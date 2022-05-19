@@ -1,0 +1,493 @@
+{
+  "edition": "Crimson Scales RM",
+  "monsterAbilities": [
+    {
+      "name": "Scout Ally",
+      "cards": [
+        [ 668, false, 29, "%move% - 1", "%attack% - 1", "^%range% 3" ],
+        [ 669, false, 40, "%move% + 1", "%attack% - 1" ],
+        [ 670, false, 53, "%move% + 0", "%attack% + 0" ],
+        [ 671, false, 54, "%move% - 2", "%attack% + 0", "^%range% 3", "^%poison%" ],
+        [ 672, false, 69, "%move% - 1", "%attack% + 1" ],
+        [ 673, false, 92, "%attack% + 2", "^%poison%" ],
+        [ 675, false, 35, "%move% + 1", "^%jump%", "%loot% 1" ],
+        [ 674, false, 79, "%attack% - 1", "^%range% 4", "^%target% 2" ]
+      ]
+    },
+    {
+      "name": "Shaman Ally",
+      "cards": [
+        [ 588, false, 8, "%move% + 0", "%attack% - 1", "^%range% + 0", "^%disarm%" ],
+        [ 589, false, 8, "%move% - 1", "%attack% + 0", "^%range% + 0", "^%immobilize%" ],
+        [ 590, false, 23, "%move% + 0", "%heal% 3", "^%range% 3" ],
+        [ 591, false, 23, "%move% + 0", "%heal% 3", "^%range% 3" ],
+        [ 592, false, 62, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
+        [ 593, false, 74, "%move% - 1", "%attack% + 1", "^%range% + 0" ],
+        [ 594, false, 89, "%move% - 1", "%heal% 1", "^Affect all adjacent allies", "%bless%", "^Self" ],
+        [ 595, false, 9, "%move% + 1", "%attack% - 1", "^%range% + 0", "^%curse%", "^%target% 2" ]
+      ]
+    },
+    {
+      "name": "Brood Mother",
+      "cards": [
+        [ 549, true, 13, "%attack% - 1", "^%wound%", "%move% - 1", "%attack% - 1", "^%wound%" ],
+        [ 551, false, 39, "%move% - 1", "%attack% + 1", "^%wound%" ],
+        [ 555, false, 6, "%shield% + 2", "%heal% 2", "^Self", "%strengthen%", "^Self" ],
+        [ 554, true, 72, "%attack% - 1", "^%wound%", "%attack% - 1", "^%wound%", "%attack% - 2", "^%wound%" ],
+        [ 557, false, 52, "%move% + 0", "%attack% + 0", "^%range% 3" ],
+        [ 558, true, 57, "%move% + 0", "%attack% - 1 %aoe-triangle-2-side%", "^%range% 3" ],
+        [ 559, false, 27, "%attack% + 0", "^%range% 3", "^%target% 2", "^%poison%" ],
+        [ 560, false, 87, "%move% - 1", "%attack% + 1", "^%range% 3" ]
+      ]
+    }
+  ],
+  "monsters": {
+    "Bandit Archer (Hired Muscle)": {
+      "deck": "Archer",
+      "display": "Bandit Archer",
+      "edition": "Crimson Scales RM",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 2, "attack": 2, "range": 3, "attributes": ["%pull% 1" ] },
+          "elite": { "health": 6, "move": 2, "attack": 3, "range": 3, "attributes": ["%pull% 1" ] }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 5, "move": 2, "attack": 2, "range": 4, "attributes": ["%pull% 1" ] },
+          "elite": { "health": 7, "move": 2, "attack": 3, "range": 5, "attributes": ["%pull% 1" ] }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 6, "move": 3, "attack": 2, "range": 4, "attributes": ["%pull% 1" ] },
+          "elite": { "health": 9, "move": 3, "attack": 3, "range": 5, "attributes": ["%pull% 1" ] }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 6, "move": 3, "attack": 3, "range": 4, "attributes": ["%pull% 1" ] },
+          "elite": { "health": 10, "move": 3, "attack": 4, "range": 5, "attributes": ["%pull% 1" ] }
+        },
+        {
+          "level": 4,
+          "normal": { "health": 8, "move": 3, "attack": 3, "range": 4, "attributes": ["%pull% 1" ] },
+          "elite": { "health": 10, "move": 3, "attack": 4, "range": 6, "attributes": [ "%pull% 1","%poison%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 10, "move": 3, "attack": 3, "range": 5, "attributes": ["%pull% 1" ] },
+          "elite": {"health": 12, "move": 4, "attack": 4, "range": 6, "attributes": [ "%pull% 1","%poison%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 10, "move": 3, "attack": 4, "range": 5, "attributes": ["%pull% 1" ] },
+          "elite": {"health": 13, "move": 4, "attack": 5, "range": 6, "attributes": ["%pull% 1", "%poison%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 13, "move": 3, "attack": 4, "range": 5, "attributes": ["%pull% 1" ] },
+          "elite": {"health": 17, "move": 4, "attack": 5, "range": 6, "attributes": ["%pull% 1", "%poison%" ]}
+        }
+      ]
+    },
+    "Bandit Guard (Hired Muscle)": {
+      "deck": "Guard",
+      "display": "Bandit Guard",
+      "edition": "Crimson Scales RM",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": ["%push% 1" ] },
+          "elite": { "health": 9, "move": 2, "attack": 3, "attributes": ["%push% 1","%push% 1" ] }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 3, "attack": 2 , "attributes": ["%push% 1" ]},
+          "elite": { "health": 9, "move": 2, "attack": 3, "attributes": [ "%push% 1","%shield% 1" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 6, "move": 3, "attack": 3 , "attributes": ["%push% 1" ]},
+          "elite": { "health": 10, "move": 2, "attack": 4, "attributes": [ "%push% 1","%shield% 1" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 9, "move": 3, "attack": 3 , "attributes": ["%push% 1" ]},
+          "elite": { "health": 10, "move": 3, "attack": 4, "attributes": [ "%push% 1","%shield% 2" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 10, "move": 4, "attack": 3 , "attributes": ["%push% 1" ]},
+          "elite": { "health": 11, "move": 3, "attack": 4, "attributes": ["%push% 1", "%muddle%", "%shield% 2" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 11, "move": 4, "attack": 4 , "attributes": ["%push% 1" ]},
+          "elite": { "health": 12, "move": 3, "attack": 5, "attributes": ["%push% 1", "%muddle%", "%shield% 2" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 14, "move": 4, "attack": 4 , "attributes": ["%push% 1" ]},
+          "elite": { "health": 14, "move": 4, "attack": 5, "attributes": [ "%push% 1","%muddle%", "%shield% 2" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 16, "move": 5, "attack": 4 , "attributes": ["%push% 1" ]},
+          "elite": { "health": 14, "move": 3, "attack": 5, "attributes": ["%push% 1", "%muddle%", "%shield% 3" ]}
+        }
+      ]
+    },
+    "Living Wall": {
+      "deck": "Harrower Aegis",
+      "gfx": "Harrower Aegis",
+      "edition": "Crimson Scales RM",
+      "hidden": true,
+      "count": 1,
+      "levels": [
+        {
+          "level": 0, "health": "12xC/2", "move": 1, "attack": 2, "attributes": [ "%retaliate% 1",  "%range% 2" ]
+        },
+        {
+          "level": 1, "health": "16xC/2", "move": 2, "attack": 2, "attributes": [ "%retaliate% 1",  "%range% 2" ]
+        },
+        {
+          "level": 2, "health": "20xC/2", "move": 2, "attack": 2, "attributes": [ "%retaliate% 1",  "%range% 3" ]
+
+        },
+        {
+          "level": 3, "health": "24xC/2", "move": 2, "attack": 3, "attributes": [ "%retaliate% 2",  "%range% 3" ]
+
+        },
+        {
+          "level": 4, "health": "28xC/2", "move": 3, "attack": 4, "attributes": [ "%retaliate% 2",  "%range% 3", "Immune %stun%" ]
+        },
+        {
+          "level": 5, "health": "32xC/2", "move": 3, "attack": 5, "attributes": [ "%retaliate% 3",  "%range% 3", "Immune %stun%" ]
+        },
+        {
+          "level": 6, "health": "38xC/2", "move": 3, "attack": 6, "attributes": [ "%retaliate% 4",  "%range% 3", "Immune %stun%" ]
+        },
+        {
+          "level": 7, "health": "42xC/2", "move": 3, "attack": 6, "attributes": [ "%retaliate% 4",  "%range% 3", "Immune %stun%" ]
+        }
+      ]
+    },
+    "Carrion Scavenger": {
+      "deck": "Hound",
+      "gfx": "Hound",
+      "edition": "Crimson Scales RM",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 3, "attack": 2,"attributes": [ "On death:","attack +0","%target% all","adjacent"  ]},
+          "elite": { "health": 6, "move": 5, "attack": 2,"attributes": ["On death:","attack +0","%target% all","adjacent"  ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 4, "move": 4, "attack": 2, "attributes": [ "%retaliate% 1","On death:","attack +0","%target% all","adjacent"   ]},
+          "elite": { "health": 6, "move": 5, "attack": 2, "attributes": [ "%retaliate% 2", "On death:","attack +0","%target% all","adjacent"  ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 6, "move": 4, "attack": 2, "attributes": [ "%retaliate% 1", "On death:","attack +0","%target% all","adjacent"]},
+          "elite": { "health": 7, "move": 5, "attack": 3, "attributes": [ "%retaliate% 2", "On death:","attack +0","%target% all","adjacent" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 8, "move": 4, "attack": 2, "attributes": [ "%retaliate% 1","On death:","attack +0","%target% all","adjacent" ]},
+          "elite": { "health": 8, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2", "On death:","attack +0","%target% all","adjacent"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 8, "move": 4, "attack": 3, "attributes": [ "%retaliate% 1", "On death:","attack +0","%target% all","adjacent" ]},
+          "elite": { "health": 11, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2", "On death:","attack +0","%target% all","adjacent" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 9, "move": 4, "attack": 3, "attributes": [ "%retaliate% 2" , "On death:","attack +0","%target% all","adjacent"]},
+          "elite": { "health": 12, "move": 5, "attack": 4, "attributes": [ "%retaliate% 3", "On death:","attack +0","%target% all","adjacent" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 11, "move": 5, "attack": 3, "attributes": [ "%retaliate% 2" ,"On death:","attack +0","%target% all","adjacent"]},
+          "elite": { "health": 15, "move": 6, "attack": 4, "attributes": [ "%retaliate% 3", "On death:","attack +0","%target% all","adjacent" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 15, "move": 5, "attack": 3, "attributes": [ "%retaliate% 2", "On death:","attack +0","%target% all","adjacent" ]},
+          "elite": { "health": 15, "move": 6, "attack": 5, "attributes": [ "%retaliate% 4", "On death:","attack +0","%target% all","adjacent" ]}
+        }
+      ]
+    },
+    "Guttermaw": {
+      "deck": "Ravenous Gharial",
+      "gfx": "Ravenous Gharial",
+      "edition": "Crimson Scales RM",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0, "health": "10xC", "move": 3, "attack": 3,
+          "attributes": [ "%pierce% 2 %aoe-line-2%", "*Unaffected by", "*water hexes", "*%shield% 1%", "*Shield only applies on ranged","*attacks" ],
+          "immunities": ["%disarm%", "%immobilize%", "%stun%"]
+        },
+        {
+          "level": 1, "health": "12xC", "move": 3, "attack": 4,
+          "attributes": [ "%pierce% 2 %aoe-line-2%", "*Unaffected by", "*water hexes", "*%shield% 1%", "*Shield only applies on ranged","*attacks" ],
+          "immunities": ["%disarm%", "%immobilize%", "%stun%"]
+        },
+        {
+          "level": 2, "health": "14xC", "move": 3, "attack": 4,
+          "attributes": ["%pierce% 2 %aoe-line-2%",  "*Unaffected by", "*water hexes", "*%shield% 2%", "*Shield only applies on ranged","*attacks" ],
+          "immunities": ["%disarm%", "%immobilize%", "%stun%"]
+        },
+        {
+          "level": 3, "health": "16xC", "move": 4, "attack": 4,
+          "attributes": [ "%pierce% 2 %aoe-line-2%", "*Unaffected by", "*water hexes", "*%shield% 2%", "*Shield only applies on ranged","*attacks" ],
+          "immunities": ["%disarm%", "%immobilize%", "%stun%"]
+        },
+        {
+          "level": 4, "health": "16xC", "move": 4, "attack": 5,
+          "attributes": ["%pierce% 2 %aoe-line-2%", "*Unaffected by", "*water hexes", "*%shield% 3%", "*Shield only applies on ranged","*attacks" ],
+          "immunities": ["%disarm%", "%immobilize%", "%stun%"]
+        },
+        {
+          "level": 5, "health": "19xC", "move": 4, "attack": 5,
+          "attributes": ["%pierce% 2 %aoe-line-2%",  "*Unaffected by", "*water hexes", "*%shield% 3%", "*Shield only applies on ranged","*attacks" ],
+          "immunities": ["%disarm%", "%immobilize%", "%stun%"]
+        },
+        {
+          "level": 6, "health": "20xC", "move": 5, "attack": 5,
+          "attributes": ["%pierce% 2 %aoe-line-2%",  "*Unaffected by", "*water hexes", "*%shield% 4%", "*Shield only applies on ranged","*attacks" ],
+          "immunities": ["%disarm%", "%immobilize%", "%stun%"]
+        },
+        {
+          "level": 7, "health": "22xC", "move": 5, "attack": 6,
+          "attributes": ["%pierce% 2 %aoe-line-2%",  "*Unaffected by", "*water hexes", "*%shield% 4%", "*Shield only applies on ranged","*attacks" ],
+          "immunities": ["%disarm%", "%immobilize%", "%stun%"]
+        }
+      ]
+    },
+    "Vermling Scout (ally)": {
+      "deck": "Scout Ally",
+      "edition": "Crimson Scales RM",
+      "display": "Vermling Scout",
+      "hidden": true,
+      "count": 10,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 2, "move": 3, "attack": 1 },
+          "elite": { "health": 4, "move": 3, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 3, "move": 3, "attack": 1 },
+          "elite": { "health": 5, "move": 3, "attack": 2 }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 3, "move": 3, "attack": 2 },
+          "elite": { "health": 5, "move": 4, "attack": 3 }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 5, "move": 3, "attack": 2 },
+          "elite": { "health": 7, "move": 4, "attack": 3 }
+        },
+        {
+          "level": 4,
+          "normal": { "health": 6, "move": 3, "attack": 3 },
+          "elite": { "health": 8, "move": 4, "attack": 4 }
+        },
+        {
+          "level": 5,
+          "normal": { "health": 8, "move": 3, "attack": 3 },
+          "elite": { "health": 11, "move": 4, "attack": 4 }
+        },
+        {
+          "level": 6,
+          "normal": { "health": 9, "move": 4, "attack": 3 },
+          "elite": { "health": 12, "move": 5, "attack": 4 }
+        },
+        {
+          "level": 7,
+          "normal": { "health": 11, "move": 4, "attack": 3 },
+          "elite": { "health": 15, "move": 5, "attack": 4 }
+        }
+      ]
+    },
+    "Vermling Shaman (ally)": {
+      "deck": "Shaman Ally",
+      "edition": "Crimson Scales RM",
+      "display": "Vermling Shaman",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 2, "move": 2, "attack": 1, "range": 3, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 3, "move": 3, "attack": 2, "range": 3, "attributes": [ "%shield% 2" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 2, "move": 2, "attack": 1, "range": 3, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 3, "move": 3, "attack": 2, "range": 3, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 3, "move": 2, "attack": 1, "range": 4, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 4, "move": 3, "attack": 2, "range": 4, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 3, "move": 2, "attack": 2, "range": 4, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 5, "move": 3, "attack": 3, "range": 4, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 3, "move": 3, "attack": 2, "range": 4, "attributes": [ "%muddle%", "%shield% 3" ]},
+          "elite": { "health": 5, "move": 3, "attack": 3, "range": 4, "attributes": [ "%muddle%", "%shield% 4" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 4, "move": 3, "attack": 3, "range": 4, "attributes": [ "%muddle%", "%shield% 3" ]},
+          "elite": { "health": 6, "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 4" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 5, "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 3" ]},
+          "elite": { "health": 6, "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 5" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 7, "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 3" ]},
+          "elite": { "health": 8, "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 5" ]}
+        }
+      ]
+    },
+    "Brood Mother": {
+      "gfx": "Terrorscale Drake",
+      "deck": "Brood Mother",
+      "edition": "Crimson Scales",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "27",
+          "move": 4,
+          "attack": 3,
+          "attributes": [ "No focus:","%shield% 3", "%retaliate% 3", "%heal% 3 self"],
+          "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
+        },
+        {
+          "level": 1,
+          "health": "30",
+          "move": 4,
+          "attack": 4,
+          "attributes": [ "No focus:","%shield% 4", "%retaliate% 4", "%heal% 4 self"],
+          "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
+        },
+        {
+          "level": 2,
+          "health": "39",
+          "move": 5,
+          "attack": 4,
+          "attributes": [ "No focus:","%shield% 4", "%retaliate% 4", "%heal% 4 self"],
+          "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
+        },
+        {
+          "level": 3,
+          "health": "42",
+          "move": 5,
+          "attack": 4,
+          "attributes": [ "No focus:","%shield% 4", "%retaliate% 4", "%heal% 4 self"],
+          "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
+        },
+        {
+          "level": 4,
+          "health": "56",
+          "move": 5,
+          "attack": 5,
+          "attributes": [ "No focus:","%shield% 5", "%retaliate% 5", "%heal% 5 self"],
+          "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
+        },
+        {
+          "level": 5,
+          "health": "60",
+          "move": 6,
+          "attack": 5,
+          "attributes": [ "No focus:","%shield% 5", "%retaliate% 5", "%heal% 5 self"],
+          "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
+        },
+        {
+          "level": 6,
+          "health": "75",
+          "move": 6,
+          "attack": 5,
+          "attributes": [ "No focus:","%shield% 5", "%retaliate% 5", "%heal% 5 self"],
+          "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
+        },
+        {
+          "level": 7,
+          "health": "81",
+          "move": 6,
+          "attack": 6,
+          "attributes": [ "No focus:","%shield% 6", "%retaliate% 6", "%heal% 6 self"],
+          "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
+        }
+      ]
+    }
+  },
+  "scenarios": {
+    "#1 Mind Your Manners": {
+      "monsters": [ "Bandit Guard (Hired Muscle)", "Bandit Archer (Hired Muscle)", "Inox Guard", "Inox Archer" ]
+    },
+    "#2 Sinking Kingpin": {
+      "monsters": [ "Bandit Guard", "Bandit Archer", "Inox Guard", "Inox Archer", "Inox Bloodguard", "Goremyon Shatter-Mind" ]
+    },
+    "#3 Ruined Colony": {
+      "monsters": [ "Hound", "Giant Viper", "Cave Bear", "Ooze", "Gnashing Drake" ]
+    },
+    "#4 Terrorscale Lair": {
+      "monsters": [ "Terrorscale Drake", "Gnashing Drake", "Spitting Drake", "Rending Drake" ]
+    },
+    "#5 Unseen Plight": {
+      "monsters": [ "Ravenous Gharial", "Black Imp" ]
+    },
+    "#6 Solo: The Fall of Shadow’s Respite": {
+      "monsters": [ "Gnashing Drake", "Spitting Drake", "Rending Drake", "Vermling Scout (ally)", "Vermling Shaman (ally)" ],
+      "special": [
+        "Escort: The Chosen", "6+L", "Init: 99"]
+    },
+    "#7 Insatiable": {
+      "monsters": [ "Hound", "Ruinmaw", "Vermling Shaman", "Vermling Scout", "Giant Viper" ]
+    }
+  },
+  "sections": {
+    "#2-1 Courtyard": {
+      "monsters": [ "Living Wall" ]
+    },
+    "#1-5 Broken Homes": {
+      "monsters": [ "Carrion Scavenger" ]
+    },
+    "#2-5 Guttermaw’s Lair": {
+      "monsters": [ "Guttermaw" ]
+    },
+    "#3-5 Wrong Turn": {
+      "special": [
+        "Escort: Vermling 1", "C+L", "Init: 35",
+        "Escort: Vermling 2", "C+L", "Init: 35",
+        "Escort: Vermling 3", "C+L", "Init: 35"
+      ]
+    },
+    "#4-6 The Shadow Falls": {
+      "monsters": [ "Brood Mother" ]
+    }
+  }
+}

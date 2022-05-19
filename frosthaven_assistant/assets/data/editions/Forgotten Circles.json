@@ -1,0 +1,1255 @@
+{
+  "edition": "Forgotten Circles",
+  "classes": {
+    "Diviner": {
+      "note": "this class has some special hardcoded rules, unlocking the ability to scry and change order of monster decks",
+      "name": "Diviner",
+      "color": -1593835521,
+      "edition": "Forgotten Circles",
+      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+        "Ghost Falcon": {
+          "level": 3,
+          "hitpoints": 4,
+          "move": 3,
+          "attack": 2
+        },
+        "Twilight Archon": {
+          "level": 9,
+          "hitpoints": 9,
+          "move": 3,
+          "attack": 2
+        }
+      }
+    }
+  },
+  "monsterAbilities": [
+    {
+      "name": "Ashblade",
+      "edition": "Forgotten Circles",
+      "cards": [
+        [ 1007, true, 42, "%move% + 1", "%attack% + 0", "%dark%" ],
+        [ 1008, true, 47, "%move% + 1", "%attack% + 0", "%fire%" ],
+        [ 1009, false, 24, "%attack% + 3", "^%pierce% 2", "%fire%" ],
+        [ 1010, false, 28, "%move% - 1", "%attack% - 1", "^%range% 3", "^%immobilize%" ],
+        [ 1011, false, 17, "%move% + 0", "%attack% + 0", "%fire%%use%", "!^%disarm%" ],
+        [ 1012, false, 9, "%move% + 0", "%attack% + 0", "%dark%%use%", "!^%invisible%", "!^Self" ],
+        [ 1013, false, 36, "%move% - 1", "%attack% + 2", "%fire%%use%", "!^%wound%", "%dark%%use%", "!^%curse%" ],
+        [
+          1014,
+          false,
+          2,
+          "*Focus on the enemy with", "*the highest initiative",
+          "*%teleport% to the closest unoccupied", "*hex adjacent to the focus",
+          "%attack% - 2",
+          "%dark%"
+        ]
+      ]
+    },
+    {
+      "name": "Bear-Drake Abomination",
+      "edition": "Forgotten Circles",
+      "cards": [
+        [ 587, false, 14, "%move% - 1", "%attack% - 1", "^%immobilize%" ],
+        [ 601, true, 80, "%attack% - 1", "%move% - 2", "%attack% - 1", "^%wound%" ],
+        [ 602, false, 61, "%move% + 0", "%attack% - 1", "^%target% 2" ],
+        [ 603, false, 3, "%shield% + 1", "%retaliate% + 2", "%heal% 2", "^Self" ],
+        [ 548, false, 12, "%move% + 1", "%attack% - 1" ],
+        [ 549, true, 13, "%attack% - 1", "%move% - 1", "%attack% - 1" ],
+        [ 550, false, 25, "%move% + 0", "%attack% + 0" ],
+        [ 553, false, 59, "%move% - 2", "%attack% + 1", "^%target% 2" ]
+      ]
+    },
+    {
+      "name": "Wolf-Viper Abomination",
+      "edition": "Forgotten Circles",
+      "cards": [
+        [ 540, false, 6, "%move% - 1", "%attack% + 0", "^%immobilize%" ],
+        [
+          543,
+          true,
+          19,
+          "%move% + 0",
+          "%attack% + 0",
+          "^Add +2 %attack% if the target is adjacent",
+          "^to any of the Abomination's allies"
+        ],
+        [ 544, false, 26, "%move% + 0", "%attack% + 0" ],
+        [ 547, false, 72, "%attack% - 1", "^%pierce% 2", "%move% - 2", "%attack% - 1", "^%pierce% 2" ],
+        [ 685, true, 32, "%move% + 0", "%attack% + 0", "^Add +2 Attack if the target is adjacent to any of the Abomination's allies." ],
+        [ 687, false, 43, "%move% + 1", "^%jump%", "%attack% - 1", "^Target all adjacent enemies." ],
+        [ 688, false, 58, "%move% - 1", "%attack% + 1" ],
+        [ 689, false, 58, "%move% + 1", "^%jump%", "%attack% - 1", "^All attacks targeting Abomination this round gain Disadvantage." ],
+        [ 691, false, 23, "%move% - 1", "%attack% - 1", "^%immobilize%", "%attack% - 1" ]
+      ]
+    },
+    {
+      "name": "Savage",
+      "edition": "Forgotten Circles",
+      "cards": [
+        [ 999, false, 13, "%strengthen%", "^Self", "%attack% + 0", "^%wound%", "Savage suffers 2 damage" ],
+        [ 1000, true, 17, "%retaliate% 3", "^%range% 3", "%heal% 1", "%regenerate%", "^Self" ],
+        [ 1001, false, 28, "%move% + 0", "%attack% - 1", "%attack% - 1" ],
+        [ 1002, false, 38, "%move% - 1", "%attack% + 0", "^%pierce% 2" ],
+        [ 1003, false, 46, "%move% + 0", "%attack% - 1", "^%range% 3" ],
+        [ 1004, false, 46, "%move% + 0", "%attack% - 1", "^%range% 3" ],
+        [ 1005, false, 60, "%move% + 2", "%attack% + 0", "ELITE:", "%attack% + 0" ],
+        [ 1006, true, 72, "%move% - 1", "NORMAL:", "%attack% + 0", "ELITE:", "%attack% + 1 %aoe-arc-3%" ]
+      ]
+    },
+    {
+      "name": "Tracker",
+      "edition": "Forgotten Circles",
+      "cards": [
+        [ 991, false, 12, "%move% + 0", "%attack% - 1", "^%range% + 0", "^%muddle%" ],
+        [ 992, false, 18, "%move% - 1", "%attack% - 1", "^%range% + 0", "*Create one %disarm% trap in any adjacent", "*empty hex closest to an enemy" ],
+        [ 993, false, 27, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
+        [ 994, true, 33, "%move% + 0", "%attack% + 0", "^%range% + 1", "^%pierce% 1" ],
+        [ 995, false, 37, "%move% - 1", "%attack% + 0", "^%range% + 1", "^%immobilize%" ],
+        [ 996, false, 48, "ELITE:", "*Focus on the enemy with the", "*lowest current hit point value ", "%move% + 1", "%attack% + 0", "^%range% + 0" ],
+        [
+          997,
+          false,
+          55,
+          "ELITE:", "*Focus on the enemy with the", "*highest current hit point value ",
+          "%move% + 0",
+          "%attack% - 1",
+          "%wound%"
+        ],
+        [ 998, true, 69, "%attack% + 1", "%heal% 1", "%regenerate%", "^Self" ]
+      ]
+    },
+    {
+      "name": "Manifestation of Corruption",
+      "cards": [
+        [ 0, false, 0, "(Use the Manifestation of Corruption ability deck.)" ]
+      ]
+    }
+  ],
+  "monsters": {
+    "Aesther Ashblade": {
+      "edition": "Forgotten Circles",
+      "deck": "Ashblade",
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 8, "move": 3, "attack": 2 },
+          "elite": {
+            "health": 12,
+            "move": 3,
+            "attack": 3,
+            "attributes": [ "%poison%" ]
+          }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 9, "move": 3, "attack": 3 },
+          "elite": {
+            "health": 14,
+            "move": 4,
+            "attack": 3,
+            "attributes": [ "%poison%" ]
+          }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 13, "move": 3, "attack": 3 },
+          "elite": {
+            "health": 16,
+            "move": 4,
+            "attack": 4,
+            "attributes": [ "%poison%" ]
+          }
+        },
+        {
+          "level": 3,
+          "normal": {
+            "health": 15,
+            "move": 3,
+            "attack": 3,
+            "attributes": [ "%poison%" ]
+          },
+          "elite": {
+            "health": 18,
+            "move": 4,
+            "attack": 4,
+            "attributes": [ "Attackers gain disadvantage", "%poison%" ]
+          }
+        },
+        {
+          "level": 4,
+          "normal": {
+            "health": 15,
+            "move": 4,
+            "attack": 4,
+            "attributes": [ "%poison%" ]
+          },
+          "elite": {
+            "health": 21,
+            "move": 4,
+            "attack": 5,
+            "attributes": [ "Attackers gain disadvantage", "%poison%" ]
+          }
+        },
+        {
+          "level": 5,
+          "normal": {
+            "health": 18,
+            "move": 4,
+            "attack": 4,
+            "attributes": [ "%poison%" ]
+          },
+          "elite": {
+            "health": 25,
+            "move": 4,
+            "attack": 5,
+            "attributes": [ "Attackers gain disadvantage", "%poison%" ]
+          }
+        },
+        {
+          "level": 6,
+          "normal": {
+            "health": 21,
+            "move": 4,
+            "attack": 4,
+            "attributes": [ "%poison%" ]
+          },
+          "elite": {
+            "health": 28,
+            "move": 4,
+            "attack": 6,
+            "attributes": [ "Attackers gain disadvantage", "%poison%" ]
+          }
+        },
+        {
+          "level": 7,
+          "normal": {
+            "health": 24,
+            "move": 4,
+            "attack": 5,
+            "attributes": [ "%poison%" ]
+          },
+          "elite": {
+            "health": 32,
+            "move": 5,
+            "attack": 6,
+            "attributes": [ "Attackers gain disadvantage", "%poison%" ]
+          }
+        }
+      ]
+    },
+    "Aesther Scout": {
+      "edition": "Forgotten Circles",
+      "deck": "Scout",
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 8, "move": 3, "attack": 2 },
+          "elite": { "health": 13, "move": 3, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 9, "move": 3, "attack": 3 },
+          "elite": {
+            "health": 14,
+            "move": 4,
+            "attack": 3,
+            "attributes": [ "%muddle%" ]
+          }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 12, "move": 3, "attack": 3 },
+          "elite": {
+            "health": 17,
+            "move": 4,
+            "attack": 3,
+            "attributes": [ "%muddle%" ]
+          }
+        },
+        {
+          "level": 3,
+          "normal": {
+            "health": 14,
+            "move": 4,
+            "attack": 3,
+            "attributes": [ "%muddle%" ]
+          },
+          "elite": {
+            "health": 19,
+            "move": 4,
+            "attack": 4,
+            "attributes": [ "%muddle%", "%curse%" ]
+          }
+        },
+        {
+          "level": 4,
+          "normal": {
+            "health": 16,
+            "move": 4,
+            "attack": 4,
+            "attributes": [ "%muddle%" ]
+          },
+          "elite": {
+            "health": 23,
+            "move": 4,
+            "attack": 4,
+            "attributes": [ "%muddle%", "%curse%" ]
+          }
+        },
+        {
+          "level": 5,
+          "normal": {
+            "health": 18,
+            "move": 4,
+            "attack": 4,
+            "attributes": [ "%muddle%", "%curse%" ]
+          },
+          "elite": {
+            "health": 26,
+            "move": 4,
+            "attack": 5,
+            "attributes": [ "%muddle%", "%curse%" ]
+          }
+        },
+        {
+          "level": 6,
+          "normal": {
+            "health": 21,
+            "move": 4,
+            "attack": 4,
+            "attributes": [ "%muddle%", "%curse%" ]
+          },
+          "elite": {
+            "health": 29,
+            "move": 5,
+            "attack": 5,
+            "attributes": [ "%muddle%", "%curse%" ]
+          }
+        },
+        {
+          "level": 7,
+          "normal": {
+            "health": 24,
+            "move": 5,
+            "attack": 4,
+            "attributes": [ "%muddle%", "%curse%" ]
+          },
+          "elite": {
+            "health": 33,
+            "move": 5,
+            "attack": 6,
+            "attributes": [ "%muddle%", "%curse%" ]
+          }
+        }
+      ]
+    },
+    "Bear-Drake Abomination": {
+      "deck": "Bear-Drake Abomination",
+      "edition": "Forgotten Circles",
+      "count": 1,
+      "flying": true,
+      "hidden": true,
+      "levels": [
+        {
+          "level": 0, "health": "11xC/2", "move": 3, "attack": 4,
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%" ]
+        },
+        {
+          "level": 1, "health": "14xC/2", "move": 3, "attack": 4,
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%" ]
+        },
+        {
+          "level": 2, "health": "17xC/2", "move": 4, "attack": 4,
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%" ]
+        },
+        {
+          "level": 3, "health": "20xC/2", "move": 4, "attack": 5,
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%" ]
+        },
+        {
+          "level": 4,
+          "health": "21xC/2",
+          "move": 5,
+          "attack": 5,
+          "attributes": [ "%wound%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%" ]
+        },
+        {
+          "level": 5,
+          "health": "24xC/2",
+          "move": 5,
+          "attack": 6,
+          "attributes": [ "%wound%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%" ]
+        },
+        {
+          "level": 6,
+          "health": "28xC/2",
+          "move": 5,
+          "attack": 7,
+          "attributes": [ "%wound%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%" ]
+        },
+        {
+          "level": 7,
+          "health": "33xC/2",
+          "move": 5,
+          "attack": 7,
+          "attributes": [ "%wound%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%" ]
+        }
+      ]
+    },
+    "Valrath Tracker": {
+      "edition": "Forgotten Circles",
+      "deck": "Tracker",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 2, "range": 2 },
+          "elite": { "health": 9, "move": 2, "attack": 3, "range": 4 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 3, "attack": 2, "range": 2 },
+          "elite": {
+            "health": 11,
+            "move": 2,
+            "attack": 3,
+            "range": 5,
+            "attributes": [ "%pierce% 1" ]
+          }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 3, "attack": 3, "range": 2 },
+          "elite": {
+            "health": 12,
+            "move": 2,
+            "attack": 4,
+            "range": 5,
+            "attributes": [ "%pierce% 1" ]
+          }
+        },
+        {
+          "level": 3,
+          "normal": {
+            "health": 9,
+            "move": 3,
+            "attack": 3,
+            "range": 3,
+            "attributes": [ "Advantage" ]
+          },
+          "elite": {
+            "health": 14,
+            "move": 2,
+            "attack": 4,
+            "range": 6,
+            "attributes": [ "%pierce% 1", "%push% 1" ]
+          }
+        },
+        {
+          "level": 4,
+          "normal": {
+            "health": 10,
+            "move": 4,
+            "attack": 3,
+            "range": 3,
+            "attributes": [ "Advantage" ]
+          },
+          "elite": {
+            "health": 16,
+            "move": 3,
+            "attack": 4,
+            "range": 7,
+            "attributes": [ "%pierce% 2", "%push% 1" ]
+          }
+        },
+        {
+          "level": 5,
+          "normal": {
+            "health": 12,
+            "move": 4,
+            "attack": 4,
+            "range": 3,
+            "attributes": [ "Advantage" ]
+          },
+          "elite": {
+            "health": 18,
+            "move": 3,
+            "attack": 5,
+            "range": 7,
+            "attributes": [ "%pierce% 2", "%push% 1" ]
+          }
+        },
+        {
+          "level": 6,
+          "normal": {
+            "health": 14,
+            "move": 4,
+            "attack": 4,
+            "range": 4,
+            "attributes": [ "Advantage" ]
+          },
+          "elite": {
+            "health": 21,
+            "move": 3,
+            "attack": 5,
+            "range": 8,
+            "attributes": [ "%pierce% 2", "%push% 2" ]
+          }
+        },
+        {
+          "level": 7,
+          "normal": {
+            "health": 17,
+            "move": 5,
+            "attack": 4,
+            "range": 4,
+            "attributes": [ "Advantage" ]
+          },
+          "elite": {
+            "health": 24,
+            "move": 3,
+            "attack": 6,
+            "range": 8,
+            "attributes": [ "%pierce% 3", "%push% 2" ]
+          }
+        }
+      ]
+    },
+    "Valrath Savage": {
+      "edition": "Forgotten Circles",
+      "deck": "Savage",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": {
+            "health": 6,
+            "move": 2,
+            "attack": 2,
+            "attributes": [ "%shield% 1" ]
+          },
+          "elite": { "health": 10, "move": 2, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": {
+            "health": 6,
+            "move": 2,
+            "attack": 2,
+            "attributes": [ "%shield% 1" ]
+          },
+          "elite": { "health": 12, "move": 2, "attack": 3 }
+        },
+        {
+          "level": 2,
+          "normal": {
+            "health": 8,
+            "move": 2,
+            "attack": 3,
+            "attributes": [ "%shield% 1" ]
+          },
+          "elite": { "health": 14, "move": 2, "attack": 4 }
+        },
+        {
+          "level": 3,
+          "normal": {
+            "health": 10,
+            "move": 3,
+            "attack": 2,
+            "attributes": [ "%shield% 1" ]
+          },
+          "elite": {
+            "health": 16,
+            "move": 2,
+            "attack": 4,
+            "attributes": [ "*All adjacent", "*allies add", "*+1 %attack%", "*to all", "*attacks" ]
+          }
+        },
+        {
+          "level": 4,
+          "normal": {
+            "health": 10,
+            "move": 3,
+            "attack": 2,
+            "attributes": [ "%shield% 2" ]
+          },
+          "elite": {
+            "health": 18,
+            "move": 3,
+            "attack": 4,
+            "attributes": [ "*All adjacent", "*allies add", "*+1 %attack%", "*to all", "*attacks" ]
+          }
+        },
+        {
+          "level": 5,
+          "normal": {
+            "health": 11,
+            "move": 3,
+            "attack": 3,
+            "attributes": [ "%shield% 2" ]
+          },
+          "elite": {
+            "health": 21,
+            "move": 3,
+            "attack": 5,
+            "attributes": [ "*All adjacent", "*allies add", "*+2 %attack%", "*to all", "*attacks" ]
+          }
+        },
+        {
+          "level": 6,
+          "normal": {
+            "health": 12,
+            "move": 4,
+            "attack": 3,
+            "attributes": [ "%shield% 2" ]
+          },
+          "elite": {
+            "health": 24,
+            "move": 3,
+            "attack": 5,
+            "attributes": [ "*All adjacent", "*allies add", "*+2 %attack%", "*to all", "*attacks" ]
+          }
+        },
+        {
+          "level": 7,
+          "normal": {
+            "health": 14,
+            "move": 4,
+            "attack": 3,
+            "attributes": [ "%shield% 3" ]
+          },
+          "elite": {
+            "health": 28,
+            "move": 3,
+            "attack": 6,
+            "attributes": [ "*All adjacent", "*allies add", "*+2 %attack%", "*to all", "*attacks" ]
+          }
+        }
+      ]
+    },
+    "Wolf-Viper Abomination": {
+      "edition": "Forgotten Circles",
+      "deck": "Wolf-Viper Abomination",
+      "count": 6,
+      "hidden": true,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 7, "move": 3, "attack": 2 },
+          "elite": { "health": 9, "move": 5, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": {
+            "health": 7,
+            "move": 4,
+            "attack": 2,
+            "attributes": [ "%retaliate% 1" ]
+          },
+          "elite": {
+            "health": 9,
+            "move": 5,
+            "attack": 2,
+            "attributes": [ "%retaliate% 2" ]
+          }
+        },
+        {
+          "level": 2,
+          "normal": {
+            "health": 9,
+            "move": 4,
+            "attack": 2,
+            "attributes": [ "%retaliate% 1" ]
+          },
+          "elite": {
+            "health": 10,
+            "move": 5,
+            "attack": 3,
+            "attributes": [ "%retaliate% 2" ]
+          }
+        },
+        {
+          "level": 3,
+          "normal": {
+            "health": 11,
+            "move": 4,
+            "attack": 2,
+            "attributes": [ "%retaliate% 1" ]
+          },
+          "elite": {
+            "health": 11,
+            "move": 5,
+            "attack": 4,
+            "attributes": [ "%retaliate% 2" ]
+          }
+        },
+        {
+          "level": 4,
+          "normal": {
+            "health": 11,
+            "move": 4,
+            "attack": 3,
+            "attributes": [ "%retaliate% 1" ]
+          },
+          "elite": {
+            "health": 14,
+            "move": 5,
+            "attack": 4,
+            "attributes": [ "%retaliate% 2" ]
+          }
+        },
+        {
+          "level": 5,
+          "normal": {
+            "health": 12,
+            "move": 4,
+            "attack": 3,
+            "attributes": [ "%retaliate% 2" ]
+          },
+          "elite": {
+            "health": 15,
+            "move": 5,
+            "attack": 4,
+            "attributes": [ "%retaliate% 3" ]
+          }
+        },
+        {
+          "level": 6,
+          "normal": {
+            "health": 14,
+            "move": 5,
+            "attack": 3,
+            "attributes": [ "%retaliate% 2" ]
+          },
+          "elite": {
+            "health": 18,
+            "move": 6,
+            "attack": 4,
+            "attributes": [ "%retaliate% 3" ]
+          }
+        },
+        {
+          "level": 7,
+          "normal": {
+            "health": 18,
+            "move": 5,
+            "attack": 3,
+            "attributes": [ "%retaliate% 2" ]
+          },
+          "elite": {
+            "health": 18,
+            "move": 6,
+            "attack": 5,
+            "attributes": [ "%retaliate% 4" ]
+          }
+        }
+      ]
+    },
+    "Human Commander": {
+      "edition": "Forgotten Circles",
+      "deck": "Boss",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "6xC",
+          "move": 2,
+          "attack": 4,
+          "special1": [ "%move% + 0, %attack% + 0", "Summon City Guard" ],
+          "special2": [ "Summon City Archer", "%move% - 1, %shield% 1", "Affect all adjacent allies" ],
+          "immunities": [ "%immobilize%", "%poison%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%shield% 2" ]
+        },
+        {
+          "level": 1,
+          "health": "8xC",
+          "move": 3,
+          "attack": 4,
+          "special1": [ "%move% + 0, %attack% + 0", "Summon City Guard" ],
+          "special2": [ "Summon City Archer", "%move% - 1, %shield% 1", "Affect all adjacent allies" ],
+          "immunities": [ "%immobilize%", "%poison%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%shield% 2" ]
+        },
+        {
+          "level": 2,
+          "health": "10xC",
+          "move": 3,
+          "attack": 5,
+          "special1": [ "%move% + 0, %attack% + 0", "Summon City Guard" ],
+          "special2": [ "Summon City Archer", "%move% - 1, %shield% 1", "Affect all adjacent allies" ],
+          "immunities": [ "%immobilize%", "%poison%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%shield% 2" ]
+        },
+        {
+          "level": 3,
+          "health": "11xC",
+          "move": 4,
+          "attack": 5,
+          "special1": [ "%move% + 0, %attack% + 0", "Summon City Guard" ],
+          "special2": [ "Summon City Archer", "%move% - 1, %shield% 2", "Affect all adjacent allies" ],
+          "immunities": [ "%immobilize%", "%poison%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%shield% 3" ]
+        },
+        {
+          "level": 4,
+          "health": "13xC",
+          "move": 4,
+          "attack": 6,
+          "special1": [ "%move% + 0, %attack% + 0", "Summon City Guard" ],
+          "special2": [ "Summon City Archer", "%move% - 1, %shield% 2", "Affect all adjacent allies" ],
+          "immunities": [ "%immobilize%", "%poison%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%shield% 3" ]
+        },
+        {
+          "level": 5,
+          "health": "14xC",
+          "move": 4,
+          "attack": 6,
+          "special1": [ "%move% + 0, %attack% + 0", "Summon City Guard" ],
+          "special2": [ "Summon City Archer", "%move% - 1, %shield% 2", "Affect all adjacent allies" ],
+          "immunities": [ "%immobilize%", "%poison%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%shield% 4" ]
+        },
+        {
+          "level": 6,
+          "health": "17xC",
+          "move": 4,
+          "attack": 7,
+          "special1": [ "%move% + 0, %attack% + 0", "Summon City Guard" ],
+          "special2": [ "Summon City Archer", "%move% - 1, %shield% 2", "Affect all adjacent allies" ],
+          "immunities": [ "%immobilize%", "%poison%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%shield% 4" ]
+        },
+        {
+          "level": 7,
+          "health": "20xC",
+          "move": 5,
+          "attack": 8,
+          "special1": [ "%move% + 0, %attack% + 0", "Summon City Guard" ],
+          "special2": [ "Summon City Archer", "%move% - 1, %shield% 3", "Affect all adjacent allies" ],
+          "immunities": [ "%immobilize%", "%poison%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%shield% 4" ]
+        }
+      ]
+    },
+    "Valrath Commander": {
+      "edition": "Forgotten Circles",
+      "deck": "Boss",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "10xC",
+          "move": 2,
+          "attack": 3,
+          "range": 3,
+          "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 2", "Affect all adjacent allies" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%wound%" ]
+        },
+        {
+          "level": 1,
+          "health": "12xC",
+          "move": 2,
+          "attack": 4,
+          "range": 3,
+          "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 2", "Affect all adjacent allies" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%wound%" ]
+        },
+        {
+          "level": 2,
+          "health": "15xC",
+          "move": 3,
+          "attack": 4,
+          "range": 3,
+          "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 3", "Affect all adjacent allies" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%wound%" ]
+        },
+        {
+          "level": 3,
+          "health": "18xC",
+          "move": 3,
+          "attack": 5,
+          "range": 3,
+          "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 3", "Affect all adjacent allies" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%wound%, %poison%" ]
+        },
+        {
+          "level": 4,
+          "health": "21xC",
+          "move": 3,
+          "attack": 5,
+          "range": 4,
+          "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 4", "Affect all adjacent allies" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%wound%, %poison%" ]
+        },
+        {
+          "level": 5,
+          "health": "24xC",
+          "move": 3,
+          "attack": 6,
+          "range": 4,
+          "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 4", "Affect all adjacent allies" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%wound%, %poison%" ]
+        },
+        {
+          "level": 6,
+          "health": "28xC",
+          "move": 4,
+          "attack": 6,
+          "range": 4,
+          "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 4", "Affect all adjacent allies" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%wound%, %poison%" ]
+        },
+        {
+          "level": 7,
+          "health": "33xC",
+          "move": 4,
+          "attack": 7,
+          "range": 5,
+          "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 5", "Affect all adjacent allies" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
+          "attributes": [ "%wound%, %poison%" ]
+        }
+      ]
+    },
+    "Manifestation of Corruption": {
+      "edition": "Forgotten Circles",
+      "deck": "Manifestation of Corruption",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "22xC",
+          "move": 0,
+          "attack": 5,
+          "range": 3,
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%" ],
+          "notes": "Play top two cards, using the first card as initiative. Perform the bottom action of the first card, then the top action of the second card."
+        },
+        {
+          "level": 1,
+          "health": "27xC",
+          "move": 0,
+          "attack": 5,
+          "range": 4,
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%" ],
+          "notes": "Play top two cards, using the first card as initiative. Perform the bottom action of the first card, then the top action of the second card."
+        },
+        {
+          "level": 2,
+          "health": "32xC",
+          "move": 0,
+          "attack": 6,
+          "range": 4,
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%" ],
+          "notes": "Play top two cards, using the first card as initiative. Perform the bottom action of the first card, then the top action of the second card."
+        },
+        {
+          "level": 3,
+          "health": "38xC",
+          "move": 0,
+          "attack": 6,
+          "range": 5,
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%" ],
+          "notes": "Play top two cards, using the first card as initiative. Perform the bottom action of the first card, then the top action of the second card."
+        },
+        {
+          "level": 4,
+          "health": "44xC",
+          "move": 0,
+          "attack": 7,
+          "range": 5,
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%" ],
+          "notes": "Play top two cards, using the first card as initiative. Perform the bottom action of the first card, then the top action of the second card."
+        },
+        {
+          "level": 5,
+          "health": "49xC",
+          "move": 0,
+          "attack": 7,
+          "range": 6,
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%" ],
+          "notes": "Play top two cards, using the first card as initiative. Perform the bottom action of the first card, then the top action of the second card."
+        },
+        {
+          "level": 6,
+          "health": "56xC",
+          "move": 0,
+          "attack": 8,
+          "range": 6,
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%" ],
+          "notes": "Play top two cards, using the first card as initiative. Perform the bottom action of the first card, then the top action of the second card."
+        },
+        {
+          "level": 7,
+          "health": "65xC",
+          "move": 0,
+          "attack": 8,
+          "range": 7,
+          "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%" ],
+          "notes": "Play top two cards, using the first card as initiative. Perform the bottom action of the first card, then the top action of the second card."
+        }
+      ]
+    }
+  },
+
+  "startingNumber": 96,
+  "scenarios": {
+    "#96 Unexpected Visitors": {
+      "monsters": [ "Earth Demon", "Flame Demon", "Frost Demon", "Wind Demon" ]
+    },
+    "#97 Lore Untold": {
+      "monsters": [ "Black Imp", "Living Bones", "Living Corpse" ]
+    },
+    "#98 Past In Flames": {
+      "monsters": [ "Ancient Artillery", "Bandit Archer", "Bandit Guard", "Spitting Drake" ]
+    },
+    "#99 Aftershocks": {
+      "monsters": [ "Black Imp", "Cultist", "Deep Terror" ]
+    },
+    "#100 Shifting Gears": {
+      "monsters": [ "Stone Golem" ]
+    },
+    "#101 Shrouded Crypt": {
+      "monsters": [ "Rending Drake", "Spitting Drake" ]
+    },
+    "#102 Bazaar of Knowledge": {
+      "monsters": []
+    },
+    "#103 Where It Is Needed": {
+      "special": [ "Escort: Caravan", "2x(C+L)+3" ]
+    },
+    "#104 A Gaping Wound": {
+      "monsters": [ "Harrower Infester", "Lurker", "Spitting Drake" ],
+      "special": [ "Escort: Hail", "6+2xL" ]
+    },
+    "#105 Monstrosities of a Cult": {
+      "monsters": [ "Bandit Guard", "Valrath Tracker" ]
+    },
+    "#106 Intricate Work": {
+      "monsters": [ "Aesther Scout" ]
+    },
+    "#107 Mechanical Genius": {
+      "monsters": []
+    },
+    "#108 Prologue to the End": {
+      "monsters": [ "City Archer", "City Guard", "Valrath Savage", "Valrath Tracker", "Human Commander", "Valrath Commander" ]
+    },
+    "#109 Epilogue of a War": {
+      "monsters": [ "City Archer", "City Guard", "Valrath Savage", "Valrath Tracker" ]
+    },
+    "#110 A Circular Solution": {
+      "monsters": [ "City Guard", "Earth Demon", "Flame Demon", "Savvas Lavaflow", "Valrath Tracker", "Vermling Shaman" ],
+      "special": [ "Valrath Tracker: %target% C, %pierce% 10, Vermling Shaman: CxH/2, City Guard: CxH/2, Savvas Lavaflow: CxH/2" ]
+    },
+    "#111 The Shackles Loosen": {
+      "monsters": [ "Aesther Ashblade", "Aesther Scout", "Black Imp", "Night Demon" ],
+      "special": [ "Aesther Ashblade: HxC" ]
+    },
+    "#112 The Bottom of It": {
+      "monsters": [ "Ancient Artillery", "Living Bones", "Stone Golem" ]
+    },
+    "#113 The Lost Thread": {
+      "monsters": [ "Stone Golem" ],
+      "special": [ "Escort: Naaret", "4+2xL" ]
+    },
+    "#114 Ink Not Yet Dry": {
+      "monsters": [ "Aesther Ashblade", "Aesther Scout", "Wind Demon" ],
+      "special": [ "Escort: Hail", "4+2xL" ]
+    },
+    "#115 Future Uncertain": {
+      "monsters": [ "Aesther Ashblade", "Aesther Scout", "Black Imp", "Valrath Savage", "Valrath Tracker", "Manifestation of Corruption" ],
+      "special": [ "Manifestation of Corruption: Manual Deck" ]
+    }
+
+  },
+  "sections": {
+    "#1 Volcanic Wasteland": {
+      "monsters": [ "Flame Demon" ],
+      "special": [ "Objective: Altar of Wildfire", "C+L+1" ]
+    },
+    "#4 Barge Ablaze": {
+      "monsters": [ "Bandit Archer", "Bandit Guard", "Spitting Drake" ]
+    },
+    "#6 Kennel of Things": {
+      "monsters": [ "Bandit Guard", "Valrath Tracker", "Wolf-Viper Abomination" ]
+    },
+    "#8 A Life Taken, a Life Given": {
+      "monsters": [ "Valrath Savage" ]
+    },
+    "#13 Shrine of Ashtar": {
+      "monsters": [ "Ancient Artillery", "Earth Demon", "Flame Demon", "Savvas Lavaflow" ]
+    },
+    "#14 The Floor Moves": {
+      "monsters": [ "Living Spirit", "Stone Golem" ]
+    },
+    "#15 Trash Dump": {
+      "monsters": [ "Vermling Scout", "Vermling Shaman" ]
+    },
+    "#17 Escape is Not So Easy": {
+      "monsters": [ "Aesther Ashblade", "Aesther Scout", "Wind Demon" ]
+    },
+    "#22 A Rumbling Sound": {
+      "monsters": [ "Living Spirit" ]
+    },
+    "#23 Narrow Vault": {
+      "monsters": [ "Living Bones", "Living Corpse" ]
+    },
+    "#24 Withered Grove": {
+      "monsters": [ "Earth Demon" ],
+      "special": [ "Objective: Altar of Rot", "Cx2+L+4" ]
+    },
+    "#26 Secret Library": {
+      "monsters": [ "Ancient Artillery" ]
+    },
+    "#28 A Bear of a Drake": {
+      "monsters": [ "Bandit Guard", "Valrath Tracker", "Bear-Drake Abomination" ]
+    },
+    "#29 Serene Path": {
+      "monsters": [ "Valrath Savage" ]
+    },
+    "#30 Seal of Attraction": {
+      "monsters": [ "Deep Terror", "Living Bones" ]
+    },
+    "#32 Flaming Caravel": {
+      "monsters": [ "Bandit Archer", "Bandit Guard", "Spitting Drake" ]
+    },
+    "#34 Frozen Cave": {
+      "monsters": [ "Frost Demon" ],
+      "special": [ "Objective: Altar of Blizzards", "Cx2+L" ]
+    },
+    "#35 Shrine of Thelija": {
+      "monsters": [ "Ancient Artillery", "Frost Demon", "Savvas Icestorm", "Wind Demon" ]
+    },
+    "#37 Aiding Diamara": {
+      "special": [ "Bosses use the same deck" ]
+    },
+    "#39 Another Revolution": {
+      "monsters": [ "Ancient Artillery" ]
+    },
+    "#40 Venerated Tomb": {
+      "monsters": [ "Living Bones", "Living Corpse" ]
+    },
+    "#41 A Sphere of Nightmares": {
+      "monsters": [ "Living Spirit", "Night Demon" ],
+      "special": [ "Objective: Altar", "20+L+2xC" ]
+    },
+    "#42 Collapsed Atrium": {
+      "monsters": [ "Living Spirit" ]
+    },
+    "#46 Quick Turn": {
+      "monsters": [ "Living Spirit" ]
+    },
+    "#47 Hall of Horrors": {
+      "monsters": [ "Black Imp", "Deep Terror", "Harrower Infester" ]
+    },
+    "#50 Slow Turn": {
+      "monsters": [ "Living Spirit" ]
+    },
+    "#60 Seal of Repulsion": {
+      "monsters": [ "Living Corpse", "Living Spirit" ]
+    },
+    "#64 Flooded Catacombs": {
+      "monsters": [ "Living Bones", "Living Corpse" ]
+    },
+    "#67 Branching Alleyway": {
+      "monsters": [ "Aesther Scout", "Black Imp", "Night Demon" ]
+    },
+    "#71 Quiet Rotation": {
+      "monsters": [ "Living Spirit", "Stone Golem" ]
+    },
+    "#72 Clinging Fog": {
+      "monsters": [ "Living Spirit", "Night Demon" ]
+    },
+    "#73 Reflecting Road": {
+      "monsters": [ "Valrath Savage" ]
+    },
+    "#81 Narrow Street": {
+      "monsters": [ "Aesther Scout", "Black Imp", "Night Demon" ]
+    },
+    "#84 Gateway to the Firmament": {
+      "monsters": [ "Aesther Ashblade", "Earth Demon", "Flame Demon", "Frost Demon", "Savvas Icestorm", "Savvas Lavaflow" ]
+    },
+    "#90 Misty Glade": {
+      "monsters": [ "Valrath Savage" ]
+    },
+    "#92 Nesting Grounds": {
+      "monsters": [ "Vermling Scout", "Vermling Shaman" ]
+    },
+    "#93 Rays of Sunlight": {
+      "monsters": [ "Living Spirit", "Night Demon" ],
+      "special": [ "Objective: Altar", "5+L+2xC" ]
+    },
+    "#94 Seal of Reanimation": {
+      "monsters": [ "Living Corpse", "Living Spirit" ]
+    },
+    "#95 The Horde's Kitchen": {
+      "monsters": [ "Vermling Scout" ]
+    },
+    "#96 Haunted Treasury": {
+      "monsters": [ "Living Spirit" ]
+    },
+    "#100 Sekhem Fountain": {
+      "monsters": [ "Black Imp", "Cultist", "Deep Terror" ]
+    },
+    "#103 The Thorns of Hate": {
+      "monsters": [ "Earth Demon", "Forest Imp", "Wind Demon" ]
+    },
+    "#106 Strangler's Park": {
+      "monsters": [ "Harrower Infester", "Vermling Shaman" ]
+    },
+    "#108 Seal of Distortion": {
+      "monsters": [ "Deep Terror", "Living Bones" ]
+    },
+    "#112 Access Hall": {
+      "monsters": [ "Aesther Scout" ]
+    },
+    "#119 A Multitude of Tomes": {
+      "monsters": [ "Black Imp", "Deep Terror" ]
+    },
+    "#123 Lingering Darkness": {
+      "monsters": [ "Living Spirit", "Night Demon" ]
+    },
+    "#126 Training Maneuvers": {
+      "monsters": [ "Vermling Scout", "Vermling Shaman" ]
+    },
+    "#127 Guarded Nursery": {
+      "monsters": [ "Vermling Scout", "Vermling Shaman" ]
+    },
+    "#129 Fighting Dirty": {
+      "monsters": [ "Ooze" ]
+    },
+    "#132 Near the Gates": {
+      "monsters": [ "Aesther Scout", "Black Imp", "Night Demon" ]
+    },
+    "#133 A Secret Floor": {
+      "monsters": [ "Ancient Artillery" ]
+    },
+    "#134 Clawing at Victory": {
+      "monsters": [ "Lurker" ]
+    }
+  }
+}
