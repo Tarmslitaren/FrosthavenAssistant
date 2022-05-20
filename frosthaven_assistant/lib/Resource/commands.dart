@@ -37,8 +37,15 @@ class NextRoundCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   @override
   void execute() {
+    for (var item in _gameState.currentList) {
+      if (item is Character) {
+        item.characterState.initiative = 0;
+      }
+    }
+    _gameState.updateElements();
     _gameState.setRoundState(RoundState.chooseInitiative);
     _gameState.sortCharactersFirst();
+
     //TODO: a million more things: save a bunch of state: all current initiatives and monster deck states
   }
 
@@ -82,7 +89,7 @@ class InitListCommand extends Command {
         characterState.level.value = level;
         characterState.health.value = characterClass.healthByLevel[level-1];
         //TODO: temp test for init value. should be 0 nad not set here.
-        characterState.initiative.value = 78;
+        //characterState.initiative = 78;
         return Character(characterState, characterClass);
       }
     }
@@ -130,7 +137,7 @@ class AddCharacterCommand extends Command {
         characterState.level.value = level;
         characterState.health.value = characterClass.healthByLevel[level-1];
         //TODO: temp test
-        characterState.initiative.value = 78;
+        //characterState.initiative.value = 78;
         character = Character(characterState, characterClass);
       }
     }
@@ -158,5 +165,47 @@ class RemoveCharacterCommand extends Command {
   void undo() {
     //TODO: retain index
     _gameState.currentList.add(_character);
+  }
+}
+
+class UseElementCommand extends Command {
+  final GameState _gameState = getIt<GameState>();
+  final Elements element;
+  ElementState? _previousState;
+
+  UseElementCommand(this.element);
+
+  @override
+  void execute() {
+    _previousState = _gameState.elementState.value[element];
+    _gameState.elementState.value[element] = ElementState.inert;
+  }
+
+  @override
+  void undo() {
+    _gameState.elementState.value[element] = _previousState!;
+  }
+}
+
+class ImbueElementCommand extends Command {
+  final GameState _gameState = getIt<GameState>();
+  final Elements element;
+  final bool half;
+  ElementState? _previousState;
+
+  ImbueElementCommand(this.element, this.half);
+
+  @override
+  void execute() {
+    _previousState = _gameState.elementState.value[element];
+    _gameState.elementState.value[element] = ElementState.full;
+    if(half){
+      _gameState.elementState.value[element] = ElementState.half;
+    }
+  }
+
+  @override
+  void undo() {
+    _gameState.elementState.value[element] = _previousState!;
   }
 }

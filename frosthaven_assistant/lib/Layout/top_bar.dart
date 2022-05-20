@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Resource/game_state.dart';
 import 'element_button.dart';
 
 AppBar createTopBar() {
@@ -24,38 +25,38 @@ AppBar createTopBar() {
       ElementButton(
           key: UniqueKey(),
           color: Colors.red,
+          element: Elements.fire,
           icon: 'assets/images/psd/element-fire.png'
-        // Use the properties stored in the State class.
       ),
       ElementButton(
           key: UniqueKey(),
           color: Colors.blue,
+          element: Elements.ice,
           icon: 'assets/images/psd/element-ice.png'
-        // Use the properties stored in the State class.
       ),
       ElementButton(
           key: UniqueKey(),
           color: Colors.grey,
+          element: Elements.air,
           icon: 'assets/images/psd/element-air.png'
-        // Use the properties stored in the State class.
       ),
       ElementButton(
           key: UniqueKey(),
           color: Colors.green,
+          element: Elements.earth,
           icon: 'assets/images/psd/element-earth.png'
-        // Use the properties stored in the State class.
       ),
       ElementButton(
           key: UniqueKey(),
           color: Colors.yellow,
+          element: Elements.light,
           icon: 'assets/images/psd/element-light.png'
-        // Use the properties stored in the State class.
       ),
       ElementButton(
           key: UniqueKey(),
           color: Colors.black,
+          element: Elements.dark,
           icon: 'assets/images/psd/element-dark.png'
-        // Use the properties stored in the State class.
       ),
     ],
   );

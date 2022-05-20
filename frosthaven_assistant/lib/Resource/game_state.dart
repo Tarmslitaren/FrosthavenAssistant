@@ -1,4 +1,6 @@
+import 'dart:collection';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:math';
 
 import 'package:flutter/services.dart';
@@ -13,6 +15,22 @@ import 'action_handler.dart';
 import 'commands.dart';
 import 'monster_ability_state.dart';
 
+enum ElementState{
+  full,
+  half,
+  inert
+
+}
+
+enum Elements{
+  fire,
+  ice,
+  air,
+  earth,
+  light,
+  dark
+}
+
 enum RoundState{
   chooseInitiative,
   playTurns,
@@ -25,7 +43,7 @@ class FigureState {
 }
 
 class CharacterState extends FigureState {
-  final initiative = ValueNotifier<int>(0); //TODO: this is no good: instances?
+  int initiative = 0;
   final xp = ValueNotifier<int>(0);
 }
 
@@ -120,6 +138,12 @@ class GameState extends ActionHandler{
   GameState() {
     fetchCampaignData("JotL");
     //load save state; then call initlist command
+    elementState.value[Elements.fire] = ElementState.inert;
+    elementState.value[Elements.ice] = ElementState.inert;
+    elementState.value[Elements.air] = ElementState.inert;
+    elementState.value[Elements.earth] = ElementState.inert;
+    elementState.value[Elements.light] = ElementState.inert;
+    elementState.value[Elements.dark] = ElementState.inert;
 
   }
   fetchCampaignData(String campaign) async {
@@ -184,12 +208,12 @@ class GameState extends ActionHandler{
       int aInitiative = 0;
       int bInitiative = 0;
       if(a is Character) {
-        aInitiative = a.characterState.initiative.value;
+        aInitiative = a.characterState.initiative;
       } else if (a is Monster) {
         aInitiative = a.deck.discardPile.peek.initiative;
       }
       if(b is Character) {
-        bInitiative = b.characterState.initiative.value;
+        bInitiative = b.characterState.initiative;
       } else if (b is Monster) {
         bInitiative = b.deck.discardPile.peek.initiative;
       }
@@ -214,6 +238,18 @@ class GameState extends ActionHandler{
     monster.deck = MonsterAbilityState(monster.type.deck);
     currentAbilityDecks.add(monster.deck);
   }
+
+  bool canDraw() {
+    for (var item in currentList) {
+      if(item is Character) {
+        if(item.characterState.initiative == 0) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   void drawAbilityCards(){
     for(MonsterAbilityState deck in currentAbilityDecks) {
       //TODO: don't draw if there are no monsters of the type
@@ -231,6 +267,19 @@ class GameState extends ActionHandler{
     for (MonsterAbilityState deck in currentAbilityDecks) {
       if (deck.name == name) {
         return deck;
+      }
+    }
+  }
+
+  //elements
+  final elementState = ValueNotifier< Map<Elements, ElementState> >(HashMap());
+  void updateElements(){
+    for (var key in elementState.value.keys) {
+      if(elementState.value[key] == ElementState.full) {
+        elementState.value[key] = ElementState.half;
+      }
+      else if(elementState.value[key] == ElementState.half) {
+        elementState.value[key] = ElementState.inert;
       }
     }
   }

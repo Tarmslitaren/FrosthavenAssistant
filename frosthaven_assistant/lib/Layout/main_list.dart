@@ -21,31 +21,31 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     late final Widget child;
     late final double height;
-    if(data is Character) {
+    if (data is Character) {
       Character character = data as Character;
       child = CharacterWidget(characterClass: character.characterClass);
-      height = 60;//TODO put in ListItemData, and have it change depending on summons+monster instances
+      height =
+          60; //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else if (data is Monster) {
       Monster monster = data as Monster;
       child = MonsterWidget(data: monster.type, level: monster.level);
-      height = 120; //TODO put in ListItemData, and have it change depending on summons+monster instances
+      height =
+          120; //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else {
       height = 0;
     }
-      return AnimatedContainer(
-            height:  height,
-            duration: const Duration(milliseconds: 500),
-          decoration: const BoxDecoration(
-              color: Colors.transparent,
-          ),
-            child: child,
-      );
+    return AnimatedContainer(
+      height: height,
+      duration: const Duration(milliseconds: 500),
+      decoration: const BoxDecoration(
+        color: Colors.transparent,
+      ),
+      child: child,
+    );
   }
 }
 
-class MyReorderModel extends AnimatedListBaseReorderModel {
-
-}
+class MyReorderModel extends AnimatedListBaseReorderModel {}
 
 class MainList extends StatefulWidget {
   const MainList({Key? key}) : super(key: key);
@@ -67,12 +67,10 @@ class _MainListState extends State<MainList> {
     });
   }
 
-
   @override
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -102,56 +100,52 @@ class _MainListState extends State<MainList> {
   }
 
   Widget buildList() {
-    return ValueListenableBuilder<int>(
-        valueListenable: _gameState.commandIndex, //TODO: listen for changes in list instead?
-        builder: (context, value, child) {
-          //find which are added or  removed?
-          if (_gameState.commands.isNotEmpty) {
-            Command command = _gameState.getCurrent();
-            if (command is RemoveCharacterCommand) {}
-            else if (command is AddCharacterCommand) {}
-            else if (command is DrawCommand) {
-              //do i need ot do something?
-              //sortList();
-              //controller.notifyChangedRange(0, _gameState.currentList.length, (context, index, data) => null)
-            }
-          }
+    return Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor:
+              Colors.transparent, //needed to make background transparent if reorder is enabled
+          //other styles
+        ),
+        child: ValueListenableBuilder<int>(
+            valueListenable: _gameState.commandIndex,
+            //TODO: listen for changes in list instead?
+            builder: (context, value, child) {
+              //find which are added or  removed?
+              if (_gameState.commands.isNotEmpty) {
+                Command command = _gameState.getCurrent();
+                if (command is RemoveCharacterCommand) {
+                } else if (command is AddCharacterCommand) {
+                } else if (command is DrawCommand) {
+                  //do i need ot do something?
+                }
+              }
 
-          return Scrollbar(
-            controller: scrollController,
+              return Scrollbar(
+                controller: scrollController,
+                child: AutomaticAnimatedListView<ListItemData>(
+                  animator: const DefaultAnimatedListAnimator(
+                      //dismissIncomingDuration: Duration(milliseconds: 1000),
+                      //reorderDuration: Duration(milliseconds: 2000),
 
-            child: AutomaticAnimatedListView<ListItemData>(
+                      //dismissIncomingDuration: const Duration(milliseconds: 150),
+                      //resizeDuration: const Duration(milliseconds: 200),
+                      ),
+                  list: _gameState.currentList,
+                  comparator: AnimatedListDiffListComparator<ListItemData>(
+                      sameItem: (a, b) => isSameItem(a, b),
+                      sameContent: (a, b) => isSameContent(a, b)),
+                  itemBuilder: (context, item, data) => data.measuring
+                      ? Container(
+                          color: Colors.transparent,
+                          height: item is Monster ? 120 : 60,
+                          //margin: const EdgeInsets.all(5), height: 60
+                        )
+                      : Item(data: item),
+                  listController: controller,
+                  scrollController: scrollController,
+                  addLongPressReorderable: true,
 
-
-              animator: const DefaultAnimatedListAnimator(
-                //dismissIncomingDuration: Duration(milliseconds: 1000),
-                //reorderDuration: Duration(milliseconds: 2000),
-
-
-
-
-                //dismissIncomingDuration: const Duration(milliseconds: 150),
-                //resizeDuration: const Duration(milliseconds: 200),
-              ),
-
-              list: _gameState.currentList,
-              comparator: AnimatedListDiffListComparator<ListItemData>(
-                  sameItem: (a, b) => isSameItem(a,b),
-                  sameContent: (a, b) => isSameContent(a, b)
-              ),
-              itemBuilder: (context, item, data) =>
-              data.measuring
-                  ? Container(
-                color: Colors.transparent,
-                  height: item is Monster? 120 : 60,
-                  //margin: const EdgeInsets.all(5), height: 60
-                  )
-                  : Item(data: item),
-              listController: controller,
-              scrollController: scrollController,
-              //addLongPressReorderable: true,
-
-              /*reorderModel: AnimatedListReorderModel(
+                  /*reorderModel: AnimatedListReorderModel(
 
 
                 onReorderStart: (index, dx, dy) {
@@ -167,13 +161,14 @@ class _MainListState extends State<MainList> {
                   return true;
                 },
               ),*/
-              //reorderModel: AutomaticAnimatedListReorderModel(_gameState.currentList),
-            ),
-          );
-        }
-    );
+                  reorderModel:
+                      AutomaticAnimatedListReorderModel(_gameState.currentList),
+                ),
+              );
+            }));
   }
 
-  final scrollController = ScrollController(); //use to animate to position in list:
+  final scrollController =
+      ScrollController(); //use to animate to position in list:
   final controller = AnimatedListController();
 }

@@ -27,10 +27,11 @@ class _DrawButtonState extends State<DrawButton> {
   }
 
   void onPressed() {
-    if(_gameState.roundState.value == RoundState.chooseInitiative) {
-      _gameState.action(DrawCommand());
-    }
-    else {
+    if (_gameState.roundState.value == RoundState.chooseInitiative) {
+      if (_gameState.canDraw()) {
+        _gameState.action(DrawCommand());
+      }
+    } else {
       _gameState.action(NextRoundCommand());
     }
   }
@@ -50,10 +51,12 @@ class _DrawButtonState extends State<DrawButton> {
               child: Text(
                 _gameState.roundState.value == RoundState.chooseInitiative
                     ? "Draw"
-                    : "Next Round",
+                    : " Next\nRound",
                 style: const TextStyle(
-                  fontSize: 26,
+                  height: 0.8,
+                  fontSize: 16,
                   color: Colors.white,
+                  shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
                 ),
               ));
         },

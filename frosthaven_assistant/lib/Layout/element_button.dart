@@ -1,22 +1,35 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/commands.dart';
+
+import '../Resource/game_state.dart';
+import '../services/service_locator.dart';
 
 class ElementButton extends StatefulWidget {
   final String icon;
   final double width;
   final Color color;
+  final Elements element;
   final double borderWidth = 2;
-  const ElementButton({Key? key, required this.icon, this.width = 40, required this.color }) : super(key: key);
+
+  const ElementButton(
+      {Key? key,
+      required this.icon,
+      this.width = 40,
+      required this.color,
+      required this.element})
+      : super(key: key);
 
   @override
-  _AnimatedContainerButtonState createState() => _AnimatedContainerButtonState();
+  _AnimatedContainerButtonState createState() =>
+      _AnimatedContainerButtonState();
 }
-
 
 class _AnimatedContainerButtonState extends State<ElementButton> {
   // Define the various properties with default values. Update these properties
   // when the user taps a FloatingActionButton.
-  bool _half = false;
-  bool _full = true;
+  final GameState _gameState = getIt<GameState>();
   late double _height;
   late Color _color;
   late BorderRadiusGeometry _borderRadius;
@@ -24,11 +37,37 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
   @override
   void initState() {
     super.initState();
+    _height = widget.width;
+    _color = Colors.transparent;
+    _borderRadius =
+        BorderRadius.all(Radius.circular(widget.width - widget.borderWidth));
+  }
+
+  void setHalf(){
+    _color = widget.color;
+    _height = widget.width / 2;
+    _borderRadius = BorderRadius.only(
+        bottomLeft:
+        Radius.circular(widget.width / 2 - widget.borderWidth),
+        bottomRight:
+        Radius.circular(widget.width / 2 - widget.borderWidth));
+    //_borderRadius = BorderRadius.only(
+     //   bottomLeft: Radius.circular(_height - widget.borderWidth),
+      //  bottomRight: Radius.circular(_height - widget.borderWidth));
+  }
+
+  void setFull(){
     _color = widget.color;
     _height = widget.width;
     _borderRadius = BorderRadius.all(
-        Radius.circular(widget.width-widget.borderWidth)
-    );
+        Radius.circular(widget.width - widget.borderWidth));
+  }
+
+  void setInert(){
+    _color = Colors.transparent;
+    _height = widget.width;
+    _borderRadius = BorderRadius.all(
+        Radius.circular(widget.width - widget.borderWidth));
   }
 
   @override
@@ -36,109 +75,89 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
     return GestureDetector(
         onDoubleTap: () {
           setState(() {
-            _full = false;
-            _half = true;
-            _color = widget.color;
-            _height = widget.width/2;
-            _borderRadius = BorderRadius.only(
-                bottomLeft: Radius.circular(widget.width/2-widget.borderWidth),
-                bottomRight: Radius.circular(widget.width/2-widget.borderWidth)
-            );
-
+            _gameState.elementState.value
+                .update(widget.element, (value) => ElementState.half);
+            _gameState.action(ImbueElementCommand(widget.element, true));
+           // setHalf();
           });
         },
         onTap: () {
-          // Use setState to rebuild the widget with new values.
           setState(() {
-            // Create a random number generator.
-            if(_full) {
-              _full = false;
-              _half = false;
-            } else if(_half) {
-              _half = false;
+            if (_gameState.elementState.value[widget.element] !=
+                ElementState.inert) {
+              _gameState.elementState.value
+                  .update(widget.element, (value) => ElementState.inert);
             } else {
-              _full = true;
+              _gameState.elementState.value
+                  .update(widget.element, (value) => ElementState.full);
             }
-            if(_half) {
-              _height = widget.width/2;
-              _color = widget.color;
-              _borderRadius = BorderRadius.only(
-                  bottomLeft: Radius.circular(_height-widget.borderWidth),
-                  bottomRight: Radius.circular(_height-widget.borderWidth)
-              );
-            }
-            else if(_full) {
-              _height = widget.width;
-              _color = widget.color;
-              _borderRadius = BorderRadius.all(
-                  Radius.circular(widget.width-widget.borderWidth)
-              );
+            if (_gameState.elementState.value[widget.element] ==
+                ElementState.half) {
+              _gameState.action(ImbueElementCommand(widget.element, true));
+
+              //setHalf();
+            } else if (_gameState.elementState.value[widget.element] ==
+                ElementState.full) {
+              _gameState.action(ImbueElementCommand(widget.element, false));
+              //setFull();
+
             } else {
-              _height = widget.width;
-              _color = Colors.transparent;
-              _borderRadius = BorderRadius.all(
-                  Radius.circular(widget.width-widget.borderWidth)
-              );
+              //setInert();
+              _gameState.action(UseElementCommand(widget.element));
             }
           });
         },
         child: Stack(
           alignment: Alignment.center,
           children: [
-            /*Container(
-              width: widget.width,
-              height: widget.width,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white,
-              ),
-            ),*/
-            /*Container(
-              width: widget.width-widget.borderWidth,
-              height: widget.width-widget.borderWidth,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.transparent,
-              ),
-            ),*/
-
-            //TODO: alingment bottom center mkaes the color overlop the border.
             Align(
               alignment: Alignment.bottomCenter,
-              child: AnimatedContainer(
-                // Use the properties stored in the State class.
-                width: widget.width-widget.borderWidth,
-                height: _height-widget.borderWidth,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: _color,
-                  borderRadius: _borderRadius,
-                  boxShadow: [
-                    _full || _half? BoxShadow(
-                      //spreadRadius: 2
-                      blurRadius: 2
-                    ) :
-                    BoxShadow(
-                      color: Colors.transparent,
-                    )
-                  ]
-                ),
-                // Define how long the animation should take.
-                duration: const Duration(seconds: 1),
-                // Provide an optional curve to make the animation feel smoother.
-                curve: Curves.fastOutSlowIn,
-              ),
-            ),
+              child: ValueListenableBuilder<int>(
+                  valueListenable: _gameState.commandIndex,
+                  builder: (context, value, child) {
 
+                    if (_gameState.elementState.value[widget.element] == ElementState.inert) {
+                      setInert();
+                    }
+                    else if (_gameState.elementState.value[widget.element] == ElementState.half) {
+                      setHalf();
+                    }
+                    else if (_gameState.elementState.value[widget.element] == ElementState.full) {
+                      setFull();
+                    }
+
+                    return AnimatedContainer(
+                      // Use the properties stored in the State class.
+                      width: widget.width - widget.borderWidth,
+                      height: _height - widget.borderWidth,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          color: _color,
+                          borderRadius: _borderRadius,
+                          boxShadow: [
+                            _gameState.elementState.value[widget.element] !=
+                                    ElementState.inert
+                                ? const BoxShadow(
+                                    //spreadRadius: 2
+                                    blurRadius: 2)
+                                : const BoxShadow(
+                                    color: Colors.transparent,
+                                  )
+                          ]),
+                      // Define how long the animation should take.
+                      duration: const Duration(seconds: 1),
+                      // Provide an optional curve to make the animation feel smoother.
+                      curve: Curves.fastOutSlowIn,
+                    );
+                  }),
+            ),
             Image(
               //fit: BoxFit.contain,
-              height: widget.width*0.8,
+              height: widget.width * 0.8,
               image: AssetImage(widget.icon),
-              width: widget.width*0.8,
-
+              width: widget.width * 0.8,
             ),
           ],
-        )
-    );
+        ));
   }
 }

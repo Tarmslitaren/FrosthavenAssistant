@@ -237,7 +237,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                card!.title,
+                card.title,
                 style: const TextStyle(
                     fontFamily: 'Pirata',
                     color: Colors.white,
