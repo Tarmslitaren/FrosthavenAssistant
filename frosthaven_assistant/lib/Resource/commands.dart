@@ -8,6 +8,7 @@ import 'game_state.dart';
 
 class DrawCommand extends Command {
   final GameState _gameState = getIt<GameState>();
+
   DrawCommand();
 
   @override
@@ -28,13 +29,12 @@ class DrawCommand extends Command {
     _gameState.round.value--;
     _gameState.setRoundState(RoundState.chooseInitiative);
     //TODO: un draw the cards (need to save the random nr used. unsort the list
-
   }
-
 }
 
 class NextRoundCommand extends Command {
   final GameState _gameState = getIt<GameState>();
+
   @override
   void execute() {
     for (var item in _gameState.currentList) {
@@ -56,7 +56,6 @@ class NextRoundCommand extends Command {
   }
 }
 
-
 //For use with save states and when starting a scenario (adding a bunch of monsters and special characters at once)
 class InitListCommand extends Command {
   final GameState _gameState = getIt<GameState>();
@@ -73,7 +72,6 @@ class InitListCommand extends Command {
         _gameState.listKey.currentState!.insertItem(i, duration: Duration.zero);
       }
     }*/
-
   }
 
   @override
@@ -82,12 +80,13 @@ class InitListCommand extends Command {
   }
 
   //helper to make the init list.
-  static Character? createCharacter(String name, int level){
-    for (CharacterClass characterClass in getIt<GameState>().modelData.value!.characters) {
-      if(characterClass.name == name) {
+  static Character? createCharacter(String name, int level) {
+    for (CharacterClass characterClass
+        in getIt<GameState>().modelData.value!.characters) {
+      if (characterClass.name == name) {
         var characterState = CharacterState();
         characterState.level.value = level;
-        characterState.health.value = characterClass.healthByLevel[level-1];
+        characterState.health.value = characterClass.healthByLevel[level - 1];
         //TODO: temp test for init value. should be 0 nad not set here.
         //characterState.initiative = 78;
         return Character(characterState, characterClass);
@@ -95,19 +94,18 @@ class InitListCommand extends Command {
     }
     return null;
   }
-
-  //helper to make the init list.
-  static Monster? createMonster(String name, int level){
-    for (MonsterModel monster in getIt<GameState>().modelData.value!.monsters) {
-      if(monster.name == name) {
-        Monster monster = Monster(name, level);
-        return monster;
-      }
-    }
-    return null;
-  }
 }
 
+//helper to make the init list.
+Monster? createMonster(String name, int level) {
+  for (MonsterModel monster in getIt<GameState>().modelData.value!.monsters) {
+    if (monster.name == name) {
+      Monster monster = Monster(name, level);
+      return monster;
+    }
+  }
+  return null;
+}
 
 class AddCharacterCommand extends Command {
   final GameState _gameState = getIt<GameState>();
@@ -115,7 +113,7 @@ class AddCharacterCommand extends Command {
   final int _level;
   late Character character;
 
-  AddCharacterCommand(this._name, this._level){
+  AddCharacterCommand(this._name, this._level) {
     _createCharacter(_name, _level);
   }
 
@@ -130,12 +128,13 @@ class AddCharacterCommand extends Command {
     _gameState.currentList.remove(character);
   }
 
-  void _createCharacter(String name, int level){
-    for (CharacterClass characterClass in _gameState.modelData.value!.characters) {
-      if(characterClass.name == name) {
+  void _createCharacter(String name, int level) {
+    for (CharacterClass characterClass
+        in _gameState.modelData.value!.characters) {
+      if (characterClass.name == name) {
         var characterState = CharacterState();
         characterState.level.value = level;
-        characterState.health.value = characterClass.healthByLevel[level-1];
+        characterState.health.value = characterClass.healthByLevel[level - 1];
         //TODO: temp test
         //characterState.initiative.value = 78;
         character = Character(characterState, characterClass);
@@ -154,7 +153,7 @@ class RemoveCharacterCommand extends Command {
   @override
   void execute() {
     for (ListItemData character in _gameState.currentList) {
-      if(character.id == name) {
+      if (character.id == name) {
         _character = character as Character;
       }
     }
@@ -165,6 +164,43 @@ class RemoveCharacterCommand extends Command {
   void undo() {
     //TODO: retain index
     _gameState.currentList.add(_character);
+  }
+}
+
+class SetScenarioCommand extends Command {
+  final GameState _gameState = getIt<GameState>();
+  final String _scenario;
+
+  SetScenarioCommand(this._scenario) {}
+
+  @override
+  void execute() {
+    //first reset state
+    List<ListItemData> newList = [];
+    for (var item in _gameState.currentList) {
+      if (item is Character) {
+        newList.add(item);
+        item.characterState.initiative = 0;
+      }
+    }
+    List<String> monsters =
+        _gameState.modelData.value!.scenarios[_scenario]!.monsters;
+    for (String monster in monsters) {
+      newList.add(
+          createMonster(monster, _gameState.level.value)!
+      );
+    }
+
+    _gameState.currentList = newList;
+    _gameState.updateElements();
+    _gameState.updateElements(); //twice to make sure they are inert.
+    _gameState.setRoundState(RoundState.chooseInitiative);
+    _gameState.sortCharactersFirst();
+  }
+
+  @override
+  void undo() {
+    //TODO: implement
   }
 }
 
@@ -199,7 +235,7 @@ class ImbueElementCommand extends Command {
   void execute() {
     _previousState = _gameState.elementState.value[element];
     _gameState.elementState.value[element] = ElementState.full;
-    if(half){
+    if (half) {
       _gameState.elementState.value[element] = ElementState.half;
     }
   }

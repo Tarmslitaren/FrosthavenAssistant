@@ -41,7 +41,8 @@ Widget createLines(List<String> strings, final bool left) {
     "and": "and"
   };
 
-  var shadow = Shadow(offset: Offset(1, 1), color: left ? Colors.white : Colors.black);
+  var shadow =
+      Shadow(offset: Offset(1, 1), color: left ? Colors.white : Colors.black);
 
   var smallStyle = TextStyle(
       fontFamily: 'Majalla',
@@ -158,10 +159,12 @@ class MonsterStatCardWidget extends StatefulWidget {
   final int level;
   final MonsterModel data;
 
-  final leftStyle =
-      const TextStyle(fontFamily: 'Majalla', color: Colors.black, fontSize: 16,height: 1.2,
-          shadows: [Shadow(offset: Offset(1, 1), color: Colors.black12)]);
-
+  final leftStyle = const TextStyle(
+      fontFamily: 'Majalla',
+      color: Colors.black,
+      fontSize: 16,
+      height: 1.2,
+      shadows: [Shadow(offset: Offset(1, 1), color: Colors.black12)]);
 
   final rightStyle = const TextStyle(
       fontFamily: 'Majalla',
@@ -206,10 +209,13 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
             child: Stack(
               //alignment: Alignment.center,
               children: [
-                Image(
-                  height: widget.height,
-                  image: const AssetImage(
-                      "assets/images/psd/monsterStats-normal.png"),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image(
+                    height: widget.height,
+                    image: const AssetImage(
+                        "assets/images/psd/monsterStats-normal.png"),
+                  ),
                 ),
                 Positioned(
                   left: 72.0,
@@ -256,7 +262,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                       Text(
                           widget.data.levels[_level].normal?.range != 0
                               ? widget.data.levels[_level].normal!.range
-                              .toString()
+                                  .toString()
                               : "-",
                           style: widget.rightStyle),
                     ],

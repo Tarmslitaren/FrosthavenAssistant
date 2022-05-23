@@ -154,9 +154,9 @@ class GameState extends ActionHandler{
     action(InitListCommand([
       InitListCommand.createCharacter("Hatchet", 1)!,
       InitListCommand.createCharacter("Demolitionist", 1)!,
-      InitListCommand.createMonster("Zealot", 1)!,
-      InitListCommand.createMonster("Giant Viper (JotL)", 1)!,
-      InitListCommand.createMonster("Rat Monstrosity", 4)!,
+      createMonster("Zealot", level.value)!,
+      createMonster("Giant Viper (JotL)", level.value)!,
+      createMonster("Rat Monstrosity", level.value)!,
     ]));
   }
   //data
@@ -170,6 +170,8 @@ class GameState extends ActionHandler{
   void setRoundState(RoundState state) {
     roundState.value = state;
   }
+
+  final level = ValueNotifier<int>(1); //TODO: update and stuff
 
   //final currentCharacters = <Character>[];
   //final currentMonsters = <Monster>[];
@@ -224,7 +226,6 @@ class GameState extends ActionHandler{
     //TODO: deal with the listKey
 
   }
-
 
   final currentAbilityDecks = <MonsterAbilityState>[]; //add to here when adding a monster type
   void addAbilityDeck(Monster monster) {
