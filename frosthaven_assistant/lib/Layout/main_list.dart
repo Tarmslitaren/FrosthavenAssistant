@@ -75,6 +75,8 @@ class _MainListState extends State<MainList> {
   @override
   Widget build(BuildContext context) {
     return Container(
+        //alignment: Alignment.center,
+
         decoration: const BoxDecoration(
           image: DecorationImage(
               fit: BoxFit.cover,
@@ -102,8 +104,7 @@ class _MainListState extends State<MainList> {
   Widget buildList() {
     return Theme(
         data: Theme.of(context).copyWith(
-          canvasColor:
-              Colors.transparent, //needed to make background transparent if reorder is enabled
+          canvasColor: Colors.transparent, //needed to make background transparent if reorder is enabled
           //other styles
         ),
         child: ValueListenableBuilder<int>(

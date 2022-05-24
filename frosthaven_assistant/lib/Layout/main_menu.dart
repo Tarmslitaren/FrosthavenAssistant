@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:search_choices/search_choices.dart';
 
 import '../Model/campaign.dart';
 import '../Resource/commands.dart';
@@ -25,7 +26,8 @@ Drawer createMainMenu(BuildContext context) {
                 decoration: BoxDecoration(
                   color: Colors.blue,
                 ),
-                child: Text('Main Menu'),
+                child: Text(
+                    'Main Menu'), //add more useful stuff here (set level stuff maybe?)
               ),
               ListTile(
                 title: const Text('Undo'),
@@ -45,54 +47,25 @@ Drawer createMainMenu(BuildContext context) {
               const Divider(),
               _gameState.modelData.value == null
                   ? Container()
-                  : FormField<String>(
-                      builder: (FormFieldState<String> state) {
-                        return InputDecorator(
-                          decoration: const InputDecoration(
-                            counterText: '',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.transparent),
-                            ),
-                            // border: UnderlineInputBorder(
-                            //   borderSide:
-                            //      BorderSide(color: Colors.pink),
-                            // ),
-                          ),
-                          isEmpty: _currentSelectedValue == '',
-                          child: DropdownButtonHideUnderline(
-                            child: DropdownButton<String>(
-                              hint: const Text("Set Scenario"),
-                              value: _currentSelectedValue,
-                              isDense: true,
-                              onChanged: (String? newValue) {
-                                //setState(() {
-                                _currentSelectedValue = newValue;
-                                state.didChange(newValue);
-                                //TODO: run setscenario command
-                                _gameState.action(SetScenarioCommand(_currentSelectedValue!));
-                                //});
-                              },
-                              items: _gameState.modelData.value?.scenarios.keys
-                                  .map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ),
+                  : SearchChoices.single(
+                      items: _gameState.modelData.value?.scenarios.keys
+                          .map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
                         );
+                      }).toList(),
+                      value: _currentSelectedValue,
+                      hint: "Set Scenario",
+                      searchHint: "Select Scenario",
+                      onChanged: (value) {
+                        _currentSelectedValue = value;
+                        _gameState
+                            .action(SetScenarioCommand(_currentSelectedValue!));
                       },
+                      isExpanded: true,
+                      displayClearIcon: false,
                     ),
-              ListTile(
-                title: const Text('Set Scenario'),
-                onTap: () {
-                  //Navigator.pop(context);
-                },
-              ),
               ListTile(
                 title: const Text('Add Section'),
                 onTap: () {

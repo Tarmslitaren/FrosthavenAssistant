@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:scaled_app/scaled_app.dart';
 
 import 'Layout/main_menu.dart';
 
 void main() {
   setupGetIt();
+  /*ScaledWidgetsFlutterBinding.ensureInitialized(
+    baseWidth: 490,
+    applyScaling: (deviceWidth) => deviceWidth > 100 && deviceWidth < 740,
+  );*/
+  //runAppScaled(const MyApp());
   runApp(const MyApp());
 }
 

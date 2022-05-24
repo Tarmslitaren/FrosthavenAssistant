@@ -172,6 +172,7 @@ class GameState extends ActionHandler{
   }
 
   final level = ValueNotifier<int>(1); //TODO: update and stuff
+  final scenario = ValueNotifier<String>("");
 
   //final currentCharacters = <Character>[];
   //final currentMonsters = <Monster>[];
@@ -286,4 +287,7 @@ class GameState extends ActionHandler{
   }
 
   GameState? savedState; //load from file, save to file on interval/ app in background? or after any operation?
+
+  //config: TODO: move to own state
+  final userScaling = ValueNotifier<double>(1.0);
 }

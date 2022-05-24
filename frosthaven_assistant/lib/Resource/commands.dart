@@ -196,6 +196,7 @@ class SetScenarioCommand extends Command {
     _gameState.updateElements(); //twice to make sure they are inert.
     _gameState.setRoundState(RoundState.chooseInitiative);
     _gameState.sortCharactersFirst();
+    _gameState.scenario.value = _scenario;
   }
 
   @override
