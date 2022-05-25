@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/commands.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:great_list_view/great_list_view.dart';
 
 import '../Resource/action_handler.dart';
@@ -19,18 +20,19 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double scale = getScaleByReference(context);
     late final Widget child;
     late final double height;
     if (data is Character) {
       Character character = data as Character;
       child = CharacterWidget(characterClass: character.characterClass);
       height =
-          60; //TODO put in ListItemData, and have it change depending on summons+monster instances
+          60 * scale; //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else if (data is Monster) {
       Monster monster = data as Monster;
       child = MonsterWidget(data: monster.type, level: monster.level);
       height =
-          120; //TODO put in ListItemData, and have it change depending on summons+monster instances
+          120 * scale; //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else {
       height = 0;
     }
@@ -138,7 +140,8 @@ class _MainListState extends State<MainList> {
                   itemBuilder: (context, item, data) => data.measuring
                       ? Container(
                           color: Colors.transparent,
-                          height: item is Monster ? 120 : 60,
+                          height: item is Monster ? 120 : getScaleByReference(context) * 60,
+                    //TODO: these are for smoth animations. need to be same size as the items
                           //margin: const EdgeInsets.all(5), height: 60
                         )
                       : Item(data: item),

@@ -7,20 +7,21 @@ import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import 'monster_stat_card.dart';
 
 class MonsterWidget extends StatefulWidget {
   //final String icon;
-  final double height;
-  final double borderWidth = 2;
+  //final double height;
+  //final double borderWidth = 2;
   final int level;
   final MonsterModel data;
 
   const MonsterWidget(
       {Key? key,
       //required this.icon,
-      this.height = 123,
+      //this.height = 123,
         required this.data,
         required this.level})
       : super(key: key);
@@ -39,6 +40,8 @@ class _MonsterWidgetState extends State<MonsterWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double scale = getScaleByReference(context);
+    double height = scale * 123;
     return Row(
       children: [
         GestureDetector(
@@ -56,23 +59,23 @@ class _MonsterWidgetState extends State<MonsterWidget> {
               setState(() {});
             },
             child: Container(
-                margin: const EdgeInsets.all(2),
+                margin: EdgeInsets.all(2*scale),
                 child: Stack(alignment: Alignment.bottomCenter, children: [
                   Image(
                     //fit: BoxFit.contain,
-                    height: widget.height,
-                    width: widget.height,
+                    height: height,
+                    width: height,
                     image: AssetImage("assets/images/monsters/${widget.data.gfx}.png"),
                     //width: widget.height*0.8,
                   ),
                   Text(
                     widget.data.display,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontFamily: 'Pirata',
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 20*scale,
                         shadows: [
-                          Shadow(offset: Offset(1, 1), color: Colors.black)
+                          Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
                         ]),
                   )
                 ]))),

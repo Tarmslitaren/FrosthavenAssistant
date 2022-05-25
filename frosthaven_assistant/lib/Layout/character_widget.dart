@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Model/character_class.dart';
 import '../Resource/action_handler.dart';
@@ -8,22 +9,13 @@ import '../Resource/game_state.dart';
 import '../services/service_locator.dart';
 
 class CharacterWidget extends StatefulWidget {
-  //final String icon;
-  final double height;
 
-  //final Color color;
-  final double borderWidth = 2;
-
-  //final String name;
+  //final double borderWidth = 2;
   final CharacterClass characterClass;
 
   const CharacterWidget({
     Key? key,
-    //required this.icon,
-    this.height = 60,
     required this.characterClass,
-    //required this.name,
-    //required this.color
   }) : super(key: key);
 
   @override
@@ -62,6 +54,9 @@ class _CharacterWidgetState extends State<CharacterWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double scale = getScaleByReference(context);
+    double height = 60 * scale;
+
     return GestureDetector(
         onVerticalDragStart: (details) {
           //start moving the widget in the list
@@ -80,9 +75,9 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           alignment: Alignment.centerLeft,
           children: [
             Container(
-              margin: const EdgeInsets.all(2),
-              width: 495,
-              height: widget.height - widget.borderWidth,
+              margin: EdgeInsets.all(2*scale),
+              width: 495 * scale,
+              height: 58 * scale,
               decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
                 color: widget.characterClass.color,
@@ -94,7 +89,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                   children: [
                     Image(
                       //fit: BoxFit.contain,
-                      height: widget.height,
+                      height: height,
                       image: AssetImage(
                         "assets/images/class-icons/${widget.characterClass.name}.png",
                       ),
@@ -104,10 +99,10 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                       alignment: Alignment.bottomCenter,
                       child: Column(children: [
                         Container(
-                          margin: const EdgeInsets.only(top: 10),
+                          margin: EdgeInsets.only(top: 10 * scale),
                           child: Image(
                             //fit: BoxFit.contain,
-                            height: widget.height * 0.1,
+                            height: height * 0.1,
                             image: const AssetImage("assets/images/init.png"),
                           ),
                         ),
@@ -116,19 +111,19 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                             builder: (context, value, child) {
                               if (_characterState.initiative == 0) {
                                 return SizedBox(
-                                  height: 33,
-                                  width: 24,
+                                  height: 33*scale,
+                                  width: 24*scale,
                                   child: TextField(
                                       textAlign: TextAlign.center,
                                       cursorColor: Colors.white,
                                       maxLength: 2,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           fontFamily: 'Pirata',
                                           color: Colors.white,
-                                          fontSize: 24,
+                                          fontSize: 24*scale, //TODO: does scaleing work right with the fontsizes?
                                           shadows: [
                                             Shadow(
-                                                offset: Offset(1, 1),
+                                                offset: Offset(1*scale, 1*scale),
                                                 color: Colors.black)
                                           ]),
                                       decoration: const InputDecoration(
@@ -153,18 +148,18 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                 );
                               } else {
                                 return SizedBox(
-                                    height: 33,
-                                    width: 24,
+                                    height: 33*scale,
+                                    width: 24*scale,
                                     child: Text(
                                       _characterState.initiative.toString(),
                                       textAlign: TextAlign.center,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                           fontFamily: 'Pirata',
                                           color: Colors.white,
-                                          fontSize: 24,
+                                          fontSize: 24*scale,
                                           shadows: [
                                             Shadow(
-                                                offset: Offset(1, 1),
+                                                offset: Offset(1*scale, 1*scale),
                                                 color: Colors.black)
                                           ]),
                                     ));
@@ -177,29 +172,29 @@ class _CharacterWidgetState extends State<CharacterWidget> {
 
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(top: 10),
+                            margin: EdgeInsets.only(top: 10*scale),
                             child: Text(
                               widget.characterClass.name,
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontFamily: 'Pirata',
                                   color: Colors.white,
-                                  fontSize: 16,
+                                  fontSize: 16*scale,
                                   shadows: [
                                     Shadow(
-                                        offset: Offset(1, 1),
+                                        offset: Offset(1*scale, 1*scale),
                                         color: Colors.black)
                                   ]),
                             ),
                           ),
                           Text(
                             'health: ${_characterState.health.value.toString()} / ${widget.characterClass.healthByLevel[_characterState.level.value - 1].toString()}',
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontFamily: 'Pirata',
                                 color: Colors.white,
-                                fontSize: 16,
+                                fontSize: 16*scale,
                                 shadows: [
                                   Shadow(
-                                      offset: Offset(1, 1), color: Colors.black)
+                                      offset: Offset(1*scale, 1*scale), color: Colors.black)
                                 ]),
                           )
                         ])

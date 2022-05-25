@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/commands.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Model/monster.dart';
 import '../Resource/action_handler.dart';
 
-Widget createLines(List<String> strings) {
+Widget createLines(List<String> strings, bool left, double scale) {
   const Map<String, String> _tokens = {
     "attack": "Attack",
     "move": "Move",
@@ -44,32 +45,35 @@ Widget createLines(List<String> strings) {
     "and": "and"
   };
 
-  const dividerStyle = TextStyle(
-      fontFamily: 'Majalla',
-      color: Colors.white,
-      fontSize: 8,
-      letterSpacing: 2,
-      height: 0.7,
-      shadows: const [Shadow(offset: Offset(1, 1), color: Colors.black)]);
+  var shadow =
+  Shadow(offset: Offset(1*scale, 1*scale), color: left ? Colors.white : Colors.black);
 
-  const smallStyle = TextStyle(
+  var dividerStyle = TextStyle(
       fontFamily: 'Majalla',
-      color: Colors.white,
-      fontSize: 8,
-      height: 0.8,
-      shadows: const [Shadow(offset: Offset(1, 1), color: Colors.black)]);
-  const midStyle = TextStyle(
+      color: left ? Colors.black : Colors.white,
+      fontSize: 8*scale,
+      letterSpacing: 2*scale,
+      height: 0.7*scale,
+      shadows: [shadow]);
+
+  var smallStyle = TextStyle(
       fontFamily: 'Majalla',
-      color: Colors.white,
-      fontSize: 10,
-      height: 0.8,
-      shadows: const [Shadow(offset: Offset(1, 1), color: Colors.black)]);
-  const normalStyle = TextStyle(
+      color: left ? Colors.black : Colors.white,
+      fontSize: 8*scale,
+      height: 0.8*scale,
+      shadows: [shadow]);
+  var midStyle = TextStyle(
       fontFamily: 'Majalla',
-      color: Colors.white,
-      fontSize: 14,
-      height: 0.8,
-      shadows: const [Shadow(offset: Offset(1, 1), color: Colors.black)]);
+      color: left ? Colors.black : Colors.white,
+      fontSize: 10*scale,
+      height: 0.8*scale,
+      shadows: [shadow]);
+  var normalStyle = TextStyle(
+      fontFamily: 'Majalla',
+      color: left ? Colors.black : Colors.white,
+      fontSize: 14*scale,
+      height: 0.8*scale,
+      shadows: [shadow]);
   List<Text> lines = [];
   for (String line in strings) {
     bool isRightPartOfLastLine = false;
@@ -156,7 +160,7 @@ Widget createLines(List<String> strings) {
   return Align(
     //alignment: Alignment.center,
     child: Container(
-      margin: const EdgeInsets.only(top: 24),
+      margin: EdgeInsets.only(top: 24*scale),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
@@ -166,15 +170,13 @@ Widget createLines(List<String> strings) {
 }
 
 class MonsterAbilityCardWidget extends StatefulWidget {
-  //final String icon;
-  final double height;
-  final double borderWidth = 2;
+  //final double height;
+  //final double borderWidth = 2;
   final MonsterModel data;
 
   const MonsterAbilityCardWidget(
       {Key? key,
-      //required this.icon,
-      this.height = 123,
+      //this.height = 123,
       required this.data})
       : super(key: key);
 
@@ -194,18 +196,18 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
     super.initState();
   }
 
-  Widget _buildRear() {
+  Widget _buildRear(double scale) {
     return Container(
         key: const ValueKey<int>(0),
-        margin: const EdgeInsets.all(2),
-        width: 180,
+        margin: EdgeInsets.all(2*scale),
+        width: 180*scale,
         child: Stack(
           alignment: Alignment.center,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(8.0*scale),
               child: Image(
-                height: widget.height,
+                height: 123*scale,
                 image: const AssetImage(
                     "assets/images/psd/monsterAbility-back.png"),
               ),
@@ -214,40 +216,40 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
         ));
   }
 
-  Widget _buildFront(MonsterAbilityCardModel? card) {
+  Widget _buildFront(MonsterAbilityCardModel? card, double scale) {
     String initText = card!.initiative.toString();
     if (initText.length == 1) {
       initText = "0" + initText;
     }
     return Container(
         key: const ValueKey<int>(1),
-        margin: const EdgeInsets.all(2),
-        width: 180,
+        margin: EdgeInsets.all(2*scale),
+        width: 180*scale,
         child: Stack(
           alignment: Alignment.center,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(8.0*scale),
               child: Image(
-                height: widget.height,
+                height: 123*scale,
                 image: const AssetImage(
                     "assets/images/psd/monsterAbility-front.png"),
               ),
             ),
             Positioned(
-              top: 2,
+              top: 2*scale,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Text(
                     card.title,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontFamily: 'Pirata',
                         color: Colors.white,
-                        fontSize: 18,
+                        fontSize: 18*scale,
                         shadows: [
-                          Shadow(offset: Offset(1, 1), color: Colors.black)
+                          Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
                         ]),
                   ),
                 ],
@@ -259,47 +261,47 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
             //child:
 
             Positioned(
-                left: 10.0,
-                top: 24.0,
+                left: 10.0*scale,
+                top: 24.0*scale,
                 child: Container(
                   child: Text(
                     initText,
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
+                        fontSize: 20*scale,
                         shadows: [
-                          Shadow(offset: Offset(1, 1), color: Colors.black)
+                          Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
                         ]),
                   ),
                 )),
             Positioned(
-                left: 4.0,
-                top: 110.0,
+                left: 4.0*scale,
+                top: 110.0*scale,
                 child: Container(
                   child: Text(
                     card.nr.toString(),
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontFamily: 'Majalla',
                         color: Colors.white,
-                        fontSize: 8,
+                        fontSize: 8*scale,
                         shadows: [
-                          Shadow(offset: Offset(1, 1), color: Colors.black)
+                          Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
                         ]),
                   ),
                 )),
             card.shuffle
                 ? Positioned(
-                    right: 4.0,
-                    bottom: 4.0,
+                    right: 4.0*scale,
+                    bottom: 4.0*scale,
                     child: Container(
                       child: Image(
-                        height: widget.height * 0.14,
+                        height: 123 * 0.14 * scale,
                         image: const AssetImage(
                             "assets/images/abilities/shuffle.png"),
                       ),
                     ))
                 : Container(),
-            createLines(card.lines),
+            createLines(card.lines, true, scale),
           ],
         ));
   }
@@ -321,6 +323,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    double scale = getScaleByReference(context);
     return ValueListenableBuilder<RoundState>(
         valueListenable: _gameState.roundState,
         builder: (context, value, child) {
@@ -343,8 +346,8 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 //switchInCurve: Curves.easeInBack,
                 //switchOutCurve: Curves.easeInBack.flipped,
                 child: _gameState.roundState.value == RoundState.playTurns
-                    ? _buildFront(card)
-                    : _buildRear()),
+                    ? _buildFront(card, scale)
+                    : _buildRear(scale)),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);
             //CurvedAnimation(parent: null, curve: Curves.easeIn)
             //),
