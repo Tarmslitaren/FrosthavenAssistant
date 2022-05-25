@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:frosthaven_assistant/Layout/character_widget.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
@@ -26,13 +27,13 @@ class Item extends StatelessWidget {
     if (data is Character) {
       Character character = data as Character;
       child = CharacterWidget(characterClass: character.characterClass);
-      height =
-          60 * scale; //TODO put in ListItemData, and have it change depending on summons+monster instances
+      height = 60 *
+          scale; //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else if (data is Monster) {
       Monster monster = data as Monster;
       child = MonsterWidget(data: monster.type, level: monster.level);
-      height =
-          120 * scale; //TODO put in ListItemData, and have it change depending on summons+monster instances
+      height = 120 *
+          scale; //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else {
       height = 0;
     }
@@ -46,8 +47,6 @@ class Item extends StatelessWidget {
     );
   }
 }
-
-class MyReorderModel extends AnimatedListBaseReorderModel {}
 
 class MainList extends StatefulWidget {
   const MainList({Key? key}) : super(key: key);
@@ -78,6 +77,7 @@ class _MainListState extends State<MainList> {
   Widget build(BuildContext context) {
     return Container(
         //alignment: Alignment.center,
+        //width: MediaQuery.of(context).size.width,
 
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -106,7 +106,8 @@ class _MainListState extends State<MainList> {
   Widget buildList() {
     return Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Colors.transparent, //needed to make background transparent if reorder is enabled
+          canvasColor: Colors
+              .transparent, //needed to make background transparent if reorder is enabled
           //other styles
         ),
         child: ValueListenableBuilder<int>(
@@ -114,42 +115,49 @@ class _MainListState extends State<MainList> {
             //TODO: listen for changes in list instead?
             builder: (context, value, child) {
               //find which are added or  removed?
-              if (_gameState.commands.isNotEmpty) {
+              /*if (_gameState.commands.isNotEmpty) {
                 Command command = _gameState.getCurrent();
                 if (command is RemoveCharacterCommand) {
                 } else if (command is AddCharacterCommand) {
                 } else if (command is DrawCommand) {
                   //do i need ot do something?
                 }
-              }
+              }*/
 
-              return Scrollbar(
-                controller: scrollController,
-                child: AutomaticAnimatedListView<ListItemData>(
-                  animator: const DefaultAnimatedListAnimator(
-                      //dismissIncomingDuration: Duration(milliseconds: 1000),
-                      //reorderDuration: Duration(milliseconds: 2000),
+              double scale = getScaleByReference(context);
+              return Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(left: getMainListMargin(context)),
+                  //TODO: honestly this is the  hackiest solution for a thing that should be automatically super easy to do but flutter sometimes really suck.
 
-                      //dismissIncomingDuration: const Duration(milliseconds: 150),
-                      //resizeDuration: const Duration(milliseconds: 200),
-                      ),
-                  list: _gameState.currentList,
-                  comparator: AnimatedListDiffListComparator<ListItemData>(
-                      sameItem: (a, b) => isSameItem(a, b),
-                      sameContent: (a, b) => isSameContent(a, b)),
-                  itemBuilder: (context, item, data) => data.measuring
-                      ? Container(
-                          color: Colors.transparent,
-                          height: item is Monster ? 120 : getScaleByReference(context) * 60,
-                    //TODO: these are for smoth animations. need to be same size as the items
-                          //margin: const EdgeInsets.all(5), height: 60
-                        )
-                      : Item(data: item),
-                  listController: controller,
-                  scrollController: scrollController,
-                  addLongPressReorderable: true,
+                  child: Scrollbar(
+                    controller: scrollController,
+                    child: AutomaticAnimatedListView<ListItemData>(
+                      animator: const DefaultAnimatedListAnimator(
+                          //dismissIncomingDuration: Duration(milliseconds: 1000),
+                          //reorderDuration: Duration(milliseconds: 2000),
 
-                  /*reorderModel: AnimatedListReorderModel(
+                          //dismissIncomingDuration: const Duration(milliseconds: 150),
+                          //resizeDuration: const Duration(milliseconds: 200),
+                          ),
+                      list: _gameState.currentList,
+                      comparator: AnimatedListDiffListComparator<ListItemData>(
+                          sameItem: (a, b) => isSameItem(a, b),
+                          sameContent: (a, b) => isSameContent(a, b)),
+                      itemBuilder: (context, item, data) => data.measuring
+                          ? Container(
+                              color: Colors.transparent,
+                              height:
+                                  item is Monster ? 120 * scale : 60 * scale,
+                              //TODO: these are for smooth animations. need to be same size as the items
+                              //margin: const EdgeInsets.all(5), height: 60
+                            )
+                          : Item(data: item),
+                      listController: controller,
+                      scrollController: scrollController,
+                      addLongPressReorderable: true,
+
+                      /*reorderModel: AnimatedListReorderModel(
 
 
                 onReorderStart: (index, dx, dy) {
@@ -165,10 +173,11 @@ class _MainListState extends State<MainList> {
                   return true;
                 },
               ),*/
-                  reorderModel:
-                      AutomaticAnimatedListReorderModel(_gameState.currentList),
-                ),
-              );
+
+                      reorderModel: AutomaticAnimatedListReorderModel(
+                          _gameState.currentList),
+                    ),
+                  ));
             }));
   }
 

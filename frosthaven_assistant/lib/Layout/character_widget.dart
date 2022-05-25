@@ -72,7 +72,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           setState(() {});
         },
         child: Stack(
-          alignment: Alignment.centerLeft,
+          //alignment: Alignment.centerLeft,
           children: [
             Container(
               margin: EdgeInsets.all(2*scale),
@@ -84,7 +84,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
               ),
             ),
             Align(
-                alignment: Alignment.centerLeft,
+                //alignment: Alignment.centerLeft,
                 child: Row(
                   children: [
                     Image(
@@ -96,7 +96,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                       //width: widget.height*0.8,
                     ),
                     Align(
-                      alignment: Alignment.bottomCenter,
+                      //alignment: Alignment.bottomCenter,
                       child: Column(children: [
                         Container(
                           margin: EdgeInsets.only(top: 10 * scale),
