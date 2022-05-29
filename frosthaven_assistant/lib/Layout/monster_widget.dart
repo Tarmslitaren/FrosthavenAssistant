@@ -11,6 +11,8 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import 'monster_stat_card.dart';
 
+double tempScale = 0.8;
+
 class MonsterWidget extends StatefulWidget {
   //final String icon;
   //final double height;
@@ -41,8 +43,9 @@ class _MonsterWidgetState extends State<MonsterWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double height = scale * 123;
+    double height = scale *tempScale* 121.5;
     return Row(
+
       children: [
         GestureDetector(
             onVerticalDragStart: (details) {
@@ -59,7 +62,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
               setState(() {});
             },
             child: Container(
-                margin: EdgeInsets.all(2*scale),
+                //margin: EdgeInsets.all(2*tempScale*scale),
                 child: Stack(alignment: Alignment.bottomCenter, children: [
                   Image(
                     //fit: BoxFit.contain,
@@ -73,7 +76,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                     style: TextStyle(
                         fontFamily: 'Pirata',
                         color: Colors.white,
-                        fontSize: 20*scale,
+                        fontSize: 20*tempScale*scale,
                         shadows: [
                           Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
                         ]),

@@ -2,8 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-const double maxWidth = 640.0;
-const double referenceWidth = 495.0;
+const double maxWidth = 840.0;
+const double referenceWidth = 412.0;
 
 double getScaleByReference(BuildContext context) {
   return _scaleByReference(context, referenceWidth, maxWidth);

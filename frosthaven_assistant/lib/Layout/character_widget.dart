@@ -76,13 +76,28 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           children: [
             Container(
               margin: EdgeInsets.all(2*scale),
-              width: 495 * scale,
+              width: 408 * scale,
               height: 58 * scale,
               decoration: BoxDecoration(
+                image: DecorationImage(
+                    fit: BoxFit.fill,
+                  colorFilter: ColorFilter.mode(widget.characterClass.color, BlendMode.color),
+                  image: const AssetImage(
+                      "assets/images/psd/character-bar.png")
+                ),
                 shape: BoxShape.rectangle,
                 color: widget.characterClass.color,
               ),
             ),
+            /*ClipRRect(
+              borderRadius: BorderRadius.circular(2.0*scale),
+              child: Image(
+                height: 58*scale,
+                width: 408*scale,
+                image: const AssetImage(
+                    "assets/images/psd/character-bar.png"),
+              ),
+            ),*/
             Align(
                 //alignment: Alignment.centerLeft,
                 child: Row(

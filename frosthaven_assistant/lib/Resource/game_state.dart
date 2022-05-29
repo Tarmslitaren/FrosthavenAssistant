@@ -86,6 +86,10 @@ class CardStack<E> {
     //so basically save whole list state for every command and overwrite instead of random shuffle
 
   }
+
+  int size() {
+    return _list.length;
+  }
 }
 
 enum MonsterType {

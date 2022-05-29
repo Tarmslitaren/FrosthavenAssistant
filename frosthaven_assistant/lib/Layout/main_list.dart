@@ -14,6 +14,8 @@ import '../Resource/action_handler.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
 
+double tempScale = 0.8;
+
 class Item extends StatelessWidget {
   final ListItemData data;
 
@@ -32,7 +34,7 @@ class Item extends StatelessWidget {
     } else if (data is Monster) {
       Monster monster = data as Monster;
       child = MonsterWidget(data: monster.type, level: monster.level);
-      height = 120 *
+      height = 120 *tempScale*
           scale; //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else {
       height = 0;
@@ -148,7 +150,7 @@ class _MainListState extends State<MainList> {
                           ? Container(
                               color: Colors.transparent,
                               height:
-                                  item is Monster ? 120 * scale : 60 * scale,
+                                  item is Monster ? 120 * tempScale* scale : 60 * scale,
                               //TODO: these are for smooth animations. need to be same size as the items
                               //margin: const EdgeInsets.all(5), height: 60
                             )

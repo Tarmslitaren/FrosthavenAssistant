@@ -650,7 +650,7 @@
         },
         {
           "level": 1,
-          "normal": { "health": 4, "move": 1, "attack": 2, "attributes": [ "On death, all adjacent figures suffer 1 damage" ] },
+          "normal": { "health": 4, "move": 1, "attack": 2, "attributes": [ "On death, all","adjacent","figures suffer","1 damage" ] },
           "elite": { "health": 7, "move": 1, "attack": 2, "attributes": [ "On death, all adjacent figures suffer 2 damage", "Advantage" ] }
         },
         {

@@ -6,7 +6,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Model/monster.dart';
 import 'monster_ability_card.dart';
-
+double tempScale = 0.8;
 class MonsterStatCardWidget extends StatefulWidget {
   //final String icon;
   //final double height;
@@ -40,19 +40,19 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double height = 123*scale;
+    double height = 123*tempScale*scale;
 
     final leftStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.black,
-        fontSize: 16*scale,
+        fontSize: 16*tempScale*scale,
         height: 1.2,
         shadows: [Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black12)]);
 
     final rightStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.white,
-        fontSize: 16*scale,
+        fontSize: 16*tempScale*scale,
         height: 1.2,
         shadows: [Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)]);
 
@@ -62,7 +62,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
           setState(() {});
         },
         child: Container(
-            margin:  EdgeInsets.all(2*scale),
+            margin:  EdgeInsets.all(2*scale*tempScale),
             child: Stack(
               //alignment: Alignment.center,
               children: [
@@ -75,8 +75,25 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                   ),
                 ),
                 Positioned(
-                  left: 72.0*scale,
-                  top: 4.0*scale,
+                    left: 4.0 * tempScale * scale,
+                    top: 0 * tempScale * scale,
+                    child: Container(
+                      child: Text(
+                        _level.toString(),
+                        style: TextStyle(
+                            fontFamily: 'Majalla',
+                            color: Colors.white,
+                            fontSize: 18 * tempScale * scale,
+                            shadows: [
+                              Shadow(
+                                  offset: Offset(1 * scale, 1 * scale),
+                                  color: Colors.black)
+                            ]),
+                      ),
+                    )),
+                Positioned(
+                  left: 82.0*tempScale*scale,
+                  top: 26.0*tempScale*scale,
                   child: Column(
                     //mainAxisAlignment: MainAxisAlignment.center,
                     //mainAxisSize: MainAxisSize.min,
@@ -97,15 +114,23 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                   ),
                 ),
                 Positioned(
-                  width: 65*scale,
-                  left: 6.0*scale,
-                  top: -20.0*scale,
-                  child: createLines(
-                      widget.data.levels[_level].normal!.attributes, true, scale),
+
+                  left: 6.0*tempScale*scale,
+                  top: 24.0*tempScale*scale,
+                    width: 65*tempScale*scale,
+                  child:
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        //alignment: Alignment.topRight,
+                    //width: 67*tempScale*scale,
+                    children: [createLines(
+                        widget.data.levels[_level].normal!.attributes, true,CrossAxisAlignment.end, scale),]
+                  )
+
                 ),
                 Positioned(
-                  right: 72.0*scale,
-                  top: 4.0*scale,
+                  right: 80.0*tempScale*scale,
+                  top: 26.0*tempScale*scale,
                   child: Column(
                     //mainAxisAlignment: MainAxisAlignment.center,
                     //mainAxisSize: MainAxisSize.min,
@@ -126,11 +151,11 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                   ),
                 ),
                 Positioned(
-                  width: 65*scale,
+                  width: 65*tempScale*scale,
                   right: 0.0,
-                  top: -20.0*scale,
+                  top: 24.0*tempScale*scale,
                   child: createLines(
-                      widget.data.levels[_level].normal!.attributes, false, scale),
+                      widget.data.levels[_level].normal!.attributes, false, CrossAxisAlignment.start, scale),
                 )
               ],
             )));

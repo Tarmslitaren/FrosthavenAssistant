@@ -10,7 +10,9 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Model/monster.dart';
 import '../Resource/action_handler.dart';
 
-Widget createLines(List<String> strings, bool left, double scale) {
+double tempScale = 0.8;
+
+Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment, double scale) {
   const Map<String, String> _tokens = {
     "attack": "Attack",
     "move": "Move",
@@ -45,36 +47,37 @@ Widget createLines(List<String> strings, bool left, double scale) {
     "and": "and"
   };
 
-  var shadow =
-  Shadow(offset: Offset(1*scale, 1*scale), color: left ? Colors.white : Colors.black);
+  var shadow = Shadow(
+      offset: Offset(1 * scale, 1 * scale),
+      color: left ? Colors.white : Colors.black);
 
   var dividerStyle = TextStyle(
       fontFamily: 'Majalla',
       color: left ? Colors.black : Colors.white,
-      fontSize: 8*scale,
-      letterSpacing: 2*scale,
-      height: 0.7*scale,
+      fontSize: 8 * tempScale * scale,
+      letterSpacing: 2 * tempScale * scale,
+      height: 0.7,
       shadows: [shadow]);
 
   var smallStyle = TextStyle(
       fontFamily: 'Majalla',
       color: left ? Colors.black : Colors.white,
-      fontSize: 8*scale,
-      height: 0.8*scale,
+      fontSize: 8 * tempScale * scale,
+      height: 0.8,
       shadows: [shadow]);
   var midStyle = TextStyle(
       fontFamily: 'Majalla',
       color: left ? Colors.black : Colors.white,
-      fontSize: 10*scale,
-      height: 0.8*scale,
+      fontSize: 10 * tempScale * scale,
+      height: 0.8,
       shadows: [shadow]);
   var normalStyle = TextStyle(
       fontFamily: 'Majalla',
       color: left ? Colors.black : Colors.white,
-      fontSize: 14*scale,
-      height: 0.8*scale,
+      fontSize: 14 * tempScale * scale,
+      height: 0.8,
       shadows: [shadow]);
-  List<Text> lines = [];
+  List<Widget> lines = [];
   for (String line in strings) {
     bool isRightPartOfLastLine = false;
     var styleToUse = normalStyle;
@@ -138,14 +141,18 @@ Widget createLines(List<String> strings, bool left, double scale) {
       String textPart = line.substring(partStartIndex, line.length);
       textPartList.add(TextSpan(text: textPart, style: styleToUse));
     }
+    var text = Text.rich(
+      TextSpan(
+        children: textPartList,
+      ),
+    );
     if (isRightPartOfLastLine) {
-      //TODO: handle differently: like use the same string instead of a separate one?
+      Widget line = lines.last;
+      lines.removeLast();
+      lines.add(Row(
+        children: [line, text],
+      ));
     } else {
-      var text = Text.rich(
-        TextSpan(
-          children: textPartList,
-        ),
-      );
       lines.add(text);
     }
 
@@ -157,16 +164,11 @@ Widget createLines(List<String> strings, bool left, double scale) {
     //really should add those layout specials to the card in json, but whatever.
 
   }
-  return Align(
-    //alignment: Alignment.center,
-    child: Container(
-      margin: EdgeInsets.only(top: 24*scale),
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: lines),
-    ),
-  );
+  return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: alignment,
+      mainAxisSize: MainAxisSize.max,
+      children: lines);
 }
 
 class MonsterAbilityCardWidget extends StatefulWidget {
@@ -197,21 +199,46 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
   }
 
   Widget _buildRear(double scale) {
+    int size = 8;
+    for (var deck in _gameState.currentAbilityDecks) {
+      if (deck.name == widget.data.deck) {
+        size = deck.drawPile.size();
+        break;
+      }
+    }
+
     return Container(
         key: const ValueKey<int>(0),
-        margin: EdgeInsets.all(2*scale),
-        width: 180*scale,
+        margin: EdgeInsets.all(2 * scale),
+        //width: 180*tempScale*scale,
         child: Stack(
           alignment: Alignment.center,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8.0*scale),
+              borderRadius: BorderRadius.circular(8.0 * scale),
               child: Image(
-                height: 123*scale,
+                height: 123 * tempScale * scale,
                 image: const AssetImage(
                     "assets/images/psd/monsterAbility-back.png"),
               ),
-            )
+            ),
+            Positioned(
+                right: 6.0 * tempScale * scale,
+                bottom: 0 * tempScale * scale,
+                child: Container(
+                  child: Text(
+                    size.toString(),
+                    style: TextStyle(
+                        fontFamily: 'Majalla',
+                        color: Colors.white,
+                        fontSize: 16 * tempScale * scale,
+                        shadows: [
+                          Shadow(
+                              offset: Offset(1 * scale, 1 * scale),
+                              color: Colors.black)
+                        ]),
+                  ),
+                )),
           ],
         ));
   }
@@ -223,21 +250,21 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
     }
     return Container(
         key: const ValueKey<int>(1),
-        margin: EdgeInsets.all(2*scale),
-        width: 180*scale,
+        margin: EdgeInsets.all(2 * scale),
+        width: 180 * tempScale * scale,
         child: Stack(
           alignment: Alignment.center,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8.0*scale),
+              borderRadius: BorderRadius.circular(8.0 * scale),
               child: Image(
-                height: 123*scale,
+                height: 123 * tempScale * scale,
                 image: const AssetImage(
                     "assets/images/psd/monsterAbility-front.png"),
               ),
             ),
             Positioned(
-              top: 2*scale,
+              top: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -247,9 +274,11 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                     style: TextStyle(
                         fontFamily: 'Pirata',
                         color: Colors.white,
-                        fontSize: 18*scale,
+                        fontSize: 14 * tempScale * scale,
                         shadows: [
-                          Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
+                          Shadow(
+                              offset: Offset(1 * scale, 1 * scale),
+                              color: Colors.black)
                         ]),
                   ),
                 ],
@@ -261,47 +290,62 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
             //child:
 
             Positioned(
-                left: 10.0*scale,
-                top: 24.0*scale,
+                left: 7.0 * tempScale * scale,
+                top: 16.0 * tempScale * scale,
                 child: Container(
                   child: Text(
+                    textAlign: TextAlign.center,
                     initText,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20*scale,
+                        fontSize: 20 * tempScale * scale,
                         shadows: [
-                          Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
+                          Shadow(
+                              offset: Offset(1 * scale, 1 * scale),
+                              color: Colors.black)
                         ]),
                   ),
                 )),
             Positioned(
-                left: 4.0*scale,
-                top: 110.0*scale,
+                left: 6.0 * tempScale * scale,
+                bottom: 0.5 * tempScale * scale,
                 child: Container(
                   child: Text(
                     card.nr.toString(),
                     style: TextStyle(
                         fontFamily: 'Majalla',
                         color: Colors.white,
-                        fontSize: 8*scale,
+                        fontSize: 8 * tempScale * scale,
                         shadows: [
-                          Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
+                          Shadow(
+                              offset: Offset(1 * scale, 1 * scale),
+                              color: Colors.black)
                         ]),
                   ),
                 )),
             card.shuffle
                 ? Positioned(
-                    right: 4.0*scale,
-                    bottom: 4.0*scale,
+                    right: 4.0 * tempScale * scale,
+                    bottom: 4.0 * tempScale * scale,
                     child: Container(
                       child: Image(
-                        height: 123 * 0.14 * scale,
+                        height: 123 * tempScale * 0.14 * scale,
                         image: const AssetImage(
                             "assets/images/abilities/shuffle.png"),
                       ),
                     ))
                 : Container(),
-            createLines(card.lines, true, scale),
+            Positioned(
+              top: 24.0 * tempScale * scale,
+              //alignment: Alignment.center,
+              child: SizedBox(
+                height: 80 * scale * tempScale,
+                //alignment: Alignment.center,
+                // margin: EdgeInsets.only(top: 24*tempScale*scale),
+
+                child: createLines(card.lines, false, CrossAxisAlignment.center, scale),
+              ),
+            )
           ],
         ));
   }
