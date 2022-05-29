@@ -4,13 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Model/character_class.dart';
-import '../Resource/action_handler.dart';
 import '../Resource/game_state.dart';
 import '../services/service_locator.dart';
 
 class CharacterWidget extends StatefulWidget {
-
-  //final double borderWidth = 2;
   final CharacterClass characterClass;
 
   const CharacterWidget({
@@ -23,10 +20,6 @@ class CharacterWidget extends StatefulWidget {
 }
 
 class _CharacterWidgetState extends State<CharacterWidget> {
-  // Define the various properties with default values. Update these properties
-  // when the user taps a FloatingActionButton.
-  //int _init = 99;
-  //bool _selectInitMode = false;
   final GameState _gameState = getIt<GameState>();
   late CharacterState _characterState;
   final _initTextFieldController = TextEditingController();
@@ -75,146 +68,146 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           //alignment: Alignment.centerLeft,
           children: [
             Container(
-              margin: EdgeInsets.all(2*scale),
+              margin: EdgeInsets.all(2 * scale),
               width: 408 * scale,
               height: 58 * scale,
               decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                  colorFilter: ColorFilter.mode(widget.characterClass.color, BlendMode.color),
-                  image: const AssetImage(
-                      "assets/images/psd/character-bar.png")
-                ),
+                    colorFilter: ColorFilter.mode(
+                        widget.characterClass.color, BlendMode.color),
+                    image: const AssetImage(
+                        "assets/images/psd/character-bar.png")),
                 shape: BoxShape.rectangle,
                 color: widget.characterClass.color,
               ),
             ),
-            /*ClipRRect(
-              borderRadius: BorderRadius.circular(2.0*scale),
-              child: Image(
-                height: 58*scale,
-                width: 408*scale,
-                image: const AssetImage(
-                    "assets/images/psd/character-bar.png"),
-              ),
-            ),*/
             Align(
-                //alignment: Alignment.centerLeft,
+                // alignment: Alignment.centerLeft,
                 child: Row(
-                  children: [
-                    Image(
-                      //fit: BoxFit.contain,
-                      height: height,
-                      image: AssetImage(
-                        "assets/images/class-icons/${widget.characterClass.name}.png",
+              children: [
+                Container(
+                  margin: EdgeInsets.only(left: 20 * scale),
+                  child: Image(
+                    //fit: BoxFit.contain,
+                    height: height,
+                    image: AssetImage(
+                      "assets/images/class-icons/${widget.characterClass.name}.png",
+                    ),
+                    //width: widget.height*0.8,
+                  ),
+                ),
+                Align(
+                  //alignment: Alignment.centerLeft,
+                  child: Column(children: [
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: 10 * scale, left: 10 * scale),
+                      child: Image(
+                        //fit: BoxFit.contain,
+                        height: height * 0.1,
+                        image: const AssetImage("assets/images/init.png"),
                       ),
-                      //width: widget.height*0.8,
                     ),
-                    Align(
-                      //alignment: Alignment.bottomCenter,
-                      child: Column(children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10 * scale),
-                          child: Image(
-                            //fit: BoxFit.contain,
-                            height: height * 0.1,
-                            image: const AssetImage("assets/images/init.png"),
-                          ),
-                        ),
-                        ValueListenableBuilder<int>(
-                            valueListenable: _gameState.commandIndex,
-                            builder: (context, value, child) {
-                              if (_characterState.initiative == 0) {
-                                return SizedBox(
-                                  height: 33*scale,
-                                  width: 24*scale,
-                                  child: TextField(
-                                      textAlign: TextAlign.center,
-                                      cursorColor: Colors.white,
-                                      maxLength: 2,
-                                      style: TextStyle(
-                                          fontFamily: 'Pirata',
-                                          color: Colors.white,
-                                          fontSize: 24*scale, //TODO: does scaleing work right with the fontsizes?
-                                          shadows: [
-                                            Shadow(
-                                                offset: Offset(1*scale, 1*scale),
-                                                color: Colors.black)
-                                          ]),
-                                      decoration: const InputDecoration(
-                                          counterText: '',
-                                        enabledBorder:
-                                            UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.transparent),
-                                        ),
-                                        focusedBorder:
-                                            UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                              color: Colors.transparent),
-                                        ),
-                                        // border: UnderlineInputBorder(
-                                        //   borderSide:
-                                        //      BorderSide(color: Colors.pink),
-                                        // ),
-                                      ),
-                                      controller: _initTextFieldController,
-                                      keyboardType: TextInputType.number),
-                                );
-                              } else {
-                                return SizedBox(
-                                    height: 33*scale,
-                                    width: 24*scale,
-                                    child: Text(
-                                      _characterState.initiative.toString(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          fontFamily: 'Pirata',
-                                          color: Colors.white,
-                                          fontSize: 24*scale,
-                                          shadows: [
-                                            Shadow(
-                                                offset: Offset(1*scale, 1*scale),
-                                                color: Colors.black)
-                                          ]),
-                                    ));
-                              }
-                            }),
-                      ]),
+                    ValueListenableBuilder<int>(
+                        valueListenable: _gameState.commandIndex,
+                        builder: (context, value, child) {
+                          if (_characterState.initiative == 0) {
+                            return Container(
+                              margin: EdgeInsets.only(left: 10 * scale),
+                              height: 29 * scale,
+                              width: 25 * scale,
+                              child: TextField(
+                                  textAlign: TextAlign.center,
+                                  cursorColor: Colors.white,
+                                  maxLength: 2,
+                                  style: TextStyle(
+                                      fontFamily: 'Pirata',
+                                      color: Colors.white,
+                                      fontSize: 24 * scale,
+                                      shadows: [
+                                        Shadow(
+                                            offset:
+                                                Offset(1 * scale, 1 * scale),
+                                            color: Colors.black)
+                                      ]),
+                                  decoration: const InputDecoration(
+                                    counterText: '',
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.transparent),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.transparent),
+                                    ),
+                                    // border: UnderlineInputBorder(
+                                    //   borderSide:
+                                    //      BorderSide(color: Colors.pink),
+                                    // ),
+                                  ),
+                                  controller: _initTextFieldController,
+                                  keyboardType: TextInputType.number),
+                            );
+                          } else {
+                            return Container(
+                                height: 33 * scale,
+                                width: 24 * scale,
+                                margin: EdgeInsets.only(left: 10 * scale),
+                                child: Text(
+                                  _characterState.initiative.toString(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: 'Pirata',
+                                      color: Colors.white,
+                                      fontSize: 24 * scale,
+                                      shadows: [
+                                        Shadow(
+                                            offset:
+                                                Offset(1 * scale, 1 * scale),
+                                            color: Colors.black)
+                                      ]),
+                                ));
+                          }
+                        }),
+                  ]),
+                ),
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.start, //align children to the left
+                    children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 10 * scale, left: 10 * scale),
+                    child: Text(
+                      widget.characterClass.name,
+                      style: TextStyle(
+                          fontFamily: 'Pirata',
+                          color: Colors.white,
+                          fontSize: 16 * scale,
+                          shadows: [
+                            Shadow(
+                                offset: Offset(1 * scale, 1 * scale),
+                                color: Colors.black)
+                          ]),
                     ),
-                    Column(
-                        //mainAxisAlignment: MainAxisAlignment.start,
-
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 10*scale),
-                            child: Text(
-                              widget.characterClass.name,
-                              style: TextStyle(
-                                  fontFamily: 'Pirata',
-                                  color: Colors.white,
-                                  fontSize: 16*scale,
-                                  shadows: [
-                                    Shadow(
-                                        offset: Offset(1*scale, 1*scale),
-                                        color: Colors.black)
-                                  ]),
-                            ),
-                          ),
-                          Text(
-                            'health: ${_characterState.health.value.toString()} / ${widget.characterClass.healthByLevel[_characterState.level.value - 1].toString()}',
-                            style: TextStyle(
-                                fontFamily: 'Pirata',
-                                color: Colors.white,
-                                fontSize: 16*scale,
-                                shadows: [
-                                  Shadow(
-                                      offset: Offset(1*scale, 1*scale), color: Colors.black)
-                                ]),
-                          )
-                        ])
-                  ],
-                ))
+                  ),
+                  Container(
+                      margin:
+                          EdgeInsets.only( left: 10 * scale),
+                      child: Text(
+                        'health: ${_characterState.health.value.toString()} / ${widget.characterClass.healthByLevel[_characterState.level.value - 1].toString()}',
+                        style: TextStyle(
+                            fontFamily: 'Pirata',
+                            color: Colors.white,
+                            fontSize: 16 * scale,
+                            shadows: [
+                              Shadow(
+                                  offset: Offset(1 * scale, 1 * scale),
+                                  color: Colors.black)
+                            ]),
+                      ))
+                ])
+              ],
+            ))
           ],
         ));
   }

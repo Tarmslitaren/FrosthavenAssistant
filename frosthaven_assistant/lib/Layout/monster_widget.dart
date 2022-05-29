@@ -43,7 +43,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double height = scale *tempScale* 121.5;
+    double height = scale *tempScale* 121;
     return Row(
 
       children: [
