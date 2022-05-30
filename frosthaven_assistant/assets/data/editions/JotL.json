@@ -156,11 +156,11 @@
       "cards": [
         ["Nothing Special", 420, false, 39, "%move% + 0","*.........", "%attack% + 0"],
         ["Calculated Strike", 421, false, 60, "%move% - 1","*.........", "%attack% + 1"],
-        ["Unstable Scratch", 422, true, 52, "%move% + 0","*.........", "%attack% + 1", "^If this attack is performed, the","Monstrosity suffers 1 damage."],
+        ["Unstable Scratch", 422, true, 52, "%move% + 0","*.........", "%attack% + 1", "^If this attack is performed, the","^Monstrosity suffers 1 damage."],
         ["Swarm", 423, false, 21, "%move% + 1","*.........", "%attack% - 1", "^Add +1 %attack% if the target is adjacent", "^to any of the Monstrosity's allies."],
         ["Swarm", 424, false, 21, "%move% + 1","*.........", "%attack% - 1", "^Add +1 %attack% if the target is adjacent", "^to any of the Monstrosity's allies."],
         ["Weakening Bite", 425, false, 34, "%move% + 0","*.........", "%attack% + 0", "^%muddle%"],
-        ["Explosive Blisters", 426, true, 9, "%move% + 1","*.........", "*Any time a figure attacks the","Monstrosity this round, that","figure suffers 2 damage."],
+        ["Explosive Blisters", 426, true, 9, "%move% + 1","*.........", "^Any time a figure attacks the","^Monstrosity this round, that","^figure suffers 2 damage."],
         ["Unstable Frenzy" ,427, false, 74, "%move% + 0","*.........", "*Monstrosity suffers 1 damage","*.........", "%attack% + 1", "^Target all adjacent enemies"]
       ]
     },

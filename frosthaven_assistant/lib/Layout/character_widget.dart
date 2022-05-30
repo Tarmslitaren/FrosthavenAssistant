@@ -89,8 +89,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                 Container(
                   margin: EdgeInsets.only(left: 20 * scale),
                   child: Image(
-                    //fit: BoxFit.contain,
-                    height: height,
+                    fit: BoxFit.contain,
+                    height: height * scale,
                     image: AssetImage(
                       "assets/images/class-icons/${widget.characterClass.name}.png",
                     ),

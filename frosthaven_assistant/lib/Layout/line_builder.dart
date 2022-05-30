@@ -77,7 +77,7 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
   };
 
   var shadow = Shadow(
-      offset: Offset(1 * scale, 1 * scale),
+      offset: Offset(1 * scale * tempScale, 1 * scale* tempScale),
       color: left ? Colors.white : Colors.black);
 
   var dividerStyle = TextStyle(
@@ -143,11 +143,12 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
         if (isIconPart) {
           //create token part
           String iconToken = line.substring(partStartIndex, i);
-          if (iconToken == "use") {
+          if (iconToken == "use") { //put use gfx on top of previous and add ':'
             WidgetSpan part = textPartList.removeLast() as WidgetSpan;
             Image lastImage = (part.child as Container).child as Image;
             textPartList.add(WidgetSpan(
-                alignment: PlaceholderAlignment.middle,
+                alignment: PlaceholderAlignment.top,
+                style: TextStyle(fontSize: styleToUse.fontSize!*0.8),
                 child: Stack(
                   children: [
                     lastImage,
@@ -158,6 +159,7 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
                   ],
                 )));
             textPartList.add(TextSpan(text: ": ", style: styleToUse));
+            //TODO: examine if removing the Container margins is the right thing to do for this case
           } else {
             double height = getIconHeight(iconToken, styleToUse.fontSize!);
             String? iconTokenText = _tokens[iconToken];
@@ -175,10 +177,12 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
                 child: child,
               );
             }
-
             textPartList.add(WidgetSpan(
-                alignment: PlaceholderAlignment.middle,
-                child: child));
+                alignment: PlaceholderAlignment.top,
+                style: TextStyle(fontSize: styleToUse.fontSize!*0.8),//styleToUse, //don't ask (probably because height is 0.8
+                child: child
+            ));
+
           }
           isIconPart = false;
         } else {
@@ -211,14 +215,6 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
     } else {
       lines.add(text);
     }
-
-    //if starts with ^ -> medium size
-    //if starts with * -> small size
-    //if starts with *..... -> extra small font height margins
-    //handle icons: %wound% etc.
-    //handle special layout placements (graphics of aoes and infuse element typically):
-    //really should add those layout specials to the card in json, but whatever.
-
   }
   return Column(
       mainAxisAlignment: MainAxisAlignment.center,
