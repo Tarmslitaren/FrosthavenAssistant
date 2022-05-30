@@ -8,14 +8,6 @@ import 'main_menu.dart';
 
 Scaffold createMainScaffold(BuildContext context) {
   return Scaffold(
-
-
-    //persistentFooterButtons: [
-    //  IconButton(
-    //    icon: Icon(Icons.access_alarms_outlined),
-    //    onPressed: () {},
-    //  ),
-    //],
     bottomNavigationBar: createBottomBar(context),
     appBar: createTopBar(),
     drawer: createMainMenu(context),

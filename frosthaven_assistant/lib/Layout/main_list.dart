@@ -114,7 +114,6 @@ class _MainListState extends State<MainList> {
         ),
         child: ValueListenableBuilder<int>(
             valueListenable: _gameState.commandIndex,
-            //TODO: listen for changes in list instead?
             builder: (context, value, child) {
               //find which are added or  removed?
               /*if (_gameState.commands.isNotEmpty) {
@@ -131,6 +130,7 @@ class _MainListState extends State<MainList> {
                   alignment: Alignment.center,
                   margin: EdgeInsets.only(left: getMainListMargin(context)),
                   //TODO: honestly this is the  hackiest solution for a thing that should be automatically super easy to do but flutter sometimes really suck.
+                  //TODO: the real solution is likely to make the items wrap on Expand or similar to take max width of parent.
 
                   child: Scrollbar(
                     controller: scrollController,

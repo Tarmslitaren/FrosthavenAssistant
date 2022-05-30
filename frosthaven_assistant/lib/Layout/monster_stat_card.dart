@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Model/monster.dart';
+import 'line_builder.dart';
 import 'monster_ability_card.dart';
 double tempScale = 0.8;
 class MonsterStatCardWidget extends StatefulWidget {
