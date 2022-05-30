@@ -12,9 +12,6 @@ Drawer createMainMenu(BuildContext context) {
   GameState _gameState = getIt<GameState>();
 
   return Drawer(
-// Add a ListView to the drawer. This ensures the user can scroll
-// through the options in the drawer if there isn't enough vertical
-// space to fit everything.
     child: ValueListenableBuilder<CampaignModel?>(
       valueListenable: _gameState.modelData,
       builder: (context, value, child) {

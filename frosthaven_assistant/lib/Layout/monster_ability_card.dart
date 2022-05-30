@@ -180,13 +180,12 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                     ))
                 : Container(),
             Positioned(
-              top: 24.0 * tempScale * scale,
+              top: 20.0 * tempScale * scale,
               //alignment: Alignment.center,
-              child: SizedBox(
-                height: 80 * scale * tempScale,
-                //alignment: Alignment.center,
-                // margin: EdgeInsets.only(top: 24*tempScale*scale),
-
+              child: Container(
+                height: 94 * scale * tempScale,
+                //width: 176 * scale * tempScale, //prolly unnecessary
+                //color: Colors.amber,
                 child: createLines(card.lines, false, CrossAxisAlignment.center, scale),
               ),
             )

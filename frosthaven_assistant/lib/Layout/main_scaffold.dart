@@ -8,6 +8,7 @@ import 'main_menu.dart';
 
 Scaffold createMainScaffold(BuildContext context) {
   return Scaffold(
+    //drawerScrimColor: Colors.yellow,
     bottomNavigationBar: createBottomBar(context),
     appBar: createTopBar(),
     drawer: createMainMenu(context),

@@ -5,6 +5,7 @@ import 'element_button.dart';
 
 AppBar createTopBar() {
   return AppBar(
+    iconTheme: const IconThemeData(color: Colors.white),
     // Here we take the value from the MyHomePage object that was created by
     // the App.build method, and use it to set our appbar title.
     //TODO: set the text to be state specific: add characters, set scenario or add monsters, choose cards(initiative), take turns. Or don't. add instructions to drawer menu and instead highlight what t do next.
