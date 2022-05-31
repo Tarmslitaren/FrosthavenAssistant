@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/select_scenario_popup.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:search_choices/search_choices.dart';
@@ -7,8 +8,19 @@ import 'package:search_choices/search_choices.dart';
 import '../Model/campaign.dart';
 import '../Resource/commands.dart';
 
+void openDialog(BuildContext context, Widget widget) {
+  showDialog(context: context,
+      builder: (BuildContext context) => widget
+  );
+  /*Navigator.of(context).push(MaterialPageRoute<void>(
+    builder: (BuildContext context) {
+      return widget;
+    },
+  ));*/
+}
+
 Drawer createMainMenu(BuildContext context) {
-  String? _currentSelectedValue;
+  String? _currentSelectedScenario;
   GameState _gameState = getIt<GameState>();
 
   return Drawer(
@@ -44,6 +56,24 @@ Drawer createMainMenu(BuildContext context) {
               const Divider(),
               _gameState.modelData.value == null
                   ? Container()
+                  : ListTile(
+                      title: const Text('Set Scenario'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        openDialog(context, const SelectScenarioMenu());
+                        //Navigator.pop(context);
+                      },
+                    ),
+              ListTile(
+                title: const Text('Add Section'),
+                onTap: () {
+                  //TODO: of no section for current scenario, gray out the button and do nothing
+                  Navigator.pop(context);
+                },
+              ),
+              const Divider(),
+              _gameState.modelData.value == null
+                  ? Container()
                   : SearchChoices.single(
                       items: _gameState.modelData.value?.scenarios.keys
                           .map((String value) {
@@ -52,30 +82,17 @@ Drawer createMainMenu(BuildContext context) {
                           child: Text(value),
                         );
                       }).toList(),
-                      value: _currentSelectedValue,
-                      hint: "Set Scenario",
-                      searchHint: "Select Scenario",
+                      value: _currentSelectedScenario,
+                      hint: "Add Character",
+                      searchHint: "Add Character",
                       onChanged: (value) {
-                        _currentSelectedValue = value;
-                        _gameState
-                            .action(SetScenarioCommand(_currentSelectedValue!));
+                        _currentSelectedScenario = value;
+                        _gameState.action(
+                            AddCharacterCommand(_currentSelectedScenario!, 1));
                       },
                       isExpanded: true,
                       displayClearIcon: false,
                     ),
-              ListTile(
-                title: const Text('Add Section'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text('Add Characters'),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              ),
               ListTile(
                 title: const Text('Remove Characters'),
                 onTap: () {

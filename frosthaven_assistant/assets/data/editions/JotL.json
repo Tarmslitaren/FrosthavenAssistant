@@ -923,7 +923,7 @@
           "health": "10xC",
           "move": 2,
           "attack": 3,
-          "special1": [ "All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
+          "special1": [ "All enemies within Range 2","suffer 2 damage, Spawn C/2"," Blood Imps"],
           "special2": [ "%attack% + 0,", "%attack% - 1 within", "%range% 2 of target,", "%attack% - 2 within", "%range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
@@ -932,7 +932,7 @@
           "health": "14xC",
           "move": 2,
           "attack": 4,
-          "special1": [ "All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
+          "special1": [ "All enemies within Range 2","suffer 2 damage, Spawn C/2"," Blood Imps"],
           "special2": [ "%attack% + 0,", "%attack% - 1 within", "%range% 2 of target,", "%attack% - 2 within", "%range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },

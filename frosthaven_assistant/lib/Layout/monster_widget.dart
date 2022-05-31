@@ -14,16 +14,11 @@ import 'monster_stat_card.dart';
 double tempScale = 0.8;
 
 class MonsterWidget extends StatefulWidget {
-  //final String icon;
-  //final double height;
-  //final double borderWidth = 2;
   final int level;
   final MonsterModel data;
 
   const MonsterWidget(
       {Key? key,
-      //required this.icon,
-      //this.height = 123,
         required this.data,
         required this.level})
       : super(key: key);
@@ -76,7 +71,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                     style: TextStyle(
                         fontFamily: 'Pirata',
                         color: Colors.white,
-                        fontSize: 20*tempScale*scale,
+                        fontSize: 18*tempScale*scale,
                         shadows: [
                           Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
                         ]),
