@@ -1,9 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:frosthaven_assistant/Layout/character_widget.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/commands.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
@@ -120,6 +118,11 @@ class _MainListState extends State<MainList> {
                 Command command = _gameState.getCurrent();
                 if (command is RemoveCharacterCommand) {
                 } else if (command is AddCharacterCommand) {
+                  log("list updated add characer coomad!");
+                  for(var item in _gameState.currentList) {
+                    log(item.toString());
+                  }
+                  //log(_gameState.currentList.toString());
                 } else if (command is DrawCommand) {
                   //do i need ot do something?
                 }
@@ -183,7 +186,7 @@ class _MainListState extends State<MainList> {
             }));
   }
 
-  final scrollController =
-      ScrollController(); //use to animate to position in list:
+  final scrollController = ScrollController();
+  //use to animate to position in list:
   final controller = AnimatedListController();
 }

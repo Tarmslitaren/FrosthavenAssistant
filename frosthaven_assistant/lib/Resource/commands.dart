@@ -6,6 +6,8 @@ import '../Model/monster.dart';
 import '../services/service_locator.dart';
 import 'game_state.dart';
 
+void doListMagic() {}
+
 class DrawCommand extends Command {
   final GameState _gameState = getIt<GameState>();
 
@@ -17,10 +19,6 @@ class DrawCommand extends Command {
     _gameState.sortByInitiative();
     _gameState.round.value++;
     _gameState.setRoundState(RoundState.playTurns);
-
-    //draw:
-
-    //TODO: draw the cards and sort by initiative
   }
 
   @override
@@ -61,17 +59,11 @@ class InitListCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final List<ListItemData> items;
 
-  //TODO: deal also with monsters here
   InitListCommand(this.items);
 
   @override
   void execute() {
     _gameState.currentList.addAll(items);
-    /*for(int i = 0; i < items.length; i++) {
-      if (_gameState.listKey.currentState != null) {
-        _gameState.listKey.currentState!.insertItem(i, duration: Duration.zero);
-      }
-    }*/
   }
 
   @override
@@ -87,8 +79,6 @@ class InitListCommand extends Command {
         var characterState = CharacterState();
         characterState.level.value = level;
         characterState.health.value = characterClass.healthByLevel[level - 1];
-        //TODO: temp test for init value. should be 0 nad not set here.
-        //characterState.initiative = 78;
         return Character(characterState, characterClass);
       }
     }
@@ -120,7 +110,12 @@ class AddCharacterCommand extends Command {
   @override
   void execute() {
     //add new character on top of list
-    _gameState.currentList.insert(0, character);
+    List<ListItemData> newList = [];
+    for (var item in _gameState.currentList) {
+      newList.add(item);
+    }
+    newList.insert(0, character);
+    _gameState.currentList = newList;
   }
 
   @override
@@ -135,8 +130,6 @@ class AddCharacterCommand extends Command {
         var characterState = CharacterState();
         characterState.level.value = level;
         characterState.health.value = characterClass.healthByLevel[level - 1];
-        //TODO: temp test
-        //characterState.initiative.value = 78;
         character = Character(characterState, characterClass);
       }
     }
@@ -145,25 +138,37 @@ class AddCharacterCommand extends Command {
 
 class RemoveCharacterCommand extends Command {
   final GameState _gameState = getIt<GameState>();
-  final String name;
-  late Character _character;
+  final List<String> names;
+  final List<Character> _characters = [];
 
-  RemoveCharacterCommand(this.name);
+  RemoveCharacterCommand(this.names);
 
   @override
   void execute() {
-    for (ListItemData character in _gameState.currentList) {
-      if (character.id == name) {
-        _character = character as Character;
+    List<ListItemData> newList = [];
+    for (var item in _gameState.currentList) {
+      if (item is Character) {
+        bool remove = false;
+        for (var name in names) {
+          if (item.id == name) {
+            remove = true;
+            break;
+          }
+        }
+        if (!remove) {
+          newList.add(item);
+        }
+      } else {
+        newList.add(item);
       }
     }
-    _gameState.currentList.remove(_character);
+    _gameState.currentList = newList;
   }
 
   @override
   void undo() {
-    //TODO: retain index
-    _gameState.currentList.add(_character);
+    //TODO: implement (and retain index)
+    //_gameState.currentList.add(_character);
   }
 }
 
@@ -171,7 +176,7 @@ class SetScenarioCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final String _scenario;
 
-  SetScenarioCommand(this._scenario) {}
+  SetScenarioCommand(this._scenario);
 
   @override
   void execute() {
@@ -186,9 +191,7 @@ class SetScenarioCommand extends Command {
     List<String> monsters =
         _gameState.modelData.value!.scenarios[_scenario]!.monsters;
     for (String monster in monsters) {
-      newList.add(
-          createMonster(monster, _gameState.level.value)!
-      );
+      newList.add(createMonster(monster, _gameState.level.value)!);
     }
 
     _gameState.currentList = newList;

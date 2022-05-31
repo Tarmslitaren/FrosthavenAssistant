@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/select_scenario_popup.dart';
+import 'package:frosthaven_assistant/Layout/add_character_menu.dart';
+import 'package:frosthaven_assistant/Layout/remove_character_menu.dart';
+import 'package:frosthaven_assistant/Layout/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:search_choices/search_choices.dart';
@@ -61,7 +63,6 @@ Drawer createMainMenu(BuildContext context) {
                       onTap: () {
                         Navigator.pop(context);
                         openDialog(context, const SelectScenarioMenu());
-                        //Navigator.pop(context);
                       },
                     ),
               ListTile(
@@ -72,32 +73,19 @@ Drawer createMainMenu(BuildContext context) {
                 },
               ),
               const Divider(),
-              _gameState.modelData.value == null
-                  ? Container()
-                  : SearchChoices.single(
-                      items: _gameState.modelData.value?.scenarios.keys
-                          .map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      value: _currentSelectedScenario,
-                      hint: "Add Character",
-                      searchHint: "Add Character",
-                      onChanged: (value) {
-                        _currentSelectedScenario = value;
-                        _gameState.action(
-                            AddCharacterCommand(_currentSelectedScenario!, 1));
-                      },
-                      isExpanded: true,
-                      displayClearIcon: false,
-                    ),
-              ListTile(
-                title: const Text('Remove Characters'),
+                  ListTile(
+                title: const Text('Add Character'),
                 onTap: () {
                   Navigator.pop(context);
+                  openDialog(context, const AddCharacterMenu());
                 },
+              ),
+              ListTile(
+                title: const Text('Remove Characters'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    openDialog(context, const RemoveCharacterMenu());
+                  },
               ),
               const Divider(),
               ListTile(

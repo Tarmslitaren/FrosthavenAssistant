@@ -157,8 +157,8 @@ class GameState extends ActionHandler{
 
     action(InitListCommand([
       InitListCommand.createCharacter("Hatchet", 1)!,
-      InitListCommand.createCharacter("Demolitionist", 1)!,
-      createMonster("Zealot", level.value)!,
+      InitListCommand.createCharacter("Demolitionist", 4)!,
+      createMonster("Zealot", 4)!,
       createMonster("Giant Viper (JotL)", level.value)!,
       createMonster("Rat Monstrosity", level.value)!,
     ]));
@@ -178,9 +178,6 @@ class GameState extends ActionHandler{
   final level = ValueNotifier<int>(1); //TODO: update and stuff
   final scenario = ValueNotifier<String>("");
 
-  //final currentCharacters = <Character>[];
-  //final currentMonsters = <Monster>[];
-  //final GlobalKey<dynamic> listKey = GlobalKey(); //for mapping to widget list. right place for this?
   List<ListItemData> currentList = []; //has both monsters and characters
   void sortCharactersFirst(){
     late List<ListItemData> newList = List.from(currentList);
@@ -228,8 +225,16 @@ class GameState extends ActionHandler{
     }
     );
     currentList = newList;
-    //TODO: deal with the listKey
+  }
 
+  List<Character> getCurrentCharacters(){
+    List<Character> characters = [];
+    for(ListItemData data in currentList) {
+      if(data is Character) {
+        characters.add(data);
+      }
+    }
+    return characters;
   }
 
   final currentAbilityDecks = <MonsterAbilityState>[]; //add to here when adding a monster type
