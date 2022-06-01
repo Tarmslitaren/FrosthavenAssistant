@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/add_character_menu.dart';
-import 'package:frosthaven_assistant/Layout/remove_character_menu.dart';
-import 'package:frosthaven_assistant/Layout/select_scenario_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:search_choices/search_choices.dart';
 
-import '../Model/campaign.dart';
-import '../Resource/commands.dart';
+import '../../Model/campaign.dart';
+import '../../Resource/commands.dart';
 
 void openDialog(BuildContext context, Widget widget) {
   showDialog(context: context,

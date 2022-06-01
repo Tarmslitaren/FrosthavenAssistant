@@ -90,6 +90,15 @@ class CardStack<E> {
   int size() {
     return _list.length;
   }
+
+  List<E> getList(){ //TODO: try to return a copy for safety?
+    return _list;
+  }
+
+  void setList(List<E> list) {
+    _list.clear();
+    _list.addAll(list);
+  }
 }
 
 enum MonsterType {

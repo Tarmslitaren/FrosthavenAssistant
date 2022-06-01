@@ -54,7 +54,7 @@ class NextRoundCommand extends Command {
   }
 }
 
-//For use with save states and when starting a scenario (adding a bunch of monsters and special characters at once)
+//For use with save states (adding a bunch of monsters and special characters at once)
 class InitListCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final List<ListItemData> items;
@@ -86,7 +86,7 @@ class InitListCommand extends Command {
   }
 }
 
-//helper to make the init list.
+//helper to make the init list. can be removed.
 Monster? createMonster(String name, int level) {
   for (MonsterModel monster in getIt<GameState>().modelData.value!.monsters) {
     if (monster.name == name) {
@@ -138,7 +138,7 @@ class AddCharacterCommand extends Command {
 
 class RemoveCharacterCommand extends Command {
   final GameState _gameState = getIt<GameState>();
-  final List<String> names;
+  final List<Character> names;
   final List<Character> _characters = [];
 
   RemoveCharacterCommand(this.names);
@@ -150,7 +150,7 @@ class RemoveCharacterCommand extends Command {
       if (item is Character) {
         bool remove = false;
         for (var name in names) {
-          if (item.id == name) {
+          if (item.id == name.id) {
             remove = true;
             break;
           }

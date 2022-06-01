@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../Resource/commands.dart';
-import '../Resource/game_state.dart';
-import '../services/service_locator.dart';
+import '../../Resource/commands.dart';
+import '../../Resource/game_state.dart';
+import '../../services/service_locator.dart';
 
 class SelectScenarioMenu extends StatefulWidget {
   const SelectScenarioMenu({Key? key}) : super(key: key);
@@ -12,15 +12,13 @@ class SelectScenarioMenu extends StatefulWidget {
 }
 
 class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
-  // This holds a list of fiction users
-  // You can use data fetched from a database or a server as well
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
 
   @override
   initState() {
-    // at the beginning, all users are shown
+    // at the beginning, all items are shown
     _foundScenarios = _gameState.modelData.value!.scenarios.keys.toList();
     super.initState();
   }
@@ -29,7 +27,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
   void _runFilter(String enteredKeyword) {
     List<String> results = [];
     if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
+      // if the search field is empty or only contains white-space, we'll display all
       results = _gameState.modelData.value!.scenarios.keys.toList();
     } else {
       results = _gameState.modelData.value!.scenarios.keys

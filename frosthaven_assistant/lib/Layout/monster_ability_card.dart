@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/show_ability_cards_menu.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/commands.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
@@ -10,94 +11,43 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Model/monster.dart';
 import '../Resource/action_handler.dart';
 import 'line_builder.dart';
+import 'menus/main_menu.dart';
 
 double tempScale = 0.8;
-
-
 
 class MonsterAbilityCardWidget extends StatefulWidget {
   //final double height;
   //final double borderWidth = 2;
   final MonsterModel data;
 
-  const MonsterAbilityCardWidget(
-      {Key? key,
-      //this.height = 123,
-      required this.data})
+  const MonsterAbilityCardWidget({Key? key, required this.data})
       : super(key: key);
 
   @override
   _MonsterAbilityCardWidgetState createState() =>
       _MonsterAbilityCardWidgetState();
-}
 
-class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
-// Define the various properties with default values. Update these properties
-// when the user taps a FloatingActionButton.
-//late MonsterData _data;
-  final GameState _gameState = getIt<GameState>();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  Widget _buildRear(double scale) {
-    int size = 8;
-    for (var deck in _gameState.currentAbilityDecks) {
-      if (deck.name == widget.data.deck) {
-        size = deck.drawPile.size();
-        break;
-      }
-    }
-
-    return Container(
-        key: const ValueKey<int>(0),
-        margin: EdgeInsets.all(2 * scale),
-        //width: 180*tempScale*scale,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0 * scale),
-              child: Image(
-                height: 123 * tempScale * scale,
-                image: const AssetImage(
-                    "assets/images/psd/monsterAbility-back.png"),
-              ),
-            ),
-            Positioned(
-                right: 6.0 * tempScale * scale,
-                bottom: 0 * tempScale * scale,
-                child: Container(
-                  child: Text(
-                    size.toString(),
-                    style: TextStyle(
-                        fontFamily: 'Majalla',
-                        color: Colors.white,
-                        fontSize: 16 * tempScale * scale,
-                        shadows: [
-                          Shadow(
-                              offset: Offset(1 * scale, 1 * scale),
-                              color: Colors.black)
-                        ]),
-                  ),
-                )),
-          ],
-        ));
-  }
-
-  Widget _buildFront(MonsterAbilityCardModel? card, double scale) {
+  static Widget buildFront(MonsterAbilityCardModel? card, double scale) {
     String initText = card!.initiative.toString();
     if (initText.length == 1) {
       initText = "0" + initText;
     }
+
+    var shadow = [
+      Shadow(
+          offset: Offset(1 * scale * tempScale, 1 * scale * tempScale),
+          color: Colors.black)
+    ];
+
     return Container(
         key: const ValueKey<int>(1),
-        margin: EdgeInsets.all(2 * scale),
+        margin: EdgeInsets.all(2 * scale * tempScale),
         width: 180 * tempScale * scale,
         child: Stack(
-          alignment: Alignment.center,
+          //fit: StackFit.passthrough,
+          alignment: AlignmentDirectional.center,
+          clipBehavior: Clip.none,
+
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0 * scale),
@@ -119,11 +69,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                         fontFamily: 'Pirata',
                         color: Colors.white,
                         fontSize: 14 * tempScale * scale,
-                        shadows: [
-                          Shadow(
-                              offset: Offset(1 * scale, 1 * scale),
-                              color: Colors.black)
-                        ]),
+                        shadows: shadow),
                   ),
                 ],
               ),
@@ -143,11 +89,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20 * tempScale * scale,
-                        shadows: [
-                          Shadow(
-                              offset: Offset(1 * scale, 1 * scale),
-                              color: Colors.black)
-                        ]),
+                        shadows: shadow),
                   ),
                 )),
             Positioned(
@@ -160,11 +102,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                         fontFamily: 'Majalla',
                         color: Colors.white,
                         fontSize: 8 * tempScale * scale,
-                        shadows: [
-                          Shadow(
-                              offset: Offset(1 * scale, 1 * scale),
-                              color: Colors.black)
-                        ]),
+                        shadows: shadow),
                   ),
                 )),
             card.shuffle
@@ -186,11 +124,63 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 height: 94 * scale * tempScale,
                 //width: 176 * scale * tempScale, //prolly unnecessary
                 //color: Colors.amber,
-                child: createLines(card.lines, false, CrossAxisAlignment.center, scale),
+                child: createLines(
+                    card.lines, false, CrossAxisAlignment.center, scale),
               ),
             )
           ],
         ));
+  }
+
+  static Widget buildRear(double scale, int size) {
+    return Container(
+        key: const ValueKey<int>(0),
+        margin: EdgeInsets.all(2 * scale),
+        //width: 180*tempScale*scale,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0 * scale),
+              child: Image(
+                height: 123 * tempScale * scale,
+                image: const AssetImage(
+                    "assets/images/psd/monsterAbility-back.png"),
+              ),
+            ),
+            size >= 0
+                ? Positioned(
+                    right: 6.0 * tempScale * scale,
+                    bottom: 0 * tempScale * scale,
+                    child: Container(
+                      child: Text(
+                        size.toString(),
+                        style: TextStyle(
+                            fontFamily: 'Majalla',
+                            color: Colors.white,
+                            fontSize: 16 * tempScale * scale,
+                            shadows: [
+                              Shadow(
+                                  offset: Offset(1 * scale, 1 * scale),
+                                  color: Colors.black)
+                            ]),
+                      ),
+                    ))
+                : Container(),
+          ],
+        ));
+  }
+}
+
+class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
+// Define the various properties with default values. Update these properties
+// when the user taps a FloatingActionButton.
+//late MonsterData _data;
+  final GameState _gameState = getIt<GameState>();
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   Widget _transitionBuilder(Widget widget, Animation<double> animation) {
@@ -219,9 +209,22 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
             card = _gameState.getDeck(widget.data.deck)!.discardPile.peek;
           }
 
+          //get size for back
+          var deckk;
+          int size = 8;
+          for (var deck in _gameState.currentAbilityDecks) {
+            if (deck.name == widget.data.deck) {
+              size = deck.drawPile.size();
+              deckk = deck;
+              break;
+            }
+          }
+
           return GestureDetector(
             onTap: () {
               //open deck menu
+              openDialog(context, AbilityCardMenu(monsterAbilityState: deckk));
+
               setState(() {});
             },
             child: AnimatedSwitcher(
@@ -233,8 +236,8 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 //switchInCurve: Curves.easeInBack,
                 //switchOutCurve: Curves.easeInBack.flipped,
                 child: _gameState.roundState.value == RoundState.playTurns
-                    ? _buildFront(card, scale)
-                    : _buildRear(scale)),
+                    ? MonsterAbilityCardWidget.buildFront(card, scale)
+                    : MonsterAbilityCardWidget.buildRear(scale, size)),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);
             //CurvedAnimation(parent: null, curve: Curves.easeIn)
             //),

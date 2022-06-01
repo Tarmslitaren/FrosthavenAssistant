@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../Model/character_class.dart';
-import '../Resource/commands.dart';
-import '../Resource/game_state.dart';
-import '../services/service_locator.dart';
+import '../../Model/character_class.dart';
+import '../../Resource/commands.dart';
+import '../../Resource/game_state.dart';
+import '../../services/service_locator.dart';
 
 class RemoveCharacterMenu extends StatefulWidget {
   const RemoveCharacterMenu({Key? key}) : super(key: key);
@@ -13,14 +13,11 @@ class RemoveCharacterMenu extends StatefulWidget {
 }
 
 class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
-  // This holds a list of fiction users
-  // You can use data fetched from a database or a server as well
-  // This list holds the data for the list view
   final GameState _gameState = getIt<GameState>();
 
   @override
   initState() {
-    // at the beginning, all users are shown
+    // at the beginning, all items are shown
     super.initState();
   }
 
@@ -37,6 +34,15 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
               const SizedBox(
                 height: 20,
               ),
+        ListTile(
+          title: const Text(
+            "Remove All",
+          ),
+          onTap: () {
+            _gameState.action(RemoveCharacterCommand(
+                currentCharacters)); //
+            Navigator.pop(context);
+          },),
               Expanded(
                 child: ListView.builder(
                   itemCount: currentCharacters.length,
@@ -52,8 +58,8 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                     ),
                     onTap: () {
                       _gameState.action(RemoveCharacterCommand(
-                          [currentCharacters[index].id])); //
-                      //Navigator.pop(context);
+                          [currentCharacters[index]])); //
+                      Navigator.pop(context);
                     },
                   ),
                 ),

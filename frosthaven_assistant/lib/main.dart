@@ -4,7 +4,7 @@ import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:scaled_app/scaled_app.dart';
 
-import 'Layout/main_menu.dart';
+import 'Layout/menus/main_menu.dart';
 
 void main() {
   setupGetIt();

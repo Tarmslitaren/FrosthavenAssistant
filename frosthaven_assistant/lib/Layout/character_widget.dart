@@ -33,6 +33,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
         _characterState = character.characterState;
       }
     }
+    _initTextFieldController.clear();
     _initTextFieldController.addListener(() {
       for (var item in _gameState.currentList) {
         if (item is Character) {
@@ -87,18 +88,17 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                 child: Row(
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 20 * scale),
+                  margin: EdgeInsets.only(left: 20 * scale, top: 5*scale, bottom: 5*scale),
                   child: Image(
                     fit: BoxFit.contain,
                     height: height * scale,
                     image: AssetImage(
                       "assets/images/class-icons/${widget.characterClass.name}.png",
                     ),
-                    //width: widget.height*0.8,
+                    width: height*0.8,
                   ),
                 ),
                 Align(
-                  //alignment: Alignment.centerLeft,
                   child: Column(children: [
                     Container(
                       margin:
@@ -112,6 +112,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                     ValueListenableBuilder<int>(
                         valueListenable: _gameState.commandIndex,
                         builder: (context, value, child) {
+                          _initTextFieldController.clear();
                           if (_characterState.initiative == 0) {
                             return Container(
                               margin: EdgeInsets.only(left: 10 * scale),
@@ -121,6 +122,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                   textAlign: TextAlign.center,
                                   cursorColor: Colors.white,
                                   maxLength: 2,
+
                                   style: TextStyle(
                                       fontFamily: 'Pirata',
                                       color: Colors.white,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../Model/character_class.dart';
-import '../Resource/commands.dart';
-import '../Resource/game_state.dart';
-import '../services/service_locator.dart';
+import '../../Model/character_class.dart';
+import '../../Resource/commands.dart';
+import '../../Resource/game_state.dart';
+import '../../services/service_locator.dart';
 
 class AddCharacterMenu extends StatefulWidget {
   const AddCharacterMenu({Key? key}) : super(key: key);

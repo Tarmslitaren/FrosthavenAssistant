@@ -4,7 +4,7 @@ import 'package:frosthaven_assistant/Model/campaign.dart';
 
 import 'bottom_bar.dart';
 import 'main_list.dart';
-import 'main_menu.dart';
+import 'menus/main_menu.dart';
 
 Scaffold createMainScaffold(BuildContext context) {
   return Scaffold(
