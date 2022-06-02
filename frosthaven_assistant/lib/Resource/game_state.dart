@@ -314,4 +314,5 @@ class GameState extends ActionHandler{
 
   //config: TODO: move to own state
   final userScaling = ValueNotifier<double>(1.0);
+  final showCalculated = ValueNotifier<bool>(true);
 }

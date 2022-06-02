@@ -25,19 +25,11 @@ class Item extends StatelessWidget {
 
     child = revealed
         ? MonsterAbilityCardWidget.buildFront(data, scale)
-        : MonsterAbilityCardWidget.buildRear(scale, -1); // * 1.085);
+        : MonsterAbilityCardWidget.buildRear(scale, -1);
     height = 120 * tempScale * scale;
 
     return child;
 
-    return AnimatedContainer(
-      height: height,
-      duration: const Duration(milliseconds: 500),
-      decoration: const BoxDecoration(
-        color: Colors.transparent,
-      ),
-      child: child,
-    );
   }
 }
 
@@ -53,8 +45,7 @@ class AbilityCardMenu extends StatefulWidget {
 
 class _AbilityCardMenuState extends State<AbilityCardMenu> {
   final GameState _gameState = getIt<GameState>();
-  final _fuckingShit = ValueNotifier<List<MonsterAbilityCardModel>>([]);
-  final _fuckingShitFuck = ValueNotifier<int>(0);
+  List<MonsterAbilityCardModel> _revealedList = [];
 
   @override
   initState() {
@@ -63,18 +54,16 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
 
   void markAsOpen(int revealed) {
     setState(() {
-      _fuckingShit.value = [];
-      var drawPile =
-          widget.monsterAbilityState.drawPile.getList().reversed.toList();
+      _revealedList = [];
+      var drawPile = widget.monsterAbilityState.drawPile.getList().reversed.toList();
       for (int i = 0; i < revealed; i++) {
-        _fuckingShit.value.add(drawPile[i]);
+        _revealedList.add(drawPile[i]);
       }
     });
-    _fuckingShitFuck.value = revealed;
   }
 
   bool isRevealed(MonsterAbilityCardModel item) {
-    for (var card in _fuckingShit.value) {
+    for (var card in _revealedList) {
       if (card.nr == item.nr) {
         return true;
       }
@@ -110,7 +99,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
   }
 
   Widget buildList(List<MonsterAbilityCardModel> list, bool reorderable,
-      bool reverse, var controller) {
+      bool allOpen, var controller) {
     var screenSize = MediaQuery.of(context).size;
     double scale = getScaleByReference(context);
     return Theme(
@@ -120,13 +109,13 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
           //other styles
         ),
         child: Container(
-          height: screenSize.height * 0.86,
+          height: _gameState.roundState.value == RoundState.playTurns? screenSize.height * 0.86: screenSize.height * 0.94,
           width: 188 * tempScale * scale,
           //a bit disgusting that I need to set the exact width of the cards here.
           //alignment: Alignment.centerLeft,
           //margin: EdgeInsets.only(left: getMainListMargin(context)),
           child: AutomaticAnimatedListView<MonsterAbilityCardModel>(
-            reverse: reverse,
+            //reverse: true,
             animator: const DefaultAnimatedListAnimator(),
             list: list,
             comparator: AnimatedListDiffListComparator<MonsterAbilityCardModel>(
@@ -140,7 +129,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
                   )
                 : Item(
                     data: item,
-                    revealed: isRevealed(item) || reorderable == false),
+                    revealed: isRevealed(item) || allOpen == true),
             listController: controller,
             //scrollController: ScrollController(),
             addLongPressReorderable: reorderable,
@@ -178,7 +167,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
         widget.monsterAbilityState.drawPile.getList().reversed.toList();
     var discardPile = widget.monsterAbilityState.discardPile.getList();
     return Column(children: [
-      _gameState.roundState.value == RoundState.playTurns || true?
+      _gameState.roundState.value == RoundState.playTurns?
       Card(
 
           //color: Colors.transparent,
@@ -222,12 +211,8 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
             Row(
               //TODO: center on screen
               children: [
-                ValueListenableBuilder<int>(
-                    valueListenable: _fuckingShitFuck,
-                    builder: (context, value, child) {
-                      return buildList(drawPile, true, false, controller);
-                    }),
-                buildList(discardPile, false, false, controller2)
+                buildList(drawPile, _gameState.roundState.value == RoundState.playTurns, false, controller),
+                buildList(discardPile, false, true, controller2)
               ],
             ),
 
