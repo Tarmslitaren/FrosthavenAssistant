@@ -8,7 +8,7 @@ AppBar createTopBar() {
     iconTheme: const IconThemeData(color: Colors.white),
     // Here we take the value from the MyHomePage object that was created by
     // the App.build method, and use it to set our appbar title.
-    //TODO: set the text to be state specific: add characters, set scenario or add monsters, choose cards(initiative), take turns. Or don't. add instructions to drawer menu and instead highlight what t do next.
+    //TODO: scale: minimum 40 height but scale up
     title: const Text(
       "Frosthaven\nHelper", style: TextStyle(
       fontFamily: 'Pirata',

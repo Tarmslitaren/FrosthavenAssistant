@@ -14,7 +14,8 @@ class Item extends StatelessWidget {
   final MonsterAbilityCardModel data;
   final bool revealed;
 
-  const Item({Key? key, required this.data, required this.revealed}) : super(key: key);
+  const Item({Key? key, required this.data, required this.revealed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +23,9 @@ class Item extends StatelessWidget {
     late final Widget child;
     late final double height;
 
-    child = revealed? MonsterAbilityCardWidget.buildFront(data, scale)
-    : MonsterAbilityCardWidget.buildRear(scale, -1); // * 1.085);
+    child = revealed
+        ? MonsterAbilityCardWidget.buildFront(data, scale)
+        : MonsterAbilityCardWidget.buildRear(scale, -1); // * 1.085);
     height = 120 * tempScale * scale;
 
     return child;
@@ -51,7 +53,7 @@ class AbilityCardMenu extends StatefulWidget {
 
 class _AbilityCardMenuState extends State<AbilityCardMenu> {
   final GameState _gameState = getIt<GameState>();
-  final _fuckingShit = ValueNotifier< List<MonsterAbilityCardModel>>([]);
+  final _fuckingShit = ValueNotifier<List<MonsterAbilityCardModel>>([]);
   final _fuckingShitFuck = ValueNotifier<int>(0);
 
   @override
@@ -60,10 +62,10 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
   }
 
   void markAsOpen(int revealed) {
-
     setState(() {
       _fuckingShit.value = [];
-      var drawPile = widget.monsterAbilityState.drawPile.getList().reversed.toList();
+      var drawPile =
+          widget.monsterAbilityState.drawPile.getList().reversed.toList();
       for (int i = 0; i < revealed; i++) {
         _fuckingShit.value.add(drawPile[i]);
       }
@@ -71,9 +73,9 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
     _fuckingShitFuck.value = revealed;
   }
 
-  bool isRevealed(MonsterAbilityCardModel item){
-    for(var card in _fuckingShit.value){
-      if (card.nr == item.nr){
+  bool isRevealed(MonsterAbilityCardModel item) {
+    for (var card in _fuckingShit.value) {
+      if (card.nr == item.nr) {
         return true;
       }
     }
@@ -88,6 +90,25 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
     return a.nr == b.nr;
   }
 
+  Widget buildRevealButton(int nrOfButtons, int nr){
+    String text = "All";
+    if (nr < nrOfButtons){
+      text = nr.toString();
+    }
+    var screenSize = MediaQuery.of(context).size;
+    return SizedBox(
+      width: screenSize.width / nrOfButtons -15,
+        child: TextButton(
+
+          child: Text(text),
+          onPressed: () {
+            markAsOpen(nr);
+            setState() {}
+          },
+        )
+    );
+  }
+
   Widget buildList(List<MonsterAbilityCardModel> list, bool reorderable,
       bool reverse, var controller) {
     var screenSize = MediaQuery.of(context).size;
@@ -99,7 +120,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
           //other styles
         ),
         child: Container(
-          height: screenSize.height*0.9,
+          height: screenSize.height * 0.86,
           width: 188 * tempScale * scale,
           //a bit disgusting that I need to set the exact width of the cards here.
           //alignment: Alignment.centerLeft,
@@ -117,7 +138,9 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
                     height: 120 * tempScale * scale,
                     //TODO: these are for smooth animations. need to be same size as the items
                   )
-                : Item(data: item, revealed: isRevealed(item) || reorderable == false),
+                : Item(
+                    data: item,
+                    revealed: isRevealed(item) || reorderable == false),
             listController: controller,
             //scrollController: ScrollController(),
             addLongPressReorderable: reorderable,
@@ -154,89 +177,64 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
     var drawPile =
         widget.monsterAbilityState.drawPile.getList().reversed.toList();
     var discardPile = widget.monsterAbilityState.discardPile.getList();
-    return Card(
-        color: Colors.transparent,
-        margin: const EdgeInsets.all(20),
-        child: Column(children: [
-          Expanded(child: Row(children: [
-            const Text("Reveal:", style: TextStyle(color: Colors.white)),
-            drawPile.isNotEmpty
-                ? TextButton(
-                    child: const Text("1"),
-                    onPressed: () {
-                      markAsOpen(1);
-                      setState(){}
-                    },
-                  )
-                : Container(),
-            drawPile.length > 1
-                ? TextButton(
-                    child: const Text("2"),
-                    onPressed: () {
-                      markAsOpen(2);
-                    },
-                  )
-                : Container(),
-            drawPile.length > 2
-                ? TextButton(
-                    child: const Text("3"),
-                    onPressed: () {
-                      markAsOpen(3);
-                    },
-                  )
-                : Container(),
-            drawPile.length > 3
-                ? TextButton(
-                    child: const Text("4"),
-                    onPressed: () {
-                      markAsOpen(4);
-                    },
-                  )
-                : Container(),
-            drawPile.length > 4
-                ? TextButton(
-                    child: const Text("5"),
-                    onPressed: () {
-                      markAsOpen(5);
-                    },
-                  )
-                : Container(),
-            drawPile.length > 5
-                ? TextButton(
-                    child: const Text("6"),
-                    onPressed: () {
-                      markAsOpen(6);
-                    },
-                  )
-                : Container(),
-            drawPile.length > 6
-                ? TextButton(
-                    child: const Text("7"),
-                    onPressed: () {
-                      markAsOpen(7);
-                    },
-                  )
-                : Container(),
-            TextButton(
-              child: const Text("All"),
-              onPressed: () {
-                markAsOpen(drawPile.length);
-              },
-            )
-          ])),
-          Stack(children: [
-            //TODO: show other side for first column and add the diviner functionality: reveal x cards, remove selected (how to mark selected?)
+    return Column(children: [
+      _gameState.roundState.value == RoundState.playTurns || true?
+      Card(
+
+          //color: Colors.transparent,
+          margin: const EdgeInsets.only(left:20, right:20, top: 20),
+
+          child: Column(children: [
+
+            Row(
+              mainAxisSize: MainAxisSize.max,
+                children: [
+              const Text(
+                "Reveal:",
+                //style: TextStyle(color: Colors.white)
+              ),
+              drawPile.length > 1
+                  ? buildRevealButton(drawPile.length, 1)
+                  : Container(),
+              drawPile.length > 2
+                  ? buildRevealButton(drawPile.length, 2)
+                  : Container(),
+              drawPile.length > 3
+                  ? buildRevealButton(drawPile.length, 3)
+                  : Container(),
+              drawPile.length > 4
+                  ? buildRevealButton(drawPile.length, 4)
+                  : Container(),
+              drawPile.length > 5
+                  ? buildRevealButton(drawPile.length, 5)
+                  : Container(),
+              drawPile.length > 6
+                  ? buildRevealButton(drawPile.length, 6)
+                  : Container(),
+              /*drawPile.length > 7
+                  ? TextButton(
+                      child: const Text("7"),
+                      onPressed: () {
+                        markAsOpen(7);
+                      },
+                    )
+                  : Container(),*/
+                  buildRevealButton(drawPile.length, 7)
+            ]),
+          ])): Container(),
+      Card(
+          color: Colors.transparent,
+          margin: const EdgeInsets.only(left:20, right:20),
+          child: Stack(children: [
+            //TODO: add diviner functionality:, remove selected (how to mark selected?)
             Row(
               //TODO: center on screen
               children: [
                 ValueListenableBuilder<int>(
-                valueListenable: _fuckingShitFuck,
+                    valueListenable: _fuckingShitFuck,
                     builder: (context, value, child) {
-
-                  return buildList(drawPile, true, false, controller);
-
-                }
-                ),
+                      return buildList(drawPile, true, false, controller);
+                    }),
                 buildList(discardPile, false, false, controller2)
               ],
             ),
@@ -253,7 +251,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
                     onPressed: () {
                       Navigator.pop(context);
                     }))
-          ])
-        ]));
+          ]))
+    ]);
   }
 }

@@ -78,7 +78,6 @@ flutter:
     - assets/images/monsters/ #portraits
     - assets/images/summon/
     - assets/images/psd/
-    - assets/images/psd/MonsterAbility-back.png
     - assets/images/bg/
     - assets/images/
   #   - images/a_dot_burr.jpeg

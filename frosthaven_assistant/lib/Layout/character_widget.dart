@@ -118,7 +118,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                           _initTextFieldController.clear();
                           if (_characterState.initiative == 0) {
                             return Container(
-                              margin: EdgeInsets.only(left: 10 * scale), //TODO: test on web - why is the layout different?
+                              margin: EdgeInsets.only(left: 10 * scale),
                               height: 33 * scale,
                               width: 25 * scale,
                               child: TextField(
@@ -128,7 +128,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                   maxLength: 2,
 
                                   style: TextStyle(
-                                    height: 0.9,
+                                    height: 0.9, //quick fix for web-phone disparity.
                                       fontFamily: 'Pirata',
                                       color: Colors.white,
                                       fontSize: 24 * scale,

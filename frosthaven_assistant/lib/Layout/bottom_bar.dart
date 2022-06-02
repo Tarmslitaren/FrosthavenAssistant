@@ -4,7 +4,7 @@ import 'package:frosthaven_assistant/Layout/draw_button.dart';
 import '../Resource/game_state.dart';
 import '../services/service_locator.dart';
 
-
+//TODO: scale: minimum 40 height but scale up
 Widget createBottomBar(BuildContext context) {
   GameState _gameState = getIt<GameState>();
   return Container(
@@ -32,10 +32,12 @@ Widget createBottomBar(BuildContext context) {
                           _gameState.scenario.value
                       );
                   }),
-              Text("level: 1 trap: 2 hazard: 1 xp: +4 coin: x2"),
+              //TODO: implement
+              Text("level: ${_gameState.level.value} trap: 2 hazard: 1 xp: +4 coin: x2"),
             ],
           ),
 
+          //TODO: monster modifier deck widget
         ],
       )
 
