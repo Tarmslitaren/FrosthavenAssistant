@@ -6,7 +6,6 @@ import '../Model/monster.dart';
 import '../services/service_locator.dart';
 import 'game_state.dart';
 
-void doListMagic() {}
 
 class DrawCommand extends Command {
   final GameState _gameState = getIt<GameState>();
@@ -186,6 +185,11 @@ class SetScenarioCommand extends Command {
       if (item is Character) {
         newList.add(item);
         item.characterState.initiative = 0;
+        //TODO: clear all other shit
+      }
+      if (item is Monster) {
+        item.deck.shuffle();
+        //TODO: clear all other shit
       }
     }
     List<String> monsters =

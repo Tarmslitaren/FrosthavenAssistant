@@ -115,13 +115,16 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                     ValueListenableBuilder<int>(
                         valueListenable: _gameState.commandIndex,
                         builder: (context, value, child) {
-                          _initTextFieldController.clear();
-                          if (_characterState.initiative == 0) {
+                          //_initTextFieldController.clear();
+                          //if (_characterState.initiative == 0) {
+                          if (_gameState.roundState.value == RoundState.chooseInitiative) {
                             return Container(
                               margin: EdgeInsets.only(left: 10 * scale),
                               height: 33 * scale,
                               width: 25 * scale,
                               child: TextField(
+                                //TODO: clear on enter focus
+                                //TODO: close soft keyboard on 2 chars entered
                                 //expands: true,
                                   textAlign: TextAlign.center,
                                   cursorColor: Colors.white,
@@ -157,6 +160,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                   keyboardType: TextInputType.number),
                             );
                           } else {
+                            _initTextFieldController.clear();
                             return Container(
                                 height: 33 * scale,
                                 width: 25 * scale,
