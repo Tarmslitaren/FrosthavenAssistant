@@ -10,14 +10,15 @@ AppBar createTopBar() {
     // the App.build method, and use it to set our appbar title.
     //TODO: set the text to be state specific: add characters, set scenario or add monsters, choose cards(initiative), take turns. Or don't. add instructions to drawer menu and instead highlight what t do next.
     title: const Text(
-      "Frosthaven Helper", style: TextStyle(
+      "Frosthaven\nHelper", style: TextStyle(
       fontFamily: 'Pirata',
       color: Colors.white,
-      fontSize: 25,
+      fontSize: 16,
     ),
     ),
     toolbarHeight: 40, // Set this height
     flexibleSpace: const Image(
+      height: 40,
       image: AssetImage('assets/images/psd/frosthaven-bar.png'),
       //fit: BoxFit.fitHeight,
       repeat: ImageRepeat.repeat

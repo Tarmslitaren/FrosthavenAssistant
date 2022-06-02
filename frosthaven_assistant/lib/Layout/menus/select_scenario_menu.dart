@@ -20,6 +20,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
   initState() {
     // at the beginning, all items are shown
     _foundScenarios = _gameState.modelData.value!.scenarios.keys.toList();
+    _foundScenarios.sort((a, b) => a.compareTo(b)); //TODO: sort by nrs
     super.initState();
   }
 
@@ -72,7 +73,10 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                 ? ListView.builder(
                     itemCount: _foundScenarios.length,
                     itemBuilder: (context, index) => ListTile(
-                      title: Text(_foundScenarios[index]),
+                      title: Text(_foundScenarios[index],
+                          style: TextStyle(fontSize: 18)
+
+                      ),
                       onTap: () {
                         _gameState
                             .action(SetScenarioCommand(_foundScenarios[index]));

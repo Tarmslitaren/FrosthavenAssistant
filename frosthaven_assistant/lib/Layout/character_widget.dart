@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -38,8 +37,12 @@ class _CharacterWidgetState extends State<CharacterWidget> {
       for (var item in _gameState.currentList) {
         if (item is Character) {
           if (item.characterClass.name == widget.characterClass.name) {
-            item.characterState.initiative = int.parse(_initTextFieldController
-                .value.text); //TODO: sanity check inputs
+            if(_initTextFieldController
+                .value.text.isNotEmpty) {
+              item.characterState.initiative =
+                  int.parse(_initTextFieldController
+                      .value.text); //TODO: sanity check inputs
+            }
           }
         }
       }
@@ -49,7 +52,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double height = 60 * scale;
+    double scaledHeight = 60 * scale;
 
     return GestureDetector(
         onVerticalDragStart: (details) {
@@ -91,21 +94,21 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                   margin: EdgeInsets.only(left: 20 * scale, top: 5*scale, bottom: 5*scale),
                   child: Image(
                     fit: BoxFit.contain,
-                    height: height * scale,
+                    height: scaledHeight,
                     image: AssetImage(
                       "assets/images/class-icons/${widget.characterClass.name}.png",
                     ),
-                    width: height*0.8,
+                    width: scaledHeight*0.8,
                   ),
                 ),
                 Align(
                   child: Column(children: [
                     Container(
                       margin:
-                          EdgeInsets.only(top: 10 * scale, left: 10 * scale),
+                          EdgeInsets.only(top: scaledHeight / 6, left: 10 * scale),
                       child: Image(
                         //fit: BoxFit.contain,
-                        height: height * 0.1,
+                        height: scaledHeight * 0.1,
                         image: const AssetImage("assets/images/init.png"),
                       ),
                     ),
@@ -115,15 +118,17 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                           _initTextFieldController.clear();
                           if (_characterState.initiative == 0) {
                             return Container(
-                              margin: EdgeInsets.only(left: 10 * scale),
-                              height: 29 * scale,
+                              margin: EdgeInsets.only(left: 10 * scale), //TODO: test on web - why is the layout different?
+                              height: 33 * scale,
                               width: 25 * scale,
                               child: TextField(
+                                //expands: true,
                                   textAlign: TextAlign.center,
                                   cursorColor: Colors.white,
                                   maxLength: 2,
 
                                   style: TextStyle(
+                                    height: 0.9,
                                       fontFamily: 'Pirata',
                                       color: Colors.white,
                                       fontSize: 24 * scale,
@@ -154,7 +159,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                           } else {
                             return Container(
                                 height: 33 * scale,
-                                width: 24 * scale,
+                                width: 25 * scale,
                                 margin: EdgeInsets.only(left: 10 * scale),
                                 child: Text(
                                   _characterState.initiative.toString(),

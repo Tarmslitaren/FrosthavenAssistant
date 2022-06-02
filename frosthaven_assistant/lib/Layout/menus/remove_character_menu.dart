@@ -34,15 +34,14 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
               const SizedBox(
                 height: 20,
               ),
-        ListTile(
-          title: const Text(
-            "Remove All",
-          ),
-          onTap: () {
-            _gameState.action(RemoveCharacterCommand(
-                currentCharacters)); //
-            Navigator.pop(context);
-          },),
+              ListTile(
+                title: const Text("Remove All", style: TextStyle(fontSize: 18)),
+                onTap: () {
+                  _gameState
+                      .action(RemoveCharacterCommand(currentCharacters)); //
+                  Navigator.pop(context);
+                },
+              ),
               Expanded(
                 child: ListView.builder(
                   itemCount: currentCharacters.length,
@@ -53,9 +52,8 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                           "assets/images/class-icons/${currentCharacters[index].id}.png"),
                     ),
                     iconColor: currentCharacters[index].characterClass.color,
-                    title: Text(
-                      currentCharacters[index].id,
-                    ),
+                    title: Text(currentCharacters[index].id,
+                        style: TextStyle(fontSize: 18)),
                     onTap: () {
                       _gameState.action(RemoveCharacterCommand(
                           [currentCharacters[index]])); //

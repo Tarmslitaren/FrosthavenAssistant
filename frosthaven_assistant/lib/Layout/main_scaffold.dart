@@ -6,8 +6,12 @@ import 'bottom_bar.dart';
 import 'main_list.dart';
 import 'menus/main_menu.dart';
 
-Scaffold createMainScaffold(BuildContext context) {
-  return Scaffold(
+Widget createMainScaffold(BuildContext context) {
+  return SafeArea(
+    bottom: false,
+      maintainBottomViewPadding: true,
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
     //drawerScrimColor: Colors.yellow,
     bottomNavigationBar: createBottomBar(context),
     appBar: createTopBar(),
@@ -18,5 +22,5 @@ Scaffold createMainScaffold(BuildContext context) {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),*/ // This trailing comma makes auto-formatting nicer for build methods.
-  );
+  ));
 }

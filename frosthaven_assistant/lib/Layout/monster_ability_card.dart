@@ -145,7 +145,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
               child: Image(
                 height: 123 * tempScale * scale,
                 image: const AssetImage(
-                    "assets/images/psd/monsterAbility-back.png"),
+                    "assets/images/psd/MonsterAbility-back.png"),
               ),
             ),
             size >= 0

@@ -72,12 +72,13 @@ flutter:
     - assets/data/editions/
     - assets/images/abilities/ #for use with monster ability card
     - assets/images/attack/ #modifier deck
-    - assets/images/class-bgs/ #not gonna use these
+    #- assets/images/class-bgs/ #not gonna use these
     - assets/images/conditions/ #should find better versions of these to scale
     - assets/images/class-icons/ #find better versions of these
     - assets/images/monsters/ #portraits
     - assets/images/summon/
     - assets/images/psd/
+    - assets/images/psd/MonsterAbility-back.png
     - assets/images/bg/
     - assets/images/
   #   - images/a_dot_burr.jpeg

@@ -95,6 +95,8 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                               ? "???"
                               : _foundCharacters[index].name,
                           style: TextStyle(
+                              fontSize: 18,
+
                               color: _characterAlreadyAdded(_foundCharacters[index].name)?
                                   Colors.grey : Colors.black
                           )),

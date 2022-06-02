@@ -91,16 +91,16 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
   var smallStyle = TextStyle(
       fontFamily: 'Majalla',
       color: left ? Colors.black : Colors.white,
-      fontSize: 8 * tempScale * scale,
+      fontSize: 9 * tempScale * scale,
       height: 0.8,
       shadows: [shadow]);
   var midStyle = TextStyle(
       fontFamily: 'Majalla',
       color: left ? Colors.black : Colors.white,
-      fontSize: 11 * tempScale * scale,
-      height: 0.8,
+      fontSize: 12 * tempScale * scale,
+      height: 0.9,
       shadows: [shadow]);
-  var normalStyle = TextStyle(
+  var normalStyle = TextStyle( //maybe slightly bigger between chars space?
       fontFamily: 'Majalla',
       color: left ? Colors.black : Colors.white,
       fontSize: 14 * tempScale * scale,
