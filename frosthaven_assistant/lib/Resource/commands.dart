@@ -88,7 +88,7 @@ class InitListCommand extends Command {
   }
 }
 
-//helper to make the init list. can be removed.
+//helper to make the init list. can be removed after saving works
 Monster? createMonster(String name, int level) {
   for (MonsterModel monster in getIt<GameState>().modelData.value!.monsters) {
     if (monster.name == name) {

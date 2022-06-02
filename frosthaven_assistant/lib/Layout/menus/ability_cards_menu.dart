@@ -182,25 +182,27 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
                 "Reveal:",
                 //style: TextStyle(color: Colors.white)
               ),
-              drawPile.length > 1
+              drawPile.length > 0
                   ? buildRevealButton(drawPile.length, 1)
                   : Container(),
-              drawPile.length > 2
+              drawPile.length > 1
                   ? buildRevealButton(drawPile.length, 2)
                   : Container(),
-              drawPile.length > 3
+              drawPile.length > 2
                   ? buildRevealButton(drawPile.length, 3)
                   : Container(),
-              drawPile.length > 4
+              drawPile.length > 3
                   ? buildRevealButton(drawPile.length, 4)
                   : Container(),
-              drawPile.length > 5
+              drawPile.length > 4
                   ? buildRevealButton(drawPile.length, 5)
                   : Container(),
-              drawPile.length > 6
+              drawPile.length > 5
                   ? buildRevealButton(drawPile.length, 6)
                   : Container(),
-                  buildRevealButton(drawPile.length, 7)
+                  drawPile.length > 6
+                  ?buildRevealButton(drawPile.length, 7)
+                      :Container(),
             ]),
           ])): Container(),
       Card(
