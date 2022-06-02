@@ -211,14 +211,6 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
               drawPile.length > 6
                   ? buildRevealButton(drawPile.length, 6)
                   : Container(),
-              /*drawPile.length > 7
-                  ? TextButton(
-                      child: const Text("7"),
-                      onPressed: () {
-                        markAsOpen(7);
-                      },
-                    )
-                  : Container(),*/
                   buildRevealButton(drawPile.length, 7)
             ]),
           ])): Container(),

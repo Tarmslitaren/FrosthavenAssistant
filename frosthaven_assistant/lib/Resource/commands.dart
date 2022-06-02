@@ -36,7 +36,10 @@ class NextRoundCommand extends Command {
   void execute() {
     for (var item in _gameState.currentList) {
       if (item is Character) {
-        item.characterState.initiative = 0;
+        item.nextRound();
+      }
+      if (item is Monster) {
+        item.nextRound();
       }
     }
     _gameState.updateElements();

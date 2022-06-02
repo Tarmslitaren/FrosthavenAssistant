@@ -59,6 +59,9 @@ class Character extends ListItemData{
   final CharacterState characterState;
   final CharacterClass characterClass;
   final ListItemState state = ListItemState.chooseInitiative;
+  void nextRound(){
+    characterState.initiative = 0;
+  }
 }
 
 class CardStack<E> {
@@ -144,6 +147,12 @@ class Monster extends ListItemData{
   final ListItemState state = ListItemState.chooseInitiative;
   final int level;
   late final MonsterAbilityState deck; //for ease of reference
+
+  void nextRound(){
+    if(deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle){
+      deck.shuffle();
+    }
+  }
 }
 
 class GameState extends ActionHandler{
@@ -273,9 +282,6 @@ class GameState extends ActionHandler{
   void drawAbilityCards(){
     for(MonsterAbilityState deck in currentAbilityDecks) {
       //TODO: don't draw if there are no monsters of the type
-      if(deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle){
-        deck.shuffle();
-      }
       deck.draw();
     }
   }

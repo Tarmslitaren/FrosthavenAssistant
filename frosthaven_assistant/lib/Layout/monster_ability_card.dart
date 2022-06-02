@@ -132,6 +132,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
         ));
   }
 
+
+
   static Widget buildRear(double scale, int size) {
     return Container(
         key: const ValueKey<int>(0),
@@ -177,10 +179,17 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 // when the user taps a FloatingActionButton.
 //late MonsterData _data;
   final GameState _gameState = getIt<GameState>();
+  int _deckSize = 8;
 
   @override
   void initState() {
     super.initState();
+    for (var deck in _gameState.currentAbilityDecks) {
+      if (deck.name == widget.data.deck) {
+        _deckSize = deck.drawPile.size();
+        break;
+      }
+    }
   }
 
   Widget _transitionBuilder(Widget widget, Animation<double> animation) {
@@ -201,8 +210,8 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    return ValueListenableBuilder<RoundState>(
-        valueListenable: _gameState.roundState,
+    return ValueListenableBuilder<int>(
+        valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
           MonsterAbilityCardModel? card;
           if (_gameState.roundState.value == RoundState.playTurns) {
@@ -211,10 +220,10 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 
           //get size for back
           var deckk;
-          int size = 8;
+          _deckSize = 8;
           for (var deck in _gameState.currentAbilityDecks) {
             if (deck.name == widget.data.deck) {
-              size = deck.drawPile.size();
+              _deckSize = deck.drawPile.size();
               deckk = deck;
               break;
             }
@@ -237,11 +246,11 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 //switchOutCurve: Curves.easeInBack.flipped,
                 child: _gameState.roundState.value == RoundState.playTurns
                     ? MonsterAbilityCardWidget.buildFront(card, scale)
-                    : MonsterAbilityCardWidget.buildRear(scale, size)),
+                    : MonsterAbilityCardWidget.buildRear(scale, _deckSize),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);
             //CurvedAnimation(parent: null, curve: Curves.easeIn)
             //),
-          );
+            ));
         });
   }
 }
