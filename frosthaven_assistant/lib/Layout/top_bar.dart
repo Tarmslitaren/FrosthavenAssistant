@@ -10,7 +10,7 @@ AppBar createTopBar() {
     // the App.build method, and use it to set our appbar title.
     //TODO: scale: minimum 40 height but scale up
     title: const Text(
-      "Frosthaven\nHelper", style: TextStyle(
+      "Frosthaven\nAssistant", style: TextStyle(
       fontFamily: 'Pirata',
       color: Colors.white,
       fontSize: 16,

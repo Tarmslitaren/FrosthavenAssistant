@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:search_choices/search_choices.dart';
 
 import '../../Model/campaign.dart';
 import '../../Resource/commands.dart';
+import '../bottom_bar.dart';
 
 void openDialog(BuildContext context, Widget widget) {
-  showDialog(context: context,
-      builder: (BuildContext context) => widget
-  );
+  showDialog(context: context, builder: (BuildContext context) => widget);
   /*Navigator.of(context).push(MaterialPageRoute<void>(
     builder: (BuildContext context) {
       return widget;
@@ -33,12 +33,15 @@ Drawer createMainMenu(BuildContext context) {
 // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
             children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
+              DrawerHeader(
+                decoration: const BoxDecoration(
                   color: Colors.blue,
                 ),
-                child: Text(
-                    'Main Menu'), //add more useful stuff here (set level stuff maybe?)
+                child: Column(children: [
+                  const Text('Main Menu'),
+                  createLevelWidget(context),
+                  //const SetLevelMenu()
+                ]),
               ),
               ListTile(
                 title: const Text('Undo'),
@@ -76,7 +79,7 @@ Drawer createMainMenu(BuildContext context) {
                 },
               ),
               const Divider(),
-                  ListTile(
+              ListTile(
                 title: const Text('Add Character'),
                 onTap: () {
                   Navigator.pop(context);
@@ -85,10 +88,10 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: const Text('Remove Characters'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    openDialog(context, const RemoveCharacterMenu());
-                  },
+                onTap: () {
+                  Navigator.pop(context);
+                  openDialog(context, const RemoveCharacterMenu());
+                },
               ),
               const Divider(),
               ListTile(

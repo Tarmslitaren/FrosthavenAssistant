@@ -8,6 +8,17 @@ import 'menus/main_menu.dart';
 
 Widget createLevelWidget(BuildContext context) {
   GameState _gameState = getIt<GameState>();
+
+  var textStyle = const TextStyle(
+      //fontFamily: 'Majalla',
+      color: Colors.black87,
+      fontWeight: FontWeight.bold,
+      //backgroundColor: Colors.transparent.withAlpha(100),
+      fontSize: 15,
+      shadows: [
+        Shadow(offset: Offset(1, 1), color: Colors.white)
+      ]);
+
   return GestureDetector(
     onVerticalDragStart: (details) {
       //start moving the widget in the list
@@ -39,13 +50,15 @@ Widget createLevelWidget(BuildContext context) {
                   child: Text(
                     _gameState.scenario.value,
                     textAlign: TextAlign.center,
+                    style: textStyle,
                   ));
             }),
         ValueListenableBuilder<int>(
             valueListenable: _gameState.level,
             builder: (context, value, child) {
               return Text(
-                  "level: ${_gameState.level.value} trap: ${_gameState.getTrapValue()} hazard: ${_gameState.getHazardValue()} xp: +${_gameState.getXPValue()} coin: x${_gameState.getCoinValue()}");
+                  "level: ${_gameState.level.value} trap: ${_gameState.getTrapValue()} hazard: ${_gameState.getHazardValue()} xp: +${_gameState.getXPValue()} coin: x${_gameState.getCoinValue()}",
+              style: textStyle,);
             })
       ],
     ),
