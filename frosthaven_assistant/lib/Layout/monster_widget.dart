@@ -14,13 +14,11 @@ import 'monster_stat_card.dart';
 double tempScale = 0.8;
 
 class MonsterWidget extends StatefulWidget {
-  final int level;
   final MonsterModel data;
 
   const MonsterWidget(
       {Key? key,
-        required this.data,
-        required this.level})
+        required this.data})
       : super(key: key);
 
   @override
@@ -87,7 +85,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                   )
                 ]))),
         MonsterAbilityCardWidget(data: widget.data),
-        MonsterStatCardWidget(data: widget.data, level: widget.level,),
+        MonsterStatCardWidget(data: widget.data),
       ],
     );
   }

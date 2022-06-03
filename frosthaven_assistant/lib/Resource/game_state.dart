@@ -193,7 +193,8 @@ class GameState extends ActionHandler{
     roundState.value = state;
   }
 
-  final level = ValueNotifier<int>(1); //TODO: update and stuff
+  final level = ValueNotifier<int>(1);
+  final solo = ValueNotifier<bool>(false);
   final scenario = ValueNotifier<String>("");
 
   List<ListItemData> currentList = []; //has both monsters and characters
@@ -308,6 +309,51 @@ class GameState extends ActionHandler{
         elementState.value[key] = ElementState.inert;
       }
     }
+  }
+
+
+  int getTrapValue(){
+    return 2 + level.value;
+  }
+
+  int getHazardValue(){
+    return 1  + (level.value/3.0).ceil();
+  }
+
+  int getXPValue(){
+    return 4 + 2 * level.value;
+  }
+
+  int getCoinValue(){
+    if (level.value == 7) {
+      return 6;
+    }
+    return 2 + (level.value / 2.0).floor();
+  }
+
+  int getRecommendedLevel() {
+    double totalLevels = 0;
+    double nrOfCharaters = 0;
+    for (var item in currentList) {
+      if (item is Character) {
+        totalLevels+= item.characterState.level.value;
+        nrOfCharaters++;
+      }
+    }
+    if(nrOfCharaters == 0 ){
+      return 1;
+    }
+    if(solo.value == true) {
+      //Take the average level of all characters in the
+      // scenario, then add 1 before dividing by 2 and rounding
+      // up.
+      return ((totalLevels/nrOfCharaters+1.0)/2.0).ceil();
+
+    }
+    //scenario level is equal to
+    //the average level of the characters divided by 2
+    //(rounded up)
+    return (totalLevels/nrOfCharaters/2.0).ceil();
   }
 
   GameState? savedState; //load from file, save to file on interval/ app in background? or after any operation?

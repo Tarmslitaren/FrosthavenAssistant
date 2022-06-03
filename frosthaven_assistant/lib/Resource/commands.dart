@@ -256,3 +256,23 @@ class ImbueElementCommand extends Command {
     _gameState.elementState.value[element] = _previousState!;
   }
 }
+
+class SetLevelCommand extends Command {
+  final GameState _gameState = getIt<GameState>();
+  int _previousState = 0;
+  int level;
+
+  SetLevelCommand(this.level);
+
+  @override
+  void execute() {
+    _previousState = _gameState.level.value;
+    _gameState.level.value = level;
+  }
+
+  @override
+  void undo() {
+    _gameState.level.value = _previousState;
+  }
+}
+

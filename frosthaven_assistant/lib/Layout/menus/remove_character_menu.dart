@@ -24,10 +24,7 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
   @override
   Widget build(BuildContext context) {
     List<Character> currentCharacters = _gameState.getCurrentCharacters();
-    return Card(
-        //color: Colors.transparent,
-        // shadowColor: Colors.transparent,
-        margin: const EdgeInsets.all(20),
+    return Dialog(
         child: Stack(children: [
           Column(
             children: [

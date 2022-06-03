@@ -99,10 +99,8 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
             } else if (_gameState.elementState.value[widget.element] ==
                 ElementState.full) {
               _gameState.action(ImbueElementCommand(widget.element, false));
-              //setFull();
 
             } else {
-              //setInert();
               _gameState.action(UseElementCommand(widget.element));
             }
           });
@@ -115,7 +113,6 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
               child: ValueListenableBuilder<int>(
                   valueListenable: _gameState.commandIndex,
                   builder: (context, value, child) {
-
                     if (_gameState.elementState.value[widget.element] == ElementState.inert) {
                       setInert();
                     }
@@ -145,7 +142,7 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
                                   )
                           ]),
                       // Define how long the animation should take.
-                      duration: const Duration(seconds: 1),
+                      duration: const Duration(milliseconds: 500),
                       // Provide an optional curve to make the animation feel smoother.
                       curve: Curves.fastOutSlowIn,
                     );
