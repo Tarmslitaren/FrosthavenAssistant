@@ -58,7 +58,10 @@ class _MonsterWidgetState extends State<MonsterWidget> {
             },
             child: Container(
                 //margin: EdgeInsets.all(2*tempScale*scale),
-                child: Stack(alignment: Alignment.bottomCenter, children: [
+                child: Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+
                   Image(
                     //fit: BoxFit.contain,
                     height: height,
@@ -66,15 +69,21 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                     image: AssetImage("assets/images/monsters/${widget.data.gfx}.png"),
                     //width: widget.height*0.8,
                   ),
-                  Text(
-                    widget.data.display,
-                    style: TextStyle(
-                        fontFamily: 'Pirata',
-                        color: Colors.white,
-                        fontSize: 18*tempScale*scale,
-                        shadows: [
-                          Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
-                        ]),
+                  Container(
+                    width: height*0.95,
+                    //height: height,
+                      alignment: Alignment.bottomCenter,
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      widget.data.display,
+                      style: TextStyle(
+                          fontFamily: 'Pirata',
+                          color: Colors.white,
+                          fontSize: 18*tempScale*scale,
+                          shadows: [
+                            Shadow(offset: Offset(1*scale, 1*scale), color: Colors.black)
+                          ]),
+                    )
                   )
                 ]))),
         MonsterAbilityCardWidget(data: widget.data),

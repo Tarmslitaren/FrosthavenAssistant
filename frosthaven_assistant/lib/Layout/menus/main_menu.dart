@@ -42,6 +42,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: const Text('Undo'),
+                enabled: false,
                 onTap: () {
 // Update the state of the app
 // ...
@@ -51,6 +52,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: const Text('Redo'),
+                enabled: false,
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -67,6 +69,7 @@ Drawer createMainMenu(BuildContext context) {
                     ),
               ListTile(
                 title: const Text('Add Section'),
+                enabled: false,
                 onTap: () {
                   //TODO: of no section for current scenario, gray out the button and do nothing
                   Navigator.pop(context);
@@ -89,6 +92,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               const Divider(),
               ListTile(
+                enabled: false,
                 title: const Text('Add Monsters'),
                 onTap: () {
                   Navigator.pop(context);
@@ -96,6 +100,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: const Text('Remove Monsters'),
+                enabled: false,
                 onTap: () {
                   Navigator.pop(context);
                 },
@@ -103,12 +108,14 @@ Drawer createMainMenu(BuildContext context) {
               const Divider(),
               ListTile(
                 title: const Text('Settings'),
+                enabled: false,
                 onTap: () {
                   Navigator.pop(context);
                 },
               ),
               ListTile(
                 title: const Text('Documentation'),
+                enabled: false,
                 onTap: () {
                   Navigator.pop(context);
                 },

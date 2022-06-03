@@ -393,6 +393,7 @@
     },
     {
       "name": "Basic Zealot",
+      "gfx": "Basic Zealot",
       "note": "Used only in scenario 2 of JotL",
       "deck": "Basic Zealot",
       "edition": "JotL",
@@ -491,6 +492,8 @@
     },
     {
       "name": "Common Vermling Raider",
+      "gfx": "Vermling Raider",
+      "display": "Common Vermling Raider",
       "note": "This is only used for JotL Scenario 1",
       "deck": "Common Vermling Raider",
       "edition": "JotL",
@@ -541,6 +544,7 @@
     },
     {
       "name": "Basic Vermling Raider",
+      "gfx": "Vermling Raider",
       "note": "This is only used for JotL Scenario 2",
       "deck": "Basic Vermling Raider",
       "edition": "JotL",
@@ -1327,6 +1331,7 @@
     },
     {
       "name": "Basic Giant Viper",
+      "gfx": "Giant Viper",
       "note": "Used only in JotL scenario 3",
       "edition": "JotL",
       "deck": "Basic Giant Viper",
