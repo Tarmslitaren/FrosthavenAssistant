@@ -6,7 +6,7 @@
       "edition": "Frosthaven",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
-      "color": "a28b7bff",
+      "color": "ffa28b7b",
       "summons": {}
     },
     "Blinkblade": {
@@ -14,7 +14,7 @@
       "edition": "Frosthaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
-      "color": "009ec6ff",
+      "color": "ff009ec6",
       "summons": {}
     },
     "BannerSpear": {
@@ -22,7 +22,7 @@
       "edition": "Frosthaven",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
-      "color": "E7B32EFF",
+      "color": "FFE7B32E",
       "summons": {
         "Reinforcements": {
           "level": 1,
@@ -84,7 +84,7 @@
       "edition": "Frosthaven",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
-      "color": "707d91ff",
+      "color": "ff707d91",
       "summons": {
         "Shadow Beast": {
           "level": 1,
@@ -107,7 +107,7 @@
       "edition": "Frosthaven",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
-      "color": "279e55ff",
+      "color": "ff279e55",
       "summons": {
         "Shambling Skeleton": {
           "level": 1,
@@ -162,7 +162,7 @@
       "edition": "Frosthaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
-      "color": "cf4471ff",
+      "color": "ffcf4471",
       "summons": {}
     }
   },

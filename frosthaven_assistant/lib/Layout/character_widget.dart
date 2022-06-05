@@ -1,5 +1,6 @@
-
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/main_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Model/character_class.dart';
@@ -37,10 +38,9 @@ class _CharacterWidgetState extends State<CharacterWidget> {
       for (var item in _gameState.currentList) {
         if (item is Character) {
           if (item.characterClass.name == widget.characterClass.name) {
-            if(_initTextFieldController
-                .value.text.isNotEmpty) {
-              item.characterState.initiative =
-                  int.parse(_initTextFieldController
+            if (_initTextFieldController.value.text.isNotEmpty) {
+              item.characterState.initiative = int.parse(
+                  _initTextFieldController
                       .value.text); //TODO: sanity check inputs
             }
           }
@@ -66,6 +66,13 @@ class _CharacterWidgetState extends State<CharacterWidget> {
         },
         onTap: () {
           //open stats menu
+          //TODO: open the whole state change menu
+          openDialog(
+            context,
+            Dialog(
+              child: SetCharacterLevelMenu(characterState: _characterState),
+            ),
+          );
           setState(() {});
         },
         child: Stack(
@@ -91,21 +98,22 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                 child: Row(
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: 20 * scale, top: 5*scale, bottom: 5*scale),
+                  margin: EdgeInsets.only(
+                      left: 20 * scale, top: 5 * scale, bottom: 5 * scale),
                   child: Image(
                     fit: BoxFit.contain,
                     height: scaledHeight,
                     image: AssetImage(
                       "assets/images/class-icons/${widget.characterClass.name}.png",
                     ),
-                    width: scaledHeight*0.8,
+                    width: scaledHeight * 0.8,
                   ),
                 ),
                 Align(
                   child: Column(children: [
                     Container(
-                      margin:
-                          EdgeInsets.only(top: scaledHeight / 6, left: 10 * scale),
+                      margin: EdgeInsets.only(
+                          top: scaledHeight / 6, left: 10 * scale),
                       child: Image(
                         //fit: BoxFit.contain,
                         height: scaledHeight * 0.1,
@@ -117,21 +125,22 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                         builder: (context, value, child) {
                           //_initTextFieldController.clear();
                           //if (_characterState.initiative == 0) {
-                          if (_gameState.roundState.value == RoundState.chooseInitiative) {
+                          if (_gameState.roundState.value ==
+                              RoundState.chooseInitiative) {
                             return Container(
                               margin: EdgeInsets.only(left: 10 * scale),
                               height: 33 * scale,
                               width: 25 * scale,
                               child: TextField(
-                                //TODO: clear on enter focus
-                                //TODO: close soft keyboard on 2 chars entered
-                                //expands: true,
+                                  //TODO: clear on enter focus
+                                  //TODO: close soft keyboard on 2 chars entered
+                                  //expands: true,
                                   textAlign: TextAlign.center,
                                   cursorColor: Colors.white,
                                   maxLength: 2,
-
                                   style: TextStyle(
-                                    height: 0.9, //quick fix for web-phone disparity.
+                                      height: 0.9,
+                                      //quick fix for web-phone disparity.
                                       fontFamily: 'Pirata',
                                       color: Colors.white,
                                       fontSize: 24 * scale,
@@ -183,40 +192,45 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                         }),
                   ]),
                 ),
-                Column(
-                    crossAxisAlignment: CrossAxisAlignment.start, //align children to the left
+                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                    //align children to the left
                     children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 10 * scale, left: 10 * scale),
-                    child: Text(
-                      widget.characterClass.name,
-                      style: TextStyle(
-                          fontFamily: 'Pirata',
-                          color: Colors.white,
-                          fontSize: 16 * scale,
-                          shadows: [
-                            Shadow(
-                                offset: Offset(1 * scale, 1 * scale),
-                                color: Colors.black)
-                          ]),
-                    ),
-                  ),
-                  Container(
-                      margin:
-                          EdgeInsets.only( left: 10 * scale),
-                      child: Text(
-                        'health: ${_characterState.health.value.toString()} / ${widget.characterClass.healthByLevel[_characterState.level.value - 1].toString()}',
-                        style: TextStyle(
-                            fontFamily: 'Pirata',
-                            color: Colors.white,
-                            fontSize: 16 * scale,
-                            shadows: [
-                              Shadow(
-                                  offset: Offset(1 * scale, 1 * scale),
-                                  color: Colors.black)
-                            ]),
-                      ))
-                ])
+                      Container(
+                        margin:
+                            EdgeInsets.only(top: 10 * scale, left: 10 * scale),
+                        child: Text(
+                          widget.characterClass.name,
+                          style: TextStyle(
+                              fontFamily: 'Pirata',
+                              color: Colors.white,
+                              fontSize: 16 * scale,
+                              shadows: [
+                                Shadow(
+                                    offset: Offset(1 * scale, 1 * scale),
+                                    color: Colors.black)
+                              ]),
+                        ),
+                      ),
+                      ValueListenableBuilder<int>(
+                          valueListenable: _characterState.level,
+                          builder: (context, value, child) {
+                            return Container(
+                                margin: EdgeInsets.only(left: 10 * scale),
+                                child: Text(
+                                  'health: ${_characterState.health.value.toString()} / ${widget.characterClass.healthByLevel[_characterState.level.value - 1].toString()}',
+                                  style: TextStyle(
+                                      fontFamily: 'Pirata',
+                                      color: Colors.white,
+                                      fontSize: 16 * scale,
+                                      shadows: [
+                                        Shadow(
+                                            offset:
+                                                Offset(1 * scale, 1 * scale),
+                                            color: Colors.black)
+                                      ]),
+                                ));
+                          })
+                    ])
               ],
             ))
           ],

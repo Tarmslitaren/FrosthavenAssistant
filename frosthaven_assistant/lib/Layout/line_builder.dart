@@ -201,7 +201,15 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
       String textPart = line.substring(partStartIndex, line.length);
       textPartList.add(TextSpan(text: textPart, style: styleToUse));
     }
+    TextAlign textAlign = TextAlign.center;
+    if(alignment == CrossAxisAlignment.start) {
+      textAlign = TextAlign.start;
+    }
+    if(alignment == CrossAxisAlignment.end) {
+      textAlign = TextAlign.end;
+    }
     var text = Text.rich(
+      textAlign: textAlign,
       TextSpan(
         children: textPartList,
       ),

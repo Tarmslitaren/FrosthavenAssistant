@@ -4,7 +4,7 @@
   "classes": [
     {
       "name": "Hatchet",
-      "color": 2075907839,
+      "color": "FF7BBBD6",
       "edition": "JotL",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
@@ -12,7 +12,7 @@
     },
     {
       "name": "Demolitionist",
-      "color": -442339329,
+      "color": "FFE5A26F",
       "edition": "JotL",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
@@ -20,7 +20,7 @@
     },
     {
       "name": "Voidwarden",
-      "color": -454695425,
+      "color": "FFE8E9E9",
       "edition": "JotL",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
@@ -28,7 +28,7 @@
     },
     {
       "name": "Red Guard",
-      "color": -665297409,
+      "color": "FFD8585D",
       "edition": "JotL",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,

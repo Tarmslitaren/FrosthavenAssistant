@@ -3,7 +3,7 @@
   "classes": {
     "Brute": {
       "name": "Brute",
-      "color": 934205439,
+      "color": "FF35ACD5",
       "edition": "Gloomhaven",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
@@ -11,7 +11,7 @@
     },
     "Tinkerer": {
       "name": "Tinkerer",
-      "color": -758864897,
+      "color": "FFD1C3A2",
       "edition": "Gloomhaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
@@ -38,7 +38,7 @@
     },
     "Spellweaver": {
       "name": "Spellweaver",
-      "color": -794696961,
+      "color": "FFB28AC2",
       "edition": "Gloomhaven",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
@@ -61,7 +61,7 @@
     },
     "Scoundrel": {
       "name": "Scoundrel",
-      "color": -1546361601,
+      "color": "FF9ECF5F",
       "edition": "Gloomhaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
@@ -69,7 +69,7 @@
     },
     "Cragheart": {
       "name": "Cragheart",
-      "color": -2104804353,
+      "color": "FF828B3B",
       "edition": "Gloomhaven",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
@@ -77,7 +77,7 @@
     },
     "Mindthief": {
       "name": "Mindthief",
-      "color": 1652139519,
+      "color": "FF6279A5",
       "edition": "Gloomhaven",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
@@ -104,7 +104,7 @@
 
     "Sunkeeper": {
       "name": "Sunkeeper",
-      "color": -52153089,
+      "color": "FFFCE434",
       "edition": "Gloomhaven",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
@@ -112,7 +112,7 @@
     },
     "Quartermaster": {
       "name": "Quartermaster",
-      "color": -928216065,
+      "color": "FFAD9477",
       "edition": "Gloomhaven",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
@@ -120,7 +120,7 @@
     },
     "Summoner": {
       "name": "Summoner",
-      "color": -361383681,
+      "color": "FFE570B3",
       "edition": "Gloomhaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
@@ -203,7 +203,7 @@
     },
     "Nightshroud": {
       "name": "Nightshroud",
-      "color": 1950405887,
+      "color": "FF7440D4",
       "edition": "Gloomhaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
@@ -211,7 +211,7 @@
     },
     "Plagueherald": {
       "name": "Plagueherald",
-      "color": 1927331583,
+      "color": "FF72E0BE",
       "edition": "Gloomhaven",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
@@ -219,7 +219,7 @@
     },
     "Berserker": {
       "name": "Berserker",
-      "color": -260288769,
+      "color": "FFF07C4E",
       "edition": "Gloomhaven",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
@@ -227,7 +227,7 @@
     },
     "Soothsinger": {
       "name": "Soothsinger",
-      "color": -562982657,
+      "color": "FFDB6E8D",
       "edition": "Gloomhaven",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
@@ -235,7 +235,7 @@
     },
     "Doomstalker": {
       "name": "Doomstalker",
-      "color": 1539693823,
+      "color": "FF5BC5DC",
       "edition": "Gloomhaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
@@ -275,7 +275,7 @@
     },
     "Sawbones": {
       "name": "Sawbones",
-      "color": -708141825,
+      "color": "FFD5CA9C",
       "edition": "Gloomhaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
@@ -283,7 +283,7 @@
     },
     "Elementalist": {
       "name": "Elementalist",
-      "color": -589505281,
+      "color": "FFDCDCDC",
       "edition": "Gloomhaven",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
@@ -305,7 +305,7 @@
     "BeastTyrant": {
       "note": "the bear is a special summon wth scaling hit points. as such it remains hardcoded",
       "name": "Beast Tyrant",
-      "color": -1267311873,
+      "color": "FFB4765A",
       "edition": "Gloomhaven",
       "hitpoints": [6, 7, 8, 9, 10, 11, 12, 13, 14],
       "hidden": true,
@@ -353,7 +353,7 @@
 
     "Bladeswarm": {
       "name": "Bladeswarm",
-      "color": -693331457,
+      "color": "FFCB9070",
       "edition": "Gloomhaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": true,

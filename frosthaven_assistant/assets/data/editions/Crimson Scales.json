@@ -8,7 +8,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
-      "color": "ddde8bff",
+      "color": "FFDDDE8B",
       "summons": {}
     },
     "Starslinger": {
@@ -16,7 +16,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
-      "color": "6d6fb3ff",
+      "color": "FF6D6FB3",
       "summons": {}
     },
     "FireKnight": {
@@ -24,7 +24,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [9,10,12,14,16,17,19,21,23],
       "hidden": true,
-      "color": "cd2127ff",
+      "color": "FFCD2127",
       "summons": {
         "Spotted Hound": {
           "level": 1,
@@ -46,7 +46,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [8, 9, 11, 12, 14, 15, 17, 18, 20],
       "hidden": true,
-      "color": "caad2eff",
+      "color": "FFCAAD2E",
       "summons": {
         "Metal Detector": {
           "level": 3,
@@ -65,7 +65,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [8,9,111,12,14,15,17,18,20],
       "hidden": true,
-      "color": "76c6c4ff",
+      "color": "FF76C6C4",
       "summons": {
         "Scout Dog": {
           "level": 1,
@@ -145,7 +145,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
-      "color": "63bd57ff",
+      "color": "FF63BD57",
       "summons": {
         "Blazing Fire": {
           "level": 1,
@@ -264,7 +264,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
-      "color": "e85a25ff",
+      "color": "FFE65925",
       "summons": {
         "Flailing Ivies": {
           "level": 1,
@@ -283,7 +283,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "color": "ce6d2fff",
+      "color": "FFCE6D2F",
       "summons": {}
     },
     "Bombard": {
@@ -291,7 +291,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "color": "a59886ff",
+      "color": "FFA59786",
       "summons": {}
     },
     "Luminary": {
@@ -299,7 +299,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "color": "bf9ecaff",
+      "color": "ffbf9eca",
       "summons": {
         "Gleaming Squid": {
           "level": 9,
@@ -314,7 +314,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [7,8,9,10,12,13,14,15,17],
       "hidden": true,
-      "color": "a04aa5ff",
+      "color": "ffa04aa5",
       "summons": {}
     },
     "Ruinmaw": {
@@ -322,7 +322,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "color": "c12729ff",
+      "color": "ffc12729",
       "summons": {}
     },
     "AmberAegis": {
@@ -330,7 +330,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [12, 14, 17 ,19, 22, 24, 27, 29, 32],
       "hidden": true,
-      "color": "f89521ff",
+      "color": "fff89521",
       "summons": {
         "Venator tarantula": {
           "level": 7,
@@ -351,7 +351,7 @@
       "edition": "Crimson Scales",
       "hitpoints": [7, 8, 9, 12, 13, 14, 15, 17],
       "hidden": true,
-      "color": "79bcdaff",
+      "color": "ff79bcda",
       "summons": {
         "Clockwork Soldier": {
           "level": 1,

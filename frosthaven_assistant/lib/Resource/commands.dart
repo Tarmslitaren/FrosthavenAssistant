@@ -276,3 +276,23 @@ class SetLevelCommand extends Command {
   }
 }
 
+class SetCharacterLevelCommand extends Command {
+  final GameState _gameState = getIt<GameState>();
+  int _previousState = 0;
+  int level;
+  final CharacterState characterState;
+
+  SetCharacterLevelCommand(this.level, this.characterState);
+
+  @override
+  void execute() {
+    _previousState = characterState.level.value;
+    characterState.level.value = level;
+  }
+
+  @override
+  void undo() {
+    characterState.level.value = _previousState;
+  }
+}
+

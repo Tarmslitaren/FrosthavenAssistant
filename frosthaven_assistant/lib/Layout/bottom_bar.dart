@@ -11,12 +11,22 @@ Widget createLevelWidget(BuildContext context) {
 
   var textStyle = const TextStyle(
       //fontFamily: 'Majalla',
-      color: Colors.black87,
-      fontWeight: FontWeight.bold,
+      color: Colors.white,
+      //fontWeight: FontWeight.bold,
       //backgroundColor: Colors.transparent.withAlpha(100),
-      fontSize: 15,
+      fontSize: 15.5,
       shadows: [
-        Shadow(offset: Offset(1, 1), color: Colors.white)
+        Shadow(
+          offset: Offset(1.0, 1.0),
+          blurRadius: 3.0,
+          color: Colors.black
+        ),
+        Shadow(
+          offset: Offset(1.0, 1.0),
+          blurRadius: 8.0,
+          color: Colors.black
+        ),
+        //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
       ]);
 
   return GestureDetector(
@@ -71,8 +81,11 @@ Widget createBottomBar(BuildContext context) {
   return Container(
       height: 40,
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        image: const DecorationImage(
+        //color: Theme.of(context).primaryColor,
+        color: Colors.black,
+        image: DecorationImage(
+            colorFilter:  ColorFilter.mode(Colors.black.withOpacity(0.85),
+                BlendMode.dstATop),
             image: AssetImage('assets/images/psd/frosthaven-bar.png'),
             //fit: BoxFit.fitHeight,
             repeat: ImageRepeat.repeat),
