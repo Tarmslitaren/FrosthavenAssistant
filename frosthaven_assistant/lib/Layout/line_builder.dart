@@ -18,16 +18,20 @@ double getIconHeight(String iconToken, double height) {
   return height;
 }
 
-EdgeInsetsGeometry? getMarginForToken(String iconToken, double height, bool mainLine) {
+EdgeInsetsGeometry? getMarginForToken(String iconToken, double height, bool mainLine, CrossAxisAlignment alignment) {
+  double margin = 0.5;
+  if(alignment != CrossAxisAlignment.center) {
+    margin = 0.1;
+  }
   if (iconToken.contains("aoe")) {
-    return EdgeInsets.only(left: 0.5 * height, right: 0.5 * height);
+    return EdgeInsets.only(left: margin * height, right: margin * height);
   }
   if(mainLine && (iconToken == "attack" ||
       iconToken == "heal" ||
       iconToken == "loot" ||
       iconToken == "shield" ||
       iconToken == "move")){
-    return EdgeInsets.only(left: 0.5 * height, right: 0.5 * height);
+    return EdgeInsets.only(left: margin * height, right: margin * height);
   }
   if(iconToken == "air" ||
       iconToken == "earth"||
@@ -137,12 +141,18 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
         //TODO: if + check if move/attack/range and change calculations
         //TODO: if attributes has line of %muddle% etc. add muddle icon etc to attack line
         //TODO: do for all conditions + jump, pierce, add target  etc.
-
-        //TODO: handle special case positioning of text/icons
+        
 
         if (isIconPart) {
           //create token part
           String iconToken = line.substring(partStartIndex, i);
+          String iconGfx = iconToken;
+          if(left) {
+            RegExp regEx = RegExp(r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
+            if(regEx.hasMatch(_tokens[iconToken]!) == true){
+              iconGfx += "-medium-black";
+            }
+          }
           if (iconToken == "use") { //put use gfx on top of previous and add ':'
             WidgetSpan part = textPartList.removeLast() as WidgetSpan;
             Image lastImage = (part.child as Container).child as Image;
@@ -155,7 +165,7 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
                     Image(
                       height: styleToUse.fontSize! * 1.2,
                       //alignment: Alignment.topCenter,
-                      image: AssetImage("assets/images/abilities/$iconToken.png"),)
+                      image: AssetImage("assets/images/abilities/$iconGfx.png"),)
                   ],
                 )));
             textPartList.add(TextSpan(text: ": ", style: styleToUse));
@@ -165,11 +175,11 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
             String? iconTokenText = _tokens[iconToken];
             textPartList.add(TextSpan(text: iconTokenText, style: styleToUse));
             bool mainLine = styleToUse == normalStyle;
-            EdgeInsetsGeometry? margin = getMarginForToken(iconToken, height, mainLine);
+            EdgeInsetsGeometry? margin = getMarginForToken(iconToken, height, mainLine, alignment);
             Widget child = Image(
               height: height,
               //alignment: Alignment.topCenter,
-              image: AssetImage("assets/images/abilities/$iconToken.png"),
+              image: AssetImage("assets/images/abilities/$iconGfx.png"),
             );
             if (margin != null){
               child = Container(

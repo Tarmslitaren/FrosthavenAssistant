@@ -27,8 +27,7 @@ class CharacterClass {
       radix = 16;
     }
     int value = int.parse(colorValue, radix: radix);
-    Color color = Color(value); //TODO: test both hex and regular int values
-    //TODO: have a second color value for background (or use same but muted?)
+    Color color = Color(value);
 
     return CharacterClass(name, healthByLevel, edition, color, hidden);
   }

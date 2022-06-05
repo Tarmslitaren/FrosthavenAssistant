@@ -72,7 +72,6 @@ flutter:
     - assets/data/editions/
     - assets/images/abilities/ #for use with monster ability card
     - assets/images/attack/ #modifier deck
-    #- assets/images/class-bgs/ #not gonna use these
     - assets/images/conditions/ #should find better versions of these to scale
     - assets/images/class-icons/ #find better versions of these
     - assets/images/monsters/ #portraits
@@ -80,8 +79,6 @@ flutter:
     - assets/images/psd/
     - assets/images/bg/
     - assets/images/
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
