@@ -45,7 +45,7 @@ EdgeInsetsGeometry? getMarginForToken(String iconToken, double height, bool main
   return null;
 }
 
-Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment, double scale) {
+Widget createLines(List<String> strings, bool left, bool flying, CrossAxisAlignment alignment, double scale) {
   const Map<String, String> _tokens = {
     "attack": "Attack",
     "move": "Move",
@@ -176,6 +176,9 @@ Widget createLines(List<String> strings, bool left, CrossAxisAlignment alignment
             textPartList.add(TextSpan(text: iconTokenText, style: styleToUse));
             bool mainLine = styleToUse == normalStyle;
             EdgeInsetsGeometry? margin = getMarginForToken(iconToken, height, mainLine, alignment);
+            if(iconToken == "move" && flying){
+              iconGfx = "flying";
+            }
             Widget child = Image(
               height: height,
               //alignment: Alignment.topCenter,

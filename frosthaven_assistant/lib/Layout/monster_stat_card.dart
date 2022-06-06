@@ -187,6 +187,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                         widget.data.levels[_level].normal!
                                             .attributes,
                                         true,
+                                        widget.data.flying,
                                         CrossAxisAlignment.end,
                                         scale),
                                   ]))
@@ -203,6 +204,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                         widget.data.levels[_level].boss!
                                             .attributes,
                                         true,
+                                        widget.data.flying,
                                         CrossAxisAlignment.end,
                                         scale),
                                     Row(
@@ -214,6 +216,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                               widget.data.levels[_level].boss!
                                                   .special1,
                                               false,
+                                              widget.data.flying,
                                               CrossAxisAlignment.start,
                                               scale),
                                         ]),
@@ -226,6 +229,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                               widget.data.levels[_level].boss!
                                                   .special2,
                                               false,
+                                              widget.data.flying,
                                               CrossAxisAlignment.start,
                                               scale),
                                         ])
@@ -270,10 +274,33 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               child: createLines(
                                   widget.data.levels[_level].elite!.attributes,
                                   false,
+                                  widget.data.flying,
                                   CrossAxisAlignment.start,
                                   scale),
                             )
-                          : Container()
+                          : Container(),
+                      widget.data.levels[_level].boss == null
+                          ? widget.data.flying
+                              ? Positioned(
+                          height: 20 * tempScale * scale,
+                                  left: 94.0 * tempScale * scale,
+                                  top: 45.0 * tempScale * scale,
+                                  child: const Image(
+                                    image: AssetImage(
+                                        "assets/images/psd/flying-stat.png"),
+                                  ))
+                              : Container()
+                          : widget.data.flying
+                              ? Positioned(
+                        height: 20 * tempScale * scale,
+                                  left: 31.0 * tempScale * scale,
+                                  top: 56.0 * tempScale * scale,
+                                  child: const Image(
+                                    image: AssetImage(
+                                        "assets/images/psd/flying-stat.png"),
+                                  ),
+                                )
+                              : Container(),
                     ],
                   ));
             }));

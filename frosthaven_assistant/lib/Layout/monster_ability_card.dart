@@ -27,7 +27,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   _MonsterAbilityCardWidgetState createState() =>
       _MonsterAbilityCardWidgetState();
 
-  static Widget buildFront(MonsterAbilityCardModel? card, double scale) {
+  static Widget buildFront(MonsterAbilityCardModel? card, MonsterModel data, double scale) {
     String initText = card!.initiative.toString();
     if (initText.length == 1) {
       initText = "0" + initText;
@@ -125,7 +125,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 //width: 176 * scale * tempScale, //prolly unnecessary
                 //color: Colors.amber,
                 child: createLines(
-                    card.lines, false, CrossAxisAlignment.center, scale),
+                    card.lines, false, data.flying, CrossAxisAlignment.center, scale),
               ),
             )
           ],
@@ -232,7 +232,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
           return GestureDetector(
             onTap: () {
               //open deck menu
-              openDialog(context, AbilityCardMenu(monsterAbilityState: deckk));
+              openDialog(context, AbilityCardMenu(monsterAbilityState: deckk, monsterData: widget.data,));
 
               setState(() {});
             },
@@ -245,7 +245,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 //switchInCurve: Curves.easeInBack,
                 //switchOutCurve: Curves.easeInBack.flipped,
                 child: _gameState.roundState.value == RoundState.playTurns
-                    ? MonsterAbilityCardWidget.buildFront(card, scale)
+                    ? MonsterAbilityCardWidget.buildFront(card, widget.data, scale)
                     : MonsterAbilityCardWidget.buildRear(scale, _deckSize),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);
             //CurvedAnimation(parent: null, curve: Curves.easeIn)

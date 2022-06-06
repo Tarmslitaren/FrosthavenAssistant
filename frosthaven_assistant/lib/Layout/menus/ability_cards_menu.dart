@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
+import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/monster_ability_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:great_list_view/great_list_view.dart';
@@ -12,9 +13,10 @@ import '../../services/service_locator.dart';
 
 class Item extends StatelessWidget {
   final MonsterAbilityCardModel data;
+  final MonsterModel monsterData;
   final bool revealed;
 
-  const Item({Key? key, required this.data, required this.revealed})
+  const Item({Key? key, required this.data, required this.revealed, required this.monsterData})
       : super(key: key);
 
   @override
@@ -24,7 +26,7 @@ class Item extends StatelessWidget {
     late final double height;
 
     child = revealed
-        ? MonsterAbilityCardWidget.buildFront(data, scale)
+        ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale)
         : MonsterAbilityCardWidget.buildRear(scale, -1);
     height = 120 * tempScale * scale;
 
@@ -34,10 +36,11 @@ class Item extends StatelessWidget {
 }
 
 class AbilityCardMenu extends StatefulWidget {
-  const AbilityCardMenu({Key? key, required this.monsterAbilityState})
+  const AbilityCardMenu({Key? key, required this.monsterAbilityState, required this.monsterData})
       : super(key: key);
 
   final MonsterAbilityState monsterAbilityState;
+  final MonsterModel monsterData;
 
   @override
   _AbilityCardMenuState createState() => _AbilityCardMenuState();
@@ -129,6 +132,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
                   )
                 : Item(
                     data: item,
+                    monsterData: widget.monsterData,
                     revealed: isRevealed(item) || allOpen == true),
             listController: controller,
             //scrollController: ScrollController(),
