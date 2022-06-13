@@ -91,14 +91,17 @@ List<Map<String, int>> getStatTokens(Monster monster, bool elite) {
 }
 
 int? parseIntValue(String input) {
+  log("input: "+input);
   //get the value:
   int lastIndex = input.length;
   for( int i = lastIndex; i < input.length; i++) {
     if(input[i]== " "){
       lastIndex = i;
+      break;
     }
   }
   String nr = input.substring(2, lastIndex);
+  log("nr: "+nr);
   String sign = input.substring(1, 2);
   bool minus = sign == "-";
   bool plus = sign == "+";
@@ -119,6 +122,8 @@ int? parseIntValue(String input) {
 
 
 String applyMonsterStats(String line, Monster monster) {
+  //log("monster: " + monster.id);
+  //log("line: "+line);
   List<String> tokens = [];
   List<String> eTokens = [];
   var normalTokens = getStatTokens(monster, false);
@@ -145,16 +150,24 @@ String applyMonsterStats(String line, Monster monster) {
         continue; //skip one round
       } else {
         isIconPart = true;
-
       }
     }
-    if(lastIconToken.isNotEmpty && isIconPart == false && (line[i] == '%' || i == line.length-1)){
+    //log("line1.5: "+line.substring(0, i));
+   // log("isIconPart: "+isIconPart.toString());
+    //log("line[i]: "+line[i]);
+    //when to do calculations: only after a token that can have a modifiable value
+    if(lastIconToken.isNotEmpty && isIconPart == false && (line[i] == '%' || i == line.length-1 ||
+        (line[i] == " "
+            && line[i+1] == "%") //TODO: this is wrong. should ckeck regexp not a number?
+    )){
       //parse this part
       int? normalResult;
       int? eliteResult;
-
       //we are assuming a token is followed eiter by a value or text. not both. TODO: examine if this is indeed correct
+      //log("line2: "+line);
       String textPart = line.substring(lastNonIconStartIndex, i+1);
+      //log("line3: "+line);
+      //log("textpart: "+textPart);
 
       if (lastIconToken == "attack") {
         RegExp regEx = RegExp(r"(?=.*[a-z])");
