@@ -13,7 +13,7 @@ import '../../services/service_locator.dart';
 
 class Item extends StatelessWidget {
   final MonsterAbilityCardModel data;
-  final MonsterModel monsterData;
+  final Monster monsterData;
   final bool revealed;
 
   const Item({Key? key, required this.data, required this.revealed, required this.monsterData})
@@ -24,9 +24,11 @@ class Item extends StatelessWidget {
     double scale = getScaleByReference(context);
     late final Widget child;
     late final double height;
+    final GameState _gameState = getIt<GameState>();
 
+    //TODO: the level should be linked to monster data / stats and not general level
     child = revealed
-        ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale)
+        ? MonsterAbilityCardWidget.buildFront(data, monsterData, _gameState.level.value, scale)
         : MonsterAbilityCardWidget.buildRear(scale, -1);
     height = 120 * tempScale * scale;
 
@@ -40,7 +42,7 @@ class AbilityCardMenu extends StatefulWidget {
       : super(key: key);
 
   final MonsterAbilityState monsterAbilityState;
-  final MonsterModel monsterData;
+  final Monster monsterData;
 
   @override
   _AbilityCardMenuState createState() => _AbilityCardMenuState();

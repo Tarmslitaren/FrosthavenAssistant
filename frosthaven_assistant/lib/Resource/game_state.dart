@@ -112,11 +112,10 @@ enum MonsterType {
 }
 
 class MonsterInstance {
-  MonsterInstance(this.standeeNr, this.health, this.maxHealth, this.isElite, this.type);
+  MonsterInstance(this.standeeNr, this.health, this.maxHealth, this.type);
   final int standeeNr;
   final int health;
   final int maxHealth;
-  final bool isElite;
   final MonsterType type;
   //list of conditions
 
@@ -147,6 +146,25 @@ class Monster extends ListItemData{
   final ListItemState state = ListItemState.chooseInitiative;
   final int level;
   late final MonsterAbilityState deck; //for ease of reference
+
+  bool hasElites() {
+    for (var instance in monsterInstances) {
+      if(instance.type == MonsterType.elite) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  //includes boss
+  bool hasNormal() {
+    for (var instance in monsterInstances) {
+      if(instance.type != MonsterType.elite) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   void nextRound(){
     if(deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle){

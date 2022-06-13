@@ -16,9 +16,7 @@ import 'menus/main_menu.dart';
 double tempScale = 0.8;
 
 class MonsterAbilityCardWidget extends StatefulWidget {
-  //final double height;
-  //final double borderWidth = 2;
-  final MonsterModel data;
+  final Monster data;
 
   const MonsterAbilityCardWidget({Key? key, required this.data})
       : super(key: key);
@@ -27,7 +25,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   _MonsterAbilityCardWidgetState createState() =>
       _MonsterAbilityCardWidgetState();
 
-  static Widget buildFront(MonsterAbilityCardModel? card, MonsterModel data, double scale) {
+  static Widget buildFront(MonsterAbilityCardModel? card, Monster data, int level, double scale) {
     String initText = card!.initiative.toString();
     if (initText.length == 1) {
       initText = "0" + initText;
@@ -125,7 +123,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 //width: 176 * scale * tempScale, //prolly unnecessary
                 //color: Colors.amber,
                 child: createLines(
-                    card.lines, false, data.flying, CrossAxisAlignment.center, scale),
+                    card.lines, false, true, data, CrossAxisAlignment.center, scale),
               ),
             )
           ],
@@ -215,19 +213,21 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
         builder: (context, value, child) {
           MonsterAbilityCardModel? card;
           if (_gameState.roundState.value == RoundState.playTurns) {
-            card = _gameState.getDeck(widget.data.deck)!.discardPile.peek;
+            card = _gameState.getDeck(widget.data.type.deck)!.discardPile.peek;
           }
 
           //get size for back
           var deckk;
           _deckSize = 8;
           for (var deck in _gameState.currentAbilityDecks) {
-            if (deck.name == widget.data.deck) {
+            if (deck.name == widget.data.type.deck) {
               _deckSize = deck.drawPile.size();
               deckk = deck;
               break;
             }
           }
+
+          int level = _gameState.level.value;
 
           return GestureDetector(
             onTap: () {
@@ -245,7 +245,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 //switchInCurve: Curves.easeInBack,
                 //switchOutCurve: Curves.easeInBack.flipped,
                 child: _gameState.roundState.value == RoundState.playTurns
-                    ? MonsterAbilityCardWidget.buildFront(card, widget.data, scale)
+                    ? MonsterAbilityCardWidget.buildFront(card, widget.data, level, scale)
                     : MonsterAbilityCardWidget.buildRear(scale, _deckSize),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);
             //CurvedAnimation(parent: null, curve: Curves.easeIn)

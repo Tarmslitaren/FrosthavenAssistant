@@ -31,7 +31,7 @@ class Item extends StatelessWidget {
           scale; //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else if (data is Monster) {
       Monster monster = data as Monster;
-      child = MonsterWidget(data: monster.type);
+      child = MonsterWidget(data: monster);
       height = 120 *tempScale*
           scale; //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else {

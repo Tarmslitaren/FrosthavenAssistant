@@ -14,7 +14,7 @@ import 'monster_stat_card.dart';
 double tempScale = 0.8;
 
 class MonsterWidget extends StatefulWidget {
-  final MonsterModel data;
+  final Monster data;
 
   const MonsterWidget(
       {Key? key,
@@ -64,7 +64,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                     //fit: BoxFit.contain,
                     height: height,
                     width: height,
-                    image: AssetImage("assets/images/monsters/${widget.data.gfx}.png"),
+                    image: AssetImage("assets/images/monsters/${widget.data.type.gfx}.png"),
                     //width: widget.height*0.8,
                   ),
                   Container(
@@ -73,7 +73,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                       alignment: Alignment.bottomCenter,
                     child: Text(
                       textAlign: TextAlign.center,
-                      widget.data.display,
+                      widget.data.type.display,
                       style: TextStyle(
                           fontFamily: 'Pirata',
                           color: Colors.white,
