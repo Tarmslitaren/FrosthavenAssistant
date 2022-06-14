@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-import 'package:scaled_app/scaled_app.dart';
+//import 'package:scaled_app/scaled_app.dart';
 
 import 'Layout/menus/main_menu.dart';
 

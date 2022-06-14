@@ -21,7 +21,7 @@ class CharacterWidget extends StatefulWidget {
 
 class _CharacterWidgetState extends State<CharacterWidget> {
   final GameState _gameState = getIt<GameState>();
-  late CharacterState _characterState;
+  late Character _character;
   final _initTextFieldController = TextEditingController();
 
   @override
@@ -30,7 +30,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
     for (var character in _gameState.currentList) {
       if (character is Character &&
           character.characterClass.name == widget.characterClass.name) {
-        _characterState = character.characterState;
+        _character = character;
       }
     }
     _initTextFieldController.clear();
@@ -70,7 +70,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           openDialog(
             context,
             Dialog(
-              child: SetCharacterLevelMenu(characterState: _characterState),
+              child: SetCharacterLevelMenu(character: _character),
             ),
           );
           setState(() {});
@@ -175,7 +175,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                 width: 25 * scale,
                                 margin: EdgeInsets.only(left: 10 * scale),
                                 child: Text(
-                                  _characterState.initiative.toString(),
+                                  _character.characterState.initiative.toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontFamily: 'Pirata',
@@ -212,12 +212,12 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                         ),
                       ),
                       ValueListenableBuilder<int>(
-                          valueListenable: _characterState.level,
+                          valueListenable: _character.characterState.health, //not working?
                           builder: (context, value, child) {
                             return Container(
                                 margin: EdgeInsets.only(left: 10 * scale),
                                 child: Text(
-                                  'health: ${_characterState.health.value.toString()} / ${widget.characterClass.healthByLevel[_characterState.level.value - 1].toString()}',
+                                  'health: ${_character.characterState.health.value.toString()} / ${widget.characterClass.healthByLevel[_character.characterState.level.value - 1].toString()}',
                                   style: TextStyle(
                                       fontFamily: 'Pirata',
                                       color: Colors.white,

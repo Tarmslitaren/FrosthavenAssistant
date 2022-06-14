@@ -35,7 +35,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
   void initState() {
     super.initState();
     //TODO: handle special rules level changes for specific monster types.
-    _level = widget.data.level;
+    _level = widget.data.level; //is this the right start?
   }
 
   @override
@@ -78,7 +78,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         child: ValueListenableBuilder<int>(
             valueListenable: _gameState.level,
             builder: (context, value, child) {
-              _level = widget.data.level;
+              _level = _gameState.level.value;// widget.data.level;
               return Container(
                   margin: EdgeInsets.all(2 * scale * tempScale),
                   child: Stack(

@@ -34,7 +34,7 @@ dependencies:
   get_it: ^6.0.0
   #implicitly_animated_reorderable_list: ^0.4.2
   great_list_view: ^0.1.4 #will need to hack two columns for this.
-  scaled_app: ^0.2.0 # wont work well for my use case
+  #scaled_app: ^0.2.0 # wont work well for my use case.
   #dropdown_search: ^4.0.1 this was absolute trash
   #searchable_dropdown: ^1.1.3 not nullsafe wtf, why this is still up
   search_choices: ^2.0.20
@@ -42,6 +42,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  objectbox: ^1.5.0 #saving and loading library
 
 
 dev_dependencies:
@@ -73,7 +74,7 @@ flutter:
     - assets/images/abilities/ #for use with monster ability card
     - assets/images/attack/ #modifier deck
     - assets/images/conditions/ #should find better versions of these to scale
-    - assets/images/class-icons/ #find better versions of these
+    - assets/images/class-icons/ #should find better versions of these
     - assets/images/monsters/ #portraits
     - assets/images/summon/
     - assets/images/psd/

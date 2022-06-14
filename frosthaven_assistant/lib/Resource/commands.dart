@@ -188,6 +188,7 @@ class SetScenarioCommand extends Command {
       if (item is Character) {
         newList.add(item);
         item.characterState.initiative = 0;
+        item.characterState.health.value = item.characterClass.healthByLevel[item.characterState.level.value-1];
         //TODO: clear all other shit
       }
       if (item is Monster) {
@@ -279,20 +280,24 @@ class SetLevelCommand extends Command {
 class SetCharacterLevelCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   int _previousState = 0;
+  int _previousHealth = 0;
   int level;
-  final CharacterState characterState;
+  final Character character;
 
-  SetCharacterLevelCommand(this.level, this.characterState);
+  SetCharacterLevelCommand(this.level, this.character);
 
   @override
   void execute() {
-    _previousState = characterState.level.value;
-    characterState.level.value = level;
+    _previousState = character.characterState.level.value;
+    _previousHealth = character.characterState.health.value;
+    character.characterState.level.value = level;
+    character.characterState.health.value = character.characterClass.healthByLevel[level-1];
   }
 
   @override
   void undo() {
-    characterState.level.value = _previousState;
+    character.characterState.level.value = _previousState;
+    character.characterState.health.value = _previousHealth;
   }
 }
 

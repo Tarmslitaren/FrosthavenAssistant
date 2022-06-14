@@ -8,9 +8,9 @@ import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 
 class SetCharacterLevelMenu extends StatefulWidget {
-  const SetCharacterLevelMenu({Key? key, required this.characterState}) : super(key: key);
+  const SetCharacterLevelMenu({Key? key, required this.character}) : super(key: key);
 
-  final CharacterState characterState;
+  final Character character;
 
   @override
   _SetCharacterLevelMenuState createState() => _SetCharacterLevelMenuState();
@@ -29,7 +29,7 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
-          bool isCurrentlySelected = nr == widget.characterState.level.value;
+          bool isCurrentlySelected = nr == widget.character.characterState.level.value;
           String text = nr.toString();
           return SizedBox(
             width: 32,
@@ -44,7 +44,7 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
-                      _gameState.action(SetCharacterLevelCommand(nr, widget.characterState));
+                      _gameState.action(SetCharacterLevelCommand(nr, widget.character));
                     }
                     //Navigator.pop(context);
                   },
