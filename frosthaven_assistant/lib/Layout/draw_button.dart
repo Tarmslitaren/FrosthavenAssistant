@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/commands.dart';
 
+import '../Resource/game_methods.dart';
 import '../Resource/game_state.dart';
 import '../services/service_locator.dart';
 
@@ -28,7 +29,7 @@ class _DrawButtonState extends State<DrawButton> {
 
   void onPressed() {
     if (_gameState.roundState.value == RoundState.chooseInitiative) {
-      if (_gameState.canDraw()) {
+      if (GameMethods.canDraw()) {
         _gameState.action(DrawCommand());
       }
     } else {

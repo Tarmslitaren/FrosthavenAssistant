@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:great_list_view/great_list_view.dart';
 
 import '../Resource/action_handler.dart';
+import '../Resource/game_methods.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
 
@@ -64,7 +65,7 @@ class _MainListState extends State<MainList> {
 
   void sortList() {
     setState(() {
-      _gameState.sortByInitiative();
+      GameMethods.sortByInitiative();
     });
   }
 

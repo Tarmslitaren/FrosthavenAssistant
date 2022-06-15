@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 
@@ -47,7 +48,7 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
   }
 
   bool _characterAlreadyAdded(String newCharacter) {
-    var characters = _gameState.getCurrentCharacters();
+    var characters = GameMethods.getCurrentCharacters();
     for (var character in characters) {
       if (character.id == newCharacter){
         return true;

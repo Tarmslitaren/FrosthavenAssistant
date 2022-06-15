@@ -91,7 +91,7 @@ List<Map<String, int>> getStatTokens(Monster monster, bool elite) {
 }
 
 int? parseIntValue(String input) {
-  log("input: "+input);
+  //log("input: "+input);
   //get the value:
   int lastIndex = input.length;
   for( int i = lastIndex; i < input.length; i++) {
@@ -101,7 +101,7 @@ int? parseIntValue(String input) {
     }
   }
   String nr = input.substring(2, lastIndex);
-  log("nr: "+nr);
+  //log("nr: "+nr);
   String sign = input.substring(1, 2);
   bool minus = sign == "-";
   bool plus = sign == "+";

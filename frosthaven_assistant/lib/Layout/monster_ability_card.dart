@@ -10,6 +10,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Model/monster.dart';
 import '../Resource/action_handler.dart';
+import '../Resource/game_methods.dart';
 import 'line_builder.dart';
 import 'menus/main_menu.dart';
 
@@ -183,7 +184,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
   void initState() {
     super.initState();
     for (var deck in _gameState.currentAbilityDecks) {
-      if (deck.name == widget.data.deck) {
+      if (deck.name == widget.data.type.deck) {
         _deckSize = deck.drawPile.size();
         break;
       }
@@ -213,7 +214,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
         builder: (context, value, child) {
           MonsterAbilityCardModel? card;
           if (_gameState.roundState.value == RoundState.playTurns) {
-            card = _gameState.getDeck(widget.data.type.deck)!.discardPile.peek;
+            card = GameMethods.getDeck(widget.data.type.deck)!.discardPile.peek;
           }
 
           //get size for back

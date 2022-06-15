@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../../Resource/commands.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 
@@ -28,7 +29,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
         valueListenable: _gameState.solo,
         builder: (context, value, child) {
           bool isCurrentlySelected = nr == _gameState.level.value;
-          bool isRecommended = _gameState.getRecommendedLevel() == nr;
+          bool isRecommended = GameMethods.getRecommendedLevel() == nr;
           Color color = Colors.transparent;
           if (isRecommended) {
             color = Colors.grey;

@@ -1,5 +1,6 @@
 import '../Model/MonsterAbility.dart';
 import '../services/service_locator.dart';
+import 'card_stack.dart';
 import 'game_state.dart';
 
 class MonsterAbilityState{
@@ -24,5 +25,14 @@ class MonsterAbilityState{
   void draw(){
     //put top of draw pile on discard pile
     discardPile.push(drawPile.pop());
+  }
+
+  @override
+  String toString() {
+    return '{'
+        '"name": "$name", '
+        '"drawPile": ${drawPile.toString()}, '
+        '"discardPile": ${discardPile.toString()} '
+        '}';
   }
 }

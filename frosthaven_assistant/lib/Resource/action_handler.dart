@@ -24,6 +24,7 @@ class ActionHandler {
     if(commandIndex.value >= 0) {
       commands[commandIndex.value].undo();
       commandIndex.value--;
+      getIt<GameState>().save(); //save after each action ok?
     }
   }
 
@@ -31,6 +32,7 @@ class ActionHandler {
     if(commandIndex.value < commands.length-1) {
       commandIndex.value++;
       commands[commandIndex.value].execute();
+      getIt<GameState>().save(); //save after each action ok?
     }
   }
 
@@ -42,5 +44,6 @@ class ActionHandler {
     if(commands.length-1 > commandIndex.value) {
       commands.removeRange(commandIndex.value + 1, commands.length - 1);
     }
+    getIt<GameState>().save(); //save after each action ok?
   }
 }

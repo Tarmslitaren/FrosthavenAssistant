@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/draw_button.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 
+import '../Resource/game_methods.dart';
 import '../Resource/game_state.dart';
 import '../services/service_locator.dart';
 import 'menus/main_menu.dart';
@@ -67,7 +68,7 @@ Widget createLevelWidget(BuildContext context) {
             valueListenable: _gameState.level,
             builder: (context, value, child) {
               return Text(
-                  "level: ${_gameState.level.value} trap: ${_gameState.getTrapValue()} hazard: ${_gameState.getHazardValue()} xp: +${_gameState.getXPValue()} coin: x${_gameState.getCoinValue()}",
+                  "level: ${_gameState.level.value} trap: ${GameMethods.getTrapValue()} hazard: ${GameMethods.getHazardValue()} xp: +${GameMethods.getXPValue()} coin: x${GameMethods.getCoinValue()}",
               style: textStyle,);
             })
       ],

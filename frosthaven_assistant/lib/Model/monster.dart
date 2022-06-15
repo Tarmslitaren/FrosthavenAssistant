@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class MonsterModel {
   MonsterModel(this.name, this.display, this.gfx, this.hidden, this.flying,
     this.deck,
@@ -111,26 +113,3 @@ class MonsterStatsModel {
     return MonsterStatsModel(health, move, attack, range, attributes, immunities, special1, special2);
   }
 }
-
-/*
-"edition": "JotL",
-      "deck": "Basic Giant Viper",
-      "hidden": true,
-      "count": 10,
-      "levels": [
-        {
-          "level": 0,
-          "normal": {
-            "health": 2,
-            "move": 2,
-            "attack": 1,
-            "attributes": [ "%poison%" ]
-          },
-          "elite": {
-            "health": 3,
-            "move": 2,
-            "attack": 2,
-            "attributes": [ "%poison%" ]
-          }
-        },
- */

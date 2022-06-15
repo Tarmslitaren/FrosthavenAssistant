@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 
@@ -23,7 +24,7 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
 
   @override
   Widget build(BuildContext context) {
-    List<Character> currentCharacters = _gameState.getCurrentCharacters();
+    List<Character> currentCharacters = GameMethods.getCurrentCharacters();
     return Dialog(
         child: Stack(children: [
           Column(

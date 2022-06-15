@@ -6,3 +6,7 @@ final getIt = GetIt.instance;
 void setupGetIt() {
   getIt.registerLazySingleton<GameState>(() => GameState());
 }
+
+void setupGetItPreMade(GameState gameState) {
+  getIt.registerLazySingleton<GameState>(() => gameState);
+}

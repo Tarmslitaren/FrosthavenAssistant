@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Resource/action_handler.dart';
 import '../Model/character_class.dart';
 import '../Model/monster.dart';
 import '../services/service_locator.dart';
+import 'game_methods.dart';
 import 'game_state.dart';
 
 
@@ -14,17 +15,17 @@ class DrawCommand extends Command {
 
   @override
   void execute() {
-    _gameState.drawAbilityCards();
-    _gameState.sortByInitiative();
+    GameMethods.drawAbilityCards();
+    GameMethods.sortByInitiative();
     _gameState.round.value++;
-    _gameState.setRoundState(RoundState.playTurns);
+    GameMethods.setRoundState(RoundState.playTurns);
   }
 
   @override
   void undo() {
-    _gameState.unDrawAbilityCards();
+    GameMethods.unDrawAbilityCards();
     _gameState.round.value--;
-    _gameState.setRoundState(RoundState.chooseInitiative);
+    GameMethods.setRoundState(RoundState.chooseInitiative);
     //TODO: un draw the cards (need to save the random nr used. unsort the list
   }
 }
@@ -42,16 +43,17 @@ class NextRoundCommand extends Command {
         item.nextRound();
       }
     }
-    _gameState.updateElements();
-    _gameState.setRoundState(RoundState.chooseInitiative);
-    _gameState.sortCharactersFirst();
+    GameMethods.shuffleDecksIfNeeded();
+    GameMethods.updateElements();
+    GameMethods.setRoundState(RoundState.chooseInitiative);
+    GameMethods.sortCharactersFirst();
 
     //TODO: a million more things: save a bunch of state: all current initiatives and monster deck states
   }
 
   @override
   void undo() {
-    _gameState.setRoundState(RoundState.playTurns);
+    GameMethods.setRoundState(RoundState.playTurns);
     //TODO: a million more things: reapply a bunch of state: all current initiatives and monster deck states
   }
 }
@@ -192,10 +194,10 @@ class SetScenarioCommand extends Command {
         //TODO: clear all other shit
       }
       if (item is Monster) {
-        item.deck.shuffle();
         //TODO: clear all other shit
       }
     }
+    GameMethods.shuffleDecks();
     List<String> monsters =
         _gameState.modelData.value!.scenarios[_scenario]!.monsters;
     for (String monster in monsters) {
@@ -203,10 +205,10 @@ class SetScenarioCommand extends Command {
     }
 
     _gameState.currentList = newList;
-    _gameState.updateElements();
-    _gameState.updateElements(); //twice to make sure they are inert.
-    _gameState.setRoundState(RoundState.chooseInitiative);
-    _gameState.sortCharactersFirst();
+    GameMethods.updateElements();
+    GameMethods.updateElements(); //twice to make sure they are inert.
+    GameMethods.setRoundState(RoundState.chooseInitiative);
+    GameMethods.sortCharactersFirst();
     _gameState.scenario.value = _scenario;
   }
 

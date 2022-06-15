@@ -1,17 +1,19 @@
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Model/campaign.dart';
 import '../Model/character_class.dart';
 import 'action_handler.dart';
+import 'card_stack.dart';
 import 'commands.dart';
 import 'monster_ability_state.dart';
 
@@ -19,6 +21,8 @@ enum ElementState{
   full,
   half,
   inert
+
+
 
 }
 
@@ -43,8 +47,28 @@ class FigureState {
 }
 
 class CharacterState extends FigureState {
+
+  CharacterState();
+
   int initiative = 0;
   final xp = ValueNotifier<int>(0);
+
+  @override
+  String toString() {
+    return '{'
+        '"initiative": $initiative, '
+        '"health": ${health.value}, '
+        '"level": ${level.value}, '
+        '"xp": ${xp.value} '
+        '}';
+  }
+
+  CharacterState.fromJson(Map<String, dynamic> json) {
+    initiative = json['initiative'];
+    xp.value = json['xp'];
+    health.value = json["health"];
+    level.value = json["level"];
+  }
 }
 
 class ListItemData {
@@ -56,53 +80,39 @@ class Character extends ListItemData{
   Character(this.characterState, this.characterClass) {
     id = characterClass.name;
   }
-  final CharacterState characterState;
-  final CharacterClass characterClass;
-  final ListItemState state = ListItemState.chooseInitiative;
+  late final CharacterState characterState;
+  late final CharacterClass characterClass;
+  //late ListItemState state = ListItemState.chooseInitiative;
   void nextRound(){
     characterState.initiative = 0;
   }
-}
-
-class CardStack<E> {
-  final _list = <E>[];
-
-  void push(E value) => _list.add(value);
-
-  E pop() => _list.removeLast();
-
-  E get peek => _list.last;
-
-  bool get isEmpty => _list.isEmpty;
-  bool get isNotEmpty => _list.isNotEmpty;
 
   @override
-  String toString() => _list.toString();
-  void init(List<E> list) {
-    _list.addAll(list);
-  }
-  void shuffle() {
-    _list.shuffle(Random());
-  }
-  void undoShuffle() { //mun djö!
-    //TODO: how to undo and redo random stuff? I need to use a set random and somehow turn back time
-    //so basically save whole list state for every command and overwrite instead of random shuffle
-
+  String toString() {
+    return '{'
+        '"id": "$id", '
+        '"characterState": ${characterState.toString()}, '
+        '"characterClass": "${characterClass.name}" '
+        //'"state": ${state.index} '
+        '}';
   }
 
-  int size() {
-    return _list.length;
+  Character.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    //state = ListItemState.values[json['state']];
+    characterState = CharacterState.fromJson(json['characterState']);
+    String className = json['characterClass'];
+    for (var item in getIt<GameState>().modelData.value!.characters ){
+      if (item.name == className){
+        characterClass = item;
+        break;
+      }
+    }
   }
 
-  List<E> getList(){ //TODO: try to return a copy for safety?
-    return _list;
-  }
 
-  void setList(List<E> list) {
-    _list.clear();
-    _list.addAll(list);
-  }
 }
+
 
 enum MonsterType {
   normal,
@@ -127,7 +137,7 @@ enum ListItemState {
   chooseInitiative, //gray
   waitingTurn, //hopeful
   myTurn, //conditions reminder (above in list is gray)
-  doneTurn, //gray, expire conditoins
+  doneTurn, //gray, expire conditions
 }
 
 class Monster extends ListItemData{
@@ -139,13 +149,12 @@ class Monster extends ListItemData{
       }
     }
 
-    getIt<GameState>().addAbilityDeck(this);
+    GameMethods.addAbilityDeck(this);
   }
   late final MonsterModel type;
-  final List<MonsterInstance> monsterInstances = [];
-  final ListItemState state = ListItemState.chooseInitiative;
-  final int level;
-  late final MonsterAbilityState deck; //for ease of reference
+  late List<MonsterInstance> monsterInstances = [];
+  //late final ListItemState state = ListItemState.chooseInitiative;
+  int level = 0;
 
   bool hasElites() {
     for (var instance in monsterInstances) {
@@ -167,17 +176,44 @@ class Monster extends ListItemData{
   }
 
   void nextRound(){
-    if(deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle){
-      deck.shuffle();
+  }
+
+  @override
+  String toString() {
+    return '{'
+        '"id": "$id", '
+        '"type": "${type.name}", '
+        '"monsterInstances": ${monsterInstances.toString()}, '
+        //'"state": ${state.index}, '
+        '"level": $level '
+        '}';
+  }
+
+  Monster.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    level = json['level'];
+    String modelName = json['type'];
+    //state = ListItemState.values[json["state"]];
+
+    for(var item in getIt<GameState>().modelData.value!.monsters) {
+      if(item.name == modelName){
+        type = item;
+        break;
+      }
     }
+    monsterInstances = []; //TODO: later
+
   }
 }
 
 class GameState extends ActionHandler{
 
   GameState() {
-    fetchCampaignData("JotL");
-    //load save state; then call initlist command
+    init();
+  }
+
+  void init(){
+
     elementState.value[Elements.fire] = ElementState.inert;
     elementState.value[Elements.ice] = ElementState.inert;
     elementState.value[Elements.air] = ElementState.inert;
@@ -185,198 +221,181 @@ class GameState extends ActionHandler{
     elementState.value[Elements.light] = ElementState.inert;
     elementState.value[Elements.dark] = ElementState.inert;
 
+    fetchCampaignData("JotL");
   }
+
+
   fetchCampaignData(String campaign) async {
     final String response = await rootBundle.loadString('assets/data/editions/$campaign.json');
     final data = await json.decode(response);
     modelData.value = CampaignModel.fromJson(data);
 
-    action(InitListCommand([
+    /*action(InitListCommand([
       InitListCommand.createCharacter("Hatchet", 1)!,
       InitListCommand.createCharacter("Demolitionist", 4)!,
       createMonster("Zealot", 4)!,
       createMonster("Giant Viper (JotL)", level.value)!,
       createMonster("Rat Monstrosity", level.value)!,
-    ]));
+    ]));*/
+
+    load(); //load saved state from file.
   }
   //data
   final modelData = ValueNotifier<CampaignModel?>(null);
-  //TODO: load all the data, not just the one campaign. Data is anyway in same(ish) format, as some campaing items are merged (like classes and monsters) and only campaign in map, or list.
+  //TODO: load all the data, not just the one campaign. Data is anyway in same(ish) format, as some campaign items are merged (like classes and monsters) and only campaign in map, or list.
 
   //state
   final round = ValueNotifier<int>(0);
   final roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
-
-  void setRoundState(RoundState state) {
-    roundState.value = state;
-  }
 
   final level = ValueNotifier<int>(1);
   final solo = ValueNotifier<bool>(false);
   final scenario = ValueNotifier<String>("");
 
   List<ListItemData> currentList = []; //has both monsters and characters
-  void sortCharactersFirst(){
-    late List<ListItemData> newList = List.from(currentList);
-    newList.sort((a, b) {
-
-      bool aIsChar = false;
-      bool bIsChar = false;
-      if(a is Character) {
-        aIsChar = true;
-      }
-      if(b is Character) {
-        bIsChar = true;
-      }
-      if (aIsChar && bIsChar) {
-        return 0;
-      }
-      if (bIsChar) {
-        return 1;
-      }
-      return -1;
-    }
-    );
-    currentList = newList;
-  }
-  void sortByInitiative(){
-
-    //hack:
-    late List<ListItemData> newList = List.from(currentList);
 
 
-    newList.sort((a, b) {
-      int aInitiative = 0;
-      int bInitiative = 0;
-      if(a is Character) {
-        aInitiative = a.characterState.initiative;
-      } else if (a is Monster) {
-        aInitiative = a.deck.discardPile.peek.initiative;
-      }
-      if(b is Character) {
-        bInitiative = b.characterState.initiative;
-      } else if (b is Monster) {
-        bInitiative = b.deck.discardPile.peek.initiative;
-      }
-      return aInitiative.compareTo(bInitiative);
-    }
-    );
-    currentList = newList;
-  }
-
-  List<Character> getCurrentCharacters(){
-    List<Character> characters = [];
-    for(ListItemData data in currentList) {
-      if(data is Character) {
-        characters.add(data);
-      }
-    }
-    return characters;
-  }
-
-  final currentAbilityDecks = <MonsterAbilityState>[]; //add to here when adding a monster type
-  void addAbilityDeck(Monster monster) {
-    for (MonsterAbilityState deck in currentAbilityDecks) {
-      if(deck.name == monster.type.deck) {
-        //add ref to monster (this code smells a bit though.)
-        monster.deck = deck;
-        return;
-      }
-    }
-    monster.deck = MonsterAbilityState(monster.type.deck);
-    currentAbilityDecks.add(monster.deck);
-  }
-
-  bool canDraw() {
-    for (var item in currentList) {
-      if(item is Character) {
-        if(item.characterState.initiative == 0) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  void drawAbilityCards(){
-    for(MonsterAbilityState deck in currentAbilityDecks) {
-      //TODO: don't draw if there are no monsters of the type
-      deck.draw();
-    }
-  }
-  void unDrawAbilityCards(){
-//TODO: implement
-  }
-
-  MonsterAbilityState? getDeck(String name) {
-    for (MonsterAbilityState deck in currentAbilityDecks) {
-      if (deck.name == name) {
-        return deck;
-      }
-    }
-  }
+  List<MonsterAbilityState> currentAbilityDecks = <MonsterAbilityState>[]; //add to here when adding a monster type
 
   //elements
   final elementState = ValueNotifier< Map<Elements, ElementState> >(HashMap());
-  void updateElements(){
-    for (var key in elementState.value.keys) {
-      if(elementState.value[key] == ElementState.full) {
-        elementState.value[key] = ElementState.half;
-      }
-      else if(elementState.value[key] == ElementState.half) {
-        elementState.value[key] = ElementState.inert;
-      }
-    }
-  }
 
-
-  int getTrapValue(){
-    return 2 + level.value;
-  }
-
-  int getHazardValue(){
-    return 1  + (level.value/3.0).ceil();
-  }
-
-  int getXPValue(){
-    return 4 + 2 * level.value;
-  }
-
-  int getCoinValue(){
-    if (level.value == 7) {
-      return 6;
-    }
-    return 2 + (level.value / 2.0).floor();
-  }
-
-  int getRecommendedLevel() {
-    double totalLevels = 0;
-    double nrOfCharaters = 0;
-    for (var item in currentList) {
-      if (item is Character) {
-        totalLevels+= item.characterState.level.value;
-        nrOfCharaters++;
-      }
-    }
-    if(nrOfCharaters == 0 ){
-      return 1;
-    }
-    if(solo.value == true) {
-      //Take the average level of all characters in the
-      // scenario, then add 1 before dividing by 2 and rounding
-      // up.
-      return ((totalLevels/nrOfCharaters+1.0)/2.0).ceil();
-
-    }
-    //scenario level is equal to
-    //the average level of the characters divided by 2
-    //(rounded up)
-    return (totalLevels/nrOfCharaters/2.0).ceil();
-  }
-
-  GameState? savedState; //load from file, save to file on interval/ app in background? or after any operation?
+  //GameState? savedState; //load from file, save to file on interval/ app in background? or after any operation?
 
   //config: TODO: move to own state
   final userScaling = ValueNotifier<double>(1.0);
   final showCalculated = ValueNotifier<bool>(true);
+
+  @override
+  String toString() {
+    Map<String, int> elements = {};
+    for( var key in elementState.value.keys) {
+      elements[key.index.toString()] = elementState.value[key]!.index;
+    }
+
+    print("kuken");
+    print(json.encode(elements));
+    return '{'
+        '"level": ${level.value}, '
+        '"solo": ${solo.value}, '
+        '"roundState": ${roundState.value.index}, '
+        '"round": ${round.value}, '
+        '"scenario": "${scenario.value}", '
+        '"currentList": ${currentList.toString()}, '
+        '"currentAbilityDecks": ${currentAbilityDecks.toString()}, '
+        '"elementState": ${json.encode(elements)} ' //didn't like the map?
+        '}';
+  }
+
+  Future<void> save() async {
+    //1 serialize to json
+    String value = toString();
+    const sharedPrefsKey = 'gameState';
+    bool _hasError = false;
+    bool _isWaiting = true;
+    //notifyListeners();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+        // save
+        // uncomment this to simulate an error-during-save
+        // if (_value > 3) throw Exception("Artificial Error");
+        await prefs.setString(sharedPrefsKey, value);
+      _hasError = false;
+    } catch (error) {
+      _hasError = true;
+    }
+    _isWaiting = false;
+    //notifyListeners();
+  }
+
+  Future<void> load() async {
+    //have to call after init or element state overridden
+
+    const sharedPrefsKey = 'gameState';
+    bool _hasError = false;
+    bool _isWaiting = true;
+    String value = "";
+    //notifyListeners();
+    // artificial delay so we can see the UI changes
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      value = prefs.getString(sharedPrefsKey) ?? "";
+      _hasError = false;
+    } catch (error) {
+      _hasError = true;
+    }
+    _isWaiting = false;
+
+    if (value.isNotEmpty){
+      Map<String, dynamic> data = jsonDecode(value);
+      level.value = data['level'] as int;
+      scenario.value = data['scenario'];// as String;
+      round.value = data['round'] as int;
+      roundState.value =  RoundState.values[data['roundState']];
+      solo.value = data['solo'] as bool; //TODO: does not update properly (because changing it is not a command
+      var list = data['currentList'] as List;
+      currentList.clear();
+      List<ListItemData> newList = [];
+      for (Map<String, dynamic> item in list){
+        if (item["characterClass"] != null) {
+          Character character = Character.fromJson(item);
+          //is character
+          newList.add(character);
+        } else if (item["type"] != null){
+          //is monster
+          Monster monster = Monster.fromJson(item);
+          newList.add(monster);
+
+        }
+        //create the objects
+        //add to currentList.
+      }
+      currentList = newList;
+
+      var decks = data['currentAbilityDecks'] as List;
+      currentAbilityDecks.clear();
+      for (Map<String, dynamic> item in decks){
+        MonsterAbilityState state = MonsterAbilityState(item["name"]);
+
+        List<MonsterAbilityCardModel> newDrawList = [];
+        List drawPile = item["drawPile"] as List;
+        for(var item in drawPile){
+          int nr = item["nr"];
+          for(var card in state.drawPile.getList()){
+            if(card.nr == nr){
+              newDrawList.add(card);
+            }
+          }
+        }
+        List<MonsterAbilityCardModel> newDiscardList = [];
+        for(var item in item["discardPile"] as List){
+          int nr = item["nr"];
+          for(var card in state.drawPile.getList()){
+            if(card.nr == nr){
+              newDiscardList.add(card);
+            }
+          }
+        }
+        state.drawPile.getList().clear();
+        state.discardPile.getList().clear();
+        state.drawPile.setList(newDrawList);
+        state.discardPile.setList(newDiscardList);
+
+
+        currentAbilityDecks.add(state);
+      }
+
+      Map elementData = data['elementState'];
+
+
+      elementState.value[Elements.fire] = ElementState.values[elementData[Elements.fire.index.toString()]];
+      elementState.value[Elements.ice] = ElementState.values[elementData[Elements.ice.index.toString()]];
+      elementState.value[Elements.air] = ElementState.values[elementData[Elements.air.index.toString()]];
+      elementState.value[Elements.earth] = ElementState.values[elementData[Elements.earth.index.toString()]];
+      elementState.value[Elements.light] = ElementState.values[elementData[Elements.light.index.toString()]];
+      elementState.value[Elements.dark] = ElementState.values[elementData[Elements.dark.index.toString()]];
+
+    }
+  }
+
 }

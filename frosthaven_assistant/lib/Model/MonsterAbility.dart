@@ -26,19 +26,28 @@ class MonsterAbilityDeckModel {
       for (int i = 3; i < card.length; i++) {
         lines.add(card[i] as String);
       }
-      cards.add(MonsterAbilityCardModel(title, nr, shuffle, initiative, lines));
+      cards.add(MonsterAbilityCardModel(title, nr, shuffle, initiative, lines, name));
     }
     return MonsterAbilityDeckModel(name, edition, cards);
   }
 }
 
 class MonsterAbilityCardModel {
-  MonsterAbilityCardModel(this.title, this.nr, this.shuffle, this.initiative, this.lines);
+  MonsterAbilityCardModel(this.title, this.nr, this.shuffle, this.initiative, this.lines, this.deck);
+  final String deck;
   final String title;
   final int nr;
   final bool shuffle;
   final int initiative; //or String
   final List<String> lines;
+
+  @override
+  String toString() {
+    return '{'
+        '"nr": $nr, '
+        '"deck": "$deck" '
+        '}';
+  }
 }
 /*
 {
