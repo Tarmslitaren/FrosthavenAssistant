@@ -70,7 +70,27 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
     return Container(
         width: 10,
         height: 160,
-        child: Stack(children: [
+        decoration: const BoxDecoration(
+          //color: Colors.black,
+          //borderRadius: BorderRadius.all(Radius.circular(8)),
+
+          /*border: Border.fromBorderSide(BorderSide(
+            color: Colors.blueGrey,
+            width: 10
+          )),*/
+          image: DecorationImage(
+              image: AssetImage('assets/images/bg/white_bg.png'),
+              fit: BoxFit.fitWidth,
+          ),
+        ),
+        child: Stack(
+            //alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'assets/images/bg/white_bg.png',
+                //height: 460,
+                fit: BoxFit.cover,
+              ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

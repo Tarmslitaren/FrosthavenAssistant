@@ -17,12 +17,39 @@ import 'card_stack.dart';
 import 'commands.dart';
 import 'monster_ability_state.dart';
 
+enum Condition{
+  stun,
+  immobilize,
+  disarm,
+  wound,
+  wound2,
+  muddle,
+  poison,
+  poison2,
+  poison3,
+  poison4,
+  bane,
+  brittle,
+  chill,
+  infect,
+  impair,
+  rupture,
+  strengthen,
+  invisible,
+  regenerate,
+  ward;
+
+  @override
+  String toString() {
+    return index.toString();
+  }
+
+}
+
 enum ElementState{
   full,
   half,
   inert
-
-
 
 }
 
@@ -40,26 +67,32 @@ enum RoundState{
   playTurns,
 }
 
-class FigureState {
-  final health = ValueNotifier<int>(0); //TODO: this is no good: instances? or does it work?
+class Figure {
+  final health = ValueNotifier<int>(0);
   final level = ValueNotifier<int>(1);
-  //array of conditions
+  final maxHealth = ValueNotifier<int>(0); //? //needed for the times you wanna set hp yourself, for special reasons
+  final conditions = ValueNotifier<List<Condition>>([]);
 }
 
-class CharacterState extends FigureState {
+class CharacterState extends Figure{
 
   CharacterState();
 
   int initiative = 0;
   final xp = ValueNotifier<int>(0);
 
+
   @override
   String toString() {
+    print("apanson");
+    print(conditions.value.toString());
     return '{'
         '"initiative": $initiative, '
         '"health": ${health.value}, '
+        '"maxHealth": ${maxHealth.value}, '
         '"level": ${level.value}, '
-        '"xp": ${xp.value} '
+        '"xp": ${xp.value}, '
+        '"conditions": ${conditions.value.toString()} '
         '}';
   }
 
@@ -68,6 +101,13 @@ class CharacterState extends FigureState {
     xp.value = json['xp'];
     health.value = json["health"];
     level.value = json["level"];
+    maxHealth.value = json["maxHealth"];
+
+    List<dynamic> condis = json["conditions"];
+
+    for(int item in condis){
+      conditions.value.add(Condition.values[item]);
+    }
   }
 }
 
@@ -121,15 +161,12 @@ enum MonsterType {
   //named
 }
 
-class MonsterInstance {
-  MonsterInstance(this.standeeNr, this.health, this.maxHealth, this.type);
+class MonsterInstance extends Figure{
+  MonsterInstance(this.standeeNr, this.type);
   final int standeeNr;
-  final int health;
-  final int maxHealth;
   final MonsterType type;
-  //list of conditions
 
-//mark expiring conditions
+//todo: mark expiring conditions
 
 }
 

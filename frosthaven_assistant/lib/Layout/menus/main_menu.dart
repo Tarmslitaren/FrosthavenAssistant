@@ -24,7 +24,6 @@ void openDialog(BuildContext context, Widget widget) {
 }
 
 Drawer createMainMenu(BuildContext context) {
-  String? _currentSelectedScenario;
   GameState _gameState = getIt<GameState>();
 
   return Drawer(
@@ -49,9 +48,6 @@ Drawer createMainMenu(BuildContext context) {
                 title: const Text('Undo'),
                 enabled: false,
                 onTap: () {
-// Update the state of the app
-// ...
-// Then close the drawer
                   Navigator.pop(context);
                 },
               ),

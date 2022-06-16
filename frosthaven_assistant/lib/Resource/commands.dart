@@ -76,18 +76,19 @@ class InitListCommand extends Command {
   }
 
   //helper to make the init list.
-  static Character? createCharacter(String name, int level) {
+  /*static Character? createCharacter(String name, int level) {
     for (CharacterClass characterClass
         in getIt<GameState>().modelData.value!.characters) {
       if (characterClass.name == name) {
         var characterState = CharacterState();
         characterState.level.value = level;
         characterState.health.value = characterClass.healthByLevel[level - 1];
+        characterState.maxHealth.value = characterState.health.value;
         return Character(characterState, characterClass);
       }
     }
     return null;
-  }
+  }*/
 }
 
 Monster? createMonster(String name, int level) {
@@ -133,6 +134,7 @@ class AddCharacterCommand extends Command {
         var characterState = CharacterState();
         characterState.level.value = level;
         characterState.health.value = characterClass.healthByLevel[level - 1];
+        characterState.maxHealth.value = characterState.health.value;
         character = Character(characterState, characterClass);
       }
     }
@@ -357,6 +359,7 @@ class SetCharacterLevelCommand extends Command {
     _previousHealth = character.characterState.health.value;
     character.characterState.level.value = level;
     character.characterState.health.value = character.characterClass.healthByLevel[level-1];
+    character.characterState.maxHealth.value = character.characterState.health.value;
   }
 
   @override
@@ -365,4 +368,64 @@ class SetCharacterLevelCommand extends Command {
     character.characterState.health.value = _previousHealth;
   }
 }
+
+class AddConditionCommand extends Command {
+  final Condition condition;
+  final Figure figure;
+  AddConditionCommand(this.condition, this.figure);
+  @override
+  void execute() {
+    List<Condition> newList = [];
+    newList.addAll(figure.conditions.value);
+    newList.add(condition);
+    figure.conditions.value = newList;
+  }
+
+  @override
+  void undo() {
+    List<Condition> newList = [];
+    newList.addAll(figure.conditions.value);
+    newList.remove(condition);
+    figure.conditions.value = newList;
+  }
+}
+
+class RemoveConditionCommand extends Command {
+  final Condition condition;
+  final Figure figure;
+  RemoveConditionCommand(this.condition, this.figure);
+  @override
+  void execute() {
+    List<Condition> newList = [];
+    newList.addAll(figure.conditions.value);
+    newList.remove(condition);
+    figure.conditions.value = newList;
+  }
+
+  @override
+  void undo() {
+    List<Condition> newList = [];
+    newList.addAll(figure.conditions.value);
+    newList.add(condition);
+    figure.conditions.value = newList;
+  }
+}
+
+
+class ChangeStatCommand extends Command {
+  final int change;
+  final ValueNotifier<int> stat;
+  ChangeStatCommand(this.change, this.stat );
+
+  @override
+  void execute() {
+    stat.value += change;
+  }
+
+  @override
+  void undo() {
+    stat.value -= change;
+  }
+}
+
 

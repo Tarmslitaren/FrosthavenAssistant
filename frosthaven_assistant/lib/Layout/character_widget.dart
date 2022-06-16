@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/main_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Model/character_class.dart';
@@ -49,6 +50,17 @@ class _CharacterWidgetState extends State<CharacterWidget> {
     });
   }
 
+  List<Image> createConditionList() {
+    List<Image> list = [];
+    for (var item in _character.characterState.conditions.value) {
+      Image image = Image(
+        image: AssetImage("assets/images/conditions/${item.name}.png"),
+      );
+      list.add(image);
+    }
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
@@ -70,7 +82,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           openDialog(
             context,
             Dialog(
-              child: SetCharacterLevelMenu(character: _character),
+              child: StatusMenu(
+                  figure: _character.characterState, character: _character),
             ),
           );
           setState(() {});
@@ -79,6 +92,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           //alignment: Alignment.centerLeft,
           children: [
             Container(
+              //background
               margin: EdgeInsets.all(2 * scale),
               width: 408 * scale,
               height: 58 * scale,
@@ -175,7 +189,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                 width: 25 * scale,
                                 margin: EdgeInsets.only(left: 10 * scale),
                                 child: Text(
-                                  _character.characterState.initiative.toString(),
+                                  _character.characterState.initiative
+                                      .toString(),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontFamily: 'Pirata',
@@ -195,40 +210,83 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                 Column(crossAxisAlignment: CrossAxisAlignment.start,
                     //align children to the left
                     children: [
-                      Container(
-                        margin:
-                            EdgeInsets.only(top: 10 * scale, left: 10 * scale),
-                        child: Text(
-                          widget.characterClass.name,
-                          style: TextStyle(
-                              fontFamily: 'Pirata',
-                              color: Colors.white,
-                              fontSize: 16 * scale,
-                              shadows: [
-                                Shadow(
-                                    offset: Offset(1 * scale, 1 * scale),
-                                    color: Colors.black)
-                              ]),
-                        ),
-                      ),
-                      ValueListenableBuilder<int>(
-                          valueListenable: _character.characterState.health, //not working?
-                          builder: (context, value, child) {
-                            return Container(
-                                margin: EdgeInsets.only(left: 10 * scale),
-                                child: Text(
-                                  'health: ${_character.characterState.health.value.toString()} / ${widget.characterClass.healthByLevel[_character.characterState.level.value - 1].toString()}',
+                      Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                                top: 10 * scale, left: 10 * scale),
+                            child: Text(
+                              widget.characterClass.name,
+                              style: TextStyle(
+                                  fontFamily: 'Pirata',
+                                  color: Colors.white,
+                                  fontSize: 16 * scale,
+                                  shadows: [
+                                    Shadow(
+                                        offset: Offset(1 * scale, 1 * scale),
+                                        color: Colors.black)
+                                  ]),
+                            ),
+                          ),
+                          ValueListenableBuilder<int>(
+                              valueListenable: _character.characterState.xp,
+                              builder: (context, value, child) {
+                                return Text(
+                                  _character.characterState.xp.value.toString(),
                                   style: TextStyle(
                                       fontFamily: 'Pirata',
-                                      color: Colors.white,
-                                      fontSize: 16 * scale,
+                                      color: Colors.blue,
+                                      fontSize: 14 * scale,
                                       shadows: [
                                         Shadow(
                                             offset:
                                                 Offset(1 * scale, 1 * scale),
                                             color: Colors.black)
                                       ]),
-                                ));
+                                );
+                              }),
+                          const Image(
+                            color: Colors.blue,
+                            image: AssetImage("assets/images/psd/xp.png"),
+                          ),
+                        ],
+                      ),
+                      ValueListenableBuilder<int>(
+                          valueListenable: _character.characterState.health,
+                          //not working?
+                          builder: (context, value, child) {
+                            return Container(
+                                margin: EdgeInsets.only(left: 10 * scale),
+                                child: Row(children: [
+                                  Image(
+                                    //fit: BoxFit.contain,
+                                    height: scaledHeight * 0.3,
+                                    image: const AssetImage(
+                                        "assets/images/blood.png"),
+                                  ),
+                                  Text(
+                                    '${_character.characterState.health.value.toString()} / ${widget.characterClass.healthByLevel[_character.characterState.level.value - 1].toString()}',
+                                    style: TextStyle(
+                                        fontFamily: 'Pirata',
+                                        color: Colors.white,
+                                        fontSize: 16 * scale,
+                                        shadows: [
+                                          Shadow(
+                                              offset:
+                                                  Offset(1 * scale, 1 * scale),
+                                              color: Colors.black)
+                                        ]),
+                                  ),
+                                  //add conditions here
+                                  ValueListenableBuilder<List<Condition>>(
+                                      valueListenable:
+                                          _character.characterState.conditions,
+                                      builder: (context, value, child) {
+                                        return Row(
+                                          children: createConditionList(),
+                                        );
+                                      }),
+                                ]));
                           })
                     ])
               ],
