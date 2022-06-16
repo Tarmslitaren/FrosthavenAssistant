@@ -4,7 +4,8 @@ class MonsterModel {
   MonsterModel(this.name, this.display, this.gfx, this.hidden, this.flying,
     this.deck,
     this.count,
-      this.levels
+      this.levels,
+      this.edition
       );
   final String name; //id
   final String deck;
@@ -13,9 +14,10 @@ class MonsterModel {
   final bool hidden;
   final bool flying;
   final int count;
+  final String edition;
   final List<MonsterLevelModel> levels;
 
-  factory MonsterModel.fromJson(Map<String, dynamic> data) {
+  factory MonsterModel.fromJson(Map<String, dynamic> data, String edition) {
     // note the explicit cast to String
     // this is required if robust lint rules are enabled
     final name = data['name'] as String;
@@ -44,7 +46,7 @@ class MonsterModel {
     for (var item in levels) {
       monsterLevelDataList.add(MonsterLevelModel.fromJson(item));
     }
-    return MonsterModel(name, display, gfx, hidden, flying, deck, count, monsterLevelDataList);
+    return MonsterModel(name, display, gfx, hidden, flying, deck, count, monsterLevelDataList, edition);
   }
 }
 

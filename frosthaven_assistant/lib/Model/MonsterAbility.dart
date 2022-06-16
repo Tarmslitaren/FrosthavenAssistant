@@ -52,7 +52,7 @@ class MonsterAbilityCardModel {
 /*
 {
       "name": "Chaos Demon",
-      "edition": "JotL",
+      "edition": "Jaws of the Lion",
       "cards": [
         ["Chilling Breath", 412, false, 13, "%move% - 1","*.........", "%attack% + 0 %aoe-triangle-2-side-with-black%","*.........", "%ice%%use%", "!*Any time a figure attacks the", "!*Chaos Demon this round,", "!*that figure suffers 2 damage." ],
         ["Heal Blast", 413, false, "01", "%move% + 1","*.........", "%attack% - 1", "^%range% 3", "%fire%%use%", "!%wound%" ],

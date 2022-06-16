@@ -90,7 +90,6 @@ class InitListCommand extends Command {
   }
 }
 
-//helper to make the init list. can be removed after saving works
 Monster? createMonster(String name, int level) {
   for (MonsterModel monster in getIt<GameState>().modelData.value!.monsters) {
     if (monster.name == name) {
@@ -152,6 +151,70 @@ class RemoveCharacterCommand extends Command {
     List<ListItemData> newList = [];
     for (var item in _gameState.currentList) {
       if (item is Character) {
+        bool remove = false;
+        for (var name in names) {
+          if (item.id == name.id) {
+            remove = true;
+            break;
+          }
+        }
+        if (!remove) {
+          newList.add(item);
+        }
+      } else {
+        newList.add(item);
+      }
+    }
+    _gameState.currentList = newList;
+  }
+
+  @override
+  void undo() {
+    //TODO: implement (and retain index)
+    //_gameState.currentList.add(_character);
+  }
+}
+
+
+class AddMonsterCommand extends Command {
+  final GameState _gameState = getIt<GameState>();
+  final String _name;
+  final int _level;
+  late Monster monster;
+
+  AddMonsterCommand(this._name, this._level) {
+    monster = createMonster(_name, _level)!;
+  }
+
+  @override
+  void execute() {
+    //add new character on top of list
+    List<ListItemData> newList = [];
+    for (var item in _gameState.currentList) {
+      newList.add(item);
+    }
+    newList.insert(0, monster);
+    _gameState.currentList = newList;
+  }
+
+  @override
+  void undo() {
+    _gameState.currentList.remove(monster);
+  }
+}
+
+class RemoveMonsterCommand extends Command {
+  final GameState _gameState = getIt<GameState>();
+  final List<Monster> names;
+  final List<Monster> _monsters = [];
+
+  RemoveMonsterCommand(this.names);
+
+  @override
+  void execute() {
+    List<ListItemData> newList = [];
+    for (var item in _gameState.currentList) {
+      if (item is Monster) {
         bool remove = false;
         for (var name in names) {
           if (item.id == name.id) {

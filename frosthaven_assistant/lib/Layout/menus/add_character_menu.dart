@@ -14,8 +14,6 @@ class AddCharacterMenu extends StatefulWidget {
 }
 
 class _AddCharacterMenuState extends State<AddCharacterMenu> {
-  // This holds a list of fiction users
-  // You can use data fetched from a database or a server as well
   // This list holds the data for the list view
   List<CharacterClass> _foundCharacters = [];
   final GameState _gameState = getIt<GameState>();
@@ -101,6 +99,11 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                               color: _characterAlreadyAdded(_foundCharacters[index].name)?
                                   Colors.grey : Colors.black
                           )),
+                          trailing: Text("(${_foundCharacters[index].edition})",
+                              style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Colors.grey
+                              )),
                           onTap: () {
                             //TODO: add level selection menu  (1-9) on top in this here menu.
                             if (!_characterAlreadyAdded(_foundCharacters[index].name)){

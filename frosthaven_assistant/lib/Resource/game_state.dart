@@ -273,8 +273,6 @@ class GameState extends ActionHandler{
       elements[key.index.toString()] = elementState.value[key]!.index;
     }
 
-    print("kuken");
-    print(json.encode(elements));
     return '{'
         '"level": ${level.value}, '
         '"solo": ${solo.value}, '

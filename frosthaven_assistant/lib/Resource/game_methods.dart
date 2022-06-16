@@ -170,6 +170,16 @@ class GameMethods {
     return characters;
   }
 
+  static List<Monster> getCurrentMonsters() {
+    List<Monster> monsters = [];
+    for (ListItemData data in _gameState.currentList) {
+      if (data is Monster) {
+        monsters.add(data);
+      }
+    }
+    return monsters;
+  }
+
   static void setRoundState(RoundState state) {
     _gameState.roundState.value = state;
   }

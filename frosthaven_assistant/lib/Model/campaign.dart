@@ -41,7 +41,7 @@ class CampaignModel {
     final monsters = data['monsters'] as List<dynamic>;
     List<MonsterModel> monsterDataList = [];
     for (var item in monsters) {
-      monsterDataList.add(MonsterModel.fromJson(item));
+      monsterDataList.add(MonsterModel.fromJson(item, edition));
     }
 
     List<CharacterClass> characterDataList = [];

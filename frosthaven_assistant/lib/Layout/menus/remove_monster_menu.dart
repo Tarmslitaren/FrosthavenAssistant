@@ -6,14 +6,14 @@ import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 
-class RemoveCharacterMenu extends StatefulWidget {
-  const RemoveCharacterMenu({Key? key}) : super(key: key);
+class RemoveMonsterMenu extends StatefulWidget {
+  const RemoveMonsterMenu({Key? key}) : super(key: key);
 
   @override
-  _RemoveCharacterMenuState createState() => _RemoveCharacterMenuState();
+  _RemoveMonsterMenuState createState() => _RemoveMonsterMenuState();
 }
 
-class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
+class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
   final GameState _gameState = getIt<GameState>();
 
   @override
@@ -24,7 +24,7 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
 
   @override
   Widget build(BuildContext context) {
-    List<Character> currentCharacters = GameMethods.getCurrentCharacters();
+    List<Monster> currentMonsters = GameMethods.getCurrentMonsters();
     return Dialog(
         child: Stack(children: [
           Column(
@@ -36,30 +36,30 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                 title: const Text("Remove All", style: TextStyle(fontSize: 18)),
                 onTap: () {
                   _gameState
-                      .action(RemoveCharacterCommand(currentCharacters)); //
+                      .action(RemoveMonsterCommand(currentMonsters)); //
                   Navigator.pop(context);
                 },
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: currentCharacters.length,
+                  itemCount: currentMonsters.length,
                   itemBuilder: (context, index) => ListTile(
                     leading: Image(
                       height: 30,
                       image: AssetImage(
-                          "assets/images/class-icons/${currentCharacters[index].id}.png"),
+                          "assets/images/monsters/${currentMonsters[index].type.gfx}.png"),
                     ),
-                    iconColor: currentCharacters[index].characterClass.color,
-                    title: Text(currentCharacters[index].id,
-                        style: TextStyle(fontSize: 18)),
-                    trailing: Text("(${currentCharacters[index].characterClass.edition})",
+                    //iconColor: currentCharacters[index].characterClass.color,
+                    title: Text(currentMonsters[index].type.display,
+                        style: const TextStyle(fontSize: 18)),
+                    trailing: Text("(${currentMonsters[index].type.edition})",
                         style: const TextStyle(
                             fontSize: 14,
                             color: Colors.grey
                         )),
                     onTap: () {
-                      _gameState.action(RemoveCharacterCommand(
-                          [currentCharacters[index]])); //
+                      _gameState.action(RemoveMonsterCommand(
+                          [currentMonsters[index]])); //
                       Navigator.pop(context);
                     },
                   ),

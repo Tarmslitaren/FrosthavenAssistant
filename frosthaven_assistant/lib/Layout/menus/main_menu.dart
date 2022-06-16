@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
@@ -11,6 +12,7 @@ import 'package:search_choices/search_choices.dart';
 import '../../Model/campaign.dart';
 import '../../Resource/commands.dart';
 import '../bottom_bar.dart';
+import 'add_monster_menu.dart';
 
 void openDialog(BuildContext context, Widget widget) {
   showDialog(context: context, builder: (BuildContext context) => widget);
@@ -95,17 +97,17 @@ Drawer createMainMenu(BuildContext context) {
               ),
               const Divider(),
               ListTile(
-                enabled: false,
                 title: const Text('Add Monsters'),
                 onTap: () {
                   Navigator.pop(context);
+                  openDialog(context, const AddMonsterMenu());
                 },
               ),
               ListTile(
                 title: const Text('Remove Monsters'),
-                enabled: false,
                 onTap: () {
                   Navigator.pop(context);
+                  openDialog(context, const RemoveMonsterMenu());
                 },
               ),
               const Divider(),
