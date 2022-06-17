@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/line_builder.dart';
 import 'package:frosthaven_assistant/Layout/menus/main_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
@@ -50,10 +51,11 @@ class _CharacterWidgetState extends State<CharacterWidget> {
     });
   }
 
-  List<Image> createConditionList() {
+  List<Image> createConditionList(double scale) {
     List<Image> list = [];
     for (var item in _character.characterState.conditions.value) {
       Image image = Image(
+        height: 16 * scale,
         image: AssetImage("assets/images/conditions/${item.name}.png"),
       );
       list.add(image);
@@ -207,12 +209,11 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                         }),
                   ]),
                 ),
-                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                Column(
+                    //crossAxisAlignment: CrossAxisAlignment.center,
                     //align children to the left
                     children: [
-                      Row(
-                        children: [
-                          Container(
+                      Container(
                             margin: EdgeInsets.only(
                                 top: 10 * scale, left: 10 * scale),
                             child: Text(
@@ -228,29 +229,6 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                   ]),
                             ),
                           ),
-                          ValueListenableBuilder<int>(
-                              valueListenable: _character.characterState.xp,
-                              builder: (context, value, child) {
-                                return Text(
-                                  _character.characterState.xp.value.toString(),
-                                  style: TextStyle(
-                                      fontFamily: 'Pirata',
-                                      color: Colors.blue,
-                                      fontSize: 14 * scale,
-                                      shadows: [
-                                        Shadow(
-                                            offset:
-                                                Offset(1 * scale, 1 * scale),
-                                            color: Colors.black)
-                                      ]),
-                                );
-                              }),
-                          const Image(
-                            color: Colors.blue,
-                            image: AssetImage("assets/images/psd/xp.png"),
-                          ),
-                        ],
-                      ),
                       ValueListenableBuilder<int>(
                           valueListenable: _character.characterState.health,
                           //not working?
@@ -283,14 +261,45 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                           _character.characterState.conditions,
                                       builder: (context, value, child) {
                                         return Row(
-                                          children: createConditionList(),
+                                          children: createConditionList(scale),
                                         );
                                       }),
                                 ]));
                           })
                     ])
               ],
-            ))
+            )),
+            Positioned(
+              top: 10*scale,
+                right: 75*scale + getMainListMargin(context),
+                child: Row(
+                  children: [
+                    ValueListenableBuilder<int>(
+                        valueListenable: _character.characterState.xp,
+                        builder: (context, value, child) {
+                          return Text(
+                            _character.characterState.xp.value.toString(),
+                            style: TextStyle(
+                                fontFamily: 'Pirata',
+                                color: Colors.blue,
+                                fontSize: 14 * scale,
+                                shadows: [
+                                  Shadow(
+                                      offset:
+                                      Offset(1 * scale, 1 * scale),
+                                      color: Colors.black)
+                                ]),
+                          );
+                        }),
+                    Image(
+                      height: 20.0*scale*tempScale,
+                      color: Colors.blue,
+                      image: const AssetImage(
+                          "assets/images/psd/xp.png"),
+                    ),
+                  ],
+                )
+            )
           ],
         ));
   }
