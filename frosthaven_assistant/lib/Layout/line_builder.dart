@@ -158,12 +158,12 @@ String applyMonsterStats(String line, Monster monster) {
     //when to do calculations: only after a token that can have a modifiable value
     if(lastIconToken.isNotEmpty && isIconPart == false && (line[i] == '%' || i == line.length-1 ||
         (line[i] == " "
-            && line[i+1] == "%") //TODO: this is wrong. should ckeck regexp not a number?
+            && line[i+1] == "%") //TODO: this is wrong. should ckeck regexp not a number? - other solution: make sure to end string at nr end and use ! to right align
     )){
       //parse this part
       int? normalResult;
       int? eliteResult;
-      //we are assuming a token is followed eiter by a value or text. not both. TODO: examine if this is indeed correct
+      //we are assuming a token is followed eiter by a value or text. not both. TODO: examine if this is indeed correct (or change solution)
       //log("line2: "+line);
       String textPart = line.substring(lastNonIconStartIndex, i+1);
       //log("line3: "+line);
@@ -173,12 +173,12 @@ String applyMonsterStats(String line, Monster monster) {
         RegExp regEx = RegExp(r"(?=.*[a-z])");
         for (var item in normalTokens) {
           if (regEx.hasMatch(item.keys.first) == true) {
-            tokens.add("%" + item.keys.first + "%");
+            tokens.add("%" + item.keys.first + "%"); //TODO: only add relevant tokens (i.e conditions that apply on attack)
           }
         }
         for (var item in eliteTokens) {
           if (regEx.hasMatch(item.keys.first) == true) {
-            eTokens.add("%" + item.keys.first + "%");
+            eTokens.add("%" + item.keys.first + "%");//TODO: only add relevant tokens (i.e conditions that apply on attack)
           }
         }
 
@@ -236,7 +236,7 @@ String applyMonsterStats(String line, Monster monster) {
         for (var item in tokens) {
           newStringPart+= "|" + item; //disable text printout for conditions
         }
-        if (elite != null) {
+        if (elite != null) { //TODO: this si a shitty solution creating lots of problems. instead create anew string with ! to denote right hand side. and make sure to end it after the end of the nr.
           newStringPart += "/" + eliteResult.toString();
           for (var item in eTokens) {
             newStringPart+= "|" + item;

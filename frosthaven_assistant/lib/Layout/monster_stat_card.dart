@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -8,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../Model/monster.dart';
 import '../services/service_locator.dart';
 import 'line_builder.dart';
+import 'menus/main_menu.dart';
 import 'monster_ability_card.dart';
 
 double tempScale = 0.8;
@@ -78,7 +80,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         child: ValueListenableBuilder<int>(
             valueListenable: _gameState.level,
             builder: (context, value, child) {
-              _level = _gameState.level.value;// widget.data.level;
+              _level = _gameState.level.value; // widget.data.level;
               return Container(
                   margin: EdgeInsets.all(2 * scale * tempScale),
                   child: Stack(
@@ -120,23 +122,26 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      widget.data.type.levels[_level].normal!.health
+                                      widget.data.type.levels[_level].normal!
+                                          .health
                                           .toString(),
                                       style: leftStyle),
                                   Text(
-                                      widget.data.type.levels[_level].normal!.move
+                                      widget
+                                          .data.type.levels[_level].normal!.move
                                           .toString(),
                                       style: leftStyle),
                                   Text(
-                                      widget.data.type.levels[_level].normal!.attack
+                                      widget.data.type.levels[_level].normal!
+                                          .attack
                                           .toString(),
                                       style: leftStyle),
                                   Text(
                                       widget.data.type.levels[_level].normal
                                                   ?.range !=
                                               0
-                                          ? widget
-                                              .data.type.levels[_level].normal!.range
+                                          ? widget.data.type.levels[_level]
+                                              .normal!.range
                                               .toString()
                                           : "-",
                                       style: leftStyle),
@@ -151,7 +156,8 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      widget.data.type.levels[_level].boss!.health
+                                      widget
+                                          .data.type.levels[_level].boss!.health
                                           .toString(),
                                       style: leftStyle),
                                   Text(
@@ -159,14 +165,16 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                           .toString(),
                                       style: leftStyle),
                                   Text(
-                                      widget.data.type.levels[_level].boss!.attack
+                                      widget
+                                          .data.type.levels[_level].boss!.attack
                                           .toString(),
                                       style: leftStyle),
                                   Text(
-                                      widget.data.type.levels[_level].boss?.range !=
+                                      widget.data.type.levels[_level].boss
+                                                  ?.range !=
                                               0
-                                          ? widget
-                                              .data.type.levels[_level].boss!.range
+                                          ? widget.data.type.levels[_level]
+                                              .boss!.range
                                               .toString()
                                           : "",
                                       style: leftStyle),
@@ -215,8 +223,8 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                         children: [
                                           Text("1:", style: specialStyle),
                                           createLines(
-                                              widget.data.type.levels[_level].boss!
-                                                  .special1,
+                                              widget.data.type.levels[_level]
+                                                  .boss!.special1,
                                               false,
                                               false,
                                               widget.data,
@@ -229,8 +237,8 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                         children: [
                                           Text("2:", style: specialStyle),
                                           createLines(
-                                              widget.data.type.levels[_level].boss!
-                                                  .special2,
+                                              widget.data.type.levels[_level]
+                                                  .boss!.special2,
                                               false,
                                               false,
                                               widget.data,
@@ -247,22 +255,26 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      widget.data.type.levels[_level].elite!.health
+                                      widget.data.type.levels[_level].elite!
+                                          .health
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      widget.data.type.levels[_level].elite!.move
+                                      widget
+                                          .data.type.levels[_level].elite!.move
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      widget.data.type.levels[_level].elite!.attack
+                                      widget.data.type.levels[_level].elite!
+                                          .attack
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      widget.data.type.levels[_level].elite?.range !=
+                                      widget.data.type.levels[_level].elite
+                                                  ?.range !=
                                               0
-                                          ? widget
-                                              .data.type.levels[_level].elite!.range
+                                          ? widget.data.type.levels[_level]
+                                              .elite!.range
                                               .toString()
                                           : "-",
                                       style: rightStyle),
@@ -276,7 +288,8 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               right: 0.0,
                               top: 24.0 * tempScale * scale,
                               child: createLines(
-                                  widget.data.type.levels[_level].elite!.attributes,
+                                  widget.data.type.levels[_level].elite!
+                                      .attributes,
                                   false,
                                   false,
                                   widget.data,
@@ -287,7 +300,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                       widget.data.type.levels[_level].boss == null
                           ? widget.data.type.flying
                               ? Positioned(
-                          height: 20 * tempScale * scale,
+                                  height: 20 * tempScale * scale,
                                   left: 94.0 * tempScale * scale,
                                   top: 45.0 * tempScale * scale,
                                   child: const Image(
@@ -297,7 +310,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               : Container()
                           : widget.data.type.flying
                               ? Positioned(
-                        height: 20 * tempScale * scale,
+                                  height: 20 * tempScale * scale,
                                   left: 31.0 * tempScale * scale,
                                   top: 56.0 * tempScale * scale,
                                   child: const Image(
@@ -306,6 +319,61 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   ),
                                 )
                               : Container(),
+                      Positioned(
+                          bottom: 1 * scale * tempScale,
+                          left: 1 * scale * tempScale,
+                          child: Container(
+                              width: 25 * scale,
+                              height: 25 * scale,
+                              child: IconButton(
+                                icon: Image.asset('assets/images/psd/add.png'),
+                                onPressed: () {
+                                  openDialog(
+                                      context,
+                                      Stack(children: [
+                                        Positioned(
+                                          //TODO: how to get a good grip on position
+                                          //left: 100, // left coordinate
+                                          //top: 100,  // top coordinate
+                                          child: Dialog(
+                                            child: AddStandeeMenu(
+                                              elite: false,
+                                              monster: widget.data,
+                                            ),
+                                          ),
+                                        )
+                                      ]));
+                                },
+                              ))),
+                      widget.data.type.levels[_level].boss == null
+                          ? Positioned(
+                              bottom: 1 * scale * tempScale,
+                              right: 1 * scale * tempScale,
+                              child: Container(
+                                  width: 25 * scale,
+                                  height: 25 * scale,
+                                  child: IconButton(
+                                    icon: Image.asset(
+                                        'assets/images/psd/add.png'),
+                                    onPressed: () {
+                                      openDialog(
+                                          context,
+                                          Stack(children: [
+                                            Positioned(
+                                              //TODO: how to get a good grip on position
+                                              //left: 100, // left coordinate
+                                              //top: 100,  // top coordinate
+                                              child: Dialog(
+                                                child: AddStandeeMenu(
+                                                  elite: true,
+                                                  monster: widget.data,
+                                                ),
+                                              ),
+                                            )
+                                          ]));
+                                    },
+                                  )))
+                          : Container(),
                     ],
                   ));
             }));

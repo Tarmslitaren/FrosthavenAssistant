@@ -83,10 +83,17 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           //TODO: open the whole state change menu
           openDialog(
             context,
-            Dialog(
-              child: StatusMenu(
-                  figure: _character.characterState, character: _character),
-            ),
+            Stack(
+                children: [
+                Positioned(
+                  //TODO: how to get a good grip on position
+                //left: 100, // left coordinate
+                //top: 100,  // top coordinate
+                child:Dialog(
+                  child: StatusMenu(
+                      figure: _character.characterState, character: _character),
+                ),
+              )])
           );
           setState(() {});
         },

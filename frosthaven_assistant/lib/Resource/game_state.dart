@@ -84,8 +84,6 @@ class CharacterState extends Figure{
 
   @override
   String toString() {
-    print("apanson");
-    print(conditions.value.toString());
     return '{'
         '"initiative": $initiative, '
         '"health": ${health.value}, '
@@ -162,11 +160,47 @@ enum MonsterType {
 }
 
 class MonsterInstance extends Figure{
-  MonsterInstance(this.standeeNr, this.type);
-  final int standeeNr;
-  final MonsterType type;
+  MonsterInstance(this.standeeNr, this.type, Monster monster) {
+    if (type == MonsterType.boss) {
+      maxHealth.value = monster.type.levels[monster.level].boss!.health;
+    } else if (type == MonsterType.elite) {
+      maxHealth.value = monster.type.levels[monster.level].elite!.health;
+    } else if (type == MonsterType.normal) {
+      maxHealth.value = monster.type.levels[monster.level].normal!.health;
+    }
+    health.value = maxHealth.value;
+    level.value = monster.level;
+    name = monster.type.gfx;
+  }
+  late final int standeeNr;
+  late final MonsterType type;
+  late final String name;
 
-//todo: mark expiring conditions
+  @override
+  String toString() {
+    return '{'
+        '"health": ${health.value}, '
+        '"maxHealth": ${maxHealth.value}, '
+        '"level": ${level.value}, '
+        '"standeeNr": $standeeNr, '
+        '"name": "$name", '
+        '"type": ${type.index}, '
+        '"conditions": ${conditions.value.toString()} '
+        '}';
+  }
+
+  MonsterInstance.fromJson(Map<String, dynamic> json) {
+    standeeNr = json["standeeNr"];
+    health.value = json["health"];
+    level.value = json["level"];
+    maxHealth.value = json["maxHealth"];
+    name = json["name"];
+    type = MonsterType.values[json["type"]];
+    List<dynamic> condis = json["conditions"];
+    for(int item in condis){
+      conditions.value.add(Condition.values[item]);
+    }
+  }
 
 }
 
@@ -189,12 +223,12 @@ class Monster extends ListItemData{
     GameMethods.addAbilityDeck(this);
   }
   late final MonsterModel type;
-  late List<MonsterInstance> monsterInstances = [];
+  final monsterInstances = ValueNotifier<List<MonsterInstance>>([]);
   //late final ListItemState state = ListItemState.chooseInitiative;
   int level = 0;
 
   bool hasElites() {
-    for (var instance in monsterInstances) {
+    for (var instance in monsterInstances.value) {
       if(instance.type == MonsterType.elite) {
         return true;
       }
@@ -204,7 +238,7 @@ class Monster extends ListItemData{
 
   //includes boss
   bool hasNormal() {
-    for (var instance in monsterInstances) {
+    for (var instance in monsterInstances.value) {
       if(instance.type != MonsterType.elite) {
         return true;
       }
@@ -220,7 +254,7 @@ class Monster extends ListItemData{
     return '{'
         '"id": "$id", '
         '"type": "${type.name}", '
-        '"monsterInstances": ${monsterInstances.toString()}, '
+        '"monsterInstances": ${monsterInstances.value.toString()}, '
         //'"state": ${state.index}, '
         '"level": $level '
         '}';
@@ -238,8 +272,16 @@ class Monster extends ListItemData{
         break;
       }
     }
-    monsterInstances = []; //TODO: later
 
+    List<dynamic> instanceList = json["monsterInstances"];
+
+    List<MonsterInstance> newList = [];
+    for(Map<String, dynamic> item in instanceList){
+      var instance = MonsterInstance.fromJson(item);
+      newList.add(instance);
+
+    }
+    monsterInstances.value = newList;
   }
 }
 

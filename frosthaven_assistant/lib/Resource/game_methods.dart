@@ -160,6 +160,19 @@ class GameMethods {
     _gameState.currentList = newList;
   }
 
+  static void sortMonsterInstances(List<MonsterInstance> instances){
+    instances.sort((a, b) {
+      if(a.type == MonsterType.elite && b.type != MonsterType.elite){
+        return -1;
+      }
+      if(b.type == MonsterType.elite && a.type != MonsterType.elite){
+        return 1;
+      }
+      return a.standeeNr.compareTo(b.standeeNr);
+    }
+    );
+  }
+
   static List<Character> getCurrentCharacters() {
     List<Character> characters = [];
     for (ListItemData data in _gameState.currentList) {

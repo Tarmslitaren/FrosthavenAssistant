@@ -427,5 +427,28 @@ class ChangeStatCommand extends Command {
     stat.value -= change;
   }
 }
+class AddStandeeCommand extends Command {
+  final int nr;
+  final Monster monster;
+  final MonsterType type;
+  AddStandeeCommand(this.nr, this.monster, this.type);
+
+  @override
+  void execute() {
+    MonsterInstance instance = MonsterInstance(nr, type, monster);
+    List<MonsterInstance> newList = [];
+    newList.addAll(monster.monsterInstances.value);
+    newList.add(instance);
+    GameMethods.sortMonsterInstances(newList);
+    monster.monsterInstances.value = newList;
+  }
+
+  @override
+  void undo() {
+    // TODO: implement undo
+  }
+
+}
+
 
 
