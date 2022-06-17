@@ -110,7 +110,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
               ),
             ),
             Align(
-                // alignment: Alignment.centerLeft,
+                //alignment: Alignment.centerLeft,
                 child: Row(
               children: [
                 Container(
@@ -210,7 +210,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                   ]),
                 ),
                 Column(
-                    //crossAxisAlignment: CrossAxisAlignment.center,
+                  //mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     //align children to the left
                     children: [
                       Container(
