@@ -181,53 +181,58 @@ class _MainListState extends State<MainList> {
     return _gameState.currentList.length;
   }
 
+  List<Widget> generateChildren() {
+    final generatedChildren = List<Widget>.generate(
+      //TODO: this is probably super inefficient and also blocks animation
+      _gameState.currentList.length,
+      (index) => Container(
+          key: Key(_gameState.currentList[index].toString()),
+          child: Item(data: _gameState.currentList[index])),
+    );
+    return generatedChildren;
+  }
+
+  Widget defaultBuildDraggableFeedback(
+      BuildContext context, BoxConstraints constraints, Widget child) {
+    return Transform(
+      transform: Matrix4.rotationZ(0),
+      alignment: FractionalOffset.topLeft,
+      child: Material(
+        elevation: 6.0,
+        color: Colors.transparent,
+        borderRadius: BorderRadius.zero,
+        child: Card(
+            //shadowColor: Colors.red,
+            color: Colors.transparent,
+            child: ConstrainedBox(constraints: constraints, child: child)),
+      ),
+    );
+  }
+
   Widget buildList() {
     return Theme(
         data: Theme.of(context).copyWith(
-            canvasColor: Colors.transparent,
-            //needed to make background transparent if reorder is enabled
-            backgroundColor: Colors.transparent,
-            cardColor: Colors.transparent,
-            focusColor: Colors.transparent,
-            dialogBackgroundColor: Colors.transparent,
-            primaryColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            accentColor: Colors.transparent,
-            applyElevationOverlayColor: false,
-            buttonColor: Colors.transparent,
-            disabledColor: Colors.transparent,
-            hintColor: Colors.transparent,
-            cardTheme: CardTheme(
-              color: Colors.transparent,
-              surfaceTintColor: Colors.transparent,
-            )
-//TODO: how to make move widget not have white bg?
-            //other styles
+            //not needed
             ),
         child: ValueListenableBuilder<int>(
             valueListenable: _gameState.commandIndex,
             builder: (context, value, child) {
               double scale = getScaleByReference(context);
-              final generatedChildren = List<Widget>.generate(
-                _gameState.currentList.length,
-                (index) => Container(
-                    key: Key(_gameState.currentList[index].toString()),
-                    child: Item(data: _gameState.currentList[index])),
-              );
               return Container(
                   alignment: Alignment.topCenter,
                   child: Scrollbar(
                     controller: scrollController,
                     child: ReorderableWrap(
                       runAlignment: WrapAlignment.start,
+                      //TODO: try not to reassign the list all the time. see if that helps with te hanimations
                       scrollAnimationDuration: Duration(milliseconds: 500),
                       reorderAnimationDuration: Duration(milliseconds: 500),
                       maxMainAxisCount: getItemsCanFitOneColumn(),
-                      //TODO: does not update list (blocked by ValueListenableBuilder?)
 
                       direction: Axis.vertical,
                       //scrollDirection: Axis.horizontal,
                       //ignorePrimaryScrollController: true,
+                      buildDraggableFeedback: defaultBuildDraggableFeedback,
                       needsLongPressDraggable: true,
                       onReorder: (int oldIndex, int newIndex) {
                         setState(() {
@@ -236,7 +241,7 @@ class _MainListState extends State<MainList> {
                               _gameState.currentList.removeAt(oldIndex));
                         });
                       },
-                      children: generatedChildren,
+                      children: generateChildren(),
                     ),
                     /*AutomaticAnimatedListView<ListItemData>(
                       animator: const DefaultAnimatedListAnimator(
