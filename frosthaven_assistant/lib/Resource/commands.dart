@@ -194,12 +194,12 @@ class AddMonsterCommand extends Command {
 
   @override
   void execute() {
-    //add new character on top of list
+    //add new character on bottom of list
     List<ListItemData> newList = [];
     for (var item in _gameState.currentList) {
       newList.add(item);
     }
-    newList.insert(0, monster);
+    newList.add(monster);
     _gameState.currentList = newList;
   }
 
@@ -469,12 +469,22 @@ class AddStandeeCommand extends Command {
 
   @override
   void execute() {
+
     MonsterInstance instance = MonsterInstance(nr, type, monster);
     List<MonsterInstance> newList = [];
     newList.addAll(monster.monsterInstances.value);
     newList.add(instance);
     GameMethods.sortMonsterInstances(newList);
     monster.monsterInstances.value = newList;
+    if(monster.monsterInstances.value.length == 1) {
+      //first added
+      if(getIt<GameState>().roundState.value == RoundState.chooseInitiative){
+        GameMethods.sortCharactersFirst();
+      } else if(getIt<GameState>().roundState.value == RoundState.playTurns){
+        GameMethods.sortByInitiative();
+      }
+
+    }
   }
 
   @override

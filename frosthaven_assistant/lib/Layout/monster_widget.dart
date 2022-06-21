@@ -13,6 +13,7 @@ import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
+import '../Resource/color_matrices.dart';
 import 'monster_stat_card.dart';
 
 double tempScale = 0.8;
@@ -113,7 +114,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
     );*/
   }*/
 
-  Widget buildMonsterBoxGrid_old() {
+  /*Widget buildMonsterBoxGrid_old() {
     final generatedChildren = List<Widget>.generate(
       widget.data.monsterInstances.value.length,
       (index) => Container(
@@ -155,13 +156,20 @@ class _MonsterWidgetState extends State<MonsterWidget> {
         );
       },
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     double height = scale * tempScale * 120;
-    return Column(mainAxisSize: MainAxisSize.max, children: [
+    bool active = false;
+    if(widget.data.monsterInstances.value.isNotEmpty) {
+      active = true;
+    }
+    return ColorFiltered(
+        colorFilter: active ? ColorFilter.matrix(identity) : ColorFilter.matrix(grayScale),
+      child:
+      Column(mainAxisSize: MainAxisSize.max, children: [
       SizedBox(
         height: 120 * tempScale * scale, //this dictates size of the cards
         width: getMainListWidth(context),
@@ -226,6 +234,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
             }),
       ),
       //TODO: add standees list here (AnimatbleGrid?)
-    ]);
+    ])
+    );
   }
 }

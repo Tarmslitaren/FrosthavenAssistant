@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Model/character_class.dart';
+import '../Resource/color_matrices.dart';
 import '../Resource/game_state.dart';
 import '../services/service_locator.dart';
 
@@ -68,6 +69,11 @@ class _CharacterWidgetState extends State<CharacterWidget> {
     double scale = getScaleByReference(context);
     double scaledHeight = 60 * scale;
 
+    bool active = true;
+    if(_character.characterState.health.value == 0) {
+      active = false;
+    }
+
     return GestureDetector(
         onVerticalDragStart: (details) {
           //start moving the widget in the list
@@ -97,7 +103,10 @@ class _CharacterWidgetState extends State<CharacterWidget> {
               ]));
           setState(() {});
         },
-        child: Container(
+        child: ColorFiltered(
+    colorFilter: active ? ColorFilter.matrix(identity) : ColorFilter.matrix(grayScale),
+    child:
+         Container(
           height: 60 * scale,
         width: getMainListWidth(context),
         child: Stack(
@@ -309,6 +318,6 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                   ],
                 ))
           ],
-        )));
+        ))));
   }
 }

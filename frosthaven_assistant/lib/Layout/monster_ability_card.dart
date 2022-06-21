@@ -245,7 +245,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                     ),
                 //switchInCurve: Curves.easeInBack,
                 //switchOutCurve: Curves.easeInBack.flipped,
-                child: _gameState.roundState.value == RoundState.playTurns
+                child: _gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty
                     ? MonsterAbilityCardWidget.buildFront(card, widget.data, level, scale)
                     : MonsterAbilityCardWidget.buildRear(scale, _deckSize),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);

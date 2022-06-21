@@ -92,13 +92,22 @@ class _StatusMenuState extends State<StatusMenu> {
     ]);
   }
 
-  //TODO: better way with notifiers?
+  //TODO: better way with notifiers? also needs to be comand...
   void handleDeath(BuildContext context){
     for(var item in _gameState.currentList){
       if(item is Monster){
         for (var instance in item.monsterInstances.value) {
           if(instance.health.value == 0) {
             item.monsterInstances.value.remove(instance);
+            if (item.monsterInstances.value.isEmpty) {
+              if (getIt<GameState>().roundState.value ==
+                  RoundState.chooseInitiative) {
+                GameMethods.sortCharactersFirst();
+              } else
+              if (getIt<GameState>().roundState.value == RoundState.playTurns) {
+                GameMethods.sortByInitiative();
+              }
+            }
             Navigator.pop(context);
             break;
           }
@@ -143,37 +152,6 @@ class _StatusMenuState extends State<StatusMenu> {
 
   @override
   Widget build(BuildContext context) {
-    //for use with ColorFiltered widget
-    /*Map<String, List<double>> predefinedFilters = {
-      'Identity': [
-        //R  G   B    A  Const
-        1, 0, 0, 0, 0, //
-        0, 1, 0, 0, 0, //
-        0, 0, 1, 0, 0, //
-        0, 0, 0, 1, 0, //
-      ],
-      'Grey Scale': [
-        //R  G   B    A  Const
-        0.33, 0.59, 0.11, 0, 0, //
-        0.33, 0.59, 0.11, 0, 0, //
-        0.33, 0.59, 0.11, 0, 0, //
-        0, 0, 0, 1, 0, //
-      ],
-      'Inverse': [
-        //R  G   B    A  Const
-        -1, 0, 0, 0, 255, //
-        0, -1, 0, 0, 255, //
-        0, 0, -1, 0, 255, //
-        0, 0, 0, 1, 0, //
-      ],
-      'Sepia': [
-        //R  G   B    A  Const
-        0.393, 0.769, 0.189, 0, 0, //
-        0.349, 0.686, 0.168, 0, 0, //
-        0.272, 0.534, 0.131, 0, 0, //
-        0, 0, 0, 1, 0, //
-      ],
-    };*/
     return Container(
         width: 320,
         height: 210,

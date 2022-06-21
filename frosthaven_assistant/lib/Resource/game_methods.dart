@@ -86,8 +86,15 @@ class GameMethods {
 
   static void drawAbilityCards() {
     for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
-      //TODO: don't draw if there are no monsters of the type
-      deck.draw();
+      for (var item in _gameState.currentList) {
+        if(item is Monster) {
+          if(item.type.deck == deck.name) {
+            if (item.monsterInstances.value.isNotEmpty) {
+              deck.draw();
+            }
+          }
+        }
+      }
     }
   }
 
@@ -120,6 +127,17 @@ class GameMethods {
       if (bIsChar) {
         return 1;
       }
+
+      if (a is Monster) {
+        if(a.monsterInstances.value.isEmpty) {
+          return 1; //inactive at bottom
+        }
+      }
+      if (b is Monster) {
+        if(b.monsterInstances.value.isEmpty) {
+          return -1; //inactive at bottom
+        }
+      }
       return -1;
     }
     );
@@ -137,6 +155,9 @@ class GameMethods {
       if (a is Character) {
         aInitiative = a.characterState.initiative;
       } else if (a is Monster) {
+        if(a.monsterInstances.value.isEmpty) {
+          return 1; //inactive at bottom
+        }
 
         //find the deck
         for (var item in _gameState.currentAbilityDecks) {
@@ -148,6 +169,9 @@ class GameMethods {
       if (b is Character) {
         bInitiative = b.characterState.initiative;
       } else if (b is Monster) {
+        if(b.monsterInstances.value.isEmpty) {
+          return -1; //inactive at bottom
+        }
         //find the deck
         for (var item in _gameState.currentAbilityDecks) {
           if (item.name == b.type.deck) {
