@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
+import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -36,8 +37,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
   @override
   void initState() {
     super.initState();
-    //TODO: handle special rules level changes for specific monster types.
-    _level = widget.data.level; //is this the right start?
+    _level = widget.data.level.value; //is this the right start?
   }
 
   @override
@@ -78,9 +78,9 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
           setState(() {});
         },
         child: ValueListenableBuilder<int>(
-            valueListenable: _gameState.level,
+            valueListenable: widget.data.level,
             builder: (context, value, child) {
-              _level = _gameState.level.value; // widget.data.level;
+              _level = widget.data.level.value;
               return Container(
                   margin: EdgeInsets.all(2 * scale * tempScale),
                   child: Stack(

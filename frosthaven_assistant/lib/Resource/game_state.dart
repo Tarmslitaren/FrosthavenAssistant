@@ -161,20 +161,25 @@ enum MonsterType {
 
 class MonsterInstance extends Figure{
   MonsterInstance(this.standeeNr, this.type, Monster monster) {
-    if (type == MonsterType.boss) {
-      maxHealth.value = monster.type.levels[monster.level].boss!.health;
-    } else if (type == MonsterType.elite) {
-      maxHealth.value = monster.type.levels[monster.level].elite!.health;
-    } else if (type == MonsterType.normal) {
-      maxHealth.value = monster.type.levels[monster.level].normal!.health;
-    }
-    health.value = maxHealth.value;
-    level.value = monster.level;
+    setLevel(monster);
     name = monster.type.gfx;
   }
   late final int standeeNr;
   late final MonsterType type;
   late final String name;
+
+
+  void setLevel(Monster monster) {
+    if (type == MonsterType.boss) {
+      maxHealth.value = monster.type.levels[monster.level.value].boss!.health;
+    } else if (type == MonsterType.elite) {
+      maxHealth.value = monster.type.levels[monster.level.value].elite!.health;
+    } else if (type == MonsterType.normal) {
+      maxHealth.value = monster.type.levels[monster.level.value].normal!.health;
+    }
+    level.value = monster.level.value;
+    health.value = maxHealth.value;
+  }
 
   @override
   String toString() {
@@ -212,8 +217,9 @@ enum ListItemState {
 }
 
 class Monster extends ListItemData{
-  Monster(String name, this.level){
+  Monster(String name, int level){
     id = name;
+    this.level.value = level;
     for(MonsterModel model in getIt<GameState>().modelData.value!.monsters) {
       if(model.name == name) {
         type = model;
@@ -225,7 +231,7 @@ class Monster extends ListItemData{
   late final MonsterModel type;
   final monsterInstances = ValueNotifier<List<MonsterInstance>>([]);
   //late final ListItemState state = ListItemState.chooseInitiative;
-  int level = 0;
+  final level = ValueNotifier<int>(0);
 
   bool hasElites() {
     for (var instance in monsterInstances.value) {
@@ -249,6 +255,13 @@ class Monster extends ListItemData{
   void nextRound(){
   }
 
+  void setLevel(int level) {
+    this.level.value = level;
+    for(var item in monsterInstances.value) {
+      item.setLevel(this);
+    }
+  }
+
   @override
   String toString() {
     return '{'
@@ -256,13 +269,13 @@ class Monster extends ListItemData{
         '"type": "${type.name}", '
         '"monsterInstances": ${monsterInstances.value.toString()}, '
         //'"state": ${state.index}, '
-        '"level": $level '
+        '"level": ${level.value} '
         '}';
   }
 
   Monster.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    level = json['level'];
+    level.value = json['level'];
     String modelName = json['type'];
     //state = ListItemState.values[json["state"]];
 

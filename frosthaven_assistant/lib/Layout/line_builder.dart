@@ -56,17 +56,17 @@ EdgeInsetsGeometry? getMarginForToken(String iconToken, double height,
 List<Map<String, int>> getStatTokens(Monster monster, bool elite) {
   List<Map<String, int>> values = [];
   MonsterStatsModel data;
-  if (monster.type.levels[monster.level].boss != null) {
+  if (monster.type.levels[monster.level.value].boss != null) {
     //is boss
     if (elite) {
       return values;
     }
-    data = monster.type.levels[monster.level].boss!;
+    data = monster.type.levels[monster.level.value].boss!;
   } else {
     if (elite) {
-      data = monster.type.levels[monster.level].elite!;
+      data = monster.type.levels[monster.level.value].elite!;
     } else {
-      data = monster.type.levels[monster.level].normal!;
+      data = monster.type.levels[monster.level.value].normal!;
     }
   }
   for (String item in data.attributes) {
@@ -129,9 +129,9 @@ String applyMonsterStats(String line, Monster monster) {
   var normalTokens = getStatTokens(monster, false);
   var eliteTokens = getStatTokens(monster, true);
 
-  MonsterStatsModel? normal = monster.type.levels[monster.level].boss ??
-      monster.type.levels[monster.level].normal;
-  MonsterStatsModel? elite = monster.type.levels[monster.level].elite;
+  MonsterStatsModel? normal = monster.type.levels[monster.level.value].boss ??
+      monster.type.levels[monster.level.value].normal;
+  MonsterStatsModel? elite = monster.type.levels[monster.level.value].elite;
 
   int partStartIndex = 1;
   bool isIconPart = false;

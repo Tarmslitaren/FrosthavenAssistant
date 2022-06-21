@@ -12,11 +12,13 @@ import '../../services/service_locator.dart';
 import 'main_menu.dart';
 
 class StatusMenu extends StatefulWidget {
-  const StatusMenu({Key? key, required this.figure, this.character})
+  const StatusMenu({Key? key, required this.figure, this.character, this.monster})
       : super(key: key);
 
   final Figure figure;
   final Character? character;
+  final Monster? monster;
+
 
   @override
   _StatusMenuState createState() => _StatusMenuState();
@@ -62,6 +64,7 @@ class _StatusMenuState extends State<StatusMenu> {
             onPressed: () {
               if (notifier.value > 0) {
                 _gameState.action(ChangeStatCommand(-1, notifier));
+                handleDeath(context);
               }
               //increment
             },
@@ -80,8 +83,6 @@ class _StatusMenuState extends State<StatusMenu> {
             icon: Image.asset('assets/images/psd/add.png'),
             //iconSize: 30,
             onPressed: () {
-              print("kuken");
-              print(maxValue);
               if (notifier.value < maxValue) {
                 _gameState.action(ChangeStatCommand(1, notifier));
               }
@@ -89,6 +90,21 @@ class _StatusMenuState extends State<StatusMenu> {
             },
           )),
     ]);
+  }
+
+  //TODO: better way with notifiers?
+  void handleDeath(BuildContext context){
+    for(var item in _gameState.currentList){
+      if(item is Monster){
+        for (var instance in item.monsterInstances.value) {
+          if(instance.health.value == 0) {
+            item.monsterInstances.value.remove(instance);
+            Navigator.pop(context);
+            break;
+          }
+        }
+      }
+    }
   }
 
   Widget buildConditionButton(Condition condition) {
@@ -201,7 +217,8 @@ class _StatusMenuState extends State<StatusMenu> {
                             icon: Image.asset('assets/images/psd/skull.png'),
                             //iconSize: 10,
                             onPressed: () {
-                              widget.figure.health.value = 0;
+                              _gameState.action(ChangeStatCommand(-widget.figure.health.value, widget.figure.health));
+                              handleDeath(context);
                             },
                           ),
                         ),
@@ -225,9 +242,9 @@ class _StatusMenuState extends State<StatusMenu> {
                                 } else {
                                   openDialog(
                                     context,
-                                    const Dialog(
+                                    Dialog(
                                       child:
-                                          SetLevelMenu(), //TODO: add figure to this menu so that monster types can be leveled separately from scenario leve
+                                          SetLevelMenu(monster: widget.monster),
                                     ),
                                   );
                                 }
@@ -245,6 +262,7 @@ class _StatusMenuState extends State<StatusMenu> {
                 height: 20,
               ),
               //const Text("Set Scenario Level", style: TextStyle(fontSize: 18)),
+              //TODO: other config for monsters and CS stuff.
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -286,9 +304,3 @@ class _StatusMenuState extends State<StatusMenu> {
   }
 }
 
-//- hp +      4x4 columns of status (different for enemies. can depend on certain character or certain scenario/monster (but not for jotl. so not need implement yet)
-//- xp +
-//or
-//- bless +
-//- curse +
-// kill, set level

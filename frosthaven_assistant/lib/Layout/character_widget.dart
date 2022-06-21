@@ -82,21 +82,24 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           //open stats menu
           //TODO: open the whole state change menu
           openDialog(
-            context,
-            Stack(
-                children: [
+              context,
+              Stack(children: [
                 Positioned(
                   //TODO: how to get a good grip on position
-                //left: 100, // left coordinate
-                //top: 100,  // top coordinate
-                child:Dialog(
-                  child: StatusMenu(
-                      figure: _character.characterState, character: _character),
-                ),
-              )])
-          );
+                  //left: 100, // left coordinate
+                  //top: 100,  // top coordinate
+                  child: Dialog(
+                    child: StatusMenu(
+                        figure: _character.characterState,
+                        character: _character),
+                  ),
+                )
+              ]));
           setState(() {});
         },
+        child: Container(
+          height: 60 * scale,
+        width: getMainListWidth(context),
         child: Stack(
           //alignment: Alignment.centerLeft,
           children: [
@@ -217,26 +220,26 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                   ]),
                 ),
                 Column(
-                  //mainAxisAlignment: MainAxisAlignment.start,
+                    //mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     //align children to the left
                     children: [
                       Container(
-                            margin: EdgeInsets.only(
-                                top: 10 * scale, left: 10 * scale),
-                            child: Text(
-                              widget.characterClass.name,
-                              style: TextStyle(
-                                  fontFamily: 'Pirata',
-                                  color: Colors.white,
-                                  fontSize: 16 * scale,
-                                  shadows: [
-                                    Shadow(
-                                        offset: Offset(1 * scale, 1 * scale),
-                                        color: Colors.black)
-                                  ]),
-                            ),
-                          ),
+                        margin:
+                            EdgeInsets.only(top: 10 * scale, left: 10 * scale),
+                        child: Text(
+                          widget.characterClass.name,
+                          style: TextStyle(
+                              fontFamily: 'Pirata',
+                              color: Colors.white,
+                              fontSize: 16 * scale,
+                              shadows: [
+                                Shadow(
+                                    offset: Offset(1 * scale, 1 * scale),
+                                    color: Colors.black)
+                              ]),
+                        ),
+                      ),
                       ValueListenableBuilder<int>(
                           valueListenable: _character.characterState.health,
                           //not working?
@@ -278,8 +281,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
               ],
             )),
             Positioned(
-              top: 10*scale,
-                right: 75*scale + getMainListMargin(context),
+                top: 10 * scale,
+                right: 75 * scale,
                 child: Row(
                   children: [
                     ValueListenableBuilder<int>(
@@ -293,22 +296,19 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                 fontSize: 14 * scale,
                                 shadows: [
                                   Shadow(
-                                      offset:
-                                      Offset(1 * scale, 1 * scale),
+                                      offset: Offset(1 * scale, 1 * scale),
                                       color: Colors.black)
                                 ]),
                           );
                         }),
                     Image(
-                      height: 20.0*scale*tempScale,
+                      height: 20.0 * scale * tempScale,
                       color: Colors.blue,
-                      image: const AssetImage(
-                          "assets/images/psd/xp.png"),
+                      image: const AssetImage("assets/images/psd/xp.png"),
                     ),
                   ],
-                )
-            )
+                ))
           ],
-        ));
+        )));
   }
 }

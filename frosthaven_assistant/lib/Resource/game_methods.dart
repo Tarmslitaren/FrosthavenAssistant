@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -158,6 +159,7 @@ class GameMethods {
     }
     );
     _gameState.currentList = newList;
+
   }
 
   static void sortMonsterInstances(List<MonsterInstance> instances){

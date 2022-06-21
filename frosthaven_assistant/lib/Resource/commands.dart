@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/main_list.dart';
 import 'package:frosthaven_assistant/Resource/action_handler.dart';
 
 import '../Model/character_class.dart';
@@ -19,6 +20,8 @@ class DrawCommand extends Command {
     GameMethods.sortByInitiative();
     _gameState.round.value++;
     GameMethods.setRoundState(RoundState.playTurns);
+    MainList.scrollToTop();
+
   }
 
   @override
@@ -47,6 +50,7 @@ class NextRoundCommand extends Command {
     GameMethods.updateElements();
     GameMethods.setRoundState(RoundState.chooseInitiative);
     GameMethods.sortCharactersFirst();
+    MainList.scrollToTop();
 
     //TODO: a million more things: save a bunch of state: all current initiatives and monster deck states
   }
@@ -256,10 +260,10 @@ class SetScenarioCommand extends Command {
         newList.add(item);
         item.characterState.initiative = 0;
         item.characterState.health.value = item.characterClass.healthByLevel[item.characterState.level.value-1];
-        //TODO: clear all other shit
+        item.characterState.xp.value = 0;
       }
       if (item is Monster) {
-        //TODO: clear all other shit
+        item.monsterInstances.value.clear();
       }
     }
     GameMethods.shuffleDecks();
@@ -328,19 +332,48 @@ class ImbueElementCommand extends Command {
 class SetLevelCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   int _previousState = 0;
-  int level;
+  final int level;
+  final Monster? monster;
 
-  SetLevelCommand(this.level);
+  SetLevelCommand(this.level, this.monster);
 
   @override
   void execute() {
-    _previousState = _gameState.level.value;
-    _gameState.level.value = level;
+    if (monster == null) {
+      _previousState = _gameState.level.value;
+      _gameState.level.value = level;
+      for (var item in _gameState.currentList) {
+        if(item is Monster) {
+          item.setLevel(level);
+          //will overwrite specific level settings, but that is probably ok
+        }
+      }
+    } else {
+      _previousState = monster!.level.value;
+      monster!.level.value = level;
+      for(var item in monster!.monsterInstances.value){
+        item.setLevel(monster!);
+      }
+
+    }
   }
 
   @override
   void undo() {
-    _gameState.level.value = _previousState;
+    if(monster != null) {
+      monster!.level.value = _previousState;
+      for(var item in monster!.monsterInstances.value){
+        item.level.value = _previousState;
+      }
+    } else {
+      _gameState.level.value = _previousState;
+      for (var item in _gameState.currentList) {
+        if(item is Monster) {
+          item.level.value = level;
+          //will overwrite specific level settings, but that is probably ok
+        }
+      }
+    }
   }
 }
 
@@ -427,6 +460,7 @@ class ChangeStatCommand extends Command {
     stat.value -= change;
   }
 }
+
 class AddStandeeCommand extends Command {
   final int nr;
   final Monster monster;
@@ -447,7 +481,6 @@ class AddStandeeCommand extends Command {
   void undo() {
     // TODO: implement undo
   }
-
 }
 
 

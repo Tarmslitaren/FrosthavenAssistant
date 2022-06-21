@@ -9,7 +9,9 @@ import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 
 class SetLevelMenu extends StatefulWidget {
-  const SetLevelMenu({Key? key}) : super(key: key);
+  const SetLevelMenu({Key? key, this.monster}) : super(key: key);
+
+  final Monster? monster;
 
   @override
   _SetLevelMenuState createState() => _SetLevelMenuState();
@@ -28,7 +30,12 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
     return ValueListenableBuilder<bool>(
         valueListenable: _gameState.solo,
         builder: (context, value, child) {
-          bool isCurrentlySelected = nr == _gameState.level.value;
+          bool isCurrentlySelected;
+          if(widget.monster != null) {
+            isCurrentlySelected = nr == widget.monster!.level.value;
+          }else {
+            isCurrentlySelected = nr == _gameState.level.value;
+          }
           bool isRecommended = GameMethods.getRecommendedLevel() == nr;
           Color color = Colors.transparent;
           if (isRecommended) {
@@ -46,7 +53,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                     border: Border.all(
                       color: color,
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(30))),
+                    borderRadius: const BorderRadius.all(Radius.circular(30))),
                 child: TextButton(
                   child: Text(
                     text,
@@ -56,7 +63,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
-                      _gameState.action(SetLevelCommand(nr));
+                      _gameState.action(SetLevelCommand(nr, widget.monster));
                     }
                     Navigator.pop(context);
                   },
@@ -117,7 +124,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                 ],
               ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text("Solo:"),
+                const Text("Solo:"),
                 ValueListenableBuilder<bool>(
                     valueListenable: _gameState.solo,
                     builder: (context, value, child) {
@@ -127,8 +134,6 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                         //side: BorderSide(color: Colors.black),
                         onChanged: (bool? newValue) {
                           _gameState.solo.value = newValue!;
-
-                          //_gameState.solo.value = !_gameState.solo.value;
                         },
                         value: _gameState.solo.value,
                       );
