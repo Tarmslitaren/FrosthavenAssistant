@@ -63,11 +63,18 @@ class _StatusMenuState extends State<StatusMenu> {
             //iconSize: 30,
             onPressed: () {
               if (notifier.value > 0) {
-                _gameState.action(ChangeStatCommand(-1, notifier));
-                handleDeath(context);
+                _gameState.action(
+                    ChangeStatCommand(-1, notifier, widget.figure));
+                if (notifier == widget.figure.health &&
+                    widget.figure.health.value <= 0) {
+                  {
+                    Navigator.pop(context);
+                  }
+                  //handleDeath(context);
+                }
+                //increment
               }
-              //increment
-            },
+            }
           )),
       Container(
         width: 42,
@@ -84,36 +91,15 @@ class _StatusMenuState extends State<StatusMenu> {
             //iconSize: 30,
             onPressed: () {
               if (notifier.value < maxValue) {
-                _gameState.action(ChangeStatCommand(1, notifier));
+                _gameState.action(ChangeStatCommand(1, notifier, widget.figure));
+                if(notifier.value <= 0 && notifier == widget.figure.health){
+                  Navigator.pop(context);
+                }
               }
               //increment
             },
           )),
     ]);
-  }
-
-  //TODO: better way with notifiers? also needs to be comand...
-  void handleDeath(BuildContext context){
-    for(var item in _gameState.currentList){
-      if(item is Monster){
-        for (var instance in item.monsterInstances.value) {
-          if(instance.health.value == 0) {
-            item.monsterInstances.value.remove(instance);
-            if (item.monsterInstances.value.isEmpty) {
-              if (getIt<GameState>().roundState.value ==
-                  RoundState.chooseInitiative) {
-                GameMethods.sortCharactersFirst();
-              } else
-              if (getIt<GameState>().roundState.value == RoundState.playTurns) {
-                GameMethods.sortByInitiative();
-              }
-            }
-            Navigator.pop(context);
-            break;
-          }
-        }
-      }
-    }
   }
 
   Widget buildConditionButton(Condition condition) {
@@ -195,8 +181,8 @@ class _StatusMenuState extends State<StatusMenu> {
                             icon: Image.asset('assets/images/psd/skull.png'),
                             //iconSize: 10,
                             onPressed: () {
-                              _gameState.action(ChangeStatCommand(-widget.figure.health.value, widget.figure.health));
-                              handleDeath(context);
+                              _gameState.action(ChangeStatCommand(-widget.figure.health.value, widget.figure.health, widget.figure));
+                              Navigator.pop(context);
                             },
                           ),
                         ),

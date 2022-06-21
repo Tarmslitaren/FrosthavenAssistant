@@ -448,11 +448,38 @@ class RemoveConditionCommand extends Command {
 class ChangeStatCommand extends Command {
   final int change;
   final ValueNotifier<int> stat;
-  ChangeStatCommand(this.change, this.stat );
+  final Figure figure;
+  ChangeStatCommand(this.change, this.stat, this.figure );
 
   @override
   void execute() {
     stat.value += change;
+    if (stat.value <= 0 && stat == figure.health) {
+      handleDeath();
+    }
+  }
+
+  void handleDeath(){
+    for(var item in getIt<GameState>().currentList){
+      if(item is Monster){
+        for (var instance in item.monsterInstances.value) {
+          if(instance.health.value == 0) {
+            item.monsterInstances.value.remove(instance);
+            if (item.monsterInstances.value.isEmpty) {
+              if (getIt<GameState>().roundState.value ==
+                  RoundState.chooseInitiative) {
+                GameMethods.sortCharactersFirst();
+              } else
+              if (getIt<GameState>().roundState.value == RoundState.playTurns) {
+                GameMethods.sortByInitiative();
+              }
+            }
+            //Navigator.pop(context);
+            break;
+          }
+        }
+      }
+    }
   }
 
   @override

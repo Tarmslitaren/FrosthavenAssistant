@@ -7,8 +7,8 @@ import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/commands.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-import 'package:great_list_view/great_list_view.dart';
-import 'package:reorderableitemsview/reorderableitemsview.dart';
+//import 'package:great_list_view/great_list_view.dart';
+//import 'package:reorderableitemsview/reorderableitemsview.dart';
 import 'package:reorderables/reorderables.dart';
 
 import '../Resource/action_handler.dart';
@@ -64,7 +64,7 @@ class MainList extends StatefulWidget {
   const MainList({Key? key}) : super(key: key);
 
   static void scrollToTop() {
-    //_MainListState.scrollToTop();
+    _MainListState.scrollToTop();
   }
 
   @override
@@ -94,7 +94,6 @@ class _MainListState extends State<MainList> {
     return Container(
         //alignment: Alignment.center,
         //width: MediaQuery.of(context).size.width,
-
         decoration: const BoxDecoration(
           image: DecorationImage(
               fit: BoxFit.cover,
@@ -120,9 +119,8 @@ class _MainListState extends State<MainList> {
   }
 
   static void scrollToTop() {
-    //TODO: doesn't work. also screws up everything?
     scrollController.animateTo(
-      scrollController.position.maxScrollExtent,
+      0,
       curve: Curves.easeOut,
       duration: const Duration(milliseconds: 500),
     );
@@ -224,7 +222,6 @@ class _MainListState extends State<MainList> {
                     controller: scrollController,
                     child: ReorderableWrap(
                       runAlignment: WrapAlignment.start,
-                      //TODO: try not to reassign the list all the time. see if that helps with te hanimations
                       scrollAnimationDuration: Duration(milliseconds: 500),
                       reorderAnimationDuration: Duration(milliseconds: 500),
                       maxMainAxisCount: getItemsCanFitOneColumn(),
@@ -234,6 +231,7 @@ class _MainListState extends State<MainList> {
                       //ignorePrimaryScrollController: true,
                       buildDraggableFeedback: defaultBuildDraggableFeedback,
                       needsLongPressDraggable: true,
+                      controller: scrollController,
                       onReorder: (int oldIndex, int newIndex) {
                         setState(() {
                           //TODO: should be a command.
@@ -295,5 +293,5 @@ class _MainListState extends State<MainList> {
   static final scrollController = ScrollController();
 
   //use to animate to position in list:
-  final controller = AnimatedListController();
+  //final controller = AnimatedListController();
 }

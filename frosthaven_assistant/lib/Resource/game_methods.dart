@@ -111,8 +111,8 @@ class GameMethods {
   }
 
   static void sortCharactersFirst() {
-    late List<ListItemData> newList = List.from(_gameState.currentList);
-    newList.sort((a, b) {
+    //late List<ListItemData> newList = List.from(_gameState.currentList);
+    _gameState.currentList.sort((a, b) {
       bool aIsChar = false;
       bool bIsChar = false;
       if (a is Character) {
@@ -141,15 +141,15 @@ class GameMethods {
       return -1;
     }
     );
-    _gameState.currentList = newList;
+    //_gameState.currentList = newList;
   }
 
   static void sortByInitiative() {
     //hack:
-    late List<ListItemData> newList = List.from(_gameState.currentList);
+    //late List<ListItemData> newList = List.from(_gameState.currentList);
 
 
-    newList.sort((a, b) {
+    _gameState.currentList.sort((a, b) {
       int aInitiative = 0;
       int bInitiative = 0;
       if (a is Character) {
@@ -182,7 +182,7 @@ class GameMethods {
       return aInitiative.compareTo(bInitiative);
     }
     );
-    _gameState.currentList = newList;
+    //_gameState.currentList = newList;
 
   }
 
