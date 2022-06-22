@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -121,9 +122,13 @@ int? parseIntValue(String input) {
 }
 
 
-String applyMonsterStats(String line, Monster monster) {
-  //log("monster: " + monster.id);
-  //log("line: "+line);
+//TODO: redo from scratch maybe?
+List<String> applyMonsterStats(String lineInput, String sizeToken, Monster monster) {
+
+  String line = "" + lineInput;
+  List<String> result = [];
+  log("monster: " + monster.id);
+  log("line: "+line);
   List<String> tokens = [];
   List<String> eTokens = [];
   var normalTokens = getStatTokens(monster, false);
@@ -139,8 +144,6 @@ String applyMonsterStats(String line, Monster monster) {
   int lastNonIconStartIndex = 0;
   for (int i = 0; i < line.length; i++) {
     if (line[i] == '%') {
-      //TODO: do for all conditions + jump, pierce, add target  etc.
-
       if (isIconPart) {
         String iconToken = line.substring(partStartIndex, i);
         partStartIndex = i+1;
@@ -153,32 +156,43 @@ String applyMonsterStats(String line, Monster monster) {
       }
     }
     //log("line1.5: "+line.substring(0, i));
-   // log("isIconPart: "+isIconPart.toString());
+    //log("isIconPart: "+isIconPart.toString());
     //log("line[i]: "+line[i]);
     //when to do calculations: only after a token that can have a modifiable value
     if(lastIconToken.isNotEmpty && isIconPart == false && (line[i] == '%' || i == line.length-1 ||
-        (line[i] == " "
-            && line[i+1] == "%") //TODO: this is wrong. should ckeck regexp not a number? - other solution: make sure to end string at nr end and use ! to right align
+        (line[i] == " " && line[i+1] == "%")
+        //TODO: this is wrong. should ckeck regexp not a number? - other solution: make sure to end string at nr end and use ! to right align
     )){
       //parse this part
       int? normalResult;
       int? eliteResult;
+      //eff this
       //we are assuming a token is followed eiter by a value or text. not both. TODO: examine if this is indeed correct (or change solution)
-      //log("line2: "+line);
+      log("line2: "+line);
       String textPart = line.substring(lastNonIconStartIndex, i+1);
-      //log("line3: "+line);
-      //log("textpart: "+textPart);
+      log("line3: "+line);
+      log("textpart: "+textPart);
 
       if (lastIconToken == "attack") {
         RegExp regEx = RegExp(r"(?=.*[a-z])");
         for (var item in normalTokens) {
           if (regEx.hasMatch(item.keys.first) == true) {
-            tokens.add("%" + item.keys.first + "%"); //TODO: only add relevant tokens (i.e conditions that apply on attack)
+            if(item.keys.first != "shield" &&
+                item.keys.first != "retaliate" &&
+                item.keys.first != "jump" //TODO: check if works fine now
+            ) {
+              tokens.add("%${item.keys.first}%");
+            }
           }
         }
         for (var item in eliteTokens) {
           if (regEx.hasMatch(item.keys.first) == true) {
-            eTokens.add("%" + item.keys.first + "%");//TODO: only add relevant tokens (i.e conditions that apply on attack)
+            if(item.keys.first != "shield" &&
+                item.keys.first != "retaliate" &&
+                item.keys.first != "jump" //TODO: check if works fine now
+            ) {
+              eTokens.add("%${item.keys.first}%");
+            }
           }
         }
 
@@ -213,6 +227,7 @@ String applyMonsterStats(String line, Monster monster) {
             if (elite != null) {
               eliteResult = number + elite.move;
             }
+            //TODO: add jump if has innate jump
           }
         }
       }
@@ -236,23 +251,40 @@ String applyMonsterStats(String line, Monster monster) {
         for (var item in tokens) {
           newStringPart+= "|" + item; //disable text printout for conditions
         }
-        if (elite != null) { //TODO: this si a shitty solution creating lots of problems. instead create anew string with ! to denote right hand side. and make sure to end it after the end of the nr.
-          newStringPart += "/" + eliteResult.toString();
+        String elitePart = sizeToken+"!£"; //pound means elite :D
+        if (elite != null) {
+          newStringPart += "/";
+          elitePart += eliteResult.toString();
           for (var item in eTokens) {
-            newStringPart+= "|" + item;
+            elitePart+= "|" + item;
           }
         }
         //replace the substring
         line = line.replaceRange(lastNonIconStartIndex, i+1, newStringPart);
-        i = lastNonIconStartIndex + newStringPart.length;
 
+        i = lastNonIconStartIndex + newStringPart.length;
+        if(elitePart.isNotEmpty) {
+          log('linepart '+line.substring(0,i));
+          log('elitepart'+elitePart);
+
+          result.add(line.substring(0, i));
+          result.add(elitePart);
+          if(i+1 < line.length) {
+            String leftOver = sizeToken+"!"+line.substring(i, line.length);
+            log('leftover'+leftOver);
+            //result.add(leftOver);
+            result.addAll(applyMonsterStats(leftOver,sizeToken, monster));
+          }
+          return result;
+        }
       }
     }
 
   }
 
 
-  return line;
+
+  return [line];
 
 }
 
@@ -331,8 +363,26 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
       height: 0.8,
       shadows: [shadow]);
 
-  List<Widget> lines = [];
-  for (String line in strings) {
+  var eliteSmallStyle = TextStyle(
+      fontFamily: 'Majalla',
+      color: Colors.yellow,
+      fontSize: 9 * tempScale * scale,
+      height: 0.8,
+      shadows: [shadow]);
+  var eliteMidStyle = TextStyle(
+      fontFamily: 'Majalla',
+      color: Colors.yellow,
+      fontSize: 12 * tempScale * scale,
+      height: 0.9,
+      shadows: [shadow]);
+
+  List<Text> lines = [];
+  List<String> localStrings = [];
+  localStrings.addAll(strings);
+  List<InlineSpan> lastLineTextPartList = [];
+  for (int i = 0; i < localStrings.length; i++){
+    String line = localStrings[i];
+    String sizeToken = "";
     bool isRightPartOfLastLine = false;
     var styleToUse = normalStyle;
     List<InlineSpan> textPartList = [];
@@ -342,6 +392,7 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
       line = line.substring(1, line.length);
     }
     if (line.startsWith('*')) {
+      sizeToken = '*';
       styleToUse = smallStyle;
       line = line.substring(1, line.length);
       if (line.startsWith("....")) {
@@ -349,12 +400,16 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
       }
     }
     if (line.startsWith('^')) {
+      sizeToken = '^';
       styleToUse = midStyle;
       line = line.substring(1, line.length);
     }
-
     if (applyStats) {
-      line = applyMonsterStats(line, monster);
+      List<String> statLines = applyMonsterStats(line, sizeToken, monster);
+      line = statLines.removeAt(0);
+      if(statLines.length > 0) {
+        localStrings.insertAll(i+1, statLines);
+      }
     }
 
 
@@ -368,8 +423,6 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
       if (line[i] == '%') {
         //TODO: handle monster attributes and calculations:
         //TODO: show / and elite values in yellow only if elites available and vice versa for normals
-        //TODO: if + check if move/attack/range and change calculations
-        //TODO: if attributes has line of %muddle% etc. add muddle icon etc to attack line
         //TODO: do for all conditions + jump, pierce, add target  etc.
 
         if (isIconPart) {
@@ -444,12 +497,20 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
         }
         partStartIndex = i + 1;
       }
-      if(line[i] == "/"){
+      if(line[i] == "£"){
         //finish current part
         String textPart = line.substring(partStartIndex, i+1);
-        textPartList.add(TextSpan(text: textPart, style: styleToUse));
+        //textPartList.add(TextSpan(text: textPart, style: styleToUse));
         partStartIndex = i+1;
-        styleToUse = eliteStyle; //TODO: check if different sizes needed
+        if(styleToUse == normalStyle){
+          styleToUse = eliteStyle;
+        }else if (styleToUse == smallStyle) {
+          styleToUse = eliteSmallStyle;
+        }else if(styleToUse == midStyle){
+          styleToUse = eliteMidStyle;
+        }
+
+         //TODO: check if different sizes needed
       }
     }
 
@@ -471,14 +532,19 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
       ),
     );
     if (isRightPartOfLastLine) {
-      Widget line = lines.last;
       lines.removeLast();
-      lines.add(Row(
-        children: [line, text],
-      ));
+      textPartList.insertAll(0, lastLineTextPartList);
+      text = Text.rich(
+        textAlign: textAlign,
+        TextSpan(
+          children: textPartList,
+        ),
+      );
+      lines.add(text);
     } else {
       lines.add(text);
     }
+    lastLineTextPartList = textPartList;
   }
   return Column(
       mainAxisAlignment: MainAxisAlignment.center,
