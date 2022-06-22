@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
-import '../../Resource/commands.dart';
+import '../../Resource/commands/set_character_level_command.dart';
 import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 

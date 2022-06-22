@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../Resource/commands.dart';
+import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 

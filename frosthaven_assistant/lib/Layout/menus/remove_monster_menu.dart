@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Model/character_class.dart';
-import '../../Resource/commands.dart';
+import '../../Resource/commands/remove_monster_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';

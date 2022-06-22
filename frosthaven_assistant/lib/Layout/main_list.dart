@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/character_widget.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
-import 'package:frosthaven_assistant/Resource/commands.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:local_hero/local_hero.dart';
@@ -13,6 +12,7 @@ import 'package:local_hero/local_hero.dart';
 import 'package:reorderables/reorderables.dart';
 
 import '../Resource/action_handler.dart';
+import '../Resource/commands/reorder_list_command.dart';
 import '../Resource/game_methods.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
@@ -289,9 +289,9 @@ class _MainListState extends State<MainList> {
                       controller: scrollController,
                       onReorder: (int oldIndex, int newIndex) {
                         setState(() {
-                          //TODO: should be a command.
-                          _gameState.currentList.insert(newIndex,
-                              _gameState.currentList.removeAt(oldIndex));
+                          _gameState.action(ReorderListCommand(newIndex, oldIndex));
+                          //_gameState.currentList.insert(newIndex,
+                          //    _gameState.currentList.removeAt(oldIndex));
                         });
                       },
                       children: generateChildren(),

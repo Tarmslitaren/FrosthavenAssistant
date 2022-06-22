@@ -5,7 +5,9 @@ import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart'
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
-import '../../Resource/commands.dart';
+import '../../Resource/commands/add_condition_command.dart';
+import '../../Resource/commands/change_stat_command.dart';
+import '../../Resource/commands/remove_condition_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/ui_utils.dart';

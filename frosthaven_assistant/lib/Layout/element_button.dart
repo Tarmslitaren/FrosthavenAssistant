@@ -1,8 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/commands.dart';
 
+import '../Resource/commands/imbue_element_command.dart';
+import '../Resource/commands/use_element_command.dart';
 import '../Resource/game_state.dart';
 import '../services/service_locator.dart';
 

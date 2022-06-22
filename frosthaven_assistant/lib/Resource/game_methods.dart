@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-import 'commands.dart';
+import '../Model/monster.dart';
+import 'commands/add_standee_command.dart';
 import 'monster_ability_state.dart';
 
 GameState _gameState = getIt<GameState>();
@@ -258,5 +259,15 @@ class GameMethods {
         }
       }
     }
+  }
+
+  static Monster? createMonster(String name, int level) {
+    for (MonsterModel monster in getIt<GameState>().modelData.value!.monsters) {
+      if (monster.name == name) {
+        Monster monster = Monster(name, level);
+        return monster;
+      }
+    }
+    return null;
   }
 }
