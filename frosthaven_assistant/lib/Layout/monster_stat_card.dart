@@ -69,7 +69,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
     return GestureDetector(
         onTap: () {
-          //if grayscale mode: fade in the stats
+          //if grayscale mode: fade in the stats (if hide stats enabled)
           setState(() {});
         },
         child: ValueListenableBuilder<int>(
@@ -389,8 +389,30 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                         }
                                       })))
                           : Container(),
+                      Positioned(
+                        right: 10 *scale,
+                          top: 1 * scale,
+                          child: Row(
+                            children: createConditionList(scale),
+                          ))
                     ],
                   ));
             }));
+  }
+
+  List<Image> createConditionList(double scale) {
+    List<Image> list = [];
+    if(widget.data.type.levels[_level].boss == null) {
+      return list;
+    }
+    for (var item in widget.data.type.levels[_level].boss!.immunities) {
+      item = item.substring(1, item.length-1);
+      Image image = Image(
+        height: 11 * scale,
+        image: AssetImage("assets/images/conditions/$item.png"),
+      );
+      list.add(image);
+    }
+    return list;
   }
 }
