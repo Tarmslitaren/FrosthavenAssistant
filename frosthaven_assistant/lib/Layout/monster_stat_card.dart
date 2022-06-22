@@ -1,22 +1,15 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
-import 'package:frosthaven_assistant/Layout/monster_box.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
-import '../Model/monster.dart';
-import '../Resource/commands.dart';
 import '../Resource/stat_calculator.dart';
-import '../services/service_locator.dart';
+import '../Resource/ui_utils.dart';
 import 'line_builder.dart';
-import 'menus/main_menu.dart';
-import 'monster_ability_card.dart';
 
-double tempScale = 0.8;
+double tempScale = 0.8; //TODO: f this
 
 class MonsterStatCardWidget extends StatefulWidget {
   final Monster data;
@@ -27,15 +20,14 @@ class MonsterStatCardWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _MonsterStatCardWidgetState createState() => _MonsterStatCardWidgetState();
+  MonsterStatCardWidgetState createState() => MonsterStatCardWidgetState();
 }
 
-class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
+class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 // Define the various properties with default values. Update these properties
 // when the user taps a FloatingActionButton.
 //late MonsterData _data;
   int _level = 1;
-  final GameState _gameState = getIt<GameState>();
 
   @override
   void initState() {
@@ -353,21 +345,15 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   } else if (widget
                                           .data.monsterInstances.value.length <
                                       widget.data.type.count - 1) {
-                                    openDialog(
-                                        context,
-                                        Stack(children: [
-                                          Positioned(
-                                            //TODO: how to get a good grip on position
-                                            //left: 100, // left coordinate
-                                            //top: 100,  // top coordinate
-                                            child: Dialog(
-                                              child: AddStandeeMenu(
-                                                elite: false,
-                                                monster: widget.data,
-                                              ),
-                                            ),
-                                          )
-                                        ]));
+                                    openDialogAtPosition(
+                                        context, //problem: context is of stat card widget, not the + button
+                                        AddStandeeMenu(
+                                          elite: false,
+                                          monster: widget.data,
+                                        ),
+                                        -185*scale, //does not take into account the popup does not scale. (should it?)
+                                        12*scale
+                                    );
                                   }
                                 },
                               ))),
@@ -391,21 +377,15 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                         } else if (widget.data.monsterInstances
                                                 .value.length <
                                             widget.data.type.count - 1) {
-                                          openDialog(
+                                          openDialogAtPosition(
                                               context,
-                                              Stack(children: [
-                                                Positioned(
-                                                  //TODO: how to get a good grip on position
-                                                  //left: 100, // left coordinate
-                                                  //top: 100,  // top coordinate
-                                                  child: Dialog(
-                                                    child: AddStandeeMenu(
-                                                      elite: true,
-                                                      monster: widget.data,
-                                                    ),
-                                                  ),
-                                                )
-                                              ]));
+                                              AddStandeeMenu(
+                                                elite: true,
+                                                monster: widget.data,
+                                              ),
+                                            -45*scale,
+                                              12*scale
+                                              );
                                         }
                                       })))
                           : Container(),

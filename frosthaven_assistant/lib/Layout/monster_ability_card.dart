@@ -11,6 +11,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Model/monster.dart';
 import '../Resource/action_handler.dart';
 import '../Resource/game_methods.dart';
+import '../Resource/ui_utils.dart';
 import 'line_builder.dart';
 import 'menus/main_menu.dart';
 

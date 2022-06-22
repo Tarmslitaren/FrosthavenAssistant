@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../Model/character_class.dart';
 import '../Resource/color_matrices.dart';
 import '../Resource/game_state.dart';
+import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 
 class CharacterWidget extends StatefulWidget {
@@ -86,12 +87,10 @@ class _CharacterWidgetState extends State<CharacterWidget> {
         },
         onTap: () {
           //open stats menu
-          //TODO: open the whole state change menu
           openDialog(
               context,
               Stack(children: [
                 Positioned(
-                  //TODO: how to get a good grip on position
                   //left: 100, // left coordinate
                   //top: 100,  // top coordinate
                   child: Dialog(
@@ -291,7 +290,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
             )),
             Positioned(
                 top: 10 * scale,
-                right: 75 * scale,
+                left: 318 * scale,
                 child: Row(
                   children: [
                     ValueListenableBuilder<int>(

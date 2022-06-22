@@ -78,14 +78,14 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
     //4 nr's per row
     double height = 80;
     if (nrOfStandees > 4) {
-      height = 160;
+      height = 120;
     }
     if (nrOfStandees > 8) {
-      height = 240;
+      height = 160;
     }
     return Container(
-        width: 10,
-        height: 160,
+        width: 30, //need to set any width to center content
+        height: height,
         decoration: const BoxDecoration(
           //color: Colors.black,
           //borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -102,11 +102,12 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
         child: Stack(
             //alignment: Alignment.center,
             children: [
-              Image.asset(
+              /*Image.asset(
                 'assets/images/bg/white_bg.png',
                 //height: 460,
+                //width: 50,
                 fit: BoxFit.cover,
-              ),
+              ),*/
               ValueListenableBuilder<List<MonsterInstance>>(
                   valueListenable: widget.monster.monsterInstances,
                   builder: (context, value, child) {

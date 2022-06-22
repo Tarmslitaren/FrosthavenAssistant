@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
+import '../Resource/ui_utils.dart';
 import 'menus/main_menu.dart';
 import 'menus/status_menu.dart';
 import 'monster_stat_card.dart';
@@ -194,7 +195,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                       color: Colors.black,
                       width: 0.5 * scale,
                     ),
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.black,
                     progressColor: Colors.red,
                     formatValueFixed: 2, //what does this do?
                     changeColorValue:(widget.data.maxHealth.value/2).toInt(),

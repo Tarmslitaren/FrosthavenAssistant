@@ -11,17 +11,9 @@ import 'package:search_choices/search_choices.dart';
 
 import '../../Model/campaign.dart';
 import '../../Resource/commands.dart';
+import '../../Resource/ui_utils.dart';
 import '../bottom_bar.dart';
 import 'add_monster_menu.dart';
-
-void openDialog(BuildContext context, Widget widget) {
-  showDialog(context: context, builder: (BuildContext context) => widget);
-  /*Navigator.of(context).push(MaterialPageRoute<void>(
-    builder: (BuildContext context) {
-      return widget;
-    },
-  ));*/
-}
 
 Drawer createMainMenu(BuildContext context) {
   GameState _gameState = getIt<GameState>();

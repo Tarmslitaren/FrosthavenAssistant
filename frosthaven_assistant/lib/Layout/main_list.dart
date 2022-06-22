@@ -78,7 +78,7 @@ class MainList extends StatefulWidget {
 
 class _MainListState extends State<MainList> {
   final GameState _gameState = getIt<GameState>();
-  List<Item> _generatedList = [];
+  List<Widget> _generatedList = [];
 
   void setCurrentTurn(int index) {
     //gray out all above, expire conditions/(un-expire if last current was lower down in list)
@@ -189,8 +189,9 @@ class _MainListState extends State<MainList> {
 
   List<Widget> generateChildren() {
     //insert, remove and reorder. don't recreate. let's see about them animations.
+    //this causes items not to update their inner shit unless they are moved.
     //I suppose I could do special hacks her since I know which items move where - add some hacky animation solution?
-    for (int i = 0; i < _gameState.currentList.length; i++) {
+    /*for (int i = 0; i < _gameState.currentList.length; i++) {
       var data = _gameState.currentList[i];
       bool found = false;
 
@@ -227,17 +228,17 @@ class _MainListState extends State<MainList> {
           _generatedList.remove(item);
         }
       }
-    }
+    }*/
 
 
 
-    /*_generatedList = List<Widget>.generate(
+    _generatedList = List<Widget>.generate(
       //TODO: this is probably super inefficient and also blocks animation
       _gameState.currentList.length,
       (index) => Container(
           key: Key(_gameState.currentList[index].toString()),
           child: Item(data: _gameState.currentList[index])),
-    );*/
+    );
     return _generatedList;
   }
 
