@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
+import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -170,13 +171,15 @@ class MonsterInstance extends Figure{
 
 
   void setLevel(Monster monster) {
+    dynamic newHealthValue = 0;
     if (type == MonsterType.boss) {
-      maxHealth.value = monster.type.levels[monster.level.value].boss!.health;
+      newHealthValue = monster.type.levels[monster.level.value].boss!.health;
     } else if (type == MonsterType.elite) {
-      maxHealth.value = monster.type.levels[monster.level.value].elite!.health;
+      newHealthValue= monster.type.levels[monster.level.value].elite!.health;
     } else if (type == MonsterType.normal) {
-      maxHealth.value = monster.type.levels[monster.level.value].normal!.health;
+      newHealthValue = monster.type.levels[monster.level.value].normal!.health;
     }
+    maxHealth.value = StatCalculator.getHitPoints(newHealthValue);
     level.value = monster.level.value;
     health.value = maxHealth.value;
   }

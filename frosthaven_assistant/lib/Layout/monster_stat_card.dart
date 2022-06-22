@@ -4,10 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Model/monster.dart';
+import '../Resource/commands.dart';
+import '../Resource/stat_calculator.dart';
 import '../services/service_locator.dart';
 import 'line_builder.dart';
 import 'menus/main_menu.dart';
@@ -81,6 +84,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
             valueListenable: widget.data.level,
             builder: (context, value, child) {
               _level = widget.data.level.value;
+              bool isBoss = widget.data.type.levels[_level].boss != null;
               return Container(
                   margin: EdgeInsets.all(2 * scale * tempScale),
                   child: Stack(
@@ -113,7 +117,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   ]),
                             ),
                           )),
-                      widget.data.type.levels[_level].boss == null
+                      !isBoss
                           ? Positioned(
                               left: 82.0 * tempScale * scale,
                               top: 26.0 * tempScale * scale,
@@ -122,8 +126,12 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      widget.data.type.levels[_level].normal!
-                                          .health
+                                      StatCalculator.getHitPoints(widget
+                                              .data
+                                              .type
+                                              .levels[_level]
+                                              .normal!
+                                              .health)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
@@ -156,8 +164,8 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      widget
-                                          .data.type.levels[_level].boss!.health
+                                      StatCalculator.getHitPoints(widget.data
+                                              .type.levels[_level].boss!.health)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
@@ -181,7 +189,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 ],
                               ),
                             ),
-                      widget.data.type.levels[_level].boss == null
+                      !isBoss
                           ? Positioned(
                               left: 6.0 * tempScale * scale,
                               top: 24.0 * tempScale * scale,
@@ -246,7 +254,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                               scale),
                                         ])
                                   ])),
-                      widget.data.type.levels[_level].boss == null
+                      !isBoss
                           ? Positioned(
                               right: 80.0 * tempScale * scale,
                               top: 26.0 * tempScale * scale,
@@ -255,8 +263,12 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      widget.data.type.levels[_level].elite!
-                                          .health
+                                      StatCalculator.getHitPoints(widget
+                                              .data
+                                              .type
+                                              .levels[_level]
+                                              .elite!
+                                              .health)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
@@ -282,7 +294,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               ),
                             )
                           : Container(),
-                      widget.data.type.levels[_level].boss == null
+                      !isBoss
                           ? Positioned(
                               width: 65 * tempScale * scale,
                               right: 0.0,
@@ -297,7 +309,7 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   scale),
                             )
                           : Container(),
-                      widget.data.type.levels[_level].boss == null
+                      !isBoss
                           ? widget.data.type.flying
                               ? Positioned(
                                   height: 20 * tempScale * scale,
@@ -328,24 +340,38 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               child: IconButton(
                                 icon: Image.asset('assets/images/psd/add.png'),
                                 onPressed: () {
-                                  openDialog(
-                                      context,
-                                      Stack(children: [
-                                        Positioned(
-                                          //TODO: how to get a good grip on position
-                                          //left: 100, // left coordinate
-                                          //top: 100,  // top coordinate
-                                          child: Dialog(
-                                            child: AddStandeeMenu(
-                                              elite: false,
-                                              monster: widget.data,
+                                  if (widget
+                                          .data.monsterInstances.value.length ==
+                                      widget.data.type.count - 1) {
+                                    //directly add last standee
+                                    GameMethods.addStandee(
+                                        null,
+                                        widget.data,
+                                        isBoss
+                                            ? MonsterType.boss
+                                            : MonsterType.normal);
+                                  } else if (widget
+                                          .data.monsterInstances.value.length <
+                                      widget.data.type.count - 1) {
+                                    openDialog(
+                                        context,
+                                        Stack(children: [
+                                          Positioned(
+                                            //TODO: how to get a good grip on position
+                                            //left: 100, // left coordinate
+                                            //top: 100,  // top coordinate
+                                            child: Dialog(
+                                              child: AddStandeeMenu(
+                                                elite: false,
+                                                monster: widget.data,
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      ]));
+                                          )
+                                        ]));
+                                  }
                                 },
                               ))),
-                      widget.data.type.levels[_level].boss == null
+                      !isBoss
                           ? Positioned(
                               bottom: 1 * scale * tempScale,
                               right: 1 * scale * tempScale,
@@ -353,26 +379,35 @@ class _MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   width: 25 * scale,
                                   height: 25 * scale,
                                   child: IconButton(
-                                    icon: Image.asset(
-                                        'assets/images/psd/add.png'),
-                                    onPressed: () {
-                                      openDialog(
-                                          context,
-                                          Stack(children: [
-                                            Positioned(
-                                              //TODO: how to get a good grip on position
-                                              //left: 100, // left coordinate
-                                              //top: 100,  // top coordinate
-                                              child: Dialog(
-                                                child: AddStandeeMenu(
-                                                  elite: true,
-                                                  monster: widget.data,
-                                                ),
-                                              ),
-                                            )
-                                          ]));
-                                    },
-                                  )))
+                                      icon: Image.asset(
+                                          'assets/images/psd/add.png'),
+                                      onPressed: () {
+                                        if (widget.data.monsterInstances.value
+                                                .length ==
+                                            widget.data.type.count - 1) {
+                                          //directly add last standee
+                                          GameMethods.addStandee(null,
+                                              widget.data, MonsterType.elite);
+                                        } else if (widget.data.monsterInstances
+                                                .value.length <
+                                            widget.data.type.count - 1) {
+                                          openDialog(
+                                              context,
+                                              Stack(children: [
+                                                Positioned(
+                                                  //TODO: how to get a good grip on position
+                                                  //left: 100, // left coordinate
+                                                  //top: 100,  // top coordinate
+                                                  child: Dialog(
+                                                    child: AddStandeeMenu(
+                                                      elite: true,
+                                                      monster: widget.data,
+                                                    ),
+                                                  ),
+                                                )
+                                              ]));
+                                        }
+                                      })))
                           : Container(),
                     ],
                   ));

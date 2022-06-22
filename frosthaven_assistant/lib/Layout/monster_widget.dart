@@ -192,14 +192,16 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                 child: Container(
                     //margin: EdgeInsets.all(2*tempScale*scale),
                     child: Stack(alignment: Alignment.bottomCenter, children: [
-                  Image(
+                  Container(
+                    margin: EdgeInsets.only(bottom: 4*scale, top: 4*scale),
+                    child:Image(
                     //fit: BoxFit.contain,
                     height: height,
                     width: height,
                     image: AssetImage(
                         "assets/images/monsters/${widget.data.type.gfx}.png"),
                     //width: widget.height*0.8,
-                  ),
+                  ),),
                   Container(
                       width: height * 0.95,
                       //height: height,

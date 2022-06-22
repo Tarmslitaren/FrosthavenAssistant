@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
+import 'commands.dart';
 import 'monster_ability_state.dart';
 
 GameState _gameState = getIt<GameState>();
@@ -234,6 +235,28 @@ class GameMethods {
   static void shuffleDecks(){
     for(var deck in _gameState.currentAbilityDecks) {
       deck.shuffle();
+    }
+  }
+
+  static void addStandee(int? nr, Monster data, MonsterType type ){
+    if(nr != null) {
+      _gameState.action(AddStandeeCommand(nr, data, type));
+    }
+    else {
+      //add first un added nr
+      for(int i = 1; i <= data.type.count; i++) {
+        bool added = false;
+        for (var item in data.monsterInstances.value) {
+          if (item.standeeNr == i) {
+            added = true;
+            break;
+          }
+        }
+        if (!added) {
+          _gameState.action(AddStandeeCommand(i, data, type));
+          return;
+        }
+      }
     }
   }
 }

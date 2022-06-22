@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/commands.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:local_hero/local_hero.dart';
 //import 'package:great_list_view/great_list_view.dart';
 //import 'package:reorderableitemsview/reorderableitemsview.dart';
 import 'package:reorderables/reorderables.dart';
@@ -48,6 +49,10 @@ class Item extends StatelessWidget {
     } else {
       height = 0;
     }
+    /*return LocalHero(
+      tag: child.key.toString(),
+      child: child,
+    );*/
     return child;
     return AnimatedContainer(
       height: height,
@@ -73,6 +78,7 @@ class MainList extends StatefulWidget {
 
 class _MainListState extends State<MainList> {
   final GameState _gameState = getIt<GameState>();
+  List<Item> _generatedList = [];
 
   void setCurrentTurn(int index) {
     //gray out all above, expire conditions/(un-expire if last current was lower down in list)
@@ -179,15 +185,60 @@ class _MainListState extends State<MainList> {
     return _gameState.currentList.length;
   }
 
+
+
   List<Widget> generateChildren() {
-    final generatedChildren = List<Widget>.generate(
+    //insert, remove and reorder. don't recreate. let's see about them animations.
+    //I suppose I could do special hacks her since I know which items move where - add some hacky animation solution?
+    for (int i = 0; i < _gameState.currentList.length; i++) {
+      var data = _gameState.currentList[i];
+      bool found = false;
+
+      for(int j = 0; j <_generatedList.length; j++) {
+        var widget = _generatedList[j];
+        if(widget.data == data) {
+          //reorder
+          found = true;
+          if(i != j) {
+            _generatedList.insert(i, _generatedList.removeAt(j));
+          }
+          break;
+        }
+      }
+      if(!found) {
+        //create new
+        _generatedList.insert(i,
+          Item(data: data), //TODO: do I need the container or key?
+        );
+      }
+    }
+
+    //remove extras
+    if(_generatedList.length > _gameState.currentList.length){
+      for(var item in _generatedList) {
+        bool found = false;
+        for (var data in _gameState.currentList){
+          if(item.data == data) {
+            found = true;
+            break;
+          }
+        }
+        if (!found){
+          _generatedList.remove(item);
+        }
+      }
+    }
+
+
+
+    /*_generatedList = List<Widget>.generate(
       //TODO: this is probably super inefficient and also blocks animation
       _gameState.currentList.length,
       (index) => Container(
           key: Key(_gameState.currentList[index].toString()),
           child: Item(data: _gameState.currentList[index])),
-    );
-    return generatedChildren;
+    );*/
+    return _generatedList;
   }
 
   Widget defaultBuildDraggableFeedback(
@@ -220,6 +271,9 @@ class _MainListState extends State<MainList> {
                   alignment: Alignment.topCenter,
                   child: Scrollbar(
                     controller: scrollController,
+                    //child: LocalHeroScope(
+                     // duration: const Duration(milliseconds: 300),
+                     // curve: Curves.easeInOut,
                     child: ReorderableWrap(
                       runAlignment: WrapAlignment.start,
                       scrollAnimationDuration: Duration(milliseconds: 500),
@@ -286,7 +340,8 @@ class _MainListState extends State<MainList> {
                       reorderModel: AutomaticAnimatedListReorderModel(
                           _gameState.currentList),
                     ),*/
-                  ));
+                  //)
+              ));
             }));
   }
 
