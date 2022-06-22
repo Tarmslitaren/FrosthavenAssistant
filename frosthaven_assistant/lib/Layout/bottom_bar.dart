@@ -68,7 +68,59 @@ Widget createLevelWidget(BuildContext context) {
         ValueListenableBuilder<int>(
             valueListenable: _gameState.level,
             builder: (context, value, child) {
-              return Text(
+              return Text.rich(
+                //textAlign: textAlign,
+                TextSpan(
+                  children:[
+                    WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
+                        style: textStyle,
+                        child: const Image(
+                          height: 15.5,
+                          image: AssetImage("assets/images/psd/level.png"),
+                        )
+                    ),
+                    TextSpan(
+                        text: " : ${_gameState.level.value} ", style: textStyle,
+                    ),
+                    WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
+                        style: textStyle,
+                        child: const Image(
+                          height: 15.5,
+                          image: AssetImage("assets/images/psd/traps.png"),
+                        )
+                    ),
+                    TextSpan(
+                      text: " : ${GameMethods.getTrapValue()} / ${GameMethods.getHazardValue()} ", style: textStyle,
+                    ),
+                    WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
+                        style: textStyle,
+                        child: const Image(
+                          height: 15.5,
+                          image: AssetImage("assets/images/psd/xp.png"),
+                        )
+                    ),
+                    TextSpan(
+                      text: " : ${GameMethods.getXPValue()} ", style: textStyle,
+                    ),
+                    WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
+                        style: textStyle,
+                        child: const Image(
+                          height: 15.5,
+                          image: AssetImage("assets/images/psd/coins.png"),
+                        )
+                    ),
+                    TextSpan(
+                      text: " : ${GameMethods.getCoinValue()}", style: textStyle,
+                    ),
+                  ]
+                ),
+              );
+
+                Text(
                   "level: ${_gameState.level.value} trap: ${GameMethods.getTrapValue()} hazard: ${GameMethods.getHazardValue()} xp: +${GameMethods.getXPValue()} coin: x${GameMethods.getCoinValue()}",
               style: textStyle,);
             })
