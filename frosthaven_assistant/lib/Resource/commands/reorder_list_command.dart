@@ -13,6 +13,7 @@ class ReorderListCommand extends Command {
     GameState gameState = getIt<GameState>();
     gameState.currentList.insert(newIndex,
         gameState.currentList.removeAt(oldIndex));
+    gameState.updateList.value++;
   }
 
   @override

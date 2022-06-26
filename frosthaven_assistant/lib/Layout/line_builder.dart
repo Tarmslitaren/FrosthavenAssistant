@@ -1,10 +1,8 @@
 import 'dart:developer';
-import 'dart:html';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 
@@ -144,7 +142,7 @@ List<String> applyStatForToken(
   if (lastToken == "attack") {
     normalValue = normal!.attack;
     if (elite != null) {
-      eliteValue = elite!.attack;
+      eliteValue = elite.attack;
     }
 
     RegExp regEx =
@@ -171,13 +169,13 @@ List<String> applyStatForToken(
     if (normal?.range != 0) {
       normalValue = normal!.range;
       if (elite != null) {
-        eliteValue = elite!.range;
+        eliteValue = elite.range;
       }
     }
   } else if (lastToken == "move") {
     normalValue = normal!.move;
     if (elite != null) {
-      eliteValue = elite!.move;
+      eliteValue = elite.move;
     }
     //TODO: add jump if has innate jump
   }

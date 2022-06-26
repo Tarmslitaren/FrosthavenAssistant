@@ -342,6 +342,9 @@ class GameState extends ActionHandler{
   final round = ValueNotifier<int>(0);
   final roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
 
+  //TODO: ugly hack to delay list update
+  final updateList = ValueNotifier<int>(0);
+
   final level = ValueNotifier<int>(1);
   final solo = ValueNotifier<bool>(false);
   final scenario = ValueNotifier<String>("");
@@ -355,6 +358,7 @@ class GameState extends ActionHandler{
   final elementState = ValueNotifier< Map<Elements, ElementState> >(HashMap());
 
   //GameState? savedState; //load from file, save to file on interval/ app in background? or after any operation?
+  //actually make a list of saved states and use for the undo/redo feature
 
   //config: TODO: move to own state
   final userScaling = ValueNotifier<double>(1.0);

@@ -1,9 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 //import 'package:scaled_app/scaled_app.dart';
+import 'package:wakelock/wakelock.dart';
 
 import 'Layout/menus/main_menu.dart';
 
@@ -26,6 +29,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    //to hide ui top and bottom on android
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    if(!kIsWeb) {
+      Wakelock.enable();
+      //should force app to be in foreground and disable screen lock
+    }
+    //Screen.keepOn(true);
 
     return MaterialApp(
       title: 'Frosthaven Assistant',

@@ -16,7 +16,10 @@ class DrawCommand extends Command {
     GameMethods.sortByInitiative();
     _gameState.round.value++;
     GameMethods.setRoundState(RoundState.playTurns);
-    MainList.scrollToTop();
+    Future.delayed(Duration(milliseconds: 600), () {
+      _gameState.updateList.value++;
+      MainList.scrollToTop();
+    });
 
   }
 

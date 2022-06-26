@@ -200,8 +200,8 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
           final value = min(rotateAnim.value, pi / 2);
           return Transform(
             transform: Matrix4.rotationX(value),
-            child: widget,
             alignment: Alignment.center,
+            child: widget,
           );
         });
   }
@@ -213,7 +213,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
           MonsterAbilityCardModel? card;
-          if (_gameState.roundState.value == RoundState.playTurns) {
+          if (_gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty) {
             card = GameMethods.getDeck(widget.data.type.deck)!.discardPile.peek;
           }
 
@@ -237,6 +237,9 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 
               setState(() {});
             },
+              onDoubleTap: (){
+              //TODO: zoom in (show larger)
+              },
             child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 600),
                 transitionBuilder: _transitionBuilder,

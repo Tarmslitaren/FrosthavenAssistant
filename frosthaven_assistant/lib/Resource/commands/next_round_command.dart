@@ -22,14 +22,16 @@ class NextRoundCommand extends Command {
     GameMethods.updateElements();
     GameMethods.setRoundState(RoundState.chooseInitiative);
     GameMethods.sortCharactersFirst();
-    MainList.scrollToTop();
 
-    //TODO: a million more things: save a bunch of state: all current initiatives and monster deck states
+    Future.delayed(Duration(milliseconds: 600), () {
+        _gameState.updateList.value++;
+        MainList.scrollToTop();
+    });
   }
 
   @override
   void undo() {
     GameMethods.setRoundState(RoundState.playTurns);
-    //TODO: a million more things: reapply a bunch of state: all current initiatives and monster deck states
+    //TODO
   }
 }

@@ -31,12 +31,12 @@ class Item extends StatelessWidget {
     late final double height;
     if (data is Character) {
       Character character = data as Character;
-      child = CharacterWidget(characterClass: character.characterClass);
+      child = CharacterWidget(key: Key(character.id), characterClass: character.characterClass);
       height = 60 * scale; //TODO:cna I get implicit height?
       //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else if (data is Monster) {
       Monster monster = data as Monster;
-      child = MonsterWidget(data: monster);
+      child = MonsterWidget(key: Key(monster.id), data: monster);
       int standeeRows = 0;
       if (monster.monsterInstances.value.length > 0) {
         standeeRows = 1;
@@ -85,9 +85,7 @@ class _MainListState extends State<MainList> {
   }
 
   void sortList() {
-    setState(() {
-      GameMethods.sortByInitiative();
-    });
+    GameMethods.sortByInitiative();
   }
 
   @override
@@ -235,9 +233,7 @@ class _MainListState extends State<MainList> {
     _generatedList = List<Widget>.generate(
       //TODO: this is probably super inefficient and also blocks animation
       _gameState.currentList.length,
-      (index) => Container(
-          key: Key(_gameState.currentList[index].toString()),
-          child: Item(data: _gameState.currentList[index])),
+      (index) => Item(data: _gameState.currentList[index]),
     );
     return _generatedList;
   }
@@ -264,8 +260,8 @@ class _MainListState extends State<MainList> {
         data: Theme.of(context).copyWith(
             //not needed
             ),
-        child: ValueListenableBuilder<int>(
-            valueListenable: _gameState.commandIndex,
+        child: ValueListenableBuilder<int>( //todo listen for changes in list, not all commands?
+            valueListenable: _gameState.updateList,
             builder: (context, value, child) {
               double scale = getScaleByReference(context);
               return Container(
@@ -288,11 +284,11 @@ class _MainListState extends State<MainList> {
                       needsLongPressDraggable: true,
                       controller: scrollController,
                       onReorder: (int oldIndex, int newIndex) {
-                        setState(() {
+                        //setState(() {
                           _gameState.action(ReorderListCommand(newIndex, oldIndex));
                           //_gameState.currentList.insert(newIndex,
                           //    _gameState.currentList.removeAt(oldIndex));
-                        });
+                        //});
                       },
                       children: generateChildren(),
                     ),

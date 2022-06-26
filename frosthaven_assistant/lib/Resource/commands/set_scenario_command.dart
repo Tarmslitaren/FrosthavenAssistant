@@ -38,6 +38,8 @@ class SetScenarioCommand extends Command {
     GameMethods.setRoundState(RoundState.chooseInitiative);
     GameMethods.sortCharactersFirst();
     _gameState.scenario.value = _scenario;
+
+    _gameState.updateList.value++;
   }
 
   @override

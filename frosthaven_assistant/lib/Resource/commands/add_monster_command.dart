@@ -23,6 +23,7 @@ class AddMonsterCommand extends Command {
     }
     newList.add(monster);
     _gameState.currentList = newList;
+    _gameState.updateList.value++;
   }
 
   @override

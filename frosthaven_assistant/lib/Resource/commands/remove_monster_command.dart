@@ -30,6 +30,7 @@ class RemoveMonsterCommand extends Command {
       }
     }
     _gameState.currentList = newList;
+    _gameState.updateList.value++;
   }
 
   @override

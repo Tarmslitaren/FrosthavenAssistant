@@ -23,6 +23,7 @@ class AddCharacterCommand extends Command {
     }
     newList.insert(0, character);
     _gameState.currentList = newList;
+    _gameState.updateList.value++;
   }
 
   @override
