@@ -70,7 +70,6 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     return GestureDetector(
         onTap: () {
           //if grayscale mode: fade in the stats (if hide stats enabled)
-          setState(() {});
         },
         child: ValueListenableBuilder<int>(
             valueListenable: widget.data.level,

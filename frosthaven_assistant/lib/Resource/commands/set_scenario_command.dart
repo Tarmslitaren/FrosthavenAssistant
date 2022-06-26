@@ -17,9 +17,10 @@ class SetScenarioCommand extends Command {
     for (var item in _gameState.currentList) {
       if (item is Character) {
         newList.add(item);
-        item.characterState.initiative = 0;
+        item.characterState.initiative = 0; //TODO: initiative values not
         item.characterState.health.value = item.characterClass.healthByLevel[item.characterState.level.value-1];
         item.characterState.xp.value = 0;
+        item.characterState.conditions.value.clear();
       }
       if (item is Monster) {
         item.monsterInstances.value.clear();

@@ -233,7 +233,7 @@ class _MainListState extends State<MainList> {
     _generatedList = List<Widget>.generate(
       //TODO: this is probably super inefficient and also blocks animation
       _gameState.currentList.length,
-      (index) => Item(data: _gameState.currentList[index]),
+      (index) => Item(key: Key(_gameState.currentList[index].id), data: _gameState.currentList[index]),
     );
     return _generatedList;
   }

@@ -26,7 +26,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   _MonsterAbilityCardWidgetState createState() =>
       _MonsterAbilityCardWidgetState();
 
-  static Widget buildFront(MonsterAbilityCardModel? card, Monster data, int level, double scale) {
+  static Widget buildFront(MonsterAbilityCardModel? card, Monster data, double scale) {
     String initText = card!.initiative.toString();
     if (initText.length == 1) {
       initText = "0" + initText;
@@ -137,7 +137,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     return Container(
         key: const ValueKey<int>(0),
         margin: EdgeInsets.all(2 * scale),
-        //width: 180*tempScale*scale,
+        width: 179*tempScale*scale, //this evaluates to same space as front somehow.
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -228,7 +228,6 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
             }
           }
 
-          int level = _gameState.level.value;
 
           return GestureDetector(
             onTap: () {
@@ -249,7 +248,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 //switchInCurve: Curves.easeInBack,
                 //switchOutCurve: Curves.easeInBack.flipped,
                 child: _gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty
-                    ? MonsterAbilityCardWidget.buildFront(card, widget.data, level, scale)
+                    ? MonsterAbilityCardWidget.buildFront(card, widget.data, scale)
                     : MonsterAbilityCardWidget.buildRear(scale, _deckSize),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);
             //CurvedAnimation(parent: null, curve: Curves.easeIn)

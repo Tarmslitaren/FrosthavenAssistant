@@ -28,7 +28,7 @@ class Item extends StatelessWidget {
 
     //TODO: the level should be linked to monster data / stats and not general level
     child = revealed
-        ? MonsterAbilityCardWidget.buildFront(data, monsterData, _gameState.level.value, scale)
+        ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale)
         : MonsterAbilityCardWidget.buildRear(scale, -1);
     height = 120 * tempScale * scale;
 

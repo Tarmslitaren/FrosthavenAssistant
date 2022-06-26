@@ -25,9 +25,14 @@ class AddStandeeCommand extends Command {
       if (getIt<GameState>().roundState.value == RoundState.chooseInitiative) {
         GameMethods.sortCharactersFirst();
       } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
+        GameMethods.drawAbilityCardFromInactiveDeck();
         GameMethods.sortByInitiative();
       }
+      Future.delayed(Duration(milliseconds: 600), () {
+        getIt<GameState>().updateList.value++;
+      });
     }
+
   }
 
   @override

@@ -88,6 +88,24 @@ class GameMethods {
     return true;
   }
 
+
+  static void drawAbilityCardFromInactiveDeck() {
+    for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
+      for (var item in _gameState.currentList) {
+        if(item is Monster) {
+          if(item.type.deck == deck.name) {
+            if (item.monsterInstances.value.isNotEmpty) {
+              if(deck.discardPile.isEmpty) {
+                deck.draw();
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
   static void drawAbilityCards() {
     for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
       for (var item in _gameState.currentList) {
@@ -190,17 +208,35 @@ class GameMethods {
 
 
     _gameState.currentList.sort((a, b) {
+      //dead characters dead last
+      if (a is Character) {
+        if (b is Character) {
+          if(b.characterState.health.value == 0) {
+            return -1;
+          }
+        }
+        if(a.characterState.health.value == 0) {
+          return 1;
+        }
+      }
+      if (b is Character) {
+        if(b.characterState.health.value == 0) {
+          return -1;
+        }
+        if (a is Character) {
+          if(a.characterState.health.value == 0) {
+            return 1;
+          }
+        }
+      }
       int aInitiative = 0;
       int bInitiative = 0;
       if (a is Character) {
         aInitiative = a.characterState.initiative;
-        if(a.characterState.health.value == 0) {
-          aInitiative = 100;
-        }
       } else if (a is Monster) {
         if(a.monsterInstances.value.isEmpty) {
           if(b is Monster && b.monsterInstances.value.isEmpty) {
-            return -1;
+            return 1;
           }
           return 1; //inactive at bottom
         }
@@ -214,9 +250,6 @@ class GameMethods {
       }
       if (b is Character) {
         bInitiative = b.characterState.initiative;
-        if(b.characterState.health.value == 0) {
-          bInitiative = 100;
-        }
       } else if (b is Monster) {
         if(b.monsterInstances.value.isEmpty) {
           if(a is Monster && a.monsterInstances.value.isEmpty) {
