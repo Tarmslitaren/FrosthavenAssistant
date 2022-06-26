@@ -3,6 +3,7 @@
 //stat sheet
 //monster boxes
 import 'package:flutter/material.dart';
+
 //import 'package:flutter_reorderable_grid_view/entities/reorderable_entity.dart';
 //import 'package:flutter_reorderable_grid_view/widgets/reorderable_builder.dart';
 //import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -54,9 +55,9 @@ class _MonsterWidgetState extends State<MonsterWidget> {
   Widget buildMonsterBoxGrid() {
     final generatedChildren = List<Widget>.generate(
       widget.data.monsterInstances.value.length,
-          (index) => Container(
+      (index) => Container(
         key: Key(widget.data.monsterInstances.value[index].toString()),
-        child:  MonsterBox(data: widget.data.monsterInstances.value[index]),
+        child: MonsterBox(data: widget.data.monsterInstances.value[index]),
       ),
     );
     return Wrap(
@@ -163,19 +164,20 @@ class _MonsterWidgetState extends State<MonsterWidget> {
     double scale = getScaleByReference(context);
     double height = scale * tempScale * 120;
     bool active = false;
-    if(widget.data.monsterInstances.value.isNotEmpty) {
+    if (widget.data.monsterInstances.value.isNotEmpty) {
       active = true;
     }
     return ColorFiltered(
-        colorFilter: active ? ColorFilter.matrix(identity) : ColorFilter.matrix(grayScale),
-      child:
-      Column(mainAxisSize: MainAxisSize.max, children: [
-      SizedBox(
-        height: 120 * tempScale * scale, //this dictates size of the cards
-        width: getMainListWidth(context),
-        child: Row(
-          children: [
-            GestureDetector(
+        colorFilter: active
+            ? ColorFilter.matrix(identity)
+            : ColorFilter.matrix(grayScale),
+        child: Column(mainAxisSize: MainAxisSize.max, children: [
+          SizedBox(
+            height: 120 * tempScale * scale, //this dictates size of the cards
+            width: getMainListWidth(context),
+            child: Row(
+              children: [
+                /*GestureDetector( //reason to remove this: blocks drag and drop non long press
                 onVerticalDragStart: (details) {
                   //start moving the widget in the list
                 },
@@ -189,19 +191,21 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                   //open stats menu
                   setState(() {});
                 },
-                child: Container(
+                child:*/
+                Container(
                     //margin: EdgeInsets.all(2*tempScale*scale),
                     child: Stack(alignment: Alignment.bottomCenter, children: [
                   Container(
-                    margin: EdgeInsets.only(bottom: 4*scale, top: 4*scale),
-                    child:Image(
-                    //fit: BoxFit.contain,
-                    height: height,
-                    width: height,
-                    image: AssetImage(
-                        "assets/images/monsters/${widget.data.type.gfx}.png"),
-                    //width: widget.height*0.8,
-                  ),),
+                    margin: EdgeInsets.only(bottom: 4 * scale, top: 4 * scale),
+                    child: Image(
+                      //fit: BoxFit.contain,
+                      height: height,
+                      width: height,
+                      image: AssetImage(
+                          "assets/images/monsters/${widget.data.type.gfx}.png"),
+                      //width: widget.height*0.8,
+                    ),
+                  ),
                   Container(
                       width: height * 0.95,
                       //height: height,
@@ -219,24 +223,25 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                                   color: Colors.black)
                             ]),
                       ))
-                ]))),
-            MonsterAbilityCardWidget(data: widget.data),
-            MonsterStatCardWidget(data: widget.data),
-          ],
-        ),
-      ),
-      Container(
-        //color: Colors.amber,
-        //height: 50,
-        width: getMainListWidth(context),
-        child: ValueListenableBuilder<List<MonsterInstance>>(
-            valueListenable: widget.data.monsterInstances,
-            builder: (context, value, child) {
-              return buildMonsterBoxGrid();
-            }),
-      ),
-      //TODO: add standees list here (AnimatbleGrid?)
-    ])
-    );
+                ])
+                    //)
+                    ),
+                MonsterAbilityCardWidget(data: widget.data),
+                MonsterStatCardWidget(data: widget.data),
+              ],
+            ),
+          ),
+          Container(
+            //color: Colors.amber,
+            //height: 50,
+            width: getMainListWidth(context),
+            child: ValueListenableBuilder<List<MonsterInstance>>(
+                valueListenable: widget.data.monsterInstances,
+                builder: (context, value, child) {
+                  return buildMonsterBoxGrid();
+                }),
+          ),
+          //TODO: add standees list here (AnimatbleGrid?)
+        ]));
   }
 }
