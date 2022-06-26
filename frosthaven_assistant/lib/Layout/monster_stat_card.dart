@@ -118,7 +118,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      StatCalculator.getHitPoints(widget
+                                      StatCalculator.calculateFormula(widget
                                               .data
                                               .type
                                               .levels[_level]
@@ -156,7 +156,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      StatCalculator.getHitPoints(widget.data
+                                      StatCalculator.calculateFormula(widget.data
                                               .type.levels[_level].boss!.health)
                                           .toString(),
                                       style: leftStyle),
@@ -226,7 +226,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                               widget.data.type.levels[_level]
                                                   .boss!.special1,
                                               false,
-                                              false,
+                                              true,
                                               widget.data,
                                               CrossAxisAlignment.start,
                                               scale),
@@ -240,7 +240,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                               widget.data.type.levels[_level]
                                                   .boss!.special2,
                                               false,
-                                              false,
+                                              true,
                                               widget.data,
                                               CrossAxisAlignment.start,
                                               scale),
@@ -255,7 +255,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      StatCalculator.getHitPoints(widget
+                                      StatCalculator.calculateFormula(widget
                                               .data
                                               .type
                                               .levels[_level]

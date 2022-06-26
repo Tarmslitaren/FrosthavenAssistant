@@ -2,9 +2,11 @@ import 'dart:developer';
 import 'dart:html';
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
+import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 
 import '../Resource/game_state.dart';
 
@@ -92,11 +94,11 @@ List<Map<String, int>> getStatTokens(Monster monster, bool elite) {
 }
 
 int? parseIntValue(String input) {
-  //log("input: "+input);
+  log("pares int input: " + input);
   //get the value:
   int lastIndex = input.length;
-  for( int i = lastIndex; i < input.length; i++) {
-    if(input[i]== " "){
+  for (int i = lastIndex; i < input.length; i++) {
+    if (input[i] == " ") {
       lastIndex = i;
       break;
     }
@@ -121,171 +123,189 @@ int? parseIntValue(String input) {
   return null;
 }
 
-
-//TODO: redo from scratch maybe?
-List<String> applyMonsterStats(String lineInput, String sizeToken, Monster monster) {
-
-  String line = "" + lineInput;
-  List<String> result = [];
-  log("monster: " + monster.id);
-  log("line: "+line);
+List<String> applyStatForToken(
+    String formula,
+    String line,
+    int startIndex,
+    int endIndex,
+    Monster monster,
+    bool showMinimal,
+    String lastToken,
+    List<Map<String, int>> normalTokens,
+    List<Map<String, int>> eliteTokens) {
+  List<String> retVal = [];
   List<String> tokens = [];
   List<String> eTokens = [];
-  var normalTokens = getStatTokens(monster, false);
-  var eliteTokens = getStatTokens(monster, true);
-
+  int normalValue = 0;
+  int eliteValue = 0;
   MonsterStatsModel? normal = monster.type.levels[monster.level.value].boss ??
       monster.type.levels[monster.level.value].normal;
   MonsterStatsModel? elite = monster.type.levels[monster.level.value].elite;
-
-  int partStartIndex = 1;
-  bool isIconPart = false;
-  String lastIconToken = "";
-  int lastNonIconStartIndex = 0;
-  for (int i = 0; i < line.length; i++) {
-    if (line[i] == '%') {
-      if (isIconPart) {
-        String iconToken = line.substring(partStartIndex, i);
-        partStartIndex = i+1;
-        lastIconToken = iconToken;
-        isIconPart = false;
-        lastNonIconStartIndex = i+1;
-        continue; //skip one round
-      } else {
-        isIconPart = true;
-      }
+  if (lastToken == "attack") {
+    normalValue = normal!.attack;
+    if (elite != null) {
+      eliteValue = elite!.attack;
     }
-    //log("line1.5: "+line.substring(0, i));
-    //log("isIconPart: "+isIconPart.toString());
-    //log("line[i]: "+line[i]);
-    //when to do calculations: only after a token that can have a modifiable value
-    if(lastIconToken.isNotEmpty && isIconPart == false && (line[i] == '%' || i == line.length-1 ||
-        (line[i] == " " && line[i+1] == "%")
-        //TODO: this is wrong. should ckeck regexp not a number? - other solution: make sure to end string at nr end and use ! to right align
-    )){
-      //parse this part
-      int? normalResult;
-      int? eliteResult;
-      //eff this
-      //we are assuming a token is followed eiter by a value or text. not both. TODO: examine if this is indeed correct (or change solution)
-      log("line2: "+line);
-      String textPart = line.substring(lastNonIconStartIndex, i+1);
-      log("line3: "+line);
-      log("textpart: "+textPart);
 
-      if (lastIconToken == "attack") {
-        RegExp regEx = RegExp(r"(?=.*[a-z])");
-        for (var item in normalTokens) {
-          if (regEx.hasMatch(item.keys.first) == true) {
-            if(item.keys.first != "shield" &&
-                item.keys.first != "retaliate" &&
-                item.keys.first != "jump" //TODO: check if works fine now
-            ) {
-              tokens.add("%${item.keys.first}%");
-            }
-          }
-        }
-        for (var item in eliteTokens) {
-          if (regEx.hasMatch(item.keys.first) == true) {
-            if(item.keys.first != "shield" &&
-                item.keys.first != "retaliate" &&
-                item.keys.first != "jump" //TODO: check if works fine now
-            ) {
-              eTokens.add("%${item.keys.first}%");
-            }
-          }
-        }
-
-        //TODO: handle C and other calculations. use on any dynamic. also on attribute values (like shield C)
-        int? number = parseIntValue(textPart);
-        if (number != null) {
-          normalResult = number + normal?.attack as int;
-          if (elite != null) {
-            eliteResult = number + elite.attack as int;
-          }
-        } else {
-          //TODO: in case an attack with a value but no sign - should here add the tokens anyway? is there such a case?
-        }
-      }
-      else if (lastIconToken == "range") {
-        //later games the monsters have no range values
-        if (normal?.range != 0) {
-          int? number = parseIntValue(textPart);
-          if (number != null) {
-            normalResult = number + normal!.range;
-            if (elite != null) {
-              eliteResult = number + elite.range;
-            }
-          }
-        }
-      }
-      else if (lastIconToken == "move") {
-        int? number = parseIntValue(textPart);
-        if (number != null) {
-          if (normal?.move != null) {
-            normalResult = number + normal!.move;
-            if (elite != null) {
-              eliteResult = number + elite.move;
-            }
-            //TODO: add jump if has innate jump
-          }
-        }
-      }
-      //TODO: handle shield, jump and add target. heal. maybe retaliate??
-      else if (lastIconToken == "shield") {
-      }
-      else if (lastIconToken == "target") {
-      }
-      else if (lastIconToken == "retaliate") {
-      }
-
-      else if (lastIconToken == "jump") {
-      }
-      else if (lastIconToken == "heal") {
-      }
-
-      String newStringPart = "";
-      if (normalResult != null) {
-        newStringPart+=normalResult.toString();
-        //add tokens
-        for (var item in tokens) {
-          newStringPart+= "|" + item; //disable text printout for conditions
-        }
-        String elitePart = sizeToken+"!£"; //pound means elite :D
-        if (elite != null) {
-          newStringPart += "/";
-          elitePart += eliteResult.toString();
-          for (var item in eTokens) {
-            elitePart+= "|" + item;
-          }
-        }
-        //replace the substring
-        line = line.replaceRange(lastNonIconStartIndex, i+1, newStringPart);
-
-        i = lastNonIconStartIndex + newStringPart.length;
-        if(elitePart.isNotEmpty) {
-          log('linepart '+line.substring(0,i));
-          log('elitepart'+elitePart);
-
-          result.add(line.substring(0, i));
-          result.add(elitePart);
-          if(i+1 < line.length) {
-            String leftOver = sizeToken+"!"+line.substring(i, line.length);
-            log('leftover'+leftOver);
-            //result.add(leftOver);
-            result.addAll(applyMonsterStats(leftOver,sizeToken, monster));
-          }
-          return result;
+    RegExp regEx =
+        RegExp(r"(?=.*[a-z])"); //not sure why I fdo this. only letters?
+    for (var item in normalTokens) {
+      if (regEx.hasMatch(item.keys.first) == true) {
+        if (item.keys.first != "shield" &&
+            item.keys.first != "retaliate" &&
+            item.keys.first != "jump") {
+          tokens.add("%${item.keys.first}%");
         }
       }
     }
-
+    for (var item in eliteTokens) {
+      if (regEx.hasMatch(item.keys.first) == true) {
+        if (item.keys.first != "shield" &&
+            item.keys.first != "retaliate" &&
+            item.keys.first != "jump") {
+          eTokens.add("%${item.keys.first}%");
+        }
+      }
+    }
+  } else if (lastToken == "range") {
+    if (normal?.range != 0) {
+      normalValue = normal!.range;
+      if (elite != null) {
+        eliteValue = elite!.range;
+      }
+    }
+  } else if (lastToken == "move") {
+    normalValue = normal!.move;
+    if (elite != null) {
+      eliteValue = elite!.move;
+    }
+    //TODO: add jump if has innate jump
   }
 
+  //TODO: handle shield, jump and add target. heal. maybe retaliate??
+  else if (lastToken == "shield") {
+    //TOOD: at least this is needed
+  } else if (lastToken == "target") {
+  } else if (lastToken == "retaliate") {
+  } else if (lastToken == "jump") {
+  } else if (lastToken == "heal") {}
+  int normalResult =
+      StatCalculator.calculateFormula(formula + "+" + normalValue.toString());
+  String newStartOfLine =
+      line.substring(0, startIndex) + normalResult.toString();
+  for (var item in eTokens) {
+    newStartOfLine += "|" + item;
+  }
 
+  if (elite != null) {
+    newStartOfLine += "/";
+    retVal.add(newStartOfLine);
+
+    int eliteResult =
+        StatCalculator.calculateFormula(formula + "+" + eliteValue.toString());
+    String eliteString = "!£" + eliteResult.toString();
+    for (var item in eTokens) {
+      eliteString += "|" + item;
+    }
+    retVal.add(eliteString);
+  } else {
+    retVal.add(newStartOfLine);
+  }
+  if (endIndex < line.length) {
+    String leftOver = "!" + line.substring(endIndex + 1, line.length);
+
+    //retVal.addAll(applyMonsterStats(leftOver, sizeToken, monster)); //TODO
+    retVal.add(leftOver);
+  }
+  return retVal;
+  return retVal;
+}
+
+List<String> applyMonsterStats(
+    final String lineInput, String sizeToken, Monster monster) {
+  String line = "" + lineInput; //make sure lineInput is not altered
+  if (kDebugMode) {
+    print("monster: ${monster.id}");
+    print("line: $line");
+  }
+
+  List<String> retVal = [];
+
+  //get the data
+  var normalTokens = getStatTokens(monster, false);
+  var eliteTokens = getStatTokens(monster, true);
+
+  RegExp regExpNumbers = RegExp(r'^[\d ()xCL/*+-]+$');
+  //first pass fix values only
+  String lastToken =
+      ""; //turn this into move or attack or whatever, then apply correct monster stat
+  bool isInToken = false;
+  int tokenStartIndex = 0;
+  for (int i = 0; i < line.length; i++) {
+    if (line[i] == "%") {
+      if (!isInToken) {
+        isInToken = true;
+        tokenStartIndex = i + 1;
+      } else {
+        isInToken = false;
+        lastToken = line.substring(tokenStartIndex, i);
+      }
+    }
+    if ((line[i] == '+' ||
+                line[i] == '-' ||
+                line[i] == 'C' ||
+                line[i] == 'L') &&
+            (i == 0 ||
+                line[i - 1] ==
+                    ' ') //supposing there is always a leading whitespace to any formula
+        ) {
+      String formula = line[i];
+      int startIndex = i;
+      int endIndex = i;
+
+      for (int j = i + 1; j < lineInput.length; j++) {
+        String val = lineInput[j];
+        if (val.contains(regExpNumbers)) {
+          if (val != ' ') formula += val;
+          endIndex = j;
+        } else {
+          i = j; //skip ahead
+          if (lineInput[i - 1] == ' ') {
+            i = j - 1; //restore any skipped whitespace
+            endIndex = endIndex - 1;
+          }
+          break;
+        }
+      }
+      if (formula.length > 1) {
+        //this disallows a single digit or C,L. single C or L could be part of regular text
+        //should do a pass where monster stats are calculated before applying formula
+
+        if (lastToken.isNotEmpty) {
+          retVal = applyStatForToken(
+            formula,
+            line,
+            startIndex,
+            endIndex,
+            monster,
+            false,
+            lastToken,
+            normalTokens,
+            eliteTokens,
+          );
+          lastToken = "";
+          if (retVal.isNotEmpty) {
+            return retVal;
+          }
+        } else {
+          int result = StatCalculator.calculateFormula(formula);
+          line = line.replaceRange(startIndex, endIndex + 1, result.toString());
+        }
+      }
+    }
+  }
 
   return [line];
-
 }
 
 Widget createLines(List<String> strings, bool left, bool applyStats,
@@ -356,7 +376,7 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
       shadows: [shadow]);
 
   var eliteStyle = TextStyle(
-    //maybe slightly bigger between chars space?
+      //maybe slightly bigger between chars space?
       fontFamily: 'Majalla',
       color: Colors.yellow,
       fontSize: 14 * tempScale * scale,
@@ -380,7 +400,7 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
   List<String> localStrings = [];
   localStrings.addAll(strings);
   List<InlineSpan> lastLineTextPartList = [];
-  for (int i = 0; i < localStrings.length; i++){
+  for (int i = 0; i < localStrings.length; i++) {
     String line = localStrings[i];
     String sizeToken = "";
     bool isRightPartOfLastLine = false;
@@ -407,17 +427,17 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
     if (applyStats) {
       List<String> statLines = applyMonsterStats(line, sizeToken, monster);
       line = statLines.removeAt(0);
-      if(statLines.length > 0) {
-        localStrings.insertAll(i+1, statLines);
+      if (statLines.length > 0) {
+        localStrings.insertAll(i + 1, statLines);
       }
     }
-
 
     int partStartIndex = 0;
     bool isIconPart = false;
     bool addText = true;
     for (int i = 0; i < line.length; i++) {
-      if(line[i] == "|"){ //don't add text for conditions added with calculations
+      if (line[i] == "|") {
+        //don't add text for conditions added with calculations
         addText = false;
       }
       if (line[i] == '%') {
@@ -459,8 +479,8 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
             double height = getIconHeight(iconToken, styleToUse.fontSize!);
             if (addText) {
               String? iconTokenText = _tokens[iconToken];
-              textPartList.add(
-                  TextSpan(text: iconTokenText, style: styleToUse));
+              textPartList
+                  .add(TextSpan(text: iconTokenText, style: styleToUse));
             }
             bool mainLine = styleToUse == normalStyle;
             EdgeInsetsGeometry? margin =
@@ -497,20 +517,20 @@ Widget createLines(List<String> strings, bool left, bool applyStats,
         }
         partStartIndex = i + 1;
       }
-      if(line[i] == "£"){
+      if (line[i] == "£") {
         //finish current part
-        String textPart = line.substring(partStartIndex, i+1);
+        String textPart = line.substring(partStartIndex, i + 1);
         //textPartList.add(TextSpan(text: textPart, style: styleToUse));
-        partStartIndex = i+1;
-        if(styleToUse == normalStyle){
+        partStartIndex = i + 1;
+        if (styleToUse == normalStyle) {
           styleToUse = eliteStyle;
-        }else if (styleToUse == smallStyle) {
+        } else if (styleToUse == smallStyle) {
           styleToUse = eliteSmallStyle;
-        }else if(styleToUse == midStyle){
+        } else if (styleToUse == midStyle) {
           styleToUse = eliteMidStyle;
         }
 
-         //TODO: check if different sizes needed
+        //TODO: check if different sizes needed
       }
     }
 

@@ -4,11 +4,12 @@ import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class StatCalculator {
-  static int getHitPoints(final dynamic str) {
+  static int calculateFormula(final dynamic str) {
     if(str is int) {
       return str;
     }
     int C = GameMethods.getCurrentCharacters().length;
+    if(C == 0){ C = 1;}
     int L = getIt<GameState>().level.value;
     String formula = str.replaceAll("C", C.toString());
     formula = formula.replaceAll("L", L.toString());
@@ -77,7 +78,7 @@ class Parser {
       if (eat('*')) x *= parseFactor(); // multiplication
       if (eat('x')) x *= parseFactor(); // multiplication
       else if (eat('/')) {
-        x = x ~/ parseFactor();
+        x = (x / parseFactor()).ceil();
       } else {
         return x;
       }
