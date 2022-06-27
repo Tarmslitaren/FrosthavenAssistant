@@ -34,7 +34,7 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
     } else {
       results = _gameState.modelData.value!.monsters
           .where((user) =>
-          user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+              user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       // we use the toLowerCase() method to make it case-insensitive
     }
@@ -48,7 +48,7 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
   bool _monsterAlreadyAdded(String id) {
     var monsters = GameMethods.getCurrentMonsters();
     for (var monster in monsters) {
-      if (monster.id == id){
+      if (monster.id == id) {
         return true;
       }
     }
@@ -58,8 +58,8 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      //color: Colors.transparent,
-      // shadowColor: Colors.transparent,
+        //color: Colors.transparent,
+        // shadowColor: Colors.transparent,
         margin: const EdgeInsets.all(20),
         child: Stack(children: [
           Column(
@@ -72,8 +72,7 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
                 child: TextField(
                   onChanged: (value) => _runFilter(value),
                   decoration: const InputDecoration(
-                      labelText: 'Add Monster',
-                      suffixIcon: Icon(Icons.search)),
+                      labelText: 'Add Monster', suffixIcon: Icon(Icons.search)),
                 ),
               ),
               const SizedBox(
@@ -82,42 +81,45 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
               Expanded(
                 child: _foundMonsters.isNotEmpty
                     ? ListView.builder(
-                  itemCount: _foundMonsters.length,
-                  itemBuilder: (context, index) => ListTile(
-                    leading: Image(
-                      height: 30,
-                      image: AssetImage(
-                          "assets/images/monsters/${_foundMonsters[index].gfx}.png"),
-                    ),
-                    //iconColor: _foundMonsters[index].color,
-                    title: Text(_foundMonsters[index].hidden
-                        ? "${_foundMonsters[index].display} (special)"
-                        : _foundMonsters[index].display,
-                        style: TextStyle(
-                            fontSize: 18,
+                        itemCount: _foundMonsters.length,
+                        itemBuilder: (context, index) => ListTile(
+                          leading: Image(
+                            height: 30,
+                            image: AssetImage(
+                                "assets/images/monsters/${_foundMonsters[index].gfx}.png"),
+                          ),
+                          //iconColor: _foundMonsters[index].color,
+                          title: Text(
+                              _foundMonsters[index].hidden
+                                  ? "${_foundMonsters[index].display} (special)"
+                                  : _foundMonsters[index].display,
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: _monsterAlreadyAdded(
+                                          _foundMonsters[index].name)
+                                      ? Colors.grey
+                                      : Colors.black)),
+                          trailing: Text("(${_foundMonsters[index].edition})",
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.grey)),
+                          onTap: () {
+                            //TODO: add level selection menu  (0-7) on top in this here menu.
+                            if (!_monsterAlreadyAdded(
+                                _foundMonsters[index].name)) {
+                              setState(() {
+                                _gameState.action(AddMonsterCommand(
+                                    _foundMonsters[index].name, null)); //
+                              });
 
-                            color: _monsterAlreadyAdded(_foundMonsters[index].name)?
-                            Colors.grey : Colors.black
-                        )),
-                    trailing: Text("(${_foundMonsters[index].edition})",
-                        style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey
-                        )),
-                    onTap: () {
-                      //TODO: add level selection menu  (0-7) on top in this here menu.
-                      if (!_monsterAlreadyAdded(_foundMonsters[index].name)){
-                        _gameState.action(AddMonsterCommand(
-                            _foundMonsters[index].name, 1)); //
-                        Navigator.pop(context);
-                      }
-                    },
-                  ),
-                )
+                              //Navigator.pop(context);
+                            }
+                          },
+                        ),
+                      )
                     : const Text(
-                  'No results found',
-                  style: TextStyle(fontSize: 24),
-                ),
+                        'No results found',
+                        style: TextStyle(fontSize: 24),
+                      ),
               ),
             ],
           ),

@@ -7,7 +7,7 @@ import '../game_state.dart';
 class AddMonsterCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final String _name;
-  final int _level;
+  final int? _level;
   late Monster monster;
 
   AddMonsterCommand(this._name, this._level) {

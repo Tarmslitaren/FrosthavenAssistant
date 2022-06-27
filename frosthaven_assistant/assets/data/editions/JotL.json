@@ -43,7 +43,7 @@
         ["Nothing special", 384, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
         ["Hasty Assault", 385, false, 35, "%move% + 1","*.........", "%attack% - 1" ],
         ["Calculated Strike", 386, false, 65, "%move% - 1","*.........", "%attack% + 1"],
-        ["Drain Life", 387, true, 27, "%move% + 0","*.........", "%attack% - 1", "^%range% 2","*.........", "%heal% X", "^Self", "*X is damage suffered by target of attack", "%dark%"],
+        ["Drain Life", 387, true, 27, "%move% + 0","*.........", "%attack% - 1", "^%range% 2","*.........", "%heal% X   %dark%", "^Self", "^X is damage suffered by target of attack"],
         ["Boil Blood", 388, false, 46, "%attack% - 1", "^%range% 2", "^%target% 2", "^%muddle%", "%fire%%use%", "!^+2 %range%" ],
         ["Vile Scourge", 389, false, 77, "%move% - 1","*.........", "%attack% - 1 %aoe-triangle-2-side-with-black%", "^%poison%", "%air%%use%", "!^+1 %attack%"],
         ["Hex Whip", 390, false, 19, "%move% + 1", "^%jump%","*.........", "%attack% - 1", "^%curse%", "%air%"],
@@ -81,7 +81,7 @@
         ["Patch Wounds", 376, true, 30, "%move% + 1","*.........", "%heal% 3", "^Self" ],
         ["Parry", 377, false, 70, "%move% + 0","*.........", "%attack% - 1", "^%disarm%" ],
         ["Vicious Spear", 378, false, 77, "%move% - 1","*.........", "%attack% + 0", "^%range% 3", "^%wound%" ],
-        ["Spiked Pit",379, false, 20, "%attack% + 0", "^%range% 4","*.........", "*Create one 3-damage trap in an adjacent empty hex closest to an enemy." ]
+        ["Spiked Pit",379, false, 20, "%attack% + 0", "^%range% 4","*.........", "^Create one 3-damage trap in an adjacent empty hex closest to an enemy." ]
 
       ]
     },
@@ -161,7 +161,7 @@
         ["Swarm", 424, false, 21, "%move% + 1","*.........", "%attack% - 1", "^Add +1 %attack% if the target is adjacent", "^to any of the Monstrosity's allies."],
         ["Weakening Bite", 425, false, 34, "%move% + 0","*.........", "%attack% + 0", "^%muddle%"],
         ["Explosive Blisters", 426, true, 9, "%move% + 1","*.........", "^Any time a figure attacks the","^Monstrosity this round, that","^figure suffers 2 damage."],
-        ["Unstable Frenzy" ,427, false, 74, "%move% + 0","*.........", "*Monstrosity suffers 1 damage","*.........", "%attack% + 1", "^Target all adjacent enemies"]
+        ["Unstable Frenzy" ,427, false, 74, "%move% + 0","*.........", "^Monstrosity suffers 1 damage.","*.........", "%attack% + 1", "^Target all adjacent enemies"]
       ]
     },
     {
@@ -192,14 +192,14 @@
       "name": "Chaos Demon",
       "edition": "Jaws of the Lion",
       "cards": [
-        ["Chilling Breath", 412, false, 13, "%move% - 1","*.........", "%attack% + 0 %aoe-triangle-2-side-with-black%","*.........", "%ice%%use%", "!*Any time a figure attacks the", "!*Chaos Demon this round,", "!*that figure suffers 2 damage." ],
-        ["Heal Blast", 413, false, 1, "%move% + 1","*.........", "%attack% - 1", "^%range% 3", "%fire%%use%", "!%wound%" ],
+        ["Chilling Breath", 412, false, 13, "%move% - 1","*.........", "%attack% + 0 %aoe-triangle-2-side-with-black%","*.........", "%ice%%use%", "!*Any time a figure attacks the Chaos Demon this round, that figure suffers 2 damage." ],
+        ["Heal Blast", 413, false, 1, "%move% + 1","*.........", "%attack% - 1", "^%range% 3", "%fire%%use%", "!^%wound%" ],
         ["Seismic Punch", 414, false, 67, "%move% - 2","*.........", "%attack% + 1", "^%push% 2", "%earth%%use%", "!%aoe-triangle-2-side-with-black%" ],
         ["Whirlwind", 415, false, 20, "%move% + 0","*.........", "%attack% - 1 %aoe-triangle-2-side%", "^%range% 2","*.........", "%air%%use%", "!^%shield% 2"] ,
-        ["Flashing Claws", 416, false, 41, "%move% + 0","*.........", "%attack% + 0", "^Advantage","*.........", "%light%%use%", "!%heal% 4", "!*Self" ],
-        ["Black Tendrils", 417, false, 52, "%move% - 1","*.........", "%attack% + 1", "%dark%%use%", "!*All enemies adjacent to the", "!*target suffer 1 damage." ],
-        ["Mana Explosion", 418, true, 76, "%move% + 0","*.........", "%attack% + 0", "%fire%%ice%%air%%earth%%light%%dark%" ],
-        ["Hungry Maw", 419, true, 98, "%move% - 1","*.........", "%attack% - 1", "%any%%use%", "!%disarm%" ]
+        ["Flashing Claws", 416, false, 41, "%move% + 0","*.........", "%attack% + 0", "^Advantage","*.........", "%light%%use%", "!^%heal% 4", "*Self" ],
+        ["Black Tendrils", 417, false, 52, "%move% - 1","*.........", "%attack% + 1", "%dark%%use%", "!*All enemies adjacent to the target suffer 1 damage." ],
+        ["Mana Explosion", 418, true, 76, "%move% + 0","*.........", "%attack% + 0", "%fire% %ice% %air% %earth% %light% %dark%" ],
+        ["Hungry Maw", 419, true, 98, "%move% - 1","*.........", "%attack% - 1", "%any%%use%", "!^%disarm%" ]
       ],
       "cardLayouts": [
         {
@@ -222,11 +222,11 @@
       "name": "Stone Golem (JotL)",
       "edition": "Jaws of the Lion",
       "cards": [
-        ["Runic Feeedback", 404, false, 10, "*Any time a figure attacks the", "*Stone Golem this round , that", "*figure suffers 3 damage" ],
-        ["Taxing Advance", 405, false, 28, "%move% + 1","*.........", "%attack% + 0","*.........", "*If the Move ability was performed,", "*the Stone Golem suffers 1 damage." ],
+        ["Runic Feeedback", 404, false, 10, "^Any time a figure attacks the", "^Stone Golem this round , that", "^figure suffers 3 damage" ],
+        ["Taxing Advance", 405, false, 28, "%move% + 1","*.........", "%attack% + 0","*.........", "^If the Move ability was performed,", "^the Stone Golem suffers 1 damage." ],
         ["Hasty Assault", 406, true, 51, "%move% + 1","*.........", "%attack% - 1"],
         ["Nothing Special", 407, false, 64, "%move% + 0","*.........", "%attack% + 0"],
-        ["Sacrificial Hurl", 408, false, 72, "%attack% + 1", "^%range% 3", "*If this attack is performed,", "*the Stone Golem suffers 2 damage."],
+        ["Sacrificial Hurl", 408, false, 72, "%attack% + 1", "^%range% 3", "^If this attack is performed,", "^the Stone Golem suffers 2 damage."],
         ["Calculated Strike", 409, true, 90, "%move% - 1","*.........", "%attack% + 1"],
         ["Ground Pound", 410, false, 83, "%move% + 0","*.........", "%attack% - 1", "^Target all adjacent enemies"],
         ["Runic Draw", 411, false, 28, "%move% + 1","*.........", "%attack% - 2", "^%range% 3", "^%pull% 2", "^%immobilize%" ]
@@ -290,7 +290,7 @@
         ["Nothing Special", 454, false, 48, "%move% + 0","*.........", "%attack% + 0", "^%range% 3"],
         ["Nothing Special", 455, false, 48, "%move% + 0","*.........", "%attack% + 0", "^%range% 3"],
         ["Coupled Chain", 456, false, 61, "%attack% + 0", "^%range% 3", "^%target% 2"],
-        ["Leech Warmth", 457, false, 75, "%move% - 1","*.........", "%attack% + 1", "^%range% 3","*.........", "%heal% 1", "!%ice%", "^Self"],
+        ["Leech Warmth", 457, false, 75, "%move% - 1","*.........", "%attack% + 1", "^%range% 3","*.........", "%heal% 1", "!   %ice%", "^Self"],
         ["Angry Howl", 458, false, 55, "%move% + 0","*.........", "%curse%", "^Target all enemies within %range% 3", "%ice%"],
         ["Icy Glare", 459, false, 67, "%move% - 1","*.........", "%attack% + 1", "^%range% 3", "%ice%%use%", "!^%disarm%"]
       ]
@@ -314,12 +314,12 @@
       "edition": "Jaws of the Lion",
       "note":  "A custom deck for the First of the Order because their text is difficult to read otherwise. We like this special deck but others might find it weird.",
       "cards": [
-        ["Accelerated Power", 468, false, 11, "Special 2:", "!%attack% + 0 ", "%attack% - 1 within", "%range% 2 of target,", "%attack% - 2 within", "%range% 2 of target"],
-        ["Accelerated Power", 469, false, 14, "Special 2:", "!%attack% + 0 ", "%attack% - 1 within", "%range% 2 of target,", "%attack% - 2 within", "%range% 2 of target"],
-        ["Accelerated Power", 470, true, 17, "Special 2:", "!%attack% + 0 ", "%attack% - 1 within", "%range% 2 of target,", "%attack% - 2 within", "%range% 2 of target"],
-        ["Lingering Strength", 471, true, 85, "Special 1:", "All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
-        ["Lingering Strength", 472, false, 79, "Special 1:", " All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
-        ["Lingering Strength", 473, false, 73, "Special 1:", " All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
+        ["Accelerated Power", 468, false, 11, "Special 2:","^%attack% + 0 %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target"],
+        ["Accelerated Power", 469, false, 14, "Special 2:","^%attack% + 0 %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target"],
+        ["Accelerated Power", 470, true, 17, "Special 2:","^%attack% + 0 %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target"],
+        ["Lingering Strength", 471, true, 85, "Special 1:", "^All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
+        ["Lingering Strength", 472, false, 79, "Special 1:", "^All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
+        ["Lingering Strength", 473, false, 73, "Special 1:", "^All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
         ["Nothing Special", 474, false, 36, "%move% + 0","*.........", "%attack% + 0"],
         ["Twin Missiles", 475, false, 54, "%move% - 1","*.........", "%attack% - 1", "^%range% 3", "^%target% 2"]
       ]

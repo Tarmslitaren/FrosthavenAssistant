@@ -57,9 +57,12 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                             color: Colors.grey
                         )),
                     onTap: () {
-                      _gameState.action(RemoveCharacterCommand(
-                          [currentCharacters[index]])); //
-                      Navigator.pop(context);
+                      setState(() {
+                        _gameState.action(RemoveCharacterCommand(
+                            [currentCharacters[index]])); //
+                      });
+
+                      //Navigator.pop(context);
                     },
                   ),
                 ),

@@ -107,9 +107,12 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                           onTap: () {
                             //TODO: add level selection menu  (1-9) on top in this here menu.
                             if (!_characterAlreadyAdded(_foundCharacters[index].name)){
-                              _gameState.action(AddCharacterCommand(
-                                  _foundCharacters[index].name, 1)); //
-                              Navigator.pop(context);
+                              setState(() {
+                                _gameState.action(AddCharacterCommand(
+                                    _foundCharacters[index].name, 1)); //
+                              });
+
+                              //Navigator.pop(context);
                             }
                           },
                         ),

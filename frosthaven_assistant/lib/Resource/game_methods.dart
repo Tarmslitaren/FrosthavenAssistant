@@ -344,9 +344,12 @@ class GameMethods {
     }
   }
 
-  static Monster? createMonster(String name, int level) {
+  static Monster? createMonster(String name, int? level) {
     for (MonsterModel monster in getIt<GameState>().modelData.value!.monsters) {
       if (monster.name == name) {
+        if(level == null) {
+          level = getIt<GameState>().level.value;
+        }
         Monster monster = Monster(name, level);
         return monster;
       }

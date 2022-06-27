@@ -23,13 +23,13 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     late final Widget child;
-    late final double height;
+    //late final double height;
     final GameState _gameState = getIt<GameState>();
 
     child = revealed
         ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale)
         : MonsterAbilityCardWidget.buildRear(scale, -1);
-    height = 120 * tempScale * scale;
+    //height = 120 * tempScale * scale;
 
     return child;
 
@@ -114,7 +114,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
         ),
         child: Container(
           height: _gameState.roundState.value == RoundState.playTurns? screenSize.height * 0.86: screenSize.height * 0.94,
-          width: 198 * tempScale * scale,
+          width: 184 * tempScale * scale,
           //alignment: Alignment.centerLeft,
           //margin: EdgeInsets.only(left: getMainListMargin(context)),
           child: AutomaticAnimatedListView<MonsterAbilityCardModel>(
@@ -128,7 +128,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
                 ? Container(
                     color: Colors.transparent,
                     height: 120 * tempScale * scale,
-                    //TODO: these are for smooth animations. need to be same size as the items
+                    //these are for smooth animations. need to be same size as the items
                   )
                 : Item(
                     data: item,
@@ -215,7 +215,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
           child: Stack(children: [
             //TODO: add diviner functionality:, remove selected (how to mark selected?)
             Row(
-              //TODO: center on screen
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 buildList(drawPile, _gameState.roundState.value == RoundState.playTurns, false, controller),
                 buildList(discardPile, false, true, controller2)

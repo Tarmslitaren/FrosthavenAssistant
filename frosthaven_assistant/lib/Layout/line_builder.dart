@@ -50,7 +50,9 @@ class LineBuilder {
         iconToken == "fire" ||
         iconToken == "ice" ||
         iconToken == "dark" ||
-        iconToken == "light") {
+        iconToken == "light"||
+        iconToken == "any"
+    ) {
       return height * 1.2;
     }
     if (iconToken.contains("aoe")) {
@@ -81,7 +83,9 @@ class LineBuilder {
         iconToken == "fire" ||
         iconToken == "ice" ||
         iconToken == "dark" ||
-        iconToken == "light") {
+        iconToken == "light"||
+    iconToken == "any"
+    ) {
       return EdgeInsets.only(
           top: 0.19 * height); //since icons lager, need lager margin top
     }
@@ -125,37 +129,8 @@ class LineBuilder {
     return values;
   }
 
-  static int? _parseIntValue(String input) {
-    log("pares int input: " + input);
-    //get the value:
-    int lastIndex = input.length;
-    for (int i = lastIndex; i < input.length; i++) {
-      if (input[i] == " ") {
-        lastIndex = i;
-        break;
-      }
-    }
-    String nr = input.substring(2, lastIndex);
-    //log("nr: "+nr);
-    String sign = input.substring(1, 2);
-    bool minus = sign == "-";
-    bool plus = sign == "+";
-    int modifier = 1;
-    if (minus) {
-      modifier = -1;
-    }
-    if (!plus && !minus) {
-      return null; //no op if straight number
-    }
-    if (int.tryParse(nr) != null) {
-      int res = int.tryParse(nr)! * modifier;
-      return res;
-    }
-
-    return null;
-  }
-
-  static List<String> _applyStatForToken(String formula,
+  static List<String> _applyStatForToken(
+      String formula,
       String line,
       String sizeModifier,
       int startIndex,
@@ -180,7 +155,7 @@ class LineBuilder {
       }
 
       RegExp regEx =
-      RegExp(r"(?=.*[a-z])"); //not sure why I fdo this. only letters?
+          RegExp(r"(?=.*[a-z])"); //not sure why I fdo this. only letters?
       for (var item in normalTokens) {
         if (regEx.hasMatch(item.keys.first) == true) {
           if (item.keys.first != "shield" &&
@@ -217,11 +192,15 @@ class LineBuilder {
     //TODO: handle shield, jump and add target. heal. maybe retaliate??
     else if (lastToken == "shield") {
       //TOOD: at least this is needed
-    } else if (lastToken == "target") {} else
-    if (lastToken == "retaliate") {} else
-    if (lastToken == "jump") {} else if (lastToken == "heal") {}
+    } else if (lastToken == "target") {
+    } else if (lastToken == "retaliate") {
+    } else if (lastToken == "jump") {
+    } else if (lastToken == "heal") {}
     int normalResult =
-    StatCalculator.calculateFormula(formula + "+" + normalValue.toString());
+        StatCalculator.calculateFormula(formula + "+" + normalValue.toString());
+    if (normalResult < 0) {
+      normalResult = 0; //needed for blood tumor: has 0 move and a -1 move card
+    }
     String newStartOfLine =
         line.substring(0, startIndex) + normalResult.toString();
     for (var item in eTokens) {
@@ -232,8 +211,11 @@ class LineBuilder {
       newStartOfLine += "/";
       retVal.add(newStartOfLine);
 
-      int eliteResult =
-      StatCalculator.calculateFormula(formula + "+" + eliteValue.toString());
+      int eliteResult = StatCalculator.calculateFormula(
+          formula + "+" + eliteValue.toString());
+      if (eliteResult < 0) {
+        eliteResult = 0;
+      }
       String eliteString = "!" + sizeModifier + "£" + eliteResult.toString();
       for (var item in eTokens) {
         eliteString += "|" + item;
@@ -243,8 +225,8 @@ class LineBuilder {
       retVal.add(newStartOfLine);
     }
     if (endIndex < line.length) {
-      String leftOver = "!" + sizeModifier +
-          line.substring(endIndex + 1, line.length);
+      String leftOver =
+          "!" + sizeModifier + line.substring(endIndex + 1, line.length);
 
       //retVal.addAll(applyMonsterStats(leftOver, sizeToken, monster)); //TODO
       retVal.add(leftOver);
@@ -252,8 +234,8 @@ class LineBuilder {
     return retVal;
   }
 
-  static List<String> _applyMonsterStats(final String lineInput, String sizeToken,
-      Monster monster) {
+  static List<String> _applyMonsterStats(
+      final String lineInput, String sizeToken, Monster monster) {
     String line = "" + lineInput; //make sure lineInput is not altered
     if (kDebugMode) {
       print("monster: ${monster.id}");
@@ -282,14 +264,19 @@ class LineBuilder {
           lastToken = line.substring(tokenStartIndex, i);
         }
       }
-      if ((line[i] == '+' ||
-          line[i] == '-' ||
-          line[i] == 'C' ||
-          line[i] == 'L') &&
-          (i == 0 ||
-              line[i - 1] ==
-                  ' ') //supposing there is always a leading whitespace to any formula
-      ) {
+      if (!isInToken &&
+                  (line[i] == '+' ||
+                      line[i] == '-' ||
+                      line[i] == 'C' ||
+                      line[i] == 'L') ||
+              (line[i].contains(regExpNumbers) &&
+                      lastToken
+                          .isEmpty) //plain numbers cant be calculated for tokens (e.g. attack 1 is not same as attack +1)
+                  &&
+                  (i == 0 ||
+                      line[i - 1] ==
+                          ' ') //supposing there is always a leading whitespace to any formula
+          ) {
         String formula = line[i];
         int startIndex = i;
         int endIndex = i;
@@ -305,12 +292,26 @@ class LineBuilder {
               i = j - 1; //restore any skipped whitespace
               endIndex = endIndex - 1;
             }
+            //hack for when a formula is followed by " (..."
+            if (i > 0 && lineInput[i - 1] == '(') {
+              i = j - 1; //restore any skipped (
+              endIndex = endIndex - 1;
+              formula = formula.substring(0, formula.length - 1);
+              if (i > 1 && lineInput[i - 2] == ' ') {
+                i = j - 1; //restore any skipped whitespace
+                endIndex = endIndex - 1;
+              }
+            }
             break;
           }
         }
-        if (formula.length > 1) {
+        if (formula.length > 1 && lastToken.isNotEmpty || formula.length > 2) {
           //this disallows a single digit or C,L. single C or L could be part of regular text
-          //should do a pass where monster stats are calculated before applying formula
+          //for a formula to work (oustside of plain C or L) it must either be modifying a token vslue or be 3+ chars long
+          //might not be right. test.
+          if (kDebugMode) {
+            print("formula:" + formula);
+          }
 
           if (lastToken.isNotEmpty) {
             retVal = _applyStatForToken(
@@ -331,6 +332,10 @@ class LineBuilder {
             }
           } else {
             int result = StatCalculator.calculateFormula(formula);
+            if (result < 0) {
+              //just some nicety. probably never applies
+              result = 0;
+            }
             line =
                 line.replaceRange(startIndex, endIndex + 1, result.toString());
           }
@@ -343,7 +348,6 @@ class LineBuilder {
 
   static Widget createLines(List<String> strings, bool left, bool applyStats,
       Monster monster, CrossAxisAlignment alignment, double scale) {
-
     var shadow = Shadow(
         offset: Offset(1 * scale * tempScale, 1 * scale * tempScale),
         color: left ? Colors.white : Colors.black);
@@ -358,29 +362,33 @@ class LineBuilder {
     var smallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center ? 9 : 12) *
-            tempScale * scale,
+        fontSize: (alignment == CrossAxisAlignment.center ? 10 : 12) *
+            tempScale *
+            scale,
         //sizes are larger on stat cards
         height: 0.8,
         shadows: [shadow]);
     var midStyle = TextStyle(
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center ? 12 : 13) *
-            tempScale * scale,
+        fontSize: (alignment == CrossAxisAlignment.center ? 12.7 : 13) *
+            tempScale *
+            scale,
         //sizes are larger on stat cards
         height: 0.9,
         shadows: [shadow]);
     var normalStyle = TextStyle(
-      //maybe slightly bigger between chars space?
+        //maybe slightly bigger between chars space?
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: 14 * tempScale * scale,
+        fontSize: (alignment == CrossAxisAlignment.center ? 15.7 : 14) *
+            tempScale *
+            scale,
         height: 0.8,
         shadows: [shadow]);
 
     var eliteStyle = TextStyle(
-      //maybe slightly bigger between chars space?
+        //maybe slightly bigger between chars space?
         fontFamily: 'Majalla',
         color: Colors.yellow,
         fontSize: 14 * tempScale * scale,
@@ -478,8 +486,8 @@ class LineBuilder {
                       Image(
                         height: styleToUse.fontSize! * 1.2,
                         //alignment: Alignment.topCenter,
-                        image: AssetImage(
-                            "assets/images/abilities/$iconGfx.png"),
+                        image:
+                            AssetImage("assets/images/abilities/$iconGfx.png"),
                       )
                     ],
                   )));
@@ -494,7 +502,7 @@ class LineBuilder {
               }
               bool mainLine = styleToUse == normalStyle;
               EdgeInsetsGeometry? margin =
-              _getMarginForToken(iconToken, height, mainLine, alignment);
+                  _getMarginForToken(iconToken, height, mainLine, alignment);
               if (iconToken == "move" && monster.type.flying) {
                 iconGfx = "flying";
               }
@@ -521,6 +529,11 @@ class LineBuilder {
             //create part up to now if length more than 0
             if (i > 0 && partStartIndex < i) {
               String textPart = line.substring(partStartIndex, i);
+              if (i > 0 && line[i - 1] == "|") {
+                //voi ei. remove the | from output. would be nice to find better place to do this
+                textPart = line.substring(partStartIndex, i - 1);
+              }
+
               textPartList.add(TextSpan(text: textPart, style: styleToUse));
             }
             isIconPart = true;

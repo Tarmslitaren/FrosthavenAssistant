@@ -42,6 +42,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
         key: const ValueKey<int>(1),
         margin: EdgeInsets.all(2 * scale * tempScale),
         width: 180 * tempScale * scale,
+        height: 118 * tempScale * scale,
         child: Stack(
           //fit: StackFit.passthrough,
           alignment: AlignmentDirectional.center,
@@ -51,7 +52,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0 * scale),
               child: Image(
-                height: 123 * tempScale * scale,
+                height: 116 * tempScale * scale,
+                //height: 123 * tempScale * scale,
                 image: const AssetImage(
                     "assets/images/psd/monsterAbility-front.png"),
               ),
@@ -110,17 +112,17 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                     bottom: 4.0 * tempScale * scale,
                     child: Container(
                       child: Image(
-                        height: 123 * tempScale * 0.14 * scale,
+                        height: 123 * tempScale * 0.12 * scale,
                         image: const AssetImage(
                             "assets/images/abilities/shuffle.png"),
                       ),
                     ))
                 : Container(),
             Positioned(
-              top: 20.0 * tempScale * scale,
+              top: 10.0 * tempScale * scale,
               //alignment: Alignment.center,
               child: Container(
-                height: 94 * scale * tempScale,
+                height: 110 * scale * tempScale,
                 width: 180 * scale * tempScale, //needed for line breaks in lines
                 //color: Colors.amber,
                 child: LineBuilder.createLines(
@@ -138,13 +140,14 @@ class MonsterAbilityCardWidget extends StatefulWidget {
         key: const ValueKey<int>(0),
         margin: EdgeInsets.all(2 * scale),
         width: 179*tempScale*scale, //this evaluates to same space as front somehow.
+        height: 118 * tempScale * scale,
         child: Stack(
           alignment: Alignment.center,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0 * scale),
               child: Image(
-                height: 123 * tempScale * scale,
+                height: 114 * tempScale * scale,
                 image: const AssetImage(
                     "assets/images/psd/MonsterAbility-back.png"),
               ),

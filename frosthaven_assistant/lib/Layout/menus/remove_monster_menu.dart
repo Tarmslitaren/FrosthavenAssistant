@@ -58,9 +58,13 @@ class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                             color: Colors.grey
                         )),
                     onTap: () {
-                      _gameState.action(RemoveMonsterCommand(
-                          [currentMonsters[index]])); //
-                      Navigator.pop(context);
+                      setState(() {
+                        _gameState.action(RemoveMonsterCommand(
+                            [currentMonsters[index]])); //
+                      });
+
+
+                      //Navigator.pop(context);
                     },
                   ),
                 ),
