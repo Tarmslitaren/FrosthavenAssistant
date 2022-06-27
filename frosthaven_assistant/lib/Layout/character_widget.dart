@@ -342,7 +342,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                         );
                                       }),
                                   Image(
-                                    height: 20.0 * scale * tempScale,
+                                    height: 20.0 * scale * LineBuilder.tempScale,
                                     color: Colors.blue,
                                     image: const AssetImage(
                                         "assets/images/psd/xp.png"),

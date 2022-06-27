@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
@@ -126,13 +125,21 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                           .toString(),
                                       style: leftStyle),
                                   Text(
-                                      widget
-                                          .data.type.levels[_level].normal!.move
+                                      StatCalculator.calculateFormula(widget
+                                          .data
+                                          .type
+                                          .levels[_level]
+                                          .elite!
+                                          .move)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
-                                      widget.data.type.levels[_level].normal!
-                                          .attack
+                                      StatCalculator.calculateFormula(widget
+                                          .data
+                                          .type
+                                          .levels[_level]
+                                          .elite!
+                                          .attack)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
@@ -148,24 +155,38 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               ),
                             )
                           : Positioned(
-                              left: 3.0 * tempScale * scale,
+                              left: 15.0 * tempScale * scale,
                               top: 38.0 * tempScale * scale,
                               child: Column(
-                                //mainAxisAlignment: MainAxisAlignment.center,
-                                //mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                //mainAxisAlignment: MainAxisAlignment.end,
+                                //mainAxisSize: MainAxisSize.max,
                                 children: <Widget>[
                                   Text(
-                                      StatCalculator.calculateFormula(widget.data
-                                              .type.levels[_level].boss!.health)
+                                      StatCalculator.calculateFormula(widget
+                                              .data
+                                              .type
+                                              .levels[_level]
+                                              .boss!
+                                              .health)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
-                                      widget.data.type.levels[_level].boss!.move
+                                      StatCalculator.calculateFormula(widget
+                                          .data
+                                          .type
+                                          .levels[_level]
+                                          .boss!
+                                          .move)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
-                                      widget
-                                          .data.type.levels[_level].boss!.attack
+                                      StatCalculator.calculateFormula(widget
+                                          .data
+                                          .type
+                                          .levels[_level]
+                                          .boss!
+                                          .attack)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
@@ -182,15 +203,15 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                             ),
                       !isBoss
                           ? Positioned(
-                              left: 6.0 * tempScale * scale,
+                              left: 0.0,
                               top: 24.0 * tempScale * scale,
-                              width: 65 * tempScale * scale,
+                              width: 73 * tempScale * scale,
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   //alignment: Alignment.topRight,
                                   //width: 67*tempScale*scale,
                                   children: [
-                                    createLines(
+                                    LineBuilder.createLines(
                                         widget.data.type.levels[_level].normal!
                                             .attributes,
                                         true,
@@ -202,13 +223,13 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           : Positioned(
                               left: 56.0 * tempScale * scale,
                               top: 24.0 * tempScale * scale,
-                              width: 165 * tempScale * scale, //useful or not?
+                              width: 160 * tempScale * scale, //useful or not?
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   //alignment: Alignment.topRight,
                                   //width: 67*tempScale*scale,
                                   children: [
-                                    createLines(
+                                    LineBuilder.createLines(
                                         widget.data.type.levels[_level].boss!
                                             .attributes,
                                         true,
@@ -221,28 +242,40 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text("1:", style: specialStyle),
-                                          createLines(
-                                              widget.data.type.levels[_level]
-                                                  .boss!.special1,
-                                              false,
-                                              true,
-                                              widget.data,
-                                              CrossAxisAlignment.start,
-                                              scale),
+                                          Container(
+                                              width: 140 * tempScale * scale,
+                                              child: LineBuilder.createLines(
+                                                  widget
+                                                      .data
+                                                      .type
+                                                      .levels[_level]
+                                                      .boss!
+                                                      .special1,
+                                                  false,
+                                                  true,
+                                                  widget.data,
+                                                  CrossAxisAlignment.start,
+                                                  scale)),
                                         ]),
                                     Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text("2:", style: specialStyle),
-                                          createLines(
-                                              widget.data.type.levels[_level]
-                                                  .boss!.special2,
-                                              false,
-                                              true,
-                                              widget.data,
-                                              CrossAxisAlignment.start,
-                                              scale),
+                                          Container(
+                                              width: 140 * tempScale * scale,
+                                              child: LineBuilder.createLines(
+                                                  widget
+                                                      .data
+                                                      .type
+                                                      .levels[_level]
+                                                      .boss!
+                                                      .special2,
+                                                  false,
+                                                  true,
+                                                  widget.data,
+                                                  CrossAxisAlignment.start,
+                                                  scale)),
                                         ])
                                   ])),
                       !isBoss
@@ -263,13 +296,21 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      widget
-                                          .data.type.levels[_level].elite!.move
+                                      StatCalculator.calculateFormula(widget
+                                          .data
+                                          .type
+                                          .levels[_level]
+                                          .elite!
+                                          .move)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      widget.data.type.levels[_level].elite!
-                                          .attack
+                                      StatCalculator.calculateFormula(widget
+                                          .data
+                                          .type
+                                          .levels[_level]
+                                          .elite!
+                                          .attack)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
@@ -287,10 +328,10 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           : Container(),
                       !isBoss
                           ? Positioned(
-                              width: 65 * tempScale * scale,
+                              width: 70 * tempScale * scale,
                               right: 0.0,
                               top: 24.0 * tempScale * scale,
-                              child: createLines(
+                              child: LineBuilder.createLines(
                                   widget.data.type.levels[_level].elite!
                                       .attributes,
                                   false,
@@ -345,14 +386,15 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                           .data.monsterInstances.value.length <
                                       widget.data.type.count - 1) {
                                     openDialogAtPosition(
-                                        context, //problem: context is of stat card widget, not the + button
+                                        context,
+                                        //problem: context is of stat card widget, not the + button
                                         AddStandeeMenu(
                                           elite: false,
                                           monster: widget.data,
                                         ),
-                                        -185*scale, //does not take into account the popup does not scale. (should it?)
-                                        12*scale
-                                    );
+                                        -185 * scale,
+                                        //does not take into account the popup does not scale. (should it?)
+                                        12 * scale);
                                   }
                                 },
                               ))),
@@ -382,14 +424,13 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 elite: true,
                                                 monster: widget.data,
                                               ),
-                                            -45*scale,
-                                              12*scale
-                                              );
+                                              -45 * scale,
+                                              12 * scale);
                                         }
                                       })))
                           : Container(),
                       Positioned(
-                        right: 10 *scale,
+                          right: 10 * scale,
                           top: 1 * scale,
                           child: Row(
                             children: createConditionList(scale),
@@ -401,11 +442,11 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
   List<Image> createConditionList(double scale) {
     List<Image> list = [];
-    if(widget.data.type.levels[_level].boss == null) {
+    if (widget.data.type.levels[_level].boss == null) {
       return list;
     }
     for (var item in widget.data.type.levels[_level].boss!.immunities) {
-      item = item.substring(1, item.length-1);
+      item = item.substring(1, item.length - 1);
       Image image = Image(
         height: 11 * scale,
         image: AssetImage("assets/images/conditions/$item.png"),

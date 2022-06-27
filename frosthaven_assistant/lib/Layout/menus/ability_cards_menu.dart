@@ -26,7 +26,6 @@ class Item extends StatelessWidget {
     late final double height;
     final GameState _gameState = getIt<GameState>();
 
-    //TODO: the level should be linked to monster data / stats and not general level
     child = revealed
         ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale)
         : MonsterAbilityCardWidget.buildRear(scale, -1);
@@ -115,8 +114,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
         ),
         child: Container(
           height: _gameState.roundState.value == RoundState.playTurns? screenSize.height * 0.86: screenSize.height * 0.94,
-          width: 188 * tempScale * scale,
-          //a bit disgusting that I need to set the exact width of the cards here.
+          width: 198 * tempScale * scale,
           //alignment: Alignment.centerLeft,
           //margin: EdgeInsets.only(left: getMainListMargin(context)),
           child: AutomaticAnimatedListView<MonsterAbilityCardModel>(
