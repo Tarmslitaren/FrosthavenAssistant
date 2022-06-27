@@ -241,14 +241,14 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                 Container(
                   //color: Colors.amber,
                   //height: 50,
-                  width: getMainListWidth(context),
+                  margin: EdgeInsets.only(left:4*scale*tempScale, right: 4*scale*tempScale),
+                  width: getMainListWidth(context)-4*scale*tempScale,
                   child: ValueListenableBuilder<List<MonsterInstance>>(
                       valueListenable: widget.data.monsterInstances,
                       builder: (context, value, child) {
                         return buildMonsterBoxGrid();
                       }),
                 ),
-                //TODO: add standees list here (AnimatbleGrid?)
               ]));
         });
   }

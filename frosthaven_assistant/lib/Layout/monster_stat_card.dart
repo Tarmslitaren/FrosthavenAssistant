@@ -155,12 +155,13 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               ),
                             )
                           : Positioned(
-                              left: 15.0 * tempScale * scale,
+                              left: 0.0 * tempScale * scale,
                               top: 38.0 * tempScale * scale,
+                              width: 30 * tempScale * scale,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
-                                //mainAxisAlignment: MainAxisAlignment.end,
-                                //mainAxisSize: MainAxisSize.max,
+                               // mainAxisAlignment: MainAxisAlignment.end,
+                               // mainAxisSize: MainAxisSize.max,
                                 children: <Widget>[
                                   Text(
                                       StatCalculator.calculateFormula(widget
@@ -170,6 +171,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                               .boss!
                                               .health)
                                           .toString(),
+                                      textAlign: TextAlign.end,
                                       style: leftStyle),
                                   Text(
                                       StatCalculator.calculateFormula(widget

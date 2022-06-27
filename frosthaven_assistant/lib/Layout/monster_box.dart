@@ -136,14 +136,16 @@ class _MonsterBoxState extends State<MonsterBox> {
               ),
               Positioned(
                   left: 20 * scale,
+                  width: width-20*scale,
                   top: 0,
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                     Image(
                       //fit: BoxFit.contain,
                       color: Colors.red,
-                      height: height * 0.6,
+                      height: height * 0.3,
                       image: const AssetImage("assets/images/blood.png"),
                     ),
                     Container(
