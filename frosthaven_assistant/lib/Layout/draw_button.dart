@@ -32,6 +32,11 @@ class _DrawButtonState extends State<DrawButton> {
     if (_gameState.roundState.value == RoundState.chooseInitiative) {
       if (GameMethods.canDraw()) {
         _gameState.action(DrawCommand());
+      } else {
+        //show toast
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Player Initiative numbers must be set (under the initiative marker to the right of the character symbol)"),
+        ));
       }
     } else {
       _gameState.action(NextRoundCommand());

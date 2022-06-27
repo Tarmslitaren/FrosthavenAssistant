@@ -171,7 +171,6 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                               .boss!
                                               .health)
                                           .toString(),
-                                      textAlign: TextAlign.end,
                                       style: leftStyle),
                                   Text(
                                       StatCalculator.calculateFormula(widget

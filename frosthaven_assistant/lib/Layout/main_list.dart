@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:great_list_view/great_list_view.dart';
 import 'package:local_hero/local_hero.dart';
 //import 'package:great_list_view/great_list_view.dart';
 //import 'package:reorderableitemsview/reorderableitemsview.dart';
@@ -54,12 +55,15 @@ class Item extends StatelessWidget {
       child: child,
     );*/
     return child;
+
+    //this is used to animate height changes in list items. only useful if can get implicit height though + update list on height changes
     return AnimatedContainer(
+      //color: Colors.transparent,
       height: height,
       duration: const Duration(milliseconds: 500),
-      decoration: const BoxDecoration(
-        color: Colors.transparent,
-      ),
+      //decoration: const BoxDecoration(
+        //color: Colors.transparent,
+      //),
       child: child,
     );
   }
