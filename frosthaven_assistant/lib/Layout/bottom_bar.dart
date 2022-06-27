@@ -88,11 +88,22 @@ Widget createLevelWidget(BuildContext context) {
                         style: textStyle,
                         child: const Image(
                           height: 15.5,
-                          image: AssetImage("assets/images/psd/traps.png"),
+                          image: AssetImage("assets/images/psd/traps-fh.png"),
                         )
                     ),
                     TextSpan(
-                      text: " : ${GameMethods.getTrapValue()} / ${GameMethods.getHazardValue()} ", style: textStyle,
+                      text: " : ${GameMethods.getTrapValue()}", style: textStyle,
+                    ),
+                    WidgetSpan(
+                        alignment: PlaceholderAlignment.middle,
+                        style: textStyle,
+                        child: const Image(
+                          height: 15.5,
+                          image: AssetImage("assets/images/psd/hazard-fh.png"),
+                        )
+                    ),
+                    TextSpan(
+                      text: " : ${GameMethods.getHazardValue()} ", style: textStyle,
                     ),
                     WidgetSpan(
                         alignment: PlaceholderAlignment.middle,
@@ -110,7 +121,7 @@ Widget createLevelWidget(BuildContext context) {
                         style: textStyle,
                         child: const Image(
                           height: 15.5,
-                          image: AssetImage("assets/images/psd/coins.png"),
+                          image: AssetImage("assets/images/psd/coins-fh.png"),
                         )
                     ),
                     TextSpan(
