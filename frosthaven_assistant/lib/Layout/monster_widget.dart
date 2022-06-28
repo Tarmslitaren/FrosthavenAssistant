@@ -13,6 +13,7 @@ import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:local_hero/local_hero.dart';
 
 import '../Resource/color_matrices.dart';
 import '../services/service_locator.dart';
@@ -55,13 +56,15 @@ class _MonsterWidgetState extends State<MonsterWidget> {
 
   Widget buildMonsterBoxGrid() {
     final generatedChildren = List<Widget>.generate(
-      widget.data.monsterInstances.value.length,
-          (index) =>
-          Container(
+        widget.data.monsterInstances.value.length,
+        (index) => Container(
             key: Key(widget.data.monsterInstances.value[index].toString()),
-            child: MonsterBox(data: widget.data.monsterInstances.value[index]),
-          ),
-    );
+            //child: LocalHero(
+              //tag: widget.data.monsterInstances.value[index].toString(),
+              child:
+                  MonsterBox(data: widget.data.monsterInstances.value[index]),
+            //)
+        ));
     return Wrap(
       runSpacing: 4.0,
       spacing: 4.0,
@@ -165,9 +168,9 @@ class _MonsterWidgetState extends State<MonsterWidget> {
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     double height = scale * tempScale * 120;
-    return ValueListenableBuilder<
-        int>(
-        valueListenable: getIt<GameState>().commandIndex, //TODO: more granularity for performance?
+    return ValueListenableBuilder<int>(
+        valueListenable: getIt<GameState>().commandIndex,
+        //TODO: more granularity for performance?
         builder: (context, value, child) {
           return ColorFiltered(
               colorFilter: widget.data.monsterInstances.value.isNotEmpty
@@ -196,9 +199,10 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                 },
                 child:*/
                       Container(
-                        //margin: EdgeInsets.all(2*tempScale*scale),
+                          //margin: EdgeInsets.all(2*tempScale*scale),
                           child: Stack(
-                              alignment: Alignment.bottomCenter, children: [
+                              alignment: Alignment.bottomCenter,
+                              children: [
                             Container(
                               margin: EdgeInsets.only(
                                   bottom: 4 * scale, top: 4 * scale),
@@ -207,8 +211,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                                 height: height,
                                 width: height,
                                 image: AssetImage(
-                                    "assets/images/monsters/${widget.data.type
-                                        .gfx}.png"),
+                                    "assets/images/monsters/${widget.data.type.gfx}.png"),
                                 //width: widget.height*0.8,
                               ),
                             ),
@@ -225,14 +228,14 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                                       fontSize: 18 * tempScale * scale,
                                       shadows: [
                                         Shadow(
-                                            offset: Offset(
-                                                1 * scale, 1 * scale),
+                                            offset:
+                                                Offset(1 * scale, 1 * scale),
                                             color: Colors.black)
                                       ]),
                                 ))
                           ])
-                        //)
-                      ),
+                          //)
+                          ),
                       MonsterAbilityCardWidget(data: widget.data),
                       MonsterStatCardWidget(data: widget.data),
                     ],
@@ -241,8 +244,10 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                 Container(
                   //color: Colors.amber,
                   //height: 50,
-                  margin: EdgeInsets.only(left:4*scale*tempScale, right: 4*scale*tempScale),
-                  width: getMainListWidth(context)-4*scale*tempScale,
+                  margin: EdgeInsets.only(
+                      left: 4 * scale * tempScale,
+                      right: 4 * scale * tempScale),
+                  width: getMainListWidth(context) - 4 * scale * tempScale,
                   child: ValueListenableBuilder<List<MonsterInstance>>(
                       valueListenable: widget.data.monsterInstances,
                       builder: (context, value, child) {
