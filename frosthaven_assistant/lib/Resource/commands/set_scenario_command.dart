@@ -1,4 +1,5 @@
 
+import '../../Layout/main_list.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../game_methods.dart';
@@ -40,7 +41,10 @@ class SetScenarioCommand extends Command {
     GameMethods.sortCharactersFirst();
     _gameState.scenario.value = _scenario;
 
-    _gameState.updateList.value++;
+    //Future.delayed(Duration(milliseconds: 10), () {
+      _gameState.updateList.value++;
+      MainList.scrollToTop();
+    //});
   }
 
   @override

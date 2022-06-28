@@ -97,7 +97,8 @@ class _MainListState extends State<MainList> {
   Widget build(BuildContext context) {
     return Container(
         //alignment: Alignment.center,
-        //width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           image: DecorationImage(
               fit: BoxFit.cover,

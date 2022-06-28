@@ -9,6 +9,7 @@ import 'package:local_hero/local_hero.dart';
 
 //import 'package:scaled_app/scaled_app.dart';
 import 'package:wakelock/wakelock.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'Layout/menus/main_menu.dart';
 
@@ -26,9 +27,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    //to set fullscreen on pc - need to add exit button to quit //would be good to exit/enter mode with ctrl+enter
+    //WindowManager.instance.setFullScreen(true);
     //to hide ui top and bottom on android
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     if (!kIsWeb) {
