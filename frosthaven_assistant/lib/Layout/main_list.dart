@@ -132,27 +132,28 @@ class _MainListState extends State<MainList> {
   double getListHeight(){
     double mainListWidth = getMainListWidth(context);
     double scale = getScaleByReference(context);
+    double tempScale = 0.8;
     double listHeight = 0;
     for (int i = 0; i < _gameState.currentList.length; i++) {
       var item = _gameState.currentList[i];
       if (item is Character) {
-        listHeight += 65; //TODO: + summon list size
+        listHeight += 64; //TODO: + summon list size
       }
       if (item is Monster) {
-        listHeight += 130 * 0.8;
+        listHeight += 124 * tempScale;
         if (item.monsterInstances.value.isNotEmpty) {
           double listWidth = 0;
           for (var monsterInstance in item.monsterInstances.value) {
             listWidth += MonsterBox.getWidth(scale, monsterInstance);
           }
 
-          double rows = listWidth.toInt() / mainListWidth.toInt();
-          listHeight += 40 * (rows.floor().toDouble() + 1);
+          double rows = listWidth.ceil() / mainListWidth.toInt();
+          listHeight += 34 * tempScale * (rows.ceil().toDouble());
         }
       }
     }
 
-    return listHeight * 1 * scale;
+    return listHeight * 1.2 * scale;
   }
 
   int getItemsCanFitOneColumn(double listHeight) {
@@ -181,6 +182,18 @@ class _MainListState extends State<MainList> {
     );
     return _generatedList;
   }
+
+
+  List<Widget> generateSomeChildren(int startIndex, int length) {
+    _generatedList = List<Widget>.generate(
+      length,
+          (index) => Item(
+          key: Key(_gameState.currentList[index+startIndex].id),
+          data: _gameState.currentList[index+startIndex]),
+    );
+    return _generatedList;
+  }
+
 
   Widget defaultBuildDraggableFeedback(
       BuildContext context, BoxConstraints constraints, Widget child) {
@@ -219,24 +232,25 @@ class _MainListState extends State<MainList> {
               int items = getItemsCanFitOneColumn(listHeight);
               int items2 = _gameState.currentList.length-items;
 
-              double heightFor2Columns = listHeight /2;
+              double heightFor2Columns = listHeight / 2;
               if(heightFor2Columns < MediaQuery.of(context).size.height ) {
                 heightFor2Columns = MediaQuery.of(context).size.height;
               }
+              //List<Widget> children = generateChildren();
 
-              List<Widget> children  = generateChildren();
-
-              return Container(
-                width: MediaQuery.of(context).size.width,
-                height:MediaQuery.of(context).size.height,
-                  alignment: Alignment.topCenter,
-                  child: SingleChildScrollView(
+              return  SingleChildScrollView(
+                padding: EdgeInsets.zero,
+               // margin: EdgeInsets.zero,
                      controller: scrollController,
-                child: SizedBox(
-                        height: canFit2Columns? heightFor2Columns : listHeight,
+                child: Container(
+                  padding: EdgeInsets.zero,
+                  margin: EdgeInsets.zero,
+                  alignment: Alignment.topCenter,
+                    width: MediaQuery.of(context).size.width,
+                    height: canFit2Columns? heightFor2Columns: listHeight,
                       child: LocalHeroOverlay(
                         child: Row(
-
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Column( //TODO: try reorderable table next
                               //scrollAnimationDuration: Duration(milliseconds: 500),
@@ -256,7 +270,7 @@ class _MainListState extends State<MainList> {
                                     .action(ReorderListCommand(newIndex, oldIndex));
                               },*/
 
-                              children: children.sublist(0,items),
+                              children: generateSomeChildren(0, items)// children.sublist(0,items),
                             ),
                             canFit2Columns?
                             Column(
@@ -272,9 +286,12 @@ class _MainListState extends State<MainList> {
                                     .action(ReorderListCommand(newIndex, oldIndex));
                               },*/
 
-                              children: children.sublist(items,children.length),
+                              children: generateSomeChildren(items, _gameState.currentList.length-items),// children.sublist(items,children.length),
                             )
-                                :Container()
+                                :Container(
+                              padding: EdgeInsets.zero,
+                              margin: EdgeInsets.zero,
+                            )
                           ],
                         )
 
@@ -283,7 +300,7 @@ class _MainListState extends State<MainList> {
                       ),
                 //Container()
               //])
-              )
+             // )
               );
             }));
   }
