@@ -20,6 +20,31 @@ import 'monster_widget.dart';
 
 double tempScale = 0.8;
 
+class LocalHeroOverlay extends StatefulWidget {
+  const LocalHeroOverlay({
+    Key? key,
+    this.child,
+  }) : super(key: key);
+
+  final Widget? child;
+
+  @override
+  _LocalHeroOverlayState createState() => _LocalHeroOverlayState();
+}
+
+class _LocalHeroOverlayState extends State<LocalHeroOverlay> {
+  @override
+  Widget build(BuildContext context) {
+    return ClipRect(
+      child: Overlay(
+        initialEntries: <OverlayEntry>[
+          OverlayEntry(builder: (context) => widget.child!),
+        ],
+      ),
+    );
+  }
+}
+
 class Item extends StatelessWidget {
   final ListItemData data;
 
@@ -50,10 +75,10 @@ class Item extends StatelessWidget {
     } else {
       height = 0;
     }
-    /*return LocalHero(
+    return LocalHero(
       tag: child.key.toString(),
       child: child,
-    );*/
+    );
     return child;
 
     //this is used to animate height changes in list items. only useful if can get implicit height though + update list on height changes
@@ -272,7 +297,7 @@ class _MainListState extends State<MainList> {
                   alignment: Alignment.topCenter,
                   child: Scrollbar(
                     controller: scrollController,
-                    //child: LocalHeroScope(
+                    child: LocalHeroOverlay(
                      // duration: const Duration(milliseconds: 300),
                      // curve: Curves.easeInOut,
                     child: ReorderableWrap(
@@ -342,7 +367,9 @@ class _MainListState extends State<MainList> {
                           _gameState.currentList),
                     ),*/
                   //)
-              ));
+              )
+                  )
+              );
             }));
   }
 

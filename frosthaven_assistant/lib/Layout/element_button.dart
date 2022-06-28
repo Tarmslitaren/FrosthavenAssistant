@@ -145,7 +145,8 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
                       // Define how long the animation should take.
                       duration: const Duration(milliseconds: 500),
                       // Provide an optional curve to make the animation feel smoother.
-                      curve: Curves.fastOutSlowIn,
+                      curve: Curves.fastLinearToSlowEaseIn,
+                      //TODO: animate it filling up from below istead?
                     );
                   }),
             ),

@@ -5,13 +5,14 @@ import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:local_hero/local_hero.dart';
+
 //import 'package:scaled_app/scaled_app.dart';
 import 'package:wakelock/wakelock.dart';
 
 import 'Layout/menus/main_menu.dart';
 
 void main() {
-
   setupGetIt();
 
   /*ScaledWidgetsFlutterBinding.ensureInitialized(
@@ -20,7 +21,6 @@ void main() {
   );*/
   //runAppScaled(const MyApp());
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -29,20 +29,32 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     //to hide ui top and bottom on android
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    if(!kIsWeb) {
+    if (!kIsWeb) {
       Wakelock.enable();
       //should force app to be in foreground and disable screen lock
     }
     //Screen.keepOn(true);
 
-    return MaterialApp(
+    return LocalHeroScope(
+      duration: const Duration(milliseconds: 500),
+      createRectTween: (begin, end) {
+        return RectTween(begin: begin, end: end);
+      },
+      curve: Curves.easeInOut,
+      child: MaterialApp(
+        title: 'Frosthaven Assistant',
+        theme: theme,
+        home: const MyHomePage(title: 'Frosthaven Assistant'),
+      ),
+    );
+
+    /*return MaterialApp(
       title: 'Frosthaven Assistant',
       theme: theme,
       home: const MyHomePage(title: 'Frosthaven Assistant'),
-    );
+    );*/
   }
 }
 
