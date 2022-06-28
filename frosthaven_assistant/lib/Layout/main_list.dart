@@ -1,4 +1,4 @@
-import 'dart:developer';
+
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/character_widget.dart';
@@ -6,15 +6,8 @@ import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-import 'package:great_list_view/great_list_view.dart';
 import 'package:local_hero/local_hero.dart';
 
-//import 'package:great_list_view/great_list_view.dart';
-//import 'package:reorderableitemsview/reorderableitemsview.dart';
-import 'package:reorderables/reorderables.dart';
-
-import '../Resource/action_handler.dart';
-import '../Resource/commands/reorder_list_command.dart';
 import '../Resource/game_methods.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
@@ -225,17 +218,18 @@ class _MainListState extends State<MainList> {
               //1 check can fit 2 columns
               //2 if not, size the container to fix all items
               //3 if can not fit, divide items equally and size containers to fit all items
-              //4 todo: reorderable column
+              //4 todo: reorder able column
 
               bool canFit2Columns = MediaQuery.of(context).size.width >= getMainListWidth(context) * 2;
               double listHeight = getListHeight();
               int items = getItemsCanFitOneColumn(listHeight);
-              int items2 = _gameState.currentList.length-items;
 
               double heightFor2Columns = listHeight / 2;
               if(heightFor2Columns < MediaQuery.of(context).size.height ) {
                 heightFor2Columns = MediaQuery.of(context).size.height;
               }
+
+              double listWidth = getMainListWidth(context);
               //List<Widget> children = generateChildren();
 
               return  SingleChildScrollView(
@@ -249,14 +243,23 @@ class _MainListState extends State<MainList> {
                     width: MediaQuery.of(context).size.width,
                     height: canFit2Columns? heightFor2Columns: listHeight,
                       child: LocalHeroOverlay(
-                        child: Row(
+
+                        child:SizedBox(
+                          width:  MediaQuery.of(context).size.width,
+                            child:Row(
+                          mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column( //TODO: try reorderable table next
+                            SizedBox(
+                            width:  listWidth,
+                            child: Column(
                               //scrollAnimationDuration: Duration(milliseconds: 500),
                               //reorderAnimationDuration: Duration(milliseconds: 500),
                               //maxMainAxisCount: getItemsCanFitOneColumn(),
                               verticalDirection: VerticalDirection.down,
+                              mainAxisSize: MainAxisSize.min,
+
                               //buildDraggableFeedback: defaultBuildDraggableFeedback,
                               //needsLongPressDraggable: true,
                               /*onReorder: (int oldIndex, int newIndex) {
@@ -271,10 +274,13 @@ class _MainListState extends State<MainList> {
                               },*/
 
                               children: generateSomeChildren(0, items)// children.sublist(0,items),
-                            ),
+                            ),),
                             canFit2Columns?
-                            Column(
+                            SizedBox(
+                              width:  listWidth,
+                              child:Column(
                               verticalDirection: VerticalDirection.down,
+                              mainAxisSize: MainAxisSize.min,
                               //buildDraggableFeedback: defaultBuildDraggableFeedback,
                               //needsLongPressDraggable: true,
                               /*onReorder: (int oldIndex, int newIndex) {
@@ -287,7 +293,7 @@ class _MainListState extends State<MainList> {
                               },*/
 
                               children: generateSomeChildren(items, _gameState.currentList.length-items),// children.sublist(items,children.length),
-                            )
+                            ))
                                 :Container(
                               padding: EdgeInsets.zero,
                               margin: EdgeInsets.zero,
@@ -300,7 +306,7 @@ class _MainListState extends State<MainList> {
                       ),
                 //Container()
               //])
-             // )
+              )
               );
             }));
   }

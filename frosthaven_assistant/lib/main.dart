@@ -44,6 +44,10 @@ class MyApp extends StatelessWidget {
       },
       curve: Curves.easeInOut,
       child: MaterialApp(
+        //debugShowCheckedModeBanner: false,
+        //debugShowMaterialGrid: true,
+        checkerboardOffscreenLayers: false,
+        //showPerformanceOverlay: true,
         title: 'Frosthaven Assistant',
         theme: theme,
         home: const MyHomePage(title: 'Frosthaven Assistant'),
