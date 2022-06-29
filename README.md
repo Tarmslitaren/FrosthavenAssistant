@@ -39,16 +39,13 @@ This is also my attempt at learning the Flutter framework.
   - Crimson Scales full support
   - add sections
   - set campaign
-  - Special scenario rules (escorts, objectives, modified levels, 
+  - Special scenario rules (escorts, objectives, modified levels) 
   - Monster Modifier Deck
   - Summons
   - Round Counter
   - Animatd lists
-  - Better styling on monster standees
-  - gray out plus if all standees out
-  - make popups see through
-  - position popups
-  - monster stat menu changes neeed for CS
+  - make popup menues better (semi transparant, positioned, adjust sizes)
+  - monster stat menu changes neeed for Crimson Scales
   - calculate shield value
 
 -Release 3 plan:
@@ -61,7 +58,7 @@ This is also my attempt at learning the Flutter framework.
 -Release 4 plan:
   - settings
   - turn order (expire conditions, scroll to position, gray out)
-  - show trap types and scenrio special rules at bottom
+  - show trap types and scenario special rules at bottom
   - show special rules toast on start/end of round if special rules for round nr
   - maybe dark mode?
 
@@ -69,4 +66,4 @@ This is also my attempt at learning the Flutter framework.
   - networking
 
 Release 6 plan:
-  - Frosthaven style icons and card layout
+  - Frosthaven style icons and card layouts
