@@ -9,6 +9,7 @@ double getScaleByReference(BuildContext context) {
   return _scaleByReference(context, referenceWidth, maxWidth);
 }
 
+//not used
 double getMainListMargin(BuildContext context) {
   var screenSize = MediaQuery.of(context).size;
   var width = min(screenSize.width, maxWidth);
@@ -21,8 +22,8 @@ double getMainListMargin(BuildContext context) {
 
 double getMainListWidth(BuildContext context) { //wrong
   var screenSize = MediaQuery.of(context).size;
-  var width = max(screenSize.width, maxWidth);
-  return width - getMainListMargin(context)*2;
+  var width = min(screenSize.width, maxWidth);
+  return width;// - getMainListMargin(context)*2;
 }
 
 double _scaleByReference(BuildContext context, double referenceWidth, double maxWidth) {

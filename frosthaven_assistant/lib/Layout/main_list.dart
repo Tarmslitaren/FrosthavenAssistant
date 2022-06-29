@@ -148,10 +148,10 @@ class _MainListState extends State<MainList> {
     for (int i = 0; i < _gameState.currentList.length; i++) {
       var item = _gameState.currentList[i];
       if (item is Character) {
-        listHeight += 62; //TODO: + summon list size
+        listHeight += 64; //TODO: + summon list size
       }
       if (item is Monster) {
-        listHeight += 130;
+        listHeight += 124;
         if (item.monsterInstances.value.isNotEmpty) {
           double listWidth = 0;
           for (var monsterInstance in item.monsterInstances.value) {
@@ -159,15 +159,18 @@ class _MainListState extends State<MainList> {
           }
 
           double rows = listWidth.toInt() / mainListWidth.toInt();
-          listHeight += 40 * (rows.floor().toDouble() + 1);
+          listHeight += 40 * rows.ceil();
         }
       }
       widgetPositions.add(listHeight);
     }
-    if (widgetPositions.last > 2 * screenHeight) {
+    if (widgetPositions.last * scale > 2 * screenHeight) {
       //find center point
       for (int i = 0; i < widgetPositions.length; i++) {
         if (widgetPositions[i] > widgetPositions.last / 2) {
+          if(i+1 < (widgetPositions.length/2).ceil()) {
+            return (widgetPositions.length/2).ceil();
+          }
           return i + 1;
         }
       }
@@ -176,11 +179,14 @@ class _MainListState extends State<MainList> {
       for (int i = 0; i < widgetPositions.length; i++) {
         if (widgetPositions[i] > screenHeight * 0.8) {
           //TODO: use real values instead of leeway.
+          if(i+1 < (widgetPositions.length/2).ceil()) {
+            return (widgetPositions.length/2).ceil();
+          }
           return i;
         }
       }
     }
-    return _gameState.currentList.length;
+    return (widgetPositions.length/2).ceil();
   }
 
 
@@ -266,6 +272,7 @@ class _MainListState extends State<MainList> {
               double scale = getScaleByReference(context);
               return Container(
                   alignment: Alignment.topCenter,
+                  width: MediaQuery.of(context).size.width,
                   child: Scrollbar(
                     controller: scrollController,
                     //child: LocalHeroScope(
@@ -273,8 +280,8 @@ class _MainListState extends State<MainList> {
                     // curve: Curves.easeInOut,
                     child: ReorderableWrap(
                       runAlignment: WrapAlignment.start,
-                      scrollAnimationDuration: Duration(milliseconds: 500),
-                      reorderAnimationDuration: Duration(milliseconds: 500),
+                      scrollAnimationDuration: Duration(milliseconds: 400),
+                      reorderAnimationDuration: Duration(milliseconds: 400),
                       maxMainAxisCount: getItemsCanFitOneColumn(),
 
                       direction: Axis.vertical,
@@ -286,57 +293,10 @@ class _MainListState extends State<MainList> {
                       onReorder: (int oldIndex, int newIndex) {
                         //setState(() {
                         _gameState.action(ReorderListCommand(newIndex, oldIndex));
-                        //_gameState.currentList.insert(newIndex,
-                        //    _gameState.currentList.removeAt(oldIndex));
                         //});
                       },
                       children: generateChildren(),
                     ),
-                    /*AutomaticAnimatedListView<ListItemData>(
-                      animator: const DefaultAnimatedListAnimator(
-                          //dismissIncomingDuration: Duration(milliseconds: 1000),
-                          //reorderDuration: Duration(milliseconds: 2000),
-
-                          //dismissIncomingDuration: const Duration(milliseconds: 150),
-                          //resizeDuration: const Duration(milliseconds: 200),
-                          ),
-                      list: _gameState.currentList,
-                      comparator: AnimatedListDiffListComparator<ListItemData>(
-                          sameItem: (a, b) => isSameItem(a, b),
-                          sameContent: (a, b) => isSameContent(a, b)),
-                      itemBuilder: (context, item, data) => data.measuring
-                          ? Container(
-                              color: Colors.transparent,
-                              height:
-                                  item is Monster ? 120 * tempScale* scale : 60 * scale,
-                              //TODO: these are for smooth animations. need to be same size as the items
-                              //margin: const EdgeInsets.all(5), height: 60
-                            )
-                          : Item(data: item),
-                      listController: controller,
-                      scrollController: scrollController,
-                      addLongPressReorderable: true,
-
-                      /*reorderModel: AnimatedListReorderModel(
-
-
-                onReorderStart: (index, dx, dy) {
-                  // only monster+character items can be reordered
-                  return true;
-                },
-                onReorderMove: (index, dropIndex) {
-                  // pink-colored items cannot be swapped
-                  return true;//list[dropIndex].color != 3;
-                },
-                onReorderComplete: (index, dropIndex, slot) {
-                  _gameState.currentList.insert(dropIndex, _gameState.currentList.removeAt(index));
-                  return true;
-                },
-              ),*/
-
-                      reorderModel: AutomaticAnimatedListReorderModel(
-                          _gameState.currentList),
-                    ),*/
                     //)
                   ));
             }));
@@ -344,6 +304,4 @@ class _MainListState extends State<MainList> {
 
   static final scrollController = ScrollController();
 
-//use to animate to position in list:
-//final controller = AnimatedListController();
 }
