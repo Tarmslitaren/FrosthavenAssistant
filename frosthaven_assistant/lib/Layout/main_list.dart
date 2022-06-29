@@ -158,18 +158,19 @@ class _MainListState extends State<MainList> {
             listWidth += MonsterBox.getWidth(scale, monsterInstance);
           }
 
-          double rows = listWidth.toInt() / mainListWidth.toInt();
-          listHeight += 40 * rows.ceil();
+          double rows = listWidth / mainListWidth;
+          listHeight += 34 * rows.ceil();
         }
       }
       widgetPositions.add(listHeight);
     }
-    if (widgetPositions.last * scale > 2 * screenHeight) {
+    //if can't fit without scroll
+    if (widgetPositions.last * scale > 3 * (screenHeight-80)) {
       //find center point
       for (int i = 0; i < widgetPositions.length; i++) {
         if (widgetPositions[i] > widgetPositions.last / 2) {
           if(i+1 < (widgetPositions.length/2).ceil()) {
-            return (widgetPositions.length/2).ceil();
+            return (widgetPositions.length/2).ceil(); //this pretty much overrides the purpose. need other solution for wraps
           }
           return i + 1;
         }
@@ -177,12 +178,11 @@ class _MainListState extends State<MainList> {
     } else {
       //make all fit in screen of possible
       for (int i = 0; i < widgetPositions.length; i++) {
-        if (widgetPositions[i] > screenHeight * 0.8) {
-          //TODO: use real values instead of leeway.
+        if (widgetPositions[i] * scale > (screenHeight - 80)) { //minus height of topand bottom bars
           if(i+1 < (widgetPositions.length/2).ceil()) {
             return (widgetPositions.length/2).ceil();
           }
-          return i;
+          return i+1;
         }
       }
     }
@@ -266,7 +266,7 @@ class _MainListState extends State<MainList> {
         data: Theme.of(context).copyWith(
           //not needed
         ),
-        child: ValueListenableBuilder<int>( //todo listen for changes in list, not all commands?
+        child: ValueListenableBuilder<int>(
             valueListenable: _gameState.updateList,
             builder: (context, value, child) {
               double scale = getScaleByReference(context);

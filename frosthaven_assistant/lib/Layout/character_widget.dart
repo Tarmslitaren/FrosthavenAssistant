@@ -3,6 +3,7 @@ import 'package:frosthaven_assistant/Layout/line_builder.dart';
 import 'package:frosthaven_assistant/Layout/menus/main_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
+import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Model/character_class.dart';
@@ -164,24 +165,44 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                       builder: (context, value, child) {
                                         //_initTextFieldController.clear();
                                         //if (_characterState.initiative == 0) {
-                                        _initTextFieldController.clear();
+                                        if (_gameState.commands[_gameState
+                                            .commandIndex
+                                            .value] is DrawCommand) {
+                                          _initTextFieldController.clear();
+                                        }
                                         if (_gameState.roundState.value ==
-                                            RoundState.chooseInitiative &&
-                                        _character.characterState.health.value > 0) {
+                                                RoundState.chooseInitiative &&
+                                            _character.characterState.health
+                                                    .value >
+                                                0) {
                                           return Container(
                                             margin: EdgeInsets.only(
                                                 left: 10 * scale),
                                             height: 33 * scale,
                                             width: 25 * scale,
                                             child: TextField(
-                                                //TODO: clear on enter focus
-                                                //TODO: close soft keyboard on 2 chars entered
+
+                                              //scrollPadding: EdgeInsets.zero,
+                                                onTap: () => {
+                                                      //clear on enter focus
+                                                      _initTextFieldController
+                                                          .clear()
+                                                    },
+                                                onChanged: (String str) {
+                                                  //close soft keyboard on 2 chars entered
+                                                  if (str.length == 2) {
+                                                    FocusManager
+                                                        .instance.primaryFocus
+                                                        ?.unfocus();
+                                                  }
+                                                },
+
                                                 //expands: true,
                                                 textAlign: TextAlign.center,
                                                 cursorColor: Colors.white,
                                                 maxLength: 2,
                                                 style: TextStyle(
-                                                    height: 0.9,
+                                                    height: 1,
                                                     //quick fix for web-phone disparity.
                                                     fontFamily: 'Pirata',
                                                     color: Colors.white,
@@ -226,10 +247,16 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                               margin: EdgeInsets.only(
                                                   left: 10 * scale),
                                               child: Text(
-                                                _character.characterState.health.value > 0?
-                                                _character
-                                                    .characterState.initiative
-                                                    .toString(): "",
+                                                _character.characterState.health
+                                                            .value >
+                                                        0 ||
+                                                    _character.characterState.xp
+                                                        .value >
+                                                        0
+                                                    ? _character.characterState
+                                                        .initiative
+                                                        .toString()
+                                                    : "",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     fontFamily: 'Pirata',
@@ -342,7 +369,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                         );
                                       }),
                                   Image(
-                                    height: 20.0 * scale * LineBuilder.tempScale,
+                                    height:
+                                        20.0 * scale * LineBuilder.tempScale,
                                     color: Colors.blue,
                                     image: const AssetImage(
                                         "assets/images/psd/xp.png"),

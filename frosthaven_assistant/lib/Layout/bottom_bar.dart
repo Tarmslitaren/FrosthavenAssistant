@@ -32,15 +32,6 @@ Widget createLevelWidget(BuildContext context) {
       ]);
 
   return GestureDetector(
-    onVerticalDragStart: (details) {
-      //start moving the widget in the list
-    },
-    onVerticalDragUpdate: (details) {
-      //update widget position?
-    },
-    onVerticalDragEnd: (details) {
-      //place back in list
-    },
     onTap: () {
       //open stats menu
       openDialog(
@@ -57,7 +48,6 @@ Widget createLevelWidget(BuildContext context) {
             valueListenable: _gameState.scenario,
             builder: (context, value, child) {
               return Container(
-                  //color: Colors.amber,
                   width: 200,
                   child: Text(
                     _gameState.scenario.value,
@@ -76,7 +66,7 @@ Widget createLevelWidget(BuildContext context) {
                         alignment: PlaceholderAlignment.middle,
                         style: textStyle,
                         child: const Image(
-                          height: 15.5,
+                          height: 10.5,
                           image: AssetImage("assets/images/psd/level.png"),
                         )
                     ),
@@ -109,12 +99,12 @@ Widget createLevelWidget(BuildContext context) {
                         alignment: PlaceholderAlignment.middle,
                         style: textStyle,
                         child: const Image(
-                          height: 15.5,
+                          height: 14.5,
                           image: AssetImage("assets/images/psd/xp.png"),
                         )
                     ),
                     TextSpan(
-                      text: " : ${GameMethods.getXPValue()} ", style: textStyle,
+                      text: " : +${GameMethods.getXPValue()} ", style: textStyle,
                     ),
                     WidgetSpan(
                         alignment: PlaceholderAlignment.middle,
@@ -125,7 +115,7 @@ Widget createLevelWidget(BuildContext context) {
                         )
                     ),
                     TextSpan(
-                      text: " : ${GameMethods.getCoinValue()}", style: textStyle,
+                      text: " : x${GameMethods.getCoinValue()}", style: textStyle,
                     ),
                   ]
                 ),

@@ -365,12 +365,13 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 )
                               : Container(),
                       Positioned(
-                          bottom: 1 * scale * tempScale,
-                          left: 1 * scale * tempScale,
+                          bottom: 5 * scale * tempScale,
+                          left: 5 * scale * tempScale,
                           child: Container(
-                              width: 25 * scale,
-                              height: 25 * scale,
+                              width: 25 * scale * tempScale,
+                              height: 25 * scale * tempScale,
                               child: IconButton(
+                                padding: EdgeInsets.zero,
                                 icon: Image.asset('assets/images/psd/add.png'),
                                 onPressed: () {
                                   if (widget
@@ -401,12 +402,13 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               ))),
                       !isBoss
                           ? Positioned(
-                              bottom: 1 * scale * tempScale,
-                              right: 1 * scale * tempScale,
+                              bottom: 5 * scale * tempScale,
+                              right: 5 * scale * tempScale,
                               child: Container(
-                                  width: 25 * scale,
-                                  height: 25 * scale,
+                                  width: 25 * scale * tempScale,
+                                  height: 25 * scale * tempScale,
                                   child: IconButton(
+                                    padding: EdgeInsets.zero,
                                       icon: Image.asset(
                                           'assets/images/psd/add.png'),
                                       onPressed: () {
@@ -425,8 +427,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 elite: true,
                                                 monster: widget.data,
                                               ),
-                                              -45 * scale,
-                                              12 * scale);
+                                              -145 * scale,
+                                              12 * scale
+                                          );
                                         }
                                       })))
                           : Container(),

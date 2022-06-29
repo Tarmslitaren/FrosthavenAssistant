@@ -19,12 +19,12 @@ class MonsterBox extends StatefulWidget {
 
   static const double conditionSize = 14;
   static double getWidth(double scale, MonsterInstance data ){
-    double width = 57;
+    double width = 47;
     width += conditionSize * data.conditions.value.length / 2;
     if(data.conditions.value.length % 2 != 0) {
-      width += conditionSize/2;
+      width += conditionSize /2;
     }
-    width *= scale;
+    width = width * scale;
     return width;
   }
 
@@ -65,7 +65,7 @@ class _MonsterBoxState extends State<MonsterBox> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double height = scale * 40;
+    //double height = scale * 40;
     Color color = Colors.white;
     if (widget.data.type == MonsterType.elite) {
       color = Colors.yellow;
@@ -82,51 +82,53 @@ class _MonsterBoxState extends State<MonsterBox> {
               context,
               Stack(children: [
                 Positioned(
-                  //TODO: how to get a good grip on position
-                  //left: 100, // left coordinate
-                  //top: 100,  // top coordinate
                   child: Dialog(
                     child: StatusMenu(figure: widget.data, monster: getMonster()),
                   ),
                 )
               ]));
-          setState(() {});
+          //setState(() {});
         },
         child: Container(
             decoration: null,
-            padding: EdgeInsets.all(0),
+            padding: EdgeInsets.zero,
             height: 30 * scale,
             width: width,
             color: Color(int.parse("7A000000", radix: 16)),
-            child: Stack(alignment: Alignment.centerLeft, children: [
-              /*Image( //TODO make nice background image frame go around. think about color for text
+            child: Stack(
+                alignment: Alignment.centerLeft,
+                children: [
+              Image( //TODO make nice background image frame go around. think about color for text
                 //fit: BoxFit.contain,
-                height: height,
-                //width: height,
-                //fit: BoxFit.cover,
+                height: 30 * scale,
+                width: 47 * scale,
+                fit: BoxFit.fill, //scale up disregarding aspect ratio
                 image: AssetImage(
                     "assets/images/psd/monster-box.png"),
                 //width: widget.height*0.8,
-              ),*/
+              ),
+              Container(
+                margin: EdgeInsets.only(left:3 * scale, top: 3 * scale, bottom: 2 * scale),
+                  child:
               Image(
                 //fit: BoxFit.contain,
-                height: height * 2.5,
-                width: height / 2,
+                height: 100 * scale,
+                width: 17 * scale,
                 fit: BoxFit.cover,
                 image: AssetImage(
                     "assets/images/monsters/${widget.data.name}.png"),
                 //width: widget.height*0.8,
-              ),
-
+              ),),
               Positioned(
-                left: 5 * scale,
+                width: 22*scale, //baked in edge insets to line up with picture
+                top: 1 * scale,
                 child: Text(
                   textAlign: TextAlign.center,
                   widget.data.standeeNr.toString(),
                   style: TextStyle(
                       fontFamily: 'Pirata',
                       color: color,
-                      fontSize: height * 0.5,
+                      fontSize: 20 * scale,
                       shadows: [
                         Shadow(
                             offset: Offset(1 * scale, 1 * scale),
@@ -135,28 +137,33 @@ class _MonsterBoxState extends State<MonsterBox> {
                 ),
               ),
               Positioned(
+
                   left: 20 * scale,
-                  width: width-20*scale,
+                  //width: width-20*scale,
                   top: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+
+                  child: Container(
+                      padding: EdgeInsets.zero,
+                      margin: EdgeInsets.zero,
+                      child: Row(
+                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                     Image(
                       //fit: BoxFit.contain,
                       color: Colors.red,
-                      height: height * 0.3,
+                      height:  12 * scale,
                       image: const AssetImage("assets/images/blood.png"),
                     ),
                     Container(
-                      width: 30,
+                      width: 18 * scale,
                       child:Text(
                       //textAlign: TextAlign.center,
-                      "${widget.data.health.value}",///${widget.data.maxHealth.value}",
+                      "${widget.data.health.value}",
                       style: TextStyle(
                           fontFamily: 'Pirata',
                           color: Colors.white,
-                          fontSize: height * 0.5,
+                          fontSize: widget.data.health.value>99? 13 * scale : 18 * scale,
                           shadows: [
                             Shadow(
                                 offset: Offset(1 * scale, 1 * scale),
@@ -169,6 +176,8 @@ class _MonsterBoxState extends State<MonsterBox> {
                           return Container(
                               height: 30 * scale,
                               child: Wrap(
+                                spacing: 0,
+                                runSpacing: 0,
                                 direction: Axis.vertical,
                                 //verticalDirection: VerticalDirection.up,
                                 //clipBehavior: Clip.none,
@@ -180,15 +189,17 @@ class _MonsterBoxState extends State<MonsterBox> {
                               ));
                         }),
                   ])
-              ),
-              Container(
+              ),),
+              Container( //the hp bar
+                margin: EdgeInsets.only(bottom: 2* scale, left: 2*scale, right: 2*scale),
                 alignment: Alignment.bottomCenter,
-                  width: 57 * scale,
+                width: 42 * scale,
+
 
                   child: FAProgressBar(
                     currentValue: widget.data.health.value.toDouble(),
                     maxValue: widget.data.maxHealth.value.toDouble(),
-                    size: 8 * scale,
+                    size: 4.5 * scale,
                     animatedDuration: const Duration(milliseconds: 0), //TODO: glitch with animation due to redraw?
                     direction: Axis.horizontal,
                     //verticalDirection: VerticalDirection.up,
@@ -200,7 +211,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                     backgroundColor: Colors.black,
                     progressColor: Colors.red,
                     formatValueFixed: 2, //what does this do?
-                    changeColorValue:(widget.data.maxHealth.value/2).toInt(),
+                    changeColorValue:(widget.data.maxHealth.value/1.5).toInt(),
                     changeProgressColor: Colors.green,
                   ),
               )
