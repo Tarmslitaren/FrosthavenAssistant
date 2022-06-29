@@ -19,8 +19,6 @@ class DrawButton extends StatefulWidget {
 }
 
 class _DrawButtonState extends State<DrawButton> {
-  // Define the various properties with default values. Update these properties
-  // when the user taps a FloatingActionButton.
   final GameState _gameState = getIt<GameState>();
 
   @override
@@ -34,6 +32,7 @@ class _DrawButtonState extends State<DrawButton> {
         _gameState.action(DrawCommand());
       } else {
         //show toast
+        //TODO: show other message if no characters or no monsters
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Player Initiative numbers must be set (under the initiative marker to the right of the character symbol)"),
         ));
@@ -53,19 +52,32 @@ class _DrawButtonState extends State<DrawButton> {
       ValueListenableBuilder<RoundState>(
         valueListenable: _gameState.roundState,
         builder: (context, value, child) {
-          return TextButton(
+          return
+          Container(
+            //padding: EdgeInsets.only(left: 15),
+            margin: EdgeInsets.zero,
+            width: 60,
+            child:
+              TextButton(
+                style: TextButton.styleFrom(
+                    padding: EdgeInsets.only(left: 10, right: 10),
+                    //minimumSize: Size(50, 30),
+                    //tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    alignment: Alignment.center
+                     ),
+
               onPressed: onPressed,
               child: Text(
                 _gameState.roundState.value == RoundState.chooseInitiative
                     ? "Draw"
-                    : " Next\nRound",
+                    : " Next Round",
                 style: const TextStyle(
                   height: 0.8,
                   fontSize: 16,
                   color: Colors.white,
                   shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
                 ),
-              ));
+              )));
         },
       )
     ]);

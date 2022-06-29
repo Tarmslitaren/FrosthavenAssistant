@@ -182,7 +182,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                             width: 25 * scale,
                                             child: TextField(
 
-                                              //scrollPadding: EdgeInsets.zero,
+                                                //scrollPadding: EdgeInsets.zero,
                                                 onTap: () => {
                                                       //clear on enter focus
                                                       _initTextFieldController
@@ -248,11 +248,12 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                                   left: 10 * scale),
                                               child: Text(
                                                 _character.characterState.health
-                                                            .value >
-                                                        0 ||
-                                                    _character.characterState.xp
-                                                        .value >
-                                                        0
+                                                                .value >
+                                                            0 &&
+                                                        _character
+                                                                .characterState
+                                                                .initiative >
+                                                            0
                                                     ? _character.characterState
                                                         .initiative
                                                         .toString()
