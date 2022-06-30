@@ -1,6 +1,7 @@
 
 import 'package:frosthaven_assistant/Resource/action_handler.dart';
 
+import '../../services/service_locator.dart';
 import '../game_state.dart';
 
 class RemoveConditionCommand extends Command {
@@ -13,6 +14,7 @@ class RemoveConditionCommand extends Command {
     newList.addAll(figure.conditions.value);
     newList.remove(condition);
     figure.conditions.value = newList;
+    getIt<GameState>().updateList.value++;
   }
 
   @override

@@ -1,4 +1,5 @@
 
+import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../game_state.dart';
 
@@ -12,6 +13,7 @@ class AddConditionCommand extends Command {
     newList.addAll(figure.conditions.value);
     newList.add(condition);
     figure.conditions.value = newList;
+    getIt<GameState>().updateList.value++;
   }
 
   @override

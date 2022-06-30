@@ -54,7 +54,6 @@ class _DrawButtonState extends State<DrawButton> {
         builder: (context, value, child) {
           return
           Container(
-            //padding: EdgeInsets.only(left: 15),
             margin: EdgeInsets.zero,
             width: 60,
             child:

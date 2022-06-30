@@ -34,6 +34,15 @@ class ChangeStatCommand extends Command {
               if (getIt<GameState>().roundState.value == RoundState.playTurns) {
                 GameMethods.sortByInitiative();
               }
+              if(getIt<GameState>().roundState.value == RoundState.playTurns) {
+                Future.delayed(Duration(milliseconds: 600), () {
+                  getIt<GameState>().updateList.value++;
+                });
+              }else {
+                getIt<GameState>().updateList.value++;
+              }
+            }else {
+              getIt<GameState>().updateList.value++;
             }
             //Navigator.pop(context);
             break;

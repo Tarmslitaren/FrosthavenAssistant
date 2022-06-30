@@ -31,6 +31,8 @@ class AddStandeeCommand extends Command {
       Future.delayed(Duration(milliseconds: 600), () {
         getIt<GameState>().updateList.value++;
       });
+    } else {
+      getIt<GameState>().updateList.value++;
     }
 
   }

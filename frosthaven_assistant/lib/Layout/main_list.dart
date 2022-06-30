@@ -32,19 +32,26 @@ class Item extends StatelessWidget {
     if (data is Character) {
       Character character = data as Character;
       child = CharacterWidget(key: Key(character.id), characterClass: character.characterClass);
-      height = 60 * scale; //TODO:cna I get implicit height?
-      //TODO put in ListItemData, and have it change depending on summons+monster instances
+      height = 60 * scale; //TODO:can I get implicit height?
     } else if (data is Monster) {
+      double listWidth = getMainListWidth(context);
       Monster monster = data as Monster;
       child = MonsterWidget(key: Key(monster.id), data: monster);
       int standeeRows = 0;
-      if (monster.monsterInstances.value.length > 0) {
+      if (monster.monsterInstances.value.isNotEmpty) {
         standeeRows = 1;
       }
-      if (monster.monsterInstances.value.length > 4) {
+      double totalWidthOfMonsterBoxes = 0;
+      for (var item in monster.monsterInstances.value) {
+        totalWidthOfMonsterBoxes += MonsterBox.getWidth(scale, item) + 2 * scale;
+      }
+      if(totalWidthOfMonsterBoxes > listWidth){
         standeeRows = 2;
       }
-      height = 120 * tempScale * scale + standeeRows * 50;
+      if(totalWidthOfMonsterBoxes > 2 * listWidth){
+        standeeRows = 3;
+      }
+      height = 122 * tempScale * scale + standeeRows * 31 * scale;
       //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else {
       height = 0;
@@ -53,13 +60,14 @@ class Item extends StatelessWidget {
       tag: child.key.toString(),
       child: child,
     );*/
-    return child;
+    //return child;
+
     return AnimatedContainer(
       height: height,
       duration: const Duration(milliseconds: 500),
-      decoration: const BoxDecoration(
-        color: Colors.transparent,
-      ),
+      //decoration: const BoxDecoration(
+      //  color: Colors.transparent,
+      //),
       child: child,
     );
   }
