@@ -236,7 +236,7 @@ class GameMethods {
       } else if (a is Monster) {
         if(a.monsterInstances.value.isEmpty) {
           if(b is Monster && b.monsterInstances.value.isEmpty) {
-            return 1;
+            return -1;
           }
           return 1; //inactive at bottom
         }
