@@ -342,8 +342,9 @@ class GameState extends ActionHandler{
   final round = ValueNotifier<int>(0);
   final roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
 
-  //TODO: ugly hack to delay list update
+  //TODO: ugly hacks to delay list update (doesn't need to be here though)
   final updateList = ValueNotifier<int>(0);
+  final killMonsterStandee = ValueNotifier<int>(-1);
 
   final level = ValueNotifier<int>(1);
   final solo = ValueNotifier<bool>(false);

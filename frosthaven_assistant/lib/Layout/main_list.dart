@@ -46,7 +46,7 @@ class Item extends StatelessWidget {
       double totalWidthOfMonsterBoxes = 0;
       for (var item in monster.monsterInstances.value) {
         totalWidthOfMonsterBoxes +=
-            MonsterBox.getWidth(scale, item) + 4 * scale;
+            MonsterBox.getWidth(scale, item) + 2 * scale;
       }
       if (totalWidthOfMonsterBoxes > listWidth) {
         standeeRows = 2;
@@ -236,14 +236,19 @@ class _MainListState extends State<MainList> {
     return (widgetPositions.length / 2).ceil();
   }
 
-  AnimatedSwitcher createAnimatedSwitcher(int index, int lastIndex) {
+  AnimatedSize createAnimatedSwitcher(int index, int lastIndex) {
     //TODO: figure out old widget position and slide from there
-    //TODO: this is wrong, should have one one way animation per item, not a switcher
-    return AnimatedSwitcher(
+    //TODO: this is wrong, should have one one way animation per item, not a switcher.
+    return AnimatedSize( //to mkae the switch somewhat less glitchy looking
+        duration: Duration(milliseconds: 350),
+      child:
+
+
+      AnimatedSwitcher(
       key: Key(index.toString()),
       duration: Duration(milliseconds: 1000),
       /*transitionBuilder: (Widget child, Animation<double> animation) {
-        //TODO: the offset works well only whn all items are same size
+        //TODO: the offset works well only when all items are same size
         //switcher might be wrong idea to use, when reorder, and it's not just 2 items switching place like (0,1,2 -> 1,2,0)
         //if only we could get the actual size of widgets ;(
         //offset 1 == 1 x size of widget. soo. calc all widget heights (120 or 60 + 30x rows) + x offset if 2 colums.
@@ -257,10 +262,10 @@ class _MainListState extends State<MainList> {
       },*/
       //use default animation for now.
       child: _generatedList[index],
-    );
+    ));
   }
   List<Widget> generateChildren() {
-    List<AnimatedSwitcher> generatedListAnimators = [];
+    List<AnimatedSize> generatedListAnimators = [];
     List<int> indices = [];
     for(int i = 0; i < _gameState.currentList.length; i++){
       int index = i;

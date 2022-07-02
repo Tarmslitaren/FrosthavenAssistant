@@ -26,6 +26,10 @@ class ChangeStatCommand extends Command {
         for (var instance in item.monsterInstances.value) {
           if(instance.health.value == 0) {
             item.monsterInstances.value.remove(instance);
+            Future.delayed(Duration(milliseconds: 600), () {
+              getIt<GameState>().killMonsterStandee.value++;
+            });
+
             if (item.monsterInstances.value.isEmpty) {
               if (getIt<GameState>().roundState.value ==
                   RoundState.chooseInitiative) {
@@ -42,7 +46,7 @@ class ChangeStatCommand extends Command {
                 getIt<GameState>().updateList.value++;
               }
             }else {
-              getIt<GameState>().updateList.value++;
+              //getIt<GameState>().updateList.value++;
             }
             //Navigator.pop(context);
             break;

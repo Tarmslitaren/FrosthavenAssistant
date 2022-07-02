@@ -18,7 +18,9 @@ double tempScale = 0.8;
 class MonsterWidget extends StatefulWidget {
   final Monster data;
 
-  const MonsterWidget({Key? key, required this.data}) : super(key: key);
+  final updateList = ValueNotifier<int>(0);
+
+  MonsterWidget({Key? key, required this.data}) : super(key: key);
 
   @override
   _MonsterWidgetState createState() => _MonsterWidgetState();
@@ -26,146 +28,40 @@ class MonsterWidget extends StatefulWidget {
 
 class _MonsterWidgetState extends State<MonsterWidget> {
   @override
+  late int lastListLength;
   void initState() {
     super.initState();
+    lastListLength = widget.data.monsterInstances.value.length;
   }
 
-  /*
-  MasonryGridView.count(
-  crossAxisCount: 4,
-  mainAxisSpacing: 4,
-  crossAxisSpacing: 4,
-  itemBuilder: (context, index) {
-    return Tile(
-      index: index,
-      extent: (index % 5 + 1) * 100,
-    );
-  },
-);
-   */
+  Widget buildMonsterBoxGrid(double scale) {
 
-  /*int getRowsNeeded(){
-    return 2;
-  }*/
+    bool display = lastListLength != widget.data.monsterInstances.value.length;
 
-  Widget buildMonsterBoxGrid() {
     final generatedChildren = List<Widget>.generate(
         widget.data.monsterInstances.value.length,
-        (index) => Container(
-            key: Key(widget.data.monsterInstances.value[index].toString()),
-            //child: LocalHero(
-              //tag: widget.data.monsterInstances.value[index].toString(),
+        (index) => AnimatedSwitcher( //TODO: why is this not working?
+            key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
+          duration: Duration(milliseconds: 1600),
               child:
-                  MonsterBox(data: widget.data.monsterInstances.value[index]),
+                  MonsterBox(
+                      key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
+                      data: widget.data.monsterInstances.value[index],
+                  display: display),
             //)
         ));
+    lastListLength = generatedChildren.length;
     return Wrap(
-      runSpacing: 4.0,
-      spacing: 4.0,
+      runSpacing: 2.0 * scale,
+      spacing: 2.0 * scale,
       children: generatedChildren,
     );
   }
-
-  /*Widget buildMonsterBoxGrid_old_2() {
-    return MasonryGridView.count(
-        crossAxisCount: getRowsNeeded(),
-        //crossAxisCount: ViewStateHelper.getColumnCount(_viewState),
-        itemCount: widget.data.monsterInstances.value.length,
-        mainAxisSpacing: 4,
-        crossAxisSpacing: 4,
-        scrollDirection: Axis.horizontal,
-
-
-        itemBuilder: (context, index) {
-          return MonsterBox(
-            data: widget.data.monsterInstances.value[index]
-          );
-        });
-
-
-
-    /*return ReorderableBuilder(
-      children: generatedChildren,
-      enableDraggable: false,
-      enableLongPress: false,
-      enableScrollingWhileDragging: false,
-      builder: (children) {
-        return GridView(
-
-          scrollDirection: Axis.horizontal,
-          //key: _gridViewKey,
-          //controller: _scrollController,
-
-          //shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            //crossAxisCount: 2, //fucked up that this dictates size of children
-            maxCrossAxisExtent: 60,//getMainListWidth(context),
-            mainAxisExtent: 120,
-
-            mainAxisSpacing: 4,
-            crossAxisSpacing: 8,
-          ),
-          //key: _gridViewKey,
-          //controller: _scrollController,
-          children: children,
-
-        );
-      },
-    );*/
-  }*/
-
-  /*Widget buildMonsterBoxGrid_old() {
-    final generatedChildren = List<Widget>.generate(
-      widget.data.monsterInstances.value.length,
-      (index) => Container(
-        key: Key(widget.data.monsterInstances.value[index].toString()),
-        child:  MonsterBox(data: widget.data.monsterInstances.value[index]),
-      ),
-    );
-    return ReorderableBuilder(
-      //key: Key(_gridViewKey.toString()),
-      children: generatedChildren,
-      //onReorder: _handleReorder,
-      //lockedIndices: lockedIndices,
-      //onDragStarted: _handleDragStarted,
-      //onDragEnd: _handleDragEnd,
-      //scrollController: _scrollController,
-      enableDraggable: false,
-      enableLongPress: false,
-      enableScrollingWhileDragging: false,
-      builder: (children) {
-        return GridView(
-
-          scrollDirection: Axis.horizontal,
-          //key: _gridViewKey,
-          //controller: _scrollController,
-
-          //shrinkWrap: true,
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            //crossAxisCount: 2, //fucked up that this dictates size of children
-            maxCrossAxisExtent: 60,//getMainListWidth(context),
-            mainAxisExtent: 120,
-
-            mainAxisSpacing: 4,
-            crossAxisSpacing: 8,
-          ),
-          //key: _gridViewKey,
-          //controller: _scrollController,
-          children: children,
-
-        );
-      },
-    );
-  }*/
 
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     double height = scale * tempScale * 120;
-    return ValueListenableBuilder<int>(
-        valueListenable: getIt<GameState>().commandIndex,
-        //TODO: more granularity for performance?
-        builder: (context, value, child) {
           return ColorFiltered(
               colorFilter: widget.data.monsterInstances.value.isNotEmpty
                   ? ColorFilter.matrix(identity)
@@ -242,13 +138,13 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                       left: 4 * scale * tempScale,
                       right: 4 * scale * tempScale),
                   width: getMainListWidth(context) - 4 * scale * tempScale,
-                  child: ValueListenableBuilder<List<MonsterInstance>>(
-                      valueListenable: widget.data.monsterInstances,
+                  child: ValueListenableBuilder<int>(
+                      valueListenable: getIt<GameState>().killMonsterStandee, // widget.data.monsterInstances,
                       builder: (context, value, child) {
-                        return buildMonsterBoxGrid();
+                        return buildMonsterBoxGrid(scale);
                       }),
                 ),
               ]));
-        });
+
   }
 }

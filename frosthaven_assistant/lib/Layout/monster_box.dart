@@ -1,3 +1,6 @@
+import 'package:animated_widgets/AnimatedWidgets.dart';
+import 'package:animated_widgets/widgets/opacity_animated.dart';
+import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
@@ -14,15 +17,17 @@ import 'monster_stat_card.dart';
 
 class MonsterBox extends StatefulWidget {
   final MonsterInstance data;
+  final bool display;
 
-  const MonsterBox({Key? key, required this.data}) : super(key: key);
+  const MonsterBox({Key? key, required this.data, required this.display}) : super(key: key);
 
   static const double conditionSize = 14;
-  static double getWidth(double scale, MonsterInstance data ){
+
+  static double getWidth(double scale, MonsterInstance data) {
     double width = 47;
     width += conditionSize * data.conditions.value.length / 2;
-    if(data.conditions.value.length % 2 != 0) {
-      width += conditionSize /2;
+    if (data.conditions.value.length % 2 != 0) {
+      width += conditionSize / 2;
     }
     width = width * scale;
     return width;
@@ -51,15 +56,179 @@ class _MonsterBoxState extends State<MonsterBox> {
     return list;
   }
 
-  Monster? getMonster(){
-    for( var item in getIt<GameState>().currentList){
-      if (item is Monster){
-        if(item.id == widget.data.name) {
+  Monster? getMonster() {
+    for (var item in getIt<GameState>().currentList) {
+      if (item is Monster) {
+        if (item.id == widget.data.name) {
           return item;
         }
       }
     }
     return null;
+  }
+
+  Widget buildInternal(double scale, double width, Color color){
+    return Container(
+        decoration: null,
+        padding: EdgeInsets.zero,
+        height: 30 * scale,
+        width: width,
+        color: Color(int.parse("7A000000", radix: 16)),
+        //black with some opacity
+        child: Stack(
+            alignment: Alignment.centerLeft,
+            children: [
+              Image(
+                //fit: BoxFit.contain,
+                height: 30 * scale,
+                width: 47 * scale,
+                fit: BoxFit.fill,
+                //scale up disregarding aspect ratio
+                image: AssetImage(
+                    "assets/images/psd/monster-box.png"),
+                //width: widget.height*0.8,
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                    left: 3 * scale,
+                    top: 3 * scale,
+                    bottom: 2 * scale),
+                child: Image(
+                  //fit: BoxFit.contain,
+                  height: 100 * scale,
+                  width: 17 * scale,
+                  fit: BoxFit.cover,
+                  image: AssetImage(
+                      "assets/images/monsters/${widget.data.name}.png"),
+                  //width: widget.height*0.8,
+                ),
+              ),
+              Positioned(
+                width: 22 * scale,
+                //baked in edge insets to line up with picture
+                top: 1 * scale,
+                child: Text(
+                  textAlign: TextAlign.center,
+                  widget.data.standeeNr.toString(),
+                  style: TextStyle(
+                      fontFamily: 'Pirata',
+                      color: color,
+                      fontSize: 20 * scale,
+                      shadows: [
+                        Shadow(
+                            offset: Offset(
+                                1 * scale, 1 * scale),
+                            color: Colors.black)
+                      ]),
+                ),
+              ),
+              Positioned(
+                left: 20 * scale,
+                //width: width-20*scale,
+                top: 0,
+
+                child: Container(
+                    padding: EdgeInsets.zero,
+                    margin: EdgeInsets.zero,
+                    child: Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image(
+                            //fit: BoxFit.contain,
+                            color: Colors.red,
+                            height: 12 * scale,
+                            image: const AssetImage(
+                                "assets/images/blood.png"),
+                          ),
+                          Container(
+                            width: 18 * scale,
+                            child: Text(
+                              //textAlign: TextAlign.center,
+                              "${widget.data.health.value}",
+                              style: TextStyle(
+                                  fontFamily: 'Pirata',
+                                  color: Colors.white,
+                                  fontSize: widget
+                                      .data
+                                      .health
+                                      .value >
+                                      99
+                                      ? 13 * scale
+                                      : 18 * scale,
+                                  shadows: [
+                                    Shadow(
+                                        offset: Offset(
+                                            1 * scale,
+                                            1 * scale),
+                                        color: Colors.red)
+                                  ]),
+                            ),
+                          ),
+                          ValueListenableBuilder<
+                              List<Condition>>(
+                              valueListenable:
+                              widget.data.conditions,
+                              builder: (context, value,
+                                  child) {
+                                return Container(
+                                    height: 30 * scale,
+                                    child: Wrap(
+                                      spacing: 0,
+                                      runSpacing: 0,
+                                      direction:
+                                      Axis.vertical,
+                                      //verticalDirection: VerticalDirection.up,
+                                      //clipBehavior: Clip.none,
+                                      //runAlignment: ,
+                                      alignment:
+                                      WrapAlignment
+                                          .center,
+                                      crossAxisAlignment:
+                                      WrapCrossAlignment
+                                          .center,
+
+                                      children:
+                                      createConditionList(
+                                          scale),
+                                    ));
+                              }),
+                        ])),
+              ),
+              Container(
+                //the hp bar
+                margin: EdgeInsets.only(
+                    bottom: 2 * scale,
+                    left: 2 * scale,
+                    right: 2 * scale),
+                alignment: Alignment.bottomCenter,
+                width: 42 * scale,
+
+                child: FAProgressBar(
+                  currentValue:
+                  widget.data.health.value.toDouble(),
+                  maxValue: widget.data.maxHealth.value
+                      .toDouble(),
+                  size: 4.5 * scale,
+                  //animatedDuration: const Duration(milliseconds: 0),
+                  direction: Axis.horizontal,
+                  //verticalDirection: VerticalDirection.up,
+                  borderRadius: BorderRadius.circular(0),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.5 * scale,
+                  ),
+                  backgroundColor: Colors.black,
+                  progressColor: Colors.red,
+                  //formatValueFixed: 2,
+                  //what does this do?
+                  changeColorValue:
+                  (widget.data.maxHealth.value)
+                      .toInt(),
+                  changeProgressColor: Colors.green,
+                ),
+              )
+            ]));
   }
 
   @override
@@ -83,139 +252,49 @@ class _MonsterBoxState extends State<MonsterBox> {
               Stack(children: [
                 Positioned(
                   child: Dialog(
-                    child: StatusMenu(figure: widget.data, monster: getMonster()),
+                    child:
+                        StatusMenu(figure: widget.data, monster: getMonster()),
                   ),
                 )
               ]));
-          //setState(() {});
         },
-        child: Container(
-            decoration: null,
-            padding: EdgeInsets.zero,
-            height: 30 * scale,
+        child: AnimatedContainer( //makes it grow nicely when adding conditions
+            key: Key(widget.data.standeeNr.toString()),
             width: width,
-            color: Color(int.parse("7A000000", radix: 16)),
-            child: Stack(
-                alignment: Alignment.centerLeft,
-                children: [
-              Image( //TODO make nice background image frame go around. think about color for text
-                //fit: BoxFit.contain,
-                height: 30 * scale,
-                width: 47 * scale,
-                fit: BoxFit.fill, //scale up disregarding aspect ratio
-                image: AssetImage(
-                    "assets/images/psd/monster-box.png"),
-                //width: widget.height*0.8,
-              ),
-              Container(
-                margin: EdgeInsets.only(left:3 * scale, top: 3 * scale, bottom: 2 * scale),
-                  child:
-              Image(
-                //fit: BoxFit.contain,
-                height: 100 * scale,
-                width: 17 * scale,
-                fit: BoxFit.cover,
-                image: AssetImage(
-                    "assets/images/monsters/${widget.data.name}.png"),
-                //width: widget.height*0.8,
-              ),),
-              Positioned(
-                width: 22*scale, //baked in edge insets to line up with picture
-                top: 1 * scale,
-                child: Text(
-                  textAlign: TextAlign.center,
-                  widget.data.standeeNr.toString(),
-                  style: TextStyle(
-                      fontFamily: 'Pirata',
-                      color: color,
-                      fontSize: 20 * scale,
-                      shadows: [
-                        Shadow(
-                            offset: Offset(1 * scale, 1 * scale),
-                            color: Colors.black)
-                      ]),
-                ),
-              ),
-              Positioned(
+            curve: Curves.easeInOut,
+            duration: const Duration(milliseconds: 300),
+            child: ValueListenableBuilder<int>(
+                valueListenable: widget.data.health,
+                builder: (context, value, child) {
+                  bool alive = true;
+                  if (widget.data.health.value <= 0) {
+                    //_display = false;
+                    alive = false;
+                  }
 
-                  left: 20 * scale,
-                  //width: width-20*scale,
-                  top: 0,
+                  double offset = -30 * scale;
+                  //TODO: only show add animations when added, not every redraw
+                  Widget child = buildInternal(scale, width, color);
 
-                  child: Container(
-                      padding: EdgeInsets.zero,
-                      margin: EdgeInsets.zero,
-                      child: Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                    Image(
-                      //fit: BoxFit.contain,
-                      color: Colors.red,
-                      height:  12 * scale,
-                      image: const AssetImage("assets/images/blood.png"),
-                    ),
-                    Container(
-                      width: 18 * scale,
-                      child:Text(
-                      //textAlign: TextAlign.center,
-                      "${widget.data.health.value}",
-                      style: TextStyle(
-                          fontFamily: 'Pirata',
-                          color: Colors.white,
-                          fontSize: widget.data.health.value>99? 13 * scale : 18 * scale,
-                          shadows: [
-                            Shadow(
-                                offset: Offset(1 * scale, 1 * scale),
-                                color: Colors.red)
-                          ]),
-                    ),),
-                    ValueListenableBuilder<List<Condition>>(
-                        valueListenable: widget.data.conditions,
-                        builder: (context, value, child) {
-                          return Container(
-                              height: 30 * scale,
-                              child: Wrap(
-                                spacing: 0,
-                                runSpacing: 0,
-                                direction: Axis.vertical,
-                                //verticalDirection: VerticalDirection.up,
-                                //clipBehavior: Clip.none,
-                                //runAlignment: ,
-                                alignment: WrapAlignment.center,
-                                crossAxisAlignment: WrapCrossAlignment.center,
+                  if (widget.display == false){
+                    //return child;
+                  }
 
-                                children: createConditionList(scale),
-                              ));
-                        }),
-                  ])
-              ),),
-              Container( //the hp bar
-                margin: EdgeInsets.only(bottom: 2* scale, left: 2*scale, right: 2*scale),
-                alignment: Alignment.bottomCenter,
-                width: 42 * scale,
+                  //find out if added
 
+                  return TranslationAnimatedWidget.tween(
+                      enabled: true, //fix is to only set enabled on added/removed ones?
+                      translationDisabled: Offset(0, alive ?  offset : 0),
+                      translationEnabled: Offset(0, alive ? 0 : -offset),
+                      duration: Duration(milliseconds: 600),
+                      curve: alive ? Curves.linear : Curves.linear,
 
-                  child: FAProgressBar(
-                    currentValue: widget.data.health.value.toDouble(),
-                    maxValue: widget.data.maxHealth.value.toDouble(),
-                    size: 4.5 * scale,
-                    animatedDuration: const Duration(milliseconds: 0), //TODO: glitch with animation due to redraw?
-                    direction: Axis.horizontal,
-                    //verticalDirection: VerticalDirection.up,
-                    borderRadius: BorderRadius.circular(0),
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 0.5 * scale,
-                    ),
-                    backgroundColor: Colors.black,
-                    progressColor: Colors.red,
-                    formatValueFixed: 2, //what does this do?
-                    changeColorValue:(widget.data.maxHealth.value/1.5).toInt(),
-                    changeProgressColor: Colors.green,
-                  ),
-              )
-            ])
-        ));
+                      child: OpacityAnimatedWidget.tween(
+                          enabled: alive,
+                          opacityDisabled: 0,
+                          opacityEnabled: 1,
+                          child: child
+                  ));
+                })));
   }
 }

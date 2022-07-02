@@ -28,12 +28,8 @@ class AddStandeeCommand extends Command {
         GameMethods.drawAbilityCardFromInactiveDeck();
         GameMethods.sortByInitiative();
       }
-      Future.delayed(Duration(milliseconds: 600), () {
-        getIt<GameState>().updateList.value++;
-      });
-    } else {
-      getIt<GameState>().updateList.value++;
     }
+    getIt<GameState>().updateList.value++;
 
   }
 

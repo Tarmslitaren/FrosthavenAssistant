@@ -3,6 +3,7 @@ import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/stat_calculator.dart';
 import '../Resource/ui_utils.dart';
@@ -75,7 +76,6 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
             builder: (context, value, child) {
               _level = widget.data.level.value;
               bool isBoss = widget.data.type.levels[_level].boss != null;
-              bool allStandeesOut = widget.data.monsterInstances.value.length == widget.data.type.count;
               return Container(
                   margin: EdgeInsets.all(2 * scale * tempScale),
                   child: Stack(
@@ -127,20 +127,20 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                       style: leftStyle),
                                   Text(
                                       StatCalculator.calculateFormula(widget
-                                          .data
-                                          .type
-                                          .levels[_level]
-                                          .elite!
-                                          .move)
+                                              .data
+                                              .type
+                                              .levels[_level]
+                                              .elite!
+                                              .move)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
                                       StatCalculator.calculateFormula(widget
-                                          .data
-                                          .type
-                                          .levels[_level]
-                                          .elite!
-                                          .attack)
+                                              .data
+                                              .type
+                                              .levels[_level]
+                                              .elite!
+                                              .attack)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
@@ -161,8 +161,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               width: 30 * tempScale * scale,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
-                               // mainAxisAlignment: MainAxisAlignment.end,
-                               // mainAxisSize: MainAxisSize.max,
+                                // mainAxisAlignment: MainAxisAlignment.end,
+                                // mainAxisSize: MainAxisSize.max,
                                 children: <Widget>[
                                   Text(
                                       StatCalculator.calculateFormula(widget
@@ -175,20 +175,20 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                       style: leftStyle),
                                   Text(
                                       StatCalculator.calculateFormula(widget
-                                          .data
-                                          .type
-                                          .levels[_level]
-                                          .boss!
-                                          .move)
+                                              .data
+                                              .type
+                                              .levels[_level]
+                                              .boss!
+                                              .move)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
                                       StatCalculator.calculateFormula(widget
-                                          .data
-                                          .type
-                                          .levels[_level]
-                                          .boss!
-                                          .attack)
+                                              .data
+                                              .type
+                                              .levels[_level]
+                                              .boss!
+                                              .attack)
                                           .toString(),
                                       style: leftStyle),
                                   Text(
@@ -299,20 +299,20 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                       style: rightStyle),
                                   Text(
                                       StatCalculator.calculateFormula(widget
-                                          .data
-                                          .type
-                                          .levels[_level]
-                                          .elite!
-                                          .move)
+                                              .data
+                                              .type
+                                              .levels[_level]
+                                              .elite!
+                                              .move)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
                                       StatCalculator.calculateFormula(widget
-                                          .data
-                                          .type
-                                          .levels[_level]
-                                          .elite!
-                                          .attack)
+                                              .data
+                                              .type
+                                              .levels[_level]
+                                              .elite!
+                                              .attack)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
@@ -371,39 +371,50 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           child: Container(
                               width: 25 * scale * tempScale,
                               height: 25 * scale * tempScale,
-                              child: IconButton(
-                                padding: EdgeInsets.zero,
-                                icon: Image.asset(
-                                    color: allStandeesOut? Colors.white24 : Colors.grey,
-                                    colorBlendMode: BlendMode.modulate,
-                                    'assets/images/psd/add.png'),
-                                onPressed: () {
-                                  if (widget
-                                          .data.monsterInstances.value.length ==
-                                      widget.data.type.count - 1) {
-                                    //directly add last standee
-                                    GameMethods.addStandee(
-                                        null,
-                                        widget.data,
-                                        isBoss
-                                            ? MonsterType.boss
-                                            : MonsterType.normal);
-                                  } else if (widget
-                                          .data.monsterInstances.value.length <
-                                      widget.data.type.count - 1) {
-                                    openDialogAtPosition(
-                                        context,
-                                        //problem: context is of stat card widget, not the + button
-                                        AddStandeeMenu(
-                                          elite: false,
-                                          monster: widget.data,
-                                        ),
-                                        -185 * scale,
-                                        //does not take into account the popup does not scale. (should it?)
-                                        12 * scale);
-                                  }
-                                },
-                              ))),
+                              child: ValueListenableBuilder<
+                                      List<MonsterInstance>>(
+                                  valueListenable: widget.data.monsterInstances,
+                                  builder: (context, value, child) {
+                                    bool allStandeesOut = widget.data
+                                            .monsterInstances.value.length ==
+                                        widget.data.type.count;
+                                    return IconButton(
+                                      padding: EdgeInsets.zero,
+                                      icon: Image.asset(
+                                          //TODO: is not updated on remove
+                                          color: allStandeesOut
+                                              ? Colors.white24
+                                              : Colors.grey,
+                                          colorBlendMode: BlendMode.modulate,
+                                          'assets/images/psd/add.png'),
+                                      onPressed: () {
+                                        if (widget.data.monsterInstances.value
+                                                .length ==
+                                            widget.data.type.count - 1) {
+                                          //directly add last standee
+                                          GameMethods.addStandee(
+                                              null,
+                                              widget.data,
+                                              isBoss
+                                                  ? MonsterType.boss
+                                                  : MonsterType.normal);
+                                        } else if (widget.data.monsterInstances
+                                                .value.length <
+                                            widget.data.type.count - 1) {
+                                          openDialogAtPosition(
+                                              context,
+                                              //problem: context is of stat card widget, not the + button
+                                              AddStandeeMenu(
+                                                elite: false,
+                                                monster: widget.data,
+                                              ),
+                                              -185 * scale,
+                                              //does not take into account the popup does not scale. (should it?)
+                                              12 * scale);
+                                        }
+                                      },
+                                    );
+                                  }))),
                       !isBoss
                           ? Positioned(
                               bottom: 5 * scale * tempScale,
@@ -412,9 +423,13 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   width: 25 * scale * tempScale,
                                   height: 25 * scale * tempScale,
                                   child: IconButton(
-                                    padding: EdgeInsets.zero,
+                                      padding: EdgeInsets.zero,
                                       icon: Image.asset(
-                                          color: allStandeesOut? Colors.white24 : Colors.grey,
+                                          color: widget.data
+                                              .monsterInstances.value.length ==
+                                              widget.data.type.count
+                                              ? Colors.white24
+                                              : Colors.grey,
                                           colorBlendMode: BlendMode.modulate,
                                           'assets/images/psd/add.png'),
                                       onPressed: () {
@@ -434,8 +449,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 monster: widget.data,
                                               ),
                                               -145 * scale,
-                                              12 * scale
-                                          );
+                                              12 * scale);
                                         }
                                       })))
                           : Container(),
