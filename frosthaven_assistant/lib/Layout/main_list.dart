@@ -46,7 +46,7 @@ class Item extends StatelessWidget {
       double totalWidthOfMonsterBoxes = 0;
       for (var item in monster.monsterInstances.value) {
         totalWidthOfMonsterBoxes +=
-            MonsterBox.getWidth(scale, item) + 2 * scale;
+            MonsterBox.getWidth(scale, item) + 4 * scale;
       }
       if (totalWidthOfMonsterBoxes > listWidth) {
         standeeRows = 2;
@@ -54,7 +54,7 @@ class Item extends StatelessWidget {
       if (totalWidthOfMonsterBoxes > 2 * listWidth) {
         standeeRows = 3;
       }
-      height = 122 * tempScale * scale + standeeRows * 31 * scale;
+      height = 122 * tempScale * scale + standeeRows * 32 * scale;
       //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else {
       height = 0;

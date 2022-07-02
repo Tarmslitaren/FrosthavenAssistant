@@ -90,7 +90,8 @@ class _StatusMenuState extends State<StatusMenu> {
           width: 42,
           height: 42,
           child: IconButton(
-            icon: Image.asset('assets/images/psd/add.png'),
+            icon: Image.asset(
+                'assets/images/psd/add.png'),
             //iconSize: 30,
             onPressed: () {
               if (notifier.value < maxValue) {

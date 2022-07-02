@@ -75,6 +75,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
             builder: (context, value, child) {
               _level = widget.data.level.value;
               bool isBoss = widget.data.type.levels[_level].boss != null;
+              bool allStandeesOut = widget.data.monsterInstances.value.length == widget.data.type.count;
               return Container(
                   margin: EdgeInsets.all(2 * scale * tempScale),
                   child: Stack(
@@ -372,7 +373,10 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               height: 25 * scale * tempScale,
                               child: IconButton(
                                 padding: EdgeInsets.zero,
-                                icon: Image.asset('assets/images/psd/add.png'),
+                                icon: Image.asset(
+                                    color: allStandeesOut? Colors.white24 : Colors.grey,
+                                    colorBlendMode: BlendMode.modulate,
+                                    'assets/images/psd/add.png'),
                                 onPressed: () {
                                   if (widget
                                           .data.monsterInstances.value.length ==
@@ -410,6 +414,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   child: IconButton(
                                     padding: EdgeInsets.zero,
                                       icon: Image.asset(
+                                          color: allStandeesOut? Colors.white24 : Colors.grey,
+                                          colorBlendMode: BlendMode.modulate,
                                           'assets/images/psd/add.png'),
                                       onPressed: () {
                                         if (widget.data.monsterInstances.value
