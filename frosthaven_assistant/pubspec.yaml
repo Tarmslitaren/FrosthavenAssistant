@@ -45,7 +45,11 @@ dependencies:
   search_choices: ^2.0.20
 
   flutter_animation_progress_bar: ^2.2.1 # for the health bars (note the animations run on init which is crappy)
-  local_hero: ^0.2.0 #maybe can add animations with this?
+  #local_hero: ^0.2.0 #maybe can add animations with this? does not work with scrolling :(
+
+  local_hero: #TODO:try to disable the hero animation when scrolling
+    git:
+      url: https://github.com/Tarmslitaren/local_hero
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

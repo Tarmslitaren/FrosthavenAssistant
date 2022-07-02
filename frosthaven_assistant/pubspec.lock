@@ -173,9 +173,11 @@ packages:
   local_hero:
     dependency: "direct main"
     description:
-      name: local_hero
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: a6c01ee389b917f5c5043ffd0d6715d0439abb11
+      url: "https://github.com/Tarmslitaren/local_hero"
+    source: git
     version: "0.2.0"
   matcher:
     dependency: transitive
@@ -454,7 +456,7 @@ packages:
       name: worker_manager
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.2.6"
+    version: "4.3.5"
   xdg_directories:
     dependency: transitive
     description:

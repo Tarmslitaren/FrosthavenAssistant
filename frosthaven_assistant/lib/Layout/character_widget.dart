@@ -165,7 +165,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                       builder: (context, value, child) {
                                         //_initTextFieldController.clear();
                                         //if (_characterState.initiative == 0) {
-                                        if (_gameState.commands[_gameState
+                                        if (_gameState
+                                            .commandIndex.value >= 0 &&_gameState.commands[_gameState
                                             .commandIndex
                                             .value] is DrawCommand) {
                                           _initTextFieldController.clear();

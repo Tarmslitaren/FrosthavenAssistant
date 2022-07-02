@@ -21,7 +21,8 @@ void main() {
     applyScaling: (deviceWidth) => deviceWidth > 100 && deviceWidth < 740,
   );*/
   //runAppScaled(const MyApp());
-  runApp(const MyApp());
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -41,13 +42,7 @@ class MyApp extends StatelessWidget {
     }
     //Screen.keepOn(true);
 
-    return LocalHeroScope(
-      duration: const Duration(milliseconds: 500),
-      createRectTween: (begin, end) {
-        return RectTween(begin: begin, end: end);
-      },
-      curve: Curves.easeInOut,
-      child: MaterialApp(
+    return MaterialApp(
         //debugShowCheckedModeBanner: false,
         //debugShowMaterialGrid: true,
         checkerboardOffscreenLayers: false,
@@ -55,8 +50,7 @@ class MyApp extends StatelessWidget {
         title: 'Frosthaven Assistant',
         theme: theme,
         home: const MyHomePage(title: 'Frosthaven Assistant'),
-      ),
-    );
+      );
 
     /*return MaterialApp(
       title: 'Frosthaven Assistant',
