@@ -41,6 +41,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
     final generatedChildren = List<Widget>.generate(
         widget.data.monsterInstances.value.length,
         (index) => AnimatedSwitcher( //TODO: why is this not working?
+
             key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
           duration: Duration(milliseconds: 1600),
               child:

@@ -170,21 +170,7 @@ class _MainListState extends State<MainList> {
     );
   }
 
-  int getItemsCanFitOneColumn() {
-    //too bad this has to be done
-    bool canFit2Columns =
-        MediaQuery
-            .of(context)
-            .size
-            .width >= getMainListWidth(context) * 2;
-    if (!canFit2Columns) {
-      return _gameState
-          .currentList.length; //don't wrap if no space. Probably not needed
-    }
-    double screenHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
+  List<double> getItemHeights(){
     double listHeight = 0;
     double scale = getScaleByReference(context);
     double mainListWidth = getMainListWidth(context);
@@ -207,33 +193,47 @@ class _MainListState extends State<MainList> {
           listHeight += 34 * rows.ceil();
         }
       }
-      widgetPositions.add(listHeight);
+      widgetPositions.add(listHeight * scale);
     }
+    return widgetPositions;
+
+  }
+
+  int getItemsCanFitOneColumn(List<double> widgetPositions) {
+    //too bad this has to be done
+    bool canFit2Columns =
+        MediaQuery
+            .of(context)
+            .size
+            .width >= getMainListWidth(context) * 2;
+    if (!canFit2Columns) {
+      return _gameState
+          .currentList.length; //don't wrap if no space. Probably not needed
+    }
+    double screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
+
     //if can't fit without scroll
-    if (widgetPositions.last * scale > 3 * (screenHeight - 80)) {
+    if (widgetPositions.last > 2 * (screenHeight - 80)) {
       //find center point
       for (int i = 0; i < widgetPositions.length; i++) {
         if (widgetPositions[i] > widgetPositions.last / 2) {
-          if (i + 1 < (widgetPositions.length / 2).ceil()) {
-            return (widgetPositions.length / 2)
-                .ceil(); //this pretty much overrides the purpose. need other solution for wraps
-          }
-          return i + 1;
-        }
-      }
-    } else {
-      //make all fit in screen of possible
-      for (int i = 0; i < widgetPositions.length; i++) {
-        if (widgetPositions[i] * scale > (screenHeight - 80)) {
-          //minus height of topand bottom bars
-          if (i + 1 < (widgetPositions.length / 2).ceil()) {
-            return (widgetPositions.length / 2).ceil();
-          }
           return i + 1;
         }
       }
     }
-    return (widgetPositions.length / 2).ceil();
+    else {
+      //make all fit in screen of possible
+      for (int i = 0; i < widgetPositions.length; i++) {
+        if (widgetPositions[i] > (screenHeight - 80)) {
+          //minus height of topand bottom bars
+          return i + 1;
+        }
+      }
+    }
+    return widgetPositions.length;
   }
 
   AnimatedSize createAnimatedSwitcher(int index, int lastIndex) {
@@ -354,20 +354,31 @@ class _MainListState extends State<MainList> {
             valueListenable: _gameState.updateList,
             builder: (context, value, child) {
               double scale = getScaleByReference(context);
+              bool canFit2Columns = MediaQuery.of(context).size.width >= getMainListWidth(context) * 2;
+              List<double> itemHeights = getItemHeights();
+              int itemsPerColumn = getItemsCanFitOneColumn(itemHeights); //no good
+              bool ignoreScroll = false;
+              if(canFit2Columns && itemHeights.last < 2 * MediaQuery.of(context).size.height -160){
+                ignoreScroll = true;
+              }
               return Container(
                   alignment: Alignment.topCenter,
                   width: MediaQuery.of(context).size.width,
                   child: Scrollbar(
+
                     controller: scrollController,
-                    child: LocalHeroScope(
-                     duration: const Duration(milliseconds: 600),
-                     curve: Curves.easeInOut,
+                    //child: LocalHeroScope(
+                    // duration: const Duration(milliseconds: 600),
+                    // curve: Curves.easeInOut,
                     child: ReorderableWrap(
+
+
                       //scrollPhysics: NeverScrollableScrollPhysics(), //disables scrolling
                       runAlignment: WrapAlignment.start,
                       scrollAnimationDuration: Duration(milliseconds: 400),
                       reorderAnimationDuration: Duration(milliseconds: 400),
-                      maxMainAxisCount: getItemsCanFitOneColumn(),
+                      maxMainAxisCount: itemsPerColumn,
+                      ignorePrimaryScrollController: ignoreScroll, //this makes it wrap at screen height. turn on if can fit 2 columns and can fit all items in screen
 
                       direction: Axis.vertical,
                       //scrollDirection: Axis.horizontal,
@@ -384,7 +395,9 @@ class _MainListState extends State<MainList> {
                       children: generateChildren(),
                     ),
                     //)
-                  )));
+                  //)
+              )
+              );
             }));
   }
 }
