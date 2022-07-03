@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/character_widget.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
@@ -104,11 +105,17 @@ class _MainListState extends State<MainList> {
   final GameState _gameState = getIt<GameState>();
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
-  //static bool isScrolling = false;
+
+  List<double> lastPositions = [];
 
   @override
   void initState() {
     super.initState();
+
+    Future.delayed(Duration(milliseconds:1000), () {
+      lastPositions = getItemHeights();
+    });
+
 
     /*Future.delayed(Duration(milliseconds:1000), () { //uly hack to make this late enough.
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -237,15 +244,41 @@ class _MainListState extends State<MainList> {
   }
 
   AnimatedSize createAnimatedSwitcher(int index, int lastIndex) {
-    //List<double> positions = getItemHeights(); - the end resulting positions.
+  //need also last positions
+    List<double> positions = getItemHeights();// - the end resulting positions.
+    double position = 0;
+    if(index > 0){
+      position = positions[index-1];
+    }
+    //TODO: handle insert and delete
+    //TODO: make the calcuated positions exactly right
+
+    double lastPosition = 0;
+    if(lastIndex > 0){
+      lastPosition = lastPositions[lastIndex-1];
+    }
+
+    double diff = lastPosition - position;
+
+
+
+    lastPositions = positions;
+    //YAAAAAAAASSSS!!!!!!! almost there!!!!
     //TODO: figure out old widget position and slide from there
-    //TODO: this is wrong, should have one one way animation per item, not a switcher (for translation animations from position).
     return AnimatedSize( //to mkae the switch somewhat less glitchy looking
-        duration: Duration(milliseconds: 350),
+        duration: Duration(milliseconds: 0),
       child:
+      TranslationAnimatedWidget.tween(
+    translationDisabled: Offset(0, diff),
+    translationEnabled: Offset(0,  0),
+    duration: Duration(milliseconds: 600),
+    curve:  Curves.linear,
+    child: _generatedList[index],
+      )
 
 
-      AnimatedSwitcher(
+
+      /*AnimatedSwitcher(
       key: Key(index.toString()),
       duration: Duration(milliseconds: 1000),
       /*transitionBuilder: (Widget child, Animation<double> animation) {
@@ -263,7 +296,8 @@ class _MainListState extends State<MainList> {
       },*/
       //use default animation for now.
       child: _generatedList[index],
-    ));
+    )*/
+    );
   }
   List<Widget> generateChildren() {
     List<AnimatedSize> generatedListAnimators = [];
