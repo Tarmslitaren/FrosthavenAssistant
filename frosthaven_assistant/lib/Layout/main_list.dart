@@ -106,42 +106,16 @@ class _MainListState extends State<MainList> {
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
 
-  List<double> lastPositions = [];
+  late List<double> lastPositions;
 
   @override
   void initState() {
     super.initState();
 
-    Future.delayed(Duration(milliseconds:1000), () {
+    //this does cause a index o
+   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       lastPositions = getItemHeights();
     });
-
-
-    /*Future.delayed(Duration(milliseconds:1000), () { //uly hack to make this late enough.
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        /*scrollController.addListener(() {
-          print('scrolling');
-        });*/
-        scrollController.position.isScrollingNotifier.addListener(() {
-          if(!scrollController.position.isScrollingNotifier.value) {
-            print('scroll is stopped');
-            isScrolling = false;
-            Future.delayed(Duration(milliseconds:100), (){
-                _gameState.updateList.value++; //force rebuild
-            });
-            //enable hero widget here
-          } else {
-            print('scroll is started');
-            isScrolling = true;
-            _gameState.updateList.value++; //force rebuild
-
-            //disable hero widget her
-          }
-        });
-      });
-    });*/
-
-
   }
 
   @override
@@ -186,10 +160,10 @@ class _MainListState extends State<MainList> {
     for (int i = 0; i < _gameState.currentList.length; i++) {
       var item = _gameState.currentList[i];
       if (item is Character) {
-        listHeight += 64; //TODO: + summon list size
+        listHeight += 60; //TODO: + summon list size
       }
       if (item is Monster) {
-        listHeight += 124;
+        listHeight += 120 * tempScale;
         if (item.monsterInstances.value.isNotEmpty) {
           double listWidth = 0;
           for (var monsterInstance in item.monsterInstances.value) {
@@ -197,7 +171,7 @@ class _MainListState extends State<MainList> {
           }
 
           double rows = listWidth / mainListWidth;
-          listHeight += 34 * rows.ceil();
+          listHeight += 32 * rows.ceil();
         }
       }
       widgetPositions.add(listHeight * scale);
@@ -223,20 +197,22 @@ class _MainListState extends State<MainList> {
         .height;
 
     //if can't fit without scroll
-    if (widgetPositions.last > 2 * (screenHeight - 80)) {
-      //find center point
-      for (int i = 0; i < widgetPositions.length; i++) {
-        if (widgetPositions[i] > widgetPositions.last / 2) {
-          return i + 1;
+    if(widgetPositions.length > 0) {
+      if (widgetPositions.last > 2 * (screenHeight - 80)) {
+        //find center point
+        for (int i = 0; i < widgetPositions.length; i++) {
+          if (widgetPositions[i] > widgetPositions.last / 2) {
+            return i + 1;
+          }
         }
       }
-    }
-    else {
-      //make all fit in screen of possible
-      for (int i = 0; i < widgetPositions.length; i++) {
-        if (widgetPositions[i] > (screenHeight - 80)) {
-          //minus height of top and bottom bars
-          return i + 1;
+      else {
+        //make all fit in screen of possible
+        for (int i = 0; i < widgetPositions.length; i++) {
+          if (widgetPositions[i] > (screenHeight - 80)) {
+            //minus height of top and bottom bars
+            return i + 1;
+          }
         }
       }
     }
@@ -250,53 +226,30 @@ class _MainListState extends State<MainList> {
     if(index > 0){
       position = positions[index-1];
     }
-    //TODO: handle insert and delete
-    //TODO: make the calcuated positions exactly right
 
     double lastPosition = 0;
     if(lastIndex > 0){
-      lastPosition = lastPositions[lastIndex-1];
+      if(lastPositions.length >=lastIndex) { //should be ok except for on reload as we don't bother saving lastPositions ot disk
+        lastPosition = lastPositions[lastIndex - 1];
+      }
     }
 
     double diff = lastPosition - position;
 
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      lastPositions = positions;
+    });
 
-
-    lastPositions = positions;
-    //YAAAAAAAASSSS!!!!!!! almost there!!!!
-    //TODO: figure out old widget position and slide from there
     return AnimatedSize( //to mkae the switch somewhat less glitchy looking
-        duration: Duration(milliseconds: 0),
+        duration: const Duration(milliseconds: 0),
       child:
       TranslationAnimatedWidget.tween(
     translationDisabled: Offset(0, diff),
     translationEnabled: Offset(0,  0),
-    duration: Duration(milliseconds: 600),
-    curve:  Curves.linear,
+    duration: Duration(milliseconds: 1000),
+    curve: Curves.linearToEaseOut, // Curves.decelerate,
     child: _generatedList[index],
       )
-
-
-
-      /*AnimatedSwitcher(
-      key: Key(index.toString()),
-      duration: Duration(milliseconds: 1000),
-      /*transitionBuilder: (Widget child, Animation<double> animation) {
-        //TODO: the offset works well only when all items are same size
-        //switcher might be wrong idea to use, when reorder, and it's not just 2 items switching place like (0,1,2 -> 1,2,0)
-        //if only we could get the actual size of widgets ;(
-        //offset 1 == 1 x size of widget. soo. calc all widget heights (120 or 60 + 30x rows) + x offset if 2 colums.
-        var tween = Tween<Offset>(
-            begin: Offset(0, (lastIndex - index).toDouble()), end: Offset(0, 0)
-        );
-        return SlideTransition(
-          position: tween.animate(animation),
-          child: child,
-        );
-      },*/
-      //use default animation for now.
-      child: _generatedList[index],
-    )*/
     );
   }
   List<Widget> generateChildren() {

@@ -58,17 +58,18 @@ class _MonsterWidgetState extends State<MonsterWidget> {
 
     final generatedChildren = List<Widget>.generate(
         widget.data.monsterInstances.value.length,
-        (index) => AnimatedSwitcher( //TODO: why is this not working?
+        (index) =>/* AnimatedSwitcher( //TODO: why is this not working?
 
             key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
           duration: Duration(milliseconds: 1600),
-              child:
+              child:*/
                   MonsterBox(
                       key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
                       data: widget.data.monsterInstances.value[index],
                   display: displaystartAnimation),
             //)
-        ));
+       // )
+    );
     lastList = widget.data.monsterInstances.value;
     return Wrap(
       runSpacing: 2.0 * scale,

@@ -277,18 +277,18 @@ class _MonsterBoxState extends State<MonsterBox> {
                   if (widget.display != widget.data.standeeNr){
                     //if this one is not added
                     return TranslationAnimatedWidget.tween(
-                        enabled: !alive, //fix is to only set enabled on added/removed ones?
+                        enabled: !alive,
                         translationDisabled: Offset(0, 0),
                         translationEnabled: Offset(0, alive ? 0 : -offset),
                         duration: Duration(milliseconds: 600),
                         curve: alive ? Curves.linear : Curves.linear,
 
-                        child: OpacityAnimatedWidget.tween(
+                        child: child );/*OpacityAnimatedWidget.tween(
                             enabled: alive,
                             opacityDisabled: 0,
                             opacityEnabled: 1,
                             child: child
-                        ));
+                        ));*/
                   }
 
                   //find out if added

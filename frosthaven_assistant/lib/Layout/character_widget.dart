@@ -107,7 +107,6 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                       ? ColorFilter.matrix(identity)
                       : ColorFilter.matrix(grayScale),
                   child: Container(
-                      height: 60 * scale,
                       width: getMainListWidth(context),
                       child: Stack(
                         //alignment: Alignment.centerLeft,
