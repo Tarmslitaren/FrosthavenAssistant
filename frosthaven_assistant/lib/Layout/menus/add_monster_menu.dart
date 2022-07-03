@@ -22,6 +22,7 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
   initState() {
     // at the beginning, all users are shown
     _foundMonsters = _gameState.modelData.value!.monsters;
+    _foundMonsters.sort((a, b) => a.name.compareTo(b.name));
     super.initState();
   }
 

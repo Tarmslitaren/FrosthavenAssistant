@@ -22,6 +22,8 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
   initState() {
     // at the beginning, all users are shown
     _foundCharacters = _gameState.modelData.value!.characters;
+    //TODO: sort by edition as well. and maybe not sort at all?
+    _foundCharacters.sort((a, b) => a.name.compareTo(b.name));
     super.initState();
   }
 
