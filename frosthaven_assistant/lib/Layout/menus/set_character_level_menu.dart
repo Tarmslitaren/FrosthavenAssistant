@@ -58,15 +58,9 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
     return Container(
         width: 10,
         height: 160,
-        decoration: const BoxDecoration(
-          //color: Colors.black,
-          //borderRadius: BorderRadius.all(Radius.circular(8)),
-
-          /*border: Border.fromBorderSide(BorderSide(
-            color: Colors.blueGrey,
-            width: 10
-          )),*/
+        decoration: BoxDecoration(
           image: DecorationImage(
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
             image: AssetImage('assets/images/bg/white_bg.png'),
             fit: BoxFit.fitWidth,
           ),

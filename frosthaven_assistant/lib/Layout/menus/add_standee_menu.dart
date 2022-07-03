@@ -86,7 +86,7 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
     return Container(
         width: 30, //need to set any width to center content
         height: height,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           //color: Colors.black,
           //borderRadius: BorderRadius.all(Radius.circular(8)),
 
@@ -95,19 +95,14 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
             width: 10
           )),*/
           image: DecorationImage(
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
             image: AssetImage('assets/images/bg/white_bg.png'),
-            fit: BoxFit.fitWidth,
+            fit: BoxFit.fitHeight,
           ),
         ),
         child: Stack(
             //alignment: Alignment.center,
             children: [
-              /*Image.asset(
-                'assets/images/bg/white_bg.png',
-                //height: 460,
-                //width: 50,
-                fit: BoxFit.cover,
-              ),*/
               ValueListenableBuilder<List<MonsterInstance>>(
                   valueListenable: widget.monster.monsterInstances,
                   builder: (context, value, child) {

@@ -145,15 +145,9 @@ class _StatusMenuState extends State<StatusMenu> {
     return Container(
         width: 320,
         height: 210,
-        decoration: const BoxDecoration(
-          //color: Colors.black,
-          //borderRadius: BorderRadius.all(Radius.circular(8)),
-
-          /*border: Border.fromBorderSide(BorderSide(
-            color: Colors.blueGrey,
-            width: 10
-          )),*/
+        decoration: BoxDecoration(
           image: DecorationImage(
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
             image: AssetImage('assets/images/bg/white_bg.png'),
             fit: BoxFit.fitWidth,
           ),

@@ -228,7 +228,7 @@ class _MainListState extends State<MainList> {
       //make all fit in screen of possible
       for (int i = 0; i < widgetPositions.length; i++) {
         if (widgetPositions[i] > (screenHeight - 80)) {
-          //minus height of topand bottom bars
+          //minus height of top and bottom bars
           return i + 1;
         }
       }
@@ -237,8 +237,9 @@ class _MainListState extends State<MainList> {
   }
 
   AnimatedSize createAnimatedSwitcher(int index, int lastIndex) {
+    //List<double> positions = getItemHeights(); - the end resulting positions.
     //TODO: figure out old widget position and slide from there
-    //TODO: this is wrong, should have one one way animation per item, not a switcher.
+    //TODO: this is wrong, should have one one way animation per item, not a switcher (for translation animations from position).
     return AnimatedSize( //to mkae the switch somewhat less glitchy looking
         duration: Duration(milliseconds: 350),
       child:

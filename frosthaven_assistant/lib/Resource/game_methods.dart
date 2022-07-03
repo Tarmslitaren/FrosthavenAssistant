@@ -203,10 +203,6 @@ class GameMethods {
   }
 
   static void sortByInitiative() {
-    //hack:
-    //late List<ListItemData> newList = List.from(_gameState.currentList);
-
-
     _gameState.currentList.sort((a, b) {
       //dead characters dead last
       if (a is Character) {
@@ -267,8 +263,6 @@ class GameMethods {
       return aInitiative.compareTo(bInitiative);
     }
     );
-    //_gameState.currentList = newList;
-
   }
 
   static void sortMonsterInstances(List<MonsterInstance> instances){

@@ -28,15 +28,33 @@ class MonsterWidget extends StatefulWidget {
 
 class _MonsterWidgetState extends State<MonsterWidget> {
   @override
-  late int lastListLength;
+  late List<MonsterInstance> lastList = [];
   void initState() {
     super.initState();
-    lastListLength = widget.data.monsterInstances.value.length;
+    lastList = widget.data.monsterInstances.value;
   }
 
   Widget buildMonsterBoxGrid(double scale) {
 
-    bool display = lastListLength != widget.data.monsterInstances.value.length;
+    int displaystartAnimation = -1;
+
+    if(lastList.length < widget.data.monsterInstances.value.length){
+      //find which is new
+
+      for(var item in widget.data.monsterInstances.value){
+        bool found = false;
+        for(var oldItem in lastList) {
+          if(item.standeeNr == oldItem.standeeNr){
+            found = true;
+            break;
+          }
+        }
+        if (!found){
+          displaystartAnimation = item.standeeNr;
+          break;
+        }
+      }
+    }
 
     final generatedChildren = List<Widget>.generate(
         widget.data.monsterInstances.value.length,
@@ -48,10 +66,10 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                   MonsterBox(
                       key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
                       data: widget.data.monsterInstances.value[index],
-                  display: display),
+                  display: displaystartAnimation),
             //)
         ));
-    lastListLength = generatedChildren.length;
+    lastList = widget.data.monsterInstances.value;
     return Wrap(
       runSpacing: 2.0 * scale,
       spacing: 2.0 * scale,

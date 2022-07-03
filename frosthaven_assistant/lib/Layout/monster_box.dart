@@ -17,7 +17,7 @@ import 'monster_stat_card.dart';
 
 class MonsterBox extends StatefulWidget {
   final MonsterInstance data;
-  final bool display;
+  final int display;
 
   const MonsterBox({Key? key, required this.data, required this.display}) : super(key: key);
 
@@ -273,11 +273,23 @@ class _MonsterBoxState extends State<MonsterBox> {
                   }
 
                   double offset = -30 * scale;
-                  //TODO: only show add animations when added, not every redraw
                   Widget child = buildInternal(scale, width, color);
 
-                  if (widget.display == false){
-                    //return child;
+                  if (widget.display != widget.data.standeeNr){
+                    //if this one is not added
+                    return TranslationAnimatedWidget.tween(
+                        enabled: !alive, //fix is to only set enabled on added/removed ones?
+                        translationDisabled: Offset(0, 0),
+                        translationEnabled: Offset(0, alive ? 0 : -offset),
+                        duration: Duration(milliseconds: 600),
+                        curve: alive ? Curves.linear : Curves.linear,
+
+                        child: OpacityAnimatedWidget.tween(
+                            enabled: alive,
+                            opacityDisabled: 0,
+                            opacityEnabled: 1,
+                            child: child
+                        ));
                   }
 
                   //find out if added

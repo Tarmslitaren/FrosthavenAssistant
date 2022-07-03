@@ -76,7 +76,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
     return Container(
         width: 10,
         height: 160,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           //color: Colors.black,
           //borderRadius: BorderRadius.all(Radius.circular(8)),
 
@@ -85,6 +85,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
             width: 10
           )),*/
           image: DecorationImage(
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
               image: AssetImage('assets/images/bg/white_bg.png'),
               fit: BoxFit.fitWidth,
           ),
@@ -92,11 +93,11 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
         child: Stack(
             //alignment: Alignment.center,
             children: [
-              Image.asset(
+              /*Image.asset(
                 'assets/images/bg/white_bg.png',
                 //height: 460,
                 fit: BoxFit.cover,
-              ),
+              ),*/
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [

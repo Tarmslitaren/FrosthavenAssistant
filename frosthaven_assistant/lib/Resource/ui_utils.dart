@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 void openDialog(BuildContext context, Widget widget) {
-  showDialog(context: context, builder: (BuildContext context) => widget);
+  showDialog(
+      context: context,
+      builder: (BuildContext context) => widget);
   /*Navigator.of(context).push(MaterialPageRoute<void>(
     builder: (BuildContext context) {
       return widget;
@@ -22,6 +24,7 @@ void openDialogAtPosition(
             left: x + xOffset, // left coordinate
             top: y + yOffset, // top coordinate
             child: Dialog(
+              backgroundColor: Colors.transparent,
                 /*shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.0),
                   side: BorderSide(
@@ -34,4 +37,3 @@ void openDialogAtPosition(
                 child: widget)),
       ]));
 }
-
