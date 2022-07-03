@@ -240,7 +240,7 @@ class _MainListState extends State<MainList> {
       lastPositions = positions;
     });
 
-    return AnimatedSize( //to mkae the switch somewhat less glitchy looking
+    return AnimatedSize( //not really needed now
         duration: const Duration(milliseconds: 0),
       child:
       TranslationAnimatedWidget.tween(

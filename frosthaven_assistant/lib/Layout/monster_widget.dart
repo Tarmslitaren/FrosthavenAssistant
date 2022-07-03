@@ -62,13 +62,16 @@ class _MonsterWidgetState extends State<MonsterWidget> {
 
             key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
           duration: Duration(milliseconds: 1600),
-              child:*/
+              child:*/ AnimatedSize( //not really needed now
+          key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
+    duration: const Duration(milliseconds: 300),
+        child:
                   MonsterBox(
                       key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
                       data: widget.data.monsterInstances.value[index],
                   display: displaystartAnimation),
             //)
-       // )
+        )
     );
     lastList = widget.data.monsterInstances.value;
     return Wrap(

@@ -66,9 +66,10 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
 
   void setInert(){
     _color = Colors.transparent;
-    _height = widget.width;
-    _borderRadius = BorderRadius.all(
-        Radius.circular(widget.width - widget.borderWidth));
+    _height = 4;// widget.width;
+    _borderRadius = BorderRadius.zero;
+        //BorderRadius.all(
+        //Radius.circular(widget.width - widget.borderWidth));
   }
 
   @override
@@ -143,10 +144,9 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
                                   )
                           ]),
                       // Define how long the animation should take.
-                      duration: const Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 1200),
                       // Provide an optional curve to make the animation feel smoother.
                       curve: Curves.fastLinearToSlowEaseIn,
-                      //TODO: animate it filling up from below istead?
                     );
                   }),
             ),
