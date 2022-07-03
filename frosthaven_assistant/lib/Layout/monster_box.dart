@@ -268,7 +268,6 @@ class _MonsterBoxState extends State<MonsterBox> {
                 builder: (context, value, child) {
                   bool alive = true;
                   if (widget.data.health.value <= 0) {
-                    //_display = false;
                     alive = false;
                   }
 
