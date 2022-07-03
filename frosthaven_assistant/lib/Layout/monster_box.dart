@@ -252,6 +252,7 @@ class _MonsterBoxState extends State<MonsterBox> {
               Stack(children: [
                 Positioned(
                   child: Dialog(
+                    backgroundColor: Colors.transparent,
                     child:
                         StatusMenu(figure: widget.data, monster: getMonster()),
                   ),

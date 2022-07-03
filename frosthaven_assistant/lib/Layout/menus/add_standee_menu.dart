@@ -95,7 +95,7 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
             width: 10
           )),*/
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.dstATop),
             image: AssetImage('assets/images/bg/white_bg.png'),
             fit: BoxFit.fitHeight,
           ),

@@ -90,6 +90,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                   //left: 100, // left coordinate
                   //top: 100,  // top coordinate
                   child: Dialog(
+                    backgroundColor: Colors.transparent,
                     child: StatusMenu(
                         figure: _character.characterState,
                         character: _character),

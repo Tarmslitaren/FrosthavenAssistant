@@ -34,12 +34,12 @@ Widget createLevelWidget(BuildContext context) {
   return GestureDetector(
     onTap: () {
       //open stats menu
-      openDialogAtPosition(
+      openDialog(
         context,
         const Dialog(
+          backgroundColor: Colors.transparent,
           child: SetLevelMenu(),
         ),
-        0,0
       );
     },
     child: Column(
