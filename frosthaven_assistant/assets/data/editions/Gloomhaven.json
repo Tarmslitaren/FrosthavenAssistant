@@ -510,7 +510,7 @@
     {
       "name": "Earth Demon",
       "cards": [
-        [ 636, true, 40, "%heal% 3", "^Self", "%earth%%use%", "!*%immobilize%", "!*Target all enemies within %range% 3" ],
+        [ 636, true, 40, "%heal% 3", "^Self", "%earth%%use%", "!^%immobilize% Target all enemies within %range% 3" ],
         [ 637, true, 42, "%move% + 1", "%attack% - 1" ],
         [ 638, false, 62, "%move% + 0", "%attack% + 0", "%earth%" ],
         [ 639, false, 71, "%attack% + 0", "^%range% 4", "%earth%%use%", "!^%target% 2" ],
@@ -534,8 +534,7 @@
           true,
           30,
           "%fire%%use%",
-          "!^All adjacent enemies",
-          "!^suffer 2 damage.",
+          "!^All adjacent enemies suffer 2 damage.",
           "%move% + 0",
           "%attack% - 2",
           "^%range% + 0",
@@ -599,8 +598,7 @@
           "%move% - 1",
           "%attack% + 0 %aoe-line-4-with-black%",
           "%dark%%use%",
-          "!^Perform \"%heal% 2, Self\"",
-          "!^for each target damaged"
+          "!^Perform \"%heal% 2, Self\" for each target damaged."
         ],
         [ 730, false, 38, "%move% + 0", "%attack% - 1", "^%target% 2", "%dark%%use%", "!^+2 %attack%, %disarm%" ],
         [ 731, true, 7, "%attack% - 1", "^%range% 3", "^%muddle%", "%heal% 4", "^Self" ]
@@ -3627,7 +3625,7 @@
           "move": 3,
           "attack": 3,
           "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C", "eggs", "%move% - 1", "%attack% + 0" ],
+          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3636,7 +3634,7 @@
           "move": 4,
           "attack": 3,
           "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C", "eggs", "%move% - 1", "%attack% + 0" ],
+          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3645,7 +3643,7 @@
           "move": 4,
           "attack": 4,
           "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C", "eggs", "%move% - 1", "%attack% + 0" ],
+          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3654,7 +3652,7 @@
           "move": 4,
           "attack": 4,
           "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C", "eggs", "%move% - 1", "%attack% + 0" ],
+          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3663,7 +3661,7 @@
           "move": 5,
           "attack": 4,
           "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C", "eggs", "%move% - 1", "%attack% + 0" ],
+          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3672,7 +3670,7 @@
           "move": 5,
           "attack": 5,
           "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C", "eggs", "%move% - 1", "%attack% + 0" ],
+          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3681,7 +3679,7 @@
           "move": 5,
           "attack": 5,
           "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C", "eggs", "%move% - 1", "%attack% + 0" ],
+          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3690,7 +3688,7 @@
           "move": 5,
           "attack": 5,
           "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C", "eggs", "%move% - 1", "%attack% + 0" ],
+          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         }
       ]

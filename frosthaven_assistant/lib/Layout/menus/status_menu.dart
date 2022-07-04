@@ -148,7 +148,7 @@ class _StatusMenuState extends State<StatusMenu> {
         height: 210,
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.7), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage('assets/images/bg/white_bg.png'),
             fit: BoxFit.fitWidth,
           ),

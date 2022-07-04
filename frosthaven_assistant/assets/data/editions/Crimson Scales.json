@@ -407,7 +407,7 @@
         [1217, false, 45, "%attack% + 2", "^%chill%", "%ice%" ],
         [1218, false, 86, "%move% + 1","*.........", "%attack% - 1", "^Add +2 %attack% if the target", "^has %chill%" ],
         [1219, false, 86, "%move% + 1","*.........", "%attack% - 1", "^Add +2 %attack% if the target", "^has %chill%" ],
-        [1220, false, 94, "%move% + 2","*.........", "%ice%%use%", "!^%heal% 2", "!^Self" ],
+        [1220, false, 94, "%move% + 2","*.........", "%ice%%use%", "!^%heal% 2", "*Self" ],
         [1221, false, 77, "%stun% and", "%push% 1", "^Target one adjacent enemy" ]
       ]
     },
@@ -555,7 +555,7 @@
       "edition": "Crimson Scales",
       "cards": [
         [1198, true, 96, "%attack% - 1", "^%range% 5", "*Summon one normal Blood Ooze in a hex adjacent to the target with a hit point value equal to the summoning Blood Ooze's current hit point value minus 2 (limited by a normal Blood Ooze's specifiec maximum hit point value)" ],
-        [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "%fire%%use%", "!^Hit point value equal", "!^to three instead" ],
+        [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "%fire%%use%", "!^Hit point value equal to three instead" ],
         [1200, false, 71, "^All adjacent enemies", "^suffer one damage.","*.........", "%move% + 1","*.........", "%heal% 1", "^Target all adjacent Blood Oozes"],
         [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^Target one adjacent enemy", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes." ],
         [1202, false, 62, "%attack% - 1", "^%poison%", "^Target one adjacent enemy","*.........", "%attack% - 1", "^Target one enemy at exactly %range% 2" ],
@@ -947,7 +947,7 @@
           "move": 4,
           "attack": 3,
           "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy", "obstacle, perform", "%shield%1, %retaliate%1,", "%heal%1" ],
+          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%1 %retaliate%1 %heal%1" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -956,7 +956,7 @@
           "move": 4,
           "attack": 4,
           "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy", "obstacle, perform", "%shield%1, %retaliate%1,", "%heal%1" ],
+          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%1, %retaliate%1, %heal%1" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -965,7 +965,7 @@
           "move": 5,
           "attack": 4,
           "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy", "obstacle, perform", "%shield%1, %retaliate%1,", "%heal%1" ],
+          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%1, %retaliate%1, %heal%1" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -974,7 +974,7 @@
           "move": 5,
           "attack": 4,
           "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy", "obstacle, perform", "%shield%2, %retaliate%2,", "%heal%2" ],
+          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%2, %retaliate%2, %heal%2" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -983,7 +983,7 @@
           "move": 5,
           "attack": 5,
           "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy", "obstacle, perform", "%shield%2, %retaliate%2,", "%heal%2" ],
+          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%2, %retaliate%2, %heal%2" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -992,7 +992,7 @@
           "move": 6,
           "attack": 5,
           "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy", "obstacle, perform", "%shield%3, %retaliate%3,", "%heal%3" ],
+          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%3, %retaliate%3, %heal%3" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1001,7 +1001,7 @@
           "move": 6,
           "attack": 5,
           "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy", "obstacle, perform", "%shield%3, %retaliate%3,", "%heal%3" ],
+          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%3, %retaliate%3, %heal%3" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1010,7 +1010,7 @@
           "move": 6,
           "attack": 6,
           "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy", "obstacle, perform", "%shield%4, %retaliate%4,", "%heal%4" ],
+          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%4, %retaliate%4, %heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         }
       ]
@@ -2102,13 +2102,13 @@
             "health": 8,
             "move": 1,
             "attack": 1,
-            "attributes": [ "%retaliate% 1", "%range% 2" ]
+            "attributes": [ "%retaliate% 1 %range% 2" ]
           },
           "elite": {
             "health": 12,
             "move": 1,
             "attack": 2,
-            "attributes": [ "%retaliate% 1",  "%range% 2" ]
+            "attributes": [ "%retaliate% 1 %range% 2" ]
           }
         },
         {
@@ -2117,13 +2117,13 @@
             "health": 11,
             "move": 1,
             "attack": 2,
-            "attributes": [ "%retaliate% 1", "%range% 2" ]
+            "attributes": [ "%retaliate% 1 %range% 2" ]
           },
           "elite": {
             "health": 16,
             "move": 2,
             "attack": 2,
-            "attributes": [ "%retaliate% 1",  "%range% 2" ]
+            "attributes": [ "%retaliate% 1 %range% 2" ]
           }
         },
         {
@@ -2132,13 +2132,13 @@
             "health": 14,
             "move": 1,
             "attack": 2,
-            "attributes": [ "%retaliate% 1", "%range% 3" ]
+            "attributes": [ "%retaliate% 1 %range% 3" ]
           },
           "elite": {
             "health": 20,
             "move": 2,
             "attack": 2,
-            "attributes": [ "%retaliate% 1",  "%range% 3" ]
+            "attributes": [ "%retaliate% 1 %range% 3" ]
           }
         },
         {
@@ -2147,13 +2147,13 @@
             "health": 17,
             "move": 2,
             "attack": 2,
-            "attributes": [ "%retaliate% 1", "%range% 3" ]
+            "attributes": [ "%retaliate% 1 %range% 3" ]
           },
           "elite": {
             "health": 24,
             "move": 2,
             "attack": 3,
-            "attributes": [ "%retaliate% 2",  "%range% 3" ]
+            "attributes": [ "%retaliate% 2 %range% 3" ]
           }
         },
         {
@@ -2162,13 +2162,13 @@
             "health": 20,
             "move": 2,
             "attack": 3,
-            "attributes": [ "%retaliate% 2", "%range% 3" ]
+            "attributes": [ "%retaliate% 2 %range% 3" ]
           },
           "elite": {
             "health": 28,
             "move": 3,
             "attack": 4,
-            "attributes": [ "%retaliate% 2",  "%range% 3", "Immune %stun%" ]
+            "attributes": [ "%retaliate% 2 %range% 3", "^Immune %stun%" ]
           }
         },
         {
@@ -2177,13 +2177,13 @@
             "health": 23,
             "move": 3,
             "attack": 3,
-            "attributes": [ "%retaliate% 2", "^%range% 3" ]
+            "attributes": [ "%retaliate% 2 %range% 3" ]
           },
           "elite": {
             "health": 32,
             "move": 3,
             "attack": 5,
-            "attributes": [ "%retaliate% 3",  "%range% 3", "Immune %stun%" ]
+            "attributes": [ "%retaliate% 3 %range% 3", "^Immune %stun%" ]
           }
         },
         {
@@ -2192,13 +2192,13 @@
             "health": 26,
             "move": 3,
             "attack": 4,
-            "attributes": [ "%retaliate% 3", "%range% 3", "Immune %stun%" ]
+            "attributes": [ "%retaliate% 3 %range% 3", "^Immune %stun%" ]
           },
           "elite": {
             "health": 38,
             "move": 3,
             "attack": 6,
-            "attributes": [ "%retaliate% 4",  "%range% 3", "Immune %stun%" ]
+            "attributes": [ "%retaliate% 4 %range% 3", "^Immune %stun%" ]
           }
         },
         {
@@ -2207,13 +2207,13 @@
             "health": 30,
             "move": 3,
             "attack": 4,
-            "attributes": [ "%retaliate% 4", "%range% 3", "Immune %stun%" ]
+            "attributes": [ "%retaliate% 4 %range% 3", "^Immune %stun%" ]
           },
           "elite": {
             "health": 42,
             "move": 3,
             "attack": 6,
-            "attributes": [ "%retaliate% 4",  "%range% 3", "Immune %stun%" ]
+            "attributes": [ "%retaliate% 4 %range% 3", "^Immune %stun%" ]
           }
         }
       ]

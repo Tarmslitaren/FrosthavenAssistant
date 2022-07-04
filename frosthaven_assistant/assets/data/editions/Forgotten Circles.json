@@ -94,8 +94,8 @@
         [ 1002, false, 38, "%move% - 1", "%attack% + 0", "^%pierce% 2" ],
         [ 1003, false, 46, "%move% + 0", "%attack% - 1", "^%range% 3" ],
         [ 1004, false, 46, "%move% + 0", "%attack% - 1", "^%range% 3" ],
-        [ 1005, false, 60, "%move% + 2", "%attack% + 0", "ELITE:", "%attack% + 0" ],
-        [ 1006, true, 72, "%move% - 1", "NORMAL:", "%attack% + 0", "ELITE:", "%attack% + 1 %aoe-arc-3%" ]
+        [ 1005, false, 60, "%move% + 2", "%attack% + 0", "£ELITE:", "%attack% + 0" ],
+        [ 1006, true, 72, "%move% - 1", "NORMAL:", "%attack% + 0", "£ELITE:", "%attack% + 1 %aoe-arc-3%" ]
       ]
     },
     {
@@ -107,12 +107,12 @@
         [ 993, false, 27, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
         [ 994, true, 33, "%move% + 0", "%attack% + 0", "^%range% + 1", "^%pierce% 1" ],
         [ 995, false, 37, "%move% - 1", "%attack% + 0", "^%range% + 1", "^%immobilize%" ],
-        [ 996, false, 48, "ELITE:", "*Focus on the enemy with the", "*lowest current hit point value ", "%move% + 1", "%attack% + 0", "^%range% + 0" ],
+        [ 996, false, 48, "£ELITE:", "*Focus on the enemy with the", "*lowest current hit point value ", "%move% + 1", "%attack% + 0", "^%range% + 0" ],
         [
           997,
           false,
           55,
-          "ELITE:", "*Focus on the enemy with the", "*highest current hit point value ",
+          "£ELITE:", "*Focus on the enemy with the", "*highest current hit point value ",
           "%move% + 0",
           "%attack% - 1",
           "%wound%"
@@ -349,6 +349,7 @@
     },
     "Bear-Drake Abomination": {
       "deck": "Bear-Drake Abomination",
+      "gfx": "Cave Bear",
       "edition": "Forgotten Circles",
       "count": 1,
       "flying": true,
