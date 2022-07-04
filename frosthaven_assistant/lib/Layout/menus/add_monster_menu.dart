@@ -28,7 +28,26 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
       );
     }
     _foundMonsters = _allMonsters;
-    _foundMonsters.sort((a, b) => a.name.compareTo(b.name));
+    _foundMonsters.sort((a, b) {
+      if(a.edition != b.edition) {
+        return -a.edition.compareTo(b.edition);
+        //NOTE: this - here is a bit silly. it just so happens that the order makes more sense backards: Jotl, gloom, FC, FH, CS
+      }
+      if(a.hidden && !b.hidden){
+        return 1;
+      }
+      if(b.hidden && !a.hidden){
+        return -1;
+      }
+      if(a.levels[0].boss != null && b.levels[0].boss == null){
+        return 1;
+      }
+      if(b.levels[0].boss != null && a.levels[0].boss == null){
+        return -1;
+      }
+      return a.name.compareTo(b.name);
+    }
+    );
     super.initState();
   }
 

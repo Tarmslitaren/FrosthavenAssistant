@@ -1146,6 +1146,7 @@
       "monsters": [ "Ancient Artillery", "Frost Demon", "Savvas Icestorm", "Wind Demon" ]
     },
     "#37 Aiding Diamara": {
+      "monsters": [],
       "special": [ "Bosses use the same deck" ]
     },
     "#39 Another Revolution": {

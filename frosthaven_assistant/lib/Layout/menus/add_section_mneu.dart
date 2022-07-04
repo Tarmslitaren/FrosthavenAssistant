@@ -4,14 +4,14 @@ import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 
-class SelectScenarioMenu extends StatefulWidget {
-  const SelectScenarioMenu({Key? key}) : super(key: key);
+class AddSectionMenu extends StatefulWidget {
+  const AddSectionMenu({Key? key}) : super(key: key);
 
   @override
-  _SelectScenarioMenuState createState() => _SelectScenarioMenuState();
+  AddSectionMenuState createState() => AddSectionMenuState();
 }
 
-class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
+class AddSectionMenuState extends State<AddSectionMenu> {
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
@@ -40,7 +40,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
     //TODO:clear search
     _gameState.currentCampaign.value = campaign;
     _foundScenarios = _gameState
-        .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
+        .modelData.value[_gameState.currentCampaign.value]!.sections.keys
         .toList();
     _foundScenarios.sort((a, b) {
 
@@ -59,14 +59,14 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
       results = _gameState
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
+          .modelData.value[_gameState.currentCampaign.value]!.sections.keys
           .toList();
     } else {
       results = _gameState
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
+          .modelData.value[_gameState.currentCampaign.value]!.sections.keys
           .toList()
           .where((user) =>
-              user.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       // we use the toLowerCase() method to make it case-insensitive
     }
@@ -81,8 +81,8 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        //color: Colors.transparent,
-        // shadowColor: Colors.transparent,
+      //color: Colors.transparent,
+      // shadowColor: Colors.transparent,
         margin: const EdgeInsets.all(20),
         child: Stack(children: [
           Column(
@@ -90,39 +90,12 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
               const SizedBox(
                 height: 20,
               ),
-              Column(children: [
-                Text("Current Scenario: ${_gameState.currentCampaign.value}"),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      setCampaign("JotL");
-                    });
-                  },
-                  child: Text("Jaws of the Lion"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      setCampaign("Gloomhaven");
-                    });
-                  },
-                  child: Text("Gloomhaven"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      setCampaign("Crimson Scales");
-                    });
-                  },
-                  child: Text("Crimson Scales"),
-                ),
-              ]),
               Container(
                 margin: const EdgeInsets.only(left: 10, right: 10),
                 child: TextField(
                   onChanged: (value) => _runFilter(value),
                   decoration: const InputDecoration(
-                      labelText: 'Set Scenario',
+                      labelText: 'Add Section',
                       suffixIcon: Icon(Icons.search)),
                 ),
               ),
@@ -132,21 +105,21 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
               Expanded(
                 child: _foundScenarios.isNotEmpty
                     ? ListView.builder(
-                        itemCount: _foundScenarios.length,
-                        itemBuilder: (context, index) => ListTile(
-                          title: Text(_foundScenarios[index],
-                              style: TextStyle(fontSize: 18)),
-                          onTap: () {
-                            _gameState.action(
-                                SetScenarioCommand(_foundScenarios[index], false));
-                            Navigator.pop(context);
-                          },
-                        ),
-                      )
+                  itemCount: _foundScenarios.length,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text(_foundScenarios[index],
+                        style: TextStyle(fontSize: 18)),
+                    onTap: () {
+                      _gameState.action(
+                          SetScenarioCommand(_foundScenarios[index], true));
+                      Navigator.pop(context);
+                    },
+                  ),
+                )
                     : const Text(
-                        'No results found',
-                        style: TextStyle(fontSize: 24),
-                      ),
+                  'No results found',
+                  style: TextStyle(fontSize: 24),
+                ),
               ),
             ],
           ),

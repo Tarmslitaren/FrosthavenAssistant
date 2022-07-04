@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/add_section_mneu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
@@ -61,10 +62,11 @@ Drawer createMainMenu(BuildContext context) {
                     ),
               ListTile(
                 title: const Text('Add Section'),
-                enabled: false,
+                enabled: true,
                 onTap: () {
                   //TODO: of no section for current scenario, gray out the button and do nothing
                   Navigator.pop(context);
+                  openDialog(context, const AddSectionMenu());
                 },
               ),
               const Divider(),
