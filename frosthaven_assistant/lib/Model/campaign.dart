@@ -4,27 +4,15 @@ import 'dart:core';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
+import 'package:frosthaven_assistant/Model/scenario.dart';
 
-class ScenarioModel {
-  ScenarioModel({required this.monsters});
-  List<String> monsters;
-  factory ScenarioModel.fromJson(Map<String, dynamic> data) {
-    final monsters = data['monsters'] as List<dynamic>;
-    List<String> monsterList = [];
-    for (var monster in monsters) {
-      monsterList.add(monster);
-    }
-    //TODO: add other scensrio stuff like special rules and sections
-    return ScenarioModel(monsters: monsterList);
-  }
-
-}
 
 class CampaignModel {
   CampaignModel({required this.edition, required this.monsterAbilities, required this.monsters, required this.characters, required this.scenarios,});
   final String edition;
   final List<MonsterAbilityDeckModel> monsterAbilities;
-  final List<MonsterModel> monsters;
+  //final List<MonsterModel> monsters;
+  final Map< String, MonsterModel> monsters;
   final List<CharacterClass> characters;
   final Map< String, ScenarioModel> scenarios;
   //TODO: add classes and scenarios (sections are part of scenarios)
@@ -36,12 +24,18 @@ class CampaignModel {
     final monsterAbilities = data['monsterAbilities'] as List<dynamic>;
     List<MonsterAbilityDeckModel> deckDataList = [];
     for (var item in monsterAbilities) {
-      deckDataList.add(MonsterAbilityDeckModel.fromJson(item));
+      deckDataList.add(MonsterAbilityDeckModel.fromJson(item, edition));
     }
-    final monsters = data['monsters'] as List<dynamic>;
+    /*final monsters = data['monsters'] as List<dynamic>;
     List<MonsterModel> monsterDataList = [];
     for (var item in monsters) {
       monsterDataList.add(MonsterModel.fromJson(item, edition));
+    }*/
+
+    Map<String, MonsterModel> monsterMap = HashMap();
+    final monsters = data['monsters'] as Map<dynamic, dynamic>;
+    for (String key in monsters.keys){
+      monsterMap[key] = MonsterModel.fromJson(monsters[key], key, edition);
     }
 
     List<CharacterClass> characterDataList = [];
@@ -55,6 +49,6 @@ class CampaignModel {
     for (String key in scenarios.keys){
       scenarioMap[key] = ScenarioModel.fromJson(scenarios[key]);
     }
-    return CampaignModel(edition: edition, monsterAbilities: deckDataList, monsters: monsterDataList, characters: characterDataList, scenarios: scenarioMap);
+    return CampaignModel(edition: edition, monsterAbilities: deckDataList, monsters: monsterMap, characters: characterDataList, scenarios: scenarioMap);
   }
 }

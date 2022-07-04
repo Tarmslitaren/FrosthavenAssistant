@@ -18,7 +18,7 @@ Drawer createMainMenu(BuildContext context) {
   GameState _gameState = getIt<GameState>();
 
   return Drawer(
-    child: ValueListenableBuilder<CampaignModel?>(
+    child: ValueListenableBuilder<Map<String,CampaignModel?>>(
       valueListenable: _gameState.modelData,
       builder: (context, value, child) {
         return ListView(

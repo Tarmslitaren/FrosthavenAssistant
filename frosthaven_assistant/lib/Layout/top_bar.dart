@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
 import 'element_button.dart';
 

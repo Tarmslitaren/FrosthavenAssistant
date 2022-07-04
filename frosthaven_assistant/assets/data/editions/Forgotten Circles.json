@@ -1,7 +1,7 @@
 {
   "edition": "Forgotten Circles",
-  "classes": {
-    "Diviner": {
+  "classes": [
+    {
       "note": "this class has some special hardcoded rules, unlocking the ability to scry and change order of monster decks",
       "name": "Diviner",
       "color": "FFC8E3EA",
@@ -23,7 +23,7 @@
         }
       }
     }
-  },
+  ],
   "monsterAbilities": [
     {
       "name": "Ashblade",
@@ -1016,7 +1016,6 @@
     }
   },
 
-  "startingNumber": 96,
   "scenarios": {
     "#96 Unexpected Visitors": {
       "monsters": [ "Earth Demon", "Flame Demon", "Frost Demon", "Wind Demon" ]
@@ -1040,6 +1039,7 @@
       "monsters": []
     },
     "#103 Where It Is Needed": {
+      "monsters": [],
       "special": [ "Escort: Caravan", "2x(C+L)+3" ]
     },
     "#104 A Gaping Wound": {

@@ -2,6 +2,7 @@
 import '../../Layout/main_list.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
+import '../enums.dart';
 import '../game_methods.dart';
 import '../game_state.dart';
 
@@ -18,7 +19,7 @@ class SetScenarioCommand extends Command {
     for (var item in _gameState.currentList) {
       if (item is Character) {
         newList.add(item);
-        item.characterState.initiative = 0; //TODO: initiative values not
+        item.characterState.initiative = 0;
         item.characterState.health.value = item.characterClass.healthByLevel[item.characterState.level.value-1];
         item.characterState.xp.value = 0;
         item.characterState.conditions.value.clear();
@@ -28,8 +29,13 @@ class SetScenarioCommand extends Command {
       }
     }
     GameMethods.shuffleDecks();
-    List<String> monsters =
-        _gameState.modelData.value!.scenarios[_scenario]!.monsters;
+    List<String> monsters = [];
+    for (String key in _gameState.modelData.value.keys){
+      monsters.addAll(
+          _gameState.modelData.value[key]!.scenarios[_scenario]!.monsters
+      );
+    }
+
     for (String monster in monsters) {
       newList.add(GameMethods.createMonster(monster, _gameState.level.value)!);
     }

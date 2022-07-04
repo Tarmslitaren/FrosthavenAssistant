@@ -134,8 +134,8 @@ class _MainListState extends State<MainList> {
               repeat: ImageRepeat.repeat,
               image: AssetImage('assets/images/bg/frosthaven-bg.png')),
         ),
-        child: ValueListenableBuilder<CampaignModel?>(
-            valueListenable: _gameState.modelData,
+        child: ValueListenableBuilder<Map<String,CampaignModel>>(
+            valueListenable: _gameState.modelData, //TODO: this won't update properly without reasigning
             builder: (context, value, child) {
               return _gameState.modelData.value != null
                   ? buildList()

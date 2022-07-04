@@ -5,11 +5,9 @@ class MonsterAbilityDeckModel {
   final String edition;
   final List<MonsterAbilityCardModel> cards; //need to interpret strings later on
 
-  factory MonsterAbilityDeckModel.fromJson(Map<String, dynamic> data) {
-    // note the explicit cast to String
-    // this is required if robust lint rules are enabled
+  factory MonsterAbilityDeckModel.fromJson(Map<String, dynamic> data, String edition) {
     final name = data['name'] as String;
-    final edition = data['edition'] as String;
+    //final edition = data['edition'] as String;
     final  List<dynamic> dynamicCards = data['cards'] as List<dynamic>;
     List<MonsterAbilityCardModel> cards = [];
     for (var card in dynamicCards) {

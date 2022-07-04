@@ -6,7 +6,14 @@ import 'game_state.dart';
 class MonsterAbilityState{
   //final MonsterAbilityDeckModel deck;
   MonsterAbilityState(this.name){
-    for (MonsterAbilityDeckModel model in getIt<GameState>().modelData.value!.monsterAbilities) {
+    GameState gameState = getIt<GameState>();
+    List<MonsterAbilityDeckModel> monsters = [];
+    for (String key in gameState.modelData.value.keys){
+      monsters.addAll(
+          gameState.modelData.value[key]!.monsterAbilities
+      );
+    }
+    for (MonsterAbilityDeckModel model in monsters) {
       if(name == model.name) {
         drawPile.init(model.cards);
         shuffle();

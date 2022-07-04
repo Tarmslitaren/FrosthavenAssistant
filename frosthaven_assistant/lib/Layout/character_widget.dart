@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Model/character_class.dart';
 import '../Resource/color_matrices.dart';
+import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';

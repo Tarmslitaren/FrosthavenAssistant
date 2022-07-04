@@ -1,7 +1,7 @@
 {
   "edition": "Frosthaven",
-  "classes": {
-    "Drifter": {
+  "classes": [
+    {
       "name": "Drifter",
       "edition": "Frosthaven",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
@@ -9,7 +9,7 @@
       "color": "ffa28b7b",
       "summons": {}
     },
-    "Blinkblade": {
+    {
       "name": "Blinkblade",
       "edition": "Frosthaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
@@ -17,7 +17,7 @@
       "color": "ff009ec6",
       "summons": {}
     },
-    "BannerSpear": {
+    {
       "name": "Banner Spear",
       "edition": "Frosthaven",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
@@ -79,7 +79,7 @@
         }
       }
     },
-    "Deathwalker": {
+    {
       "name": "Deathwalker",
       "edition": "Frosthaven",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
@@ -102,7 +102,7 @@
         }
       }
     },
-    "Boneshaper": {
+    {
       "name": "Boneshaper",
       "edition": "Frosthaven",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
@@ -157,7 +157,7 @@
         }
       }
     },
-    "Geminate": {
+    {
       "name": "Geminate",
       "edition": "Frosthaven",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
@@ -165,12 +165,10 @@
       "color": "ffcf4471",
       "summons": {}
     }
-  },
-  "monsterAbilities": {
-  },
+  ],
+  "monsterAbilities": [],
   "monsters": {
   },
-  "startingNumber": 0,
   "scenarios": {
   },
   "sections": {

@@ -32,8 +32,15 @@ class AddCharacterCommand extends Command {
   }
 
   void _createCharacter(String name, int level) {
+
+    List<CharacterClass> characters = [];
+    for (String key in _gameState.modelData.value.keys){
+      characters.addAll(
+          _gameState.modelData.value[key]!.characters
+      );
+    }
     for (CharacterClass characterClass
-    in _gameState.modelData.value!.characters) {
+    in characters) {
       if (characterClass.name == name) {
         var characterState = CharacterState();
         characterState.level.value = level;

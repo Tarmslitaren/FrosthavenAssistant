@@ -16,12 +16,18 @@ class AddMonsterMenu extends StatefulWidget {
 class _AddMonsterMenuState extends State<AddMonsterMenu> {
   // This list holds the data for the list view
   List<MonsterModel> _foundMonsters = [];
+  final List<MonsterModel> _allMonsters = [];
   final GameState _gameState = getIt<GameState>();
 
   @override
   initState() {
     // at the beginning, all users are shown
-    _foundMonsters = _gameState.modelData.value!.monsters;
+    for (String key in _gameState.modelData.value.keys){
+      _allMonsters.addAll(
+          _gameState.modelData.value[key]!.monsters.values
+      );
+    }
+    _foundMonsters = _allMonsters;
     _foundMonsters.sort((a, b) => a.name.compareTo(b.name));
     super.initState();
   }
@@ -31,9 +37,9 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
     List<MonsterModel> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all users
-      results = _gameState.modelData.value!.monsters;
+      results = _allMonsters;
     } else {
-      results = _gameState.modelData.value!.monsters
+      results = _allMonsters
           .where((user) =>
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();

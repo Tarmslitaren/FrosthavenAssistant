@@ -1,9 +1,8 @@
 {
   "edition": "Crimson Scales",
-  "titlesOnAbilityCards": true,
-  "classes": {
+  "classes": [
 
-    "Hierophant": {
+    {
       "name": "Hierophant",
       "edition": "Crimson Scales",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
@@ -11,7 +10,7 @@
       "color": "FFDDDE8B",
       "summons": {}
     },
-    "Starslinger": {
+    {
       "name": "Starslinger",
       "edition": "Crimson Scales",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
@@ -19,7 +18,7 @@
       "color": "FF6D6FB3",
       "summons": {}
     },
-    "FireKnight": {
+    {
       "name": "Fire Knight",
       "edition": "Crimson Scales",
       "hitpoints": [9,10,12,14,16,17,19,21,23],
@@ -41,7 +40,7 @@
         }
       }
     },
-    "Brightspark": {
+    {
       "name": "Brightspark",
       "edition": "Crimson Scales",
       "hitpoints": [8, 9, 11, 12, 14, 15, 17, 18, 20],
@@ -60,7 +59,7 @@
         }
       }
     },
-    "Chieftain": {
+    {
       "name": "Chieftain",
       "edition": "Crimson Scales",
       "hitpoints": [8,9,111,12,14,15,17,18,20],
@@ -140,7 +139,7 @@
         }
       }
     },
-    "SpiritCaller": {
+    {
       "name": "Spirit Caller",
       "edition": "Crimson Scales",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
@@ -259,7 +258,7 @@
         }
       }
     },
-    "Mirefoot": {
+    {
       "name": "Mirefoot",
       "edition": "Crimson Scales",
       "hitpoints": [6,7,8,9,10,11,12,13,14],
@@ -278,7 +277,7 @@
         }
       }
     },
-    "Chainguard": {
+    {
       "name": "Chainguard",
       "edition": "Crimson Scales",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
@@ -286,7 +285,7 @@
       "color": "FFCE6D2F",
       "summons": {}
     },
-    "Bombard": {
+    {
       "name": "Bombard",
       "edition": "Crimson Scales",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
@@ -294,7 +293,7 @@
       "color": "FFA59786",
       "summons": {}
     },
-    "Luminary": {
+    {
       "name": "Luminary",
       "edition": "Crimson Scales",
       "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
@@ -309,7 +308,7 @@
         }
       }
     },
-    "Hollowpact": {
+    {
       "name": "Hollowpact",
       "edition": "Crimson Scales",
       "hitpoints": [7,8,9,10,12,13,14,15,17],
@@ -317,7 +316,7 @@
       "color": "ffa04aa5",
       "summons": {}
     },
-    "Ruinmaw": {
+    {
       "name": "Ruinmaw",
       "edition": "Crimson Scales",
       "hitpoints": [8,9,11,12,14,15,17,18,20],
@@ -325,7 +324,7 @@
       "color": "ffc12729",
       "summons": {}
     },
-    "AmberAegis": {
+    {
       "name": "Amber Aegis",
       "edition": "Crimson Scales",
       "hitpoints": [12, 14, 17 ,19, 22, 24, 27, 29, 32],
@@ -346,7 +345,7 @@
         }
       }
     },
-    "Artificer": {
+    {
       "name": "Artificer",
       "edition": "Crimson Scales",
       "hitpoints": [7, 8, 9, 12, 13, 14, 15, 17],
@@ -396,34 +395,34 @@
         }
       }
     }
-  },
+  ],
   "monsterAbilities": [
     {
       "name": "Frozen Cadaver",
       "edition": "Crimson Scales",
       "cards": [
-        ["", 1214, true, 34, "%move% + 1", "*.........","%chill%", "^Target all adjacent enemies that do", "^not have any %chill% tokens" ],
-        ["", 1215, true, 34, "%move% + 1","*.........", "%All adjacent enemies with",  "^%chill% suffer 1 damage."],
-        ["", 1216, false, 60, "%move% + 1", "*.........","%attack% + 0", "%air%" ],
-        ["", 1217, false, 45, "%attack% + 2", "^%chill%", "%ice%" ],
-        ["", 1218, false, 86, "%move% + 1","*.........", "%attack% - 1", "^Add +2 %attack% if the target", "^has %chill%" ],
-        ["", 1219, false, 86, "%move% + 1","*.........", "%attack% - 1", "^Add +2 %attack% if the target", "^has %chill%" ],
-        ["", 1220, false, 94, "%move% + 2","*.........", "%ice%%use%", "!^%heal% 2", "!^Self" ],
-        ["", 1221, false, 77, "%stun% and", "%push% 1", "^Target one adjacent enemy" ]
+        [1214, true, 34, "%move% + 1", "*.........","%chill%", "^Target all adjacent enemies that do", "^not have any %chill% tokens" ],
+        [1215, true, 34, "%move% + 1","*.........", "%All adjacent enemies with",  "^%chill% suffer 1 damage."],
+        [1216, false, 60, "%move% + 1", "*.........","%attack% + 0", "%air%" ],
+        [1217, false, 45, "%attack% + 2", "^%chill%", "%ice%" ],
+        [1218, false, 86, "%move% + 1","*.........", "%attack% - 1", "^Add +2 %attack% if the target", "^has %chill%" ],
+        [1219, false, 86, "%move% + 1","*.........", "%attack% - 1", "^Add +2 %attack% if the target", "^has %chill%" ],
+        [1220, false, 94, "%move% + 2","*.........", "%ice%%use%", "!^%heal% 2", "!^Self" ],
+        [1221, false, 77, "%stun% and", "%push% 1", "^Target one adjacent enemy" ]
       ]
     },
     {
       "name": "Gnashing Drake",
       "edition": "Crimson Scales",
       "cards": [
-        ["", 2000, false, "06", "%shield% + 2","*.........", "%heal% 2", "^Self","*.........", "%strengthen%", "^Self" ],
-        ["", 2001, false, 18, "%move% + 1","*.........", "%attack% - 1" ],
-        ["", 2002, true, 24, "^%attack% - 1","*%wound%","*.........", "*Focus on the enemy farthest away.", "^%move% + 0","*.........", "^%attack% - 1","*%wound%", "*Target one adjacent enemy" ],
-        ["", 2003, false, 30, "%move% + 0","*.........", "%attack% + 0", "^Add +1 %attack% if the target's current", "^hit point value is less than maximum." ],
-        ["", 2004, false, 35, "%move% - 1","*.........", "%attack% - 1 %aoe-4-with-black%", "^%poison%" ],
-        ["", 2005, false, 44, "%attack% - 1", "^%range% 3", "^%target% 2", "^Add +1 %attack% if the target's current", "^hit point value is less than maximum." ],
-        ["", 2006, true, 62, "%move% - 1","*.........", "%attack% - 1 %aoe-triangle-2-side%", "^%range% 2", "^%muddle%" ],
-        ["", 2007, false, 73, "%move% - 1", "*.........","%attack% + 1" ]
+        [2000, false, 6, "%shield% + 2","*.........", "%heal% 2", "^Self","*.........", "%strengthen%", "^Self" ],
+        [2001, false, 18, "%move% + 1","*.........", "%attack% - 1" ],
+        [2002, true, 24, "^%attack% - 1","*%wound%","*.........", "*Focus on the enemy farthest away.", "^%move% + 0","*.........", "^%attack% - 1","*%wound%", "*Target one adjacent enemy" ],
+        [2003, false, 30, "%move% + 0","*.........", "%attack% + 0", "^Add +1 %attack% if the target's current", "^hit point value is less than maximum." ],
+        [2004, false, 35, "%move% - 1","*.........", "%attack% - 1 %aoe-4-with-black%", "^%poison%" ],
+        [2005, false, 44, "%attack% - 1", "^%range% 3", "^%target% 2", "^Add +1 %attack% if the target's current", "^hit point value is less than maximum." ],
+        [2006, true, 62, "%move% - 1","*.........", "%attack% - 1 %aoe-triangle-2-side%", "^%range% 2", "^%muddle%" ],
+        [2007, false, 73, "%move% - 1", "*.........","%attack% + 1" ]
       ],
       "cardLayouts": [
         {
@@ -445,56 +444,56 @@
       "name": "Hail Demon",
       "edition": "Crimson Scales",
       "cards": [
-        ["", 1222, true, 13, "%attack% + 1", "^Target all enemies within %range% 3", "^with %chill%", "%air%" ],
-        ["", 1223, true, 38, "%attack% + 1", "^%range% + 1", "%air%%use%", "!^%chill%"],
-        ["", 1224, false, "05", "%move% - 1","*.........", "%attack% + 0", "%air%%use%", "!^%pull% 2" ],
-        ["", 1225, false, 30, "%heal% 2", "^Self","*.........", "%chill%", "^Target one enemy with no %chill%", "^tokens within %range% 3" ],
-        ["", 1226, false, 26, "%move% + 0","*.........", "%attack% - 1","*.........", "^Create a %chill% trap in an adjacent", "^empty hex closest to an enemy." ],
-        ["", 1227, false, 10, "%retaliate% 3", "^%range% 3","*.........", "%air%%use%", "!^%attack% - 1", "!^%range% - 1" ],
-        ["", 1228, false, 22, "%pull% 2", "^Target one enemy within %range% 3","*.........", "%attack% - 1 %aoe-arc-3%", "%air%" ],
-        ["", 1229, false, 19, "%attack% - 1", "^Target all enemies within %range% 2", "%ice%%use%", "!%air%" ]
+        [1222, true, 13, "%attack% + 1", "^Target all enemies within %range% 3", "^with %chill%", "%air%" ],
+        [1223, true, 38, "%attack% + 1", "^%range% + 1", "%air%%use%", "!^%chill%"],
+        [1224, false, 5, "%move% - 1","*.........", "%attack% + 0", "%air%%use%", "!^%pull% 2" ],
+        [1225, false, 30, "%heal% 2", "^Self","*.........", "%chill%", "^Target one enemy with no %chill%", "^tokens within %range% 3" ],
+        [1226, false, 26, "%move% + 0","*.........", "%attack% - 1","*.........", "^Create a %chill% trap in an adjacent", "^empty hex closest to an enemy." ],
+        [1227, false, 10, "%retaliate% 3", "^%range% 3","*.........", "%air%%use%", "!^%attack% - 1", "!^%range% - 1" ],
+        [1228, false, 22, "%pull% 2", "^Target one enemy within %range% 3","*.........", "%attack% - 1 %aoe-arc-3%", "%air%" ],
+        [1229, false, 19, "%attack% - 1", "^Target all enemies within %range% 2", "%ice%%use%", "!%air%" ]
       ]
     },
     {
       "name": "Harrower Icecrawlers",
       "edition": "Crimson Scales",
       "cards": [
-        ["", 1230, true, 44, "%move% + 0", "*.........","%attack% + 1", "%ice%" ],
-        ["", 1231, true, 44, "%move% + 1", "*.........","%attack% + 0", "%ice%" ],
-        ["", 1232, false, 12, "%shield% + 2", "^Self","*.........", "^If an enemy suffers %retaliate% damage", "^from attacking an Icecrawler this round,", "^the enemy gains %chill%." ],
-        ["", 1233, false, 63, "%move% + 0","*.........", "%attack% + 0 %aoe-triangle-2-side-with-black%", "%ice%%use%", "!^%pierce% 2" ],
-        ["", 1234, false, 55, "%move% - 2","*.........", "%attack% + 1", "^%range% 3", "%ice%%use%", "!^%pierce% 2" ],
-        ["", 1235, false, 16, "%attack% + 0", "^%range% 5", "%ice%%use%", "!^All enemies adjacent to the", "!^target suffer one damage" ],
-        ["", 1236, false, 68, "%move% + 0","*.........", "%attack% - 1 %aoe-star-with-side-black%"],
-        ["", 1237, false, 9, "^Gain %range% 3 on all", "^%retaliate% abilities.","*.........", "%move% + 0","*.........", "%heal% 2", "^%range% 3" ]
+        [1230, true, 44, "%move% + 0", "*.........","%attack% + 1", "%ice%" ],
+        [1231, true, 44, "%move% + 1", "*.........","%attack% + 0", "%ice%" ],
+        [1232, false, 12, "%shield% + 2", "^Self","*.........", "^If an enemy suffers %retaliate% damage", "^from attacking an Icecrawler this round,", "^the enemy gains %chill%." ],
+        [1233, false, 63, "%move% + 0","*.........", "%attack% + 0 %aoe-triangle-2-side-with-black%", "%ice%%use%", "!^%pierce% 2" ],
+        [1234, false, 55, "%move% - 2","*.........", "%attack% + 1", "^%range% 3", "%ice%%use%", "!^%pierce% 2" ],
+        [1235, false, 16, "%attack% + 0", "^%range% 5", "%ice%%use%", "!^All enemies adjacent to the", "!^target suffer one damage" ],
+        [1236, false, 68, "%move% + 0","*.........", "%attack% - 1 %aoe-star-with-side-black%"],
+        [1237, false, 9, "^Gain %range% 3 on all", "^%retaliate% abilities.","*.........", "%move% + 0","*.........", "%heal% 2", "^%range% 3" ]
       ]
     },
     {
       "name": "Toxic Imp",
       "edition": "Crimson Scales",
       "cards": [
-        ["", 1238, true, 41, "%move% - 1", "*.........","%attack% + 0", "%infect%" ],
-        ["", 1239, true, 41, "%move% - 1","*.........", "%attack% + 0", "%infect%" ],
-        ["", 1240, false, 35, "%heal% 2", "^%range% 2", "^%target% 2" ],
-        ["", 1241, false, 4, "%shield% + 2", "^Self","*.........", "%attack% + 0", "^Target one adjacent enemy" ],
-        ["", 1242, false, 23, "%move% - 1", "*.........","%attack% - 1", "^%poison%","*.........", "^All attacks targeting Toxic Imp", "^this round gain Disadvantage." ],
-        ["", 1243, false, 47, "%attack% + 1", "^%range% + 1", "^Add +1 %attack% if the target", "^has %infect%" ],
-        ["", 1244, false, 12, "%move% + 0","*.........","%attack% - 1","*.........", "^If an enemey targets Toxic Imp", "^with an attack, that enemy", "^gains %infect%." ],
-        ["", 1245, false, 76, "%heal% 2", "^%range% 3", "^If a negative condition was removed", "^with this heal, the target gains", "^%strengthen%." ]
+        [1238, true, 41, "%move% - 1", "*.........","%attack% + 0", "%infect%" ],
+        [1239, true, 41, "%move% - 1","*.........", "%attack% + 0", "%infect%" ],
+        [1240, false, 35, "%heal% 2", "^%range% 2", "^%target% 2" ],
+        [1241, false, 4, "%shield% + 2", "^Self","*.........", "%attack% + 0", "^Target one adjacent enemy" ],
+        [1242, false, 23, "%move% - 1", "*.........","%attack% - 1", "^%poison%","*.........", "^All attacks targeting Toxic Imp", "^this round gain Disadvantage." ],
+        [1243, false, 47, "%attack% + 1", "^%range% + 1", "^Add +1 %attack% if the target", "^has %infect%" ],
+        [1244, false, 12, "%move% + 0","*.........","%attack% - 1","*.........", "^If an enemey targets Toxic Imp", "^with an attack, that enemy", "^gains %infect%." ],
+        [1245, false, 76, "%heal% 2", "^%range% 3", "^If a negative condition was removed", "^with this heal, the target gains", "^%strengthen%." ]
       ]
     },
     {
       "name": "Water Spirit",
       "edition": "Crimson Scales",
       "cards": [
-        ["", 1246, true, 37, "%move% + 0", "*.........","%attack% + 0", "^Add +2 Attack if the target is occupying a water tile" ],
-        ["", 1247, true, 30, "%move% + 0","*.........", "%attack% + 0", "^%pierce% X", "^where X is equal to the number of", "^water tiles within %range% 1." ],
-        ["", 1248, false, 16, "%move% - 1","*.........", "%attack% - 1","*.........", "All enemies occupying a water tile suffer 1 damage." ],
-        ["", 1249, false, 69, "%move% + 1","*.........", "%attack% - 1 %aoe-arc-3%", " ", "^Create a water tile in all hexes occupied by a target containing no overlay tiles." ],
-        ["", 1250, false, 44, "%attack% + 0", "^%range% 3", "^%pull% 2", "^%immobilize%" ],
-        ["", 1251, false, 53, "%move% + 0","*.........", "%attack% - 1", "^+X where X is equal to the number of", "^water tiles within %range% 1, up to 3." ],
-        ["", 1252, false, 86, "%move% + 2","*.........", "%heal% 3", "^Self","*.........", "^Create a water tile in an unoccupied", "^adjacent hex closest to an enemy", "^containing no overlay tile." ],
-        ["", 1253, false, 22, "%attack% + 1", "^%target% 2", "^Create a water tile in all hexes occupied by", "^a target containing no overlay tiles." ]
+        [1246, true, 37, "%move% + 0", "*.........","%attack% + 0", "^Add +2 Attack if the target is occupying a water tile" ],
+        [1247, true, 30, "%move% + 0","*.........", "%attack% + 0", "^%pierce% X", "^where X is equal to the number of", "^water tiles within %range% 1." ],
+        [1248, false, 16, "%move% - 1","*.........", "%attack% - 1","*.........", "All enemies occupying a water tile suffer 1 damage." ],
+        [1249, false, 69, "%move% + 1","*.........", "%attack% - 1 %aoe-arc-3%", " ", "^Create a water tile in all hexes occupied by a target containing no overlay tiles." ],
+        [1250, false, 44, "%attack% + 0", "^%range% 3", "^%pull% 2", "^%immobilize%" ],
+        [1251, false, 53, "%move% + 0","*.........", "%attack% - 1", "^+X where X is equal to the number of", "^water tiles within %range% 1, up to 3." ],
+        [1252, false, 86, "%move% + 2","*.........", "%heal% 3", "^Self","*.........", "^Create a water tile in an unoccupied", "^adjacent hex closest to an enemy", "^containing no overlay tile." ],
+        [1253, false, 22, "%attack% + 1", "^%target% 2", "^Create a water tile in all hexes occupied by", "^a target containing no overlay tiles." ]
       ]
     },
     {
@@ -555,28 +554,28 @@
       "name": "Blood Ooze",
       "edition": "Crimson Scales",
       "cards": [
-        ["", 1198, true, 96, "%attack% - 1", "^%range% 5", "*Summon one normal Blood Ooze in a hex adjacent to the target with a hit point value equal to the summoning Blood Ooze's current hit point value minus 2 (limited by a normal Blood Ooze's specifiec maximum hit point value)" ],
-        ["", 1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "%fire%%use%", "!^Hit point value equal", "!^to three instead" ],
-        ["", 1200, false, 71, "^All adjacent enemies", "^suffer one damage.","*.........", "%move% + 1","*.........", "%heal% 1", "^Target all adjacent Blood Oozes"],
-        ["", 1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^Target one adjacent enemy", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes." ],
-        ["", 1202, false, 62, "%attack% - 1", "^%poison%", "^Target one adjacent enemy","*.........", "%attack% - 1", "^Target one enemy at exactly %range% 2" ],
-        ["", 1203, false, 53, "%move% + 0","*.........", "%loot% 1","*.........", "^If at least one money token was looted:", "%attack% + 1" ],
-        ["", 1204, false, 17, "%retaliate% 1", "^%range% 3", "*.........","%move% + 0","*.........", "%wound%", "^Target all adjacent enemies" ],
-        ["", 1205, false, 80, "^Blood Ooze suffers two damage.","*.........", "%invisible%", "^Self" ]
+        [1198, true, 96, "%attack% - 1", "^%range% 5", "*Summon one normal Blood Ooze in a hex adjacent to the target with a hit point value equal to the summoning Blood Ooze's current hit point value minus 2 (limited by a normal Blood Ooze's specifiec maximum hit point value)" ],
+        [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "%fire%%use%", "!^Hit point value equal", "!^to three instead" ],
+        [1200, false, 71, "^All adjacent enemies", "^suffer one damage.","*.........", "%move% + 1","*.........", "%heal% 1", "^Target all adjacent Blood Oozes"],
+        [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^Target one adjacent enemy", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes." ],
+        [1202, false, 62, "%attack% - 1", "^%poison%", "^Target one adjacent enemy","*.........", "%attack% - 1", "^Target one enemy at exactly %range% 2" ],
+        [1203, false, 53, "%move% + 0","*.........", "%loot% 1","*.........", "^If at least one money token was looted:", "%attack% + 1" ],
+        [1204, false, 17, "%retaliate% 1", "^%range% 3", "*.........","%move% + 0","*.........", "%wound%", "^Target all adjacent enemies" ],
+        [1205, false, 80, "^Blood Ooze suffers two damage.","*.........", "%invisible%", "^Self" ]
       ]
     },
     {
       "name": "Flaming Drake",
       "edition": "Crimson Scales",
       "cards": [
-        ["", 1206, true, 62, "%move% + 0","*.........", "%attack% - 1", "^%aoe-line-2%", "%fire%" ],
-        ["", 1207, true, 62, "%move% - 1", "*.........","%attack% + 0",  "^%aoe-line-2%", "%fire%"],
-        ["", 1208, false, 88, "%move% + 0","*.........", "%disarm%", "^Target all adjacent enemies" ],
-        ["", 1209, false, "03", "%shield% + 2", "^Self", "*.........","%heal% 2", "^Self", "%fire%%use%", "!+2 %heal%" ],
-        ["", 1210, false, 56, "%move% + 0 %aoe-line-4-with-black%","*.........", "%attack% - 1      %aoe-line-5-with-black%", "%fire%%use%", "!^%attack% + 1" ],
-        ["", 1211, false, 40, "%move% - 1","*.........", "%attack% + 0", "^%fire%%use%", "!^%range% + 2" ],
-        ["", 1212, false, 49, "%attack% + 1", "^%range% - 1", "^%target% 2" ],
-        ["", 1213, false, 77, "%attack% - 2 %aoe-circle%", "^%immobilize%" ]
+        [1206, true, 62, "%move% + 0","*.........", "%attack% - 1", "^%aoe-line-2%", "%fire%" ],
+        [1207, true, 62, "%move% - 1", "*.........","%attack% + 0",  "^%aoe-line-2%", "%fire%"],
+        [1208, false, 88, "%move% + 0","*.........", "%disarm%", "^Target all adjacent enemies" ],
+        [1209, false, 3, "%shield% + 2", "^Self", "*.........","%heal% 2", "^Self", "%fire%%use%", "!+2 %heal%" ],
+        [1210, false, 56, "%move% + 0 %aoe-line-4-with-black%","*.........", "%attack% - 1      %aoe-line-5-with-black%", "%fire%%use%", "!^%attack% + 1" ],
+        [1211, false, 40, "%move% - 1","*.........", "%attack% + 0", "^%fire%%use%", "!^%range% + 2" ],
+        [1212, false, 49, "%attack% + 1", "^%range% - 1", "^%target% 2" ],
+        [1213, false, 77, "%attack% - 2 %aoe-circle%", "^%immobilize%" ]
       ]
     },
     {
@@ -588,7 +587,7 @@
         ["Terrifying Lunge", 2030, false, 59, "%move% + 0","*.........", "%attack% + 0", "^%immobilize%","*.........", "%push% 1", "^Target all enemies exactly at %range% 2 or 3" ],
         ["Drag Away", 2031, true, 34, "%move% + 1","*.........", "%attack% - 1", "^%range% 2", "^%pull% 1", "^%wound%" ],
         ["Tail Swipe", 2032, false, 88, "%move% + 1", "*This movement may move through all figures.","*.........", "%attack% - 1 %aoe-arc-3%", "^%push% 2" ],
-        ["Survival Instincts", 2033, false, "09", "%move% + 0","*.........", "%retaliate% X", "^where X is the figure's %attack% value.","*.........", "^All ranged attacks targeting", "^this figure gain Disadvantage." ],
+        ["Survival Instincts", 2033, false, 9, "%move% + 0","*.........", "%retaliate% X", "^where X is the figure's %attack% value.","*.........", "^All ranged attacks targeting", "^this figure gain Disadvantage." ],
         ["Patient Predator", 2034, false, 18, "%invisible%", "^Self", "*- At 50, perform the following abilities -", "%move% + 0", "*.........","%attack% + 1", "^If this attack was performed,", "^remove %invisible%."],
         ["Sundering Bite", 2035, false, 26, "%move% + 0", "*.........","%attack% + 0", "^%pierce% 3" ]
       ],
@@ -627,60 +626,60 @@
     {
       "name": "The Cultist",
       "cards": [
-        ["", 604, false, 10, "%move% + 1","*.........", "%attack% + 2", "On Death:", "^%attack% + 5 %aoe-circle-with-middle-black%" ],
-        ["", 605, false, 10, "%move% + 1","*.........", "%attack% + 2", "On Death:", "^%attack% + 5 %aoe-circle-with-middle-black%" ],
-        ["", 606, false, 27, "%move% + 2","*.........", "%attack% + 3" ],
-        ["", 607, false, 27, "%move% + 2", "*.........","%attack% + 3" ],
-        ["", 608, false, 39, "%move% + 1", "*.........","%attack% + 3","*.........", "%heal% 1", "^Self" ],
-        ["", 609, true, 63, " ", "Summon normal Living Spirits" ],
-        ["", 610, true, 63, " ", "Summon normal Living Spirits" ],
-        ["", 611, false, 31, "%move% + 1","*.........", "%heal% 3", "^%range% 3" ]
+        [604, false, 10, "%move% + 1","*.........", "%attack% + 2", "On Death:", "^%attack% + 5 %aoe-circle-with-middle-black%" ],
+        [605, false, 10, "%move% + 1","*.........", "%attack% + 2", "On Death:", "^%attack% + 5 %aoe-circle-with-middle-black%" ],
+        [606, false, 27, "%move% + 2","*.........", "%attack% + 3" ],
+        [607, false, 27, "%move% + 2", "*.........","%attack% + 3" ],
+        [608, false, 39, "%move% + 1", "*.........","%attack% + 3","*.........", "%heal% 1", "^Self" ],
+        [609, true, 63, " ", "Summon normal Living Spirits" ],
+        [610, true, 63, " ", "Summon normal Living Spirits" ],
+        [611, false, 31, "%move% + 1","*.........", "%heal% 3", "^%range% 3" ]
       ]
     },
     {
       "name": "Terror Drone",
       "cards": [
-        ["", 732, false, 65, "%attack% + 0", "^%range% 3", "^%target% 3", "^%curse%" ],
-        ["", 733, true, 60, "%attack% + 0 %aoe-line-6-with-black%", "^%pierce% 3" ],
-        ["", 734, true, 60, "%attack% + 0 %aoe-line-6-with-black%", "^%pierce% 3" ],
-        ["", 735, false, 84, "%attack% - 1", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4", "^%wound%" ],
-        ["", 736, false, 75, "%attack% + 0", "^%poison%","*.........", "%attack% - 1", "^%range% 5", "^%immobilize%" ],
-        ["", 737, false, 75, "%attack% - 2", "^Target all adjacent enemies", "^%disarm%","*.........", "%attack% + 0", "^%range% 3", "^%target% 2" ],
-        ["", 738, false, 96, "%attack% - 2", "^%range% 6", "^Summon normal Undead Archer in a hex adjacent to the target" ],
-        ["", 739, false, 54, "%wound% and", "%poison%", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4" ]
+        [732, false, 65, "%attack% + 0", "^%range% 3", "^%target% 3", "^%curse%" ],
+        [733, true, 60, "%attack% + 0 %aoe-line-6-with-black%", "^%pierce% 3" ],
+        [734, true, 60, "%attack% + 0 %aoe-line-6-with-black%", "^%pierce% 3" ],
+        [735, false, 84, "%attack% - 1", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4", "^%wound%" ],
+        [736, false, 75, "%attack% + 0", "^%poison%","*.........", "%attack% - 1", "^%range% 5", "^%immobilize%" ],
+        [737, false, 75, "%attack% - 2", "^Target all adjacent enemies", "^%disarm%","*.........", "%attack% + 0", "^%range% 3", "^%target% 2" ],
+        [738, false, 96, "%attack% - 2", "^%range% 6", "^Summon normal Undead Archer in a hex adjacent to the target" ],
+        [739, false, 54, "%wound% and", "%poison%", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4" ]
       ]
     },
     {
       "name": "Undead Archer",
       "cards": [
-        ["", 516, false, 64, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0" ],
-        ["", 517, true, 20, "%move% - 2","*.........", "%attack% + 0", "^%range% + 0","*.........", "%heal% 2", "^Self" ],
-        ["", 518, false, 25, "%move% + 1","*.........", "%attack% - 1" , "^%range% + 0"],
-        ["", 519, false, 45, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
-        ["", 520, false, 45, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
-        ["", 521, false, 81, "%attack% + 2","*.........", "^%range% + 0" ],
-        ["", 522, false, 74, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0", "^Target one enemy with all attacks" ],
-        ["", 523, true, 12, "%shield% + 1","*.........", "%heal% 2", "^Self" ]
+        [516, false, 64, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0" ],
+        [517, true, 20, "%move% - 2","*.........", "%attack% + 0", "^%range% + 0","*.........", "%heal% 2", "^Self" ],
+        [518, false, 25, "%move% + 1","*.........", "%attack% - 1" , "^%range% + 0"],
+        [519, false, 45, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
+        [520, false, 45, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
+        [521, false, 81, "%attack% + 2","*.........", "^%range% + 0" ],
+        [522, false, 74, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0", "^Target one enemy with all attacks" ],
+        [523, true, 12, "%shield% + 1","*.........", "%heal% 2", "^Self" ]
       ]
     },
     {
       "name": "Apex Demon",
       "cards": [
-        ["",  636, true, 40, "%heal% 3", "^Self", "%earth%%use%", "!*%immobilize%", "!*Target all enemies within %range% 3" ],
-        ["",  637, true, 42, "%move% + 3", "%attack% - 1" ],
-        ["",  638, false, 62, "%move% + 3", "%attack% + 0", "%earth%" ],
-        ["",  639, false, 71, "%attack% + 0", "^%range% 4", "%earth%%use%", "!^%target% 2" ],
-        ["",  640, false, 83, "%move% + 1", "%attack% + 1", "%earth%" ],
-        ["",  641, false, 93, "%move% + 1", "%attack% - 1", "^Target all adjacent enemies", "%earth%%use%", "!^%push% 1" ],
-        ["",  642, false, 79, "%move% + 3", "%attack% + 0", "%air%%use%", "!^-2 %attack%" ],
-        ["",  643, false, 87, "%move% + 2", "%attack% - 1", "%aoe-4-with-black%", "%any%%use%", "!%earth%" ]
+        [636, true, 40, "%heal% 3", "^Self", "%earth%%use%", "!*%immobilize%", "!*Target all enemies within %range% 3" ],
+        [637, true, 42, "%move% + 3", "%attack% - 1" ],
+        [638, false, 62, "%move% + 3", "%attack% + 0", "%earth%" ],
+        [639, false, 71, "%attack% + 0", "^%range% 4", "%earth%%use%", "!^%target% 2" ],
+        [640, false, 83, "%move% + 1", "%attack% + 1", "%earth%" ],
+        [641, false, 93, "%move% + 1", "%attack% - 1", "^Target all adjacent enemies", "%earth%%use%", "!^%push% 1" ],
+        [642, false, 79, "%move% + 3", "%attack% + 0", "%air%%use%", "!^-2 %attack%" ],
+        [643, false, 87, "%move% + 2", "%attack% - 1", "%aoe-4-with-black%", "%any%%use%", "!%earth%" ]
       ]
     },
     {
       "name": "Morphling",
       "edition": "Crimson Scales",
       "cards": [
-        ["", 0, false, 0, "(Use the deck you built during the scenario.)" ]
+        [0, false, 0, "(Use the deck you built during the scenario.)" ]
       ]
     }
   ],

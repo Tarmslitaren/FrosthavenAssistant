@@ -38,7 +38,6 @@
   "monsterAbilities": [
     {
       "name": "Zealot",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Nothing special", 384, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
         ["Hasty Assault", 385, false, 35, "%move% + 1","*.........", "%attack% - 1" ],
@@ -62,7 +61,6 @@
     {
       "name": "Basic Zealot",
       "note": "Only used in scenario 3 of JotL",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Boil Blood", 380, false, 46, "%attack% + 1", "^%range% 2", "^%muddle%"],
         ["Hex Whip", 381, false, 19, "%move% + 0","*.........", "%attack% - 1", "^%curse%" ],
@@ -72,7 +70,6 @@
     },
     {
       "name": "Vermling Raider",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Screaming Shot", 372, true, 85, "%push% 1", "^Target all adjacent enemies","*.........", "%attack% + 1", "^%range% 2" ],
         ["Careful Throw", 373, false, 36, "%move% + 0","*.........", "%attack% - 1", "^%range% 4" ],
@@ -88,7 +85,6 @@
     {
       "name": "Common Vermling Raider",
       "note": "Only used in scenario 1 of JotL",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Nothing Special", 375, true, 50, "%move% + 0", "*.........", "%attack% + 0" ]
       ]
@@ -96,7 +92,6 @@
     {
       "name": "Basic Vermling Raider",
       "note": "initial test for ..... lines",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Screaming Shot", 368, true, 85, "%push% 1", "^Target all adjacent enemies", "*.........", "%attack% + 1", "^%range% + 2", "*Shuffle this deck at the end of the round." ],
         ["Careful Throw", 369, false, 36, "%move% + 0","*.........", "%attack% - 1", "^%range% + 2", "*They will move to avoid being adjacent to their focus." ],
@@ -106,7 +101,6 @@
     },
     {
       "name": "Black Sludge",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Hasty Assault", 428, false, 36, "%move% + 1","*.........", "%attack% - 1", "^%range% 3"],
         ["Nothing Special", 429, false, 57, "%move% + 0","*.........", "%attack% + 0", "^%range% 2"],
@@ -152,7 +146,6 @@
     },
     {
       "name": "Monstrosity",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Nothing Special", 420, false, 39, "%move% + 0","*.........", "%attack% + 0"],
         ["Calculated Strike", 421, false, 60, "%move% - 1","*.........", "%attack% + 1"],
@@ -166,7 +159,6 @@
     },
     {
       "name": "Imp (JotL)",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Phase Out", 436, false, 5, "%shield% 5","*.........", "%heal% 1", "^Self", "%any%" ],
         ["Nothing Special",437, false, 37, "%move% + 0","*.........", "%attack% + 0", "^%range% 3"],
@@ -190,7 +182,6 @@
     },
     {
       "name": "Chaos Demon",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Chilling Breath", 412, false, 13, "%move% - 1","*.........", "%attack% + 0 %aoe-triangle-2-side-with-black%","*.........", "%ice%%use%", "!*Any time a figure attacks the Chaos Demon this round, that figure suffers 2 damage." ],
         ["Heal Blast", 413, false, 1, "%move% + 1","*.........", "%attack% - 1", "^%range% 3", "%fire%%use%", "!^%wound%" ],
@@ -220,7 +211,6 @@
     },
     {
       "name": "Stone Golem (JotL)",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Runic Feeedback", 404, false, 10, "^Any time a figure attacks the", "^Stone Golem this round , that", "^figure suffers 3 damage" ],
         ["Taxing Advance", 405, false, 28, "%move% + 1","*.........", "%attack% + 0","*.........", "^If the Move ability was performed,", "^the Stone Golem suffers 1 damage." ],
@@ -234,7 +224,6 @@
     },
     {
       "name": "Basic Giant Viper",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Swift Fangs", 392, false, 33, "%move% + 1", "^%jump%","*.........", "%attack% + 0", "^%target% 2"],
         ["Find Cover", 393, false, 18, "%move% + 1", "^%jump%","*.........", "%attack% - 1", "^All attacks targeting Giant Viper", "^gain Disadvantage this round."],
@@ -244,7 +233,6 @@
     },
     {
       "name": "Giant Viper (JotL)",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Swift Fangs", 396, false, 33, "%move% + 1", "^%jump%", "*.........", "%attack% + 0", "^%target% 2"],
         ["Find Cover", 397, false, 18, "%move% + 1", "^%jump%","*.........", "%attack% - 1", "^All attacks targeting Giant Viper", "^gain Disadvantage this round."],
@@ -258,7 +246,6 @@
     },
     {
       "name": "Living Corpse (JotL)",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Rotting Embrace", 444, false, 21, "%move% + 1","*.........", "%muddle% and %immobilize%", "^Target one adjacent enemy", "%earth%%use%", "!^The target also suffers 2 damage"],
         ["hasty Assault", 445, false, 47, "%move% + 1","*.........", "%attack% - 1"],
@@ -283,7 +270,6 @@
     },
     {
       "name": "Living Spirit (JotL)",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Sap Strength", 452, true, 22, "%move% - 1","*.........", "%attack% - 1", "^%range% 4", "%muddle%"],
         ["Booming Scream", 453, true, 33, "%move% + 0","*.........", "%attack% - 1", "^Target any enemies within %range% 2"],
@@ -297,7 +283,6 @@
     },
     {
       "name": "Vermling Scout (JotL)",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Short Bow", 460, false, 29, "%move% - 1","*.........", "%attack% - 1", "^%range% 3"],
         ["Hasty Assault", 461, false, 40, "%move% + 1","*.........", "%attack% - 1"],
@@ -311,7 +296,6 @@
     },
     {
       "name": "First of the Order",
-      "edition": "Jaws of the Lion",
       "note":  "A custom deck for the First of the Order because their text is difficult to read otherwise. We like this special deck but others might find it weird.",
       "cards": [
         ["Accelerated Power", 468, false, 11, "Special 2:","^%attack% + 0 %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target"],
@@ -327,7 +311,6 @@
     {
       "name": "Boss (JotL)",
       "note": "Custom deck for JotL Bosses. Only one card has changed and it's minor.",
-      "edition": "Jaws of the Lion",
       "cards": [
         ["Accelerated Power", 468, false, 11, "Special 2"],
         ["Accelerated Power", 469, false, 14, "Special 2"],
@@ -342,9 +325,8 @@
   ],
 
 
-  "monsters": [
-    {
-      "name": "Zealot",
+  "monsters": {
+    "Zealot":{
       "deck": "Zealot",
       "edition": "Jaws of the Lion",
       "count": 6,
@@ -391,8 +373,7 @@
         }
       ]
     },
-    {
-      "name": "Basic Zealot",
+    "Basic Zealot":{
       "gfx": "Zealot",
       "note": "Used only in scenario 2 of JotL",
       "deck": "Basic Zealot",
@@ -442,8 +423,7 @@
         }
       ]
     },
-    {
-      "name": "Vermling Raider",
+    "Vermling Raider":{
       "deck": "Vermling Raider",
       "edition": "Jaws of the Lion",
       "count": 6,
@@ -490,8 +470,7 @@
         }
       ]
     },
-    {
-      "name": "Common Vermling Raider",
+    "Common Vermling Raider":{
       "gfx": "Vermling Raider",
       "display": "Common Vermling Raider",
       "note": "This is only used for JotL Scenario 1",
@@ -542,8 +521,7 @@
         }
       ]
     },
-    {
-      "name": "Basic Vermling Raider",
+    "Basic Vermling Raider":{
       "gfx": "Vermling Raider",
       "note": "This is only used for JotL Scenario 2",
       "deck": "Basic Vermling Raider",
@@ -593,8 +571,7 @@
         }
       ]
     },
-    {
-      "name": "Black Sludge",
+    "Black Sludge":{
       "deck": "Black Sludge",
       "edition": "Jaws of the Lion",
       "count": 6,
@@ -641,8 +618,7 @@
         }
       ]
     },
-    {
-      "name": "Rat Monstrosity",
+    "Rat Monstrosity":{
       "deck": "Monstrosity",
       "edition": "Jaws of the Lion",
       "count": 10,
@@ -689,8 +665,7 @@
         }
       ]
     },
-    {
-      "name": "Blood Imp",
+    "Blood Imp":{
       "note": "Interestingly, range is no longer on the monster stats sheets in JotL, range is only on ability cards.",
       "display": "Blood Imp",
       "deck": "Imp (JotL)",
@@ -739,8 +714,7 @@
         }
       ]
     },
-    {
-      "name": "Blood Monstrosity",
+    "Blood Monstrosity":{
       "deck": "Monstrosity",
       "edition": "Jaws of the Lion",
       "count": 6,
@@ -787,8 +761,7 @@
         }
       ]
     },
-    {
-      "name": "Chaos Demon",
+    "Chaos Demon":{
       "deck": "Chaos Demon",
       "edition": "Jaws of the Lion",
       "count": 4,
@@ -835,8 +808,7 @@
         }
       ]
     },
-    {
-      "name": "Blood Tumor",
+    "Blood Tumor":{
       "edition": "Jaws of the Lion",
       "count": 1,
       "deck": "Boss (JotL)",
@@ -916,8 +888,7 @@
         }
       ]
     },
-    {
-      "name": "First of the Order",
+    "First of the Order":{
       "edition": "Jaws of the Lion",
       "count": 1,
       "deck": "First of the Order",
@@ -996,8 +967,7 @@
         }
       ]
     },
-    {
-      "name": "Blood Horror",
+    "Blood Horror":{
       "edition": "Jaws of the Lion",
       "count": 1,
       "deck": "Boss (JotL)",
@@ -1076,8 +1046,7 @@
         }
       ]
     },
-    {
-      "name": "Stone Golem (JotL)",
+    "Stone Golem (JotL)":{
       "display": "Stone Golem",
       "edition": "Jaws of the Lion",
       "deck": "Stone Golem (JotL)",
@@ -1200,8 +1169,7 @@
         }
       ]
     },
-    {
-      "name": "Giant Viper (JotL)",
+    "Giant Viper (JotL)":{
       "display": "Giant Viper",
       "edition": "Jaws of the Lion",
       "deck": "Giant Viper (JotL)",
@@ -1329,8 +1297,7 @@
         }
       ]
     },
-    {
-      "name": "Basic Giant Viper",
+    "Basic Giant Viper":{
       "gfx": "Giant Viper",
       "note": "Used only in JotL scenario 3",
       "edition": "Jaws of the Lion",
@@ -1460,8 +1427,7 @@
         }
       ]
     },
-    {
-      "name":"Living Corpse (JotL)",
+    "Living Corpse (JotL)":{
       "display": "Living Corpse",
       "edition": "Jaws of the Lion",
       "deck": "Living Corpse (JotL)",
@@ -1539,8 +1505,7 @@
         }
       ]
     },
-    {
-      "name": "Living Spirit (JotL)",
+    "Living Spirit (JotL)":{
       "display": "Living Spirit",
       "edition": "Jaws of the Lion",
       "deck": "Living Spirit (JotL)",
@@ -1668,8 +1633,7 @@
         }
       ]
     },
-    {
-      "name": "Black Imp (JotL)",
+    "Black Imp (JotL)":{
       "display": "Black Imp",
       "edition": "Jaws of the Lion",
       "deck": "Imp (JotL)",
@@ -1793,8 +1757,7 @@
         }
       ]
     },
-    {
-      "name": "Vermling Scout (JotL)",
+    "Vermling Scout (JotL)":{
       "display": "Vermling Scout",
       "edition": "Jaws of the Lion",
       "deck": "Vermling Scout (JotL)",
@@ -1842,7 +1805,7 @@
         }
       ]
     }
-  ],
+  },
 
   "scenarios": {
     "#1 Roadside Ambush": {

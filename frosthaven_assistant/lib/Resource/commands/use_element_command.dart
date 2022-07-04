@@ -1,6 +1,7 @@
 
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
+import '../enums.dart';
 import '../game_state.dart';
 
 class UseElementCommand extends Command {

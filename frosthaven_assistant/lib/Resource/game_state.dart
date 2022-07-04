@@ -15,57 +15,8 @@ import '../Model/campaign.dart';
 import '../Model/character_class.dart';
 import 'action_handler.dart';
 import 'card_stack.dart';
+import 'enums.dart';
 import 'monster_ability_state.dart';
-
-enum Condition{
-  stun,
-  immobilize,
-  disarm,
-  wound,
-  wound2,
-  muddle,
-  poison,
-  poison2,
-  poison3,
-  poison4,
-  bane,
-  brittle,
-  chill,
-  infect,
-  impair,
-  rupture,
-  strengthen,
-  invisible,
-  regenerate,
-  ward;
-
-  @override
-  String toString() {
-    return index.toString();
-  }
-
-}
-
-enum ElementState{
-  full,
-  half,
-  inert
-
-}
-
-enum Elements{
-  fire,
-  ice,
-  air,
-  earth,
-  light,
-  dark
-}
-
-enum RoundState{
-  chooseInitiative,
-  playTurns,
-}
 
 class Figure {
   final health = ValueNotifier<int>(0);
@@ -140,7 +91,14 @@ class Character extends ListItemData{
     //state = ListItemState.values[json['state']];
     characterState = CharacterState.fromJson(json['characterState']);
     String className = json['characterClass'];
-    for (var item in getIt<GameState>().modelData.value!.characters ){
+    GameState gameState = getIt<GameState>();
+    List<CharacterClass> characters = [];
+    for (String key in gameState.modelData.value.keys){
+      characters.addAll(
+          gameState.modelData.value[key]!.characters
+      );
+    }
+    for (var item in characters ){
       if (item.name == className){
         characterClass = item;
         break;
@@ -157,6 +115,7 @@ enum MonsterType {
   elite,
   boss,
   //named
+  //summon?
 }
 
 class MonsterInstance extends Figure{
@@ -211,20 +170,20 @@ class MonsterInstance extends Figure{
 
 }
 
-enum ListItemState {
-  chooseInitiative, //gray
-  waitingTurn, //hopeful
-  myTurn, //conditions reminder (above in list is gray)
-  doneTurn, //gray, expire conditions
-}
-
 class Monster extends ListItemData{
   Monster(String name, int level){
     id = name;
     this.level.value = level;
-    for(MonsterModel model in getIt<GameState>().modelData.value!.monsters) {
-      if(model.name == name) {
-        type = model;
+    GameState gameState = getIt<GameState>();
+    Map<String, MonsterModel> monsters = {};
+    for (String key in gameState.modelData.value.keys){
+      monsters.addAll(
+          gameState.modelData.value[key]!.monsters
+      );
+    }
+    for(String key in monsters.keys) {
+      if(key == name) {
+        type = monsters[key]!;
       }
     }
 
@@ -281,9 +240,16 @@ class Monster extends ListItemData{
     String modelName = json['type'];
     //state = ListItemState.values[json["state"]];
 
-    for(var item in getIt<GameState>().modelData.value!.monsters) {
-      if(item.name == modelName){
-        type = item;
+    GameState gameState = getIt<GameState>();
+    Map<String, MonsterModel> monsters = {};
+    for (String key in gameState.modelData.value.keys){
+      monsters.addAll(
+          gameState.modelData.value[key]!.monsters
+      );
+    }
+    for(var item in monsters.keys) {
+      if(item == modelName){
+        type = monsters[item]!;
         break;
       }
     }
@@ -315,30 +281,32 @@ class GameState extends ActionHandler{
     elementState.value[Elements.light] = ElementState.inert;
     elementState.value[Elements.dark] = ElementState.inert;
 
-    fetchCampaignData("JotL");
+    initGame();
   }
 
+  initGame() async {
+
+    await fetchCampaignData("JotL");
+    await fetchCampaignData("Gloomhaven");
+    await fetchCampaignData("Forgotten Circles");
+    await fetchCampaignData("Crimson Scales");
+    await fetchCampaignData("Frosthaven");
+    //TODO:specify campaigns in data, or scrub the directory for files
+
+    load(); //load saved state from file.
+  }
 
   fetchCampaignData(String campaign) async {
     final String response = await rootBundle.loadString('assets/data/editions/$campaign.json');
     final data = await json.decode(response);
-    modelData.value = CampaignModel.fromJson(data);
-
-    /*action(InitListCommand([
-      InitListCommand.createCharacter("Hatchet", 1)!,
-      InitListCommand.createCharacter("Demolitionist", 4)!,
-      createMonster("Zealot", 4)!,
-      createMonster("Giant Viper (JotL)", level.value)!,
-      createMonster("Rat Monstrosity", level.value)!,
-    ]));*/
-
-    load(); //load saved state from file.
+    modelData.value[campaign] = CampaignModel.fromJson(data);
   }
   //data
-  final modelData = ValueNotifier<CampaignModel?>(null);
+  final modelData = ValueNotifier<Map<String, CampaignModel>>({});
   //TODO: load all the data, not just the one campaign. Data is anyway in same(ish) format, as some campaign items are merged (like classes and monsters) and only campaign in map, or list.
 
   //state
+  final currentCampaign = ValueNotifier<String>("JotL");
   final round = ValueNotifier<int>(0);
   final roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
 
@@ -363,6 +331,7 @@ class GameState extends ActionHandler{
 
   //config: TODO: move to own state
   final userScaling = ValueNotifier<double>(1.0);
+  final fullScreen = ValueNotifier<bool>(false);
   final showCalculated = ValueNotifier<bool>(true);
 
   @override
@@ -378,6 +347,7 @@ class GameState extends ActionHandler{
         '"roundState": ${roundState.value.index}, '
         '"round": ${round.value}, '
         '"scenario": "${scenario.value}", '
+        '"currentCampaign": "${currentCampaign.value}", '
         '"currentList": ${currentList.toString()}, '
         '"currentAbilityDecks": ${currentAbilityDecks.toString()}, '
         '"elementState": ${json.encode(elements)} ' //didn't like the map?
@@ -427,6 +397,7 @@ class GameState extends ActionHandler{
       Map<String, dynamic> data = jsonDecode(value);
       level.value = data['level'] as int;
       scenario.value = data['scenario'];// as String;
+      currentCampaign.value = data['currentCampaign'];
       round.value = data['round'] as int;
       roundState.value =  RoundState.values[data['roundState']];
       solo.value = data['solo'] as bool; //TODO: does not update properly (because changing it is not a command

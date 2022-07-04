@@ -1,7 +1,7 @@
 {
   "edition": "Gloomhaven",
-  "classes": {
-    "Brute": {
+  "classes": [
+     {
       "name": "Brute",
       "color": "FF35ACD5",
       "edition": "Gloomhaven",
@@ -9,7 +9,7 @@
       "hidden": false,
       "summons": {}
     },
-    "Tinkerer": {
+     {
       "name": "Tinkerer",
       "color": "FFD1C3A2",
       "edition": "Gloomhaven",
@@ -36,7 +36,7 @@
       }
 
     },
-    "Spellweaver": {
+     {
       "name": "Spellweaver",
       "color": "FFB28AC2",
       "edition": "Gloomhaven",
@@ -59,7 +59,7 @@
         }
       }
     },
-    "Scoundrel": {
+     {
       "name": "Scoundrel",
       "color": "FF9ECF5F",
       "edition": "Gloomhaven",
@@ -67,7 +67,7 @@
       "hidden": false,
       "summons": {}
     },
-    "Cragheart": {
+    {
       "name": "Cragheart",
       "color": "FF828B3B",
       "edition": "Gloomhaven",
@@ -75,7 +75,7 @@
       "hidden": false,
       "summons": {}
     },
-    "Mindthief": {
+     {
       "name": "Mindthief",
       "color": "FF6279A5",
       "edition": "Gloomhaven",
@@ -102,7 +102,7 @@
       }
     },
 
-    "Sunkeeper": {
+     {
       "name": "Sunkeeper",
       "color": "FFFCE434",
       "edition": "Gloomhaven",
@@ -110,7 +110,7 @@
       "hidden": true,
       "summons": {}
     },
-    "Quartermaster": {
+     {
       "name": "Quartermaster",
       "color": "FFAD9477",
       "edition": "Gloomhaven",
@@ -118,7 +118,7 @@
       "hidden": true,
       "summons": {}
     },
-    "Summoner": {
+     {
       "name": "Summoner",
       "color": "FFE570B3",
       "edition": "Gloomhaven",
@@ -201,7 +201,7 @@
         }
       }
     },
-    "Nightshroud": {
+     {
       "name": "Nightshroud",
       "color": "FF7440D4",
       "edition": "Gloomhaven",
@@ -209,7 +209,7 @@
       "hidden": true,
       "summons": {}
     },
-    "Plagueherald": {
+     {
       "name": "Plagueherald",
       "color": "FF72E0BE",
       "edition": "Gloomhaven",
@@ -217,7 +217,7 @@
       "hidden": true,
       "summons": {}
     },
-    "Berserker": {
+     {
       "name": "Berserker",
       "color": "FFF07C4E",
       "edition": "Gloomhaven",
@@ -225,7 +225,7 @@
       "hidden": true,
       "summons": {}
     },
-    "Soothsinger": {
+     {
       "name": "Soothsinger",
       "color": "FFDB6E8D",
       "edition": "Gloomhaven",
@@ -233,7 +233,7 @@
       "hidden": true,
       "summons": {}
     },
-    "Doomstalker": {
+     {
       "name": "Doomstalker",
       "color": "FF5BC5DC",
       "edition": "Gloomhaven",
@@ -273,7 +273,7 @@
         }
       }
     },
-    "Sawbones": {
+     {
       "name": "Sawbones",
       "color": "FFD5CA9C",
       "edition": "Gloomhaven",
@@ -281,7 +281,7 @@
       "hidden": true,
       "summons": {}
     },
-    "Elementalist": {
+     {
       "name": "Elementalist",
       "color": "FFDCDCDC",
       "edition": "Gloomhaven",
@@ -302,7 +302,7 @@
         }
       }
     },
-    "BeastTyrant": {
+     {
       "note": "the bear is a special summon wth scaling hit points. as such it remains hardcoded",
       "name": "Beast Tyrant",
       "color": "FFB4765A",
@@ -351,7 +351,7 @@
       }
     },
 
-    "Bladeswarm": {
+     {
       "name": "Bladeswarm",
       "color": "FFCB9070",
       "edition": "Gloomhaven",
@@ -417,7 +417,8 @@
         }
       }
     }
-  },
+  ],
+
   "monsterAbilities": [
     {
       "name": "Ancient Artillery",

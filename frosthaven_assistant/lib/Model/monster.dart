@@ -17,10 +17,10 @@ class MonsterModel {
   final String edition;
   final List<MonsterLevelModel> levels;
 
-  factory MonsterModel.fromJson(Map<String, dynamic> data, String edition) {
+  factory MonsterModel.fromJson(Map<String, dynamic> data, String name, String edition) {
     // note the explicit cast to String
     // this is required if robust lint rules are enabled
-    final name = data['name'] as String;
+    //final name = data['name'] as String;
     String display = name;
     if(data.containsKey('display')){
       display = data['display'] as String;

@@ -6,8 +6,9 @@ import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/monster_ability_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-import 'package:great_list_view/great_list_view.dart'; //TODO migrate away from this.
+import 'package:great_list_view/great_list_view.dart';
 
+import '../../Resource/enums.dart';
 import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 

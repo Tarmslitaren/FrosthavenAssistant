@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Model/monster.dart';
 import 'commands/add_standee_command.dart';
+import 'enums.dart';
 import 'monster_ability_state.dart';
 
 GameState _gameState = getIt<GameState>();
@@ -339,15 +340,14 @@ class GameMethods {
   }
 
   static Monster? createMonster(String name, int? level) {
-    for (MonsterModel monster in getIt<GameState>().modelData.value!.monsters) {
-      if (monster.name == name) {
-        if(level == null) {
-          level = getIt<GameState>().level.value;
-        }
-        Monster monster = Monster(name, level);
-        return monster;
-      }
+    Map<String, MonsterModel> monsters = {};
+    for (String key in _gameState.modelData.value.keys){
+      monsters.addAll(
+          _gameState.modelData.value[key]!.monsters
+      );
     }
-    return null;
+    level ??= getIt<GameState>().level.value;
+    Monster monster = Monster(name, level);
+    return monster;
   }
 }

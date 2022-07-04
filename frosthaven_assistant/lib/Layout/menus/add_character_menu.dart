@@ -16,12 +16,18 @@ class AddCharacterMenu extends StatefulWidget {
 class _AddCharacterMenuState extends State<AddCharacterMenu> {
   // This list holds the data for the list view
   List<CharacterClass> _foundCharacters = [];
+  List<CharacterClass> _allCharacters = [];
   final GameState _gameState = getIt<GameState>();
 
   @override
   initState() {
     // at the beginning, all users are shown
-    _foundCharacters = _gameState.modelData.value!.characters;
+    for (String key in _gameState.modelData.value.keys){
+      _allCharacters.addAll(
+          _gameState.modelData.value[key]!.characters
+      );
+    }
+    _foundCharacters = _allCharacters;
     //TODO: sort by edition as well. and maybe not sort at all?
     _foundCharacters.sort((a, b) => a.name.compareTo(b.name));
     super.initState();
@@ -32,9 +38,9 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
     List<CharacterClass> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all users
-      results = _gameState.modelData.value!.characters;
+      results = _allCharacters;
     } else {
-      results = _gameState.modelData.value!.characters
+      results = _allCharacters
           .where((user) =>
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();

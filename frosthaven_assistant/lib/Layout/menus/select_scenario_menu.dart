@@ -19,7 +19,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
   @override
   initState() {
     // at the beginning, all items are shown
-    _foundScenarios = _gameState.modelData.value!.scenarios.keys.toList();
+    _foundScenarios = _gameState.modelData.value[_gameState.currentCampaign.value]!.scenarios.keys.toList();
     _foundScenarios.sort((a, b) => a.compareTo(b)); //TODO: sort by nrs
     super.initState();
   }
@@ -29,9 +29,9 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
     List<String> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameState.modelData.value!.scenarios.keys.toList();
+      results = _gameState.modelData.value[_gameState.currentCampaign]!.scenarios.keys.toList();
     } else {
-      results = _gameState.modelData.value!.scenarios.keys
+      results = _gameState.modelData.value[_gameState.currentCampaign]!.scenarios.keys
           .toList()
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))
@@ -45,6 +45,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
     });
   }
 
+  //TODO: add select current campaign widgert
   @override
   Widget build(BuildContext context) {
     return Card(
