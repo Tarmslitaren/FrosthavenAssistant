@@ -110,7 +110,7 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
                         itemCount: _foundMonsters.length,
                         itemBuilder: (context, index) => ListTile(
                           leading: Image(
-                            height: 30,
+                            height: 35,
                             image: AssetImage(
                                 "assets/images/monsters/${_foundMonsters[index].gfx}.png"),
                           ),

@@ -17,6 +17,7 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
   // This list holds the data for the list view
   List<CharacterClass> _foundCharacters = [];
   List<CharacterClass> _allCharacters = [];
+  late CharacterClass bs;
   final GameState _gameState = getIt<GameState>();
 
   @override
@@ -27,9 +28,27 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
           _gameState.modelData.value[key]!.characters
       );
     }
+    for (var item in _allCharacters) {
+      if(item.name == "Bladeswarm") {
+        _allCharacters.remove(item);
+        bs = item;
+        break;
+      }
+    }
     _foundCharacters = _allCharacters;
-    //TODO: sort by edition as well. and maybe not sort at all?
-    _foundCharacters.sort((a, b) => a.name.compareTo(b.name));
+    _foundCharacters.sort((a, b) {
+      if(a.edition != b.edition) {
+        return -a.edition.compareTo(b.edition);
+        //NOTE: this - here is a bit silly. it just so happens that the order makes more sense backards: Jotl, gloom, FC, FH, CS
+      }
+      if(a.hidden && !b.hidden){
+        return 1;
+      }
+      if(b.hidden && !a.hidden){
+        return -1;
+      }
+      return a.name.compareTo(b.name);
+    });
     super.initState();
   }
 
@@ -44,6 +63,10 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
           .where((user) =>
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
+      if(enteredKeyword.toLowerCase() == "bladeswarm") {
+        //unlocked it!
+        results = [bs];
+      }
       // we use the toLowerCase() method to make it case-insensitive
     }
 
@@ -93,7 +116,9 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                         itemCount: _foundCharacters.length,
                         itemBuilder: (context, index) => ListTile(
                           leading: Image(
-                            height: 30,
+                            height: 50,
+                            width: 50,
+                            fit: BoxFit.scaleDown,
                             image: AssetImage(
                                 "assets/images/class-icons/${_foundCharacters[index].name}.png"),
                           ),
