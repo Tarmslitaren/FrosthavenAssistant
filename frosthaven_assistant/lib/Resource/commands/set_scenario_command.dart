@@ -17,8 +17,9 @@ class SetScenarioCommand extends Command {
   @override
   void execute() {
     //first reset state
-    //List<ListItemData> newList = [];
+
     if (!section) {
+      List<ListItemData> newList = [];
       for (var item in _gameState.currentList) {
         if (item is Character) {
           //newList.add(item);
@@ -28,28 +29,33 @@ class SetScenarioCommand extends Command {
               1];
           item.characterState.xp.value = 0;
           item.characterState.conditions.value.clear();
+          newList.add(item);
         }
+
         if (item is Monster) {
-          item.monsterInstances.value.clear();
+          _gameState.currentList.remove(item);
         }
       }
       GameMethods.shuffleDecks();
+      _gameState.currentList = newList;
     }
+
 
     List<String> monsters;
     if (section) {
       monsters = _gameState.modelData.value[_gameState
           .currentCampaign.value]!.sections[_scenario]!.monsters;
+      //TODO: don't add duplicates! - this would not be needed if we keep track on added sections
     }else{
       monsters = _gameState.modelData.value[_gameState
           .currentCampaign.value]!.scenarios[_scenario]!.monsters;
     }
 
     for (String monster in monsters) {
+
       _gameState.currentList.add(GameMethods.createMonster(monster, _gameState.level.value)!);
     }
 
-    //_gameState.currentList = newList;
     if (!section) {
       GameMethods.updateElements();
       GameMethods.updateElements(); //twice to make sure they are inert.

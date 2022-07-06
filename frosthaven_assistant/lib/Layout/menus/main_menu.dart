@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/add_section_mneu.dart';
+import 'package:frosthaven_assistant/Layout/menus/add_section_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';

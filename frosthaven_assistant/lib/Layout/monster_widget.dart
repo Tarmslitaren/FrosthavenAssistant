@@ -96,21 +96,6 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                   width: getMainListWidth(context),
                   child: Row(
                     children: [
-                      /*GestureDetector( //reason to remove this: blocks drag and drop non long press
-                onVerticalDragStart: (details) {
-                  //start moving the widget in the list
-                },
-                onVerticalDragUpdate: (details) {
-                  //update widget position?
-                },
-                onVerticalDragEnd: (details) {
-                  //place back in list
-                },
-                onTap: () {
-                  //open stats menu
-                  setState(() {});
-                },
-                child:*/
                       Container(
                           //margin: EdgeInsets.all(2*tempScale*scale),
                           child: Stack(

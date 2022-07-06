@@ -468,6 +468,19 @@
       ]
     },
     {
+      "name": "Boss 2",
+      "cards": [
+        [ 572, false, 11, "Special 2" ],
+        [ 573, false, 14, "Special 2" ],
+        [ 574, true, 17, "Special 2" ],
+        [ 575, true, 85, "Special 1" ],
+        [ 576, false, 79, "Special 1" ],
+        [ 577, false, 73, "Special 1" ],
+        [ 578, false, 36, "%move% + 0", "%attack% + 0" ],
+        [ 579, false, 52, "%move% - 1", "%attack% - 1", "^%range% 3", "^%target% 2" ]
+      ]
+    },
+    {
       "name": "Cave Bear",
       "cards": [
         [ 596, false, 13, "%move% + 1", "%attack% - 1" ],

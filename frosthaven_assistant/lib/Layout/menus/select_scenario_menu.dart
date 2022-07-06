@@ -111,6 +111,14 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                 TextButton(
                   onPressed: () {
                     setState(() {
+                      setCampaign("Forgotten Circles");
+                    });
+                  },
+                  child: Text("Forgotten Circles"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
                       setCampaign("Crimson Scales");
                     });
                   },

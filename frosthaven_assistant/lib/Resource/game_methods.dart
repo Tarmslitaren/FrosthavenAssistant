@@ -10,19 +10,15 @@ import 'monster_ability_state.dart';
 GameState _gameState = getIt<GameState>();
 
 class GameMethods {
-
-
   static void updateElements() {
     for (var key in _gameState.elementState.value.keys) {
       if (_gameState.elementState.value[key] == ElementState.full) {
         _gameState.elementState.value[key] = ElementState.half;
-      }
-      else if (_gameState.elementState.value[key] == ElementState.half) {
+      } else if (_gameState.elementState.value[key] == ElementState.half) {
         _gameState.elementState.value[key] = ElementState.inert;
       }
     }
   }
-
 
   static int getTrapValue() {
     return 2 + _gameState.level.value;
@@ -80,7 +76,7 @@ class GameMethods {
     for (var item in _gameState.currentList) {
       if (item is Character) {
         if (item.characterState.initiative == 0) {
-          if(item.characterState.health.value > 0) {
+          if (item.characterState.health.value > 0) {
             return false;
           }
         }
@@ -89,15 +85,15 @@ class GameMethods {
     return true;
   }
 
-
   static void drawAbilityCardFromInactiveDeck() {
     for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
       for (var item in _gameState.currentList) {
-        if(item is Monster) {
-          if(item.type.deck == deck.name) {
+        if (item is Monster) {
+          if (item.type.deck == deck.name) {
             if (item.monsterInstances.value.isNotEmpty) {
-              if(deck.discardPile.isEmpty) {
+              if (deck.discardPile.isEmpty) {
                 deck.draw();
+                break;
               }
             }
           }
@@ -106,14 +102,15 @@ class GameMethods {
     }
   }
 
-
   static void drawAbilityCards() {
     for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
       for (var item in _gameState.currentList) {
-        if(item is Monster) {
-          if(item.type.deck == deck.name) {
+        if (item is Monster) {
+          if (item.type.deck == deck.name) {
             if (item.monsterInstances.value.isNotEmpty) {
               deck.draw();
+              //only draw once from each deck
+              break;
             }
           }
         }
@@ -136,29 +133,27 @@ class GameMethods {
   static void sortCharactersFirst() {
     //late List<ListItemData> newList = List.from(_gameState.currentList);
     _gameState.currentList.sort((a, b) {
-
       //dead characters dead last
       if (a is Character) {
         if (b is Character) {
-          if(b.characterState.health.value == 0) {
+          if (b.characterState.health.value == 0) {
             return -1;
           }
         }
-        if(a.characterState.health.value == 0) {
+        if (a.characterState.health.value == 0) {
           return 1;
         }
       }
       if (b is Character) {
-        if(b.characterState.health.value == 0) {
+        if (b.characterState.health.value == 0) {
           return -1;
         }
         if (a is Character) {
-          if(a.characterState.health.value == 0) {
+          if (a.characterState.health.value == 0) {
             return 1;
           }
         }
       }
-
 
       bool aIsChar = false;
       bool bIsChar = false;
@@ -178,28 +173,27 @@ class GameMethods {
       //inactive at bottom
       if (a is Monster) {
         if (b is Monster) {
-          if(b.monsterInstances.value.isEmpty) {
+          if (b.monsterInstances.value.isEmpty) {
             return -1;
           }
         }
-        if(a.monsterInstances.value.isEmpty) {
+        if (a.monsterInstances.value.isEmpty) {
           return 1;
         }
       }
       if (b is Monster) {
-        if(b.monsterInstances.value.isEmpty) {
+        if (b.monsterInstances.value.isEmpty) {
           return -1;
         }
         if (a is Monster) {
-          if(a.monsterInstances.value.isEmpty) {
+          if (a.monsterInstances.value.isEmpty) {
             return 1;
           }
         }
       }
 
       return -1;
-    }
-    );
+    });
     //_gameState.currentList = newList;
   }
 
@@ -208,20 +202,20 @@ class GameMethods {
       //dead characters dead last
       if (a is Character) {
         if (b is Character) {
-          if(b.characterState.health.value == 0) {
+          if (b.characterState.health.value == 0) {
             return -1;
           }
         }
-        if(a.characterState.health.value == 0) {
+        if (a.characterState.health.value == 0) {
           return 1;
         }
       }
       if (b is Character) {
-        if(b.characterState.health.value == 0) {
+        if (b.characterState.health.value == 0) {
           return -1;
         }
         if (a is Character) {
-          if(a.characterState.health.value == 0) {
+          if (a.characterState.health.value == 0) {
             return 1;
           }
         }
@@ -231,8 +225,8 @@ class GameMethods {
       if (a is Character) {
         aInitiative = a.characterState.initiative;
       } else if (a is Monster) {
-        if(a.monsterInstances.value.isEmpty) {
-          if(b is Monster && b.monsterInstances.value.isEmpty) {
+        if (a.monsterInstances.value.isEmpty) {
+          if (b is Monster && b.monsterInstances.value.isEmpty) {
             return -1;
           }
           return 1; //inactive at bottom
@@ -248,8 +242,8 @@ class GameMethods {
       if (b is Character) {
         bInitiative = b.characterState.initiative;
       } else if (b is Monster) {
-        if(b.monsterInstances.value.isEmpty) {
-          if(a is Monster && a.monsterInstances.value.isEmpty) {
+        if (b.monsterInstances.value.isEmpty) {
+          if (a is Monster && a.monsterInstances.value.isEmpty) {
             return 1;
           }
           return -1; //inactive at bottom
@@ -262,21 +256,19 @@ class GameMethods {
         }
       }
       return aInitiative.compareTo(bInitiative);
-    }
-    );
+    });
   }
 
-  static void sortMonsterInstances(List<MonsterInstance> instances){
+  static void sortMonsterInstances(List<MonsterInstance> instances) {
     instances.sort((a, b) {
-      if(a.type == MonsterType.elite && b.type != MonsterType.elite){
+      if (a.type == MonsterType.elite && b.type != MonsterType.elite) {
         return -1;
       }
-      if(b.type == MonsterType.elite && a.type != MonsterType.elite){
+      if (b.type == MonsterType.elite && a.type != MonsterType.elite) {
         return 1;
       }
       return a.standeeNr.compareTo(b.standeeNr);
-    }
-    );
+    });
   }
 
   static List<Character> getCurrentCharacters() {
@@ -303,27 +295,26 @@ class GameMethods {
     _gameState.roundState.value = state;
   }
 
-  static void shuffleDecksIfNeeded(){
-    for(var deck in _gameState.currentAbilityDecks) {
+  static void shuffleDecksIfNeeded() {
+    for (var deck in _gameState.currentAbilityDecks) {
       if (deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle) {
         deck.shuffle();
       }
     }
   }
 
-  static void shuffleDecks(){
-    for(var deck in _gameState.currentAbilityDecks) {
+  static void shuffleDecks() {
+    for (var deck in _gameState.currentAbilityDecks) {
       deck.shuffle();
     }
   }
 
-  static void addStandee(int? nr, Monster data, MonsterType type ){
-    if(nr != null) {
+  static void addStandee(int? nr, Monster data, MonsterType type) {
+    if (nr != null) {
       _gameState.action(AddStandeeCommand(nr, data, type));
-    }
-    else {
+    } else {
       //add first un added nr
-      for(int i = 1; i <= data.type.count; i++) {
+      for (int i = 1; i <= data.type.count; i++) {
         bool added = false;
         for (var item in data.monsterInstances.value) {
           if (item.standeeNr == i) {
@@ -341,10 +332,8 @@ class GameMethods {
 
   static Monster? createMonster(String name, int? level) {
     Map<String, MonsterModel> monsters = {};
-    for (String key in _gameState.modelData.value.keys){
-      monsters.addAll(
-          _gameState.modelData.value[key]!.monsters
-      );
+    for (String key in _gameState.modelData.value.keys) {
+      monsters.addAll(_gameState.modelData.value[key]!.monsters);
     }
     level ??= getIt<GameState>().level.value;
     Monster monster = Monster(name, level);
