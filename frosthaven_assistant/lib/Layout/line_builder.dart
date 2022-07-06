@@ -92,13 +92,13 @@ class LineBuilder {
     return EdgeInsets.zero;
   }
 
-  static List<Map<String, int>> _getStatTokens(Monster monster, bool elite) {
-    List<Map<String, int>> values = [];
+  static Map<String, int> _getStatTokens(Monster monster, bool elite) {
+    var map = <String, int>{};
     MonsterStatsModel data;
     if (monster.type.levels[monster.level.value].boss != null) {
       //is boss
       if (elite) {
-        return values;
+        return map;
       }
       data = monster.type.levels[monster.level.value].boss!;
     } else {
@@ -135,15 +135,14 @@ class LineBuilder {
               }
 
             }
-            var map = <String, int>{};
+
             map[token] = number;
-            values.add(map);
             break; //only one token added per line
           }
         }
       }
     }
-    return values;
+    return map;
   }
 
   static List<String> _applyStatForToken(
@@ -155,8 +154,8 @@ class LineBuilder {
       Monster monster,
       bool showMinimal,
       String lastToken,
-      List<Map<String, int>> normalTokens,
-      List<Map<String, int>> eliteTokens) {
+      Map<String, int> normalTokens,
+      Map<String, int> eliteTokens) {
     List<String> retVal = [];
     List<String> tokens = [];
     List<String> eTokens = [];
@@ -182,21 +181,21 @@ class LineBuilder {
 
       RegExp regEx =
           RegExp(r"(?=.*[a-z])"); //not sure why I fdo this. only letters?
-      for (var item in normalTokens) {
-        if (regEx.hasMatch(item.keys.first) == true) {
-          if (item.keys.first != "shield" &&
-              item.keys.first != "retaliate" &&
-              item.keys.first != "jump") {
-            tokens.add("%${item.keys.first}%");
+      for (var item in normalTokens.keys) {
+        if (regEx.hasMatch(item) == true) {
+          if (item != "shield" &&
+              item != "retaliate" &&
+              item != "jump") {
+            tokens.add("%$item%");
           }
         }
       }
-      for (var item in eliteTokens) {
-        if (regEx.hasMatch(item.keys.first) == true) {
-          if (item.keys.first != "shield" &&
-              item.keys.first != "retaliate" &&
-              item.keys.first != "jump") {
-            eTokens.add("%${item.keys.first}%");
+      for (var item in eliteTokens.keys) {
+        if (regEx.hasMatch(item) == true) {
+          if (item != "shield" &&
+              item != "retaliate" &&
+              item != "jump") {
+            eTokens.add("%$item%");
           }
         }
       }
@@ -215,13 +214,18 @@ class LineBuilder {
       //TODO: add jump if has innate jump
     }
 
-    //TODO: handle shield, jump and add target. heal. maybe retaliate??
     else if (lastToken == "shield") {
-      //TOOD: at least this is needed
+      int? value = normalTokens["shield"];
+      int? eValue = eliteTokens["shield"];
+      if (elite != null && eValue != null) {
+        eliteValue = eValue;
+      }
+      if (normal != null && value != null) {
+        normalValue = value;
+      }
     } else if (lastToken == "target") {
-    } else if (lastToken == "retaliate") {
-    } else if (lastToken == "jump") {
-    } else if (lastToken == "heal") {}
+      //only if there is ever a +x target
+    }
     String normalResult = formula;
     if (!skipCalculation) {
       int res = StatCalculator.calculateFormula(formula + "+" + normalValue.toString())!;
@@ -236,6 +240,12 @@ class LineBuilder {
     if (!skipCalculation) {
       for (var item in tokens) {
         newStartOfLine += "|" + item;
+        //add nr if applicable
+        String key = item.substring(1, item.length-1);
+        int value = normalTokens[key]!;
+        if(value > 0){
+          newStartOfLine += " " + value.toString();
+        }
       }
     }
 
@@ -251,6 +261,13 @@ class LineBuilder {
       String eliteString = "!" + sizeModifier + "£" + eliteResult.toString();
       for (var item in eTokens) {
         eliteString += "|" + item;
+
+        //add nr if applicable
+        String key = item.substring(1, item.length-1);
+        int value = eliteTokens[key]!;
+        if(value > 0){
+          eliteString += " " + value.toString();
+        }
       }
       retVal.add(eliteString);
     } else {
@@ -512,7 +529,7 @@ class LineBuilder {
                   //alignment: PlaceholderAlignment.top,
                   style: styleToUse, //this is wrong here
                   child: Container(
-                    color: Colors.amber,
+                    //color: Colors.amber,
                     //margin: margin,
                     child: Stack(
                     children: [
