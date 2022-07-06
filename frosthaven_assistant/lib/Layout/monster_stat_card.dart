@@ -99,7 +99,17 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
               if(healthValue != null) {
                 health = healthValue.toString();
               }
-              //TODO: need to handle NOT doing calculations on ability card if the stats are not calculable
+              //special case:
+              if(health == "Hollowpact"){
+                health = "7";
+                for(var item in getIt<GameState>().currentList) {
+                  if(item is Character && item.id == "Hollowpact") {
+                    health = item.characterClass.healthByLevel[item.characterState.level.value-1].toString();
+                  }
+
+                }
+              }
+
               int? moveValue = StatCalculator.calculateFormula(normal.move);
               String move = normal.move.toString();
               if(moveValue != null) {

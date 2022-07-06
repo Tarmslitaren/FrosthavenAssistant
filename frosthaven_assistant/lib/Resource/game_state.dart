@@ -129,7 +129,7 @@ class MonsterInstance extends Figure{
 
 
   void setLevel(Monster monster) {
-    dynamic newHealthValue = 0;
+    dynamic newHealthValue = 10; //need to put something outer than 0 or the standee will die immediately causing glitch
     if (type == MonsterType.boss) {
       newHealthValue = monster.type.levels[monster.level.value].boss!.health;
     } else if (type == MonsterType.elite) {
@@ -137,8 +137,24 @@ class MonsterInstance extends Figure{
     } else if (type == MonsterType.normal) {
       newHealthValue = monster.type.levels[monster.level.value].normal!.health;
     }
-    //TODO: handle special case maxHealths, where the health is not typically calculable
-    maxHealth.value = StatCalculator.calculateFormula(newHealthValue)!;
+    int? value = StatCalculator.calculateFormula(newHealthValue);
+    if (value != null) {
+      maxHealth.value = value;
+    } else {
+      //handle edge case?
+      if(newHealthValue == "Hollowpact"){
+        int value = 7;
+        for(var item in getIt<GameState>().currentList) {
+          if(item is Character && item.id == "Hollowpact") {
+            value = item.characterClass.healthByLevel[item.characterState.level.value-1];
+            break;
+          }
+        }
+        maxHealth.value = value;
+      }
+
+    }
+    //maxHealth.value = StatCalculator.calculateFormula(newHealthValue)!;
     level.value = monster.level.value;
     health.value = maxHealth.value;
   }
