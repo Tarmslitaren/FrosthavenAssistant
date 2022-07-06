@@ -1,6 +1,5 @@
 {
   "text": {
-    "removeAds": "Remove Ads",
     "undo": "Undo",
     "redo": "Redo",
     "setScenario": "Set Scenario",
@@ -21,7 +20,7 @@
     "addMonstersCheckbox": "Add monsters",
     "baseGame": "Base Game",
     "forgottenCircles": "Forgotten Circles",
-    "jawsOfTheLion": "Jaws of the Lion",",
+    "jawsOfTheLion": "Jaws of the Lion",
     "showNames": "Show Names",
     "hideNames": "Hide Names",
     "nextRound": "Next Round",

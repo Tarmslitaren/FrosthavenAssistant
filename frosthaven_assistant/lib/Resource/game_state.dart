@@ -121,11 +121,13 @@ enum MonsterType {
 class MonsterInstance extends Figure{
   MonsterInstance(this.standeeNr, this.type, Monster monster) {
     setLevel(monster);
-    name = monster.type.gfx;
+    gfx = monster.type.gfx;
+    name = monster.type.name;
   }
   late final int standeeNr;
   late final MonsterType type;
   late final String name;
+  late final String gfx;
 
 
   void setLevel(Monster monster) {
@@ -167,6 +169,7 @@ class MonsterInstance extends Figure{
         '"level": ${level.value}, '
         '"standeeNr": $standeeNr, '
         '"name": "$name", '
+        '"gfx": "$gfx", '
         '"type": ${type.index}, '
         '"conditions": ${conditions.value.toString()} '
         '}';
@@ -178,6 +181,7 @@ class MonsterInstance extends Figure{
     level.value = json["level"];
     maxHealth.value = json["maxHealth"];
     name = json["name"];
+    gfx = json["gfx"];
     type = MonsterType.values[json["type"]];
     List<dynamic> condis = json["conditions"];
     for(int item in condis){
@@ -320,7 +324,6 @@ class GameState extends ActionHandler{
   }
   //data
   final modelData = ValueNotifier<Map<String, CampaignModel>>({});
-  //TODO: load all the data, not just the one campaign. Data is anyway in same(ish) format, as some campaign items are merged (like classes and monsters) and only campaign in map, or list.
 
   //state
   final currentCampaign = ValueNotifier<String>("JotL");

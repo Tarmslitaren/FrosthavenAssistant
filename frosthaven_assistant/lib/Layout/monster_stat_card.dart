@@ -423,9 +423,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 elite: false,
                                                 monster: widget.data,
                                               ),
-                                              -185 * scale,
+                                              -185,
                                               //does not take into account the popup does not scale. (should it?)
-                                              12 * scale);
+                                              -120);
                                         }
                                       },
                                     );
@@ -462,8 +462,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 elite: isBoss? false : true,
                                                 monster: widget.data,
                                               ),
-                                              -145 * scale,
-                                              12 * scale);
+                                              -100,
+                                              -12);
                                         }
                                       }))),
 

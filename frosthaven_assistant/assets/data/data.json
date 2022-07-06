@@ -5,9 +5,6 @@
 		"JotL",
 		"Frosthaven",
 		"Crimson Scales",
-		"Crimson Scales AA",
-		"Crimson Scales QA",
-		"Crimson Scales RM"
 	],
 
 	"note": "Class Order important for menu order and dividers. Monster order matter for hardcoded layout values based on index.",

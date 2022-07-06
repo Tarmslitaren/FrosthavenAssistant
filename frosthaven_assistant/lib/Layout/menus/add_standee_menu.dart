@@ -76,7 +76,7 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
   Widget build(BuildContext context) {
     int nrOfStandees = widget.monster.type.count;
     //4 nr's per row
-    double height = 80;
+    double height =100;
     if (nrOfStandees > 4) {
       height = 120;
     }
@@ -84,7 +84,7 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
       height = 160;
     }
     return Container(
-        width: 30, //need to set any width to center content
+        width: 10, //need to set any width to center content
         height: height,
         decoration: BoxDecoration(
           //color: Colors.black,

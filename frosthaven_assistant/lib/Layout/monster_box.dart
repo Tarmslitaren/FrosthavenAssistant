@@ -60,6 +60,7 @@ class _MonsterBoxState extends State<MonsterBox> {
   Monster? getMonster() {
     for (var item in getIt<GameState>().currentList) {
       if (item is Monster) {
+        //this will cause issues if several monsters use same gfx.
         if (item.id == widget.data.name) {
           return item;
         }
@@ -100,7 +101,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                   width: 17 * scale,
                   fit: BoxFit.cover,
                   image: AssetImage(
-                      "assets/images/monsters/${widget.data.name}.png"),
+                      "assets/images/monsters/${widget.data.gfx}.png"),
                   //width: widget.height*0.8,
                 ),
               ),

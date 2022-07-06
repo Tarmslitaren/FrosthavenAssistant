@@ -73,6 +73,10 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
 
   @override
   Widget build(BuildContext context) {
+    String title = "Set Scenario Level";
+    if(widget.monster != null) {
+      title = "Set " + widget.monster!.type.display + "'s level";
+    }
     return Container(
         width: 10,
         height: 160,
@@ -93,18 +97,13 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
         child: Stack(
             //alignment: Alignment.center,
             children: [
-              /*Image.asset(
-                'assets/images/bg/white_bg.png',
-                //height: 460,
-                fit: BoxFit.cover,
-              ),*/
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
                 height: 20,
               ),
-              const Text("Set Scenario Level", style: TextStyle(fontSize: 18)),
+              Text(title, style: TextStyle(fontSize: 18)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

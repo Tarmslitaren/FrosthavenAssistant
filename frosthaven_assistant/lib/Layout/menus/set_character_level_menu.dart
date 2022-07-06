@@ -73,7 +73,8 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                 height: 20,
               ),
               //TODO: set the name of the char in this here text.
-              const Text("Set Character Level", style: TextStyle(fontSize: 18)),
+              Text(
+                  "Set ${widget.character.id}'s Level", style: TextStyle(fontSize: 18)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
