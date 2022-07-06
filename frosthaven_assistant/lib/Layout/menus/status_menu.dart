@@ -16,13 +16,59 @@ import '../../services/service_locator.dart';
 import 'main_menu.dart';
 
 class StatusMenu extends StatefulWidget {
-  const StatusMenu({Key? key, required this.figure, this.character, this.monster})
+  const StatusMenu(
+      {Key? key, required this.figure, this.character, this.monster})
       : super(key: key);
 
   final Figure figure;
   final Character? character;
   final Monster? monster;
 
+  //conditions always:
+  //stun,
+  //immobilize,
+  //disarm,
+  //wound,
+  //muddle,
+  //poison,
+  //bane,
+  //brittle,
+  //strengthen,
+  //invisible,
+  //regenerate,
+  //ward;
+
+  //rupture
+
+  //only monsters:
+
+  //only certain character:
+  //poison3,
+  //poison4,
+  //wound2,
+
+  //poison2,
+
+  //only characters;
+  //chill, ((only certain scenarios/monsters)
+  //infect,((only certain scenarios/monsters)
+  //impair
+
+  //character:
+  // sliders: hp, xp, chill: normal
+  //monster:
+  // sliders: hp bless, curse: normal
+
+  //monster layout:
+  //stun immobilize  disarm  wound
+  //muddle poison bane brittle
+  //variable: rupture poison 2 OR  rupture, wound2, poison 2-4
+  //strengthen invisible regenerate ward
+
+  //character layout
+  //same except line 3: infect impair rupture
+
+  //add setting: turn off CS conditions,
 
   @override
   _StatusMenuState createState() => _StatusMenuState();
@@ -63,23 +109,22 @@ class _StatusMenuState extends State<StatusMenu> {
           width: 42,
           height: 42,
           child: IconButton(
-            icon: Image.asset('assets/images/psd/sub.png'),
-            //iconSize: 30,
-            onPressed: () {
-              if (notifier.value > 0) {
-                _gameState.action(
-                    ChangeStatCommand(-1, notifier, widget.figure));
-                if (notifier == widget.figure.health &&
-                    widget.figure.health.value <= 0) {
-                  {
-                    Navigator.pop(context);
+              icon: Image.asset('assets/images/psd/sub.png'),
+              //iconSize: 30,
+              onPressed: () {
+                if (notifier.value > 0) {
+                  _gameState
+                      .action(ChangeStatCommand(-1, notifier, widget.figure));
+                  if (notifier == widget.figure.health &&
+                      widget.figure.health.value <= 0) {
+                    {
+                      Navigator.pop(context);
+                    }
+                    //handleDeath(context);
                   }
-                  //handleDeath(context);
+                  //increment
                 }
-                //increment
-              }
-            }
-          )),
+              })),
       Container(
         width: 42,
         height: 42,
@@ -91,15 +136,59 @@ class _StatusMenuState extends State<StatusMenu> {
           width: 42,
           height: 42,
           child: IconButton(
-            icon: Image.asset(
-                'assets/images/psd/add.png'),
+            icon: Image.asset('assets/images/psd/add.png'),
             //iconSize: 30,
             onPressed: () {
               if (notifier.value < maxValue) {
-                _gameState.action(ChangeStatCommand(1, notifier, widget.figure));
-                if(notifier.value <= 0 && notifier == widget.figure.health){
+                _gameState
+                    .action(ChangeStatCommand(1, notifier, widget.figure));
+                if (notifier.value <= 0 && notifier == widget.figure.health) {
                   Navigator.pop(context);
                 }
+              }
+              //increment
+            },
+          )),
+    ]);
+  }
+
+  Widget buildChillButtons(
+      ValueNotifier<int> notifier, int maxValue, String image) {
+    return Row(children: [
+      Container(
+          width: 42,
+          height: 42,
+          child: IconButton(
+              icon: Image.asset('assets/images/psd/sub.png'),
+              //iconSize: 30,
+              onPressed: () {
+                if (notifier.value > 0) {
+                  _gameState
+                      .action(ChangeStatCommand(-1, notifier, widget.figure));
+                  _gameState.action(
+                      RemoveConditionCommand(Condition.chill, widget.figure));
+                }
+                //increment
+              })),
+      Container(
+        width: 42,
+        height: 42,
+        child: Image(
+          image: AssetImage(image),
+        ),
+      ),
+      Container(
+          width: 42,
+          height: 42,
+          child: IconButton(
+            icon: Image.asset('assets/images/psd/add.png'),
+            //iconSize: 30,
+            onPressed: () {
+              if (notifier.value < maxValue) {
+                _gameState
+                    .action(ChangeStatCommand(1, notifier, widget.figure));
+                _gameState.action(
+                    AddConditionCommand(Condition.chill, widget.figure));
               }
               //increment
             },
@@ -132,9 +221,11 @@ class _StatusMenuState extends State<StatusMenu> {
                     //iconSize: 30,
                     onPressed: () {
                       if (!isActive) {
-                        _gameState.action(AddConditionCommand(condition, widget.figure));
+                        _gameState.action(
+                            AddConditionCommand(condition, widget.figure));
                       } else {
-                        _gameState.action(RemoveConditionCommand(condition, widget.figure));
+                        _gameState.action(
+                            RemoveConditionCommand(condition, widget.figure));
                       }
                     },
                   )));
@@ -143,12 +234,20 @@ class _StatusMenuState extends State<StatusMenu> {
 
   @override
   Widget build(BuildContext context) {
+    bool hasMireFoot = false;
+    for (var item in _gameState.currentList) {
+      if (item.id == "Mirefoot") {
+        hasMireFoot = true;
+        break;
+      }
+    }
     return Container(
-        width: 320,
+        width: 336,
         height: 210,
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage('assets/images/bg/white_bg.png'),
             fit: BoxFit.fitWidth,
           ),
@@ -171,6 +270,12 @@ class _StatusMenuState extends State<StatusMenu> {
                             900,
                             "assets/images/psd/xp.png")
                         : Container(),
+                    widget.character != null
+                        ? buildChillButtons(
+                            widget.character!.characterState.chill,
+                            5,
+                            "assets/images/conditions/chill.png")
+                        : Container(),
                     Row(
                       children: [
                         Container(
@@ -180,7 +285,10 @@ class _StatusMenuState extends State<StatusMenu> {
                             icon: Image.asset('assets/images/psd/skull.png'),
                             //iconSize: 10,
                             onPressed: () {
-                              _gameState.action(ChangeStatCommand(-widget.figure.health.value, widget.figure.health, widget.figure));
+                              _gameState.action(ChangeStatCommand(
+                                  -widget.figure.health.value,
+                                  widget.figure.health,
+                                  widget.figure));
                               Navigator.pop(context);
                             },
                           ),
@@ -213,6 +321,17 @@ class _StatusMenuState extends State<StatusMenu> {
                                 }
                               },
                             )),
+                        Text(widget.figure.level.value.toString(),
+                            style:
+                                const TextStyle(color: Colors.white, shadows: [
+                              Shadow(
+                                  offset: Offset(1.0, 1.0),
+                                  color: Colors.black),
+                              Shadow(
+                                  offset: Offset(1.0, 1.0),
+                                  color: Colors.black),
+                              //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
+                            ])),
                       ],
                     )
                   ], //three +/- button groups and then kill/setlevel buttons
@@ -224,8 +343,7 @@ class _StatusMenuState extends State<StatusMenu> {
               const SizedBox(
                 height: 20,
               ),
-              //const Text("Set Scenario Level", style: TextStyle(fontSize: 18)),
-              //TODO: other config for monsters and CS stuff.
+              //const Text("Status", style: TextStyle(fontSize: 18)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -244,14 +362,33 @@ class _StatusMenuState extends State<StatusMenu> {
                   buildConditionButton(Condition.brittle),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  buildConditionButton(Condition.infect),
-                  buildConditionButton(Condition.impair),
-                  buildConditionButton(Condition.rupture),
-                ],
-              ),
+              widget.character != null
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        buildConditionButton(Condition.infect),
+                        buildConditionButton(Condition.impair),
+                        buildConditionButton(Condition.rupture),
+                      ],
+                    )
+                  : !hasMireFoot
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            buildConditionButton(Condition.poison2),
+                            buildConditionButton(Condition.rupture),
+                          ],
+                        )
+                      : Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            buildConditionButton(Condition.wound2),
+                            buildConditionButton(Condition.poison2),
+                            buildConditionButton(Condition.poison3),
+                            buildConditionButton(Condition.poison4),
+                            buildConditionButton(Condition.rupture),
+                          ],
+                        ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -266,4 +403,3 @@ class _StatusMenuState extends State<StatusMenu> {
         ]));
   }
 }
-

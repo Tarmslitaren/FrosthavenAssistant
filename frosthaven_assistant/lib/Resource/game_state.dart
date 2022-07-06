@@ -31,6 +31,7 @@ class CharacterState extends Figure{
 
   int initiative = 0;
   final xp = ValueNotifier<int>(0);
+  final chill = ValueNotifier<int>(0);
 
 
   @override
@@ -41,6 +42,7 @@ class CharacterState extends Figure{
         '"maxHealth": ${maxHealth.value}, '
         '"level": ${level.value}, '
         '"xp": ${xp.value}, '
+        '"chill": ${chill.value}, '
         '"conditions": ${conditions.value.toString()} '
         '}';
   }
@@ -48,6 +50,7 @@ class CharacterState extends Figure{
   CharacterState.fromJson(Map<String, dynamic> json) {
     initiative = json['initiative'];
     xp.value = json['xp'];
+    chill.value = json['chill'];
     health.value = json["health"];
     level.value = json["level"];
     maxHealth.value = json["maxHealth"];
