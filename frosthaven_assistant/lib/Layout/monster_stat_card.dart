@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
+import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -62,7 +63,16 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         fontFamily: 'Majalla',
         color: Colors.yellow,
         fontSize: 14 * tempScale * scale,
-        //height: 1.2,
+        //height: 0.8,
+        shadows: [
+          Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black)
+        ]);
+
+    final lineStyle = TextStyle(
+        fontFamily: 'Majalla',
+        color: Colors.yellow,
+        fontSize: 14 * tempScale * scale,
+        height: 0.1,
         shadows: [
           Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black)
         ]);
@@ -76,6 +86,32 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
             builder: (context, value, child) {
               _level = widget.data.level.value;
               bool isBoss = widget.data.type.levels[_level].boss != null;
+              MonsterStatsModel normal;
+              MonsterStatsModel? elite = widget.data.type.levels[_level].elite;
+              if (isBoss){
+                normal = widget.data.type.levels[_level].boss!;
+              } else {
+                normal = widget.data.type.levels[_level].normal!;
+              }
+              //normal stats calculated:
+              int? healthValue = StatCalculator.calculateFormula(normal.health);
+              String health = normal.health.toString();
+              if(healthValue != null) {
+                health = healthValue.toString();
+              }
+              //TODO: need to handle NOT doing calculations on ability card if the stats are not calculable
+              int? moveValue = StatCalculator.calculateFormula(normal.move);
+              String move = normal.move.toString();
+              if(moveValue != null) {
+                move = moveValue.toString();
+              }
+              int? attackValue = StatCalculator.calculateFormula(normal.attack);
+              String attack = normal.attack.toString();
+              if(attackValue != null) {
+                attack = attackValue.toString();
+              }
+
+
               return Container(
                   margin: EdgeInsets.all(2 * scale * tempScale),
                   child: Stack(
@@ -86,7 +122,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                         child: Image(
                           height: height,
                           image: AssetImage(
-                              widget.data.type.levels[_level].boss == null
+                              !isBoss
                                   ? "assets/images/psd/monsterStats-normal.png"
                                   : "assets/images/psd/monsterStats-boss.png"),
                         ),
@@ -117,38 +153,18 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      StatCalculator.calculateFormula(widget
-                                              .data
-                                              .type
-                                              .levels[_level]
-                                              .normal!
-                                              .health)
-                                          .toString(),
+                                      health,
                                       style: leftStyle),
                                   Text(
-                                      StatCalculator.calculateFormula(widget
-                                              .data
-                                              .type
-                                              .levels[_level]
-                                              .elite!
-                                              .move)
-                                          .toString(),
+                                      move,
                                       style: leftStyle),
                                   Text(
-                                      StatCalculator.calculateFormula(widget
-                                              .data
-                                              .type
-                                              .levels[_level]
-                                              .elite!
-                                              .attack)
-                                          .toString(),
+                                      attack,
                                       style: leftStyle),
                                   Text(
-                                      widget.data.type.levels[_level].normal
-                                                  ?.range !=
+                                      normal.range !=
                                               0
-                                          ? widget.data.type.levels[_level]
-                                              .normal!.range
+                                          ? normal.range
                                               .toString()
                                           : "-",
                                       style: leftStyle),
@@ -165,38 +181,18 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 // mainAxisSize: MainAxisSize.max,
                                 children: <Widget>[
                                   Text(
-                                      StatCalculator.calculateFormula(widget
-                                              .data
-                                              .type
-                                              .levels[_level]
-                                              .boss!
-                                              .health)
-                                          .toString(),
+                                      health,
                                       style: leftStyle),
                                   Text(
-                                      StatCalculator.calculateFormula(widget
-                                              .data
-                                              .type
-                                              .levels[_level]
-                                              .boss!
-                                              .move)
-                                          .toString(),
+                                      move,
                                       style: leftStyle),
                                   Text(
-                                      StatCalculator.calculateFormula(widget
-                                              .data
-                                              .type
-                                              .levels[_level]
-                                              .boss!
-                                              .attack)
-                                          .toString(),
+                                      attack,
                                       style: leftStyle),
                                   Text(
-                                      widget.data.type.levels[_level].boss
-                                                  ?.range !=
+                                      normal.range !=
                                               0
-                                          ? widget.data.type.levels[_level]
-                                              .boss!.range
+                                          ? normal.range
                                               .toString()
                                           : "",
                                       style: leftStyle),
@@ -214,8 +210,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   //width: 67*tempScale*scale,
                                   children: [
                                     LineBuilder.createLines(
-                                        widget.data.type.levels[_level].normal!
-                                            .attributes,
+                                        normal.attributes,
                                         true,
                                         false,
                                         widget.data,
@@ -224,24 +219,29 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   ]))
                           : Positioned(
                               left: 56.0 * tempScale * scale,
-                              top: 24.0 * tempScale * scale,
+                              top: 20.0 * tempScale * scale,
                               width: 160 * tempScale * scale, //useful or not?
                               child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   //alignment: Alignment.topRight,
                                   //width: 67*tempScale*scale,
                                   children: [
-                                    LineBuilder.createLines(
-                                        widget.data.type.levels[_level].boss!
-                                            .attributes,
-                                        true,
+                                    normal.attributes.isNotEmpty? Row(
+                                    children: [
+                                      Text("    ", style: specialStyle),
+                                      LineBuilder.createLines(
+                                        normal.attributes,
+                                        false,
                                         false,
                                         widget.data,
-                                        CrossAxisAlignment.end,
-                                        scale),
+                                        CrossAxisAlignment.start,
+                                        scale
+                                    ),]
+                                    ): Container(),
+                                    normal.special1.isNotEmpty?
                                     Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text("1:", style: specialStyle),
                                           Container(
@@ -258,7 +258,13 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                   widget.data,
                                                   CrossAxisAlignment.start,
                                                   scale)),
-                                        ]),
+                                        ]): Container(),
+                                    normal.special2.isNotEmpty?
+                                    Row(
+                                        children: [
+                                          Text("_______________________________\n\n\n", style: lineStyle),]
+                                    ): Container(),
+                                    normal.special2.isNotEmpty?
                                     Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -278,8 +284,10 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                   widget.data,
                                                   CrossAxisAlignment.start,
                                                   scale)),
-                                        ])
-                                  ])),
+                                        ]): Container()
+
+                                  ])
+                      ),
                       !isBoss
                           ? Positioned(
                               right: 80.0 * tempScale * scale,
@@ -289,38 +297,24 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      StatCalculator.calculateFormula(widget
-                                              .data
-                                              .type
-                                              .levels[_level]
-                                              .elite!
+                                      StatCalculator.calculateFormula(elite!
                                               .health)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      StatCalculator.calculateFormula(widget
-                                              .data
-                                              .type
-                                              .levels[_level]
-                                              .elite!
+                                      StatCalculator.calculateFormula(elite
                                               .move)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      StatCalculator.calculateFormula(widget
-                                              .data
-                                              .type
-                                              .levels[_level]
-                                              .elite!
+                                      StatCalculator.calculateFormula(elite
                                               .attack)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      widget.data.type.levels[_level].elite
-                                                  ?.range !=
+                                      elite.range !=
                                               0
-                                          ? widget.data.type.levels[_level]
-                                              .elite!.range
+                                          ? elite.range
                                               .toString()
                                           : "-",
                                       style: rightStyle),
@@ -334,8 +328,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               right: 0.0,
                               top: 24.0 * tempScale * scale,
                               child: LineBuilder.createLines(
-                                  widget.data.type.levels[_level].elite!
-                                      .attributes,
+                                  elite!.attributes,
                                   false,
                                   false,
                                   widget.data,
@@ -365,6 +358,18 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   ),
                                 )
                               : Container(),
+                      isBoss?    normal.range != 0?
+                      Positioned(
+                          height: 21 * tempScale * scale,
+                          left: 30.0 * tempScale * scale,
+                          top: 93.0 * tempScale * scale,
+                          child: const Image(
+                            image: AssetImage(
+                                "assets/images/psd/range-stat.png"),
+                          )):
+                      Container()
+              : Container(),
+                      !isBoss ?
                       Positioned(
                           bottom: 5 * scale * tempScale,
                           left: 5 * scale * tempScale,
@@ -414,9 +419,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                         }
                                       },
                                     );
-                                  }))),
-                      !isBoss
-                          ? Positioned(
+                                  }))): Container(),
+                       Positioned(
                               bottom: 5 * scale * tempScale,
                               right: 5 * scale * tempScale,
                               child: Container(
@@ -438,38 +442,50 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                             widget.data.type.count - 1) {
                                           //directly add last standee
                                           GameMethods.addStandee(null,
-                                              widget.data, MonsterType.elite);
+                                              widget.data, isBoss? MonsterType.boss : MonsterType.elite);
                                         } else if (widget.data.monsterInstances
                                                 .value.length <
                                             widget.data.type.count - 1) {
                                           openDialogAtPosition(
                                               context,
                                               AddStandeeMenu(
-                                                elite: true,
+                                                elite: isBoss? false : true,
                                                 monster: widget.data,
                                               ),
                                               -145 * scale,
                                               12 * scale);
                                         }
-                                      })))
-                          : Container(),
-                      Positioned(
+                                      }))),
+
+                      isBoss? Positioned(
                           right: 10 * scale,
                           top: 1 * scale,
                           child: Row(
-                            children: createConditionList(scale),
+                            children: createConditionList(scale, normal),
+                          ))
+                          : Positioned(
+                          left: 45 * scale,
+                          bottom : 10 * scale,
+                          child: Column(
+                            verticalDirection: VerticalDirection.up,
+                            children: createConditionList(scale, normal),
+                          )),
+                      isBoss? Container():
+                      Positioned(
+                          right: 45 * scale,
+                          bottom: 10 * scale,
+                          child: Column(
+                            verticalDirection: VerticalDirection.up,
+                            children: createConditionList(scale, elite!),
                           ))
                     ],
                   ));
             }));
   }
 
-  List<Image> createConditionList(double scale) {
+  List<Image> createConditionList(double scale, MonsterStatsModel stats) {
     List<Image> list = [];
-    if (widget.data.type.levels[_level].boss == null) {
-      return list;
-    }
-    for (var item in widget.data.type.levels[_level].boss!.immunities) {
+    for (var item in stats.immunities) {
       item = item.substring(1, item.length - 1);
       Image image = Image(
         height: 11 * scale,

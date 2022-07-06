@@ -137,7 +137,8 @@ class MonsterInstance extends Figure{
     } else if (type == MonsterType.normal) {
       newHealthValue = monster.type.levels[monster.level.value].normal!.health;
     }
-    maxHealth.value = StatCalculator.calculateFormula(newHealthValue);
+    //TODO: handle special case maxHealths, where the health is not typically calculable
+    maxHealth.value = StatCalculator.calculateFormula(newHealthValue)!;
     level.value = monster.level.value;
     health.value = maxHealth.value;
   }

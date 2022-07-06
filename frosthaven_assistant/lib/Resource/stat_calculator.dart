@@ -1,22 +1,24 @@
-
+import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class StatCalculator {
-  static int calculateFormula(final dynamic str) {
-    if(str is int) {
+  static int? calculateFormula(final dynamic str) {
+    if (str is int) {
       return str;
     }
     int C = GameMethods.getCurrentCharacters().length;
-    if(C == 0){ C = 1;}
+    if (C == 0) {
+      C = 1;
+    }
     int L = getIt<GameState>().level.value;
     String formula = str.replaceAll("C", C.toString());
     formula = formula.replaceAll("L", L.toString());
     return eval(formula);
   }
 
-  static int eval(final String str) {
+  static int? eval(final String str) {
     return Parser(str).parse();
   }
 }
@@ -43,13 +45,21 @@ class Parser {
     return false;
   }
 
-  int parse() {
-    nextChar();
-    int x = parseExpression();
-    if (pos < str.length) {
-      throw Exception("Unexpected: $ch");
+  int? parse() {
+    try {
+      nextChar();
+      int x = parseExpression()!;
+      if (pos < str.length) {
+        if (kDebugMode) {
+          print("Unexpected: $ch");
+        }
+        return null;
+        //throw Exception("Unexpected: $ch");
+      }
+      return x;
+    } catch (_) {
+      return null;
     }
-    return x;
   }
 
   // Grammar:
@@ -59,81 +69,68 @@ class Parser {
   //        | functionName `(` expression `)` | functionName factor
   //        | factor `^` factor
 
-  int parseExpression() {
-    int x = parseTerm();
-    for (;;) {
-      if (eat('+')) {
-        x += parseTerm();
-      } else if (eat('-')) {
-        x -= parseTerm();
-      } else {
-        return x;
-      }
-    }
-  }
-
-  int parseTerm() {
-    int x = parseFactor();
-    for (;;) {
-      if (eat('*')) x *= parseFactor(); // multiplication
-      if (eat('x')) x *= parseFactor(); // multiplication
-      else if (eat('/')) {
-        x = (x / parseFactor()).ceil();
-      } else {
-        return x;
-      }
-    }
-  }
-
-  int parseFactor() {
-    if (eat('+')) return parseFactor(); // unary plus
-    if (eat('-')) return -parseFactor(); // unary minus
-
-    int x;
-    int startPos = pos;
-    int asciiValue = ch.codeUnits[0];
-    if (eat('(')) { // parentheses
-      x = parseExpression();
-      if (!eat(')')) throw Exception("Missing ')'");
-    } else if (asciiValue >= '0'.codeUnits[0] &&
-        asciiValue <= '9'.codeUnits[0]) { // numbers
-      while ((asciiValue >= '0'.codeUnits[0] &&
-          asciiValue <= '9'.codeUnits[0])) {
-        nextChar();
-        asciiValue = ch.codeUnits[0];
-      }
-      x = int.parse(str.substring(startPos, pos));
-    }
-    // else if (asciiValue >= 'a' && asciiValue <= 'z') { // functions
-    /*while (asciiValue >= 'a' && asciiValue <= 'z') {
-        nextChar();
-        asciiValue = ch.codeUnits[0];
-      }*/
-
-    //don't need functions
-    /*String func = str.substring(startPos, pos);
-      if (eat('(')) {
-        x = parseExpression();
-        if (!eat(')')) {
-          throw Exception(
-            "Missing ')' after argument to $func");
+  int? parseExpression() {
+    try {
+      int x = parseTerm()!;
+      for (;;) {
+        if (eat('+')) {
+          x += parseTerm()!;
+        } else if (eat('-')) {
+          x -= parseTerm()!;
+        } else {
+          return x;
         }
-      } else {
-        x = parseFactor();
       }
-      if (func == "sqrt") x = sqrt(x);
-      else if (func =="sin") x = sin(toRadians(x));
-          else if (func == "cos") x = cos(toRadians(x));
-          else if (func == "tan") x = tan(toRadians(x));
-      else {
-        throw Exception("Unknown function: $func");
-      }*/
-    // }
-    else {
-      throw Exception("Unexpected: $ch");
+    } catch (_) {
+      return null;
     }
-    //if (eat('^')) x = pow(x, parseFactor()); // exponentiation
-    return x;
+  }
+
+  int? parseTerm() {
+    try {
+      int x = parseFactor()!;
+      for (;;) {
+        if (eat('*')) x *= parseFactor()!; // multiplication
+        if (eat('x'))
+          x *= parseFactor()!; // multiplication
+        else if (eat('/')) {
+          x = (x / parseFactor()!).ceil();
+        } else {
+          return x;
+        }
+      }
+    } catch(_) {
+      return null;
+    }
+  }
+
+  int? parseFactor() {
+    try {
+      if (eat('+')) return parseFactor(); // unary plus
+      if (eat('-')) return -parseFactor()!; // unary minus
+
+      int x;
+      int startPos = pos;
+      int asciiValue = ch.codeUnits[0];
+      if (eat('(')) {
+        // parentheses
+        x = parseExpression()!;
+        if (!eat(')')) throw Exception("Missing ')'");
+      } else if (asciiValue >= '0'.codeUnits[0] &&
+          asciiValue <= '9'.codeUnits[0]) {
+        // numbers
+        while ((asciiValue >= '0'.codeUnits[0] &&
+            asciiValue <= '9'.codeUnits[0])) {
+          nextChar();
+          asciiValue = ch.codeUnits[0];
+        }
+        x = int.parse(str.substring(startPos, pos));
+      } else {
+        throw Exception("Unexpected: $ch");
+      }
+      return x;
+    } catch (_) {
+      return null;
+    }
   }
 }
-

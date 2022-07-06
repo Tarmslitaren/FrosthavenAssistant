@@ -554,7 +554,7 @@
       "name": "Blood Ooze",
       "edition": "Crimson Scales",
       "cards": [
-        [1198, true, 96, "%attack% - 1", "^%range% 5", "*Summon one normal Blood Ooze in a hex adjacent to the target with a hit point value equal to the summoning Blood Ooze's current hit point value minus 2 (limited by a normal Blood Ooze's specifiec maximum hit point value)" ],
+        [1198, true, 96, "%attack% - 1", "^%range% 5", "*Summon one normal Blood Ooze in a hex adjacent to the target with a hit point value equal to the summoning Blood Ooze's current hit point value minus 2 (limited by a normal Blood Ooze's specified maximum hit point value)" ],
         [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "%fire%%use%", "!^Hit point value equal to three instead" ],
         [1200, false, 71, "^All adjacent enemies", "^suffer one damage.","*.........", "%move% + 1","*.........", "%heal% 1", "^Target all adjacent Blood Oozes"],
         [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^Target one adjacent enemy", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes." ],
@@ -1000,8 +1000,8 @@
           "health": "9xC",
           "move": 4,
           "attack": 3,
-          "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%1 %retaliate%1 %heal%1" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%1 %retaliate%1 %heal%1" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1009,8 +1009,8 @@
           "health": "10xC",
           "move": 4,
           "attack": 4,
-          "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%1, %retaliate%1, %heal%1" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%1, %retaliate%1, %heal%1" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1018,8 +1018,8 @@
           "health": "13xC",
           "move": 5,
           "attack": 4,
-          "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%1, %retaliate%1, %heal%1" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%1, %retaliate%1, %heal%1" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1027,8 +1027,8 @@
           "health": "14xC",
           "move": 5,
           "attack": 4,
-          "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%2, %retaliate%2, %heal%2" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%2, %retaliate%2, %heal%2" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1036,8 +1036,8 @@
           "health": "18xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%2, %retaliate%2, %heal%2" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%2, %retaliate%2, %heal%2" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1045,8 +1045,8 @@
           "health": "20xC",
           "move": 6,
           "attack": 5,
-          "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%3, %retaliate%3, %heal%3" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%3, %retaliate%3, %heal%3" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1054,8 +1054,8 @@
           "health": "25xC",
           "move": 6,
           "attack": 5,
-          "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%3, %retaliate%3, %heal%3" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%3, %retaliate%3, %heal%3" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1063,8 +1063,8 @@
           "health": "27xC",
           "move": 6,
           "attack": 6,
-          "special1": [ "%attack% + 1 %pierce%3,", "all enemies adjacent to target suffer 1 damage,", "destroy obstacle" ],
-          "special2": [ "%attack% - 2, destroy obstacle, perform %shield%4, %retaliate%4, %heal%4" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%4, %retaliate%4, %heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         }
       ]
@@ -2222,7 +2222,8 @@
             "health": 28,
             "move": 3,
             "attack": 4,
-            "attributes": [ "%retaliate% 2 %range% 3", "^Immune %stun%" ]
+            "attributes": [ "%retaliate% 2 %range% 3" ],
+            "immunities": ["%stun%"]
           }
         },
         {
@@ -2237,7 +2238,8 @@
             "health": 32,
             "move": 3,
             "attack": 5,
-            "attributes": [ "%retaliate% 3 %range% 3", "^Immune %stun%" ]
+            "attributes": [ "%retaliate% 3 %range% 3" ],
+            "immunities": ["%stun%"]
           }
         },
         {
@@ -2246,13 +2248,15 @@
             "health": 26,
             "move": 3,
             "attack": 4,
-            "attributes": [ "%retaliate% 3 %range% 3", "^Immune %stun%" ]
+            "attributes": [ "%retaliate% 3 %range% 3" ],
+            "immunities": ["%stun%"]
           },
           "elite": {
             "health": 38,
             "move": 3,
             "attack": 6,
-            "attributes": [ "%retaliate% 4 %range% 3", "^Immune %stun%" ]
+            "attributes": [ "%retaliate% 4 %range% 3" ],
+            "immunities": ["%stun%"]
           }
         },
         {
@@ -2261,13 +2265,15 @@
             "health": 30,
             "move": 3,
             "attack": 4,
-            "attributes": [ "%retaliate% 4 %range% 3", "^Immune %stun%" ]
+            "attributes": [ "%retaliate% 4 %range% 3" ],
+            "immunities": ["%stun%"]
           },
           "elite": {
             "health": 42,
             "move": 3,
             "attack": 6,
-            "attributes": [ "%retaliate% 4 %range% 3", "^Immune %stun%" ]
+            "attributes": [ "%retaliate% 4 %range% 3"],
+            "immunities": ["%stun%"]
           }
         }
       ]
@@ -2550,6 +2556,7 @@
     "Shadow Demon": {
       "deck": "Night Demon",
       "gfx": "Night Demon",
+      "display": "Shadow Demon",
       "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
@@ -3567,58 +3574,58 @@
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 4, "move": 1, "attack": 2, "range": 3, "attributes": [ "immune to:"," %poison%"," %wound%" ],
+          "normal": { "health": 4, "move": 1, "attack": 2, "range": 3, "attributes": [],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 6, "move": 1, "attack": 3, "range": 4, "attributes": [ "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 6, "move": 1, "attack": 3, "range": 4, "attributes": [ ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 1,
-          "normal": { "health": 5, "move": 1, "attack": 2, "range": 4, "attributes": [ "immune to:"," %poison%"," %wound%" ],
+          "normal": { "health": 5, "move": 1, "attack": 2, "range": 4, "attributes": [ ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 6, "move": 1, "attack": 3, "range": 5, "attributes": [ "%pierce% 1", "%shield% 1", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 6, "move": 1, "attack": 3, "range": 5, "attributes": [ "%pierce% 1", "%shield% 1" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 2,
-          "normal": { "health": 6, "move": 1, "attack": 3, "range": 4, "attributes": [ "immune to:"," %poison%"," %wound%" ],
+          "normal": { "health": 6, "move": 1, "attack": 3, "range": 4, "attributes": [ ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 7, "move": 1, "attack": 4, "range": 5, "attributes": [ "%pierce% 2", "%shield% 1", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 7, "move": 1, "attack": 4, "range": 5, "attributes": [ "%pierce% 2", "%shield% 1" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 3,
-          "normal": { "health": 6, "move": 2, "attack": 3, "range": 4, "attributes": [ "%shield% 1","immune to:"," %poison%"," %wound%"  ],
+          "normal": { "health": 6, "move": 2, "attack": 3, "range": 4, "attributes": [ "%shield% 1"  ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 8, "move": 2, "attack": 4, "range": 5, "attributes": [ "%pierce% 2", "%shield% 2", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 8, "move": 2, "attack": 4, "range": 5, "attributes": [ "%pierce% 2", "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 4,
-          "normal": { "health": 8, "move": 2, "attack": 3, "range": 5, "attributes": [ "%shield% 1" ,"immune to:"," %poison%"," %wound%" ],
+          "normal": { "health": 8, "move": 2, "attack": 3, "range": 5, "attributes": [ "%shield% 1" ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 10, "move": 2, "attack": 4, "range": 6, "attributes": [ "%pierce% 2", "%shield% 2", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 10, "move": 2, "attack": 4, "range": 6, "attributes": [ "%pierce% 2", "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 5,
-          "normal": { "health": 9, "move": 2, "attack": 4, "range": 5, "attributes": [ "%shield% 1","immune to:"," %poison%"," %wound%"  ],
+          "normal": { "health": 9, "move": 2, "attack": 4, "range": 5, "attributes": [ "%shield% 1"  ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 11, "move": 2, "attack": 5, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 11, "move": 2, "attack": 5, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 6,
-          "normal": { "health": 9, "move": 3, "attack": 4, "range": 5, "attributes": [ "%shield% 2","immune to:"," %poison%"," %wound%"  ],
+          "normal": { "health": 9, "move": 3, "attack": 4, "range": 5, "attributes": [ "%shield% 2"  ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 12, "move": 3, "attack": 6, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 12, "move": 3, "attack": 6, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 7,
-          "normal": { "health": 10, "move": 3, "attack": 4, "range": 6, "attributes": [ "%shield% 2","immune to:"," %poison%"," %wound%"  ],
+          "normal": { "health": 10, "move": 3, "attack": 4, "range": 6, "attributes": [ "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 13, "move": 3, "attack": 6, "range": 7, "attributes": [ "%pierce% 3", "%shield% 3", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 13, "move": 3, "attack": 6, "range": 7, "attributes": [ "%pierce% 3", "%shield% 3" ],
             "immunities": ["%wound%", "%poison%"]}
         }
       ]
@@ -3632,58 +3639,58 @@
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": [ "immune to:"," %poison%"," %wound%" ],
+          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": [ ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 6,  "move": 2,  "attack": 3, "attributes": [ "%shield% 1", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 6,  "move": 2,  "attack": 3, "attributes": [ "%shield% 1" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 1,
-          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": [ "%shield% 1", "immune to:"," %poison%", " %wound%" ],
+          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": [ "%shield% 1"],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 6, "move": 2, "attack": 3, "attributes": [ "%shield% 2", "immune to:","%poison% ", " %wound%" ],
+          "elite": { "health": 6, "move": 2, "attack": 3, "attributes": [ "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 2,
-          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "%shield% 1", "immune to:"," %poison%", " %wound%" ],
+          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "%shield% 1" ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 9, "move": 2, "attack": 3, "attributes": [ "%shield% 2", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 9, "move": 2, "attack": 3, "attributes": [ "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 3,
-          "normal": { "health": 8, "move": 2, "attack": 3, "attributes": [ "%shield% 1", "immune to:"," %poison%", " %wound%" ],
+          "normal": { "health": 8, "move": 2, "attack": 3, "attributes": [ "%shield% 1" ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 9, "move": 2, "attack": 4, "attributes": [ "%retaliate% 1", "%shield% 2", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 9, "move": 2, "attack": 4, "attributes": [ "%retaliate% 1", "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 4,
-          "normal": { "health": 9, "move": 3, "attack": 3, "attributes": [ "%shield% 1", "immune to:"," %poison%", " %wound%" ],
+          "normal": { "health": 9, "move": 3, "attack": 3, "attributes": [ "%shield% 1" ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 10, "move": 3, "attack": 4, "attributes": [ "%retaliate% 2", "%shield% 2", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 10, "move": 3, "attack": 4, "attributes": [ "%retaliate% 2", "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 5,
-          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%shield% 2", "immune to:"," %poison%", " %wound%" ],
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 12, "move": 3, "attack": 4, "attributes": [ "%retaliate% 2", "%shield% 3", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 12, "move": 3, "attack": 4, "attributes": [ "%retaliate% 2", "%shield% 3"],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 6,
-          "normal": { "health": 11, "move": 3, "attack": 4, "attributes": [ "%shield% 2", "immune to:"," %poison%", " %wound%" ],
+          "normal": { "health": 11, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 13, "move": 3, "attack": 5, "attributes": [ "%retaliate% 3", "%shield% 3", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 13, "move": 3, "attack": 5, "attributes": [ "%retaliate% 3", "%shield% 3"],
             "immunities": ["%wound%", "%poison%"]}
         },
         {
           "level": 7,
-          "normal": { "health": 13, "move": 3, "attack": 4, "attributes": [ "%shield% 2", "immune to:"," %poison%", " %wound%" ],
+          "normal": { "health": 13, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ],
             "immunities": ["%wound%", "%poison%"]},
-          "elite": { "health": 14, "move": 3, "attack": 6, "attributes": [ "%retaliate% 3", "%shield% 3", "immune to:","%poison% ", "%wound% " ],
+          "elite": { "health": 14, "move": 3, "attack": 6, "attributes": [ "%retaliate% 3", "%shield% 3" ],
             "immunities": ["%wound%", "%poison%"]}
         }
       ]
@@ -4014,16 +4021,20 @@
 
         },
         {
-          "level": 4, "health": "28xC/2", "move": 3, "attack": 4, "attributes": [ "%retaliate% 2",  "%range% 3", "Immune %stun%" ]
+          "level": 4, "health": "28xC/2", "move": 3, "attack": 4, "attributes": [ "%retaliate% 2",  "%range% 3" ],
+          "immunities": ["%stun%"]
         },
         {
-          "level": 5, "health": "32xC/2", "move": 3, "attack": 5, "attributes": [ "%retaliate% 3",  "%range% 3", "Immune %stun%" ]
+          "level": 5, "health": "32xC/2", "move": 3, "attack": 5, "attributes": [ "%retaliate% 3",  "%range% 3" ],
+          "immunities": ["%stun%"]
         },
         {
-          "level": 6, "health": "38xC/2", "move": 3, "attack": 6, "attributes": [ "%retaliate% 4",  "%range% 3", "Immune %stun%" ]
+          "level": 6, "health": "38xC/2", "move": 3, "attack": 6, "attributes": [ "%retaliate% 4",  "%range% 3" ],
+          "immunities": ["%stun%"]
         },
         {
-          "level": 7, "health": "42xC/2", "move": 3, "attack": 6, "attributes": [ "%retaliate% 4",  "%range% 3", "Immune %stun%" ]
+          "level": 7, "health": "42xC/2", "move": 3, "attack": 6, "attributes": [ "%retaliate% 4",  "%range% 3" ],
+          "immunities": ["%stun%"]
         }
       ]
     },
@@ -4085,42 +4096,42 @@
       "levels": [
         {
           "level": 0, "health": "10xC", "move": 3, "attack": 3,
-          "attributes": [ "%pierce% 2 %aoe-line-2%", "*Unaffected by", "*water hexes", "*%shield% 1%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": [ "%pierce% 2 %aoe-line-3-with-black%", "*Unaffected by", "*water hexes", "*%shield% 1%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 1, "health": "12xC", "move": 3, "attack": 4,
-          "attributes": [ "%pierce% 2 %aoe-line-2%", "*Unaffected by", "*water hexes", "*%shield% 1%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": [ "%pierce% 2 %aoe-line-3-with-black%", "*Unaffected by", "*water hexes", "*%shield% 1%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 2, "health": "14xC", "move": 3, "attack": 4,
-          "attributes": ["%pierce% 2 %aoe-line-2%",  "*Unaffected by", "*water hexes", "*%shield% 2%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": ["%pierce% 2 %aoe-line-3-with-black%",  "*Unaffected by", "*water hexes", "*%shield% 2%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 3, "health": "16xC", "move": 4, "attack": 4,
-          "attributes": [ "%pierce% 2 %aoe-line-2%", "*Unaffected by", "*water hexes", "*%shield% 2%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": [ "%pierce% 2 %aoe-line-3-with-black%", "*Unaffected by", "*water hexes", "*%shield% 2%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 4, "health": "16xC", "move": 4, "attack": 5,
-          "attributes": ["%pierce% 2 %aoe-line-2%", "*Unaffected by", "*water hexes", "*%shield% 3%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": ["%pierce% 2 %aoe-line-3-with-black%", "*Unaffected by", "*water hexes", "*%shield% 3%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 5, "health": "19xC", "move": 4, "attack": 5,
-          "attributes": ["%pierce% 2 %aoe-line-2%",  "*Unaffected by", "*water hexes", "*%shield% 3%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": ["%pierce% 2 %aoe-line-3-with-black%",  "*Unaffected by", "*water hexes", "*%shield% 3%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 6, "health": "20xC", "move": 5, "attack": 5,
-          "attributes": ["%pierce% 2 %aoe-line-2%",  "*Unaffected by", "*water hexes", "*%shield% 4%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": ["%pierce% 2 %aoe-line-3-with-black%",  "*Unaffected by", "*water hexes", "*%shield% 4%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 7, "health": "22xC", "move": 5, "attack": 6,
-          "attributes": ["%pierce% 2 %aoe-line-2%",  "*Unaffected by", "*water hexes", "*%shield% 4%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": ["%pierce% 2 %aoe-line-3-with-black%",  "*Unaffected by", "*water hexes", "*%shield% 4%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         }
       ]

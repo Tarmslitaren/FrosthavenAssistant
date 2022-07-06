@@ -80,7 +80,6 @@
         [ 685, true, 32, "%move% + 0", "%attack% + 0", "^Add +2 Attack if the target is adjacent to any of the Abomination's allies." ],
         [ 687, false, 43, "%move% + 1", "^%jump%", "%attack% - 1", "^Target all adjacent enemies." ],
         [ 688, false, 58, "%move% - 1", "%attack% + 1" ],
-        [ 689, false, 58, "%move% + 1", "^%jump%", "%attack% - 1", "^All attacks targeting Abomination this round gain Disadvantage." ],
         [ 691, false, 23, "%move% - 1", "%attack% - 1", "^%immobilize%", "%attack% - 1" ]
       ]
     },
@@ -853,7 +852,7 @@
           "attack": 3,
           "range": 3,
           "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 2", "Affect all adjacent allies" ],
-          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "special2": [ "%move% + 0 %attack% + 0 Summon Valrath Savage" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
           "attributes": [ "%wound%" ]
         },
@@ -864,7 +863,7 @@
           "attack": 4,
           "range": 3,
           "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 2", "Affect all adjacent allies" ],
-          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "special2": [ "%move% + 0 %attack% + 0 Summon Valrath Savage" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
           "attributes": [ "%wound%" ]
         },
@@ -875,7 +874,7 @@
           "attack": 4,
           "range": 3,
           "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 3", "Affect all adjacent allies" ],
-          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "special2": [ "%move% + 0 %attack% + 0 Summon Valrath Savage" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
           "attributes": [ "%wound%" ]
         },
@@ -886,9 +885,9 @@
           "attack": 5,
           "range": 3,
           "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 3", "Affect all adjacent allies" ],
-          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "special2": [ "%move% + 0 %attack% + 0 Summon Valrath Savage" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
-          "attributes": [ "%wound%, %poison%" ]
+          "attributes": [ "%wound%","%poison%" ]
         },
         {
           "level": 4,
@@ -897,9 +896,9 @@
           "attack": 5,
           "range": 4,
           "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 4", "Affect all adjacent allies" ],
-          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "special2": [ "%move% + 0 %attack% + 0 Summon Valrath Savage" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
-          "attributes": [ "%wound%, %poison%" ]
+          "attributes": [ "%wound%", "%poison%" ]
         },
         {
           "level": 5,
@@ -908,9 +907,9 @@
           "attack": 6,
           "range": 4,
           "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 4", "Affect all adjacent allies" ],
-          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "special2": [ "%move% + 0 %attack% + 0 Summon Valrath Savage" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
-          "attributes": [ "%wound%, %poison%" ]
+          "attributes": [ "%wound%", "%poison%" ]
         },
         {
           "level": 6,
@@ -919,9 +918,9 @@
           "attack": 6,
           "range": 4,
           "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 4", "Affect all adjacent allies" ],
-          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "special2": [ "%move% + 0 %attack% + 0 Summon Valrath Savage" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
-          "attributes": [ "%wound%, %poison%" ]
+          "attributes": [ "%wound%", "%poison%" ]
         },
         {
           "level": 7,
@@ -930,9 +929,9 @@
           "attack": 7,
           "range": 5,
           "special1": [ "Summon Valrath Tracker", "%move% - 1, %heal% 5", "Affect all adjacent allies" ],
-          "special2": [ "%move% + 0", "%attack% + 0", "Summon Valrath", "Savage" ],
+          "special2": [ "%move% + 0 %attack% + 0 Summon Valrath Savage" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%" ],
-          "attributes": [ "%wound%, %poison%" ]
+          "attributes": [ "%wound%", "%poison%" ]
         }
       ]
     },

@@ -135,11 +135,11 @@ flutter:
     #         style: italic
     - family: Majalla
       fonts:
-        - asset: assets/fonts/majalla-bold.ttf
+        - asset: assets/fonts/majallab.ttf
+          weight: 400 #does nothing
     - family: Pirata
       fonts:
         - asset: assets/fonts/PirataOne-Gloomhaven.ttf
-  #         weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

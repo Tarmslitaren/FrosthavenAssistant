@@ -526,7 +526,7 @@
         [ 628, false, 3, "%move% + 1", "%attack% - 1", "^%range% + 0", "%fire%" ],
         [ 629, false, 24, "%move% + 0", "%attack% + 0", "^%range% + 0", "%fire%" ],
         [ 630, true, 46, "%attack% + 0", "^%range% + 0", "%fire%%use%", "!%aoe-circle%" ],
-        [ 631, false, 49, "%attack% + 0", "%aoe-line-3-with-black%", "%fire%%use%", "!^+1 %attack%", "!^%wound%" ],
+        [ 631, false, 49, "%attack% + 0", "%aoe-line-3-with-black%", "%fire%%use%", "!^+1 %attack%", "^%wound%" ],
         [ 632, false, 67, "%move% - 1", "%attack% + 1", "^%range% - 1", "%fire%" ],
         [ 633, false, 77, "%attack% + 0", "^Target all adjacent enemies", "%ice%%use%", "!^Flame Demon suffers 1 damage." ],
         [
@@ -534,14 +534,14 @@
           true,
           30,
           "%fire%%use%",
-          "!^All adjacent enemies suffer 2 damage.",
+          "!^All adjacent enemies","suffer 2 damage.",
           "%move% + 0",
           "%attack% - 2",
           "^%range% + 0",
           "^%wound%",
           "^%target% 2"
         ],
-        [ 635, false, 8, "%move% - 1", "*Create a 4 damage trap in an adjacent empty hex closest to an enemy", "%any%%use%", "!%fire%" ]
+        [ 635, false, 8, "%move% - 1", "*Create a 4 damage trap in an adjacent empty hex closest to an enemy", "%any%%use% %fire%" ]
       ]
     },
     {

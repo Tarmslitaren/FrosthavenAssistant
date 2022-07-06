@@ -77,8 +77,8 @@ class MonsterLevelModel {
 
 class MonsterStatsModel {
   MonsterStatsModel(this.health, this.move, this.attack, this.range, this.attributes, this.immunities, this.special1, this.special2);
-  final dynamic health; //or string
-  final int move;
+  final dynamic health;
+  final dynamic move;
   final dynamic attack;
   final int range;
   final List<String> attributes;

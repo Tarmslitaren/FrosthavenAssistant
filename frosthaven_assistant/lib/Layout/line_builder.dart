@@ -61,7 +61,7 @@ class LineBuilder {
     return height;
   }
 
-  static EdgeInsetsGeometry? _getMarginForToken(String iconToken, double height,
+  static EdgeInsetsGeometry _getMarginForToken(String iconToken, double height,
       bool mainLine, CrossAxisAlignment alignment) {
     double margin = 0.5;
     if (alignment != CrossAxisAlignment.center) {
@@ -89,7 +89,7 @@ class LineBuilder {
       return EdgeInsets.only(
           top: 0.19 * height); //since icons lager, need lager margin top
     }
-    return null;
+    return EdgeInsets.zero;
   }
 
   static List<Map<String, int>> _getStatTokens(Monster monster, bool elite) {
@@ -109,19 +109,36 @@ class LineBuilder {
       }
     }
     for (String item in data.attributes) {
-      if (item.substring(0, 1) == "%") {
+      if (item.substring(0, 1) == "%") { //expects token to be first in line. is this ok?
         //parse item and then parse number;
         for (int i = 1; i < item.length; i++) {
           if (item[i] == '%') {
             String token = item.substring(1, i);
             int number = 0;
-            if (i != item.length - 1) {
-              String nr = item.substring(i + 1, item.length);
-              number = int.parse(nr);
+            if (i != item.length - 1)
+            {
+              for (int j = i+2; j < item.length; j++){
+                if(item[j] == ' ' || j == item.length-1){
+                  //need to find end of nr and ignore the rest
+                  String nr = item.substring(i + 1, j+1);
+                  int? res = StatCalculator.calculateFormula(nr);
+                  if(res != null){
+                    number = res;
+                  }else {
+                    if(kDebugMode) {
+                      print("failed calculation for formula: " + nr +  "for token: "+ token);
+
+                    }
+                  }
+                  break;
+                }
+              }
+
             }
             var map = <String, int>{};
             map[token] = number;
             values.add(map);
+            break; //only one token added per line
           }
         }
       }
@@ -145,13 +162,22 @@ class LineBuilder {
     List<String> eTokens = [];
     int normalValue = 0;
     int eliteValue = 0;
+    bool skipCalculation = false; //in case uncalculable
     MonsterStatsModel? normal = monster.type.levels[monster.level.value].boss ??
         monster.type.levels[monster.level.value].normal;
     MonsterStatsModel? elite = monster.type.levels[monster.level.value].elite;
     if (lastToken == "attack") {
-      normalValue = StatCalculator.calculateFormula(normal!.attack);
+      int? calc = StatCalculator.calculateFormula(normal!.attack);
+      if(calc != null) {
+        normalValue = calc;
+      } else {
+        skipCalculation = true;
+      }
       if (elite != null) {
-        eliteValue = StatCalculator.calculateFormula(elite.attack);
+        calc = StatCalculator.calculateFormula(elite.attack);
+        if(calc != null) {
+          eliteValue = calc;
+        }
       }
 
       RegExp regEx =
@@ -182,9 +208,9 @@ class LineBuilder {
         }
       }
     } else if (lastToken == "move") {
-      normalValue = StatCalculator.calculateFormula(normal!.move);
+      normalValue = StatCalculator.calculateFormula(normal!.move)!;
       if (elite != null) {
-        eliteValue = eliteValue = StatCalculator.calculateFormula(elite.move);
+        eliteValue = eliteValue = StatCalculator.calculateFormula(elite.move)!;
       }
       //TODO: add jump if has innate jump
     }
@@ -196,23 +222,29 @@ class LineBuilder {
     } else if (lastToken == "retaliate") {
     } else if (lastToken == "jump") {
     } else if (lastToken == "heal") {}
-    int normalResult =
-        StatCalculator.calculateFormula(formula + "+" + normalValue.toString());
-    if (normalResult < 0) {
-      normalResult = 0; //needed for blood tumor: has 0 move and a -1 move card
-    }
-    String newStartOfLine =
-        line.substring(0, startIndex) + normalResult.toString();
-    for (var item in eTokens) {
-      newStartOfLine += "|" + item;
+    String normalResult = formula;
+    if (!skipCalculation) {
+      int res = StatCalculator.calculateFormula(formula + "+" + normalValue.toString())!;
+      if (res < 0) {
+        res = 0; //needed for blood tumor: has 0 move and a -1 move card
+      }
+      normalResult = res.toString();
     }
 
-    if (elite != null) {
+    String newStartOfLine =
+        line.substring(0, startIndex) + normalResult;
+    if (!skipCalculation) {
+      for (var item in tokens) {
+        newStartOfLine += "|" + item;
+      }
+    }
+
+    if (elite != null && !skipCalculation) {
       newStartOfLine += "/";
       retVal.add(newStartOfLine);
 
       int eliteResult = StatCalculator.calculateFormula(
-          formula + "+" + eliteValue.toString());
+          formula + "+" + eliteValue.toString())!;
       if (eliteResult < 0) {
         eliteResult = 0;
       }
@@ -310,7 +342,7 @@ class LineBuilder {
           //for a formula to work (oustside of plain C or L) it must either be modifying a token vslue or be 3+ chars long
           //might not be right. test.
           if (kDebugMode) {
-            print("formula:" + formula);
+            print("formula:$formula");
           }
 
           if (lastToken.isNotEmpty) {
@@ -331,7 +363,7 @@ class LineBuilder {
               return retVal;
             }
           } else {
-            int result = StatCalculator.calculateFormula(formula);
+            int result = StatCalculator.calculateFormula(formula)!;
             if (result < 0) {
               //just some nicety. probably never applies
               result = 0;
@@ -362,11 +394,11 @@ class LineBuilder {
     var smallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center ? 10 : 12) *
+        fontSize: (alignment == CrossAxisAlignment.center ? 11 : 12) *
             tempScale *
             scale,
         //sizes are larger on stat cards
-        height: 0.8,
+        height: 0.85,
         shadows: [shadow]);
     var midStyle = TextStyle(
         fontFamily: 'Majalla',
@@ -391,20 +423,20 @@ class LineBuilder {
         //maybe slightly bigger between chars space?
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: 14 * tempScale * scale,
+        fontSize: 15.7 * tempScale * scale,
         height: 0.8,
         shadows: [shadow]);
 
     var eliteSmallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: 9 * tempScale * scale,
+        fontSize: 11 * tempScale * scale,
         height: 0.8,
         shadows: [shadow]);
     var eliteMidStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: 12 * tempScale * scale,
+        fontSize: 12.7 * tempScale * scale,
         height: 0.9,
         shadows: [shadow]);
 
@@ -458,7 +490,6 @@ class LineBuilder {
           addText = false;
         }
         if (line[i] == '%') {
-          //TODO: handle monster attributes and calculations:
           //TODO: show / and elite values in yellow only if elites available and vice versa for normals
           //TODO: do for all conditions + jump, pierce, add target  etc.
 
@@ -478,9 +509,12 @@ class LineBuilder {
               WidgetSpan part = textPartList.removeLast() as WidgetSpan;
               Image lastImage = (part.child as Container).child as Image;
               textPartList.add(WidgetSpan(
-                  alignment: PlaceholderAlignment.top,
-                  style: TextStyle(fontSize: styleToUse.fontSize! * 0.8),
-                  child: Stack(
+                  //alignment: PlaceholderAlignment.top,
+                  style: styleToUse, //this is wrong here
+                  child: Container(
+                    color: Colors.amber,
+                    //margin: margin,
+                    child: Stack(
                     children: [
                       lastImage,
                       Image(
@@ -490,9 +524,9 @@ class LineBuilder {
                             AssetImage("assets/images/abilities/$iconGfx.png"),
                       )
                     ],
-                  )));
-              textPartList.add(TextSpan(text: ": ", style: styleToUse));
-              //TODO: examine if removing the Container margins is the right thing to do for this case
+                  ))));
+              textPartList.add(TextSpan(
+                  text: ": ", style: styleToUse));
             } else {
               double height = _getIconHeight(iconToken, styleToUse.fontSize!);
               if (addText) {
@@ -501,25 +535,43 @@ class LineBuilder {
                     .add(TextSpan(text: iconTokenText, style: styleToUse));
               }
               bool mainLine = styleToUse == normalStyle;
-              EdgeInsetsGeometry? margin =
+              EdgeInsetsGeometry margin =
                   _getMarginForToken(iconToken, height, mainLine, alignment);
               if (iconToken == "move" && monster.type.flying) {
                 iconGfx = "flying";
               }
               Widget child = Image(
-                height: height,
+                //fit: BoxFit.fill,
+                //could do funk stuff with the color value for cool effects maybe?
+                height: height, //TODO: this causes lines to have variable height
                 //alignment: Alignment.topCenter,
                 image: AssetImage("assets/images/abilities/$iconGfx.png"),
               );
-              if (margin != null) {
-                child = Container(
-                  margin: margin,
-                  child: child,
-                );
+              child = Container(
+                ///height: height,// * 0.8,
+                //color: Colors.amber,
+                margin: margin,
+                child: child,
+              );
+
+              //TODO: make a solid solution. not a house of cards.
+              double wtf = 0.8;
+              if(height == styleToUse.fontSize! * 1.2) { //is element height
+                wtf = 1.8; //wtf for elements alignment
               }
+              //wtf = 1;
+
               textPartList.add(WidgetSpan(
-                  alignment: PlaceholderAlignment.top,
-                  style: TextStyle(fontSize: styleToUse.fontSize! * 0.8),
+                  style: TextStyle(
+                      //height: styleToUse.height!*5,
+                    //backgroundColor: Colors.blueGrey,
+                     // textBaseline: TextBaseline.ideographic,
+                   // decoration: TextDecoration.lineThrough,
+                    //overflow: TextOverflow.visible,
+                   // decorationColor: Colors.blueGrey,
+                    //leadingDistribution: TextLeadingDistribution.even,
+
+                      fontSize: styleToUse.fontSize! * wtf),
                   //styleToUse, //don't ask (probably because height is 0.8
                   child: child));
             }
@@ -565,6 +617,9 @@ class LineBuilder {
         textAlign = TextAlign.end;
       }
       var text = Text.rich(
+        textHeightBehavior: const TextHeightBehavior(
+          leadingDistribution: TextLeadingDistribution.even
+        ),
         textAlign: textAlign,
         TextSpan(
           children: textPartList,
@@ -574,6 +629,9 @@ class LineBuilder {
         lines.removeLast();
         textPartList.insertAll(0, lastLineTextPartList);
         text = Text.rich(
+          textHeightBehavior: const TextHeightBehavior(
+              leadingDistribution: TextLeadingDistribution.even
+          ),
           textAlign: textAlign,
           TextSpan(
             children: textPartList,
