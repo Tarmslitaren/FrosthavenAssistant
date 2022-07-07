@@ -26,13 +26,15 @@ class CharacterWidget extends StatefulWidget {
 
 class _CharacterWidgetState extends State<CharacterWidget> {
   final GameState _gameState = getIt<GameState>();
-  late bool isCharacter;
+  late bool isCharacter = true;
   final _initTextFieldController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _initTextFieldController.clear();
+    if (widget.initPreset != null) {
+      _initTextFieldController.text = widget.initPreset.toString();
+    }
     _initTextFieldController.addListener(() {
       for (var item in _gameState.currentList) {
         if (item is Character) {
@@ -50,6 +52,9 @@ class _CharacterWidgetState extends State<CharacterWidget> {
     if(widget.character.characterClass.name == "Objective" || widget.character.characterClass.name == "Escort") {
       isCharacter = false;
       widget.character.characterState.initiative = widget.initPreset!;
+    }
+    if (isCharacter) {
+      _initTextFieldController.clear();
     }
   }
 
@@ -163,9 +168,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                   ValueListenableBuilder<int>(
                                       valueListenable: _gameState.commandIndex,
                                       builder: (context, value, child) {
-                                        //_initTextFieldController.clear();
-                                        //if (_characterState.initiative == 0) {
-                                        if (_gameState
+                                        if (isCharacter && _gameState
                                             .commandIndex.value >= 0 &&_gameState.commands[_gameState
                                             .commandIndex
                                             .value] is DrawCommand) {
@@ -175,7 +178,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                                 RoundState.chooseInitiative &&
                                             widget.character.characterState.health
                                                     .value >
-                                                0 && widget.initPreset != null) {
+                                                0) {
                                           return Container(
                                             margin: EdgeInsets.only(
                                                 left: 10 * scale),
@@ -186,8 +189,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                                 //scrollPadding: EdgeInsets.zero,
                                                 onTap: () => {
                                                       //clear on enter focus
-                                                      _initTextFieldController
-                                                          .clear()
+                                                      _initTextFieldController.clear()
                                                     },
                                                 onChanged: (String str) {
                                                   //close soft keyboard on 2 chars entered
@@ -241,20 +243,17 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                                     TextInputType.number),
                                           );
                                         } else {
-                                          _initTextFieldController.clear();
+                                          if(isCharacter) {
+                                            _initTextFieldController.clear();
+                                          }
                                           return Container(
                                               height: 33 * scale,
                                               width: 25 * scale,
                                               margin: EdgeInsets.only(
                                                   left: 10 * scale),
                                               child: Text(
-                                                widget.character.characterState.health
-                                                                .value >
-                                                            0 &&
-                                                    widget.character
-                                                                .characterState
-                                                                .initiative >
-                                                            0
+                                                widget.character.characterState.health.value > 0 &&
+                                                    widget.character.characterState.initiative > 0
                                                     ? widget.character.characterState
                                                         .initiative
                                                         .toString()
