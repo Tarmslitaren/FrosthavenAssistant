@@ -4305,6 +4305,56 @@
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         }
       ]
+    },
+    "Rending Drake #60 Special": {
+      "deck": "Rending Drake",
+      "gfx": "Rending Drake",
+      "display": "Rending Drake",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 8, "move": 3, "attack": 3 },
+          "elite": { "health": 11, "move": 4, "attack": 4 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 9, "move": 3, "attack": 3, "attributes": [ "%wound%" ]},
+          "elite": { "health": 11, "move": 4, "attack": 5, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 11, "move": 4, "attack": 3, "attributes": [ "%wound%" ]},
+          "elite": { "health": 12, "move": 5, "attack": 5, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 11, "move": 4, "attack": 4, "attributes": [ "%wound%" ]},
+          "elite": { "health": 15, "move": 5, "attack": 6, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 12, "move": 4, "attack": 4, "attributes": [ "%wound%" ]},
+          "elite": { "health": 17, "move": 6, "attack": 6, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 15, "move": 4, "attack": 5, "attributes": [ "%wound%" ]},
+          "elite": { "health": 21, "move": 6, "attack": 6, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 17, "move": 5, "attack": 5, "attributes": [ "%wound%" ]},
+          "elite": { "health": 23, "move": 6, "attack": 7, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 21, "move": 5, "attack": 5, "attributes": [ "%wound%" ]
+          },
+          "elite": { "health": 27, "move": 6, "attack": 7, "attributes": [ "%wound%" ]}
+        }
+      ]
     }
   },
   "scenarios": {
@@ -4619,13 +4669,7 @@
       "monsters": [ "Cave Bear", "Giant Viper", "Hound", "Vermling Scout", "Vermling Shaman" ]
     },
     "#60 Through the Fire and the Flames": {
-      "monsters": [ "Flame Demon", "Rending Drake", "Savvas Lavaflow", "Spitting Drake" ],
-      "special": [
-        {
-          "type": "HealthAdjust",
-          "name": "Rending Drake",
-          "health": "H+(H/2)"
-        }]
+      "monsters": [ "Flame Demon", "Rending Drake #60 Special", "Savvas Lavaflow", "Spitting Drake" ]
     },
     "#61 Archaic Preservation": {
       "monsters": [ "Ancient Artillery", "Black Imp", "Lurker", "Rending Drake", "Stone Golem" ]
