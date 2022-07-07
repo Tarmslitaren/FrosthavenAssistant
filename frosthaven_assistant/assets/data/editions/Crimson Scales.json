@@ -4337,12 +4337,38 @@
     },
     "#10 Den of Monstrosity": {
       "monsters": [ "Black Imp", "Lurker" ],
-      "special": [ "Objective: Supply Crate 1", "2x(C+L+1)",
-        "Objective: Supply Crate 2", "2x(C+L+1)",
-        "Objective: Supply Crate 3", "2x(C+L+1)",
-        "Objective: Supply Crate 4", "2x(C+L+1)",
-        "Objective: Supply Crate 5", "2x(C+L+1)",
-        "Objective: Supply Crate 6", "2x(C+L+1)"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Supply Crate 1",
+          "health": "2x(C+L+1)"
+        },
+        {
+          "type": "Objective",
+          "name": "Supply Crate 2",
+          "health": "2x(C+L+1)"
+        },
+        {
+          "type": "Objective",
+          "name": "Supply Crate 3",
+          "health": "2x(C+L+1)"
+        },
+        {
+          "type": "Objective",
+          "name": "Supply Crate 4",
+          "health": "2x(C+L+1)"
+        },
+        {
+          "type": "Objective",
+          "name": "Supply Crate 5",
+          "health": "2x(C+L+1)"
+        },
+        {
+          "type": "Objective",
+          "name": "Supply Crate 6",
+          "health": "2x(C+L+1)"
+        }
+      ]
     },
     "#11 Voyage Abound": {
       "monsters": [ "Flame Demon", "Inox Archer", "Inox Guard", "Inox Shaman", "Night Demon" ]
@@ -4373,9 +4399,22 @@
     },
     "#20 Midnight Ritual": {
       "monsters": [ "The Cultist", "Deep Terror", "Living Spirit", "Living Bones" ],
-      "special": [ "Objective: Altar A", "3x(C+L)",
-        "Objective: Altar B", "3x(C+L)",
-        "Objective: Altar C", "3x(C+L)"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Altar A",
+          "health": "3x(C+L)"
+        },
+        {
+          "type": "Objective",
+          "name": "Altar B",
+          "health": "3x(C+L)"
+        },
+        {
+          "type": "Objective",
+          "name": "Altar C",
+          "health": "3x(C+L)"
+        }]
     },
     "#21 A Fiery Death": {
       "monsters": [ "Earth Demon", "Flame Demon" ]
@@ -4391,12 +4430,27 @@
     },
     "#25 Brightspark, Behold!": {
       "monsters": [ "Forest Imp", "Giant Viper", "Lurker", "Spitting Drake", "Sun Demon" ],
-      "special": [ "Escort: Brightspark", "C+(L*3)", "Init: 50"]
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Brightspark",
+          "health": "C+(Lx3)",
+          "init": 50
+        }]
     },
     "#26 Thermal Stone Peak": {
       "monsters": [ "Frozen Cadaver", "Hail Demon", "Harrower Icecrawlers" ],
-      "special": [ "Objective: Cold thermal stone 1", "C+3",
-        "Objective: Cold thermal stone 2", "C+3"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Cold thermal stone 1",
+          "health": "C+3"
+        },
+        {
+          "type": "Objective",
+          "name": "Cold thermal stone 2",
+          "health": "C+3"
+        }]
     },
     "#27 Frostbite Cavern": {
       "monsters": [ "Frost Demon", "Stone Golem", "Wind Demon" ]
@@ -4421,22 +4475,54 @@
     },
     "#34 Great Oak Rescue": {
       "monsters": [ "Hound", "Inox Archer", "Inox Guard", "Inox Shaman" ],
-      "special": [ "Objective: Sacred Monk 1", "C+L+2",
-        "Objective: Sacred Monk 2", "C+L+2",
-        "Objective: Sacred Monk 3", "C+L+2",
-        "Objective: Sacred Monk 4", "C+L+2"]
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Sacred Monk 1",
+          "health": "C+L+2"
+        },
+        {
+          "type": "Escort",
+          "name": "Sacred Monk 2",
+          "health": "C+L+2"
+        },
+        {
+          "type": "Escort",
+          "name": "Sacred Monk 3",
+          "health": "C+L+2"
+        },
+        {
+          "type": "Escort",
+          "name": "Sacred Monk 4",
+          "health": "C+L+2"
+        }]
     },
     "#35 Prison Riot": {
       "monsters": [ "Bandit Archer", "Bandit Guard", "Night Demon", "Wind Demon" ],
-      "special": [ "Escort: Chainguard", "6+(3xL)", "Init: 50"]
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Chainguard",
+          "health": "6+(3xL)",
+          "init": 50
+        }]
     },
     "#36 Hunters Bounty": {
       "monsters": [ "Bandit Archer", "Bandit Guard", "Hound" ]
     },
     "#37 Burning Stones": {
       "monsters": [ "Flame Demon", "Frost Demon", "Night Demon", "Sun Demon", "Vermling Scout" ],
-      "special": [ "Objective: Radiant Stone", "L+C+2",
-        "Objective: Flaming Stone", "L+C+2"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Radiant Stone",
+          "health": "L+C+2"
+        },
+        {
+          "type": "Objective",
+          "name": "Flaming Stone",
+          "health": "L+C+2"
+        }]
     },
     "#38 Altars of Confusion": {
       "monsters": [ "Black Imp", "Living Spirit", "Night Demon", "Stone Golem" ]
@@ -4461,7 +4547,12 @@
     },
     "#45 Defend the Swamp": {
       "monsters": [ "Black Imp", "Land Leviathan", "Forest Imp" ],
-      "special": [ "Land Leviathan: +1 level" ]
+      "special": [
+        {
+          "type": "LevelAdjust",
+          "name": "Land Leviathan",
+          "level": 1
+        }]
     },
     "#46 Vermling Gardens": {
       "monsters": [ "Cave Bear", "Hound", "Vermling Scout", "Vermling Shaman" ]
@@ -4474,11 +4565,31 @@
     },
     "#49 Oak Invasion A": {
       "monsters": [ "City Archer", "City Guard", "Inox Archer", "Inox Bodyguard", "Inox Guard", "Inox Shaman" ],
-      "special": [ "City Guard: -1 level", "City Archer: -1 level"]
+      "special": [
+        {
+          "type": "LevelAdjust",
+          "name": "City Guard",
+          "level": -1
+        },
+        {
+          "type": "LevelAdjust",
+          "name": "City Guard",
+          "level": -1
+        }]
     },
     "#50 Oak Invasion B": {
       "monsters": [ "Captain of the Guard", "Cave Bear", "City Archer", "City Guard", "Inox Archer", "Inox Guard" ],
-      "special": [ "Inox Guard: -1 level", "Inox Archer: -1 level"]
+      "special": [
+        {
+          "type": "LevelAdjust",
+          "name": "Inox Guard",
+          "level": -1
+        },
+        {
+          "type": "LevelAdjust",
+          "name": "Inox Archer",
+          "level": -1
+        }]
     },
     "#51 Rodent Warehouse": {
       "monsters": [ "Flame Demon", "Sun Demon", "Vermling Scout", "Vermling Shaman" ]
@@ -4509,14 +4620,25 @@
     },
     "#60 Through the Fire and the Flames": {
       "monsters": [ "Flame Demon", "Rending Drake", "Savvas Lavaflow", "Spitting Drake" ],
-      "special": [ "Rending Drake health: H+(H/2). Too bad these specials are only for show and don't do anything"]
+      "special": [
+        {
+          "type": "HealthAdjust",
+          "name": "Rending Drake",
+          "health": "H+(H/2)"
+        }]
     },
     "#61 Archaic Preservation": {
       "monsters": [ "Ancient Artillery", "Black Imp", "Lurker", "Rending Drake", "Stone Golem" ]
     },
     "#62 Hallow Redemption": {
       "monsters": [ "Aesther Ashblade", "Cave Bear", "Forest Imp", "Vermling Shaman" ],
-      "special": [ "Aesther Ashblade: -1 level" ]
+
+      "special": [
+        {
+          "type": "LevelAdjust",
+          "name": "Aesther Ashblade",
+          "level": -1
+        }]
     },
     "#63 A Cornered Viper": {
       "monsters": [ "Cave Bear", "Giant Viper", "Inox Archer", "Living Corpse", "Living Spirit", "Stone Golem" ]
@@ -4526,8 +4648,19 @@
     },
     "#65 Beyond the Grave": {
       "monsters": [ "Vermling Shaman" ],
-      "special": [ "Objective: Angry Spirit 1", "6", "init: 50",
-        "Objective: Angry Spirit 2", "6", "init: 50" ]
+      "special": [
+        {
+          "type": "Ecort",
+          "name": "Angry Spirit 1",
+          "init": 25,
+          "health": "6"
+        },
+        {
+          "type": "Ecort",
+          "name": "Angry Spirit 2",
+          "init": 25,
+          "health": "6"
+        }]
     },
     "#66 Otherworldly Strangers": {
       "monsters": [ "City Archer", "City Guard", "Earth Demon", "Harrower Infester", "Night Demon", "Sun Demon" ]
@@ -4542,8 +4675,19 @@
     "#AA3 Solo: Hive Guardian": {
       "monsters": [ "Flame Demon", "Frost Demon", "Wind Demon", "Earth Demon", "Night Demon", "Sun Demon" ],
       "special": [
-        "Escort: Soul Leech Egg 1", "3+L", "Init: 25",
-        "Escort: Soul Leech Egg 2", "3+L", "Init: 25"]
+        {
+          "type": "Ecort",
+          "name": "Soul Leech Egg 1",
+          "init": 25,
+          "health": "3+L"
+        },
+        {
+          "type": "Ecort",
+          "name": "Soul Leech Egg 2",
+          "init": 25,
+          "health": "3+L"
+        }
+      ]
     },
 
     "#QA1 Capstone Test": {
@@ -4574,7 +4718,12 @@
     "#RM6 Solo: The Fall of Shadow’s Respite": {
       "monsters": [ "Gnashing Drake", "Spitting Drake", "Rending Drake", "Vermling Scout (ally)", "Vermling Shaman (ally)" ],
       "special": [
-        "Escort: The Chosen", "6+L", "Init: 99"]
+        {
+          "type": "Ecort",
+          "name": "The Chosen",
+          "init": 99,
+          "health": "6+L"
+        }]
     },
     "#RM7 Insatiable": {
       "monsters": [ "Hound", "Ruinmaw", "Vermling Shaman", "Vermling Scout", "Giant Viper" ]
@@ -4592,12 +4741,26 @@
     },
     "#27C Scenario 26": {
       "monsters": [],
-      "special": [ "Objective: Hot thermal stone 1", "C+3",
-        "Objective: Hot thermal stone 2", "C+3"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Hot thermal stone 1",
+          "health": "C+3"
+        },
+        {
+          "type": "Objective",
+          "name": "Hot thermal stone 2",
+          "health": "C+3"
+        }]
     },
     "#28A Scenario 26": {
       "monsters": [],
-      "special": [ "Objective: Icy Flame thermal stone", "C+6"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Icy Flame thermal stone",
+          "health": "C+6"
+        }]
     },
 
     "#29A Scenario 27": {
@@ -4605,7 +4768,12 @@
     },
     "#30B Scenario 28": {
       "monsters": [],
-      "special": [ "Objective: Fountain of Bones", "Cx(L+8)"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Fountain of Bones",
+          "health": "Cx(L+8)"
+        }]
     },
     "#32A Scenario 30": {
       "monsters": [ "Shadow Demon" ]
@@ -4618,18 +4786,45 @@
     },
     "#36B Scenario 34": {
       "monsters": [],
-      "special": [ "Objective: Holy Monk 1", "C+L+2",
-        "Objective: Holy Monk 2", "C+L+2",
-        "Objective: Holy Monk 3", "C+L+2"]
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Holy Monk 1",
+          "health": "C+L+2"
+        },
+        {
+          "type": "Escort",
+          "name": "Holy Monk 2",
+          "health": "C+L+2"
+        },
+        {
+          "type": "Escort",
+          "name": "Holy Monk 3",
+          "health": "C+L+2"
+        }]
     },
     "#37C Scenario 34": {
       "monsters": [],
-      "special": [ "Objective: Revered Monk 1", "C+L+2",
-        "Objective: Revered Monk 2", "C+L+2"]
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Revered Monk 1",
+          "health": "C+L+2"
+        },
+        {
+          "type": "Escort",
+          "name": "Revered Monk 2",
+          "health": "C+L+2"
+        }]
     },
     "#38A Scenario 34": {
       "monsters": [],
-      "special": [ "Objective: Ordained Monk", "C+L+2"]
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Ordained Monk",
+          "health": "C+L+2"
+        }]
     },
     "#40A Scenario 36": {
       "monsters": [ "Terrible Two Archer" ]
@@ -4639,15 +4834,30 @@
     },
     "#42B Scenario 38": {
       "monsters": [],
-      "special": [ "Objective: Altar of Mystification", "Cx(L+3)"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Altar of Mystification",
+          "health": "Cx(L+3)"
+        }]
     },
     "#43A Scenario 38": {
       "monsters": [],
-      "special": [ "Objective: Altar of Disorientation", "Cx(L+4)"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Altar of Disorientation",
+          "health": "Cx(L+4)"
+        }]
     },
     "#43B Scenario 38": {
       "monsters": [],
-      "special": [ "Objective: Altar of Perplexity", "Cx(L+3)"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Altar of Perplexity",
+          "health": "Cx(L+3)"
+        }]
     },
 
     "#44C Scenario 40": {
@@ -4655,12 +4865,38 @@
     },
     "#46A Scenario 41": {
       "monsters": [ "Rogue Hollowpact" ],
-      "special": [ "Objective: Void Pit 1", "C+L",
-        "Objective: Void Pit 2", "C+L",
-        "Objective: Void Pit 3", "C+L",
-        "Objective: Void Pit 4", "C+L",
-        "Objective: Void Pit 5", "C+L",
-        "Objective: Void Pit 6", "C+L"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Void Pit 1",
+          "health": "C+L"
+        },
+        {
+          "type": "Objective",
+          "name": "Void Pit 2",
+          "health": "C+L"
+        },
+        {
+          "type": "Objective",
+          "name": "Void Pit 3",
+          "health": "C+L"
+        },
+        {
+          "type": "Objective",
+          "name": "Void Pit 4",
+          "health": "C+L"
+        },
+        {
+          "type": "Objective",
+          "name": "Void Pit 5",
+          "health": "C+L"
+        },
+        {
+          "type": "Objective",
+          "name": "Void Pit 6",
+          "health": "C+L"
+        }
+      ]
     },
     "#45D Scenario 42": {
       "monsters": [ "Goring Grizzly" ]
@@ -4673,7 +4909,12 @@
     },
     "#52C Scenario 46": {
       "monsters": [],
-      "special": [ "Objective: Tree of Death", "Cx(L+5)"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Tree of Death",
+          "health": "Cx(L+5)"
+        }]
     },
     "#60A Scenario 53": {
       "monsters": [ "Morphling" ]
@@ -4692,17 +4933,39 @@
     },
     "#73C Scenario 65": {
       "monsters": [],
-      "special": [ "Objective: Vile Spirit 1", "4", "init: 50",
-        "Objective: Vile Spirit 2", "4", "init: 50" ]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Vile Spirit 1",
+          "health": 4,
+          "init": 50
+        },
+        {
+          "type": "Objective",
+          "name": "Vile Spirit 2",
+          "health": 4,
+          "init": 50
+        }]
     },
     "#73D Scenario 65": {
       "monsters": [],
-      "special": [ "Objective: Haunted Ghoul Spirit 1", "10", "init: 50"]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Haunted Ghoul Spirit 1",
+          "health": 10,
+          "init": 50
+        }]
     },
 
     "#AA1 The Gilded Condescent": {
       "monsters": [ "The Gilded One" ],
-      "special": [ "The Gilded One: +1 level" ]
+      "special": [
+        {
+          "type": "LevelAdjust",
+          "name": "The Gilded One",
+          "level": 1
+        }]
     },
     "#AA2 The Banishment": {
       "monsters": [ "The Echo" ]
@@ -4723,8 +4986,17 @@
     "#QA5 Cooling Chamber": {
       "monsters": [],
       "special": [
-        "Objective: Stalagmite 1", "C+L",
-        "Objective: Stalagmite 2", "C+L"]
+        {
+          "type": "Objective",
+          "name": "Stalagmite 1",
+          "health": "C+L"
+        },
+        {
+          "type": "Objective",
+          "name": "Stalagmite 2",
+          "health": "C+L"
+        }
+      ]
     },
     "#QA2 Mechanical Menace": {
       "monsters": [ "Clockwork Devastator" ]
@@ -4742,9 +5014,24 @@
     "#RM3 Wrong Turn": {
       "monsters": [],
       "special": [
-        "Escort: Vermling 1", "C+L", "Init: 35",
-        "Escort: Vermling 2", "C+L", "Init: 35",
-        "Escort: Vermling 3", "C+L", "Init: 35"
+        {
+          "type": "Escort",
+          "name": "Vermling 1",
+          "health": "C+L",
+          "init": 35
+        },
+        {
+          "type": "Escort",
+          "name": "Vermling 2",
+          "health": "C+L",
+          "init": 35
+        },
+        {
+          "type": "Escort",
+          "name": "Vermling 3",
+          "health": "C+L",
+          "init": 35
+        }
       ]
     },
     "#RM4 The Shadow Falls": {

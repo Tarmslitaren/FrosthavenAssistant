@@ -49,7 +49,7 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                           "assets/images/class-icons/${currentCharacters[index].id}.png"),
                     ),
                     iconColor: currentCharacters[index].characterClass.color,
-                    title: Text(currentCharacters[index].id,
+                    title: Text(currentCharacters[index].characterState.display,
                         style: TextStyle(fontSize: 18)),
                     trailing: Text("(${currentCharacters[index].characterClass.edition})",
                         style: const TextStyle(

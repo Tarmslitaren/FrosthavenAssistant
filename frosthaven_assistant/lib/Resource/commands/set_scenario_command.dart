@@ -23,7 +23,9 @@ class SetScenarioCommand extends Command {
       for (var item in _gameState.currentList) {
         if (item is Character) {
           //newList.add(item);
-          item.characterState.initiative = 0;
+          if (item.id != "Objective" && item.id != "Escort") {
+            item.characterState.initiative = 0;
+          }
           item.characterState.health.value =
           item.characterClass.healthByLevel[item.characterState.level.value -
               1];

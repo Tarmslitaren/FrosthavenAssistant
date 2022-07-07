@@ -1040,11 +1040,23 @@
     },
     "#103 Where It Is Needed": {
       "monsters": [],
-      "special": [ "Escort: Caravan", "2x(C+L)+3" ]
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Caravan",
+          "health": "2x(C+L)+3",
+          "note": "Escort: Caravan 2x(C+L)+3"
+        }]
     },
     "#104 A Gaping Wound": {
       "monsters": [ "Harrower Infester", "Lurker", "Spitting Drake" ],
-      "special": [ "Escort: Hail", "6+2xL" ]
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Hail",
+          "health": "6+2xL",
+          "note": "Escort: Hail 6+2xL"
+        } ]
     },
     "#105 Monstrosities of a Cult": {
       "monsters": [ "Bandit Guard", "Valrath Tracker" ]
@@ -1063,33 +1075,69 @@
     },
     "#110 A Circular Solution": {
       "monsters": [ "City Guard", "Earth Demon", "Flame Demon", "Savvas Lavaflow", "Valrath Tracker", "Vermling Shaman" ],
-      "special": [ "Valrath Tracker: %target% C, %pierce% 10, Vermling Shaman: CxH/2, City Guard: CxH/2, Savvas Lavaflow: CxH/2" ]
+      "special": [
+        {
+          "type": "Note",
+          "note": "Valrath Tracker: %target% C, %pierce% 10, Vermling Shaman: CxH/2, City Guard: CxH/2, Savvas Lavaflow: CxH/2"
+        }]
     },
     "#111 The Shackles Loosen": {
       "monsters": [ "Aesther Ashblade", "Aesther Scout", "Black Imp", "Night Demon" ],
-      "special": [ "Aesther Ashblade: HxC" ]
+      "special": [
+        {
+          "type": "HealthAdjust",
+          "name": "Aesther Ashblade",
+          "health": "HxC",
+          "note": "Aesther Ashblade: HxC - probably named"
+        }]
     },
     "#112 The Bottom of It": {
       "monsters": [ "Ancient Artillery", "Living Bones", "Stone Golem" ]
     },
     "#113 The Lost Thread": {
       "monsters": [ "Stone Golem" ],
-      "special": [ "Escort: Naaret", "4+2xL" ]
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Naaret",
+          "health": "4+2xL",
+          "init": 99,
+          "note": "\"Escort: Naaret\", \"4+2xL\""
+        }]
     },
     "#114 Ink Not Yet Dry": {
       "monsters": [ "Aesther Ashblade", "Aesther Scout", "Wind Demon" ],
-      "special": [ "Escort: Hail", "4+2xL" ]
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Hail",
+          "health": "4+2xL",
+          "init": 99,
+          "note": "\"Escort: Hail\", \"4+2xL\""
+        }]
     },
     "#115 Future Uncertain": {
       "monsters": [ "Aesther Ashblade", "Aesther Scout", "Black Imp", "Valrath Savage", "Valrath Tracker", "Manifestation of Corruption" ],
-      "special": [ "Manifestation of Corruption: Manual Deck" ]
+      "special": [
+        {
+          "type": "Note",
+          "note": "Manifestation of Corruption: Manual Deck"
+        }
+        ]
     }
 
   },
   "sections": {
     "#1 Volcanic Wasteland": {
       "monsters": [ "Flame Demon" ],
-      "special": [ "Objective: Altar of Wildfire", "C+L+1" ]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Altar of Wildfire",
+          "health": "C+L+1",
+          "init": 99,
+          "note": "Objective: Altar of Wildfire, C+L+1 "
+        } ]
     },
     "#4 Barge Ablaze": {
       "monsters": [ "Bandit Archer", "Bandit Guard", "Spitting Drake" ]
@@ -1120,7 +1168,15 @@
     },
     "#24 Withered Grove": {
       "monsters": [ "Earth Demon" ],
-      "special": [ "Objective: Altar of Rot", "Cx2+L+4" ]
+
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Altar of Rot",
+          "health": "Cx2+L+4",
+          "init": 99,
+          "note": "Objective: Altar of Rot Cx2+L+4"
+        }]
     },
     "#26 Secret Library": {
       "monsters": [ "Ancient Artillery" ]
@@ -1156,7 +1212,15 @@
     },
     "#41 A Sphere of Nightmares": {
       "monsters": [ "Living Spirit", "Night Demon" ],
-      "special": [ "Objective: Altar", "20+L+2xC" ]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Altar",
+          "health": "20+L+2xC",
+          "init": 99,
+          "note": "Objective: Altar 20+L+2xC"
+        }
+         ]
     },
     "#42 Collapsed Atrium": {
       "monsters": [ "Living Spirit" ]
@@ -1202,7 +1266,14 @@
     },
     "#93 Rays of Sunlight": {
       "monsters": [ "Living Spirit", "Night Demon" ],
-      "special": [ "Objective: Altar", "5+L+2xC" ]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Altar",
+          "health": "5+L+2xC",
+          "init": 99,
+          "note": "Objective: Altar 5+L+2xC"
+        }]
     },
     "#94 Seal of Reanimation": {
       "monsters": [ "Living Corpse", "Living Spirit" ]

@@ -2345,6 +2345,38 @@
         }
       ]
     },
+    "Arcane Golem": {
+      "gfx": "Stone Golem",
+      "deck": "Stone Golem",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0, "health": "10xC", "move": 2, "attack": 4, "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 1, "health": "11xC", "move": 2, "attack": 4, "attributes": [ "%shield% 2" ]
+        },
+        {
+          "level": 2, "health": "14xC", "move": 2, "attack": 5, "attributes": [ "%shield% 2" ]
+        },
+        {
+          "level": 3, "health": "15xC", "move": 2, "attack": 5, "attributes": [ "%shield% 3" ]
+        },
+        {
+          "level": 4, "health": "17xC", "move": 2, "attack": 6, "attributes": [ "%shield% 3" ]
+        },
+        {
+          "level": 5, "health": "19xC", "move": 3, "attack": 6, "attributes": [ "%shield% 3" ]
+        },
+        {
+          "level": 6, "health": "20xC", "move": 3, "attack": 7, "attributes": [ "%shield% 3" ]
+        },
+        {
+          "level": 7, "health": "21xC", "move": 3, "attack": 7, "attributes": [ "%shield% 4" ]
+        }
+      ]
+    },
     "Sun Demon": {
       "deck": "Sun Demon",
       "count": 6,
@@ -3708,7 +3740,6 @@
     }
   },
 
-  "startingNumber": 1,
   "scenarios": {
       "#1 Black Barrow": {
         "monsters": [ "Bandit Guard", "Bandit Archer", "Living Bones" ]
@@ -3766,7 +3797,14 @@
       },
       "#19 Forgotten Crypt": {
         "monsters": [ "Cultist", "Living Bones", "Living Spirit", "Living Corpse" ],
-        "special": [ "Escort: Hail" ]
+        "special": [
+          {
+            "type": "Escort",
+            "name": "Hail",
+            "health": "4+(2xL)",
+            "init": 99,
+            "note": "Escort: Hail"
+          } ]
       },
       "#20 Necromancer's Sanctum": {
         "monsters": [ "Living Bones", "Cultist", "Night Demon", "Living Corpse", "Jekserah" ]
@@ -3790,11 +3828,27 @@
         "monsters": [ "Living Corpse", "Ooze", "Night Demon", "Black Imp" ]
       },
       "#27 Ruinous Rift": {
-        "monsters": [ "Night Demon", "Wind Demon", "Frost Demon", "Sun Demon", "Earth Demon", "Flame Demon" ]
+        "monsters": [ "Night Demon", "Wind Demon", "Frost Demon", "Sun Demon", "Earth Demon", "Flame Demon" ],
+        "special": [
+          {
+            "type": "Escort",
+            "name": "Hail",
+            "health": "4+(2xL)",
+            "init": 99,
+            "note": "Escort: Hail"
+          }
+        ]
       },
       "#28 Outer Ritual Chamber": {
         "monsters": [ "Living Corpse", "Cultist", "Living Bones", "Night Demon", "Sun Demon" ],
-        "special": [ "Living Corpse: +2 levels" ]
+        "special": [
+          {
+            "type": "LevelAdjust",
+            "name": "Living Corpse",
+            "level": 2,
+            "note":  "Living Corpse: +2 levels"
+          }
+        ]
       },
       "#29 Sanctuary of Gloom": {
         "monsters": [ "Living Bones", "Living Corpse", "Living Spirit", "Black Imp" ]
@@ -3883,11 +3937,25 @@
       },
       "#57 Investigation": {
         "monsters": [ "City Guard", "City Archer", "Hound" ],
-        "special": [ "Harrower Infester: +1 level" ]
+        "special": [
+          {
+            "type": "LevelAdjust",
+            "name": "Harrower Infester",
+            "level": 1,
+            "note":  "Harrower Infester: +1 level"
+          }
+        ]
       },
       "#58 Bloody Shack": {
         "monsters": [ "Earth Demon", "Harrower Infester", "Black Imp", "City Guard" ],
-        "special": [ "City Guard: +1 level" ]
+        "special": [
+          {
+            "type": "LevelAdjust",
+            "name": "City Guard",
+            "level": 1,
+            "note": "City Guard: +1 level"
+          }
+        ]
       },
       "#59 Forgotten Grove": {
         "monsters": [ "Cave Bear", "Hound", "Forest Imp" ]
@@ -3914,8 +3982,15 @@
         "monsters": [ "Ooze", "Ancient Artillery", "Living Spirit", "Stone Golem" ]
       },
       "#67 Arcane Library": {
-        "monsters": [ "Forest Imp", "Cave Bear", "Stone Golem" ],
-        "special": [ "Elite Stone Golem: +1 level, HPxC" ]
+        "monsters": [ "Forest Imp", "Cave Bear", "Arcane Golem" ],
+        "special": [
+          {
+            "type": "LevelAdjust",
+            "name": "Arcane Golem",
+            "level": 1,
+            "note": "Elite Stone Golem: +1 level, HPxC"
+          }
+        ]
       },
       "#68 Toxic Moor": {
         "monsters": [ "Rending Drake", "Black Imp", "Giant Viper", "Living Corpse" ]

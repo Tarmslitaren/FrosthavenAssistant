@@ -29,6 +29,7 @@ class CharacterState extends Figure{
 
   CharacterState();
 
+  String display = "";
   int initiative = 0;
   final xp = ValueNotifier<int>(0);
   final chill = ValueNotifier<int>(0);
@@ -43,6 +44,7 @@ class CharacterState extends Figure{
         '"level": ${level.value}, '
         '"xp": ${xp.value}, '
         '"chill": ${chill.value}, '
+        '"display": "$display", '
         '"conditions": ${conditions.value.toString()} '
         '}';
   }
@@ -54,6 +56,7 @@ class CharacterState extends Figure{
     health.value = json["health"];
     level.value = json["level"];
     maxHealth.value = json["maxHealth"];
+    display = json['display'];
 
     List<dynamic> condis = json["conditions"];
 
@@ -76,7 +79,9 @@ class Character extends ListItemData{
   late final CharacterClass characterClass;
   //late ListItemState state = ListItemState.chooseInitiative;
   void nextRound(){
-    characterState.initiative = 0;
+    if (id != "Objective" && id != "Escort") {
+      characterState.initiative = 0;
+    }
   }
 
   @override
@@ -310,6 +315,7 @@ class GameState extends ActionHandler{
 
   initGame() async {
 
+    await fetchCampaignData("na");
     await fetchCampaignData("JotL");
     await fetchCampaignData("Gloomhaven");
     await fetchCampaignData("Forgotten Circles");

@@ -8,7 +8,7 @@ class StatCalculator {
     if (str is int) {
       return str;
     }
-    int C = GameMethods.getCurrentCharacters().length;
+    int C = GameMethods.getCurrentCharacterAmount();
     if (C == 0) {
       C = 1;
     }

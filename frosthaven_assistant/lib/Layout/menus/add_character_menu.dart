@@ -79,6 +79,9 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
   bool _characterAlreadyAdded(String newCharacter) {
     var characters = GameMethods.getCurrentCharacters();
     for (var character in characters) {
+      if (character.id == "Escort" || character.id == "Objective") {
+        return false;
+      }
       if (character.id == newCharacter){
         return true;
       }
@@ -141,11 +144,24 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                             //TODO: add level selection menu  (1-9) on top in this here menu.
                             if (!_characterAlreadyAdded(_foundCharacters[index].name)){
                               setState(() {
+
+                                String display = _foundCharacters[index].name;
+                                int count = 1;
+                                if(_foundCharacters[index].name == "Objective" || _foundCharacters[index].name == "Escort") {
+                                  //add a number to name if already exists
+                                  for (var item in _gameState.currentList) {
+                                    if (item.id == _foundCharacters[index].name ){
+                                      count++;
+                                    }
+                                  }
+                                  if (count > 1) {
+                                    display += " $count";
+                                  }
+                                }
                                 _gameState.action(AddCharacterCommand(
-                                    _foundCharacters[index].name, 1)); //
+                                    _foundCharacters[index].name, display, 1)); //
                               });
 
-                              //Navigator.pop(context);
                             }
                           },
                         ),

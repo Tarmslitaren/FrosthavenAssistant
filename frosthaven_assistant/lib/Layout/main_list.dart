@@ -33,8 +33,12 @@ class Item extends StatelessWidget {
     late final double height;
     if (data is Character) {
       Character character = data as Character;
+      int? initPreset;
+      if(character.id == "Escort" || character.id == "Objective") {
+        initPreset = character.characterState.initiative;
+      }
       child = CharacterWidget(
-          key: Key(character.id), characterClass: character.characterClass);
+          key: Key(character.id), character: character, initPreset: initPreset);
       height = 60 * scale; //TODO:can I get implicit height?
     } else if (data is Monster) {
       double listWidth = getMainListWidth(context);

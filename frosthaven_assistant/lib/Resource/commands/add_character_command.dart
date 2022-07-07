@@ -8,10 +8,11 @@ class AddCharacterCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final String _name;
   final int _level;
+  final String? _display;
   late Character character;
 
-  AddCharacterCommand(this._name, this._level) {
-    _createCharacter(_name, _level);
+  AddCharacterCommand(this._name, this._display, this._level) {
+    _createCharacter(_name,_display, _level);
   }
 
   @override
@@ -31,7 +32,7 @@ class AddCharacterCommand extends Command {
     _gameState.currentList.remove(character);
   }
 
-  void _createCharacter(String name, int level) {
+  void _createCharacter(String name, String? display, int level) {
 
     List<CharacterClass> characters = [];
     for (String key in _gameState.modelData.value.keys){
@@ -39,13 +40,19 @@ class AddCharacterCommand extends Command {
           _gameState.modelData.value[key]!.characters
       );
     }
-    for (CharacterClass characterClass
-    in characters) {
+    for (CharacterClass characterClass in characters) {
       if (characterClass.name == name) {
         var characterState = CharacterState();
         characterState.level.value = level;
         characterState.health.value = characterClass.healthByLevel[level - 1];
         characterState.maxHealth.value = characterState.health.value;
+        if (name == "Escort" || name == "Objective") {
+          characterState.initiative = 99;
+        }
+        characterState.display = name;
+        if (display != null) {
+          characterState.display = display;
+        }
         character = Character(characterState, characterClass);
       }
     }

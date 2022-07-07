@@ -281,6 +281,18 @@ class GameMethods {
     return characters;
   }
 
+  static int getCurrentCharacterAmount() {
+    int res = 0;
+    List<Character> characters = [];
+    for (ListItemData data in _gameState.currentList) {
+      if (data is Character)
+        if (data.id != "Escort" && data.id != "Objective"){
+         res++;
+      }
+    }
+    return res;
+  }
+
   static List<Monster> getCurrentMonsters() {
     List<Monster> monsters = [];
     for (ListItemData data in _gameState.currentList) {

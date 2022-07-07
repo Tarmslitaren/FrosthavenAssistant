@@ -6,7 +6,6 @@ import '../game_state.dart';
 class RemoveCharacterCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final List<Character> names;
-  final List<Character> _characters = [];
 
   RemoveCharacterCommand(this.names);
 
@@ -17,7 +16,7 @@ class RemoveCharacterCommand extends Command {
       if (item is Character) {
         bool remove = false;
         for (var name in names) {
-          if (item.id == name.id) {
+          if (item.characterState.display == name.characterState.display) {
             remove = true;
             break;
           }
