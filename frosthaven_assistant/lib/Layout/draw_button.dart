@@ -49,13 +49,15 @@ class _DrawButtonState extends State<DrawButton> {
     //has a turn counter
     //and a timer
     //2 states
-    return Stack(alignment: Alignment.centerLeft, children: [
+    return Stack(
+        alignment: Alignment.centerLeft, children: [
       ValueListenableBuilder<RoundState>(
         valueListenable: _gameState.roundState,
         builder: (context, value, child) {
           return
           Container(
             margin: EdgeInsets.zero,
+            height: 60,
             width: 60,
             child:
               TextButton(
@@ -78,6 +80,26 @@ class _DrawButtonState extends State<DrawButton> {
                   shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
                 ),
               )));
+        },
+      ),
+      ValueListenableBuilder<int>(
+        valueListenable: _gameState.round,
+        builder: (context, value, child) {
+          return
+            Positioned(
+              bottom: 2,
+                right: 5,
+               // width: 60,
+                child:
+                Text(
+                  _gameState.round.value.toString(),
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white,
+                    shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
+
+                  )
+                    ));
         },
       )
     ]);
