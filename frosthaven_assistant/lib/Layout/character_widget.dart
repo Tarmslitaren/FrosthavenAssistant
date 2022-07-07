@@ -51,7 +51,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
 
     if(widget.character.characterClass.name == "Objective" || widget.character.characterClass.name == "Escort") {
       isCharacter = false;
-      widget.character.characterState.initiative = widget.initPreset!;
+      //widget.character.characterState.initiative = widget.initPreset!;
     }
     if (isCharacter) {
       _initTextFieldController.clear();

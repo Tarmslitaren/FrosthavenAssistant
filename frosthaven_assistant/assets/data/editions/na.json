@@ -6,8 +6,8 @@
 			"color": "FFD54829",
 			"edition": "na",
 			"nonPlayer": true,
-			"note": "hitpoints depending on player amount:  6 + level x players",
-			"hitpoints": [6, 10, 14, 18, 22, 26, 30, 34, 38],
+			"note": "health depending on player amount:  6 + level x players",
+			"health": [6, 10, 14, 18, 22, 26, 30, 34, 38],
 			"hidden": false,
 			"summons": {}
 		},
@@ -16,7 +16,7 @@
 			"color": "FF39A205",
 			"edition": "na",
 			"nonPlayer": true,
-			"hitpoints": [6, 8, 10, 12, 14, 16, 18, 20, 22],
+			"health": [6, 8, 10, 12, 14, 16, 18, 20, 22],
 			"hidden": false,
 			"summons": {}
 		}

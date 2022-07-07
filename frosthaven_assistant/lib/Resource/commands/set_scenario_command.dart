@@ -88,12 +88,14 @@ class SetScenarioCommand extends Command {
         Character objective = GameMethods.createCharacter("Objective", item.name, _gameState.level.value)!;
         objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
         objective.characterState.health.value = objective.characterState.maxHealth.value;
+        objective.characterState.initiative = item.init;
         _gameState.currentList.add(objective);
       }
       if (item.type == "Escort") {
         Character objective = GameMethods.createCharacter("Escort", item.name, _gameState.level.value)!;
         objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
         objective.characterState.health.value = objective.characterState.maxHealth.value;
+        objective.characterState.initiative = item.init;
         _gameState.currentList.add(objective);
       }
     }

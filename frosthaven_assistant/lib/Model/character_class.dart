@@ -17,7 +17,7 @@ class CharacterClass {
     if(data.containsKey('hidden')) {
       hidden = data['hidden'] as bool;
     }
-    final healthByLevel = (data['hitpoints'] as List<dynamic>).cast<int>();
+    final healthByLevel = (data['health'] as List<dynamic>).cast<int>();
     var colorValue = data['color']; //this can be both string and signed int
     if(colorValue is int) {
       colorValue = colorValue.toString();

@@ -6,7 +6,7 @@
       "name": "Hatchet",
       "color": "FF7BBBD6",
       "edition": "Jaws of the Lion",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
       "summons": {}
     },
@@ -14,7 +14,7 @@
       "name": "Demolitionist",
       "color": "FFE5A26F",
       "edition": "Jaws of the Lion",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
       "summons": {}
     },
@@ -22,7 +22,7 @@
       "name": "Voidwarden",
       "color": "FFE8E9E9",
       "edition": "Jaws of the Lion",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
       "summons": {}
     },
@@ -30,7 +30,7 @@
       "name": "Red Guard",
       "color": "FFD8585D",
       "edition": "Jaws of the Lion",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
       "summons": {}
     }

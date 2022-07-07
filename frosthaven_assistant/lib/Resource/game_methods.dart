@@ -360,7 +360,7 @@ class GameMethods {
         characterState.health.value = characterClass.healthByLevel[level - 1];
         characterState.maxHealth.value = characterState.health.value;
         if (name == "Escort" || name == "Objective") {
-          characterState.initiative = 99;
+          //characterState.initiative = 99;
         }
         characterState.display = name;
         if (display != null) {

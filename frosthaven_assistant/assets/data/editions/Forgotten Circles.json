@@ -6,18 +6,18 @@
       "name": "Diviner",
       "color": "FFC8E3EA",
       "edition": "Forgotten Circles",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
       "summons": {
         "Ghost Falcon": {
           "level": 3,
-          "hitpoints": 4,
+          "health": 4,
           "move": 3,
           "attack": 2
         },
         "Twilight Archon": {
           "level": 9,
-          "hitpoints": 9,
+          "health": 9,
           "move": 3,
           "attack": 2
         }

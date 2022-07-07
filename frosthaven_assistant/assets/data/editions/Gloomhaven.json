@@ -5,7 +5,7 @@
       "name": "Brute",
       "color": "FF35ACD5",
       "edition": "Gloomhaven",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
       "summons": {}
     },
@@ -13,23 +13,23 @@
       "name": "Tinkerer",
       "color": "FFD1C3A2",
       "edition": "Gloomhaven",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
       "summons": {
         "Decoy": {
           "level": 1,
-          "hitpoints": 6,
+          "health": 6,
           "move": 2
         },
         "Battle Bot": {
           "level": 4,
-          "hitpoints": 6,
+          "health": 6,
           "move": 2,
           "attack": 2
         },
         "Kill Bot": {
           "level": 7,
-          "hitpoints": 6,
+          "health": 6,
           "move": 3,
           "attack": 3
         }
@@ -40,19 +40,19 @@
       "name": "Spellweaver",
       "color": "FFB28AC2",
       "edition": "Gloomhaven",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
       "summons": {
         "Mystic Ally": {
           "level": 1,
-          "hitpoints": 2,
+          "health": 2,
           "move": 2,
           "attack": 3,
           "range":  2
         },
         "Burning Avatar": {
           "level": 6,
-          "hitpoints": 2,
+          "health": 2,
           "move": 3,
           "attack": 2,
           "range": 3
@@ -63,7 +63,7 @@
       "name": "Scoundrel",
       "color": "FF9ECF5F",
       "edition": "Gloomhaven",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
       "summons": {}
     },
@@ -71,7 +71,7 @@
       "name": "Cragheart",
       "color": "FF828B3B",
       "edition": "Gloomhaven",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
       "summons": {}
     },
@@ -79,24 +79,24 @@
       "name": "Mindthief",
       "color": "FF6279A5",
       "edition": "Gloomhaven",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
       "summons": {
         "Rat Swarm": {
           "level": 1,
-          "hitpoints": 6,
+          "health": 6,
           "move": 1,
           "attack": 2
         },
         "Monstrous Rat": {
           "level": 2,
-          "hitpoints": 4,
+          "health": 4,
           "move": 3,
           "attack": 3
         },
         "Rat King": {
           "level": 9,
-          "hitpoints": 9,
+          "health": 9,
           "move": 2
         }
       }
@@ -106,7 +106,7 @@
       "name": "Sunkeeper",
       "color": "FFFCE434",
       "edition": "Gloomhaven",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "summons": {}
     },
@@ -114,7 +114,7 @@
       "name": "Quartermaster",
       "color": "FFAD9477",
       "edition": "Gloomhaven",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "summons": {}
     },
@@ -122,80 +122,80 @@
       "name": "Summoner",
       "color": "FFE570B3",
       "edition": "Gloomhaven",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "summons": {
         "Lava Golem": {
           "level": 1,
-          "hitpoints": 7,
+          "health": 7,
           "move": 2,
           "attack": 3
         },
         "Shadow wolf": {
           "level": 1,
-          "hitpoints": 3,
+          "health": 3,
           "move": 3,
           "attack": 2
         },
         "Iron Beast ": {
           "level": 1,
-          "hitpoints": 5,
+          "health": 5,
           "move": 2,
           "attack": 1
         },
         "Thorn Shooter": {
           "level": 1,
-          "hitpoints": 2,
+          "health": 2,
           "move": 1,
           "attack": 2,
           "range": 4
         },
         "Living Bomb": {
           "level": 1,
-          "hitpoints": 1,
+          "health": 1,
           "move": 3,
           "attack": 2
         },
         "Bat Swarm": {
           "level": 1,
-          "hitpoints": 4,
+          "health": 4,
           "move": 2,
           "attack": 2
         },
         "Slime Spirit": {
           "level": 3,
-          "hitpoints": 4,
+          "health": 4,
           "move": 3,
           "attack": 1
         },
         "Rock Colossus": {
           "level": 4,
-          "hitpoints": 7,
+          "health": 7,
           "move": 1,
           "attack": 3
         },
         "Healing Sprite": {
           "level": 5,
-          "hitpoints": 2,
+          "health": 2,
           "move": 2,
           "attack": 1,
           "range": 3
         },
         "Nail Sphere": {
           "level": 6,
-          "hitpoints": 4,
+          "health": 4,
           "move": 2
         },
         "Void Eater": {
           "level": 7,
-          "hitpoints": 5,
+          "health": 5,
           "move": 3,
           "attack": 2,
           "range": 2
         },
         "Black Unicorn": {
           "level": 9,
-          "hitpoints": 6,
+          "health": 6,
           "move": 4,
           "attack": 4
         }
@@ -205,7 +205,7 @@
       "name": "Nightshroud",
       "color": "FF7440D4",
       "edition": "Gloomhaven",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "summons": {}
     },
@@ -213,7 +213,7 @@
       "name": "Plagueherald",
       "color": "FF72E0BE",
       "edition": "Gloomhaven",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "summons": {}
     },
@@ -221,7 +221,7 @@
       "name": "Berserker",
       "color": "FFF07C4E",
       "edition": "Gloomhaven",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "summons": {}
     },
@@ -229,7 +229,7 @@
       "name": "Soothsinger",
       "color": "FFDB6E8D",
       "edition": "Gloomhaven",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "summons": {}
     },
@@ -237,36 +237,36 @@
       "name": "Doomstalker",
       "color": "FF5BC5DC",
       "edition": "Gloomhaven",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "summons": {
         "War Hawk": {
           "level": 1,
-          "hitpoints": 3,
+          "health": 3,
           "move": 3,
           "attack": 3
         },
         "Vicious Jackal": {
           "level": 1,
-          "hitpoints": 5,
+          "health": 5,
           "move": 2,
           "attack": 1
         },
         "Battle Boar": {
           "level": 1,
-          "hitpoints": 7,
+          "health": 7,
           "move": 3,
           "attack": 1
         },
         "Giant Toad": {
           "level": 6,
-          "hitpoints": 7,
+          "health": 7,
           "move": 1,
           "attack": 1
         },
         "Spitting Cobra": {
           "level": 9,
-          "hitpoints": 5,
+          "health": 5,
           "move": 3,
           "attack": 3,
           "range": 3
@@ -277,7 +277,7 @@
       "name": "Sawbones",
       "color": "FFD5CA9C",
       "edition": "Gloomhaven",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "summons": {}
     },
@@ -285,17 +285,17 @@
       "name": "Elementalist",
       "color": "FFDCDCDC",
       "edition": "Gloomhaven",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "summons": {
         "Doppelganger": {
           "level": 6,
-          "hitpoints": 10,
+          "health": 10,
           "move": 2
         },
         "Mana Sphere": {
           "level": 9,
-          "hitpoints": 3,
+          "health": 3,
           "move": 3,
           "attack": 2,
           "range": 3
@@ -307,45 +307,45 @@
       "name": "Beast Tyrant",
       "color": "FFB4765A",
       "edition": "Gloomhaven",
-      "hitpoints": [6, 7, 8, 9, 10, 11, 12, 13, 14],
+      "health": [6, 7, 8, 9, 10, 11, 12, 13, 14],
       "hidden": true,
       "summons": {
         "Green Adder": {
           "level": 1,
-          "hitpoints": 4,
+          "health": 4,
           "move": 2,
           "attack": 1
         },
         "Tattered Wolf": {
           "level": 1,
-          "hitpoints": 4,
+          "health": 4,
           "move": 3,
           "attack": 2
         },
         "Red Falcon": {
           "level": 1,
-          "hitpoints": 2,
+          "health": 2,
           "move": 4,
           "attack": 2
         },
         "Swamp Alligator": {
           "level": 3,
-          "hitpoints": 5,
+          "health": 5,
           "move": 2,
           "attack": 3
         },
         "Monolith": {
           "level": 5,
-          "hitpoints": 15
+          "health": 15
         },
         "Wind Totem": {
           "level": 7,
-          "hitpoints": 8,
+          "health": 8,
           "attack": 1
         },
         "Spirit Banner": {
           "level": 9,
-          "hitpoints": 8
+          "health": 8
         }
 
       }
@@ -355,34 +355,34 @@
       "name": "Bladeswarm",
       "color": "FFCB9070",
       "edition": "Gloomhaven",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "dontList": true,
       "summons": {
         "Soul Leeches": {
           "level": 1,
           "gfx": "SoulLeeches",
-          "hitpoints": 4,
+          "health": 4,
           "move": 3
         },
         "Creeping Beetles": {
           "level": 1,
           "gfx": "CreepingBeetles",
-          "hitpoints": 5,
+          "health": 5,
           "move": 2,
           "attack": 2
         },
         "Angry Wasps": {
           "level": 1,
           "gfx": "AngryWasps",
-          "hitpoints": 3,
+          "health": 3,
           "move": 4,
           "attack": 2
         },
         "Steel Scarabs": {
           "level": 1,
           "gfx": "SteelScarabs",
-          "hitpoints": 4,
+          "health": 4,
           "move": 2,
           "attack": 1
         },
@@ -390,7 +390,7 @@
           "level": 3,
           "gfx": "BloatMaggot",
           "standees": 3,
-          "hitpoints": 3,
+          "health": 3,
           "move": 3,
           "attack": 1
         },
@@ -398,20 +398,20 @@
           "level": 5,
           "gfx": "LightningMoth",
           "standees": 2,
-          "hitpoints": 3,
+          "health": 3,
           "move": 3
         },
         "Rage Hornets": {
           "level": 7,
           "gfx": "RageHornets",
-          "hitpoints": 5,
+          "health": 5,
           "move": 3,
           "attack": 3
         },
         "Rust Vermin": {
           "level": 1,
           "gfx": "RustVermin",
-          "hitpoints": 7,
+          "health": 7,
           "move": 4,
           "attack": 3
         }

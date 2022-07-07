@@ -4,7 +4,7 @@
     {
       "name": "Drifter",
       "edition": "Frosthaven",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
       "color": "ffa28b7b",
       "summons": {}
@@ -12,7 +12,7 @@
     {
       "name": "Blinkblade",
       "edition": "Frosthaven",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
       "color": "ff009ec6",
       "summons": {}
@@ -20,54 +20,54 @@
     {
       "name": "Banner Spear",
       "edition": "Frosthaven",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
       "color": "FFE7B32E",
       "summons": {
         "Reinforcements": {
           "level": 1,
           "graphicsId": "Reinforcements",
-          "hitpoints": 1,
+          "health": 1,
           "move": 2
         },
         "Banner of Strength": {
           "level": 1,
           "graphicsId": "BannerOfStrength",
-          "hitpoints": 4
+          "health": 4
         },
         "Banner of Hope": {
           "level": 1,
           "graphicsId": "BannerOfHope",
-          "hitpoints": 4
+          "health": 4
         },
         "Torch Bearer": {
           "level": 1,
           "graphicsId": "TorchBearer",
-          "hitpoints": 5,
+          "health": 5,
           "move": 2,
           "attack":  1
         },
         "Banner of Courage": {
           "level": 3,
           "graphicsId": "BannerOfCourage",
-          "hitpoints": 7
+          "health": 7
         },
         "Trained Falcon": {
           "level": 4,
           "graphicsId": "TrainedFalcon",
-          "hitpoints": 1,
+          "health": 1,
           "move": 3,
           "attack":  2
         },
         "Banner of Valor": {
           "level": 6,
           "graphicsId": "BannerOfValor",
-          "hitpoints": 5
+          "health": 5
         },
         "Longbowman": {
           "level": 7,
           "graphicsId": "Longbowman",
-          "hitpoints": 3,
+          "health": 3,
           "move": 2,
           "attack":  2,
           "range": 4
@@ -75,28 +75,28 @@
         "Banner of Doom": {
           "level": 9,
           "graphicsId": "BannerOfDoom",
-          "hitpoints": 9
+          "health": 9
         }
       }
     },
     {
       "name": "Deathwalker",
       "edition": "Frosthaven",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
       "color": "ff707d91",
       "summons": {
         "Shadow Beast": {
           "level": 1,
           "graphicsId": "ShadowBeast",
-          "hitpoints": 1,
+          "health": 1,
           "move": 3,
           "attack":  3
         },
         "Shadow Horror": {
           "level": 6,
           "graphicsId": "ShadowHorror",
-          "hitpoints": 5,
+          "health": 5,
           "move": 3,
           "attack":  3
         }
@@ -105,7 +105,7 @@
     {
       "name": "Boneshaper",
       "edition": "Frosthaven",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
       "color": "ff279e55",
       "summons": {
@@ -113,14 +113,14 @@
           "level": 1,
           "graphicsId": "Shambling Skeleton",
           "standees": 6,
-          "hitpoints": 3,
+          "health": 3,
           "move": 2,
           "attack":  2
         },
         "Wraith": {
           "level": 1,
           "graphicsId": "Wraith",
-          "hitpoints": 1,
+          "health": 1,
           "move": 2,
           "attack":  1,
           "range": 3
@@ -128,21 +128,21 @@
         "Raging Corpse": {
           "level": 2,
           "graphicsId": "RagingCorpse",
-          "hitpoints": 6,
+          "health": 6,
           "move": 2,
           "attack":  3
         },
         "Stitched Atrocity": {
           "level": 5,
           "graphicsId": "StitchedAtrocity",
-          "hitpoints": 8,
+          "health": 8,
           "move": 2,
           "attack":  3
         },
         "Bone Horde": {
           "level": 8,
           "graphicsId": "BoneHorde",
-          "hitpoints": 7,
+          "health": 7,
           "move": 3,
 
           "attack":  3
@@ -150,7 +150,7 @@
         "Skeleton Sorcerer": {
           "level": 9,
           "graphicsId": "SkeletonSorcerer",
-          "hitpoints": 6,
+          "health": 6,
           "move": 3,
           "attack":  2,
           "range": 3
@@ -160,7 +160,7 @@
     {
       "name": "Geminate",
       "edition": "Frosthaven",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
       "color": "ffcf4471",
       "summons": {}

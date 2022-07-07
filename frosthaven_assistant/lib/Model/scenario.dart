@@ -3,8 +3,9 @@ class SpecialRule {
   final String name;
   final dynamic health;
   final int level;
+  final int init;
   final String note;
-  SpecialRule(this.type, this.name, this.health, this.level, this.note);
+  SpecialRule(this.type, this.name, this.health, this.level, this.init, this.note);
 
   factory SpecialRule.fromJson(Map<String, dynamic> data) {
     final String type = data['type']; //required
@@ -20,11 +21,15 @@ class SpecialRule {
     if(data.containsKey('level')) {
       level = data['level'];
     }
+    int init = 99;
+    if(data.containsKey('init')) {
+      init = data['init'];
+    }
     String note = "";
     if(data.containsKey('note')) {
       note = data['note'];
     }
-    return SpecialRule(type,name,health, level,note );
+    return SpecialRule(type,name,health, level, init, note);
   }
 }
 

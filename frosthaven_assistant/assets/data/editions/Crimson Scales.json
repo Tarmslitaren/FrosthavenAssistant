@@ -5,7 +5,7 @@
     {
       "name": "Hierophant",
       "edition": "Crimson Scales",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "color": "FFDDDE8B",
       "summons": {}
@@ -13,7 +13,7 @@
     {
       "name": "Starslinger",
       "edition": "Crimson Scales",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "color": "FF6D6FB3",
       "summons": {}
@@ -21,19 +21,19 @@
     {
       "name": "Fire Knight",
       "edition": "Crimson Scales",
-      "hitpoints": [9,10,12,14,16,17,19,21,23],
+      "health": [9,10,12,14,16,17,19,21,23],
       "hidden": true,
       "color": "FFCD2127",
       "summons": {
         "Spotted Hound": {
           "level": 1,
-          "hitpoints": 4,
+          "health": 4,
           "move": 2,
           "attack":  1
         },
         "Reigniting Drakefiend": {
           "level": 9,
-          "hitpoints": 1,
+          "health": 1,
           "move": 3,
           "attack":  2,
           "range":  2
@@ -43,18 +43,18 @@
     {
       "name": "Brightspark",
       "edition": "Crimson Scales",
-      "hitpoints": [8, 9, 11, 12, 14, 15, 17, 18, 20],
+      "health": [8, 9, 11, 12, 14, 15, 17, 18, 20],
       "hidden": true,
       "color": "FFCAAD2E",
       "summons": {
         "Metal Detector": {
           "level": 3,
-          "hitpoints": 6,
+          "health": 6,
           "move": 1
         },
         "Black Hole": {
           "level": 7,
-          "hitpoints": 4,
+          "health": 4,
           "range":  4
         }
       }
@@ -62,78 +62,78 @@
     {
       "name": "Chieftain",
       "edition": "Crimson Scales",
-      "hitpoints": [8,9,111,12,14,15,17,18,20],
+      "health": [8,9,111,12,14,15,17,18,20],
       "hidden": true,
       "color": "FF76C6C4",
       "summons": {
         "Scout Dog": {
           "level": 1,
-          "hitpoints": 4,
+          "health": 4,
           "move": 3,
           "attack":  1
         },
         "Fighting Bull": {
           "level": 1,
-          "hitpoints": 4,
+          "health": 4,
           "move": 2,
           "attack":  2
         },
         "Speedy Ostrich": {
           "level": 1,
-          "hitpoints": 4,
+          "health": 4,
           "move": 3,
           "attack":  1
         },
         "Giant Tortoise": {
           "level": 1,
-          "hitpoints": 6,
+          "health": 6,
           "move": 1,
           "attack":  1
         },
         "Cavalry Camel": {
           "level": 1,
-          "hitpoints": 5,
+          "health": 5,
           "move": 2,
           "attack":  1
         },
         "Pack Mule": {
           "level": 1,
-          "hitpoints": 4,
+          "health": 4,
           "move": 3
         },
         "Black Panther": {
           "level": 3,
-          "hitpoints": 5,
+          "health": 5,
           "move": 3,
           "attack":  1
         },
         "Lowland Gorilla": {
           "level": 5,
-          "hitpoints": 7,
+          "health": 7,
           "move": 3,
           "attack":  2
         },
         "Cottonmouth Snake": {
           "level": 6,
-          "hitpoints": 5,
+          "health": 5,
           "move": 4,
           "attack":  1
         },
         "Battle Rhinoceros": {
           "level": 7,
-          "hitpoints": 7,
+          "health": 7,
           "move": 2,
           "attack":  2
         },
         "War Elephant": {
           "level": 8,
-          "hitpoints": 8,
+          "health": 8,
           "move": 2,
           "attack":  3
         },
         "Sabretooth tiger": {
           "level": 9,
-          "hitpoints": 8,
+          "health": 8,
           "move": 3,
           "attack":  3
         }
@@ -142,108 +142,108 @@
     {
       "name": "Spirit Caller",
       "edition": "Crimson Scales",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "color": "FF63BD57",
       "summons": {
         "Blazing Fire": {
           "level": 1,
-          "hitpoints": 2
+          "health": 2
         },
         "Wall of Shadows": {
           "level": 1,
-          "hitpoints": 2
+          "health": 2
         },
         "Phantom Hound": {
           "level": 1,
-          "hitpoints": 1,
+          "health": 1,
           "move": 3,
           "attack":  2
         },
         "Wailing Banshee": {
           "level": 1,
-          "hitpoints": 2,
+          "health": 2,
           "move": 3,
           "attack":  2
         },
         "Skeletal Archer": {
           "level": 1,
-          "hitpoints": 2,
+          "health": 2,
           "move": 2,
           "attack":  1,
           "range":  2
         },
         "Ghost Carriage": {
           "level": 1,
-          "hitpoints": 2,
+          "health": 2,
           "move": 4
         },
         "Deatheater": {
           "level": 1,
-          "hitpoints": 2,
+          "health": 2,
           "move": 3,
           "attack":  1,
           "range":  3
         },
         "Leeching Phantasm": {
           "level": 1,
-          "hitpoints": 2,
+          "health": 2,
           "move": 2,
           "attack":  2
         },
         "Bat Cloud": {
           "level": 2,
-          "hitpoints": 2,
+          "health": 2,
           "move": 2,
           "attack":  1
         },
         "Mantle of Darkness": {
           "level": 2,
-          "hitpoints": 2,
+          "health": 2,
           "move": 1,
           "attack":  2
         },
         "Leprous Wraith": {
           "level": 3,
-          "hitpoints": 2,
+          "health": 2,
           "move": 1,
           "attack":  2
         },
         "Orb of Light": {
           "level": 4,
-          "hitpoints": 2,
+          "health": 2,
           "move": 3,
           "attack":  2
         },
         "Shifting Discs": {
           "level": 4,
-          "hitpoints": 2,
+          "health": 2,
           "move": 2
         },
         "Imbued Monolith": {
           "level": 5,
-          "hitpoints": 2
+          "health": 2
         },
         "Mimicking Sprite": {
           "level": 6,
-          "hitpoints": 1
+          "health": 1
         },
         "Soul snatcher": {
           "level": 6,
-          "hitpoints": 3,
+          "health": 3,
           "move": 2,
           "attack":  2,
           "range":  3
         },
         "Spectral Phoenix": {
           "level": 7,
-          "hitpoints": 1,
+          "health": 1,
           "move": 4,
           "attack":  3
         },
         "Vengeful Phantasm": {
           "level": 7,
-          "hitpoints": 2,
+          "health": 2,
           "move": 1
         },
         "Wandering Soul": {
@@ -252,7 +252,7 @@
         },
         "Disembodied Goliath": {
           "level": 9,
-          "hitpoints": 3,
+          "health": 3,
           "move": 1,
           "attack":  2
         }
@@ -261,18 +261,18 @@
     {
       "name": "Mirefoot",
       "edition": "Crimson Scales",
-      "hitpoints": [6,7,8,9,10,11,12,13,14],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "color": "FFE65925",
       "summons": {
         "Flailing Ivies": {
           "level": 1,
-          "hitpoints": 1,
+          "health": 1,
           "attack":  1
         },
         "Crypt Nettle": {
           "level": 7,
-          "hitpoints": 3,
+          "health": 3,
           "attack":  1
         }
       }
@@ -280,7 +280,7 @@
     {
       "name": "Chainguard",
       "edition": "Crimson Scales",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "color": "FFCE6D2F",
       "summons": {}
@@ -288,7 +288,7 @@
     {
       "name": "Bombard",
       "edition": "Crimson Scales",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "color": "FFA59786",
       "summons": {}
@@ -296,13 +296,13 @@
     {
       "name": "Luminary",
       "edition": "Crimson Scales",
-      "hitpoints": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "color": "ffbf9eca",
       "summons": {
         "Gleaming Squid": {
           "level": 9,
-          "hitpoints": 3,
+          "health": 3,
           "move": 3,
           "attack":  2
         }
@@ -311,7 +311,7 @@
     {
       "name": "Hollowpact",
       "edition": "Crimson Scales",
-      "hitpoints": [7,8,9,10,12,13,14,15,17],
+      "health": [7,8,9,10,12,13,14,15,17],
       "hidden": true,
       "color": "ffa04aa5",
       "summons": {}
@@ -319,7 +319,7 @@
     {
       "name": "Ruinmaw",
       "edition": "Crimson Scales",
-      "hitpoints": [8,9,11,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ffc12729",
       "summons": {}
@@ -327,20 +327,20 @@
     {
       "name": "Amber Aegis",
       "edition": "Crimson Scales",
-      "hitpoints": [12, 14, 17 ,19, 22, 24, 27, 29, 32],
+      "health": [12, 14, 17 ,19, 22, 24, 27, 29, 32],
       "hidden": true,
       "color": "fff89521",
       "summons": {
         "Venator tarantula": {
           "level": 7,
-          "hitpoints": 2,
+          "health": 2,
           "move": 3,
           "attack":  1,
           "range": 3
         },
         "Beta Aegis": {
           "level": 9,
-          "note": "hp is half current hitpoints/2 round up",
+          "note": "hp is half current health/2 round up",
           "move": 3
         }
       }
@@ -348,48 +348,48 @@
     {
       "name": "Artificer",
       "edition": "Crimson Scales",
-      "hitpoints": [7, 8, 9, 12, 13, 14, 15, 17],
+      "health": [7, 8, 9, 12, 13, 14, 15, 17],
       "hidden": true,
       "color": "ff79bcda",
       "summons": {
         "Clockwork Soldier": {
           "level": 1,
-          "hitpoints": 4,
+          "health": 4,
           "move": 3,
           "attack":  2
         },
         "Clockwork Bombard": {
           "level": 1,
-          "hitpoints": 2,
+          "health": 2,
           "attack":  2,
           "range": 5
         },
         "Hollow Carapace": {
           "level": 1,
-          "hitpoints": 9
+          "health": 9
         },
         "Clockwork Guardian": {
           "level": 3,
-          "hitpoints": 7,
+          "health": 7,
           "move": 1,
           "attack":  1
         },
         "Clockwork Drone": {
           "level": 5,
-          "hitpoints": 3,
+          "health": 3,
           "move": 3,
           "attack":  3,
           "range": 3
         },
         "Clockwork Rocket": {
           "level": 7,
-          "hitpoints": 1,
+          "health": 1,
           "move": 6,
           "attack":  5
         },
         "Clockwork Ravager": {
           "level": 9,
-          "hitpoints": 6,
+          "health": 6,
           "move": 3,
           "attack": 3
         }
