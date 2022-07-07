@@ -3911,8 +3911,7 @@
         "monsters": [ "Forest Imp", "Earth Demon", "Harrower Infester", "Dark Rider" ]
       },
       "#49 Rebel's Stand": {
-        "monsters": [ "Giant Viper", "City Archer", "City Guard", "Ancient Artillery" ],
-        "special": [ "Ancient Artillery: Hx2" ]
+        "monsters": [ "Giant Viper", "City Archer", "City Guard", "Ancient Artillery" ]
       },
       "#50 Ghost Fortress": {
         "monsters": [ "Night Demon", "Sun Demon", "Earth Demon", "Wind Demon" ]

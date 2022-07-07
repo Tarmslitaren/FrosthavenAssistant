@@ -313,7 +313,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                                       "assets/images/blood.png"),
                                                 ),
                                                 Text(
-                                                  '${widget.character.characterState.health.value.toString()} / ${widget.character.characterClass.healthByLevel[widget.character.characterState.level.value - 1].toString()}',
+                                                  '${widget.character.characterState.health.value.toString()} / ${widget.character.characterState.maxHealth.value.toString()}',
                                                   style: TextStyle(
                                                       fontFamily: 'Pirata',
                                                       color: Colors.white,

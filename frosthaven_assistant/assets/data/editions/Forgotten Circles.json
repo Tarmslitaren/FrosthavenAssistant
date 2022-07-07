@@ -1121,6 +1121,7 @@
       "special": [
         {
           "type": "Note",
+          "name" : "",
           "note": "Manifestation of Corruption: Manual Deck"
         }
         ]
@@ -1195,14 +1196,24 @@
     },
     "#34 Frozen Cave": {
       "monsters": [ "Frost Demon" ],
-      "special": [ "Objective: Altar of Blizzards", "Cx2+L" ]
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Altar of Blizzards",
+          "health": "Cx2+L"
+        }]
     },
     "#35 Shrine of Thelija": {
       "monsters": [ "Ancient Artillery", "Frost Demon", "Savvas Icestorm", "Wind Demon" ]
     },
     "#37 Aiding Diamara": {
       "monsters": [],
-      "special": [ "Bosses use the same deck" ]
+      "special": [
+        {
+          "type": "Note",
+          "name": "",
+          "note": "Bosses use the same deck"
+        } ]
     },
     "#39 Another Revolution": {
       "monsters": [ "Ancient Artillery" ]

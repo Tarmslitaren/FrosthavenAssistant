@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
+import '../Model/character_class.dart';
 import '../Model/monster.dart';
 import 'commands/add_standee_command.dart';
 import 'enums.dart';
@@ -342,13 +344,89 @@ class GameMethods {
     }
   }
 
-  static Monster? createMonster(String name, int? level) {
+  static Character? createCharacter(String name, String? display, int level) {
+
+    Character? character;
+    List<CharacterClass> characters = [];
+    for (String key in _gameState.modelData.value.keys){
+      characters.addAll(
+          _gameState.modelData.value[key]!.characters
+      );
+    }
+    for (CharacterClass characterClass in characters) {
+      if (characterClass.name == name) {
+        var characterState = CharacterState();
+        characterState.level.value = level;
+        characterState.health.value = characterClass.healthByLevel[level - 1];
+        characterState.maxHealth.value = characterState.health.value;
+        if (name == "Escort" || name == "Objective") {
+          characterState.initiative = 99;
+        }
+        characterState.display = name;
+        if (display != null) {
+          characterState.display = display;
+        }
+        character = Character(characterState, characterClass);
+        break;
+      }
+    }
+    return character;
+  }
+
+  static Monster? createMonster(String name, int? level, String? healthAdjust) {
     Map<String, MonsterModel> monsters = {};
     for (String key in _gameState.modelData.value.keys) {
       monsters.addAll(_gameState.modelData.value[key]!.monsters);
     }
     level ??= getIt<GameState>().level.value;
     Monster monster = Monster(name, level);
+    if (healthAdjust != null) {
+
+      //create new type on the fly
+      List<MonsterLevelModel> levels = monster.type.levels;
+      List<MonsterLevelModel> newLevels = [];
+      for (var level in levels) {
+        //Imma gonna assume only elite monsters need this kind of special.
+        //Since that seems to be the case so far.
+        //find H and replace
+        String thisLevelHPAdjust = healthAdjust;
+        for(int i = 0; i < thisLevelHPAdjust.length; i++) {
+          if (thisLevelHPAdjust[i] == 'H'){
+            thisLevelHPAdjust = thisLevelHPAdjust.replaceRange(i, i+1, level.elite!.health.toString());
+          }
+        }
+        //TODO: what happens on refresh!?!? will this go away? TODO again: F this: can make a specila monster in data for this case as well.
+        MonsterStatsModel elite = MonsterStatsModel(
+            //need to calc H now
+            thisLevelHPAdjust,
+            level.elite!.move,
+            level.elite!.attack,
+            level.elite!.range,
+            level.elite!.attributes,
+            level.elite!.immunities,
+            level.elite!.special1,
+            level.elite!.special2);
+        MonsterLevelModel newLevel = MonsterLevelModel(
+            level.level,
+            level.normal,
+            elite,
+            level.boss);
+        newLevels.add(newLevel);
+      }
+
+      MonsterModel newModdel = MonsterModel(
+          monster.type.name,
+          monster.type.display,
+          monster.type.gfx,
+          monster.type.hidden,
+          monster.type.flying,
+          monster.type.deck,
+          monster.type.count,
+          newLevels,
+          monster.type.edition
+      );
+      monster.type = newModdel;
+    }
     return monster;
   }
 }
