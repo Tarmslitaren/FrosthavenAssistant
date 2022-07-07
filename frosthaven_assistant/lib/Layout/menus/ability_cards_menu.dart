@@ -28,7 +28,7 @@ class Item extends StatelessWidget {
     final GameState _gameState = getIt<GameState>();
 
     child = revealed
-        ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale)
+        ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale, true)
         : MonsterAbilityCardWidget.buildRear(scale, -1);
     //height = 120 * tempScale * scale;
 

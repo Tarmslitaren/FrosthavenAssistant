@@ -27,7 +27,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   _MonsterAbilityCardWidgetState createState() =>
       _MonsterAbilityCardWidgetState();
 
-  static Widget buildFront(MonsterAbilityCardModel? card, Monster data, double scale) {
+  static Widget buildFront(MonsterAbilityCardModel? card, Monster data, double scale, bool calculateAll) {
     String initText = card!.initiative.toString();
     if (initText.length == 1) {
       initText = "0" + initText;
@@ -127,7 +127,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 width: 180 * scale * tempScale, //needed for line breaks in lines
                 //color: Colors.amber,
                 child: LineBuilder.createLines(
-                    card.lines, false, true, data, CrossAxisAlignment.center, scale),
+                    card.lines, false, true, calculateAll, data, CrossAxisAlignment.center, scale),
               ),
             )
           ],
@@ -252,7 +252,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 //switchInCurve: Curves.easeInBack,
                 //switchOutCurve: Curves.easeInBack.flipped,
                 child: _gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty
-                    ? MonsterAbilityCardWidget.buildFront(card, widget.data, scale)
+                    ? MonsterAbilityCardWidget.buildFront(card, widget.data, scale, false)
                     : MonsterAbilityCardWidget.buildRear(scale, _deckSize),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);
             //CurvedAnimation(parent: null, curve: Curves.easeIn)

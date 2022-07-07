@@ -152,10 +152,16 @@ class LineBuilder {
       int startIndex,
       int endIndex,
       Monster monster,
-      bool showMinimal,
+      bool showNormal,
+      bool showElite,
       String lastToken,
       Map<String, int> normalTokens,
       Map<String, int> eliteTokens) {
+
+    if(!showElite && !showNormal){
+      return [line]; //?
+    }
+
     List<String> retVal = [];
     List<String> tokens = [];
     List<String> eTokens = [];
@@ -235,22 +241,27 @@ class LineBuilder {
       normalResult = res.toString();
     }
 
-    String newStartOfLine =
-        line.substring(0, startIndex) + normalResult;
-    if (!skipCalculation) {
-      for (var item in tokens) {
-        newStartOfLine += "|" + item;
-        //add nr if applicable
-        String key = item.substring(1, item.length-1);
-        int value = normalTokens[key]!;
-        if(value > 0){
-          newStartOfLine += " " + value.toString();
+
+    String newStartOfLine = line.substring(0, startIndex);
+    if(showNormal) {
+      newStartOfLine += normalResult;
+      if (!skipCalculation) {
+        for (var item in tokens) {
+          newStartOfLine += "|" + item;
+          //add nr if applicable
+          String key = item.substring(1, item.length - 1);
+          int value = normalTokens[key]!;
+          if (value > 0) {
+            newStartOfLine += " " + value.toString();
+          }
         }
       }
     }
 
-    if (elite != null && !skipCalculation) {
-      newStartOfLine += "/";
+    if (elite != null && !skipCalculation && showElite) {
+      if(showNormal) {
+        newStartOfLine += "/";
+      }
       retVal.add(newStartOfLine);
 
       int eliteResult = StatCalculator.calculateFormula(
@@ -284,7 +295,14 @@ class LineBuilder {
   }
 
   static List<String> _applyMonsterStats(
-      final String lineInput, String sizeToken, Monster monster) {
+      final String lineInput, String sizeToken, Monster monster, bool forceShowAll) {
+
+    bool showElite = monster.monsterInstances.value.length > 0 && monster.monsterInstances.value[0].type == MonsterType.elite;
+    bool showNormal = monster.monsterInstances.value.length > 0 && monster.monsterInstances.value.last.type != MonsterType.elite;
+    if(forceShowAll) {
+      showElite = true;
+      showNormal = true;
+    }
     String line = "" + lineInput; //make sure lineInput is not altered
     if (kDebugMode) {
       print("monster: ${monster.id}");
@@ -370,7 +388,8 @@ class LineBuilder {
               startIndex,
               endIndex,
               monster,
-              false,
+              showNormal,
+              showElite,
               lastToken,
               normalTokens,
               eliteTokens,
@@ -395,7 +414,7 @@ class LineBuilder {
     return [line];
   }
 
-  static Widget createLines(List<String> strings, bool left, bool applyStats,
+  static Widget createLines(List<String> strings, bool left, bool applyStats, bool applyAll,
       Monster monster, CrossAxisAlignment alignment, double scale) {
     var shadow = Shadow(
         offset: Offset(1 * scale * tempScale, 1 * scale * tempScale),
@@ -491,7 +510,7 @@ class LineBuilder {
         line = line.substring(1, line.length);
       }
       if (applyStats) {
-        List<String> statLines = _applyMonsterStats(line, sizeToken, monster);
+        List<String> statLines = _applyMonsterStats(line, sizeToken, monster, applyAll);
         line = statLines.removeAt(0);
         if (statLines.length > 0) {
           localStrings.insertAll(i + 1, statLines);
