@@ -367,6 +367,17 @@ class GameMethods {
           characterState.display = display;
         }
         character = Character(characterState, characterClass);
+
+        if(name == "Beast Tyrant") {
+          //create the bear summon
+          final int bearHp = 8 + characterState.level.value * 2;
+
+          MonsterInstance bear = MonsterInstance.summon(
+              0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, "beast");
+
+          character.characterState.summonList.value.add(bear);
+        }
+
         break;
       }
     }

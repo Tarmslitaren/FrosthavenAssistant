@@ -70,140 +70,145 @@ class _MonsterBoxState extends State<MonsterBox> {
       isSummon = true;
       folder = "summon";
     }
-    return Container(
-        decoration: null,
-        padding: EdgeInsets.zero,
-        height: 30 * scale,
-        width: width,
-        color: Color(int.parse("7A000000", radix: 16)),
-        //black with some opacity
-        child: Stack(alignment: Alignment.centerLeft, children: [
-          Image(
-            //fit: BoxFit.contain,
-            height: 30 * scale,
-            width: 47 * scale,
-            fit: BoxFit.fill,
-            //scale up disregarding aspect ratio
-            image: AssetImage("assets/images/psd/monster-box.png"),
-            //width: widget.height*0.8,
-          ),
-          Container(
-            margin: EdgeInsets.only(
-                left: 3 * scale, top: 3 * scale, bottom: 2 * scale),
-            child: Image(
+    String standeeNr = "";
+    if (widget.data.standeeNr > 0) {
+      widget.data.standeeNr.toString();
+    }
+      return Container(
+          decoration: null,
+          padding: EdgeInsets.zero,
+          height: 30 * scale,
+          width: width,
+          color: Color(int.parse("7A000000", radix: 16)),
+          //black with some opacity
+          child: Stack(alignment: Alignment.centerLeft, children: [
+            Image(
               //fit: BoxFit.contain,
-              height: 100 * scale,
-              width: 17 * scale,
-              fit: BoxFit.cover,
-              image: AssetImage("assets/images/$folder/${widget.data.gfx}.png"),
+              height: 30 * scale,
+              width: 47 * scale,
+              fit: BoxFit.fill,
+              //scale up disregarding aspect ratio
+              image: AssetImage("assets/images/psd/monster-box.png"),
               //width: widget.height*0.8,
             ),
-          ),
-          Positioned(
-            width: 22 * scale,
-            //baked in edge insets to line up with picture
-            top: 1 * scale,
-            child: Text(
-              textAlign: TextAlign.center,
-              widget.data.standeeNr.toString(),
-              style: TextStyle(
-                  fontFamily: 'Pirata',
-                  color: color,
-                  fontSize: 20 * scale,
-                  shadows: [
-                    Shadow(
-                        offset: Offset(1 * scale, 1 * scale),
-                        color: Colors.black)
-                  ]),
+            Container(
+              margin: EdgeInsets.only(
+                  left: 3 * scale, top: 3 * scale, bottom: 2 * scale),
+              child: Image(
+                //fit: BoxFit.contain,
+                height: 100 * scale,
+                width: 17 * scale,
+                fit: BoxFit.cover,
+                image: AssetImage("assets/images/$folder/${widget.data.gfx}.png"),
+                //width: widget.height*0.8,
+              ),
             ),
-          ),
-          Positioned(
-            left: 20 * scale,
-            //width: width-20*scale,
-            top: 0,
+            Positioned(
+              width: 22 * scale,
+              //baked in edge insets to line up with picture
+              top: 1 * scale,
+              child: Text(
+                textAlign: TextAlign.center,
+                standeeNr,
+                style: TextStyle(
+                    fontFamily: 'Pirata',
+                    color: color,
+                    fontSize: 20 * scale,
+                    shadows: [
+                      Shadow(
+                          offset: Offset(1 * scale, 1 * scale),
+                          color: Colors.black)
+                    ]),
+              ),
+            ),
+            Positioned(
+              left: 20 * scale,
+              //width: width-20*scale,
+              top: 0,
 
-            child: Container(
-                padding: EdgeInsets.zero,
-                margin: EdgeInsets.zero,
-                child: Row(
+              child: Container(
+                  padding: EdgeInsets.zero,
+                  margin: EdgeInsets.zero,
+                  child: Row(
                     //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     //crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image(
-                        //fit: BoxFit.contain,
-                        color: Colors.red,
-                        height: 12 * scale,
-                        image: const AssetImage("assets/images/blood.png"),
-                      ),
-                      Container(
-                        width: 18 * scale,
-                        child: Text(
-                          //textAlign: TextAlign.center,
-                          "${widget.data.health.value}",
-                          style: TextStyle(
-                              fontFamily: 'Pirata',
-                              color: Colors.white,
-                              fontSize: widget.data.health.value > 99
-                                  ? 13 * scale
-                                  : 18 * scale,
-                              shadows: [
-                                Shadow(
-                                    offset: Offset(1 * scale, 1 * scale),
-                                    color: Colors.red)
-                              ]),
+                      children: [
+                        Image(
+                          //fit: BoxFit.contain,
+                          color: Colors.red,
+                          height: 12 * scale,
+                          image: const AssetImage("assets/images/blood.png"),
                         ),
-                      ),
-                      ValueListenableBuilder<List<Condition>>(
-                          valueListenable: widget.data.conditions,
-                          builder: (context, value, child) {
-                            return Container(
-                                height: 30 * scale,
-                                child: Wrap(
-                                  spacing: 0,
-                                  runSpacing: 0,
-                                  direction: Axis.vertical,
-                                  //verticalDirection: VerticalDirection.up,
-                                  //clipBehavior: Clip.none,
-                                  //runAlignment: ,
-                                  alignment: WrapAlignment.center,
-                                  crossAxisAlignment: WrapCrossAlignment.center,
+                        Container(
+                          width: 18 * scale,
+                          child: Text(
+                            //textAlign: TextAlign.center,
+                            "${widget.data.health.value}",
+                            style: TextStyle(
+                                fontFamily: 'Pirata',
+                                color: Colors.white,
+                                fontSize: widget.data.health.value > 99
+                                    ? 13 * scale
+                                    : 18 * scale,
+                                shadows: [
+                                  Shadow(
+                                      offset: Offset(1 * scale, 1 * scale),
+                                      color: Colors.red)
+                                ]),
+                          ),
+                        ),
+                        ValueListenableBuilder<List<Condition>>(
+                            valueListenable: widget.data.conditions,
+                            builder: (context, value, child) {
+                              return Container(
+                                  height: 30 * scale,
+                                  child: Wrap(
+                                    spacing: 0,
+                                    runSpacing: 0,
+                                    direction: Axis.vertical,
+                                    //verticalDirection: VerticalDirection.up,
+                                    //clipBehavior: Clip.none,
+                                    //runAlignment: ,
+                                    alignment: WrapAlignment.center,
+                                    crossAxisAlignment: WrapCrossAlignment.center,
 
-                                  children: createConditionList(scale),
-                                ));
-                          }),
-                    ])),
-          ),
-          Container(
+                                    children: createConditionList(scale),
+                                  ));
+                            }),
+                      ])),
+            ),
+            Container(
               //the hp bar
-              margin: EdgeInsets.only(
-                  bottom: 2.5 * scale, left: 2.5 * scale, right: 2.7 * scale),
-              alignment: Alignment.bottomCenter,
-              width: 42 * scale,
-              child: ValueListenableBuilder<int>(
-                  valueListenable: widget.data.maxHealth,
-                  builder: (context, value, child) {
-                    return FAProgressBar(
-                      currentValue: widget.data.health.value.toDouble(),
-                      maxValue: widget.data.maxHealth.value.toDouble(),
-                      size: 4.0 * scale,
-                      //animatedDuration: const Duration(milliseconds: 0),
-                      direction: Axis.horizontal,
-                      //verticalDirection: VerticalDirection.up,
-                      borderRadius: BorderRadius.circular(0),
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 0.5 * scale,
-                      ),
-                      backgroundColor: Colors.black,
-                      progressColor: Colors.red,
-                      //formatValueFixed: 2,
-                      //what does this do?
-                      changeColorValue: (widget.data.maxHealth.value).toInt(),
-                      changeProgressColor: Colors.green,
-                    );
-                  }))
-        ]));
-  }
+                margin: EdgeInsets.only(
+                    bottom: 2.5 * scale, left: 2.5 * scale, right: 2.7 * scale),
+                alignment: Alignment.bottomCenter,
+                width: 42 * scale,
+                child: ValueListenableBuilder<int>(
+                    valueListenable: widget.data.maxHealth,
+                    builder: (context, value, child) {
+                      return FAProgressBar(
+                        currentValue: widget.data.health.value.toDouble(),
+                        maxValue: widget.data.maxHealth.value.toDouble(),
+                        size: 4.0 * scale,
+                        //animatedDuration: const Duration(milliseconds: 0),
+                        direction: Axis.horizontal,
+                        //verticalDirection: VerticalDirection.up,
+                        borderRadius: BorderRadius.circular(0),
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 0.5 * scale,
+                        ),
+                        backgroundColor: Colors.black,
+                        progressColor: Colors.red,
+                        //formatValueFixed: 2,
+                        //what does this do?
+                        changeColorValue: (widget.data.maxHealth.value).toInt(),
+                        changeProgressColor: Colors.green,
+                      );
+                    }))
+          ]));
+    }
+
 
   @override
   Widget build(BuildContext context) {
@@ -231,7 +236,7 @@ class _MonsterBoxState extends State<MonsterBox> {
         },
         child: AnimatedContainer(
             //makes it grow nicely when adding conditions
-            key: Key(widget.data.standeeNr.toString()),
+            key: Key(widget.data.standeeNr.toString()), //TODO: shiiiet
             width: width,
             curve: Curves.easeInOut,
             duration: const Duration(milliseconds: 300),
