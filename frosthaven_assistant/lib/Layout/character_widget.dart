@@ -12,6 +12,10 @@ import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
+import 'main_list.dart';
+import 'menus/add_standee_menu.dart';
+import 'menus/add_summon_menu.dart';
+import 'monster_box.dart';
 
 class CharacterWidget extends StatefulWidget {
   final Character character;
@@ -28,10 +32,13 @@ class _CharacterWidgetState extends State<CharacterWidget> {
   final GameState _gameState = getIt<GameState>();
   late bool isCharacter = true;
   final _initTextFieldController = TextEditingController();
+  late List<MonsterInstance> lastList = [];
 
   @override
   void initState() {
     super.initState();
+    lastList = widget.character.characterState.summonList.value;
+
     if (widget.initPreset != null) {
       _initTextFieldController.text = widget.initPreset.toString();
     }
@@ -70,6 +77,77 @@ class _CharacterWidgetState extends State<CharacterWidget> {
     return list;
   }
 
+  Widget summonsButton(double scale) {
+    return Container(
+      width: 30 * scale,
+        height: 30*scale,
+        child: IconButton(
+      padding: EdgeInsets.zero,
+
+      icon: Image.asset(
+          color:  Colors.white24,
+          colorBlendMode: BlendMode.modulate,
+          'assets/images/psd/add.png'),
+      onPressed: () {
+          openDialog(
+              context,
+              //problem: context is of stat card widget, not the + button
+              AddSummonMenu(
+                character: widget.character,
+              ),
+
+          );
+      },
+    ));
+  }
+
+  Widget buildMonsterBoxGrid(double scale) {
+
+    int displaystartAnimation = -1;
+
+    if(lastList.length < widget.character.characterState.summonList.value.length){
+      //find which is new
+
+      for(var item in widget.character.characterState.summonList.value){
+        bool found = false;
+        for(var oldItem in lastList) {
+          if(item.standeeNr == oldItem.standeeNr){
+            found = true;
+            break;
+          }
+        }
+        if (!found){
+          displaystartAnimation = item.standeeNr;
+          break;
+        }
+      }
+    }
+
+    final generatedChildren = List<Widget>.generate(
+        widget.character.characterState.summonList.value.length,
+            (index) =>/* AnimatedSwitcher( //TODO: why is this not working?
+
+            key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
+          duration: Duration(milliseconds: 1600),
+              child:*/ AnimatedSize( //not really needed now
+          key: Key(widget.character.characterState.summonList.value[index].standeeNr.toString()),
+          duration: const Duration(milliseconds: 300),
+          child:
+          MonsterBox(
+              key: Key(widget.character.characterState.summonList.value[index].standeeNr.toString()),
+              data: widget.character.characterState.summonList.value[index],
+              display: displaystartAnimation),
+          //)
+        )
+    );
+    lastList = widget.character.characterState.summonList.value;
+    return Wrap(
+      runSpacing: 2.0 * scale,
+      spacing: 2.0 * scale,
+      children: generatedChildren,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
@@ -90,18 +168,12 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           //open stats menu
           openDialog(
               context,
-              Stack(children: [
-                Positioned(
-                  //left: 100, // left coordinate
-                  //top: 100,  // top coordinate
-                  child: Dialog(
-                    backgroundColor: Colors.transparent,
-                    child: StatusMenu(
+             StatusMenu(
                         figure: widget.character.characterState,
                         character: widget.character),
-                  ),
-                )
-              ]));
+                  );
+
+
           setState(() {});
         },
         child: ValueListenableBuilder<int>(
@@ -117,6 +189,19 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                       child: Stack(
                         //alignment: Alignment.centerLeft,
                         children: [
+                          Container(
+                            //color: Colors.amber,
+                            //height: 50,
+                            margin: EdgeInsets.only(
+                                left: 4 * scale * tempScale,
+                                right: 4 * scale * tempScale),
+                            width: getMainListWidth(context) - 4 * scale * tempScale,
+                            child: ValueListenableBuilder<int>(
+                                valueListenable: getIt<GameState>().killMonsterStandee, // widget.data.monsterInstances,
+                                builder: (context, value, child) {
+                                  return buildMonsterBoxGrid(scale);
+                                }),
+                          ),
                           Container(
                             //background
                             margin: EdgeInsets.all(2 * scale),
@@ -377,7 +462,13 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                         "assets/images/psd/xp.png"),
                                   ),
                                 ],
-                              )): Container()
+                              )): Container(),
+                  isCharacter? Positioned(
+                    right: 29 * scale,
+                    top: 14 * scale,
+                    child: summonsButton(scale),
+                  ):Container()
+
                         ],
                       )));
             }));

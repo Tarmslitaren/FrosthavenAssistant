@@ -164,7 +164,15 @@ class _MainListState extends State<MainList> {
     for (int i = 0; i < _gameState.currentList.length; i++) {
       var item = _gameState.currentList[i];
       if (item is Character) {
-        listHeight += 60; //TODO: + summon list size
+        listHeight += 60;
+        if (item.characterState.summonList.value.isNotEmpty) {
+          double listWidth = 0;
+          for (var monsterInstance in item.characterState.summonList.value) {
+            listWidth += MonsterBox.getWidth(scale, monsterInstance);
+          }
+          double rows = listWidth / mainListWidth;
+          listHeight += 32 * rows.ceil();
+        }
       }
       if (item is Monster) {
         listHeight += 120 * tempScale;

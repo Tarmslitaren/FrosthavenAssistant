@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void openDialog(BuildContext context, Widget widget) {
+void openDialogOld(BuildContext context, Widget widget) {
   showDialog(
       context: context,
       builder: (BuildContext context) => widget);
@@ -11,13 +11,29 @@ void openDialog(BuildContext context, Widget widget) {
   ));*/
 }
 
+
+void openDialog(BuildContext context, Widget widget) {
+  Widget innerWidget = Stack(children: [
+    Positioned(
+      child: Dialog(
+        backgroundColor: Colors.transparent,
+        child: widget
+      ),
+    )
+  ]);
+  showDialog(
+      context: context,
+      builder: (BuildContext context) => innerWidget);
+}
+
+
 void openDialogAtPosition(
     BuildContext context, Widget widget, double x, double y) {
   double xOffset =
       (context.findRenderObject() as RenderBox).localToGlobal(Offset.zero).dx;
   double yOffset =
       (context.findRenderObject() as RenderBox).localToGlobal(Offset.zero).dy;
-  openDialog(
+  openDialogOld(
       context,
       Stack(children: [
         Positioned(

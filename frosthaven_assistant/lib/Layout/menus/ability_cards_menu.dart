@@ -171,7 +171,12 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
     var drawPile =
         widget.monsterAbilityState.drawPile.getList().reversed.toList();
     var discardPile = widget.monsterAbilityState.discardPile.getList();
-    return Column(children: [
+    return Container(
+      //TODO: fix layout size for this.
+      //width: 500,
+       // height: 300,
+        child:
+      Column(children: [
       _gameState.roundState.value == RoundState.playTurns?
       Card(
 
@@ -236,6 +241,6 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
                       Navigator.pop(context);
                     }))
           ]))
-    ]);
+    ]));
   }
 }

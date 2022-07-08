@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
+import 'package:frosthaven_assistant/Model/summon.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -34,6 +35,8 @@ class CharacterState extends Figure{
   final xp = ValueNotifier<int>(0);
   final chill = ValueNotifier<int>(0);
 
+  final summonList = ValueNotifier<List<MonsterInstance>>([]);
+
 
   @override
   String toString() {
@@ -45,6 +48,7 @@ class CharacterState extends Figure{
         '"xp": ${xp.value}, '
         '"chill": ${chill.value}, '
         '"display": "$display", '
+        '"summonList": ${summonList.value.toString()}, '
         '"conditions": ${conditions.value.toString()} '
         '}';
   }
@@ -57,6 +61,11 @@ class CharacterState extends Figure{
     level.value = json["level"];
     maxHealth.value = json["maxHealth"];
     display = json['display'];
+
+    List<dynamic> summons = json["summonsList"];
+    for(var item in summons){
+      summonList.value.add(MonsterInstance.fromJson(item));
+    }
 
     List<dynamic> condis = json["conditions"];
 
@@ -122,20 +131,35 @@ enum MonsterType {
   normal,
   elite,
   boss,
-  //named
-  //summon?
+  //named?
+  summon
 }
 
 class MonsterInstance extends Figure{
   MonsterInstance(this.standeeNr, this.type, Monster monster) {
-    setLevel(monster);
-    gfx = monster.type.gfx;
-    name = monster.type.name;
+      setLevel(monster);
+      gfx = monster.type.gfx;
+      name = monster.type.name;
+      move = 0; //only used for summons
+      attack = 0;
+      range = 0;
   }
+
+  MonsterInstance.summon(this.standeeNr, this.type, this.name, int summonHealth, this.move, this.attack, this.range, this.gfx) {
+      //deal with summon init
+    maxHealth.value = summonHealth;
+    health.value = summonHealth;
+  }
+
   late final int standeeNr;
   late final MonsterType type;
   late final String name;
   late final String gfx;
+
+  //summon stats
+  late int move;
+  late int attack;
+  late int range;
 
 
   void setLevel(Monster monster) {
@@ -151,7 +175,7 @@ class MonsterInstance extends Figure{
     if (value != null) {
       maxHealth.value = value;
     } else {
-      //handle edge case?
+      //handle edge case
       if(newHealthValue == "Hollowpact"){
         int value = 7;
         for(var item in getIt<GameState>().currentList) {
@@ -176,6 +200,9 @@ class MonsterInstance extends Figure{
         '"maxHealth": ${maxHealth.value}, '
         '"level": ${level.value}, '
         '"standeeNr": $standeeNr, '
+        '"move": $move, '
+        '"attack": $attack, '
+        '"range": $range, '
         '"name": "$name", '
         '"gfx": "$gfx", '
         '"type": ${type.index}, '
@@ -191,6 +218,9 @@ class MonsterInstance extends Figure{
     name = json["name"];
     gfx = json["gfx"];
     type = MonsterType.values[json["type"]];
+    move = json["move"];
+    attack = json["attack"];
+    range = json["range"];
     List<dynamic> condis = json["conditions"];
     for(int item in condis){
       conditions.value.add(Condition.values[item]);
@@ -315,6 +345,17 @@ class GameState extends ActionHandler{
 
   initGame() async {
 
+    final String response = await rootBundle.loadString('assets/data/summons.json');
+    final data = await json.decode(response);
+
+    //load loose summons
+    if(data.containsKey('summons')) {
+      final summons = data['summons'] as Map<dynamic, dynamic>;
+      for (String key in summons.keys){
+        itemSummonData.add(SummonModel.fromJson(summons[key], key));
+      }
+    }
+
     await fetchCampaignData("na");
     await fetchCampaignData("JotL");
     await fetchCampaignData("Gloomhaven");
@@ -333,6 +374,7 @@ class GameState extends ActionHandler{
   }
   //data
   final modelData = ValueNotifier<Map<String, CampaignModel>>({});
+  List<SummonModel> itemSummonData = [];
 
   //state
   final currentCampaign = ValueNotifier<String>("JotL");

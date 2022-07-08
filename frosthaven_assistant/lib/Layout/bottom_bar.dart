@@ -36,10 +36,8 @@ Widget createLevelWidget(BuildContext context) {
       //open stats menu
       openDialog(
         context,
-        const Dialog(
-          backgroundColor: Colors.transparent,
-          child: SetLevelMenu(),
-        ),
+        SetLevelMenu(),
+
       );
     },
     child: Column(

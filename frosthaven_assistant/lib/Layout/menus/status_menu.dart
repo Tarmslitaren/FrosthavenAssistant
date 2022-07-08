@@ -95,7 +95,6 @@ class _StatusMenuState extends State<StatusMenu> {
   }
 
   void activateCondition(Condition condition, Figure figure) {
-    //TODO: handle special case for chill
     List<Condition> newList = [];
     newList.addAll(figure.conditions.value);
     newList.add(condition);
@@ -305,18 +304,13 @@ class _StatusMenuState extends State<StatusMenu> {
                                 if (widget.figure is CharacterState) {
                                   openDialog(
                                     context,
-                                    Dialog(
-                                      child: SetCharacterLevelMenu(
-                                          character: widget.character!),
-                                    ),
+                                    SetCharacterLevelMenu(character: widget.character!),
                                   );
                                 } else {
                                   openDialog(
                                     context,
-                                    Dialog(
-                                      child:
-                                          SetLevelMenu(monster: widget.monster),
-                                    ),
+                                    SetLevelMenu(monster: widget.monster),
+
                                   );
                                 }
                               },

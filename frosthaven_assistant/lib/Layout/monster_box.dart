@@ -250,16 +250,9 @@ class _MonsterBoxState extends State<MonsterBox> {
         onTap: () {
           //open stats menu
           openDialog(
-              context,
-              Stack(children: [
-                Positioned(
-                  child: Dialog(
-                    backgroundColor: Colors.transparent,
-                    child:
-                        StatusMenu(figure: widget.data, monster: getMonster()),
-                  ),
-                )
-              ]));
+            context,
+            StatusMenu(figure: widget.data, monster: getMonster()),
+          );
         },
         child: AnimatedContainer( //makes it grow nicely when adding conditions
             key: Key(widget.data.standeeNr.toString()),

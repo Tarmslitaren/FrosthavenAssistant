@@ -303,7 +303,7 @@
       }
     },
      {
-      "note": "the bear is a special summon wth scaling hit points. as such it remains hardcoded",
+      "note": "the bear is a special summon with scaling hit points. as such it remains hardcoded",
       "name": "Beast Tyrant",
       "color": "FFB4765A",
       "edition": "Gloomhaven",
@@ -347,7 +347,6 @@
           "level": 9,
           "health": 8
         }
-
       }
     },
 

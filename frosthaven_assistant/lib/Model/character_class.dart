@@ -1,12 +1,15 @@
 import 'dart:ui';
 
+import 'package:frosthaven_assistant/Model/summon.dart';
+
 class CharacterClass {
-  CharacterClass(this.name, this.healthByLevel, this.edition, this.color, this.hidden);
+  CharacterClass(this.name, this.healthByLevel, this.edition, this.color, this.hidden, this.summons);
   final String name;
   final String edition;
   final List<int> healthByLevel;
   final Color color;
   final bool hidden;
+  final List<SummonModel> summons;
 
   factory CharacterClass.fromJson(Map<String, dynamic> data) {
     // note the explicit cast to String
@@ -29,6 +32,13 @@ class CharacterClass {
     int value = int.parse(colorValue, radix: radix);
     Color color = Color(value);
 
-    return CharacterClass(name, healthByLevel, edition, color, hidden);
+    List<SummonModel> summonList = [];
+    if(data.containsKey('summons')) {
+      final summons = data['summons'] as Map<dynamic, dynamic>;
+      for (String key in summons.keys){
+        summonList.add(SummonModel.fromJson(summons[key], key));
+      }
+    }
+    return CharacterClass(name, healthByLevel, edition, color, hidden, summonList);
   }
 }

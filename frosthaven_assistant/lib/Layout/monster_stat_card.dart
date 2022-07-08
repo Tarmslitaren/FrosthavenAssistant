@@ -156,7 +156,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           )),
                       !isBoss
                           ? Positioned(
-                              left: 82.0 * tempScale * scale,
+                              left: 80.0 * tempScale * scale,
                               top: 26.0 * tempScale * scale,
                               child: Column(
                                 //mainAxisAlignment: MainAxisAlignment.center,
@@ -304,9 +304,10 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                       ),
                       !isBoss
                           ? Positioned(
-                              right: 80.0 * tempScale * scale,
+                              right: 77.0 * tempScale * scale,
                               top: 26.0 * tempScale * scale,
                               child: Column(
+                                //crossAxisAlignment: CrossAxisAlignment.start,
                                 //mainAxisAlignment: MainAxisAlignment.center,
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
