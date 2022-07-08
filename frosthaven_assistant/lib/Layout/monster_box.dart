@@ -200,9 +200,9 @@ class _MonsterBoxState extends State<MonsterBox> {
               Container(
                 //the hp bar
                 margin: EdgeInsets.only(
-                    bottom: 2 * scale,
-                    left: 2 * scale,
-                    right: 2 * scale),
+                    bottom: 2.5 * scale,
+                    left: 2.5 * scale,
+                    right: 2.7 * scale),
                 alignment: Alignment.bottomCenter,
                 width: 42 * scale,
 
@@ -211,7 +211,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                   widget.data.health.value.toDouble(),
                   maxValue: widget.data.maxHealth.value
                       .toDouble(),
-                  size: 4.5 * scale,
+                  size: 4.0 * scale,
                   //animatedDuration: const Duration(milliseconds: 0),
                   direction: Axis.horizontal,
                   //verticalDirection: VerticalDirection.up,
