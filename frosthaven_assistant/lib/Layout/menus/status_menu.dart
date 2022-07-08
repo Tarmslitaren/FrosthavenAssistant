@@ -71,57 +71,6 @@ class StatusMenu extends StatefulWidget {
   //TODO: add setting: turn off CS conditions?
 
 
-  static Widget buildCounterButtons(
-      //TODO! - show the value or value difference as a text beneath the center image
-      ValueNotifier<int> notifier, int maxValue, String image, BuildContext context, Figure figure, bool showTotalValue) {
-    GameState gameState = getIt<GameState>();
-    return Row(children: [
-      Container(
-          width: 42,
-          height: 42,
-          child: IconButton(
-              icon: Image.asset('assets/images/psd/sub.png'),
-              //iconSize: 30,
-              onPressed: () {
-                if (notifier.value > 0) {
-                  gameState
-                      .action(ChangeStatCommand(-1, notifier, figure));
-                  if (notifier == figure.health &&
-                      figure.health.value <= 0) {
-                    {
-                      Navigator.pop(context);
-                    }
-                  }
-                }
-              })),
-      Container(
-        width: 42,
-        height: 42,
-        child: Image(
-          image: AssetImage(image),
-        ),
-      ),
-      Container(
-          width: 42,
-          height: 42,
-          child: IconButton(
-            icon: Image.asset('assets/images/psd/add.png'),
-            //iconSize: 30,
-            onPressed: () {
-              if (notifier.value < maxValue) {
-                gameState
-                    .action(ChangeStatCommand(1, notifier, figure));
-                if (notifier.value <= 0 && notifier == figure.health) {
-                  Navigator.pop(context);
-                }
-              }
-              //increment
-            },
-          )),
-    ]);
-  }
-
-
   @override
   _StatusMenuState createState() => _StatusMenuState();
 }
@@ -170,13 +119,28 @@ class _StatusMenuState extends State<StatusMenu> {
                 }
                 //increment
               })),
-      Container(
-        width: 42,
-        height: 42,
-        child: Image(
-          image: AssetImage(image),
+      Stack(children: [
+        Container(
+          width: 42,
+          height: 42,
+          child: Image(
+            image: AssetImage(image),
+          ),
         ),
-      ),
+        ValueListenableBuilder<int>(
+            valueListenable: notifier,
+            builder: (context, value, child) {
+              String text = notifier.value.toString();
+              if(notifier.value == 0) {
+                text = "";
+              }
+              return Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Text(text, style: const TextStyle(color: Colors.blue),)
+              );
+            })
+      ]),
       Container(
           width: 42,
           height: 42,
@@ -261,15 +225,15 @@ class _StatusMenuState extends State<StatusMenu> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    StatusMenu.buildCounterButtons(
+                    buildCounterButtons(
                         widget.figure.health,
                         widget.figure.maxHealth.value,
-                        "assets/images/blood.png", context, widget.figure, false),
+                        "assets/images/blood.png", context, widget.figure, false, Colors.red),
                     widget.character != null
-                        ? StatusMenu.buildCounterButtons(
+                        ? buildCounterButtons(
                             widget.character!.characterState.xp,
                             900,
-                            "assets/images/psd/xp.png", context, widget.figure, false)
+                            "assets/images/psd/xp.png", context, widget.figure, false, Colors.blue)
                         : Container(),
                     widget.character != null || isSummon
                         ? buildChillButtons(

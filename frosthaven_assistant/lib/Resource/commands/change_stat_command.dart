@@ -21,14 +21,13 @@ class ChangeStatCommand extends Command {
     if (stat.value < figure.health.value && stat == figure.maxHealth) {
       figure.health.value = figure.maxHealth.value;
     }
-
     //if health same as maxhealth, then let health follow?
     if (stat.value - change ==  figure.health.value && stat == figure.maxHealth) {
       figure.health.value = figure.maxHealth.value;
     }
 
 
-    if (stat.value <= 0 && stat == figure.health) {
+    if (stat.value <= 0 && (stat == figure.health || stat == figure.maxHealth)) {
       handleDeath();
     }
   }

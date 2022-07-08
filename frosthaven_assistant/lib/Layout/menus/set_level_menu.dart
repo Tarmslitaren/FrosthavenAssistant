@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../../Resource/commands/set_level_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class SetLevelMenu extends StatefulWidget {
@@ -152,12 +153,12 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                              StatusMenu.buildCounterButtons(
+                              buildCounterButtons(
                                   widget.figure!.maxHealth,
                                   900,
                                   "assets/images/blood.png",
                                   context,
-                                  widget.figure!, true)
+                                  widget.figure!, true, Colors.red)
                             ])
                       : Container(),
                 ],

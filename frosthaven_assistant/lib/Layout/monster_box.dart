@@ -1,20 +1,14 @@
-import 'package:animated_widgets/AnimatedWidgets.dart';
+
 import 'package:animated_widgets/widgets/opacity_animated.dart';
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
-import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
-import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-
 import '../Resource/enums.dart';
 import '../Resource/ui_utils.dart';
-import 'menus/main_menu.dart';
 import 'menus/status_menu.dart';
-import 'monster_stat_card.dart';
 
 class MonsterBox extends StatefulWidget {
   final MonsterInstance data;
@@ -252,7 +246,8 @@ class _MonsterBoxState extends State<MonsterBox> {
                   double offset = -30 * scale;
                   Widget child = buildInternal(scale, width, color);
 
-                  if (widget.display != widget.data.standeeNr) {
+                  //TODO: this needs to be fixed some other way. id by stnadee nr might be ok for monsters, but summons need other way ot tell it is new
+                  if (widget.display != widget.data.standeeNr ) {
                     //if this one is not added
                     return TranslationAnimatedWidget.tween(
                         enabled: !alive,

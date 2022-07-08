@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../services/service_locator.dart';
+import 'commands/change_stat_command.dart';
+import 'game_state.dart';
+
 void openDialogOld(BuildContext context, Widget widget) {
-  showDialog(
-      context: context,
-      builder: (BuildContext context) => widget);
+  showDialog(context: context, builder: (BuildContext context) => widget);
   /*Navigator.of(context).push(MaterialPageRoute<void>(
     builder: (BuildContext context) {
       return widget;
@@ -11,21 +13,14 @@ void openDialogOld(BuildContext context, Widget widget) {
   ));*/
 }
 
-
 void openDialog(BuildContext context, Widget widget) {
   Widget innerWidget = Stack(children: [
     Positioned(
-      child: Dialog(
-        backgroundColor: Colors.transparent,
-        child: widget
-      ),
+      child: Dialog(backgroundColor: Colors.transparent, child: widget),
     )
   ]);
-  showDialog(
-      context: context,
-      builder: (BuildContext context) => innerWidget);
+  showDialog(context: context, builder: (BuildContext context) => innerWidget);
 }
-
 
 void openDialogAtPosition(
     BuildContext context, Widget widget, double x, double y) {
@@ -40,7 +35,7 @@ void openDialogAtPosition(
             left: x + xOffset, // left coordinate
             top: y + yOffset, // top coordinate
             child: Dialog(
-              backgroundColor: Colors.transparent,
+                backgroundColor: Colors.transparent,
                 /*shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.0),
                   side: BorderSide(
@@ -54,4 +49,82 @@ void openDialogAtPosition(
       ]));
 }
 
+Widget buildCounterButtons(
+//TODO! - show the value or value difference as a text beneath the center image
+    ValueNotifier<int> notifier,
+    int maxValue,
+    String image,
+    BuildContext context,
+    Figure figure,
+    bool showTotalValue,
+    Color color) {
+  GameState gameState = getIt<GameState>();
 
+  final totalChangeValue = ValueNotifier<int>(0);
+  return Row(children: [
+    Container(
+        width: 42,
+        height: 42,
+        child: IconButton(
+            icon: Image.asset('assets/images/psd/sub.png'),
+//iconSize: 30,
+            onPressed: () {
+              if (notifier.value > 0) {
+                totalChangeValue.value--;
+                gameState.action(ChangeStatCommand(-1, notifier, figure));
+                if (notifier == figure.health && figure.health.value <= 0) {
+                  {
+                    Navigator.pop(context);
+                  }
+                }
+              }
+            })),
+    Stack(children: [
+      Container(
+        width: 42,
+        height: 42,
+        child: Image(
+          color: color,
+          colorBlendMode: BlendMode.modulate,
+          image: AssetImage(image),
+        ),
+      ),
+      ValueListenableBuilder<int>(
+          valueListenable: totalChangeValue,
+          builder: (context, value, child) {
+            String text = "";
+            if(totalChangeValue.value > 0) {
+              text = "+${totalChangeValue.value.toString()}";
+            }
+            else if(totalChangeValue.value != 0) {
+              text = totalChangeValue.value.toString();
+            }
+            if(showTotalValue) {
+              text = notifier.value.toString();
+            }
+            return Positioned(
+              bottom: 0,
+              right: 0,
+              child: Text(text, style: TextStyle(color: color),)
+            );
+          })
+    ]),
+    Container(
+        width: 42,
+        height: 42,
+        child: IconButton(
+          icon: Image.asset('assets/images/psd/add.png'),
+//iconSize: 30,
+          onPressed: () {
+            if (notifier.value < maxValue) {
+              totalChangeValue.value++;
+              gameState.action(ChangeStatCommand(1, notifier, figure));
+              if (notifier.value <= 0 && notifier == figure.health) {
+                Navigator.pop(context);
+              }
+            }
+//increment
+          },
+        )),
+  ]);
+}

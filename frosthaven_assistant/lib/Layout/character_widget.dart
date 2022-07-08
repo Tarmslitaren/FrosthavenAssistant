@@ -471,6 +471,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                               scale *
                                               LineBuilder.tempScale,
                                           color: Colors.blue,
+                                          colorBlendMode: BlendMode.modulate,
                                           image: const AssetImage(
                                               "assets/images/psd/xp.png"),
                                         ),
