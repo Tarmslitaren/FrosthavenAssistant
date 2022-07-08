@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../../Resource/commands/set_level_command.dart';
 import '../../Resource/game_methods.dart';
@@ -8,9 +9,10 @@ import '../../Resource/game_state.dart';
 import '../../services/service_locator.dart';
 
 class SetLevelMenu extends StatefulWidget {
-  const SetLevelMenu({Key? key, this.monster}) : super(key: key);
+  const SetLevelMenu({Key? key, this.monster, this.figure}) : super(key: key);
 
   final Monster? monster;
+  final Figure? figure;
 
   @override
   _SetLevelMenuState createState() => _SetLevelMenuState();
@@ -30,9 +32,9 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
         valueListenable: _gameState.solo,
         builder: (context, value, child) {
           bool isCurrentlySelected;
-          if(widget.monster != null) {
+          if (widget.monster != null) {
             isCurrentlySelected = nr == widget.monster!.level.value;
-          }else {
+          } else {
             isCurrentlySelected = nr == _gameState.level.value;
           }
           bool isRecommended = GameMethods.getRecommendedLevel() == nr;
@@ -56,9 +58,12 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                 child: TextButton(
                   child: Text(
                     text,
-                    style: TextStyle(
-                        color:
-                            isCurrentlySelected ? Colors.black : Colors.grey),
+                    style: TextStyle(shadows: [
+                      Shadow(
+                          offset: Offset(1, 1),
+                          color:
+                              isCurrentlySelected ? Colors.grey : Colors.black)
+                    ], color: isCurrentlySelected ? Colors.black : Colors.grey),
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
@@ -74,7 +79,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
   @override
   Widget build(BuildContext context) {
     String title = "Set Scenario Level";
-    if(widget.monster != null) {
+    if (widget.monster != null) {
       title = "Set " + widget.monster!.type.display + "'s level";
     }
     return Container(
@@ -89,57 +94,74 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
             width: 10
           )),*/
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
-              image: AssetImage('assets/images/bg/white_bg.png'),
-              fit: BoxFit.fitWidth,
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            image: AssetImage('assets/images/bg/white_bg.png'),
+            fit: BoxFit.fitWidth,
           ),
         ),
         child: Stack(
             //alignment: Alignment.center,
             children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Text(title, style: TextStyle(fontSize: 18)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  buildLevelButton(0),
-                  buildLevelButton(1),
-                  buildLevelButton(2),
-                  buildLevelButton(3),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(title, style: TextStyle(fontSize: 18)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buildLevelButton(0),
+                      buildLevelButton(1),
+                      buildLevelButton(2),
+                      buildLevelButton(3),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      buildLevelButton(4),
+                      buildLevelButton(5),
+                      buildLevelButton(6),
+                      buildLevelButton(7),
+                    ],
+                  ),
+                  widget.figure == null
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                              const Text("Solo:"),
+                              ValueListenableBuilder<bool>(
+                                  valueListenable: _gameState.solo,
+                                  builder: (context, value, child) {
+                                    return Checkbox(
+                                      checkColor: Colors.black,
+                                      activeColor: Colors.grey.shade200,
+                                      //side: BorderSide(color: Colors.black),
+                                      onChanged: (bool? newValue) {
+                                        _gameState.solo.value = newValue!;
+                                      },
+                                      value: _gameState.solo.value,
+                                    );
+                                  })
+                            ])
+                      : Container(),
+                  widget.figure != null
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                              StatusMenu.buildCounterButtons(
+                                  widget.figure!.maxHealth,
+                                  900,
+                                  "assets/images/blood.png",
+                                  context,
+                                  widget.figure!, true)
+                            ])
+                      : Container(),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  buildLevelButton(4),
-                  buildLevelButton(5),
-                  buildLevelButton(6),
-                  buildLevelButton(7),
-                ],
-              ),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                const Text("Solo:"),
-                ValueListenableBuilder<bool>(
-                    valueListenable: _gameState.solo,
-                    builder: (context, value, child) {
-                      return Checkbox(
-                        checkColor: Colors.black,
-                        activeColor: Colors.grey.shade200,
-                        //side: BorderSide(color: Colors.black),
-                        onChanged: (bool? newValue) {
-                          _gameState.solo.value = newValue!;
-                        },
-                        value: _gameState.solo.value,
-                      );
-                    })
-              ]),
-            ],
-          ),
-        ]));
+            ]));
   }
 }

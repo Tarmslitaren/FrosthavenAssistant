@@ -39,6 +39,7 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   child: Text(
                     text,
                     style: TextStyle(
+                        shadows: [Shadow(offset: Offset(1, 1), color: isCurrentlySelected ? Colors.grey: Colors.black)],
                         color:
                         isCurrentlySelected ? Colors.black : Colors.grey),
                   ),
@@ -60,7 +61,7 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
         height: 160,
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage('assets/images/bg/white_bg.png'),
             fit: BoxFit.fitWidth,
           ),

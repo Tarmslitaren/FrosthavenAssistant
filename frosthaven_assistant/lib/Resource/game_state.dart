@@ -24,6 +24,7 @@ class Figure {
   final level = ValueNotifier<int>(1);
   final maxHealth = ValueNotifier<int>(0); //? //needed for the times you wanna set hp yourself, for special reasons
   final conditions = ValueNotifier<List<Condition>>([]);
+  final chill = ValueNotifier<int>(0);
 }
 
 class CharacterState extends Figure{
@@ -33,7 +34,6 @@ class CharacterState extends Figure{
   String display = "";
   int initiative = 0;
   final xp = ValueNotifier<int>(0);
-  final chill = ValueNotifier<int>(0);
 
   final summonList = ValueNotifier<List<MonsterInstance>>([]);
 
@@ -62,7 +62,7 @@ class CharacterState extends Figure{
     maxHealth.value = json["maxHealth"];
     display = json['display'];
 
-    List<dynamic> summons = json["summonsList"];
+    List<dynamic> summons = json["summonList"];
     for(var item in summons){
       summonList.value.add(MonsterInstance.fromJson(item));
     }
@@ -206,6 +206,7 @@ class MonsterInstance extends Figure{
         '"name": "$name", '
         '"gfx": "$gfx", '
         '"type": ${type.index}, '
+        '"chill": ${chill.value}, '
         '"conditions": ${conditions.value.toString()} '
         '}';
   }
@@ -221,6 +222,7 @@ class MonsterInstance extends Figure{
     move = json["move"];
     attack = json["attack"];
     range = json["range"];
+    chill.value = json["chill"];
     List<dynamic> condis = json["conditions"];
     for(int item in condis){
       conditions.value.add(Condition.values[item]);

@@ -325,7 +325,7 @@ class GameMethods {
 
   static void addStandee(int? nr, Monster data, MonsterType type) {
     if (nr != null) {
-      _gameState.action(AddStandeeCommand(nr, data, type));
+      _gameState.action(AddStandeeCommand(nr, data, null, data.monsterInstances, type));
     } else {
       //add first un added nr
       for (int i = 1; i <= data.type.count; i++) {
@@ -337,7 +337,7 @@ class GameMethods {
           }
         }
         if (!added) {
-          _gameState.action(AddStandeeCommand(i, data, type));
+          _gameState.action(AddStandeeCommand(i, data, null, data.monsterInstances, type));
           return;
         }
       }

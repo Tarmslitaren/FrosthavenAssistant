@@ -30,7 +30,8 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     late final Widget child;
-    late final double height;
+    double height;
+    double listWidth = getMainListWidth(context);
     if (data is Character) {
       Character character = data as Character;
       int? initPreset;
@@ -39,9 +40,18 @@ class Item extends StatelessWidget {
       }
       child = CharacterWidget(
           key: Key(character.id), character: character, initPreset: initPreset);
-      height = 60 * scale; //TODO:can I get implicit height?
+      height = 60 * scale;
+      if (character.characterState.summonList.value.isNotEmpty) {
+        double listWidth = 0;
+        for (var monsterInstance in character.characterState.summonList.value) {
+          listWidth += MonsterBox.getWidth(scale, monsterInstance);
+        }
+        double rows = listWidth / listWidth;
+        height += 32 * rows.ceil() * scale;
+      }
+
+
     } else if (data is Monster) {
-      double listWidth = getMainListWidth(context);
       Monster monster = data as Monster;
       child = MonsterWidget(key: Key(monster.id), data: monster);
       int standeeRows = 0;
@@ -60,26 +70,9 @@ class Item extends StatelessWidget {
         standeeRows = 3;
       }
       height = 122 * tempScale * scale + standeeRows * 32 * scale;
-      //TODO put in ListItemData, and have it change depending on summons+monster instances
     } else {
       height = 0;
     }
-
-    /*bool isScrolling = _MainListState.isScrolling;
-    LocalHero localHero = LocalHero(
-      tag: child.key.toString(),
-      enabled: isScrolling? false: true,
-      child: Material(
-          color: Colors.transparent,
-          child: child),
-    );
-
-    if(localHero.enabled == false) {
-      print("ok working as inteded false!");
-    }
-
-    return localHero;*/
-    //return child;
 
     var animatedContainer = AnimatedContainer(
       key: child.key,

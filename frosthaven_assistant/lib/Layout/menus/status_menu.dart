@@ -68,7 +68,59 @@ class StatusMenu extends StatefulWidget {
   //character layout
   //same except line 3: infect impair rupture
 
-  //add setting: turn off CS conditions,
+  //TODO: add setting: turn off CS conditions?
+
+
+  static Widget buildCounterButtons(
+      //TODO! - show the value or value difference as a text beneath the center image
+      ValueNotifier<int> notifier, int maxValue, String image, BuildContext context, Figure figure, bool showTotalValue) {
+    GameState gameState = getIt<GameState>();
+    return Row(children: [
+      Container(
+          width: 42,
+          height: 42,
+          child: IconButton(
+              icon: Image.asset('assets/images/psd/sub.png'),
+              //iconSize: 30,
+              onPressed: () {
+                if (notifier.value > 0) {
+                  gameState
+                      .action(ChangeStatCommand(-1, notifier, figure));
+                  if (notifier == figure.health &&
+                      figure.health.value <= 0) {
+                    {
+                      Navigator.pop(context);
+                    }
+                  }
+                }
+              })),
+      Container(
+        width: 42,
+        height: 42,
+        child: Image(
+          image: AssetImage(image),
+        ),
+      ),
+      Container(
+          width: 42,
+          height: 42,
+          child: IconButton(
+            icon: Image.asset('assets/images/psd/add.png'),
+            //iconSize: 30,
+            onPressed: () {
+              if (notifier.value < maxValue) {
+                gameState
+                    .action(ChangeStatCommand(1, notifier, figure));
+                if (notifier.value <= 0 && notifier == figure.health) {
+                  Navigator.pop(context);
+                }
+              }
+              //increment
+            },
+          )),
+    ]);
+  }
+
 
   @override
   _StatusMenuState createState() => _StatusMenuState();
@@ -100,57 +152,6 @@ class _StatusMenuState extends State<StatusMenu> {
     newList.add(condition);
     figure.conditions.value = newList;
   }
-
-  Widget buildCounterButtons(
-      ValueNotifier<int> notifier, int maxValue, String image) {
-    return Row(children: [
-      Container(
-          width: 42,
-          height: 42,
-          child: IconButton(
-              icon: Image.asset('assets/images/psd/sub.png'),
-              //iconSize: 30,
-              onPressed: () {
-                if (notifier.value > 0) {
-                  _gameState
-                      .action(ChangeStatCommand(-1, notifier, widget.figure));
-                  if (notifier == widget.figure.health &&
-                      widget.figure.health.value <= 0) {
-                    {
-                      Navigator.pop(context);
-                    }
-                    //handleDeath(context);
-                  }
-                  //increment
-                }
-              })),
-      Container(
-        width: 42,
-        height: 42,
-        child: Image(
-          image: AssetImage(image),
-        ),
-      ),
-      Container(
-          width: 42,
-          height: 42,
-          child: IconButton(
-            icon: Image.asset('assets/images/psd/add.png'),
-            //iconSize: 30,
-            onPressed: () {
-              if (notifier.value < maxValue) {
-                _gameState
-                    .action(ChangeStatCommand(1, notifier, widget.figure));
-                if (notifier.value <= 0 && notifier == widget.figure.health) {
-                  Navigator.pop(context);
-                }
-              }
-              //increment
-            },
-          )),
-    ]);
-  }
-
   Widget buildChillButtons(
       ValueNotifier<int> notifier, int maxValue, String image) {
     return Row(children: [
@@ -234,6 +235,7 @@ class _StatusMenuState extends State<StatusMenu> {
   @override
   Widget build(BuildContext context) {
     bool hasMireFoot = false;
+    bool isSummon = (widget.monster == null && widget.character == null); //hack - should have monsterBox send summon data instead
     for (var item in _gameState.currentList) {
       if (item.id == "Mirefoot") {
         hasMireFoot = true;
@@ -259,19 +261,19 @@ class _StatusMenuState extends State<StatusMenu> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    buildCounterButtons(
+                    StatusMenu.buildCounterButtons(
                         widget.figure.health,
                         widget.figure.maxHealth.value,
-                        "assets/images/blood.png"),
+                        "assets/images/blood.png", context, widget.figure, false),
                     widget.character != null
-                        ? buildCounterButtons(
+                        ? StatusMenu.buildCounterButtons(
                             widget.character!.characterState.xp,
                             900,
-                            "assets/images/psd/xp.png")
+                            "assets/images/psd/xp.png", context, widget.figure, false)
                         : Container(),
-                    widget.character != null
+                    widget.character != null || isSummon
                         ? buildChillButtons(
-                            widget.character!.characterState.chill,
+                            widget.figure.chill,
                             5,
                             "assets/images/conditions/chill.png")
                         : Container(),
@@ -309,7 +311,7 @@ class _StatusMenuState extends State<StatusMenu> {
                                 } else {
                                   openDialog(
                                     context,
-                                    SetLevelMenu(monster: widget.monster),
+                                    SetLevelMenu(monster: widget.monster, figure: widget.figure,), //TODO: should add summon data here instead
 
                                   );
                                 }
@@ -356,12 +358,12 @@ class _StatusMenuState extends State<StatusMenu> {
                   buildConditionButton(Condition.brittle),
                 ],
               ),
-              widget.character != null
+              widget.character != null || isSummon
                   ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         buildConditionButton(Condition.infect),
-                        buildConditionButton(Condition.impair),
+                        if(!isSummon )buildConditionButton(Condition.impair),
                         buildConditionButton(Condition.rupture),
                       ],
                     )

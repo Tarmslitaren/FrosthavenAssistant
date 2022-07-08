@@ -22,7 +22,8 @@ class CharacterWidget extends StatefulWidget {
   final int? initPreset;
 
   const CharacterWidget(
-  {required this.character, required this.initPreset, Key? key  }): super(key: key);
+      {required this.character, required this.initPreset, Key? key})
+      : super(key: key);
 
   @override
   _CharacterWidgetState createState() => _CharacterWidgetState();
@@ -45,7 +46,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
     _initTextFieldController.addListener(() {
       for (var item in _gameState.currentList) {
         if (item is Character) {
-          if (item.characterState.display== widget.character.characterState.display) {
+          if (item.characterState.display ==
+              widget.character.characterState.display) {
             if (_initTextFieldController.value.text.isNotEmpty) {
               item.characterState.initiative = int.parse(
                   _initTextFieldController
@@ -56,7 +58,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
       }
     });
 
-    if(widget.character.characterClass.name == "Objective" || widget.character.characterClass.name == "Escort") {
+    if (widget.character.characterClass.name == "Objective" ||
+        widget.character.characterClass.name == "Escort") {
       isCharacter = false;
       //widget.character.characterState.initiative = widget.initPreset!;
     }
@@ -79,67 +82,56 @@ class _CharacterWidgetState extends State<CharacterWidget> {
 
   Widget summonsButton(double scale) {
     return Container(
-      width: 30 * scale,
-        height: 30*scale,
+        width: 30 * scale,
+        height: 30 * scale,
         child: IconButton(
-      padding: EdgeInsets.zero,
-
-      icon: Image.asset(
-          color:  Colors.white24,
-          colorBlendMode: BlendMode.modulate,
-          'assets/images/psd/add.png'),
-      onPressed: () {
-          openDialog(
+          padding: EdgeInsets.zero,
+          icon: Image.asset(
+              color: Colors.white24,
+              colorBlendMode: BlendMode.modulate,
+              'assets/images/psd/add.png'),
+          onPressed: () {
+            openDialog(
               context,
               //problem: context is of stat card widget, not the + button
               AddSummonMenu(
                 character: widget.character,
               ),
-
-          );
-      },
-    ));
+            );
+          },
+        ));
   }
 
   Widget buildMonsterBoxGrid(double scale) {
 
     int displaystartAnimation = -1;
 
-    if(lastList.length < widget.character.characterState.summonList.value.length){
-      //find which is new
-
-      for(var item in widget.character.characterState.summonList.value){
-        bool found = false;
-        for(var oldItem in lastList) {
-          if(item.standeeNr == oldItem.standeeNr){
-            found = true;
-            break;
-          }
-        }
-        if (!found){
-          displaystartAnimation = item.standeeNr;
-          break;
-        }
-      }
+    if (lastList.length <
+        widget.character.characterState.summonList.value.length) {
+      //find which is new - always the last one
+      displaystartAnimation =
+          widget.character.characterState.summonList.value.length - 1;
     }
 
     final generatedChildren = List<Widget>.generate(
         widget.character.characterState.summonList.value.length,
-            (index) =>/* AnimatedSwitcher( //TODO: why is this not working?
+        (index) => /* AnimatedSwitcher( //TODO: why is this not working?
 
             key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
           duration: Duration(milliseconds: 1600),
-              child:*/ AnimatedSize( //not really needed now
-          key: Key(widget.character.characterState.summonList.value[index].standeeNr.toString()),
-          duration: const Duration(milliseconds: 300),
-          child:
-          MonsterBox(
-              key: Key(widget.character.characterState.summonList.value[index].standeeNr.toString()),
-              data: widget.character.characterState.summonList.value[index],
-              display: displaystartAnimation),
-          //)
-        )
-    );
+              child:*/
+            AnimatedSize(
+              //not really needed now
+              key: Key(index.toString()),
+              duration: const Duration(milliseconds: 300),
+              child: MonsterBox(
+                  key: Key(widget.character.characterState.summonList
+                      .value[index].standeeNr
+                      .toString()),
+                  data: widget.character.characterState.summonList.value[index],
+                  display: -2),
+              //)
+            ));
     lastList = widget.character.characterState.summonList.value;
     return Wrap(
       runSpacing: 2.0 * scale,
@@ -152,7 +144,6 @@ class _CharacterWidgetState extends State<CharacterWidget> {
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     double scaledHeight = 60 * scale;
-
 
     return GestureDetector(
         onVerticalDragStart: (details) {
@@ -167,18 +158,17 @@ class _CharacterWidgetState extends State<CharacterWidget> {
         onTap: () {
           //open stats menu
           openDialog(
-              context,
-             StatusMenu(
-                        figure: widget.character.characterState,
-                        character: widget.character),
-                  );
-
+            context,
+            StatusMenu(
+                figure: widget.character.characterState,
+                character: widget.character),
+          );
 
           setState(() {});
         },
-        child: ValueListenableBuilder<int>(
-            valueListenable: getIt<GameState>().commandIndex,
-            //TODO: more granularity for performance?
+        child: ValueListenableBuilder<dynamic>(
+            valueListenable: getIt<GameState>().modelData,
+            //TODO: is this even needed?
             builder: (context, value, child) {
               return ColorFiltered(
                   colorFilter: widget.character.characterState.health.value != 0
@@ -186,59 +176,64 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                       : ColorFilter.matrix(grayScale),
                   child: Container(
                       width: getMainListWidth(context),
-                      child: Stack(
-                        //alignment: Alignment.centerLeft,
-                        children: [
-                          Container(
-                            //color: Colors.amber,
-                            //height: 50,
-                            margin: EdgeInsets.only(
-                                left: 4 * scale * tempScale,
-                                right: 4 * scale * tempScale),
-                            width: getMainListWidth(context) - 4 * scale * tempScale,
-                            child: ValueListenableBuilder<int>(
-                                valueListenable: getIt<GameState>().killMonsterStandee, // widget.data.monsterInstances,
-                                builder: (context, value, child) {
-                                  return buildMonsterBoxGrid(scale);
-                                }),
-                          ),
-                          Container(
-                            //background
-                            margin: EdgeInsets.all(2 * scale),
+                      child: Column(mainAxisSize: MainAxisSize.max, children: [
+                        Container(
+                          padding: EdgeInsets.zero,
+                          // color: Colors.amber,
+                          //height: 50,
+                          margin: EdgeInsets.only(
+                              left: 4 * scale * tempScale,
+                              right: 4 * scale * tempScale),
+                          width:
+                              getMainListWidth(context) - 4 * scale * tempScale,
+                          child: ValueListenableBuilder<int>(
+                              valueListenable:
+                                  getIt<GameState>().killMonsterStandee,
+                              // widget.data.monsterInstances,
+                              builder: (context, value, child) {
+                                return buildMonsterBoxGrid(scale);
+                              }),
+                        ),
+                        Container(
                             width: 408 * scale,
-                            height: 58 * scale,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  colorFilter: ColorFilter.mode(
-                                      widget.character.characterClass.color,
-                                      BlendMode.color),
-                                  image: const AssetImage(
-                                      "assets/images/psd/character-bar.png")),
-                              shape: BoxShape.rectangle,
-                              color: widget.character.characterClass.color,
-                            ),
-                          ),
-                          Align(
-                              //alignment: Alignment.centerLeft,
-                              child: Row(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(
-                                    left: 20 * scale,
-                                    top: 5 * scale,
-                                    bottom: 5 * scale),
-                                child: Image(
-                                  fit: BoxFit.contain,
-                                  height: scaledHeight,
-                                  image: AssetImage(
-                                    "assets/images/class-icons/${widget.character.characterClass.name}.png",
-                                  ),
-                                  width: scaledHeight * 0.8,
-                                ),
+                            height: 60 * scale,
+                            child: Stack(
+                          //alignment: Alignment.centerLeft,
+                          children: [
+                            Container(
+                              //background
+                              margin: EdgeInsets.all(2 * scale),
+                              width: 408 * scale,
+                              height: 58 * scale,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.fill,
+                                    colorFilter: ColorFilter.mode(
+                                        widget.character.characterClass.color,
+                                        BlendMode.color),
+                                    image: const AssetImage(
+                                        "assets/images/psd/character-bar.png")),
+                                shape: BoxShape.rectangle,
+                                color: widget.character.characterClass.color,
                               ),
-                              Align(
-                                child: Column(children: [
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      left: 20 * scale,
+                                      top: 5 * scale,
+                                      bottom: 5 * scale),
+                                  child: Image(
+                                    fit: BoxFit.contain,
+                                    height: scaledHeight,
+                                    image: AssetImage(
+                                      "assets/images/class-icons/${widget.character.characterClass.name}.png",
+                                    ),
+                                    width: scaledHeight * 0.8,
+                                  ),
+                                ),
+                                Column(children: [
                                   Container(
                                     margin: EdgeInsets.only(
                                         top: scaledHeight / 6,
@@ -253,16 +248,18 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                   ValueListenableBuilder<int>(
                                       valueListenable: _gameState.commandIndex,
                                       builder: (context, value, child) {
-                                        if (isCharacter && _gameState
-                                            .commandIndex.value >= 0 &&_gameState.commands[_gameState
-                                            .commandIndex
-                                            .value] is DrawCommand) {
+                                        if (isCharacter &&
+                                            _gameState.commandIndex.value >=
+                                                0 &&
+                                            _gameState.commands[_gameState
+                                                .commandIndex
+                                                .value] is DrawCommand) {
                                           _initTextFieldController.clear();
                                         }
                                         if (_gameState.roundState.value ==
                                                 RoundState.chooseInitiative &&
-                                            widget.character.characterState.health
-                                                    .value >
+                                            widget.character.characterState
+                                                    .health.value >
                                                 0) {
                                           return Container(
                                             margin: EdgeInsets.only(
@@ -274,7 +271,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                                 //scrollPadding: EdgeInsets.zero,
                                                 onTap: () => {
                                                       //clear on enter focus
-                                                      _initTextFieldController.clear()
+                                                      _initTextFieldController
+                                                          .clear()
                                                     },
                                                 onChanged: (String str) {
                                                   //close soft keyboard on 2 chars entered
@@ -328,7 +326,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                                     TextInputType.number),
                                           );
                                         } else {
-                                          if(isCharacter) {
+                                          if (isCharacter) {
                                             _initTextFieldController.clear();
                                           }
                                           return Container(
@@ -337,9 +335,17 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                               margin: EdgeInsets.only(
                                                   left: 10 * scale),
                                               child: Text(
-                                                widget.character.characterState.health.value > 0 &&
-                                                    widget.character.characterState.initiative > 0
-                                                    ? widget.character.characterState
+                                                widget.character.characterState
+                                                                .health.value >
+                                                            0 &&
+                                                        widget
+                                                                .character
+                                                                .characterState
+                                                                .initiative >
+                                                            0
+                                                    ? widget
+                                                        .character
+                                                        .characterState
                                                         .initiative
                                                         .toString()
                                                     : "",
@@ -359,118 +365,128 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                         }
                                       }),
                                 ]),
-                              ),
-                              Column(
-                                  //mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  //align children to the left
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(
-                                          top: 10 * scale, left: 10 * scale),
-                                      child: Text(
-                                        widget.character.characterState.display,
-                                        style: TextStyle(
-                                            fontFamily: 'Pirata',
-                                            color: Colors.white,
-                                            fontSize: 16 * scale,
-                                            shadows: [
-                                              Shadow(
-                                                  offset: Offset(
-                                                      1 * scale, 1 * scale),
-                                                  color: Colors.black)
-                                            ]),
-                                      ),
-                                    ),
-                                    ValueListenableBuilder<int>(
-                                        valueListenable:
-                                        widget.character.characterState.health,
-                                        //not working?
-                                        builder: (context, value, child) {
-                                          return Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 10 * scale),
-                                              child: Row(children: [
-                                                Image(
-                                                  //fit: BoxFit.contain,
-                                                  height: scaledHeight * 0.3,
-                                                  image: const AssetImage(
-                                                      "assets/images/blood.png"),
-                                                ),
-                                                Text(
-                                                  '${widget.character.characterState.health.value.toString()} / ${widget.character.characterState.maxHealth.value.toString()}',
-                                                  style: TextStyle(
-                                                      fontFamily: 'Pirata',
-                                                      color: Colors.white,
-                                                      fontSize: 16 * scale,
-                                                      shadows: [
-                                                        Shadow(
-                                                            offset: Offset(
-                                                                1 * scale,
-                                                                1 * scale),
-                                                            color: Colors.black)
-                                                      ]),
-                                                ),
-                                                //add conditions here
-                                                ValueListenableBuilder<
-                                                        List<Condition>>(
-                                                    valueListenable: widget.character
-                                                        .characterState
-                                                        .conditions,
-                                                    builder: (context, value,
-                                                        child) {
-                                                      return Row(
-                                                        children:
-                                                            createConditionList(
-                                                                scale),
-                                                      );
-                                                    }),
-                                              ]));
-                                        })
-                                  ])
-                            ],
-                          )),
-                          isCharacter? Positioned(
-                              top: 10 * scale,
-                              left: 318 * scale,
-                              child: Row(
-                                children: [
-                                  ValueListenableBuilder<int>(
-                                      valueListenable:
-                                      widget.character.characterState.xp,
-                                      builder: (context, value, child) {
-                                        return Text(
-                                          widget.character.characterState.xp.value
-                                              .toString(),
+                                Column(
+                                    //mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    //align children to the left
+                                    children: [
+                                      Container(
+                                        margin: EdgeInsets.only(
+                                            top: 10 * scale, left: 10 * scale),
+                                        child: Text(
+                                          widget
+                                              .character.characterState.display,
                                           style: TextStyle(
                                               fontFamily: 'Pirata',
-                                              color: Colors.blue,
-                                              fontSize: 14 * scale,
+                                              color: Colors.white,
+                                              fontSize: 16 * scale,
                                               shadows: [
                                                 Shadow(
                                                     offset: Offset(
                                                         1 * scale, 1 * scale),
                                                     color: Colors.black)
                                               ]),
-                                        );
-                                      }),
-                                  Image(
-                                    height:
-                                        20.0 * scale * LineBuilder.tempScale,
-                                    color: Colors.blue,
-                                    image: const AssetImage(
-                                        "assets/images/psd/xp.png"),
-                                  ),
-                                ],
-                              )): Container(),
-                  isCharacter? Positioned(
-                    right: 29 * scale,
-                    top: 14 * scale,
-                    child: summonsButton(scale),
-                  ):Container()
-
-                        ],
-                      )));
+                                        ),
+                                      ),
+                                      ValueListenableBuilder<int>(
+                                          valueListenable: widget
+                                              .character.characterState.health,
+                                          //not working?
+                                          builder: (context, value, child) {
+                                            return Container(
+                                                margin: EdgeInsets.only(
+                                                    left: 10 * scale),
+                                                child: Row(children: [
+                                                  Image(
+                                                    //fit: BoxFit.contain,
+                                                    height: scaledHeight * 0.3,
+                                                    image: const AssetImage(
+                                                        "assets/images/blood.png"),
+                                                  ),
+                                                  Text(
+                                                    '${widget.character.characterState.health.value.toString()} / ${widget.character.characterState.maxHealth.value.toString()}',
+                                                    style: TextStyle(
+                                                        fontFamily: 'Pirata',
+                                                        color: Colors.white,
+                                                        fontSize: 16 * scale,
+                                                        shadows: [
+                                                          Shadow(
+                                                              offset: Offset(
+                                                                  1 * scale,
+                                                                  1 * scale),
+                                                              color:
+                                                                  Colors.black)
+                                                        ]),
+                                                  ),
+                                                  //add conditions here
+                                                  ValueListenableBuilder<
+                                                          List<Condition>>(
+                                                      valueListenable: widget
+                                                          .character
+                                                          .characterState
+                                                          .conditions,
+                                                      builder: (context, value,
+                                                          child) {
+                                                        return Row(
+                                                          children:
+                                                              createConditionList(
+                                                                  scale),
+                                                        );
+                                                      }),
+                                                ]));
+                                          })
+                                    ])
+                              ],
+                            ),
+                            isCharacter
+                                ? Positioned(
+                                    top: 10 * scale,
+                                    left: 318 * scale,
+                                    child: Row(
+                                      children: [
+                                        ValueListenableBuilder<int>(
+                                            valueListenable: widget
+                                                .character.characterState.xp,
+                                            builder: (context, value, child) {
+                                              return Text(
+                                                widget.character.characterState
+                                                    .xp.value
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontFamily: 'Pirata',
+                                                    color: Colors.blue,
+                                                    fontSize: 14 * scale,
+                                                    shadows: [
+                                                      Shadow(
+                                                          offset: Offset(
+                                                              1 * scale,
+                                                              1 * scale),
+                                                          color: Colors.black)
+                                                    ]),
+                                              );
+                                            }),
+                                        Image(
+                                          height: 20.0 *
+                                              scale *
+                                              LineBuilder.tempScale,
+                                          color: Colors.blue,
+                                          image: const AssetImage(
+                                              "assets/images/psd/xp.png"),
+                                        ),
+                                      ],
+                                    ))
+                                : Container(),
+                            isCharacter
+                                ? Positioned(
+                                    right: 29 * scale,
+                                    top: 14 * scale,
+                                    child: summonsButton(scale),
+                                  )
+                                : Container()
+                          ],
+                        )
+                        )])));
             }));
   }
 }
