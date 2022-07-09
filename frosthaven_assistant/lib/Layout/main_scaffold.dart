@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'bottom_bar.dart';
 import 'main_list.dart';
 import 'menus/main_menu.dart';
+import 'modifier_deck_widget.dart';
 
 Widget createMainScaffold(BuildContext context) {
   return SafeArea(
@@ -17,10 +18,6 @@ Widget createMainScaffold(BuildContext context) {
     appBar: createTopBar(),
     drawer: createMainMenu(context),
     body: const MainList(),
-    /*floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),*/ // This trailing comma makes auto-formatting nicer for build methods.
+    //floatingActionButton: const ModifierDeckWidget()
   ));
 }

@@ -21,7 +21,6 @@ class DrawCommand extends Command {
       _gameState.updateList.value++;
       MainList.scrollToTop();
     });
-
   }
 
   @override

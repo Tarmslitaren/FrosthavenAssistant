@@ -94,7 +94,7 @@ class _DrawButtonState extends State<DrawButton> {
                 Text(
                   _gameState.round.value.toString(),
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     color: Colors.white,
                     shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
 

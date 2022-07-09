@@ -17,6 +17,7 @@ import '../Model/character_class.dart';
 import 'action_handler.dart';
 import 'card_stack.dart';
 import 'enums.dart';
+import 'modifier_deck_state.dart';
 import 'monster_ability_state.dart';
 
 class Figure {
@@ -124,15 +125,6 @@ class Character extends ListItemData{
   }
 
 
-}
-
-
-enum MonsterType {
-  normal,
-  elite,
-  boss,
-  //named?
-  summon
 }
 
 class MonsterInstance extends Figure{
@@ -327,7 +319,7 @@ class Monster extends ListItemData{
   }
 }
 
-class GameState extends ActionHandler{
+class GameState extends ActionHandler{ //TODO: put action handler in own place
 
   GameState() {
     init();
@@ -399,8 +391,11 @@ class GameState extends ActionHandler{
   //elements
   final elementState = ValueNotifier< Map<Elements, ElementState> >(HashMap());
 
+  //modifierDeck
+  ModifierDeck modifierDeck = ModifierDeck();
+
   //GameState? savedState; //load from file, save to file on interval/ app in background? or after any operation?
-  //actually make a list of saved states and use for the undo/redo feature
+  //actually make a list of saved states and use for the undo/redo feature?
 
   //config: TODO: move to own state
   final userScaling = ValueNotifier<double>(1.0);
@@ -423,6 +418,7 @@ class GameState extends ActionHandler{
         '"currentCampaign": "${currentCampaign.value}", '
         '"currentList": ${currentList.toString()}, '
         '"currentAbilityDecks": ${currentAbilityDecks.toString()}, '
+        '"modifierDeck": ${modifierDeck.toString()}, '
         '"elementState": ${json.encode(elements)} ' //didn't like the map?
         '}';
   }
@@ -525,6 +521,52 @@ class GameState extends ActionHandler{
 
         currentAbilityDecks.add(state);
       }
+
+      var modifierDeckData = data['modifierDeck'];
+        ModifierDeck state = ModifierDeck();
+
+        List<ModifierCard> newDrawList = [];
+        List drawPile = modifierDeckData["drawPile"] as List;
+        for(var item in drawPile) {
+          String gfx = item["gfx"]; //TODO only save gfx
+          if (gfx == "curse") {
+            state.curses.value++;
+            newDrawList.add(ModifierCard(CardType.curse, gfx));
+          }
+          else if (gfx == "bless") {
+            state.blesses.value++;
+            newDrawList.add(ModifierCard(CardType.curse, gfx));
+          }
+          else if(gfx == "nullAttack" || gfx == "doubleAttack"){
+            newDrawList.add(ModifierCard(CardType.multiply, gfx));
+          } else {
+            newDrawList.add(ModifierCard(CardType.add, gfx));
+          }
+        }
+        List<ModifierCard> newDiscardList = [];
+        for(var item in modifierDeckData["discardPile"] as List){
+          String gfx = item["gfx"];
+          if (gfx == "curse") {
+            newDiscardList.add(ModifierCard(CardType.curse, gfx));
+          }
+          else if (gfx == "bless") {
+            newDiscardList.add(ModifierCard(CardType.curse, gfx));
+          }
+          else if(gfx == "nullAttack" || gfx == "doubleAttack"){
+            newDiscardList.add(ModifierCard(CardType.multiply, gfx));
+            state.needsShuffle = true;
+          } else {
+            newDiscardList.add(ModifierCard(CardType.add, gfx));
+          }
+        }
+        state.drawPile.getList().clear();
+        state.discardPile.getList().clear();
+        state.drawPile.setList(newDrawList);
+        state.discardPile.setList(newDiscardList);
+        state.cardCount.value = state.drawPile.size();
+        modifierDeck = state;
+
+      //////
 
       Map elementData = data['elementState'];
 

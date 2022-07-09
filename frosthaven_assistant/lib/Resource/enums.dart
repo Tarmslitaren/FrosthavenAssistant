@@ -55,3 +55,11 @@ enum ListItemState {
   myTurn, //conditions reminder (above in list is gray)
   doneTurn, //gray, expire conditions
 }
+
+enum MonsterType {
+  normal,
+  elite,
+  boss,
+  //named?
+  summon
+}

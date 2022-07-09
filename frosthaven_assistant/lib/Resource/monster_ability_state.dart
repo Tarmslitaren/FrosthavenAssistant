@@ -17,6 +17,7 @@ class MonsterAbilityState{
       if(name == model.name) {
         drawPile.init(model.cards);
         shuffle();
+        break;
       }
     }
   }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 
+import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
 
 class LineBuilder {

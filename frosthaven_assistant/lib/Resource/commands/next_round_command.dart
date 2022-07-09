@@ -28,6 +28,10 @@ class NextRoundCommand extends Command {
         _gameState.updateList.value++;
         MainList.scrollToTop();
     });
+
+    if(_gameState.modifierDeck.needsShuffle) {
+      _gameState.modifierDeck.shuffle();
+    }
   }
 
   @override

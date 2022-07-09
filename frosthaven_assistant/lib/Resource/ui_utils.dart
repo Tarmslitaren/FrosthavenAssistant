@@ -63,8 +63,8 @@ Widget buildCounterButtons(
   final totalChangeValue = ValueNotifier<int>(0);
   return Row(children: [
     Container(
-        width: 42,
-        height: 42,
+        width: 40,
+        height: 40,
         child: IconButton(
             icon: Image.asset('assets/images/psd/sub.png'),
 //iconSize: 30,
@@ -81,8 +81,8 @@ Widget buildCounterButtons(
             })),
     Stack(children: [
       Container(
-        width: 42,
-        height: 42,
+        width: 40,
+        height: 40,
         child: Image(
           color: color,
           colorBlendMode: BlendMode.modulate,
@@ -90,7 +90,7 @@ Widget buildCounterButtons(
         ),
       ),
       ValueListenableBuilder<int>(
-          valueListenable: totalChangeValue,
+          valueListenable: notifier,
           builder: (context, value, child) {
             String text = "";
             if(totalChangeValue.value > 0) {
@@ -105,13 +105,16 @@ Widget buildCounterButtons(
             return Positioned(
               bottom: 0,
               right: 0,
-              child: Text(text, style: TextStyle(color: color),)
+              child: Text(text, style: TextStyle(color: color,
+                  shadows: [
+                  Shadow(offset: Offset(1, 1), color: Colors.black)]
+            ),)
             );
           })
     ]),
     Container(
-        width: 42,
-        height: 42,
+        width: 40,
+        height: 40,
         child: IconButton(
           icon: Image.asset('assets/images/psd/add.png'),
 //iconSize: 30,

@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
+import '../Resource/enums.dart';
 import '../Resource/stat_calculator.dart';
 import '../Resource/ui_utils.dart';
 import 'line_builder.dart';

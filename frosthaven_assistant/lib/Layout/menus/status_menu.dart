@@ -137,7 +137,9 @@ class _StatusMenuState extends State<StatusMenu> {
               return Positioned(
                   bottom: 0,
                   right: 0,
-                  child: Text(text, style: const TextStyle(color: Colors.blue),)
+                  child: Text(text, style: const TextStyle(color: Colors.blue,
+                      shadows: [
+                        Shadow(offset: Offset(1, 1), color: Colors.black)]),)
               );
             })
       ]),
@@ -241,6 +243,10 @@ class _StatusMenuState extends State<StatusMenu> {
                             5,
                             "assets/images/conditions/chill.png")
                         : Container(),
+                    widget.monster!= null ?
+                        buildCounterButtons(_gameState.modifierDeck.blesses, 10, "assets/images/abilities/bless.png", context, widget.figure, true, Colors.white): Container(),
+                    widget.monster!= null ?
+                    buildCounterButtons(_gameState.modifierDeck.curses, 10, "assets/images/abilities/curse.png", context, widget.figure, true, Colors.white): Container(),
                     Row(
                       children: [
                         Container(
