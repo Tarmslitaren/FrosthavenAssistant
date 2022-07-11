@@ -42,11 +42,11 @@ class Item extends StatelessWidget {
           key: Key(character.id), character: character, initPreset: initPreset);
       height = 60 * scale;
       if (character.characterState.summonList.value.isNotEmpty) {
-        double listWidth = 0;
+        double summonsTotalWidth = 0;
         for (var monsterInstance in character.characterState.summonList.value) {
-          listWidth += MonsterBox.getWidth(scale, monsterInstance);
+          summonsTotalWidth += MonsterBox.getWidth(scale, monsterInstance);
         }
-        double rows = listWidth / listWidth;
+        double rows = summonsTotalWidth / listWidth;
         height += 32 * rows.ceil() * scale;
       }
 
