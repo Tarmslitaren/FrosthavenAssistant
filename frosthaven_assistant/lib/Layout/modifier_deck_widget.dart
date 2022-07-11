@@ -27,10 +27,93 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   void initState() {
     super.initState();
   }
+  Widget buildSlideAnimation(Widget child, Key key) {
+    return Container(
+        key: key,
+        child: TranslationAnimatedWidget(
+          //curve: Curves.slowMiddle,
+          /*animationFinished: (bool finished){
+            if (finished) {
+              //enabled = false;
+            }
+          },*/
+            duration: Duration(milliseconds: cardAnimationDuration),
+            enabled: enabled,
+            curve: Curves.easeIn,
+            values: [
+              Offset(0, 0), //left to drawpile
+              Offset(0, 0), //left to drawpile
+              Offset(50, 0), //end
+            ],
+                child: RotationAnimatedWidget(
+                    enabled: enabled,
+                    values: [
+                      Rotation.deg(x: 0, y: 0, z: -15),
+                      Rotation.deg(x: 0, y: 0, z: -15),
+                      Rotation.deg(x: 0, y: 0, z: 0),
+                    ],
+                    duration: Duration(milliseconds:cardAnimationDuration),
+                    child: child)));
+
+  }
+
+  static int cardAnimationDuration = 1200;
+  bool enabled = true; //TODO: disable the animation onc eit is done and save the disabled state, so it doesn't play on resize/restart
+  Widget buildDrawAnimation(Widget child, Key key) {
+    //compose a translation, scale, rotation + somehow switch widget from back to front
+    double width = 88;
+    double height = 60;
+    //enabled = !enabled; //testing
+
+    var screenSize = MediaQuery.of(context).size;
+    double xOffset = -(screenSize.width/2 - 100);
+    double yOffset = -(screenSize.height/2 - height/2);
+
+    return Container(
+      key: key, //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
+        child: TranslationAnimatedWidget(
+          //curve: Curves.slowMiddle,
+          /*animationFinished: (bool finished){
+            if (finished) {
+              //enabled = false;
+            }
+          },*/
+        duration: Duration(milliseconds: cardAnimationDuration),
+        enabled: enabled,
+        values: [
+          Offset(-(width+3), 0), //left to drawpile
+          Offset(xOffset, yOffset), //center of screen
+          Offset(xOffset, yOffset), //center of screen
+          Offset(xOffset, yOffset), //center of screen
+          Offset(0, 0), //end
+        ],
+        child: ScaleAnimatedWidget( //does nothing
+          enabled: enabled,
+            duration: Duration(milliseconds: cardAnimationDuration),
+
+            values: [
+              1,
+              3,
+              3,
+              3,
+              1
+            ],
+            child: RotationAnimatedWidget(
+              enabled: enabled,
+               values: [
+                 //Rotation.deg(x: 0, y: 0, z: 0),
+                 //Rotation.deg(x:0, y: 0, z: 90),
+                 Rotation.deg(x: 0, y: 0, z: 180),
+                 //Rotation.deg(x: 0, y: 0, z: 270),
+                 Rotation.deg(x: 0, y: 0, z: 360),
+               ],
+               duration: Duration(milliseconds:(cardAnimationDuration * 0.25).ceil()),
+                child: child))));
+  }
 
   @override
   Widget build(BuildContext context) {
-    int remainingCards = _gameState.modifierDeck.drawPile.size();
+    bool isAnimating = false;
     return Positioned(
         right: 0,
         bottom: 0,
@@ -38,21 +121,27 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
           width: 230,
           height: 60,
           child: ValueListenableBuilder<int>(
-              valueListenable: _gameState.modifierDeck.cardCount,
+              valueListenable: _gameState.modifierDeck.curses,
               builder: (context, value, child) {
                 return Row(
                   children: [
                     GestureDetector(
                         onTap: () {
                           setState(() {
+                            //isAnimating = true;
+                            // Future.delayed(Duration(milliseconds: 600), () {
                             _gameState.action(DrawModifierCardCommand());
+                            //isAnimating = false;
+                            //});
+
+                            //TODO: start the animation - do a start animation for the top card of the discard pile
                           });
                         },
                         child: Stack(children: [
                           _gameState.modifierDeck.drawPile.isNotEmpty
                               ? ModifierCardWidget(
                                   card: _gameState.modifierDeck.drawPile.peek,
-                                  revealed: false)
+                                  revealed: isAnimating)
                               : Container(
                                   width: 88,
                                   height: 60,
@@ -85,7 +174,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                             //TODO: WHYYY!? if I make the width big enough, the rotated widget can be seen overflowing the height?!
                             child: Stack(children: [
                               _gameState.modifierDeck.discardPile.size() > 1
-                                  ? Positioned(
+                                  ? buildSlideAnimation(Positioned(
                                       left: 55,
                                       child: RotationTransition(
                                           turns: const AlwaysStoppedAnimation(
@@ -102,18 +191,19 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                                     .length -
                                                 2],
                                             revealed: true,
-                                          )))
+                                          ))), Key(_gameState.modifierDeck.discardPile.size().toString()))
                                   : Container(),
-                              _gameState.modifierDeck.discardPile
-                                      .isNotEmpty //TODO: not exactly right: need to save last cards drawn even if they needed to be shuffled
-                                  ? ModifierCardWidget(
+                              _gameState.modifierDeck.discardPile.isNotEmpty
+                                  ? buildDrawAnimation(
+                                  ModifierCardWidget(
+                                key: Key(_gameState.modifierDeck.discardPile.size().toString()),
                                       card: _gameState
                                           .modifierDeck.discardPile.peek,
                                       revealed: true,
-                                    )
+                                    ),
+                                Key((-_gameState.modifierDeck.discardPile.size()).toString()))
                                   : Container(
                                       width: 100,
-                                      //todo proper size same as card. so it can be interacted with
                                       height: 60,
                                     ),
                             ])))

@@ -12,9 +12,12 @@ double tempScale = 0.8;
 
 class ModifierCardWidget extends StatefulWidget {
   final ModifierCard card;
-  bool revealed;
+  final revealed = ValueNotifier<bool>(false);
 
-  ModifierCardWidget({Key? key, required this.card, required this.revealed}) : super(key: key);
+  ModifierCardWidget({Key? key, required this.card, required bool revealed}) {
+    //super(key: key);
+    this.revealed.value = revealed;
+  }
 
   @override
   ModifierCardWidgetState createState() => ModifierCardWidgetState();
@@ -22,10 +25,11 @@ class ModifierCardWidget extends StatefulWidget {
   static Widget buildFront(ModifierCard card, double scale) {
     return Container(
       //margin: EdgeInsets.all(2),
+      //key: UniqueKey(),
       width: 88,
       height: 60,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(4.0 ),
+        borderRadius: BorderRadius.circular(4.0),
         child: Image(
           //height: 56,
           //height: 123 * tempScale * scale,
@@ -37,10 +41,8 @@ class ModifierCardWidget extends StatefulWidget {
 
   static Widget buildRear(double scale) {
     return Container(
-      key: const ValueKey<int>(0),
-      //margin: EdgeInsets.onl(2),
+      key: const ValueKey<int>(0), //with a unique key this would run the switcher animation for 2 backsides
       width: 88,
-      //this evaluates to same space as front somehow.
       height: 60,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0),
@@ -61,7 +63,7 @@ class ModifierCardWidgetState extends State<ModifierCardWidget> {
     super.initState();
   }
 
-  Widget _transitionBuilder(Widget widget, Animation<double> animation) {
+  Widget transitionBuilder(Widget widget, Animation<double> animation) {
     final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
     return AnimatedBuilder(
         animation: rotateAnim,
@@ -79,20 +81,24 @@ class ModifierCardWidgetState extends State<ModifierCardWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    return  AnimatedSwitcher(
-          duration: const Duration(milliseconds: 600),
-          transitionBuilder: _transitionBuilder,
-          layoutBuilder: (widget, list) => Stack(
-            children: [widget!, ...list],
-          ),
-          //switchInCurve: Curves.easeInBack,
-          //switchOutCurve: Curves.easeInBack.flipped,
-          child: widget.revealed
-              ? ModifierCardWidget.buildFront(widget.card, scale)
-              : ModifierCardWidget.buildRear(scale),
-          //AnimationController(duration: Duration(seconds: 1), vsync: 0);
-          //CurvedAnimation(parent: null, curve: Curves.easeIn)
-          //),
-        );
+    return ValueListenableBuilder<bool>(
+        valueListenable: _gameState.solo, //not needed
+        builder: (context, value, child) {
+          return AnimatedSwitcher( //wrong place: should add animated switcher as part of animation stack?
+            duration: const Duration(milliseconds: 800),
+            transitionBuilder: transitionBuilder,
+            layoutBuilder: (widget, list) => Stack(
+              children: [widget!, ...list],
+            ),
+            //switchInCurve: Curves.easeInBack,
+            //switchOutCurve: Curves.easeInBack.flipped,
+            child: widget.revealed.value
+                ? ModifierCardWidget.buildFront(widget.card, scale)
+                : ModifierCardWidget.buildRear(scale),
+            //AnimationController(duration: Duration(seconds: 1), vsync: 0);
+            //CurvedAnimation(parent: null, curve: Curves.easeIn)
+            //),
+          );
+        });
   }
 }
