@@ -91,10 +91,12 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
 
   @override
   Widget build(BuildContext context) {
+    //edge insets if width not too small
+
     return Card(
         //color: Colors.transparent,
         // shadowColor: Colors.transparent,
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.all(2),
         child: Stack(children: [
           Column(
             children: [

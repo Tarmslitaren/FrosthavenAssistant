@@ -83,7 +83,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     return Card(
       //color: Colors.transparent,
       // shadowColor: Colors.transparent,
-        margin: const EdgeInsets.all(20),
+        margin: const EdgeInsets.all(2),
         child: Stack(children: [
           Column(
             children: [

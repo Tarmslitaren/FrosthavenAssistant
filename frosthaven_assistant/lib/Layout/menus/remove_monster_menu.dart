@@ -25,7 +25,7 @@ class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
   @override
   Widget build(BuildContext context) {
     List<Monster> currentMonsters = GameMethods.getCurrentMonsters();
-    return Dialog(
+    return Card(
         child: Stack(children: [
           Column(
             children: [

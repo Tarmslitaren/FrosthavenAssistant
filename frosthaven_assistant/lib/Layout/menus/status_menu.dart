@@ -101,6 +101,7 @@ class _StatusMenuState extends State<StatusMenu> {
     newList.add(condition);
     figure.conditions.value = newList;
   }
+
   Widget buildChillButtons(
       ValueNotifier<int> notifier, int maxValue, String image) {
     return Row(children: [
@@ -208,6 +209,18 @@ class _StatusMenuState extends State<StatusMenu> {
         break;
       }
     }
+    String name = "";
+    if(widget.monster != null) {
+      name = widget.monster!.type.display;
+
+    }else if(widget.character != null){
+      name = widget.character!.characterState.display;
+    }else if (widget.figure is MonsterInstance) {
+      name = (widget.figure as MonsterInstance).name;
+    }
+      //has to be summon
+
+
     return Container(
         width: 336,
         height: 210,
@@ -219,7 +232,11 @@ class _StatusMenuState extends State<StatusMenu> {
             fit: BoxFit.fitWidth,
           ),
         ),
-        child: Row(children: [
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+          Text(name),
+          Row(children: [
           ValueListenableBuilder<int>(
               valueListenable: widget.figure.maxHealth,
               builder: (context, value, child) {
@@ -366,6 +383,6 @@ class _StatusMenuState extends State<StatusMenu> {
               ),
             ],
           ),
-        ]));
+        ])]));
   }
 }

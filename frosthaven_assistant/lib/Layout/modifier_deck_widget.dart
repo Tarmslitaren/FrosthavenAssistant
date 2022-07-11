@@ -13,7 +13,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/enums.dart';
 
-double tempScale = 0.8;
+double smallify = 0.66666;
 
 class ModifierDeckWidget extends StatefulWidget {
   const ModifierDeckWidget({Key? key}) : super(key: key);
@@ -45,7 +45,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
             values: [
               Offset(0, 0), //left to drawpile
               Offset(0, 0), //left to drawpile
-              Offset(50, 0), //end
+              Offset(50*smallify, 0), //end
             ],
                 child: RotationAnimatedWidget(
                     enabled: enabled,
@@ -63,12 +63,12 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   bool enabled = true; //TODO: disable the animation onc eit is done and save the disabled state, so it doesn't play on resize/restart
   Widget buildDrawAnimation(Widget child, Key key) {
     //compose a translation, scale, rotation + somehow switch widget from back to front
-    double width = 88;
-    double height = 60;
+    double width = 88 * smallify;
+    double height = 40;
     //enabled = !enabled; //testing
 
     var screenSize = MediaQuery.of(context).size;
-    double xOffset = -(screenSize.width/2 - 100);
+    double xOffset = -(screenSize.width/2 - 100*smallify);
     double yOffset = -(screenSize.height/2 - height/2);
 
     return Container(
@@ -83,7 +83,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         duration: Duration(milliseconds: cardAnimationDuration),
         enabled: enabled,
         values: [
-          Offset(-(width+3), 0), //left to drawpile
+          Offset(-(width+2), 0), //left to drawpile
           Offset(xOffset, yOffset), //center of screen
           Offset(xOffset, yOffset), //center of screen
           Offset(xOffset, yOffset), //center of screen
@@ -95,9 +95,9 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
             values: [
               1,
-              3,
-              3,
-              3,
+              4,
+              4,
+              4,
               1
             ],
             child: RotationAnimatedWidget(
@@ -120,8 +120,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         right: 0,
         bottom: 0,
         child: Container(
-          width: 230,
-          height: 60,
+          width: 230 * smallify,
+          height: 40,
           child: ValueListenableBuilder<int>(
               valueListenable: _gameState.modifierDeck.curses,
               builder: (context, value, child) {
@@ -130,13 +130,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                     GestureDetector(
                         onTap: () {
                           setState(() {
-                            //isAnimating = true;
-                            // Future.delayed(Duration(milliseconds: 600), () {
                             _gameState.action(DrawModifierCardCommand());
-                            //isAnimating = false;
-                            //});
-
-                            //TODO: start the animation - do a start animation for the top card of the discard pile
                           });
                         },
                         child: Stack(children: [
@@ -145,17 +139,18 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                   card: _gameState.modifierDeck.drawPile.peek,
                                   revealed: isAnimating)
                               : Container(
-                                  width: 88,
-                                  height: 60,
+                                  width: 88 * smallify,
+                                  height: 40,
                                   color:
                                       Color(int.parse("7A000000", radix: 16))),
                           Positioned(
-                              bottom: 1,
+                              bottom: 0,
                               right: 2,
                               child: Text(
                                 _gameState.modifierDeck.cardCount.value
                                     .toString(),
                                 style: const TextStyle(
+                                  fontSize: 10,
                                     color: Colors.white,
                                     shadows: [
                                       Shadow(
@@ -165,19 +160,19 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                               ))
                         ])),
                     SizedBox(
-                      width: 3,
+                      width: 2,
                     ),
                     GestureDetector(
                         onTap: () {
                           openDialog(context, const ModifierCardMenu());
                         },
                         child: Container(
-                            width: 155,
+                            width: 155 * smallify,
                             //TODO: WHYYY!? if I make the width big enough, the rotated widget can be seen overflowing the height?!
                             child: Stack(children: [
                               _gameState.modifierDeck.discardPile.size() > 1
                                   ? buildSlideAnimation(Positioned(
-                                      left: 55,
+                                      left: 55 * smallify,
                                       child: RotationTransition(
                                           turns: const AlwaysStoppedAnimation(
                                               15 / 360),
@@ -205,8 +200,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                     ),
                                 Key((-_gameState.modifierDeck.discardPile.size()).toString()))
                                   : Container(
-                                      width: 100,
-                                      height: 60,
+                                      width: 100 * smallify,
+                                      height: 40,
                                     ),
                             ])))
                   ],

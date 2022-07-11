@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
@@ -88,7 +90,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     }
     var screenSize = MediaQuery.of(context).size;
     return SizedBox(
-        width: screenSize.width / nrOfButtons -15,
+        width: max(screenSize.width / nrOfButtons -15,20),
         child: TextButton(
 
           child: Text(text),

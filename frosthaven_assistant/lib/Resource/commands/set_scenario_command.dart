@@ -48,10 +48,6 @@ class SetScenarioCommand extends Command {
             newList.add(item);
           }
         }
-
-        if (item is Monster) {
-          _gameState.currentList.remove(item);
-        }
       }
       GameMethods.shuffleDecks();
       _gameState.currentList = newList;

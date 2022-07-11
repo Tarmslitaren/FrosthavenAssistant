@@ -26,6 +26,7 @@ class Figure {
   final maxHealth = ValueNotifier<int>(0); //? //needed for the times you wanna set hp yourself, for special reasons
   final conditions = ValueNotifier<List<Condition>>([]);
   final chill = ValueNotifier<int>(0);
+
 }
 
 class CharacterState extends Figure{
@@ -466,7 +467,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
       Map<String, dynamic> data = jsonDecode(value);
       level.value = data['level'] as int;
       scenario.value = data['scenario'];// as String;
-      currentCampaign.value = data['currentCampaign'];
+      currentCampaign.value = data['currentCampaign'];//TODO: does not update properly (because changing it is not a command
       round.value = data['round'] as int;
       roundState.value =  RoundState.values[data['roundState']];
       solo.value = data['solo'] as bool; //TODO: does not update properly (because changing it is not a command
@@ -528,7 +529,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
         List<ModifierCard> newDrawList = [];
         List drawPile = modifierDeckData["drawPile"] as List;
         for(var item in drawPile) {
-          String gfx = item["gfx"]; //TODO only save gfx
+          String gfx = item["gfx"];
           if (gfx == "curse") {
             state.curses.value++;
             newDrawList.add(ModifierCard(CardType.curse, gfx));

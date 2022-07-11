@@ -12,12 +12,15 @@ import 'modifier_deck_widget.dart';
 Widget createLevelWidget(BuildContext context) {
   GameState _gameState = getIt<GameState>();
 
+  const double fontHeight = 14;
+
   var textStyle = const TextStyle(
       //fontFamily: 'Majalla',
       color: Colors.white,
+      overflow: TextOverflow.fade,
       //fontWeight: FontWeight.bold,
       //backgroundColor: Colors.transparent.withAlpha(100),
-      fontSize: 15.5,
+      fontSize: fontHeight,
       shadows: [
         Shadow(offset: Offset(1.0, 1.0), blurRadius: 3.0, color: Colors.black),
         Shadow(offset: Offset(1.0, 1.0), blurRadius: 8.0, color: Colors.black),
@@ -39,8 +42,9 @@ Widget createLevelWidget(BuildContext context) {
             valueListenable: _gameState.scenario,
             builder: (context, value, child) {
               return Container(
-                  width: 200,
+                  width: 174,
                   child: Text(
+                    overflow: TextOverflow.ellipsis,
                     _gameState.scenario.value,
                     textAlign: TextAlign.center,
                     style: textStyle,
@@ -56,51 +60,51 @@ Widget createLevelWidget(BuildContext context) {
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
                       child: const Image(
-                        height: 10.5,
+                        height: fontHeight * 0.6,
                         image: AssetImage("assets/images/psd/level.png"),
                       )),
                   TextSpan(
-                    text: " : ${_gameState.level.value} ",
+                    text: ": ${_gameState.level.value} ",
                     style: textStyle,
                   ),
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
                       child: const Image(
-                        height: 15.5,
+                        height: fontHeight,
                         image: AssetImage("assets/images/psd/traps-fh.png"),
                       )),
                   TextSpan(
-                    text: " : ${GameMethods.getTrapValue()}",
+                    text: ": ${GameMethods.getTrapValue()} ",
                     style: textStyle,
                   ),
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
                       child: const Image(
-                        height: 15.5,
+                        height: fontHeight,
                         image: AssetImage("assets/images/psd/hazard-fh.png"),
                       )),
                   TextSpan(
-                    text: " : ${GameMethods.getHazardValue()} ",
+                    text: ": ${GameMethods.getHazardValue()} ",
                     style: textStyle,
                   ),
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
                       child: const Image(
-                        height: 14.5,
+                        height: fontHeight * 0.9,
                         image: AssetImage("assets/images/psd/xp.png"),
                       )),
                   TextSpan(
-                    text: " : +${GameMethods.getXPValue()} ",
+                    text: ": +${GameMethods.getXPValue()} ",
                     style: textStyle,
                   ),
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
                       child: const Image(
-                        height: 15.5,
+                        height: fontHeight,
                         image: AssetImage("assets/images/psd/coins-fh.png"),
                       )),
                   TextSpan(
@@ -124,7 +128,7 @@ Widget createLevelWidget(BuildContext context) {
 Widget createBottomBar(BuildContext context) {
   GameState _gameState = getIt<GameState>();
   return Container(
-    height: 60,
+    height: 40,
       child: Stack(
           children: [
         Positioned(
@@ -132,7 +136,7 @@ Widget createBottomBar(BuildContext context) {
             left: 0,
             child:
     Container(
-        height: 60,
+        height: 40,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           color: Colors.transparent,

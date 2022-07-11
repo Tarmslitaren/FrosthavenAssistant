@@ -24,7 +24,7 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
   @override
   Widget build(BuildContext context) {
     List<Character> currentCharacters = GameMethods.getCurrentCharacters();
-    return Dialog(
+    return Card(
         child: Stack(children: [
           Column(
             children: [

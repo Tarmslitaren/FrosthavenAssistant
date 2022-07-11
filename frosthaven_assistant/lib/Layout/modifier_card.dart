@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/enums.dart';
 import '../Resource/modifier_deck_state.dart';
+import 'modifier_deck_widget.dart';
 
 double tempScale = 0.8;
 
@@ -25,8 +26,8 @@ class ModifierCardWidget extends StatefulWidget {
     return Container(
       //margin: EdgeInsets.all(2),
       //key: UniqueKey(),
-      width: 88,
-      height: 60,
+      width: 88 * smallify,
+      height: 39,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0),
         child: Image(
@@ -40,9 +41,8 @@ class ModifierCardWidget extends StatefulWidget {
 
   static Widget buildRear(double scale) {
     return Container(
-      key: const ValueKey<int>(0), //with a unique key this would run the switcher animation for 2 backsides
-      width: 88,
-      height: 60,
+      width: 88 * smallify,
+      height: 39,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0),
         child: Image(
