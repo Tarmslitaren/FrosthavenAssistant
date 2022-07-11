@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/modifier_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/enums.dart';
@@ -167,7 +169,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                     ),
                     GestureDetector(
                         onTap: () {
-                          //TODO: open the card menu
+                          openDialog(context, const ModifierCardMenu());
                         },
                         child: Container(
                             width: 155,

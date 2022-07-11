@@ -14,8 +14,7 @@ class ModifierCardWidget extends StatefulWidget {
   final ModifierCard card;
   final revealed = ValueNotifier<bool>(false);
 
-  ModifierCardWidget({Key? key, required this.card, required bool revealed}) {
-    //super(key: key);
+  ModifierCardWidget({Key? key, required this.card, required bool revealed}) : super(key: key) {
     this.revealed.value = revealed;
   }
 
@@ -81,24 +80,8 @@ class ModifierCardWidgetState extends State<ModifierCardWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    return ValueListenableBuilder<bool>(
-        valueListenable: _gameState.solo, //not needed
-        builder: (context, value, child) {
-          return AnimatedSwitcher( //wrong place: should add animated switcher as part of animation stack?
-            duration: const Duration(milliseconds: 800),
-            transitionBuilder: transitionBuilder,
-            layoutBuilder: (widget, list) => Stack(
-              children: [widget!, ...list],
-            ),
-            //switchInCurve: Curves.easeInBack,
-            //switchOutCurve: Curves.easeInBack.flipped,
-            child: widget.revealed.value
+    return  widget.revealed.value
                 ? ModifierCardWidget.buildFront(widget.card, scale)
-                : ModifierCardWidget.buildRear(scale),
-            //AnimationController(duration: Duration(seconds: 1), vsync: 0);
-            //CurvedAnimation(parent: null, curve: Curves.easeIn)
-            //),
-          );
-        });
+                : ModifierCardWidget.buildRear(scale);
   }
 }
