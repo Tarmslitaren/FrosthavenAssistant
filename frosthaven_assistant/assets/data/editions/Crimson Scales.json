@@ -463,7 +463,7 @@
         [1232, false, 12, "%shield% + 2", "^Self","*.........", "^If an enemy suffers %retaliate% damage", "^from attacking an Icecrawler this round,", "^the enemy gains %chill%." ],
         [1233, false, 63, "%move% + 0","*.........", "%attack% + 0 %aoe-triangle-2-side-with-black%", "%ice%%use%", "!^%pierce% 2" ],
         [1234, false, 55, "%move% - 2","*.........", "%attack% + 1", "^%range% 3", "%ice%%use%", "!^%pierce% 2" ],
-        [1235, false, 16, "%attack% + 0", "^%range% 5", "%ice%%use%", "!^All enemies adjacent to the", "!^target suffer one damage" ],
+        [1235, false, 16, "%attack% + 0", "^%range% 5", "%ice%%use%", "!^All enemies adjacent to the", "^target suffer one damage" ],
         [1236, false, 68, "%move% + 0","*.........", "%attack% - 1 %aoe-star-with-side-black%"],
         [1237, false, 9, "^Gain %range% 3 on all", "^%retaliate% abilities.","*.........", "%move% + 0","*.........", "%heal% 2", "^%range% 3" ]
       ]
@@ -923,7 +923,7 @@
           "attack": 2,
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm", "%immobilize%", "%curse%" ]
+          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm%", "%immobilize%", "%curse%" ]
         },
         {
           "level": 1,
@@ -932,7 +932,7 @@
           "attack": 3,
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm", "%immobilize%", "%curse%" ]
+          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm%", "%immobilize%", "%curse%" ]
         },
         {
           "level": 2,
@@ -941,7 +941,7 @@
           "attack": 3,
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm", "%immobilize%", "%curse%" ]
+          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm%", "%immobilize%", "%curse%" ]
         },
         {
           "level": 3,
@@ -950,7 +950,7 @@
           "attack": 4,
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm", "%immobilize%", "%curse%" ]
+          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm%", "%immobilize%", "%curse%" ]
         },
         {
           "level": 4,
@@ -959,7 +959,7 @@
           "attack": 4,
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm", "%immobilize%", "%curse%" ]
+          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm%", "%immobilize%", "%curse%" ]
         },
         {
           "level": 5,
@@ -968,7 +968,7 @@
           "attack": 4,
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm", "%immobilize%", "%curse%" ]
+          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm%", "%immobilize%", "%curse%" ]
         },
         {
           "level": 6,
@@ -977,7 +977,7 @@
           "attack": 5,
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm", "%immobilize%", "%curse%" ]
+          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm%", "%immobilize%", "%curse%" ]
         },
         {
           "level": 7,
@@ -986,7 +986,7 @@
           "attack": 5,
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm", "%immobilize%", "%curse%" ]
+          "immunities": [ "%poison%", "%wound%", "%stun%", "%disarm%", "%immobilize%", "%curse%" ]
         }
       ]
     },

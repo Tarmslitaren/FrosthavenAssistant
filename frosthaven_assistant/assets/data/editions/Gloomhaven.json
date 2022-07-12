@@ -360,34 +360,34 @@
       "summons": {
         "Soul Leeches": {
           "level": 1,
-          "gfx": "SoulLeeches",
+          "gfxx": "SoulLeeches",
           "health": 4,
           "move": 3
         },
         "Creeping Beetles": {
           "level": 1,
-          "gfx": "CreepingBeetles",
+          "gfxx": "CreepingBeetles",
           "health": 5,
           "move": 2,
           "attack": 2
         },
         "Angry Wasps": {
           "level": 1,
-          "gfx": "AngryWasps",
+          "gfxx": "AngryWasps",
           "health": 3,
           "move": 4,
           "attack": 2
         },
         "Steel Scarabs": {
           "level": 1,
-          "gfx": "SteelScarabs",
+          "gfxx": "SteelScarabs",
           "health": 4,
           "move": 2,
           "attack": 1
         },
         "Bloat Maggot": {
           "level": 3,
-          "gfx": "BloatMaggot",
+          "gfxx": "BloatMaggot",
           "standees": 3,
           "health": 3,
           "move": 3,
@@ -395,21 +395,21 @@
         },
         "Lightning Moth": {
           "level": 5,
-          "gfx": "LightningMoth",
+          "gfxx": "LightningMoth",
           "standees": 2,
           "health": 3,
           "move": 3
         },
         "Rage Hornets": {
           "level": 7,
-          "gfx": "RageHornets",
+          "gfxx": "RageHornets",
           "health": 5,
           "move": 3,
           "attack": 3
         },
         "Rust Vermin": {
           "level": 1,
-          "gfx": "RustVermin",
+          "gfxx": "RustVermin",
           "health": 7,
           "move": 4,
           "attack": 3
@@ -546,7 +546,7 @@
           true,
           30,
           "%fire%%use%",
-          "!^All adjacent enemies","suffer 2 damage.",
+          "!^All adjacent enemies","^suffer 2 damage.",
           "%move% + 0",
           "%attack% - 2",
           "^%range% + 0",
@@ -3934,7 +3934,7 @@
         "monsters": [ "Hound", "Bandit Archer", "Rending Drake", "Bandit Guard" ]
       },
       "#57 Investigation": {
-        "monsters": [ "City Guard", "City Archer", "Hound" ],
+        "monsters": [ "City Guard", "City Archer", "Hound", "Harrower Infester" ],
         "special": [
           {
             "type": "LevelAdjust",

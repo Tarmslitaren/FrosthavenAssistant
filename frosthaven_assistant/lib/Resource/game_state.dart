@@ -351,21 +351,25 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
       }
     }
 
-    await fetchCampaignData("na");
-    await fetchCampaignData("JotL");
-    await fetchCampaignData("Gloomhaven");
-    await fetchCampaignData("Forgotten Circles");
-    await fetchCampaignData("Crimson Scales");
-    await fetchCampaignData("Frosthaven");
+    Map<String, CampaignModel> map = {};
+
+    await fetchCampaignData("na", map);
+    await fetchCampaignData("JotL", map);
+    await fetchCampaignData("Gloomhaven", map);
+    await fetchCampaignData("Forgotten Circles", map);
+    await fetchCampaignData("Crimson Scales", map);
+    await fetchCampaignData("Frosthaven", map);
     //TODO:specify campaigns in data, or scrub the directory for files
+
+    modelData.value = map;
 
     load(); //load saved state from file.
   }
 
-  fetchCampaignData(String campaign) async {
+  fetchCampaignData(String campaign, Map<String, CampaignModel> map) async {
     final String response = await rootBundle.loadString('assets/data/editions/$campaign.json');
     final data = await json.decode(response);
-    modelData.value[campaign] = CampaignModel.fromJson(data);
+    map[campaign] = CampaignModel.fromJson(data);
   }
   //data
   final modelData = ValueNotifier<Map<String, CampaignModel>>({});
