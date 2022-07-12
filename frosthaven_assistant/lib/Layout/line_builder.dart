@@ -137,6 +137,10 @@ class LineBuilder {
 
             }
 
+            if (token == "target" && number == 0) {
+              //target needs a nr
+              continue;
+            }
             map[token] = number;
             break; //only one token added per line
           }
@@ -232,6 +236,14 @@ class LineBuilder {
       }
     } else if (lastToken == "target") {
       //only if there is ever a +x target
+      /*int? value = normalTokens["target"];
+      int? eValue = eliteTokens["target"];
+      if (elite != null && eValue != null) {
+        eliteValue = eValue;
+      }
+      if (normal != null && value != null) {
+        normalValue = value;
+      }*/
     }
     String normalResult = formula;
     if (!skipCalculation) {
@@ -527,8 +539,7 @@ class LineBuilder {
           addText = false;
         }
         if (line[i] == '%') {
-          //TODO: show / and elite values in yellow only if elites available and vice versa for normals
-          //TODO: do for all conditions + jump, pierce, add target  etc.
+          //TODO: do for all conditions + jump, add target.
 
           if (isIconPart) {
             //create token part

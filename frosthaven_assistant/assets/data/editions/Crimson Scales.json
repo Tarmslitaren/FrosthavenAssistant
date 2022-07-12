@@ -735,6 +735,27 @@
         [ 559, false, 27, "%attack% + 0", "^%range% 3", "^%target% 2", "^%poison%" ],
         [ 560, false, 87, "%move% - 1", "%attack% + 1", "^%range% 3" ]
       ]
+    },
+    {
+      "name": "Terrible Two Archer",
+      "cards": [
+        [ 532, false, 16, "%move% + 1", "%attack% - 1", "^%range% + 0 %target% 2" ],
+        [ 533, false, 31, "%move% + 0", "%attack% + 0", "^%range% + 0 %target% 2" ],
+        [ 534, false, 32, "%move% + 0", "%attack% + 1", "^%range% - 1 %target% 2" ],
+        [ 535, false, 44, "%move% - 1", "%attack% + 1", "^%range% + 0 %target% 2" ],
+        [ 536, false, 56, "%attack% - 1", "^%range% + 0", "^%target% 3" ],
+        [ 537, true, 68, "%attack% + 1", "^%range% + 1 %target% 2" ],
+        [
+          538,
+          false,
+          14,
+          "%move% - 1",
+          "%attack% - 1",
+          "^%range% + 0 %target% 2",
+          "*Create a 3 damage trap in an adjacent empty hex closest to an enemy"
+        ],
+        [ 539, true, 29, "%move% + 0", "%attack% - 1", "^%range% + 1 %target% 2", "^%immobilize%" ]
+      ]
     }
   ],
   "monsters": {
@@ -2671,42 +2692,42 @@
     },
     "Terrible Two Archer": {
       "note": "should use it's own custom deck rather than add jump and target+ to attributes",
-      "deck": "Archer",
+      "deck": "Terrible Two Archer",
       "gfx":"Bandit Archer",
       "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
         {
-          "level": 0, "health": "6x(C+2)", "move": 2, "attack": 3, "range": 3, "attributes": [ "%target% +1", "%jump%" ],
+          "level": 0, "health": "6x(C+2)", "move": 2, "attack": 3, "range": 3, "attributes": [ "%target% plus 1", "%jump%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 1, "health": "7x(C+2)", "move": 2, "attack": 3, "range": 5, "attributes": [ "%target% +1", "%jump%" ],
+          "level": 1, "health": "7x(C+2)", "move": 2, "attack": 3, "range": 5, "attributes": [ "%target% plus 1", "%jump%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 2, "health": "9x(C+2)", "move": 3, "attack": 3, "range": 5, "attributes": [ "%target% +1", "%jump%" ],
+          "level": 2, "health": "9x(C+2)", "move": 3, "attack": 3, "range": 5, "attributes": [ "%target% plus 1", "%jump%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 3, "health": "10x(C+2)", "move": 3, "attack": 4, "range": 5, "attributes": [ "%target% +1", "%jump%" ],
+          "level": 3, "health": "10x(C+2)", "move": 3, "attack": 4, "range": 5, "attributes": [ "%target% plus 1", "%jump%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 4, "health": "10x(C+2)", "move": 3, "attack": 4, "range": 6, "attributes": [ "%target% +1", "%jump%", "%poison%" ],
+          "level": 4, "health": "10x(C+2)", "move": 3, "attack": 4, "range": 6, "attributes": [ "%target% plus 1", "%jump%", "%poison%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 5, "health": "12x(C+2)", "move": 4, "attack": 4, "range": 6, "attributes": [ "%target% +1", "%jump%", "%poison%" ],
+          "level": 5, "health": "12x(C+2)", "move": 4, "attack": 4, "range": 6, "attributes": [ "%target% plus 1", "%jump%", "%poison%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 6, "health": "13x(C+2)", "move": 4, "attack": 5, "range": 6, "attributes": [ "%target% +1", "%jump%", "%poison%" ],
+          "level": 6, "health": "13x(C+2)", "move": 4, "attack": 5, "range": 6, "attributes": [ "%target% plus 1", "%jump%", "%poison%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 7, "health": "17x(C+2)", "move": 4, "attack": 5, "range": 6, "attributes": [ "%target% +1", "%jump%", "%poison%" ],
+          "level": 7, "health": "17x(C+2)", "move": 4, "attack": 5, "range": 6, "attributes": [ "%target% plus 1", "%jump%", "%poison%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         }
       ]
