@@ -34,7 +34,11 @@ void openDialogAtPosition(
         Positioned(
             left: x + xOffset, // left coordinate
             top: y + yOffset, // top coordinate
-            child: Dialog(
+            child:GestureDetector(
+                onTap: (){
+                  Navigator.pop(context);
+                },
+                child: Dialog(
                 backgroundColor: Colors.transparent,
                 /*shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.0),
@@ -45,12 +49,11 @@ void openDialogAtPosition(
                 insetPadding: const EdgeInsets.all(0),
                 insetAnimationCurve: Curves.easeInOut, //does nothing?
                 //insetAnimationDuration: Duration(milliseconds: 1500),
-                child: widget)),
+                child: widget))),
       ]));
 }
 
 Widget buildCounterButtons(
-//TODO! - show the value or value difference as a text beneath the center image
     ValueNotifier<int> notifier,
     int maxValue,
     String image,
