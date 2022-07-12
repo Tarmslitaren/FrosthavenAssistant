@@ -336,11 +336,14 @@
           "health": 2,
           "move": 3,
           "attack":  1,
+          "gfx": "venator tarantula",
+          "standees": 2,
           "range": 3
         },
         "Beta Aegis": {
           "level": 9,
           "note": "hp is half current health/2 round up",
+          "gfx": "beta aegis",
           "move": 3
         }
       }

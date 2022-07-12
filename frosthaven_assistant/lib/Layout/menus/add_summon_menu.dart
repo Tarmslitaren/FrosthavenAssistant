@@ -161,7 +161,21 @@ class AddSummonMenuState extends State<AddSummonMenu> {
         Expanded(
             child: ListView.builder(
                 itemCount: _summonList.length,
-                itemBuilder: (context, index) => ListTile(
+                itemBuilder: (context, index) {
+
+                  SummonModel model = _summonList[index];
+                  String gfx = chosenGfx;
+                  bool showNr = true;
+                  if (model.gfx.isNotEmpty) {
+                    gfx = model.gfx;
+                    if(model.standees < 2) {
+                      showNr = false;
+                    }
+                  }
+
+
+
+                  return ListTile(
                     leading: Stack(
                       alignment: Alignment.center,
                         children: [
@@ -169,9 +183,10 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                         height: 30,
                         width: 30,
                         image:
-                            AssetImage("assets/images/summon/$chosenGfx.png"),
+                            AssetImage("assets/images/summon/$gfx.png"),
                       ),
-                      Text(chosenNr.toString(),
+                      if(showNr) Text(
+                          chosenNr.toString(),
                           style: const TextStyle(fontSize: 18, color: Colors.white,
                               shadows: [
                                 Shadow(offset: Offset(1,1 ),color: Colors.black)
@@ -189,6 +204,9 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                         if (model.gfx.isNotEmpty) {
                           gfx = model.gfx;
                         }
+                        if(model.standees < 2) {
+                          chosenNr = 0; //don't show on monsterbox unless standees are numbered
+                        }
                         SummonData summonData = SummonData(
                             chosenNr,
                             model.name,
@@ -205,7 +223,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                             MonsterType.summon));
                       });
                       Navigator.pop(context);
-                    })))
+                    });}))
       ]),
     );
   }

@@ -6,7 +6,8 @@ class SummonModel {
   final int range;
   final int level;
   final String gfx;
-  SummonModel(this.name, this.health, this.move, this.attack, this.range, this.level, this.gfx);
+  final int standees;
+  SummonModel(this.name, this.health, this.move, this.attack, this.range, this.level, this.gfx, this.standees);
 
   factory SummonModel.fromJson(Map<String, dynamic> data, String key) {
     String name = key;
@@ -34,6 +35,13 @@ class SummonModel {
     if(data.containsKey('gfx')) {
       gfx = data['gfx'];
     }
-    return SummonModel(name, health, move, attack, range, level, gfx);
+
+    int  standees= 1;
+    if(data.containsKey('standees')) {
+      standees = data['standees'];
+    }
+
+
+    return SummonModel(name, health, move, attack, range, level, gfx, standees);
   }
 }

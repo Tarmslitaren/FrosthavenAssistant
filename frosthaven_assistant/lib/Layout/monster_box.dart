@@ -72,7 +72,7 @@ class _MonsterBoxState extends State<MonsterBox> {
     }
     String standeeNr = "";
     if (widget.data.standeeNr > 0) {
-      widget.data.standeeNr.toString();
+      standeeNr = widget.data.standeeNr.toString();
     }
       return Container(
           decoration: null,
@@ -236,7 +236,7 @@ class _MonsterBoxState extends State<MonsterBox> {
         },
         child: AnimatedContainer(
             //makes it grow nicely when adding conditions
-            key: Key(widget.data.standeeNr.toString()), //TODO: shiiiet
+            key: Key(widget.data.standeeNr.toString()), //TODO: shiiiet wont work for summons, use index?
             width: width,
             curve: Curves.easeInOut,
             duration: const Duration(milliseconds: 300),
