@@ -83,6 +83,11 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
     if (widget.monster != null) {
       title = "Set " + widget.monster!.type.display + "'s level";
     }
+    //if summon:
+    bool isSummon = widget.monster == null && widget.figure is MonsterInstance;
+    if(isSummon) {
+      title = "Set ${(widget.figure as MonsterInstance).name}'s max health";
+    }
     return Container(
         width: 10,
         height: 160,
@@ -111,7 +116,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                     height: 20,
                   ),
                   Text(title, style: TextStyle(fontSize: 18)),
-                  Row(
+                  if (!isSummon) Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       buildLevelButton(0),
@@ -120,7 +125,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                       buildLevelButton(3),
                     ],
                   ),
-                  Row(
+                  if (!isSummon) Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       buildLevelButton(4),
