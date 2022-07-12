@@ -3504,8 +3504,8 @@
           "health": "8xC",
           "move": 3,
           "attack": 4,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
+          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3513,8 +3513,8 @@
           "health": "9xC",
           "move": 4,
           "attack": 4,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
+          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3522,8 +3522,8 @@
           "health": "10xC",
           "move": 4,
           "attack": 5,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
+          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3531,8 +3531,8 @@
           "health": "12xC",
           "move": 4,
           "attack": 6,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
+          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3540,8 +3540,8 @@
           "health": "14xC",
           "move": 5,
           "attack": 6,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
+          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3549,8 +3549,8 @@
           "health": "16xC",
           "move": 5,
           "attack": 7,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
+          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3558,8 +3558,8 @@
           "health": "20xC",
           "move": 5,
           "attack": 7,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
+          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3567,8 +3567,8 @@
           "health": "22xC",
           "move": 5,
           "attack": 8,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2", "%attack% - 1" ],
+          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         }
       ]
