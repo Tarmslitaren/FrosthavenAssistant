@@ -66,20 +66,12 @@
       "edition": "Forgotten Circles",
       "cards": [
         [ 540, false, 6, "%move% - 1", "%attack% + 0", "^%immobilize%" ],
-        [
-          543,
-          true,
-          19,
-          "%move% + 0",
-          "%attack% + 0",
-          "^Add +2 %attack% if the target is adjacent",
-          "^to any of the Abomination's allies"
-        ],
-        [ 544, false, 26, "%move% + 0", "%attack% + 0" ],
+        [ 542, true, 19, "%move% + 0", "%attack% + 0", "^Add +2 %attack% if the target is adjacent", "^to any of the Abomination's allies" ],
+        [ 543, true, 19, "%move% + 0", "%attack% + 0", "^Add +2 %attack% if the target is adjacent", "^to any of the Abomination's allies" ],
         [ 547, false, 72, "%attack% - 1", "^%pierce% 2", "%move% - 2", "%attack% - 1", "^%pierce% 2" ],
-        [ 685, true, 32, "%move% + 0", "%attack% + 0", "^Add +2 Attack if the target is adjacent to any of the Abomination's allies." ],
         [ 687, false, 43, "%move% + 1", "^%jump%", "%attack% - 1", "^Target all adjacent enemies." ],
-        [ 688, false, 58, "%move% - 1", "%attack% + 1" ],
+        [ 690, false, 43, "%move% - 1", "^%jump%", "%attack% + 0", "^%target% 2" ],
+        [ 689, false, 58, "%move% + 1", "^%jump%", "%attack% - 1", "^All attacks targeting Giant Viper this round gain Disadvantage." ],
         [ 691, false, 23, "%move% - 1", "%attack% - 1", "^%immobilize%", "%attack% - 1" ]
       ]
     },
