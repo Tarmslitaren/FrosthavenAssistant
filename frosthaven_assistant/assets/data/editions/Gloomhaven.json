@@ -4034,7 +4034,29 @@
         "monsters": [ "Sun Demon", "Frost Demon", "Night Demon", "Wind Demon", "Earth Demon", "Flame Demon", "Prime Demon" ]
       },
       "#22 Temple of the Elements": {
-        "monsters": [ "Living Bones", "Cultist", "Earth Demon", "Flame Demon", "Frost Demon", "Wind Demon" ]
+        "monsters": [ "Living Bones", "Cultist", "Earth Demon", "Flame Demon", "Frost Demon", "Wind Demon" ],
+        "special": [
+          {
+            "type": "Objective",
+            "name": "Altar 1",
+            "health": "4+(CxL)"
+          },
+          {
+            "type": "Objective",
+            "name": "Altar 2",
+            "health": "4+(CxL)"
+          },
+          {
+            "type": "Objective",
+            "name": "Altar 3",
+            "health": "4+(CxL)"
+          },
+          {
+            "type": "Objective",
+            "name": "Altar 4",
+            "health": "4+(CxL)"
+          }
+        ]
       },
       "#23 Deep Ruins": {
         "monsters": [ "Stone Golem", "Ancient Artillery", "Living Bones", "Living Spirit" ]
@@ -4288,13 +4310,13 @@
           },
           {
             "type": "Escort",
-            "name": "Captive Orchid 1",
+            "name": "Captive Orchid 2",
             "health": "4+(2xL)",
             "init": 50
           },
           {
             "type": "Escort",
-            "name": "Captive Orchid 1",
+            "name": "Captive Orchid 3",
             "health": "4+(2xL)",
             "init": 50
           }
@@ -4321,22 +4343,22 @@
             "note": "City Guard: +1 level"
           },
           {
-            "type": "Objective ",
+            "type": "Objective",
             "name": "Bone Pile 1",
             "health": "L+(2xC)"
           },
           {
-            "type": "Objective ",
+            "type": "Objective",
             "name": "Bone Pile 2",
             "health": "L+(2xC)"
           },
           {
-            "type": "Objective ",
+            "type": "Objective",
             "name": "Bone Pile 3",
             "health": "L+(2xC)"
           },
           {
-            "type": "Objective ",
+            "type": "Objective",
             "name": "Bone Pile 4",
             "health": "L+(2xC)"
           }
@@ -4463,7 +4485,7 @@
           {
             "type": "Escort",
             "name": "The Crystal",
-            "health": "4+c+(2xL)"
+            "health": "4+C+(2xL)"
           }
         ]
       },
