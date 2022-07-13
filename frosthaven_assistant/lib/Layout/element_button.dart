@@ -43,6 +43,24 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
     _color = Colors.transparent;
     _borderRadius =
         BorderRadius.all(Radius.circular(widget.width - widget.borderWidth));
+
+    //to load save state
+    _gameState.elementState.addListener(() {
+      if (_gameState.elementState.value[widget.element] != null) {
+        ElementState state = _gameState.elementState.value[widget.element]!;
+        if (state == ElementState.full) {
+          setState(() {
+            setFull();
+          });
+        }
+        else if (state == ElementState.half) {
+          setState(() {
+            setHalf();
+          });
+        }
+      }
+
+    });
   }
 
   void setHalf(){
@@ -53,9 +71,6 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
         Radius.circular(widget.width / 2 - widget.borderWidth),
         bottomRight:
         Radius.circular(widget.width / 2 - widget.borderWidth));
-    //_borderRadius = BorderRadius.only(
-     //   bottomLeft: Radius.circular(_height - widget.borderWidth),
-      //  bottomRight: Radius.circular(_height - widget.borderWidth));
   }
 
   void setFull(){
@@ -67,10 +82,8 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
 
   void setInert(){
     _color = Colors.transparent;
-    _height = 4;// widget.width;
+    _height = 4;
     _borderRadius = BorderRadius.zero;
-        //BorderRadius.all(
-        //Radius.circular(widget.width - widget.borderWidth));
   }
 
   @override

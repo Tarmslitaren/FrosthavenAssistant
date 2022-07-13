@@ -32,6 +32,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+
     //to set fullscreen on pc - need to add exit button to quit //would be good to exit/enter mode with ctrl+enter
     //WindowManager.instance.setFullScreen(true);
     //to hide ui top and bottom on android
@@ -58,6 +60,7 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(title: 'Frosthaven Assistant'),
     );*/
   }
+
 }
 
 class MyHomePage extends StatefulWidget {

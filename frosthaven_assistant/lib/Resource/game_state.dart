@@ -575,13 +575,16 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
 
       Map elementData = data['elementState'];
 
+      Map<Elements, ElementState> newMap = {};
 
-      elementState.value[Elements.fire] = ElementState.values[elementData[Elements.fire.index.toString()]];
-      elementState.value[Elements.ice] = ElementState.values[elementData[Elements.ice.index.toString()]];
-      elementState.value[Elements.air] = ElementState.values[elementData[Elements.air.index.toString()]];
-      elementState.value[Elements.earth] = ElementState.values[elementData[Elements.earth.index.toString()]];
-      elementState.value[Elements.light] = ElementState.values[elementData[Elements.light.index.toString()]];
-      elementState.value[Elements.dark] = ElementState.values[elementData[Elements.dark.index.toString()]];
+      newMap[Elements.fire] = ElementState.values[elementData[Elements.fire.index.toString()]];
+      newMap[Elements.ice] = ElementState.values[elementData[Elements.ice.index.toString()]];
+      newMap[Elements.air] = ElementState.values[elementData[Elements.air.index.toString()]];
+      newMap[Elements.earth] = ElementState.values[elementData[Elements.earth.index.toString()]];
+      newMap[Elements.light] = ElementState.values[elementData[Elements.light.index.toString()]];
+      newMap[Elements.dark] = ElementState.values[elementData[Elements.dark.index.toString()]];
+
+      elementState.value = newMap;
 
     }
   }
