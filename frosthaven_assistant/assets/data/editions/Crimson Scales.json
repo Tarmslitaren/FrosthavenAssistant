@@ -336,14 +336,14 @@
           "health": 2,
           "move": 3,
           "attack":  1,
-          "gfx": "venator tarantula",
+          "gfx": "AMB venator tarantula",
           "standees": 2,
           "range": 3
         },
         "Beta Aegis": {
           "level": 9,
           "note": "hp is half current health/2 round up",
-          "gfx": "beta aegis",
+          "gfx": "AMB beta aegis",
           "move": 3
         }
       }
@@ -359,42 +359,49 @@
           "level": 1,
           "health": 4,
           "move": 3,
-          "attack":  2
+          "attack":  2,
+          "gfx": "ART clockwork soldier"
         },
         "Clockwork Bombard": {
           "level": 1,
           "health": 2,
           "attack":  2,
-          "range": 5
+          "range": 5,
+          "gfx": "ART clockwork bombard"
         },
         "Hollow Carapace": {
           "level": 1,
-          "health": 9
+          "health": 9,
+          "gfx": "ART hollow carapace"
         },
         "Clockwork Guardian": {
           "level": 3,
           "health": 7,
           "move": 1,
-          "attack":  1
+          "attack":  1,
+          "gfx": "ART clockwork guardian"
         },
         "Clockwork Drone": {
           "level": 5,
           "health": 3,
           "move": 3,
           "attack":  3,
-          "range": 3
+          "range": 3,
+          "gfx": "ART clockwork drone"
         },
         "Clockwork Rocket": {
           "level": 7,
           "health": 1,
           "move": 6,
-          "attack":  5
+          "attack":  5,
+          "gfx": "ART clockwork rocket"
         },
         "Clockwork Ravager": {
           "level": 9,
           "health": 6,
           "move": 3,
-          "attack": 3
+          "attack": 3,
+          "gfx": "ART clockwork ravager"
         }
       }
     }

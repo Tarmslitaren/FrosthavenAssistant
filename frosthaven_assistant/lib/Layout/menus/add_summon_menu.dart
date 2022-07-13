@@ -27,10 +27,20 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     super.initState();
 
     //populate the summon list
-    _summonList.addAll(widget.character.characterClass.summons);
+    //_summonList.addAll(widget.character.characterClass.summons);
     for (var item in widget.character.characterClass.summons) {
       if (item.level <= widget.character.characterState.level.value) {
-        _summonList.add(item);
+        int standeesOut = 0;
+        for (var item2 in widget.character.characterState.summonList.value){
+          if (item2.name == item.name) {
+            standeesOut++;
+          }
+
+        }
+        //only add to list if can summon more
+        if (standeesOut < item.standees) {
+          _summonList.add(item);
+        }
       }
     }
     _summonList.addAll(_gameState.itemSummonData);
@@ -174,6 +184,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                   }
 
 
+                  //TODO: gray out if all standees out (or remove from list entirely?)
 
                   return ListTile(
                     leading: Stack(

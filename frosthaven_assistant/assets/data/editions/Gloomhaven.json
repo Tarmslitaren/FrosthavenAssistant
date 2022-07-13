@@ -360,34 +360,34 @@
       "summons": {
         "Soul Leeches": {
           "level": 1,
-          "gfxx": "SoulLeeches",
+          "gfx": "BLA soul leeches",
           "health": 4,
           "move": 3
         },
         "Creeping Beetles": {
           "level": 1,
-          "gfxx": "CreepingBeetles",
+          "gfx": "BLA creeping beetles",
           "health": 5,
           "move": 2,
           "attack": 2
         },
         "Angry Wasps": {
           "level": 1,
-          "gfxx": "AngryWasps",
+          "gfx": "BLA angry wasps",
           "health": 3,
           "move": 4,
           "attack": 2
         },
         "Steel Scarabs": {
           "level": 1,
-          "gfxx": "SteelScarabs",
+          "gfx": "BLA steel scarabs",
           "health": 4,
           "move": 2,
           "attack": 1
         },
         "Bloat Maggot": {
           "level": 3,
-          "gfxx": "BloatMaggot",
+          "gfx": "BLA bloat maggots",
           "standees": 3,
           "health": 3,
           "move": 3,
@@ -395,21 +395,21 @@
         },
         "Lightning Moth": {
           "level": 5,
-          "gfxx": "LightningMoth",
+          "gfx": "BLA lightning moth",
           "standees": 2,
           "health": 3,
           "move": 3
         },
         "Rage Hornets": {
           "level": 7,
-          "gfxx": "RageHornets",
+          "gfx": "BLA rage hornets",
           "health": 5,
           "move": 3,
           "attack": 3
         },
         "Rust Vermin": {
-          "level": 1,
-          "gfxx": "RustVermin",
+          "level": 9,
+          "gfx": "BLA rust vermin",
           "health": 7,
           "move": 4,
           "attack": 3
@@ -3877,7 +3877,15 @@
         "monsters": [ "Lurker", "Deep Terror", "Harrower Infester" ]
       },
       "#38 Slave Pens": {
-        "monsters": [ "Inox Guard", "Inox Archer", "Inox Shaman", "Stone Golem" ]
+        "monsters": [ "Inox Guard", "Inox Archer", "Inox Shaman", "Stone Golem" ],
+        "special": [
+          {
+            "type": "Escort",
+            "name": "Orchid",
+            "health": "6+(3xL)",
+            "init": 99
+          }
+        ]
       },
       "#39 Treacherous Divide": {
         "monsters": [ "Cave Bear", "Frost Demon", "Spitting Drake", "Cultist", "Living Bones" ]
@@ -3895,7 +3903,15 @@
         "monsters": [ "Flame Demon", "Rending Drake", "Spitting Drake" ]
       },
       "#44 Tribal Assault": {
-        "monsters": [ "Inox Guard", "Inox Archer", "Hound", "Inox Shaman" ]
+        "monsters": [ "Inox Guard", "Inox Archer", "Hound", "Inox Shaman" ],
+        "special": [
+          {
+            "type": "Escort",
+            "name": "Redthorn",
+            "health": "6+(3xL)",
+            "init": 1
+          }
+        ]
       },
       "#45 Rebel Swamp": {
         "monsters": [ "City Guard", "City Archer", "Hound" ]
