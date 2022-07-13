@@ -167,12 +167,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                           openDialog(context, const ModifierCardMenu());
                         },
                         child: Container(
-                            width: 155 * smallify,
-                            //TODO: WHYYY!? if I make the width big enough, the rotated widget can be seen overflowing the height?!
+                            width: 105 * smallify, //155
                             child: Stack(children: [
                               _gameState.modifierDeck.discardPile.size() > 1
-                                  ? buildSlideAnimation(Positioned(
-                                      left: 55 * smallify,
+                                  ? buildSlideAnimation(Container(
+                                      //left: 55 * smallify,
                                       child: RotationTransition(
                                           turns: const AlwaysStoppedAnimation(
                                               15 / 360),
