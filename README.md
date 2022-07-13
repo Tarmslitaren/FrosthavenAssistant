@@ -9,7 +9,7 @@ That means most of the functionality will be in one single screen, which makes i
 This is also my attempt at learning the Flutter framework.
 
 ## Key features
-- Full support for Jaws of the Lion only
+- Full support for Gloomhaven, Forgotten Circles, Jaws of the Lion and Crimson Scales!
 - Characters
 - Monster ability decks
 - Monster Stat cards
@@ -22,12 +22,11 @@ This is also my attempt at learning the Flutter framework.
 - add monster per scenario, or separately
 - drag and drop items in list (longpress to start)
 - 2 columns if screen is wide enough
+- Summons with graphics when available
+- Modifier Deck for monsters
+- Scenario special rules - Objectives, Escorts, Level Adjustments and Named Monsters.
 
 ## Key features still missing:
-- Other campaigns (Crimson Scales, Goomhaven, Forgotten Cricles etc)
-- Monster Modifier Deck
-- Summons
-- Round Counter
 - undo/redo
 - settings menu
 - networking
@@ -35,32 +34,20 @@ This is also my attempt at learning the Flutter framework.
 - IOS release
 
 ## Roadmap
--Release 2 plan:
-  - Crimson Scales full support
-  - add sections
-  - set campaign
-  - Special scenario rules (escorts, objectives, modified levels) 
-  - Monster Modifier Deck
-  - Summons
-  - Round Counter
-  - Animatd lists
-  - make popup menues better (semi transparant, positioned, adjust sizes)
-  - monster stat menu changes neeed for Crimson Scales
-  - calculate shield value
-
--Release 3 plan:
+-Release 3 (Beta 1):
   - undo/redo
-  - other campaigns (Gloomhaven, Forgotten Circles)
-  - include jump and multitarget on stat calculations
-  - show only normal or elite or none stat calculations depending on what standees are out
+  - include jump on stat calculations
   - diviner special features (remove card from deck, curse added on 6th place from top)
+  - Improved layout overall
+  - save unlocked classes
+  - Official Release on Android Playstore and IOS, after playtesting.
 
 -Release 4 plan:
   - settings
   - turn order (expire conditions, scroll to position, gray out)
   - show trap types and scenario special rules at bottom
   - show special rules toast on start/end of round if special rules for round nr
-  - maybe dark mode?
+  - solo scenarios
 
 -Release 5 plan:
   - networking
