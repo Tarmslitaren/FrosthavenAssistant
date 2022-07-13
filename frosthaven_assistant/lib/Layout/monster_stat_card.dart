@@ -89,7 +89,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
               bool isBoss = widget.data.type.levels[_level].boss != null;
               MonsterStatsModel normal;
               MonsterStatsModel? elite = widget.data.type.levels[_level].elite;
-              if (isBoss){
+              if (isBoss) {
                 normal = widget.data.type.levels[_level].boss!;
               } else {
                 normal = widget.data.type.levels[_level].normal!;
@@ -97,31 +97,31 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
               //normal stats calculated:
               int? healthValue = StatCalculator.calculateFormula(normal.health);
               String health = normal.health.toString();
-              if(healthValue != null) {
+              if (healthValue != null) {
                 health = healthValue.toString();
               }
               //special case:
-              if(health == "Hollowpact"){
+              if (health == "Hollowpact") {
                 health = "7";
-                for(var item in getIt<GameState>().currentList) {
-                  if(item is Character && item.id == "Hollowpact") {
-                    health = item.characterClass.healthByLevel[item.characterState.level.value-1].toString();
+                for (var item in getIt<GameState>().currentList) {
+                  if (item is Character && item.id == "Hollowpact") {
+                    health = item.characterClass
+                        .healthByLevel[item.characterState.level.value - 1]
+                        .toString();
                   }
-
                 }
               }
 
               int? moveValue = StatCalculator.calculateFormula(normal.move);
               String move = normal.move.toString();
-              if(moveValue != null) {
+              if (moveValue != null) {
                 move = moveValue.toString();
               }
               int? attackValue = StatCalculator.calculateFormula(normal.attack);
               String attack = normal.attack.toString();
-              if(attackValue != null) {
+              if (attackValue != null) {
                 attack = attackValue.toString();
               }
-
 
               return Container(
                   margin: EdgeInsets.all(2 * scale * tempScale),
@@ -132,10 +132,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                         borderRadius: BorderRadius.circular(8.0 * scale),
                         child: Image(
                           height: height,
-                          image: AssetImage(
-                              !isBoss
-                                  ? "assets/images/psd/monsterStats-normal.png"
-                                  : "assets/images/psd/monsterStats-boss.png"),
+                          image: AssetImage(!isBoss
+                              ? "assets/images/psd/monsterStats-normal.png"
+                              : "assets/images/psd/monsterStats-boss.png"),
                         ),
                       ),
                       Positioned(
@@ -163,20 +162,12 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisAlignment: MainAxisAlignment.center,
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
+                                  Text(health, style: leftStyle),
+                                  Text(move, style: leftStyle),
+                                  Text(attack, style: leftStyle),
                                   Text(
-                                      health,
-                                      style: leftStyle),
-                                  Text(
-                                      move,
-                                      style: leftStyle),
-                                  Text(
-                                      attack,
-                                      style: leftStyle),
-                                  Text(
-                                      normal.range !=
-                                              0
-                                          ? normal.range
-                                              .toString()
+                                      normal.range != 0
+                                          ? normal.range.toString()
                                           : "-",
                                       style: leftStyle),
                                 ],
@@ -191,20 +182,12 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 // mainAxisAlignment: MainAxisAlignment.end,
                                 // mainAxisSize: MainAxisSize.max,
                                 children: <Widget>[
+                                  Text(health, style: leftStyle),
+                                  Text(move, style: leftStyle),
+                                  Text(attack, style: leftStyle),
                                   Text(
-                                      health,
-                                      style: leftStyle),
-                                  Text(
-                                      move,
-                                      style: leftStyle),
-                                  Text(
-                                      attack,
-                                      style: leftStyle),
-                                  Text(
-                                      normal.range !=
-                                              0
-                                          ? normal.range
-                                              .toString()
+                                      normal.range != 0
+                                          ? normal.range.toString()
                                           : "",
                                       style: leftStyle),
                                 ],
@@ -238,71 +221,82 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   //alignment: Alignment.topRight,
                                   //width: 67*tempScale*scale,
                                   children: [
-                                    normal.attributes.isNotEmpty? Row(
-                                    children: [
-                                      Text("    ", style: specialStyle),
-                                      LineBuilder.createLines(
-                                        normal.attributes,
-                                        false,
-                                        false,
-                                        false,
-                                        widget.data,
-                                        CrossAxisAlignment.start,
-                                        scale
-                                    ),]
-                                    ): Container(),
-                                    normal.special1.isNotEmpty?
-                                    Row(
-                                      //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text("1:", style: specialStyle),
-                                          Container(
-                                              width: 140 * tempScale * scale,
-                                              child: LineBuilder.createLines(
-                                                  widget
-                                                      .data
-                                                      .type
-                                                      .levels[_level]
-                                                      .boss!
-                                                      .special1,
-                                                  false,
-                                                  true,
-                                                  false,
-                                                  widget.data,
-                                                  CrossAxisAlignment.start,
-                                                  scale)),
-                                        ]): Container(),
-                                    normal.special2.isNotEmpty?
-                                    Row(
-                                        children: [
-                                          Text("_______________________________\n\n\n", style: lineStyle),]
-                                    ): Container(),
-                                    normal.special2.isNotEmpty?
-                                    Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text("2:", style: specialStyle),
-                                          Container(
-                                              width: 140 * tempScale * scale,
-                                              child: LineBuilder.createLines(
-                                                  widget
-                                                      .data
-                                                      .type
-                                                      .levels[_level]
-                                                      .boss!
-                                                      .special2,
-                                                  false,
-                                                  true,
-                                                  false,
-                                                  widget.data,
-                                                  CrossAxisAlignment.start,
-                                                  scale)),
-                                        ]): Container()
-
-                                  ])
-                      ),
+                                    normal.attributes.isNotEmpty
+                                        ? Row(children: [
+                                            Text("    ", style: specialStyle),
+                                            Container(
+                                                width: 140 * tempScale * scale,
+                                                child: LineBuilder.createLines(
+                                                    normal.attributes,
+                                                    false,
+                                                    false,
+                                                    false,
+                                                    widget.data,
+                                                    CrossAxisAlignment.start,
+                                                    scale)),
+                                          ])
+                                        : Container(),
+                                    normal.special1.isNotEmpty
+                                        ? Row(
+                                            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                                Text("1:", style: specialStyle),
+                                                Container(
+                                                    width:
+                                                        140 * tempScale * scale,
+                                                    child:
+                                                        LineBuilder.createLines(
+                                                            widget
+                                                                .data
+                                                                .type
+                                                                .levels[_level]
+                                                                .boss!
+                                                                .special1,
+                                                            false,
+                                                            true,
+                                                            false,
+                                                            widget.data,
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                            scale)),
+                                              ])
+                                        : Container(),
+                                    normal.special2.isNotEmpty
+                                        ? Row(children: [
+                                            Text(
+                                                "_______________________________\n\n\n",
+                                                style: lineStyle),
+                                          ])
+                                        : Container(),
+                                    normal.special2.isNotEmpty
+                                        ? Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                                Text("2:", style: specialStyle),
+                                                Container(
+                                                    width:
+                                                        140 * tempScale * scale,
+                                                    child:
+                                                        LineBuilder.createLines(
+                                                            widget
+                                                                .data
+                                                                .type
+                                                                .levels[_level]
+                                                                .boss!
+                                                                .special2,
+                                                            false,
+                                                            true,
+                                                            false,
+                                                            widget.data,
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                            scale)),
+                                              ])
+                                        : Container()
+                                  ])),
                       !isBoss
                           ? Positioned(
                               right: 77.0 * tempScale * scale,
@@ -313,25 +307,23 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 //mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
                                   Text(
-                                      StatCalculator.calculateFormula(elite!
-                                              .health)
+                                      StatCalculator.calculateFormula(
+                                              elite!.health)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      StatCalculator.calculateFormula(elite
-                                              .move)
+                                      StatCalculator.calculateFormula(
+                                              elite.move)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      StatCalculator.calculateFormula(elite
-                                              .attack)
+                                      StatCalculator.calculateFormula(
+                                              elite.attack)
                                           .toString(),
                                       style: rightStyle),
                                   Text(
-                                      elite.range !=
-                                              0
-                                          ? elite.range
-                                              .toString()
+                                      elite.range != 0
+                                          ? elite.range.toString()
                                           : "-",
                                       style: rightStyle),
                                 ],
@@ -375,126 +367,141 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   ),
                                 )
                               : Container(),
-                      isBoss?    normal.range != 0?
-                      Positioned(
-                          height: 21 * tempScale * scale,
-                          left: 30.0 * tempScale * scale,
-                          top: 93.0 * tempScale * scale,
-                          child: const Image(
-                            image: AssetImage(
-                                "assets/images/psd/range-stat.png"),
-                          )):
-                      Container()
-              : Container(),
-                      !isBoss ?
-                      Positioned(
-                          bottom: 5 * scale * tempScale,
-                          left: 5 * scale * tempScale,
-                          child: Container(
-                              width: 25 * scale * tempScale,
-                              height: 25 * scale * tempScale,
-                              child: ValueListenableBuilder<
-                                      List<MonsterInstance>>(
-                                  valueListenable: widget.data.monsterInstances,
-                                  builder: (context, value, child) {
-                                    bool allStandeesOut = widget.data
-                                            .monsterInstances.value.length ==
-                                        widget.data.type.count;
-                                    return IconButton(
-                                      padding: EdgeInsets.zero,
-                                      icon: Image.asset(
-                                          //TODO: is not updated on remove
-                                          color: allStandeesOut
-                                              ? Colors.white24
-                                              : Colors.grey,
-                                          colorBlendMode: BlendMode.modulate,
-                                          'assets/images/psd/add.png'),
-                                      onPressed: () {
-                                        if (widget.data.monsterInstances.value
-                                                .length ==
-                                            widget.data.type.count - 1) {
-                                          //directly add last standee
-                                          GameMethods.addStandee(
-                                              null,
-                                              widget.data,
-                                              isBoss
-                                                  ? MonsterType.boss
-                                                  : MonsterType.normal);
-                                        } else if (widget.data.monsterInstances
-                                                .value.length <
-                                            widget.data.type.count - 1) {
-                                          openDialogAtPosition(
-                                              context,
-                                              //problem: context is of stat card widget, not the + button
-                                              AddStandeeMenu(
-                                                elite: false,
-                                                monster: widget.data,
-                                              ),
-                                              -185,
-                                              //does not take into account the popup does not scale. (should it?)
-                                              -120);
-                                        }
-                                      },
-                                    );
-                                  }))): Container(),
-                       Positioned(
+                      isBoss
+                          ? normal.range != 0
+                              ? Positioned(
+                                  height: 20 * tempScale * scale,
+                                  left: 30.0 * tempScale * scale,
+                                  top: 93.0 * tempScale * scale,
+                                  child: const Image(
+                                    image: AssetImage(
+                                        "assets/images/psd/range-stat.png"),
+                                  ))
+                              : Container()
+                          : Container(),
+                      !isBoss
+                          ? Positioned(
                               bottom: 5 * scale * tempScale,
-                              right: 5 * scale * tempScale,
+                              left: 5 * scale * tempScale,
                               child: Container(
                                   width: 25 * scale * tempScale,
                                   height: 25 * scale * tempScale,
-                                  child: IconButton(
-                                      padding: EdgeInsets.zero,
-                                      icon: Image.asset(
-                                          color: widget.data
-                                              .monsterInstances.value.length ==
-                                              widget.data.type.count
-                                              ? Colors.white24
-                                              : Colors.grey,
-                                          colorBlendMode: BlendMode.modulate,
-                                          'assets/images/psd/add.png'),
-                                      onPressed: () {
-                                        if (widget.data.monsterInstances.value
+                                  child: ValueListenableBuilder<
+                                          List<MonsterInstance>>(
+                                      valueListenable:
+                                          widget.data.monsterInstances,
+                                      builder: (context, value, child) {
+                                        bool allStandeesOut = widget
+                                                .data
+                                                .monsterInstances
+                                                .value
                                                 .length ==
-                                            widget.data.type.count - 1) {
-                                          //directly add last standee
-                                          GameMethods.addStandee(null,
-                                              widget.data, isBoss? MonsterType.boss : MonsterType.elite);
-                                        } else if (widget.data.monsterInstances
-                                                .value.length <
-                                            widget.data.type.count - 1) {
-                                          openDialogAtPosition(
-                                              context,
-                                              AddStandeeMenu(
-                                                elite: isBoss? false : true,
-                                                monster: widget.data,
-                                              ),
-                                              -100,
-                                              -12);
-                                        }
-                                      }))),
-
-                      isBoss? Positioned(
-                          right: 10 * scale,
-                          top: 1 * scale,
-                          child: Row(
-                            children: createConditionList(scale, normal),
-                          ))
-                          : Positioned(
-                          left: 45 * scale,
-                          bottom : 10 * scale,
-                          child: Column(
-                            verticalDirection: VerticalDirection.up,
-                            children: createConditionList(scale, normal),
-                          )),
-                      isBoss? Container():
+                                            widget.data.type.count;
+                                        return IconButton(
+                                          padding: EdgeInsets.zero,
+                                          icon: Image.asset(
+                                              //TODO: is not updated on remove
+                                              color: allStandeesOut
+                                                  ? Colors.white24
+                                                  : Colors.grey,
+                                              colorBlendMode:
+                                                  BlendMode.modulate,
+                                              'assets/images/psd/add.png'),
+                                          onPressed: () {
+                                            if (widget.data.monsterInstances
+                                                    .value.length ==
+                                                widget.data.type.count - 1) {
+                                              //directly add last standee
+                                              GameMethods.addStandee(
+                                                  null,
+                                                  widget.data,
+                                                  isBoss
+                                                      ? MonsterType.boss
+                                                      : MonsterType.normal);
+                                            } else if (widget
+                                                    .data
+                                                    .monsterInstances
+                                                    .value
+                                                    .length <
+                                                widget.data.type.count - 1) {
+                                              openDialogAtPosition(
+                                                  context,
+                                                  //problem: context is of stat card widget, not the + button
+                                                  AddStandeeMenu(
+                                                    elite: false,
+                                                    monster: widget.data,
+                                                  ),
+                                                  -185,
+                                                  //does not take into account the popup does not scale. (should it?)
+                                                  -120);
+                                            }
+                                          },
+                                        );
+                                      })))
+                          : Container(),
                       Positioned(
-                          right: 45 * scale,
-                          bottom: 10 * scale,
-                          child: Column(
-                            verticalDirection: VerticalDirection.up,
-                            children: createConditionList(scale, elite!),
-                          ))
+                          bottom: 5 * scale * tempScale,
+                          right: 5 * scale * tempScale,
+                          child: Container(
+                              width: 25 * scale * tempScale,
+                              height: 25 * scale * tempScale,
+                              child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  icon: Image.asset(
+                                      color: widget.data.monsterInstances.value
+                                                  .length ==
+                                              widget.data.type.count
+                                          ? Colors.white24
+                                          : Colors.grey,
+                                      colorBlendMode: BlendMode.modulate,
+                                      'assets/images/psd/add.png'),
+                                  onPressed: () {
+                                    if (widget.data.monsterInstances.value
+                                            .length ==
+                                        widget.data.type.count - 1) {
+                                      //directly add last standee
+                                      GameMethods.addStandee(
+                                          null,
+                                          widget.data,
+                                          isBoss
+                                              ? MonsterType.boss
+                                              : MonsterType.elite);
+                                    } else if (widget.data.monsterInstances
+                                            .value.length <
+                                        widget.data.type.count - 1) {
+                                      openDialogAtPosition(
+                                          context,
+                                          AddStandeeMenu(
+                                            elite: isBoss ? false : true,
+                                            monster: widget.data,
+                                          ),
+                                          -100,
+                                          -12);
+                                    }
+                                  }))),
+                      isBoss
+                          ? Positioned(
+                              right: 10 * scale,
+                              top: 1 * scale,
+                              child: Row(
+                                children: createConditionList(scale, normal),
+                              ))
+                          : Positioned(
+                              left: 45 * scale,
+                              bottom: 10 * scale,
+                              child: Column(
+                                verticalDirection: VerticalDirection.up,
+                                children: createConditionList(scale, normal),
+                              )),
+                      isBoss
+                          ? Container()
+                          : Positioned(
+                              right: 45 * scale,
+                              bottom: 10 * scale,
+                              child: Column(
+                                verticalDirection: VerticalDirection.up,
+                                children: createConditionList(scale, elite!),
+                              ))
                     ],
                   ));
             }));

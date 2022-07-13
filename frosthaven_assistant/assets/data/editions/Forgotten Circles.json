@@ -116,6 +116,19 @@
       "cards": [
         [ 0, false, 0, "(Use the Manifestation of Corruption ability deck.)" ]
       ]
+    },
+    {
+      "name": "Sraka the Wise",
+      "cards": [
+        [ 588, false, 8, "%move% + 0", "%attack% - 1", "^%range% + 0", "^%disarm%" ],
+        [ 589, false, 8, "%move% - 1", "%attack% + 0", "^%range% + 0", "^%immobilize%" ],
+        [ 590, true, 23, "%move% + 0", "%heal% 6", "^%range% 3" ],
+        [ 591, true, 23, "%move% + 0", "%heal% 6", "^%range% 3" ],
+        [ 592, false, 62, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
+        [ 593, false, 74, "%move% - 1", "%attack% + 1", "^%range% + 0" ],
+        [ 594, false, 89, "%move% - 1", "%heal% 2", "^Affect all adjacent allies", "%bless%|%bless%", "^Self" ],
+        [ 595, false, 9, "%move% + 1", "%attack% - 1", "^%range% + 0", "^%curse%|%curse%", "^%target% 2" ]
+      ]
     }
   ],
   "monsters": {
@@ -228,6 +241,54 @@
             "attack": 6,
             "attributes": [ "Attackers gain disadvantage", "%poison%" ]
           }
+        }
+      ]
+    },
+    "The Husk": {
+      "gfx": "Aesther Ashblade",
+      "deck": "Ashblade",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": "12xC", "move": 3, "attack": 3, "attributes": [ "%poison%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+
+        },
+        {
+          "level": 1, "health": "14xC", "move": 4, "attack": 3, "attributes": [ "%poison%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+
+        },
+        {
+          "level": 2, "health": "16xC", "move": 4, "attack": 4, "attributes": [ "%poison%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+
+        },
+        {
+          "level": 3, "health": "18xC", "move": 4, "attack": 4, "attributes": [ "Attackers gain disadvantage", "%poison%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+
+        },
+        {
+          "level": 4, "health": "21xC", "move": 4, "attack": 5, "attributes": [ "Attackers gain disadvantage", "%poison%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+
+        },
+        {
+          "level": 5, "health": "25xC", "move": 4, "attack": 5, "attributes": [ "Attackers gain disadvantage", "%poison%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+
+        },
+        {
+          "level": 6, "health": "28xC", "move": 4, "attack": 6, "attributes": [ "Attackers gain disadvantage", "%poison%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+
+        },
+        {
+          "level": 7, "health": "32xC", "move": 5, "attack": 6, "attributes": [ "Attackers gain disadvantage", "%poison%" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+
         }
       ]
     },
@@ -512,6 +573,134 @@
             "range": 8,
             "attributes": [ "%pierce% 3", "%push% 2" ]
           }
+        }
+      ]
+    },
+    "Selah Neberis": {
+      "edition": "Forgotten Circles",
+      "deck": "Tracker",
+      "gfx": "Valrath Tracker",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0, "health": 9, "move": 2, "attack": 3, "range": 4, "attributes": ["%target% C", "%pierce% 10" ]
+        },
+        {
+          "level": 1, "health": 11, "move": 2, "attack": 3, "range": 5, "attributes": [ "%target% C", "%pierce% 10" ]
+        },
+        {
+          "level": 2, "health": 12, "move": 2, "attack": 4, "range": 5, "attributes": [ "%target% C", "%pierce% 10"]
+        },
+        {
+          "level": 3, "health": 14, "move": 2, "attack": 4, "range": 6, "attributes": [ "%target% C", "%pierce% 10", "%push% 1" ]
+        },
+        {
+          "level": 4, "health": 16, "move": 3, "attack": 4, "range": 7, "attributes": [ "%target% C", "%pierce% 10", "%push% 1" ]
+        },
+        {
+          "level": 5, "health": 18, "move": 3, "attack": 5, "range": 7, "attributes": [ "%target% C", "%pierce% 10", "%push% 1" ]
+        },
+        {
+          "level": 6, "health": 21, "move": 3, "attack": 5, "range": 8, "attributes": [ "%target% C", "%pierce% 10", "%push% 2" ]
+        },
+        {
+          "level": 7, "health": 24, "move": 3, "attack": 6, "range": 8, "attributes": [ "%target% C", "%pierce% 10", "%push% 2" ]
+        }
+      ]
+    },
+    "Sraka the Wise": {
+      "deck": "Sraka the Wise",
+      "gfx": "Vermling Shaman",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0, "health": "3xC/2", "move": 3, "attack": 2, "range": 3, "attributes": [ "%shield% 2" ]
+        },
+        {
+          "level": 1, "health": "3xC/2", "move": 3, "attack": 2, "range": 3, "attributes": [ "%shield% 3" ]
+        },
+        {
+          "level": 2, "health": "4xC/2", "move": 3, "attack": 2, "range": 4, "attributes": [ "%shield% 3" ]
+        },
+        {
+          "level": 3, "health": "5xC/2", "move": 3, "attack": 3, "range": 4, "attributes": [ "%shield% 3" ]
+        },
+        {
+          "level": 4, "health": "5xC/2", "move": 3, "attack": 3, "range": 4, "attributes": [ "%muddle%", "%shield% 4" ]
+        },
+        {
+          "level": 5, "health": "6xC/2", "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 4" ]
+        },
+        {
+          "level": 6, "health": "6xC/2", "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 5" ]
+        },
+        {
+          "level": 7, "health": "8xC/2", "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 5" ]
+        }
+      ]
+    },
+    "Uyart Ikkuma": {
+      "deck": "Savvas Lavaflow",
+      "gfx": "Savvas Lavaflow",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": "13xC/2", "move": 3, "attack": 3,"attributes": ["Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon"]
+        },
+        {
+          "level": 1, "health": "15xC/2", "move": 3, "attack": 3, "attributes": [ "%wound%" , "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon"]
+        },
+        {
+          "level": 2, "health": "18xC/2", "move": 3, "attack": 3, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+        },
+        {
+          "level": 3, "health": "21xC/2", "move": 3, "attack": 4, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+        },
+        {
+          "level": 4, "health": "24xC/2", "move": 4, "attack": 4, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+        },
+        {
+          "level": 5, "health": "27xC/2", "move": 4, "attack": 5, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+        },
+        {
+          "level": 6, "health": "30xC/2", "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+        },
+        {
+          "level": 7, "health": "35xC/2", "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+        }
+      ]
+    },
+    "The Steel Lion": {
+      "deck": "Guard",
+      "gfx": "City Guard",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0, "health": "6xC/2",  "move": 3,  "attack": 3, "attributes": [ "%shield% 1 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+        },
+        {
+          "level": 1, "health": "6xC/2", "move": 3, "attack": 3, "attributes": [ "%shield% 2 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+        },
+        {
+          "level": 2, "health": "9xC/2", "move": 3, "attack": 3, "attributes": [ "%shield% 2 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+        },
+        {
+          "level": 3, "health": "9xC/2", "move": 3, "attack": 4, "attributes": [ "%retaliate% 1", "%shield% 2 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+        },
+        {
+          "level": 4,"health": "10xC/2", "move": 4, "attack": 4, "attributes": [ "%retaliate% 2", "%shield% 2 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+        },
+        {
+          "level": 5, "health": "12xC/2", "move": 4, "attack": 4, "attributes": [ "%retaliate% 2", "%shield% 3 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+        },
+        {
+          "level": 6, "health": "13xC/2", "move": 4, "attack": 5, "attributes": [ "%retaliate% 3", "%shield% 3 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+        },
+        {
+          "level": 7, "health": "14xC/2", "move": 4, "attack": 6, "attributes": [ "%retaliate% 3", "%shield% 3 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
         }
       ]
     },
@@ -1005,6 +1194,198 @@
           "notes": "Play top two cards, using the first card as initiative. Perform the bottom action of the first card, then the top action of the second card."
         }
       ]
+    },
+    "Avatar of Ashtar": {
+      "deck": "Savvas Lavaflow",
+      "gfx": "Savvas Lavaflow",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": 13, "move": 3, "attack": 3
+        },
+        {
+          "level": 1, "health": 15, "move": 3, "attack": 3, "attributes": [ "%wound%" ]
+        },
+        {
+          "level": 2, "health": 18, "move": 3, "attack": 3, "attributes": [ "%poison%", "%wound%" ]
+        },
+        {
+          "level": 3, "health": 21, "move": 3, "attack": 4, "attributes": [ "%poison%", "%wound%" ]
+        },
+        {
+          "level": 4, "health": 24, "move": 4, "attack": 4, "attributes": [ "%poison%", "%wound%" ]
+        },
+        {
+          "level": 5, "health": 27, "move": 4, "attack": 5, "attributes": [ "%poison%", "%wound%" ]
+        },
+        {
+          "level": 6, "health": 30, "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%" ]
+        },
+        {
+          "level": 7, "health": 35, "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%" ]
+        }
+      ]
+    },
+    "Avatar of Thelija": {
+      "deck": "Savvas Icestorm",
+      "gfx": "Savvas Icestorm",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": 12, "move": 2, "attack": 3, "range": 4, "attributes": [ "%pierce% 3" ]
+        },
+        {
+          "level": 1, "health": 12, "move": 2, "attack": 3, "range": 5, "attributes": [ "%pierce% 3", "%shield% 1" ]
+        },
+        {
+          "level": 2, "health": 15, "move": 3, "attack": 3, "range": 5, "attributes": [ "%pierce% 3", "%shield% 1" ]
+        },
+        {
+          "level": 3, "health": 18, "move": 3, "attack": 4, "range": 6, "attributes": [ "%pierce% 3", "%shield% 1" ]
+        },
+        {
+          "level": 4, "health": 19, "move": 4, "attack": 4, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]
+        },
+        {
+          "level": 5, "health": 21, "move": 4, "attack": 5, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]
+        },
+        {
+          "level": 6, "health": 23, "move": 4, "attack": 6, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]
+        },
+        {
+          "level": 7, "health": 24, "move": 4, "attack": 6, "range": 6, "attributes": [ "%pierce% 4", "%shield% 3" ]
+        }
+      ]
+    },
+    "Lavaflow Guardian of the Firmament": {
+      "deck": "Savvas Lavaflow",
+      "gfx": "Savvas Lavaflow",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": 13, "move": 3, "attack": 3, "attributes": ["Advantage" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 1, "health": 15, "move": 3, "attack": 3, "attributes": ["Advantage", "%wound%" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 2, "health": 18, "move": 3, "attack": 3, "attributes": [ "Advantage","%poison%", "%wound%" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 3, "health": 21, "move": 3, "attack": 4, "attributes": ["Advantage", "%poison%", "%wound%" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 4, "health": 24, "move": 4, "attack": 4, "attributes": [ "Advantage","%poison%", "%wound%" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 5, "health": 27, "move": 4, "attack": 5, "attributes": ["Advantage", "%poison%", "%wound%" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 6, "health": 30, "move": 4, "attack": 6, "attributes": ["Advantage", "%poison%", "%wound%" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 7, "health": 35, "move": 4, "attack": 6, "attributes": ["Advantage", "%poison%", "%wound%" ],
+          "immunities": [ "%stun%"]
+        }
+      ]
+    },
+    "Icestorm Guardian of the Firmament": {
+      "deck": "Savvas Icestorm",
+      "gfx": "Savvas Icestorm",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": 12, "move": 2, "attack": 3, "range": 4, "attributes": ["Advantage", "%pierce% 3" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 1, "health": 12, "move": 2, "attack": 3, "range": 5, "attributes": ["Advantage", "%pierce% 3", "%shield% 1" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 2, "health": 15, "move": 3, "attack": 3, "range": 5, "attributes": ["Advantage", "%pierce% 3", "%shield% 1" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 3, "health": 18, "move": 3, "attack": 4, "range": 6, "attributes": ["Advantage", "%pierce% 3", "%shield% 1" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 4, "health": 19, "move": 4, "attack": 4, "range": 6, "attributes": ["Advantage", "%pierce% 3", "%shield% 2" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 5, "health": 21, "move": 4, "attack": 5, "range": 6, "attributes": ["Advantage", "%pierce% 3", "%shield% 2" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 6, "health": 23, "move": 4, "attack": 6, "range": 6, "attributes": ["Advantage", "%pierce% 3", "%shield% 2" ],
+          "immunities": [ "%stun%"]
+        },
+        {
+          "level": 7, "health": 24, "move": 4, "attack": 6, "range": 6, "attributes": ["Advantage", "%pierce% 4", "%shield% 3" ],
+          "immunities": [ "%stun%"]
+        }
+      ]
+    },
+    "Elham": {
+      "gfx": "Aesther Ashblade",
+      "deck": "Ashblade",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": 12, "move": 3, "attack": 3, "attributes": ["Advantage", "%poison%" ],
+          "immunities": [ "%stun%" ]
+
+        },
+        {
+          "level": 1, "health": 14, "move": 4, "attack": 3, "attributes": ["Advantage", "%poison%" ],
+          "immunities": [ "%stun%" ]
+
+        },
+        {
+          "level": 2, "health": 16, "move": 4, "attack": 4, "attributes": ["Advantage", "%poison%" ],
+          "immunities": [ "%stun%" ]
+
+        },
+        {
+          "level": 3, "health": 18, "move": 4, "attack": 4, "attributes": [ "Advantage","Attackers gain disadvantage", "%poison%" ],
+          "immunities": [ "%stun%" ]
+
+        },
+        {
+          "level": 4, "health": 21, "move": 4, "attack": 5, "attributes": ["Advantage", "Attackers gain disadvantage", "%poison%" ],
+          "immunities": [ "%stun%" ]
+
+        },
+        {
+          "level": 5, "health": 25, "move": 4, "attack": 5, "attributes": ["Advantage", "Attackers gain disadvantage", "%poison%" ],
+          "immunities": ["%stun%" ]
+
+        },
+        {
+          "level": 6, "health": 28, "move": 4, "attack": 6, "attributes": ["Advantage", "Attackers gain disadvantage", "%poison%" ],
+          "immunities": [ "%stun%" ]
+
+        },
+        {
+          "level": 7, "health": 32, "move": 5, "attack": 6, "attributes": ["Advantage", "Attackers gain disadvantage", "%poison%" ],
+          "immunities": [ "%stun%" ]
+
+        }
+      ]
     }
   },
 
@@ -1019,7 +1400,27 @@
       "monsters": [ "Ancient Artillery", "Bandit Archer", "Bandit Guard", "Spitting Drake" ]
     },
     "#99 Aftershocks": {
-      "monsters": [ "Black Imp", "Cultist", "Deep Terror" ]
+      "monsters": [ "Black Imp", "Cultist", "Deep Terror" ],
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Civilian 1",
+          "health": "2x(L+C)",
+          "init": 50
+        },
+        {
+          "type": "Escort",
+          "name": "Civilian 2",
+          "health": "2x(L+C)",
+          "init": 50
+        },
+        {
+          "type": "Escort",
+          "name": "Civilian 3",
+          "health": "2x(L+C)",
+          "init": 50
+        }
+      ]
     },
     "#100 Shifting Gears": {
       "monsters": [ "Stone Golem" ]
@@ -1066,22 +1467,10 @@
       "monsters": [ "City Archer", "City Guard", "Valrath Savage", "Valrath Tracker" ]
     },
     "#110 A Circular Solution": {
-      "monsters": [ "City Guard", "Earth Demon", "Flame Demon", "Savvas Lavaflow", "Valrath Tracker", "Vermling Shaman" ],
-      "special": [
-        {
-          "type": "Note",
-          "note": "Valrath Tracker: %target% C, %pierce% 10, Vermling Shaman: CxH/2, City Guard: CxH/2, Savvas Lavaflow: CxH/2"
-        }]
+      "monsters": [ "The Steel Lion", "Earth Demon", "Flame Demon", "Uyart Ikkuma", "Selah Neberis", "Sraka the Wise" ]
     },
     "#111 The Shackles Loosen": {
-      "monsters": [ "Aesther Ashblade", "Aesther Scout", "Black Imp", "Night Demon" ],
-      "special": [
-        {
-          "type": "HealthAdjust",
-          "name": "Aesther Ashblade",
-          "health": "HxC",
-          "note": "Aesther Ashblade: HxC - probably named"
-        }]
+      "monsters": [ "The Husk", "Aesther Scout", "Black Imp", "Night Demon" ]
     },
     "#112 The Bottom of It": {
       "monsters": [ "Ancient Artillery", "Living Bones", "Stone Golem" ]
@@ -1093,8 +1482,7 @@
           "type": "Escort",
           "name": "Naaret",
           "health": "4+2xL",
-          "init": 99,
-          "note": "\"Escort: Naaret\", \"4+2xL\""
+          "init": 50
         }]
     },
     "#114 Ink Not Yet Dry": {
@@ -1104,8 +1492,7 @@
           "type": "Escort",
           "name": "Hail",
           "health": "4+2xL",
-          "init": 99,
-          "note": "\"Escort: Hail\", \"4+2xL\""
+          "init": 99
         }]
     },
     "#115 Future Uncertain": {
@@ -1142,7 +1529,7 @@
       "monsters": [ "Valrath Savage" ]
     },
     "#13 Shrine of Ashtar": {
-      "monsters": [ "Ancient Artillery", "Earth Demon", "Flame Demon", "Savvas Lavaflow" ]
+      "monsters": [ "Ancient Artillery", "Earth Demon", "Flame Demon", "Avatar of Ashtar" ]
     },
     "#14 The Floor Moves": {
       "monsters": [ "Living Spirit", "Stone Golem" ]
@@ -1196,7 +1583,7 @@
         }]
     },
     "#35 Shrine of Thelija": {
-      "monsters": [ "Ancient Artillery", "Frost Demon", "Savvas Icestorm", "Wind Demon" ]
+      "monsters": [ "Ancient Artillery", "Frost Demon", "Avatar of Thelija", "Wind Demon" ]
     },
     "#37 Aiding Diamara": {
       "monsters": [],
@@ -1259,7 +1646,7 @@
       "monsters": [ "Aesther Scout", "Black Imp", "Night Demon" ]
     },
     "#84 Gateway to the Firmament": {
-      "monsters": [ "Aesther Ashblade", "Earth Demon", "Flame Demon", "Frost Demon", "Savvas Icestorm", "Savvas Lavaflow" ]
+      "monsters": [ "Elham", "Earth Demon", "Flame Demon", "Frost Demon", "Icestorm Guardian of the Firmamant", "Lavaflow Guardian of the Firmament" ]
     },
     "#90 Misty Glade": {
       "monsters": [ "Valrath Savage" ]
@@ -1288,7 +1675,39 @@
       "monsters": [ "Living Spirit" ]
     },
     "#100 Sekhem Fountain": {
-      "monsters": [ "Black Imp", "Cultist", "Deep Terror" ]
+      "monsters": [ "Black Imp", "Cultist", "Deep Terror" ],
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Civilian 4",
+          "health": "2x(L+C)",
+          "init": 50
+        },
+        {
+          "type": "Escort",
+          "name": "Civilian 5",
+          "health": "2x(L+C)",
+          "init": 50
+        },
+        {
+          "type": "Escort",
+          "name": "Civilian 6",
+          "health": "2x(L+C)",
+          "init": 50
+        },
+        {
+          "type": "Escort",
+          "name": "Civilian 7",
+          "health": "2x(L+C)",
+          "init": 50
+        },
+        {
+          "type": "Escort",
+          "name": "Civilian 8",
+          "health": "2x(L+C)",
+          "init": 50
+        }
+      ]
     },
     "#103 The Thorns of Hate": {
       "monsters": [ "Earth Demon", "Forest Imp", "Wind Demon" ]

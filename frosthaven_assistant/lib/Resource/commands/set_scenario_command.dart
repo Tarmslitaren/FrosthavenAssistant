@@ -62,7 +62,6 @@ class SetScenarioCommand extends Command {
 
       specialRules = _gameState.modelData.value[_gameState
           .currentCampaign.value]!.sections[_scenario]!.specialRules;
-      //TODO: don't add duplicates! - this would not be needed if we keep track on added sections
     }else{
       monsters = _gameState.modelData.value[_gameState
           .currentCampaign.value]!.scenarios[_scenario]!.monsters;
@@ -86,7 +85,19 @@ class SetScenarioCommand extends Command {
         }
       }
 
-      _gameState.currentList.add(GameMethods.createMonster(monster, min(_gameState.level.value + levelAdjust, 7), healthAdjust)!);
+      bool add = true;
+      for (var item in _gameState.currentList) {
+        //don't add duplicates
+        if(item.id == monster) {
+          add = false;
+          break;
+        }
+      }
+      if(add) {
+        _gameState.currentList.add(GameMethods.createMonster(
+            monster, min(_gameState.level.value + levelAdjust, 7),
+            healthAdjust)!);
+      }
     }
 
     //add objectives and escorts
@@ -96,14 +107,34 @@ class SetScenarioCommand extends Command {
         objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
         objective.characterState.health.value = objective.characterState.maxHealth.value;
         objective.characterState.initiative = item.init;
-        _gameState.currentList.add(objective);
+        bool add = true;
+        for (var item2 in _gameState.currentList) {
+          //don't add duplicates
+          if(item2 is Character && (item2).characterState.display == item.name) {
+            add = false;
+            break;
+          }
+        }
+        if(add) {
+          _gameState.currentList.add(objective);
+        }
       }
       if (item.type == "Escort") {
         Character objective = GameMethods.createCharacter("Escort", item.name, _gameState.level.value)!;
         objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
         objective.characterState.health.value = objective.characterState.maxHealth.value;
         objective.characterState.initiative = item.init;
-        _gameState.currentList.add(objective);
+        bool add = true;
+        for (var item2 in _gameState.currentList) {
+          //don't add duplicates
+          if(item2 is Character && (item2).characterState.display == item.name) {
+            add = false;
+            break;
+          }
+        }
+        if(add) {
+          _gameState.currentList.add(objective);
+        }
       }
     }
 

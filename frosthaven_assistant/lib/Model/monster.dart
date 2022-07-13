@@ -21,6 +21,9 @@ class MonsterModel {
     // note the explicit cast to String
     // this is required if robust lint rules are enabled
     //final name = data['name'] as String;
+    if(kDebugMode) {
+      print(name);
+    }
     String display = name;
     if(data.containsKey('display')){
       display = data['display'] as String;
