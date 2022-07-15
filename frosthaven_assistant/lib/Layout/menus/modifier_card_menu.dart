@@ -77,7 +77,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     }
     var screenSize = MediaQuery.of(context).size;
     return SizedBox(
-        width: max(screenSize.width / nrOfButtons - 15, 20),
+        width: max(screenSize.width / nrOfButtons - 15, 40),
         child: TextButton(
           child: Text(text),
           onPressed: () {
@@ -108,7 +108,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         ),
         child: Container(
           height: screenSize.height * 0.80,
-          width: 88*2, //double scale, since it's so small to begin with
+          width: 88*1.5, //double scale??, since it's so small to begin with
           child: reorderable
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
@@ -187,7 +187,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 buildList(drawPile,
-                    _gameState.roundState.value == RoundState.playTurns, false),
+                    true, false),
                 buildList(discardPile, false, true)
               ],
             ),

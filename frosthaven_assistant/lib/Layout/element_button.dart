@@ -59,7 +59,6 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
           });
         }
       }
-
     });
   }
 
