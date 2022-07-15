@@ -1,19 +1,14 @@
-import 'dart:math';
 
 import 'package:animated_widgets/animated_widgets.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/modifier_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
-import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-import '../Resource/enums.dart';
 
-double smallify = 0.66666;
 
 class ModifierDeckWidget extends StatefulWidget {
   const ModifierDeckWidget({Key? key}) : super(key: key);
@@ -28,28 +23,45 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   @override
   void initState() {
     super.initState();
+
+    //to load save state
+    _gameState.modelData.addListener(() {
+        setState(() {});
+    });
   }
+
+  Widget buildStayAnimation(Widget child) {
+    return Container(
+        margin: EdgeInsets.only(left: 33.3333),
+        child: child);
+  }
+
+
   Widget buildSlideAnimation(Widget child, Key key) {
+    if(!animationsEnabled) {
+      return Container(
+        margin: EdgeInsets.only(left: 33.3333),
+          child: child);
+    }
     return Container(
         key: key,
         child: TranslationAnimatedWidget(
           //curve: Curves.slowMiddle,
           animationFinished: (bool finished){
             if (finished) {
-              //enabled = false;
               animationsEnabled = false;
             }
           },
             duration: Duration(milliseconds: cardAnimationDuration),
-            enabled: enabled,
+            enabled: true,
             curve: Curves.easeIn,
             values: [
               Offset(0, 0), //left to drawpile
               Offset(0, 0), //left to drawpile
-              Offset(50*smallify, 0), //end
+              Offset(33.3333, 0), //end
             ],
                 child: RotationAnimatedWidget(
-                    enabled: enabled,
+                    enabled: true,
                     values: [
                       Rotation.deg(x: 0, y: 0, z: -15),
                       Rotation.deg(x: 0, y: 0, z: -15),
@@ -63,29 +75,21 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   }
 
   static int cardAnimationDuration = 1200;
-  bool enabled = false;  //set this to true on press and false on complete?
   bool animationsEnabled = false;
-  //TODO: disable the animation onc eit is done and save the disabled state, so it doesn't play on resize/restart
   Widget buildDrawAnimation(Widget child, Key key) {
     //compose a translation, scale, rotation + somehow switch widget from back to front
-    double width = 88 * smallify;
+    double width = 58.6666;
     double height = 40;
 
     var screenSize = MediaQuery.of(context).size;
-    double xOffset = -(screenSize.width/2 - 100*smallify);
+    double xOffset = -(screenSize.width/2 - 66.6666);
     double yOffset = -(screenSize.height/2 - height/2);
 
     return Container(
       key: key, //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
         child: animationsEnabled? TranslationAnimatedWidget(
-          //curve: Curves.slowMiddle,
-          animationFinished: (bool finished){
-            if (finished) {
-              //enabled = false;
-            }
-          },
         duration: Duration(milliseconds: cardAnimationDuration),
-        enabled: enabled,
+        enabled: true,
         values: [
           Offset(-(width+2), 0), //left to drawpile
           Offset(xOffset, yOffset), //center of screen
@@ -94,7 +98,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
           Offset(0, 0), //end
         ],
         child: ScaleAnimatedWidget( //does nothing
-          enabled: enabled,
+          enabled: true,
             duration: Duration(milliseconds: cardAnimationDuration),
 
             values: [
@@ -105,7 +109,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
               1
             ],
             child: RotationAnimatedWidget(
-              enabled: enabled,
+              enabled: true,
                values: [
                  //Rotation.deg(x: 0, y: 0, z: 0),
                  //Rotation.deg(x:0, y: 0, z: 90),
@@ -126,7 +130,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         //right: 0,
        // bottom: 0,
         child: Container(
-          width: 230 * smallify, //TODO: make smaller if can't fit on screen?
+          width: 153, //TODO: make smaller if can't fit on screen?
           height: 40,
           child: ValueListenableBuilder<int>(
               valueListenable: _gameState.modifierDeck.curses,
@@ -136,7 +140,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                     GestureDetector(
                         onTap: () {
                           setState(() {
-                            enabled = true;
                             animationsEnabled = true;
                             _gameState.action(DrawModifierCardCommand());
                           });
@@ -147,7 +150,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                   card: _gameState.modifierDeck.drawPile.peek,
                                   revealed: isAnimating)
                               : Container(
-                                  width: 88 * smallify,
+                                  width: 58.6666,
                                   height: 40,
                                   color:
                                       Color(int.parse("7A000000", radix: 16))),
@@ -177,16 +180,30 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         child: Container(
                             //width: 105 * smallify, //155
                             child: Stack(children: [
+                              _gameState.modifierDeck.discardPile.size() > 2
+                                  ? buildStayAnimation(Container(
+                                //left: 55 * smallify,
+                                  child: RotationTransition(
+                                      turns: const AlwaysStoppedAnimation(
+                                          15 / 360),
+                                      child: ModifierCardWidget(
+                                        card: _gameState
+                                            .modifierDeck.discardPile
+                                            .getList()[_gameState
+                                            .modifierDeck.discardPile
+                                            .getList()
+                                            .length -
+                                            3],
+                                        revealed: true,
+                                      ))), )
+                                  : Container(),
                               _gameState.modifierDeck.discardPile.size() > 1
                                   ? buildSlideAnimation(Container(
                                       //left: 55 * smallify,
                                       child: RotationTransition(
                                           turns: const AlwaysStoppedAnimation(
                                               15 / 360),
-                                          child:
-
-                                              //Transform.rotate(angle: - pi / 4, child:
-                                              ModifierCardWidget(
+                                          child: ModifierCardWidget(
                                             card: _gameState
                                                 .modifierDeck.discardPile
                                                 .getList()[_gameState
@@ -207,7 +224,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                     ),
                                 Key((-_gameState.modifierDeck.discardPile.size()).toString()))
                                   : Container(
-                                      width: 100 * smallify,
+                                      width: 66.6666,
                                       height: 40,
                                     ),
                             ])))

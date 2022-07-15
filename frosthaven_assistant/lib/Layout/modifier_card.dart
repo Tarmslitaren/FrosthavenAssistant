@@ -22,9 +22,7 @@ class ModifierCardWidget extends StatefulWidget {
 
   static Widget buildFront(ModifierCard card, double scale) {
     return Container(
-      //margin: EdgeInsets.all(2),
-      //key: UniqueKey(),
-      width: 88 * smallify * scale,
+      width: 58.6666 * scale,
       height: 39*scale,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0* scale),
@@ -39,12 +37,11 @@ class ModifierCardWidget extends StatefulWidget {
 
   static Widget buildRear(double scale) {
     return Container(
-      width: 88 * smallify * scale,
+      width: 58.6666 * scale,
       height: 39*scale,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0 * scale),
         child: Image(
-          //height: 56,
           image: const AssetImage("assets/images/attack/back.png"),
         ),
       ),
