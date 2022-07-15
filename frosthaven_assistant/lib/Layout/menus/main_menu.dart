@@ -9,11 +9,21 @@ import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:search_choices/search_choices.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Model/campaign.dart';
 import '../../Resource/ui_utils.dart';
 import '../bottom_bar.dart';
 import 'add_monster_menu.dart';
+
+Future<void> launchUrlInBrowser(Uri url) async {
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
+  }
+}
 
 Drawer createMainMenu(BuildContext context) {
   GameState _gameState = getIt<GameState>();
@@ -108,8 +118,10 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: const Text('Documentation'),
-                enabled: false,
                 onTap: () {
+                    final Uri toLaunch =
+                    Uri(scheme: 'https', host: 'www.github.com', path: 'Tarmslitaren/FrosthavenAssistant', fragment: "#readme" );
+                    launchUrlInBrowser(toLaunch);
                   Navigator.pop(context);
                 },
               ),

@@ -21,14 +21,16 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scale = getScaleByReference(context);
+    double scale = 2;// getScaleByReference(context) * 2; //double scale
     late final Widget child;
 
     child = revealed
         ? ModifierCardWidget.buildFront(data, scale)
         : ModifierCardWidget.buildRear(scale);
 
-    return child;
+    return Container(
+      margin: EdgeInsets.all(2),
+        child: child);
   }
 }
 
@@ -106,7 +108,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         ),
         child: Container(
           height: screenSize.height * 0.80,
-          width: 88,
+          width: 88*2, //double scale, since it's so small to begin with
           child: reorderable
               ? ReorderableColumn(
                   needsLongPressDraggable: true,

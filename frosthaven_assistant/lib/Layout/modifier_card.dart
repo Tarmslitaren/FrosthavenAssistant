@@ -9,8 +9,6 @@ import '../Resource/enums.dart';
 import '../Resource/modifier_deck_state.dart';
 import 'modifier_deck_widget.dart';
 
-double tempScale = 0.8;
-
 class ModifierCardWidget extends StatefulWidget {
   final ModifierCard card;
   final revealed = ValueNotifier<bool>(false);
@@ -26,10 +24,10 @@ class ModifierCardWidget extends StatefulWidget {
     return Container(
       //margin: EdgeInsets.all(2),
       //key: UniqueKey(),
-      width: 88 * smallify,
-      height: 39,
+      width: 88 * smallify * scale,
+      height: 39*scale,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(4.0* scale),
         child: Image(
           //height: 56,
           //height: 123 * tempScale * scale,
@@ -41,10 +39,10 @@ class ModifierCardWidget extends StatefulWidget {
 
   static Widget buildRear(double scale) {
     return Container(
-      width: 88 * smallify,
-      height: 39,
+      width: 88 * smallify * scale,
+      height: 39*scale,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(4.0),
+        borderRadius: BorderRadius.circular(4.0 * scale),
         child: Image(
           //height: 56,
           image: const AssetImage("assets/images/attack/back.png"),
@@ -81,7 +79,7 @@ class ModifierCardWidgetState extends State<ModifierCardWidget> {
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     return  widget.revealed.value
-                ? ModifierCardWidget.buildFront(widget.card, scale)
-                : ModifierCardWidget.buildRear(scale);
+                ? ModifierCardWidget.buildFront(widget.card, 1)
+                : ModifierCardWidget.buildRear(1);
   }
 }

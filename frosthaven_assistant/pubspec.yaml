@@ -67,6 +67,8 @@ dependencies:
 
   flutter_launcher_icons: ^0.9.3 #I can't believe we need a third party package to do icons..
 
+  url_launcher: ^6.1.5
+
 
 dev_dependencies:
   flutter_test:
