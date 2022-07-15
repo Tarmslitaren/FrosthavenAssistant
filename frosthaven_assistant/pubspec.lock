@@ -71,13 +71,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.2"
-  diffutil_dart:
-    dependency: transitive
-    description:
-      name: diffutil_dart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -149,13 +142,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.2.0"
-  great_list_view:
-    dependency: "direct main"
-    description:
-      name: great_list_view
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.4"
   image:
     dependency: transitive
     description:
@@ -177,15 +163,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  local_hero:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: a6c01ee389b917f5c5043ffd0d6715d0439abb11
-      url: "https://github.com/Tarmslitaren/local_hero"
-    source: git
-    version: "0.2.0"
   matcher:
     dependency: transitive
     description:
@@ -457,13 +434,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.5"
-  worker_manager:
-    dependency: transitive
-    description:
-      name: worker_manager
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.3.5"
   xdg_directories:
     dependency: transitive
     description:

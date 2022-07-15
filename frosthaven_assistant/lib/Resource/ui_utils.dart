@@ -134,3 +134,21 @@ Widget buildCounterButtons(
         )),
   ]);
 }
+
+//used to get transpaarant background when dragging in reorderable widgets
+Widget defaultBuildDraggableFeedback(
+    BuildContext context, BoxConstraints constraints, Widget child) {
+  return Transform(
+    transform: Matrix4.rotationZ(0),
+    alignment: FractionalOffset.topLeft,
+    child: Material(
+      elevation: 6.0,
+      color: Colors.transparent,
+      borderRadius: BorderRadius.zero,
+      child: Card(
+        //shadowColor: Colors.red,
+          color: Colors.transparent,
+          child: ConstrainedBox(constraints: constraints, child: child)),
+    ),
+  );
+}

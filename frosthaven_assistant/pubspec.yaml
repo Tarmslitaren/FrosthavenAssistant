@@ -33,7 +33,7 @@ dependencies:
   #rxdart: ^0.27.3
   get_it: ^7.2.0
   #implicitly_animated_reorderable_list: ^0.4.2
-  great_list_view: ^0.1.4 #is great for simple lists
+  #great_list_view: ^0.1.4 #is great for simple lists
   #flutter_reorderable_grid_view: ^3.1.1 #maybe this will work well? - or not.
   flutter_layout_grid: ^1.0.3
   #flutter_staggered_grid_view: ^0.6.1
@@ -45,11 +45,6 @@ dependencies:
   search_choices: ^2.0.20
 
   flutter_animation_progress_bar: ^2.2.1 # for the health bars (note the animations run on init which is crappy)
-  #local_hero: ^0.2.0 #maybe can add animations with this? does not work with scrolling :(
-
-  local_hero: #TODO:try to disable the hero animation when scrolling
-    git:
-      url: https://github.com/Tarmslitaren/local_hero
 
   animated_widgets: ^1.1.0 #for monster death animation
 

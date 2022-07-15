@@ -1,15 +1,14 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
-import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/monster_ability_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-import 'package:great_list_view/great_list_view.dart';
-
+import 'package:reorderables/reorderables.dart';
+import '../../Resource/commands/reorder_ability_list_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class Item extends StatelessWidget {
@@ -24,13 +23,10 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     late final Widget child;
-    //late final double height;
-    final GameState _gameState = getIt<GameState>();
 
     child = revealed
         ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale, true)
         : MonsterAbilityCardWidget.buildRear(scale, -1);
-    //height = 120 * tempScale * scale;
 
     return child;
 
@@ -76,12 +72,18 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
     return false;
   }
 
-  bool isSameContent(MonsterAbilityCardModel a, MonsterAbilityCardModel b) {
-    return false;
-  }
-
-  bool isSameItem(MonsterAbilityCardModel a, MonsterAbilityCardModel b) {
-    return a.nr == b.nr;
+  List<Widget> generateList(
+      List<MonsterAbilityCardModel> inputList, bool allOpen) {
+    List<Widget> list = [];
+    for (var item in inputList) {
+      Item value = Item(
+          key: Key(item.nr.toString()),
+          data: item,
+          monsterData: widget.monsterData,
+          revealed: isRevealed(item) || allOpen == true);
+      list.add(value);
+    }
+    return list;
   }
 
   Widget buildRevealButton(int nrOfButtons, int nr){
@@ -97,14 +99,13 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
           child: Text(text),
           onPressed: () {
             markAsOpen(nr);
-            setState() {}
           },
         )
     );
   }
 
   Widget buildList(List<MonsterAbilityCardModel> list, bool reorderable,
-      bool allOpen, var controller) {
+      bool allOpen) {
     var screenSize = MediaQuery.of(context).size;
     double scale = getScaleByReference(context);
     return Theme(
@@ -116,55 +117,33 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
         child: Container(
           height: _gameState.roundState.value == RoundState.playTurns? screenSize.height * 0.86: screenSize.height * 0.94,
           width: 184 * tempScale * scale,
-          //alignment: Alignment.centerLeft,
-          //margin: EdgeInsets.only(left: getMainListMargin(context)),
-          child: AutomaticAnimatedListView<MonsterAbilityCardModel>(
-            //reverse: true,
-            animator: const DefaultAnimatedListAnimator(),
-            list: list,
-            comparator: AnimatedListDiffListComparator<MonsterAbilityCardModel>(
-                sameItem: (a, b) => isSameItem(a, b),
-                sameContent: (a, b) => isSameContent(a, b)),
-            itemBuilder: (context, item, data) => data.measuring
-                ? Container(
-                    color: Colors.transparent,
-                    height: 120 * tempScale * scale,
-                    //these are for smooth animations. need to be same size as the items
-                  )
-                : Item(
-                    data: item,
-                    monsterData: widget.monsterData,
-                    revealed: isRevealed(item) || allOpen == true),
-            listController: controller,
-            //scrollController: ScrollController(),
-            addLongPressReorderable: reorderable,
+          child: reorderable? ReorderableColumn(
+            needsLongPressDraggable: true,
+            scrollController: scrollController,
+            scrollAnimationDuration: Duration(milliseconds: 400),
+            reorderAnimationDuration: Duration(milliseconds: 400),
 
-            reorderModel: AnimatedListReorderModel(
-              onReorderStart: (index, dx, dy) {
-                return true;
-              },
-              onReorderMove: (index, dropIndex) {
-                // pink-colored items cannot be swapped
-                return true; //list[dropIndex].color != 3;
-              },
-              onReorderComplete: (index, dropIndex, slot) {
+            buildDraggableFeedback: defaultBuildDraggableFeedback,
+            onReorder: (index, dropIndex) {
+              //make sure this is correct
+              setState(() {
+                dropIndex = list.length -dropIndex-1;
+                index = list.length-index-1;
                 list.insert(dropIndex, list.removeAt(index));
-                widget.monsterAbilityState.drawPile
-                    .setList(list.reversed.toList());
-                return true;
-              },
-            ),
+                _gameState.action(ReorderAbilityListCommand(
+                    widget.monsterAbilityState.name, dropIndex, index));
+              });
+            },
+            children: generateList(list, allOpen),
 
-            //reorderModel: AutomaticAnimatedListReorderModel(list),
-          ),
+          ):
+            ListView(
+              children: generateList(list, allOpen),
+            ),
         ));
   }
 
   final scrollController = ScrollController();
-
-  //use to animate to position in list:
-  final controller = AnimatedListController();
-  final controller2 = AnimatedListController();
 
   @override
   Widget build(BuildContext context) {
@@ -223,8 +202,8 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                buildList(drawPile, _gameState.roundState.value == RoundState.playTurns, false, controller),
-                buildList(discardPile, false, true, controller2)
+                buildList(drawPile, _gameState.roundState.value == RoundState.playTurns, false),
+                buildList(discardPile, false, true)
               ],
             ),
 

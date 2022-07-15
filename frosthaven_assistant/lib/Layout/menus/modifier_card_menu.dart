@@ -1,47 +1,39 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
-import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
-import 'package:frosthaven_assistant/Resource/monster_ability_state.dart';
+import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-import 'package:great_list_view/great_list_view.dart';
+import 'package:reorderables/reorderables.dart';
 
 import '../../Resource/enums.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/modifier_deck_state.dart';
+import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class Item extends StatelessWidget {
-  final MonsterAbilityCardModel data;
-  final Monster monsterData;
+  final ModifierCard data;
   final bool revealed;
 
-  const Item({Key? key, required this.data, required this.revealed, required this.monsterData})
+  const Item({Key? key, required this.data, required this.revealed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     late final Widget child;
-    //late final double height;
-    final GameState _gameState = getIt<GameState>();
 
     child = revealed
-        ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale, true)
-        : MonsterAbilityCardWidget.buildRear(scale, -1);
-    //height = 120 * tempScale * scale;
+        ? ModifierCardWidget.buildFront(data, scale)
+        : ModifierCardWidget.buildRear(scale);
 
     return child;
-
   }
 }
 
 class ModifierCardMenu extends StatefulWidget {
-  const ModifierCardMenu({Key? key})
-      : super(key: key);
+  const ModifierCardMenu({Key? key}) : super(key: key);
 
   @override
   ModifierCardMenuState createState() => ModifierCardMenuState();
@@ -59,7 +51,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
   void markAsOpen(int revealed) {
     setState(() {
       _revealedList = [];
-      var drawPile =_gameState.modifierDeck.drawPile.getList().reversed.toList();
+      var drawPile =
+          _gameState.modifierDeck.drawPile.getList().reversed.toList();
       for (int i = 0; i < revealed; i++) {
         _revealedList.add(drawPile[i]);
       }
@@ -75,37 +68,36 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     return false;
   }
 
-  bool isSameContent(ModifierCard a, ModifierCard b) {
-    return a.gfx == b.gfx;
-  }
-
-  bool isSameItem(ModifierCard a, ModifierCard b) {
-    return false; //TODO: not exactly. this f's stuff up
-  }
-
-  Widget buildRevealButton(int nrOfButtons, int nr){
+  Widget buildRevealButton(int nrOfButtons, int nr) {
     String text = "All";
-    if (nr < nrOfButtons){
+    if (nr < nrOfButtons) {
       text = nr.toString();
     }
     var screenSize = MediaQuery.of(context).size;
     return SizedBox(
-        width: max(screenSize.width / nrOfButtons -15,20),
+        width: max(screenSize.width / nrOfButtons - 15, 20),
         child: TextButton(
-
           child: Text(text),
           onPressed: () {
             markAsOpen(nr);
-            setState() {}
           },
-        )
-    );
+        ));
   }
 
-  Widget buildList(List<ModifierCard> list, bool reorderable,
-      bool allOpen, var controller) {
+  List<Widget> generateList(List<ModifierCard> inputList, bool allOpen) {
+    List<Widget> list = [];
+    for (var item in inputList) {
+      Item value = Item(
+          key: UniqueKey(),
+          data: item,
+          revealed: isRevealed(item) || allOpen == true);
+      list.add(value);
+    }
+    return list;
+  }
+
+  Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen) {
     var screenSize = MediaQuery.of(context).size;
-    double scale = getScaleByReference(context);
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
@@ -115,128 +107,102 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         child: Container(
           height: screenSize.height * 0.80,
           width: 88,
-          //alignment: Alignment.centerLeft,
-          //margin: EdgeInsets.only(left: getMainListMargin(context)),
-          child: AutomaticAnimatedListView<ModifierCard>(
-            //reverse: true,
-            animator: const DefaultAnimatedListAnimator(),
-            list: list,
-            comparator: AnimatedListDiffListComparator<ModifierCard>(
-                sameItem: (a, b) => isSameItem(a, b, ),
-                sameContent: (a, b) => isSameContent(a, b)),
-            itemBuilder: (context, item, data) => data.measuring
-                ? Container(
-              color: Colors.transparent,
-              height: 60,
-              //these are for smooth animations. need to be same size as the items
-            )
-                : ModifierCardWidget(card: item,
-                revealed: isRevealed(item) || allOpen == true),
-            listController: controller,
-            //scrollController: ScrollController(),
-            addLongPressReorderable: reorderable,
-
-            reorderModel: AnimatedListReorderModel(
-              onReorderStart: (index, dx, dy) {
-                return true;
-              },
-              onReorderMove: (index, dropIndex) {
-                // pink-colored items cannot be swapped
-                return true; //list[dropIndex].color != 3;
-              },
-              onReorderComplete: (index, dropIndex, slot) {
-                list.insert(dropIndex, list.removeAt(index));
-                _gameState.modifierDeck.drawPile
-                    .setList(list.reversed.toList());
-                return true;
-              },
-            ),
-
-            //reorderModel: AutomaticAnimatedListReorderModel(list),
-          ),
+          child: reorderable
+              ? ReorderableColumn(
+                  needsLongPressDraggable: true,
+                  scrollController: scrollController,
+                  scrollAnimationDuration: Duration(milliseconds: 400),
+                  reorderAnimationDuration: Duration(milliseconds: 400),
+                  buildDraggableFeedback: defaultBuildDraggableFeedback,
+                  onReorder: (index, dropIndex) {
+                    //make sure this is correct
+                    setState(() {
+                      dropIndex = list.length - dropIndex - 1;
+                      index = list.length - index - 1;
+                      list.insert(dropIndex, list.removeAt(index));
+                      _gameState
+                          .action(ReorderModifierListCommand(dropIndex, index));
+                    });
+                  },
+                  children: generateList(list, allOpen),
+                )
+              : ListView(
+                  children: generateList(list, allOpen),
+                ),
         ));
   }
 
   final scrollController = ScrollController();
 
-  //use to animate to position in list:
-  final controller = AnimatedListController();
-  final controller2 = AnimatedListController();
-
   @override
   Widget build(BuildContext context) {
-    var drawPile =
-    _gameState.modifierDeck.drawPile.getList().reversed.toList();
+    var drawPile = _gameState.modifierDeck.drawPile.getList().reversed.toList();
     var discardPile = _gameState.modifierDeck.discardPile.getList();
     return Container(
-      //TODO: fix layout size for this.
-      //width: 500,
-      // height: 300,
-        child:
-        Column(children: [
-          Card(
+        //TODO: fix layout size for this.
+        //width: 500,
+        // height: 300,
+        child: Column(children: [
+      Card(
 
-            //color: Colors.transparent,
-              margin: const EdgeInsets.only(left:20, right:20, top: 20),
+          //color: Colors.transparent,
+          margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+          child: Column(children: [
+            Row(mainAxisSize: MainAxisSize.max, children: [
+              const Text(
+                "Reveal:",
+                //style: TextStyle(color: Colors.white)
+              ),
+              drawPile.length > 0
+                  ? buildRevealButton(drawPile.length, 1)
+                  : Container(),
+              drawPile.length > 1
+                  ? buildRevealButton(drawPile.length, 2)
+                  : Container(),
+              drawPile.length > 2
+                  ? buildRevealButton(drawPile.length, 3)
+                  : Container(),
+              drawPile.length > 3
+                  ? buildRevealButton(drawPile.length, 4)
+                  : Container(),
+              drawPile.length > 4
+                  ? buildRevealButton(drawPile.length, 5)
+                  : Container(),
+              drawPile.length > 5
+                  ? buildRevealButton(drawPile.length, 6)
+                  : Container(),
+              drawPile.length > 6
+                  ? buildRevealButton(drawPile.length, 7)
+                  : Container(),
+            ]),
+          ])),
+      Card(
+          color: Colors.transparent,
+          margin: const EdgeInsets.only(left: 20, right: 20),
+          child: Stack(children: [
+            //TODO: add diviner functionality:, bad omen, enfeebling hex
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                buildList(drawPile,
+                    _gameState.roundState.value == RoundState.playTurns, false),
+                buildList(discardPile, false, true)
+              ],
+            ),
 
-              child: Column(children: [
-
-                Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      const Text(
-                        "Reveal:",
-                        //style: TextStyle(color: Colors.white)
-                      ),
-                      drawPile.length > 0
-                          ? buildRevealButton(drawPile.length, 1)
-                          : Container(),
-                      drawPile.length > 1
-                          ? buildRevealButton(drawPile.length, 2)
-                          : Container(),
-                      drawPile.length > 2
-                          ? buildRevealButton(drawPile.length, 3)
-                          : Container(),
-                      drawPile.length > 3
-                          ? buildRevealButton(drawPile.length, 4)
-                          : Container(),
-                      drawPile.length > 4
-                          ? buildRevealButton(drawPile.length, 5)
-                          : Container(),
-                      drawPile.length > 5
-                          ? buildRevealButton(drawPile.length, 6)
-                          : Container(),
-                      drawPile.length > 6
-                          ?buildRevealButton(drawPile.length, 7)
-                          :Container(),
-                    ]),
-              ])),
-          Card(
-              color: Colors.transparent,
-              margin: const EdgeInsets.only(left:20, right:20),
-              child: Stack(children: [
-                //TODO: add diviner functionality:send ot bottom, bad omen, enfeebling hex
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    buildList(drawPile, _gameState.roundState.value == RoundState.playTurns, false, controller),
-                    buildList(discardPile, false, true, controller2)
-                  ],
-                ),
-
-                Positioned(
-                    width: 100,
-                    right: 2,
-                    bottom: 2,
-                    child: TextButton(
-                        child: const Text(
-                          'Close',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        }))
-              ]))
-        ]));
+            Positioned(
+                width: 100,
+                right: 2,
+                bottom: 2,
+                child: TextButton(
+                    child: const Text(
+                      'Close',
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }))
+          ]))
+    ]));
   }
 }

@@ -116,11 +116,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   @override
   Widget build(BuildContext context) {
     bool isAnimating = false;
-    return Positioned(
-        right: 0,
-        bottom: 0,
+    return  Container( //Positioned( //only a positioned if place in a stack
+        //right: 0,
+       // bottom: 0,
         child: Container(
-          width: 230 * smallify,
+          width: 230 * smallify, //TODO: make smaller if can't fit on screen?
           height: 40,
           child: ValueListenableBuilder<int>(
               valueListenable: _gameState.modifierDeck.curses,
@@ -167,7 +167,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                           openDialog(context, const ModifierCardMenu());
                         },
                         child: Container(
-                            width: 105 * smallify, //155
+                            //width: 105 * smallify, //155
                             child: Stack(children: [
                               _gameState.modifierDeck.discardPile.size() > 1
                                   ? buildSlideAnimation(Container(

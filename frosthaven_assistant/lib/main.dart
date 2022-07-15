@@ -5,7 +5,6 @@ import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-import 'package:local_hero/local_hero.dart';
 
 //import 'package:scaled_app/scaled_app.dart';
 import 'package:wakelock/wakelock.dart';

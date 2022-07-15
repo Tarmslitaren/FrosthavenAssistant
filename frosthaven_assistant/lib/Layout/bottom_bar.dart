@@ -148,8 +148,9 @@ Widget createBottomBar(BuildContext context) {
               repeat: ImageRepeat.repeat),
         ),
         child: Row(
-          children: [const DrawButton(), createLevelWidget(context), /*ModifierDeckWidget()*/],
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [const DrawButton(), createLevelWidget(context), ModifierDeckWidget()],
         ))),
-    const ModifierDeckWidget(),
+    //const ModifierDeckWidget(),
   ]));
 }

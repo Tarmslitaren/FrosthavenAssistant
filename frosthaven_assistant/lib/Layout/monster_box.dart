@@ -141,8 +141,9 @@ class _MonsterBoxState extends State<MonsterBox> {
                         ),
                         Container(
                           width: 18 * scale,
+                          alignment: Alignment.center,
                           child: Text(
-                            //textAlign: TextAlign.center,
+                            textAlign: TextAlign.end,
                             "${widget.data.health.value}",
                             style: TextStyle(
                                 fontFamily: 'Pirata',

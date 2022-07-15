@@ -7,7 +7,6 @@ import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-import 'package:local_hero/local_hero.dart';
 
 //import 'package:great_list_view/great_list_view.dart';
 //import 'package:reorderableitemsview/reorderableitemsview.dart';
@@ -16,6 +15,7 @@ import 'package:reorderables/reorderables.dart';
 import '../Resource/action_handler.dart';
 import '../Resource/commands/reorder_list_command.dart';
 import '../Resource/game_methods.dart';
+import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
 
@@ -224,7 +224,7 @@ class _MainListState extends State<MainList> {
     return widgetPositions.length;
   }
 
-  AnimatedSize createAnimatedSwitcher(int index, int lastIndex) {
+  Widget createAnimatedSwitcher(int index, int lastIndex) {
   //need also last positions
     List<double> positions = getItemHeights();// - the end resulting positions.
     double position = 0;
@@ -245,20 +245,17 @@ class _MainListState extends State<MainList> {
       lastPositions = positions;
     });
 
-    return AnimatedSize( //not really needed now
-        duration: const Duration(milliseconds: 0),
-      child:
-      TranslationAnimatedWidget.tween(
+    return TranslationAnimatedWidget.tween(
     translationDisabled: Offset(0, diff),
     translationEnabled: Offset(0,  0),
     duration: Duration(milliseconds: 1000),
     curve: Curves.linearToEaseOut, // Curves.decelerate,
     child: _generatedList[index],
-      )
+
     );
   }
   List<Widget> generateChildren() {
-    List<AnimatedSize> generatedListAnimators = [];
+    List<Widget> generatedListAnimators = [];
     List<int> indices = [];
     for(int i = 0; i < _gameState.currentList.length; i++){
       int index = i;
@@ -321,22 +318,6 @@ class _MainListState extends State<MainList> {
     return generatedListAnimators;//_generatedList;
   }
 
-  Widget defaultBuildDraggableFeedback(
-      BuildContext context, BoxConstraints constraints, Widget child) {
-    return Transform(
-      transform: Matrix4.rotationZ(0),
-      alignment: FractionalOffset.topLeft,
-      child: Material(
-        elevation: 6.0,
-        color: Colors.transparent,
-        borderRadius: BorderRadius.zero,
-        child: Card(
-            //shadowColor: Colors.red,
-            color: Colors.transparent,
-            child: ConstrainedBox(constraints: constraints, child: child)),
-      ),
-    );
-  }
 
   Widget buildList() {
     return Theme(

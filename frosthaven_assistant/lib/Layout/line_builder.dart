@@ -318,8 +318,8 @@ class LineBuilder {
     }
     String line = "" + lineInput; //make sure lineInput is not altered
     if (kDebugMode) {
-      print("monster: ${monster.id}");
-      print("line: $line");
+      //print("monster: ${monster.id}");
+      //print("line: $line");
     }
 
     List<String> retVal = [];
@@ -390,7 +390,7 @@ class LineBuilder {
           //for a formula to work (oustside of plain C or L) it must either be modifying a token vslue or be 3+ chars long
           //might not be right. test.
           if (kDebugMode) {
-            print("formula:$formula");
+            //print("formula:$formula");
           }
 
           if (lastToken.isNotEmpty) {
