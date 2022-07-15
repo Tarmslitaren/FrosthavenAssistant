@@ -34,11 +34,12 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         key: key,
         child: TranslationAnimatedWidget(
           //curve: Curves.slowMiddle,
-          /*animationFinished: (bool finished){
+          animationFinished: (bool finished){
             if (finished) {
               //enabled = false;
+              animationsEnabled = false;
             }
-          },*/
+          },
             duration: Duration(milliseconds: cardAnimationDuration),
             enabled: enabled,
             curve: Curves.easeIn,
@@ -55,17 +56,20 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                       Rotation.deg(x: 0, y: 0, z: 0),
                     ],
                     duration: Duration(milliseconds:cardAnimationDuration),
-                    child: child)));
+                    child: child))
+
+    );
 
   }
 
   static int cardAnimationDuration = 1200;
-  bool enabled = true; //TODO: disable the animation onc eit is done and save the disabled state, so it doesn't play on resize/restart
+  bool enabled = false;  //set this to true on press and false on complete?
+  bool animationsEnabled = false;
+  //TODO: disable the animation onc eit is done and save the disabled state, so it doesn't play on resize/restart
   Widget buildDrawAnimation(Widget child, Key key) {
     //compose a translation, scale, rotation + somehow switch widget from back to front
     double width = 88 * smallify;
     double height = 40;
-    //enabled = !enabled; //testing
 
     var screenSize = MediaQuery.of(context).size;
     double xOffset = -(screenSize.width/2 - 100*smallify);
@@ -73,13 +77,13 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
     return Container(
       key: key, //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
-        child: TranslationAnimatedWidget(
+        child: animationsEnabled? TranslationAnimatedWidget(
           //curve: Curves.slowMiddle,
-          /*animationFinished: (bool finished){
+          animationFinished: (bool finished){
             if (finished) {
               //enabled = false;
             }
-          },*/
+          },
         duration: Duration(milliseconds: cardAnimationDuration),
         enabled: enabled,
         values: [
@@ -110,12 +114,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                  Rotation.deg(x: 0, y: 0, z: 360),
                ],
                duration: Duration(milliseconds:(cardAnimationDuration * 0.25).ceil()),
-                child: child))));
+                child: child)))
+            :child
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    bool isAnimating = false;
+    bool isAnimating = false; //is not doing anything now. in case flip animation is added
     return  Container( //Positioned( //only a positioned if place in a stack
         //right: 0,
        // bottom: 0,
@@ -130,6 +136,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                     GestureDetector(
                         onTap: () {
                           setState(() {
+                            enabled = true;
+                            animationsEnabled = true;
                             _gameState.action(DrawModifierCardCommand());
                           });
                         },
