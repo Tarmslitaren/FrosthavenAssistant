@@ -361,9 +361,10 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
     await fetchCampaignData("Frosthaven", map);
     //TODO:specify campaigns in data, or scrub the directory for files
 
-    modelData.value = map;
 
     load(); //load saved state from file.
+
+    modelData.value = map;
   }
 
   fetchCampaignData(String campaign, Map<String, CampaignModel> map) async {
@@ -475,6 +476,8 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
       round.value = data['round'] as int;
       roundState.value =  RoundState.values[data['roundState']];
       solo.value = data['solo'] as bool; //TODO: does not update properly (because changing it is not a command
+
+      //main list
       var list = data['currentList'] as List;
       currentList.clear();
       List<ListItemData> newList = [];
@@ -489,11 +492,10 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
           newList.add(monster);
 
         }
-        //create the objects
-        //add to currentList.
       }
       currentList = newList;
 
+      //ability decks
       var decks = data['currentAbilityDecks'] as List;
       currentAbilityDecks.clear();
       for (Map<String, dynamic> item in decks){
@@ -522,14 +524,12 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
         state.discardPile.getList().clear();
         state.drawPile.setList(newDrawList);
         state.discardPile.setList(newDiscardList);
-
-
         currentAbilityDecks.add(state);
       }
 
+      //modifier deck
       var modifierDeckData = data['modifierDeck'];
         ModifierDeck state = ModifierDeck();
-
         List<ModifierCard> newDrawList = [];
         List drawPile = modifierDeckData["drawPile"] as List;
         for(var item in drawPile) {
@@ -571,19 +571,15 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
         state.cardCount.value = state.drawPile.size();
         modifierDeck = state;
 
-      //////
-
+      //////elements
       Map elementData = data['elementState'];
-
       Map<Elements, ElementState> newMap = {};
-
       newMap[Elements.fire] = ElementState.values[elementData[Elements.fire.index.toString()]];
       newMap[Elements.ice] = ElementState.values[elementData[Elements.ice.index.toString()]];
       newMap[Elements.air] = ElementState.values[elementData[Elements.air.index.toString()]];
       newMap[Elements.earth] = ElementState.values[elementData[Elements.earth.index.toString()]];
       newMap[Elements.light] = ElementState.values[elementData[Elements.light.index.toString()]];
       newMap[Elements.dark] = ElementState.values[elementData[Elements.dark.index.toString()]];
-
       elementState.value = newMap;
 
     }
