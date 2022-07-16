@@ -54,8 +54,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
       color = Colors.black;
     }
     return SizedBox(
-      width: 32,
-      height: 32,
+      width: 42,
+      height: 42,
       child: Container(
           decoration: BoxDecoration(
               border: Border.all(
@@ -87,7 +87,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     }
     String text = nr.toString();
     return SizedBox(
-      width: 32,
+      width: 42,
       height: 32,
       child: Container(
           decoration: BoxDecoration(
@@ -99,6 +99,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
             child: Text(
               text,
               style: TextStyle(
+                fontSize: 18,
                   color: isCurrentlySelected ? Colors.black : Colors.grey),
             ),
             onPressed: () {
@@ -215,7 +216,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                         if (model.gfx.isNotEmpty) {
                           gfx = model.gfx;
                         }
-                        if(model.standees < 2) {
+                        if(model.standees < 2 && model.gfx.isNotEmpty) {
                           chosenNr = 0; //don't show on monsterbox unless standees are numbered
                         }
                         SummonData summonData = SummonData(

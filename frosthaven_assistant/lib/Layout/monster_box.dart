@@ -136,11 +136,11 @@ class _MonsterBoxState extends State<MonsterBox> {
                         Image(
                           //fit: BoxFit.contain,
                           color: Colors.red,
-                          height: 12 * scale,
+                          height: 11 * scale,
                           image: const AssetImage("assets/images/blood.png"),
                         ),
                         Container(
-                          width: 18 * scale,
+                          width: 16.7 * scale,
                           alignment: Alignment.center,
                           child: Text(
                             textAlign: TextAlign.end,
@@ -149,7 +149,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                                 fontFamily: 'Pirata',
                                 color: Colors.white,
                                 fontSize: widget.data.health.value > 99
-                                    ? 13 * scale
+                                    ? 12 * scale
                                     : 18 * scale,
                                 shadows: [
                                   Shadow(
