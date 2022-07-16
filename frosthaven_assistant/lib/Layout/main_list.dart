@@ -98,12 +98,65 @@ class MainList extends StatefulWidget {
   _MainListState createState() => _MainListState();
 }
 
+class ListAnimation extends StatefulWidget {
+  final int index;
+  final int lastIndex;
+  final Widget child;
+  const ListAnimation({Key? key, required this.index, required this.lastIndex, required this.child}) : super(key: key);
+
+
+  @override
+  State<StatefulWidget> createState() {
+    return ListAnimationState();
+  }
+}
+
+class ListAnimationState extends State<ListAnimation>{
+  bool blockAnimation = false;
+  @override
+  Widget build(BuildContext context) {{
+      //need also last positions
+      List<double> positions = _MainListState.getItemHeights(context);// - the end resulting positions.
+      double position = 0;
+      if(widget.index > 0){
+        position = positions[widget.index-1];
+      }
+
+      double lastPosition = 0;
+      if(widget.lastIndex > 0){
+        if(_MainListState.lastPositions.length >=widget.lastIndex) { //should be ok except for on reload as we don't bother saving lastPositions ot disk
+          lastPosition = _MainListState.lastPositions[widget.lastIndex - 1];
+        }
+      }
+
+      double diff = lastPosition - position;
+
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+        _MainListState.lastPositions = positions;
+      });
+
+      return TranslationAnimatedWidget.tween(
+        translationDisabled: Offset(0, blockAnimation? diff : 0),
+        translationEnabled: Offset(0,  0),
+        duration: Duration(milliseconds: 1000),
+        curve: Curves.linearToEaseOut, // Curves.decelerate,
+        child: widget.child,
+        animationFinished: (bool finished){
+          blockAnimation = true;
+        },
+
+
+      );
+    }
+  }
+}
+
 class _MainListState extends State<MainList> {
   final GameState _gameState = getIt<GameState>();
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
 
-  late List<double> lastPositions;
+  static late List<double> lastPositions;
 
   @override
   void initState() {
@@ -111,7 +164,7 @@ class _MainListState extends State<MainList> {
 
     //this does cause a index o
    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      lastPositions = getItemHeights();
+      lastPositions = getItemHeights(context);
     });
   }
 
@@ -148,14 +201,15 @@ class _MainListState extends State<MainList> {
     );
   }
 
-  List<double> getItemHeights(){
+  static List<double> getItemHeights(BuildContext context){
+    GameState gameState = getIt<GameState>();
     double listHeight = 0;
     double scale = getScaleByReference(context);
     double mainListWidth = getMainListWidth(context);
 
     List<double> widgetPositions = [];
-    for (int i = 0; i < _gameState.currentList.length; i++) {
-      var item = _gameState.currentList[i];
+    for (int i = 0; i < gameState.currentList.length; i++) {
+      var item = gameState.currentList[i];
       if (item is Character) {
         listHeight += 60;
         if (item.characterState.summonList.value.isNotEmpty) {
@@ -224,36 +278,6 @@ class _MainListState extends State<MainList> {
     return widgetPositions.length;
   }
 
-  Widget createAnimatedSwitcher(int index, int lastIndex) {
-  //need also last positions
-    List<double> positions = getItemHeights();// - the end resulting positions.
-    double position = 0;
-    if(index > 0){
-      position = positions[index-1];
-    }
-
-    double lastPosition = 0;
-    if(lastIndex > 0){
-      if(lastPositions.length >=lastIndex) { //should be ok except for on reload as we don't bother saving lastPositions ot disk
-        lastPosition = lastPositions[lastIndex - 1];
-      }
-    }
-
-    double diff = lastPosition - position;
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      lastPositions = positions;
-    });
-
-    return TranslationAnimatedWidget.tween(
-    translationDisabled: Offset(0, diff),
-    translationEnabled: Offset(0,  0),
-    duration: Duration(milliseconds: 1000),
-    curve: Curves.linearToEaseOut, // Curves.decelerate,
-    child: _generatedList[index],
-
-    );
-  }
   List<Widget> generateChildren() {
     List<Widget> generatedListAnimators = [];
     List<int> indices = [];
@@ -300,8 +324,8 @@ class _MainListState extends State<MainList> {
       //make the list longer
       for (int i = generatedListAnimators.length; i < _generatedList.length; i++)
       {
-        generatedListAnimators.add(
-            createAnimatedSwitcher(i, indices[i])
+        generatedListAnimators.add(ListAnimation(index: i, lastIndex: indices[i], child: _generatedList[i])
+            //createAnimatedSwitcher(i, indices[i])
         );
       }
     }
@@ -329,7 +353,7 @@ class _MainListState extends State<MainList> {
             builder: (context, value, child) {
               double scale = getScaleByReference(context);
               bool canFit2Columns = MediaQuery.of(context).size.width >= getMainListWidth(context) * 2;
-              List<double> itemHeights = getItemHeights();
+              List<double> itemHeights = getItemHeights(context);
               int itemsPerColumn = getItemsCanFitOneColumn(itemHeights); //no good
               bool ignoreScroll = false;
               if(canFit2Columns && itemHeights.last < 2 * MediaQuery.of(context).size.height -160){
@@ -341,13 +365,9 @@ class _MainListState extends State<MainList> {
                   child: Scrollbar(
 
                     controller: scrollController,
-                    //child: LocalHeroScope(
-                    // duration: const Duration(milliseconds: 600),
-                    // curve: Curves.easeInOut,
                     child: ReorderableWrap(
 
 
-                      //scrollPhysics: NeverScrollableScrollPhysics(), //disables scrolling
                       runAlignment: WrapAlignment.start,
                       scrollAnimationDuration: Duration(milliseconds: 400),
                       reorderAnimationDuration: Duration(milliseconds: 400),
@@ -355,16 +375,14 @@ class _MainListState extends State<MainList> {
                       ignorePrimaryScrollController: ignoreScroll, //this makes it wrap at screen height. turn on if can fit 2 columns and can fit all items in screen
 
                       direction: Axis.vertical,
-                      //scrollDirection: Axis.horizontal,
                       //ignorePrimaryScrollController: true,
                       buildDraggableFeedback: defaultBuildDraggableFeedback,
                       needsLongPressDraggable: true,
                       controller: scrollController,
                       onReorder: (int oldIndex, int newIndex) {
-                        //setState(() {
-                        _gameState
-                            .action(ReorderListCommand(newIndex, oldIndex));
-                        //});
+                        setState(() {
+                          _gameState.action(ReorderListCommand(newIndex, oldIndex));
+                        });
                       },
                       children: generateChildren(),
                     ),

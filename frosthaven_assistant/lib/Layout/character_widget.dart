@@ -57,7 +57,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
         }
       }
     });
-
+    
     if (widget.character.characterClass.name == "Objective" ||
         widget.character.characterClass.name == "Escort") {
       isCharacter = false;
@@ -163,8 +163,6 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                 figure: widget.character.characterState,
                 character: widget.character),
           );
-
-          setState(() {});
         },
         child: ValueListenableBuilder<dynamic>(
             valueListenable: getIt<GameState>().modelData,
