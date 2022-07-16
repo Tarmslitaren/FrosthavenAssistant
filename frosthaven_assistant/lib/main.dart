@@ -28,6 +28,8 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
 
+
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,13 @@ class MyApp extends StatelessWidget {
     //WindowManager.instance.setFullScreen(true);
     //to hide ui top and bottom on android
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
+    //to fix issue with system bottom bar on top after keyboard shown on earlier os (24)
+    SystemChrome.setSystemUIChangeCallback((systemOverlaysAreVisible) =>
+    Future.delayed(const Duration(milliseconds: 1001), () {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    }));
+     //call after keyboard
     if (!kIsWeb) {
       Wakelock.enable();
       //should force app to be in foreground and disable screen lock
