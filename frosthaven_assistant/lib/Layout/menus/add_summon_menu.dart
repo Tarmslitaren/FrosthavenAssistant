@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_state.dart';
@@ -183,8 +185,6 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                       showNr = false;
                     }
                   }
-
-
                   //TODO: gray out if all standees out (or remove from list entirely?)
 
                   return ListTile(
@@ -235,6 +235,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                             MonsterType.summon));
                       });
                       Navigator.pop(context);
+                      //open the level menu here for convenience
+                      openDialog(context, SetLevelMenu(figure: widget.character.characterState.summonList.value.last ));
                     });}))
       ]),
     );

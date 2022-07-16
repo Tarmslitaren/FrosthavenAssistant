@@ -298,7 +298,7 @@ class _StatusMenuState extends State<StatusMenu> {
                                 } else {
                                   openDialog(
                                     context,
-                                    SetLevelMenu(monster: widget.monster, figure: widget.figure,), //TODO: should add summon data here instead
+                                    SetLevelMenu(monster: widget.monster, figure: widget.figure,),
 
                                   );
                                 }

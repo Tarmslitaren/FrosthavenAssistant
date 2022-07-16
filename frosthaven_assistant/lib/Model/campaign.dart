@@ -16,7 +16,6 @@ class CampaignModel {
   final List<CharacterClass> characters;
   final Map< String, ScenarioModel> scenarios;
   final Map< String, ScenarioModel> sections;
-  //TODO: add classes and scenarios (sections are part of scenarios)
 
   factory CampaignModel.fromJson(Map<String, dynamic> data) {
     // note the explicit cast to String

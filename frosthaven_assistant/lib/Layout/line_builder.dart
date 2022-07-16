@@ -301,7 +301,7 @@ class LineBuilder {
       String leftOver =
           "!" + sizeModifier + line.substring(endIndex + 1, line.length);
 
-      //retVal.addAll(applyMonsterStats(leftOver, sizeToken, monster)); //TODO
+      //retVal.addAll(applyMonsterStats(leftOver, sizeToken, monster));
       retVal.add(leftOver);
     }
     return retVal;

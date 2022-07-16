@@ -115,11 +115,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
 
     final generatedChildren = List<Widget>.generate(
         widget.character.characterState.summonList.value.length,
-        (index) => /* AnimatedSwitcher( //TODO: why is this not working?
-
-            key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
-          duration: Duration(milliseconds: 1600),
-              child:*/
+        (index) =>
             AnimatedSize(
               //not really needed now
               key: Key(index.toString()),
@@ -130,7 +126,6 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                       .toString()),
                   data: widget.character.characterState.summonList.value[index],
                   display: -2),
-              //)
             ));
     lastList = widget.character.characterState.summonList.value;
     return Wrap(

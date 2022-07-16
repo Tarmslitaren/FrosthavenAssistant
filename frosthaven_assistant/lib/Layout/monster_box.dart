@@ -20,7 +20,7 @@ class MonsterBox extends StatefulWidget {
   static const double conditionSize = 14;
 
   static double getWidth(double scale, MonsterInstance data) {
-    double width = 47;
+    double width = 47.0000001; //some margin there
     width += conditionSize * data.conditions.value.length / 2;
     if (data.conditions.value.length % 2 != 0) {
       width += conditionSize / 2;
@@ -140,7 +140,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                           image: const AssetImage("assets/images/blood.png"),
                         ),
                         Container(
-                          width: 16.7 * scale,
+                          width: 16.8 * scale,
                           alignment: Alignment.center,
                           child: Text(
                             textAlign: TextAlign.end,
@@ -149,7 +149,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                                 fontFamily: 'Pirata',
                                 color: Colors.white,
                                 fontSize: widget.data.health.value > 99
-                                    ? 12 * scale
+                                    ? 13 * scale
                                     : 18 * scale,
                                 shadows: [
                                   Shadow(
@@ -157,6 +157,9 @@ class _MonsterBoxState extends State<MonsterBox> {
                                       color: Colors.red)
                                 ]),
                           ),
+                        ),
+                        SizedBox(
+                          width: (2.5) *scale,
                         ),
                         ValueListenableBuilder<List<Condition>>(
                             valueListenable: widget.data.conditions,
@@ -255,6 +258,8 @@ class _MonsterBoxState extends State<MonsterBox> {
                   //TODO: this needs to be fixed some other way. id by stnadee nr might be ok for monsters, but summons need other way ot tell it is new
                   if (widget.display != widget.data.standeeNr ) {
                     //if this one is not added
+
+                    //TODO: make own widget: make it run add animation only once
                     return TranslationAnimatedWidget.tween(
                         enabled: !alive,
                         translationDisabled: Offset(0, 0),

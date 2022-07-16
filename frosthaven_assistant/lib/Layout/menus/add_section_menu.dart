@@ -77,7 +77,6 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     });
   }
 
-  //TODO: add select current campaign widgert
   @override
   Widget build(BuildContext context) {
     return Card(

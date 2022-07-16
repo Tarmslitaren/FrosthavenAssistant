@@ -73,7 +73,6 @@ Drawer createMainMenu(BuildContext context) {
                 title: const Text('Add Section'),
                 enabled: true,
                 onTap: () {
-                  //TODO: of no section for current scenario, gray out the button and do nothing
                   Navigator.pop(context);
                   openDialog(context, const AddSectionMenu());
                 },
