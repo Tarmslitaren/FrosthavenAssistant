@@ -84,13 +84,13 @@ class ListItemData {
 
 class Character extends ListItemData{
   Character(this.characterState, this.characterClass) {
-    id = characterClass.name;
+    id = characterState.display; //characterClass.name;
   }
   late final CharacterState characterState;
   late final CharacterClass characterClass;
   //late ListItemState state = ListItemState.chooseInitiative;
   void nextRound(){
-    if (id != "Objective" && id != "Escort") {
+    if (characterClass.name != "Objective" && characterClass.name != "Escort") {
       characterState.initiative = 0;
     }
   }

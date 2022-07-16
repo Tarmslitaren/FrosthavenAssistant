@@ -35,11 +35,11 @@ class Item extends StatelessWidget {
     if (data is Character) {
       Character character = data as Character;
       int? initPreset;
-      if(character.id == "Escort" || character.id == "Objective") {
+      if(character.characterClass.name == "Escort" || character.characterClass.name == "Objective") {
         initPreset = character.characterState.initiative;
       }
       child = CharacterWidget(
-          key: Key(character.id), character: character, initPreset: initPreset);
+          key: Key(character.characterState.display), character: character, initPreset: initPreset);
       height = 60 * scale;
       if (character.characterState.summonList.value.isNotEmpty) {
         double summonsTotalWidth = 0;

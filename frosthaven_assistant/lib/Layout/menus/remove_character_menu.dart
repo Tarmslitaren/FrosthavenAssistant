@@ -46,7 +46,7 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                     leading: Image(
                       height: 30,
                       image: AssetImage(
-                          "assets/images/class-icons/${currentCharacters[index].id}.png"),
+                          "assets/images/class-icons/${currentCharacters[index].characterClass.name}.png"),
                     ),
                     iconColor: currentCharacters[index].characterClass.color,
                     title: Text(currentCharacters[index].characterState.display,

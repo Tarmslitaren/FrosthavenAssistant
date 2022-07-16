@@ -26,7 +26,7 @@ class SetScenarioCommand extends Command {
       List<ListItemData> newList = [];
       for (var item in _gameState.currentList) {
         if (item is Character) {
-          if (item.id != "Objective" && item.id != "Escort") {
+          if (item.characterClass.name != "Objective" && item.characterClass.name != "Escort") {
             //newList.add(item);item.characterState.initiative = 0;
 
             item.characterState.health.value =

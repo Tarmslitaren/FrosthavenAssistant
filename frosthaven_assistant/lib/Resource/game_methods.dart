@@ -287,9 +287,10 @@ class GameMethods {
     int res = 0;
     List<Character> characters = [];
     for (ListItemData data in _gameState.currentList) {
-      if (data is Character)
-        if (data.id != "Escort" && data.id != "Objective"){
-         res++;
+      if (data is Character){
+        if (data.characterClass.name != "Escort" && data.characterClass.name != "Objective") {
+          res++;
+        }
       }
     }
     return res;

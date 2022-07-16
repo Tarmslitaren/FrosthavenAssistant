@@ -79,10 +79,10 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
   bool _characterAlreadyAdded(String newCharacter) {
     var characters = GameMethods.getCurrentCharacters();
     for (var character in characters) {
-      if (character.id == "Escort" || character.id == "Objective") {
+      if (character.characterClass.name == "Escort" || character.characterClass.name == "Objective") {
         return false;
       }
-      if (character.id == newCharacter){
+      if (character.characterClass.name == newCharacter){
         return true;
       }
     }
