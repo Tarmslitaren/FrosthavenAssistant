@@ -581,9 +581,19 @@
         [1206, true, 62, "%move% + 0","*.........", "%attack% - 1", "^%aoe-line-2%", "%fire%" ],
         [1207, true, 62, "%move% - 1", "*.........","%attack% + 0",  "^%aoe-line-2%", "%fire%"],
         [1208, false, 88, "%move% + 0","*.........", "%disarm%", "^Target all adjacent enemies" ],
-        [1209, false, 3, "%shield% + 2", "^Self", "*.........","%heal% 2", "^Self", "%fire%%use%", "!+2 %heal%" ],
-        [1210, false, 56, "%move% + 0 %aoe-line-4-with-black%","*.........", "%attack% - 1      %aoe-line-5-with-black%", "%fire%%use%", "!^%attack% + 1" ],
-        [1211, false, 40, "%move% - 1","*.........", "%attack% + 0", "^%fire%%use%", "!^%range% + 2" ],
+        [1209, false, 3, "%shield% + 2", "^Self", "*.........","%heal% 2", "^Self", "%fire%%use%", "!^+2 %heal%" ],
+        [1210, false, 56, [{
+          "gfx": "aoe-line-4-with-black",
+          "x": 0.86,
+          "y": 0.66,
+          "angle": 210
+        }, {
+          "gfx": "aoe-line-5-with-black",
+          "x": 0.948,
+          "y": 0.425,
+          "angle": 60
+        }], "%move% + 0","*.........", "%attack% - 1","", "%fire%%use%", "!^%attack% + 1 .                                ." ],
+        [1211, false, 40, "%move% - 1","*.........", "%attack% + 0", "%fire%%use%", "!^%range% + 2" ],
         [1212, false, 49, "%attack% + 1", "^%range% - 1", "^%target% 2" ],
         [1213, false, 77, "%attack% - 2 %aoe-circle%", "^%immobilize%" ]
       ]

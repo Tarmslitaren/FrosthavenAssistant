@@ -130,9 +130,15 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0 * scale),
-                        child: Image(
+                        child:
+                        Image(
                           height: height,
-                          image: AssetImage(!isBoss
+                          fit: BoxFit.fitHeight,
+
+                          //height: height,
+                          image: AssetImage(
+
+                              !isBoss
                               ? "assets/images/psd/monsterStats-normal.png"
                               : "assets/images/psd/monsterStats-boss.png"),
                         ),

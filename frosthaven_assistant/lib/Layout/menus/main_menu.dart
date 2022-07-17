@@ -47,8 +47,9 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: const Text('Undo'),
-                enabled: false,
+               // enabled: false,
                 onTap: () {
+                  _gameState.initGame(); //TODO: this is for ease of testing reloading json values
                   Navigator.pop(context);
                 },
               ),

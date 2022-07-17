@@ -64,14 +64,16 @@ class LineBuilder {
 
   static EdgeInsetsGeometry _getMarginForToken(String iconToken, double height,
       bool mainLine, CrossAxisAlignment alignment) {
-    double margin = 0.5;
+    double margin = 0.2;
     if (alignment != CrossAxisAlignment.center) {
       margin = 0.1;
     }
     if (iconToken.contains("aoe")) {
       return EdgeInsets.only(left: margin * height, right: margin * height);
     }
-    if (mainLine &&
+    if (
+    mainLine
+        &&
         (iconToken == "attack" ||
             iconToken == "heal" ||
             iconToken == "loot" ||
@@ -87,9 +89,10 @@ class LineBuilder {
         iconToken == "light"||
     iconToken == "any"
     ) {
-      return EdgeInsets.only(
-          top: 0.19 * height); //since icons lager, need lager margin top
+      //TODO: needed?
+      //return EdgeInsets.only(top: 0.19 * height); //since icons lager, need lager margin top
     }
+    return EdgeInsets.only(left: 0.1 * height, right: 0.1 * height);
     return EdgeInsets.zero;
   }
 
@@ -443,20 +446,20 @@ class LineBuilder {
     var smallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center ? 11 : 12) *
+        fontSize: (alignment == CrossAxisAlignment.center ? 10 : 12) *
             tempScale *
             scale,
         //sizes are larger on stat cards
-        height: 0.85,
+        height: 1,//0.85,
         shadows: [shadow]);
     var midStyle = TextStyle(
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center ? 12.7 : 13) *
+        fontSize: (alignment == CrossAxisAlignment.center ? 11 : 13) *
             tempScale *
             scale,
         //sizes are larger on stat cards
-        height: 0.9,
+        height: 1.1,// 0.9,
         shadows: [shadow]);
     var normalStyle = TextStyle(
         //maybe slightly bigger between chars space?
@@ -465,7 +468,7 @@ class LineBuilder {
         fontSize: (alignment == CrossAxisAlignment.center ? 15.7 : 14) *
             tempScale *
             scale,
-        height: 0.8,
+        height: 1.1,// 0.8,
         shadows: [shadow]);
 
     var eliteStyle = TextStyle(
@@ -473,7 +476,7 @@ class LineBuilder {
         fontFamily: 'Majalla',
         color: Colors.yellow,
         fontSize: 15.7 * tempScale * scale,
-        height: 0.8,
+        height: 1,//0.8,
         shadows: [shadow]);
 
     var eliteSmallStyle = TextStyle(
@@ -574,7 +577,7 @@ class LineBuilder {
                     ],
                   ))));
               textPartList.add(TextSpan(
-                  text: ": ", style: styleToUse));
+                  text: " : ", style: styleToUse));
             } else {
               double height = _getIconHeight(iconToken, styleToUse.fontSize!);
               if (addText) {
@@ -603,7 +606,7 @@ class LineBuilder {
               );
 
               //TODO: make a solid solution. not a house of cards.
-              double wtf = 0.8;
+              double wtf = 1;
               if(height == styleToUse.fontSize! * 1.2) { //is element height
                 wtf = 1.8; //wtf for elements alignment
               }

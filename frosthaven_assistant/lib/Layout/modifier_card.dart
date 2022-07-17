@@ -27,6 +27,7 @@ class ModifierCardWidget extends StatefulWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0* scale),
         child: Image(
+          fit: BoxFit.fitHeight,
           //height: 56,
           //height: 123 * tempScale * scale,
           image: AssetImage("assets/images/attack/${card.gfx}.png"),
@@ -42,6 +43,7 @@ class ModifierCardWidget extends StatefulWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0 * scale),
         child: Image(
+          fit: BoxFit.fitHeight,
           image: const AssetImage("assets/images/attack/back.png"),
         ),
       ),

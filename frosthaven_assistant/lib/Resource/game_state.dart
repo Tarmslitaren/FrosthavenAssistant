@@ -339,7 +339,6 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   }
 
   initGame() async {
-
     final String response = await rootBundle.loadString('assets/data/summons.json');
     final data = await json.decode(response);
 
@@ -368,6 +367,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   }
 
   fetchCampaignData(String campaign, Map<String, CampaignModel> map) async {
+    rootBundle.evict('assets/data/editions/$campaign.json');
     final String response = await rootBundle.loadString('assets/data/editions/$campaign.json');
     final data = await json.decode(response);
     map[campaign] = CampaignModel.fromJson(data);

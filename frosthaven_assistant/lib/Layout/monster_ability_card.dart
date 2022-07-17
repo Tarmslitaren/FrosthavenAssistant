@@ -27,6 +27,31 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   _MonsterAbilityCardWidgetState createState() =>
       _MonsterAbilityCardWidgetState();
 
+  static List<Widget> buildGraphicPositionals(double scale, List<GraphicPositional> positionals) {
+    List<Widget> list = [];
+    double cardWidth = 180 * tempScale * scale;
+    double cardHeight = 118 * tempScale * scale;
+    for (GraphicPositional item in positionals) {
+      Positioned pos = Positioned(
+          left: item.x * cardWidth,
+          top: item.y * cardHeight,
+          child: Transform.rotate(
+            alignment: Alignment.topLeft,
+            angle: item.angle * pi / 180,
+            child: Transform.scale(
+              scale: item.scale * scale * tempScale * 0.5,
+              alignment: Alignment.topLeft,
+              child: Image.asset(
+                "assets/images/abilities/${item.gfx}.png",
+            ), //note: default scale is 0.6? since all pngs are uniformly sized (probably)
+          ))
+      );
+      list.add(pos);
+    }
+
+    return list;
+  }
+
   static Widget buildFront(MonsterAbilityCardModel? card, Monster data, double scale, bool calculateAll) {
     String initText = card!.initiative.toString();
     if (initText.length == 1) {
@@ -38,6 +63,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
           offset: Offset(1 * scale * tempScale, 1 * scale * tempScale),
           color: Colors.black)
     ];
+
+    List<Widget> positionals = buildGraphicPositionals(scale, card.graphicPositional);
 
     return Container(
         key: const ValueKey<int>(1),
@@ -53,6 +80,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0 * scale),
               child: Image(
+                fit: BoxFit.fitHeight,
                 height: 116 * tempScale * scale,
                 //height: 123 * tempScale * scale,
                 image: const AssetImage(
@@ -119,6 +147,13 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                       ),
                     ))
                 : Container(),
+
+            //add graphic positionals here
+            if (positionals.isNotEmpty) positionals[0],
+            if (positionals.length > 1) positionals[1],
+            if (positionals.length > 2) positionals[2],
+            if (positionals.length > 3) positionals[3],
+
             Positioned(
               top: 10.0 * tempScale * scale,
               //alignment: Alignment.center,
@@ -148,6 +183,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0 * scale),
               child: Image(
+                fit: BoxFit.fitHeight,
                 height: 114 * tempScale * scale,
                 image: const AssetImage(
                     "assets/images/psd/MonsterAbility-back.png"),
