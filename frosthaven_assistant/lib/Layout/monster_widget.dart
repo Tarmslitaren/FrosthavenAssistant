@@ -84,7 +84,9 @@ class _MonsterWidgetState extends State<MonsterWidget> {
               colorFilter: widget.data.monsterInstances.value.isNotEmpty
                   ? ColorFilter.matrix(identity)
                   : ColorFilter.matrix(grayScale),
-              child: Column(mainAxisSize: MainAxisSize.max, children: [
+              child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
                 SizedBox(
                   height: 120 * tempScale * scale,
                   //this dictates size of the cards

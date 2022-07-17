@@ -40,7 +40,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   Widget buildSlideAnimation(Widget child, Key key) {
     if(!animationsEnabled) {
       return Container(
-        margin: EdgeInsets.only(left: 33.3333),
+        margin: const EdgeInsets.only(left: 33.3333),
           child: child);
     }
     return Container(
@@ -55,7 +55,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
             duration: Duration(milliseconds: cardAnimationDuration),
             enabled: true,
             curve: Curves.easeIn,
-            values: [
+            values: const [
               Offset(0, 0), //left to drawpile
               Offset(0, 0), //left to drawpile
               Offset(33.3333, 0), //end
@@ -95,13 +95,13 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
           Offset(xOffset, yOffset), //center of screen
           Offset(xOffset, yOffset), //center of screen
           Offset(xOffset, yOffset), //center of screen
-          Offset(0, 0), //end
+          const Offset(0, 0), //end
         ],
         child: ScaleAnimatedWidget( //does nothing
           enabled: true,
             duration: Duration(milliseconds: cardAnimationDuration),
 
-            values: [
+            values: const [
               1,
               4,
               4,
@@ -161,7 +161,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 _gameState.modifierDeck.cardCount.value
                                     .toString(),
                                 style: const TextStyle(
-                                  fontSize: 10,
+                                  fontSize: 12,
                                     color: Colors.white,
                                     shadows: [
                                       Shadow(
@@ -170,7 +170,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                     ]),
                               ))
                         ])),
-                    SizedBox(
+                    const SizedBox(
                       width: 2,
                     ),
                     GestureDetector(
@@ -198,21 +198,19 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                       ))), )
                                   : Container(),
                               _gameState.modifierDeck.discardPile.size() > 1
-                                  ? buildSlideAnimation(Container(
-                                      //left: 55 * smallify,
-                                      child: RotationTransition(
-                                          turns: const AlwaysStoppedAnimation(
-                                              15 / 360),
-                                          child: ModifierCardWidget(
-                                            card: _gameState
+                                  ? buildSlideAnimation(RotationTransition(
+                                      turns: const AlwaysStoppedAnimation(
+                                          15 / 360),
+                                      child: ModifierCardWidget(
+                                        card: _gameState
+                                            .modifierDeck.discardPile
+                                            .getList()[_gameState
                                                 .modifierDeck.discardPile
-                                                .getList()[_gameState
-                                                    .modifierDeck.discardPile
-                                                    .getList()
-                                                    .length -
-                                                2],
-                                            revealed: true,
-                                          ))), Key(_gameState.modifierDeck.discardPile.size().toString()))
+                                                .getList()
+                                                .length -
+                                            2],
+                                        revealed: true,
+                                      )), Key(_gameState.modifierDeck.discardPile.size().toString()))
                                   : Container(),
                               _gameState.modifierDeck.discardPile.isNotEmpty
                                   ? buildDrawAnimation(

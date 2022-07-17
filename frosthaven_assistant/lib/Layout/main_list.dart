@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +7,8 @@ import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
-//import 'package:great_list_view/great_list_view.dart';
-//import 'package:reorderableitemsview/reorderableitemsview.dart';
 import 'package:reorderables/reorderables.dart';
-
-import '../Resource/action_handler.dart';
 import '../Resource/commands/reorder_list_command.dart';
-import '../Resource/game_methods.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
@@ -24,7 +18,7 @@ double tempScale = 0.8;
 class Item extends StatelessWidget {
   final ListItemData data;
 
-  Item({Key? key, required this.data}) : super(key: key);
+  const Item({Key? key, required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +38,7 @@ class Item extends StatelessWidget {
       if (character.characterState.summonList.value.isNotEmpty) {
         double summonsTotalWidth = 0;
         for (var monsterInstance in character.characterState.summonList.value) {
-          summonsTotalWidth += MonsterBox.getWidth(scale, monsterInstance);
+          summonsTotalWidth += MonsterBox.getWidth(scale, monsterInstance) + 2*scale;
         }
         double rows = summonsTotalWidth / listWidth;
         height += 32 * rows.ceil() * scale;
@@ -137,8 +131,8 @@ class ListAnimationState extends State<ListAnimation>{
 
       return TranslationAnimatedWidget.tween(
         translationDisabled: Offset(0, blockAnimation? diff : 0),
-        translationEnabled: Offset(0,  0),
-        duration: Duration(milliseconds: 1000),
+        translationEnabled: const Offset(0,  0),
+        duration: const Duration(milliseconds: 1000),
         curve: Curves.linearToEaseOut, // Curves.decelerate,
         child: widget.child,
         animationFinished: (bool finished){
@@ -187,7 +181,7 @@ class _MainListState extends State<MainList> {
         child: ValueListenableBuilder<Map<String,CampaignModel>>(
             valueListenable: _gameState.modelData,
             builder: (context, value, child) {
-              return _gameState.modelData.value != null
+              return _gameState.modelData.value.isNotEmpty != null
                   ? buildList()
                   : const Center(child: CircularProgressIndicator());
             }));
@@ -218,7 +212,7 @@ class _MainListState extends State<MainList> {
             listWidth += MonsterBox.getWidth(scale, monsterInstance);
           }
           double rows = listWidth / mainListWidth;
-          listHeight += 32 * rows.ceil();
+          listHeight += 32 * (rows.ceil());
         }
       }
       if (item is Monster) {

@@ -20,7 +20,7 @@ class MonsterBox extends StatefulWidget {
   static const double conditionSize = 14;
 
   static double getWidth(double scale, MonsterInstance data) {
-    double width = 47.0000001; //some margin there
+    double width = 47; //some margin there
     width += conditionSize * data.conditions.value.length / 2;
     if (data.conditions.value.length % 2 != 0) {
       width += conditionSize / 2;
@@ -262,9 +262,9 @@ class _MonsterBoxState extends State<MonsterBox> {
                     //TODO: make own widget: make it run add animation only once
                     return TranslationAnimatedWidget.tween(
                         enabled: !alive,
-                        translationDisabled: Offset(0, 0),
+                        translationDisabled: const Offset(0, 0),
                         translationEnabled: Offset(0, alive ? 0 : -offset),
-                        duration: Duration(milliseconds: 600),
+                        duration: const Duration(milliseconds: 600),
                         curve: alive ? Curves.linear : Curves.linear,
                         child:
                             child); /*OpacityAnimatedWidget.tween(
@@ -282,7 +282,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                       //fix is to only set enabled on added/removed ones?
                       translationDisabled: Offset(0, alive ? offset : 0),
                       translationEnabled: Offset(0, alive ? 0 : -offset),
-                      duration: Duration(milliseconds: 600),
+                      duration: const Duration(milliseconds: 600),
                       curve: alive ? Curves.linear : Curves.linear,
                       child: OpacityAnimatedWidget.tween(
                           enabled: alive,

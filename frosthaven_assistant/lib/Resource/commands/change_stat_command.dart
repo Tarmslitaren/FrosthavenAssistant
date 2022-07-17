@@ -38,7 +38,7 @@ class ChangeStatCommand extends Command {
         for (var instance in item.monsterInstances.value) {
           if(instance.health.value == 0) {
             item.monsterInstances.value.remove(instance);
-            Future.delayed(Duration(milliseconds: 600), () {
+            Future.delayed(const Duration(milliseconds: 600), () {
               getIt<GameState>().killMonsterStandee.value++;
             });
 
@@ -57,6 +57,8 @@ class ChangeStatCommand extends Command {
               }else {
                 getIt<GameState>().updateList.value++;
               }
+            }else {
+              getIt<GameState>().updateList.value++;
             }
             break;
           }
@@ -81,7 +83,7 @@ class ChangeStatCommand extends Command {
               }
               ////
             }else {
-              //getIt<GameState>().updateList.value++;
+              getIt<GameState>().updateList.value++;
             }
             //Navigator.pop(context);
             break;
