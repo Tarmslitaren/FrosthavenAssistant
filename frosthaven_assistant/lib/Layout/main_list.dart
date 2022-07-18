@@ -13,7 +13,6 @@ import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
 
-double tempScale = 0.8;
 
 class Item extends StatelessWidget {
   final ListItemData data;
@@ -63,7 +62,7 @@ class Item extends StatelessWidget {
       if (totalWidthOfMonsterBoxes > 2 * listWidth) {
         standeeRows = 3;
       }
-      height = 122 * tempScale * scale + standeeRows * 32 * scale;
+      height = 122 * 0.8 * scale + standeeRows * 32 * scale;
     } else {
       height = 0;
     }
@@ -216,7 +215,7 @@ class _MainListState extends State<MainList> {
         }
       }
       if (item is Monster) {
-        listHeight += 120 * tempScale;
+        listHeight += 120 * 0.8;
         if (item.monsterInstances.value.isNotEmpty) {
           double listWidth = 0;
           for (var monsterInstance in item.monsterInstances.value) {

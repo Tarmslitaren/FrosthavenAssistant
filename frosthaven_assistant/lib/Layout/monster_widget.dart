@@ -13,8 +13,6 @@ import '../Resource/color_matrices.dart';
 import '../services/service_locator.dart';
 import 'monster_stat_card.dart';
 
-double tempScale = 0.8;
-
 class MonsterWidget extends StatefulWidget {
   final Monster data;
 
@@ -79,7 +77,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double height = scale * tempScale * 120;
+    double height = scale * 0.8 * 120;
           return ColorFiltered(
               colorFilter: widget.data.monsterInstances.value.isNotEmpty
                   ? ColorFilter.matrix(identity)
@@ -88,7 +86,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                 SizedBox(
-                  height: 120 * tempScale * scale,
+                  height: 120 * 0.8 * scale,
                   //this dictates size of the cards
                   width: getMainListWidth(context),
                   child: Row(
@@ -120,7 +118,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                                   style: TextStyle(
                                       fontFamily: 'Pirata',
                                       color: Colors.white,
-                                      fontSize: 18 * tempScale * scale,
+                                      fontSize: 18 * 0.8 * scale,
                                       shadows: [
                                         Shadow(
                                             offset:
@@ -140,9 +138,9 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                   //color: Colors.amber,
                   //height: 50,
                   margin: EdgeInsets.only(
-                      left: 4 * scale * tempScale,
-                      right: 4 * scale * tempScale),
-                  width: getMainListWidth(context) - 4 * scale * tempScale,
+                      left: 4 * scale * 0.8,
+                      right: 4 * scale * 0.8),
+                  width: getMainListWidth(context) - 4 * scale * 0.8,
                   child: ValueListenableBuilder<int>(
                       valueListenable: getIt<GameState>().killMonsterStandee, // widget.data.monsterInstances,
                       builder: (context, value, child) {

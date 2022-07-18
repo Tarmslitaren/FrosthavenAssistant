@@ -116,7 +116,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
         ),
         child: Container(
           height: _gameState.roundState.value == RoundState.playTurns? screenSize.height * 0.86: screenSize.height * 0.94,
-          width: 184 * tempScale * scale,
+          width: 184 * 0.8 * scale,
           child: reorderable? ReorderableColumn(
             needsLongPressDraggable: true,
             scrollController: scrollController,

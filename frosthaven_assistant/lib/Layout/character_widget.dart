@@ -175,10 +175,10 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                       // color: Colors.amber,
                       //height: 50,
                       margin: EdgeInsets.only(
-                          left: 4 * scale * tempScale,
-                          right: 4 * scale * tempScale),
+                          left: 4 * scale * 0.8,
+                          right: 4 * scale * 0.8),
                       width:
-                          getMainListWidth(context) - 4 * scale * tempScale,
+                          getMainListWidth(context) - 4 * scale * 0.8,
                       child: ValueListenableBuilder<int>(
                           valueListenable:
                               getIt<GameState>().killMonsterStandee,
@@ -462,7 +462,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                     Image(
                                       height: 20.0 *
                                           scale *
-                                          LineBuilder.tempScale,
+                                          0.8,
                                       color: Colors.blue,
                                       colorBlendMode: BlendMode.modulate,
                                       image: const AssetImage(

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
@@ -9,7 +10,6 @@ import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
 
 class LineBuilder {
-  static const double tempScale = 0.8;
 
   static const Map<String, String> _tokens = {
     "attack": "Attack",
@@ -89,8 +89,7 @@ class LineBuilder {
         iconToken == "light"||
     iconToken == "any"
     ) {
-      //TODO: needed?
-      //return EdgeInsets.only(top: 0.19 * height); //since icons lager, need lager margin top
+      return EdgeInsets.only(top: 0.19 * height); //since icons lager, need lager margin top
     }
     return EdgeInsets.only(left: 0.1 * height, right: 0.1 * height);
     return EdgeInsets.zero;
@@ -430,16 +429,26 @@ class LineBuilder {
     return [line];
   }
 
+  static Widget createLinesColumn(CrossAxisAlignment alignment, List<Widget> lines) {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: alignment,
+        mainAxisSize: MainAxisSize.max,
+        children: lines);
+  }
+
   static Widget createLines(List<String> strings, bool left, bool applyStats, bool applyAll,
       Monster monster, CrossAxisAlignment alignment, double scale) {
+    //applyStats = false;
     var shadow = Shadow(
-        offset: Offset(1 * scale * tempScale, 1 * scale * tempScale),
+        offset: Offset(1 * scale * 0.8, 1 * scale * 0.8),
         color: left ? Colors.white : Colors.black);
     var dividerStyle = TextStyle(
         fontFamily: 'Majalla',
+        leadingDistribution: TextLeadingDistribution.proportional,
         color: left ? Colors.black : Colors.white,
-        fontSize: 8 * tempScale * scale,
-        letterSpacing: 2 * tempScale * scale,
+        fontSize: 8 * 0.8 * scale,
+        letterSpacing: 2 * 0.8 * scale,
         height: 0.7,
         shadows: [shadow]);
 
@@ -447,16 +456,18 @@ class LineBuilder {
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center ? 10 : 12) *
-            tempScale *
+            0.8 *
             scale,
         //sizes are larger on stat cards
         height: 1,//0.85,
         shadows: [shadow]);
     var midStyle = TextStyle(
+      //backgroundColor: Colors.amber,
+
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center ? 11 : 13) *
-            tempScale *
+            0.8 *
             scale,
         //sizes are larger on stat cards
         height: 1.1,// 0.9,
@@ -466,7 +477,7 @@ class LineBuilder {
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center ? 15.7 : 14) *
-            tempScale *
+            0.8 *
             scale,
         height: 1.1,// 0.8,
         shadows: [shadow]);
@@ -475,38 +486,124 @@ class LineBuilder {
         //maybe slightly bigger between chars space?
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: 15.7 * tempScale * scale,
-        height: 1,//0.8,
+        fontSize: 15.7 * 0.8 * scale,
+        height: 1.1,//0.8,
         shadows: [shadow]);
 
     var eliteSmallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: 11 * tempScale * scale,
-        height: 0.8,
+        fontSize: 11 * 0.8 * scale,
+        height: 1,
         shadows: [shadow]);
     var eliteMidStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: 12.7 * tempScale * scale,
-        height: 0.9,
+        fontSize: 12.7 * 0.8 * scale,
+        height: 1.1,
         shadows: [shadow]);
 
-    List<Text> lines = [];
+    List<Widget> lines = [];
     List<String> localStrings = [];
     localStrings.addAll(strings);
     List<InlineSpan> lastLineTextPartList = [];
+
+    //specialized layouts
+    bool isInColumn = false;
+    bool isInRow = false;
+    bool isColumnInRow = false;
+    bool isRowInColumn = false;
+    List<Widget> widgetsInColumn = [];
+    List<Widget> widgetsInRow = [];
+    Widget column;
+    Widget row;
+
     for (int i = 0; i < localStrings.length; i++) {
       String line = localStrings[i];
       String sizeToken = "";
       bool isRightPartOfLastLine = false;
       var styleToUse = normalStyle;
-      //because most stat card txt should use mid style but not specified in data:
-      /*if(alignment != CrossAxisAlignment.center) {
-      styleToUse = midStyle;
-    }*/
-      //fixed in data side, as should be
       List<InlineSpan> textPartList = [];
+
+      //Note: this solution can only have one row in a column or one column in a row and no deeper nesting
+      if(line == "[c]"){
+        isInColumn = true;
+        if(isInRow) {
+          isColumnInRow = true;
+        }
+        continue;
+      }
+      if(line == "[/c]"){
+        //end column  //handle the results
+        isInColumn = false;
+        column = Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: alignment,
+          mainAxisSize: MainAxisSize.max,
+          children: widgetsInColumn,
+        );
+        if(isColumnInRow) {
+          widgetsInRow.add(column);
+        }else {
+          lines.add(column);
+          if(line == localStrings.last){
+            return createLinesColumn(alignment, lines);
+          }
+        }
+        continue;
+      }
+      if(line == "[r]"){
+        isInRow = true;
+        if(isInColumn) {
+          isRowInColumn = true;
+        }
+        //start row
+        continue;
+      }
+      if(line == "[/r]"){
+        //end row
+        //end column  //handle the results
+        isInRow = false;
+        row = Row(
+          //crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly, //TODO evaluate if this or center with margins on parts is better (probably center)
+          children: widgetsInRow,
+        );
+        if(isRowInColumn) {
+          widgetsInColumn.add(row);
+        }else {
+          lines.add(row);
+          if(line == localStrings.last){
+            return createLinesColumn(alignment, lines);
+          }
+        }
+
+        continue;
+      }
+      if (line.startsWith('¤')) {
+        Widget image =
+        Image.asset(
+          scale: 1.0/(scale * 0.8 * 0.55), //for some reason flutter likes scale to be inverted
+
+          fit: BoxFit.fitHeight,
+          "assets/images/abilities/${line.substring(1)}.png",
+        );
+        //create pure picture, not a WidgetSpan (scale 5.5)
+        if(isInColumn && (!isInRow || isColumnInRow) ){
+          widgetsInColumn.add(image);
+        }else if (isInRow && (!isInColumn|| isRowInColumn)){
+          widgetsInRow.add(image);
+        }
+        else {
+          lines.add(image);
+        }
+        if(line == localStrings.last){
+          return createLinesColumn(alignment, lines);
+        }
+        continue;
+      }
+
       if (line.startsWith('!')) {
         //add as
         isRightPartOfLastLine = true;
@@ -542,7 +639,7 @@ class LineBuilder {
           addText = false;
         }
         if (line[i] == '%') {
-          //TODO: do for all conditions + jump, add target.
+          //TODO: do for all conditions + jump.
 
           if (isIconPart) {
             //create token part
@@ -654,6 +751,15 @@ class LineBuilder {
             styleToUse = eliteMidStyle;
           }
         }
+        if (line[i] == "Å") {
+          styleToUse = TextStyle(
+
+            //backgroundColor: Colors.amber,
+              fontFamily: 'Majalla',
+              color: Colors.transparent,
+              fontSize: 11 * 0.8 * scale,
+              height: 1);
+        }
       }
 
       if (partStartIndex < line.length) {
@@ -677,7 +783,14 @@ class LineBuilder {
         ),
       );
       if (isRightPartOfLastLine) {
-        lines.removeLast();
+        if(isInColumn && (!isInRow || isColumnInRow) ){
+          widgetsInColumn.removeLast();
+        }else if (isInRow && (!isInColumn|| isRowInColumn)){
+          widgetsInRow.removeLast();
+        }
+        else {
+          lines.removeLast();
+        }
         textPartList.insertAll(0, lastLineTextPartList);
         text = Text.rich(
           textHeightBehavior: const TextHeightBehavior(
@@ -688,16 +801,18 @@ class LineBuilder {
             children: textPartList,
           ),
         );
-        lines.add(text);
-      } else {
+        //lines.add(text);
+      }
+      if(isInColumn && (!isInRow || isColumnInRow) ){
+        widgetsInColumn.add(text);
+      }else if (isInRow && (!isInColumn|| isRowInColumn)){
+        widgetsInRow.add(text);
+      }
+      else {
         lines.add(text);
       }
       lastLineTextPartList = textPartList;
     }
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: alignment,
-        mainAxisSize: MainAxisSize.max,
-        children: lines);
+    return createLinesColumn(alignment, lines);
   }
 }

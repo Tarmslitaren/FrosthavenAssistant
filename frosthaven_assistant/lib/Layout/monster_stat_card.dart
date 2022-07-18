@@ -11,7 +11,6 @@ import '../Resource/stat_calculator.dart';
 import '../Resource/ui_utils.dart';
 import 'line_builder.dart';
 
-double tempScale = 0.8; //TODO: f this
 
 class MonsterStatCardWidget extends StatefulWidget {
   final Monster data;
@@ -40,12 +39,12 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double height = 123 * tempScale * scale;
+    double height = 123 * 0.8 * scale;
 
     final leftStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.black,
-        fontSize: 16 * tempScale * scale,
+        fontSize: 16 * 0.8 * scale,
         height: 1.2,
         shadows: [
           Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black12)
@@ -54,7 +53,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     final rightStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.white,
-        fontSize: 16 * tempScale * scale,
+        fontSize: 16 * 0.8 * scale,
         height: 1.2,
         shadows: [
           Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black)
@@ -63,7 +62,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     final specialStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: 14 * tempScale * scale,
+        fontSize: 14 * 0.8 * scale,
         //height: 0.8,
         shadows: [
           Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black)
@@ -72,7 +71,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     final lineStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: 14 * tempScale * scale,
+        fontSize: 14 * 0.8 * scale,
         height: 0.1,
         shadows: [
           Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black)
@@ -124,7 +123,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
               }
 
               return Container(
-                  margin: EdgeInsets.all(2 * scale * tempScale),
+                  margin: EdgeInsets.all(2 * scale * 0.8),
                   child: Stack(
                     //alignment: Alignment.center,
                     children: [
@@ -144,15 +143,15 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                         ),
                       ),
                       Positioned(
-                          left: 4.0 * tempScale * scale,
-                          top: 0 * tempScale * scale,
+                          left: 4.0 * 0.8 * scale,
+                          top: 0 * 0.8 * scale,
                           child: Container(
                             child: Text(
                               _level.toString(),
                               style: TextStyle(
                                   fontFamily: 'Majalla',
                                   color: Colors.white,
-                                  fontSize: 18 * tempScale * scale,
+                                  fontSize: 18 * 0.8 * scale,
                                   shadows: [
                                     Shadow(
                                         offset: Offset(1 * scale, 1 * scale),
@@ -162,8 +161,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           )),
                       !isBoss
                           ? Positioned(
-                              left: 80.0 * tempScale * scale,
-                              top: 26.0 * tempScale * scale,
+                              left: 80.0 * 0.8 * scale,
+                              top: 26.0 * 0.8 * scale,
                               child: Column(
                                 //mainAxisAlignment: MainAxisAlignment.center,
                                 //mainAxisSize: MainAxisSize.min,
@@ -180,9 +179,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               ),
                             )
                           : Positioned(
-                              left: 0.0 * tempScale * scale,
-                              top: 38.0 * tempScale * scale,
-                              width: 30 * tempScale * scale,
+                              left: 0.0 * 0.8 * scale,
+                              top: 38.0 * 0.8 * scale,
+                              width: 30 * 0.8 * scale,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 // mainAxisAlignment: MainAxisAlignment.end,
@@ -202,8 +201,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                       !isBoss
                           ? Positioned(
                               left: 0.0,
-                              top: 24.0 * tempScale * scale,
-                              width: 73 * tempScale * scale,
+                              top: 24.0 * 0.8 * scale,
+                              width: 73 * 0.8 * scale,
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   //alignment: Alignment.topRight,
@@ -219,9 +218,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                         scale),
                                   ]))
                           : Positioned(
-                              left: 56.0 * tempScale * scale,
-                              top: 20.0 * tempScale * scale,
-                              width: 160 * tempScale * scale, //useful or not?
+                              left: 56.0 * 0.8 * scale,
+                              top: 20.0 * 0.8 * scale,
+                              width: 160 * 0.8 * scale, //useful or not?
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   //alignment: Alignment.topRight,
@@ -231,7 +230,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                         ? Row(children: [
                                             Text("    ", style: specialStyle),
                                             Container(
-                                                width: 140 * tempScale * scale,
+                                                width: 140 * 0.8 * scale,
                                                 child: LineBuilder.createLines(
                                                     normal.attributes,
                                                     false,
@@ -251,7 +250,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 Text("1:", style: specialStyle),
                                                 Container(
                                                     width:
-                                                        140 * tempScale * scale,
+                                                        140 * 0.8 * scale,
                                                     child:
                                                         LineBuilder.createLines(
                                                             widget
@@ -284,7 +283,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 Text("2:", style: specialStyle),
                                                 Container(
                                                     width:
-                                                        140 * tempScale * scale,
+                                                        140 * 0.8 * scale,
                                                     child:
                                                         LineBuilder.createLines(
                                                             widget
@@ -305,8 +304,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   ])),
                       !isBoss
                           ? Positioned(
-                              right: 77.0 * tempScale * scale,
-                              top: 26.0 * tempScale * scale,
+                              right: 77.0 * 0.8 * scale,
+                              top: 26.0 * 0.8 * scale,
                               child: Column(
                                 //crossAxisAlignment: CrossAxisAlignment.start,
                                 //mainAxisAlignment: MainAxisAlignment.center,
@@ -338,9 +337,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           : Container(),
                       !isBoss
                           ? Positioned(
-                              width: 70 * tempScale * scale,
+                              width: 70 * 0.8 * scale,
                               right: 0.0,
-                              top: 24.0 * tempScale * scale,
+                              top: 24.0 * 0.8 * scale,
                               child: LineBuilder.createLines(
                                   elite!.attributes,
                                   false,
@@ -354,9 +353,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                       !isBoss
                           ? widget.data.type.flying
                               ? Positioned(
-                                  height: 20 * tempScale * scale,
-                                  left: 94.0 * tempScale * scale,
-                                  top: 45.0 * tempScale * scale,
+                                  height: 20 * 0.8 * scale,
+                                  left: 94.0 * 0.8 * scale,
+                                  top: 45.0 * 0.8 * scale,
                                   child: const Image(
                                     image: AssetImage(
                                         "assets/images/psd/flying-stat.png"),
@@ -364,9 +363,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               : Container()
                           : widget.data.type.flying
                               ? Positioned(
-                                  height: 20 * tempScale * scale,
-                                  left: 31.0 * tempScale * scale,
-                                  top: 56.0 * tempScale * scale,
+                                  height: 20 * 0.8 * scale,
+                                  left: 31.0 * 0.8 * scale,
+                                  top: 56.0 * 0.8 * scale,
                                   child: const Image(
                                     image: AssetImage(
                                         "assets/images/psd/flying-stat.png"),
@@ -376,9 +375,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                       isBoss
                           ? normal.range != 0
                               ? Positioned(
-                                  height: 20 * tempScale * scale,
-                                  left: 30.0 * tempScale * scale,
-                                  top: 93.0 * tempScale * scale,
+                                  height: 20 * 0.8 * scale,
+                                  left: 30.0 * 0.8 * scale,
+                                  top: 93.0 * 0.8 * scale,
                                   child: const Image(
                                     image: AssetImage(
                                         "assets/images/psd/range-stat.png"),
@@ -387,11 +386,11 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           : Container(),
                       !isBoss
                           ? Positioned(
-                              bottom: 5 * scale * tempScale,
-                              left: 5 * scale * tempScale,
+                              bottom: 5 * scale * 0.8,
+                              left: 5 * scale * 0.8,
                               child: Container(
-                                  width: 25 * scale * tempScale,
-                                  height: 25 * scale * tempScale,
+                                  width: 25 * scale * 0.8,
+                                  height: 25 * scale * 0.8,
                                   child: ValueListenableBuilder<
                                           List<MonsterInstance>>(
                                       valueListenable:
@@ -446,11 +445,11 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                       })))
                           : Container(),
                       Positioned(
-                          bottom: 5 * scale * tempScale,
-                          right: 5 * scale * tempScale,
+                          bottom: 5 * scale * 0.8,
+                          right: 5 * scale * 0.8,
                           child: Container(
-                              width: 25 * scale * tempScale,
-                              height: 25 * scale * tempScale,
+                              width: 25 * scale * 0.8,
+                              height: 25 * scale * 0.8,
                               child: IconButton(
                                   padding: EdgeInsets.zero,
                                   icon: Image.asset(
