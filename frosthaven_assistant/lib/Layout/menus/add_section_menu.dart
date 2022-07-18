@@ -120,6 +120,9 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                   style: TextStyle(fontSize: 24),
                 ),
               ),
+              const SizedBox(
+                height: 30,
+              ),
             ],
           ),
           Positioned(

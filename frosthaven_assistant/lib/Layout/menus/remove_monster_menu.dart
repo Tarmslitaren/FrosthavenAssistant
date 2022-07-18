@@ -69,6 +69,9 @@ class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 30,
+              ),
             ],
           ),
           Positioned(

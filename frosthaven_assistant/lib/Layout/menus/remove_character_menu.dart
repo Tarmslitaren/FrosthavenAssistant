@@ -67,6 +67,9 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 30,
+              ),
             ],
           ),
           Positioned(

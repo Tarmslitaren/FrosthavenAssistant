@@ -91,38 +91,43 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                 height: 20,
               ),
               Column(children: [
-                Text("Current Scenario: ${_gameState.currentCampaign.value}"),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      setCampaign("JotL");
-                    });
-                  },
-                  child: Text("Jaws of the Lion"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      setCampaign("Gloomhaven");
-                    });
-                  },
-                  child: Text("Gloomhaven"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      setCampaign("Forgotten Circles");
-                    });
-                  },
-                  child: Text("Forgotten Circles"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      setCampaign("Crimson Scales");
-                    });
-                  },
-                  child: Text("Crimson Scales"),
+                Text("Set Scenario"),
+                ExpansionTile(
+                    title: Text("Current Scenario: ${_gameState.currentCampaign.value}"),
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          setCampaign("JotL");
+                        });
+                      },
+                      child: Text("Jaws of the Lion"),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          setCampaign("Gloomhaven");
+                        });
+                      },
+                      child: Text("Gloomhaven"),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          setCampaign("Forgotten Circles");
+                        });
+                      },
+                      child: Text("Forgotten Circles"),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          setCampaign("Crimson Scales");
+                        });
+                      },
+                      child: Text("Crimson Scales"),
+                    ),
+                  ],
                 ),
               ]),
               Container(
@@ -155,6 +160,9 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                         'No results found',
                         style: TextStyle(fontSize: 24),
                       ),
+              ),
+              const SizedBox(
+                height: 30,
               ),
             ],
           ),

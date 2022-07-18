@@ -147,6 +147,9 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
                         style: TextStyle(fontSize: 24),
                       ),
               ),
+              const SizedBox(
+                height: 30,
+              ),
             ],
           ),
           Positioned(

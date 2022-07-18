@@ -173,6 +173,9 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                         style: TextStyle(fontSize: 24),
                       ),
               ),
+              const SizedBox(
+                height: 30,
+              ),
             ],
           ),
           Positioned(

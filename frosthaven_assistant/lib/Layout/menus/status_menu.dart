@@ -257,7 +257,7 @@ class _StatusMenuState extends State<StatusMenu> {
                     widget.character != null || isSummon
                         ? buildChillButtons(
                             widget.figure.chill,
-                            5,
+                            12, //technically you can have infinite, but realisticaly not so much
                             "assets/images/conditions/chill.png")
                         : Container(),
                     widget.monster!= null ?

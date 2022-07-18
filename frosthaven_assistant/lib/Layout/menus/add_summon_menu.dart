@@ -121,7 +121,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   Widget build(BuildContext context) {
     return Container(
       width: 336,
-      height: 410,
+      height: 452,
       decoration: BoxDecoration(
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
@@ -188,6 +188,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                   //TODO: gray out if all standees out (or remove from list entirely?)
 
                   return ListTile(
+
                     leading: Stack(
                       alignment: Alignment.center,
                         children: [
@@ -237,7 +238,10 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                       Navigator.pop(context);
                       //open the level menu here for convenience
                       openDialog(context, SetLevelMenu(figure: widget.character.characterState.summonList.value.last ));
-                    });}))
+                    });})),
+        const SizedBox(
+          height: 20,
+        ),
       ]),
     );
   }

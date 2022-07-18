@@ -39,17 +39,19 @@ Drawer createMainMenu(BuildContext context) {
               DrawerHeader(
                 decoration: const BoxDecoration(
                   color: Colors.blue,
+                  image: DecorationImage(
+                    fit: BoxFit.fitWidth,
+                      image: AssetImage("assets/images/icon.png"))
                 ),
                 child: Column(children: [
-                  const Text('Main Menu'),
-                  createLevelWidget(context),
+                  //const Text('Main Menu'),
+                 // createLevelWidget(context),
                 ]),
               ),
               ListTile(
                 title: const Text('Undo'),
-               // enabled: false,
+                enabled: false,
                 onTap: () {
-                  _gameState.initGame(); //TODO: this is for ease of testing reloading json values
                   Navigator.pop(context);
                 },
               ),
