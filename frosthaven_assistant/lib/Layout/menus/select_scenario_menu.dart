@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_state.dart';
@@ -77,7 +79,6 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
     });
   }
 
-  //TODO: add select current campaign widgert
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -132,12 +133,37 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
               ]),
               Container(
                 margin: const EdgeInsets.only(left: 10, right: 10),
-                child: TextField(
+                child:RawKeyboardListener( //needed to trigger onEditingComplete on enter
+                    focusNode: FocusNode(),
+                    onKey: (event) {
+                      if (kDebugMode) {
+                        print(event.data.logicalKey.keyId);
+                      }
+                       if (event.runtimeType == RawKeyDownEvent &&
+                          (event.logicalKey.keyId == 13)) {
+                         if(_foundScenarios.isNotEmpty){
+                           //_gameState.action(
+                           //    SetScenarioCommand(_foundScenarios[0], false));
+                           //Navigator.pop(context);
+                         }
+                         //Navigator.pop(context, this._textController.text);
+                       }
+
+                    },
+                    child:  TextField(
                   onChanged: (value) => _runFilter(value),
+                  //TODO: test this on device
+                  onEditingComplete: () {
+                    if(_foundScenarios.isNotEmpty){
+                      _gameState.action(
+                          SetScenarioCommand(_foundScenarios[0], false));
+                      Navigator.pop(context);
+                    }
+                  },
                   decoration: const InputDecoration(
                       labelText: 'Set Scenario',
                       suffixIcon: Icon(Icons.search)),
-                ),
+                )),
               ),
               const SizedBox(
                 height: 20,

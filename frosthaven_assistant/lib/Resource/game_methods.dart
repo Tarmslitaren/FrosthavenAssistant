@@ -358,10 +358,12 @@ class GameMethods {
       if (characterClass.name == name) {
         var characterState = CharacterState();
         characterState.level.value = level;
-        characterState.health.value = characterClass.healthByLevel[level - 1];
-        characterState.maxHealth.value = characterState.health.value;
+
         if (name == "Escort" || name == "Objective") {
           //characterState.initiative = 99;
+        }else {
+          characterState.health.value = characterClass.healthByLevel[level - 1];
+          characterState.maxHealth.value = characterState.health.value;
         }
         characterState.display = name;
         if (display != null) {

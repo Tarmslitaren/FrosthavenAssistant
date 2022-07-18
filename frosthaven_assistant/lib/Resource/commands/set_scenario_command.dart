@@ -103,7 +103,7 @@ class SetScenarioCommand extends Command {
     //add objectives and escorts
     for(var item in specialRules) {
       if(item.type == "Objective"){
-        Character objective = GameMethods.createCharacter("Objective", item.name, _gameState.level.value)!;
+        Character objective = GameMethods.createCharacter("Objective", item.name, _gameState.level.value+1)!;
         objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
         objective.characterState.health.value = objective.characterState.maxHealth.value;
         objective.characterState.initiative = item.init;
@@ -120,7 +120,7 @@ class SetScenarioCommand extends Command {
         }
       }
       if (item.type == "Escort") {
-        Character objective = GameMethods.createCharacter("Escort", item.name, _gameState.level.value)!;
+        Character objective = GameMethods.createCharacter("Escort", item.name, _gameState.level.value+1)!;
         objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
         objective.characterState.health.value = objective.characterState.maxHealth.value;
         objective.characterState.initiative = item.init;

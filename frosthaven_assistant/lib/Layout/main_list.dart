@@ -356,7 +356,7 @@ class _MainListState extends State<MainList> {
                     controller: scrollController,
                     child: ReorderableWrap(
                       padding: EdgeInsets.only(bottom: 30),
-                      
+
                       runAlignment: WrapAlignment.start,
                       scrollAnimationDuration: Duration(milliseconds: 400),
                       reorderAnimationDuration: Duration(milliseconds: 400),
