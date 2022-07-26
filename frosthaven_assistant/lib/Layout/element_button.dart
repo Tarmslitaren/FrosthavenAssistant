@@ -49,14 +49,18 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
       if (_gameState.elementState.value[widget.element] != null) {
         ElementState state = _gameState.elementState.value[widget.element]!;
         if (state == ElementState.full) {
-          setState(() {
-            setFull();
-          });
+          if(mounted) {
+            setState(() {
+              setFull();
+            });
+          }
         }
         else if (state == ElementState.half) {
-          setState(() {
-            setHalf();
-          });
+          if(mounted) {
+            setState(() {
+              setHalf();
+            });
+          }
         }
       }
     });

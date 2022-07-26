@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
 
 import '../services/service_locator.dart';
-import 'commands/change_stat_command.dart';
+import 'commands/change_stat_commands/change_stat_command.dart';
 import 'game_state.dart';
 
 void openDialogOld(BuildContext context, Widget widget) {
@@ -51,88 +52,6 @@ void openDialogAtPosition(
                 //insetAnimationDuration: Duration(milliseconds: 1500),
                 child: widget))),
       ]));
-}
-
-Widget buildCounterButtons(
-    ValueNotifier<int> notifier,
-    int maxValue,
-    String image,
-    BuildContext context,
-    Figure figure,
-    bool showTotalValue,
-    Color color) {
-  GameState gameState = getIt<GameState>();
-
-  final totalChangeValue = ValueNotifier<int>(0);
-  return Row(children: [
-    Container(
-        width: 40,
-        height: 40,
-        child: IconButton(
-            icon: Image.asset('assets/images/psd/sub.png'),
-//iconSize: 30,
-            onPressed: () {
-              if (notifier.value > 0) {
-                totalChangeValue.value--;
-                gameState.action(ChangeStatCommand(-1, notifier, figure));
-                if (notifier == figure.health && figure.health.value <= 0) {
-                  {
-                    Navigator.pop(context);
-                  }
-                }
-              }
-            })),
-    Stack(children: [
-      Container(
-        width: 40,
-        height: 40,
-        child: Image(
-          color: color,
-          colorBlendMode: BlendMode.modulate,
-          image: AssetImage(image),
-        ),
-      ),
-      ValueListenableBuilder<int>(
-          valueListenable: notifier,
-          builder: (context, value, child) {
-            String text = "";
-            if(totalChangeValue.value > 0) {
-              text = "+${totalChangeValue.value.toString()}";
-            }
-            else if(totalChangeValue.value != 0) {
-              text = totalChangeValue.value.toString();
-            }
-            if(showTotalValue) {
-              text = notifier.value.toString();
-            }
-            return Positioned(
-              bottom: 0,
-              right: 0,
-              child: Text(text, style: TextStyle(color: color,
-                  shadows: [
-                  Shadow(offset: Offset(1, 1), color: Colors.black)]
-            ),)
-            );
-          })
-    ]),
-    Container(
-        width: 40,
-        height: 40,
-        child: IconButton(
-          icon: Image.asset('assets/images/psd/add.png'),
-//iconSize: 30,
-          onPressed: () {
-            if (notifier.value < maxValue) {
-              totalChangeValue.value++;
-              gameState.action(ChangeStatCommand(1, notifier, figure));
-              if (notifier.value <= 0 && notifier == figure.health) {
-                Navigator.pop(context);
-              }
-            }
-//increment
-          },
-        )),
-  ]);
 }
 
 //used to get transpaarant background when dragging in reorderable widgets

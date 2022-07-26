@@ -326,7 +326,7 @@ class GameMethods {
 
   static void addStandee(int? nr, Monster data, MonsterType type) {
     if (nr != null) {
-      _gameState.action(AddStandeeCommand(nr, data, null, data.monsterInstances, type));
+      _gameState.action(AddStandeeCommand(nr, null, data.id, type));
     } else {
       //add first un added nr
       for (int i = 1; i <= data.type.count; i++) {
@@ -338,11 +338,39 @@ class GameMethods {
           }
         }
         if (!added) {
-          _gameState.action(AddStandeeCommand(i, data, null, data.monsterInstances, type));
+          _gameState.action(AddStandeeCommand(i, null, data.id, type));
           return;
         }
       }
     }
+  }
+
+
+  static Figure? getFigure(String ownerId, String figureId) {
+    for(var item in getIt<GameState>().currentList) {
+      if(item.id == figureId) {
+        return (item as Character).characterState;
+      }
+      if(item.id == ownerId){
+        if(item is Monster) {
+
+          for (var instance in item.monsterInstances.value) {
+            String id = instance.name + instance.gfx + instance.standeeNr.toString();
+            if(id == figureId){
+              return instance;
+            }
+          }
+        }else if(item is Character){
+          for (var instance in item.characterState.summonList.value){
+            String id = instance.name + instance.gfx + instance.standeeNr.toString();
+            if (id == figureId) {
+              return instance;
+            }
+          }
+        }
+      }
+    }
+    return null;
   }
 
   static Character? createCharacter(String name, String? display, int level) {

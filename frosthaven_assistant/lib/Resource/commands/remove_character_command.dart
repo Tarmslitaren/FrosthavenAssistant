@@ -34,7 +34,12 @@ class RemoveCharacterCommand extends Command {
 
   @override
   void undo() {
-    //TODO: implement (and retain index)
     //_gameState.currentList.add(_character);
+    _gameState.updateList.value++;
+  }
+
+  @override
+  String toString() {
+    return "Remove ${names[0].id}";
   }
 }

@@ -35,7 +35,12 @@ class RemoveMonsterCommand extends Command {
 
   @override
   void undo() {
-    //TODO: implement (and retain index)
     //_gameState.currentList.add(_character);
+    _gameState.updateList.value++;
+  }
+
+  @override
+  String toString() {
+    return "Remove ${_monsters[0].type.display}";
   }
 }

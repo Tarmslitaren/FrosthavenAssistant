@@ -6,10 +6,12 @@ import '../game_state.dart';
 
 class AddConditionCommand extends Command {
   final Condition condition;
-  final Figure figure;
-  AddConditionCommand(this.condition, this.figure);
+  final String ownerId;
+  final String figureId;
+  AddConditionCommand(this.condition, this.figureId, this.ownerId);
   @override
   void execute() {
+    Figure figure = getFigure(ownerId, figureId)!;
     List<Condition> newList = [];
     newList.addAll(figure.conditions.value);
     newList.add(condition);
@@ -17,11 +19,44 @@ class AddConditionCommand extends Command {
     getIt<GameState>().updateList.value++;
   }
 
+  Figure? getFigure(String ownerId, String figureId) {
+    for(var item in getIt<GameState>().currentList) {
+      if(item.id == figureId) {
+        return (item as Character).characterState;
+      }
+      if(item.id == ownerId){
+        if(item is Monster) {
+
+          for (var instance in item.monsterInstances.value) {
+            String id = instance.name + instance.gfx + instance.standeeNr.toString();
+            if(id == figureId){
+              return instance;
+            }
+          }
+        }else if(item is Character){
+          for (var instance in item.characterState.summonList.value){
+            String id = instance.name + instance.gfx + instance.standeeNr.toString();
+            if (id == figureId) {
+              return instance;
+            }
+          }
+        }
+      }
+    }
+    return null;
+  }
+
   @override
   void undo() {
-    List<Condition> newList = [];
+    /*List<Condition> newList = [];
     newList.addAll(figure.conditions.value);
     newList.remove(condition);
-    figure.conditions.value = newList;
+    figure.conditions.value = newList;*/
+    getIt<GameState>().updateList.value++;
+  }
+
+  @override
+  String toString() {
+    return "Add ${condition.name}";
   }
 }

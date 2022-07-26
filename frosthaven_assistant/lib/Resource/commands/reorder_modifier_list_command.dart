@@ -21,6 +21,10 @@ class ReorderModifierListCommand extends Command {
 
   @override
   void undo() {
-    // TODO: implement undo
+  }
+
+  @override
+  String toString() {
+    return "Reorder modifier";
   }
 }

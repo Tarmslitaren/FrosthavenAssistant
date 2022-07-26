@@ -3,9 +3,11 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import 'Layout/main_scaffold.dart';
 import 'Model/campaign.dart';
+import 'Resource/game_state.dart';
 import 'main.dart';
 
 
@@ -18,16 +20,23 @@ class DataLoadedNotification extends Notification {
 
 class MainState extends State<MyHomePage>  {
 
+  void rebuildAllChildren(BuildContext context) {
+    void rebuild(Element el) {
+      el.markNeedsBuild();
+      el.visitChildren(rebuild);
+    }
+    (context as Element).visitChildren(rebuild);
+  }
+
   MainState() {
   }
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    return ValueListenableBuilder<int>(
+        valueListenable: getIt<GameState>().updateForUndo,
+        builder: (context, value, child) {
+          rebuildAllChildren(context); //only way to remake the valuelistenable builders with broken references
     return createMainScaffold(context);
+    });
   }
 }

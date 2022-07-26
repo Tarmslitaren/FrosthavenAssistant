@@ -8,13 +8,20 @@ class SetCharacterLevelCommand extends Command {
   int _previousState = 0;
   int _previousHealth = 0;
   int level;
-  final Character character;
+  String characterId;
 
-  SetCharacterLevelCommand(this.level, this.character);
+  SetCharacterLevelCommand(this.level, this.characterId);
 
   @override
   void execute() {
-    _previousState = character.characterState.level.value;
+    Character? character;
+    for(var item in _gameState.currentList){
+      if (item.id == characterId) {
+        character = item as Character;
+        break;
+      }
+    }
+    _previousState = character!.characterState.level.value;
     _previousHealth = character.characterState.health.value;
     character.characterState.level.value = level;
     character.characterState.health.value = character.characterClass.healthByLevel[level-1];
@@ -33,7 +40,12 @@ class SetCharacterLevelCommand extends Command {
 
   @override
   void undo() {
-    character.characterState.level.value = _previousState;
-    character.characterState.health.value = _previousHealth;
+    //character.characterState.level.value = _previousState;
+    //character.characterState.health.value = _previousHealth;
+  }
+
+  @override
+  String toString() {
+    return "Set Character Level";
   }
 }

@@ -3,6 +3,7 @@ import 'package:animated_widgets/widgets/opacity_animated.dart';
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -11,10 +12,12 @@ import '../Resource/ui_utils.dart';
 import 'menus/status_menu.dart';
 
 class MonsterBox extends StatefulWidget {
-  final MonsterInstance data;
+  //final MonsterInstance data;
+  final String figureId;
+  final String ownerId;
   final int display;
 
-  const MonsterBox({Key? key, required this.data, required this.display})
+  const MonsterBox({Key? key, required this.figureId, required this.ownerId, required this.display})
       : super(key: key);
 
   static const double conditionSize = 14;
@@ -34,14 +37,17 @@ class MonsterBox extends StatefulWidget {
 }
 
 class _MonsterBoxState extends State<MonsterBox> {
+  late MonsterInstance data;
+
   @override
   void initState() {
     super.initState();
+    data = GameMethods.getFigure(widget.ownerId, widget.figureId) as MonsterInstance;
   }
 
   List<Image> createConditionList(double scale) {
     List<Image> list = [];
-    for (var item in widget.data.conditions.value) {
+    for (var item in data.conditions.value) {
       Image image = Image(
         height: MonsterBox.conditionSize * scale,
         image: AssetImage("assets/images/conditions/${item.name}.png"),
@@ -51,12 +57,12 @@ class _MonsterBoxState extends State<MonsterBox> {
     return list;
   }
 
-  Monster? getMonster() {
+  String? getMonster() {
     for (var item in getIt<GameState>().currentList) {
       if (item is Monster) {
         //this will cause issues if several monsters use same gfx.
-        if (item.id == widget.data.name) {
-          return item;
+        if (item.id == data.name) {
+          return item.id;
         }
       }
     }
@@ -66,13 +72,13 @@ class _MonsterBoxState extends State<MonsterBox> {
   Widget buildInternal(double scale, double width, Color color) {
     String folder = "monsters";
     bool isSummon = false;
-    if (widget.data.type == MonsterType.summon) {
+    if (data.type == MonsterType.summon) {
       isSummon = true;
       folder = "summon";
     }
     String standeeNr = "";
-    if (widget.data.standeeNr > 0) {
-      standeeNr = widget.data.standeeNr.toString();
+    if (data.standeeNr > 0) {
+      standeeNr = data.standeeNr.toString();
     }
       return Container(
           decoration: null,
@@ -99,7 +105,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                 height: 100 * scale,
                 width: 17 * scale,
                 fit: BoxFit.cover,
-                image: AssetImage("assets/images/$folder/${widget.data.gfx}.png"),
+                image: AssetImage("assets/images/$folder/${data.gfx}.png"),
                 //width: widget.height*0.8,
               ),
             ),
@@ -144,11 +150,11 @@ class _MonsterBoxState extends State<MonsterBox> {
                           alignment: Alignment.center,
                           child: Text(
                             textAlign: TextAlign.end,
-                            "${widget.data.health.value}",
+                            "${data.health.value}",
                             style: TextStyle(
                                 fontFamily: 'Pirata',
                                 color: Colors.white,
-                                fontSize: widget.data.health.value > 99
+                                fontSize: data.health.value > 99
                                     ? 13 * scale
                                     : 18 * scale,
                                 shadows: [
@@ -162,7 +168,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                           width: (2.5) *scale,
                         ),
                         ValueListenableBuilder<List<Condition>>(
-                            valueListenable: widget.data.conditions,
+                            valueListenable: data.conditions,
                             builder: (context, value, child) {
                               return Container(
                                   height: 30 * scale,
@@ -188,11 +194,11 @@ class _MonsterBoxState extends State<MonsterBox> {
                 alignment: Alignment.bottomCenter,
                 width: 42 * scale,
                 child: ValueListenableBuilder<int>(
-                    valueListenable: widget.data.maxHealth,
+                    valueListenable: data.maxHealth,
                     builder: (context, value, child) {
                       return FAProgressBar(
-                        currentValue: widget.data.health.value.toDouble(),
-                        maxValue: widget.data.maxHealth.value.toDouble(),
+                        currentValue: data.health.value.toDouble(),
+                        maxValue: data.maxHealth.value.toDouble(),
                         size: 4.0 * scale,
                         //animatedDuration: const Duration(milliseconds: 0),
                         direction: Axis.horizontal,
@@ -206,7 +212,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                         progressColor: Colors.red,
                         //formatValueFixed: 2,
                         //what does this do?
-                        changeColorValue: (widget.data.maxHealth.value).toInt(),
+                        changeColorValue: (data.maxHealth.value).toInt(),
                         changeProgressColor: Colors.green,
                       );
                     }))
@@ -217,38 +223,44 @@ class _MonsterBoxState extends State<MonsterBox> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
+    data = GameMethods.getFigure(widget.ownerId, widget.figureId) as MonsterInstance;
     //double height = scale * 40;
     Color color = Colors.white;
-    if (widget.data.type == MonsterType.elite) {
+    if (data.type == MonsterType.elite) {
       color = Colors.yellow;
     }
-    if (widget.data.type == MonsterType.boss) {
+    if (data.type == MonsterType.boss) {
       color = Colors.red;
     }
     //if (widget.data.type == MonsterType.summon) {
     //  color = Colors.lightGreenAccent;
     //}
 
-    double width = MonsterBox.getWidth(scale, widget.data);
+    double width = MonsterBox.getWidth(scale, data);
+    String figureId = data.name + data.gfx + data.standeeNr.toString();
+    String? characterId;
+    if(widget.ownerId != data.name){
+      characterId = widget.ownerId; //this is probably wrong
+    }
     return GestureDetector(
         onTap: () {
           //open stats menu
           openDialog(
             context,
-            StatusMenu(figure: widget.data, monster: getMonster()),
+            StatusMenu(figureId: figureId, monsterId: getMonster(), characterId: characterId),
           );
         },
         child: AnimatedContainer(
             //makes it grow nicely when adding conditions
-            key: Key(widget.data.standeeNr.toString()), //TODO: shiiiet wont work for summons, use index?
+            key: Key(data.standeeNr.toString()), //TODO: shiiiet wont work for summons, use index?
             width: width,
             curve: Curves.easeInOut,
             duration: const Duration(milliseconds: 300),
             child: ValueListenableBuilder<int>(
-                valueListenable: widget.data.health,
+                valueListenable: data.health,
                 builder: (context, value, child) {
                   bool alive = true;
-                  if (widget.data.health.value <= 0) {
+                  if (data.health.value <= 0) {
                     alive = false;
                   }
 
@@ -256,7 +268,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                   Widget child = buildInternal(scale, width, color);
 
                   //TODO: this needs to be fixed some other way. id by stnadee nr might be ok for monsters, but summons need other way ot tell it is new
-                  if (widget.display != widget.data.standeeNr ) {
+                  if (widget.display != data.standeeNr ) {
                     //if this one is not added
 
                     //TODO: make own widget: make it run add animation only once

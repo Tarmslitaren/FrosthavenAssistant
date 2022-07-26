@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/counter_button.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
+import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_max_health_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../../Resource/commands/set_level_command.dart';
 import '../../Resource/game_methods.dart';
@@ -10,9 +12,10 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class SetLevelMenu extends StatefulWidget {
-  const SetLevelMenu({Key? key, this.monster, this.figure}) : super(key: key);
+  const SetLevelMenu({Key? key, this.monster, this.figure, this.characterId}) : super(key: key);
 
   final Monster? monster;
+  final String? characterId;
   final Figure? figure;
 
   @override
@@ -59,7 +62,9 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                 child: TextButton(
                   child: Text(
                     text,
-                    style: TextStyle(shadows: [
+                    style: TextStyle(
+                      fontSize: 18,
+                        shadows: [
                       Shadow(
                           offset: Offset(1, 1),
                           color:
@@ -68,7 +73,11 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
-                      _gameState.action(SetLevelCommand(nr, widget.monster));
+                      String? monsterId;
+                      if(widget.monster != null) {
+                        monsterId = widget.monster!.id;
+                      }
+                      _gameState.action(SetLevelCommand(nr, monsterId));
                     }
                     Navigator.pop(context);
                   },
@@ -88,6 +97,30 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
     if(isSummon) {
       title = "Set ${(widget.figure as MonsterInstance).name}'s max health";
     }
+
+
+    String name = "";
+    String ownerId = "";
+    String figureId = "";
+    if(widget.monster != null) {
+      name = widget.monster!.type.display;
+      ownerId = widget.monster!.id;
+
+    }else if(widget.figure is CharacterState){
+      figureId = ( widget.figure as CharacterState).display;
+      ownerId = name;
+    }
+    if (widget.figure is MonsterInstance) {
+      name = (widget.figure as MonsterInstance).name;
+      int nr = (widget.figure as MonsterInstance).standeeNr;
+      String gfx = (widget.figure as MonsterInstance).gfx;
+      figureId = name + gfx + nr.toString();
+      if(widget.characterId != null) {
+        ownerId = widget.characterId!;
+      }
+    }
+
+
     return Container(
         width: 10,
         height: 160,
@@ -158,12 +191,8 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                              buildCounterButtons(
-                                  widget.figure!.maxHealth,
-                                  900,
-                                  "assets/images/blood.png",
-                                  context,
-                                  widget.figure!, true, Colors.red)
+                            CounterButton(widget.figure!.maxHealth, ChangeMaxHealthCommand(0, figureId, ownerId),
+                                900, "assets/images/blood.png", true, Colors.red, figureId: figureId, ownerId: ownerId)
                             ])
                       : Container(),
                 ],

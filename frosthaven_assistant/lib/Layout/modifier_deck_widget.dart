@@ -3,6 +3,7 @@ import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/modifier_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
+import 'package:frosthaven_assistant/Resource/action_handler.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
@@ -133,7 +134,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
           width: 153, //TODO: make smaller if can't fit on screen?
           height: 40,
           child: ValueListenableBuilder<int>(
-              valueListenable: _gameState.modifierDeck.curses,
+              valueListenable: _gameState.commandIndex, //blanket
               builder: (context, value, child) {
                 return Row(
                   children: [

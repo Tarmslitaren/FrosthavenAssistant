@@ -28,6 +28,12 @@ class AddMonsterCommand extends Command {
 
   @override
   void undo() {
-    _gameState.currentList.remove(monster);
+    //_gameState.currentList.remove(monster);
+    _gameState.updateList.value++;
+  }
+
+  @override
+  String toString() {
+    return "Add ${monster.type.display}";
   }
 }

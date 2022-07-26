@@ -29,9 +29,19 @@ Drawer createMainMenu(BuildContext context) {
   GameState _gameState = getIt<GameState>();
 
   return Drawer(
-    child: ValueListenableBuilder<Map<String,CampaignModel?>>(
-      valueListenable: _gameState.modelData,
+    child: ValueListenableBuilder<int>(
+      valueListenable: _gameState.commandIndex,
       builder: (context, value, child) {
+
+        String undoText = "Undo";
+        if (_gameState.commandIndex.value >= 0){
+          undoText += ": ${_gameState.commands[_gameState.commandIndex.value].toString()}";
+        }
+        String redoText = "Redo";
+        if (_gameState.commandIndex.value < _gameState.commands.length-1) {
+          redoText += ": ${_gameState.commands[_gameState.commandIndex.value+1].toString()}";
+        }
+
         return ListView(
 // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
@@ -49,17 +59,19 @@ Drawer createMainMenu(BuildContext context) {
                 ]),
               ),
               ListTile(
-                title: const Text('Undo'),
-                enabled: false,
+                title: Text(undoText ),
+                enabled: _gameState.commandIndex.value >= 0,
                 onTap: () {
-                  Navigator.pop(context);
+                  _gameState.undo();
+                  //Navigator.pop(context);
                 },
               ),
               ListTile(
-                title: const Text('Redo'),
-                enabled: false,
+                title: Text(redoText),
+                enabled: _gameState.commandIndex.value < _gameState.commands.length-1,
                 onTap: () {
-                  Navigator.pop(context);
+                  _gameState.redo();
+                  //Navigator.pop(context);
                 },
               ),
               const Divider(),

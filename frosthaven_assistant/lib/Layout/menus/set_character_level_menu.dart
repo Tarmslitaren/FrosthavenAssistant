@@ -39,13 +39,14 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   child: Text(
                     text,
                     style: TextStyle(
+                      fontSize: 18,
                         shadows: [Shadow(offset: Offset(1, 1), color: isCurrentlySelected ? Colors.grey: Colors.black)],
                         color:
                         isCurrentlySelected ? Colors.black : Colors.grey),
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
-                      _gameState.action(SetCharacterLevelCommand(nr, widget.character));
+                      _gameState.action(SetCharacterLevelCommand(nr, widget.character.id));
                     }
                     //Navigator.pop(context);
                   },

@@ -62,7 +62,8 @@ class _MonsterWidgetState extends State<MonsterWidget> {
         child:
                   MonsterBox(
                       key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
-                      data: widget.data.monsterInstances.value[index],
+                      figureId: widget.data.monsterInstances.value[index].name + widget.data.monsterInstances.value[index].gfx + widget.data.monsterInstances.value[index].standeeNr.toString(),
+                  ownerId: widget.data.id,
                   display: displaystartAnimation),
         )
     );

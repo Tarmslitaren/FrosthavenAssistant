@@ -17,6 +17,11 @@ class ReorderListCommand extends Command {
 
   @override
   void undo() {
-    // TODO: implement undo
+    getIt<GameState>().updateList.value++;
+  }
+
+  @override
+  String toString() {
+    return "Reorder";
   }
 }

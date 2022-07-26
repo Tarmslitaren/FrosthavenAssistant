@@ -16,7 +16,10 @@ class DrawModifierCardCommand extends Command {
 
   @override
   void undo() {
-    //TODO
+  }
 
+  @override
+  String toString() {
+    return "Draw modifier card";
   }
 }

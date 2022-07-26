@@ -18,11 +18,11 @@ import 'menus/add_summon_menu.dart';
 import 'monster_box.dart';
 
 class CharacterWidget extends StatefulWidget {
-  final Character character;
+  final String characterId;
   final int? initPreset;
 
   const CharacterWidget(
-      {required this.character, required this.initPreset, Key? key})
+      {required this.characterId, required this.initPreset, Key? key})
       : super(key: key);
 
   @override
@@ -30,15 +30,22 @@ class CharacterWidget extends StatefulWidget {
 }
 
 class _CharacterWidgetState extends State<CharacterWidget> {
+
   final GameState _gameState = getIt<GameState>();
   late bool isCharacter = true;
   final _initTextFieldController = TextEditingController();
   late List<MonsterInstance> lastList = [];
+  late Character character;
 
   @override
   void initState() {
     super.initState();
-    lastList = widget.character.characterState.summonList.value;
+    for (var item in _gameState.currentList) {
+      if (item.id == widget.characterId){
+        character = item as Character;
+      }
+    }
+    lastList = character.characterState.summonList.value;
 
     if (widget.initPreset != null) {
       _initTextFieldController.text = widget.initPreset.toString();
@@ -47,7 +54,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
       for (var item in _gameState.currentList) {
         if (item is Character) {
           if (item.characterState.display ==
-              widget.character.characterState.display) {
+              character.characterState.display) {
             if (_initTextFieldController.value.text.isNotEmpty) {
               item.characterState.initiative = int.parse(
                   _initTextFieldController
@@ -58,8 +65,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
       }
     });
     
-    if (widget.character.characterClass.name == "Objective" ||
-        widget.character.characterClass.name == "Escort") {
+    if (character.characterClass.name == "Objective" ||
+        character.characterClass.name == "Escort") {
       isCharacter = false;
       //widget.character.characterState.initiative = widget.initPreset!;
     }
@@ -68,9 +75,10 @@ class _CharacterWidgetState extends State<CharacterWidget> {
     }
   }
 
+  //TODO: try wrap
   List<Image> createConditionList(double scale) {
     List<Image> list = [];
-    for (var item in widget.character.characterState.conditions.value) {
+    for (var item in character.characterState.conditions.value) {
       Image image = Image(
         height: 16 * scale,
         image: AssetImage("assets/images/conditions/${item.name}.png"),
@@ -95,7 +103,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
               context,
               //problem: context is of stat card widget, not the + button
               AddSummonMenu(
-                character: widget.character,
+                character: character,
               ),
             );
           },
@@ -107,27 +115,31 @@ class _CharacterWidgetState extends State<CharacterWidget> {
     int displaystartAnimation = -1;
 
     if (lastList.length <
-        widget.character.characterState.summonList.value.length) {
+        character.characterState.summonList.value.length) {
       //find which is new - always the last one
       displaystartAnimation =
-          widget.character.characterState.summonList.value.length - 1;
+          character.characterState.summonList.value.length - 1;
     }
 
     final generatedChildren = List<Widget>.generate(
-        widget.character.characterState.summonList.value.length,
+        character.characterState.summonList.value.length,
         (index) =>
             AnimatedSize(
               //not really needed now
               key: Key(index.toString()),
               duration: const Duration(milliseconds: 300),
               child: MonsterBox(
-                  key: Key(widget.character.characterState.summonList
+                  key: Key(character.characterState.summonList
                       .value[index].standeeNr
                       .toString()),
-                  data: widget.character.characterState.summonList.value[index],
+                  figureId: character.characterState.summonList
+                      .value[index].name + character.characterState.summonList
+                      .value[index].gfx + character.characterState.summonList
+                      .value[index].standeeNr.toString(),
+                  ownerId: character.id,
                   display: -2),
             ));
-    lastList = widget.character.characterState.summonList.value;
+    lastList = character.characterState.summonList.value;
     return Wrap(
       runSpacing: 2.0 * scale,
       spacing: 2.0 * scale,
@@ -139,6 +151,12 @@ class _CharacterWidgetState extends State<CharacterWidget> {
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     double scaledHeight = 60 * scale;
+
+    for (var item in _gameState.currentList) {
+      if (item.id == widget.characterId){
+        character = item as Character;
+      }
+    }
 
     return GestureDetector(
         onVerticalDragStart: (details) {
@@ -155,8 +173,9 @@ class _CharacterWidgetState extends State<CharacterWidget> {
           openDialog(
             context,
             StatusMenu(
-                figure: widget.character.characterState,
-                character: widget.character),
+                figureId: character.id,
+                characterId: character.id
+            ),
           );
         },
         child: ValueListenableBuilder<dynamic>(
@@ -164,7 +183,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
             //TODO: is this even needed?
             builder: (context, value, child) {
               return ColorFiltered(
-                  colorFilter: widget.character.characterState.health.value != 0
+                  colorFilter: character.characterState.health.value != 0
                       ? ColorFilter.matrix(identity)
                       : ColorFilter.matrix(grayScale),
                   child: Column(
@@ -178,7 +197,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                           left: 4 * scale * 0.8,
                           right: 4 * scale * 0.8),
                       width:
-                          getMainListWidth(context) - 4 * scale * 0.8,
+                          getMainListWidth(context) - 8 * scale * 0.8,
                       child: ValueListenableBuilder<int>(
                           valueListenable:
                               getIt<GameState>().killMonsterStandee,
@@ -202,12 +221,12 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                             image: DecorationImage(
                                 fit: BoxFit.fill,
                                 colorFilter: ColorFilter.mode(
-                                    widget.character.characterClass.color,
+                                    character.characterClass.color,
                                     BlendMode.color),
                                 image: const AssetImage(
                                     "assets/images/psd/character-bar.png")),
                             shape: BoxShape.rectangle,
-                            color: widget.character.characterClass.color,
+                            color: character.characterClass.color,
                           ),
                         ),
                         Row(
@@ -221,7 +240,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                 fit: BoxFit.contain,
                                 height: scaledHeight,
                                 image: AssetImage(
-                                  "assets/images/class-icons/${widget.character.characterClass.name}.png",
+                                  "assets/images/class-icons/${character.characterClass.name}.png",
                                 ),
                                 width: scaledHeight * 0.8,
                               ),
@@ -251,7 +270,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                     }
                                     if (_gameState.roundState.value ==
                                             RoundState.chooseInitiative &&
-                                        widget.character.characterState
+                                        character.characterState
                                                 .health.value >
                                             0) {
                                       return Container(
@@ -328,16 +347,14 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                           margin: EdgeInsets.only(
                                               left: 10 * scale),
                                           child: Text(
-                                            widget.character.characterState
+                                            character.characterState
                                                             .health.value >
                                                         0 &&
-                                                    widget
-                                                            .character
+                                                    character
                                                             .characterState
                                                             .initiative >
                                                         0
-                                                ? widget
-                                                    .character
+                                                ? character
                                                     .characterState
                                                     .initiative
                                                     .toString()
@@ -368,8 +385,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                     margin: EdgeInsets.only(
                                         top: 10 * scale, left: 10 * scale),
                                     child: Text(
-                                      widget
-                                          .character.characterState.display,
+                                      character.characterState.display,
                                       style: TextStyle(
                                           fontFamily: 'Pirata',
                                           color: Colors.white,
@@ -383,8 +399,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                     ),
                                   ),
                                   ValueListenableBuilder<int>(
-                                      valueListenable: widget
-                                          .character.characterState.health,
+                                      valueListenable: character.characterState.health,
                                       //not working?
                                       builder: (context, value, child) {
                                         return Container(
@@ -398,7 +413,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                                     "assets/images/blood.png"),
                                               ),
                                               Text(
-                                                '${widget.character.characterState.health.value.toString()} / ${widget.character.characterState.maxHealth.value.toString()}',
+                                                '${character.characterState.health.value.toString()} / ${character.characterState.maxHealth.value.toString()}',
                                                 style: TextStyle(
                                                     fontFamily: 'Pirata',
                                                     color: Colors.white,
@@ -415,8 +430,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                               //add conditions here
                                               ValueListenableBuilder<
                                                       List<Condition>>(
-                                                  valueListenable: widget
-                                                      .character
+                                                  valueListenable: character
                                                       .characterState
                                                       .conditions,
                                                   builder: (context, value,
@@ -439,11 +453,10 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                 child: Row(
                                   children: [
                                     ValueListenableBuilder<int>(
-                                        valueListenable: widget
-                                            .character.characterState.xp,
+                                        valueListenable: character.characterState.xp,
                                         builder: (context, value, child) {
                                           return Text(
-                                            widget.character.characterState
+                                            character.characterState
                                                 .xp.value
                                                 .toString(),
                                             style: TextStyle(

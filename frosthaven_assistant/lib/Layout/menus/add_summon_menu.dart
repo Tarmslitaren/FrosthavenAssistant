@@ -230,14 +230,13 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                             gfx);
                         _gameState.action(AddStandeeCommand(
                             chosenNr,
-                            null,
                             summonData,
-                            widget.character.characterState.summonList,
+                            widget.character.id,
                             MonsterType.summon));
                       });
                       Navigator.pop(context);
                       //open the level menu here for convenience
-                      openDialog(context, SetLevelMenu(figure: widget.character.characterState.summonList.value.last ));
+                      openDialog(context, SetLevelMenu(figure: widget.character.characterState.summonList.value.last,characterId: widget.character.id, ));
                     });})),
         const SizedBox(
           height: 20,

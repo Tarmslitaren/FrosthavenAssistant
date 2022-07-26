@@ -7,13 +7,13 @@ class SetLevelCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   int _previousState = 0;
   final int level;
-  final Monster? monster;
+  final String? monsterId;
 
-  SetLevelCommand(this.level, this.monster);
+  SetLevelCommand(this.level, this.monsterId);
 
   @override
   void execute() {
-    if (monster == null) {
+    if (monsterId == null) {
       _previousState = _gameState.level.value;
       _gameState.level.value = level;
       for (var item in _gameState.currentList) {
@@ -23,10 +23,16 @@ class SetLevelCommand extends Command {
         }
       }
     } else {
+      Monster? monster;
+      for(var item in _gameState.currentList) {
+        if (item.id == monsterId) {
+          monster = item as Monster;
+        }
+      }
       _previousState = monster!.level.value;
-      monster!.level.value = level;
-      for(var item in monster!.monsterInstances.value){
-        item.setLevel(monster!);
+      monster.level.value = level;
+      for(var item in monster.monsterInstances.value){
+        item.setLevel(monster);
       }
 
     }
@@ -34,7 +40,7 @@ class SetLevelCommand extends Command {
 
   @override
   void undo() {
-    if(monster != null) {
+    /*if(monster != null) {
       monster!.level.value = _previousState;
       for(var item in monster!.monsterInstances.value){
         item.level.value = _previousState;
@@ -47,6 +53,11 @@ class SetLevelCommand extends Command {
           //will overwrite specific level settings, but that is probably ok
         }
       }
-    }
+    }*/
+  }
+
+  @override
+  String toString() {
+    return "Set Level";
   }
 }

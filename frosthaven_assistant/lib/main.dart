@@ -39,11 +39,14 @@ class MyApp extends StatelessWidget {
     //WindowManager.instance.setFullScreen(true);
     //to hide ui top and bottom on android
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-
     //to fix issue with system bottom bar on top after keyboard shown on earlier os (24)
     SystemChrome.setSystemUIChangeCallback((systemOverlaysAreVisible) =>
     Future.delayed(const Duration(milliseconds: 1001), () {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+      //in case the first went to  early?
+      Future.delayed(const Duration(milliseconds: 301), () {
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+      });
     }));
      //call after keyboard
     if (!kIsWeb) {

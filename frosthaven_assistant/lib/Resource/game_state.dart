@@ -320,6 +320,179 @@ class Monster extends ListItemData{
   }
 }
 
+class GameSaveState{
+
+  String? _savedState;
+  void save() {
+    _savedState = getIt<GameState>().toString();
+  }
+  Future<void> load() async {
+    if (_savedState != null) {
+      GameState gameState = getIt<GameState>();
+      Map<String, dynamic> data = jsonDecode(_savedState!);
+      gameState.level.value = data['level'] as int;
+      gameState.scenario.value = data['scenario']; // as String;
+      gameState.currentCampaign.value =
+      data['currentCampaign']; //TODO: does not update properly (because changing it is not a command
+      gameState.round.value = data['round'] as int;
+      gameState.roundState.value = RoundState.values[data['roundState']];
+      gameState.solo.value =
+      data['solo'] as bool; //TODO: does not update properly (because changing it is not a command
+
+      //main list
+      var list = data['currentList'] as List;
+      gameState.currentList.clear();
+      List<ListItemData> newList = [];
+      for (Map<String, dynamic> item in list) {
+        if (item["characterClass"] != null) {
+          Character character = Character.fromJson(item);
+          //is character
+          newList.add(character);
+        } else if (item["type"] != null) {
+          //is monster
+          Monster monster = Monster.fromJson(item);
+          newList.add(monster);
+        }
+      }
+      gameState.currentList = newList;
+
+      //ability decks
+      var decks = data['currentAbilityDecks'] as List;
+      gameState.currentAbilityDecks.clear();
+      for (Map<String, dynamic> item in decks) {
+        MonsterAbilityState state = MonsterAbilityState(item["name"]);
+
+        List<MonsterAbilityCardModel> newDrawList = [];
+        List drawPile = item["drawPile"] as List;
+        for (var item in drawPile) {
+          int nr = item["nr"];
+          for (var card in state.drawPile.getList()) {
+            if (card.nr == nr) {
+              newDrawList.add(card);
+            }
+          }
+        }
+        List<MonsterAbilityCardModel> newDiscardList = [];
+        for (var item in item["discardPile"] as List) {
+          int nr = item["nr"];
+          for (var card in state.drawPile.getList()) {
+            if (card.nr == nr) {
+              newDiscardList.add(card);
+            }
+          }
+        }
+        state.drawPile.getList().clear();
+        state.discardPile.getList().clear();
+        state.drawPile.setList(newDrawList);
+        state.discardPile.setList(newDiscardList);
+        gameState.currentAbilityDecks.add(state);
+      }
+
+      //modifier deck
+      var modifierDeckData = data['modifierDeck'];
+      ModifierDeck state = ModifierDeck();
+      List<ModifierCard> newDrawList = [];
+      List drawPile = modifierDeckData["drawPile"] as List;
+      for (var item in drawPile) {
+        String gfx = item["gfx"];
+        if (gfx == "curse") {
+          state.curses.value++;
+          newDrawList.add(ModifierCard(CardType.curse, gfx));
+        }
+        else if (gfx == "bless") {
+          state.blesses.value++;
+          newDrawList.add(ModifierCard(CardType.curse, gfx));
+        }
+        else if (gfx == "nullAttack" || gfx == "doubleAttack") {
+          newDrawList.add(ModifierCard(CardType.multiply, gfx));
+        } else {
+          newDrawList.add(ModifierCard(CardType.add, gfx));
+        }
+      }
+      List<ModifierCard> newDiscardList = [];
+      for (var item in modifierDeckData["discardPile"] as List) {
+        String gfx = item["gfx"];
+        if (gfx == "curse") {
+          newDiscardList.add(ModifierCard(CardType.curse, gfx));
+        }
+        else if (gfx == "bless") {
+          newDiscardList.add(ModifierCard(CardType.curse, gfx));
+        }
+        else if (gfx == "nullAttack" || gfx == "doubleAttack") {
+          newDiscardList.add(ModifierCard(CardType.multiply, gfx));
+          state.needsShuffle = true;
+        } else {
+          newDiscardList.add(ModifierCard(CardType.add, gfx));
+        }
+      }
+      state.drawPile.getList().clear();
+      state.discardPile.getList().clear();
+      state.drawPile.setList(newDrawList);
+      state.discardPile.setList(newDiscardList);
+      state.cardCount.value = state.drawPile.size();
+      gameState.modifierDeck = state;
+
+      //////elements
+      Map elementData = data['elementState'];
+      Map<Elements, ElementState> newMap = {};
+      newMap[Elements.fire] =
+      ElementState.values[elementData[Elements.fire.index.toString()]];
+      newMap[Elements.ice] =
+      ElementState.values[elementData[Elements.ice.index.toString()]];
+      newMap[Elements.air] =
+      ElementState.values[elementData[Elements.air.index.toString()]];
+      newMap[Elements.earth] =
+      ElementState.values[elementData[Elements.earth.index.toString()]];
+      newMap[Elements.light] =
+      ElementState.values[elementData[Elements.light.index.toString()]];
+      newMap[Elements.dark] =
+      ElementState.values[elementData[Elements.dark.index.toString()]];
+      gameState.elementState.value = newMap;
+    }
+  }
+  Future<void> saveToDisk() async{
+    if(_savedState == null) {
+      save();
+    }
+    const sharedPrefsKey = 'gameState';
+    bool _hasError = false;
+    bool _isWaiting = true;
+    //notifyListeners();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      // save
+      // uncomment this to simulate an error-during-save
+      // if (_value > 3) throw Exception("Artificial Error");
+      await prefs.setString(sharedPrefsKey, _savedState!);
+      _hasError = false;
+    } catch (error) {
+      _hasError = true;
+    }
+    _isWaiting = false;
+    //notifyListeners();
+  }
+  Future<void> loadFromDisk() async {
+    //have to call after init or element state overridden
+
+    const sharedPrefsKey = 'gameState';
+    bool _hasError = false;
+    bool _isWaiting = true;
+    //notifyListeners();
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      _savedState = prefs.getString(sharedPrefsKey);
+      _hasError = false;
+    } catch (error) {
+      _hasError = true;
+    }
+    _isWaiting = false;
+
+    if (_savedState != null){
+      load();
+    }
+  }
+}
+
 class GameState extends ActionHandler{ //TODO: put action handler in own place
 
   GameState() {
@@ -374,6 +547,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
     final data = await json.decode(response);
     map[campaign] = CampaignModel.fromJson(data);
   }
+
   //data
   final modelData = ValueNotifier<Map<String, CampaignModel>>({});
   List<SummonModel> itemSummonData = [];
@@ -386,6 +560,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   //TODO: ugly hacks to delay list update (doesn't need to be here though)
   final updateList = ValueNotifier<int>(0);
   final killMonsterStandee = ValueNotifier<int>(-1);
+  final updateForUndo = ValueNotifier<int>(0);
 
   final level = ValueNotifier<int>(1);
   final solo = ValueNotifier<bool>(false);
@@ -432,159 +607,16 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   }
 
   Future<void> save() async {
-    //1 serialize to json
-    String value = toString();
-    const sharedPrefsKey = 'gameState';
-    bool _hasError = false;
-    bool _isWaiting = true;
-    //notifyListeners();
-    try {
-      final prefs = await SharedPreferences.getInstance();
-        // save
-        // uncomment this to simulate an error-during-save
-        // if (_value > 3) throw Exception("Artificial Error");
-        await prefs.setString(sharedPrefsKey, value);
-      _hasError = false;
-    } catch (error) {
-      _hasError = true;
-    }
-    _isWaiting = false;
-    //notifyListeners();
+    GameSaveState state = GameSaveState();
+    state.save();
+    state.saveToDisk();
+    gameSaveStates.add(state); //do this from action handler instead
   }
 
   Future<void> load() async {
-    //have to call after init or element state overridden
-
-    const sharedPrefsKey = 'gameState';
-    bool _hasError = false;
-    bool _isWaiting = true;
-    String value = "";
-    //notifyListeners();
-    // artificial delay so we can see the UI changes
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      value = prefs.getString(sharedPrefsKey) ?? "";
-      _hasError = false;
-    } catch (error) {
-      _hasError = true;
-    }
-    _isWaiting = false;
-
-    if (value.isNotEmpty){
-      Map<String, dynamic> data = jsonDecode(value);
-      level.value = data['level'] as int;
-      scenario.value = data['scenario'];// as String;
-      currentCampaign.value = data['currentCampaign'];//TODO: does not update properly (because changing it is not a command
-      round.value = data['round'] as int;
-      roundState.value =  RoundState.values[data['roundState']];
-      solo.value = data['solo'] as bool; //TODO: does not update properly (because changing it is not a command
-
-      //main list
-      var list = data['currentList'] as List;
-      currentList.clear();
-      List<ListItemData> newList = [];
-      for (Map<String, dynamic> item in list){
-        if (item["characterClass"] != null) {
-          Character character = Character.fromJson(item);
-          //is character
-          newList.add(character);
-        } else if (item["type"] != null){
-          //is monster
-          Monster monster = Monster.fromJson(item);
-          newList.add(monster);
-
-        }
-      }
-      currentList = newList;
-
-      //ability decks
-      var decks = data['currentAbilityDecks'] as List;
-      currentAbilityDecks.clear();
-      for (Map<String, dynamic> item in decks){
-        MonsterAbilityState state = MonsterAbilityState(item["name"]);
-
-        List<MonsterAbilityCardModel> newDrawList = [];
-        List drawPile = item["drawPile"] as List;
-        for(var item in drawPile){
-          int nr = item["nr"];
-          for(var card in state.drawPile.getList()){
-            if(card.nr == nr){
-              newDrawList.add(card);
-            }
-          }
-        }
-        List<MonsterAbilityCardModel> newDiscardList = [];
-        for(var item in item["discardPile"] as List){
-          int nr = item["nr"];
-          for(var card in state.drawPile.getList()){
-            if(card.nr == nr){
-              newDiscardList.add(card);
-            }
-          }
-        }
-        state.drawPile.getList().clear();
-        state.discardPile.getList().clear();
-        state.drawPile.setList(newDrawList);
-        state.discardPile.setList(newDiscardList);
-        currentAbilityDecks.add(state);
-      }
-
-      //modifier deck
-      var modifierDeckData = data['modifierDeck'];
-        ModifierDeck state = ModifierDeck();
-        List<ModifierCard> newDrawList = [];
-        List drawPile = modifierDeckData["drawPile"] as List;
-        for(var item in drawPile) {
-          String gfx = item["gfx"];
-          if (gfx == "curse") {
-            state.curses.value++;
-            newDrawList.add(ModifierCard(CardType.curse, gfx));
-          }
-          else if (gfx == "bless") {
-            state.blesses.value++;
-            newDrawList.add(ModifierCard(CardType.curse, gfx));
-          }
-          else if(gfx == "nullAttack" || gfx == "doubleAttack"){
-            newDrawList.add(ModifierCard(CardType.multiply, gfx));
-          } else {
-            newDrawList.add(ModifierCard(CardType.add, gfx));
-          }
-        }
-        List<ModifierCard> newDiscardList = [];
-        for(var item in modifierDeckData["discardPile"] as List){
-          String gfx = item["gfx"];
-          if (gfx == "curse") {
-            newDiscardList.add(ModifierCard(CardType.curse, gfx));
-          }
-          else if (gfx == "bless") {
-            newDiscardList.add(ModifierCard(CardType.curse, gfx));
-          }
-          else if(gfx == "nullAttack" || gfx == "doubleAttack"){
-            newDiscardList.add(ModifierCard(CardType.multiply, gfx));
-            state.needsShuffle = true;
-          } else {
-            newDiscardList.add(ModifierCard(CardType.add, gfx));
-          }
-        }
-        state.drawPile.getList().clear();
-        state.discardPile.getList().clear();
-        state.drawPile.setList(newDrawList);
-        state.discardPile.setList(newDiscardList);
-        state.cardCount.value = state.drawPile.size();
-        modifierDeck = state;
-
-      //////elements
-      Map elementData = data['elementState'];
-      Map<Elements, ElementState> newMap = {};
-      newMap[Elements.fire] = ElementState.values[elementData[Elements.fire.index.toString()]];
-      newMap[Elements.ice] = ElementState.values[elementData[Elements.ice.index.toString()]];
-      newMap[Elements.air] = ElementState.values[elementData[Elements.air.index.toString()]];
-      newMap[Elements.earth] = ElementState.values[elementData[Elements.earth.index.toString()]];
-      newMap[Elements.light] = ElementState.values[elementData[Elements.light.index.toString()]];
-      newMap[Elements.dark] = ElementState.values[elementData[Elements.dark.index.toString()]];
-      elementState.value = newMap;
-
-    }
+    GameSaveState state = GameSaveState();
+    state.loadFromDisk();
+    gameSaveStates.add(state); //init state: means gmae save state is one larger tnan command list
   }
 
 }

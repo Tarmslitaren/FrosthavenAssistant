@@ -154,6 +154,11 @@ class SetScenarioCommand extends Command {
 
   @override
   void undo() {
-    //TODO: implement
+    _gameState.updateList.value++;
+  }
+
+  @override
+  String toString() {
+    return "Set Scenario";
   }
 }

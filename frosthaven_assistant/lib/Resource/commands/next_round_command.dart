@@ -36,7 +36,12 @@ class NextRoundCommand extends Command {
 
   @override
   void undo() {
-    GameMethods.setRoundState(RoundState.playTurns);
-    //TODO
+    //GameMethods.setRoundState(RoundState.playTurns);
+    _gameState.updateList.value++;
+  }
+
+  @override
+  String toString() {
+    return "Next Round";
   }
 }

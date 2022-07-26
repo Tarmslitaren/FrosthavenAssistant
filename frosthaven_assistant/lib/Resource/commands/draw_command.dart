@@ -25,9 +25,14 @@ class DrawCommand extends Command {
 
   @override
   void undo() {
-    GameMethods.unDrawAbilityCards();
+    /*GameMethods.unDrawAbilityCards();
     _gameState.round.value--;
-    GameMethods.setRoundState(RoundState.chooseInitiative);
-    //TODO: un draw the cards (need to save the random nr used. unsort the list
+    GameMethods.setRoundState(RoundState.chooseInitiative);*/
+    _gameState.updateList.value++;
+  }
+
+  @override
+  String toString() {
+    return "Draw";
   }
 }

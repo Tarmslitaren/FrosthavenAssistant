@@ -20,18 +20,27 @@ class SummonData {
 
 class AddStandeeCommand extends Command {
   final int nr;
-  final Monster? monster;
+
+  //nope can't use any references: they will break on load data
   final SummonData? summon;
   final MonsterType type;
-  final ValueNotifier<List<MonsterInstance>> monsterList;
+  final String ownerId;
+  //final ValueNotifier<List<MonsterInstance>> monsterList;
 
-  AddStandeeCommand(this.nr, this.monster, this.summon, this.monsterList, this.type);
+
+  AddStandeeCommand(this.nr, this.summon, this.ownerId, this.type);
 
   @override
   void execute() {
 
     MonsterInstance instance;
-    if(monster != null) {
+    Monster? monster;
+    if(summon == null) {
+      for (var item in getIt<GameState>().currentList) {
+        if (item.id == ownerId && item is Monster) {
+          monster = item;
+        }
+      }
       instance = MonsterInstance(nr, type, monster!);
     } else {
       instance = MonsterInstance.summon(
@@ -46,8 +55,22 @@ class AddStandeeCommand extends Command {
     }
 
     List<MonsterInstance> newList = [];
-    newList.addAll(monsterList.value);
+    ValueNotifier<List<MonsterInstance>>? monsterList;
+    //find list
+    if(monster != null) {
+      monsterList = monster.monsterInstances;
+    } else {
+      for (var item in getIt<GameState>().currentList) {
+        if (item.id == ownerId) {
+          monsterList = (item as Character).characterState.summonList;
+          break;
+        }
+      }
+    }
+
+    newList.addAll(monsterList!.value);
     newList.add(instance);
+
     if (monster != null) {
       GameMethods.sortMonsterInstances(newList);
     }
@@ -68,6 +91,15 @@ class AddStandeeCommand extends Command {
 
   @override
   void undo() {
-    // TODO: implement undo
+    getIt<GameState>().updateList.value++;
+  }
+
+  @override
+  String toString() {
+    String name  = ownerId;
+    if(summon != null) {
+      name = summon!.name;
+    }
+    return "Add ${name} $nr";
   }
 }

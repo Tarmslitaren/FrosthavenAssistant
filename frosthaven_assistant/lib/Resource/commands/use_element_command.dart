@@ -19,6 +19,11 @@ class UseElementCommand extends Command {
 
   @override
   void undo() {
-    _gameState.elementState.value[element] = _previousState!;
+    //_gameState.elementState.value[element] = _previousState!;
+  }
+
+  @override
+  String toString() {
+    return "Use Element";
   }
 }

@@ -61,12 +61,13 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
           text,
           style: TextStyle(
             color: color,
+            fontSize: 18,
             shadows: const [Shadow(offset: Offset(1, 1), color: Colors.black)],
           ),
         ),
         onPressed: () {
           if (!isOut) {
-            _gameState.action(AddStandeeCommand(nr, widget.monster, null, widget.monster.monsterInstances, type));
+            _gameState.action(AddStandeeCommand(nr, null, widget.monster.id, type));
           }
         },
       )),

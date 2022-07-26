@@ -30,6 +30,12 @@ class AddCharacterCommand extends Command {
 
   @override
   void undo() {
-    _gameState.currentList.remove(character);
+    //_gameState.currentList.remove(character);
+    _gameState.updateList.value++;
+  }
+
+  @override
+  String toString() {
+    return "Add ${_name}";
   }
 }

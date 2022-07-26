@@ -1,35 +1,18 @@
 
-import 'package:flutter/material.dart';
+import '../../../services/service_locator.dart';
+import '../../action_handler.dart';
+import '../../enums.dart';
+import '../../game_methods.dart';
+import '../../game_state.dart';
 
-import '../../services/service_locator.dart';
-import '../action_handler.dart';
-import '../enums.dart';
-import '../game_methods.dart';
-import '../game_state.dart';
+abstract class ChangeStatCommand extends Command {
+  final String ownerId;
+  int change;
+  final String figureId; //need to generate this somehow (name for char, standeeNr for monsters, summons - name+something (standeeNr+gfx)
+  ChangeStatCommand(this.change, this.figureId, this.ownerId);
 
-class ChangeStatCommand extends Command {
-  final int change;
-  final ValueNotifier<int> stat;
-  final Figure figure;
-  ChangeStatCommand(this.change, this.stat, this.figure );
-
-  @override
-  void execute() {
-    stat.value += change;
-
-    //lower healh if max health lowers
-    if (stat.value < figure.health.value && stat == figure.maxHealth) {
-      figure.health.value = figure.maxHealth.value;
-    }
-    //if health same as maxhealth, then let health follow?
-    if (stat.value - change ==  figure.health.value && stat == figure.maxHealth) {
-      figure.health.value = figure.maxHealth.value;
-    }
-
-
-    if (stat.value <= 0 && (stat == figure.health || stat == figure.maxHealth)) {
-      handleDeath();
-    }
+  void setChange(int change) {
+    this.change = change;
   }
 
   void handleDeath(){
@@ -58,7 +41,7 @@ class ChangeStatCommand extends Command {
                 getIt<GameState>().updateList.value++;
               }
             }else {
-              getIt<GameState>().updateList.value++;
+             // getIt<GameState>().updateList.value++; //check if this was needed for something (will block standee death anim)
             }
             break;
           }
@@ -95,6 +78,12 @@ class ChangeStatCommand extends Command {
 
   @override
   void undo() {
-    stat.value -= change;
+    //stat.value -= change;
+    getIt<GameState>().updateList.value++;
+  }
+
+  @override
+  String toString() {
+    return "change stat";
   }
 }

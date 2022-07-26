@@ -26,6 +26,10 @@ class ReorderAbilityListCommand extends Command {
 
   @override
   void undo() {
-    // TODO: implement undo
+  }
+
+  @override
+  String toString() {
+    return "Reorder Ability";
   }
 }
