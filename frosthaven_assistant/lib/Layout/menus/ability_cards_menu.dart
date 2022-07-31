@@ -138,7 +138,8 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
 
           ):
             ListView(
-              children: generateList(list, allOpen),
+              //reverse: true,
+              children: generateList(list, allOpen).reversed.toList(),
             ),
         ));
   }

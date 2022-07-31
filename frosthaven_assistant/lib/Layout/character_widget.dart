@@ -407,8 +407,8 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                                 left: 10 * scale),
                                             child: Row(children: [
                                               Image(
-                                                //fit: BoxFit.contain,
-                                                height: scaledHeight * 0.3,
+                                                fit: BoxFit.contain,
+                                                height: scaledHeight * 0.2,
                                                 image: const AssetImage(
                                                     "assets/images/blood.png"),
                                               ),

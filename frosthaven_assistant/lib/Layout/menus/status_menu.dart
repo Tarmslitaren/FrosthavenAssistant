@@ -113,8 +113,8 @@ class _StatusMenuState extends State<StatusMenu> {
       ValueNotifier<int> notifier, int maxValue, String image, String figureId, String ownerId) {
     return Row(children: [
       Container(
-          width: 42,
-          height: 42,
+          width: 40,
+          height: 40,
           child: IconButton(
               icon: Image.asset('assets/images/psd/sub.png'),
               //iconSize: 30,
@@ -129,8 +129,8 @@ class _StatusMenuState extends State<StatusMenu> {
               })),
       Stack(children: [
         Container(
-          width: 42,
-          height: 42,
+          width: 40,
+          height: 40,
           child: Image(
             image: AssetImage(image),
           ),
@@ -152,8 +152,8 @@ class _StatusMenuState extends State<StatusMenu> {
             })
       ]),
       Container(
-          width: 42,
-          height: 42,
+          width: 40,
+          height: 40,
           child: IconButton(
             icon: Image.asset('assets/images/psd/add.png'),
             //iconSize: 30,
@@ -268,7 +268,7 @@ class _StatusMenuState extends State<StatusMenu> {
 
     return Container(
         width: 336,
-        height: 210,
+        height: 211,
         decoration: BoxDecoration(
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
@@ -280,7 +280,9 @@ class _StatusMenuState extends State<StatusMenu> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
-          Text(name),
+          Text(name,
+              style: const TextStyle(fontSize: 18)
+          ),
           Row(children: [
           ValueListenableBuilder<int>(
               valueListenable: _gameState.commandIndex,
@@ -334,7 +336,6 @@ class _StatusMenuState extends State<StatusMenu> {
                                  figureId,
                                   ownerId)
                               );
-
                             },
                           ),
                         ),
@@ -381,7 +382,7 @@ class _StatusMenuState extends State<StatusMenu> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
-                height: 20,
+                height: 2,
               ),
               //const Text("Status", style: TextStyle(fontSize: 18)),
               Row(

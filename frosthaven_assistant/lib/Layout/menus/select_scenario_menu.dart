@@ -94,7 +94,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
               Column(children: [
                 Text("Set Scenario"),
                 ExpansionTile(
-                    title: Text("Current Scenario: ${_gameState.currentCampaign.value}"),
+                    title: Text("Current Campaign: ${_gameState.currentCampaign.value}"),
                   children: [
                     TextButton(
                       onPressed: () {

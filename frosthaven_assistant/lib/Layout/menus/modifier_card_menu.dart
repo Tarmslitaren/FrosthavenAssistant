@@ -29,7 +29,7 @@ class Item extends StatelessWidget {
         : ModifierCardWidget.buildRear(scale);
 
     return Container(
-      margin: EdgeInsets.all(2),
+      margin: const EdgeInsets.all(2),
         child: child);
   }
 }
@@ -113,8 +113,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
                   scrollController: scrollController,
-                  scrollAnimationDuration: Duration(milliseconds: 400),
-                  reorderAnimationDuration: Duration(milliseconds: 400),
+                  scrollAnimationDuration: const Duration(milliseconds: 400),
+                  reorderAnimationDuration: const Duration(milliseconds: 400),
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
                   onReorder: (index, dropIndex) {
                     //make sure this is correct
@@ -129,7 +129,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                   children: generateList(list, allOpen),
                 )
               : ListView(
-                  children: generateList(list, allOpen),
+                  children: generateList(list, allOpen).reversed.toList(),
                 ),
         ));
   }
