@@ -9,7 +9,7 @@ import 'modifier_deck_widget.dart';
 
 Widget createMainScaffold(BuildContext context) {
   return SafeArea(
-    bottom: false,
+    //bottom: false,
       maintainBottomViewPadding: true,
       child: Scaffold(
         resizeToAvoidBottomInset: false,

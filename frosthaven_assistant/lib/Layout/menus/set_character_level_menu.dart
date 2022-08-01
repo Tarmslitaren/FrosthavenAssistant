@@ -2,9 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/set_character_level_command.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
 
 class SetCharacterLevelMenu extends StatefulWidget {
@@ -31,6 +33,7 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
         builder: (context, value, child) {
           bool isCurrentlySelected = nr == widget.character.characterState.level.value;
           String text = nr.toString();
+          bool darkMode = getIt<Settings>().darkMode.value;
           return SizedBox(
             width: 32,
             height: 32,
@@ -40,9 +43,13 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     text,
                     style: TextStyle(
                       fontSize: 18,
-                        shadows: [Shadow(offset: Offset(1, 1), color: isCurrentlySelected ? Colors.grey: Colors.black)],
+                        shadows: [Shadow(offset: Offset(1, 1), color: isCurrentlySelected ?
+                        Colors.grey:
+                        Colors.black)],
                         color:
-                        isCurrentlySelected ? Colors.black : Colors.grey),
+                        isCurrentlySelected ?
+                        (darkMode? Colors.white : Colors.black) :
+                        Colors.grey),
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
@@ -63,8 +70,10 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
         decoration: BoxDecoration(
           image: DecorationImage(
             colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage('assets/images/bg/white_bg.png'),
-            fit: BoxFit.fitWidth,
+            image: AssetImage(getIt<Settings>().darkMode.value?
+            'assets/images/bg/dark_bg.png'
+                :'assets/images/bg/white_bg.png'),
+            fit: BoxFit.cover,
           ),
         ),
         child: Stack(children: [
@@ -76,7 +85,7 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
               ),
               //TODO: set the name of the char in this here text.
               Text(
-                  "Set ${widget.character.id}'s Level", style: TextStyle(fontSize: 18)),
+                  "Set ${widget.character.id}'s Level", style: getTitleTextStyle()),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

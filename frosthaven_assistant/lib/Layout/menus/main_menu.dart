@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
@@ -6,10 +8,12 @@ import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/settings_menu.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:window_manager/window_manager.dart';
 
 import '../../Model/campaign.dart';
 import '../../Resource/ui_utils.dart';
@@ -127,9 +131,9 @@ Drawer createMainMenu(BuildContext context) {
               const Divider(),
               ListTile(
                 title: const Text('Settings'),
-                enabled: false,
                 onTap: () {
                   Navigator.pop(context);
+                  openDialog(context, const SettingsMenu());
                 },
               ),
               ListTile(
@@ -141,6 +145,15 @@ Drawer createMainMenu(BuildContext context) {
                   Navigator.pop(context);
                 },
               ),
+              Platform.isMacOS || Platform.isLinux || Platform.isWindows? ListTile(
+                title: const Text('Exit'),
+                enabled: true,
+                onTap: () {
+                  Navigator.pop(context);
+                  _gameState.save();
+                  windowManager.close();
+                },
+              ): Container(),
             ]);
       },
     ),

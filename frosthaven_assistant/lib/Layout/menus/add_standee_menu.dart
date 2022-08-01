@@ -2,11 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
 
 class AddStandeeMenu extends StatefulWidget {
@@ -86,7 +88,7 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
       height = 160;
     }
     return Container(
-        width: 10, //need to set any width to center content
+        width: 250, //need to set any width to center content, overridden by dialog default min width.
         height: height,
         decoration: BoxDecoration(
           //color: Colors.black,
@@ -98,8 +100,10 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
           )),*/
           image: DecorationImage(
             colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage('assets/images/bg/white_bg.png'),
-            fit: BoxFit.fitHeight,
+            image: AssetImage(getIt<Settings>().darkMode.value?
+            'assets/images/bg/dark_bg.png'
+                :'assets/images/bg/white_bg.png'),
+            fit: BoxFit.cover,
           ),
         ),
         child: Stack(
@@ -114,8 +118,8 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
                         const SizedBox(
                           height: 20,
                         ),
-                        const Text("Add Standees",
-                            style: TextStyle(fontSize: 18)),
+                        Text("Add Standees",
+                            style: getTitleTextStyle()),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

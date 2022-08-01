@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -509,6 +510,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
     elementState.value[Elements.dark] = ElementState.inert;
 
     initGame();
+
   }
 
   initGame() async {
@@ -579,11 +581,6 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
 
   //GameState? savedState; //load from file, save to file on interval/ app in background? or after any operation?
   //actually make a list of saved states and use for the undo/redo feature?
-
-  //config: TODO: move to own state
-  final userScaling = ValueNotifier<double>(1.0);
-  final fullScreen = ValueNotifier<bool>(false);
-  final showCalculated = ValueNotifier<bool>(true);
 
   @override
   String toString() {

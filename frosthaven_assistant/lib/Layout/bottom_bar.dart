@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 
 import '../Resource/game_methods.dart';
 import '../Resource/game_state.dart';
+import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'menus/main_menu.dart';
@@ -128,29 +129,37 @@ Widget createLevelWidget(BuildContext context) {
 Widget createBottomBar(BuildContext context) {
   GameState _gameState = getIt<GameState>();
   return Container(
-    height: 40,
-      child: Stack(
-          children: [
+      height: 40,
+      child: Stack(children: [
         Positioned(
-          bottom: 0,
+            bottom: 0,
             left: 0,
-            child:
-    Container(
-        height: 40,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          image: DecorationImage(
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.85), BlendMode.dstATop),
-              image: AssetImage('assets/images/psd/frosthaven-bar.png'),
-              //fit: BoxFit.fitHeight,
-              repeat: ImageRepeat.repeat),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [const DrawButton(), createLevelWidget(context), ModifierDeckWidget()],
-        ))),
-    //const ModifierDeckWidget(),
-  ]));
+            child: ValueListenableBuilder<bool>(
+                valueListenable: getIt<Settings>().darkMode,
+            builder: (context, value, child) {
+              return Container(
+                  height: 40,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    image: DecorationImage(
+                        //colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.85), BlendMode.dstATop),
+                        image: AssetImage(getIt<Settings>().darkMode.value
+                            ? 'assets/images/psd/gloomhaven-bar.png'
+                            : 'assets/images/psd/frosthaven-bar.png'),
+                        //fit: BoxFit.fitHeight,
+                        repeat: ImageRepeat.repeat),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const DrawButton(),
+                      createLevelWidget(context),
+                      ModifierDeckWidget()
+                    ],
+                  ));
+            }),
+        )
+        //const ModifierDeckWidget(),
+      ]));
 }

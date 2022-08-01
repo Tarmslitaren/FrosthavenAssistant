@@ -117,11 +117,11 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
           //other styles
         ),
         child: Container(
-          height: _gameState.roundState.value == RoundState.playTurns? screenSize.height * 0.86: screenSize.height * 0.94,
+          height: _gameState.roundState.value == RoundState.playTurns? screenSize.height * 0.86: screenSize.height  - 80,
           width: 184 * 0.8 * scale,
           child: reorderable? ReorderableColumn(
             needsLongPressDraggable: true,
-            scrollController: scrollController,
+            scrollController: ScrollController(),
             scrollAnimationDuration: Duration(milliseconds: 400),
             reorderAnimationDuration: Duration(milliseconds: 400),
 
@@ -141,12 +141,11 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
           ):
             ListView(
               //reverse: true,
+              controller: ScrollController(),
               children: generateList(list, allOpen).reversed.toList(),
             ),
         ));
   }
-
-  final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -154,9 +153,6 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
         widget.monsterAbilityState.drawPile.getList().reversed.toList();
     var discardPile = widget.monsterAbilityState.discardPile.getList();
     return Container(
-      //TODO: fix layout size for this.
-      //width: 500,
-       // height: 300,
         child:
       Column(children: [
       _gameState.roundState.value == RoundState.playTurns?
@@ -199,9 +195,9 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
           ])): Container(),
       Card(
           color: Colors.transparent,
-          //margin: const EdgeInsets.only(left:20, right:20),
           child: Stack(children: [
             //TODO: add diviner functionality:, remove selected (how to mark selected?)
+            // hand of destiny: delete cards
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

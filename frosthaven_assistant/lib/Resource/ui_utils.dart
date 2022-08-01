@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import '../services/service_locator.dart';
 import 'commands/change_stat_commands/change_stat_command.dart';
@@ -12,6 +13,23 @@ void openDialogOld(BuildContext context, Widget widget) {
       return widget;
     },
   ));*/
+}
+
+TextStyle getTitleTextStyle() {
+  return TextStyle(
+    fontSize: 18,
+    color: getIt<Settings>().darkMode.value? Colors.white : Colors.black
+  );
+}
+
+TextStyle getSmallTextStyle() {
+  return TextStyle(
+      fontSize: 14,
+      color: getIt<Settings>().darkMode.value? Colors.white : Colors.black,
+      shadows: [
+        Shadow(offset: const Offset(1,1 ), color: getIt<Settings>().darkMode.value? Colors.grey : Colors.grey)
+      ]
+  );
 }
 
 void openDialog(BuildContext context, Widget widget) {

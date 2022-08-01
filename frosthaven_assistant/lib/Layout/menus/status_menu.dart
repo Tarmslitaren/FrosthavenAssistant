@@ -17,6 +17,7 @@ import '../../Resource/commands/remove_condition_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import '../counter_button.dart';
@@ -181,7 +182,7 @@ class _StatusMenuState extends State<StatusMenu> {
           }
           bool isActive = isConditionActive(condition, figure );
           if (isActive) {
-            color = Colors.black;
+            color = getIt<Settings>().darkMode.value? Colors.white : Colors.black;
           }
           return Container(
                 width: 42,
@@ -273,15 +274,17 @@ class _StatusMenuState extends State<StatusMenu> {
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage('assets/images/bg/white_bg.png'),
-            fit: BoxFit.fitWidth,
+            image: AssetImage(getIt<Settings>().darkMode.value?
+            'assets/images/bg/dark_bg.png'
+                :'assets/images/bg/white_bg.png'),
+            fit: BoxFit.cover,
           ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
             children: [
           Text(name,
-              style: const TextStyle(fontSize: 18)
+              style: getTitleTextStyle()
           ),
           Row(children: [
           ValueListenableBuilder<int>(

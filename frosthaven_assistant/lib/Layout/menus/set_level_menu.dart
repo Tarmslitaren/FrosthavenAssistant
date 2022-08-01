@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../../Resource/commands/set_level_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
@@ -50,6 +51,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
             //color = Colors.black;
           }
           String text = nr.toString();
+          bool darkMode = getIt<Settings>().darkMode.value;
           return SizedBox(
             width: 32,
             height: 32,
@@ -68,8 +70,13 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                       Shadow(
                           offset: Offset(1, 1),
                           color:
-                              isCurrentlySelected ? Colors.grey : Colors.black)
-                    ], color: isCurrentlySelected ? Colors.black : Colors.grey),
+                              isCurrentlySelected ?
+                              darkMode? Colors.black : Colors.grey :
+                              darkMode? Colors.black : Colors.black)
+                    ],
+                        color: isCurrentlySelected ?
+                        darkMode? Colors.white : Colors.black :
+                        darkMode? Colors.grey :Colors.grey),
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
@@ -135,8 +142,10 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage('assets/images/bg/white_bg.png'),
-            fit: BoxFit.fitWidth,
+            image: AssetImage(getIt<Settings>().darkMode.value?
+            'assets/images/bg/dark_bg.png'
+                :'assets/images/bg/white_bg.png'),
+            fit: BoxFit.cover,
           ),
         ),
         child: Stack(
@@ -148,7 +157,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(title, style: TextStyle(fontSize: 18)),
+                  Text(title, style: getTitleTextStyle()),
                   if (!isSummon) Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -171,14 +180,14 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                              const Text("Solo:"),
+                              Text("Solo:", style: getSmallTextStyle()),
                               ValueListenableBuilder<bool>(
                                   valueListenable: _gameState.solo,
                                   builder: (context, value, child) {
                                     return Checkbox(
                                       checkColor: Colors.black,
-                                      activeColor: Colors.grey.shade200,
-                                      //side: BorderSide(color: Colors.black),
+                                      activeColor:  Colors.grey.shade200,
+                                      side: BorderSide(color: getIt<Settings>().darkMode.value? Colors.white : Colors.black),
                                       onChanged: (bool? newValue) {
                                         _gameState.solo.value = newValue!;
                                       },

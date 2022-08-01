@@ -92,7 +92,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                 height: 20,
               ),
               Column(children: [
-                Text("Set Scenario"),
+                const Text("Set Scenario",  style: TextStyle(fontSize: 18)),
                 ExpansionTile(
                     title: Text("Current Campaign: ${_gameState.currentCampaign.value}"),
                   children: [

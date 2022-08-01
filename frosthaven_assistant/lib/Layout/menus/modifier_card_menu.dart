@@ -21,16 +21,14 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scale = 2;// getScaleByReference(context) * 2; //double scale
+    double scale = getScaleByReference(context) * 2; //double scale
     late final Widget child;
 
     child = revealed
         ? ModifierCardWidget.buildFront(data, scale)
         : ModifierCardWidget.buildRear(scale);
 
-    return Container(
-      margin: const EdgeInsets.all(2),
-        child: child);
+    return Container(margin: const EdgeInsets.all(2), child: child);
   }
 }
 
@@ -100,6 +98,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
 
   Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen) {
     var screenSize = MediaQuery.of(context).size;
+    double scale = getScaleByReference(context);
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
@@ -107,8 +106,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           //other styles
         ),
         child: Container(
-          height: screenSize.height * 0.80,
-          width: 88*1.5, //double scale??, since it's so small to begin with
+          height: screenSize.height - 120,
+          width: 88 * 2 * scale, //double scale??, since it's so small to begin with
           child: reorderable
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
@@ -129,6 +128,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                   children: generateList(list, allOpen),
                 )
               : ListView(
+                  controller: ScrollController(),
                   children: generateList(list, allOpen).reversed.toList(),
                 ),
         ));
@@ -141,53 +141,51 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     var drawPile = _gameState.modifierDeck.drawPile.getList().reversed.toList();
     var discardPile = _gameState.modifierDeck.discardPile.getList();
     return Container(
-        //TODO: fix layout size for this.
-        //width: 500,
-        // height: 300,
         child: Column(children: [
       Card(
 
           //color: Colors.transparent,
           //margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
           child: Column(children: [
-            Row(mainAxisSize: MainAxisSize.max, children: [
-              const Text(
-                "Reveal:",
-                //style: TextStyle(color: Colors.white)
-              ),
-              drawPile.length > 0
-                  ? buildRevealButton(drawPile.length, 1)
-                  : Container(),
-              drawPile.length > 1
-                  ? buildRevealButton(drawPile.length, 2)
-                  : Container(),
-              drawPile.length > 2
-                  ? buildRevealButton(drawPile.length, 3)
-                  : Container(),
-              drawPile.length > 3
-                  ? buildRevealButton(drawPile.length, 4)
-                  : Container(),
-              drawPile.length > 4
-                  ? buildRevealButton(drawPile.length, 5)
-                  : Container(),
-              drawPile.length > 5
-                  ? buildRevealButton(drawPile.length, 6)
-                  : Container(),
-              drawPile.length > 6
-                  ? buildRevealButton(drawPile.length, 7)
-                  : Container(),
-            ]),
-          ])),
+        Row(mainAxisSize: MainAxisSize.max, children: [
+          const Text(
+            "Reveal:",
+            //style: TextStyle(color: Colors.white)
+          ),
+          drawPile.length > 0
+              ? buildRevealButton(drawPile.length, 1)
+              : Container(),
+          drawPile.length > 1
+              ? buildRevealButton(drawPile.length, 2)
+              : Container(),
+          drawPile.length > 2
+              ? buildRevealButton(drawPile.length, 3)
+              : Container(),
+          drawPile.length > 3
+              ? buildRevealButton(drawPile.length, 4)
+              : Container(),
+          drawPile.length > 4
+              ? buildRevealButton(drawPile.length, 5)
+              : Container(),
+          drawPile.length > 5
+              ? buildRevealButton(drawPile.length, 6)
+              : Container(),
+          drawPile.length > 6
+              ? buildRevealButton(drawPile.length, 7)
+              : Container(),
+        ]),
+      ])),
       Card(
           color: Colors.transparent,
           //margin: const EdgeInsets.only(left: 20, right: 20),
           child: Stack(children: [
-            //TODO: add diviner functionality:, bad omen, enfeebling hex
+            //TODO: add diviner functionality:,
+            // bad omen (next 6 times place a curse 6th from the top),
+            // enfeebling hex: shuffle x amount -1's to enemy deck
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                buildList(drawPile,
-                    true, false),
+                buildList(drawPile, true, false),
                 buildList(discardPile, false, true)
               ],
             ),

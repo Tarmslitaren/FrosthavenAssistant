@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
 
 class AddSummonMenu extends StatefulWidget {
@@ -33,11 +34,10 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     for (var item in widget.character.characterClass.summons) {
       if (item.level <= widget.character.characterState.level.value) {
         int standeesOut = 0;
-        for (var item2 in widget.character.characterState.summonList.value){
+        for (var item2 in widget.character.characterState.summonList.value) {
           if (item2.name == item.name) {
             standeesOut++;
           }
-
         }
         //only add to list if can summon more
         if (standeesOut < item.standees) {
@@ -53,7 +53,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     isCurrentlySelected = summonGfx == chosenGfx;
     Color color = Colors.transparent;
     if (isCurrentlySelected) {
-      color = Colors.black;
+      color = getIt<Settings>().darkMode.value? Colors.white : Colors.black;
     }
     return SizedBox(
       width: 42,
@@ -88,6 +88,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
       //color = Colors.black;
     }
     String text = nr.toString();
+    bool darkMode = getIt<Settings>().darkMode.value;
     return SizedBox(
       width: 42,
       height: 32,
@@ -101,8 +102,10 @@ class AddSummonMenuState extends State<AddSummonMenu> {
             child: Text(
               text,
               style: TextStyle(
-                fontSize: 18,
-                  color: isCurrentlySelected ? Colors.black : Colors.grey),
+                  fontSize: 18,
+                  color: isCurrentlySelected ?
+                  darkMode? Colors.white : Colors.black :
+                  Colors.grey),
             ),
             onPressed: () {
               if (!isCurrentlySelected) {
@@ -126,15 +129,17 @@ class AddSummonMenuState extends State<AddSummonMenu> {
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
               Colors.black.withOpacity(0.8), BlendMode.dstATop),
-          image: AssetImage('assets/images/bg/white_bg.png'),
-          fit: BoxFit.fitHeight,
+          image: AssetImage(getIt<Settings>().darkMode.value
+              ? 'assets/images/bg/dark_bg.png'
+              : 'assets/images/bg/white_bg.png'),
+          fit: BoxFit.cover,
         ),
       ),
       child: Column(children: [
         const SizedBox(
           height: 20,
         ),
-        const Text("Add Summon", style: TextStyle(fontSize: 18)),
+        Text("Add Summon", style: getTitleTextStyle()),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -175,69 +180,69 @@ class AddSummonMenuState extends State<AddSummonMenu> {
             child: ListView.builder(
                 itemCount: _summonList.length,
                 itemBuilder: (context, index) {
-
                   SummonModel model = _summonList[index];
                   String gfx = chosenGfx;
                   bool showNr = true;
                   if (model.gfx.isNotEmpty) {
                     gfx = model.gfx;
-                    if(model.standees < 2) {
+                    if (model.standees < 2) {
                       showNr = false;
                     }
                   }
                   //TODO: gray out if all standees out (or remove from list entirely?)
 
                   return ListTile(
-
-                    leading: Stack(
-                      alignment: Alignment.center,
-                        children: [
-                      Image(
-                        height: 30,
-                        width: 30,
-                        image:
-                            AssetImage("assets/images/summon/$gfx.png"),
-                      ),
-                      if(showNr) Text(
-                          chosenNr.toString(),
-                          style: const TextStyle(fontSize: 18, color: Colors.white,
+                      leading: Stack(alignment: Alignment.center, children: [
+                        Image(
+                          height: 30,
+                          width: 30,
+                          image: AssetImage("assets/images/summon/$gfx.png"),
+                        ),
+                        if (showNr)
+                          Text(chosenNr.toString(), style: const TextStyle(fontSize: 18, color: Colors.white,
                               shadows: [
                                 Shadow(offset: Offset(1,1 ),color: Colors.black)
-                              ])
-                      ),
-                    ]),
-                    //iconColor: _foundMonsters[index].color,
-                    title: Text(_summonList[index].name,
-                        style:
-                            const TextStyle(fontSize: 18, color: Colors.black)),
-                    onTap: () {
-                      setState(() {
-                        SummonModel model = _summonList[index];
-                        String gfx = chosenGfx;
-                        if (model.gfx.isNotEmpty) {
-                          gfx = model.gfx;
-                        }
-                        if(model.standees < 2 && model.gfx.isNotEmpty) {
-                          chosenNr = 0; //don't show on monsterbox unless standees are numbered
-                        }
-                        SummonData summonData = SummonData(
-                            chosenNr,
-                            model.name,
-                            model.health,
-                            model.move,
-                            model.attack,
-                            model.range,
-                            gfx);
-                        _gameState.action(AddStandeeCommand(
-                            chosenNr,
-                            summonData,
-                            widget.character.id,
-                            MonsterType.summon));
+                              ])),
+                      ]),
+                      //iconColor: _foundMonsters[index].color,
+                      title: Text(_summonList[index].name,
+                          style: getTitleTextStyle()),
+                      onTap: () {
+                        setState(() {
+                          SummonModel model = _summonList[index];
+                          String gfx = chosenGfx;
+                          if (model.gfx.isNotEmpty) {
+                            gfx = model.gfx;
+                          }
+                          if (model.standees < 2 && model.gfx.isNotEmpty) {
+                            chosenNr =
+                                0; //don't show on monsterbox unless standees are numbered
+                          }
+                          SummonData summonData = SummonData(
+                              chosenNr,
+                              model.name,
+                              model.health,
+                              model.move,
+                              model.attack,
+                              model.range,
+                              gfx);
+                          _gameState.action(AddStandeeCommand(
+                              chosenNr,
+                              summonData,
+                              widget.character.id,
+                              MonsterType.summon));
+                        });
+                        Navigator.pop(context);
+                        //open the level menu here for convenience
+                        openDialog(
+                            context,
+                            SetLevelMenu(
+                              figure: widget.character.characterState.summonList
+                                  .value.last,
+                              characterId: widget.character.id,
+                            ));
                       });
-                      Navigator.pop(context);
-                      //open the level menu here for convenience
-                      openDialog(context, SetLevelMenu(figure: widget.character.characterState.summonList.value.last,characterId: widget.character.id, ));
-                    });})),
+                })),
         const SizedBox(
           height: 20,
         ),

@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'Layout/main_scaffold.dart';
 import 'Model/campaign.dart';
@@ -18,7 +19,7 @@ class DataLoadedNotification extends Notification {
   const DataLoadedNotification({required this.data});
 }
 
-class MainState extends State<MyHomePage>  {
+class MainState extends State<MyHomePage> with WindowListener  {
 
   void rebuildAllChildren(BuildContext context) {
     void rebuild(Element el) {
@@ -38,5 +39,11 @@ class MainState extends State<MyHomePage>  {
           rebuildAllChildren(context); //only way to remake the valuelistenable builders with broken references
     return createMainScaffold(context);
     });
+  }
+
+  @override
+  void onWindowFocus() {
+    // Make sure to call once.
+    setState(() {});
   }
 }
