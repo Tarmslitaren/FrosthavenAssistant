@@ -77,7 +77,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     }
     var screenSize = MediaQuery.of(context).size;
     return SizedBox(
-        width: max(screenSize.width / nrOfButtons - 15, 40),
+        width: max(screenSize.width / nrOfButtons - 40, 40),
         child: TextButton(
           child: Text(text),
           onPressed: () {
@@ -148,7 +148,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
       Card(
 
           //color: Colors.transparent,
-          margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+          //margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
           child: Column(children: [
             Row(mainAxisSize: MainAxisSize.max, children: [
               const Text(
@@ -180,7 +180,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           ])),
       Card(
           color: Colors.transparent,
-          margin: const EdgeInsets.only(left: 20, right: 20),
+          //margin: const EdgeInsets.only(left: 20, right: 20),
           child: Stack(children: [
             //TODO: add diviner functionality:, bad omen, enfeebling hex
             Row(

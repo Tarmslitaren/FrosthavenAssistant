@@ -183,10 +183,10 @@ class _StatusMenuState extends State<StatusMenu> {
           if (isActive) {
             color = Colors.black;
           }
-          return SizedBox(
-              width: 42,
-              height: 42,
-              child: Container(
+          return Container(
+                width: 42,
+                  height: 42,
+                  margin: const EdgeInsets.all(1),
                   decoration: BoxDecoration(
                       border: Border.all(
                         color: color,
@@ -206,7 +206,7 @@ class _StatusMenuState extends State<StatusMenu> {
                             RemoveConditionCommand(condition, figureId, ownerId));
                       }
                     },
-                  )));
+                  ));
         });
   }
 

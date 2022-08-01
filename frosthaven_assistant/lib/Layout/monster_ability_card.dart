@@ -266,7 +266,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
           return GestureDetector(
             onTap: () {
               //open deck menu
-              openDialogOld(context, AbilityCardMenu(monsterAbilityState: deckk, monsterData: widget.data,));
+              openDialog(context, AbilityCardMenu(monsterAbilityState: deckk, monsterData: widget.data,));
 
               setState(() {});
             },

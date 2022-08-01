@@ -47,6 +47,8 @@ Drawer createMainMenu(BuildContext context) {
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
+                padding: EdgeInsets.zero,
+                margin: EdgeInsets.zero,
                 decoration: const BoxDecoration(
                   color: Colors.blue,
                   image: DecorationImage(

@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
@@ -93,7 +95,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
     }
     var screenSize = MediaQuery.of(context).size;
     return SizedBox(
-      width: screenSize.width / nrOfButtons -15,
+      width: max(screenSize.width / nrOfButtons -40, 40),
         child: TextButton(
 
           child: Text(text),
@@ -161,7 +163,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
       Card(
 
           //color: Colors.transparent,
-          margin: const EdgeInsets.only(left:20, right:20, top: 20),
+          //margin: const EdgeInsets.only(left:20, right:20, top: 20),
 
           child: Column(children: [
 
@@ -197,7 +199,7 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
           ])): Container(),
       Card(
           color: Colors.transparent,
-          margin: const EdgeInsets.only(left:20, right:20),
+          //margin: const EdgeInsets.only(left:20, right:20),
           child: Stack(children: [
             //TODO: add diviner functionality:, remove selected (how to mark selected?)
             Row(
