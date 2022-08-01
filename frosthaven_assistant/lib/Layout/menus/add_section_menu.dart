@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
 
 class AddSectionMenu extends StatefulWidget {
@@ -15,6 +18,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   initState() {
@@ -23,9 +27,9 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     super.initState();
   }
 
-  int? findNrFromScenarioName(String scenario){
+  int? findNrFromScenarioName(String scenario) {
     String nr = scenario.substring(1);
-    for(int i = 0; i < nr.length; i++){
+    for (int i = 0; i < nr.length; i++) {
       if (nr[i] == ' ') {
         nr = nr.substring(0, i);
         int? number = int.tryParse(nr);
@@ -43,10 +47,9 @@ class AddSectionMenuState extends State<AddSectionMenu> {
         .modelData.value[_gameState.currentCampaign.value]!.sections.keys
         .toList();
     _foundScenarios.sort((a, b) {
-
       int? aNr = findNrFromScenarioName(a);
       int? bNr = findNrFromScenarioName(b);
-      if(aNr != null && bNr != null){
+      if (aNr != null && bNr != null) {
         return aNr.compareTo(bNr);
       }
       return a.compareTo(b);
@@ -66,7 +69,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
           .modelData.value[_gameState.currentCampaign.value]!.sections.keys
           .toList()
           .where((user) =>
-          user.toLowerCase().contains(enteredKeyword.toLowerCase()))
+              user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       // we use the toLowerCase() method to make it case-insensitive
     }
@@ -80,8 +83,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      //color: Colors.transparent,
-      // shadowColor: Colors.transparent,
+        //color: Colors.transparent,
+        // shadowColor: Colors.transparent,
         margin: const EdgeInsets.all(2),
         child: Stack(children: [
           Column(
@@ -92,10 +95,26 @@ class AddSectionMenuState extends State<AddSectionMenu> {
               Container(
                 margin: const EdgeInsets.only(left: 10, right: 10),
                 child: TextField(
+                  controller: _controller,
+                  keyboardType: getIt<Settings>().softNumpadInput.value
+                      ? TextInputType.none
+                      : TextInputType.text,
                   onChanged: (value) => _runFilter(value),
+                  onTap: () {
+                    _controller.clear();
+                    if (getIt<Settings>().softNumpadInput.value) {
+                      openDialog(
+                          context,
+                          NumpadMenu(
+                              controller: _controller,
+                              maxLength: 3,
+                              onChange: (String value) {
+                                _runFilter(value);
+                              }));
+                    }
+                  },
                   decoration: const InputDecoration(
-                      labelText: 'Add Section',
-                      suffixIcon: Icon(Icons.search)),
+                      labelText: 'Add Section', suffixIcon: Icon(Icons.search)),
                 ),
               ),
               const SizedBox(
@@ -104,21 +123,21 @@ class AddSectionMenuState extends State<AddSectionMenu> {
               Expanded(
                 child: _foundScenarios.isNotEmpty
                     ? ListView.builder(
-                  itemCount: _foundScenarios.length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(_foundScenarios[index],
-                        style: TextStyle(fontSize: 18)),
-                    onTap: () {
-                      _gameState.action(
-                          SetScenarioCommand(_foundScenarios[index], true));
-                      Navigator.pop(context);
-                    },
-                  ),
-                )
+                        itemCount: _foundScenarios.length,
+                        itemBuilder: (context, index) => ListTile(
+                          title: Text(_foundScenarios[index],
+                              style: TextStyle(fontSize: 18)),
+                          onTap: () {
+                            _gameState.action(SetScenarioCommand(
+                                _foundScenarios[index], true));
+                            Navigator.pop(context);
+                          },
+                        ),
+                      )
                     : const Text(
-                  'No results found',
-                  style: TextStyle(fontSize: 24),
-                ),
+                        'No results found',
+                        style: TextStyle(fontSize: 24),
+                      ),
               ),
               const SizedBox(
                 height: 30,

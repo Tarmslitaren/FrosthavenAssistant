@@ -4,7 +4,10 @@ import 'package:flutter/services.dart';
 
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/settings.dart';
+import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
+import 'numpad_menu.dart';
 
 class SelectScenarioMenu extends StatefulWidget {
   const SelectScenarioMenu({Key? key}) : super(key: key);
@@ -17,6 +20,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
+  TextEditingController _controller = TextEditingController();
 
   @override
   initState() {
@@ -134,6 +138,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
               Container(
                 margin: const EdgeInsets.only(left: 10, right: 10),
                 child:RawKeyboardListener( //needed to trigger onEditingComplete on enter
+                  //TODO: add this to the other menus
                     focusNode: FocusNode(),
                     onKey: (event) {
                       if (kDebugMode) {
@@ -152,6 +157,20 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                     },
                     child:  TextField(
                   onChanged: (value) => _runFilter(value),
+                  controller: _controller,
+                  onTap: () {
+                    _controller.clear();
+                    if (getIt<Settings>().softNumpadInput.value) {
+                      openDialog(
+                          context,
+                          NumpadMenu(
+                              controller: _controller,
+                              maxLength: 3,
+                              onChange: (String value) {
+                                _runFilter(value);
+                              }));
+                    }
+                  },
                   //TODO: test this on device
                   onEditingComplete: () {
                     if(_foundScenarios.isNotEmpty){

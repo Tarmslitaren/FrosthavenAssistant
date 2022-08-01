@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/line_builder.dart';
 import 'package:frosthaven_assistant/Layout/menus/main_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
@@ -10,6 +11,7 @@ import '../Model/character_class.dart';
 import '../Resource/color_matrices.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
+import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'main_list.dart';
@@ -60,7 +62,9 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                   _initTextFieldController
                       .value.text); //TODO: sanity check inputs
             }
+            break;
           }
+
         }
       }
     });
@@ -281,10 +285,12 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                         child: TextField(
 
                                             //scrollPadding: EdgeInsets.zero,
-                                            onTap: () => {
+                                            onTap: () {
                                                   //clear on enter focus
-                                                  _initTextFieldController
-                                                      .clear()
+                                                  _initTextFieldController.clear();
+                                                  if(getIt<Settings>().softNumpadInput.value){
+                                                    openDialog(context, NumpadMenu(controller: _initTextFieldController,maxLength: 2,));
+                                                  }
                                                 },
                                             onChanged: (String str) {
                                               //close soft keyboard on 2 chars entered
@@ -334,8 +340,9 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                             ),
                                             controller:
                                                 _initTextFieldController,
-                                            keyboardType:
-                                                TextInputType.number),
+                                            keyboardType: getIt<Settings>().softNumpadInput.value?
+                                                TextInputType.none :
+                                            TextInputType.number),
                                       );
                                     } else {
                                       if (isCharacter) {
