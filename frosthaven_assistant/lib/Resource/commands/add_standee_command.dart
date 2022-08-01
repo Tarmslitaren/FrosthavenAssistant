@@ -68,6 +68,31 @@ class AddStandeeCommand extends Command {
       }
     }
 
+    //make sure summons can not have same gfx and nr:
+    if(instance.standeeNr != 0) {
+      bool ok = false;
+      while (!ok) {
+        ok = true;
+        for (var item in monsterList!.value) {
+          if (item.standeeNr == instance.standeeNr) {
+            if (item.gfx == instance.gfx) {
+              //can not have same gfx and nr
+              instance = MonsterInstance.summon(
+                  instance.standeeNr+1,
+                  type,
+                  summon!.name,
+                  summon!.health,
+                  summon!.move,
+                  summon!.attack,
+                  summon!.range,
+                  summon!.gfx);
+              ok = false;
+            }
+          }
+        }
+      }
+    }
+
     newList.addAll(monsterList!.value);
     newList.add(instance);
 
