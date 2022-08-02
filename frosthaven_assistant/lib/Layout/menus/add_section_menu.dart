@@ -82,80 +82,83 @@ class AddSectionMenuState extends State<AddSectionMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        //color: Colors.transparent,
-        // shadowColor: Colors.transparent,
-        margin: const EdgeInsets.all(2),
-        child: Stack(children: [
-          Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 10, right: 10),
-                child: TextField(
-                  controller: _controller,
-                  keyboardType: getIt<Settings>().softNumpadInput.value
-                      ? TextInputType.none
-                      : TextInputType.text,
-                  onChanged: (value) => _runFilter(value),
-                  onTap: () {
-                    _controller.clear();
-                    if (getIt<Settings>().softNumpadInput.value) {
-                      openDialog(
-                          context,
-                          NumpadMenu(
-                              controller: _controller,
-                              maxLength: 3,
-                              onChange: (String value) {
-                                _runFilter(value);
-                              }));
-                    }
-                  },
-                  decoration: const InputDecoration(
-                      labelText: 'Add Section', suffixIcon: Icon(Icons.search)),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: _foundScenarios.isNotEmpty
-                    ? ListView.builder(
-                        itemCount: _foundScenarios.length,
-                        itemBuilder: (context, index) => ListTile(
-                          title: Text(_foundScenarios[index],
-                              style: TextStyle(fontSize: 18)),
-                          onTap: () {
-                            _gameState.action(SetScenarioCommand(
-                                _foundScenarios[index], true));
-                            Navigator.pop(context);
-                          },
-                        ),
-                      )
-                    : const Text(
-                        'No results found',
-                        style: TextStyle(fontSize: 24),
-                      ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-            ],
-          ),
-          Positioned(
-              width: 100,
-              right: 2,
-              bottom: 2,
-              child: TextButton(
-                  child: const Text(
-                    'Close',
-                    style: TextStyle(fontSize: 20),
+    return Container(
+        constraints: const BoxConstraints(maxWidth: 400),
+        child: Card(
+            //color: Colors.transparent,
+            // shadowColor: Colors.transparent,
+            margin: const EdgeInsets.all(2),
+            child: Stack(children: [
+              Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }))
-        ]));
+                  Container(
+                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    child: TextField(
+                      controller: _controller,
+                      keyboardType: getIt<Settings>().softNumpadInput.value
+                          ? TextInputType.none
+                          : TextInputType.text,
+                      onChanged: (value) => _runFilter(value),
+                      onTap: () {
+                        _controller.clear();
+                        if (getIt<Settings>().softNumpadInput.value) {
+                          openDialog(
+                              context,
+                              NumpadMenu(
+                                  controller: _controller,
+                                  maxLength: 3,
+                                  onChange: (String value) {
+                                    _runFilter(value);
+                                  }));
+                        }
+                      },
+                      decoration: const InputDecoration(
+                          labelText: 'Add Section',
+                          suffixIcon: Icon(Icons.search)),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(
+                    child: _foundScenarios.isNotEmpty
+                        ? ListView.builder(
+                            itemCount: _foundScenarios.length,
+                            itemBuilder: (context, index) => ListTile(
+                              title: Text(_foundScenarios[index],
+                                  style: TextStyle(fontSize: 18)),
+                              onTap: () {
+                                _gameState.action(SetScenarioCommand(
+                                    _foundScenarios[index], true));
+                                Navigator.pop(context);
+                              },
+                            ),
+                          )
+                        : const Text(
+                            'No results found',
+                            style: TextStyle(fontSize: 24),
+                          ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
+              Positioned(
+                  width: 100,
+                  right: 2,
+                  bottom: 2,
+                  child: TextButton(
+                      child: const Text(
+                        'Close',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }))
+            ])));
   }
 }

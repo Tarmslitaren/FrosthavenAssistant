@@ -173,6 +173,9 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           drawPile.length > 6
               ? buildRevealButton(drawPile.length, 7)
               : Container(),
+          drawPile.length > 7
+              ? buildRevealButton(drawPile.length, 8)
+              : Container(),
         ]),
       ])),
       Card(

@@ -93,7 +93,9 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
   Widget build(BuildContext context) {
     //edge insets if width not too small
 
-    return Card(
+    return Container(
+        constraints: const BoxConstraints(maxWidth: 400),
+        child: Card(
         //color: Colors.transparent,
         // shadowColor: Colors.transparent,
         margin: const EdgeInsets.all(2),
@@ -190,6 +192,6 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                   onPressed: () {
                     Navigator.pop(context);
                   }))
-        ]));
+        ])));
   }
 }

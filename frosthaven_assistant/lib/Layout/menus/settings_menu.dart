@@ -32,7 +32,9 @@ class SettingsMenuState extends State<SettingsMenu> {
                 height: 20,
               ),
               
-              Flexible(
+              Container(
+                constraints: const BoxConstraints(maxWidth: 300),
+
                 child: Column(
                   children: [
                     const Text("Settings", style: TextStyle(fontSize: 18),),

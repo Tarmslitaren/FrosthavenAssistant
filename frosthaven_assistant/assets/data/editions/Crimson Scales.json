@@ -4279,6 +4279,7 @@
       "gfx": "Terrorscale Drake",
       "deck": "Brood Mother",
       "edition": "Crimson Scales",
+      "hidden": true,
       "count": 1,
       "levels": [
         {

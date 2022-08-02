@@ -24,8 +24,10 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
   @override
   Widget build(BuildContext context) {
     List<Character> currentCharacters = GameMethods.getCurrentCharacters();
-    return Card(
-        child: Stack(children: [
+    return Container(
+        constraints: const BoxConstraints(maxWidth: 400),
+        child: Card(
+            child: Stack(children: [
           Column(
             children: [
               const SizedBox(
@@ -51,11 +53,10 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                     iconColor: currentCharacters[index].characterClass.color,
                     title: Text(currentCharacters[index].characterState.display,
                         style: TextStyle(fontSize: 18)),
-                    trailing: Text("(${currentCharacters[index].characterClass.edition})",
-                        style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey
-                        )),
+                    trailing: Text(
+                        "(${currentCharacters[index].characterClass.edition})",
+                        style:
+                            const TextStyle(fontSize: 14, color: Colors.grey)),
                     onTap: () {
                       setState(() {
                         _gameState.action(RemoveCharacterCommand(
@@ -84,6 +85,6 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                   onPressed: () {
                     Navigator.pop(context);
                   }))
-        ]));
+        ])));
   }
 }

@@ -29,9 +29,9 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
     super.initState();
   }
 
-  int? findNrFromScenarioName(String scenario){
+  int? findNrFromScenarioName(String scenario) {
     String nr = scenario.substring(1);
-    for(int i = 0; i < nr.length; i++){
+    for (int i = 0; i < nr.length; i++) {
       if (nr[i] == ' ') {
         nr = nr.substring(0, i);
         int? number = int.tryParse(nr);
@@ -49,10 +49,9 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
         .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
         .toList();
     _foundScenarios.sort((a, b) {
-
       int? aNr = findNrFromScenarioName(a);
       int? bNr = findNrFromScenarioName(b);
-      if(aNr != null && bNr != null){
+      if (aNr != null && bNr != null) {
         return aNr.compareTo(bNr);
       }
       return a.compareTo(b);
@@ -85,144 +84,147 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        //color: Colors.transparent,
-        // shadowColor: Colors.transparent,
-        margin: const EdgeInsets.all(2),
-        child: Stack(children: [
-          Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Column(children: [
-                const Text("Set Scenario",  style: TextStyle(fontSize: 18)),
-                ExpansionTile(
-                    title: Text("Current Campaign: ${_gameState.currentCampaign.value}"),
-                  children: [
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          setCampaign("JotL");
-                        });
-                      },
-                      child: Text("Jaws of the Lion"),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          setCampaign("Gloomhaven");
-                        });
-                      },
-                      child: Text("Gloomhaven"),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          setCampaign("Forgotten Circles");
-                        });
-                      },
-                      child: Text("Forgotten Circles"),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        setState(() {
-                          setCampaign("Crimson Scales");
-                        });
-                      },
-                      child: Text("Crimson Scales"),
-                    ),
-                  ],
-                ),
-              ]),
-              Container(
-                margin: const EdgeInsets.only(left: 10, right: 10),
-                child:RawKeyboardListener( //needed to trigger onEditingComplete on enter
-                  //TODO: add this to the other menus
-                    focusNode: FocusNode(),
-                    onKey: (event) {
-                      if (kDebugMode) {
-                        print(event.data.logicalKey.keyId);
-                      }
-                       if (event.runtimeType == RawKeyDownEvent &&
-                          (event.logicalKey.keyId == 13)) {
-                         if(_foundScenarios.isNotEmpty){
-                           //_gameState.action(
-                           //    SetScenarioCommand(_foundScenarios[0], false));
-                           //Navigator.pop(context);
-                         }
-                         //Navigator.pop(context, this._textController.text);
-                       }
-
-                    },
-                    child:  TextField(
-                  onChanged: (value) => _runFilter(value),
-                  controller: _controller,
-                  onTap: () {
-                    _controller.clear();
-                    if (getIt<Settings>().softNumpadInput.value) {
-                      openDialog(
-                          context,
-                          NumpadMenu(
-                              controller: _controller,
-                              maxLength: 3,
-                              onChange: (String value) {
-                                _runFilter(value);
-                              }));
-                    }
-                  },
-                  //TODO: test this on device
-                  onEditingComplete: () {
-                    if(_foundScenarios.isNotEmpty){
-                      _gameState.action(
-                          SetScenarioCommand(_foundScenarios[0], false));
-                      Navigator.pop(context);
-                    }
-                  },
-                  decoration: const InputDecoration(
-                      labelText: 'Set Scenario',
-                      suffixIcon: Icon(Icons.search)),
-                )),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: _foundScenarios.isNotEmpty
-                    ? ListView.builder(
-                        itemCount: _foundScenarios.length,
-                        itemBuilder: (context, index) => ListTile(
-                          title: Text(_foundScenarios[index],
-                              style: TextStyle(fontSize: 18)),
-                          onTap: () {
-                            _gameState.action(
-                                SetScenarioCommand(_foundScenarios[index], false));
-                            Navigator.pop(context);
-                          },
-                        ),
-                      )
-                    : const Text(
-                        'No results found',
-                        style: TextStyle(fontSize: 24),
-                      ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-            ],
-          ),
-          Positioned(
-              width: 100,
-              right: 2,
-              bottom: 2,
-              child: TextButton(
-                  child: const Text(
-                    'Close',
-                    style: TextStyle(fontSize: 20),
+    return Container(
+        constraints: const BoxConstraints(maxWidth: 400),
+        child: Card(
+            //color: Colors.transparent,
+            // shadowColor: Colors.transparent,
+            margin: const EdgeInsets.all(2),
+            child: Stack(children: [
+              Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }))
-        ]));
+                  Column(children: [
+                    const Text("Set Scenario", style: TextStyle(fontSize: 18)),
+                    ExpansionTile(
+                      title: Text(
+                          "Current Campaign: ${_gameState.currentCampaign.value}"),
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              setCampaign("JotL");
+                            });
+                          },
+                          child: Text("Jaws of the Lion"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              setCampaign("Gloomhaven");
+                            });
+                          },
+                          child: Text("Gloomhaven"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              setCampaign("Forgotten Circles");
+                            });
+                          },
+                          child: Text("Forgotten Circles"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              setCampaign("Crimson Scales");
+                            });
+                          },
+                          child: Text("Crimson Scales"),
+                        ),
+                      ],
+                    ),
+                  ]),
+                  Container(
+                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    child: RawKeyboardListener(
+                        //needed to trigger onEditingComplete on enter
+                        //TODO: add this to the other menus
+                        focusNode: FocusNode(),
+                        onKey: (event) {
+                          if (kDebugMode) {
+                            print(event.data.logicalKey.keyId);
+                          }
+                          if (event.runtimeType == RawKeyDownEvent &&
+                              (event.logicalKey.keyId == 13)) {
+                            if (_foundScenarios.isNotEmpty) {
+                              //_gameState.action(
+                              //    SetScenarioCommand(_foundScenarios[0], false));
+                              //Navigator.pop(context);
+                            }
+                            //Navigator.pop(context, this._textController.text);
+                          }
+                        },
+                        child: TextField(
+                          onChanged: (value) => _runFilter(value),
+                          controller: _controller,
+                          onTap: () {
+                            _controller.clear();
+                            if (getIt<Settings>().softNumpadInput.value) {
+                              openDialog(
+                                  context,
+                                  NumpadMenu(
+                                      controller: _controller,
+                                      maxLength: 3,
+                                      onChange: (String value) {
+                                        _runFilter(value);
+                                      }));
+                            }
+                          },
+                          //TODO: test this on device
+                          onEditingComplete: () {
+                            if (_foundScenarios.isNotEmpty) {
+                              _gameState.action(SetScenarioCommand(
+                                  _foundScenarios[0], false));
+                              Navigator.pop(context);
+                            }
+                          },
+                          decoration: const InputDecoration(
+                              labelText: 'Set Scenario',
+                              suffixIcon: Icon(Icons.search)),
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(
+                    child: _foundScenarios.isNotEmpty
+                        ? ListView.builder(
+                            itemCount: _foundScenarios.length,
+                            itemBuilder: (context, index) => ListTile(
+                              title: Text(_foundScenarios[index],
+                                  style: TextStyle(fontSize: 18)),
+                              onTap: () {
+                                _gameState.action(SetScenarioCommand(
+                                    _foundScenarios[index], false));
+                                Navigator.pop(context);
+                              },
+                            ),
+                          )
+                        : const Text(
+                            'No results found',
+                            style: TextStyle(fontSize: 24),
+                          ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
+              Positioned(
+                  width: 100,
+                  right: 2,
+                  bottom: 2,
+                  child: TextButton(
+                      child: const Text(
+                        'Close',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }))
+            ])));
   }
 }

@@ -25,8 +25,10 @@ class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
   @override
   Widget build(BuildContext context) {
     List<Monster> currentMonsters = GameMethods.getCurrentMonsters();
-    return Card(
-        child: Stack(children: [
+    return Container(
+        constraints: const BoxConstraints(maxWidth: 450),
+        child: Card(
+            child: Stack(children: [
           Column(
             children: [
               const SizedBox(
@@ -35,8 +37,7 @@ class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
               ListTile(
                 title: const Text("Remove All", style: TextStyle(fontSize: 18)),
                 onTap: () {
-                  _gameState
-                      .action(RemoveMonsterCommand(currentMonsters)); //
+                  _gameState.action(RemoveMonsterCommand(currentMonsters)); //
                   Navigator.pop(context);
                 },
               ),
@@ -53,16 +54,13 @@ class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                     title: Text(currentMonsters[index].type.display,
                         style: const TextStyle(fontSize: 18)),
                     trailing: Text("(${currentMonsters[index].type.edition})",
-                        style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey
-                        )),
+                        style:
+                            const TextStyle(fontSize: 14, color: Colors.grey)),
                     onTap: () {
                       setState(() {
-                        _gameState.action(RemoveMonsterCommand(
-                            [currentMonsters[index]])); //
+                        _gameState.action(
+                            RemoveMonsterCommand([currentMonsters[index]])); //
                       });
-
 
                       //Navigator.pop(context);
                     },
@@ -86,6 +84,6 @@ class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                   onPressed: () {
                     Navigator.pop(context);
                   }))
-        ]));
+        ])));
   }
 }
