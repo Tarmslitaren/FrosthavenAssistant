@@ -368,7 +368,8 @@ class _MainListState extends State<MainList> {
                 interactive: !ignoreScroll,
                 controller: scrollController,
                 child: ReorderableWrap(
-                  padding: EdgeInsets.only(bottom: 30 * getIt<Settings>().userScalingBars.value),
+                  //Todo: double this when adding allies deck
+                  padding: EdgeInsets.only(bottom: 60 * getIt<Settings>().userScalingBars.value),
 
                   runAlignment: WrapAlignment.start,
                   scrollAnimationDuration: const Duration(milliseconds: 400),

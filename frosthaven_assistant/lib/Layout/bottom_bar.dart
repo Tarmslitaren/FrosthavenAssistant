@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 
 import '../Resource/game_methods.dart';
 import '../Resource/game_state.dart';
+import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
@@ -24,8 +25,16 @@ Widget createLevelWidget(BuildContext context) {
       //backgroundColor: Colors.transparent.withAlpha(100),
       fontSize: fontHeight,
       shadows: [
-        Shadow(offset: Offset(1.0 * settings.userScalingBars.value, 1.0 * settings.userScalingBars.value), blurRadius: 3.0 * settings.userScalingBars.value, color: Colors.black),
-        Shadow(offset: Offset(1.0 * settings.userScalingBars.value, 1.0 * settings.userScalingBars.value), blurRadius: 8.0 * settings.userScalingBars.value, color: Colors.black),
+        Shadow(
+            offset: Offset(1.0 * settings.userScalingBars.value,
+                1.0 * settings.userScalingBars.value),
+            blurRadius: 3.0 * settings.userScalingBars.value,
+            color: Colors.black),
+        Shadow(
+            offset: Offset(1.0 * settings.userScalingBars.value,
+                1.0 * settings.userScalingBars.value),
+            blurRadius: 8.0 * settings.userScalingBars.value,
+            color: Colors.black),
         //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
       ]);
 
@@ -74,7 +83,8 @@ Widget createLevelWidget(BuildContext context) {
                       style: textStyle,
                       child: Image(
                         height: fontHeight,
-                        image: const AssetImage("assets/images/psd/traps-fh.png"),
+                        image:
+                            const AssetImage("assets/images/psd/traps-fh.png"),
                       )),
                   TextSpan(
                     text: ": ${GameMethods.getTrapValue()} ",
@@ -85,7 +95,8 @@ Widget createLevelWidget(BuildContext context) {
                       style: textStyle,
                       child: Image(
                         height: fontHeight,
-                        image: const AssetImage("assets/images/psd/hazard-fh.png"),
+                        image:
+                            const AssetImage("assets/images/psd/hazard-fh.png"),
                       )),
                   TextSpan(
                     text: ": ${GameMethods.getHazardValue()} ",
@@ -107,7 +118,8 @@ Widget createLevelWidget(BuildContext context) {
                       style: textStyle,
                       child: Image(
                         height: fontHeight,
-                        image: const AssetImage("assets/images/psd/coins-fh.png"),
+                        image:
+                            const AssetImage("assets/images/psd/coins-fh.png"),
                       )),
                   TextSpan(
                     text: " : x${GameMethods.getCoinValue()}",
@@ -160,7 +172,9 @@ Widget createBottomBar(BuildContext context) {
                             children: [
                               const DrawButton(),
                               createLevelWidget(context),
-                              const ModifierDeckWidget() //TODO: move this above the bottom bar in case it doesn't fit (narrow mobile screens)
+                              modifiersFitOnBar(context)
+                                  ? const ModifierDeckWidget()
+                                  : Container()
                             ],
                           ));
                     }),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/top_bar.dart';
 
+import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 import 'bottom_bar.dart';
@@ -19,7 +21,17 @@ Widget createMainScaffold(BuildContext context) {
     bottomNavigationBar: createBottomBar(context),
     appBar: createTopBar(),
     drawer: createMainMenu(context),
-    body: const MainList(),
+    body: Stack(
+      children: [
+        const MainList(),
+        modifiersFitOnBar(context)? Container():
+        const Positioned(
+          bottom: 4,
+            right: 0,
+            child: ModifierDeckWidget())
+      ],
+    )
+    ,
     //floatingActionButton: const ModifierDeckWidget()
   ));});
 }

@@ -26,6 +26,17 @@ double getMainListMargin(BuildContext context) {
   return 0.0;
 }
 
+bool modifiersFitOnBar(BuildContext context){
+  Settings settings = getIt<Settings>();
+  double screenWidth = MediaQuery.of(context).size.width;
+  double referenceMinWidthWithModifiersOnBar = 370;
+  double barSize = screenWidth/settings.userScalingBars.value;
+  if(barSize < referenceMinWidthWithModifiersOnBar){
+    return false;
+  }
+  return true;
+}
+
 double getMainListWidth(BuildContext context) { //wrong
   var screenSize = MediaQuery.of(context).size;
   var width = min(screenSize.width, maxWidth);
