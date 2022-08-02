@@ -154,7 +154,8 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                                 if(_foundCharacters[index].name == "Objective" || _foundCharacters[index].name == "Escort") {
                                   //add a number to name if already exists
                                   for (var item in _gameState.currentList) {
-                                    if (item.id == _foundCharacters[index].name ){
+                                    if(item is Character &&
+                                        item.characterClass.name == _foundCharacters[index].name ){
                                       count++;
                                     }
                                   }

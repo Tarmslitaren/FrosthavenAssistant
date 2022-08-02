@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -493,13 +491,13 @@ class LineBuilder {
     var eliteSmallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: 11 * 0.8 * scale,
+        fontSize: 10 * 0.8 * scale,
         height: 1,
         shadows: [shadow]);
     var eliteMidStyle = TextStyle(
         fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: 12.7 * 0.8 * scale,
+        fontSize: 11 * 0.8 * scale,
         height: 1.1,
         shadows: [shadow]);
 

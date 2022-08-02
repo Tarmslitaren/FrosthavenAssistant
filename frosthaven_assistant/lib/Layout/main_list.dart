@@ -352,13 +352,15 @@ class _MainListState extends State<MainList> {
           int itemsPerColumn = getItemsCanFitOneColumn(itemHeights); //no good
           bool ignoreScroll = false;
           if (canFit2Columns &&
-              itemHeights.last < 2 * MediaQuery.of(context).size.height - 160) {
+              itemHeights.last < 2 * MediaQuery.of(context).size.height - 160 -200) { //TODO: deal with hardcoded values (this represents top + bottom bar height * 2 - 200 for good measure
             ignoreScroll = true;
           }
+
           return Container(
               alignment: Alignment.topCenter,
               width: MediaQuery.of(context).size.width,
               child: Scrollbar(
+                interactive: !ignoreScroll,
                 controller: scrollController,
                 child: ReorderableWrap(
                   padding: EdgeInsets.only(bottom: 30),

@@ -41,6 +41,6 @@ class RemoveMonsterCommand extends Command {
 
   @override
   String toString() {
-    return "Remove ${_monsters[0].type.display}";
+    return "Remove ${names[0].type.display}";
   }
 }

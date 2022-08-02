@@ -80,7 +80,6 @@ class CharacterState extends Figure{
 
 class ListItemData {
   late String id;
-  //final double? fixedHeight;
 }
 
 class Character extends ListItemData{
@@ -89,7 +88,6 @@ class Character extends ListItemData{
   }
   late final CharacterState characterState;
   late final CharacterClass characterClass;
-  //late ListItemState state = ListItemState.chooseInitiative;
   void nextRound(){
     if (characterClass.name != "Objective" && characterClass.name != "Escort") {
       characterState.initiative = 0;
@@ -578,9 +576,6 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
 
   //modifierDeck
   ModifierDeck modifierDeck = ModifierDeck();
-
-  //GameState? savedState; //load from file, save to file on interval/ app in background? or after any operation?
-  //actually make a list of saved states and use for the undo/redo feature?
 
   @override
   String toString() {
