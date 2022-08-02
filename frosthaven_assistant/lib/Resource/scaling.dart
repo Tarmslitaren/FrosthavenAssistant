@@ -1,9 +1,15 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
-const double maxWidth = 740.0; //todo; scale this from settings
+double maxWidth = 740.0 * getIt<Settings>().userScalingMainList.value;
 const double referenceWidth = 412.0;
+
+void setMaxWidth(){
+  maxWidth = 740.0 * getIt<Settings>().userScalingMainList.value;
+}
 
 double getScaleByReference(BuildContext context) {
   return _scaleByReference(context, referenceWidth, maxWidth);

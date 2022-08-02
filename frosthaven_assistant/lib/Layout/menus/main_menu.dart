@@ -1,23 +1,18 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_section_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/settings_menu.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-import 'package:search_choices/search_choices.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../../Model/campaign.dart';
 import '../../Resource/ui_utils.dart';
-import '../bottom_bar.dart';
 import 'add_monster_menu.dart';
 
 Future<void> launchUrlInBrowser(Uri url) async {
@@ -30,20 +25,20 @@ Future<void> launchUrlInBrowser(Uri url) async {
 }
 
 Drawer createMainMenu(BuildContext context) {
-  GameState _gameState = getIt<GameState>();
+  GameState gameState = getIt<GameState>();
 
   return Drawer(
     child: ValueListenableBuilder<int>(
-      valueListenable: _gameState.commandIndex,
+      valueListenable: gameState.commandIndex,
       builder: (context, value, child) {
 
         String undoText = "Undo";
-        if (_gameState.commandIndex.value >= 0){
-          undoText += ": ${_gameState.commands[_gameState.commandIndex.value].toString()}";
+        if (gameState.commandIndex.value >= 0){
+          undoText += ": ${gameState.commands[gameState.commandIndex.value].toString()}";
         }
         String redoText = "Redo";
-        if (_gameState.commandIndex.value < _gameState.commands.length-1) {
-          redoText += ": ${_gameState.commands[_gameState.commandIndex.value+1].toString()}";
+        if (gameState.commandIndex.value < gameState.commands.length-1) {
+          redoText += ": ${gameState.commands[gameState.commandIndex.value+1].toString()}";
         }
 
         return ListView(
@@ -66,22 +61,22 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(undoText ),
-                enabled: _gameState.commandIndex.value >= 0,
+                enabled: gameState.commandIndex.value >= 0,
                 onTap: () {
-                  _gameState.undo();
+                  gameState.undo();
                   //Navigator.pop(context);
                 },
               ),
               ListTile(
                 title: Text(redoText),
-                enabled: _gameState.commandIndex.value < _gameState.commands.length-1,
+                enabled: gameState.commandIndex.value < gameState.commands.length-1,
                 onTap: () {
-                  _gameState.redo();
+                  gameState.redo();
                   //Navigator.pop(context);
                 },
               ),
               const Divider(),
-              _gameState.modelData.value == null
+              gameState.modelData.value == null
                   ? Container()
                   : ListTile(
                       title: const Text('Set Scenario'),
@@ -150,7 +145,7 @@ Drawer createMainMenu(BuildContext context) {
                 enabled: true,
                 onTap: () {
                   Navigator.pop(context);
-                  _gameState.save();
+                  gameState.save();
                   windowManager.close();
                 },
               ): Container(),

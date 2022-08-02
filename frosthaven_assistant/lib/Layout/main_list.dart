@@ -194,7 +194,11 @@ class _MainListState extends State<MainList> {
               child: ValueListenableBuilder<Map<String, CampaignModel>>(
                   valueListenable: _gameState.modelData,
                   builder: (context, value, child) {
-                    return buildList();
+                    return ValueListenableBuilder<double>(
+                        valueListenable: getIt<Settings>().userScalingMainList,
+                        builder: (context, value, child) {
+                          return buildList();
+                        });
                   }));
         });
   }
@@ -345,14 +349,15 @@ class _MainListState extends State<MainList> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.updateList,
         builder: (context, value, child) {
-          double scale = getScaleByReference(context);
           bool canFit2Columns = MediaQuery.of(context).size.width >=
               getMainListWidth(context) * 2;
           List<double> itemHeights = getItemHeights(context);
           int itemsPerColumn = getItemsCanFitOneColumn(itemHeights); //no good
           bool ignoreScroll = false;
           if (canFit2Columns &&
-              itemHeights.last < 2 * MediaQuery.of(context).size.height - 160 -200) { //TODO: deal with hardcoded values (this represents top + bottom bar height * 2 - 200 for good measure
+              itemHeights.last <
+                  2 * MediaQuery.of(context).size.height - 160 * getIt<Settings>().userScalingBars.value - 200) {
+            //TODO: 200 is a feely hack, hard to say why it is needed
             ignoreScroll = true;
           }
 
@@ -363,11 +368,11 @@ class _MainListState extends State<MainList> {
                 interactive: !ignoreScroll,
                 controller: scrollController,
                 child: ReorderableWrap(
-                  padding: EdgeInsets.only(bottom: 30),
+                  padding: EdgeInsets.only(bottom: 30 * getIt<Settings>().userScalingBars.value),
 
                   runAlignment: WrapAlignment.start,
-                  scrollAnimationDuration: Duration(milliseconds: 400),
-                  reorderAnimationDuration: Duration(milliseconds: 400),
+                  scrollAnimationDuration: const Duration(milliseconds: 400),
+                  reorderAnimationDuration: const Duration(milliseconds: 400),
                   maxMainAxisCount: itemsPerColumn,
                   ignorePrimaryScrollController: ignoreScroll,
                   //this makes it wrap at screen height. turn on if can fit 2 columns and can fit all items in screen

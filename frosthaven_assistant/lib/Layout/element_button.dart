@@ -6,19 +6,19 @@ import '../Resource/commands/imbue_element_command.dart';
 import '../Resource/commands/use_element_command.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
+import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 
 class ElementButton extends StatefulWidget {
   final String icon;
-  final double width;
   final Color color;
   final Elements element;
+  final double width = 40;
   final double borderWidth = 2;
 
   const ElementButton(
       {Key? key,
       required this.icon,
-      this.width = 40,
       required this.color,
       required this.element})
       : super(key: key);
@@ -32,6 +32,7 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
   // Define the various properties with default values. Update these properties
   // when the user taps a FloatingActionButton.
   final GameState _gameState = getIt<GameState>();
+  final Settings settings = getIt<Settings>();
   late double _height;
   late Color _color;
   late BorderRadiusGeometry _borderRadius;
@@ -39,10 +40,10 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
   @override
   void initState() {
     super.initState();
-    _height = widget.width;
+    _height = widget.width * settings.userScalingBars.value;
     _color = Colors.transparent;
     _borderRadius =
-        BorderRadius.all(Radius.circular(widget.width - widget.borderWidth));
+        BorderRadius.all(Radius.circular(widget.width * settings.userScalingBars.value - widget.borderWidth * settings.userScalingBars.value * 2));
 
     //to load save state
     _gameState.elementState.addListener(() {
@@ -68,24 +69,24 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
 
   void setHalf(){
     _color = widget.color;
-    _height = widget.width / 2;
+    _height = widget.width * settings.userScalingBars.value / 2;
     _borderRadius = BorderRadius.only(
         bottomLeft:
-        Radius.circular(widget.width / 2 - widget.borderWidth),
+        Radius.circular(widget.width * settings.userScalingBars.value / 2 - widget.borderWidth * settings.userScalingBars.value),
         bottomRight:
-        Radius.circular(widget.width / 2 - widget.borderWidth));
+        Radius.circular(widget.width * settings.userScalingBars.value / 2 - widget.borderWidth* settings.userScalingBars.value));
   }
 
   void setFull(){
     _color = widget.color;
-    _height = widget.width;
+    _height = widget.width * settings.userScalingBars.value;
     _borderRadius = BorderRadius.all(
-        Radius.circular(widget.width - widget.borderWidth));
+        Radius.circular(widget.width  * settings.userScalingBars.value - widget.borderWidth * settings.userScalingBars.value * 2));
   }
 
   void setInert(){
     _color = Colors.transparent;
-    _height = 4;
+    _height = 4 * settings.userScalingBars.value;
     _borderRadius = BorderRadius.zero;
   }
 
@@ -127,7 +128,9 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Align(
+            Container(
+              padding: EdgeInsets.only(bottom: 2 * settings.userScalingBars.value),
+                child: Align(
               alignment: Alignment.bottomCenter,
               child: ValueListenableBuilder<int>(
                   valueListenable: _gameState.commandIndex,
@@ -144,8 +147,8 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
 
                     return AnimatedContainer(
                       // Use the properties stored in the State class.
-                      width: widget.width - widget.borderWidth,
-                      height: _height - widget.borderWidth,
+                      width: widget.width * settings.userScalingBars.value - widget.borderWidth * settings.userScalingBars.value * 2,
+                      height: _height - widget.borderWidth * settings.userScalingBars.value * 2,
                       decoration: BoxDecoration(
                           shape: BoxShape.rectangle,
                           color: _color,
@@ -166,12 +169,12 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
                       curve: Curves.fastLinearToSlowEaseIn,
                     );
                   }),
-            ),
+            )),
             Image(
               //fit: BoxFit.contain,
-              height: widget.width * 0.8,
+              height: widget.width * settings.userScalingBars.value * 0.75,
               image: AssetImage(widget.icon),
-              width: widget.width * 0.8,
+              width: widget.width * settings.userScalingBars.value * 0.75,
             ),
           ],
         ));

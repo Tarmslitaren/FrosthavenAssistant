@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/enums.dart';
@@ -22,7 +23,7 @@ class ModifierCardWidget extends StatefulWidget {
 
   static Widget buildFront(ModifierCard card, double scale) {
     return Container(
-      width: 58.6666 * scale,
+      width: 58.6666 * scale ,
       height: 39*scale,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0* scale),
@@ -77,8 +78,9 @@ class ModifierCardWidgetState extends State<ModifierCardWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
+    Settings settings = getIt<Settings>();
     return  widget.revealed.value
-                ? ModifierCardWidget.buildFront(widget.card, 1)
-                : ModifierCardWidget.buildRear(1);
+                ? ModifierCardWidget.buildFront(widget.card,  settings.userScalingBars.value)
+                : ModifierCardWidget.buildRear(settings.userScalingBars.value);
   }
 }

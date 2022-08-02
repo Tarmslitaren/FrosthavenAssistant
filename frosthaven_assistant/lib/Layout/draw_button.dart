@@ -5,14 +5,12 @@ import '../Resource/commands/next_round_command.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/game_state.dart';
+import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 
 class DrawButton extends StatefulWidget {
-  final double height;
-
   const DrawButton({
     Key? key,
-    this.height = 60,
   }) : super(key: key);
 
   @override
@@ -35,7 +33,8 @@ class _DrawButtonState extends State<DrawButton> {
         //show toast
         //TODO: show other message if no characters or no monsters
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Player Initiative numbers must be set (under the initiative marker to the right of the character symbol)"),
+          content: Text(
+              "Player Initiative numbers must be set (under the initiative marker to the right of the character symbol)"),
         ));
       }
     } else {
@@ -49,59 +48,69 @@ class _DrawButtonState extends State<DrawButton> {
     //has a turn counter
     //and a timer
     //2 states
-    return Stack(
-        alignment: Alignment.centerLeft, children: [
-      ValueListenableBuilder<RoundState>(
-        valueListenable: _gameState.roundState,
+    Settings settings = getIt<Settings>();
+    return ValueListenableBuilder<double>(
+        valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
-          return
-          Container(
-            margin: EdgeInsets.zero,
-            height: 60,
-            width: 60,
-            child:
-              TextButton(
-                style: TextButton.styleFrom(
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    //minimumSize: Size(50, 30),
-                    //tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    alignment: Alignment.center
-                     ),
-
-              onPressed: onPressed,
-              child: Text(
-                _gameState.roundState.value == RoundState.chooseInitiative
-                    ? "Draw"
-                    : " Next Round",
-                style: const TextStyle(
-                  height: 0.8,
-                  fontSize: 16,
-                  color: Colors.white,
-                  shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-                ),
-              )));
-        },
-      ),
-      ValueListenableBuilder<int>(
-        valueListenable: _gameState.round,
-        builder: (context, value, child) {
-          return
-            Positioned(
-              bottom: 2,
-                right: 5,
-               // width: 60,
-                child:
-                Text(
-                  _gameState.round.value.toString(),
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                    shadows: [Shadow(offset: Offset(1, 1), color: Colors.black)],
-
-                  )
-                    ));
-        },
-      )
-    ]);
+          return Stack(alignment: Alignment.centerLeft, children: [
+            ValueListenableBuilder<RoundState>(
+              valueListenable: _gameState.roundState,
+              builder: (context, value, child) {
+                return Container(
+                    margin: EdgeInsets.zero,
+                    height: 40 * settings.userScalingBars.value,
+                    width: 60 * settings.userScalingBars.value,
+                    child: TextButton(
+                        style: TextButton.styleFrom(
+                            padding: EdgeInsets.only(
+                                left: 10 * settings.userScalingBars.value,
+                                right: 10 * settings.userScalingBars.value),
+                            //minimumSize: Size(50, 30),
+                            //tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            alignment: Alignment.center),
+                        onPressed: onPressed,
+                        child: Text(
+                          _gameState.roundState.value ==
+                                  RoundState.chooseInitiative
+                              ? "Draw"
+                              : " Next Round",
+                          style: TextStyle(
+                            height: 0.8,
+                            fontSize: 16 * settings.userScalingBars.value,
+                            color: Colors.white,
+                            shadows: [
+                              Shadow(
+                                  offset: Offset(
+                                      1 * settings.userScalingBars.value,
+                                      1 * settings.userScalingBars.value),
+                                  color: Colors.black)
+                            ],
+                          ),
+                        )));
+              },
+            ),
+            ValueListenableBuilder<int>(
+              valueListenable: _gameState.round,
+              builder: (context, value, child) {
+                return Positioned(
+                    bottom: 2 * settings.userScalingBars.value,
+                    right: 5 * settings.userScalingBars.value,
+                    // width: 60,
+                    child: Text(_gameState.round.value.toString(),
+                        style: TextStyle(
+                          fontSize: 14 * settings.userScalingBars.value,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                                offset: Offset(
+                                    1 * settings.userScalingBars.value,
+                                    1 * settings.userScalingBars.value),
+                                color: Colors.black)
+                          ],
+                        )));
+              },
+            )
+          ]);
+        });
   }
 }

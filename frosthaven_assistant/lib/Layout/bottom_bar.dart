@@ -12,10 +12,11 @@ import 'modifier_deck_widget.dart';
 
 Widget createLevelWidget(BuildContext context) {
   GameState _gameState = getIt<GameState>();
+  Settings settings = getIt<Settings>();
 
-  const double fontHeight = 14;
+  double fontHeight = 14 * settings.userScalingBars.value;
 
-  var textStyle = const TextStyle(
+  var textStyle = TextStyle(
       //fontFamily: 'Majalla',
       color: Colors.white,
       overflow: TextOverflow.fade,
@@ -23,8 +24,8 @@ Widget createLevelWidget(BuildContext context) {
       //backgroundColor: Colors.transparent.withAlpha(100),
       fontSize: fontHeight,
       shadows: [
-        Shadow(offset: Offset(1.0, 1.0), blurRadius: 3.0, color: Colors.black),
-        Shadow(offset: Offset(1.0, 1.0), blurRadius: 8.0, color: Colors.black),
+        Shadow(offset: Offset(1.0 * settings.userScalingBars.value, 1.0 * settings.userScalingBars.value), blurRadius: 3.0 * settings.userScalingBars.value, color: Colors.black),
+        Shadow(offset: Offset(1.0 * settings.userScalingBars.value, 1.0 * settings.userScalingBars.value), blurRadius: 8.0 * settings.userScalingBars.value, color: Colors.black),
         //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
       ]);
 
@@ -43,7 +44,7 @@ Widget createLevelWidget(BuildContext context) {
             valueListenable: _gameState.scenario,
             builder: (context, value, child) {
               return Container(
-                  width: 174,
+                  width: 174 * settings.userScalingBars.value,
                   child: Text(
                     overflow: TextOverflow.ellipsis,
                     _gameState.scenario.value,
@@ -60,7 +61,7 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child: const Image(
+                      child: Image(
                         height: fontHeight * 0.6,
                         image: AssetImage("assets/images/psd/level.png"),
                       )),
@@ -71,9 +72,9 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child: const Image(
+                      child: Image(
                         height: fontHeight,
-                        image: AssetImage("assets/images/psd/traps-fh.png"),
+                        image: const AssetImage("assets/images/psd/traps-fh.png"),
                       )),
                   TextSpan(
                     text: ": ${GameMethods.getTrapValue()} ",
@@ -82,9 +83,9 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child: const Image(
+                      child: Image(
                         height: fontHeight,
-                        image: AssetImage("assets/images/psd/hazard-fh.png"),
+                        image: const AssetImage("assets/images/psd/hazard-fh.png"),
                       )),
                   TextSpan(
                     text: ": ${GameMethods.getHazardValue()} ",
@@ -93,9 +94,9 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child: const Image(
+                      child: Image(
                         height: fontHeight * 0.9,
-                        image: AssetImage("assets/images/psd/xp.png"),
+                        image: const AssetImage("assets/images/psd/xp.png"),
                       )),
                   TextSpan(
                     text: ": +${GameMethods.getXPValue()} ",
@@ -104,9 +105,9 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child: const Image(
+                      child: Image(
                         height: fontHeight,
-                        image: AssetImage("assets/images/psd/coins-fh.png"),
+                        image: const AssetImage("assets/images/psd/coins-fh.png"),
                       )),
                   TextSpan(
                     text: " : x${GameMethods.getCoinValue()}",
@@ -125,41 +126,46 @@ Widget createLevelWidget(BuildContext context) {
   );
 }
 
-//TODO: scale: minimum 40 height but scale up
 Widget createBottomBar(BuildContext context) {
-  GameState _gameState = getIt<GameState>();
-  return Container(
-      height: 40,
-      child: Stack(children: [
-        Positioned(
-            bottom: 0,
-            left: 0,
-            child: ValueListenableBuilder<bool>(
-                valueListenable: getIt<Settings>().darkMode,
-            builder: (context, value, child) {
-              return Container(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    image: DecorationImage(
-                        //colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.85), BlendMode.dstATop),
-                        image: AssetImage(getIt<Settings>().darkMode.value
-                            ? 'assets/images/psd/gloomhaven-bar.png'
-                            : 'assets/images/psd/frosthaven-bar.png'),
-                        //fit: BoxFit.fitHeight,
-                        repeat: ImageRepeat.repeat),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const DrawButton(),
-                      createLevelWidget(context),
-                      ModifierDeckWidget()
-                    ],
-                  ));
-            }),
-        )
-        //const ModifierDeckWidget(),
-      ]));
+  Settings settings = getIt<Settings>();
+  return ValueListenableBuilder<double>(
+      valueListenable: settings.userScalingBars,
+      builder: (context, value, child) {
+        return Container(
+            height: 40 * settings.userScalingBars.value,
+            child: Stack(children: [
+              Positioned(
+                bottom: 0,
+                left: 0,
+                child: ValueListenableBuilder<bool>(
+                    valueListenable: getIt<Settings>().darkMode,
+                    builder: (context, value, child) {
+                      return Container(
+                          height: 40 * settings.userScalingBars.value,
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                            color: Colors.transparent,
+                            image: DecorationImage(
+                                //colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.85), BlendMode.dstATop),
+                                image: AssetImage(getIt<Settings>()
+                                        .darkMode
+                                        .value
+                                    ? 'assets/images/psd/gloomhaven-bar.png'
+                                    : 'assets/images/psd/frosthaven-bar.png'),
+                                fit: BoxFit.cover,
+                                repeat: ImageRepeat.repeatX),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const DrawButton(),
+                              createLevelWidget(context),
+                              const ModifierDeckWidget() //TODO: move this above the bottom bar in case it doesn't fit (narrow mobile screens)
+                            ],
+                          ));
+                    }),
+              )
+              //const ModifierDeckWidget(),
+            ]));
+      });
 }
