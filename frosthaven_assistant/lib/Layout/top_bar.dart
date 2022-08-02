@@ -19,21 +19,36 @@ PreferredSize createTopBar() {
               iconTheme: const IconThemeData(color: Colors.white),
               leading: IconButton(
                 //could modify constraints to make the button take less space when small, but could potentially cause issues
-                padding: EdgeInsets.all(min(8.0 * settings.userScalingBars.value, 8.0)),
+                padding: EdgeInsets.all(
+                    min(8.0 * settings.userScalingBars.value, 8.0)),
                 icon: Icon(Icons.menu,
-                size: 24 * settings.userScalingBars.value),
+                    shadows: [
+                      Shadow(
+                          offset: Offset(1 * settings.userScalingBars.value,
+                              1 * settings.userScalingBars.value),
+                          color: Colors.black45)
+                    ],
+                    size: 24 * settings.userScalingBars.value),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
               title: Container(
-                padding: EdgeInsets.only(left: 2.0 * settings.userScalingBars.value),
+                padding:
+                    EdgeInsets.only(left: 2.0 * settings.userScalingBars.value),
                 child: Text(
-                "Frosthaven\nAssistant",
-                style: TextStyle(
-                  fontFamily: 'Pirata',
-                  color: Colors.white,
-                  fontSize: 16 * settings.userScalingBars.value,
+                  "Frosthaven\nAssistant",
+                  style: TextStyle(
+                    fontFamily: 'Pirata',
+                    color: Colors.white,
+                    fontSize: 16 * settings.userScalingBars.value,
+                    shadows: [
+                      Shadow(
+                          offset: Offset(1 * settings.userScalingBars.value,
+                              1 * settings.userScalingBars.value),
+                          color: Colors.black45)
+                    ],
+                  ),
                 ),
-              ),),
+              ),
               toolbarHeight: 40 * settings.userScalingBars.value,
               flexibleSpace: ValueListenableBuilder<bool>(
                   valueListenable: getIt<Settings>().darkMode,

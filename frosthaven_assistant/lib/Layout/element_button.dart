@@ -129,6 +129,7 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
           alignment: Alignment.center,
           children: [
             Container(
+              margin: EdgeInsets.only(right:2 * settings.userScalingBars.value ),
               padding: EdgeInsets.only(bottom: 2 * settings.userScalingBars.value),
                 child: Align(
               alignment: Alignment.bottomCenter,
@@ -156,9 +157,10 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
                           boxShadow: [
                             _gameState.elementState.value[widget.element] !=
                                     ElementState.inert
-                                ? const BoxShadow(
-                                    //spreadRadius: 2
-                                    blurRadius: 2)
+                                ? BoxShadow(
+                              //blurStyle: BlurStyle.solid,
+                                    //spreadRadius: 2 * settings.userScalingBars.value,
+                                    blurRadius: 4 * settings.userScalingBars.value)
                                 : const BoxShadow(
                                     color: Colors.transparent,
                                   )
@@ -175,6 +177,7 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
               height: widget.width * settings.userScalingBars.value * 0.75,
               image: AssetImage(widget.icon),
               width: widget.width * settings.userScalingBars.value * 0.75,
+
             ),
           ],
         ));

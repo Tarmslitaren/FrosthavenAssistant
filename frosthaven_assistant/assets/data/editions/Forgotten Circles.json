@@ -612,6 +612,7 @@
     "Sraka the Wise": {
       "deck": "Sraka the Wise",
       "gfx": "Vermling Shaman",
+      "hidden": true,
       "count": 6,
       "levels": [
         {

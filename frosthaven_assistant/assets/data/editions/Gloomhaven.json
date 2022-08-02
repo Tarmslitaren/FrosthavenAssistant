@@ -2119,6 +2119,7 @@
     "Giant Ooze": {
       "deck": "Ooze",
       "gfx": "Ooze",
+      "hidden": true,
       "count": 10,
       "levels": [
         {
@@ -3931,6 +3932,7 @@
     "Hungry Soul": {
       "deck": "Living Bones",
       "gfx": "Living Bones",
+      "hidden": true,
       "count": 10,
       "levels": [
         { "level": 0, "health": "(6xC)/2", "move": 4, "attack": 4, "attributes": [ "%target% 2", "%shield% 5" ]},
