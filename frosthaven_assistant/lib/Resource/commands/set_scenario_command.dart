@@ -21,6 +21,7 @@ class SetScenarioCommand extends Command {
   @override
   void execute() {
     //first reset state
+    _gameState.currentAbilityDecks.clear();
 
     if (!section) {
       List<ListItemData> newList = [];

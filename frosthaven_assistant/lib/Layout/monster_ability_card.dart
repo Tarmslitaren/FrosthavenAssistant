@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
+import 'package:frosthaven_assistant/Resource/card_stack.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -248,7 +249,12 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
         builder: (context, value, child) {
           MonsterAbilityCardModel? card;
           if (_gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty) {
-            card = GameMethods.getDeck(widget.data.type.deck)!.discardPile.peek;
+            CardStack stack = GameMethods
+                .getDeck(widget.data.type.deck)!
+                .discardPile;
+            if(stack.isNotEmpty){
+              card = stack.peek;
+            }
           }
 
           //get size for back
@@ -281,7 +287,7 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                     ),
                 //switchInCurve: Curves.easeInBack,
                 //switchOutCurve: Curves.easeInBack.flipped,
-                child: _gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty
+                child: _gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty && card != null
                     ? MonsterAbilityCardWidget.buildFront(card, widget.data, scale, false)
                     : MonsterAbilityCardWidget.buildRear(scale, _deckSize),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);

@@ -6,20 +6,20 @@ import '../game_state.dart';
 class RemoveMonsterCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final List<Monster> names;
-  final List<Monster> _monsters = [];
 
   RemoveMonsterCommand(this.names);
 
   @override
   void execute() {
+    List<String> deckIds = [];
     List<ListItemData> newList = [];
     for (var item in _gameState.currentList) {
       if (item is Monster) {
         bool remove = false;
-        for (var name in names) {
+        for(var name in names) {
           if (item.id == name.id) {
             remove = true;
-            break;
+            deckIds.add(item.type.deck);
           }
         }
         if (!remove) {
@@ -29,18 +29,43 @@ class RemoveMonsterCommand extends Command {
         newList.add(item);
       }
     }
+
+
     _gameState.currentList = newList;
+
+    for (var deck in deckIds) {
+    bool removeDeck = true;
+    for(var item in _gameState.currentList) {
+      if (item is Monster){
+        if(item.type.deck == deck){
+          removeDeck = false;
+        }
+      }
+    }
+
+    if(removeDeck) {
+      for (var item in _gameState.currentAbilityDecks) {
+        if(item.name == deck) {
+          _gameState.currentAbilityDecks.remove(item);
+          break;
+        }
+      }
+    }
+    }
+
     _gameState.updateList.value++;
   }
 
   @override
   void undo() {
-    //_gameState.currentList.add(_character);
     _gameState.updateList.value++;
   }
 
   @override
   String toString() {
+    if(names.length > 1) {
+      return "Remove all monsters";
+    }
     return "Remove ${names[0].type.display}";
   }
 }

@@ -1,7 +1,7 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/monster_ability_state.dart';
@@ -18,7 +18,8 @@ class Item extends StatelessWidget {
   final Monster monsterData;
   final bool revealed;
 
-  const Item({Key? key, required this.data, required this.revealed, required this.monsterData})
+  const Item(
+      {Key? key, required this.data, required this.revealed, required this.monsterData})
       : super(key: key);
 
   @override
@@ -31,24 +32,24 @@ class Item extends StatelessWidget {
         : MonsterAbilityCardWidget.buildRear(scale, -1);
 
     return child;
-
   }
 }
 
 class AbilityCardMenu extends StatefulWidget {
-  const AbilityCardMenu({Key? key, required this.monsterAbilityState, required this.monsterData})
+  const AbilityCardMenu(
+      {Key? key, required this.monsterAbilityState, required this.monsterData})
       : super(key: key);
 
   final MonsterAbilityState monsterAbilityState;
   final Monster monsterData;
 
   @override
-  _AbilityCardMenuState createState() => _AbilityCardMenuState();
+  AbilityCardMenuState createState() => AbilityCardMenuState();
 }
 
-class _AbilityCardMenuState extends State<AbilityCardMenu> {
+class AbilityCardMenuState extends State<AbilityCardMenu> {
   final GameState _gameState = getIt<GameState>();
-  List<MonsterAbilityCardModel> _revealedList = [];
+  static List<MonsterAbilityCardModel> revealedList = [];
 
   @override
   initState() {
@@ -57,16 +58,19 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
 
   void markAsOpen(int revealed) {
     setState(() {
-      _revealedList = [];
-      var drawPile = widget.monsterAbilityState.drawPile.getList().reversed.toList();
+      revealedList = [];
+      var drawPile = widget.monsterAbilityState.drawPile
+          .getList()
+          .reversed
+          .toList();
       for (int i = 0; i < revealed; i++) {
-        _revealedList.add(drawPile[i]);
+        revealedList.add(drawPile[i]);
       }
     });
   }
 
   bool isRevealed(MonsterAbilityCardModel item) {
-    for (var card in _revealedList) {
+    for (var card in revealedList) {
       if (card.nr == item.nr) {
         return true;
       }
@@ -74,28 +78,49 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
     return false;
   }
 
-  List<Widget> generateList(
-      List<MonsterAbilityCardModel> inputList, bool allOpen) {
+  List<Widget> generateList(List<MonsterAbilityCardModel> inputList,
+      bool allOpen) {
     List<Widget> list = [];
+    bool hasDiviner = false;
+    for (var item in _gameState.currentList) {
+      if (item is Character && item.characterClass.name == "Diviner") {
+        hasDiviner = true;
+        break;
+      }
+    }
     for (var item in inputList) {
       Item value = Item(
           key: Key(item.nr.toString()),
           data: item,
           monsterData: widget.monsterData,
           revealed: isRevealed(item) || allOpen == true);
-      list.add(value);
+      if (hasDiviner && _gameState.roundState.value == RoundState.playTurns) {
+        GestureDetector gestureDetector = GestureDetector(
+          key: Key(item.nr.toString()),
+          onTap: () {
+            //open remove card menu
+            openDialog(context, RemoveCardMenu(card: item));
+          },
+          child: value,
+        );
+        list.add(gestureDetector);
+      } else {
+        list.add(value);
+      }
     }
     return list;
   }
 
-  Widget buildRevealButton(int nrOfButtons, int nr){
+  Widget buildRevealButton(int nrOfButtons, int nr) {
     String text = "All";
-    if (nr < nrOfButtons){
+    if (nr < nrOfButtons) {
       text = nr.toString();
     }
-    var screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery
+        .of(context)
+        .size;
     return SizedBox(
-      width: max(screenSize.width / nrOfButtons -40, 40),
+        width: max(screenSize.width / nrOfButtons - 40, 40),
         child: TextButton(
 
           child: Text(text),
@@ -108,7 +133,9 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
 
   Widget buildList(List<MonsterAbilityCardModel> list, bool reorderable,
       bool allOpen) {
-    var screenSize = MediaQuery.of(context).size;
+    var screenSize = MediaQuery
+        .of(context)
+        .size;
     double scale = getScaleByReference(context);
     return Theme(
         data: Theme.of(context).copyWith(
@@ -117,20 +144,22 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
           //other styles
         ),
         child: Container(
-          height: _gameState.roundState.value == RoundState.playTurns? screenSize.height * 0.86: screenSize.height  - 80,
+          height: _gameState.roundState.value == RoundState.playTurns
+              ? screenSize.height * 0.86
+              : screenSize.height - 80,
           width: 184 * 0.8 * scale,
-          child: reorderable? ReorderableColumn(
+          child: reorderable ? ReorderableColumn(
             needsLongPressDraggable: true,
             scrollController: ScrollController(),
-            scrollAnimationDuration: Duration(milliseconds: 400),
-            reorderAnimationDuration: Duration(milliseconds: 400),
+            scrollAnimationDuration: const Duration(milliseconds: 400),
+            reorderAnimationDuration: const Duration(milliseconds: 400),
 
             buildDraggableFeedback: defaultBuildDraggableFeedback,
             onReorder: (index, dropIndex) {
               //make sure this is correct
               setState(() {
-                dropIndex = list.length -dropIndex-1;
-                index = list.length-index-1;
+                dropIndex = list.length - dropIndex - 1;
+                index = list.length - index - 1;
                 list.insert(dropIndex, list.removeAt(index));
                 _gameState.action(ReorderAbilityListCommand(
                     widget.monsterAbilityState.name, dropIndex, index));
@@ -138,87 +167,97 @@ class _AbilityCardMenuState extends State<AbilityCardMenu> {
             },
             children: generateList(list, allOpen),
 
-          ):
-            ListView(
-              //reverse: true,
-              controller: ScrollController(),
-              children: generateList(list, allOpen).reversed.toList(),
-            ),
+          ) :
+          ListView(
+            //reverse: true,
+            controller: ScrollController(),
+            children: generateList(list, allOpen).reversed.toList(),
+          ),
         ));
   }
 
   @override
   Widget build(BuildContext context) {
-    var drawPile =
-        widget.monsterAbilityState.drawPile.getList().reversed.toList();
-    var discardPile = widget.monsterAbilityState.discardPile.getList();
-    return Container(
-        child:
-      Column(children: [
-      _gameState.roundState.value == RoundState.playTurns?
-      Card(
+    return
+      ValueListenableBuilder<int>(
+          valueListenable: _gameState.commandIndex,
+          builder: (context, value, child) {
+            var drawPile =
+            widget.monsterAbilityState.drawPile
+                .getList()
+                .reversed
+                .toList();
+            var discardPile = widget.monsterAbilityState.discardPile.getList();
+            return Container(
+                child:
+                Column(children: [
+                  _gameState.roundState.value == RoundState.playTurns ?
+                  Card(
 
-          //color: Colors.transparent,
-          //margin: const EdgeInsets.only(left:20, right:20, top: 20),
+                    //color: Colors.transparent,
+                    //margin: const EdgeInsets.only(left:20, right:20, top: 20),
 
-          child: Column(children: [
+                      child: Column(children: [
 
-            Row(
-              mainAxisSize: MainAxisSize.max,
-                children: [
-              const Text(
-                "Reveal:",
-                //style: TextStyle(color: Colors.white)
-              ),
-              drawPile.length > 0
-                  ? buildRevealButton(drawPile.length, 1)
-                  : Container(),
-              drawPile.length > 1
-                  ? buildRevealButton(drawPile.length, 2)
-                  : Container(),
-              drawPile.length > 2
-                  ? buildRevealButton(drawPile.length, 3)
-                  : Container(),
-              drawPile.length > 3
-                  ? buildRevealButton(drawPile.length, 4)
-                  : Container(),
-              drawPile.length > 4
-                  ? buildRevealButton(drawPile.length, 5)
-                  : Container(),
-              drawPile.length > 5
-                  ? buildRevealButton(drawPile.length, 6)
-                  : Container(),
-                  drawPile.length > 6
-                  ?buildRevealButton(drawPile.length, 7)
-                      :Container(),
-            ]),
-          ])): Container(),
-      Card(
-          color: Colors.transparent,
-          child: Stack(children: [
-            //TODO: add diviner functionality:, remove selected (how to mark selected?)
-            // hand of destiny: delete cards
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                buildList(drawPile, _gameState.roundState.value == RoundState.playTurns, false),
-                buildList(discardPile, false, true)
-              ],
-            ),
+                        Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              const Text(
+                                "Reveal:",
+                                //style: TextStyle(color: Colors.white)
+                              ),
+                              drawPile.length > 0
+                                  ? buildRevealButton(drawPile.length, 1)
+                                  : Container(),
+                              drawPile.length > 1
+                                  ? buildRevealButton(drawPile.length, 2)
+                                  : Container(),
+                              drawPile.length > 2
+                                  ? buildRevealButton(drawPile.length, 3)
+                                  : Container(),
+                              drawPile.length > 3
+                                  ? buildRevealButton(drawPile.length, 4)
+                                  : Container(),
+                              drawPile.length > 4
+                                  ? buildRevealButton(drawPile.length, 5)
+                                  : Container(),
+                              drawPile.length > 5
+                                  ? buildRevealButton(drawPile.length, 6)
+                                  : Container(),
+                              drawPile.length > 6
+                                  ? buildRevealButton(drawPile.length, 7)
+                                  : Container(),
+                              drawPile.length > 7
+                                  ? buildRevealButton(drawPile.length, 8)
+                                  : Container(),
+                            ]),
+                      ])) : Container(),
+                  Card(
+                      color: Colors.transparent,
+                      child: Stack(children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            buildList(drawPile, _gameState.roundState.value ==
+                                RoundState.playTurns, false),
+                            buildList(discardPile, false, true)
+                          ],
+                        ),
 
-            Positioned(
-                width: 100,
-                right: 2,
-                bottom: 2,
-                child: TextButton(
-                    child: const Text(
-                      'Close',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    }))
-          ]))
-    ]));
+                        Positioned(
+                            width: 100,
+                            right: 2,
+                            bottom: 2,
+                            child: TextButton(
+                                child: const Text(
+                                  'Close',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }))
+                      ]))
+                ]));
+          });
   }
 }
