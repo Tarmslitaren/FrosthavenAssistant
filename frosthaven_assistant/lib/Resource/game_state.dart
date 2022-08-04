@@ -429,6 +429,11 @@ class GameSaveState{
       state.drawPile.setList(newDrawList);
       state.discardPile.setList(newDiscardList);
       state.cardCount.value = state.drawPile.size();
+
+      state.badOmen.value = modifierDeckData["badOmen"] as int;
+
+
+
       gameState.modifierDeck = state;
 
       //////elements

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/commands/remove_card_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/reorder_ability_list_command.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/settings.dart';
-import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class RemoveCardMenu extends StatefulWidget {
@@ -25,7 +24,6 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
 
   @override
   initState() {
-    // at the beginning, all items are shown
     super.initState();
   }
 
@@ -45,30 +43,45 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
           ),
         ),
         child: Column(children: [
-          const SizedBox(height: 20,),
-          Text(
-            "Remove ${widget.card.title} Card? (nr: ${widget.card.nr})",
-            style: getTitleTextStyle(),
+          const SizedBox(
+            height: 20,
           ),
-          const SizedBox(height: 20,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-            TextButton(
+          TextButton(
+              onPressed: () {
+                _gameState.action(RemoveCardCommand(widget.card));
 
-                onPressed: (){
-                  _gameState.action(RemoveCardCommand(widget.card));
+                Navigator.pop(context);
+              },
+              child: Text(
+                  "Remove ${widget.card.title} Card (nr: ${widget.card.nr})",
+                  style: const TextStyle(fontSize: 20))),
+          const SizedBox(
+            height: 20,
+          ),
+          TextButton(
+              onPressed: () {
+                int oldIndex = 0;
+                int newIndex = 0;
+                for (var item in _gameState.currentAbilityDecks) {
+                  if (item.name == widget.card.deck) {
+                    var list = item.drawPile.getList();
+                    //newIndex = list.length-1;
+                    for (int i = 0; i < list.length; i++) {
+                      if (list[i].nr == widget.card.nr) {
+                        oldIndex = i;
+                        break;
+                      }
+                    }
+                    break;
+                  }
+                }
+                _gameState.action(ReorderAbilityListCommand(
+                    widget.card.deck, newIndex, oldIndex));
 
-                  Navigator.pop(context);
-                },
-                child: const Text("OK",style: TextStyle(fontSize: 20))),
-
-            TextButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                },
-                child: const Text("Cancel",style: TextStyle(fontSize: 20))),
-          ])
+                Navigator.pop(context);
+              },
+              child:
+                  const Text("Send to Bottom", style: TextStyle(fontSize: 20))),
         ]));
   }
 }
