@@ -51,6 +51,7 @@ class SetScenarioCommand extends Command {
         }
       }
       GameMethods.shuffleDecks();
+      _gameState.modifierDeck.initDeck();
       _gameState.currentList = newList;
     }
 

@@ -72,7 +72,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                 child: child)));
   }
 
-  static int cardAnimationDuration = 1200;
+  static const int cardAnimationDuration = 1200;
   bool animationsEnabled = false;
 
   Widget buildDrawAnimation(Widget child, Key key) {
@@ -186,12 +186,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         width: 2 * settings.userScalingBars.value,
                       ),
                       GestureDetector(
+                        behavior: HitTestBehavior.opaque,
                           onTap: () {
                             openDialog(context, const ModifierCardMenu());
                           },
                           child: Container(
-                              //width: 105 * smallify, //155
+                              //width: 92.3 * settings.userScalingBars.value,
                               child: Stack(children: [
+
                             _gameState.modifierDeck.discardPile.size() > 2
                                 ? buildStayAnimation(
                                     Container(

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
 import 'package:frosthaven_assistant/Resource/commands/bad_omen_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/enfeebling_hex_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:reorderables/reorderables.dart';
 
 import '../../Resource/enums.dart';
@@ -23,14 +25,14 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scale = getScaleByReference(context) * 2; //double scale
+    double scale = getIt<Settings>().userScalingBars.value;// getScaleByReference(context) * 2; //double scale
     late final Widget child;
 
     child = revealed
         ? ModifierCardWidget.buildFront(data, scale)
         : ModifierCardWidget.buildRear(scale);
 
-    return Container(margin: const EdgeInsets.all(2), child: child);
+    return Container(margin: EdgeInsets.all(2 * scale), child: child);
   }
 }
 
@@ -132,7 +134,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         ),
         child: Container(
           height: screenSize.height - 120,
-          width: 88 * 2 * scale,
+          width: 88 * getIt<Settings>().userScalingBars.value,
           //double scale??, since it's so small to begin with
           child: reorderable
               ? ReorderableColumn(
@@ -192,7 +194,13 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                     ),
                     if(_gameState.modifierDeck.badOmen.value > 0) Text(
                       "BadOmensLeft: ${_gameState.modifierDeck.badOmen.value}",
-                        style: getTitleTextStyle())
+                        style: getTitleTextStyle()),
+                    TextButton(
+                      onPressed: () {
+                        _gameState.action(EnfeeblingHexCommand());
+                      },
+                      child: Text("Enfeebling Hex (added minus ones: ${_gameState.modifierDeck.addedMinusOnes.value})"),
+                    ),
                   ],
                 ),
               Row(mainAxisSize: MainAxisSize.max, children: [
@@ -231,7 +239,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                 //margin: const EdgeInsets.only(left: 20, right: 20),
                 child: Stack(children: [
                   //TODO: add diviner functionality:,
-                  // bad omen (next 6 times place a curse 6th from the top),
                   // enfeebling hex: shuffle x amount -1's to enemy deck
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

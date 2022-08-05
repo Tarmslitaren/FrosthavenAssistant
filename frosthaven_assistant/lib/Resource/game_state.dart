@@ -431,6 +431,7 @@ class GameSaveState{
       state.cardCount.value = state.drawPile.size();
 
       state.badOmen.value = modifierDeckData["badOmen"] as int;
+      state.addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
 
 
 

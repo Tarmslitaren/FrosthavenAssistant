@@ -26,6 +26,18 @@ class ModifierCard {
 class ModifierDeck {
   ModifierDeck() {
     //build deck
+    initDeck();
+    curses.addListener(() {
+      _handleCurseBless(CardType.curse, curses, "curse");
+    });
+
+    blesses.addListener(() {
+      _handleCurseBless(CardType.bless, blesses, "bless");
+    });
+
+  }
+
+  void initDeck() {
     List<ModifierCard> cards = [];
     cards.add(ModifierCard(CardType.add, "minus2"));
     cards.add(ModifierCard(CardType.add, "plus2"));
@@ -38,18 +50,15 @@ class ModifierDeck {
     for (int i = 0; i < 6; i++) {
       cards.add(ModifierCard(CardType.add, "plus0"));
     }
-    drawPile.init(cards);
+    drawPile.setList(cards);
+    discardPile.setList([]);
     shuffle();
-
-    curses.addListener(() {
-      _handleCurseBless(CardType.curse, curses, "curse");
-    });
-
-    blesses.addListener(() {
-      _handleCurseBless(CardType.bless, blesses, "bless");
-    });
-
     cardCount.value = drawPile.size();
+    curses.value = 0;
+    blesses.value = 0;
+    badOmen.value = 0;
+    addedMinusOnes.value = 0;
+    needsShuffle = false;
   }
 
   bool needsShuffle = false;
@@ -62,6 +71,14 @@ class ModifierDeck {
       0); //TODO: everything is a hammer - use maybe change notifier instead?
 
   final badOmen = ValueNotifier<int>(0);
+  final addedMinusOnes = ValueNotifier<int>(0);
+
+  void addMinusOne() {
+    addedMinusOnes.value++;
+    drawPile.getList().add(ModifierCard(CardType.add, "minus1"));
+    drawPile.shuffle();
+    cardCount.value++;
+  }
 
   void _handleCurseBless(
       CardType type, ValueNotifier<int> notifier, String gfx) {
@@ -143,7 +160,8 @@ class ModifierDeck {
         //'"blesses": ${blesses.value}, '
         // '"curses": ${curses.value}, '
         // '"needsShuffle": ${needsShuffle}, '
-        '"badOmen": ${badOmen.toString()}, '
+        '"addedMinusOnes": ${addedMinusOnes.value.toString()}, '
+        '"badOmen": ${badOmen.value.toString()}, '
         '"drawPile": ${drawPile.toString()}, '
         '"discardPile": ${discardPile.toString()} '
         '}';

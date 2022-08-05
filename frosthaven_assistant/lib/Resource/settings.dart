@@ -8,7 +8,7 @@ import 'package:window_manager/window_manager.dart';
 
 class Settings {
   final userScalingMainList = ValueNotifier<double>(1.0);
-  final userScalingBars = ValueNotifier<double>(1.0); //if ! mobile ->2.0
+  final userScalingBars = ValueNotifier<double>((Platform.isWindows || Platform.isLinux || Platform.isMacOS)? 2.0 : 1.0); //if ! mobile ->2.0
   final userScalingMenus = ValueNotifier<double>(1.0);
   final fullScreen = ValueNotifier<bool>(true);
   final darkMode = ValueNotifier<bool>(false);
