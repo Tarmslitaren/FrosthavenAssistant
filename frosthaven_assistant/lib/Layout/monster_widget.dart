@@ -34,7 +34,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
 
   Widget buildMonsterBoxGrid(double scale) {
 
-    int displaystartAnimation = -1;
+    String displayStartAnimation = "";
 
     if(lastList.length < widget.data.monsterInstances.value.length){
       //find which is new
@@ -48,7 +48,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
           }
         }
         if (!found){
-          displaystartAnimation = item.standeeNr;
+          displayStartAnimation = item.getId();
           break;
         }
       }
@@ -64,7 +64,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                       key: Key(widget.data.monsterInstances.value[index].standeeNr.toString()),
                       figureId: widget.data.monsterInstances.value[index].name + widget.data.monsterInstances.value[index].gfx + widget.data.monsterInstances.value[index].standeeNr.toString(),
                   ownerId: widget.data.id,
-                  display: displaystartAnimation),
+                  displayStartAnimation: displayStartAnimation),
         )
     );
     lastList = widget.data.monsterInstances.value;

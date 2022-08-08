@@ -143,6 +143,10 @@ class MonsterInstance extends Figure{
     health.value = summonHealth;
   }
 
+  String getId(){
+    return name + gfx + standeeNr.toString();
+  }
+
   late final int standeeNr;
   late final MonsterType type;
   late final String name;

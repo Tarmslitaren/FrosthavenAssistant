@@ -15,9 +15,9 @@ class MonsterBox extends StatefulWidget {
   //final MonsterInstance data;
   final String figureId;
   final String ownerId;
-  final int display;
+  final String displayStartAnimation;
 
-  const MonsterBox({Key? key, required this.figureId, required this.ownerId, required this.display})
+  const MonsterBox({Key? key, required this.figureId, required this.ownerId, required this.displayStartAnimation})
       : super(key: key);
 
   static const double conditionSize = 14;
@@ -60,7 +60,6 @@ class _MonsterBoxState extends State<MonsterBox> {
   String? getMonster() {
     for (var item in getIt<GameState>().currentList) {
       if (item is Monster) {
-        //this will cause issues if several monsters use same gfx.
         if (item.id == data.name) {
           return item.id;
         }
@@ -71,9 +70,7 @@ class _MonsterBoxState extends State<MonsterBox> {
 
   Widget buildInternal(double scale, double width, Color color) {
     String folder = "monsters";
-    bool isSummon = false;
     if (data.type == MonsterType.summon) {
-      isSummon = true;
       folder = "summon";
     }
     String standeeNr = "";
@@ -237,7 +234,7 @@ class _MonsterBoxState extends State<MonsterBox> {
     //}
 
     double width = MonsterBox.getWidth(scale, data);
-    String figureId = data.name + data.gfx + data.standeeNr.toString();
+    String figureId = data.getId();
     String? characterId;
     if(widget.ownerId != data.name){
       characterId = widget.ownerId; //this is probably wrong
@@ -252,7 +249,7 @@ class _MonsterBoxState extends State<MonsterBox> {
         },
         child: AnimatedContainer(
             //makes it grow nicely when adding conditions
-            key: Key(data.standeeNr.toString()), //TODO: shiiiet wont work for summons, use index?
+            key: Key(figureId.toString()),
             width: width,
             curve: Curves.easeInOut,
             duration: const Duration(milliseconds: 300),
@@ -267,27 +264,17 @@ class _MonsterBoxState extends State<MonsterBox> {
                   double offset = -30 * scale;
                   Widget child = buildInternal(scale, width, color);
 
-                  //TODO: this needs to be fixed some other way. id by stnadee nr might be ok for monsters, but summons need other way ot tell it is new
-                  if (widget.display != data.standeeNr ) {
-                    //if this one is not added
-
-                    //TODO: make own widget: make it run add animation only once
+                  if (widget.displayStartAnimation != widget.figureId ) {
+                    //if this one is not added - only play death animation
                     return TranslationAnimatedWidget.tween(
                         enabled: !alive,
                         translationDisabled: const Offset(0, 0),
                         translationEnabled: Offset(0, alive ? 0 : -offset),
                         duration: const Duration(milliseconds: 600),
-                        curve: alive ? Curves.linear : Curves.linear,
+                        curve: Curves.linear,
                         child:
-                            child); /*OpacityAnimatedWidget.tween(
-                            enabled: alive,
-                            opacityDisabled: 0,
-                            opacityEnabled: 1,
-                            child: child
-                        ));*/
+                            child);
                   }
-
-                  //find out if added
 
                   return TranslationAnimatedWidget.tween(
                       enabled: true,

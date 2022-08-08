@@ -116,13 +116,13 @@ class _CharacterWidgetState extends State<CharacterWidget> {
 
   Widget buildMonsterBoxGrid(double scale) {
 
-    int displaystartAnimation = -1;
+    String displaystartAnimation = "";
 
     if (lastList.length <
         character.characterState.summonList.value.length) {
       //find which is new - always the last one
       displaystartAnimation =
-          character.characterState.summonList.value.length - 1;
+          character.characterState.summonList.value.last.getId();
     }
 
     final generatedChildren = List<Widget>.generate(
@@ -134,14 +134,13 @@ class _CharacterWidgetState extends State<CharacterWidget> {
               duration: const Duration(milliseconds: 300),
               child: MonsterBox(
                   key: Key(character.characterState.summonList
-                      .value[index].standeeNr
-                      .toString()),
+                      .value[index].getId()),
                   figureId: character.characterState.summonList
                       .value[index].name + character.characterState.summonList
                       .value[index].gfx + character.characterState.summonList
                       .value[index].standeeNr.toString(),
                   ownerId: character.id,
-                  display: -2),
+                  displayStartAnimation: displaystartAnimation),
             ));
     lastList = character.characterState.summonList.value;
     return Wrap(
@@ -262,7 +261,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                                 ),
                               ),
                               ValueListenableBuilder<int>(
-                                  valueListenable: _gameState.commandIndex,
+                                  valueListenable: _gameState.modifierDeck.cardCount,
                                   builder: (context, value, child) {
                                     if (isCharacter &&
                                         _gameState.commandIndex.value >=
