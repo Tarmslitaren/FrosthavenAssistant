@@ -101,6 +101,18 @@
           "health": 4,
           "move": 3
         },
+        "Warrior Hawk": {
+          "level": 1,
+          "health": 4,
+          "move": 3,
+          "attack":  1
+        },
+        "Swamp Hippo": {
+          "level": 1,
+          "health": 6,
+          "move": 1,
+          "attack":  3
+        },
         "Black Panther": {
           "level": 3,
           "health": 5,
@@ -189,6 +201,17 @@
           "level": 1,
           "health": 2,
           "move": 2,
+          "attack":  2
+        },
+        "Reaching Tentacle": {
+          "level": 1,
+          "health": 2,
+          "range": 4,
+          "attack":  2
+        },
+        "One-Eyed Terror": {
+          "level": 1,
+          "health": 1,
           "attack":  2
         },
         "Bat Cloud": {
