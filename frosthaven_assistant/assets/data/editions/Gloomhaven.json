@@ -423,34 +423,27 @@
       "name": "Ancient Artillery",
       "cards": [
         [ 700, false, 46, "%attack% - 1", "^%range% + 2" ],
-        [ 701, true, 71, "%attack% + 0", "^%range% + 0", "^ ", "^All adjacent enemies suffer 2 damage" ],
-        [ 702, true, 71, "%attack% + 0", "^%range% + 0", "^ ", "^All adjacent enemies suffer 2 damage" ],
-        [ 703, false, 37, "%push% 1", "^Target all adjacent enemies", "%attack% - 1 %aoe-triangle-2-side%", "^%range% - 1" ],
-        [ 704, false, 37, "%push% 1", "^Target all adjacent enemies", "%attack% - 1 %aoe-circle%", "^%range% - 1" ],
-        [ 706, false, 17, "%push% 2", "^Target all adjacent enemies", "%shield% + 2", "%attack% - 2", "^%range% + 0" ],
+        [ 701, true, 71, "%attack% + 0", "^%range% + 0","*.........", "^All adjacent enemies suffer 2 damage" ],
+        [ 702, true, 71, "%attack% + 0", "^%range% + 0", "*.........", "^All adjacent enemies suffer 2 damage" ],
+        [ 703, false, 37, "%push% 1", "^Target all adjacent enemies","*.........", "[r]", "[c]","%attack% - 1", "^%range% - 1","[/c]", "¤aoe-triangle-2-side", "[/r]" ],
+        [ 704, false, 37, "%push% 1", "^Target all adjacent enemies","*.........", "[r]", "[c]", "%attack% - 1", "^%range% - 1","[/c]", "¤aoe-circle", "[/r]" ],
+        [ 706, false, 17, "%push% 2", "^Target all adjacent enemies","*.........", "%shield% + 2","*.........", "%attack% - 2", "^%range% + 0" ],
         [ 705, false, 95, "%attack% + 1", "^%range% + 0" ],
-        [ 707, false, 46, "%attack% - 1 %aoe-triangle-2-side%", "^%range% + 0", "^%immobilize%" ]
+        [ 707, false, 46, "[r]", "[c]", "%attack% - 1", "^%range% + 0", "^%immobilize%","[/c]","¤aoe-triangle-2-side", "[/r]" ]
       ]
     },
     {
       "name": "Archer",
       "cards": [
-        [ 532, false, 16, "%move% + 1", "%attack% - 1", "^%range% + 0" ],
-        [ 533, false, 31, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
-        [ 534, false, 32, "%move% + 0", "%attack% + 1", "^%range% - 1" ],
-        [ 535, false, 44, "%move% - 1", "%attack% + 1", "^%range% + 0" ],
+        [ 532, false, 16, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0" ],
+        [ 533, false, 31, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
+        [ 534, false, 32, "%move% + 0","*.........", "%attack% + 1", "^%range% - 1" ],
+        [ 535, false, 44, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0" ],
         [ 536, false, 56, "%attack% - 1", "^%range% + 0", "^%target% 2" ],
         [ 537, true, 68, "%attack% + 1", "^%range% + 1" ],
-        [
-          538,
-          false,
-          14,
-          "%move% - 1",
-          "%attack% - 1",
-          "^%range% + 0",
-          "*Create a 3 damage trap in an adjacent empty hex closest to an enemy"
-        ],
-        [ 539, true, 29, "%move% + 0", "%attack% - 1", "^%range% + 1", "^%immobilize%" ]
+        [538, false, 14, "%move% - 1","*.........", "%attack% - 1", "^%range% + 0","*.........",
+          "*Create a 3 damage trap in an adjacent empty hex closest to an enemy"],
+        [ 539, true, 29, "%move% + 0","*.........", "%attack% - 1", "^%range% + 1", "^%immobilize%" ]
       ]
     },
     {
@@ -462,8 +455,8 @@
         [ 575, true, 85, "Special 1" ],
         [ 576, false, 79, "Special 1" ],
         [ 577, false, 73, "Special 1" ],
-        [ 578, false, 36, "%move% + 0", "%attack% + 0" ],
-        [ 579, false, 52, "%move% - 1", "%attack% - 1", "^%range% 3", "^%target% 2" ]
+        [ 578, false, 36, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 579, false, 52, "%move% - 1","*.........", "%attack% - 1", "^%range% 3", "^%target% 2" ]
       ]
     },
     {
@@ -475,407 +468,394 @@
         [ 575, true, 85, "Special 1" ],
         [ 576, false, 79, "Special 1" ],
         [ 577, false, 73, "Special 1" ],
-        [ 578, false, 36, "%move% + 0", "%attack% + 0" ],
-        [ 579, false, 52, "%move% - 1", "%attack% - 1", "^%range% 3", "^%target% 2" ]
+        [ 578, false, 36, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 579, false, 52, "%move% - 1","*.........", "%attack% - 1", "^%range% 3", "^%target% 2" ]
       ]
     },
     {
       "name": "Cave Bear",
       "cards": [
-        [ 596, false, 13, "%move% + 1", "%attack% - 1" ],
-        [ 587, false, 14, "%move% - 1", "%attack% - 1", "^%immobilize%" ],
+        [ 596, false, 13, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 587, false, 14, "%move% - 1","*.........", "%attack% - 1", "^%immobilize%" ],
         [ 598, true, 34, "%attack% + 1", "^%wound%" ],
-        [ 599, false, 41, "%move% + 0", "%attack% + 0" ],
-        [ 600, false, 60, "%move% - 1", "%attack% + 1" ],
-        [ 601, true, 80, "%attack% - 1", "%move% - 2", "%attack% - 1", "^%wound%" ],
-        [ 602, false, 61, "%move% + 0", "%attack% - 1", "^%target% 2" ],
-        [ 603, false, 3, "%shield% + 1", "%retaliate% + 2", "%heal% 2", "^Self" ]
+        [ 599, false, 41, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 600, false, 60, "%move% - 1","*.........", "%attack% + 1" ],
+        [ 601, true, 80, "%attack% - 1","*.........", "%move% - 2", "*.........","%attack% - 1", "^%wound%" ],
+        [ 602, false, 61, "%move% + 0","*.........", "%attack% - 1", "^%target% 2" ],
+        [ 603, false, 3, "%shield% + 1","*.........", "%retaliate% 2","*.........", "%heal% 2", "^Self" ]
       ]
     },
     {
       "name": "Cultist",
       "cards": [
-        [ 604, false, 10, "%move% - 1", "%attack% - 1", "On Death:", "^%attack% + 2 %aoe-circle-with-middle-black%" ],
-        [ 605, false, 10, "%move% - 1", "%attack% - 1", "On Death:", "^%attack% + 2 %aoe-circle-with-middle-black%" ],
-        [ 606, false, 27, "%move% + 0", "%attack% + 0" ],
-        [ 607, false, 27, "%move% + 0", "%attack% + 0" ],
-        [ 608, false, 39, "%move% - 1", "%attack% + 0", "%heal% 1", "^Self" ],
-        [ 609, true, 63, " ", "Summon normal Living Bones", "^Cultist suffers 2 damage." ],
-        [ 610, true, 63, " ", "Summon normal Living Bones", "^Cultist suffers 2 damage." ],
-        [ 611, false, 31, "%move% - 1", "%heal% 3", "^%range% 3" ]
+        [ 604, false, 10, "%move% - 1","*.........", "%attack% - 1","*.........", "[r]","[c]","On Death:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        [ 605, false, 10, "%move% - 1","*.........", "%attack% - 1","*.........", "[r]","[c]","On Death:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        [ 606, false, 27, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 607, false, 27, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 608, false, 39, "%move% - 1","*.........", "%attack% + 0","*.........", "%heal% 1", "^Self" ],
+        [ 609, true, 63, " ", "Summon normal","Living Bones","*", "^Cultist suffers 2 damage." ],
+        [ 610, true, 63, " ", "Summon normal","Living Bones","*", "^Cultist suffers 2 damage." ],
+        [ 611, false, 31, "%move% - 1","*.........", "%heal% 3", "^%range% 3" ]
       ]
     },
     {
       "name": "Deep Terror",
       "cards": [
         [ 732, false, 65, "%attack% + 0", "^%range% 3", "^%target% 3", "^%curse%" ],
-        [ 733, true, 60, "%attack% + 0 %aoe-line-6-with-black%", "^%pierce% 3" ],
-        [ 734, true, 60, "%attack% + 0 %aoe-line-6-with-black%", "^%pierce% 3" ],
-        [ 735, false, 84, "%attack% - 1", "^Target all adjacent enemies", "%attack% + 0", "^%range% 4", "^%wound%" ],
-        [ 736, false, 75, "%attack% + 0", "^%poison%", "%attack% - 1", "^%range% 5", "^%immobilize%" ],
-        [ 737, false, 75, "%attack% - 2", "^Target all adjacent enemies", "^%disarm%", "%attack% + 0", "^%range% 3", "^%target% 2" ],
-        [ 738, false, 96, "%attack% - 2", "^%range% 6", "^Summon normal Deep Terror in a hex adjacent to the target" ],
-        [ 739, false, 54, "%wound% and", "%poison%", "^Target all adjacent enemies", "%attack% + 0", "^%range% 4" ]
+        [ 733, true, 60,[{
+          "gfx": "aoe-line-6-with-black",
+          "x": 0.65,
+          "y": 0.28
+        }], "%attack% + 0", "^%pierce% 3" ],
+        [ 734, true, 60, [{
+          "gfx": "aoe-line-6-with-black",
+          "x": 0.65,
+          "y": 0.28
+        }],"%attack% + 0", "^%pierce% 3" ],
+        [ 735, false, 84, "%attack% - 1", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4", "^%wound%" ],
+        [ 736, false, 75, "%attack% + 0", "^%poison%","*.........", "%attack% - 1", "^%range% 5", "^%immobilize%" ],
+        [ 737, false, 75, "%attack% - 2", "^Target all adjacent enemies", "^%disarm%","*.........", "%attack% + 0", "^%range% 3", "^%target% 2" ],
+        [ 738, false, 96, "%attack% - 2", "^%range% 6","*.........", "^Summon normal Deep Terror","^in a hex adjacent to the target." ],
+        [ 739, false, 54, "%wound% and", "%poison%", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4" ]
       ]
     },
 
     {
       "name": "Earth Demon",
       "cards": [
-        [ 636, true, 40, "%heal% 3", "^Self", "%earth%%use%", "!^%immobilize% Target all enemies within %range% 3" ],
-        [ 637, true, 42, "%move% + 1", "%attack% - 1" ],
-        [ 638, false, 62, "%move% + 0", "%attack% + 0", "%earth%" ],
+        [ 636, true, 40, "%heal% 3", "^Self","*.........","[r]", "%earth%%use%", "[c]", "^%immobilize%", "^Target all enemies within %range% 3","[/c]", "[/r]" ],
+        [ 637, true, 42, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 638, false, 62, "%move% + 0","*.........", "%attack% + 0", "%earth%" ],
         [ 639, false, 71, "%attack% + 0", "^%range% 4", "%earth%%use%", "!^%target% 2" ],
-        [ 640, false, 83, "%move% - 1", "%attack% + 1", "%earth%" ],
-        [ 641, false, 93, "%move% - 1", "%attack% - 1", "^Target all adjacent enemies", "%earth%%use%", "!^%push% 1" ],
-        [ 642, false, 79, "%move% + 1", "%attack% + 0", "%air%%use%", "!^-2 %attack%" ],
-        [ 643, false, 87, "%move% + 0", "%attack% - 1", "%aoe-4-with-black%", "%any%%use%", "!%earth%" ]
+        [ 640, false, 83, "%move% - 1","*.........", "%attack% + 1", "%earth%" ],
+        [ 641, false, 93, "%move% - 1","*.........", "%attack% - 1", "^Target all adjacent enemies", "%earth%%use%", "!^%push% 1" ],
+        [ 642, false, 79, "%move% + 1","*.........", "%attack% + 0", "%air%%use%", "!^-2 %attack%" ],
+        [ 643, false, 87, "[r]","[c]","     %move% + 0","*.........", "     %attack% - 1","[/c]", "¤aoe-4-with-black", "[/r]","*.........","%any%%use%", "!%earth%" ]
       ]
     },
     {
       "name": "Flame Demon",
       "cards": [
-        [ 628, false, 3, "%move% + 1", "%attack% - 1", "^%range% + 0", "%fire%" ],
-        [ 629, false, 24, "%move% + 0", "%attack% + 0", "^%range% + 0", "%fire%" ],
-        [ 630, true, 46, "%attack% + 0", "^%range% + 0", "%fire%%use%", "!%aoe-circle%" ],
-        [ 631, false, 49, "%attack% + 0", "%aoe-line-3-with-black%", "%fire%%use%", "!^+1 %attack%", "^%wound%" ],
-        [ 632, false, 67, "%move% - 1", "%attack% + 1", "^%range% - 1", "%fire%" ],
-        [ 633, false, 77, "%attack% + 0", "^Target all adjacent enemies", "%ice%%use%", "!^Flame Demon suffers 1 damage." ],
-        [
-          634,
-          true,
-          30,
-          "%fire%%use%",
-          "!^All adjacent enemies","^suffer 2 damage.",
-          "%move% + 0",
-          "%attack% - 2",
-          "^%range% + 0",
-          "^%wound%",
-          "^%target% 2"
+        [ 628, false, 3, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0", "*.........","%fire%" ],
+        [ 629, false, 24, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0","*.........", "%fire%" ],
+        [ 630, true, 46, "%attack% + 0", "^%range% + 0","*.........", "[r]","%fire%%use%", "¤aoe-circle", "[/r]" ],
+        [ 631, false, 49,[{
+          "gfx": "aoe-line-3-with-black",
+          "x": 0.65,
+          "y": 0.5,
+          "angle": -60.0
+        }], "%attack% + 0", "!ÅKKKKK","","*.........", "[r]","%fire%%use%", "[c]", "^+1 %attack%", "^%wound%","[/c]", "[/r]"],
+        [ 632, false, 67, "%move% - 1","*.........", "%attack% + 1", "^%range% - 1", "%fire%" ],
+        [ 633, false, 77, "%attack% + 0", "^Target all adjacent enemies","*.........", "%ice%%use%", "!^Flame Demon suffers 1 damage." ],
+        [ 634, true, 30,
+          "[r]","%fire%%use%", "[c]","*All adjacent enemies","*suffer 2 damage.", "[/c]","[/r]",
+          "*.........","%move% + 0","*.........", "%attack% - 2", "^%range% + 0", "^%wound%", "^%target% 2"
         ],
-        [ 635, false, 8, "%move% - 1", "*Create a 4 damage trap in an adjacent empty hex closest to an enemy", "%any%%use% %fire%" ]
+        [ 635, false, 8, "%move% - 1","*.........", "*Create a 4 damage trap in an adjacent empty hex closest to an enemy", "%any%%use% %fire%" ]
       ]
     },
     {
       "name": "Frost Demon",
       "cards": [
-        [ 620, false, 18, "%immobilize%", "^Target all enemies within %range% 2", "%ice%%use%", "!^%heal% 3", "!^Self" ],
-        [ 621, false, 38, "%move% + 1", "%attack% - 1" ],
-        [ 622, false, 58, "%move% + 0", "%attack% + 0" ],
-        [ 623, false, 58, "%move% - 1", "%attack% + 0", "^%range% 2", "%ice%%use%", "!^+2 %attack%, +1 %range%" ],
-        [ 624, true, 78, "%move% - 1", "%attack% + 0 %aoe-triangle-2-side-with-black%", "%ice%" ],
-        [ 625, true, 78, "%move% - 1", "%attack% + 0 %aoe-triangle-2-side-with-black%", "%ice%" ],
-        [ 626, false, 58, "%move% - 1", "%attack% - 1", "^%pierce% 3", "%any%%use%", "!%ice%" ],
-        [ 627, false, 18, "%shield% + 2", "%move% + 1", "%fire%%use%", "!^Frost Demon suffers 1 damage" ]
+        [ 620, false, 18, "%immobilize%", "^Target all enemies within %range% 2","*.........", "[r]", "%ice%%use%", "[c]", "^%heal% 3", "^Self","[/c]", "[/r]" ],
+        [ 621, false, 38, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 622, false, 58, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 623, false, 58, "%move% - 1","*.........", "%attack% + 0", "^%range% 2", "[r]","%ice%%use%","[c]", "^+2 %attack%","^+1 %range%", "[/c]", "[/r]" ],
+        [ 624, true, 78,  "[r]", "ÅKK", "[c]","%move% - 1","*.........", "%attack% + 0", "[/c]","Å.","¤aoe-triangle-2-side-with-black", "[/r]", "%ice%" ],
+        [ 625, true, 78,  "[r]", "ÅKK", "[c]","%move% - 1","*.........", "%attack% + 0", "[/c]","Å.","¤aoe-triangle-2-side-with-black", "[/r]", "%ice%" ],
+        [ 626, false, 58, "%move% - 1","*.........", "%attack% - 1", "^%pierce% 3", "%any%%use%", "!%ice%" ],
+        [ 627, false, 18, "%shield% + 2","*.........", "%move% + 1","*.........", "%fire%%use%", "!^Frost Demon suffers 1 damage" ]
       ]
     },
     {
       "name": "Giant Viper",
       "cards": [
-        [ 684, true, 32, "%move% + 0", "%attack% + 0", "^Add +2 Attack if the target is adjacent to any of the Giant Viper's allies." ],
-        [ 685, true, 32, "%move% + 0", "%attack% + 0", "^Add +2 Attack if the target is adjacent to any of the Giant Viper's allies." ],
-        [ 686, false, 11, "%shield% + 1", "%attack% - 1" ],
-        [ 687, false, 43, "%move% + 1", "^%jump%", "%attack% - 1", "^Target all adjacent enemies." ],
-        [ 688, false, 58, "%move% - 1", "%attack% + 1" ],
-        [ 689, false, 58, "%move% + 1", "^%jump%", "%attack% - 1", "^All attacks targeting Giant Viper this round gain Disadvantage." ],
-        [ 690, false, 43, "%move% - 1", "^%jump%", "%attack% + 0", "^%target% 2" ],
-        [ 691, false, 23, "%move% - 1", "%attack% - 1", "^%immobilize%", "%attack% - 1" ]
+        [ 684, true, 32, "%move% + 0","*.........", "%attack% + 0", "^Add +2 Attack if the target is adjacent","^to any of the Giant Viper's allies." ],
+        [ 685, true, 32, "%move% + 0","*.........", "%attack% + 0", "^Add +2 Attack if the target is adjacent","^to any of the Giant Viper's allies." ],
+        [ 686, false, 11, "%shield% + 1","*.........", "%attack% - 1" ],
+        [ 687, false, 43, "%move% + 1", "^%jump%","*.........", "%attack% - 1", "^Target all adjacent enemies." ],
+        [ 688, false, 58, "%move% - 1","*.........", "%attack% + 1" ],
+        [ 689, false, 58, "%move% + 1", "^%jump%","*.........", "%attack% - 1","*.........", "^All attacks targeting Giant Viper","^this round gain Disadvantage." ],
+        [ 690, false, 43, "%move% - 1", "^%jump%","*.........", "%attack% + 0", "^%target% 2" ],
+        [ 691, false, 23, "%move% - 1", "*.........","%attack% - 1", "^%immobilize%","*.........", "%attack% - 1" ]
       ]
     },
     {
       "name": "Guard",
       "cards": [
-        [ 524, true, 15, "%shield% + 1", "%retaliate% + 2" ],
-        [ 525, false, 30, "%move% + 1", "%attack% - 1" ],
-        [ 526, false, 35, "%move% - 1", "%attack% + 0", "^%range% 2" ],
-        [ 527, false, 50, "%move% + 0", "%attack% + 0" ],
-        [ 528, false, 50, "%move% + 0", "%attack% + 0" ],
-        [ 529, false, 70, "%move% - 1", "%attack% + 1" ],
-        [ 530, false, 55, "%move% - 1", "%attack% + 0", "%strengthen%", "^Self" ],
-        [ 531, true, 15, "%shield% + 1", "%attack% + 0", "^%poison%" ]
+        [ 524, true, 15, "%shield% + 1","*.........", "%retaliate% + 2" ],
+        [ 525, false, 30, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 526, false, 35, "%move% - 1","*.........", "%attack% + 0", "^%range% 2" ],
+        [ 527, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 528, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 529, false, 70, "%move% - 1","*.........", "%attack% + 1" ],
+        [ 530, false, 55, "%move% - 1","*.........", "%attack% + 0","*.........", "%strengthen%", "^Self" ],
+        [ 531, true, 15, "%shield% + 1","*.........", "%attack% + 0", "^%poison%" ]
       ]
     },
     {
       "name": "Harrower Infester",
       "cards": [
-        [ 724, false, 38, "%move% - 1", "%attack% + 1", "^%target% 2" ],
-        [ 725, false, 7, "%move% + 0", "%attack% - 1", "^%poison%", "%dark%" ],
-        [ 726, false, 16, "%move% - 1", "%attack% - 1", "%heal% 5", "^Self" ],
-        [ 727, false, 16, "%attack% + 2", "^%immobilize%", "%retaliate% + 2" ],
-        [ 728, true, 2, "%shield% + 2", "%retaliate% 2", "^%range% 3" ],
-        [
-          729,
-          false,
-          30,
-          "%move% - 1",
-          "%attack% + 0 %aoe-line-4-with-black%",
-          "%dark%%use%",
-          "!^Perform \"%heal% 2, Self\" for each target damaged."
-        ],
-        [ 730, false, 38, "%move% + 0", "%attack% - 1", "^%target% 2", "%dark%%use%", "!^+2 %attack%, %disarm%" ],
-        [ 731, true, 7, "%attack% - 1", "^%range% 3", "^%muddle%", "%heal% 4", "^Self" ]
+        [ 724, false, 38, "%move% - 1","*.........", "%attack% + 1", "^%target% 2" ],
+        [ 725, false, 7, "%move% + 0", "*.........","%attack% - 1", "^%poison%", "%dark%" ],
+        [ 726, false, 16, "%move% - 1","*.........", "%attack% - 1","*.........", "%heal% 5", "^Self" ],
+        [ 727, false, 16, "%attack% + 2", "^%immobilize%","*.........", "%retaliate% + 2" ],
+        [ 728, true, 2, "%shield% + 2","*.........", "%retaliate% 2", "^%range% 3" ],
+        [ 729, false, 30, [{
+          "gfx": "aoe-line-4-with-black",
+          "x": 0.73,
+          "y": 0.36,
+          "angle": -30.0
+        }],"%move% - 1","*.........", "%attack% + 0", "[r]","%dark%%use%", "[c]","^Perform \"%heal% 2, Self\"","^for each target damaged.", "[/c]","[/r]"],
+        [ 730, false, 38, "%move% + 0","*.........", "%attack% - 1", "^%target% 2", "%dark%%use%", "!^+2 %attack%, %disarm%" ],
+        [ 731, true, 7, "%attack% - 1", "^%range% 3", "^%muddle%","*.........", "%heal% 4", "^Self" ]
       ]
     },
     {
       "name": "Hound",
       "cards": [
-        [ 540, false, 6, "%move% - 1", "%attack% + 0", "^%immobilize%" ],
-        [ 541, false, 7, "%move% + 0", "%muddle%", "^Target all adjacent enemies" ],
-        [ 542, true, 19, "%move% + 0", "%attack% + 0", "^Add +2 %attack% if the target is adjacent", "^to any of the Hound's allies" ],
-        [ 543, true, 19, "%move% + 0", "%attack% + 0", "^Add +2 %attack% if the target is adjacent", "^to any of the Hound's allies" ],
-        [ 544, false, 26, "%move% + 0", "%attack% + 0" ],
-        [ 545, false, 26, "%move% + 0", "%attack% + 0" ],
-        [ 546, false, 83, "%move% - 2", "%attack% + 1" ],
-        [ 547, false, 72, "%attack% - 1", "^%pierce% 2", "%move% - 2", "%attack% - 1", "^%pierce% 2" ]
+        [ 540, false, 6, "%move% - 1","*.........", "%attack% + 0", "^%immobilize%" ],
+        [ 541, false, 7, "%move% + 0","*.........", "%muddle%", "^Target all adjacent enemies" ],
+        [ 542, true, 19, "%move% + 0","*.........", "%attack% + 0", "^Add +2 %attack% if the target is adjacent", "^to any of the Hound's allies" ],
+        [ 543, true, 19, "%move% + 0","*.........", "%attack% + 0", "^Add +2 %attack% if the target is adjacent", "^to any of the Hound's allies" ],
+        [ 544, false, 26, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 545, false, 26, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 546, false, 83, "%move% - 2","*.........", "%attack% + 1" ],
+        [ 547, false, 72, "%attack% - 1", "^%pierce% 2","*.........", "%move% - 2","*.........", "%attack% - 1", "^%pierce% 2" ]
       ]
     },
     {
       "name": "Imp",
       "cards": [
-        [ 676, false, 5, "%shield% + 5", "%heal% 1", "^Self" ],
-        [ 677, false, 37, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
-        [ 678, false, 37, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
-        [ 679, false, 42, "%move% + 1", "%heal% 2", "^%range% 3" ],
-        [ 680, true, 43, "%move% + 0", "%attack% - 1", "^%range% + 0", "^%target% 2", "^%poison%" ],
-        [ 681, false, 76, "%move% - 1", "%attack% + 1", "^%range% + 0" ],
-        [ 682, true, 43, "%move% + 0", "%attack% - 1", "^%range% + 0", "^%target% 2", "^%curse%" ],
-        [ 683, false, 24, "%strengthen%", "^Affect all allies within %range% 2", "%muddle%", "^Target all enemies within %range% 2" ]
+        [ 676, false, 5, "%shield% + 5","*.........", "%heal% 1", "^Self" ],
+        [ 677, false, 37, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
+        [ 678, false, 37, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
+        [ 679, false, 42, "%move% + 1","*.........", "%heal% 2", "^%range% 3" ],
+        [ 680, true, 43, "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "^%target% 2", "^%poison%" ],
+        [ 681, false, 76, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0" ],
+        [ 682, true, 43, "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "^%target% 2", "^%curse%" ],
+        [ 683, false, 24, "%strengthen%", "^Affect all allies within %range% 2","*.........", "%muddle%", "^Target all enemies within %range% 2" ]
       ]
     },
     {
       "name": "Living Bones",
       "cards": [
-        [ 516, false, 64, "%move% - 1", "%attack% + 1" ],
-        [ 517, true, 20, "%move% - 2", "%attack% + 0", "%heal% 2", "^Self" ],
-        [ 518, false, 25, "%move% + 1", "%attack% - 1" ],
-        [ 519, false, 45, "%move% + 0", "%attack% + 0" ],
-        [ 520, false, 45, "%move% + 0", "%attack% + 0" ],
+        [ 516, false, 64, "%move% - 1", "*.........","%attack% + 1" ],
+        [ 517, true, 20, "%move% - 2","*.........", "%attack% + 0", "*.........","%heal% 2", "^Self" ],
+        [ 518, false, 25, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 519, false, 45, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 520, false, 45, "%move% + 0", "*.........","%attack% + 0" ],
         [ 521, false, 81, "%attack% + 2" ],
-        [ 522, false, 74, "%move% + 0", "%attack% + 0", "^Target one enemy with all attacks" ],
-        [ 523, true, 12, "%shield% + 1", "%heal% 2", "^Self" ]
+        [ 522, false, 74, "%move% + 0","*.........", "%attack% + 0", "^Target one enemy with all attacks" ],
+        [ 523, true, 12, "%shield% + 1","*.........", "%heal% 2", "^Self" ]
       ]
     },
 
     {
       "name": "Living Corpse",
       "cards": [
-        [ 564, false, 21, "%move% + 1", "%muddle% and", "%immobilize%", "^Target one adjacent enemy" ],
-        [ 565, false, 47, "%move% + 1", "%attack% - 1" ],
-        [ 566, true, 66, "%move% + 0", "%attack% + 0" ],
-        [ 567, true, 66, "%move% + 0", "%attack% + 0" ],
-        [ 568, false, 82, "%move% - 1", "%attack% + 1" ],
-        [ 569, false, 91, "%move% + 1", "Living Corpse suffers 1 damage." ],
-        [ 570, false, 71, "%move% + 0", "%attack% + 1", "%poison%", "^Target all adjacent enemies" ],
-        [ 571, false, 32, "%attack% + 2", "^%push% 1", "Living Corpse suffers 1 damage." ]
+        [ 564, false, 21, "%move% + 1","*.........", "%muddle% and", "%immobilize%", "^Target one adjacent enemy" ],
+        [ 565, false, 47, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 566, true, 66, "%move% + 0", "*.........","%attack% + 0" ],
+        [ 567, true, 66, "%move% + 0", "*.........","%attack% + 0" ],
+        [ 568, false, 82, "%move% - 1", "*.........","%attack% + 1" ],
+        [ 569, false, 91, "%move% + 1","*.........", "Living Corpse suffers 1 damage." ],
+        [ 570, false, 71, "%move% + 0", "*.........","%attack% + 1","*.........", "%poison%", "^Target all adjacent enemies" ],
+        [ 571, false, 32, "%attack% + 2", "^%push% 1","*.........", "Living Corpse suffers 1 damage." ]
       ]
     },
     {
       "name": "Living Spirit",
       "cards": [
-        [ 580, true, 22, "%move% - 1", "%attack% - 1", "^%range% + 0", "^%muddle%" ],
-        [ 581, true, 33, "%move% + 0", "%attack% - 1", "^%range% + 0", "^Target all enemies within range" ],
-        [ 582, false, 48, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
-        [ 583, false, 48, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
+        [ 580, true, 22, "%move% - 1","*.........", "%attack% - 1", "^%range% + 0", "^%muddle%" ],
+        [ 581, true, 33, "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "^Target all enemies within range" ],
+        [ 582, false, 48, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
+        [ 583, false, 48, "%move% + 0", "*.........","%attack% + 0", "^%range% + 0" ],
         [ 584, false, 61, "%attack% + 0", "^%range% - 1", "^%target% 2" ],
-        [ 585, false, 75, "%move% - 1", "%attack% + 1", "^%range% - 1", "%heal% 1", "^Self" ],
-        [ 586, false, 55, "%move% + 0", "%curse%", "^%range% + 0", "^Target all enemies within range", "%ice%" ],
-        [ 587, false, 67, "%move% - 1", "%attack% + 1", "^%range% + 0", "%ice%%use%", "!^%stun%" ]
+        [ 585, false, 75, "%move% - 1","*.........", "%attack% + 1", "^%range% - 1","*.........", "%heal% 1", "^Self" ],
+        [ 586, false, 55, "%move% + 0","*.........", "%curse%", "^%range% + 0", "^Target all enemies within range", "%ice%" ],
+        [ 587, false, 67, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0", "*.........","%ice%%use%", "!^%stun%" ]
       ]
     },
     {
       "name": "Lurker",
       "cards": [
-        [ 612, true, 11, "%shield% + 1", "%ice%%use%", "!^%shield% + 2 instead", "%wound%", "^Target all adjacent enemies" ],
-        [ 613, false, 28, "%move% + 1", "%attack% - 1" ],
-        [ 614, false, 38, "%move% + 0", "%attack% + 0" ],
-        [ 615, false, 38, "%move% + 0", "%attack% + 0", "^Target one enemy with all attacks" ],
-        [ 616, false, 61, "%move% - 1", "%attack% + 1" ],
+        [ 612, true, 11, "%shield% + 1", "%ice%%use%", "!^%shield% + 2 instead","*.........", "%wound%", "^Target all adjacent enemies" ],
+        [ 613, false, 28, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 614, false, 38, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 615, false, 38, "%move% + 0","*.........", "%attack% + 0", "^Target one enemy with all attacks" ],
+        [ 616, false, 61, "%move% - 1","*.........", "%attack% + 1" ],
         [ 617, false, 64, "%attack% + 1", "^Target all adjacent enemies" ],
-        [ 618, false, 41, "%ice%%use%", "!^%strengthen%", "!^Self", "%move% + 0", "%attack% - 1", "^%wound%" ],
-        [ 619, true, 23, "%shield% + 1", "%move% + 0", "%attack% - 1", "%ice%" ]
+        [ 618, false, 41, "%ice%%use%", "!^%strengthen%", "!^Self","*.........", "%move% + 0", "%attack% - 1", "^%wound%" ],
+        [ 619, true, 23, "%shield% + 1","*.........", "%move% + 0","*.........", "%attack% - 1", "%ice%" ]
       ]
     },
     {
       "name": "Night Demon",
       "cards": [
-        [ 660, false, 4, "%move% + 1", "%attack% - 1", "%dark%" ],
-        [ 661, false, 7, "%move% + 1", "%attack% - 1", "%dark%%use%", "!^%invisible%", "!^Self" ],
-        [ 662, false, 22, "%move% + 0", "%attack% + 0", "%dark%" ],
+        [ 660, false, 4, "%move% + 1","*.........", "%attack% - 1", "%dark%" ],
+        [ 661, false, 7, "%move% + 1","*.........", "%attack% - 1","*.........", "[r]", "%dark%%use%", "[c]","^%invisible%", "^Self","[/c]","[/r]" ],
+        [ 662, false, 22, "%move% + 0","*.........", "%attack% + 0", "%dark%" ],
         [ 663, false, 26, "%attack% - 2", "^%range% 3", "^%target% 3", "%dark%%use%", "!^%muddle%" ],
-        [ 664, true, 46, "%move% - 1", "%attack% + 1", "%dark%%use%", "!^+2 %attack%" ],
-        [ 665, true, 41, "%move% - 1", "%attack% + 1", "%dark%" ],
-        [ 666, false, 35, "%attack% - 1", "%attack% - 1", "^%pierce% 2", "%light%%use%", "!^%curse%", "!^Self" ],
-        [ 667, false, 15, "%move% + 0", "%attack% - 1", "*All adjacent enemies and allies suffer 1 damage.", "%any%%use%", "!%dark%" ]
+        [ 664, true, 46, "%move% - 1","*.........", "%attack% + 1", "%dark%%use%", "!^+2 %attack%" ],
+        [ 665, true, 41, "%move% - 1","*.........", "%attack% + 1", "%dark%" ],
+        [ 666, false, 35, "%attack% - 1","*.........", "%attack% - 1", "^%pierce% 2", "*.........", "[r]","%light%%use%", "[c]", "^%curse%", "^Self", "[/c]", "[/r]" ],
+        [ 667, false, 15, "%move% + 0","*.........", "%attack% - 1", "^All adjacent enemies and allies","^suffer 1 damage.","*.........", "%any%%use%", "!%dark%" ]
       ]
     },
     {
       "name": "Ooze",
       "cards": [
-        [ 692, false, 36, "%move% + 1", "%attack% - 1", "^%range% + 0" ],
-        [ 693, false, 57, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
+        [ 692, false, 36, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0" ],
+        [ 693, false, 57, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
         [ 694, false, 59, "%attack% + 0", "^%range% + 0", "^%target% 2", "^%poison%" ],
-        [ 695, false, 66, "%move% - 1", "%attack% + 1", "^%range% + 1" ],
-        [
-          696,
-          true,
-          94,
-          "Ooze suffers 2 damage",
-          "*Summons normal Ooze with a hit point value equal to the summoning Ooze's current hit point value (limited by a normal Ooze's specified maximum hit point value)"
-        ],
-        [
-          697,
-          true,
-          94,
-          "Ooze suffers 2 damage",
-          "*Summons normal Ooze with a hit point value equal to the summoning Ooze's current hit point value (limited by a normal Ooze's specified maximum hit point value)"
-        ],
-        [ 699, false, 85, "%push% 1 and", "%poison%", "^Target all adjacent enemies", "%attack% + 1", "^%range% - 1" ],
-        [ 698, false, 66, "%move% - 1", "%loot% 1", "%heal% 2", "^Self" ]
+        [ 695, false, 66, "%move% - 1","*.........", "%attack% + 1", "^%range% + 1" ],
+        [ 696, true, 94, "^Ooze suffers 2 damage","*.........",
+          "^Summons normal Ooze with a hit","^point value equal to the summoning","^Ooze's current hit point value","^(limited by a normal Ooze's specified","^maximum hit point value)"],
+        [ 697, true, 94, "^Ooze suffers 2 damage","*.........",
+          "^Summons normal Ooze with a hit","^point value equal to the summoning","^Ooze's current hit point value","^(limited by a normal Ooze's specified","^maximum hit point value)"],
+        [ 699, false, 85, "%push% 1 and", "%poison%", "^Target all adjacent enemies","*.........", "%attack% + 1", "^%range% - 1" ],
+        [ 698, false, 66, "%move% - 1","*.........", "%loot% 1", "*.........","%heal% 2", "^Self" ]
       ]
     },
     {
       "name": "Rending Drake",
       "cards": [
-        [ 548, false, 12, "%move% + 1", "%attack% - 1" ],
-        [ 549, true, 13, "%attack% - 1", "%move% - 1", "%attack% - 1" ],
-        [ 550, false, 25, "%move% + 0", "%attack% + 0" ],
-        [ 551, false, 39, "%move% - 1", "%attack% + 1" ],
-        [ 552, false, 54, "%move% - 2", "%attack% - 1", "^%range% 3", "^%target% 2", "^%poison%" ],
-        [ 553, false, 59, "%move% - 2", "%attack% + 1", "^%target% 2" ],
-        [ 555, false, 6, "%shield% + 2", "%heal% 2", "^Self", "%strengthen%", "^Self" ],
-        [ 554, true, 72, "%attack% - 1", "%attack% - 1", "%attack% - 2" ]
+        [ 548, false, 12, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 549, true, 13, "%attack% - 1","*.........", "%move% - 1","*.........", "%attack% - 1" ],
+        [ 550, false, 25, "%move% + 0", "*.........","%attack% + 0" ],
+        [ 551, false, 39, "%move% - 1","*.........", "%attack% + 1" ],
+        [ 552, false, 54, "%move% - 2","*.........", "%attack% - 1", "^%range% 3", "^%target% 2", "^%poison%" ],
+        [ 553, false, 59, "%move% - 2","*.........", "%attack% + 1", "^%target% 2" ],
+        [ 555, false, 6, "%shield% + 2","*.........", "%heal% 2", "^Self","*.........", "%strengthen%", "^Self" ],
+        [ 554, true, 72, "%attack% - 1","*.........","%attack% - 1","*.........", "%attack% - 2" ]
       ]
     },
     {
       "name": "Savvas Icestorm",
       "cards": [
-        [ 708, false, 70, "%push% 2", "^Target all adjacent enemies", "%air%%use%", "!^%push% 4 instead", "%attack% + 1", "^%range% + 1" ],
-        [ 709, false, 98, "^Summon normal Wind Demon", "%air%" ],
-        [ 710, false, 98, "^Summon normal Frost Demon", "%ice%" ],
-        [
-          711,
-          false,
-          19,
-          "%move% + 0",
-          "%attack% - 1",
-          "^%range% - 1",
-          "%shield% + 1",
-          "^Affect self and all allies within %range% 2",
-          "%ice%"
-        ],
-        [ 712, false, 14, "%attack% + 0", "^%range% + 0", "%ice%%use%", "!^+2 %attack%", "!^%immobilize%", "%retaliate% + 2", "%air%" ],
-        [ 713, false, 14, "%shield% + 4", "%heal% 2", "^%range% 3", "%ice%%use%", "!^+3 %heal%", "%air%%use%", "!^%attack% + 0" ],
-        [ 714, true, 47, "%disarm%", "^Target all adjacent enemies", "%move% + 0", "%attack% - 1", "^%range% + 0", "%air%" ],
-        [ 715, true, 35, "%move% - 1", "%attack% - 1 %aoe-triangle-3-side-with-corner-black%", "%ice%" ]
+        [ 708, false, 70, "%push% 2", "^Target all adjacent enemies", "%air%%use%", "!^%push% 4 instead","*.........", "%attack% + 1", "^%range% + 1" ],
+        [ 709, false, 98, "Summon normal","Wind Demon", "%air%" ],
+        [ 710, false, 98, "Summon normal","Frost Demon", "%ice%" ],
+        [ 711, false, 19,  [{
+          "gfx": "ice",
+          "x": 0.783,
+          "y": 0.56
+        }],"%move% + 0","*.........", "%attack% - 1", "^%range% - 1","*.........", "%shield% + 1",
+          "^Affect self and all allies within %range% 2"],
+        [ 712, false, 14,[{
+          "gfx": "air",
+          "x": 0.783,
+          "y": 0.76
+        }], "     %attack% + 0", "^%range% + 0", "%ice%%use%", "!^+2 %attack%", "!^%immobilize%","*.........", "%retaliate% + 2" ],
+        [ 713, false, 14, "%shield% + 4","*.........", "%heal% 2", "^%range% 3", "%ice%%use%", "!^+3 %heal%","*.........", "%air%%use%", "!^%attack% + 0" ],
+        [ 714, true, 47, [{
+          "gfx": "air",
+          "x": 0.783,
+          "y": 0.46
+        }],"%disarm%", "^Target all adjacent enemies","*.........", "%move% + 0","*.........", "%attack% - 1", "^%range% + 0" ],
+        [ 715, true, 35, "[r]","[c]","%move% - 1","*.........", "%attack% - 1", "[/c]","¤aoe-triangle-3-side-with-corner-black", "[/r]", "%ice%" ]
       ]
     },
     {
       "name": "Savvas Lavaflow",
       "cards": [
-        [ 716, false, 97, "^Summon normal Flame Demon", "%fire%" ],
-        [ 717, false, 97, "^Summon normal Earth Demon", "%earth%" ],
-        [ 718, false, 22, "%move% + 1", "%attack% - 1", "^Target all adjacent enemies", "%fire%%use%", "!^%retaliate% + 3" ],
-        [
-          719,
-          true,
-          68,
-          "%move% - 1",
-          "%attack% + 1",
-          "^%range% 3",
-          "^All allies and enemies adjacent to the target suffer 2 damage.",
-          "%earth%"
-        ],
-        [ 720, false, 41, "%move% + 0", "%attack% - 1 %aoe-line-4-with-black%", "%earth%%use%", "!^+2 %attack%, %immobilize%" ],
-        [
-          721,
-          false,
-          51,
-          "^All enemies suffer 2 damage.",
-          "%fire%%use%",
-          "!^%wound% all enemies",
-          "%earth%%use%",
-          "!^%disarm% all enemies"
-        ],
+        [ 716, false, 97, "Summon normal","Flame Demon", "%fire%" ],
+        [ 717, false, 97, "Summon normal","Earth Demon", "%earth%" ],
+        [ 718, false, 22, "%move% + 1","*.........", "%attack% - 1", "^Target all adjacent enemies","*.........", "%fire%%use%", "!^%retaliate% + 3" ],
+        [ 719, true, 68, [{
+          "gfx": "earth",
+          "x": 0.783,
+          "y": 0.23
+        }],"%move% - 1","*.........", "%attack% + 1", "^%range% 3",
+          "^All allies and enemies adjacent","^to the target suffer 2 damage."],
+        [ 720, false, 41,  [{
+          "gfx": "aoe-line-4-with-black",
+          "x": 0.9,
+          "y": 0.3
+        }],"%move% + 0", "*.........","%attack% - 1        ", "%earth%%use%", "!^+2 %attack%, %immobilize%" ],
+        [ 721, false, 51, "^All enemies suffer 2 damage.","*.........",
+          "%fire%%use%", "!^%wound% all enemies", "*.........",
+          "%earth%%use%", "!^%disarm% all enemies"],
         [ 722, false, 31, "%heal% 4", "^%range% 3", "%earth%%use%", "!^%target% 3" ],
-        [ 723, true, 68, "%move% - 1", "%attack% - 1", "^%range% 3", "^%target% 2", "%fire%" ]
-      ]
+        [ 723, true, 68, "%move% - 1","*.........", "%attack% - 1", "^%range% 3", "^%target% 2", "%fire%" ]]
     },
     {
       "name": "Scout",
       "cards": [
-        [ 668, false, 29, "%move% - 1", "%attack% - 1", "^%range% 3" ],
-        [ 669, false, 40, "%move% + 1", "%attack% - 1" ],
-        [ 670, false, 53, "%move% + 0", "%attack% + 0" ],
-        [ 671, false, 54, "%move% - 2", "%attack% + 0", "^%range% 3", "^%poison%" ],
-        [ 672, false, 69, "%move% - 1", "%attack% + 1" ],
+        [ 668, false, 29, "%move% - 1","*.........", "%attack% - 1", "^%range% 3" ],
+        [ 669, false, 40, "%move% + 1","*.........","%attack% - 1" ],
+        [ 670, false, 53, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 671, false, 54, "%move% - 2","*.........", "%attack% + 0", "^%range% 3", "^%poison%" ],
+        [ 672, false, 69, "%move% - 1","*.........", "%attack% + 1" ],
         [ 673, true, 92, "%attack% + 2", "^%poison%" ],
-        [ 675, true, 35, "%move% + 1", "^%jump%", "%loot% 1" ],
+        [ 675, true, 35, "%move% + 1", "^%jump%","*.........", "%loot% 1" ],
         [ 674, false, 79, "%attack% - 1", "^%range% 4", "^%target% 2" ]
       ]
     },
     {
       "name": "Shaman",
       "cards": [
-        [ 588, false, 8, "%move% + 0", "%attack% - 1", "^%range% + 0", "^%disarm%" ],
-        [ 589, false, 8, "%move% - 1", "%attack% + 0", "^%range% + 0", "^%immobilize%" ],
-        [ 590, true, 23, "%move% + 0", "%heal% 3", "^%range% 3" ],
-        [ 591, true, 23, "%move% + 0", "%heal% 3", "^%range% 3" ],
-        [ 592, false, 62, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
-        [ 593, false, 74, "%move% - 1", "%attack% + 1", "^%range% + 0" ],
-        [ 594, false, 89, "%move% - 1", "%heal% 1", "^Affect all adjacent allies", "%bless%", "^Self" ],
-        [ 595, false, 9, "%move% + 1", "%attack% - 1", "^%range% + 0", "^%curse%", "^%target% 2" ]
+        [ 588, false, 8, "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "^%disarm%" ],
+        [ 589, false, 8, "%move% - 1","*.........", "%attack% + 0", "^%range% + 0", "^%immobilize%" ],
+        [ 590, true, 23, "%move% + 0", "*.........","%heal% 3", "^%range% 3" ],
+        [ 591, true, 23, "%move% + 0","*.........", "%heal% 3", "^%range% 3" ],
+        [ 592, false, 62, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
+        [ 593, false, 74, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0" ],
+        [ 594, false, 89, "%move% - 1","*.........", "%heal% 1", "^Affect all adjacent allies", "*.........","%bless%", "^Self" ],
+        [ 595, false, 9, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0", "^%curse%", "^%target% 2" ]
       ]
     },
     {
       "name": "Spitting Drake",
       "cards": [
-        [ 556, false, 32, "%move% + 1", "%attack% - 1", "^%range% + 0" ],
-        [ 557, false, 52, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
-        [ 558, true, 57, "%move% + 0", "%attack% - 1 %aoe-triangle-2-side%", "^%range% - 1" ],
+        [ 556, false, 32, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0" ],
+        [ 557, false, 52, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
+        [ 558, true, 57, "[r]", "[c]","%move% + 0", "*.........","%attack% - 1", "!Å.","^%range% - 1", "[/c]","¤aoe-triangle-2-side", "[/r]"],
         [ 559, false, 27, "%attack% + 0", "^%range% + 0", "^%target% 2", "^%poison%" ],
-        [ 560, false, 87, "%move% - 1", "%attack% + 1", "^%range% + 0" ],
+        [ 560, false, 87, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0" ],
         [ 561, false, 89, "%attack% - 2", "^%range% + 0", "^%stun%" ],
-        [ 562, false, 6, "%shield% + 2", "%heal% 2", "^Self", "%strengthen%", "^Self" ],
-        [ 563, true, 89, "%move% - 1", "%attack% - 2 %aoe-circle%", "^%range% - 2", "^%poison%" ]
+        [ 562, false, 6, "%shield% + 2","*.........", "%heal% 2", "^Self","*.........", "%strengthen%", "^Self" ],
+        [ 563, true, 89, "[r]", "[c]","%move% - 1","*.........", "%attack% - 2", "!Å.", "^%range% - 2", "^%poison%", "[/c]" ,"¤aoe-circle", "[/r]" ]
       ]
     },
     {
       "name": "Stone Golem",
       "cards": [
         [ 740, false, 11, "%retaliate% 3", "^%range% 3" ],
-        [ 741, false, 28, "%move% + 1", "%attack% + 0", "Stone Golem suffers 1 damage." ],
-        [ 742, true, 51, "%move% + 1", "%attack% - 1" ],
-        [ 743, false, 65, "%move% + 0", "%attack% + 0" ],
-        [ 744, false, 72, "%attack% + 1", "^%range% 3", "Stone Golem suffers 2 damage" ],
-        [ 745, true, 90, "%move% - 1", "%attack% + 1" ],
-        [ 747, false, 28, "%move% + 1", "%attack% - 2", "^%range% 3", "^%pull% 2", "^%immobilize%" ],
-        [ 746, false, 83, "%move% + 0", "%attack% - 1", "^Target all adjacent enemies" ]
+        [ 741, false, 28, "%move% + 1","*.........", "%attack% + 0", "*.........","^Stone Golem suffers 1 damage." ],
+        [ 742, true, 51, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 743, false, 65, "%move% + 0", "*.........","%attack% + 0" ],
+        [ 744, false, 72, "%attack% + 1", "^%range% 3","*.........", "^Stone Golem suffers 2 damage." ],
+        [ 745, true, 90, "%move% - 1","*.........", "%attack% + 1" ],
+        [ 747, false, 28, "%move% + 1", "*.........","%attack% - 2", "^%range% 3", "^%pull% 2", "^%immobilize%" ],
+        [ 746, false, 83, "%move% + 0", "*.........","%attack% - 1", "^Target all adjacent enemies" ]
       ]
     },
     {
       "name": "Sun Demon",
       "cards": [
         [ 652, true, 17, "%heal% 3", "^%range% 3", "%light%%use%", "!^Target all allies within range" ],
-        [ 653, false, 36, "%move% + 0", "%attack% + 0", "^Target all adjacent enemies", "%light%" ],
-        [ 654, false, 36, "%move% + 0", "%attack% + 0", "^Target all adjacent enemies", "%light%" ],
-        [ 655, false, 68, "%move% + 0", "%attack% + 1", "%light%" ],
-        [ 656, true, 73, "%move% + 0", "%attack% + 1", "%light%%use%", "!^%heal% 3", "!^Self" ],
-        [ 657, false, 95, "%move% - 1", "%attack% + 0", "^%range% 4", "%light%%use%", "!^Target all enemies within range" ],
-        [ 658, false, 88, "%move% - 1", "%attack% - 1", "^Target all adjacent enemies", "%dark%%use%", "!^%muddle%", "!^Self" ],
-        [ 659, false, 50, "%move% + 0", "%attack% + 0", "^%range% 3", "%any%%use%", "!%light%" ]
+        [ 653, false, 36, "%move% + 0", "*.........","%attack% + 0", "^Target all adjacent enemies", "%light%" ],
+        [ 654, false, 36, "%move% + 0","*.........", "%attack% + 0", "^Target all adjacent enemies", "%light%" ],
+        [ 655, false, 68, "%move% + 0", "*.........","%attack% + 1", "%light%" ],
+        [ 656, true, 73, "%move% + 0", "*.........","%attack% + 1", "*.........","[r]","%light%%use%", "[c]", "^%heal% 3", "^Self", "[/c]" ,"[/r]"],
+        [ 657, false, 95, "%move% - 1","*.........", "%attack% + 0", "^%range% 4", "%light%%use%", "!^Target all enemies within range" ],
+        [ 658, false, 88, "%move% - 1", "*.........","%attack% - 1", "^Target all adjacent enemies","*.........", "[r]", "%dark%%use%", "[c]","^%muddle%", "^Self", "[/c]" , "[/r]"],
+        [ 659, false, 50, "%move% + 0", "*.........","%attack% + 0", "^%range% 3", "*.........","%any%%use%", "!%light%" ]
       ]
     },
     {
       "name": "Wind Demon",
       "cards": [
-        [ 644, false, 9, "%attack% - 1", "^%range% + 0", "%heal% 1", "^Self", "%air%%use%", "!^%invisible%", "!^Self" ],
-        [ 645, true, 21, "%move% + 0", "%attack% + 0", "^%range% + 0", "^%pull% 1", "%air%" ],
-        [ 646, true, 21, "%move% + 0", "%attack% + 0", "^%range% + 0", "^%pull% 1", "%air%" ],
-        [ 647, false, 29, "%move% + 0", "%attack% - 1", "^%range% + 0", "^%target% 2", "%air%%use%", "!^%push% 2" ],
-        [ 648, false, 37, "%move% + 0", "%attack% + 0 %aoe-4-with-black%", "%air%%use%", "!^+1 %attack% %aoe-circle-with-side-black%" ],
-        [ 649, false, 43, "%move% - 1", "%attack% + 1", "^%range% + 0", "%air%%use%", "!^%target% 2" ],
-        [ 650, false, 43, "%push% 1", "^Target all adjacent enemies", "%attack% + 0", "^%range% + 0", "%earth%%use%", "!^-2 %range%" ],
-        [ 651, false, 2, "%shield% + 1", "%move% - 1", "%attack% - 1", "^%range% + 0", "%any%%use%", "!%air%" ]
+        [ 644, false, 9, "%attack% - 1", "^%range% + 0", "*.........","%heal% 1", "^Self","*.........", "[r]","%air%%use%", "[c]","^%invisible%", "^Self","[/c]", "[/r]" ],
+        [ 645, true, 21, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0", "^%pull% 1", "%air%" ],
+        [ 646, true, 21, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0", "^%pull% 1", "%air%" ],
+        [ 647, false, 29, "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "^%target% 2", "%air%%use%", "!^%push% 2" ],
+        [ 648, false, 37, "[r]", "[c]","        %move% + 0", "*.........","        %attack% + 0", "[/c]","Å.","¤aoe-4-with-black","[/r]", "[r]","%air%%use%", "!^+1 %attack%","Å.", "¤aoe-circle-with-side-black", "[/r]" ],
+        [ 649, false, 43, "%move% - 1", "*.........","%attack% + 1", "^%range% + 0", "%air%%use%", "!^%target% 2" ],
+        [ 650, false, 43, "%push% 1", "^Target all adjacent enemies", "*.........","%attack% + 0", "^%range% + 0", "%earth%%use%", "!^-2 %range%" ],
+        [ 651, false, 2, "%shield% + 1","*.........", "%move% - 1","*.........", "%attack% - 1", "^%range% + 0", "%any%%use%", "!%air%" ]
       ]
     }
 
@@ -3319,49 +3299,49 @@
       "levels": [
         {
           "level": 0, "health": "11xC", "move": 0, "attack": 3,
-          "special1": [ "%attack% + 0 %boss-aoe-elder-drake-sp1%" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 1, "health": "12xC", "move": 0, "attack": 4,
-          "special1": [ "%attack% + 0 %boss-aoe-elder-drake-sp1%" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 2, "health": "15xC", "move": 0, "attack": 4,
-          "special1": [ "%attack% + 0 %boss-aoe-elder-drake-sp1%" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 3, "health": "16xC", "move": 0, "attack": 5,
-          "special1": [ "%attack% + 0 %boss-aoe-elder-drake-sp1%" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 4, "health": "20xC", "move": 0, "attack": 5,
-          "special1": [ "%attack% + 0 %boss-aoe-elder-drake-sp1%" ],
+          "special1":[ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 5, "health": "22xC", "move": 0, "attack": 6,
-          "special1": [ "%attack% + 0 %boss-aoe-elder-drake-sp1%" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 6, "health": "27xC", "move": 0, "attack": 6,
-          "special1": [ "%attack% + 0 %boss-aoe-elder-drake-sp1%" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 7, "health": "29xC", "move": 0, "attack": 7,
-          "special1": [ "%attack% + 0 %boss-aoe-elder-drake-sp1%" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         }
@@ -3376,8 +3356,8 @@
           "health": "20xC",
           "move": 2,
           "attack": 5,
-          "special1": [ "%move% + 9", "%attack% + 9" ],
-          "special2": [ "Teleport", "%attack% + 1", "%range% 5", "%poison%", "%wound%", "%stun%" ],
+          "special1": [ "^%move% + 9, %attack% + 9" ],
+          "special2": [ "^Teleport", "^%attack% + 1", "*%range% 5", "*%poison%","*%wound%","*%stun%" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3385,8 +3365,8 @@
           "health": "25xC",
           "move": 2,
           "attack": 5,
-          "special1": [ "%move% + 9", "%attack% + 9" ],
-          "special2": [ "Teleport", "%attack% + 1", "%range% 5", "%poison%", "%wound%", "%stun%" ],
+          "special1": [ "^%move% + 9, %attack% + 9" ],
+          "special2": [ "^Teleport", "^%attack% + 1", "*%range% 5", "*%poison%","*%wound%","*%stun%" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3394,8 +3374,8 @@
           "health": "29xC",
           "move": 2,
           "attack": 6,
-          "special1": [ "%move% + 9", "%attack% + 9" ],
-          "special2": [ "Teleport", "%attack% + 1", "%range% 5", "%poison%", "%wound%", "%stun%" ],
+          "special1": [ "^%move% + 9, %attack% + 9" ],
+          "special2": [ "^Teleport", "^%attack% + 1", "*%range% 5", "*%poison%","*%wound%","*%stun%" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3403,8 +3383,8 @@
           "health": "35xC",
           "move": 2,
           "attack": 6,
-          "special1": [ "%move% + 9", "%attack% + 9" ],
-          "special2": [ "Teleport", "%attack% + 1", "%range% 5", "%poison%", "%wound%", "%stun%" ],
+          "special1": [ "^%move% + 9, %attack% + 9" ],
+          "special2": [ "^Teleport", "^%attack% + 1", "*%range% 5", "*%poison%","*%wound%","*%stun%" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3412,8 +3392,8 @@
           "health": "39xC",
           "move": 3,
           "attack": 7,
-          "special1": [ "%move% + 9", "%attack% + 9" ],
-          "special2": [ "Teleport", "%attack% + 1", "%range% 5", "%poison%", "%wound%", "%stun%" ],
+          "special1": [ "^%move% + 9, %attack% + 9" ],
+          "special2": [ "^Teleport", "^%attack% + 1", "*%range% 5", "*%poison%","*%wound%","*%stun%" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3421,8 +3401,8 @@
           "health": "46xC",
           "move": 3,
           "attack": 7,
-          "special1": [ "%move% + 9", "%attack% + 9" ],
-          "special2": [ "Teleport", "%attack% + 1", "%range% 5", "%poison%", "%wound%", "%stun%" ],
+          "special1": [ "^%move% + 9, %attack% + 9" ],
+          "special2": [ "^Teleport", "^%attack% + 1", "*%range% 5", "*%poison%","*%wound%","*%stun%" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3430,8 +3410,8 @@
           "health": "50xC",
           "move": 3,
           "attack": 8,
-          "special1": [ "%move% + 9", "%attack% + 9" ],
-          "special2": [ "Teleport", "%attack% + 1", "%range% 5", "%poison%", "%wound%", "%stun%" ],
+          "special1": [ "^%move% + 9, %attack% + 9" ],
+          "special2": [ "^Teleport", "^%attack% + 1", "*%range% 5", "*%poison%","*%wound%","*%stun%" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3439,8 +3419,8 @@
           "health": "56xC",
           "move": 3,
           "attack": 9,
-          "special1": [ "%move% + 9", "%attack% + 9" ],
-          "special2": [ "Teleport", "%attack% + 1", "%range% 5", "%poison%", "%wound%", "%stun%" ],
+          "special1": [ "^%move% + 9, %attack% + 9" ],
+          "special2": [ "^Teleport", "^%attack% + 1", "*%range% 5", "*%poison%","*%wound%","*%stun%" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
         }
       ]
@@ -3454,7 +3434,7 @@
           "health": "6xC",
           "move": 2,
           "attack": "C",
-          "special1": [ "%move% - 1", "%attack% - 1 %boss-aoe-inox-bodyguard-sp1%" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 3" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3463,7 +3443,7 @@
           "health": "7xC",
           "move": 2,
           "attack": "1+C",
-          "special1": [ "%move% - 1", "%attack% - 1 %boss-aoe-inox-bodyguard-sp1%" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 3" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3472,7 +3452,7 @@
           "health": "9xC",
           "move": 2,
           "attack": "1+C",
-          "special1": [ "%move% - 1", "%attack% - 1 %boss-aoe-inox-bodyguard-sp1%" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 3" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3481,7 +3461,7 @@
           "health": "10xC",
           "move": 3,
           "attack": "2+C",
-          "special1": [ "%move% - 1", "%attack% - 1 %boss-aoe-inox-bodyguard-sp1%" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 4" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3490,7 +3470,7 @@
           "health": "11xC",
           "move": 3,
           "attack": "2+C",
-          "special1": [ "%move% - 1", "%attack% - 1 %boss-aoe-inox-bodyguard-sp1%" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 4" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3499,7 +3479,7 @@
           "health": "13xC",
           "move": 3,
           "attack": "3+C",
-          "special1": [ "%move% - 1", "%attack% - 1 %boss-aoe-inox-bodyguard-sp1%" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 5" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3508,7 +3488,7 @@
           "health": "15xC",
           "move": 4,
           "attack": "3+C",
-          "special1": [ "%move% - 1", "%attack% - 1 %boss-aoe-inox-bodyguard-sp1%" ],
+          "special1":[ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 5" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3517,7 +3497,7 @@
           "health": "17xC",
           "move": 4,
           "attack": "4+C",
-          "special1": [ "%move% - 1", "%attack% - 1 %boss-aoe-inox-bodyguard-sp1%" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 5" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         }
@@ -3532,8 +3512,8 @@
           "health": "6xC",
           "move": 2,
           "attack": 2,
-          "special1": [ "Summon Living Bones", "%attack% - 1, Target all", "adjacent enemies" ],
-          "special2": [ "Summon Living Corpse", "%move% - 1", "%attack% + 2" ],
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
           "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
         },
         {
@@ -3541,8 +3521,8 @@
           "health": "7xC",
           "move": 2,
           "attack": 3,
-          "special1": [ "Summon Living Bones", "%attack% - 1, Target all", "adjacent enemies" ],
-          "special2": [ "Summon Living Corpse", "%move% - 1", "%attack% + 2" ],
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
           "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
         },
         {
@@ -3550,8 +3530,8 @@
           "health": "9xC",
           "move": 3,
           "attack": 3,
-          "special1": [ "Summon Living Bones", "%attack% - 1, Target all", "adjacent enemies" ],
-          "special2": [ "Summon Living Corpse", "%move% - 1", "%attack% + 2" ],
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
           "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
         },
         {
@@ -3559,8 +3539,8 @@
           "health": "12xC",
           "move": 4,
           "attack": 4,
-          "special1": [ "Summon Living Bones", "%attack% - 1, Target all", "adjacent enemies" ],
-          "special2": [ "Summon Living Corpse", "%move% - 1", "%attack% + 2" ],
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
           "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
         },
         {
@@ -3568,8 +3548,8 @@
           "health": "13xC",
           "move": 4,
           "attack": 5,
-          "special1": [ "Summon Living Bones", "%attack% - 1, Target all", "adjacent enemies" ],
-          "special2": [ "Summon Living Corpse", "%move% - 1", "%attack% + 2" ],
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
           "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
         },
         {
@@ -3577,8 +3557,8 @@
           "health": "15xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "Summon Living Bones", "%attack% - 1, Target all", "adjacent enemies" ],
-          "special2": [ "Summon Living Corpse", "%move% - 1", "%attack% + 2" ],
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
           "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
         },
         {
@@ -3586,8 +3566,8 @@
           "health": "18xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "Summon Living Bones", "%attack% - 1, Target all", "adjacent enemies" ],
-          "special2": [ "Summon Living Corpse", "%move% - 1", "%attack% + 2" ],
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
           "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
         },
         {
@@ -3595,8 +3575,8 @@
           "health": "22xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "Summon Living Bones", "%attack% - 1, Target all", "adjacent enemies" ],
-          "special2": [ "Summon Living Corpse", "%move% - 1", "%attack% + 2" ],
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
           "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
         }
       ]
@@ -3696,8 +3676,8 @@
           "health": "8xC",
           "move": 3,
           "attack": 4,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3705,8 +3685,8 @@
           "health": "9xC",
           "move": 4,
           "attack": 4,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3714,8 +3694,8 @@
           "health": "10xC",
           "move": 4,
           "attack": 5,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3723,8 +3703,8 @@
           "health": "12xC",
           "move": 4,
           "attack": 6,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3732,8 +3712,8 @@
           "health": "14xC",
           "move": 5,
           "attack": 6,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3741,8 +3721,8 @@
           "health": "16xC",
           "move": 5,
           "attack": 7,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3750,8 +3730,8 @@
           "health": "20xC",
           "move": 5,
           "attack": 7,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         },
         {
@@ -3759,8 +3739,8 @@
           "health": "22xC",
           "move": 5,
           "attack": 8,
-          "special1": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
-          "special2": [ "Throne moves", "Summon Demon", "%move% + 2, %attack% - 1" ],
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
         }
       ]
@@ -3775,8 +3755,8 @@
           "move": 0,
           "attack": 5,
           "range": 3,
-          "special1": [ "Summon Deep Terror", "%attack% - 3 %boss-aoe-sightless-eye-sp1%" ],
-          "special2": [ "Summon Deep Terror", "%attack% - 2 %boss-aoe-sightless-eye-sp2%" ],
+          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3785,8 +3765,8 @@
           "move": 0,
           "attack": 6,
           "range": 3,
-          "special1": [ "Summon Deep Terror", "%attack% - 3 %boss-aoe-sightless-eye-sp1%" ],
-          "special2": [ "Summon Deep Terror", "%attack% - 2 %boss-aoe-sightless-eye-sp2%" ],
+          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3795,8 +3775,8 @@
           "move": 0,
           "attack": 6,
           "range": 3,
-          "special1": [ "Summon Deep Terror", "%attack% - 3 %boss-aoe-sightless-eye-sp1%" ],
-          "special2": [ "Summon Deep Terror", "%attack% - 2 %boss-aoe-sightless-eye-sp2%" ],
+          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3805,8 +3785,8 @@
           "move": 0,
           "attack": 7,
           "range": 3,
-          "special1": [ "Summon Deep Terror", "%attack% - 3 %boss-aoe-sightless-eye-sp1%" ],
-          "special2": [ "Summon Deep Terror", "%attack% - 2 %boss-aoe-sightless-eye-sp2%" ],
+          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3815,8 +3795,8 @@
           "move": 0,
           "attack": 7,
           "range": 3,
-          "special1": [ "Summon Deep Terror", "%attack% - 3 %boss-aoe-sightless-eye-sp1%" ],
-          "special2": [ "Summon Deep Terror", "%attack% - 2 %boss-aoe-sightless-eye-sp2%" ],
+          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3825,8 +3805,8 @@
           "move": 0,
           "attack": 8,
           "range": 3,
-          "special1": [ "Summon Deep Terror", "%attack% - 3 %boss-aoe-sightless-eye-sp1%" ],
-          "special2": [ "Summon Deep Terror", "%attack% - 2 %boss-aoe-sightless-eye-sp2%" ],
+          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3835,8 +3815,8 @@
           "move": 0,
           "attack": 8,
           "range": 3,
-          "special1": [ "Summon Deep Terror", "%attack% - 3 %boss-aoe-sightless-eye-sp1%" ],
-          "special2": [ "Summon Deep Terror", "%attack% - 2 %boss-aoe-sightless-eye-sp2%" ],
+          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3845,8 +3825,8 @@
           "move": 0,
           "attack": 9,
           "range": 3,
-          "special1": [ "Summon Deep Terror", "%attack% - 3 %boss-aoe-sightless-eye-sp1%" ],
-          "special2": [ "Summon Deep Terror", "%attack% - 2 %boss-aoe-sightless-eye-sp2%" ],
+          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         }
       ]
@@ -3860,8 +3840,8 @@
           "health": "6xC",
           "move": 3,
           "attack": 3,
-          "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
+          "special1": [ "^%attack% - 1, Target all", "^adjacent enemies", "^%attack% + 0, %range% 3", "^Hatch eggs" ],
+          "special2": [ "^Summon C eggs", "^%move% - 1", "^%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3869,8 +3849,8 @@
           "health": "7xC",
           "move": 4,
           "attack": 3,
-          "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
+          "special1": [ "^%attack% - 1, Target all", "^adjacent enemies", "^%attack% + 0, %range% 3", "^Hatch eggs" ],
+          "special2": [ "^Summon C eggs", "^%move% - 1", "^%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3878,8 +3858,8 @@
           "health": "8xC",
           "move": 4,
           "attack": 4,
-          "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
+          "special1": [ "^%attack% - 1, Target all", "^adjacent enemies", "^%attack% + 0, %range% 3", "^Hatch eggs" ],
+          "special2": [ "^Summon C eggs", "^%move% - 1", "^%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3887,8 +3867,8 @@
           "health": "10xC",
           "move": 4,
           "attack": 4,
-          "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
+          "special1": [ "^%attack% - 1, Target all", "^adjacent enemies", "^%attack% + 0, %range% 3", "^Hatch eggs" ],
+          "special2": [ "^Summon C eggs", "^%move% - 1", "^%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3896,8 +3876,8 @@
           "health": "12xC",
           "move": 5,
           "attack": 4,
-          "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
+          "special1": [ "^%attack% - 1, Target all", "^adjacent enemies", "^%attack% + 0, %range% 3", "^Hatch eggs" ],
+          "special2": [ "^Summon C eggs", "^%move% - 1", "^%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3905,8 +3885,8 @@
           "health": "14xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
+          "special1": [ "^%attack% - 1, Target all", "^adjacent enemies", "^%attack% + 0, %range% 3", "^Hatch eggs" ],
+          "special2": [ "^Summon C eggs", "^%move% - 1", "^%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3914,8 +3894,8 @@
           "health": "17xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
+          "special1": [ "^%attack% - 1, Target all", "^adjacent enemies", "^%attack% + 0, %range% 3", "^Hatch eggs" ],
+          "special2": [ "^Summon C eggs", "^%move% - 1", "^%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
@@ -3923,8 +3903,8 @@
           "health": "20xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "%attack% - 1, Target all", "adjacent enemies", "%attack% + 0, %range% 3", "Hatch eggs" ],
-          "special2": [ "Summon C eggs", "%move% - 1", "%attack% + 0" ],
+          "special1": [ "^%attack% - 1, Target all", "^adjacent enemies", "^%attack% + 0, %range% 3", "^Hatch eggs" ],
+          "special2": [ "^Summon C eggs", "^%move% - 1", "^%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         }
       ]

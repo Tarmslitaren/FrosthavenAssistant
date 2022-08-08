@@ -412,12 +412,12 @@
       "edition": "Crimson Scales",
       "cards": [
         [1214, true, 34, "%move% + 1", "*.........","%chill%", "^Target all adjacent enemies that do", "^not have any %chill% tokens" ],
-        [1215, true, 34, "%move% + 1","*.........", "%All adjacent enemies with",  "^%chill% suffer 1 damage."],
+        [1215, true, 34, "%move% + 1","*.........", "^All adjacent enemies with",  "^%chill% suffer 1 damage."],
         [1216, false, 60, "%move% + 1", "*.........","%attack% + 0", "%air%" ],
         [1217, false, 45, "%attack% + 2", "^%chill%", "%ice%" ],
         [1218, false, 86, "%move% + 1","*.........", "%attack% - 1", "^Add +2 %attack% if the target", "^has %chill%" ],
         [1219, false, 86, "%move% + 1","*.........", "%attack% - 1", "^Add +2 %attack% if the target", "^has %chill%" ],
-        [1220, false, 94, "%move% + 2","*.........", "%ice%%use%", "!^%heal% 2", "*Self" ],
+        [1220, false, 94, "%move% + 2","*.........", "[r]","%ice%%use%", "[c]","^%heal% 2", "^Self", "[/c]", "[/r]" ],
         [1221, false, 77, "%stun% and", "%push% 1", "^Target one adjacent enemy" ]
       ]
     },
@@ -427,27 +427,12 @@
       "cards": [
         [2000, false, 6, "%shield% + 2","*.........", "%heal% 2", "^Self","*.........", "%strengthen%", "^Self" ],
         [2001, false, 18, "%move% + 1","*.........", "%attack% - 1" ],
-        [2002, true, 24, "^%attack% - 1","*%wound%","*.........", "*Focus on the enemy farthest away.", "^%move% + 0","*.........", "^%attack% - 1","*%wound%", "*Target one adjacent enemy" ],
+        [2002, true, 24, "^%attack% - 1","*%wound%","*.........", "*Focus on the enemy farthest away.", "^%move% + 0","*.........", "^%attack% - 1","*Target one adjacent enemy", "*%wound%" ],
         [2003, false, 30, "%move% + 0","*.........", "%attack% + 0", "^Add +1 %attack% if the target's current", "^hit point value is less than maximum." ],
-        [2004, false, 35, "%move% - 1","*.........", "%attack% - 1 %aoe-4-with-black%", "^%poison%" ],
+        [2004, false, 35, "%move% - 1","*.........", "[r]", "[c]","%attack% - 1", "^%poison%","[/c]","¤aoe-4-with-black", "[/r]" ],
         [2005, false, 44, "%attack% - 1", "^%range% 3", "^%target% 2", "^Add +1 %attack% if the target's current", "^hit point value is less than maximum." ],
-        [2006, true, 62, "%move% - 1","*.........", "%attack% - 1 %aoe-triangle-2-side%", "^%range% 2", "^%muddle%" ],
+        [2006, true, 62, "%move% - 1","*.........", "[r]", "[c]","%attack% - 1", "^%range% 2", "^%muddle%","[/c]", "¤aoe-triangle-2-side", "[/r]" ],
         [2007, false, 73, "%move% - 1", "*.........","%attack% + 1" ]
-      ],
-      "cardLayouts": [
-        {
-          "nr": 2002,
-          "lines": [
-            {"index": 1, "type": "icon","xOffset": 0, "heightOffset": -12},
-            {"index": 2, "type": "icon","xOffset": 0, "heightOffset": -10},
-            {"index": 3, "type": "line","xOffset": 0, "spaceTopOffset": -5},
-            {"index": 4, "type": "icon","xOffset": 0, "yOffset": 0},
-            {"index": 5, "type": "line","xOffset": 0, "spaceTopOffset": -5},
-            {"index": 6, "type": "icon","xOffset": 0, "heightOffset": 0},
-            {"index": 7, "type": "icon","xOffset": 0, "heightOffset": -12},
-            {"index": 8, "type": "line","xOffset": 0, "spaceTopOffset": -2}
-          ]
-        }
       ]
     },
     {
@@ -456,11 +441,11 @@
       "cards": [
         [1222, true, 13, "%attack% + 1", "^Target all enemies within %range% 3", "^with %chill%", "%air%" ],
         [1223, true, 38, "%attack% + 1", "^%range% + 1", "%air%%use%", "!^%chill%"],
-        [1224, false, 5, "%move% - 1","*.........", "%attack% + 0", "%air%%use%", "!^%pull% 2" ],
+        [1224, false, 5, "%move% - 1","*.........", "%attack% + 0","^%range% + 0", "%air%%use%", "!^%pull% 2" ],
         [1225, false, 30, "%heal% 2", "^Self","*.........", "%chill%", "^Target one enemy with no %chill%", "^tokens within %range% 3" ],
-        [1226, false, 26, "%move% + 0","*.........", "%attack% - 1","*.........", "^Create a %chill% trap in an adjacent", "^empty hex closest to an enemy." ],
-        [1227, false, 10, "%retaliate% 3", "^%range% 3","*.........", "%air%%use%", "!^%attack% - 1", "!^%range% - 1" ],
-        [1228, false, 22, "%pull% 2", "^Target one enemy within %range% 3","*.........", "%attack% - 1 %aoe-arc-3%", "%air%" ],
+        [1226, false, 26, "%move% + 0","*.........", "%attack% - 1","^%range% + 0","*.........", "^Create a %chill% trap in an adjacent", "^empty hex closest to an enemy." ],
+        [1227, false, 10, "%retaliate% 3", "^%range% 3","*.........", "[r]","%air%%use%", "[c]", "^%attack% - 1", "*%range% - 1","[/c]", "[/r]" ],
+        [1228, false, 22, "%pull% 2", "^Target one enemy within %range% 3","*.........", "[r]","[c]","%attack% - 1","^%range% + 0","[/c]","¤aoe-arc-3","[/r]", "%air%" ],
         [1229, false, 19, "%attack% - 1", "^Target all enemies within %range% 2", "%ice%%use%", "!%air%" ]
       ]
     },
@@ -471,10 +456,10 @@
         [1230, true, 44, "%move% + 0", "*.........","%attack% + 1", "%ice%" ],
         [1231, true, 44, "%move% + 1", "*.........","%attack% + 0", "%ice%" ],
         [1232, false, 12, "%shield% + 2", "^Self","*.........", "^If an enemy suffers %retaliate% damage", "^from attacking an Icecrawler this round,", "^the enemy gains %chill%." ],
-        [1233, false, 63, "%move% + 0","*.........", "%attack% + 0 %aoe-triangle-2-side-with-black%", "%ice%%use%", "!^%pierce% 2" ],
+        [1233, false, 63, "%move% + 0","*.........", "[r]", "[c]","%attack% + 0", "%ice%%use%", "!^%pierce% 2","[/c]","¤aoe-triangle-2-side-with-black", "[/r]"],
         [1234, false, 55, "%move% - 2","*.........", "%attack% + 1", "^%range% 3", "%ice%%use%", "!^%pierce% 2" ],
-        [1235, false, 16, "%attack% + 0", "^%range% 5", "%ice%%use%", "!^All enemies adjacent to the", "^target suffer one damage" ],
-        [1236, false, 68, "%move% + 0","*.........", "%attack% - 1 %aoe-star-with-side-black%"],
+        [1235, false, 16, "%attack% + 0", "^%range% 5", "[r]","%ice%%use%", "[c]","^All enemies adjacent to the", "^target suffer one damage", "[/c]", "[/r]" ],
+        [1236, false, 68, "%move% + 0","*.........","[r]","%attack% - 1","¤aoe-star-with-side-black", "[/r]"],
         [1237, false, 9, "^Gain %range% 3 on all", "^%retaliate% abilities.","*.........", "%move% + 0","*.........", "%heal% 2", "^%range% 3" ]
       ]
     },
@@ -482,13 +467,13 @@
       "name": "Toxic Imp",
       "edition": "Crimson Scales",
       "cards": [
-        [1238, true, 41, "%move% - 1", "*.........","%attack% + 0", "%infect%" ],
-        [1239, true, 41, "%move% - 1","*.........", "%attack% + 0", "%infect%" ],
+        [1238, true, 41, "%move% - 1", "*.........","%attack% + 0", "^%range% +0", "^%infect%" ],
+        [1239, true, 41, "%move% - 1","*.........", "%attack% + 0", "^%range% +0", "^%infect%" ],
         [1240, false, 35, "%heal% 2", "^%range% 2", "^%target% 2" ],
         [1241, false, 4, "%shield% + 2", "^Self","*.........", "%attack% + 0", "^Target one adjacent enemy" ],
-        [1242, false, 23, "%move% - 1", "*.........","%attack% - 1", "^%poison%","*.........", "^All attacks targeting Toxic Imp", "^this round gain Disadvantage." ],
+        [1242, false, 23, "%move% - 1", "*.........","%attack% - 1","^%range% +0", "^%poison%","*.........", "^All attacks targeting Toxic Imp", "^this round gain Disadvantage." ],
         [1243, false, 47, "%attack% + 1", "^%range% + 1", "^Add +1 %attack% if the target", "^has %infect%" ],
-        [1244, false, 12, "%move% + 0","*.........","%attack% - 1","*.........", "^If an enemey targets Toxic Imp", "^with an attack, that enemy", "^gains %infect%." ],
+        [1244, false, 12, "%move% + 0","*.........","%attack% - 1","^%range% +0","*.........", "^If an enemey targets Toxic Imp", "^with an attack, that enemy", "^gains %infect%." ],
         [1245, false, 76, "%heal% 2", "^%range% 3", "^If a negative condition was removed", "^with this heal, the target gains", "^%strengthen%." ]
       ]
     },
@@ -498,10 +483,10 @@
       "cards": [
         [1246, true, 37, "%move% + 0", "*.........","%attack% + 0", "^Add +2 Attack if the target is occupying a water tile" ],
         [1247, true, 30, "%move% + 0","*.........", "%attack% + 0", "^%pierce% X", "^where X is equal to the number of", "^water tiles within %range% 1." ],
-        [1248, false, 16, "%move% - 1","*.........", "%attack% - 1","*.........", "All enemies occupying a water tile suffer 1 damage." ],
-        [1249, false, 69, "%move% + 1","*.........", "%attack% - 1 %aoe-arc-3%", " ", "^Create a water tile in all hexes occupied by a target containing no overlay tiles." ],
+        [1248, false, 16, "%move% - 1","*.........", "%attack% - 1","*.........", "^All enemies occupying a","^water tile suffer 1 damage." ],
+        [1249, false, 69, "[r]", "ÅKKKK","[c]","%move% + 1","*.........", "%attack% - 1", "[/c]","Å.","¤aoe-arc-3","[/r]", "^Create a water tile in all hexes occupied by a target containing no overlay tiles." ],
         [1250, false, 44, "%attack% + 0", "^%range% 3", "^%pull% 2", "^%immobilize%" ],
-        [1251, false, 53, "%move% + 0","*.........", "%attack% - 1", "^+X where X is equal to the number of", "^water tiles within %range% 1, up to 3." ],
+        [1251, false, 53, "%move% + 0","*.........", "%attack% + (X - 1)", "^where X is equal to the number of", "^water tiles within %range% 1, up to 3." ],
         [1252, false, 86, "%move% + 2","*.........", "%heal% 3", "^Self","*.........", "^Create a water tile in an unoccupied", "^adjacent hex closest to an enemy", "^containing no overlay tile." ],
         [1253, false, 22, "%attack% + 1", "^%target% 2", "^Create a water tile in all hexes occupied by", "^a target containing no overlay tiles." ]
       ]
@@ -510,66 +495,34 @@
       "name": "Harrower Aegis",
       "edition": "Crimson Scales",
       "cards": [
-        ["Horned Carapace", 2020, false, 26, "%attack% + 2", "^%pierce% 2", "^%push% 2", "^%immobilize%","*.........", "%retaliate% 1 %air%", "^%range% 3" ],
+        ["Horned Carapace", 2020, false, 26, [{
+          "gfx": "earth",
+          "x": 0.783,
+          "y": 0.76
+        }],"%attack% + 2", "^%pierce% 2", "^%push% 2", "^%immobilize%","*.........", "%retaliate% 1", "^%range% 3" ],
         ["Maddening Chatter", 2021, false, 29, "%retaliate% 3", "^%range% 2 or 3", "^Affect all allies within %range% 3","*.........", "%muddle%", "^Target all enemies within %range% 3", "%any%%use%", "!%fire%" ],
         ["Encasing Webs", 2022, false, 33, "%heal% 5", "^Affect one ally within %range% 3", "^%pull% 2", "^%immobilize%", "%earth%%use%", "!^The affected ally gains \"%retaliate% 1\"." ],
-        ["Steelsilk Weaver", 2023, false, 41, "%move% + 0","*.........", "%immobilize%", "^%range% 3", "^%target% 3", "%fire%%use%", "!^All targets suffer 1 damage" ],
+        ["Steelsilk Weaver", 2023, false, 41, "%move% + 0","*.........", "%immobilize%", "^%range% 3", "^%target% 3", "%fire%%use%", "!^All targets suffer 1 damage." ],
         ["Coordinated Infestation", 2024, true, 50, "%move% + 1","*.........", "%attack% + 0", "*.........","%ward%", "^Affect self and all adjacent allies", "%fire% %earth%" ],
-        ["Anti-Venom", 2025, false, 63, "^Remove %poison% from self.","*.........", "%move% + 0", "*.........","%attack% + 0", "^%poison%", "*.........","%heal% 3 %earth%", "^Self" ],
+        ["Anti-Venom", 2025, false, 63, [{
+          "gfx": "earth",
+          "x": 0.783,
+          "y": 0.76
+        }],"^         Remove %poison% from self.","*.........", "%move% + 0", "*.........","%attack% + 0", "^%poison%", "*.........","%heal% 3", "^Self" ],
         ["Burning Stingers", 2026, false, 73, "%attack% - 1", "^%range% 3", "^%target% 3", "^All targets suffer 1 damage.", "%fire%" ],
-        ["Burrow Under", 2027, true, 88, "^Focus on the enemy farthest away.", "%move% + 2", "^%jump%","*.........", "%attack% + 0", "^Target all enemies within", "^one hex along the path moved", "^%earth%%use% or%fire%%use%", "!^%immobilize%" ]
-      ],
-      "cardLayouts": [
-        {
-          "nr": 2021,
-          "lines": [
-            {"index": 3, "type": "line","xOffset": 0, "spaceTopOffset": -6},
-            {"index": 4, "type": "line","xOffset": 0, "spaceTopOffset": -6},
-            {"index": 6, "type": "line","xOffset": 0, "spaceTopOffset": -8}
-          ]
-        },
-        {
-          "nr": 2024,
-          "lines": [
-            {"index": 1, "type": "line","xOffset": 0, "spaceTopOffset": -3},
-            {"index": 3, "type": "icon","xOffset": 0, "spaceTopOffset": -3},
-            {"index": 6, "type": "icon","xOffset": 0, "yOffset": -6}
-          ]
-        },
-        {
-          "nr": 2025,
-          "lines": [
-            {"index": 1, "type": "line","xOffset": 0, "spaceTopOffset": -7},
-            {"index": 2, "type": "line","xOffset": 0, "spaceTopOffset": -3},
-            {"index": 3, "type": "line","xOffset": 0, "spaceTopOffset": -6},
-            {"index": 4, "type": "line","xOffset": 0, "spaceTopOffset": -3},
-            {"index": 6, "type": "line","xOffset": 0, "spaceTopOffset": -7},
-            {"index": 8, "type": "line","xOffset": 0, "spaceTopOffset": -3}
-          ]
-        },
-        {
-          "nr": 2027,
-          "lines": [
-            {"index": 0, "type": "line","xOffset": 50, "spaceTopOffset": 0},
-            {"index": 1, "type": "line","xOffset": 0, "spaceTopOffset": -15},
-            {"index": 3, "type": "line","xOffset": 0, "spaceTopOffset": -5},
-            {"index": 4, "type": "line","xOffset": 0, "spaceTopOffset": -3},
-            {"index": 6, "type": "line","xOffset": 0, "spaceTopOffset": -5},
-            {"index": 6, "type": "line","xOffset": 0, "spaceTopOffset": -5}
-          ]
-        }
+        ["Burrow Under", 2027, true, 88, "^                   Focus on the enemy farthest away.", "%move% + 2", "^%jump%","*.........", "%attack% + 0", "^Target all enemies within", "^one hex along the path moved", "^%earth%%use% or %fire%%use%", "!^%immobilize%" ]
       ]
     },
     {
       "name": "Blood Ooze",
       "edition": "Crimson Scales",
       "cards": [
-        [1198, true, 96, "%attack% - 1", "^%range% 5", "*Summon one normal Blood Ooze in a hex adjacent to the target with a hit point value equal to the summoning Blood Ooze's current hit point value minus 2 (limited by a normal Blood Ooze's specified maximum hit point value)" ],
-        [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "%fire%%use%", "!^Hit point value equal to three instead" ],
+        [1198, true, 96, "%attack% - 1", "^%range% 5", "*Summon one normal Blood Ooze in a hex","*adjacent to the target with a hit point value equal","*to the summoning Blood Ooze's current hit point","*value minus 2 (limited by a normal Blood Ooze's","*specified maximum hit point value)" ],
+        [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "[r]","%fire%%use%", "[c]", "^Hit point value equal","^to three instead", "[/c]", "[/r]" ],
         [1200, false, 71, "^All adjacent enemies", "^suffer one damage.","*.........", "%move% + 1","*.........", "%heal% 1", "^Target all adjacent Blood Oozes"],
-        [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^Target one adjacent enemy", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes." ],
+        [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^%range% + 0", "^Target one adjacent enemy", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes." ],
         [1202, false, 62, "%attack% - 1", "^%poison%", "^Target one adjacent enemy","*.........", "%attack% - 1", "^Target one enemy at exactly %range% 2" ],
-        [1203, false, 53, "%move% + 0","*.........", "%loot% 1","*.........", "^If at least one money token was looted:", "%attack% + 1" ],
+        [1203, false, 53, "%move% + 0","*.........", "%loot% 1","*.........", "^If at least one money token was looted:", "%attack% + 1", "^%range% + 0" ],
         [1204, false, 17, "%retaliate% 1", "^%range% 3", "*.........","%move% + 0","*.........", "%wound%", "^Target all adjacent enemies" ],
         [1205, false, 80, "^Blood Ooze suffers two damage.","*.........", "%invisible%", "^Self" ]
       ]
@@ -578,8 +531,8 @@
       "name": "Flaming Drake",
       "edition": "Crimson Scales",
       "cards": [
-        [1206, true, 62,  "%move% + 0","*.........","[r]", "%attack% - 1","¤aoe-line-2","[/r]", "%fire%" ],
-        [1207, true, 62, "%move% - 1", "*.........","[r]","%attack% + 0", "¤aoe-line-2","[/r]", "%fire%"],
+        [1206, true, 62,  "%move% + 0","*.........","[r]", "%attack% - 1","¤aoe-line-2","[/r]", "^%range% + 0", "%fire%" ],
+        [1207, true, 62, "%move% - 1", "*.........","[r]","%attack% + 0", "¤aoe-line-2","[/r]", "^%range% + 0", "%fire%"],
         [1208, false, 88, "%move% + 0","*.........", "%disarm%", "^Target all adjacent enemies" ],
         [1209, false, 3, "%shield% + 2", "^Self", "*.........","%heal% 2", "^Self", "%fire%%use%", "!^+2 %heal%" ],
         [1210, false, 56, [{
@@ -590,69 +543,38 @@
         }, {
           "gfx": "aoe-line-5-with-black",
           "x": 0.948,
-          "y": 0.414,
+          "y": 0.429,
           "angle": 60.0
-        }], "%move% + 0","*.........", "%attack% - 1","ÅKK", "%fire%%use%", "!^%attack% + 1","!Å.                                    ." ],
-        [1211, false, 40, "%move% - 1","*.........", "%attack% + 0", "%fire%%use%", "!^%range% + 2" ],
+        }], "%move% + 0","*.........", "%attack% - 1", "^%range% + 0","ÅKK", "%fire%%use%", "!^%attack% + 1","!Å.                                    .", "^%range% + 0"],
+        [1211, false, 40, "%move% - 1","*.........", "%attack% + 0", "^%range% + 0", "%fire%%use%", "!^%range% + 2" ],
         [1212, false, 49, "%attack% + 1", "^%range% - 1", "^%target% 2" ],
-        [1213, false, 77, "[r]", "[c]","%attack% - 2", "^%immobilize%","[/c]", "¤aoe-circle", "[/r]"]
+        [1213, false, 77, "[r]", "[c]","%attack% - 2","^%range% + 0", "^%immobilize%","[/c]", "¤aoe-circle", "[/r]"]
       ]
     },
     {
       "name": "Ravenous Gharial",
       "edition": "Crimson Scales",
       "cards": [
-        ["Death Roll", 2028, false, 30, "^%attack% - 2", "^%immobilize%", "^- At 60, perform the following abilities -", "^%attack% - 1", "^%wound%", "^- At 90, perform the following abilities -", "^%attack% + 0" ],
+        ["Death Roll", 2028, false, 30, "%attack% - 2", "^%immobilize%", "^- At 60, perform the following abilities -", "%attack% - 1", "^%wound%", "^- At 90, perform the following abilities -", "%attack% + 0" ],
         ["Swallow Whole", 2029, true, 65, "%move% + 0","*.........", "%attack% + 0", "*.........","%heal% X", "^Self", "*where X is the damage dealt", "*by the attack ability." ],
         ["Terrifying Lunge", 2030, false, 59, "%move% + 0","*.........", "%attack% + 0", "^%immobilize%","*.........", "%push% 1", "^Target all enemies exactly at %range% 2 or 3" ],
         ["Drag Away", 2031, true, 34, "%move% + 1","*.........", "%attack% - 1", "^%range% 2", "^%pull% 1", "^%wound%" ],
-        ["Tail Swipe", 2032, false, 88, "%move% + 1", "*This movement may move through all figures.","*.........", "%attack% - 1 %aoe-arc-3%", "^%push% 2" ],
+        ["Tail Swipe", 2032, false, 88, "%move% + 1", "^This movement may move through all figures.","*.........","[r]","[c]", "%attack% - 1", "^%push% 2","[/c]","Å.","¤aoe-arc-3", "[/c]", "[/r]" ],
         ["Survival Instincts", 2033, false, 9, "%move% + 0","*.........", "%retaliate% X", "^where X is the figure's %attack% value.","*.........", "^All ranged attacks targeting", "^this figure gain Disadvantage." ],
-        ["Patient Predator", 2034, false, 18, "%invisible%", "^Self", "*- At 50, perform the following abilities -", "%move% + 0", "*.........","%attack% + 1", "^If this attack was performed,", "^remove %invisible%."],
+        ["Patient Predator", 2034, false, 18, "^%invisible%", "^Self", "*- At 50, perform the following abilities -", "%move% + 0", "*.........","%attack% + 1", "^If this attack was performed,", "^remove %invisible%."],
         ["Sundering Bite", 2035, false, 26, "%move% + 0", "*.........","%attack% + 0", "^%pierce% 3" ]
-      ],
-      "cardLayouts": [
-        {
-          "nr": 2029,
-          "lines": [
-            {"index": 6, "type": "line","xOffset": 0, "spaceTopOffset": -20}
-          ]
-        },
-        {
-          "nr": 2034,
-          "lines": [
-            {"index": 0, "type": "line","xOffset": 0, "yOffset": 15},
-            {"index": 1, "type": "line","xOffset": 0, "yOffset": 15},
-            {"index": 2, "type": "icon","xOffset": 0, "yOffset": -10},
-            {"index": 3, "type": "icon","xOffset": 0, "yOffset": -10},
-            {"index": 4, "type": "line","xOffset": 0, "spaceTopOffset": -15},
-            {"index": 5, "type": "line","xOffset": 0, "spaceTopOffset": -5},
-            {"index": 6, "type": "line","xOffset": 0, "spaceTopOffset": -5},
-            {"index": 7, "type": "line","xOffset": 0, "spaceTopOffset": -5}
-          ]
-        },
-        {
-          "nr": 2032,
-          "lines": [
-            {"index": 0, "type": "line","yOffset": 10},
-            {"index": 1, "type": "line","yOffset": 5},
-            {"index": 2, "type": "line","yOffset": 10},
-            {"index": 3, "type": "line","yOffset": 10},
-            {"index": 4, "type": "line","yOffset": 10}
-          ]
-        }
       ]
     },
     {
       "name": "The Cultist",
       "cards": [
-        [604, false, 10, "%move% + 1","*.........", "%attack% + 2", "On Death:", "^%attack% + 5 %aoe-circle-with-middle-black%" ],
-        [605, false, 10, "%move% + 1","*.........", "%attack% + 2", "On Death:", "^%attack% + 5 %aoe-circle-with-middle-black%" ],
+        [604, false, 10, "%move% + 1","*.........", "%attack% + 2", "[r]","[c]","On Death:", "^%attack% + 5","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        [605, false, 10, "%move% + 1","*.........", "%attack% + 2", "[r]","[c]","On Death:", "^%attack% + 5","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
         [606, false, 27, "%move% + 2","*.........", "%attack% + 3" ],
         [607, false, 27, "%move% + 2", "*.........","%attack% + 3" ],
         [608, false, 39, "%move% + 1", "*.........","%attack% + 3","*.........", "%heal% 1", "^Self" ],
-        [609, true, 63, " ", "Summon normal Living Spirits" ],
-        [610, true, 63, " ", "Summon normal Living Spirits" ],
+        [609, true, 63, " ", "Summon normal","Living Spirits" ],
+        [610, true, 63, " ", "Summon normal","Living Spirits" ],
         [611, false, 31, "%move% + 1","*.........", "%heal% 3", "^%range% 3" ]
       ]
     },
@@ -660,12 +582,20 @@
       "name": "Terror Drone",
       "cards": [
         [732, false, 65, "%attack% + 0", "^%range% 3", "^%target% 3", "^%curse%" ],
-        [733, true, 60, "%attack% + 0 %aoe-line-6-with-black%", "^%pierce% 3" ],
-        [734, true, 60, "%attack% + 0 %aoe-line-6-with-black%", "^%pierce% 3" ],
+        [ 733, true, 60,[{
+          "gfx": "aoe-line-6-with-black",
+          "x": 0.65,
+          "y": 0.28
+        }], "%attack% + 0", "^%pierce% 3" ],
+        [ 734, true, 60, [{
+          "gfx": "aoe-line-6-with-black",
+          "x": 0.65,
+          "y": 0.28
+        }],"%attack% + 0", "^%pierce% 3" ],
         [735, false, 84, "%attack% - 1", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4", "^%wound%" ],
         [736, false, 75, "%attack% + 0", "^%poison%","*.........", "%attack% - 1", "^%range% 5", "^%immobilize%" ],
         [737, false, 75, "%attack% - 2", "^Target all adjacent enemies", "^%disarm%","*.........", "%attack% + 0", "^%range% 3", "^%target% 2" ],
-        [738, false, 96, "%attack% - 2", "^%range% 6", "^Summon normal Undead Archer in a hex adjacent to the target" ],
+        [738, false, 96, "%attack% - 2", "^%range% 6", "^Summon normal Undead Archer","^in a hex adjacent to the target" ],
         [739, false, 54, "%wound% and", "%poison%", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4" ]
       ]
     },
@@ -685,14 +615,14 @@
     {
       "name": "Apex Demon",
       "cards": [
-        [636, true, 40, "%heal% 3", "^Self", "%earth%%use%", "!*%immobilize%", "!*Target all enemies within %range% 3" ],
-        [637, true, 42, "%move% + 3", "%attack% - 1" ],
-        [638, false, 62, "%move% + 3", "%attack% + 0", "%earth%" ],
-        [639, false, 71, "%attack% + 0", "^%range% 4", "%earth%%use%", "!^%target% 2" ],
-        [640, false, 83, "%move% + 1", "%attack% + 1", "%earth%" ],
-        [641, false, 93, "%move% + 1", "%attack% - 1", "^Target all adjacent enemies", "%earth%%use%", "!^%push% 1" ],
-        [642, false, 79, "%move% + 3", "%attack% + 0", "%air%%use%", "!^-2 %attack%" ],
-        [643, false, 87, "%move% + 2", "%attack% - 1", "%aoe-4-with-black%", "%any%%use%", "!%earth%" ]
+        [ 636, true, 40, "%heal% 3", "^Self","*.........","[r]", "%earth%%use%", "[c]", "^%immobilize%", "^Target all enemies within %range% 3","[/c]", "[/r]" ],
+        [ 637, true, 42, "%move% + 3","*.........", "%attack% - 1" ],
+        [ 638, false, 62, "%move% + 2","*.........", "%attack% + 0", "*.........","%earth%" ],
+        [ 639, false, 71, "%attack% + 0", "^%range% 4", "%earth%%use%", "!^%target% 2" ],
+        [ 640, false, 83, "%move% + 1","*.........", "%attack% + 1","*.........", "%earth%" ],
+        [ 641, false, 93, "%move% + 1","*.........", "%attack% - 1", "^Target all adjacent enemies", "%earth%%use%", "!^%push% 1" ],
+        [ 642, false, 79, "%move% + 3","*.........", "%attack% + 0", "%air%%use%", "!^-2 %attack%" ],
+        [ 643, false, 87, "[r]","[c]","     %move% + 2","*.........", "     %attack% - 1","[/c]", "¤aoe-4-with-black", "[/r]","*.........","%any%%use%", "!%earth%" ]
       ]
     },
     {
@@ -710,74 +640,75 @@
         [ 614, false, 38, "%move% + 0", "*.........","%attack% + 0" ],
         [ 615, false, 38, "%move% + 0", "*.........","%attack% + 0", "^Target one enemy with all attacks" ],
         [ 619, true, 23, "%shield% + 1","*.........", "%move% + 0","*.........", "%attack% - 1" ],
-        [ 733, true, 60, "%attack% + 0 %aoe-line-6-with-black%", "^%pierce% 3" ],
-        [ 734, true, 60, "%attack% + 0 %aoe-line-6-with-black%", "^%pierce% 3" ],
+        [ 733, true, 60,[{
+          "gfx": "aoe-line-6-with-black",
+          "x": 0.65,
+          "y": 0.28
+        }], "%attack% + 0", "^%pierce% 3" ],
+        [ 734, true, 60, [{
+          "gfx": "aoe-line-6-with-black",
+          "x": 0.65,
+          "y": 0.28
+        }],"%attack% + 0", "^%pierce% 3" ],
         [ 735, false, 84, "%attack% - 1", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4", "^%wound%" ],
         [ 739, false, 54, "%wound% and", "%poison%", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4" ]
       ]
     },
-
     {
       "name": "Scout Ally",
       "cards": [
-        [ 668, false, 29, "%move% - 1", "%attack% - 1", "^%range% 3" ],
-        [ 669, false, 40, "%move% + 1", "%attack% - 1" ],
-        [ 670, false, 53, "%move% + 0", "%attack% + 0" ],
-        [ 671, false, 54, "%move% - 2", "%attack% + 0", "^%range% 3", "^%poison%" ],
-        [ 672, false, 69, "%move% - 1", "%attack% + 1" ],
+        [ 668, false, 29, "%move% - 1","*.........", "%attack% - 1", "^%range% 3" ],
+        [ 669, false, 40, "%move% + 1","*.........","%attack% - 1" ],
+        [ 670, false, 53, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 671, false, 54, "%move% - 2","*.........", "%attack% + 0", "^%range% 3", "^%poison%" ],
+        [ 672, false, 69, "%move% - 1","*.........", "%attack% + 1" ],
         [ 673, false, 92, "%attack% + 2", "^%poison%" ],
-        [ 675, false, 35, "%move% + 1", "^%jump%", "%loot% 1" ],
+        [ 675, false, 35, "%move% + 1", "^%jump%","*.........", "%loot% 1" ],
         [ 674, false, 79, "%attack% - 1", "^%range% 4", "^%target% 2" ]
       ]
     },
     {
       "name": "Shaman Ally",
       "cards": [
-        [ 588, false, 8, "%move% + 0", "%attack% - 1", "^%range% + 0", "^%disarm%" ],
-        [ 589, false, 8, "%move% - 1", "%attack% + 0", "^%range% + 0", "^%immobilize%" ],
-        [ 590, false, 23, "%move% + 0", "%heal% 3", "^%range% 3" ],
-        [ 591, false, 23, "%move% + 0", "%heal% 3", "^%range% 3" ],
-        [ 592, false, 62, "%move% + 0", "%attack% + 0", "^%range% + 0" ],
-        [ 593, false, 74, "%move% - 1", "%attack% + 1", "^%range% + 0" ],
-        [ 594, false, 89, "%move% - 1", "%heal% 1", "^Affect all adjacent allies", "%bless%", "^Self" ],
-        [ 595, false, 9, "%move% + 1", "%attack% - 1", "^%range% + 0", "^%curse%", "^%target% 2" ]
+        [ 588, false, 8, "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "^%disarm%" ],
+        [ 589, false, 8, "%move% - 1","*.........", "%attack% + 0", "^%range% + 0", "^%immobilize%" ],
+        [ 590, false, 23, "%move% + 0", "*.........","%heal% 3", "^%range% 3" ],
+        [ 591, false, 23, "%move% + 0","*.........", "%heal% 3", "^%range% 3" ],
+        [ 592, false, 62, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
+        [ 593, false, 74, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0" ],
+        [ 594, false, 89, "%move% - 1","*.........", "%heal% 1", "^Affect all adjacent allies", "*.........","%bless%", "^Self" ],
+        [ 595, false, 9, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0", "^%curse%", "^%target% 2" ]
       ]
     },
     {
       "name": "Brood Mother",
       "cards": [
-        [ 549, true, 13, "%attack% - 1", "^%wound%", "%move% - 1", "%attack% - 1", "^%wound%" ],
-        [ 551, false, 39, "%move% - 1", "%attack% + 1", "^%wound%" ],
-        [ 555, false, 6, "%shield% + 2", "%heal% 2", "^Self", "%strengthen%", "^Self" ],
-        [ 554, true, 72, "%attack% - 1", "^%wound%", "%attack% - 1", "^%wound%", "%attack% - 2", "^%wound%" ],
-        [ 557, false, 52, "%move% + 0", "%attack% + 0", "^%range% 3" ],
-        [ 558, true, 57, "%move% + 0", "%attack% - 1 %aoe-triangle-2-side%", "^%range% 3" ],
+        [ 549, true, 13, "%attack% - 1","*.........", "^%wound%", "%move% - 1", "*.........","%attack% - 1", "^%wound%" ],
+        [ 551, false, 39, "%move% - 1", "*.........","%attack% + 1", "^%wound%" ],
+        [ 555, false, 6, "%shield% + 2","*.........", "%heal% 2", "^Self","*.........", "%strengthen%", "^Self" ],
+        [ 554, true, 72, "%attack% - 1", "^%wound%","*.........", "%attack% - 1", "^%wound%","*.........", "%attack% - 2", "^%wound%" ],
+        [ 557, false, 52, "%move% + 0","*.........", "%attack% + 0", "^%range% 3" ],
+        [ 558, true, 57, "[r]", "[c]","%move% + 0", "*.........","%attack% - 1", "!Å.","^%range% 3", "[/c]","¤aoe-triangle-2-side", "[/r]"],
         [ 559, false, 27, "%attack% + 0", "^%range% 3", "^%target% 2", "^%poison%" ],
-        [ 560, false, 87, "%move% - 1", "%attack% + 1", "^%range% 3" ]
+        [ 560, false, 87, "%move% - 1","*.........", "%attack% + 1", "^%range% 3" ]
       ]
     },
     {
       "name": "Terrible Two Archer",
       "cards": [
-        [ 532, false, 16, "%move% + 1", "%attack% - 1", "^%range% + 0 %target% 2" ],
-        [ 533, false, 31, "%move% + 0", "%attack% + 0", "^%range% + 0 %target% 2" ],
-        [ 534, false, 32, "%move% + 0", "%attack% + 1", "^%range% - 1 %target% 2" ],
-        [ 535, false, 44, "%move% - 1", "%attack% + 1", "^%range% + 0 %target% 2" ],
+        [ 532, false, 16, "%move% + 1", "*.........","%attack% - 1", "^%range% + 0 %target% 2" ],
+        [ 533, false, 31, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0 %target% 2" ],
+        [ 534, false, 32, "%move% + 0","*.........", "%attack% + 1", "^%range% - 1 %target% 2" ],
+        [ 535, false, 44, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0 %target% 2" ],
         [ 536, false, 56, "%attack% - 1", "^%range% + 0", "^%target% 3" ],
         [ 537, true, 68, "%attack% + 1", "^%range% + 1 %target% 2" ],
-        [
-          538,
-          false,
-          14,
-          "%move% - 1",
-          "%attack% - 1",
-          "^%range% + 0 %target% 2",
-          "*Create a 3 damage trap in an adjacent empty hex closest to an enemy"
-        ],
-        [ 539, true, 29, "%move% + 0", "%attack% - 1", "^%range% + 1 %target% 2", "^%immobilize%" ]
+        [ 538, false, 14, "%move% - 1", "*.........", "%attack% - 1", "^%range% + 0 %target% 2", "*.........",
+          "*Create a 3 damage trap in an adjacent empty hex closest to an enemy"],
+        [ 539, true, 29, "%move% + 0","*.........", "%attack% - 1", "^%range% + 1 %target% 2", "^%immobilize%" ]
       ]
     }
   ],
+
   "monsters": {
     "Goremyon Shatter-Mind": {
       "deck": "Boss 2",
@@ -790,8 +721,8 @@
           "move": 0,
           "attack": 1,
           "range": 2,
-          "special1": [ "Weakest ally performs", "\"%move%+1, %attack%+0", "Target all adjacent\", Dies" ],
-          "special2": [ "Slowest character", "performs \"%move% 3,", "%attack% 2\" targeting", "allies" ],
+          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
+          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 2\" targeting", "^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -800,8 +731,8 @@
           "move": 0,
           "attack": 2,
           "range": 2,
-          "special1": [ "Weakest ally performs", "\"%move%+1, %attack%+0", "Target all adjacent\", Dies" ],
-          "special2": [ "Slowest character", "performs \"%move% 3,", "%attack% 3\" targeting", "allies" ],
+          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
+          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 3\" targeting", "^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -810,8 +741,8 @@
           "move": 0,
           "attack": 2,
           "range": 2,
-          "special1": [ "Weakest ally performs", "\"%move%+1, %attack%+0", "Target all adjacent\", Dies" ],
-          "special2": [ "Slowest character", "performs \"%move% 3,", "%attack% 3\" targeting", "allies" ],
+          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
+          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 3\" targeting", "^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -820,8 +751,8 @@
           "move": 0,
           "attack": 2,
           "range": 3,
-          "special1": [ "Weakest ally performs", "\"%move%+1, %attack%+0", "Target all adjacent\", Dies" ],
-          "special2": [ "Slowest character", "performs \"%move% 3,", "%attack% 4\" targeting", "allies" ],
+          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
+          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 4\" targeting", "^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -830,8 +761,8 @@
           "move": 0,
           "attack": 3,
           "range": 3,
-          "special1": [ "Weakest ally performs", "\"%move%+1, %attack%+0", "Target all adjacent\", Dies" ],
-          "special2": [ "Slowest character", "performs \"%move% 3,", "%attack% 4\" targeting", "allies" ],
+          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
+          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 4\" targeting", "^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -840,8 +771,8 @@
           "move": 0,
           "attack": 3,
           "range": 3,
-          "special1": [ "Weakest ally performs", "\"%move%+1, %attack%+0", "Target all adjacent\", Dies" ],
-          "special2": [ "Slowest character", "performs \"%move% 3,", "%attack% 5\" targeting", "allies" ],
+          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
+          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 5\" targeting", "^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -850,8 +781,8 @@
           "move": 0,
           "attack": 3,
           "range": 4,
-          "special1": [ "Weakest ally performs", "\"%move%+1, %attack%+0", "Target all adjacent\", Dies" ],
-          "special2": [ "Slowest character", "performs \"%move% 3,", "%attack% 5\" targeting", "allies" ],
+          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
+          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 5\" targeting", "^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -860,8 +791,8 @@
           "move": 0,
           "attack": 4,
           "range": 4,
-          "special1": [ "Weakest ally performs", "\"%move%+1, %attack%+0", "Target all adjacent\", Dies" ],
-          "special2": [ "Slowest character", "performs \"%move% 3,", "%attack% 6\" targeting", "allies" ],
+          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
+          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 6\" targeting", "^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         }
       ]
@@ -876,8 +807,8 @@
           "health": "8xC",
           "move": 3,
           "attack": 2,
-          "special1": [ "%move% + 1 %jump%", "%attack% + 1" ],
-          "special2": [ "%move% + 0,", "%attack% + 0, %push%3", "%shield%1" ],
+          "special1": [ "^%move% + 1 %jump%", "^%attack% + 1" ],
+          "special2": [ "^%move% + 0,", "^%attack% + 0, %push%3", "^%shield%4" ],
           "immunities": [ "%muddle%", "%immobilize%", "%stun%", "%curse%", "%disarm%" ]
         },
         {
@@ -886,8 +817,8 @@
           "move": 3,
           "attack": 3,
           "attributes": [ "%retaliate% 1" ],
-          "special1": [ "%move% + 1 %jump%", "%attack% + 1" ],
-          "special2": [ "%move% + 0,", "%attack% + 0, %push%3", "%shield%1" ],
+          "special1": [ "^%move% + 1 %jump%", "^%attack% + 1" ],
+          "special2": [ "^%move% + 0,", "^%attack% + 0, %push%3", "^%shield%4" ],
           "immunities": [ "%muddle%", "%immobilize%", "%stun%", "%curse%", "%disarm%" ]
         },
         {
@@ -896,8 +827,8 @@
           "move": 3,
           "attack": 3,
           "attributes": [ "%retaliate% 1" ],
-          "special1": [ "%move% + 1 %jump%", "%attack% + 1" ],
-          "special2": [ "%move% + 0,", "%attack% + 0, %push%3", "%shield%1" ],
+          "special1": [ "^%move% + 1 %jump%", "^%attack% + 1" ],
+          "special2": [ "^%move% + 0,", "^%attack% + 0, %push%3", "^%shield%4" ],
           "immunities": [ "%muddle%", "%immobilize%", "%stun%", "%curse%", "%disarm%" ]
         },
         {
@@ -906,8 +837,8 @@
           "move": 4,
           "attack": 4,
           "attributes": [ "%retaliate% 2" ],
-          "special1": [ "%move% + 1 %jump%", "%attack% + 1" ],
-          "special2": [ "%move% + 0,", "%attack% + 0, %push%3", "%shield%2" ],
+          "special1": [ "^%move% + 1 %jump%", "^%attack% + 1" ],
+          "special2": [ "^%move% + 0,", "^%attack% + 0, %push%3", "^%shield%4" ],
           "immunities": [ "%muddle%", "%immobilize%", "%stun%", "%curse%", "%disarm%" ]
         },
         {
@@ -916,8 +847,8 @@
           "move": 4,
           "attack": 4,
           "attributes": [ "%retaliate% 2" ],
-          "special1": [ "%move% + 1 %jump%", "%attack% + 1" ],
-          "special2": [ "%move% + 0,", "%attack% + 0, %push%3", "%shield%2" ],
+          "special1": [ "^%move% + 1 %jump%", "^%attack% + 1" ],
+          "special2": [ "^%move% + 0,", "^%attack% + 0, %push%3", "^%shield%4" ],
           "immunities": [ "%muddle%", "%immobilize%", "%stun%", "%curse%", "%disarm%" ]
         },
         {
@@ -926,8 +857,8 @@
           "move": 4,
           "attack": 5,
           "attributes": [ "%retaliate% 3" ],
-          "special1": [ "%move% + 1 %jump%", "%attack% + 1" ],
-          "special2": [ "%move% + 0,", "%attack% + 0, %push%3", "%shield%3" ],
+          "special1": [ "^%move% + 1 %jump%", "^%attack% + 1" ],
+          "special2": [ "^%move% + 0,", "^%attack% + 0, %push%3", "^%shield%4" ],
           "immunities": [ "%muddle%", "%immobilize%", "%stun%", "%curse%", "%disarm%" ]
         },
         {
@@ -936,8 +867,8 @@
           "move": 5,
           "attack": 5,
           "attributes": [ "%retaliate% 3" ],
-          "special1": [ "%move% + 1 %jump%", "%attack% + 1" ],
-          "special2": [ "%move% + 0,", "%attack% + 0, %push%3", "%shield%3" ],
+          "special1": [ "^%move% + 1 %jump%", "^%attack% + 1" ],
+          "special2": [ "^%move% + 0,", "^%attack% + 0, %push%3", "^%shield%4" ],
           "immunities": [ "%muddle%", "%immobilize%", "%stun%", "%curse%", "%disarm%" ]
         },
         {
@@ -946,8 +877,8 @@
           "move": 5,
           "attack": 6,
           "attributes": [ "%retaliate% 4" ],
-          "special1": [ "%move% + 1 %jump%", "%attack% + 1" ],
-          "special2": [ "%move% + 0,", "%attack% + 0, %push%3", "%shield%4" ],
+          "special1": [ "^%move% + 1 %jump%", "^%attack% + 1" ],
+          "special2": [ "^%move% + 0,", "^%attack% + 0, %push%3", "^%shield%4" ],
           "immunities": [ "%muddle%", "%immobilize%", "%stun%", "%curse%", "%disarm%" ]
         }
       ]
@@ -1041,8 +972,8 @@
           "health": "9xC",
           "move": 4,
           "attack": 3,
-          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%1 %retaliate%1 %heal%1" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1050,8 +981,8 @@
           "health": "10xC",
           "move": 4,
           "attack": 4,
-          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%1, %retaliate%1, %heal%1" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1059,8 +990,8 @@
           "health": "13xC",
           "move": 5,
           "attack": 4,
-          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%1, %retaliate%1, %heal%1" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1068,8 +999,8 @@
           "health": "14xC",
           "move": 5,
           "attack": 4,
-          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%2, %retaliate%2, %heal%2" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1077,8 +1008,8 @@
           "health": "18xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%2, %retaliate%2, %heal%2" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1086,8 +1017,8 @@
           "health": "20xC",
           "move": 6,
           "attack": 5,
-          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%3, %retaliate%3, %heal%3" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1095,8 +1026,8 @@
           "health": "25xC",
           "move": 6,
           "attack": 5,
-          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%3, %retaliate%3, %heal%3" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1104,8 +1035,8 @@
           "health": "27xC",
           "move": 6,
           "attack": 6,
-          "special1": [ "^%attack% + 1 %pierce%3,","all enemies adjacent to target suffer 1 damage, destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle, perform %shield%4, %retaliate%4, %heal%4" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
+          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         }
       ]
@@ -1252,8 +1183,8 @@
         {
           "level": 0, "health": "8xC","move": 1, "attack": 2, "range": 3,
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "%move% + 0 All other","Blood Oozes perform", "%attack% -1, Target one","adjacent enemy" ],
-          "special2": [ "Reference scenario", "Special Rules" ]
+          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
+          "special2": [ "^Reference scenario","^Special Rules." ]
         },
         {
           "level": 1,
@@ -1263,8 +1194,8 @@
           "range": 3,
           "attributes": [ "%shield% 1" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "%move% + 0 All other","Blood Oozes perform", "%attack% -1, Target one","adjacent enemy" ],
-          "special2": [ "Reference scenario", "Special Rules" ]
+          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
+          "special2": [ "^Reference scenario","^Special Rules." ]
         },
         {
           "level": 2,
@@ -1274,8 +1205,8 @@
           "range": 3,
           "attributes": [ "%shield% 1" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "%move% + 0 All other","Blood Oozes perform", "%attack% -1, Target one","adjacent enemy" ],
-          "special2": [ "Reference scenario", "Special Rules" ]
+          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
+          "special2": [ "^Reference scenario","^Special Rules." ]
         },
         {
           "level": 3,
@@ -1285,8 +1216,8 @@
           "range": 4,
           "attributes": [ "%poison%", "%shield% 1" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "%move% + 0 All other","Blood Oozes perform", "%attack% -1, Target one","adjacent enemy" ],
-          "special2": [ "Reference scenario", "Special Rules" ]
+          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
+          "special2": [ "^Reference scenario","^Special Rules." ]
         },
         {
           "level": 4,
@@ -1296,8 +1227,8 @@
           "range": 4,
           "attributes": [ "%poison%", "%shield% 1" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "%move% + 0 All other","Blood Oozes perform", "%attack% -1, Target one","adjacent enemy" ],
-          "special2": [ "Reference scenario", "Special Rules" ]
+          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
+          "special2": [ "^Reference scenario","^Special Rules." ]
         },
         {
           "level": 5,
@@ -1307,8 +1238,8 @@
           "range": 4,
           "attributes": [ "%poison%", "%shield% 1" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "%move% + 0 All other","Blood Oozes perform", "%attack% -1, Target one","adjacent enemy" ],
-          "special2": [ "Reference scenario", "Special Rules" ]
+          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
+          "special2": [ "^Reference scenario","^Special Rules." ]
         },
         {
           "level": 6,
@@ -1318,8 +1249,8 @@
           "range": 4,
           "attributes": [ "%poison%", "%shield% 2" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "%move% + 0 All other","Blood Oozes perform", "%attack% -1, Target one","adjacent enemy" ],
-          "special2": [ "Reference scenario", "Special Rules" ]
+          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
+          "special2": [ "^Reference scenario","^Special Rules." ]
         },
         {
           "level": 7,
@@ -1329,8 +1260,8 @@
           "range": 4,
           "attributes": [ "%poison%", "%shield% 2" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "%move% + 0 All other","Blood Oozes perform", "%attack% -1, Target one","adjacent enemy" ],
-          "special2": [ "Reference scenario", "Special Rules" ]
+          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
+          "special2": [ "^Reference scenario","^Special Rules." ]
         }
       ]
     },
@@ -2803,50 +2734,50 @@
         {
           "level": 0, "health": "3x(C+2)", "move": 3, "attack": 2, "range": 3, "attributes": [ "%shield% 2" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "%heal% 1 self. Summon", "Rending Drake" ],
-          "special2": [ "%shield% 1 self", "Summon Spitting", "Drake. See", "Special Rules" ]
+          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
+          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
         },
         {
           "level": 1, "health": "3x(C+2)", "move": 3, "attack": 2, "range": 3, "attributes": [ "%shield% 3" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "%heal% 1 self. Summon", "Rending Drake" ],
-          "special2": [ "%shield% 1 self", "Summon Spitting", "Drake. See", "Special Rules" ]
+          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
+          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
         },
         {
           "level": 2, "health": "4x(C+2)", "move": 3, "attack": 2, "range": 4, "attributes": [ "%shield% 3" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "%heal% 1 self. Summon", "Rending Drake" ],
-          "special2": [ "%shield% 1 self", "Summon Spitting", "Drake. See", "Special Rules" ]
+          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
+          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
         },
         {
           "level": 3, "health": "5x(C+2)", "move": 3, "attack": 3, "range": 4, "attributes": [ "%shield% 3" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "%heal% 1 self. Summon", "Rending Drake" ],
-          "special2": [ "%shield% 1 self", "Summon Spitting", "Drake. See", "Special Rules" ]
+          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
+          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
         },
         {
           "level": 4, "health": "5x(C+2)", "move": 3, "attack": 3, "range": 4, "attributes": [ "%muddle%", "%shield% 4" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "%heal% 1 self. Summon", "Rending Drake" ],
-          "special2": [ "%shield% 1 self", "Summon Spitting", "Drake. See", "Special Rules" ]
+          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
+          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
         },
         {
           "level": 5, "health": "6x(C+2)", "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 4" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "%heal% 1 self. Summon", "Rending Drake" ],
-          "special2": [ "%shield% 1 self", "Summon Spitting", "Drake. See", "Special Rules" ]
+          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
+          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
         },
         {
           "level": 6, "health": "6x(C+2)", "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 5" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "%heal% 1 self. Summon", "Rending Drake" ],
-          "special2": [ "%shield% 1 self", "Summon Spitting", "Drake. See", "Special Rules" ]
+          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
+          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
         },
         {
           "level": 7, "health": "8x(C+2)", "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 5" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "%heal% 1 self. Summon", "Rending Drake" ],
-          "special2": [ "%shield% 1 self", "Summon Spitting", "Drake. See", "Special Rules" ]
+          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
+          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
         }
       ]
     },
@@ -3944,7 +3875,8 @@
 
     "Bandit Archer (Hired Muscle)": {
       "deck": "Archer",
-      "display": "Bandit Archer",
+      "gfx" : "Bandit Archer",
+      "display": "Hired Bandit Archer",
       "edition": "Crimson Scales RM",
       "hidden": true,
       "count": 6,
@@ -3993,7 +3925,8 @@
     },
     "Bandit Guard (Hired Muscle)": {
       "deck": "Guard",
-      "display": "Bandit Guard",
+      "gfx": "Bandit Guard",
+      "display": "Hired Bandit Guard",
       "edition": "Crimson Scales RM",
       "hidden": true,
       "count": 6,
@@ -4088,43 +4021,43 @@
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 4, "move": 3, "attack": 2,"attributes": [ "On death:","attack +0","%target% all","adjacent"  ]},
-          "elite": { "health": 6, "move": 5, "attack": 2,"attributes": ["On death:","attack +0","%target% all","adjacent"  ]}
+          "normal": { "health": 4, "move": 3, "attack": 2,"attributes": [ "^On death:","^%attack% + 0","^%target% all","^adjacent"  ]},
+          "elite": { "health": 6, "move": 5, "attack": 2,"attributes": ["^On death:","^%attack% + 0","^%target% all","^adjacent"  ]}
         },
         {
           "level": 1,
-          "normal": { "health": 4, "move": 4, "attack": 2, "attributes": [ "%retaliate% 1","On death:","attack +0","%target% all","adjacent"   ]},
-          "elite": { "health": 6, "move": 5, "attack": 2, "attributes": [ "%retaliate% 2", "On death:","attack +0","%target% all","adjacent"  ]}
+          "normal": { "health": 4, "move": 4, "attack": 2, "attributes": [ "^%retaliate% 1","^On death:","^%attack% + 0","^%target% all","^adjacent"   ]},
+          "elite": { "health": 6, "move": 5, "attack": 2, "attributes": [ "^%retaliate% 2", "^On death:","^%attack% + 0","^%target% all","^adjacent"  ]}
         },
         {
           "level": 2,
-          "normal": { "health": 6, "move": 4, "attack": 2, "attributes": [ "%retaliate% 1", "On death:","attack +0","%target% all","adjacent"]},
-          "elite": { "health": 7, "move": 5, "attack": 3, "attributes": [ "%retaliate% 2", "On death:","attack +0","%target% all","adjacent" ]}
+          "normal": { "health": 6, "move": 4, "attack": 2, "attributes": [ "^%retaliate% 1", "^On death:","^attack + 0","^%target% all","^adjacent"]},
+          "elite": { "health": 7, "move": 5, "attack": 3, "attributes": [ "^%retaliate% 2", "^On death:","^attack + 0","^%target% all","^adjacent" ]}
         },
         {
           "level": 3,
-          "normal": { "health": 8, "move": 4, "attack": 2, "attributes": [ "%retaliate% 1","On death:","attack +0","%target% all","adjacent" ]},
-          "elite": { "health": 8, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2", "On death:","attack +0","%target% all","adjacent"]}
+          "normal": { "health": 8, "move": 4, "attack": 2, "attributes": [ "^%retaliate% 1","^On death:","^%attack% + 0","^%target% all","^adjacent" ]},
+          "elite": { "health": 8, "move": 5, "attack": 4, "attributes": [ "^%retaliate% 2", "^On death:","^%attack% + 0","^%target% all","^adjacent"]}
         },
         {
           "level": 4,
-          "normal": { "health": 8, "move": 4, "attack": 3, "attributes": [ "%retaliate% 1", "On death:","attack +0","%target% all","adjacent" ]},
-          "elite": { "health": 11, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2", "On death:","attack +0","%target% all","adjacent" ]}
+          "normal": { "health": 8, "move": 4, "attack": 3, "attributes": [ "^%retaliate% 1", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]},
+          "elite": { "health": 11, "move": 5, "attack": 4, "attributes": [ "^%retaliate% 2", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]}
         },
         {
           "level": 5,
-          "normal": { "health": 9, "move": 4, "attack": 3, "attributes": [ "%retaliate% 2" , "On death:","attack +0","%target% all","adjacent"]},
-          "elite": { "health": 12, "move": 5, "attack": 4, "attributes": [ "%retaliate% 3", "On death:","attack +0","%target% all","adjacent" ]}
+          "normal": { "health": 9, "move": 4, "attack": 3, "attributes": [ "^%retaliate% 2" , "^On death:","^%attack% + 0","^%target% all","^adjacent"]},
+          "elite": { "health": 12, "move": 5, "attack": 4, "attributes": [ "^%retaliate% 3", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 11, "move": 5, "attack": 3, "attributes": [ "%retaliate% 2" ,"On death:","attack +0","%target% all","adjacent"]},
-          "elite": { "health": 15, "move": 6, "attack": 4, "attributes": [ "%retaliate% 3", "On death:","attack +0","%target% all","adjacent" ]}
+          "normal": { "health": 11, "move": 5, "attack": 3, "attributes": [ "^%retaliate% 2" ,"^On death:","^%attack% + 0","^%target% all","^adjacent"]},
+          "elite": { "health": 15, "move": 6, "attack": 4, "attributes": [ "^%retaliate% 3", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]}
         },
         {
           "level": 7,
-          "normal": { "health": 15, "move": 5, "attack": 3, "attributes": [ "%retaliate% 2", "On death:","attack +0","%target% all","adjacent" ]},
-          "elite": { "health": 15, "move": 6, "attack": 5, "attributes": [ "%retaliate% 4", "On death:","attack +0","%target% all","adjacent" ]}
+          "normal": { "health": 15, "move": 5, "attack": 3, "attributes": [ "^%retaliate% 2", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]},
+          "elite": { "health": 15, "move": 6, "attack": 5, "attributes": [ "^%retaliate% 4", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]}
         }
       ]
     },
@@ -4137,42 +4070,42 @@
       "levels": [
         {
           "level": 0, "health": "10xC", "move": 3, "attack": 3,
-          "attributes": [ "%pierce% 2 %aoe-line-3-with-black%", "*Unaffected by", "*water hexes", "*%shield% 1%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": [ "%pierce% 2","¤aoe-line-3-with-black", "*Unaffected by", "*water hexes", "*%shield% 1%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 1, "health": "12xC", "move": 3, "attack": 4,
-          "attributes": [ "%pierce% 2 %aoe-line-3-with-black%", "*Unaffected by", "*water hexes", "*%shield% 1%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": [ "%pierce% 2","¤aoe-line-3-with-black", "*Unaffected by", "*water hexes", "*%shield% 1%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 2, "health": "14xC", "move": 3, "attack": 4,
-          "attributes": ["%pierce% 2 %aoe-line-3-with-black%",  "*Unaffected by", "*water hexes", "*%shield% 2%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": ["%pierce% 2","¤aoe-line-3-with-black",  "*Unaffected by", "*water hexes", "*%shield% 2%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 3, "health": "16xC", "move": 4, "attack": 4,
-          "attributes": [ "%pierce% 2 %aoe-line-3-with-black%", "*Unaffected by", "*water hexes", "*%shield% 2%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": [ "%pierce% 2","¤aoe-line-3-with-black", "*Unaffected by", "*water hexes", "*%shield% 2%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 4, "health": "16xC", "move": 4, "attack": 5,
-          "attributes": ["%pierce% 2 %aoe-line-3-with-black%", "*Unaffected by", "*water hexes", "*%shield% 3%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": ["%pierce% 2","¤aoe-line-3-with-black", "*Unaffected by", "*water hexes", "*%shield% 3%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 5, "health": "19xC", "move": 4, "attack": 5,
-          "attributes": ["%pierce% 2 %aoe-line-3-with-black%",  "*Unaffected by", "*water hexes", "*%shield% 3%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": ["%pierce% 2","¤aoe-line-3-with-black",  "*Unaffected by", "*water hexes", "*%shield% 3%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 6, "health": "20xC", "move": 5, "attack": 5,
-          "attributes": ["%pierce% 2 %aoe-line-3-with-black%",  "*Unaffected by", "*water hexes", "*%shield% 4%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": ["%pierce% 2","¤aoe-line-3-with-black",  "*Unaffected by", "*water hexes", "*%shield% 4%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         },
         {
           "level": 7, "health": "22xC", "move": 5, "attack": 6,
-          "attributes": ["%pierce% 2 %aoe-line-3-with-black%",  "*Unaffected by", "*water hexes", "*%shield% 4%", "*Shield only applies on ranged","*attacks" ],
+          "attributes": ["%pierce% 2","¤aoe-line-3-with-black",  "*Unaffected by", "*water hexes", "*%shield% 4%", "*Shield only applies on ranged","*attacks" ],
           "immunities": ["%disarm%", "%immobilize%", "%stun%"]
         }
       ]

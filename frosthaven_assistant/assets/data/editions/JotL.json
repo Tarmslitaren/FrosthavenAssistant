@@ -42,20 +42,15 @@
         ["Nothing special", 384, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
         ["Hasty Assault", 385, false, 35, "%move% + 1","*.........", "%attack% - 1" ],
         ["Calculated Strike", 386, false, 65, "%move% - 1","*.........", "%attack% + 1"],
-        ["Drain Life", 387, true, 27, "%move% + 0","*.........", "%attack% - 1", "^%range% 2","*.........", "%heal% X   %dark%", "^Self", "^X is damage suffered by target of attack"],
+        ["Drain Life", 387, true, 27, [{
+          "gfx": "dark",
+          "x": 0.70,
+          "y": 0.56
+        }],"%move% + 0","*.........", "%attack% - 1", "^%range% 2","*.........", "%heal% X", "^Self", "^X is damage suffered by target of attack"],
         ["Boil Blood", 388, false, 46, "%attack% - 1", "^%range% 2", "^%target% 2", "^%muddle%", "%fire%%use%", "!^+2 %range%" ],
-        ["Vile Scourge", 389, false, 77, "%move% - 1","*.........", "%attack% - 1 %aoe-triangle-2-side-with-black%", "^%poison%", "%air%%use%", "!^+1 %attack%"],
+        ["Vile Scourge", 389, false, 77, "%move% - 1","*.........", "[r]", "[c]", "%attack% - 1", "^%poison%", "%air%%use%", "!^+1 %attack%", "[/c]", "¤aoe-triangle-2-side-with-black", "[/r]"],
         ["Hex Whip", 390, false, 19, "%move% + 1", "^%jump%","*.........", "%attack% - 1", "^%curse%", "%air%"],
         ["Unholy Flame", 391, true, 82, "%attack% + 1", "^%range% 3", "%fire%" ]
-      ],
-      "cardLayouts": [
-        {
-          "nr": 387,
-          "lines": [
-            {"index": 7, "type": "line", "spaceTopOffset": -22},
-            {"index": 8, "type": "icon", "xOffset": 130, "yOffset": -100, "heightOffset": -50}
-          ]
-        }
       ]
     },
     {
@@ -110,38 +105,6 @@
         ["Plasma Ward", 433, false, 85, "%push% 1 and", "%poison%", "^Target all adjacent enemies","*.........", "%attack% + 1", "^%range% 2"],
         ["Black Hex", 434, true, 85, "^The closest enemy in", "^line-of-sight, regardless of","^range, suffers 1+L/2 (rounded up) damage.","*.........", "%heal% 1", "^Self", "%dark%"],
         ["Septic Hex", 435, true, 85, "^The closest enemy in", "^line-of-sight, regardless of", "^range, suffers 1+L/2 (rounded up) damage.","*.........", "%heal% 1", "^Self", "%earth%"]
-      ],
-      "cardLayouts": [
-        {
-          "nr": 432,
-          "lines": [
-            {"index": 6, "type": "icon", "xOffset": 0,  "heightOffset": -10}
-          ]
-        },
-        {
-          "nr": 434,
-          "lines": [
-            {"index": 0, "type": "line","yOffset": 5 },
-            {"index": 1, "type": "line","yOffset": 5, "spaceTopOffset": 0},
-            {"index": 2, "type": "line","yOffset": 5, "spaceTopOffset": 0},
-            {"index": 3, "type": "line","yOffset": 5, "spaceTopOffset": -5},
-            {"index": 4, "type": "line","yOffset": 5, "spaceTopOffset": 0},
-            {"index": 5, "type": "line","yOffset": 5, "spaceTopOffset": 0},
-            {"index": 6, "type": "icon", "heightOffset": -6}
-          ]
-        },
-        {
-          "nr": 435,
-          "lines": [
-            {"index": 0, "type": "line","yOffset": 5 },
-            {"index": 1, "type": "line","yOffset": 5, "spaceTopOffset": 0},
-            {"index": 2, "type": "line","yOffset": 5, "spaceTopOffset": 0},
-            {"index": 3, "type": "line","yOffset": 5, "spaceTopOffset": -5},
-            {"index": 4, "type": "line","yOffset": 5, "spaceTopOffset": 0},
-            {"index": 5, "type": "line","yOffset": 5, "spaceTopOffset": 0},
-            {"index": 6, "type": "icon", "heightOffset": -6}
-          ]
-        }
       ]
     },
     {
@@ -168,45 +131,26 @@
         ["Calculated Strike", 441, false, 76, "%move% - 1","*.........", "%attack% + 1", "^%range% 3"],
         ["Dark Charm", 442, false, 42, "%move% + 0","*.........", "%attack% - 1", "^%range% 3", "^%target% 2", "^%curse%"],
         ["Tip The Scales", 443, false, 24, "%strengthen%", "^Target self and all allies within %range% 2","*.........", "%muddle%", "^Target all enemies within %range% 2"]
-      ],
-      "cardLayouts": [{
-          "nr": 443,
-          "lines": [
-            {"index": 0, "type": "line","yOffset": 10 },
-            {"index": 1, "type": "line","yOffset": 10, "spaceTopOffset": 0},
-            {"index": 2, "type": "line","yOffset": 10, "spaceTopOffset": -3},
-            {"index": 3, "type": "line","yOffset": 10, "spaceTopOffset": 0},
-            {"index": 4, "type": "line","yOffset": 10, "spaceTopOffset": 0}
-          ]
-      }]
+      ]
     },
     {
       "name": "Chaos Demon",
       "cards": [
-        ["Chilling Breath", 412, false, 13, "%move% - 1","*.........", "%attack% + 0 %aoe-triangle-2-side-with-black%","*.........", "%ice%%use%", "!*Any time a figure attacks the Chaos Demon this round, that figure suffers 2 damage." ],
+        ["Chilling Breath", 412, false, 13, "%move% - 1",
+          "[r]",
+              "[c]", "*........." , "%attack% + 0","*.........", "[/c]",
+          "¤aoe-triangle-2-side-with-black",
+          "[/r]",
+          "[r]", "%ice%%use%",
+              "[c]", "*Any time a figure attacks the","*Chaos Demon this round,","*that figure suffers 2 damage.","[/c]",
+          "[/r]" ],
         ["Heal Blast", 413, false, 1, "%move% + 1","*.........", "%attack% - 1", "^%range% 3", "%fire%%use%", "!^%wound%" ],
-        ["Seismic Punch", 414, false, 67, "%move% - 2","*.........", "%attack% + 1", "^%push% 2", "%earth%%use%", "!%aoe-triangle-2-side-with-black%" ],
-        ["Whirlwind", 415, false, 20, "%move% + 0","*.........", "%attack% - 1 %aoe-triangle-2-side%", "^%range% 2","*.........", "%air%%use%", "!^%shield% 2"] ,
-        ["Flashing Claws", 416, false, 41, "%move% + 0","*.........", "%attack% + 0", "^Advantage","*.........", "%light%%use%", "!^%heal% 4", "*Self" ],
-        ["Black Tendrils", 417, false, 52, "%move% - 1","*.........", "%attack% + 1", "%dark%%use%", "!*All enemies adjacent to the target suffer 1 damage." ],
+        ["Seismic Punch", 414, false, 67, "%move% - 2","*.........", "%attack% + 1", "^%push% 2", "[r]", "%earth%%use%", "¤aoe-triangle-2-side-with-black", "[/r]" ],
+        ["Whirlwind", 415, false, 20, "%move% + 0","*.........", "[r]", "[c]", "%attack% - 1", "^%range% 2", "[/c]", "¤aoe-triangle-2-side", "[/r]", "*.........", "%air%%use%", "!^%shield% 2"] ,
+        ["Flashing Claws", 416, false, 41, "%move% + 0","*.........", "%attack% + 0", "^Advantage","*.........", "[r]","%light%%use%","[c]", "^%heal% 4", "*Self","[/c]", "[/r]" ],
+        ["Black Tendrils", 417, false, 52, "%move% - 1","*.........", "%attack% + 1", "[r]", "%dark%%use%", "[c]","*All enemies adjacent to the","*target suffer 1 damage.","[/c]", "[/r]" ],
         ["Mana Explosion", 418, true, 76, "%move% + 0","*.........", "%attack% + 0", "%fire% %ice% %air% %earth% %light% %dark%" ],
         ["Hungry Maw", 419, true, 98, "%move% - 1","*.........", "%attack% - 1", "%any%%use%", "!^%disarm%" ]
-      ],
-      "cardLayouts": [
-        {
-          "nr": 412,
-          "lines": [
-            {"index": 7, "type": "line","xOffset": 50, "spaceTopOffset": -16},
-            {"index": 2, "type": "icon", "xOffset": -5, "yOffset": 10, "heightOffset": 0},
-            {"index": 3, "type": "line", "xOffset": 0, "yOffset": 0, "spaceTopOffset": 15}
-          ]
-        },
-        {
-          "nr": 415,
-          "lines": [
-            {"index": 2, "type": "icon", "xOffset": -5, "yOffset": 10, "heightOffset": 0}
-          ]
-        }
       ]
     },
     {
@@ -247,25 +191,18 @@
     {
       "name": "Living Corpse (JotL)",
       "cards": [
-        ["Rotting Embrace", 444, false, 21, "%move% + 1","*.........", "%muddle% and %immobilize%", "^Target one adjacent enemy", "%earth%%use%", "!^The target also suffers 2 damage"],
+        ["Rotting Embrace", 444, false, 21, "%move% + 1","*.........", "%muddle% and", "%immobilize%", "^Target one adjacent enemy", "%earth%%use%", "!*The target also suffers 2 damage"],
         ["hasty Assault", 445, false, 47, "%move% + 1","*.........", "%attack% - 1"],
         ["Nothing Special", 446, true, 68, "%move% + 0","*.........", "%attack% + 0"],
         ["Nothing Special", 447, true, 68, "%move% + 0","*.........", "%attack% + 0"],
         ["Calculated Strike", 448, false, 81, "%move% - 1","*.........", "%attack% + 1"],
-        ["Reckless Charge", 449, false, 91, "%move% + 2", "^If this movement is performed, the Living Corpse suffers 1 damage."],
-        ["Release Gas", 450, false, 71, "%move% + 0","*.........", "%attack% + 1", "*.........","%poison%", "^Target all adjacent enemies", "%earth%"],
+        ["Reckless Charge", 449, false, 91, "%move% + 2", "^If this movement is performed,","^the Living Corpse suffers 1 damage."],
+        ["Release Gas", 450, false, 71, [{
+          "gfx": "earth",
+          "x": 0.80,
+          "y": 0.5
+        }], "%move% + 0","*.........", "%attack% + 1", "*.........","%poison%", "^Target all adjacent enemies"],
         ["Violent Slam", 451, false, 32, "%attack% + 2", "%push% 1", "^If this attack is performed, the Living Corpse suffers 1 damage."]
-      ],
-      "cardLayouts": [
-        {
-          "nr": 450,
-          "lines": [
-            {"index": 0, "type": "line","xOffset": 0, "yOffset": 5},
-            {"index": 4, "type": "line","xOffset": 0, "yOffset": -5},
-            {"index": 5, "type": "line","xOffset": 0, "spaceTopOffset": -5},
-            {"index": 6, "type": "icon","xOffset": 0, "yOffset": -7}
-          ]
-        }
       ]
     },
     {
@@ -276,7 +213,11 @@
         ["Nothing Special", 454, false, 48, "%move% + 0","*.........", "%attack% + 0", "^%range% 3"],
         ["Nothing Special", 455, false, 48, "%move% + 0","*.........", "%attack% + 0", "^%range% 3"],
         ["Coupled Chain", 456, false, 61, "%attack% + 0", "^%range% 3", "^%target% 2"],
-        ["Leech Warmth", 457, false, 75, "%move% - 1","*.........", "%attack% + 1", "^%range% 3","*.........", "%heal% 1", "!   %ice%", "^Self"],
+        ["Leech Warmth", 457, false, 75,[{
+          "gfx": "ice",
+          "x": 0.80,
+          "y": 0.5
+        }], "%move% - 1","*.........", "%attack% + 1", "^%range% 3","*.........", "%heal% 1", "^Self"],
         ["Angry Howl", 458, false, 55, "%move% + 0","*.........", "%curse%", "^Target all enemies within %range% 3", "%ice%"],
         ["Icy Glare", 459, false, 67, "%move% - 1","*.........", "%attack% + 1", "^%range% 3", "%ice%%use%", "!^%disarm%"]
       ]
@@ -298,12 +239,12 @@
       "name": "First of the Order",
       "note":  "A custom deck for the First of the Order because their text is difficult to read otherwise. We like this special deck but others might find it weird.",
       "cards": [
-        ["Accelerated Power", 468, false, 11, "Special 2:","^%attack% + 0 %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target"],
-        ["Accelerated Power", 469, false, 14, "Special 2:","^%attack% + 0 %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target"],
-        ["Accelerated Power", 470, true, 17, "Special 2:","^%attack% + 0 %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target"],
-        ["Lingering Strength", 471, true, 85, "Special 1:", "^All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
-        ["Lingering Strength", 472, false, 79, "Special 1:", "^All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
-        ["Lingering Strength", 473, false, 73, "Special 1:", "^All enemies within Range 2 suffer 2 damage, Spawn C/2 Blood Imps"],
+        ["Accelerated Power", 468, false, 11, "Special 2:","^%attack% + 0","*.........","^%attack% - 1 within %range% 2 of target","*.........","^%attack% - 2 within %range% 2 of target"],
+        ["Accelerated Power", 469, false, 14, "Special 2:","^%attack% + 0","*.........","^%attack% - 1 within %range% 2 of target","*.........","^%attack% - 2 within %range% 2 of target"],
+        ["Accelerated Power", 470, true, 17, "Special 2:","^%attack% + 0","*.........","^%attack% - 1 within %range% 2 of target","*.........","^%attack% - 2 within %range% 2 of target"],
+        ["Lingering Strength", 471, true, 85, "Special 1:", "^All enemies within Range 2 suffer 2 damage","*.........","^Spawn C/2 Blood Imps"],
+        ["Lingering Strength", 472, false, 79, "Special 1:", "^All enemies within Range 2 suffer 2 damage","*.........","^Spawn C/2 Blood Imps"],
+        ["Lingering Strength", 473, false, 73, "Special 1:", "^All enemies within Range 2 suffer 2 damage","*.........","^Spawn C/2 Blood Imps"],
         ["Nothing Special", 474, false, 36, "%move% + 0","*.........", "%attack% + 0"],
         ["Twin Missiles", 475, false, 54, "%move% - 1","*.........", "%attack% - 1", "^%range% 3", "^%target% 2"]
       ]

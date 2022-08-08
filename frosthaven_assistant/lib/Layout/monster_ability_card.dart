@@ -150,10 +150,10 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             if (positionals.length > 3) positionals[3],
 
             Positioned(
-              top: 8 * scale,
+              top: 11 * scale,
               //alignment: Alignment.center,
               child: Container(
-                height: 110 * scale * 0.8,
+                height: 110 * scale * 0.8 ,
                 width: 178 * scale * 0.8, //needed for line breaks in lines
                 //color: Colors.amber,
                 child: LineBuilder.createLines(

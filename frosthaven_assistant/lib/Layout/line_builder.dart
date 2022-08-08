@@ -79,6 +79,28 @@ class LineBuilder {
             iconToken == "move")) {
       return EdgeInsets.only(left: margin * height, right: margin * height);
     }
+    if (
+    mainLine
+        &&
+        (iconToken == "pierce" ||
+            iconToken == "target" ||
+            iconToken == "curse" ||
+            iconToken == "bless" ||
+            iconToken == "curse" ||
+            iconToken == "push" ||
+            iconToken == "pull" ||
+            iconToken == "poison" ||
+            iconToken == "wound" ||
+            iconToken == "infect" ||
+            iconToken == "chill" ||
+            iconToken == "disarm" ||
+            iconToken == "immobilize" ||
+            iconToken == "stun" ||
+            iconToken == "muddle"
+        )) {
+      //smaller magins for secondary modifiers
+      return const EdgeInsets.all(0);
+    }
     if (iconToken == "air" ||
         iconToken == "earth" ||
         iconToken == "fire" ||
@@ -234,6 +256,15 @@ class LineBuilder {
       if (normal != null && value != null) {
         normalValue = value;
       }
+    } else if (lastToken == "retaliate") {
+      int? value = normalTokens["retaliate"];
+      int? eValue = eliteTokens["retaliate"];
+      if (elite != null && eValue != null) {
+        eliteValue = eValue;
+      }
+      if (normal != null && value != null) {
+        normalValue = value;
+      }
     } else if (lastToken == "target") {
       //only if there is ever a +x target
       /*int? value = normalTokens["target"];
@@ -247,11 +278,16 @@ class LineBuilder {
     }
     String normalResult = formula;
     if (!skipCalculation) {
-      int res = StatCalculator.calculateFormula(formula + "+" + normalValue.toString())!;
-      if (res < 0) {
+      int? res = StatCalculator.calculateFormula(formula + "+" + normalValue.toString());
+
+      if (res != null && res < 0) {
         res = 0; //needed for blood tumor: has 0 move and a -1 move card
       }
-      normalResult = res.toString();
+      if (res == null) {
+        skipCalculation = true;
+      } else {
+        normalResult = res.toString();
+      }
     }
 
 
@@ -412,13 +448,16 @@ class LineBuilder {
               return retVal;
             }
           } else {
-            int result = StatCalculator.calculateFormula(formula)!;
-            if (result < 0) {
-              //just some nicety. probably never applies
-              result = 0;
+            int? result = StatCalculator.calculateFormula(formula);
+            if(result != null) {
+              if (result < 0) {
+                //just some nicety. probably never applies
+                result = 0;
+              }
+              line =
+                  line.replaceRange(
+                      startIndex, endIndex + 1, result.toString());
             }
-            line =
-                line.replaceRange(startIndex, endIndex + 1, result.toString());
           }
         }
       }
@@ -453,7 +492,7 @@ class LineBuilder {
     var smallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center ? 10 : 12) *
+        fontSize: (alignment == CrossAxisAlignment.center ? 10 : 11) *
             0.8 *
             scale,
         //sizes are larger on stat cards
@@ -464,11 +503,11 @@ class LineBuilder {
 
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center ? 11 : 13) *
+        fontSize: (alignment == CrossAxisAlignment.center ? 11 : 12.7) *
             0.8 *
             scale,
         //sizes are larger on stat cards
-        height: 1.1,// 0.9,
+        height: (alignment == CrossAxisAlignment.center ? 1: 0.8),// 0.9,
         shadows: [shadow]);
     var normalStyle = TextStyle(
         //maybe slightly bigger between chars space?
@@ -477,7 +516,7 @@ class LineBuilder {
         fontSize: (alignment == CrossAxisAlignment.center ? 15.7 : 14) *
             0.8 *
             scale,
-        height: 1.1,// 0.8,
+        height: (alignment == CrossAxisAlignment.center) ? 1.1 : 1,// 0.8,
         shadows: [shadow]);
 
     var eliteStyle = TextStyle(
@@ -538,13 +577,14 @@ class LineBuilder {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: alignment,
           mainAxisSize: MainAxisSize.max,
-          children: widgetsInColumn,
+          children: widgetsInColumn.toList(),
         );
+        widgetsInColumn = [];
         if(isColumnInRow) {
           widgetsInRow.add(column);
         }else {
           lines.add(column);
-          if(line == localStrings.last){
+          if(i == localStrings.length-1){
             return createLinesColumn(alignment, lines);
           }
         }
@@ -565,18 +605,18 @@ class LineBuilder {
         row = Row(
           //crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly, //TODO evaluate if this or center with margins on parts is better (probably center)
-          children: widgetsInRow,
+          mainAxisAlignment: MainAxisAlignment.center, //TODO evaluate if this or center with margins on parts is better (probably center)
+          children: widgetsInRow.toList(),
         );
+        widgetsInRow =[];
         if(isRowInColumn) {
           widgetsInColumn.add(row);
-        }else {
+        } else {
           lines.add(row);
-          if(line == localStrings.last){
+          if(i == localStrings.length-1){ //error just a string compare
             return createLinesColumn(alignment, lines);
           }
         }
-
         continue;
       }
       if (line.startsWith('¤')) {
@@ -596,7 +636,7 @@ class LineBuilder {
         else {
           lines.add(image);
         }
-        if(line == localStrings.last){
+        if(i == localStrings.length-1){
           return createLinesColumn(alignment, lines);
         }
         continue;
@@ -680,7 +720,7 @@ class LineBuilder {
                 textPartList
                     .add(TextSpan(text: iconTokenText, style: styleToUse));
               }
-              bool mainLine = styleToUse == normalStyle;
+              bool mainLine = styleToUse == normalStyle || styleToUse == eliteStyle;
               EdgeInsetsGeometry margin =
                   _getMarginForToken(iconToken, height, mainLine, alignment);
               if (iconToken == "move" && monster.type.flying) {
@@ -693,8 +733,14 @@ class LineBuilder {
                 //alignment: Alignment.topCenter,
                 image: AssetImage("assets/images/abilities/$iconGfx.png"),
               );
+              //TODO: may fine tune the height of some/all icons here
+              double fuu = 1;
+              if(iconGfx == "poison" || iconGfx == "wound") {
+                //fuu = 0.8;
+                //margin = EdgeInsets.zero;
+              }
               child = Container(
-                ///height: height,// * 0.8,
+                height: height * fuu,
                 //color: Colors.amber,
                 margin: margin,
                 child: child,

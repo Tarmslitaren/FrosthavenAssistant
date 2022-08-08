@@ -63,7 +63,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         fontFamily: 'Majalla',
         color: Colors.yellow,
         fontSize: 14 * 0.8 * scale,
-        //height: 0.8,
+        height: 1,
         shadows: [
           Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black)
         ]);
@@ -247,7 +247,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                                Text("1:", style: specialStyle),
+                                                Text("1:", style: specialStyle,),
                                                 Container(
                                                     width:
                                                         140 * 0.8 * scale,

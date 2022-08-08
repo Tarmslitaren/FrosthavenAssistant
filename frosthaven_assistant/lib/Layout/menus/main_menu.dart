@@ -54,10 +54,14 @@ Drawer createMainMenu(BuildContext context) {
                     fit: BoxFit.fitWidth,
                       image: AssetImage("assets/images/icon.png"))
                 ),
-                child: Column(children: [
-                  //const Text('Main Menu'),
-                 // createLevelWidget(context),
-                ]),
+                child: Stack(
+                  children: const [
+                    Positioned(
+                      right: 6,
+                        bottom: 0,
+                        child: Text("Version 1.0.0 Beta 1"))
+                  ],
+                ),
               ),
               ListTile(
                 title: Text(undoText ),
