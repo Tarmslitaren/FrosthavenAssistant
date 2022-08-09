@@ -53,8 +53,8 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
           String text = nr.toString();
           bool darkMode = getIt<Settings>().darkMode.value;
           return SizedBox(
-            width: 32,
-            height: 32,
+            width: 40,
+            height: 40,
             child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
@@ -130,7 +130,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
 
     return Container(
         width: 10,
-        height: 160,
+        height: 180,
         decoration: BoxDecoration(
           //color: Colors.black,
           //borderRadius: BorderRadius.all(Radius.circular(8)),

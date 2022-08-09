@@ -35,8 +35,8 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
           String text = nr.toString();
           bool darkMode = getIt<Settings>().darkMode.value;
           return SizedBox(
-            width: 32,
-            height: 32,
+            width: 40,
+            height: 40,
             child: Container(
                 child: TextButton(
                   child: Text(

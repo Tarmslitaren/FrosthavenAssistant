@@ -54,3 +54,16 @@ This is also my attempt at learning the Flutter framework.
 
 Release 6 plan:
   - Frosthaven style icons and card layouts
+
+## Copyright / License
+
+Gloomhaven and all related properties, images and text are owned by [Cephalofair Games](https://cephalofair.com).
+
+Assets/Data used:
+
+- [Creator Pack by Isaac Childres](https://boardgamegeek.com/thread/1733586/files-creation) CC BY-NC-SA 4.0
+- Frosthaven rulebook sneak peak] (https://drive.google.com/file/d/1sz6nbQNM5wylz2sXJBBSWMLaiBFqqFLl/view)
+- [Worldhaven](https://github.com/any2cards/worldhaven)
+- some other assets used are public domain licensed
+
+Source code is licenced under [AGPL](/LICENSE)

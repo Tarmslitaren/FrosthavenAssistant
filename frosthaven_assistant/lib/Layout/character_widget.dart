@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/line_builder.dart';
-import 'package:frosthaven_assistant/Layout/menus/main_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
-import '../Model/character_class.dart';
 import '../Resource/color_matrices.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
-import 'main_list.dart';
-import 'menus/add_standee_menu.dart';
 import 'menus/add_summon_menu.dart';
 import 'monster_box.dart';
 
@@ -28,10 +22,10 @@ class CharacterWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  _CharacterWidgetState createState() => _CharacterWidgetState();
+  CharacterWidgetState createState() => CharacterWidgetState();
 }
 
-class _CharacterWidgetState extends State<CharacterWidget> {
+class CharacterWidgetState extends State<CharacterWidget> {
 
   final GameState _gameState = getIt<GameState>();
   late bool isCharacter = true;
@@ -93,7 +87,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
   }
 
   Widget summonsButton(double scale) {
-    return Container(
+    return SizedBox(
         width: 30 * scale,
         height: 30 * scale,
         child: IconButton(
@@ -209,7 +203,7 @@ class _CharacterWidgetState extends State<CharacterWidget> {
                             return buildMonsterBoxGrid(scale);
                           }),
                     ),
-                    Container(
+                    SizedBox(
                         width: getMainListWidth(context),// 408 * scale,
                         height: 60 * scale,
                         child: Stack(

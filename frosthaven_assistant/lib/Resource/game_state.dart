@@ -157,7 +157,6 @@ class MonsterInstance extends Figure{
   late int attack;
   late int range;
 
-
   void setLevel(Monster monster) {
     dynamic newHealthValue = 10; //need to put something outer than 0 or the standee will die immediately causing glitch
     if (type == MonsterType.boss) {
@@ -434,8 +433,12 @@ class GameSaveState{
       state.discardPile.setList(newDiscardList);
       state.cardCount.value = state.drawPile.size();
 
-      state.badOmen.value = modifierDeckData["badOmen"] as int;
-      state.addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
+      if(data.containsKey('badOmen')) {
+        state.badOmen.value = modifierDeckData["badOmen"] as int;
+      }
+      if(data.containsKey('addedMinusOnes')) {
+        state.addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
+      }
 
 
 

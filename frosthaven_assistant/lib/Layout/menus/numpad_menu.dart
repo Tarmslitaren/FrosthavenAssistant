@@ -26,8 +26,8 @@ class NumpadMenuState extends State<NumpadMenu> {
 
   Widget buildNrButton(int nr) {
     return  SizedBox(
-            width: 32,
-            height: 32,
+            width: 40,
+            height: 40,
             child: TextButton(
               child: Text(
                 nr.toString(),
@@ -57,7 +57,7 @@ class NumpadMenuState extends State<NumpadMenu> {
   Widget build(BuildContext context) {
     return Container(
         width: 10,
-        height: 160,
+        height: 180,
         decoration: BoxDecoration(
           //color: Colors.black,
           //borderRadius: BorderRadius.all(Radius.circular(8)),

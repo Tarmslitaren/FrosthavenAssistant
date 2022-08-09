@@ -1,12 +1,8 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
-
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
-import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
@@ -55,8 +51,8 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
     }
     String text = nr.toString();
     return SizedBox(
-      width: 32,
-      height: 32,
+      width: 40,
+      height: 40,
       child: Container(
           child: TextButton(
         child: Text(
@@ -80,12 +76,12 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
   Widget build(BuildContext context) {
     int nrOfStandees = widget.monster.type.count;
     //4 nr's per row
-    double height =100;
+    double height =110;
     if (nrOfStandees > 4) {
-      height = 120;
+      height = 130;
     }
     if (nrOfStandees > 8) {
-      height = 160;
+      height = 170;
     }
     return Container(
         width: 250, //need to set any width to center content, overridden by dialog default min width.

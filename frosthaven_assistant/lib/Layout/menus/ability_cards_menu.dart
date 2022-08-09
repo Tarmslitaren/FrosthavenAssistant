@@ -54,6 +54,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
   @override
   initState() {
     super.initState();
+    revealedList = [];
   }
 
   void markAsOpen(int revealed) {

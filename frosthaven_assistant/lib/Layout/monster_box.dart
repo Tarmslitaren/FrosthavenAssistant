@@ -282,7 +282,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                       translationDisabled: Offset(0, alive ? offset : 0),
                       translationEnabled: Offset(0, alive ? 0 : -offset),
                       duration: const Duration(milliseconds: 600),
-                      curve: alive ? Curves.linear : Curves.linear,
+                      curve: Curves.linear,
                       child: OpacityAnimatedWidget.tween(
                           enabled: alive,
                           opacityDisabled: 0,

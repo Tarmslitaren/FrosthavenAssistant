@@ -31,7 +31,7 @@ class Settings {
 
       // Use it only after calling `hiddenWindowAtLaunch`
       windowManager.waitUntilReadyToShow().then((_) async {
-// Hide window title bar
+        // Hide window title bar
         //await windowManager.setTitleBarStyle('hidden');
         if(fullscreen) {
           await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
@@ -58,10 +58,11 @@ class Settings {
     } else {
       //android:
       //to hide ui top and bottom on android
+      SystemUiMode nonFullscreen = SystemUiMode.manual;
       if (fullscreen) {
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
       } else {
-        SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+        SystemChrome.setEnabledSystemUIMode(nonFullscreen, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
       }
       //to fix issue with system bottom bar on top after keyboard shown on earlier os (24)
       SystemChrome.setSystemUIChangeCallback((systemOverlaysAreVisible) =>
@@ -69,7 +70,7 @@ class Settings {
             if (fullscreen) {
               SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
             } else {
-              SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+              SystemChrome.setEnabledSystemUIMode(nonFullscreen, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
             }
             //in case the first went too early?
             Future.delayed(const Duration(milliseconds: 301), () {
@@ -77,7 +78,7 @@ class Settings {
                 SystemChrome.setEnabledSystemUIMode(
                     SystemUiMode.immersiveSticky);
               } else {
-                SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+                SystemChrome.setEnabledSystemUIMode(nonFullscreen, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
               }
             });
           }));

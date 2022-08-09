@@ -168,9 +168,10 @@ class MonsterAbilityCardWidget extends StatefulWidget {
 
   static Widget buildRear(double scale, int size) {
     return Container(
+
         key: const ValueKey<int>(0),
-        margin: EdgeInsets.all(2 * scale),
-        width: 179*0.8*scale, //this evaluates to same space as front somehow.
+        margin: EdgeInsets.all(2 * scale * 0.8),
+        width: 178*0.8*scale, //this evaluates to same space as front somehow.
         height: 118 * 0.8 * scale,
         child: Stack(
           alignment: Alignment.center,
