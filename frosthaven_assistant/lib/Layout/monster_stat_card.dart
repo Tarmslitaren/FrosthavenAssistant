@@ -389,8 +389,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               bottom: 5 * scale * 0.8,
                               left: 5 * scale * 0.8,
                               child: Container(
-                                  width: 25 * scale * 0.8,
-                                  height: 25 * scale * 0.8,
+                                  width: 25 * scale * 0.8 +8,
+                                  height: 25 * scale * 0.8 +8,
                                   child: ValueListenableBuilder<
                                           List<MonsterInstance>>(
                                       valueListenable:
@@ -403,7 +403,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 .length ==
                                             widget.data.type.count;
                                         return IconButton(
-                                          padding: EdgeInsets.zero,
+                                          padding: const EdgeInsets.only(right: 8, top: 8),
                                           icon: Image.asset(
                                               //TODO: is not updated on remove
                                               color: allStandeesOut
@@ -446,12 +446,12 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           : Container(),
                       Positioned(
                           bottom: 5 * scale * 0.8,
-                          right: 5 * scale * 0.8,
+                          right: 5 * scale * 0.8 ,
                           child: Container(
-                              width: 25 * scale * 0.8,
-                              height: 25 * scale * 0.8,
+                              width: 25 * scale * 0.8 + 8,
+                              height: 25 * scale * 0.8 + 8,
                               child: IconButton(
-                                  padding: EdgeInsets.zero,
+                                  padding: const EdgeInsets.only(left: 8, top: 8),
                                   icon: Image.asset(
                                       color: widget.data.monsterInstances.value
                                                   .length ==

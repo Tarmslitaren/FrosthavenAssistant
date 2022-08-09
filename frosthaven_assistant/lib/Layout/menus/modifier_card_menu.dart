@@ -10,7 +10,6 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:reorderables/reorderables.dart';
 
-import '../../Resource/enums.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/modifier_deck_state.dart';
 import '../../Resource/ui_utils.dart';
@@ -123,9 +122,14 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     return list;
   }
 
-  Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen) {
+  Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen, bool hasDiviner) {
     var screenSize = MediaQuery.of(context).size;
-    double scale = getScaleByReference(context);
+
+    double height = screenSize.height - 120;
+    if(hasDiviner) {
+      height -= 34;
+    }
+
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
@@ -133,7 +137,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           //other styles
         ),
         child: Container(
-          height: screenSize.height - 120,
+          height: height,
           width: 88 * getIt<Settings>().userScalingBars.value,
           //double scale??, since it's so small to begin with
           child: reorderable
@@ -243,8 +247,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildList(drawPile, true, false),
-                      buildList(discardPile, false, true)
+                      buildList(drawPile, true, false, hasDiviner),
+                      buildList(discardPile, false, true, hasDiviner)
                     ],
                   ),
 
