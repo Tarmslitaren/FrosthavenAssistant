@@ -2,8 +2,9 @@
     package="com.tarmslitaren.frosthaven_assistant">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="frosthaven_assistant"
+        android:label="Frosthaven Assistant"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
