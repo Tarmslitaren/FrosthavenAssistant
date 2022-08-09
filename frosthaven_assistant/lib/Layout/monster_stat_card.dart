@@ -145,19 +145,17 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                       Positioned(
                           left: 4.0 * 0.8 * scale,
                           top: 0 * 0.8 * scale,
-                          child: Container(
-                            child: Text(
-                              _level.toString(),
-                              style: TextStyle(
-                                  fontFamily: 'Majalla',
-                                  color: Colors.white,
-                                  fontSize: 18 * 0.8 * scale,
-                                  shadows: [
-                                    Shadow(
-                                        offset: Offset(1 * scale, 1 * scale),
-                                        color: Colors.black)
-                                  ]),
-                            ),
+                          child: Text(
+                            _level.toString(),
+                            style: TextStyle(
+                                fontFamily: 'Majalla',
+                                color: Colors.white,
+                                fontSize: 18 * 0.8 * scale,
+                                shadows: [
+                                  Shadow(
+                                      offset: Offset(1 * scale, 1 * scale),
+                                      color: Colors.black)
+                                ]),
                           )),
                       !isBoss
                           ? Positioned(
@@ -229,7 +227,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                     normal.attributes.isNotEmpty
                                         ? Row(children: [
                                             Text("    ", style: specialStyle),
-                                            Container(
+                                            SizedBox(
                                                 width: 140 * 0.8 * scale,
                                                 child: LineBuilder.createLines(
                                                     normal.attributes,
@@ -248,7 +246,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                                 Text("1:", style: specialStyle,),
-                                                Container(
+                                                SizedBox(
                                                     width:
                                                         140 * 0.8 * scale,
                                                     child:
@@ -281,7 +279,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                                 Text("2:", style: specialStyle),
-                                                Container(
+                                                SizedBox(
                                                     width:
                                                         140 * 0.8 * scale,
                                                     child:
@@ -388,7 +386,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           ? Positioned(
                               bottom: 5 * scale * 0.8,
                               left: 5 * scale * 0.8,
-                              child: Container(
+                              child: SizedBox(
                                   width: 25 * scale * 0.8 +8,
                                   height: 25 * scale * 0.8 +8,
                                   child: ValueListenableBuilder<
@@ -447,7 +445,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                       Positioned(
                           bottom: 5 * scale * 0.8,
                           right: 5 * scale * 0.8 ,
-                          child: Container(
+                          child: SizedBox(
                               width: 25 * scale * 0.8 + 8,
                               height: 25 * scale * 0.8 + 8,
                               child: IconButton(
