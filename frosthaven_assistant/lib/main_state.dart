@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -27,6 +30,22 @@ class MainState extends State<MyHomePage> with WindowListener  {
       el.visitChildren(rebuild);
     }
     (context as Element).visitChildren(rebuild);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    KeyboardVisibilityController().onChange.listen(
+            (bool visible) {
+              if (kDebugMode) {
+                print("keyboard visible $visible");
+              }
+              if(!visible && getIt<Settings>().fullScreen.value == true) {
+                getIt<Settings>().setFullscreen(true);
+              }
+            }
+    );
   }
 
   MainState() {

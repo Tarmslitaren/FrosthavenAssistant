@@ -69,6 +69,8 @@ dependencies:
 
   url_launcher: ^6.1.5
 
+  flutter_keyboard_visibility: ^5.3.0 #only way to check for keyboard closed event.
+
 
 dev_dependencies:
   flutter_test:

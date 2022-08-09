@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
@@ -69,6 +70,9 @@ class Settings {
           Future.delayed(const Duration(milliseconds: 1001), () {
             if (fullscreen) {
               SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+              if (kDebugMode) {
+                print("force fullscreen 1 sec");
+              }
             } else {
               SystemChrome.setEnabledSystemUIMode(nonFullscreen, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
             }
@@ -77,6 +81,9 @@ class Settings {
               if (fullscreen) {
                 SystemChrome.setEnabledSystemUIMode(
                     SystemUiMode.immersiveSticky);
+                if (kDebugMode) {
+                  print("force fullscreen 1.3 sec");
+                }
               } else {
                 SystemChrome.setEnabledSystemUIMode(nonFullscreen, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
               }
