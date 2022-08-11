@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
@@ -24,11 +23,11 @@ class ElementButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  _AnimatedContainerButtonState createState() =>
-      _AnimatedContainerButtonState();
+  AnimatedContainerButtonState createState() =>
+      AnimatedContainerButtonState();
 }
 
-class _AnimatedContainerButtonState extends State<ElementButton> {
+class AnimatedContainerButtonState extends State<ElementButton> {
   // Define the various properties with default values. Update these properties
   // when the user taps a FloatingActionButton.
   final GameState _gameState = getIt<GameState>();
@@ -86,7 +85,7 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
 
   void setInert(){
     _color = Colors.transparent;
-    _height = 4 * settings.userScalingBars.value;
+    _height =  4 * settings.userScalingBars.value;
     _borderRadius = BorderRadius.zero;
   }
 
@@ -168,7 +167,7 @@ class _AnimatedContainerButtonState extends State<ElementButton> {
                       // Define how long the animation should take.
                       duration: const Duration(milliseconds: 1200),
                       // Provide an optional curve to make the animation feel smoother.
-                      curve: Curves.fastLinearToSlowEaseIn,
+                      curve: Curves.linearToEaseOut
                     );
                   }),
             )),

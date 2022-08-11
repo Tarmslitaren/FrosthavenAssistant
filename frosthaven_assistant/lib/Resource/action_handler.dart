@@ -1,7 +1,5 @@
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-
 import '../services/service_locator.dart';
 import 'game_state.dart';
 
@@ -36,7 +34,7 @@ class ActionHandler {
     if(commandIndex.value < commands.length-1) {
       commandIndex.value++;
       commands[commandIndex.value].execute();
-      //getIt<GameState>().save(); //should save to disk, but not save in savestate list.
+      //getIt<GameState>().save(); //should save to disk, but not save in save state list.
     }
   }
 
