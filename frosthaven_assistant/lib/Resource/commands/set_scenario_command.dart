@@ -20,10 +20,10 @@ class SetScenarioCommand extends Command {
 
   @override
   void execute() {
-    //first reset state
-    _gameState.currentAbilityDecks.clear();
 
     if (!section) {
+      //first reset state
+      _gameState.currentAbilityDecks.clear();
       List<ListItemData> newList = [];
       for (var item in _gameState.currentList) {
         if (item is Character) {
