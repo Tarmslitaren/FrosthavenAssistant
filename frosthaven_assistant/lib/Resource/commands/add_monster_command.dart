@@ -11,7 +11,7 @@ class AddMonsterCommand extends Command {
   late Monster monster;
 
   AddMonsterCommand(this._name, this._level) {
-    monster = GameMethods.createMonster(_name, _level, null)!;
+    monster = GameMethods.createMonster(_name, _level)!;
   }
 
   @override

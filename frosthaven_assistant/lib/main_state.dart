@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -36,16 +37,18 @@ class MainState extends State<MyHomePage> with WindowListener  {
   void initState() {
     super.initState();
 
-    KeyboardVisibilityController().onChange.listen(
-            (bool visible) {
-              if (kDebugMode) {
-                print("keyboard visible $visible");
-              }
-              if(!visible && getIt<Settings>().fullScreen.value == true) {
-                getIt<Settings>().setFullscreen(true);
-              }
+    if (Platform.isAndroid || Platform.isIOS) {
+      KeyboardVisibilityController().onChange.listen(
+              (bool visible) {
+            if (kDebugMode) {
+              print("keyboard visible $visible");
             }
-    );
+            if (!visible && getIt<Settings>().fullScreen.value == true) {
+              getIt<Settings>().setFullscreen(true);
+            }
+          }
+      );
+    }
   }
 
   MainState() {

@@ -120,10 +120,6 @@ class GameMethods {
     }
   }
 
-  static void unDrawAbilityCards() {
-//TODO: implement
-  }
-
   static MonsterAbilityState? getDeck(String name) {
     for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
       if (deck.name == name) {
@@ -415,60 +411,13 @@ class GameMethods {
     return character;
   }
 
-  static Monster? createMonster(String name, int? level, String? healthAdjust) {
+  static Monster? createMonster(String name, int? level) {
     Map<String, MonsterModel> monsters = {};
     for (String key in _gameState.modelData.value.keys) {
       monsters.addAll(_gameState.modelData.value[key]!.monsters);
     }
     level ??= getIt<GameState>().level.value;
     Monster monster = Monster(name, level);
-    if (healthAdjust != null) {
-
-      //create new type on the fly
-      List<MonsterLevelModel> levels = monster.type.levels;
-      List<MonsterLevelModel> newLevels = [];
-      for (var level in levels) {
-        //Imma gonna assume only elite monsters need this kind of special.
-        //Since that seems to be the case so far.
-        //find H and replace
-        String thisLevelHPAdjust = healthAdjust;
-        for(int i = 0; i < thisLevelHPAdjust.length; i++) {
-          if (thisLevelHPAdjust[i] == 'H'){
-            thisLevelHPAdjust = thisLevelHPAdjust.replaceRange(i, i+1, level.elite!.health.toString());
-          }
-        }
-        //TODO: what happens on refresh!?!? will this go away? TODO again: F this: can make a specila monster in data for this case as well.
-        MonsterStatsModel elite = MonsterStatsModel(
-            //need to calc H now
-            thisLevelHPAdjust,
-            level.elite!.move,
-            level.elite!.attack,
-            level.elite!.range,
-            level.elite!.attributes,
-            level.elite!.immunities,
-            level.elite!.special1,
-            level.elite!.special2);
-        MonsterLevelModel newLevel = MonsterLevelModel(
-            level.level,
-            level.normal,
-            elite,
-            level.boss);
-        newLevels.add(newLevel);
-      }
-
-      MonsterModel newModdel = MonsterModel(
-          monster.type.name,
-          monster.type.display,
-          monster.type.gfx,
-          monster.type.hidden,
-          monster.type.flying,
-          monster.type.deck,
-          monster.type.count,
-          newLevels,
-          monster.type.edition
-      );
-      monster.type = newModdel;
-    }
     return monster;
   }
 }

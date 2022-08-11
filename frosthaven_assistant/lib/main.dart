@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
      //call after keyboard
-    if (!kIsWeb) {
+    if (Platform.isIOS || Platform.isAndroid) {
       Wakelock.enable();
       //should force app to be in foreground and disable screen lock
     }

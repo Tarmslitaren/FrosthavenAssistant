@@ -34,7 +34,7 @@ abstract class ChangeStatCommand extends Command {
                 GameMethods.sortByInitiative();
               }
               if(getIt<GameState>().roundState.value == RoundState.playTurns) {
-                Future.delayed(Duration(milliseconds: 600), () {
+                Future.delayed(const Duration(milliseconds: 600), () {
                   getIt<GameState>().updateList.value++;
                 });
               }else {
@@ -51,24 +51,21 @@ abstract class ChangeStatCommand extends Command {
         for (var instance in item.characterState.summonList.value) {
           if(instance.health.value == 0) {
             item.characterState.summonList.value.remove(instance);
-            Future.delayed(Duration(milliseconds: 600), () {
+            Future.delayed(const Duration(milliseconds: 600), () {
               getIt<GameState>().killMonsterStandee.value++;
             });
 
             if (item.characterState.summonList.value.isEmpty) {
-              //TODO: unessessary?
               if(getIt<GameState>().roundState.value == RoundState.playTurns) {
-                Future.delayed(Duration(milliseconds: 600), () {
+                Future.delayed(const Duration(milliseconds: 600), () {
                   getIt<GameState>().updateList.value++;
                 });
               }else {
                 getIt<GameState>().updateList.value++;
               }
-              ////
             }else {
               getIt<GameState>().updateList.value++;
             }
-            //Navigator.pop(context);
             break;
           }
         }

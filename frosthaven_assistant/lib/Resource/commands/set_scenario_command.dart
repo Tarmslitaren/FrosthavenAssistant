@@ -99,8 +99,7 @@ class SetScenarioCommand extends Command {
       }
       if(add) {
         _gameState.currentList.add(GameMethods.createMonster(
-            monster, min(_gameState.level.value + levelAdjust, 7),
-            healthAdjust)!);
+            monster, min(_gameState.level.value + levelAdjust, 7))!);
       }
     }
 

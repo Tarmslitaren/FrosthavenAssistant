@@ -21,7 +21,6 @@ class ActionHandler {
     if(commandIndex.value >= 0) {
 
       gameSaveStates[commandIndex.value].load(); //this works as gameSaveStates has one more entry than command list (includes load at start)
-      // TODO: test when there is no initial save state
       commands[commandIndex.value].undo(); //currently undo only makes sure ui is updated...
       commandIndex.value--;
 

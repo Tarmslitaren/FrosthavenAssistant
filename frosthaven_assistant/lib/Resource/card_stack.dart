@@ -23,11 +23,6 @@ class CardStack<E> {
   void shuffle() {
     _list.shuffle(Random());
   }
-  void undoShuffle() { //mun djö!
-    //TODO: how to undo and redo random stuff? I need to use a set random and somehow turn back time
-    //so basically save whole list state for every command and overwrite instead of random shuffle
-
-  }
 
   int size() {
     return _list.length;
