@@ -56,7 +56,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                         settings.saveToDisk();
                       });
                     }),
-                    if (Platform.isIOS ) CheckboxListTile( title: const Text("Fullscreen"), value: settings.fullScreen.value, onChanged: (bool? value) {
+                    if (!Platform.isIOS ) CheckboxListTile( title: const Text("Fullscreen"), value: settings.fullScreen.value, onChanged: (bool? value) {
                       setState(() {
                         settings.setFullscreen(value!);
                       });
