@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -55,7 +56,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                         settings.saveToDisk();
                       });
                     }),
-                    CheckboxListTile( title: const Text("Fullscreen"), value: settings.fullScreen.value, onChanged: (bool? value) {
+                    if (Platform.isIOS ) CheckboxListTile( title: const Text("Fullscreen"), value: settings.fullScreen.value, onChanged: (bool? value) {
                       setState(() {
                         settings.setFullscreen(value!);
                       });

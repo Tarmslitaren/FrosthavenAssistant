@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
 
     //getIt<Settings>().setFullscreen(true);
     return MaterialApp(
-        //debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         //debugShowMaterialGrid: true,
         checkerboardOffscreenLayers: false,
         //showPerformanceOverlay: true,
