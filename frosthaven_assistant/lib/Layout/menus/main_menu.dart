@@ -59,7 +59,7 @@ Drawer createMainMenu(BuildContext context) {
                     Positioned(
                       right: 6,
                         bottom: 0,
-                        child: Text("Version 1.0.0 Beta 1.1"))
+                        child: Text("Version 1.0.0"))
                   ],
                 ),
               ),
