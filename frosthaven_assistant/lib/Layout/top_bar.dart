@@ -34,7 +34,7 @@ PreferredSize createTopBar() {
                 padding:
                     EdgeInsets.only(left: 2.0 * settings.userScalingBars.value),
                 child: Text(
-                  "Frosthaven\nAssistant",
+                  "Assistant for\nFrosthaven",
                   style: TextStyle(
                     fontFamily: 'Pirata',
                     color: Colors.white,

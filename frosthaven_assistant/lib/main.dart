@@ -49,9 +49,9 @@ class MyApp extends StatelessWidget {
         //debugShowMaterialGrid: true,
         checkerboardOffscreenLayers: false,
         //showPerformanceOverlay: true,
-        title: 'Frosthaven Assistant',
+        title: 'Assistant for Frosthaven',
         theme: theme,
-        home: const MyHomePage(title: 'Frosthaven Assistant'),
+        home: const MyHomePage(title: 'Assistant for Frosthaven'),
       );
 
     /*return MaterialApp(
