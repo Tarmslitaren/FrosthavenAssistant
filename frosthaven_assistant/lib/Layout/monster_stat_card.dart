@@ -355,6 +355,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   left: 94.0 * 0.8 * scale,
                                   top: 45.0 * 0.8 * scale,
                                   child: const Image(
+                                    fit: BoxFit.fitHeight,
                                     image: AssetImage(
                                         "assets/images/psd/flying-stat.png"),
                                   ))
@@ -365,6 +366,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   left: 31.0 * 0.8 * scale,
                                   top: 56.0 * 0.8 * scale,
                                   child: const Image(
+                                    fit: BoxFit.fitHeight,
                                     image: AssetImage(
                                         "assets/images/psd/flying-stat.png"),
                                   ),
@@ -377,6 +379,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   left: 30.0 * 0.8 * scale,
                                   top: 93.0 * 0.8 * scale,
                                   child: const Image(
+                                    fit: BoxFit.fitHeight,
                                     image: AssetImage(
                                         "assets/images/psd/range-stat.png"),
                                   ))

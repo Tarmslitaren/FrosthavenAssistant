@@ -122,7 +122,7 @@ Widget createLevelWidget(BuildContext context) {
                             const AssetImage("assets/images/psd/coins-fh.png"),
                       )),
                   TextSpan(
-                    text: " : x${GameMethods.getCoinValue()}",
+                    text: ": x${GameMethods.getCoinValue()}",
                     style: textStyle,
                   ),
                 ]),

@@ -268,7 +268,7 @@ class _StatusMenuState extends State<StatusMenu> {
 
 
     return Container(
-        width: 336,
+        width: 340,
         height: 211,
         decoration: BoxDecoration(
           image: DecorationImage(
