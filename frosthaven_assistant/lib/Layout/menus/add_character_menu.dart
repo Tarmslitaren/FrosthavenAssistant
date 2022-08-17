@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands/add_character_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class AddCharacterMenu extends StatefulWidget {
@@ -145,7 +147,6 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                                   color: Colors.grey
                               )),
                           onTap: () {
-                            //TODO: add level selection menu  (1-9) on top in this here menu.
                             if (!_characterAlreadyAdded(_foundCharacters[index].name)){
                               setState(() {
 
@@ -163,8 +164,11 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                                     display += " $count";
                                   }
                                 }
-                                _gameState.action(AddCharacterCommand(
-                                    _foundCharacters[index].name, display, 1)); //
+                                AddCharacterCommand command = AddCharacterCommand(
+                                    _foundCharacters[index].name, display, 1);
+                                _gameState.action(command); //
+                                //open level menu
+                                openDialog(context, SetCharacterLevelMenu(character: command.character));
                               });
 
                             }

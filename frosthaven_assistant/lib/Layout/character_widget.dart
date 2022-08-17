@@ -156,15 +156,6 @@ class CharacterWidgetState extends State<CharacterWidget> {
     }
 
     return GestureDetector(
-        onVerticalDragStart: (details) {
-          //start moving the widget in the list
-        },
-        onVerticalDragUpdate: (details) {
-          //update widget position?
-        },
-        onVerticalDragEnd: (details) {
-          //place back in list
-        },
         onTap: () {
           //open stats menu
           openDialog(
