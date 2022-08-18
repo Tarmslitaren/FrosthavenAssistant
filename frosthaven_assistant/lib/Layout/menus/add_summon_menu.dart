@@ -91,7 +91,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     bool darkMode = getIt<Settings>().darkMode.value;
     return SizedBox(
       width: 42,
-      height: 32,
+      height: 42,
       child: Container(
           decoration: BoxDecoration(
               border: Border.all(
