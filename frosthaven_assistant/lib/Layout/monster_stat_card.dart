@@ -335,7 +335,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           : Container(),
                       !isBoss
                           ? Positioned(
-                              width: 70 * 0.8 * scale,
+                              width: 72 * 0.8 * scale,
                               right: 0.0,
                               top: 24.0 * 0.8 * scale,
                               child: LineBuilder.createLines(

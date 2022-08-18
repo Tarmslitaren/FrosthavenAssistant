@@ -132,6 +132,12 @@ class LineBuilder {
       }
     }
     for (String item in data.attributes) {
+
+      //remove size modifiers (only used for immobilize since it's so long it overflows.)
+      String sizeMod = (item.substring(0, 1));
+      if(sizeMod == "^" || sizeMod == "*") {
+        item = item.substring(1);
+      }
       if (item.substring(0, 1) == "%") { //expects token to be first in line. is this ok?
         //parse item and then parse number;
         for (int i = 1; i < item.length; i++) {

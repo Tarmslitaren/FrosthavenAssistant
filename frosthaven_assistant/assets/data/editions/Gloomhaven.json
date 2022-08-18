@@ -1329,27 +1329,27 @@
         {
           "level": 3,
           "normal": { "health": 13, "move": 2, "attack": 3 },
-          "elite": { "health": 20, "move": 2, "attack": 4, "attributes": [ "%immobilize%" ]}
+          "elite": { "health": 20, "move": 2, "attack": 4, "attributes": [ "^%immobilize%" ]}
         },
         {
           "level": 4,
           "normal": { "health": 15, "move": 2, "attack": 4 },
-          "elite": { "health": 21, "move": 3, "attack": 5, "attributes": [ "%immobilize%" ]}
+          "elite": { "health": 21, "move": 3, "attack": 5, "attributes": [ "^%immobilize%" ]}
         },
         {
           "level": 5,
-          "normal": { "health": 17, "move": 2, "attack": 4, "attributes": [ "%immobilize%" ]},
-          "elite": { "health": 25, "move": 3, "attack": 5, "attributes": [ "%immobilize%" ]}
+          "normal": { "health": 17, "move": 2, "attack": 4, "attributes": [ "^%immobilize%" ]},
+          "elite": { "health": 25, "move": 3, "attack": 5, "attributes": [ "^%immobilize%" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 20, "move": 2, "attack": 4, "attributes": [ "%immobilize%" ]},
-          "elite": { "health": 27, "move": 3, "attack": 6, "attributes": [ "%immobilize%" ]}
+          "normal": { "health": 20, "move": 2, "attack": 4, "attributes": [ "^%immobilize%" ]},
+          "elite": { "health": 27, "move": 3, "attack": 6, "attributes": [ "^%immobilize%" ]}
         },
         {
           "level": 7,
-          "normal": { "health": 22, "move": 3, "attack": 4, "attributes": [ "%immobilize%" ]},
-          "elite": { "health": 32, "move": 3, "attack": 6, "attributes": [ "%immobilize%" ]}
+          "normal": { "health": 22, "move": 3, "attack": 4, "attributes": [ "^%immobilize%" ]},
+          "elite": { "health": 32, "move": 3, "attack": 6, "attributes": [ "^%immobilize%" ]}
         }
       ]
     },
