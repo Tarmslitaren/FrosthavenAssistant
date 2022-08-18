@@ -706,6 +706,7 @@ class LineBuilder {
                       Image(
                         height: styleToUse.fontSize! * 1.2,
                         //alignment: Alignment.topCenter,
+                        fit: BoxFit.fitHeight,
                         image:
                             AssetImage("assets/images/abilities/$iconGfx.png"),
                       )
@@ -731,6 +732,7 @@ class LineBuilder {
                 //could do funk stuff with the color value for cool effects maybe?
                 height: height, //TODO: this causes lines to have variable height
                 //alignment: Alignment.topCenter,
+                fit: BoxFit.fitHeight,
                 image: AssetImage("assets/images/abilities/$iconGfx.png"),
               );
               //TODO: may fine tune the height of some/all icons here
