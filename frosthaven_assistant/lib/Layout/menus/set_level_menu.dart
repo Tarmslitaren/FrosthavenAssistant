@@ -1,10 +1,7 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/counter_button.dart';
-import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_max_health_command.dart';
-import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../../Resource/commands/set_level_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
@@ -68,7 +65,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                       fontSize: 18,
                         shadows: [
                       Shadow(
-                          offset: Offset(1, 1),
+                          offset: const Offset(1, 1),
                           color:
                               isCurrentlySelected ?
                               darkMode? Colors.black : Colors.grey :
@@ -93,11 +90,49 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
         });
   }
 
+  Widget createLegend(String name, String gfx, String value) {
+    var textStyleLevelWidget = const TextStyle(
+      //fontFamily: 'Majalla',
+        color: Colors.white,
+        overflow: TextOverflow.fade,
+        //fontWeight: FontWeight.bold,
+        //backgroundColor: Colors.transparent.withAlpha(100),
+        fontSize: 18,
+        shadows: [
+          Shadow(
+              offset: Offset(1.0 , 1.0 ),
+              blurRadius: 3.0,
+              color: Colors.black),
+          Shadow(
+              offset: Offset(1.0 , 1.0 ),
+              blurRadius: 8.0,
+              color: Colors.black),
+          //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
+        ]);
+    double height = 20;
+    if (gfx.contains("level")){
+      height = 15;
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 8,
+        ),
+        Image(
+          height: height,
+            image:AssetImage(gfx)),
+        Text(value, style: textStyleLevelWidget),
+        Text(" ($name)", style: textStyleLevelWidget),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     String title = "Set Scenario Level";
     if (widget.monster != null) {
-      title = "Set " + widget.monster!.type.display + "'s level";
+      title = "Set ${widget.monster!.type.display}'s level";
     }
     //if summon:
     bool isSummon = widget.monster == null && widget.figure is MonsterInstance;
@@ -127,10 +162,13 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
       }
     }
 
+    bool showLegend = widget.figure == null;
+
+    bool darkMode = getIt<Settings>().darkMode.value;
 
     return Container(
         width: 10,
-        height: 180,
+        height: showLegend? 300 : 180,
         decoration: BoxDecoration(
           //color: Colors.black,
           //borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -142,7 +180,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value?
+            image: AssetImage(darkMode?
             'assets/images/bg/dark_bg.png'
                 :'assets/images/bg/white_bg.png'),
             fit: BoxFit.cover,
@@ -187,7 +225,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                                     return Checkbox(
                                       checkColor: Colors.black,
                                       activeColor:  Colors.grey.shade200,
-                                      side: BorderSide(color: getIt<Settings>().darkMode.value? Colors.white : Colors.black),
+                                      side: BorderSide(color: darkMode? Colors.white : Colors.black),
                                       onChanged: (bool? newValue) {
                                         _gameState.solo.value = newValue!;
                                       },
@@ -204,6 +242,18 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                                 900, "assets/images/blood.png", true, Colors.red, figureId: figureId, ownerId: ownerId)
                             ])
                       : Container(),
+                  if (showLegend == true) Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                          createLegend( "trap damage", "assets/images/psd/traps-fh.png" , ": ${GameMethods.getTrapValue()}"),
+                          createLegend( "hazardous terrain damage", "assets/images/psd/hazard-fh.png" , ": ${GameMethods.getHazardValue()}"),
+                          createLegend( "experience added", "assets/images/psd/xp.png" , ": +${GameMethods.getXPValue()}"),
+                          createLegend( "gold coin value", "assets/images/psd/coins-fh.png" , ": x${GameMethods.getCoinValue()}"),
+                          createLegend( "level", "assets/images/psd/level.png" , ": ${_gameState.level.value}"),
+                    ],
+
+                  )
                 ],
               ),
             ]));
