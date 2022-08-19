@@ -448,9 +448,18 @@ class CharacterWidgetState extends State<CharacterWidget> {
                         isCharacter
                             ? Positioned(
                                 top: 10 * scale,
-                                left: 318 * scale,
+                                left: 314 * scale,
                                 child: Row(
                                   children: [
+                                    Image(
+                                      height: 20.0 *
+                                          scale *
+                                          0.8,
+                                      color: Colors.blue,
+                                      colorBlendMode: BlendMode.modulate,
+                                      image: const AssetImage(
+                                          "assets/images/psd/xp.png"),
+                                    ),
                                     ValueListenableBuilder<int>(
                                         valueListenable: character.characterState.xp,
                                         builder: (context, value, child) {
@@ -471,17 +480,43 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                 ]),
                                           );
                                         }),
-                                    Image(
-                                      height: 20.0 *
-                                          scale *
-                                          0.8,
-                                      color: Colors.blue,
-                                      colorBlendMode: BlendMode.modulate,
-                                      image: const AssetImage(
-                                          "assets/images/psd/xp.png"),
-                                    ),
                                   ],
                                 ))
+                            : Container(),
+                        isCharacter
+                            ? Positioned(
+                            top: 28 * scale,
+                            left: 316 * scale,
+                            child: Row(
+                              children: [
+                                Image(
+                                  height: 12.0 *
+                                      scale,
+                                  image: const AssetImage(
+                                      "assets/images/psd/level.png"),
+                                ),
+                                ValueListenableBuilder<int>(
+                                    valueListenable: character.characterState.level,
+                                    builder: (context, value, child) {
+                                      return Text(
+                                        character.characterState
+                                            .level.value
+                                            .toString(),
+                                        style: TextStyle(
+                                            fontFamily: 'Pirata',
+                                            color: Colors.white,
+                                            fontSize: 14 * scale,
+                                            shadows: [
+                                              Shadow(
+                                                  offset: Offset(
+                                                      1 * scale,
+                                                      1 * scale),
+                                                  color: Colors.black)
+                                            ]),
+                                      );
+                                    }),
+                              ],
+                            ))
                             : Container(),
                         isCharacter
                             ? Positioned(

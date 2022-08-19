@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -75,6 +76,9 @@ class GameMethods {
   }
 
   static bool canDraw() {
+    if (getIt<Settings>().noInit.value == true) {
+      return true;
+    }
     for (var item in _gameState.currentList) {
       if (item is Character) {
         if (item.characterState.initiative == 0) {

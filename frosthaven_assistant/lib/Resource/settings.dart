@@ -13,6 +13,7 @@ class Settings {
   final userScalingMenus = ValueNotifier<double>(1.0);
   final fullScreen = ValueNotifier<bool>(true);
   final darkMode = ValueNotifier<bool>(false);
+  final noInit = ValueNotifier<bool>(false);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -152,6 +153,10 @@ class Settings {
       if (data["darkMode"] != null) {
         darkMode.value = data["darkMode"];
       }
+      if (data["noInit"] != null) {
+        noInit.value = data["noInit"];
+      }
+
     }
   }
 
@@ -163,6 +168,7 @@ class Settings {
         '"userScalingMenus": ${userScalingMenus.value}, '
         '"fullScreen": ${fullScreen.value}, '
         '"softNumpadInput": ${softNumpadInput.value}, '
+        '"noInit": ${noInit.value}, '
         '"darkMode": ${darkMode.value} '
         '}';
   }

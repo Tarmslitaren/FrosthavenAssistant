@@ -64,6 +64,15 @@ class SettingsMenuState extends State<SettingsMenu> {
                         settings.saveToDisk();
                       });
                     }),
+                CheckboxListTile(
+                    title: const Text("Drag for initiative"),
+                    value: settings.noInit.value,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        settings.noInit.value = value!;
+                        settings.saveToDisk();
+                      });
+                    }),
                 if (!Platform.isIOS)
                   CheckboxListTile(
                       title: const Text("Fullscreen"),
