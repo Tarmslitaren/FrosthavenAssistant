@@ -181,14 +181,14 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                       ),
               ),
               const SizedBox(
-                height: 30,
+                height: 34,
               ),
             ],
           ),
           Positioned(
               width: 100,
-              right: 2,
-              bottom: 2,
+              right: 0,
+              bottom: 0,
               child: TextButton(
                   child: const Text(
                     'Close',

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
@@ -7,7 +5,6 @@ import 'package:frosthaven_assistant/Resource/commands/bad_omen_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/enfeebling_hex_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:reorderables/reorderables.dart';
 
 import '../../Resource/game_state.dart';
@@ -24,7 +21,7 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scale = getIt<Settings>().userScalingBars.value;// getScaleByReference(context) * 2; //double scale
+    double scale = getScaleByReference(context) * 2; //double scale
     late final Widget child;
 
     child = revealed
@@ -76,9 +73,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     if (nr < nrOfButtons) {
       text = nr.toString();
     }
-    var screenSize = MediaQuery.of(context).size;
     return SizedBox(
-        width: max(screenSize.width / nrOfButtons - 40, 40),
+        width: 32,
         child: TextButton(
           child: Text(text),
           onPressed: () {
@@ -122,14 +118,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     return list;
   }
 
-  Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen, bool hasDiviner) {
-    var screenSize = MediaQuery.of(context).size;
-
-    double height = screenSize.height - 120;
-    if(hasDiviner) {
-      height -= 34;
-    }
-
+  Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen,
+      bool hasDiviner) {
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
@@ -137,9 +127,11 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           //other styles
         ),
         child: Container(
-          height: height,
-          width: 88 * getIt<Settings>().userScalingBars.value,
-          //double scale??, since it's so small to begin with
+          // constraints: BoxConstraints(
+          //minHeight: 400,
+          // maxHeight: screenSize.height - 50,
+          //),
+          width: 118 * getScaleByReference(context), //184 * 0.8 *
           child: reorderable
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
@@ -173,7 +165,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
-          var drawPile = _gameState.modifierDeck.drawPile.getList().reversed.toList();
+          var drawPile =
+              _gameState.modifierDeck.drawPile.getList().reversed.toList();
           var discardPile = _gameState.modifierDeck.discardPile.getList();
           bool hasDiviner = false;
           for (var item in _gameState.currentList) {
@@ -181,91 +174,131 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
               hasDiviner = true;
             }
           }
+          double scale = getScaleByReference(context);
           return Container(
-              child: Column(children: [
-            Card(
-
-                //color: Colors.transparent,
-                //margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: Column(children: [
-                if(hasDiviner) Row(
-                  children: [
-                    if(_gameState.modifierDeck.badOmen.value == 0)TextButton(
-                      onPressed: () {
-                        _gameState.action(BadOmenCommand());
-                      },
-                      child: Text("Bad Omen"),
-                    ),
-                    if(_gameState.modifierDeck.badOmen.value > 0) Text(
-                      "BadOmensLeft: ${_gameState.modifierDeck.badOmen.value}",
-                        style: getTitleTextStyle()),
-                    TextButton(
-                      onPressed: () {
-                        _gameState.action(EnfeeblingHexCommand());
-                      },
-                      child: Text("Enfeebling Hex (added minus ones: ${_gameState.modifierDeck.addedMinusOnes.value})"),
-                    ),
-                  ],
-                ),
-              Row(mainAxisSize: MainAxisSize.max, children: [
-                const Text(
-                  "Reveal:",
-                  //style: TextStyle(color: Colors.white)
-                ),
-                drawPile.length > 0
-                    ? buildRevealButton(drawPile.length, 1)
-                    : Container(),
-                drawPile.length > 1
-                    ? buildRevealButton(drawPile.length, 2)
-                    : Container(),
-                drawPile.length > 2
-                    ? buildRevealButton(drawPile.length, 3)
-                    : Container(),
-                drawPile.length > 3
-                    ? buildRevealButton(drawPile.length, 4)
-                    : Container(),
-                drawPile.length > 4
-                    ? buildRevealButton(drawPile.length, 5)
-                    : Container(),
-                drawPile.length > 5
-                    ? buildRevealButton(drawPile.length, 6)
-                    : Container(),
-                drawPile.length > 6
-                    ? buildRevealButton(drawPile.length, 7)
-                    : Container(),
-                drawPile.length > 7
-                    ? buildRevealButton(drawPile.length, 8)
-                    : Container(),
-              ]),
-            ])),
-            Card(
-                color: Colors.transparent,
-                //margin: const EdgeInsets.only(left: 20, right: 20),
-                child: Stack(children: [
-                  //TODO: add diviner functionality:,
-                  // enfeebling hex: shuffle x amount -1's to enemy deck
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildList(drawPile, true, false, hasDiviner),
-                      buildList(discardPile, false, true, hasDiviner)
-                    ],
-                  ),
-
-                  Positioned(
-                      width: 100,
-                      right: 2,
-                      bottom: 2,
-                      child: TextButton(
-                          child: const Text(
-                            'Close',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }))
-                ]))
-          ]));
+              constraints: BoxConstraints(
+                  maxWidth: 118 * scale * 2 + 8,
+                  maxHeight: MediaQuery.of(context).size.height * 0.9),
+              child: Card(
+                  color: Colors.transparent,
+                  child: Stack(children: [
+                    Column(mainAxisSize: MainAxisSize.max, children: [
+                      Container(
+                          margin: const EdgeInsets.all(2),
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(8),
+                                  topRight: Radius.circular(8))),
+                          child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (hasDiviner)
+                                  Row(
+                                    children: [
+                                      if (_gameState
+                                              .modifierDeck.badOmen.value ==
+                                          0)
+                                        TextButton(
+                                          onPressed: () {
+                                            _gameState.action(BadOmenCommand());
+                                          },
+                                          child: Text("Bad Omen"),
+                                        ),
+                                      if (_gameState
+                                              .modifierDeck.badOmen.value >
+                                          0)
+                                        Text(
+                                            "BadOmensLeft: ${_gameState.modifierDeck.badOmen.value}",
+                                            style: getTitleTextStyle()),
+                                      TextButton(
+                                        onPressed: () {
+                                          _gameState
+                                              .action(EnfeeblingHexCommand());
+                                        },
+                                        child: Text(
+                                            "Enfeebling Hex (added minus ones: ${_gameState.modifierDeck.addedMinusOnes.value})"),
+                                      ),
+                                    ],
+                                  ),
+                                Wrap(
+                                    runSpacing: 0,
+                                    spacing: 0,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    children: [
+                                      const Text(
+                                        "   Reveal:",
+                                        //style: TextStyle(color: Colors.white)
+                                      ),
+                                      drawPile.length > 0
+                                          ? buildRevealButton(
+                                              drawPile.length, 1)
+                                          : Container(),
+                                      drawPile.length > 1
+                                          ? buildRevealButton(
+                                              drawPile.length, 2)
+                                          : Container(),
+                                      drawPile.length > 2
+                                          ? buildRevealButton(
+                                              drawPile.length, 3)
+                                          : Container(),
+                                      drawPile.length > 3
+                                          ? buildRevealButton(
+                                              drawPile.length, 4)
+                                          : Container(),
+                                      drawPile.length > 4
+                                          ? buildRevealButton(
+                                              drawPile.length, 5)
+                                          : Container(),
+                                      drawPile.length > 5
+                                          ? buildRevealButton(
+                                              drawPile.length, 6)
+                                          : Container(),
+                                      drawPile.length > 6
+                                          ? buildRevealButton(
+                                              drawPile.length, 7)
+                                          : Container(),
+                                      drawPile.length > 7
+                                          ? buildRevealButton(
+                                              drawPile.length, 8)
+                                          : Container(),
+                                    ]),
+                              ])),
+                      Flexible(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildList(drawPile, true, false, hasDiviner),
+                          buildList(discardPile, false, true, hasDiviner)
+                        ],
+                      )),
+                      Container(
+                        // color: Colors.white,
+                        height: 32,
+                        margin: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8))),
+                      ),
+                    ]),
+                    Positioned(
+                        width: 100,
+                        right: 2,
+                        bottom: 2,
+                        child: TextButton(
+                            child: const Text(
+                              'Close',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }))
+                  ])));
         });
   }
 }

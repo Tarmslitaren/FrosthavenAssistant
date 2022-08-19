@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
@@ -19,7 +17,10 @@ class Item extends StatelessWidget {
   final bool revealed;
 
   const Item(
-      {Key? key, required this.data, required this.revealed, required this.monsterData})
+      {Key? key,
+      required this.data,
+      required this.revealed,
+      required this.monsterData})
       : super(key: key);
 
   @override
@@ -60,10 +61,8 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
   void markAsOpen(int revealed) {
     setState(() {
       revealedList = [];
-      var drawPile = widget.monsterAbilityState.drawPile
-          .getList()
-          .reversed
-          .toList();
+      var drawPile =
+          widget.monsterAbilityState.drawPile.getList().reversed.toList();
       for (int i = 0; i < revealed; i++) {
         revealedList.add(drawPile[i]);
       }
@@ -79,8 +78,8 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
     return false;
   }
 
-  List<Widget> generateList(List<MonsterAbilityCardModel> inputList,
-      bool allOpen) {
+  List<Widget> generateList(
+      List<MonsterAbilityCardModel> inputList, bool allOpen) {
     List<Widget> list = [];
     bool hasDiviner = false;
     for (var item in _gameState.currentList) {
@@ -117,26 +116,18 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
     if (nr < nrOfButtons) {
       text = nr.toString();
     }
-    var screenSize = MediaQuery
-        .of(context)
-        .size;
     return SizedBox(
-        width: max(screenSize.width / nrOfButtons - 40, 40),
+        width: 32,
         child: TextButton(
-
           child: Text(text),
           onPressed: () {
             markAsOpen(nr);
           },
-        )
-    );
+        ));
   }
 
-  Widget buildList(List<MonsterAbilityCardModel> list, bool reorderable,
-      bool allOpen) {
-    var screenSize = MediaQuery
-        .of(context)
-        .size;
+  Widget buildList(
+      List<MonsterAbilityCardModel> list, bool reorderable, bool allOpen) {
     double scale = getScaleByReference(context);
     return Theme(
         data: Theme.of(context).copyWith(
@@ -145,120 +136,145 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           //other styles
         ),
         child: Container(
-          height: _gameState.roundState.value == RoundState.playTurns
-              ? screenSize.height * 0.86
-              : screenSize.height - 80,
           width: 184 * 0.8 * scale,
-          child: reorderable ? ReorderableColumn(
-            needsLongPressDraggable: true,
-            scrollController: ScrollController(),
-            scrollAnimationDuration: const Duration(milliseconds: 400),
-            reorderAnimationDuration: const Duration(milliseconds: 400),
-
-            buildDraggableFeedback: defaultBuildDraggableFeedback,
-            onReorder: (index, dropIndex) {
-              //make sure this is correct
-              setState(() {
-                dropIndex = list.length - dropIndex - 1;
-                index = list.length - index - 1;
-                list.insert(dropIndex, list.removeAt(index));
-                _gameState.action(ReorderAbilityListCommand(
-                    widget.monsterAbilityState.name, dropIndex, index));
-              });
-            },
-            children: generateList(list, allOpen),
-
-          ) :
-          ListView(
-            //reverse: true,
-            controller: ScrollController(),
-            children: generateList(list, allOpen).reversed.toList(),
-          ),
+          child: reorderable
+              ? ReorderableColumn(
+                  needsLongPressDraggable: true,
+                  scrollController: ScrollController(),
+                  scrollAnimationDuration: const Duration(milliseconds: 400),
+                  reorderAnimationDuration: const Duration(milliseconds: 400),
+                  buildDraggableFeedback: defaultBuildDraggableFeedback,
+                  onReorder: (index, dropIndex) {
+                    //make sure this is correct
+                    setState(() {
+                      dropIndex = list.length - dropIndex - 1;
+                      index = list.length - index - 1;
+                      list.insert(dropIndex, list.removeAt(index));
+                      _gameState.action(ReorderAbilityListCommand(
+                          widget.monsterAbilityState.name, dropIndex, index));
+                    });
+                  },
+                  children: generateList(list, allOpen),
+                )
+              : ListView(
+                  controller: ScrollController(),
+                  children: generateList(list, allOpen).reversed.toList(),
+                ),
         ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return
-      ValueListenableBuilder<int>(
-          valueListenable: _gameState.commandIndex,
-          builder: (context, value, child) {
-            var drawPile =
-            widget.monsterAbilityState.drawPile
-                .getList()
-                .reversed
-                .toList();
-            var discardPile = widget.monsterAbilityState.discardPile.getList();
-            return Container(
-                child:
-                Column(children: [
-                  _gameState.roundState.value == RoundState.playTurns ?
-                  Card(
+    return ValueListenableBuilder<int>(
+        valueListenable: _gameState.commandIndex,
+        builder: (context, value, child) {
+          var drawPile =
+              widget.monsterAbilityState.drawPile.getList().reversed.toList();
+          var discardPile = widget.monsterAbilityState.discardPile.getList();
+          double scale = getScaleByReference(context);
+          return Container(
+              constraints: BoxConstraints(
+                  maxWidth: 184 * 0.8 * scale * 2 + 8,
+                  maxHeight: MediaQuery.of(context).size.height * 0.9),
+              child: Card(
+                  color: Colors.transparent,
+                  child: Stack(children: [
+                    Column(mainAxisSize: MainAxisSize.max, children: [
+                      _gameState.roundState.value == RoundState.playTurns
+                          ? Container(
+                              margin: const EdgeInsets.all(2),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(8),
+                                      topRight: Radius.circular(8))),
 
-                    //color: Colors.transparent,
-                    //margin: const EdgeInsets.only(left:20, right:20, top: 20),
+                              //color: Colors.transparent,
 
-                      child: Column(children: [
+                              child: Column(children: [
+                                Wrap(
+                                    //alignment: WrapAlignment.start,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    runSpacing: 0,
+                                    spacing: 0,
 
-                        Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              const Text(
-                                "Reveal:",
-                                //style: TextStyle(color: Colors.white)
-                              ),
-                              drawPile.length > 0
-                                  ? buildRevealButton(drawPile.length, 1)
-                                  : Container(),
-                              drawPile.length > 1
-                                  ? buildRevealButton(drawPile.length, 2)
-                                  : Container(),
-                              drawPile.length > 2
-                                  ? buildRevealButton(drawPile.length, 3)
-                                  : Container(),
-                              drawPile.length > 3
-                                  ? buildRevealButton(drawPile.length, 4)
-                                  : Container(),
-                              drawPile.length > 4
-                                  ? buildRevealButton(drawPile.length, 5)
-                                  : Container(),
-                              drawPile.length > 5
-                                  ? buildRevealButton(drawPile.length, 6)
-                                  : Container(),
-                              drawPile.length > 6
-                                  ? buildRevealButton(drawPile.length, 7)
-                                  : Container(),
-                              drawPile.length > 7
-                                  ? buildRevealButton(drawPile.length, 8)
-                                  : Container(),
-                            ]),
-                      ])) : Container(),
-                  Card(
-                      color: Colors.transparent,
-                      child: Stack(children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            buildList(drawPile, _gameState.roundState.value ==
-                                RoundState.playTurns, false),
-                            buildList(discardPile, false, true)
-                          ],
-                        ),
-
-                        Positioned(
-                            width: 100,
-                            right: 2,
-                            bottom: 2,
-                            child: TextButton(
-                                child: const Text(
-                                  'Close',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                }))
-                      ]))
-                ]));
-          });
+                                    //mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      const Text(
+                                        " Reveal:",
+                                      ),
+                                      drawPile.length > 0
+                                          ? buildRevealButton(
+                                              drawPile.length, 1)
+                                          : Container(),
+                                      drawPile.length > 1
+                                          ? buildRevealButton(
+                                              drawPile.length, 2)
+                                          : Container(),
+                                      drawPile.length > 2
+                                          ? buildRevealButton(
+                                              drawPile.length, 3)
+                                          : Container(),
+                                      drawPile.length > 3
+                                          ? buildRevealButton(
+                                              drawPile.length, 4)
+                                          : Container(),
+                                      drawPile.length > 4
+                                          ? buildRevealButton(
+                                              drawPile.length, 5)
+                                          : Container(),
+                                      drawPile.length > 5
+                                          ? buildRevealButton(
+                                              drawPile.length, 6)
+                                          : Container(),
+                                      drawPile.length > 6
+                                          ? buildRevealButton(
+                                              drawPile.length, 7)
+                                          : Container(),
+                                      drawPile.length > 7
+                                          ? buildRevealButton(
+                                              drawPile.length, 8)
+                                          : Container(),
+                                    ]),
+                              ]))
+                          : Container(),
+                      Flexible(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildList(
+                              drawPile,
+                              _gameState.roundState.value ==
+                                  RoundState.playTurns,
+                              false),
+                          buildList(discardPile, false, true)
+                        ],
+                      )),
+                      Container(
+                        height: 32,
+                        margin: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8))),
+                      )
+                    ]),
+                    Positioned(
+                        width: 100,
+                        right: 0,
+                        bottom: 0,
+                        child: TextButton(
+                            child: const Text(
+                              'Close',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            }))
+                  ])));
+        });
   }
 }

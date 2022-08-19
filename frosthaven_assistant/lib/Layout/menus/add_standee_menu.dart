@@ -114,7 +114,7 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
                         const SizedBox(
                           height: 20,
                         ),
-                        Text("Add Standees",
+                        Text("Add Standee Nr",
                             style: getTitleTextStyle()),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
