@@ -20,7 +20,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
   @override
   initState() {
@@ -56,6 +56,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
       }
       return a.compareTo(b);
     });
+    _foundScenarios.insert(0, "custom");
   }
 
   // This function is called whenever the text field changes
@@ -66,6 +67,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
       results = _gameState
           .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
           .toList();
+      results.insert(0, "custom");
     } else {
       results = _gameState
           .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
@@ -108,7 +110,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                               setCampaign("JotL");
                             });
                           },
-                          child: Text("Jaws of the Lion"),
+                          child: const Text("Jaws of the Lion"),
                         ),
                         TextButton(
                           onPressed: () {
@@ -116,7 +118,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                               setCampaign("Gloomhaven");
                             });
                           },
-                          child: Text("Gloomhaven"),
+                          child: const Text("Gloomhaven"),
                         ),
                         TextButton(
                           onPressed: () {
@@ -124,7 +126,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                               setCampaign("Forgotten Circles");
                             });
                           },
-                          child: Text("Forgotten Circles"),
+                          child: const Text("Forgotten Circles"),
                         ),
                         TextButton(
                           onPressed: () {
@@ -132,7 +134,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                               setCampaign("Crimson Scales");
                             });
                           },
-                          child: Text("Crimson Scales"),
+                          child: const Text("Crimson Scales"),
                         ),
                       ],
                     ),
@@ -173,7 +175,6 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                                       }));
                             }
                           },
-                          //TODO: test this on device
                           onEditingComplete: () {
                             if (_foundScenarios.isNotEmpty) {
                               _gameState.action(SetScenarioCommand(
@@ -195,7 +196,7 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                             itemCount: _foundScenarios.length,
                             itemBuilder: (context, index) => ListTile(
                               title: Text(_foundScenarios[index],
-                                  style: TextStyle(fontSize: 18)),
+                                  style: const TextStyle(fontSize: 18)),
                               onTap: () {
                                 _gameState.action(SetScenarioCommand(
                                     _foundScenarios[index], false));

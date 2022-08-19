@@ -404,7 +404,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                         return Container(
                                             margin: EdgeInsets.only(
                                                 left: 10 * scale),
-                                            child: Row(children: [
+                                            child: Row(
+                                                children: [
                                               Image(
                                                 fit: BoxFit.contain,
                                                 height: scaledHeight * 0.2,

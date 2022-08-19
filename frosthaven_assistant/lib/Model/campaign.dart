@@ -50,6 +50,7 @@ class CampaignModel {
       scenarioMap[key] = ScenarioModel.fromJson(scenarios[key]);
     }
 
+
     Map<String, ScenarioModel> sectionMap = HashMap();
     final sections = data['sections'] as Map<dynamic, dynamic>;
     for (String key in sections.keys){
