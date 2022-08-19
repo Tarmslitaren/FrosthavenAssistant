@@ -116,7 +116,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           width: 8,
         ),
         Image(

@@ -98,6 +98,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                               alignment: Alignment.bottomCenter,
                               children: [
                             Container(
+
                               margin: EdgeInsets.only(
                                   bottom: 4 * scale, top: 4 * scale),
                               child: Image(

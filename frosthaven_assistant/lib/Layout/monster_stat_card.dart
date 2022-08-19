@@ -123,6 +123,15 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
               }
 
               return Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black45,
+                        blurRadius: 4 * scale,
+                        offset: Offset(2 * scale, 4 * scale), // Shadow position
+                      ),
+                    ],
+                  ),
                   margin: EdgeInsets.all(2 * scale * 0.8),
                   child: Stack(
                     //alignment: Alignment.center,

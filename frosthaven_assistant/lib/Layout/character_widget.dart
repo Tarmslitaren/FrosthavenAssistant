@@ -206,6 +206,13 @@ class CharacterWidgetState extends State<CharacterWidget> {
                           width: 408 * scale,
                           height: 58 * scale,
                           decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black45,
+                                blurRadius: 4 * scale,
+                                offset: Offset(2 * scale, 4 * scale), // Shadow position
+                              ),
+                            ],
                             image: DecorationImage(
                                 fit: BoxFit.fill,
                                 colorFilter: ColorFilter.mode(

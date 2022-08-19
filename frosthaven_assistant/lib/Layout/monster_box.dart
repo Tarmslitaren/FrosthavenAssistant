@@ -252,6 +252,15 @@ class _MonsterBoxState extends State<MonsterBox> {
             key: Key(figureId.toString()),
             width: width,
             curve: Curves.easeInOut,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black45,
+                  blurRadius: 4 * scale,
+                  offset: Offset(2 * scale, 4 * scale), // Shadow position
+                ),
+              ],
+            ),
             duration: const Duration(milliseconds: 300),
             child: ValueListenableBuilder<int>(
                 valueListenable: data.health,
