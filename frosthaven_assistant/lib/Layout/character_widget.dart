@@ -263,9 +263,11 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                             0) {
                                       return Container(
                                         margin: EdgeInsets.only(
-                                            left: 10 * scale),
-                                        height: 33 * scale,
+                                            left: 10 * scale ,top: 10*scale),
+                                        height: scaledHeight * 0.5, //33 * scale,
                                         width: 25 * scale,
+                                        padding: EdgeInsets.zero,
+                                        alignment: Alignment.topCenter,
                                         child: TextField(
 
                                             //scrollPadding: EdgeInsets.zero,
@@ -304,16 +306,22 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                 ]),
                                             decoration:
                                                 const InputDecoration(
+                                                  isDense: true, //this is what fixes the height issue
                                               counterText: '',
+                                              contentPadding: EdgeInsets.zero,
                                               enabledBorder:
                                                   UnderlineInputBorder(
+                                                    borderRadius: BorderRadius.zero,
                                                 borderSide: BorderSide(
+                                                  width: 0,
                                                     color:
                                                         Colors.transparent),
                                               ),
                                               focusedBorder:
                                                   UnderlineInputBorder(
+                                                    borderRadius: BorderRadius.zero,
                                                 borderSide: BorderSide(
+                                                  width: 0,
                                                     color:
                                                         Colors.transparent),
                                               ),
