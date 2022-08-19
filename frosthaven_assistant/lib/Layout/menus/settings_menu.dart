@@ -88,12 +88,13 @@ class SettingsMenuState extends State<SettingsMenu> {
                     setState(() {
                       settings.userScalingMainList.value = value;
                       setMaxWidth();
+                      settings.saveToDisk();
                     });
                   },
                 ),
                 Container(
-                  constraints: BoxConstraints(minWidth: double.infinity),
-                  padding: EdgeInsets.only(left: 16, top: 10),
+                  constraints: const BoxConstraints(minWidth: double.infinity),
+                  padding: const EdgeInsets.only(left: 16, top: 10),
                   alignment: Alignment.bottomLeft,
                   child: const Text("App Bar Scaling:"),
                 ),
@@ -105,10 +106,10 @@ class SettingsMenuState extends State<SettingsMenu> {
                   onChanged: (value) {
                     setState(() {
                       settings.userScalingBars.value = value;
+                      settings.saveToDisk();
                     });
                   },
                 )
-                //Todo: maybe comprehensive ui scaling. or not. (test on tv and small screen devices)
               ],
             ),
           ),

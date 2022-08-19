@@ -186,8 +186,8 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                               decoration: const BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(8),
-                                      topRight: Radius.circular(8))),
+                                      topLeft: Radius.circular(4),
+                                      topRight: Radius.circular(4))),
 
                               //color: Colors.transparent,
 
@@ -258,8 +258,8 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(8),
-                                bottomRight: Radius.circular(8))),
+                                bottomLeft: Radius.circular(4),
+                                bottomRight: Radius.circular(4))),
                       )
                     ]),
                     Positioned(
