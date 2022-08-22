@@ -522,15 +522,37 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
             }));
   }
 
-  List<Image> createConditionList(double scale, MonsterStatsModel stats) {
-    List<Image> list = [];
+  List<Widget> createConditionList(double scale, MonsterStatsModel stats) {
+    List<Widget> list = [];
     for (var item in stats.immunities) {
       item = item.substring(1, item.length - 1);
       Image image = Image(
         height: 11 * scale,
         image: AssetImage("assets/images/conditions/$item.png"),
       );
-      list.add(image);
+      Image immuneIcon = Image(
+        height: 4 * scale,
+        image: const AssetImage("assets/images/psd/immune.png"),
+      );
+      Stack stack = Stack(
+        alignment: Alignment.center,
+        children: [
+          Positioned(
+              left: 0,
+              top: 0,
+              child: image),
+          Positioned(
+            left: 9 * scale,
+              top: 3.5*scale,
+              child: immuneIcon),
+
+        ],
+      );
+      list.add(Container(
+        width: 14*scale,
+        height: 11*scale,
+        child: stack,
+      ));
     }
     return list;
   }
