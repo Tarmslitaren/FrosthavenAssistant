@@ -2,7 +2,6 @@ import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/modifier_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
-import 'package:frosthaven_assistant/Resource/action_handler.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
@@ -53,12 +52,12 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                 animationsEnabled = false;
               }
             },
-            duration: Duration(milliseconds: cardAnimationDuration),
+            duration: const Duration(milliseconds: cardAnimationDuration),
             enabled: true,
             curve: Curves.easeIn,
             values: [
-              const Offset(0, 0), //left to drawpile
-              const Offset(0, 0), //left to drawpile
+              const Offset(0, 0), //left to draw pile
+              const Offset(0, 0), //left to draw pile
               Offset(33.3333 * settings.userScalingBars.value, 0), //end
             ],
             child: RotationAnimatedWidget(
@@ -68,7 +67,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                   Rotation.deg(x: 0, y: 0, z: -15),
                   Rotation.deg(x: 0, y: 0, z: 0),
                 ],
-                duration: Duration(milliseconds: cardAnimationDuration),
+                duration: const Duration(milliseconds: cardAnimationDuration),
                 child: child)));
   }
 
@@ -82,7 +81,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
     var screenSize = MediaQuery.of(context).size;
     double xOffset =
-        -(screenSize.width / 2 - 66.6666 * settings.userScalingBars.value);
+        -(screenSize.width / 2 - 63 * settings.userScalingBars.value);
     double yOffset = -(screenSize.height / 2 - height / 2);
 
     if (!animationsEnabled) {
@@ -100,11 +99,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                     animationsEnabled = false;
                   }
                 },
-                duration: Duration(milliseconds: cardAnimationDuration),
+                duration: const Duration(milliseconds: cardAnimationDuration),
                 enabled: true,
                 values: [
                   Offset(-(width + 2 * settings.userScalingBars.value), 0),
-                  //left to drawpile
+                  //left to draw pile
                   Offset(xOffset, yOffset),
                   //center of screen
                   Offset(xOffset, yOffset),
@@ -199,68 +198,64 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                           onTap: () {
                             openDialog(context, const ModifierCardMenu());
                           },
-                          child: Container(
-                              //width: 92.3 * settings.userScalingBars.value,
-                              child: Stack(children: [
+                          child: Stack(children: [
 
                             _gameState.modifierDeck.discardPile.size() > 2
-                                ? buildStayAnimation(
-                                    Container(
-                                        //left: 55 * smallify,
-                                        child: RotationTransition(
-                                            turns: const AlwaysStoppedAnimation(
-                                                15 / 360),
-                                            child: ModifierCardWidget(
-                                              card: _gameState
-                                                  .modifierDeck.discardPile
-                                                  .getList()[_gameState
-                                                      .modifierDeck.discardPile
-                                                      .getList()
-                                                      .length -
-                                                  3],
-                                              revealed: true,
-                                            ))),
-                                  )
-                                : Container(),
-                            _gameState.modifierDeck.discardPile.size() > 1
-                                ? buildSlideAnimation(
-                                    RotationTransition(
-                                        turns: const AlwaysStoppedAnimation(
-                                            15 / 360),
-                                        child: ModifierCardWidget(
-                                          card: _gameState
-                                              .modifierDeck.discardPile
-                                              .getList()[_gameState
-                                                  .modifierDeck.discardPile
-                                                  .getList()
-                                                  .length -
-                                              2],
-                                          revealed: true,
-                                        )),
-                                    Key(_gameState.modifierDeck.discardPile
-                                        .size()
-                                        .toString()))
-                                : Container(),
-                            _gameState.modifierDeck.discardPile.isNotEmpty
-                                ? buildDrawAnimation(
-                                    ModifierCardWidget(
-                                      key: Key(_gameState
-                                          .modifierDeck.discardPile
-                                          .size()
-                                          .toString()),
+                            ? buildStayAnimation(
+                                RotationTransition(
+                                    turns: const AlwaysStoppedAnimation(
+                                        15 / 360),
+                                    child: ModifierCardWidget(
                                       card: _gameState
-                                          .modifierDeck.discardPile.peek,
+                                          .modifierDeck.discardPile
+                                          .getList()[_gameState
+                                              .modifierDeck.discardPile
+                                              .getList()
+                                              .length -
+                                          3],
                                       revealed: true,
-                                    ),
-                                    Key((-_gameState.modifierDeck.discardPile
-                                            .size())
-                                        .toString()))
-                                : Container(
-                                    width: 66.6666 *
-                                        settings.userScalingBars.value,
-                                    height: 40 * settings.userScalingBars.value,
-                                  ),
-                          ])))
+                                    )),
+                              )
+                            : Container(),
+                            _gameState.modifierDeck.discardPile.size() > 1
+                            ? buildSlideAnimation(
+                                RotationTransition(
+                                    turns: const AlwaysStoppedAnimation(
+                                        15 / 360),
+                                    child: ModifierCardWidget(
+                                      card: _gameState
+                                          .modifierDeck.discardPile
+                                          .getList()[_gameState
+                                              .modifierDeck.discardPile
+                                              .getList()
+                                              .length -
+                                          2],
+                                      revealed: true,
+                                    )),
+                                Key(_gameState.modifierDeck.discardPile
+                                    .size()
+                                    .toString()))
+                            : Container(),
+                            _gameState.modifierDeck.discardPile.isNotEmpty
+                            ? buildDrawAnimation(
+                                ModifierCardWidget(
+                                  key: Key(_gameState
+                                      .modifierDeck.discardPile
+                                      .size()
+                                      .toString()),
+                                  card: _gameState
+                                      .modifierDeck.discardPile.peek,
+                                  revealed: true,
+                                ),
+                                Key((-_gameState.modifierDeck.discardPile
+                                        .size())
+                                    .toString()))
+                            : SizedBox(
+                                width: 66.6666 *
+                                    settings.userScalingBars.value,
+                                height: 40 * settings.userScalingBars.value,
+                              ),
+                          ]))
                     ],
                   );
                 }),
