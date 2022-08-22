@@ -16,7 +16,7 @@ class DrawCommand extends Command {
     GameMethods.drawAbilityCards();
     GameMethods.sortByInitiative();
     GameMethods.setRoundState(RoundState.playTurns);
-    Future.delayed(Duration(milliseconds: 600), () {
+    Future.delayed(const Duration(milliseconds: 600), () {
       _gameState.updateList.value++;
       MainList.scrollToTop();
     });

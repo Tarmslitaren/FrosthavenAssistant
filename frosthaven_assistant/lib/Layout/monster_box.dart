@@ -91,7 +91,7 @@ class _MonsterBoxState extends State<MonsterBox> {
               width: 47 * scale,
               fit: BoxFit.fill,
               //scale up disregarding aspect ratio
-              image: AssetImage("assets/images/psd/monster-box.png"),
+              image: const AssetImage("assets/images/psd/monster-box.png"),
               //width: widget.height*0.8,
             ),
             Container(
@@ -167,7 +167,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                         ValueListenableBuilder<List<Condition>>(
                             valueListenable: data.conditions,
                             builder: (context, value, child) {
-                              return Container(
+                              return SizedBox(
                                   height: 30 * scale,
                                   child: Wrap(
                                     spacing: 0,
@@ -197,9 +197,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                         currentValue: data.health.value.toDouble(),
                         maxValue: data.maxHealth.value.toDouble(),
                         size: 4.0 * scale,
-                        //animatedDuration: const Duration(milliseconds: 0),
                         direction: Axis.horizontal,
-                        //verticalDirection: VerticalDirection.up,
                         borderRadius: BorderRadius.circular(0),
                         border: Border.all(
                           color: Colors.black,
@@ -207,8 +205,6 @@ class _MonsterBoxState extends State<MonsterBox> {
                         ),
                         backgroundColor: Colors.black,
                         progressColor: Colors.red,
-                        //formatValueFixed: 2,
-                        //what does this do?
                         changeColorValue: (data.maxHealth.value).toInt(),
                         changeProgressColor: Colors.green,
                       );

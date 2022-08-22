@@ -85,11 +85,21 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         -(screenSize.width / 2 - 66.6666 * settings.userScalingBars.value);
     double yOffset = -(screenSize.height / 2 - height / 2);
 
+    if (!animationsEnabled) {
+      return Container(
+          child: child);
+    }
+
     return Container(
         key: key,
         //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
         child: animationsEnabled
             ? TranslationAnimatedWidget(
+                animationFinished: (bool finished) {
+                  if (finished) {
+                    animationsEnabled = false;
+                  }
+                },
                 duration: Duration(milliseconds: cardAnimationDuration),
                 enabled: true,
                 values: [
@@ -107,7 +117,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                 child: ScaleAnimatedWidget(
                     //does nothing
                     enabled: true,
-                    duration: Duration(milliseconds: cardAnimationDuration),
+                    duration: const Duration(milliseconds: cardAnimationDuration),
                     values: const [1, 4, 4, 4, 1],
                     child: RotationAnimatedWidget(
                         enabled: true,
@@ -134,7 +144,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         builder: (context, value, child) {
           return SizedBox(
             width: 153 * settings.userScalingBars.value,
-            //TODO: make smaller if can't fit on screen?
             height: 40 * settings.userScalingBars.value,
             child: ValueListenableBuilder<int>(
                 valueListenable: _gameState.commandIndex, //blanket
@@ -186,7 +195,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         width: 2 * settings.userScalingBars.value,
                       ),
                       GestureDetector(
-                        behavior: HitTestBehavior.opaque,
+                        behavior: HitTestBehavior.opaque, //makes tappable when no graphics
                           onTap: () {
                             openDialog(context, const ModifierCardMenu());
                           },
