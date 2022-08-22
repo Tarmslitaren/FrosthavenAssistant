@@ -76,6 +76,9 @@ class GameMethods {
   }
 
   static bool canDraw() {
+    if(_gameState.currentList.isEmpty) {
+      return false;
+    }
     if (getIt<Settings>().noInit.value == true) {
       return true;
     }

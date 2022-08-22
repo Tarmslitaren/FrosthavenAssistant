@@ -31,10 +31,14 @@ class _DrawButtonState extends State<DrawButton> {
         _gameState.action(DrawCommand());
       } else {
         //show toast
+        String text = "Player Initiative numbers must be set (under the initiative marker to the right of the character symbol)";
+        if(_gameState.currentList.isEmpty) {
+          text = "Add characters first.";
+        }
         //TODO: show other message if no characters or no monsters
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
-              "Player Initiative numbers must be set (under the initiative marker to the right of the character symbol)"),
+              text),
         ));
       }
     } else {

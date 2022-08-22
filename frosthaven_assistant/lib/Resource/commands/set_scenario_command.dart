@@ -21,7 +21,7 @@ class SetScenarioCommand extends Command {
   @override
   void execute() {
 
-    _gameState.round.value = 0;
+    _gameState.round.value = 1;
 
     if (!section) {
       //first reset state

@@ -24,6 +24,8 @@ class NextRoundCommand extends Command {
     GameMethods.setRoundState(RoundState.chooseInitiative);
     GameMethods.sortCharactersFirst();
 
+    _gameState.round.value++;
+
     Future.delayed(Duration(milliseconds: 600), () {
         _gameState.updateList.value++;
         MainList.scrollToTop();

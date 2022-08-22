@@ -92,45 +92,49 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                   width: getMainListWidth(context),
                   child: Row(
                     children: [
-                      Container(
-                          //margin: EdgeInsets.all(2*tempScale*scale),
-                          child: Stack(
-                              alignment: Alignment.bottomCenter,
-                              children: [
-                            Container(
+                      Stack(
+                          alignment: Alignment.bottomCenter,
+                          children: [
+                             PhysicalShape(
+                                color: Colors.transparent, //TODO: yse to mark current turn?
+                                shadowColor: Colors.black,
+                                elevation: 18,
+                                clipper: ShapeBorderClipper(shape: CircleBorder()),
+                                child: Container(
 
-                              margin: EdgeInsets.only(
-                                  bottom: 4 * scale, top: 4 * scale),
-                              child: Image(
-                                //fit: BoxFit.contain,
-                                height: height,
-                                width: height,
-                                image: AssetImage(
-                                    "assets/images/monsters/${widget.data.type.gfx}.png"),
-                                //width: widget.height*0.8,
-                              ),
+                                  margin: EdgeInsets.only(
+                                      bottom: 4 * scale, top: 4 * scale),
+                                  child: Image(
+                                    //fit: BoxFit.contain,
+                                    height: height,
+                                    width: height,
+                                    image: AssetImage(
+                                        "assets/images/monsters/${widget.data.type.gfx}.png"),
+                                    //width: widget.height*0.8,
+                                  ),
+                                ),
+
                             ),
-                            Container(
-                                width: height * 0.95,
-                                //height: height,
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                  textAlign: TextAlign.center,
-                                  widget.data.type.display,
-                                  style: TextStyle(
-                                      fontFamily: 'Pirata',
-                                      color: Colors.white,
-                                      fontSize: 18 * 0.8 * scale,
-                                      shadows: [
-                                        Shadow(
-                                            offset:
-                                                Offset(1 * scale, 1 * scale),
-                                            color: Colors.black)
-                                      ]),
-                                ))
-                          ])
-                          //)
-                          ),
+
+                        Container(
+                            width: height * 0.95,
+                            //height: height,
+                            alignment: Alignment.bottomCenter,
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              widget.data.type.display,
+                              style: TextStyle(
+                                  fontFamily: 'Pirata',
+                                  color: Colors.white,
+                                  fontSize: 18 * 0.8 * scale,
+                                  shadows: [
+                                    Shadow(
+                                        offset:
+                                            Offset(1 * scale, 1 * scale),
+                                        color: Colors.black)
+                                  ]),
+                            ))
+                      ]),
                       MonsterAbilityCardWidget(data: widget.data),
                       MonsterStatCardWidget(data: widget.data),
                     ],

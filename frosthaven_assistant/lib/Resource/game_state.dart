@@ -567,7 +567,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
 
   //state
   final currentCampaign = ValueNotifier<String>("JotL");
-  final round = ValueNotifier<int>(0);
+  final round = ValueNotifier<int>(1);
   final roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
 
   //TODO: ugly hacks to delay list update (doesn't need to be here though)
