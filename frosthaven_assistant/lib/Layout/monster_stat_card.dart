@@ -11,7 +11,6 @@ import '../Resource/stat_calculator.dart';
 import '../Resource/ui_utils.dart';
 import 'line_builder.dart';
 
-
 class MonsterStatCardWidget extends StatefulWidget {
   final Monster data;
 
@@ -138,15 +137,12 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0 * scale),
-                        child:
-                        Image(
+                        child: Image(
                           height: height,
                           fit: BoxFit.fitHeight,
 
                           //height: height,
-                          image: AssetImage(
-
-                              !isBoss
+                          image: AssetImage(!isBoss
                               ? "assets/images/psd/monsterStats-normal.png"
                               : "assets/images/psd/monsterStats-boss.png"),
                         ),
@@ -254,10 +250,12 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                                Text("1:", style: specialStyle,),
+                                                Text(
+                                                  "1:",
+                                                  style: specialStyle,
+                                                ),
                                                 SizedBox(
-                                                    width:
-                                                        140 * 0.8 * scale,
+                                                    width: 140 * 0.8 * scale,
                                                     child:
                                                         LineBuilder.createLines(
                                                             widget
@@ -289,8 +287,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                             children: [
                                                 Text("2:", style: specialStyle),
                                                 SizedBox(
-                                                    width:
-                                                        140 * 0.8 * scale,
+                                                    width: 140 * 0.8 * scale,
                                                     child:
                                                         LineBuilder.createLines(
                                                             widget
@@ -399,8 +396,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               bottom: 5 * scale * 0.8,
                               left: 5 * scale * 0.8,
                               child: SizedBox(
-                                  width: 25 * scale * 0.8 +8,
-                                  height: 25 * scale * 0.8 +8,
+                                  width: 25 * scale * 0.8 + 8,
+                                  height: 25 * scale * 0.8 + 8,
                                   child: ValueListenableBuilder<
                                           List<MonsterInstance>>(
                                       valueListenable:
@@ -413,9 +410,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 .length ==
                                             widget.data.type.count;
                                         return IconButton(
-                                          padding: const EdgeInsets.only(right: 8, top: 8),
+                                          padding: const EdgeInsets.only(
+                                              right: 8, top: 8),
                                           icon: Image.asset(
-                                              //TODO: is not updated on remove
                                               color: allStandeesOut
                                                   ? Colors.white24
                                                   : Colors.grey,
@@ -456,43 +453,55 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                           : Container(),
                       Positioned(
                           bottom: 5 * scale * 0.8,
-                          right: 5 * scale * 0.8 ,
+                          right: 5 * scale * 0.8,
                           child: SizedBox(
                               width: 25 * scale * 0.8 + 8,
                               height: 25 * scale * 0.8 + 8,
-                              child: IconButton(
-                                  padding: const EdgeInsets.only(left: 8, top: 8),
-                                  icon: Image.asset(
-                                      color: widget.data.monsterInstances.value
+                              child: ValueListenableBuilder<
+                                      List<MonsterInstance>>(
+                                  valueListenable: widget.data.monsterInstances,
+                                  builder: (context, value, child) {
+                                    bool allStandeesOut = widget.data
+                                            .monsterInstances.value.length ==
+                                        widget.data.type.count;
+                                    return IconButton(
+                                        padding: const EdgeInsets.only(
+                                            left: 8, top: 8),
+                                        icon: Image.asset(
+                                            color: widget.data.monsterInstances
+                                                        .value.length ==
+                                                    widget.data.type.count
+                                                ? Colors.white24
+                                                : Colors.grey,
+                                            colorBlendMode: BlendMode.modulate,
+                                            'assets/images/psd/add.png'),
+                                        onPressed: () {
+                                          if (widget.data.monsterInstances.value
                                                   .length ==
-                                              widget.data.type.count
-                                          ? Colors.white24
-                                          : Colors.grey,
-                                      colorBlendMode: BlendMode.modulate,
-                                      'assets/images/psd/add.png'),
-                                  onPressed: () {
-                                    if (widget.data.monsterInstances.value
-                                            .length ==
-                                        widget.data.type.count - 1) {
-                                      //directly add last standee
-                                      GameMethods.addStandee(
-                                          null,
-                                          widget.data,
-                                          isBoss
-                                              ? MonsterType.boss
-                                              : MonsterType.elite);
-                                    } else if (widget.data.monsterInstances
-                                            .value.length <
-                                        widget.data.type.count - 1) {
-                                      openDialogAtPosition(
-                                          context,
-                                          AddStandeeMenu(
-                                            elite: isBoss ? false : true,
-                                            monster: widget.data,
-                                          ),
-                                          -100,
-                                          -12);
-                                    }
+                                              widget.data.type.count - 1) {
+                                            //directly add last standee
+                                            GameMethods.addStandee(
+                                                null,
+                                                widget.data,
+                                                isBoss
+                                                    ? MonsterType.boss
+                                                    : MonsterType.elite);
+                                          } else if (widget
+                                                  .data
+                                                  .monsterInstances
+                                                  .value
+                                                  .length <
+                                              widget.data.type.count - 1) {
+                                            openDialogAtPosition(
+                                                context,
+                                                AddStandeeMenu(
+                                                  elite: isBoss ? false : true,
+                                                  monster: widget.data,
+                                                ),
+                                                -100,
+                                                -12);
+                                          }
+                                        });
                                   }))),
                       isBoss
                           ? Positioned(
@@ -501,7 +510,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               child: Row(
                                 children: createConditionList(scale, normal),
                               ))
-                          : Positioned( //TODO: move position to FH place in corner
+                          : Positioned(
+                              //TODO: move position to FH place in corner
                               left: 45 * scale,
                               bottom: 10 * scale,
                               child: Column(
@@ -537,20 +547,13 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
       Stack stack = Stack(
         alignment: Alignment.center,
         children: [
-          Positioned(
-              left: 0,
-              top: 0,
-              child: image),
-          Positioned(
-            left: 9 * scale,
-              top: 3.5*scale,
-              child: immuneIcon),
-
+          Positioned(left: 0, top: 0, child: image),
+          Positioned(left: 9 * scale, top: 3.5 * scale, child: immuneIcon),
         ],
       );
       list.add(SizedBox(
-        width: 14*scale,
-        height: 11*scale,
+        width: 14 * scale,
+        height: 11 * scale,
         child: stack,
       ));
     }

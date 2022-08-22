@@ -18,9 +18,13 @@ abstract class ChangeStatCommand extends Command {
   void handleDeath(){
     for(var item in getIt<GameState>().currentList){
       if(item is Monster){
+        List<MonsterInstance> newList = [];
+        newList.addAll(item.monsterInstances.value);
         for (var instance in item.monsterInstances.value) {
           if(instance.health.value == 0) {
-            item.monsterInstances.value.remove(instance);
+            newList.remove(instance);
+            item.monsterInstances.value = newList;
+            //item.monsterInstances.value.remove(instance);
             Future.delayed(const Duration(milliseconds: 600), () {
               getIt<GameState>().killMonsterStandee.value++;
             });
