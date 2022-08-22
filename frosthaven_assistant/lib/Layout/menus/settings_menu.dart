@@ -25,7 +25,7 @@ class SettingsMenuState extends State<SettingsMenu> {
     Settings settings = getIt<Settings>();
 
     double screenWidth = MediaQuery.of(context).size.width;
-    double referenceMinBarWidth = 40 * 6;
+    double referenceMinBarWidth = 40 * 6.5;
     double maxBarScale = screenWidth / referenceMinBarWidth;
 
     return Card(
@@ -108,7 +108,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   child: const Text("App Bar Scaling:"),
                 ),
                 Slider(
-                  min: min(0.5, maxBarScale),
+                  min: min(0.8, maxBarScale),
                   max: min(maxBarScale, 3.0),
                   //divisions: 1,
                   value: settings.userScalingBars.value,

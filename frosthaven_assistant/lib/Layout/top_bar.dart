@@ -52,13 +52,16 @@ PreferredSize createTopBar() {
               flexibleSpace: ValueListenableBuilder<bool>(
                   valueListenable: getIt<Settings>().darkMode,
                   builder: (context, value, child) {
-                    return Image(
+                    return Container(
+                      height: 42 * settings.userScalingBars.value,
+                        color:getIt<Settings>().darkMode.value?  Colors.black : Colors.white,
+                        child:Image(
                         height: 40 * settings.userScalingBars.value,
                         image: AssetImage(getIt<Settings>().darkMode.value
                             ? 'assets/images/psd/gloomhaven-bar.png'
                             : 'assets/images/psd/frosthaven-bar.png'),
                         fit: BoxFit.cover,
-                        repeat: ImageRepeat.repeatX);
+                        repeat: ImageRepeat.repeatX));
                   }),
               actions: [
                 ElementButton(
