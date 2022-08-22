@@ -501,7 +501,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               child: Row(
                                 children: createConditionList(scale, normal),
                               ))
-                          : Positioned(
+                          : Positioned( //TODO: move position to FH place in corner
                               left: 45 * scale,
                               bottom: 10 * scale,
                               child: Column(
@@ -548,7 +548,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
         ],
       );
-      list.add(Container(
+      list.add(SizedBox(
         width: 14*scale,
         height: 11*scale,
         child: stack,

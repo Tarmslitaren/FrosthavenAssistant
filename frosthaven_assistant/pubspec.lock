@@ -114,9 +114,11 @@ packages:
   flutter_animation_progress_bar:
     dependency: "direct main"
     description:
-      name: flutter_animation_progress_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "7d55351b63fda66a33b40f595e090b47a9eda967"
+      url: "https://github.com/Tarmslitaren/Flutter-Animation-Progress-Bar"
+    source: git
     version: "2.2.1"
   flutter_keyboard_visibility:
     dependency: "direct main"
