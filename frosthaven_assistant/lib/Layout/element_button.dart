@@ -68,12 +68,12 @@ class AnimatedContainerButtonState extends State<ElementButton> {
 
   void setHalf(){
     _color = widget.color;
-    _height = widget.width * settings.userScalingBars.value / 2;
+    _height = widget.width * settings.userScalingBars.value / 2 +2 * settings.userScalingBars.value;
     _borderRadius = BorderRadius.only(
         bottomLeft:
-        Radius.circular(widget.width * settings.userScalingBars.value / 2 - widget.borderWidth * settings.userScalingBars.value),
+        Radius.circular(widget.width * settings.userScalingBars.value / 2 - widget.borderWidth * settings.userScalingBars.value * 0),
         bottomRight:
-        Radius.circular(widget.width * settings.userScalingBars.value / 2 - widget.borderWidth* settings.userScalingBars.value));
+        Radius.circular(widget.width * settings.userScalingBars.value / 2 - widget.borderWidth* settings.userScalingBars.value * 0));
   }
 
   void setFull(){
@@ -92,6 +92,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
         onDoubleTap: () {
           setState(() {
             _gameState.elementState.value
