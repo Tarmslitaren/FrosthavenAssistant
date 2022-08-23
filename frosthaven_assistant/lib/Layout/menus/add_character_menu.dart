@@ -132,7 +132,7 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                                 "assets/images/class-icons/${_foundCharacters[index].name}.png"),
                           ),
                           iconColor: _foundCharacters[index].color,
-                          title: Text(_foundCharacters[index].hidden
+                          title: Text(_foundCharacters[index].hidden && !_gameState.unlockedClasses.contains(_foundCharacters[index].name)
                               ? "???"
                               : _foundCharacters[index].name,
                           style: TextStyle(

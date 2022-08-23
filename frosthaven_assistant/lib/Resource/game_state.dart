@@ -417,6 +417,12 @@ class GameSaveState{
       }
       gameState.currentList = newList;
 
+      var unlockedClassesList = data['unlockedClasses'] as List;
+      gameState.unlockedClasses.clear();
+      for (String item in unlockedClassesList) {
+        gameState.unlockedClasses.add(item);
+      }
+
       //ability decks
       var decks = data['currentAbilityDecks'] as List;
       gameState.currentAbilityDecks.clear();
@@ -589,7 +595,6 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
 
   List<ListItemData> currentList = []; //has both monsters and characters
 
-
   List<MonsterAbilityState> currentAbilityDecks = <MonsterAbilityState>[]; //add to here when adding a monster type
 
   //elements
@@ -598,6 +603,9 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   //modifierDeck
   ModifierDeck modifierDeck = ModifierDeck("");
   ModifierDeck modifierDeckAllies = ModifierDeck("Allies");
+
+  //unlocked characters
+  Set<String> unlockedClasses = {};
 
   @override
   String toString() {
@@ -617,6 +625,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
         '"currentAbilityDecks": ${currentAbilityDecks.toString()}, '
         '"modifierDeck": ${modifierDeck.toString()}, '
         '"modifierDeckAllies": ${modifierDeckAllies.toString()}, '
+        '"unlockedClasses": ${jsonEncode(unlockedClasses.toList())}, '
         '"elementState": ${json.encode(elements)} ' //didn't like the map?
         '}';
   }

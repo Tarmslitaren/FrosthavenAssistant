@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/counter_button.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_max_health_command.dart';
@@ -10,7 +9,8 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class SetLevelMenu extends StatefulWidget {
-  const SetLevelMenu({Key? key, this.monster, this.figure, this.characterId}) : super(key: key);
+  const SetLevelMenu({Key? key, this.monster, this.figure, this.characterId})
+      : super(key: key);
 
   final Monster? monster;
   final String? characterId;
@@ -62,23 +62,30 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                   child: Text(
                     text,
                     style: TextStyle(
-                      fontSize: 18,
+                        fontSize: 18,
                         shadows: [
-                      Shadow(
-                          offset: const Offset(1, 1),
-                          color:
-                              isCurrentlySelected ?
-                              darkMode? Colors.black : Colors.grey :
-                              darkMode? Colors.black : Colors.black)
-                    ],
-                        color: isCurrentlySelected ?
-                        darkMode? Colors.white : Colors.black :
-                        darkMode? Colors.grey :Colors.grey),
+                          Shadow(
+                              offset: const Offset(1, 1),
+                              color: isCurrentlySelected
+                                  ? darkMode
+                                      ? Colors.black
+                                      : Colors.grey
+                                  : darkMode
+                                      ? Colors.black
+                                      : Colors.black)
+                        ],
+                        color: isCurrentlySelected
+                            ? darkMode
+                                ? Colors.white
+                                : Colors.black
+                            : darkMode
+                                ? Colors.grey
+                                : Colors.grey),
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
                       String? monsterId;
-                      if(widget.monster != null) {
+                      if (widget.monster != null) {
                         monsterId = widget.monster!.id;
                       }
                       _gameState.action(SetLevelCommand(nr, monsterId));
@@ -92,7 +99,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
 
   Widget createLegend(String name, String gfx, String value) {
     var textStyleLevelWidget = const TextStyle(
-      //fontFamily: 'Majalla',
+        //fontFamily: 'Majalla',
         color: Colors.white,
         overflow: TextOverflow.fade,
         //fontWeight: FontWeight.bold,
@@ -100,17 +107,13 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
         fontSize: 18,
         shadows: [
           Shadow(
-              offset: Offset(1.0 , 1.0 ),
-              blurRadius: 3.0,
-              color: Colors.black),
+              offset: Offset(1.0, 1.0), blurRadius: 3.0, color: Colors.black),
           Shadow(
-              offset: Offset(1.0 , 1.0 ),
-              blurRadius: 8.0,
-              color: Colors.black),
+              offset: Offset(1.0, 1.0), blurRadius: 8.0, color: Colors.black),
           //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
         ]);
     double height = 20;
-    if (gfx.contains("level")){
+    if (gfx.contains("level")) {
       height = 15;
     }
     return Row(
@@ -119,9 +122,19 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
         const SizedBox(
           width: 8,
         ),
-        Image(
-          height: height,
-            image:AssetImage(gfx)),
+        Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.4),
+                  spreadRadius: 5,
+                  blurRadius: 10.0,
+                  //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                ),
+              ],
+            ),
+            child: Image(height: height, image: AssetImage(gfx))),
         Text(value, style: textStyleLevelWidget),
         Text(" ($name)", style: textStyleLevelWidget),
       ],
@@ -136,20 +149,18 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
     }
     //if summon:
     bool isSummon = widget.monster == null && widget.figure is MonsterInstance;
-    if(isSummon) {
+    if (isSummon) {
       title = "Set ${(widget.figure as MonsterInstance).name}'s max health";
     }
-
 
     String name = "";
     String ownerId = "";
     String figureId = "";
-    if(widget.monster != null) {
+    if (widget.monster != null) {
       name = widget.monster!.type.display;
       ownerId = widget.monster!.id;
-
-    }else if(widget.figure is CharacterState){
-      figureId = ( widget.figure as CharacterState).display;
+    } else if (widget.figure is CharacterState) {
+      figureId = (widget.figure as CharacterState).display;
       ownerId = name;
     }
     if (widget.figure is MonsterInstance) {
@@ -157,7 +168,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
       int nr = (widget.figure as MonsterInstance).standeeNr;
       String gfx = (widget.figure as MonsterInstance).gfx;
       figureId = name + gfx + nr.toString();
-      if(widget.characterId != null) {
+      if (widget.characterId != null) {
         ownerId = widget.characterId!;
       }
     }
@@ -168,7 +179,7 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
 
     return Container(
         width: 10,
-        height: showLegend? 300 : 180,
+        height: showLegend ? 300 : 180,
         decoration: BoxDecoration(
           //color: Colors.black,
           //borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -180,9 +191,9 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(darkMode?
-            'assets/images/bg/dark_bg.png'
-                :'assets/images/bg/white_bg.png'),
+            image: AssetImage(darkMode
+                ? 'assets/images/bg/dark_bg.png'
+                : 'assets/images/bg/white_bg.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -196,24 +207,26 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                     height: 20,
                   ),
                   Text(title, style: getTitleTextStyle()),
-                  if (!isSummon) Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildLevelButton(0),
-                      buildLevelButton(1),
-                      buildLevelButton(2),
-                      buildLevelButton(3),
-                    ],
-                  ),
-                  if (!isSummon) Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildLevelButton(4),
-                      buildLevelButton(5),
-                      buildLevelButton(6),
-                      buildLevelButton(7),
-                    ],
-                  ),
+                  if (!isSummon)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        buildLevelButton(0),
+                        buildLevelButton(1),
+                        buildLevelButton(2),
+                        buildLevelButton(3),
+                      ],
+                    ),
+                  if (!isSummon)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        buildLevelButton(4),
+                        buildLevelButton(5),
+                        buildLevelButton(6),
+                        buildLevelButton(7),
+                      ],
+                    ),
                   widget.figure == null
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -224,8 +237,11 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                                   builder: (context, value, child) {
                                     return Checkbox(
                                       checkColor: Colors.black,
-                                      activeColor:  Colors.grey.shade200,
-                                      side: BorderSide(color: darkMode? Colors.white : Colors.black),
+                                      activeColor: Colors.grey.shade200,
+                                      side: BorderSide(
+                                          color: darkMode
+                                              ? Colors.white
+                                              : Colors.black),
                                       onChanged: (bool? newValue) {
                                         _gameState.solo.value = newValue!;
                                       },
@@ -238,22 +254,42 @@ class _SetLevelMenuState extends State<SetLevelMenu> {
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            CounterButton(widget.figure!.maxHealth, ChangeMaxHealthCommand(0, figureId, ownerId),
-                                900, "assets/images/blood.png", true, Colors.red, figureId: figureId, ownerId: ownerId)
+                              CounterButton(
+                                  widget.figure!.maxHealth,
+                                  ChangeMaxHealthCommand(0, figureId, ownerId),
+                                  900,
+                                  "assets/images/blood.png",
+                                  true,
+                                  Colors.red,
+                                  figureId: figureId,
+                                  ownerId: ownerId)
                             ])
                       : Container(),
-                  if (showLegend == true) Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                          createLegend( "trap damage", "assets/images/psd/traps-fh.png" , ": ${GameMethods.getTrapValue()}"),
-                          createLegend( "hazardous terrain damage", "assets/images/psd/hazard-fh.png" , ": ${GameMethods.getHazardValue()}"),
-                          createLegend( "experience added", "assets/images/psd/xp.png" , ": +${GameMethods.getXPValue()}"),
-                          createLegend( "gold coin value", "assets/images/psd/coins-fh.png" , ": x${GameMethods.getCoinValue()}"),
-                          createLegend( "level", "assets/images/psd/level.png" , ": ${_gameState.level.value}"),
-                    ],
-
-                  )
+                  if (showLegend == true)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        createLegend(
+                            "trap damage",
+                            "assets/images/psd/traps-fh.png",
+                            ": ${GameMethods.getTrapValue()}"),
+                        createLegend(
+                            "hazardous terrain damage",
+                            "assets/images/psd/hazard-fh.png",
+                            ": ${GameMethods.getHazardValue()}"),
+                        createLegend(
+                            "experience added",
+                            "assets/images/psd/xp.png",
+                            ": +${GameMethods.getXPValue()}"),
+                        createLegend(
+                            "gold coin value",
+                            "assets/images/psd/coins-fh.png",
+                            ": x${GameMethods.getCoinValue()}"),
+                        createLegend("level", "assets/images/psd/level.png",
+                            ": ${_gameState.level.value}"),
+                      ],
+                    )
                 ],
               ),
             ]));
