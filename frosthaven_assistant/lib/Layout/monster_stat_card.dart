@@ -76,11 +76,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
           Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black)
         ]);
 
-    return GestureDetector(
-        onTap: () {
-          //if grayscale mode: fade in the stats (if hide stats enabled)
-        },
-        child: ValueListenableBuilder<int>(
+    return ValueListenableBuilder<int>(
             valueListenable: widget.data.level,
             builder: (context, value, child) {
               _level = widget.data.level.value;
@@ -531,7 +527,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               ))
                     ],
                   ));
-            }));
+            });
   }
 
   List<Widget> createConditionList(double scale, MonsterStatsModel stats) {

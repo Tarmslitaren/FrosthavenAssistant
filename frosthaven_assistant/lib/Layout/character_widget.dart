@@ -155,7 +155,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
       }
     }
 
-    return GestureDetector(
+    return InkWell(
         onTap: () {
           //open stats menu
           openDialog(

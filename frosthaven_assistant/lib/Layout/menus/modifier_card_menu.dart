@@ -92,7 +92,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           data: item,
           revealed: isRevealed(item) || allOpen == true);
       if (!allOpen) {
-        GestureDetector gestureDetector = GestureDetector(
+        InkWell gestureDetector = InkWell(
           key: Key(index.toString()),
           onTap: () {
             //open remove card menu

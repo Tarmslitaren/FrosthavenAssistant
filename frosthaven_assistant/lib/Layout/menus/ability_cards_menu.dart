@@ -95,7 +95,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           monsterData: widget.monsterData,
           revealed: isRevealed(item) || allOpen == true);
       if (hasDiviner && _gameState.roundState.value == RoundState.playTurns) {
-        GestureDetector gestureDetector = GestureDetector(
+        InkWell gestureDetector = InkWell(
           key: Key(item.nr.toString()),
           onTap: () {
             //open remove card menu

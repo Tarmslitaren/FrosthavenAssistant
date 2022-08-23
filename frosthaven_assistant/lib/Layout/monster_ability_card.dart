@@ -276,7 +276,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
           }
 
 
-          return GestureDetector(
+          return InkWell(
             onTap: () {
               //open deck menu
               openDialog(context, AbilityCardMenu(monsterAbilityState: deckk, monsterData: widget.data,));

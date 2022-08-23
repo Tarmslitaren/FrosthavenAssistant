@@ -39,7 +39,7 @@ class AbilityCardZoomState extends State<AbilityCardZoom> {
       width = screenWidth - 40;
     }
 
-    return GestureDetector(
+    return InkWell(
       onTap: (){
         Navigator.pop(context);
       },

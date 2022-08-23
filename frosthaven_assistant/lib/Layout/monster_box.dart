@@ -235,7 +235,7 @@ class _MonsterBoxState extends State<MonsterBox> {
     if(widget.ownerId != data.name){
       characterId = widget.ownerId; //this is probably wrong
     }
-    return GestureDetector(
+    return InkWell(
         onTap: () {
           //open stats menu
           openDialog(

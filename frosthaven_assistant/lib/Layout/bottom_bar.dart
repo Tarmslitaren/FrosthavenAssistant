@@ -38,12 +38,12 @@ Widget createLevelWidget(BuildContext context) {
         //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
       ]);
 
-  return GestureDetector(
+  return InkWell(
     onTap: () {
       //open stats menu
       openDialog(
         context,
-        SetLevelMenu(),
+        const SetLevelMenu(),
       );
     },
     child: Column(

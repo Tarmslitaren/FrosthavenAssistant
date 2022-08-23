@@ -149,7 +149,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                 builder: (context, value, child) {
                   return Row(
                     children: [
-                      GestureDetector(
+                      InkWell(
                           onTap: () {
                             setState(() {
                               animationsEnabled = true;
@@ -193,8 +193,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                       SizedBox(
                         width: 2 * settings.userScalingBars.value,
                       ),
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque, //makes tappable when no graphics
+                      InkWell(
+                        //behavior: HitTestBehavior.opaque, //makes tappable when no graphics
                           onTap: () {
                             openDialog(context, const ModifierCardMenu());
                           },
