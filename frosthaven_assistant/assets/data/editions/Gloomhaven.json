@@ -3975,10 +3975,20 @@
         "monsters": [ "Flame Demon", "Earth Demon", "Sun Demon" ]
       },
       "#11 Gloomhaven Square A": {
-        "monsters": [ "Living Bones", "Living Corpse", "City Guard", "City Archer", "Captain of the Guard" ]
+        "monsters": [ "Living Bones", "Living Corpse", "City Guard", "City Archer", "Captain of the Guard" ],
+        "special": [
+          {
+            "type": "allies",
+            "list": ["Living Bones", "Living Corpse"]
+          }]
       },
       "#12 Gloomhaven Square B": {
-        "monsters": [ "Living Bones", "Living Corpse", "Cultist", "City Guard", "City Archer", "Jekserah" ]
+        "monsters": [ "Living Bones", "Living Corpse", "Cultist", "City Guard", "City Archer", "Jekserah" ],
+        "special": [
+          {
+            "type": "allies",
+            "list": ["City Guard", "City Archer"]
+          }]
       },
       "#13 Temple of the Seer": {
         "monsters": [ "Stone Golem", "Cave Bear", "Living Spirit", "Spitting Drake" ]
@@ -4105,6 +4115,10 @@
             "type": "Objective",
             "name": "Rock Column",
             "health": "(8+L)xC"
+          },
+          {
+            "type": "allies",
+            "list": ["Night Demon"]
           }
         ]
       },
@@ -4490,7 +4504,12 @@
         "monsters": [ "Earth Demon", "Wind Demon", "Night Demon", "Living Spirit" ]
       },
       "#91 Wild Melee": {
-        "monsters": [ "Cave Bear", "Hound", "Bandit Guard", "Bandit Archer", "Living Spirit" ]
+        "monsters": [ "Cave Bear", "Hound", "Bandit Guard", "Bandit Archer", "Living Spirit" ],
+        "special": [
+          {
+            "type": "allies",
+            "list": ["Hound", "Cave Bear"]
+          }]
       },
       "#92 Back Alley Brawl": {
         "monsters": [ "Bandit Guard", "City Guard", "Inox Guard", "Bandit Archer", "City Archer", "Savvas Lavaflow", "Flame Demon", "Earth Demon" ]

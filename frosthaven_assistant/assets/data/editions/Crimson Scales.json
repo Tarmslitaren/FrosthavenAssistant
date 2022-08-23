@@ -4623,6 +4623,10 @@
           "type": "LevelAdjust",
           "name": "City Guard",
           "level": -1
+        },
+        {
+          "type": "allies",
+          "list": ["City Guard", "City Archer"]
         }]
     },
     "#50 Oak Invasion B": {
@@ -4637,7 +4641,12 @@
           "type": "LevelAdjust",
           "name": "Inox Archer",
           "level": -1
-        }]
+        },
+        {
+          "type": "allies",
+          "list": ["Inox Guard", "Inox Archer"]
+        }
+        ]
     },
     "#51 Rodent Warehouse": {
       "monsters": [ "Flame Demon", "Sun Demon", "Vermling Scout", "Vermling Shaman" ]
