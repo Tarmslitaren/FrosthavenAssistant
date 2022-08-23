@@ -91,8 +91,10 @@ class AnimatedContainerButtonState extends State<ElementButton> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
+    return InkWell(
+      //behavior: HitTestBehavior.opaque,
+
+
         onDoubleTap: () {
           setState(() {
             _gameState.elementState.value
@@ -101,7 +103,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
            // setHalf();
           });
         },
-        onTap: () {
+        onTapDown: (TapDownDetails details) {
           setState(() {
             if (_gameState.elementState.value[widget.element] !=
                 ElementState.inert) {
@@ -166,9 +168,9 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                                   )
                           ]),
                       // Define how long the animation should take.
-                      duration: const Duration(milliseconds: 1200),
+                      duration: const Duration(milliseconds: 600),
                       // Provide an optional curve to make the animation feel smoother.
-                      curve: Curves.linearToEaseOut
+                      curve: Curves.decelerate//Curves.linearToEaseOut
                     );
                   }),
             )),

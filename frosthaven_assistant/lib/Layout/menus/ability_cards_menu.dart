@@ -135,7 +135,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
               .transparent, //needed to make background transparent if reorder is enabled
           //other styles
         ),
-        child: Container(
+        child: SizedBox(
           width: 184 * 0.8 * scale,
           child: reorderable
               ? ReorderableColumn(

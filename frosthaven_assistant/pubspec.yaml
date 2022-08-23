@@ -74,6 +74,8 @@ dependencies:
 
   flutter_keyboard_visibility: ^5.3.0 #only way to check for keyboard closed event.
 
+  #inkwell_splash: ^0.1.0 #because 300ms delay on single tap on default inkwell - but not nll safe..
+
 
 dev_dependencies:
   flutter_test:
