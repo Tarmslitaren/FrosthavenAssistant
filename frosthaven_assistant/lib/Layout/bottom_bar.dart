@@ -1,3 +1,4 @@
+import 'package:drop_shadow_image/drop_shadow_image.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/draw_button.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
@@ -69,10 +70,25 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child: Image(
+                      child:
+                      Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.6),
+                              spreadRadius: 5,
+                              blurRadius: 5.0 * settings.userScalingBars.value,
+                              //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child:
+
+                      Image(
                         height: fontHeight * 0.6,
                         image: AssetImage("assets/images/psd/level.png"),
-                      )),
+                      ))),
                   TextSpan(
                     text: ": ${gameState.level.value} ",
                     style: textStyle,
@@ -80,11 +96,23 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child: Image(
+                      child:Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.6),
+                                spreadRadius: 5,
+                                blurRadius: 5.0 * settings.userScalingBars.value,
+                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Image(
                         height: fontHeight,
                         image:
                             const AssetImage("assets/images/psd/traps-fh.png"),
-                      )),
+                      ))),
                   TextSpan(
                     text: ": ${GameMethods.getTrapValue()} ",
                     style: textStyle,
@@ -92,11 +120,23 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child: Image(
+                      child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.6),
+                                spreadRadius: 5,
+                                blurRadius: 5.0 * settings.userScalingBars.value,
+                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child:Image(
                         height: fontHeight,
                         image:
                             const AssetImage("assets/images/psd/hazard-fh.png"),
-                      )),
+                      ))),
                   TextSpan(
                     text: ": ${GameMethods.getHazardValue()} ",
                     style: textStyle,
@@ -104,10 +144,22 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child: Image(
+                      child:Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.6),
+                                spreadRadius: 5,
+                                blurRadius: 5.0 * settings.userScalingBars.value,
+                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Image(
                         height: fontHeight * 0.9,
                         image: const AssetImage("assets/images/psd/xp.png"),
-                      )),
+                      ))),
                   TextSpan(
                     text: ": +${GameMethods.getXPValue()} ",
                     style: textStyle,
@@ -115,11 +167,23 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child: Image(
+                      child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.6),
+                                spreadRadius: 5,
+                                blurRadius: 5.0 * settings.userScalingBars.value,
+                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child:Image(
                         height: fontHeight,
                         image:
                             const AssetImage("assets/images/psd/coins-fh.png"),
-                      )),
+                      ))),
                   TextSpan(
                     text: ": x${GameMethods.getCoinValue()}",
                     style: textStyle,

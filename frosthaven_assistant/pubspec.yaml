@@ -62,6 +62,9 @@ dependencies:
   # objectbox_sync_flutter_libs: any
   #state_persistence: ^0.1.0 - no web support
   #path_provider: ^2.0.11 # no web support
+  #inkwell_splash: ^0.1.0 #because 300ms delay on single tap on default inkwell - but not nll safe..
+  #drop_shadow_image: ^0.9.1 # need some dark. maybe this is good? Nope a piece of shit
+
   shared_preferences: ^2.0.15
 
   wakelock: ^0.6.1+2 #keep awake on android
@@ -74,7 +77,6 @@ dependencies:
 
   flutter_keyboard_visibility: ^5.3.0 #only way to check for keyboard closed event.
 
-  #inkwell_splash: ^0.1.0 #because 300ms delay on single tap on default inkwell - but not nll safe..
 
 
 dev_dependencies:
