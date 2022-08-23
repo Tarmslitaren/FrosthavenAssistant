@@ -167,7 +167,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
           );
         },
         child: ValueListenableBuilder<dynamic>(
-            valueListenable: getIt<GameState>().modelData,
+            valueListenable: getIt<GameState>().updateList,
             //TODO: is this even needed?
             builder: (context, value, child) {
               return ColorFiltered(

@@ -23,6 +23,9 @@ class MonsterBox extends StatefulWidget {
   static const double conditionSize = 14;
 
   static double getWidth(double scale, MonsterInstance data) {
+    if (data.health.value == 0) {
+      return 0;
+    }
     double width = 47; //some margin there
     width += conditionSize * data.conditions.value.length / 2;
     if (data.conditions.value.length % 2 != 0) {

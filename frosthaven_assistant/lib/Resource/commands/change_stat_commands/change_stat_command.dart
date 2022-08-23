@@ -51,6 +51,11 @@ abstract class ChangeStatCommand extends Command {
           }
         }
       } else if (item is Character) {
+        //handle character death
+        if(item.characterState.health.value <= 0) {
+          getIt<GameState>().updateList.value++;
+        }
+
         //handle summon death
         for (var instance in item.characterState.summonList.value) {
           if(instance.health.value == 0) {
