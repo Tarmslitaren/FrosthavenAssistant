@@ -8,11 +8,10 @@ import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
-import 'menus/main_menu.dart';
 import 'modifier_deck_widget.dart';
 
 Widget createLevelWidget(BuildContext context) {
-  GameState _gameState = getIt<GameState>();
+  GameState gameState = getIt<GameState>();
   Settings settings = getIt<Settings>();
 
   double fontHeight = 14 * settings.userScalingBars.value;
@@ -50,19 +49,19 @@ Widget createLevelWidget(BuildContext context) {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ValueListenableBuilder<String>(
-            valueListenable: _gameState.scenario,
+            valueListenable: gameState.scenario,
             builder: (context, value, child) {
               return Container(
                   width: 174 * settings.userScalingBars.value,
                   child: Text(
                     overflow: TextOverflow.ellipsis,
-                    _gameState.scenario.value,
+                    gameState.scenario.value,
                     textAlign: TextAlign.center,
                     style: textStyle,
                   ));
             }),
         ValueListenableBuilder<int>(
-            valueListenable: _gameState.level,
+            valueListenable: gameState.level,
             builder: (context, value, child) {
               return Text.rich(
                 //textAlign: textAlign,
@@ -75,7 +74,7 @@ Widget createLevelWidget(BuildContext context) {
                         image: AssetImage("assets/images/psd/level.png"),
                       )),
                   TextSpan(
-                    text: ": ${_gameState.level.value} ",
+                    text: ": ${gameState.level.value} ",
                     style: textStyle,
                   ),
                   WidgetSpan(
@@ -129,7 +128,7 @@ Widget createLevelWidget(BuildContext context) {
               );
 
               Text(
-                "level: ${_gameState.level.value} trap: ${GameMethods.getTrapValue()} hazard: ${GameMethods.getHazardValue()} xp: +${GameMethods.getXPValue()} coin: x${GameMethods.getCoinValue()}",
+                "level: ${gameState.level.value} trap: ${GameMethods.getTrapValue()} hazard: ${GameMethods.getHazardValue()} xp: +${GameMethods.getXPValue()} coin: x${GameMethods.getCoinValue()}",
                 style: textStyle,
               );
             })
@@ -143,7 +142,7 @@ Widget createBottomBar(BuildContext context) {
   return ValueListenableBuilder<double>(
       valueListenable: settings.userScalingBars,
       builder: (context, value, child) {
-        return Container(
+        return SizedBox(
             height: 40 * settings.userScalingBars.value,
             child: Stack(children: [
               Positioned(
@@ -173,7 +172,7 @@ Widget createBottomBar(BuildContext context) {
                               const DrawButton(),
                               createLevelWidget(context),
                               modifiersFitOnBar(context)
-                                  ? const ModifierDeckWidget()
+                                  ? const ModifierDeckWidget(name: '',)
                                   : Container()
                             ],
                           ));

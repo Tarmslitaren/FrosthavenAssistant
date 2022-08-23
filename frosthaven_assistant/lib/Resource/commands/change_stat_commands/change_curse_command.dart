@@ -1,6 +1,7 @@
 
 import '../../../services/service_locator.dart';
 import '../../game_state.dart';
+import '../../modifier_deck_state.dart';
 import 'change_stat_command.dart';
 
 class ChangeCurseCommand extends ChangeStatCommand {
@@ -9,10 +10,19 @@ class ChangeCurseCommand extends ChangeStatCommand {
   @override
   void execute() {
 
+    ModifierDeck deck = getIt<GameState>().modifierDeck;
     //Figure figure = getFigure(ownerId, figureId)!;
+    for (var item in getIt<GameState>().currentList) {
+      if (item.id == ownerId) {
+        if(item is Monster && item.isAlly) {
+          deck = getIt<GameState>().modifierDeckAllies;
+        }
+      }
+    }
+
 
     //figure.chill.value += change;
-    getIt<GameState>().modifierDeck.curses.value += change;
+    deck.curses.value += change;
 
   }
 

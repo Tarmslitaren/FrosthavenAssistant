@@ -24,9 +24,9 @@ class ModifierCard {
 }
 
 class ModifierDeck {
-  ModifierDeck() {
+  ModifierDeck(this.name) {
     //build deck
-    initDeck();
+    initDeck(name);
     curses.addListener(() {
       _handleCurseBless(CardType.curse, curses, "curse");
     });
@@ -37,18 +37,22 @@ class ModifierDeck {
 
   }
 
-  void initDeck() {
+  void initDeck(String name) {
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
     List<ModifierCard> cards = [];
-    cards.add(ModifierCard(CardType.add, "minus2"));
-    cards.add(ModifierCard(CardType.add, "plus2"));
-    cards.add(ModifierCard(CardType.multiply, "doubleAttack"));
-    cards.add(ModifierCard(CardType.multiply, "nullAttack"));
+    cards.add(ModifierCard(CardType.add, "minus2$suffix"));
+    cards.add(ModifierCard(CardType.add, "plus2$suffix"));
+    cards.add(ModifierCard(CardType.multiply, "doubleAttack$suffix"));
+    cards.add(ModifierCard(CardType.multiply, "nullAttack$suffix"));
     for (int i = 0; i < 5; i++) {
-      cards.add(ModifierCard(CardType.add, "minus1"));
-      cards.add(ModifierCard(CardType.add, "plus1"));
+      cards.add(ModifierCard(CardType.add, "minus1$suffix"));
+      cards.add(ModifierCard(CardType.add, "plus1$suffix"));
     }
     for (int i = 0; i < 6; i++) {
-      cards.add(ModifierCard(CardType.add, "plus0"));
+      cards.add(ModifierCard(CardType.add, "plus0$suffix"));
     }
     drawPile.setList(cards);
     discardPile.setList([]);
@@ -59,8 +63,10 @@ class ModifierDeck {
     badOmen.value = 0;
     addedMinusOnes.value = 0;
     needsShuffle = false;
+    name = name;
   }
 
+  final String name;
   bool needsShuffle = false;
   final CardStack<ModifierCard> drawPile = CardStack<ModifierCard>();
   final CardStack<ModifierCard> discardPile = CardStack<ModifierCard>();

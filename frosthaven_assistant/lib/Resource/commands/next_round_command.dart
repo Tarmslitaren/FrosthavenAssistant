@@ -16,7 +16,7 @@ class NextRoundCommand extends Command {
         item.nextRound();
       }
       if (item is Monster) {
-        item.nextRound();
+        //item.nextRound();
       }
     }
     GameMethods.shuffleDecksIfNeeded();

@@ -17,6 +17,7 @@ import '../../Resource/commands/remove_condition_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
+import '../../Resource/modifier_deck_state.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
@@ -290,6 +291,19 @@ class _StatusMenuState extends State<StatusMenu> {
           ValueListenableBuilder<int>(
               valueListenable: _gameState.commandIndex,
               builder: (context, value, child) {
+
+                ModifierDeck deck = _gameState.modifierDeck;
+                if (widget.monsterId != null) {
+                  for (var item in _gameState.currentList) {
+                    if (item.id == widget.monsterId) {
+                      if (item is Monster && item.isAlly) {
+                        deck = _gameState.modifierDeckAllies;
+                      }
+                    }
+                  }
+
+                }
+
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -317,11 +331,11 @@ class _StatusMenuState extends State<StatusMenu> {
                     )
                         : Container(),
                     widget.monsterId!= null ?
-                    CounterButton(_gameState.modifierDeck.blesses, ChangeBlessCommand(0, figureId, ownerId),
+                    CounterButton(deck.blesses, ChangeBlessCommand(0, figureId, ownerId),
                         10, "assets/images/abilities/bless.png", true, Colors.white, figureId: figureId, ownerId: ownerId)
                         : Container(),
                     widget.monsterId!= null ?
-                    CounterButton(_gameState.modifierDeck.curses, ChangeCurseCommand(0, figureId, ownerId),
+                    CounterButton(deck.curses, ChangeCurseCommand(0, figureId, ownerId),
                         10, "assets/images/abilities/curse.png", true, Colors.white, figureId: figureId, ownerId: ownerId)
                         : Container(),
                     Row(

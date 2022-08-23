@@ -7,10 +7,13 @@ import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
+import '../Resource/modifier_deck_state.dart';
 import '../Resource/settings.dart';
 
 class ModifierDeckWidget extends StatefulWidget {
-  const ModifierDeckWidget({Key? key}) : super(key: key);
+  const ModifierDeckWidget({Key? key, required this.name}) : super(key: key);
+
+  final String name;
 
   @override
   ModifierDeckWidgetState createState() => ModifierDeckWidgetState();
@@ -136,6 +139,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   @override
   Widget build(BuildContext context) {
+    ModifierDeck deck = _gameState.modifierDeck;
+    if(widget.name == "Allies") {
+      deck = _gameState.modifierDeckAllies;
+    }
+
     bool isAnimating =
         false; //is not doing anything now. in case flip animation is added
     return ValueListenableBuilder<double>(
@@ -153,13 +161,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                           onTap: () {
                             setState(() {
                               animationsEnabled = true;
-                              _gameState.action(DrawModifierCardCommand());
+                              _gameState.action(DrawModifierCardCommand(widget.name));
                             });
                           },
                           child: Stack(children: [
-                            _gameState.modifierDeck.drawPile.isNotEmpty
+                            deck.drawPile.isNotEmpty
                                 ? ModifierCardWidget(
-                                    card: _gameState.modifierDeck.drawPile.peek,
+                                    card: deck.drawPile.peek,
+                                    name: deck.name,
                                     revealed: isAnimating)
                                 : Container(
                                     width: 58.6666 *
@@ -171,7 +180,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 bottom: 0,
                                 right: 2 * settings.userScalingBars.value,
                                 child: Text(
-                                  _gameState.modifierDeck.cardCount.value
+                                  deck.cardCount.value
                                       .toString(),
                                   style: TextStyle(
                                       fontSize:
@@ -196,20 +205,19 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                       InkWell(
                         //behavior: HitTestBehavior.opaque, //makes tappable when no graphics
                           onTap: () {
-                            openDialog(context, const ModifierCardMenu());
+                            openDialog(context, ModifierCardMenu(name: deck.name));
                           },
                           child: Stack(children: [
 
-                            _gameState.modifierDeck.discardPile.size() > 2
+                            deck.discardPile.size() > 2
                             ? buildStayAnimation(
                                 RotationTransition(
                                     turns: const AlwaysStoppedAnimation(
                                         15 / 360),
                                     child: ModifierCardWidget(
-                                      card: _gameState
-                                          .modifierDeck.discardPile
-                                          .getList()[_gameState
-                                              .modifierDeck.discardPile
+                                      name: deck.name,
+                                      card: deck.discardPile
+                                          .getList()[deck.discardPile
                                               .getList()
                                               .length -
                                           3],
@@ -217,37 +225,35 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                     )),
                               )
                             : Container(),
-                            _gameState.modifierDeck.discardPile.size() > 1
+                            deck.discardPile.size() > 1
                             ? buildSlideAnimation(
                                 RotationTransition(
                                     turns: const AlwaysStoppedAnimation(
                                         15 / 360),
                                     child: ModifierCardWidget(
-                                      card: _gameState
-                                          .modifierDeck.discardPile
-                                          .getList()[_gameState
-                                              .modifierDeck.discardPile
+                                      name: deck.name,
+                                      card: deck.discardPile
+                                          .getList()[deck.discardPile
                                               .getList()
                                               .length -
                                           2],
                                       revealed: true,
                                     )),
-                                Key(_gameState.modifierDeck.discardPile
+                                Key(deck.discardPile
                                     .size()
                                     .toString()))
                             : Container(),
-                            _gameState.modifierDeck.discardPile.isNotEmpty
+                            deck.discardPile.isNotEmpty
                             ? buildDrawAnimation(
                                 ModifierCardWidget(
-                                  key: Key(_gameState
-                                      .modifierDeck.discardPile
+                                  name: deck.name,
+                                  key: Key(deck.discardPile
                                       .size()
                                       .toString()),
-                                  card: _gameState
-                                      .modifierDeck.discardPile.peek,
+                                  card: deck.discardPile.peek,
                                   revealed: true,
                                 ),
-                                Key((-_gameState.modifierDeck.discardPile
+                                Key((-deck.discardPile
                                         .size())
                                     .toString()))
                             : SizedBox(

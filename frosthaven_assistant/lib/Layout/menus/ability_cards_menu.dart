@@ -273,7 +273,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                             ),
                             onPressed: () {
                               Navigator.pop(context);
-                            }))
+                            })),
                   ])));
         });
   }

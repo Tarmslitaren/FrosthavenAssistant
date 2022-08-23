@@ -53,7 +53,8 @@ class SetScenarioCommand extends Command {
         }
       }
       GameMethods.shuffleDecks();
-      _gameState.modifierDeck.initDeck();
+      _gameState.modifierDeck.initDeck("");
+      _gameState.modifierDeckAllies.initDeck("Allies");
       _gameState.currentList = newList;
     }
 
@@ -78,15 +79,16 @@ class SetScenarioCommand extends Command {
     //handle special rules
     for (String monster in monsters) {
       int levelAdjust = 0;
-      String? healthAdjust;
+      Set<String> alliedMonsters = {};
       for (var rule in specialRules) {
         if(rule.name == monster) {
           if(rule.type == "LevelAdjust") {
             levelAdjust = rule.level;
           }
-          //TODO: f this - if I ever decide this is good: I would instead have the monster state have an extraHpSpecial field and also name field for named monsters?
-          if(rule.type == "HealthAdjust") {
-            //healthAdjust = rule.health;
+        }
+        if(rule.type == "allies"){
+          for (String item in rule.list){
+            alliedMonsters.add(item);
           }
         }
       }
@@ -95,13 +97,18 @@ class SetScenarioCommand extends Command {
       for (var item in _gameState.currentList) {
         //don't add duplicates
         if(item.id == monster) {
+          //TODO: does not handle problems with allies?
           add = false;
           break;
         }
       }
       if(add) {
+        bool isAlly = false;
+        if(alliedMonsters.contains(monster)){
+          isAlly = true;
+        }
         _gameState.currentList.add(GameMethods.createMonster(
-            monster, min(_gameState.level.value + levelAdjust, 7))!);
+            monster, min(_gameState.level.value + levelAdjust, 7), isAlly)!);
       }
     }
 

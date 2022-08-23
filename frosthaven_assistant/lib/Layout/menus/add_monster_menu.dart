@@ -10,14 +10,15 @@ class AddMonsterMenu extends StatefulWidget {
   const AddMonsterMenu({Key? key}) : super(key: key);
 
   @override
-  _AddMonsterMenuState createState() => _AddMonsterMenuState();
+  AddMonsterMenuState createState() => AddMonsterMenuState();
 }
 
-class _AddMonsterMenuState extends State<AddMonsterMenu> {
+class AddMonsterMenuState extends State<AddMonsterMenu> {
   // This list holds the data for the list view
   List<MonsterModel> _foundMonsters = [];
   final List<MonsterModel> _allMonsters = [];
   final GameState _gameState = getIt<GameState>();
+  bool addAsAlly = false;
 
   @override
   initState() {
@@ -29,7 +30,7 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
     _foundMonsters.sort((a, b) {
       if (a.edition != b.edition) {
         return -a.edition.compareTo(b.edition);
-        //NOTE: this - here is a bit silly. it just so happens that the order makes more sense backards: Jotl, gloom, FC, FH, CS
+        //NOTE: this - here is a bit silly. it just so happens that the order makes more sense backwards: Jotl, gloom, FC, FH, CS
       }
       if (a.hidden && !b.hidden) {
         return 1;
@@ -92,6 +93,14 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
                   const SizedBox(
                     height: 20,
                   ),
+                  CheckboxListTile(
+                      title: const Text("Add as Ally"),
+                      value: addAsAlly,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          addAsAlly = value!;
+                        });
+                      }),
                   Container(
                     margin: const EdgeInsets.only(left: 10, right: 10),
                     child: TextField(
@@ -130,12 +139,11 @@ class _AddMonsterMenuState extends State<AddMonsterMenu> {
                                   style: const TextStyle(
                                       fontSize: 14, color: Colors.grey)),
                               onTap: () {
-                                //TODO: add level selection menu  (0-7) on top in this here menu.
                                 if (!_monsterAlreadyAdded(
                                     _foundMonsters[index].name)) {
                                   setState(() {
                                     _gameState.action(AddMonsterCommand(
-                                        _foundMonsters[index].name, null)); //
+                                        _foundMonsters[index].name, null, addAsAlly)); //
                                   });
 
                                   //Navigator.pop(context);

@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import 'package:reorderables/reorderables.dart';
 import '../Resource/commands/reorder_list_command.dart';
+import '../Resource/game_methods.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
@@ -361,6 +362,10 @@ class _MainListState extends State<MainList> {
             ignoreScroll = true;
           }
 
+          double padding = 60 * getIt<Settings>().userScalingBars.value;
+          if(GameMethods.hasAllies()){
+            padding *=2;
+          }
           return Container(
               alignment: Alignment.topCenter,
               width: MediaQuery.of(context).size.width,
@@ -368,8 +373,7 @@ class _MainListState extends State<MainList> {
                 interactive: !ignoreScroll,
                 controller: scrollController,
                 child: ReorderableWrap(
-                  //Todo: double this when adding allies deck
-                  padding: EdgeInsets.only(bottom: 60 * getIt<Settings>().userScalingBars.value),
+                  padding: EdgeInsets.only(bottom: padding),
 
                   runAlignment: WrapAlignment.start,
                   scrollAnimationDuration: const Duration(milliseconds: 400),

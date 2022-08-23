@@ -8,7 +8,6 @@ import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
-import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Model/campaign.dart';
 import '../Model/character_class.dart';
 import 'action_handler.dart';
-import 'card_stack.dart';
 import 'enums.dart';
 import 'modifier_deck_state.dart';
 import 'monster_ability_state.dart';
@@ -227,8 +225,9 @@ class MonsterInstance extends Figure{
 }
 
 class Monster extends ListItemData{
-  Monster(String name, int level){
+  Monster(String name, int level,{required bool isAlly}): isAlly = isAlly{
     id = name;
+    this.isAlly = isAlly;
     this.level.value = level;
     GameState gameState = getIt<GameState>();
     Map<String, MonsterModel> monsters = {};
@@ -247,8 +246,8 @@ class Monster extends ListItemData{
   }
   late final MonsterModel type;
   final monsterInstances = ValueNotifier<List<MonsterInstance>>([]);
-  //late final ListItemState state = ListItemState.chooseInitiative;
   final level = ValueNotifier<int>(0);
+  bool isAlly;
 
   bool hasElites() {
     for (var instance in monsterInstances.value) {
@@ -269,9 +268,6 @@ class Monster extends ListItemData{
     return false;
   }
 
-  void nextRound(){
-  }
-
   void setLevel(int level) {
     this.level.value = level;
     for(var item in monsterInstances.value) {
@@ -286,13 +282,17 @@ class Monster extends ListItemData{
         '"type": "${type.name}", '
         '"monsterInstances": ${monsterInstances.value.toString()}, '
         //'"state": ${state.index}, '
+        '"isAlly": $isAlly, '
         '"level": ${level.value} '
         '}';
   }
 
-  Monster.fromJson(Map<String, dynamic> json) {
+  Monster.fromJson(Map<String, dynamic> json):isAlly = false {
     id = json['id'];
     level.value = json['level'];
+    if (json.containsKey("isAlly")) {
+      isAlly = json['isAlly'];
+    }
     String modelName = json['type'];
     //state = ListItemState.values[json["state"]];
 
@@ -328,6 +328,65 @@ class GameSaveState{
   void save() {
     _savedState = getIt<GameState>().toString();
   }
+
+  void loadModifierDeck(String identifier, var data){
+    //modifier deck
+    var modifierDeckData = data[identifier];
+    ModifierDeck state = ModifierDeck("");
+    List<ModifierCard> newDrawList = [];
+    List drawPile = modifierDeckData["drawPile"] as List;
+    for (var item in drawPile) {
+      String gfx = item["gfx"];
+      if (gfx == "curse") {
+        state.curses.value++;
+        newDrawList.add(ModifierCard(CardType.curse, gfx));
+      }
+      else if (gfx == "bless") {
+        state.blesses.value++;
+        newDrawList.add(ModifierCard(CardType.curse, gfx));
+      }
+      else if (gfx == "nullAttack" || gfx == "doubleAttack") {
+        newDrawList.add(ModifierCard(CardType.multiply, gfx));
+      } else {
+        newDrawList.add(ModifierCard(CardType.add, gfx));
+      }
+    }
+    List<ModifierCard> newDiscardList = [];
+    for (var item in modifierDeckData["discardPile"] as List) {
+      String gfx = item["gfx"];
+      if (gfx == "curse") {
+        newDiscardList.add(ModifierCard(CardType.curse, gfx));
+      }
+      else if (gfx == "bless") {
+        newDiscardList.add(ModifierCard(CardType.curse, gfx));
+      }
+      else if (gfx == "nullAttack" || gfx == "doubleAttack") {
+        newDiscardList.add(ModifierCard(CardType.multiply, gfx));
+        state.needsShuffle = true;
+      } else {
+        newDiscardList.add(ModifierCard(CardType.add, gfx));
+      }
+    }
+    state.drawPile.getList().clear();
+    state.discardPile.getList().clear();
+    state.drawPile.setList(newDrawList);
+    state.discardPile.setList(newDiscardList);
+    state.cardCount.value = state.drawPile.size();
+
+    //TODO: do we need to handle these for allies? probably not
+    if(identifier == 'modifierDeck') {
+      if (data.containsKey('badOmen')) {
+        state.badOmen.value = modifierDeckData["badOmen"] as int;
+      }
+      if (data.containsKey('addedMinusOnes')) {
+        state.addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
+      }
+      getIt<GameState>().modifierDeck = state;
+    } else {
+      getIt<GameState>().modifierDeckAllies = state;
+    }
+  }
+
   Future<void> load() async {
     if (_savedState != null) {
       GameState gameState = getIt<GameState>();
@@ -390,59 +449,8 @@ class GameSaveState{
         gameState.currentAbilityDecks.add(state);
       }
 
-      //modifier deck
-      var modifierDeckData = data['modifierDeck'];
-      ModifierDeck state = ModifierDeck();
-      List<ModifierCard> newDrawList = [];
-      List drawPile = modifierDeckData["drawPile"] as List;
-      for (var item in drawPile) {
-        String gfx = item["gfx"];
-        if (gfx == "curse") {
-          state.curses.value++;
-          newDrawList.add(ModifierCard(CardType.curse, gfx));
-        }
-        else if (gfx == "bless") {
-          state.blesses.value++;
-          newDrawList.add(ModifierCard(CardType.curse, gfx));
-        }
-        else if (gfx == "nullAttack" || gfx == "doubleAttack") {
-          newDrawList.add(ModifierCard(CardType.multiply, gfx));
-        } else {
-          newDrawList.add(ModifierCard(CardType.add, gfx));
-        }
-      }
-      List<ModifierCard> newDiscardList = [];
-      for (var item in modifierDeckData["discardPile"] as List) {
-        String gfx = item["gfx"];
-        if (gfx == "curse") {
-          newDiscardList.add(ModifierCard(CardType.curse, gfx));
-        }
-        else if (gfx == "bless") {
-          newDiscardList.add(ModifierCard(CardType.curse, gfx));
-        }
-        else if (gfx == "nullAttack" || gfx == "doubleAttack") {
-          newDiscardList.add(ModifierCard(CardType.multiply, gfx));
-          state.needsShuffle = true;
-        } else {
-          newDiscardList.add(ModifierCard(CardType.add, gfx));
-        }
-      }
-      state.drawPile.getList().clear();
-      state.discardPile.getList().clear();
-      state.drawPile.setList(newDrawList);
-      state.discardPile.setList(newDiscardList);
-      state.cardCount.value = state.drawPile.size();
-
-      if(data.containsKey('badOmen')) {
-        state.badOmen.value = modifierDeckData["badOmen"] as int;
-      }
-      if(data.containsKey('addedMinusOnes')) {
-        state.addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
-      }
-
-
-
-      gameState.modifierDeck = state;
+      loadModifierDeck('modifierDeck', data);
+      loadModifierDeck('modifierDeckAllies', data);
 
       //////elements
       Map elementData = data['elementState'];
@@ -588,7 +596,8 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   final elementState = ValueNotifier< Map<Elements, ElementState> >(HashMap());
 
   //modifierDeck
-  ModifierDeck modifierDeck = ModifierDeck();
+  ModifierDeck modifierDeck = ModifierDeck("");
+  ModifierDeck modifierDeckAllies = ModifierDeck("Allies");
 
   @override
   String toString() {
@@ -607,6 +616,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
         '"currentList": ${currentList.toString()}, '
         '"currentAbilityDecks": ${currentAbilityDecks.toString()}, '
         '"modifierDeck": ${modifierDeck.toString()}, '
+        '"modifierDeckAllies": ${modifierDeckAllies.toString()}, '
         '"elementState": ${json.encode(elements)} ' //didn't like the map?
         '}';
   }

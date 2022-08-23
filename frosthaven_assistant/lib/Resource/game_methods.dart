@@ -418,13 +418,24 @@ class GameMethods {
     return character;
   }
 
-  static Monster? createMonster(String name, int? level) {
+  static Monster? createMonster(String name, int? level, bool isAlly) {
     Map<String, MonsterModel> monsters = {};
     for (String key in _gameState.modelData.value.keys) {
       monsters.addAll(_gameState.modelData.value[key]!.monsters);
     }
     level ??= getIt<GameState>().level.value;
-    Monster monster = Monster(name, level);
+    Monster monster = Monster(name, level, isAlly: isAlly);
     return monster;
+  }
+
+  static bool hasAllies(){
+    for (var item in _gameState.currentList) {
+      if (item is Monster) {
+        if (item.isAlly) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

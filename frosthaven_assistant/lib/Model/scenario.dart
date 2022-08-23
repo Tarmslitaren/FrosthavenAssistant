@@ -5,7 +5,8 @@ class SpecialRule {
   final int level;
   final int init;
   final String note;
-  SpecialRule(this.type, this.name, this.health, this.level, this.init, this.note);
+  final List<dynamic> list;
+  SpecialRule(this.type, this.name, this.health, this.level, this.init, this.note, this.list);
 
   factory SpecialRule.fromJson(Map<String, dynamic> data) {
     final String type = data['type']; //required
@@ -29,7 +30,11 @@ class SpecialRule {
     if(data.containsKey('note')) {
       note = data['note'];
     }
-    return SpecialRule(type,name,health, level, init, note);
+    List<dynamic> aList = [];
+    if(data.containsKey('list')) {
+      aList = data['list'];
+    }
+    return SpecialRule(type,name,health, level, init, note, aList);
   }
 }
 

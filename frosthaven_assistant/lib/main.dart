@@ -1,30 +1,17 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/Layout/theme.dart';
-import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-//import 'package:scaled_app/scaled_app.dart';
 import 'package:wakelock/wakelock.dart';
-import 'package:window_manager/window_manager.dart';
-
-import 'Layout/menus/main_menu.dart';
 
 void main() {
   setupGetIt();
 
-  /*ScaledWidgetsFlutterBinding.ensureInitialized(
-    baseWidth: 490,
-    applyScaling: (deviceWidth) => deviceWidth > 100 && deviceWidth < 740,
-  );*/
-  //runAppScaled(const MyApp());
-
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -54,11 +41,6 @@ class MyApp extends StatelessWidget {
         home: const MyHomePage(title: 'X-haven Assistant'),
       );
 
-    /*return MaterialApp(
-      title: 'Frosthaven Assistant',
-      theme: theme,
-      home: const MyHomePage(title: 'Frosthaven Assistant'),
-    );*/
   }
 
 

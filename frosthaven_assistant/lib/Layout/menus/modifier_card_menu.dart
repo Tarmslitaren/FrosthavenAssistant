@@ -15,8 +15,9 @@ import '../../services/service_locator.dart';
 class Item extends StatelessWidget {
   final ModifierCard data;
   final bool revealed;
+  final String name;
 
-  const Item({Key? key, required this.data, required this.revealed})
+  const Item({Key? key, required this.data, required this.revealed, required this.name})
       : super(key: key);
 
   @override
@@ -26,14 +27,23 @@ class Item extends StatelessWidget {
 
     child = revealed
         ? ModifierCardWidget.buildFront(data, scale)
-        : ModifierCardWidget.buildRear(scale);
+        : ModifierCardWidget.buildRear(scale,name);
 
     return Container(margin: EdgeInsets.all(2 * scale), child: child);
   }
 }
 
 class ModifierCardMenu extends StatefulWidget {
-  const ModifierCardMenu({Key? key}) : super(key: key);
+  ModifierCardMenu({Key? key, required this.name}) : super(key: key){
+    if (name == "Allies") {
+      deck = getIt<GameState>().modifierDeckAllies;
+    }else {
+      deck = getIt<GameState>().modifierDeck;
+    }
+  }
+
+  final String name;
+  late final ModifierDeck deck;
 
   @override
   ModifierCardMenuState createState() => ModifierCardMenuState();
@@ -52,7 +62,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     setState(() {
       _revealedList = [];
       var drawPile =
-          _gameState.modifierDeck.drawPile.getList().reversed.toList();
+          widget.deck.drawPile.getList().reversed.toList();
       for (int i = 0; i < revealed; i++) {
         _revealedList.add(drawPile[i]);
       }
@@ -83,13 +93,14 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         ));
   }
 
-  List<Widget> generateList(List<ModifierCard> inputList, bool allOpen) {
+  List<Widget> generateList(List<ModifierCard> inputList, bool allOpen, String name) {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
       var item = inputList[index];
       Item value = Item(
           key: Key(index.toString()),
           data: item,
+          name: name,
           revealed: isRevealed(item) || allOpen == true);
       if (!allOpen) {
         InkWell gestureDetector = InkWell(
@@ -119,7 +130,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
   }
 
   Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen,
-      bool hasDiviner) {
+      bool hasDiviner, String name) {
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
@@ -149,11 +160,11 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                           .action(ReorderModifierListCommand(dropIndex, index));
                     });
                   },
-                  children: generateList(list, allOpen),
+                  children: generateList(list, allOpen, name),
                 )
               : ListView(
                   controller: ScrollController(),
-                  children: generateList(list, allOpen).reversed.toList(),
+                  children: generateList(list, allOpen, name).reversed.toList(),
                 ),
         ));
   }
@@ -166,8 +177,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
           var drawPile =
-              _gameState.modifierDeck.drawPile.getList().reversed.toList();
-          var discardPile = _gameState.modifierDeck.discardPile.getList();
+              widget.deck.drawPile.getList().reversed.toList();
+          var discardPile = widget.deck.discardPile.getList();
           bool hasDiviner = false;
           for (var item in _gameState.currentList) {
             if (item is Character && item.characterClass.name == "Diviner") {
@@ -175,6 +186,10 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
             }
           }
           double scale = getScaleByReference(context);
+          String name = widget.name;
+          if (name.isEmpty) {
+            name = "Enemies";
+          }
           return Container(
               constraints: BoxConstraints(
                   maxWidth: 118 * scale * 2 + 8,
@@ -197,8 +212,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 if (hasDiviner)
                                   Row(
                                     children: [
-                                      if (_gameState
-                                              .modifierDeck.badOmen.value ==
+                                      if (widget.deck.badOmen.value ==
                                           0)
                                         TextButton(
                                           onPressed: () {
@@ -206,11 +220,10 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                           },
                                           child: Text("Bad Omen"),
                                         ),
-                                      if (_gameState
-                                              .modifierDeck.badOmen.value >
+                                      if (widget.deck.badOmen.value >
                                           0)
                                         Text(
-                                            "BadOmensLeft: ${_gameState.modifierDeck.badOmen.value}",
+                                            "BadOmensLeft: ${widget.deck.badOmen.value}",
                                             style: getTitleTextStyle()),
                                       TextButton(
                                         onPressed: () {
@@ -218,7 +231,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                               .action(EnfeeblingHexCommand());
                                         },
                                         child: Text(
-                                            "Enfeebling Hex (added minus ones: ${_gameState.modifierDeck.addedMinusOnes.value})"),
+                                            "Enfeebling Hex (added minus ones: ${widget.deck.addedMinusOnes.value})"),
                                       ),
                                     ],
                                   ),
@@ -271,8 +284,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildList(drawPile, true, false, hasDiviner),
-                          buildList(discardPile, false, true, hasDiviner)
+                          buildList(drawPile, true, false, hasDiviner, widget.name),
+                          buildList(discardPile, false, true, hasDiviner, widget.name)
                         ],
                       )),
                       Container(
@@ -297,7 +310,14 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                             ),
                             onPressed: () {
                               Navigator.pop(context);
-                            }))
+                            })),
+                    Positioned(
+                        bottom: 4,
+                        left: 20,
+                        child: Text(
+                          name,
+                          style: const TextStyle(fontSize: 20),
+                        ))
                   ])));
         });
   }

@@ -6,12 +6,17 @@ import '../action_handler.dart';
 import '../game_state.dart';
 class DrawModifierCardCommand extends Command {
   final GameState _gameState = getIt<GameState>();
+  final String name;
 
-  DrawModifierCardCommand();
+  DrawModifierCardCommand(this.name);
 
   @override
   void execute() {
-    _gameState.modifierDeck.draw();
+    if(name == "Allies"){
+      _gameState.modifierDeckAllies.draw();
+    }else {
+      _gameState.modifierDeck.draw();
+    }
   }
 
   @override
