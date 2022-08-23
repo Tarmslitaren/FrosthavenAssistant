@@ -37,7 +37,10 @@ void openDialog(BuildContext context, Widget widget) {
   //could potentially modify edge insets based on screen width.
   Widget innerWidget = Stack(children: [
     Positioned(
-      child: Dialog(backgroundColor: Colors.transparent, insetPadding: const EdgeInsets.all(20), child: widget),
+      child: Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: const EdgeInsets.all(18),
+          child: widget),
     )
   ]);
   showDialog(context: context, builder: (BuildContext context) => innerWidget);

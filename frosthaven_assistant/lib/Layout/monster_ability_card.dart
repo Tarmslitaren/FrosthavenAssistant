@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
@@ -7,14 +6,11 @@ import 'package:frosthaven_assistant/Resource/card_stack.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-
-import '../Model/monster.dart';
-import '../Resource/action_handler.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/ui_utils.dart';
 import 'line_builder.dart';
-import 'menus/main_menu.dart';
+import 'menus/ability_card_zoom.dart';
 
 
 class MonsterAbilityCardWidget extends StatefulWidget {
@@ -24,8 +20,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  _MonsterAbilityCardWidgetState createState() =>
-      _MonsterAbilityCardWidgetState();
+  MonsterAbilityCardWidgetState createState() =>
+      MonsterAbilityCardWidgetState();
 
   static List<Widget> buildGraphicPositionals(double scale, List<GraphicPositional> positionals) {
     List<Widget> list = [];
@@ -55,7 +51,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   static Widget buildFront(MonsterAbilityCardModel? card, Monster data, double scale, bool calculateAll) {
     String initText = card!.initiative.toString();
     if (initText.length == 1) {
-      initText = "0" + initText;
+      initText = "0$initText";
     }
 
     var shadow = [
@@ -81,9 +77,9 @@ class MonsterAbilityCardWidget extends StatefulWidget {
         width: 178 * 0.8 * scale,
         height: 118 * 0.8 * scale,
         child: Stack(
-          //fit: StackFit.passthrough,
+          //fit: StackFit.loose,
           alignment: AlignmentDirectional.center,
-          clipBehavior: Clip.none,
+          clipBehavior: Clip.none, //if text overflows it still visible
 
           children: [
             ClipRRect(
@@ -116,39 +112,33 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             Positioned(
                 left: 7.0 * 0.8 * scale,
                 top: 16.0 * 0.8 * scale,
-                child: Container(
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    initText,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20 * 0.8 * scale,
-                        shadows: shadow),
-                  ),
+                child: Text(
+                  textAlign: TextAlign.center,
+                  initText,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20 * 0.8 * scale,
+                      shadows: shadow),
                 )),
             Positioned(
                 left: 6.0 * 0.8 * scale,
                 bottom: 0.5 * 0.8 * scale,
-                child: Container(
-                  child: Text(
-                    card.nr.toString(),
-                    style: TextStyle(
-                        fontFamily: 'Majalla',
-                        color: Colors.white,
-                        fontSize: 8 * 0.8 * scale,
-                        shadows: shadow),
-                  ),
+                child: Text(
+                  card.nr.toString(),
+                  style: TextStyle(
+                      fontFamily: 'Majalla',
+                      color: Colors.white,
+                      fontSize: 8 * 0.8 * scale,
+                      shadows: shadow),
                 )),
             card.shuffle
                 ? Positioned(
                     right: 4.0 * 0.8 * scale,
                     bottom: 4.0 * 0.8 * scale,
-                    child: Container(
-                      child: Image(
-                        height: 123 * 0.8 * 0.13 * scale,
-                        image: const AssetImage(
-                            "assets/images/abilities/shuffle.png"),
-                      ),
+                    child: Image(
+                      height: 123 * 0.8 * 0.13 * scale,
+                      image: const AssetImage(
+                          "assets/images/abilities/shuffle.png"),
                     ))
                 : Container(),
 
@@ -161,7 +151,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             Positioned(
               top: 11 * scale,
               //alignment: Alignment.center,
-              child: Container(
+              child: SizedBox(
                 height: 110 * scale * 0.8 ,
                 width: 178 * scale * 0.8, //needed for line breaks in lines
                 //color: Colors.amber,
@@ -207,19 +197,17 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 ? Positioned(
                     right: 6.0 * 0.8 * scale,
                     bottom: 0,
-                    child: Container(
-                      child: Text(
-                        size.toString(),
-                        style: TextStyle(
-                            fontFamily: 'Majalla',
-                            color: Colors.white,
-                            fontSize: 16 * 0.8 * scale,
-                            shadows: const [
-                              Shadow(
-                                  offset: Offset(1 * 0.8, 1 * 0.8),
-                                  color: Colors.black)
-                            ]),
-                      ),
+                    child: Text(
+                      size.toString(),
+                      style: TextStyle(
+                          fontFamily: 'Majalla',
+                          color: Colors.white,
+                          fontSize: 16 * 0.8 * scale,
+                          shadows: const [
+                            Shadow(
+                                offset: Offset(1 * 0.8, 1 * 0.8),
+                                color: Colors.black)
+                          ]),
                     ))
                 : Container(),
           ],
@@ -227,7 +215,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   }
 }
 
-class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
+class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 // Define the various properties with default values. Update these properties
 // when the user taps a FloatingActionButton.
 //late MonsterData _data;
@@ -296,7 +284,18 @@ class _MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
               setState(() {});
             },
               onDoubleTap: (){
-              //TODO: zoom in (show larger)
+              if(_gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty && card != null) {
+                setState(() {
+                  openDialog(
+                      context,
+                      //problem: context is of stat card widget, not the + button
+                      AbilityCardZoom(card: card!,
+                          monster: widget.data,
+                          calculateAll: false)
+                  );
+                });
+              }
+
               },
             child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 600),

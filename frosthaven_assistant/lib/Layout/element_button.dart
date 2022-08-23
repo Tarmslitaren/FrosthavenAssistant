@@ -80,7 +80,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
     _color = widget.color;
     _height = widget.width * settings.userScalingBars.value;
     _borderRadius = BorderRadius.all(
-        Radius.circular(widget.width  * settings.userScalingBars.value - widget.borderWidth * settings.userScalingBars.value * 2));
+        Radius.circular(widget.width  * settings.userScalingBars.value - widget.borderWidth * settings.userScalingBars.value));
   }
 
   void setInert(){

@@ -436,16 +436,17 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                     .value
                                                     .length <
                                                 widget.data.type.count - 1) {
-                                              openDialogAtPosition(
+                                              openDialog(
                                                   context,
                                                   //problem: context is of stat card widget, not the + button
                                                   AddStandeeMenu(
                                                     elite: false,
                                                     monster: widget.data,
                                                   ),
-                                                  -185,
+                                                  //-185,
                                                   //does not take into account the popup does not scale. (should it?)
-                                                  -120);
+                                                  //-120
+                                              );
                                             }
                                           },
                                         );
@@ -492,14 +493,15 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                   .value
                                                   .length <
                                               widget.data.type.count - 1) {
-                                            openDialogAtPosition(
+                                            openDialog(
                                                 context,
                                                 AddStandeeMenu(
                                                   elite: isBoss ? false : true,
                                                   monster: widget.data,
                                                 ),
-                                                -100,
-                                                -12);
+                                                //-100,
+                                               // -12
+                                            );
                                           }
                                         });
                                   }))),
