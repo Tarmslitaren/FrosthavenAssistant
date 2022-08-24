@@ -203,7 +203,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
               color: character.turnState == TurnsState.current? Colors.blue: Colors.transparent,
               //or bleu if current
               shadowColor: Colors.black,
-              elevation: 108,
+              elevation: 8,
               clipper:
               const ShapeBorderClipper(shape: RoundedRectangleBorder()),
               child:SizedBox(

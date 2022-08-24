@@ -449,8 +449,14 @@ class GameMethods {
     for (int i = 0; i < index; i++) {
       _gameState.currentList[i].turnState = TurnsState.done;
     }
-    _gameState.currentList[index].turnState = TurnsState.done;
+    //if on index is NOT current then set to current else set to done
     int newIndex = index +1;
+    if (_gameState.currentList[index].turnState == TurnsState.current){
+      _gameState.currentList[index].turnState = TurnsState.done;
+
+    }else {
+      newIndex = index;
+    }
     for ( ; newIndex < _gameState.currentList.length; newIndex++) {
       ListItemData data = _gameState.currentList[newIndex];
       if(data is Monster){

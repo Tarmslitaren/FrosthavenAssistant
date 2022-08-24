@@ -88,7 +88,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
           color: widget.data.turnState == TurnsState.current? Colors.blue: Colors.transparent,
           //or bleu if current
           shadowColor: Colors.black,
-          elevation: 18,
+          elevation: 8,
           clipper:
           const ShapeBorderClipper(shape: CircleBorder()),
           child: Container(
