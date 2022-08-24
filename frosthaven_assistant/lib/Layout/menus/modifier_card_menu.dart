@@ -131,6 +131,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
 
   Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen,
       bool hasDiviner, String name) {
+    print(name);
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
@@ -196,9 +197,12 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(
                   color: Colors.transparent,
-                  child: Stack(children: [
+                  child: Stack(
+                    //fit: StackFit.expand,
+                      children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
                       Container(
+                        width: 900, //need some width to fill out
                           margin: const EdgeInsets.all(2),
                           decoration: const BoxDecoration(
                               color: Colors.white,
@@ -209,7 +213,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (hasDiviner)
+                                if (hasDiviner && widget.name.isEmpty)
                                   Row(
                                     children: [
                                       if (widget.deck.badOmen.value ==
