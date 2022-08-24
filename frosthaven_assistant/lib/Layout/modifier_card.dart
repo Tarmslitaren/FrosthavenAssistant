@@ -77,7 +77,6 @@ class ModifierCardWidgetState extends State<ModifierCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = getScaleByReference(context);
     Settings settings = getIt<Settings>();
     return  widget.revealed.value
                 ? ModifierCardWidget.buildFront(widget.card,  settings.userScalingBars.value)

@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Resource/color_matrices.dart';
+import '../Resource/commands/next_turn_command.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
 import '../Resource/settings.dart';
@@ -32,6 +33,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
   final _initTextFieldController = TextEditingController();
   late List<MonsterInstance> lastList = [];
   late Character character;
+  final focusNode = FocusNode();
 
   @override
   void initState() {
@@ -171,13 +173,16 @@ class CharacterWidgetState extends State<CharacterWidget> {
             //TODO: is this even needed?
             builder: (context, value, child) {
               return ColorFiltered(
-                  colorFilter: character.characterState.health.value != 0
+                  colorFilter: character.characterState.health.value != 0 &&
+                      (character.turnState != TurnsState.done || getIt<GameState>().roundState.value == RoundState.chooseInitiative)
                       ? ColorFilter.matrix(identity)
                       : ColorFilter.matrix(grayScale),
                   child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
+
                     Container(
+
                       //padding: EdgeInsets.zero,
                       // color: Colors.amber,
                       //height: 50,
@@ -194,7 +199,14 @@ class CharacterWidgetState extends State<CharacterWidget> {
                             return buildMonsterBoxGrid(scale);
                           }),
                     ),
-                    SizedBox(
+              PhysicalShape( //TODO: needs to be more shiny
+              color: character.turnState == TurnsState.current? Colors.blue: Colors.transparent,
+              //or bleu if current
+              shadowColor: Colors.black,
+              elevation: 108,
+              clipper:
+              const ShapeBorderClipper(shape: RoundedRectangleBorder()),
+              child:SizedBox(
                         width: getMainListWidth(context),// 408 * scale,
                         height: 60 * scale,
                         child: Stack(
@@ -270,12 +282,13 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                             0) {
                                       return Container(
                                         margin: EdgeInsets.only(
-                                            left: 10 * scale ,top: 10*scale),
+                                            left: 11 * scale ,top: scaledHeight * 0.11),
                                         height: scaledHeight * 0.5, //33 * scale,
                                         width: 25 * scale,
                                         padding: EdgeInsets.zero,
                                         alignment: Alignment.topCenter,
                                         child: TextField(
+                                          focusNode: focusNode,
 
                                             //scrollPadding: EdgeInsets.zero,
                                             onTap: () {
@@ -532,10 +545,31 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                 top: 14 * scale,
                                 child: summonsButton(scale),
                               )
-                            : Container()
+                            : Container(),
+                        if(character.characterState.health.value > 0) InkWell(
+                            onTap: (){
+                              if(_gameState.roundState.value == RoundState.chooseInitiative) {
+                                //if in choose mode - focus the input or open the soft numpad if that option is on
+                                if(getIt<Settings>().softNumpadInput.value == true) {
+                                  openDialog(context, NumpadMenu(controller: _initTextFieldController,maxLength: 2,));
+                                } else {
+                                  //focus on
+                                  focusNode.requestFocus();
+                                }
+                              }else {
+                                getIt<GameState>().action(TurnDoneCommand(character.id));
+                              }
+                              //if in choose mode - focus the input or open the soft numpad if that option is on
+                              //else: mark as done
+                            },
+                            child: SizedBox(
+                              height: 60 * scale,
+                              width: 70 * scale,
+
+                            )),
                       ],
                     )
-                    ),
+                    )),
 
                       ]));
             }));

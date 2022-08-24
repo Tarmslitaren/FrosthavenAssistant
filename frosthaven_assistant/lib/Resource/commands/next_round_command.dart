@@ -23,6 +23,7 @@ class NextRoundCommand extends Command {
     GameMethods.updateElements();
     GameMethods.setRoundState(RoundState.chooseInitiative);
     GameMethods.sortCharactersFirst();
+    GameMethods.clearTurnState();
 
     _gameState.round.value++;
 

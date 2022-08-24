@@ -63,3 +63,9 @@ enum MonsterType {
   //named?
   summon
 }
+
+enum TurnsState {
+  notDone,
+  current,
+  done
+}

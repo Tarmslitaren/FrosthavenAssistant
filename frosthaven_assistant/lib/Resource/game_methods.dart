@@ -438,4 +438,36 @@ class GameMethods {
     }
     return false;
   }
+
+  static void clearTurnState(){
+    for (var item in _gameState.currentList) {
+      item.turnState = TurnsState.notDone;
+    }
+  }
+
+  static void setTurnDone(int index) {
+    for (int i = 0; i < index; i++) {
+      _gameState.currentList[i].turnState = TurnsState.done;
+    }
+    _gameState.currentList[index].turnState = TurnsState.done;
+    int newIndex = index +1;
+    for ( ; newIndex < _gameState.currentList.length; newIndex++) {
+      ListItemData data = _gameState.currentList[newIndex];
+      if(data is Monster){
+        if (data.monsterInstances.value.isNotEmpty){
+          data.turnState = TurnsState.current;
+          break;
+        }
+      }
+      else if(data is Character){
+        if (data.characterState.health.value > 0){
+          data.turnState = TurnsState.current;
+          break;
+        }
+      }
+    }
+    for (int i = newIndex+1; i < _gameState.currentList.length; i++) {
+      _gameState.currentList[i].turnState = TurnsState.notDone;
+    }
+  }
 }

@@ -56,6 +56,8 @@ class SetScenarioCommand extends Command {
       _gameState.modifierDeck.initDeck("");
       _gameState.modifierDeckAllies.initDeck("Allies");
       _gameState.currentList = newList;
+
+      GameMethods.clearTurnState();
     }
 
 

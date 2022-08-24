@@ -333,7 +333,6 @@ class GameSaveState{
   void loadModifierDeck(String identifier, var data){
     //modifier deck
     String name  = "";
-
     if (identifier == 'modifierDeckAllies'){
       name = "Allies";
     }
