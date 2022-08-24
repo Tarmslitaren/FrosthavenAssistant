@@ -97,6 +97,7 @@ class Character extends ListItemData{
   String toString() {
     return '{'
         '"id": "$id", '
+        '"turnState": ${turnState.index}, '
         '"characterState": ${characterState.toString()}, '
         '"characterClass": "${characterClass.name}" '
         //'"state": ${state.index} '
@@ -106,6 +107,7 @@ class Character extends ListItemData{
   Character.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     //state = ListItemState.values[json['state']];
+    turnState = TurnsState.values[json['turnState']];
     characterState = CharacterState.fromJson(json['characterState']);
     String className = json['characterClass'];
     GameState gameState = getIt<GameState>();
@@ -280,6 +282,7 @@ class Monster extends ListItemData{
   String toString() {
     return '{'
         '"id": "$id", '
+        '"turnState": ${turnState.index}, '
         '"type": "${type.name}", '
         '"monsterInstances": ${monsterInstances.value.toString()}, '
         //'"state": ${state.index}, '
@@ -290,6 +293,7 @@ class Monster extends ListItemData{
 
   Monster.fromJson(Map<String, dynamic> json):isAlly = false {
     id = json['id'];
+    turnState = TurnsState.values[json['turnState']];
     level.value = json['level'];
     if (json.containsKey("isAlly")) {
       isAlly = json['isAlly'];
