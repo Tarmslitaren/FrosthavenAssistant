@@ -78,6 +78,7 @@ class CharacterState extends Figure{
 
 class ListItemData {
   late String id;
+  TurnsState turnState = TurnsState.notDone;
 }
 
 class Character extends ListItemData{
@@ -331,8 +332,13 @@ class GameSaveState{
 
   void loadModifierDeck(String identifier, var data){
     //modifier deck
+    String name  = "";
+
+    if (identifier == 'modifierDeckAllies'){
+      name = "Allies";
+    }
     var modifierDeckData = data[identifier];
-    ModifierDeck state = ModifierDeck("");
+    ModifierDeck state = ModifierDeck(name);
     List<ModifierCard> newDrawList = [];
     List drawPile = modifierDeckData["drawPile"] as List;
     for (var item in drawPile) {
