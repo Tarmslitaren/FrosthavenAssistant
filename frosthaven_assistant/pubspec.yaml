@@ -73,6 +73,8 @@ dependencies:
 
   flutter_launcher_icons: ^0.10.0 #I can't believe we need a third party package to do icons..
 
+  flutter_native_splash: ^2.2.8 # and same for splash :)
+
   url_launcher: ^6.1.5
 
   flutter_keyboard_visibility: ^5.3.0 #only way to check for keyboard closed event.
@@ -101,6 +103,10 @@ flutter_icons:
     generate: true
     image_path: "assets/images/icon.png"
     icon_size: 48
+
+flutter_native_splash:
+  background_image: "assets/images/bg/frosthaven-bg.png"
+  image: "assets/images/icon512x512.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -146,6 +146,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                           image: const AssetImage("assets/images/blood.png"),
                         ),
                         Container(
+                          margin: EdgeInsets.only(bottom: 2 * scale),
                           width: 16.8 * scale,
                           alignment: Alignment.center,
                           child: Text(
