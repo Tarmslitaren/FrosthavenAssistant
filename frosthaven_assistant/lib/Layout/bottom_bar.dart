@@ -64,6 +64,9 @@ Widget createLevelWidget(BuildContext context) {
         ValueListenableBuilder<int>(
             valueListenable: gameState.level,
             builder: (context, value, child) {
+              const double blurRadius = 3.0;
+              const double spreadRadius = 3.0;
+              const double opacity = 0.3;
               return Text.rich(
                 //textAlign: textAlign,
                 TextSpan(children: [
@@ -76,9 +79,9 @@ Widget createLevelWidget(BuildContext context) {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.6),
-                              spreadRadius: 5,
-                              blurRadius: 5.0 * settings.userScalingBars.value,
+                              color: Colors.black.withOpacity(opacity),
+                              spreadRadius: spreadRadius,
+                              blurRadius: blurRadius * settings.userScalingBars.value,
                               //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                             ),
                           ],
@@ -102,9 +105,9 @@ Widget createLevelWidget(BuildContext context) {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.6),
-                                spreadRadius: 5,
-                                blurRadius: 5.0 * settings.userScalingBars.value,
+                                color: Colors.black.withOpacity(opacity),
+                                spreadRadius: spreadRadius,
+                                blurRadius: blurRadius * settings.userScalingBars.value,
                                 //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                               ),
                             ],
@@ -127,9 +130,9 @@ Widget createLevelWidget(BuildContext context) {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.6),
-                                spreadRadius: 5,
-                                blurRadius: 5.0 * settings.userScalingBars.value,
+                                color: Colors.black.withOpacity(opacity),
+                                spreadRadius: spreadRadius,
+                                blurRadius: blurRadius * settings.userScalingBars.value,
                                 //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                               ),
                             ],
@@ -152,9 +155,9 @@ Widget createLevelWidget(BuildContext context) {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.6),
-                                spreadRadius: 5,
-                                blurRadius: 5.0 * settings.userScalingBars.value,
+                                color: Colors.black.withOpacity(opacity),
+                                spreadRadius: spreadRadius,
+                                blurRadius: blurRadius * settings.userScalingBars.value,
                                 //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                               ),
                             ],
@@ -176,9 +179,9 @@ Widget createLevelWidget(BuildContext context) {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.6),
-                                spreadRadius: 5,
-                                blurRadius: 5.0 * settings.userScalingBars.value,
+                                color: Colors.black.withOpacity(opacity),
+                                spreadRadius: spreadRadius,
+                                blurRadius: blurRadius * settings.userScalingBars.value,
                                 //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                               ),
                             ],
