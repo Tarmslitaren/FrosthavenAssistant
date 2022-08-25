@@ -536,10 +536,12 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
       item = item.substring(1, item.length - 1);
       Image image = Image(
         height: 11 * scale,
+        filterQuality: FilterQuality.high, //needed because of the edges
         image: AssetImage("assets/images/conditions/$item.png"),
       );
       Image immuneIcon = Image(
         height: 4 * scale,
+        filterQuality: FilterQuality.high, //needed because of the edges
         image: const AssetImage("assets/images/psd/immune.png"),
       );
       Stack stack = Stack(

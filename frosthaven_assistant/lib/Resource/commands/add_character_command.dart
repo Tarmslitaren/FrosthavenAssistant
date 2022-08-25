@@ -37,6 +37,6 @@ class AddCharacterCommand extends Command {
 
   @override
   String toString() {
-    return "Add ${_name}";
+    return "Add $_name";
   }
 }

@@ -210,6 +210,7 @@ class StatusMenuState extends State<StatusMenu> {
                   child: IconButton(
                     //iconSize: 24,
                     icon: enabled? Image.asset(
+                        filterQuality: FilterQuality.high, //needed because of the edges
                       height: 24,
                         width: 24,
                         'assets/images/conditions/${condition.name}.png'):
@@ -219,6 +220,7 @@ class StatusMenuState extends State<StatusMenu> {
                         children: [
                           Positioned(left: 0, top: 0, child: Image(
                             height: 23.1,
+                            filterQuality: FilterQuality.high, //needed because of the edges
                             image: AssetImage('assets/images/conditions/${condition.name}.png'),
                           )),
                           const Positioned(
@@ -226,6 +228,7 @@ class StatusMenuState extends State<StatusMenu> {
                               left: 15.75, top: 7.35, child:
                           Image(
                             height: 8.4,
+                            filterQuality: FilterQuality.high, //needed because of the edges
                             image: AssetImage("assets/images/psd/immune.png"),
                           )),
                         ],

@@ -52,7 +52,7 @@ Widget createLevelWidget(BuildContext context) {
         ValueListenableBuilder<String>(
             valueListenable: gameState.scenario,
             builder: (context, value, child) {
-              return Container(
+              return SizedBox(
                   width: 174 * settings.userScalingBars.value,
                   child: Text(
                     overflow: TextOverflow.ellipsis,
@@ -87,7 +87,8 @@ Widget createLevelWidget(BuildContext context) {
 
                       Image(
                         height: fontHeight * 0.6,
-                        image: AssetImage("assets/images/psd/level.png"),
+                        filterQuality: FilterQuality.high, //needed because of the edges
+                        image: const AssetImage("assets/images/psd/level.png"),
                       ))),
                   TextSpan(
                     text: ": ${gameState.level.value} ",
@@ -110,6 +111,7 @@ Widget createLevelWidget(BuildContext context) {
                           ),
                           child: Image(
                         height: fontHeight,
+                            filterQuality: FilterQuality.high, //needed because of the edges
                         image:
                             const AssetImage("assets/images/psd/traps-fh.png"),
                       ))),
@@ -134,6 +136,7 @@ Widget createLevelWidget(BuildContext context) {
                           ),
                           child:Image(
                         height: fontHeight,
+                            filterQuality: FilterQuality.high, //needed because of the edges
                         image:
                             const AssetImage("assets/images/psd/hazard-fh.png"),
                       ))),
@@ -158,6 +161,7 @@ Widget createLevelWidget(BuildContext context) {
                           ),
                           child: Image(
                         height: fontHeight * 0.9,
+                            filterQuality: FilterQuality.high, //needed because of the edges
                         image: const AssetImage("assets/images/psd/xp.png"),
                       ))),
                   TextSpan(
@@ -181,6 +185,7 @@ Widget createLevelWidget(BuildContext context) {
                           ),
                           child:Image(
                         height: fontHeight,
+                            filterQuality: FilterQuality.high, //needed because of the edges
                         image:
                             const AssetImage("assets/images/psd/coins-fh.png"),
                       ))),

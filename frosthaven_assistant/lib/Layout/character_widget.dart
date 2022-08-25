@@ -200,7 +200,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                           }),
                     ),
               PhysicalShape( //TODO: needs to be more shiny
-              color: character.turnState == TurnsState.current? Colors.blue: Colors.transparent,
+              color: character.turnState == TurnsState.current? Colors.tealAccent: Colors.transparent,
               //or bleu if current
               shadowColor: Colors.black,
               elevation: 8,
@@ -239,17 +239,29 @@ class CharacterWidgetState extends State<CharacterWidget> {
                         Row(
                           children: [
                             Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.6),
+                                    spreadRadius: 4,
+                                    blurRadius: 13.0 * scale,
+                                    //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                                  ),
+                                ],
+                              ),
                               margin: EdgeInsets.only(
-                                  left: 20 * scale,
+                                  left: 26 * scale,
                                   top: 5 * scale,
                                   bottom: 5 * scale),
                               child: Image(
                                 fit: BoxFit.contain,
-                                height: scaledHeight,
+                                height: scaledHeight * 0.6,
+                                color: isCharacter? character.characterClass.color: null,
                                 image: AssetImage(
                                   "assets/images/class-icons/${character.characterClass.name}.png",
                                 ),
-                                width: scaledHeight * 0.8,
+                                width: scaledHeight * 0.6,
                               ),
                             ),
                             Column(children: [

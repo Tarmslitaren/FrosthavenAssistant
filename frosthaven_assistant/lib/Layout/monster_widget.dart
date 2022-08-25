@@ -82,28 +82,30 @@ class _MonsterWidgetState extends State<MonsterWidget> {
     );
   }
 
-  Widget buildImagePart(double height, double scale){
+  Widget buildImagePart(double height, double scale) {
     return Stack(alignment: Alignment.bottomCenter, children: [
-       PhysicalShape(
-          color: widget.data.turnState == TurnsState.current? Colors.blue: Colors.transparent,
-          //or bleu if current
-          shadowColor: Colors.black,
-          elevation: 8,
-          clipper:
-          const ShapeBorderClipper(shape: CircleBorder()),
-          child: Container(
-            margin: EdgeInsets.only(
-                bottom: 4 * scale, top: 4 * scale),
-            child: Image(
-              //fit: BoxFit.contain,
-              height: height,
-              width: height,
-              image: AssetImage(
-                  "assets/images/monsters/${widget.data.type.gfx}.png"),
-              //width: widget.height*0.8,
+      Container(
+          margin: EdgeInsets.only(bottom: 4 * scale, top: 4 * scale),
+          child: PhysicalShape(
+            color: widget.data.turnState == TurnsState.current
+                ? Colors.tealAccent
+                : Colors.transparent,
+            //or bleu if current
+            shadowColor: Colors.black,
+            elevation: 8,
+            clipper: const ShapeBorderClipper(shape: CircleBorder()),
+            child: Container(
+              margin: EdgeInsets.only(bottom: 0 * scale, top: 2 * scale),
+              child: Image(
+                //fit: BoxFit.contain,
+                height: height,
+                width: height,
+                image: AssetImage(
+                    "assets/images/monsters/${widget.data.type.gfx}.png"),
+                //width: widget.height*0.8,
+              ),
             ),
-          ),
-        ),
+          )),
       Container(
           width: height * 0.95,
           //height: height,
@@ -117,8 +119,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                 fontSize: 18 * 0.8 * scale,
                 shadows: [
                   Shadow(
-                      offset: Offset(1 * scale, 1 * scale),
-                      color: Colors.black)
+                      offset: Offset(1 * scale, 1 * scale), color: Colors.black)
                 ]),
           ))
     ]);
@@ -130,46 +131,52 @@ class _MonsterWidgetState extends State<MonsterWidget> {
     double height = scale * 0.8 * 120;
     return ValueListenableBuilder<int>(
         valueListenable: getIt<GameState>().updateList,
-    // widget.data.monsterInstances,
-    builder: (context, value, child) {
-    return
-      ColorFiltered(
-        colorFilter: widget.data.monsterInstances.value.isNotEmpty &&
-            (widget.data.turnState != TurnsState.done || getIt<GameState>().roundState.value == RoundState.chooseInitiative)
-            ? ColorFilter.matrix(identity)
-            : ColorFilter.matrix(grayScale),
-        child: Column(mainAxisSize: MainAxisSize.max, children: [
-          SizedBox(
-            height: 120 * 0.8 * scale,
-            //this dictates size of the cards
-            width: getMainListWidth(context),
-            child: Row(
-              children: [
-                getIt<GameState>().roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty
-                ? InkWell( //TODO: text blocks input. should be a level higher
-              onTap: () {
-                getIt<GameState>().action(TurnDoneCommand(widget.data.id));
-              },
-              child:
-                buildImagePart(height, scale)): buildImagePart(height, scale),
-                MonsterAbilityCardWidget(data: widget.data),
-                MonsterStatCardWidget(data: widget.data),
-              ],
-            ),
-          ),
-          Container(
-            //color: Colors.amber,
-            //height: 50,
-            margin:
-                EdgeInsets.only(left: 4 * scale * 0.8, right: 4 * scale * 0.8),
-            width: getMainListWidth(context) - 4 * scale * 0.8,
-            child: ValueListenableBuilder<int>(
-                valueListenable: getIt<GameState>().killMonsterStandee,
-                // widget.data.monsterInstances,
-                builder: (context, value, child) {
-                  return buildMonsterBoxGrid(scale);
-                }),
-          ),
-        ]));});
+        // widget.data.monsterInstances,
+        builder: (context, value, child) {
+          return ColorFiltered(
+              colorFilter: widget.data.monsterInstances.value.isNotEmpty &&
+                      (widget.data.turnState != TurnsState.done ||
+                          getIt<GameState>().roundState.value ==
+                              RoundState.chooseInitiative)
+                  ? ColorFilter.matrix(identity)
+                  : ColorFilter.matrix(grayScale),
+              child: Column(mainAxisSize: MainAxisSize.max, children: [
+                SizedBox(
+                  height: 120 * 0.8 * scale,
+                  //this dictates size of the cards
+                  width: getMainListWidth(context),
+                  child: Row(
+                    children: [
+                      getIt<GameState>().roundState.value ==
+                                  RoundState.playTurns &&
+                              widget.data.monsterInstances.value.isNotEmpty
+                          ? InkWell(
+                              //TODO: text blocks input. should be a level higher
+                              onTap: () {
+                                getIt<GameState>()
+                                    .action(TurnDoneCommand(widget.data.id));
+                              },
+                              child: buildImagePart(height, scale))
+                          : buildImagePart(height, scale),
+                      MonsterAbilityCardWidget(data: widget.data),
+                      MonsterStatCardWidget(data: widget.data),
+                    ],
+                  ),
+                ),
+                Container(
+                  //color: Colors.amber,
+                  //height: 50,
+                  margin: EdgeInsets.only(
+                      left: 4 * scale * 0.8, right: 4 * scale * 0.8),
+                  width: getMainListWidth(context) - 4 * scale * 0.8,
+                  child: ValueListenableBuilder<int>(
+                      valueListenable: getIt<GameState>().killMonsterStandee,
+                      // widget.data.monsterInstances,
+                      builder: (context, value, child) {
+                        return buildMonsterBoxGrid(scale);
+                      }),
+                ),
+              ]));
+        });
   }
 }

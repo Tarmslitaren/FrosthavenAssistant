@@ -47,6 +47,8 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                   itemBuilder: (context, index) => ListTile(
                     leading: Image(
                       height: 30,
+                      width: 30,
+                      fit: BoxFit.scaleDown,
                       image: AssetImage(
                           "assets/images/class-icons/${currentCharacters[index].characterClass.name}.png"),
                     ),

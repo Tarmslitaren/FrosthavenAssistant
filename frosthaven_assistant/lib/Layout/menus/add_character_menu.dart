@@ -79,11 +79,11 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
   }
 
   bool _characterAlreadyAdded(String newCharacter) {
+    if (newCharacter == "Escort" || newCharacter == "Objective") {
+      return false;
+    }
     var characters = GameMethods.getCurrentCharacters();
     for (var character in characters) {
-      if (character.characterClass.name == "Escort" || character.characterClass.name == "Objective") {
-        return false;
-      }
       if (character.characterClass.name == newCharacter){
         return true;
       }
@@ -125,8 +125,8 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
                         itemCount: _foundCharacters.length,
                         itemBuilder: (context, index) => ListTile(
                           leading: Image(
-                            height: 50,
-                            width: 50,
+                            height: 40,
+                            width: 40,
                             fit: BoxFit.scaleDown,
                             image: AssetImage(
                                 "assets/images/class-icons/${_foundCharacters[index].name}.png"),

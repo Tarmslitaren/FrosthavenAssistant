@@ -631,6 +631,7 @@ class LineBuilder {
           scale: 1.0/(scale * 0.8 * 0.55), //for some reason flutter likes scale to be inverted
 
           fit: BoxFit.fitHeight,
+          filterQuality: FilterQuality.high,
           "assets/images/abilities/${line.substring(1)}.png",
         );
         //create pure picture, not a WidgetSpan (scale 5.5)
@@ -713,6 +714,7 @@ class LineBuilder {
                         height: styleToUse.fontSize! * 1.2,
                         //alignment: Alignment.topCenter,
                         fit: BoxFit.fitHeight,
+                        filterQuality: FilterQuality.high,
                         image:
                             AssetImage("assets/images/abilities/$iconGfx.png"),
                       )
@@ -739,6 +741,7 @@ class LineBuilder {
                 height: height, //TODO: this causes lines to have variable height
                 //alignment: Alignment.topCenter,
                 fit: BoxFit.fitHeight,
+                filterQuality: FilterQuality.high,
                 image: AssetImage("assets/images/abilities/$iconGfx.png"),
               );
               //TODO: may fine tune the height of some/all icons here
