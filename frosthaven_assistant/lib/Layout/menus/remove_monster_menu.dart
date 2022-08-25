@@ -74,6 +74,7 @@ class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
           ),
           Positioned(
               width: 100,
+              height: 40,
               right: 0,
               bottom: 0,
               child: TextButton(

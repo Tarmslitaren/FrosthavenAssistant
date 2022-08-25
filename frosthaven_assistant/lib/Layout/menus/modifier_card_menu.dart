@@ -193,7 +193,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           }
           return Container(
               constraints: BoxConstraints(
-                  maxWidth: 118 * scale * 2 + 8,
+                  maxWidth: 118 * scale * 2 + 98,
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(
                   color: Colors.transparent,
@@ -305,9 +305,11 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                     ]),
                     Positioned(
                         width: 100,
-                        right: 2,
-                        bottom: 2,
+                        height: 40,
+                        right: 0,
+                        bottom: 0,
                         child: TextButton(
+
                             child: const Text(
                               'Close',
                               style: TextStyle(fontSize: 20),

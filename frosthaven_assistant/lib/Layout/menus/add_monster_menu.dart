@@ -163,6 +163,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
               ),
               Positioned(
                   width: 100,
+                  height: 40,
                   right: 0,
                   bottom: 0,
                   child: TextButton(
