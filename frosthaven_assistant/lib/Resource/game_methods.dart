@@ -391,11 +391,11 @@ class GameMethods {
         characterState.level.value = level;
 
         if (name == "Escort" || name == "Objective") {
-          //characterState.initiative = 99;
-        }else {
-          characterState.health.value = characterClass.healthByLevel[level - 1];
-          characterState.maxHealth.value = characterState.health.value;
+          characterState.initiative = 99;
         }
+        characterState.health.value = characterClass.healthByLevel[level - 1];
+        characterState.maxHealth.value = characterState.health.value;
+
         characterState.display = name;
         if (display != null) {
           characterState.display = display;
