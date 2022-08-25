@@ -71,11 +71,11 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Release 5 plan (next):
   - frosthaven style icons and card layouts
   - expire conditions
-  - show scenario special rules at bottom
   - show special rules toast on start/end of round if special rules for round nr
   - solo scenarios
 
 -Release 5 plan:
+  - show scenario special rules (at bottom?)
   - networking
 
 Release 6 plan:
