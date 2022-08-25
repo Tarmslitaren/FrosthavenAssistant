@@ -27,10 +27,11 @@ This is also an opportunity for me to learn the Flutter framework.
 - Scenario special rules - Objectives, Escorts, Level Adjustments and Named Monsters.
 - Undo and Redo actions
 - Settings: Full screen, Separate user scaling for main list and bars, Dark mode, Soft numpad input
+- Double tap to see bigger ability cards
+- Allies modifier deck
 ## Key features still missing:
 - networking
-- turn order
-- More platforms (IOS, Macos, Linux)
+- expire conditions
 
 ## Usage:
 - Press hamburger icon to open main menu.
@@ -54,8 +55,10 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - To open stats menu for monster, tap/click the standee.
 - On the stats menu you can add conditions and set current health values etc.
 - To the right on bottom bar, or above in case screen to narrow is the monster modifier deck.
+- In case a scenario has monsters be allied to you, there will appear also a second allies modifier deck above the enemies one.
 - Top bar hosts element infusions. press to infuse, double tap/click to set waning.
 - Main list items can be reordered on a long press.
+- Monster Ability Cards can be double tapped to open a bigger view of them.
 - Monster Ability Cards and Modifier Deck can be tapped/clicked to open card menu with info on discard pile content and such.
 - To add a summon, press the big plus on the right of the character widget.
   - On the add summon menu, fist choose the color and nr before pressing your desired summon from the list.
@@ -64,24 +67,19 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Objectives and Escorts are special characters, representing special rules from scenarios.
 - If some special rules or monsters appear from an added section in the scenario/sections booklets, they can be added from the add sections menu.
 - If you make a mistake, there is an undo button in the main menu. and if the mistake was to undo, there is also redo ;)
-
 ## Roadmap
--Release 3 (current: Beta 1):
-  - Official Release on Android Play store and IOS, after play testing.
-
--Release 4 plan (next):
-  - save unlocked classes
-  - turn order (expire conditions, scroll to position, gray out)
-  - show trap types and scenario special rules at bottom
+- Release 5 plan (next):
+  - frosthaven style icons and card layouts
+  - expire conditions
+  - show scenario special rules at bottom
   - show special rules toast on start/end of round if special rules for round nr
-  - allies modifier deck
   - solo scenarios
 
 -Release 5 plan:
   - networking
 
 Release 6 plan:
-  - Frosthaven style icons and card layouts
+  - full Frosthaven support
 
 ## Copyright / License
 
