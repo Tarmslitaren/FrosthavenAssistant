@@ -54,8 +54,8 @@ class CounterButtonState extends State<CounterButton> {
               })),
       Stack(children: [
         Container(
-          width: 40,
-          height: 40,
+          width: 30,
+          height: 30,
           child: Image(
             color: widget.color,
             colorBlendMode: BlendMode.modulate,

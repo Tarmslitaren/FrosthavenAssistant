@@ -126,8 +126,8 @@ class StatusMenuState extends State<StatusMenu> {
               })),
       Stack(children: [
         Container(
-          width: 40,
-          height: 40,
+          width: 30,
+          height: 30,
           child: Image(
             image: AssetImage(image),
           ),
@@ -195,7 +195,7 @@ class StatusMenuState extends State<StatusMenu> {
           if (isActive) {
             color = getIt<Settings>().darkMode.value? Colors.white : Colors.black;
           }
-          double scale = 2.1;
+
           return Container(
                 width: 42,
                   height: 42,
@@ -210,21 +210,23 @@ class StatusMenuState extends State<StatusMenu> {
                   child: IconButton(
                     //iconSize: 24,
                     icon: enabled? Image.asset(
+                      height: 24,
+                        width: 24,
                         'assets/images/conditions/${condition.name}.png'):
 
                       Stack(
                         alignment: Alignment.center,
                         children: [
                           Positioned(left: 0, top: 0, child: Image(
-                            height: 11 * scale,
+                            height: 23.1,
                             image: AssetImage('assets/images/conditions/${condition.name}.png'),
                           )),
-                          Positioned(
-                            //TODO: should be 9 but there is a clipping issue
-                              left: 7.5 * scale, top: 3.5 * scale, child:
+                          const Positioned(
+                            //TODO: should be 19  but there is a clipping issue
+                              left: 15.75, top: 7.35, child:
                           Image(
-                            height: 4 * scale,
-                            image: const AssetImage("assets/images/psd/immune.png"),
+                            height: 8.4,
+                            image: AssetImage("assets/images/psd/immune.png"),
                           )),
                         ],
 
