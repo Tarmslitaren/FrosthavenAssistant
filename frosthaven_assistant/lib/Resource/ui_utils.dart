@@ -46,20 +46,6 @@ void openDialog(BuildContext context, Widget widget) {
   showDialog(context: context, builder: (BuildContext context) => innerWidget);
 }
 
-void openDialogNoPadding(BuildContext context, Widget widget) {
-
-  //could potentially modify edge insets based on screen width.
-  Widget innerWidget = Stack(children: [
-    Positioned(
-      child: Dialog(
-          backgroundColor: Colors.transparent,
-          insetPadding: const EdgeInsets.all(0),
-          child: widget),
-    )
-  ]);
-  showDialog(context: context, builder: (BuildContext context) => innerWidget);
-}
-
 void openDialogAtPosition(
     BuildContext context, Widget widget, double x, double y) {
   double xOffset =

@@ -350,8 +350,14 @@ class _MainListState extends State<MainList> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.updateList,
         builder: (context, value, child) {
+          double width = getMainListWidth(context);
           bool canFit2Columns = MediaQuery.of(context).size.width >=
-              getMainListWidth(context) * 2;
+              width * 2;
+          if(canFit2Columns) {
+            width *= 2;
+          }
+          double paddingLeft = (MediaQuery.of(context).size.width - 2 * getMainListWidth(context))/2;
+          //double paddingRight = ca
           List<double> itemHeights = getItemHeights(context);
           int itemsPerColumn = getItemsCanFitOneColumn(itemHeights); //no good
           bool ignoreScroll = false;
@@ -362,20 +368,19 @@ class _MainListState extends State<MainList> {
             ignoreScroll = true;
           }
 
-          double padding = 60 * getIt<Settings>().userScalingBars.value;
+          double paddingBottom = 60 * getIt<Settings>().userScalingBars.value;
           if(GameMethods.hasAllies()){
-            padding *=2;
+            paddingBottom *=2;
           }
           return Container(
-              alignment: Alignment.topCenter,
-              width: MediaQuery.of(context).size.width,
+            margin: canFit2Columns? EdgeInsets.only(left: paddingLeft, right: paddingLeft): null,
+              alignment: canFit2Columns? Alignment.topLeft: Alignment.topCenter,
+              width:canFit2Columns? width : MediaQuery.of(context).size.width,
               child: Scrollbar(
                 interactive: !ignoreScroll,
                 controller: scrollController,
                 child: ReorderableWrap(
-                  padding: EdgeInsets.only(bottom: padding),
-
-                  runAlignment: WrapAlignment.start,
+                  padding: EdgeInsets.only(bottom: paddingBottom),
                   scrollAnimationDuration: const Duration(milliseconds: 400),
                   reorderAnimationDuration: const Duration(milliseconds: 400),
                   maxMainAxisCount: itemsPerColumn,
