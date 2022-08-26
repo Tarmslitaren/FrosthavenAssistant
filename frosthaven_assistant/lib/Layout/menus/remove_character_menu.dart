@@ -49,12 +49,18 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                       height: 30,
                       width: 30,
                       fit: BoxFit.scaleDown,
+                      color: currentCharacters[index].characterClass.name ==
+                                  "Escort" ||
+                              currentCharacters[index].characterClass.name ==
+                                  "Objective"
+                          ? null
+                          : currentCharacters[index].characterClass.color,
                       image: AssetImage(
                           "assets/images/class-icons/${currentCharacters[index].characterClass.name}.png"),
                     ),
                     iconColor: currentCharacters[index].characterClass.color,
                     title: Text(currentCharacters[index].characterState.display,
-                        style: TextStyle(fontSize: 18)),
+                        style: const TextStyle(fontSize: 18)),
                     trailing: Text(
                         "(${currentCharacters[index].characterClass.edition})",
                         style:

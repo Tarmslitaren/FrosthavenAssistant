@@ -12,26 +12,24 @@ class AddCharacterMenu extends StatefulWidget {
   const AddCharacterMenu({Key? key}) : super(key: key);
 
   @override
-  _AddCharacterMenuState createState() => _AddCharacterMenuState();
+  AddCharacterMenuState createState() => AddCharacterMenuState();
 }
 
-class _AddCharacterMenuState extends State<AddCharacterMenu> {
+class AddCharacterMenuState extends State<AddCharacterMenu> {
   // This list holds the data for the list view
   List<CharacterClass> _foundCharacters = [];
-  List<CharacterClass> _allCharacters = [];
+  final List<CharacterClass> _allCharacters = [];
   late CharacterClass bs;
   final GameState _gameState = getIt<GameState>();
 
   @override
   initState() {
     // at the beginning, all users are shown
-    for (String key in _gameState.modelData.value.keys){
-      _allCharacters.addAll(
-          _gameState.modelData.value[key]!.characters
-      );
+    for (String key in _gameState.modelData.value.keys) {
+      _allCharacters.addAll(_gameState.modelData.value[key]!.characters);
     }
     for (var item in _allCharacters) {
-      if(item.name == "Bladeswarm") {
+      if (item.name == "Bladeswarm") {
         _allCharacters.remove(item);
         bs = item;
         break;
@@ -39,14 +37,14 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
     }
     _foundCharacters = _allCharacters;
     _foundCharacters.sort((a, b) {
-      if(a.edition != b.edition) {
+      if (a.edition != b.edition) {
         return -a.edition.compareTo(b.edition);
         //NOTE: this - here is a bit silly. it just so happens that the order makes more sense backards: Jotl, gloom, FC, FH, CS
       }
-      if(a.hidden && !b.hidden){
+      if (a.hidden && !b.hidden) {
         return 1;
       }
-      if(b.hidden && !a.hidden){
+      if (b.hidden && !a.hidden) {
         return -1;
       }
       return a.name.compareTo(b.name);
@@ -65,7 +63,7 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
           .where((user) =>
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
-      if(enteredKeyword.toLowerCase() == "bladeswarm") {
+      if (enteredKeyword.toLowerCase() == "bladeswarm") {
         //unlocked it!
         results = [bs];
       }
@@ -84,7 +82,7 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
     }
     var characters = GameMethods.getCurrentCharacters();
     for (var character in characters) {
-      if (character.characterClass.name == newCharacter){
+      if (character.characterClass.name == newCharacter) {
         return true;
       }
     }
@@ -98,106 +96,128 @@ class _AddCharacterMenuState extends State<AddCharacterMenu> {
     return Container(
         constraints: const BoxConstraints(maxWidth: 400),
         child: Card(
-        //color: Colors.transparent,
-        // shadowColor: Colors.transparent,
-        margin: const EdgeInsets.all(2),
-        child: Stack(children: [
-          Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 10, right: 10),
-                child: TextField(
-                  onChanged: (value) => _runFilter(value),
-                  decoration: const InputDecoration(
-                      labelText: 'Add Character (type name for hidden character classes)',
-                      suffixIcon: Icon(Icons.search)),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: _foundCharacters.isNotEmpty
-                    ? ListView.builder(
-                        itemCount: _foundCharacters.length,
-                        itemBuilder: (context, index) => ListTile(
-                          leading: Image(
-                            height: 40,
-                            width: 40,
-                            fit: BoxFit.scaleDown,
-                            image: AssetImage(
-                                "assets/images/class-icons/${_foundCharacters[index].name}.png"),
-                          ),
-                          iconColor: _foundCharacters[index].color,
-                          title: Text(_foundCharacters[index].hidden && !_gameState.unlockedClasses.contains(_foundCharacters[index].name)
-                              ? "???"
-                              : _foundCharacters[index].name,
-                          style: TextStyle(
-                              fontSize: 18,
-
-                              color: _characterAlreadyAdded(_foundCharacters[index].name)?
-                                  Colors.grey : Colors.black
-                          )),
-                          trailing: Text("(${_foundCharacters[index].edition})",
-                              style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey
-                              )),
-                          onTap: () {
-                            if (!_characterAlreadyAdded(_foundCharacters[index].name)){
-                              setState(() {
-
-                                String display = _foundCharacters[index].name;
-                                int count = 1;
-                                if(_foundCharacters[index].name == "Objective" || _foundCharacters[index].name == "Escort") {
-                                  //add a number to name if already exists
-                                  for (var item in _gameState.currentList) {
-                                    if(item is Character &&
-                                        item.characterClass.name == _foundCharacters[index].name ){
-                                      count++;
-                                    }
-                                  }
-                                  if (count > 1) {
-                                    display += " $count";
-                                  }
-                                }
-                                AddCharacterCommand command = AddCharacterCommand(
-                                    _foundCharacters[index].name, display, 1);
-                                _gameState.action(command); //
-                                //open level menu
-                                openDialog(context, SetCharacterLevelMenu(character: command.character));
-                              });
-
-                            }
-                          },
-                        ),
-                      )
-                    : const Text(
-                        'No results found',
-                        style: TextStyle(fontSize: 24),
-                      ),
-              ),
-              const SizedBox(
-                height: 34,
-              ),
-            ],
-          ),
-          Positioned(
-              width: 100,
-              height: 40,
-              right: 0,
-              bottom: 0,
-              child: TextButton(
-                  child: const Text(
-                    'Close',
-                    style: TextStyle(fontSize: 20),
+            //color: Colors.transparent,
+            // shadowColor: Colors.transparent,
+            margin: const EdgeInsets.all(2),
+            child: Stack(children: [
+              Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }))
-        ])));
+                  Container(
+                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    child: TextField(
+                      onChanged: (value) => _runFilter(value),
+                      decoration: const InputDecoration(
+                          labelText:
+                              'Add Character (type name for hidden character classes)',
+                          suffixIcon: Icon(Icons.search)),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Expanded(
+                    child: _foundCharacters.isNotEmpty
+                        ? ListView.builder(
+                            itemCount: _foundCharacters.length,
+                            itemBuilder: (context, index) => ListTile(
+                              leading: Image(
+                                height: 40,
+                                width: 40,
+                                fit: BoxFit.scaleDown,
+                                color: _foundCharacters[index].hidden &&
+                                        !_gameState.unlockedClasses.contains(
+                                            _foundCharacters[index].name) ||
+                                    _foundCharacters[index].name ==
+                                            "Escort" ||
+                                        _foundCharacters[index].name ==
+                                            "Objective"
+                                    ? null
+                                    : _foundCharacters[index].color,
+                                image: AssetImage(
+                                    "assets/images/class-icons/${_foundCharacters[index].name}.png"),
+                              ),
+                              iconColor: _foundCharacters[index].color,
+                              title: Text(
+                                  _foundCharacters[index].hidden &&
+                                          !_gameState.unlockedClasses.contains(
+                                              _foundCharacters[index].name)
+                                      ? "???"
+                                      : _foundCharacters[index].name,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      color: _characterAlreadyAdded(
+                                              _foundCharacters[index].name)
+                                          ? Colors.grey
+                                          : Colors.black)),
+                              trailing: Text(
+                                  "(${_foundCharacters[index].edition})",
+                                  style: const TextStyle(
+                                      fontSize: 14, color: Colors.grey)),
+                              onTap: () {
+                                if (!_characterAlreadyAdded(
+                                    _foundCharacters[index].name)) {
+                                  setState(() {
+                                    String display =
+                                        _foundCharacters[index].name;
+                                    int count = 1;
+                                    if (_foundCharacters[index].name ==
+                                            "Objective" ||
+                                        _foundCharacters[index].name ==
+                                            "Escort") {
+                                      //add a number to name if already exists
+                                      for (var item in _gameState.currentList) {
+                                        if (item is Character &&
+                                            item.characterClass.name ==
+                                                _foundCharacters[index].name) {
+                                          count++;
+                                        }
+                                      }
+                                      if (count > 1) {
+                                        display += " $count";
+                                      }
+                                    }
+                                    AddCharacterCommand command =
+                                        AddCharacterCommand(
+                                            _foundCharacters[index].name,
+                                            display,
+                                            1);
+                                    _gameState.action(command); //
+                                    //open level menu
+                                    openDialog(
+                                        context,
+                                        SetCharacterLevelMenu(
+                                            character: command.character));
+                                  });
+                                }
+                              },
+                            ),
+                          )
+                        : const Text(
+                            'No results found',
+                            style: TextStyle(fontSize: 24),
+                          ),
+                  ),
+                  const SizedBox(
+                    height: 34,
+                  ),
+                ],
+              ),
+              Positioned(
+                  width: 100,
+                  height: 40,
+                  right: 0,
+                  bottom: 0,
+                  child: TextButton(
+                      child: const Text(
+                        'Close',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      }))
+            ])));
   }
 }
