@@ -19,9 +19,18 @@ class ModifierCardWidget extends StatefulWidget {
   ModifierCardWidgetState createState() => ModifierCardWidgetState();
 
   static Widget buildFront(ModifierCard card, double scale) {
-    return SizedBox(
+    return Container(
       width: 58.6666 * scale ,
       height: 39*scale,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black45,
+            blurRadius: 4 * scale,
+            offset: Offset(2 * scale, 4 * scale), // Shadow position
+          ),
+        ],
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0* scale),
         child: Image(
@@ -39,9 +48,18 @@ class ModifierCardWidget extends StatefulWidget {
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    return SizedBox(
+    return Container(
       width: 58.6666 * scale,
       height: 39*scale,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black45,
+            blurRadius: 4 * scale,
+            offset: Offset(2 * scale, 4 * scale), // Shadow position
+          ),
+        ],
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(4.0 * scale),
         child: Image(

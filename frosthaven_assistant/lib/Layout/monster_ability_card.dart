@@ -85,7 +85,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0 * scale),
               child: Image(
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.fill,
                 height: 116 * 0.8 * scale,
                 //height: 123 * 0.8 * scale,
                 image: const AssetImage(
@@ -110,7 +110,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
               ),
             ),
             Positioned(
-                left: 7.0 * 0.8 * scale,
+                left: 4.0 * scale,
                 top: 16.0 * 0.8 * scale,
                 child: Text(
                   textAlign: TextAlign.center,
@@ -137,6 +137,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                     bottom: 4.0 * 0.8 * scale,
                     child: Image(
                       height: 123 * 0.8 * 0.13 * scale,
+                      fit: BoxFit.cover,
                       image: const AssetImage(
                           "assets/images/abilities/shuffle.png"),
                     ))
