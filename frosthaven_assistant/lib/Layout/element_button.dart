@@ -92,6 +92,10 @@ class AnimatedContainerButtonState extends State<ElementButton> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      hoverColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       //behavior: HitTestBehavior.opaque,
 
 
