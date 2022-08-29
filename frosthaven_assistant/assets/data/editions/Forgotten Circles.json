@@ -1493,6 +1493,10 @@
           "note": "Manifestation of Corruption: Manual Deck"
         }
         ]
+    },
+    "#Challenge: Tower to the Stars": {
+      "monsters": [ "Ancient Artillery", "City Archer", "City Guard", "Hound" ]
+
     }
 
   },
