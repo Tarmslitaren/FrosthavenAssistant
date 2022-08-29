@@ -31,6 +31,9 @@ class ChangeHealthCommand extends ChangeStatCommand {
 
   @override
   String toString() {
-    return "change health";
+    if(change > 0) {
+      return "Increase $figureId's health";
+    }
+    return "Decrease $figureId's health";
   }
 }

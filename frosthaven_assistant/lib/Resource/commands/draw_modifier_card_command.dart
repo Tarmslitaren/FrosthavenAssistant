@@ -25,6 +25,9 @@ class DrawModifierCardCommand extends Command {
 
   @override
   String toString() {
-    return "Draw modifier card";
+    if(name == "Allies"){
+      return "Draw allies modifier card";
+    }
+    return "Draw monster modifier card";
   }
 }

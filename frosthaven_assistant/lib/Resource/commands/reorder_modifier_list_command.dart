@@ -25,6 +25,6 @@ class ReorderModifierListCommand extends Command {
 
   @override
   String toString() {
-    return "Reorder modifier";
+    return "Reorder Modifier Cards";
   }
 }

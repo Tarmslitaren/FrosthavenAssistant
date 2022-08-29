@@ -32,6 +32,9 @@ class ChangeBlessCommand extends ChangeStatCommand {
 
   @override
   String toString() {
-    return "change bless";
+    if (change > 0) {
+      return "Add a Bless";
+    }
+    return "Remove a Bless";
   }
 }

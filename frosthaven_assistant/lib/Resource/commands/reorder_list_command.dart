@@ -22,6 +22,6 @@ class ReorderListCommand extends Command {
 
   @override
   String toString() {
-    return "Reorder";
+    return "Reorder List";
   }
 }

@@ -24,6 +24,9 @@ class ChangeXPCommand extends ChangeStatCommand {
 
   @override
   String toString() {
-    return "change xp";
+    if(change > 0) {
+      return "Increase $figureId's xp";
+    }
+    return "Decrease $figureId's xp";
   }
 }

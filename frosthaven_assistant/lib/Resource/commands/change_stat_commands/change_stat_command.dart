@@ -8,7 +8,7 @@ import '../../game_state.dart';
 abstract class ChangeStatCommand extends Command {
   final String ownerId;
   int change;
-  final String figureId; //need to generate this somehow (name for char, standeeNr for monsters, summons - name+something (standeeNr+gfx)
+  final String figureId;
   ChangeStatCommand(this.change, this.figureId, this.ownerId);
 
   void setChange(int change) {

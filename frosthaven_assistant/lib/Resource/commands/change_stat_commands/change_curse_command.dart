@@ -34,6 +34,9 @@ class ChangeCurseCommand extends ChangeStatCommand {
 
   @override
   String toString() {
-    return "change curse";
+    if (change > 0) {
+      return "Add a Curse";
+    }
+    return "Remove a Curse";
   }
 }

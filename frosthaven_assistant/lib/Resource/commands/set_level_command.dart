@@ -58,6 +58,9 @@ class SetLevelCommand extends Command {
 
   @override
   String toString() {
+    if (monsterId != null) {
+      return "Set $monsterId's level";
+    }
     return "Set Level";
   }
 }

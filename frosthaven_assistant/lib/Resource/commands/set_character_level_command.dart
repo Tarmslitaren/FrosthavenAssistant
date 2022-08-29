@@ -46,6 +46,6 @@ class SetCharacterLevelCommand extends Command {
 
   @override
   String toString() {
-    return "Set Character Level";
+    return "Set $characterId's Level";
   }
 }

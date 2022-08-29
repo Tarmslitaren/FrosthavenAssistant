@@ -30,6 +30,6 @@ class ReorderAbilityListCommand extends Command {
 
   @override
   String toString() {
-    return "Reorder Ability";
+    return "Reorder Ability Cards";
   }
 }
