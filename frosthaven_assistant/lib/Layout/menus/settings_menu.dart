@@ -73,6 +73,33 @@ class SettingsMenuState extends State<SettingsMenu> {
                         settings.saveToDisk();
                       });
                     }),
+                CheckboxListTile(
+                    title: const Text("Don't track Standees"),
+                    value: settings.noStandees.value,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        settings.noStandees.value = value!;
+                        settings.saveToDisk();
+                      });
+                    }),
+                CheckboxListTile(
+                    title: const Text("Random Standees"),
+                    value: settings.randomStandees.value,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        settings.randomStandees.value = value!;
+                        settings.saveToDisk();
+                      });
+                    }),
+                CheckboxListTile(
+                    title: const Text("No Calculations"),
+                    value: settings.noCalculation.value,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        settings.noCalculation.value = value!;
+                        settings.saveToDisk();
+                      });
+                    }),
                 if (!Platform.isIOS)
                   CheckboxListTile(
                       title: const Text("Fullscreen"),

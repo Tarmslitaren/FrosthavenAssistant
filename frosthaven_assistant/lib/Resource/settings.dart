@@ -14,6 +14,9 @@ class Settings {
   final fullScreen = ValueNotifier<bool>(true);
   final darkMode = ValueNotifier<bool>(false);
   final noInit = ValueNotifier<bool>(false);
+  final noStandees = ValueNotifier<bool>(false);
+  final randomStandees = ValueNotifier<bool>(false);
+  final noCalculation = ValueNotifier<bool>(false);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -156,7 +159,15 @@ class Settings {
       if (data["noInit"] != null) {
         noInit.value = data["noInit"];
       }
-
+      if (data["noStandees"] != null) {
+        noInit.value = data["noStandees"];
+      }
+      if (data["randomStandees"] != null) {
+        noInit.value = data["randomStandees"];
+      }
+      if (data["noCalculation"] != null) {
+        noInit.value = data["noCalculation"];
+      }
     }
   }
 
@@ -169,6 +180,9 @@ class Settings {
         '"fullScreen": ${fullScreen.value}, '
         '"softNumpadInput": ${softNumpadInput.value}, '
         '"noInit": ${noInit.value}, '
+        '"noStandees": ${noStandees.value}, '
+        '"randomStandees": ${randomStandees.value}, '
+        '"noCalculation": ${noCalculation.value}, '
         '"darkMode": ${darkMode.value} '
         '}';
   }

@@ -1,11 +1,15 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
+import '../Resource/commands/add_standee_command.dart';
 import '../Resource/enums.dart';
 import '../Resource/stat_calculator.dart';
 import '../Resource/ui_utils.dart';
@@ -33,6 +37,59 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
   void initState() {
     super.initState();
     _level = widget.data.level.value; //is this the right start?
+  }
+
+  void handleAddPressed(bool left, bool isBoss){
+
+    Settings settings = getIt<Settings>();
+
+    if (widget.data.monsterInstances
+        .value.length ==
+        widget.data.type.count - 1) {
+      //directly add last standee
+      GameMethods.addStandee(
+          null,
+          widget.data,
+          isBoss
+              ? MonsterType.boss
+              : left?  MonsterType.normal: MonsterType.elite);
+    } else if (widget
+        .data
+        .monsterInstances
+        .value
+        .length <
+        widget.data.type.count - 1) {
+      if(settings.randomStandees.value == true) {
+        int nrOfStandees = widget.data.type.count;
+        List<int> available = [];
+        for (int i = 0; i < nrOfStandees; i++) {
+          bool isAvailable = true;
+          for (var item in widget.data.monsterInstances.value) {
+            if(item.standeeNr == i) {
+              isAvailable = false;
+              break;
+            }
+          }
+          if (isAvailable) {
+            available.add(i);
+          }
+        }
+        int standeeNr = available[Random().nextInt(available.length)];
+        getIt<GameState>().action(AddStandeeCommand(standeeNr, null, widget.data.id, isBoss
+            ? MonsterType.boss
+            : left?  MonsterType.normal: MonsterType.elite));
+
+      } else {
+        openDialog(
+          context,
+          AddStandeeMenu(
+            elite: !left,
+            monster: widget.data,
+          ),
+        );
+      }
+    }
+
   }
 
   @override
@@ -416,34 +473,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                   BlendMode.modulate,
                                               'assets/images/psd/add.png'),
                                           onPressed: () {
-                                            if (widget.data.monsterInstances
-                                                    .value.length ==
-                                                widget.data.type.count - 1) {
-                                              //directly add last standee
-                                              GameMethods.addStandee(
-                                                  null,
-                                                  widget.data,
-                                                  isBoss
-                                                      ? MonsterType.boss
-                                                      : MonsterType.normal);
-                                            } else if (widget
-                                                    .data
-                                                    .monsterInstances
-                                                    .value
-                                                    .length <
-                                                widget.data.type.count - 1) {
-                                              openDialog(
-                                                  context,
-                                                  //problem: context is of stat card widget, not the + button
-                                                  AddStandeeMenu(
-                                                    elite: false,
-                                                    monster: widget.data,
-                                                  ),
-                                                  //-185,
-                                                  //does not take into account the popup does not scale. (should it?)
-                                                  //-120
-                                              );
-                                            }
+                                            handleAddPressed(true,isBoss);
                                           },
                                         );
                                       })))
@@ -473,32 +503,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                             colorBlendMode: BlendMode.modulate,
                                             'assets/images/psd/add.png'),
                                         onPressed: () {
-                                          if (widget.data.monsterInstances.value
-                                                  .length ==
-                                              widget.data.type.count - 1) {
-                                            //directly add last standee
-                                            GameMethods.addStandee(
-                                                null,
-                                                widget.data,
-                                                isBoss
-                                                    ? MonsterType.boss
-                                                    : MonsterType.elite);
-                                          } else if (widget
-                                                  .data
-                                                  .monsterInstances
-                                                  .value
-                                                  .length <
-                                              widget.data.type.count - 1) {
-                                            openDialog(
-                                                context,
-                                                AddStandeeMenu(
-                                                  elite: isBoss ? false : true,
-                                                  monster: widget.data,
-                                                ),
-                                                //-100,
-                                               // -12
-                                            );
-                                          }
+                                          handleAddPressed(false,isBoss);
+
                                         });
                                   }))),
                       isBoss
