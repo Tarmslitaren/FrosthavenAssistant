@@ -148,7 +148,15 @@ class SettingsMenuState extends State<SettingsMenu> {
                       settings.saveToDisk();
                     });
                   },
-                )
+                ),
+                ListTile(
+                    title: const Text("Clear unlocked characters"),
+                    onTap: () {
+                      setState(() {
+                        getIt<GameState>().unlockedClasses = {};
+                      });
+                    }
+                    ),
               ],
             ),
           ),
