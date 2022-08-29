@@ -13,10 +13,10 @@ class SelectScenarioMenu extends StatefulWidget {
   const SelectScenarioMenu({Key? key}) : super(key: key);
 
   @override
-  _SelectScenarioMenuState createState() => _SelectScenarioMenuState();
+  SelectScenarioMenuState createState() => SelectScenarioMenuState();
 }
 
-class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
+class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
@@ -135,6 +135,14 @@ class _SelectScenarioMenuState extends State<SelectScenarioMenu> {
                             });
                           },
                           child: const Text("Crimson Scales"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              setCampaign("Seeker of Xorn");
+                            });
+                          },
+                          child: const Text("Seeker of Xorn"),
                         ),
                       ],
                     ),

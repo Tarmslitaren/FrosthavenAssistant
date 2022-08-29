@@ -575,6 +575,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
     await fetchCampaignData("Forgotten Circles", map);
     await fetchCampaignData("Crimson Scales", map);
     await fetchCampaignData("Frosthaven", map);
+    await fetchCampaignData("Seeker of Xorn", map);
     //TODO:specify campaigns in data, or scrub the directory for files
 
 

@@ -30,6 +30,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     _foundMonsters.sort((a, b) {
       if (a.edition != b.edition) {
         return -a.edition.compareTo(b.edition);
+        //TODO: have an actual order in data
         //NOTE: this - here is a bit silly. it just so happens that the order makes more sense backwards: Jotl, gloom, FC, FH, CS
       }
       if (a.hidden && !b.hidden) {

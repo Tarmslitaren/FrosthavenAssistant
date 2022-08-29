@@ -15,10 +15,10 @@ class AddStandeeMenu extends StatefulWidget {
       : super(key: key);
 
   @override
-  _AddStandeeMenuState createState() => _AddStandeeMenuState();
+  AddStandeeMenuState createState() => AddStandeeMenuState();
 }
 
-class _AddStandeeMenuState extends State<AddStandeeMenu> {
+class AddStandeeMenuState extends State<AddStandeeMenu> {
   final GameState _gameState = getIt<GameState>();
 
   @override
@@ -31,13 +31,15 @@ class _AddStandeeMenuState extends State<AddStandeeMenu> {
     bool boss = widget.monster.type.levels[0].boss != null;
     MonsterType type = MonsterType.normal;
     Color color = Colors.white;
-    if (boss) {
-      color = Colors.red;
-      type = MonsterType.boss;
-    }
+
     if (widget.elite) {
       color = Colors.yellow;
       type = MonsterType.elite;
+    }
+
+    if (boss) {
+      color = Colors.red;
+      type = MonsterType.boss;
     }
     bool isOut = false;
     for (var item in widget.monster.monsterInstances.value) {
