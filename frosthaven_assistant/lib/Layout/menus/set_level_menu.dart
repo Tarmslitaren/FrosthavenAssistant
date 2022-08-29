@@ -17,10 +17,10 @@ class SetLevelMenu extends StatefulWidget {
   final Figure? figure;
 
   @override
-  _SetLevelMenuState createState() => _SetLevelMenuState();
+  SetLevelMenuState createState() => SetLevelMenuState();
 }
 
-class _SetLevelMenuState extends State<SetLevelMenu> {
+class SetLevelMenuState extends State<SetLevelMenu> {
   final GameState _gameState = getIt<GameState>();
 
   @override

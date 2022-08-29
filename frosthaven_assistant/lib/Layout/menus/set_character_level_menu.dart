@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
+import '../../Resource/commands/change_stat_commands/change_max_health_command.dart';
 import '../../Resource/commands/set_character_level_command.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
+import '../counter_button.dart';
 
 class SetCharacterLevelMenu extends StatefulWidget {
   const SetCharacterLevelMenu({Key? key, required this.character}) : super(key: key);
@@ -66,7 +68,7 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   Widget build(BuildContext context) {
     return Container(
         width: 10,
-        height: 160,
+        height: 200,
         decoration: BoxDecoration(
           image: DecorationImage(
             colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
@@ -106,7 +108,20 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   buildLevelButton(9),
                 ],
               ),
-              //TODO: add a change name widget and a set health directly widget
+              //TODO: add a change name widget
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CounterButton(
+                        widget.character.characterState.maxHealth,
+                        ChangeMaxHealthCommand(0, widget.character.id, widget.character.id),
+                        900,
+                        "assets/images/blood.png",
+                        true,
+                        Colors.red,
+                        figureId: widget.character.id,
+                        ownerId: widget.character.id)
+                  ])
             ],
           ),
         ]));
