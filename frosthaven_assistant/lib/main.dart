@@ -7,9 +7,17 @@ import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import 'package:wakelock/wakelock.dart';
+import 'package:window_size/window_size.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
+
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle('Flutter Demo');
+    setWindowMinSize(const Size(400, 600));
+    setWindowMaxSize(Size.infinite);
+  }
 
   runApp(const MyApp());
 }

@@ -515,7 +515,7 @@
         [ 735, false, 84, "%attack% - 1", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4", "^%wound%" ],
         [ 736, false, 75, "%attack% + 0", "^%poison%","*.........", "%attack% - 1", "^%range% 5", "^%immobilize%" ],
         [ 737, false, 75, "%attack% - 2", "^Target all adjacent enemies", "^%disarm%","*.........", "%attack% + 0", "^%range% 3", "^%target% 2" ],
-        [ 738, false, 96, "%attack% - 2", "^%range% 6","*.........", "^Summon normal Deep Terror","^in a hex adjacent to the target." ],
+        [ 738, false, 96, "%attack% - 2", "^%range% 6", "^Summon normal Deep Terror","^in a hex adjacent to the target." ],
         [ 739, false, 54, "%wound% and", "%poison%", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4" ]
       ]
     },
