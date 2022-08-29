@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/game_state.dart';
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
@@ -99,6 +100,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                       setState(() {
                         settings.noCalculation.value = value!;
                         settings.saveToDisk();
+                        getIt<GameState>().updateList.value++;
                       });
                     }),
                 if (!Platform.isIOS)

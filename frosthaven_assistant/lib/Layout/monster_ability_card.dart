@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/card_stack.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_methods.dart';
@@ -157,7 +158,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 width: 178 * scale * 0.8, //needed for line breaks in lines
                 //color: Colors.amber,
                 child: LineBuilder.createLines(
-                    card.lines, false, true, calculateAll, data, CrossAxisAlignment.center, scale),
+                    card.lines, false, !getIt<Settings>().noCalculation.value, calculateAll, data, CrossAxisAlignment.center, scale),
               ),
             )
           ],

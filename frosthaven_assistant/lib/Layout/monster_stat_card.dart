@@ -179,6 +179,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                 attack = attackValue.toString();
               }
 
+              bool noCalculationSetting = getIt<Settings>().noCalculation.value;
+
               return Container(
                   decoration: BoxDecoration(
                     boxShadow: [
@@ -323,7 +325,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                                 .boss!
                                                                 .special1,
                                                             false,
-                                                            true,
+                                                            !noCalculationSetting,
                                                             false,
                                                             widget.data,
                                                             CrossAxisAlignment
@@ -355,7 +357,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                                 .boss!
                                                                 .special2,
                                                             false,
-                                                            true,
+                                                            !noCalculationSetting,
                                                             false,
                                                             widget.data,
                                                             CrossAxisAlignment
