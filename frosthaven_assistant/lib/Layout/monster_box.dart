@@ -80,6 +80,18 @@ class _MonsterBoxState extends State<MonsterBox> {
     if (data.standeeNr > 0) {
       standeeNr = data.standeeNr.toString();
     }
+    Color? borderColor = color;
+    if (data.type == MonsterType.summon) {
+      borderColor = Colors.green;
+    }
+    BlendMode blendMode = BlendMode.hue;
+    if (color == Colors.red) {
+      blendMode = BlendMode.modulate;
+    }
+    if (color == Colors.yellow) {
+      borderColor = null;
+    }
+
       return Container(
           decoration: null,
           padding: EdgeInsets.zero,
@@ -93,6 +105,8 @@ class _MonsterBoxState extends State<MonsterBox> {
               height: 30 * scale,
               width: 47 * scale,
               fit: BoxFit.fill,
+              color: borderColor,
+              colorBlendMode: blendMode,// (works but not great),// BlendMode.modulate/color (good for boss), //BlendMode.saturation,(not good for bosss)
               //scale up disregarding aspect ratio
               image: const AssetImage("assets/images/psd/monster-box.png"),
               //width: widget.height*0.8,

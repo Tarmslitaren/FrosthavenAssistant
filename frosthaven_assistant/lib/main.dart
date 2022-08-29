@@ -14,7 +14,7 @@ void main() {
   setupGetIt();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowTitle('Flutter Demo');
+    setWindowTitle('X-haven Assistant');
     setWindowMinSize(const Size(400, 600));
     setWindowMaxSize(Size.infinite);
   }
