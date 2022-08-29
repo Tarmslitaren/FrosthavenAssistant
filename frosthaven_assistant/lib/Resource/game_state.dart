@@ -251,6 +251,8 @@ class Monster extends ListItemData{
   final monsterInstances = ValueNotifier<List<MonsterInstance>>([]);
   final level = ValueNotifier<int>(0);
   bool isAlly;
+  //note: this is only used for the no standee tracking setting
+  bool isActive = false;
 
   bool hasElites() {
     for (var instance in monsterInstances.value) {
@@ -283,6 +285,7 @@ class Monster extends ListItemData{
     return '{'
         '"id": "$id", '
         '"turnState": ${turnState.index}, '
+        '"isActive": $isActive, '
         '"type": "${type.name}", '
         '"monsterInstances": ${monsterInstances.value.toString()}, '
         //'"state": ${state.index}, '
@@ -297,6 +300,9 @@ class Monster extends ListItemData{
     level.value = json['level'];
     if (json.containsKey("isAlly")) {
       isAlly = json['isAlly'];
+    }
+    if (json.containsKey("isActive")) {
+      isActive = json['isActive'];
     }
     String modelName = json['type'];
     //state = ListItemState.values[json["state"]];

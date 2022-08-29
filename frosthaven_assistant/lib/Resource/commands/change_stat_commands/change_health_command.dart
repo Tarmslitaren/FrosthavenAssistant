@@ -34,6 +34,10 @@ class ChangeHealthCommand extends ChangeStatCommand {
     if(change > 0) {
       return "Increase $figureId's health";
     }
+    Figure figure = GameMethods.getFigure(ownerId, figureId)!;
+    if (figure.health.value <= 0) {
+      return "Kill $figureId";
+    }
     return "Decrease $figureId's health";
   }
 }

@@ -4,8 +4,14 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:frosthaven_assistant/Resource/commands/activate_monster_type.dart';
+import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
+import 'package:window_size/window_size.dart';
+
+import '../services/service_locator.dart';
+import 'commands/change_stat_commands/change_health_command.dart';
 
 class Settings {
   final userScalingMainList = ValueNotifier<double>(1.0);
@@ -160,16 +166,38 @@ class Settings {
         noInit.value = data["noInit"];
       }
       if (data["noStandees"] != null) {
-        noInit.value = data["noStandees"];
+        noStandees.value = data["noStandees"];
       }
       if (data["randomStandees"] != null) {
-        noInit.value = data["randomStandees"];
+        randomStandees.value = data["randomStandees"];
       }
       if (data["noCalculation"] != null) {
-        noInit.value = data["noCalculation"];
+        noCalculation.value = data["noCalculation"];
       }
     }
   }
+
+  void handleNoStandeesSettingChange() {
+    GameState gameState = getIt<GameState>();
+    if(noStandees.value) {
+      for (var item in gameState.currentList) {
+        if(item is Monster) {
+          item.monsterInstances.value = [];
+        }
+      }
+    }else {
+      for (var item in gameState.currentList) {
+        if(item is Monster && item.isActive) {
+          item.isActive = false;
+        }
+      }
+    }
+    gameState.gameSaveStates.clear();
+    gameState.commands.clear();
+    gameState.commandIndex.value = -1;
+    gameState.updateList.value++;
+  }
+
 
   @override
   String toString() {

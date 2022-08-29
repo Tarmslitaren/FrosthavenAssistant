@@ -23,13 +23,14 @@ class MonsterWidget extends StatefulWidget {
   MonsterWidget({Key? key, required this.data}) : super(key: key);
 
   @override
-  _MonsterWidgetState createState() => _MonsterWidgetState();
+  MonsterWidgetState createState() => MonsterWidgetState();
 }
 
-class _MonsterWidgetState extends State<MonsterWidget> {
-  @override
+class MonsterWidgetState extends State<MonsterWidget> {
+
   late List<MonsterInstance> lastList = [];
 
+  @override
   void initState() {
     super.initState();
     lastList = widget.data.monsterInstances.value;
@@ -134,7 +135,7 @@ class _MonsterWidgetState extends State<MonsterWidget> {
         // widget.data.monsterInstances,
         builder: (context, value, child) {
           return ColorFiltered(
-              colorFilter: widget.data.monsterInstances.value.isNotEmpty &&
+              colorFilter: (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive) &&
                       (widget.data.turnState != TurnsState.done ||
                           getIt<GameState>().roundState.value ==
                               RoundState.chooseInitiative)
@@ -149,9 +150,8 @@ class _MonsterWidgetState extends State<MonsterWidget> {
                     children: [
                       getIt<GameState>().roundState.value ==
                                   RoundState.playTurns &&
-                              widget.data.monsterInstances.value.isNotEmpty
+                          (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive)
                           ? InkWell(
-                              //TODO: text blocks input. should be a level higher
                               onTap: () {
                                 getIt<GameState>()
                                     .action(TurnDoneCommand(widget.data.id));

@@ -79,6 +79,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                     onChanged: (bool? value) {
                       setState(() {
                         settings.noStandees.value = value!;
+                        settings.handleNoStandeesSettingChange();
                         settings.saveToDisk();
                       });
                     }),

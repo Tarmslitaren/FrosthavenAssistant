@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
+import 'package:frosthaven_assistant/Resource/commands/activate_monster_type.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -42,6 +43,10 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
   void handleAddPressed(bool left, bool isBoss){
 
     Settings settings = getIt<Settings>();
+    if(settings.noStandees.value == true) {
+      getIt<GameState>().action(ActivateMonsterTypeCommand(widget.data.id, !widget.data.isActive));
+      return;
+    }
 
     if (widget.data.monsterInstances
         .value.length ==
@@ -488,9 +493,6 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                       List<MonsterInstance>>(
                                   valueListenable: widget.data.monsterInstances,
                                   builder: (context, value, child) {
-                                    bool allStandeesOut = widget.data
-                                            .monsterInstances.value.length ==
-                                        widget.data.type.count;
                                     return IconButton(
                                         padding: const EdgeInsets.only(
                                             left: 8, top: 8),

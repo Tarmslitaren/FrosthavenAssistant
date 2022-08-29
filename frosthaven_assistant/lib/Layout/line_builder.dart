@@ -352,8 +352,8 @@ class LineBuilder {
   static List<String> _applyMonsterStats(
       final String lineInput, String sizeToken, Monster monster, bool forceShowAll) {
 
-    bool showElite = monster.monsterInstances.value.length > 0 && monster.monsterInstances.value[0].type == MonsterType.elite;
-    bool showNormal = monster.monsterInstances.value.length > 0 && monster.monsterInstances.value.last.type != MonsterType.elite;
+    bool showElite = monster.monsterInstances.value.isNotEmpty && monster.monsterInstances.value[0].type == MonsterType.elite || monster.isActive;
+    bool showNormal = monster.monsterInstances.value.isNotEmpty && monster.monsterInstances.value.last.type != MonsterType.elite || monster.isActive;
     if(forceShowAll) {
       showElite = true;
       showNormal = true;

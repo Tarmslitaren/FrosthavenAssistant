@@ -99,7 +99,7 @@ class GameMethods {
       for (var item in _gameState.currentList) {
         if (item is Monster) {
           if (item.type.deck == deck.name) {
-            if (item.monsterInstances.value.isNotEmpty) {
+            if (item.monsterInstances.value.isNotEmpty || item.isActive) {
               if (deck.discardPile.isEmpty) {
                 deck.draw();
                 break;
@@ -116,7 +116,7 @@ class GameMethods {
       for (var item in _gameState.currentList) {
         if (item is Monster) {
           if (item.type.deck == deck.name) {
-            if (item.monsterInstances.value.isNotEmpty) {
+            if (item.monsterInstances.value.isNotEmpty || item.isActive) {
               deck.draw();
               //only draw once from each deck
               break;
@@ -178,20 +178,20 @@ class GameMethods {
       //inactive at bottom
       if (a is Monster) {
         if (b is Monster) {
-          if (b.monsterInstances.value.isEmpty) {
+          if (b.monsterInstances.value.isEmpty && !b.isActive) {
             return -1;
           }
         }
-        if (a.monsterInstances.value.isEmpty) {
+        if (a.monsterInstances.value.isEmpty && !a.isActive) {
           return 1;
         }
       }
       if (b is Monster) {
-        if (b.monsterInstances.value.isEmpty) {
+        if (b.monsterInstances.value.isEmpty && !b.isActive) {
           return -1;
         }
         if (a is Monster) {
-          if (a.monsterInstances.value.isEmpty) {
+          if (a.monsterInstances.value.isEmpty && !a.isActive) {
             return 1;
           }
         }
@@ -230,8 +230,8 @@ class GameMethods {
       if (a is Character) {
         aInitiative = a.characterState.initiative;
       } else if (a is Monster) {
-        if (a.monsterInstances.value.isEmpty) {
-          if (b is Monster && b.monsterInstances.value.isEmpty) {
+        if (a.monsterInstances.value.isEmpty && !a.isActive) {
+          if (b is Monster && b.monsterInstances.value.isEmpty && !b.isActive) {
             return -1;
           }
           return 1; //inactive at bottom
@@ -247,8 +247,8 @@ class GameMethods {
       if (b is Character) {
         bInitiative = b.characterState.initiative;
       } else if (b is Monster) {
-        if (b.monsterInstances.value.isEmpty) {
-          if (a is Monster && a.monsterInstances.value.isEmpty) {
+        if (b.monsterInstances.value.isEmpty && ! b.isActive) {
+          if (a is Monster && a.monsterInstances.value.isEmpty && !a.isActive) {
             return 1;
           }
           return -1; //inactive at bottom
@@ -460,7 +460,7 @@ class GameMethods {
     for ( ; newIndex < _gameState.currentList.length; newIndex++) {
       ListItemData data = _gameState.currentList[newIndex];
       if(data is Monster){
-        if (data.monsterInstances.value.isNotEmpty){
+        if (data.monsterInstances.value.isNotEmpty || data.isActive){
           data.turnState = TurnsState.current;
           break;
         }

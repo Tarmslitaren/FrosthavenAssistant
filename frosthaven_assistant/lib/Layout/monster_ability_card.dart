@@ -256,7 +256,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
           MonsterAbilityCardModel? card;
-          if (_gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty) {
+          if (_gameState.roundState.value == RoundState.playTurns && (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive)) {
             CardStack stack = GameMethods
                 .getDeck(widget.data.type.deck)!
                 .discardPile;
@@ -285,7 +285,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
               setState(() {});
             },
               onDoubleTap: (){
-              if(_gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty && card != null) {
+              if(_gameState.roundState.value == RoundState.playTurns && (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive) && card != null) {
                 setState(() {
                   openDialog(
                       context,
@@ -306,7 +306,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                     ),
                 //switchInCurve: Curves.easeInBack,
                 //switchOutCurve: Curves.easeInBack.flipped,
-                child: _gameState.roundState.value == RoundState.playTurns && widget.data.monsterInstances.value.isNotEmpty && card != null
+                child: _gameState.roundState.value == RoundState.playTurns && (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive) && card != null
                     ? MonsterAbilityCardWidget.buildFront(card, widget.data, scale, false)
                     : MonsterAbilityCardWidget.buildRear(scale, _deckSize),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);

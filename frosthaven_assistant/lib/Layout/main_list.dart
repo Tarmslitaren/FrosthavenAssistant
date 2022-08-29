@@ -361,7 +361,7 @@ class _MainListState extends State<MainList> {
           List<double> itemHeights = getItemHeights(context);
           int itemsPerColumn = getItemsCanFitOneColumn(itemHeights); //no good
           bool ignoreScroll = false;
-          if (canFit2Columns &&
+          if (canFit2Columns && itemHeights.length > 0 &&
               itemHeights.last <
                   2 * MediaQuery.of(context).size.height - 160 * getIt<Settings>().userScalingBars.value - 200) {
             //TODO: 200 is a feely hack, hard to say why it is needed
