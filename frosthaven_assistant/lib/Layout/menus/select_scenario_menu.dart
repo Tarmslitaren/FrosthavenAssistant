@@ -144,6 +144,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                           },
                           child: const Text("Seeker of Xorn"),
                         ),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              setCampaign("Solo");
+                            });
+                          },
+                          child: const Text("Solo Scenarios"),
+                        ),
                       ],
                     ),
                   ]),
