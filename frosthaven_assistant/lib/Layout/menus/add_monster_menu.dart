@@ -19,6 +19,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   final List<MonsterModel> _allMonsters = [];
   final GameState _gameState = getIt<GameState>();
   bool addAsAlly = false;
+  bool showSpecial = false;
+  bool showBoss = true;
 
   @override
   initState() {
@@ -26,7 +28,16 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     for (String key in _gameState.modelData.value.keys) {
       _allMonsters.addAll(_gameState.modelData.value[key]!.monsters.values);
     }
-    _foundMonsters = _allMonsters;
+    _foundMonsters = _allMonsters.toList();
+
+    if(!showSpecial) {
+      _foundMonsters.removeWhere((element) => element.hidden == true);
+    }
+    if(!showBoss) {
+      _foundMonsters.removeWhere((element) => element.levels[0].boss != null);
+    }
+
+
     _foundMonsters.sort((a, b) {
       if (a.edition != b.edition) {
         return -a.edition.compareTo(b.edition);
@@ -55,13 +66,20 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     List<MonsterModel> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all users
-      results = _allMonsters;
+      results = _allMonsters.toList();
     } else {
       results = _allMonsters
           .where((user) =>
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       // we use the toLowerCase() method to make it case-insensitive
+    }
+
+    if(!showSpecial) {
+      results.removeWhere((element) => element.hidden == true);
+    }
+    if(!showBoss) {
+      results.removeWhere((element) => element.levels[0].boss != null);
     }
 
     // Refresh the UI
@@ -100,6 +118,24 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                       onChanged: (bool? value) {
                         setState(() {
                           addAsAlly = value!;
+                        });
+                      }),
+                  CheckboxListTile(
+                      title: const Text("Show Bosses"),
+                      value: showBoss,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          showBoss = value!;
+                          _runFilter("");
+                        });
+                      }),
+                  CheckboxListTile(
+                      title: const Text("Show Scenario Special Monsters"),
+                      value: showSpecial,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          showSpecial = value!;
+                          _runFilter("");
                         });
                       }),
                   Container(

@@ -284,6 +284,7 @@
 			"deck": "Cave Bear",
 			"gfx": "Cave Bear",
 			"display": "Cave Bear",
+			"hidden": true,
 			"count": 4,
 			"levels": [
 				{
