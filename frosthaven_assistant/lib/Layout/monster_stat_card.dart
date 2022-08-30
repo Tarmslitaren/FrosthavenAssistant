@@ -208,14 +208,15 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                         ),
                       ),
                       Positioned(
-                          left: 4.0 * 0.8 * scale,
-                          top: 0 * 0.8 * scale,
+                          left: isBoss? 7.0 * scale : 3.2 * scale,
+                          top: isBoss? 2.0 * scale : 3.2 * scale,
                           child: Text(
                             _level.toString(),
                             style: TextStyle(
                                 fontFamily: 'Majalla',
                                 color: Colors.white,
                                 fontSize: 18 * 0.8 * scale,
+                                height: 1,
                                 shadows: [
                                   Shadow(
                                       offset: Offset(1 * scale, 1 * scale),
