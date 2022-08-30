@@ -6,6 +6,8 @@ import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 
 import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
+import '../Resource/settings.dart';
+import '../services/service_locator.dart';
 
 class LineBuilder {
 
@@ -483,6 +485,14 @@ class LineBuilder {
   static Widget createLines(List<String> strings, bool left, bool applyStats, bool applyAll,
       Monster monster, CrossAxisAlignment alignment, double scale) {
     //applyStats = false;
+    bool frosthavenStyle = getIt<Settings>().style.value == Style.frosthaven ||
+        getIt<Settings>().style.value == Style.original && getIt<GameState>().currentCampaign.value == "Frosthaven";
+    //TODO:more generic solution for coming campaigns with frosthaven style.
+    String imageSuffix = "";
+    if (frosthavenStyle) {
+      imageSuffix = "_fh";
+    }
+
     var shadow = Shadow(
         offset: Offset(1 * scale * 0.8, 1 * scale * 0.8),
         color: left ? Colors.white : Colors.black);
@@ -591,6 +601,7 @@ class LineBuilder {
         }else {
           lines.add(column);
           if(i == localStrings.length-1){
+            //TODO: remove - this never happens
             return createLinesColumn(alignment, lines);
           }
         }
@@ -660,6 +671,29 @@ class LineBuilder {
         line = line.substring(1, line.length);
         if (line.startsWith("....")) {
           styleToUse = dividerStyle;
+          if(frosthavenStyle) {
+            Widget image =
+            Image.asset(
+              scale: 1.0/(scale * 0.15), //for some reason flutter likes scale to be inverted
+              //fit: BoxFit.fitHeight,
+              height: 6 * scale,
+              filterQuality: FilterQuality.high,
+              "assets/images/abilities/divider_fh.png",
+            );
+            //create pure picture, not a WidgetSpan (scale 5.5)
+            if(isInColumn && (!isInRow || isColumnInRow) ){
+              widgetsInColumn.add(image);
+            }else if (isInRow && (!isInColumn|| isRowInColumn)){
+              widgetsInRow.add(image);
+            }
+            else {
+              lines.add(image);
+            }
+            if(i == localStrings.length-1){
+              return createLinesColumn(alignment, lines);
+            }
+            continue;
+          }
         }
       }
       if (line.startsWith('^')) {
@@ -694,7 +728,7 @@ class LineBuilder {
               RegExp regEx = RegExp(
                   r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
               if (regEx.hasMatch(_tokens[iconToken]!) == true) {
-                iconGfx += "-medium-black";
+                iconGfx += "-medium-black"; //TODO: rename black graphics
               }
             }
             if (iconToken == "use") {
@@ -708,16 +742,23 @@ class LineBuilder {
                     //color: Colors.amber,
                     //margin: margin,
                     child: Stack(
+                      clipBehavior: Clip.none,
                     children: [
                       lastImage,
-                      Image(
-                        height: styleToUse.fontSize! * 1.2,
+                      Positioned(
+                        width: frosthavenStyle?  styleToUse.fontSize! * 1.2+ scale * 5 : styleToUse.fontSize! * 1.2,
+                        bottom: 0,
+                          left: frosthavenStyle? 2.8  * scale : 0, //why left?!
+
+                          child: Image(
+                        height: frosthavenStyle? styleToUse.fontSize! * 1.2 * 0.5: styleToUse.fontSize! * 1.2,
+                        //width: frosthavenStyle? styleToUse.fontSize! * 1.2 * 0.5: styleToUse.fontSize! * 1.2,
                         //alignment: Alignment.topCenter,
                         fit: BoxFit.fitHeight,
                         filterQuality: FilterQuality.high,
                         image:
-                            AssetImage("assets/images/abilities/$iconGfx.png"),
-                      )
+                            AssetImage("assets/images/abilities/${iconGfx+imageSuffix}.png"),
+                      ))
                     ],
                   ))));
               textPartList.add(TextSpan(
@@ -726,6 +767,9 @@ class LineBuilder {
               double height = _getIconHeight(iconToken, styleToUse.fontSize!);
               if (addText) {
                 String? iconTokenText = _tokens[iconToken];
+                if (frosthavenStyle) {
+                  iconTokenText = null;
+                }
                 textPartList
                     .add(TextSpan(text: iconTokenText, style: styleToUse));
               }
@@ -744,7 +788,7 @@ class LineBuilder {
                 filterQuality: FilterQuality.high,
                 image: AssetImage("assets/images/abilities/$iconGfx.png"),
               );
-              //TODO: may fine tune the height of some/all icons here
+              //TODO: may fine-tune the height of some/all icons here
               double fuu = 1;
               if(iconGfx == "poison" || iconGfx == "wound") {
                 //fuu = 0.8;

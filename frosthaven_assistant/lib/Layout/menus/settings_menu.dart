@@ -149,6 +149,51 @@ class SettingsMenuState extends State<SettingsMenu> {
                     });
                   },
                 ),
+                const Text(
+                  "Style:",
+                  style: TextStyle(fontSize: 18),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      children: [
+                        Radio(value: Style.frosthaven, groupValue: settings.style.value, onChanged: (index) {
+                          setState(() {
+                            settings.style.value = Style.frosthaven;
+                            settings.saveToDisk();
+                            getIt<GameState>().updateList.value++;
+                          });
+                        }),
+                        const Text('Frosthaven')
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Radio(value: Style.gloomhaven, groupValue: settings.style.value, onChanged: (index) {
+                          setState(() {
+                            settings.style.value = Style.gloomhaven;
+                            settings.saveToDisk();
+                            getIt<GameState>().updateList.value++;
+                          });
+                        }),
+                        const Text('Gloomhaven')
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Radio(value: Style.original, groupValue: settings.style.value, onChanged: (index) {
+                          setState(() {
+                            settings.style.value = Style.original;
+                            settings.saveToDisk();
+                            getIt<GameState>().updateList.value++;
+                          });
+                        }),
+                        const Text('Original')
+                      ],
+                    ),
+                  ],
+                ),
                 ListTile(
                     title: const Text("Clear unlocked characters"),
                     onTap: () {

@@ -13,6 +13,12 @@ import 'package:window_size/window_size.dart';
 import '../services/service_locator.dart';
 import 'commands/change_stat_commands/change_health_command.dart';
 
+enum Style {
+  frosthaven,
+  gloomhaven,
+  original
+}
+
 class Settings {
   final userScalingMainList = ValueNotifier<double>(1.0);
   final userScalingBars = ValueNotifier<double>((Platform.isWindows || Platform.isLinux || Platform.isMacOS)? 1.6 : 1.0); //if ! mobile ->2.0
@@ -26,6 +32,8 @@ class Settings {
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
+
+  final style = ValueNotifier<Style>(Style.original);
 
 
   Future<void> init() async {
@@ -174,6 +182,9 @@ class Settings {
       if (data["noCalculation"] != null) {
         noCalculation.value = data["noCalculation"];
       }
+      if (data["style"] != null) {
+        style.value = Style.values[data["style"]];
+      }
     }
   }
 
@@ -211,6 +222,7 @@ class Settings {
         '"noStandees": ${noStandees.value}, '
         '"randomStandees": ${randomStandees.value}, '
         '"noCalculation": ${noCalculation.value}, '
+        '"style": ${style.value.index}, '
         '"darkMode": ${darkMode.value} '
         '}';
   }
