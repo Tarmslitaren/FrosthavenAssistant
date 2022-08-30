@@ -131,7 +131,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                 textAlign: TextAlign.center,
                 standeeNr,
                 style: TextStyle(
-                    fontFamily: 'Pirata',
+                    //fontFamily: 'Pirata',
                     color: color,
                     fontSize: 20 * scale,
                     shadows: [
@@ -167,7 +167,7 @@ class _MonsterBoxState extends State<MonsterBox> {
                             textAlign: TextAlign.end,
                             "${data.health.value}",
                             style: TextStyle(
-                                fontFamily: 'Pirata',
+                                //fontFamily: 'Pirata',
                                 color: Colors.white,
                                 fontSize: data.health.value > 99
                                     ? 13 * scale

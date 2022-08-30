@@ -161,6 +161,13 @@ flutter:
     - family: Pirata
       fonts:
         - asset: assets/fonts/PirataOne-Gloomhaven.ttf
+    - family: GermaniaOne
+      fonts:
+        - asset: assets/fonts/GermaniaOne-Regular.ttf
+    - family: Markazi
+      fonts:
+        - asset: assets/fonts/MarkaziText-VariableFont_wght.ttf
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

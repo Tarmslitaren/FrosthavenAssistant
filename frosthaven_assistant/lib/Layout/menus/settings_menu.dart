@@ -2,9 +2,11 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
+import '../../Resource/theme_switcher.dart';
 import '../../services/service_locator.dart';
 
 class SettingsMenu extends StatefulWidget {
@@ -162,6 +164,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                           setState(() {
                             settings.style.value = Style.frosthaven;
                             settings.saveToDisk();
+                            ThemeSwitcher.of(context).switchTheme(themeFH);
                             getIt<GameState>().updateList.value++;
                           });
                         }),
@@ -174,6 +177,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                           setState(() {
                             settings.style.value = Style.gloomhaven;
                             settings.saveToDisk();
+                            ThemeSwitcher.of(context).switchTheme(theme);
                             getIt<GameState>().updateList.value++;
                           });
                         }),
@@ -186,6 +190,11 @@ class SettingsMenuState extends State<SettingsMenu> {
                           setState(() {
                             settings.style.value = Style.original;
                             settings.saveToDisk();
+                            if(getIt<GameState>().currentCampaign.value == "Frosthaven"){
+                              ThemeSwitcher.of(context).switchTheme(themeFH);
+                            } else {
+                              ThemeSwitcher.of(context).switchTheme(theme);
+                            }
                             getIt<GameState>().updateList.value++;
                           });
                         }),

@@ -102,7 +102,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                   Text(
                     card.title,
                     style: TextStyle(
-                        fontFamily: 'Pirata',
+                        //fontFamily: 'Pirata',
                         color: Colors.white,
                         fontSize: 14 * 0.8 * scale,
                         shadows: shadow),

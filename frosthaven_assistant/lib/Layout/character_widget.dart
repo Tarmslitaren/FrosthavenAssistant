@@ -326,7 +326,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                             style: TextStyle(
                                                 height: 1,
                                                 //quick fix for web-phone disparity.
-                                                fontFamily: 'Pirata',
+                                                //fontFamily: 'Pirata',
                                                 color: Colors.white,
                                                 fontSize: 24 * scale,
                                                 shadows: [
@@ -392,7 +392,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                 : "",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                                fontFamily: 'Pirata',
+                                                //fontFamily: 'Pirata',
                                                 color: Colors.white,
                                                 fontSize: 24 * scale,
                                                 shadows: [
@@ -418,7 +418,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                     child: Text(
                                       character.characterState.display,
                                       style: TextStyle(
-                                          fontFamily: 'Pirata',
+                                          //fontFamily: 'Pirata',
                                           color: Colors.white,
                                           fontSize: 16 * scale,
                                           shadows: [
@@ -447,7 +447,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                               Text(
                                                 '${character.characterState.health.value.toString()} / ${character.characterState.maxHealth.value.toString()}',
                                                 style: TextStyle(
-                                                    fontFamily: 'Pirata',
+                                                    //fontFamily: 'Pirata',
                                                     color: Colors.white,
                                                     fontSize: 16 * scale,
                                                     shadows: [
@@ -501,7 +501,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                 .xp.value
                                                 .toString(),
                                             style: TextStyle(
-                                                fontFamily: 'Pirata',
+                                                //fontFamily: 'Pirata',
                                                 color: Colors.blue,
                                                 fontSize: 14 * scale,
                                                 shadows: [
@@ -536,7 +536,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                             .level.value
                                             .toString(),
                                         style: TextStyle(
-                                            fontFamily: 'Pirata',
+                                            //fontFamily: 'Pirata',
                                             color: Colors.white,
                                             fontSize: 14 * scale,
                                             shadows: [

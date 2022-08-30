@@ -24,9 +24,11 @@ class ChangeChillCommand extends ChangeStatCommand {
 
   @override
   String toString() {
+    //not correct for summons
     if(change > 0) {
-      return "Increase $figureId's chill";
+
+      return "Increase $ownerId's chill";
     }
-    return "Decrease $figureId's chill";
+    return "Decrease $ownerId's chill";
   }
 }

@@ -37,8 +37,8 @@ class ChangeMaxHealthCommand extends ChangeStatCommand {
   @override
   String toString() {
     if(change > 0) {
-      return "Increase $figureId's max health";
+      return "Increase $ownerId's max health";
     }
-    return "Decrease $figureId's max health";
+    return "Decrease $ownerId's max health";
   }
 }

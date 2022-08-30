@@ -115,7 +115,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
             textAlign: TextAlign.center,
             widget.data.type.display,
             style: TextStyle(
-                fontFamily: 'Pirata',
+                //fontFamily: 'Pirata',
                 color: Colors.white,
                 fontSize: 18 * 0.8 * scale,
                 shadows: [

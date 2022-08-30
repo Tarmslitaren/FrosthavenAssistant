@@ -36,7 +36,7 @@ PreferredSize createTopBar() {
                 child: Text(
                   "X-haven\nAssistant",
                   style: TextStyle(
-                    fontFamily: 'Pirata',
+                    //fontFamily: 'Pirata',
                     color: Colors.white,
                     fontSize: 16 * settings.userScalingBars.value,
                     shadows: [

@@ -9,6 +9,8 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:window_size/window_size.dart';
 
+import 'Resource/theme_switcher.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
@@ -19,7 +21,9 @@ void main() {
     setWindowMaxSize(Size.infinite);
   }
 
-  runApp(const MyApp());
+  runApp(
+    ThemeSwitcherWidget(initialTheme: theme, child: const MyApp())
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +49,7 @@ class MyApp extends StatelessWidget {
         checkerboardOffscreenLayers: false,
         //showPerformanceOverlay: true,
         title: 'X-haven Assistant',
-        theme: theme,
+        theme: ThemeSwitcher.of(context).themeData,
         home: const MyHomePage(title: 'X-haven Assistant'),
       );
 
