@@ -48,6 +48,19 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     _foundScenarios = _gameState
         .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
         .toList();
+
+    //special hack for solo BladeSwarm
+    if (campaign == "Solo") {
+      if (!_gameState.unlockedClasses.contains("Bladeswarm")) {
+        for (var item in _foundScenarios) {
+          if (item.contains("Bladeswarm")) {
+            _foundScenarios.remove(item);
+            break;
+          }
+        }
+      }
+    }
+
     _foundScenarios.sort((a, b) {
       int? aNr = findNrFromScenarioName(a);
       int? bNr = findNrFromScenarioName(b);
@@ -56,7 +69,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       }
       return a.compareTo(b);
     });
-    _foundScenarios.insert(0, "custom");
+    if (campaign != "Solo") {
+      _foundScenarios.insert(0, "custom");
+    }
   }
 
   // This function is called whenever the text field changes
@@ -82,6 +97,24 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     setState(() {
       _foundScenarios = results;
     });
+  }
+
+  Widget buildSoloTile(String name) {
+    List<String> strings = name.split(':');
+    return ListTile(
+      leading: Image(
+        height: 30,
+        width: 30,
+        fit: BoxFit.scaleDown,
+        image: AssetImage("assets/images/class-icons/${strings[0]}.png"),
+      ),
+      title: Text(strings[1], style: const TextStyle(fontSize: 18)),
+      onTap: () {
+        _gameState.action(SetScenarioCommand(name, false));
+        Navigator.pop(context);
+        //Navigator.pop(context);
+      },
+    );
   }
 
   @override
@@ -210,15 +243,19 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                     child: _foundScenarios.isNotEmpty
                         ? ListView.builder(
                             itemCount: _foundScenarios.length,
-                            itemBuilder: (context, index) => ListTile(
-                              title: Text(_foundScenarios[index],
-                                  style: const TextStyle(fontSize: 18)),
-                              onTap: () {
-                                _gameState.action(SetScenarioCommand(
-                                    _foundScenarios[index], false));
-                                Navigator.pop(context);
-                              },
-                            ),
+                            itemBuilder: (context, index) =>
+                                _gameState.currentCampaign.value == "Solo"
+                                    ? buildSoloTile(_foundScenarios[index])
+                                    : ListTile(
+                                        title: Text(_foundScenarios[index],
+                                            style:
+                                                const TextStyle(fontSize: 18)),
+                                        onTap: () {
+                                          _gameState.action(SetScenarioCommand(
+                                              _foundScenarios[index], false));
+                                          Navigator.pop(context);
+                                        },
+                                      ),
                           )
                         : const Text(
                             'No results found',
