@@ -34,9 +34,14 @@ class AbilityCardZoomState extends State<AbilityCardZoom> {
     double scale = getScaleByReference(context);
     double zoomValue = 2.5;
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     double width = 178 * 0.8 * scale* zoomValue;
+    double height = 116 * 0.8 * scale* zoomValue;
     if(screenWidth < 40 + width) {
-      width = screenWidth - 40;
+      zoomValue = screenWidth/ (178 * 0.8 * scale);// 2;
+    }
+    if(screenHeight < 60 + height) {
+      zoomValue = 2;
     }
 
     return InkWell(
