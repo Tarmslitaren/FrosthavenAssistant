@@ -82,7 +82,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       results = _gameState
           .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
           .toList();
-      results.insert(0, "custom");
+      if(_gameState.currentCampaign.value != "Solo") {
+        results.insert(0, "custom");
+      }
     } else {
       results = _gameState
           .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
@@ -91,6 +93,17 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       // we use the toLowerCase() method to make it case-insensitive
+      //special hack for solo BladeSwarm
+      if (_gameState.currentCampaign.value == "Solo") {
+        if (!_gameState.unlockedClasses.contains("Bladeswarm")) {
+          for (var item in results) {
+            if (item.contains("Bladeswarm")) {
+              results.remove(item);
+              break;
+            }
+          }
+        }
+      }
     }
 
     // Refresh the UI
