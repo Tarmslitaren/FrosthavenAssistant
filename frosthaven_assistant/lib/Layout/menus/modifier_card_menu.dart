@@ -213,10 +213,10 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (hasDiviner && widget.name.isEmpty)
                                   Row(
                                     children: [
-                                      if (widget.deck.badOmen.value ==
+                                      if (hasDiviner && widget.name.isEmpty)
+                                        if (widget.deck.badOmen.value ==
                                           0)
                                         TextButton(
                                           onPressed: () {
@@ -235,7 +235,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                               .action(EnfeeblingHexCommand());
                                         },
                                         child: Text(
-                                            "Enfeebling Hex (added minus ones: ${widget.deck.addedMinusOnes.value})"),
+                                            "Add -1 card (added : ${widget.deck.addedMinusOnes.value})"),
                                       ),
                                     ],
                                   ),
