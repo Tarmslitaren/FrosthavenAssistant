@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
@@ -677,6 +679,7 @@ class LineBuilder {
               scale: 1.0/(scale * 0.15), //for some reason flutter likes scale to be inverted
               //fit: BoxFit.fitHeight,
               height: 6 * scale,
+              width: 50 * scale,
               filterQuality: FilterQuality.high,
               "assets/images/abilities/divider_fh.png",
             );
@@ -728,7 +731,7 @@ class LineBuilder {
               RegExp regEx = RegExp(
                   r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
               if (regEx.hasMatch(_tokens[iconToken]!) == true) {
-                iconGfx += "-medium-black"; //TODO: rename black graphics
+                iconGfx += "_black";
               }
             }
             if (iconToken == "use") {
@@ -779,23 +782,23 @@ class LineBuilder {
               if (iconToken == "move" && monster.type.flying) {
                 iconGfx = "flying";
               }
+              String imagePath = "assets/images/abilities/$iconGfx.png";
+              if(imageSuffix.isNotEmpty) {
+                if (File("assets/images/abilities/$iconGfx$imageSuffix.png").existsSync()) {
+                  imagePath = "assets/images/abilities/$iconGfx$imageSuffix.png";
+                }
+              }
               Widget child = Image(
-                //fit: BoxFit.fill,
+                //fit: BoxFit.contain,
                 //could do funk stuff with the color value for cool effects maybe?
                 height: height, //TODO: this causes lines to have variable height
                 //alignment: Alignment.topCenter,
                 fit: BoxFit.fitHeight,
                 filterQuality: FilterQuality.high,
-                image: AssetImage("assets/images/abilities/$iconGfx.png"),
+                image: AssetImage(imagePath),
               );
-              //TODO: may fine-tune the height of some/all icons here
-              double fuu = 1;
-              if(iconGfx == "poison" || iconGfx == "wound") {
-                //fuu = 0.8;
-                //margin = EdgeInsets.zero;
-              }
               child = Container(
-                height: height * fuu,
+                height: height,
                 //color: Colors.amber,
                 margin: margin,
                 child: child,

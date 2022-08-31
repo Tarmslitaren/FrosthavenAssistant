@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/enums.dart';
+import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import 'menus/status_menu.dart';
 
@@ -36,10 +37,10 @@ class MonsterBox extends StatefulWidget {
   }
 
   @override
-  _MonsterBoxState createState() => _MonsterBoxState();
+  MonsterBoxState createState() => MonsterBoxState();
 }
 
-class _MonsterBoxState extends State<MonsterBox> {
+class MonsterBoxState extends State<MonsterBox> {
   late MonsterInstance data;
 
   @override
@@ -92,6 +93,8 @@ class _MonsterBoxState extends State<MonsterBox> {
       borderColor = null;
     }
 
+    bool frostHavenStyle = getIt<Settings>().style.value == Style.frosthaven || (getIt<Settings>().style.value == Style.original && getIt<GameState>().currentCampaign.value == "Frosthaven");
+
       return Container(
           decoration: null,
           padding: EdgeInsets.zero,
@@ -101,7 +104,6 @@ class _MonsterBoxState extends State<MonsterBox> {
           //black with some opacity
           child: Stack(alignment: Alignment.centerLeft, children: [
             Image(
-              //fit: BoxFit.contain,
               height: 30 * scale,
               width: 47 * scale,
               fit: BoxFit.fill,
@@ -109,7 +111,6 @@ class _MonsterBoxState extends State<MonsterBox> {
               colorBlendMode: blendMode,// (works but not great),// BlendMode.modulate/color (good for boss), //BlendMode.saturation,(not good for bosss)
               //scale up disregarding aspect ratio
               image: const AssetImage("assets/images/psd/monster-box.png"),
-              //width: widget.height*0.8,
             ),
             Container(
               margin: EdgeInsets.only(
@@ -120,7 +121,6 @@ class _MonsterBoxState extends State<MonsterBox> {
                 width: 17 * scale,
                 fit: BoxFit.cover,
                 image: AssetImage("assets/images/$folder/${data.gfx}.png"),
-                //width: widget.height*0.8,
               ),
             ),
             Positioned(
@@ -131,7 +131,6 @@ class _MonsterBoxState extends State<MonsterBox> {
                 textAlign: TextAlign.center,
                 standeeNr,
                 style: TextStyle(
-                    //fontFamily: 'Pirata',
                     color: color,
                     fontSize: 20 * scale,
                     shadows: [
@@ -150,8 +149,6 @@ class _MonsterBoxState extends State<MonsterBox> {
                   padding: EdgeInsets.zero,
                   margin: EdgeInsets.zero,
                   child: Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Image(
                           //fit: BoxFit.contain,
@@ -167,11 +164,10 @@ class _MonsterBoxState extends State<MonsterBox> {
                             textAlign: TextAlign.end,
                             "${data.health.value}",
                             style: TextStyle(
-                                //fontFamily: 'Pirata',
                                 color: Colors.white,
                                 fontSize: data.health.value > 99
-                                    ? 13 * scale
-                                    : 18 * scale,
+                                    ? frostHavenStyle? 10 * scale : 13 * scale
+                                    : frostHavenStyle? 15 * scale : 18 * scale,
                                 shadows: [
                                   Shadow(
                                       offset: Offset(1 * scale, 1 * scale),
@@ -191,9 +187,6 @@ class _MonsterBoxState extends State<MonsterBox> {
                                     spacing: 0,
                                     runSpacing: 0,
                                     direction: Axis.vertical,
-                                    //verticalDirection: VerticalDirection.up,
-                                    //clipBehavior: Clip.none,
-                                    //runAlignment: ,
                                     alignment: WrapAlignment.center,
                                     crossAxisAlignment: WrapCrossAlignment.center,
 
