@@ -543,7 +543,7 @@
         [1198, true, 96, "%attack% - 1", "^%range% 5", "*Summon one normal Blood Ooze in a hex","*adjacent to the target with a hit point value equal","*to the summoning Blood Ooze's current hit point","*value minus 2 (limited by a normal Blood Ooze's","*specified maximum hit point value)" ],
         [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "[r]","%fire%%use%", "[c]", "^Hit point value equal","^to three instead", "[/c]", "[/r]" ],
         [1200, false, 71, "^All adjacent enemies", "^suffer one damage.","*.........", "%move% + 1","*.........", "%heal% 1", "^Target all adjacent Blood Oozes"],
-        [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^%range% + 0", "^Target one adjacent enemy", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes." ],
+        [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^Target one adjacent enemy", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes." ],
         [1202, false, 62, "%attack% - 1", "^%poison%", "^Target one adjacent enemy","*.........", "%attack% - 1", "^Target one enemy at exactly %range% 2" ],
         [1203, false, 53, "%move% + 0","*.........", "%loot% 1","*.........", "^If at least one money token was looted:", "%attack% + 1", "^%range% + 0" ],
         [1204, false, 17, "%retaliate% 1", "^%range% 3", "*.........","%move% + 0","*.........", "%wound%", "^Target all adjacent enemies" ],
