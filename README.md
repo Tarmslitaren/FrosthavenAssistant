@@ -1,4 +1,4 @@
-# Frosthaven Assistant
+# X-haven Assistant
 
 ## What is it?
 A helper app for the boardgames Gloomhaven, Frosthaven and any derivative.
@@ -67,6 +67,7 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Objectives and Escorts are special characters, representing special rules from scenarios.
 - If some special rules or monsters appear from an added section in the scenario/sections booklets, they can be added from the add sections menu.
 - If you make a mistake, there is an undo button in the main menu. and if the mistake was to undo, there is also redo ;)
+
 ## Roadmap
 - Release 5 plan (next):
   - frosthaven style icons and card layouts
@@ -74,11 +75,10 @@ scaling the bottom/top bars (for better visibility on some screens for example).
   - show special rules toast on start/end of round if special rules for round nr
   - solo scenarios
 
--Release 5 plan:
-  - show scenario special rules (at bottom?)
+-Release 6 plan:
   - networking
 
-Release 6 plan:
+Release 7 plan:
   - full Frosthaven support
 
 ## Copyright / License
