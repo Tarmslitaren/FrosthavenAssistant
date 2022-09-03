@@ -10,6 +10,7 @@ import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
 import '../Resource/settings.dart';
 import '../services/service_locator.dart';
+import 'package:dotted_border/dotted_border.dart';
 
 class LineBuilder {
 
@@ -65,10 +66,14 @@ class LineBuilder {
   }
 
   static EdgeInsetsGeometry _getMarginForToken(String iconToken, double height,
-      bool mainLine, CrossAxisAlignment alignment) {
+      bool mainLine, CrossAxisAlignment alignment, bool isFrostHavenStyle) {
     double margin = 0.2;
+
     if (alignment != CrossAxisAlignment.center) {
       margin = 0.1;
+    }
+    if(isFrostHavenStyle)  {
+      margin = 0;
     }
     if (iconToken.contains("aoe")) {
       return EdgeInsets.only(left: margin * height, right: margin * height);
@@ -111,12 +116,13 @@ class LineBuilder {
         iconToken == "ice" ||
         iconToken == "dark" ||
         iconToken == "light"||
+        iconToken == "light"||
     iconToken == "any"
     ) {
-      return EdgeInsets.only(top: 0.19 * height); //since icons lager, need lager margin top
+      //this caused elements to not align well especially noticeable in case of use element to create element
+      //return EdgeInsets.only(top: 0.19 * height); //since icons lager, need lager margin top
     }
     return EdgeInsets.only(left: 0.1 * height, right: 0.1 * height);
-    return EdgeInsets.zero;
   }
 
   static Map<String, int> _getStatTokens(Monster monster, bool elite) {
@@ -228,6 +234,7 @@ class LineBuilder {
         if (regEx.hasMatch(item) == true) {
           if (item != "shield" &&
               item != "retaliate" &&
+              item != "range" &&
               item != "jump") {
             tokens.add("%$item%");
           }
@@ -237,6 +244,7 @@ class LineBuilder {
         if (regEx.hasMatch(item) == true) {
           if (item != "shield" &&
               item != "retaliate" &&
+              item != "range" &&
               item != "jump") {
             eTokens.add("%$item%");
           }
@@ -484,9 +492,267 @@ class LineBuilder {
         children: lines);
   }
 
-  static Widget createLines(List<String> strings, bool left, bool applyStats, bool applyAll,
-      Monster monster, CrossAxisAlignment alignment, double scale) {
-    //applyStats = false;
+  static List<String> convertLinesToFH(List<String> lines) {
+    //move lines up when they should
+    //add container markers here as well
+    List<String> retVal = [];
+    bool isSubLine = false;
+    bool isReallySubLine = false;
+    bool isConditional = false;
+    for(int i = 0; i < lines.length; i++) {
+      String line = lines[i];
+      //if(line.contains("%use")/*|| line.toLowerCase().contains("if")*/){
+     //   isConditional = true;
+      //  retVal.add("[conditionalStart]");
+      //}
+      if(line == "[r]" && (lines[i+1].contains('%use') || lines[i+1].toLowerCase().contains('if') ||
+          (lines.length > i+2 && lines[i+2].toLowerCase().contains('if'))
+      )) {
+        isConditional = true;
+       // retVal.add("[conditionalStart]");
+      }
+      if(line == "[/r]" && isConditional) {
+        isConditional = false;
+       // retVal.add("[conditionalEnd]");
+      }
+
+      if(line == "*Self") {
+        line = "!^ self";
+      }
+
+      line = line.replaceAll("Affect", "Target");
+      //the affect keyword is presumably because in base goomhaven you can only target enemies.
+      // this is changed already in JotL.
+
+      if(line.startsWith("*")) { //now for both * and *..... potential problems?
+        //reset
+        if(isReallySubLine){ //&& !isConditional
+          retVal.add("[subLineEnd]");
+
+        }
+        isReallySubLine = false;
+        isSubLine = false;
+        isConditional = false;
+
+      }
+
+      //removing conditional here is a bit of a cop out. if fixes one bug, but also -no handling of conditionals...
+      if(line.startsWith("^") && isSubLine && !isConditional){
+        //check if match right align issues
+        if(!isConditional && !isReallySubLine) {
+          retVal.add("[subLineStart]");
+          isReallySubLine = true;
+        }
+        if(line[1] == '%' ||
+            //these are all very... assuming.
+            line.startsWith("^Self") ||
+            line.startsWith("^Advantage") ||
+            //only target on same line for non valued tokens
+            (line.startsWith("^Target") && lines[i-1].contains('%push%')) ||
+            (line.startsWith("^Target") && lines[i-1].contains('%pull%')) ||
+            (line.startsWith("^Target") && lines[i-1].startsWith('%') && lines[i-1].endsWith('%')) || //this is to add sub line after a lone condition
+            (line.startsWith("^Target") && lines[i-1].startsWith('^%') && lines[i-1].endsWith('%')) || //you will not want a linebreak after a lone poison sub line
+            line.startsWith("^All") && !line.startsWith("^All attacks")&& !line.startsWith("^All targets")) {
+          line = "!$line";
+          line = line.replaceFirst("Self", "self");
+          line = line.replaceFirst("All", "all");
+          if(retVal.last == "[subLineStart]"){
+            retVal.last = "![subLineStart]";
+          }
+        }
+
+        if(retVal.last.endsWith("%") && line.endsWith("adjacent enemy")){ //blood ooze 62 hack
+          retVal[retVal.length-2] ="[subLineStart]";
+        }
+      }
+      if(line.startsWith("^") && isReallySubLine) {
+        //I know.
+        //we add a linebreaker at same time as we attach line to last,
+        // because we only look at lastLineTextPartList later
+        if(retVal.last != "[subLineStart]") {
+          retVal.add("!^[lineBreak]");
+        }
+        line = "!$line";
+      }
+      else if(line.startsWith("!") || line.startsWith("*") || line.startsWith("^")){
+        //ignore
+      }else{ //if(line != "[c]" && line != "[r]"){
+        if(!isSubLine) {
+          isSubLine = true;
+        }else {
+          if(isReallySubLine){ //&&!isConditional
+            retVal.add("[subLineEnd]");
+            isReallySubLine = false;
+            isSubLine = false;
+          }
+
+        }
+      }
+
+      //if conditional or subline start - add marker
+      //if conditional or subline end - add end marker
+      //don't add subline markers if in conditional block
+
+      //use iconography instead of words
+      line = line.replaceAll("Target", "%target%");
+
+      retVal.add(line);
+    }
+    if(isReallySubLine && !isConditional){
+      retVal.add("[subLineEnd]");
+    }
+    return retVal;
+  }
+
+  static void buildFHStyleBackgrounds(List<Widget> lines, List<InlineSpan> lastLineTextPartList, TextAlign textAlign, double scale,
+      bool isInRow, bool isInColumn, bool isColumnInRow, List<Widget> widgetsInColumn, List<Widget> widgetsInRow) {
+    List<InlineSpan> list1 = [];
+    List<List<InlineSpan>> list2 = [];
+    bool conditional = false;
+    for (int i = 0; i < lastLineTextPartList.length; i++){
+      if(lastLineTextPartList[i].toPlainText().contains("[subLineStart]")) {
+        list1 = lastLineTextPartList.sublist(0,i);
+        List<InlineSpan> tempSpanList = [];
+        for (int j = i+1; j < lastLineTextPartList.length; j++) {
+          if(lastLineTextPartList[j].toPlainText().contains("[lineBreak]")){
+            list2.add(tempSpanList.toList());
+            tempSpanList.clear();
+          } else {
+            tempSpanList.add(lastLineTextPartList[j]);
+          }
+        }
+        list2.add(tempSpanList);
+      }
+      if(lastLineTextPartList[i].toPlainText().contains("[conditionalStart]")) {
+        conditional = true;
+        list1 = lastLineTextPartList.sublist(0,i);
+        List<InlineSpan> tempSpanList = [];
+        for (int j = i+1; j < lastLineTextPartList.length; j++) {
+          if(lastLineTextPartList[j].toPlainText().contains("[lineBreak]")){
+            list2.add(tempSpanList.toList());
+            tempSpanList.clear();
+          } else {
+            tempSpanList.add(lastLineTextPartList[j]);
+          }
+        }
+        list2.add(tempSpanList);
+      }
+
+    }
+
+    Widget widget1 = Text.rich(
+      textHeightBehavior: const TextHeightBehavior(
+          leadingDistribution: TextLeadingDistribution.even
+      ),
+      textAlign: textAlign,
+      TextSpan(
+        children: list1,
+      ),
+    );
+
+    Widget widget2 = Container(
+        decoration: BoxDecoration(
+          //backgroundBlendMode: BlendMode.softLight,
+          //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.amber)),
+            color: conditional? Colors.blue : Color(int.parse("9A808080", radix: 16)),
+            borderRadius: BorderRadius.all(Radius.circular(6 * scale))
+
+        ),
+        padding: EdgeInsets.fromLTRB(3 * scale, 1 * scale, 3 * scale, 0.75 *scale),
+        margin: EdgeInsets.only(left: 2 * scale),
+        //child: Expanded(
+            child: Column(
+mainAxisSize: MainAxisSize.max,
+            children: [
+              if(list2.length > 0)
+            Text.rich(
+            textHeightBehavior: const TextHeightBehavior(
+                leadingDistribution: TextLeadingDistribution.even
+            ),
+            textAlign: textAlign,
+            TextSpan(
+              children: list2[0],
+            )),
+          if(list2.length > 1)
+            Text.rich(
+                textHeightBehavior: const TextHeightBehavior(
+                    leadingDistribution: TextLeadingDistribution.even
+                ),
+                textAlign: textAlign,
+                TextSpan(
+                  children: list2[1],
+                )),
+              if(list2.length > 2)
+                Text.rich(
+                    textHeightBehavior: const TextHeightBehavior(
+                        leadingDistribution: TextLeadingDistribution.even
+                    ),
+                    textAlign: textAlign,
+                    TextSpan(
+                      children: list2[2],
+                    )),
+              if(list2.length > 3)
+                Text.rich(
+                    textHeightBehavior: const TextHeightBehavior(
+                        leadingDistribution: TextLeadingDistribution.even
+                    ),
+                    textAlign: textAlign,
+                    TextSpan(
+                      children: list2[3],
+                    )),
+
+
+          //can't figure out why the builder does not work
+          /*ListView.builder(
+            itemCount: list2.length,
+            itemBuilder: (context, index) => Text.rich(
+              textHeightBehavior: const TextHeightBehavior(
+                  leadingDistribution: TextLeadingDistribution.even
+              ),
+              textAlign: textAlign,
+              TextSpan(
+                children: list2[index],
+              ),
+          )
+          )*/
+        ]
+        )
+    //)
+    );
+    MainAxisAlignment alignment = MainAxisAlignment.center;
+    if(textAlign == TextAlign.end) {
+      alignment = MainAxisAlignment.end;
+    }
+    if(textAlign == TextAlign.start) {
+      alignment = MainAxisAlignment.start;
+    }
+
+    Widget row = Row(
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: alignment,
+      children: [
+        widget1,
+        widget2
+      ],
+    );
+
+
+    if(isInColumn && (!isInRow || isColumnInRow) ){
+      widgetsInColumn.removeLast();
+      widgetsInColumn.add(row);
+    }else if (isInRow && (!isInColumn)){
+      widgetsInRow.removeLast();
+      widgetsInRow.add(row);
+    }
+    else {
+      lines.removeLast();
+      lines.add(row);
+    }
+  }
+
+  static Widget createLines(List<String> strings, final bool left, final bool applyStats,final bool applyAll,
+      final Monster monster, final CrossAxisAlignment alignment, final double scale) {
     bool frosthavenStyle = getIt<Settings>().style.value == Style.frosthaven ||
         getIt<Settings>().style.value == Style.original && getIt<GameState>().currentCampaign.value == "Frosthaven";
     //TODO:more generic solution for coming campaigns with frosthaven style.
@@ -526,7 +792,8 @@ class LineBuilder {
             scale,
         //sizes are larger on stat cards
         height: (alignment == CrossAxisAlignment.center ? 1: 0.8),// 0.9,
-        shadows: [shadow]);
+        shadows: [shadow]
+    );
     var normalStyle = TextStyle(
         //maybe slightly bigger between chars space?
         fontFamily: 'Majalla',
@@ -563,15 +830,27 @@ class LineBuilder {
     localStrings.addAll(strings);
     List<InlineSpan> lastLineTextPartList = [];
 
+
+    if (frosthavenStyle) {
+      localStrings = convertLinesToFH(localStrings);
+    }
+
     //specialized layouts
     bool isInColumn = false;
     bool isInRow = false;
     bool isColumnInRow = false;
-    bool isRowInColumn = false;
     List<Widget> widgetsInColumn = [];
     List<Widget> widgetsInRow = [];
     Widget column;
     Widget row;
+
+    TextAlign textAlign = TextAlign.center;
+    if (alignment == CrossAxisAlignment.start) {
+      textAlign = TextAlign.start;
+    }
+    if (alignment == CrossAxisAlignment.end) {
+      textAlign = TextAlign.end;
+    }
 
     for (int i = 0; i < localStrings.length; i++) {
       String line = localStrings[i];
@@ -580,7 +859,19 @@ class LineBuilder {
       var styleToUse = normalStyle;
       List<InlineSpan> textPartList = [];
 
-      //Note: this solution can only have one row in a column or one column in a row and no deeper nesting
+      if(line == "[subLineStart]"){
+        //continue;
+      }
+      //handle FH layout with gray background for sub-lines
+      if(line.contains("[subLineEnd]") || line.contains("[conditionalEnd]")){
+        buildFHStyleBackgrounds(
+          lines, lastLineTextPartList, textAlign, scale,
+          isInRow, isInColumn, isColumnInRow, widgetsInColumn, widgetsInRow
+        );
+        continue;
+      }
+
+      //Note: this solution can only have one column in a row and no deeper nesting
       if(line == "[c]"){
         isInColumn = true;
         if(isInRow) {
@@ -603,7 +894,7 @@ class LineBuilder {
         }else {
           lines.add(column);
           if(i == localStrings.length-1){
-            //TODO: remove - this never happens
+            //this never happens -unless last line is a [/c]
             return createLinesColumn(alignment, lines);
           }
         }
@@ -611,9 +902,6 @@ class LineBuilder {
       }
       if(line == "[r]"){
         isInRow = true;
-        if(isInColumn) {
-          isRowInColumn = true;
-        }
         //start row
         continue;
       }
@@ -621,27 +909,82 @@ class LineBuilder {
         //end row
         //end column  //handle the results
         isInRow = false;
+        //if(widgetsInRow[0].toStringDeep())
+        bool elementUse = false;
+        for(var item in widgetsInRow) {
+          String compare = item.toStringDeep();
+          if(compare.contains(" : ") || compare.toLowerCase().contains("if") ) { //not a great solution
+            elementUse = true;
+          }
+          if(compare.startsWith("Column")) { //is a column in row
+            for(var colItem in (item as Column).children) {
+              String compare = colItem.toStringDeep();
+              if(compare.contains(" : ") || compare.toLowerCase().contains("if") ) { //not a great solution
+                elementUse = true;
+              }
+            }
+          }
+        }
         row = Row(
           //crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center, //TODO evaluate if this or center with margins on parts is better (probably center)
+          mainAxisSize: MainAxisSize.min, //todo: this was max. make sure the change doe snot f something up
+          mainAxisAlignment: MainAxisAlignment.center,
           children: widgetsInRow.toList(),
         );
         widgetsInRow =[];
-        if(isRowInColumn) {
-          widgetsInColumn.add(row);
-        } else {
+
+
+        if(frosthavenStyle && elementUse) { //or conditional: is isforsthavenStyle and contains a %use%
+          lines.add(Container(
+            margin: EdgeInsets.all(2 * scale),
+              child: DottedBorder(
+              color: Colors.white,
+              //borderType: BorderType.Rect,
+              borderType: BorderType.RRect,
+              radius: Radius.circular(10 * scale),
+              //strokeCap: StrokeCap.round,
+              padding: const EdgeInsets.all(0),
+              dashPattern: [2 * scale, 1 * scale],
+
+              strokeWidth: 0.6 * scale,
+              child:  Container(
+              decoration: BoxDecoration(
+                //backgroundBlendMode: BlendMode.softLight,
+                //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
+                  color: Color(int.parse("9A808080", radix: 16)),
+                  borderRadius: BorderRadius.all(Radius.circular(10 * scale))
+
+              ),
+              padding: EdgeInsets.fromLTRB(3 * scale, 1 * scale, 3 * scale, 0.75 *scale),
+              //margin: EdgeInsets.only(left: 2 * scale),
+              //child: Expanded(
+              child: row
+          )))
+          );
+        }else {
           lines.add(row);
-          if(i == localStrings.length-1){ //error just a string compare
-            return createLinesColumn(alignment, lines);
-          }
+        }
+        if(i == localStrings.length-1){ //error just a string compare
+          return createLinesColumn(alignment, lines);
         }
         continue;
       }
+
       if (line.startsWith('¤')) {
+        double scaleConstant =0.8 * 0.55; //this is because of the actual size of the assets
+        if(line.substring(1) == "air"||
+            line.substring(1) == "earth"||
+            line.substring(1) == "ice"||
+            line.substring(1) == "fire"||
+            line.substring(1) == "light"||
+            line.substring(1) == "dark"
+        ) {
+          //because we added new graphics for these that are bigger (todo: change this when creating new aoe graphic)
+          scaleConstant *= 0.6;
+        }
         Widget image =
         Image.asset(
-          scale: 1.0/(scale * 0.8 * 0.55), //for some reason flutter likes scale to be inverted
+          scale: 1.0/(scale * scaleConstant), //for some reason flutter likes scale to be inverted
 
           fit: BoxFit.fitHeight,
           filterQuality: FilterQuality.high,
@@ -650,7 +993,7 @@ class LineBuilder {
         //create pure picture, not a WidgetSpan (scale 5.5)
         if(isInColumn && (!isInRow || isColumnInRow) ){
           widgetsInColumn.add(image);
-        }else if (isInRow && (!isInColumn|| isRowInColumn)){
+        }else if (isInRow && (!isInColumn)){
           widgetsInRow.add(image);
         }
         else {
@@ -686,7 +1029,7 @@ class LineBuilder {
             //create pure picture, not a WidgetSpan (scale 5.5)
             if(isInColumn && (!isInRow || isColumnInRow) ){
               widgetsInColumn.add(image);
-            }else if (isInRow && (!isInColumn|| isRowInColumn)){
+            }else if (isInRow && (!isInColumn)){
               widgetsInRow.add(image);
             }
             else {
@@ -707,7 +1050,7 @@ class LineBuilder {
       if (applyStats) {
         List<String> statLines = _applyMonsterStats(line, sizeToken, monster, applyAll);
         line = statLines.removeAt(0);
-        if (statLines.length > 0) {
+        if (statLines.isNotEmpty) {
           localStrings.insertAll(i + 1, statLines);
         }
       }
@@ -778,7 +1121,7 @@ class LineBuilder {
               }
               bool mainLine = styleToUse == normalStyle || styleToUse == eliteStyle;
               EdgeInsetsGeometry margin =
-                  _getMarginForToken(iconToken, height, mainLine, alignment);
+                  _getMarginForToken(iconToken, height, mainLine, alignment, frosthavenStyle);
               if (iconToken == "move" && monster.type.flying) {
                 iconGfx = "flying";
               }
@@ -813,14 +1156,6 @@ class LineBuilder {
 
               textPartList.add(WidgetSpan(
                   style: TextStyle(
-                      //height: styleToUse.height!*5,
-                    //backgroundColor: Colors.blueGrey,
-                     // textBaseline: TextBaseline.ideographic,
-                   // decoration: TextDecoration.lineThrough,
-                    //overflow: TextOverflow.visible,
-                   // decorationColor: Colors.blueGrey,
-                    //leadingDistribution: TextLeadingDistribution.even,
-
                       fontSize: styleToUse.fontSize! * wtf),
                   //styleToUse, //don't ask (probably because height is 0.8
                   child: child));
@@ -868,13 +1203,6 @@ class LineBuilder {
         String textPart = line.substring(partStartIndex, line.length);
         textPartList.add(TextSpan(text: textPart, style: styleToUse));
       }
-      TextAlign textAlign = TextAlign.center;
-      if (alignment == CrossAxisAlignment.start) {
-        textAlign = TextAlign.start;
-      }
-      if (alignment == CrossAxisAlignment.end) {
-        textAlign = TextAlign.end;
-      }
       var text = Text.rich(
         textHeightBehavior: const TextHeightBehavior(
           leadingDistribution: TextLeadingDistribution.even
@@ -886,9 +1214,13 @@ class LineBuilder {
       );
       if (isRightPartOfLastLine) {
         if(isInColumn && (!isInRow || isColumnInRow) ){
-          widgetsInColumn.removeLast();
-        }else if (isInRow && (!isInColumn|| isRowInColumn)){
-          widgetsInRow.removeLast();
+          if (widgetsInColumn.isNotEmpty) {
+            widgetsInColumn.removeLast();
+          }
+        }else if (isInRow && (!isInColumn)){
+          if(widgetsInRow.isNotEmpty) {
+            widgetsInRow.removeLast();
+          }
         }
         else {
           lines.removeLast();
@@ -903,13 +1235,14 @@ class LineBuilder {
             children: textPartList,
           ),
         );
-        //lines.add(text);
       }
-      if(isInColumn && (!isInRow || isColumnInRow) ){
+
+      if (isInColumn && (!isInRow || isColumnInRow)) {
         widgetsInColumn.add(text);
-      }else if (isInRow && (!isInColumn|| isRowInColumn)){
+      } else if (isInRow && (!isInColumn)) {
         widgetsInRow.add(text);
       }
+
       else {
         lines.add(text);
       }

@@ -28,7 +28,22 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     List<Widget> list = [];
     double cardWidth = 178 * 0.8 * scale;
     double cardHeight = 118 * 0.8 * scale;
+
     for (GraphicPositional item in positionals) {
+
+      double scaleConstant =0.8 * 0.55; //this is because of the actual size of the assets
+      if(item.gfx == "air"||
+          item.gfx == "earth"||
+          item.gfx  == "ice"||
+          item.gfx  == "fire"||
+          item.gfx  == "light"||
+          item.gfx  == "dark"
+      ) {
+        //because we added new graphics for these that are bigger
+        scaleConstant *= 0.6;
+      }
+
+
       Positioned pos = Positioned(
           left: item.x * cardWidth,
           top: item.y * cardHeight,
@@ -36,7 +51,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             alignment: Alignment.topLeft,
             angle: item.angle * pi / 180,
             child: Transform.scale(
-              scale: item.scale * scale * 0.8 * 0.55,
+              scale: item.scale * scale * scaleConstant,
               alignment: Alignment.topLeft,
               child: Image.asset(
                 "assets/images/abilities/${item.gfx}.png",

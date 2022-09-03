@@ -438,8 +438,8 @@
         [1215, true, 34, "%move% + 1","*.........", "^All adjacent enemies with",  "^%chill% suffer 1 damage."],
         [1216, false, 60, "%move% + 1", "*.........","%attack% + 0", "%air%" ],
         [1217, false, 45, "%attack% + 2", "^%chill%", "%ice%" ],
-        [1218, false, 86, "%move% + 1","*.........", "%attack% - 1", "^Add +2 %attack% if the target", "^has %chill%" ],
-        [1219, false, 86, "%move% + 1","*.........", "%attack% - 1", "^Add +2 %attack% if the target", "^has %chill%" ],
+        [1218, false, 86, "%move% + 1","*.........", "%attack% - 1","[r]", "[c]", "^Add +2 %attack% if the target", "^has %chill%", "[/c]", "[/r]"],
+        [1219, false, 86, "%move% + 1","*.........", "%attack% - 1", "[r]", "[c]","^Add +2 %attack% if the target", "^has %chill%","[/c]", "[/r]" ],
         [1220, false, 94, "%move% + 2","*.........", "[r]","%ice%%use%", "[c]","^%heal% 2", "^Self", "[/c]", "[/r]" ],
         [1221, false, 77, "%stun% and", "%push% 1", "^Target one adjacent enemy" ]
       ]
@@ -451,9 +451,9 @@
         [2000, false, 6, "%shield% + 2","*.........", "%heal% 2", "^Self","*.........", "%strengthen%", "^Self" ],
         [2001, false, 18, "%move% + 1","*.........", "%attack% - 1" ],
         [2002, true, 24, "^%attack% - 1","*%wound%","*.........", "*Focus on the enemy farthest away.", "^%move% + 0","*.........", "^%attack% - 1","*Target one adjacent enemy", "*%wound%" ],
-        [2003, false, 30, "%move% + 0","*.........", "%attack% + 0", "^Add +1 %attack% if the target's current", "^hit point value is less than maximum." ],
+        [2003, false, 30, "%move% + 0","*.........", "%attack% + 0", "[r]", "[c]","^Add +1 %attack% if the target's current", "^hit point value is less than maximum.", "[/c]", "[/r]"],
         [2004, false, 35, "%move% - 1","*.........", "[r]", "[c]","%attack% - 1", "^%poison%","[/c]","¤aoe-4-with-black", "[/r]" ],
-        [2005, false, 44, "%attack% - 1", "^%range% 3", "^%target% 2", "^Add +1 %attack% if the target's current", "^hit point value is less than maximum." ],
+        [2005, false, 44, "%attack% - 1", "^%range% 3", "^%target% 2","[r]", "[c]", "^Add +1 %attack% if the target's current", "^hit point value is less than maximum.", "[/c]", "[/r]"],
         [2006, true, 62, "%move% - 1","*.........", "[r]", "[c]","%attack% - 1", "^%range% 2", "^%muddle%","[/c]", "¤aoe-triangle-2-side", "[/r]" ],
         [2007, false, 73, "%move% - 1", "*.........","%attack% + 1" ]
       ]
@@ -463,13 +463,13 @@
       "edition": "Crimson Scales",
       "cards": [
         [1222, true, 13, "%attack% + 1", "^Target all enemies within %range% 3", "^with %chill%", "%air%" ],
-        [1223, true, 38, "%attack% + 1", "^%range% + 1", "%air%%use%", "!^%chill%"],
-        [1224, false, 5, "%move% - 1","*.........", "%attack% + 0","^%range% + 0", "%air%%use%", "!^%pull% 2" ],
+        [1223, true, 38, "%attack% + 1", "^%range% + 1", "[r]", "%air%%use%", "^%chill%", "[/r]"],
+        [1224, false, 5, "%move% - 1","*.........", "%attack% + 0","^%range% + 0", "[r]","%air%%use%", "^%pull% 2", "[/r]" ],
         [1225, false, 30, "%heal% 2", "^Self","*.........", "%chill%", "^Target one enemy with no %chill%", "^tokens within %range% 3" ],
         [1226, false, 26, "%move% + 0","*.........", "%attack% - 1","^%range% + 0","*.........", "^Create a %chill% trap in an adjacent", "^empty hex closest to an enemy." ],
         [1227, false, 10, "%retaliate% 3", "^%range% 3","*.........", "[r]","%air%%use%", "[c]", "^%attack% - 1", "^%range% - 1","[/c]", "[/r]" ],
         [1228, false, 22, "%pull% 2", "^Target one enemy within %range% 3","*.........", "[r]","[c]","%attack% - 1","^%range% + 0","[/c]","¤aoe-arc-3","[/r]", "%air%" ],
-        [1229, false, 19, "%attack% - 1", "^Target all enemies within %range% 2", "%ice%%use%", "!%air%" ]
+        [1229, false, 19, "%attack% - 1", "^Target all enemies within %range% 2", "[r]","%ice%%use%", "%air%", "[/r]" ]
       ]
     },
     {
@@ -478,9 +478,9 @@
       "cards": [
         [1230, true, 44, "%move% + 0", "*.........","%attack% + 1", "%ice%" ],
         [1231, true, 44, "%move% + 1", "*.........","%attack% + 0", "%ice%" ],
-        [1232, false, 12, "%shield% + 2", "^Self","*.........", "^If an enemy suffers %retaliate% damage", "^from attacking an Icecrawler this round,", "^the enemy gains %chill%." ],
+        [1232, false, 12, "%shield% + 2", "^Self","*.........","[r]", "[c]", "^If an enemy suffers %retaliate% damage", "^from attacking an Icecrawler this round,", "^the enemy gains %chill%.","[/c]", "[/r]" ],
         [1233, false, 63, "%move% + 0","*.........", "[r]", "[c]","%attack% + 0", "%ice%%use%", "!^%pierce% 2","[/c]","¤aoe-triangle-2-side-with-black", "[/r]"],
-        [1234, false, 55, "%move% - 2","*.........", "%attack% + 1", "^%range% 3", "%ice%%use%", "!^%pierce% 2" ],
+        [1234, false, 55, "%move% - 2","*.........", "%attack% + 1", "^%range% 3", "[r]", "%ice%%use%", "^%pierce% 2","[/r]" ],
         [1235, false, 16, "%attack% + 0", "^%range% 5", "[r]","%ice%%use%", "[c]","^All enemies adjacent to the", "^target suffer one damage", "[/c]", "[/r]" ],
         [1236, false, 68, "%move% + 0","*.........","[r]","%attack% - 1","¤aoe-star-with-side-black", "[/r]"],
         [1237, false, 9, "^Gain %range% 3 on all", "^%retaliate% abilities.","*.........", "%move% + 0","*.........", "%heal% 2", "^%range% 3" ]
@@ -495,23 +495,23 @@
         [1240, false, 35, "%heal% 2", "^%range% 2", "^%target% 2" ],
         [1241, false, 4, "%shield% + 2", "^Self","*.........", "%attack% + 0", "^Target one adjacent enemy" ],
         [1242, false, 23, "%move% - 1", "*.........","%attack% - 1","^%range% +0", "^%poison%","*.........", "^All attacks targeting Toxic Imp", "^this round gain Disadvantage." ],
-        [1243, false, 47, "%attack% + 1", "^%range% + 1", "^Add +1 %attack% if the target", "^has %infect%" ],
+        [1243, false, 47, "%attack% + 1", "^%range% + 1","[r]","[c]", "^Add +1 %attack% if the target", "^has %infect%","[/c]","[/r]" ],
         [1244, false, 12, "%move% + 0","*.........","%attack% - 1","^%range% +0","*.........", "^If an enemey targets Toxic Imp", "^with an attack, that enemy", "^gains %infect%." ],
-        [1245, false, 76, "%heal% 2", "^%range% 3", "^If a negative condition was removed", "^with this heal, the target gains", "^%strengthen%." ]
+        [1245, false, 76, "%heal% 2", "^%range% 3","[r]", "[/r]", "^If a negative condition was removed", "^with this heal, the target gains", "^%strengthen%." ]
       ]
     },
     {
       "name": "Water Spirit",
       "edition": "Crimson Scales",
       "cards": [
-        [1246, true, 37, "%move% + 0", "*.........","%attack% + 0", "^Add +2 Attack if the target is occupying a water tile" ],
-        [1247, true, 30, "%move% + 0","*.........", "%attack% + 0", "^%pierce% X", "^where X is equal to the number of", "^water tiles within %range% 1." ],
+        [1246, true, 37, "%move% + 0", "*.........","%attack% + 0","[r]", "[c]", "^Add +2 Attack if the target is","^occupying a water tile","[/c]", "[/r]" ],
+        [1247, true, 30, "%move% + 0","*.........", "%attack% + 0", "^%pierce% X","[r]","[/r]", "^where X is equal to the number of", "^water tiles within %range% 1." ],
         [1248, false, 16, "%move% - 1","*.........", "%attack% - 1","*.........", "^All enemies occupying a","^water tile suffer 1 damage." ],
-        [1249, false, 69, "[r]", "ÅKKKK","[c]","%move% + 1","*.........", "%attack% - 1", "[/c]","Å.","¤aoe-arc-3","[/r]", "^Create a water tile in all hexes occupied by a target containing no overlay tiles." ],
+        [1249, false, 69, "[r]", "ÅKKKK","[c]","%move% + 1","*.........", "%attack% - 1", "[/c]","Å.","¤aoe-arc-3","[/r]", "^Create a water tile in all hexes occupied by a","^target containing no overlay tiles." ],
         [1250, false, 44, "%attack% + 0", "^%range% 3", "^%pull% 2", "^%immobilize%" ],
         [1251, false, 53, "%move% + 0","*.........", "%attack% + (X - 1)", "^where X is equal to the number of", "^water tiles within %range% 1, up to 3." ],
         [1252, false, 86, "%move% + 2","*.........", "%heal% 3", "^Self","*.........", "^Create a water tile in an unoccupied", "^adjacent hex closest to an enemy", "^containing no overlay tile." ],
-        [1253, false, 22, "%attack% + 1", "^%target% 2", "^Create a water tile in all hexes occupied by", "^a target containing no overlay tiles." ]
+        [1253, false, 22, "%attack% + 1", "^%target% 2", "[r]","[/r]","^Create a water tile in all hexes occupied by", "^a target containing no overlay tiles." ]
       ]
     },
     {
@@ -523,9 +523,9 @@
           "x": 0.783,
           "y": 0.76
         }],"%attack% + 2", "^%pierce% 2", "^%push% 2", "^%immobilize%","*.........", "%retaliate% 1", "^%range% 3" ],
-        ["Maddening Chatter", 2021, false, 29, "%retaliate% 3", "^%range% 2 or 3", "^Affect all allies within %range% 3","*.........", "%muddle%", "^Target all enemies within %range% 3", "%any%%use%", "!%fire%" ],
-        ["Encasing Webs", 2022, false, 33, "%heal% 5", "^Affect one ally within %range% 3", "^%pull% 2", "^%immobilize%", "%earth%%use%", "!^The affected ally gains \"%retaliate% 1\"." ],
-        ["Steelsilk Weaver", 2023, false, 41, "%move% + 0","*.........", "%immobilize%", "^%range% 3", "^%target% 3", "%fire%%use%", "!^All targets suffer 1 damage." ],
+        ["Maddening Chatter", 2021, false, 29, "%retaliate% 3", "^%range% 2 or 3", "^Affect all allies within %range% 3","*.........", "%muddle%", "^Target all enemies within %range% 3", "[r]","%any%%use%", "%fire%", "[/r]" ],
+        ["Encasing Webs", 2022, false, 33, "%heal% 5", "^Affect one ally within %range% 3", "^%pull% 2", "^%immobilize%", "[r]", "%earth%%use%", "^The affected ally gains \"%retaliate% 1\".", "[/r]" ],
+        ["Steelsilk Weaver", 2023, false, 41, "%move% + 0","*.........", "%immobilize%", "^%range% 3", "^%target% 3", "[r]","%fire%%use%", "^All targets suffer 1 damage.", "[/r]" ],
         ["Coordinated Infestation", 2024, true, 50, "%move% + 1","*.........", "%attack% + 0", "*.........","%ward%", "^Affect self and all adjacent allies", "%fire% %earth%" ],
         ["Anti-Venom", 2025, false, 63, [{
           "gfx": "earth",
@@ -533,7 +533,7 @@
           "y": 0.76
         }],"^         Remove %poison% from self.","*.........", "%move% + 0", "*.........","%attack% + 0", "^%poison%", "*.........","%heal% 3", "^Self" ],
         ["Burning Stingers", 2026, false, 73, "%attack% - 1", "^%range% 3", "^%target% 3", "^All targets suffer 1 damage.", "%fire%" ],
-        ["Burrow Under", 2027, true, 88, "^                   Focus on the enemy farthest away.", "%move% + 2", "^%jump%","*.........", "%attack% + 0", "^Target all enemies within", "^one hex along the path moved", "^%earth%%use% or %fire%%use%", "!^%immobilize%" ]
+        ["Burrow Under", 2027, true, 88, "^                   Focus on the enemy farthest away.", "%move% + 2", "^%jump%","*.........", "%attack% + 0", "^Target all enemies within", "^one hex along the path moved", "[r]", "^%earth%%use% or %fire%%use%", "^%immobilize%", "[/r]" ]
       ]
     },
     {
@@ -543,7 +543,7 @@
         [1198, true, 96, "%attack% - 1", "^%range% 5", "*Summon one normal Blood Ooze in a hex","*adjacent to the target with a hit point value equal","*to the summoning Blood Ooze's current hit point","*value minus 2 (limited by a normal Blood Ooze's","*specified maximum hit point value)" ],
         [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "[r]","%fire%%use%", "[c]", "^Hit point value equal","^to three instead", "[/c]", "[/r]" ],
         [1200, false, 71, "^All adjacent enemies", "^suffer one damage.","*.........", "%move% + 1","*.........", "%heal% 1", "^Target all adjacent Blood Oozes"],
-        [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^Target one adjacent enemy", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes." ],
+        [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^Target one adjacent enemy","[r]", "[c]", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes.","[/c]", "[/r]" ],
         [1202, false, 62, "%attack% - 1", "^%poison%", "^Target one adjacent enemy","*.........", "%attack% - 1", "^Target one enemy at exactly %range% 2" ],
         [1203, false, 53, "%move% + 0","*.........", "%loot% 1","*.........", "^If at least one money token was looted:", "%attack% + 1", "^%range% + 0" ],
         [1204, false, 17, "%retaliate% 1", "^%range% 3", "*.........","%move% + 0","*.........", "%wound%", "^Target all adjacent enemies" ],
@@ -557,19 +557,14 @@
         [1206, true, 62,  "%move% + 0","*.........","[r]", "%attack% - 1","¤aoe-line-2","[/r]", "^%range% + 0", "%fire%" ],
         [1207, true, 62, "%move% - 1", "*.........","[r]","%attack% + 0", "¤aoe-line-2","[/r]", "^%range% + 0", "%fire%"],
         [1208, false, 88, "%move% + 0","*.........", "%disarm%", "^Target all adjacent enemies" ],
-        [1209, false, 3, "%shield% + 2", "^Self", "*.........","%heal% 2", "^Self", "%fire%%use%", "!^+2 %heal%" ],
+        [1209, false, 3, "%shield% + 2", "^Self", "*.........","%heal% 2", "^Self", "[r]","%fire%%use%", "^+2 %heal%", "[/r]" ],
         [1210, false, 56, [{
           "gfx": "aoe-line-4-with-black",
           "x": 0.86,
           "y": 0.66,
           "angle": 210.0
-        }, {
-          "gfx": "aoe-line-5-with-black",
-          "x": 0.948,
-          "y": 0.429,
-          "angle": 60.0
-        }], "%move% + 0","*.........", "%attack% - 1", "^%range% + 0","ÅKK", "%fire%%use%", "!^%attack% + 1","!Å.                                    .", "^%range% + 0"],
-        [1211, false, 40, "%move% - 1","*.........", "%attack% + 0", "^%range% + 0", "%fire%%use%", "!^%range% + 2" ],
+        }], "%move% + 0","*.........", "%attack% - 1", "^%range% + 0","ÅKK", "[r]", "%fire%%use%","[c]", "^%attack% + 1", "^%range% + 0", "[/c]","¤aoe-line-5-with-black_v2", "[/r]"],
+        [1211, false, 40, "%move% - 1","*.........", "%attack% + 0", "^%range% + 0", "[r]", "%fire%%use%", "^%range% + 2", "[/r]" ],
         [1212, false, 49, "%attack% + 1", "^%range% - 1", "^%target% 2" ],
         [1213, false, 77, "[r]", "[c]","%attack% - 2","^%range% + 0", "^%immobilize%","[/c]", "¤aoe-circle", "[/r]"]
       ]
@@ -578,13 +573,13 @@
       "name": "Ravenous Gharial",
       "edition": "Crimson Scales",
       "cards": [
-        ["Death Roll", 2028, false, 30, "%attack% - 2", "^%immobilize%", "^- At 60, perform the following abilities -", "%attack% - 1", "^%wound%", "^- At 90, perform the following abilities -", "%attack% + 0" ],
+        ["Death Roll", 2028, false, 30, "%attack% - 2", "^%immobilize%", "*- At 60, perform the following abilities -", "%attack% - 1", "^%wound%", "*- At 90, perform the following abilities -", "%attack% + 0" ],
         ["Swallow Whole", 2029, true, 65, "%move% + 0","*.........", "%attack% + 0", "*.........","%heal% X", "^Self", "*where X is the damage dealt", "*by the attack ability." ],
         ["Terrifying Lunge", 2030, false, 59, "%move% + 0","*.........", "%attack% + 0", "^%immobilize%","*.........", "%push% 1", "^Target all enemies exactly at %range% 2 or 3" ],
         ["Drag Away", 2031, true, 34, "%move% + 1","*.........", "%attack% - 1", "^%range% 2", "^%pull% 1", "^%wound%" ],
         ["Tail Swipe", 2032, false, 88, "%move% + 1", "^This movement may move through all figures.","*.........","[r]","[c]", "%attack% - 1", "^%push% 2","[/c]","Å.","¤aoe-arc-3", "[/c]", "[/r]" ],
         ["Survival Instincts", 2033, false, 9, "%move% + 0","*.........", "%retaliate% X", "^where X is the figure's %attack% value.","*.........", "^All ranged attacks targeting", "^this figure gain Disadvantage." ],
-        ["Patient Predator", 2034, false, 18, "^%invisible%", "^Self", "*- At 50, perform the following abilities -", "%move% + 0", "*.........","%attack% + 1", "^If this attack was performed,", "^remove %invisible%."],
+        ["Patient Predator", 2034, false, 18, "^%invisible%", "^Self", "*- At 50, perform the following abilities -", "%move% + 0", "*.........","%attack% + 1","[r]", "[c]", "^If this attack was performed,", "^remove %invisible%.","[/c]", "[/r]"],
         ["Sundering Bite", 2035, false, 26, "%move% + 0", "*.........","%attack% + 0", "^%pierce% 3" ]
       ]
     },
@@ -618,7 +613,7 @@
         [735, false, 84, "%attack% - 1", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4", "^%wound%" ],
         [736, false, 75, "%attack% + 0", "^%poison%","*.........", "%attack% - 1", "^%range% 5", "^%immobilize%" ],
         [737, false, 75, "%attack% - 2", "^Target all adjacent enemies", "^%disarm%","*.........", "%attack% + 0", "^%range% 3", "^%target% 2" ],
-        [738, false, 96, "%attack% - 2", "^%range% 6", "^Summon normal Undead Archer","^in a hex adjacent to the target" ],
+        [738, false, 96, "%attack% - 2", "^%range% 6","[r]","[/r]", "^Summon normal Undead Archer","^in a hex adjacent to the target" ],
         [739, false, 54, "%wound% and", "%poison%", "^Target all adjacent enemies","*.........", "%attack% + 0", "^%range% 4" ]
       ]
     },
@@ -631,7 +626,7 @@
         [519, false, 45, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
         [520, false, 45, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
         [521, false, 81, "%attack% + 2","*.........", "^%range% + 0" ],
-        [522, false, 74, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0", "^Target one enemy with all attacks" ],
+        [522, false, 74, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0","[r]","[/r]", "^Target one enemy with all attacks" ],
         [523, true, 12, "%shield% + 1","*.........", "%heal% 2", "^Self" ]
       ]
     },
@@ -641,11 +636,11 @@
         [ 636, true, 40, "%heal% 3", "^Self","*.........","[r]", "%earth%%use%", "[c]", "^%immobilize%", "^Target all enemies within %range% 3","[/c]", "[/r]" ],
         [ 637, true, 42, "%move% + 3","*.........", "%attack% - 1" ],
         [ 638, false, 62, "%move% + 2","*.........", "%attack% + 0", "*.........","%earth%" ],
-        [ 639, false, 71, "%attack% + 0", "^%range% 4", "%earth%%use%", "!^%target% 2" ],
+        [ 639, false, 71, "%attack% + 0", "^%range% 4","[r]", "%earth%%use%", "^%target% 2","[/r]"],
         [ 640, false, 83, "%move% + 1","*.........", "%attack% + 1","*.........", "%earth%" ],
-        [ 641, false, 93, "%move% + 1","*.........", "%attack% - 1", "^Target all adjacent enemies", "%earth%%use%", "!^%push% 1" ],
-        [ 642, false, 79, "%move% + 3","*.........", "%attack% + 0", "%air%%use%", "!^-2 %attack%" ],
-        [ 643, false, 87, "[r]","[c]","     %move% + 2","*.........", "     %attack% - 1","[/c]", "¤aoe-4-with-black", "[/r]","*.........","%any%%use%", "!%earth%" ]
+        [ 641, false, 93, "%move% + 1","*.........", "%attack% - 1", "^Target all adjacent enemies", "[r]","%earth%%use%", "^%push% 1", "[/r]"],
+        [ 642, false, 79, "%move% + 3","*.........", "%attack% + 0", "[r]","%air%%use%", "^-2 %attack%","[/r]"],
+        [ 643, false, 87, "[r]","[c]","     %move% + 2","*.........", "     %attack% - 1","[/c]", "¤aoe-4-with-black", "[/r]","*.........","[r]","%any%%use%", "%earth%","[/r]"]
       ]
     },
     {
@@ -2151,13 +2146,13 @@
             "health": 8,
             "move": 1,
             "attack": 1,
-            "attributes": [ "%retaliate% 1 %range% 2" ]
+            "attributes": [ "%retaliate% 1","^%range% 2" ]
           },
           "elite": {
             "health": 12,
             "move": 1,
             "attack": 2,
-            "attributes": [ "%retaliate% 1 %range% 2" ]
+            "attributes": [ "%retaliate% 1", "^%range% 2" ]
           }
         },
         {
@@ -2166,13 +2161,13 @@
             "health": 11,
             "move": 1,
             "attack": 2,
-            "attributes": [ "%retaliate% 1 %range% 2" ]
+            "attributes": [ "%retaliate% 1","^%range% 2" ]
           },
           "elite": {
             "health": 16,
             "move": 2,
             "attack": 2,
-            "attributes": [ "%retaliate% 1 %range% 2" ]
+            "attributes": [ "%retaliate% 1","^%range% 2" ]
           }
         },
         {
@@ -2181,13 +2176,13 @@
             "health": 14,
             "move": 1,
             "attack": 2,
-            "attributes": [ "%retaliate% 1 %range% 3" ]
+            "attributes": [ "%retaliate% 1","^%range% 3" ]
           },
           "elite": {
             "health": 20,
             "move": 2,
             "attack": 2,
-            "attributes": [ "%retaliate% 1 %range% 3" ]
+            "attributes": [ "%retaliate% 1","^%range% 3" ]
           }
         },
         {
@@ -2196,13 +2191,13 @@
             "health": 17,
             "move": 2,
             "attack": 2,
-            "attributes": [ "%retaliate% 1 %range% 3" ]
+            "attributes": [ "%retaliate% 1","^%range% 3" ]
           },
           "elite": {
             "health": 24,
             "move": 2,
             "attack": 3,
-            "attributes": [ "%retaliate% 2 %range% 3" ]
+            "attributes": [ "%retaliate% 2","^%range% 3" ]
           }
         },
         {
@@ -2211,13 +2206,13 @@
             "health": 20,
             "move": 2,
             "attack": 3,
-            "attributes": [ "%retaliate% 2 %range% 3" ]
+            "attributes": [ "%retaliate% 2","^%range% 3" ]
           },
           "elite": {
             "health": 28,
             "move": 3,
             "attack": 4,
-            "attributes": [ "%retaliate% 2 %range% 3" ],
+            "attributes": [ "%retaliate% 2", "^%range% 3" ],
             "immunities": ["%stun%"]
           }
         },
@@ -2227,13 +2222,13 @@
             "health": 23,
             "move": 3,
             "attack": 3,
-            "attributes": [ "%retaliate% 2 %range% 3" ]
+            "attributes": [ "%retaliate% 2","^%range% 3" ]
           },
           "elite": {
             "health": 32,
             "move": 3,
             "attack": 5,
-            "attributes": [ "%retaliate% 3 %range% 3" ],
+            "attributes": [ "%retaliate% 3","^%range% 3" ],
             "immunities": ["%stun%"]
           }
         },
@@ -2243,14 +2238,14 @@
             "health": 26,
             "move": 3,
             "attack": 4,
-            "attributes": [ "%retaliate% 3 %range% 3" ],
+            "attributes": [ "%retaliate% 3","^%range% 3" ],
             "immunities": ["%stun%"]
           },
           "elite": {
             "health": 38,
             "move": 3,
             "attack": 6,
-            "attributes": [ "%retaliate% 4 %range% 3" ],
+            "attributes": [ "%retaliate% 4","^%range% 3" ],
             "immunities": ["%stun%"]
           }
         },
@@ -2260,14 +2255,14 @@
             "health": 30,
             "move": 3,
             "attack": 4,
-            "attributes": [ "%retaliate% 4 %range% 3" ],
+            "attributes": [ "%retaliate% 4", "^%range% 3" ],
             "immunities": ["%stun%"]
           },
           "elite": {
             "health": 42,
             "move": 3,
             "attack": 6,
-            "attributes": [ "%retaliate% 4 %range% 3"],
+            "attributes": [ "%retaliate% 4","^%range% 3"],
             "immunities": ["%stun%"]
           }
         }
