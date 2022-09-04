@@ -147,7 +147,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 child: Text(
                   card.nr.toString(),
                   style: TextStyle(
-                      fontFamily: 'Majalla',
+                      fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
                       color: Colors.white,
                       fontSize: 8 * 0.8 * scale,
                       shadows: shadow),
@@ -224,7 +224,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                     child: Text(
                       size.toString(),
                       style: TextStyle(
-                          fontFamily: 'Majalla',
+                          fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
                           color: Colors.white,
                           fontSize: 16 * 0.8 * scale,
                           shadows: const [

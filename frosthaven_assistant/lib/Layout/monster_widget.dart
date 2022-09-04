@@ -100,7 +100,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
             child: Container(
               margin: EdgeInsets.only(bottom: 0 * scale, top: 2 * scale),
               child: Image(
-                //fit: BoxFit.contain,
+                fit: BoxFit.contain,
                 height: height,
                 width: height,
                 image: AssetImage(

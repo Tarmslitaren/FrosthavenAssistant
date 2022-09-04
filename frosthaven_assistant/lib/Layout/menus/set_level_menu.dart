@@ -99,7 +99,6 @@ class SetLevelMenuState extends State<SetLevelMenu> {
 
   Widget createLegend(String name, String gfx, String value) {
     var textStyleLevelWidget = const TextStyle(
-        //fontFamily: 'Majalla',
         color: Colors.white,
         overflow: TextOverflow.fade,
         //fontWeight: FontWeight.bold,

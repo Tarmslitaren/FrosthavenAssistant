@@ -653,14 +653,12 @@ class LineBuilder {
 
     Widget widget2 = Container(
         decoration: BoxDecoration(
-          //backgroundBlendMode: BlendMode.softLight,
-          //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.amber)),
             color: conditional? Colors.blue : Color(int.parse("9A808080", radix: 16)),
             borderRadius: BorderRadius.all(Radius.circular(6 * scale))
 
         ),
         padding: EdgeInsets.fromLTRB(3 * scale, 1 * scale, 3 * scale, 0.75 *scale),
-        margin: EdgeInsets.only(left: 2 * scale),
+        //margin: EdgeInsets.only(left: 2 * scale),
         //child: Expanded(
             child: Column(
 mainAxisSize: MainAxisSize.max,
@@ -773,7 +771,7 @@ mainAxisSize: MainAxisSize.max,
         shadows: [shadow]);
 
     var smallStyle = TextStyle(
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? "Markazi" : 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center ? 10 : 11) *
             0.8 *
@@ -784,7 +782,7 @@ mainAxisSize: MainAxisSize.max,
     var midStyle = TextStyle(
       //backgroundColor: Colors.amber,
 
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center ? 11 : 12.7) *
             0.8 *
@@ -795,7 +793,7 @@ mainAxisSize: MainAxisSize.max,
     );
     var normalStyle = TextStyle(
         //maybe slightly bigger between chars space?
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center ? 15.7 : 14) *
             0.8 *
@@ -805,20 +803,20 @@ mainAxisSize: MainAxisSize.max,
 
     var eliteStyle = TextStyle(
         //maybe slightly bigger between chars space?
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: 15.7 * 0.8 * scale,
         height: 1.1,//0.8,
         shadows: [shadow]);
 
     var eliteSmallStyle = TextStyle(
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Maerkazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: 10 * 0.8 * scale,
         height: 1,
         shadows: [shadow]);
     var eliteMidStyle = TextStyle(
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: 11 * 0.8 * scale,
         height: 1.1,

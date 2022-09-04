@@ -18,7 +18,6 @@ Widget createLevelWidget(BuildContext context) {
   double fontHeight = 14 * settings.userScalingBars.value;
 
   var textStyle = TextStyle(
-      //fontFamily: 'Majalla',
       color: Colors.white,
       overflow: TextOverflow.fade,
       //fontWeight: FontWeight.bold,

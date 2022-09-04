@@ -102,17 +102,19 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     double scale = getScaleByReference(context);
     double height = 123 * 0.8 * scale;
 
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+
     final leftStyle = TextStyle(
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: Colors.black,
-        fontSize: 16 * 0.8 * scale,
+        fontSize: 12.8 * scale,
         height: 1.2,
         shadows: [
           Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black12)
         ]);
 
     final rightStyle = TextStyle(
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: Colors.white,
         fontSize: 16 * 0.8 * scale,
         height: 1.2,
@@ -121,7 +123,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         ]);
 
     final specialStyle = TextStyle(
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: 14 * 0.8 * scale,
         height: 1,
@@ -130,7 +132,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         ]);
 
     final lineStyle = TextStyle(
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: 14 * 0.8 * scale,
         height: 0.1,
@@ -211,11 +213,11 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                       ),
                       Positioned(
                           left: isBoss? 7.0 * scale : 3.2 * scale,
-                          top: isBoss? 2.0 * scale : 3.2 * scale,
+                          top: isBoss? frosthavenStyle? 0.5 * scale : 2.0 * scale : 3.2 * scale,
                           child: Text(
                             _level.toString(),
                             style: TextStyle(
-                                fontFamily: 'Majalla',
+                                fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
                                 color: Colors.white,
                                 fontSize: 18 * 0.8 * scale,
                                 height: 1,
@@ -245,9 +247,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               ),
                             )
                           : Positioned(
-                              left: 0.0 * 0.8 * scale,
-                              top: 38.0 * 0.8 * scale,
-                              width: 30 * 0.8 * scale,
+                              left: 0,
+                              top: frosthavenStyle? 29.4 * scale :30.4 * scale,
+                              width: 24 * scale,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 // mainAxisAlignment: MainAxisAlignment.end,
