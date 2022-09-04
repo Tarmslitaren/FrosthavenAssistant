@@ -181,6 +181,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
               bool noCalculationSetting = getIt<Settings>().noCalculation.value;
 
+              bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+
               return Container(
                   decoration: BoxDecoration(
                     boxShadow: [
@@ -418,39 +420,73 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                       !isBoss
                           ? widget.data.type.flying
                               ? Positioned(
-                                  height: 20 * 0.8 * scale,
-                                  left: 94.0 * 0.8 * scale,
-                                  top: 45.0 * 0.8 * scale,
-                                  child: const Image(
+                                  height: 16 * scale,
+                                  left: 74.8 * scale,
+                                  top: 35.6 * scale,
+                                  child: Image(
                                     fit: BoxFit.fitHeight,
-                                    image: AssetImage(
+                                    image: AssetImage( frosthavenStyle?
+                                    "assets/images/psd/flying-stat_fh.png":
                                         "assets/images/psd/flying-stat.png"),
                                   ))
-                              : Container()
+                              : frosthavenStyle?
+                      Positioned(
+                          height: 16 * scale,
+                          left: 74.8 * scale,
+                          top: 35.6 * scale,
+                          child: const Image(
+                            fit: BoxFit.fitHeight,
+                            image: AssetImage(
+                                "assets/images/psd/move-stat_fh.png"),
+                          ))
+                          : Container()
                           : widget.data.type.flying
                               ? Positioned(
-                                  height: 20 * 0.8 * scale,
-                                  left: 31.0 * 0.8 * scale,
-                                  top: 56.0 * 0.8 * scale,
-                                  child: const Image(
+                                  height: 16 * scale,
+                                  left: 23.5 * scale,
+                                  top: 44.4 * scale,
+                                  child: Image(
                                     fit: BoxFit.fitHeight,
-                                    image: AssetImage(
+                                    image: AssetImage( frosthavenStyle?
+                                    "assets/images/psd/flying-stat_fh.png":
                                         "assets/images/psd/flying-stat.png"),
                                   ),
                                 )
-                              : Container(),
+                              : !frosthavenStyle?
+                      Positioned(
+                        height: 16 * scale,
+                        left: 23.5 * scale,
+                        top: 44.4 * scale,
+                        child:const Image(
+                          fit: BoxFit.fitHeight,
+                          image: AssetImage(
+                          "assets/images/psd/move-stat.png"),
+                        ),
+                      )
+                          : Container(),
                       isBoss
                           ? normal.range != 0
                               ? Positioned(
-                                  height: 20 * 0.8 * scale,
+                                  height: 16 * scale,
                                   left: 30.0 * 0.8 * scale,
                                   top: 93.0 * 0.8 * scale,
-                                  child: const Image(
+                                  child: Image(
                                     fit: BoxFit.fitHeight,
-                                    image: AssetImage(
+                                    image: AssetImage( frosthavenStyle?
+                                    "assets/images/psd/range-stat_fh.png":
                                         "assets/images/psd/range-stat.png"),
                                   ))
                               : Container()
+                          : frosthavenStyle?
+                      Positioned(
+                          height: 16 * scale,
+                          left: 74.8 * scale,
+                          top: 66 * scale,
+                          child: const Image(
+                            fit: BoxFit.fitHeight,
+                            image: AssetImage(
+                            "assets/images/psd/range-stat_fh.png"),
+                          ))
                           : Container(),
                       !isBoss
                           ? Positioned(
