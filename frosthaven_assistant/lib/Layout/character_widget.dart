@@ -4,7 +4,7 @@ import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-
+import 'dart:io';
 import '../Resource/color_matrices.dart';
 import '../Resource/commands/next_turn_command.dart';
 import '../Resource/enums.dart';
@@ -76,10 +76,20 @@ class CharacterWidgetState extends State<CharacterWidget> {
   //TODO: try wrap
   List<Image> createConditionList(double scale) {
     List<Image> list = [];
+    String suffix = "";
+    if(GameMethods.isFrosthavenStyle()) {
+      suffix = "_fh";
+    }
     for (var item in character.characterState.conditions.value) {
+      String imagePath = "assets/images/abilities/${item.name}.png";
+      if(suffix.isNotEmpty) {
+        if (File("assets/images/abilities/${item.name}$suffix.png").existsSync()) {
+          imagePath = "assets/images/abilities/${item.name}$suffix.png";
+        }
+      }
       Image image = Image(
         height: 16 * scale,
-        image: AssetImage("assets/images/conditions/${item.name}.png"),
+        image: AssetImage(imagePath),
       );
       list.add(image);
     }

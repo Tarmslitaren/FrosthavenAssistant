@@ -8,9 +8,9 @@ import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/enums.dart';
-import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import 'menus/status_menu.dart';
+import 'dart:io';
 
 class MonsterBox extends StatefulWidget {
   //final MonsterInstance data;
@@ -51,10 +51,20 @@ class MonsterBoxState extends State<MonsterBox> {
 
   List<Image> createConditionList(double scale) {
     List<Image> list = [];
+    String suffix = "";
+    if(GameMethods.isFrosthavenStyle()) {
+      suffix = "_fh";
+    }
     for (var item in data.conditions.value) {
+      String imagePath = "assets/images/abilities/${item.name}.png";
+      if(suffix.isNotEmpty) {
+        if (File("assets/images/abilities/${item.name}$suffix.png").existsSync()) {
+          imagePath = "assets/images/abilities/${item.name}$suffix.png";
+        }
+      }
       Image image = Image(
         height: MonsterBox.conditionSize * scale,
-        image: AssetImage("assets/images/conditions/${item.name}.png"),
+        image: AssetImage(imagePath),
       );
       list.add(image);
     }

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_bless_command.dart';
@@ -169,6 +170,16 @@ class StatusMenuState extends State<StatusMenu> {
 
   Widget buildConditionButton(Condition condition, String figureId, String ownerId, List<String> immunities) {
     bool enabled = true;
+    String suffix = "";
+    if(GameMethods.isFrosthavenStyle()) {
+      suffix = "_fh";
+    }
+    String imagePath = "assets/images/abilities/${condition.name}.png";
+    if(suffix.isNotEmpty) {
+      if (File("assets/images/abilities/${condition.name}$suffix.png").existsSync()) {
+        imagePath = "assets/images/abilities/${condition.name}$suffix.png";
+      }
+    }
     for (var item in immunities) {
       if (condition.name.contains(item.substring(1, item.length-1))) {
         enabled = false;
@@ -213,7 +224,7 @@ class StatusMenuState extends State<StatusMenu> {
                         filterQuality: FilterQuality.high, //needed because of the edges
                       height: 24,
                         width: 24,
-                        'assets/images/conditions/${condition.name}.png'):
+                        imagePath):
 
                       Stack(
                         alignment: Alignment.center,
@@ -221,7 +232,7 @@ class StatusMenuState extends State<StatusMenu> {
                           Positioned(left: 0, top: 0, child: Image(
                             height: 23.1,
                             filterQuality: FilterQuality.high, //needed because of the edges
-                            image: AssetImage('assets/images/conditions/${condition.name}.png'),
+                            image: AssetImage(imagePath),
                           )),
                           const Positioned(
                             //TODO: should be 19  but there is a clipping issue
@@ -380,7 +391,7 @@ class StatusMenuState extends State<StatusMenu> {
                         ? buildChillButtons(
                             figure.chill,
                             12, //technically you can have infinite, but realistically not so much
-                            "assets/images/conditions/chill.png",
+                            "assets/images/abilities/chill.png",
                       figureId,
                       ownerId
                     )

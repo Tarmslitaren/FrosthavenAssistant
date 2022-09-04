@@ -132,8 +132,8 @@ flutter:
     - assets/data/editions/
     - assets/images/abilities/ #for use with monster ability card
     - assets/images/attack/ #modifier deck
-    - assets/images/conditions/ #should find better versions of these to scale
-    - assets/images/class-icons/ #should find better versions of these
+    #- assets/images/conditions/
+    - assets/images/class-icons/
     - assets/images/monsters/ #portraits
     - assets/images/summon/
     - assets/images/psd/

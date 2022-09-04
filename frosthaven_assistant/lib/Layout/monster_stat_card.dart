@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
@@ -579,12 +579,22 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
   List<Widget> createConditionList(double scale, MonsterStatsModel stats) {
     List<Widget> list = [];
+    String suffix = "";
+    if(GameMethods.isFrosthavenStyle()) {
+      suffix = "_fh";
+    }
     for (var item in stats.immunities) {
       item = item.substring(1, item.length - 1);
+      String imagePath = "assets/images/abilities/$item.png";
+      if(suffix.isNotEmpty) {
+        if (File("assets/images/abilities/$item$suffix.png").existsSync()) {
+          imagePath = "assets/images/abilities/$item$suffix.png";
+        }
+      }
       Image image = Image(
         height: 11 * scale,
         filterQuality: FilterQuality.high, //needed because of the edges
-        image: AssetImage("assets/images/conditions/$item.png"),
+        image: AssetImage(imagePath),
       );
       Image immuneIcon = Image(
         height: 4 * scale,
