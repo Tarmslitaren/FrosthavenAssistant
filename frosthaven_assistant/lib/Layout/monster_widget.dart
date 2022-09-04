@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Resource/commands/next_turn_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
@@ -84,6 +85,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
   }
 
   Widget buildImagePart(double height, double scale) {
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
     return Stack(alignment: Alignment.bottomCenter, children: [
       Container(
           margin: EdgeInsets.only(bottom: 4 * scale, top: 4 * scale),
@@ -111,13 +113,14 @@ class MonsterWidgetState extends State<MonsterWidget> {
           width: height * 0.95,
           //height: height,
           alignment: Alignment.bottomCenter,
+          margin: EdgeInsets.only(bottom: frosthavenStyle? 2 * scale : 0),
           child: Text(
             textAlign: TextAlign.center,
             widget.data.type.display,
             style: TextStyle(
-                //fontFamily: 'Pirata',
+                fontFamily: frosthavenStyle?"GermaniaOne" : 'Pirata',
                 color: Colors.white,
-                fontSize: 18 * 0.8 * scale,
+                fontSize: 14.4 * scale,
                 shadows: [
                   Shadow(
                       offset: Offset(1 * scale, 1 * scale), color: Colors.black)

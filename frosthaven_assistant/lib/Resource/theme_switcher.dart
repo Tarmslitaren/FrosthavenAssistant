@@ -32,7 +32,7 @@ class ThemeSwitcherWidget extends StatefulWidget {
 }
 
 class ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget> {
-  ThemeData themeData = themeFH;
+  ThemeData themeData = theme;
 
   void switchTheme(ThemeData themee) {
     setState(() {

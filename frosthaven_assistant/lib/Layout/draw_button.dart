@@ -98,7 +98,7 @@ class _DrawButtonState extends State<DrawButton> {
               builder: (context, value, child) {
                 return Positioned(
                     bottom: 2 * settings.userScalingBars.value,
-                    right: 5 * settings.userScalingBars.value,
+                    right: 3.5 * settings.userScalingBars.value,
                     // width: 60,
                     child: Text(_gameState.round.value.toString(),
                         style: TextStyle(

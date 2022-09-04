@@ -65,6 +65,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   }
 
   static Widget buildFront(MonsterAbilityCardModel? card, Monster data, double scale, bool calculateAll) {
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+
     String initText = card!.initiative.toString();
     if (initText.length == 1) {
       initText = "0$initText";
@@ -72,6 +74,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
 
     var shadow = [
       Shadow(
+        //TODO: soft shadow
           offset: Offset(1 * scale * 0.8, 1 * scale * 0.8),
           color: Colors.black)
     ];
@@ -104,12 +107,13 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 fit: BoxFit.fill,
                 height: 116 * 0.8 * scale,
                 //height: 123 * 0.8 * scale,
-                image: const AssetImage(
+                image: AssetImage(frosthavenStyle?
+                "assets/images/psd/monsterAbility-front_fh.png" :
                     "assets/images/psd/monsterAbility-front.png"),
               ),
             ),
             Positioned(
-              top: 0,
+              top:frosthavenStyle? 2 * scale : 0 * scale,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
@@ -117,9 +121,9 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                   Text(
                     card.title,
                     style: TextStyle(
-                        //fontFamily: 'Pirata',
+                        fontFamily: frosthavenStyle? "GermaniaOne" : 'Pirata',
                         color: Colors.white,
-                        fontSize: 14 * 0.8 * scale,
+                        fontSize: frosthavenStyle? 10 * scale :11.2 * scale,
                         shadows: shadow),
                   ),
                 ],
@@ -132,8 +136,9 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                   textAlign: TextAlign.center,
                   initText,
                   style: TextStyle(
+                    fontFamily: frosthavenStyle? "GermaniaOne" : 'Pirata',
                       color: Colors.white,
-                      fontSize: 20 * 0.8 * scale,
+                      fontSize: frosthavenStyle? 15 * scale: 16 * scale,
                       shadows: shadow),
                 )),
             Positioned(
@@ -183,6 +188,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
 
 
   static Widget buildRear(double scale, int size) {
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -206,8 +212,9 @@ class MonsterAbilityCardWidget extends StatefulWidget {
               child: Image(
                 fit: BoxFit.fitHeight,
                 height: 114 * 0.8 * scale,
-                image: const AssetImage(
-                    "assets/images/psd/MonsterAbility-back.png"),
+                image: AssetImage(frosthavenStyle?
+                "assets/images/psd/MonsterAbility-back_fh.png"
+                   : "assets/images/psd/MonsterAbility-back.png"),
               ),
             ),
             size >= 0

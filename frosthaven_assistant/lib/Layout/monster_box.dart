@@ -93,8 +93,6 @@ class MonsterBoxState extends State<MonsterBox> {
       borderColor = null;
     }
 
-    bool frostHavenStyle = getIt<Settings>().style.value == Style.frosthaven || (getIt<Settings>().style.value == Style.original && getIt<GameState>().currentCampaign.value == "Frosthaven");
-
       return Container(
           decoration: null,
           padding: EdgeInsets.zero,
@@ -166,8 +164,8 @@ class MonsterBoxState extends State<MonsterBox> {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: data.health.value > 99
-                                    ? frostHavenStyle? 10 * scale : 13 * scale
-                                    : frostHavenStyle? 15 * scale : 18 * scale,
+                                    ?  13 * scale
+                                    :  18 * scale,
                                 shadows: [
                                   Shadow(
                                       offset: Offset(1 * scale, 1 * scale),

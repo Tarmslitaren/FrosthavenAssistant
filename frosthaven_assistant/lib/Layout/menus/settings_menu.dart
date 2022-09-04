@@ -164,7 +164,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                           setState(() {
                             settings.style.value = Style.frosthaven;
                             settings.saveToDisk();
-                            ThemeSwitcher.of(context).switchTheme(themeFH);
+                            //ThemeSwitcher.of(context).switchTheme(themeFH);
                             getIt<GameState>().updateList.value++;
                           });
                         }),
@@ -177,7 +177,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                           setState(() {
                             settings.style.value = Style.gloomhaven;
                             settings.saveToDisk();
-                            ThemeSwitcher.of(context).switchTheme(theme);
+                            //ThemeSwitcher.of(context).switchTheme(theme);
                             getIt<GameState>().updateList.value++;
                           });
                         }),
@@ -191,9 +191,9 @@ class SettingsMenuState extends State<SettingsMenu> {
                             settings.style.value = Style.original;
                             settings.saveToDisk();
                             if(getIt<GameState>().currentCampaign.value == "Frosthaven"){
-                              ThemeSwitcher.of(context).switchTheme(themeFH);
+                              //ThemeSwitcher.of(context).switchTheme(themeFH);
                             } else {
-                              ThemeSwitcher.of(context).switchTheme(theme);
+                              //ThemeSwitcher.of(context).switchTheme(theme);
                             }
                             getIt<GameState>().updateList.value++;
                           });

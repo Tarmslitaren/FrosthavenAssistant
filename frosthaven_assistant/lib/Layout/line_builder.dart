@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 
 import '../Resource/enums.dart';
@@ -753,10 +754,8 @@ mainAxisSize: MainAxisSize.max,
 
   static Widget createLines(List<String> strings, final bool left, final bool applyStats,final bool applyAll,
       final Monster monster, final CrossAxisAlignment alignment, final double scale) {
-    bool frosthavenStyle = getIt<Settings>().style.value == Style.frosthaven ||
-        getIt<Settings>().style.value == Style.original && getIt<GameState>().currentCampaign.value == "Frosthaven";
-    //TODO:more generic solution for coming campaigns with frosthaven style.
     String imageSuffix = "";
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
     if (frosthavenStyle) {
       imageSuffix = "_fh";
     }
