@@ -759,8 +759,11 @@ mainAxisSize: MainAxisSize.max,
     }
 
     var shadow = Shadow(
-        offset: Offset(1 * scale * 0.8, 1 * scale * 0.8),
-        color: left ? Colors.white : Colors.black);
+        offset: Offset(0.4 * scale, 0.4 * scale),
+        color: left ? Colors.black54 : Colors.black87,
+      blurRadius: 1 * scale,
+
+    );
     var dividerStyle = TextStyle(
         fontFamily: 'Majalla',
         leadingDistribution: TextLeadingDistribution.proportional,

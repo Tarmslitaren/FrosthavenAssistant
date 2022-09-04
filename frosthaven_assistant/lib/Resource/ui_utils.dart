@@ -17,23 +17,24 @@ void openDialogOld(BuildContext context, Widget widget) {
 
 TextStyle getTitleTextStyle() {
   return TextStyle(
-    fontSize: 18,
-    color: getIt<Settings>().darkMode.value? Colors.white : Colors.black
-  );
+      fontSize: 18,
+      color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black);
 }
 
 TextStyle getSmallTextStyle() {
   return TextStyle(
       fontSize: 14,
-      color: getIt<Settings>().darkMode.value? Colors.white : Colors.black,
-      shadows: [
-        Shadow(offset: const Offset(1,1 ), color: getIt<Settings>().darkMode.value? Colors.grey : Colors.grey)
-      ]
-  );
+      color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black,
+      shadows: const [
+        Shadow(
+          offset: Offset(1, 1),
+          color: Colors.black87,
+          blurRadius: 1,
+        )
+      ]);
 }
 
 void openDialog(BuildContext context, Widget widget) {
-
   //could potentially modify edge insets based on screen width.
   Widget innerWidget = Stack(children: [
     Positioned(
@@ -58,22 +59,22 @@ void openDialogAtPosition(
         Positioned(
             left: x + xOffset, // left coordinate
             top: y + yOffset, // top coordinate
-            child:GestureDetector(
-                onTap: (){
+            child: GestureDetector(
+                onTap: () {
                   Navigator.pop(context);
                 },
                 child: Dialog(
-                backgroundColor: Colors.transparent,
-                /*shape: RoundedRectangleBorder(
+                    backgroundColor: Colors.transparent,
+                    /*shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.0),
                   side: BorderSide(
                     color: Colors.green,
                   ),
                 ),*/
-                insetPadding: const EdgeInsets.all(0),
-                insetAnimationCurve: Curves.easeInOut, //does nothing?
-                //insetAnimationDuration: Duration(milliseconds: 1500),
-                child: widget))),
+                    insetPadding: const EdgeInsets.all(0),
+                    insetAnimationCurve: Curves.easeInOut, //does nothing?
+                    //insetAnimationDuration: Duration(milliseconds: 1500),
+                    child: widget))),
       ]));
 }
 
@@ -88,7 +89,7 @@ Widget defaultBuildDraggableFeedback(
       color: Colors.transparent,
       borderRadius: BorderRadius.zero,
       child: Card(
-        //shadowColor: Colors.red,
+          //shadowColor: Colors.red,
           color: Colors.transparent,
           child: ConstrainedBox(constraints: constraints, child: child)),
     ),

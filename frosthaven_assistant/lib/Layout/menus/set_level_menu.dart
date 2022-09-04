@@ -98,17 +98,20 @@ class SetLevelMenuState extends State<SetLevelMenu> {
   }
 
   Widget createLegend(String name, String gfx, String value) {
-    var textStyleLevelWidget = const TextStyle(
+
+    var shadow = const Shadow(
+      offset: Offset(1, 1),
+      color: Colors.black87,
+      blurRadius: 1,
+    );
+    var textStyleLevelWidget = TextStyle(
         color: Colors.white,
         overflow: TextOverflow.fade,
         //fontWeight: FontWeight.bold,
         //backgroundColor: Colors.transparent.withAlpha(100),
         fontSize: 18,
         shadows: [
-          Shadow(
-              offset: Offset(1.0, 1.0), blurRadius: 3.0, color: Colors.black),
-          Shadow(
-              offset: Offset(1.0, 1.0), blurRadius: 8.0, color: Colors.black),
+          shadow
           //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
         ]);
     double height = 20;
@@ -126,9 +129,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.4),
-                  spreadRadius: 5,
-                  blurRadius: 10.0,
+                  color: Colors.black.withOpacity(0.3),
+                  spreadRadius: 1,
+                  blurRadius: 3.0,
                   //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                 ),
               ],

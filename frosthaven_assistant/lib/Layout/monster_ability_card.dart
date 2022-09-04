@@ -72,12 +72,11 @@ class MonsterAbilityCardWidget extends StatefulWidget {
       initText = "0$initText";
     }
 
-    var shadow = [
-      Shadow(
-        //TODO: soft shadow
-          offset: Offset(1 * scale * 0.8, 1 * scale * 0.8),
-          color: Colors.black)
-    ];
+    var shadow = Shadow(
+      offset: Offset(1 * scale, 1 * scale),
+      color: Colors.black87,
+      blurRadius: 1 * scale,
+    );
 
     List<Widget> positionals = buildGraphicPositionals(scale, card.graphicPositional);
 
@@ -124,7 +123,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                         fontFamily: frosthavenStyle? "GermaniaOne" : 'Pirata',
                         color: Colors.white,
                         fontSize: frosthavenStyle? 10 * scale :11.2 * scale,
-                        shadows: shadow),
+                        shadows: [shadow]),
                   ),
                 ],
               ),
@@ -139,7 +138,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                     fontFamily: frosthavenStyle? "GermaniaOne" : 'Pirata',
                       color: Colors.white,
                       fontSize: frosthavenStyle? 15 * scale: 16 * scale,
-                      shadows: shadow),
+                      shadows: [shadow]),
                 )),
             Positioned(
                 left: 6.0 * 0.8 * scale,
@@ -150,7 +149,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                       fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
                       color: Colors.white,
                       fontSize: 8 * 0.8 * scale,
-                      shadows: shadow),
+                      shadows: [shadow]),
                 )),
             card.shuffle
                 ? Positioned(

@@ -39,27 +39,31 @@ class _SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
           return SizedBox(
             width: 40,
             height: 40,
-            child: Container(
-                child: TextButton(
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                      fontSize: 18,
-                        shadows: [Shadow(offset: Offset(1, 1), color: isCurrentlySelected ?
-                        Colors.grey:
-                        Colors.black)],
-                        color:
-                        isCurrentlySelected ?
-                        (darkMode? Colors.white : Colors.black) :
-                        Colors.grey),
-                  ),
-                  onPressed: () {
-                    if (!isCurrentlySelected) {
-                      _gameState.action(SetCharacterLevelCommand(nr, widget.character.id));
-                    }
-                    //Navigator.pop(context);
-                  },
-                )),
+            child: TextButton(
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 18,
+                    shadows: [
+
+                Shadow(
+                offset: const Offset(1, 1),
+                color: isCurrentlySelected ? Colors.black54 : Colors.black87,
+                blurRadius: 1,
+              ),
+                    ],
+                    color:
+                    isCurrentlySelected ?
+                    (darkMode? Colors.white : Colors.black) :
+                    Colors.grey),
+              ),
+              onPressed: () {
+                if (!isCurrentlySelected) {
+                  _gameState.action(SetCharacterLevelCommand(nr, widget.character.id));
+                }
+                //Navigator.pop(context);
+              },
+            ),
           );
         });
   }

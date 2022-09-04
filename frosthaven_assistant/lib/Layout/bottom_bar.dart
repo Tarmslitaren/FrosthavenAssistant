@@ -17,6 +17,12 @@ Widget createLevelWidget(BuildContext context) {
 
   double fontHeight = 14 * settings.userScalingBars.value;
 
+  var shadow = Shadow(
+    offset: Offset(1 * settings.userScalingBars.value, 1 * settings.userScalingBars.value),
+    color: Colors.black87,
+    blurRadius: 1 * settings.userScalingBars.value,
+  );
+
   var textStyle = TextStyle(
       color: Colors.white,
       overflow: TextOverflow.fade,
@@ -24,7 +30,8 @@ Widget createLevelWidget(BuildContext context) {
       //backgroundColor: Colors.transparent.withAlpha(100),
       fontSize: fontHeight,
       shadows: [
-        Shadow(
+        shadow
+        /*Shadow(
             offset: Offset(1.0 * settings.userScalingBars.value,
                 1.0 * settings.userScalingBars.value),
             blurRadius: 3.0 * settings.userScalingBars.value,
@@ -33,7 +40,7 @@ Widget createLevelWidget(BuildContext context) {
             offset: Offset(1.0 * settings.userScalingBars.value,
                 1.0 * settings.userScalingBars.value),
             blurRadius: 8.0 * settings.userScalingBars.value,
-            color: Colors.black),
+            color: Colors.black),*/
         //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
       ]);
 
@@ -64,7 +71,7 @@ Widget createLevelWidget(BuildContext context) {
             valueListenable: gameState.level,
             builder: (context, value, child) {
               const double blurRadius = 3.0;
-              const double spreadRadius = 3.0;
+              const double spreadRadius = 1.0;
               const double opacity = 0.3;
               return Text.rich(
                 //textAlign: textAlign,

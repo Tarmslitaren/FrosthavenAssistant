@@ -33,7 +33,7 @@ class CounterButtonState extends State<CounterButton> {
       return Container();
     }
     return Row(children: [
-      Container(
+      SizedBox(
           width: 40,
           height: 40,
           child: IconButton(
@@ -75,17 +75,21 @@ class CounterButtonState extends State<CounterButton> {
               if(widget.showTotalValue) {
                 text = widget.notifier.value.toString();
               }
+              var shadow = const Shadow(
+                  offset: Offset(1, 1),
+                  color: Colors.black87,
+                  blurRadius: 1,
+              );
               return Positioned(
                   bottom: 0,
                   right: 0,
                   child: Text(text, style: TextStyle(color: widget.color,
-                      shadows: const [
-                        Shadow(offset: Offset(1, 1), color: Colors.black)]
+                      shadows: [shadow]
                   ),)
               );
             })
       ]),
-      Container(
+      SizedBox(
           width: 40,
           height: 40,
           child: IconButton(

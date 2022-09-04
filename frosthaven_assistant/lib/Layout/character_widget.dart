@@ -176,6 +176,12 @@ class CharacterWidgetState extends State<CharacterWidget> {
             //TODO: is this even needed?
             builder: (context, value, child) {
               bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+
+              var shadow = Shadow(
+                offset: Offset(1 * scale, 1 * scale),
+                color: Colors.black87,
+                blurRadius: 1 * scale,
+              );
               return ColorFiltered(
                   colorFilter: character.characterState.health.value != 0 &&
                           (character.turnState != TurnsState.done ||
@@ -349,14 +355,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                         fontFamily: frosthavenStyle? 'GermaniaOne' : 'Pirata',
                                                         color: Colors.white,
                                                         fontSize: 24 * scale,
-                                                        shadows: [
-                                                          Shadow(
-                                                              offset: Offset(
-                                                                  1 * scale,
-                                                                  1 * scale),
-                                                              color:
-                                                                  Colors.black)
-                                                        ]),
+                                                        shadows: [shadow]),
                                                     decoration:
                                                         const InputDecoration(
                                                       isDense: true,
@@ -426,12 +425,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                         color: Colors.white,
                                                         fontSize: 24 * scale,
                                                         shadows: [
-                                                          Shadow(
-                                                              offset: Offset(
-                                                                  1 * scale,
-                                                                  1 * scale),
-                                                              color:
-                                                                  Colors.black)
+                                                          shadow
                                                         ]),
                                                   ));
                                             }
@@ -454,11 +448,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                   color: Colors.white,
                                                   fontSize:frosthavenStyle? 15 * scale : 16 * scale,
                                                   shadows: [
-                                                    Shadow(
-                                                        offset: Offset(
-                                                            1 * scale,
-                                                            1 * scale),
-                                                        color: Colors.black)
+                                                    shadow
                                                   ]),
                                             ),
                                           ),
@@ -489,13 +479,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                             frosthavenStyle? 16 * scale : 16 * scale,
 
                                                             shadows: [
-                                                              Shadow(
-                                                                  offset: Offset(
-                                                                      1 * scale,
-                                                                      1 *
-                                                                          scale),
-                                                                  color: Colors
-                                                                      .black)
+                                                              shadow
                                                             ]),
                                                       ),
                                                       //add conditions here
@@ -546,12 +530,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                         color: Colors.blue,
                                                         fontSize: 14 * scale,
                                                         shadows: [
-                                                          Shadow(
-                                                              offset: Offset(
-                                                                  1 * scale,
-                                                                  1 * scale),
-                                                              color:
-                                                                  Colors.black)
+                                                          shadow
                                                         ]),
                                                   );
                                                 }),
@@ -583,12 +562,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                         color: Colors.white,
                                                         fontSize: 14 * scale,
                                                         shadows: [
-                                                          Shadow(
-                                                              offset: Offset(
-                                                                  1 * scale,
-                                                                  1 * scale),
-                                                              color:
-                                                                  Colors.black)
+                                                          shadow
                                                         ]),
                                                   );
                                                 }),

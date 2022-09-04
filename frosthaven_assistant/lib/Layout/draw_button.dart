@@ -56,6 +56,13 @@ class _DrawButtonState extends State<DrawButton> {
     return ValueListenableBuilder<double>(
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
+
+          var shadow = Shadow(
+            offset: Offset(1 * settings.userScalingBars.value, 1 * settings.userScalingBars.value),
+            color: Colors.black87,
+            blurRadius: 1 * settings.userScalingBars.value,
+          );
+
           return Stack(alignment: Alignment.centerLeft, children: [
             ValueListenableBuilder<RoundState>(
               valueListenable: _gameState.roundState,
@@ -83,11 +90,7 @@ class _DrawButtonState extends State<DrawButton> {
                             fontSize: 16 * settings.userScalingBars.value,
                             color: Colors.white,
                             shadows: [
-                              Shadow(
-                                  offset: Offset(
-                                      1 * settings.userScalingBars.value,
-                                      1 * settings.userScalingBars.value),
-                                  color: Colors.black)
+                              shadow
                             ],
                           ),
                         )));
@@ -105,11 +108,7 @@ class _DrawButtonState extends State<DrawButton> {
                           fontSize: 14 * settings.userScalingBars.value,
                           color: Colors.white,
                           shadows: [
-                            Shadow(
-                                offset: Offset(
-                                    1 * settings.userScalingBars.value,
-                                    1 * settings.userScalingBars.value),
-                                color: Colors.black)
+                            shadow
                           ],
                         )));
               },

@@ -201,7 +201,11 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                         if (showNr)
                           Text(chosenNr.toString(), style: const TextStyle(fontSize: 18, color: Colors.white,
                               shadows: [
-                                Shadow(offset: Offset(1,1 ),color: Colors.black)
+                                Shadow(
+                              offset: Offset(1, 1),
+                            color: Colors.black87,
+                            blurRadius: 1,
+                          )
                               ])),
                       ]),
                       //iconColor: _foundMonsters[index].color,

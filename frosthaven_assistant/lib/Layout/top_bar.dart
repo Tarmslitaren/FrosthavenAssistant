@@ -14,6 +14,11 @@ PreferredSize createTopBar() {
       child: ValueListenableBuilder<double>(
           valueListenable: getIt<Settings>().userScalingBars,
           builder: (context, value, child) {
+            var shadow = Shadow(
+              offset: Offset(1 * settings.userScalingBars.value, 1 * settings.userScalingBars.value),
+              color: Colors.black87,
+              blurRadius: 1 * settings.userScalingBars.value,
+            );
             return AppBar(
               iconTheme: const IconThemeData(color: Colors.white),
               leading: IconButton(
@@ -22,10 +27,7 @@ PreferredSize createTopBar() {
                     min(8.0 * settings.userScalingBars.value, 8.0)),
                 icon: Icon(Icons.menu,
                     shadows: [
-                      Shadow(
-                          offset: Offset(1 * settings.userScalingBars.value,
-                              1 * settings.userScalingBars.value),
-                          color: Colors.black45)
+                      shadow
                     ],
                     size: 24 * settings.userScalingBars.value),
                 onPressed: () => Scaffold.of(context).openDrawer(),
@@ -40,10 +42,7 @@ PreferredSize createTopBar() {
                     color: Colors.white,
                     fontSize: 16 * settings.userScalingBars.value,
                     shadows: [
-                      Shadow(
-                          offset: Offset(1 * settings.userScalingBars.value,
-                              1 * settings.userScalingBars.value),
-                          color: Colors.black45)
+                      shadow
                     ],
                   ),
                 ),

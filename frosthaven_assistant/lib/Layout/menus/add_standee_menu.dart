@@ -52,6 +52,11 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
       color = Colors.grey;
     }
     String text = nr.toString();
+    var shadow = const Shadow(
+      offset: Offset(1, 1),
+      color: Colors.black87,
+      blurRadius: 1,
+    );
     return SizedBox(
       width: 40,
       height: 40,
@@ -62,7 +67,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
           style: TextStyle(
             color: color,
             fontSize: 18,
-            shadows: const [Shadow(offset: Offset(1, 1), color: Colors.black)],
+            shadows: [shadow],
           ),
         ),
         onPressed: () {

@@ -103,6 +103,12 @@ class MonsterBoxState extends State<MonsterBox> {
       borderColor = null;
     }
 
+    var shadow = Shadow(
+      offset: Offset(0.4 * scale, 0.4 * scale),
+      color: Colors.black87,
+      blurRadius: 1 * scale,
+    );
+
       return Container(
           decoration: null,
           padding: EdgeInsets.zero,
@@ -142,9 +148,7 @@ class MonsterBoxState extends State<MonsterBox> {
                     color: color,
                     fontSize: 20 * scale,
                     shadows: [
-                      Shadow(
-                          offset: Offset(1 * scale, 1 * scale),
-                          color: Colors.black)
+                      shadow
                     ]),
               ),
             ),
@@ -177,9 +181,7 @@ class MonsterBoxState extends State<MonsterBox> {
                                     ?  13 * scale
                                     :  18 * scale,
                                 shadows: [
-                                  Shadow(
-                                      offset: Offset(1 * scale, 1 * scale),
-                                      color: Colors.red)
+                                  shadow
                                 ]),
                           ),
                         ),
@@ -254,6 +256,7 @@ class MonsterBoxState extends State<MonsterBox> {
     if(widget.ownerId != data.name){
       characterId = widget.ownerId; //this is probably wrong
     }
+
     return InkWell(
         onTap: () {
           //open stats menu

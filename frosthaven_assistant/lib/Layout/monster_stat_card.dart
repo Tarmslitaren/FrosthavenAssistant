@@ -104,13 +104,25 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
     bool frosthavenStyle = GameMethods.isFrosthavenStyle();
 
+    var shadow = Shadow(
+        offset: Offset(0.4 * scale, 0.4 * scale),
+        color: Colors.black87,
+        blurRadius: 1 * scale,
+    );
+
+    var shadowLeft = Shadow(
+      offset: Offset(0.4 * scale, 0.4 * scale),
+      color: Colors.black54,
+      blurRadius: 1 * scale,
+    );
+
     final leftStyle = TextStyle(
         fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: Colors.black,
         fontSize: 12.8 * scale,
         height: 1.2,
         shadows: [
-          Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black12)
+          shadowLeft
         ]);
 
     final rightStyle = TextStyle(
@@ -119,7 +131,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         fontSize: 16 * 0.8 * scale,
         height: 1.2,
         shadows: [
-          Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black)
+          shadow
         ]);
 
     final specialStyle = TextStyle(
@@ -128,7 +140,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         fontSize: 14 * 0.8 * scale,
         height: 1,
         shadows: [
-          Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black)
+          shadow
         ]);
 
     final lineStyle = TextStyle(
@@ -137,7 +149,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         fontSize: 14 * 0.8 * scale,
         height: 0.1,
         shadows: [
-          Shadow(offset: Offset(1 * scale, 1 * scale), color: Colors.black)
+          shadow
         ]);
 
     return ValueListenableBuilder<int>(
@@ -185,6 +197,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
               bool frosthavenStyle = GameMethods.isFrosthavenStyle();
 
+
               return Container(
                   decoration: BoxDecoration(
                     boxShadow: [
@@ -221,11 +234,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 color: Colors.white,
                                 fontSize: 18 * 0.8 * scale,
                                 height: 1,
-                                shadows: [
-                                  Shadow(
-                                      offset: Offset(1 * scale, 1 * scale),
-                                      color: Colors.black)
-                                ]),
+                                shadows: [shadow]),
                           )),
                       !isBoss
                           ? Positioned(
