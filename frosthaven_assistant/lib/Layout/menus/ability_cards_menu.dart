@@ -236,6 +236,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                           ? buildRevealButton(
                                               drawPile.length, 8)
                                           : Container(),
+                                      Expanded(child: Container())
                                     ]),
                               ]))
                           : Container(),

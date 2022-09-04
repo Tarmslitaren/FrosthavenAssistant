@@ -579,7 +579,7 @@
         ["Drag Away", 2031, true, 34, "%move% + 1","*.........", "%attack% - 1", "^%range% 2", "^%pull% 1", "^%wound%" ],
         ["Tail Swipe", 2032, false, 88, "%move% + 1", "^This movement may move through all figures.","*.........","[r]","[c]", "%attack% - 1", "^%push% 2","[/c]","Å.","¤aoe-arc-3", "[/c]", "[/r]" ],
         ["Survival Instincts", 2033, false, 9, "%move% + 0","*.........", "%retaliate% X", "^where X is the figure's %attack% value.","*.........", "^All ranged attacks targeting", "^this figure gain Disadvantage." ],
-        ["Patient Predator", 2034, false, 18, "^%invisible%", "^Self", "*- At 50, perform the following abilities -", "%move% + 0", "*.........","%attack% + 1","[r]", "[c]", "^If this attack was performed,", "^remove %invisible%.","[/c]", "[/r]"],
+        ["Patient Predator", 2034, false, 18, "%invisible%", "^Self", "*- At 50, perform the following abilities -", "%move% + 0", "*.........","%attack% + 1","[r]", "[c]", "^If this attack was performed,", "^remove %invisible%.","[/c]", "[/r]"],
         ["Sundering Bite", 2035, false, 26, "%move% + 0", "*.........","%attack% + 0", "^%pierce% 3" ]
       ]
     },
