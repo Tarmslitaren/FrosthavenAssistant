@@ -73,7 +73,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     }
 
     var shadow = Shadow(
-      offset: Offset(1 * scale, 1 * scale),
+      offset: Offset(0.6 * scale, 0.6 * scale),
       color: Colors.black87,
       blurRadius: 1 * scale,
     );
