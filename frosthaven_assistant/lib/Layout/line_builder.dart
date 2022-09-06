@@ -481,7 +481,7 @@ class LineBuilder {
         children: lines);
   }
 
-  static List<String> convertLinesToFH(List<String> lines) {
+  static List<String> convertLinesToFH(List<String> lines, bool applyStats) {
     //move lines up when they should
     //add container markers here as well
     List<String> retVal = [];
@@ -506,6 +506,11 @@ class LineBuilder {
       }
 
       line = line.replaceAll("Affect", "Target");
+      if (!applyStats) {
+        line = line.replaceAll(" - ", "-");
+        line = line.replaceAll(" + ", "+");
+      }
+
       //the affect keyword is presumably because in base gloomhaven you can only target enemies.
       // this is changed already in JotL.
 
@@ -857,7 +862,7 @@ class LineBuilder {
     List<InlineSpan> lastLineTextPartList = [];
 
     if (frosthavenStyle) {
-      localStrings = convertLinesToFH(localStrings);
+      localStrings = convertLinesToFH(localStrings, applyStats);
     }
 
     //specialized layouts
