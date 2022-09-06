@@ -4423,7 +4423,7 @@
       "monsters": [ "Living Corpse", "Lurker", "Ooze" ]
     },
     "#14 Cultist Cave": {
-      "monsters": [ "Cultist", "Deep Terror", "Living Corpse", "Living Bones" ]
+      "monsters": [ "Cultist", "Deep Terror", "Living Corpse" ]
     },
     "#15 Ambush of Beasts": {
       "monsters": [ "Cave Bear", "Giant Viper", "Hound", "Lurker", "Rending Drake" ]
