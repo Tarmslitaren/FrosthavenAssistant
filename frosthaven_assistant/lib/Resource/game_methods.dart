@@ -46,7 +46,7 @@ class GameMethods {
     double totalLevels = 0;
     double nrOfCharaters = 0;
     for (var item in _gameState.currentList) {
-      if (item is Character) {
+      if (item is Character && item.characterClass.name != "Escort" && item.characterClass.name != "Objective") {
         totalLevels += item.characterState.level.value;
         nrOfCharaters++;
       }
