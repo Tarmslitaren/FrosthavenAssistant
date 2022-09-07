@@ -543,6 +543,9 @@ class LineBuilder {
         if (!isReallySubLine) { //!isConditional
           retVal.add("[subLineStart]");
           isReallySubLine = true;
+
+          //too wide? remove whitespace between icon and value. only for sub lines?
+          line = line.replaceAll("% ", "%");
         }
         //check if match right align issues
         if (line[1] == '%' ||
