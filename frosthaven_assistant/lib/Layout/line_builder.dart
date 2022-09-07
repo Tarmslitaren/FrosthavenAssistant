@@ -83,7 +83,7 @@ class LineBuilder {
             iconToken == "move")) {
       return EdgeInsets.only(left: margin * height, right: margin * height);
     }
-    if (mainLine &&
+    if
         (iconToken == "pierce" ||
             iconToken == "target" ||
             iconToken == "curse" ||
@@ -98,9 +98,15 @@ class LineBuilder {
             iconToken == "disarm" ||
             iconToken == "immobilize" ||
             iconToken == "stun" ||
-            iconToken == "muddle")) {
-      //smaller margins for secondary modifiers
-      return const EdgeInsets.all(0);
+            iconToken == "muddle") {
+      if(mainLine){
+        //smaller margins for secondary modifiers
+        return const EdgeInsets.all(0);
+      } else if (isFrostHavenStyle == true && iconToken != "target" ) {
+        //need more margin around the over sized condition gfx
+        return EdgeInsets.only(left: 0.2 * height, right: 0.2 * height);
+      }
+
     }
     if (iconToken == "air" ||
         iconToken == "earth" ||
@@ -113,6 +119,9 @@ class LineBuilder {
         iconToken == "any") {
       //this caused elements to not align well especially noticeable in case of use element to create element
       // return EdgeInsets.only(top: 0.19 * height); //since icons lager, need lager margin top (make margins in source files instead)
+    }
+    if(isFrostHavenStyle) {
+      return EdgeInsets.zero;
     }
     return EdgeInsets.only(left: 0.1 * height, right: 0.1 * height);
   }
@@ -485,11 +494,16 @@ class LineBuilder {
     //move lines up when they should
     //add container markers here as well
     List<String> retVal = [];
-    bool isSubLine = false;
-    bool isReallySubLine = false;
+    bool isSubLine = false; //marked potential start of subline after a mainline end
+    bool isReallySubLine = false; //when entering a definate subline
     bool isConditional = false;
+    bool isElementUse = false;
     for (int i = 0; i < lines.length; i++) {
       String line = lines[i];
+      if (line == "[r]" &&
+          lines[i + 1].contains('%use') ){
+        isElementUse = true;
+      }
       if (line == "[r]" &&
           (lines[i + 1].contains('%use') ||
               lines[i + 1].toLowerCase().contains('if') ||
@@ -499,10 +513,7 @@ class LineBuilder {
       }
       if (line == "[/r]" && isConditional) {
         isConditional = false;
-      }
-
-      if (line == "*Self") {
-        line = "!^ self";
+        isElementUse = false;
       }
 
       line = line.replaceAll("Affect", "Target");
@@ -524,20 +535,21 @@ class LineBuilder {
         isReallySubLine = false;
         isSubLine = false;
         isConditional = false;
+        isElementUse = false;
       }
 
-      //removing conditional here is a bit of a cop out. if fixes one bug, but also -no handling of conditionals...
       if (line.startsWith("^") && isSubLine) {
         //&& !isConditional
-        //check if match right align issues
-        if (!isConditional && !isReallySubLine) {
-          //todo: should handle even in conditional
+        if (!isReallySubLine) { //!isConditional
           retVal.add("[subLineStart]");
           isReallySubLine = true;
         }
+        //check if match right align issues
         if (line[1] == '%' ||
             //these are all very... assuming.
             line.startsWith("^Self") ||
+            line.startsWith("^-") || //useful for element use add effects
+            line.startsWith("^+") ||
             line.startsWith("^Advantage") ||
             //only target on same line for non valued tokens
             (line.startsWith("^Target") && lines[i - 1].contains('%push%')) ||
@@ -553,6 +565,16 @@ class LineBuilder {
             line.startsWith("^All") &&
                 !line.startsWith("^All attacks") &&
                 !line.startsWith("^All targets")) {
+
+          //make bigger icon and text in element use block
+          //TODO: make sure this doesnt crash if emement use on first line
+          if(isElementUse && (!lines[i-2].contains("[c]"))) { //ok, so if there is a subline, then there has to be a [c]
+            line = line.substring(1); //make first sub line into main line
+            if(retVal.last == "[subLineStart]") {
+              retVal.removeLast();
+            }
+            isReallySubLine = false;
+          }
           line = "!$line";
           line = line.replaceFirst("Self", "self");
           line = line.replaceFirst("All", "all");
@@ -561,6 +583,8 @@ class LineBuilder {
 
           if (retVal.last == "[subLineStart]") {
             retVal.last = "![subLineStart]";
+          } else {
+            //line = "!^ " + line.substring(2); //adding space
           }
         }
 
@@ -568,6 +592,7 @@ class LineBuilder {
           //blood ooze 62 hack
           retVal[retVal.length - 2] = "[subLineStart]";
         }
+
       }
       if (line.startsWith("^") && isReallySubLine) {
         //I know.
@@ -582,7 +607,7 @@ class LineBuilder {
           line.startsWith("^")) {
         //ignore
       } else {
-        //if(line != "[c]" && line != "[r]"){
+       // if(line != "[c]" && line != "[r]"){
         if (!isSubLine) {
           isSubLine = true;
         } else {
@@ -593,6 +618,7 @@ class LineBuilder {
             isSubLine = false;
           }
         }
+       // }
       }
 
       //if conditional or sub line start - add marker
@@ -604,7 +630,7 @@ class LineBuilder {
 
       retVal.add(line);
     }
-    if (isReallySubLine && !isConditional) {
+    if (isReallySubLine && (!isConditional || isElementUse) ) { //&& !isConditional
       retVal.add("[subLineEnd]");
     }
     return retVal;
@@ -693,7 +719,7 @@ class LineBuilder {
                 : Color(int.parse("9A808080", radix: 16)),
             borderRadius: BorderRadius.all(Radius.circular(6 * scale))),
         padding:
-            EdgeInsets.fromLTRB(2 * scale, 0.25 * scale, 2 * scale, 0.75 * 0.35 * scale),
+            EdgeInsets.fromLTRB(2 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
         //margin: EdgeInsets.only(left: 2 * scale),
         //child: Expanded(
         child: Column(mainAxisSize: MainAxisSize.max, children: [
@@ -765,7 +791,7 @@ class LineBuilder {
       widgetsInColumn.removeLast();
       widgetsInColumn.add(row);
     } else if (isInRow && (!isInColumn)) {
-      widgetsInRow.removeLast();
+      if(widgetsInRow.isNotEmpty) {widgetsInRow.removeLast();}
       widgetsInRow.add(row);
     } else {
       lines.removeLast();
@@ -802,10 +828,10 @@ class LineBuilder {
         shadows: [shadow]);
 
     var smallStyle = TextStyle(
-        fontFamily: frosthavenStyle ? "Markazi" : 'Majalla',
+        fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize:
-            (alignment == CrossAxisAlignment.center ? 10 : 11) * 0.8 * scale,
+            (alignment == CrossAxisAlignment.center ? 8 : 8.8) * scale,
         //sizes are larger on stat cards
         height: 1,
         //0.85,
@@ -817,7 +843,7 @@ class LineBuilder {
         fontFamily: frosthavenStyle ? 'Majalla' : 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize:
-            (alignment == CrossAxisAlignment.center ? frosthavenStyle? 9.4 : 11 : 12.7) * 0.8 * scale,
+            (alignment == CrossAxisAlignment.center ? frosthavenStyle? 7.52 : 8.8 : 10.16) * scale,
         //sizes are larger on stat cards
         height: (alignment == CrossAxisAlignment.center ? 1 : 0.8),
         // 0.9,
@@ -844,16 +870,16 @@ class LineBuilder {
         shadows: [shadow]);
 
     var eliteSmallStyle = TextStyle(
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+        fontFamily:  'Majalla',
         color: Colors.yellow,
         fontSize: 8 * scale,
         height: 1,
         shadows: [shadow]);
     var eliteMidStyle = TextStyle(
-        fontFamily: frosthavenStyle ? 'Majalla' : 'Majalla',
+        fontFamily: 'Majalla',
         color: Colors.yellow,
-        fontSize: frosthavenStyle? 9.4 * scale : 8.8 * scale,
-        height: 1.1,
+        fontSize: frosthavenStyle? 7.52 * scale : 8.8 * scale,
+        height: 1,
         shadows: [shadow]);
 
     List<Widget> lines = [];
@@ -950,9 +976,13 @@ class LineBuilder {
             //not a great solution
             elementUse = true;
             conditional = true;
+            //columnHack = true;
           }
           if (compare.startsWith("Column")) {
             //is a column in row
+            if(elementUse) {
+              columnHack = true;
+            }
             for (var colItem in (item as Column).children) {
               String compare = colItem.toStringDeep();
               if (compare.contains(" : ")) {
@@ -962,7 +992,6 @@ class LineBuilder {
               }
               if (compare.toLowerCase().contains("if")) {
                 //not a great solution
-                elementUse = true;
                 conditional = true;
               }
             }
@@ -997,9 +1026,10 @@ class LineBuilder {
                           color: Color(int.parse("9A808080", radix: 16)),
                           borderRadius:
                               BorderRadius.all(Radius.circular(10 * scale))),
+                      //TODO: should the padding be dependant on nr of lines?
                       padding: EdgeInsets.fromLTRB(
-                          elementUse? 1 * scale : 2 * scale,
-                          0.25 * scale, 2 * scale, 0.75* 0.35 * scale),
+                          elementUse? 1 * scale : 3 * scale,
+                          0.25 * scale, 3 * scale, 0.2625 * scale),
                       //margin: EdgeInsets.only(left: 2 * scale),
                       //child: Expanded(
                       child: row))));

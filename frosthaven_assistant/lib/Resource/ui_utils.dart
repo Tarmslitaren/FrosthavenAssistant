@@ -25,13 +25,13 @@ TextStyle getSmallTextStyle() {
   return TextStyle(
       fontSize: 14,
       color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black,
-      shadows: const [
+      /*shadows: const [
         Shadow(
           offset: Offset(1, 1),
           color: Colors.black87,
           blurRadius: 1,
         )
-      ]);
+      ]*/);
 }
 
 void openDialog(BuildContext context, Widget widget) {

@@ -147,7 +147,7 @@
         ["Heal Blast", 413, false, 1, "%move% + 1","*.........", "%attack% - 1", "^%range% 3", "[r]", "%fire%%use%", "^%wound%", "[/r]" ],
         ["Seismic Punch", 414, false, 67, "%move% - 2","*.........", "%attack% + 1", "^%push% 2", "[r]", "%earth%%use%", "¤aoe-triangle-2-side-with-black", "[/r]" ],
         ["Whirlwind", 415, false, 20, "%move% + 0","*.........", "[r]", "[c]", "%attack% - 1", "^%range% 2", "[/c]", "¤aoe-triangle-2-side", "[/r]", "*.........", "[r]", "%air%%use%", "^%shield% 2", "[/r]"] ,
-        ["Flashing Claws", 416, false, 41, "%move% + 0","*.........", "%attack% + 0", "^Advantage","*.........", "[r]","%light%%use%","[c]", "^%heal% 4", "*Self","[/c]", "[/r]" ],
+        ["Flashing Claws", 416, false, 41, "%move% + 0","*.........", "%attack% + 0", "^Advantage","*.........", "[r]","%light%%use%","[c]", "^%heal% 4", "^Self","[/c]", "[/r]" ],
         ["Black Tendrils", 417, false, 52, "%move% - 1","*.........", "%attack% + 1", "[r]", "%dark%%use%", "[c]","*All enemies adjacent to the","*target suffer 1 damage.","[/c]", "[/r]" ],
         ["Mana Explosion", 418, true, 76, "%move% + 0","*.........", "%attack% + 0", "%fire% %ice% %air% %earth% %light% %dark%" ],
         ["Hungry Maw", 419, true, 98, "%move% - 1","*.........", "%attack% - 1", "[r]","%any%%use%", "^%disarm%", "[/r]" ]
