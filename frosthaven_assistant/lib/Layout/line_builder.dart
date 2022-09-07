@@ -828,7 +828,7 @@ class LineBuilder {
         shadows: [shadow]);
 
     var smallStyle = TextStyle(
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize:
             (alignment == CrossAxisAlignment.center ? 8 : 8.8) * scale,
@@ -840,7 +840,7 @@ class LineBuilder {
         //backgroundColor: Colors.amber,
         leadingDistribution: TextLeadingDistribution.even,
 
-        fontFamily: frosthavenStyle ? 'Majalla' : 'Majalla',
+        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize:
             (alignment == CrossAxisAlignment.center ? frosthavenStyle? 7.52 : 8.8 : 10.16) * scale,
@@ -870,13 +870,13 @@ class LineBuilder {
         shadows: [shadow]);
 
     var eliteSmallStyle = TextStyle(
-        fontFamily:  'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: 8 * scale,
         height: 1,
         shadows: [shadow]);
     var eliteMidStyle = TextStyle(
-        fontFamily: 'Majalla',
+        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: frosthavenStyle? 7.52 * scale : 8.8 * scale,
         height: 1,
@@ -1195,7 +1195,7 @@ class LineBuilder {
                   text: " : ",
                   style: TextStyle(
                     //maybe slightly bigger between chars space?
-                      fontFamily: 'Majalla',
+                      fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
                       color: left ? Colors.black : Colors.white,
                       fontSize:
                       (alignment == CrossAxisAlignment.center ? 12 : 12) * 0.8 * scale,
