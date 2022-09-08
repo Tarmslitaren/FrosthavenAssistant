@@ -45,7 +45,8 @@ class LineBuilder {
     "and": "and"
   };
 
-  static double _getIconHeight(String iconToken, double height, bool isFrosthavenStyle) {
+  static double _getIconHeight(
+      String iconToken, double height, bool isFrosthavenStyle) {
     if (iconToken == "air" ||
         iconToken == "earth" ||
         iconToken == "fire" ||
@@ -54,7 +55,7 @@ class LineBuilder {
         iconToken == "light" ||
         iconToken == "any") {
       //FH style: elements have same size as regular icons
-      return isFrosthavenStyle? height : height * 1.2;
+      return isFrosthavenStyle ? height : height * 1.2;
     }
     if (iconToken.contains("aoe")) {
       return height * 2;
@@ -86,30 +87,28 @@ class LineBuilder {
             iconToken == "move")) {
       return EdgeInsets.only(left: margin * height, right: margin * height);
     }
-    if
-        (iconToken == "pierce" ||
-            iconToken == "target" ||
-            iconToken == "curse" ||
-            iconToken == "bless" ||
-            iconToken == "curse" ||
-            iconToken == "push" ||
-            iconToken == "pull" ||
-            iconToken.contains("poison") ||
-            iconToken.contains("wound") ||
-            iconToken == "infect" ||
-            iconToken == "chill" ||
-            iconToken == "disarm" ||
-            iconToken == "immobilize" ||
-            iconToken == "stun" ||
-            iconToken == "muddle") {
-      if(mainLine){
+    if (iconToken == "pierce" ||
+        iconToken == "target" ||
+        iconToken == "curse" ||
+        iconToken == "bless" ||
+        iconToken == "curse" ||
+        iconToken == "push" ||
+        iconToken == "pull" ||
+        iconToken.contains("poison") ||
+        iconToken.contains("wound") ||
+        iconToken == "infect" ||
+        iconToken == "chill" ||
+        iconToken == "disarm" ||
+        iconToken == "immobilize" ||
+        iconToken == "stun" ||
+        iconToken == "muddle") {
+      if (mainLine) {
         //smaller margins for secondary modifiers
         return const EdgeInsets.all(0);
-      } else if (isFrostHavenStyle == true && iconToken != "target" ) {
+      } else if (isFrostHavenStyle == true && iconToken != "target") {
         //need more margin around the over sized condition gfx
         return EdgeInsets.only(left: 0.25 * height, right: 0.25 * height);
       }
-
     }
     if (iconToken == "air" ||
         iconToken == "earth" ||
@@ -123,7 +122,7 @@ class LineBuilder {
       //this caused elements to not align well especially noticeable in case of use element to create element
       // return EdgeInsets.only(top: 0.19 * height); //since icons lager, need lager margin top (make margins in source files instead)
     }
-    if(isFrostHavenStyle) {
+    if (isFrostHavenStyle) {
       return EdgeInsets.zero;
     }
     return EdgeInsets.only(left: 0.1 * height, right: 0.1 * height);
@@ -168,7 +167,8 @@ class LineBuilder {
                     number = res;
                   } else {
                     if (kDebugMode) {
-                      print("failed calculation for formula: ${nr}for token: $token");
+                      print(
+                          "failed calculation for formula: ${nr}for token: $token");
                     }
                   }
                   break;
@@ -187,6 +187,18 @@ class LineBuilder {
       }
     }
     return map;
+  }
+
+  static double getTopPaddingForStyle(TextStyle style) {
+    if(style.height! < 1) {
+      return 0;
+    }
+    double height = style.fontSize!;
+    bool markazi = style.fontFamily == "Markazi";
+    if(markazi) {
+      return height * 0.1;
+    }
+    return height * 0.15;
   }
 
   static List<String> _applyStatForToken(
@@ -294,8 +306,7 @@ class LineBuilder {
     }
     String normalResult = formula;
     if (!skipCalculation) {
-      int? res = StatCalculator.calculateFormula(
-          "$formula+$normalValue");
+      int? res = StatCalculator.calculateFormula("$formula+$normalValue");
 
       if (res != null && res < 0) {
         res = 0; //needed for blood tumor: has 0 move and a -1 move card
@@ -329,8 +340,8 @@ class LineBuilder {
       }
       retVal.add(newStartOfLine);
 
-      int eliteResult = StatCalculator.calculateFormula(
-          "$formula+$eliteValue")!;
+      int eliteResult =
+          StatCalculator.calculateFormula("$formula+$eliteValue")!;
       if (eliteResult < 0) {
         eliteResult = 0;
       }
@@ -497,14 +508,14 @@ class LineBuilder {
     //move lines up when they should
     //add container markers here as well
     List<String> retVal = [];
-    bool isSubLine = false; //marked potential start of subline after a mainline end
+    bool isSubLine =
+        false; //marked potential start of subline after a mainline end
     bool isReallySubLine = false; //when entering a definate subline
     bool isConditional = false;
     bool isElementUse = false;
     for (int i = 0; i < lines.length; i++) {
       String line = lines[i];
-      if (line == "[r]" &&
-          lines[i + 1].contains('%use') ){
+      if (line == "[r]" && lines[i + 1].contains('%use')) {
         isElementUse = true;
       }
       if (line == "[r]" &&
@@ -514,7 +525,7 @@ class LineBuilder {
                   lines[i + 2].toLowerCase().contains('if')))) {
         isConditional = true;
       }
-      if (line == "[/r]" && isConditional) {
+      if (line == "[/r]" && isConditional) { //TODO: add instead a [conditionalDone] tag
         isConditional = false;
         isElementUse = false;
       }
@@ -524,7 +535,7 @@ class LineBuilder {
         line = line.replaceAll(" - ", "-");
         line = line.replaceAll(" + ", "+");
       }
-      line = line.replaceAll("% ", "%");
+      line = line.replaceAll("% ", "%"); //oh oh.
 
       //the affect keyword is presumably because in base gloomhaven you can only target enemies.
       // this is changed already in JotL.
@@ -544,12 +555,13 @@ class LineBuilder {
 
       if (line.startsWith("^") && isSubLine) {
         //&& !isConditional
-        if (!isReallySubLine) { //!isConditional
+        if (!isReallySubLine && (!isConditional || isElementUse)) {
+          //!isConditional
           retVal.add("[subLineStart]");
           isReallySubLine = true;
 
           //too wide? remove whitespace between icon and value. only for sub lines?
-          line = line.replaceAll("% ", "%");
+          //line = line.replaceAll("% ", "%");
         }
         //check if match right align issues
         if (line[1] == '%' ||
@@ -572,12 +584,12 @@ class LineBuilder {
             line.startsWith("^All") &&
                 !line.startsWith("^All attacks") &&
                 !line.startsWith("^All targets")) {
-
           //make bigger icon and text in element use block
           //TODO: make sure this doesnt crash if emement use on first line
-          if(isElementUse && (!lines[i-2].contains("[c]"))) { //ok, so if there is a subline, then there has to be a [c]
+          if (isElementUse && (!lines[i - 2].contains("[c]"))) {
+            //ok, so if there is a subline, then there has to be a [c]
             line = line.substring(1); //make first sub line into main line
-            if(retVal.last == "[subLineStart]") {
+            if (retVal.last == "[subLineStart]") {
               retVal.removeLast();
             }
             isReallySubLine = false;
@@ -599,7 +611,6 @@ class LineBuilder {
           //blood ooze 62 hack
           retVal[retVal.length - 2] = "[subLineStart]";
         }
-
       }
       if (line.startsWith("^") && isReallySubLine) {
         //I know.
@@ -614,7 +625,7 @@ class LineBuilder {
           line.startsWith("^")) {
         //ignore
       } else {
-       // if(line != "[c]" && line != "[r]"){
+        // if(line != "[c]" && line != "[r]"){
         if (!isSubLine) {
           isSubLine = true;
         } else {
@@ -625,7 +636,7 @@ class LineBuilder {
             isSubLine = false;
           }
         }
-       // }
+        // }
       }
 
       //if conditional or sub line start - add marker
@@ -637,15 +648,17 @@ class LineBuilder {
 
       retVal.add(line);
     }
-    if (isReallySubLine && (!isConditional || isElementUse) ) { //&& !isConditional
+    if (isReallySubLine && (!isConditional || isElementUse)) {
+      //&& !isConditional
       retVal.add("[subLineEnd]");
     }
     return retVal;
   }
 
-  static bool shouldOverflow(bool frosthavenStyle,String iconToken, bool mainLine) {
-    return /*!mainLine &&*/ frosthavenStyle && (
-        (iconToken == "pierce" ||
+  static bool shouldOverflow(
+      bool frosthavenStyle, String iconToken, bool mainLine) {
+    return /*!mainLine &&*/ frosthavenStyle &&
+        ((iconToken == "pierce" ||
             iconToken == "target" ||
             iconToken == "curse" ||
             iconToken == "bless" ||
@@ -661,47 +674,49 @@ class LineBuilder {
             iconToken == "disarm" ||
             iconToken == "immobilize" ||
             iconToken == "stun" ||
-            iconToken == "muddle")
-    );
-
-
+            iconToken == "muddle"));
   }
 
   static void buildFHStyleBackgrounds(
       List<Widget> lines,
-      List<InlineSpan> lastLineTextPartList,
+      List<Widget> lastLineTextPartList,
       TextAlign textAlign,
+      MainAxisAlignment rowMainAxisAlignment,
       double scale,
       bool isInRow,
       bool isInColumn,
       bool isColumnInRow,
       List<Widget> widgetsInColumn,
       List<Widget> widgetsInRow) {
-    List<InlineSpan> list1 = [];
-    List<List<InlineSpan>> list2 = [];
+    List<Widget> list1 = [];
+    List<List<Widget>> list2 = [];
     bool conditional = false;
     for (int i = 0; i < lastLineTextPartList.length; i++) {
-      if (lastLineTextPartList[i].toPlainText().contains("[subLineStart]")) {
-        list1 = lastLineTextPartList.sublist(0, i);
-        List<InlineSpan> tempSpanList = [];
-        for (int j = i + 1; j < lastLineTextPartList.length; j++) {
-          if (lastLineTextPartList[j].toPlainText().contains("[lineBreak]")) {
-            list2.add(tempSpanList.toList());
-            tempSpanList.clear();
-          } else {
-            tempSpanList.add(lastLineTextPartList[j]);
+      Widget part = lastLineTextPartList[i];
+      if(part is Container) {
+        if (part.child! is Text &&
+            (part.child as Text).data!.contains("[subLineStart]")) {
+          list1 = lastLineTextPartList.sublist(0, i);
+          List<Widget> tempSpanList = [];
+          for (int j = i + 1; j < lastLineTextPartList.length; j++) {
+            Widget part2 = lastLineTextPartList[j];
+            if (part2 is Container && part2.child is Text && (part2.child as Text).data!.contains("[lineBreak]")) {
+              list2.add(tempSpanList.toList());
+              tempSpanList.clear();
+            } else {
+              tempSpanList.add(lastLineTextPartList[j]);
+            }
           }
+          list2.add(tempSpanList);
         }
-        list2.add(tempSpanList);
       }
-      if (lastLineTextPartList[i]
-          .toPlainText()
-          .contains("[conditionalStart]")) {
+      if (part is Container && part.child is Text && (part.child as Text).data!.contains("[conditionalStart]")) {
         conditional = true;
         list1 = lastLineTextPartList.sublist(0, i);
-        List<InlineSpan> tempSpanList = [];
+        List<Widget> tempSpanList = [];
         for (int j = i + 1; j < lastLineTextPartList.length; j++) {
-          if (lastLineTextPartList[j].toPlainText().contains("[lineBreak]")) {
+          Widget part2 = lastLineTextPartList[j];
+          if (part2 is Container && part2.child is Text && (part2.child as Text).data!.contains("[lineBreak]")) {
             list2.add(tempSpanList.toList());
             tempSpanList.clear();
           } else {
@@ -712,14 +727,15 @@ class LineBuilder {
       }
     }
 
-    Widget widget1 = Text.rich(
+    /*Widget widget1 = Text.rich(
       textHeightBehavior: const TextHeightBehavior(
           leadingDistribution: TextLeadingDistribution.even),
       textAlign: textAlign,
       TextSpan(
         children: list1,
       ),
-    );
+    );*/
+    Row widget1 = Row(children: list1);
 
     Widget widget2 = Container(
         decoration: BoxDecoration(
@@ -727,43 +743,24 @@ class LineBuilder {
                 ? Colors.blue
                 : Color(int.parse("9A808080", radix: 16)),
             borderRadius: BorderRadius.all(Radius.circular(6 * scale))),
-        padding:
-            EdgeInsets.fromLTRB(2 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
+        padding: EdgeInsets.fromLTRB(
+            2 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
         margin: EdgeInsets.only(left: 2 * scale),
         //child: Expanded(
         child: Column(mainAxisSize: MainAxisSize.max, children: [
-          if (list2.isNotEmpty)
-            Text.rich(
-                textHeightBehavior: const TextHeightBehavior(
-                    leadingDistribution: TextLeadingDistribution.even),
-                textAlign: textAlign,
-                TextSpan(
-                  children: list2[0],
-                )),
+          if (list2.isNotEmpty) Row(children: list2[0]),
           if (list2.length > 1)
-            Text.rich(
-                textHeightBehavior: const TextHeightBehavior(
-                    leadingDistribution: TextLeadingDistribution.even),
-                textAlign: textAlign,
-                TextSpan(
-                  children: list2[1],
-                )),
+            Row(
+              children: list2[1],
+            ),
           if (list2.length > 2)
-            Text.rich(
-                textHeightBehavior: const TextHeightBehavior(
-                    leadingDistribution: TextLeadingDistribution.even),
-                textAlign: textAlign,
-                TextSpan(
-                  children: list2[2],
-                )),
+            Row(
+              children: list2[2],
+            ),
           if (list2.length > 3)
-            Text.rich(
-                textHeightBehavior: const TextHeightBehavior(
-                    leadingDistribution: TextLeadingDistribution.even),
-                textAlign: textAlign,
-                TextSpan(
-                  children: list2[3],
-                )),
+            Row(
+              children: list2[3],
+            )
 
           //can't figure out why the builder does not work
           /*ListView.builder(
@@ -792,7 +789,7 @@ class LineBuilder {
     Widget row = Row(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: alignment,
+      mainAxisAlignment: rowMainAxisAlignment,
       children: [widget1, widget2],
     );
 
@@ -800,12 +797,35 @@ class LineBuilder {
       widgetsInColumn.removeLast();
       widgetsInColumn.add(row);
     } else if (isInRow && (!isInColumn)) {
-      if(widgetsInRow.isNotEmpty) {widgetsInRow.removeLast();}
+      if (widgetsInRow.isNotEmpty) {
+        widgetsInRow.removeLast();
+      }
       widgetsInRow.add(row);
     } else {
       lines.removeLast();
       lines.add(row);
     }
+  }
+
+  static String getAllTextInWidget(Widget widget) {
+    String retVal = "";
+    if(widget is Row) {
+      for(Widget item in widget.children) {
+        retVal += getAllTextInWidget(item);
+      }
+    }
+    else if(widget is Column) {
+      for(Widget item in widget.children) {
+        retVal += getAllTextInWidget(item);
+      }
+    }
+    else if (widget is Container && widget.child != null) {
+      retVal += getAllTextInWidget(widget.child!);
+    } else if (widget is Text) {
+      retVal += widget.data!;
+    }
+
+    return retVal;
   }
 
   static Widget createLines(
@@ -820,6 +840,13 @@ class LineBuilder {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle();
     if (frosthavenStyle) {
       imageSuffix = "_fh";
+    }
+    MainAxisAlignment rowMainAxisAlignment = MainAxisAlignment.center;
+    if (alignment == CrossAxisAlignment.start) {
+      rowMainAxisAlignment = MainAxisAlignment.start;
+    }
+    if (alignment == CrossAxisAlignment.end) {
+      rowMainAxisAlignment = MainAxisAlignment.end;
     }
 
     var shadow = Shadow(
@@ -837,65 +864,85 @@ class LineBuilder {
         shadows: [shadow]);
 
     var smallStyle = TextStyle(
-        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
+        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize:
-            (alignment == CrossAxisAlignment.center ? 8 : 8.8) * scale,
+        fontSize: (alignment == CrossAxisAlignment.center ? 8 : 8.8) * scale,
         //sizes are larger on stat cards
         height: 1,
+       // backgroundColor: Colors.amber,
         //0.85,
         shadows: [shadow]);
     var midStyle = TextStyle(
-        //backgroundColor: Colors.amber,
+        //backgroundColor: Colors.greenAccent,
         leadingDistribution: TextLeadingDistribution.even,
-
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize:
-            (alignment == CrossAxisAlignment.center ? frosthavenStyle? 7.52 : 8.8 : 10.16) * scale,
+        fontSize: (alignment == CrossAxisAlignment.center
+                ? frosthavenStyle
+                    ? 7.52
+                    : 8.8
+                : 10.16) *
+            scale,
         //sizes are larger on stat cards
-        height: (alignment == CrossAxisAlignment.center ? 1 : 0.8),
+        height: (alignment == CrossAxisAlignment.center ? 1 :
+        1//0.8
+        ),
         // 0.9,
         shadows: [shadow]);
     var normalStyle = TextStyle(
         //maybe slightly bigger between chars space?
         leadingDistribution: TextLeadingDistribution.even,
+        textBaseline: TextBaseline.alphabetic,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
-        backgroundColor: Colors.lightGreen,
-        fontSize:
-            (alignment == CrossAxisAlignment.center ? frosthavenStyle? 13.1 : 12.56 : 11.2) * scale,
-        height: (alignment == CrossAxisAlignment.center) ? frosthavenStyle? 0.84 : 1.1 : 1,
+       // backgroundColor: Colors.lightGreen,
+        fontSize: (alignment == CrossAxisAlignment.center
+                ? frosthavenStyle
+                    ? 13.1
+                    : 12.56
+                : 11.2) *
+            scale,
+        height: (alignment == CrossAxisAlignment.center)
+            ? frosthavenStyle
+                ? 1//0.84
+                : 1//0.5
+            : frosthavenStyle? 1//0.84
+            :1,// 0.5,
+        //height is really low for gh style due to text not being center aligned in font - so to force to center the height is reduced. this is a shitty solution to a shitty problem.
         // 0.84,
 
         shadows: [shadow]);
 
     var eliteStyle = TextStyle(
+        //backgroundColor: Colors.lightGreen,
+        leadingDistribution: TextLeadingDistribution.even,
+        //textBaseline: TextBaseline.alphabetic,
         //maybe slightly bigger between chars space?
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
-        fontSize: 15.7 * 0.8 * scale,
-        height: frosthavenStyle? 1 : 1.1,
+        fontSize: frosthavenStyle ? 13.1 * scale : 12.56 * scale,
+        height: 1,// frosthavenStyle ? 0.84 : 0.5,
         //0.8,
         shadows: [shadow]);
 
     var eliteSmallStyle = TextStyle(
-        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
+        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: 8 * scale,
         height: 1,
         shadows: [shadow]);
     var eliteMidStyle = TextStyle(
-        fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
+        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
-        fontSize: frosthavenStyle? 7.52 * scale : 8.8 * scale,
+        fontSize: frosthavenStyle ? 7.52 * scale : 8.8 * scale,
         height: 1,
         shadows: [shadow]);
 
     List<Widget> lines = [];
     List<String> localStrings = [];
     localStrings.addAll(strings);
-    List<InlineSpan> lastLineTextPartList = [];
+    //List<InlineSpan> lastLineTextPartList = [];
+    List<Widget> lastLineTextPartListRowContent = [];
 
     if (frosthavenStyle) {
       localStrings = convertLinesToFH(localStrings, applyStats);
@@ -908,7 +955,6 @@ class LineBuilder {
     List<Widget> widgetsInColumn = [];
     List<Widget> widgetsInRow = [];
     Widget column;
-    Widget row;
 
     TextAlign textAlign = TextAlign.center;
     if (alignment == CrossAxisAlignment.start) {
@@ -923,15 +969,25 @@ class LineBuilder {
       String sizeToken = "";
       bool isRightPartOfLastLine = false;
       var styleToUse = normalStyle;
-      List<InlineSpan> textPartList = [];
+      //List<InlineSpan> textPartList = [];
+      List<Widget> textPartListRowContent = [];
 
       if (line == "[subLineStart]") {
         //continue;
       }
       //handle FH layout with gray background for sub-lines
       if (line.contains("[subLineEnd]")) {
-        buildFHStyleBackgrounds(lines, lastLineTextPartList, textAlign, scale,
-            isInRow, isInColumn, isColumnInRow, widgetsInColumn, widgetsInRow);
+        buildFHStyleBackgrounds(
+            lines,
+            lastLineTextPartListRowContent,
+            textAlign,
+            rowMainAxisAlignment,
+            scale,
+            isInRow,
+            isInColumn,
+            isColumnInRow,
+            widgetsInColumn,
+            widgetsInRow);
         continue;
       }
 
@@ -974,45 +1030,34 @@ class LineBuilder {
         //end column  //handle the results
         isInRow = false;
         //if(widgetsInRow[0].toStringDeep())
+
+        /////start the dotted hack
         bool elementUse = false;
         bool conditional = false;
-        bool columnHack = false; //this is used since there is a bug where if there is a [r] %element%%use% [c] ... [/c][/r] then the use is drawn twice. the bug is likely higher up
+        bool columnHack = false;
+        //this is used since there is a bug where if there is a [r] %element%%use% [c] ... [/c][/r] then the use is drawn twice. the bug is likely higher up
+        String texts = "";
         for (var item in widgetsInRow) {
-          String compare = item.toStringDeep();
-          if(compare.toLowerCase().contains("if")) {
-            conditional = true;
-          }
-          if (compare.contains(" :")) {
-            //not a great solution
-            elementUse = true;
-            conditional = true;
-            //columnHack = true;
-          }
-          if (compare.startsWith("Column")) {
-            //is a column in row
-            if(elementUse) {
-              columnHack = true;
-            }
-            for (var colItem in (item as Column).children) {
-              String compare = colItem.toStringDeep();
-              if (compare.contains(" :")) {
-                elementUse = true;
-                conditional = true;
-                columnHack = true;
-              }
-              if (compare.toLowerCase().contains("if")) {
-                //not a great solution
-                conditional = true;
-              }
-            }
-          }
+          texts += getAllTextInWidget(item);
         }
-        row = Row(
+        if (texts.contains(" :")) {
+          elementUse = true;
+          conditional = true;
+        }
+        if (texts.toLowerCase().contains("if")) {
+          conditional = true;
+        }
+        if(texts.lastIndexOf(" :") != texts.indexOf(" :")) {
+          columnHack = true;
+        }
+
+        Row row = Row(
           //crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           //todo: this was max. make sure the change doe snot f something up
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: columnHack? widgetsInRow.sublist(1) : widgetsInRow.toList(),
+          mainAxisAlignment: rowMainAxisAlignment,
+          children:
+              columnHack ? widgetsInRow.sublist(1) : widgetsInRow.toList(),
         );
         widgetsInRow = [];
 
@@ -1031,7 +1076,6 @@ class LineBuilder {
                   dashPattern: [2 * scale, 1 * scale],
                   strokeWidth: 0.6 * scale,
                   child: Container(
-
                       decoration: BoxDecoration(
                           //backgroundBlendMode: BlendMode.softLight,
                           //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
@@ -1040,8 +1084,10 @@ class LineBuilder {
                               BorderRadius.all(Radius.circular(10 * scale))),
                       //TODO: should the padding be dependant on nr of lines?
                       padding: EdgeInsets.fromLTRB(
-                          elementUse? 1 * scale : 3 * scale,
-                          0.25 * scale, 3 * scale, 0.2625 * scale),
+                          elementUse ? 1 * scale : 3 * scale,
+                          0.25 * scale,
+                          3 * scale,
+                          0.2625 * scale),
                       //margin: EdgeInsets.only(left: 2 * scale),
                       //child: Expanded(
                       child: row))));
@@ -1163,23 +1209,20 @@ class LineBuilder {
             }
             if (iconToken == "use") {
               //put use gfx on top of previous and add ':'
-              WidgetSpan part = textPartList.removeLast() as WidgetSpan;
-              Container container = part.child as Container;
+              // WidgetSpan part = textPartList.removeLast() as WidgetSpan;
+              Widget part = textPartListRowContent.removeLast();
+              Container container = part as Container;
               Image lastImage;
-              if(container.child is Image){
+              if (container.child is Image) {
                 lastImage = container.child as Image;
-              }else {
+              } else {
                 lastImage = (container.child as OverflowBox).child as Image;
               }
               //Image lastImage = ((part.child as Container).child as OverflowBox).child as Image;
-              textPartList.add(WidgetSpan(
-                  //alignment: PlaceholderAlignment.top,
-                  style: styleToUse, //this is wrong here
-                  //baseline: TextBaseline.ideographic,
-                  child: Container(
-                      color: Colors.amber,
-                      //margin: margin,
-                      child: Stack(
+              textPartListRowContent.add(Container(
+                 // color: Colors.amber,
+                  //margin: margin,
+                  child: Stack(
                     clipBehavior: Clip.none,
                     children: [
                       lastImage,
@@ -1203,31 +1246,40 @@ class LineBuilder {
                                 "assets/images/abilities/${iconGfx + imageSuffix}.png"),
                           ))
                     ],
-                  ))));
-              textPartList.add(TextSpan(
-                  text: frosthavenStyle? " :" : " : ",
+                  )));
+              textPartListRowContent.add(Text(frosthavenStyle ? " :" : " : ",
                   style: TextStyle(
-                    //maybe slightly bigger between chars space?
-                      fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
+                      //maybe slightly bigger between chars space?
+                      fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
                       color: left ? Colors.black : Colors.white,
-                      backgroundColor: Colors.amber,
+                     // backgroundColor: Colors.amber,
                       fontSize:
-                      (alignment == CrossAxisAlignment.center ? 12 : 12) * 0.8 * scale,
-                      height: (alignment == CrossAxisAlignment.center) ? frosthavenStyle? 1 : 1.1 : 1,
+                          (alignment == CrossAxisAlignment.center ? 12 : 12) *
+                              0.8 *
+                              scale,
+                      height: (alignment == CrossAxisAlignment.center)
+                          ? frosthavenStyle
+                              ? 1
+                              : 1.1
+                          : 1,
                       // 0.8,
 
-                      shadows: [shadow]))); //use majalla even for FH style on this one
+                      shadows: [
+                        shadow
+                      ]))); //use majalla even for FH style on this one
             } else {
-              double height = _getIconHeight(iconToken, styleToUse.fontSize!, frosthavenStyle);
+              double height = _getIconHeight(
+                  iconToken, styleToUse.fontSize!, frosthavenStyle);
               if (addText) {
                 String? iconTokenText = _tokens[iconToken];
                 if (frosthavenStyle) {
                   iconTokenText = null;
-                } else {
-                  textPartList
-                      .add(TextSpan(text: iconTokenText,
-                      style: styleToUse
-                  ));
+                } else if (iconTokenText != null) {
+                  textPartListRowContent
+                      .add(Container(
+                   // color: Colors.red,
+                    padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
+                      child:Text(iconTokenText!, style: styleToUse)));
                 }
               }
               bool mainLine =
@@ -1245,12 +1297,16 @@ class LineBuilder {
                       "assets/images/abilities/$iconGfx$imageSuffix.png";
                 }
               }
-              bool overflow = shouldOverflow(frosthavenStyle, iconGfx, mainLine);
-              double heightMod = mainLine? 1 : 1.35 * 1.15; //to make sub line conditions have larger size and overflow on FH style
+              bool overflow =
+                  shouldOverflow(frosthavenStyle, iconGfx, mainLine);
+              double heightMod = mainLine
+                  ? 1
+                  : 1.35 *
+                      1.15; //to make sub line conditions have larger size and overflow on FH style
               Widget child = Image(
                 //fit: BoxFit.contain,
                 //could do funk stuff with the color value for cool effects maybe?
-                height: overflow? height*heightMod : height,
+                height: overflow ? height * heightMod : height,
                 //this causes lines to have variable height if height set to less than 1
                 //alignment: Alignment.topCenter,
                 fit: BoxFit.fitHeight,
@@ -1259,18 +1315,22 @@ class LineBuilder {
                 image: AssetImage(imagePath),
               );
               child = Container(
-                color: Colors.blue,
-                height: height,
-                width: overflow? height: null,
-                margin: margin,
-                clipBehavior: Clip.none,
-                child: overflow? OverflowBox(
-                  minWidth: 0.0,
-                  minHeight: 0.0,
-                maxHeight: double.infinity,// height * heightMod,
-                maxWidth: double.infinity,// height * heightMod,
-                child: child,
-              ): child);
+                 // color: Colors.blue,
+                  height: height,
+                  width: overflow ? height : null,
+                  margin: margin,
+                  clipBehavior: Clip.none,
+                  child: overflow
+                      ? OverflowBox(
+                          minWidth: 0.0,
+                          minHeight: 0.0,
+                          maxHeight: double.infinity,
+                          // height * heightMod,
+                          maxWidth: double.infinity,
+                          // height * heightMod,
+                          child: child,
+                        )
+                      : child);
 
               //TODO: make a solid solution. not a house of cards.
               double wtf = 1;
@@ -1280,11 +1340,7 @@ class LineBuilder {
               }
               //wtf = 1;
 
-              textPartList.add(WidgetSpan(
-                  style:  TextStyle(fontSize: styleToUse.fontSize! * wtf),
-                  //styleToUse, //don't ask (probably because height is 0.8
-                  //baseline: frosthavenStyle? TextBaseline.ideographic : null, //solves icon alignment, but text align....
-                  child: child));
+              textPartListRowContent.add(child);
             }
             isIconPart = false;
             addText = true;
@@ -1297,9 +1353,11 @@ class LineBuilder {
                 textPart = line.substring(partStartIndex, i - 1);
               }
 
-              textPartList.add(TextSpan(text: textPart,
-                  style: styleToUse
-              ));
+              textPartListRowContent.add(Container(
+                //  color: Colors.red,
+                  padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
+                  child:
+                  Text(textPart, style: styleToUse)));
             }
             isIconPart = true;
           }
@@ -1329,11 +1387,15 @@ class LineBuilder {
 
       if (partStartIndex < line.length) {
         String textPart = line.substring(partStartIndex, line.length);
-        textPartList.add(TextSpan(text: textPart,
-            style: styleToUse
-        ));
+        textPartListRowContent.add(Container(
+         //   color: Colors.red,
+            padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
+            child:Text(textPart, style: styleToUse)));
       }
-      var text = Text.rich(
+
+      //TODO: use rows instead of Text.rich
+
+      /*var text = Text.rich(
         //style: styleToUse,
         textHeightBehavior: const TextHeightBehavior(
             leadingDistribution: TextLeadingDistribution.even),
@@ -1342,7 +1404,13 @@ class LineBuilder {
           //style: styleToUse,
           children: textPartList,
         ),
-      );
+      );*/
+      Row row = Row(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: rowMainAxisAlignment,
+          children: textPartListRowContent);
+
       if (isRightPartOfLastLine) {
         if (isInColumn && (!isInRow || isColumnInRow)) {
           if (widgetsInColumn.isNotEmpty) {
@@ -1355,8 +1423,8 @@ class LineBuilder {
         } else {
           lines.removeLast();
         }
-        textPartList.insertAll(0, lastLineTextPartList);
-        text = Text.rich(
+        textPartListRowContent.insertAll(0, lastLineTextPartListRowContent);
+        /*text = Text.rich(
           style: styleToUse,
           textHeightBehavior: const TextHeightBehavior(
               leadingDistribution: TextLeadingDistribution.even),
@@ -1365,17 +1433,23 @@ class LineBuilder {
             style: styleToUse,
             children: textPartList,
           ),
-        );
+        );*/
+        row = Row(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: rowMainAxisAlignment,
+            children: textPartListRowContent);
       }
 
       if (isInColumn && (!isInRow || isColumnInRow)) {
-        widgetsInColumn.add(text);
+        widgetsInColumn.add(row);
       } else if (isInRow && (!isInColumn)) {
-        widgetsInRow.add(text);
+        widgetsInRow.add(row);
       } else {
-        lines.add(text);
+        lines.add(row);
       }
-      lastLineTextPartList = textPartList;
+      // lastLineTextPartList = textPartList;
+      lastLineTextPartListRowContent = textPartListRowContent;
     }
     return createLinesColumn(alignment, lines);
   }
