@@ -59,6 +59,9 @@ class LineBuilder {
     if (iconToken.contains("aoe")) {
       return height * 2;
     }
+    //if(shouldOverflow(isFrosthavenStyle, iconToken, true)) {
+    //  return height * 1.2;
+    //}
     return height;
   }
 
@@ -104,7 +107,7 @@ class LineBuilder {
         return const EdgeInsets.all(0);
       } else if (isFrostHavenStyle == true && iconToken != "target" ) {
         //need more margin around the over sized condition gfx
-        return EdgeInsets.only(left: 0.2 * height, right: 0.2 * height);
+        return EdgeInsets.only(left: 0.25 * height, right: 0.25 * height);
       }
 
     }
@@ -521,6 +524,7 @@ class LineBuilder {
         line = line.replaceAll(" - ", "-");
         line = line.replaceAll(" + ", "+");
       }
+      line = line.replaceAll("% ", "%");
 
       //the affect keyword is presumably because in base gloomhaven you can only target enemies.
       // this is changed already in JotL.
@@ -640,11 +644,13 @@ class LineBuilder {
   }
 
   static bool shouldOverflow(bool frosthavenStyle,String iconToken, bool mainLine) {
-    return !mainLine && frosthavenStyle && (
+    return /*!mainLine &&*/ frosthavenStyle && (
         (iconToken == "pierce" ||
             iconToken == "target" ||
             iconToken == "curse" ||
             iconToken == "bless" ||
+            iconToken == "invisible" ||
+            iconToken == "strengthen" ||
             iconToken == "curse" ||
             iconToken == "push" ||
             iconToken == "pull" ||
@@ -723,7 +729,7 @@ class LineBuilder {
             borderRadius: BorderRadius.all(Radius.circular(6 * scale))),
         padding:
             EdgeInsets.fromLTRB(2 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
-        //margin: EdgeInsets.only(left: 2 * scale),
+        margin: EdgeInsets.only(left: 2 * scale),
         //child: Expanded(
         child: Column(mainAxisSize: MainAxisSize.max, children: [
           if (list2.isNotEmpty)
@@ -856,10 +862,11 @@ class LineBuilder {
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
+        backgroundColor: Colors.lightGreen,
         fontSize:
             (alignment == CrossAxisAlignment.center ? frosthavenStyle? 13.1 : 12.56 : 11.2) * scale,
-        height: (alignment == CrossAxisAlignment.center) ? frosthavenStyle? 0.8 : 1.1 : 1,
-        // 0.8,
+        height: (alignment == CrossAxisAlignment.center) ? frosthavenStyle? 0.84 : 1.1 : 1,
+        // 0.84,
 
         shadows: [shadow]);
 
@@ -868,7 +875,7 @@ class LineBuilder {
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: 15.7 * 0.8 * scale,
-        height: 1.1,
+        height: frosthavenStyle? 1 : 1.1,
         //0.8,
         shadows: [shadow]);
 
@@ -922,7 +929,7 @@ class LineBuilder {
         //continue;
       }
       //handle FH layout with gray background for sub-lines
-      if (line.contains("[subLineEnd]") || line.contains("[conditionalEnd]")) {
+      if (line.contains("[subLineEnd]")) {
         buildFHStyleBackgrounds(lines, lastLineTextPartList, textAlign, scale,
             isInRow, isInColumn, isColumnInRow, widgetsInColumn, widgetsInRow);
         continue;
@@ -975,7 +982,7 @@ class LineBuilder {
           if(compare.toLowerCase().contains("if")) {
             conditional = true;
           }
-          if (compare.contains(" : ")) {
+          if (compare.contains(" :")) {
             //not a great solution
             elementUse = true;
             conditional = true;
@@ -988,7 +995,7 @@ class LineBuilder {
             }
             for (var colItem in (item as Column).children) {
               String compare = colItem.toStringDeep();
-              if (compare.contains(" : ")) {
+              if (compare.contains(" :")) {
                 elementUse = true;
                 conditional = true;
                 columnHack = true;
@@ -1013,6 +1020,7 @@ class LineBuilder {
           //or conditional: is isFrosthavenStyle and contains a %use%
           lines.add(Container(
               margin: EdgeInsets.all(2 * scale),
+              //alignment: Alignment.bottomCenter,
               child: DottedBorder(
                   color: Colors.white,
                   //borderType: BorderType.Rect,
@@ -1023,6 +1031,7 @@ class LineBuilder {
                   dashPattern: [2 * scale, 1 * scale],
                   strokeWidth: 0.6 * scale,
                   child: Container(
+
                       decoration: BoxDecoration(
                           //backgroundBlendMode: BlendMode.softLight,
                           //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
@@ -1166,8 +1175,9 @@ class LineBuilder {
               textPartList.add(WidgetSpan(
                   //alignment: PlaceholderAlignment.top,
                   style: styleToUse, //this is wrong here
+                  //baseline: TextBaseline.ideographic,
                   child: Container(
-                      //color: Colors.amber,
+                      color: Colors.amber,
                       //margin: margin,
                       child: Stack(
                     clipBehavior: Clip.none,
@@ -1195,14 +1205,15 @@ class LineBuilder {
                     ],
                   ))));
               textPartList.add(TextSpan(
-                  text: " : ",
+                  text: frosthavenStyle? " :" : " : ",
                   style: TextStyle(
                     //maybe slightly bigger between chars space?
                       fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
                       color: left ? Colors.black : Colors.white,
+                      backgroundColor: Colors.amber,
                       fontSize:
                       (alignment == CrossAxisAlignment.center ? 12 : 12) * 0.8 * scale,
-                      height: (alignment == CrossAxisAlignment.center) ? frosthavenStyle? 0.8 : 1.1 : 1,
+                      height: (alignment == CrossAxisAlignment.center) ? frosthavenStyle? 1 : 1.1 : 1,
                       // 0.8,
 
                       shadows: [shadow]))); //use majalla even for FH style on this one
@@ -1212,9 +1223,12 @@ class LineBuilder {
                 String? iconTokenText = _tokens[iconToken];
                 if (frosthavenStyle) {
                   iconTokenText = null;
+                } else {
+                  textPartList
+                      .add(TextSpan(text: iconTokenText,
+                      style: styleToUse
+                  ));
                 }
-                textPartList
-                    .add(TextSpan(text: iconTokenText, style: styleToUse));
               }
               bool mainLine =
                   styleToUse == normalStyle || styleToUse == eliteStyle;
@@ -1232,18 +1246,20 @@ class LineBuilder {
                 }
               }
               bool overflow = shouldOverflow(frosthavenStyle, iconGfx, mainLine);
-              double heightMod = 1.35; //to make sub line conditions have larger size and overflow on FH style
+              double heightMod = mainLine? 1 : 1.35 * 1.15; //to make sub line conditions have larger size and overflow on FH style
               Widget child = Image(
                 //fit: BoxFit.contain,
                 //could do funk stuff with the color value for cool effects maybe?
                 height: overflow? height*heightMod : height,
-                //TODO: this causes lines to have variable height
+                //this causes lines to have variable height if height set to less than 1
                 //alignment: Alignment.topCenter,
                 fit: BoxFit.fitHeight,
+                //alignment: Alignment.topLeft,
                 filterQuality: FilterQuality.high,
                 image: AssetImage(imagePath),
               );
               child = Container(
+                color: Colors.blue,
                 height: height,
                 width: overflow? height: null,
                 margin: margin,
@@ -1265,8 +1281,9 @@ class LineBuilder {
               //wtf = 1;
 
               textPartList.add(WidgetSpan(
-                  style: TextStyle(fontSize: styleToUse.fontSize! * wtf),
+                  style:  TextStyle(fontSize: styleToUse.fontSize! * wtf),
                   //styleToUse, //don't ask (probably because height is 0.8
+                  //baseline: frosthavenStyle? TextBaseline.ideographic : null, //solves icon alignment, but text align....
                   child: child));
             }
             isIconPart = false;
@@ -1280,7 +1297,9 @@ class LineBuilder {
                 textPart = line.substring(partStartIndex, i - 1);
               }
 
-              textPartList.add(TextSpan(text: textPart, style: styleToUse));
+              textPartList.add(TextSpan(text: textPart,
+                  style: styleToUse
+              ));
             }
             isIconPart = true;
           }
@@ -1310,13 +1329,17 @@ class LineBuilder {
 
       if (partStartIndex < line.length) {
         String textPart = line.substring(partStartIndex, line.length);
-        textPartList.add(TextSpan(text: textPart, style: styleToUse));
+        textPartList.add(TextSpan(text: textPart,
+            style: styleToUse
+        ));
       }
       var text = Text.rich(
+        //style: styleToUse,
         textHeightBehavior: const TextHeightBehavior(
             leadingDistribution: TextLeadingDistribution.even),
         textAlign: textAlign,
         TextSpan(
+          //style: styleToUse,
           children: textPartList,
         ),
       );
@@ -1334,10 +1357,12 @@ class LineBuilder {
         }
         textPartList.insertAll(0, lastLineTextPartList);
         text = Text.rich(
+          style: styleToUse,
           textHeightBehavior: const TextHeightBehavior(
               leadingDistribution: TextLeadingDistribution.even),
           textAlign: textAlign,
           TextSpan(
+            style: styleToUse,
             children: textPartList,
           ),
         );
