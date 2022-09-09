@@ -73,7 +73,7 @@
         ["Patch Wounds", 376, true, 30, "%move% + 1","*.........", "%heal% 3", "^Self" ],
         ["Parry", 377, false, 70, "%move% + 0","*.........", "%attack% - 1", "^%disarm%" ],
         ["Vicious Spear", 378, false, 77, "%move% - 1","*.........", "%attack% + 0", "^%range% 3", "^%wound%" ],
-        ["Spiked Pit",379, false, 20, "%attack% + 0", "^%range% 4","*.........", "^Create one 3-damage trap in an adjacent empty hex closest to an enemy." ]
+        ["Spiked Pit",379, false, 20, "%attack% + 0", "^%range% 4","*.........", "^^Create one 3-damage trap in an adjacent","^^empty hex closest to an enemy." ]
 
       ]
     },
@@ -157,10 +157,10 @@
       "name": "Stone Golem (JotL)",
       "cards": [
         ["Runic Feeedback", 404, false, 10, "^Any time a figure attacks the", "^Stone Golem this round , that", "^figure suffers 3 damage" ],
-        ["Taxing Advance", 405, false, 28, "%move% + 1","*.........", "%attack% + 0","*.........","[r]", "[c]", "^If the Move ability was performed,", "^the Stone Golem suffers 1 damage.","[/c]", "[/r]" ],
+        ["Taxing Advance", 405, false, 28, "%move% + 1","*.........", "%attack% + 0","*.........","[r]", "[c]", "^^If the Move ability was performed,", "^^the Stone Golem suffers 1 damage.","[/c]", "[/r]" ],
         ["Hasty Assault", 406, true, 51, "%move% + 1","*.........", "%attack% - 1"],
         ["Nothing Special", 407, false, 64, "%move% + 0","*.........", "%attack% + 0"],
-        ["Sacrificial Hurl", 408, false, 72, "%attack% + 1", "^%range% 3", "*","[r]", "[c]", "^If this attack is performed,", "^the Stone Golem suffers 2 damage.","[/c]", "[/r]"],
+        ["Sacrificial Hurl", 408, false, 72, "%attack% + 1", "^%range% 3", "*","[r]", "[c]", "^^If this attack is performed,", "^^the Stone Golem suffers 2 damage.","[/c]", "[/r]"],
         ["Calculated Strike", 409, true, 90, "%move% - 1","*.........", "%attack% + 1"],
         ["Ground Pound", 410, false, 83, "%move% + 0","*.........", "%attack% - 1", "^Target all adjacent enemies"],
         ["Runic Draw", 411, false, 28, "%move% + 1","*.........", "%attack% - 2", "^%range% 3", "^%pull% 2", "^%immobilize%" ]
@@ -566,43 +566,43 @@
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 4, "move": 1, "attack": 1, "attributes": [ "^On death, all adjacent figures suffer 1 damage" ] },
-          "elite": { "health": 6, "move": 1, "attack": 2, "attributes": [ "^On death, all adjacent figures suffer 1 damage" ] }
+          "normal": { "health": 4, "move": 1, "attack": 1, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 1 damage" ] },
+          "elite": { "health": 6, "move": 1, "attack": 2, "attributes": [ "^^^On death, all","^^adjacent figures","^^suffer 1 damage" ] }
         },
         {
           "level": 1,
-          "normal": { "health": 4, "move": 1, "attack": 2, "attributes": [ "^On death, all adjacent figures suffer 1 damage" ] },
-          "elite": { "health": 7, "move": 1, "attack": 2, "attributes": [ "^On death, all adjacent figures suffer 2 damage", "^Advantage" ] }
+          "normal": { "health": 4, "move": 1, "attack": 2, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 1 damage" ] },
+          "elite": { "health": 7, "move": 1, "attack": 2, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 2 damage", "^Advantage" ] }
         },
         {
           "level": 2,
-          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": [ "^On death, all adjacent figures suffer 1 damage" ] },
-          "elite": { "health": 8, "move": 1, "attack": 3, "attributes": [ "^On death, all adjacent figures suffer 2 damage", "^Advantage" ] }
+          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 1 damage" ] },
+          "elite": { "health": 8, "move": 1, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 2 damage", "^Advantage" ] }
         },
         {
           "level": 3,
-          "normal": { "health": 6, "move": 2, "attack": 3, "attributes": [ "^On death, all adjacent figures suffer 2 damage" ] },
-          "elite": { "health": 10, "move": 2, "attack": 3, "attributes": [ "^On death, all adjacent figures suffer 2 damage", "^Advantage" ] }
+          "normal": { "health": 6, "move": 2, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 2 damage" ] },
+          "elite": { "health": 10, "move": 2, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 2 damage", "^Advantage" ] }
         },
         {
           "level": 4,
-          "normal": { "health": 8, "move": 2, "attack": 3, "attributes": [ "^On death, all adjacent figures suffer 2 damage" ] },
-          "elite": { "health": 12, "move": 2, "attack": 3, "attributes": [ "^On death, all adjacent figures suffer 3 damage", "^Advantage" ] }
+          "normal": { "health": 8, "move": 2, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 2 damage" ] },
+          "elite": { "health": 12, "move": 2, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage", "^Advantage" ] }
         },
         {
           "level": 5,
-          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "^On death, all adjacent figures suffer 2 damage" ] },
-          "elite": { "health": 13, "move": 2, "attack": 4, "attributes": [ "^On death, all adjacent figures suffer 3 damage", "^Advantage" ] }
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 2 damage" ] },
+          "elite": { "health": 13, "move": 2, "attack": 4, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage", "^Advantage" ] }
         },
         {
           "level": 6,
-          "normal": { "health": 12, "move": 3, "attack": 3, "attributes": [ "^On death, all adjacent figures suffer 3 damage" ] },
-          "elite": { "health": 14, "move": 3, "attack": 4, "attributes": [ "^On death, all adjacent figures suffer 3 damage", "^Advantage" ] }
+          "normal": { "health": 12, "move": 3, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage" ] },
+          "elite": { "health": 14, "move": 3, "attack": 4, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage", "^Advantage" ] }
         },
         {
           "level": 7,
-          "normal": { "health": 12, "move": 3, "attack": 4, "attributes": [ "^On death, all adjacent figures suffer 3 damage" ] },
-          "elite": { "health": 16, "move": 3, "attack": 5, "attributes": [ "^On death, all adjacent figures suffer 4 damage", "^Advantage" ] }
+          "normal": { "health": 12, "move": 3, "attack": 4, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage" ] },
+          "elite": { "health": 16, "move": 3, "attack": 5, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 4 damage", "^Advantage" ] }
         }
       ]
     },
@@ -662,43 +662,43 @@
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "^On death, all","^adjacent figures","^suffer 1 damage" ] },
-          "elite": { "health": 12, "move": 2, "attack": 3, "attributes": [ "^On death, all","^adjacent figures","^suffer 1 damage" ] }
+          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 1 damage" ] },
+          "elite": { "health": 12, "move": 2, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 1 damage" ] }
         },
         {
           "level": 1,
-          "normal": { "health": 9, "move": 2, "attack": 2, "attributes": [ "^On death, all","^adjacent figures","^suffer 2 damage" ] },
-          "elite": { "health": 12, "move": 2, "attack": 3, "attributes": [ "^On death, all","^adjacent figures","^suffer 3 damage", "%shield% 1" ] }
+          "normal": { "health": 9, "move": 2, "attack": 2, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 2 damage" ] },
+          "elite": { "health": 12, "move": 2, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage", "%shield% 1" ] }
         },
         {
           "level": 2,
-          "normal": { "health": 10, "move": 2, "attack": 3, "attributes": [ "^On death, all","^adjacent figures","^suffer 2 damage" ] },
-          "elite": { "health": 15, "move": 2, "attack": 4, "attributes": [ "^On death, all","^adjacent figures","^suffer 3 damage", "%shield% 1" ] }
+          "normal": { "health": 10, "move": 2, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 2 damage" ] },
+          "elite": { "health": 15, "move": 2, "attack": 4, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage", "%shield% 1" ] }
         },
         {
           "level": 3,
-          "normal": { "health": 12, "move": 3, "attack": 3, "attributes": [ "^On death, all","^adjacent figures","^suffer 3 damage" ] },
-          "elite": { "health": 18, "move": 3, "attack": 4, "attributes": [ "^On death, all","^adjacent figures","^suffer 4 damage", "%shield% 1" ] }
+          "normal": { "health": 12, "move": 3, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage" ] },
+          "elite": { "health": 18, "move": 3, "attack": 4, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 4 damage", "%shield% 1" ] }
         },
         {
           "level": 4,
-          "normal": { "health": 12, "move": 3, "attack": 3, "attributes": [ "^On death, all","^adjacent figures","^suffer 3 damage", "%shield% 1" ] },
-          "elite": { "health": 18, "move": 3, "attack": 4, "attributes": [ "^On death, all","^adjacent figures","^suffer 4 damage", "%shield% 2" ] }
+          "normal": { "health": 12, "move": 3, "attack": 3, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage", "%shield% 1" ] },
+          "elite": { "health": 18, "move": 3, "attack": 4, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 4 damage", "%shield% 2" ] }
         },
         {
           "level": 5,
-          "normal": { "health": 13, "move": 3, "attack": 4, "attributes": [ "^On death, all","^adjacent figures","^suffer 3 damage", "%shield% 1" ] },
-          "elite": { "health": 20, "move": 3, "attack": 5, "attributes": [ "^On death, all","^adjacent figures","^suffer 5 damage", "%shield% 2" ] }
+          "normal": { "health": 13, "move": 3, "attack": 4, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage", "%shield% 1" ] },
+          "elite": { "health": 20, "move": 3, "attack": 5, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 5 damage", "%shield% 2" ] }
         },
         {
           "level": 6,
-          "normal": { "health": 17, "move": 3, "attack": 4, "attributes": [ "^On death, all","^adjacent figures","^suffer 3 damage", "%shield% 1" ] },
-          "elite": { "health": 27, "move": 3, "attack": 6, "attributes": [ "^On death, all","^adjacent figures","^suffer 5 damage", "%shield% 2" ] }
+          "normal": { "health": 17, "move": 3, "attack": 4, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 3 damage", "%shield% 1" ] },
+          "elite": { "health": 27, "move": 3, "attack": 6, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 5 damage", "%shield% 2" ] }
         },
         {
           "level": 7,
-          "normal": { "health": 20, "move": 3, "attack": 5, "attributes": [ "^On death, all","^adjacent figures","^suffer 4 damage", "%shield% 1" ] },
-          "elite": { "health": 23, "move": 3, "attack": 6, "attributes": [ "^On death, all","^adjacent figures","^suffer 5 damage", "%shield% 3" ] }
+          "normal": { "health": 20, "move": 3, "attack": 5, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 4 damage", "%shield% 1" ] },
+          "elite": { "health": 23, "move": 3, "attack": 6, "attributes": [ "^^On death, all","^^adjacent figures","^^suffer 5 damage", "%shield% 3" ] }
         }
       ]
     },
@@ -1632,7 +1632,7 @@
             "health": 8,
             "move": 1,
             "attack": 3,
-            "attributes": [ "Attackers gain Disadvantage", "%poison%" ]
+            "attributes": [ "^^Attackers gain","^^Disadvantage", "%poison%" ]
           }
         },
         {
@@ -1648,7 +1648,7 @@
             "health": 11,
             "move": 1,
             "attack": 3,
-            "attributes": [ "Attackers gain Disadvantage", "%poison%" ]
+            "attributes": [ "^^Attackers gain","^^Disadvantage", "%poison%" ]
           }
         },
         {
@@ -1663,7 +1663,7 @@
             "health": 14,
             "move": 1,
             "attack": 3,
-            "attributes": [ "Attackers gain Disadvantage", "%poison%" ]
+            "attributes": [ "^^Attackers gain", "^^Disadvantage", "%poison%" ]
           }
         },
         {
@@ -1678,7 +1678,7 @@
             "health": 15,
             "move": 1,
             "attack": 4,
-            "attributes": [ "Attackers gain Disadvantage", "%poison%" ]
+            "attributes": [ "^^Attackers gain", "^^Disadvantage", "%poison%" ]
           }
         },
         {
@@ -1693,7 +1693,7 @@
             "health": 19,
             "move": 1,
             "attack": 4,
-            "attributes": [ "Attackers gain Disadvantage", "%poison%" ]
+            "attributes": [ "^^Attackers gain","^^Disadvantage", "%poison%" ]
           }
         }
       ]

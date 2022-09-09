@@ -167,7 +167,7 @@
             "health": 18,
             "move": 4,
             "attack": 4,
-            "attributes": [ "Attackers gain disadvantage", "%poison%" ]
+            "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ]
           }
         },
         {
@@ -182,7 +182,7 @@
             "health": 21,
             "move": 4,
             "attack": 5,
-            "attributes": [ "Attackers gain disadvantage", "%poison%" ]
+            "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ]
           }
         },
         {
@@ -197,7 +197,7 @@
             "health": 25,
             "move": 4,
             "attack": 5,
-            "attributes": [ "Attackers gain disadvantage", "%poison%" ]
+            "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ]
           }
         },
         {
@@ -212,7 +212,7 @@
             "health": 28,
             "move": 4,
             "attack": 6,
-            "attributes": [ "Attackers gain disadvantage", "%poison%" ]
+            "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ]
           }
         },
         {
@@ -227,7 +227,7 @@
             "health": 32,
             "move": 5,
             "attack": 6,
-            "attributes": [ "Attackers gain disadvantage", "%poison%" ]
+            "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ]
           }
         }
       ]
@@ -254,27 +254,27 @@
 
         },
         {
-          "level": 3, "health": "18xC", "move": 4, "attack": 4, "attributes": [ "Attackers gain disadvantage", "%poison%" ],
+          "level": 3, "health": "18xC", "move": 4, "attack": 4, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
 
         },
         {
-          "level": 4, "health": "21xC", "move": 4, "attack": 5, "attributes": [ "Attackers gain disadvantage", "%poison%" ],
+          "level": 4, "health": "21xC", "move": 4, "attack": 5, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
 
         },
         {
-          "level": 5, "health": "25xC", "move": 4, "attack": 5, "attributes": [ "Attackers gain disadvantage", "%poison%" ],
+          "level": 5, "health": "25xC", "move": 4, "attack": 5, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
 
         },
         {
-          "level": 6, "health": "28xC", "move": 4, "attack": 6, "attributes": [ "Attackers gain disadvantage", "%poison%" ],
+          "level": 6, "health": "28xC", "move": 4, "attack": 6, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
 
         },
         {
-          "level": 7, "health": "32xC", "move": 5, "attack": 6, "attributes": [ "Attackers gain disadvantage", "%poison%" ],
+          "level": 7, "health": "32xC", "move": 5, "attack": 6, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
 
         }
@@ -1350,27 +1350,27 @@
 
         },
         {
-          "level": 3, "health": 18, "move": 4, "attack": 4, "attributes": [ "Advantage","Attackers gain disadvantage", "%poison%" ],
+          "level": 3, "health": 18, "move": 4, "attack": 4, "attributes": [ "Advantage","^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%stun%" ]
 
         },
         {
-          "level": 4, "health": 21, "move": 4, "attack": 5, "attributes": ["Advantage", "Attackers gain disadvantage", "%poison%" ],
+          "level": 4, "health": 21, "move": 4, "attack": 5, "attributes": ["Advantage", "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%stun%" ]
 
         },
         {
-          "level": 5, "health": 25, "move": 4, "attack": 5, "attributes": ["Advantage", "Attackers gain disadvantage", "%poison%" ],
+          "level": 5, "health": 25, "move": 4, "attack": 5, "attributes": ["Advantage", "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": ["%stun%" ]
 
         },
         {
-          "level": 6, "health": 28, "move": 4, "attack": 6, "attributes": ["Advantage", "Attackers gain disadvantage", "%poison%" ],
+          "level": 6, "health": 28, "move": 4, "attack": 6, "attributes": ["Advantage", "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%stun%" ]
 
         },
         {
-          "level": 7, "health": 32, "move": 5, "attack": 6, "attributes": ["Advantage", "Attackers gain disadvantage", "%poison%" ],
+          "level": 7, "health": 32, "move": 5, "attack": 6, "attributes": ["Advantage", "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%stun%" ]
 
         }

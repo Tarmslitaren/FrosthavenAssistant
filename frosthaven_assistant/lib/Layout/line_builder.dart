@@ -49,6 +49,7 @@ class LineBuilder {
       String iconToken, double height, bool isFrosthavenStyle) {
     if (iconToken == "air" ||
         iconToken == "earth" ||
+        iconToken == "earthfire" ||
         iconToken == "fire" ||
         iconToken == "ice" ||
         iconToken == "dark" ||
@@ -112,6 +113,7 @@ class LineBuilder {
     }
     if (iconToken == "air" ||
         iconToken == "earth" ||
+        iconToken == "earthfire" ||
         iconToken == "fire" ||
         iconToken == "ice" ||
         iconToken == "dark" ||
@@ -509,8 +511,8 @@ class LineBuilder {
     //add container markers here as well
     List<String> retVal = [];
     bool isSubLine =
-        false; //marked potential start of subline after a mainline end
-    bool isReallySubLine = false; //when entering a definate subline
+        false; //marked potential start of sub line after a mainline end
+    bool isReallySubLine = false; //when entering a definite sub line
     bool isConditional = false;
     bool isElementUse = false;
     for (int i = 0; i < lines.length; i++) {
@@ -520,9 +522,9 @@ class LineBuilder {
       }
       if (line == "[r]" &&
           (lines[i + 1].contains('%use') ||
-              lines[i + 1].toLowerCase().contains('if') ||
+              lines[i + 1].toLowerCase().contains('if ') || lines[i + 1].contains('On ') ||
               (lines.length > i + 2 &&
-                  lines[i + 2].toLowerCase().contains('if')))) {
+                  lines[i + 2].toLowerCase().contains('if ')|| lines[i + 1].contains('On ')))) {
         isConditional = true;
       }
       if (line == "[/r]" && isConditional) { //TODO: add instead a [conditionalDone] tag
@@ -581,12 +583,15 @@ class LineBuilder {
                 lines[i - 1].startsWith('^%') &&
                 lines[i - 1].endsWith(
                     '%')) || //you will not want a linebreak after a lone poison sub line
+            line.startsWith("^all") ||
             line.startsWith("^All") &&
                 !line.startsWith("^All attacks") &&
                 !line.startsWith("^All targets")) {
           //make bigger icon and text in element use block
-          //TODO: make sure this doesnt crash if emement use on first line
-          if (isElementUse && (!lines[i - 2].contains("[c]"))) {
+          //TODO: make sure this doesnt crash if element use on first line
+          if (isElementUse && (!lines[i - 2].contains("[c]")) && !line.startsWith("^Target")
+              && !line.startsWith("^all")
+          ) {
             //ok, so if there is a subline, then there has to be a [c]
             line = line.substring(1); //make first sub line into main line
             if (retVal.last == "[subLineStart]") {
@@ -863,6 +868,15 @@ class LineBuilder {
         height: 0.7,
         shadows: [shadow]);
 
+    var dividerStyleExtraThin = TextStyle(
+        fontFamily: 'Majalla',
+        leadingDistribution: TextLeadingDistribution.proportional,
+        color: left ? Colors.black : Colors.white,
+        fontSize: 6 * 0.8 * scale,
+        letterSpacing: 2 * 0.8 * scale,
+        height: 0.1,
+        shadows: [shadow]);
+
     var smallStyle = TextStyle(
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
@@ -936,6 +950,24 @@ class LineBuilder {
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 7.52 * scale : 8.8 * scale,
         height: 1,
+        shadows: [shadow]);
+
+    var midStyleSquished = TextStyle(
+      //backgroundColor: Colors.greenAccent,
+        leadingDistribution: TextLeadingDistribution.even,
+        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+        color: left ? Colors.black : Colors.white,
+        fontSize: (alignment == CrossAxisAlignment.center
+            ? frosthavenStyle
+            ? 7.52
+            : 8.8
+            : 10.16) *
+            scale,
+        //sizes are larger on stat cards
+        height: (alignment == CrossAxisAlignment.center ? 0.8 :
+        0.8
+        ),
+        // 0.9,
         shadows: [shadow]);
 
     List<Widget> lines = [];
@@ -1044,7 +1076,7 @@ class LineBuilder {
           elementUse = true;
           conditional = true;
         }
-        if (texts.toLowerCase().contains("if")) {
+        if (texts.toLowerCase().contains("if ") || texts.contains('On ')) {
           conditional = true;
         }
         if(texts.lastIndexOf(" :") != texts.indexOf(" :")) {
@@ -1054,7 +1086,7 @@ class LineBuilder {
         Row row = Row(
           //crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          //todo: this was max. make sure the change doe snot f something up
+          //todo: this was max. make sure the change does not f something up
           mainAxisAlignment: rowMainAxisAlignment,
           children:
               columnHack ? widgetsInRow.sublist(1) : widgetsInRow.toList(),
@@ -1106,6 +1138,7 @@ class LineBuilder {
             0.8 * 0.55; //this is because of the actual size of the assets
         if (line.substring(1) == "air" ||
             line.substring(1) == "earth" ||
+            line.substring(1) == "earthfire" ||
             line.substring(1) == "ice" ||
             line.substring(1) == "fire" ||
             line.substring(1) == "light" ||
@@ -1144,8 +1177,13 @@ class LineBuilder {
         sizeToken = '*';
         styleToUse = smallStyle;
         line = line.substring(1, line.length);
-        if (line.startsWith("....")) {
+        if (line.startsWith("....") ||line.startsWith("*....")) {
           styleToUse = dividerStyle;
+          if(line.startsWith('*')){
+            line = line.substring(1, line.length);
+            styleToUse = dividerStyleExtraThin;
+          }
+
           if (frosthavenStyle) {
             Widget image = Image.asset(
               scale: 1.0 / (scale * 0.15),
@@ -1175,6 +1213,10 @@ class LineBuilder {
         sizeToken = '^';
         styleToUse = midStyle;
         line = line.substring(1, line.length);
+        if(line.startsWith('^')) { //double ^^ : no means no, you bastard!
+          styleToUse = midStyleSquished;
+          line = line.substring(1, line.length);
+        }
       }
       if (applyStats) {
         List<String> statLines =
