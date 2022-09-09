@@ -598,6 +598,9 @@ class LineBuilder {
               retVal.removeLast();
             }
             isReallySubLine = false;
+          } else if(isElementUse && (!lines[i - 2].contains("[c]"))){
+            isReallySubLine = false; //block useblocks from having straight sublines?
+            //hope this doesn't come back to bite me (flame demon 77)
           }
           line = "!$line";
           line = line.replaceFirst("Self", "self");
@@ -631,7 +634,7 @@ class LineBuilder {
         //ignore
       } else {
         // if(line != "[c]" && line != "[r]"){
-        if (!isSubLine) {
+        if (!isSubLine && !line.contains("%use%")) {
           isSubLine = true;
         } else {
           if (isReallySubLine) {
@@ -1308,7 +1311,7 @@ class LineBuilder {
 
                       shadows: [
                         shadow
-                      ]))); //use majalla even for FH style on this one
+                      ])));
             } else {
               double height = _getIconHeight(
                   iconToken, styleToUse.fontSize!, frosthavenStyle);
@@ -1346,13 +1349,10 @@ class LineBuilder {
                   : 1.35 *
                       1.15; //to make sub line conditions have larger size and overflow on FH style
               Widget child = Image(
-                //fit: BoxFit.contain,
                 //could do funk stuff with the color value for cool effects maybe?
                 height: overflow ? height * heightMod : height,
                 //this causes lines to have variable height if height set to less than 1
-                //alignment: Alignment.topCenter,
                 fit: BoxFit.fitHeight,
-                //alignment: Alignment.topLeft,
                 filterQuality: FilterQuality.high,
                 image: AssetImage(imagePath),
               );
@@ -1367,9 +1367,7 @@ class LineBuilder {
                           minWidth: 0.0,
                           minHeight: 0.0,
                           maxHeight: double.infinity,
-                          // height * heightMod,
                           maxWidth: double.infinity,
-                          // height * heightMod,
                           child: child,
                         )
                       : child);
@@ -1435,18 +1433,6 @@ class LineBuilder {
             child:Text(textPart, style: styleToUse)));
       }
 
-      //TODO: use rows instead of Text.rich
-
-      /*var text = Text.rich(
-        //style: styleToUse,
-        textHeightBehavior: const TextHeightBehavior(
-            leadingDistribution: TextLeadingDistribution.even),
-        textAlign: textAlign,
-        TextSpan(
-          //style: styleToUse,
-          children: textPartList,
-        ),
-      );*/
       Row row = Row(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -1466,21 +1452,13 @@ class LineBuilder {
           lines.removeLast();
         }
         textPartListRowContent.insertAll(0, lastLineTextPartListRowContent);
-        /*text = Text.rich(
-          style: styleToUse,
-          textHeightBehavior: const TextHeightBehavior(
-              leadingDistribution: TextLeadingDistribution.even),
-          textAlign: textAlign,
-          TextSpan(
-            style: styleToUse,
-            children: textPartList,
-          ),
-        );*/
+
         row = Row(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: rowMainAxisAlignment,
-            children: textPartListRowContent);
+            children: textPartListRowContent
+        );
       }
 
       if (isInColumn && (!isInRow || isColumnInRow)) {
@@ -1490,7 +1468,6 @@ class LineBuilder {
       } else {
         lines.add(row);
       }
-      // lastLineTextPartList = textPartList;
       lastLineTextPartListRowContent = textPartListRowContent;
     }
     return createLinesColumn(alignment, lines);

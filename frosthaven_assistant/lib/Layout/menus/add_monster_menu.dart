@@ -37,10 +37,25 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
       _foundMonsters.removeWhere((element) => element.levels[0].boss != null);
     }
 
+    sortMonsters(_foundMonsters);
+    super.initState();
+  }
 
-    _foundMonsters.sort((a, b) {
+  int compareEditions(String a, String b) {
+    if(a.startsWith("S") && ! b.startsWith("S")){
+      return 1;
+    }
+    if(b.startsWith("S") && ! a.startsWith("S")){
+      return -1;
+    }
+    return -a.compareTo(b);
+
+  }
+
+  void sortMonsters(List<MonsterModel> list) {
+    list.sort((a, b) {
       if (a.edition != b.edition) {
-        return -a.edition.compareTo(b.edition);
+        return compareEditions(a.edition, b.edition);
         //TODO: have an actual order in data
         //NOTE: this - here is a bit silly. it just so happens that the order makes more sense backwards: Jotl, gloom, FC, FH, CS
       }
@@ -58,7 +73,6 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
       }
       return a.name.compareTo(b.name);
     });
-    super.initState();
   }
 
   // This function is called whenever the text field changes
@@ -81,6 +95,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     if(!showBoss) {
       results.removeWhere((element) => element.levels[0].boss != null);
     }
+    sortMonsters(results);
 
     // Refresh the UI
     setState(() {
