@@ -739,8 +739,8 @@
           "move": 0,
           "attack": 1,
           "range": 2,
-          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
-          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 2\" targeting", "^allies" ],
+          "special1": [ "^^Weakest ally performs", "^^\"%move%+1, %attack%+0", "^^Target all adjacent\", Dies" ],
+          "special2": [ "^^Slowest character", "^^performs \"%move% 3,", "^^%attack% 2\" targeting", "^^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -749,8 +749,8 @@
           "move": 0,
           "attack": 2,
           "range": 2,
-          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
-          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 3\" targeting", "^allies" ],
+          "special1": [ "^^Weakest ally performs", "^^\"%move%+1, %attack%+0", "^^Target all adjacent\", Dies" ],
+          "special2": [ "^^Slowest character", "^^performs \"%move% 3,", "^^%attack% 3\" targeting", "^^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -759,8 +759,8 @@
           "move": 0,
           "attack": 2,
           "range": 2,
-          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
-          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 3\" targeting", "^allies" ],
+          "special1": [ "^^Weakest ally performs", "^^\"%move%+1, %attack%+0", "^^Target all adjacent\", Dies" ],
+          "special2": [ "^^Slowest character", "^^performs \"%move% 3,", "^^%attack% 3\" targeting", "^^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -769,8 +769,8 @@
           "move": 0,
           "attack": 2,
           "range": 3,
-          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
-          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 4\" targeting", "^allies" ],
+          "special1": [ "^^Weakest ally performs", "^^\"%move%+1, %attack%+0", "^^Target all adjacent\", Dies" ],
+          "special2": [ "^^Slowest character", "^^performs \"%move% 3,", "^^%attack% 4\" targeting", "^^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -779,8 +779,8 @@
           "move": 0,
           "attack": 3,
           "range": 3,
-          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
-          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 4\" targeting", "^allies" ],
+          "special1": [ "^^Weakest ally performs", "^^\"%move%+1, %attack%+0", "^^Target all adjacent\", Dies" ],
+          "special2": [ "^^Slowest character", "^^performs \"%move% 3,", "^^%attack% 4\" targeting", "^^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -789,8 +789,8 @@
           "move": 0,
           "attack": 3,
           "range": 3,
-          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
-          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 5\" targeting", "^allies" ],
+          "special1": [ "^^Weakest ally performs", "^^\"%move%+1, %attack%+0", "^^Target all adjacent\", Dies" ],
+          "special2": [ "^^Slowest character", "^^performs \"%move% 3,", "^^%attack% 5\" targeting", "^^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -799,8 +799,8 @@
           "move": 0,
           "attack": 3,
           "range": 4,
-          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
-          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 5\" targeting", "^allies" ],
+          "special1": [ "^^Weakest ally performs", "^^\"%move%+1, %attack%+0", "^^Target all adjacent\", Dies" ],
+          "special2": [ "^^Slowest character", "^^performs \"%move% 3,", "^^%attack% 5\" targeting", "^^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         },
         {
@@ -809,8 +809,8 @@
           "move": 0,
           "attack": 4,
           "range": 4,
-          "special1": [ "^Weakest ally performs", "^\"%move%+1, %attack%+0", "^Target all adjacent\", Dies" ],
-          "special2": [ "^Slowest character", "^performs \"%move% 3,", "^%attack% 6\" targeting", "^allies" ],
+          "special1": [ "^^Weakest ally performs", "^^\"%move%+1, %attack%+0", "^^Target all adjacent\", Dies" ],
+          "special2": [ "^^Slowest character", "^^performs \"%move% 3,", "^^%attack% 6\" targeting", "^^allies" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%curse%", "%stun%", "%push%", "%pull%" ]
         }
       ]
@@ -990,8 +990,8 @@
           "health": "9xC",
           "move": 4,
           "attack": 3,
-          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^^all enemies adjacent to target","^^suffer 1 damage","^^destroy obstacle" ],
+          "special2": [ "^^%attack% - 2, destroy obstacle","^^%shield%4, %retaliate%4","^^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -999,8 +999,8 @@
           "health": "10xC",
           "move": 4,
           "attack": 4,
-          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^^all enemies adjacent to target","^^suffer 1 damage","^^destroy obstacle" ],
+          "special2": [ "^^%attack% - 2, destroy obstacle","^^%shield%4, %retaliate%4","^^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1008,8 +1008,8 @@
           "health": "13xC",
           "move": 5,
           "attack": 4,
-          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^^all enemies adjacent to target","^^suffer 1 damage","^^destroy obstacle" ],
+          "special2": [ "^^%attack% - 2, destroy obstacle","^^%shield%4, %retaliate%4","^^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1017,8 +1017,8 @@
           "health": "14xC",
           "move": 5,
           "attack": 4,
-          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^^all enemies adjacent to target","^^suffer 1 damage","^^destroy obstacle" ],
+          "special2": [ "^^%attack% - 2, destroy obstacle","^^%shield%4, %retaliate%4","^^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1026,8 +1026,8 @@
           "health": "18xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^^all enemies adjacent to target","^^suffer 1 damage","^^destroy obstacle" ],
+          "special2": [ "^^%attack% - 2, destroy obstacle","^^%shield%4, %retaliate%4","^^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1035,8 +1035,8 @@
           "health": "20xC",
           "move": 6,
           "attack": 5,
-          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^^all enemies adjacent to target","^^suffer 1 damage","^^destroy obstacle" ],
+          "special2": [ "^^%attack% - 2, destroy obstacle","^^%shield%4, %retaliate%4","^^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1044,8 +1044,8 @@
           "health": "25xC",
           "move": 6,
           "attack": 5,
-          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^^all enemies adjacent to target","^^suffer 1 damage","^^destroy obstacle" ],
+          "special2": [ "^^%attack% - 2, destroy obstacle","^^%shield%4, %retaliate%4","^^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         },
         {
@@ -1053,8 +1053,8 @@
           "health": "27xC",
           "move": 6,
           "attack": 6,
-          "special1": [ "^%attack% + 1 %pierce%3,","^all enemies adjacent to target suffer 1 damage","^destroy obstacle" ],
-          "special2": [ "^%attack% - 2, destroy obstacle","^%shield%4, %retaliate%4","^%heal%4" ],
+          "special1": [ "^%attack% + 1 %pierce%3,","^^all enemies adjacent to target","^^suffer 1 damage","^^destroy obstacle" ],
+          "special2": [ "^^%attack% - 2, destroy obstacle","^^%shield%4, %retaliate%4","^^%heal%4" ],
           "immunities": [ "%immobilize%", "%curse%", "%poison%", "%stun%", "%disarm%" ]
         }
       ]

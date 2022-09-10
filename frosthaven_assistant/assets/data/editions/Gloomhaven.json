@@ -2920,7 +2920,7 @@
           "health": "8xC",
           "move": 3,
           "attack": 3,
-          "special1": [ "Move to next door and reveal room" ],
+          "special1": [ "Move to next door and","reveal room" ],
           "special2": [ "Summon Living Bones" ],
           "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
         },
@@ -2929,7 +2929,7 @@
           "health": "10xC",
           "move": 3,
           "attack": 3,
-          "special1": [ "Move to next door and reveal room" ],
+          "special1": [ "Move to next door and","reveal room" ],
           "special2": [ "Summon Living Bones" ],
           "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
         },
@@ -2938,7 +2938,7 @@
           "health": "12xC",
           "move": 4,
           "attack": 3,
-          "special1": [ "Move to next door and reveal room" ],
+          "special1": [ "Move to next door and","reveal room" ],
           "special2": [ "Summon Living Bones" ],
           "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
         },
@@ -2947,7 +2947,7 @@
           "health": "13xC",
           "move": 4,
           "attack": 4,
-          "special1": [ "Move to next door and reveal room" ],
+          "special1": [ "Move to next door and","reveal room"],
           "special2": [ "Summon Living Bones" ],
           "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
         },
@@ -2956,7 +2956,7 @@
           "health": "15xC",
           "move": 4,
           "attack": 4,
-          "special1": [ "Move to next door and reveal room" ],
+          "special1": [ "Move to next door and","reveal room" ],
           "special2": [ "Summon Living Bones" ],
           "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
         },
@@ -2965,7 +2965,7 @@
           "health": "16xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "Move to next door and reveal room" ],
+          "special1": [ "Move to next door and","reveal room" ],
           "special2": [ "Summon Living Bones" ],
           "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
         },
@@ -2974,7 +2974,7 @@
           "health": "19xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "Move to next door and reveal room" ],
+          "special1": ["Move to next door and","reveal room" ],
           "special2": [ "Summon Living Bones" ],
           "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
         },
@@ -2983,7 +2983,7 @@
           "health": "23xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "Move to next door and reveal room" ],
+          "special1": [ "Move to next door and","reveal room" ],
           "special2": [ "Summon Living Bones" ],
           "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
         }
@@ -3085,7 +3085,7 @@
           "move": 2,
           "attack": 3,
           "special1": [ "%heal% 2, Affect self", "and all allies" ],
-          "special2": [ "All allies add +1 Attack to all attacks this round", "%attack% + 1" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round", "%attack% + 1" ],
           "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
         },
         {
@@ -3094,7 +3094,7 @@
           "move": 2,
           "attack": 3,
           "special1": [ "%heal% 2, Affect self", "and all allies" ],
-          "special2": [ "All allies add +1 Attack to all attacks this round", "%attack% + 1" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round", "%attack% + 1" ],
           "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
         },
         {
@@ -3103,7 +3103,7 @@
           "move": 2,
           "attack": 4,
           "special1": [ "%heal% 2, Affect self", "and all allies" ],
-          "special2": [ "All allies add +1 Attack to all attacks this round", "%attack% + 1" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round", "%attack% + 1" ],
           "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
         },
         {
@@ -3112,7 +3112,7 @@
           "move": 3,
           "attack": 4,
           "special1": [ "%heal% 2, Affect self", "and all allies" ],
-          "special2": [ "All allies add +1 Attack to all attacks this round", "%attack% + 1" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round", "%attack% + 1" ],
           "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
         },
         {
@@ -3121,7 +3121,7 @@
           "move": 3,
           "attack": 5,
           "special1": [ "%heal% 2, Affect self", "and all allies" ],
-          "special2": [ "All allies add +1 Attack to all attacks this round", "%attack% + 1" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round", "%attack% + 1" ],
           "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
         },
         {
@@ -3130,7 +3130,7 @@
           "move": 3,
           "attack": 5,
           "special1": [ "%heal% 2, Affect self", "and all allies" ],
-          "special2": [ "All allies add +1 Attack to all attacks this round", "%attack% + 1" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round", "%attack% + 1" ],
           "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
         },
         {
@@ -3139,7 +3139,7 @@
           "move": 4,
           "attack": 6,
           "special1": [ "%heal% 2, Affect self", "and all allies" ],
-          "special2": [ "All allies add +1 Attack to all attacks this round", "%attack% + 1" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round", "%attack% + 1" ],
           "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
         },
         {
@@ -3148,7 +3148,7 @@
           "move": 4,
           "attack": 6,
           "special1": [ "%heal% 2, Affect self", "and all allies" ],
-          "special2": [ "All allies add +1 Attack to all attacks this round", "%attack% + 1" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round", "%attack% + 1" ],
           "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
         }
       ]
@@ -3299,49 +3299,49 @@
       "levels": [
         {
           "level": 0, "health": "11xC", "move": 0, "attack": 3,
-          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 1, "health": "12xC", "move": 0, "attack": 4,
-          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 2, "health": "15xC", "move": 0, "attack": 4,
-          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 3, "health": "16xC", "move": 0, "attack": 5,
-          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 4, "health": "20xC", "move": 0, "attack": 5,
-          "special1":[ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special1":[ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 5, "health": "22xC", "move": 0, "attack": 6,
-          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 6, "health": "27xC", "move": 0, "attack": 6,
-          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         },
         {
           "level": 7, "health": "29xC", "move": 0, "attack": 7,
-          "special1": [ "[r]","%attack% + 0","ÅKKKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
           "special2": [ "%move%", "Summon 2 Zephyrs" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
         }
@@ -3420,7 +3420,7 @@
           "move": 3,
           "attack": 9,
           "special1": [ "^%move% + 9, %attack% + 9" ],
-          "special2": [ "^Teleport", "^%attack% + 1", "*%range% 5", "*%poison%","*%wound%","*%stun%" ],
+          "special2": [ "^Teleport", "%attack% + 1", "^%range% 5", "*%poison%","*%wound%","*%stun%" ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
         }
       ]
@@ -3434,7 +3434,7 @@
           "health": "6xC",
           "move": 2,
           "attack": "C",
-          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 3" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3443,7 +3443,7 @@
           "health": "7xC",
           "move": 2,
           "attack": "1+C",
-          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 3" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3452,7 +3452,7 @@
           "health": "9xC",
           "move": 2,
           "attack": "1+C",
-          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 3" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3461,7 +3461,7 @@
           "health": "10xC",
           "move": 3,
           "attack": "2+C",
-          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 4" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3470,7 +3470,7 @@
           "health": "11xC",
           "move": 3,
           "attack": "2+C",
-          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 4" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3479,7 +3479,7 @@
           "health": "13xC",
           "move": 3,
           "attack": "3+C",
-          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 5" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3488,7 +3488,7 @@
           "health": "15xC",
           "move": 4,
           "attack": "3+C",
-          "special1":[ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special1":[ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 5" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         },
@@ -3497,7 +3497,7 @@
           "health": "17xC",
           "move": 4,
           "attack": "4+C",
-          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
           "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 5" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
         }
@@ -3755,8 +3755,8 @@
           "move": 0,
           "attack": 5,
           "range": 3,
-          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
-          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
+          "special1": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3765,8 +3765,8 @@
           "move": 0,
           "attack": 6,
           "range": 3,
-          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
-          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
+          "special1": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3775,8 +3775,8 @@
           "move": 0,
           "attack": 6,
           "range": 3,
-          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
-          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
+          "special1": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3785,8 +3785,8 @@
           "move": 0,
           "attack": 7,
           "range": 3,
-          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
-          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
+          "special1": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3795,8 +3795,8 @@
           "move": 0,
           "attack": 7,
           "range": 3,
-          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
-          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
+          "special1": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3805,8 +3805,8 @@
           "move": 0,
           "attack": 8,
           "range": 3,
-          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
-          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
+          "special1": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3815,8 +3815,8 @@
           "move": 0,
           "attack": 8,
           "range": 3,
-          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
-          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
+          "special1": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         },
         {
@@ -3825,8 +3825,8 @@
           "move": 0,
           "attack": 9,
           "range": 3,
-          "special1": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
-          "special2": [ "[r]","[c]","^Summon","^Deep Terror", "^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
+          "special1": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKKKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","Summon","Deep Terror", "%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKKKKK","[/r]" ],
           "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
         }
       ]
@@ -3903,8 +3903,8 @@
           "health": "20xC",
           "move": 5,
           "attack": 5,
-          "special1": [ "^%attack% - 1, Target all", "^adjacent enemies", "^%attack% + 0, %range% 3", "^Hatch eggs" ],
-          "special2": [ "^Summon C eggs", "^%move% - 1", "^%attack% + 0" ],
+          "special1": [ "%attack% - 1","*Target all adjacent enemies", "%attack% + 0","^%range% 3", "*Hatch eggs" ],
+          "special2": [ "*Summon C eggs", "*%move% - 1", "*%attack% + 0" ],
           "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         }
       ]

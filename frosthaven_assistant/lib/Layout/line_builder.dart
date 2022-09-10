@@ -965,8 +965,8 @@ class LineBuilder {
             ? frosthavenStyle
                 ? 0.84
                 : 1//0.5
-            : frosthavenStyle? 1//0.84
-            :1,// 0.5,
+            : frosthavenStyle? 0.84
+            :0.84,// 0.5,
         //height is really low for gh style due to text not being center aligned in font - so to force to center the height is reduced. this is a shitty solution to a shitty problem.
         // 0.84,
 
