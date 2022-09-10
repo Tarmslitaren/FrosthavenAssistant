@@ -176,11 +176,8 @@ class StatusMenuState extends State<StatusMenu> {
       suffix = "_fh";
     }
     String imagePath = "assets/images/abilities/${condition.name}.png";
-    if (suffix.isNotEmpty) {
-      if (File("assets/images/abilities/${condition.name}$suffix.png")
-          .existsSync()) {
+    if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
         imagePath = "assets/images/abilities/${condition.name}$suffix.png";
-      }
     }
     for (var item in immunities) {
       if (condition.name.contains(item.substring(1, item.length - 1))) {
@@ -226,7 +223,7 @@ class StatusMenuState extends State<StatusMenu> {
                 //iconSize: 24,
                 icon: enabled
                     ? Image.asset(
-                        filterQuality: FilterQuality.high,
+                        filterQuality: FilterQuality.medium,
                         //needed because of the edges
                         height: 24,
                         width: 24,
@@ -239,7 +236,7 @@ class StatusMenuState extends State<StatusMenu> {
                               top: 0,
                               child: Image(
                                 height: 23.1,
-                                filterQuality: FilterQuality.high,
+                                filterQuality: FilterQuality.medium,
                                 //needed because of the edges
                                 image: AssetImage(imagePath),
                               )),
@@ -249,7 +246,7 @@ class StatusMenuState extends State<StatusMenu> {
                               top: 7.35,
                               child: Image(
                                 height: 8.4,
-                                filterQuality: FilterQuality.high,
+                                filterQuality: FilterQuality.medium,
                                 //needed because of the edges
                                 image:
                                     AssetImage("assets/images/psd/immune.png"),

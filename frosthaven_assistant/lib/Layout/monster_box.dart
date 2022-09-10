@@ -57,10 +57,8 @@ class MonsterBoxState extends State<MonsterBox> {
     }
     for (var item in data.conditions.value) {
       String imagePath = "assets/images/abilities/${item.name}.png";
-      if(suffix.isNotEmpty) {
-        if (File("assets/images/abilities/${item.name}$suffix.png").existsSync()) {
-          imagePath = "assets/images/abilities/${item.name}$suffix.png";
-        }
+      if(suffix.isNotEmpty && hasGHVersion(item.name)) {
+        imagePath = "assets/images/abilities/${item.name}$suffix.png";
       }
       Image image = Image(
         height: MonsterBox.conditionSize * scale,

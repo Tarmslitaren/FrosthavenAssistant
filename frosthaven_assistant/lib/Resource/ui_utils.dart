@@ -23,15 +23,16 @@ TextStyle getTitleTextStyle() {
 
 TextStyle getSmallTextStyle() {
   return TextStyle(
-      fontSize: 14,
-      color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black,
-      /*shadows: const [
+    fontSize: 14,
+    color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black,
+    /*shadows: const [
         Shadow(
           offset: Offset(1, 1),
           color: Colors.black87,
           blurRadius: 1,
         )
-      ]*/);
+      ]*/
+  );
 }
 
 void openDialog(BuildContext context, Widget widget) {
@@ -94,4 +95,62 @@ Widget defaultBuildDraggableFeedback(
           child: ConstrainedBox(constraints: constraints, child: child)),
     ),
   );
+}
+
+bool hasGHVersion(String name) {
+  if (name.contains("aoe")) {
+    return false;
+  }
+  if (name == "bane") {
+    return false;
+  }
+  if (name == "bless") {
+    return false;
+  }
+  if (name == "curse") {
+    return false;
+  }
+  if (name == "brittle") {
+    return false;
+  }
+  if (name == "chill") {
+    return false;
+  }
+  if (name == "muddle") {
+    return false;
+  }
+  if (name == "regenerate") {
+    return false;
+  }
+  if (name == "ward") {
+    return false;
+  }
+  if (name == "rupture") {
+    return false;
+  }
+  if (name == "bane") {
+    return false;
+  }
+  if (name == "air") {
+    return false;
+  }
+  if (name.contains("earth")) {
+    return false;
+  }
+  if (name == "ice") {
+    return false;
+  }
+  if (name == "dark") {
+    return false;
+  }
+  if (name == "light") {
+    return false;
+  }
+  if (name == "any") {
+    return false;
+  }
+  if (name == "fire") {
+    return false;
+  }
+  return true;
 }

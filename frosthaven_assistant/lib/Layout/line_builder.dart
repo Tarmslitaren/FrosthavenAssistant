@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
@@ -517,17 +518,17 @@ class LineBuilder {
     bool isElementUse = false;
     for (int i = 0; i < lines.length; i++) {
       String line = lines[i];
-      if (line == "[r]" && lines[i + 1].contains('%use')) {
+      if ((line == "[r]" || line == "[s]") && lines[i + 1].contains('%use')) {
         isElementUse = true;
       }
-      if (line == "[r]" &&
+      if ((line == "[r]" || line == "[s]") &&
           (lines[i + 1].contains('%use') ||
               lines[i + 1].toLowerCase().contains('if ') || lines[i + 1].contains('On ') ||
               (lines.length > i + 2 &&
                   lines[i + 2].toLowerCase().contains('if ')|| lines[i + 1].contains('On ')))) {
         isConditional = true;
       }
-      if (line == "[/r]" && isConditional) { //TODO: add instead a [conditionalDone] tag
+      if ((line == "[/r]" || line == "[/s]") && isConditional) { //TODO: add instead a [conditionalDone] tag
         isConditional = false;
         isElementUse = false;
       }
@@ -562,6 +563,7 @@ class LineBuilder {
           retVal.add("[subLineStart]");
           isReallySubLine = true;
 
+
           //too wide? remove whitespace between icon and value. only for sub lines?
           //line = line.replaceAll("% ", "%");
         }
@@ -586,11 +588,11 @@ class LineBuilder {
             line.startsWith("^all") ||
             line.startsWith("^All") &&
                 !line.startsWith("^All attacks") &&
-                !line.startsWith("^All targets")) {
+                !line.startsWith("^All targets")
+        ) {
           //make bigger icon and text in element use block
-          //TODO: make sure this doesnt crash if element use on first line
           if (isElementUse && (!lines[i - 2].contains("[c]")) && !line.startsWith("^Target")
-              && !line.startsWith("^all")
+              && !line.startsWith("^all") && !line.startsWith("^All")
           ) {
             //ok, so if there is a subline, then there has to be a [c]
             line = line.substring(1); //make first sub line into main line
@@ -598,9 +600,9 @@ class LineBuilder {
               retVal.removeLast();
             }
             isReallySubLine = false;
-          } else if(isElementUse && (!lines[i - 2].contains("[c]"))){
+          } else if(isElementUse && (!lines[i - 2].contains("[c]") && !line.startsWith("^all")&& !line.startsWith("^All"))){
             isReallySubLine = false; //block useblocks from having straight sublines?
-            //hope this doesn't come back to bite me (flame demon 77)
+            //hope this doesn't come back to bite me (flame demon 77) - it does savvas lavaflow 51
           }
           line = "!$line";
           line = line.replaceFirst("Self", "self");
@@ -667,7 +669,7 @@ class LineBuilder {
       bool frosthavenStyle, String iconToken, bool mainLine) {
     return /*!mainLine &&*/ frosthavenStyle &&
         ((iconToken == "pierce" ||
-            iconToken == "target" ||
+            //iconToken == "target" ||
             iconToken == "curse" ||
             iconToken == "bless" ||
             iconToken == "invisible" ||
@@ -694,8 +696,11 @@ class LineBuilder {
       bool isInRow,
       bool isInColumn,
       bool isColumnInRow,
+      bool hasInnerRow,
       List<Widget> widgetsInColumn,
-      List<Widget> widgetsInRow) {
+      List<Widget> widgetsInRow,
+  List<Widget> widgetsInInnerRow,
+      ) {
     List<Widget> list1 = [];
     List<List<Widget>> list2 = [];
     bool conditional = false;
@@ -801,6 +806,12 @@ class LineBuilder {
       children: [widget1, widget2],
     );
 
+    if(hasInnerRow) {
+      if (widgetsInInnerRow.isNotEmpty) {
+        widgetsInInnerRow.removeLast();
+      }
+      widgetsInInnerRow.add(row);
+    }
     if (isInColumn && (!isInRow || isColumnInRow)) {
       widgetsInColumn.removeLast();
       widgetsInColumn.add(row);
@@ -834,6 +845,37 @@ class LineBuilder {
     }
 
     return retVal;
+  }
+
+  static void applyConditionalGraphics(var lines, double scale, bool elementUse, double rightMargin, child){
+    lines.add(Container(
+        margin: EdgeInsets.all(2 * scale),
+        //alignment: Alignment.bottomCenter,
+        child: DottedBorder(
+            color: Colors.white,
+            //borderType: BorderType.Rect,
+            borderType: BorderType.RRect,
+            radius: Radius.circular(10 * scale),
+            //strokeCap: StrokeCap.round,
+            padding: const EdgeInsets.all(0),
+            dashPattern: [2 * scale, 1 * scale],
+            strokeWidth: 0.6 * scale,
+            child: Container(
+                decoration: BoxDecoration(
+                  //backgroundBlendMode: BlendMode.softLight,
+                  //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
+                    color: Color(int.parse("9A808080", radix: 16)),
+                    borderRadius:
+                    BorderRadius.all(Radius.circular(10 * scale))),
+                //TODO: should the padding be dependant on nr of lines?
+                padding: EdgeInsets.fromLTRB(
+                    elementUse ? 1 * scale : 3 * scale,
+                    0.25 * scale,
+                    rightMargin,
+                    0.2625 * scale),
+                //margin: EdgeInsets.only(left: 2 * scale),
+                //child: Expanded(
+                child: child))));
   }
 
   static Widget createLines(
@@ -885,8 +927,8 @@ class LineBuilder {
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center ? 8 : 8.8) * scale,
         //sizes are larger on stat cards
-        height: 1,
-       // backgroundColor: Colors.amber,
+        height: 0.8,
+        //backgroundColor: Colors.amber,
         //0.85,
         shadows: [shadow]);
     var midStyle = TextStyle(
@@ -896,12 +938,12 @@ class LineBuilder {
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center
                 ? frosthavenStyle
-                    ? 7.52
+                    ? 9.52 //7.52 is closer to physical size, but too hard to see on smaller screens
                     : 8.8
                 : 10.16) *
             scale,
         //sizes are larger on stat cards
-        height: (alignment == CrossAxisAlignment.center ? 1 :
+        height: (alignment == CrossAxisAlignment.center ? frosthavenStyle? 0.8 : 1 :
         1//0.8
         ),
         // 0.9,
@@ -912,7 +954,7 @@ class LineBuilder {
         textBaseline: TextBaseline.alphabetic,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
-       // backgroundColor: Colors.lightGreen,
+        //backgroundColor: Colors.lightGreen,
         fontSize: (alignment == CrossAxisAlignment.center
                 ? frosthavenStyle
                     ? 13.1
@@ -921,7 +963,7 @@ class LineBuilder {
             scale,
         height: (alignment == CrossAxisAlignment.center)
             ? frosthavenStyle
-                ? 1//0.84
+                ? 0.84
                 : 1//0.5
             : frosthavenStyle? 1//0.84
             :1,// 0.5,
@@ -938,7 +980,7 @@ class LineBuilder {
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 13.1 * scale : 12.56 * scale,
-        height: 1,// frosthavenStyle ? 0.84 : 0.5,
+        height:  frosthavenStyle ? 0.84 : 1,
         //0.8,
         shadows: [shadow]);
 
@@ -949,10 +991,11 @@ class LineBuilder {
         height: 1,
         shadows: [shadow]);
     var eliteMidStyle = TextStyle(
+        leadingDistribution: TextLeadingDistribution.even,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
-        fontSize: frosthavenStyle ? 7.52 * scale : 8.8 * scale,
-        height: 1,
+        fontSize: frosthavenStyle ? 9.52 * scale : 8.8 * scale,
+        height: frosthavenStyle? 0.8: 1,
         shadows: [shadow]);
 
     var midStyleSquished = TextStyle(
@@ -962,7 +1005,7 @@ class LineBuilder {
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center
             ? frosthavenStyle
-            ? 7.52
+            ? 9.52
             : 8.8
             : 10.16) *
             scale,
@@ -989,7 +1032,10 @@ class LineBuilder {
     bool isColumnInRow = false;
     List<Widget> widgetsInColumn = [];
     List<Widget> widgetsInRow = [];
+    List<Widget> widgetsInInnerRow = [];
     Widget column;
+
+    bool hasInnerRow = false;
 
     TextAlign textAlign = TextAlign.center;
     if (alignment == CrossAxisAlignment.start) {
@@ -1021,8 +1067,11 @@ class LineBuilder {
             isInRow,
             isInColumn,
             isColumnInRow,
+            hasInnerRow,
             widgetsInColumn,
-            widgetsInRow);
+            widgetsInRow,
+          widgetsInInnerRow
+        );
         continue;
       }
 
@@ -1060,11 +1109,58 @@ class LineBuilder {
         //start row
         continue;
       }
+      if (line == "[s]") { //inner row. sort of
+        hasInnerRow = true;
+        continue;
+      }
+      if (line == "[/s]") {
+        hasInnerRow = false;
+        /////start the dotted hack
+        bool elementUse = false;
+        bool conditional = false;
+        bool columnHack = false;
+        //this is used since there is a bug where if there is a [r] %element%%use% [c] ... [/c][/r] then the use is drawn twice. the bug is likely higher up
+        String texts = "";
+        for (var item in widgetsInInnerRow) {
+          texts += getAllTextInWidget(item);
+        }
+        if (texts.contains(" :")) {
+          elementUse = true;
+          conditional = true;
+        }
+        if (texts.toLowerCase().contains("if ") || texts.contains('On ')) {
+          conditional = true;
+        }
+        if(texts.lastIndexOf(" :") != texts.indexOf(" :")) {
+          columnHack = true;
+        }
+
+        double rightMargin = 3 * scale;
+        if (texts == " :") { //has only element to element:
+          rightMargin = 1 * scale;
+        }
+
+        Row row = Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: rowMainAxisAlignment,
+          children:
+          columnHack ? widgetsInInnerRow.sublist(1) : widgetsInInnerRow.toList(),
+        );
+        widgetsInInnerRow = [];
+
+        if (frosthavenStyle && conditional) {
+          //might need ot check if in column or row here
+          applyConditionalGraphics(widgetsInColumn, scale, elementUse, rightMargin, row);
+        } else {
+          widgetsInColumn.add(row);
+        }
+        continue;
+      }
       if (line == "[/r]") {
         //end row
         //end column  //handle the results
         isInRow = false;
-        //if(widgetsInRow[0].toStringDeep())
 
         /////start the dotted hack
         bool elementUse = false;
@@ -1086,8 +1182,13 @@ class LineBuilder {
           columnHack = true;
         }
 
+        double rightMargin = 3 * scale;
+        if (texts == " :") { //has only element to element:
+          rightMargin = 1 * scale;
+        }
+
         Row row = Row(
-          //crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           //todo: this was max. make sure the change does not f something up
           mainAxisAlignment: rowMainAxisAlignment,
@@ -1097,35 +1198,7 @@ class LineBuilder {
         widgetsInRow = [];
 
         if (frosthavenStyle && conditional) {
-          //or conditional: is isFrosthavenStyle and contains a %use%
-          lines.add(Container(
-              margin: EdgeInsets.all(2 * scale),
-              //alignment: Alignment.bottomCenter,
-              child: DottedBorder(
-                  color: Colors.white,
-                  //borderType: BorderType.Rect,
-                  borderType: BorderType.RRect,
-                  radius: Radius.circular(10 * scale),
-                  //strokeCap: StrokeCap.round,
-                  padding: const EdgeInsets.all(0),
-                  dashPattern: [2 * scale, 1 * scale],
-                  strokeWidth: 0.6 * scale,
-                  child: Container(
-                      decoration: BoxDecoration(
-                          //backgroundBlendMode: BlendMode.softLight,
-                          //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
-                          color: Color(int.parse("9A808080", radix: 16)),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(10 * scale))),
-                      //TODO: should the padding be dependant on nr of lines?
-                      padding: EdgeInsets.fromLTRB(
-                          elementUse ? 1 * scale : 3 * scale,
-                          0.25 * scale,
-                          3 * scale,
-                          0.2625 * scale),
-                      //margin: EdgeInsets.only(left: 2 * scale),
-                      //child: Expanded(
-                      child: row))));
+          applyConditionalGraphics(lines, scale, elementUse, rightMargin, row);
         } else {
           lines.add(row);
         }
@@ -1154,11 +1227,13 @@ class LineBuilder {
           scale: 1.0 / (scale * scaleConstant),
           //for some reason flutter likes scale to be inverted
           fit: BoxFit.fitHeight,
-          filterQuality: FilterQuality.high,
+          filterQuality: FilterQuality.medium,
           "assets/images/abilities/${line.substring(1)}.png",
         );
         //create pure picture, not a WidgetSpan (scale 5.5)
-        if (isInColumn && (!isInRow || isColumnInRow)) {
+        if(hasInnerRow) {
+          widgetsInInnerRow.add(image);
+        } else if (isInColumn && (!isInRow || isColumnInRow)) {
           widgetsInColumn.add(image);
         } else if (isInRow && (!isInColumn)) {
           widgetsInRow.add(image);
@@ -1194,11 +1269,13 @@ class LineBuilder {
               //fit: BoxFit.fitHeight,
               height: 6 * scale,
               width: 50 * scale,
-              filterQuality: FilterQuality.high,
+              filterQuality: FilterQuality.medium,
               "assets/images/abilities/divider_fh.png",
             );
             //create pure picture, not a WidgetSpan (scale 5.5)
-            if (isInColumn && (!isInRow || isColumnInRow)) {
+            if(hasInnerRow) {
+              widgetsInInnerRow.add(image);
+            }else if (isInColumn && (!isInRow || isColumnInRow)) {
               widgetsInColumn.add(image);
             } else if (isInRow && (!isInColumn)) {
               widgetsInRow.add(image);
@@ -1286,7 +1363,7 @@ class LineBuilder {
                             //width: frosthavenStyle? styleToUse.fontSize! * 1.2 * 0.5: styleToUse.fontSize! * 1.2,
                             //alignment: Alignment.topCenter,
                             fit: BoxFit.fitHeight,
-                            filterQuality: FilterQuality.high,
+                            filterQuality: FilterQuality.medium,
                             image: AssetImage(
                                 "assets/images/abilities/${iconGfx + imageSuffix}.png"),
                           ))
@@ -1315,6 +1392,10 @@ class LineBuilder {
             } else {
               double height = _getIconHeight(
                   iconToken, styleToUse.fontSize!, frosthavenStyle);
+              if(frosthavenStyle && styleToUse == midStyle && !shouldOverflow(true, iconToken, false)){
+                //height *= 0.7; //sub line icons too big? don't do this for conditions.
+                //todo: larger margins on range icon instead
+              }
               if (addText) {
                 String? iconTokenText = _tokens[iconToken];
                 if (frosthavenStyle) {
@@ -1335,12 +1416,8 @@ class LineBuilder {
                 iconGfx = "flying";
               }
               String imagePath = "assets/images/abilities/$iconGfx.png";
-              if (imageSuffix.isNotEmpty) {
-                if (File("assets/images/abilities/$iconGfx$imageSuffix.png")
-                    .existsSync()) {
-                  imagePath =
-                      "assets/images/abilities/$iconGfx$imageSuffix.png";
-                }
+              if (imageSuffix.isNotEmpty && hasGHVersion(iconGfx)) {
+                imagePath = "assets/images/abilities/$iconGfx$imageSuffix.png";
               }
               bool overflow =
                   shouldOverflow(frosthavenStyle, iconGfx, mainLine);
@@ -1351,9 +1428,10 @@ class LineBuilder {
               Widget child = Image(
                 //could do funk stuff with the color value for cool effects maybe?
                 height: overflow ? height * heightMod : height,
+               // isAntiAlias: true,
                 //this causes lines to have variable height if height set to less than 1
                 fit: BoxFit.fitHeight,
-                filterQuality: FilterQuality.high,
+                filterQuality: FilterQuality.medium,
                 image: AssetImage(imagePath),
               );
               child = Container(
@@ -1428,7 +1506,7 @@ class LineBuilder {
       if (partStartIndex < line.length) {
         String textPart = line.substring(partStartIndex, line.length);
         textPartListRowContent.add(Container(
-         //   color: Colors.red,
+            //color: Colors.red,
             padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
             child:Text(textPart, style: styleToUse)));
       }
@@ -1440,7 +1518,11 @@ class LineBuilder {
           children: textPartListRowContent);
 
       if (isRightPartOfLastLine) {
-        if (isInColumn && (!isInRow || isColumnInRow)) {
+        if(hasInnerRow) {
+          if(widgetsInInnerRow.isNotEmpty) {
+            widgetsInInnerRow.removeLast();
+          }
+        } else if (isInColumn && (!isInRow || isColumnInRow)) {
           if (widgetsInColumn.isNotEmpty) {
             widgetsInColumn.removeLast();
           }
@@ -1461,7 +1543,10 @@ class LineBuilder {
         );
       }
 
-      if (isInColumn && (!isInRow || isColumnInRow)) {
+      if(hasInnerRow) {
+        widgetsInInnerRow.add(row);
+      }
+      else if (isInColumn && (!isInRow || isColumnInRow)) {
         widgetsInColumn.add(row);
       } else if (isInRow && (!isInColumn)) {
         widgetsInRow.add(row);

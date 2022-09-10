@@ -131,7 +131,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
 
   Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen,
       bool hasDiviner, String name) {
-    print(name);
+    //print(name);
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors

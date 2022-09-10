@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
@@ -82,10 +83,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
     }
     for (var item in character.characterState.conditions.value) {
       String imagePath = "assets/images/abilities/${item.name}.png";
-      if(suffix.isNotEmpty) {
-        if (File("assets/images/abilities/${item.name}$suffix.png").existsSync()) {
-          imagePath = "assets/images/abilities/${item.name}$suffix.png";
-        }
+      if(suffix.isNotEmpty && hasGHVersion(item.name)) {
+        imagePath = "assets/images/abilities/${item.name}$suffix.png";
       }
       Image image = Image(
         height: 16 * scale,

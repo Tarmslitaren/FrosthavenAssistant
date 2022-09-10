@@ -450,7 +450,7 @@
       "cards": [
         [2000, false, 6, "%shield% + 2","*.........", "%heal% 2", "^Self","*.........", "%strengthen%", "^Self" ],
         [2001, false, 18, "%move% + 1","*.........", "%attack% - 1" ],
-        [2002, true, 24, "^%attack% - 1","*%wound%","*.........", "*Focus on the enemy farthest away.", "^%move% + 0","*.........", "^%attack% - 1","*Target one adjacent enemy", "*%wound%" ],
+        [2002, true, 24, "%attack% - 1","^%wound%","**.........", "^^Focus on the enemy farthest away.", "%move% + 0","**.........", "%attack% - 1","^^Target one adjacent enemy", "^%wound%" ],
         [2003, false, 30, "%move% + 0","*.........", "%attack% + 0", "[r]", "[c]","^Add +1 %attack% if the target's current", "^hit point value is less than maximum.", "[/c]", "[/r]"],
         [2004, false, 35, "%move% - 1","*.........", "[r]", "[c]","%attack% - 1", "^%poison%","[/c]","¤aoe-4-with-black", "[/r]" ],
         [2005, false, 44, "%attack% - 1", "^%range% 3", "^%target% 2","[r]", "[c]", "^Add +1 %attack% if the target's current", "^hit point value is less than maximum.", "[/c]", "[/r]"],
@@ -479,9 +479,9 @@
         [1230, true, 44, "%move% + 0", "*.........","%attack% + 1", "%ice%" ],
         [1231, true, 44, "%move% + 1", "*.........","%attack% + 0", "%ice%" ],
         [1232, false, 12, "%shield% + 2", "^Self","*.........","[r]", "[c]", "^If an enemy suffers %retaliate% damage", "^from attacking an Icecrawler this round,", "^the enemy gains %chill%.","[/c]", "[/r]" ],
-        [1233, false, 63, "%move% + 0","*.........", "[r]", "[c]","%attack% + 0", "%ice%%use%", "!^%pierce% 2","[/c]","¤aoe-triangle-2-side-with-black", "[/r]"],
+        [1233, false, 63, "%move% + 0","*.........", "[r]", "[c]","%attack% + 0","[s]", "%ice%%use%", "^%pierce% 2", "[/s]","[/c]","¤aoe-triangle-2-side-with-black", "[/r]"],
         [1234, false, 55, "%move% - 2","*.........", "%attack% + 1", "^%range% 3", "[r]", "%ice%%use%", "^%pierce% 2","[/r]" ],
-        [1235, false, 16, "%attack% + 0", "^%range% 5", "[r]","%ice%%use%", "[c]","^All enemies adjacent to the", "^target suffer one damage", "[/c]", "[/r]" ],
+        [1235, false, 16, "%attack% + 0", "^%range% 5", "[r]","%ice%%use%", "[c]","^All enemies adjacent to the", "^^target suffer one damage", "[/c]", "[/r]" ],
         [1236, false, 68, "%move% + 0","*.........","[r]","%attack% - 1","¤aoe-star-with-side-black", "[/r]"],
         [1237, false, 9, "^Gain %range% 3 on all", "^%retaliate% abilities.","*.........", "%move% + 0","*.........", "%heal% 2", "^%range% 3" ]
       ]
@@ -541,7 +541,7 @@
       "edition": "Crimson Scales",
       "cards": [
         [1198, true, 96, "%attack% - 1", "^%range% 5", "*Summon one normal Blood Ooze in a hex","*adjacent to the target with a hit point value equal","*to the summoning Blood Ooze's current hit point","*value minus 2 (limited by a normal Blood Ooze's","*specified maximum hit point value)" ],
-        [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "[r]","%fire%%use%", "[c]", "^Hit point value equal","^to three instead", "[/c]", "[/r]" ],
+        [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "[r]","%fire%%use%", "[c]", "*Hit point value equal","*to three instead", "[/c]", "[/r]" ],
         [1200, false, 71, "^All adjacent enemies", "^suffer one damage.","*.........", "%move% + 1","*.........", "%heal% 1", "^Target all adjacent Blood Oozes"],
         [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^Target one adjacent enemy","[r]", "[c]", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes.","[/c]", "[/r]" ],
         [1202, false, 62, "%attack% - 1", "^%poison%", "^Target one adjacent enemy","*.........", "%attack% - 1", "^Target one enemy at exactly %range% 2" ],
@@ -577,9 +577,9 @@
         ["Swallow Whole", 2029, true, 65, "%move% + 0","*.........", "%attack% + 0", "*.........","%heal% X", "^Self", "*where X is the damage dealt", "*by the attack ability." ],
         ["Terrifying Lunge", 2030, false, 59, "%move% + 0","*.........", "%attack% + 0", "^%immobilize%","*.........", "%push% 1", "^Target all enemies exactly at %range% 2 or 3" ],
         ["Drag Away", 2031, true, 34, "%move% + 1","*.........", "%attack% - 1", "^%range% 2", "^%pull% 1", "^%wound%" ],
-        ["Tail Swipe", 2032, false, 88, "%move% + 1", "^This movement may move through all figures.","*.........","[r]","[c]", "%attack% - 1", "^%push% 2","[/c]","Å.","¤aoe-arc-3", "[/c]", "[/r]" ],
+        ["Tail Swipe", 2032, false, 88, "%move% + 1", "*This movement may move through all figures.","*.........","[r]","[c]", "%attack% - 1", "^%push% 2","[/c]","Å.","¤aoe-arc-3", "[/c]", "[/r]" ],
         ["Survival Instincts", 2033, false, 9, "%move% + 0","*.........", "%retaliate% X", "^where X is the figure's %attack% value.","*.........", "^All ranged attacks targeting", "^this figure gain Disadvantage." ],
-        ["Patient Predator", 2034, false, 18, "%invisible%", "^Self", "*- At 50, perform the following abilities -", "%move% + 0", "**.........","%attack% + 1","[r]", "[c]", "^If this attack was performed,", "^remove %invisible%.","[/c]", "[/r]"],
+        ["Patient Predator", 2034, false, 18, "%invisible%", "^Self", "*- At 50, perform the following abilities -", "%move% + 0", "**.........","%attack% + 1","[r]", "[c]", "^^If this attack was performed,", "^remove %invisible%.","[/c]", "[/r]"],
         ["Sundering Bite", 2035, false, 26, "%move% + 0", "*.........","%attack% + 0", "^%pierce% 3" ]
       ]
     },

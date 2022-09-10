@@ -96,7 +96,7 @@ Widget createLevelWidget(BuildContext context) {
 
                       Image(
                         height: fontHeight * 0.6,
-                        filterQuality: FilterQuality.high, //needed because of the edges
+                        filterQuality: FilterQuality.medium, //needed because of the edges
                         image: const AssetImage("assets/images/psd/level.png"),
                       ))),
                   TextSpan(
@@ -120,7 +120,7 @@ Widget createLevelWidget(BuildContext context) {
                           ),
                           child: Image(
                         height: fontHeight,
-                            filterQuality: FilterQuality.high, //needed because of the edges
+                            filterQuality: FilterQuality.medium, //needed because of the edges
                         image:
                             const AssetImage("assets/images/psd/traps-fh.png"),
                       ))),
@@ -145,7 +145,7 @@ Widget createLevelWidget(BuildContext context) {
                           ),
                           child:Image(
                         height: fontHeight,
-                            filterQuality: FilterQuality.high, //needed because of the edges
+                            filterQuality: FilterQuality.medium, //needed because of the edges
                         image:
                             const AssetImage("assets/images/psd/hazard-fh.png"),
                       ))),
@@ -170,7 +170,7 @@ Widget createLevelWidget(BuildContext context) {
                           ),
                           child: Image(
                         height: fontHeight * 0.9,
-                            filterQuality: FilterQuality.high, //needed because of the edges
+                            filterQuality: FilterQuality.medium, //needed because of the edges
                         image: const AssetImage("assets/images/psd/xp.png"),
                       ))),
                   TextSpan(
@@ -194,7 +194,7 @@ Widget createLevelWidget(BuildContext context) {
                           ),
                           child:Image(
                         height: fontHeight,
-                            filterQuality: FilterQuality.high, //needed because of the edges
+                            filterQuality: FilterQuality.medium, //needed because of the edges
                         image:
                             const AssetImage("assets/images/psd/coins-fh.png"),
                       ))),
@@ -234,6 +234,13 @@ Widget createBottomBar(BuildContext context) {
                           width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             color: Colors.transparent,
+                            boxShadow: const [
+                              BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 10,
+                              offset: Offset(0,
+                                  -4 ), // Shadow position
+                            )],
                             image: DecorationImage(
                                 //colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.85), BlendMode.dstATop),
                                 image: AssetImage(getIt<Settings>()

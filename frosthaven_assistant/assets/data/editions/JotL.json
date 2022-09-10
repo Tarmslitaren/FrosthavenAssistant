@@ -46,9 +46,9 @@
           "gfx": "dark",
           "x": 0.70,
           "y": 0.56
-        }],"%move% + 0","*.........", "%attack% - 1", "^%range% 2","*.........", "%heal% X", "^Self", "[r]", "^X is damage suffered by target of attack", "[/r]"],
+        }],"%move% + 0","**.........", "%attack% - 1", "^%range% 2","*.........", "%heal% X", "^Self", "[r]", "^^X is damage suffered by target of attack", "[/r]"],
         ["Boil Blood", 388, false, 46, "%attack% - 1", "^%range% 2", "^%target% 2", "^%muddle%", "[r]", "%fire%%use%", "^+2 %range%", "[/r]" ],
-        ["Vile Scourge", 389, false, 77, "%move% - 1","*.........", "[r]", "[c]", "%attack% - 1", "^%poison%", "%air%%use%", "!^+1 %attack%", "[/c]", "¤aoe-triangle-2-side-with-black", "[/r]"],
+        ["Vile Scourge", 389, false, 77, "%move% - 1","*.........", "[r]", "[c]", "%attack% - 1", "^%poison%", "[s]", "%air%%use%", "!^+1 %attack%", "[/s]", "[/c]", "¤aoe-triangle-2-side-with-black", "[/r]"],
         ["Hex Whip", 390, false, 19, "%move% + 1", "^%jump%","*.........", "%attack% - 1", "^%curse%", "%air%"],
         ["Unholy Flame", 391, true, 82, "%attack% + 1", "^%range% 3", "%fire%" ]
       ]
@@ -157,10 +157,10 @@
       "name": "Stone Golem (JotL)",
       "cards": [
         ["Runic Feeedback", 404, false, 10, "^Any time a figure attacks the", "^Stone Golem this round , that", "^figure suffers 3 damage" ],
-        ["Taxing Advance", 405, false, 28, "%move% + 1","*.........", "%attack% + 0","*.........","[r]", "[c]", "^^If the Move ability was performed,", "^^the Stone Golem suffers 1 damage.","[/c]", "[/r]" ],
+        ["Taxing Advance", 405, false, 28, "%move% + 1","*.........", "%attack% + 0","*.........","[r]", "[c]", "^If the Move ability was performed,", "^^the Stone Golem suffers 1 damage.","[/c]", "[/r]" ],
         ["Hasty Assault", 406, true, 51, "%move% + 1","*.........", "%attack% - 1"],
         ["Nothing Special", 407, false, 64, "%move% + 0","*.........", "%attack% + 0"],
-        ["Sacrificial Hurl", 408, false, 72, "%attack% + 1", "^%range% 3", "*","[r]", "[c]", "^^If this attack is performed,", "^^the Stone Golem suffers 2 damage.","[/c]", "[/r]"],
+        ["Sacrificial Hurl", 408, false, 72, "%attack% + 1", "^%range% 3", "*","[r]", "[c]", "^If this attack is performed,", "^^the Stone Golem suffers 2 damage.","[/c]", "[/r]"],
         ["Calculated Strike", 409, true, 90, "%move% - 1","*.........", "%attack% + 1"],
         ["Ground Pound", 410, false, 83, "%move% + 0","*.........", "%attack% - 1", "^Target all adjacent enemies"],
         ["Runic Draw", 411, false, 28, "%move% + 1","*.........", "%attack% - 2", "^%range% 3", "^%pull% 2", "^%immobilize%" ]
@@ -759,8 +759,8 @@
           "health": "7xC",
           "move": 0,
           "attack": "C-1",
-          "special1": [ "%heal% C", "*Self"],
-          "special2": [ "%heal% 2", "*Target all allies" ],
+          "special1": [ "^^%heal% C", "*Self"],
+          "special2": [ "^^%heal% 2", "*Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
 
         },
@@ -769,8 +769,8 @@
           "health": "10xC",
           "move": 0,
           "attack": "C",
-          "special1": [ "%heal% C", "*Self"],
-          "special2": [ "%heal% 2", "*Target all allies" ],
+          "special1": [ "^^%heal% C", "*Self"],
+          "special2": [ "^^%heal% 2", "*Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -778,8 +778,8 @@
           "health": "12xC",
           "move": 0,
           "attack": "C",
-          "special1": [ "%heal% C+1", "*Self"],
-          "special2": [ "%heal% 3", "*Target all allies" ],
+          "special1": [ "^^%heal% C+1", "*Self"],
+          "special2": [ "^^%heal% 3", "*Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -787,8 +787,8 @@
           "health": "15xC",
           "move": 0,
           "attack": "C+1",
-          "special1": [ "%heal% C+1", "*Self"],
-          "special2": [ "%heal% 3", "*Target all allies" ],
+          "special1": [ "^^%heal% C+1", "*Self"],
+          "special2": [ "^^%heal% 3", "*Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -796,8 +796,8 @@
           "health": "17xC",
           "move": 0,
           "attack": "C+1",
-          "special1": [ "%heal% C+2", "*Self"],
-          "special2": [ "%heal% 4", "*Target all allies" ],
+          "special1": [ "^^%heal% C+2", "*Self"],
+          "special2": [ "^^%heal% 4", "*Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -805,8 +805,8 @@
           "health": "20xC",
           "move": 0,
           "attack": "C+2",
-          "special1": [ "%heal% C+2", "*Self"],
-          "special2": [ "%heal% 4", "*Target all allies" ],
+          "special1": [ "^^%heal% C+2", "*Self"],
+          "special2": [ "^^%heal% 4", "*Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -814,8 +814,8 @@
           "health": "23xC",
           "move": 0,
           "attack": "C+2",
-          "special1": [ "%heal% C+2", "*Self"],
-          "special2": [ "%heal% 5", "*Target all allies" ],
+          "special1": [ "^^%heal% C+2", "*Self"],
+          "special2": [ "^^%heal% 5", "*Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -823,8 +823,8 @@
           "health": "28xC",
           "move": 0,
           "attack": "C+3",
-          "special1": [ "%heal% C+3", "*Self"],
-          "special2": [ "%heal% 5", "*Target all allies" ],
+          "special1": [ "^^%heal% C+3", "*Self"],
+          "special2": [ "^^%heal% 5", "*Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         }
       ]
@@ -839,8 +839,8 @@
           "health": "10xC",
           "move": 2,
           "attack": 3,
-          "special1": [ "*All enemies within %range% 2 suffer 2 damage, Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target" ],
+          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
+          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -848,8 +848,8 @@
           "health": "14xC",
           "move": 2,
           "attack": 4,
-          "special1": [ "*All enemies within %range% 2 suffer 2 damage, Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target" ],
+          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
+          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -857,8 +857,8 @@
           "health": "17xC",
           "move": 2,
           "attack": 4,
-          "special1": [ "*All enemies within %range% 2 suffer 2 damage, Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target" ],
+          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
+          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -866,8 +866,8 @@
           "health": "20xC",
           "move": 2,
           "attack": 5,
-          "special1": [ "*All enemies within %range% 2 suffer 2 damage, Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target" ],
+          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
+          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -875,8 +875,8 @@
           "health": "24xC",
           "move": 3,
           "attack": 5,
-          "special1": [ "*All enemies within %range% 2 suffer 2 damage, Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target" ],
+          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
+          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -884,8 +884,8 @@
           "health": "28xC",
           "move": 3,
           "attack": 6,
-          "special1": [ "*All enemies within %range% 2 suffer 2 damage, Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target" ],
+          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
+          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -893,8 +893,8 @@
           "health": "32xC",
           "move": 3,
           "attack": 7,
-          "special1": [ "*All enemies within %range% 2 suffer 2 damage, Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target" ],
+          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
+          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -902,9 +902,9 @@
           "health": "36xC",
           "move": 3,
           "attack": 8,
-          "special1": [ "*All enemies within %range% 2 suffer 2 damage, Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1 within %range% 2 of target, %attack% - 2 within %range% 2 of target" ],
-          "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
+          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
+          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
+         "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         }
       ]
     },
@@ -918,8 +918,8 @@
           "health": "7xC",
           "move": 3,
           "attack": "C-1",
-          "special1": [ "^Jump to farthest dead Zealot and revive or Jump to farthest character and %attack% + 0"],
-          "special2": [ "^%move% + 0, %attack% + 0,", "^Revive all dead Zealots in room" ],
+          "special1": [ "^^Jump to farthest dead Zealot","^^and revive or Jump to farthest","^^character and %attack% + 0"],
+          "special2": [ "^^%move% + 0","^^%attack% + 0,", "^^Revive all dead Zealots","^^in room" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%" ]
         },
         {
@@ -927,8 +927,8 @@
           "health": "10xC",
           "move": 3,
           "attack": "C",
-          "special1": [ "^Jump to farthest dead Zealot and revive or Jump to farthest character and %attack% + 0"],
-          "special2": [ "^%move% + 0, %attack% + 0,", "^Revive all dead Zealots in room" ],
+          "special1": [ "^^Jump to farthest dead Zealot","^^and revive or Jump to farthest","^^character and %attack% + 0"],
+          "special2": [ "^^%move% + 0","^^%attack% + 0,", "^^Revive all dead Zealots","^^in room" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%" ]
         },
         {
@@ -936,8 +936,8 @@
           "health": "12xC",
           "move": 4,
           "attack": "C",
-          "special1": [ "^Jump to farthest dead Zealot and revive or Jump to farthest character and %attack% + 0"],
-          "special2": [ "^%move% + 0, %attack% + 0,", "^Revive all dead Zealots in room" ],
+          "special1": [ "^^Jump to farthest dead Zealot","^^and revive or Jump to farthest","^^character and %attack% + 0"],
+          "special2": [ "^^%move% + 0","^^%attack% + 0,", "^^Revive all dead Zealots","^^in room" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%" ]
         },
         {
@@ -945,8 +945,8 @@
           "health": "15xC",
           "move": 4,
           "attack": "C+1",
-          "special1": [ "^Jump to farthest dead Zealot and revive or Jump to farthest character and %attack% + 0"],
-          "special2": [ "^%move% + 0, %attack% + 0,", "^Revive all dead Zealots in room" ],
+          "special1": [ "^^Jump to farthest dead Zealot","^^and revive or Jump to farthest","^^character and %attack% + 0"],
+          "special2": [ "^^%move% + 0","^^%attack% + 0,", "^^Revive all dead Zealots","^^in room" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%" ]
         },
         {
@@ -954,8 +954,8 @@
           "health": "17xC",
           "move": 5,
           "attack": "C+1",
-          "special1": [ "^Jump to farthest dead Zealot and revive or Jump to farthest character and %attack% + 0"],
-          "special2": [ "^%move% + 0, %attack% + 0,", "^Revive all dead Zealots in room" ],
+          "special1": [ "^^Jump to farthest dead Zealot","^^and revive or Jump to farthest","^^character and %attack% + 0"],
+          "special2": [ "^^%move% + 0","^^%attack% + 0,", "^^Revive all dead Zealots","^^in room" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%" ]
         },
         {
@@ -963,8 +963,8 @@
           "health": "20xC",
           "move": 5,
           "attack": "C+2",
-          "special1": [ "^Jump to farthest dead Zealot and revive or Jump to farthest character and %attack% + 0"],
-          "special2": [ "^%move% + 0, %attack% + 0,", "^Revive all dead Zealots in room" ],
+          "special1": [ "^^Jump to farthest dead Zealot","^^and revive or Jump to farthest","^^character and %attack% + 0"],
+          "special2": [ "^^%move% + 0","^^%attack% + 0,", "^^Revive all dead Zealots","^^in room" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%" ]
         },
         {
@@ -972,8 +972,8 @@
           "health": "23xC",
           "move": 5,
           "attack": "C+3",
-          "special1": [ "^Jump to farthest dead Zealot and revive or Jump to farthest character and %attack% + 0"],
-          "special2": [ "^%move% + 0, %attack% + 0,", "^Revive all dead Zealots in room" ],
+          "special1": [ "^^Jump to farthest dead Zealot","^^and revive or Jump to farthest","^^character and %attack% + 0"],
+          "special2": [ "^^%move% + 0","^^%attack% + 0,", "^^Revive all dead Zealots","^^in room" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%" ]
         },
         {
@@ -981,8 +981,8 @@
           "health": "28xC",
           "move": 5,
           "attack": "C+4",
-          "special1": [ "^Jump to farthest dead Zealot and revive or Jump to farthest character and %attack% + 0"],
-          "special2": [ "^%move% + 0, %attack% + 0,", "^Revive all dead Zealots in room" ],
+          "special1": [ "^^Jump to farthest dead Zealot","^^and revive or Jump to farthest","^^character and %attack% + 0"],
+          "special2": [ "^^%move% + 0","^^%attack% + 0,", "^^Revive all dead Zealots","^^in room" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%" ]
         }
       ]

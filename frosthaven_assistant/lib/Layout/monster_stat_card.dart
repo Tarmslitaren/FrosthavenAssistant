@@ -597,19 +597,17 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     for (var item in stats.immunities) {
       item = item.substring(1, item.length - 1);
       String imagePath = "assets/images/abilities/$item.png";
-      if(suffix.isNotEmpty) {
-        if (File("assets/images/abilities/$item$suffix.png").existsSync()) {
-          imagePath = "assets/images/abilities/$item$suffix.png";
-        }
+      if(suffix.isNotEmpty && hasGHVersion(item)) {
+        imagePath = "assets/images/abilities/$item$suffix.png";
       }
       Image image = Image(
         height: 11 * scale,
-        filterQuality: FilterQuality.high, //needed because of the edges
+        filterQuality: FilterQuality.medium, //needed because of the edges
         image: AssetImage(imagePath),
       );
       Image immuneIcon = Image(
         height: 4 * scale,
-        filterQuality: FilterQuality.high, //needed because of the edges
+        filterQuality: FilterQuality.medium, //needed because of the edges
         image: const AssetImage("assets/images/psd/immune.png"),
       );
       Stack stack = Stack(
