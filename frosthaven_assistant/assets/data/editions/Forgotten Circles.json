@@ -636,28 +636,28 @@
       "count": 4,
       "levels": [
         {
-          "level": 0, "health": "13xC/2", "move": 3, "attack": 3,"attributes": ["Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon"]
+          "level": 0, "health": "13xC/2", "move": 3, "attack": 3,"attributes": ["*Summons elite for 3-4 players", "^^Consume %earth% if Earth Demon", "^^Consume %fire% if Flame Demon"]
         },
         {
-          "level": 1, "health": "15xC/2", "move": 3, "attack": 3, "attributes": [ "%wound%" , "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon"]
+          "level": 1, "health": "15xC/2", "move": 3, "attack": 3, "attributes": [ "%wound%" , "*Summons elite for 3-4 players", "^^Consume %earth% if Earth Demon", "^^Consume %fire% if Flame Demon"]
         },
         {
-          "level": 2, "health": "18xC/2", "move": 3, "attack": 3, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+          "level": 2, "health": "18xC/2", "move": 3, "attack": 3, "attributes": [ "%poison%", "%wound%", "*Summons elite for 3-4 players", "^^Consume %earth% if Earth Demon", "^^Consume %fire% if Flame Demon" ]
         },
         {
-          "level": 3, "health": "21xC/2", "move": 3, "attack": 4, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+          "level": 3, "health": "21xC/2", "move": 3, "attack": 4, "attributes": [ "%poison%", "%wound%", "*Summons elite for 3-4 players", "^^Consume %earth% if Earth Demon", "^^Consume %fire% if Flame Demon" ]
         },
         {
-          "level": 4, "health": "24xC/2", "move": 4, "attack": 4, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+          "level": 4, "health": "24xC/2", "move": 4, "attack": 4, "attributes": [ "%poison%", "%wound%", "*Summons elite for 3-4 players", "^^Consume %earth% if Earth Demon", "^^Consume %fire% if Flame Demon" ]
         },
         {
-          "level": 5, "health": "27xC/2", "move": 4, "attack": 5, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+          "level": 5, "health": "27xC/2", "move": 4, "attack": 5, "attributes": [ "%poison%", "%wound%", "*Summons elite for 3-4 players", "^^Consume %earth% if Earth Demon", "^^Consume %fire% if Flame Demon" ]
         },
         {
-          "level": 6, "health": "30xC/2", "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+          "level": 6, "health": "30xC/2", "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%", "*Summons elite for 3-4 players", "^^Consume %earth% if Earth Demon", "^^Consume %fire% if Flame Demon" ]
         },
         {
-          "level": 7, "health": "35xC/2", "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%", "Summons elite for 3-4 players", "Consume %earth% if Earth Demon", "Consume %fire% if Flame Demon" ]
+          "level": 7, "health": "35xC/2", "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%", "*Summons elite for 3-4 players", "^^Consume %earth% if Earth Demon", "^^Consume %fire% if Flame Demon" ]
         }
       ]
     },
@@ -668,28 +668,28 @@
       "count": 6,
       "levels": [
         {
-          "level": 0, "health": "6xC/2",  "move": 3,  "attack": 3, "attributes": [ "%shield% 1 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+          "level": 0, "health": "6xC/2",  "move": 3,  "attack": 3, "attributes": [ "%shield% 1 self and all allies", "6+ damage: no damage first","C times.", "Target me instead of","adjacent ally." ]
         },
         {
-          "level": 1, "health": "6xC/2", "move": 3, "attack": 3, "attributes": [ "%shield% 2 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+          "level": 1, "health": "6xC/2", "move": 3, "attack": 3, "attributes": [ "%shield% 2 self and all allies", "6+ damage: no damage first","C times.", "Target me instead of","adjacent ally." ]
         },
         {
-          "level": 2, "health": "9xC/2", "move": 3, "attack": 3, "attributes": [ "%shield% 2 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+          "level": 2, "health": "9xC/2", "move": 3, "attack": 3, "attributes": [ "%shield% 2 self and all allies", "6+ damage: no damage first","C times.", "Target me instead of","adjacent ally." ]
         },
         {
-          "level": 3, "health": "9xC/2", "move": 3, "attack": 4, "attributes": [ "%retaliate% 1", "%shield% 2 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+          "level": 3, "health": "9xC/2", "move": 3, "attack": 4, "attributes": [ "%retaliate% 1", "%shield% 2 self and all allies", "6+ damage: no damage first","C times.", "Target me instead of","adjacent ally." ]
         },
         {
-          "level": 4,"health": "10xC/2", "move": 4, "attack": 4, "attributes": [ "%retaliate% 2", "%shield% 2 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+          "level": 4,"health": "10xC/2", "move": 4, "attack": 4, "attributes": [ "%retaliate% 2", "%shield% 2 self and all allies", "6+ damage: no damage first","C times.", "Target me instead of","adjacent ally." ]
         },
         {
-          "level": 5, "health": "12xC/2", "move": 4, "attack": 4, "attributes": [ "%retaliate% 2", "%shield% 3 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+          "level": 5, "health": "12xC/2", "move": 4, "attack": 4, "attributes": [ "%retaliate% 2", "%shield% 3 self and all allies", "6+ damage: no damage first","C times.", "Target me instead of","adjacent ally." ]
         },
         {
-          "level": 6, "health": "13xC/2", "move": 4, "attack": 5, "attributes": [ "%retaliate% 3", "%shield% 3 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+          "level": 6, "health": "13xC/2", "move": 4, "attack": 5, "attributes": [ "%retaliate% 3", "%shield% 3 self and all allies", "6+ damage: no damage first","C times.", "Target me instead of","adjacent ally." ]
         },
         {
-          "level": 7, "health": "14xC/2", "move": 4, "attack": 6, "attributes": [ "%retaliate% 3", "%shield% 3 self and all allies", "6+ damage: no damage first C times.", "Target me instead of adjacent ally." ]
+          "level": 7, "health": "14xC/2", "move": 4, "attack": 6, "attributes": [ "%retaliate% 3", "%shield% 3 self and all allies", "6+ damage: no damage first","C times.", "Target me instead of","adjacent ally." ]
         }
       ]
     },
@@ -1350,27 +1350,27 @@
 
         },
         {
-          "level": 3, "health": 18, "move": 4, "attack": 4, "attributes": [ "Advantage","^^Attackers gain","^^disadvantage", "%poison%" ],
+          "level": 3, "health": 18, "move": 4, "attack": 4, "attributes": [ "Advantage","Attackers gain","disadvantage", "%poison%" ],
           "immunities": [ "%stun%" ]
 
         },
         {
-          "level": 4, "health": 21, "move": 4, "attack": 5, "attributes": ["Advantage", "^^Attackers gain","^^disadvantage", "%poison%" ],
+          "level": 4, "health": 21, "move": 4, "attack": 5, "attributes": ["Advantage", "Attackers gain","disadvantage", "%poison%" ],
           "immunities": [ "%stun%" ]
 
         },
         {
-          "level": 5, "health": 25, "move": 4, "attack": 5, "attributes": ["Advantage", "^^Attackers gain","^^disadvantage", "%poison%" ],
+          "level": 5, "health": 25, "move": 4, "attack": 5, "attributes": ["Advantage", "Attackers gain","disadvantage", "%poison%" ],
           "immunities": ["%stun%" ]
 
         },
         {
-          "level": 6, "health": 28, "move": 4, "attack": 6, "attributes": ["Advantage", "^^Attackers gain","^^disadvantage", "%poison%" ],
+          "level": 6, "health": 28, "move": 4, "attack": 6, "attributes": ["Advantage", "Attackers gain","disadvantage", "%poison%" ],
           "immunities": [ "%stun%" ]
 
         },
         {
-          "level": 7, "health": 32, "move": 5, "attack": 6, "attributes": ["Advantage", "^^Attackers gain","^^disadvantage", "%poison%" ],
+          "level": 7, "health": 32, "move": 5, "attack": 6, "attributes": ["Advantage", "Attackers gain","disadvantage", "%poison%" ],
           "immunities": [ "%stun%" ]
 
         }

@@ -507,7 +507,7 @@
         [1246, true, 37, "%move% + 0", "*.........","%attack% + 0","[r]", "[c]", "^Add +2 Attack if the target is","^occupying a water tile","[/c]", "[/r]" ],
         [1247, true, 30, "%move% + 0","*.........", "%attack% + 0", "^%pierce% X","[r]","[/r]", "^where X is equal to the number of", "^water tiles within %range% 1." ],
         [1248, false, 16, "%move% - 1","*.........", "%attack% - 1","*.........", "^All enemies occupying a","^water tile suffer 1 damage." ],
-        [1249, false, 69, "[r]", "ÅKKKK","[c]","%move% + 1","*.........", "%attack% - 1", "[/c]","Å.","¤aoe-arc-3","[/r]", "^Create a water tile in all hexes occupied by a","^target containing no overlay tiles." ],
+        [1249, false, 69, "[r]", "ÅKKKK","[c]","%move% + 1","*.........", "%attack% - 1", "[/c]","Å.","¤aoe-arc-3","[/r]", "^Create a water tile in all hexes occupied","^by a target containing no overlay tiles." ],
         [1250, false, 44, "%attack% + 0", "^%range% 3", "^%pull% 2", "^%immobilize%" ],
         [1251, false, 53, "%move% + 0","*.........", "%attack% + (X - 1)", "^where X is equal to the number of", "^water tiles within %range% 1, up to 3." ],
         [1252, false, 86, "%move% + 2","*.........", "%heal% 3", "^Self","*.........", "^Create a water tile in an unoccupied", "^adjacent hex closest to an enemy", "^containing no overlay tile." ],
@@ -647,7 +647,7 @@
       "name": "Morphling",
       "edition": "Crimson Scales",
       "cards": [
-        [0, false, 0, "(Use the deck you built during the scenario.)" ]
+        [0, false, 0, "(Use the deck you built","during the scenario.)" ]
       ]
     },
 
@@ -721,7 +721,7 @@
         [ 536, false, 56, "%attack% - 1", "^%range% + 0", "^%target% 3" ],
         [ 537, true, 68, "%attack% + 1", "^%range% + 1 %target% 2" ],
         [ 538, false, 14, "%move% - 1", "*.........", "%attack% - 1", "^%range% + 0 %target% 2", "*.........",
-          "*Create a 3 damage trap in an adjacent empty hex closest to an enemy"],
+          "^^Create a 3 damage trap in an adjacent","^^empty hex closest to an enemy"],
         [ 539, true, 29, "%move% + 0","*.........", "%attack% - 1", "^%range% + 1 %target% 2", "^%immobilize%" ]
       ]
     }
@@ -1201,8 +1201,8 @@
         {
           "level": 0, "health": "8xC","move": 1, "attack": 2, "range": 3,
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
-          "special2": [ "^Reference scenario","^Special Rules." ]
+          "special1": [ "*%move% + 0","*All other Blood Oozes perform","*%attack% -1","*Target one adjacent enemy" ],
+          "special2": [ "*Reference scenario","*Special Rules." ]
         },
         {
           "level": 1,
@@ -1212,8 +1212,8 @@
           "range": 3,
           "attributes": [ "%shield% 1" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
-          "special2": [ "^Reference scenario","^Special Rules." ]
+          "special1": [ "*%move% + 0","*All other Blood Oozes perform","*%attack% -1","*Target one adjacent enemy" ],
+          "special2": [ "*Reference scenario","*Special Rules." ]
         },
         {
           "level": 2,
@@ -1223,8 +1223,8 @@
           "range": 3,
           "attributes": [ "%shield% 1" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
-          "special2": [ "^Reference scenario","^Special Rules." ]
+          "special1": [ "*%move% + 0","*All other Blood Oozes perform","*%attack% -1","*Target one adjacent enemy" ],
+          "special2": [ "*Reference scenario","*Special Rules." ]
         },
         {
           "level": 3,
@@ -1234,8 +1234,8 @@
           "range": 4,
           "attributes": [ "%poison%", "%shield% 1" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
-          "special2": [ "^Reference scenario","^Special Rules." ]
+          "special1": [ "*%move% + 0","*All other Blood Oozes perform","*%attack% -1","*Target one adjacent enemy" ],
+          "special2": [ "*Reference scenario","*Special Rules." ]
         },
         {
           "level": 4,
@@ -1245,8 +1245,8 @@
           "range": 4,
           "attributes": [ "%poison%", "%shield% 1" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
-          "special2": [ "^Reference scenario","^Special Rules." ]
+          "special1": [ "*%move% + 0","*All other Blood Oozes perform","*%attack% -1","*Target one adjacent enemy" ],
+          "special2": [ "*Reference scenario","*Special Rules." ]
         },
         {
           "level": 5,
@@ -1256,8 +1256,8 @@
           "range": 4,
           "attributes": [ "%poison%", "%shield% 1" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
-          "special2": [ "^Reference scenario","^Special Rules." ]
+          "special1": [ "*%move% + 0","*All other Blood Oozes perform","*%attack% -1","*Target one adjacent enemy" ],
+          "special2": [ "*Reference scenario","*Special Rules." ]
         },
         {
           "level": 6,
@@ -1267,8 +1267,8 @@
           "range": 4,
           "attributes": [ "%poison%", "%shield% 2" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
-          "special2": [ "^Reference scenario","^Special Rules." ]
+          "special1": [ "*%move% + 0","*All other Blood Oozes perform","*%attack% -1","*Target one adjacent enemy" ],
+          "special2": [ "*Reference scenario","*Special Rules." ]
         },
         {
           "level": 7,
@@ -1278,8 +1278,8 @@
           "range": 4,
           "attributes": [ "%poison%", "%shield% 2" ],
           "immunities": [ "%immobilize%", "%muddle%", "%disarm%", "%curse%", "%wound%", "%stun%", "%poison%", "%bane%", "%brittle%" ],
-          "special1": [ "^%move% + 0, All other Blood Oozes perform %attack% -1 Target one adjacent enemy" ],
-          "special2": [ "^Reference scenario","^Special Rules." ]
+          "special1": [ "*%move% + 0","*All other Blood Oozes perform","*%attack% -1","*Target one adjacent enemy" ],
+          "special2": [ "*Reference scenario","*Special Rules." ]
         }
       ]
     },
@@ -2794,8 +2794,8 @@
         {
           "level": 7, "health": "8x(C+2)", "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 5" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
-          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
+          "special1": [ "^^%heal% 1 self.","^^Summon Rending Drake" ],
+          "special2": [ "^^%shield% 1 self", "^^Summon Spitting Drake.","^^See Special Rules." ]
         }
       ]
     },
@@ -3168,43 +3168,43 @@
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 7, "move": 3, "attack": 3, "attributes": [ "Attackers gain Disadvantage" ] },
-          "elite": { "health": 11, "move": 3, "attack": 4, "attributes": [ "Attackers gain Disadvantage" ] }
+          "normal": { "health": 7, "move": 3, "attack": 3, "attributes": ["^^Attackers gain","^^Disadvantage"] },
+          "elite": { "health": 11, "move": 3, "attack": 4, "attributes": [ "^^Attackers gain","^^Disadvantage" ] }
         },
         {
           "level": 1,
-          "normal": { "health": 9, "move": 3, "attack": 3, "attributes": [ "Attackers gain Disadvantage" ] },
-          "elite": { "health": 14, "move": 3, "attack": 4, "attributes": [ "Attackers gain Disadvantage" ] }
+          "normal": { "health": 9, "move": 3, "attack": 3, "attributes": [ "^^Attackers gain","^^Disadvantage" ] },
+          "elite": { "health": 14, "move": 3, "attack": 4, "attributes": [ "^^Attackers gain","^^Disadvantage" ] }
         },
         {
           "level": 2,
-          "normal": { "health": 11, "move": 4, "attack": 3, "attributes": [ "Attackers gain Disadvantage" ] },
-          "elite": { "health": 17, "move": 4, "attack": 4, "attributes": [ "Attackers gain Disadvantage" ] }
+          "normal": { "health": 11, "move": 4, "attack": 3, "attributes": [ "^^Attackers gain","^^Disadvantage"] },
+          "elite": { "health": 17, "move": 4, "attack": 4, "attributes": ["^^Attackers gain","^^Disadvantage" ] }
         },
         {
           "level": 3,
-          "normal": { "health": 13, "move": 4, "attack": 4, "attributes": [ "Attackers gain Disadvantage" ] },
-          "elite": { "health": 20, "move": 4, "attack": 5, "attributes": [ "Attackers gain Disadvantage" ] }
+          "normal": { "health": 13, "move": 4, "attack": 4, "attributes": [ "^^Attackers gain","^^Disadvantage" ] },
+          "elite": { "health": 20, "move": 4, "attack": 5, "attributes": [ "^^Attackers gain","^^Disadvantage" ] }
         },
         {
           "level": 4,
-          "normal": { "health": 16, "move": 4, "attack": 4, "attributes": [ "Attackers gain Disadvantage" ] },
-          "elite": { "health": 21, "move": 5, "attack": 5, "attributes": [ "%wound%" ]}
+          "normal": { "health": 16, "move": 4, "attack": 4, "attributes": [ "^^Attackers gain","^^Disadvantage" ] },
+          "elite": { "health": 21, "move": 5, "attack": 5, "attributes": [ "%wound%","*","^^Attackers gain","^^Disadvantage" ]}
         },
         {
           "level": 5,
-          "normal": { "health": 17, "move": 5, "attack": 4, "attributes": [ "%wound%", "Attackers gain Disadvantage" ]},
-          "elite": { "health": 24, "move": 5, "attack": 6, "attributes": [ "%wound%", "Attackers gain Disadvantage" ]}
+          "normal": { "health": 17, "move": 5, "attack": 4, "attributes": [ "%wound%","*", "^^Attackers gain","^^Disadvantage" ]},
+          "elite": { "health": 24, "move": 5, "attack": 6, "attributes": [ "%wound%","*", "^^Attackers gain","^^Disadvantage"]}
         },
         {
           "level": 6,
-          "normal": { "health": 19, "move": 5, "attack": 5, "attributes": [ "%wound%", "Attackers gain Disadvantage" ]},
-          "elite": { "health": 28, "move": 5, "attack": 7, "attributes": [ "%wound%", "Attackers gain Disadvantage" ]}
+          "normal": { "health": 19, "move": 5, "attack": 5, "attributes": [ "%wound%", "*","^^Attackers gain","^^Disadvantage"]},
+          "elite": { "health": 28, "move": 5, "attack": 7, "attributes": [ "%wound%", "*","^^Attackers gain","^^Disadvantage" ]}
         },
         {
           "level": 7,
-          "normal": {"health": 22, "move": 5, "attack": 5, "attributes": [ "%wound%", "Attackers gain Disadvantage" ]},
-          "elite": { "health": 33, "move": 5, "attack": 7, "attributes": [ "%wound%", "Attackers gain Disadvantage" ]}
+          "normal": {"health": 22, "move": 5, "attack": 5, "attributes": [ "%wound%","*", "^^Attackers gain","^^Disadvantage"]},
+          "elite": { "health": 33, "move": 5, "attack": 7, "attributes": [ "%wound%","*", "^^Attackers gain","^^Disadvantage" ]}
         }
       ]
     },
@@ -4039,43 +4039,43 @@
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 4, "move": 3, "attack": 2,"attributes": [ "^On death:","^%attack% + 0","^%target% all","^adjacent"  ]},
-          "elite": { "health": 6, "move": 5, "attack": 2,"attributes": ["^On death:","^%attack% + 0","^%target% all","^adjacent"  ]}
+          "normal": { "health": 4, "move": 3, "attack": 2,"attributes": [ "^^On death:","^^%attack% + 0","^^%target% all","^^adjacent"  ]},
+          "elite": { "health": 6, "move": 5, "attack": 2,"attributes": ["^^On death:","^^%attack% + 0","^^%target% all","^^adjacent"  ]}
         },
         {
           "level": 1,
-          "normal": { "health": 4, "move": 4, "attack": 2, "attributes": [ "^%retaliate% 1","^On death:","^%attack% + 0","^%target% all","^adjacent"   ]},
-          "elite": { "health": 6, "move": 5, "attack": 2, "attributes": [ "^%retaliate% 2", "^On death:","^%attack% + 0","^%target% all","^adjacent"  ]}
+          "normal": { "health": 4, "move": 4, "attack": 2, "attributes": [ "^^%retaliate% 1","^^On death:","^^%attack% + 0","^^%target% all","^^adjacent"   ]},
+          "elite": { "health": 6, "move": 5, "attack": 2, "attributes": [ "^^%retaliate% 2", "^^On death:","^^%attack% + 0","^^%target% all","^^adjacent"  ]}
         },
         {
           "level": 2,
-          "normal": { "health": 6, "move": 4, "attack": 2, "attributes": [ "^%retaliate% 1", "^On death:","^attack + 0","^%target% all","^adjacent"]},
-          "elite": { "health": 7, "move": 5, "attack": 3, "attributes": [ "^%retaliate% 2", "^On death:","^attack + 0","^%target% all","^adjacent" ]}
+          "normal": { "health": 6, "move": 4, "attack": 2, "attributes": [ "^^%retaliate% 1", "^^On death:","^^attack + 0","^^%target% all","^^adjacent"]},
+          "elite": { "health": 7, "move": 5, "attack": 3, "attributes": [ "^^%retaliate% 2", "^^On death:","^^attack + 0","^^%target% all","^^adjacent" ]}
         },
         {
           "level": 3,
-          "normal": { "health": 8, "move": 4, "attack": 2, "attributes": [ "^%retaliate% 1","^On death:","^%attack% + 0","^%target% all","^adjacent" ]},
-          "elite": { "health": 8, "move": 5, "attack": 4, "attributes": [ "^%retaliate% 2", "^On death:","^%attack% + 0","^%target% all","^adjacent"]}
+          "normal": { "health": 8, "move": 4, "attack": 2, "attributes": [ "^^%retaliate% 1","^^On death:","^^%attack% + 0","^^%target% all","^^adjacent" ]},
+          "elite": { "health": 8, "move": 5, "attack": 4, "attributes": [ "^^%retaliate% 2", "^^On death:","^^%attack% + 0","^^%target% all","^^adjacent"]}
         },
         {
           "level": 4,
-          "normal": { "health": 8, "move": 4, "attack": 3, "attributes": [ "^%retaliate% 1", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]},
-          "elite": { "health": 11, "move": 5, "attack": 4, "attributes": [ "^%retaliate% 2", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]}
+          "normal": { "health": 8, "move": 4, "attack": 3, "attributes": [ "^^%retaliate% 1", "^^On death:","^^%attack% + 0","^^%target% all","^^adjacent" ]},
+          "elite": { "health": 11, "move": 5, "attack": 4, "attributes": [ "^^%retaliate% 2", "^^On death:","^^%attack% + 0","^^%target% all","^^adjacent" ]}
         },
         {
           "level": 5,
-          "normal": { "health": 9, "move": 4, "attack": 3, "attributes": [ "^%retaliate% 2" , "^On death:","^%attack% + 0","^%target% all","^adjacent"]},
-          "elite": { "health": 12, "move": 5, "attack": 4, "attributes": [ "^%retaliate% 3", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]}
+          "normal": { "health": 9, "move": 4, "attack": 3, "attributes": [ "^^%retaliate% 2" , "^^On death:","^^%attack% + 0","^^%target% all","^^adjacent"]},
+          "elite": { "health": 12, "move": 5, "attack": 4, "attributes": [ "^^%retaliate% 3", "^^On death:","^^%attack% + 0","^^%target% all","^^adjacent" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 11, "move": 5, "attack": 3, "attributes": [ "^%retaliate% 2" ,"^On death:","^%attack% + 0","^%target% all","^adjacent"]},
-          "elite": { "health": 15, "move": 6, "attack": 4, "attributes": [ "^%retaliate% 3", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]}
+          "normal": { "health": 11, "move": 5, "attack": 3, "attributes": [ "^^%retaliate% 2" ,"^^On death:","^^%attack% + 0","^^%target% all","^^adjacent"]},
+          "elite": { "health": 15, "move": 6, "attack": 4, "attributes": [ "^^%retaliate% 3", "^^On death:","^^%attack% + 0","^^%target% all","^^adjacent" ]}
         },
         {
           "level": 7,
-          "normal": { "health": 15, "move": 5, "attack": 3, "attributes": [ "^%retaliate% 2", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]},
-          "elite": { "health": 15, "move": 6, "attack": 5, "attributes": [ "^%retaliate% 4", "^On death:","^%attack% + 0","^%target% all","^adjacent" ]}
+          "normal": { "health": 15, "move": 5, "attack": 3, "attributes": [ "^^%retaliate% 2", "^^On death:","^^%attack% + 0","^^%target% all","^^adjacent" ]},
+          "elite": { "health": 15, "move": 6, "attack": 5, "attributes": [ "^^%retaliate% 4", "^^On death:","^^%attack% + 0","^^%target% all","^^adjacent" ]}
         }
       ]
     },

@@ -150,7 +150,7 @@ class LineBuilder {
     for (String item in data.attributes) {
       //remove size modifiers (only used for immobilize since it's so long it overflows.)
       String sizeMod = (item.substring(0, 1));
-      if (sizeMod == "^" || sizeMod == "*") {
+      if (sizeMod == "^" || sizeMod == "*" && item.length > 1) {
         item = item.substring(1);
       }
       if (item.substring(0, 1) == "%") {
@@ -544,7 +544,6 @@ class LineBuilder {
       // this is changed already in JotL.
 
       if (line.startsWith("*")) {
-        //now for both * and *..... potential problems?
         //reset
         if (isReallySubLine) {
           //&& !isConditional
@@ -559,13 +558,8 @@ class LineBuilder {
       if (line.startsWith("^") && isSubLine) {
         //&& !isConditional
         if (!isReallySubLine && (!isConditional || isElementUse)) {
-          //!isConditional
           retVal.add("[subLineStart]");
           isReallySubLine = true;
-
-
-          //too wide? remove whitespace between icon and value. only for sub lines?
-          //line = line.replaceAll("% ", "%");
         }
         //check if match right align issues
         if (line[1] == '%' ||
@@ -591,8 +585,13 @@ class LineBuilder {
                 !line.startsWith("^All targets")
         ) {
           //make bigger icon and text in element use block
-          if (isElementUse && (!lines[i - 2].contains("[c]")) && !line.startsWith("^Target")
-              && !line.startsWith("^all") && !line.startsWith("^All")
+          //TODO: changed. need to check aaaall cards again...
+          if (isElementUse && (lines[i-1].contains("use")  ||
+              (lines[i-2].contains("use") && lines[i-1].contains("[c]")))   // (!lines[i - 2].contains("[c]"))
+              && !line.startsWith("^Target")
+              && !line.startsWith("^all")
+              && !line.startsWith("^All")
+              && !line.contains("instead")
           ) {
             //ok, so if there is a subline, then there has to be a [c]
             line = line.substring(1); //make first sub line into main line
@@ -601,7 +600,7 @@ class LineBuilder {
             }
             isReallySubLine = false;
           } else if(isElementUse && (!lines[i - 2].contains("[c]") && !line.startsWith("^all")&& !line.startsWith("^All"))){
-            isReallySubLine = false; //block useblocks from having straight sublines?
+            //isReallySubLine = false; //block useblocks from having straight sublines?
             //hope this doesn't come back to bite me (flame demon 77) - it does savvas lavaflow 51
           }
           line = "!$line";
@@ -758,7 +757,7 @@ class LineBuilder {
             borderRadius: BorderRadius.all(Radius.circular(6 * scale))),
         padding: EdgeInsets.fromLTRB(
             2 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
-        margin: EdgeInsets.only(left: 2 * scale),
+        margin: EdgeInsets.only(left: 2 * scale, right: 2 * scale),
         //child: Expanded(
         child: Column(mainAxisSize: MainAxisSize.max, children: [
           if (list2.isNotEmpty) Row(children: list2[0]),
@@ -943,7 +942,8 @@ class LineBuilder {
                 : 10.16) *
             scale,
         //sizes are larger on stat cards
-        height: (alignment == CrossAxisAlignment.center ? frosthavenStyle? 0.8 : 1 :
+        height: (alignment == CrossAxisAlignment.center ? frosthavenStyle? 1 //he one problem here: one line no icons -> squished
+            : 1 :
         1//0.8
         ),
         // 0.9,

@@ -6,14 +6,14 @@
 		{
 			"name": "Inox Necromancer",
 			"cards": [
-				[ 588, false, 8, "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "^%disarm%", "*","^Summon normal Living Corpse if you are affected." ],
-				[ 589, false, 8, "%move% - 1","*.........", "%attack% + 0", "^%range% + 0", "^%immobilize%", "*", "^Summon normal Living Corpse if you are affected." ],
+				[ 588, false, 8, "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "^%disarm%", "*","^Summon normal Living Corpse", "^^if you are affected." ],
+				[ 589, false, 8, "%move% - 1","*.........", "%attack% + 0", "^%range% + 0", "^%immobilize%", "*", "^Summon normal Living Corpse", "^^if you are affected." ],
 				[ 590, true, 23, "%move% + 0", "*.........","%heal% 3", "^%range% 3" ],
 				[ 591, true, 23, "%move% + 0","*.........", "%heal% 3", "^%range% 3" ],
 				[ 592, false, 62, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
 				[ 593, false, 74, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0" ],
 				[ 594, false, 89, "%move% - 1","*.........", "%heal% 1", "^Affect all adjacent allies", "*.........","%bless%", "^Self" ],
-				[ 595, false, 9, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0", "^%curse%", "^%target% 2","*","^Summon normal Living Corpse if you are affected." ]
+				[ 595, false, 9, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0", "^%curse%", "^%target% 2","*","^Summon normal Living Corpse", "^^if you are affected." ]
 			]
 		},
 		{
