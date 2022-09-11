@@ -108,11 +108,20 @@ class MonsterBoxState extends State<MonsterBox> {
     );
 
       return Container(
-          decoration: null,
           padding: EdgeInsets.zero,
           height: 30 * scale,
           width: width,
-          color: Color(int.parse("7A000000", radix: 16)),
+          decoration: BoxDecoration(
+            color: Color(int.parse("7A000000", radix: 16)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black45,
+                blurRadius: 4 * scale,
+                offset: Offset(2 * scale, 4 * scale), // Shadow position
+              ),
+            ],
+          ),
+          //color: Color(int.parse("7A000000", radix: 16)),
           //black with some opacity
           child: Stack(alignment: Alignment.centerLeft, children: [
             Image(
@@ -268,15 +277,6 @@ class MonsterBoxState extends State<MonsterBox> {
             key: Key(figureId.toString()),
             width: width,
             curve: Curves.easeInOut,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black45,
-                  blurRadius: 4 * scale,
-                  offset: Offset(2 * scale, 4 * scale), // Shadow position
-                ),
-              ],
-            ),
             duration: const Duration(milliseconds: 300),
             child: ValueListenableBuilder<int>(
                 valueListenable: data.health,
