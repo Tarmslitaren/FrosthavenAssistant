@@ -171,7 +171,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                         const Text('Frosthaven')
                       ],
                     ),
-                    Row(
+                    /*Row(
                       children: [
                         Radio(value: Style.gloomhaven, groupValue: settings.style.value, onChanged: (index) {
                           setState(() {
@@ -183,7 +183,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                         }),
                         const Text('Gloomhaven')
                       ],
-                    ),
+                    ),*/
                     Row(
                       children: [
                         Radio(value: Style.original, groupValue: settings.style.value, onChanged: (index) {

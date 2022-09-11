@@ -558,7 +558,8 @@ class LineBuilder {
       if (line.startsWith("^") && isSubLine) {
         //&& !isConditional
         if (!isReallySubLine && (!isConditional || (isElementUse
-            && !line.startsWith("^Perform") && !line.startsWith("^^for each")  //should these hacks really be here? (for harrower infester 30)
+            && !line.startsWith("^Perform") && !line.startsWith("^^for each") //harrower infester 30
+           // && !line.startsWith("^All enemies") && !line.startsWith("^^target suffer")//(icecrawler 16) - screws with [c]?
         ))) {
           retVal.add("[subLineStart]");
           isReallySubLine = true;
