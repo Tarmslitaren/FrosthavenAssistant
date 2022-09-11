@@ -327,9 +327,9 @@ class GameMethods {
     }
   }
 
-  static void addStandee(int? nr, Monster data, MonsterType type) {
+  static void addStandee(int? nr, Monster data, MonsterType type, bool addAsSummon) {
     if (nr != null) {
-      _gameState.action(AddStandeeCommand(nr, null, data.id, type));
+      _gameState.action(AddStandeeCommand(nr, null, data.id, type, addAsSummon));
     } else {
       //add first un added nr
       for (int i = 1; i <= data.type.count; i++) {
@@ -341,7 +341,7 @@ class GameMethods {
           }
         }
         if (!added) {
-          _gameState.action(AddStandeeCommand(i, null, data.id, type));
+          _gameState.action(AddStandeeCommand(i, null, data.id, type, addAsSummon));
           return;
         }
       }

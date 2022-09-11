@@ -21,6 +21,8 @@ class AddStandeeMenu extends StatefulWidget {
 class AddStandeeMenuState extends State<AddStandeeMenu> {
   final GameState _gameState = getIt<GameState>();
 
+  bool addAsSummon = false;
+
   @override
   initState() {
     // at the beginning, all items are shown
@@ -72,7 +74,9 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
         ),
         onPressed: () {
           if (!isOut) {
-            _gameState.action(AddStandeeCommand(nr, null, widget.monster.id, type));
+            setState(() {
+              _gameState.action(AddStandeeCommand(nr, null, widget.monster.id, type, addAsSummon));
+            });
           }
         },
       )),
@@ -83,12 +87,12 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
   Widget build(BuildContext context) {
     int nrOfStandees = widget.monster.type.count;
     //4 nr's per row
-    double height =110;
+    double height =140;
     if (nrOfStandees > 4) {
-      height = 130;
+      height = 160;
     }
     if (nrOfStandees > 8) {
-      height = 170;
+      height = 200;
     }
     return Container(
         width: 250, //need to set any width to center content, overridden by dialog default min width.
@@ -164,6 +168,26 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                                 ],
                               )
                             : Container(),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Add as summon:", style: getSmallTextStyle()),
+                              Checkbox(
+                                checkColor: Colors.black,
+                                activeColor: Colors.grey.shade200,
+                                side: BorderSide(
+                                    color: getIt<Settings>().darkMode.value
+                                        ? Colors.white
+                                        : Colors.black),
+                                onChanged: (bool? newValue) {
+                                  setState(() {
+                                    addAsSummon = newValue!;
+                                  });
+                                },
+                                value: addAsSummon,
+                              )
+
+                            ])
                       ],
                     );
                   }),

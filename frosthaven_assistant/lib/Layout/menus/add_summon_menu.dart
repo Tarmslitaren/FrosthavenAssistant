@@ -234,7 +234,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                               chosenNr,
                               summonData,
                               widget.character.id,
-                              MonsterType.summon));
+                              MonsterType.summon, true));
                         });
                         Navigator.pop(context);
                         //open the level menu here for convenience

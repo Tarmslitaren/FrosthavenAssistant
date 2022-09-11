@@ -110,7 +110,7 @@ class MonsterBoxState extends State<MonsterBox> {
 
       return ColorFiltered(
         //gray out if summoned this turn
-        colorFilter: (data.type == MonsterType.summon && data.roundSummoned == getIt<GameState>().round.value)
+        colorFilter: (data.roundSummoned == getIt<GameState>().round.value)
     ? ColorFilter.matrix(grayScale)
         : ColorFilter.matrix(identity),
     child: Container(

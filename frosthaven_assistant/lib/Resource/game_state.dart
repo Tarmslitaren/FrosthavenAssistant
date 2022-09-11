@@ -129,14 +129,18 @@ class Character extends ListItemData{
 }
 
 class MonsterInstance extends Figure{
-  MonsterInstance(this.standeeNr, this.type, Monster monster) {
+  MonsterInstance(this.standeeNr, this.type, bool summoned, Monster monster) {
       setLevel(monster);
       gfx = monster.type.gfx;
       name = monster.type.name;
       move = 0; //only used for summons
       attack = 0;
       range = 0;
-      roundSummoned = -1;
+      if(summoned) {
+        roundSummoned = getIt<GameState>().round.value;
+      } else {
+        roundSummoned = -1;
+      }
   }
 
   MonsterInstance.summon(this.standeeNr, this.type, this.name, int summonHealth, this.move, this.attack, this.range, this.gfx, this.roundSummoned) {

@@ -57,7 +57,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
           widget.data,
           isBoss
               ? MonsterType.boss
-              : left?  MonsterType.normal: MonsterType.elite);
+              : left?  MonsterType.normal: MonsterType.elite, false);
     } else if (widget
         .data
         .monsterInstances
@@ -82,7 +82,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         int standeeNr = available[Random().nextInt(available.length)+1];
         getIt<GameState>().action(AddStandeeCommand(standeeNr, null, widget.data.id, isBoss
             ? MonsterType.boss
-            : left?  MonsterType.normal: MonsterType.elite));
+            : left?  MonsterType.normal: MonsterType.elite, false));
 
       } else {
         openDialog(

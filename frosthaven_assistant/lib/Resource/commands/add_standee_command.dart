@@ -25,10 +25,11 @@ class AddStandeeCommand extends Command {
   final SummonData? summon;
   final MonsterType type;
   final String ownerId;
+  final bool addAsSummon;
   //final ValueNotifier<List<MonsterInstance>> monsterList;
 
 
-  AddStandeeCommand(this.nr, this.summon, this.ownerId, this.type);
+  AddStandeeCommand(this.nr, this.summon, this.ownerId, this.type, this.addAsSummon);
 
   @override
   void execute() {
@@ -41,7 +42,7 @@ class AddStandeeCommand extends Command {
           monster = item;
         }
       }
-      instance = MonsterInstance(nr, type, monster!);
+      instance = MonsterInstance(nr, type, addAsSummon, monster!);
     } else {
       instance = MonsterInstance.summon(
           summon!.standeeNr,
