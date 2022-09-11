@@ -51,7 +51,8 @@ class AddStandeeCommand extends Command {
           summon!.move,
           summon!.attack,
           summon!.range,
-          summon!.gfx);
+          summon!.gfx,
+          getIt<GameState>().round.value);
     }
 
     List<MonsterInstance> newList = [];
@@ -85,7 +86,9 @@ class AddStandeeCommand extends Command {
                   summon!.move,
                   summon!.attack,
                   summon!.range,
-                  summon!.gfx);
+                  summon!.gfx,
+                  getIt<GameState>().round.value
+              );
               ok = false;
             }
           }

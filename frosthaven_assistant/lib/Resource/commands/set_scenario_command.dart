@@ -44,7 +44,7 @@ class SetScenarioCommand extends Command {
               //create the bear summon
               final int bearHp = 8 + item.characterState.level.value * 2;
               MonsterInstance bear = MonsterInstance.summon(
-                  0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, "beast");
+                  0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, "beast", -1);
               item.characterState.summonList.value.add(bear);
             }
 

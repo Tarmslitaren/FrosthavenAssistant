@@ -407,7 +407,7 @@ class GameMethods {
           final int bearHp = 8 + characterState.level.value * 2;
 
           MonsterInstance bear = MonsterInstance.summon(
-              0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, "beast");
+              0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, "beast", -1);
 
           character.characterState.summonList.value.add(bear);
         }

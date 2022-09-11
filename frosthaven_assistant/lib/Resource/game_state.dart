@@ -136,9 +136,10 @@ class MonsterInstance extends Figure{
       move = 0; //only used for summons
       attack = 0;
       range = 0;
+      roundSummoned = -1;
   }
 
-  MonsterInstance.summon(this.standeeNr, this.type, this.name, int summonHealth, this.move, this.attack, this.range, this.gfx) {
+  MonsterInstance.summon(this.standeeNr, this.type, this.name, int summonHealth, this.move, this.attack, this.range, this.gfx, this.roundSummoned) {
       //deal with summon init
     maxHealth.value = summonHealth;
     health.value = summonHealth;
@@ -157,6 +158,7 @@ class MonsterInstance extends Figure{
   late int move;
   late int attack;
   late int range;
+  late final int roundSummoned;
 
   void setLevel(Monster monster) {
     dynamic newHealthValue = 10; //need to put something outer than 0 or the standee will die immediately causing glitch
@@ -201,6 +203,7 @@ class MonsterInstance extends Figure{
         '"range": $range, '
         '"name": "$name", '
         '"gfx": "$gfx", '
+        '"roundSummoned": $roundSummoned, '
         '"type": ${type.index}, '
         '"chill": ${chill.value}, '
         '"conditions": ${conditions.value.toString()} '
@@ -218,6 +221,7 @@ class MonsterInstance extends Figure{
     move = json["move"];
     attack = json["attack"];
     range = json["range"];
+    roundSummoned = json["roundSummoned"];
     chill.value = json["chill"];
     List<dynamic> condis = json["conditions"];
     for(int item in condis){

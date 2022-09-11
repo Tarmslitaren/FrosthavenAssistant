@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import '../Resource/color_matrices.dart';
 import '../Resource/enums.dart';
 import '../Resource/ui_utils.dart';
 import 'menus/status_menu.dart';
@@ -107,7 +108,12 @@ class MonsterBoxState extends State<MonsterBox> {
       blurRadius: 1 * scale,
     );
 
-      return Container(
+      return ColorFiltered(
+        //gray out if summoned this turn
+        colorFilter: (data.type == MonsterType.summon && data.roundSummoned == getIt<GameState>().round.value)
+    ? ColorFilter.matrix(grayScale)
+        : ColorFilter.matrix(identity),
+    child: Container(
           padding: EdgeInsets.zero,
           height: 30 * scale,
           width: width,
@@ -237,7 +243,7 @@ class MonsterBoxState extends State<MonsterBox> {
                         changeProgressColor: Colors.green,
                       );
                     }))
-          ]));
+          ])));
     }
 
 
