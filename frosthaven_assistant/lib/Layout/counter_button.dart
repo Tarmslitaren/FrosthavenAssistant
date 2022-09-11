@@ -29,7 +29,7 @@ class CounterButtonState extends State<CounterButton> {
   @override
   Widget build(BuildContext context) {
     Figure? figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
-    if (figure == null) { //in case it dies and was removed from the list
+    if (figure == null && widget.figureId != "unknown"){ //in case it dies and was removed from the list
       return Container();
     }
     return Row(children: [
@@ -45,7 +45,7 @@ class CounterButtonState extends State<CounterButton> {
                 if (widget.notifier.value > 0) {
                   totalChangeValue.value--;
                   gameState.action(widget.command);
-                  if ( widget.notifier == figure.health && figure.health.value <= 0) {
+                  if (widget.figureId != "unknown" && widget.notifier == figure!.health && figure.health.value <= 0) {
                     {
                       Navigator.pop(context);
                     }
@@ -100,7 +100,7 @@ class CounterButtonState extends State<CounterButton> {
               if (widget.notifier.value < widget.maxValue) {
                 totalChangeValue.value++;
                 gameState.action(widget.command);
-                if (widget.notifier.value <= 0 && widget.notifier == figure.health) {
+                if (widget.figureId != "unknown"&& widget.notifier.value <= 0 && widget.notifier == figure!.health) {
                   Navigator.pop(context);
                 }
               }

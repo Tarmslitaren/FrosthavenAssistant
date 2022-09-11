@@ -7,10 +7,13 @@ import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_com
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:reorderables/reorderables.dart';
 
+import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
+import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/modifier_deck_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
+import '../counter_button.dart';
 
 class Item extends StatelessWidget {
   final ModifierCard data;
@@ -213,7 +216,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                  Row(
+                                Row(
                                     children: [
                                       if (hasDiviner && widget.name.isEmpty)
                                         if (widget.deck.badOmen.value ==
@@ -239,6 +242,30 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                       ),
                                     ],
                                   ),
+                                Row(
+                                  children: [
+                                    CounterButton(
+                                        widget.deck.blesses,
+                                        ChangeBlessCommand(0, "unknown", "unknown"),
+                                        10,
+                                        "assets/images/abilities/bless.png",
+                                        true,
+                                        Colors.white,
+                                        figureId: "unknown",
+                                        ownerId: "unknown"
+                                    ),
+                                    CounterButton(
+                                        widget.deck.curses,
+                                        ChangeCurseCommand(0, "unknown", "unknown"),
+                                        10,
+                                        "assets/images/abilities/curse.png",
+                                        true,
+                                        Colors.white,
+                                        figureId: "unknown",
+                                        ownerId: "unknown"
+                                    ),
+                                  ],
+                                ),
                                 Wrap(
                                     runSpacing: 0,
                                     spacing: 0,
