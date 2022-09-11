@@ -70,16 +70,16 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         for (int i = 0; i < nrOfStandees; i++) {
           bool isAvailable = true;
           for (var item in widget.data.monsterInstances.value) {
-            if(item.standeeNr == i) {
+            if(item.standeeNr == i+1) {
               isAvailable = false;
               break;
             }
           }
           if (isAvailable) {
-            available.add(i);
+            available.add(i+1);
           }
         }
-        int standeeNr = available[Random().nextInt(available.length)];
+        int standeeNr = available[Random().nextInt(available.length)+1];
         getIt<GameState>().action(AddStandeeCommand(standeeNr, null, widget.data.id, isBoss
             ? MonsterType.boss
             : left?  MonsterType.normal: MonsterType.elite));

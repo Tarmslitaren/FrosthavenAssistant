@@ -557,11 +557,13 @@ class LineBuilder {
 
       if (line.startsWith("^") && isSubLine) {
         //&& !isConditional
-        if (!isReallySubLine && (!isConditional || isElementUse)) {
+        if (!isReallySubLine && (!isConditional || (isElementUse
+            && !line.startsWith("^Perform") && !line.startsWith("^^for each")  //should these hacks really be here? (for harrower infester 30)
+        ))) {
           retVal.add("[subLineStart]");
           isReallySubLine = true;
         }
-        //check if match right align issues
+        //make right aligned, in theese cases
         if (line[1] == '%' ||
             //these are all very... assuming.
             line.startsWith("^Self") ||
@@ -585,7 +587,6 @@ class LineBuilder {
                 !line.startsWith("^All targets")
         ) {
           //make bigger icon and text in element use block
-          //TODO: changed. need to check aaaall cards again...
           if (isElementUse && (lines[i-1].contains("use")  ||
               (lines[i-2].contains("use") && lines[i-1].contains("[c]")))   // (!lines[i - 2].contains("[c]"))
               && !line.startsWith("^Target")
