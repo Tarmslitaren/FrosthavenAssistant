@@ -48,6 +48,7 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                     leading: Image(
                       height: 30,
                       width: 30,
+                      filterQuality: FilterQuality.medium,
                       fit: BoxFit.scaleDown,
                       color: currentCharacters[index].characterClass.name ==
                                   "Escort" ||

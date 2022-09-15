@@ -100,6 +100,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
         child: IconButton(
           padding: EdgeInsets.zero,
           icon: Image.asset(
+            fit: BoxFit.fitHeight,
               color: Colors.white24,
               colorBlendMode: BlendMode.modulate,
               'assets/images/psd/add.png'),
@@ -268,6 +269,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                         color: isCharacter
                                             ? character.characterClass.color
                                             : null,
+                                        filterQuality: FilterQuality.medium,
                                         image: AssetImage(
                                           "assets/images/class-icons/${character.characterClass.name}.png",
                                         ),

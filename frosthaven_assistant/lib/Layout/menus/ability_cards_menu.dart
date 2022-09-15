@@ -174,7 +174,8 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           double scale = getScaleByReference(context);
           return Container(
               constraints: BoxConstraints(
-                  maxWidth: 184 * 0.8 * scale * 2 + 8,
+                //minWidth: MediaQuery.of(context).size.width,
+                  maxWidth: MediaQuery.of(context).size.width,// 184 * 0.8 * scale * 2 + 8,
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(
                   color: Colors.transparent,

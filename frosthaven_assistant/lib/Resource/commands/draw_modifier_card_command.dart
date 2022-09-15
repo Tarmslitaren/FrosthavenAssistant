@@ -24,7 +24,7 @@ class DrawModifierCardCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     if(name == "Allies"){
       return "Draw allies modifier card";
     }

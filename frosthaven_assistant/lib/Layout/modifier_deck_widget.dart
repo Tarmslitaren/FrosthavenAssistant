@@ -75,7 +75,16 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   }
 
   static const int cardAnimationDuration = 1200;
-  bool animationsEnabled = false;
+  bool animationsEnabled = initAnimationEnabled();
+
+  static bool initAnimationEnabled() {
+    if(getIt<Settings>().client.value || getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0 &&
+    getIt<GameState>().commandDescriptions[getIt<GameState>().commandIndex.value].contains("modifier card")){
+      //also: missing info. need to check for updateForUndo
+      return true;
+    }
+    return false;
+  }
 
   Widget buildDrawAnimation(Widget child, Key key) {
     //compose a translation, scale, rotation + somehow switch widget from back to front
@@ -155,6 +164,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
             child: ValueListenableBuilder<int>(
                 valueListenable: _gameState.commandIndex, //blanket
                 builder: (context, value, child) {
+
+                  if (animationsEnabled != true ) {
+                    animationsEnabled = initAnimationEnabled();
+                  }
+
                   return Row(
                     children: [
                       InkWell(

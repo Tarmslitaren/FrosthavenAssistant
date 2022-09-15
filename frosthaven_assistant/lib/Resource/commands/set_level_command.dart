@@ -6,8 +6,8 @@ import '../game_state.dart';
 class SetLevelCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   int _previousState = 0;
-  final int level;
-  final String? monsterId;
+  late final int level;
+  late final String? monsterId;
 
   SetLevelCommand(this.level, this.monsterId);
 
@@ -57,10 +57,11 @@ class SetLevelCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     if (monsterId != null) {
       return "Set $monsterId's level";
     }
     return "Set Level";
   }
+
 }

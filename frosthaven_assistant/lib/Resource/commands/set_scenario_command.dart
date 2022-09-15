@@ -13,8 +13,8 @@ import '../game_state.dart';
 
 class SetScenarioCommand extends Command {
   final GameState _gameState = getIt<GameState>();
-  final String _scenario;
-  final bool section;
+  late final String _scenario;
+  late final bool section;
 
   SetScenarioCommand(this._scenario, this.section);
 
@@ -172,7 +172,8 @@ class SetScenarioCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Set Scenario";
   }
+
 }

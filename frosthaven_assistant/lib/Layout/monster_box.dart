@@ -147,6 +147,7 @@ class MonsterBoxState extends State<MonsterBox> {
                 height: 100 * scale,
                 width: 17 * scale,
                 fit: BoxFit.cover,
+                filterQuality: FilterQuality.medium,
                 image: AssetImage("assets/images/$folder/${data.gfx}.png"),
               ),
             ),

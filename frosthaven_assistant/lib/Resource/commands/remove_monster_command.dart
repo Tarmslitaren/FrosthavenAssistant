@@ -62,10 +62,12 @@ class RemoveMonsterCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     if(names.length > 1) {
       return "Remove all monsters";
     }
     return "Remove ${names[0].type.display}";
   }
+
+
 }

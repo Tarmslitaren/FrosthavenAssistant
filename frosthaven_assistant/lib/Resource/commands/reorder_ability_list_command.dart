@@ -6,9 +6,9 @@ import '../action_handler.dart';
 import '../game_state.dart';
 
 class ReorderAbilityListCommand extends Command {
-  final int newIndex;
-  final int oldIndex;
-  String deck;
+  late final int newIndex;
+  late final int oldIndex;
+  late final String deck;
   ReorderAbilityListCommand(this.deck, this.newIndex, this.oldIndex);
 
   @override
@@ -29,7 +29,8 @@ class ReorderAbilityListCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Reorder Ability Cards";
   }
+
 }

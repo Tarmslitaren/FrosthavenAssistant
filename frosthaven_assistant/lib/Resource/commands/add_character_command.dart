@@ -36,7 +36,7 @@ class AddCharacterCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Add $_name";
   }
 }

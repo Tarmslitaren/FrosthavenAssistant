@@ -23,7 +23,7 @@ class ChangeChillCommand extends ChangeStatCommand {
   }
 
   @override
-  String toString() {
+  String describe() {
     //not correct for summons
     if(change > 0) {
 

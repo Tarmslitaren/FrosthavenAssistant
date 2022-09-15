@@ -44,7 +44,7 @@ class NextRoundCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Next Round";
   }
 }

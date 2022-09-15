@@ -131,7 +131,7 @@ class AddStandeeCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     String name  = ownerId;
     if(summon != null) {
       name = summon!.name;

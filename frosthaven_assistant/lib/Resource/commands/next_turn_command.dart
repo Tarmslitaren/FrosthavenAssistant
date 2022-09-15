@@ -27,7 +27,7 @@ class TurnDoneCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Set Turn";
   }
 }

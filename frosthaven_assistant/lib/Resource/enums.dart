@@ -69,3 +69,10 @@ enum TurnsState {
   current,
   done
 }
+
+enum NetworkMessage {
+  init,
+  action,
+  undo,
+  redo
+}

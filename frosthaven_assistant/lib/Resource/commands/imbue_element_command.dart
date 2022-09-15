@@ -24,7 +24,7 @@ class ImbueElementCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Imbue element ${element.name}";
   }
 }

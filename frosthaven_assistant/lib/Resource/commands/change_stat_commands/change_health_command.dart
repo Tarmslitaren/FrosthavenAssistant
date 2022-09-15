@@ -30,7 +30,7 @@ class ChangeHealthCommand extends ChangeStatCommand {
   }
 
   @override
-  String toString() {
+  String describe() {
     if(change > 0) {
       return "Increase $figureId's health";
     }

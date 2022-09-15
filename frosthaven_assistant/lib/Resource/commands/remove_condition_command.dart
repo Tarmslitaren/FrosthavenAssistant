@@ -32,7 +32,7 @@ class RemoveConditionCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Remove ${condition.name}";
   }
 }

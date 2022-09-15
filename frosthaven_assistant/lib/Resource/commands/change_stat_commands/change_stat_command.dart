@@ -89,7 +89,7 @@ abstract class ChangeStatCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "change stat";
   }
 }

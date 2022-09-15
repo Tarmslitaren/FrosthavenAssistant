@@ -74,9 +74,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
         ),
         onPressed: () {
           if (!isOut) {
-            setState(() {
-              _gameState.action(AddStandeeCommand(nr, null, widget.monster.id, type, addAsSummon));
-            });
+            _gameState.action(AddStandeeCommand(nr, null, widget.monster.id, type, addAsSummon));
           }
         },
       )),
@@ -86,13 +84,13 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
   @override
   Widget build(BuildContext context) {
     int nrOfStandees = widget.monster.type.count;
-    //4 nr's per row
+    //4 nrs per row
     double height =140;
     if (nrOfStandees > 4) {
-      height = 160;
+      height = 172;
     }
     if (nrOfStandees > 8) {
-      height = 200;
+      height = 211;
     }
     return Container(
         width: 250, //need to set any width to center content, overridden by dialog default min width.
@@ -171,7 +169,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Add as summon:", style: getSmallTextStyle()),
+                              Text("Summoned:", style: getSmallTextStyle()),
                               Checkbox(
                                 checkColor: Colors.black,
                                 activeColor: Colors.grey.shade200,

@@ -35,7 +35,7 @@ class ChangeMaxHealthCommand extends ChangeStatCommand {
   }
 
   @override
-  String toString() {
+  String describe() {
     if(change > 0) {
       return "Increase $ownerId's max health";
     }

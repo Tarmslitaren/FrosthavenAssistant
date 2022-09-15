@@ -5,10 +5,8 @@ import '../game_state.dart';
 
 class SetCharacterLevelCommand extends Command {
   final GameState _gameState = getIt<GameState>();
-  int _previousState = 0;
-  int _previousHealth = 0;
-  int level;
-  String characterId;
+  late final int level;
+  late final String characterId;
 
   SetCharacterLevelCommand(this.level, this.characterId);
 
@@ -21,9 +19,7 @@ class SetCharacterLevelCommand extends Command {
         break;
       }
     }
-    _previousState = character!.characterState.level.value;
-    _previousHealth = character.characterState.health.value;
-    character.characterState.level.value = level;
+    character!.characterState.level.value = level;
     character.characterState.health.value = character.characterClass.healthByLevel[level-1];
     character.characterState.maxHealth.value = character.characterState.health.value;
 
@@ -40,12 +36,11 @@ class SetCharacterLevelCommand extends Command {
 
   @override
   void undo() {
-    //character.characterState.level.value = _previousState;
-    //character.characterState.health.value = _previousHealth;
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Set $characterId's Level";
   }
+
 }

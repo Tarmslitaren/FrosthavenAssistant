@@ -46,7 +46,7 @@ class ActivateMonsterTypeCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     if (activate) {
       return "Activate $name";
     }

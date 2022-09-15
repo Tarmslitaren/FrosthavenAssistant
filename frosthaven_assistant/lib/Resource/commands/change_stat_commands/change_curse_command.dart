@@ -33,7 +33,7 @@ class ChangeCurseCommand extends ChangeStatCommand {
   }
 
   @override
-  String toString() {
+  String describe() {
     if (change > 0) {
       return "Add a Curse";
     }

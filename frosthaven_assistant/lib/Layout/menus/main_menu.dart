@@ -33,12 +33,12 @@ Drawer createMainMenu(BuildContext context) {
       builder: (context, value, child) {
 
         String undoText = "Undo";
-        if (gameState.commandIndex.value >= 0){
-          undoText += ": ${gameState.commands[gameState.commandIndex.value].toString()}";
+        if (gameState.commandIndex.value >= 0 && gameState.commandDescriptions.length > gameState.commandIndex.value){
+          undoText += ": ${gameState.commandDescriptions[gameState.commandIndex.value]}";
         }
         String redoText = "Redo";
-        if (gameState.commandIndex.value < gameState.commands.length-1) {
-          redoText += ": ${gameState.commands[gameState.commandIndex.value+1].toString()}";
+        if (gameState.commandIndex.value < gameState.commandDescriptions.length-1) {
+          redoText += ": ${gameState.commandDescriptions[gameState.commandIndex.value+1]}";
         }
 
         return ListView(
@@ -73,7 +73,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(redoText),
-                enabled: gameState.commandIndex.value < gameState.commands.length-1,
+                enabled: gameState.commandIndex.value < gameState.commandDescriptions.length-1,
                 onTap: () {
                   gameState.redo();
                   //Navigator.pop(context);

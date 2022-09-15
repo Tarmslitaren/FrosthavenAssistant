@@ -56,7 +56,7 @@ class AddConditionCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Add ${condition.name}";
   }
 }

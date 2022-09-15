@@ -343,6 +343,10 @@ class Monster extends ListItemData{
 
 class GameSaveState{
 
+  String getState() {
+    return _savedState!;
+  }
+
   String? _savedState;
   void save() {
     _savedState = getIt<GameState>().toString();
@@ -540,6 +544,12 @@ class GameSaveState{
       load();
     }
   }
+
+  Future<void> loadFromData(String data) async {
+    //have to call after init or element state overridden
+    _savedState = data;
+    load();
+  }
 }
 
 class GameState extends ActionHandler{ //TODO: put action handler in own place
@@ -665,7 +675,15 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   Future<void> load() async {
     GameSaveState state = GameSaveState();
     state.loadFromDisk();
-    gameSaveStates.add(state); //init state: means gmae save state is one larger tnan command list
+    gameSaveStates.add(state); //init state: means game save state is one larger than command list
   }
+
+  Future<void> loadFromData(String data) async {
+    GameSaveState state = GameSaveState();
+    state.loadFromData(data);
+    gameSaveStates.add(state);
+    state.saveToDisk();
+  }
+
 
 }

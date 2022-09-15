@@ -39,7 +39,7 @@ class RemoveCharacterCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     if(names.length > 1) {
       return "Remove all characters";
     }

@@ -196,7 +196,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           }
           return Container(
               constraints: BoxConstraints(
-                  maxWidth: 118 * scale * 2 + 98,
+                  //maxWidth: 118 * scale * 2 + 98,
+                  maxWidth: MediaQuery.of(context).size.width,
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(
                   color: Colors.transparent,
@@ -299,14 +300,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                       drawPile.length > 5
                                           ? buildRevealButton(
                                               drawPile.length, 6)
-                                          : Container(),
-                                      drawPile.length > 6
-                                          ? buildRevealButton(
-                                              drawPile.length, 7)
-                                          : Container(),
-                                      drawPile.length > 7
-                                          ? buildRevealButton(
-                                              drawPile.length, 8)
                                           : Container(),
                                     ]),
                               ])),

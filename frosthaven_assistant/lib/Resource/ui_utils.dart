@@ -160,3 +160,10 @@ bool hasGHVersion(String name) {
   }
   return true;
 }
+
+showToast(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text(
+        text),
+  ));
+}

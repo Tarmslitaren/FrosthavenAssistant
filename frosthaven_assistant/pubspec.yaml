@@ -53,6 +53,11 @@ dependencies:
 
   dotted_border: ^2.0.0+2
 
+  #ping_discover_network: ^0.2.0+1 -useful for finding other devices on network, not sure if useful for this
+  network_info_plus: ^2.1.4+1
+
+  dart_ipify: ^1.1.1 #get outgoing ip
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   # I don't think I need this

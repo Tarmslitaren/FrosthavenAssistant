@@ -34,7 +34,7 @@ class AddMonsterCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Add ${monster.type.display}";
   }
 }

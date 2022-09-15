@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
@@ -11,9 +12,17 @@ import 'package:window_size/window_size.dart';
 
 import 'Resource/theme_switcher.dart';
 
+void _enablePlatformOverrideForDesktop() {
+  if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
+    debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
+  }
+}
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
+
+  _enablePlatformOverrideForDesktop();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle('X-haven Assistant');

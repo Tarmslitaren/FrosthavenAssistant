@@ -43,7 +43,7 @@ class RemoveCardCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Remove ${card.deck} card nr ${card.nr}";
   }
 }

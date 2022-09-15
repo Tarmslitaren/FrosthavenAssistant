@@ -17,7 +17,7 @@ class BadOmenCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Bad Omen";
   }
 }

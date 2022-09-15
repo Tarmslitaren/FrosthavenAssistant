@@ -122,8 +122,11 @@ class MonsterWidgetState extends State<MonsterWidget> {
                 color: Colors.white,
                 fontSize: 14.4 * scale,
                 shadows: [
-                  Shadow(
-                      offset: Offset(1 * scale, 1 * scale), color: Colors.black)
+                Shadow(
+                offset: Offset(1 * scale, 1 * scale),
+    color: Colors.black87,
+    blurRadius: 1 * scale,
+    )
                 ]),
           ))
     ]);

@@ -24,6 +24,11 @@
       "health": 1,
       "move": 1,
       "attack":  0
+    },
+    "custom": {
+      "health": 2,
+      "move": 2,
+      "attack":  2
     }
   }
 }

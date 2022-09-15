@@ -16,7 +16,7 @@ class EnfeeblingHexCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Enfeebling Hex";
   }
 }

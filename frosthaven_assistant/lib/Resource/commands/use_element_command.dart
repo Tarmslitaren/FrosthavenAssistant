@@ -6,7 +6,7 @@ import '../game_state.dart';
 
 class UseElementCommand extends Command {
   final GameState _gameState = getIt<GameState>();
-  final Elements element;
+  late final Elements element;
 
   UseElementCommand(this.element);
 
@@ -20,7 +20,8 @@ class UseElementCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Use Element ${element.name}";
   }
+
 }

@@ -126,7 +126,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                               leading: Image(
                                 height: 40,
                                 width: 40,
-                                fit: BoxFit.scaleDown,
+                                fit: BoxFit.contain,
                                 color: _foundCharacters[index].hidden &&
                                         !_gameState.unlockedClasses.contains(
                                             _foundCharacters[index].name) ||
@@ -136,10 +136,11 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                                             "Objective"
                                     ? null
                                     : _foundCharacters[index].color,
+                                filterQuality: FilterQuality.medium,
                                 image: AssetImage(
                                     "assets/images/class-icons/${_foundCharacters[index].name}.png"),
                               ),
-                              iconColor: _foundCharacters[index].color,
+                              //iconColor: _foundCharacters[index].color,
                               title: Text(
                                   _foundCharacters[index].hidden &&
                                           !_gameState.unlockedClasses.contains(

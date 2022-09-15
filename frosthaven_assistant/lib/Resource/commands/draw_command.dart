@@ -34,7 +34,7 @@ class DrawCommand extends Command {
   }
 
   @override
-  String toString() {
+  String describe() {
     return "Draw";
   }
 }

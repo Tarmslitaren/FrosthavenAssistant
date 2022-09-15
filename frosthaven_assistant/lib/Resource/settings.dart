@@ -4,14 +4,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:frosthaven_assistant/Resource/commands/activate_monster_type.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
-import 'package:window_size/window_size.dart';
-
+import '../../services/network/network_info.dart';
 import '../services/service_locator.dart';
-import 'commands/change_stat_commands/change_health_command.dart';
 
 enum Style {
   frosthaven,
@@ -35,10 +32,19 @@ class Settings {
 
   final style = ValueNotifier<Style>(Style.original);
 
+  final server = ValueNotifier<bool>(false); //not saving these, but maybe save last known connection ip?
+  final client = ValueNotifier<bool>(false);
+  final connectingAsServer = ValueNotifier<bool>(false);
+  final connectionsAsClient = ValueNotifier<bool>(false);
+  String lastKnownConnection = "192.168.1.1";
+  String lastKnownPort = "58888";
+
 
   Future<void> init() async {
     await loadFromDisk();
     setFullscreen(fullScreen.value);
+
+    NetworkInformation.initNetworkInfo();
   }
 
   Future<void> setFullscreen(bool fullscreen) async {
@@ -185,6 +191,12 @@ class Settings {
       if (data["style"] != null) {
         style.value = Style.values[data["style"]];
       }
+      if (data["lastKnownConnection"] != null) {
+        lastKnownConnection = data["lastKnownConnection"];
+      }
+      if (data["lastKnownPort"] != null) {
+        lastKnownPort = data["lastKnownPort"];
+      }
     }
   }
 
@@ -206,6 +218,7 @@ class Settings {
     gameState.gameSaveStates.clear();
     gameState.commands.clear();
     gameState.commandIndex.value = -1;
+    gameState.commandDescriptions.clear();
     gameState.updateList.value++;
   }
 
@@ -223,7 +236,9 @@ class Settings {
         '"randomStandees": ${randomStandees.value}, '
         '"noCalculation": ${noCalculation.value}, '
         '"style": ${style.value.index}, '
-        '"darkMode": ${darkMode.value} '
+        '"darkMode": ${darkMode.value}, '
+        '"lastKnownConnection": "$lastKnownConnection", '
+        '"lastKnownPort": "$lastKnownPort" '
         '}';
   }
 }
