@@ -228,7 +228,7 @@ class GameMethods {
       int aInitiative = 0;
       int bInitiative = 0;
       if (a is Character) {
-        aInitiative = a.characterState.initiative;
+        aInitiative = a.characterState.initiative.value;
       } else if (a is Monster) {
         if (a.monsterInstances.value.isEmpty && !a.isActive) {
           if (b is Monster && b.monsterInstances.value.isEmpty && !b.isActive) {
@@ -245,7 +245,7 @@ class GameMethods {
         }
       }
       if (b is Character) {
-        bInitiative = b.characterState.initiative;
+        bInitiative = b.characterState.initiative.value;
       } else if (b is Monster) {
         if (b.monsterInstances.value.isEmpty && ! b.isActive) {
           if (a is Monster && a.monsterInstances.value.isEmpty && !a.isActive) {
@@ -391,7 +391,7 @@ class GameMethods {
         characterState.level.value = level;
 
         if (name == "Escort" || name == "Objective") {
-          characterState.initiative = 99;
+          characterState.initiative.value = 99;
         }
         characterState.health.value = characterClass.healthByLevel[level - 1];
         characterState.maxHealth.value = characterState.health.value;

@@ -120,7 +120,7 @@ class SetScenarioCommand extends Command {
         Character objective = GameMethods.createCharacter("Objective", item.name, _gameState.level.value+1)!;
         objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
         objective.characterState.health.value = objective.characterState.maxHealth.value;
-        objective.characterState.initiative = item.init;
+        objective.characterState.initiative.value = item.init;
         bool add = true;
         for (var item2 in _gameState.currentList) {
           //don't add duplicates
@@ -137,7 +137,7 @@ class SetScenarioCommand extends Command {
         Character objective = GameMethods.createCharacter("Escort", item.name, _gameState.level.value+1)!;
         objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
         objective.characterState.health.value = objective.characterState.maxHealth.value;
-        objective.characterState.initiative = item.init;
+        objective.characterState.initiative.value = item.init;
         bool add = true;
         for (var item2 in _gameState.currentList) {
           //don't add duplicates

@@ -6,13 +6,13 @@ import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/network/network_info.dart';
 
-import '../../Resource/ui_utils.dart';
 import '../service_locator.dart';
-import 'dart:developer' as developer;
+//import 'dart:developer' as developer;
 
 Server server = Server();
 
 class Server {
+  final serverVersion = 1;
 
   final GameState _gameState = getIt<GameState>();
 
@@ -24,158 +24,181 @@ class Server {
   String leftOverMessage = "";
 
   Future<void> startServer() async {
-    _clients.clear();
+    //_clients.clear();
     //cannot bind to outgoing
     //server = await ServerSocket.bind(InternetAddress.anyIPv4, 4567);
-    await ServerSocket.bind(NetworkInformation.wifiIPv4, int.parse(getIt<Settings>().lastKnownPort)).then((
-        ServerSocket serverSocket) {
+    await ServerSocket.bind(NetworkInformation.wifiIPv4,
+            int.parse(getIt<Settings>().lastKnownPort))
+        .then((ServerSocket serverSocket) {
       runZoned(() {
-
         _serverSocket = serverSocket;
         getIt<Settings>().server.value = true;
-        developer.log('Server Online');
+        print(
+            'Server Online: IP: ${NetworkInformation.wifiIPv4}, Port: ${getIt<Settings>().lastKnownPort}');
         _gameState.commandIndex.value = -1;
         _gameState.commands.clear();
         _gameState.commandDescriptions.clear();
-        _gameState.gameSaveStates.removeRange(0, _gameState.gameSaveStates.length-1);
+        _gameState.gameSaveStates
+            .removeRange(0, _gameState.gameSaveStates.length - 1);
+
+        //if has clients when connecting (re connect) run reset/welcome message
+        String commandDescription = "";
+        if (_gameState.commandIndex.value > 0) {
+          commandDescription = _gameState.commandDescriptions[_gameState.commandIndex.value];
+        }
+        send(
+            "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last.getState()}");
+
         _serverSocket!.listen((client) {
           handleConnection(client);
         }, onError: (e) {
-          developer.log('Server error: $e');
-
+          print('Server error: $e');
         });
       });
     });
   }
 
   void stopServer() {
-    if(_serverSocket != null) {
+    if (_serverSocket != null) {
       _serverSocket!.close();
-      developer.log('Server Offline');
+      print('Server Offline');
     }
     getIt<Settings>().server.value = false;
-    leftOverMessage ="";
+    leftOverMessage = "";
   }
 
   void handleConnection(Socket client) {
-      developer.log('Connection from'
+    print('Connection from'
         ' ${client.remoteAddress.address}:${client.remotePort}');
 
-
+    bool existed = false;
+    for (var existingClient in _clients) {
+      if (client.address == existingClient.address) {
+        existed = true;
+      }
+    }
+    if (!existed) {
       _clients.add(client);
+    }
     // listen for events from the client
-      try {
-        client.listen(
+    try {
+      client.listen(
+        // handle data from the client
+        (Uint8List data) async {
+          //await Future.delayed(Duration(seconds: 1));
+          String message = String.fromCharCodes(data);
+          message = leftOverMessage + message;
+          leftOverMessage = "";
 
-          // handle data from the client
-              (Uint8List data) async {
-            //await Future.delayed(Duration(seconds: 1));
-            String message = String.fromCharCodes(data);
-            message = leftOverMessage+message;
-            leftOverMessage = "";
+          List<String> messages = message.split("S3nD:");
+          //handle
+          for (var message in messages) {
+            if (message.endsWith("[EOM]")) {
+              message = message.substring(0, message.length - "[EOM]".length);
+              if (message.startsWith("Index:")) {
+                print('Server Receive data');
+                List<String> messageParts1 = message.split("Description:");
+                String indexString =
+                    messageParts1[0].substring("Index:".length);
+                List<String> messageParts2 =
+                    messageParts1[1].split("GameState:");
+                String description = messageParts2[0];
+                String data = messageParts2[1];
 
-            List<String> messages = message.split("S3nD:");
-            //handle
-            for (var message in messages) {
-              if(message.endsWith("[EOM]")) {
-                message = message.substring(0, message.length - "[EOM]".length);
-                if (message.startsWith("Index:")) {
-                  developer.log('Server Receive data');
-                  List<String> messageParts1 = message.split("Description:");
-                  String indexString = messageParts1[0].substring(
-                      "Index:".length);
-                  List<String> messageParts2 = messageParts1[1].split(
-                      "GameState:");
-                  String description = messageParts2[0];
-                  String data = messageParts2[1];
+                print(
+                    'Server Receive Data, index: $indexString, description:$description');
 
-                  print(
-                      'Server Receive Data, index: $indexString, description:$description');
-
-                  int newIndex = int.parse(indexString);
-                  if (newIndex > _gameState.commandIndex.value) {
-                    _gameState.commandIndex.value = int.parse(indexString);
-                    if (newIndex >= 0) {
-                      _gameState.commandDescriptions.insert(
-                          _gameState.commandIndex.value, description);
-                    }
-                    _gameState.loadFromData(data);
-                    _gameState.updateAllUI();
-                    //getIt<GameState>().modifierDeck.
-                    //client.write('your gameState changes received by server');
-                  } else {
-                    print(
-                        'Got same or lower index. ignoring: received index: $newIndex current index ${_gameState
-                            .commandIndex.value}');
-                    //ignore if same index from server
+                int newIndex = int.parse(indexString);
+                if(newIndex > _gameState.commandDescriptions.length) {
+                  //invalid: index too high. send correction to clients
+                  send("Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last.getState()}");
+                } else if (newIndex > _gameState.commandIndex.value) {
+                  _gameState.commandIndex.value = int.parse(indexString);
+                  if (newIndex >= 0) {
+                    _gameState.commandDescriptions
+                        .insert(_gameState.commandIndex.value, description);
                   }
-                } else if (message.startsWith("init")) {
-                  //TODO: check version code is same
-                  print('Server Receive init');
+                  _gameState.loadFromData(data);
+                  _gameState.updateAllUI();
+                  //getIt<GameState>().modifierDeck.
+                  //client.write('your gameState changes received by server');
+                } else {
+                  print(
+                      'Got same or lower index. ignoring: received index: $newIndex current index ${_gameState.commandIndex.value}');
+                  //ignore if same index from server
+                }
+              } else if (message.startsWith("init")) {
+                print('Server Receive init');
+
+                List<String> initMessageParts = message.split("version:");
+                int version = int.parse(initMessageParts[1]);
+                if(version != serverVersion) {
+                  //version mismatch
+                  client.write(
+                      "S3nD:Error: Server Version is $serverVersion. client version is $version. Please update your client.[EOM]");
+
+                } else {
                   String commandDescription = "";
                   if (_gameState.commandIndex.value > 0) {
-                    commandDescription =
-                    _gameState.commandDescriptions[_gameState.commandIndex
-                        .value];
+                    commandDescription = _gameState
+                        .commandDescriptions[_gameState.commandIndex.value];
                   }
-                  print('Server sends init response: "S3nD:Index:${_gameState
-                      .commandIndex
-                      .value}Description:$commandDescription');
-                  client.write("S3nD:Index:${_gameState.commandIndex
-                      .value}Description:${commandDescription}GameState:${_gameState
-                      .gameSaveStates.last.getState()}[EOM]");
+                  print(
+                      'Server sends init response: "S3nD:Index:${_gameState
+                          .commandIndex.value}Description:$commandDescription');
+                  client.write(
+                      "S3nD:Index:${_gameState.commandIndex
+                          .value}Description:${commandDescription}GameState:${_gameState
+                          .gameSaveStates.last.getState()}[EOM]");
                 }
-              } else {
-                leftOverMessage = message;
               }
+            } else {
+              leftOverMessage = message;
             }
-          },
-
-          // handle errors
-          onError: (error) {
-            developer.log(error);
-            client.close();
-            for (int i = 0; i < _clients.length; i++) {
-              if (_clients[i].address == client.address) {
-                _clients.removeAt(i);
-                break;
-              }
-            }
-          },
-
-          // handle the client closing the connection
-          onDone: () {
-            developer.log('Client left');
-            client.close();
-            for (int i = 0; i < _clients.length; i++) {
-              if (_clients[i].address == client.address) {
-                _clients.removeAt(i);
-                break;
-              }
-            }
-            //todo: toast
-            //showToast(context, 'Client left');
-          },
-        );
-      } catch (error) {
-        print(error);
-        client.close();
-        for (int i = 0; i < _clients.length; i++) {
-          if (_clients[i].address == client.address) {
-            _clients.removeAt(i);
-            break;
           }
+        },
+
+        // handle errors
+        onError: (error) {
+          print(error);
+          client.close();
+          for (int i = 0; i < _clients.length; i++) {
+            if (_clients[i].address == client.address) {
+              _clients.removeAt(i);
+              break;
+            }
+          }
+        },
+
+        // handle the client closing the connection
+        onDone: () {
+          print('Client left');
+          client.close();
+          for (int i = 0; i < _clients.length; i++) {
+            if (_clients[i].address == client.address) {
+              _clients.removeAt(i);
+              break;
+            }
+          }
+          //todo: toast
+          //showToast(context, 'Client left');
+        },
+      );
+    } catch (error) {
+      print(error);
+      client.close();
+      for (int i = 0; i < _clients.length; i++) {
+        if (_clients[i].address == client.address) {
+          _clients.removeAt(i);
+          break;
         }
+      }
     }
   }
 
   void send(String data) {
-    //if (_serverSocket!.isBroadcast) {
-      //developer.log('Client sends: $data');
-      for(Socket client in _clients) {
-        client.write("S3nD:$data[EOM]");
-      }
-      //await Future.delayed(Duration(seconds: 2));
-    //}
+    for (Socket client in _clients) {
+      client.write("S3nD:$data[EOM]");
+    }
   }
 }

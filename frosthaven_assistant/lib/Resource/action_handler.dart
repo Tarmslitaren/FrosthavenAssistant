@@ -49,13 +49,29 @@ class ActionHandler {
 
       //make sure to invalidate and rebuild all ui, since references will be broken
       getIt<GameState>().updateForUndo.value++;
+
+      //send last gamestate if connected
+       if(isServer) {
+        print(
+            'server sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
+        server.send(
+            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last.getState()}");
+      }
+       //only allow server to undo
+      /*else if (isClient) {
+        print(
+            'client sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
+        client.send(
+            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last.getState()}");
+      }*/
+
     }
   }
 
   void redo() {
     bool isServer = getIt<Settings>().server.value;
     bool isClient = getIt<Settings>().client.value;
-    if (commandIndex.value < commands.length - 1) {
+    if (commandIndex.value < commandDescriptions.length - 1) {
       commandIndex.value++;
       //if (!isServer && !isClient) {
       //  commands[commandIndex.value].execute();
@@ -63,6 +79,22 @@ class ActionHandler {
         gameSaveStates[commandIndex.value+1].load(); //test this over network again
         //also run generic update ui function
         updateAllUI();
+
+      //send last gamestate if connected
+      if (isServer) {
+        print(
+            'server sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
+        server.send(
+            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last.getState()}");
+      }
+      //only allow server to redo
+      /*else if (isClient) {
+        print(
+            'client sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
+        client.send(
+            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last.getState()}");
+      }*/
+
       //}
     }
   }

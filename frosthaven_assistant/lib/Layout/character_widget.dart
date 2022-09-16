@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
-import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_init_command.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../Resource/color_matrices.dart';
@@ -15,6 +15,7 @@ import 'menus/add_summon_menu.dart';
 import 'monster_box.dart';
 
 class CharacterWidget extends StatefulWidget {
+  static final Set<String> localCharacterInitChanges = {}; //if it's been changed locally then it's not hidden
   final String characterId;
   final int? initPreset;
 
@@ -51,10 +52,18 @@ class CharacterWidgetState extends State<CharacterWidget> {
       for (var item in _gameState.currentList) {
         if (item is Character) {
           if (item.characterState.display == character.characterState.display) {
-            if (_initTextFieldController.value.text.isNotEmpty) {
-              item.characterState.initiative = int.parse(
+            if (_initTextFieldController.value.text.isNotEmpty && _initTextFieldController
+                .value.text != character.characterState.initiative.value.toString() &&_initTextFieldController
+                .value.text.isNotEmpty && _initTextFieldController
+                .value.text != "??") {
+              int? init = int.tryParse(
                   _initTextFieldController
-                      .value.text); //TODO: sanity check inputs
+                      .value.text);
+              if (init != null && init != 0) {
+                CharacterWidget.localCharacterInitChanges.add(character.id);
+                _gameState.action(
+                    SetInitCommand(character.characterState.display, init));
+              }
             }
             break;
           }
@@ -69,6 +78,9 @@ class CharacterWidgetState extends State<CharacterWidget> {
     }
     if (isCharacter) {
       _initTextFieldController.clear();
+    }
+    if(_gameState.roundState.value == RoundState.playTurns) {
+      CharacterWidget.localCharacterInitChanges.clear();
     }
   }
 
@@ -117,11 +129,11 @@ class CharacterWidgetState extends State<CharacterWidget> {
   }
 
   Widget buildMonsterBoxGrid(double scale) {
-    String displaystartAnimation = "";
+    String displayStartAnimation = "";
 
     if (lastList.length < character.characterState.summonList.value.length) {
       //find which is new - always the last one
-      displaystartAnimation =
+      displayStartAnimation =
           character.characterState.summonList.value.last.getId();
     }
 
@@ -140,7 +152,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                       character.characterState.summonList.value[index].standeeNr
                           .toString(),
                   ownerId: character.id,
-                  displayStartAnimation: displaystartAnimation),
+                  displayStartAnimation: displayStartAnimation),
             ));
     lastList = character.characterState.summonList.value;
     return Wrap(
@@ -290,22 +302,37 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                       ),
                                       ValueListenableBuilder<int>(
                                           valueListenable:
-                                              _gameState.modifierDeck.cardCount,
+                                              character.characterState.initiative,
                                           builder: (context, value, child) {
-                                            if (isCharacter &&
-                                                _gameState.commandIndex.value >=
-                                                    0 &&
-                                                _gameState.commands[_gameState
-                                                    .commandIndex
-                                                    .value] is DrawCommand) {
+                                            if(_initTextFieldController.text != character.characterState.initiative.value.toString() && character.characterState.initiative.value != 0) {
+
+                                              //handle secret if originating from other device
+                                              bool secret = (getIt<Settings>().server.value || getIt<Settings>().client.value) &&
+                                                  (!CharacterWidget.localCharacterInitChanges.contains(character.id));
+
+                                              if (secret){
+                                                _initTextFieldController.text = "??";
+                                              }else {
+                                                _initTextFieldController.text =
+                                                    character.characterState
+                                                        .initiative.value
+                                                        .toString();
+                                              }
+                                            }
+                                            if(_gameState.roundState.value == RoundState.playTurns && isCharacter){
                                               _initTextFieldController.clear();
                                             }
+                                            //if (isCharacter && _gameState.commandIndex.value >= 0 &&
+                                            //    _gameState.commands[_gameState.commandIndex.value] is DrawCommand) {
+                                            //  _initTextFieldController.clear();
+                                            //}
                                             if (_gameState.roundState.value ==
                                                     RoundState
                                                         .chooseInitiative &&
                                                 character.characterState.health
                                                         .value >
                                                     0) {
+
                                               return Container(
                                                 margin: EdgeInsets.only(
                                                     left: 11 * scale,
@@ -397,8 +424,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                               );
                                             } else {
                                               if (isCharacter) {
-                                                _initTextFieldController
-                                                    .clear();
+                                                _initTextFieldController.clear();
                                               }
                                               return Container(
                                                   height: 33 * scale,
@@ -411,11 +437,11 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                                 0 &&
                                                             character
                                                                     .characterState
-                                                                    .initiative >
+                                                                    .initiative.value >
                                                                 0
                                                         ? character
                                                             .characterState
-                                                            .initiative
+                                                            .initiative.value
                                                             .toString()
                                                         : "",
                                                     textAlign: TextAlign.center,

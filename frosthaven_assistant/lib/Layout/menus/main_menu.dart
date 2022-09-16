@@ -12,6 +12,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
 import 'add_monster_menu.dart';
 
@@ -65,7 +66,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(undoText ),
-                enabled: gameState.commandIndex.value >= 0,
+                enabled: gameState.commandIndex.value >= 0 && !getIt<Settings>().client.value && !getIt<Settings>().server.value,
                 onTap: () {
                   gameState.undo();
                   //Navigator.pop(context);
@@ -73,7 +74,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(redoText),
-                enabled: gameState.commandIndex.value < gameState.commandDescriptions.length-1,
+                enabled: gameState.commandIndex.value < gameState.commandDescriptions.length-1 && !getIt<Settings>().client.value&& !getIt<Settings>().server.value,
                 onTap: () {
                   gameState.redo();
                   //Navigator.pop(context);

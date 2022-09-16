@@ -3,6 +3,8 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:developer' as developer;
 
+import 'package:frosthaven_assistant/services/network/server.dart';
+
 import '../../Resource/game_state.dart';
 import '../../Resource/settings.dart';
 import '../service_locator.dart';
@@ -18,13 +20,15 @@ class Client {
   Future<void> connect(String address) async {
 // connect to the socket server
     try {
-      await Socket.connect(address, int.parse(getIt<Settings>().lastKnownPort)).then((Socket socket) {
+      int port = int.parse(getIt<Settings>().lastKnownPort);
+      print("port nr: ${port.toString()}");
+      await Socket.connect(address, port).then((Socket socket) {
         runZoned(() {
           _socket = socket;
           getIt<Settings>().client.value = true;
           print(
               'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}');
-          client.send("init");
+          client.send("init version:${server.serverVersion}");
           listen();
         });
       });
@@ -65,16 +69,25 @@ class Client {
                 int newIndex = int.parse(indexString);
                 //overwrite states if needed
                 _gameState.commandIndex.value = newIndex;
-                if (newIndex > 0) {
-                  _gameState.commandDescriptions.insert(newIndex, description);
-                }
-                if (newIndex + 1 < _gameState.commandDescriptions.length) {
+
+                //don't worry about this, just disallow undo/redo from clients
+                /*if (newIndex + 1 < _gameState.commandDescriptions.length) {
                   _gameState.commandDescriptions.removeRange(
                       newIndex + 1, _gameState.commandDescriptions.length);
                 }
+                if(newIndex >= _gameState.commandDescriptions.length) {
+                  for(int i = 0; i < newIndex-_gameState.commandDescriptions.length; i++) {
+                    _gameState.commandDescriptions.add(""); //add dummy descriptions since we don't have the data?
+                  }
+                  _gameState.commandDescriptions.add(description);
+                }
+                if (newIndex >= 0) {
+                  _gameState.commandDescriptions.add(description);
+                }*/
                 _gameState.loadFromData(data);
                 _gameState.updateAllUI();
-                //getIt<GameState>().modifierDeck.
+              } else if (message.startsWith("Error")) {
+                throw (message);
               }
             } else {
               _leftOverMessage = message;

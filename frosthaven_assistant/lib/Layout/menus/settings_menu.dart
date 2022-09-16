@@ -287,7 +287,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                     ),
                   ),
                   ValueListenableBuilder<bool>(
-                      valueListenable: settings.client,
+                      valueListenable: settings.server,
                       builder: (context, value, child) {
                         return CheckboxListTile(
                             title: Text(settings.server.value
@@ -295,7 +295,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 : "Start Host Server"),
                             value: settings.server.value,
                             onChanged: (bool? value) {
-                              setState(() {
+                              //setState(() {
                                 //do the thing
                                 if (!settings.server.value) {
                                   settings.lastKnownPort =
@@ -307,7 +307,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   server.stopServer();
                                 }
                               });
-                            });
+                            //});
                       }),
                   Container(
                     width: 200,

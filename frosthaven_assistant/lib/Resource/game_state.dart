@@ -33,7 +33,7 @@ class CharacterState extends Figure{
   CharacterState();
 
   String display = "";
-  int initiative = 0;
+  final initiative = ValueNotifier<int>(0);
   final xp = ValueNotifier<int>(0);
 
   final summonList = ValueNotifier<List<MonsterInstance>>([]);
@@ -42,7 +42,7 @@ class CharacterState extends Figure{
   @override
   String toString() {
     return '{'
-        '"initiative": $initiative, '
+        '"initiative": ${initiative.value}, '
         '"health": ${health.value}, '
         '"maxHealth": ${maxHealth.value}, '
         '"level": ${level.value}, '
@@ -55,7 +55,7 @@ class CharacterState extends Figure{
   }
 
   CharacterState.fromJson(Map<String, dynamic> json) {
-    initiative = json['initiative'];
+    initiative.value = json['initiative'];
     xp.value = json['xp'];
     chill.value = json['chill'];
     health.value = json["health"];
@@ -89,7 +89,7 @@ class Character extends ListItemData{
   late final CharacterClass characterClass;
   void nextRound(){
     if (characterClass.name != "Objective" && characterClass.name != "Escort") {
-      characterState.initiative = 0;
+      characterState.initiative.value = 0;
     }
   }
 

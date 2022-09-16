@@ -1,5 +1,4 @@
 
-import '../../Model/character_class.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../game_methods.dart';

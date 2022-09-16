@@ -30,7 +30,7 @@ class Item extends StatelessWidget {
       int? initPreset;
       if (character.characterClass.name == "Escort" ||
           character.characterClass.name == "Objective") {
-        initPreset = character.characterState.initiative;
+        initPreset = character.characterState.initiative.value;
       }
       child = CharacterWidget(
           key: Key(character.characterState.display),

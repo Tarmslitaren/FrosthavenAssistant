@@ -32,11 +32,10 @@ class Settings {
 
   final style = ValueNotifier<Style>(Style.original);
 
-  final server = ValueNotifier<bool>(false); //not saving these, but maybe save last known connection ip?
+  //network
+  final server = ValueNotifier<bool>(false); //not saving these
   final client = ValueNotifier<bool>(false);
-  final connectingAsServer = ValueNotifier<bool>(false);
-  final connectionsAsClient = ValueNotifier<bool>(false);
-  String lastKnownConnection = "192.168.1.1";
+  String lastKnownConnection = "192.168.1.???"; //only these
   String lastKnownPort = "58888";
 
 
@@ -215,7 +214,7 @@ class Settings {
         }
       }
     }
-    gameState.gameSaveStates.clear();
+    gameState.gameSaveStates.removeRange(0, gameState.gameSaveStates.length-1);
     gameState.commands.clear();
     gameState.commandIndex.value = -1;
     gameState.commandDescriptions.clear();
