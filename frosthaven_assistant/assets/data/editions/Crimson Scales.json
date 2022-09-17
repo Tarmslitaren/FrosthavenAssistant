@@ -2496,50 +2496,50 @@
         {
           "level": 0, "health": "12xC", "move": 2, "attack": 3, "range": 4, "attributes": [ "%pierce% 3" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%poison%", "%pull%", "%push%" ],
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "Reference the scenario", "Special Rules" ]
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^^Reference the scenario", "^^Special Rules" ]
         },
         {
           "level": 1, "health": "12xC", "move": 2, "attack": 3, "range": 5, "attributes": [ "%pierce% 3", "%shield% 1" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%poison%", "%pull%", "%push%" ],
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "Reference the scenario", "Special Rules" ]
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^^Reference the scenario", "^^Special Rules" ]
         },
         {
           "level": 2, "health": "15xC", "move": 3, "attack": 3, "range": 5, "attributes": [ "%pierce% 3", "%shield% 1" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%poison%", "%pull%", "%push%" ],
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "Reference the scenario", "Special Rules" ]
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^^Reference the scenario", "^^Special Rules" ]
         },
         {
           "level": 3, "health": "18xC", "move": 3, "attack": 4, "range": 6, "attributes": [ "%pierce% 3", "%shield% 1" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%poison%", "%pull%", "%push%" ],
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "Reference the scenario", "Special Rules" ]
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^^Reference the scenario", "^^Special Rules" ]
         },
         {
           "level": 4, "health": "19xC", "move": 4, "attack": 4, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%poison%", "%pull%", "%push%" ],
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "Reference the scenario", "Special Rules" ]
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^^Reference the scenario", "^^Special Rules" ]
         },
         {
           "level": 5, "health": "21xC", "move": 4, "attack": 5, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%poison%", "%pull%", "%push%" ],
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "Reference the scenario", "Special Rules" ]
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^^Reference the scenario", "^^Special Rules" ]
         },
         {
           "level": 6, "health": "23xC", "move": 4, "attack": 6, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%poison%", "%pull%", "%push%" ],
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "Reference the scenario", "Special Rules" ]
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^^Reference the scenario", "^^Special Rules" ]
         },
         {
           "level": 7, "health": "24xC", "move": 4, "attack": 6, "range": 6, "attributes": [ "%pierce% 4", "%shield% 3" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%poison%", "%pull%", "%push%" ],
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "Reference the scenario", "Special Rules" ]
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^^Reference the scenario", "^^Special Rules" ]
         }
       ]
     },
@@ -2752,44 +2752,44 @@
         {
           "level": 0, "health": "3x(C+2)", "move": 3, "attack": 2, "range": 3, "attributes": [ "%shield% 2" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
-          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
+          "special1": [ "^^%heal% 1 self.","^^Summon Rending Drake" ],
+          "special2": [ "^^%shield% 1 self", "^^Summon Spitting Drake.","^^See Special Rules." ]
         },
         {
           "level": 1, "health": "3x(C+2)", "move": 3, "attack": 2, "range": 3, "attributes": [ "%shield% 3" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
-          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
+          "special1": [ "^^%heal% 1 self.","^^Summon Rending Drake" ],
+          "special2": [ "^^%shield% 1 self", "^^Summon Spitting Drake.","^^See Special Rules." ]
         },
         {
           "level": 2, "health": "4x(C+2)", "move": 3, "attack": 2, "range": 4, "attributes": [ "%shield% 3" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
-          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
+          "special1": [ "^^%heal% 1 self.","^^Summon Rending Drake" ],
+          "special2": [ "^^%shield% 1 self", "^^Summon Spitting Drake.","^^See Special Rules." ]
         },
         {
           "level": 3, "health": "5x(C+2)", "move": 3, "attack": 3, "range": 4, "attributes": [ "%shield% 3" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
-          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
+          "special1": [ "^^%heal% 1 self.","^^Summon Rending Drake" ],
+          "special2": [ "^^%shield% 1 self", "^^Summon Spitting Drake.","^^See Special Rules." ]
         },
         {
           "level": 4, "health": "5x(C+2)", "move": 3, "attack": 3, "range": 4, "attributes": [ "%muddle%", "%shield% 4" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
-          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
+          "special1": [ "^^%heal% 1 self.","^^Summon Rending Drake" ],
+          "special2": [ "^^%shield% 1 self", "^^Summon Spitting Drake.","^^See Special Rules." ]
         },
         {
           "level": 5, "health": "6x(C+2)", "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 4" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
-          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
+          "special1": [ "^^%heal% 1 self.","^^Summon Rending Drake" ],
+          "special2": [ "^^%shield% 1 self", "^^Summon Spitting Drake.","^^See Special Rules." ]
         },
         {
           "level": 6, "health": "6x(C+2)", "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 5" ],
           "immunities": [ "%immobilize%", "%wound%", "%stun%", "%disarm%" ],
-          "special1": [ "^%heal% 1 self.","^Summon Rending Drake" ],
-          "special2": [ "^%shield% 1 self", "^Summon Spitting Drake.","^See Special Rules." ]
+          "special1": [ "^^%heal% 1 self.","^^Summon Rending Drake" ],
+          "special2": [ "^^%shield% 1 self", "^^Summon Spitting Drake.","^^See Special Rules." ]
         },
         {
           "level": 7, "health": "8x(C+2)", "move": 3, "attack": 4, "range": 4, "attributes": [ "%muddle%", "%shield% 5" ],
@@ -3422,50 +3422,50 @@
       "levels": [
         {
           "level": 0, "health": "Hollowpact", "move": 3, "attack": 2,
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "%move% -1","%attack% +1 %wound%","%heal% 2 self","%regenerate%" ],
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^%move% -1","^%attack% +1 %wound%","^%heal% 2 self","^%regenerate%" ],
           "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
           "level": 1, "health": "Hollowpact", "move": 3, "attack": 3,
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "%move% -1","%attack% +1 %wound%","%heal% 2 self","%regenerate%" ],
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^%move% -1","^%attack% +1 %wound%","^%heal% 2 self","^%regenerate%" ],
           "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
           "level": 2, "health": "Hollowpact", "move": 4, "attack": 3,
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "%move% -1","%attack% +1 %wound%","%heal% 2 self","%regenerate%" ],
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^%move% -1","^%attack% +1 %wound%","^%heal% 2 self","^%regenerate%" ],
           "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
           "level": 3, "health": "Hollowpact", "move": 4, "attack": 4,
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "%move% -1","%attack% +1 %wound%","%heal% 2 self","%regenerate%" ],
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^%move% -1","^%attack% +1 %wound%","^%heal% 2 self","^%regenerate%" ],
           "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
           "level": 4, "health": "Hollowpact", "move": 4, "attack": 4,
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "%move% -1","%attack% +1 %wound%","%heal% 2 self","%regenerate%" ],
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^%move% -1","^%attack% +1 %wound%","^%heal% 2 self","^%regenerate%" ],
           "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
           "level": 5, "health": "Hollowpact", "move": 4, "attack": 5,
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "%move% -1","%attack% +1 %wound%","%heal% 2 self","%regenerate%" ],
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^%move% -1","^%attack% +1 %wound%","^%heal% 2 self","^%regenerate%" ],
           "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
           "level": 6, "health": "Hollowpact", "move": 4, "attack": 6,
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "%move% -1","%attack% +1 %wound%","%heal% 2 self","%regenerate%" ],
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^%move% -1","^%attack% +1 %wound%","^%heal% 2 self","^%regenerate%" ],
           "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
           "level": 7, "health": "Hollowpact", "move": 5, "attack": 7,
-          "special1": [ "Reference the scenario", "Special Rules" ],
-          "special2": [ "%move% -1","%attack% +1 %wound%","%heal% 2 self","%regenerate%" ],
+          "special1": [ "^^Reference the scenario", "^^Special Rules" ],
+          "special2": [ "^%move% -1","^%attack% +1 %wound%","^%heal% 2 self","^%regenerate%" ],
           "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
         }
       ]

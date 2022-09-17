@@ -547,28 +547,28 @@
 			"count": 6,
 			"levels": [
 				{
-					"level": 0, "health": 6, "move": 5, "attack": 2,"attributes": [ "Gain %invisible%  at the start of each round" ]
+					"level": 0, "health": 6, "move": 5, "attack": 2,"attributes": [ "Gain %invisible%","at the start of each round" ]
 				},
 				{
-					"level": 1, "health": 6, "move": 5, "attack": 2, "attributes": [ "%retaliate% 2", "Gain %invisible%  at the start of each round" ]
+					"level": 1, "health": 6, "move": 5, "attack": 2, "attributes": [ "%retaliate% 2", "Gain %invisible%","at the start of each round" ]
 				},
 				{
-					"level": 2, "health": 7, "move": 5, "attack": 3, "attributes": [ "%retaliate% 2", "Gain %invisible%  at the start of each round"  ]
+					"level": 2, "health": 7, "move": 5, "attack": 3, "attributes": [ "%retaliate% 2", "Gain %invisible%","at the start of each round"  ]
 				},
 				{
-					"level": 3, "health": 8, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2", "Gain %invisible%  at the start of each round"  ]
+					"level": 3, "health": 8, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2", "Gain %invisible%","at the start of each round"  ]
 				},
 				{
-					"level": 4, "health": 11, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2" , "Gain %invisible%  at the start of each round" ]
+					"level": 4, "health": 11, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2" , "Gain %invisible%","at the start of each round" ]
 				},
 				{
-					"level": 5, "health": 12, "move": 5, "attack": 4, "attributes": [ "%retaliate% 3", "Gain %invisible%  at the start of each round"  ]
+					"level": 5, "health": 12, "move": 5, "attack": 4, "attributes": [ "%retaliate% 3", "Gain %invisible%","at the start of each round"  ]
 				},
 				{
-					"level": 6, "health": 15, "move": 6, "attack": 4, "attributes": [ "%retaliate% 3", "Gain %invisible%  at the start of each round"  ]
+					"level": 6, "health": 15, "move": 6, "attack": 4, "attributes": [ "%retaliate% 3", "Gain %invisible%","at the start of each round"  ]
 				},
 				{
-					"level": 7, "health": 15, "move": 6, "attack": 5, "attributes": [ "%retaliate% 4", "Gain %invisible%  at the start of each round"  ]
+					"level": 7, "health": 15, "move": 6, "attack": 5, "attributes": [ "%retaliate% 4", "Gain %invisible%","at the start of each round"  ]
 				}
 			]
 		},

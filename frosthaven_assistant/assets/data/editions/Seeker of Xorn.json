@@ -105,43 +105,43 @@
 			"levels": [
 				{
 					"level": 0,
-					"normal": { "health": 3, "move": 2, "attack": 3, "attributes": [ "Attackers gain Disadvantage" ]},
-					"elite": { "health": 5, "move": 3, "attack": 4, "attributes": [ "Attackers gain Disadvantage" ]}
+					"normal": { "health": 3, "move": 2, "attack": 3, "attributes": [ "^^Attackers gain","^^Disadvantage" ]},
+					"elite": { "health": 5, "move": 3, "attack": 4, "attributes": [ "^^Attackers gain","^^Disadvantage"]}
 				},
 				{
 					"level": 1,
-					"normal": { "health": 5, "move": 2, "attack": 3, "attributes": [ "Attackers gain Disadvantage" ]},
-					"elite": { "health": 8, "move": 3, "attack": 4, "attributes": [ "Attackers gain Disadvantage" ]}
+					"normal": { "health": 5, "move": 2, "attack": 3, "attributes": [ "^^Attackers gain","^^Disadvantage" ]},
+					"elite": { "health": 8, "move": 3, "attack": 4, "attributes": [ "^^Attackers gain","^^Disadvantage" ]}
 				},
 				{
 					"level": 2,
-					"normal": { "health": 6, "move": 2, "attack": 4, "attributes": [ "Attackers gain Disadvantage" ]},
-					"elite": { "health": 11, "move": 3, "attack": 4, "attributes": [ "Attackers gain Disadvantage" ]}
+					"normal": { "health": 6, "move": 2, "attack": 4, "attributes": [ "^^Attackers gain","^^Disadvantage" ]},
+					"elite": { "health": 11, "move": 3, "attack": 4, "attributes": [ "^^Attackers gain","^^Disadvantage" ]}
 				},
 				{
 					"level": 3,
-					"normal": { "health": 7, "move": 3, "attack": 4, "attributes": [ "Attackers gain Disadvantage" ]},
-					"elite": { "health": 13, "move": 3, "attack": 5, "attributes": [ "Attackers gain Disadvantage" ]}
+					"normal": { "health": 7, "move": 3, "attack": 4, "attributes": [ "^^Attackers gain","^^Disadvantage" ]},
+					"elite": { "health": 13, "move": 3, "attack": 5, "attributes": [ "^^Attackers gain","^^Disadvantage" ]}
 				},
 				{
 					"level": 4,
-					"normal": { "health": 8, "move": 3, "attack": 5, "attributes": [ "Attackers gain Disadvantage" ]},
-					"elite": { "health": 15, "move": 4, "attack": 5, "attributes": [ "Attackers gain Disadvantage" ]}
+					"normal": { "health": 8, "move": 3, "attack": 5, "attributes": [ "^^Attackers gain","^^Disadvantage" ]},
+					"elite": { "health": 15, "move": 4, "attack": 5, "attributes": [ "^^Attackers gain","^^Disadvantage" ]}
 				},
 				{
 					"level": 5,
-					"normal": { "health": 11, "move": 3, "attack": 5, "attributes": [ "Attackers gain Disadvantage" ]},
-					"elite": { "health": 17, "move": 4, "attack": 6, "attributes": [ "Attackers gain Disadvantage" ]}
+					"normal": { "health": 11, "move": 3, "attack": 5, "attributes": [ "^^Attackers gain","^^Disadvantage" ]},
+					"elite": { "health": 17, "move": 4, "attack": 6, "attributes": [ "^^Attackers gain","^^Disadvantage" ]}
 				},
 				{
 					"level": 6,
-					"normal": { "health": 14, "move": 3, "attack": 5, "attributes": [ "Attackers gain Disadvantage" ]},
-					"elite": { "health": 21, "move": 4, "attack": 6, "attributes": [ "Attackers gain Disadvantage" ]}
+					"normal": { "health": 14, "move": 3, "attack": 5, "attributes": [ "^^Attackers gain","^^Disadvantage" ]},
+					"elite": { "health": 21, "move": 4, "attack": 6, "attributes": [ "^^Attackers gain","^^Disadvantage" ]}
 				},
 				{
 					"level": 7,
-					"normal": { "health": 15, "move": 3, "attack": 6, "attributes": [ "Attackers gain Disadvantage" ]},
-					"elite": { "health": 21, "move": 4, "attack": 8, "attributes": [ "Attackers gain Disadvantage" ]}
+					"normal": { "health": 15, "move": 3, "attack": 6, "attributes": [ "^^Attackers gain","^^Disadvantage" ]},
+					"elite": { "health": 21, "move": 4, "attack": 8, "attributes": [ "^^Attackers gain","^^Disadvantage" ]}
 				}
 			]
 		}
