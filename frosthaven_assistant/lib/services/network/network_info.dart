@@ -22,17 +22,6 @@ class NetworkInformation {
       //wifiBroadcast,
       //wifiSubmask;
 
-  NetworkInfo() {
-
-
-      var subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-        // Got a new connectivity status!
-      }
-    }
-
-  }
-
-
   Future<void> initNetworkInfo() async {
     outgoingIPv4 = await Ipify.ipv4();
 
