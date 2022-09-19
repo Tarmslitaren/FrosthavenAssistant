@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/draw_button.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
+import 'package:frosthaven_assistant/services/network/network_ui.dart';
 
 import '../Resource/game_methods.dart';
 import '../Resource/game_state.dart';
@@ -209,7 +210,7 @@ Widget createLevelWidget(BuildContext context) {
                 "level: ${gameState.level.value} trap: ${GameMethods.getTrapValue()} hazard: ${GameMethods.getHazardValue()} xp: +${GameMethods.getXPValue()} coin: x${GameMethods.getCoinValue()}",
                 style: textStyle,
               );
-            })
+            }),
       ],
     ),
   );
@@ -256,6 +257,7 @@ Widget createBottomBar(BuildContext context) {
                             children: [
                               const DrawButton(),
                               createLevelWidget(context),
+                              const NetworkUI(),
                               modifiersFitOnBar(context)
                                   ? const ModifierDeckWidget(name: '',)
                                   : Container()

@@ -7,9 +7,8 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/network/network_info.dart';
 
 import '../service_locator.dart';
+import 'network.dart';
 //import 'dart:developer' as developer;
-
-Server server = Server();
 
 class Server {
   final serverVersion = 1;
@@ -28,11 +27,11 @@ class Server {
     //cannot bind to outgoing
     //server = await ServerSocket.bind(InternetAddress.anyIPv4, 4567);
     String connectTo = "0.0.0.0";
-    if(NetworkInformation.outgoingIPv4 != null) {
+    /*if(NetworkInformation.outgoingIPv4 != null) {
       connectTo = NetworkInformation.outgoingIPv4!;
-    }
-    if (NetworkInformation.wifiIPv4 != null && NetworkInformation.wifiIPv4!.isNotEmpty) {
-      connectTo = NetworkInformation.wifiIPv4!;
+    }*/ //it is wrong to try to bind to an outgoing ip, since it is not owned by the network?
+    if (getIt<Network>().networkInfo.wifiIPv4 != null && getIt<Network>().networkInfo.wifiIPv4!.isNotEmpty) {
+      connectTo = getIt<Network>().networkInfo.wifiIPv4!;
     }
     await ServerSocket.bind(connectTo,
             int.parse(getIt<Settings>().lastKnownPort))
@@ -40,8 +39,9 @@ class Server {
       runZoned(() {
         _serverSocket = serverSocket;
         getIt<Settings>().server.value = true;
-        print(
-            'Server Online: IP: ${_serverSocket!.address.address}, Port: ${_serverSocket!.port.toString()}');
+        String info = 'Server Online: IP: ${_serverSocket!.address.address}, Port: ${_serverSocket!.port.toString()}';
+        print(info);
+        getIt<Network>().networkMessage.value = info;
         _gameState.commandIndex.value = -1;
         _gameState.commands.clear();
         _gameState.commandDescriptions.clear();
@@ -60,6 +60,7 @@ class Server {
           handleConnection(client);
         }, onError: (e) {
           print('Server error: $e');
+          getIt<Network>().networkMessage.value = 'Server error: $e';
         });
       });
     });
@@ -69,6 +70,7 @@ class Server {
     if (_serverSocket != null) {
 
       print('Server Offline');
+      getIt<Network>().networkMessage.value = 'Server Offline';
       _serverSocket!.close();
 
       for (var item in _clients) {
@@ -83,8 +85,10 @@ class Server {
   }
 
   void handleConnection(Socket client) {
-    print('Connection from'
-        ' ${client.remoteAddress.address}:${client.remotePort}');
+    String info = 'Connection from'
+        ' ${client.remoteAddress.address}:${client.remotePort}';
+    print(info);
+    getIt<Network>().networkMessage.value = info;
 
     bool existed = false;
     for (var existingClient in _clients) {
@@ -138,6 +142,7 @@ class Server {
                   //getIt<GameState>().modifierDeck.
                   //client.write('your gameState changes received by server');
                 } else {
+                  getIt<Network>().networkMessage.value = "index mismatch: ignoring incoming message";
                   print(
                       'Got same or lower index. ignoring: received index: $newIndex current index ${_gameState.commandIndex.value}');
                   //ignore if same index from server
@@ -188,6 +193,7 @@ class Server {
         // handle the client closing the connection
         onDone: () {
           print('Client left');
+          getIt<Network>().networkMessage.value = 'Client left.';
           client.close();
           for (int i = 0; i < _clients.length; i++) {
             if (_clients[i].address == client.address) {

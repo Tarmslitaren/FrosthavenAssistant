@@ -7,6 +7,7 @@ import 'package:network_info_plus/network_info_plus.dart';
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
 import '../../services/network/client.dart';
+import '../../services/network/network.dart';
 import '../../services/network/network_info.dart';
 import '../../services/network/server.dart';
 import '../../services/service_locator.dart';
@@ -25,7 +26,7 @@ class SettingsMenuState extends State<SettingsMenu> {
   initState() {
     // at the beginning, all items are shown
     super.initState();
-    NetworkInformation.initNetworkInfo();
+    getIt<Network>().networkInfo.initNetworkInfo();
   }
 
   final TextEditingController _serverTextController = TextEditingController();
@@ -245,14 +246,14 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 if (settings.client.value != true) {
                                   settings.lastKnownPort =
                                       _portTextController.text;
-                                  client
+                                  getIt<Network>().client
                                       .connect(_serverTextController.text)
                                       .then((value) => null);
                                   settings.lastKnownConnection =
                                       _serverTextController.text;
                                   settings.saveToDisk();
                                 } else {
-                                  client.disconnect();
+                                  getIt<Network>().client.disconnect();
                                 }
                               });
                             });
@@ -301,10 +302,10 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   settings.lastKnownPort =
                                       _portTextController.text;
                                   settings.saveToDisk();
-                                  server.startServer();
+                                  getIt<Network>().server.startServer();
                                 } else {
                                   //close server?
-                                  server.stopServer();
+                                  getIt<Network>().server.stopServer();
                                 }
                               });
                             //});
@@ -312,16 +313,16 @@ class SettingsMenuState extends State<SettingsMenu> {
                   Container(
                     width: 200,
                     height: 20,
-                    child: Text(NetworkInformation.wifiIPv4 == null
+                    child: Text(getIt<Network>().networkInfo.wifiIPv4 == null
                         ? ""
-                        : NetworkInformation.wifiIPv4!),
+                        : getIt<Network>().networkInfo.wifiIPv4!),
                   ),
                   SizedBox(
                     width: 200,
                     height: 20,
-                    child: Text(NetworkInformation.outgoingIPv4 == null
+                    child: Text(getIt<Network>().networkInfo.outgoingIPv4 == null
                         ? ""
-                        : NetworkInformation.outgoingIPv4!),
+                        : getIt<Network>().networkInfo.outgoingIPv4!),
                   ),
                   Container(
                     margin: const EdgeInsets.only(top: 20),

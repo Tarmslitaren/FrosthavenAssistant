@@ -10,9 +10,10 @@ import 'dart:async';
 
 
 class NetworkInformation {
-  static final NetworkInfo networkInfo = NetworkInfo();
 
-  static String? wifiName,
+  final NetworkInfo networkInfo = NetworkInfo();
+
+  String? wifiName,
       wifiBSSID,
       wifiIPv4,
       outgoingIPv4; //
@@ -21,8 +22,18 @@ class NetworkInformation {
       //wifiBroadcast,
       //wifiSubmask;
 
+  NetworkInfo() {
 
-  static Future<void> initNetworkInfo() async {
+
+      var subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+        // Got a new connectivity status!
+      }
+    }
+
+  }
+
+
+  Future<void> initNetworkInfo() async {
     outgoingIPv4 = await Ipify.ipv4();
 
     try {

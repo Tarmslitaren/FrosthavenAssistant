@@ -3,13 +3,12 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:developer' as developer;
 
+import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/network/server.dart';
 
 import '../../Resource/game_state.dart';
 import '../../Resource/settings.dart';
 import '../service_locator.dart';
-
-Client client = Client();
 
 class Client {
   Socket? _socket;
@@ -26,14 +25,16 @@ class Client {
         runZoned(() {
           _socket = socket;
           getIt<Settings>().client.value = true;
-          print(
-              'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}');
-          client.send("init version:${server.serverVersion}");
+          String info = 'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
+          print(info);
+          getIt<Network>().networkMessage.value = info;
+          send("init version:${getIt<Network>().server.serverVersion}");
           listen();
         });
       });
     } catch (error) {
       print("client error: $error");
+      getIt<Network>().networkMessage.value = "client error: $error";
       getIt<Settings>().client.value = false;
     }
   }
@@ -45,7 +46,6 @@ class Client {
         // handle data from the server
             (Uint8List data) {
           String message = String.fromCharCodes(data);
-          print('Server: $message');
           message = _leftOverMessage+message;
           _leftOverMessage = "";
 
@@ -98,6 +98,7 @@ class Client {
         // handle errors
         onError: (error) {
           print('Client error: $error');
+          getIt<Network>().networkMessage.value = "client error: $error";
           _socket!.destroy();
           _cleanup();
         },
@@ -105,12 +106,14 @@ class Client {
         // handle server ending connection
         onDone: () {
           print('Lost connection to server.');
+          getIt<Network>().networkMessage.value = "Lost connection to server";
           _socket!.destroy();
           _cleanup();
         },
       );
     } catch (error) {
       print(error);
+      getIt<Network>().networkMessage.value = error.toString();
       _cleanup();
     }
   }
@@ -128,6 +131,7 @@ class Client {
   void disconnect() {
     if (_socket != null) {
       print('Client disconnected');
+      getIt<Network>().networkMessage.value = "client disconnected";
       _socket!.close();
       //_socket!.destroy();
       _cleanup();

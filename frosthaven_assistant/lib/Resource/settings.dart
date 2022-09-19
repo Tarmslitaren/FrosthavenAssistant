@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 import '../../services/network/network_info.dart';
+import '../services/network/network.dart';
 import '../services/service_locator.dart';
 
 enum Style {
@@ -43,7 +44,7 @@ class Settings {
     await loadFromDisk();
     setFullscreen(fullScreen.value);
 
-    NetworkInformation.initNetworkInfo();
+    getIt<Network>().networkInfo.initNetworkInfo();
   }
 
   Future<void> setFullscreen(bool fullscreen) async {

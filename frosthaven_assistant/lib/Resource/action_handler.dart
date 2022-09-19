@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import '../services/network/client.dart';
+import '../services/network/network.dart';
 import '../services/network/server.dart';
 import '../services/service_locator.dart';
 import 'game_state.dart';
@@ -54,7 +55,7 @@ class ActionHandler {
        if(isServer) {
         print(
             'server sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
-        server.send(
+        getIt<Network>().server.send(
             "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last.getState()}");
       }
        //only allow server to undo
@@ -84,7 +85,7 @@ class ActionHandler {
       if (isServer) {
         print(
             'server sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
-        server.send(
+        getIt<Network>().server.send(
             "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last.getState()}");
       }
       //only allow server to redo
@@ -128,12 +129,12 @@ class ActionHandler {
     if (isServer) {
       print(
           'server sends, index: ${commandIndex.value}, description:${command.describe()}');
-      server.send(
+      getIt<Network>().server.send(
           "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameSaveStates.last.getState()}");
     } else if (isClient) {
       print(
           'client sends, index: ${commandIndex.value}, description:${command.describe()}');
-      client.send(
+      getIt<Network>().client.send(
           "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameSaveStates.last.getState()}");
     }
   }
