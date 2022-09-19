@@ -36,7 +36,7 @@ class Settings {
   final server = ValueNotifier<bool>(false); //not saving these
   final client = ValueNotifier<bool>(false);
   String lastKnownConnection = "192.168.1.???"; //only these
-  String lastKnownPort = "58888";
+  String lastKnownPort = "4567";
 
 
   Future<void> init() async {

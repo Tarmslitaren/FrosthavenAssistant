@@ -27,14 +27,21 @@ class Server {
     //_clients.clear();
     //cannot bind to outgoing
     //server = await ServerSocket.bind(InternetAddress.anyIPv4, 4567);
-    await ServerSocket.bind(NetworkInformation.wifiIPv4,
+    String connectTo = "0.0.0.0";
+    if(NetworkInformation.outgoingIPv4 != null) {
+      connectTo = NetworkInformation.outgoingIPv4!;
+    }
+    if (NetworkInformation.wifiIPv4 != null && NetworkInformation.wifiIPv4!.isNotEmpty) {
+      connectTo = NetworkInformation.wifiIPv4!;
+    }
+    await ServerSocket.bind(connectTo,
             int.parse(getIt<Settings>().lastKnownPort))
         .then((ServerSocket serverSocket) {
       runZoned(() {
         _serverSocket = serverSocket;
         getIt<Settings>().server.value = true;
         print(
-            'Server Online: IP: ${NetworkInformation.wifiIPv4}, Port: ${getIt<Settings>().lastKnownPort}');
+            'Server Online: IP: ${_serverSocket!.address.address}, Port: ${_serverSocket!.port.toString()}');
         _gameState.commandIndex.value = -1;
         _gameState.commands.clear();
         _gameState.commandDescriptions.clear();
@@ -60,8 +67,16 @@ class Server {
 
   void stopServer() {
     if (_serverSocket != null) {
-      _serverSocket!.close();
+
       print('Server Offline');
+      _serverSocket!.close();
+
+      for (var item in _clients) {
+        item.close();
+      }
+      _clients.clear();
+      //_serverSocket!.close();
+      //print('Server Offline');
     }
     getIt<Settings>().server.value = false;
     leftOverMessage = "";

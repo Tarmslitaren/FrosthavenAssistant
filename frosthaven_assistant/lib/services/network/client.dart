@@ -104,7 +104,7 @@ class Client {
 
         // handle server ending connection
         onDone: () {
-          print('Server left.');
+          print('Lost connection to server.');
           _socket!.destroy();
           _cleanup();
         },
@@ -129,6 +129,7 @@ class Client {
     if (_socket != null) {
       print('Client disconnected');
       _socket!.close();
+      //_socket!.destroy();
       _cleanup();
     }
   }
