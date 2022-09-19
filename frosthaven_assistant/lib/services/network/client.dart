@@ -4,7 +4,6 @@ import 'dart:typed_data';
 import 'dart:developer' as developer;
 
 import 'package:frosthaven_assistant/services/network/network.dart';
-import 'package:frosthaven_assistant/services/network/server.dart';
 
 import '../../Resource/game_state.dart';
 import '../../Resource/settings.dart';
