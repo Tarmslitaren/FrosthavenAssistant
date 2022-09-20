@@ -364,6 +364,18 @@ class StatusMenuState extends State<StatusMenu> {
                       }
                     }
                   }
+                  bool hasXp = false;
+                  if(widget.characterId != null && !isSummon) {
+                    hasXp = true;
+                    for(var item in _gameState.currentList) {
+                      if (item.id == widget.characterId) {
+                        if((item as Character).characterClass.name == "Objective" ||
+                            (item).characterClass.name == "Escort"){
+                          hasXp = false;
+                        }
+                      }
+                    }
+                  }
 
                   bool canBeCursed = true;
                   for (var item in immunities) {
@@ -390,7 +402,7 @@ class StatusMenuState extends State<StatusMenu> {
                         ChangeHealthCommand(0, figureId, ownerId),
                         figure.maxHealth.value,
                         "assets/images/blood.png", context, figure, false, Colors.red),*/
-                      widget.characterId != null && !isSummon
+                      hasXp
                           ? CounterButton(
                               (figure as CharacterState).xp,
                               ChangeXPCommand(0, figureId, ownerId),

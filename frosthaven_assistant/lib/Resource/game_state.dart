@@ -409,14 +409,14 @@ class GameSaveState{
     if (modifierDeckData.containsKey("curses")) {
       int curses = modifierDeckData['curses'];
       if(curses != curseValue){
-        print("curses wtf:" + curses.toString()+ " " + curseValue.toString());
+      //  print("curses wtf:" + curses.toString()+ " " + curseValue.toString());
       }
       state.curses.value = curses;
     }
     if (modifierDeckData.containsKey("blesses")) {
       int blesses = modifierDeckData['blesses'];
       if(blesses != blessValue){
-        print("curses wtf:" + blesses.toString()+ " " + blessValue.toString());
+      //  print("curses wtf:" + blesses.toString()+ " " + blessValue.toString());
       }
       state.blesses.value = blesses;
     }
