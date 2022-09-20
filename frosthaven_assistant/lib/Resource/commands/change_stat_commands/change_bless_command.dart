@@ -5,23 +5,28 @@ import '../../modifier_deck_state.dart';
 import 'change_stat_command.dart';
 
 class ChangeBlessCommand extends ChangeStatCommand {
+
+  ModifierDeck? deck;
   ChangeBlessCommand(super.change, super.figureId, super.ownerId);
+  ChangeBlessCommand.deck(this.deck) : super(0, '', '');
 
   @override
   void execute() {
 
-    ModifierDeck deck = getIt<GameState>().modifierDeck;
     //Figure figure = getFigure(ownerId, figureId)!;
-    for (var item in getIt<GameState>().currentList) {
-      if (item.id == ownerId) {
-        if(item is Monster && item.isAlly) {
-          deck = getIt<GameState>().modifierDeckAllies;
+    if (deck == null) {
+      deck = getIt<GameState>().modifierDeck;
+      for (var item in getIt<GameState>().currentList) {
+        if (item.id == ownerId) {
+          if (item is Monster && item.isAlly) {
+            deck = getIt<GameState>().modifierDeckAllies;
+          }
         }
       }
     }
 
 
-    deck.blesses.value += change;
+    deck!.blesses.value += change;
   }
 
   @override

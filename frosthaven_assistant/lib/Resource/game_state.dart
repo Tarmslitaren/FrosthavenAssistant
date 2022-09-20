@@ -400,13 +400,28 @@ class GameSaveState{
         newDiscardList.add(ModifierCard(CardType.add, gfx));
       }
     }
-    state.curses.value = curseValue;
-    state.blesses.value = blessValue;
     state.drawPile.getList().clear();
     state.discardPile.getList().clear();
     state.drawPile.setList(newDrawList);
     state.discardPile.setList(newDiscardList);
     state.cardCount.value = state.drawPile.size();
+
+    if (modifierDeckData.containsKey("curses")) {
+      int curses = modifierDeckData['curses'];
+      if(curses != curseValue){
+        print("curses wtf:" + curses.toString()+ " " + curseValue.toString());
+      }
+      state.curses.value = curses;
+    }
+    if (modifierDeckData.containsKey("blesses")) {
+      int blesses = modifierDeckData['blesses'];
+      if(blesses != blessValue){
+        print("curses wtf:" + blesses.toString()+ " " + blessValue.toString());
+      }
+      state.blesses.value = blesses;
+    }
+    //state.curses.value = curseValue; //order is important, since the listeners on these values will add extra curses if set before the list
+    //state.blesses.value = blessValue;
 
 
 

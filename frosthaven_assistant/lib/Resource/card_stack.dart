@@ -14,6 +14,16 @@ class CardStack<E> {
 
   @override
   String toString() {
+    String retVal = "[";
+    for (var item in _list) {
+      retVal += "${item.toString()},";
+    }
+    if(_list.isNotEmpty) {
+      retVal = retVal.substring(0, retVal.length - 1);
+    }
+    retVal += "]";
+    return retVal;
+
     return _list.toString();
   }
 

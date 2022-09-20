@@ -6,23 +6,25 @@ import 'change_stat_command.dart';
 
 class ChangeCurseCommand extends ChangeStatCommand {
   ChangeCurseCommand(super.change, super.figureId, super.ownerId);
+  ChangeCurseCommand.deck(this.deck) : super(0, '', '');
+
+  ModifierDeck? deck;
 
   @override
   void execute() {
 
-    ModifierDeck deck = getIt<GameState>().modifierDeck;
-    //Figure figure = getFigure(ownerId, figureId)!;
-    for (var item in getIt<GameState>().currentList) {
-      if (item.id == ownerId) {
-        if(item is Monster && item.isAlly) {
-          deck = getIt<GameState>().modifierDeckAllies;
+    if(deck == null) {
+      deck = getIt<GameState>().modifierDeck;
+      //Figure figure = getFigure(ownerId, figureId)!;
+      for (var item in getIt<GameState>().currentList) {
+        if (item.id == ownerId) {
+          if (item is Monster && item.isAlly) {
+            deck = getIt<GameState>().modifierDeckAllies;
+          }
         }
       }
     }
-
-
-    //figure.chill.value += change;
-    deck.curses.value += change;
+    deck!.curses.value += change;
 
   }
 

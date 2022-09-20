@@ -39,14 +39,14 @@ class Item extends StatelessWidget {
 class ModifierCardMenu extends StatefulWidget {
   ModifierCardMenu({Key? key, required this.name}) : super(key: key){
     if (name == "Allies") {
-      deck = getIt<GameState>().modifierDeckAllies;
+     // deck = getIt<GameState>().modifierDeckAllies;
     }else {
-      deck = getIt<GameState>().modifierDeck;
+     // deck = getIt<GameState>().modifierDeck;
     }
   }
 
   final String name;
-  late final ModifierDeck deck;
+  //late final ModifierDeck deck;
 
   @override
   ModifierCardMenuState createState() => ModifierCardMenuState();
@@ -61,11 +61,11 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     super.initState();
   }
 
-  void markAsOpen(int revealed) {
+  void markAsOpen(int revealed, ModifierDeck deck) {
     setState(() {
       _revealedList = [];
       var drawPile =
-          widget.deck.drawPile.getList().reversed.toList();
+          deck.drawPile.getList().reversed.toList();
       for (int i = 0; i < revealed; i++) {
         _revealedList.add(drawPile[i]);
       }
@@ -81,7 +81,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     return false;
   }
 
-  Widget buildRevealButton(int nrOfButtons, int nr) {
+  Widget buildRevealButton(int nrOfButtons, int nr, ModifierDeck deck) {
     String text = "All";
     if (nr < nrOfButtons) {
       text = nr.toString();
@@ -91,7 +91,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         child: TextButton(
           child: Text(text),
           onPressed: () {
-            markAsOpen(nr);
+            markAsOpen(nr, deck);
           },
         ));
   }
@@ -180,20 +180,24 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
+          String name = widget.name;
+          if (name.isEmpty) {
+            name = "Enemies";
+          }
+          ModifierDeck deck = _gameState.modifierDeck;
+          if(name != "Enemies") {
+            deck = _gameState.modifierDeckAllies;
+          }
           var drawPile =
-              widget.deck.drawPile.getList().reversed.toList();
-          var discardPile = widget.deck.discardPile.getList();
+              deck.drawPile.getList().reversed.toList();
+          var discardPile = deck.discardPile.getList();
           bool hasDiviner = false;
           for (var item in _gameState.currentList) {
             if (item is Character && item.characterClass.name == "Diviner") {
               hasDiviner = true;
             }
           }
-          double scale = getScaleByReference(context);
-          String name = widget.name;
-          if (name.isEmpty) {
-            name = "Enemies";
-          }
+
           return Container(
               constraints: BoxConstraints(
                   //maxWidth: 118 * scale * 2 + 98,
@@ -220,7 +224,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 Row(
                                     children: [
                                       if (hasDiviner && widget.name.isEmpty)
-                                        if (widget.deck.badOmen.value ==
+                                        if (deck.badOmen.value ==
                                           0)
                                         TextButton(
                                           onPressed: () {
@@ -228,10 +232,10 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                           },
                                           child: Text("Bad Omen"),
                                         ),
-                                      if (widget.deck.badOmen.value >
+                                      if (deck.badOmen.value >
                                           0)
                                         Text(
-                                            "BadOmensLeft: ${widget.deck.badOmen.value}",
+                                            "BadOmensLeft: ${deck.badOmen.value}",
                                             style: getTitleTextStyle()),
                                       TextButton(
                                         onPressed: () {
@@ -239,15 +243,15 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                               .action(EnfeeblingHexCommand());
                                         },
                                         child: Text(
-                                            "Add -1 card (added : ${widget.deck.addedMinusOnes.value})"),
+                                            "Add -1 card (added : ${deck.addedMinusOnes.value})"),
                                       ),
                                     ],
                                   ),
                                 Row(
                                   children: [
                                     CounterButton(
-                                        widget.deck.blesses,
-                                        ChangeBlessCommand(0, "unknown", "unknown"),
+                                        deck.blesses,
+                                        ChangeBlessCommand.deck(deck),
                                         10,
                                         "assets/images/abilities/bless.png",
                                         true,
@@ -256,8 +260,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                         ownerId: "unknown"
                                     ),
                                     CounterButton(
-                                        widget.deck.curses,
-                                        ChangeCurseCommand(0, "unknown", "unknown"),
+                                        deck.curses,
+                                        ChangeCurseCommand.deck(deck),
                                         10,
                                         "assets/images/abilities/curse.png",
                                         true,
@@ -279,27 +283,27 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                       ),
                                       drawPile.length > 0
                                           ? buildRevealButton(
-                                              drawPile.length, 1)
+                                              drawPile.length, 1, deck)
                                           : Container(),
                                       drawPile.length > 1
                                           ? buildRevealButton(
-                                              drawPile.length, 2)
+                                              drawPile.length, 2, deck)
                                           : Container(),
                                       drawPile.length > 2
                                           ? buildRevealButton(
-                                              drawPile.length, 3)
+                                              drawPile.length, 3, deck)
                                           : Container(),
                                       drawPile.length > 3
                                           ? buildRevealButton(
-                                              drawPile.length, 4)
+                                              drawPile.length, 4, deck)
                                           : Container(),
                                       drawPile.length > 4
                                           ? buildRevealButton(
-                                              drawPile.length, 5)
+                                              drawPile.length, 5, deck)
                                           : Container(),
                                       drawPile.length > 5
                                           ? buildRevealButton(
-                                              drawPile.length, 6)
+                                              drawPile.length, 6, deck)
                                           : Container(),
                                     ]),
                               ])),

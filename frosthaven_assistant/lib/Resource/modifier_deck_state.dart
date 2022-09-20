@@ -163,8 +163,8 @@ class ModifierDeck {
   String toString() {
     return '{'
         //'"cardCount": ${cardCount.value}, '
-        //'"blesses": ${blesses.value}, '
-        // '"curses": ${curses.value}, '
+        '"blesses": ${blesses.value}, '
+         '"curses": ${curses.value}, '
         // '"needsShuffle": ${needsShuffle}, '
         '"addedMinusOnes": ${addedMinusOnes.value.toString()}, '
         '"badOmen": ${badOmen.value.toString()}, '
