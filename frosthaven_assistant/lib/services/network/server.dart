@@ -84,6 +84,11 @@ class Server {
     }
     getIt<Settings>().server.value = false;
     leftOverMessage = "";
+
+    _gameState.gameSaveStates.removeRange(0, _gameState.gameSaveStates.length-1);
+    _gameState.commands.clear();
+    _gameState.commandIndex.value = -1;
+    _gameState.commandDescriptions.clear();
   }
 
   void handleConnection(Socket client) {
@@ -94,7 +99,7 @@ class Server {
 
     bool existed = false;
     for (var existingClient in _clients) {
-      if (client.address == existingClient.address) {
+      if (client.remoteAddress == existingClient.remoteAddress) {
         existed = true;
       }
     }
@@ -132,7 +137,11 @@ class Server {
                 int newIndex = int.parse(indexString);
                 if(newIndex > _gameState.commandDescriptions.length) {
                   //invalid: index too high. send correction to clients
-                  send("Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last.getState()}");
+                  String commandDescription = "";
+                  if(_gameState.commandDescriptions.length > 0) {
+                    commandDescription = _gameState.commandDescriptions.last;
+                  }
+                  send("Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last.getState()}");
                 } else if (newIndex > _gameState.commandIndex.value) {
                   _gameState.commandIndex.value = int.parse(indexString);
                   if (newIndex >= 0) {
@@ -141,12 +150,20 @@ class Server {
                   }
                   _gameState.loadFromData(data);
                   _gameState.updateAllUI();
+                  sendToOthers("Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last.getState()}", client);
                   //getIt<GameState>().modifierDeck.
                   //client.write('your gameState changes received by server');
                 } else {
                   getIt<Network>().networkMessage.value = "index mismatch: ignoring incoming message";
                   print(
                       'Got same or lower index. ignoring: received index: $newIndex current index ${_gameState.commandIndex.value}');
+
+                  //overwrite client state with current server state.
+                  sendToOnly(
+                      "Index:${_gameState.commandIndex
+                          .value}Description:${_gameState
+                          .commandDescriptions[_gameState.commandIndex.value]}GameState:${_gameState
+                          .gameSaveStates.last.getState()}", client);
                   //ignore if same index from server
                 }
               } else if (message.startsWith("init")) {
@@ -156,8 +173,9 @@ class Server {
                 int version = int.parse(initMessageParts[1]);
                 if(version != serverVersion) {
                   //version mismatch
-                  client.write(
-                      "S3nD:Error: Server Version is $serverVersion. client version is $version. Please update your client.[EOM]");
+                  getIt<Network>().networkMessage.value = "Client with old version tried to connect";
+                  sendToOnly(
+                      "Error: Server Version is $serverVersion. client version is $version. Please update your client.", client);
 
                 } else {
                   String commandDescription = "";
@@ -168,10 +186,10 @@ class Server {
                   print(
                       'Server sends init response: "S3nD:Index:${_gameState
                           .commandIndex.value}Description:$commandDescription');
-                  client.write(
-                      "S3nD:Index:${_gameState.commandIndex
+                  sendToOnly(
+                      "Index:${_gameState.commandIndex
                           .value}Description:${commandDescription}GameState:${_gameState
-                          .gameSaveStates.last.getState()}[EOM]");
+                          .gameSaveStates.last.getState()}", client);
                 }
               }
             } else {
@@ -185,7 +203,7 @@ class Server {
           print(error);
           client.close();
           for (int i = 0; i < _clients.length; i++) {
-            if (_clients[i].address == client.address) {
+            if (_clients[i].remoteAddress == client.remoteAddress) {
               _clients.removeAt(i);
               break;
             }
@@ -198,20 +216,18 @@ class Server {
           getIt<Network>().networkMessage.value = 'Client left.';
           client.close();
           for (int i = 0; i < _clients.length; i++) {
-            if (_clients[i].address == client.address) {
+            if (_clients[i].remoteAddress == client.remoteAddress) {
               _clients.removeAt(i);
               break;
             }
           }
-          //todo: toast
-          //showToast(context, 'Client left');
         },
       );
     } catch (error) {
       print(error);
       client.close();
       for (int i = 0; i < _clients.length; i++) {
-        if (_clients[i].address == client.address) {
+        if (_clients[i].remoteAddress == client.remoteAddress) {
           _clients.removeAt(i);
           break;
         }
@@ -222,6 +238,18 @@ class Server {
   void send(String data) {
     for (Socket client in _clients) {
       client.write("S3nD:$data[EOM]");
+    }
+  }
+
+  void sendToOnly(String data, Socket client) {
+    client.write("S3nD:$data[EOM]");
+  }
+
+  void sendToOthers(String data, Socket client) {
+    for (Socket item in _clients) {
+      if (item.remoteAddress != client.remoteAddress) {
+        item.write("S3nD:$data[EOM]");
+      }
     }
   }
 }

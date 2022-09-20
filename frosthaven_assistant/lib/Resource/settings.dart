@@ -215,10 +215,10 @@ class Settings {
         }
       }
     }
-    gameState.gameSaveStates.removeRange(0, gameState.gameSaveStates.length-1);
-    gameState.commands.clear();
-    gameState.commandIndex.value = -1;
-    gameState.commandDescriptions.clear();
+    //gameState.gameSaveStates.removeRange(0, gameState.gameSaveStates.length-1);
+   // gameState.commands.clear();
+   // gameState.commandIndex.value = -1;
+   // gameState.commandDescriptions.clear();
     gameState.updateList.value++;
   }
 

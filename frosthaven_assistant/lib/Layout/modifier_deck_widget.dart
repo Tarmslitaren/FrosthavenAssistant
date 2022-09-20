@@ -80,7 +80,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   static bool initAnimationEnabled() {
     if(getIt<Settings>().client.value || getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0 &&
     getIt<GameState>().commandDescriptions[getIt<GameState>().commandIndex.value].contains("modifier card")){
-      //also: missing info. need to check for updateForUndo
+      //todo: also: missing info. need to check for updateForUndo
       return true;
     }
     return false;
@@ -93,8 +93,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
     var screenSize = MediaQuery.of(context).size;
     double xOffset =
-        -(screenSize.width / 2 - 63 * settings.userScalingBars.value);
-    double yOffset = -(screenSize.height / 2 - height / 2);
+        -(screenSize.width / 2 - 63 * settings.userScalingBars.value); //TODO: tweak to be exactly center
+    double yOffset = -(screenSize.height / 2 - height / 2); //TODO: not correct depending on position of the deck widget
 
     if (!animationsEnabled) {
       return Container(

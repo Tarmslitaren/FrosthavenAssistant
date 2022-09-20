@@ -362,14 +362,20 @@ class GameSaveState{
     ModifierDeck state = ModifierDeck(name);
     List<ModifierCard> newDrawList = [];
     List drawPile = modifierDeckData["drawPile"] as List;
+    //state.curses.value = 0;
+    //state.blesses.value = 0;
+    int blessValue = 0;
+    int curseValue = 0;
     for (var item in drawPile) {
       String gfx = item["gfx"];
       if (gfx == "curse") {
-        state.curses.value++;
+        //state.curses.value++;
+        curseValue++;
         newDrawList.add(ModifierCard(CardType.curse, gfx));
       }
       else if (gfx == "bless") {
-        state.blesses.value++;
+        //state.blesses.value++;
+        blessValue++;
         newDrawList.add(ModifierCard(CardType.curse, gfx));
       }
       else if (gfx == "nullAttack" || gfx == "doubleAttack") {
@@ -394,11 +400,15 @@ class GameSaveState{
         newDiscardList.add(ModifierCard(CardType.add, gfx));
       }
     }
+    state.curses.value = curseValue;
+    state.blesses.value = blessValue;
     state.drawPile.getList().clear();
     state.discardPile.getList().clear();
     state.drawPile.setList(newDrawList);
     state.discardPile.setList(newDiscardList);
     state.cardCount.value = state.drawPile.size();
+
+
 
     //TODO: do we need to handle these for allies? probably not
     if(identifier == 'modifierDeck') {
@@ -661,7 +671,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
         '"modifierDeck": ${modifierDeck.toString()}, '
         '"modifierDeckAllies": ${modifierDeckAllies.toString()}, '
         '"unlockedClasses": ${jsonEncode(unlockedClasses.toList())}, '
-        '"elementState": ${json.encode(elements)} ' //didn't like the map?
+        '"elementState": ${json.encode(elements)} '
         '}';
   }
 

@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import '../services/service_locator.dart';
-import 'commands/change_stat_commands/change_stat_command.dart';
 import 'game_state.dart';
 
 void openDialogOld(BuildContext context, Widget widget) {
   showDialog(context: context, builder: (BuildContext context) => widget);
-  /*Navigator.of(context).push(MaterialPageRoute<void>(
-    builder: (BuildContext context) {
-      return widget;
-    },
-  ));*/
 }
 
 TextStyle getTitleTextStyle() {
@@ -25,14 +18,16 @@ TextStyle getSmallTextStyle() {
   return TextStyle(
     fontSize: 14,
     color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black,
-    /*shadows: const [
-        Shadow(
-          offset: Offset(1, 1),
-          color: Colors.black87,
-          blurRadius: 1,
-        )
-      ]*/
   );
+}
+
+void rebuildAllChildren(BuildContext context) {
+  void rebuild(Element el) {
+    el.markNeedsBuild();
+    el.visitChildren(rebuild);
+  }
+
+  (context as Element).visitChildren(rebuild);
 }
 
 void openDialog(BuildContext context, Widget widget) {
@@ -42,12 +37,19 @@ void openDialog(BuildContext context, Widget widget) {
       child: Dialog(
           backgroundColor: Colors.transparent,
           insetPadding: const EdgeInsets.all(18),
-          child: widget),
+          child: ValueListenableBuilder<int>(
+              valueListenable: getIt<GameState>().updateForUndo,
+              builder: (context, value, child) {
+                rebuildAllChildren(
+                    context); //only way to remake the valuelistenable builders with broken references
+                return widget;
+              })),
     )
   ]);
   showDialog(context: context, builder: (BuildContext context) => innerWidget);
 }
 
+//note: not working properly and not used
 void openDialogAtPosition(
     BuildContext context, Widget widget, double x, double y) {
   double xOffset =
@@ -163,7 +165,6 @@ bool hasGHVersion(String name) {
 
 showToast(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text(
-        text),
+    content: Text(text),
   ));
 }

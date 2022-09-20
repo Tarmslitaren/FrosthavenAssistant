@@ -112,6 +112,7 @@ class Client {
       );
     } catch (error) {
       print(error);
+      _socket!.destroy();
       getIt<Network>().networkMessage.value = error.toString();
       _cleanup();
     }
