@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/commands/set_init_command.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../Resource/color_matrices.dart';
+import '../Resource/commands/draw_command.dart';
 import '../Resource/commands/next_turn_command.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_state.dart';
@@ -15,7 +16,8 @@ import 'menus/add_summon_menu.dart';
 import 'monster_box.dart';
 
 class CharacterWidget extends StatefulWidget {
-  static final Set<String> localCharacterInitChanges = {}; //if it's been changed locally then it's not hidden
+  static final Set<String> localCharacterInitChanges =
+      {}; //if it's been changed locally then it's not hidden
   final String characterId;
   final int? initPreset;
 
@@ -51,18 +53,17 @@ class CharacterWidgetState extends State<CharacterWidget> {
     _initTextFieldController.addListener(() {
       for (var item in _gameState.currentList) {
         if (item is Character) {
-          if (item.characterState.display == character.characterState.display) {
-            if (_initTextFieldController.value.text.isNotEmpty && _initTextFieldController
-                .value.text != character.characterState.initiative.value.toString() &&_initTextFieldController
-                .value.text.isNotEmpty && _initTextFieldController
-                .value.text != "??") {
-              int? init = int.tryParse(
-                  _initTextFieldController
-                      .value.text);
+          if (item.id == character.id) {
+            if (_initTextFieldController.value.text.isNotEmpty &&
+                _initTextFieldController.value.text !=
+                    character.characterState.initiative.value.toString() &&
+                _initTextFieldController.value.text.isNotEmpty &&
+                _initTextFieldController.value.text != "??") {
+              int? init = int.tryParse(_initTextFieldController.value.text);
               if (init != null && init != 0) {
                 CharacterWidget.localCharacterInitChanges.add(character.id);
                 _gameState.action(
-                    SetInitCommand(character.characterState.display, init));
+                    SetInitCommand(character.id, init));
               }
             }
             break;
@@ -79,7 +80,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
     if (isCharacter) {
       _initTextFieldController.clear();
     }
-    if(_gameState.roundState.value == RoundState.playTurns) {
+    if (_gameState.roundState.value == RoundState.playTurns) {
       CharacterWidget.localCharacterInitChanges.clear();
     }
   }
@@ -88,12 +89,12 @@ class CharacterWidgetState extends State<CharacterWidget> {
   List<Image> createConditionList(double scale) {
     List<Image> list = [];
     String suffix = "";
-    if(GameMethods.isFrosthavenStyle()) {
+    if (GameMethods.isFrosthavenStyle()) {
       suffix = "_fh";
     }
     for (var item in character.characterState.conditions.value) {
       String imagePath = "assets/images/abilities/${item.name}.png";
-      if(suffix.isNotEmpty && hasGHVersion(item.name)) {
+      if (suffix.isNotEmpty && hasGHVersion(item.name)) {
         imagePath = "assets/images/abilities/${item.name}$suffix.png";
       }
       Image image = Image(
@@ -112,7 +113,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
         child: IconButton(
           padding: EdgeInsets.zero,
           icon: Image.asset(
-            fit: BoxFit.fitHeight,
+              fit: BoxFit.fitHeight,
               color: Colors.white24,
               colorBlendMode: BlendMode.modulate,
               'assets/images/psd/add.png'),
@@ -301,38 +302,54 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                         ),
                                       ),
                                       ValueListenableBuilder<int>(
-                                          valueListenable:
-                                              character.characterState.initiative,
+                                          valueListenable: character
+                                              .characterState.initiative,
                                           builder: (context, value, child) {
-                                            if(_initTextFieldController.text != character.characterState.initiative.value.toString() && character.characterState.initiative.value != 0) {
-
+                                            bool secret = (getIt<Settings>()
+                                                .server
+                                                .value ||
+                                                getIt<Settings>()
+                                                    .client
+                                                    .value) &&
+                                                (!CharacterWidget
+                                                    .localCharacterInitChanges
+                                                    .contains(character.id));
+                                            if (_initTextFieldController.text !=
+                                                    character.characterState
+                                                        .initiative.value
+                                                        .toString() &&
+                                                character.characterState
+                                                        .initiative.value !=
+                                                    0 && (_initTextFieldController.text.isNotEmpty || secret)) {
                                               //handle secret if originating from other device
-                                              bool secret = (getIt<Settings>().server.value || getIt<Settings>().client.value) &&
-                                                  (!CharacterWidget.localCharacterInitChanges.contains(character.id));
 
-                                              if (secret){
-                                                _initTextFieldController.text = "??";
-                                              }else {
+                                              if (secret) {
+                                                _initTextFieldController.text =
+                                                    "??";
+                                              } else {
                                                 _initTextFieldController.text =
                                                     character.characterState
                                                         .initiative.value
                                                         .toString();
                                               }
                                             }
-                                            if(_gameState.roundState.value == RoundState.playTurns && isCharacter){
+                                            if (_gameState.roundState.value ==
+                                                    RoundState.playTurns &&
+                                                isCharacter) {
                                               _initTextFieldController.clear();
                                             }
-                                            //if (isCharacter && _gameState.commandIndex.value >= 0 &&
-                                            //    _gameState.commands[_gameState.commandIndex.value] is DrawCommand) {
-                                            //  _initTextFieldController.clear();
-                                            //}
+
+                                            /*if (isCharacter && _gameState.commandIndex.value >= 0 &&
+                                                _gameState.commands[_gameState.commandIndex.value] is DrawCommand) {
+                                              _initTextFieldController.clear();
+                                            }*/
+
                                             if (_gameState.roundState.value ==
                                                     RoundState
                                                         .chooseInitiative &&
                                                 character.characterState.health
                                                         .value >
                                                     0) {
-
                                               return Container(
                                                 margin: EdgeInsets.only(
                                                     left: 11 * scale,
@@ -378,7 +395,10 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                     style: TextStyle(
                                                         height: 1,
                                                         //quick fix for web-phone disparity.
-                                                        fontFamily: frosthavenStyle? 'GermaniaOne' : 'Pirata',
+                                                        fontFamily:
+                                                            frosthavenStyle
+                                                                ? 'GermaniaOne'
+                                                                : 'Pirata',
                                                         color: Colors.white,
                                                         fontSize: 24 * scale,
                                                         shadows: [shadow]),
@@ -424,7 +444,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                               );
                                             } else {
                                               if (isCharacter) {
-                                                _initTextFieldController.clear();
+                                                _initTextFieldController
+                                                    .clear();
                                               }
                                               return Container(
                                                   height: 33 * scale,
@@ -437,21 +458,24 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                                 0 &&
                                                             character
                                                                     .characterState
-                                                                    .initiative.value >
+                                                                    .initiative
+                                                                    .value >
                                                                 0
                                                         ? character
                                                             .characterState
-                                                            .initiative.value
+                                                            .initiative
+                                                            .value
                                                             .toString()
                                                         : "",
                                                     textAlign: TextAlign.center,
                                                     style: TextStyle(
-                                                        fontFamily: frosthavenStyle? 'GermaniaOne' :'Pirata',
+                                                        fontFamily:
+                                                            frosthavenStyle
+                                                                ? 'GermaniaOne'
+                                                                : 'Pirata',
                                                         color: Colors.white,
                                                         fontSize: 24 * scale,
-                                                        shadows: [
-                                                          shadow
-                                                        ]),
+                                                        shadows: [shadow]),
                                                   ));
                                             }
                                           }),
@@ -469,12 +493,14 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                             child: Text(
                                               character.characterState.display,
                                               style: TextStyle(
-                                                  fontFamily: frosthavenStyle? 'GermaniaOne' : 'Pirata',
+                                                  fontFamily: frosthavenStyle
+                                                      ? 'GermaniaOne'
+                                                      : 'Pirata',
                                                   color: Colors.white,
-                                                  fontSize:frosthavenStyle? 15 * scale : 16 * scale,
-                                                  shadows: [
-                                                    shadow
-                                                  ]),
+                                                  fontSize: frosthavenStyle
+                                                      ? 15 * scale
+                                                      : 16 * scale,
+                                                  shadows: [shadow]),
                                             ),
                                           ),
                                           ValueListenableBuilder<int>(
@@ -494,18 +520,17 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                             "assets/images/blood.png"),
                                                       ),
                                                       Text(
-                                                          frosthavenStyle?
-                                                        '${character.characterState.health.value.toString()}/${character.characterState.maxHealth.value.toString()}'
-                                                        :'${character.characterState.health.value.toString()} / ${character.characterState.maxHealth.value.toString()}',
+                                                        frosthavenStyle
+                                                            ? '${character.characterState.health.value.toString()}/${character.characterState.maxHealth.value.toString()}'
+                                                            : '${character.characterState.health.value.toString()} / ${character.characterState.maxHealth.value.toString()}',
                                                         style: TextStyle(
-                                                            fontFamily: frosthavenStyle? 'GermaniaOne' : 'Pirata',
+                                                            fontFamily:
+                                                                frosthavenStyle
+                                                                    ? 'GermaniaOne'
+                                                                    : 'Pirata',
                                                             color: Colors.white,
-                                                            fontSize:
-                                                            frosthavenStyle? 16 * scale : 16 * scale,
-
-                                                            shadows: [
-                                                              shadow
-                                                            ]),
+                                                            fontSize: frosthavenStyle ? 16 * scale : 16 * scale,
+                                                            shadows: [shadow]),
                                                       ),
                                                       //add conditions here
                                                       ValueListenableBuilder<
@@ -551,12 +576,13 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                         .characterState.xp.value
                                                         .toString(),
                                                     style: TextStyle(
-                                                        fontFamily: frosthavenStyle? 'GermaniaOne' : 'Pirata',
+                                                        fontFamily:
+                                                            frosthavenStyle
+                                                                ? 'GermaniaOne'
+                                                                : 'Pirata',
                                                         color: Colors.blue,
                                                         fontSize: 14 * scale,
-                                                        shadows: [
-                                                          shadow
-                                                        ]),
+                                                        shadows: [shadow]),
                                                   );
                                                 }),
                                           ],
@@ -583,12 +609,13 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                         .level.value
                                                         .toString(),
                                                     style: TextStyle(
-                                                        fontFamily: frosthavenStyle? 'GermaniaOne' : 'Pirata',
+                                                        fontFamily:
+                                                            frosthavenStyle
+                                                                ? 'GermaniaOne'
+                                                                : 'Pirata',
                                                         color: Colors.white,
                                                         fontSize: 14 * scale,
-                                                        shadows: [
-                                                          shadow
-                                                        ]),
+                                                        shadows: [shadow]),
                                                   );
                                                 }),
                                           ],

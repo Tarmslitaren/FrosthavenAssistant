@@ -262,7 +262,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   Container(
                     margin: const EdgeInsets.only(top: 10),
                     width: 200,
-                    height: 30,
+                    height: 40,
                     child: TextField(
                         controller: _serverTextController,
                         keyboardType: TextInputType.number,
@@ -276,7 +276,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     width: 200,
-                    height: 30,
+                    height: 40,
                     child: TextField(
                       keyboardType: TextInputType.number,
                       controller: _portTextController,
@@ -327,7 +327,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     width: 200,
-                    height: 30,
+                    height: 40,
                     child: TextField(
                       controller: _portTextController,
                       keyboardType: TextInputType.number,
