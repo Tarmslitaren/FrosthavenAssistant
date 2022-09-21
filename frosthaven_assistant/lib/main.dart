@@ -59,7 +59,17 @@ class MyApp extends StatelessWidget {
         //showPerformanceOverlay: true,
         title: 'X-haven Assistant',
         theme: ThemeSwitcher.of(context).themeData,
-        home: const MyHomePage(title: 'X-haven Assistant'),
+        //home: const MyHomePage(title: 'X-haven Assistant'),
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+          child: const Navigator(
+            pages: [
+              MaterialPage(child: MyHomePage(title: 'X-haven Assistant'))
+            ]
+          )
+        );
+      },
       );
 
   }
