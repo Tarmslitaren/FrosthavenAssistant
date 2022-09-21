@@ -93,7 +93,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                       value: settings.noStandees.value,
                       onChanged: (bool? value) {
                         setState(() {
-                          getIt<GameState>().action(TrackStandeesCommand(!value!));
+                          getIt<GameState>()
+                              .action(TrackStandeesCommand(!value!));
                           settings.saveToDisk();
                         });
                       }),
@@ -246,7 +247,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 if (settings.client.value != true) {
                                   settings.lastKnownPort =
                                       _portTextController.text;
-                                  getIt<Network>().client
+                                  getIt<Network>()
+                                      .client
                                       .connect(_serverTextController.text)
                                       .then((value) => null);
                                   settings.lastKnownConnection =
@@ -297,33 +299,40 @@ class SettingsMenuState extends State<SettingsMenu> {
                             value: settings.server.value,
                             onChanged: (bool? value) {
                               //setState(() {
-                                //do the thing
-                                if (!settings.server.value) {
-                                  settings.lastKnownPort =
-                                      _portTextController.text;
-                                  settings.saveToDisk();
-                                  getIt<Network>().server.startServer();
-                                } else {
-                                  //close server?
-                                  getIt<Network>().server.stopServer();
-                                }
-                              });
-                            //});
+                              //do the thing
+                              if (!settings.server.value) {
+                                settings.lastKnownPort =
+                                    _portTextController.text;
+                                settings.saveToDisk();
+                                getIt<Network>().server.startServer();
+                              } else {
+                                //close server?
+                                getIt<Network>().server.stopServer();
+                              }
+                            });
+                        //});
                       }),
-                  Container(
-                    width: 200,
-                    height: 20,
-                    child: Text(getIt<Network>().networkInfo.wifiIPv4 == null
-                        ? ""
-                        : getIt<Network>().networkInfo.wifiIPv4!),
-                  ),
-                  SizedBox(
-                    width: 200,
-                    height: 20,
-                    child: Text(getIt<Network>().networkInfo.outgoingIPv4 == null
-                        ? ""
-                        : getIt<Network>().networkInfo.outgoingIPv4!),
-                  ),
+                  ValueListenableBuilder<String>(
+                      valueListenable: getIt<Network>().networkInfo.wifiIPv4,
+                      builder: (context, value, child) {
+                        return SizedBox(
+                            width: 200,
+                            height: 20,
+                            child: Text(
+                                getIt<Network>().networkInfo.wifiIPv4.value));
+                      }),
+                  ValueListenableBuilder<String>(
+                      valueListenable:
+                          getIt<Network>().networkInfo.outgoingIPv4,
+                      builder: (context, value, child) {
+                        return SizedBox(
+                            width: 200,
+                            height: 20,
+                            child: Text(getIt<Network>()
+                                .networkInfo
+                                .outgoingIPv4
+                                .value));
+                      }),
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     width: 200,

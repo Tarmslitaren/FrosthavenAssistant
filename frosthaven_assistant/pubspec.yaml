@@ -58,6 +58,8 @@ dependencies:
 
   dart_ipify: ^1.1.1 #get outgoing ip
 
+  connectivity_plus: ^2.3.7 #poll for network changes
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   # I don't think I need this

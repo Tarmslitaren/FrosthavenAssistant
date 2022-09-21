@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  connectivity_plus_windows
   network_info_plus_windows
   screen_retriever
   url_launcher_windows

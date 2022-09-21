@@ -32,8 +32,8 @@ class Server {
     /*if(NetworkInformation.outgoingIPv4 != null) {
       connectTo = NetworkInformation.outgoingIPv4!;
     }*/ //it is wrong to try to bind to an outgoing ip, since it is not owned by the network?
-    if (getIt<Network>().networkInfo.wifiIPv4 != null && getIt<Network>().networkInfo.wifiIPv4!.isNotEmpty) {
-      connectTo = getIt<Network>().networkInfo.wifiIPv4!;
+    if (getIt<Network>().networkInfo.wifiIPv4.value.isNotEmpty) {
+      connectTo = getIt<Network>().networkInfo.wifiIPv4.value;
     }
     await ServerSocket.bind(connectTo,
             int.parse(getIt<Settings>().lastKnownPort))

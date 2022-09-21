@@ -4,26 +4,52 @@ import 'package:dart_ipify/dart_ipify.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:network_info_plus/network_info_plus.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'dart:developer' as developer;
 
 import 'dart:async';
 
+import '../service_locator.dart';
+import 'network.dart';
+
 
 class NetworkInformation {
 
+  NetworkInformation() {
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen((ConnectivityResult result){
+          if (_connectionStatus != result) {
+            if(_connectionStatus != null) { //null just to not show message on start.
+              getIt<Network>().networkMessage.value =
+              "Network connection: ${result.name}";
+            }
+          }
+          _connectionStatus = result;
+          initNetworkInfo();
+        });
+  }
+
   final NetworkInfo networkInfo = NetworkInfo();
 
-  String? wifiName,
-      wifiBSSID,
-      wifiIPv4,
-      outgoingIPv4; //
+  ConnectivityResult? _connectionStatus;
+  final Connectivity _connectivity = Connectivity();
+  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+  final wifiIPv4 = ValueNotifier<String>("");
+  final outgoingIPv4 = ValueNotifier<String>("");
+  final wifiName = ValueNotifier<String>("");
+  final wifiBSSID = ValueNotifier<String>("");
       //wifiIPv6,
       //wifiGatewayIP,
       //wifiBroadcast,
       //wifiSubmask;
 
   Future<void> initNetworkInfo() async {
-    outgoingIPv4 = await Ipify.ipv4();
+    try {
+      outgoingIPv4.value = await Ipify.ipv4();
+    } catch (error) {
+      outgoingIPv4.value = "";
+    }
 
     try {
       if (!kIsWeb && Platform.isIOS) {
@@ -33,16 +59,25 @@ class NetworkInformation {
         }
         if (status == LocationAuthorizationStatus.authorizedAlways ||
             status == LocationAuthorizationStatus.authorizedWhenInUse) {
-          wifiName = await networkInfo.getWifiName();
+          String? wifi = await networkInfo.getWifiName();
+          if(wifi != null) {
+            wifiName.value = wifi;
+          }
         } else {
-          wifiName = await networkInfo.getWifiName();
+          String? name = await networkInfo.getWifiName();
+          if(name != null) {
+            wifiName.value = name;
+          }
         }
       } else {
-        wifiName = await networkInfo.getWifiName();
+        String? name = await networkInfo.getWifiName();
+        if(name != null) {
+          wifiName.value = name;
+        }
       }
     } on PlatformException catch (e) {
       developer.log('Failed to get Wifi Name', error: e);
-      wifiName = 'Failed to get Wifi Name';
+      wifiName.value = 'Failed to get Wifi Name';
     }
 
     try {
@@ -53,23 +88,35 @@ class NetworkInformation {
         }
         if (status == LocationAuthorizationStatus.authorizedAlways ||
             status == LocationAuthorizationStatus.authorizedWhenInUse) {
-          wifiBSSID = await networkInfo.getWifiBSSID();
+          String? bssid = await networkInfo.getWifiBSSID();
+          if(bssid != null) {
+            wifiBSSID.value = bssid;
+          }
         } else {
-          wifiBSSID = await networkInfo.getWifiBSSID();
+          String? bssid = await networkInfo.getWifiBSSID();
+          if(bssid != null) {
+            wifiBSSID.value = bssid;
+          }
         }
       } else {
-        wifiBSSID = await networkInfo.getWifiBSSID();
+        String? bssid = await networkInfo.getWifiBSSID();
+        if(bssid != null) {
+          wifiBSSID.value = bssid;
+        }
       }
     } on PlatformException catch (e) {
       developer.log('Failed to get Wifi BSSID', error: e);
-      wifiBSSID = 'Failed to get Wifi BSSID';
+      wifiBSSID.value = 'Failed to get Wifi BSSID';
     }
 
     try {
-      wifiIPv4 = await networkInfo.getWifiIP();
+      String? ipv4 = await networkInfo.getWifiIP();
+      if(ipv4 != null) {
+        wifiIPv4.value = ipv4;
+      }
     } on PlatformException catch (e) {
       developer.log('Failed to get Wifi IPv4', error: e);
-      wifiIPv4 = 'Failed to get Wifi IPv4';
+      wifiIPv4.value = 'Failed to get Wifi IPv4';
     }
 
     /*try {
