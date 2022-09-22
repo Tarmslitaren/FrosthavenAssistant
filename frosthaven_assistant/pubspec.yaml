@@ -78,7 +78,7 @@ dependencies:
 
   wakelock: ^0.6.1+2 #keep awake on android
 
-  window_manager: ^0.2.5 #to be able to set fullscreen on windows
+  window_manager: ^0.2.7 #to be able to set fullscreen on windows
 
   flutter_launcher_icons: ^0.10.0 #I can't believe we need a third party package to do icons..
 
@@ -88,6 +88,7 @@ dependencies:
 
   flutter_keyboard_visibility: ^5.3.0 #only way to check for keyboard closed event.
 
+#maybe f this?
   window_size:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git

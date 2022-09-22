@@ -65,9 +65,9 @@ enum MonsterType {
 }
 
 enum TurnsState {
-  notDone,
-  current,
-  done
+  notDone, //if got condition while in this state or from earlier round: remove at end of current
+  current, //mark conditions addeed here to not be removed yet
+  done //mark conditions addeed here to not be removed yet
 }
 
 enum NetworkMessage {

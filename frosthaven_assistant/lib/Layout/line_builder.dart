@@ -12,6 +12,7 @@ import '../Resource/game_state.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 class LineBuilder {
+  static const bool debugColors = true;
   static const Map<String, String> _tokens = {
     "attack": "Attack",
     "move": "Move",
@@ -60,7 +61,7 @@ class LineBuilder {
       return isFrosthavenStyle ? height : height * 1.2;
     }
     if (iconToken.contains("aoe")) {
-      return height * 2;
+      return height * 2.0;
     }
     //if(shouldOverflow(isFrosthavenStyle, iconToken, true)) {
     //  return height * 1.2;
@@ -756,10 +757,10 @@ class LineBuilder {
             color: conditional
                 ? Colors.blue
                 : Color(int.parse("9A808080", radix: 16)),
-            borderRadius: BorderRadius.all(Radius.circular(6 * scale))),
+            borderRadius: BorderRadius.all(Radius.circular(6.0 * scale))),
         padding: EdgeInsets.fromLTRB(
-            2 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
-        margin: EdgeInsets.only(left: 2 * scale, right: 2 * scale),
+            2.0 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
+        margin: EdgeInsets.only(left: 2.0 * scale, right: 2.0 * scale),
         //child: Expanded(
         child: Column(mainAxisSize: MainAxisSize.max, children: [
           if (list2.isNotEmpty) Row(children: list2[0]),
@@ -850,16 +851,16 @@ class LineBuilder {
 
   static void applyConditionalGraphics(var lines, double scale, bool elementUse, double rightMargin, child){
     lines.add(Container(
-        margin: EdgeInsets.all(2 * scale),
+        margin: EdgeInsets.all(2.0 * scale),
         //alignment: Alignment.bottomCenter,
         child: DottedBorder(
             color: Colors.white,
             //borderType: BorderType.Rect,
             borderType: BorderType.RRect,
-            radius: Radius.circular(10 * scale),
+            radius: Radius.circular(10.0 * scale),
             //strokeCap: StrokeCap.round,
             padding: const EdgeInsets.all(0),
-            dashPattern: [2 * scale, 1 * scale],
+            dashPattern: [2.0 * scale, 1.0 * scale],
             strokeWidth: 0.6 * scale,
             child: Container(
                 decoration: BoxDecoration(
@@ -867,10 +868,10 @@ class LineBuilder {
                   //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
                     color: Color(int.parse("9A808080", radix: 16)),
                     borderRadius:
-                    BorderRadius.all(Radius.circular(10 * scale))),
+                    BorderRadius.all(Radius.circular(10.0 * scale))),
                 //TODO: should the padding be dependant on nr of lines?
                 padding: EdgeInsets.fromLTRB(
-                    elementUse ? 1 * scale : 3 * scale,
+                    elementUse ? 1.0 * scale : 3.0 * scale,
                     0.25 * scale,
                     rightMargin,
                     0.2625 * scale),
@@ -903,14 +904,14 @@ class LineBuilder {
     var shadow = Shadow(
       offset: Offset(0.4 * scale, 0.4 * scale),
       color: left ? Colors.black54 : Colors.black87,
-      blurRadius: 1 * scale,
+      blurRadius: 1.0 * scale,
     );
     var dividerStyle = TextStyle(
         fontFamily: 'Majalla',
         leadingDistribution: TextLeadingDistribution.proportional,
         color: left ? Colors.black : Colors.white,
-        fontSize: 8 * 0.8 * scale,
-        letterSpacing: 2 * 0.8 * scale,
+        fontSize: 8.0 * 0.8 * scale,
+        letterSpacing: 2.0 * 0.8 * scale,
         height: 0.7,
         shadows: [shadow]);
 
@@ -918,22 +919,22 @@ class LineBuilder {
         fontFamily: 'Majalla',
         leadingDistribution: TextLeadingDistribution.proportional,
         color: left ? Colors.black : Colors.white,
-        fontSize: 6 * 0.8 * scale,
-        letterSpacing: 2 * 0.8 * scale,
+        fontSize: 6.0 * 0.8 * scale,
+        letterSpacing: 2.0 * 0.8 * scale,
         height: 0.1,
         shadows: [shadow]);
 
     var smallStyle = TextStyle(
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center ? 8 : 8.8) * scale,
+        fontSize: (alignment == CrossAxisAlignment.center ? 8.0 : 8.8) * scale,
         //sizes are larger on stat cards
         height: 0.8,
-        //backgroundColor: Colors.amber,
+        backgroundColor: debugColors? Colors.amber: null,
         //0.85,
         shadows: [shadow]);
     var midStyle = TextStyle(
-        //backgroundColor: Colors.greenAccent,
+        backgroundColor: debugColors? Colors.greenAccent : null,
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
@@ -944,9 +945,9 @@ class LineBuilder {
                 : 10.16) *
             scale,
         //sizes are larger on stat cards
-        height: (alignment == CrossAxisAlignment.center ? frosthavenStyle? 1 //he one problem here: one line no icons -> squished
-            : 1 :
-        1//0.8
+        height: (alignment == CrossAxisAlignment.center ? frosthavenStyle? 1.0 //he one problem here: one line no icons -> squished
+            : 1.0 :
+        1.0//0.8
         ),
         // 0.9,
         shadows: [shadow]);
@@ -956,7 +957,7 @@ class LineBuilder {
         textBaseline: TextBaseline.alphabetic,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
-        //backgroundColor: Colors.lightGreen,
+        backgroundColor: debugColors? Colors.lightGreen : null,
         fontSize: (alignment == CrossAxisAlignment.center
                 ? frosthavenStyle
                     ? 13.1
@@ -966,42 +967,42 @@ class LineBuilder {
         height: (alignment == CrossAxisAlignment.center)
             ? frosthavenStyle
                 ? 0.84
-                : 1//0.5
+                : 1.0//0.5
             : frosthavenStyle? 0.84
-            :1,// needs to be at least one for the icon alignment...
+            :1.0,// needs to be at least one for the icon alignment...
         //height is really low for gh style due to text not being center aligned in font - so to force to center the height is reduced. this is a shitty solution to a shitty problem.
         // 0.84,
 
         shadows: [shadow]);
 
     var eliteStyle = TextStyle(
-        //backgroundColor: Colors.lightGreen,
+        backgroundColor: debugColors? Colors.lightGreen : null,
         leadingDistribution: TextLeadingDistribution.even,
         //textBaseline: TextBaseline.alphabetic,
         //maybe slightly bigger between chars space?
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 13.1 * scale : 12.56 * scale,
-        height:  frosthavenStyle ? 0.84 : 1,
+        height:  frosthavenStyle ? 0.84 : 1.0,
         //0.8,
         shadows: [shadow]);
 
     var eliteSmallStyle = TextStyle(
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
-        fontSize: 8 * scale,
-        height: 1,
+        fontSize: 8.0 * scale,
+        height: 1.0,
         shadows: [shadow]);
     var eliteMidStyle = TextStyle(
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 9.52 * scale : 8.8 * scale,
-        height: frosthavenStyle? 0.8: 1,
+        height: frosthavenStyle? 0.8: 1.0,
         shadows: [shadow]);
 
     var midStyleSquished = TextStyle(
-      //backgroundColor: Colors.greenAccent,
+      backgroundColor: debugColors? Colors.greenAccent : null,
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
@@ -1137,9 +1138,9 @@ class LineBuilder {
           columnHack = true;
         }
 
-        double rightMargin = 3 * scale;
+        double rightMargin = 3.0 * scale;
         if (texts == " :") { //has only element to element:
-          rightMargin = 1 * scale;
+          rightMargin = 1.0 * scale;
         }
 
         Row row = Row(
@@ -1184,9 +1185,9 @@ class LineBuilder {
           columnHack = true;
         }
 
-        double rightMargin = 3 * scale;
+        double rightMargin = 3.0 * scale;
         if (texts == " :") { //has only element to element:
-          rightMargin = 1 * scale;
+          rightMargin = 1.0 * scale;
         }
 
         Row row = Row(
@@ -1269,8 +1270,8 @@ class LineBuilder {
               scale: 1.0 / (scale * 0.15),
               //for some reason flutter likes scale to be inverted
               //fit: BoxFit.fitHeight,
-              height: 6 * scale,
-              width: 50 * scale,
+              height: 6.0 * scale,
+              width: 55.0 * scale, //actually 40, but some layout might depend on wider size so not changing now
               filterQuality: FilterQuality.medium,
               "assets/images/abilities/divider_fh.png",
             );
@@ -1344,7 +1345,7 @@ class LineBuilder {
               }
               //Image lastImage = ((part.child as Container).child as OverflowBox).child as Image;
               textPartListRowContent.add(Container(
-                 // color: Colors.amber,
+                  color: debugColors? Colors.amber : null,
                   //margin: margin,
                   child: Stack(
                     clipBehavior: Clip.none,
@@ -1352,15 +1353,15 @@ class LineBuilder {
                       lastImage,
                       Positioned(
                           width: frosthavenStyle
-                              ? styleToUse.fontSize! * 0.8 + scale * 5
+                              ? styleToUse.fontSize! * 0.8 + scale * 5.0
                               : styleToUse.fontSize! * 1.2,
                           bottom: 0,
-                          left: frosthavenStyle ? 2.8 * scale : 0,
+                          left: frosthavenStyle ? 2.8 * scale : 0.0,
                           //why left?!
 
                           child: Image(
                             height: frosthavenStyle
-                                ? styleToUse.fontSize! * 1 * 0.5
+                                ? styleToUse.fontSize! * 1.0 * 0.5
                                 : styleToUse.fontSize! * 1.2,
                             //width: frosthavenStyle? styleToUse.fontSize! * 1.2 * 0.5: styleToUse.fontSize! * 1.2,
                             //alignment: Alignment.topCenter,
@@ -1376,16 +1377,16 @@ class LineBuilder {
                       //maybe slightly bigger between chars space?
                       fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
                       color: left ? Colors.black : Colors.white,
-                     // backgroundColor: Colors.amber,
+                      backgroundColor: debugColors? Colors.amber : null,
                       fontSize:
-                          (alignment == CrossAxisAlignment.center ? 12 : 12) *
+                          (alignment == CrossAxisAlignment.center ? 12.0 : 12.0) *
                               0.8 *
                               scale,
                       height: (alignment == CrossAxisAlignment.center)
                           ? frosthavenStyle
-                              ? 1
+                              ? 1.0
                               : 1.1
-                          : 1,
+                          : 1.0,
                       // 0.8,
 
                       shadows: [
@@ -1405,7 +1406,7 @@ class LineBuilder {
                 } else if (iconTokenText != null) {
                   textPartListRowContent
                       .add(Container(
-                   // color: Colors.red,
+                    color: debugColors? Colors.red : null,
                     padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
                       child:Text(iconTokenText!, style: styleToUse)));
                 }
@@ -1424,7 +1425,7 @@ class LineBuilder {
               bool overflow =
                   shouldOverflow(frosthavenStyle, iconGfx, mainLine);
               double heightMod = mainLine
-                  ? 1
+                  ? 1.0
                   : 1.35 *
                       1.15; //to make sub line conditions have larger size and overflow on FH style
               Widget child = Image(
@@ -1437,7 +1438,7 @@ class LineBuilder {
                 image: AssetImage(imagePath),
               );
               child = Container(
-                 // color: Colors.blue,
+                  color: debugColors? Colors.blue : null,
                   height: height,
                   width: overflow ? height : null,
                   margin: margin,
@@ -1474,7 +1475,7 @@ class LineBuilder {
               }
 
               textPartListRowContent.add(Container(
-                //  color: Colors.red,
+                  color: debugColors? Colors.red : null,
                   padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
                   child:
                   Text(textPart, style: styleToUse)));
@@ -1497,7 +1498,7 @@ class LineBuilder {
         if (line[i] == "Å") {
           styleToUse = TextStyle(
 
-              //backgroundColor: Colors.amber,
+              backgroundColor: debugColors? Colors.amber : null,
               fontFamily: 'Majalla',
               color: Colors.transparent,
               fontSize: 11 * 0.8 * scale,
@@ -1508,7 +1509,7 @@ class LineBuilder {
       if (partStartIndex < line.length) {
         String textPart = line.substring(partStartIndex, line.length);
         textPartListRowContent.add(Container(
-            //color: Colors.red,
+            color: debugColors? Colors.red : null,
             padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
             child:Text(textPart, style: styleToUse)));
       }

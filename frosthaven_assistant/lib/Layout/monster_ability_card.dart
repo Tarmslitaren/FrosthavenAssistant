@@ -65,7 +65,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     return list;
   }
 
-  static Widget buildFront(MonsterAbilityCardModel? card, Monster data, double scale, bool calculateAll) {
+  static Widget buildFront(MonsterAbilityCardModel? card, Monster data,final double scale, bool calculateAll) {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle();
 
     String initText = card!.initiative.toString();
@@ -274,7 +274,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = getScaleByReference(context);
+    final double scale = getScaleByReference(context);
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {

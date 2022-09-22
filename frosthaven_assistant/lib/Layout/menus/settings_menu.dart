@@ -89,6 +89,15 @@ class SettingsMenuState extends State<SettingsMenu> {
                         });
                       }),
                   CheckboxListTile(
+                      title: const Text("Expire Conditions"),
+                      value: settings.expireConditions.value,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          settings.expireConditions.value = value!;
+                          settings.saveToDisk();
+                        });
+                      }),
+                  CheckboxListTile(
                       title: const Text("Don't track Standees"),
                       value: settings.noStandees.value,
                       onChanged: (bool? value) {

@@ -27,6 +27,7 @@ class Settings {
   final noStandees = ValueNotifier<bool>(false);
   final randomStandees = ValueNotifier<bool>(false);
   final noCalculation = ValueNotifier<bool>(false);
+  final expireConditions = ValueNotifier<bool>(false);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -64,7 +65,7 @@ class Settings {
           await windowManager.center();
           await windowManager.show();
           await windowManager.setSkipTaskbar(false);
-          await windowManager.setAlwaysOnTop(true);
+          //await windowManager.setAlwaysOnTop(true);
           await windowManager.setPosition(const Offset(0,0)); //weird this was needed
           await windowManager.show();
           
@@ -191,6 +192,9 @@ class Settings {
       if (data["style"] != null) {
         style.value = Style.values[data["style"]];
       }
+      if (data["expireConditions"] != null) {
+        expireConditions.value = data["expireConditions"];
+      }
       if (data["lastKnownConnection"] != null) {
         lastKnownConnection = data["lastKnownConnection"];
       }
@@ -235,6 +239,7 @@ class Settings {
         '"noStandees": ${noStandees.value}, '
         '"randomStandees": ${randomStandees.value}, '
         '"noCalculation": ${noCalculation.value}, '
+        '"expireConditions": ${expireConditions.value}, '
         '"style": ${style.value.index}, '
         '"darkMode": ${darkMode.value}, '
         '"lastKnownConnection": "$lastKnownConnection", '

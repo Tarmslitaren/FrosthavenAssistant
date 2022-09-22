@@ -38,11 +38,21 @@ class AbilityCardZoomState extends State<AbilityCardZoom> {
     double width = 178 * 0.8 * scale* zoomValue;
     double height = 116 * 0.8 * scale* zoomValue;
     if(screenWidth < 40 + width) {
-      zoomValue = screenWidth/ (178 * 0.8 * scale);// 2;
+      zoomValue = (screenWidth-40)/ (178 * 0.8 * scale);// 2;
     }
+
     if(screenHeight < 60 + height) {
       zoomValue = 2;
     }
+
+    double scaling = scale * zoomValue;
+    if (scaling < 269/(178*0.8) && screenWidth > 40 + width) {
+      scaling = 269/(178*0.8);
+
+    }
+
+
+
 
     return InkWell(
       onTap: (){
@@ -53,7 +63,7 @@ class AbilityCardZoomState extends State<AbilityCardZoom> {
           //margin: EdgeInsets.all(2 * scale * zoomValue * 0.8),
           //width: width,
           //height: 118 * 0.8 * scale* zoomValue,
-          child:MonsterAbilityCardWidget.buildFront(widget.card, widget.monster, scale * zoomValue, widget.calculateAll)
+          child:MonsterAbilityCardWidget.buildFront(widget.card, widget.monster, scaling, widget.calculateAll)
       ),
     );
   }
