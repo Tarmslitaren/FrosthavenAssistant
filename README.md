@@ -29,9 +29,10 @@ This is also an opportunity for me to learn the Flutter framework.
 - Settings: Full screen, Separate user scaling for main list and bars, Dark mode, Soft numpad input
 - Double tap to see bigger ability cards
 - Allies modifier deck
-## Key features still missing:
-- networking
-- expire conditions
+- Expire Conditions option
+- Share state between devices over wifi
+- Switch card styles between Gloomhaven and Frosthaven
+
 
 ## Usage:
 - Press hamburger icon to open main menu.
@@ -67,18 +68,38 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Objectives and Escorts are special characters, representing special rules from scenarios.
 - If some special rules or monsters appear from an added section in the scenario/sections booklets, they can be added from the add sections menu.
 - If you make a mistake, there is an undo button in the main menu. and if the mistake was to undo, there is also redo ;)
+- Networking:
+  - To start a server, be sure to be on a wifi network and press 'start host server' from the settings menu
+  - To connect to a server in a local network, type in the local ip of the server (usually 192.168.something) and press 'Connect as client'.
+
+##Connection Usage:
+#Starting:
+- From the settings menu, have one device start a server. Be sure to be on wifi. (a local ip will be shown i.e. 192.168.X.XXX)
+- A Port can also be defined if needed. be aware that ports under 1024 are typically blocked.
+- Other devices on the same network may connect from the settings menu, by typing in the server's ip, and port.
+#Info:
+- Be aware, when connecting to a server, the server's game state will overwrite the local state.
+- If a client gets out of sync with the server (by disconnecting, or making an update before it gets the latest state from server), the client's state change will be ignored and overwritten by latest state from server to get you back on track. And a message index out of sync will be shown.
+- There should be no issue having several users change things simultaneously: the menus will not close when getting an update.
+- Local settings are not affected by the game state. It is up to the users to decide on options that affect the game.
+
+## Known Issues:
+- Fullscreen switching button only work every other time you press it on macos build
+- Some animations will not play, (and some may play when they shouldn't) when receiving updates over wifi.
+- TCP connection only works over wifi as far as I can tell, and has not been tested in any other environment.
+- when trying to connect without a server on same network, may result in a lot of error messages shown when it tries connecting.
+- A device sharing a wifi-hotspot can not connect itself.
+- Undo and Redo is currently not supported when connected. sorry. Maybe next release.
+- Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself.
+- Some text alignment issues with small texts on small (mobile) screens.
+- Frosthaven Style option is not a 100% accurate. Partly because we don't know yet exactly how the cards should look.
 
 ## Roadmap
-- Release 5 plan (next):
-  - frosthaven style icons and card layouts
-  - expire conditions
-  - show special rules toast on start/end of round if special rules for round nr
-  - solo scenarios
-
--Release 6 plan:
-  - networking
-
-Release 7 plan:
+- Next:
+  - Show special rules toast on start/end of round if special rules for round nr
+  - Trails of Ashes support
+  - Many UI improvements, including animations on conditions when they need to be applied.
+-After that:
   - full Frosthaven support
 
 ## Copyright / License
