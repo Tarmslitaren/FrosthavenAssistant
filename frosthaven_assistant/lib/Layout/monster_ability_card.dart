@@ -1,3 +1,4 @@
+
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
@@ -65,7 +66,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     return list;
   }
 
-  static Widget buildFront(MonsterAbilityCardModel? card, Monster data,final double scale, bool calculateAll) {
+  static Widget buildFront(MonsterAbilityCardModel? card, Monster data, double scale, bool calculateAll) {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle();
 
     String initText = card!.initiative.toString();
@@ -169,6 +170,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             if (positionals.length > 1) positionals[1],
             if (positionals.length > 2) positionals[2],
             if (positionals.length > 3) positionals[3],
+
 
             Positioned(
               top: 11 * scale,

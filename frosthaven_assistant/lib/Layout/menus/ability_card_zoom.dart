@@ -42,7 +42,7 @@ class AbilityCardZoomState extends State<AbilityCardZoom> {
     }
 
     if(screenHeight < 60 + height) {
-      zoomValue = 2;
+      zoomValue = (screenHeight-60)/ (116 * 0.8 * scale);// 2;
     }
 
     double scaling = scale * zoomValue;

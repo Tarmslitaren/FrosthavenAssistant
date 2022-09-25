@@ -88,7 +88,10 @@ dependencies:
 
   flutter_keyboard_visibility: ^5.3.0 #only way to check for keyboard closed event.
 
-#maybe f this?
+  responsive_framework: ^0.2.0
+
+  override_text_scale_factor: ^1.0.2
+
   window_size:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git

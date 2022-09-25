@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:override_text_scale_factor/override_text_scale_factor.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'Layout/main_scaffold.dart';
@@ -59,7 +60,12 @@ class MainState extends State<MyHomePage> with WindowListener  {
         valueListenable: getIt<GameState>().updateForUndo,
         builder: (context, value, child) {
           rebuildAllChildren(context); //only way to remake the valuelistenable builders with broken references
-    return createMainScaffold(context);
+    return
+      OverrideTextScaleFactor(
+              // Note that any widget can be used as child - not only Text widgets
+              child:
+
+      createMainScaffold(context));
     });
   }
 

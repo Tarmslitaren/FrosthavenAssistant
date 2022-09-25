@@ -24,6 +24,7 @@ class Figure {
   final level = ValueNotifier<int>(1);
   final maxHealth = ValueNotifier<int>(0); //? //needed for the times you wanna set hp yourself, for special reasons
   final conditions = ValueNotifier<List<Condition>>([]);
+  final conditionsAddedThisTurn = ValueNotifier<List<Condition>>([]);
   final chill = ValueNotifier<int>(0);
 
 }
@@ -50,7 +51,8 @@ class CharacterState extends Figure{
         '"chill": ${chill.value}, '
         '"display": "$display", '
         '"summonList": ${summonList.value.toString()}, '
-        '"conditions": ${conditions.value.toString()} '
+        '"conditions": ${conditions.value.toString()}, '
+        '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.value.toString()} '
         '}';
   }
 
@@ -69,9 +71,15 @@ class CharacterState extends Figure{
     }
 
     List<dynamic> condis = json["conditions"];
-
     for(int item in condis){
       conditions.value.add(Condition.values[item]);
+    }
+
+    if(json.containsKey("conditionsAddedThisTurn")) {
+      List<dynamic> condis2 = json["conditionsAddedThisTurn"];
+      for (int item in condis2) {
+        conditionsAddedThisTurn.value.add(Condition.values[item]);
+      }
     }
   }
 }
@@ -210,7 +218,8 @@ class MonsterInstance extends Figure{
         '"roundSummoned": $roundSummoned, '
         '"type": ${type.index}, '
         '"chill": ${chill.value}, '
-        '"conditions": ${conditions.value.toString()} '
+        '"conditions": ${conditions.value.toString()}, '
+        '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.value.toString()} '
         '}';
   }
 
@@ -230,6 +239,13 @@ class MonsterInstance extends Figure{
     List<dynamic> condis = json["conditions"];
     for(int item in condis){
       conditions.value.add(Condition.values[item]);
+    }
+
+    if(json.containsKey("conditionsAddedThisTurn")) {
+      List<dynamic> condis2 = json["conditionsAddedThisTurn"];
+      for (int item in condis2) {
+        conditionsAddedThisTurn.value.add(Condition.values[item]);
+      }
     }
   }
 

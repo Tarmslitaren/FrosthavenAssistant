@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 
 import 'package:wakelock/wakelock.dart';
 import 'package:window_manager/window_manager.dart';
@@ -27,8 +28,8 @@ void main() {
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle('X-haven Assistant');
-    WindowManager.instance.setMinimumSize(const Size(400, 600));
-    //setWindowMinSize(const Size(400, 600)); //this stopped working after flutter upgrade to 3.3.2
+    windowManager.setMinimumSize(const Size(400, 600));
+    setWindowMinSize(const Size(400, 600)); //when updating flutter you may need to re-set these values in main.cpp
     setWindowMaxSize(Size.infinite);
   }
 
@@ -62,6 +63,21 @@ class MyApp extends StatelessWidget {
         title: 'X-haven Assistant',
         theme: ThemeSwitcher.of(context).themeData,
         home: const MyHomePage(title: 'X-haven Assistant'),
+
+     /* builder: (context, child) => ResponsiveWrapper.builder(
+
+          const Navigator(
+              pages: [
+                MaterialPage(child: MyHomePage(title: 'X-haven Assistant')),
+              ]
+          ),
+
+
+          defaultScale: true,
+
+          background: Container(color: Colors.deepPurpleAccent)),
+      initialRoute: "/",*/
+
       /*builder: (context, child) {
         return MediaQuery(
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0), //to disable os large font setting

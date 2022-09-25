@@ -101,7 +101,7 @@
         ["Nothing Special", 429, false, 57, "%move% + 0","*.........", "%attack% + 0", "^%range% 2"],
         ["Toxic Explosion", 430, false, 57, "%attack% + 0", "^%range% 2", "^%target% 2", "^%poison%", "[r]", "%earth%%use%", "^+1 %target%","[/r]"],
         ["Calculated Strike", 431, false, 66, "%move% - 1","*.........", "%attack% + 1", "^%range% 3"],
-        ["Feed", 432, false, 66, "%move% + 0","*.........", "%loot% 1","*.........", "%heal% 2", "^Self", "[r]", "%dark%%use%", "^+1 %heal%", "[/r]"],
+        ["Feed", 432, false, 66, "%move% + 0","**.........", "%loot% 1","**.........", "%heal% 2", "^Self", "[r]", "%dark%%use%", "^+1 %heal%", "[/r]"],
         ["Plasma Ward", 433, false, 85, "%push% 1 and", "%poison%", "^Target all adjacent enemies","*.........", "%attack% + 1", "^%range% 2"],
         ["Black Hex", 434, true, 85, "^The closest enemy in", "^line-of-sight, regardless of","^range, suffers 1+L/2 (rounded up) damage.","*.........", "%heal% 1", "^Self", "%dark%"],
         ["Septic Hex", 435, true, 85, "^The closest enemy in", "^line-of-sight, regardless of", "^range, suffers 1+L/2 (rounded up) damage.","*.........", "%heal% 1", "^Self", "%earth%"]

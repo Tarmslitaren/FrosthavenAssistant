@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ import '../Resource/game_state.dart';
 import 'package:dotted_border/dotted_border.dart';
 
 class LineBuilder {
-  static const bool debugColors = true;
+  static const bool debugColors = false;
   static const Map<String, String> _tokens = {
     "attack": "Attack",
     "move": "Move",
@@ -888,6 +887,10 @@ class LineBuilder {
       final Monster monster,
       final CrossAxisAlignment alignment,
       final double scale) {
+
+
+
+
     String imageSuffix = "";
     bool frosthavenStyle = GameMethods.isFrosthavenStyle();
     if (frosthavenStyle) {
@@ -938,12 +941,12 @@ class LineBuilder {
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center
+        fontSize: ((alignment == CrossAxisAlignment.center
                 ? frosthavenStyle
                     ? 9.52 //7.52 is closer to physical size, but too hard to see on smaller screens
                     : 8.8
                 : 10.16) *
-            scale,
+            scale),//.floorToDouble()+0.5, //not sur eif flooring the mid scale is realy the best option. or onl yhappens tp work on my android
         //sizes are larger on stat cards
         height: (alignment == CrossAxisAlignment.center ? frosthavenStyle? 1.0 //he one problem here: one line no icons -> squished
             : 1.0 :
@@ -998,7 +1001,7 @@ class LineBuilder {
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 9.52 * scale : 8.8 * scale,
-        height: frosthavenStyle? 0.8: 1.0,
+        height: frosthavenStyle? 1.0: 1.0,
         shadows: [shadow]);
 
     var midStyleSquished = TextStyle(
@@ -1266,8 +1269,9 @@ class LineBuilder {
           }
 
           if (frosthavenStyle) {
+
             Widget image = Image.asset(
-              scale: 1.0 / (scale * 0.15),
+              scale: 1/(scale * 0.15),
               //for some reason flutter likes scale to be inverted
               //fit: BoxFit.fitHeight,
               height: 6.0 * scale,
@@ -1379,9 +1383,9 @@ class LineBuilder {
                       color: left ? Colors.black : Colors.white,
                       backgroundColor: debugColors? Colors.amber : null,
                       fontSize:
-                          (alignment == CrossAxisAlignment.center ? 12.0 : 12.0) *
+                      ((alignment == CrossAxisAlignment.center ? 12.0 : 12.0) *
                               0.8 *
-                              scale,
+                              scale),
                       height: (alignment == CrossAxisAlignment.center)
                           ? frosthavenStyle
                               ? 1.0
