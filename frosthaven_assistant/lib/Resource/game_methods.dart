@@ -439,20 +439,137 @@ class GameMethods {
     return false;
   }
 
-  static void clearTurnState(){
+  static void clearTurnStateConditions(Figure figure, bool clearLastTurnToo) {
+    if(!clearLastTurnToo){
+      figure.conditionsAddedPreviousTurn.value = figure.conditionsAddedThisTurn.value.toSet();
+    } else {
+      figure.conditionsAddedPreviousTurn.value.clear();
+    }
+    if(!clearLastTurnToo) {
+      if (figure.conditionsAddedThisTurn.value.contains(Condition.chill)) {
+        figure.chill.value--;
+        if(figure.chill.value > 0){
+          figure.conditionsAddedThisTurn.value = {Condition.chill};
+        } else {
+          figure.conditionsAddedThisTurn.value.clear();
+        }
+      } else {
+        figure.conditionsAddedThisTurn.value.clear();
+      }
+    } else {
+      figure.conditionsAddedThisTurn.value.clear();
+    }
+
+  }
+
+  static void clearTurnState(bool clearLastTurnToo){
     for (var item in _gameState.currentList) {
       item.turnState = TurnsState.notDone;
+      if(item is Character) {
+        clearTurnStateConditions(item.characterState, clearLastTurnToo);
+        for (var instance in item.characterState.summonList.value) {
+          clearTurnStateConditions(instance, clearLastTurnToo);
+        }
+
+      } else if(item is Monster) {
+        for (var instance in item.monsterInstances.value) {
+          clearTurnStateConditions(instance, clearLastTurnToo);
+        }
+      }
+    }
+  }
+
+  static bool canExpire(Condition condition) {
+    //TODO look it up
+    if(
+    //condition == Condition.bane || //don't remove bane because user need to remember to remove 10hp as well
+        condition == Condition.strengthen ||
+        condition == Condition.stun ||
+        condition == Condition.immobilize ||
+        condition == Condition.muddle ||
+        condition == Condition.invisible ||
+        condition == Condition.disarm ||
+        condition == Condition.chill ||
+        condition == Condition.impair
+    ) {
+     return true;
+    }
+    return false;
+  }
+
+  static void removeExpiringConditions(Figure figure) {
+    if(getIt<Settings>().expireConditions.value == true) {
+      bool chillRemoved = false;
+      for (int i = figure.conditions.value.length-1; i >= 0; i--) {
+        Condition item = figure.conditions.value[i];
+        if (canExpire(item)) {
+          if(item != Condition.chill || chillRemoved == false) {
+            if (!figure.conditionsAddedThisTurn.value.contains(item)) {
+              figure.conditions.value.removeAt(i);
+              figure.conditionsAddedPreviousTurn.value.add(item);
+            }
+            if (item == Condition.chill) {
+              figure.chill.value--;
+              chillRemoved = true;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  static void removeExpiringConditionsFromListItem(ListItemData item) {
+    if(item is Character) {
+      removeExpiringConditions(item.characterState);
+      for (var summon in item.characterState.summonList.value) {
+        removeExpiringConditions(summon);
+      }
+    } else if (item is Monster) {
+      for (var instance in item.monsterInstances.value) {
+        removeExpiringConditions(instance);
+      }
+    }
+  }
+
+  static void reapplyConditions(Figure figure) {
+    for(var condition in figure.conditionsAddedPreviousTurn.value) {
+      if(!figure.conditions.value.contains(condition) || condition == Condition.chill) {
+        figure.conditions.value.add(condition);
+        figure.conditionsAddedThisTurn.value.remove(condition);
+      }
+      if(condition == Condition.chill) {
+        figure.chill.value++;
+      }
+    }
+  }
+
+  static void reapplyConditionsFromListItem(ListItemData item) {
+    if(item is Character) {
+      reapplyConditions(item.characterState);
+      for (var summon in item.characterState.summonList.value) {
+        reapplyConditions(summon);
+      }
+    } else if (item is Monster) {
+      for (var instance in item.monsterInstances.value) {
+        reapplyConditions(instance);
+      }
     }
   }
 
   static void setTurnDone(int index) {
     for (int i = 0; i < index; i++) {
-      _gameState.currentList[i].turnState = TurnsState.done;
+      if(_gameState.currentList[i].turnState != TurnsState.done) {
+        _gameState.currentList[i].turnState = TurnsState.done;
+        removeExpiringConditionsFromListItem(_gameState.currentList[i]);
+      }
+
     }
     //if on index is NOT current then set to current else set to done
     int newIndex = index +1;
     if (_gameState.currentList[index].turnState == TurnsState.current){
       _gameState.currentList[index].turnState = TurnsState.done;
+      removeExpiringConditionsFromListItem(_gameState.currentList[index]);
+      //remove expiring conditions
 
     }else {
       newIndex = index;
@@ -461,19 +578,29 @@ class GameMethods {
       ListItemData data = _gameState.currentList[newIndex];
       if(data is Monster){
         if (data.monsterInstances.value.isNotEmpty || data.isActive){
+          if(data.turnState == TurnsState.done) {
+            reapplyConditionsFromListItem(data);
+          }
           data.turnState = TurnsState.current;
           break;
         }
       }
       else if(data is Character){
         if (data.characterState.health.value > 0){
+          if(data.turnState == TurnsState.done) {
+            reapplyConditionsFromListItem(data);
+          }
           data.turnState = TurnsState.current;
           break;
         }
       }
     }
     for (int i = newIndex+1; i < _gameState.currentList.length; i++) {
+      if(_gameState.currentList[i].turnState == TurnsState.done) {
+        reapplyConditionsFromListItem(_gameState.currentList[i]);
+      }
       _gameState.currentList[i].turnState = TurnsState.notDone;
+
     }
   }
 

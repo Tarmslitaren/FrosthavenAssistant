@@ -859,7 +859,10 @@ class LineBuilder {
             radius: Radius.circular(10.0 * scale),
             //strokeCap: StrokeCap.round,
             padding: const EdgeInsets.all(0),
-            dashPattern: [2.0 * scale, 1.0 * scale],
+            //these are closer to the real values, but looks bad on small scale
+            //dashPattern: [1.2 * scale, 0.5 * scale], //1.2 && 0.5
+            //strokeWidth: 0.5 * scale, //0.4
+            dashPattern: [1.5 * scale, 0.8 * scale],
             strokeWidth: 0.6 * scale,
             child: Container(
                 decoration: BoxDecoration(

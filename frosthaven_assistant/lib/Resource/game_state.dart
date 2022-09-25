@@ -24,7 +24,8 @@ class Figure {
   final level = ValueNotifier<int>(1);
   final maxHealth = ValueNotifier<int>(0); //? //needed for the times you wanna set hp yourself, for special reasons
   final conditions = ValueNotifier<List<Condition>>([]);
-  final conditionsAddedThisTurn = ValueNotifier<List<Condition>>([]);
+  final conditionsAddedThisTurn = ValueNotifier<Set<Condition>>({});
+  final conditionsAddedPreviousTurn = ValueNotifier<Set<Condition>>({});
   final chill = ValueNotifier<int>(0);
 
 }
@@ -52,7 +53,8 @@ class CharacterState extends Figure{
         '"display": "$display", '
         '"summonList": ${summonList.value.toString()}, '
         '"conditions": ${conditions.value.toString()}, '
-        '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.value.toString()} '
+        '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.value.toList().toString()}, '
+        '"conditionsAddedPreviousTurn": ${conditionsAddedPreviousTurn.value.toList().toString()} '
         '}';
   }
 
@@ -79,6 +81,12 @@ class CharacterState extends Figure{
       List<dynamic> condis2 = json["conditionsAddedThisTurn"];
       for (int item in condis2) {
         conditionsAddedThisTurn.value.add(Condition.values[item]);
+      }
+    }
+    if(json.containsKey("conditionsAddedPreviousTurn")) {
+      List<dynamic> condis3 = json["conditionsAddedPreviousTurn"];
+      for (int item in condis3) {
+        conditionsAddedPreviousTurn.value.add(Condition.values[item]);
       }
     }
   }
@@ -219,7 +227,8 @@ class MonsterInstance extends Figure{
         '"type": ${type.index}, '
         '"chill": ${chill.value}, '
         '"conditions": ${conditions.value.toString()}, '
-        '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.value.toString()} '
+        '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.value.toList().toString()}, '
+        '"conditionsAddedPreviousTurn": ${conditionsAddedPreviousTurn.value.toList().toString()} '
         '}';
   }
 
@@ -245,6 +254,12 @@ class MonsterInstance extends Figure{
       List<dynamic> condis2 = json["conditionsAddedThisTurn"];
       for (int item in condis2) {
         conditionsAddedThisTurn.value.add(Condition.values[item]);
+      }
+    }
+    if(json.containsKey("conditionsAddedPreviousTurn")) {
+      List<dynamic> condis3 = json["conditionsAddedPreviousTurn"];
+      for (int item in condis3) {
+        conditionsAddedPreviousTurn.value.add(Condition.values[item]);
       }
     }
   }

@@ -242,6 +242,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                           getIt<GameState>().unlockedClasses = {};
                         });
                       }),
+                  const Text("Connect devices on local wifi:"),
                   ValueListenableBuilder<bool>(
                       valueListenable: settings.client,
                       builder: (context, value, child) {

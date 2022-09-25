@@ -19,6 +19,10 @@ class RemoveConditionCommand extends Command {
     newList.addAll(figure.conditions.value);
     newList.remove(condition);
     figure.conditions.value = newList;
+    if(condition != Condition.chill || !figure.conditions.value.contains(Condition.chill)) {
+      figure.conditionsAddedThisTurn.value.remove(condition);
+    }
+    figure.conditionsAddedPreviousTurn.value.remove(condition);
     getIt<GameState>().updateList.value++;
   }
 

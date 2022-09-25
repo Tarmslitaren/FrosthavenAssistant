@@ -16,6 +16,15 @@ class AddConditionCommand extends Command {
     newList.addAll(figure.conditions.value);
     newList.add(condition);
     figure.conditions.value = newList;
+
+    //only added this turn if is current or done
+    for(var item in getIt<GameState>().currentList) {
+      if (item.id == ownerId) {
+        if (item.turnState != TurnsState.notDone && getIt<GameState>().round == RoundState.playTurns) {
+          figure.conditionsAddedThisTurn.value.add(condition);
+        }
+      }
+    }
     getIt<GameState>().updateList.value++;
   }
 
