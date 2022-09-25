@@ -397,11 +397,7 @@ class StatusMenuState extends State<StatusMenu> {
                           Colors.red,
                           figureId: figureId,
                           ownerId: ownerId),
-                      /*buildCounterButtons(
-                        figure.health,
-                        ChangeHealthCommand(0, figureId, ownerId),
-                        figure.maxHealth.value,
-                        "assets/images/blood.png", context, figure, false, Colors.red),*/
+                      const SizedBox(height: 2),
                       hasXp
                           ? CounterButton(
                               (figure as CharacterState).xp,
@@ -413,6 +409,7 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId: figureId,
                               ownerId: ownerId)
                           : Container(),
+                      SizedBox(height: hasXp? 2: 0),
                       widget.characterId != null || isSummon
                           ? buildChillButtons(
                               figure.chill,
@@ -422,6 +419,7 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId,
                               ownerId)
                           : Container(),
+                      SizedBox(height: widget.characterId != null || isSummon? 2: 0),
                       widget.monsterId != null
                           ? CounterButton(
                               deck.blesses,
@@ -433,6 +431,7 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId: figureId,
                               ownerId: ownerId)
                           : Container(),
+                      SizedBox(height: widget.monsterId != null? 2: 0),
                       widget.monsterId != null && canBeCursed
                           ? CounterButton(
                               deck.curses,
@@ -444,6 +443,7 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId: figureId,
                               ownerId: ownerId)
                           : Container(),
+                      SizedBox(height: widget.monsterId != null && canBeCursed? 2: 0),
                       Row(
                         children: [
                           SizedBox(
