@@ -192,8 +192,9 @@ class LineBuilder {
     return map;
   }
 
+  //get rid of this if it doesn't really help
   static double getTopPaddingForStyle(TextStyle style) {
-    if(style.height! < 1) {
+    if(style.height! <= 1) {
       return 0;
     }
     double height = style.fontSize!;
@@ -1386,9 +1387,7 @@ class LineBuilder {
                       color: left ? Colors.black : Colors.white,
                       backgroundColor: debugColors? Colors.amber : null,
                       fontSize:
-                      ((alignment == CrossAxisAlignment.center ? 12.0 : 12.0) *
-                              0.8 *
-                              scale),
+                      ((alignment == CrossAxisAlignment.center ? 12 : 12) * scale),
                       height: (alignment == CrossAxisAlignment.center)
                           ? frosthavenStyle
                               ? 1.0
