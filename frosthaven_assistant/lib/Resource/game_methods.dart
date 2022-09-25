@@ -565,7 +565,7 @@ class GameMethods {
 
     }
     //if on index is NOT current then set to current else set to done
-    int newIndex = index +1;
+    int newIndex = index + 1;
     if (_gameState.currentList[index].turnState == TurnsState.current){
       _gameState.currentList[index].turnState = TurnsState.done;
       removeExpiringConditionsFromListItem(_gameState.currentList[index]);
