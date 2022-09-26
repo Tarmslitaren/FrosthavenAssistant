@@ -5,7 +5,7 @@
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true/>
 		<key>NSLocationWhenInUseUsageDescription</key>
-        <string>Used by wifi connection submodule</string>
+        <string>Used by wifi identification submodule</string>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
 		<key>CFBundleDisplayName</key>
