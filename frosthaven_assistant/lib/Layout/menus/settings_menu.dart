@@ -277,7 +277,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                     height: 40,
                     child: TextField(
                         controller: _serverTextController,
-                        keyboardType: TextInputType.number,
+                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
                         decoration: const InputDecoration(
                           counterText: "",
                           helperText: "server ip address",

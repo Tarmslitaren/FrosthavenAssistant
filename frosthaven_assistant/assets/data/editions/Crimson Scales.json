@@ -62,7 +62,7 @@
     {
       "name": "Chieftain",
       "edition": "Crimson Scales",
-      "health": [8,9,111,12,14,15,17,18,20],
+      "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "FF76C6C4",
       "summons": {
