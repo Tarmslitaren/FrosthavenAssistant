@@ -671,12 +671,12 @@ class LineBuilder {
       bool frosthavenStyle, String iconToken, bool mainLine) {
     return /*!mainLine &&*/ frosthavenStyle &&
         ((iconToken == "pierce" ||
-            //iconToken == "target" ||
+            iconToken == "brittle" ||
             iconToken == "curse" ||
             iconToken == "bless" ||
             iconToken == "invisible" ||
             iconToken == "strengthen" ||
-            iconToken == "curse" ||
+            iconToken == "bane" ||
             iconToken == "push" ||
             iconToken == "pull" ||
             iconToken.contains("poison") ||
