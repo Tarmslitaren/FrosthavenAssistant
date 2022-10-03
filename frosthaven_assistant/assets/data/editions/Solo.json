@@ -830,9 +830,129 @@
 				{ "type": "Escort", "name": "Rift 3", "health": "3+L"},
 				{ "type": "Escort", "name": "Rift 4", "health": "3+L"}
 			]
+		},
+		"Bombard: Disarm the Machine": {
+			"monsters": [ "Ancient Artillery", "Stone Golem" ]
+		},
+		"Brightspark: Elemental Converter": {
+			"monsters": [ "Black Imp", "Deep Terror", "Hound", "Lurker", "Rending Drake", "Spitting Drake" ]
+		},
+		"Chainguard: Penitentiary Lockdown": {
+			"monsters": [ "Bandit Archer", "Bandit Guard" ]
+		},
+		"Chieftain: Forest Invaders": {
+			"monsters": [ "Cave Bear", "Giant Viper", "Hound", "Vermling Scout", "Vermling Shaman" ]
+		},
+		"Fire Knight: Through the Fire and the Flames": {
+			"monsters": [ "Flame Demon", "Rending Drake #60 Special", "Savvas Lavaflow", "Spitting Drake" ]
+		},
+		"Hierophant: Archaic Preservation": {
+			"monsters": [ "Ancient Artillery", "Black Imp", "Lurker", "Rending Drake", "Stone Golem" ]
+		},
+		"Hollowpact: Hallow Redemption": {
+			"monsters": [ "Aesther Ashblade", "Cave Bear", "Forest Imp", "Vermling Shaman" ],
+
+			"special": [
+				{
+					"type": "LevelAdjust",
+					"name": "Aesther Ashblade",
+					"level": -1
+				}]
+		},
+		"Mirefoot: A Cornered Viper": {
+			"monsters": [ "Cave Bear", "Giant Viper", "Inox Archer", "Living Corpse", "Living Spirit", "Stone Golem" ]
+		},
+		"Luminary: Glowing Crystals": {
+			"monsters": [ "Deep Terror", "Lurker" ]
+		},
+		"Spirit Caller: Beyond the Grave": {
+			"monsters": [ "Vermling Shaman" ],
+			"special": [
+				{
+					"type": "Escort",
+					"name": "Angry Spirit 1",
+					"init": 25,
+					"health": "6"
+				},
+				{
+					"type": "Escort",
+					"name": "Angry Spirit 2",
+					"init": 25,
+					"health": "6"
+				}]
+		},
+		"Starslinger: Otherworldly Strangers": {
+			"monsters": [ "City Archer", "City Guard", "Earth Demon", "Harrower Infester", "Night Demon", "Sun Demon" ]
+		},
+		"Amber Aegis: Hive Guardian": {
+			"monsters": [ "Flame Demon", "Frost Demon", "Wind Demon", "Earth Demon", "Night Demon", "Sun Demon" ],
+			"special": [
+				{
+					"type": "Escort",
+					"name": "Soul Leech Egg 1",
+					"init": 25,
+					"health": "3+L"
+				},
+				{
+					"type": "Escort",
+					"name": "Soul Leech Egg 2",
+					"init": 25,
+					"health": "3+L"
+				}
+			]
+		},
+		"Artificer: Magnum Opus": {
+			"monsters": [  "Clockwork Soldier", "Clockwork Railcaster" ]
+		},
+		"Ruinmaw: The Fall of Shadow’s Respite": {
+			"monsters": [ "Gnashing Drake", "Spitting Drake", "Rending Drake", "Vermling Scout (ally)", "Vermling Shaman (ally)" ],
+			"special": [
+				{
+					"type": "Escort",
+					"name": "The Chosen",
+					"init": 99,
+					"health": "6+L"
+				}]
 		}
 	},
 	"sections": {
-
+		"#68A Scenario 60": {
+			"monsters": [ "Drakefiend" ]
+		},
+		"#71A Scenario 62": {
+			"monsters": [ "Your Shadow" ]
+		},
+		"#73C Scenario 65": {
+			"monsters": [],
+			"special": [
+				{
+					"type": "Objective",
+					"name": "Vile Spirit 1",
+					"health": 4,
+					"init": 50
+				},
+				{
+					"type": "Objective",
+					"name": "Vile Spirit 2",
+					"health": 4,
+					"init": 50
+				}]
+		},
+		"#73D Scenario 65": {
+			"monsters": [],
+			"special": [
+				{
+					"type": "Objective",
+					"name": "Haunted Ghoul Spirit 1",
+					"health": 10,
+					"init": 50
+				}]
+		},
+		"#QA3 Cooling Chamber": {
+			"monsters": [ "Clockwork Guardian" ]
+		},
+		"#QA3 Inspection Chamber": {
+			"monsters": [ "Steel Construct" ]
+		}
 	}
 }
