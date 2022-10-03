@@ -4696,13 +4696,13 @@
       "monsters": [ "Vermling Shaman" ],
       "special": [
         {
-          "type": "Ecort",
+          "type": "Escort",
           "name": "Angry Spirit 1",
           "init": 25,
           "health": "6"
         },
         {
-          "type": "Ecort",
+          "type": "Escort",
           "name": "Angry Spirit 2",
           "init": 25,
           "health": "6"
@@ -4722,13 +4722,13 @@
       "monsters": [ "Flame Demon", "Frost Demon", "Wind Demon", "Earth Demon", "Night Demon", "Sun Demon" ],
       "special": [
         {
-          "type": "Ecort",
+          "type": "Escort",
           "name": "Soul Leech Egg 1",
           "init": 25,
           "health": "3+L"
         },
         {
-          "type": "Ecort",
+          "type": "Escort",
           "name": "Soul Leech Egg 2",
           "init": 25,
           "health": "3+L"
@@ -4765,7 +4765,7 @@
       "monsters": [ "Gnashing Drake", "Spitting Drake", "Rending Drake", "Vermling Scout (ally)", "Vermling Shaman (ally)" ],
       "special": [
         {
-          "type": "Ecort",
+          "type": "Escort",
           "name": "The Chosen",
           "init": 99,
           "health": "6+L"
