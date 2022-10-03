@@ -14,7 +14,7 @@ import '../Resource/commands/add_standee_command.dart';
 import '../Resource/enums.dart';
 import '../Resource/stat_calculator.dart';
 import '../Resource/ui_utils.dart';
-import 'line_builder.dart';
+import '../Resource/line_builder/line_builder.dart';
 
 class MonsterStatCardWidget extends StatefulWidget {
   final Monster data;

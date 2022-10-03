@@ -11,7 +11,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/ui_utils.dart';
-import 'line_builder.dart';
+import '../Resource/line_builder/line_builder.dart';
 import 'menus/ability_card_zoom.dart';
 
 

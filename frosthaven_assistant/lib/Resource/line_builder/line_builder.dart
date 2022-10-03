@@ -1,14 +1,10 @@
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
-import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
+import 'package:frosthaven_assistant/Resource/line_builder/frosthaven_converter.dart';
+import 'package:frosthaven_assistant/Resource/line_builder/stat_applier.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
-
-import '../Resource/enums.dart';
-import '../Resource/game_state.dart';
-import 'package:dotted_border/dotted_border.dart';
+import '../game_state.dart';
 
 class LineBuilder {
   static const bool debugColors = false;
@@ -131,67 +127,6 @@ class LineBuilder {
     return EdgeInsets.only(left: 0.1 * height, right: 0.1 * height);
   }
 
-  static Map<String, int> _getStatTokens(Monster monster, bool elite) {
-    var map = <String, int>{};
-    MonsterStatsModel data;
-    if (monster.type.levels[monster.level.value].boss != null) {
-      //is boss
-      if (elite) {
-        return map;
-      }
-      data = monster.type.levels[monster.level.value].boss!;
-    } else {
-      if (elite) {
-        data = monster.type.levels[monster.level.value].elite!;
-      } else {
-        data = monster.type.levels[monster.level.value].normal!;
-      }
-    }
-    for (String item in data.attributes) {
-      //remove size modifiers (only used for immobilize since it's so long it overflows.)
-      String sizeMod = (item.substring(0, 1));
-      if (sizeMod == "^" || sizeMod == "*" && item.length > 1) {
-        item = item.substring(1);
-      }
-      if (item.substring(0, 1) == "%") {
-        //expects token to be first in line. is this ok?
-        //parse item and then parse number;
-        for (int i = 1; i < item.length; i++) {
-          if (item[i] == '%') {
-            String token = item.substring(1, i);
-            int number = 0;
-            if (i != item.length - 1) {
-              for (int j = i + 2; j < item.length; j++) {
-                if (item[j] == ' ' || j == item.length - 1) {
-                  //need to find end of nr and ignore the rest
-                  String nr = item.substring(i + 1, j + 1);
-                  int? res = StatCalculator.calculateFormula(nr);
-                  if (res != null) {
-                    number = res;
-                  } else {
-                    if (kDebugMode) {
-                      print(
-                          "failed calculation for formula: ${nr}for token: $token");
-                    }
-                  }
-                  break;
-                }
-              }
-            }
-
-            if (token == "target" && number == 0) {
-              //target needs a nr
-              continue;
-            }
-            map[token] = number;
-            break; //only one token added per line
-          }
-        }
-      }
-    }
-    return map;
-  }
-
   //get rid of this if it doesn't really help
   static double getTopPaddingForStyle(TextStyle style) {
     if(style.height! <= 1) {
@@ -205,299 +140,6 @@ class LineBuilder {
     return height * 0.15;
   }
 
-  static List<String> _applyStatForToken(
-      String formula,
-      String line,
-      String sizeModifier,
-      int startIndex,
-      int endIndex,
-      Monster monster,
-      bool showNormal,
-      bool showElite,
-      String lastToken,
-      Map<String, int> normalTokens,
-      Map<String, int> eliteTokens) {
-    if (!showElite && !showNormal) {
-      return [line]; //?
-    }
-
-    List<String> retVal = [];
-    List<String> tokens = [];
-    List<String> eTokens = [];
-    int normalValue = 0;
-    int eliteValue = 0;
-    bool skipCalculation = false; //in case un-calculable
-    MonsterStatsModel? normal = monster.type.levels[monster.level.value].boss ??
-        monster.type.levels[monster.level.value].normal;
-    MonsterStatsModel? elite = monster.type.levels[monster.level.value].elite;
-    if (lastToken == "attack") {
-      int? calc = StatCalculator.calculateFormula(normal!.attack);
-      if (calc != null) {
-        normalValue = calc;
-      } else {
-        skipCalculation = true;
-      }
-      if (elite != null) {
-        calc = StatCalculator.calculateFormula(elite.attack);
-        if (calc != null) {
-          eliteValue = calc;
-        }
-      }
-
-      RegExp regEx =
-          RegExp(r"(?=.*[a-z])"); //not sure why I do this. only letters?
-      for (var item in normalTokens.keys) {
-        if (regEx.hasMatch(item) == true) {
-          if (item != "shield" &&
-              item != "retaliate" &&
-              item != "range" &&
-              item != "jump") {
-            tokens.add("%$item%");
-          }
-        }
-      }
-      for (var item in eliteTokens.keys) {
-        if (regEx.hasMatch(item) == true) {
-          if (item != "shield" &&
-              item != "retaliate" &&
-              item != "range" &&
-              item != "jump") {
-            eTokens.add("%$item%");
-          }
-        }
-      }
-    } else if (lastToken == "range") {
-      if (normal?.range != 0) {
-        normalValue = normal!.range;
-        if (elite != null) {
-          eliteValue = elite.range;
-        }
-      }
-    } else if (lastToken == "move") {
-      normalValue = StatCalculator.calculateFormula(normal!.move)!;
-      if (elite != null) {
-        eliteValue = eliteValue = StatCalculator.calculateFormula(elite.move)!;
-      }
-      //TODO: add jump if has innate jump
-    } else if (lastToken == "shield") {
-      int? value = normalTokens["shield"];
-      int? eValue = eliteTokens["shield"];
-      if (elite != null && eValue != null) {
-        eliteValue = eValue;
-      }
-      if (normal != null && value != null) {
-        normalValue = value;
-      }
-    } else if (lastToken == "retaliate") {
-      int? value = normalTokens["retaliate"];
-      int? eValue = eliteTokens["retaliate"];
-      if (elite != null && eValue != null) {
-        eliteValue = eValue;
-      }
-      if (normal != null && value != null) {
-        normalValue = value;
-      }
-    } else if (lastToken == "target") {
-      //only if there is ever a +x target
-      /*int? value = normalTokens["target"];
-      int? eValue = eliteTokens["target"];
-      if (elite != null && eValue != null) {
-        eliteValue = eValue;
-      }
-      if (normal != null && value != null) {
-        normalValue = value;
-      }*/
-    }
-    String normalResult = formula;
-    if (!skipCalculation) {
-      int? res = StatCalculator.calculateFormula("$formula+$normalValue");
-
-      if (res != null && res < 0) {
-        res = 0; //needed for blood tumor: has 0 move and a -1 move card
-      }
-      if (res == null) {
-        skipCalculation = true;
-      } else {
-        normalResult = res.toString();
-      }
-    }
-
-    String newStartOfLine = line.substring(0, startIndex);
-    if (showNormal) {
-      newStartOfLine += normalResult;
-      if (!skipCalculation) {
-        for (var item in tokens) {
-          newStartOfLine += "|$item";
-          //add nr if applicable
-          String key = item.substring(1, item.length - 1);
-          int value = normalTokens[key]!;
-          if (value > 0) {
-            newStartOfLine += " $value";
-          }
-        }
-      }
-    }
-
-    if (elite != null && !skipCalculation && showElite) {
-      if (showNormal) {
-        newStartOfLine += "/";
-      }
-      retVal.add(newStartOfLine);
-
-      int eliteResult =
-          StatCalculator.calculateFormula("$formula+$eliteValue")!;
-      if (eliteResult < 0) {
-        eliteResult = 0;
-      }
-      String eliteString = "!$sizeModifier£$eliteResult";
-      for (var item in eTokens) {
-        eliteString += "|$item";
-
-        //add nr if applicable
-        String key = item.substring(1, item.length - 1);
-        int value = eliteTokens[key]!;
-        if (value > 0) {
-          eliteString += " $value";
-        }
-      }
-      retVal.add(eliteString);
-    } else {
-      retVal.add(newStartOfLine);
-    }
-    if (endIndex < line.length) {
-      String leftOver =
-          "!$sizeModifier${line.substring(endIndex + 1, line.length)}";
-
-      //retVal.addAll(applyMonsterStats(leftOver, sizeToken, monster));
-      retVal.add(leftOver);
-    }
-    return retVal;
-  }
-
-  static List<String> _applyMonsterStats(final String lineInput,
-      String sizeToken, Monster monster, bool forceShowAll) {
-    bool showElite = monster.monsterInstances.value.isNotEmpty &&
-            monster.monsterInstances.value[0].type == MonsterType.elite ||
-        monster.isActive;
-    bool showNormal = monster.monsterInstances.value.isNotEmpty &&
-            monster.monsterInstances.value.last.type != MonsterType.elite ||
-        monster.isActive;
-    if (forceShowAll) {
-      showElite = true;
-      showNormal = true;
-    }
-    String line = "" + lineInput; //make sure lineInput is not altered
-    if (kDebugMode) {
-      //print("monster: ${monster.id}");
-      //print("line: $line");
-    }
-
-    List<String> retVal = [];
-
-    //get the data
-    var normalTokens = _getStatTokens(monster, false);
-    var eliteTokens = _getStatTokens(monster, true);
-
-    RegExp regExpNumbers = RegExp(r'^[\d ()xCL/*+-]+$');
-    //first pass fix values only
-    String lastToken =
-        ""; //turn this into move or attack or whatever, then apply correct monster stat
-    bool isInToken = false;
-    int tokenStartIndex = 0;
-    for (int i = 0; i < line.length; i++) {
-      if (line[i] == "%") {
-        if (!isInToken) {
-          isInToken = true;
-          tokenStartIndex = i + 1;
-        } else {
-          isInToken = false;
-          lastToken = line.substring(tokenStartIndex, i);
-        }
-      }
-      if (!isInToken &&
-                  (line[i] == '+' ||
-                      line[i] == '-' ||
-                      line[i] == 'C' ||
-                      line[i] == 'L') ||
-              (line[i].contains(regExpNumbers) &&
-                      lastToken
-                          .isEmpty) //plain numbers cant be calculated for tokens (e.g. attack 1 is not same as attack +1)
-                  &&
-                  (i == 0 ||
-                      line[i - 1] ==
-                          ' ') //supposing there is always a leading whitespace to any formula
-          ) {
-        String formula = line[i];
-        int startIndex = i;
-        int endIndex = i;
-
-        for (int j = i + 1; j < lineInput.length; j++) {
-          String val = lineInput[j];
-          if (val.contains(regExpNumbers)) {
-            if (val != ' ') formula += val;
-            endIndex = j;
-          } else {
-            i = j; //skip ahead
-            if (lineInput[i - 1] == ' ') {
-              i = j - 1; //restore any skipped whitespace
-              endIndex = endIndex - 1;
-            }
-            //hack for when a formula is followed by " (..."
-            if (i > 0 && lineInput[i - 1] == '(') {
-              i = j - 1; //restore any skipped (
-              endIndex = endIndex - 1;
-              formula = formula.substring(0, formula.length - 1);
-              if (i > 1 && lineInput[i - 2] == ' ') {
-                i = j - 1; //restore any skipped whitespace
-                endIndex = endIndex - 1;
-              }
-            }
-            break;
-          }
-        }
-        if (formula.length > 1 && lastToken.isNotEmpty || formula.length > 2) {
-          //this disallows a single digit or C,L. single C or L could be part of regular text
-          //for a formula to work (outside of plain C or L) it must either be modifying a token value or be 3+ chars long
-          //might not be right. test.
-          if (kDebugMode) {
-            //print("formula:$formula");
-          }
-
-          if (lastToken.isNotEmpty) {
-            retVal = _applyStatForToken(
-              formula,
-              line,
-              sizeToken,
-              startIndex,
-              endIndex,
-              monster,
-              showNormal,
-              showElite,
-              lastToken,
-              normalTokens,
-              eliteTokens,
-            );
-            lastToken = "";
-            if (retVal.isNotEmpty) {
-              return retVal;
-            }
-          } else {
-            int? result = StatCalculator.calculateFormula(formula);
-            if (result != null) {
-              if (result < 0) {
-                //just some nicety. probably never applies
-                result = 0;
-              }
-              line = line.replaceRange(
-                  startIndex, endIndex + 1, result.toString());
-            }
-          }
-        }
-      }
-    }
-
-    return [line];
-  }
 
   static Widget createLinesColumn(
       CrossAxisAlignment alignment, List<Widget> lines) {
@@ -506,381 +148,6 @@ class LineBuilder {
         crossAxisAlignment: alignment,
         mainAxisSize: MainAxisSize.max,
         children: lines);
-  }
-
-  static List<String> convertLinesToFH(List<String> lines, bool applyStats) {
-    //move lines up when they should
-    //add container markers here as well
-    List<String> retVal = [];
-    bool isSubLine =
-        false; //marked potential start of sub line after a mainline end
-    bool isReallySubLine = false; //when entering a definite sub line
-    bool isConditional = false;
-    bool isElementUse = false;
-    for (int i = 0; i < lines.length; i++) {
-      String line = lines[i];
-      if ((line == "[r]" || line == "[s]") && lines[i + 1].contains('%use')) {
-        isElementUse = true;
-      }
-      if ((line == "[r]" || line == "[s]") &&
-          (lines[i + 1].contains('%use') ||
-              lines[i + 1].toLowerCase().contains('if ') || lines[i + 1].contains('On ') ||
-              (lines.length > i + 2 &&
-                  lines[i + 2].toLowerCase().contains('if ')|| lines[i + 1].contains('On ')))) {
-        isConditional = true;
-      }
-      if ((line == "[/r]" || line == "[/s]") && isConditional) { //TODO: add instead a [conditionalDone] tag
-        isConditional = false;
-        isElementUse = false;
-      }
-
-      line = line.replaceAll("Affect", "Target");
-      if (!applyStats) {
-        line = line.replaceAll(" - ", "-");
-        line = line.replaceAll(" + ", "+");
-      }
-      line = line.replaceAll("% ", "%"); //oh oh.
-
-      //the affect keyword is presumably because in base gloomhaven you can only target enemies.
-      // this is changed already in JotL.
-
-      if (line.startsWith("*")) {
-        //reset
-        if (isReallySubLine) {
-          //&& !isConditional
-          retVal.add("[subLineEnd]");
-        }
-        isReallySubLine = false;
-        isSubLine = false;
-        isConditional = false;
-        isElementUse = false;
-      }
-
-      if (line.startsWith("^") && isSubLine) {
-        //&& !isConditional
-        if (!isReallySubLine && (!isConditional || (isElementUse
-            && !line.startsWith("^Perform") && !line.startsWith("^^for each") //harrower infester 30
-           // && !line.startsWith("^All enemies") && !line.startsWith("^^target suffer")//(icecrawler 16) - screws with [c]?
-        ))) {
-          retVal.add("[subLineStart]");
-          isReallySubLine = true;
-        }
-        //make right aligned, in theese cases
-        if (line[1] == '%' ||
-            //these are all very... assuming.
-            line.startsWith("^Self") ||
-            line.startsWith("^-") || //useful for element use add effects
-            line.startsWith("^+") ||
-            line.startsWith("^Advantage") ||
-            //only target on same line for non valued tokens
-            (line.startsWith("^Target") && lines[i - 1].contains('%push%')) ||
-            (line.startsWith("^Target") && lines[i - 1].contains('%pull%')) ||
-            (line.startsWith("^Target") &&
-                lines[i - 1].startsWith('%') &&
-                lines[i - 1].endsWith(
-                    '%')) || //this is to add sub line after a lone condition
-            (line.startsWith("^Target") &&
-                lines[i - 1].startsWith('^%') &&
-                lines[i - 1].endsWith(
-                    '%')) || //you will not want a linebreak after a lone poison sub line
-            line.startsWith("^all") ||
-            line.startsWith("^All") &&
-                !line.startsWith("^All attacks") &&
-                !line.startsWith("^All targets")
-        ) {
-          //make bigger icon and text in element use block
-          if (isElementUse && (lines[i-1].contains("use")  ||
-              (lines[i-2].contains("use") && lines[i-1].contains("[c]")))   // (!lines[i - 2].contains("[c]"))
-              && !line.startsWith("^Target")
-              && !line.startsWith("^all")
-              && !line.startsWith("^All")
-              && !line.contains("instead")
-          ) {
-            //ok, so if there is a subline, then there has to be a [c]
-            line = line.substring(1); //make first sub line into main line
-            if (retVal.last == "[subLineStart]") {
-              retVal.removeLast();
-            }
-            isReallySubLine = false;
-          } else if(isElementUse && (!lines[i - 2].contains("[c]") && !line.startsWith("^all")&& !line.startsWith("^All"))){
-            //isReallySubLine = false; //block useblocks from having straight sublines?
-            //hope this doesn't come back to bite me (flame demon 77) - it does savvas lavaflow 51
-          }
-          line = "!$line";
-          line = line.replaceFirst("Self", "self");
-          line = line.replaceFirst("All", "all");
-
-          //TODO: add commas if needed
-
-          if (retVal.last == "[subLineStart]") {
-            retVal.last = "![subLineStart]";
-          } else {
-            //line = "!^ " + line.substring(2); //adding space
-          }
-        }
-
-        if (retVal.last.endsWith("%") && line.endsWith("adjacent enemy")) {
-          //blood ooze 62 hack
-          retVal[retVal.length - 2] = "[subLineStart]";
-        }
-      }
-      if (line.startsWith("^") && isReallySubLine) {
-        //I know.
-        //we add a line breaker at same time as we attach line to last,
-        // because we only look at lastLineTextPartList later
-        if (retVal.last != "[subLineStart]") {
-          retVal.add("!^[lineBreak]");
-        }
-        line = "!$line";
-      } else if (line.startsWith("!") ||
-          line.startsWith("*") ||
-          line.startsWith("^")) {
-        //ignore
-      } else {
-        // if(line != "[c]" && line != "[r]"){
-        if (!isSubLine && !line.contains("%use%")) {
-          isSubLine = true;
-        } else {
-          if (isReallySubLine) {
-            //&&!isConditional
-            retVal.add("[subLineEnd]");
-            isReallySubLine = false;
-            isSubLine = false;
-          }
-        }
-        // }
-      }
-
-      //if conditional or sub line start - add marker
-      //if conditional or sub line end - add end marker
-      //don't add sub line markers if in conditional block
-
-      //use iconography instead of words
-      line = line.replaceAll("Target", "%target%");
-
-      retVal.add(line);
-    }
-    if (isReallySubLine && (!isConditional || isElementUse)) {
-      //&& !isConditional
-      retVal.add("[subLineEnd]");
-    }
-    return retVal;
-  }
-
-  static bool shouldOverflow(
-      bool frosthavenStyle, String iconToken, bool mainLine) {
-    return /*!mainLine &&*/ frosthavenStyle &&
-        ((iconToken == "pierce" ||
-            iconToken == "brittle" ||
-            iconToken == "curse" ||
-            iconToken == "bless" ||
-            iconToken == "invisible" ||
-            iconToken == "strengthen" ||
-            iconToken == "bane" ||
-            iconToken == "push" ||
-            iconToken == "pull" ||
-            iconToken.contains("poison") ||
-            iconToken.contains("wound") ||
-            iconToken == "infect" ||
-            iconToken == "chill" ||
-            iconToken == "disarm" ||
-            iconToken == "immobilize" ||
-            iconToken == "stun" ||
-            iconToken == "muddle"));
-  }
-
-  static void buildFHStyleBackgrounds(
-      List<Widget> lines,
-      List<Widget> lastLineTextPartList,
-      TextAlign textAlign,
-      MainAxisAlignment rowMainAxisAlignment,
-      double scale,
-      bool isInRow,
-      bool isInColumn,
-      bool isColumnInRow,
-      bool hasInnerRow,
-      List<Widget> widgetsInColumn,
-      List<Widget> widgetsInRow,
-  List<Widget> widgetsInInnerRow,
-      ) {
-    List<Widget> list1 = [];
-    List<List<Widget>> list2 = [];
-    bool conditional = false;
-    for (int i = 0; i < lastLineTextPartList.length; i++) {
-      Widget part = lastLineTextPartList[i];
-      if(part is Container) {
-        if (part.child! is Text &&
-            (part.child as Text).data!.contains("[subLineStart]")) {
-          list1 = lastLineTextPartList.sublist(0, i);
-          List<Widget> tempSpanList = [];
-          for (int j = i + 1; j < lastLineTextPartList.length; j++) {
-            Widget part2 = lastLineTextPartList[j];
-            if (part2 is Container && part2.child is Text && (part2.child as Text).data!.contains("[lineBreak]")) {
-              list2.add(tempSpanList.toList());
-              tempSpanList.clear();
-            } else {
-              tempSpanList.add(lastLineTextPartList[j]);
-            }
-          }
-          list2.add(tempSpanList);
-        }
-      }
-      if (part is Container && part.child is Text && (part.child as Text).data!.contains("[conditionalStart]")) {
-        conditional = true;
-        list1 = lastLineTextPartList.sublist(0, i);
-        List<Widget> tempSpanList = [];
-        for (int j = i + 1; j < lastLineTextPartList.length; j++) {
-          Widget part2 = lastLineTextPartList[j];
-          if (part2 is Container && part2.child is Text && (part2.child as Text).data!.contains("[lineBreak]")) {
-            list2.add(tempSpanList.toList());
-            tempSpanList.clear();
-          } else {
-            tempSpanList.add(lastLineTextPartList[j]);
-          }
-        }
-        list2.add(tempSpanList);
-      }
-    }
-
-    /*Widget widget1 = Text.rich(
-      textHeightBehavior: const TextHeightBehavior(
-          leadingDistribution: TextLeadingDistribution.even),
-      textAlign: textAlign,
-      TextSpan(
-        children: list1,
-      ),
-    );*/
-    Row widget1 = Row(children: list1);
-
-    Widget widget2 = Container(
-        decoration: BoxDecoration(
-            color: conditional
-                ? Colors.blue
-                : Color(int.parse("9A808080", radix: 16)),
-            borderRadius: BorderRadius.all(Radius.circular(6.0 * scale))),
-        padding: EdgeInsets.fromLTRB(
-            2.0 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
-        margin: EdgeInsets.only(left: 2.0 * scale, right: 2.0 * scale),
-        //child: Expanded(
-        child: Column(mainAxisSize: MainAxisSize.max, children: [
-          if (list2.isNotEmpty) Row(children: list2[0]),
-          if (list2.length > 1)
-            Row(
-              children: list2[1],
-            ),
-          if (list2.length > 2)
-            Row(
-              children: list2[2],
-            ),
-          if (list2.length > 3)
-            Row(
-              children: list2[3],
-            )
-
-          //can't figure out why the builder does not work
-          /*ListView.builder(
-            itemCount: list2.length,
-            itemBuilder: (context, index) => Text.rich(
-              textHeightBehavior: const TextHeightBehavior(
-                  leadingDistribution: TextLeadingDistribution.even
-              ),
-              textAlign: textAlign,
-              TextSpan(
-                children: list2[index],
-              ),
-          )
-          )*/
-        ])
-        //)
-        );
-    MainAxisAlignment alignment = MainAxisAlignment.center;
-    if (textAlign == TextAlign.end) {
-      alignment = MainAxisAlignment.end;
-    }
-    if (textAlign == TextAlign.start) {
-      alignment = MainAxisAlignment.start;
-    }
-
-    Widget row = Row(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: rowMainAxisAlignment,
-      children: [widget1, widget2],
-    );
-
-    if(hasInnerRow) {
-      if (widgetsInInnerRow.isNotEmpty) {
-        widgetsInInnerRow.removeLast();
-      }
-      widgetsInInnerRow.add(row);
-    }
-    if (isInColumn && (!isInRow || isColumnInRow)) {
-      widgetsInColumn.removeLast();
-      widgetsInColumn.add(row);
-    } else if (isInRow && (!isInColumn)) {
-      if (widgetsInRow.isNotEmpty) {
-        widgetsInRow.removeLast();
-      }
-      widgetsInRow.add(row);
-    } else {
-      lines.removeLast();
-      lines.add(row);
-    }
-  }
-
-  static String getAllTextInWidget(Widget widget) {
-    String retVal = "";
-    if(widget is Row) {
-      for(Widget item in widget.children) {
-        retVal += getAllTextInWidget(item);
-      }
-    }
-    else if(widget is Column) {
-      for(Widget item in widget.children) {
-        retVal += getAllTextInWidget(item);
-      }
-    }
-    else if (widget is Container && widget.child != null) {
-      retVal += getAllTextInWidget(widget.child!);
-    } else if (widget is Text) {
-      retVal += widget.data!;
-    }
-
-    return retVal;
-  }
-
-  static void applyConditionalGraphics(var lines, double scale, bool elementUse, double rightMargin, child){
-    lines.add(Container(
-        margin: EdgeInsets.all(2.0 * scale),
-        //alignment: Alignment.bottomCenter,
-        child: DottedBorder(
-            color: Colors.white,
-            //borderType: BorderType.Rect,
-            borderType: BorderType.RRect,
-            radius: Radius.circular(10.0 * scale),
-            //strokeCap: StrokeCap.round,
-            padding: const EdgeInsets.all(0),
-            //these are closer to the real values, but looks bad on small scale
-            //dashPattern: [1.2 * scale, 0.5 * scale], //1.2 && 0.5
-            //strokeWidth: 0.5 * scale, //0.4
-            dashPattern: [1.5 * scale, 0.8 * scale],
-            strokeWidth: 0.6 * scale,
-            child: Container(
-                decoration: BoxDecoration(
-                  //backgroundBlendMode: BlendMode.softLight,
-                  //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
-                    color: Color(int.parse("9A808080", radix: 16)),
-                    borderRadius:
-                    BorderRadius.all(Radius.circular(10.0 * scale))),
-                //TODO: should the padding be dependant on nr of lines?
-                padding: EdgeInsets.fromLTRB(
-                    elementUse ? 1.0 * scale : 3.0 * scale,
-                    0.25 * scale,
-                    rightMargin,
-                    0.2625 * scale),
-                //margin: EdgeInsets.only(left: 2 * scale),
-                //child: Expanded(
-                child: child))));
   }
 
   static Widget createLines(
@@ -1033,7 +300,7 @@ class LineBuilder {
     List<Widget> lastLineTextPartListRowContent = [];
 
     if (frosthavenStyle) {
-      localStrings = convertLinesToFH(localStrings, applyStats);
+      localStrings =  FrosthavenConverter.convertLinesToFH(localStrings, applyStats);
     }
 
     //specialized layouts
@@ -1068,7 +335,7 @@ class LineBuilder {
       }
       //handle FH layout with gray background for sub-lines
       if (line.contains("[subLineEnd]")) {
-        buildFHStyleBackgrounds(
+        FrosthavenConverter.buildFHStyleBackgrounds(
             lines,
             lastLineTextPartListRowContent,
             textAlign,
@@ -1132,7 +399,7 @@ class LineBuilder {
         //this is used since there is a bug where if there is a [r] %element%%use% [c] ... [/c][/r] then the use is drawn twice. the bug is likely higher up
         String texts = "";
         for (var item in widgetsInInnerRow) {
-          texts += getAllTextInWidget(item);
+          texts += FrosthavenConverter.getAllTextInWidget(item);
         }
         if (texts.contains(" :")) {
           elementUse = true;
@@ -1161,7 +428,7 @@ class LineBuilder {
 
         if (frosthavenStyle && conditional) {
           //might need ot check if in column or row here
-          applyConditionalGraphics(widgetsInColumn, scale, elementUse, rightMargin, row);
+          FrosthavenConverter.applyConditionalGraphics(widgetsInColumn, scale, elementUse, rightMargin, row);
         } else {
           widgetsInColumn.add(row);
         }
@@ -1179,7 +446,7 @@ class LineBuilder {
         //this is used since there is a bug where if there is a [r] %element%%use% [c] ... [/c][/r] then the use is drawn twice. the bug is likely higher up
         String texts = "";
         for (var item in widgetsInRow) {
-          texts += getAllTextInWidget(item);
+          texts += FrosthavenConverter.getAllTextInWidget(item);
         }
         if (texts.contains(" :")) {
           elementUse = true;
@@ -1208,7 +475,7 @@ class LineBuilder {
         widgetsInRow = [];
 
         if (frosthavenStyle && conditional) {
-          applyConditionalGraphics(lines, scale, elementUse, rightMargin, row);
+          FrosthavenConverter.applyConditionalGraphics(lines, scale, elementUse, rightMargin, row);
         } else {
           lines.add(row);
         }
@@ -1311,7 +578,7 @@ class LineBuilder {
       }
       if (applyStats) {
         List<String> statLines =
-            _applyMonsterStats(line, sizeToken, monster, applyAll);
+            StatApplier.applyMonsterStats(line, sizeToken, monster, applyAll);
         line = statLines.removeAt(0);
         if (statLines.isNotEmpty) {
           localStrings.insertAll(i + 1, statLines);
@@ -1401,7 +668,7 @@ class LineBuilder {
             } else {
               double height = _getIconHeight(
                   iconToken, styleToUse.fontSize!, frosthavenStyle);
-              if(frosthavenStyle && styleToUse == midStyle && !shouldOverflow(true, iconToken, false)){
+              if(frosthavenStyle && styleToUse == midStyle && !FrosthavenConverter.shouldOverflow(true, iconToken, false)){
                 //height *= 0.7; //sub line icons too big? don't do this for conditions.
                 //todo: larger margins on range icon instead
               }
@@ -1429,7 +696,7 @@ class LineBuilder {
                 imagePath = "assets/images/abilities/$iconGfx$imageSuffix.png";
               }
               bool overflow =
-                  shouldOverflow(frosthavenStyle, iconGfx, mainLine);
+              FrosthavenConverter.shouldOverflow(frosthavenStyle, iconGfx, mainLine);
               double heightMod = mainLine
                   ? 1.0
                   : 1.35 *
