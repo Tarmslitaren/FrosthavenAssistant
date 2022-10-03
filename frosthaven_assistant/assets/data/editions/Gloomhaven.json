@@ -536,8 +536,8 @@
     {
       "name": "Flame Demon",
       "cards": [
-        [ 628, false, 3, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0", "*.........","%fire%" ],
-        [ 629, false, 24, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0","*.........", "%fire%" ],
+        [ 628, false, 3, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0", "%fire%" ],
+        [ 629, false, 24, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0", "%fire%" ],
         [ 630, true, 46, "%attack% + 0", "^%range% + 0","*.........", "[r]","%fire%%use%", "¤aoe-circle", "[/r]" ],
         [ 631, false, 49,[{
           "gfx": "aoe-line-3-with-black",

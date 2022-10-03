@@ -334,7 +334,7 @@
         ["Nothing Special",437, false, 37, "%move% + 0","*.........", "%attack% + 0", "^%range% 3"],
         ["Nothing Special", 438, false, 37, "%move% + 0","*.........", "%attack% + 0", "^%range% 3"],
         ["Restoration", 439, true, 42, "%move% + 1","*.........", "%heal% 2", "^%range% 3"],
-        ["Cripple", 440, true, 42, "%move% + 0","*.........", "%attack% - 1", "^%range% 3", "^%target% 2", "^%poison%"],
+        ["Rotten Sting", 440, true, 43, "%move% + 0","*.........", "%attack% - 1", "^%target% 2", "^%range% 3", "^%poison%"],
         ["Calculated Strike", 441, false, 76, "%move% - 1","*.........", "%attack% + 1", "^%range% 3"],
         ["Dark Charm", 442, false, 42, "%move% + 0","*.........", "%attack% - 1", "^%range% 3", "^%target% 2", "^%curse%"],
         ["Tip The Scales", 443, false, 24, "%strengthen%", "^Target self and all allies within %range% 2","*.........", "%muddle%", "^Target all enemies within %range% 2"]
@@ -749,12 +749,12 @@
     {
       "name": "Polar Bear",
       "cards": [
-        ["Placeholder", 647, false, 24, "Placeholder"],
-        ["Placeholder", 648, false, 64,  "Placeholder"],
-        ["Placeholder", 649, false, 45,  "Placeholder"],
-        ["Placeholder", 651, true, 10, "Placeholder"],
-        ["Placeholder", 6471, false, 24, "Placeholder"],
-        ["Placeholder", 6481, false, 64,  "Placeholder"],
+        ["Hasty Assault", 647, false, 13, "%move% + 1", "*.........","%attack% - 1"],
+        ["Low Slash", 648, false, 14,  "%move% - 1", "*.........","%attack% + 1", "^%immobilize%"],
+        ["Hibernate", 649, false, 3,  "%shield% 1", "*.........","%retaliate% 2","*.........", "%heal% 2", "^Self"],
+        ["Full Force", 651, true, 34, "%attack% + 1", "^%impair%"],
+        ["Nothing Special", 6471, false, 41, "%move% + 0", "*.........","%attack% + 0"],
+        ["Claw Swipes", 6481, false, 61,  "%move% + 0", "*.........","%attack% - 1", "^%target% 2"],
         ["Placeholder", 6491, false, 45,  "Placeholder"],
         ["Placeholder", 6511, true, 10, "Placeholder"]
       ]
@@ -2934,6 +2934,84 @@
           "level": 7,
           "normal": { "health": 7, "move": 3, "attack": 4,"attributes": [ "placeholder" ] },
           "elite": { "health": 8, "move": 3, "attack": 4, "attributes": [ "placeholder" ] }
+        }
+      ]
+    },
+    "Frozen Fist": {
+      "deck": "Boss (FH)",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "Cx15",
+          "move": 3,
+          "attack": "Cx2",
+          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
+        },
+        {
+          "level": 1,
+          "health": "Cx15",
+          "move": 3,
+          "attack": "Cx2",
+          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
+        },
+        {
+          "level": 2,
+          "health": "Cx15",
+          "move": 3,
+          "attack": "Cx2",
+          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
+        },
+        {
+          "level": 3,
+          "health": "Cx15",
+          "move": 3,
+          "attack": "Cx2",
+          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
+        },
+        {
+          "level": 4,
+          "health": "Cx15",
+          "move": 3,
+          "attack": "Cx2",
+          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
+        },
+        {
+          "level": 5,
+          "health": "Cx15",
+          "move": 3,
+          "attack": "Cx2",
+          "special1": [ "[r]", "[c]","%move% + 0", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2", "%move% + 1", "%attack% +0", "^%target% 3" ],
+          "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
+        },
+        {
+          "level": 6,
+          "health": "Cx15",
+          "move": 3,
+          "attack": "Cx2",
+          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2,","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
+        },
+        {
+          "level": 7,
+          "health": "Cx15",
+          "move": 3,
+          "attack": "Cx2",
+          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2,","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
         }
       ]
     }

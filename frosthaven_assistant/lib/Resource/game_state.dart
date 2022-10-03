@@ -243,7 +243,11 @@ class MonsterInstance extends Figure{
     move = json["move"];
     attack = json["attack"];
     range = json["range"];
-    roundSummoned = json["roundSummoned"];
+    if(json.containsKey("roundSummoned")) {
+      roundSummoned = json["roundSummoned"];
+    } else {
+      roundSummoned = -1;
+    }
     chill.value = json["chill"];
     List<dynamic> condis = json["conditions"];
     for(int item in condis){
