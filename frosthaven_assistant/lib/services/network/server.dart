@@ -56,7 +56,7 @@ class Server {
           commandDescription = _gameState.commandDescriptions[_gameState.commandIndex.value];
         }
         send(
-            "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last.getState()}");
+            "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}");
 
         _serverSocket!.listen((client) {
           handleConnection(client);
@@ -141,7 +141,7 @@ class Server {
                   if(_gameState.commandDescriptions.length > 0) {
                     commandDescription = _gameState.commandDescriptions.last;
                   }
-                  send("Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last.getState()}");
+                  send("Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}");
                 } else if (newIndex > _gameState.commandIndex.value) {
                   _gameState.commandIndex.value = int.parse(indexString);
                   if (newIndex >= 0) {
@@ -150,7 +150,7 @@ class Server {
                   }
                   _gameState.loadFromData(data);
                   _gameState.updateAllUI();
-                  sendToOthers("Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last.getState()}", client);
+                  sendToOthers("Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last!.getState()}", client);
                   //getIt<GameState>().modifierDeck.
                   //client.write('your gameState changes received by server');
                 } else {
@@ -163,7 +163,7 @@ class Server {
                       "Index:${_gameState.commandIndex
                           .value}Description:${_gameState
                           .commandDescriptions[_gameState.commandIndex.value]}GameState:${_gameState
-                          .gameSaveStates.last.getState()}", client);
+                          .gameSaveStates.last!.getState()}", client);
                   //ignore if same index from server
                 }
               } else if (message.startsWith("init")) {
@@ -189,7 +189,7 @@ class Server {
                   sendToOnly(
                       "Index:${_gameState.commandIndex
                           .value}Description:${commandDescription}GameState:${_gameState
-                          .gameSaveStates.last.getState()}", client);
+                          .gameSaveStates.last!.getState()}", client);
                 }
               }
             } else {
