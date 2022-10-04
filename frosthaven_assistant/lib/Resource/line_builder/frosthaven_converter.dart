@@ -12,6 +12,7 @@ class FrosthavenConverter {
     bool isConditional = false;
     bool isElementUse = false;
     for (int i = 0; i < lines.length; i++) {
+      bool startOfConditional = false;
       String line = lines[i];
       if ((line == "[r]" || line == "[s]") && lines[i + 1].contains('%use')) {
         isElementUse = true;
@@ -22,10 +23,15 @@ class FrosthavenConverter {
               (lines.length > i + 2 &&
                   lines[i + 2].toLowerCase().contains('if ')|| lines[i + 1].contains('On ')))) {
         isConditional = true;
+        startOfConditional = true;
       }
       if ((line == "[/r]" || line == "[/s]") && isConditional) { //TODO: add instead a [conditionalDone] tag
         isConditional = false;
         isElementUse = false;
+      }
+
+      if(i > 0 && lines[i - 1].contains("%use")){
+        startOfConditional = true; //makes sub line gray box not appear straight after a element use
       }
 
       line = line.replaceAll("Affect", "Target");
@@ -50,7 +56,7 @@ class FrosthavenConverter {
         isElementUse = false;
       }
 
-      if (line.startsWith("^") && isSubLine) {
+      if (line.startsWith("^") && isSubLine && !startOfConditional) {
         //&& !isConditional
         if (!isReallySubLine && (!isConditional || (isElementUse
             && !line.startsWith("^Perform") && !line.startsWith("^^for each") //harrower infester 30
@@ -59,7 +65,7 @@ class FrosthavenConverter {
           retVal.add("[subLineStart]");
           isReallySubLine = true;
         }
-        //make right aligned, in theese cases
+        //make right aligned, in these cases
         if (line[1] == '%' ||
             //these are all very... assuming.
             line.startsWith("^Self") ||
