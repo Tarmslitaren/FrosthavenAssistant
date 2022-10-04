@@ -35,6 +35,7 @@ class FrosthavenConverter {
       }
 
       line = line.replaceAll("Affect", "Target");
+      line = line.replaceAll("damage", "%damage%");
       if (!applyStats) {
         line = line.replaceAll(" - ", "-");
         line = line.replaceAll(" + ", "+");

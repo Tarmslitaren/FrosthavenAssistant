@@ -66,7 +66,9 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(undoText ),
-                enabled: gameState.commandIndex.value >= 0 && !getIt<Settings>().client.value && !getIt<Settings>().server.value,
+                enabled: gameState.commandIndex.value >= 0 &&
+                    (gameState.commandIndex.value == 0 || gameState.commands[gameState.commandIndex.value - 1] != null) &&
+                    !getIt<Settings>().client.value && !getIt<Settings>().server.value,
                 onTap: () {
                   gameState.undo();
                   //Navigator.pop(context);
