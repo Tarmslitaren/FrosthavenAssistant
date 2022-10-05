@@ -99,6 +99,7 @@ class LineBuilder {
         iconToken == "disarm" ||
         iconToken == "immobilize" ||
         iconToken == "stun" ||
+        iconToken == "strengthen" ||
         iconToken == "muddle") {
       if (mainLine) {
         //smaller margins for secondary modifiers
@@ -129,15 +130,16 @@ class LineBuilder {
 
   //get rid of this if it doesn't really help
   static double getTopPaddingForStyle(TextStyle style) {
-    if(style.height! <= 1) {
-      return 0;
-    }
     double height = style.fontSize!;
     bool markazi = style.fontFamily == "Markazi";
-    if(markazi) {
+
+    if(!markazi && style.height == 0.85){
+      return height * 0.25;
+    }
+    if(markazi && style.height == 0.84) {
       return height * 0.1;
     }
-    return height * 0.15;
+    return 0;
   }
 
 
@@ -220,15 +222,15 @@ class LineBuilder {
             scale),//.floorToDouble()+0.5, //not sur eif flooring the mid scale is realy the best option. or onl yhappens tp work on my android
         //sizes are larger on stat cards
         height: (alignment == CrossAxisAlignment.center ? frosthavenStyle? 1.0 //he one problem here: one line no icons -> squished
-            : 1.0 :
-        1.0//0.8
+            : 0.85 :
+        0.85//0.8
         ),
         // 0.9,
         shadows: [shadow]);
     var normalStyle = TextStyle(
         //maybe slightly bigger between chars space?
-        leadingDistribution: TextLeadingDistribution.even,
-        textBaseline: TextBaseline.alphabetic,
+        //leadingDistribution: TextLeadingDistribution.even,
+        //textBaseline: TextBaseline.alphabetic,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
         backgroundColor: debugColors? Colors.lightGreen : null,
@@ -241,9 +243,9 @@ class LineBuilder {
         height: (alignment == CrossAxisAlignment.center)
             ? frosthavenStyle
                 ? 0.84
-                : 1.0//0.5
+                : 0.85 //need a little more than 1 to align the icons? why?
             : frosthavenStyle? 0.84
-            :1.0,// needs to be at least one for the icon alignment...
+            :0.85,// needs to be at least one for the icon alignment...
         //height is really low for gh style due to text not being center aligned in font - so to force to center the height is reduced. this is a shitty solution to a shitty problem.
         // 0.84,
 
@@ -251,13 +253,13 @@ class LineBuilder {
 
     var eliteStyle = TextStyle(
         backgroundColor: debugColors? Colors.lightGreen : null,
-        leadingDistribution: TextLeadingDistribution.even,
+        //leadingDistribution: TextLeadingDistribution.even,
         //textBaseline: TextBaseline.alphabetic,
         //maybe slightly bigger between chars space?
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 13.1 * scale : 12.56 * scale,
-        height:  frosthavenStyle ? 0.84 : 1.0,
+        height:  frosthavenStyle ? 0.84 : 0.85,
         //0.8,
         shadows: [shadow]);
 
@@ -272,7 +274,7 @@ class LineBuilder {
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 9.52 * scale : 8.8 * scale,
-        height: frosthavenStyle? 1.0: 1.0,
+        height: frosthavenStyle? 1.0: 0.85,
         shadows: [shadow]);
 
     var midStyleSquished = TextStyle(

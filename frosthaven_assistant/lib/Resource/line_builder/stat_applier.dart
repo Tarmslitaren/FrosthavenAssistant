@@ -196,7 +196,7 @@ class StatApplier{
           String key = item.substring(1, item.length - 1);
           int value = normalTokens[key]!;
           if (value > 0) {
-            newStartOfLine += " $value";
+            newStartOfLine += "$value";
           }
         }
       }
@@ -221,7 +221,7 @@ class StatApplier{
         String key = item.substring(1, item.length - 1);
         int value = eliteTokens[key]!;
         if (value > 0) {
-          eliteString += " $value";
+          eliteString += "$value";
         }
       }
       retVal.add(eliteString);
