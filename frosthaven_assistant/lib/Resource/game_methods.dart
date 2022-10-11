@@ -84,7 +84,7 @@ class GameMethods {
     }
     for (var item in _gameState.currentList) {
       if (item is Character) {
-        if (item.characterState.initiative == 0) {
+        if (item.characterState.initiative.value == 0) {
           if (item.characterState.health.value > 0) {
             return false;
           }
