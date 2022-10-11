@@ -411,7 +411,7 @@ class GameSaveState{
       else if (gfx == "bless") {
         //state.blesses.value++;
         blessValue++;
-        newDrawList.add(ModifierCard(CardType.curse, gfx));
+        newDrawList.add(ModifierCard(CardType.bless, gfx));
       }
       else if (gfx == "nullAttack" || gfx == "doubleAttack") {
         newDrawList.add(ModifierCard(CardType.multiply, gfx));
@@ -426,7 +426,7 @@ class GameSaveState{
         newDiscardList.add(ModifierCard(CardType.curse, gfx));
       }
       else if (gfx == "bless") {
-        newDiscardList.add(ModifierCard(CardType.curse, gfx));
+        newDiscardList.add(ModifierCard(CardType.bless, gfx));
       }
       else if (gfx == "nullAttack" || gfx == "doubleAttack") {
         newDiscardList.add(ModifierCard(CardType.multiply, gfx));
