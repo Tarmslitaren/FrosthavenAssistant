@@ -647,7 +647,7 @@
       "name": "Morphling",
       "edition": "Crimson Scales",
       "cards": [
-        [0, false, 0, "(Use the deck you built","during the scenario.)" ]
+        [0, true, 0, "(Use the deck you built","during the scenario.)" ]
       ]
     },
 

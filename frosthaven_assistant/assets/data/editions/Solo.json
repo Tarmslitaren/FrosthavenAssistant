@@ -19,19 +19,19 @@
 		{
 			"name": "City Guard (Sun Special)",
 			"cards": [
-				[ 0, false, 99, "%move% + 0","*.........", "%attack% + 0", "^(using your attack modifier deck)" ]
+				[ 0, true, 99, "%move% + 0","*.........", "%attack% + 0", "^(using your attack modifier deck)" ]
 			]
 		},
 		{
 			"name": "Bandit Guard (Note Special)",
 			"cards": [
-				[ 0, false, 49, "%move% + 0","*.........", "%attack% + 0", "^(using your attack modifier deck)" ]
+				[ 0, true, 49, "%move% + 0","*.........", "%attack% + 0", "^(using your attack modifier deck)" ]
 			]
 		},
 		{
 			"name": "Bandit Archer (Note Special)",
 			"cards": [
-				[ 0, false, 49, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0", "*","^(using your attack modifier deck)" ]
+				[ 0, true, 49, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0", "*","^(using your attack modifier deck)" ]
 			]
 		}
 	],
