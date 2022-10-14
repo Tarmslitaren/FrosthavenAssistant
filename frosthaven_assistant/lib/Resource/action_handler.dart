@@ -20,6 +20,8 @@ class ActionHandler {
   final List<String> commandDescriptions = []; //only used when connected
   final List<GameSaveState?> gameSaveStates = [];
 
+  final int maxUndo = 500;
+
   void updateAllUI() {
     getIt<GameState>().updateList.value++;
     getIt<GameState>().updateForUndo.value++; //too harsh?
@@ -125,9 +127,9 @@ class ActionHandler {
     }
     getIt<GameState>().save(); //save after each action?
 
-    if(commandIndex.value >= 1000) {
-      commands[commandIndex.value-1000] = null;
-      gameSaveStates[commandIndex.value-1000] = null;
+    if(commandIndex.value >= maxUndo) {
+      commands[commandIndex.value-maxUndo] = null;
+      gameSaveStates[commandIndex.value-maxUndo] = null;
     }
 
     //send last gamestate if connected
