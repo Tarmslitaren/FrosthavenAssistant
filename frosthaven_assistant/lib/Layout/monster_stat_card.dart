@@ -292,7 +292,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                         false,
                                         widget.data,
                                         CrossAxisAlignment.end,
-                                        scale),
+                                        scale,
+                                      widget.data.turnState == TurnsState.current
+                                    ),
                                   ]))
                           : Positioned(
                               left: 56.0 * 0.8 * scale,
@@ -315,7 +317,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                     false,
                                                     widget.data,
                                                     CrossAxisAlignment.start,
-                                                    scale)),
+                                                    scale,
+                                                    widget.data.turnState == TurnsState.current)),
                                           ])
                                         : Container(),
                                     normal.special1.isNotEmpty
@@ -344,7 +347,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                             widget.data,
                                                             CrossAxisAlignment
                                                                 .start,
-                                                            scale)),
+                                                            scale,
+                                                            widget.data.turnState == TurnsState.current)),
                                               ])
                                         : Container(),
                                     normal.special2.isNotEmpty
@@ -376,7 +380,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                             widget.data,
                                                             CrossAxisAlignment
                                                                 .start,
-                                                            scale)),
+                                                            scale,
+                                                            widget.data.turnState == TurnsState.current)),
                                               ])
                                         : Container()
                                   ])),
@@ -425,7 +430,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   false,
                                   widget.data,
                                   CrossAxisAlignment.start,
-                                  scale),
+                                  scale,
+                                  widget.data.turnState == TurnsState.current),
                             )
                           : Container(),
                       !isBoss

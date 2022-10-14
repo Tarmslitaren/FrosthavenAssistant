@@ -180,7 +180,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 width: 178 * scale * 0.8, //needed for line breaks in lines
                 //color: Colors.amber,
                 child: LineBuilder.createLines(
-                    card.lines, false, !getIt<Settings>().noCalculation.value, calculateAll, data, CrossAxisAlignment.center, scale),
+                    card.lines, false, !getIt<Settings>().noCalculation.value, calculateAll, data, CrossAxisAlignment.center, scale, false),
               ),
             )
           ],

@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.2.0+6
+version: 1.2.1+7
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
@@ -52,6 +52,8 @@ dependencies:
   animated_widgets: ^1.1.0 #for monster death animation
 
   dotted_border: ^2.0.0+2
+
+  animated_text_kit: ^4.2.2
 
   #ping_discover_network: ^0.2.0+1 -useful for finding other devices on network, not sure if useful for this
   network_info_plus: ^2.1.4+1

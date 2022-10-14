@@ -1,4 +1,5 @@
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/frosthaven_converter.dart';
@@ -159,7 +160,9 @@ class LineBuilder {
       final bool applyAll,
       final Monster monster,
       final CrossAxisAlignment alignment,
-      final double scale) {
+      final double scale,
+      final bool animate
+      ) {
 
 
 
@@ -324,6 +327,18 @@ class LineBuilder {
       textAlign = TextAlign.end;
     }
 
+    var colorizeColors = [
+      alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
+      alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
+      Colors.blueGrey,
+      alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
+      Colors.blueGrey,
+      alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
+      Colors.blueGrey,
+      alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
+    ];
+    const int textAnimationDelay = 3500;
+
     for (int i = 0; i < localStrings.length; i++) {
       String line = localStrings[i];
       String sizeToken = "";
@@ -469,7 +484,6 @@ class LineBuilder {
         Row row = Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          //todo: this was max. make sure the change does not f something up
           mainAxisAlignment: rowMainAxisAlignment,
           children:
               columnHack ? widgetsInRow.sublist(1) : widgetsInRow.toList(),
@@ -679,11 +693,37 @@ class LineBuilder {
                 if (frosthavenStyle) {
                   iconTokenText = null;
                 } else if (iconTokenText != null) {
+
+                  //TODO: add animation on other texts too? and need to animate icons as well then for FH style
+                  bool shouldAnimate =  animate && (
+                      line.contains('dvantage') ||
+                          line.contains('retaliate') ||
+                          line.contains('shield')
+                  );
+
                   textPartListRowContent
                       .add(Container(
                     color: debugColors? Colors.red : null,
                     padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
-                      child:Text(iconTokenText!, style: styleToUse)));
+                      child:
+                      shouldAnimate?
+                      AnimatedTextKit(
+                        repeatForever: true,
+                        pause: const Duration(milliseconds: textAnimationDelay),
+                        animatedTexts: [
+                          ColorizeAnimatedText(
+                            iconTokenText,
+                            //TODO: make speed relative to text length
+                            //TODO: how to force end on certain color?
+                            textStyle: styleToUse,
+                            colors: colorizeColors,
+                          ),
+                        ],
+                        // isRepeatingAnimation: true,
+                      )
+                          :
+
+                      Text(iconTokenText, style: styleToUse)));
                 }
               }
               bool mainLine =
@@ -728,14 +768,6 @@ class LineBuilder {
                         )
                       : child);
 
-              //TODO: make a solid solution. not a house of cards.
-              double wtf = 1;
-              if (height == styleToUse.fontSize! * 1.2) {
-                //is element height
-                wtf = 1.8; //wtf for elements alignment
-              }
-              //wtf = 1;
-
               textPartListRowContent.add(child);
             }
             isIconPart = false;
@@ -752,8 +784,7 @@ class LineBuilder {
               textPartListRowContent.add(Container(
                   color: debugColors? Colors.red : null,
                   padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
-                  child:
-                  Text(textPart, style: styleToUse)));
+                  child: Text(textPart, style: styleToUse)));
             }
             isIconPart = true;
           }
@@ -781,12 +812,36 @@ class LineBuilder {
         }
       }
 
+      //TODO: add animation on other texts too? and need to animate icons as well then for FH style
+      bool shouldAnimate =  animate && (
+          line.contains('dvantage') ||
+              line.contains('Retaliate') ||
+              line.contains('Shield')
+      );
+
       if (partStartIndex < line.length) {
         String textPart = line.substring(partStartIndex, line.length);
         textPartListRowContent.add(Container(
             color: debugColors? Colors.red : null,
             padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
-            child:Text(textPart, style: styleToUse)));
+            child:
+            shouldAnimate?
+            AnimatedTextKit(
+              repeatForever: true,
+              pause: const Duration(milliseconds: textAnimationDelay),
+              animatedTexts: [
+                ColorizeAnimatedText(
+
+                  textPart,
+                  textStyle: styleToUse,
+                  colors: colorizeColors,
+                ),
+              ],
+             // isRepeatingAnimation: true,
+            )
+                :
+
+            Text(textPart, style: styleToUse)));
       }
 
       Row row = Row(
