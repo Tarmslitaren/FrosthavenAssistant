@@ -665,8 +665,13 @@ class LineBuilder {
                           ))
                     ],
                   )));
-              textPartListRowContent.add(Text(frosthavenStyle ? " :" : " : ",
-                  style: TextStyle(
+              textPartListRowContent.add(
+                  Container(
+                    color: debugColors? Colors.red : null,
+                      padding: EdgeInsets.only(top: getTopPaddingForStyle(normalStyle)*0.5),
+                      child:
+                  Text(frosthavenStyle ? " :" : " : ",
+                  style: normalStyle,/*TextStyle(
                       //maybe slightly bigger between chars space?
                       fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
                       color: left ? Colors.black : Colors.white,
@@ -682,7 +687,8 @@ class LineBuilder {
 
                       shadows: [
                         shadow
-                      ])));
+                      ]))*/
+                      )));
             } else {
               double height = _getIconHeight(
                   iconToken, styleToUse.fontSize!, frosthavenStyle);
