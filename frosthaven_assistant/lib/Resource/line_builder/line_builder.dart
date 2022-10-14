@@ -1,6 +1,7 @@
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/frosthaven_converter.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/stat_applier.dart';
@@ -338,6 +339,7 @@ class LineBuilder {
       alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
     ];
     const int textAnimationDelay = 3500;
+    const int animationSpeed = 3500;
 
     for (int i = 0; i < localStrings.length; i++) {
       String line = localStrings[i];
@@ -695,11 +697,17 @@ class LineBuilder {
                 } else if (iconTokenText != null) {
 
                   //TODO: add animation on other texts too? and need to animate icons as well then for FH style
-                  bool shouldAnimate =  animate && (
-                      line.contains('dvantage') ||
-                          line.contains('retaliate') ||
+                  bool shouldAnimate = animate && (
+                      line.contains('Disadvantage') ||
+                          line.contains('Retaliate') ||
                           line.contains('shield')
-                  );
+                  ) && (monster.isActive || monster.monsterInstances.value.isNotEmpty);
+                  if (monster.turnState  == TurnsState.current) {
+                    if(line.contains("Advantage")){
+                      shouldAnimate = true;
+                    }
+                  }
+
 
                   textPartListRowContent
                       .add(Container(
@@ -709,12 +717,12 @@ class LineBuilder {
                       shouldAnimate?
                       AnimatedTextKit(
                         repeatForever: true,
-                        pause: const Duration(milliseconds: textAnimationDelay),
+                        //pause: const Duration(milliseconds: textAnimationDelay),
                         animatedTexts: [
                           ColorizeAnimatedText(
                             iconTokenText,
+                            speed: Duration(milliseconds: (animationSpeed / iconTokenText.length).ceil()),
                             //TODO: make speed relative to text length
-                            //TODO: how to force end on certain color?
                             textStyle: styleToUse,
                             colors: colorizeColors,
                           ),
@@ -813,11 +821,17 @@ class LineBuilder {
       }
 
       //TODO: add animation on other texts too? and need to animate icons as well then for FH style
-      bool shouldAnimate =  animate && (
-          line.contains('dvantage') ||
+      bool shouldAnimate = animate && (
+          line.contains('Disadvantage') ||
               line.contains('Retaliate') ||
               line.contains('Shield')
-      );
+      ) && (monster.isActive || monster.monsterInstances.value.isNotEmpty);
+      if (monster.turnState  == TurnsState.current) {
+        if(line.contains("Advantage")){
+          shouldAnimate = true;
+        }
+      }
+
 
       if (partStartIndex < line.length) {
         String textPart = line.substring(partStartIndex, line.length);
@@ -828,10 +842,10 @@ class LineBuilder {
             shouldAnimate?
             AnimatedTextKit(
               repeatForever: true,
-              pause: const Duration(milliseconds: textAnimationDelay),
+              //pause: const Duration(milliseconds: textAnimationDelay),
               animatedTexts: [
                 ColorizeAnimatedText(
-
+                  speed: Duration(milliseconds: (animationSpeed / textPart.length).ceil()),
                   textPart,
                   textStyle: styleToUse,
                   colors: colorizeColors,
