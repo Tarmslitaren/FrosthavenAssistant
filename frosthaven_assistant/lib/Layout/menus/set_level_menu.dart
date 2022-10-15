@@ -162,7 +162,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
       name = widget.monster!.type.display;
       ownerId = widget.monster!.id;
     } else if (widget.figure is CharacterState) {
-      figureId = (widget.figure as CharacterState).display;
+      figureId = (widget.figure as CharacterState).display.value;
       ownerId = name;
     }
     if (widget.figure is MonsterInstance) {

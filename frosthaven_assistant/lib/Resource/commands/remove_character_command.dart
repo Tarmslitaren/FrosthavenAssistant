@@ -16,7 +16,7 @@ class RemoveCharacterCommand extends Command {
       if (item is Character) {
         bool remove = false;
         for (var name in names) {
-          if (item.characterState.display == name.characterState.display) {
+          if (item.characterState.display.value == name.characterState.display.value) {
             remove = true;
             break;
           }

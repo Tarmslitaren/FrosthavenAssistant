@@ -34,7 +34,7 @@ class CharacterState extends Figure{
 
   CharacterState();
 
-  String display = "";
+  final display = ValueNotifier<String>("");
   final initiative = ValueNotifier<int>(0);
   final xp = ValueNotifier<int>(0);
 
@@ -50,7 +50,7 @@ class CharacterState extends Figure{
         '"level": ${level.value}, '
         '"xp": ${xp.value}, '
         '"chill": ${chill.value}, '
-        '"display": "$display", '
+        '"display": "${display.value}", '
         '"summonList": ${summonList.value.toString()}, '
         '"conditions": ${conditions.value.toString()}, '
         '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.value.toList().toString()}, '
@@ -65,7 +65,7 @@ class CharacterState extends Figure{
     health.value = json["health"];
     level.value = json["level"];
     maxHealth.value = json["maxHealth"];
-    display = json['display'];
+    display.value = json['display'];
 
     List<dynamic> summons = json["summonList"];
     for(var item in summons){
@@ -99,7 +99,7 @@ class ListItemData {
 
 class Character extends ListItemData{
   Character(this.characterState, this.characterClass) {
-    id = characterState.display; //characterClass.name;
+    id = characterState.display.value; //characterClass.name;
   }
   late final CharacterState characterState;
   late final CharacterClass characterClass;

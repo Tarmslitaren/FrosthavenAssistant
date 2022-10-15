@@ -124,7 +124,7 @@ class SetScenarioCommand extends Command {
         bool add = true;
         for (var item2 in _gameState.currentList) {
           //don't add duplicates
-          if(item2 is Character && (item2).characterState.display == item.name) {
+          if(item2 is Character && (item2).characterState.display.value == item.name) {
             add = false;
             break;
           }
@@ -141,7 +141,7 @@ class SetScenarioCommand extends Command {
         bool add = true;
         for (var item2 in _gameState.currentList) {
           //don't add duplicates
-          if(item2 is Character && (item2).characterState.display == item.name) {
+          if(item2 is Character && (item2).characterState.display.value == item.name) {
             add = false;
             break;
           }

@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
-import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Model/character_class.dart';
@@ -44,26 +43,26 @@ class GameMethods {
 
   static int getRecommendedLevel() {
     double totalLevels = 0;
-    double nrOfCharaters = 0;
+    double nrOfCharacters = 0;
     for (var item in _gameState.currentList) {
       if (item is Character && item.characterClass.name != "Escort" && item.characterClass.name != "Objective") {
         totalLevels += item.characterState.level.value;
-        nrOfCharaters++;
+        nrOfCharacters++;
       }
     }
-    if (nrOfCharaters == 0) {
+    if (nrOfCharacters == 0) {
       return 1;
     }
     if (_gameState.solo.value == true) {
       //Take the average level of all characters in the
       // scenario, then add 1 before dividing by 2 and rounding
       // up.
-      return ((totalLevels / nrOfCharaters + 1.0) / 2.0).ceil();
+      return ((totalLevels / nrOfCharacters + 1.0) / 2.0).ceil();
     }
     //scenario level is equal to
     //the average level of the characters divided by 2
     //(rounded up)
-    return (totalLevels / nrOfCharaters / 2.0).ceil();
+    return (totalLevels / nrOfCharacters / 2.0).ceil();
   }
 
   static void addAbilityDeck(Monster monster) {
@@ -133,6 +132,7 @@ class GameMethods {
         return deck;
       }
     }
+    return null;
   }
 
   static void sortCharactersFirst() {
@@ -288,7 +288,6 @@ class GameMethods {
 
   static int getCurrentCharacterAmount() {
     int res = 0;
-    List<Character> characters = [];
     for (ListItemData data in _gameState.currentList) {
       if (data is Character){
         if (data.characterClass.name != "Escort" && data.characterClass.name != "Objective") {
@@ -396,9 +395,9 @@ class GameMethods {
         characterState.health.value = characterClass.healthByLevel[level - 1];
         characterState.maxHealth.value = characterState.health.value;
 
-        characterState.display = name;
+        characterState.display.value = name;
         if (display != null) {
-          characterState.display = display;
+          characterState.display.value = display;
         }
         character = Character(characterState, characterClass);
 

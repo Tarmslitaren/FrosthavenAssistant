@@ -33,7 +33,7 @@ class Item extends StatelessWidget {
         initPreset = character.characterState.initiative.value;
       }
       child = CharacterWidget(
-          key: Key(character.characterState.display),
+          key: Key(character.id),
           characterId: character.id,
           initPreset: initPreset);
       height = 60 * scale;
@@ -260,7 +260,7 @@ class _MainListState extends State<MainList> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     //if can't fit without scroll
-    if (widgetPositions.length > 0) {
+    if (widgetPositions.isNotEmpty) {
       if (widgetPositions.last > 2 * (screenHeight - 80)) {
         //find center point
         for (int i = 0; i < widgetPositions.length; i++) {
@@ -361,7 +361,7 @@ class _MainListState extends State<MainList> {
           List<double> itemHeights = getItemHeights(context);
           int itemsPerColumn = getItemsCanFitOneColumn(itemHeights); //no good
           bool ignoreScroll = false;
-          if (canFit2Columns && itemHeights.length > 0 &&
+          if (canFit2Columns && itemHeights.isNotEmpty &&
               itemHeights.last <
                   2 * MediaQuery.of(context).size.height - 160 * getIt<Settings>().userScalingBars.value - 200) {
             //TODO: 200 is a feely hack, hard to say why it is needed

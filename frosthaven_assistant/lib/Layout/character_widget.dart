@@ -469,18 +469,25 @@ class CharacterWidgetState extends State<CharacterWidget> {
                               margin: EdgeInsets.only(
                                   top: 10 * scale,
                                   left: 10 * scale),
-                              child: Text(
-                                character.characterState.display,
-                                style: TextStyle(
-                                    fontFamily: frosthavenStyle
-                                        ? 'GermaniaOne'
-                                        : 'Pirata',
-                                    color: Colors.white,
-                                    fontSize: frosthavenStyle
-                                        ? 15 * scale
-                                        : 16 * scale,
-                                    shadows: [shadow]),
-                              ),
+                              child:
+                              ValueListenableBuilder<String>(
+                                  valueListenable:
+                                  character.characterState.display,
+                                  // widget.data.monsterInstances,
+                                  builder: (context, value, child) {
+                                    return Text(
+                                      character.characterState.display.value,
+                                      style: TextStyle(
+                                          fontFamily: frosthavenStyle
+                                              ? 'GermaniaOne'
+                                              : 'Pirata',
+                                          color: Colors.white,
+                                          fontSize: frosthavenStyle
+                                              ? 15 * scale
+                                              : 16 * scale,
+                                          shadows: [shadow]),
+                                    );
+                                  }),
                             ),
                             ValueListenableBuilder<int>(
                                 valueListenable: character
