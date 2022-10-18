@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
+import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_bless_command.dart';
@@ -202,6 +202,13 @@ class StatusMenuState extends State<StatusMenu> {
           if (figure == null) {
             return Container();
           }
+          ListItemData? owner;
+          for(var item in _gameState.currentList) {
+            if(item.id == ownerId) {
+              owner = item;
+              break;
+            }
+          }
 
           bool isActive = isConditionActive(condition, figure);
           if (isActive) {
@@ -222,7 +229,9 @@ class StatusMenuState extends State<StatusMenu> {
               child: IconButton(
                 //iconSize: 24,
                 icon: enabled
-                    ? Image.asset(
+                    ?
+                isActive? ConditionIcon(condition, 24, owner!, figure)
+                :Image.asset(
                         filterQuality: FilterQuality.medium,
                         //needed because of the edges
                         height: 24,

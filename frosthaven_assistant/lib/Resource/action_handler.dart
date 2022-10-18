@@ -107,14 +107,14 @@ class ActionHandler {
     bool isClient = getIt<Settings>().client.value;
 
     command.execute();
-    commandIndex.value++;
     if (commands.length >= commandIndex.value) {
-      commands.insert(commandIndex.value, command);
-      commandDescriptions.insert(commandIndex.value, command.describe());
+      commands.insert(commandIndex.value + 1, command);
+      commandDescriptions.insert(commandIndex.value + 1, command.describe());
     } else {
       commands.add(command);
       commandDescriptions.add(command.describe());
     }
+    commandIndex.value++; //just moved this. hope it doesn't come with severe bugs...
     //remove possible redo list
     if (commands.length - 1 > commandIndex.value) {
       commands.removeRange(commandIndex.value + 1, commands.length);

@@ -86,11 +86,11 @@ class MainList extends StatefulWidget {
   const MainList({Key? key}) : super(key: key);
 
   static void scrollToTop() {
-    _MainListState.scrollToTop();
+    MainListState.scrollToTop();
   }
 
   @override
-  _MainListState createState() => _MainListState();
+  MainListState createState() => MainListState();
 }
 
 class ListAnimation extends StatefulWidget {
@@ -118,7 +118,7 @@ class ListAnimationState extends State<ListAnimation> {
   Widget build(BuildContext context) {
     {
       //need also last positions
-      List<double> positions = _MainListState.getItemHeights(
+      List<double> positions = MainListState.getItemHeights(
           context); // - the end resulting positions.
       double position = 0;
       if (widget.index > 0) {
@@ -127,16 +127,16 @@ class ListAnimationState extends State<ListAnimation> {
 
       double lastPosition = 0;
       if (widget.lastIndex > 0) {
-        if (_MainListState.lastPositions.length >= widget.lastIndex) {
+        if (MainListState.lastPositions.length >= widget.lastIndex) {
           //should be ok except for on reload as we don't bother saving lastPositions ot disk
-          lastPosition = _MainListState.lastPositions[widget.lastIndex - 1];
+          lastPosition = MainListState.lastPositions[widget.lastIndex - 1];
         }
       }
 
       double diff = lastPosition - position;
 
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        _MainListState.lastPositions = positions;
+        MainListState.lastPositions = positions;
       });
 
       return TranslationAnimatedWidget.tween(
@@ -154,7 +154,7 @@ class ListAnimationState extends State<ListAnimation> {
   }
 }
 
-class _MainListState extends State<MainList> {
+class MainListState extends State<MainList> {
   final GameState _gameState = getIt<GameState>();
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
@@ -193,6 +193,7 @@ class _MainListState extends State<MainList> {
                         : 'assets/images/bg/frosthaven-bg.png')),
               ),
               child: ValueListenableBuilder<Map<String, CampaignModel>>(
+                //TODO: show loading animation while waiting to load from disk.
                   valueListenable: _gameState.modelData,
                   builder: (context, value, child) {
                     return ValueListenableBuilder<double>(
@@ -210,6 +211,10 @@ class _MainListState extends State<MainList> {
       curve: Curves.easeOut,
       duration: const Duration(milliseconds: 500),
     );
+  }
+
+  static void scrollToPosition(int index) {
+    //TODO: implement
   }
 
   static List<double> getItemHeights(BuildContext context) {
@@ -357,7 +362,6 @@ class _MainListState extends State<MainList> {
             width *= 2;
           }
           double paddingLeft = (MediaQuery.of(context).size.width - 2 * getMainListWidth(context))/2;
-          //double paddingRight = ca
           List<double> itemHeights = getItemHeights(context);
           int itemsPerColumn = getItemsCanFitOneColumn(itemHeights); //no good
           bool ignoreScroll = false;

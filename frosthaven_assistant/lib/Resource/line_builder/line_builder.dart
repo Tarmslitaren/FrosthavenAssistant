@@ -705,7 +705,7 @@ class LineBuilder {
                   //TODO: add animation on other texts too? and need to animate icons as well then for FH style
                   bool shouldAnimate = animate && (
                       line.contains('Disadvantage') ||
-                          line.contains('Retaliate') ||
+                          line.contains('retaliate') ||
                           line.contains('shield')
                   ) && (monster.isActive || monster.monsterInstances.value.isNotEmpty);
                   if (monster.turnState  == TurnsState.current) {
@@ -829,8 +829,8 @@ class LineBuilder {
       //TODO: add animation on other texts too? and need to animate icons as well then for FH style
       bool shouldAnimate = animate && (
           line.contains('Disadvantage') ||
-              line.contains('Retaliate') ||
-              line.contains('Shield')
+              line.contains('retaliate') ||
+              line.contains('shield')
       ) && (monster.isActive || monster.monsterInstances.value.isNotEmpty);
       if (monster.turnState  == TurnsState.current) {
         if(line.contains("Advantage")){

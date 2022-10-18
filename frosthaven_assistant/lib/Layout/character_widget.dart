@@ -11,6 +11,7 @@ import '../Resource/game_state.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
+import 'condition_icon.dart';
 import 'menus/add_summon_menu.dart';
 import 'monster_box.dart';
 
@@ -27,6 +28,7 @@ class CharacterWidget extends StatefulWidget {
   @override
   CharacterWidgetState createState() => CharacterWidgetState();
 }
+
 
 class CharacterWidgetState extends State<CharacterWidget> {
   final GameState _gameState = getIt<GameState>();
@@ -85,24 +87,12 @@ class CharacterWidgetState extends State<CharacterWidget> {
   }
 
   //TODO: try wrap
-  List<Image> createConditionList(double scale) {
-    List<Image> list = [];
-    String suffix = "";
-    if (GameMethods.isFrosthavenStyle()) {
-      suffix = "_fh";
+  List<Widget> createConditionList(double scale) {
+    List<Widget> conditions = [];
+    for (int i = conditions.length; i < character.characterState.conditions.value.length; i++) {
+      conditions.add(ConditionIcon(character.characterState.conditions.value[i], 16, character, character.characterState));
     }
-    for (var item in character.characterState.conditions.value) {
-      String imagePath = "assets/images/abilities/${item.name}.png";
-      if (suffix.isNotEmpty && hasGHVersion(item.name)) {
-        imagePath = "assets/images/abilities/${item.name}$suffix.png";
-      }
-      Image image = Image(
-        height: 16 * scale,
-        image: AssetImage(imagePath),
-      );
-      list.add(image);
-    }
-    return list;
+    return conditions;
   }
 
   Widget summonsButton(double scale) {
@@ -163,7 +153,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
   }
 
   Widget buildInitiativeWidget(BuildContext context, double scale, double scaledHeight, Shadow shadow, bool frosthavenStyle) {
-    return                       Column(children: [
+    return Column(children: [
       Container(
         margin: EdgeInsets.only(
             top: scaledHeight / 6,
@@ -674,11 +664,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
               bool notGrayScale = character.characterState.health.value != 0 &&
               (character.turnState != TurnsState.done ||
               getIt<GameState>().roundState.value == RoundState.chooseInitiative);
-              if(notGrayScale) {
-                return buildInternal(context);
-              }
               return  ColorFiltered(
-                  colorFilter:  ColorFilter.matrix(grayScale),
+                  colorFilter: notGrayScale? ColorFilter.matrix(identity) : ColorFilter.matrix(grayScale),
                   child: buildInternal(context));
             }));
   }

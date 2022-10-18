@@ -397,20 +397,12 @@ class GameSaveState{
     ModifierDeck state = ModifierDeck(name);
     List<ModifierCard> newDrawList = [];
     List drawPile = modifierDeckData["drawPile"] as List;
-    //state.curses.value = 0;
-    //state.blesses.value = 0;
-    int blessValue = 0;
-    int curseValue = 0;
     for (var item in drawPile) {
       String gfx = item["gfx"];
       if (gfx == "curse") {
-        //state.curses.value++;
-        curseValue++;
         newDrawList.add(ModifierCard(CardType.curse, gfx));
       }
       else if (gfx == "bless") {
-        //state.blesses.value++;
-        blessValue++;
         newDrawList.add(ModifierCard(CardType.bless, gfx));
       }
       else if (gfx == "nullAttack" || gfx == "doubleAttack") {
@@ -443,22 +435,12 @@ class GameSaveState{
 
     if (modifierDeckData.containsKey("curses")) {
       int curses = modifierDeckData['curses'];
-      if(curses != curseValue){
-      //  print("curses wtf:" + curses.toString()+ " " + curseValue.toString());
-      }
       state.curses.value = curses;
     }
     if (modifierDeckData.containsKey("blesses")) {
       int blesses = modifierDeckData['blesses'];
-      if(blesses != blessValue){
-      //  print("curses wtf:" + blesses.toString()+ " " + blessValue.toString());
-      }
       state.blesses.value = blesses;
     }
-    //state.curses.value = curseValue; //order is important, since the listeners on these values will add extra curses if set before the list
-    //state.blesses.value = blessValue;
-
-
 
     //TODO: do we need to handle these for allies? probably not
     if(identifier == 'modifierDeck') {

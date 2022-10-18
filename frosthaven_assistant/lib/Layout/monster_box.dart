@@ -1,8 +1,10 @@
 
+import 'package:animated_widgets/animated_widgets.dart';
 import 'package:animated_widgets/widgets/opacity_animated.dart';
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -50,22 +52,15 @@ class MonsterBoxState extends State<MonsterBox> {
     data = GameMethods.getFigure(widget.ownerId, widget.figureId) as MonsterInstance;
   }
 
-  List<Image> createConditionList(double scale) {
-    List<Image> list = [];
-    String suffix = "";
-    if(GameMethods.isFrosthavenStyle()) {
-      suffix = "_fh";
-    }
-    for (var item in data.conditions.value) {
-      String imagePath = "assets/images/abilities/${item.name}.png";
-      if(suffix.isNotEmpty && hasGHVersion(item.name)) {
-        imagePath = "assets/images/abilities/${item.name}$suffix.png";
+  List<Widget> createConditionList(double scale) {
+    List<Widget> list = [];
+    for (var condition in data.conditions.value) {
+      for(var item in getIt<GameState>().currentList) {
+        if(item.id == widget.ownerId) {
+          list.add(ConditionIcon(condition, MonsterBox.conditionSize, item, data));
+          break;
+        }
       }
-      Image image = Image(
-        height: MonsterBox.conditionSize * scale,
-        image: AssetImage(imagePath),
-      );
-      list.add(image);
     }
     return list;
   }
