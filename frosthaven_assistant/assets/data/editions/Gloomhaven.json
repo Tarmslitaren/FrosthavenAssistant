@@ -4070,6 +4070,42 @@
             "health": "4+(2xL)",
             "init": 99,
             "note": "Escort: Hail"
+          },
+          {
+            "type": "Timer",
+            "list": [1],
+            "startOfRound": false,
+            "note": "Spawn Night Demon on hex b"
+          },
+          {
+            "type": "Timer",
+            "list": [2],
+            "startOfRound": false,
+            "note": "Spawn Wind Demon on hex c"
+          },
+          {
+            "type": "Timer",
+            "list": [3,6,9],
+            "startOfRound": false,
+            "note": "Frost Demon Spawns on hex d and Sun Demon Spawns on hex e"
+          },
+          {
+            "type": "Timer",
+            "list": [4, 7],
+            "startOfRound": false,
+            "note": "Earth Demon Spawns on hex b and Flame Demon Spawns on hex c"
+          },
+          {
+            "type": "Timer",
+            "list": [5, 8],
+            "startOfRound": false,
+            "note": "Night Demon Spawns on hex d and Wind Demon Spawns on hex e"
+          },
+          {
+            "type": "Timer",
+            "list": [10],
+            "startOfRound": false,
+            "note": "Scenario Lost..."
           }
         ]
       },
@@ -4147,6 +4183,10 @@
             "type": "Objective",
             "name": "Door",
             "health": "10+(2xL)"
+          },
+          {
+            "type": "allies",
+            "list": ["City Archer"]
           }
         ]
       },

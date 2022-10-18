@@ -25,6 +25,7 @@ class SetScenarioCommand extends Command {
       //first reset state
       _gameState.round.value = 1;
       _gameState.currentAbilityDecks.clear();
+      _gameState.scenarioSpecialRules.clear();
       List<ListItemData> newList = [];
       for (var item in _gameState.currentList) {
         if (item is Character) {
@@ -150,6 +151,8 @@ class SetScenarioCommand extends Command {
         }
       }
     }
+
+    _gameState.scenarioSpecialRules = specialRules;
 
     if (!section) {
       GameMethods.updateElements();

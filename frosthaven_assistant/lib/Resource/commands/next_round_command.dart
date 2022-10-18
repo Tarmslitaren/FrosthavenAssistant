@@ -5,6 +5,7 @@ import '../action_handler.dart';
 import '../enums.dart';
 import '../game_methods.dart';
 import '../game_state.dart';
+import '../ui_utils.dart';
 
 class NextRoundCommand extends Command {
   final GameState _gameState = getIt<GameState>();
@@ -31,6 +32,15 @@ class NextRoundCommand extends Command {
     }
     GameMethods.clearTurnState(false);
 
+    for(var rule in _gameState.scenarioSpecialRules) {
+      if(rule.type == "Timer" && rule.startOfRound == false) {
+        for(int round in rule.list) {
+          if(round == _gameState.round.value) {
+            _gameState.toastMessage.value = rule.note;
+          }
+        }
+      }
+    }
     _gameState.round.value++;
 
     Future.delayed(const Duration(milliseconds: 600), () {

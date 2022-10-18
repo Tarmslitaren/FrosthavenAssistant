@@ -6,7 +6,8 @@ class SpecialRule {
   final int init;
   final String note;
   final List<dynamic> list;
-  SpecialRule(this.type, this.name, this.health, this.level, this.init, this.note, this.list);
+  final bool startOfRound;
+  SpecialRule(this.type, this.name, this.health, this.level, this.init, this.note, this.list, this.startOfRound);
 
   factory SpecialRule.fromJson(Map<String, dynamic> data) {
     final String type = data['type']; //required
@@ -30,11 +31,29 @@ class SpecialRule {
     if(data.containsKey('note')) {
       note = data['note'];
     }
+    bool startOfRound = true;
+    if(data.containsKey('startOfRound')) {
+      startOfRound = data['startOfRound'];
+    }
     List<dynamic> aList = [];
     if(data.containsKey('list')) {
       aList = data['list'];
     }
-    return SpecialRule(type,name,health, level, init, note, aList);
+    return SpecialRule(type,name,health, level, init, note, aList, startOfRound);
+  }
+
+  @override
+  String toString() {
+    return '{'
+        '"type": "$type", '
+        '"note": "$note", '
+        '"name": "$name", '
+        '"health": "$health", '
+        '"init": $init, '
+        '"level": $level, '
+        '"startOfRound": ${startOfRound.toString()}, '
+        '"list": ${list.toString()} '
+        '}';
   }
 }
 

@@ -14,6 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Model/campaign.dart';
 import '../Model/character_class.dart';
+import '../Model/scenario.dart';
 import 'action_handler.dart';
 import 'enums.dart';
 import 'modifier_deck_state.dart';
@@ -116,13 +117,11 @@ class Character extends ListItemData{
         '"turnState": ${turnState.index}, '
         '"characterState": ${characterState.toString()}, '
         '"characterClass": "${characterClass.name}" '
-        //'"state": ${state.index} '
         '}';
   }
 
   Character.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    //state = ListItemState.values[json['state']];
     turnState = TurnsState.values[json['turnState']];
     characterState = CharacterState.fromJson(json['characterState']);
     String className = json['characterClass'];
@@ -462,8 +461,14 @@ class GameSaveState{
       Map<String, dynamic> data = jsonDecode(_savedState!);
       gameState.level.value = data['level'] as int;
       gameState.scenario.value = data['scenario']; // as String;
-      gameState.currentCampaign.value =
-      data['currentCampaign']; //TODO: does not update properly (because changing it is not a command
+
+      var scenarioSpecialRulesList = data['scenarioSpecialRules'] as List;
+      gameState.scenarioSpecialRules.clear();
+      for (Map<String, dynamic> item in scenarioSpecialRulesList) {
+        gameState.scenarioSpecialRules.add(SpecialRule.fromJson(item));
+      }
+      gameState.currentCampaign.value = data['currentCampaign'];
+      //TODO: currentCampaign does not update properly (because changing it is not a command
       gameState.round.value = data['round'] as int;
       gameState.roundState.value = RoundState.values[data['roundState']];
       gameState.solo.value =
@@ -669,6 +674,8 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   final level = ValueNotifier<int>(1);
   final solo = ValueNotifier<bool>(false);
   final scenario = ValueNotifier<String>("");
+  List<SpecialRule> scenarioSpecialRules = []; //has both monsters and characters
+  final toastMessage = ValueNotifier<String>("");
 
   List<ListItemData> currentList = []; //has both monsters and characters
 
@@ -697,6 +704,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
         '"roundState": ${roundState.value.index}, '
         '"round": ${round.value}, '
         '"scenario": "${scenario.value}", '
+        '"scenarioSpecialRules": ${scenarioSpecialRules.toString()}, '
         '"currentCampaign": "${currentCampaign.value}", '
         '"currentList": ${currentList.toString()}, '
         '"currentAbilityDecks": ${currentAbilityDecks.toString()}, '

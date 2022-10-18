@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Resource/game_state.dart';
 import '../Model/campaign.dart';
 import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
+import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'bottom_bar.dart';
 import 'main_list.dart';
@@ -28,6 +29,22 @@ Widget createMainScaffold(BuildContext context) {
               body: Stack(
                 children: [
                   const MainList(),
+                  ValueListenableBuilder<String>(
+                      valueListenable: getIt<GameState>().toastMessage,
+                      builder: (context, value, child) {
+                        Future.delayed(const Duration(milliseconds: 200), () {
+                          if (getIt<GameState>().toastMessage.value != "") {
+                            showToastSticky(
+                                context, getIt<GameState>().toastMessage.value);
+                            getIt<GameState>().toastMessage.value = "";
+                          }
+                        });
+
+                        return const SizedBox(
+                          width: 0.0000,
+                          height: 0.0000,
+                        );
+                      }),
                   ValueListenableBuilder<Map<String, CampaignModel>>(
                       valueListenable: getIt<GameState>().modelData,
                       builder: (context, value, child) {
