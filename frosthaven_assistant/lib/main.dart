@@ -28,7 +28,9 @@ void main() {
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle('X-haven Assistant');
-    windowManager.setMinimumSize(const Size(400, 600));
+    if(!Platform.isMacOS) {
+      windowManager.setMinimumSize(const Size(400, 600));
+    }
     setWindowMinSize(const Size(400, 600)); //when updating flutter you may need to re-set these values in main.cpp
     setWindowMaxSize(Size.infinite);
   }
