@@ -165,6 +165,37 @@ bool hasGHVersion(String name) {
 
 showToast(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: Text(text),
+    //duration: const Duration(days: 1),
+    content: GestureDetector(
+      onTap: () {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      },
+      child: Text(
+        text,
+        style: const TextStyle(
+            fontFamily: "markazi",
+            fontSize: 28
+        ),),
+    ),
+    backgroundColor: Colors.teal,
   ));
+}
+
+showToastSticky(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    duration: const Duration(days: 1),
+    content: GestureDetector(
+      onTap: () {
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      },
+      child: Text(
+        text,
+        style: const TextStyle(
+            fontFamily: "markazi",
+            fontSize: 28
+        ),),
+    ),
+    backgroundColor: Colors.teal,
+  ));
+
 }

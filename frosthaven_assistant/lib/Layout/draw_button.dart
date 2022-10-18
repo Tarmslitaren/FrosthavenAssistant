@@ -6,6 +6,7 @@ import '../Resource/enums.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/game_state.dart';
 import '../Resource/settings.dart';
+import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 
 class DrawButton extends StatefulWidget {
@@ -36,10 +37,7 @@ class _DrawButtonState extends State<DrawButton> {
           text = "Add characters first.";
         }
         //TODO: show other message if no characters or no monsters
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(
-              text),
-        ));
+        showToast(context, text);
       }
     } else {
       _gameState.action(NextRoundCommand());
