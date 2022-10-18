@@ -53,7 +53,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     isCurrentlySelected = summonGfx == chosenGfx;
     Color color = Colors.transparent;
     if (isCurrentlySelected) {
-      color = getIt<Settings>().darkMode.value? Colors.white : Colors.black;
+      color = getIt<Settings>().darkMode.value ? Colors.white : Colors.black;
     }
     return SizedBox(
       width: 42,
@@ -103,9 +103,11 @@ class AddSummonMenuState extends State<AddSummonMenu> {
               text,
               style: TextStyle(
                   fontSize: 18,
-                  color: isCurrentlySelected ?
-                  darkMode? Colors.white : Colors.black :
-                  Colors.grey),
+                  color: isCurrentlySelected
+                      ? darkMode
+                          ? Colors.white
+                          : Colors.black
+                      : Colors.grey),
             ),
             onPressed: () {
               if (!isCurrentlySelected) {
@@ -177,76 +179,83 @@ class AddSummonMenuState extends State<AddSummonMenu> {
           ],
         ),
         Expanded(
-            child: ListView.builder(
-                itemCount: _summonList.length,
-                itemBuilder: (context, index) {
-                  SummonModel model = _summonList[index];
-                  String gfx = chosenGfx;
-                  bool showNr = true;
-                  if (model.gfx.isNotEmpty) {
-                    gfx = model.gfx;
-                    if (model.standees < 2) {
-                      showNr = false;
-                    }
-                  }
-                  //TODO: gray out if all standees out (or remove from list entirely?)
+            child: Scrollbar(
+                child: ListView.builder(
+                    itemCount: _summonList.length,
+                    itemBuilder: (context, index) {
+                      SummonModel model = _summonList[index];
+                      String gfx = chosenGfx;
+                      bool showNr = true;
+                      if (model.gfx.isNotEmpty) {
+                        gfx = model.gfx;
+                        if (model.standees < 2) {
+                          showNr = false;
+                        }
+                      }
+                      //TODO: gray out if all standees out (or remove from list entirely?)
 
-                  return ListTile(
-                      leading: Stack(alignment: Alignment.center, children: [
-                        Image(
-                          height: 30,
-                          width: 30,
-                          image: AssetImage("assets/images/summon/$gfx.png"),
-                        ),
-                        if (showNr)
-                          Text(chosenNr.toString(), style: const TextStyle(fontSize: 18, color: Colors.white,
-                              shadows: [
-                                Shadow(
-                              offset: Offset(1, 1),
-                            color: Colors.black87,
-                            blurRadius: 1,
-                          )
-                              ])),
-                      ]),
-                      //iconColor: _foundMonsters[index].color,
-                      title: Text(_summonList[index].name,
-                          style: getTitleTextStyle()),
-                      onTap: () {
-                        setState(() {
-                          SummonModel model = _summonList[index];
-                          String gfx = chosenGfx;
-                          if (model.gfx.isNotEmpty) {
-                            gfx = model.gfx;
-                          }
-                          if (model.standees < 2 && model.gfx.isNotEmpty) {
-                            chosenNr =
-                                0; //don't show on monsterbox unless standees are numbered
-                          }
-                          SummonData summonData = SummonData(
-                              chosenNr,
-                              model.name,
-                              model.health,
-                              model.move,
-                              model.attack,
-                              model.range,
-                              gfx);
-                          _gameState.action(AddStandeeCommand(
-                              chosenNr,
-                              summonData,
-                              widget.character.id,
-                              MonsterType.summon, true));
-                        });
-                        Navigator.pop(context);
-                        //open the level menu here for convenience
-                        openDialog(
-                            context,
-                            SetLevelMenu(
-                              figure: widget.character.characterState.summonList
-                                  .value.last,
-                              characterId: widget.character.id,
-                            ));
-                      });
-                })),
+                      return ListTile(
+                          leading:
+                              Stack(alignment: Alignment.center, children: [
+                            Image(
+                              height: 30,
+                              width: 30,
+                              image:
+                                  AssetImage("assets/images/summon/$gfx.png"),
+                            ),
+                            if (showNr)
+                              Text(chosenNr.toString(),
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                      shadows: [
+                                        Shadow(
+                                          offset: Offset(1, 1),
+                                          color: Colors.black87,
+                                          blurRadius: 1,
+                                        )
+                                      ])),
+                          ]),
+                          //iconColor: _foundMonsters[index].color,
+                          title: Text(_summonList[index].name,
+                              style: getTitleTextStyle()),
+                          onTap: () {
+                            setState(() {
+                              SummonModel model = _summonList[index];
+                              String gfx = chosenGfx;
+                              if (model.gfx.isNotEmpty) {
+                                gfx = model.gfx;
+                              }
+                              if (model.standees < 2 && model.gfx.isNotEmpty) {
+                                chosenNr =
+                                    0; //don't show on monsterbox unless standees are numbered
+                              }
+                              SummonData summonData = SummonData(
+                                  chosenNr,
+                                  model.name,
+                                  model.health,
+                                  model.move,
+                                  model.attack,
+                                  model.range,
+                                  gfx);
+                              _gameState.action(AddStandeeCommand(
+                                  chosenNr,
+                                  summonData,
+                                  widget.character.id,
+                                  MonsterType.summon,
+                                  true));
+                            });
+                            Navigator.pop(context);
+                            //open the level menu here for convenience
+                            openDialog(
+                                context,
+                                SetLevelMenu(
+                                  figure: widget.character.characterState
+                                      .summonList.value.last,
+                                  characterId: widget.character.id,
+                                ));
+                          });
+                    }))),
         const SizedBox(
           height: 20,
         ),

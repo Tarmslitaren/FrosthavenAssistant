@@ -120,7 +120,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                   ),
                   Expanded(
                     child: _foundCharacters.isNotEmpty
-                        ? ListView.builder(
+                        ? Scrollbar(
+                            child: ListView.builder(
                             itemCount: _foundCharacters.length,
                             itemBuilder: (context, index) => ListTile(
                               leading: Image(
@@ -128,9 +129,11 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                                 width: 40,
                                 fit: BoxFit.contain,
                                 color: _foundCharacters[index].hidden &&
-                                        !_gameState.unlockedClasses.contains(
-                                            _foundCharacters[index].name) ||
-                                    _foundCharacters[index].name ==
+                                            !_gameState.unlockedClasses
+                                                .contains(
+                                                    _foundCharacters[index]
+                                                        .name) ||
+                                        _foundCharacters[index].name ==
                                             "Escort" ||
                                         _foundCharacters[index].name ==
                                             "Objective"
@@ -195,7 +198,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                                 }
                               },
                             ),
-                          )
+                          ))
                         : const Text(
                             'No results found',
                             style: TextStyle(fontSize: 24),

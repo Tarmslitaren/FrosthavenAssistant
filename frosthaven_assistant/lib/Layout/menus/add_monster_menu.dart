@@ -30,10 +30,10 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     }
     _foundMonsters = _allMonsters.toList();
 
-    if(!showSpecial) {
+    if (!showSpecial) {
       _foundMonsters.removeWhere((element) => element.hidden == true);
     }
-    if(!showBoss) {
+    if (!showBoss) {
       _foundMonsters.removeWhere((element) => element.levels[0].boss != null);
     }
 
@@ -42,14 +42,13 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   }
 
   int compareEditions(String a, String b) {
-    if(a.startsWith("S") && ! b.startsWith("S")){
+    if (a.startsWith("S") && !b.startsWith("S")) {
       return 1;
     }
-    if(b.startsWith("S") && ! a.startsWith("S")){
+    if (b.startsWith("S") && !a.startsWith("S")) {
       return -1;
     }
     return -a.compareTo(b);
-
   }
 
   void sortMonsters(List<MonsterModel> list) {
@@ -89,10 +88,10 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
       // we use the toLowerCase() method to make it case-insensitive
     }
 
-    if(!showSpecial) {
+    if (!showSpecial) {
       results.removeWhere((element) => element.hidden == true);
     }
-    if(!showBoss) {
+    if (!showBoss) {
       results.removeWhere((element) => element.levels[0].boss != null);
     }
     sortMonsters(results);
@@ -167,7 +166,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                   ),
                   Expanded(
                     child: _foundMonsters.isNotEmpty
-                        ? ListView.builder(
+                        ? Scrollbar(
+                            child: ListView.builder(
                             itemCount: _foundMonsters.length,
                             itemBuilder: (context, index) => ListTile(
                               leading: Image(
@@ -195,14 +195,16 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                     _foundMonsters[index].name)) {
                                   setState(() {
                                     _gameState.action(AddMonsterCommand(
-                                        _foundMonsters[index].name, null, addAsAlly)); //
+                                        _foundMonsters[index].name,
+                                        null,
+                                        addAsAlly)); //
                                   });
 
                                   //Navigator.pop(context);
                                 }
                               },
                             ),
-                          )
+                          ))
                         : const Text(
                             'No results found',
                             style: TextStyle(fontSize: 24),

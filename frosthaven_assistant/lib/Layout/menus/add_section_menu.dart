@@ -125,7 +125,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                   ),
                   Expanded(
                     child: _foundScenarios.isNotEmpty
-                        ? ListView.builder(
+                        ? Scrollbar(
+                            child: ListView.builder(
                             itemCount: _foundScenarios.length,
                             itemBuilder: (context, index) => ListTile(
                               title: Text(_foundScenarios[index],
@@ -136,7 +137,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                                 Navigator.pop(context);
                               },
                             ),
-                          )
+                          ))
                         : const Text(
                             'No results found',
                             style: TextStyle(fontSize: 24),

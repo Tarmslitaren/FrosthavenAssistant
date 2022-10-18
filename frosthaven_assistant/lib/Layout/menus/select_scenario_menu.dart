@@ -82,7 +82,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       results = _gameState
           .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
           .toList();
-      if(_gameState.currentCampaign.value != "Solo") {
+      if (_gameState.currentCampaign.value != "Solo") {
         results.insert(0, "custom");
       }
     } else {
@@ -254,7 +254,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                   ),
                   Expanded(
                     child: _foundScenarios.isNotEmpty
-                        ? ListView.builder(
+                        ? Scrollbar(
+                            child: ListView.builder(
                             itemCount: _foundScenarios.length,
                             itemBuilder: (context, index) =>
                                 _gameState.currentCampaign.value == "Solo"
@@ -269,7 +270,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                                           Navigator.pop(context);
                                         },
                                       ),
-                          )
+                          ))
                         : const Text(
                             'No results found',
                             style: TextStyle(fontSize: 24),
