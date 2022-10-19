@@ -1110,6 +1110,130 @@
         }
       ]
     },
+    "Stone Golem (JotL) (22 Special)":{
+      "display": "Stone Golem",
+      "gfx": "Stone Golem",
+      "deck": "Stone Golem (JotL)",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": "10cC", "move": 1, "attack": 3 },
+          "elite": {
+            "health": "10xC",
+            "move": 2,
+            "attack": 4,
+            "attributes": [ "%shield% 1" ]
+          }
+        },
+        {
+          "level": 1,
+          "normal": {
+            "health": "10xC",
+            "move": 1,
+            "attack": 3,
+            "attributes": [ "%shield% 1" ]
+          },
+          "elite": {
+            "health": "11xC",
+            "move": 2,
+            "attack": 4,
+            "attributes": [ "%shield% 2" ]
+          }
+        },
+        {
+          "level": 2,
+          "normal": {
+            "health": "11xC",
+            "move": 1,
+            "attack": 4,
+            "attributes": [ "%shield% 1" ]
+          },
+          "elite": {
+            "health": "13xC",
+            "move": 2,
+            "attack": 5,
+            "attributes": [ "%shield% 2" ]
+          }
+        },
+        {
+          "level": 3,
+          "normal": {
+            "health": "11xC",
+            "move": 1,
+            "attack": 4,
+            "attributes": [ "%shield% 2" ]
+          },
+          "elite": {
+            "health": "14xC",
+            "move": 2,
+            "attack": 5,
+            "attributes": [ "%shield% 3" ]
+          }
+        },
+        {
+          "level": 4,
+          "normal": {
+            "health": "12xC",
+            "move": 2,
+            "attack": 4,
+            "attributes": [ "%shield% 2" ]
+          },
+          "elite": {
+            "health": "16xC",
+            "move": 2,
+            "attack": 6,
+            "attributes": [ "%shield% 3" ]
+          }
+        },
+        {
+          "level": 5,
+          "normal": {
+            "health": "13xC",
+            "move": 2,
+            "attack": 5,
+            "attributes": [ "%shield% 2" ]
+          },
+          "elite": {
+            "health": "18xC",
+            "move": 3,
+            "attack": 6,
+            "attributes": [ "%shield% 3" ]
+          }
+        },
+        {
+          "level": 6,
+          "normal": {
+            "health": "16xC",
+            "move": 2,
+            "attack": 5,
+            "attributes": [ "%shield% 2" ]
+          },
+          "elite": {
+            "health": "20xC",
+            "move": 3,
+            "attack": 7,
+            "attributes": [ "%shield% 3" ]
+          }
+        },
+        {
+          "level": 7,
+          "normal": {
+            "health": "16xC",
+            "move": 2,
+            "attack": 5,
+            "attributes": [ "%shield% 3" ]
+          },
+          "elite": {
+            "health": "21xC",
+            "move": 3,
+            "attack": 7,
+            "attributes": [ "%shield% 4" ]
+          }
+        }
+      ]
+    },
     "Giant Viper (JotL)":{
       "display": "Giant Viper",
       "edition": "Jaws of the Lion",
@@ -1759,13 +1883,72 @@
       "monsters": [ "Basic Giant Viper", "Basic Zealot" ]
     },
     "#4 A Ritual in Stone": {
-      "monsters": [ "Stone Golem (JotL)", "Zealot" ]
+      "monsters": [ "Stone Golem (JotL)", "Zealot" ],
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Summoning Stone 1",
+          "health": "C+1"
+        },
+        {
+          "type": "Objective",
+          "name": "Summoning Stone 2",
+          "health": "C+1"
+        },
+        {
+          "type": "Objective",
+          "name": "Summoning Stone 3",
+          "health": "C+1"
+        },
+        {
+          "type": "Objective",
+          "name": "Summoning Stone 4",
+          "health": "C+1"
+        }
+      ]
     },
     "#5 A Deeper Understanding": {
       "monsters": [ "Zealot", "Chaos Demon", "Blood Tumor" ]
     },
     "#6 Corrupted Research": {
-      "monsters": [ "Rat Monstrosity", "Black Sludge" ]
+      "monsters": [ "Rat Monstrosity", "Black Sludge" ],
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Growth 1",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Growth 2",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Growth 3",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Growth 4",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Growth 5",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Growth 6",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Growth 7",
+          "health": "(1+L)xC"
+        }
+      ]
     },
     "#7 Sunken Tumor": {
       "monsters": [ "Vermling Scout (JotL)", "Zealot", "Blood Tumor" ]
@@ -1783,19 +1966,121 @@
       "monsters": [ "Black Sludge", "Giant Viper (JotL)", "Vermling Scout (JotL)" ]
     },
     "#12 Beguiling Sewers": {
-      "monsters": [ "Living Corpse (JotL)", "Living Spirit (JotL)" ]
+      "monsters": [ "Living Corpse (JotL)", "Living Spirit (JotL)" ],
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Pillar 1",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Pillar 2",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Pillar 3",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Pillar 4",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Pillar 5",
+          "health": "(3+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Pillar 6",
+          "health": "(3+L)xC"
+        }
+      ]
     },
     "#13 Vile Harvest": {
       "monsters": [ "Black Sludge", "Zealot", "Blood Imp" ]
     },
     "#14 Toxic Harvest": {
-      "monsters": [ "Blood Imp", "Zealot", "Giant Viper (JotL)" ]
+      "monsters": [ "Blood Imp", "Zealot", "Giant Viper (JotL)" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+          "startOfRound": true,
+          "note": "If Giant Vipers are next to Zealots, they die and Blood Imps spawn next to Zealot."
+        }
+      ]
     },
     "#15 Tainted Blood": {
-      "monsters": [ "Black Imp (JotL)", "Blood Imp", "Zealot" ]
+      "monsters": [ "Black Imp (JotL)", "Blood Imp", "Zealot" ],
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Table C1",
+          "health": "(2+L)xC/2"
+        },
+        {
+          "type": "Objective",
+          "name": "Table A1",
+          "health": "(2+L)xC/2"
+        },
+        {
+          "type": "Objective",
+          "name": "Table B1",
+          "health": "(2+L)xC/2"
+        },
+        {
+          "type": "Objective",
+          "name": "Table A2",
+          "health": "(2+L)xC/2"
+        },
+        {
+          "type": "Objective",
+          "name": "Table A3",
+          "health": "(2+L)xC/2"
+        },
+        {
+          "type": "Objective",
+          "name": "Table A4",
+          "health": "(2+L)xC/2"
+        },
+        {
+          "type": "Objective",
+          "name": "Table B2",
+          "health": "(2+L)xC/2"
+        },
+        {
+          "type": "Objective",
+          "name": "Table C2",
+          "health": "(2+L)xC/2"
+        },
+        {
+          "type": "Timer",
+          "list": [-1],
+          "startOfRound": true,
+          "note": "Spawn Black Imps adjacent to revealed tables."
+        },
+        {
+          "type": "Timer",
+          "list": [-1],
+          "startOfRound": false,
+          "note": "Each Zealot kills one Black Imp within range 3 and gain stun. Spawn elite Blood Imps."
+        }
+      ]
     },
     "#16 Mixed Results": {
-      "monsters": [ "Black Imp (JotL)", "Blood Imp", "Rat Monstrosity" ]
+      "monsters": [ "Black Imp (JotL)", "Blood Imp", "Rat Monstrosity" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [2],
+          "startOfRound": true,
+          "note": "Spawn Rat Monstrosities."
+        }
+      ]
     },
     "#17 Red Twilight": {
       "monsters": [ "Blood Imp", "Blood Monstrosity", "First of the Order" ]
@@ -1804,7 +2089,29 @@
       "monsters": [ "Stone Golem (JotL)" ]
     },
     "#19 Den of Thieves": {
-      "monsters": [ "Rat Monstrosity", "Vermling Raider", "Vermling Scout (JotL)" ]
+      "monsters": [ "Rat Monstrosity", "Vermling Raider", "Vermling Scout (JotL)" ],
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Nest 1",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Nest 2",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Nest 3",
+          "health": "(1+L)xC"
+        },
+        {
+          "type": "Objective",
+          "name": "Nest 4",
+          "health": "(1+L)xC"
+        }
+      ]
     },
     "#20 Misplaced Goods": {
       "monsters": [ "Black Sludge", "Giant Viper (JotL)", "Chaos Demon", "Rat Monstrosity" ]
@@ -1813,13 +2120,30 @@
       "monsters": [ "Chaos Demon", "Giant Viper (JotL)" ]
     },
     "#22 Unfriendly Message": {
-      "monsters": [ "Giant Viper (JotL)", "Stone Golem (JotL)", "Vermling Raider" ]
+      "monsters": [ "Giant Viper (JotL)", "Stone Golem (JotL) (22 Special)", "Vermling Raider" ]
     },
     "#23 The Best of the Best": {
       "monsters": [ "Giant Viper (JotL)", "Rat Monstrosity", "Stone Golem (JotL)", "Vermling Raider" ]
     },
     "#24 Warding the Void": {
-      "monsters": [ "Black Imp (JotL)", "Chaos Demon" ]
+      "monsters": [ "Black Imp (JotL)", "Chaos Demon" ],
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Ward 1",
+          "health": "(2xL)+4"
+        },
+        {
+          "type": "Objective",
+          "name": "Ward 2",
+          "health": "(2xL)+4"
+        },
+        {
+          "type": "Objective",
+          "name": "Ward 3",
+          "health": "(2xL)+4"
+        }
+      ]
     },
     "#25 The Greatest Job in the World": {
       "monsters": [ "Living Spirit (JotL)", "Vermling Raider", "Vermling Scout (JotL)" ]
