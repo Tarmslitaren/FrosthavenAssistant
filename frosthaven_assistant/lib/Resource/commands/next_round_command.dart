@@ -35,7 +35,8 @@ class NextRoundCommand extends Command {
     for(var rule in _gameState.scenarioSpecialRules) {
       if(rule.type == "Timer" && rule.startOfRound == false) {
         for(int round in rule.list) {
-          if(round == _gameState.round.value) {
+          //minus 1 means always
+          if(round == _gameState.round.value || round == -1) {
             _gameState.toastMessage.value = rule.note;
           }
         }

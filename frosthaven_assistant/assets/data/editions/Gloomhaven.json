@@ -4154,6 +4154,12 @@
           {
             "type": "allies",
             "list": ["Night Demon"]
+          },
+          {
+            "type": "Timer",
+            "list": [-1],
+            "startOfRound": true,
+            "note": "Dark strong, Light inert."
           }
         ]
       },
@@ -4187,6 +4193,60 @@
           {
             "type": "allies",
             "list": ["City Archer"]
+          },
+          {
+            "type": "Timer",
+            "list": [1,5],
+            "startOfRound": false,
+            "note": "Spawn Flame Demon at a. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage."
+          },
+          {
+            "type": "Timer",
+            "list": [2,6],
+            "startOfRound": false,
+            "note": "Spawn Earth Demon at b. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage."
+          },
+          {
+            "type": "Timer",
+            "list": [3,7],
+            "startOfRound": false,
+            "note": "Spawn Frost Demon at c. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage."
+          },
+          {
+            "type": "Timer",
+            "list": [4],
+            "startOfRound": false,
+            "note": "Spawn Wind Demon at d. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage."
+          },
+          {
+            "type": "Timer",
+            "list": [8],
+            "startOfRound": false,
+            "note": "Spawn Wind Demon at d. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage. Door I is destroyed."
+          },
+          {
+            "type": "Timer",
+            "list": [9,13,17,21,25,29],
+            "startOfRound": false,
+            "note": "Spawn Flame Demon at a"
+          },
+          {
+            "type": "Timer",
+            "list": [10,14,18,22,26,30],
+            "startOfRound": false,
+            "note": "Spawn Earth Demon at b"
+          },
+          {
+            "type": "Timer",
+            "list": [11,15,19,23,27,31],
+            "startOfRound": false,
+            "note": "Spawn Frost Demon at c"
+          },
+          {
+            "type": "Timer",
+            "list": [12,16,20,24,28,32],
+            "startOfRound": false,
+            "note": "Spawn Wind Demon at d"
           }
         ]
       },

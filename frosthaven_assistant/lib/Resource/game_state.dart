@@ -462,10 +462,12 @@ class GameSaveState{
       gameState.level.value = data['level'] as int;
       gameState.scenario.value = data['scenario']; // as String;
 
-      var scenarioSpecialRulesList = data['scenarioSpecialRules'] as List;
-      gameState.scenarioSpecialRules.clear();
-      for (Map<String, dynamic> item in scenarioSpecialRulesList) {
-        gameState.scenarioSpecialRules.add(SpecialRule.fromJson(item));
+      if(data.containsKey('scenarioSpecialRules')) {
+        var scenarioSpecialRulesList = data['scenarioSpecialRules'] as List;
+        gameState.scenarioSpecialRules.clear();
+        for (Map<String, dynamic> item in scenarioSpecialRulesList) {
+          gameState.scenarioSpecialRules.add(SpecialRule.fromJson(item));
+        }
       }
       gameState.currentCampaign.value = data['currentCampaign'];
       //TODO: currentCampaign does not update properly (because changing it is not a command

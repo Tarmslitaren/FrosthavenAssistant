@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class SpecialRule {
   final String type;
   final String name;
@@ -52,7 +54,7 @@ class SpecialRule {
         '"init": $init, '
         '"level": $level, '
         '"startOfRound": ${startOfRound.toString()}, '
-        '"list": ${list.toString()} '
+        '"list": ${jsonEncode(list)} '
         '}';
   }
 }

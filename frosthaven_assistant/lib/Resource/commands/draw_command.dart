@@ -19,6 +19,18 @@ class DrawCommand extends Command {
     if (_gameState.currentList.isNotEmpty) {
       _gameState.currentList[0].turnState = TurnsState.current;
     }
+
+    for(var rule in _gameState.scenarioSpecialRules) {
+      if(rule.type == "Timer" && rule.startOfRound == true) {
+        for(int round in rule.list) {
+          //minus 1 means always
+          if(round == _gameState.round.value || round == -1) {
+            _gameState.toastMessage.value = rule.note;
+          }
+        }
+      }
+    }
+
     Future.delayed(const Duration(milliseconds: 600), () {
       _gameState.updateList.value++;
       MainList.scrollToTop();
