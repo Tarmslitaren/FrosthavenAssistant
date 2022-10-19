@@ -152,14 +152,17 @@ class SetScenarioCommand extends Command {
       }
     }
 
-    _gameState.scenarioSpecialRules = specialRules;
+
 
     if (!section) {
+      _gameState.scenarioSpecialRules = specialRules;
       GameMethods.updateElements();
       GameMethods.updateElements(); //twice to make sure they are inert.
       GameMethods.setRoundState(RoundState.chooseInitiative);
       GameMethods.sortCharactersFirst();
       _gameState.scenario.value = _scenario;
+    }else {
+      _gameState.scenarioSpecialRules.addAll(specialRules);
     }
 
     //Future.delayed(Duration(milliseconds: 10), () {

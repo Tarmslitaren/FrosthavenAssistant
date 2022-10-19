@@ -65,10 +65,12 @@ class ScenarioModel {
   List<String> monsters;
   List<SpecialRule> specialRules;
   factory ScenarioModel.fromJson(Map<String, dynamic> data) {
-    final monsters = data['monsters'] as List<dynamic>;
     List<String> monsterList = [];
-    for (var monster in monsters) {
-      monsterList.add(monster);
+    if(data.containsKey('monsters')) {
+      final monsters = data['monsters'] as List<dynamic>;
+      for (var monster in monsters) {
+        monsterList.add(monster);
+      }
     }
     List<SpecialRule> rulesList = [];
     if(data.containsKey('special')) {

@@ -1380,13 +1380,41 @@
 
   "scenarios": {
     "#96 Unexpected Visitors": {
-      "monsters": [ "Earth Demon", "Flame Demon", "Frost Demon", "Wind Demon" ]
+      "monsters": [ "Earth Demon", "Flame Demon", "Frost Demon", "Wind Demon" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [4,7,10,13,16,19,22,25,28,31],
+          "startOfRound": false,
+          "note": "Spawn Frost Demon at a."
+        },
+        {
+          "type": "Timer",
+          "list": [5,8,11,14,17,20,23,26,29],
+          "startOfRound": false,
+          "note": "Spawn Flame Demon at b."
+        },
+        {
+          "type": "Timer",
+          "list": [6,9,12,15,18,21,24,27,30],
+          "startOfRound": false,
+          "note": "Spawn Earth Demon at c."
+        }
+      ]
     },
     "#97 Lore Untold": {
       "monsters": [ "Black Imp", "Living Bones", "Living Corpse" ]
     },
     "#98 Past In Flames": {
-      "monsters": [ "Ancient Artillery", "Bandit Archer", "Bandit Guard", "Spitting Drake" ]
+      "monsters": [ "Ancient Artillery", "Bandit Archer", "Bandit Guard", "Spitting Drake" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [-1],
+          "startOfRound": true,
+          "note": "Place damage tokens next to ships."
+        }
+      ]
     },
     "#99 Aftershocks": {
       "monsters": [ "Black Imp", "Cultist", "Deep Terror" ],
@@ -1415,7 +1443,21 @@
       "monsters": [ "Stone Golem" ]
     },
     "#101 Shrouded Crypt": {
-      "monsters": [ "Rending Drake", "Spitting Drake" ]
+      "monsters": [ "Rending Drake", "Spitting Drake" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [-1],
+          "startOfRound": true,
+          "note": "Spitting drakes gain immobilize."
+        },
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+          "startOfRound": false,
+          "note": "Rending Drake spawns at a and b if adjacent Spitting Drake is alive."
+        }
+      ]
     },
     "#102 Bazaar of Knowledge": {
       "monsters": []
@@ -1438,7 +1480,32 @@
           "name": "Hail",
           "health": "6+2xL",
           "note": "Escort: Hail 6+2xL"
-        } ]
+        },
+        {
+          "type": "Timer",
+          "list": [2,10,18,26],
+          "startOfRound": false,
+          "note": "Spawn Lurker adjacent to Portal 1."
+        },
+        {
+          "type": "Timer",
+          "list": [4,12,20,28],
+          "startOfRound": false,
+          "note": "Spawn Sun Demon adjacent to Portal 2."
+        },
+        {
+          "type": "Timer",
+          "list": [6,14,22,30],
+          "startOfRound": false,
+          "note": "Spawn Spitting Drake adjacent to Portal 3."
+        },
+        {
+          "type": "Timer",
+          "list": [8,16,24,32],
+          "startOfRound": false,
+          "note": "Spawn Harrower Infester adjacent to Portal 4."
+        }
+      ]
     },
     "#105 Monstrosities of a Cult": {
       "monsters": [ "Bandit Guard", "Valrath Tracker" ]
@@ -1456,10 +1523,32 @@
       "monsters": [ "City Archer", "City Guard", "Valrath Savage", "Valrath Tracker" ]
     },
     "#110 A Circular Solution": {
-      "monsters": [ "The Steel Lion", "Earth Demon", "Flame Demon", "Uyart Ikkuma", "Selah Neberis", "Sraka the Wise" ]
+      "monsters": [ "The Steel Lion", "Earth Demon", "Flame Demon", "Uyart Ikkuma", "Selah Neberis", "Sraka the Wise" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [4],
+          "startOfRound": false,
+          "note": "Add Section 129"
+        },
+        {
+          "type": "Timer",
+          "list": [8],
+          "startOfRound": false,
+          "note": "Add Section 134"
+        }
+      ]
     },
     "#111 The Shackles Loosen": {
-      "monsters": [ "The Husk", "Aesther Scout", "Black Imp", "Night Demon" ]
+      "monsters": [ "The Husk", "Aesther Scout", "Black Imp", "Night Demon" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [3,6,9,12,15,18,21,24,27,30],
+          "startOfRound": false,
+          "note": "Husk gains invisible."
+        }
+      ]
     },
     "#112 The Bottom of It": {
       "monsters": [ "Ancient Artillery", "Living Bones", "Stone Golem" ]
@@ -1491,6 +1580,30 @@
           "type": "Note",
           "name" : "",
           "note": "Manifestation of Corruption: Manual Deck"
+        },
+        {
+          "type": "Timer",
+          "list": [5,10],
+          "startOfRound": false,
+          "note": "Spawn one Valrath Savage and one Valrath Tracker  at c, if Altar a has no damage tokens. Spawn three Black Imps at d if Altar b has no damage tokens."
+        },
+        {
+          "type": "Timer",
+          "list": [15],
+          "startOfRound": false,
+          "note": "Scenario Lost..."
+        },
+        {
+          "type": "Timer",
+          "list": [1,2,3,4,5,6,7,8,9,10],
+          "startOfRound": true,
+          "note": "Remove one damage token from each Altar. Manifestation of Corruption heals C/2 hit points (rounded down) for each token removed."
+        },
+        {
+          "type": "Timer",
+          "list": [11,12,13,14],
+          "startOfRound": true,
+          "note": "Remove two damage tokens from each Altar. Manifestation of Corruption heals C/2 hit points (rounded down) for each token removed."
         }
         ]
     },
@@ -1602,8 +1715,20 @@
           "health": "20+L+2xC",
           "init": 99,
           "note": "Objective: Altar 20+L+2xC"
+        },
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+          "startOfRound": true,
+          "note": "Dark Strong. Spitting drakes gain immobilize."
+        },
+        {
+          "type": "Timer",
+          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": false,
+          "note": "Spawn Night Demon adjacent to Altar. Spitting drakes gain immobilize."
         }
-         ]
+      ]
     },
     "#42 Collapsed Atrium": {
       "monsters": [ "Living Spirit" ]
@@ -1616,6 +1741,28 @@
     },
     "#50 Slow Turn": {
       "monsters": [ "Living Spirit" ]
+    },
+    "#52 The First Portal": {
+      "special": [
+        {
+          "type": "Timer",
+          "list": [2,8, 14, 20,26],
+          "startOfRound": false,
+          "note": "Spawn Sun Demon adjacent to Portal 2."
+        },
+        {
+          "type": "Timer",
+          "list": [4, 10, 16, 22,28],
+          "startOfRound": false,
+          "note": "Spawn Spitting Drake adjacent to Portal 3."
+        },
+        {
+          "type": "Timer",
+          "list": [6, 12, 18,24,30],
+          "startOfRound": false,
+          "note": "Spawn Harrower Infester adjacent to Portal 4."
+        }
+      ]
     },
     "#60 Seal of Repulsion": {
       "monsters": [ "Living Corpse", "Living Spirit" ]
@@ -1630,16 +1777,56 @@
       "monsters": [ "Living Spirit", "Stone Golem" ]
     },
     "#72 Clinging Fog": {
-      "monsters": [ "Living Spirit", "Night Demon" ]
+      "monsters": [ "Living Spirit", "Night Demon" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+          "startOfRound": true,
+          "note": "Dark waning. Spitting drakes gain immobilize."
+        },
+        {
+          "type": "Timer",
+          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": false,
+          "note": "Spawn Night Demon adjacent and to the right of any door. Spitting drakes gain immobilize."
+        }
+      ]
     },
     "#73 Reflecting Road": {
       "monsters": [ "Valrath Savage" ]
+    },
+    "#79 The Second Portal": {
+      "special": [
+        {
+          "type": "Timer",
+          "list": [2,6,10,14,18,22,26,30],
+          "startOfRound": false,
+          "note": "Spawn Spitting Drake adjacent to Portal 3."
+        },
+        {
+          "type": "Timer",
+          "list": [4,8,12,16,20,24,28,32],
+          "startOfRound": false,
+          "note": "Spawn Harrower Infester adjacent to Portal 4."
+        }
+      ]
     },
     "#81 Narrow Street": {
       "monsters": [ "Aesther Scout", "Black Imp", "Night Demon" ]
     },
     "#84 Gateway to the Firmament": {
       "monsters": [ "Elham", "Earth Demon", "Flame Demon", "Frost Demon", "Icestorm Guardian of the Firmament", "Lavaflow Guardian of the Firmament" ]
+    },
+    "#85 The Third Portal": {
+      "special": [
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
+          "startOfRound": false,
+          "note": "Spawn Harrower Infester adjacent to Portal 4."
+        }
+      ]
     },
     "#90 Misty Glade": {
       "monsters": [ "Valrath Savage" ]
@@ -1656,6 +1843,18 @@
           "health": "5+L+2xC",
           "init": 99,
           "note": "Objective: Altar 5+L+2xC"
+        },
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+          "startOfRound": true,
+          "note": "Spitting drakes gain immobilize."
+        },
+        {
+          "type": "Timer",
+          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": false,
+          "note": "Spitting drakes gain immobilize."
         }]
     },
     "#94 Seal of Reanimation": {
@@ -1702,6 +1901,16 @@
         }
       ]
     },
+    "#101 Getting Both Records": {
+      "special": [
+        {
+          "type": "Timer",
+          "list": [15],
+          "startOfRound": false,
+          "note": "Scenario is Lost..."
+        }
+      ]
+    },
     "#103 The Thorns of Hate": {
       "monsters": [ "Earth Demon", "Forest Imp", "Wind Demon" ]
     },
@@ -1718,7 +1927,21 @@
       "monsters": [ "Black Imp", "Deep Terror" ]
     },
     "#123 Lingering Darkness": {
-      "monsters": [ "Living Spirit", "Night Demon" ]
+      "monsters": [ "Living Spirit", "Night Demon" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+          "startOfRound": true,
+          "note": "Dark Strong. Spitting drakes gain immobilize."
+        },
+        {
+          "type": "Timer",
+          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": false,
+          "note": "Spawn Night Demon adjacent and to the right of any door. Spitting drakes gain immobilize."
+        }
+      ]
     },
     "#126 Training Maneuvers": {
       "monsters": [ "Vermling Scout", "Vermling Shaman" ]
