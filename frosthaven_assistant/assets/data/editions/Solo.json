@@ -898,11 +898,49 @@
 					"name": "Soul Leech Egg 2",
 					"init": 25,
 					"health": "3+L"
+				},
+				{
+					"type": "Timer",
+					"list": [2,6],
+					"startOfRound": true,
+					"note": "Spawn one normal Flame Demon at hex c."
+				},
+				{
+					"type": "Timer",
+					"list": [3,7],
+					"startOfRound": true,
+					"note": "Spawn two normal Sun Demons at hex d."
+				},
+				{
+					"type": "Timer",
+					"list": [4,8],
+					"startOfRound": true,
+					"note": "Spawn one normal Night Demon at hex b."
+				},
+				{
+					"type": "Timer",
+					"list": [5,9],
+					"startOfRound": true,
+					"note": "Spawn two normal Wind Demons at hex e."
 				}
 			]
 		},
 		"Artificer: Magnum Opus": {
-			"monsters": [  "Clockwork Soldier", "Clockwork Railcaster" ]
+			"monsters": [  "Clockwork Soldier", "Clockwork Railcaster" ],
+			"special": [
+				{
+					"type": "Timer",
+					"list": [5],
+					"startOfRound": true,
+					"note": "Read Section 1."
+				},
+				{
+					"type": "Timer",
+					"list": [5,9],
+					"startOfRound": true,
+					"note": "Add Section QA2."
+				}
+			]
 		},
 		"Ruinmaw: The Fall of Shadow’s Respite": {
 			"monsters": [ "Gnashing Drake", "Spitting Drake", "Rending Drake", "Vermling Scout (ally)", "Vermling Shaman (ally)" ],
@@ -948,11 +986,8 @@
 					"init": 50
 				}]
 		},
-		"#QA3 Cooling Chamber": {
-			"monsters": [ "Clockwork Guardian" ]
-		},
-		"#QA3 Inspection Chamber": {
-			"monsters": [ "Steel Construct" ]
+		"#QA2 Mechanical Menace": {
+			"monsters": [ "Clockwork Devastator" ]
 		}
 	}
 }

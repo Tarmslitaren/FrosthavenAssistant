@@ -4414,7 +4414,15 @@
       ]
     },
     "#11 Voyage Abound": {
-      "monsters": [ "Flame Demon", "Inox Archer", "Inox Guard", "Inox Shaman", "Night Demon" ]
+      "monsters": [ "Flame Demon", "Inox Archer", "Inox Guard", "Inox Shaman", "Night Demon" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [1],
+          "startOfRound": false,
+          "note": "Spawn one normal Inox Guard and one elite Inox Archer on each tile occupied by a character."
+        }
+      ]
     },
     "#12 Uncovering the Source": {
       "monsters": [ "Flame Demon", "Giant Viper", "Rending Drake", "Spitting Drake" ]
@@ -4426,7 +4434,69 @@
       "monsters": [ "Cultist", "Deep Terror", "Living Corpse" ]
     },
     "#15 Ambush of Beasts": {
-      "monsters": [ "Cave Bear", "Giant Viper", "Hound", "Lurker", "Rending Drake" ]
+      "monsters": [ "Cave Bear", "Giant Viper", "Hound", "Lurker", "Rending Drake" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [1],
+          "startOfRound": false,
+          "note": "Spawn Hound on hex a."
+        },
+        {
+          "type": "Timer",
+          "list": [2],
+          "startOfRound": false,
+          "note": "Spawn Cave Bear on hex c."
+        },
+        {
+          "type": "Timer",
+          "list": [3],
+          "startOfRound": false,
+          "note": "Spawn Giant Viper on hex b and Rending Drake on hex d."
+        },
+        {
+          "type": "Timer",
+          "list": [4],
+          "startOfRound": false,
+          "note": "Spawn Lurker on hex a and Hound on hex c."
+        },
+        {
+          "type": "Timer",
+          "list": [5],
+          "startOfRound": false,
+          "note": "Spawn Cave Bear on hex b and Giant Viper on hex d."
+        },
+        {
+          "type": "Timer",
+          "list": [6],
+          "startOfRound": false,
+          "note": "Spawn Rending Drake on hex a and Lurker on hex c."
+        },
+        {
+          "type": "Timer",
+          "list": [7],
+          "startOfRound": false,
+          "note": "Spawn Hound on hex b and Cave Bear on hex d."
+        },
+        {
+          "type": "Timer",
+          "list": [8],
+          "startOfRound": false,
+          "note": "Spawn Giant Viper on hex a and Rending Drake on hex c."
+        },
+        {
+          "type": "Timer",
+          "list": [9],
+          "startOfRound": false,
+          "note": "Spawn Lurker on hex b and Hound on hex d."
+        },
+        {
+          "type": "Timer",
+          "list": [10],
+          "startOfRound": false,
+          "note": "Scenario Won!."
+        }
+      ]
     },
     "#16 Preto Krisanta": {
       "monsters": [ "Black Imp", "Flame Demon", "Night Demon", "Sun Demon" ]
@@ -4571,7 +4641,33 @@
       "monsters": [ "Black Imp", "Living Spirit", "Night Demon", "Stone Golem" ]
     },
     "#39 Festering Mire": {
-      "monsters": [ "Earth Demon", "Giant Viper" ]
+      "monsters": [ "Earth Demon", "Giant Viper" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [1],
+          "startOfRound": true,
+          "note": "Use the Physical Giant Viper Deck for the Ghost Vipers."
+        },
+        {
+          "type": "Timer",
+          "list": [9],
+          "startOfRound": true,
+          "note": "The Viper Hunter can now move."
+        },
+        {
+          "type": "Timer",
+          "list": [3],
+          "startOfRound": false,
+          "note": "Read 44A."
+        },
+        {
+          "type": "Timer",
+          "list": [6],
+          "startOfRound": false,
+          "note": "Read 44B."
+        }
+      ]
     },
     "#40 Smugglers Hideout": {
       "monsters": [ "Rending Drake", "Spitting Drake" ]
@@ -4647,7 +4743,15 @@
       "monsters": [ "Flame Demon", "Sun Demon", "Vermling Scout", "Vermling Shaman" ]
     },
     "#52 Wishing Well": {
-      "monsters": [ "Black Imp", "Living Corpse", "Ooze", "Spitting Drake" ]
+      "monsters": [ "Black Imp", "Living Corpse", "Ooze", "Spitting Drake" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
+          "startOfRound": false,
+          "note": "Spawn Spitting Drake at c."
+        }
+      ]
     },
     "#53 Cave of Currents": {
       "monsters": [ "Lurker", "Spitting Drake", "Water Spirit" ]
@@ -4678,7 +4782,6 @@
     },
     "#62 Hallow Redemption": {
       "monsters": [ "Aesther Ashblade", "Cave Bear", "Forest Imp", "Vermling Shaman" ],
-
       "special": [
         {
           "type": "LevelAdjust",
@@ -4713,7 +4816,45 @@
     },
 
     "#AA1 The Riches of the Steelsilk": {
-      "monsters": [ "Harrower Aegis", "Hound", "Bandit Archer", "Bandit Guard", "Wind Demon", "Frost Demon" ]
+      "monsters": [ "Harrower Aegis", "Hound", "Bandit Archer", "Bandit Guard", "Wind Demon", "Frost Demon" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [2,6],
+          "startOfRound": true,
+          "note": "Spawn C normal Bandit Guards."
+        },
+        {
+          "type": "Timer",
+          "list": [3,7],
+          "startOfRound": true,
+          "note": "Spawn C normal Bandit Archerss."
+        },
+        {
+          "type": "Timer",
+          "list": [4,8],
+          "startOfRound": true,
+          "note": "Spawn C normal Hounds."
+        },
+        {
+          "type": "Timer",
+          "list": [5],
+          "startOfRound": true,
+          "note": "Spawn C normal Wind Demons."
+        },
+        {
+          "type": "Timer",
+          "list": [9],
+          "startOfRound": true,
+          "note": "Spawn C normal Ice Demons."
+        },
+        {
+          "type": "Timer",
+          "list": [9],
+          "startOfRound": false,
+          "note": "Add Section AA1."
+        }
+      ]
     },
     "#AA2 Malign Echoes": {
       "monsters": [ "Giant Viper","Ravenous Gharial", "Black Imp", "Harrower Aegis", "Harrower Infester" ]
@@ -4732,6 +4873,30 @@
           "name": "Soul Leech Egg 2",
           "init": 25,
           "health": "3+L"
+        },
+        {
+          "type": "Timer",
+          "list": [2,6],
+          "startOfRound": true,
+          "note": "Spawn one normal Flame Demon at hex c."
+        },
+        {
+          "type": "Timer",
+          "list": [3,7],
+          "startOfRound": true,
+          "note": "Spawn two normal Sun Demons at hex d."
+        },
+        {
+          "type": "Timer",
+          "list": [4,8],
+          "startOfRound": true,
+          "note": "Spawn one normal Night Demon at hex b."
+        },
+        {
+          "type": "Timer",
+          "list": [5,9],
+          "startOfRound": true,
+          "note": "Spawn two normal Wind Demons at hex e."
         }
       ]
     },
@@ -4743,7 +4908,21 @@
       "monsters": [ "Giant Viper", "Living Bones", "Ooze", "Living Corpse", "Living Spirit" ]
     },
     "#QA3 Solo: Magnum Opus": {
-      "monsters": [  "Clockwork Soldier", "Clockwork Railcaster" ]
+      "monsters": [  "Clockwork Soldier", "Clockwork Railcaster" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [5],
+          "startOfRound": true,
+          "note": "Read Section 1."
+        },
+        {
+          "type": "Timer",
+          "list": [5,9],
+          "startOfRound": true,
+          "note": "Add Section QA2."
+        }
+      ]
     },
 
     "#RM1 Mind Your Manners": {
