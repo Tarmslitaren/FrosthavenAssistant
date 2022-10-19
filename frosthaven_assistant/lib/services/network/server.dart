@@ -13,7 +13,7 @@ import 'network.dart';
 //import 'dart:developer' as developer;
 
 class Server {
-  final serverVersion = 1;
+  final int serverVersion = 130;
 
   final GameState _gameState = getIt<GameState>();
 
@@ -138,7 +138,7 @@ class Server {
                 if(newIndex > _gameState.commandDescriptions.length) {
                   //invalid: index too high. send correction to clients
                   String commandDescription = "";
-                  if(_gameState.commandDescriptions.length > 0) {
+                  if(_gameState.commandDescriptions.isNotEmpty) {
                     commandDescription = _gameState.commandDescriptions.last;
                   }
                   send("Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}");
@@ -173,7 +173,7 @@ class Server {
                 int version = int.parse(initMessageParts[1]);
                 if(version != serverVersion) {
                   //version mismatch
-                  getIt<Network>().networkMessage.value = "Client with old version tried to connect";
+                  getIt<Network>().networkMessage.value = "Client version mismatch. Please update.";
                   sendToOnly(
                       "Error: Server Version is $serverVersion. client version is $version. Please update your client.", client);
 

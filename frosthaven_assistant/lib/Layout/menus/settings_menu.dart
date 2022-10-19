@@ -44,6 +44,7 @@ class SettingsMenuState extends State<SettingsMenu> {
     _portTextController.text = settings.lastKnownPort;
 
     return Card(
+      child: Scrollbar(
         child: SingleChildScrollView(
             child: Stack(children: [
       Column(
@@ -380,6 +381,6 @@ class SettingsMenuState extends State<SettingsMenu> {
                 Navigator.pop(context);
                 settings.saveToDisk();
               }))
-    ])));
+    ]))));
   }
 }
