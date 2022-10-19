@@ -724,7 +724,15 @@
 			"monsters":  ["Bandit Guard", "Bandit Archer", "Living Bones" ]
 		},
 		"Tinkerer: An Unfortunate Intrusion": {
-			"monsters":  ["City Guard (Ally)", "Vermling Scout", "Vermling Shaman" ]
+			"monsters":  ["City Guard (Ally)", "Vermling Scout", "Vermling Shaman" ],
+			"special": [
+				{
+					"type": "Timer",
+					"list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+					"startOfRound": false,
+					"note": "Four normal Vermling Scouts spawn at a."
+				}
+			]
 		},
 		"Spellweaver: Corrupted Laboratory": {
 			"monsters":  ["Black Imp", "Spitting Drake", "Stone Golem" ]
@@ -739,7 +747,21 @@
 				}]
 		},
 		"Cragheart: Stone Defense": {
-			"monsters":  ["Cave Bear", "Ooze", "Sun Demon" ]
+			"monsters":  ["Cave Bear", "Ooze", "Sun Demon" ],
+			"special": [
+				{
+					"type": "Timer",
+					"list": [1,3,5],
+					"startOfRound": false,
+					"note": "One normal Cave Bear spawns at a and one elite Ooze spawns at b."
+				},
+				{
+					"type": "Timer",
+					"list": [2,4,6],
+					"startOfRound": false,
+					"note": "One normal Sun Demon spawns at c and two normal Oozes spawn at d. "
+				}
+			]
 		},
 		"Mindthief: Rodent Liberation": {
 			"monsters":  ["Vermling Scout", "Vermling Shaman", "Earth Demon (Mindthief Special)" ],
@@ -773,7 +795,33 @@
 			"monsters":  ["Hound", "Bandit Guard", "Bandit Archer" ]
 		},
 		"Summoner: Plane of Wild Beasts": {
-			"monsters":  ["Hound", "Spitting Drake", "Cave Bear (Circles special)" ]
+			"monsters":  ["Hound", "Spitting Drake", "Cave Bear (Circles special)" ],
+			"special": [
+				{
+					"type": "Timer",
+					"list": [1],
+					"startOfRound": false,
+					"note": "One normal Hound spawns at a."
+				},
+				{
+					"type": "Timer",
+					"list": [2],
+					"startOfRound": false,
+					"note": "One normal Spitting Drake spawns at b."
+				},
+				{
+					"type": "Timer",
+					"list": [3],
+					"startOfRound": false,
+					"note": "Two normal Hounds spawns at c."
+				},
+				{
+					"type": "Timer",
+					"list": [4],
+					"startOfRound": false,
+					"note": "One normal Spitting Drake spawns at d."
+				}
+			]
 		},
 		"Nightshroud: Harvesting the Night": {
 			"monsters":  ["Night Demon", "Deep Terror" ]
@@ -786,7 +834,31 @@
 				{ "type": "Escort", "name": "Spirit of Xorn 3", "health": "4+L"},
 				{ "type": "Escort", "name": "Spirit of Xorn 4", "health": "4+L"},
 				{ "type": "Escort", "name": "Spirit of Xorn 5", "health": "4+L"},
-				{ "type": "Escort", "name": "Spirit of Xorn 6", "health": "4+L"}
+				{ "type": "Escort", "name": "Spirit of Xorn 6", "health": "4+L"},
+				{
+					"type": "Timer",
+					"list": [2],
+					"startOfRound": true,
+					"note": "Door b opens."
+				},
+				{
+					"type": "Timer",
+					"list": [5],
+					"startOfRound": true,
+					"note": "Door c opens."
+				},
+				{
+					"type": "Timer",
+					"list": [8],
+					"startOfRound": true,
+					"note": "Door d opens."
+				},
+				{
+					"type": "Timer",
+					"list": [11],
+					"startOfRound": true,
+					"note": "Door e opens."
+				}
 			]
 		},
 		"Berserker: Unnatural Insults": {
@@ -814,7 +886,33 @@
 			"monsters":  ["City Guard", "Lieutenant" ]
 		},
 		"Elementalist: Elemental Secrets": {
-			"monsters":  ["Flame Demon", "Earth Demon", "Frost Demon", "Wind Demon" ]
+			"monsters":  ["Flame Demon", "Earth Demon", "Frost Demon", "Wind Demon" ],
+			"special": [
+				{
+					"type": "Timer",
+					"list": [1,5,9,13,17,21,25,29],
+					"startOfRound": true,
+					"note": "Air Strong."
+				},
+				{
+					"type": "Timer",
+					"list": [2,6,10,14,18,22,26,30],
+					"startOfRound": true,
+					"note": "Ice Strong."
+				},
+				{
+					"type": "Timer",
+					"list": [3,7,11,15,19,23,27,31],
+					"startOfRound": true,
+					"note": "Earth Strong."
+				},
+				{
+					"type": "Timer",
+					"list": [4,8,12,16,20,24,28,32],
+					"startOfRound": true,
+					"note": "Fire Strong."
+				}
+			]
 		},
 		"Beast Tyrant: The Caged Bear": {
 			"monsters":  ["Hound", "Forest Imp", "Rending Drake", "Vermling Shaman", "Cave Bear" ]
