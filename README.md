@@ -53,6 +53,7 @@ scaling the bottom/top bars (for better visibility on some screens for example).
   - Level, Trap Damage, Hazardous Terrain Damage, XP Gain and Coin Multiplier.
   - Tap/click the level widget to open set level menu.
 - To set character level tap/click the character to open stat menu, then tap/click the crown to open set character level menu.
+- Character name can be changed from the same menu
 - To open stats menu for monster, tap/click the standee.
 - On the stats menu you can add conditions and set current health values etc.
 - To the right on bottom bar, or above in case screen to narrow is the monster modifier deck.
@@ -93,13 +94,11 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself.
 - Some text alignment issues with small texts on small (mobile) screens.
 - Frosthaven Style option is not a 100% accurate. Partly because we don't know yet exactly how the cards should look.
+- Condition Animations do not play when connected.
+- Yuo can connect devices with different versions, but there will be issues. PLease update all your devices!
 
 ## Roadmap
 - Next:
-  - Show special rules toast on start/end of round if special rules for round nr
-  - Trails of Ashes support
-  - Many UI improvements, including animations on conditions when they need to be applied.
--After that:
   - full Frosthaven support
 
 ## Copyright / License
