@@ -95,7 +95,9 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Some text alignment issues with small texts on small (mobile) screens.
 - Frosthaven Style option is not a 100% accurate. Partly because we don't know yet exactly how the cards should look.
 - Condition Animations do not play when connected.
-- Yuo can connect devices with different versions, but there will be issues. PLease update all your devices!
+- You can connect devices with different versions, but there will be issues. PLease update all your devices!
+- Objectives and Escorts do not update their 'level'/health when monster level is changed. Please set the correct monster level before setting a scenario.
+
 
 ## Roadmap
 - Next:

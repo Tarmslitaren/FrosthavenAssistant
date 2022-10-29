@@ -68,13 +68,13 @@ class SetScenarioCommand extends Command {
           .currentCampaign.value]!.sections[_scenario]!.monsters;
 
       specialRules = _gameState.modelData.value[_gameState
-          .currentCampaign.value]!.sections[_scenario]!.specialRules;
+          .currentCampaign.value]!.sections[_scenario]!.specialRules.toList();
     }else{
       if(_scenario != "custom") {
         monsters = _gameState.modelData.value[_gameState
             .currentCampaign.value]!.scenarios[_scenario]!.monsters;
         specialRules = _gameState.modelData.value[_gameState
-            .currentCampaign.value]!.scenarios[_scenario]!.specialRules;
+            .currentCampaign.value]!.scenarios[_scenario]!.specialRules.toList();
       }
     }
 
