@@ -164,7 +164,97 @@
       "hidden": false,
       "color": "ffcf4471",
       "summons": {}
+    },
+
+    {
+      "name": "Infuser",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
+    },
+    {
+      "name": "Pyroclast",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
+    },
+    {
+      "name": "Shattersong",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
+    },
+    {
+      "name": "Trapper",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
+    },
+    {
+      "name": "Pain Conduit",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
+    },
+    {
+      "name": "Snowdancer",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
+    },
+    {
+      "name": "Frozen Fist",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
+    },
+    {
+      "name": "Deepwraith",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
+    },
+    {
+      "name": "Crashing Tide",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
+    },
+    {
+      "name": "H.I.V.E.",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
+    },
+    {
+      "name": "Metal Mosaic",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "color": "ffcf4471",
+      "summons": {}
     }
+
   ],
   "monsterAbilities": [
     {
