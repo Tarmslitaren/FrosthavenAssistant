@@ -193,10 +193,23 @@
     {
       "name": "Trapper",
       "edition": "Frosthaven",
-      "health": [8,9,11,12,14,15,17,18,20],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
-      "color": "ffcf4471",
-      "summons": {}
+      "color": "ffac9c6f",
+      "summons": {
+        "Shaggy Lure": {
+          "level": 1,
+          "gfx": "TRA Shaggy Lure",
+          "health": 2
+        },
+        "Defense Grid": {
+          "level": 7,
+          "gfx": "TRA Defense Grid",
+          "health": 8,
+          "attack":  2,
+          "range": 3
+        }
+      }
     },
     {
       "name": "Pain Conduit",
@@ -577,7 +590,7 @@
       ]
     },
     {
-      "name": "Shaman (FH)",
+      "name": "Priest",
       "cards": [
         [ 588, false, 8, "%move% + 0","*.........", "%attack% - 1", "^%range% 3", "^%disarm%" ],
         [ 589, false, 8, "%move% - 1","*.........", "%attack% + 0", "^%range% 3", "^%immobilize%" ],
@@ -1868,10 +1881,10 @@
         }
       ]
     },
-    "Vermling Shaman (FH)": {
+    "Vermling Priest": {
       "gfx": "Vermling Shaman",
-      "display": "Vermling Shaman",
-      "deck": "Shaman (FH)",
+      "display": "Vermling Priest",
+      "deck": "Priest",
       "count": 6,
       "levels": [
         {
@@ -2196,8 +2209,8 @@
         }
       ]
     },
-    "Algox Shaman": {
-      "deck": "Shaman (FH)",
+    "Algox Priest": {
+      "deck": "Priest",
       "count": 4,
       "levels": [
         {
