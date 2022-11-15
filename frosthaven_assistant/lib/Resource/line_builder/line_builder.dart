@@ -424,9 +424,6 @@ class LineBuilder {
           elementUse = true;
           conditional = true;
         }
-        if (texts.toLowerCase().contains("if ") || texts.contains('On ')) {
-          conditional = true;
-        }
         if(texts.lastIndexOf(" :") != texts.indexOf(" :")) {
           columnHack = true;
         }

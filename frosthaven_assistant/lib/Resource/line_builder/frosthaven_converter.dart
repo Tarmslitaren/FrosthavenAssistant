@@ -17,17 +17,15 @@ class FrosthavenConverter {
       if ((line == "[r]" || line == "[s]") && lines[i + 1].contains('%use')) {
         isElementUse = true;
       }
-      if ((line == "[r]" || line == "[s]") &&
-          (lines[i + 1].contains('%use') ||
-              lines[i + 1].toLowerCase().contains('if ') || lines[i + 1].contains('On ') ||
-              (lines.length > i + 2 &&
-                  lines[i + 2].toLowerCase().contains('if ')|| lines[i + 1].contains('On ')))) {
+      if ((line == "[r]" || line == "[s]") && (lines[i + 1].contains('%use'))) {
         isConditional = true;
         startOfConditional = true;
       }
       if ((line == "[/r]" || line == "[/s]") && isConditional) { //TODO: add instead a [conditionalDone] tag
         isConditional = false;
         isElementUse = false;
+       // isReallySubLine = false;
+       // isSubLine = false;
       }
 
       if(i > 0 && lines[i - 1].contains("%use")){
@@ -59,14 +57,6 @@ class FrosthavenConverter {
       }
 
       if (line.startsWith("^") && isSubLine && !startOfConditional) {
-        //&& !isConditional
-        if (!isReallySubLine && (!isConditional || (isElementUse
-            && !line.startsWith("^Perform") && !line.startsWith("^^for each") //harrower infester 30
-            // && !line.startsWith("^All enemies") && !line.startsWith("^^target suffer")//(icecrawler 16) - screws with [c]?
-        ))) {
-          retVal.add("[subLineStart]");
-          isReallySubLine = true;
-        }
         //make right aligned, in these cases
         if (line[1] == '%' ||
             //these are all very... assuming.
@@ -90,6 +80,16 @@ class FrosthavenConverter {
                 !line.startsWith("^All attacks") &&
                 !line.startsWith("^All targets")
         ) {
+
+          //In hope this move does not screw with conditionals or ohter things...
+          if (!isReallySubLine && (!isConditional || (isElementUse
+              && !line.startsWith("^Perform") && !line.startsWith("^^for each") //harrower infester 30
+              // && !line.startsWith("^All enemies") && !line.startsWith("^^target suffer")//(icecrawler 16) - screws with [c]?
+          ))) {
+            retVal.add("[subLineStart]");
+            isReallySubLine = true;
+          }
+
           //make bigger icon and text in element use block
           if (isElementUse && (lines[i-1].contains("use")  ||
               (lines[i-2].contains("use") && lines[i-1].contains("[c]")))   // (!lines[i - 2].contains("[c]"))
@@ -112,13 +112,16 @@ class FrosthavenConverter {
           line = line.replaceFirst("Self", "self");
           line = line.replaceFirst("All", "all");
 
-          //TODO: add commas if needed
+          //TODO: add commas if needed (for now they are added in data, but looks wrong in GH style)
 
           if (retVal.last == "[subLineStart]") {
             retVal.last = "![subLineStart]";
           } else {
             //line = "!^ " + line.substring(2); //adding space
           }
+        } else {
+          //if not right aligned, then not really a subline after all
+          isSubLine = false;
         }
 
         if (retVal.last.endsWith("%") && line.endsWith("adjacent enemy")) {

@@ -177,6 +177,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                         TextButton(
                           onPressed: () {
                             setState(() {
+                              setCampaign("Frosthaven");
+                            });
+                          },
+                          child: const Text("Frosthaven"),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
                               setCampaign("Crimson Scales");
                             });
                           },

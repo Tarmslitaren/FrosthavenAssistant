@@ -137,6 +137,7 @@ class StatApplier{
           eliteValue = elite.range;
         }
       }
+
     } else if (lastToken == "move") {
       normalValue = StatCalculator.calculateFormula(normal!.move)!;
       if (elite != null) {
@@ -283,13 +284,11 @@ class StatApplier{
               line[i] == '-' ||
               line[i] == 'C' ||
               line[i] == 'L') ||
+          line[i] == 'X' || //hax: X doesn't work in formula, but if a formula starts wit X it should bork. Hopefully there are no wild 'X's anywhere.
           (line[i].contains(regExpNumbers) &&
               lastToken
                   .isEmpty) //plain numbers cant be calculated for tokens (e.g. attack 1 is not same as attack +1)
-              &&
-              (i == 0 ||
-                  line[i - 1] ==
-                      ' ') //supposing there is always a leading whitespace to any formula
+              && (i == 0 || line[i - 1] == ' ') //supposing there is always a leading whitespace to any formula
       ) {
         String formula = line[i];
         int startIndex = i;
