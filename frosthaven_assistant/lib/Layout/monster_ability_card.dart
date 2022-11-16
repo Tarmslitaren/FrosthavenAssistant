@@ -324,7 +324,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 
               },
             child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 600), 
+                duration: const Duration(milliseconds: 600),
                 transitionBuilder: _transitionBuilder,
                 layoutBuilder: (widget, list) => Stack(
                       children: [widget!, ...list],
