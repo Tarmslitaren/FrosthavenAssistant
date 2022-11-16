@@ -103,6 +103,9 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   void _setCampaign(String campaign) {
     _currentCampaign = campaign;
     _foundMonsters = _allMonsters.toList();
+    if (campaign == "JotL") {
+      campaign = "Jaws of the Lion";
+    }
     if (campaign != "All") {
       _foundMonsters.removeWhere((monster) => monster.edition != campaign);
     }
@@ -137,7 +140,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                               DropdownMenuItem<String>(
                                   value: "All", child: Text("All Campaigns")),
                               DropdownMenuItem<String>(
-                                  value: "Jaws of the Lion",
+                                  value: "JotL",
                                   child: Text("Jaws of the Lion")),
                               DropdownMenuItem<String>(
                                   value: "Gloomhaven",
