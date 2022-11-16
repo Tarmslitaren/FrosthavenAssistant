@@ -347,6 +347,16 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 true)),
                                       ])
                                     : Container(),
+                                if (bossOtherAttributes.isNotEmpty) Image.asset(
+                                  // alignment: alignment == CrossAxisAlignment.start? Alignment.centerLeft : Alignment.center,
+                                  scale: 1 / (scale * 0.15),
+                                  height: 1 * scale,
+                                  fit: BoxFit.fill,
+                                  width: 125.0 * scale,
+                                  //actually 40, but some layout might depend on wider size so not changing now
+                                  filterQuality: FilterQuality.medium,
+                                  "assets/images/abilities/divider_boss_fh.png",
+                                ),
                                 normal.special1.isNotEmpty
                                     ? Row(
                                         //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -376,7 +386,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                           ])
                                     : Container(),
                                 normal.special2.isNotEmpty
-                                    ? Row(children: [
+                                    ?
                                         Image.asset(
                                           // alignment: alignment == CrossAxisAlignment.start? Alignment.centerLeft : Alignment.center,
                                           scale: 1 / (scale * 0.15),
@@ -386,8 +396,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                           //actually 40, but some layout might depend on wider size so not changing now
                                           filterQuality: FilterQuality.medium,
                                           "assets/images/abilities/divider_boss_fh.png",
-                                        ),
-                                      ])
+                                        )
+
                                     : Container(),
                                 normal.special2.isNotEmpty
                                     ? Row(

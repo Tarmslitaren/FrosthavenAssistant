@@ -171,6 +171,7 @@ class LineBuilder {
 
 
 
+    bool isBossStatCard = monster.type.levels[0].boss != null && alignment == CrossAxisAlignment.start;
 
     String imageSuffix = "";
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster.type);
@@ -211,7 +212,7 @@ class LineBuilder {
     var smallStyle = TextStyle(
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
-        fontSize: (alignment == CrossAxisAlignment.center ? 8.0 : 8.8) * scale,
+        fontSize: (alignment == CrossAxisAlignment.center ? 8.0 : 7.4) * scale,
         //sizes are larger on stat cards
         height: 0.8,
         backgroundColor: debugColors? Colors.amber: null,
@@ -226,7 +227,7 @@ class LineBuilder {
                 ? frosthavenStyle
                     ? 9.52 //7.52 is closer to physical size, but too hard to see on smaller screens
                     : 8.8
-                : 10.16) *
+                :frosthavenStyle? 8.8 : 9.9) *
             scale),//.floorToDouble()+0.5, //not sur eif flooring the mid scale is realy the best option. or onl yhappens tp work on my android
         //sizes are larger on stat cards
         height: (alignment == CrossAxisAlignment.center ? frosthavenStyle? 1.0 //he one problem here: one line no icons -> squished
@@ -294,7 +295,7 @@ class LineBuilder {
             ? frosthavenStyle
             ? 9.52
             : 8.8
-            : 9.9) *
+            : frosthavenStyle? 8.8 : 9.9) *
             scale,
         //sizes are larger on stat cards
         height: (alignment == CrossAxisAlignment.center ? 0.8 :
@@ -370,7 +371,8 @@ class LineBuilder {
             hasInnerRow,
             widgetsInColumn,
             widgetsInRow,
-          widgetsInInnerRow
+          widgetsInInnerRow,
+            isBossStatCard
         );
         continue;
       }
@@ -448,7 +450,8 @@ class LineBuilder {
 
         if (frosthavenStyle && conditional) {
           //might need ot check if in column or row here
-          FrosthavenConverter.applyConditionalGraphics(widgetsInColumn, scale, elementUse, rightMargin, row);
+
+          FrosthavenConverter.applyConditionalGraphics(widgetsInColumn, scale, elementUse, rightMargin, isBossStatCard, row);
         } else {
           widgetsInColumn.add(row);
         }
@@ -491,7 +494,7 @@ class LineBuilder {
         widgetsInRow = [];
 
         if (frosthavenStyle && conditional) {
-          FrosthavenConverter.applyConditionalGraphics(lines, scale, elementUse, rightMargin, row);
+          FrosthavenConverter.applyConditionalGraphics(lines, scale, elementUse, rightMargin, isBossStatCard, row);
         } else {
           lines.add(row);
         }

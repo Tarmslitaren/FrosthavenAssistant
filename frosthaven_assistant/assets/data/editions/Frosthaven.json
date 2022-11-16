@@ -3139,8 +3139,8 @@
           "health": "Cx13",
           "move": 3,
           "attack": "Cx2",
-          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
-          "special2": [ "%shield% 1","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "special1": [ "[r]", "[c]","%move% + 0", "*.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 1","*.........", "%move% + 1","*.........", "%attack% +0", "^%target% 3" ],
           "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
         },
         {
@@ -3148,8 +3148,8 @@
           "health": "Cx15",
           "move": 3,
           "attack": "Cx2",
-          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
-          "special2": [ "%shield% 2","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "special1": [ "[r]", "[c]","%move% + 0", "*.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2","*.........", "%move% + 1","*.........", "%attack% +0", "^%target% 3" ],
           "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
         },
         {
@@ -3157,8 +3157,8 @@
           "health": "Cx16",
           "move": 3,
           "attack": "Cx3",
-          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
-          "special2": [ "%shield% 2","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "special1": [ "[r]", "[c]","%move% + 0", "*.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2","*.........", "%move% + 1","*.........", "%attack% +0", "^%target% 3" ],
           "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
         },
         {
@@ -3166,8 +3166,8 @@
           "health": "Cx20",
           "move": 4,
           "attack": "Cx3",
-          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
-          "special2": [ "%shield% 2","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "special1": [ "[r]", "[c]","%move% + 0", "*.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2","*.........", "%move% + 1","*.........", "%attack% +0", "^%target% 3" ],
           "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
         },
         {
@@ -3175,8 +3175,8 @@
           "health": "Cx22",
           "move": 4,
           "attack": "Cx4",
-          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
-          "special2": [ "%shield% 2","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "special1": [ "[r]", "[c]","%move% + 0", "*.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2","*.........", "%move% + 1","*.........", "%attack% +0", "^%target% 3" ],
           "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
         },
         {
@@ -3184,8 +3184,8 @@
           "health": "Cx27",
           "move": 4,
           "attack": "Cx4",
-          "special1": [ "[r]", "[c]","%move% + 0", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
-          "special2": [ "%shield% 2", "%move% + 1", "%attack% +0", "^%target% 3" ],
+          "special1": [ "[r]", "[c]","%move% + 0", "*.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 2","*.........", "%move% + 1","*.........", "%attack% +0", "^%target% 3" ],
           "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
         },
         {
@@ -3193,8 +3193,8 @@
           "health": "Cx36",
           "move": 4,
           "attack": "Cx5",
-          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
-          "special2": [ "%shield% 3,","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "special1": [ "[r]", "[c]","%move% + 0", "*.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 3","*.........", "%move% + 1","*.........", "%attack% +0", "^%target% 3" ],
           "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
         },
         {
@@ -3202,8 +3202,8 @@
           "health": "Cx47",
           "move": 4,
           "attack": "Cx5",
-          "special1": [ "[r]", "[c]","%move% + 0", "**.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
-          "special2": [ "%shield% 4,","**.........", "%move% + 1","**.........", "%attack% +0", "^%target% 3" ],
+          "special1": [ "[r]", "[c]","%move% + 0", "*.........", "%attack% + 1", "^%stun%","[/c]", "%ice%", "[/r]" ],
+          "special2": [ "%shield% 4","*.........", "%move% + 1","*.........", "%attack% +0", "^%target% 3" ],
           "immunities": [ "%wound%", "%immobilize%","%disarm%", "%stun%","%muddle%", "%curse%" ]
         }
       ]
@@ -3217,7 +3217,7 @@
           "health": "Cx10",
           "move": 3,
           "attack": "C",
-          "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
+          "special1": [ "[r]", "[c]","%move% + 1", "*.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
           "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         },
@@ -3226,7 +3226,7 @@
           "health": "Cx12",
           "move": 3,
           "attack": "C+1",
-          "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
+          "special1": [ "[r]", "[c]","%move% + 1", "*.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
           "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": ["%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         },
@@ -3235,7 +3235,7 @@
           "health": "Cx15",
           "move": 3,
           "attack": "C+1",
-          "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
+          "special1": [ "[r]", "[c]","%move% + 1", "*.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
           "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%"]
         },
@@ -3244,7 +3244,7 @@
           "health": "Cx17",
           "move": 4,
           "attack": "C+2",
-          "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
+          "special1": [ "[r]", "[c]","%move% + 1", "*.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
           "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%"]
         },
@@ -3253,7 +3253,7 @@
           "health": "Cx22",
           "move": 3,
           "attack": "C+2",
-          "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
+          "special1": [ "[r]", "[c]","%move% + 1", "*.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
           "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         },
@@ -3262,7 +3262,7 @@
           "health": "Cx25",
           "move": 3,
           "attack": "C+3",
-          "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
+          "special1": [ "[r]", "[c]","%move% + 1", "*.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
           "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": ["%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         },
@@ -3271,7 +3271,7 @@
           "health": "Cx35",
           "move": 3,
           "attack": "C+4",
-          "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
+          "special1": [ "[r]", "[c]","%move% + 1", "*.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
           "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         },
@@ -3280,7 +3280,7 @@
           "health": "Cx45",
           "move": 3,
           "attack": "C+5",
-          "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
+          "special1": [ "[r]", "[c]","%move% + 1", "*.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
           "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         }
@@ -3295,7 +3295,7 @@
           "health": "Cx25",
           "move": 0,
           "attack": 4,
-          "special1": [ "^Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
+          "special1": [ "^>Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
           "special2": [ "^Spawn C/2 sparks (rounded up).", "**.........", "^Force all enemies to move one hex", "^^toward the closest unoccupied", "^^corridor hex." ],
           "immunities": [ "%wound%","%disarm%", "%stun%", "%curse%" ]
         },
@@ -3304,7 +3304,7 @@
           "health": "Cx30",
           "move": 0,
           "attack": 4,
-          "special1": [ "^Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
+          "special1": [ "^>Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
           "special2": [ "^Spawn C/2 sparks (rounded up).", "**.........", "^Force all enemies to move one hex", "^^toward the closest unoccupied", "^^corridor hex." ],
           "immunities": ["%wound%","%disarm%", "%stun%", "%curse%" ]
         },
@@ -3313,7 +3313,7 @@
           "health": "Cx35",
           "move": 0,
           "attack": 5,
-          "special1": [ "^Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
+          "special1": [ "^>Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
           "special2": [ "^Spawn C/2 sparks (rounded up).", "**.........", "^Force all enemies to move one hex", "^^toward the closest unoccupied", "^^corridor hex." ],
           "immunities": [ "%wound%","%disarm%", "%stun%", "%curse%"]
         },
@@ -3322,7 +3322,7 @@
           "health": "Cx43",
           "move": 0,
           "attack": 5,
-          "special1": [ "^Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
+          "special1": [ "^>Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
           "special2": [ "^Spawn C/2 sparks (rounded up).", "**.........", "^Force all enemies to move one hex", "^^toward the closest unoccupied", "^^corridor hex." ],
           "immunities": [ "%wound%","%disarm%", "%stun%", "%curse%"]
         },
@@ -3331,7 +3331,7 @@
           "health": "Cx50",
           "move": 0,
           "attack": 6,
-          "special1": [ "^Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
+          "special1": [ "^>Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
           "special2": [ "^Spawn C/2 sparks (rounded up).", "**.........", "^Force all enemies to move one hex", "^^toward the closest unoccupied", "^^corridor hex." ],
           "immunities": [ "%wound%","%disarm%", "%stun%", "%curse%" ]
         },
@@ -3340,7 +3340,7 @@
           "health": "Cx60",
           "move": 0,
           "attack": 6,
-          "special1": [ "^Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
+          "special1": [ "^>Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
           "special2": [ "^Spawn C/2 sparks (rounded up).", "**.........", "^Force all enemies to move one hex", "^^toward the closest unoccupied", "^^corridor hex." ],
           "immunities": ["%wound%","%disarm%", "%stun%", "%curse%" ]
         },
@@ -3349,7 +3349,7 @@
           "health": "Cx79",
           "move": 0,
           "attack": 7,
-          "special1": [ "^Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
+          "special1": [ "^>Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
           "special2": [ "^Spawn C/2 sparks (rounded up).", "**.........", "^Force all enemies to move one hex", "^^toward the closest unoccupied", "^^corridor hex." ],
           "immunities": [ "%wound%","%disarm%", "%stun%", "%curse%" ]
         },
@@ -3358,7 +3358,7 @@
           "health": "Cx99",
           "move": 0,
           "attack": 8,
-          "special1": [ "^Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
+          "special1": [ "^>Spawn C/2 sparks (rounded down).", "**.........", "%attack% - 2","^%target% C,","^%range% 5,", "^%immobilize%" ],
           "special2": [ "^Spawn C/2 sparks (rounded up).", "**.........", "^Force all enemies to move one hex", "^^toward the closest unoccupied", "^^corridor hex." ],
           "immunities": [ "%wound%","%disarm%", "%stun%", "%curse%" ]
         }
@@ -3615,8 +3615,8 @@
           "health": "Cx10",
           "move": 0,
           "attack": "C",
-          "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
-          "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
+          "special1": [ "*Focus on farthest enemy.","^^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^^All characters occupying any", "^^pressure plate suffer trap damage."],
+          "special2": [ "*Ally to all monsters.","^^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
           "immunities": [ "%wound%","%poison%", "%stun%" ]
         },
         {
@@ -3624,17 +3624,17 @@
           "health": "Cx12",
           "move": 0,
           "attack": "C+1",
-          "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
-          "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
-           "immunities": ["%wound%","%poison%", "%stun%" ]
+          "special1": [ "*Focus on farthest enemy.","^^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^^All characters occupying any", "^^pressure plate suffer trap damage."],
+          "special2": [ "*Ally to all monsters.","^^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
+          "immunities": ["%wound%","%poison%", "%stun%" ]
         },
         {
           "level": 2,
           "health": "Cx15",
           "move": 0,
           "attack": "C+1",
-          "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
-          "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
+          "special1": [ "*Focus on farthest enemy.","^^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^^All characters occupying any", "^^pressure plate suffer trap damage."],
+          "special2": [ "*Ally to all monsters.","^^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
           "immunities": [ "%wound%","%poison%", "%stun%"]
         },
         {
@@ -3642,8 +3642,8 @@
           "health": "Cx18",
           "move": 0,
           "attack": "C+2",
-          "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
-          "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
+          "special1": [ "*Focus on farthest enemy.","^^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^^All characters occupying any", "^^pressure plate suffer trap damage."],
+          "special2": [ "*Ally to all monsters.","^^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
           "immunities": [ "%wound%","%poison%", "%stun%"]
         },
         {
@@ -3651,8 +3651,8 @@
           "health": "Cx23",
           "move": 0,
           "attack": "C+2",
-          "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
-          "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
+          "special1": [ "*Focus on farthest enemy.","^^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^^All characters occupying any", "^^pressure plate suffer trap damage."],
+          "special2": [ "*Ally to all monsters.","^^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
           "immunities": [ "%wound%","%poison%","%stun%"]
         },
         {
@@ -3660,8 +3660,8 @@
           "health": "Cx27",
           "move": 0,
           "attack": "C+3",
-          "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
-          "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
+          "special1": [ "*Focus on farthest enemy.","^^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^^All characters occupying any", "^^pressure plate suffer trap damage."],
+          "special2": [ "*Ally to all monsters.","^^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
           "immunities": ["%wound%","%poison%","%stun%" ]
         },
         {
@@ -3669,8 +3669,8 @@
           "health": "Cx40",
           "move": 0,
           "attack": "C+3",
-          "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
-          "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
+          "special1": [ "*Focus on farthest enemy.","^^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^^All characters occupying any", "^^pressure plate suffer trap damage."],
+          "special2": [ "*Ally to all monsters.","^^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
           "immunities": [ "%wound%","%poison%", "%stun%" ]
         },
         {
@@ -3678,8 +3678,8 @@
           "health": "Cx50",
           "move": 0,
           "attack": "C+4",
-          "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
-          "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
+          "special1": [ "*Focus on farthest enemy.","^^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^^All characters occupying any", "^^pressure plate suffer trap damage."],
+          "special2": [ "*Ally to all monsters.","^^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
           "immunities": [ "%wound%","%poison%", "%stun%" ]
         }
       ]
@@ -3779,8 +3779,8 @@
           "move": 2,
           "attack": 2,
           "attributes": [ "%retaliate% 1", "^%range% 3", "%brittle%"],
-          "special1": [ "^One character recover one lost card.","**.........", "%heal% 2", "^%target% C,", "^%range% 5","**.........", "^Summon one Snow Imp." ],
-          "special2": [ "^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^Summon one Snow Imp."],
+          "special1": [ "^^One character recover one lost card.","**.........", "%heal% 2", "^%target% C,", "^%range% 5","**.........", "^^Summon one Snow Imp." ],
+          "special2": [ "^^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^^Summon one Snow Imp."],
           "immunities": [ "%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3789,8 +3789,8 @@
           "move": 2,
           "attack": 2,
           "attributes": [ "%retaliate% 1", "^%range% 3","%brittle%" ],
-          "special1": [ "^One character recover one lost card.","**.........", "%heal% 3", "^%target% C,", "^%range% 5","**.........", "^Summon one Snow Imp." ],
-          "special2": [ "^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^Summon one Snow Imp."],
+          "special1": [ "^^One character recover one lost card.","**.........", "%heal% 3", "^%target% C,", "^%range% 5","**.........", "^^Summon one Snow Imp." ],
+          "special2": [ "^^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^^Summon one Snow Imp."],
           "immunities": [ "%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3799,8 +3799,8 @@
           "move": 2,
           "attack": 2,
           "attributes": [ "%retaliate% 2", "^%range% 3", "%brittle%"],
-          "special1": [ "^One character recover one lost card.","**.........", "%heal% 3", "^%target% C,", "^%range% 5","**.........", "^Summon one Snow Imp." ],
-          "special2": [ "^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^Summon one Snow Imp."],
+          "special1": [ "^^One character recover one lost card.","**.........", "%heal% 3", "^%target% C,", "^%range% 5","**.........", "^Summon one Snow Imp." ],
+          "special2": [ "^^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^Summon one Snow Imp."],
           "immunities": [ "%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3809,8 +3809,8 @@
           "move": 3,
           "attack": 3,
           "attributes": [ "%retaliate% 2", "^%range% 3","%brittle%" ],
-          "special1": [ "^One character recover one lost card.","**.........", "%heal% 4", "^%target% C,", "^%range% 5","**.........", "^Summon one Snow Imp." ],
-          "special2": [ "^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^Summon one Snow Imp."],
+          "special1": [ "^^One character recover one lost card.","**.........", "%heal% 4", "^%target% C,", "^%range% 5","**.........", "^^Summon one Snow Imp." ],
+          "special2": [ "^^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^^Summon one Snow Imp."],
           "immunities": [ "%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3819,8 +3819,8 @@
           "move": 3,
           "attack": 3,
           "attributes": [ "%retaliate% 2", "^%range% 3","%brittle%" ],
-          "special1": [ "^One character recover one lost card.","**.........", "%heal% 4", "^%target% C,", "^%range% 5","**.........", "^Summon one Snow Imp." ],
-          "special2": [ "^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^Summon one Snow Imp."],
+          "special1": [ "^^One character recover one lost card.","**.........", "%heal% 4", "^%target% C,", "^%range% 5","**.........", "^^Summon one Snow Imp." ],
+          "special2": [ "^^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^^Summon one Snow Imp."],
           "immunities": [ "%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3829,8 +3829,8 @@
           "move": 3,
           "attack": 4,
           "attributes": [ "%retaliate% 3", "^%range% 3","%brittle%" ],
-          "special1": [ "^One character recover one lost card.","**.........", "%heal% 5", "^%target% C,", "^%range% 5","**.........", "^Summon one Snow Imp." ],
-          "special2": [ "^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^Summon one Snow Imp."],
+          "special1": [ "^^One character recover one lost card.","**.........", "%heal% 5", "^%target% C,", "^%range% 5","**.........", "^^Summon one Snow Imp." ],
+          "special2": [ "^^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^^Summon one Snow Imp."],
           "immunities": [ "%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3839,8 +3839,8 @@
           "move": 3,
           "attack": 5,
           "attributes": [ "%retaliate% 3", "^%range% 3","%brittle%" ],
-          "special1": [ "^One character recover one lost card.","**.........", "%heal% 5", "^%target% C,", "^%range% 5","**.........", "^Summon one Snow Imp." ],
-          "special2": [ "^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^Summon one Snow Imp."],
+          "special1": [ "^^One character recover one lost card.","**.........", "%heal% 5", "^%target% C,", "^%range% 5","**.........", "^^Summon one Snow Imp." ],
+          "special2": [ "^^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^^Summon one Snow Imp."],
           "immunities": [ "%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -4106,7 +4106,7 @@
           "health": "Cx7",
           "move": 3,
           "attack": "C",
-          "special1": [ "%heal% Cx3/2", "^self or glowing orb", "^(rounded up)"],
+          "special1": [ "%heal% Cx3/2", "^Self or glowing orb","[subLineEnd]", "^(rounded up)"],
           "special2": [ "%move% + 0","^%jump%", "**.........","%attack% + 0","^%range% 6,","^%brittle%"],
           "immunities": [ "%wound%","%brittle%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
@@ -4115,7 +4115,7 @@
           "health": "Cx9",
           "move": 3,
           "attack": "C+1",
-          "special1": [ "%heal% Cx2", "^self or glowing orb"],
+          "special1": [ "%heal% Cx2", "^Self or glowing orb"],
           "special2": [ "%move% + 0","^%jump%", "**.........","%attack% + 0","^%range% 6,","^%brittle%"],
           "immunities": [ "%wound%","%brittle%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
@@ -4124,7 +4124,7 @@
           "health": "Cx12",
           "move": 3,
           "attack": "C+1",
-          "special1": [ "%heal% Cx5/2", "^self or glowing orb", "^(rounded up)"],
+          "special1": [ "%heal% Cx5/2", "^Self or glowing orb","[subLineEnd]", "^(rounded up)"],
           "special2": [ "%move% + 0","^%jump%", "**.........","%attack% + 0","^%range% 6,","^%brittle%"],
           "immunities": [ "%wound%","%brittle%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
@@ -4133,7 +4133,7 @@
           "health": "Cx15",
           "move": 3,
           "attack": "C+2",
-          "special1": [ "%heal% Cx3", "^self or glowing orb"],
+          "special1": [ "%heal% Cx3", "^Self or glowing orb"],
           "special2": [ "%move% + 0","^%jump%", "**.........","%attack% + 0","^%range% 6,","^%brittle%"],
           "immunities": [ "%wound%","%brittle%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
@@ -4142,7 +4142,7 @@
           "health": "Cx20",
           "move": 3,
           "attack": "C+3",
-          "special1": [ "%heal% Cx7/2", "^self or glowing orb", "^(rounded up)"],
+          "special1": [ "%heal% Cx7/2", "^Self or glowing orb", "[subLineEnd]","^(rounded up)"],
           "special2": [ "%move% + 0","^%jump%", "**.........","%attack% + 0","^%range% 6,","^%brittle%"],
           "immunities": [ "%wound%","%brittle%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
@@ -4151,7 +4151,7 @@
           "health": "Cx24",
           "move": 3,
           "attack": "C+4",
-          "special1": [ "%heal% Cx4", "^self or glowing orb"],
+          "special1": [ "%heal% Cx4", "^Self or glowing orb"],
           "special2": [ "%move% + 0","^%jump%", "**.........","%attack% + 0","^%range% 6,","^%brittle%"],
           "immunities": [ "%wound%","%brittle%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
@@ -4160,7 +4160,7 @@
           "health": "Cx36",
           "move": 3,
           "attack": "C+4",
-          "special1": [ "%heal% Cx9/2", "^self or glowing orb", "^(rounded up)"],
+          "special1": [ "%heal% Cx9/2", "^Self or glowing orb", "[subLineEnd]","^(rounded up)"],
           "special2": [ "%move% + 0","^%jump%", "**.........","%attack% + 0","^%range% 6,","^%brittle%"],
           "immunities": [ "%wound%","%brittle%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
@@ -4169,7 +4169,7 @@
           "health": "Cx45",
           "move": 3,
           "attack": "C+5",
-          "special1": [ "%heal% Cx5", "^self or glowing orb", "^(rounded up)"],
+          "special1": [ "%heal% Cx5", "^Self or glowing orb"],
           "special2": [ "%move% + 0","^%jump%", "**.........","%attack% + 0","^%range% 6,","^%brittle%"],
           "immunities": [ "%wound%","%brittle%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         }
@@ -4271,8 +4271,8 @@
           "move": 2,
           "attack": 5,
           "attributes": [ "%target% 2" ],
-          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^The target loses one card.", "[/r]"],
-          "special2": [ "^Create one %immobilize% trap in an", "adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^their attacks."],
+          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^   The target loses one card.", "[/r]"],
+          "special2": [ "^Create one %immobilize% trap in an", "^adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^^their attacks."],
           "immunities": [ "%poison%","%disarm%", "%stun%", "%muddle%", "%curse%" ]
         },
         {
@@ -4281,8 +4281,8 @@
           "move": 3,
           "attack": 6,
           "attributes": [ "%target% 2" ],
-          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^The target loses one card.", "[/r]"],
-          "special2": [ "^Create one %immobilize% trap in an", "adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^their attacks."],
+          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^   The target loses one card.", "[/r]"],
+          "special2": [ "^Create one %immobilize% trap in an", "^adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^^their attacks."],
           "immunities": [ "%poison%","%disarm%", "%stun%", "%muddle%", "%curse%" ]
         },
         {
@@ -4291,8 +4291,8 @@
           "move": 3,
           "attack": 7,
           "attributes": [ "%target% 2" ],
-          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^The target loses one card.", "[/r]"],
-          "special2": [ "^Create one %immobilize% trap in an", "adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^their attacks."],
+          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^   The target loses one card.", "[/r]"],
+          "special2": [ "^Create one %immobilize% trap in an", "^adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^^their attacks."],
           "immunities": [ "%poison%","%disarm%", "%stun%", "%muddle%", "%curse%" ]
         },
         {
@@ -4301,8 +4301,8 @@
           "move": 3,
           "attack": 8,
           "attributes": [ "%target% 2" ],
-          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^The target loses one card.", "[/r]"],
-          "special2": [ "^Create one %immobilize% trap in an", "adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^their attacks."],
+          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^   The target loses one card.", "[/r]"],
+          "special2": [ "^Create one %immobilize% trap in an", "^adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^^their attacks."],
           "immunities": [ "%poison%","%disarm%", "%stun%", "%muddle%", "%curse%" ]
         },
         {
@@ -4311,8 +4311,8 @@
           "move": 3,
           "attack": 9,
           "attributes": [ "%target% 2" ],
-          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^The target loses one card.", "[/r]"],
-          "special2": [ "^Create one %immobilize% trap in an", "adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^their attacks."],
+          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^   The target loses one card.", "[/r]"],
+          "special2": [ "^Create one %immobilize% trap in an", "^adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^^their attacks."],
           "immunities": [ "%poison%","%disarm%", "%stun%", "%muddle%", "%curse%" ]
         },
         {
@@ -4321,8 +4321,8 @@
           "move": 4,
           "attack": 10,
           "attributes": [ "%target% 2" ],
-          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^The target loses one card.", "[/r]"],
-          "special2": [ "^Create one %immobilize% trap in an", "adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^their attacks."],
+          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^   The target loses one card.", "[/r]"],
+          "special2": [ "^Create one %immobilize% trap in an", "^adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^^their attacks."],
           "immunities": [ "%poison%","%disarm%", "%stun%", "%muddle%", "%curse%" ]
         },
         {
@@ -4331,8 +4331,8 @@
           "move": 4,
           "attack": 11,
           "attributes": [ "%target% 2" ],
-          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^The target loses one card.", "[/r]"],
-          "special2": [ "^Create one %immobilize% trap in an", "adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^their attacks."],
+          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^   The target loses one card.", "[/r]"],
+          "special2": [ "^Create one %immobilize% trap in an", "^adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^^their attacks."],
           "immunities": [ "%poison%","%disarm%", "%stun%", "%muddle%", "%curse%" ]
         },
         {
@@ -4341,8 +4341,8 @@
           "move": 4,
           "attack": 12,
           "attributes": [ "%target% 2" ],
-          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^The target loses one card.", "[/r]"],
-          "special2": [ "^Create one %immobilize% trap in an", "adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^their attacks."],
+          "special1": [  "%move% + 0", "**.........", "[r]", "%attack% - 2", "^   The target loses one card.", "[/r]"],
+          "special2": [ "^Create one %immobilize% trap in an", "^adjacent empty hex.","**.........", "^All allies add +1 %attack% to all", "^^their attacks."],
           "immunities": [ "%poison%","%disarm%", "%stun%", "%muddle%", "%curse%" ]
         }
       ]

@@ -215,6 +215,7 @@ class FrosthavenConverter {
       List<Widget> widgetsInColumn,
       List<Widget> widgetsInRow,
       List<Widget> widgetsInInnerRow,
+      bool bossStatCard
       ) {
     List<Widget> list1 = [];
     List<List<Widget>> list2 = [];
@@ -269,7 +270,7 @@ class FrosthavenConverter {
         decoration: BoxDecoration(
             color: conditional
                 ? Colors.blue
-                : Color(int.parse("9A808080", radix: 16)),
+                : Color(int.parse(bossStatCard?"45D2D2D2" :"9A808080", radix: 16)),
             borderRadius: BorderRadius.all(Radius.circular(6.0 * scale))),
         padding: EdgeInsets.fromLTRB(
             2.0 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
@@ -362,7 +363,7 @@ class FrosthavenConverter {
     return retVal;
   }
 
-  static void applyConditionalGraphics(var lines, double scale, bool elementUse, double rightMargin, child){
+  static void applyConditionalGraphics(var lines, double scale, bool elementUse, double rightMargin, bool bossStatCard, child){
     lines.add(Container(
         margin: EdgeInsets.all(2.0 * scale),
         //alignment: Alignment.bottomCenter,
@@ -382,7 +383,7 @@ class FrosthavenConverter {
                 decoration: BoxDecoration(
                   //backgroundBlendMode: BlendMode.softLight,
                   //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
-                    color: Color(int.parse("9A808080", radix: 16)),
+                    color: Color(int.parse(bossStatCard?"45D2D2D2" :"9A808080", radix: 16)),
                     borderRadius:
                     BorderRadius.all(Radius.circular(10.0 * scale))),
                 //TODO: should the padding be dependant on nr of lines?
