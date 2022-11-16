@@ -25,23 +25,22 @@ Widget createLevelWidget(BuildContext context) {
   );
 
   var textStyle = TextStyle(
-      color: Colors.white,
+      color: settings.darkMode.value? Colors.white :Colors.black,
       overflow: TextOverflow.fade,
       //fontWeight: FontWeight.bold,
       //backgroundColor: Colors.transparent.withAlpha(100),
       fontSize: fontHeight,
-      shadows: [
-        shadow
-        /*Shadow(
+      shadows: settings.darkMode.value? [shadow]: [
+        Shadow(
             offset: Offset(1.0 * settings.userScalingBars.value,
                 1.0 * settings.userScalingBars.value),
             blurRadius: 3.0 * settings.userScalingBars.value,
-            color: Colors.black),
+            color: Colors.white),
         Shadow(
             offset: Offset(1.0 * settings.userScalingBars.value,
                 1.0 * settings.userScalingBars.value),
             blurRadius: 8.0 * settings.userScalingBars.value,
-            color: Colors.black),*/
+            color: Colors.white),//*/
         //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
       ]);
 
