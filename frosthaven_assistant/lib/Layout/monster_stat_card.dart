@@ -197,6 +197,19 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
               bool frosthavenStyle = GameMethods.isFrosthavenStyle();
 
+              List<String> bossAttackAttributes = [];
+              List<String> bossOtherAttributes = [];
+              if(isBoss){
+                for (String item in normal.attributes) {
+                  if (item.startsWith('%wound%') || item.startsWith("%brittle%") || item.startsWith("%target%")) {
+                    bossAttackAttributes.add(item);
+                  }else {
+                    bossOtherAttributes.add(item);
+                  }
+                }
+              }
+              Widget attackAttributes = LineBuilder.createLines(bossAttackAttributes, false, false, false, widget.data, CrossAxisAlignment.start, scale, false);
+
 
               return Container(
                   decoration: BoxDecoration(
@@ -266,7 +279,9 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                 children: <Widget>[
                                   Text(health, style: leftStyle),
                                   Text(move, style: leftStyle),
-                                  Text(attack, style: leftStyle),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                      children:[attackAttributes,Text(attack, style: leftStyle)]),
                                   Text(
                                       normal.range != 0
                                           ? normal.range.toString()
@@ -297,7 +312,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                     ),
                                   ]))
                           : Positioned(
-                              left: 56.0 * 0.8 * scale,
+                              left: 40.0 * scale,
                               top: 20.0 * 0.8 * scale,
                               width: 160 * 0.8 * scale, //useful or not?
                               child: Column(
@@ -305,13 +320,13 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                   //alignment: Alignment.topRight,
                                   //width: 67*tempScale*scale,
                                   children: [
-                                    normal.attributes.isNotEmpty
+                                    bossOtherAttributes.isNotEmpty
                                         ? Row(children: [
                                             Text("    ", style: specialStyle),
                                             SizedBox(
                                                 width: 140 * 0.8 * scale,
                                                 child: LineBuilder.createLines(
-                                                    normal.attributes,
+                                                    bossOtherAttributes,
                                                     false,
                                                     false,
                                                     false,
@@ -332,7 +347,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                   style: specialStyle,
                                                 ),
                                                 SizedBox(
-                                                    width: 140 * 0.8 * scale,
+                                                    width: 112 * scale,
                                                     child:
                                                         LineBuilder.createLines(
                                                             widget

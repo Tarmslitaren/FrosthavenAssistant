@@ -3218,7 +3218,7 @@
           "move": 3,
           "attack": "C",
           "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
-          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize", "[/r]"  ],
+          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3227,7 +3227,7 @@
           "move": 3,
           "attack": "C+1",
           "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
-          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize", "[/r]"  ],
+          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": ["%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3236,7 +3236,7 @@
           "move": 3,
           "attack": "C+1",
           "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
-          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize", "[/r]"  ],
+          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%"]
         },
         {
@@ -3245,7 +3245,7 @@
           "move": 4,
           "attack": "C+2",
           "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
-          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize", "[/r]"  ],
+          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%"]
         },
         {
@@ -3254,7 +3254,7 @@
           "move": 3,
           "attack": "C+2",
           "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
-          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize", "[/r]"  ],
+          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3263,7 +3263,7 @@
           "move": 3,
           "attack": "C+3",
           "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
-          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize", "[/r]"  ],
+          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": ["%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3272,7 +3272,7 @@
           "move": 3,
           "attack": "C+4",
           "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
-          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize", "[/r]"  ],
+          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -3281,7 +3281,7 @@
           "move": 3,
           "attack": "C+5",
           "special1": [ "[r]", "[c]","%move% + 1", "**.........", "%attack% - 1", "^%range% 3,", "^%muddle%","[/c]", "¤aoe-circle", "[/r]" ],
-          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize", "[/r]"  ],
+          "special2": [ "%attack% + 1", "^%target% 2,","^%range% 4,", "^%push% 2" ,"[r]","%ice%%use%", "^%immobilize%", "[/r]"  ],
           "immunities": [ "%wound%", "%poison%","%disarm%", "%stun%", "%curse%" ]
         }
       ]
@@ -3375,7 +3375,7 @@
           "attack": 3,
           "special1": [ "See monster stat sheet." ],
           "special2": [ "See monster stat sheet." ],
-          "immunities": [ "%poison","%immobilize%","%disarm%", "%stun%", "%curse%" ]
+          "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
           "level": 1,
@@ -3384,7 +3384,7 @@
           "attack": 4,
           "special1": [ "See monster stat sheet." ],
           "special2": [ "See monster stat sheet." ],
-          "immunities": ["%poison","%immobilize%","%disarm%", "%stun%", "%curse%" ]
+          "immunities": ["%poison%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
           "level": 2,
@@ -3393,7 +3393,7 @@
           "attack": 4,
           "special1": [ "See monster stat sheet." ],
           "special2": [ "See monster stat sheet."],
-          "immunities": [ "%poison","%immobilize%","%disarm%", "%stun%", "%curse%"]
+          "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%curse%"]
         },
         {
           "level": 3,
@@ -3402,7 +3402,7 @@
           "attack": 4,
           "special1": [ "See monster stat sheet." ],
           "special2": ["See monster stat sheet."],
-          "immunities": [ "%poison","%immobilize%","%disarm%", "%stun%", "%curse%"]
+          "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%curse%"]
         },
         {
           "level": 4,
@@ -3411,7 +3411,7 @@
           "attack": 5,
           "special1": [ "See monster stat sheet." ],
           "special2": [ "See monster stat sheet." ],
-          "immunities": [ "%poison","%immobilize%","%disarm%", "%stun%", "%curse%" ]
+          "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
           "level": 5,
@@ -3420,7 +3420,7 @@
           "attack": 5,
           "special1": [ "See monster stat sheet." ],
           "special2": [ "See monster stat sheet." ],
-          "immunities": ["%poison","%immobilize%","%disarm%", "%stun%", "%curse%" ]
+          "immunities": ["%poison%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
           "level": 6,
@@ -3429,7 +3429,7 @@
           "attack": 6,
           "special1": [ "See monster stat sheet." ],
           "special2": [ "See monster stat sheet." ],
-          "immunities": [ "%poison","%immobilize%","%disarm%", "%stun%", "%curse%" ]
+          "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
           "level": 7,
@@ -3438,7 +3438,7 @@
           "attack": 7,
           "special1": [ "See monster stat sheet." ],
           "special2": [ "See monster stat sheet." ],
-          "immunities": [ "%poison","%immobilize%","%disarm%", "%stun%", "%curse%" ]
+          "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         }
       ]
     },
@@ -3454,7 +3454,7 @@
           "attributes": [ "%retaliate% 1" ],
           "special1": [ "%attack% - 1"],
           "special2": [ "%move% - 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%","%disarm%", "%stun%" ]
+          "immunities": [ "%wound%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
         {
           "level": 1,
@@ -3464,7 +3464,7 @@
           "attributes": [ "%retaliate% 1" ],
           "special1": [ "%attack% - 1"],
           "special2": [ "%move% - 1"],
-          "immunities": ["%wound%","%poison","%immobilize%","%disarm%", "%stun%" ]
+          "immunities": ["%wound%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
         {
           "level": 2,
@@ -3474,7 +3474,7 @@
           "attributes": [ "%retaliate% 1" ],
           "special1": [ "%attack% - 1"],
           "special2": [ "%move% - 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%","%disarm%", "%stun%"]
+          "immunities": [ "%wound%","%poison%","%immobilize%","%disarm%", "%stun%"]
         },
         {
           "level": 3,
@@ -3484,7 +3484,7 @@
           "attributes": [ "%retaliate% 2" ],
           "special1": [ "%attack% - 1"],
           "special2": [ "%move% - 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%","%disarm%", "%stun%"]
+          "immunities": [ "%wound%","%poison%","%immobilize%","%disarm%", "%stun%"]
         },
         {
           "level": 4,
@@ -3494,7 +3494,7 @@
           "attributes": [ "%retaliate% 2" ],
           "special1": [ "%attack% - 1"],
           "special2": [ "%move% - 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%","%disarm%", "%stun%"]
+          "immunities": [ "%wound%","%poison%","%immobilize%","%disarm%", "%stun%"]
         },
         {
           "level": 5,
@@ -3504,7 +3504,7 @@
           "attributes": [ "%retaliate% 2" ],
           "special1": [ "%attack% - 1"],
           "special2": [ "%move% - 1"],
-          "immunities": ["%wound%","%poison","%immobilize%","%disarm%", "%stun%" ]
+          "immunities": ["%wound%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
         {
           "level": 6,
@@ -3514,7 +3514,7 @@
           "attributes": [ "%retaliate% 3" ],
           "special1": [ "%attack% - 1"],
           "special2": [ "%move% - 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%","%disarm%", "%stun%" ]
+          "immunities": [ "%wound%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         },
         {
           "level": 7,
@@ -3524,7 +3524,7 @@
           "attributes": [ "%retaliate% 3" ],
           "special1": [ "%attack% - 1"],
           "special2": [ "%move% - 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%","%disarm%", "%stun%" ]
+          "immunities": [ "%wound%","%poison%","%immobilize%","%disarm%", "%stun%" ]
         }
       ]
     },
@@ -3539,7 +3539,7 @@
           "attack": 3,
           "special1": [ "%move% + 1","**.........", "[r]","%attack% - 1", "^The target loses one item.", "[/r]", "**.........", "^All adjacent characters gain 1 slime."],
           "special2": [ "^Focus on farthest enemy.", "%attack% + 1", "^%range% 8","**.........", "%push% 2", "^Target all, %range% 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%", "%stun%" ]
+          "immunities": [ "%wound%","%poison%","%immobilize%", "%stun%" ]
         },
         {
           "level": 1,
@@ -3548,7 +3548,7 @@
           "attack": 3,
           "special1": [ "%move% + 1","**.........", "[r]","%attack% - 1", "^The target loses one item.", "[/r]", "**.........", "^All adjacent characters gain 1 slime."],
           "special2": [ "^Focus on farthest enemy.", "%attack% + 1", "^%range% 8","**.........", "%push% 2", "^Target all, %range% 1"],
-          "immunities": ["%wound%","%poison","%immobilize%", "%stun%" ]
+          "immunities": ["%wound%","%poison%","%immobilize%", "%stun%" ]
         },
         {
           "level": 2,
@@ -3557,7 +3557,7 @@
           "attack": 4,
           "special1": [ "%move% + 1","**.........", "[r]","%attack% - 1", "^The target loses one item.", "[/r]", "**.........", "^All adjacent characters gain 1 slime."],
           "special2": [ "^Focus on farthest enemy.", "%attack% + 1", "^%range% 8","**.........", "%push% 2", "^Target all, %range% 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%", "%stun%"]
+          "immunities": [ "%wound%","%poison%","%immobilize%", "%stun%"]
         },
         {
           "level": 3,
@@ -3566,7 +3566,7 @@
           "attack": 4,
           "special1": [ "%move% + 1","**.........", "[r]","%attack% - 1", "^The target loses one item.", "[/r]", "**.........", "^All adjacent characters gain 1 slime."],
           "special2": [ "^Focus on farthest enemy.", "%attack% + 1", "^%range% 8","**.........", "%push% 2", "^Target all, %range% 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%", "%stun%"]
+          "immunities": [ "%wound%","%poison%","%immobilize%", "%stun%"]
         },
         {
           "level": 4,
@@ -3575,7 +3575,7 @@
           "attack": 5,
           "special1": [ "%move% + 1","**.........", "[r]","%attack% - 1", "^The target loses one item.", "[/r]", "**.........", "^All adjacent characters gain 1 slime."],
           "special2": [ "^Focus on farthest enemy.", "%attack% + 1", "^%range% 8","**.........", "%push% 2", "^Target all, %range% 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%","%stun%"]
+          "immunities": [ "%wound%","%poison%","%immobilize%","%stun%"]
         },
         {
           "level": 5,
@@ -3584,7 +3584,7 @@
           "attack": 5,
           "special1": [ "%move% + 1","**.........", "[r]","%attack% - 1", "^The target loses one item.", "[/r]", "**.........", "^All adjacent characters gain 1 slime."],
           "special2": [ "^Focus on farthest enemy.", "%attack% + 1", "^%range% 8","**.........", "%push% 2", "^Target all, %range% 1"],
-          "immunities": ["%wound%","%poison","%immobilize%","%stun%" ]
+          "immunities": ["%wound%","%poison%","%immobilize%","%stun%" ]
         },
         {
           "level": 6,
@@ -3593,7 +3593,7 @@
           "attack": 6,
           "special1": [ "%move% + 1","**.........", "[r]","%attack% - 1", "^The target loses one item.", "[/r]", "**.........", "^All adjacent characters gain 1 slime."],
           "special2": [ "^Focus on farthest enemy.", "%attack% + 1", "^%range% 8","**.........", "%push% 2", "^Target all, %range% 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%", "%stun%" ]
+          "immunities": [ "%wound%","%poison%","%immobilize%", "%stun%" ]
         },
         {
           "level": 7,
@@ -3602,7 +3602,7 @@
           "attack": 7,
           "special1": [ "%move% + 1","**.........", "[r]","%attack% - 1", "^The target loses one item.", "[/r]", "**.........", "^All adjacent characters gain 1 slime."],
           "special2": [ "^Focus on farthest enemy.", "%attack% + 1", "^%range% 8","**.........", "%push% 2", "^Target all, %range% 1"],
-          "immunities": [ "%wound%","%poison","%immobilize%", "%stun%" ]
+          "immunities": [ "%wound%","%poison%","%immobilize%", "%stun%" ]
         }
       ]
     },
@@ -3617,7 +3617,7 @@
           "attack": "C",
           "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
           "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
-          "immunities": [ "%wound%","%poison", "%stun%" ]
+          "immunities": [ "%wound%","%poison%", "%stun%" ]
         },
         {
           "level": 1,
@@ -3626,7 +3626,7 @@
           "attack": "C+1",
           "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
           "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
-           "immunities": ["%wound%","%poison", "%stun%" ]
+           "immunities": ["%wound%","%poison%", "%stun%" ]
         },
         {
           "level": 2,
@@ -3635,7 +3635,7 @@
           "attack": "C+1",
           "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
           "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
-          "immunities": [ "%wound%","%poison", "%stun%"]
+          "immunities": [ "%wound%","%poison%", "%stun%"]
         },
         {
           "level": 3,
@@ -3644,7 +3644,7 @@
           "attack": "C+2",
           "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
           "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
-          "immunities": [ "%wound%","%poison", "%stun%"]
+          "immunities": [ "%wound%","%poison%", "%stun%"]
         },
         {
           "level": 4,
@@ -3653,7 +3653,7 @@
           "attack": "C+2",
           "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
           "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
-          "immunities": [ "%wound%","%poison","%stun%"]
+          "immunities": [ "%wound%","%poison%","%stun%"]
         },
         {
           "level": 5,
@@ -3662,7 +3662,7 @@
           "attack": "C+3",
           "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
           "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
-          "immunities": ["%wound%","%poison","%stun%" ]
+          "immunities": ["%wound%","%poison%","%stun%" ]
         },
         {
           "level": 6,
@@ -3671,7 +3671,7 @@
           "attack": "C+3",
           "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
           "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
-          "immunities": [ "%wound%","%poison", "%stun%" ]
+          "immunities": [ "%wound%","%poison%", "%stun%" ]
         },
         {
           "level": 7,
@@ -3680,7 +3680,7 @@
           "attack": "C+4",
           "special1": [ "^Focus on farthest enemy.","^%teleport% adjacent to focus.","**.........","%attack% + 0","^%target% 2","**.........",  "^All characters occupying any", "^^pressure plate suffer trap damage."],
           "special2": [ "^Ally to all monsters.","^%teleport% adjacent to focus.", "**.........", "%attack% - 2", "^Target all adjacent enemies"],
-          "immunities": [ "%wound%","%poison", "%stun%" ]
+          "immunities": [ "%wound%","%poison%", "%stun%" ]
         }
       ]
     },
