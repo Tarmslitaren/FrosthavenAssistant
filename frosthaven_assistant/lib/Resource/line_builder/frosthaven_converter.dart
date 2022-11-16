@@ -14,22 +14,27 @@ class FrosthavenConverter {
     for (int i = 0; i < lines.length; i++) {
       bool startOfConditional = false;
       String line = lines[i];
+
+      if(line == "[newLine]") { //to force newline when right align does not fit
+        lines[i-1] == lines[i-1].substring(1);
+        line = "";
+      }
+
       if ((line == "[r]" || line == "[s]") && lines[i + 1].contains('%use')) {
         isElementUse = true;
-      }
-      if ((line == "[r]" || line == "[s]") && (lines[i + 1].contains('%use'))) {
         isConditional = true;
         startOfConditional = true;
       }
-      if ((line == "[/r]" || line == "[/s]") && isConditional) { //TODO: add instead a [conditionalDone] tag
+      if ((line == "[/r]" || line == "[/s]") && isConditional) {
         isConditional = false;
         isElementUse = false;
-       // isReallySubLine = false;
-       // isSubLine = false;
       }
 
       if(i > 0 && lines[i - 1].contains("%use")){
         startOfConditional = true; //makes sub line gray box not appear straight after a element use
+      }
+      if(i > 1 && lines[i - 2].contains("%use") && (lines[i - 1] == "[r]" || lines[i - 1] == "[s]" || lines[i - 1] == "[c]")){
+        startOfConditional = true;
       }
 
       line = line.replaceAll("Affect", "Target");
@@ -57,15 +62,16 @@ class FrosthavenConverter {
       }
 
       if (line.startsWith("^") && isSubLine && !startOfConditional) {
-        //make right aligned, in these cases
         if (line[1] == '%' ||
             //these are all very... assuming.
             line.startsWith("^Self") ||
             line.startsWith("^-") || //useful for element use add effects
             line.startsWith("^+") ||
             line.startsWith("^Advantage") ||
-            //only target on same line for non valued tokens
-            (line.startsWith("^Target") && lines[i - 1].contains('%push%')) ||
+            //only target on same line for non valued tokens - damn myself, what did I mean by that? I was probably wrong
+            line.startsWith("^Target") ||
+            line.startsWith("^%target%") || //superseeds the lower ones. In FH target clauses go first so this old code is useless
+            /*(line.startsWith("^Target") && lines[i - 1].contains('%push%')) ||
             (line.startsWith("^Target") && lines[i - 1].contains('%pull%')) ||
             (line.startsWith("^Target") &&
                 lines[i - 1].startsWith('%') &&
@@ -74,7 +80,8 @@ class FrosthavenConverter {
             (line.startsWith("^Target") &&
                 lines[i - 1].startsWith('^%') &&
                 lines[i - 1].endsWith(
-                    '%')) || //you will not want a linebreak after a lone poison sub line
+                    '%')) || //you will not want a linebreak after a lone poison sub line*/
+            line.startsWith("^Normal") || //for ice wraith
             line.startsWith("^all") ||
             line.startsWith("^All") &&
                 !line.startsWith("^All attacks") &&
@@ -191,6 +198,7 @@ class FrosthavenConverter {
             iconToken == "disarm" ||
             iconToken == "immobilize" ||
             iconToken == "stun" ||
+            iconToken == "impair" ||
             iconToken == "muddle"));
   }
 

@@ -102,6 +102,10 @@ class LineBuilder {
         iconToken == "immobilize" ||
         iconToken == "stun" ||
         iconToken == "strengthen" ||
+        iconToken == "impair" ||
+        iconToken == "bane" ||
+        iconToken == "brittle" ||
+        iconToken == "invisible" ||
         iconToken == "muddle") {
       if (mainLine) {
         //smaller margins for secondary modifiers
@@ -205,7 +209,7 @@ class LineBuilder {
         shadows: [shadow]);
 
     var smallStyle = TextStyle(
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+        fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center ? 8.0 : 8.8) * scale,
         //sizes are larger on stat cards
@@ -216,7 +220,7 @@ class LineBuilder {
     var midStyle = TextStyle(
         backgroundColor: debugColors? Colors.greenAccent : null,
         leadingDistribution: TextLeadingDistribution.even,
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+        fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: ((alignment == CrossAxisAlignment.center
                 ? frosthavenStyle
@@ -268,14 +272,14 @@ class LineBuilder {
         shadows: [shadow]);
 
     var eliteSmallStyle = TextStyle(
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+        fontFamily: 'Majalla',
         color: Colors.yellow,
         fontSize: 8.0 * scale,
         height: 1.0,
         shadows: [shadow]);
     var eliteMidStyle = TextStyle(
         leadingDistribution: TextLeadingDistribution.even,
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+        fontFamily: 'Majalla',
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 9.52 * scale : 8.8 * scale,
         height: frosthavenStyle? 1.0: 0.85,
@@ -284,13 +288,13 @@ class LineBuilder {
     var midStyleSquished = TextStyle(
       backgroundColor: debugColors? Colors.greenAccent : null,
         leadingDistribution: TextLeadingDistribution.even,
-        fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
+        fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center
             ? frosthavenStyle
             ? 9.52
             : 8.8
-            : 10.16) *
+            : 9.9) *
             scale,
         //sizes are larger on stat cards
         height: (alignment == CrossAxisAlignment.center ? 0.8 :
@@ -468,9 +472,6 @@ class LineBuilder {
           elementUse = true;
           conditional = true;
         }
-        if (texts.toLowerCase().contains("if ") || texts.contains('On ')) {
-          conditional = true;
-        }
         if(texts.lastIndexOf(" :") != texts.indexOf(" :")) {
           columnHack = true;
         }
@@ -560,7 +561,7 @@ class LineBuilder {
               scale: 1/(scale * 0.15),
               //for some reason flutter likes scale to be inverted
               //fit: BoxFit.fitHeight,
-              height: 6.0 * scale,
+              height: styleToUse == dividerStyleExtraThin? 2 * scale : 6.0 * scale,
               width: 55.0 * scale, //actually 40, but some layout might depend on wider size so not changing now
               filterQuality: FilterQuality.medium,
               "assets/images/abilities/divider_fh.png",
@@ -591,7 +592,10 @@ class LineBuilder {
           line = line.substring(1, line.length);
         }
       }
-      if (applyStats) {
+      if (line.startsWith('>')) { //disable apply stats (for granted lines)
+        line = line.substring(1, line.length);
+      }
+      else if (applyStats) {
         List<String> statLines =
             StatApplier.applyMonsterStats(line, sizeToken, monster, applyAll);
         line = statLines.removeAt(0);
