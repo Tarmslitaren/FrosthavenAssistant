@@ -170,7 +170,22 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ffb6e56c",
-      "summons": {}
+      "summons": {
+        "Animated Claymore": {
+          "level": 1,
+          "gfx": "INF Animated Claymore",
+          "health": 2,
+          "move": 3,
+          "attack":  3
+        },
+        "Spiritbound Falchion": {
+          "level": 8,
+          "gfx": "INF Spiritbound Falchion",
+          "health": 6,
+          "move": 3,
+          "attack":  4
+        }
+      }
     },
     {
       "name": "Pyroclast",
@@ -215,7 +230,22 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ffc2c5ef",
-      "summons": {}
+      "summons": {
+        "Flesh Fiend": {
+          "level": 1,
+          "gfx": "PAI Flesh Fiend",
+          "health": 7,
+          "move": 2,
+          "attack":  1
+        },
+        "Flesh Bomb": {
+          "level": 1,
+          "gfx": "PAI Flesh Bomb",
+          "health": 3,
+          "move": 3,
+          "attack":  2
+        }
+      }
     },
     {
       "name": "Snowdancer",
@@ -223,7 +253,30 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ffbbd3e1",
-      "summons": {}
+      "summons": {
+        "Snow Fox": {
+          "level": 1,
+          "gfx": "SNO Snow Fox",
+          "health": 5,
+          "move": 3,
+          "attack":  2
+        },
+        "White Owl": {
+          "standees": 2,
+          "level": 2,
+          "gfx": "SNO White Owl",
+          "health": 3,
+          "move": 3,
+          "attack": 2
+        },
+        "Polar Cat": {
+          "level": 6,
+          "gfx": "SNO Polar Cat",
+          "health": 6,
+          "move": 3,
+          "attack": 2
+        }
+      }
     },
     {
       "name": "Frozen Fist",
@@ -255,7 +308,109 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ffe5de85",
-      "summons": {}
+      "summons": {
+        "Armored Tank": {
+          "level": 1,
+          "gfx": "HIV Armored Tank",
+          "health": 6,
+          "move": 2,
+          "attack":  2
+        },
+        "Jackal Mech": {
+          "level": 1,
+          "gfx": "HIV Jackal Mech",
+          "health": 4,
+          "move": 3,
+          "attack":  2
+        },
+        "Sniper Turret": {
+          "level": 1,
+          "gfx": "HIV Sniper Turret",
+          "health": 3,
+          "attack": 2,
+          "range": 4
+        },
+        "Repair Drone": {
+          "level": 1,
+          "gfx": "HIV Repair Drone",
+          "health": 3,
+          "move": 2,
+          "attack":  1,
+          "range": 3
+        },
+        "Leaper": {
+          "level": 1,
+          "gfx": "HIV Leaper",
+          "health": 7,
+          "move": 5,
+          "attack":  1
+        },
+        "Arcing Generator": {
+          "level": 1,
+          "gfx": "HIV Arcing Generator",
+          "health": 5,
+          "move": 4,
+          "attack":  2
+        },
+        "Dampening Unit": {
+          "level": 2,
+          "gfx": "HIV Dampening Unit",
+          "health": 5,
+          "move": 2,
+          "attack":  1,
+          "range": 2
+        },
+        "Machine Bolter": {
+          "level": 3,
+          "gfx": "HIV Machine Bolter",
+          "health": 3,
+          "attack":  2,
+          "range": 3
+        },
+        "Toxin Distributor": {
+          "level": 4,
+          "gfx": "HIV Toxin Distributor",
+          "health": 6,
+          "move": 2,
+          "attack":  2
+        },
+        "Trapping Unit": {
+          "level": 5,
+          "gfx": "HIV Trapping Unit",
+          "health": 7,
+          "move": 3,
+          "attack":  2
+        },
+        "Sword Propeller": {
+          "level": 6,
+          "gfx": "HIV Sword Propeller",
+          "health": 1,
+          "move": 5,
+          "attack":  2
+        },
+        "Bombardier": {
+          "level": 7,
+          "gfx": "HIV Bombardier",
+          "health": 5,
+          "move": 1,
+          "attack":  2,
+          "range": 4
+        },
+        "Shield Spider": {
+          "level": 8,
+          "gfx": "HIV Shield Spider",
+          "health": 7,
+          "move": 3,
+          "attack": 2
+        },
+        "Sledge Driver": {
+          "level": 9,
+          "gfx": "HIV Sledge Driver",
+          "health": 9,
+          "move": 2,
+          "attack": 4
+        }
+      }
     },
     {
       "name": "Metal Mosaic",
