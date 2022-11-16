@@ -172,7 +172,7 @@ class StatusMenuState extends State<StatusMenu> {
       String ownerId, List<String> immunities) {
     bool enabled = true;
     String suffix = "";
-    if (GameMethods.isFrosthavenStyle()) {
+    if (GameMethods.isFrosthavenStyle(null)) {
       suffix = "_fh";
     }
     String imagePath = "assets/images/abilities/${condition.name}.png";

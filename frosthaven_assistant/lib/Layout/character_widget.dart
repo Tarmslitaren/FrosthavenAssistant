@@ -350,7 +350,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
     double scale = getScaleByReference(context);
     double scaledHeight = 60 * scale;
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle(null);
 
     var shadow = Shadow(
       offset: Offset(1 * scale, 1 * scale),

@@ -30,7 +30,7 @@ class Item extends StatelessWidget {
 
     child = revealed
         ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale, true)
-        : MonsterAbilityCardWidget.buildRear(scale, -1);
+        : MonsterAbilityCardWidget.buildRear(scale, -1, monsterData);
 
     return child;
   }

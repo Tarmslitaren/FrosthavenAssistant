@@ -603,10 +603,12 @@ class GameMethods {
     }
   }
 
-  static bool isFrosthavenStyle() {
+  static bool isFrosthavenStyle(MonsterModel? monster) {
+    if(monster != null && monster.edition == "Frosthaven") {
+      return true;
+    }
     bool frosthavenStyle = getIt<Settings>().style.value == Style.frosthaven ||
         getIt<Settings>().style.value == Style.original && getIt<GameState>().currentCampaign.value == "Frosthaven";
-    //TODO:more generic solution for coming campaigns with frosthaven style.
     return frosthavenStyle;
   }
 }

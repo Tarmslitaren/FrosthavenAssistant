@@ -102,7 +102,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     double scale = getScaleByReference(context);
     double height = 123 * 0.8 * scale;
 
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle(widget.data.type);
 
     var shadow = Shadow(
         offset: Offset(0.4 * scale, 0.4 * scale),
@@ -195,7 +195,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
               bool noCalculationSetting = getIt<Settings>().noCalculation.value;
 
-              bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+              bool frosthavenStyle = GameMethods.isFrosthavenStyle(widget.data.type);
 
               List<String> bossAttackAttributes = [];
               List<String> bossOtherAttributes = [];
@@ -208,7 +208,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                   }
                 }
               }
-              Widget attackAttributes = LineBuilder.createLines(bossAttackAttributes, false, false, false, widget.data, CrossAxisAlignment.start, scale, false);
+              Widget attackAttributes = LineBuilder.createLines(bossAttackAttributes, true, false, false, widget.data, CrossAxisAlignment.start, scale, false);
 
 
               return Container(
@@ -612,7 +612,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
   List<Widget> createConditionList(double scale, MonsterStatsModel stats) {
     List<Widget> list = [];
     String suffix = "";
-    if(GameMethods.isFrosthavenStyle()) {
+    if(GameMethods.isFrosthavenStyle(widget.data.type)) {
       suffix = "_fh";
     }
     for (var item in stats.immunities) {

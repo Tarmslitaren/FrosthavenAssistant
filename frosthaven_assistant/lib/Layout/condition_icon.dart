@@ -17,7 +17,7 @@ class ConditionIcon extends StatefulWidget {
   ConditionIcon(this.condition, this.size, this.owner, this.figure,
       {super.key}) {
     String suffix = "";
-    if (GameMethods.isFrosthavenStyle()) {
+    if (GameMethods.isFrosthavenStyle(null)) {
       suffix = "_fh";
     }
     String imagePath = "assets/images/abilities/${condition.name}.png";

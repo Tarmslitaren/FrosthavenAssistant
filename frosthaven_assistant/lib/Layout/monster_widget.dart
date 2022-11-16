@@ -85,7 +85,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
   }
 
   Widget buildImagePart(double height, double scale) {
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle(widget.data.type);
     return Stack(alignment: Alignment.bottomCenter, children: [
       Container(
           margin: EdgeInsets.only(bottom: 4 * scale, top: 4 * scale),

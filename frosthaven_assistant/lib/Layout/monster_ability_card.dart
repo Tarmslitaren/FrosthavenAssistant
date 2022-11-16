@@ -67,7 +67,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   }
 
   static Widget buildFront(MonsterAbilityCardModel? card, Monster data, double scale, bool calculateAll) {
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
 
     String initText = card!.initiative.toString();
     if (initText.length == 1) {
@@ -189,8 +189,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
 
 
 
-  static Widget buildRear(double scale, int size) {
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+  static Widget buildRear(double scale, int size, Monster monster) {
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster.type);
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
@@ -324,7 +324,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 
               },
             child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 600),
+                duration: const Duration(milliseconds: 600), 
                 transitionBuilder: _transitionBuilder,
                 layoutBuilder: (widget, list) => Stack(
                       children: [widget!, ...list],
@@ -333,7 +333,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 //switchOutCurve: Curves.easeInBack.flipped,
                 child: _gameState.roundState.value == RoundState.playTurns && (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive) && card != null
                     ? MonsterAbilityCardWidget.buildFront(card, widget.data, scale, false)
-                    : MonsterAbilityCardWidget.buildRear(scale, _deckSize),
+                    : MonsterAbilityCardWidget.buildRear(scale, _deckSize, widget.data),
             //AnimationController(duration: Duration(seconds: 1), vsync: 0);
             //CurvedAnimation(parent: null, curve: Curves.easeIn)
             //),

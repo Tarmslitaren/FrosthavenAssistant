@@ -173,7 +173,7 @@ class LineBuilder {
 
 
     String imageSuffix = "";
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle();
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster.type);
     if (frosthavenStyle) {
       imageSuffix = "_fh";
     }
@@ -558,13 +558,14 @@ class LineBuilder {
           if (frosthavenStyle) {
 
             Widget image = Image.asset(
+              alignment: alignment == CrossAxisAlignment.start? Alignment.centerLeft : Alignment.center,
               scale: 1/(scale * 0.15),
               //for some reason flutter likes scale to be inverted
               //fit: BoxFit.fitHeight,
               height: styleToUse == dividerStyleExtraThin? 2 * scale : 6.0 * scale,
               width: 55.0 * scale, //actually 40, but some layout might depend on wider size so not changing now
               filterQuality: FilterQuality.medium,
-              "assets/images/abilities/divider_fh.png",
+              alignment == CrossAxisAlignment.start? "assets/images/abilities/divider_boss_fh.png" : "assets/images/abilities/divider_fh.png",
             );
             //create pure picture, not a WidgetSpan (scale 5.5)
             if(hasInnerRow) {
