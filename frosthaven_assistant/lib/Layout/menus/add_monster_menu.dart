@@ -18,9 +18,11 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   List<MonsterModel> _foundMonsters = [];
   final List<MonsterModel> _allMonsters = [];
   final GameState _gameState = getIt<GameState>();
-  bool addAsAlly = false;
-  bool showSpecial = false;
-  bool showBoss = true;
+  bool _addAsAlly = false;
+  bool _showSpecial = false;
+  bool _showBoss = true;
+  late String _currentCampaign;
+  bool _enableFullScroll = false;
 
   @override
   initState() {
@@ -28,16 +30,9 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     for (String key in _gameState.modelData.value.keys) {
       _allMonsters.addAll(_gameState.modelData.value[key]!.monsters.values);
     }
-    _foundMonsters = _allMonsters.toList();
+    _currentCampaign = _gameState.currentCampaign.value;
+    _setCampaign(_currentCampaign);
 
-    if (!showSpecial) {
-      _foundMonsters.removeWhere((element) => element.hidden == true);
-    }
-    if (!showBoss) {
-      _foundMonsters.removeWhere((element) => element.levels[0].boss != null);
-    }
-
-    sortMonsters(_foundMonsters);
     super.initState();
   }
 
@@ -77,29 +72,22 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
     List<MonsterModel> results = [];
+    _setCampaign(_currentCampaign);
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all users
-      results = _allMonsters.toList();
+      // results = _allMonsters.toList();
+      // _setCampaign(_currentCampaign);
+      // results = _foundMonsters;
     } else {
-      results = _allMonsters
+      _foundMonsters = _foundMonsters
           .where((user) =>
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       // we use the toLowerCase() method to make it case-insensitive
     }
 
-    if (!showSpecial) {
-      results.removeWhere((element) => element.hidden == true);
-    }
-    if (!showBoss) {
-      results.removeWhere((element) => element.levels[0].boss != null);
-    }
-    sortMonsters(results);
-
     // Refresh the UI
-    setState(() {
-      _foundMonsters = results;
-    });
+    setState(() {});
   }
 
   bool _monsterAlreadyAdded(String id) {
@@ -110,6 +98,23 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
       }
     }
     return false;
+  }
+
+  void _setCampaign(String campaign) {
+    _currentCampaign = campaign;
+    _foundMonsters = _allMonsters.toList();
+    if (campaign != "All") {
+      _foundMonsters.removeWhere((monster) => monster.edition != campaign);
+    }
+
+    if (!_showSpecial) {
+      _foundMonsters.removeWhere((element) => element.hidden == true);
+    }
+    if (!_showBoss) {
+      _foundMonsters.removeWhere((element) => element.levels[0].boss != null);
+    }
+
+    sortMonsters(_foundMonsters);
   }
 
   @override
@@ -123,33 +128,157 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
             child: Stack(children: [
               Column(
                 children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CheckboxListTile(
-                      title: const Text("Add as Ally"),
-                      value: addAsAlly,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          addAsAlly = value!;
-                        });
-                      }),
+                  Row(children: [
+                    Text("      Show monsters from:   "),
+                    DropdownButtonHideUnderline(
+                        child: DropdownButton(
+                            value: _currentCampaign,
+                            items: const [
+                              DropdownMenuItem<String>(
+                                  value: "All", child: Text("All Campaigns")),
+                              DropdownMenuItem<String>(
+                                  value: "Jaws of the Lion",
+                                  child: Text("Jaws of the Lion")),
+                              DropdownMenuItem<String>(
+                                  value: "Gloomhaven",
+                                  child: Text("Gloomhaven")),
+                              DropdownMenuItem<String>(
+                                  value: "Forgotten Circles",
+                                  child: Text("Forgotten Circles")),
+                              DropdownMenuItem<String>(
+                                  value: "Frosthaven",
+                                  child: Text("Frosthaven")),
+                              DropdownMenuItem<String>(
+                                  value: "Crimson Scales",
+                                  child: Text("Crimson Scales")),
+                              DropdownMenuItem<String>(
+                                  value: "Solo", child: Text("Solo")),
+                              DropdownMenuItem<String>(
+                                  value: "Seeker of Xorn",
+                                  child: Text("Seeker of Xorn")),
+                            ],
+                            onChanged: (value) {
+                              if (value is String) {
+                                setState(() {
+                                  _setCampaign(value);
+                                });
+                              }
+                            }))
+                  ]),
                   CheckboxListTile(
                       title: const Text("Show Bosses"),
-                      value: showBoss,
+                      value: _showBoss,
                       onChanged: (bool? value) {
                         setState(() {
-                          showBoss = value!;
+                          _showBoss = value!;
                           _runFilter("");
                         });
                       }),
                   CheckboxListTile(
                       title: const Text("Show Scenario Special Monsters"),
-                      value: showSpecial,
+                      value: _showSpecial,
                       onChanged: (bool? value) {
                         setState(() {
-                          showSpecial = value!;
+                          _showSpecial = value!;
                           _runFilter("");
+                        });
+                      }),
+                  /*child:ExpansionTile(
+              onExpansionChanged: (opened) {
+                _enableFullScroll = opened;
+              },
+              title: Text("Show Monsters from: $_currentCampaign"),
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _setCampaign("All");
+                          });
+                        },
+                        child: const Text("All"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _setCampaign("JotL");
+                          });
+                        },
+                        child: const Text("Jaws of the Lion"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _setCampaign("Gloomhaven");
+                          });
+                        },
+                        child: const Text("Gloomhaven"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _setCampaign("Forgotten Circles");
+                          });
+                        },
+                        child: const Text("Forgotten Circles"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _setCampaign("Frosthaven");
+                          });
+                        },
+                        child: const Text("Frosthaven"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _setCampaign("Crimson Scales");
+                          });
+                        },
+                        child: const Text("Crimson Scales"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _setCampaign("Seeker of Xorn");
+                          });
+                        },
+                        child: const Text("Seeker of Xorn"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            _setCampaign("Solo");
+                          });
+                        },
+                        child: const Text("Solo Scenarios"),
+                      ),
+                      CheckboxListTile(
+                          title: const Text("Show Bosses"),
+                          value: _showBoss,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _showBoss = value!;
+                              _runFilter("");
+                            });
+                          }),
+                      CheckboxListTile(
+                          title: const Text("Show Scenario Special Monsters"),
+                          value: _showSpecial,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _showSpecial = value!;
+                              _runFilter("");
+                            });
+                          }),
+                    ],
+                  )),*/
+                  CheckboxListTile(
+                      title: const Text("Add as Ally"),
+                      value: _addAsAlly,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _addAsAlly = value!;
                         });
                       }),
                   Container(
@@ -197,7 +326,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                     _gameState.action(AddMonsterCommand(
                                         _foundMonsters[index].name,
                                         null,
-                                        addAsAlly)); //
+                                        _addAsAlly)); //
                                   });
 
                                   //Navigator.pop(context);

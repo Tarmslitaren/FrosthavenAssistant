@@ -7,10 +7,7 @@ import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
-import '../../services/network/client.dart';
 import '../../services/network/network.dart';
-import '../../services/network/network_info.dart';
-import '../../services/network/server.dart';
 import '../../services/service_locator.dart';
 
 class SettingsMenu extends StatefulWidget {
