@@ -93,11 +93,10 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Undo and Redo is currently not supported when connected. sorry. Maybe next release.
 - Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself.
 - Some text alignment issues with small texts on small (mobile) screens.
-- Frosthaven Style option is not a 100% accurate. Partly because we don't know yet exactly how the cards should look.
 - Condition Animations do not play when connected.
 - You can connect devices with different versions, but there will be issues. PLease update all your devices!
 - Objectives and Escorts do not update their 'level'/health when monster level is changed. Please set the correct monster level before setting a scenario.
-
+- Frosthaven Campaign is not fully added. Please start a 'custom' scenario and add monsters manually.
 
 ## Roadmap
 - Next:
@@ -111,6 +110,7 @@ Assets/Data used:
 
 - [Creator Pack by Isaac Childres](https://boardgamegeek.com/thread/1733586/files-creation) CC BY-NC-SA 4.0
 - [Frosthaven rulebook sneak peak] (https://drive.google.com/file/d/1sz6nbQNM5wylz2sXJBBSWMLaiBFqqFLl/view)
+- [Frosthaven spoilers compiled by u/Juar99] (https://drive.google.com/drive/u/0/folders/1sMFWoFehBdkJmzstR0CKNXfzhP-YSphP?sort=13&direction=a)
 - [Worldhaven](https://github.com/any2cards/worldhaven)
 - some other assets used are public domain licensed.
 
