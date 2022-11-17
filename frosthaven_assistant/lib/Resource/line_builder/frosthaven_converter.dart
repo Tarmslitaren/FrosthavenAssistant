@@ -130,11 +130,6 @@ class FrosthavenConverter {
           //if not right aligned, then not really a subline after all
           isSubLine = false;
         }
-
-        if (retVal.last.endsWith("%") && line.endsWith("adjacent enemy")) {
-          //blood ooze 62 hack
-          retVal[retVal.length - 2] = "[subLineStart]";
-        }
       }
       if (line.startsWith("^") && isReallySubLine) {
         //I know.

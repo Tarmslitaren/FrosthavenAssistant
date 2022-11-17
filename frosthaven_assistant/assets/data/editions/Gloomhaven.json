@@ -646,7 +646,7 @@
         [ 519, false, 45, "%move% + 0","*.........", "%attack% + 0" ],
         [ 520, false, 45, "%move% + 0", "*.........","%attack% + 0" ],
         [ 521, false, 81, "%attack% + 2" ],
-        [ 522, false, 74, "%move% + 0","*.........", "%attack% + 0", "^Target one enemy with all attacks" ],
+        [ 522, false, 74, "%move% + 0","*.........", "%attack% + 0", "[newLine]","^Target one enemy with all attacks" ],
         [ 523, true, 12, "%shield% + 1","*.........", "%heal% 2", "^Self" ]
       ]
     },
@@ -668,12 +668,12 @@
       "name": "Living Spirit",
       "cards": [
         [ 580, true, 22, "%move% - 1","*.........", "%attack% - 1", "^%range% + 0", "^%muddle%" ],
-        [ 581, true, 33, "%move% + 0","*.........", "%attack% - 1", "^%range% + 0","[c]", "[/c]", "^Target all enemies within range" ],
+        [ 581, true, 33, "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "^^Target all enemies within range" ],
         [ 582, false, 48, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
         [ 583, false, 48, "%move% + 0", "*.........","%attack% + 0", "^%range% + 0" ],
         [ 584, false, 61, "%attack% + 0", "^%range% - 1", "^%target% 2" ],
         [ 585, false, 75, "%move% - 1","*.........", "%attack% + 1", "^%range% - 1","*.........", "%heal% 1", "^Self" ],
-        [ 586, false, 55, "%move% + 0","*.........", "%curse%", "^%range% + 0","[c]", "[/c]", "^Target all enemies within range", "%ice%" ],
+        [ 586, false, 55, "%move% + 0","*.........", "%curse%", "^%range% + 0", "^Target all enemies within range", "%ice%" ],
         [ 587, false, 67, "%move% - 1","*.........", "%attack% + 1", "^%range% + 0", "*.........", "[r]","%ice%%use%", "^%stun%", "[/r]" ]
       ]
     },
@@ -683,9 +683,9 @@
         [ 612, true, 11, "%shield% + 1","[r]", "%ice%%use%", "^%shield% + 2 instead", "[/r]","*.........", "%wound%", "^Target all adjacent enemies" ],
         [ 613, false, 28, "%move% + 1","*.........", "%attack% - 1" ],
         [ 614, false, 38, "%move% + 0","*.........", "%attack% + 0" ],
-        [ 615, false, 38, "%move% + 0","*.........", "%attack% + 0", "^Target one enemy with all attacks" ],
+        [ 615, false, 38, "%move% + 0","*.........", "%attack% + 0","[newLine]", "^Target one enemy with all attacks" ],
         [ 616, false, 61, "%move% - 1","*.........", "%attack% + 1" ],
-        [ 617, false, 64, "%attack% + 1", "^Target all adjacent enemies" ],
+        [ 617, false, 64, "%attack% + 1", "[newLine]", "^Target all adjacent enemies" ],
         [ 618, false, 41, "[r]","%ice%%use%", "^%strengthen%", "^Self", "[/r]","*.........", "%move% + 0", "%attack% - 1", "^%wound%" ],
         [ 619, true, 23, "%shield% + 1","*.........", "%move% + 0","*.........", "%attack% - 1", "%ice%" ]
       ]
@@ -762,7 +762,7 @@
       "cards": [
         [ 716, false, 97, "Summon normal","Flame Demon", "%fire%" ],
         [ 717, false, 97, "Summon normal","Earth Demon", "%earth%" ],
-        [ 718, false, 22, "%move% + 1","*.........", "%attack% - 1", "^Target all adjacent enemies","*.........", "[r]", "%fire%%use%", "^%retaliate% + 3", "[/r]" ],
+        [ 718, false, 22, "%move% + 1","*.........", "%attack% - 1", "[newLine]","^Target all adjacent enemies","*.........", "[r]", "%fire%%use%", "^%retaliate% + 3", "[/r]" ],
         [ 719, true, 68, [{
           "gfx": "earth",
           "x": 0.783,

@@ -41,6 +41,7 @@ class LineBuilder {
     "pierce": "PIERCE",
     "curse": "CURSE",
     "bless": "BLESS",
+    "damage": "damage",
     "and": "and"
   };
 
@@ -312,6 +313,9 @@ class LineBuilder {
 
     if (frosthavenStyle) {
       localStrings =  FrosthavenConverter.convertLinesToFH(localStrings, applyStats);
+    } else {
+      localStrings.removeWhere((element) => element == "[newLine]");
+      localStrings.removeWhere((element) => element == "[subLineEnd]");
     }
 
     //specialized layouts

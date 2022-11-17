@@ -462,7 +462,7 @@
       "name": "Hail Demon",
       "edition": "Crimson Scales",
       "cards": [
-        [1222, true, 13, "%attack% + 1", "^Target all enemies within %range% 3", "^with %chill%", "%air%" ],
+        [1222, true, 13, "%attack% + 1", "^Target all enemies within %range% 3", "^with %chill%", "[subLineEnd]", "%air%" ],
         [1223, true, 38, "%attack% + 1", "^%range% + 1", "[r]", "%air%%use%", "^%chill%", "[/r]"],
         [1224, false, 5, "%move% - 1","*.........", "%attack% + 0","^%range% + 0", "[r]","%air%%use%", "^%pull% 2", "[/r]" ],
         [1225, false, 30, "%heal% 2", "^Self","*.........", "%chill%", "^Target one enemy with no %chill%", "^tokens within %range% 3" ],
@@ -532,7 +532,7 @@
           "x": 0.783,
           "y": 0.76
         }],"^         Remove %poison% from self.","**.........", "%move% + 0", "**.........","%attack% + 0", "^%poison%", "**.........","%heal% 3", "^Self" ],
-        ["Burning Stingers", 2026, false, 73, "%attack% - 1", "^%range% 3", "^%target% 3", "^All targets suffer 1 damage.", "%fire%" ],
+        ["Burning Stingers", 2026, false, 73, "%attack% - 1", "^%range% 3", "^%target% 3", "^All targets suffer 1 damage.","[subLineEnd]", "%fire%" ],
         ["Burrow Under", 2027, true, 88, "^^                   Focus on the enemy farthest away.", "%move% + 2", "^%jump%","**.........", "%attack% + 0", "^^Target all enemies within", "^^one hex along the path moved", "[r]", "%earthfire%%use%", "^%immobilize%", "[/r]" ]
       ]
     },
@@ -544,7 +544,7 @@
         [1199, true, 96, "^Summon one normal", "^Blood Ooze with a current","^hit point value equal to four.", "[r]","%fire%%use%", "[c]", "*Hit point value equal","*to three instead", "[/c]", "[/r]" ],
         [1200, false, 71, "^All adjacent enemies", "^suffer one damage.","*.........", "%move% + 1","*.........", "%heal% 1", "^Target all adjacent Blood Oozes"],
         [1201, false, 29, "%move% + 1", "*.........", "%attack% + 0", "^Target one adjacent enemy","[r]", "[c]", "^Add +2 %attack% if the target is", "^adjacent to at least two Blood Oozes.","[/c]", "[/r]" ],
-        [1202, false, 62, "%attack% - 1", "^%poison%", "^Target one adjacent enemy","*.........", "%attack% - 1", "^Target one enemy at exactly %range% 2" ],
+        [1202, false, 62, "%attack% - 1", "^%poison%", "^^Target one adjacent enemy","*.........", "%attack% - 1", "[newLine]", "^Target one enemy at exactly %range% 2" ],
         [1203, false, 53, "%move% + 0","*.........", "%loot% 1","*.........", "^If at least one money token was looted:", "%attack% + 1", "^%range% + 0" ],
         [1204, false, 17, "%retaliate% 1", "^%range% 3", "*.........","%move% + 0","*.........", "%wound%", "^Target all adjacent enemies" ],
         [1205, false, 80, "^Blood Ooze suffers two damage.","*.........", "%invisible%", "^Self" ]
@@ -563,7 +563,7 @@
           "x": 0.86,
           "y": 0.66,
           "angle": 210.0
-        }], "%move% + 0","*.........", "%attack% - 1", "^%range% + 0","ÅKK", "[r]", "%fire%%use%","[c]", "^%attack% + 1", "^%range% + 0", "[/c]","¤aoe-line-5-with-black_v2", "[/r]"],
+        }], "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "[r]", "%fire%%use%","[c]", "^%attack% + 1","[newLine]", "^%range% + 0", "[/c]","¤aoe-line-5-with-black_v2", "[/r]"],
         [1211, false, 40, "%move% - 1","*.........", "%attack% + 0", "^%range% + 0", "[r]", "%fire%%use%", "^%range% + 2", "[/r]" ],
         [1212, false, 49, "%attack% + 1", "^%range% - 1", "^%target% 2" ],
         [1213, false, 77, "[r]", "[c]","%attack% - 2","^%range% + 0", "^%immobilize%","[/c]", "¤aoe-circle", "[/r]"]
@@ -626,7 +626,7 @@
         [519, false, 45, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
         [520, false, 45, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0" ],
         [521, false, 81, "%attack% + 2","*.........", "^%range% + 0" ],
-        [522, false, 74, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0","[r]","[/r]", "^Target one enemy with all attacks" ],
+        [522, false, 74, "%move% + 0","*.........", "%attack% + 0","^%range% + 0","[newLine]", "^Target one enemy with all attacks" ],
         [523, true, 12, "%shield% + 1","*.........", "%heal% 2", "^Self" ]
       ]
     },
@@ -656,7 +656,7 @@
       "cards": [
         [ 613, false, 28, "%move% + 1", "*.........", "%attack% - 1" ],
         [ 614, false, 38, "%move% + 0", "*.........","%attack% + 0" ],
-        [ 615, false, 38, "%move% + 0", "*.........","%attack% + 0", "^Target one enemy with all attacks" ],
+        [ 615, false, 38, "%move% + 0", "*.........","%attack% + 0","[newLine]", "^Target one enemy with all attacks" ],
         [ 619, true, 23, "%shield% + 1","*.........", "%move% + 0","*.........", "%attack% - 1" ],
         [ 733, true, 60,[{
           "gfx": "aoe-line-6-with-black",
@@ -2668,35 +2668,35 @@
       "count": 6,
       "levels": [
         {
-          "level": 0, "health": "6x(C+2)", "move": 2, "attack": 3, "range": 3, "attributes": [ "%target% plus 1", "%jump%" ],
+          "level": 0, "health": "6x(C+2)", "move": 2, "attack": 3, "range": 3, "attributes": [ "+1 %target%", "%jump%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 1, "health": "7x(C+2)", "move": 2, "attack": 3, "range": 5, "attributes": [ "%target% plus 1", "%jump%" ],
+          "level": 1, "health": "7x(C+2)", "move": 2, "attack": 3, "range": 5, "attributes": [ "+1 %target%", "%jump%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 2, "health": "9x(C+2)", "move": 3, "attack": 3, "range": 5, "attributes": [ "%target% plus 1", "%jump%" ],
+          "level": 2, "health": "9x(C+2)", "move": 3, "attack": 3, "range": 5, "attributes": [ "+1 %target%", "%jump%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 3, "health": "10x(C+2)", "move": 3, "attack": 4, "range": 5, "attributes": [ "%target% plus 1", "%jump%" ],
+          "level": 3, "health": "10x(C+2)", "move": 3, "attack": 4, "range": 5, "attributes": [ "+1 %target%", "%jump%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 4, "health": "10x(C+2)", "move": 3, "attack": 4, "range": 6, "attributes": [ "%target% plus 1", "%jump%", "%poison%" ],
+          "level": 4, "health": "10x(C+2)", "move": 3, "attack": 4, "range": 6, "attributes": [ "+1 %target%", "%jump%", "%poison%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 5, "health": "12x(C+2)", "move": 4, "attack": 4, "range": 6, "attributes": [ "%target% plus 1", "%jump%", "%poison%" ],
+          "level": 5, "health": "12x(C+2)", "move": 4, "attack": 4, "range": 6, "attributes": [ "+1 %target%", "%jump%", "%poison%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 6, "health": "13x(C+2)", "move": 4, "attack": 5, "range": 6, "attributes": [ "%target% plus 1", "%jump%", "%poison%" ],
+          "level": 6, "health": "13x(C+2)", "move": 4, "attack": 5, "range": 6, "attributes": [ "+1 %target%", "%jump%", "%poison%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         },
         {
-          "level": 7, "health": "17x(C+2)", "move": 4, "attack": 5, "range": 6, "attributes": [ "%target% plus 1", "%jump%", "%poison%" ],
+          "level": 7, "health": "17x(C+2)", "move": 4, "attack": 5, "range": 6, "attributes": [ "+1 %target%", "%jump%", "%poison%" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%curse%" ]
         }
       ]
