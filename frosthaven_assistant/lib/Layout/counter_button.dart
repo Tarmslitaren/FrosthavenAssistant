@@ -14,8 +14,9 @@ class CounterButton extends StatefulWidget {
   final String ownerId;
   final bool showTotalValue;
   final Color color;
+  final double scale;
 
-  CounterButton(this.notifier, this.command, this.maxValue, this.image, this.showTotalValue, this.color, {Key? key, required this.figureId, required this.ownerId}) : super(key: key){}
+  CounterButton(this.notifier, this.command, this.maxValue, this.image, this.showTotalValue, this.color, {Key? key, required this.figureId, required this.ownerId, required this.scale}) : super(key: key){}
 
   @override
   State<StatefulWidget> createState() {
@@ -34,8 +35,8 @@ class CounterButtonState extends State<CounterButton> {
     }
     return Row(children: [
       SizedBox(
-          width: 40,
-          height: 40,
+          width: 40 * widget.scale,
+          height: 40 * widget.scale,
           child: IconButton(
               icon: Image.asset('assets/images/psd/sub.png'),
 //iconSize: 30,
@@ -54,8 +55,8 @@ class CounterButtonState extends State<CounterButton> {
               })),
       Stack(children: [
         Container(
-          width: 30,
-          height: 30,
+          width: 30 * widget.scale,
+          height: 30 * widget.scale,
           child: Image(
             color: widget.color,
             colorBlendMode: BlendMode.modulate,
@@ -75,23 +76,25 @@ class CounterButtonState extends State<CounterButton> {
               if(widget.showTotalValue) {
                 text = widget.notifier.value.toString();
               }
-              var shadow = const Shadow(
-                  offset: Offset(1, 1),
-                  color: Colors.black87,
-                  blurRadius: 1,
+              var shadow = Shadow(
+                  offset: Offset(1 * widget.scale, 1 * widget.scale),
+                  color: Colors.black,
+                  blurRadius: 1 * widget.scale,
               );
               return Positioned(
                   bottom: 0,
                   right: 0,
-                  child: Text(text, style: TextStyle(color: widget.color,
+                  child: Text(text, style: TextStyle(
+                    fontSize: 16 * widget.scale,
+                      color: widget.color,
                       shadows: [shadow]
                   ),)
               );
             })
       ]),
       SizedBox(
-          width: 40,
-          height: 40,
+          width: 40 * widget.scale,
+          height: 40 * widget.scale,
           child: IconButton(
             icon: Image.asset('assets/images/psd/add.png'),
 //iconSize: 30,

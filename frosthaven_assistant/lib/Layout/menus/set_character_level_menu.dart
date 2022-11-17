@@ -38,7 +38,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
     });
   }
 
-  Widget buildLevelButton(int nr) {
+  Widget buildLevelButton(int nr, double scale) {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
@@ -47,20 +47,20 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
           String text = nr.toString();
           bool darkMode = getIt<Settings>().darkMode.value;
           return SizedBox(
-            width: 40,
-            height: 40,
+            width: 40 * scale,
+            height: 40 * scale,
             child: TextButton(
               child: Text(
                 text,
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 18 * scale,
                     shadows: [
                       Shadow(
-                        offset: const Offset(1, 1),
+                        offset: Offset(1 *scale, 1 * scale),
                         color: isCurrentlySelected
                             ? Colors.black54
                             : Colors.black87,
-                        blurRadius: 1,
+                        blurRadius: 1 * scale,
                       ),
                     ],
                     color: isCurrentlySelected
@@ -81,9 +81,13 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
 
   @override
   Widget build(BuildContext context) {
+    double scale = 1;
+    if(!isPhoneScreen(context)) {
+      scale = 1.5;
+    }
     return Container(
-        width: 10,
-        height: 240,
+        width: 240 * scale,
+        height: 240 * scale,
         decoration: BoxDecoration(
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
@@ -98,8 +102,8 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: 20 * scale,
               ),
               ValueListenableBuilder<String>(
                   valueListenable:
@@ -108,26 +112,26 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   builder: (context, value, child) {
                     return Text(
                         "Set ${widget.character.characterState.display.value}'s Level",
-                        style: getTitleTextStyle()
+                        style: getTitleTextStyle(scale)
                     );
                   }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  buildLevelButton(1),
-                  buildLevelButton(2),
-                  buildLevelButton(3),
-                  buildLevelButton(4),
+                  buildLevelButton(1, scale),
+                  buildLevelButton(2, scale),
+                  buildLevelButton(3, scale),
+                  buildLevelButton(4, scale),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  buildLevelButton(5),
-                  buildLevelButton(6),
-                  buildLevelButton(7),
-                  buildLevelButton(8),
-                  buildLevelButton(9),
+                  buildLevelButton(5, scale),
+                  buildLevelButton(6, scale),
+                  buildLevelButton(7, scale),
+                  buildLevelButton(8, scale),
+                  buildLevelButton(9, scale),
                 ],
               ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -140,14 +144,16 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     true,
                     Colors.red,
                     figureId: widget.character.id,
-                    ownerId: widget.character.id)
+                    ownerId: widget.character.id,
+                scale: scale)
               ]),
-              Text("Change name:", style: getTitleTextStyle()),
+              Text("Change name:", style: getTitleTextStyle(scale)),
               SizedBox(
-                  width: 140,
+                  width: 160,
                   child: TextField(
                     controller: nameController,
                     focusNode: focusNode,
+                    style: getTitleTextStyle(scale),
                     onSubmitted: (String string) {
                       //set the name
 

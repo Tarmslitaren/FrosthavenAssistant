@@ -236,7 +236,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                           0)
                                         Text(
                                             "BadOmensLeft: ${deck.badOmen.value}",
-                                            style: getTitleTextStyle()),
+                                            style: getTitleTextStyle(1)),
                                       TextButton(
                                         onPressed: () {
                                           _gameState
@@ -257,7 +257,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                         true,
                                         Colors.white,
                                         figureId: "unknown",
-                                        ownerId: "unknown"
+                                        ownerId: "unknown",
+                                        scale: 1
                                     ),
                                     CounterButton(
                                         deck.curses,
@@ -267,7 +268,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                         true,
                                         Colors.white,
                                         figureId: "unknown",
-                                        ownerId: "unknown"
+                                        ownerId: "unknown",
+                                        scale: 1
                                     ),
                                   ],
                                 ),

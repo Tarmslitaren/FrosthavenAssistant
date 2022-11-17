@@ -24,14 +24,15 @@ class NumpadMenuState extends State<NumpadMenu> {
     super.initState();
   }
 
-  Widget buildNrButton(int nr) {
+  Widget buildNrButton(int nr, double scale) {
     return  SizedBox(
-            width: 40,
-            height: 40,
+            width: 40 * scale,
+            height: 40 * scale,
             child: TextButton(
               child: Text(
                 nr.toString(),
-                style: getTitleTextStyle(),
+                textScaleFactor: scale,//maybe not right
+                style: getTitleTextStyle(scale),
               ),
               onPressed: () {
                 text += nr.toString();
@@ -55,9 +56,13 @@ class NumpadMenuState extends State<NumpadMenu> {
 
   @override
   Widget build(BuildContext context) {
+    double scale = 1;
+    if(!isPhoneScreen(context)) {
+      scale = 1.5;
+    }
     return Container(
         width: 10,
-        height: 180,
+        height: 180 * scale,
         decoration: BoxDecoration(
           //color: Colors.black,
           //borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -81,37 +86,37 @@ class NumpadMenuState extends State<NumpadMenu> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: 20 * scale,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildNrButton(1),
-                      buildNrButton(2),
-                      buildNrButton(3),
+                      buildNrButton(1, scale),
+                      buildNrButton(2, scale),
+                      buildNrButton(3, scale),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildNrButton(4),
-                      buildNrButton(5),
-                      buildNrButton(6),
+                      buildNrButton(4, scale),
+                      buildNrButton(5, scale),
+                      buildNrButton(6, scale),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildNrButton(7),
-                      buildNrButton(8),
-                      buildNrButton(9),
+                      buildNrButton(7, scale),
+                      buildNrButton(8, scale),
+                      buildNrButton(9, scale),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      buildNrButton(0),
+                      buildNrButton(0, scale),
                     ],
                   ),
                 ],

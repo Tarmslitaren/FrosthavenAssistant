@@ -48,7 +48,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     _summonList.addAll(_gameState.itemSummonData);
   }
 
-  Widget buildGraphicButton(String summonGfx) {
+  Widget buildGraphicButton(String summonGfx, double scale) {
     bool isCurrentlySelected;
     isCurrentlySelected = summonGfx == chosenGfx;
     Color color = Colors.transparent;
@@ -56,14 +56,14 @@ class AddSummonMenuState extends State<AddSummonMenu> {
       color = getIt<Settings>().darkMode.value ? Colors.white : Colors.black;
     }
     return SizedBox(
-      width: 42,
-      height: 42,
+      width: 42 * scale,
+      height: 42 * scale,
       child: Container(
           decoration: BoxDecoration(
               border: Border.all(
                 color: color,
               ),
-              borderRadius: const BorderRadius.all(Radius.circular(30))),
+              borderRadius: BorderRadius.all(Radius.circular(30 * scale))),
           child: IconButton(
             onPressed: () {
               if (!isCurrentlySelected) {
@@ -80,7 +80,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     );
   }
 
-  Widget buildNrButton(int nr) {
+  Widget buildNrButton(int nr, double scale) {
     bool isCurrentlySelected;
     isCurrentlySelected = nr == chosenNr;
     Color color = Colors.transparent;
@@ -90,8 +90,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     String text = nr.toString();
     bool darkMode = getIt<Settings>().darkMode.value;
     return SizedBox(
-      width: 42,
-      height: 42,
+      width: 42 * scale,
+      height: 42 * scale,
       child: Container(
           decoration: BoxDecoration(
               border: Border.all(
@@ -102,7 +102,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
             child: Text(
               text,
               style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 18 * scale,
                   color: isCurrentlySelected
                       ? darkMode
                           ? Colors.white
@@ -124,9 +124,13 @@ class AddSummonMenuState extends State<AddSummonMenu> {
 
   @override
   Widget build(BuildContext context) {
+    double scale = 1;
+    if(!isPhoneScreen(context)) {
+      scale = 1.5;
+    }
     return Container(
-      width: 336,
-      height: 452,
+      width: 336 * scale,
+      height: 452 * scale,
       decoration: BoxDecoration(
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
@@ -138,44 +142,44 @@ class AddSummonMenuState extends State<AddSummonMenu> {
         ),
       ),
       child: Column(children: [
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: 20 * scale,
         ),
-        Text("Add Summon", style: getTitleTextStyle()),
+        Text("Add Summon", style: getTitleTextStyle(scale)),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildGraphicButton("blue"),
-            buildGraphicButton("green"),
-            buildGraphicButton("yellow"),
-            buildGraphicButton("orange"),
+            buildGraphicButton("blue", scale),
+            buildGraphicButton("green", scale),
+            buildGraphicButton("yellow", scale),
+            buildGraphicButton("orange", scale),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildGraphicButton("white"),
-            buildGraphicButton("purple"),
-            buildGraphicButton("pink"),
-            buildGraphicButton("red"),
+            buildGraphicButton("white", scale),
+            buildGraphicButton("purple", scale),
+            buildGraphicButton("pink", scale),
+            buildGraphicButton("red", scale),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildNrButton(1),
-            buildNrButton(2),
-            buildNrButton(3),
-            buildNrButton(4),
+            buildNrButton(1, scale),
+            buildNrButton(2, scale),
+            buildNrButton(3, scale),
+            buildNrButton(4, scale),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildNrButton(5),
-            buildNrButton(6),
-            buildNrButton(7),
-            buildNrButton(8),
+            buildNrButton(5, scale),
+            buildNrButton(6, scale),
+            buildNrButton(7, scale),
+            buildNrButton(8, scale),
           ],
         ),
         Expanded(
@@ -198,27 +202,27 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                           leading:
                               Stack(alignment: Alignment.center, children: [
                             Image(
-                              height: 30,
-                              width: 30,
+                              height: 30 * scale,
+                              width: 30 * scale,
                               image:
                                   AssetImage("assets/images/summon/$gfx.png"),
                             ),
                             if (showNr)
                               Text(chosenNr.toString(),
-                                  style: const TextStyle(
-                                      fontSize: 18,
+                                  style: TextStyle(
+                                      fontSize: 18 * scale,
                                       color: Colors.white,
                                       shadows: [
                                         Shadow(
-                                          offset: Offset(1, 1),
+                                          offset: Offset(1 * scale, 1 * scale),
                                           color: Colors.black87,
-                                          blurRadius: 1,
+                                          blurRadius: 1 * scale,
                                         )
                                       ])),
                           ]),
                           //iconColor: _foundMonsters[index].color,
                           title: Text(_summonList[index].name,
-                              style: getTitleTextStyle()),
+                              style: getTitleTextStyle(scale)),
                           onTap: () {
                             setState(() {
                               SummonModel model = _summonList[index];
@@ -256,8 +260,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                 ));
                           });
                     }))),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: 20 * scale,
         ),
       ]),
     );

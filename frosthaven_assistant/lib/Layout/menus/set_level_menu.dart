@@ -29,7 +29,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     super.initState();
   }
 
-  Widget buildLevelButton(int nr) {
+  Widget buildLevelButton(int nr, double scale) {
     return ValueListenableBuilder<bool>(
         valueListenable: _gameState.solo,
         builder: (context, value, child) {
@@ -50,22 +50,22 @@ class SetLevelMenuState extends State<SetLevelMenu> {
           String text = nr.toString();
           bool darkMode = getIt<Settings>().darkMode.value;
           return SizedBox(
-            width: 40,
-            height: 40,
+            width: 40 * scale,
+            height: 40 * scale,
             child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
                       color: color,
                     ),
-                    borderRadius: const BorderRadius.all(Radius.circular(30))),
+                    borderRadius: BorderRadius.all(Radius.circular(30 * scale))),
                 child: TextButton(
                   child: Text(
                     text,
                     style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 18 * scale,
                         shadows: [
                           Shadow(
-                              offset: const Offset(1, 1),
+                              offset: Offset(1 * scale, 1 * scale),
                               color: isCurrentlySelected
                                   ? darkMode
                                       ? Colors.black
@@ -97,32 +97,32 @@ class SetLevelMenuState extends State<SetLevelMenu> {
         });
   }
 
-  Widget createLegend(String name, String gfx, String value) {
+  Widget createLegend(String name, String gfx, String value, double scale) {
 
-    var shadow = const Shadow(
-      offset: Offset(1, 1),
+    var shadow = Shadow(
+      offset: Offset(1 * scale, 1 * scale),
       color: Colors.black87,
-      blurRadius: 1,
+      blurRadius: 1 * scale,
     );
     var textStyleLevelWidget = TextStyle(
         color: Colors.white,
         overflow: TextOverflow.fade,
         //fontWeight: FontWeight.bold,
         //backgroundColor: Colors.transparent.withAlpha(100),
-        fontSize: 18,
+        fontSize: 18 * scale,
         shadows: [
           shadow
           //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
         ]);
-    double height = 20;
+    double height = 20 * scale;
     if (gfx.contains("level")) {
-      height = 15;
+      height = 15 * scale;
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const SizedBox(
-          width: 8,
+        SizedBox(
+          width: 8 * scale,
         ),
         Container(
             decoration: BoxDecoration(
@@ -179,9 +179,14 @@ class SetLevelMenuState extends State<SetLevelMenu> {
 
     bool darkMode = getIt<Settings>().darkMode.value;
 
+    double scale = 1;
+    if(!isPhoneScreen(context)) {
+      scale = 1.5;
+    }
+
     return Container(
-        width: 10,
-        height: showLegend ? 300 : 180,
+        width: 230 * scale,
+        height: showLegend ? 300 * scale : 180 * scale,
         decoration: BoxDecoration(
           //color: Colors.black,
           //borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -205,35 +210,35 @@ class SetLevelMenuState extends State<SetLevelMenu> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: 20 * scale,
                   ),
-                  Text(title, style: getTitleTextStyle()),
+                  Text(title, style: getTitleTextStyle(scale)),
                   if (!isSummon)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        buildLevelButton(0),
-                        buildLevelButton(1),
-                        buildLevelButton(2),
-                        buildLevelButton(3),
+                        buildLevelButton(0, scale),
+                        buildLevelButton(1, scale),
+                        buildLevelButton(2, scale),
+                        buildLevelButton(3, scale),
                       ],
                     ),
                   if (!isSummon)
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        buildLevelButton(4),
-                        buildLevelButton(5),
-                        buildLevelButton(6),
-                        buildLevelButton(7),
+                        buildLevelButton(4, scale),
+                        buildLevelButton(5, scale),
+                        buildLevelButton(6, scale),
+                        buildLevelButton(7, scale),
                       ],
                     ),
                   widget.figure == null
                       ? Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                              Text("Solo:", style: getSmallTextStyle()),
+                              Text("Solo:", style: getSmallTextStyle(scale)),
                               ValueListenableBuilder<bool>(
                                   valueListenable: _gameState.solo,
                                   builder: (context, value, child) {
@@ -264,7 +269,8 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                                   true,
                                   Colors.red,
                                   figureId: figureId,
-                                  ownerId: ownerId)
+                                  ownerId: ownerId,
+                                  scale: scale)
                             ])
                       : Container(),
                   if (showLegend == true)
@@ -275,21 +281,21 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                         createLegend(
                             "trap damage",
                             "assets/images/psd/traps-fh.png",
-                            ": ${GameMethods.getTrapValue()}"),
+                            ": ${GameMethods.getTrapValue()}",scale),
                         createLegend(
                             "hazardous terrain damage",
                             "assets/images/psd/hazard-fh.png",
-                            ": ${GameMethods.getHazardValue()}"),
+                            ": ${GameMethods.getHazardValue()}",scale),
                         createLegend(
                             "experience added",
                             "assets/images/psd/xp.png",
-                            ": +${GameMethods.getXPValue()}"),
+                            ": +${GameMethods.getXPValue()}",scale),
                         createLegend(
                             "gold coin value",
                             "assets/images/psd/coins-fh.png",
-                            ": x${GameMethods.getCoinValue()}"),
+                            ": x${GameMethods.getCoinValue()}",scale),
                         createLegend("level", "assets/images/psd/level.png",
-                            ": ${_gameState.level.value}"),
+                            ": ${_gameState.level.value}",scale),
                       ],
                     )
                 ],

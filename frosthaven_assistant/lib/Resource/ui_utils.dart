@@ -8,17 +8,29 @@ void openDialogOld(BuildContext context, Widget widget) {
   showDialog(context: context, builder: (BuildContext context) => widget);
 }
 
-TextStyle getTitleTextStyle() {
+TextStyle getTitleTextStyle(double scale) {
   return TextStyle(
-      fontSize: 18,
+      fontSize: 18 * scale,
       color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black);
 }
 
-TextStyle getSmallTextStyle() {
+TextStyle getSmallTextStyle(double scale) {
   return TextStyle(
-    fontSize: 14,
+    fontSize: 14 * scale,
     color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black,
   );
+}
+
+bool isPhoneScreen(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+  if(screenWidth > screenHeight && screenHeight < 600) {
+    return true;
+  }
+  if(screenWidth < screenHeight && screenWidth < 600) {
+    return true;
+  }
+  return false;
 }
 
 void rebuildAllChildren(BuildContext context) {

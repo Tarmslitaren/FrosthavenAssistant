@@ -84,8 +84,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
   Widget build(BuildContext context) {
     int nrOfStandees = widget.monster.type.count;
     double scale = 1;
-    double screenWidth = MediaQuery.of(context).size.width;
-    if(screenWidth > 500) { //TODO: evaluate cutoff point
+    if(!isPhoneScreen(context)) {
       scale = 1.5;
     }
     //4 nrs per row
@@ -128,7 +127,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                           height: 20 * scale,
                         ),
                         Text("Add Standee Nr",
-                            style: getTitleTextStyle()),
+                            style: getTitleTextStyle(scale)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -173,7 +172,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Summoned:", style: getSmallTextStyle()),
+                              Text("Summoned:", style: getSmallTextStyle(scale)),
                               Checkbox(
                                 checkColor: Colors.black,
                                 activeColor: Colors.grey.shade200,
