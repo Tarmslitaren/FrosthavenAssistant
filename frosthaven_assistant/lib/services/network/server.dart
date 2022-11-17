@@ -13,7 +13,7 @@ import 'network.dart';
 //import 'dart:developer' as developer;
 
 class Server {
-  final int serverVersion = 130;
+  final int serverVersion = 140;
 
   final GameState _gameState = getIt<GameState>();
 
