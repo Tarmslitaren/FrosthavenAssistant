@@ -3954,8 +3954,8 @@
           "move": 2,
           "attack": 2,
           "attributes": [ "%retaliate% 2", "^%range% 3", "%brittle%"],
-          "special1": [ "^^One character recover one lost card.","**.........", "%heal% 3", "^%target% C,", "^%range% 5","**.........", "^Summon one Snow Imp." ],
-          "special2": [ "^^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^Summon one Snow Imp."],
+          "special1": [ "^^One character recover one lost card.","**.........", "%heal% 3", "^%target% C,", "^%range% 5","**.........", "^^Summon one Snow Imp." ],
+          "special2": [ "^^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^^Summon one Snow Imp."],
           "immunities": [ "%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -4004,8 +4004,8 @@
           "move": 3,
           "attack": 5,
           "attributes": [ "%retaliate% 4", "^%range% 3", "%brittle%" ],
-          "special1": [ "^One character recover one lost card.","**.........", "%heal% 6", "^%target% C,", "^%range% 5","**.........", "^Summon one Snow Imp." ],
-          "special2": [ "^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^Summon one Snow Imp."],
+          "special1": [ "^^One character recover one lost card.","**.........", "%heal% 6", "^%target% C,", "^%range% 5","**.........", "^^Summon one Snow Imp." ],
+          "special2": [ "^^One character loses one card.","**.........","%push% 2", "^%target% C-1,", "^%range% 1", "^%brittle%","**.........", "^^Summon one Snow Imp."],
           "immunities": [ "%immobilize%","%disarm%", "%stun%", "%curse%" ]
         }
       ]
