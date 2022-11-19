@@ -1009,7 +1009,7 @@
       "cards": [
         ["Warding Swipe", 730, true, 17, "%move% + 1", "**.........", "[r]","%attack% - 1",  "¤aoe-arc-4", "[/r]","**.........", "%shield% + 1", "%earth%"],
         ["Two-fisted Strike", 732, false, 41,  "%move% - 1", "**.........","%attack% - 1","[r]","%ice%%use%","+2%attack%", "[/r]","**.........","%attack% - 1","[r]","%earth%%use%","+2%attack%", "[/r]"],
-        ["ice Wall", 734, false, 8,  "^Create one 1-hex obstacle", "^^tile in an adjacent empty", "^^hex closest to an enemy.","*.........","^All enemies adjacent to the created", "^^obstacle suffer haardous terrain damage.", "[r]", "%ice%", "ÅK", "%earth%", "[/r]"],
+        ["ice Wall", 734, false, 8,  "^Create one 1-hex obstacle", "^^tile in an adjacent empty", "^^hex closest to an enemy.","*.........","^All enemies adjacent to the created", "^^obstacle suffer hazardous terrain damage.", "[r]", "%ice%", "ÅK", "%earth%", "[/r]"],
         ["One with the Earth", 737, false, 12, "%shield% 3","*.........", "[r]","%earth%%use%","[c]","%heal% 1", "^Self" , "[/c]", "[/r]", "*.........","%heal% 3", "^Self"],
         ["Knockout Punch", 731, false, 76, "%move% + 0", "*.........","%attack% - 1", "^%stun%", "%ice%"],
         ["Frozen Debris", 733, false, 39,  "%move% - 1", "*.........","%attack% + 0", "^%range% 3", "[r]","%ice%%use%","%immobilize%", "[/r]"],
@@ -4583,6 +4583,417 @@
   },
   "scenarios": {
     "#0 Howling in the Snow": {
+      "monsters": [ "Hound" ]
+    },
+    "#1 Howling in the Snow": {
+      "monsters": [ "Hound" ]
+    },
+    "#2 Algox Scouting": {
+      "monsters": [ "Hound" ]
+    },
+    "#3 Algox Offensive": {
+      "monsters": [ "Hound" ]
+    },
+    "#4 Heart of Ice": {
+      "monsters": [ "Hound" ]
+    },
+    "#5 Frozen Crypt": {
+      "monsters": [ "Hound" ]
+    },
+    "#6 Avalanche": {
+      "monsters": [ "Hound" ]
+    },
+    "#7 Edge of the World": {
+      "monsters": [ "Hound" ]
+    },
+    "#8 Crystal Trench": {
+      "monsters": [ "Hound" ]
+    },
+    "#9 Glowing Catacombs": {
+      "monsters": [ "Hound" ]
+    },
+    "#10 Crystal Enclosure": {
+      "monsters": [ "Hound" ]
+    },
+    "#11 Snowscorn Peak": {
+      "monsters": [ "Hound" ]
+    },
+    "#12 Temple Entrance": {
+      "monsters": [ "Hound" ]
+    },
+    "#13 Frozen Fjord": {
+      "monsters": [ "Hound" ]
+    },
+    "#14 Jagged Shoals": {
+      "monsters": [ "Hound" ]
+    },
+    "#15 Ancient Spire": {
+      "monsters": [ "Hound" ]
+    },
+    "#16 Derelict Elevator": {
+      "monsters": [ "Hound" ]
+    },
+    "17 Haunted Vault": {
+      "monsters": [ "Hound" ]
+    },
+    "#18 Crystal Fields": {
+      "monsters": [ "Hound" ]
+    },
+    "#19 Skyhall": {
+      "monsters": [ "Hound" ]
+    },
+    "#20 Temple of Liberation": {
+      "monsters": [ "Hound" ]
+    },
+    "#21 Realm of Endless Frost": {
+      "monsters": [ "Hound" ]
+    },
+    "#22 Ice Floes": {
+      "monsters": [ "Hound" ]
+    },
+    "#23 Spire Basement": {
+      "monsters": [ "Hound" ]
+    },
+    "#24 Upper Spire": {
+      "monsters": [ "Hound" ]
+    },
+    "#25 Rusted Tunnels": {
+      "monsters": [ "Hound" ]
+    },
+    "#26 Quatryl Library": {
+      "monsters": [ "Hound" ]
+    },
+    "#27 Depths of Delirium": {
+      "monsters": [ "Hound" ]
+    },
+    "#28 Summit Meeting": {
+      "monsters": [ "Hound" ]
+    },
+    "#29 War of the Spire A": {
+      "monsters": [ "Hound" ]
+    },
+    "#30 War of the Spire B": {
+      "monsters": [ "Hound" ]
+    },
+    "#31 Crackling Tunnel": {
+      "monsters": [ "Hound" ]
+    },
+    "#32 Raven's Roost": {
+      "monsters": [ "Hound" ]
+    },
+    "#33 Thawed Wood": {
+      "monsters": [ "Hound" ]
+    },
+    "#34 Top of the Spire": {
+      "monsters": [ "Hound" ]
+    },
+    "#35 Scrap Pit": {
+      "monsters": [ "Hound" ]
+    },
+    "#36 Buried Ducts": {
+      "monsters": [ "Hound" ]
+    },
+    "#37 The Dead Mile": {
+      "monsters": [ "Hound" ]
+    },
+    "#38 The Way Forward": {
+      "monsters": [ "Hound" ]
+    },
+    "#39 Corrupted Camp": {
+      "monsters": [ "Hound" ]
+    },
+    "#40 Relief Effort": {
+      "monsters": [ "Hound" ]
+    },
+    "#41 Unfettered Shard": {
+      "monsters": [ "Hound" ]
+    },
+    "#42 Sunless Trench": {
+      "monsters": [ "Hound" ]
+    },
+    "#43 Overrun Barricade": {
+      "monsters": [ "Hound" ]
+    },
+    "#44 Nerve Center": {
+      "monsters": [ "Hound" ]
+    },
+    "#45 Living Glacier": {
+      "monsters": [ "Hound" ]
+    },
+    "#46 Dead Pass": {
+      "monsters": [ "Hound" ]
+    },
+    "#47 Carrion Ridge": {
+      "monsters": [ "Hound" ]
+    },
+    "#48 Blizzard Island": {
+      "monsters": [ "Hound" ]
+    },
+    "#49 Beneath Sea and Stone": {
+      "monsters": [ "Hound" ]
+    },
+    "#50 Explosive Descent": {
+      "monsters": [ "Hound" ]
+    },
+    "#51 Orphan's Halls": {
+      "monsters": [ "Hound" ]
+    },
+    "#52 Fleeting Permanence": {
+      "monsters": [ "Hound" ]
+    },
+    "#53 Underwater Throne": {
+      "monsters": [ "Hound" ]
+    },
+    "#54 Among the Wreckage": {
+      "monsters": [ "Hound" ]
+    },
+    "#55 Change of Heart": {
+      "monsters": [ "Hound" ]
+    },
+    "#56 Call of the Harbinger": {
+      "monsters": [ "Hound" ]
+    },
+    "#57 Sanctuary of Snow": {
+      "monsters": [ "Hound" ]
+    },
+    "#58 Orphan's Core": {
+      "monsters": [ "Hound" ]
+    },
+    "#59 Automaton Uprising": {
+      "monsters": [ "Hound" ]
+    },
+    "#60 Uniting the Crown": {
+      "monsters": [ "Hound" ]
+    },
+    "#61 Life and Death": {
+      "monsters": [ "Hound" ]
+    },
+    "#62 The Unfettered Seal": {
+      "monsters": [ "Hound" ]
+    },
+    "#63 The Savvas Seal": {
+      "monsters": [ "Hound" ]
+    },
+    "#64 The Frosthaven Seal": {
+      "monsters": [ "Hound" ]
+    },
+    "#65 A Strong Foundation": {
+      "monsters": [ "Hound" ]
+    },
+    "#66 Elemental Core": {
+      "monsters": [ "Hound" ]
+    },
+    "#67 Core Attunement": {
+      "monsters": [ "Hound" ]
+    },
+    "#68 The Face of Torment": {
+      "monsters": [ "Hound" ]
+    },
+    "#69 Sacred Soil": {
+      "monsters": [ "Hound" ]
+    },
+    "#70 The True Oak": {
+      "monsters": [ "Hound" ]
+    },
+    "#71 Invasion of the Dock": {
+      "monsters": [ "Hound" ]
+    },
+    "#72 A Giant Block of Ice": {
+      "monsters": [ "Hound" ]
+    },
+    "#73 Flotsam": {
+      "monsters": [ "Hound" ]
+    },
+    "#74 Gaps in the Road": {
+      "monsters": [ "Hound" ]
+    },
+    "#75 Infiltrating the Lair": {
+      "monsters": [ "Hound" ]
+    },
+    "#76 Apotheosis": {
+      "monsters": [ "Hound" ]
+    },
+    "#77 Fish King's Ascension": {
+      "monsters": [ "Hound" ]
+    },
+    "#78 The Lurker Problem": {
+      "monsters": [ "Hound" ]
+    },
+    "#79 Relic": {
+      "monsters": [ "Hound" ]
+    },
+    "#80 ???": {
+      "monsters": [ "Hound" ]
+    },
+    "#81 Ruinous Research Lab": {
+      "monsters": [ "Hound" ]
+    },
+    "#82 Expedition North": {
+      "monsters": [ "Hound" ]
+    },
+    "#83 Rising Brine": {
+      "monsters": [ "Hound" ]
+    },
+    "#84 Here There Be Oozes": {
+      "monsters": [ "Hound" ]
+    },
+    "#85 Deadly Pastimes": {
+      "monsters": [ "Hound" ]
+    },
+    "#86 Lady in White": {
+      "monsters": [ "Hound" ]
+    },
+    "#87 The Collection": {
+      "monsters": [ "Hound" ]
+    },
+    "#88 Collection's Capstone": {
+      "monsters": [ "Hound" ]
+    },
+    "#89 A Contained Fire": {
+      "monsters": [ "Hound" ]
+    },
+    "#90 Frozen Treasure": {
+      "monsters": [ "Hound" ]
+    },
+    "#91 Shoreline Scramble": {
+      "monsters": [ "Hound" ]
+    },
+    "#92 Sinking Ship": {
+      "monsters": [ "Hound" ]
+    },
+    "#93 Midwinter Brawl": {
+      "monsters": [ "Hound" ]
+    },
+    "#94 A Grand View": {
+      "monsters": [ "Hound" ]
+    },
+    "#95 To Bury the Dead": {
+      "monsters": [ "Hound" ]
+    },
+    "#96 Underground Station": {
+      "monsters": [ "Hound" ]
+    },
+    "#97 Program Control Nexus": {
+      "monsters": [ "Hound" ]
+    },
+    "#98 Collapsing Vent": {
+      "monsters": [ "Hound" ]
+    },
+    "#99 Prison Break": {
+      "monsters": [ "Hound" ]
+    },
+    "#100 Inside the Swarm": {
+      "monsters": [ "Hound" ]
+    },
+    "#101 Harrower Library": {
+      "monsters": [ "Hound" ]
+    },
+    "#102 Into the Black": {
+      "monsters": [ "Hound" ]
+    },
+    "#103 The Lead Door": {
+      "monsters": [ "Hound" ]
+    },
+    "#104 Ruins of the Solstice": {
+      "monsters": [ "Hound" ]
+    },
+    "#105 Ruins of the Equinox": {
+      "monsters": [ "Hound" ]
+    },
+    "#106 The Tempus Forge": {
+      "monsters": [ "Hound" ]
+    },
+    "#107 My Private Empire": {
+      "monsters": [ "Hound" ]
+    },
+    "#108 Lustrous Pit": {
+      "monsters": [ "Hound" ]
+    },
+    "#109 Furious Factory": {
+      "monsters": [ "Hound" ]
+    },
+    "#110 Guardian's Temple": {
+      "monsters": [ "Hound" ]
+    },
+    "#111 Ice Cave": {
+      "monsters": [ "Hound" ]
+    },
+    "#112 Raised by Wolves": {
+      "monsters": [ "Hound" ]
+    },
+    "#113 Lush Grotto": {
+      "monsters": [ "Hound" ]
+    },
+    "#114 Work Freeze": {
+      "monsters": [ "Hound" ]
+    },
+    "#115 Pylon Problems": {
+      "monsters": [ "Hound" ]
+    },
+    "#116 Caravan Guards": {
+      "monsters": [ "Hound" ]
+    },
+    "#117 A Waiting Game": {
+      "monsters": [ "Hound" ]
+    },
+    "#118 Lurker Necromancy": {
+      "monsters": [ "Hound" ]
+    },
+    "#119 Radiant Dust": {
+      "monsters": [ "Hound" ]
+    },
+    "#120 Under the Influence": {
+      "monsters": [ "Hound" ]
+    },
+    "#121 Black Memories": {
+      "monsters": [ "Hound" ]
+    },
+    "#122 The Eternal Crave": {
+      "monsters": [ "Hound" ]
+    },
+    "#123 The Titan": {
+      "monsters": [ "Hound" ]
+    },
+    "#124 A Growing Problem": {
+      "monsters": [ "Hound" ]
+    },
+    "#125 The Longest Second": {
+      "monsters": [ "Hound" ]
+    },
+    "#126 Joseph the Lion": {
+      "monsters": [ "Hound" ]
+    },
+    "#127 Derelict Freighter": {
+      "monsters": [ "Hound" ]
+    },
+    "#128 A Drunken Trail": {
+      "monsters": [ "Hound" ]
+    },
+    "#129 How to Lay an Ambush": {
+      "monsters": [ "Hound" ]
+    },
+    "#130 And Then, A Stream": {
+      "monsters": [ "Hound" ]
+    },
+    "#131 The Dancing Iceberg": {
+      "monsters": [ "Hound" ]
+    },
+    "#132 Temple of Feline Power": {
+      "monsters": [ "Hound" ]
+    },
+    "#133 Bolt": {
+      "monsters": [ "Hound" ]
+    },
+    "#134 Tower of Knowledge": {
+      "monsters": [ "Hound" ]
+    },
+    "#135 Belara's Keep": {
+      "monsters": [ "Hound" ]
+    },
+    "#136 Abandoned Hideout": {
+      "monsters": [ "Hound" ]
+    },
+    "#137 The Pirate Queen's Lair": {
       "monsters": [ "Hound" ]
     }
   },
