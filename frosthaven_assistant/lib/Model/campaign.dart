@@ -26,11 +26,6 @@ class CampaignModel {
     for (var item in monsterAbilities) {
       deckDataList.add(MonsterAbilityDeckModel.fromJson(item, edition));
     }
-    /*final monsters = data['monsters'] as List<dynamic>;
-    List<MonsterModel> monsterDataList = [];
-    for (var item in monsters) {
-      monsterDataList.add(MonsterModel.fromJson(item, edition));
-    }*/
 
     Map<String, MonsterModel> monsterMap = HashMap();
     final monsters = data['monsters'] as Map<dynamic, dynamic>;

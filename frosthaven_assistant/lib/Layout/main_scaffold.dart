@@ -10,6 +10,7 @@ import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'bottom_bar.dart';
+import 'loot_deck_widget.dart';
 import 'main_list.dart';
 import 'menus/main_menu.dart';
 
@@ -73,7 +74,15 @@ Widget createMainScaffold(BuildContext context) {
                           right: 0,
                           child: ModifierDeckWidget(
                             name: '',
-                          ))
+                          )),
+                  Positioned(
+                      bottom:  4 *
+                          getIt<Settings>()
+                              .userScalingBars
+                              .value,
+                      left: 20,
+                      child: const LootDeckWidget())
+
                 ],
               ),
               //floatingActionButton: const ModifierDeckWidget()

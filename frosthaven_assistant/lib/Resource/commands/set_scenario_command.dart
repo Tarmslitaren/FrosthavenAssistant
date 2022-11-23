@@ -10,6 +10,7 @@ import '../action_handler.dart';
 import '../enums.dart';
 import '../game_methods.dart';
 import '../game_state.dart';
+import '../loot_deck_state.dart';
 
 class SetScenarioCommand extends Command {
   final GameState _gameState = getIt<GameState>();
@@ -56,6 +57,18 @@ class SetScenarioCommand extends Command {
       _gameState.modifierDeck.initDeck("");
       _gameState.modifierDeckAllies.initDeck("Allies");
       _gameState.currentList = newList;
+
+
+      //loot deck init
+      if (_scenario != "custom") {
+        LootDeckModel? lootDeckModel = _gameState.modelData.value[_gameState
+            .currentCampaign.value]!.scenarios[_scenario]!.lootDeck;
+        if (lootDeckModel != null) {
+          _gameState.lootDeck = LootDeck(lootDeckModel, _gameState.lootDeck.hasCard1418, _gameState.lootDeck.hasCard1419);
+        } else {
+          _gameState.lootDeck = LootDeck.empty(_gameState.lootDeck.hasCard1418, _gameState.lootDeck.hasCard1419);
+        }
+      }
 
       GameMethods.clearTurnState(true);
     }

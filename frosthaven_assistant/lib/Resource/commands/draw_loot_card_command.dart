@@ -1,0 +1,27 @@
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
+
+import '../../services/service_locator.dart';
+import '../action_handler.dart';
+import '../game_state.dart';
+class DrawLootCardCommand extends Command {
+  final GameState _gameState = getIt<GameState>();
+
+  DrawLootCardCommand();
+
+  @override
+  void execute() {
+
+    if(_gameState.lootDeck != null && _gameState.lootDeck!.drawPile.isNotEmpty) {
+      _gameState.lootDeck!.draw();
+    }
+  }
+
+  @override
+  void undo() {
+  }
+
+  @override
+  String describe() {
+    return "Draw loot card";
+  }
+}

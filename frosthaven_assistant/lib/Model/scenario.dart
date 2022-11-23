@@ -1,5 +1,44 @@
 import 'dart:convert';
 
+class LootDeckModel {
+  final int lumber;
+  final int hide;
+  final int metal;
+  final int coin;
+  final int arrowvine;
+  final int corpsecap;
+  final int snowthistle;
+  final int axenut;
+  final int flamefruit;
+  final int rockroot;
+  final int treasure;
+  LootDeckModel(this.lumber, this.hide, this.metal, this.coin, this.arrowvine, this.corpsecap, this.snowthistle, this.axenut, this.flamefruit, this.rockroot, this.treasure);
+
+  static int _getValueFromJson(Map<String, dynamic> data, String value) {
+    if(data.containsKey(value)) {
+      return data[value];
+    }
+    return 0;
+  }
+
+  factory LootDeckModel.fromJson(Map<String, dynamic> data) {
+
+    return LootDeckModel(
+        _getValueFromJson(data, "lumber"),
+      _getValueFromJson(data, "hide"),
+      _getValueFromJson(data, "metal"),
+      _getValueFromJson(data, "coin"),
+      _getValueFromJson(data, "arrowvine"),
+      _getValueFromJson(data, "corpsecap"),
+      _getValueFromJson(data, "snowthistle"),
+      _getValueFromJson(data, "axenut"),
+      _getValueFromJson(data, "flamefruit"),
+      _getValueFromJson(data, "rockroot"),
+      _getValueFromJson(data, "treasure")
+    );
+  }
+}
+
 class SpecialRule {
   final String type;
   final String name;
@@ -44,6 +83,7 @@ class SpecialRule {
     return SpecialRule(type,name,health, level, init, note, aList, startOfRound);
   }
 
+  //is this used at all?
   @override
   String toString() {
     return '{'
@@ -61,9 +101,10 @@ class SpecialRule {
 
 
 class ScenarioModel {
-  ScenarioModel({required this.monsters, required this.specialRules});
+  ScenarioModel({required this.monsters, required this.specialRules, required this.lootDeck});
   List<String> monsters;
   List<SpecialRule> specialRules;
+  LootDeckModel? lootDeck;
   factory ScenarioModel.fromJson(Map<String, dynamic> data) {
     List<String> monsterList = [];
     if(data.containsKey('monsters')) {
@@ -79,8 +120,12 @@ class ScenarioModel {
         rulesList.add(SpecialRule.fromJson(rule));
       }
     }
+    LootDeckModel? lootDeck;
+    if(data.containsKey('lootDeck')) {
+      lootDeck = LootDeckModel.fromJson(data['lootDeck']);
+    }
 
-    return ScenarioModel(monsters: monsterList, specialRules: rulesList);
+    return ScenarioModel(monsters: monsterList, specialRules: rulesList, lootDeck: lootDeck);
   }
 
 }

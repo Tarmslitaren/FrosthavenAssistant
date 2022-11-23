@@ -17,6 +17,7 @@ import '../Model/character_class.dart';
 import '../Model/scenario.dart';
 import 'action_handler.dart';
 import 'enums.dart';
+import 'loot_deck_state.dart';
 import 'modifier_deck_state.dart';
 import 'monster_ability_state.dart';
 
@@ -386,6 +387,36 @@ class GameSaveState{
     _savedState = getIt<GameState>().toString();
   }
 
+  void loadLootDeck(var data) {
+    var lootDeckData = data["lootDeck"];
+    LootDeck state = LootDeck.empty(lootDeckData["1418"], lootDeckData["1419"]);
+    List<LootCard> newDrawList = [];
+    List drawPile = lootDeckData["drawPile"] as List;
+    for (var item in drawPile) {
+      String gfx = item["gfx"];
+      bool enhanced = item["enhanced"];
+      BaseValue baseValue = BaseValue.values[item["baseValue"]];
+      LootType lootType = LootType.values[item["lootType"]];
+      newDrawList.add(LootCard(gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType));
+    }
+    List<LootCard> newDiscardList = [];
+    for (var item in lootDeckData["discardPile"] as List) {
+      String gfx = item["gfx"];
+      bool enhanced = item["enhanced"];
+      BaseValue baseValue = BaseValue.values[item["baseValue"]];
+      LootType lootType = LootType.values[item["lootType"]];
+      newDiscardList.add(LootCard(gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType));
+    }
+    state.drawPile.getList().clear();
+    state.discardPile.getList().clear();
+    state.drawPile.setList(newDrawList);
+    state.discardPile.setList(newDiscardList);
+    state.cardCount.value = state.drawPile.size();
+
+    getIt<GameState>().lootDeck = state;
+
+  }
+
   void loadModifierDeck(String identifier, var data){
     //modifier deck
     String name  = "";
@@ -533,6 +564,7 @@ class GameSaveState{
 
       loadModifierDeck('modifierDeck', data);
       loadModifierDeck('modifierDeckAllies', data);
+      loadLootDeck(data);
 
       //////elements
       Map elementData = data['elementState'];
@@ -605,6 +637,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
 
   GameState() {
     init();
+    lootDeck = LootDeck.empty(false, false);
   }
 
   void init(){
@@ -677,6 +710,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   final solo = ValueNotifier<bool>(false);
   final scenario = ValueNotifier<String>("");
   List<SpecialRule> scenarioSpecialRules = []; //has both monsters and characters
+  late LootDeck lootDeck; //loot deck for current scenario
   final toastMessage = ValueNotifier<String>("");
 
   List<ListItemData> currentList = []; //has both monsters and characters
@@ -692,6 +726,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
 
   //unlocked characters
   Set<String> unlockedClasses = {};
+
 
   @override
   String toString() {
@@ -712,6 +747,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
         '"currentAbilityDecks": ${currentAbilityDecks.toString()}, '
         '"modifierDeck": ${modifierDeck.toString()}, '
         '"modifierDeckAllies": ${modifierDeckAllies.toString()}, '
+        '"lootDeck": ${lootDeck.toString()}, ' //does this work if null?
         '"unlockedClasses": ${jsonEncode(unlockedClasses.toList())}, '
         '"elementState": ${json.encode(elements)} '
         '}';
