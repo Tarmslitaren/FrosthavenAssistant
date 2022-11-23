@@ -158,7 +158,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                 builder: (context, value, child) {
 
                   LootDeck? deck = _gameState.lootDeck;
-                  if (deck.drawPile.isEmpty && deck.discardPile.isEmpty) {
+                  if (deck.drawPile.isEmpty && deck.discardPile.isEmpty || getIt<Settings>().hideLootDeck.value == true) {
                     return Container();
                   }
 

@@ -124,6 +124,16 @@ class SettingsMenuState extends State<SettingsMenu> {
                           getIt<GameState>().updateList.value++;
                         });
                       }),
+                  CheckboxListTile(
+                      title: const Text("Hide Loot Deck"),
+                      value: settings.hideLootDeck.value,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          settings.hideLootDeck.value = value!;
+                          settings.saveToDisk();
+                          getIt<GameState>().updateAllUI();
+                        });
+                      }),
                   if (!Platform.isIOS)
                     CheckboxListTile(
                         title: const Text("Fullscreen"),

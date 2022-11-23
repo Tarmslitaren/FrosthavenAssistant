@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
-import '../../services/network/network_info.dart';
 import '../services/network/network.dart';
 import '../services/service_locator.dart';
 
@@ -28,6 +27,7 @@ class Settings {
   final randomStandees = ValueNotifier<bool>(false);
   final noCalculation = ValueNotifier<bool>(false);
   final expireConditions = ValueNotifier<bool>(false);
+  final hideLootDeck = ValueNotifier<bool>(false);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -189,6 +189,9 @@ class Settings {
       if (data["noCalculation"] != null) {
         noCalculation.value = data["noCalculation"];
       }
+      if (data["hideLootDeck"] != null) {
+        hideLootDeck.value = data["hideLootDeck"];
+      }
       if (data["style"] != null) {
         style.value = Style.values[data["style"]];
       }
@@ -240,6 +243,7 @@ class Settings {
         '"randomStandees": ${randomStandees.value}, '
         '"noCalculation": ${noCalculation.value}, '
         '"expireConditions": ${expireConditions.value}, '
+        '"hideLootDeck": ${hideLootDeck.value}, '
         '"style": ${style.value.index}, '
         '"darkMode": ${darkMode.value}, '
         '"lastKnownConnection": "$lastKnownConnection", '
