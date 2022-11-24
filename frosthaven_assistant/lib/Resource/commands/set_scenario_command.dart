@@ -64,9 +64,9 @@ class SetScenarioCommand extends Command {
         LootDeckModel? lootDeckModel = _gameState.modelData.value[_gameState
             .currentCampaign.value]!.scenarios[_scenario]!.lootDeck;
         if (lootDeckModel != null) {
-          _gameState.lootDeck = LootDeck(lootDeckModel, _gameState.lootDeck.hasCard1418, _gameState.lootDeck.hasCard1419);
+          _gameState.lootDeck = LootDeck(lootDeckModel, _gameState.lootDeck);
         } else {
-          _gameState.lootDeck = LootDeck.empty(_gameState.lootDeck.hasCard1418, _gameState.lootDeck.hasCard1419);
+          _gameState.lootDeck = LootDeck.from(_gameState.lootDeck);
         }
       }
 

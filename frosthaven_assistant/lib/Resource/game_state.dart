@@ -389,13 +389,21 @@ class GameSaveState{
 
   void loadLootDeck(var data) {
     var lootDeckData = data["lootDeck"];
-    LootDeck state = LootDeck.empty(lootDeckData["1418"], lootDeckData["1419"]);
+    LootDeck state = LootDeck.empty();
+
+    state.hasCard1418 = lootDeckData["1418"];
+    state.hasCard1419 = lootDeckData["1419"];
+
+    state.metalEnhancements = List<bool>.from(lootDeckData['metalEnhancements']);
+    state.hideEnhancements = List<bool>.from(lootDeckData["hideEnhancements"]);
+    state.lumberEnhancements = List<bool>.from(lootDeckData["lumberEnhancements"]);
+
     List<LootCard> newDrawList = [];
     List drawPile = lootDeckData["drawPile"] as List;
     for (var item in drawPile) {
       String gfx = item["gfx"];
       bool enhanced = item["enhanced"];
-      BaseValue baseValue = BaseValue.values[item["baseValue"]];
+      LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
       LootType lootType = LootType.values[item["lootType"]];
       newDrawList.add(LootCard(gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType));
     }
@@ -403,7 +411,7 @@ class GameSaveState{
     for (var item in lootDeckData["discardPile"] as List) {
       String gfx = item["gfx"];
       bool enhanced = item["enhanced"];
-      BaseValue baseValue = BaseValue.values[item["baseValue"]];
+      LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
       LootType lootType = LootType.values[item["lootType"]];
       newDiscardList.add(LootCard(gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType));
     }
@@ -637,7 +645,6 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
 
   GameState() {
     init();
-    lootDeck = LootDeck.empty(false, false);
   }
 
   void init(){
@@ -679,7 +686,6 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
     await fetchCampaignData("Solo", map);
     //TODO:specify campaigns in data, or scrub the directory for files
 
-
     load(); //load saved state from file.
 
     modelData.value = map;
@@ -710,7 +716,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   final solo = ValueNotifier<bool>(false);
   final scenario = ValueNotifier<String>("");
   List<SpecialRule> scenarioSpecialRules = []; //has both monsters and characters
-  late LootDeck lootDeck; //loot deck for current scenario
+  late LootDeck lootDeck = LootDeck.empty(); //loot deck for current scenario
   final toastMessage = ValueNotifier<String>("");
 
   List<ListItemData> currentList = []; //has both monsters and characters

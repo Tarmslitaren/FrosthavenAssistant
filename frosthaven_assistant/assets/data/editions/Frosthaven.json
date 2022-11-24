@@ -4706,7 +4706,8 @@
         }]
     },
     "#2 Algox Scouting": {
-      "monsters": [ "Hound" ]
+      "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest", "Algox Scout" ],
+      "lootDeck": {"coin":4,"lumber": 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1}
     },
     "#3 Algox Offensive": {
       "monsters": [ "Hound" ]
@@ -4939,7 +4940,7 @@
     "#79 Relic": {
       "monsters": [ "Hound" ]
     },
-    "#80 ???": {
+    "#80 Relic Renewed": {
       "monsters": [ "Hound" ]
     },
     "#81 Ruinous Research Lab": {
