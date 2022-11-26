@@ -9,7 +9,7 @@ That means most of the functionality will be in one single screen, which makes i
 This is also an opportunity for me to learn the Flutter framework.
 
 ## Key features
-- Full support for Gloomhaven, Forgotten Circles, Jaws of the Lion and Crimson Scales!
+- Full support for Frosthaven, Gloomhaven, Forgotten Circles, Jaws of the Lion and Crimson Scales!
 - Characters
 - Monster ability decks
 - Monster Stat cards
@@ -32,6 +32,7 @@ This is also an opportunity for me to learn the Flutter framework.
 - Expire Conditions option
 - Share state between devices over wifi
 - Switch card styles between Gloomhaven and Frosthaven
+- Loot Deck for Frosthaven
 
 
 ## Usage:
@@ -69,6 +70,8 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Objectives and Escorts are special characters, representing special rules from scenarios.
 - If some special rules or monsters appear from an added section in the scenario/sections booklets, they can be added from the add sections menu.
 - If you make a mistake, there is an undo button in the main menu. and if the mistake was to undo, there is also redo ;)
+- If playing a Frosthaven Scenario,the loot decks have been predefined, and values are pre-calulated based on nr of characters.
+- To Enhance loot deck tap the loot deck discard pile to enter loot deck menu.
 - Networking:
   - To start a server, be sure to be on a wifi network and press 'start host server' from the settings menu
   - To connect to a server in a local network, type in the local ip of the server (usually 192.168.something) and press 'Connect as client'.
@@ -85,10 +88,9 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Local settings are not affected by the game state. It is up to the users to decide on options that affect the game.
 
 ## Known Issues:
-- Fullscreen switching button only work every other time you press it on macos build
 - Some animations will not play, (and some may play when they shouldn't) when receiving updates over wifi.
 - TCP connection only works over wifi as far as I can tell, and has not been tested in any other environment.
-- when trying to connect without a server on same network, may result in a lot of error messages shown when it tries connecting.
+- When trying to connect without a server on same network, may result in a lot of error messages shown when it tries connecting.
 - A device sharing a wifi-hotspot can not connect itself.
 - Undo and Redo is currently not supported when connected. sorry. Maybe next release.
 - Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself.
@@ -96,7 +98,6 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Condition Animations do not play when connected.
 - You can connect devices with different versions, but there will be issues. PLease update all your devices!
 - Objectives and Escorts do not update their 'level'/health when monster level is changed. Please set the correct monster level before setting a scenario.
-- Frosthaven Campaign is not fully added. Please start a 'custom' scenario and add monsters manually.
 
 ## Roadmap
 - Next:

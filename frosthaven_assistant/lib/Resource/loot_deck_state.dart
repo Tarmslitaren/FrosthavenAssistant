@@ -136,7 +136,7 @@ class LootDeck {
     }
 
     for (int i = 0; i < model.arrowvine; i++) {
-      _addOtherType(cards, "arrowVine");
+      _addOtherType(cards, "arrowvine");
     }
     for (int i = 0; i < model.corpsecap; i++) {
       _addOtherType(cards, "corpsecap");
