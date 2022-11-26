@@ -1215,7 +1215,6 @@
       ]
     },
     "Flaming Sword of Justice": {
-      "display": "City Guard",
       "gfx": "City Guard",
       "deck": "Guard (FH)",
       "hidden": true,
