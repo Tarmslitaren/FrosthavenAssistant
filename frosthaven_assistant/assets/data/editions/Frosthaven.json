@@ -990,7 +990,7 @@
       ]
     },
     {
-      "name": "Steel Automation",
+      "name": "Steel Automaton",
       "cards": [
         ["Calculated Strike", 618, true, 95,  "%move% - 1","*.........","%attack% + 1"],
         ["Heavy Footfalls", 619, false, 48,  "^All adjacent enemies suffer damage 1.", "*.........","%move% + 2","*.........","^All adjacent enemies suffer","^^hazardous terrain damage." ],
@@ -2881,50 +2881,43 @@
       "levels": [
         {
           "level": 0, "health": "10xCx3/2", "move": 4, "attack": 3, "attributes": [ "%muddle%" ], "immunities": [ "%wound%","%stun%"],
-          "special1": [ "%move% + 0", "*.........", "%attack% + C-4", "^%range% 4", "[r]", "%earth%%use%", "^%immobilize%", "[/r]", "*Create 1-hex hazardous terrain tiles", "*in all featureless hexes adjacent to", "*the target, and enemies in these hexes", "*suffer damage C-1", "[r]","%fire%%use%", "^+1 damage", "[/r]", "%light%"],
-          "special2": [ "%move% - 1", "*.........","%attack% + C-5", "^%curse%", "[r]","%air%%use%", "^+1 target", "[/r]", "*Create 1-hex icy terrain tiles in all", "*featureless hexes adjacent to the", "*targets of the attack", "%push% 1", "^target all,", "^%range% 1", "[r]", "%ice%%use%", "^+2 %push%", "[/r]"]
-        },
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]       },
         {
           "level": 1, "health": "12xCx3/2", "move": 4, "attack": 4, "attributes": [ "%muddle%" ], "immunities": [ "%wound%","%stun%"],
-          "special1": [ "%move% + 0", "*.........", "%attack% + C-4", "^%range% 4", "[r]", "%earth%%use%", "^%immobilize%", "[/r]", "*Create 1-hex hazardous terrain tiles", "*in all featureless hexes adjacent to", "*the target, and enemies in these hexes", "*suffer damage C-1", "[r]","%fire%%use%", "^+1 damage", "[/r]", "%light%"],
-          "special2": [ "%move% - 1", "*.........","%attack% + C-5", "^%curse%", "[r]","%air%%use%", "^+1 target", "[/r]", "*Create 1-hex icy terrain tiles in all", "*featureless hexes adjacent to the", "*targets of the attack", "%push% 1", "^target all,", "^%range% 1", "[r]", "%ice%%use%", "^+2 %push%", "[/r]"]
-
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
         },
         {
           "level": 2, "health": "14xCx3/2", "move": 4, "attack": 5, "attributes": [ "%muddle%" ], "immunities": [ "%wound%","%stun%"],
-          "special1": [ "%move% + 0", "*.........", "%attack% + C-4", "^%range% 4", "[r]", "%earth%%use%", "^%immobilize%", "[/r]", "*Create 1-hex hazardous terrain tiles", "*in all featureless hexes adjacent to", "*the target, and enemies in these hexes", "*suffer damage C-1", "[r]","%fire%%use%", "^+1 damage", "[/r]", "%light%"],
-          "special2": [ "%move% - 1", "*.........","%attack% + C-5", "^%curse%", "[r]","%air%%use%", "^+1 target", "[/r]", "*Create 1-hex icy terrain tiles in all", "*featureless hexes adjacent to the", "*targets of the attack", "%push% 1", "^target all,", "^%range% 1", "[r]", "%ice%%use%", "^+2 %push%", "[/r]"]
-
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
         },
         {
           "level": 3, "health": "18xCx3/2", "move": 5, "attack": 5, "attributes": [ "%muddle%" ], "immunities": [ "%wound%","%stun%"],
-          "special1": [ "%move% + 0", "*.........", "%attack% + C-4", "^%range% 4", "[r]", "%earth%%use%", "^%immobilize%", "[/r]", "*Create 1-hex hazardous terrain tiles", "*in all featureless hexes adjacent to", "*the target, and enemies in these hexes", "*suffer damage C-1", "[r]","%fire%%use%", "^+1 damage", "[/r]", "%light%"],
-          "special2": [ "%move% - 1", "*.........","%attack% + C-5", "^%curse%", "[r]","%air%%use%", "^+1 target", "[/r]", "*Create 1-hex icy terrain tiles in all", "*featureless hexes adjacent to the", "*targets of the attack", "%push% 1", "^target all,", "^%range% 1", "[r]", "%ice%%use%", "^+2 %push%", "[/r]"]
-
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
         },
         {
           "level": 4, "health": "21xCx3/2", "move": 5, "attack": 6, "attributes": [ "%muddle%" ], "immunities": [ "%wound%","%stun%"],
-          "special1": [ "%move% + 0", "*.........", "%attack% + C-4", "^%range% 4", "[r]", "%earth%%use%", "^%immobilize%", "[/r]", "*Create 1-hex hazardous terrain tiles", "*in all featureless hexes adjacent to", "*the target, and enemies in these hexes", "*suffer damage C-1", "[r]","%fire%%use%", "^+1 damage", "[/r]", "%light%"],
-          "special2": [ "%move% - 1", "*.........","%attack% + C-5", "^%curse%", "[r]","%air%%use%", "^+1 target", "[/r]", "*Create 1-hex icy terrain tiles in all", "*featureless hexes adjacent to the", "*targets of the attack", "%push% 1", "^target all,", "^%range% 1", "[r]", "%ice%%use%", "^+2 %push%", "[/r]"]
-
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
         },
         {
           "level": 5, "health": "26xCx3/2", "move": 5, "attack": 6, "attributes": [ "%muddle%" ], "immunities": [ "%wound%","%stun%"],
-          "special1": [ "%move% + 0", "*.........", "%attack% + C-4", "^%range% 4", "[r]", "%earth%%use%", "^%immobilize%", "[/r]", "*Create 1-hex hazardous terrain tiles", "*in all featureless hexes adjacent to", "*the target, and enemies in these hexes", "*suffer damage C-1", "[r]","%fire%%use%", "^+1 damage", "[/r]", "%light%"],
-          "special2": [ "%move% - 1", "*.........","%attack% + C-5", "^%curse%", "[r]","%air%%use%", "^+1 target", "[/r]", "*Create 1-hex icy terrain tiles in all", "*featureless hexes adjacent to the", "*targets of the attack", "%push% 1", "^target all,", "^%range% 1", "[r]", "%ice%%use%", "^+2 %push%", "[/r]"]
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
 
         },
         {
           "level": 6, "health": "33xCx3/2", "move": 5, "attack": 8, "attributes": [ "%muddle%" ],"immunities": ["%wound%","%stun%", "%curse%"],
-          "special1": [ "%move% + 0", "*.........", "%attack% + C-4", "^%range% 4", "[r]", "%earth%%use%", "^%immobilize%", "[/r]", "*Create 1-hex hazardous terrain tiles", "*in all featureless hexes adjacent to", "*the target, and enemies in these hexes", "*suffer damage C-1", "[r]","%fire%%use%", "^+1 damage", "[/r]", "%light%"],
-          "special2": [ "%move% - 1", "*.........","%attack% + C-5", "^%curse%", "[r]","%air%%use%", "^+1 target", "[/r]", "*Create 1-hex icy terrain tiles in all", "*featureless hexes adjacent to the", "*targets of the attack", "%push% 1", "^target all,", "^%range% 1", "[r]", "%ice%%use%", "^+2 %push%", "[/r]"]
-
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
         },
         {
           "level": 7, "health": "39xCx3/2", "move": 6, "attack": 9, "attributes": [ "%muddle%" ], "immunities": [ "%wound%","%stun%","%curse%"],
-          "special1": [ "%move% + 0", "*.........", "%attack% + C-4", "^%range% 4", "[r]", "%earth%%use%", "^%immobilize%", "[/r]", "*Create 1-hex hazardous terrain tiles", "*in all featureless hexes adjacent to", "*the target, and enemies in these hexes", "*suffer damage C-1", "[r]","%fire%%use%", "^+1 damage", "[/r]", "%light%"],
-          "special2": [ "%move% - 1", "*.........","%attack% + C-5", "^%curse%", "[r]","%air%%use%", "^+1 target", "[/r]", "*Create 1-hex icy terrain tiles in all", "*featureless hexes adjacent to the", "*targets of the attack", "%push% 1", "^target all,", "^%range% 1", "[r]", "%ice%%use%", "^+2 %push%", "[/r]"]
-
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
         }
       ]
     },
@@ -3727,8 +3720,8 @@
         }
       ]
     },
-    "Steel Automation": {
-      "deck": "Steel Automation",
+    "Steel Automaton": {
+      "deck": "Steel Automaton",
       "count": 4,
       "levels": [
         {
@@ -5137,7 +5130,7 @@
       "lootDeck": {"coin":4,"lumber": 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1}
     },
     "#3 Algox Offensive": {
-      "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest","Hound" ],
+      "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest","Hound (FH)" ],
       "lootDeck": {"coin":4,"lumber": 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1},
       "special": [
         {
@@ -5163,7 +5156,7 @@
       "lootDeck": {"coin":6,"lumber": 4,"metal":3,"hide": 1,"rockroot":2,"corpsecap":2}
     },
     "#6 Avalanche": {
-      "monsters": [ "Frost Demon", "Snow imp" ],
+      "monsters": [ "Frost Demon (FH)", "Snow Imp" ],
       "lootDeck": {"coin":9,"lumber": 4,"metal":1,"hide": 1,"snowthistle":2,"arrowvine":2, "axenut": 1}
     },
     "#7 Edge of the World": {
@@ -5171,11 +5164,11 @@
       "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 3,"axenut":1,"snowthistle":2}
     },
     "#8 Crystal Trench": {
-      "monsters": [ "Hound", "Polar Bear", "Snow Imp" ],
+      "monsters": [ "Hound (FH)", "Polar Bear", "Snow Imp" ],
       "lootDeck": {"coin":6,"lumber": 5,"hide": 5,"rockroot":1,"arrowvine":1, "snowthistle": 1}
     },
     "#9 Glowing Catacombs": {
-      "monsters": [ "Ice Wraith", "Living Doom","Living Spirit","Ooze" ],
+      "monsters": [ "Ice Wraith", "Living Doom","Living Spirit (FH)","Ooze (FH)" ],
       "lootDeck": {"coin":8,"lumber": 5,"metal":3,"rockroot":2,"corpsecap":1, "treasure": 1}
     },
     "#10 Crystal Enclosure": {
@@ -5200,15 +5193,15 @@
       ]
     },
     "#11 Snowscorn Peak": {
-      "monsters": [ "Algox Stormcaller", "Frost Demon", "Wind Demon" ],
+      "monsters": [ "Algox Stormcaller", "Frost Demon (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":6,"lumber": 4,"metal":3,"hide": 3,"flamefruit":1,"axenut":2, "treasure": 1}
     },
     "#12 Temple Entrance": {
-      "monsters": [ "Ancient Artillery", "Night Demon", "Steel Automaton" ],
+      "monsters": [ "Ancient Artillery (FH)", "Night Demon (FH)", "Steel Automaton" ],
       "lootDeck": {"coin":8,"lumber": 4,"metal":4,"rockroot":2,"corpsecap":1, "treasure": 1}
     },
     "#13 Frozen Fjord": {
-      "monsters": [ "Shrike Fiend", "Snow Imp", "Wind Demon" ],
+      "monsters": [ "Shrike Fiend", "Snow Imp", "Wind Demon (FH)" ],
       "lootDeck": {"coin":7,"lumber": 5,"hide": 3,"flamefruit": 1,"snowthistle":1,"arrowvine":2, "treasure": 1},
       "special": [
         {
@@ -5261,7 +5254,7 @@
       ]
     },
     "#16 Derelict Elevator": {
-      "monsters": [ "Ancient Artillery", "Flaming Bladespinner", "Ruined Machine" ],
+      "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine" ],
       "lootDeck": {"coin":8,"lumber": 4,"metal":5,"rockroot":2, "treasure": 1},
       "special": [
         {
@@ -5285,8 +5278,8 @@
       ]
 
     },
-    "17 Haunted Vault": {
-      "monsters": [ "Ice Wraith", "Living Doom", "Living Spirit" ],
+    "#17 Haunted Vault": {
+      "monsters": [ "Ice Wraith", "Living Doom", "Living Spirit (FH)" ],
       "lootDeck": {"coin":10,"lumber": 5,"metal":2,"corpsecap":2, "treasure": 1},
       "special": [
         {
@@ -5310,7 +5303,7 @@
       "lootDeck": {"coin":6,"lumber": 3,"metal":2,"hide": 5,"corpsecap":1,"arrowvine":2, "snowthistle": 1}
     },
     "#19 Skyhall": {
-      "monsters": [ "Earth Demon", "Flame Demon", "Ice Wraith" ],
+      "monsters": [ "Earth Demon (FH)", "Flame Demon (FH)", "Ice Wraith" ],
       "lootDeck": {"coin":11,"lumber": 2,"metal":2,"hide": 2,"rockroot":1,"corpsecap":1, "treasure": 1},
       "special": [
         {
@@ -5394,7 +5387,7 @@
       ]
     },
     "#21 Realm of Endless Frost": {
-      "monsters": [ "Prince of Frost", "Frost Demon", "Living Bones", "Living Spirit", "Snow Imp" ],
+      "monsters": [ "Prince of Frost", "Frost Demon (FH)", "Living Bones (FH)", "Living Spirit (FH)", "Snow Imp" ],
       "lootDeck": {"coin":6,"lumber": 4,"metal":3,"hide": 3,"flamefruit":1,"snowthistle":2, "treasure": 1}
     },
     "#22 Ice Floes": {
@@ -5402,11 +5395,11 @@
       "lootDeck": {"coin":10,"lumber": 5,"hide": 2,"arrowvine":2, "treasure": 1}
     },
     "#23 Spire Basement": {
-      "monsters": [ "Living Bones", "Living Doom", "Living Spirit" ],
+      "monsters": [ "Living Bones (FH)", "Living Doom", "Living Spirit (FH)" ],
       "lootDeck": {"coin":8,"lumber": 4,"metal":4,"flamefruit":1,"corpsecap":2, "treasure": 1}
     },
     "#24 Upper Spire": {
-      "monsters": [ "Chaos Demon", "Living Bones", "Wind Demon" ],
+      "monsters": [ "Chaos Demon (FH)", "Living Bones (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 2,"axenut":2,"flamefruit":1, "treasure": 1}
     },
     "#25 Rusted Tunnels": {
@@ -5414,7 +5407,7 @@
       "lootDeck": {"coin":10,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":1}
     },
     "#26 Quatryl Library": {
-      "monsters": [ "Ancient Artillery", "Ruined Machine", "Steel Automaton" ],
+      "monsters": [ "Ancient Artillery (FH)", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":10,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":2},
       "special": [
         {
@@ -5426,7 +5419,7 @@
       ]
     },
     "#27 Depths of Delirium": {
-      "monsters": [ "Deep Terror", "Living Bones", "Ooze" ],
+      "monsters": [ "Deep Terror (FH)", "Living Bones (FH)", "Ooze (FH)" ],
       "lootDeck": {"coin":13,"lumber": 2,"metal":2,"hide": 2, "treasure": 1},
       "note": "all altars have L+2 hitpoints. no altar in first room (sections 95.1, 68.3, 69.2, 148.?, 71.5)"
     },
@@ -5513,7 +5506,7 @@
       "lootDeck": {"coin":11,"lumber": 2,"metal":3,"rockroot":2,"arrowvine":1, "flamefruit": 1}
     },
     "#32 Raven's Roost": {
-      "monsters": [ "Frozen Corpse","Harrower Infester", "Shrike Fiend" ],
+      "monsters": [ "Frozen Corpse","Harrower Infester (FH)", "Shrike Fiend" ],
       "lootDeck": {"coin":7,"lumber": 5,"hide": 3,"axenut":2,"flamefruit":2, "treasure": 1},
       "special": [
         {
@@ -5531,14 +5524,14 @@
         ]
     },
     "#33 Thawed Wood": {
-      "monsters": [ "Black Imp", "Earth Demon", "Flame Demon", "Shrike Fiend" ],
+      "monsters": [ "Black Imp (FH)", "Earth Demon (FH)", "Flame Demon (FH)", "Shrike Fiend" ],
       "lootDeck": {"coin":8,"lumber": 5,"hide": 3,"rockroot":1,"flamefruit":2, "axenut": 2}
     },
     "#34 Top of the Spire": {
       "monsters": [ "Lord of Chaos" ]
     },
     "#35 Scrap Pit": {
-      "monsters": [ "Living Bones", "Ruined Machine", "Spitting Drake" ],
+      "monsters": [ "Living Bones (FH)", "Ruined Machine", "Spitting Drake (FH)" ],
       "lootDeck": {"coin":7,"lumber": 5,"metal":5,"hide": 2,"rockroot":2, "treasure": 1},
       "special": [
         {
@@ -5646,11 +5639,11 @@
       ]
     },
     "#37 The Dead Mile": {
-      "monsters": [ "Living Bones", "Living Spirit" ,"Ruined Machine" ],
+      "monsters": [ "Living Bones (FH)", "Living Spirit (FH)" ,"Ruined Machine" ],
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"rockroot":1,"arrowvine":2, "treasure": 1}
     },
     "#38 The Way Forward": {
-      "monsters": [ "Hound", "Polar Bear", "Sun Demon" ],
+      "monsters": [ "Hound (FH)", "Polar Bear", "Sun Demon (FH)" ],
       "lootDeck": {"coin":8,"lumber": 5,"hide": 3,"axenut":2,"arrowvine":1, "treasure": 1},
       "special": [
         {
@@ -5668,7 +5661,7 @@
       ]
     },
     "#39 Corrupted Camp": {
-      "monsters": [ "Algox Guard", "Algox Scout", "Black Imp", "Deep Terror", "Frozen Corpse" ],
+      "monsters": [ "Algox Guard", "Algox Scout", "Black Imp (FH)", "Deep Terror (FH)", "Frozen Corpse" ],
       "lootDeck": {"coin":10,"lumber": 4,"metal":2,"hide": 3,"flamefruit":1,"snowthistle":2},
       "special": [
         {
@@ -5689,7 +5682,7 @@
         }]
     },
     "#40 Relief Effort": {
-      "monsters": [ "Algox Archer", "Algox Guard", "Flaming Bladespinner", "Ruined Machine", "´Steel Automaton" ],
+      "monsters": [ "Algox Archer", "Algox Guard", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":10,"lumber": 3,"metal":4,"hide": 2,"rockroot":1,"arrowvine":2},
       "special": [
         {
@@ -5698,7 +5691,7 @@
         }]
     },
     "#41 Unfettered Shard": {
-      "monsters": [ "Deep Terror", "Living Doom", "Living Spirit", "Night Demon" ],
+      "monsters": [ "Deep Terror (FH)", "Living Doom", "Living Spirit (FH)", "Night Demon (FH)" ],
       "lootDeck": {"coin":9,"lumber": 2,"metal":2,"hide": 2,"rockroot":2,"corpsecap":2, "treasure": 1},
       "special": [
         {
@@ -5709,7 +5702,7 @@
         }]
     },
     "#42 Sunless Trench": {
-      "monsters": [ "Deep Terror", "Night Demon", "Ooze" ],
+      "monsters": [ "Deep Terror (FH)", "Night Demon (FH)", "Ooze (FH)" ],
       "lootDeck": {"coin":12,"lumber": 2,"metal":3,"flamefruit":1,"snowthistle":1, "treasure": 1}
     },
     "#43 Overrun Barricade": {
@@ -5717,13 +5710,13 @@
       "lootDeck": {"coin":8,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":2, "treasure": 1}
     },
     "#44 Nerve Center": {
-      "monsters": [ "Ancient Artillery", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
+      "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":8,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":2, "treasure": 1},
       "special": [
         {
           "type": "Objective",
           "name": "Metal Cabinet 1",
-          "health": "Cx(L+3)2",
+          "health": "Cx(L+3)/2",
           "note": "more cabinets later on: 52.1"
         }
       ]
@@ -5737,7 +5730,7 @@
       "lootDeck": {"coin":9,"lumber": 3,"metal":3,"hide": 3,"rockroot":1,"corpsecap":1}
     },
     "#47 Carrion Ridge": {
-      "monsters": [ "Algox Icespeaker", "Harrower Infester", "Shrike Fiend" ],
+      "monsters": [ "Algox Icespeaker", "Harrower Infester (FH)", "Shrike Fiend" ],
       "lootDeck": {"coin":7,"lumber": 5,"metal":2,"hide": 2,"rockroot":2,"flamefruit":2},
       "special": [
         {
@@ -5748,11 +5741,11 @@
         }]
     },
     "#48 Blizzard Island": {
-      "monsters": [ "Abael Scout", "Frost Demon", "Wind Demon" ],
+      "monsters": [ "Abael Scout", "Frost Demon (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":7,"lumber": 2,"metal":2,"hide": 5,"corpsecap":2,"snowthistle":2}
     },
     "#49 Beneath Sea and Stone": {
-      "monsters": [ "Black Imp", "Deep Terror", "Frost Demon" ],
+      "monsters": [ "Black Imp (FH)", "Deep Terror (FH)", "Frost Demon (FH)" ],
       "lootDeck": {"coin":13, "metal":3,"hide": 2,"snowthistle":2}
     },
     "#50 Explosive Descent": {
@@ -5781,7 +5774,7 @@
           "type": "Timer",
           "list": [5],
           "startOfRound": true,
-          "note": "Spawn 1 Lighting Eel at e. Normal for 2 characters, elite for 3-4. Also spawn 2 Lightning Eels at g. Normal for 2-3 characters, elite for 4."
+          "note": "Spawn 1 Lightning Eel at e. Normal for 2 characters, elite for 3-4. Also spawn 2 Lightning Eels at g. Normal for 2-3 characters, elite for 4."
         },
         {
           "type": "Timer",
@@ -5833,11 +5826,11 @@
       ]
     },
     "#51 Orphan's Halls": {
-      "monsters": [ "Ancient Artillery", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
+      "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":12,"lumber": 2,"metal":4,"flamefruit":1,"arrowvine":1}
     },
     "#52 Fleeting Permanence": {
-      "monsters": [ "Frost Demon", "Snow Imp" ],
+      "monsters": [ "Frost Demon (FH)", "Snow Imp" ],
       "lootDeck": {"coin":6,"lumber":2,"metal":2,"hide": 5,"corpsecap":2,"snowthistle":2, "treasure": 1}
     },
     "#53 Underwater Throne": {
@@ -5853,7 +5846,7 @@
         ]
     },
     "#54 Among the Wreckage": {
-      "monsters": [ "Seeker of the Abyss", "Lighting Eel", "Lurker Clawcrusher", "Lurker Mindsnipper", "Lurker Soldier", "Lurker Wavethrower" ],
+      "monsters": [ "Seeker of the Abyss", "Lightning Eel", "Lurker Clawcrusher", "Lurker Mindsnipper", "Lurker Soldier", "Lurker Wavethrower" ],
       "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 3,"axenut":2,"arrowvine":2, "treasure": 1}
     },
     "#55 Change of Heart": {
@@ -5861,7 +5854,7 @@
       "lootDeck": {"coin":3,"lumber": 2,"metal":4,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1}
     },
     "#56 Call of the Harbinger": {
-      "monsters": [ "Harbinger of Shadow", "Black Imp", "Harrower Infester", "Shrike Fiend" ],
+      "monsters": [ "Harbinger of Shadow", "Black Imp (FH)", "Harrower Infester (FH)", "Shrike Fiend" ],
       "lootDeck": {"coin":6,"lumber": 5,"metal":2,"hide": 2,"rockroot":2,"flamefruit":2},
       "special": [
         {
@@ -5873,7 +5866,7 @@
       ]
     },
     "#57 Sanctuary of Snow": {
-      "monsters": [ "Render", "Wind Demon" ],
+      "monsters": [ "Render", "Wind Demon (FH)" ],
       "special": [
         {
           "type": "Timer",
@@ -5943,7 +5936,7 @@
       "note": "didn't bother to make 3 fractured lieutenants (only +1 attack anyway)"
     },
     "#61 Life and Death": {
-      "monsters": [ "Deep Terror", "Earth Demon", "Harrower Infester" ],
+      "monsters": [ "Deep Terror (FH)", "Earth Demon (FH)", "Harrower Infester (FH)" ],
       "lootDeck": {"coin":5,"lumber": 4,"metal":4,"hide": 4,"rockroot":2,"corpsecap":2, "treasure": 1},
       "special": [
         {
@@ -5955,7 +5948,7 @@
       ]
     },
     "#62 The Unfettered Seal": {
-      "monsters": [ "Black imp", "Chaos Demon", "Harrower Infester" ],
+      "monsters": [ "Black Imp (FH)", "Chaos Demon (FH)", "Harrower Infester (FH)" ],
       "lootDeck": {"coin":5,"lumber": 4,"metal":4,"hide": 4,"snowthistle":2,"arrowvine":2, "treasure": 1},
       "special": [
         {
@@ -5973,7 +5966,7 @@
       ]
     },
     "#63 The Savvas Seal": {
-      "monsters": [ "Earth Demon", "Flame Demon", "Frost Demon", "Savvas Icestorm", "Savvas Lavaflow", "Wind Demon" ],
+      "monsters": [ "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Savvas Icestorm (FH)", "Savvas Lavaflow (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":5,"lumber": 4,"metal":4,"hide": 4,"rockroot":2,"corpsecap":2, "treasure": 1},
       "special": [
         {
@@ -6009,12 +6002,12 @@
       ]
     },
     "#64 The Frosthaven Seal": {
-      "monsters": [ "Vestige of the Imprisoned God", "Burrowing Blade", "City Guard", "Living Doom", "Living Spirit" ,"Shrike Fiend" ],
+      "monsters": [ "Vestige of the Imprisoned God", "Burrowing Blade", "City Guard (FH)", "Living Doom", "Living Spirit (FH)" ,"Shrike Fiend" ],
       "lootDeck": {"coin":5,"lumber": 4,"metal":4,"hide": 4,"axenut":2,"flamefruit":2, "treasure": 1},
       "special": [
         {
           "type": "allies",
-          "list": ["City Guard"]
+          "list": ["City Guard (FH)"]
         },
         {
           "type": "Escort",
@@ -6145,15 +6138,15 @@
       ]
     },
     "#65 A Strong Foundation": {
-      "monsters": [ "Frozen Corpse", "Ice Wraith", "Living Bones", "Snow Imp" ],
+      "monsters": [ "Frozen Corpse", "Ice Wraith", "Living Bones (FH)", "Snow Imp" ],
       "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 4,"snowthistle":2,"arrowvine":2}
     },
     "#66 Elemental Cores": {
-      "monsters": [ "Earth Demon", "Flame Demon", "Frost Demon", "Night Demon", "Sun Demon", "Wind Demon" ],
+      "monsters": [ "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Night Demon (FH)", "Sun Demon (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":12,"lumber": 2,"metal":2,"hide": 2,"rockroot":1,"arrowvine":1, "axenut": 1, "flamefruit": 1, "snowthistle": 1, "corpsecap": 1}
     },
     "#67 Core Attunement": {
-      "monsters": [ "Chaos Demon","Earth Demon", "Flame Demon", "Frost Demon", "Night Demon", "Sun Demon", "Wind Demon"],
+      "monsters": [ "Chaos Demon (FH)","Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Night Demon (FH)", "Sun Demon (FH)", "Wind Demon (FH)"],
       "lootDeck": {"coin":8,"lumber": 3,"metal":3,"hide": 3,"treasure": 1},
       "special": [
         {
@@ -6219,7 +6212,7 @@
         ]
     },
     "#68 The Face of Torment": {
-      "monsters": [ "Tormentor", "Chaos Demon","Earth Demon", "Flame Demon", "Frost Demon", "Night Demon", "Sun Demon", "Wind Demon" ],
+      "monsters": [ "Tormentor", "Chaos Demon (FH)","Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Night Demon (FH)", "Sun Demon (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"lumber": 5,"metal":5,"hide": 5, "treasure": 1},
       "special": [
         {
@@ -6267,11 +6260,11 @@
       ]
     },
     "#69 Sacred Soil": {
-      "monsters": [ "Earth Demon", "Forest Imp", "Rending Drake" ],
+      "monsters": [ "Earth Demon (FH)", "Forest Imp (FH)", "Rending Drake (FH)" ],
       "lootDeck": {"coin":8,"lumber": 5,"hide": 4,"axenut":2,"flamefruit":1}
     },
     "#70 The True Oak": {
-      "monsters": [ "City Guard", "Hound", "Sun Demon" ],
+      "monsters": [ "City Guard (FH)", "Hound (FH)", "Sun Demon (FH)" ],
       "lootDeck": {"coin":7,"lumber": 5,"hide": 3,"axenut":2,"flamefruit":2, "treasure": 1},
       "special": [
         {
@@ -6282,7 +6275,7 @@
         }]
     },
     "#71 Invasion of the Dock": {
-      "monsters": [ "Abael Scout", "Lighting Eel", "Lurker Clawcrusher", "Lurker Mindsnipper", "Lurker Wavethrower", "Piranha Pig" ],
+      "monsters": [ "Abael Scout", "Lightning Eel", "Lurker Clawcrusher", "Lurker Mindsnipper", "Lurker Wavethrower", "Piranha Pig" ],
       "lootDeck": {"coin":8,"lumber": 4,"metal":4,"hide": 4},
       "special": [
         {
@@ -6297,7 +6290,7 @@
         }]
     },
     "#72 A Giant Block of Ice": {
-      "monsters": [ "Frozen Corpse", "Ice Wraith", "Living Bones", "Steel Automaton" ],
+      "monsters": [ "Frozen Corpse", "Ice Wraith", "Living Bones (FH)", "Steel Automaton" ],
       "lootDeck": {"coin":9,"lumber": 3,"metal":5,"corpsecap":2, "treasure": 1}
     },
     "#73 Flotsam": {
@@ -6305,7 +6298,7 @@
       "lootDeck": {"coin":9,"lumber": 5,"hide": 3,"flamefruit":1,"arrowvine":2}
     },
     "#74 Gaps in the Road": {
-      "monsters": [ "Algox Archer", "Algox Guard" ,"Algox Priest", "Forest Imp", "Piranha Pig", "Wind Demon" ],
+      "monsters": [ "Algox Archer", "Algox Guard" ,"Algox Priest", "Forest Imp (FH)", "Piranha Pig", "Wind Demon (FH)" ],
       "lootDeck": {"coin":4,"lumber": 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1},
       "note": "more trees in sections? 55.2",
       "special": [
@@ -6321,7 +6314,7 @@
         }]
     },
     "#75 Infiltrating the Lair": {
-      "monsters": [ "Abael Herder", "Abael Scout", "Chaos Demon", "Frost Demon", "Lightning Eel", "Piranha Pig" ],
+      "monsters": [ "Abael Herder", "Abael Scout", "Chaos Demon (FH)", "Frost Demon (FH)", "Lightning Eel", "Piranha Pig" ],
       "lootDeck": {"coin":8,"metal":2,"hide": 5,"axenut":1,"snowthistle":2, "treasure": 1}
     },
     "#76 Apotheosis": {
@@ -6352,7 +6345,7 @@
         }]
     },
     "#77 Fish King's Ascension": {
-      "monsters": [ "Fish King", "Frost Demon", "Night Demon", "Piranha Pig" ,"Wind Demon" ],
+      "monsters": [ "Fish King", "Frost Demon (FH)", "Night Demon (FH)", "Piranha Pig" ,"Wind Demon (FH)" ],
       "lootDeck": {"coin":4,"lumber": 2,"metal":2,"hide": 2,"corpsecap":2,"flamefruit":2, "treasure": 1}
     },
     "#78 The Lurker Problem": {
@@ -6364,7 +6357,7 @@
       "lootDeck": {"coin":8,"lumber": 3,"metal":5,"hide": 2,"corpsecap":2}
     },
     "#80 Relic Renewed": {
-      "monsters": [ "Relic", "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
+      "monsters": [ "The Relic", "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":8,"lumber": 2,"metal":3,"hide": 2,"rockroot":1,"axenut":1, "treasure": 1},
       "special": [
         {
@@ -6393,7 +6386,7 @@
         }]
     },
     "#81 Ruinous Research Lab": {
-      "monsters": [ "Aesther Ashblade", "Aesther Scout", "Ancient Artillery", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
+      "monsters": [ "Aesther Ashblade", "Aesther Scout", "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":9,"lumber": 2,"metal":5,"hide": 2,"rockroot":1,"treasure": 1},
       "special": [
         {
@@ -6425,7 +6418,7 @@
       ]
     },
     "#82 Expedition North": {
-      "monsters": [ "Frost Demon", "Wind Demon" ],
+      "monsters": [ "Frost Demon (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":12,"rockroot":1,"arrowvine":1,"snowthistle":1, "treasure": 1},
      "note": "I don't understand the moving corridors at all.",
       "special": [
@@ -6456,19 +6449,19 @@
       ]
     },
     "#83 Rising Brine": {
-      "monsters": [ "Giant Piranha Pig","Ancient Artillery", "Lurker Mindsnipper", "Piranha Pig" ],
+      "monsters": [ "Giant Piranha Pig","Ancient Artillery (FH)", "Lurker Mindsnipper", "Piranha Pig" ],
       "lootDeck": {"coin":7,"lumber": 3,"metal":3,"hide": 3,"flamefruit":1,"arrowvine":2, "snowthistle": 1}
     },
     "#84 Here There Be Oozes": {
-      "monsters": [ "Elder Ooze", "Ooze" ],
+      "monsters": [ "Elder Ooze", "Ooze (FH)" ],
       "lootDeck": {"coin":15,"lumber": 3,"metal":3,"corpsecap":2, "treasure": 1}
     },
     "#85 Deadly Pastimes": {
-      "monsters": [ "Black Imp", "Burrowing Blade", "Lightning Eel", "Polar Bear" ],
+      "monsters": [ "Black Imp (FH)", "Burrowing Blade", "Lightning Eel", "Polar Bear" ],
       "lootDeck": {"coin":7,"lumber": 2,"metal":3,"hide": 4,"rockroot":2,"snowthistle":2, "treasure": 1}
     },
     "#86 Lady in White": {
-      "monsters": [ "Black Imp", "Earth Demon", "Ice Wraith" ],
+      "monsters": [ "Black Imp (FH)", "Earth Demon (FH)", "Ice Wraith" ],
       "note": "miniboss lady in white? section 6.3 and more trees...",
       "lootDeck": {"coin":10,"lumber": 4,"hide": 2,"axenut":1,"arrowvine":2, "flamefruit": 1},
       "special": [
@@ -6491,12 +6484,12 @@
         }]
     },
     "#88 Collection's Capstone": {
-      "monsters": [ "The Collector", "Earth Demon", "Flame Demon", "Frost Demon", "Lurker Clawcrusher", "Savvas Icestorm", "Savvas Lavaflow", "Wind Demon" ],
+      "monsters": [ "The Collector", "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Lurker Clawcrusher", "Savvas Icestorm (FH)", "Savvas Lavaflow (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":8,"lumber": 3,"metal":4,"hide": 2,"rockroot":1,"corpsecap":1, "treasure": 1}
     },
     "#89 A Contained Fire": {
       "note": "probalby miniboss section 83.1",
-      "monsters": [ "Algox Archer", "algox Guard", "Algox Icespeaker", "Algox Priest" ],
+      "monsters": [ "Algox Archer", "Algox Guard", "Algox Icespeaker", "Algox Priest" ],
       "lootDeck": {"coin":10,"lumber": 2,"metal":2,"hide": 2,"flamefruit":1,"arrowvine":2, "treasure": 1}
     },
     "#90 Frozen Treasure": {
@@ -6553,7 +6546,7 @@
       ]
     },
     "#93 Midwinter Brawl A": {
-      "monsters": [ "Algox Archer", "Algox Guard", "Algox Scout", "Yoglang", "Hound", "Polar Bear", "Scabwit", "Vermling Scout" ],
+      "monsters": [ "Algox Archer", "Algox Guard", "Algox Scout", "Yoglang", "Hound (FH)", "Polar Bear", "Scabwit", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":9,"lumber": 4,"metal":2,"hide": 2,"axenut":1,"flamefruit":1, "treasure": 1},
       "special": [
         {
@@ -6581,7 +6574,7 @@
       ]
     },
     "#93 Midwinter Brawl B": {
-      "monsters": [ "Algox Archer", "Algox Guard", "Algox Scout", "Yoglang", "Hound", "Polar Bear", "Scabwit", "Vermling Scout" ],
+      "monsters": [ "Algox Archer", "Algox Guard", "Algox Scout", "Yoglang", "Hound (FH)", "Polar Bear", "Scabwit", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":9,"lumber": 4,"metal":2,"hide": 2,"axenut":1,"flamefruit":1, "treasure": 1},
       "special": [
         {
@@ -6609,7 +6602,7 @@
       ]
     },
     "#94 A Grand View": {
-      "monsters": [ "Ancient Artillery", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton", "Vermling Scout" ],
+      "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":9,"lumber": 3,"metal":5,"rockroot":1,"arrowvine":1, "treasure": 1},
       "special": [
         {
@@ -6627,7 +6620,7 @@
       ]
     },
     "#95 To Bury the Dead": {
-      "monsters": [ "Ice Wraith", "Living Bones", "Living Doom", "Living Spirit" ],
+      "monsters": [ "Ice Wraith", "Living Bones (FH)", "Living Doom", "Living Spirit (FH)" ],
       "lootDeck": {"coin":8,"lumber": 4,"metal":2,"corpsecap":2,"snowthistle":2},
       "special": [
         {
@@ -6638,7 +6631,7 @@
         }]
     },
     "#96 Underground Station": {
-      "monsters": [ "Ancient Artillery", "Black Imp", "Rending Drake" ],
+      "monsters": [ "Ancient Artillery (FH)", "Black Imp (FH)", "Rending Drake (FH)" ],
       "lootDeck": {"coin":14,"lumber": 1,"metal":3,"axenut": 1,"rockroot":1},
       "special": [
         {
@@ -6660,7 +6653,7 @@
         }]
     },
     "#98 Collapsing Vent": {
-      "monsters": [ "Ancient Artillery", "Black Imp", "Burrowing Blade", "Spitting Drake" ],
+      "monsters": [ "Ancient Artillery (FH)", "Black Imp (FH)", "Burrowing Blade", "Spitting Drake (FH)" ],
       "lootDeck": {"coin":10,"lumber": 1,"metal":4,"hide": 3,"rockroot":2}
     },
     "#99 Prison Break": {
@@ -6668,7 +6661,7 @@
       "lootDeck": {"coin":10,"lumber": 2,"metal":4,"hide": 2,"arrowvine":2}
     },
     "#100 Inside the Swarm": {
-      "monsters": [ "Burrowing Blade", "Earth Demon", "Lurker Mindsnipper", "Shrike Fiend" ],
+      "monsters": [ "Burrowing Blade", "Earth Demon (FH)", "Lurker Mindsnipper", "Shrike Fiend" ],
       "lootDeck": {"coin":15}
     },
     "#101 Harrower Library": {
@@ -6677,11 +6670,11 @@
     },
     "#102 Into the Black": {
       "note": "most likely a named monster in section",
-      "monsters": [ "Chaos Demon", "Frost Demon", "Living Spirit", "Night Demon", "Savvas Icestorm", "Wind Demon" ],
+      "monsters": [ "Chaos Demon (FH)", "Frost Demon (FH)", "Living Spirit (FH)", "Night Demon (FH)", "Savvas Icestorm (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":15}
     },
     "#103 The Lead Door": {
-      "monsters": [ "Living Doom", "Living Spirit", "Lurker Clawcrusher", "Shrike Fiend" ],
+      "monsters": [ "Living Doom", "Living Spirit (FH)", "Lurker Clawcrusher", "Shrike Fiend" ],
       "lootDeck": {"coin":15, "treasure": 1},
       "special": [
         {
@@ -6723,7 +6716,7 @@
       ]
     },
     "#104 Ruins of the Solstice": {
-      "monsters": [ "Earth Demon", "Forest Imp", "Frost Demon", "Savvas Icestorm", "Wind Demon" ],
+      "monsters": [ "Earth Demon (FH)", "Forest Imp (FH)", "Frost Demon (FH)", "Savvas Icestorm (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"hide": 2,"axenut":1,"snowthistle":1},
       "special": [
         {
@@ -6734,7 +6727,7 @@
         }]
     },
     "#105 Ruins of the Equinox": {
-      "monsters": [ "Earth Demon", "Flame Demon", "Rending Drake", "Savvas Lavaflow", "Wind Demon" ],
+      "monsters": [ "Earth Demon (FH)", "Flame Demon (FH)", "Rending Drake (FH)", "Savvas Lavaflow (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"hide": 2,"corpsecap":1,"flamefruit":1},
       "special": [
         {
@@ -6758,11 +6751,11 @@
     },
     "#106 The Tempus Forge": {
       "note:" : "altar objectives (L+2)xC/2 in sections: 8.1, 184.4, 189.2,183.1,29.2",
-      "monsters": [ "City Guard", "Earth Demon", "Flame Demon", "Frost Demon", "Wind Demon" ],
+      "monsters": [ "City Guard (FH)", "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":7,"lumber": 2,"metal":4,"hide":2,"rockroot":2,"arrowvine":2, "treasure": 1}
     },
     "#107 My Private Empire": {
-      "monsters": [ "Flaming Bladespinner", "Living Bones", "Living Doom", "Living Spirit", "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
+      "monsters": [ "Flaming Bladespinner", "Living Bones (FH)", "Living Doom", "Living Spirit (FH)", "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"flamefruit":1,"axenut":1,"arrowvine":1, "treasure": 1}
     },
     "#108 Lustrous Pit": {
@@ -6771,11 +6764,11 @@
     },
     "#109 Furious Factory": {
       "note": "sections, possibly miniboss + metal cabinet (2+L)xC/2: 195.2,166.3, 186.2,162.1,175.5,72.3",
-      "monsters": [ "Ancient Artillery", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
+      "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":11,"lumber": 2,"metal":4,"rockroot":2,"flamefruit":1}
     },
     "#110 Guardian's Temple": {
-      "monsters": [ "Living Doom", "Living Spirit", "Ruined Machine", "Shrike Fiend" ],
+      "monsters": [ "Living Doom", "Living Spirit (FH)", "Ruined Machine", "Shrike Fiend" ],
       "lootDeck": {"coin":6,"lumber": 2,"metal":3,"hide": 2,"rockroot":1,"corpsecap":1},
       "special": [
         {
@@ -6818,7 +6811,7 @@
       ]
     },
     "#111 Ice Cave": {
-      "monsters": [ "Frost Demon", "Hound", "Night Demon", "Savvas Icestorm", "Wind Demon" ],
+      "monsters": [ "Frost Demon (FH)", "Hound (FH)", "Night Demon (FH)", "Savvas Icestorm (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":10,"lumber": 1,"metal":3,"hide": 3,"corpse":1,"arrowvine":2, "treasure": 1},
       "special": [
         {
@@ -6829,7 +6822,7 @@
         }]
     },
     "#112 Raised by Wolves": {
-      "monsters": ["Burrowing Blade", "Chaos Demon","Earth Demon", "Hound Scenario 112" ],
+      "monsters": ["Burrowing Blade", "Chaos Demon (FH)","Earth Demon (FH)", "Hound Scenario 112" ],
       "lootDeck": {"coin":8,"lumber": 1,"metal":3,"hide": 5,"rockroot":1,"axenut":2},
       "note": "sections: make sure there are no normal hounds in scenario 97.1",
       "special": [
@@ -6839,11 +6832,11 @@
         }]
     },
     "#113 Lush Grotto": {
-      "monsters": [ "Chaos Demon", "Forest Imp", "Poar Bear" ],
+      "monsters": [ "Chaos Demon (FH)", "Forest Imp (FH)", "Polar Bear" ],
       "lootDeck": {"coin":8,"lumber": 4,"rockroot":2,"arrowvine":2, "flamefruit": 1, "snowthistle": 2, "axenut": 1, "corpsecap":  1}
     },
     "#114 Work Freeze": {
-      "monsters": [ "Hound", "Polar Bear", "Snow Imp" ],
+      "monsters": [ "Hound (FH)", "Polar Bear", "Snow Imp" ],
       "lootDeck": {"coin":10,"metal":3,"hide": 4,"axenut":1,"snowthistle":2},
       "special": [
         {
@@ -6871,7 +6864,7 @@
       ]
     },
     "#115 Pylon Problems": {
-      "monsters": [ "Algox Guard", "algox Snowspeaker", "Snow Imp" ],
+      "monsters": [ "Algox Guard", "Algox Snowspeaker", "Snow Imp" ],
       "lootDeck": {"coin":8,"lumber":3,"metal":3,"hide": 3,"rockroot":1,"arrowvine":1, "snowthistle": 1},
       "special": [
         {
@@ -6984,15 +6977,15 @@
       ]
     },
     "#117 A Waiting Game": {
-      "monsters": [ "Hound", "Polar Bear", "Vermling Priest", "Vermling Scout"],
+      "monsters": [ "Hound (FH)", "Polar Bear", "Vermling Priest", "Vermling Scout (FH)"],
       "lootDeck": {"coin":6,"lumber": 4,"hide": 6,"axenut":1,"arrowvine":2, "flamefruit": 1}
     },
     "#118 Lurker Necromancy": {
-      "monsters": [ "Frozen Corpse", "Living Bones", "Lurker Mindsnipper", "Lurker Soldier" ],
+      "monsters": [ "Frozen Corpse", "Living Bones (FH)", "Lurker Mindsnipper", "Lurker Soldier" ],
       "lootDeck": {"coin":8,"lumber": 3,"metal":3,"hide": 3,"rockroot":1,"snowthistle":2}
     },
     "#119 Radiant Dust": {
-      "monsters": [ "Burrowing Blade", "Polar Bear", "Rending Drake", "Shrike Fiend", "Spitting Drake" ],
+      "monsters": [ "Burrowing Blade", "Polar Bear", "Rending Drake (FH)", "Shrike Fiend", "Spitting Drake (FH)" ],
       "special": [
         {
           "type": "Escort",
@@ -7002,20 +6995,20 @@
         }]
    },
     "#120 Under the Influence": {
-      "monsters": [ "City Guard", "Hound" ,"Robotic Boltshooter", "steel Automaton", "Vermling Priest", "Vermling Scout" ],
+      "monsters": [ "City Guard (FH)", "Hound (FH)" ,"Robotic Boltshooter", "Steel Automaton", "Vermling Priest", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":8,"lumber": 4,"metal":4,"hide": 4}
     },
     "#121 Black Memories": {
-      "monsters": [ "Polar Bear", "Steel Automaton", "Vermling Priest", "Vermling Scout" ],
+      "monsters": [ "Polar Bear", "Steel Automaton", "Vermling Priest", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":9,"lumber": 3,"metal":3,"hide": 2,"rockroot":1,"axenut":1, "treasure": 1}
     },
     "#122 The Eternal Crave": {
       "note": "hungry maw where? section 98.1 or 152.1",
-      "monsters": [ "Frozen Corpse", "Ice Wraith", "Polar bear", "Snow Imp" ],
+      "monsters": [ "Frozen Corpse", "Ice Wraith", "Polar Bear", "Snow Imp" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 4,"rockroot":1,"axenut":1, "treasure": 1}
     },
     "#123 The Titan": {
-      "monsters": [ "Algox Snowspeaker", "Ancient Artillery", "Ice Wraith" ],
+      "monsters": [ "Algox Snowspeaker", "Ancient Artillery (FH)", "Ice Wraith" ],
       "lootDeck": {"coin":9,"lumber": 2,"metal":6,"flamefruit":1,"snowthistle":1, "treasure": 1},
       "special": [
         {
@@ -7026,7 +7019,7 @@
         }]
     },
     "#124 A Growing Problem": {
-      "monsters": [ "Living Bones", "Living Spirit" ],
+      "monsters": [ "Living Bones (FH)", "Living Spirit (FH)" ],
       "lootDeck": {"coin":10,"lumber": 4,"metal":2,"hide": 2,"snowthistle":1,"arrowvine":1},
       "special": [
         {
@@ -7041,7 +7034,7 @@
       "lootDeck": {"coin":9,"lumber": 2,"metal":4,"hide": 2,"rockroot":1,"corpsecap":1, "treasure": 1}
     },
     "#126 Joseph the Lion": {
-      "monsters": [ "Ice Wraith", "Living Spirit", "Snow Imp" ],
+      "monsters": [ "Ice Wraith", "Living Spirit (FH)", "Snow Imp" ],
       "lootDeck": {"coin":5,"lumber": 3,"metal":3,"hide": 2,"flamefruit":1,"snowthistle":2},
       "special": [
         {
@@ -7150,11 +7143,11 @@
       ]
     },
     "#127 Derelict Freighter": {
-      "monsters": [ "Ancient Artillery", "Frozen Corpse", "Ice Wraith" ],
+      "monsters": [ "Ancient Artillery (FH)", "Frozen Corpse", "Ice Wraith" ],
       "lootDeck": {"coin":5,"lumber": 6,"metal":4,"hide": 4,"treasure": 1}
     },
     "#128 A Tall Drunken Trail": {
-      "monsters": [ "Abael Scout", "Lurker wavethrower Scenario 128", "Snow Imp", "Steel Automaton Scenario 128", "Vermling Scout" ],
+      "monsters": [ "Abael Scout", "Lurker wavethrower Scenario 128", "Snow Imp", "Steel Automaton Scenario 128", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":2,"lumber": 3,"metal":1,"hide": 8,"snowthistle":1,"arrowvine":1, "flamefruit": 2},
       "special": [
         {
@@ -7171,12 +7164,12 @@
       }]
     },
     "#129 How to Lay an Ambush": {
-      "monsters": [ "Algox Guard", "Algox Priest", "Algox Scout", "City Guard" ],
+      "monsters": [ "Algox Guard", "Algox Priest", "Algox Scout", "City Guard (FH)" ],
       "lootDeck": {"coin":4,"lumber": 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1},
       "special": [
         {
           "type": "Allies",
-          "list": ["City Guard"]
+          "list": ["City Guard (FH)"]
         }]
     },
     "#130 And Then, A Stream": {
@@ -7202,11 +7195,11 @@
         }]
     },
     "#132 Temple of Feline Power": {
-      "monsters": [ "Frost Demon", "Frozen Corpse", "Ice Wraith", "Snow Imp" ],
+      "monsters": [ "Frost Demon (FH)", "Frozen Corpse", "Ice Wraith", "Snow Imp" ],
       "lootDeck": {"coin":12,"lumber": 2,"metal":2,"hide": 2,"corpsecap":1,"arrowvine":1}
     },
     "#133 Bolt": {
-      "monsters": [ "Forest Imp", "Polar Bear","Rending Drake" ,"Spitting Drake" ],
+      "monsters": [ "Forest Imp (FH)", "Polar Bear","Rending Drake (FH)" ,"Spitting Drake (FH)" ],
       "lootDeck": {"coin":7,"lumber": 3,"metal":3,"hide": 3,"rockroot":2,"corpsecap":1, "treasure": 1}
     },
     "#134 Tower of Knowledge": {
@@ -7229,15 +7222,15 @@
     },
     "#135 Belara's Keep": {
       "note": "miniboss belara where? section 87.2",
-      "monsters": [ "Earth Demon", "Flame Demon", "Rending Drake", "Savvas Lavaflow", "Sun Demon" ],
+      "monsters": [ "Earth Demon (FH)", "Flame Demon (FH)", "Rending Drake (FH)", "Savvas Lavaflow (FH)", "Sun Demon (FH)" ],
       "lootDeck": {"coin":7,"lumber": 4,"metal":4,"hide": 2,"corpsecap":1,"flamefruit":1, "treasure": 1}
     },
     "#136 Abandoned Hideout": {
-      "monsters": [ "Lightning Eel", "Living Bones", "Living Spirit", "Lurker Wavethrower", "Piranha Pig" ],
+      "monsters": [ "Lightning Eel", "Living Bones (FH)", "Living Spirit (FH)", "Lurker Wavethrower", "Piranha Pig" ],
       "lootDeck": {"coin":8,"lumber": 4,"hide": 4,"snowthistle":1,"arrowvine":1}
     },
     "#137 The Pirate Queen's Lair": {
-      "monsters": [ "Ancient Artillery", "Flaming Bladespinner", "Forest Imp", "Piranha Pig", "Polar Bear" ,"Robotic Boltshooter" ],
+      "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Forest Imp (FH)", "Piranha Pig", "Polar Bear" ,"Robotic Boltshooter" ],
       "lootDeck": {"coin":12,"lumber": 4,"metal":4,"hide": 4,"treasure": 1}
     }
   },
