@@ -85,7 +85,7 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Be aware, when connecting to a server, the server's game state will overwrite the local state.
 - If a client gets out of sync with the server (by disconnecting, or making an update before it gets the latest state from server), the client's state change will be ignored and overwritten by latest state from server to get you back on track. And a message index out of sync will be shown.
 - There should be no issue having several users change things simultaneously: the menus will not close when getting an update.
-- Local settings are not affected by the game state. It is up to the users to decide on options that affect the game.
+- Local settings are not affected by the game state (Except for don't standees option). It is up to the users to decide on options that affect the game.
 
 ## Known Issues:
 - Some animations will not play, (and some may play when they shouldn't) when receiving updates over wifi.
@@ -98,10 +98,12 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Condition Animations do not play when connected.
 - You can connect devices with different versions, but there will be issues. PLease update all your devices!
 - Objectives and Escorts do not update their 'level'/health when monster level is changed. Please set the correct monster level before setting a scenario.
+- All Data is added by hand. Please Report any error in a ticket on github.
 
 ## Roadmap
 - Next:
-  - full Frosthaven support
+  - Minor improvements
+  - Trails of Ashes campaign
 
 ## Copyright / License
 
