@@ -92,6 +92,13 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
+      results.sort((a, b) {
+        int? aNr = findNrFromScenarioName(a);
+        int? bNr = findNrFromScenarioName(b);
+        if (aNr != null && bNr != null) {
+          return aNr.compareTo(bNr);
+        }
+        return a.compareTo(b);});
       // we use the toLowerCase() method to make it case-insensitive
       //special hack for solo BladeSwarm
       if (_gameState.currentCampaign.value == "Solo") {

@@ -30,7 +30,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   int? findNrFromScenarioName(String scenario) {
     String nr = scenario.substring(1);
     for (int i = 0; i < nr.length; i++) {
-      if (nr[i] == ' ') {
+      if (nr[i] == ' ' || nr[i] == ".") {
         nr = nr.substring(0, i);
         int? number = int.tryParse(nr);
         return number;
@@ -71,6 +71,13 @@ class AddSectionMenuState extends State<AddSectionMenu> {
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
+      results.sort((a, b) {
+        int? aNr = findNrFromScenarioName(a);
+        int? bNr = findNrFromScenarioName(b);
+        if (aNr != null && bNr != null) {
+          return aNr.compareTo(bNr);
+        }
+        return a.compareTo(b);});
       // we use the toLowerCase() method to make it case-insensitive
     }
 
