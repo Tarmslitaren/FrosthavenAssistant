@@ -1719,6 +1719,7 @@
       "gfx": "Hound",
       "display": "Hound",
       "deck": "Hound (FH)",
+      "hidden": true,
       "count": 6,
       "levels": [
         {
