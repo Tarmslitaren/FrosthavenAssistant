@@ -398,6 +398,32 @@ class GameSaveState{
     state.hideEnhancements = List<bool>.from(lootDeckData["hideEnhancements"]);
     state.lumberEnhancements = List<bool>.from(lootDeckData["lumberEnhancements"]);
 
+    state.arrowvineEnhancements = [false, false];
+    state.corpsecapEnhancements = [false, false];
+    state.flamefruitEnhancements = [false, false];
+    state.axenutEnhancements = [false, false];
+    state.snowthistleEnhancements = [false, false];
+    state.rockrootEnhancements = [false, false];
+
+    if(lootDeckData.containsKey('arrowvineEnhancements')) {
+      state.arrowvineEnhancements = List<bool>.from(lootDeckData["arrowvineEnhancements"]);
+    }
+    if(lootDeckData.containsKey('corpsecapEnhancements')) {
+      state.corpsecapEnhancements = List<bool>.from(lootDeckData["corpsecapEnhancements"]);
+    }
+    if(lootDeckData.containsKey('flamefruitEnhancements')) {
+      state.flamefruitEnhancements = List<bool>.from(lootDeckData["flamefruitEnhancements"]);
+    }
+    if(lootDeckData.containsKey('axenutEnhancements')) {
+      state.axenutEnhancements = List<bool>.from(lootDeckData["axenutEnhancements"]);
+    }
+    if(lootDeckData.containsKey('snowthistleEnhancements')) {
+      state.snowthistleEnhancements = List<bool>.from(lootDeckData["snowthistleEnhancements"]);
+    }
+    if(lootDeckData.containsKey('rockrootEnhancements')) {
+      state.rockrootEnhancements = List<bool>.from(lootDeckData["rockrootEnhancements"]);
+    }
+
     List<LootCard> newDrawList = [];
     List drawPile = lootDeckData["drawPile"] as List;
     for (var item in drawPile) {

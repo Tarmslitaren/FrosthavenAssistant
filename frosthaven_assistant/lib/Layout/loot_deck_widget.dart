@@ -154,7 +154,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
             width: (73+68) * settings.userScalingBars.value,
             height: 58.6666 * settings.userScalingBars.value,
             child: ValueListenableBuilder<int>(
-                valueListenable: _gameState.commandIndex, //blanket
+                valueListenable: _gameState.lootDeck.cardCount, //blanket
                 builder: (context, value, child) {
 
                   LootDeck? deck = _gameState.lootDeck;

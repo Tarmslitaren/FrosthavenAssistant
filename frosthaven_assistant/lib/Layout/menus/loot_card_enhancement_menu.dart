@@ -103,6 +103,18 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                       _gameState.lootDeck.metalEnhancements, "metal"),
                   createListTile("metal 2 for 2-3p", 5, 3,
                       _gameState.lootDeck.metalEnhancements, "metal"),
+                  createListTile(
+                      "arrowvine", 0, 2, _gameState.lootDeck.arrowvineEnhancements, "arrowvine"),
+                  createListTile(
+                      "axenut", 0, 2, _gameState.lootDeck.axenutEnhancements, "axenut"),
+                  createListTile(
+                      "corpsecap", 0, 2, _gameState.lootDeck.corpsecapEnhancements, "corpsecap"),
+                  createListTile(
+                      "flamefruit", 0, 2, _gameState.lootDeck.flamefruitEnhancements, "flamefruit"),
+                  createListTile(
+                      "rockroot", 0, 2, _gameState.lootDeck.rockrootEnhancements, "rockroot"),
+                  createListTile(
+                      "snowthistle", 0, 2, _gameState.lootDeck.snowthistleEnhancements, "snowthistle"),
                 ]),
           ),
           const SizedBox(

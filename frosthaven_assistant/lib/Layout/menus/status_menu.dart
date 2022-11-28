@@ -426,15 +426,13 @@ class StatusMenuState extends State<StatusMenu> {
                           scale: scale)
                           : Container(),
                       SizedBox(height: hasXp? 2: 0),
-                      widget.characterId != null || isSummon
-                          ? buildChillButtons(
+                      buildChillButtons(
                               figure.chill,
                               12,
                               //technically you can have infinite, but realistically not so much
                               "assets/images/abilities/chill.png",
                               figureId,
-                              ownerId, scale)
-                          : Container(),
+                              ownerId, scale),
                       SizedBox(height: widget.characterId != null || isSummon? 2: 0),
                       widget.monsterId != null
                           ? CounterButton(
