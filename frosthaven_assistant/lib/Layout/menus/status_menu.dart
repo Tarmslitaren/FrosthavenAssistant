@@ -351,7 +351,7 @@ class StatusMenuState extends State<StatusMenu> {
 
     return Container(
         width: 340 * scale,
-        height: 211 * scale,
+        height: 211 * scale + 30 * scale,
         decoration: BoxDecoration(
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
@@ -426,13 +426,6 @@ class StatusMenuState extends State<StatusMenu> {
                           scale: scale)
                           : Container(),
                       SizedBox(height: hasXp? 2: 0),
-                      buildChillButtons(
-                              figure.chill,
-                              12,
-                              //technically you can have infinite, but realistically not so much
-                              "assets/images/abilities/chill.png",
-                              figureId,
-                              ownerId, scale),
                       SizedBox(height: widget.characterId != null || isSummon? 2: 0),
                       widget.monsterId != null
                           ? CounterButton(
@@ -460,6 +453,13 @@ class StatusMenuState extends State<StatusMenu> {
                               ownerId: ownerId,
                       scale: scale)
                           : Container(),
+                      buildChillButtons(
+                          figure.chill,
+                          12,
+                          //technically you can have infinite, but realistically not so much
+                          "assets/images/abilities/chill.png",
+                          figureId,
+                          ownerId, scale),
                       SizedBox(height: widget.monsterId != null && canBeCursed? 2: 0),
                       Row(
                         children: [
