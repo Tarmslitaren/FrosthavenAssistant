@@ -77,7 +77,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
             available.add(i + 1);
           }
         }
-        int standeeNr = available[Random().nextInt(available.length)] + 1;
+        int standeeNr = available[Random().nextInt(available.length)];
         getIt<GameState>().action(AddStandeeCommand(
             standeeNr,
             null,
