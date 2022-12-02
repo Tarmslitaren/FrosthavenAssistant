@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../Model/character_class.dart';
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/settings.dart';
@@ -121,6 +122,20 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   Widget buildSoloTile(String name) {
     List<String> strings = name.split(':');
+
+    String  text = strings[1];
+    for (String key in _gameState.modelData.value.keys) {
+      for (CharacterClass character in _gameState.modelData.value[key]!.characters) {
+        if(character.name == strings[0]) {
+          if(character.hidden && !_gameState.unlockedClasses.contains(
+              character.name)){
+            text = "???";
+          }
+          break;
+        }
+      }
+    }
+
     return ListTile(
       leading: Image(
         height: 30,
@@ -128,7 +143,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         fit: BoxFit.scaleDown,
         image: AssetImage("assets/images/class-icons/${strings[0]}.png"),
       ),
-      title: Text(strings[1], style: const TextStyle(fontSize: 18)),
+      title: Text(text, style: const TextStyle(fontSize: 18)),
       onTap: () {
         _gameState.action(SetScenarioCommand(name, false));
         Navigator.pop(context);

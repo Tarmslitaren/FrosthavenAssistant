@@ -10,7 +10,6 @@ import 'package:frosthaven_assistant/services/network/network_info.dart';
 import '../service_locator.dart';
 
 import 'network.dart';
-//import 'dart:developer' as developer;
 
 class Server {
   final int serverVersion = 152;
@@ -232,6 +231,8 @@ class Server {
           break;
         }
       }
+
+      //TODO: try to reconnect?
     }
   }
 

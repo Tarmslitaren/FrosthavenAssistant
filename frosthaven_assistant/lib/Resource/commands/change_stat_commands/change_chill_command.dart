@@ -24,7 +24,7 @@ class ChangeChillCommand extends ChangeStatCommand {
 
   @override
   String describe() {
-    //not correct for summons
+    //todo: not correct for summons?
     if(change > 0) {
 
       return "Increase $ownerId's chill";
