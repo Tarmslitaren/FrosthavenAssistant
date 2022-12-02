@@ -153,8 +153,11 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
           return SizedBox(
             width: (73+68) * settings.userScalingBars.value,
             height: 58.6666 * settings.userScalingBars.value,
-            child: ValueListenableBuilder<int>(
-                valueListenable: _gameState.lootDeck.cardCount, //blanket
+    child: ValueListenableBuilder<int>(
+    valueListenable: _gameState.commandIndex,
+    builder: (context, value, child) {
+            return ValueListenableBuilder<int>(
+                valueListenable: _gameState.lootDeck.cardCount,
                 builder: (context, value, child) {
 
                   LootDeck? deck = _gameState.lootDeck;
@@ -273,7 +276,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                           ]))
                     ],
                   );
-                }),
+                });}),
           );
         });
   }
