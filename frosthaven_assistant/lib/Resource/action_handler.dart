@@ -41,6 +41,7 @@ class ActionHandler {
     if (commandIndex.value >= 0) {
       gameSaveStates[commandIndex.value]!
           .load(); //this works as gameSaveStates has one more entry than command list (includes load at start)
+      gameSaveStates[commandIndex.value]!.saveToDisk();
       if (!isServer && !isClient) {
         commands[commandIndex.value]!
             .undo(); //currently undo only makes sure ui is updated...
@@ -80,6 +81,7 @@ class ActionHandler {
       //  commands[commandIndex.value].execute();
      // } else {
         gameSaveStates[commandIndex.value+1]!.load(); //test this over network again
+      gameSaveStates[commandIndex.value+1]!.saveToDisk();
         //also run generic update ui function
         updateAllUI();
 
