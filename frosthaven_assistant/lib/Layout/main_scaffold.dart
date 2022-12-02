@@ -20,6 +20,8 @@ Widget createMainScaffold(BuildContext context) {
       builder: (context, value, child) {
         bool modFitsOnBar = modifiersFitOnBar(context);
         return SafeArea(
+            left: false,
+            right: false,
             maintainBottomViewPadding: true,
             child: Scaffold(
               resizeToAvoidBottomInset: false,
