@@ -84,6 +84,9 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
     double scale = 1;
     if(!isPhoneScreen(context)) {
       scale = 1.5;
+      if(isLargeTablet(context)) {
+        scale = 2;
+      }
     }
     return Container(
         width: 240 * scale,

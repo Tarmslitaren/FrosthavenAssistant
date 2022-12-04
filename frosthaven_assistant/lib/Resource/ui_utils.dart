@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 
@@ -19,6 +21,18 @@ TextStyle getSmallTextStyle(double scale) {
     fontSize: 14 * scale,
     color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black,
   );
+}
+
+bool isLargeTablet(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
+  if(screenWidth < screenHeight && screenHeight > 1200) {
+    return true;
+  }
+  if(screenWidth > screenHeight && screenWidth > 1200) {
+    return true;
+  }
+  return false;
 }
 
 bool isPhoneScreen(BuildContext context) {

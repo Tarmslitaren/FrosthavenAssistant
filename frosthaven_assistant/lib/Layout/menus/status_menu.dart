@@ -141,7 +141,9 @@ class StatusMenuState extends State<StatusMenu> {
                   bottom: 0,
                   right: 0,
                   child: Text(text,
-                      style: TextStyle(color: Colors.blue, shadows: [
+                      style: TextStyle(color: Colors.blue,
+                          fontSize: 16 * scale,
+                          shadows: [
                         Shadow(
                           offset: Offset(1 * scale, 1 * scale),
                           color: Colors.black87,
@@ -347,6 +349,9 @@ class StatusMenuState extends State<StatusMenu> {
     double scale = 1;
     if(!isPhoneScreen(context)) {
       scale = 1.5;
+      if(isLargeTablet(context)) {
+        scale = 2;
+      }
     }
 
     return Container(

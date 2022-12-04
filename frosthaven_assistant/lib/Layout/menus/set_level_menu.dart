@@ -182,6 +182,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     double scale = 1;
     if(!isPhoneScreen(context)) {
       scale = 1.5;
+      if(isLargeTablet(context)) {
+        scale = 2;
+      }
     }
 
     return Container(
