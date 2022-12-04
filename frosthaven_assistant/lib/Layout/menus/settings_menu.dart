@@ -143,6 +143,16 @@ class SettingsMenuState extends State<SettingsMenu> {
                             settings.setFullscreen(value!);
                           });
                         }),
+                  CheckboxListTile(
+                      title: const Text("Stat card text shimmers"),
+                      value: settings.shimmer.value,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          settings.shimmer.value = value!;
+                          settings.saveToDisk();
+                          getIt<GameState>().updateAllUI();
+                        });
+                      }),
                   Container(
                     constraints:
                         const BoxConstraints(minWidth: double.infinity),

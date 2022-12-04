@@ -320,7 +320,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                     widget.data,
                                     CrossAxisAlignment.end,
                                     scale,
-                                    true),
+                                    getIt<Settings>().shimmer.value),
                               ]))
                       : Positioned(
                           left: 40.0 * scale,
@@ -344,7 +344,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 widget.data,
                                                 CrossAxisAlignment.start,
                                                 scale,
-                                                true)),
+                                                getIt<Settings>().shimmer.value)),
                                       ])
                                     : Container(),
                                 if (bossOtherAttributes.isNotEmpty) Image.asset(
@@ -467,7 +467,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                               widget.data,
                               CrossAxisAlignment.start,
                               scale,
-                              true),
+                              getIt<Settings>().shimmer.value),
                         )
                       : Container(),
                   !isBoss

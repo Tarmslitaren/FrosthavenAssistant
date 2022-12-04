@@ -29,6 +29,7 @@ class Settings {
   final noCalculation = ValueNotifier<bool>(false);
   final expireConditions = ValueNotifier<bool>(false);
   final hideLootDeck = ValueNotifier<bool>(false);
+  final shimmer = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -206,6 +207,10 @@ class Settings {
       if (data["lastKnownPort"] != null) {
         lastKnownPort = data["lastKnownPort"];
       }
+
+      if (data["shimmer"] != null) {
+        shimmer.value = data["shimmer"];
+      }
     }
   }
 
@@ -248,6 +253,7 @@ class Settings {
         '"hideLootDeck": ${hideLootDeck.value}, '
         '"style": ${style.value.index}, '
         '"darkMode": ${darkMode.value}, '
+        '"shimmer": ${shimmer.value}, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort" '
         '}';
