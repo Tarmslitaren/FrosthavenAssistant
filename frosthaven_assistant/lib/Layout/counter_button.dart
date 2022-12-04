@@ -60,6 +60,8 @@ class CounterButtonState extends State<CounterButton> {
           child: Image(
             color: widget.color,
             colorBlendMode: BlendMode.modulate,
+            fit: BoxFit.contain,
+            filterQuality: FilterQuality.medium,
             image: AssetImage(widget.image),
           ),
         ),
