@@ -190,8 +190,14 @@ class Server {
                           .value}Description:${commandDescription}GameState:${_gameState
                           .gameSaveStates.last!.getState()}", client);
                 }
-              }
-            } else {
+              } else if (message.startsWith("undo")) {
+                print('Server Receive undo command');
+                _gameState.undo();
+              } else if (message.startsWith("redo")) {
+                print('Server Receive redo command');
+                _gameState.redo();
+              } else if (message.startsWith("ping")) {
+              }} else {
               leftOverMessage = message;
             }
           }

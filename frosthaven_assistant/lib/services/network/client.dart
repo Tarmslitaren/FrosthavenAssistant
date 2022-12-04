@@ -87,6 +87,9 @@ class Client {
                 _gameState.updateAllUI();
               } else if (message.startsWith("Error")) {
                 throw (message);
+              } else if (message.startsWith("undo")) {
+              } else if (message.startsWith("redo")) {
+              } else if (message.startsWith("ping")) {
               }
             } else {
               _leftOverMessage = message;

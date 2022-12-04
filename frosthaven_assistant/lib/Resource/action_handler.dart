@@ -38,69 +38,67 @@ class ActionHandler {
   void undo() {
     bool isServer = getIt<Settings>().server.value;
     bool isClient = getIt<Settings>().client.value;
-    if (commandIndex.value >= 0) {
-      gameSaveStates[commandIndex.value]!
-          .load(); //this works as gameSaveStates has one more entry than command list (includes load at start)
-      gameSaveStates[commandIndex.value]!.saveToDisk();
-      if (!isServer && !isClient) {
-        commands[commandIndex.value]!
-            .undo(); //currently undo only makes sure ui is updated...
-      } else {
-        updateAllUI();
-        //run generic update all function instead, as commands list is not retained
+    if (!isClient) {
+      if (commandIndex.value >= 0) {
+        gameSaveStates[commandIndex.value]!
+            .load(); //this works as gameSaveStates has one more entry than command list (includes load at start)
+        gameSaveStates[commandIndex.value]!.saveToDisk();
+        if (!isServer && !isClient) {
+          commands[commandIndex.value]!
+              .undo(); //currently undo only makes sure ui is updated...
+        } else {
+          updateAllUI();
+          //run generic update all function instead, as commands list is not retained
+        }
+        commandIndex.value--;
+
+        //make sure to invalidate and rebuild all ui, since references will be broken
+        getIt<GameState>().updateForUndo.value++;
       }
-      commandIndex.value--;
 
-      //make sure to invalidate and rebuild all ui, since references will be broken
-      getIt<GameState>().updateForUndo.value++;
-
-      //send last gamestate if connected
-       if(isServer) {
+      //send last game state if connected
+      if (isServer) {
         print(
             'server sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
+        //should send a special undo message?
         getIt<Network>().server.send(
             "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last!.getState()}");
       }
-       //only allow server to undo
-      /*else if (isClient) {
-        print(
-            'client sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
-        client.send(
-            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last.getState()}");
-      }*/
-
+    } else {
+      getIt<Network>().client.send("undo");
     }
   }
 
   void redo() {
     bool isServer = getIt<Settings>().server.value;
     bool isClient = getIt<Settings>().client.value;
-    if (commandIndex.value < commandDescriptions.length - 1) {
-      commandIndex.value++;
-      //if (!isServer && !isClient) {
-      //  commands[commandIndex.value].execute();
-     // } else {
-        gameSaveStates[commandIndex.value+1]!.load(); //test this over network again
-      gameSaveStates[commandIndex.value+1]!.saveToDisk();
+    if (!isClient) {
+      if (commandIndex.value < commandDescriptions.length - 1) {
+        commandIndex.value++;
+        //if (!isServer && !isClient) {
+        //  commands[commandIndex.value].execute();
+        // } else {
+        gameSaveStates[commandIndex.value + 1]!
+            .load(); //test this over network again
+        gameSaveStates[commandIndex.value + 1]!.saveToDisk();
         //also run generic update ui function
         updateAllUI();
+      } else {
+        //just send message to server
+        getIt<Network>().client.send("redo");
+      }
 
-      //send last gamestate if connected
+      //send last game state if connected
       if (isServer) {
         print(
             'server sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
         getIt<Network>().server.send(
             "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last!.getState()}");
       }
-      //only allow server to redo
-      /*else if (isClient) {
-        print(
-            'client sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
-        client.send(
-            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last.getState()}");
-      }*/
 
       //}
+    } else if (isClient) {
+      getIt<Network>().client.send("redo");
     }
   }
 
@@ -116,7 +114,8 @@ class ActionHandler {
       commands.add(command);
       commandDescriptions.add(command.describe());
     }
-    commandIndex.value++; //just moved this. hope it doesn't come with severe bugs...
+    commandIndex
+        .value++; //just moved this. hope it doesn't come with severe bugs...
     //remove possible redo list
     if (commands.length - 1 > commandIndex.value) {
       commands.removeRange(commandIndex.value + 1, commands.length);
@@ -129,9 +128,9 @@ class ActionHandler {
     }
     getIt<GameState>().save(); //save after each action?
 
-    if(commandIndex.value >= maxUndo) {
-      commands[commandIndex.value-maxUndo] = null;
-      gameSaveStates[commandIndex.value-maxUndo] = null;
+    if (commandIndex.value >= maxUndo) {
+      commands[commandIndex.value - maxUndo] = null;
+      gameSaveStates[commandIndex.value - maxUndo] = null;
     }
 
     //send last gamestate if connected
