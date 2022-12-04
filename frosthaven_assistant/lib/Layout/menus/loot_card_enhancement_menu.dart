@@ -20,9 +20,26 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
   Widget createListTile(
       name, int startIndex, int amount, List<bool> reference, String materialName) {
     ListTile listTile = ListTile(
-      leading: Text(name), //todo: use the icon and put in row
+      contentPadding: EdgeInsets.only(left: 14),
+      minVerticalPadding: 0,
+      minLeadingWidth: 0,
+      horizontalTitleGap: 6,
+      leading:
+      //Row(children: [
+        Image(
+          filterQuality: FilterQuality.medium,
+          height: 30,
+          width:  30,
+          fit: BoxFit.contain,
+          image: AssetImage("assets/images/loot/${materialName}_icon.png"),),
+        title: Text(name,
+
+          overflow: TextOverflow.visible,
+          maxLines: 1,
+        ),
+     // ]), //todo: use the icon and put in row
       trailing: Container(
-          width: amount * 50,
+          width: amount * 48,
           child: Row(
             children: [
               Checkbox(
