@@ -1063,6 +1063,7 @@
     "Blood Ooze": {
       "deck": "Blood Ooze",
       "edition": "Crimson Scales",
+      "gfx": "Ooze",
       "count": 10,
       "levels": [
         {
@@ -1412,6 +1413,7 @@
     "Frozen Cadaver": {
       "deck": "Frozen Cadaver",
       "edition": "Crimson Scales",
+      "gfx": "Living Corpse",
       "count": 6,
       "levels": [
         {
@@ -1756,6 +1758,7 @@
     "Harrower Icecrawlers": {
       "deck": "Harrower Icecrawlers",
       "edition": "Crimson Scales",
+      "gfx": "Harrower Infester",
       "count": 4,
       "levels": [
         {
@@ -1873,6 +1876,7 @@
     "Toxic Imp": {
       "deck": "Toxic Imp",
       "edition": "Crimson Scales",
+      "gfx": "Forest Imp",
       "count": 10,
       "flying": true,
       "levels": [

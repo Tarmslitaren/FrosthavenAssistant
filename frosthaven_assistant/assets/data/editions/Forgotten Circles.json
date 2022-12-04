@@ -808,6 +808,7 @@
     "Wolf-Viper Abomination": {
       "edition": "Forgotten Circles",
       "deck": "Wolf-Viper Abomination",
+      "gfx": "Hound",
       "count": 6,
       "hidden": true,
       "levels": [
