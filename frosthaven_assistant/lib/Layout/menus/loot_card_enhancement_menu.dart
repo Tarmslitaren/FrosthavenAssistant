@@ -20,7 +20,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
   Widget createListTile(
       name, int startIndex, int amount, List<bool> reference, String materialName) {
     ListTile listTile = ListTile(
-      contentPadding: EdgeInsets.only(left: 14),
+      contentPadding: const EdgeInsets.only(left: 14),
       minVerticalPadding: 0,
       minLeadingWidth: 0,
       horizontalTitleGap: 6,
