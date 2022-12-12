@@ -944,8 +944,8 @@
         ["Powerful Claw", 698, false, 60, "%move% - 1", "*.........","%attack% + 2"],
         ["Distant Wave", 699, false, 51, "^Focus on the enemy", "^^farthest away within %range% 6.", "ÅK","%attack% + 1", "^%range% 6"],
         ["Tsunami", 700, false, 29,  "%move% + 1", "*.........","[r]","[c]","%attack% - 1", "^%range% 2", "[/c]","¤aoe-circle", "[/r]"],
-        ["Aid from Below", 701, true, 98,"%attack% +1", "^%range% 4","*.........", "^%teleport% to leftmost empty hex", "or rightmost if even round."],
-        ["Aid from Below", 702, true, 98,"%attack% +1", "^%range% 4","*.........", "^%teleport% to leftmost empty hex", "or rightmost if even round."],   ["Crushing Crest", 703, false, 36, "%move% + 1", "*.........", "[r]","%attack% - 1","¤aoe-arc-3", "[/r]"],
+        ["Aid from Below", 701, true, 98,"%attack% +1", "^%range% 4","*.........", "^%teleport% to leftmost empty hex", "^or rightmost if even round."],
+        ["Aid from Below", 702, true, 98,"%attack% +1", "^%range% 4","*.........", "^%teleport% to leftmost empty hex", "^or rightmost if even round."],   ["Crushing Crest", 703, false, 36, "%move% + 1", "*.........", "[r]","%attack% - 1","¤aoe-arc-3", "[/r]"],
         ["Twin Claws", 704, false, 48,   "%move% + 0", "*.........","[r]","%attack% + 0","¤aoe-triangle-2-side-with-black", "[/r]"],
         ["Massive Swell", 705, false, 40,  "%move% + 0", "*.........","[r]", "[c]", "%attack% + 0", "^%range% 3", "[/c]","¤aoe-triangle-2-side", "[/r]"]
       ]
@@ -1250,7 +1250,7 @@
       "display": "Brother",
       "gfx": "City Guard",
       "hidden": true,
-      "deck": "boss",
+      "deck": "Boss (FH)",
       "count": 6,
       "levels": [
         {
@@ -5751,6 +5751,7 @@
       ]
     }
   },
+
   "scenarios": {
     "#0 Howling in the Snow": {
       "monsters": [ "Hound Scenario 0" ],
@@ -5805,7 +5806,7 @@
       "lootDeck": {"coin":9,"lumber": 4,"metal":1,"hide": 1,"snowthistle":2,"arrowvine":2, "axenut": 1}
     },
     "#7 Edge of the World": {
-      "monsters": [ "Frozen Corpse", "Lurker Clawcrusher", "Lurker Mindsnipper" ,"Lurker Soldier" ],
+      "monsters": [ "Lurker Clawcrusher", "Lurker Mindsnipper" ,"Lurker Soldier" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 3,"axenut":1,"snowthistle":2}
     },
     "#8 Crystal Trench": {
@@ -6057,7 +6058,7 @@
       "lootDeck": {"coin":10,"lumber": 5,"hide": 2,"arrowvine":2, "treasure": 1}
     },
     "#23 Spire Basement": {
-      "monsters": [ "Living Bones (FH)", "Living Doom", "Living Spirit (FH)" ],
+      "monsters": [ "Living Bones (FH)", "Living Spirit (FH)" ],
       "lootDeck": {"coin":8,"lumber": 4,"metal":4,"flamefruit":1,"corpsecap":2, "treasure": 1}
     },
     "#24 Upper Spire": {
@@ -6848,7 +6849,7 @@
       ]
     },
     "#65 A Strong Foundation": {
-      "monsters": [ "Frozen Corpse", "Ice Wraith", "Living Bones (FH)", "Snow Imp" ],
+      "monsters": [ "Frozen Corpse", "Living Bones (FH)", "Snow Imp" ],
       "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 4,"snowthistle":2,"arrowvine":2}
     },
     "#66 Elemental Cores": {
@@ -7182,22 +7183,14 @@
     },
     "#87 The Collection": {
       "monsters": [ "Algox Archer", "Algox Guard", "Flaming Bladespinner", "Lurker Clawcrusher", "Polar Bear", "Steel Automaton" ],
-      "lootDeck": {"coin":8,"lumber": 2,"metal":4,"hide": 3,"rockroot":1,"arrowvine":1, "corpsecap": 1},
-      "note": "special rules. section 31.2, 184.6, 77.2, 73.1",
-      "special": [
-        {
-          "type": "Timer",
-          "list": [1],
-          "startOfRound": true,
-          "note": "You will need the boss deck. maybe..."
-        }]
+      "lootDeck": {"coin":8,"lumber": 2,"metal":4,"hide": 3,"rockroot":1,"arrowvine":1, "corpsecap": 1}
     },
     "#88 Collection's Capstone": {
       "monsters": [ "The Collector", "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Lurker Clawcrusher", "Savvas Icestorm (FH)", "Savvas Lavaflow (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":8,"lumber": 3,"metal":4,"hide": 2,"rockroot":1,"corpsecap":1, "treasure": 1}
     },
     "#89 A Contained Fire": {
-      "monsters": [ "Algox Archer", "Algox Guard", "Algox Icespeaker", "Algox Priest" ],
+      "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest" ],
       "lootDeck": {"coin":10,"lumber": 2,"metal":2,"hide": 2,"flamefruit":1,"arrowvine":2, "treasure": 1}
     },
     "#90 Frozen Treasure": {
@@ -7328,7 +7321,7 @@
       ]
     },
     "#95 To Bury the Dead": {
-      "monsters": [ "Ice Wraith", "Living Bones (FH)", "Living Doom", "Living Spirit (FH)" ],
+      "monsters": [ "Ice Wraith", "Living Bones (FH)", "Living Doom" ],
       "lootDeck": {"coin":8,"lumber": 4,"metal":2,"corpsecap":2,"snowthistle":2},
       "special": [
         {
@@ -7519,7 +7512,7 @@
       ]
     },
     "#111 Ice Cave": {
-      "monsters": [ "Frost Demon (FH)", "Hound (FH)", "Night Demon (FH)", "Savvas Icestorm (FH)", "Wind Demon (FH)" ],
+      "monsters": [ "Frost Demon (FH)", "Hound (FH)", "Night Demon (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":10,"lumber": 1,"metal":3,"hide": 3,"corpse":1,"arrowvine":2, "treasure": 1},
       "special": [
         {
@@ -7707,15 +7700,15 @@
       "lootDeck": {"coin":8,"lumber": 4,"metal":4,"hide": 4}
     },
     "#121 Black Memories": {
-      "monsters": [ "Polar Bear", "Steel Automaton", "Vermling Priest", "Vermling Scout (FH)" ],
+      "monsters": [ "Vermling Priest", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":9,"lumber": 3,"metal":3,"hide": 2,"rockroot":1,"axenut":1, "treasure": 1}
     },
     "#122 The Eternal Crave": {
-      "monsters": [ "Frozen Corpse", "Ice Wraith", "Polar Bear", "Snow Imp" ],
+      "monsters": [ "Ice Wraith", "Polar Bear", "Snow Imp" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 4,"rockroot":1,"axenut":1, "treasure": 1}
     },
     "#123 The Titan": {
-      "monsters": [ "Algox Snowspeaker", "Ancient Artillery (FH)", "Ice Wraith" ],
+      "monsters": [ "Algox Snowspeaker", "Ancient Artillery (FH)" ],
       "lootDeck": {"coin":9,"lumber": 2,"metal":6,"flamefruit":1,"snowthistle":1, "treasure": 1},
       "special": [
         {
@@ -7946,7 +7939,7 @@
       ]
     },
     "#131 The Dancing Iceberg": {
-      "monsters": [ "Lurker Clawcrusher", "Lurker Mindsnipper", "Lurker Soldier", "Lurker Wavethrower Scenario 131"  ],
+      "monsters": [ "Lurker Mindsnipper", "Lurker Soldier", "Lurker Wavethrower Scenario 131"  ],
       "special": [
         {
           "type": "Timer",
@@ -8001,7 +7994,7 @@
       ]
     },
     "#135 Belara's Keep": {
-      "monsters": [ "Earth Demon (FH)", "Flame Demon (FH)", "Rending Drake (FH)", "Savvas Lavaflow (FH)", "Sun Demon (FH)" ],
+      "monsters": [ "Earth Demon (FH)", "Flame Demon (FH)", "Rending Drake (FH)", "Sun Demon (FH)" ],
       "lootDeck": {"coin":7,"lumber": 4,"metal":4,"hide": 2,"corpsecap":1,"flamefruit":1, "treasure": 1}
     },
     "#136 Abandoned Hideout": {
@@ -8033,7 +8026,7 @@
       ]
     },
     "#7.2 Frozen Crypt (5)": {
-      "note": "reestting turn tracker is not supported (or in 3 turns from now..)",
+      "note": "resetting turn tracker is not supported (or in 3 turns from now..)",
       "special": [
         {
           "type": "Objective",
