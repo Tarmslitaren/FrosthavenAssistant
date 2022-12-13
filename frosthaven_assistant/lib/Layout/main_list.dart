@@ -187,7 +187,7 @@ class MainListState extends State<MainList> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    repeat: ImageRepeat.repeat,
+                    //repeat: ImageRepeat.repeat,
                     image: AssetImage(getIt<Settings>().darkMode.value
                         ? 'assets/images/bg/bg.png'
                         : 'assets/images/bg/frosthaven-bg.png')),
