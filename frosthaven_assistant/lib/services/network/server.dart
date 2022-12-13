@@ -12,7 +12,7 @@ import '../service_locator.dart';
 import 'network.dart';
 
 class Server {
-  final int serverVersion = 152;
+  final int serverVersion = 154;
 
   final GameState _gameState = getIt<GameState>();
 
