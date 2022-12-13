@@ -33,6 +33,38 @@
 			"cards": [
 				[ 0, true, 49, "%move% + 0","*.........", "%attack% + 0", "^%range% + 0", "*","^(using your attack modifier deck)" ]
 			]
+		},
+		{
+			"name": "City Guard (Banner Spear Special)",
+			"cards": [
+				["Nothing special", 0, true, 50, "%attack% + 0" ]
+			]
+		},
+		{
+			"name": "Hollow Scholar",
+			"cards": [
+				["Calculated Strike", 666, false, 64, "%move% - 1", "*.........","%attack% + 1" ],
+				["Drain Life", 667, true, 20, "%move% - 2","*.........", "%attack% + 0", "*.........","%heal% 2", "^Self" ],
+				["Hasty Assault", 668, false, 25, "%move% + 1","*.........", "%attack% - 1" ],
+				["Nothing Special", 669, false, 45, "%move% + 0","*.........", "%attack% + 0" ],
+				["Nothing Special", 670, false, 45, "%move% + 0", "*.........","%attack% + 0" ],
+				["Power Slash", 671, false, 81, "%attack% + 2" ],
+				["Focused Stabs", 672, false, 74, "%move% + 0","*.........", "%attack% + 0","[newLine]", "^Target 1 enemy with all attacks" ],
+				["Eternal Life", 673, true, 12,  "%heal% 2", "^Self" ]
+			]
+		},
+		{
+			"name": "Algox Snowspeaker (Trapper Special)",
+			"cards": [
+				["Blinding Vortex", 738, false, 22, "%move% + 0", "*.........", "[r]", "[c]","%attack% - 1", "^%range% 2,", "^%muddle%","[/c]",  "¤aoe-circle", "[/r]", "%air%"],
+				["Sleet", 740, false, 43,  "%move% + 0", "*.........","%attack% + 1", "^%range% 3", "%ice%"],
+				["Snowstorm", 742, true, 6,  "^All enemies within", "^%range% 2 suffer damage 2.","*.........", "%push% 2", "^Target all,", "^%range% 2", "[r]", "%ice%", "Å.", "%air%", "[/r]"],
+				["Snow Drifts", 745, false, 66, "%immobilize%", "^%target% all,", "^%range% 5","*.........", "[r]","%air%%use%","[c]","%muddle%", "^Target all,","^%range% 5" , "[/c]", "[/r]"],
+				["Cold Winds", 739, false, 18, "%attack% + 0", "^%target% 2,", "^%range% 4", "[r]","%ice%%use%","%immobilize%", "[/r]"],
+				["Blistering Assault", 741, false, 30,  "%move% + 1", "*.........","%attack% - 1", "^%range% 3,", "^%push% 1", "[r]","%air%%use%","^+2%push%", "[/r]"],
+				["Hail", 743, false, 59,  "%move% - 1", "*.........","%attack% + 1", "^%range% 3","[r]","%ice%%use%","^+2%attack%", "[/r]"],
+				["Nothing Special", 744, true, 27, "%move% + 0", "*.........","%attack% + 0", "^%range% 4", "%air%"]
+			]
 		}
 	],
 	"monsters": {
@@ -133,6 +165,158 @@
 				}
 			]
 		},
+		"City Guard (Banner Spear Special)": {
+			"display": "City Guard",
+			"edition": "Frosthaven",
+			"gfx": "City Guard",
+			"hidden": true,
+			"deck": "City Guard (Banner Spear Special)",
+			"count": 6,
+			"levels": [
+				{
+					"level": 0,
+					"normal": { "health": 5, "move": 2, "attack": 0 },
+					"elite": { "health": 6,  "move": 2,  "attack": 0, "attributes": [ "%shield% 1" ]}
+				},
+				{
+					"level": 1,
+					"normal": { "health": 5, "move": 2, "attack": 1, "attributes": [ "%shield% 1" ]},
+					"elite": { "health": 6, "move": 2, "attack": 1, "attributes": [ "%shield% 2" ]}
+				},
+				{
+					"level": 2,
+					"normal": { "health": 7, "move": 2, "attack": 1, "attributes": [ "%shield% 1" ]},
+					"elite": { "health": 9, "move": 2, "attack": 1, "attributes": [ "%shield% 2" ]}
+				},
+				{
+					"level": 3,
+					"normal": { "health": 8, "move": 2, "attack": 2, "attributes": [ "%shield% 1" ]},
+					"elite": { "health": 9, "move": 2, "attack": 2, "attributes": [ "%shield% 2", "%retaliate% 1"]}
+				},
+				{
+					"level": 4,
+					"normal": { "health": 9, "move": 3, "attack": 2, "attributes": [ "%shield% 1" ]},
+					"elite": { "health": 10, "move": 3, "attack": 2, "attributes": [  "%shield% 2","%retaliate% 2"]}
+				},
+				{
+					"level": 5,
+					"normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%shield% 2" ]},
+					"elite": { "health": 13, "move": 3, "attack": 3, "attributes": [  "%shield% 2","%retaliate% 2"]}
+				},
+				{
+					"level": 6,
+					"normal": { "health": 13, "move": 3, "attack": 3, "attributes": [ "%shield% 2" ]},
+					"elite": { "health": 15, "move": 3, "attack": 3, "attributes": [ "%shield% 3","%retaliate% 3" ]}
+				},
+				{
+					"level": 7,
+					"normal": { "health": 17, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ]},
+					"elite": { "health": 20, "move": 3, "attack": 4, "attributes": [ "%shield% 3","%retaliate% 3"]}
+				}
+			]
+		},
+		"Black Imp (Deathwalker Special)": {
+			"edition": "Frosthaven",
+			"gfx": "Black Imp",
+			"display": "Black Imp",
+			"deck": "Imp (FH)",
+			"hidden": true,
+			"count": 10,
+			"levels": [
+				{
+					"level": 0,
+					"normal": { "health": 3, "move": 1, "attack": 1 },
+					"elite": { "health": 3, "move": 1, "attack": 2, "attributes": [ "%poison%" ]}
+				},
+				{
+					"level": 1,
+					"normal": { "health": 3, "move": 1, "attack": 1, "attributes": [ "%poison%" ] },
+					"elite": { "health": 5, "move": 1, "attack": 2, "attributes": [ "%poison%" ] }
+				},
+				{
+					"level": 2,
+					"normal": { "health": 4, "move": 1, "attack": 2, "attributes": [ "%poison%" ]},
+					"elite": { "health": 7, "move": 1, "attack": 2, "attributes": [ "%poison%" ]}
+				},
+				{
+					"level": 3,
+					"normal": { "health": 4, "move": 1, "attack": 2, "attributes": [ "%poison%" ]},
+					"elite": { "health": 7, "move": 1, "attack": 2, "attributes": [  "%poison%" ]}
+				},
+				{
+					"level": 4,
+					"normal": { "health": 5, "move": 1, "attack": 2, "attributes": [ "%poison%" ]},
+					"elite": { "health": 7, "move": 1, "attack": 3, "attributes": [  "%poison%" ]}
+				},
+				{
+					"level": 5,
+					"normal": { "health": 7, "move": 1, "attack": 2, "attributes": [ "%poison%" ]},
+					"elite": { "health": 9, "move": 1, "attack": 3, "attributes": [ "%poison%" ]}
+				},
+				{
+					"level": 6,
+					"normal": { "health": 9, "move": 1, "attack": 3, "attributes": [ "%poison%" ]},
+					"elite": { "health": 12, "move": 1, "attack": 4, "attributes": [  "%poison%"]}
+				},
+				{
+					"level": 7,
+					"normal": { "health": 13, "move": 1, "attack": 3, "attributes": [ "%poison%" ]},
+					"elite": { "health": 18, "move": 1, "attack": 4, "attributes": [ "%poison%" ]}
+				}
+			]
+		},
+
+		"Night Demon (Deathwalker Special)": {
+			"gfx": "Night Demon",
+			"display": "Night Demon",
+			"deck": "Night Demon (FH)",
+			"edition": "Frosthaven",
+			"hidden": true,
+			"count": 6,
+			"levels": [
+				{
+					"level": 0,
+					"normal": { "health": 3, "move": 3, "attack": 3},
+					"elite": { "health": 5, "move": 4, "attack": 4}
+				},
+				{
+					"level": 1,
+					"normal": { "health": 5, "move": 3, "attack": 3},
+					"elite": { "health": 8, "move": 4, "attack": 4}
+				},
+				{
+					"level": 2,
+					"normal": { "health": 6, "move": 3, "attack": 4},
+					"elite": { "health": 11, "move": 4, "attack": 4}
+				},
+				{
+					"level": 3,
+					"normal": { "health": 7, "move": 4, "attack": 4},
+					"elite": { "health": 13, "move": 4, "attack": 5}
+				},
+				{
+					"level": 4,
+					"normal": { "health": 8, "move": 4, "attack": 5},
+					"elite": { "health": 15, "move": 5, "attack": 5}
+				},
+				{
+					"level": 5,
+					"normal": { "health": 11, "move": 4, "attack": 5},
+					"elite": { "health": 17, "move": 5, "attack": 6}
+				},
+				{
+					"level": 6,
+					"normal": { "health": 16, "move": 4, "attack": 5},
+					"elite": { "health": 23, "move": 5, "attack": 7}
+				},
+				{
+					"level": 7,
+					"normal": { "health": 20, "move": 4, "attack": 6},
+					"elite": { "health": 30, "move": 5, "attack": 8}
+				}
+			]
+		},
+
 		"Stone Golem (Scoundrel Special)": {
 			"deck": "Stone Golem",
 			"gfx": "Stone Golem",
@@ -717,13 +901,453 @@
 					"level": 7, "health": 42, "move": 3, "attack": 6, "attributes": [ "%retaliate% 3", "%shield% 3" ]
 				}
 			]
+		},
+		"Hollow Scholar": {
+			"gfx": "Living Bones",
+			"display": "Hollow Scholar",
+			"deck": "Hollow Scholar",
+			"hidden": true,
+			"edition": "Frosthaven",
+			"count": 6,
+			"levels": [
+				{
+					"level": 0, "health": 12, "move": 4, "attack": 2, "attributes": [ "%target% 2"]
+				},
+				{
+					"level": 1, "health": 12, "move": 4, "attack": 2, "attributes": [  "%target% 3"]
+				},
+				{
+					"level": 2, "health": 14, "move": 4, "attack": 3, "attributes": [  "%target% 3"]
+				},
+				{
+					"level": 3, "health": 18, "move": 4, "attack": 3, "attributes": [  "%target% 3"]
+				},
+				{
+					"level": 4, "health": 20, "move": 4, "attack": 4, "attributes": [  "%target% 3"]
+				},
+				{
+					"level": 5, "health": 26, "move": 4, "attack": 4, "attributes": [ "%target% 3"]
+				},
+				{
+					"level": 6, "health": 36, "move": 5, "attack": 4, "attributes": [  "%target% 3"]
+				},
+				{
+					"level": 7, "health": 42, "move": 6, "attack": 5, "attributes": [  "%target% 3"]
+				}
+			]
+		},
+		"Incarnation of Ancestors": {
+			"display": "Incarnation of Ancestors",
+			"gfx": "Sun Demon",
+			"deck": "Boss (FH)",
+			"edition": "Frosthaven",
+			"hidden": true,
+			"count": 6,
+			"flying": true,
+			"levels": [
+				{
+					"level": 0, "health": 22, "move": 2, "attack": 3, "attributes": [ "Advantage", "%shield% 1" ],
+					"immunities": [ "%poison%", "%stun%"],
+					"special1": [ "See scenario Special Rules"],
+					"special2": [ "See scenario Special Rules"]
+				},
+				{
+					"level": 1, "health": 28, "move": 2, "attack": 3, "attributes": [ "Advantage", "%shield% 1" ],
+					"immunities": [ "%poison%", "%stun%"],
+					"special1": [ "See scenario Special Rules"],
+					"special2": [ "See scenario Special Rules"]
+				},
+				{
+					"level": 2, "health": 30, "move": 2, "attack": 4, "attributes": [ "Advantage", "%shield% 1" ],
+					"immunities": [ "%poison%", "%stun%"],
+					"special1": [ "See scenario Special Rules"],
+					"special2": [ "See scenario Special Rules"]
+				},
+				{
+					"level": 3, "health": 36, "move": 3, "attack": 4, "attributes": [ "Advantage", "%shield% 1" ],
+					"immunities": [ "%poison%", "%stun%"],
+					"special1": [ "See scenario Special Rules"],
+					"special2": [ "See scenario Special Rules"]
+				},
+				{
+					"level": 4, "health": 40, "move": 3, "attack": 5, "attributes": [ "Advantage", "%shield% 1" ],
+					"immunities": [ "%poison%", "%stun%"],
+					"special1": [ "See scenario Special Rules"],
+					"special2": [ "See scenario Special Rules"]
+				},
+				{
+					"level": 5, "health": 40, "move": 3, "attack": 5, "attributes": [ "Advantage", "%shield% 2" ],
+					"immunities": [ "%poison%", "%stun%"],
+					"special1": [ "See scenario Special Rules"],
+					"special2": [ "See scenario Special Rules"]
+				},
+				{
+					"level": 6, "health": 54, "move": 4, "attack": 5, "attributes": [ "Advantage", "%shield% 2" ],
+					"immunities": [ "%poison%", "%stun%"],
+					"special1": [ "See scenario Special Rules"],
+					"special2": [ "See scenario Special Rules"]
+				},
+				{
+					"level": 7, "health": 58, "move": 4, "attack": 6, "attributes": [ "Advantage", "%shield% 3" ],
+					"immunities": [ "%poison%", "%stun%"],
+					"special1": [ "See scenario Special Rules"],
+					"special2": [ "See scenario Special Rules"]
+				}
+			]
+		},
+		"Mountain's Heart": {
+			"gfx": "Earth Demon",
+			"deck": "Earth Demon (FH)",
+			"hidden": true,
+			"edition": "Frosthaven",
+			"count": 6,
+			"levels": [
+				{
+					"level": 0, "health": 20, "move": 2, "attack": 4
+				},
+				{
+					"level": 1, "health": 26, "move": 2, "attack": 4
+				},
+				{
+					"level": 2, "health": 36, "move": 2, "attack": 4
+				},
+				{
+					"level": 3, "health": 40, "move": 2, "attack": 4, "attributes": [ "%immobilize%" ]
+				},
+				{
+					"level": 4, "health": 42, "move": 3, "attack": 5, "attributes": [ "%immobilize%" ]
+				},
+				{
+					"level": 5, "health": 50, "move": 3, "attack": 5, "attributes": [ "%immobilize%" ]
+				},
+				{
+					"level": 6, "health": 64, "move": 3, "attack": 6, "attributes": [ "%immobilize%" ]
+				},
+				{
+					"level": 7, "health": 84, "move": 3, "attack": 7, "attributes": [ "%immobilize%" ]
+				}
+			]
+		},
+		"Algox Icespeaker (Shattersong Special)": {
+			"gfx": "Algox Icespeaker",
+			"display": "Algox Icespeaker",
+			"deck": "Algox Icespeaker",
+			"hidden": true,
+			"edition": "Frosthaven",
+			"count": 4,
+			"levels": [
+				{
+					"level": 0,
+					"normal": { "health": 6, "move": 2, "attack": 3, "attributes": ["%shield% 1" ],"immunities": [  "%stun%"]},
+					"elite": { "health": 8, "move": 2, "attack": 4,"attributes": ["%shield% 2" ],"immunities": [  "%stun%"] }
+				},
+				{
+					"level": 1,
+					"normal": { "health": 8, "move": 2, "attack": 3,"attributes": ["%shield% 1" ], "immunities": [  "%stun%"]},
+					"elite": { "health": 8, "move": 2, "attack": 4,"attributes": ["%shield% 2", "%brittle%" ],"immunities": [  "%stun%"] }
+				},
+				{
+					"level": 2,
+					"normal": { "health": 10, "move": 2, "attack": 3,"attributes": ["%shield% 1"],"immunities": [  "%stun%"] },
+					"elite": { "health": 10, "move": 3, "attack": 4,"attributes": ["%shield% 2", "%brittle%" ], "immunities": [  "%stun%"]}
+				},
+				{
+					"level": 3,
+					"normal": { "health": 12, "move": 3, "attack": 3,"attributes": ["%shield% 1"  ],"immunities": [  "%stun%"] },
+					"elite": { "health": 12, "move": 2, "attack": 5,"attributes": ["%shield% 2", "%brittle%" ],"immunities": [  "%stun%"] }
+				},
+				{
+					"level": 4,
+					"normal": { "health": 14, "move": 3, "attack": 4, "attributes": [ "%shield% 1" ],"immunities": [  "%stun%"] },
+					"elite": { "health": 15, "move": 4, "attack": 5, "attributes": [ "%shield% 2", "%brittle%" ], "immunities": [  "%stun%"]}
+				},
+				{
+					"level": 5,
+					"normal": { "health": 15, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ], "immunities": [  "%stun%"]},
+					"elite": { "health": 18, "move": 4, "attack": 6, "attributes": ["%shield% 2", "%brittle%" ], "immunities": [  "%stun%"]}
+				},
+				{
+					"level": 6,
+					"normal": { "health": 20, "move": 3, "attack": 5, "attributes": [ "%shield% 2" ],"immunities": [  "%stun%"] },
+					"elite": { "health": 26, "move": 4, "attack": 6, "attributes": [ "%shield% 2", "%brittle%"], "immunities": [ "%brittle%","%stun%"] }
+				},
+				{
+					"level": 7,
+					"normal": { "health": 27, "move": 4, "attack": 5,"attributes": [ "%shield% 2" ], "immunities": [ "%brittle%","%stun%"] },
+					"elite": { "health": 35, "move": 4, "attack": 6, "attributes": [ "%shield% 2", "%brittle%" ], "immunities": [ "%brittle%","%stun%"] }
+				}
+			]
+		},
+		"Chief of Spikes": {
+			"gfx": "Algox Icespeaker",
+			"deck": "Algox Icespeaker",
+			"hidden": true,
+			"edition": "Frosthaven",
+			"count": 4,
+			"levels": [
+				{
+					"level": 0, "health": 8, "move": 2, "attack": 4,"attributes": ["%shield% 2", "%target% 2", "%muddle%" ],"immunities": [  "%stun%"]
+				},
+				{
+					"level": 1, "health": 8, "move": 2, "attack": 4,"attributes": ["%shield% 2","%target% 2", "%muddle%", "%brittle%" ],"immunities": [  "%stun%"]
+				},
+				{
+					"level": 2, "health": 10, "move": 3, "attack": 4,"attributes": ["%shield% 2","%target% 2", "%muddle%", "%brittle%" ], "immunities": [  "%stun%"]
+				},
+				{
+					"level": 3, "health": 12, "move": 2, "attack": 5,"attributes": ["%shield% 2", "%target% 2", "%muddle%","%brittle%" ],"immunities": [  "%stun%"]
+				},
+				{
+					"level": 4, "health": 15, "move": 4, "attack": 5, "attributes": [ "%shield% 2","%target% 2", "%muddle%", "%brittle%" ], "immunities": [  "%stun%"]
+				},
+				{
+					"level": 5, "health": 18, "move": 4, "attack": 6, "attributes": ["%shield% 2","%target% 2", "%muddle%", "%brittle%" ], "immunities": [  "%stun%"]
+				},
+				{
+					"level": 6, "health": 26, "move": 4, "attack": 6, "attributes": [ "%shield% 2","%target% 2", "%muddle%", "%brittle%"], "immunities": [ "%brittle%","%stun%"]
+				},
+				{
+					"level": 7, "health": 35, "move": 4, "attack": 6, "attributes": [ "%shield% 2","%target% 2", "%muddle%", "%brittle%" ], "immunities": [ "%brittle%","%stun%"]
+				}
+			]
+		},
+		"Algox Snowspeaker (Trapper Special)": {
+			"deck": "Algox Snowspeaker (Trapper Special)",
+			"gfx": "Algox Snowspeaker",
+			"display": "Algox Snowspeaker",
+			"hidden": true,
+			"edition": "Frosthaven",
+			"count": 4,
+			"levels": [
+				{
+					"level": 0,
+					"normal": { "health": 6, "move": 1, "attack": 2, "attributes": ["%retaliate% 1", "^%range% 4"]},
+					"elite": { "health": 8, "move": 2, "attack": 3,"attributes": ["%retaliate% 1", "^%range% 4"] }
+				},
+				{
+					"level": 1,
+					"normal": { "health": 7, "move": 1, "attack": 3,"attributes": ["%retaliate% 1", "^%range% 4"] },
+					"elite": { "health": 10, "move": 2, "attack": 4,"attributes": ["%retaliate% 1", "^%range% 4", "%push% 1"] }
+				},
+				{
+					"level": 2,
+					"normal": { "health": 9, "move": 2, "attack": 3,"attributes": ["%retaliate% 1", "^%range% 4"] },
+					"elite": { "health": 12, "move": 2, "attack": 4,"attributes": ["%retaliate% 2", "^%range% 4", "%push% 1"] }
+				},
+				{
+					"level": 3,
+					"normal": { "health": 12, "move": 2, "attack": 3,"attributes":["%retaliate% 1", "^%range% 4"] },
+					"elite": { "health": 15, "move": 3, "attack": 4,"attributes": ["%retaliate% 2", "^%range% 4", "%push% 1"] }
+				},
+				{
+					"level": 4,
+					"normal": { "health": 13, "move": 2, "attack": 4, "attributes": ["%retaliate% 2", "^%range% 4"] },
+					"elite": { "health": 17, "move": 3, "attack": 5, "attributes": ["%retaliate% 2", "^%range% 5", "%push% 2"] }
+				},
+				{
+					"level": 5,
+					"normal": { "health": 15, "move": 3, "attack": 4, "attributes": ["%retaliate% 2", "^%range% 4"] },
+					"elite": { "health": 21, "move": 4, "attack": 5, "attributes": ["%retaliate% 2", "^%range% 4", "%push% 2"] }
+				},
+				{
+					"level": 6,
+					"normal": { "health": 20, "move": 3, "attack": 5, "attributes": ["%retaliate% 2", "^%range% 4"] },
+					"elite": { "health": 27, "move": 4, "attack": 6, "attributes": ["%retaliate% 3", "^%range% 4", "%push% 2"], "immunities": [ "%brittle%"] }
+				},
+				{
+					"level": 7,
+					"normal": { "health": 27, "move": 4, "attack": 5,"attributes": ["%retaliate% 3", "^%range% 4"], "immunities": [ "%brittle%"] },
+					"elite": { "health": 35, "move": 4, "attack": 7, "attributes": ["%retaliate% 3", "^%range% 4", "%push% 2"], "immunities": [ "%brittle%"] }
+				}
+			]
+		},
+		"Energized Corpse": {
+			"deck": "Frozen Corpse",
+			"gfx": "Frozen Corpse",
+			"hidden": true,
+			"edition": "Frosthaven",
+			"count": 6,
+			"levels": [
+				{
+					"level": 0, "health": 20, "move": 3, "attack": 2
+				},
+				{
+					"level": 1, "health": 20, "move": 3, "attack": 2,"attributes": ["%shield% 1", "%retaliate% 1" ]
+				},
+				{
+					"level": 2, "health": 22, "move": 3, "attack": 3,"attributes": ["%shield% 1", "%retaliate% 1"]
+				},
+				{
+					"level": 3, "health": 28, "move": 3, "attack": 3, "attributes": [ "%shield% 1","%retaliate% 2" ]
+				},
+				{
+					"level": 4, "health": 34, "move": 3, "attack": 4, "attributes": [ "%shield% 1","%retaliate% 2"  ]
+				},
+				{
+					"level": 5, "health": 40, "move": 4, "attack": 4, "attributes": [ "%shield% 1","%retaliate% 3"  ]
+				},
+				{
+					"level": 6, "health": 48, "move": 4, "attack": 5, "attributes": [ "%shield% 2","%retaliate% 3"  ]
+				},
+				{
+					"level": 7, "health": 62, "move": 5, "attack": 6, "attributes": ["%shield% 2","%retaliate% 3"  ]
+				}
+			]
+		},
+		"Abael Warlord": {
+			"deck": "Abael Herder",
+			"gfx": "Abael Herder",
+			"hidden": true,
+			"edition": "Frosthaven",
+			"count": 6,
+			"levels": [
+				{
+					"level": 0,
+					"normal": { "health": 8, "move": 3, "attack": 2 },
+					"elite": { "health": 12, "move": 3, "attack": 3, "attributes": [ "%muddle%" ]}
+				},
+				{
+					"level": 1,
+					"normal": { "health": 12, "move": 3, "attack": 2},
+					"elite": { "health": 18, "move": 3, "attack": 3,"attributes": [ "%muddle%" ]}
+				},
+				{
+					"level": 2,
+					"normal": { "health":16, "move": 3, "attack": 2 },
+					"elite": { "health": 22, "move": 4, "attack": 3, "attributes": [ "%muddle%" ] }
+				},
+				{
+					"level": 3,
+					"normal": { "health": 18, "move": 3, "attack": 3 },
+					"elite": { "health": 26, "move": 4, "attack": 4, "attributes": [ "%muddle%" ] }
+				},
+				{
+					"level": 4,
+					"normal": { "health": 22, "move": 4, "attack": 3 },
+					"elite": { "health": 34, "move": 4, "attack": 4, "attributes": [ "%muddle%" ] }
+				},
+				{
+					"level": 5,
+					"normal": { "health": 28, "move": 4, "attack": 3},
+					"elite": { "health": 40, "move": 4, "attack": 5, "attributes": [ "%muddle%" ] }
+				},
+				{
+					"level": 6,
+					"normal": { "health": 36, "move": 4, "attack": 4,"attributes": [ "%muddle%" ] },
+					"elite": { "health": 56, "move": 5, "attack": 5, "attributes": [ "%muddle%" ] }
+				},
+				{
+					"level": 7,
+					"normal": { "health": 48, "move": 4, "attack": 4, "attributes": [ "%muddle%" ] },
+					"elite": { "health": 72, "move": 5, "attack": 6, "attributes": [ "%muddle%" ] }
+				}
+			]
+		},
+		"Lost in Seaweed": {
+			"deck": "Lurker Wavethrower",
+			"gfx": "Lurker Wavethrower",
+			"hidden": true,
+			"edition": "Frosthaven",
+			"count": 6,
+			"levels": [
+				{
+					"level": 0, "health": 12, "move": 1, "attack": 2,"attributes": ["^Summon Lightning Eel", "^at end of turn" ]
+				},
+				{
+					"level": 1, "health": 14, "move": 1, "attack": 2,"attributes": ["^Summon Lightning Eel", "^at end of turn", "%immobilize%" ]
+				},
+				{
+					"level": 2, "health": 18, "move": 2, "attack": 2,"attributes": ["^Summon Lightning Eel", "^at end of turn", "%immobilize%"]
+				},
+				{
+					"level": 3, "health": 22, "move": 2, "attack": 2, "attributes": [ "^Summon Lightning Eel", "^at end of turn","%immobilize%" ]
+				},
+				{
+					"level": 4, "health": 26, "move": 2, "attack": 3, "attributes": [ "^Summon Lightning Eel", "^at end of turn","%immobilize%" ]
+				},
+				{
+					"level": 5, "health": 32, "move": 3, "attack": 3, "attributes": [ "^Summon Lightning Eel", "^at end of turn","%immobilize%" ]
+				},
+				{
+					"level": 6, "health": 42, "move": 3, "attack": 3, "attributes": ["^Summon Lightning Eel", "^at end of turn", "%immobilize%" ]
+				},
+				{
+					"level": 7, "health": 52, "move": 3, "attack": 4, "attributes": ["^Summon Lightning Eel", "^at end of turn", "%immobilize%" ]
+				}
+			]
+		},
+		"Shape Blocks Out the Sun": {
+			"deck": "Lurker Clawcrusher",
+			"gfx": "Lurker Clawcrusher",
+			"hidden": true,
+			"edition": "Frosthaven",
+			"count": 4,
+			"levels": [
+				{
+					"level": 0, "health": 30, "move": 1, "attack": 4,"attributes": [ "%shield% 1","%target% 2" ],"immunities": [ "%disarm%"]
+				},
+				{
+					"level": 1, "health": 30, "move": 1, "attack": 4,"attributes": [ "%shield% 2","%target% 2", "%impair%" ],"immunities": [ "%disarm%"]
+				},
+				{
+					"level": 2, "health": 39, "move": 2, "attack": 4,"attributes": [ "%shield% 2","%target% 2", "%impair%"],"immunities": [ "%disarm%"]
+				},
+				{
+					"level": 3, "health": 42, "move": 2, "attack": 5, "attributes": ["%shield% 2", "%target% 2", "%impair%" ],"immunities": [ "%disarm%"]
+				},
+				{
+					"level": 4, "health": 54, "move": 2, "attack": 5, "attributes": [ "%shield% 2", "%target% 2", "%impair%" ],"immunities": [ "%disarm%"]
+				},
+				{
+					"level": 5, "health": 63, "move": 2, "attack": 6, "attributes": [ "%shield% 2", "%target% 2", "%impair%" ],"immunities": [ "%disarm%"]
+				},
+				{
+					"level": 6, "health": 66, "move": 2, "attack": 7, "attributes": [ "%shield% 3", "%target% 2", "%impair%" ],"immunities": ["%disarm%","%stun%"]
+				},
+				{
+					"level": 7, "health": 87, "move": 2, "attack": 8, "attributes": [ "%shield% 3", "%target% 2", "%impair%" ],"immunities": [ "%disarm%","%stun%"]
+				}
+			]
+		},
+		"Plea for Help Without Answer": {
+			"deck": "Lurker Mindsnipper",
+			"gfx": "Lurker Mindsnipper",
+			"hidden": true,
+			"edition": "Frosthaven",
+			"count": 6,
+			"levels": [
+				{
+					"level": 0, "health": 21, "move": 2, "attack": 3,"attributes": [ "%target% 2", "%retaliate% 2" ],"immunities": [ "%disarm%","%stun%"]
+				},
+				{
+					"level": 1, "health": 21, "move": 3, "attack": 3,"attributes": [ "%target% 2","%retaliate% 3", "%muddle%" ],"immunities": [ "%disarm%","%stun%"]
+				},
+				{
+					"level": 2, "health": 24, "move": 3, "attack": 4,"attributes": [ "%target% 2","%retaliate% 3", "%muddle%"],"immunities": [ "%disarm%","%stun%"]
+				},
+				{
+					"level": 3, "health": 33, "move": 3, "attack": 4, "attributes": [ "%target% 2","%retaliate% 3", "%muddle%" ],"immunities": [ "%disarm%","%stun%"]
+				},
+				{
+					"level": 4, "health": 39, "move": 4, "attack": 4, "attributes": [ "%target% 2","%retaliate% 4", "%muddle%" ],"immunities": [ "%disarm%","%stun%"]
+				},
+				{
+					"level": 5, "health": 45, "move": 4, "attack": 5, "attributes": [ "%target% 2", "%retaliate% 4","%muddle%" ],"immunities": [ "%disarm%","%stun%"]
+				},
+				{
+					"level": 6, "health": 66, "move": 5, "attack": 5, "attributes": [ "%target% 2","%retaliate% 4", "%muddle%" ],"immunities": [ "%disarm%","%stun%"]
+				},
+				{
+					"level": 7, "health": 81, "move": 5, "attack": 6, "attributes": [ "%target% 2","%retaliate% 5", "%muddle%" ],"immunities": [ "%disarm%","%stun%"]
+				}
+			]
 		}
 	},
 	"scenarios": {
-		"Brute: Return to the Black Barrow": {
+		"#1 Brute: Return to the Black Barrow": {
 			"monsters":  ["Bandit Guard", "Bandit Archer", "Living Bones" ]
 		},
-		"Tinkerer: An Unfortunate Intrusion": {
+		"#2 Tinkerer: An Unfortunate Intrusion": {
 			"monsters":  ["City Guard (Ally)", "Vermling Scout", "Vermling Shaman" ],
 			"special": [
 				{
@@ -734,10 +1358,10 @@
 				}
 			]
 		},
-		"Spellweaver: Corrupted Laboratory": {
+		"#3 Spellweaver: Corrupted Laboratory": {
 			"monsters":  ["Black Imp", "Spitting Drake", "Stone Golem" ]
 		},
-		"Scoundrel: Armory Heist": {
+		"#4 Scoundrel: Armory Heist": {
 			"monsters":  ["City Guard (Scoundrel Special)", "Stone Golem (Scoundrel Special)", "Ancient Artillery" ],
 			"special": [{
 					"type": "Escort",
@@ -746,7 +1370,7 @@
 					"init": 49
 				}]
 		},
-		"Cragheart: Stone Defense": {
+		"#5 Cragheart: Stone Defense": {
 			"monsters":  ["Cave Bear", "Ooze", "Sun Demon" ],
 			"special": [
 				{
@@ -763,7 +1387,7 @@
 				}
 			]
 		},
-		"Mindthief: Rodent Liberation": {
+		"#6 Mindthief: Rodent Liberation": {
 			"monsters":  ["Vermling Scout", "Vermling Shaman", "Earth Demon (Mindthief Special)" ],
 			"special": [{
 				"type": "Objective",
@@ -781,7 +1405,7 @@
 				"health": "3+L"
 			}]
 		},
-		"Sunkeeper: Caravan Escort": {
+		"#7 Sunkeeper: Caravan Escort": {
 			"monsters":  ["City Guard (Sun Special)", "Bandit Guard", "Bandit Archer", "Inox Guard", "Inox Archer", "Inox Shaman", "Vermling Scout", "Vermling Shaman", "Cave Bear" ],
 			"special": [
 				{
@@ -791,10 +1415,10 @@
 				}
 			]
 		},
-		"Quartermaster: Storage Fees": {
+		"#8 Quartermaster: Storage Fees": {
 			"monsters":  ["Hound", "Bandit Guard", "Bandit Archer" ]
 		},
-		"Summoner: Plane of Wild Beasts": {
+		"#9 Summoner: Plane of Wild Beasts": {
 			"monsters":  ["Hound", "Spitting Drake", "Cave Bear (Circles special)" ],
 			"special": [
 				{
@@ -823,10 +1447,10 @@
 				}
 			]
 		},
-		"Nightshroud: Harvesting the Night": {
+		"#10 Nightshroud: Harvesting the Night": {
 			"monsters":  ["Night Demon", "Deep Terror" ]
 		},
-		"Plagueherald: Plagued Crypt": {
+		"#11 Plagueherald: Plagued Crypt": {
 			"monsters":  ["Giant Viper", "Black Imp" ],
 			"special": [
 				{ "type": "Escort", "name": "Spirit of Xorn 1", "health": "4+L"},
@@ -861,10 +1485,10 @@
 				}
 			]
 		},
-		"Berserker: Unnatural Insults": {
+		"#12 Berserker: Unnatural Insults": {
 			"monsters":  ["Living Corpse", "Living Bones", "Cultist", "Inox Necromancer" ]
 		},
-		"Soothsinger: Battle of the Bards": {
+		"#13 Soothsinger: Battle of the Bards": {
 			"monsters":  ["Bandit Guard (Note Special)", "Bandit Archer (Note Special)", "City Guard", "City Archer", "Stone Golem", "Song of the Deep" ],
 			"special": [
 				{
@@ -879,13 +1503,13 @@
 				}
 			]
 		},
-		"Doomstalker: Corrupted Hunt": {
+		"#14 Doomstalker: Corrupted Hunt": {
 			"monsters":  ["Ghost Wolf", "Deep Earth", "High Flame", "Giant Viper (Angry Face Special)" ]
 		},
-		"Sawbones: Aftermath": {
+		"#15 Sawbones: Aftermath": {
 			"monsters":  ["City Guard", "Lieutenant" ]
 		},
-		"Elementalist: Elemental Secrets": {
+		"#16 Elementalist: Elemental Secrets": {
 			"monsters":  ["Flame Demon", "Earth Demon", "Frost Demon", "Wind Demon" ],
 			"special": [
 				{
@@ -914,13 +1538,13 @@
 				}
 			]
 		},
-		"Beast Tyrant: The Caged Bear": {
+		"#17 Beast Tyrant: The Caged Bear": {
 			"monsters":  ["Hound", "Forest Imp", "Rending Drake", "Vermling Shaman", "Cave Bear" ]
 		},
-		"Bladeswarm: The Sands of Time": {
+		"#18 Bladeswarm: The Sands of Time": {
 			"monsters":  ["Giant Viper", "Living Spirit", "Stone Golem" ]
 		},
-		"Diviner: Forecast of the Inevitable": {
+		"#19 Diviner: Forecast of the Inevitable": {
 			"monsters":  ["Earth Demon (Diviner Special)", "Valrath Savage" ],
 			"special": [
 				{ "type": "Escort", "name": "Rift 1", "health": "3+L"},
@@ -929,25 +1553,354 @@
 				{ "type": "Escort", "name": "Rift 4", "health": "3+L"}
 			]
 		},
-		"Bombard: Disarm the Machine": {
+		"#20 Drifter: Wonder of Nature": {
+			"monsters": [ "Flame Demon (FH)", "Forest Imp (FH)", "Hound (FH)" ],
+			"lootDeck": {"coin":15}
+		},
+		"#21 Blinkblade: Race Against the Clock": {
+			"monsters": [ "Ancient Artillery (FH)", "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
+			"lootDeck": {"coin":15}
+		},
+		"#22 Banner Spear: Scouting Ambush": {
+			"monsters": [ "City Guard (Banner Spear Special)", "Polar Bear", "Vermling Scout (FH)" ],
+			"lootDeck": {"coin":15},
+			"note": "special put scout rancid arrow on top of deck before starting",
+			"special": [
+				{
+					"type": "Timer",
+					"list": [3],
+					"startOfRound": true,
+					"note": "Spawn normal Vermling Scout at b, c, d, e."
+				},
+				{
+					"type": "Timer",
+					"list": [5],
+					"startOfRound": true,
+					"note": "Spawn normal Polar Bear at b. Elite Vermling Scout at d and f."
+				},
+				{
+					"type": "Timer",
+					"list": [7],
+					"startOfRound": true,
+					"note": "Spawn elite Vermling Scout at a, b, c."
+				},
+				{
+					"type": "Timer",
+					"list": [9],
+					"startOfRound": true,
+					"note": "Spawn elite Polar Bear at e. Elite Vermling Scout at d and f."
+				}
+			]
+		},
+		"#23 Deathwalker: The Dead of Night": {
+			"monsters": [ "Black Imp (Deathwalker Special)", "Night Demon (Deathwalker Special)" ],
+			"lootDeck": {"coin":15},
+			"special": [
+				{
+					"type": "Escort",
+					"name": "Glowing Orb",
+					"health": "6+3xL"
+				},
+				{
+					"type": "Timer",
+					"list": [3],
+					"startOfRound": true,
+					"note": "Spawn normal Night Demon at a and d."
+				},
+				{
+					"type": "Timer",
+					"list": [5],
+					"startOfRound": true,
+					"note": "Spawn normal Black Imp at a, b, c and d."
+				},
+				{
+					"type": "Timer",
+					"list": [7],
+					"startOfRound": true,
+					"note": "Spawn elite Black Imp at a and c."
+				},
+				{
+					"type": "Timer",
+					"list": [10],
+					"startOfRound": true,
+					"note": "Spawn elite Night Demon at b and d."
+				}
+			]
+		},
+		"#24 Boneshaper: Bones in the Dirt": {
+			"monsters": [ "Earth Demon (FH)", "Snow Imp","Hollow Scholar" ],
+			"lootDeck": {"coin":15}
+		},
+		"#25 Geminate: Divide and Conquer": {
+			"monsters": [ "Flaming Bladespinner", "Ice Wraith", "Lightning Eel", "Lurker Soldier", "Lurker Wavethrower", "Robotic Boltshooter" ],
+			"lootDeck": {"coin":15}
+		},
+		"#26 Infuser: Path of Ancestry": {
+			"monsters": [ "Incarnation of Ancestors" ],
+			"lootDeck": {"coin":15},
+			"special": [
+				{
+					"type": "Objective",
+					"name": "Orb of Energy a",
+					"health": "L+1"
+				},
+				{
+					"type": "Objective",
+					"name": "Orb of Energy b",
+					"health": "L+1"
+				},
+				{
+					"type": "Objective",
+					"name": "Orb of Energy c",
+					"health": "L+1"
+				},
+				{
+					"type": "Objective",
+					"name": "Orb of Energy d",
+					"health": "L+1"
+				},
+				{
+					"type": "Timer",
+					"list": [2, 6, 10, 14, 18, 22, 26],
+					"startOfRound": true,
+					"note": "Altar 1 spawns Orb of Energy a"
+				},
+				{
+					"type": "Timer",
+					"list": [3, 7, 11, 15, 19, 23, 27],
+					"startOfRound": true,
+					"note": "Altar 2 spawns Orb of Energy b"
+				},
+				{
+					"type": "Timer",
+					"list": [4, 8, 12, 16, 20, 24, 28],
+					"startOfRound": true,
+					"note": "Altar 3 spawns Orb of Energy c"
+				},
+				{
+					"type": "Timer",
+					"list": [5, 9, 13.17, 21, 25, 29],
+					"startOfRound": true,
+					"note": "Altar 4 spawns Orb of Energy d"
+				}
+			]
+		},
+		"#27 Pyroclast: Crumbling Descent": {
+			"monsters": [ "Burrowing Blade", "Rending Drake (FH)","Mountain's Heart" ],
+			"lootDeck": {"coin":15}
+		},
+		"#28 Shattersong: Tuning the Resonance": {
+			"monsters": [ "Algox Archer", "Algox Icespeaker (Shattersong Special)","Chief of Spikes" ],
+			"lootDeck": {"coin":15}
+		},
+		"#29 Trapper: A Magnificent Trap": {
+			"monsters": [ "Algox Guard", "Algox Snowspeaker (Trapper Special)","Wind Demon (FH)" ],
+			"lootDeck": {"coin":15},
+			"special": [
+
+				{
+					"type": "Timer",
+					"list": [3, 7],
+					"startOfRound": true,
+					"note": "Spawn one normal Algox at c."
+				},
+				{
+					"type": "Timer",
+					"list": [4,6,8],
+					"startOfRound": true,
+					"note": "Spawn one normal Wind Demon at a."
+				},
+				{
+					"type": "Timer",
+					"list": [5],
+					"startOfRound": true,
+					"note": "Spawn one normal Algox Snowspeaker at b and one normal Algox Guard at c."
+				},
+				{
+					"type": "Timer",
+					"list": [9],
+					"startOfRound": true,
+					"note": "Spawn one normal Algox Snowspeaker at b."
+				}
+			]
+		},
+		"#30 Pain Conduit: A Collection of Suffering": {
+			"monsters": [ "Chaos Demon (FH)", "Earth Demon (FH)", "Flame Demon (FH)","Sun Demon (FH)" ],
+			"lootDeck": {"coin":15},
+			"special": [
+
+				{
+					"type": "Timer",
+					"list": [1,5,9,13,17,21,25],
+					"startOfRound": true,
+					"note": "Spawn one normal Flame Demon at a."
+				},
+				{
+					"type": "Timer",
+					"list": [2,6,10,14,18,22,26],
+					"startOfRound": true,
+					"note": "Spawn one normal Sun Demon at b."
+				},
+				{
+					"type": "Timer",
+					"list": [3,7,11,15,19,23,27],
+					"startOfRound": true,
+					"note": "Spawn one normal Earth Demon a."
+				},
+				{
+					"type": "Timer",
+					"list": [4,8,12,16,20,24,28],
+					"startOfRound": true,
+					"note": "Spawn one normal Chaos Demon at b."
+				}
+			]
+		},
+		"#31 Snowdancer: Fighting Snow with Snow": {
+			"monsters": [ "Algox Snowspeaker", "Frost Demon (FH)","Wind Demon (FH)" ],
+			"lootDeck": {"coin":15},
+			"special": [
+				{
+					"type": "Escort",
+					"name": "Rune Worker 1",
+					"health": "L+1",
+					"init": 99
+				},
+				{
+					"type": "Escort",
+					"name": "Rune Worker 2",
+					"health": "L+1",
+					"init": 99
+				},
+				{
+					"type": "Timer",
+					"list": [4],
+					"startOfRound": true,
+					"note": "Spawn one elite Frost Demon at e."
+				},
+				{
+					"type": "Timer",
+					"list": [7],
+					"startOfRound": true,
+					"note": "Spawn one normal Wind Demon at both d."
+				},
+				{
+					"type": "Timer",
+					"list": [10],
+					"startOfRound": true,
+					"note": "Spawn one elite Algox Snowspeaker at e."
+				}
+			]
+		},
+		"#32 Frozen Fist: Under the Ice": {
+			"monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner","Ruined Machine", "Steel Automaton" ],
+			"lootDeck": {"coin":15},
+			"special": [
+				{
+					"type": "Escort",
+					"name": "Altar 1",
+					"health": "Lx2+6",
+					"init": 99
+				},
+				{
+					"type": "Escort",
+					"name": "Altar 2",
+					"health": "Lx2+6",
+					"init": 99
+				},
+				{
+					"type": "Escort",
+					"name": "Altar 3",
+					"health": "Lx2+6",
+					"init": 99
+				}
+			]
+		},
+		"#33 H.I.V.E.: Recharge": {
+			"monsters": [ "Frozen Corpse", "Living Bones (FH)","Living Spirit (FH)", "Energized Corpse" ],
+			"lootDeck": {"coin":15},
+			"special": [
+				{
+					"type": "Timer",
+					"list": [3],
+					"startOfRound": true,
+					"note": "Spawn normal Living Bones at d."
+				},
+				{
+					"type": "Timer",
+					"list": [4],
+					"startOfRound": true,
+					"note": "Spawn normal Living Bones at e."
+				},
+				{
+					"type": "Timer",
+					"list": [5],
+					"startOfRound": true,
+					"note": "Spawn normal Living Spirit at b and c."
+				},
+				{
+					"type": "Timer",
+					"list": [7],
+					"startOfRound": true,
+					"note": "Spawn normal Frozen Corpse at d."
+				},
+				{
+					"type": "Timer",
+					"list": [8],
+					"startOfRound": true,
+					"note": "Spawn normal Frozen Corpse at e."
+				},
+				{
+					"type": "Timer",
+					"list": [10],
+					"startOfRound": true,
+					"note": "Spawn normal Living Bones at d and e."
+				},
+				{
+					"type": "Timer",
+					"list": [12],
+					"startOfRound": true,
+					"note": "Read 1."
+				}
+			]
+		},
+		"#34 Metal Mosaic: Boiler Room": {
+			"monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner","Ruined Machine", "Steel Automaton" ],
+			"lootDeck": {"coin":15}
+		},
+		"#35 Deepwraith: Wet Work": {
+			"monsters": [ "Abael Warlord", "Abael Scout","Burrowing Blade", "Piranha Pig" ],
+			"lootDeck": {"coin":15}
+		},
+		"#36 Crashing Tide: Crash Against the Waves": {
+			"monsters": [ "Lightning Eel", "Lost in Seaweed","Shape Blocks Out the Sun", "Plea for Help Without Answer" ],
+			"lootDeck": {"coin":15},
+			"special": [
+				{
+					"type": "Timer",
+					"list": [3],
+					"startOfRound": true,
+					"note": "Spawn Lost in Seaweed at a and Lightning Eels each hex adjacent to it."
+				}]
+		},
+		"#37 Bombard: Disarm the Machine": {
 			"monsters": [ "Ancient Artillery", "Stone Golem" ]
 		},
-		"Brightspark: Elemental Converter": {
+		"#38 Brightspark: Elemental Converter": {
 			"monsters": [ "Black Imp", "Deep Terror", "Hound", "Lurker", "Rending Drake", "Spitting Drake" ]
 		},
-		"Chainguard: Penitentiary Lockdown": {
+		"#39 Chainguard: Penitentiary Lockdown": {
 			"monsters": [ "Bandit Archer", "Bandit Guard" ]
 		},
-		"Chieftain: Forest Invaders": {
+		"#40 Chieftain: Forest Invaders": {
 			"monsters": [ "Cave Bear", "Giant Viper", "Hound", "Vermling Scout", "Vermling Shaman" ]
 		},
-		"Fire Knight: Through the Fire and the Flames": {
+		"#41 Fire Knight: Through the Fire and the Flames": {
 			"monsters": [ "Flame Demon", "Rending Drake #60 Special", "Savvas Lavaflow", "Spitting Drake" ]
 		},
-		"Hierophant: Archaic Preservation": {
+		"#42 Hierophant: Archaic Preservation": {
 			"monsters": [ "Ancient Artillery", "Black Imp", "Lurker", "Rending Drake", "Stone Golem" ]
 		},
-		"Hollowpact: Hallow Redemption": {
+		"#43 Hollowpact: Hallow Redemption": {
 			"monsters": [ "Aesther Ashblade", "Cave Bear", "Forest Imp", "Vermling Shaman" ],
 
 			"special": [
@@ -957,13 +1910,13 @@
 					"level": -1
 				}]
 		},
-		"Mirefoot: A Cornered Viper": {
+		"#44 Mirefoot: A Cornered Viper": {
 			"monsters": [ "Cave Bear", "Giant Viper", "Inox Archer", "Living Corpse", "Living Spirit", "Stone Golem" ]
 		},
-		"Luminary: Glowing Crystals": {
+		"#45 Luminary: Glowing Crystals": {
 			"monsters": [ "Deep Terror", "Lurker" ]
 		},
-		"Spirit Caller: Beyond the Grave": {
+		"#46 Spirit Caller: Beyond the Grave": {
 			"monsters": [ "Vermling Shaman" ],
 			"special": [
 				{
@@ -979,10 +1932,10 @@
 					"health": "6"
 				}]
 		},
-		"Starslinger: Otherworldly Strangers": {
+		"#47 Starslinger: Otherworldly Strangers": {
 			"monsters": [ "City Archer", "City Guard", "Earth Demon", "Harrower Infester", "Night Demon", "Sun Demon" ]
 		},
-		"Amber Aegis: Hive Guardian": {
+		"#48 Amber Aegis: Hive Guardian": {
 			"monsters": [ "Flame Demon", "Frost Demon", "Wind Demon", "Earth Demon", "Night Demon", "Sun Demon" ],
 			"special": [
 				{
@@ -1023,7 +1976,7 @@
 				}
 			]
 		},
-		"Artificer: Magnum Opus": {
+		"#49 Artificer: Magnum Opus": {
 			"monsters": [  "Clockwork Soldier", "Clockwork Railcaster" ],
 			"special": [
 				{
@@ -1040,7 +1993,7 @@
 				}
 			]
 		},
-		"Ruinmaw: The Fall of Shadow’s Respite": {
+		"#50 Ruinmaw: The Fall of Shadow’s Respite": {
 			"monsters": [ "Gnashing Drake", "Spitting Drake", "Rending Drake", "Vermling Scout (ally)", "Vermling Shaman (ally)" ],
 			"special": [
 				{

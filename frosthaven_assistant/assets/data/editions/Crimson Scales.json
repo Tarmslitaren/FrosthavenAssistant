@@ -3478,7 +3478,7 @@
     "The Gilded One": {
       "deck": "Savvas Icestorm",
       "gfx": "Savvas Icestorm",
-      "edition": "Crimson Scales AA",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 4,
       "levels": [
@@ -3519,7 +3519,7 @@
     "The Echo": {
       "deck": "Living Spirit",
       "gfx": "Living Spirit",
-      "edition": "Crimson Scales AA",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "flying": true,
@@ -3562,7 +3562,7 @@
     "Clockwork Railcaster": {
       "deck": "Archer",
       "gfx": "City Archer",
-      "edition": "Crimson Scales QA",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -3627,7 +3627,7 @@
     "Clockwork Soldier": {
       "deck": "Guard",
       "gfx": "City Guard",
-      "edition": "Crimson Scales QA",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -3692,7 +3692,7 @@
     "Clockwork Ravager": {
       "deck": "Living Bones",
       "gfx": "Living Bones",
-      "edition": "Crimson Scales QA",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 10,
       "levels": [
@@ -3733,7 +3733,7 @@
     "Clockwork Bombard": {
       "deck": "Ancient Artillery",
       "gfx": "Ancient Artillery",
-      "edition": "Crimson Scales QA",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -3774,7 +3774,7 @@
     "Clockwork Guardian": {
       "deck": "Stone Golem",
       "gfx": "Stone Golem",
-      "edition": "Crimson Scales QA",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -3815,7 +3815,7 @@
     "Steel Construct": {
       "deck": "Stone Golem",
       "gfx": "Stone Golem",
-      "edition": "Crimson Scales QA",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -3856,7 +3856,7 @@
     "Clockwork Devastator": {
       "deck": "Clockwork Devastator",
       "gfx": "Lurker",
-      "edition": "Crimson Scales QA",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -3899,7 +3899,7 @@
       "deck": "Archer",
       "gfx" : "Bandit Archer",
       "display": "Hired Bandit Archer",
-      "edition": "Crimson Scales RM",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -3949,7 +3949,7 @@
       "deck": "Guard",
       "gfx": "Bandit Guard",
       "display": "Hired Bandit Guard",
-      "edition": "Crimson Scales RM",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -3998,7 +3998,7 @@
     "Living Wall": {
       "deck": "Harrower Aegis",
       "gfx": "Harrower Aegis",
-      "edition": "Crimson Scales RM",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 1,
       "levels": [
@@ -4037,7 +4037,7 @@
     "Carrion Scavenger": {
       "deck": "Hound",
       "gfx": "Hound",
-      "edition": "Crimson Scales RM",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -4086,7 +4086,7 @@
     "Guttermaw": {
       "deck": "Ravenous Gharial",
       "gfx": "Ravenous Gharial",
-      "edition": "Crimson Scales RM",
+      "edition": "Crimson Scales",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -4134,7 +4134,7 @@
     },
     "Vermling Scout (ally)": {
       "deck": "Scout Ally",
-      "edition": "Crimson Scales RM",
+      "edition": "Crimson Scales",
       "display": "Vermling Scout",
       "hidden": true,
       "count": 10,
@@ -4183,7 +4183,7 @@
     },
     "Vermling Shaman (ally)": {
       "deck": "Shaman Ally",
-      "edition": "Crimson Scales RM",
+      "edition": "Crimson Scales",
       "display": "Vermling Shaman",
       "hidden": true,
       "count": 6,

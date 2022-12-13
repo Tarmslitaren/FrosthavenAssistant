@@ -269,7 +269,6 @@
   "monsters": {
     "Zealot":{
       "deck": "Zealot",
-      "edition": "Jaws of the Lion",
       "count": 6,
       "levels": [
         {
@@ -318,7 +317,6 @@
       "gfx": "Zealot",
       "note": "Used only in scenario 2 of JotL",
       "deck": "Basic Zealot",
-      "edition": "Jaws of the Lion",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -366,7 +364,6 @@
     },
     "Vermling Raider":{
       "deck": "Vermling Raider",
-      "edition": "Jaws of the Lion",
       "count": 6,
       "levels": [
         {
@@ -416,7 +413,6 @@
       "display": "Common Vermling Raider",
       "note": "This is only used for JotL Scenario 1",
       "deck": "Common Vermling Raider",
-      "edition": "Jaws of the Lion",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -466,7 +462,6 @@
       "gfx": "Vermling Raider",
       "note": "This is only used for JotL Scenario 2",
       "deck": "Basic Vermling Raider",
-      "edition": "Jaws of the Lion",
       "hidden": true,
       "count": 6,
       "levels": [
@@ -514,7 +509,6 @@
     },
     "Black Sludge":{
       "deck": "Black Sludge",
-      "edition": "Jaws of the Lion",
       "count": 6,
       "levels": [
         {
@@ -561,7 +555,6 @@
     },
     "Rat Monstrosity":{
       "deck": "Monstrosity",
-      "edition": "Jaws of the Lion",
       "count": 10,
       "levels": [
         {
@@ -610,7 +603,6 @@
       "note": "Interestingly, range is no longer on the monster stats sheets in JotL, range is only on ability cards.",
       "display": "Blood Imp",
       "deck": "Imp (JotL)",
-      "edition": "Jaws of the Lion",
       "count": 10,
       "levels": [
         {
@@ -657,7 +649,6 @@
     },
     "Blood Monstrosity":{
       "deck": "Monstrosity",
-      "edition": "Jaws of the Lion",
       "count": 6,
       "levels": [
         {
@@ -704,7 +695,6 @@
     },
     "Chaos Demon":{
       "deck": "Chaos Demon",
-      "edition": "Jaws of the Lion",
       "count": 4,
       "levels": [
         {
@@ -750,7 +740,6 @@
       ]
     },
     "Blood Tumor":{
-      "edition": "Jaws of the Lion",
       "count": 1,
       "deck": "Boss (JotL)",
       "levels": [
@@ -830,7 +819,6 @@
       ]
     },
     "First of the Order":{
-      "edition": "Jaws of the Lion",
       "count": 1,
       "deck": "First of the Order",
       "levels": [
@@ -909,7 +897,6 @@
       ]
     },
     "Blood Horror":{
-      "edition": "Jaws of the Lion",
       "count": 1,
       "deck": "Boss (JotL)",
       "levels": [
@@ -989,7 +976,6 @@
     },
     "Stone Golem (JotL)":{
       "display": "Stone Golem",
-      "edition": "Jaws of the Lion",
       "deck": "Stone Golem (JotL)",
       "count": 6,
       "levels": [
@@ -1236,7 +1222,6 @@
     },
     "Giant Viper (JotL)":{
       "display": "Giant Viper",
-      "edition": "Jaws of the Lion",
       "deck": "Giant Viper (JotL)",
       "count": 10,
       "levels": [
@@ -1365,7 +1350,6 @@
     "Basic Giant Viper":{
       "gfx": "Giant Viper",
       "note": "Used only in JotL scenario 3",
-      "edition": "Jaws of the Lion",
       "deck": "Basic Giant Viper",
       "hidden": true,
       "count": 10,
@@ -1494,7 +1478,6 @@
     },
     "Living Corpse (JotL)":{
       "display": "Living Corpse",
-      "edition": "Jaws of the Lion",
       "deck": "Living Corpse (JotL)",
       "count": 6,
       "levels": [
@@ -1572,7 +1555,6 @@
     },
     "Living Spirit (JotL)":{
       "display": "Living Spirit",
-      "edition": "Jaws of the Lion",
       "deck": "Living Spirit (JotL)",
       "count": 4,
       "levels": [
@@ -1700,7 +1682,6 @@
     },
     "Black Imp (JotL)":{
       "display": "Black Imp",
-      "edition": "Jaws of the Lion",
       "deck": "Imp (JotL)",
       "count": 10,
       "levels": [
@@ -1824,7 +1805,6 @@
     },
     "Vermling Scout (JotL)":{
       "display": "Vermling Scout",
-      "edition": "Jaws of the Lion",
       "deck": "Vermling Scout (JotL)",
       "count": 10,
       "levels": [

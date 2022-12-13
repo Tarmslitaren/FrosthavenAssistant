@@ -24,6 +24,13 @@ class MonsterModel {
     if(kDebugMode) {
       print(name);
     }
+
+
+    String anEdition = edition;
+    if(data.containsKey('edition')){
+      anEdition = data['edition'] as String;
+    }
+
     String display = name;
     if(data.containsKey('display')){
       display = data['display'] as String;
@@ -49,7 +56,7 @@ class MonsterModel {
     for (var item in levels) {
       monsterLevelDataList.add(MonsterLevelModel.fromJson(item));
     }
-    return MonsterModel(name, display, gfx, hidden, flying, deck, count, monsterLevelDataList, edition);
+    return MonsterModel(name, display, gfx, hidden, flying, deck, count, monsterLevelDataList, anEdition);
   }
 }
 

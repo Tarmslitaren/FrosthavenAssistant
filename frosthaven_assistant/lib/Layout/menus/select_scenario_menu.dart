@@ -70,6 +70,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       }
       return a.compareTo(b);
     });
+
     if (campaign != "Solo") {
       _foundScenarios.insert(0, "custom");
     }
@@ -122,11 +123,13 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   Widget buildSoloTile(String name) {
     List<String> strings = name.split(':');
+    strings[0] = strings[0].replaceFirst(" ", "Å");
+    String characterName = strings[0].split("Å")[1];
 
     String  text = strings[1];
     for (String key in _gameState.modelData.value.keys) {
       for (CharacterClass character in _gameState.modelData.value[key]!.characters) {
-        if(character.name == strings[0]) {
+        if(character.name == characterName) {
           if(character.hidden && !_gameState.unlockedClasses.contains(
               character.name)){
             text = "???";
@@ -141,7 +144,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         height: 30,
         width: 30,
         fit: BoxFit.scaleDown,
-        image: AssetImage("assets/images/class-icons/${strings[0]}.png"),
+        image: AssetImage("assets/images/class-icons/$characterName.png"),
       ),
       title: Text(text, style: const TextStyle(fontSize: 18)),
       onTap: () {
