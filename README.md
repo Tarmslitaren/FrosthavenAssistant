@@ -1,6 +1,6 @@
 # X-haven Assistant
 
-##Support
+## Support
 For problems and suggestions please file an issue here: https://github.com/Tarmslitaren/FrosthavenAssistant/issues
 or contact me directly at royalhasse@gmail.com
 Please check out 'known issues' and 'usage' below before submitting, thanks!
