@@ -1,5 +1,10 @@
 # X-haven Assistant
 
+##Support
+For problems and suggestions please file an issue here: https://github.com/Tarmslitaren/FrosthavenAssistant/issues
+or contact me directly at royalhasse@gmail.com
+Please check out 'known issues' and 'usage' below before submitting, thanks!
+
 ## What is it?
 A helper app for the boardgames Gloomhaven, Frosthaven and any derivative.
 The aim is to be a good replacement for the Gloomhaven Helper by Esoteric Software that is no longer available.
@@ -96,7 +101,7 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself.
 - Some text alignment issues with small texts on small (mobile) screens.
 - Condition Animations do not play when connected.
-- You can connect devices with different versions, but there will be issues. PLease update all your devices!
+- You can connect devices with different versions, but there will be issues. Please update all your devices!
 - Objectives and Escorts do not update their 'level'/health when monster level is changed. Please set the correct monster level before setting a scenario.
 - All Data is added by hand. Please Report any error in a ticket on github.
 
