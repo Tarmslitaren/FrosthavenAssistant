@@ -81,12 +81,12 @@ scaling the bottom/top bars (for better visibility on some screens for example).
   - To start a server, be sure to be on a wifi network and press 'start host server' from the settings menu
   - To connect to a server in a local network, type in the local ip of the server (usually 192.168.something) and press 'Connect as client'.
 
-##Connection Usage:
-#Starting:
+## Connection Usage:
+# Starting:
 - From the settings menu, have one device start a server. Be sure to be on wifi. (a local ip will be shown i.e. 192.168.X.XXX)
 - A Port can also be defined if needed. be aware that ports under 1024 are typically blocked.
 - Other devices on the same network may connect from the settings menu, by typing in the server's ip, and port.
-#Info:
+# Info:
 - Be aware, when connecting to a server, the server's game state will overwrite the local state.
 - If a client gets out of sync with the server (by disconnecting, or making an update before it gets the latest state from server), the client's state change will be ignored and overwritten by latest state from server to get you back on track. And a message index out of sync will be shown.
 - There should be no issue having several users change things simultaneously: the menus will not close when getting an update.
