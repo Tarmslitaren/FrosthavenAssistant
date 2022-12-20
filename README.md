@@ -93,6 +93,7 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Local settings are not affected by the game state (Except for don't standees option). It is up to the users to decide on options that affect the game.
 
 ## Known Issues:
+- Does not handle character modifier decks.
 - Some animations will not play, (and some may play when they shouldn't) when receiving updates over wifi.
 - TCP connection only works over wifi as far as I can tell, and has not been tested in any other environment.
 - When trying to connect without a server on same network, may result in a lot of error messages shown when it tries connecting.
@@ -104,7 +105,6 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - You can connect devices with different versions, but there will be issues. Please update all your devices!
 - Objectives and Escorts do not update their 'level'/health when monster level is changed. Please set the correct monster level before setting a scenario.
 - All Data is added by hand. Please Report any error in a ticket on github.
-
 ## Roadmap
 - Next:
   - Minor improvements
