@@ -53,7 +53,7 @@ class LootCardWidget extends StatefulWidget {
               "+$value",
               style: TextStyle(
                 shadows: [shadow],
-                fontSize: 30,
+                fontSize: 30 * scale,
                 color: Colors.white,
               ),
             ),
@@ -61,7 +61,7 @@ class LootCardWidget extends StatefulWidget {
               "1418",
               style: TextStyle(
                 shadows: [shadow],
-                fontSize: 30,
+                fontSize: 30 * scale,
                 color: Colors.white,
               ),
             ),
@@ -69,7 +69,7 @@ class LootCardWidget extends StatefulWidget {
               "1419",
               style: TextStyle(
                 shadows: [shadow],
-                fontSize: 30,
+                fontSize: 30 * scale,
                 color: Colors.white,
               ),
             )
