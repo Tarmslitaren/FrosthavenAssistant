@@ -36,9 +36,9 @@ class SetScenarioCommand extends Command {
             item.characterState.health.value =
             item.characterClass.healthByLevel[item.characterState.level.value -
                 1];
+            item.characterState.maxHealth.value = item.characterState.health.value;
             item.characterState.xp.value = 0;
             item.characterState.conditions.value.clear();
-
             item.characterState.summonList.value.clear();
 
             if(item.id == "Beast Tyrant") {
