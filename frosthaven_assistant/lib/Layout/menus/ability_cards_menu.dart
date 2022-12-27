@@ -6,7 +6,6 @@ import 'package:frosthaven_assistant/Resource/monster_ability_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:reorderables/reorderables.dart';
 import '../../Resource/commands/reorder_ability_list_command.dart';
-import '../../Resource/enums.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
@@ -81,20 +80,13 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
   List<Widget> generateList(
       List<MonsterAbilityCardModel> inputList, bool allOpen) {
     List<Widget> list = [];
-    bool hasDiviner = false;
-    for (var item in _gameState.currentList) {
-      if (item is Character && item.characterClass.name == "Diviner") {
-        hasDiviner = true;
-        break;
-      }
-    }
     for (var item in inputList) {
       Item value = Item(
           key: Key(item.nr.toString()),
           data: item,
           monsterData: widget.monsterData,
           revealed: isRevealed(item) || allOpen == true);
-      if (hasDiviner && _gameState.roundState.value == RoundState.playTurns) {
+      {
         InkWell gestureDetector = InkWell(
           key: Key(item.nr.toString()),
           onTap: () {
@@ -104,8 +96,6 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           child: value,
         );
         list.add(gestureDetector);
-      } else {
-        list.add(value);
       }
     }
     return list;
@@ -171,7 +161,6 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           var drawPile =
               widget.monsterAbilityState.drawPile.getList().reversed.toList();
           var discardPile = widget.monsterAbilityState.discardPile.getList();
-          double scale = getScaleByReference(context);
           return Container(
               constraints: BoxConstraints(
                 //minWidth: MediaQuery.of(context).size.width,
@@ -181,8 +170,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                   color: Colors.transparent,
                   child: Stack(children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
-                      _gameState.roundState.value == RoundState.playTurns
-                          ? Container(
+                      Container(
                               margin: const EdgeInsets.all(2),
                               decoration: const BoxDecoration(
                                   color: Colors.white,
@@ -239,8 +227,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                           : Container(),
                                       Container()
                                     ]),
-                              ]))
-                          : Container(),
+                              ])),
                       Flexible(
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -248,8 +235,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                         children: [
                           buildList(
                               drawPile,
-                              _gameState.roundState.value ==
-                                  RoundState.playTurns,
+                              true,
                               false),
                           buildList(discardPile, false, true)
                         ],
