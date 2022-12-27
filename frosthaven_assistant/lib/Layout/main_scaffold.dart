@@ -39,7 +39,9 @@ Widget createMainScaffold(BuildContext context) {
                           if (getIt<GameState>().toastMessage.value != "") {
                             showToastSticky(
                                 context, getIt<GameState>().toastMessage.value);
-                            getIt<GameState>().toastMessage.value = "";
+                            //getIt<GameState>().toastMessage.value = "";
+                          } else {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
                           }
                         });
 

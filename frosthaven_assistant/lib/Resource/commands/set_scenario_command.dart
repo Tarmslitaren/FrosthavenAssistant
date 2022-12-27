@@ -71,6 +71,7 @@ class SetScenarioCommand extends Command {
       }
 
       GameMethods.clearTurnState(true);
+      _gameState.toastMessage.value = "";
     }
 
 
@@ -101,7 +102,7 @@ class SetScenarioCommand extends Command {
             levelAdjust = rule.level;
           }
         }
-        if(rule.type == "allies"){
+        if(rule.type.toLowerCase() == "allies"){
           for (String item in rule.list){
             alliedMonsters.add(item);
           }

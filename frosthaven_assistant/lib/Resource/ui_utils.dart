@@ -191,7 +191,6 @@ bool hasGHVersion(String name) {
 
 showToast(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //duration: const Duration(days: 1),
     content: GestureDetector(
       onTap: () {
         ScaffoldMessenger.of(context).hideCurrentSnackBar();

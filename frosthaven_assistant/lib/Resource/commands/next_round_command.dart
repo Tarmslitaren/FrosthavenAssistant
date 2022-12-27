@@ -32,6 +32,7 @@ class NextRoundCommand extends Command {
     }
     GameMethods.clearTurnState(false);
 
+    _gameState.toastMessage.value = "";
     for(var rule in _gameState.scenarioSpecialRules) {
       if(rule.type == "Timer" && rule.startOfRound == false) {
         for(int round in rule.list) {
