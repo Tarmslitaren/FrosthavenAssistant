@@ -6097,7 +6097,7 @@
           "note": "Spawn one Algox Guard at d nad one Algox Archer at e. Normal for 2 characters, elite each second spawning for 3, or all elite for 4 characters."
         },
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Algox Archer", "Algox Icespeaker"]
         },
         {
@@ -6119,7 +6119,7 @@
       "lootDeck": {"coin":12,"lumber": 2,"hide": 2,"snowthistle":2,"arrowvine":1, "axenut": 1},
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Algox Archer", "Algox Guard"]
         }
         ]
@@ -6129,7 +6129,7 @@
       "lootDeck": {"coin":12,"lumber": 2,"hide": 2,"axenut":1,"arrowvine":1, "snowthistle": 2},
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Algox Icespeaker"]
         },
         {
@@ -6340,7 +6340,7 @@
           "note": "Replace each baseless standee with one normal Frozen Corpse."
         },
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Algox Guard", "Algox Scout"]
         }]
     },
@@ -6349,7 +6349,7 @@
       "lootDeck": {"coin":10,"lumber": 3,"metal":4,"hide": 2,"rockroot":1,"arrowvine":2},
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Algox Guard", "Algox Archer"]
         }]
     },
@@ -6990,7 +6990,7 @@
       "lootDeck": {"coin":8,"lumber": 4,"metal":4,"hide": 4},
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Abael Scout", "Piranha Pig"]
         },
         {
@@ -7014,7 +7014,7 @@
       "note": "more trees in sections? 55.2",
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Piranha Pig"]
         },
         {
@@ -7033,7 +7033,7 @@
       "lootDeck": {"coin":9,"metal":2,"hide": 5,"axenut":1,"snowthistle":2, "treasure": 1},
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Fish King", "Piranha Pig"]
         },
         {
@@ -7101,7 +7101,7 @@
       "lootDeck": {"coin":9,"lumber": 2,"metal":5,"hide": 2,"rockroot":1,"treasure": 1},
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Aesther Ashblade", "Aesther Scout"]
         },
         {
@@ -7251,7 +7251,7 @@
       "lootDeck": {"coin":9,"lumber": 4,"metal":2,"hide": 2,"axenut":1,"flamefruit":1, "treasure": 1},
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Scabwit"]
        },
         {
@@ -7279,7 +7279,7 @@
       "lootDeck": {"coin":9,"lumber": 4,"metal":2,"hide": 2,"axenut":1,"flamefruit":1, "treasure": 1},
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Yoglang"]
         },
         {
@@ -7528,7 +7528,7 @@
       "note": "sections: make sure there are no normal hounds in scenario 97.1",
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["Hound Scenario 112"]
         }]
     },
@@ -7916,7 +7916,7 @@
       "lootDeck": {"coin":4,"lumber": 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1},
       "special": [
         {
-          "type": "Allies",
+          "type": "allies",
           "list": ["City Guard (FH)"]
         }]
     },
