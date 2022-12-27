@@ -1957,12 +1957,12 @@
         },
         {
           "level": 1,
-          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "%target% 2", "%pierce% 1","%pierce% 1" ]},
+          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "%target% 2", "%pierce% 1" ]},
           "elite": { "health": 9, "move": 2, "attack": 3, "attributes": [  "%shield% 1","%target% 2", "%pierce% 1" ]}
         },
         {
           "level": 2,
-          "normal": {	"health": 9, "move": 3, "attack": 2, "attributes": [ "%target% 2", "%pierce% 1", "%pierce% 1"]},
+          "normal": {	"health": 9, "move": 3, "attack": 2, "attributes": [ "%target% 2", "%pierce% 1"]},
           "elite": { "health": 11, "move": 3, "attack": 3, "attributes": [ "%shield% 1", "%target% 2", "%pierce% 2" ]}
         },
         {
