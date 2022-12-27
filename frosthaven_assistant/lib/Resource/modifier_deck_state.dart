@@ -87,7 +87,6 @@ class ModifierDeck {
     cardCount.value++;
   }
 
-  //TODO: when this is run on init and has curse/bless - shuffles deck when shouldn need to?
   void _handleCurseBless(
       CardType type, ValueNotifier<int> notifier, String gfx) {
     //count and add or remove, then shuffle
@@ -98,7 +97,10 @@ class ModifierDeck {
         count++;
       }
     }
-    if (count < notifier.value) {
+    if(count == notifier.value) {
+      shuffle = false;
+    }
+    else if (count < notifier.value) {
       for (int i = count; i < notifier.value; i++) {
         if (type == CardType.curse && badOmen.value > 0) {
           badOmen.value--;
