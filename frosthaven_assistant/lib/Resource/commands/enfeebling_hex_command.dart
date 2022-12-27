@@ -17,6 +17,6 @@ class EnfeeblingHexCommand extends Command {
 
   @override
   String describe() {
-    return "Enfeebling Hex";
+    return "Add minus one";
   }
 }

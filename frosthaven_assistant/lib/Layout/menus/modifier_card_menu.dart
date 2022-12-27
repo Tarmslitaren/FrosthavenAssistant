@@ -245,6 +245,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                         child: Text(
                                             "Add -1 card (added : ${deck.addedMinusOnes.value})"),
                                       ),
+                                      //todo: remove -1, remove -2 (gray out if maxed out)
                                     ],
                                   ),
                                 Row(

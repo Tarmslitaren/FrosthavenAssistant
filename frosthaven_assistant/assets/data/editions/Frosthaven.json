@@ -5786,7 +5786,7 @@
     },
     "#4 Heart of Ice A": {
       "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Scout" ],
-      "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":2, "treasure": 1},
+      "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
       "special": [
         {
           "type": "allies",
@@ -5795,7 +5795,7 @@
     },
     "#4 Heart of Ice B": {
       "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Scout" ],
-      "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":2, "treasure": 1}
+      "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1}
     },
     "#5 Frozen Crypt": {
       "monsters": [ "Frozen Corpse", "Ice Wraith" ],
@@ -5811,7 +5811,7 @@
     },
     "#8 Crystal Trench": {
       "monsters": [ "Hound (FH)", "Polar Bear", "Snow Imp" ],
-      "lootDeck": {"coin":6,"lumber": 5,"hide": 5,"rockroot":1,"arrowvine":1, "snowthistle": 1}
+      "lootDeck": {"coin":6,"lumber": 5,"hide": 5,"axenut":1,"arrowvine":1, "snowthistle": 1}
     },
     "#9 Glowing Catacombs": {
       "monsters": [ "Ice Wraith", "Living Doom","Living Spirit (FH)","Ooze (FH)" ],
@@ -6063,7 +6063,7 @@
     },
     "#24 Upper Spire": {
       "monsters": [ "Chaos Demon (FH)", "Living Bones (FH)", "Wind Demon (FH)" ],
-      "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 2,"axenut":2,"flamefruit":1, "treasure": 1}
+      "lootDeck": {"coin":8,"lumber": 2,"metal":4,"hide": 2,"axenut":2,"flamefruit":1, "treasure": 1}
     },
     "#25 Rusted Tunnels": {
       "monsters": [ "Flaming Bladespinner", "Robotic Boltshooter", "Ruined Machine" ],
@@ -6071,7 +6071,7 @@
     },
     "#26 Quatryl Library": {
       "monsters": [ "Ancient Artillery (FH)", "Ruined Machine", "Steel Automaton" ],
-      "lootDeck": {"coin":10,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":2},
+      "lootDeck": {"coin":10,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":1},
       "special": [
         {
           "type": "Timer",
@@ -6188,7 +6188,7 @@
     },
     "#33 Thawed Wood": {
       "monsters": [ "Black Imp (FH)", "Earth Demon (FH)", "Flame Demon (FH)", "Shrike Fiend" ],
-      "lootDeck": {"coin":8,"lumber": 5,"hide": 3,"rockroot":1,"flamefruit":2, "axenut": 2}
+      "lootDeck": {"coin":8,"lumber": 5,"hide": 3,"rockroot":1,"flamefruit":1, "axenut": 2}
     },
     "#34 Top of the Spire": {
       "monsters": [ "Lord of Chaos" ]
@@ -6346,7 +6346,7 @@
     },
     "#40 Relief Effort": {
       "monsters": [ "Algox Archer", "Algox Guard", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
-      "lootDeck": {"coin":10,"lumber": 3,"metal":4,"hide": 2,"rockroot":1,"arrowvine":2},
+      "lootDeck": {"coin":10,"lumber": 3,"metal":4,"hide": 2,"flamefruit":1,"arrowvine":2},
       "special": [
         {
           "type": "allies",
@@ -7010,7 +7010,7 @@
     },
     "#74 Gaps in the Road": {
       "monsters": [ "Algox Archer", "Algox Guard" ,"Algox Priest", "Forest Imp (FH)", "Piranha Pig", "Wind Demon (FH)" ],
-      "lootDeck": {"coin":4,"lumber": 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1},
+      "lootDeck": {"coin":7,"lumber": 5,"metal":2,"hide": 3,"flamefruit":1,"arrowvine":2},
       "note": "more trees in sections? 55.2",
       "special": [
         {
@@ -7169,7 +7169,7 @@
     },
     "#85 Deadly Pastimes": {
       "monsters": [ "Black Imp (FH)", "Burrowing Blade", "Lightning Eel", "Polar Bear" ],
-      "lootDeck": {"coin":7,"lumber": 2,"metal":3,"hide": 4,"rockroot":2,"snowthistle":2, "treasure": 1}
+      "lootDeck": {"coin":7,"lumber": 2,"metal":3,"hide": 4,"rockroot":2,"snowthistle":1, "treasure": 1}
     },
     "#86 Lady in White": {
       "monsters": [ "Black Imp (FH)", "Earth Demon (FH)", "Ice Wraith" ],
@@ -7513,7 +7513,7 @@
     },
     "#111 Ice Cave": {
       "monsters": [ "Frost Demon (FH)", "Hound (FH)", "Night Demon (FH)", "Wind Demon (FH)" ],
-      "lootDeck": {"coin":10,"lumber": 1,"metal":3,"hide": 3,"corpse":1,"arrowvine":2, "treasure": 1},
+      "lootDeck": {"coin":10,"lumber": 1,"metal":3,"hide": 3,"corpsecap":1,"arrowvine":2},
       "special": [
         {
           "type": "Timer",
@@ -7524,7 +7524,7 @@
     },
     "#112 Raised by Wolves": {
       "monsters": ["Burrowing Blade", "Chaos Demon (FH)","Earth Demon (FH)", "Hound Scenario 112" ],
-      "lootDeck": {"coin":8,"lumber": 1,"metal":3,"hide": 5,"rockroot":1,"axenut":2},
+      "lootDeck": {"coin":8,"lumber": 1,"metal":3,"hide": 5,"rockroot":2,"axenut":1},
       "note": "sections: make sure there are no normal hounds in scenario 97.1",
       "special": [
         {
@@ -7705,7 +7705,7 @@
     },
     "#122 The Eternal Crave": {
       "monsters": [ "Ice Wraith", "Polar Bear", "Snow Imp" ],
-      "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 4,"rockroot":1,"axenut":1, "treasure": 1}
+      "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 4,"rockroot":2,"axenut":1, "treasure": 1}
     },
     "#123 The Titan": {
       "monsters": [ "Algox Snowspeaker", "Ancient Artillery (FH)" ],
@@ -7913,7 +7913,7 @@
     },
     "#129 How to Lay an Ambush": {
       "monsters": [ "Algox Guard", "Algox Priest", "Algox Scout", "City Guard (FH)" ],
-      "lootDeck": {"coin":4,"lumber": 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1},
+      "lootDeck": {"coin":10,"lumber": 4,"metal":2,"hide": 2,"axenut":1,"snowthistle":1},
       "special": [
         {
           "type": "allies",
@@ -7922,7 +7922,7 @@
     },
     "#130 And Then, A Stream": {
       "monsters": [ "Frozen Corpse", "Lightning Eel", "Shrike Fiend" ],
-      "lootDeck": {"coin":6,"lumber": 5,"metal":2,"hide": 3,"flamefruit":1,"arrowvine":1, "treasure": 1},
+      "lootDeck": {"coin":6,"lumber": 5,"metal":2,"hide": 3,"flamefruit":1,"arrowvine":2, "treasure": 1},
       "special": [
         {
           "type": "Timer",
@@ -8001,7 +8001,7 @@
       "monsters": [ "Lightning Eel", "Living Bones (FH)", "Living Spirit (FH)", "Lurker Wavethrower", "Piranha Pig" ],
       "lootDeck": {"coin":8,"lumber": 4,"hide": 4,"snowthistle":1,"arrowvine":1}
     },
-    "#137 The Pirate Queen's Lair": {
+    "#137 The Pirate Queen's Haul": {
       "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Forest Imp (FH)", "Piranha Pig", "Polar Bear" ,"Robotic Boltshooter" ],
       "lootDeck": {"coin":12,"lumber": 4,"metal":4,"hide": 4,"treasure": 1}
     }
