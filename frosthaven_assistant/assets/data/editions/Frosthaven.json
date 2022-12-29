@@ -5784,7 +5784,7 @@
           "list": ["Algox Priest","Hound"]
         }]
     },
-    "#4 Heart of Ice A": {
+    "#4A Heart of Ice": {
       "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Scout" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
       "special": [
@@ -5793,7 +5793,7 @@
           "list": ["Algox Archer", "Algox Guard"]
         }]
     },
-    "#4 Heart of Ice B": {
+    "#4B Heart of Ice": {
       "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Scout" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1}
     },
@@ -7246,7 +7246,7 @@
         }
       ]
     },
-    "#93 Midwinter Brawl A": {
+    "#93A Midwinter Brawl": {
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Scout", "Yoglang", "Hound (FH)", "Polar Bear", "Scabwit", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":9,"lumber": 4,"metal":2,"hide": 2,"axenut":1,"flamefruit":1, "treasure": 1},
       "special": [
@@ -7274,7 +7274,7 @@
         }
       ]
     },
-    "#93 Midwinter Brawl B": {
+    "#93B Midwinter Brawl": {
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Scout", "Yoglang", "Hound (FH)", "Polar Bear", "Scabwit", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":9,"lumber": 4,"metal":2,"hide": 2,"axenut":1,"flamefruit":1, "treasure": 1},
       "special": [

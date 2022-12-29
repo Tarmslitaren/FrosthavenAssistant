@@ -33,7 +33,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   int? findNrFromScenarioName(String scenario) {
     String nr = scenario.substring(1);
     for (int i = 0; i < nr.length; i++) {
-      if (nr[i] == ' ') {
+      if (nr[i] == ' ' || nr[i] == 'A' || nr[i] == 'B') {
         nr = nr.substring(0, i);
         int? number = int.tryParse(nr);
         return number;
@@ -151,6 +151,24 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         _gameState.action(SetScenarioCommand(name, false));
         Navigator.pop(context);
         //Navigator.pop(context);
+      },
+    );
+  }
+
+  Widget buildTile(String name) {
+    String title = name;
+    if(getIt<Settings>().showScenarioNames.value == false) {
+      title = name.split(' ')[0];
+    }
+
+    return ListTile(
+      title: Text(title,
+          style:
+          const TextStyle(fontSize: 18)),
+      onTap: () {
+        _gameState.action(SetScenarioCommand(
+            name, false));
+        Navigator.pop(context);
       },
     );
   }
@@ -293,16 +311,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                             itemBuilder: (context, index) =>
                                 _gameState.currentCampaign.value == "Solo"
                                     ? buildSoloTile(_foundScenarios[index])
-                                    : ListTile(
-                                        title: Text(_foundScenarios[index],
-                                            style:
-                                                const TextStyle(fontSize: 18)),
-                                        onTap: () {
-                                          _gameState.action(SetScenarioCommand(
-                                              _foundScenarios[index], false));
-                                          Navigator.pop(context);
-                                        },
-                                      ),
+                                    : buildTile(_foundScenarios[index])
                           ))
                         : const Text(
                             'No results found',

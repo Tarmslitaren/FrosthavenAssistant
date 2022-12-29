@@ -153,6 +153,16 @@ class SettingsMenuState extends State<SettingsMenu> {
                           getIt<GameState>().updateAllUI();
                         });
                       }),
+                  CheckboxListTile(
+                      title: const Text("Show Scenario names in list"),
+                      value: settings.showScenarioNames.value,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          settings.showScenarioNames.value = value!;
+                          settings.saveToDisk();
+                          getIt<GameState>().updateAllUI();
+                        });
+                      }),
                   Container(
                     constraints:
                         const BoxConstraints(minWidth: double.infinity),

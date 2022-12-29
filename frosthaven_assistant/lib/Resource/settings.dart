@@ -30,6 +30,7 @@ class Settings {
   final expireConditions = ValueNotifier<bool>(false);
   final hideLootDeck = ValueNotifier<bool>(false);
   final shimmer = ValueNotifier<bool>(true);
+  final showScenarioNames = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -211,6 +212,9 @@ class Settings {
       if (data["shimmer"] != null) {
         shimmer.value = data["shimmer"];
       }
+      if (data["showScenarioNames"] != null) {
+        showScenarioNames.value = data["showScenarioNames"];
+      }
     }
   }
 
@@ -254,6 +258,7 @@ class Settings {
         '"style": ${style.value.index}, '
         '"darkMode": ${darkMode.value}, '
         '"shimmer": ${shimmer.value}, '
+        '"showScenarioNames": ${showScenarioNames.value}, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort" '
         '}';
