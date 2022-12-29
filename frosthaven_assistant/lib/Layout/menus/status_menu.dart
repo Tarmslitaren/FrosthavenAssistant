@@ -141,7 +141,9 @@ class StatusMenuState extends State<StatusMenu> {
                   bottom: 0,
                   right: 0,
                   child: Text(text,
-                      style: TextStyle(color: Colors.blue,
+                      style: TextStyle(
+                          color: Colors.white,
+                          height: 0.5,
                           fontSize: 16 * scale,
                           shadows: [
                         Shadow(
@@ -411,7 +413,7 @@ class StatusMenuState extends State<StatusMenu> {
                           figure.health,
                           ChangeHealthCommand(0, figureId, ownerId),
                           figure.maxHealth.value,
-                          "assets/images/blood.png",
+                          "assets/images/abilities/heal.png",
                           false,
                           Colors.red,
                           figureId: figureId,

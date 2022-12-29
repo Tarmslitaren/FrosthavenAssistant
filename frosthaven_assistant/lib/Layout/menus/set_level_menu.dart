@@ -268,7 +268,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                                   widget.figure!.maxHealth,
                                   ChangeMaxHealthCommand(0, figureId, ownerId),
                                   900,
-                                  "assets/images/blood.png",
+                                  "assets/images/abilities/heal.png",
                                   true,
                                   Colors.red,
                                   figureId: figureId,

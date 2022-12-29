@@ -143,7 +143,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     ChangeMaxHealthCommand(
                         0, widget.character.id, widget.character.id),
                     900,
-                    "assets/images/blood.png",
+                    "assets/images/abilities/heal.png",
                     true,
                     Colors.red,
                     figureId: widget.character.id,

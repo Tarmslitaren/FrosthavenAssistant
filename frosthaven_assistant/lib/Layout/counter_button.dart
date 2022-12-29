@@ -87,8 +87,9 @@ class CounterButtonState extends State<CounterButton> {
                   bottom: 0,
                   right: 0,
                   child: Text(text, style: TextStyle(
+                    height: 0.5,
                     fontSize: 16 * widget.scale,
-                      color: widget.color,
+                      color: Colors.white,//widget.color,
                       shadows: [shadow]
                   ),)
               );
