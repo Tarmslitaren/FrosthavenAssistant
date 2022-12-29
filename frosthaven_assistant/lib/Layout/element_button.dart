@@ -91,7 +91,9 @@ class AnimatedContainerButtonState extends State<ElementButton> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return Container(
+        margin: EdgeInsets.only(right:2 * settings.userScalingBars.value ),
+        child: InkWell(
       hoverColor: Colors.transparent,
       splashColor: Colors.transparent,
       focusColor: Colors.transparent,
@@ -99,7 +101,8 @@ class AnimatedContainerButtonState extends State<ElementButton> {
       //behavior: HitTestBehavior.opaque,
 
 
-        onDoubleTap: () {
+
+        onLongPress: () {
           setState(() {
             _gameState.elementState.value
                 .update(widget.element, (value) => ElementState.half);
@@ -135,7 +138,6 @@ class AnimatedContainerButtonState extends State<ElementButton> {
           alignment: Alignment.center,
           children: [
             Container(
-              margin: EdgeInsets.only(right:2 * settings.userScalingBars.value ),
               padding: EdgeInsets.only(bottom: 2 * settings.userScalingBars.value),
                 child: Align(
               alignment: Alignment.bottomCenter,
@@ -172,7 +174,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                                   )
                           ]),
                       // Define how long the animation should take.
-                      duration: const Duration(milliseconds: 400),
+                      duration: const Duration(milliseconds: 350),
                       // Provide an optional curve to make the animation feel smoother.
                       curve: Curves.decelerate//Curves.linearToEaseOut
                     );
@@ -180,12 +182,14 @@ class AnimatedContainerButtonState extends State<ElementButton> {
             )),
             Image(
               //fit: BoxFit.contain,
-              height: widget.width * settings.userScalingBars.value * 0.75,
+              height: widget.width * settings.userScalingBars.value * 0.65,
               image: AssetImage(widget.icon),
-              width: widget.width * settings.userScalingBars.value * 0.75,
+              color: _gameState.elementState.value[widget.element] ==
+                  ElementState.inert ? getIt<Settings>().darkMode.value == false ? Colors.black : null : null,
+              width: widget.width * settings.userScalingBars.value * 0.65,
 
             ),
           ],
-        ));
+        )));
   }
 }
