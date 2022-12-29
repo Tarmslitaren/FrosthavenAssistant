@@ -170,7 +170,7 @@ class MonsterInstance extends Figure{
   }
 
   late final int standeeNr;
-  late final MonsterType type;
+  late MonsterType type;
   late final String name;
   late final String gfx;
 

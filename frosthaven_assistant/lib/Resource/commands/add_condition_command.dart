@@ -1,4 +1,6 @@
 
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
+
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../enums.dart';
@@ -11,7 +13,7 @@ class AddConditionCommand extends Command {
   AddConditionCommand(this.condition, this.figureId, this.ownerId);
   @override
   void execute() {
-    Figure figure = getFigure(ownerId, figureId)!;
+    Figure figure = GameMethods.getFigure(ownerId, figureId)!;
     List<Condition> newList = [];
     newList.addAll(figure.conditions.value);
     newList.add(condition);
@@ -26,33 +28,6 @@ class AddConditionCommand extends Command {
       }
     }
     getIt<GameState>().updateList.value++;
-  }
-
-  Figure? getFigure(String ownerId, String figureId) {
-    for(var item in getIt<GameState>().currentList) {
-      if(item.id == figureId) {
-        return (item as Character).characterState;
-      }
-      if(item.id == ownerId){
-        if(item is Monster) {
-
-          for (var instance in item.monsterInstances.value) {
-            String id = instance.name + instance.gfx + instance.standeeNr.toString();
-            if(id == figureId){
-              return instance;
-            }
-          }
-        }else if(item is Character){
-          for (var instance in item.characterState.summonList.value){
-            String id = instance.name + instance.gfx + instance.standeeNr.toString();
-            if (id == figureId) {
-              return instance;
-            }
-          }
-        }
-      }
-    }
-    return null;
   }
 
   @override
