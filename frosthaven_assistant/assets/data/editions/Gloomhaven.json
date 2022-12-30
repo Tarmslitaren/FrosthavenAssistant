@@ -748,7 +748,7 @@
           "x": 0.783,
           "y": 0.76
         }], "     %attack% + 0", "^%range% + 0", "[r]","%ice%%use%", "^+2 %attack%", "!^%immobilize%", "[/r]","*.........", "%retaliate% + 2" ],
-        [ 713, false, 14, "%shield% + 4","*.........", "%heal% 2", "^%range% 3","[r]", "%ice%%use%", "^+3 %heal%", "[/r]","*.........", "[r]","%air%%use%", "^%attack% + 0", "[/r]" ],
+        [ 713, false, 14, "%shield% + 4","*.........", "%heal% 2", "^%range% 3","[r]", "%ice%%use%", "^+3 %heal%", "[/r]","*.........", "[r]","%air%%use%", "^%attack% + 0", "^%range% + 0", "[/r]" ],
         [ 714, true, 47, [{
           "gfx": "air",
           "x": 0.783,
