@@ -95,8 +95,8 @@
         [ 995, false, 37, "%move% - 1","*.........", "%attack% + 0", "^%range% + 1", "^%immobilize%" ],
         [ 996, false, 48, "^£ELITE:", "!^Focus on the enemy","^with the lowest current hit point value.", "%move% + 1","*.........", "%attack% + 0", "^%range% + 0" ],
         [ 997, false, 55, "^£ELITE:", "!^Focus on the enemy","^with the highest current hit point value.",
-          "%move% + 0","*.........", "%attack% - 1", "^%wound%"],
-        [ 998, true, 69, "%attack% + 1","*.........", "%heal% 1", "*.........","%regenerate%", "^Self" ]
+          "%move% + 0","*.........", "%attack% - 1", "^%range% + 0", "^%wound%"],
+        [ 998, true, 69, "%attack% + 1", "^%range% + 0","*.........", "%heal% 1", "*.........","%regenerate%", "^Self" ]
       ]
     },
     {
