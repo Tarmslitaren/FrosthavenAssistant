@@ -88,9 +88,9 @@
       "name": "Basic Vermling Raider",
       "note": "initial test for ..... lines",
       "cards": [
-        ["Screaming Shot", 368, true, 85, "%push% 1", "^Target all adjacent enemies", "*.........", "%attack% + 1", "^%range% + 2", "*Shuffle this deck at the end of the round." ],
-        ["Careful Throw", 369, false, 36, "%move% + 0","*.........", "%attack% - 1", "^%range% + 2", "*They will move to avoid being adjacent to their focus." ],
-        ["Dual Daggers", 370, false, 59, "%attack% + 0", "^%range% + 2", "^%target% 2", "*They are not moving this round." ],
+        ["Screaming Shot", 368, true, 85, "%push% 1", "^Target all adjacent enemies", "*.........", "%attack% + 1", "^%range% 2", "*Shuffle this deck at the end of the round." ],
+        ["Careful Throw", 369, false, 36, "%move% + 0","*.........", "%attack% - 1", "^%range% 2", "*They will move to avoid being adjacent to their focus." ],
+        ["Dual Daggers", 370, false, 59, "%attack% + 0", "^%range% 2", "^%target% 2", "*They are not moving this round." ],
         ["Nothing Special", 371, false, 50, "%move% + 0","*.........", "%attack% + 0", "*This is exactly how they acted last scenario." ]
       ]
     },
