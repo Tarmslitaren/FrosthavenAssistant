@@ -3978,7 +3978,7 @@
         "monsters": [ "Living Bones", "Living Corpse", "City Guard", "City Archer", "Captain of the Guard" ],
         "special": [
           {
-            "type": "allies",
+            "type": "Allies",
             "list": ["Living Bones", "Living Corpse"]
           }]
       },
@@ -3986,7 +3986,7 @@
         "monsters": [ "Living Bones", "Living Corpse", "Cultist", "City Guard", "City Archer", "Jekserah" ],
         "special": [
           {
-            "type": "allies",
+            "type": "Allies",
             "list": ["City Guard", "City Archer"]
           }]
       },
@@ -4152,7 +4152,7 @@
             "health": "(8+L)xC"
           },
           {
-            "type": "allies",
+            "type": "Allies",
             "list": ["Night Demon"]
           },
           {
@@ -4191,7 +4191,7 @@
             "health": "10+(2xL)"
           },
           {
-            "type": "allies",
+            "type": "Allies",
             "list": ["City Archer"]
           },
           {
@@ -4794,7 +4794,7 @@
         "monsters": [ "Cave Bear", "Hound", "Bandit Guard", "Bandit Archer", "Living Spirit" ],
         "special": [
           {
-            "type": "allies",
+            "type": "Allies",
             "list": ["Hound", "Cave Bear"]
           }]
       },
