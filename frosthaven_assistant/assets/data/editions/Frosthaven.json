@@ -6260,22 +6260,22 @@
         {
           "type": "Objective",
           "name": "Door a",
-          "health": "(C-1)/2x(L+3)"
+          "health": "(L+3)x(C-1)d2"
         },
         {
           "type": "Objective",
           "name": "Door b",
-          "health": "(C-1)/2x(L+3)"
+          "health": "(L+3)x(C-1)d2"
         },
         {
           "type": "Objective",
           "name": "Door c",
-          "health": "(C-1)/2x(L+3)"
+          "health": "(L+3)x(C-1)d2"
         },
         {
           "type": "Objective",
           "name": "Door d",
-          "health": "(C-1)/2x(L+3)"
+          "health": "(L+3)x(C-1)d2"
         },
         {
           "type": "Timer",

@@ -296,7 +296,7 @@ class StatApplier{
 
         for (int j = i + 1; j < lineInput.length; j++) {
           String val = lineInput[j];
-          if (val.contains(regExpNumbers)) {
+          if (val.contains(regExpNumbers) || val == "d") {
             if (val != ' ') formula += val;
             endIndex = j;
           } else {

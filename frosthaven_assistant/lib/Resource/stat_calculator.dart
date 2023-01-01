@@ -95,6 +95,8 @@ class Parser {
           x *= parseFactor()!; // multiplication
         else if (eat('/')) {
           x = (x / parseFactor()!).ceil();
+        } else if (eat('d')) {
+          x = (x / parseFactor()!).floor();
         } else {
           return x;
         }
