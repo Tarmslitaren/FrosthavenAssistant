@@ -5872,17 +5872,17 @@
         {
           "type": "Objective",
           "name": "Ice Pillar 1",
-          "health": "(2+L)xC/2"
+          "health": "(2+L)xCd2"
         },
         {
           "type": "Objective",
           "name": "Ice Pillar 2",
-          "health": "(2+L)xC/2"
+          "health": "(2+L)xCd2"
         },
         {
           "type": "Objective",
           "name": "Ice Pillar 3",
-          "health": "(2+L)xC/2"
+          "health": "(2+L)xCd2"
         }
       ]
     },
@@ -6248,7 +6248,7 @@
         {
           "type": "Escort",
           "name": "Crain",
-          "health": "Cx(L+3)/2",
+          "health": "Cx(L+3)d2",
           "init": 50
         }
         ]
@@ -7499,7 +7499,6 @@
         }]
     },
     "#106 The Tempus Forge": {
-      "note:" : "altar objectives (L+2)xC/2 in sections: 8.1, 184.4, 189.2,183.1,29.2",
       "monsters": [ "City Guard (FH)", "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":7,"lumber": 2,"metal":4,"hide":2,"rockroot":2,"arrowvine":2, "treasure": 1}
     },
@@ -7512,7 +7511,6 @@
       "lootDeck": {"coin":15,"lumber": 2,"metal":2,"hide": 2,"rockroot":1,"arrowvine":1, "treasure": 1}
     },
     "#109 Furious Factory": {
-      "note": "sections, possibly miniboss + metal cabinet (2+L)xC/2: 195.2,166.3, 186.2,162.1,175.5,72.3",
       "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":11,"lumber": 2,"metal":4,"rockroot":2,"flamefruit":1}
     },
@@ -8089,12 +8087,12 @@
          "type": "Timer",
          "startOfRound": false,
          "list": [-1],
-         "note": "all characters suffer 1 damage until altar is destroyed"
+         "note": "all characters suffer 1 damage until altar 1 is destroyed"
        },
        {
          "type": "Objective",
          "name": "Altar 1",
-         "health": "(L+2)xC/2"
+         "health": "(L+2)xCd2"
        }
       ]
     },
@@ -8125,7 +8123,7 @@
           "note": "Spawn one Hound at any empty starting Hex. Normal for 2 characters, elite every other time for 3, elite for 4."
         }]
     },
-    "#29.2 Crystal Trench (8)": {
+    "#29.2 The Tempus Forge (8)": {
       "monsters": ["Blacksmith"]
     },
     "#36.1 A Contained Fire (89)": {
@@ -8133,12 +8131,12 @@
         {
           "type": "Objective",
           "name": "Altar a",
-          "health": "(L+1)xC/2"
+          "health": "(L+1)xCd2"
         },
         {
           "type": "Objective",
           "name": "Altar b",
-          "health": "(L+1)xC/2"
+          "health": "(L+1)xCd2"
         }
       ]
     },
@@ -8346,6 +8344,45 @@
     },
     "#182.2 Ice Cave (111)": {
       "monsters": ["The Shimmer"]
+    },
+    "#183.1 The Tempus Forge (106)": {
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Altar 4",
+          "health": "(L+2)xCd2"
+        }
+      ]
+    },
+    "#184.4 The Tempus Forge (106)": {
+      "special": [
+        {
+          "type": "Timer",
+          "startOfRound": false,
+          "list": [-1],
+          "note": "all monsters heal 2 damage until altar 2 is destroyed"
+        },
+        {
+          "type": "Objective",
+          "name": "Altar 2",
+          "health": "(L+2)xCd2"
+        }
+      ]
+    },
+    "#189.2 The Tempus Forge (106)": {
+      "special": [
+        {
+          "type": "Timer",
+          "startOfRound": false,
+          "list": [-1],
+          "note": "all characters gain muddle until altar 3 is destroyed"
+        },
+        {
+          "type": "Objective",
+          "name": "Altar 3",
+          "health": "(L+2)xCd2"
+        }
+      ]
     },
     "#194.2 The Dancing Iceberg (131)": {
       "monsters": ["Lurker Conductor"]
