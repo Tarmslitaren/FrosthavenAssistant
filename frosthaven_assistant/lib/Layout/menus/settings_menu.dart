@@ -78,7 +78,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                         });
                       }),
                   CheckboxListTile(
-                      title: const Text("Drag Order for initiative"),
+                      title: const Text("Don't ask for initiative"),
                       value: settings.noInit.value,
                       onChanged: (bool? value) {
                         setState(() {

@@ -1772,9 +1772,6 @@
     "#64 Flooded Catacombs": {
       "monsters": [ "Living Bones", "Living Corpse" ]
     },
-    "#67 Branching Alleyway": {
-      "monsters": [ "Aesther Scout", "Black Imp", "Night Demon" ]
-    },
     "#71 Quiet Rotation": {
       "monsters": [ "Living Spirit", "Stone Golem" ]
     },
