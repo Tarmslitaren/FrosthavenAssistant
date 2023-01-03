@@ -13,7 +13,8 @@
           "level": 3,
           "health": 4,
           "move": 3,
-          "attack": 2
+          "attack": 2,
+          "standees": 2
         },
         "Twilight Archon": {
           "level": 9,

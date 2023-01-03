@@ -131,11 +131,12 @@
           "move": 2,
           "attack": 3
         },
-        "Shadow wolf": {
+        "Shadow Wolf": {
           "level": 1,
           "health": 3,
           "move": 3,
-          "attack": 2
+          "attack": 2,
+          "standees": 2
         },
         "Iron Beast ": {
           "level": 1,
@@ -184,7 +185,8 @@
         "Nail Sphere": {
           "level": 6,
           "health": 4,
-          "move": 2
+          "move": 2,
+          "standees": 3
         },
         "Void Eater": {
           "level": 7,
