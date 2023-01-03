@@ -94,6 +94,7 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 
 ## Known Issues:
 - Does not handle character modifier decks.
+- Severe flickering on lineage os 16, 17 and 18. 
 - Some animations will not play, (and some may play when they shouldn't) when receiving updates over wifi.
 - TCP connection only works over wifi as far as I can tell, and has not been tested in any other environment.
 - When trying to connect without a server on same network, may result in a lot of error messages shown when it tries connecting.
@@ -108,7 +109,9 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 ## Roadmap
 - Next:
   - Minor improvements
+- And then:
   - Trails of Ashes campaign
+  - Something else.
 
 ## Copyright / License
 
