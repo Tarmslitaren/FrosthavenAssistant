@@ -4720,7 +4720,7 @@
           "level": -1
         },
         {
-          "type": "allies",
+          "type": "Allies",
           "list": ["City Guard", "City Archer"]
         }]
     },
@@ -4738,7 +4738,7 @@
           "level": -1
         },
         {
-          "type": "allies",
+          "type": "Allies",
           "list": ["Inox Guard", "Inox Archer"]
         }
         ]

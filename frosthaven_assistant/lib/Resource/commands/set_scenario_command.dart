@@ -102,7 +102,7 @@ class SetScenarioCommand extends Command {
             levelAdjust = rule.level;
           }
         }
-        if(rule.type.toLowerCase() == "allies"){
+        if(rule.type == "Allies"){
           for (String item in rule.list){
             alliedMonsters.add(item);
           }
