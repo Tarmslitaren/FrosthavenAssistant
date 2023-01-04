@@ -228,7 +228,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
+                                    Wrap(
                                       children: [
                                         if (hasDiviner)
                                           if (deck.badOmen.value == 0)
