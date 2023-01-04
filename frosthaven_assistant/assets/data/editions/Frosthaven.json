@@ -2532,7 +2532,7 @@
         {
           "level": 0,
           "normal": {"health": 3, "move": 3, "attack": 2, "attributes": [ "%shield% 1" ]},
-          "elite": {"health": 5, "move": 4, "attack": 3, "attributes": [ "%shield% 1" ]}
+          "elite": {"health": 5, "move": 3, "attack": 3, "attributes": [ "%shield% 1" ]}
         },
         {
           "level": 1,
