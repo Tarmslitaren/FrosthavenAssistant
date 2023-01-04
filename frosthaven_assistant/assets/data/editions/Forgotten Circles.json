@@ -242,42 +242,114 @@
         {
           "level": 0, "health": "12xC", "move": 3, "attack": 3, "attributes": [ "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
-
         },
         {
           "level": 1, "health": "14xC", "move": 4, "attack": 3, "attributes": [ "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
-
         },
         {
           "level": 2, "health": "16xC", "move": 4, "attack": 4, "attributes": [ "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
-
         },
         {
           "level": 3, "health": "18xC", "move": 4, "attack": 4, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
-
         },
         {
           "level": 4, "health": "21xC", "move": 4, "attack": 5, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
-
         },
         {
           "level": 5, "health": "25xC", "move": 4, "attack": 5, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
-
         },
         {
           "level": 6, "health": "28xC", "move": 4, "attack": 6, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
-
         },
         {
           "level": 7, "health": "32xC", "move": 5, "attack": 6, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%" ],
           "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
-
+        }
+      ]
+    },
+    "The Husk (66)": {
+      "gfx": "Aesther Ashblade",
+      "deck": "Ashblade",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": "12xC", "move": 3, "attack": 4, "attributes": [ "%poison%", "%shield% 1" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 1, "health": "14xC", "move": 4, "attack": 4, "attributes": [ "%poison%", "%shield% 1" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 2, "health": "16xC", "move": 4, "attack": 5, "attributes": [ "%poison%", "%shield% 1" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 3, "health": "18xC", "move": 4, "attack": 5, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%", "%shield% 1" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 4, "health": "21xC", "move": 4, "attack": 6, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%", "%shield% 1" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 5, "health": "25xC", "move": 4, "attack": 6, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%", "%shield% 1" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 6, "health": "28xC", "move": 4, "attack": 7, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%", "%shield% 1" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 7, "health": "32xC", "move": 5, "attack": 7, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%", "%shield% 1" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        }
+      ]
+    },
+    "The Husk (128)": {
+      "gfx": "Aesther Ashblade",
+      "deck": "Ashblade",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": "12xC", "move": 3, "attack": 6, "attributes": [ "%poison%", "%shield% 2" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 1, "health": "14xC", "move": 4, "attack": 6, "attributes": [ "%poison%", "%shield% 2" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 2, "health": "16xC", "move": 4, "attack": 7, "attributes": [ "%poison%", "%shield% 2" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 3, "health": "18xC", "move": 4, "attack": 7, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%", "%shield% 2" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 4, "health": "21xC", "move": 4, "attack": 8, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%", "%shield% 2" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 5, "health": "25xC", "move": 4, "attack": 8, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%", "%shield% 2" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 6, "health": "28xC", "move": 4, "attack": 9, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%", "%shield% 2" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
+        },
+        {
+          "level": 7, "health": "32xC", "move": 5, "attack": 9, "attributes": [ "^^Attackers gain","^^disadvantage", "%poison%", "%shield% 2" ],
+          "immunities": [ "%immobilize%", "%disarm%", "%stun%", "%push%", "%pull%" ]
         }
       ]
     },
@@ -1772,6 +1844,15 @@
     "#64 Flooded Catacombs": {
       "monsters": [ "Living Bones", "Living Corpse" ]
     },
+    "#66 Sardonic Smile": {
+      "monsters": [ "The Husk (66)" ],
+      "special": [
+        {
+          "type": "Note",
+          "name": "",
+          "note": "Transfer The Husk's conditions and HP to The Husk (66)"
+        } ]
+    },
     "#71 Quiet Rotation": {
       "monsters": [ "Living Spirit", "Stone Golem" ]
     },
@@ -1810,9 +1891,6 @@
           "note": "Spawn Harrower Infester adjacent to Portal 4."
         }
       ]
-    },
-    "#81 Narrow Street": {
-      "monsters": [ "Aesther Scout", "Black Imp", "Night Demon" ]
     },
     "#84 Gateway to the Firmament": {
       "monsters": [ "Elham", "Earth Demon", "Flame Demon", "Frost Demon", "Icestorm Guardian of the Firmament", "Lavaflow Guardian of the Firmament" ]
@@ -1948,11 +2026,17 @@
     "#127 Guarded Nursery": {
       "monsters": [ "Vermling Scout", "Vermling Shaman" ]
     },
+    "#128 Cracked Facade": {
+      "monsters": [ "The Husk (128)" ],
+      "special": [
+        {
+          "type": "Note",
+          "name": "",
+          "note": "Transfer The Husk (66)'s conditions and HP to The Husk (128)"
+        } ]
+    },
     "#129 Fighting Dirty": {
       "monsters": [ "Ooze" ]
-    },
-    "#132 Near the Gates": {
-      "monsters": [ "Aesther Scout", "Black Imp", "Night Demon" ]
     },
     "#133 A Secret Floor": {
       "monsters": [ "Ancient Artillery" ]
