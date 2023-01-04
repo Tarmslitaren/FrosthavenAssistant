@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/character_widget.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
+import 'package:frosthaven_assistant/Resource/adjustable_scroll_controller.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
@@ -157,7 +158,7 @@ class ListAnimationState extends State<ListAnimation> {
 class MainListState extends State<MainList> {
   final GameState _gameState = getIt<GameState>();
   List<Widget> _generatedList = [];
-  static final scrollController = ScrollController();
+  static final scrollController = AdjustableScrollController();
 
   static late List<double> lastPositions;
 
@@ -193,7 +194,7 @@ class MainListState extends State<MainList> {
                         : 'assets/images/bg/frosthaven-bg.png')),
               ),
               child: ValueListenableBuilder<Map<String, CampaignModel>>(
-                //TODO: show loading animation while waiting to load from disk.
+                  //TODO: show loading animation while waiting to load from disk.
                   valueListenable: _gameState.modelData,
                   builder: (context, value, child) {
                     return ValueListenableBuilder<double>(
@@ -356,30 +357,37 @@ class MainListState extends State<MainList> {
         valueListenable: _gameState.updateList,
         builder: (context, value, child) {
           double width = getMainListWidth(context);
-          bool canFit2Columns = MediaQuery.of(context).size.width >=
-              width * 2;
-          if(canFit2Columns) {
+          bool canFit2Columns = MediaQuery.of(context).size.width >= width * 2;
+          if (canFit2Columns) {
             width *= 2;
           }
-          double paddingLeft = (MediaQuery.of(context).size.width - 2 * getMainListWidth(context))/2;
+          double paddingLeft = (MediaQuery.of(context).size.width -
+                  2 * getMainListWidth(context)) /
+              2;
           List<double> itemHeights = getItemHeights(context);
           int itemsPerColumn = getItemsCanFitOneColumn(itemHeights); //no good
           bool ignoreScroll = false;
-          if (canFit2Columns && itemHeights.isNotEmpty &&
+          if (canFit2Columns &&
+              itemHeights.isNotEmpty &&
               itemHeights.last <
-                  2 * MediaQuery.of(context).size.height - 160 * getIt<Settings>().userScalingBars.value - 200) {
+                  2 * MediaQuery.of(context).size.height -
+                      160 * getIt<Settings>().userScalingBars.value -
+                      200) {
             //TODO: 200 is a feely hack, hard to say why it is needed
             ignoreScroll = true;
           }
 
           double paddingBottom = 60 * getIt<Settings>().userScalingBars.value;
-          if(GameMethods.hasAllies()){
-            paddingBottom *=2;
+          if (GameMethods.hasAllies()) {
+            paddingBottom *= 2;
           }
           return Container(
-            margin: canFit2Columns? EdgeInsets.only(left: paddingLeft, right: paddingLeft): null,
-              alignment: canFit2Columns? Alignment.topLeft: Alignment.topCenter,
-              width:canFit2Columns? width : MediaQuery.of(context).size.width,
+              margin: canFit2Columns
+                  ? EdgeInsets.only(left: paddingLeft, right: paddingLeft)
+                  : null,
+              alignment:
+                  canFit2Columns ? Alignment.topLeft : Alignment.topCenter,
+              width: canFit2Columns ? width : MediaQuery.of(context).size.width,
               child: Scrollbar(
                 interactive: !ignoreScroll,
                 controller: scrollController,

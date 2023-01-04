@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
+import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/settings.dart';
@@ -19,6 +20,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
   final TextEditingController _controller = TextEditingController();
+  final AdjustableScrollController _scrollController =
+      AdjustableScrollController();
 
   @override
   initState() {
@@ -77,7 +80,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
         if (aNr != null && bNr != null) {
           return aNr.compareTo(bNr);
         }
-        return a.compareTo(b);});
+        return a.compareTo(b);
+      });
       // we use the toLowerCase() method to make it case-insensitive
     }
 
@@ -133,18 +137,20 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                   Expanded(
                     child: _foundScenarios.isNotEmpty
                         ? Scrollbar(
+                            controller: _scrollController,
                             child: ListView.builder(
-                            itemCount: _foundScenarios.length,
-                            itemBuilder: (context, index) => ListTile(
-                              title: Text(_foundScenarios[index],
-                                  style: TextStyle(fontSize: 18)),
-                              onTap: () {
-                                _gameState.action(SetScenarioCommand(
-                                    _foundScenarios[index], true));
-                                Navigator.pop(context);
-                              },
-                            ),
-                          ))
+                              controller: _scrollController,
+                              itemCount: _foundScenarios.length,
+                              itemBuilder: (context, index) => ListTile(
+                                title: Text(_foundScenarios[index],
+                                    style: TextStyle(fontSize: 18)),
+                                onTap: () {
+                                  _gameState.action(SetScenarioCommand(
+                                      _foundScenarios[index], true));
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ))
                         : const Text(
                             'No results found',
                             style: TextStyle(fontSize: 24),

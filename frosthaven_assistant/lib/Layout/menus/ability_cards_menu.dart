@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/monster_ability_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:reorderables/reorderables.dart';
+import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/reorder_ability_list_command.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/ui_utils.dart';
@@ -130,7 +131,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           child: reorderable
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
-                  scrollController: ScrollController(),
+                  scrollController: AdjustableScrollController(),
                   scrollAnimationDuration: const Duration(milliseconds: 400),
                   reorderAnimationDuration: const Duration(milliseconds: 400),
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
@@ -147,7 +148,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                   children: generateList(list, allOpen),
                 )
               : ListView(
-                  controller: ScrollController(),
+                  controller: AdjustableScrollController(),
                   children: generateList(list, allOpen).reversed.toList(),
                 ),
         ));
@@ -163,80 +164,70 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           var discardPile = widget.monsterAbilityState.discardPile.getList();
           return Container(
               constraints: BoxConstraints(
-                //minWidth: MediaQuery.of(context).size.width,
-                  maxWidth: MediaQuery.of(context).size.width,// 184 * 0.8 * scale * 2 + 8,
+                  //minWidth: MediaQuery.of(context).size.width,
+                  maxWidth: MediaQuery.of(context)
+                      .size
+                      .width, // 184 * 0.8 * scale * 2 + 8,
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
                       Container(
-                              margin: const EdgeInsets.all(2),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(4),
-                                      topRight: Radius.circular(4))),
+                          margin: const EdgeInsets.all(2),
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(4),
+                                  topRight: Radius.circular(4))),
 
-                              //color: Colors.transparent,
+                          //color: Colors.transparent,
 
-                              child: Column(children: [
-                                Wrap(
-                                    //alignment: WrapAlignment.start,
-                                    crossAxisAlignment:
-                                        WrapCrossAlignment.center,
-                                    runSpacing: 0,
-                                    spacing: 0,
+                          child: Column(children: [
+                            Wrap(
+                                //alignment: WrapAlignment.start,
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                runSpacing: 0,
+                                spacing: 0,
 
-                                    //mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      const Text(
-                                        " Reveal:",
-                                      ),
-                                      drawPile.length > 0
-                                          ? buildRevealButton(
-                                              drawPile.length, 1)
-                                          : Container(),
-                                      drawPile.length > 1
-                                          ? buildRevealButton(
-                                              drawPile.length, 2)
-                                          : Container(),
-                                      drawPile.length > 2
-                                          ? buildRevealButton(
-                                              drawPile.length, 3)
-                                          : Container(),
-                                      drawPile.length > 3
-                                          ? buildRevealButton(
-                                              drawPile.length, 4)
-                                          : Container(),
-                                      drawPile.length > 4
-                                          ? buildRevealButton(
-                                              drawPile.length, 5)
-                                          : Container(),
-                                      drawPile.length > 5
-                                          ? buildRevealButton(
-                                              drawPile.length, 6)
-                                          : Container(),
-                                      drawPile.length > 6
-                                          ? buildRevealButton(
-                                              drawPile.length, 7)
-                                          : Container(),
-                                      drawPile.length > 7
-                                          ? buildRevealButton(
-                                              drawPile.length, 8)
-                                          : Container(),
-                                      Container()
-                                    ]),
-                              ])),
+                                //mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  const Text(
+                                    " Reveal:",
+                                  ),
+                                  drawPile.length > 0
+                                      ? buildRevealButton(drawPile.length, 1)
+                                      : Container(),
+                                  drawPile.length > 1
+                                      ? buildRevealButton(drawPile.length, 2)
+                                      : Container(),
+                                  drawPile.length > 2
+                                      ? buildRevealButton(drawPile.length, 3)
+                                      : Container(),
+                                  drawPile.length > 3
+                                      ? buildRevealButton(drawPile.length, 4)
+                                      : Container(),
+                                  drawPile.length > 4
+                                      ? buildRevealButton(drawPile.length, 5)
+                                      : Container(),
+                                  drawPile.length > 5
+                                      ? buildRevealButton(drawPile.length, 6)
+                                      : Container(),
+                                  drawPile.length > 6
+                                      ? buildRevealButton(drawPile.length, 7)
+                                      : Container(),
+                                  drawPile.length > 7
+                                      ? buildRevealButton(drawPile.length, 8)
+                                      : Container(),
+                                  Container()
+                                ]),
+                          ])),
                       Flexible(
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildList(
-                              drawPile,
-                              true,
-                              false),
+                          buildList(drawPile, true, false),
                           buildList(discardPile, false, true)
                         ],
                       )),

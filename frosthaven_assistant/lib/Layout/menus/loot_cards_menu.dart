@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add__special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/remove__special_loot_card_command.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/loot_deck_state.dart';
@@ -69,7 +70,7 @@ class LootCardMenuState extends State<LootCardMenu> {
           //width: 118 * getScaleByReference(context), //184 * 0.8 *
           child: GridView.count(
             //todo: replace wiut a gridview so can see more cards at once
-            controller: ScrollController(),
+            controller: AdjustableScrollController(),
             //gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
 
             // maxCrossAxisExtent: 5
@@ -87,14 +88,13 @@ class LootCardMenuState extends State<LootCardMenu> {
         ));
   }
 
-  final scrollController = ScrollController();
+  final scrollController = AdjustableScrollController();
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
-
           var discardPile = _gameState.lootDeck.discardPile.getList();
 
           return Container(
@@ -125,34 +125,47 @@ class LootCardMenuState extends State<LootCardMenu> {
                                         TextButton(
                                           onPressed: () {
                                             setState(() {
-                                              if (_gameState.lootDeck.hasCard1418) {
-                                                _gameState.action(RemoveSpecialLootCardCommand(1418));
+                                              if (_gameState
+                                                  .lootDeck.hasCard1418) {
+                                                _gameState.action(
+                                                    RemoveSpecialLootCardCommand(
+                                                        1418));
                                               } else {
-                                                _gameState.action(AddSpecialLootCardCommand(1418));
+                                                _gameState.action(
+                                                    AddSpecialLootCardCommand(
+                                                        1418));
                                               }
                                             });
                                           },
-                                          child: Text(_gameState.lootDeck.hasCard1418
-                                              ? "Remove card 1418"
-                                              : "Add card 1418"),
+                                          child: Text(
+                                              _gameState.lootDeck.hasCard1418
+                                                  ? "Remove card 1418"
+                                                  : "Add card 1418"),
                                         ),
                                         TextButton(
                                           onPressed: () {
                                             setState(() {
-                                              if (_gameState.lootDeck.hasCard1419) {
-                                                _gameState.action(RemoveSpecialLootCardCommand(1419));
+                                              if (_gameState
+                                                  .lootDeck.hasCard1419) {
+                                                _gameState.action(
+                                                    RemoveSpecialLootCardCommand(
+                                                        1419));
                                               } else {
-                                                _gameState.action(AddSpecialLootCardCommand(1419));
+                                                _gameState.action(
+                                                    AddSpecialLootCardCommand(
+                                                        1419));
                                               }
                                             });
                                           },
-                                          child: Text(_gameState.lootDeck.hasCard1419
-                                              ? "Remove card 1419"
-                                              : "Add card 1419"),
+                                          child: Text(
+                                              _gameState.lootDeck.hasCard1419
+                                                  ? "Remove card 1419"
+                                                  : "Add card 1419"),
                                         ),
                                         TextButton(
                                           onPressed: () {
-                                            openDialog(context, const LootCardEnhancementMenu());
+                                            openDialog(context,
+                                                const LootCardEnhancementMenu());
                                           },
                                           child: const Text("Enhance cards"),
                                         ),

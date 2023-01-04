@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_com
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:reorderables/reorderables.dart';
 
+import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
 import '../../Resource/game_state.dart';
@@ -20,7 +21,11 @@ class Item extends StatelessWidget {
   final bool revealed;
   final String name;
 
-  const Item({Key? key, required this.data, required this.revealed, required this.name})
+  const Item(
+      {Key? key,
+      required this.data,
+      required this.revealed,
+      required this.name})
       : super(key: key);
 
   @override
@@ -30,22 +35,23 @@ class Item extends StatelessWidget {
 
     child = revealed
         ? ModifierCardWidget.buildFront(data, scale)
-        : ModifierCardWidget.buildRear(scale,name);
+        : ModifierCardWidget.buildRear(scale, name);
 
     return Container(margin: EdgeInsets.all(2 * scale), child: child);
   }
 }
 
 class ModifierCardMenu extends StatefulWidget {
-  ModifierCardMenu({Key? key, required this.name}) : super(key: key){
+  ModifierCardMenu({Key? key, required this.name}) : super(key: key) {
     if (name == "Allies") {
-     // deck = getIt<GameState>().modifierDeckAllies;
-    }else {
-     // deck = getIt<GameState>().modifierDeck;
+      // deck = getIt<GameState>().modifierDeckAllies;
+    } else {
+      // deck = getIt<GameState>().modifierDeck;
     }
   }
 
   final String name;
+
   //late final ModifierDeck deck;
 
   @override
@@ -64,8 +70,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
   void markAsOpen(int revealed, ModifierDeck deck) {
     setState(() {
       _revealedList = [];
-      var drawPile =
-          deck.drawPile.getList().reversed.toList();
+      var drawPile = deck.drawPile.getList().reversed.toList();
       for (int i = 0; i < revealed; i++) {
         _revealedList.add(drawPile[i]);
       }
@@ -96,7 +101,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         ));
   }
 
-  List<Widget> generateList(List<ModifierCard> inputList, bool allOpen, String name) {
+  List<Widget> generateList(
+      List<ModifierCard> inputList, bool allOpen, String name) {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
       var item = inputList[index];
@@ -167,13 +173,13 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                   children: generateList(list, allOpen, name),
                 )
               : ListView(
-                  controller: ScrollController(),
+                  controller: AdjustableScrollController(),
                   children: generateList(list, allOpen, name).reversed.toList(),
                 ),
         ));
   }
 
-  final scrollController = ScrollController();
+  final scrollController = AdjustableScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -185,11 +191,10 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
             name = "Enemies";
           }
           ModifierDeck deck = _gameState.modifierDeck;
-          if(name != "Enemies") {
+          if (name != "Enemies") {
             deck = _gameState.modifierDeckAllies;
           }
-          var drawPile =
-              deck.drawPile.getList().reversed.toList();
+          var drawPile = deck.drawPile.getList().reversed.toList();
           var discardPile = deck.discardPile.getList();
           bool hasDiviner = false;
           for (var item in _gameState.currentList) {
@@ -206,152 +211,150 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
               child: Card(
                   color: Colors.transparent,
                   child: Stack(
-                    //fit: StackFit.expand,
+                      //fit: StackFit.expand,
                       children: [
-                    Column(mainAxisSize: MainAxisSize.max, children: [
-                      Container(
-                        width: 900, //need some width to fill out
-                          margin: const EdgeInsets.all(2),
-                          decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(4),
-                                  topRight: Radius.circular(4))),
-                          child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                    children: [
-                                      if (hasDiviner && widget.name.isEmpty)
-                                        if (deck.badOmen.value ==
-                                          0)
+                        Column(mainAxisSize: MainAxisSize.max, children: [
+                          Container(
+                              width: 900, //need some width to fill out
+                              margin: const EdgeInsets.all(2),
+                              decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(4),
+                                      topRight: Radius.circular(4))),
+                              child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        if (hasDiviner && widget.name.isEmpty)
+                                          if (deck.badOmen.value == 0)
+                                            TextButton(
+                                              onPressed: () {
+                                                _gameState
+                                                    .action(BadOmenCommand());
+                                              },
+                                              child: Text("Bad Omen"),
+                                            ),
+                                        if (deck.badOmen.value > 0)
+                                          Text(
+                                              "BadOmensLeft: ${deck.badOmen.value}",
+                                              style: getTitleTextStyle(1)),
                                         TextButton(
                                           onPressed: () {
-                                            _gameState.action(BadOmenCommand());
+                                            _gameState
+                                                .action(EnfeeblingHexCommand());
                                           },
-                                          child: Text("Bad Omen"),
+                                          child: Text(
+                                              "Add -1 card (added : ${deck.addedMinusOnes.value})"),
                                         ),
-                                      if (deck.badOmen.value >
-                                          0)
-                                        Text(
-                                            "BadOmensLeft: ${deck.badOmen.value}",
-                                            style: getTitleTextStyle(1)),
-                                      TextButton(
-                                        onPressed: () {
-                                          _gameState
-                                              .action(EnfeeblingHexCommand());
-                                        },
-                                        child: Text(
-                                            "Add -1 card (added : ${deck.addedMinusOnes.value})"),
-                                      ),
-                                      //todo: remove -1, remove -2 (gray out if maxed out)
-                                    ],
-                                  ),
-                                Row(
-                                  children: [
-                                    CounterButton(
-                                        deck.blesses,
-                                        ChangeBlessCommand.deck(deck),
-                                        10,
-                                        "assets/images/abilities/bless.png",
-                                        true,
-                                        Colors.white,
-                                        figureId: "unknown",
-                                        ownerId: "unknown",
-                                        scale: 1
+                                        //todo: remove -1, remove -2 (gray out if maxed out)
+                                      ],
                                     ),
-                                    CounterButton(
-                                        deck.curses,
-                                        ChangeCurseCommand.deck(deck),
-                                        10,
-                                        "assets/images/abilities/curse.png",
-                                        true,
-                                        Colors.white,
-                                        figureId: "unknown",
-                                        ownerId: "unknown",
-                                        scale: 1
+                                    Row(
+                                      children: [
+                                        CounterButton(
+                                            deck.blesses,
+                                            ChangeBlessCommand.deck(deck),
+                                            10,
+                                            "assets/images/abilities/bless.png",
+                                            true,
+                                            Colors.white,
+                                            figureId: "unknown",
+                                            ownerId: "unknown",
+                                            scale: 1),
+                                        CounterButton(
+                                            deck.curses,
+                                            ChangeCurseCommand.deck(deck),
+                                            10,
+                                            "assets/images/abilities/curse.png",
+                                            true,
+                                            Colors.white,
+                                            figureId: "unknown",
+                                            ownerId: "unknown",
+                                            scale: 1),
+                                      ],
                                     ),
-                                  ],
+                                    Wrap(
+                                        runSpacing: 0,
+                                        spacing: 0,
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.center,
+                                        children: [
+                                          const Text(
+                                            "   Reveal:",
+                                            //style: TextStyle(color: Colors.white)
+                                          ),
+                                          drawPile.length > 0
+                                              ? buildRevealButton(
+                                                  drawPile.length, 1, deck)
+                                              : Container(),
+                                          drawPile.length > 1
+                                              ? buildRevealButton(
+                                                  drawPile.length, 2, deck)
+                                              : Container(),
+                                          drawPile.length > 2
+                                              ? buildRevealButton(
+                                                  drawPile.length, 3, deck)
+                                              : Container(),
+                                          drawPile.length > 3
+                                              ? buildRevealButton(
+                                                  drawPile.length, 4, deck)
+                                              : Container(),
+                                          drawPile.length > 4
+                                              ? buildRevealButton(
+                                                  drawPile.length, 5, deck)
+                                              : Container(),
+                                          drawPile.length > 5
+                                              ? buildRevealButton(
+                                                  drawPile.length, 6, deck)
+                                              : Container(),
+                                        ]),
+                                  ])),
+                          Flexible(
+                              child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              buildList(drawPile, true, false, hasDiviner,
+                                  widget.name),
+                              buildList(discardPile, false, true, hasDiviner,
+                                  widget.name)
+                            ],
+                          )),
+                          Container(
+                            // color: Colors.white,
+                            height: 32,
+                            margin: const EdgeInsets.all(2),
+                            decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(4),
+                                    bottomRight: Radius.circular(4))),
+                          ),
+                        ]),
+                        Positioned(
+                            width: 100,
+                            height: 40,
+                            right: 0,
+                            bottom: 0,
+                            child: TextButton(
+                                child: const Text(
+                                  'Close',
+                                  style: TextStyle(fontSize: 20),
                                 ),
-                                Wrap(
-                                    runSpacing: 0,
-                                    spacing: 0,
-                                    crossAxisAlignment:
-                                        WrapCrossAlignment.center,
-                                    children: [
-                                      const Text(
-                                        "   Reveal:",
-                                        //style: TextStyle(color: Colors.white)
-                                      ),
-                                      drawPile.length > 0
-                                          ? buildRevealButton(
-                                              drawPile.length, 1, deck)
-                                          : Container(),
-                                      drawPile.length > 1
-                                          ? buildRevealButton(
-                                              drawPile.length, 2, deck)
-                                          : Container(),
-                                      drawPile.length > 2
-                                          ? buildRevealButton(
-                                              drawPile.length, 3, deck)
-                                          : Container(),
-                                      drawPile.length > 3
-                                          ? buildRevealButton(
-                                              drawPile.length, 4, deck)
-                                          : Container(),
-                                      drawPile.length > 4
-                                          ? buildRevealButton(
-                                              drawPile.length, 5, deck)
-                                          : Container(),
-                                      drawPile.length > 5
-                                          ? buildRevealButton(
-                                              drawPile.length, 6, deck)
-                                          : Container(),
-                                    ]),
-                              ])),
-                      Flexible(
-                          child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          buildList(drawPile, true, false, hasDiviner, widget.name),
-                          buildList(discardPile, false, true, hasDiviner, widget.name)
-                        ],
-                      )),
-                      Container(
-                        // color: Colors.white,
-                        height: 32,
-                        margin: const EdgeInsets.all(2),
-                        decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(4),
-                                bottomRight: Radius.circular(4))),
-                      ),
-                    ]),
-                    Positioned(
-                        width: 100,
-                        height: 40,
-                        right: 0,
-                        bottom: 0,
-                        child: TextButton(
-
-                            child: const Text(
-                              'Close',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            })),
-                    Positioned(
-                        bottom: 4,
-                        left: 20,
-                        child: Text(
-                          name,
-                          style: const TextStyle(fontSize: 20),
-                        ))
-                  ])));
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                })),
+                        Positioned(
+                            bottom: 4,
+                            left: 20,
+                            child: Text(
+                              name,
+                              style: const TextStyle(fontSize: 20),
+                            ))
+                      ])));
         });
   }
 }

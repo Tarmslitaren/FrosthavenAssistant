@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../Model/character_class.dart';
+import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/settings.dart';
@@ -22,6 +23,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
   final TextEditingController _controller = TextEditingController();
+  final AdjustableScrollController _scrollController =
+      AdjustableScrollController();
 
   @override
   initState() {
@@ -100,7 +103,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         if (aNr != null && bNr != null) {
           return aNr.compareTo(bNr);
         }
-        return a.compareTo(b);});
+        return a.compareTo(b);
+      });
       // we use the toLowerCase() method to make it case-insensitive
       //special hack for solo BladeSwarm
       if (_gameState.currentCampaign.value == "Solo") {
@@ -126,12 +130,13 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     strings[0] = strings[0].replaceFirst(" ", "Å");
     String characterName = strings[0].split("Å")[1];
 
-    String  text = strings[1];
+    String text = strings[1];
     for (String key in _gameState.modelData.value.keys) {
-      for (CharacterClass character in _gameState.modelData.value[key]!.characters) {
-        if(character.name == characterName) {
-          if(character.hidden && !_gameState.unlockedClasses.contains(
-              character.name)){
+      for (CharacterClass character
+          in _gameState.modelData.value[key]!.characters) {
+        if (character.name == characterName) {
+          if (character.hidden &&
+              !_gameState.unlockedClasses.contains(character.name)) {
             text = "???";
           }
           break;
@@ -157,17 +162,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   Widget buildTile(String name) {
     String title = name;
-    if(getIt<Settings>().showScenarioNames.value == false) {
+    if (getIt<Settings>().showScenarioNames.value == false) {
       title = name.split(' ')[0];
     }
 
     return ListTile(
-      title: Text(title,
-          style:
-          const TextStyle(fontSize: 18)),
+      title: Text(title, style: const TextStyle(fontSize: 18)),
       onTap: () {
-        _gameState.action(SetScenarioCommand(
-            name, false));
+        _gameState.action(SetScenarioCommand(name, false));
         Navigator.pop(context);
       },
     );
@@ -306,13 +308,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                   Expanded(
                     child: _foundScenarios.isNotEmpty
                         ? Scrollbar(
+                            controller: _scrollController,
                             child: ListView.builder(
-                            itemCount: _foundScenarios.length,
-                            itemBuilder: (context, index) =>
-                                _gameState.currentCampaign.value == "Solo"
-                                    ? buildSoloTile(_foundScenarios[index])
-                                    : buildTile(_foundScenarios[index])
-                          ))
+                                controller: _scrollController,
+                                itemCount: _foundScenarios.length,
+                                itemBuilder: (context, index) =>
+                                    _gameState.currentCampaign.value == "Solo"
+                                        ? buildSoloTile(_foundScenarios[index])
+                                        : buildTile(_foundScenarios[index])))
                         : const Text(
                             'No results found',
                             style: TextStyle(fontSize: 24),

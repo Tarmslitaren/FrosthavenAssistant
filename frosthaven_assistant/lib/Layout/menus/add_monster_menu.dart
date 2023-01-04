@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 
+import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_monster_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/game_state.dart';
@@ -22,7 +23,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   bool _showSpecial = false;
   bool _showBoss = true;
   late String _currentCampaign;
-  bool _enableFullScroll = false;
+  final AdjustableScrollController _scrollController =
+      AdjustableScrollController();
 
   @override
   initState() {
@@ -186,96 +188,6 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                           _runFilter("");
                         });
                       }),
-                  /*child:ExpansionTile(
-              onExpansionChanged: (opened) {
-                _enableFullScroll = opened;
-              },
-              title: Text("Show Monsters from: $_currentCampaign"),
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _setCampaign("All");
-                          });
-                        },
-                        child: const Text("All"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _setCampaign("JotL");
-                          });
-                        },
-                        child: const Text("Jaws of the Lion"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _setCampaign("Gloomhaven");
-                          });
-                        },
-                        child: const Text("Gloomhaven"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _setCampaign("Forgotten Circles");
-                          });
-                        },
-                        child: const Text("Forgotten Circles"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _setCampaign("Frosthaven");
-                          });
-                        },
-                        child: const Text("Frosthaven"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _setCampaign("Crimson Scales");
-                          });
-                        },
-                        child: const Text("Crimson Scales"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _setCampaign("Seeker of Xorn");
-                          });
-                        },
-                        child: const Text("Seeker of Xorn"),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            _setCampaign("Solo");
-                          });
-                        },
-                        child: const Text("Solo Scenarios"),
-                      ),
-                      CheckboxListTile(
-                          title: const Text("Show Bosses"),
-                          value: _showBoss,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              _showBoss = value!;
-                              _runFilter("");
-                            });
-                          }),
-                      CheckboxListTile(
-                          title: const Text("Show Scenario Special Monsters"),
-                          value: _showSpecial,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              _showSpecial = value!;
-                              _runFilter("");
-                            });
-                          }),
-                    ],
-                  )),*/
                   CheckboxListTile(
                       title: const Text("Add as Ally"),
                       value: _addAsAlly,
@@ -299,44 +211,46 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                   Expanded(
                     child: _foundMonsters.isNotEmpty
                         ? Scrollbar(
+                            controller: _scrollController,
                             child: ListView.builder(
-                            itemCount: _foundMonsters.length,
-                            itemBuilder: (context, index) => ListTile(
-                              leading: Image(
-                                height: 35,
-                                image: AssetImage(
-                                    "assets/images/monsters/${_foundMonsters[index].gfx}.png"),
-                              ),
-                              //iconColor: _foundMonsters[index].color,
-                              title: Text(
-                                  _foundMonsters[index].hidden
-                                      ? "${_foundMonsters[index].display} (special)"
-                                      : _foundMonsters[index].display,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: _monsterAlreadyAdded(
-                                              _foundMonsters[index].name)
-                                          ? Colors.grey
-                                          : Colors.black)),
-                              trailing: Text(
-                                  "(${_foundMonsters[index].edition})",
-                                  style: const TextStyle(
-                                      fontSize: 14, color: Colors.grey)),
-                              onTap: () {
-                                if (!_monsterAlreadyAdded(
-                                    _foundMonsters[index].name)) {
-                                  setState(() {
-                                    _gameState.action(AddMonsterCommand(
-                                        _foundMonsters[index].name,
-                                        null,
-                                        _addAsAlly)); //
-                                  });
+                              controller: _scrollController,
+                              itemCount: _foundMonsters.length,
+                              itemBuilder: (context, index) => ListTile(
+                                leading: Image(
+                                  height: 35,
+                                  image: AssetImage(
+                                      "assets/images/monsters/${_foundMonsters[index].gfx}.png"),
+                                ),
+                                //iconColor: _foundMonsters[index].color,
+                                title: Text(
+                                    _foundMonsters[index].hidden
+                                        ? "${_foundMonsters[index].display} (special)"
+                                        : _foundMonsters[index].display,
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: _monsterAlreadyAdded(
+                                                _foundMonsters[index].name)
+                                            ? Colors.grey
+                                            : Colors.black)),
+                                trailing: Text(
+                                    "(${_foundMonsters[index].edition})",
+                                    style: const TextStyle(
+                                        fontSize: 14, color: Colors.grey)),
+                                onTap: () {
+                                  if (!_monsterAlreadyAdded(
+                                      _foundMonsters[index].name)) {
+                                    setState(() {
+                                      _gameState.action(AddMonsterCommand(
+                                          _foundMonsters[index].name,
+                                          null,
+                                          _addAsAlly)); //
+                                    });
 
-                                  //Navigator.pop(context);
-                                }
-                              },
-                            ),
-                          ))
+                                    //Navigator.pop(context);
+                                  }
+                                },
+                              ),
+                            ))
                         : const Text(
                             'No results found',
                             style: TextStyle(fontSize: 24),

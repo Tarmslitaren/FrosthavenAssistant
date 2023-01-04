@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_state.dart';
@@ -23,6 +24,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   String chosenGfx = "blue";
 
   final List<SummonModel> _summonList = [];
+  final AdjustableScrollController _scrollController =
+      AdjustableScrollController();
 
   @override
   initState() {
@@ -125,9 +128,9 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   @override
   Widget build(BuildContext context) {
     double scale = 1;
-    if(!isPhoneScreen(context)) {
+    if (!isPhoneScreen(context)) {
       scale = 1.5;
-      if(isLargeTablet(context)) {
+      if (isLargeTablet(context)) {
         scale = 2;
       }
     }
@@ -187,7 +190,9 @@ class AddSummonMenuState extends State<AddSummonMenu> {
         ),
         Expanded(
             child: Scrollbar(
+                controller: _scrollController,
                 child: ListView.builder(
+                    controller: _scrollController,
                     itemCount: _summonList.length,
                     itemBuilder: (context, index) {
                       SummonModel model = _summonList[index];
