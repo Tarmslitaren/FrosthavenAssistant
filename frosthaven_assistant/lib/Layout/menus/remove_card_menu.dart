@@ -31,7 +31,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
   Widget build(BuildContext context) {
     return Container(
         width: 300,
-        height: 140,
+        height: 180,
         decoration: BoxDecoration(
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
@@ -53,7 +53,8 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                 Navigator.pop(context);
               },
               child: Text(
-                  "Remove ${widget.card.title} Card (nr: ${widget.card.nr})",
+                  "Remove ${widget.card.title}\nCard (nr: ${widget.card.nr})",
+                  textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 20))),
           const SizedBox(
             height: 20,
