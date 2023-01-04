@@ -7465,7 +7465,7 @@
       ]
     },
     "#104 Ruins of the Solstice": {
-      "monsters": [ "Earth Demon (FH)", "Forest Imp (FH)", "Frost Demon (FH)", "Savvas Icestorm (FH)", "Wind Demon (FH)", "Ice Wraith" ],
+      "monsters": [ "Earth Demon (FH)", "Forest Imp (FH)", "Frost Demon (FH)", "Savvas Icestorm (FH)", "Wind Demon (FH)"],
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"hide": 2,"axenut":1,"snowthistle":1},
       "special": [
         {
