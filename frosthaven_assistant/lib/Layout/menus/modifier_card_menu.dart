@@ -228,12 +228,12 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                   children: [
                                     Row(
                                       children: [
-                                        if (hasDiviner && widget.name.isEmpty)
+                                        if (hasDiviner)
                                           if (deck.badOmen.value == 0)
                                             TextButton(
                                               onPressed: () {
                                                 _gameState
-                                                    .action(BadOmenCommand());
+                                                    .action(BadOmenCommand(name == "Allies"));
                                               },
                                               child: Text("Bad Omen"),
                                             ),
@@ -244,7 +244,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                         TextButton(
                                           onPressed: () {
                                             _gameState
-                                                .action(EnfeeblingHexCommand());
+                                                .action(EnfeeblingHexCommand(name == "Allies"));
                                           },
                                           child: Text(
                                               "Add -1 card (added : ${deck.addedMinusOnes.value})"),

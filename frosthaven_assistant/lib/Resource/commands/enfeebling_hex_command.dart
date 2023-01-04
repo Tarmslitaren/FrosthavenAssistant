@@ -4,11 +4,16 @@ import '../action_handler.dart';
 import '../game_state.dart';
 
 class EnfeeblingHexCommand extends Command {
-  EnfeeblingHexCommand();
+  bool allies;
+  EnfeeblingHexCommand(this.allies);
 
   @override
   void execute() {
-    getIt<GameState>().modifierDeck.addMinusOne();
+    if (allies) {
+      getIt<GameState>().modifierDeckAllies.addMinusOne();
+    } else {
+      getIt<GameState>().modifierDeck.addMinusOne();
+    }
   }
 
   @override

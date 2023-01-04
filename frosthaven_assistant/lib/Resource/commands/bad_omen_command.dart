@@ -4,12 +4,18 @@ import '../action_handler.dart';
 import '../game_state.dart';
 
 class BadOmenCommand extends Command {
-  BadOmenCommand();
+  late final bool allies;
+  BadOmenCommand(this.allies);
+
 
   @override
   void execute() {
     GameState gameState = getIt<GameState>();
-    gameState.modifierDeck.badOmen.value += 6;
+    if(allies) {
+      gameState.modifierDeckAllies.badOmen.value += 6;
+    } else {
+      gameState.modifierDeck.badOmen.value += 6;
+    }
   }
 
   @override
