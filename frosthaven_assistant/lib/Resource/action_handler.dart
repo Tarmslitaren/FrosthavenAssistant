@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
-import '../services/network/client.dart';
 import '../services/network/network.dart';
-import '../services/network/server.dart';
 import '../services/service_locator.dart';
 import 'game_state.dart';
 
@@ -115,7 +113,7 @@ class ActionHandler {
       commandDescriptions.add(command.describe());
     }
     commandIndex
-        .value++; //just moved this. hope it doesn't come with severe bugs...
+        .value++;
     //remove possible redo list
     if (commands.length - 1 > commandIndex.value) {
       commands.removeRange(commandIndex.value + 1, commands.length);
@@ -126,8 +124,7 @@ class ActionHandler {
       //remove future game states
       gameSaveStates.removeRange(commandIndex.value + 1, gameSaveStates.length);
     }
-    getIt<GameState>().save(); //save after each action?
-
+    getIt<GameState>().save(); //save after each action
     if (commandIndex.value >= maxUndo) {
       commands[commandIndex.value - maxUndo] = null;
       gameSaveStates[commandIndex.value - maxUndo] = null;

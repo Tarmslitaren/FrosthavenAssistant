@@ -14,7 +14,8 @@ class ReorderModifierListCommand extends Command {
   void execute() {
     GameState gameState = getIt<GameState>();
     List<ModifierCard> list = List.from(gameState.modifierDeck.drawPile.getList());
-    list.insert(newIndex, list.removeAt(oldIndex));
+    var item = list.removeAt(oldIndex);
+    list.insert(newIndex, item);
     gameState.modifierDeck.drawPile.setList(list);
   }
 
