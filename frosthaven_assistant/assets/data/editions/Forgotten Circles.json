@@ -1811,9 +1811,6 @@
         }
       ]
     },
-    "#81 Narrow Street": {
-      "monsters": [ "Aesther Scout", "Black Imp", "Night Demon" ]
-    },
     "#84 Gateway to the Firmament": {
       "monsters": [ "Elham", "Earth Demon", "Flame Demon", "Frost Demon", "Icestorm Guardian of the Firmament", "Lavaflow Guardian of the Firmament" ]
     },
@@ -1950,9 +1947,6 @@
     },
     "#129 Fighting Dirty": {
       "monsters": [ "Ooze" ]
-    },
-    "#132 Near the Gates": {
-      "monsters": [ "Aesther Scout", "Black Imp", "Night Demon" ]
     },
     "#133 A Secret Floor": {
       "monsters": [ "Ancient Artillery" ]
