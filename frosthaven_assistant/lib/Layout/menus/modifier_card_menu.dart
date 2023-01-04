@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
+import 'package:frosthaven_assistant/Resource/commands/amd_remove_minus_1_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/bad_omen_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/enfeebling_hex_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
@@ -8,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:reorderables/reorderables.dart';
 
 import '../../Resource/adjustable_scroll_controller.dart';
+import '../../Resource/commands/amd_remove_minus_2_command.dart';
 import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
 import '../../Resource/game_state.dart';
@@ -235,7 +237,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                                 _gameState
                                                     .action(BadOmenCommand(name == "Allies"));
                                               },
-                                              child: Text("Bad Omen"),
+                                              child: const Text("Bad Omen"),
                                             ),
                                         if (deck.badOmen.value > 0)
                                           Text(
@@ -249,7 +251,31 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                           child: Text(
                                               "Add -1 card (added : ${deck.addedMinusOnes.value})"),
                                         ),
-                                        //todo: remove -1, remove -2 (gray out if maxed out)
+                                        TextButton(
+                                          onPressed: () {
+                                            if(deck.hasMinus1()) {
+                                              _gameState
+                                                  .action(
+                                                  AMDRemoveMinus1Command(
+                                                      name == "Allies"));
+                                            }
+                                          },
+                                          child: const Text(
+                                              "Remove -1 card"),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            if(deck.hasMinus2()) {
+                                              _gameState
+                                                  .action(
+                                                  AMDRemoveMinus2Command(
+                                                      name == "Allies"));
+                                            }
+                                          },
+                                          child: const Text(
+                                              "Remove -2 card"),
+                                        ),
+                                        //todo: (gray out if maxed out)
                                       ],
                                     ),
                                     Row(

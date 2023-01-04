@@ -97,6 +97,8 @@ dependencies:
 
   override_text_scale_factor: ^1.0.2
 
+  collection: ^1.16.0
+
   window_size:
     git:
       url: https://github.com/google/flutter-desktop-embedding.git

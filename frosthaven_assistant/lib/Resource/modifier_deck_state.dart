@@ -1,4 +1,5 @@
 
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import 'card_stack.dart';
@@ -81,10 +82,61 @@ class ModifierDeck {
   final addedMinusOnes = ValueNotifier<int>(0);
 
   void addMinusOne() {
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
     addedMinusOnes.value++;
-    drawPile.getList().add(ModifierCard(CardType.add, "minus1"));
+    drawPile.getList().add(ModifierCard(CardType.add, "minus1$suffix"));
     drawPile.shuffle();
     cardCount.value++;
+  }
+
+  void removeMinusOne() {
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
+    shuffle();
+    addedMinusOnes.value--;
+    var card = drawPile.getList().lastWhereOrNull((element) => element.gfx == "minus1$suffix");
+    if (card != null) {
+      drawPile.getList().remove(card);
+      drawPile.shuffle();
+      cardCount.value--;
+    }
+  }
+
+  bool hasMinus1(){
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
+    return drawPile.getList().firstWhereOrNull((element) => element.gfx == "minus1$suffix") != null ||
+        discardPile.getList().firstWhereOrNull((element) => element.gfx == "minus1$suffix") != null;
+  }
+
+  bool hasMinus2(){
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
+    return drawPile.getList().firstWhereOrNull((element) => element.gfx == "minus2$suffix") != null ||
+        discardPile.getList().firstWhereOrNull((element) => element.gfx == "minus2$suffix") != null;
+  }
+
+  void removeMinusTwo() {
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
+    shuffle();
+    var card = drawPile.getList().lastWhereOrNull((element) => element.gfx == "minus2$suffix");
+    if (card != null) {
+      drawPile.getList().remove(card);
+      drawPile.shuffle();
+      cardCount.value--;
+    }
   }
 
   void _handleCurseBless(
@@ -105,8 +157,12 @@ class ModifierDeck {
         if (type == CardType.curse && badOmen.value > 0) {
           badOmen.value--;
           shuffle = false;
-          //put in sixth
-          drawPile.getList().insert(drawPile.getList().length-5, ModifierCard(type, gfx));
+          //put in sixth or as far down as it goes.
+          int position = 5;
+          if(drawPile.getList().length < 6) {
+            position = drawPile.getList().length;
+          }
+          drawPile.getList().insert(drawPile.getList().length-position, ModifierCard(type, gfx));
         } else {
           drawPile.push(ModifierCard(type, gfx));
         }
