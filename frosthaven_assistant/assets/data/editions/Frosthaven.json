@@ -5394,8 +5394,8 @@
           "move": 3,
           "attack": "C",
           "attributes": ["%wound%"],
-          "special1": [ "^%teleport% to farthest totem and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
-          "special2": [ "^Destroy all adjacent totems.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
+          "special1": [ "^%teleport% to farthest carving and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
+          "special2": [ "^Destroy all adjacent carvings.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
           "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -5404,8 +5404,8 @@
           "move": 4,
           "attack": "C+2",
           "attributes": ["%wound%"],
-          "special1": [ "^%teleport% to farthest totem and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
-          "special2": [ "^Destroy all adjacent totems.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
+          "special1": [ "^%teleport% to farthest carving and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
+          "special2": [ "^Destroy all adjacent carvings.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
           "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -5414,8 +5414,8 @@
           "move": 4,
           "attack": "C+2",
           "attributes": ["%wound%"],
-          "special1": [ "^%teleport% to farthest totem and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
-          "special2": [ "^Destroy all adjacent totems.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
+          "special1": [ "^%teleport% to farthest carving and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
+          "special2": [ "^Destroy all adjacent carvings.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
           "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -5424,8 +5424,8 @@
           "move": 4,
           "attack": "C+3",
           "attributes": ["%wound%"],
-          "special1": [ "^%teleport% to farthest totem and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
-          "special2": [ "^Destroy all adjacent totems.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
+          "special1": [ "^%teleport% to farthest carving and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
+          "special2": [ "^Destroy all adjacent carvings.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
           "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -5434,8 +5434,8 @@
           "move": 4,
           "attack": "C+3",
           "attributes": ["%wound%"],
-          "special1": [ "^%teleport% to farthest totem and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
-          "special2": [ "^Destroy all adjacent totems.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
+          "special1": [ "^%teleport% to farthest carving and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
+          "special2": [ "^Destroy all adjacent carvings.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
           "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -5444,8 +5444,8 @@
           "move": 4,
           "attack": "C+4",
           "attributes": ["%wound%"],
-          "special1": [ "^%teleport% to farthest totem and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
-          "special2": [ "^Destroy all adjacent totems.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
+          "special1": [ "^%teleport% to farthest carving and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
+          "special2": [ "^Destroy all adjacent carvings.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
          "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -5454,8 +5454,8 @@
           "move": 4,
           "attack": "C+5",
           "attributes": ["%wound%"],
-          "special1": [ "^%teleport% to farthest totem and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
-          "special2": [ "^Destroy all adjacent totems.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
+          "special1": [ "^%teleport% to farthest carving and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
+          "special2": [ "^Destroy all adjacent carvings.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
          "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
@@ -5464,8 +5464,8 @@
           "move": 4,
           "attack": "C+6",
           "attributes": ["%wound%"],
-          "special1": [ "^%teleport% to farthest totem and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
-          "special2": [ "^Destroy all adjacent totems.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
+          "special1": [ "^%teleport% to farthest carving and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
+          "special2": [ "^Destroy all adjacent carvings.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
           "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         }
       ]
