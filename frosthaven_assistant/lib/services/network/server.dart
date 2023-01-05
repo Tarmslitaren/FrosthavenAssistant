@@ -153,13 +153,13 @@ class Server {
                   //getIt<GameState>().modifierDeck.
                   //client.write('your gameState changes received by server');
                 } else {
-                  getIt<Network>().networkMessage.value = "index mismatch: ignoring incoming message";
+                  //getIt<Network>().networkMessage.value = "index mismatch: ignoring incoming message";
                   print(
                       'Got same or lower index. ignoring: received index: $newIndex current index ${_gameState.commandIndex.value}');
 
                   //overwrite client state with current server state.
                   sendToOnly(
-                      "Index:${_gameState.commandIndex
+                      "Mismatch:Index:${_gameState.commandIndex
                           .value}Description:${_gameState
                           .commandDescriptions[_gameState.commandIndex.value]}GameState:${_gameState
                           .gameSaveStates.last!.getState()}", client);

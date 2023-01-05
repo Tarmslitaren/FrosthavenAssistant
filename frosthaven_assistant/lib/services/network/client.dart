@@ -53,6 +53,10 @@ class Client {
           for (var message in messages) {
             if(message.endsWith("[EOM]")) {
               message = message.substring(0, message.length-"[EOM]".length);
+              if(message.startsWith("Mismatch:")) {
+                message = message.substring("Mismatch:".length);
+                getIt<Network>().networkMessage.value = "Your state was not up to date, try again.";
+              }
               if (message.startsWith("Index:")) {
                 List<String> messageParts1 = message.split("Description:");
                 String indexString = messageParts1[0].substring(
