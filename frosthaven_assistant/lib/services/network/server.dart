@@ -35,9 +35,11 @@ class Server {
   Future<void> startServer() async {
     //_clients.clear();
     //server = await ServerSocket.bind(InternetAddress.anyIPv4, 4567);
-    String connectTo = "0.0.0.0";
+    String connectTo = InternetAddress.anyIPv4.toString(); //"0.0.0.0";
     if (getIt<Network>().networkInfo.wifiIPv4.value.isNotEmpty) {
       connectTo = getIt<Network>().networkInfo.wifiIPv4.value;
+    } else {
+      getIt<Network>().networkInfo.wifiIPv4.value = connectTo; //if not on wifi show local ip?
     }
     await ServerSocket.bind(connectTo,
             int.parse(getIt<Settings>().lastKnownPort))
@@ -63,7 +65,7 @@ class Server {
             "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}");
 
 
-        _serverSocket!.listen((client) {
+        _serverSocket!.listen((Socket client) {
           handleConnection(client);
         }, onError: (e) {
           print('Server error: $e');

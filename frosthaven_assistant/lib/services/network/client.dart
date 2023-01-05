@@ -106,7 +106,7 @@ class Client {
         onError: (error) {
           print('Client error: $error');
           getIt<Network>().networkMessage.value = "client error: $error";
-          _socket!.destroy();
+          _socket?.destroy();
           _cleanup();
         },
 
@@ -114,13 +114,13 @@ class Client {
         onDone: () {
           print('Lost connection to server.');
           getIt<Network>().networkMessage.value = "Lost connection to server";
-          _socket!.destroy();
+          _socket?.destroy();
           _cleanup();
         },
       );
     } catch (error) {
       print(error);
-      _socket!.destroy();
+      _socket?.destroy();
       getIt<Network>().networkMessage.value = error.toString();
       _cleanup();
     }
@@ -130,7 +130,6 @@ class Client {
     if (_socket != null) {
       //print('Client sends: $data');
       _socket!.write("S3nD:$data[EOM]");
-      //await Future.delayed(Duration(seconds: 2));
     } else {
 
     }
@@ -140,8 +139,7 @@ class Client {
     if (_socket != null) {
       print('Client disconnected');
       getIt<Network>().networkMessage.value = "client disconnected";
-      _socket!.close();
-      //_socket!.destroy();
+      _socket!.destroy();
       _cleanup();
     }
   }
