@@ -28,19 +28,24 @@ Future<void> launchUrlInBrowser(Uri url) async {
 
 Drawer createMainMenu(BuildContext context) {
   GameState gameState = getIt<GameState>();
+  Settings settings = getIt<Settings>();
 
   return Drawer(
     child: ValueListenableBuilder<int>(
       valueListenable: gameState.commandIndex,
       builder: (context, value, child) {
-
         String undoText = "Undo";
-        if (gameState.commandIndex.value >= 0 && gameState.commandDescriptions.length > gameState.commandIndex.value){
-          undoText += ": ${gameState.commandDescriptions[gameState.commandIndex.value]}";
+        if (gameState.commandIndex.value >= 0 &&
+            gameState.commandDescriptions.length >
+                gameState.commandIndex.value) {
+          undoText +=
+              ": ${gameState.commandDescriptions[gameState.commandIndex.value]}";
         }
         String redoText = "Redo";
-        if (gameState.commandIndex.value < gameState.commandDescriptions.length-1) {
-          redoText += ": ${gameState.commandDescriptions[gameState.commandIndex.value+1]}";
+        if (gameState.commandIndex.value <
+            gameState.commandDescriptions.length - 1) {
+          redoText +=
+              ": ${gameState.commandDescriptions[gameState.commandIndex.value + 1]}";
         }
 
         return ListView(
@@ -51,25 +56,27 @@ Drawer createMainMenu(BuildContext context) {
                 padding: EdgeInsets.zero,
                 margin: EdgeInsets.zero,
                 decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  image: DecorationImage(
-                    fit: BoxFit.fitWidth,
-                      image: AssetImage("assets/images/icon.png"))
-                ),
+                    color: Colors.blue,
+                    image: DecorationImage(
+                        fit: BoxFit.fitWidth,
+                        image: AssetImage("assets/images/icon.png"))),
                 child: Stack(
                   children: const [
                     Positioned(
-                      right: 6,
-                        bottom: 0,
-                        child: Text("Version 1.5.4"))
+                        right: 6, bottom: 0, child: Text("Version 1.5.4"))
                   ],
                 ),
               ),
               ListTile(
-                title: Text(undoText ),
-                enabled: getIt<Settings>().client.value != ClientState.connected && !getIt<Settings>().server.value && gameState.commandIndex.value >= 0 &&
+                title: Text(undoText),
+                enabled: getIt<Settings>().client.value !=
+                        ClientState.connected &&
+                    !getIt<Settings>().server.value &&
+                    gameState.commandIndex.value >= 0 &&
                     gameState.commandIndex.value < gameState.commands.length &&
-                    (gameState.commandIndex.value == 0 || gameState.commands[gameState.commandIndex.value - 1] != null),
+                    (gameState.commandIndex.value == 0 ||
+                        gameState.commands[gameState.commandIndex.value - 1] !=
+                            null),
                 onTap: () {
                   gameState.undo();
                   //Navigator.pop(context);
@@ -77,7 +84,10 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(redoText),
-                enabled: gameState.commandIndex.value < gameState.commandDescriptions.length-1 && getIt<Settings>().client.value != ClientState.connected && !getIt<Settings>().server.value,
+                enabled: gameState.commandIndex.value <
+                        gameState.commandDescriptions.length - 1 &&
+                    getIt<Settings>().client.value != ClientState.connected &&
+                    !getIt<Settings>().server.value,
                 onTap: () {
                   gameState.redo();
                   //Navigator.pop(context);
@@ -139,24 +149,84 @@ Drawer createMainMenu(BuildContext context) {
                   openDialog(context, const SettingsMenu());
                 },
               ),
+              const Divider(),
+              const Text("Connect to last known address:", textAlign: TextAlign.center),
+              ValueListenableBuilder<ClientState>(
+                  valueListenable: settings.client,
+                  builder: (context, value, child) {
+                    bool connected = false;
+                    String connectionText = "Connect as Client";
+                    if (settings.client.value == ClientState.connected) {
+                      connected = true;
+                      connectionText = "Connected as Client";
+                    }
+                    if (settings.client.value == ClientState.connecting) {
+                      connectionText = "Connecting...";
+                    }
+                    return CheckboxListTile(
+                        enabled: settings.server.value == false &&
+                            settings.client.value != ClientState.connecting,
+                        title: Text(connectionText),
+                        value: connected,
+                        onChanged: (bool? value) {
+                          if (settings.client.value != ClientState.connected) {
+                            settings.client.value = ClientState.connecting;
+                            getIt<Network>()
+                                .client
+                                .connect(settings.lastKnownConnection)
+                                .then((value) => null);
+                            settings.saveToDisk();
+                          } else {
+                            getIt<Network>().client.disconnect();
+                          }
+                        });
+                  }),
+              ValueListenableBuilder<bool>(
+                  valueListenable: settings.server,
+                  builder: (context, value, child) {
+                    return CheckboxListTile(
+                        title: Text(settings.server.value
+                            ? "Stop Server"
+                            : "Start Host Server"),
+                        value: settings.server.value,
+                        onChanged: (bool? value) {
+                          //setState(() {
+                          //do the thing
+                          if (!settings.server.value) {
+                            getIt<Network>().server.startServer();
+                          } else {
+                            //close server?
+                            getIt<Network>().server.stopServer();
+                          }
+                        });
+                    //});
+                  }),
+              //checkbox client + host + port
+              //checkbox server - show ip, port
+              const Divider(),
               ListTile(
                 title: const Text('Documentation'),
                 onTap: () {
-                    final Uri toLaunch =
-                    Uri(scheme: 'https', host: 'www.github.com', path: 'Tarmslitaren/FrosthavenAssistant', fragment: "#readme" );
-                    launchUrlInBrowser(toLaunch);
+                  final Uri toLaunch = Uri(
+                      scheme: 'https',
+                      host: 'www.github.com',
+                      path: 'Tarmslitaren/FrosthavenAssistant',
+                      fragment: "#readme");
+                  launchUrlInBrowser(toLaunch);
                   Navigator.pop(context);
                 },
               ),
-              Platform.isMacOS || Platform.isLinux || Platform.isWindows? ListTile(
-                title: const Text('Exit'),
-                enabled: true,
-                onTap: () {
-                  Navigator.pop(context);
-                  gameState.save();
-                  windowManager.close();
-                },
-              ): Container(),
+              Platform.isMacOS || Platform.isLinux || Platform.isWindows
+                  ? ListTile(
+                      title: const Text('Exit'),
+                      enabled: true,
+                      onTap: () {
+                        Navigator.pop(context);
+                        gameState.save();
+                        windowManager.close();
+                      },
+                    )
+                  : Container(),
             ]);
       },
     ),

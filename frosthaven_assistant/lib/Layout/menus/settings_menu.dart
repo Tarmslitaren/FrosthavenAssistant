@@ -288,7 +288,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     });
                                   }),
                               const Text("Connect devices on local wifi:"),
-                              ValueListenableBuilder<ClientState>( //TODO: change to enum for connection state
+                              ValueListenableBuilder<ClientState>(
                                   valueListenable: settings.client,
                                   builder: (context, value, child) {
                                     bool connected = false;
