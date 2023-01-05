@@ -28,7 +28,7 @@ class Client {
           print(info);
           getIt<Network>().networkMessage.value = info;
           send("init version:${getIt<Network>().server.serverVersion}");
-          listen();
+          _listen();
         });
       });
     } catch (error) {
@@ -38,7 +38,7 @@ class Client {
     }
   }
 
-  void listen() {
+  void _listen() {
     // listen for responses from the server
     try {
       _socket!.listen(
@@ -94,6 +94,7 @@ class Client {
               } else if (message.startsWith("undo")) {
               } else if (message.startsWith("redo")) {
               } else if (message.startsWith("ping")) {
+                send("pong");
               }
             } else {
               _leftOverMessage = message;

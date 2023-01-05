@@ -23,14 +23,19 @@ class Server {
 
   String leftOverMessage = "";
 
+  void sendPing() {
+    if (_serverSocket != null && getIt<Settings>().server.value != false) {
+      Future.delayed(const Duration(seconds: 20), () {
+        send("ping");
+        sendPing();
+      });
+    }
+  }
+
   Future<void> startServer() async {
     //_clients.clear();
-    //cannot bind to outgoing
     //server = await ServerSocket.bind(InternetAddress.anyIPv4, 4567);
     String connectTo = "0.0.0.0";
-    /*if(NetworkInformation.outgoingIPv4 != null) {
-      connectTo = NetworkInformation.outgoingIPv4!;
-    }*/ //it is wrong to try to bind to an outgoing ip, since it is not owned by the network?
     if (getIt<Network>().networkInfo.wifiIPv4.value.isNotEmpty) {
       connectTo = getIt<Network>().networkInfo.wifiIPv4.value;
     }
@@ -57,12 +62,15 @@ class Server {
         send(
             "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}");
 
+
         _serverSocket!.listen((client) {
           handleConnection(client);
         }, onError: (e) {
           print('Server error: $e');
           getIt<Network>().networkMessage.value = 'Server error: $e';
         });
+
+        sendPing();
       });
     });
   }
@@ -196,7 +204,8 @@ class Server {
               } else if (message.startsWith("redo")) {
                 print('Server Receive redo command');
                 _gameState.redo();
-              } else if (message.startsWith("ping")) {
+              } else if (message.startsWith("pong")) {
+                print('pong from ${client.remoteAddress}');
               }} else {
               leftOverMessage = message;
             }
