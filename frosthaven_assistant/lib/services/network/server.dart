@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 import 'dart:typed_data';
@@ -122,7 +123,7 @@ class Server {
         // handle data from the client
         (Uint8List data) async {
           //await Future.delayed(Duration(seconds: 1));
-          String message = String.fromCharCodes(data);
+          String message = utf8.decode(data); //String.fromCharCodes(data);
           message = leftOverMessage + message;
           leftOverMessage = "";
 

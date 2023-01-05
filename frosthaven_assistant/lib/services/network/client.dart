@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/services/network/network.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/settings.dart';
 import '../service_locator.dart';
+import 'dart:convert' show utf8;
 
 class Client {
   Socket? _socket;
@@ -23,6 +24,7 @@ class Client {
         runZoned(() {
           _socket = socket;
           _socket?.setOption(SocketOption.tcpNoDelay, true);
+          _socket?.encoding = utf8;
           getIt<Settings>().client.value = ClientState.connected;
           String info = 'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
           print(info);
