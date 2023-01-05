@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add__special_loot_card_command.dart';
@@ -6,7 +8,6 @@ import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/remove__special_loot_card_command.dart';
 import '../../Resource/game_state.dart';
 import '../../Resource/loot_deck_state.dart';
-import '../../Resource/modifier_deck_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import '../loot_card.dart';
@@ -18,19 +19,25 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scale = getScaleByReference(context) * 1.5; //double scale
+    double screenWidth = MediaQuery.of(context).size.width;
+    double wantedItemMaxWidth = 200;
+    double maxScale = 3;
+    double scale = min(maxScale, screenWidth/wantedItemMaxWidth);
+
+    //double scale = MediaQuery.of(context).size.width/wantedItemMaxWidth;// getScaleByReference(context) * 2; //nope
     late final Widget child;
 
     child = LootCardWidget.buildFront(data, scale);
 
-    return Container(margin: EdgeInsets.all(2 * scale), child: child);
+    return Container(
+      //width: 40 * scale,
+      //  height: 80 * scale,
+        margin: EdgeInsets.all(2 * scale), child: child);
   }
 }
 
 class LootCardMenu extends StatefulWidget {
   const LootCardMenu({Key? key}) : super(key: key);
-
-  //late final ModifierDeck deck;
 
   @override
   LootCardMenuState createState() => LootCardMenuState();
@@ -38,7 +45,6 @@ class LootCardMenu extends StatefulWidget {
 
 class LootCardMenuState extends State<LootCardMenu> {
   final GameState _gameState = getIt<GameState>();
-  List<ModifierCard> _revealedList = [];
 
   @override
   initState() {
@@ -56,6 +62,8 @@ class LootCardMenuState extends State<LootCardMenu> {
   }
 
   Widget buildList(List<LootCard> list) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double wantedItemMaxWidth = 200;
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
@@ -68,20 +76,21 @@ class LootCardMenuState extends State<LootCardMenu> {
           // maxHeight: screenSize.height - 50,
           //),
           //width: 118 * getScaleByReference(context), //184 * 0.8 *
+
           child: GridView.count(
-            //todo: replace wiut a gridview so can see more cards at once
             controller: AdjustableScrollController(),
             //gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
 
             // maxCrossAxisExtent: 5
 
+            childAspectRatio: 0.72,
             //),
             //padding: 0,
             mainAxisSpacing: 0,
             crossAxisSpacing: 0,
             padding: EdgeInsets.zero,
 
-            crossAxisCount: 4,
+            crossAxisCount: max(4,(screenWidth/wantedItemMaxWidth).ceil()),
             // (MediaQuery.of(context).size.width/ 100).ceil(),
             children: generateList(list).reversed.toList(),
           ),
@@ -109,7 +118,7 @@ class LootCardMenuState extends State<LootCardMenu> {
                       children: [
                         Column(mainAxisSize: MainAxisSize.max, children: [
                           Container(
-                              width: 900, //need some width to fill out
+                              //width: 2900, //need some width to fill out
                               margin: const EdgeInsets.all(2),
                               decoration: const BoxDecoration(
                                   color: Colors.white,
@@ -172,7 +181,9 @@ class LootCardMenuState extends State<LootCardMenu> {
                                       ],
                                     ),
                                   ])),
-                          Flexible(child: buildList(discardPile)),
+                          Flexible(
+                            fit: FlexFit.tight,
+                              child: buildList(discardPile)),
                           Container(
                             // color: Colors.white,
                             height: 32,

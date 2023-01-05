@@ -43,9 +43,10 @@ class LootCardWidget extends StatefulWidget {
 
           children: [
             ClipRRect(
+              clipBehavior: Clip.hardEdge,
               borderRadius: BorderRadius.circular(4.0 * scale),
               child: Image(
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
                 image: AssetImage("assets/images/loot/${card.gfx}.png"),
               ),
             ),
@@ -61,7 +62,7 @@ class LootCardWidget extends StatefulWidget {
               "1418",
               style: TextStyle(
                 shadows: [shadow],
-                fontSize: 30 * scale,
+                fontSize: 25 * scale,
                 color: Colors.white,
               ),
             ),
@@ -69,9 +70,19 @@ class LootCardWidget extends StatefulWidget {
               "1419",
               style: TextStyle(
                 shadows: [shadow],
-                fontSize: 30 * scale,
+                fontSize: 25 * scale,
                 color: Colors.white,
               ),
+            ),
+            if (card.owner != "" ) Positioned(
+              height: 15 * scale,
+              width: 15 * scale,
+              top: 2 * scale,
+              right: 2 * scale,
+              child: Image.asset(
+                 fit: BoxFit.scaleDown,
+                  color: Colors.black,
+                  'assets/images/class-icons/${card.owner}.png'),
             )
           ]),
     );

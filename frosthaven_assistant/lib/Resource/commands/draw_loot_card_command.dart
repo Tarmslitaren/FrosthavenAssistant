@@ -11,8 +11,8 @@ class DrawLootCardCommand extends Command {
   @override
   void execute() {
 
-    if(_gameState.lootDeck != null && _gameState.lootDeck!.drawPile.isNotEmpty) {
-      _gameState.lootDeck!.draw();
+    if(_gameState.lootDeck.drawPile.isNotEmpty) {
+      _gameState.lootDeck.draw();
     }
   }
 

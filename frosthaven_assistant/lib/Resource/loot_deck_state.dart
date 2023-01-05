@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/scenario.dart';
+import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 
@@ -13,21 +14,26 @@ enum LootType { materiel, other }
 enum LootBaseValue { one, oneIf4twoIfNot, oneIf3or4twoIfNot }
 
 class LootCard {
-  String gfx;
-  LootBaseValue baseValue;
-  LootType lootType;
+  final String gfx;
+  final LootBaseValue baseValue;
+  final LootType lootType;
   bool enhanced;
+  late String owner;
 
   LootCard(
       {required this.lootType,
       required this.baseValue,
       required this.enhanced,
-      required this.gfx});
+      required this.gfx
+      }) {
+    owner = "";
+  }
 
   @override
   String toString() {
     return '{'
         '"gfx": "$gfx", '
+        '"owner": "$owner", '
         '"enhanced": $enhanced, '
         '"baseValue": ${baseValue.index}, '
         '"lootType": ${lootType.index} '
@@ -223,7 +229,8 @@ class LootDeck {
         baseValue: LootBaseValue.one,
         enhanced: false,
         lootType: LootType.other,
-        gfx: gfx));
+        gfx: gfx,
+    ));
   }
 
   void _addHerb(List<LootCard> cards, String gfx, List<bool> enhancements) {
@@ -379,6 +386,14 @@ class LootDeck {
   void draw() {
     //put top of draw pile on discard pile
     LootCard card = drawPile.pop();
+
+    //mark owner
+    for(var item in getIt<GameState>().currentList){
+      if(item.turnState == TurnsState.current && item is Character) {
+        card.owner = item.characterClass.name;
+      }
+    }
+
     discardPile.push(card);
     cardCount.value = drawPile.size();
   }

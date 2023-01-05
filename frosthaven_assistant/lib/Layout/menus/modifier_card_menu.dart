@@ -154,7 +154,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           //minHeight: 400,
           // maxHeight: screenSize.height - 50,
           //),
-          width: 118 * getScaleByReference(context), //184 * 0.8 *
+          width: 118 * getScaleByReference(context), //184 * 0.8 * //TODO: wrong- scale by reference will screw this menu up
           child: reorderable
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
@@ -217,7 +217,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                       children: [
                         Column(mainAxisSize: MainAxisSize.max, children: [
                           Container(
-                              width: 900, //need some width to fill out
+                              //width: 900, //need some width to fill out
                               margin: const EdgeInsets.all(2),
                               decoration: const BoxDecoration(
                                   color: Colors.white,
@@ -273,7 +273,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                             }
                                           },
                                           child: const Text(
-                                              "Remove -2 card"),
+                                              "Remove -2 card",
+                                          ),
                                         ),
                                         //todo: (gray out if maxed out)
                                       ],

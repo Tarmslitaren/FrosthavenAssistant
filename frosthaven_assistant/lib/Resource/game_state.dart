@@ -427,19 +427,31 @@ class GameSaveState{
     List<LootCard> newDrawList = [];
     List drawPile = lootDeckData["drawPile"] as List;
     for (var item in drawPile) {
+      String owner = "";
       String gfx = item["gfx"];
+      if(item.containsKey('owner')) {
+        owner = item["owner"];
+      }
       bool enhanced = item["enhanced"];
       LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
       LootType lootType = LootType.values[item["lootType"]];
-      newDrawList.add(LootCard(gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType));
+      LootCard lootCard = LootCard(gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
+      lootCard.owner = owner;
+      newDrawList.add(lootCard);
     }
     List<LootCard> newDiscardList = [];
     for (var item in lootDeckData["discardPile"] as List) {
       String gfx = item["gfx"];
+      String owner = "";
+      if(item.containsKey('owner')) {
+        owner = item["owner"];
+      }
       bool enhanced = item["enhanced"];
       LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
       LootType lootType = LootType.values[item["lootType"]];
-      newDiscardList.add(LootCard(gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType));
+      LootCard lootCard = LootCard(gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
+      lootCard.owner = owner;
+      newDiscardList.add(lootCard);
     }
     state.drawPile.getList().clear();
     state.discardPile.getList().clear();
