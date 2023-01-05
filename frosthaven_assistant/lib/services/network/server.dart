@@ -100,6 +100,8 @@ class Server {
   }
 
   void handleConnection(Socket client) {
+    client.setOption(SocketOption.tcpNoDelay, true);
+
     String info = 'Connection from'
         ' ${client.remoteAddress.address}:${client.remotePort}';
     print(info);

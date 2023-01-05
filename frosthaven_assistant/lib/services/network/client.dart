@@ -22,6 +22,7 @@ class Client {
       await Socket.connect(address, port).then((Socket socket) {
         runZoned(() {
           _socket = socket;
+          _socket?.setOption(SocketOption.tcpNoDelay, true);
           getIt<Settings>().client.value = ClientState.connected;
           String info = 'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
           print(info);
