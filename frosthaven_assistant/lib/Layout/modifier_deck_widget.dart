@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Layout/modifier_card.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/modifier_deck_state.dart';
@@ -78,7 +79,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   bool animationsEnabled = initAnimationEnabled();
 
   static bool initAnimationEnabled() {
-    if(getIt<Settings>().client.value || getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0 &&
+    if(getIt<Settings>().client.value == ClientState.connected || getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0 &&
     getIt<GameState>().commandDescriptions[getIt<GameState>().commandIndex.value].contains("modifier card")){
       //todo: also: missing info. need to check for updateForUndo
       return true;

@@ -154,10 +154,10 @@ class NetworkInformation {
       wifiSubmask = 'Failed to get Wifi submask';
     }*/
 
-    developer.log('Wifi Name: $wifiName\n'
-          'Wifi BSSID: $wifiBSSID\n'
-          'Wifi IPv4: $wifiIPv4\n'
-          'Outgoing IPv4: $outgoingIPv4\n'
+    developer.log('Wifi Name: ${wifiName.value}\n'
+          'Wifi BSSID: ${wifiBSSID.value}\n'
+          'Wifi IPv4: ${wifiIPv4.value}\n'
+          'Outgoing IPv4: ${outgoingIPv4.value}\n'
           //'Wifi Broadcast: $wifiBroadcast\n'
           //'Wifi Gateway: $wifiGatewayIP\n'
           //'Wifi Submask: $wifiSubmask\n'

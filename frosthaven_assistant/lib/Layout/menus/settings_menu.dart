@@ -288,18 +288,26 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     });
                                   }),
                               const Text("Connect devices on local wifi:"),
-                              ValueListenableBuilder<bool>(
+                              ValueListenableBuilder<ClientState>( //TODO: change to enum for connection state
                                   valueListenable: settings.client,
                                   builder: (context, value, child) {
+                                    bool connected = false;
+                                    String connectionText = "Connect as Client";
+                                    if (settings.client.value == ClientState.connected) {
+                                      connected = true;
+                                      connectionText = "Connected as Client";
+                                    }
+                                    if (settings.client.value == ClientState.connecting) {
+                                      connectionText = "Connecting...";
+                                    }
                                     return CheckboxListTile(
-                                        enabled: settings.server.value == false,
-                                        title: Text(settings.client.value
-                                            ? "Connected as Client"
-                                            : "Connect as Client"),
-                                        value: settings.client.value,
+                                        enabled: settings.server.value == false && settings.client.value != ClientState.connecting,
+                                        title: Text(connectionText),
+                                        value: connected,
                                         onChanged: (bool? value) {
                                           setState(() {
-                                            if (settings.client.value != true) {
+                                            if (settings.client.value != ClientState.connected) {
+                                              settings.client.value = ClientState.connecting;
                                               settings.lastKnownPort =
                                                   _portTextController.text;
                                               getIt<Network>()

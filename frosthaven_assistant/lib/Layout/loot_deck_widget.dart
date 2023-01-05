@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/commands/draw_loot_card_command.dart';
@@ -78,7 +79,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   bool animationsEnabled = initAnimationEnabled();
 
   static bool initAnimationEnabled() {
-    if (getIt<Settings>().client.value ||
+    if (getIt<Settings>().client.value == ClientState.connected ||
         getIt<Settings>().server.value &&
             getIt<GameState>().commandIndex.value >= 0 &&
             getIt<GameState>()

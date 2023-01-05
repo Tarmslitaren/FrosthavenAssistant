@@ -39,7 +39,7 @@ class Settings {
 
   //network
   final server = ValueNotifier<bool>(false); //not saving these
-  final client = ValueNotifier<bool>(false);
+  final client = ValueNotifier<ClientState>(ClientState.disconnected);
   String lastKnownConnection = "192.168.1.???"; //only these
   String lastKnownPort = "4567";
 

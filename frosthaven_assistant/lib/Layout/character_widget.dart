@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_init_command.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/services/network/network.dart';
 import '../Resource/color_matrices.dart';
 import '../Resource/commands/next_turn_command.dart';
 import '../Resource/enums.dart';
@@ -174,7 +175,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                 .value ||
                 getIt<Settings>()
                     .client
-                    .value) &&
+                    .value == ClientState.connected) &&
                 (!CharacterWidget
                     .localCharacterInitChanges
                     .contains(character.id));

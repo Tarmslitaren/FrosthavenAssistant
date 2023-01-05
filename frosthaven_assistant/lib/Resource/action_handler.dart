@@ -35,7 +35,7 @@ class ActionHandler {
 
   void undo() {
     bool isServer = getIt<Settings>().server.value;
-    bool isClient = getIt<Settings>().client.value;
+    bool isClient = getIt<Settings>().client.value == ClientState.connected;
     if (!isClient) {
       if (commandIndex.value >= 0) {
         gameSaveStates[commandIndex.value]!
@@ -69,7 +69,7 @@ class ActionHandler {
 
   void redo() {
     bool isServer = getIt<Settings>().server.value;
-    bool isClient = getIt<Settings>().client.value;
+    bool isClient = getIt<Settings>().client.value == ClientState.connected;
     if (!isClient) {
       if (commandIndex.value < commandDescriptions.length - 1) {
         commandIndex.value++;
@@ -102,7 +102,7 @@ class ActionHandler {
 
   void action(Command command) {
     bool isServer = getIt<Settings>().server.value;
-    bool isClient = getIt<Settings>().client.value;
+    bool isClient = getIt<Settings>().client.value == ClientState.connected;
 
     command.execute();
     if (commands.length >= commandIndex.value) {

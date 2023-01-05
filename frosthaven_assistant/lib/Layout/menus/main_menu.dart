@@ -14,6 +14,7 @@ import 'package:window_manager/window_manager.dart';
 
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
+import '../../services/network/network.dart';
 import 'add_monster_menu.dart';
 
 Future<void> launchUrlInBrowser(Uri url) async {
@@ -66,7 +67,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(undoText ),
-                enabled: !getIt<Settings>().client.value && !getIt<Settings>().server.value && gameState.commandIndex.value >= 0 &&
+                enabled: getIt<Settings>().client.value != ClientState.connected && !getIt<Settings>().server.value && gameState.commandIndex.value >= 0 &&
                     gameState.commandIndex.value < gameState.commands.length &&
                     (gameState.commandIndex.value == 0 || gameState.commands[gameState.commandIndex.value - 1] != null),
                 onTap: () {
@@ -76,7 +77,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(redoText),
-                enabled: gameState.commandIndex.value < gameState.commandDescriptions.length-1 && !getIt<Settings>().client.value&& !getIt<Settings>().server.value,
+                enabled: gameState.commandIndex.value < gameState.commandDescriptions.length-1 && getIt<Settings>().client.value != ClientState.connected && !getIt<Settings>().server.value,
                 onTap: () {
                   gameState.redo();
                   //Navigator.pop(context);

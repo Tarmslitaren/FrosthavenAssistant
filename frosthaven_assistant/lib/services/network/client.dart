@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
-import 'dart:developer' as developer;
 
 import 'package:frosthaven_assistant/services/network/network.dart';
 
@@ -23,7 +22,7 @@ class Client {
       await Socket.connect(address, port).then((Socket socket) {
         runZoned(() {
           _socket = socket;
-          getIt<Settings>().client.value = true;
+          getIt<Settings>().client.value = ClientState.connected;
           String info = 'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
           print(info);
           getIt<Network>().networkMessage.value = info;
@@ -34,7 +33,7 @@ class Client {
     } catch (error) {
       print("client error: $error");
       getIt<Network>().networkMessage.value = "client error: $error";
-      getIt<Settings>().client.value = false;
+      getIt<Settings>().client.value = ClientState.disconnected;
     }
   }
 
@@ -145,7 +144,7 @@ class Client {
   }
 
   void _cleanup() {
-    getIt<Settings>().client.value = false;
+    getIt<Settings>().client.value = ClientState.disconnected;
     _gameState.commandIndex.value = -1;
     _gameState.commands.clear();
     _gameState.commandDescriptions.clear();
