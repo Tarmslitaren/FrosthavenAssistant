@@ -34,9 +34,8 @@ class Server {
 
   Future<void> startServer() async {
     //_clients.clear();
-    //server = await ServerSocket.bind(InternetAddress.anyIPv4, 4567);
     String connectTo = InternetAddress.anyIPv4.toString(); //"0.0.0.0";
-    if (getIt<Network>().networkInfo.wifiIPv4.value.isNotEmpty) {
+    if (getIt<Network>().networkInfo.wifiIPv4.value.isNotEmpty && !getIt<Network>().networkInfo.wifiIPv4.value.contains("Fail")) {
       connectTo = getIt<Network>().networkInfo.wifiIPv4.value;
     } else {
       getIt<Network>().networkInfo.wifiIPv4.value = connectTo; //if not on wifi show local ip?
