@@ -150,12 +150,11 @@ Drawer createMainMenu(BuildContext context) {
                 },
               ),
               const Divider(),
-              const Text("Connect to last known address:", textAlign: TextAlign.center),
               ValueListenableBuilder<ClientState>(
                   valueListenable: settings.client,
                   builder: (context, value, child) {
                     bool connected = false;
-                    String connectionText = "Connect as Client";
+                    String connectionText = "Connect as Client (${settings.lastKnownConnection})";
                     if (settings.client.value == ClientState.connected) {
                       connected = true;
                       connectionText = "Connected as Client";
