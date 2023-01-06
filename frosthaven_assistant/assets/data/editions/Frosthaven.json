@@ -2523,6 +2523,7 @@
       ]
     },
     "Wind Demon (FH)": {
+      "note": "ERRATA: Elite level 0 has 3 movement",
       "gfx": "Wind Demon",
       "display": "Wind Demon",
       "deck": "Wind Demon (FH)",
@@ -5385,6 +5386,7 @@
       ]
     },
     "Render": {
+      "note": "ERRATA: All instances of \"totem\" should be \"carving\"",
       "deck": "Boss (FH)",
       "count": 1,
       "levels": [
@@ -5446,7 +5448,7 @@
           "attributes": ["%wound%"],
           "special1": [ "^%teleport% to farthest carving and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
           "special2": [ "^Destroy all adjacent carvings.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
-         "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
+          "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
           "level": 6,
@@ -5456,7 +5458,7 @@
           "attributes": ["%wound%"],
           "special1": [ "^%teleport% to farthest carving and destroy it.","**.........", "%attack% + 2", "^%target% 5,", "^%push% 2"],
           "special2": [ "^Destroy all adjacent carvings.","**.........","%pull% 2","^%target% C,","^%range% 5,", "**.........","%attack% - 1","^%target% all adjacent enemies","**.........","%heal% C","^Self"],
-         "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
+          "immunities": [ "%brittle%","%immobilize%","%disarm%", "%stun%", "%curse%" ]
         },
         {
           "level": 7,
@@ -6350,6 +6352,7 @@
       ]
     },
     "#37 The Dead Mile": {
+      "note": "ERRATA: Treasure Chest should be #56",
       "monsters": [ "Living Bones (FH)", "Living Spirit (FH)" ,"Ruined Machine" ],
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"rockroot":1,"arrowvine":2, "treasure": 1}
     },
@@ -7023,6 +7026,7 @@
       "lootDeck": {"coin":8,"lumber": 5,"hide": 4,"axenut":2,"flamefruit":1}
     },
     "#70 The True Oak": {
+      "note": "ERRATA: There should only be 1 Random Item on the loot deck",
       "monsters": [ "City Guard (FH)", "Hound (FH)", "Sun Demon (FH)" ],
       "lootDeck": {"coin":7,"lumber": 5,"hide": 3,"axenut":2,"flamefruit":2, "treasure": 1},
       "special": [
@@ -8096,6 +8100,9 @@
        }
       ]
     },
+    "#14.2 SCENARIONAME (NUMBER)": {
+      "note": "ERRATA: Map: Ice Wraith should be Frost Demon"
+    },
     "#14.3 Temple of Liberation (20)": {
       "special": [
         {
@@ -8281,6 +8288,7 @@
       "monsters": ["Flaming Sword of Justice"]
     },
     "#111.2 Invasion of the Dock (71)": {
+      "note": "ERRATA: Map: Lurker Soldier should be Lurker Clawcrusher",
       "special": [
         {
           "type": "Escort",
@@ -8320,6 +8328,9 @@
     },
     "#146.3 A Contained Fire (89)": {
       "monsters": ["Vanjal"]
+    },
+    "#154.1 SCENARIONAME (NUMBER)": {
+      "note": "ERRATA: Map: Black Imp should be Forest Imp"
     },
     "#157.1 Orphan's Halls (120)": {
       "special": [
@@ -8389,6 +8400,9 @@
     },
     "#195.1 Belara's Keep (135)": {
       "monsters": ["Belara"]
+    },
+    "#197.1 SCENARIONAME (0)": {
+      "note": "ERRATA: Outdated descriptions and names of some cards"
     }
   }
 }
