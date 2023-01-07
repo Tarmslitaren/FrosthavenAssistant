@@ -101,10 +101,11 @@ class SpecialRule {
 
 
 class ScenarioModel {
-  ScenarioModel({required this.monsters, required this.specialRules, required this.lootDeck});
+  ScenarioModel({required this.monsters, required this.specialRules, required this.lootDeck, required this.initMessage});
   List<String> monsters;
   List<SpecialRule> specialRules;
   LootDeckModel? lootDeck;
+  String initMessage;
   factory ScenarioModel.fromJson(Map<String, dynamic> data) {
     List<String> monsterList = [];
     if(data.containsKey('monsters')) {
@@ -124,8 +125,12 @@ class ScenarioModel {
     if(data.containsKey('lootDeck')) {
       lootDeck = LootDeckModel.fromJson(data['lootDeck']);
     }
+    String initMessage = "";
+    if(data.containsKey('initialMessage')) {
+      initMessage = data['initialMessage'];
+    }
 
-    return ScenarioModel(monsters: monsterList, specialRules: rulesList, lootDeck: lootDeck);
+    return ScenarioModel(monsters: monsterList, specialRules: rulesList, lootDeck: lootDeck, initMessage: initMessage);
   }
 
 }

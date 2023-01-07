@@ -77,18 +77,24 @@ class SetScenarioCommand extends Command {
 
     List<String> monsters = [];
     List<SpecialRule> specialRules = [];
+    String initMessage = "";
     if (section) {
       monsters = _gameState.modelData.value[_gameState
           .currentCampaign.value]!.sections[_scenario]!.monsters;
 
       specialRules = _gameState.modelData.value[_gameState
           .currentCampaign.value]!.sections[_scenario]!.specialRules.toList();
+
+      initMessage = _gameState.modelData.value[_gameState
+          .currentCampaign.value]!.sections[_scenario]!.initMessage;
     }else{
       if(_scenario != "custom") {
         monsters = _gameState.modelData.value[_gameState
             .currentCampaign.value]!.scenarios[_scenario]!.monsters;
         specialRules = _gameState.modelData.value[_gameState
             .currentCampaign.value]!.scenarios[_scenario]!.specialRules.toList();
+        initMessage = _gameState.modelData.value[_gameState
+            .currentCampaign.value]!.scenarios[_scenario]!.initMessage;
       }
     }
 
@@ -166,8 +172,6 @@ class SetScenarioCommand extends Command {
       }
     }
 
-
-
     if (!section) {
       _gameState.scenarioSpecialRules = specialRules;
       GameMethods.updateElements();
@@ -183,6 +187,11 @@ class SetScenarioCommand extends Command {
       _gameState.updateList.value++;
       MainList.scrollToTop();
     //});
+
+    //show init message if exists:
+    if(initMessage.isNotEmpty) {
+      _gameState.toastMessage.value = initMessage;
+    }
   }
 
   @override
