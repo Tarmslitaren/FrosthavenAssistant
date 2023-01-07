@@ -113,6 +113,66 @@ scaling the bottom/top bars (for better visibility on some screens for example).
   - Trails of Ashes campaign
   - Something else.
 
+## Developer Notes
+
+#Calculations:
+health and attack may be using a string formula instead of integer.
+Calculations handle division (integer only) '/' rounds up, 'd' rounds down
+multiplications (* or x means same thing)
+addition (- or +)
+and parenthesis.
+variables: C (nr of characters), L (scenario level)
+
+#Special Rules:
+Allies: 
+ - need a "list" of strings of monsters
+Timer: 
+ - "startOfRound": optional boolean,
+ - "list": integers of the rounds in which to display note. -1 means all rounds
+ - "note" - test to display
+Objective/Escort:          
+ - "name" - name of character
+ - "health": - string with the calculation for health with C,L etc.
+ - "init": - preset initiative
+LevelAdjust:,
+ - "name" - string, the monster id
+ - "level" - integer, the disparity from regular level (i.e. -1 means one level lower)
+Named or otherwise special enemies are not added as special rules, but as their own monster type
+Since named monsters are like bosses, they should be added as if they were a boss (i.e only one type instead of normal+elite types)
+
+#special signs for text layout:
+ - *small style - only used for longer texts usually.
+ - ^mid style - also denotes subline in case last line was main line sized. if you want a line to be a subline you NEED to use this or ^^.
+ - ^^mid style squished. makes the line height smaller. can cause alignment issues if text contains icons. best to use this from the second row onwards in a text block.
+ - ! to the right of (don't use this. is being used internally. prefer the "[r]"+"[/r]" way.)
+ - £ yellow
+ - | draw only condition, not the text (for FH style, ignore this. the text is removed automatically)
+ - Å invisible text - used for force aligning text, since whitespace by itself gets disregarded. also empty lines, since height of empty string is variable :(
+ - '>' disables stat calculation (useful for grant abilities)
+ - "[r]"+"[/r]" row "[c]"+"[/c]" column - put items between in row or column.
+ - "[s]"+"[/s]" for row in column in row. only used for element use case.
+ - ¤ treat as image instead of WidgetSpan - using actual image size (use this for aoe graphics)
+ - *......... create divider
+ - **......... crete divider with smaller height.
+ - [newLine] used to force break line for the sublines (gray boxes: it is ont correct style, but necessary to fit calculated values in some cases.
+graphics can be placed at exact position like this:
+[{
+"gfx": "aoe-line-4-with-black",
+"x": 0.73,
+"y": 0.36,
+"angle": -30.0 //don't use angle unless you have to since the pivot point is not in center.
+}]
+added before the lines.
+FH special considerations:
+ - write as if gloomhaven style, the algorithm will move the sublines up when applicable.
+ - algorithm will find if is subline by looking for ^ after a mainline.
+ - algorithm will find conditional block (dotted edge) by looking for keyword: '%use%'
+ - algorithm will make first ^ line after a use-element to be main line when reasonable (e.g. conditions, and added attacks)
+ - if you need a subline to be in 2 parts, one to the right and one below, add empty row like this to separate: "[r]","[/r]",
+ - don't use ^^ on first line of subline of conditional block as the gray background will be squished as well and look bad.
+ - subline text is somewhat larger than the physical counterpart due to the fact it was just too small to see easily on smaller screens.
+ 
+
 ## Copyright / License
 
 Gloomhaven and all related properties, images and text are owned by [Cephalofair Games](https://cephalofair.com).
