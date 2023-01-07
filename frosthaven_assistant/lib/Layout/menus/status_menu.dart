@@ -300,7 +300,8 @@ class StatusMenuState extends State<StatusMenu> {
     String name = "";
     String ownerId = "";
     if (widget.monsterId != null) {
-      name = widget.monsterId!;
+
+      name = widget.monsterId!; //this is no good
       ownerId = widget.monsterId!;
     } else if (widget.characterId != null) {
       name = widget.characterId!;
@@ -323,7 +324,8 @@ class StatusMenuState extends State<StatusMenu> {
       if (widget.monsterId != null) {
         for (var item in _gameState.currentList) {
           if (item.id == widget.monsterId) {
-            monster = item as Monster;
+            monster = item as Monster; 
+            name = monster.type.display;
             if (monster.type.deck == "Ice Wraith") {
               isIceWraith = true;
             }
