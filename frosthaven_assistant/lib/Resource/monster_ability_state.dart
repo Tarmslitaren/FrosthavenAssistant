@@ -20,10 +20,12 @@ class MonsterAbilityState{
         break;
       }
     }
+    lastRoundDrawn = 0;
   }
   final String name;
   final CardStack<MonsterAbilityCardModel> drawPile = CardStack<MonsterAbilityCardModel>();
   final CardStack<MonsterAbilityCardModel> discardPile = CardStack<MonsterAbilityCardModel>();
+  int lastRoundDrawn = 0;
   void shuffle(){
     while(discardPile.isNotEmpty) {
       drawPile.push(discardPile.pop());
@@ -33,6 +35,7 @@ class MonsterAbilityState{
   void draw(){
     //put top of draw pile on discard pile
     discardPile.push(drawPile.pop());
+    lastRoundDrawn = getIt<GameState>().round.value;
   }
 
   @override
@@ -40,7 +43,8 @@ class MonsterAbilityState{
     return '{'
         '"name": "$name", '
         '"drawPile": ${drawPile.toString()}, '
-        '"discardPile": ${discardPile.toString()} '
+        '"discardPile": ${discardPile.toString()}, '
+        '"lastRoundDrawn": $lastRoundDrawn '
         '}';
   }
 }

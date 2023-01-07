@@ -601,6 +601,10 @@ class GameSaveState{
             }
           }
         }
+        if (item.containsKey("lastRoundDrawn")) {
+          state.lastRoundDrawn = item["lastRoundDrawn"];
+        }
+
         state.drawPile.getList().clear();
         state.discardPile.getList().clear();
         state.drawPile.setList(newDrawList);
