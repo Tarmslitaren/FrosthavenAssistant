@@ -23,7 +23,6 @@ class NextRoundCommand extends Command {
     GameMethods.shuffleDecksIfNeeded();
     GameMethods.updateElements();
     GameMethods.setRoundState(RoundState.chooseInitiative);
-    GameMethods.sortCharactersFirst();
     if(_gameState.currentList.last.turnState != TurnsState.done) {
       GameMethods.setTurnDone(_gameState.currentList.length - 1);
     }
@@ -31,6 +30,7 @@ class NextRoundCommand extends Command {
       GameMethods.setTurnDone(_gameState.currentList.length - 1);
     }
     GameMethods.clearTurnState(false);
+    GameMethods.sortCharactersFirst();
 
     _gameState.toastMessage.value = "";
     for(var rule in _gameState.scenarioSpecialRules) {
