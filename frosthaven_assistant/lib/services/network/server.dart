@@ -108,15 +108,16 @@ class Server {
     print(info);
     getIt<Network>().networkMessage.value = info;
 
-    bool existed = false;
+    /*bool existed = false;
     for (var existingClient in _clients) {
       if (client.remoteAddress == existingClient.remoteAddress) {
         existed = true;
       }
-    }
-    if (!existed) {
+    }*/
+    _clients.removeWhere((element) => element.remoteAddress == client.remoteAddress);
+    //if (!existed) {
       _clients.add(client);
-    }
+    //}
     // listen for events from the client
     try {
       client.listen(
@@ -219,6 +220,7 @@ class Server {
         // handle errors
         onError: (error) {
           print(error);
+          getIt<Network>().networkMessage.value = error.toString();
           client.close();
           for (int i = 0; i < _clients.length; i++) {
             if (_clients[i].remoteAddress == client.remoteAddress) {
@@ -243,6 +245,7 @@ class Server {
       );
     } catch (error) {
       print(error);
+      getIt<Network>().networkMessage.value = error.toString();
       client.close();
       for (int i = 0; i < _clients.length; i++) {
         if (_clients[i].remoteAddress == client.remoteAddress) {

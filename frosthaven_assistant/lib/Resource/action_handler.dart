@@ -125,10 +125,6 @@ class ActionHandler {
       gameSaveStates.removeRange(commandIndex.value + 1, gameSaveStates.length);
     }
     getIt<GameState>().save(); //save after each action
-    if (commandIndex.value >= maxUndo) {
-      commands[commandIndex.value - maxUndo] = null;
-      gameSaveStates[commandIndex.value - maxUndo] = null;
-    }
 
     //send last gamestate if connected
     if (isServer) {
@@ -141,6 +137,13 @@ class ActionHandler {
           'client sends, index: ${commandIndex.value}, description:${command.describe()}');
       getIt<Network>().client.send(
           "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameSaveStates.last!.getState()}");
+    }
+
+    //TODO: this is breaking if commandindex is not in sync with commands. aa in connected state.
+    //really need to go over this again: do we really need to save commands at all, or are savestates + descriptions enough also for offline?
+    if (commandIndex.value >= maxUndo) {
+      commands[commandIndex.value - maxUndo] = null;
+      gameSaveStates[commandIndex.value - maxUndo] = null;
     }
   }
 }

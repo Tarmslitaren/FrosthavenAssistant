@@ -122,7 +122,7 @@ class NetworkInformation {
           for (var address in interface.addresses) {
             if (address.type == InternetAddressType.IPv4) {
               wifiIPv4.value = address.address; //default to ipv4 ethernet address if no wifi
-              break; 
+              break;
             }
           }
         }

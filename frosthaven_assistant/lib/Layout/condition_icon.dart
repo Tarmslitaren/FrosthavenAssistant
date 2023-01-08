@@ -66,7 +66,7 @@ class ConditionIconState extends State<ConditionIcon> {
   void _animateListener() {
     GameState gameState = getIt<GameState>();
     Command? command;
-    //TODO: does not work at all when networked.
+    //TODO: does not work at all when networked. index value wrong
     if (gameState.commandIndex.value >= 0 && gameState.commands.isNotEmpty) {
       command = gameState.commands[gameState.commandIndex.value];
     }

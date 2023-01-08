@@ -7,13 +7,14 @@ class AdjustableScrollController extends ScrollController {
     super.addListener(() {
       ScrollDirection scrollDirection = super.position.userScrollDirection;
       if (scrollDirection != ScrollDirection.idle) {
-        double scrollEnd = super.offset +
+        /*double scrollEnd = super.offset +
             (scrollDirection == ScrollDirection.reverse
                 ? extraScrollSpeed
                 : -extraScrollSpeed);
         scrollEnd = min(super.position.maxScrollExtent,
             max(super.position.minScrollExtent, scrollEnd));
-        jumpTo(scrollEnd);
+        jumpTo(scrollEnd);*/
+        //totally screws up non mousewheel scrolling...
       }
     });
   }

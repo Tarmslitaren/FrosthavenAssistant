@@ -36,6 +36,7 @@ class MainState extends State<MyHomePage>
     switch (state) {
       case AppLifecycleState.resumed:
         print("app in resumed");
+        rebuildAllChildren(context); //might be a bit performance heavy
         //TODO: reconnect to last known if disconnected, and get latest state if still connected.
 
         break;
