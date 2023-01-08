@@ -35,7 +35,7 @@ class Server {
 
   Future<void> startServer() async {
     //_clients.clear();
-    String connectTo = InternetAddress.anyIPv4.toString(); //"0.0.0.0";
+    String connectTo = InternetAddress.anyIPv4.address;//"0.0.0.0";
     if (getIt<Network>().networkInfo.wifiIPv4.value.isNotEmpty && !getIt<Network>().networkInfo.wifiIPv4.value.contains("Fail")) {
       connectTo = getIt<Network>().networkInfo.wifiIPv4.value;
     } else {

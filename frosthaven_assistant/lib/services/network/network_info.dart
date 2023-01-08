@@ -117,6 +117,17 @@ class NetworkInformation {
     } on PlatformException catch (e) {
       developer.log('Failed to get Wifi IPv4', error: e);
       wifiIPv4.value = 'Failed to get Wifi IPv4';
+      for (var interface in await NetworkInterface.list()) {
+        if (interface.name == "Ethernet") {
+          for (var address in interface.addresses) {
+            if (address.type == InternetAddressType.IPv4) {
+              wifiIPv4.value = address.address; //default to ipv4 ethernet address if no wifi
+              break; 
+            }
+          }
+        }
+      }
+
     }
 
     /*try {
