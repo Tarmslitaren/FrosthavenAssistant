@@ -35,7 +35,7 @@ class GameSaveState{
     state.metalEnhancements = List<bool>.from(lootDeckData['metalEnhancements']);
     state.hideEnhancements = List<bool>.from(lootDeckData["hideEnhancements"]);
     state.lumberEnhancements = List<bool>.from(lootDeckData["lumberEnhancements"]);
-
+    state.addedCards = List<int>.from(lootDeckData["addedCards"]);
     state.arrowvineEnhancements = [false, false];
     state.corpsecapEnhancements = [false, false];
     state.flamefruitEnhancements = [false, false];

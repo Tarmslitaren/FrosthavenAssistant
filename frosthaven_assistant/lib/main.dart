@@ -6,8 +6,6 @@ import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-import 'package:responsive_framework/responsive_wrapper.dart';
-
 import 'package:wakelock/wakelock.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';

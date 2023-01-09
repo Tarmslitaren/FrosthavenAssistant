@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add__special_loot_card_command.dart';
-import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/remove__special_loot_card_command.dart';
 import '../../Resource/state/game_state.dart';
@@ -11,6 +10,7 @@ import '../../Resource/state/loot_deck_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import '../loot_card.dart';
+import 'add_loot_card_menu.dart';
 
 class Item extends StatelessWidget {
   final LootCard data;
@@ -177,6 +177,13 @@ class LootCardMenuState extends State<LootCardMenu> {
                                                 const LootCardEnhancementMenu());
                                           },
                                           child: const Text("Enhance cards"),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            openDialog(context,
+                                                const AddLootCardMenu());
+                                          },
+                                          child: const Text("Add Card"),
                                         ),
                                       ],
                                     ),

@@ -269,7 +269,7 @@ class StatusMenuState extends State<StatusMenu> {
                                 filterQuality: FilterQuality.medium,
                                 //needed because of the edges
                                 image:
-                                    AssetImage("assets/images/psd/immune.png"),
+                                    const AssetImage("assets/images/psd/immune.png"),
                               )),
                         ],
                       ),

@@ -68,7 +68,7 @@ class LootDeck {
   List<LootCard> lumberPool = [];
   List<LootCard> hidePool = [];
   List<LootCard> metalPool = [];
-
+//tODO: redo this whole mess: but...depleting the pools means they need to be added to data aaaaaaaaarh!!!!!
   //2 +1, 3 oneIf3or4twoIfNot, 3 oneIf4twoIfNot
   List<bool> metalEnhancements = [
     false,
@@ -126,6 +126,8 @@ class LootDeck {
     false,
   ];
 
+  List<int> addedCards = [0,0,0,0,0,0,0,0,0];
+
   final CardStack<LootCard> drawPile = CardStack<LootCard>();
   final CardStack<LootCard> discardPile = CardStack<LootCard>();
   bool hasCard1418 = false;
@@ -147,6 +149,7 @@ class LootDeck {
     snowthistleEnhancements = other.snowthistleEnhancements;
     rockrootEnhancements = other.rockrootEnhancements;
     flamefruitEnhancements = other.flamefruitEnhancements;
+    addedCards = other.addedCards;
 
     //build deck
     _initPools();
@@ -166,6 +169,7 @@ class LootDeck {
     snowthistleEnhancements = other.snowthistleEnhancements;
     rockrootEnhancements = other.rockrootEnhancements;
     flamefruitEnhancements = other.flamefruitEnhancements;
+    addedCards = other.addedCards;
 
     _initPools();
   }
@@ -237,7 +241,7 @@ class LootDeck {
   void _addHerb(List<LootCard> cards, String gfx, List<bool> enhancements) {
     cards.add(LootCard(
         baseValue: LootBaseValue.one,
-        enhanced: enhancements[Random().nextInt(enhancements.length)],
+        enhanced: enhancements[Random().nextInt(enhancements.length)], //TODO: da fuk? this is not correct!  -not treating as a pool of cards
         lootType: LootType.materiel,
         gfx: gfx));
   }
@@ -333,6 +337,59 @@ class LootDeck {
     cardCount.value = drawPile.size();
   }
 
+  void addExtraCard(String identifier) {
+    //this assumes you are here for the favors, so won't be correct if there's any cards of same type added already
+
+    if (identifier == "hide") {
+      drawPile.getList().add(hidePool[0+addedCards[0]]);
+      addedCards[0]++;
+      shuffle();
+    }
+    if (identifier == "lumber") {
+      drawPile.getList().add(lumberPool[0+addedCards[1]]);
+      addedCards[1]++;
+      shuffle();
+    }
+    if (identifier == "metal") {
+      drawPile.getList().add(metalPool[0+addedCards[2]]);
+      addedCards[2]++;
+      shuffle();
+    }
+
+    if (identifier == "arrowvine") {
+      _addHerb(drawPile.getList(), "arrowvine", arrowvineEnhancements);
+      addedCards[3]++;
+      shuffle();
+    }
+    if (identifier == "axenut") {
+      _addHerb(drawPile.getList(), "axenut", axenutEnhancements);
+      addedCards[4]++;
+      shuffle();
+    }
+    if (identifier == "corpsecap") {
+      _addHerb(drawPile.getList(), "corpsecap", corpsecapEnhancements);
+      addedCards[5]++;
+      shuffle();
+    }
+    if (identifier == "flamefruit") {
+      _addHerb(drawPile.getList(), "flamefruit", flamefruitEnhancements);
+      addedCards[6]++;
+      shuffle();
+    }
+    if (identifier == "rockroot") {
+      _addHerb(drawPile.getList(), "rockroot", rockrootEnhancements);
+      addedCards[7]++;
+      shuffle();
+    }
+
+    if (identifier == "snowthistle") {
+      _addHerb(drawPile.getList(), "snowthistle", snowthistleEnhancements);
+      addedCards[8]++;
+      shuffle();
+    }
+
+  }
+
   void flipEnhancement(bool value, int index, String identifier) {
     List<bool> enhancementList = [];
     if (identifier == "lumber") {
@@ -413,6 +470,7 @@ class LootDeck {
         '"snowthistleEnhancements": ${snowthistleEnhancements.toString()}, '
         '"axenutEnhancements": ${axenutEnhancements.toString()}, '
         '"arrowvineEnhancements": ${arrowvineEnhancements.toString()}, '
+        '"addedCards": ${addedCards.toString()}, ' //todo: test this
         '"1418": $hasCard1418, '
         '"1419": $hasCard1419 '
         '}';

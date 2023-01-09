@@ -97,6 +97,10 @@ dependencies:
 
   override_text_scale_factor: ^1.0.2
 
+  #flutter_improved_scrolling: ^0.0.3 #doesn't actually improve anything
+
+  #dyn_mouse_scroll: ^1.0.7 #nope
+
   collection: ^1.16.0
 
   window_size:

@@ -1,17 +1,12 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
-import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:override_text_scale_factor/override_text_scale_factor.dart';
 import 'package:window_manager/window_manager.dart';
-
 import 'Layout/main_scaffold.dart';
 import 'Model/campaign.dart';
 import 'Resource/state/game_state.dart';
@@ -86,9 +81,8 @@ class MainState extends State<MyHomePage>
         valueListenable: getIt<GameState>().updateForUndo,
         builder: (context, value, child) {
           rebuildAllChildren(
-              context); //only way to remake the valuelistenable builders with broken references
+              context); //only way to remake the value listenable builders with broken references
           return OverrideTextScaleFactor(
-              // Note that any widget can be used as child - not only Text widgets
               child: createMainScaffold(context));
         });
   }

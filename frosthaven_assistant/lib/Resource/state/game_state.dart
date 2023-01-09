@@ -4,10 +4,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Model/campaign.dart';
 import '../../Model/scenario.dart';
@@ -35,7 +32,6 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
     elementState.value[Elements.dark] = ElementState.inert;
 
     initGame();
-
   }
 
   initGame() async {
