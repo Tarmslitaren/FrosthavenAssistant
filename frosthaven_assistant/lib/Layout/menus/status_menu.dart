@@ -13,9 +13,15 @@ import '../../Resource/commands/ice_wraith_change_form_command.dart';
 import '../../Resource/commands/remove_condition_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_methods.dart';
-import '../../Resource/game_state.dart';
-import '../../Resource/modifier_deck_state.dart';
+import '../../Resource/state/character.dart';
+import '../../Resource/state/character_state.dart';
+import '../../Resource/state/figure_state.dart';
+import '../../Resource/state/game_state.dart';
+import '../../Resource/state/list_item_data.dart';
+import '../../Resource/state/modifier_deck_state.dart';
 import '../../Resource/settings.dart';
+import '../../Resource/state/monster.dart';
+import '../../Resource/state/monster_instance.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import '../counter_button.dart';
@@ -88,7 +94,7 @@ class StatusMenuState extends State<StatusMenu> {
     super.initState();
   }
 
-  bool isConditionActive(Condition condition, Figure figure) {
+  bool isConditionActive(Condition condition, FigureState figure) {
     bool isActive = false;
     for (var item in figure.conditions.value) {
       if (item == condition) {
@@ -99,7 +105,7 @@ class StatusMenuState extends State<StatusMenu> {
     return isActive;
   }
 
-  void activateCondition(Condition condition, Figure figure) {
+  void activateCondition(Condition condition, FigureState figure) {
     List<Condition> newList = [];
     newList.addAll(figure.conditions.value);
     newList.add(condition);
@@ -203,7 +209,7 @@ class StatusMenuState extends State<StatusMenu> {
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
           Color color = Colors.transparent;
-          Figure? figure = GameMethods.getFigure(ownerId, figureId);
+          FigureState? figure = GameMethods.getFigure(ownerId, figureId);
           if (figure == null) {
             return Container();
           }
@@ -309,7 +315,7 @@ class StatusMenuState extends State<StatusMenu> {
     }
 
     String figureId = widget.figureId;
-    Figure? figure = GameMethods.getFigure(ownerId, figureId);
+    FigureState? figure = GameMethods.getFigure(ownerId, figureId);
     if (figure == null) {
       return Container();
     }

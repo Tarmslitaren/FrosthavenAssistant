@@ -1,4 +1,4 @@
-import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:get_it/get_it.dart';
 

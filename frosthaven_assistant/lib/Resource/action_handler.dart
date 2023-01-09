@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/Resource/state/game_save_state.dart';
 import '../services/network/network.dart';
 import '../services/service_locator.dart';
-import 'game_state.dart';
+import 'state/game_state.dart';
 
 abstract class Command {
   void execute();
@@ -142,7 +143,9 @@ class ActionHandler {
     //TODO: this is breaking if commandindex is not in sync with commands. aa in connected state.
     //really need to go over this again: do we really need to save commands at all, or are savestates + descriptions enough also for offline?
     if (commandIndex.value >= maxUndo) {
-      commands[commandIndex.value - maxUndo] = null;
+      if(commands.length > commandIndex.value) {
+        commands[commandIndex.value - maxUndo] = null;
+      }
       gameSaveStates[commandIndex.value - maxUndo] = null;
     }
   }

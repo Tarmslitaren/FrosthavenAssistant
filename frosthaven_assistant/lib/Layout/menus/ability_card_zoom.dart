@@ -1,17 +1,10 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
-import 'package:frosthaven_assistant/Resource/monster_ability_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-import 'package:reorderables/reorderables.dart';
-import '../../Resource/commands/reorder_ability_list_command.dart';
-import '../../Resource/enums.dart';
-import '../../Resource/game_state.dart';
-import '../../Resource/ui_utils.dart';
-import '../../services/service_locator.dart';
+
+import '../../Resource/state/monster.dart';
 
 
 class AbilityCardZoom extends StatefulWidget {

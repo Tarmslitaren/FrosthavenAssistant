@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/modifier_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
-import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-import '../Resource/modifier_deck_state.dart';
+import '../Resource/state/modifier_deck_state.dart';
 import '../Resource/settings.dart';
 
 class ModifierDeckWidget extends StatefulWidget {

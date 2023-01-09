@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../Resource/game_state.dart';
+import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';

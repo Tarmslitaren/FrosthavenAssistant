@@ -2,7 +2,8 @@
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 
 import '../../../services/service_locator.dart';
-import '../../game_state.dart';
+import '../../state/character_state.dart';
+import '../../state/game_state.dart';
 import 'change_stat_command.dart';
 
 class ChangeXPCommand extends ChangeStatCommand {

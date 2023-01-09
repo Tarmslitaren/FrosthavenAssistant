@@ -4,7 +4,8 @@ import 'package:frosthaven_assistant/Resource/enums.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../game_methods.dart';
-import '../game_state.dart';
+import '../state/game_state.dart';
+import '../state/monster_instance.dart';
 
 class IceWraithChangeFormCommand extends Command {
   IceWraithChangeFormCommand(this.isElite, this.ownerId, this.figureId);

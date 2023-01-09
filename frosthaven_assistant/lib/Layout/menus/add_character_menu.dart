@@ -5,7 +5,8 @@ import '../../Model/character_class.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_character_command.dart';
 import '../../Resource/game_methods.dart';
-import '../../Resource/game_state.dart';
+import '../../Resource/state/character.dart';
+import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 

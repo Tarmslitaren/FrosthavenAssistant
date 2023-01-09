@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../Resource/commands/imbue_element_command.dart';
 import '../Resource/commands/use_element_command.dart';
 import '../Resource/enums.dart';
-import '../Resource/game_state.dart';
+import '../Resource/state/game_state.dart';
 import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 

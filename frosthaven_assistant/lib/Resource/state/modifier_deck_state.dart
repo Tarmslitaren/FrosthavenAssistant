@@ -2,7 +2,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import 'card_stack.dart';
+import '../card_stack.dart';
 
 enum CardType {
   add,

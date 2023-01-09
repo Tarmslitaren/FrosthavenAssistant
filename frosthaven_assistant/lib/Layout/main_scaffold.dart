@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/top_bar.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
-import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Model/campaign.dart';
 import '../Resource/scaling.dart';

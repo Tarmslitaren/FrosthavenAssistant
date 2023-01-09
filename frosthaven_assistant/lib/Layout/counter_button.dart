@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../Resource/commands/change_stat_commands/change_stat_command.dart';
 import '../Resource/game_methods.dart';
-import '../Resource/game_state.dart';
+import '../Resource/state/figure_state.dart';
+import '../Resource/state/game_state.dart';
 import '../services/service_locator.dart';
 
 class CounterButton extends StatefulWidget {
@@ -29,7 +30,7 @@ class CounterButtonState extends State<CounterButton> {
   final totalChangeValue = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
-    Figure? figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
+    FigureState? figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
     if (figure == null && widget.figureId != "unknown"){ //in case it dies and was removed from the list
       return Container();
     }

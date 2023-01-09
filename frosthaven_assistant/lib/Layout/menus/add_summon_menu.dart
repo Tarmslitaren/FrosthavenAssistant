@@ -5,7 +5,8 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
-import '../../Resource/game_state.dart';
+import '../../Resource/state/character.dart';
+import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
 

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../Resource/commands/remove_character_command.dart';
 import '../../Resource/game_methods.dart';
-import '../../Resource/game_state.dart';
+import '../../Resource/state/character.dart';
+import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class RemoveCharacterMenu extends StatefulWidget {

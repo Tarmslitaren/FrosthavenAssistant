@@ -14,7 +14,7 @@ import 'package:window_manager/window_manager.dart';
 
 import 'Layout/main_scaffold.dart';
 import 'Model/campaign.dart';
-import 'Resource/game_state.dart';
+import 'Resource/state/game_state.dart';
 import 'main.dart';
 
 class DataLoadedNotification extends Notification {

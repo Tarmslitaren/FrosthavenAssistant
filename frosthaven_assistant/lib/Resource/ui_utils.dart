@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import '../services/service_locator.dart';
-import 'game_state.dart';
+import 'state/game_state.dart';
 
 void openDialogOld(BuildContext context, Widget widget) {
   showDialog(context: context, builder: (BuildContext context) => widget);

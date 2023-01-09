@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 
 import '../../Model/monster.dart';
 import '../enums.dart';
-import '../game_state.dart';
 import '../stat_calculator.dart';
+import '../state/monster.dart';
 
 class StatApplier{
 

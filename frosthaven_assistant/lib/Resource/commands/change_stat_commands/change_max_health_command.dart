@@ -1,7 +1,8 @@
 
 import '../../../services/service_locator.dart';
 import '../../game_methods.dart';
-import '../../game_state.dart';
+import '../../state/figure_state.dart';
+import '../../state/game_state.dart';
 import 'change_stat_command.dart';
 
 class ChangeMaxHealthCommand extends ChangeStatCommand {
@@ -10,7 +11,7 @@ class ChangeMaxHealthCommand extends ChangeStatCommand {
   @override
   void execute() {
 
-    Figure figure = GameMethods.getFigure(ownerId, figureId)!;
+    FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
 
     figure.maxHealth.value += change;
 

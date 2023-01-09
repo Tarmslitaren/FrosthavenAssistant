@@ -7,9 +7,11 @@ import '../Resource/action_handler.dart';
 import '../Resource/commands/next_turn_command.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_methods.dart';
-import '../Resource/game_state.dart';
+import '../Resource/state/figure_state.dart';
+import '../Resource/state/game_state.dart';
 import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
+import '../Resource/state/list_item_data.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 
@@ -30,7 +32,7 @@ class ConditionIcon extends StatefulWidget {
   final Condition condition;
   final double size;
   final ListItemData owner;
-  final Figure figure;
+  final FigureState figure;
   late final String gfx;
 
   @override

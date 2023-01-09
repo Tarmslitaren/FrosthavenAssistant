@@ -4,7 +4,8 @@ import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../enums.dart';
-import '../game_state.dart';
+import '../state/figure_state.dart';
+import '../state/game_state.dart';
 
 class AddConditionCommand extends Command {
   final Condition condition;
@@ -13,7 +14,7 @@ class AddConditionCommand extends Command {
   AddConditionCommand(this.condition, this.figureId, this.ownerId);
   @override
   void execute() {
-    Figure figure = GameMethods.getFigure(ownerId, figureId)!;
+    FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
     List<Condition> newList = [];
     newList.addAll(figure.conditions.value);
     newList.add(condition);

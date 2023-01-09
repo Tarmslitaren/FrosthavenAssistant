@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
-import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class StatCalculator {

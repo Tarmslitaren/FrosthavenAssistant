@@ -6,7 +6,8 @@ import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/frosthaven_converter.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/stat_applier.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
-import '../game_state.dart';
+import '../state/game_state.dart';
+import '../state/monster.dart';
 
 class LineBuilder {
   static const bool debugColors = false;

@@ -1,6 +1,6 @@
-import '../Model/MonsterAbility.dart';
-import '../services/service_locator.dart';
-import 'card_stack.dart';
+import '../../Model/MonsterAbility.dart';
+import '../../services/service_locator.dart';
+import '../card_stack.dart';
 import 'game_state.dart';
 
 class MonsterAbilityState{

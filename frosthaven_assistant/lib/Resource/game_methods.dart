@@ -1,13 +1,19 @@
 
-import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/state/character.dart';
+import 'package:frosthaven_assistant/Resource/state/character_state.dart';
+import 'package:frosthaven_assistant/Resource/state/figure_state.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/Resource/state/list_item_data.dart';
+import 'package:frosthaven_assistant/Resource/state/monster.dart';
+import 'package:frosthaven_assistant/Resource/state/monster_instance.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Model/character_class.dart';
 import '../Model/monster.dart';
 import 'commands/add_standee_command.dart';
 import 'enums.dart';
-import 'monster_ability_state.dart';
+import 'state/monster_ability_state.dart';
 
 GameState _gameState = getIt<GameState>();
 
@@ -348,7 +354,7 @@ class GameMethods {
   }
 
 
-  static Figure? getFigure(String ownerId, String figureId) {
+  static FigureState? getFigure(String ownerId, String figureId) {
     for(var item in getIt<GameState>().currentList) {
       if(item.id == figureId) {
         return (item as Character).characterState;
@@ -438,7 +444,7 @@ class GameMethods {
     return false;
   }
 
-  static void clearTurnStateConditions(Figure figure, bool clearLastTurnToo) {
+  static void clearTurnStateConditions(FigureState figure, bool clearLastTurnToo) {
     if(!clearLastTurnToo){
       figure.conditionsAddedPreviousTurn.value = figure.conditionsAddedThisTurn.value.toSet();
     } else {
@@ -496,7 +502,7 @@ class GameMethods {
     return false;
   }
 
-  static void removeExpiringConditions(Figure figure) {
+  static void removeExpiringConditions(FigureState figure) {
     if(getIt<Settings>().expireConditions.value == true) {
       bool chillRemoved = false;
       for (int i = figure.conditions.value.length-1; i >= 0; i--) {
@@ -530,7 +536,7 @@ class GameMethods {
     }
   }
 
-  static void reapplyConditions(Figure figure) {
+  static void reapplyConditions(FigureState figure) {
     for(var condition in figure.conditionsAddedPreviousTurn.value) {
       if(!figure.conditions.value.contains(condition) || condition == Condition.chill) {
         figure.conditions.value.add(condition);

@@ -1,7 +1,8 @@
 
 import '../../../services/service_locator.dart';
 import '../../game_methods.dart';
-import '../../game_state.dart';
+import '../../state/figure_state.dart';
+import '../../state/game_state.dart';
 import 'change_stat_command.dart';
 
 class ChangeHealthCommand extends ChangeStatCommand {
@@ -10,7 +11,7 @@ class ChangeHealthCommand extends ChangeStatCommand {
   @override
   void execute() {
 
-    Figure figure = GameMethods.getFigure(ownerId, figureId)!;
+    FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
 
     figure.health.value += change;
     if(change > 0 && figure.health.value == 1) {
@@ -34,7 +35,7 @@ class ChangeHealthCommand extends ChangeStatCommand {
     if(change > 0) {
       return "Increase $figureId's health";
     }
-    Figure? figure = GameMethods.getFigure(ownerId, figureId);
+    FigureState? figure = GameMethods.getFigure(ownerId, figureId);
     if (figure == null || figure.health.value <= 0) {
       return "Kill $ownerId";
     }

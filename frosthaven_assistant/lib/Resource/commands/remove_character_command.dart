@@ -1,7 +1,9 @@
 
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
-import '../game_state.dart';
+import '../state/character.dart';
+import '../state/game_state.dart';
+import '../state/list_item_data.dart';
 
 class RemoveCharacterCommand extends Command {
   final GameState _gameState = getIt<GameState>();

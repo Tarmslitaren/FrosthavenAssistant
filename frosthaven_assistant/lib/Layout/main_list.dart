@@ -4,13 +4,16 @@ import 'package:frosthaven_assistant/Layout/character_widget.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/adjustable_scroll_controller.dart';
-import 'package:frosthaven_assistant/Resource/game_state.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import 'package:reorderables/reorderables.dart';
 import '../Resource/commands/reorder_list_command.dart';
 import '../Resource/game_methods.dart';
+import '../Resource/state/character.dart';
+import '../Resource/state/list_item_data.dart';
+import '../Resource/state/monster.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';

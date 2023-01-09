@@ -4,7 +4,7 @@ import 'package:frosthaven_assistant/Model/monster.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_monster_command.dart';
 import '../../Resource/game_methods.dart';
-import '../../Resource/game_state.dart';
+import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddMonsterMenu extends StatefulWidget {

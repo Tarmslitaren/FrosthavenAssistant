@@ -4,7 +4,9 @@ import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../enums.dart';
 import '../game_methods.dart';
-import '../game_state.dart';
+import '../state/character.dart';
+import '../state/game_state.dart';
+import '../state/monster.dart';
 import '../ui_utils.dart';
 
 class NextRoundCommand extends Command {

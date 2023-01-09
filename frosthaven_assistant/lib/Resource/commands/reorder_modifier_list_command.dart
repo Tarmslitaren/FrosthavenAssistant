@@ -1,9 +1,9 @@
 
-import 'package:frosthaven_assistant/Resource/modifier_deck_state.dart';
+import 'package:frosthaven_assistant/Resource/state/modifier_deck_state.dart';
 
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
-import '../game_state.dart';
+import '../state/game_state.dart';
 
 class ReorderModifierListCommand extends Command {
   late final int newIndex;

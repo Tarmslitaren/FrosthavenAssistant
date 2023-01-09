@@ -4,7 +4,7 @@ import 'dart:typed_data';
 
 import 'package:frosthaven_assistant/services/network/network.dart';
 
-import '../../Resource/game_state.dart';
+import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../service_locator.dart';
 import 'dart:convert' show utf8;

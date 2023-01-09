@@ -1,7 +1,7 @@
 
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
-import '../game_state.dart';
+import '../state/game_state.dart';
 
 class AMDRemoveMinus1Command extends Command {
   bool allies;

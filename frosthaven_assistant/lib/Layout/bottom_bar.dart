@@ -5,7 +5,7 @@ import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/services/network/network_ui.dart';
 
 import '../Resource/game_methods.dart';
-import '../Resource/game_state.dart';
+import '../Resource/state/game_state.dart';
 import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
