@@ -46,7 +46,7 @@ class Client {
       _socket!.listen(
         // handle data from the server
             (Uint8List data) {
-          String message = String.fromCharCodes(data);
+          String message = utf8.decode(data);// String.fromCharCodes(data);
           message = _leftOverMessage+message;
           _leftOverMessage = "";
 

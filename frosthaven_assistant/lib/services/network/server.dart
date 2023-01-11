@@ -6,11 +6,10 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
-import 'package:frosthaven_assistant/services/network/network_info.dart';
-
 import '../service_locator.dart';
 
 import 'network.dart';
+import 'dart:convert' show utf8;
 
 class Server {
   final int serverVersion = 154;
@@ -46,6 +45,7 @@ class Server {
         .then((ServerSocket serverSocket) {
       runZoned(() {
         _serverSocket = serverSocket;
+
         getIt<Settings>().server.value = true;
         String info = 'Server Online: IP: ${_serverSocket!.address.address}, Port: ${_serverSocket!.port.toString()}';
         print(info);
@@ -99,6 +99,7 @@ class Server {
 
   void handleConnection(Socket client) {
     client.setOption(SocketOption.tcpNoDelay, true);
+    client.encoding = utf8;
 
     String info = 'Connection from'
         ' ${client.remoteAddress.address}:${client.remotePort}';
