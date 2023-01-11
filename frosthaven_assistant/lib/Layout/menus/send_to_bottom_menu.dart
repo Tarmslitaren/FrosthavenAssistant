@@ -7,10 +7,11 @@ import '../../services/service_locator.dart';
 class SendToBottomMenu extends StatefulWidget {
   final int currentIndex;
   final int length;
+  final bool allies;
 
   const SendToBottomMenu({
     Key? key,
-    required this.currentIndex, required this.length,
+    required this.currentIndex, required this.length, required this.allies
   }) : super(key: key);
 
   @override
@@ -48,7 +49,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
               onPressed: () {
                 int oldIndex = widget.length-1 - widget.currentIndex;
                 int newIndex = widget.length-1;
-                _gameState.action(ReorderModifierListCommand(0, oldIndex));
+                _gameState.action(ReorderModifierListCommand(0, oldIndex, widget.allies));
                 Navigator.pop(context);
               },
               child:

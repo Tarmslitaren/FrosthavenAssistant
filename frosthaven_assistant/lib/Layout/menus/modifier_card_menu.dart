@@ -128,7 +128,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                   currentIndex: int.parse(value.key
                       .toString()
                       .substring(3, value.key.toString().length - 3)),
-                  length: inputList.length,
+                  length: inputList.length, allies: name == "Allies",
                 ));
           },
           child: value,
@@ -170,7 +170,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                       index = list.length - index - 1;
                       list.insert(dropIndex, list.removeAt(index));
                       _gameState
-                          .action(ReorderModifierListCommand(dropIndex, index));
+                          .action(ReorderModifierListCommand(dropIndex, index, name == "Allies"));
                     });
                   },
                   children: generateList(list, allOpen, name),
