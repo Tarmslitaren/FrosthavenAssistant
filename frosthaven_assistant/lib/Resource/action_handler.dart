@@ -106,7 +106,7 @@ class ActionHandler {
     bool isClient = getIt<Settings>().client.value == ClientState.connected;
 
     command.execute();
-    if (commands.length >= commandIndex.value) {
+    if (commands.length > commandIndex.value) {
       commands.insert(commandIndex.value + 1, command);
       commandDescriptions.insert(commandIndex.value + 1, command.describe());
     } else {
