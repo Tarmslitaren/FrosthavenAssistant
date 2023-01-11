@@ -88,8 +88,6 @@ class Server {
         item.close();
       }
       _clients.clear();
-      //_serverSocket!.close();
-      //print('Server Offline');
     }
     getIt<Settings>().server.value = false;
     leftOverMessage = "";
@@ -108,16 +106,16 @@ class Server {
     print(info);
     getIt<Network>().networkMessage.value = info;
 
-    /*bool existed = false;
-    for (var existingClient in _clients) {
-      if (client.remoteAddress == existingClient.remoteAddress) {
-        existed = true;
+    for(int i = _clients.length-1; i >= 0; i--) {
+      try {
+        if (_clients[i].remoteAddress == client.remoteAddress) {
+          _clients.removeAt(i);
+        }
+      } catch (e) {
+        _clients.removeAt(i);
       }
-    }*/
-    _clients.removeWhere((element) => element.remoteAddress == client.remoteAddress);
-    //if (!existed) {
-      _clients.add(client);
-    //}
+    }
+    _clients.add(client);
     // listen for events from the client
     try {
       client.listen(
