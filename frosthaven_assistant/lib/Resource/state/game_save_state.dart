@@ -156,14 +156,14 @@ class GameSaveState{
       state.blesses.value = blesses;
     }
 
-    //TODO: do we need to handle these for allies? probably not
+    if (modifierDeckData.containsKey('badOmen')) {
+      state.badOmen.value = modifierDeckData["badOmen"] as int;
+    }
+    if (modifierDeckData.containsKey('addedMinusOnes')) {
+      state.addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
+    }
+
     if(identifier == 'modifierDeck') {
-      if (data.containsKey('badOmen')) {
-        state.badOmen.value = modifierDeckData["badOmen"] as int;
-      }
-      if (data.containsKey('addedMinusOnes')) {
-        state.addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
-      }
       getIt<GameState>().modifierDeck = state;
     } else {
       getIt<GameState>().modifierDeckAllies = state;
