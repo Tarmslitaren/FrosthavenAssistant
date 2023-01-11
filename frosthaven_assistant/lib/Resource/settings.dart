@@ -44,6 +44,8 @@ class Settings {
   String lastKnownConnection = "192.168.1.???"; //only these
   String lastKnownPort = "4567";
 
+  bool connectClientOnStartup = false;
+
 
   Future<void> init() async {
     await loadFromDisk();
@@ -216,6 +218,10 @@ class Settings {
       if (data["showScenarioNames"] != null) {
         showScenarioNames.value = data["showScenarioNames"];
       }
+
+      if (data["connectClientOnStartup"] != null) {
+        getIt<Network>().client.connect(lastKnownConnection);
+      }
     }
   }
 
@@ -260,6 +266,7 @@ class Settings {
         '"darkMode": ${darkMode.value}, '
         '"shimmer": ${shimmer.value}, '
         '"showScenarioNames": ${showScenarioNames.value}, '
+        '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort" '
         '}';

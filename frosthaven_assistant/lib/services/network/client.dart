@@ -153,5 +153,9 @@ class Client {
     _gameState.commandDescriptions.clear();
     _gameState.gameSaveStates.removeRange(0, _gameState.gameSaveStates.length-1);
     _leftOverMessage = "";
+
+    if(getIt<Network>().appInBackground == true) {
+      getIt<Network>().clientDisconnectedWhileInBackground = true;
+    }
   }
 }

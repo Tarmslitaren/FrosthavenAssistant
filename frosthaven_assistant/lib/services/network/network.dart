@@ -15,4 +15,7 @@ class Network {
   final Server server = Server();
   final NetworkInformation networkInfo = NetworkInformation();
   final networkMessage = ValueNotifier<String>("");
+
+  bool appInBackground = false;
+  bool clientDisconnectedWhileInBackground = false;
 }
