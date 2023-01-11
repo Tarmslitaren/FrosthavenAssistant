@@ -58,7 +58,7 @@ class Server {
 
         //if has clients when connecting (re connect) run reset/welcome message
         String commandDescription = "";
-        if (_gameState.commandIndex.value > 0) {
+        if (_gameState.commandIndex.value < _gameState.commandDescriptions.length && _gameState.commandIndex.value >= 0) {
           commandDescription = _gameState.commandDescriptions[_gameState.commandIndex.value];
         }
         send(
@@ -71,7 +71,6 @@ class Server {
           print('Server error: $e');
           getIt<Network>().networkMessage.value = 'Server error: $e';
         });
-
         sendPing();
       });
     });

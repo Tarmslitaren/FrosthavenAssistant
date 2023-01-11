@@ -48,6 +48,15 @@ class ActionHandler {
         } else {
           updateAllUI();
           //run generic update all function instead, as commands list is not retained
+
+          //send last game state if connected
+          if (isServer) {
+            print(
+                'server sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
+            //should send a special undo message? yes
+            getIt<Network>().server.send(
+                "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates[commandIndex.value]!.getState()}");
+          }
         }
         commandIndex.value--;
 
@@ -55,14 +64,7 @@ class ActionHandler {
         getIt<GameState>().updateForUndo.value++;
       }
 
-      //send last game state if connected
-      if (isServer) {
-        print(
-            'server sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
-        //should send a special undo message?
-        getIt<Network>().server.send(
-            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last!.getState()}");
-      }
+
     } else {
       getIt<Network>().client.send("undo");
     }
@@ -78,7 +80,7 @@ class ActionHandler {
         //  commands[commandIndex.value].execute();
         // } else {
         gameSaveStates[commandIndex.value + 1]!
-            .load(); //test this over network again
+            .load();
         gameSaveStates[commandIndex.value + 1]!.saveToDisk();
         //also run generic update ui function
         updateAllUI();
@@ -92,10 +94,8 @@ class ActionHandler {
         print(
             'server sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
         getIt<Network>().server.send(
-            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates.last!.getState()}");
+            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates[commandIndex.value + 1]!.getState()}");
       }
-
-      //}
     } else if (isClient) {
       getIt<Network>().client.send("redo");
     }

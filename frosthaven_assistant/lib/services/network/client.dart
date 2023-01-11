@@ -75,7 +75,7 @@ class Client {
                 //overwrite states if needed
                 _gameState.commandIndex.value = newIndex;
 
-                //don't worry about this, just disallow undo/redo from clients
+                //don't worry about this, just run undo/redo without descriptions?
                 /*if (newIndex + 1 < _gameState.commandDescriptions.length) {
                   _gameState.commandDescriptions.removeRange(
                       newIndex + 1, _gameState.commandDescriptions.length);
@@ -93,8 +93,6 @@ class Client {
                 _gameState.updateAllUI();
               } else if (message.startsWith("Error")) {
                 throw (message);
-              } else if (message.startsWith("undo")) {
-              } else if (message.startsWith("redo")) {
               } else if (message.startsWith("ping")) {
                 send("pong");
               }

@@ -26,6 +26,40 @@ Future<void> launchUrlInBrowser(Uri url) async {
   }
 }
 
+bool undoEnabled() {
+  GameState gameState = getIt<GameState>();
+  if(getIt<Settings>().client.value == ClientState.connected) {
+    return true;
+  }
+  if(getIt<Settings>().server.value == true) {
+    //TDO make the logic
+    return gameState.commandIndex.value >= 0 &&
+        gameState.commandIndex.value < gameState.commandDescriptions.length &&
+        (gameState.commandIndex.value == 0 ||
+            gameState.commandDescriptions[gameState.commandIndex.value - 1] !=
+                "");
+  }
+  return
+      gameState.commandIndex.value >= 0 &&
+      gameState.commandIndex.value < gameState.commands.length &&
+      (gameState.commandIndex.value == 0 ||
+          gameState.commands[gameState.commandIndex.value - 1] !=
+              null);
+}
+
+bool redoEnabled() {
+  GameState gameState = getIt<GameState>();
+  if(getIt<Settings>().client.value == ClientState.connected) {
+    return true;
+  }
+  if(getIt<Settings>().server.value == true) {
+    return gameState.commandDescriptions.isNotEmpty &&
+        gameState.gameSaveStates.length >= gameState.commandDescriptions.length &&
+        gameState.commandIndex.value < gameState.commandDescriptions.length - 1;
+  }
+  return gameState.commandIndex.value < gameState.commandDescriptions.length - 1;
+}
+
 Drawer createMainMenu(BuildContext context) {
   GameState gameState = getIt<GameState>();
   Settings settings = getIt<Settings>();
@@ -35,14 +69,14 @@ Drawer createMainMenu(BuildContext context) {
       valueListenable: gameState.commandIndex,
       builder: (context, value, child) {
         String undoText = "Undo";
-        if (gameState.commandIndex.value >= 0 &&
+        if (settings.client.value != ClientState.connected && gameState.commandIndex.value >= 0 &&
             gameState.commandDescriptions.length >
                 gameState.commandIndex.value) {
           undoText +=
               ": ${gameState.commandDescriptions[gameState.commandIndex.value]}";
         }
         String redoText = "Redo";
-        if (gameState.commandIndex.value <
+        if (settings.client.value != ClientState.connected && gameState.commandIndex.value <
             gameState.commandDescriptions.length - 1) {
           redoText +=
               ": ${gameState.commandDescriptions[gameState.commandIndex.value + 1]}";
@@ -69,14 +103,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(undoText),
-                enabled: getIt<Settings>().client.value !=
-                        ClientState.connected &&
-                    !getIt<Settings>().server.value &&
-                    gameState.commandIndex.value >= 0 &&
-                    gameState.commandIndex.value < gameState.commands.length &&
-                    (gameState.commandIndex.value == 0 ||
-                        gameState.commands[gameState.commandIndex.value - 1] !=
-                            null),
+                enabled: undoEnabled(),
                 onTap: () {
                   gameState.undo();
                   //Navigator.pop(context);
@@ -84,10 +111,7 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(redoText),
-                enabled: gameState.commandIndex.value <
-                        gameState.commandDescriptions.length - 1 &&
-                    getIt<Settings>().client.value != ClientState.connected &&
-                    !getIt<Settings>().server.value,
+                enabled: redoEnabled(),
                 onTap: () {
                   gameState.redo();
                   //Navigator.pop(context);
