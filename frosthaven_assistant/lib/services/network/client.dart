@@ -28,6 +28,7 @@ class Client {
           getIt<Settings>().client.value = ClientState.connected;
           String info = 'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
           print(info);
+          _gameState.commands.clear();
           getIt<Network>().networkMessage.value = info;
           getIt<Settings>().connectClientOnStartup = true;
           getIt<Settings>().saveToDisk();

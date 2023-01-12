@@ -107,14 +107,14 @@ class ConditionIconState extends State<ConditionIcon> {
     } else if (command is ChangeHealthCommand) {
       if (widget.figure ==
           GameMethods.getFigure(command.ownerId, command.figureId)) {
-        if (command.change == -1) {
+        if (command.change < 0) {
           if (widget.condition.name.contains("poison") ||
               widget.condition == Condition.regenerate ||
               widget.condition == Condition.ward ||
               widget.condition == Condition.brittle) {
             _runAnimation();
           }
-        } else if (command.change == 1) {
+        } else if (command.change >= 1) {
           if (widget.condition == Condition.rupture ||
               widget.condition == Condition.wound ||
               widget.condition == Condition.bane ||

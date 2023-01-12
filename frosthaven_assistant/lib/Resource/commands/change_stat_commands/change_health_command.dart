@@ -33,12 +33,14 @@ class ChangeHealthCommand extends ChangeStatCommand {
   @override
   String describe() {
     if(change > 0) {
-      return "Increase $figureId's health";
+      //TODO: looks bad
+      return "Increase $figureId's health by $change";
     }
     FigureState? figure = GameMethods.getFigure(ownerId, figureId);
     if (figure == null || figure.health.value <= 0) {
       return "Kill $ownerId";
     }
-    return "Decrease $ownerId's health";
+    //TODO: incorrect for chracger summons
+    return "Decrease $ownerId's health by ${-change}";
   }
 }

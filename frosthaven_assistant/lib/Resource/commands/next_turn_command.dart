@@ -6,7 +6,8 @@ import '../state/game_state.dart';
 
 class TurnDoneCommand extends Command {
   late int index;
-  TurnDoneCommand(String id){
+  late String id;
+  TurnDoneCommand(this.id){
     index = 0;
     for (int i = 0; i < getIt<GameState>().currentList.length; i++) {
       if(id == getIt<GameState>().currentList[i].id) {
@@ -28,6 +29,6 @@ class TurnDoneCommand extends Command {
 
   @override
   String describe() {
-    return "Set Turn";
+    return "$id's turn done";
   }
 }
