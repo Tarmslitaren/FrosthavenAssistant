@@ -176,6 +176,9 @@ class GameSaveState{
       Map<String, dynamic> data = jsonDecode(_savedState!);
       gameState.level.value = data['level'] as int;
       gameState.scenario.value = data['scenario']; // as String;
+      if(data.containsKey('toastMessage')) {
+        gameState.toastMessage.value = data['toastMessage']; // as String;
+      }
 
       if(data.containsKey('scenarioSpecialRules')) {
         var scenarioSpecialRulesList = data['scenarioSpecialRules'] as List;
