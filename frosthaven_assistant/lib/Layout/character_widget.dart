@@ -411,12 +411,12 @@ class CharacterWidgetState extends State<CharacterWidget> {
                       image: DecorationImage(
                           fit: BoxFit.fill,
                           colorFilter: ColorFilter.mode(
-                              character.characterClass.color,
+                              character.characterClass.colorSecondary,
                               BlendMode.color),
                           image: const AssetImage(
                               "assets/images/psd/character-bar.png")),
                       shape: BoxShape.rectangle,
-                      color: character.characterClass.color,
+                      color: character.characterClass.colorSecondary,
                     ),
                   ),
                   Row(

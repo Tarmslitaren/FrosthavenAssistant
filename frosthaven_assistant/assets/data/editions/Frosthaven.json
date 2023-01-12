@@ -170,6 +170,7 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ffb6e56c",
+      "colorSecondary": "ff537073",
       "summons": {
         "Animated Claymore": {
           "level": 1,
@@ -300,6 +301,7 @@
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "color": "ffabd4da",
+      "colorSecondary": "ffac427d",
       "summons": {}
     },
     {
@@ -308,6 +310,7 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ffe5de85",
+      "colorSecondary": "ff982818",
       "summons": {
         "Armored Tank": {
           "level": 1,

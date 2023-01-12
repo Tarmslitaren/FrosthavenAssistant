@@ -3,11 +3,12 @@ import 'dart:ui';
 import 'package:frosthaven_assistant/Model/summon.dart';
 
 class CharacterClass {
-  CharacterClass(this.name, this.healthByLevel, this.edition, this.color, this.hidden, this.summons);
+  CharacterClass(this.name, this.healthByLevel, this.edition, this.color, this.colorSecondary, this.hidden, this.summons);
   final String name;
   final String edition;
   final List<int> healthByLevel;
   final Color color;
+  final Color colorSecondary;
   final bool hidden;
   final List<SummonModel> summons;
 
@@ -25,12 +26,13 @@ class CharacterClass {
     if(colorValue is int) {
       colorValue = colorValue.toString();
     }
-    int radix = 10;
-    if(colorValue.length == 8) { //I know it's a hack but I know the data is such that if 8 chars then it's a hex value
-      radix = 16;
-    }
+    int radix = 16;
     int value = int.parse(colorValue, radix: radix);
     Color color = Color(value);
+    Color colorSecondary = color;
+    if(data.containsKey("colorSecondary")) {
+      colorSecondary = Color(int.parse(data['colorSecondary'], radix: radix));
+    }
 
     List<SummonModel> summonList = [];
     if(data.containsKey('summons')) {
@@ -39,6 +41,6 @@ class CharacterClass {
         summonList.add(SummonModel.fromJson(summons[key], key));
       }
     }
-    return CharacterClass(name, healthByLevel, edition, color, hidden, summonList);
+    return CharacterClass(name, healthByLevel, edition, color, colorSecondary, hidden, summonList);
   }
 }
