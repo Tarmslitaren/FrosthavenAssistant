@@ -174,7 +174,7 @@ Drawer createMainMenu(BuildContext context) {
                 },
               ),
               const Divider(),
-              ValueListenableBuilder<ClientState>(
+              if(!settings.lastKnownConnection.endsWith('?')) ValueListenableBuilder<ClientState>(
                   valueListenable: settings.client,
                   builder: (context, value, child) {
                     bool connected = false;
