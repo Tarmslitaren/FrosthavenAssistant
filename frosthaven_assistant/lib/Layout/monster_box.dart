@@ -79,9 +79,13 @@ class MonsterBoxState extends State<MonsterBox> {
   }
 
   Widget buildInternal(double scale, double width, Color color) {
-    String folder = "monsters";
+    String imagePath = "assets/images/tombstone.png";
     if (data.type == MonsterType.summon) {
-      folder = "summon";
+      imagePath = "assets/images/summon/${data.gfx}.png";
+    } else {
+      if(data.roundSummoned != -1) {
+        imagePath = "assets/images/summon/green.png";
+      }
     }
     String standeeNr = "";
     if (data.standeeNr > 0) {
@@ -145,7 +149,9 @@ class MonsterBoxState extends State<MonsterBox> {
                 width: 17 * scale,
                 fit: BoxFit.cover,
                 filterQuality: FilterQuality.medium,
-                image: AssetImage("assets/images/$folder/${data.gfx}.png"),
+                image: AssetImage(
+                    imagePath
+                ),
               ),
             ),
             Positioned(
