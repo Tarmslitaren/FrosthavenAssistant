@@ -29,6 +29,8 @@ class Client {
           String info = 'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
           print(info);
           getIt<Network>().networkMessage.value = info;
+          getIt<Settings>().connectClientOnStartup = true;
+          getIt<Settings>().saveToDisk();
           send("init version:${getIt<Network>().server.serverVersion}");
           _listen();
         });
@@ -140,7 +142,10 @@ class Client {
       print('Client disconnected');
       getIt<Network>().networkMessage.value = "client disconnected";
       _socket!.destroy();
+      getIt<Settings>().connectClientOnStartup = false;
+      getIt<Settings>().saveToDisk();
       _cleanup();
+
     }
   }
 

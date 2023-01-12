@@ -317,6 +317,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                                   .then((value) => null);
                                               settings.lastKnownConnection =
                                                   _serverTextController.text;
+                                              settings.connectClientOnStartup = true;
                                               settings.saveToDisk();
                                             } else {
                                               getIt<Network>()

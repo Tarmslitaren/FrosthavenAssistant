@@ -121,8 +121,6 @@ class Settings {
             });
           }));
     }
-
-    saveToDisk();
   }
 
   Future<void> saveToDisk() async {
@@ -219,8 +217,9 @@ class Settings {
         showScenarioNames.value = data["showScenarioNames"];
       }
 
-      if (data["connectClientOnStartup"] != null) {
+      if (data["connectClientOnStartup"] != null && data["connectClientOnStartup"] != false) {
         getIt<Network>().client.connect(lastKnownConnection);
+        connectClientOnStartup = false;
       }
     }
   }

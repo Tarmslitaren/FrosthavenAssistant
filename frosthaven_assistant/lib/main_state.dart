@@ -34,7 +34,7 @@ class MainState extends State<MyHomePage>
         getIt<Network>().appInBackground = false;
         print("app in resumed");
         rebuildAllChildren(context); //might be a bit performance heavy, but ensures app state visually up to date with server.
-        if(getIt<Network>().clientDisconnectedWhileInBackground == true) {
+        if(getIt<Network>().clientDisconnectedWhileInBackground == true || getIt<Settings>().connectClientOnStartup == true) {
           print("client was disconnected in background so try reconnect");
           getIt<Network>().clientDisconnectedWhileInBackground = false;
           getIt<Network>().client.connect(getIt<Settings>().lastKnownConnection);
@@ -56,6 +56,7 @@ class MainState extends State<MyHomePage>
           getIt<Network>().clientDisconnectedWhileInBackground = true;
           getIt<Settings>().connectClientOnStartup = true;
           getIt<Settings>().saveToDisk();
+          getIt<Network>().appInBackground = true;
         }
         break;
     }
