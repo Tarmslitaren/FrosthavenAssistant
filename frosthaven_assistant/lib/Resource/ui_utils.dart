@@ -206,6 +206,7 @@ showToast(BuildContext context, String text) {
 }
 
 showToastSticky(BuildContext context, String text) {
+  ScaffoldMessenger.of(context).clearSnackBars();
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     duration: const Duration(days: 1),
     content: GestureDetector(
