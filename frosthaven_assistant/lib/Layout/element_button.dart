@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../Resource/commands/imbue_element_command.dart';
@@ -23,8 +22,7 @@ class ElementButton extends StatefulWidget {
       : super(key: key);
 
   @override
-  AnimatedContainerButtonState createState() =>
-      AnimatedContainerButtonState();
+  AnimatedContainerButtonState createState() => AnimatedContainerButtonState();
 }
 
 class AnimatedContainerButtonState extends State<ElementButton> {
@@ -41,22 +39,22 @@ class AnimatedContainerButtonState extends State<ElementButton> {
     super.initState();
     _height = widget.width * settings.userScalingBars.value;
     _color = Colors.transparent;
-    _borderRadius =
-        BorderRadius.all(Radius.circular(widget.width * settings.userScalingBars.value - widget.borderWidth * settings.userScalingBars.value * 2));
+    _borderRadius = BorderRadius.all(Radius.circular(
+        widget.width * settings.userScalingBars.value -
+            widget.borderWidth * settings.userScalingBars.value * 2));
 
     //to load save state
     _gameState.elementState.addListener(() {
       if (_gameState.elementState.value[widget.element] != null) {
         ElementState state = _gameState.elementState.value[widget.element]!;
         if (state == ElementState.full) {
-          if(mounted) {
+          if (mounted) {
             setState(() {
               setFull();
             });
           }
-        }
-        else if (state == ElementState.half) {
-          if(mounted) {
+        } else if (state == ElementState.half) {
+          if (mounted) {
             setState(() {
               setHalf();
             });
@@ -66,130 +64,161 @@ class AnimatedContainerButtonState extends State<ElementButton> {
     });
   }
 
-  void setHalf(){
+  void setHalf() {
     _color = widget.color;
-    _height = widget.width * settings.userScalingBars.value / 2 +2 * settings.userScalingBars.value;
+    _height = widget.width * settings.userScalingBars.value / 2 +
+        2 * settings.userScalingBars.value;
     _borderRadius = BorderRadius.only(
-        bottomLeft:
-        Radius.circular(widget.width * settings.userScalingBars.value / 2 - widget.borderWidth * settings.userScalingBars.value * 0),
-        bottomRight:
-        Radius.circular(widget.width * settings.userScalingBars.value / 2 - widget.borderWidth* settings.userScalingBars.value * 0));
+        bottomLeft: Radius.circular(
+            widget.width * settings.userScalingBars.value / 2 -
+                widget.borderWidth * settings.userScalingBars.value * 0),
+        bottomRight: Radius.circular(
+            widget.width * settings.userScalingBars.value / 2 -
+                widget.borderWidth * settings.userScalingBars.value * 0));
   }
 
-  void setFull(){
+  void setFull() {
     _color = widget.color;
     _height = widget.width * settings.userScalingBars.value;
-    _borderRadius = BorderRadius.all(
-        Radius.circular(widget.width  * settings.userScalingBars.value - widget.borderWidth * settings.userScalingBars.value));
+    _borderRadius = BorderRadius.all(Radius.circular(
+        widget.width * settings.userScalingBars.value -
+            widget.borderWidth * settings.userScalingBars.value));
   }
 
-  void setInert(){
+  void setInert() {
     _color = Colors.transparent;
-    _height =  4 * settings.userScalingBars.value;
+    _height = 4 * settings.userScalingBars.value;
     _borderRadius = BorderRadius.zero;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(right:2 * settings.userScalingBars.value ),
+        margin: EdgeInsets.only(right: 2 * settings.userScalingBars.value),
         child: InkWell(
-      hoverColor: Colors.transparent,
-      splashColor: Colors.transparent,
-      focusColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      //behavior: HitTestBehavior.opaque,
+            hoverColor: Colors.transparent,
+            splashColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            //behavior: HitTestBehavior.opaque,
 
+            onLongPress: () {
+              setState(() {
+                _gameState.elementState.value
+                    .update(widget.element, (value) => ElementState.half);
+                _gameState.action(ImbueElementCommand(widget.element, true));
+                // setHalf();
+              });
+            },
+            onTapDown: (TapDownDetails details) {
+              setState(() {
+                if (_gameState.elementState.value[widget.element] !=
+                    ElementState.inert) {
+                  _gameState.elementState.value
+                      .update(widget.element, (value) => ElementState.inert);
+                } else {
+                  _gameState.elementState.value
+                      .update(widget.element, (value) => ElementState.full);
+                }
+                if (_gameState.elementState.value[widget.element] ==
+                    ElementState.half) {
+                  _gameState.action(ImbueElementCommand(widget.element, true));
 
+                  //setHalf();
+                } else if (_gameState.elementState.value[widget.element] ==
+                    ElementState.full) {
+                  _gameState.action(ImbueElementCommand(widget.element, false));
+                } else {
+                  _gameState.action(UseElementCommand(widget.element));
+                }
+              });
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                    padding: EdgeInsets.only(
+                        bottom: 2 * settings.userScalingBars.value),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: ValueListenableBuilder<int>(
+                          valueListenable: _gameState.commandIndex,
+                          builder: (context, value, child) {
+                            if (_gameState.elementState.value[widget.element] ==
+                                ElementState.inert) {
+                              setInert();
+                            } else if (_gameState
+                                    .elementState.value[widget.element] ==
+                                ElementState.half) {
+                              setHalf();
+                            } else if (_gameState
+                                    .elementState.value[widget.element] ==
+                                ElementState.full) {
+                              setFull();
+                            }
 
-        onLongPress: () {
-          setState(() {
-            _gameState.elementState.value
-                .update(widget.element, (value) => ElementState.half);
-            _gameState.action(ImbueElementCommand(widget.element, true));
-           // setHalf();
-          });
-        },
-        onTapDown: (TapDownDetails details) {
-          setState(() {
-            if (_gameState.elementState.value[widget.element] !=
-                ElementState.inert) {
-              _gameState.elementState.value
-                  .update(widget.element, (value) => ElementState.inert);
-            } else {
-              _gameState.elementState.value
-                  .update(widget.element, (value) => ElementState.full);
-            }
-            if (_gameState.elementState.value[widget.element] ==
-                ElementState.half) {
-              _gameState.action(ImbueElementCommand(widget.element, true));
+                            return AnimatedContainer(
+                                // Use the properties stored in the State class.
+                                width: widget.width *
+                                        settings.userScalingBars.value -
+                                    widget.borderWidth *
+                                        settings.userScalingBars.value *
+                                        2,
+                                height: _height -
+                                    widget.borderWidth *
+                                        settings.userScalingBars.value *
+                                        2,
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    color: _color,
+                                    borderRadius: _borderRadius,
+                                    boxShadow: [
+                                      _gameState.elementState
+                                                  .value[widget.element] !=
+                                              ElementState.inert
+                                          ? BoxShadow(
+                                              //blurStyle: BlurStyle.solid,
+                                              //spreadRadius: 2 * settings.userScalingBars.value,
+                                              blurRadius: 4 *
+                                                  settings
+                                                      .userScalingBars.value)
+                                          : const BoxShadow(
+                                              color: Colors.transparent,
+                                            )
+                                    ]),
+                                // Define how long the animation should take.
+                                duration: const Duration(milliseconds: 350),
+                                // Provide an optional curve to make the animation feel smoother.
+                                curve:
+                                    Curves.decelerate //Curves.linearToEaseOut
+                                );
+                          }),
+                    )),
+                ValueListenableBuilder<int>(
+                    valueListenable: _gameState.commandIndex,
+                    builder: (context, value, child) {
+                      Color? color;
+                      if (getIt<Settings>().darkMode.value == false) {
+                        color = Colors.black;
+                      }
+                      if (ElementState.inert !=
+                          _gameState.elementState.value[widget.element]) {
+                        color = null;
+                      }
 
-              //setHalf();
-            } else if (_gameState.elementState.value[widget.element] ==
-                ElementState.full) {
-              _gameState.action(ImbueElementCommand(widget.element, false));
-
-            } else {
-              _gameState.action(UseElementCommand(widget.element));
-            }
-          });
-        },
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.only(bottom: 2 * settings.userScalingBars.value),
-                child: Align(
-              alignment: Alignment.bottomCenter,
-              child: ValueListenableBuilder<int>(
-                  valueListenable: _gameState.commandIndex,
-                  builder: (context, value, child) {
-                    if (_gameState.elementState.value[widget.element] == ElementState.inert) {
-                      setInert();
-                    }
-                    else if (_gameState.elementState.value[widget.element] == ElementState.half) {
-                      setHalf();
-                    }
-                    else if (_gameState.elementState.value[widget.element] == ElementState.full) {
-                      setFull();
-                    }
-
-                    return AnimatedContainer(
-                      // Use the properties stored in the State class.
-                      width: widget.width * settings.userScalingBars.value - widget.borderWidth * settings.userScalingBars.value * 2,
-                      height: _height - widget.borderWidth * settings.userScalingBars.value * 2,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.rectangle,
-                          color: _color,
-                          borderRadius: _borderRadius,
-                          boxShadow: [
-                            _gameState.elementState.value[widget.element] !=
-                                    ElementState.inert
-                                ? BoxShadow(
-                              //blurStyle: BlurStyle.solid,
-                                    //spreadRadius: 2 * settings.userScalingBars.value,
-                                    blurRadius: 4 * settings.userScalingBars.value)
-                                : const BoxShadow(
-                                    color: Colors.transparent,
-                                  )
-                          ]),
-                      // Define how long the animation should take.
-                      duration: const Duration(milliseconds: 350),
-                      // Provide an optional curve to make the animation feel smoother.
-                      curve: Curves.decelerate//Curves.linearToEaseOut
-                    );
-                  }),
-            )),
-            Image(
-              //fit: BoxFit.contain,
-              height: widget.width * settings.userScalingBars.value * 0.65,
-              image: AssetImage(widget.icon),
-              color: _gameState.elementState.value[widget.element] ==
-                  ElementState.inert ? getIt<Settings>().darkMode.value == false ? Colors.black : null : null,
-              width: widget.width * settings.userScalingBars.value * 0.65,
-
-            ),
-          ],
-        )));
+                      return Image(
+                        //fit: BoxFit.contain,
+                        height: widget.width *
+                            settings.userScalingBars.value *
+                            0.65,
+                        image: AssetImage(widget.icon),
+                        color: color,
+                        width: widget.width *
+                            settings.userScalingBars.value *
+                            0.65,
+                      );
+                    }),
+              ],
+            )));
   }
 }
