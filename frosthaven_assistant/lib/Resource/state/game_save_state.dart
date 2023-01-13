@@ -25,6 +25,7 @@ class GameSaveState{
     _savedState = getIt<GameState>().toString();
   }
 
+
   void loadLootDeck(var data) {
     var lootDeckData = data["lootDeck"];
     LootDeck state = LootDeck.empty();
@@ -32,48 +33,37 @@ class GameSaveState{
     state.hasCard1418 = lootDeckData["1418"];
     state.hasCard1419 = lootDeckData["1419"];
 
-    state.metalEnhancements = List<bool>.from(lootDeckData['metalEnhancements']);
-    state.hideEnhancements = List<bool>.from(lootDeckData["hideEnhancements"]);
-    state.lumberEnhancements = List<bool>.from(lootDeckData["lumberEnhancements"]);
-    state.addedCards = List<int>.from(lootDeckData["addedCards"]);
-    state.arrowvineEnhancements = [false, false];
-    state.corpsecapEnhancements = [false, false];
-    state.flamefruitEnhancements = [false, false];
-    state.axenutEnhancements = [false, false];
-    state.snowthistleEnhancements = [false, false];
-    state.rockrootEnhancements = [false, false];
-
-    if(lootDeckData.containsKey('arrowvineEnhancements')) {
-      state.arrowvineEnhancements = List<bool>.from(lootDeckData["arrowvineEnhancements"]);
-    }
-    if(lootDeckData.containsKey('corpsecapEnhancements')) {
-      state.corpsecapEnhancements = List<bool>.from(lootDeckData["corpsecapEnhancements"]);
-    }
-    if(lootDeckData.containsKey('flamefruitEnhancements')) {
-      state.flamefruitEnhancements = List<bool>.from(lootDeckData["flamefruitEnhancements"]);
-    }
-    if(lootDeckData.containsKey('axenutEnhancements')) {
-      state.axenutEnhancements = List<bool>.from(lootDeckData["axenutEnhancements"]);
-    }
-    if(lootDeckData.containsKey('snowthistleEnhancements')) {
-      state.snowthistleEnhancements = List<bool>.from(lootDeckData["snowthistleEnhancements"]);
-    }
-    if(lootDeckData.containsKey('rockrootEnhancements')) {
-      state.rockrootEnhancements = List<bool>.from(lootDeckData["rockrootEnhancements"]);
+    if(lootDeckData.containsKey('enhancements')) {
+      //TODO: test loading enhancements
+      state.enhancements = Map<int, int>.from(lootDeckData['enhancements']);
+    } else {
+      state.enhancements = {};
     }
 
     List<LootCard> newDrawList = [];
     List drawPile = lootDeckData["drawPile"] as List;
+    int id = 0;
     for (var item in drawPile) {
       String owner = "";
       String gfx = item["gfx"];
       if(item.containsKey('owner')) {
         owner = item["owner"];
       }
-      bool enhanced = item["enhanced"];
+      if(item.containsKey('id')) {
+        id = item["id"];
+      }
+      int enhanced = 0;
+      if(item['enhanced'].runtimeType == bool) {
+        bool enh = item['enhanced'];
+        if(enh) {
+          enhanced = 1;
+        }
+      } else {
+        enhanced = item["enhanced"];
+      }
       LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
       LootType lootType = LootType.values[item["lootType"]];
-      LootCard lootCard = LootCard(gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
+      LootCard lootCard = LootCard(id: id, gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
       lootCard.owner = owner;
       newDrawList.add(lootCard);
     }
@@ -84,10 +74,22 @@ class GameSaveState{
       if(item.containsKey('owner')) {
         owner = item["owner"];
       }
-      bool enhanced = item["enhanced"];
+      if(item.containsKey('id')) {
+        id = item["id"];
+      }
+
+      int enhanced = 0;
+      if(item['enhanced'].runtimeType == bool) {
+        bool enh = item['enhanced'];
+        if(enh) {
+          enhanced = 1;
+        }
+      } else {
+        enhanced = item["enhanced"];
+      }
       LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
       LootType lootType = LootType.values[item["lootType"]];
-      LootCard lootCard = LootCard(gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
+      LootCard lootCard = LootCard(id: id, gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
       lootCard.owner = owner;
       newDiscardList.add(lootCard);
     }
@@ -188,11 +190,11 @@ class GameSaveState{
         }
       }
       gameState.currentCampaign.value = data['currentCampaign'];
-      //TODO: currentCampaign does not update properly (because changing it is not a command
+      //TODO: currentCampaign does not update properly (because changing it is not a command)
       gameState.round.value = data['round'] as int;
       gameState.roundState.value = RoundState.values[data['roundState']];
       gameState.solo.value =
-      data['solo'] as bool; //TODO: does not update properly (because changing it is not a command
+      data['solo'] as bool; //TODO: does not update properly (because changing it is not a command)
 
       //main list
       var list = data['currentList'] as List;

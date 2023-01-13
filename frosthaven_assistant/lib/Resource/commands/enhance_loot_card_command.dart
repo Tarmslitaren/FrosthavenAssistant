@@ -4,14 +4,14 @@ import '../action_handler.dart';
 import '../state/game_state.dart';
 
 class EnhanceLootCardCommand extends Command {
-  EnhanceLootCardCommand(this.value, this.index, this.resourceType);
-  final bool value;
-  final int index;
+  EnhanceLootCardCommand(this.id, this.value, this.resourceType);
+  final int value;
+  final int id;
   final String resourceType;
 
   @override
   void execute() {
-    getIt<GameState>().lootDeck.flipEnhancement(value, index, resourceType);
+    getIt<GameState>().lootDeck.addEnhancement(id, value, resourceType);
   }
 
   @override
@@ -20,7 +20,7 @@ class EnhanceLootCardCommand extends Command {
 
   @override
   String describe() {
-    if(value == false) {
+    if(value <= 0) {
       return "Remove Loot Enhancement";
     }
     return "Add Loot Enhancement";

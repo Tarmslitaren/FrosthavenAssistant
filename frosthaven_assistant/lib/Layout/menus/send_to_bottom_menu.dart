@@ -4,7 +4,7 @@ import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
 
-class SendToBottomMenu extends StatefulWidget {
+class SendToBottomMenu extends StatefulWidget { //it's for modifier deck
   final int currentIndex;
   final int length;
   final bool allies;

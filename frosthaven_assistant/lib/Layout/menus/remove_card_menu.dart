@@ -53,7 +53,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                 Navigator.pop(context);
               },
               child: Text(
-                  "Remove ${widget.card.title}\nCard (nr: ${widget.card.nr})",
+                  "Remove ${widget.card.title}\n(card nr: ${widget.card.nr})",
                   textAlign: TextAlign.center,
                   style: const TextStyle(fontSize: 20))),
           const SizedBox(
