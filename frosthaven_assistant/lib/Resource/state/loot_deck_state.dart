@@ -98,7 +98,6 @@ class LootDeck {
   LootDeck(LootDeckModel model, LootDeck other) {
     hasCard1418 = other.hasCard1418;
     hasCard1419 = other.hasCard1419;
-    addedCards = other.addedCards;
     enhancements = other.enhancements;
 
     //build deck
@@ -109,7 +108,6 @@ class LootDeck {
   LootDeck.from(LootDeck other) {
     hasCard1418 = other.hasCard1418;
     hasCard1419 = other.hasCard1419;
-    addedCards = other.addedCards;
     enhancements = other.enhancements;
 
     _initPools();
@@ -328,39 +326,39 @@ class LootDeck {
     _initPools();
     shuffle();
     if (identifier == "hide") {
-      drawPile.getList().add(_getAvailableCards(hidePool)[addedCards[0]]);
+      drawPile.getList().add(_getAvailableCards(hidePool)[0]);
       addedCards[0]++;
     }
     if (identifier == "lumber") {
-      drawPile.getList().add(_getAvailableCards(lumberPool)[addedCards[1]]);
+      drawPile.getList().add(_getAvailableCards(lumberPool)[1]);
       addedCards[1]++;
     }
     if (identifier == "metal") {
-      drawPile.getList().add(_getAvailableCards(metalPool)[addedCards[2]]);
+      drawPile.getList().add(_getAvailableCards(metalPool)[2]);
       addedCards[2]++;
     }
     if (identifier == "arrowvine") {
-      drawPile.getList().add(_getAvailableCards(arrowvinePool)[addedCards[3]]);
+      drawPile.getList().add(_getAvailableCards(arrowvinePool)[3]);
       addedCards[3]++;
     }
     if (identifier == "axenut") {
-      drawPile.getList().add(_getAvailableCards(axenutPool)[addedCards[4]]);
+      drawPile.getList().add(_getAvailableCards(axenutPool)[4]);
       addedCards[4]++;
     }
     if (identifier == "corpsecap") {
-      drawPile.getList().add(_getAvailableCards(corpsecapPool)[addedCards[5]]);
+      drawPile.getList().add(_getAvailableCards(corpsecapPool)[5]);
       addedCards[5]++;
     }
     if (identifier == "flamefruit") {
-      drawPile.getList().add(_getAvailableCards(flamefruitPool)[addedCards[6]]);
+      drawPile.getList().add(_getAvailableCards(flamefruitPool)[6]);
       addedCards[6]++;
     }
     if (identifier == "rockroot") {
-      drawPile.getList().add(_getAvailableCards(rockrootPool)[addedCards[7]]);
+      drawPile.getList().add(_getAvailableCards(rockrootPool)[7]);
       addedCards[7]++;
     }
     if (identifier == "snowthistle") {
-      drawPile.getList().add(_getAvailableCards(snowthistlePool)[addedCards[8]]);
+      drawPile.getList().add(_getAvailableCards(snowthistlePool)[8]);
       addedCards[8]++;
     }
     shuffle();
