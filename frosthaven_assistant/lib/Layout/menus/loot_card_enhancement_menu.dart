@@ -39,16 +39,16 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
               child: const Icon(
                 Icons.remove,
                 color: Colors.white,
-                size: 16,
+                size: 32
               )),
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 3),
-            padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3), color: Colors.white),
+                borderRadius: BorderRadius.circular(1), color: Colors.white),
             child: Text(
               card.enhanced.toString(),
-              style: const TextStyle(color: Colors.black, fontSize: 16),
+              style: const TextStyle(color: Colors.black, fontSize: 18),
             ),
           ),
           InkWell(
@@ -61,7 +61,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
               child: const Icon(
                 Icons.add,
                 color: Colors.white,
-                size: 16,
+                size: 32,
               )),
         ],
       ),
@@ -334,22 +334,18 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                                       getCardFromIndex("coin", 1)!),
                                   createCounterButton(
                                       getCardFromIndex("coin", 2)!),
-                                  createCounterButton(
-                                      getCardFromIndex("coin", 3)!)
                                 ],
                               ),
                               const SizedBox(height: 6),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
+                                  createCounterButton(
+                                      getCardFromIndex("coin", 3)!),
                                   createCounterButton(
                                       getCardFromIndex("coin", 4)!),
                                   createCounterButton(
-                                      getCardFromIndex("coin", 5)!),
-                                  createCounterButton(
-                                      getCardFromIndex("coin", 6)!),
-                                  createCounterButton(
-                                      getCardFromIndex("coin", 7)!)
+                                      getCardFromIndex("coin", 5)!)
                                 ],
                               ),
                               const SizedBox(height: 6),
@@ -357,13 +353,23 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
                                   createCounterButton(
-                                      getCardFromIndex("coin", 8)!),
+                                      getCardFromIndex("coin", 6)!),
+                                  createCounterButton(
+                                      getCardFromIndex("coin", 7)!),
+                                  createCounterButton(
+                                      getCardFromIndex("coin", 8)!)
+                                ],
+                              ),
+                              const SizedBox(height: 6),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
                                   createCounterButton(
                                       getCardFromIndex("coin", 9)!),
                                   createCounterButton(
                                       getCardFromIndex("coin", 10)!),
                                   createCounterButton(
-                                      getCardFromIndex("coin", 11)!)
+                                      getCardFromIndex("coin", 11)!),
                                 ],
                               ),
                               const Divider(),

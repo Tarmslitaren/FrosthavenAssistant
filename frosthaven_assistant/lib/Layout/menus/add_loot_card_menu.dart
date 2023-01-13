@@ -47,7 +47,7 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
       ),
       // ]),
       trailing: Text(
-          "added: ${getIt<GameState>().lootDeck.addedCards[index]}"  //todo: use right value
+          "added: ${getIt<GameState>().lootDeck.addedCards[index]}   "  //todo: use right value
           ),
     );
     return listTile;
