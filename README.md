@@ -64,10 +64,12 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - On the stats menu you can add conditions and set current health values etc.
 - To the right on bottom bar, or above in case screen to narrow is the monster modifier deck.
 - In case a scenario has monsters be allied to you, there will appear also a second allies modifier deck above the enemies one.
-- Top bar hosts element infusions. press to infuse, double tap/click to set waning.
+- Tapping the amd discard pile opens amd menu. In the menu, tapping cards will give some options. you may also long press to reorder if needed.
+- Top bar hosts element infusions. press to infuse, long press to set waning.
 - Main list items can be reordered on a long press.
 - Monster Ability Cards can be double tapped to open a bigger view of them.
 - Monster Ability Cards and Modifier Deck can be tapped/clicked to open card menu with info on discard pile content and such.
+- In the monster ability deck menu, tapping cards will give some options. you may also long press to reorder if needed.
 - To add a summon, press the big plus on the right of the character widget.
   - On the add summon menu, fist choose the color and nr before pressing your desired summon from the list.
 - From any menu: tapping/clicking anywhere outside the menu will close it.
@@ -76,6 +78,7 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - If some special rules or monsters appear from an added section in the scenario/sections booklets, they can be added from the add sections menu.
 - If you make a mistake, there is an undo button in the main menu. and if the mistake was to undo, there is also redo ;)
 - If playing a Frosthaven Scenario,the loot decks have been predefined, and values are pre-calulated based on nr of characters.
+- Make sure to select who's turn it is before drawing loot cards, to mark the cards owner.
 - To Enhance loot deck tap the loot deck discard pile to enter loot deck menu.
 - Networking:
   - To start a server, be sure to be on a wifi network and press 'start host server' from the settings menu
@@ -83,35 +86,37 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 
 ## Connection Usage:
 # Starting:
-- From the settings menu, have one device start a server. Be sure to be on wifi. (a local ip will be shown i.e. 192.168.X.XXX)
+- From the settings menu, have one device start a server. Be sure to be on wifi or ethernet (a local ip will be shown i.e. 192.168.X.XXX)
 - A Port can also be defined if needed. be aware that ports under 1024 are typically blocked.
 - Other devices on the same network may connect from the settings menu, by typing in the server's ip, and port.
 # Info:
 - Be aware, when connecting to a server, the server's game state will overwrite the local state.
+- Mobile devices might cut connections when they are not in foreground. This is especially crucial for Server device: Best to put the server on a windows or mac if available.
+- Clients will try to auto reconnect when coming back to foreground if connection was cut.
 - If a client gets out of sync with the server (by disconnecting, or making an update before it gets the latest state from server), the client's state change will be ignored and overwritten by latest state from server to get you back on track. And a message index out of sync will be shown.
 - There should be no issue having several users change things simultaneously: the menus will not close when getting an update.
-- Local settings are not affected by the game state (Except for don't standees option). It is up to the users to decide on options that affect the game.
+- Local settings are not affected by the game state (Except for no standees option). It is up to the users to decide on options that affect the game.
 
 ## Known Issues:
 - Does not handle character modifier decks.
-- Severe flickering on lineage os 16, 17 and 18. 
+- Severe flickering on lineage os 16, 17 and 18 on older phones using adreno 300 series graphic chip. 
 - Some animations will not play, (and some may play when they shouldn't) when receiving updates over wifi.
-- TCP connection only works over wifi as far as I can tell, and has not been tested in any other environment.
 - When trying to connect without a server on same network, may result in a lot of error messages shown when it tries connecting.
 - A device sharing a wifi-hotspot can not connect itself.
-- Undo and Redo is currently not supported when connected. sorry. Maybe next release.
 - Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself.
 - Some text alignment issues with small texts on small (mobile) screens.
 - Condition Animations do not play when connected.
-- You can connect devices with different versions, but there will be issues. Please update all your devices!
+- When connected and device goes to background, the connection may be broken. Try to avoid having the server device's app go to background for this reason. 
 - Objectives and Escorts do not update their 'level'/health when monster level is changed. Please set the correct monster level before setting a scenario.
+- Also bosses or other enemies which health or attack depend on nr of players do not update their values when you add/remove characters during scenario.
 - All Data is added by hand. Please Report any error in a ticket on github.
 ## Roadmap
 - Next:
-  - Minor improvements
-- And then:
   - Trails of Ashes campaign
-  - Something else.
+  - Something special.
+  - More minor improvements
+- And then:
+  - Maybe language support
 
 ## Developer Notes
 
