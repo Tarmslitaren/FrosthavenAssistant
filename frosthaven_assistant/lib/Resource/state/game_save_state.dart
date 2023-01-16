@@ -232,6 +232,7 @@ class GameSaveState{
           for (var card in state.drawPile.getList()) {
             if (card.nr == nr) {
               newDrawList.add(card);
+              break;
             }
           }
         }
@@ -241,6 +242,7 @@ class GameSaveState{
           for (var card in state.drawPile.getList()) {
             if (card.nr == nr) {
               newDiscardList.add(card);
+              break;
             }
           }
         }
