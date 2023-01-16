@@ -40,6 +40,8 @@ class Client {
       print("client error: $error");
       getIt<Network>().networkMessage.value = "client error: $error";
       getIt<Settings>().client.value = ClientState.disconnected;
+      getIt<Settings>().connectClientOnStartup = false;
+      getIt<Settings>().saveToDisk();
     }
   }
 

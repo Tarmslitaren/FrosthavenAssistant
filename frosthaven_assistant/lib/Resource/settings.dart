@@ -219,7 +219,6 @@ class Settings {
 
       if (data["connectClientOnStartup"] != null && data["connectClientOnStartup"] != false) {
         getIt<Network>().client.connect(lastKnownConnection);
-        connectClientOnStartup = false;
       }
     }
   }
