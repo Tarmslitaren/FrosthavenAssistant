@@ -221,6 +221,11 @@ showToastSticky(BuildContext context, String text) {
         ),),
     ),
     backgroundColor: Colors.teal,
-  ));
+  )).closed
+      .then((value) {
+        if(getIt<GameState>().toastMessage.value == text) {
+          getIt<GameState>().toastMessage.value = "";
+        }
+      });
 
 }

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class MonsterAbilityDeckModel {
   MonsterAbilityDeckModel(this.name, this.edition, this.cards);
 
@@ -18,6 +20,13 @@ class MonsterAbilityDeckModel {
         card.removeAt(0);
       }
       int nr = card[0] as int;
+
+      ///duplication check
+      if(kDebugMode) {
+        if (cards.any((element) => element.nr == nr)) {
+          print("duplicate monster abilty card nr: $nr for $name");
+        }
+      }
       bool shuffle = card[1] as bool;
       int initiative = card[2] as int;
       List<GraphicPositional> graphicPositionals = [];

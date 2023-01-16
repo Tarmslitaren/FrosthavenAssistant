@@ -41,7 +41,7 @@ Widget createMainScaffold(BuildContext context) {
                                 context, getIt<GameState>().toastMessage.value);
                             //getIt<GameState>().toastMessage.value = "";
                           } else {
-                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            //ScaffoldMessenger.of(context).hideCurrentSnackBar();
                           }
                         });
 
