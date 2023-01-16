@@ -218,7 +218,10 @@ class Settings {
       }
 
       if (data["connectClientOnStartup"] != null && data["connectClientOnStartup"] != false) {
-        getIt<Network>().client.connect(lastKnownConnection);
+        Future.delayed(const Duration(milliseconds: 2000), () {
+          getIt<Network>().client.connect(lastKnownConnection);
+        });
+
       }
     }
   }
