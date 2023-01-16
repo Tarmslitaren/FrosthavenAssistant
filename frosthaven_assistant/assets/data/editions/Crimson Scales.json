@@ -509,7 +509,7 @@
         [1248, false, 16, "%move% - 1","*.........", "%attack% - 1","*.........", "^All enemies occupying a","^water tile suffer 1 damage." ],
         [1249, false, 69, "[r]", "ÅKKKK","[c]","%move% + 1","*.........", "%attack% - 1", "[/c]","Å.","¤aoe-arc-3","[/r]", "^Create a water tile in all hexes occupied","^by a target containing no overlay tiles." ],
         [1250, false, 44, "%attack% + 0", "^%range% 3", "^%pull% 2", "^%immobilize%" ],
-        [1251, false, 53, "%move% + 0","*.........", "%attack% + (X - 1)", "^where X is equal to the number of", "^water tiles within %range% 1, up to 3." ],
+        [1251, false, 53, "%move% + 0","*.........", ">%attack% + (X - 1)", "^where X is equal to the number of", "^water tiles within %range% 1, up to 3." ],
         [1252, false, 86, "%move% + 2","*.........", "%heal% 3", "^Self","*.........", "^Create a water tile in an unoccupied", "^adjacent hex closest to an enemy", "^containing no overlay tile." ],
         [1253, false, 22, "%attack% + 1", "^%target% 2", "[r]","[/r]","^Create a water tile in all hexes occupied by", "^a target containing no overlay tiles." ]
       ]
