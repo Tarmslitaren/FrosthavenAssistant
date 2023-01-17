@@ -339,12 +339,38 @@ class CharacterWidgetState extends State<CharacterWidget> {
                     width: 408 * scale,
                     height: 58 * scale,
                     decoration: BoxDecoration(
-                      gradient: character.characterClass.name == "Shattersong"
-                          ? const SweepGradient(
-                              center: FractionalOffset.bottomRight,
-                              transform: GradientRotation(2),
-                              tileMode: TileMode.mirror,
-                              colors: [
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black45,
+                          blurRadius: 4 * scale,
+                          offset:
+                              Offset(2 * scale, 4 * scale), // Shadow position
+                        ),
+                      ],
+                      image: DecorationImage(
+                          fit: BoxFit.fill,
+                          colorFilter:
+                              character.characterClass.name == "Shattersong"
+                                  ? const ColorFilter.mode(
+                                  Colors.white,
+                                  BlendMode.softLight)
+                                  : ColorFilter.mode(
+                                      character.characterClass.colorSecondary,
+                                      BlendMode.color),
+                          image: const AssetImage(
+                              "assets/images/psd/character-bar.png")),
+                      shape: BoxShape.rectangle,
+                      //color: character.characterClass.name == "Shattersong"? null : character.characterClass.colorSecondary,
+                    ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            backgroundBlendMode: character.characterClass.name == "Shattersong"? BlendMode.multiply: null,
+                            gradient: character.characterClass.name == "Shattersong"
+                                ? const SweepGradient(
+                                center: FractionalOffset.bottomRight,
+                                transform: GradientRotation(2),
+                                tileMode: TileMode.mirror,
+                                colors: [
                                   //character.characterClass.color,
                                   //  character.characterClass.color,
                                   Colors.yellow,
@@ -361,7 +387,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                   Colors.white24,
                                   Colors.yellow,
                                 ],
-                              stops: [
+                                stops: [
                                   0,
                                   1 / 13,
                                   2 / 13,
@@ -376,32 +402,9 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                   12 / 13,
                                   1
                                 ])
-                          : null,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black45,
-                          blurRadius: 4 * scale,
-                          offset:
-                              Offset(2 * scale, 4 * scale), // Shadow position
+                                : null,
+                            )
                         ),
-                      ],
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          opacity:
-                              character.characterClass.name == "Shattersong"
-                                  ? 0.75
-                                  : 1,
-                          colorFilter:
-                              character.characterClass.name == "Shattersong"
-                                  ? null
-                                  : ColorFilter.mode(
-                                      character.characterClass.colorSecondary,
-                                      BlendMode.color),
-                          image: const AssetImage(
-                              "assets/images/psd/character-bar.png")),
-                      shape: BoxShape.rectangle,
-                      //color: character.characterClass.name == "Shattersong"? null : character.characterClass.colorSecondary,
-                    ),
                   ),
                   Row(
                     children: [
