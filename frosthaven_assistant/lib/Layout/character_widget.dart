@@ -1,3 +1,6 @@
+import 'dart:math';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
@@ -32,7 +35,6 @@ class CharacterWidget extends StatefulWidget {
   CharacterWidgetState createState() => CharacterWidgetState();
 }
 
-
 class CharacterWidgetState extends State<CharacterWidget> {
   final GameState _gameState = getIt<GameState>();
   late bool isCharacter = true;
@@ -66,8 +68,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
               int? init = int.tryParse(_initTextFieldController.value.text);
               if (init != null && init != 0) {
                 CharacterWidget.localCharacterInitChanges.add(character.id);
-                _gameState.action(
-                    SetInitCommand(character.id, init));
+                _gameState.action(SetInitCommand(character.id, init));
               }
             }
             break;
@@ -92,8 +93,11 @@ class CharacterWidgetState extends State<CharacterWidget> {
   //TODO: try wrap
   List<Widget> createConditionList(double scale) {
     List<Widget> conditions = [];
-    for (int i = conditions.length; i < character.characterState.conditions.value.length; i++) {
-      conditions.add(ConditionIcon(character.characterState.conditions.value[i], 16, character, character.characterState));
+    for (int i = conditions.length;
+        i < character.characterState.conditions.value.length;
+        i++) {
+      conditions.add(ConditionIcon(character.characterState.conditions.value[i],
+          16, character, character.characterState));
     }
     return conditions;
   }
@@ -155,53 +159,38 @@ class CharacterWidgetState extends State<CharacterWidget> {
     );
   }
 
-  Widget buildInitiativeWidget(BuildContext context, double scale, double scaledHeight, Shadow shadow, bool frosthavenStyle) {
+  Widget buildInitiativeWidget(BuildContext context, double scale,
+      double scaledHeight, Shadow shadow, bool frosthavenStyle) {
     return Column(children: [
       Container(
-        margin: EdgeInsets.only(
-            top: scaledHeight / 6,
-            left: 10 * scale),
+        margin: EdgeInsets.only(top: scaledHeight / 6, left: 10 * scale),
         child: Image(
           //fit: BoxFit.contain,
           height: scaledHeight * 0.1,
-          image: const AssetImage(
-              "assets/images/init.png"),
+          image: const AssetImage("assets/images/init.png"),
         ),
       ),
       ValueListenableBuilder<int>(
-          valueListenable: character
-              .characterState.initiative,
+          valueListenable: character.characterState.initiative,
           builder: (context, value, child) {
-            bool secret = (getIt<Settings>()
-                .server
-                .value ||
-                getIt<Settings>()
-                    .client
-                    .value == ClientState.connected) &&
-                (!CharacterWidget
-                    .localCharacterInitChanges
+            bool secret = (getIt<Settings>().server.value ||
+                    getIt<Settings>().client.value == ClientState.connected) &&
+                (!CharacterWidget.localCharacterInitChanges
                     .contains(character.id));
             if (_initTextFieldController.text !=
-                character.characterState
-                    .initiative.value
-                    .toString() &&
-                character.characterState
-                    .initiative.value !=
-                    0 && (_initTextFieldController.text.isNotEmpty || secret)) {
+                    character.characterState.initiative.value.toString() &&
+                character.characterState.initiative.value != 0 &&
+                (_initTextFieldController.text.isNotEmpty || secret)) {
               //handle secret if originating from other device
 
               if (secret) {
-                _initTextFieldController.text =
-                "??";
+                _initTextFieldController.text = "??";
               } else {
                 _initTextFieldController.text =
-                    character.characterState
-                        .initiative.value
-                        .toString();
+                    character.characterState.initiative.value.toString();
               }
             }
-            if (_gameState.roundState.value ==
-                RoundState.playTurns &&
+            if (_gameState.roundState.value == RoundState.playTurns &&
                 isCharacter) {
               _initTextFieldController.clear();
             }
@@ -211,16 +200,11 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                               _initTextFieldController.clear();
                                             }*/
 
-            if (_gameState.roundState.value ==
-                RoundState
-                    .chooseInitiative &&
-                character.characterState.health
-                    .value >
-                    0) {
+            if (_gameState.roundState.value == RoundState.chooseInitiative &&
+                character.characterState.health.value > 0) {
               return Container(
-                margin: EdgeInsets.only(
-                    left: 11 * scale,
-                    top: scaledHeight * 0.11),
+                margin:
+                    EdgeInsets.only(left: 11 * scale, top: scaledHeight * 0.11),
                 height: scaledHeight * 0.5,
                 //33 * scale,
                 width: 25 * scale,
@@ -232,16 +216,12 @@ class CharacterWidgetState extends State<CharacterWidget> {
                     //scrollPadding: EdgeInsets.zero,
                     onTap: () {
                       //clear on enter focus
-                      _initTextFieldController
-                          .clear();
-                      if (getIt<Settings>()
-                          .softNumpadInput
-                          .value) {
+                      _initTextFieldController.clear();
+                      if (getIt<Settings>().softNumpadInput.value) {
                         openDialog(
                             context,
                             NumpadMenu(
-                              controller:
-                              _initTextFieldController,
+                              controller: _initTextFieldController,
                               maxLength: 2,
                             ));
                       }
@@ -249,9 +229,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                     onChanged: (String str) {
                       //close soft keyboard on 2 chars entered
                       if (str.length == 2) {
-                        FocusManager.instance
-                            .primaryFocus
-                            ?.unfocus();
+                        FocusManager.instance.primaryFocus?.unfocus();
                       }
                     },
 
@@ -262,84 +240,51 @@ class CharacterWidgetState extends State<CharacterWidget> {
                     style: TextStyle(
                         height: 1,
                         //quick fix for web-phone disparity.
-                        fontFamily:
-                        frosthavenStyle
-                            ? 'GermaniaOne'
-                            : 'Pirata',
+                        fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
                         color: Colors.white,
                         fontSize: 24 * scale,
                         shadows: [shadow]),
-                    decoration:
-                    const InputDecoration(
+                    decoration: const InputDecoration(
                       isDense: true,
                       //this is what fixes the height issue
                       counterText: '',
-                      contentPadding:
-                      EdgeInsets.zero,
-                      enabledBorder:
-                      UnderlineInputBorder(
-                        borderRadius:
-                        BorderRadius.zero,
-                        borderSide: BorderSide(
-                            width: 0,
-                            color: Colors
-                                .transparent),
+                      contentPadding: EdgeInsets.zero,
+                      enabledBorder: UnderlineInputBorder(
+                        borderRadius: BorderRadius.zero,
+                        borderSide:
+                            BorderSide(width: 0, color: Colors.transparent),
                       ),
-                      focusedBorder:
-                      UnderlineInputBorder(
-                        borderRadius:
-                        BorderRadius.zero,
-                        borderSide: BorderSide(
-                            width: 0,
-                            color: Colors
-                                .transparent),
+                      focusedBorder: UnderlineInputBorder(
+                        borderRadius: BorderRadius.zero,
+                        borderSide:
+                            BorderSide(width: 0, color: Colors.transparent),
                       ),
                       // border: UnderlineInputBorder(
                       //   borderSide:
                       //      BorderSide(color: Colors.pink),
                       // ),
                     ),
-                    controller:
-                    _initTextFieldController,
-                    keyboardType:
-                    getIt<Settings>()
-                        .softNumpadInput
-                        .value
+                    controller: _initTextFieldController,
+                    keyboardType: getIt<Settings>().softNumpadInput.value
                         ? TextInputType.none
-                        : TextInputType
-                        .number),
+                        : TextInputType.number),
               );
             } else {
               if (isCharacter) {
-                _initTextFieldController
-                    .clear();
+                _initTextFieldController.clear();
               }
               return Container(
                   height: 33 * scale,
                   width: 25 * scale,
-                  margin: EdgeInsets.only(
-                      left: 10 * scale),
+                  margin: EdgeInsets.only(left: 10 * scale),
                   child: Text(
-                    character.characterState.health
-                        .value >
-                        0 &&
-                        character
-                            .characterState
-                            .initiative
-                            .value >
-                            0
-                        ? character
-                        .characterState
-                        .initiative
-                        .value
-                        .toString()
+                    character.characterState.health.value > 0 &&
+                            character.characterState.initiative.value > 0
+                        ? character.characterState.initiative.value.toString()
                         : "",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontFamily:
-                        frosthavenStyle
-                            ? 'GermaniaOne'
-                            : 'Pirata',
+                        fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
                         color: Colors.white,
                         fontSize: 24 * scale,
                         shadows: [shadow]),
@@ -350,7 +295,6 @@ class CharacterWidgetState extends State<CharacterWidget> {
   }
 
   Widget buildInternal(BuildContext context) {
-
     double scale = getScaleByReference(context);
     double scaledHeight = 60 * scale;
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(null);
@@ -361,32 +305,27 @@ class CharacterWidgetState extends State<CharacterWidget> {
       blurRadius: 1 * scale,
     );
 
-    return Column(mainAxisSize: MainAxisSize.max, children:
-    [
+    return Column(mainAxisSize: MainAxisSize.max, children: [
       Container(
         //padding: EdgeInsets.zero,
         // color: Colors.amber,
         //height: 50,
-        margin: EdgeInsets.only(
-            left: 4 * scale * 0.8, right: 4 * scale * 0.8),
+        margin: EdgeInsets.only(left: 4 * scale * 0.8, right: 4 * scale * 0.8),
         width: getMainListWidth(context) - 8 * scale * 0.8,
         child: ValueListenableBuilder<int>(
-            valueListenable:
-            getIt<GameState>().killMonsterStandee,
+            valueListenable: getIt<GameState>().killMonsterStandee,
             // widget.data.monsterInstances,
             builder: (context, value, child) {
               return buildMonsterBoxGrid(scale);
             }),
       ),
       PhysicalShape(
-        //TODO: needs to be more shiny
           color: character.turnState == TurnsState.current
               ? Colors.tealAccent
               : Colors.transparent,
           shadowColor: Colors.black,
           elevation: 8,
-          clipper: const ShapeBorderClipper(
-              shape: RoundedRectangleBorder()),
+          clipper: const ShapeBorderClipper(shape: RoundedRectangleBorder()),
           child: SizedBox(
               width: getMainListWidth(context),
               // 408 * scale,
@@ -400,72 +339,140 @@ class CharacterWidgetState extends State<CharacterWidget> {
                     width: 408 * scale,
                     height: 58 * scale,
                     decoration: BoxDecoration(
+                      gradient: character.characterClass.name == "Shattersong"
+                          ? const SweepGradient(
+                              center: FractionalOffset.bottomRight,
+                              transform: GradientRotation(2),
+                              tileMode: TileMode.mirror,
+                              colors: [
+                                  //character.characterClass.color,
+                                  //  character.characterClass.color,
+                                  Colors.yellow,
+                                  Colors.purple,
+                                  Colors.teal,
+                                  Colors.white24,
+                                  Colors.yellow,
+                                  Colors.purple,
+                                  Colors.teal,
+                                  Colors.white24,
+                                  Colors.yellow,
+                                  Colors.purple,
+                                  Colors.teal,
+                                  Colors.white24,
+                                  Colors.yellow,
+                                ],
+                              stops: [
+                                  0,
+                                  1 / 13,
+                                  2 / 13,
+                                  3 / 13,
+                                  4 / 13,
+                                  5 / 13,
+                                  6 / 13,
+                                  7 / 13,
+                                  8 / 13,
+                                  9 / 13,
+                                  10 / 13,
+                                  12 / 13,
+                                  1
+                                ])
+                          : null,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black45,
                           blurRadius: 4 * scale,
-                          offset: Offset(2 * scale,
-                              4 * scale), // Shadow position
+                          offset:
+                              Offset(2 * scale, 4 * scale), // Shadow position
                         ),
                       ],
                       image: DecorationImage(
                           fit: BoxFit.fill,
-                          colorFilter: ColorFilter.mode(
-                              character.characterClass.colorSecondary,
-                              BlendMode.color),
+                          opacity:
+                              character.characterClass.name == "Shattersong"
+                                  ? 0.75
+                                  : 1,
+                          colorFilter:
+                              character.characterClass.name == "Shattersong"
+                                  ? null
+                                  : ColorFilter.mode(
+                                      character.characterClass.colorSecondary,
+                                      BlendMode.color),
                           image: const AssetImage(
                               "assets/images/psd/character-bar.png")),
                       shape: BoxShape.rectangle,
-                      color: character.characterClass.colorSecondary,
+                      //color: character.characterClass.name == "Shattersong"? null : character.characterClass.colorSecondary,
                     ),
                   ),
                   Row(
                     children: [
                       Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color:
-                              Colors.black.withOpacity(0.6),
-                              spreadRadius: 4,
-                              blurRadius: 13.0 * scale,
-                              //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        margin: EdgeInsets.only(
-                            left: 26 * scale,
-                            top: 5 * scale,
-                            bottom: 5 * scale),
-                        child: Image(
-                          fit: BoxFit.contain,
-                          height: scaledHeight * 0.6,
-                          color: isCharacter
-                              ? character.characterClass.color
-                              : null,
-                          filterQuality: FilterQuality.medium,
-                          image: AssetImage(
-                            "assets/images/class-icons/${character.characterClass.name}.png",
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.6),
+                                spreadRadius: 4,
+                                blurRadius: 13.0 * scale,
+                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                              ),
+                            ],
                           ),
-                          width: scaledHeight * 0.6,
-                        ),
-                      ),
-                      buildInitiativeWidget(context, scale, scaledHeight, shadow, frosthavenStyle),
+                          margin: EdgeInsets.only(
+                              left: 26 * scale,
+                              top: 5 * scale,
+                              bottom: 5 * scale),
+                          child: character.characterClass.name == "Shattersong"
+                              ? ShaderMask(
+                                  shaderCallback: (bounds) {
+                                    return LinearGradient(
+                                        transform:
+                                            const GradientRotation(pi * -0.6),
+                                        colors: [
+                                          Color(
+                                              int.parse("ff759a9d", radix: 16)),
+                                          Color(
+                                              int.parse("ffa0a8ac", radix: 16)),
+                                          Color(
+                                              int.parse("ff759a9d", radix: 16)),
+                                        ],
+                                        stops: const [
+                                          0,
+                                          0.2,
+                                          1
+                                        ]).createShader(bounds);
+                                  },
+                                  blendMode: BlendMode.srcATop,
+                                  child: Image.asset(
+                                    "assets/images/class-icons/${character.characterClass.name}.png",
+                                    height: scaledHeight * 0.6,
+                                    fit: BoxFit.contain,
+                                  ),
+                                )
+                              : Image(
+                                  fit: BoxFit.contain,
+                                  height: scaledHeight * 0.6,
+                                  color: isCharacter
+                                      ? character.characterClass.color
+                                      : null,
+                                  filterQuality: FilterQuality.medium,
+                                  image: AssetImage(
+                                    "assets/images/class-icons/${character.characterClass.name}.png",
+                                  ),
+                                  width: scaledHeight * 0.6,
+                                )),
+                      buildInitiativeWidget(context, scale, scaledHeight,
+                          shadow, frosthavenStyle),
                       Column(
-                        //mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                          //mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           //align children to the left
                           children: [
                             Container(
                               margin: EdgeInsets.only(
-                                  top: 10 * scale,
-                                  left: 10 * scale),
-                              child:
-                              ValueListenableBuilder<String>(
+                                  top: 10 * scale, left: 10 * scale),
+                              child: ValueListenableBuilder<String>(
                                   valueListenable:
-                                  character.characterState.display,
+                                      character.characterState.display,
                                   // widget.data.monsterInstances,
                                   builder: (context, value, child) {
                                     return Text(
@@ -483,18 +490,16 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                   }),
                             ),
                             ValueListenableBuilder<int>(
-                                valueListenable: character
-                                    .characterState.health,
+                                valueListenable:
+                                    character.characterState.health,
                                 //not working?
                                 builder: (context, value, child) {
                                   return Container(
-                                      margin: EdgeInsets.only(
-                                          left: 10 * scale),
+                                      margin: EdgeInsets.only(left: 10 * scale),
                                       child: Row(children: [
                                         Image(
                                           fit: BoxFit.contain,
-                                          height:
-                                          scaledHeight * 0.2,
+                                          height: scaledHeight * 0.2,
                                           image: const AssetImage(
                                               "assets/images/blood.png"),
                                         ),
@@ -503,27 +508,23 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                               ? '${character.characterState.health.value.toString()}/${character.characterState.maxHealth.value.toString()}'
                                               : '${character.characterState.health.value.toString()} / ${character.characterState.maxHealth.value.toString()}',
                                           style: TextStyle(
-                                              fontFamily:
-                                              frosthavenStyle
+                                              fontFamily: frosthavenStyle
                                                   ? 'GermaniaOne'
                                                   : 'Pirata',
                                               color: Colors.white,
-                                              fontSize: frosthavenStyle ? 16 * scale : 16 * scale,
+                                              fontSize: frosthavenStyle
+                                                  ? 16 * scale
+                                                  : 16 * scale,
                                               shadows: [shadow]),
                                         ),
                                         //add conditions here
-                                        ValueListenableBuilder<
-                                            List<Condition>>(
-                                            valueListenable:
-                                            character
-                                                .characterState
-                                                .conditions,
-                                            builder: (context,
-                                                value, child) {
+                                        ValueListenableBuilder<List<Condition>>(
+                                            valueListenable: character
+                                                .characterState.conditions,
+                                            builder: (context, value, child) {
                                               return Row(
                                                 children:
-                                                createConditionList(
-                                                    scale),
+                                                    createConditionList(scale),
                                               );
                                             }),
                                       ]));
@@ -533,79 +534,71 @@ class CharacterWidgetState extends State<CharacterWidget> {
                   ),
                   isCharacter
                       ? Positioned(
-                      top: 10 * scale,
-                      left: 314 * scale,
-                      child: Row(
-                        children: [
-                          Image(
-                            height: 20.0 * scale * 0.8,
-                            color: Colors.blue,
-                            colorBlendMode:
-                            BlendMode.modulate,
-                            image: const AssetImage(
-                                "assets/images/psd/xp.png"),
-                          ),
-                          ValueListenableBuilder<int>(
-                              valueListenable:
-                              character.characterState.xp,
-                              builder:
-                                  (context, value, child) {
-                                return Text(
-                                  character
-                                      .characterState.xp.value
-                                      .toString(),
-                                  style: TextStyle(
-                                      fontFamily:
-                                      frosthavenStyle
-                                          ? 'GermaniaOne'
-                                          : 'Pirata',
-                                      color: Colors.blue,
-                                      fontSize: 14 * scale,
-                                      shadows: [shadow]),
-                                );
-                              }),
-                        ],
-                      ))
+                          top: 10 * scale,
+                          left: 314 * scale,
+                          child: Row(
+                            children: [
+                              Image(
+                                height: 20.0 * scale * 0.8,
+                                color: Colors.blue,
+                                colorBlendMode: BlendMode.modulate,
+                                image: const AssetImage(
+                                    "assets/images/psd/xp.png"),
+                              ),
+                              ValueListenableBuilder<int>(
+                                  valueListenable: character.characterState.xp,
+                                  builder: (context, value, child) {
+                                    return Text(
+                                      character.characterState.xp.value
+                                          .toString(),
+                                      style: TextStyle(
+                                          fontFamily: frosthavenStyle
+                                              ? 'GermaniaOne'
+                                              : 'Pirata',
+                                          color: Colors.blue,
+                                          fontSize: 14 * scale,
+                                          shadows: [shadow]),
+                                    );
+                                  }),
+                            ],
+                          ))
                       : Container(),
                   isCharacter
                       ? Positioned(
-                      top: 28 * scale,
-                      left: 316 * scale,
-                      child: Row(
-                        children: [
-                          Image(
-                            height: 12.0 * scale,
-                            image: const AssetImage(
-                                "assets/images/psd/level.png"),
-                          ),
-                          ValueListenableBuilder<int>(
-                              valueListenable: character
-                                  .characterState.level,
-                              builder:
-                                  (context, value, child) {
-                                return Text(
-                                  character.characterState
-                                      .level.value
-                                      .toString(),
-                                  style: TextStyle(
-                                      fontFamily:
-                                      frosthavenStyle
-                                          ? 'GermaniaOne'
-                                          : 'Pirata',
-                                      color: Colors.white,
-                                      fontSize: 14 * scale,
-                                      shadows: [shadow]),
-                                );
-                              }),
-                        ],
-                      ))
+                          top: 28 * scale,
+                          left: 316 * scale,
+                          child: Row(
+                            children: [
+                              Image(
+                                height: 12.0 * scale,
+                                image: const AssetImage(
+                                    "assets/images/psd/level.png"),
+                              ),
+                              ValueListenableBuilder<int>(
+                                  valueListenable:
+                                      character.characterState.level,
+                                  builder: (context, value, child) {
+                                    return Text(
+                                      character.characterState.level.value
+                                          .toString(),
+                                      style: TextStyle(
+                                          fontFamily: frosthavenStyle
+                                              ? 'GermaniaOne'
+                                              : 'Pirata',
+                                          color: Colors.white,
+                                          fontSize: 14 * scale,
+                                          shadows: [shadow]),
+                                    );
+                                  }),
+                            ],
+                          ))
                       : Container(),
                   isCharacter
                       ? Positioned(
-                    right: 29 * scale,
-                    top: 14 * scale,
-                    child: summonsButton(scale),
-                  )
+                          right: 29 * scale,
+                          top: 14 * scale,
+                          child: summonsButton(scale),
+                        )
                       : Container(),
                   if (character.characterState.health.value > 0)
                     InkWell(
@@ -613,15 +606,12 @@ class CharacterWidgetState extends State<CharacterWidget> {
                           if (_gameState.roundState.value ==
                               RoundState.chooseInitiative) {
                             //if in choose mode - focus the input or open the soft numpad if that option is on
-                            if (getIt<Settings>()
-                                .softNumpadInput
-                                .value ==
+                            if (getIt<Settings>().softNumpadInput.value ==
                                 true) {
                               openDialog(
                                   context,
                                   NumpadMenu(
-                                    controller:
-                                    _initTextFieldController,
+                                    controller: _initTextFieldController,
                                     maxLength: 2,
                                   ));
                             } else {
@@ -629,8 +619,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                               focusNode.requestFocus();
                             }
                           } else {
-                            getIt<GameState>().action(
-                                TurnDoneCommand(character.id));
+                            getIt<GameState>()
+                                .action(TurnDoneCommand(character.id));
                           }
                           //if in choose mode - focus the input or open the soft numpad if that option is on
                           //else: mark as done
@@ -646,7 +636,6 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     for (var item in _gameState.currentList) {
       if (item.id == widget.characterId) {
         character = item as Character;
@@ -665,10 +654,13 @@ class CharacterWidgetState extends State<CharacterWidget> {
             valueListenable: getIt<GameState>().updateList,
             builder: (context, value, child) {
               bool notGrayScale = character.characterState.health.value != 0 &&
-              (character.turnState != TurnsState.done ||
-              getIt<GameState>().roundState.value == RoundState.chooseInitiative);
-              return  ColorFiltered(
-                  colorFilter: notGrayScale? ColorFilter.matrix(identity) : ColorFilter.matrix(grayScale),
+                  (character.turnState != TurnsState.done ||
+                      getIt<GameState>().roundState.value ==
+                          RoundState.chooseInitiative);
+              return ColorFiltered(
+                  colorFilter: notGrayScale
+                      ? ColorFilter.matrix(identity)
+                      : ColorFilter.matrix(grayScale),
                   child: buildInternal(context));
             }));
   }
