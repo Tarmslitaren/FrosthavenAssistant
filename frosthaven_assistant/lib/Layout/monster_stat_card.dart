@@ -554,6 +554,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                       padding: const EdgeInsets.only(
                                           right: 8, top: 8),
                                       icon: Image.asset(
+                                          height: 25 * scale * 0.8,
+                                          fit: BoxFit.fitHeight,
                                           color: allStandeesOut
                                               ? Colors.white24
                                               : Colors.grey,
@@ -583,6 +585,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                                 widget.data.type.count
                                             ? Colors.white24
                                             : Colors.grey,
+                                        height: 25 * scale * 0.8,
+                                        fit: BoxFit.fitHeight,
                                         colorBlendMode: BlendMode.modulate,
                                         'assets/images/psd/add.png'),
                                     onPressed: () {

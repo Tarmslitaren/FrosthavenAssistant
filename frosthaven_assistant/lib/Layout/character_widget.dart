@@ -109,6 +109,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
         child: IconButton(
           padding: EdgeInsets.zero,
           icon: Image.asset(
+            height: 30*scale,
               fit: BoxFit.fitHeight,
               color: Colors.white24,
               colorBlendMode: BlendMode.modulate,
