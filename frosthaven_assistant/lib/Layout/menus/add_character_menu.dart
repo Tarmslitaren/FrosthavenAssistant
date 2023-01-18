@@ -26,6 +26,19 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   final AdjustableScrollController _scrollController =
       AdjustableScrollController();
 
+
+  int compareEditions(String a, String b) {
+    for(String item in _gameState.editions) {
+      if(b == item && a != item) {
+        return 1;
+      }
+      if(a == item && b != item) {
+        return -1;
+      }
+    }
+    return a.compareTo(b);
+  }
+
   @override
   initState() {
     // at the beginning, all users are shown
@@ -42,9 +55,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     _foundCharacters = _allCharacters;
     _foundCharacters.sort((a, b) {
       if (a.edition != b.edition) {
-        return -a.edition.compareTo(b.edition);
-        //NOTE: this - here is a bit silly. it just so happens that the order makes more sense backards: Jotl, gloom, FC, FH, CS
-      }
+        return  compareEditions(a.edition, b.edition);
+              }
       if (a.hidden && !b.hidden) {
         return 1;
       }

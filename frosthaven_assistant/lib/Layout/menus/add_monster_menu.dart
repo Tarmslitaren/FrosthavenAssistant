@@ -39,21 +39,21 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   }
 
   int compareEditions(String a, String b) {
-    if (a.startsWith("S") && !b.startsWith("S")) {
-      return 1;
+    for(String item in _gameState.editions) {
+      if(b == item && a != item) {
+        return 1;
+      }
+      if(a == item && b != item) {
+        return -1;
+      }
     }
-    if (b.startsWith("S") && !a.startsWith("S")) {
-      return -1;
-    }
-    return -a.compareTo(b);
+    return a.compareTo(b);
   }
 
   void sortMonsters(List<MonsterModel> list) {
     list.sort((a, b) {
       if (a.edition != b.edition) {
         return compareEditions(a.edition, b.edition);
-        //TODO: have an actual order in data
-        //NOTE: this - here is a bit silly. it just so happens that the order makes more sense backwards: Jotl, gloom, FC, FH, CS
       }
       if (a.hidden && !b.hidden) {
         return 1;
@@ -105,9 +105,6 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   void _setCampaign(String campaign) {
     _currentCampaign = campaign;
     _foundMonsters = _allMonsters.toList();
-    if (campaign == "JotL") {
-      campaign = "Jaws of the Lion";
-    }
     if (campaign != "All") {
       _foundMonsters.removeWhere((monster) => monster.edition != campaign);
     }
@@ -122,6 +119,22 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     sortMonsters(_foundMonsters);
   }
 
+  List<DropdownMenuItem<String>> buildEditionDroopDownMenuItems(){
+    List<DropdownMenuItem<String>> retVal = [];
+    retVal.add(const DropdownMenuItem<String>(
+        value: "All", child: Text("All Campaigns")));
+
+    for(String item in _gameState.editions) {
+      if(item != "na") {
+        retVal.add(DropdownMenuItem<String>(
+            value: item,
+            child: Text(item)));
+      }
+    }
+
+    return retVal;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -134,34 +147,11 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
               Column(
                 children: [
                   Row(children: [
-                    Text("      Show monsters from:   "),
+                    const Text("      Show monsters from:   "),
                     DropdownButtonHideUnderline(
                         child: DropdownButton(
                             value: _currentCampaign,
-                            items: const [
-                              DropdownMenuItem<String>(
-                                  value: "All", child: Text("All Campaigns")),
-                              DropdownMenuItem<String>(
-                                  value: "JotL",
-                                  child: Text("Jaws of the Lion")),
-                              DropdownMenuItem<String>(
-                                  value: "Gloomhaven",
-                                  child: Text("Gloomhaven")),
-                              DropdownMenuItem<String>(
-                                  value: "Forgotten Circles",
-                                  child: Text("Forgotten Circles")),
-                              DropdownMenuItem<String>(
-                                  value: "Frosthaven",
-                                  child: Text("Frosthaven")),
-                              DropdownMenuItem<String>(
-                                  value: "Crimson Scales",
-                                  child: Text("Crimson Scales")),
-                              DropdownMenuItem<String>(
-                                  value: "Solo", child: Text("Solo")),
-                              DropdownMenuItem<String>(
-                                  value: "Seeker of Xorn",
-                                  child: Text("Seeker of Xorn")),
-                            ],
+                            items: buildEditionDroopDownMenuItems(),
                             onChanged: (value) {
                               if (value is String) {
                                 setState(() {

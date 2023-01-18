@@ -50,14 +50,13 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
 
     Map<String, CampaignModel> map = {};
 
-    await fetchCampaignData("na", map);
-    await fetchCampaignData("JotL", map);
-    await fetchCampaignData("Gloomhaven", map);
-    await fetchCampaignData("Forgotten Circles", map);
-    await fetchCampaignData("Crimson Scales", map);
-    await fetchCampaignData("Frosthaven", map);
-    await fetchCampaignData("Seeker of Xorn", map);
-    await fetchCampaignData("Solo", map);
+    final String editions = await rootBundle.loadString('assets/data/editions/editions.json', cache: false);
+    final Map<String, dynamic> editionData = await json.decode(editions);
+    for (String item in editionData["editions"]) {
+      this.editions.add(item);
+      await fetchCampaignData(item, map);
+    }
+
     //TODO:specify campaigns in data, or scrub the directory for files
 
     load(); //load saved state from file.
@@ -72,12 +71,14 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
     map[campaign] = CampaignModel.fromJson(data);
   }
 
+  List<String> editions = [];
+
   //data
   final modelData = ValueNotifier<Map<String, CampaignModel>>({});
   List<SummonModel> itemSummonData = [];
 
   //state
-  final currentCampaign = ValueNotifier<String>("JotL");
+  final currentCampaign = ValueNotifier<String>("Jaws of the Lion");
   final round = ValueNotifier<int>(1);
   final roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
 

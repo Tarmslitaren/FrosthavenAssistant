@@ -175,6 +175,23 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     );
   }
 
+  List<Widget> buildCampaignButtons() {
+    List<Widget> retVal = [];
+    for( String item in _gameState.editions) {
+      if(item != "na") {
+        retVal.add(TextButton(
+            onPressed: () {
+              setState(() {
+                setCampaign(item);
+              });
+            },
+            child: Text(item)
+        ));
+      }
+    }
+    return retVal;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -194,64 +211,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                     ExpansionTile(
                       title: Text(
                           "Current Campaign: ${_gameState.currentCampaign.value}"),
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              setCampaign("JotL");
-                            });
-                          },
-                          child: const Text("Jaws of the Lion"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              setCampaign("Gloomhaven");
-                            });
-                          },
-                          child: const Text("Gloomhaven"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              setCampaign("Forgotten Circles");
-                            });
-                          },
-                          child: const Text("Forgotten Circles"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              setCampaign("Frosthaven");
-                            });
-                          },
-                          child: const Text("Frosthaven"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              setCampaign("Crimson Scales");
-                            });
-                          },
-                          child: const Text("Crimson Scales"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              setCampaign("Seeker of Xorn");
-                            });
-                          },
-                          child: const Text("Seeker of Xorn"),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              setCampaign("Solo");
-                            });
-                          },
-                          child: const Text("Solo Scenarios"),
-                        ),
-                      ],
+                      children: buildCampaignButtons(),
                     ),
                   ]),
                   Container(

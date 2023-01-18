@@ -107,7 +107,7 @@
       "edition": "Frosthaven",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
-      "color": "ff279e55",
+      "color": "ff49a967",
       "summons": {
         "Shambling Skeleton": {
           "level": 1,
@@ -209,7 +209,7 @@
       "edition": "Frosthaven",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
-      "color": "ffac9c6f",
+      "color": "ffddb586",
       "summons": {
         "Shaggy Lure": {
           "level": 1,
