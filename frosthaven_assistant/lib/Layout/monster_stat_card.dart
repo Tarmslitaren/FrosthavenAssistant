@@ -188,21 +188,23 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
           bool frosthavenStyle =
               GameMethods.isFrosthavenStyle(widget.data.type);
 
-          List<String> bossAttackAttributes = [];
+          //List<String> bossAttackAttributes = [];
+          String bossAttackAttributes = "";
           List<String> bossOtherAttributes = [];
           if (isBoss) {
             for (String item in normal.attributes) {
-              if (item.startsWith('%wound%') ||
+              if (frosthavenStyle &&( item.startsWith('%wound%') ||
+                  item.startsWith('%poison%') ||
                   item.startsWith("%brittle%") ||
-                  item.startsWith("%target%")) {
-                bossAttackAttributes.add(item);
+                  item.startsWith("%target%"))) {
+                bossAttackAttributes += item;
               } else {
                 bossOtherAttributes.add(item);
               }
             }
           }
           Widget attackAttributes = LineBuilder.createLines(
-              bossAttackAttributes,
+              [bossAttackAttributes],
               true,
               false,
               false,

@@ -563,7 +563,7 @@ class LineBuilder {
             styleToUse = dividerStyleExtraThin;
           }
 
-          if (frosthavenStyle) {
+          if (frosthavenStyle || alignment == CrossAxisAlignment.start) {
 
             Widget image = Image.asset(
               alignment: alignment == CrossAxisAlignment.start? Alignment.centerLeft : Alignment.center,

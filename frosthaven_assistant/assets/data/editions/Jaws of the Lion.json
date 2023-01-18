@@ -748,8 +748,8 @@
           "health": "7xC",
           "move": 0,
           "attack": "C-1",
-          "special1": [ "^^%heal% C", "*Self"],
-          "special2": [ "^^%heal% 2", "*Target all allies" ],
+          "special1": [ "%heal% C", "^Self"],
+          "special2": [ "%heal% 2", "^Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
 
         },
@@ -758,8 +758,8 @@
           "health": "10xC",
           "move": 0,
           "attack": "C",
-          "special1": [ "^^%heal% C", "*Self"],
-          "special2": [ "^^%heal% 2", "*Target all allies" ],
+          "special1": [ "%heal% C", "^Self"],
+          "special2": [ "%heal% 2", "^Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -767,8 +767,8 @@
           "health": "12xC",
           "move": 0,
           "attack": "C",
-          "special1": [ "^^%heal% C+1", "*Self"],
-          "special2": [ "^^%heal% 3", "*Target all allies" ],
+          "special1": [ "%heal% C+1", "^Self"],
+          "special2": [ "%heal% 3", "^Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -776,8 +776,8 @@
           "health": "15xC",
           "move": 0,
           "attack": "C+1",
-          "special1": [ "^^%heal% C+1", "*Self"],
-          "special2": [ "^^%heal% 3", "*Target all allies" ],
+          "special1": [ "%heal% C+1", "^Self"],
+          "special2": [ "%heal% 3", "^Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -785,8 +785,8 @@
           "health": "17xC",
           "move": 0,
           "attack": "C+1",
-          "special1": [ "^^%heal% C+2", "*Self"],
-          "special2": [ "^^%heal% 4", "*Target all allies" ],
+          "special1": [ "%heal% C+2", "^Self"],
+          "special2": [ "%heal% 4", "^Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -794,8 +794,8 @@
           "health": "20xC",
           "move": 0,
           "attack": "C+2",
-          "special1": [ "^^%heal% C+2", "*Self"],
-          "special2": [ "^^%heal% 4", "*Target all allies" ],
+          "special1": [ "%heal% C+2", "^Self"],
+          "special2": [ "%heal% 4", "^Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -803,8 +803,8 @@
           "health": "23xC",
           "move": 0,
           "attack": "C+2",
-          "special1": [ "^^%heal% C+2", "*Self"],
-          "special2": [ "^^%heal% 5", "*Target all allies" ],
+          "special1": [ "%heal% C+2", "^Self"],
+          "special2": [ "%heal% 5", "^Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         },
         {
@@ -812,8 +812,8 @@
           "health": "28xC",
           "move": 0,
           "attack": "C+3",
-          "special1": [ "^^%heal% C+3", "*Self"],
-          "special2": [ "^^%heal% 5", "*Target all allies" ],
+          "special1": [ "%heal% C+3", "^Self"],
+          "special2": [ "%heal% 5", "^Target all allies" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%" ]
         }
       ]
@@ -827,8 +827,8 @@
           "health": "10xC",
           "move": 2,
           "attack": 3,
-          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
+          "special1": [ "^^All enemies within %range% 2","^^suffer 2 damage","^^Spawn C/2 Black Imps"],
+          "special2": [ "^^%attack% + 0","^^%attack% - 1","^^within %range% 2 of target","^^%attack% - 2","^^within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -836,8 +836,8 @@
           "health": "14xC",
           "move": 2,
           "attack": 4,
-          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
+          "special1": [ "^^All enemies within %range% 2","^^suffer 2 damage","^^Spawn C/2 Black Imps"],
+          "special2": [ "^^%attack% + 0","^^%attack% - 1","^^within %range% 2 of target","^^%attack% - 2","^^within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -845,8 +845,8 @@
           "health": "17xC",
           "move": 2,
           "attack": 4,
-          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
+          "special1": [ "^^All enemies within %range% 2","^^suffer 2 damage","^^Spawn C/2 Black Imps"],
+          "special2": [ "^^%attack% + 0","^^%attack% - 1","^^within %range% 2 of target","^^%attack% - 2","^^within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -854,8 +854,8 @@
           "health": "20xC",
           "move": 2,
           "attack": 5,
-          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
+          "special1": [ "^^All enemies within %range% 2","^^suffer 2 damage","^^Spawn C/2 Black Imps"],
+          "special2": [ "^^%attack% + 0","^^%attack% - 1","^^within %range% 2 of target","^^%attack% - 2","^^within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -863,8 +863,8 @@
           "health": "24xC",
           "move": 3,
           "attack": 5,
-          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
+          "special1": [ "^^All enemies within %range% 2","^^suffer 2 damage","^^Spawn C/2 Black Imps"],
+          "special2": [ "^^%attack% + 0","^^%attack% - 1","^^within %range% 2 of target","^^%attack% - 2","^^within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -872,8 +872,8 @@
           "health": "28xC",
           "move": 3,
           "attack": 6,
-          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
+          "special1": [ "^^All enemies within %range% 2","^^suffer 2 damage","^^Spawn C/2 Black Imps"],
+          "special2": [ "^^%attack% + 0","^^%attack% - 1","^^within %range% 2 of target","^^%attack% - 2","^^within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -881,8 +881,8 @@
           "health": "32xC",
           "move": 3,
           "attack": 7,
-          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
+          "special1": [ "^^All enemies within %range% 2","^^suffer 2 damage","^^Spawn C/2 Black Imps"],
+          "special2": [ "^^%attack% + 0","^^%attack% - 1","^^within %range% 2 of target","^^%attack% - 2","^^within %range% 2 of target" ],
           "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         },
         {
@@ -890,8 +890,8 @@
           "health": "36xC",
           "move": 3,
           "attack": 8,
-          "special1": [ "*All enemies within %range% 2","*suffer 2 damage","*Spawn C/2 Black Imps"],
-          "special2": [ "*%attack% + 0, %attack% - 1","*within %range% 2 of target","*%attack% - 2","*within %range% 2 of target" ],
+          "special1": [ "^^All enemies within %range% 2","^^suffer 2 damage","^^Spawn C/2 Black Imps"],
+          "special2": [ "^^%attack% + 0","^^%attack% - 1","^^within %range% 2 of target","^^%attack% - 2","^^within %range% 2 of target" ],
          "immunities": [ "%disarm%", "%muddle%", "%stun%", "%immobilize%", "%curse%" ]
         }
       ]
