@@ -6,7 +6,7 @@
       "edition": "Frosthaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
-      "color": "ffa28b7b",
+      "color": "ffa28b7c",
       "summons": {}
     },
     {
@@ -14,7 +14,7 @@
       "edition": "Frosthaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
-      "color": "ff009ec6",
+      "color": "ff01b0db",
       "summons": {}
     },
     {
@@ -22,7 +22,7 @@
       "edition": "Frosthaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
-      "color": "FFE7B32E",
+      "color": "ffedbc47",
       "summons": {
         "Reinforcements": {
           "level": 1,
@@ -84,7 +84,7 @@
       "edition": "Frosthaven",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
-      "color": "ff707d91",
+      "color": "ff8c97a9",
       "summons": {
         "Shadow Beast": {
           "level": 1,
@@ -161,7 +161,8 @@
       "edition": "Frosthaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
-      "color": "ffcf4471",
+      "color": "ffc33e69",
+      "colorSecondary": "ff613141",
       "summons": {}
     },
     {
@@ -169,8 +170,8 @@
       "edition": "Frosthaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "color": "ffb6e56c",
-      "colorSecondary": "ff537073",
+      "color": "ff6fb54e",
+      "colorSecondary": "ff3c5254",
       "summons": {
         "Animated Claymore": {
           "level": 1,
@@ -193,7 +194,8 @@
       "edition": "Frosthaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "color": "ffec9063",
+      "color": "ffeb5b38",
+      "colorSecondary": "ff303030",
       "summons": {}
     },
     {
@@ -230,7 +232,8 @@
       "edition": "Frosthaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "color": "ffc2c5ef",
+      "color": "ff7476a7",
+      "colorSecondary": "ff2b2b2b",
       "summons": {
         "Flesh Fiend": {
           "level": 1,
@@ -253,7 +256,8 @@
       "edition": "Frosthaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "color": "ffbbd3e1",
+      "color": "ff83b5be",
+      "colorSecondary": "ff4b4b4d",
       "summons": {
         "Snow Fox": {
           "level": 1,
@@ -284,7 +288,7 @@
       "edition": "Frosthaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "color": "ffd3dbe9",
+      "color": "ff88abc6",
       "summons": {}
     },
     {
@@ -292,7 +296,7 @@
       "edition": "Frosthaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "color": "ff9f9bd0",
+      "color": "ff987bab",
       "summons": {}
     },
     {
@@ -300,8 +304,8 @@
       "edition": "Frosthaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "color": "ffabd4da",
-      "colorSecondary": "ffac427d",
+      "color": "ff4c988b",
+      "colorSecondary": "ff641e48",
       "summons": {}
     },
     {
@@ -309,8 +313,8 @@
       "edition": "Frosthaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "color": "ffe5de85",
-      "colorSecondary": "ff982818",
+      "color": "ffd7ad47",
+      "colorSecondary": "ff691a05",
       "summons": {
         "Armored Tank": {
           "level": 1,
@@ -420,7 +424,8 @@
       "edition": "Frosthaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "color": "ffcbbe9c",
+      "color": "ffad8f68",
+      "colorSecondary": "ff363637",
       "summons": {}
     }
   ],
