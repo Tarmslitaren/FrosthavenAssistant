@@ -13,25 +13,30 @@ class CharacterClass {
   final List<SummonModel> summons;
 
   factory CharacterClass.fromJson(Map<String, dynamic> data) {
-    // note the explicit cast to String
-    // this is required if robust lint rules are enabled
     final edition = data['edition'] as String;
     final name = data['name'] as String;
     bool hidden = false;
     if(data.containsKey('hidden')) {
       hidden = data['hidden'] as bool;
     }
+    //TODO: noListing value
+    //TODO: color array + gradiantType
     final healthByLevel = (data['health'] as List<dynamic>).cast<int>();
-    var colorValue = data['color']; //this can be both string and signed int
-    if(colorValue is int) {
-      colorValue = colorValue.toString();
-    }
     int radix = 16;
-    int value = int.parse(colorValue, radix: radix);
-    Color color = Color(value);
+    var colorValue = data['color'];
+    Color color;
+    if(colorValue is List<dynamic>) {
+      color = Color(int.parse(colorValue[0], radix: radix)); //TODO: handle lists
+    } else {
+      color = Color(int.parse(colorValue, radix: radix));
+    }
     Color colorSecondary = color;
     if(data.containsKey("colorSecondary")) {
-      colorSecondary = Color(int.parse(data['colorSecondary'], radix: radix));
+      if(data["colorSecondary"] is List<dynamic>) {
+        colorSecondary = Color(int.parse(data['colorSecondary'][0], radix: radix)); //TODO: handle lists
+      } else {
+        colorSecondary = Color(int.parse(data['colorSecondary'], radix: radix));
+      }
     }
 
     List<SummonModel> summonList = [];

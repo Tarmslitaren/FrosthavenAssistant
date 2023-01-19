@@ -22,6 +22,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   List<CharacterClass> _foundCharacters = [];
   final List<CharacterClass> _allCharacters = [];
   late CharacterClass bs;
+  late CharacterClass vq;
   final GameState _gameState = getIt<GameState>();
   final AdjustableScrollController _scrollController =
       AdjustableScrollController();
@@ -45,6 +46,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     for (String key in _gameState.modelData.value.keys) {
       _allCharacters.addAll(_gameState.modelData.value[key]!.characters);
     }
+
     for (var item in _allCharacters) {
       if (item.name == "Bladeswarm") {
         _allCharacters.remove(item);
@@ -52,6 +54,14 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
         break;
       }
     }
+    for (var item in _allCharacters) {
+      if (item.name == "Vanquisher") {
+        _allCharacters.remove(item);
+        vq = item;
+        break;
+      }
+    }
+
     _foundCharacters = _allCharacters;
     _foundCharacters.sort((a, b) {
       if (a.edition != b.edition) {
@@ -82,6 +92,10 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       if (enteredKeyword.toLowerCase() == "bladeswarm") {
         //unlocked it!
         results = [bs];
+      }
+      if (enteredKeyword.toLowerCase() == "vanquisher") {
+        //unlocked it!
+        results = [vq];
       }
       // we use the toLowerCase() method to make it case-insensitive
     }

@@ -67,6 +67,16 @@ class MonsterInstance extends FigureState{
         }
         maxHealth.value = value;
       }
+      if(newHealthValue == "Incarnate"){
+        int value = 36; //double Incarante's level 5 health
+        for(var item in getIt<GameState>().currentList) {
+          if(item is Character && item.id == "Incarnate") {
+            value = item.characterClass.healthByLevel[item.characterState.level.value-1] * 2;
+            break;
+          }
+        }
+        maxHealth.value = value;
+      }
 
     }
     //maxHealth.value = StatCalculator.calculateFormula(newHealthValue)!;

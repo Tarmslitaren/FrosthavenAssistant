@@ -25,6 +25,11 @@
       "move": 1,
       "attack":  0
     },
+    "Harrower Swarm": {
+      "health": 3,
+      "move": 3,
+      "attack":  2
+    },
     "custom": {
       "health": 2,
       "move": 2,

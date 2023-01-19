@@ -358,7 +358,7 @@
       "edition": "Gloomhaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "dontList": true,
+      "noListing": true,
       "summons": {
         "Soul Leeches": {
           "level": 1,

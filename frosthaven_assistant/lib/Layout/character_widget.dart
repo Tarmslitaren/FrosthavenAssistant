@@ -295,6 +295,66 @@ class CharacterWidgetState extends State<CharacterWidget> {
     ]);
   }
 
+
+  SweepGradient buildGradiantBackground(List<Color> colors) {
+    int nrOfColorEntries = colors.length * 3 +1;
+
+    List<Color> endList = [];
+    for (int i = 0; i < 3; i++) {
+      for (Color color in colors) {
+        endList.add(color);
+      }
+    }
+    endList.add(colors[0]);
+
+    List<double> stops = [];
+    stops.add(0);
+    for (int i = 1; i < nrOfColorEntries-1; i++) {
+      stops.add(i/nrOfColorEntries);
+    }
+    stops.add(1);
+
+    return SweepGradient(
+        center: FractionalOffset.bottomRight,
+        transform: GradientRotation(2),
+        tileMode: TileMode.mirror,
+        colors: endList,
+
+        /*[
+          Colors.yellow,
+          Colors.purple,
+          Colors.teal,
+          Colors.white24,
+          Colors.yellow,
+          Colors.purple,
+          Colors.teal,
+          Colors.white24,
+          Colors.yellow,
+          Colors.purple,
+          Colors.teal,
+          Colors.white24,
+          Colors.yellow,
+        ],*/
+        stops: stops
+      /* [
+          0,
+          1 / 13,
+          2 / 13,
+          3 / 13,
+          4 / 13,
+          5 / 13,
+          6 / 13,
+          7 / 13,
+          8 / 13,
+          9 / 13,
+          10 / 13,
+          12 / 13,
+          1
+        ]*/
+    );
+
+  }
+
   Widget buildInternal(BuildContext context) {
     double scale = getScaleByReference(context);
     double scaledHeight = 60 * scale;
@@ -351,10 +411,11 @@ class CharacterWidgetState extends State<CharacterWidget> {
                       image: DecorationImage(
                           fit: BoxFit.fill,
                           colorFilter:
-                              character.characterClass.name == "Shattersong"
-                                  ? const ColorFilter.mode(
-                                  Colors.white,
-                                  BlendMode.softLight)
+                          character.characterClass.name == "Shattersong" || character.characterClass.name == "Rimehearth"
+                                  ?  ColorFilter.mode(
+                              character.characterClass.color,
+                                  BlendMode.softLight
+                          )
                                   : ColorFilter.mode(
                                       character.characterClass.colorSecondary,
                                       BlendMode.color),
@@ -365,45 +426,22 @@ class CharacterWidgetState extends State<CharacterWidget> {
                     ),
                       child: Container(
                         decoration: BoxDecoration(
-                            backgroundBlendMode: character.characterClass.name == "Shattersong"? BlendMode.multiply: null,
-                            gradient: character.characterClass.name == "Shattersong"
-                                ? const SweepGradient(
-                                center: FractionalOffset.bottomRight,
-                                transform: GradientRotation(2),
-                                tileMode: TileMode.mirror,
-                                colors: [
-                                  //character.characterClass.color,
-                                  //  character.characterClass.color,
+                            backgroundBlendMode: (character.characterClass.name == "Shattersong" ||
+                                character.characterClass.name == "Rimehearth")
+                                ? BlendMode.multiply: null,
+                            gradient: (character.characterClass.name == "Shattersong")
+                                ? buildGradiantBackground([
                                   Colors.yellow,
-                                  Colors.purple,
-                                  Colors.teal,
-                                  Colors.white24,
-                                  Colors.yellow,
-                                  Colors.purple,
-                                  Colors.teal,
-                                  Colors.white24,
-                                  Colors.yellow,
-                                  Colors.purple,
-                                  Colors.teal,
-                                  Colors.white24,
-                                  Colors.yellow,
-                                ],
-                                stops: [
-                                  0,
-                                  1 / 13,
-                                  2 / 13,
-                                  3 / 13,
-                                  4 / 13,
-                                  5 / 13,
-                                  6 / 13,
-                                  7 / 13,
-                                  8 / 13,
-                                  9 / 13,
-                                  10 / 13,
-                                  12 / 13,
-                                  1
-                                ])
-                                : null,
+                              Colors.purple,
+                              Colors.teal,
+                              Colors.white24])
+                                :
+                            character.characterClass.name == "Rimehearth"
+                                ? buildGradiantBackground([
+                              character.characterClass.colorSecondary,
+                              character.characterClass.color])
+                            :
+                            null
                             )
                         ),
                   ),

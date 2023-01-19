@@ -2002,6 +2002,54 @@
 					"init": 99,
 					"health": "6+L"
 				}]
+		},
+
+		"#51 Incarnate: Unsouled": {
+			"monsters": [ "Inox Archer", "Inox Guard", "Inox Guard (ally)"]
+		},
+		"#52 Rimehearth: Conflux of Power": {
+			"monsters": [ "Savvas Acolyte","Inferno Demon", "Glacier Demon", "Flame Demon", "Frost Demon" ]
+		},
+
+		"#53 Shardrender: Corrupted Presence": {
+			"monsters": [ "Deep Terror (TOA 81)","Frost Demon", "Living Spirit", "Night Demon", "Tendril of Corruption"],
+			"special": [
+				{
+					"type": "Timer",
+					"note": "Read section 42.B",
+					"list": [2],
+					"startOfRound": false
+				},
+				{
+					"type": "Timer",
+					"note": "Simultaneously move your character to the hex that contains your character token and move that character token to the hex you occupied.",
+					"list": [4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+					"startOfRound": false
+				}
+			]
+		},
+		"#54 Tempest: Storm Mountain": {
+			"monsters": [ "Stone Golem", "Volt Demon", "Wind Demon"]
+		},
+		"#55 Thornreaper: Collapsed Cavern": {
+			"monsters": [ "Black Imp","Cave Bear","Deep Terror","Earth Demon","Forest Imp", "Living Bones"],
+			"special": [
+				{
+					"type": "Timer",
+					"note": "Read section 48.B",
+					"list": [5],
+					"startOfRound": false
+				},
+				{
+					"type": "Timer",
+					"note": "Read section 48.C",
+					"list": [9],
+					"startOfRound": false
+				}
+			]
+		},
+		"#56 Vanquisher: Return to Crystal Gardens": {
+			"monsters": [ "Shardrender (84)", "Smoke Spirit"]
 		}
 	},
 	"sections": {
@@ -2039,6 +2087,9 @@
 		},
 		"#QA2 Mechanical Menace": {
 			"monsters": [ "Clockwork Devastator" ]
+		},
+		"#38A (Scenario 79)": {
+			"monsters": ["Okeda"]
 		}
 	}
 }
