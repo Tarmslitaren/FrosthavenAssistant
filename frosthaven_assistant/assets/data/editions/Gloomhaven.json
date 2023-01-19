@@ -3747,6 +3747,87 @@
         }
       ]
     },
+    "Prime Demon (36)": {
+      "deck": "Boss",
+      "hidden": true,
+      "gfx": "Prime Demon",
+      "display": "Prime Demon",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "8xCx2",
+          "move": 3,
+          "attack": 4,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 1,
+          "health": "9xCx2",
+          "move": 4,
+          "attack": 4,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 2,
+          "health": "10xCx2",
+          "move": 4,
+          "attack": 5,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 3,
+          "health": "12xCx2",
+          "move": 4,
+          "attack": 6,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 4,
+          "health": "14xCx2",
+          "move": 5,
+          "attack": 6,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 5,
+          "health": "16xCx2",
+          "move": 5,
+          "attack": 7,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 6,
+          "health": "20xCx2",
+          "move": 5,
+          "attack": 7,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 7,
+          "health": "22xCx2",
+          "move": 5,
+          "attack": 8,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        }
+      ]
+    },
     "The Sightless Eye": {
       "deck": "Boss",
       "count": 1,
@@ -4185,7 +4266,7 @@
         ]
       },
       "#36 Gloomhaven Battlements B": {
-        "monsters": [ "Flame Demon", "Frost Demon", "Earth Demon", "Wind Demon", "City Archer", "Prime Demon" ],
+        "monsters": [ "Flame Demon", "Frost Demon", "Earth Demon", "Wind Demon", "City Archer", "Prime Demon (36)" ],
         "special": [
           {
             "type": "Objective",
