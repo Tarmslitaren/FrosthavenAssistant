@@ -1274,10 +1274,10 @@
       "monsters": [ "Deep Terror", "Smoke Spirit", "Spitting Drake", "Vermling Scavenger"]
     },
     "#68 Rival Explorers": {
-      "monsters": [ "Ancient Artillery", "Smoke Spirit", "Vermling shaman (TOA 68)", "Vermling scout (TOA 68)"]
+      "monsters": [ "Ancient Artillery", "Smoke Spirit", "Vermling Shaman (TOA 68)", "Vermling Scout (TOA 68)"]
     },
     "#69 Shaman Chaperone": {
-      "monsters": [ "Cave Bear", "Earth Demon", "Hound", "Inox shaman", "Vermling scout", "Talo"],
+      "monsters": [ "Cave Bear", "Earth Demon", "Hound", "Inox Shaman", "Vermling Scout", "Talo"],
       "special": [
         {
           "type": "Allies",
@@ -1307,7 +1307,7 @@
       "monsters": [ "Black Imp","Harrower Bugflute", "Harrower Infester"]
     },
     "#75 Sunken Temple": {
-      "monsters": [ "Depp Terror","Lurker", "Stone Golem"]
+      "monsters": [ "Deep Terror","Lurker", "Stone Golem"]
     },
     "#76 Untold Woe": {
       "monsters": [ "Flame Demon","Gnashing Drake", "Hound", "Spitting Drake", "Sun Demon"]
