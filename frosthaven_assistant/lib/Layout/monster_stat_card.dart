@@ -171,6 +171,16 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
               }
             }
           }
+          if (health == "Incarnate") {
+            health = "36";
+            for (var item in getIt<GameState>().currentList) {
+              if (item is Character && item.id == "Incarnate") {
+                health = (item.characterClass
+                    .healthByLevel[item.characterState.level.value - 1] * 2)
+                    .toString();
+              }
+            }
+          }
 
           int? moveValue = StatCalculator.calculateFormula(normal.move);
           String move = normal.move.toString();
