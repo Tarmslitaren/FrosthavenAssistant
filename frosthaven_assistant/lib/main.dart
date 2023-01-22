@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    debugInvertOversizedImages = false;
 
      //call after keyboard
     if (Platform.isIOS || Platform.isAndroid) {
@@ -54,7 +55,6 @@ class MyApp extends StatelessWidget {
 
     getIt<Settings>().init();
 
-    //getIt<Settings>().setFullscreen(true);
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         //debugShowMaterialGrid: true,
