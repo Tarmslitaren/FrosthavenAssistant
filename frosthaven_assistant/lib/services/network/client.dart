@@ -20,7 +20,7 @@ class Client {
     try {
       int port = int.parse(getIt<Settings>().lastKnownPort);
       print("port nr: ${port.toString()}");
-      await Socket.connect(address, port).then((Socket socket) {
+      await Socket.connect(InternetAddress(address), port).then((Socket socket) {
         runZoned(() {
           _socket = socket;
           _socket?.setOption(SocketOption.tcpNoDelay, true);
