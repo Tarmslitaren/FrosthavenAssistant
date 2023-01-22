@@ -24,14 +24,23 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   final GameState _gameState = getIt<GameState>();
   final Settings settings = getIt<Settings>();
 
+
+  void _modelDataListener() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _gameState.modelData.removeListener(_modelDataListener);
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
 
     //to load save state
-    _gameState.modelData.addListener(() {
-      setState(() {});
-    });
+    _gameState.modelData.addListener(_modelDataListener);
   }
 
   Widget buildStayAnimation(Widget child) {

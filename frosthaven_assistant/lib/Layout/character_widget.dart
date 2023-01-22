@@ -43,6 +43,33 @@ class CharacterWidgetState extends State<CharacterWidget> {
   late Character character;
   final focusNode = FocusNode();
 
+  void _textFieldControllerListener() {
+    for (var item in _gameState.currentList) {
+      if (item is Character) {
+        if (item.id == character.id) {
+          if (_initTextFieldController.value.text.isNotEmpty &&
+              _initTextFieldController.value.text !=
+                  character.characterState.initiative.value.toString() &&
+              _initTextFieldController.value.text.isNotEmpty &&
+              _initTextFieldController.value.text != "??") {
+            int? init = int.tryParse(_initTextFieldController.value.text);
+            if (init != null && init != 0) {
+              CharacterWidget.localCharacterInitChanges.add(character.id);
+              _gameState.action(SetInitCommand(character.id, init));
+            }
+          }
+          break;
+        }
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _initTextFieldController.removeListener(_textFieldControllerListener);
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -56,26 +83,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
     if (widget.initPreset != null) {
       _initTextFieldController.text = widget.initPreset.toString();
     }
-    _initTextFieldController.addListener(() {
-      for (var item in _gameState.currentList) {
-        if (item is Character) {
-          if (item.id == character.id) {
-            if (_initTextFieldController.value.text.isNotEmpty &&
-                _initTextFieldController.value.text !=
-                    character.characterState.initiative.value.toString() &&
-                _initTextFieldController.value.text.isNotEmpty &&
-                _initTextFieldController.value.text != "??") {
-              int? init = int.tryParse(_initTextFieldController.value.text);
-              if (init != null && init != 0) {
-                CharacterWidget.localCharacterInitChanges.add(character.id);
-                _gameState.action(SetInitCommand(character.id, init));
-              }
-            }
-            break;
-          }
-        }
-      }
-    });
+    _initTextFieldController.addListener(_textFieldControllerListener);
 
     if (character.characterClass.name == "Objective" ||
         character.characterClass.name == "Escort") {

@@ -31,11 +31,11 @@ class ScrollDetector extends StatelessWidget {
 
 class AdjustableScrollController extends ScrollController {
   AdjustableScrollController([int extraScrollSpeed = 30]) {
-    super.addListener(() {
+    /*super.addListener(() {
       ScrollDirection scrollDirection = super.position.userScrollDirection;
       if (scrollDirection != ScrollDirection.idle) {
         //TODO: this does not fix mouse wheel scroll for android devices. Also screws up trackpad.
-        /*if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+        if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
           double scrollEnd = super.offset +
               (scrollDirection == ScrollDirection.reverse
                   ? extraScrollSpeed
@@ -44,8 +44,8 @@ class AdjustableScrollController extends ScrollController {
               max(super.position.minScrollExtent, scrollEnd));
           jumpTo(scrollEnd);
           //totally screws up non mousewheel scrolling...
-        }*/
+        }
       }
-    });
+    })*/;
   }
 }

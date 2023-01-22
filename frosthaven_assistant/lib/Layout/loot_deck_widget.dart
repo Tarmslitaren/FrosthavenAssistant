@@ -24,14 +24,22 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   final GameState _gameState = getIt<GameState>();
   final Settings settings = getIt<Settings>();
 
+  void _modelDataListenerLootDeck() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _gameState.modelData.removeListener(_modelDataListenerLootDeck);
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
 
     //to load save state
-    _gameState.modelData.addListener(() {
-      setState(() {});
-    });
+    _gameState.modelData.addListener(_modelDataListenerLootDeck);
   }
 
   Widget buildStayAnimation(Widget child) {

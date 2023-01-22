@@ -25,18 +25,26 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   final TextEditingController nameController = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
+  void _focusNodeListener() {
+    if (!focusNode.hasFocus) {
+      if (nameController.text.isNotEmpty) {
+        widget.character.characterState.display.value = nameController.text;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    focusNode.removeListener(_focusNodeListener);
+    super.dispose();
+  }
+
   @override
   initState() {
     // at the beginning, all items are shown
     super.initState();
 
-    focusNode.addListener(() {
-      if (!focusNode.hasFocus) {
-        if (nameController.text.isNotEmpty) {
-          widget.character.characterState.display.value = nameController.text;
-        }
-      }
-    });
+    focusNode.addListener(_focusNodeListener);
   }
 
   Widget buildLevelButton(int nr, double scale) {

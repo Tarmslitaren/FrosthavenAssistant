@@ -35,6 +35,31 @@ class AnimatedContainerButtonState extends State<ElementButton> {
   late BorderRadiusGeometry _borderRadius;
 
   @override
+  void dispose() {
+    _gameState.elementState.removeListener(elementListener);
+    super.dispose();
+  }
+
+  void elementListener() {
+    if (_gameState.elementState.value[widget.element] != null) {
+      ElementState state = _gameState.elementState.value[widget.element]!;
+      if (state == ElementState.full) {
+        if (mounted) {
+          setState(() {
+            setFull();
+          });
+        }
+      } else if (state == ElementState.half) {
+        if (mounted) {
+          setState(() {
+            setHalf();
+          });
+        }
+      }
+    }
+  }
+
+  @override
   void initState() {
     super.initState();
     _height = widget.width * settings.userScalingBars.value;
@@ -44,24 +69,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
             widget.borderWidth * settings.userScalingBars.value * 2));
 
     //to load save state
-    _gameState.elementState.addListener(() {
-      if (_gameState.elementState.value[widget.element] != null) {
-        ElementState state = _gameState.elementState.value[widget.element]!;
-        if (state == ElementState.full) {
-          if (mounted) {
-            setState(() {
-              setFull();
-            });
-          }
-        } else if (state == ElementState.half) {
-          if (mounted) {
-            setState(() {
-              setHalf();
-            });
-          }
-        }
-      }
-    });
+    _gameState.elementState.addListener(elementListener);
   }
 
   void setHalf() {

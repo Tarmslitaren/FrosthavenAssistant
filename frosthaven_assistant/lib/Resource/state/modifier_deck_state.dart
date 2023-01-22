@@ -25,18 +25,24 @@ class ModifierCard {
   }
 }
 
+
 class ModifierDeck {
   ModifierDeck(this.name) {
     //build deck
     initDeck(name);
-    curses.addListener(() {
-      _handleCurseBless(CardType.curse, curses, "curse");
-    });
+    curses.removeListener(_curseListener);
+    blesses.removeListener(_blessListener);
 
-    blesses.addListener(() {
-      _handleCurseBless(CardType.bless, blesses, "bless");
-    });
+    curses.addListener(_curseListener);
+    blesses.addListener(_blessListener);
+  }
 
+  void _curseListener() {
+    _handleCurseBless(CardType.curse, curses, "curse");
+  }
+
+  void _blessListener() {
+    _handleCurseBless(CardType.bless, blesses, "bless");
   }
 
   void initDeck(String name) {
