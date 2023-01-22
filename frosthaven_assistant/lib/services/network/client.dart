@@ -109,8 +109,8 @@ class Client {
 
         // handle errors
         onError: (error) {
-          print('Client error: $error');
-          getIt<Network>().networkMessage.value = "client error: $error";
+          print('Client error: ${error.toString()}');
+          getIt<Network>().networkMessage.value = "client error: ${error.toString()}";
           _socket?.destroy();
           _cleanup();
         },
@@ -125,6 +125,7 @@ class Client {
       );
     } catch (error) {
       print(error);
+      getIt<Network>().networkMessage.value = "client listen error: ${error.toString()}";
       _socket?.destroy();
       getIt<Network>().networkMessage.value = error.toString();
       _cleanup();
