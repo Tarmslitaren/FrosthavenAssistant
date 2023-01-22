@@ -69,7 +69,7 @@ class ConditionIconState extends State<ConditionIcon> {
     GameState gameState = getIt<GameState>();
     Command? command;
     //TODO: does not work at all when networked. index value wrong
-    if (gameState.commandIndex.value >= 0 && gameState.commands.isNotEmpty) {
+    if (gameState.commandIndex.value >= 0 && gameState.commands.length > gameState.commandIndex.value) {
       command = gameState.commands[gameState.commandIndex.value];
     }
     if (command is TurnDoneCommand) {
