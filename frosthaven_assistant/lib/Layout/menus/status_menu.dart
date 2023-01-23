@@ -60,6 +60,8 @@ class StatusMenu extends StatefulWidget {
 
   //poison2,
 
+  //dodge (only character's and 'allies' so basically everyone.
+
   //only characters;
   //chill, ((only certain scenarios/monsters)
   //infect,((only certain scenarios/monsters)
@@ -615,7 +617,7 @@ class StatusMenuState extends State<StatusMenu> {
                             buildConditionButton(Condition.impair, figureId,
                                 ownerId, immunities, scale),
                           buildConditionButton(Condition.rupture, figureId,
-                              ownerId, immunities, scale),
+                              ownerId, immunities, scale)
                         ],
                       )
                     : !hasMireFoot
@@ -654,6 +656,8 @@ class StatusMenuState extends State<StatusMenu> {
                         ownerId, immunities, scale),
                     buildConditionButton(
                         Condition.ward, figureId, ownerId, immunities, scale),
+                    buildConditionButton(Condition.dodge, figureId,
+                        ownerId, immunities, scale),
                   ],
                 ),
               ],

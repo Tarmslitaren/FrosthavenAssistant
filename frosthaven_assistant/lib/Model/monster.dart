@@ -22,7 +22,7 @@ class MonsterModel {
     // this is required if robust lint rules are enabled
     //final name = data['name'] as String;
     if(kDebugMode) {
-      print(name);
+      //print(name);
     }
 
 

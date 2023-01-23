@@ -19,7 +19,8 @@ enum Condition{
   strengthen,
   invisible,
   regenerate,
-  ward;
+  ward,
+  dodge;
 
   @override
   String toString() {

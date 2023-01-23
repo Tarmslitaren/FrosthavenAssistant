@@ -128,6 +128,9 @@ bool hasGHVersion(String name) {
   if (name.contains("aoe")) {
     return false;
   }
+  if (name == ("dodge")) {
+    return false;
+  }
   if (name == "bane") {
     return false;
   }
