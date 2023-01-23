@@ -170,6 +170,17 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),
+                              CheckboxListTile(
+                                  title:
+                                  const Text("Show Custom Content"),
+                                  value: settings.showCustomContent.value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      settings.showCustomContent.value = value!;
+                                      settings.saveToDisk();
+                                      getIt<GameState>().updateAllUI();
+                                    });
+                                  }),
                               Container(
                                 constraints: const BoxConstraints(
                                     minWidth: double.infinity),

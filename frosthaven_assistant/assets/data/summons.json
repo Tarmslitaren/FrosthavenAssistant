@@ -20,6 +20,11 @@
       "move": 2,
       "attack":  3
     },
+    "custom": {
+      "health": 2,
+      "move": 2,
+      "attack":  2
+    },
     "Delicate Model": {
       "health": 1,
       "move": 1,
@@ -37,11 +42,6 @@
     },
     "Water Spirit": {
       "health": 3,
-      "move": 2,
-      "attack":  2
-    },
-    "custom": {
-      "health": 2,
       "move": 2,
       "attack":  2
     }

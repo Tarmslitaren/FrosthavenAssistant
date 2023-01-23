@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
@@ -71,6 +72,21 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
           }
         }
       }
+    }
+
+    if(campaign == "Solo" && getIt<Settings>().showCustomContent.value == false) {
+      _foundScenarios.removeWhere((scenario) {
+        List<String> strings = scenario.split(':');
+        strings[0] = strings[0].replaceFirst(" ", "Å");
+        String characterName = strings[0].split("Å")[1];
+        if(_gameState.modelData.value.entries.any((element) =>
+        GameMethods.isCustomCampaign(element.value.edition) && element.value.characters.any(
+                (element) => element.name == characterName))) {
+          return true;
+        }
+
+        return false;
+      });
     }
 
     _foundScenarios.sort((a, b) {
@@ -195,14 +211,16 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     List<Widget> retVal = [];
     for( String item in _gameState.editions) {
       if(item != "na") {
-        retVal.add(TextButton(
-            onPressed: () {
-              setState(() {
-                setCampaign(item);
-              });
-            },
-            child: Text(item)
-        ));
+        if(getIt<Settings>().showCustomContent.value == true || !GameMethods.isCustomCampaign(item)) {
+          retVal.add(TextButton(
+              onPressed: () {
+                setState(() {
+                  setCampaign(item);
+                });
+              },
+              child: Text(item)
+          ));
+        }
       }
     }
     return retVal;

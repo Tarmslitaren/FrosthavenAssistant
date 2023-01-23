@@ -50,6 +50,11 @@ class AddSummonMenuState extends State<AddSummonMenu> {
       }
     }
     _summonList.addAll(_gameState.itemSummonData);
+    
+    if(getIt<Settings>().showCustomContent.value == false) {
+      //-4 because there are 4 custom summons. I know.
+      _summonList.removeRange(_summonList.length-4, _summonList.length);
+    }
   }
 
   Widget buildGraphicButton(String summonGfx, double scale) {
@@ -205,7 +210,6 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                           showNr = false;
                         }
                       }
-                      //TODO: gray out if all standees out (or remove from list entirely?)
 
                       return ListTile(
                           leading:

@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Model/monster.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_monster_command.dart';
 import '../../Resource/game_methods.dart';
+import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
@@ -107,6 +108,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     _foundMonsters = _allMonsters.toList();
     if (campaign != "All") {
       _foundMonsters.removeWhere((monster) => monster.edition != campaign);
+    } else if (getIt<Settings>().showCustomContent.value == false) {
+      _foundMonsters.removeWhere((monster) => GameMethods.isCustomCampaign(monster.edition));
     }
 
     if (!_showSpecial) {
@@ -126,9 +129,11 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
 
     for(String item in _gameState.editions) {
       if(item != "na") {
-        retVal.add(DropdownMenuItem<String>(
-            value: item,
-            child: Text(item)));
+        if(!GameMethods.isCustomCampaign(item) || getIt<Settings>().showCustomContent.value == true) {
+          retVal.add(DropdownMenuItem<String>(
+              value: item,
+              child: Text(item)));
+        }
       }
     }
 

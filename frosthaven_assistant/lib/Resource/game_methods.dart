@@ -617,4 +617,14 @@ class GameMethods {
         getIt<Settings>().style.value == Style.original && getIt<GameState>().currentCampaign.value == "Frosthaven";
     return frosthavenStyle;
   }
+
+  static bool isCustomCampaign(String campaign) {
+    if(campaign == "Crimson Scales") {
+      return true;
+    }
+    if(campaign == "Trail of Ashes") {
+      return true;
+    }
+    return false;
+  }
 }

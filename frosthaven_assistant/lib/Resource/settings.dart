@@ -32,6 +32,7 @@ class Settings {
   final hideLootDeck = ValueNotifier<bool>(false);
   final shimmer = ValueNotifier<bool>(true);
   final showScenarioNames = ValueNotifier<bool>(true);
+  final showCustomContent = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -216,6 +217,9 @@ class Settings {
       if (data["showScenarioNames"] != null) {
         showScenarioNames.value = data["showScenarioNames"];
       }
+      if (data["showCustomContent"] != null) {
+        showCustomContent.value = data["showCustomContent"];
+      }
 
       if (data["connectClientOnStartup"] != null && data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
@@ -267,6 +271,7 @@ class Settings {
         '"darkMode": ${darkMode.value}, '
         '"shimmer": ${shimmer.value}, '
         '"showScenarioNames": ${showScenarioNames.value}, '
+        '"showCustomContent": ${showCustomContent.value}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort" '

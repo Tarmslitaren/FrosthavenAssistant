@@ -294,6 +294,7 @@ class StatusMenuState extends State<StatusMenu> {
 
   @override
   Widget build(BuildContext context) {
+    bool showCustomContent = getIt<Settings>().showCustomContent.value;
     bool hasMireFoot = false;
     bool hasIncarnate = false;
     bool isSummon = (widget.monsterId == null &&
@@ -301,10 +302,10 @@ class StatusMenuState extends State<StatusMenu> {
             widget
                 .figureId); //hack - should have monsterBox send summon data instead
     for (var item in _gameState.currentList) {
-      if (item.id == "Mirefoot") {
+      if (item.id == "Mirefoot" && showCustomContent) {
         hasMireFoot = true;
       }
-      if (item.id == "Incarnate") {
+      if (item.id == "Incarnate" && showCustomContent) {
         hasIncarnate = true;
       }
     }
@@ -359,7 +360,6 @@ class StatusMenuState extends State<StatusMenu> {
     //has to be summon
 
     //get id and owner Id
-
     Character? character;
     if (widget.characterId != null) {
       for (var item in _gameState.currentList) {
@@ -521,7 +521,7 @@ class StatusMenuState extends State<StatusMenu> {
                           ownerId: ownerId,
                           scale: scale)
                           : Container(),
-                      buildChillButtons(
+                      if (showCustomContent) buildChillButtons(
                           figure.chill,
                           12,
                           //technically you can have infinite, but realistically not so much
@@ -627,12 +627,12 @@ class StatusMenuState extends State<StatusMenu> {
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          buildConditionButton(Condition.infect, figureId,
+                          if(showCustomContent) buildConditionButton(Condition.infect, figureId,
                               ownerId, immunities, scale),
                           if (!isSummon)
                             buildConditionButton(Condition.impair, figureId,
                                 ownerId, immunities, scale),
-                          buildConditionButton(Condition.rupture, figureId,
+                          if(showCustomContent) buildConditionButton(Condition.rupture, figureId,
                               ownerId, immunities, scale)
                         ],
                       )
@@ -640,9 +640,9 @@ class StatusMenuState extends State<StatusMenu> {
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              buildConditionButton(Condition.poison2, figureId,
+                              if(showCustomContent) buildConditionButton(Condition.poison2, figureId,
                                   ownerId, immunities, scale),
-                              buildConditionButton(Condition.rupture, figureId,
+                              if(showCustomContent) buildConditionButton(Condition.rupture, figureId,
                                   ownerId, immunities, scale),
                             ],
                           )
@@ -672,7 +672,7 @@ class StatusMenuState extends State<StatusMenu> {
                         ownerId, immunities, scale),
                     buildConditionButton(
                         Condition.ward, figureId, ownerId, immunities, scale),
-                    buildConditionButton(Condition.dodge, figureId,
+                    if(showCustomContent) buildConditionButton(Condition.dodge, figureId,
                         ownerId, immunities, scale),
                   ],
                 ),
