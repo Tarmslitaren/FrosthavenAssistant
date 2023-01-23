@@ -140,6 +140,9 @@ bool hasGHVersion(String name) {
   if (name == "curse") {
     return false;
   }
+  if (name == "enfeeble") {
+    return false;
+  }
   if (name == "brittle") {
     return false;
   }

@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/chan
 
 import '../../Resource/commands/add_condition_command.dart';
 import '../../Resource/commands/change_stat_commands/change_chill_command.dart';
+import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
 import '../../Resource/commands/change_stat_commands/change_health_command.dart';
 import '../../Resource/commands/ice_wraith_change_form_command.dart';
 import '../../Resource/commands/remove_condition_command.dart';
@@ -294,6 +295,7 @@ class StatusMenuState extends State<StatusMenu> {
   @override
   Widget build(BuildContext context) {
     bool hasMireFoot = false;
+    bool hasIncarnate = false;
     bool isSummon = (widget.monsterId == null &&
         widget.characterId !=
             widget
@@ -301,7 +303,9 @@ class StatusMenuState extends State<StatusMenu> {
     for (var item in _gameState.currentList) {
       if (item.id == "Mirefoot") {
         hasMireFoot = true;
-        break;
+      }
+      if (item.id == "Incarnate") {
+        hasIncarnate = true;
       }
     }
 
@@ -375,7 +379,7 @@ class StatusMenuState extends State<StatusMenu> {
 
     return Container(
         width: 340 * scale,
-        height: 211 * scale + 30 * scale,
+        height: 211 * scale + 30 * scale + ((hasIncarnate && widget.monsterId != null && !isSummon) ? 40 * scale: 0),
         decoration: BoxDecoration(
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
@@ -504,6 +508,18 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId: figureId,
                               ownerId: ownerId,
                               scale: scale)
+                          : Container(),
+                      widget.monsterId != null && hasIncarnate
+                          ? CounterButton(
+                          deck.enfeebles,
+                          ChangeEnfeebleCommand(0, figureId, ownerId),
+                          10,
+                          "assets/images/abilities/enfeeble.png",
+                          true,
+                          Colors.white,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          scale: scale)
                           : Container(),
                       buildChillButtons(
                           figure.chill,

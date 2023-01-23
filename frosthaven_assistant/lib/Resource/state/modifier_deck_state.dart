@@ -9,6 +9,7 @@ enum CardType {
   multiply,
   curse,
   bless,
+  enfeeble
 }
 
 class ModifierCard {
@@ -32,9 +33,11 @@ class ModifierDeck {
     initDeck(name);
     curses.removeListener(_curseListener);
     blesses.removeListener(_blessListener);
+    enfeebles.removeListener(_enfeebleListener);
 
     curses.addListener(_curseListener);
     blesses.addListener(_blessListener);
+    enfeebles.addListener(_enfeebleListener);
   }
 
   void _curseListener() {
@@ -43,6 +46,10 @@ class ModifierDeck {
 
   void _blessListener() {
     _handleCurseBless(CardType.bless, blesses, "bless");
+  }
+
+  void _enfeebleListener() {
+    _handleCurseBless(CardType.enfeeble, enfeebles, "enfeeble");
   }
 
   void initDeck(String name) {
@@ -68,6 +75,7 @@ class ModifierDeck {
     cardCount.value = drawPile.size();
     curses.value = 0;
     blesses.value = 0;
+    enfeebles.value = 0;
     badOmen.value = 0;
     addedMinusOnes.value = 0;
     needsShuffle = false;
@@ -81,6 +89,7 @@ class ModifierDeck {
 
   final curses = ValueNotifier<int>(0);
   final blesses = ValueNotifier<int>(0);
+  final enfeebles = ValueNotifier<int>(0);
   final cardCount = ValueNotifier<int>(
       0); //TODO: everything is a hammer - use maybe change notifier instead?
 
@@ -194,7 +203,7 @@ class ModifierDeck {
     while (discardPile.isNotEmpty) {
       ModifierCard card = discardPile.pop();
       //remove curse and bless
-      if (card.type != CardType.bless && card.type != CardType.curse) {
+      if (card.type != CardType.bless && card.type != CardType.curse && card.type != CardType.enfeeble) {
         drawPile.push(card);
       }
     }
@@ -220,6 +229,9 @@ class ModifierDeck {
     if (card.type == CardType.bless) {
       blesses.value--;
     }
+    if (card.type == CardType.enfeeble) {
+      enfeebles.value--;
+    }
 
     discardPile.push(card);
     cardCount.value = drawPile.size();
@@ -231,6 +243,7 @@ class ModifierDeck {
         //'"cardCount": ${cardCount.value}, '
         '"blesses": ${blesses.value}, '
          '"curses": ${curses.value}, '
+        '"enfeebles": ${curses.value}, '
         // '"needsShuffle": ${needsShuffle}, '
         '"addedMinusOnes": ${addedMinusOnes.value.toString()}, '
         '"badOmen": ${badOmen.value.toString()}, '

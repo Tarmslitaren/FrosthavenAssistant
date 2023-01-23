@@ -41,6 +41,7 @@ class LineBuilder {
     "pull": "PULL",
     "pierce": "PIERCE",
     "curse": "CURSE",
+    "enfeeble": "ENFEEBLE",
     "bless": "BLESS",
     "damage": "damage",
     "and": "and"
@@ -92,8 +93,9 @@ class LineBuilder {
     if (iconToken == "pierce" ||
         iconToken == "target" ||
         iconToken == "curse" ||
+        iconToken == "enfeeble" ||
         iconToken == "bless" ||
-        iconToken == "curse" ||
+        iconToken == "enfeeble" ||
         iconToken == "push" ||
         iconToken == "pull" ||
         iconToken.contains("poison") ||

@@ -180,6 +180,7 @@ class FrosthavenConverter {
         ((iconToken == "pierce" ||
             iconToken == "brittle" ||
             iconToken == "curse" ||
+            iconToken == "enfeeble" ||
             iconToken == "bless" ||
             iconToken == "invisible" ||
             iconToken == "strengthen" ||

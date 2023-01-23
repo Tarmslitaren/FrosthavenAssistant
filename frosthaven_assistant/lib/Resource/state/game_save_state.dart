@@ -34,7 +34,6 @@ class GameSaveState{
     state.hasCard1419 = lootDeckData["1419"];
 
     if(lootDeckData.containsKey('enhancements')) {
-      //TODO: test loading enhancements
       state.enhancements = Map<int, int>.from(lootDeckData['enhancements']);
     } else {
       state.enhancements = {};
@@ -118,6 +117,9 @@ class GameSaveState{
       if (gfx == "curse") {
         newDrawList.add(ModifierCard(CardType.curse, gfx));
       }
+      else if (gfx == "enfeeble") {
+        newDrawList.add(ModifierCard(CardType.enfeeble, gfx));
+      }
       else if (gfx == "bless") {
         newDrawList.add(ModifierCard(CardType.bless, gfx));
       }
@@ -132,6 +134,9 @@ class GameSaveState{
       String gfx = item["gfx"];
       if (gfx == "curse") {
         newDiscardList.add(ModifierCard(CardType.curse, gfx));
+      }
+      else if (gfx == "enfeeble") {
+        newDiscardList.add(ModifierCard(CardType.enfeeble, gfx));
       }
       else if (gfx == "bless") {
         newDiscardList.add(ModifierCard(CardType.bless, gfx));
@@ -152,6 +157,10 @@ class GameSaveState{
     if (modifierDeckData.containsKey("curses")) {
       int curses = modifierDeckData['curses'];
       state.curses.value = curses;
+    }
+    if (modifierDeckData.containsKey("enfeebles")) {
+      int enfeebles = modifierDeckData['enfeebles'];
+      state.enfeebles.value = enfeebles;
     }
     if (modifierDeckData.containsKey("blesses")) {
       int blesses = modifierDeckData['blesses'];

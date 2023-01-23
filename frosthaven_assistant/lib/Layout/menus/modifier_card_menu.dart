@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/commands/amd_remove_minus_1_comman
 import 'package:frosthaven_assistant/Resource/commands/bad_omen_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/enfeebling_hex_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:reorderables/reorderables.dart';
 
@@ -12,6 +13,7 @@ import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/amd_remove_minus_2_command.dart';
 import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
+import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
 import '../../Resource/state/character.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/state/modifier_deck_state.dart';
@@ -302,6 +304,17 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                             figureId: "unknown",
                                             ownerId: "unknown",
                                             scale: 1),
+                                        if (GameMethods.getFigure("Incarnate", "Incarnate") != null) CounterButton(
+                                            deck.enfeebles,
+                                            ChangeEnfeebleCommand.deck(deck),
+                                            10,
+                                            "assets/images/abilities/enfeeble.png",
+                                            true,
+                                            Colors.white,
+                                            figureId: "unknown",
+                                            ownerId: "unknown",
+                                            scale: 1),
+
                                       ],
                                     ),
                                     Wrap(

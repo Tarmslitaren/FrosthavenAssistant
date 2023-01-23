@@ -136,7 +136,7 @@
     {
       "name": "Okeda",
       "cards": [
-        [ 999, true, 99, "*Take turn directly after the Incarnate","*mimicking the Incarnate's actions.", "%move% 2", "^if the Incarnate does not move.", "*.........", "%attack% 4", "^ENFEEBLE", "^if the Incarnate does not attack."]
+        [ 999, true, 99, "*              Take turn directly after the Incarnate","*              mimicking the Incarnate's actions.", "%move% 2", "^if the Incarnate does not move.", "*.........", "%attack% 4","^%enfeeble%","[newLine]",  "^if the Incarnate does not attack."]
       ]
     },
     {
