@@ -8,6 +8,7 @@
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "color": "FFDDDE8B",
+      "colorSecondary": "ff777977",
       "summons": {}
     },
     {
@@ -16,6 +17,7 @@
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "color": "FF6D6FB3",
+      "colorSecondary": "ff32375f",
       "summons": {}
     },
     {
@@ -24,6 +26,7 @@
       "health": [9,10,12,14,16,17,19,21,23],
       "hidden": true,
       "color": "FFCD2127",
+      "colorSecondary": "ff762215",
       "summons": {
         "Spotted Hound": {
           "level": 1,
@@ -157,6 +160,7 @@
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "color": "FF63BD57",
+      "colorSecondary": "ff344d23",
       "summons": {
         "Blazing Fire": {
           "level": 1,
@@ -287,6 +291,7 @@
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "color": "FFE65925",
+      "colorSecondary": "ff37341b",
       "summons": {
         "Flailing Ivies": {
           "level": 1,
@@ -306,6 +311,7 @@
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "color": "FFCE6D2F",
+      "colorSecondary": "ff3a312d",
       "summons": {}
     },
     {
@@ -314,6 +320,7 @@
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "color": "FFA59786",
+      "colorSecondary": "ff5b432c",
       "summons": {}
     },
     {
@@ -322,6 +329,7 @@
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "color": "ffbf9eca",
+      "colorSecondary": "ff2e184a",
       "summons": {
         "Gleaming Squid": {
           "level": 9,
@@ -337,6 +345,7 @@
       "health": [7,8,9,10,12,13,14,15,17],
       "hidden": true,
       "color": "ffa04aa5",
+      "colorSecondary": "ff49194d",
       "summons": {}
     },
     {
@@ -345,6 +354,7 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ffc12729",
+      "colorSecondary": "ff471817",
       "summons": {}
     },
     {
@@ -353,6 +363,7 @@
       "health": [12, 14, 17 ,19, 22, 24, 27, 29, 32],
       "hidden": true,
       "color": "fff89521",
+      "colorSecondary": "ff794e1f",
       "summons": {
         "Venator tarantula": {
           "level": 7,
@@ -377,6 +388,7 @@
       "health": [7, 8, 9, 12, 13, 14, 15, 17],
       "hidden": true,
       "color": "ff79bcda",
+      "colorSecondary": "ff415054",
       "summons": {
         "Clockwork Soldier": {
           "level": 1,
