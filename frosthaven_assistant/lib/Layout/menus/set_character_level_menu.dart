@@ -97,6 +97,10 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
         scale = 2;
       }
     }
+
+    bool isObjective = widget.character.characterClass.name == "Objective" ||
+        widget.character.characterClass.name == "Escort";
+
     return Container(
         width: 240 * scale,
         height: 240 * scale,
@@ -113,6 +117,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 height: 20 * scale,
@@ -123,11 +128,12 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   // widget.data.monsterInstances,
                   builder: (context, value, child) {
                     return Text(
-                        "Set ${widget.character.characterState.display.value}'s Level",
+                        isObjective ? "Set ${widget.character.characterState.display.value}'s Health"
+                            :"Set ${widget.character.characterState.display.value}'s Level",
                         style: getTitleTextStyle(scale)
                     );
                   }),
-              Row(
+              if (!isObjective) Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   buildLevelButton(1, scale),
@@ -136,7 +142,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   buildLevelButton(4, scale),
                 ],
               ),
-              Row(
+              if (!isObjective) Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   buildLevelButton(5, scale),

@@ -433,6 +433,7 @@ class StatusMenuState extends State<StatusMenu> {
                     }
                   }
                   bool hasXp = false;
+                  bool isObjective = false;
                   if (widget.characterId != null && !isSummon) {
                     hasXp = true;
                     for (var item in _gameState.currentList) {
@@ -441,6 +442,7 @@ class StatusMenuState extends State<StatusMenu> {
                                 "Objective" ||
                             (item).characterClass.name == "Escort") {
                           hasXp = false;
+                          isObjective = true;
                         }
                       }
                     }
@@ -573,7 +575,7 @@ class StatusMenuState extends State<StatusMenu> {
                                   }
                                 },
                               )),
-                          Text(figure.level.value.toString(),
+                          if(!isObjective) Text(figure.level.value.toString(),
                               style: TextStyle(
                                   fontSize: 14 * scale,
                                   color: Colors.white,
