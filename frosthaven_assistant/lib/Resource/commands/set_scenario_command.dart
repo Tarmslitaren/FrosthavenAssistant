@@ -122,7 +122,6 @@ class SetScenarioCommand extends Command {
       for (var item in _gameState.currentList) {
         //don't add duplicates
         if(item.id == monster) {
-          //TODO: does not handle problems with allies?
           add = false;
           break;
         }

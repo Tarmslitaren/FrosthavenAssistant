@@ -26,6 +26,7 @@ class AddCharacterCommand extends Command {
     }
     newList.insert(0, character);
     _gameState.currentList = newList;
+    GameMethods.updateForSpecialRules();
     _gameState.updateList.value++;
     _gameState.unlockedClasses.add(character.characterClass.name);
   }

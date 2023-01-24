@@ -1,4 +1,8 @@
 
+import 'dart:math';
+
+import 'package:collection/collection.dart';
+import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/Resource/state/character.dart';
 import 'package:frosthaven_assistant/Resource/state/character_state.dart';
 import 'package:frosthaven_assistant/Resource/state/figure_state.dart';
@@ -11,6 +15,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Model/character_class.dart';
 import '../Model/monster.dart';
+import '../Model/scenario.dart';
 import 'commands/add_standee_command.dart';
 import 'enums.dart';
 import 'state/monster_ability_state.dart';
@@ -626,5 +631,34 @@ class GameMethods {
       return true;
     }
     return false;
+  }
+
+  static void updateForSpecialRules() {
+    List<SpecialRule>? rules = _gameState.modelData.value[_gameState.currentCampaign.value]?.scenarios[_gameState.scenario.value]?.specialRules;
+    if(rules != null) {
+      for(SpecialRule rule in rules) {
+        if(rule.type == "Objective" || rule.type == "Escort") {
+          Character? character = _gameState.currentList.firstWhereOrNull((element) => element.id == rule.name) as Character?;
+          if(character != null) {
+            int newHealth = StatCalculator.calculateFormula(rule.health.toString())!;
+            if(newHealth != character.characterState.maxHealth.value) {
+              character.characterState.maxHealth.value = newHealth;
+              character.characterState.health.value = newHealth;
+            }
+          }
+        } else if ( rule.type == "LevelAdjust") {
+          Monster? monster = _gameState.currentList.firstWhereOrNull((element) => element.id == rule.name) as Monster?;
+          if(monster != null) {
+            if(_gameState.level.value == monster.level.value) {
+              int newLevel = min(7,monster.level.value + rule.level);
+              monster.level.value = newLevel;
+              for(MonsterInstance instance in monster.monsterInstances.value) {
+                instance.setLevel(monster);
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

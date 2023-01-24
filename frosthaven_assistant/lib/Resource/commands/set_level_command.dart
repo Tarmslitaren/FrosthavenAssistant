@@ -1,4 +1,6 @@
 
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
+
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
@@ -20,9 +22,9 @@ class SetLevelCommand extends Command {
       for (var item in _gameState.currentList) {
         if(item is Monster) {
           item.setLevel(level);
-          //will overwrite specific level settings, but that is probably ok
         }
       }
+      GameMethods.updateForSpecialRules();
     } else {
       Monster? monster;
       for(var item in _gameState.currentList) {
