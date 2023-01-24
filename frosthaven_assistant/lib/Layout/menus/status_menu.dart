@@ -338,7 +338,7 @@ class StatusMenuState extends State<StatusMenu> {
         for (var item in _gameState.currentList) {
           if (item.id == widget.monsterId) {
             monster = item as Monster;
-            name = monster.type.display;
+            name = "${monster.type.display} ${figure.standeeNr.toString()}";
             if (monster.type.deck == "Ice Wraith") {
               isIceWraith = true;
             }
