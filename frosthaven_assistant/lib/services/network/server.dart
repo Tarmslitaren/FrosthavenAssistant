@@ -34,20 +34,24 @@ class Server {
 
   Future<void> startServer() async {
     //_clients.clear();
-    String connectTo = InternetAddress.anyIPv4.address;//"0.0.0.0";
-    if (getIt<Network>().networkInfo.wifiIPv4.value.isNotEmpty && !getIt<Network>().networkInfo.wifiIPv4.value.contains("Fail")) {
+    String connectTo = InternetAddress.anyIPv4.address; //"0.0.0.0";
+    if (getIt<Network>().networkInfo.wifiIPv4.value.isNotEmpty &&
+        !getIt<Network>().networkInfo.wifiIPv4.value.contains("Fail")) {
       connectTo = getIt<Network>().networkInfo.wifiIPv4.value;
     } else {
-      getIt<Network>().networkInfo.wifiIPv4.value = connectTo; //if not on wifi show local ip?
+      getIt<Network>().networkInfo.wifiIPv4.value =
+          connectTo; //if not on wifi show local ip
     }
+    try {
     await ServerSocket.bind(connectTo,
-            int.parse(getIt<Settings>().lastKnownPort))
+        int.parse(getIt<Settings>().lastKnownPort))
         .then((ServerSocket serverSocket) {
       runZoned(() {
         _serverSocket = serverSocket;
 
         getIt<Settings>().server.value = true;
-        String info = 'Server Online: IP: ${_serverSocket!.address.address}, Port: ${_serverSocket!.port.toString()}';
+        String info = 'Server Online: IP: ${_serverSocket!.address
+            .address}, Port: ${_serverSocket!.port.toString()}';
         print(info);
         getIt<Network>().networkMessage.value = info;
         _gameState.commandIndex.value = -1;
@@ -58,33 +62,52 @@ class Server {
 
         //if has clients when connecting (re connect) run reset/welcome message
         String commandDescription = "";
-        if (_gameState.commandIndex.value < _gameState.commandDescriptions.length && _gameState.commandIndex.value >= 0) {
-          commandDescription = _gameState.commandDescriptions[_gameState.commandIndex.value];
+        if (_gameState.commandIndex.value <
+            _gameState.commandDescriptions.length &&
+            _gameState.commandIndex.value >= 0) {
+          commandDescription =
+          _gameState.commandDescriptions[_gameState.commandIndex.value];
         }
         send(
-            "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}");
+            "Index:${_gameState.commandIndex
+                .value}Description:${commandDescription}GameState:${_gameState
+                .gameSaveStates.last!.getState()}");
 
 
         _serverSocket!.listen((Socket client) {
           handleConnection(client);
         }, onError: (e) {
           print('Server error: $e');
-          getIt<Network>().networkMessage.value = 'Server error: $e';
+          getIt<Network>().networkMessage.value = 'Server error: ${e.toString()}';
         });
         sendPing();
       });
     });
+  } catch (error) {
+      print('Server error: $error');
+      getIt<Network>().networkMessage.value = 'Server error: ${error.toString()}';
+    }
   }
 
-  void stopServer() {
+  void stopServer(String? error) {
     if (_serverSocket != null) {
-
+      
       print('Server Offline');
-      getIt<Network>().networkMessage.value = 'Server Offline';
-      _serverSocket!.close();
+      if(error != null) {
+        getIt<Network>().networkMessage.value = error;
+      } else {
+        getIt<Network>().networkMessage.value = 'Server Offline';
+      }
+      _serverSocket!.close().catchError((error) => print(error));
 
-      for (var item in _clients) {
-        item.close();
+      if(error != null) {
+        for (var item in _clients) {
+          item.destroy();
+        }
+      } else {
+        for (var item in _clients) {
+          item.close();
+        }
       }
       _clients.clear();
     }
@@ -116,13 +139,13 @@ class Server {
       }
     }
     _clients.add(client);
+
     // listen for events from the client
     try {
       client.listen(
         // handle data from the client
         (Uint8List data) async {
-          //await Future.delayed(Duration(seconds: 1));
-          String message = utf8.decode(data); //String.fromCharCodes(data);
+          String message = utf8.decode(data);
           message = leftOverMessage + message;
           leftOverMessage = "";
 
@@ -189,9 +212,12 @@ class Server {
 
                 } else {
                   String commandDescription = "";
-                  if (_gameState.commandIndex.value > 0) {
+                  if (_gameState.commandIndex.value > 0 && _gameState
+                      .commandDescriptions.length > _gameState.commandIndex.value) {
                     commandDescription = _gameState
                         .commandDescriptions[_gameState.commandIndex.value];
+                  } else {
+                    print("wtf");
                   }
                   print(
                       'Server sends init response: "S3nD:Index:${_gameState
@@ -219,24 +245,45 @@ class Server {
         onError: (error) {
           print(error);
           getIt<Network>().networkMessage.value = error.toString();
-          client.close();
+          /*stopServer(error.toString());
           for (int i = 0; i < _clients.length; i++) {
-            if (_clients[i].remoteAddress == client.remoteAddress) {
+            try {
+              if (_clients[i].remoteAddress == client.remoteAddress) {
+                _clients.removeAt(i);
+                break;
+              }
+            } catch (e) {
               _clients.removeAt(i);
               break;
             }
+          }*/
+          if(error is SocketException && error.osError?.errorCode == 103) {
+            stopServer(error.toString());
           }
         },
 
         // handle the client closing the connection
         onDone: () {
-          print('Client left');
-          getIt<Network>().networkMessage.value = 'Client left.';
-          client.close();
-          for (int i = 0; i < _clients.length; i++) {
-            if (_clients[i].remoteAddress == client.remoteAddress) {
-              _clients.removeAt(i);
-              break;
+          if(getIt<Settings>().server.value == false) {
+            //no op
+          } else {
+            //easy close
+            for (int i = 0; i < _clients.length; i++) {
+              try {
+                if (_clients[i].remoteAddress == client.remoteAddress) {
+                  print('Client left');
+                  getIt<Network>().networkMessage.value = 'Client left.';
+                  _clients.removeAt(i);
+                  client.destroy();
+                  break;
+                }
+              } catch (e) {
+                _clients.removeAt(i);
+                print('Client left');
+                getIt<Network>().networkMessage.value = 'Client left.';
+                client.destroy();
+                break;
+              }
             }
           }
         },
@@ -244,15 +291,18 @@ class Server {
     } catch (error) {
       print(error);
       getIt<Network>().networkMessage.value = error.toString();
-      client.close();
-      for (int i = 0; i < _clients.length; i++) {
-        if (_clients[i].remoteAddress == client.remoteAddress) {
+      //client.close();
+      /*for (int i = 0; i < _clients.length; i++) {
+        try {
+          if (_clients[i].remoteAddress == client.remoteAddress) {
+            _clients.removeAt(i);
+            break;
+          }
+        } catch (e) {
           _clients.removeAt(i);
           break;
         }
-      }
-
-      //TODO: try to reconnect?
+      }*/
     }
   }
 

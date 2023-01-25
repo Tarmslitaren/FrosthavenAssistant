@@ -111,8 +111,8 @@ class Client {
         onError: (error) {
           print('Client error: ${error.toString()}');
           getIt<Network>().networkMessage.value = "client error: ${error.toString()}";
-          _socket?.destroy();
-          _cleanup();
+          //_socket?.destroy();
+          //_cleanup();
         },
 
         // handle server ending connection
@@ -125,10 +125,9 @@ class Client {
       );
     } catch (error) {
       print(error);
-      getIt<Network>().networkMessage.value = "client listen error: ${error.toString()}";
-      _socket?.destroy();
-      getIt<Network>().networkMessage.value = error.toString();
-      _cleanup();
+      //_socket?.destroy();
+      getIt<Network>().networkMessage.value = 'Client listen error: ${error.toString()}';
+      //_cleanup();
     }
   }
 

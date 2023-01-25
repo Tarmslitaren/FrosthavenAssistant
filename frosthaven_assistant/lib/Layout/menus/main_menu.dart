@@ -219,7 +219,7 @@ Drawer createMainMenu(BuildContext context) {
                             getIt<Network>().server.startServer();
                           } else {
                             //close server?
-                            getIt<Network>().server.stopServer();
+                            getIt<Network>().server.stopServer(null);
                           }
                         });
                     //});

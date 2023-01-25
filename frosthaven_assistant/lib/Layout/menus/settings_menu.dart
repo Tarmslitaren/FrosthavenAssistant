@@ -377,8 +377,6 @@ class SettingsMenuState extends State<SettingsMenu> {
                                             : "Start Host Server"),
                                         value: settings.server.value,
                                         onChanged: (bool? value) {
-                                          //setState(() {
-                                          //do the thing
                                           if (!settings.server.value) {
                                             settings.lastKnownPort =
                                                 _portTextController.text;
@@ -387,13 +385,12 @@ class SettingsMenuState extends State<SettingsMenu> {
                                                 .server
                                                 .startServer();
                                           } else {
-                                            //close server?
+                                            //close server
                                             getIt<Network>()
                                                 .server
-                                                .stopServer();
+                                                .stopServer(null);
                                           }
                                         });
-                                    //});
                                   }),
                               ValueListenableBuilder<String>(
                                   valueListenable:
