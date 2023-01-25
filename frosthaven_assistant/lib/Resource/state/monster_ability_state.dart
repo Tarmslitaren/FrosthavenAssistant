@@ -4,9 +4,15 @@ import '../card_stack.dart';
 import 'game_state.dart';
 
 class MonsterAbilityState{
-  //final MonsterAbilityDeckModel deck;
+
+  final String name;
+  final CardStack<MonsterAbilityCardModel> drawPile = CardStack<MonsterAbilityCardModel>();
+  final CardStack<MonsterAbilityCardModel> discardPile = CardStack<MonsterAbilityCardModel>();
+  int lastRoundDrawn = 0;
+
   MonsterAbilityState(this.name){
     GameState gameState = getIt<GameState>();
+
     List<MonsterAbilityDeckModel> monsters = [];
     for (String key in gameState.modelData.value.keys){
       monsters.addAll(
@@ -20,12 +26,10 @@ class MonsterAbilityState{
         break;
       }
     }
+
     lastRoundDrawn = 0;
   }
-  final String name;
-  final CardStack<MonsterAbilityCardModel> drawPile = CardStack<MonsterAbilityCardModel>();
-  final CardStack<MonsterAbilityCardModel> discardPile = CardStack<MonsterAbilityCardModel>();
-  int lastRoundDrawn = 0;
+
   void shuffle(){
     while(discardPile.isNotEmpty) {
       drawPile.push(discardPile.pop());

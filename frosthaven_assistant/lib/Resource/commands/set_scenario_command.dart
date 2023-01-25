@@ -1,7 +1,10 @@
 
 import 'dart:math';
 
+import 'package:collection/collection.dart';
+import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
+import 'package:frosthaven_assistant/Resource/state/monster_ability_state.dart';
 
 import '../../Layout/main_list.dart';
 import '../../Model/scenario.dart';
@@ -56,7 +59,7 @@ class SetScenarioCommand extends Command {
           }
         }
       }
-      GameMethods.shuffleDecks();
+
       _gameState.modifierDeck.initDeck("");
       _gameState.modifierDeckAllies.initDeck("Allies");
       _gameState.currentList = newList;
@@ -135,6 +138,19 @@ class SetScenarioCommand extends Command {
             monster, min(_gameState.level.value + levelAdjust, 7), isAlly)!);
       }
     }
+
+    GameMethods.shuffleDecks();
+    //hack for banner spear solo special rule
+    if (_scenario.contains("Banner Spear: Scouting Ambush") ) {
+        MonsterAbilityState deck = _gameState.currentAbilityDecks.firstWhere((element) => element.name.contains("Scout"));
+        List<MonsterAbilityCardModel> list = deck.drawPile.getList();
+        for (int i = 0; i < list.length; i++) {
+          if(list[i].title == "Rancid Arrow") {
+            list.add(list.removeAt(i));
+            break;
+          }
+        }
+      }
 
     //add objectives and escorts
     for(var item in specialRules) {

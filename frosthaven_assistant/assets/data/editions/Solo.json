@@ -1567,6 +1567,10 @@
 			"note": "special put scout rancid arrow on top of deck before starting",
 			"special": [
 				{
+					"type": "Allies",
+					"list": ["City Guard (Banner Spear Special)"]
+				},
+				{
 					"type": "Timer",
 					"list": [3],
 					"startOfRound": true,
