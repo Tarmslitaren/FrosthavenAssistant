@@ -200,7 +200,7 @@ Drawer createMainMenu(BuildContext context) {
                                 .then((value) => null);
                             settings.saveToDisk();
                           } else {
-                            getIt<Network>().client.disconnect();
+                            getIt<Network>().client.disconnect(null);
                           }
                         });
                   }),

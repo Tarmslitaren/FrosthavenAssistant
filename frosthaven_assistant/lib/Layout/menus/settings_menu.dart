@@ -332,7 +332,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                             } else {
                                               getIt<Network>()
                                                   .client
-                                                  .disconnect();
+                                                  .disconnect(null);
                                             }
                                           });
                                         });

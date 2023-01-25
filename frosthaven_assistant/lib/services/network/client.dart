@@ -12,11 +12,13 @@ import 'dart:convert' show utf8;
 class Client {
   Socket? _socket;
   String _leftOverMessage = "";
+  bool serveResponsive = true;
 
   final GameState _gameState = getIt<GameState>();
 
   Future<void> connect(String address) async {
 // connect to the socket server
+    serveResponsive = true;
     try {
       int port = int.parse(getIt<Settings>().lastKnownPort);
       print("port nr: ${port.toString()}");
@@ -33,6 +35,7 @@ class Client {
           getIt<Settings>().connectClientOnStartup = true;
           getIt<Settings>().saveToDisk();
           send("init version:${getIt<Network>().server.serverVersion}");
+          _sendPing();
           _listen();
         });
       });
@@ -42,6 +45,20 @@ class Client {
       getIt<Settings>().client.value = ClientState.disconnected;
       getIt<Settings>().connectClientOnStartup = false;
       getIt<Settings>().saveToDisk();
+    }
+  }
+
+  void _sendPing() {
+    if (_socket != null && getIt<Settings>().client.value == ClientState.connected) {
+      Future.delayed(const Duration(seconds: 20), () {
+        if(serveResponsive == true) {
+          send("ping");
+          _sendPing();
+          serveResponsive = false; //set back to true when get response
+        } else {
+          disconnect("Server unresponsive. Client disconnected.");
+        }
+      });
     }
   }
 
@@ -100,6 +117,8 @@ class Client {
                 throw (message);
               } else if (message.startsWith("ping")) {
                 send("pong");
+              }else if (message.startsWith("pong")) {
+                serveResponsive = true;
               }
             } else {
               _leftOverMessage = message;
@@ -118,7 +137,9 @@ class Client {
         // handle server ending connection
         onDone: () {
           print('Lost connection to server.');
-          getIt<Network>().networkMessage.value = "Lost connection to server";
+          if(serveResponsive != false) {
+            getIt<Network>().networkMessage.value = "Lost connection to server";
+          }
           _socket?.destroy();
           _cleanup();
         },
@@ -140,10 +161,11 @@ class Client {
     }
   }
 
-  void disconnect() {
+  void disconnect(String? message) {
+    message ??= "client disconnected";
     if (_socket != null) {
-      print('Client disconnected');
-      getIt<Network>().networkMessage.value = "client disconnected";
+      print(message);
+      getIt<Network>().networkMessage.value = message;
       _socket!.destroy();
       getIt<Settings>().connectClientOnStartup = false;
       getIt<Settings>().saveToDisk();
@@ -163,5 +185,6 @@ class Client {
     if(getIt<Network>().appInBackground == true) {
       getIt<Network>().clientDisconnectedWhileInBackground = true;
     }
+    serveResponsive = true;
   }
 }

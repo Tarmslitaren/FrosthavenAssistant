@@ -235,7 +235,11 @@ class Server {
                 _gameState.redo();
               } else if (message.startsWith("pong")) {
                 print('pong from ${client.remoteAddress}');
-              }} else {
+              }else if (message.startsWith("ping")) {
+                print('ping from ${client.remoteAddress}');
+                send("pong");
+              }
+            } else {
               leftOverMessage = message;
             }
           }
