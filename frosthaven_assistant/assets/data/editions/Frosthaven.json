@@ -817,6 +817,19 @@
       ]
     },
     {
+      "name": "Laser Spire",
+      "cards": [
+        ["Accelerated Power", 874, false, 11, "Special 2"],
+        ["Accelerated Power", 875, false, 14, "Special 2"],
+        ["Accelerated Power", 876, true, 17, "Special 2"],
+        ["Lingering Strength", 877, true, 85, "Special 1"],
+        ["Lingering Strength", 878, false, 79, "Special 1"],
+        ["Lingering Strength", 879, false, 73, "Special 1"],
+        ["Nothing Special", 880, false, 36, "Rotate each laser spire", "clockwise (if able)."],
+        ["Twin Shots", 881, false, 52, "Rotate each laser spire", "counterclockwise (if able)."]
+      ]
+    },
+    {
       "name": "Burrowing Blade",
       "cards": [
         ["Tunneling Slices", 818, true, 68, "^Focus on the enemy", "^^farthest away.", "%move% +1", "^%jump%","*.........", "%attack% - 2", "[newLine]", "^Target all enemies occupying or adjacent to", "^^hexes entered during the movement" ],
@@ -5805,6 +5818,54 @@
           "immunities": [ "%wound%","%poison%","%disarm%", "%stun%", "%curse%" ]
         }
       ]
+    },
+    "Laser Spire Controller": {
+      "gfx": "nothing",
+      "hidden": true,
+      "deck": "Laser Spire",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0, "health": 1,  "move": 0,  "attack": 0,
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
+        },
+        {
+          "level": 1, "health": 1, "move": 0, "attack":0,
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
+        },
+        {
+          "level": 2,"health": 1,  "move": 0,  "attack": 0,
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
+        },
+        {
+          "level": 3, "health": 1,  "move": 0,  "attack": 0,
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
+        },
+        {
+          "level": 4,"health": 1,  "move": 0,  "attack": 0,
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
+        },
+        {
+          "level": 5, "health": 1,  "move": 0,  "attack": 0,
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
+        },
+        {
+          "level": 6, "health": 1,  "move": 0,  "attack": 0,
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
+        },
+        {
+          "level": 7, "health": 1,  "move": 0,  "attack": 0,
+          "special1": [ "See scenario Special Rules"],
+          "special2": [ "See scenario Special Rules"]
+        }
+      ]
     }
   },
 
@@ -8397,6 +8458,9 @@
     },
     "#195.1 Belara's Keep (135)": {
       "monsters": ["Belara"]
+    },
+    "#195.2 Furious Factory (109)": {
+      "monsters": ["Laser Spire Controller"]
     }
   }
 }
