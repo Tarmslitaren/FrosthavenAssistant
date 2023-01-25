@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.tarmslitaren" "\0"
-            VALUE "FileDescription", "frosthaven_assistant" "\0"
+            VALUE "FileDescription", "X-Haven Assistant" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "frosthaven_assistant" "\0"
+            VALUE "InternalName", "X-Haven Assistant" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.tarmslitaren. All rights reserved." "\0"
-            VALUE "OriginalFilename", "frosthaven_assistant.exe" "\0"
-            VALUE "ProductName", "frosthaven_assistant" "\0"
+            VALUE "OriginalFilename", "X-Haven Assistant.exe" "\0"
+            VALUE "ProductName", "X-Haven Assistant" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
