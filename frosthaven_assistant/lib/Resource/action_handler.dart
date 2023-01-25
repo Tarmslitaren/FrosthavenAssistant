@@ -19,7 +19,7 @@ class ActionHandler {
   final List<String> commandDescriptions = []; //only used when connected
   final List<GameSaveState?> gameSaveStates = [];
 
-  final int maxUndo = 500;
+  final int maxUndo = 250;
 
   void updateAllUI() {
     getIt<GameState>().updateList.value++;
@@ -38,7 +38,7 @@ class ActionHandler {
     bool isServer = getIt<Settings>().server.value;
     bool isClient = getIt<Settings>().client.value == ClientState.connected;
     if (!isClient) {
-      if (commandIndex.value >= 0) {
+      if (commandIndex.value >= 0 && gameSaveStates[commandIndex.value] != null) {
         gameSaveStates[commandIndex.value]!
             .load(); //this works as gameSaveStates has one more entry than command list (includes load at start)
         gameSaveStates[commandIndex.value]!.saveToDisk();
@@ -146,7 +146,9 @@ class ActionHandler {
       if(commands.length > commandIndex.value) {
         commands[commandIndex.value - maxUndo] = null;
       }
-      gameSaveStates[commandIndex.value - maxUndo] = null;
+      if(gameSaveStates.length > commandIndex.value - maxUndo) {
+        gameSaveStates[commandIndex.value - maxUndo] = null;
+      }
     }
   }
 }
