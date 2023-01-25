@@ -123,7 +123,7 @@ class GameSaveState{
       else if (gfx == "bless") {
         newDrawList.add(ModifierCard(CardType.bless, gfx));
       }
-      else if (gfx == "nullAttack" || gfx == "doubleAttack") {
+      else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
         newDrawList.add(ModifierCard(CardType.multiply, gfx));
       } else {
         newDrawList.add(ModifierCard(CardType.add, gfx));
@@ -141,7 +141,7 @@ class GameSaveState{
       else if (gfx == "bless") {
         newDiscardList.add(ModifierCard(CardType.bless, gfx));
       }
-      else if (gfx == "nullAttack" || gfx == "doubleAttack") {
+      else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
         newDiscardList.add(ModifierCard(CardType.multiply, gfx));
         state.needsShuffle = true;
       } else {

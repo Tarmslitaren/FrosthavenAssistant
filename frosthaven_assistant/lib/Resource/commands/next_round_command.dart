@@ -55,6 +55,9 @@ class NextRoundCommand extends Command {
     if(_gameState.modifierDeck.needsShuffle) {
       _gameState.modifierDeck.shuffle();
     }
+    if(_gameState.modifierDeckAllies.needsShuffle) {
+      _gameState.modifierDeckAllies.shuffle();
+    }
   }
 
   @override
