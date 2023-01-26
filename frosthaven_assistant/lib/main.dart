@@ -33,6 +33,14 @@ void main() {
     setWindowMaxSize(Size.infinite);
   }
 
+  if (kReleaseMode) {
+    ErrorWidget.builder = ((e) {
+      //to not show the gray boxes, when there are exceptions
+      return Container(
+      );
+    });
+  }
+
   runApp(
     ThemeSwitcherWidget(initialTheme: theme, child: const MyApp())
   );
