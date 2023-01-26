@@ -147,6 +147,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     onChanged: (bool? value) {
                                       setState(() {
                                         settings.setFullscreen(value!);
+                                        settings.saveToDisk();
                                       });
                                     }),
                               CheckboxListTile(
