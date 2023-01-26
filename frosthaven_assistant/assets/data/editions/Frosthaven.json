@@ -1017,7 +1017,7 @@
         ["Concentrated Flock", 811, true, 10,  "%move% - 1", "*.........","%attack% + 0","^%target% 2,","^%range% 5"],
         ["Fiendish Charge", 812, false, 73,  "%move% + 2 ", "*.........","%attack% + 0","^%push% 2"],
         ["Angry Cloud", 813, false, 9, "^All enemies within %range% 3 suffer damage 2.", "*.........","%retaliate% 2", "^%range% 3", "%dark%"],
-        ["Gather the Flock", 814, false, 72,  "%pull% 2", "^Target all, %range% 5","*.........","^All enemies withing %range% 3 suffer damage 2."],
+        ["Gather the Flock", 814, false, 72,  "%pull% 2", "^Target all, %range% 5","*.........","^All enemies within %range% 3 suffer damage 2."],
         ["Dive Bombs", 816, false, 49,  "%attack% + 0","^%target% 2,","^%range% 3,", "^%immobilize%"],
         ["Nothing Special", 815, true, 90,  "%move% + 0", "*.........","%attack% + 0", "%dark%"],
         ["Birds of Prey", 817, false, 23, "%attack% - 2","^%target% 3,","^%range% 6,", "^%pull% 2", "*.........","[r]","%dark%%use%","^%shield% 2", "[/r]"]

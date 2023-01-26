@@ -237,7 +237,7 @@ class Server {
                 print('pong from ${client.remoteAddress}');
               }else if (message.startsWith("ping")) {
                 print('ping from ${client.remoteAddress}');
-                send("pong");
+                sendToOnly("pong", client);
               }
             } else {
               leftOverMessage = message;

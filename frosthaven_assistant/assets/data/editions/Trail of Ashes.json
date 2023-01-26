@@ -90,7 +90,7 @@
       "name": "Talo",
       "cards": [
         [ 714, true, 57, "%move% 3","*.........", "%heal% 3", "^%range% 3"],
-        [ 715, true, 67, "%move% 2","*.........", "%bless%", "^Affect one ally withing %range% 2"],
+        [ 715, true, 67, "%move% 2","*.........", "%bless%", "^Affect one ally within %range% 2"],
         [ 716, false, 39, "%move% 2","*.........", "%attack% - 1", "^%curse%"],
         [ 717, false, 63, "%move% 3","*.........", "%attack% + 0", "^%immobilize%"]
       ]
