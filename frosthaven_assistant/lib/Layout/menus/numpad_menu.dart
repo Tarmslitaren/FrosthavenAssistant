@@ -31,7 +31,7 @@ class NumpadMenuState extends State<NumpadMenu> {
             child: TextButton(
               child: Text(
                 nr.toString(),
-                textScaleFactor: scale,//maybe not right
+                //textScaleFactor: scale,//maybe not right
                 style: getTitleTextStyle(scale),
               ),
               onPressed: () {
