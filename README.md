@@ -106,13 +106,10 @@ scaling the bottom/top bars (for better visibility on some screens for example).
 - Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself.
 - Some text alignment issues with small texts on small (mobile) screens.
 - Condition Animations do not play when connected.
-- When connected and device goes to background, the connection may be broken. Try to avoid having the server device's app go to background for this reason. 
-- Objectives and Escorts do not update their 'level'/health when monster level is changed. Please set the correct monster level before setting a scenario.
-- Also bosses or other enemies which health or attack depend on nr of players do not update their values when you add/remove characters during scenario.
+- When connected and device goes to background, the connection may be broken. Try to avoid having the server device's app go to background for this reason.
 - All Data is added by hand. Please Report any error in a ticket on github.
 ## Roadmap
 - Next:
-  - Trails of Ashes campaign
   - Something special.
   - More minor improvements
 - And then:
