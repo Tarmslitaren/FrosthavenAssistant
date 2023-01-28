@@ -43,20 +43,6 @@ class SetLevelCommand extends Command {
 
   @override
   void undo() {
-    /*if(monster != null) {
-      monster!.level.value = _previousState;
-      for(var item in monster!.monsterInstances.value){
-        item.level.value = _previousState;
-      }
-    } else {
-      _gameState.level.value = _previousState;
-      for (var item in _gameState.currentList) {
-        if(item is Monster) {
-          item.level.value = level;
-          //will overwrite specific level settings, but that is probably ok
-        }
-      }
-    }*/
   }
 
   @override

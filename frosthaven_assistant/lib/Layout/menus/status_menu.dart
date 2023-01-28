@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
+import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_bless_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_curse_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_xp_command.dart';
@@ -12,6 +13,7 @@ import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dar
 import '../../Resource/commands/change_stat_commands/change_health_command.dart';
 import '../../Resource/commands/ice_wraith_change_form_command.dart';
 import '../../Resource/commands/remove_condition_command.dart';
+import '../../Resource/commands/set_as_summon_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/character.dart';
@@ -116,7 +118,7 @@ class StatusMenuState extends State<StatusMenu> {
   Widget buildChillButtons(ValueNotifier<int> notifier, int maxValue,
       String image, String figureId, String ownerId, double scale) {
     return Row(children: [
-      Container(
+      SizedBox(
           width: 40 * scale,
           height: 40 * scale,
           child: IconButton(
@@ -131,7 +133,7 @@ class StatusMenuState extends State<StatusMenu> {
                 //increment
               })),
       Stack(children: [
-        Container(
+        SizedBox(
           width: 30 * scale,
           height: 30 * scale,
           child: Image(
@@ -178,6 +180,67 @@ class StatusMenuState extends State<StatusMenu> {
             },
           )),
     ]);
+  }
+
+  Widget buildSummonButton(String figureId,
+      String ownerId, double scale) {
+    String imagePath = "assets/images/summon/green.png";
+    // enabled = false;
+    return ValueListenableBuilder<int>(
+        valueListenable: _gameState.commandIndex,
+        builder: (context, value, child) {
+          Color color = Colors.transparent;
+          FigureState? figure = GameMethods.getFigure(ownerId, figureId);
+          if (figure == null) {
+            return Container();
+          }
+          ListItemData? owner;
+          for (var item in _gameState.currentList) {
+            if (item.id == ownerId) {
+              owner = item;
+              break;
+            }
+          }
+
+          bool isActive = (figure as MonsterInstance).roundSummoned != -1;
+          if (isActive) {
+            color =
+            getIt<Settings>().darkMode.value ? Colors.white : Colors.black;
+          }
+
+          return Container(
+              width: 42 * scale,
+              height: 42 * scale,
+              padding: EdgeInsets.zero,
+              margin: EdgeInsets.all(1 * scale),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: color,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(30 * scale))),
+              child: IconButton(
+                //iconSize: 24,
+                icon: isActive ?
+                Image(
+                    height:24 * scale,
+                    filterQuality: FilterQuality.medium,
+                    image: AssetImage(imagePath))
+                    : Image.asset(
+                    filterQuality: FilterQuality.medium,
+                    //needed because of the edges
+                    height: 24 * scale,
+                    width: 24 * scale,
+                    imagePath),
+
+                onPressed:  () {
+                  if (!isActive) {
+                    _gameState.action(SetAsSummonCommand(true, figureId, ownerId));
+                  } else {
+                    _gameState.action(SetAsSummonCommand(false, figureId, ownerId));
+                  }
+                }
+              ));
+        });
   }
 
   Widget buildConditionButton(Condition condition, String figureId,
@@ -389,7 +452,7 @@ class StatusMenuState extends State<StatusMenu> {
           ),
         ),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Container(
+          SizedBox(
               height: 28 * scale,
               child: Row(
                   //crossAxisAlignment: CrossAxisAlignment.center,
@@ -585,11 +648,10 @@ class StatusMenuState extends State<StatusMenu> {
                                       color: Colors.black87,
                                       blurRadius: 1 * scale,
                                     )
-                                    //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
                                   ])),
                         ],
                       )
-                    ], //three +/- button groups and then kill/setlevel buttons
+                    ],
                   );
                 }),
             Column(
@@ -676,6 +738,12 @@ class StatusMenuState extends State<StatusMenu> {
                         Condition.ward, figureId, ownerId, immunities, scale),
                     if(showCustomContent) buildConditionButton(Condition.dodge, figureId,
                         ownerId, immunities, scale),
+                  ],
+                ),
+                if(monster != null) Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    buildSummonButton(figureId, ownerId, scale)
                   ],
                 ),
               ],

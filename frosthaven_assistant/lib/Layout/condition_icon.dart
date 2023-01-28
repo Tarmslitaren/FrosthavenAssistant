@@ -41,9 +41,7 @@ class ConditionIcon extends StatefulWidget {
 
 class ConditionIconState extends State<ConditionIcon> {
   final animate = ValueNotifier<bool>(
-      false); //this needs to exist outside of this class to apply when parent rebuilds. FUUUUUUUUUUUUUUUUUUUCCCKKK!!!!!
-
-  //bool noMoreThisTurn = false;
+      false); //this needs to exist outside of this class to apply when parent rebuilds. :(
 
   @override
   void dispose() {

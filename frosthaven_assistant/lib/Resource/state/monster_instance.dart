@@ -41,7 +41,7 @@ class MonsterInstance extends FigureState{
   late int move;
   late int attack;
   late int range;
-  late final int roundSummoned;
+  int roundSummoned = -1;
 
   void setLevel(Monster monster) {
     dynamic newHealthValue = 10; //need to put something outer than 0 or the standee will die immediately causing glitch
