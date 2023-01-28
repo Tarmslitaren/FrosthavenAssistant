@@ -50,7 +50,7 @@ class Client {
 
   void _sendPing() {
     if (_socket != null && getIt<Settings>().client.value == ClientState.connected) {
-      Future.delayed(const Duration(seconds: 20), () {
+      Future.delayed(const Duration(seconds: 12), () {
         if(serveResponsive == true) {
           send("ping");
           _sendPing();
