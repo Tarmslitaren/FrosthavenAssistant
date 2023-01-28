@@ -82,8 +82,6 @@ class StatusMenu extends StatefulWidget {
   //character layout
   //same except line 3: infect impair rupture
 
-  //TODO: add setting: turn off CS conditions?
-
   @override
   StatusMenuState createState() => StatusMenuState();
 }
@@ -418,7 +416,9 @@ class StatusMenuState extends State<StatusMenu> {
                                 color: Colors.blue,
                               )))
                   ])),
-          Row(children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
             ValueListenableBuilder<int>(
                 valueListenable: _gameState.commandIndex,
                 builder: (context, value, child) {
