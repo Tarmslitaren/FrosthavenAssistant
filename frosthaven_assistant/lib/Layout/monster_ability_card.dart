@@ -99,7 +99,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
         height: 118 * 0.8 * scale,
         child: Stack(
           //fit: StackFit.loose,
-          alignment: AlignmentDirectional.center,
+          //alignment: Alignment.topCenter,
           clipBehavior: Clip.none, //if text overflows it still visible
 
           children: [
@@ -108,6 +108,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
               child: Image(
                 fit: BoxFit.fill,
                 height: 116 * 0.8 * scale,
+                width: 178 * 0.8 * scale,
                 //height: 123 * 0.8 * scale,
                 image: AssetImage(frosthavenStyle?
                 "assets/images/psd/monsterAbility-front_fh.png" :
@@ -116,21 +117,31 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             ),
             Positioned(
               top:frosthavenStyle? 2 * scale : 0 * scale,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
+              //left: 40 * scale,
+                child: SizedBox(
+                  height: 110 * scale * 0.8 ,
+                  width: 178 * scale * 0.8, //needed for line breaks in lines
+
+                  child: Column(
+
+                    mainAxisAlignment: MainAxisAlignment.start,
+
+                    crossAxisAlignment: CrossAxisAlignment.center,
+
+                    mainAxisSize: MainAxisSize.max,
+
+                    children:   [
+                      Text(
                     card.title,
                     style: TextStyle(
                         fontFamily: frosthavenStyle? "GermaniaOne" : 'Pirata',
                         color: Colors.white,
-                        fontSize: frosthavenStyle? 10 * scale :11.2 * scale,
+                        fontSize: frosthavenStyle? 10 * scale : 11.2 * scale,
                         shadows: [shadow]),
                   ),
                 ],
               ),
-            ),
+            )),
             Positioned(
                 left: 4.0 * scale,
                 top: 16.0 * 0.8 * scale,
@@ -156,7 +167,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 )),
             card.shuffle
                 ? Positioned(
-                    right: 4.0 * 0.8 * scale,
+                    left: 158 * 0.8 * scale,
                     bottom: 4.0 * 0.8 * scale,
                     child: Image(
                       height: 123 * 0.8 * 0.13 * scale,

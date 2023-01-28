@@ -119,6 +119,7 @@ class LootCardMenuState extends State<LootCardMenu> {
                         Column(mainAxisSize: MainAxisSize.max, children: [
                           Container(
                               //width: 2900, //need some width to fill out
+                            width: MediaQuery.of(context).size.width,
                               margin: const EdgeInsets.all(2),
                               decoration: const BoxDecoration(
                                   color: Colors.white,
@@ -129,7 +130,7 @@ class LootCardMenuState extends State<LootCardMenu> {
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
+                                    Wrap(
                                       children: [
                                         TextButton(
                                           onPressed: () {

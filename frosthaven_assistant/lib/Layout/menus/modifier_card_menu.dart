@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
@@ -6,7 +8,6 @@ import 'package:frosthaven_assistant/Resource/commands/bad_omen_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/enfeebling_hex_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
-import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:reorderables/reorderables.dart';
 
 import '../../Resource/adjustable_scroll_controller.dart';
@@ -35,7 +36,8 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scale = getScaleByReference(context) * 2; //double scale
+    var screenSize = MediaQuery.of(context).size;
+    double scale = max((screenSize.height / (40 * 12)), 1);
     late final Widget child;
 
     child = revealed
@@ -47,17 +49,9 @@ class Item extends StatelessWidget {
 }
 
 class ModifierCardMenu extends StatefulWidget {
-  ModifierCardMenu({Key? key, required this.name}) : super(key: key) {
-    if (name == "Allies") {
-      // deck = getIt<GameState>().modifierDeckAllies;
-    } else {
-      // deck = getIt<GameState>().modifierDeck;
-    }
-  }
+  const ModifierCardMenu({Key? key, required this.name}) : super(key: key);
 
   final String name;
-
-  //late final ModifierDeck deck;
 
   @override
   ModifierCardMenuState createState() => ModifierCardMenuState();
@@ -121,9 +115,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           key: Key(index.toString()),
           onTap: () {
             //open remove card menu
-            String test = value.key
-                .toString()
-                .substring(3, value.key.toString().length - 3);
             openDialog(
                 context,
                 SendToBottomMenu(
@@ -146,20 +137,17 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
 
   Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen,
       bool hasDiviner, String name) {
-    //print(name);
+
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
               .transparent, //needed to make background transparent if reorder is enabled
           //other styles
         ),
-        child: Container(
-          // constraints: BoxConstraints(
-          //minHeight: 400,
-          // maxHeight: screenSize.height - 50,
-          //),
-          width: 118 * getScaleByReference(context),
-          //184 * 0.8 * //TODO: wrong- scale by reference will screw this menu up
+        child: SizedBox(
+          width: screenWidth * 0.3,
           child: reorderable
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
@@ -168,7 +156,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                   reorderAnimationDuration: const Duration(milliseconds: 400),
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
                   onReorder: (index, dropIndex) {
-                    //make sure this is correct
                     setState(() {
                       dropIndex = list.length - dropIndex - 1;
                       index = list.length - index - 1;
@@ -212,7 +199,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
 
           return Container(
               constraints: BoxConstraints(
-                  //maxWidth: 118 * scale * 2 + 98,
                   maxWidth: MediaQuery.of(context).size.width,
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(

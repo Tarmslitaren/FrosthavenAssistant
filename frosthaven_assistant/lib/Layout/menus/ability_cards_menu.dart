@@ -1,9 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/state/monster_ability_state.dart';
-import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:reorderables/reorderables.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/reorder_ability_list_command.dart';
@@ -26,7 +27,11 @@ class Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double scale = getScaleByReference(context);
+    var screenSize = MediaQuery.of(context).size;
+    double scale = max((screenSize.height / (40 * 14)), 0.5);
+    if(screenSize.width * 0.4 < 178*0.8*scale) {
+      scale = screenSize.width * 0.4/(178*0.8);
+    }
     late final Widget child;
 
     child = revealed
@@ -120,7 +125,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
 
   Widget buildList(
       List<MonsterAbilityCardModel> list, bool reorderable, bool allOpen) {
-    double scale = getScaleByReference(context);
+    double screenWidth = MediaQuery.of(context).size.width;
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
@@ -128,7 +133,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           //other styles
         ),
         child: SizedBox(
-          width: 184 * 0.8 * scale,
+          width: screenWidth * 0.4,
           child: reorderable
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
@@ -136,6 +141,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                   scrollAnimationDuration: const Duration(milliseconds: 400),
                   reorderAnimationDuration: const Duration(milliseconds: 400),
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
+
                   onReorder: (index, dropIndex) {
                     //make sure this is correct
                     setState(() {
@@ -150,6 +156,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                 )
               : ListView(
                   controller: AdjustableScrollController(),
+                  padding: EdgeInsets.zero ,
                   children: generateList(list, allOpen).reversed.toList(),
                 ),
         ));
