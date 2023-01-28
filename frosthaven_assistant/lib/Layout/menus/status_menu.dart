@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
-import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_bless_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_curse_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_xp_command.dart';
@@ -440,7 +439,7 @@ class StatusMenuState extends State<StatusMenu> {
 
     return Container(
         width: 340 * scale,
-        height: 211 * scale + 30 * scale + ((hasIncarnate && widget.monsterId != null && !isSummon) ? 40 * scale: 0),
+        height: 220 * scale + 30 * scale + ((hasIncarnate && widget.monsterId != null && !isSummon) ? 40 * scale: 0),
         decoration: BoxDecoration(
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
