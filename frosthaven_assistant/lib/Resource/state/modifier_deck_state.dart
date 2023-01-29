@@ -243,7 +243,7 @@ class ModifierDeck {
         //'"cardCount": ${cardCount.value}, '
         '"blesses": ${blesses.value}, '
          '"curses": ${curses.value}, '
-        '"enfeebles": ${curses.value}, '
+        '"enfeebles": ${enfeebles.value}, '
         // '"needsShuffle": ${needsShuffle}, '
         '"addedMinusOnes": ${addedMinusOnes.value.toString()}, '
         '"badOmen": ${badOmen.value.toString()}, '
