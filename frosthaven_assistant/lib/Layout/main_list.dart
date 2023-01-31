@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/character_widget.dart';
@@ -268,11 +270,12 @@ class MainListState extends State<MainList> {
       return _gameState
           .currentList.length; //don't wrap if no space. Probably not needed
     }
-    double screenHeight = MediaQuery.of(context).size.height;
+    double screenHeight = MediaQuery.of(context).size.height -
+        80 * getIt<Settings>().userScalingBars.value;
 
     //if can't fit without scroll
     if (widgetPositions.isNotEmpty) {
-      if (widgetPositions.last > 2 * (screenHeight - 80)) {
+      if (widgetPositions.last > 2 * screenHeight) {
         //find center point
         for (int i = 0; i < widgetPositions.length; i++) {
           if (widgetPositions[i] > widgetPositions.last / 2) {
@@ -280,12 +283,36 @@ class MainListState extends State<MainList> {
           }
         }
       } else {
-        //make all fit in screen of possible
+        //make all fit in screen if possible
         for (int i = 0; i < widgetPositions.length; i++) {
-          if (widgetPositions[i] > (screenHeight - 80)) {
+          if (widgetPositions[i] > screenHeight) {
             //minus height of top and bottom bars
             return i + 1;
           }
+        }
+      }
+    }
+    return widgetPositions.length;
+  }
+
+  int getItemsForHalfTotalHeight(List<double> widgetPositions) {
+    //too bad this has to be done
+    bool canFit2Columns =
+        MediaQuery.of(context).size.width >= getMainListWidth(context) * 2;
+    if (!canFit2Columns) {
+      return _gameState
+          .currentList.length; //don't wrap if no space. Probably not needed
+    }
+    double screenHeight = MediaQuery.of(context).size.height -
+        80 * getIt<Settings>().userScalingBars.value;
+
+    //if can't fit without scroll
+    if (widgetPositions.isNotEmpty) {
+
+      //find center point
+      for (int i = 0; i < widgetPositions.length; i++) {
+        if (widgetPositions[i] > widgetPositions.last / 2) {
+          return i + 1;
         }
       }
     }
@@ -370,17 +397,20 @@ class MainListState extends State<MainList> {
                   2 * getMainListWidth(context)) /
               2;
           List<double> itemHeights = getItemHeights(context);
-          int itemsPerColumn = getItemsCanFitOneColumn(itemHeights); //no good
+          int itemsPerColumn = getItemsForHalfTotalHeight(itemHeights); //no good
+          int itemsColumn2 = itemHeights.length - itemsPerColumn;
+          itemsPerColumn = max(itemsPerColumn, itemsColumn2);
           bool ignoreScroll = false;
-          if (canFit2Columns &&
+          /*bool canFit2ColumnsWithoutScroll = canFit2Columns &&
               itemHeights.isNotEmpty &&
               itemHeights.last <
                   2 * MediaQuery.of(context).size.height -
-                      160 * getIt<Settings>().userScalingBars.value -
-                      200) {
-            //TODO: 200 is a feely hack, hard to say why it is needed
+                      160 * getIt<Settings>().userScalingBars.value;
+          //ignoreScroll = true;
+          if (canFit2ColumnsWithoutScroll) {
             ignoreScroll = true;
           }
+          ignoreScroll = false;*/ //there is no easy way to add nice amount of padding for this mode.
 
           double paddingBottom = 60 * getIt<Settings>().userScalingBars.value;
           if (GameMethods.hasAllies()) {
@@ -393,6 +423,7 @@ class MainListState extends State<MainList> {
               alignment:
                   canFit2Columns ? Alignment.topLeft : Alignment.topCenter,
               width: canFit2Columns ? width : MediaQuery.of(context).size.width,
+              //height: 200,
               child: Scrollbar(
                 interactive: !ignoreScroll,
                 controller: scrollController,
@@ -405,7 +436,6 @@ class MainListState extends State<MainList> {
                   //this makes it wrap at screen height. turn on if can fit 2 columns and can fit all items in screen
 
                   direction: Axis.vertical,
-                  //ignorePrimaryScrollController: true,
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
                   needsLongPressDraggable: true,
                   controller: scrollController,
@@ -416,7 +446,7 @@ class MainListState extends State<MainList> {
                   },
                   children: generateChildren(),
                 ),
-                //)
+                // )
                 //)
               ));
         });
