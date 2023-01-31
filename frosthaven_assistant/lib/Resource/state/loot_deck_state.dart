@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/scenario.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
@@ -85,7 +87,7 @@ class LootDeck {
   //2 +1, 3 oneIf3or4twoIfNot, 3 oneIf4twoIfNot
 
   List<int> addedCards = [0,0,0,0,0,0,0,0,0];
-  Map<int, int> enhancements = {};
+  Map<String, int> enhancements = {};
 
   final CardStack<LootCard> drawPile = CardStack<LootCard>();
   final CardStack<LootCard> discardPile = CardStack<LootCard>();
@@ -115,6 +117,78 @@ class LootDeck {
 
   LootDeck.empty() {
     _initPools();
+  }
+
+  LootDeck.fromJson(dynamic lootDeckData) {
+    hasCard1418 = lootDeckData["1418"];
+    hasCard1419 = lootDeckData["1419"];
+
+    if(lootDeckData.containsKey('enhancements')) {
+      enhancements = Map<String, int>.from(lootDeckData['enhancements']);
+    } else {
+      enhancements = {};
+    }
+
+    _initPools();
+
+    List<LootCard> newDrawList = [];
+    List drawPile = lootDeckData["drawPile"] as List;
+    int id = 0;
+    for (var item in drawPile) {
+      String owner = "";
+      String gfx = item["gfx"];
+      if(item.containsKey('owner')) {
+        owner = item["owner"];
+      }
+      if(item.containsKey('id')) {
+        id = item["id"];
+      }
+      int enhanced = 0;
+      if(item['enhanced'].runtimeType == bool) {
+        bool enh = item['enhanced'];
+        if(enh) {
+          enhanced = 1;
+        }
+      } else {
+        enhanced = item["enhanced"];
+      }
+      LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
+      LootType lootType = LootType.values[item["lootType"]];
+      LootCard lootCard = LootCard(id: id, gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
+      lootCard.owner = owner;
+      newDrawList.add(lootCard);
+    }
+    List<LootCard> newDiscardList = [];
+    for (var item in lootDeckData["discardPile"] as List) {
+      String gfx = item["gfx"];
+      String owner = "";
+      if(item.containsKey('owner')) {
+        owner = item["owner"];
+      }
+      if(item.containsKey('id')) {
+        id = item["id"];
+      }
+
+      int enhanced = 0;
+      if(item['enhanced'].runtimeType == bool) {
+        bool enh = item['enhanced'];
+        if(enh) {
+          enhanced = 1;
+        }
+      } else {
+        enhanced = item["enhanced"];
+      }
+      LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
+      LootType lootType = LootType.values[item["lootType"]];
+      LootCard lootCard = LootCard(id: id, gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
+      lootCard.owner = owner;
+      newDiscardList.add(lootCard);
+    }
+    this.drawPile.getList().clear();
+    discardPile.getList().clear();
+    this.drawPile.setList(newDrawList);
+    discardPile.setList(newDiscardList);
+    cardCount.value = this.drawPile.size();
   }
 
   void _addCardFromPool(int amount, List<LootCard> pool, List<LootCard> cards) {
@@ -164,7 +238,7 @@ class LootDeck {
     cards.add(LootCard(
         id: id,
         baseValue: LootBaseValue.one,
-        enhanced: enhancements[id] != null ? enhancements[id]!:0,
+        enhanced: enhancements[id.toString()] != null ? enhancements[id.toString()]!:0,
         lootType: LootType.other,
         gfx: gfx,
     ));
@@ -177,7 +251,7 @@ class LootDeck {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.one,
-          enhanced: enhancements[startId] != null ? enhancements[startId]!:0,
+          enhanced: enhancements[startId.toString()] != null ? enhancements[startId.toString()]!:0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -186,7 +260,7 @@ class LootDeck {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.oneIf3or4twoIfNot,
-          enhanced: enhancements[startId] != null ? enhancements[startId]!:0,
+          enhanced: enhancements[startId.toString()] != null ? enhancements[startId.toString()]!:0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -195,7 +269,7 @@ class LootDeck {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.oneIf4twoIfNot,
-          enhanced: enhancements[startId] != null ? enhancements[startId]!:0,
+          enhanced: enhancements[startId.toString()] != null ? enhancements[startId.toString()]!:0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -210,7 +284,7 @@ class LootDeck {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.one,
-          enhanced: enhancements[startId] != null ? enhancements[startId]!:0,
+          enhanced: enhancements[startId.toString()] != null ? enhancements[startId.toString()]!:0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -365,7 +439,7 @@ class LootDeck {
   }
 
   void addEnhancement(int id, int value, String identifier) {
-    enhancements[id] = value;
+    enhancements[id.toString()] = value;
     //reset loot deck
     _initPools();
     GameState gameState = getIt<GameState>();
@@ -407,7 +481,7 @@ class LootDeck {
         '"drawPile": ${drawPile.toString()}, '
         '"discardPile": ${discardPile.toString()}, '
         '"addedCards": ${addedCards.toString()}, '
-        '"enhancements": ${enhancements.toString()}, '
+        '"enhancements": ${json.encode(enhancements)}, '
         '"1418": $hasCard1418, '
         '"1419": $hasCard1419 '
         '}';

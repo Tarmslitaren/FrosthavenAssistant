@@ -28,76 +28,8 @@ class GameSaveState{
 
   void loadLootDeck(var data) {
     var lootDeckData = data["lootDeck"];
-    LootDeck state = LootDeck.empty();
-
-    state.hasCard1418 = lootDeckData["1418"];
-    state.hasCard1419 = lootDeckData["1419"];
-
-    if(lootDeckData.containsKey('enhancements')) {
-      state.enhancements = Map<int, int>.from(lootDeckData['enhancements']);
-    } else {
-      state.enhancements = {};
-    }
-
-    List<LootCard> newDrawList = [];
-    List drawPile = lootDeckData["drawPile"] as List;
-    int id = 0;
-    for (var item in drawPile) {
-      String owner = "";
-      String gfx = item["gfx"];
-      if(item.containsKey('owner')) {
-        owner = item["owner"];
-      }
-      if(item.containsKey('id')) {
-        id = item["id"];
-      }
-      int enhanced = 0;
-      if(item['enhanced'].runtimeType == bool) {
-        bool enh = item['enhanced'];
-        if(enh) {
-          enhanced = 1;
-        }
-      } else {
-        enhanced = item["enhanced"];
-      }
-      LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
-      LootType lootType = LootType.values[item["lootType"]];
-      LootCard lootCard = LootCard(id: id, gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
-      lootCard.owner = owner;
-      newDrawList.add(lootCard);
-    }
-    List<LootCard> newDiscardList = [];
-    for (var item in lootDeckData["discardPile"] as List) {
-      String gfx = item["gfx"];
-      String owner = "";
-      if(item.containsKey('owner')) {
-        owner = item["owner"];
-      }
-      if(item.containsKey('id')) {
-        id = item["id"];
-      }
-
-      int enhanced = 0;
-      if(item['enhanced'].runtimeType == bool) {
-        bool enh = item['enhanced'];
-        if(enh) {
-          enhanced = 1;
-        }
-      } else {
-        enhanced = item["enhanced"];
-      }
-      LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
-      LootType lootType = LootType.values[item["lootType"]];
-      LootCard lootCard = LootCard(id: id, gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
-      lootCard.owner = owner;
-      newDiscardList.add(lootCard);
-    }
-    state.drawPile.getList().clear();
-    state.discardPile.getList().clear();
-    state.drawPile.setList(newDrawList);
-    state.discardPile.setList(newDiscardList);
-    state.cardCount.value = state.drawPile.size();
-
+    LootDeck state = LootDeck.fromJson(lootDeckData);
+    //LootDeck.empty();
     getIt<GameState>().lootDeck = state;
 
   }
