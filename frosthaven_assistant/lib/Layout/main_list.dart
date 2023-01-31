@@ -210,11 +210,13 @@ class MainListState extends State<MainList> {
   }
 
   static void scrollToTop() {
-    scrollController.animateTo(
-      0,
-      curve: Curves.easeOut,
-      duration: const Duration(milliseconds: 500),
-    );
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        0,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 500),
+      );
+    }
   }
 
   static void scrollToPosition(int index) {
