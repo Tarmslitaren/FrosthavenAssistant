@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Model/MonsterAbility.dart';
@@ -14,30 +15,28 @@ import 'modifier_deck_state.dart';
 import 'monster.dart';
 import 'monster_ability_state.dart';
 
-class GameSaveState{
-
+class GameSaveState {
   String getState() {
     return _savedState!;
   }
 
   String? _savedState;
+
   void save() {
     _savedState = getIt<GameState>().toString();
   }
-
 
   void loadLootDeck(var data) {
     var lootDeckData = data["lootDeck"];
     LootDeck state = LootDeck.fromJson(lootDeckData);
     //LootDeck.empty();
     getIt<GameState>().lootDeck = state;
-
   }
 
-  void loadModifierDeck(String identifier, var data){
+  void loadModifierDeck(String identifier, var data) {
     //modifier deck
-    String name  = "";
-    if (identifier == 'modifierDeckAllies'){
+    String name = "";
+    if (identifier == 'modifierDeckAllies') {
       name = "Allies";
     }
     var modifierDeckData = data[identifier];
@@ -48,14 +47,11 @@ class GameSaveState{
       String gfx = item["gfx"];
       if (gfx == "curse") {
         newDrawList.add(ModifierCard(CardType.curse, gfx));
-      }
-      else if (gfx == "enfeeble") {
+      } else if (gfx == "enfeeble") {
         newDrawList.add(ModifierCard(CardType.enfeeble, gfx));
-      }
-      else if (gfx == "bless") {
+      } else if (gfx == "bless") {
         newDrawList.add(ModifierCard(CardType.bless, gfx));
-      }
-      else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
+      } else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
         newDrawList.add(ModifierCard(CardType.multiply, gfx));
       } else {
         newDrawList.add(ModifierCard(CardType.add, gfx));
@@ -66,14 +62,11 @@ class GameSaveState{
       String gfx = item["gfx"];
       if (gfx == "curse") {
         newDiscardList.add(ModifierCard(CardType.curse, gfx));
-      }
-      else if (gfx == "enfeeble") {
+      } else if (gfx == "enfeeble") {
         newDiscardList.add(ModifierCard(CardType.enfeeble, gfx));
-      }
-      else if (gfx == "bless") {
+      } else if (gfx == "bless") {
         newDiscardList.add(ModifierCard(CardType.bless, gfx));
-      }
-      else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
+      } else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
         newDiscardList.add(ModifierCard(CardType.multiply, gfx));
         state.needsShuffle = true;
       } else {
@@ -106,7 +99,7 @@ class GameSaveState{
       state.addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
     }
 
-    if(identifier == 'modifierDeck') {
+    if (identifier == 'modifierDeck') {
       getIt<GameState>().modifierDeck = state;
     } else {
       getIt<GameState>().modifierDeckAllies = state;
@@ -116,112 +109,121 @@ class GameSaveState{
   Future<void> load() async {
     if (_savedState != null) {
       GameState gameState = getIt<GameState>();
-      Map<String, dynamic> data = jsonDecode(_savedState!);
-      gameState.level.value = data['level'] as int;
-      gameState.scenario.value = data['scenario']; // as String;
-      if(data.containsKey('toastMessage')) {
-        gameState.toastMessage.value = data['toastMessage']; // as String;
-      }
+      Map<String, dynamic> data = {};
+      try {
+        var data = json.decode(_savedState!) as Map<String, dynamic>;
 
-      if(data.containsKey('scenarioSpecialRules')) {
-        var scenarioSpecialRulesList = data['scenarioSpecialRules'] as List;
-        gameState.scenarioSpecialRules.clear();
-        for (Map<String, dynamic> item in scenarioSpecialRulesList) {
-          gameState.scenarioSpecialRules.add(SpecialRule.fromJson(item));
+        gameState.level.value = data['level'] as int;
+        gameState.scenario.value = data['scenario']; // as String;
+        if (data.containsKey('toastMessage')) {
+          gameState.toastMessage.value = data['toastMessage']; // as String;
         }
-      }
-      gameState.currentCampaign.value = data['currentCampaign'];
-      //TODO: currentCampaign does not update properly (because changing it is not a command)
-      gameState.round.value = data['round'] as int;
-      gameState.roundState.value = RoundState.values[data['roundState']];
-      gameState.solo.value =
-      data['solo'] as bool; //TODO: does not update properly (because changing it is not a command)
 
-      //main list
-      var list = data['currentList'] as List;
-      gameState.currentList.clear();
-      List<ListItemData> newList = [];
-      for (Map<String, dynamic> item in list) {
-        if (item["characterClass"] != null) {
-          Character character = Character.fromJson(item);
-          //is character
-          newList.add(character);
-        } else if (item["type"] != null) {
-          //is monster
-          Monster monster = Monster.fromJson(item);
-          newList.add(monster);
-        }
-      }
-      gameState.currentList = newList;
-
-      var unlockedClassesList = data['unlockedClasses'] as List;
-      gameState.unlockedClasses.clear();
-      for (String item in unlockedClassesList) {
-        gameState.unlockedClasses.add(item);
-      }
-
-      //ability decks
-      var decks = data['currentAbilityDecks'] as List;
-      gameState.currentAbilityDecks.clear();
-      for (Map<String, dynamic> item in decks) {
-        MonsterAbilityState state = MonsterAbilityState(item["name"]);
-
-        List<MonsterAbilityCardModel> newDrawList = [];
-        List drawPile = item["drawPile"] as List;
-        for (var item in drawPile) {
-          int nr = item["nr"];
-          for (var card in state.drawPile.getList()) {
-            if (card.nr == nr) {
-              newDrawList.add(card);
-              break;
-            }
+        if (data.containsKey('scenarioSpecialRules')) {
+          var scenarioSpecialRulesList = data['scenarioSpecialRules'] as List;
+          gameState.scenarioSpecialRules.clear();
+          for (Map<String, dynamic> item in scenarioSpecialRulesList) {
+            gameState.scenarioSpecialRules.add(SpecialRule.fromJson(item));
           }
         }
-        List<MonsterAbilityCardModel> newDiscardList = [];
-        for (var item in item["discardPile"] as List) {
-          int nr = item["nr"];
-          for (var card in state.drawPile.getList()) {
-            if (card.nr == nr) {
-              newDiscardList.add(card);
-              break;
-            }
+        gameState.currentCampaign.value = data['currentCampaign'];
+        //TODO: currentCampaign does not update properly (because changing it is not a command)
+        gameState.round.value = data['round'] as int;
+        gameState.roundState.value = RoundState.values[data['roundState']];
+        gameState.solo.value = data['solo']
+            as bool; //TODO: does not update properly (because changing it is not a command)
+
+        //main list
+        var list = data['currentList'] as List;
+        gameState.currentList.clear();
+        List<ListItemData> newList = [];
+        for (Map<String, dynamic> item in list) {
+          if (item["characterClass"] != null) {
+            Character character = Character.fromJson(item);
+            //is character
+            newList.add(character);
+          } else if (item["type"] != null) {
+            //is monster
+            Monster monster = Monster.fromJson(item);
+            newList.add(monster);
           }
         }
-        if (item.containsKey("lastRoundDrawn")) {
-          state.lastRoundDrawn = item["lastRoundDrawn"];
+        gameState.currentList = newList;
+
+        var unlockedClassesList = data['unlockedClasses'] as List;
+        gameState.unlockedClasses.clear();
+        for (String item in unlockedClassesList) {
+          gameState.unlockedClasses.add(item);
         }
 
-        state.drawPile.getList().clear();
-        state.discardPile.getList().clear();
-        state.drawPile.setList(newDrawList);
-        state.discardPile.setList(newDiscardList);
-        gameState.currentAbilityDecks.add(state);
+        //ability decks
+        var decks = data['currentAbilityDecks'] as List;
+        gameState.currentAbilityDecks.clear();
+        for (Map<String, dynamic> item in decks) {
+          MonsterAbilityState state = MonsterAbilityState(item["name"]);
+
+          List<MonsterAbilityCardModel> newDrawList = [];
+          List drawPile = item["drawPile"] as List;
+          for (var item in drawPile) {
+            int nr = item["nr"];
+            for (var card in state.drawPile.getList()) {
+              if (card.nr == nr) {
+                newDrawList.add(card);
+                break;
+              }
+            }
+          }
+          List<MonsterAbilityCardModel> newDiscardList = [];
+          for (var item in item["discardPile"] as List) {
+            int nr = item["nr"];
+            for (var card in state.drawPile.getList()) {
+              if (card.nr == nr) {
+                newDiscardList.add(card);
+                break;
+              }
+            }
+          }
+          if (item.containsKey("lastRoundDrawn")) {
+            state.lastRoundDrawn = item["lastRoundDrawn"];
+          }
+
+          state.drawPile.getList().clear();
+          state.discardPile.getList().clear();
+          state.drawPile.setList(newDrawList);
+          state.discardPile.setList(newDiscardList);
+          gameState.currentAbilityDecks.add(state);
+        }
+
+        loadModifierDeck('modifierDeck', data);
+        loadModifierDeck('modifierDeckAllies', data);
+        loadLootDeck(data);
+
+        //////elements
+        Map elementData = data['elementState'];
+        Map<Elements, ElementState> newMap = {};
+        newMap[Elements.fire] =
+            ElementState.values[elementData[Elements.fire.index.toString()]];
+        newMap[Elements.ice] =
+            ElementState.values[elementData[Elements.ice.index.toString()]];
+        newMap[Elements.air] =
+            ElementState.values[elementData[Elements.air.index.toString()]];
+        newMap[Elements.earth] =
+            ElementState.values[elementData[Elements.earth.index.toString()]];
+        newMap[Elements.light] =
+            ElementState.values[elementData[Elements.light.index.toString()]];
+        newMap[Elements.dark] =
+            ElementState.values[elementData[Elements.dark.index.toString()]];
+        gameState.elementState.value = newMap;
+      } catch (e) {
+        if (kDebugMode) {
+          print(e.toString());
+        }
       }
-
-      loadModifierDeck('modifierDeck', data);
-      loadModifierDeck('modifierDeckAllies', data);
-      loadLootDeck(data);
-
-      //////elements
-      Map elementData = data['elementState'];
-      Map<Elements, ElementState> newMap = {};
-      newMap[Elements.fire] =
-      ElementState.values[elementData[Elements.fire.index.toString()]];
-      newMap[Elements.ice] =
-      ElementState.values[elementData[Elements.ice.index.toString()]];
-      newMap[Elements.air] =
-      ElementState.values[elementData[Elements.air.index.toString()]];
-      newMap[Elements.earth] =
-      ElementState.values[elementData[Elements.earth.index.toString()]];
-      newMap[Elements.light] =
-      ElementState.values[elementData[Elements.light.index.toString()]];
-      newMap[Elements.dark] =
-      ElementState.values[elementData[Elements.dark.index.toString()]];
-      gameState.elementState.value = newMap;
     }
   }
-  Future<void> saveToDisk() async{
-    if(_savedState == null) {
+
+  Future<void> saveToDisk() async {
+    if (_savedState == null) {
       save();
     }
     const sharedPrefsKey = 'gameState';
@@ -241,6 +243,7 @@ class GameSaveState{
     _isWaiting = false;
     //notifyListeners();
   }
+
   Future<void> loadFromDisk() async {
     //have to call after init or element state overridden
 
@@ -257,7 +260,7 @@ class GameSaveState{
     }
     _isWaiting = false;
 
-    if (_savedState != null){
+    if (_savedState != null) {
       load();
     }
   }
