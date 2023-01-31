@@ -345,9 +345,6 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 height: 40,
                                 child: TextField(
                                     controller: _serverTextController,
-                                    keyboardType: Platform.isAndroid
-                                        ? TextInputType.number
-                                        : null,
                                     decoration: const InputDecoration(
                                       counterText: "",
                                       helperText: "server ip address",
