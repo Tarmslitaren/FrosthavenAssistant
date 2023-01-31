@@ -337,7 +337,9 @@
         }
       ]
     },
-    "Shardrender": {
+    "Shardrender (monster)": {
+      "gfx": "Shardrender",
+      "display": "Shardrender",
       "deck": "Orchid Shardrender",
       "count": 1,
       "levels": [
@@ -1368,11 +1370,11 @@
   },
   "sections": {
     "#19A (Scenario 71)": {
-      "monsters": ["Shardrender", "Enraged Vanquisher"],
+      "monsters": ["Shardrender (monster)", "Enraged Vanquisher"],
       "special": [
         {
           "type": "Allies",
-          "list": ["Shardrender"]
+          "list": ["Shardrender (monster)"]
         }
       ]
     },

@@ -74,8 +74,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
   void initState() {
     super.initState();
     for (var item in _gameState.currentList) {
-      if (item.id == widget.characterId) {
-        character = item as Character;
+      if (item.id == widget.characterId && item is Character) {
+        character = item;
       }
     }
     lastList = character.characterState.summonList.value;
@@ -687,8 +687,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
   @override
   Widget build(BuildContext context) {
     for (var item in _gameState.currentList) {
-      if (item.id == widget.characterId) {
-        character = item as Character;
+      if (item.id == widget.characterId && item is Character) {
+        character = item;
       }
     }
 
