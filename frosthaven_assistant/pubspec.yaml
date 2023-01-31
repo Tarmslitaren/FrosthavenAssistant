@@ -35,7 +35,7 @@ dependencies:
   #implicitly_animated_reorderable_list: ^0.4.2
   #great_list_view: ^0.1.4 #is great for simple lists
   #flutter_reorderable_grid_view: ^3.1.1 #maybe this will work well? - or not.
-  flutter_layout_grid: ^1.0.3
+  flutter_layout_grid: ^2.0.1
   #flutter_staggered_grid_view: ^0.6.1
   #reorderableitemsview: ^2.0.1 # builds on staggered grid view. doesn't fit + trashy reorder anims. also uses old version of staggered :(
   reorderables: ^0.6.0
@@ -57,11 +57,11 @@ dependencies:
   animated_text_kit: ^4.2.2
 
   #ping_discover_network: ^0.2.0+1 -useful for finding other devices on network, not sure if useful for this
-  network_info_plus: ^2.1.4+1
+  network_info_plus: ^3.0.1
 
   dart_ipify: ^1.1.1 #get outgoing ip
 
-  connectivity_plus: ^2.3.7 #poll for network changes
+  connectivity_plus: ^3.0.2 #poll for network changes
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -81,9 +81,9 @@ dependencies:
 
   wakelock: ^0.6.1+2 #keep awake on android
 
-  window_manager: ^0.2.7 #to be able to set fullscreen on windows
+  window_manager: ^0.3.0 #to be able to set fullscreen on windows
 
-  flutter_launcher_icons: ^0.10.0 #I can't believe we need a third party package to do icons..
+  flutter_launcher_icons: ^0.11.0 #I can't believe we need a third party package to do icons..
 
   flutter_native_splash: ^2.2.8 # and same for splash :)
 
@@ -99,7 +99,7 @@ dependencies:
 
   #dyn_mouse_scroll: ^1.0.7 #nope
 
-  collection: ^1.16.0
+  collection: ^1.17.0
 
   window_size:
     git:
