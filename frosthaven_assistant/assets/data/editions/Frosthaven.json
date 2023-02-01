@@ -671,7 +671,7 @@
         ["Hasty Assault", 866, false, 36, "%move% + 1","*.........", "%attack% - 1", "^%range% 3", "%earth%" ],
         ["Nothing Special", 867, false, 57, "%move% + 0","*.........", "%attack% + 0", "^%range% 3" ],
         ["Toxic Explosion", 868, false, 59, "%attack% + 0", "^%target% 2,","^%range% 3,", "^%poison%", "[r]", "%earth%%use%", "^+1%target%", "[/r]" ],
-        ["calculated Strike", 870, false, 66, "%move% - 1","*.........", "%attack% + 1", "^%range% 4", "%dark%" ],
+        ["Calculated Strike", 870, false, 66, "%move% - 1","*.........", "%attack% + 1", "^%range% 4", "%dark%" ],
         ["Split", 671, true, 94, "^Ooze suffers damage 2.","*.........",
           "^Summon one normal Ooze with","^a hit point value equal to the","^summoning Ooze's current hit point","^value (limited by a normal Ooze's","^maximum hit point value)."],
         ["Split", 872, true, 94, "^Ooze suffers 2 damage","*.........",
@@ -1080,7 +1080,7 @@
       "cards": [
         ["Warding Swipe", 730, true, 17, "%move% + 1", "**.........", "[r]","%attack% - 1",  "¤aoe-arc-4", "[/r]","**.........", "%shield% + 1", "%earth%"],
         ["Two-fisted Strike", 732, false, 41,  "%move% - 1", "**.........","%attack% - 1","[r]","%ice%%use%","+2%attack%", "[/r]","**.........","%attack% - 1","[r]","%earth%%use%","+2%attack%", "[/r]"],
-        ["ice Wall", 734, false, 8,  "^Create one 1-hex obstacle", "^^tile in an adjacent empty", "^^hex closest to an enemy.","*.........","^All enemies adjacent to the created", "^^obstacle suffer hazardous terrain damage.", "[r]", "%ice%", "ÅK", "%earth%", "[/r]"],
+        ["Ice Wall", 734, false, 8,  "^Create one 1-hex obstacle", "^^tile in an adjacent empty", "^^hex closest to an enemy.","*.........","^All enemies adjacent to the created", "^^obstacle suffer hazardous terrain damage.", "[r]", "%ice%", "ÅK", "%earth%", "[/r]"],
         ["One with the Earth", 737, false, 12, "%shield% 3","*.........", "[r]","%earth%%use%","[c]","%heal% 1", "^Self" , "[/c]", "[/r]", "*.........","%heal% 3", "^Self"],
         ["Knockout Punch", 731, false, 76, "%move% + 0", "*.........","%attack% - 1", "^%stun%", "%ice%"],
         ["Frozen Debris", 733, false, 39,  "%move% - 1", "*.........","%attack% + 0", "^%range% 3", "[r]","%ice%%use%","%immobilize%", "[/r]"],
@@ -8357,7 +8357,7 @@
         }
       ]
     },
-    "#48.1 realm of Endless Frost (21)": {
+    "#48.1 Realm of Endless Frost (21)": {
       "special": [
         {
           "type": "Objective",
