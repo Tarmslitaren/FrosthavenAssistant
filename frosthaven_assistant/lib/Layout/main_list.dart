@@ -306,12 +306,24 @@ class MainListState extends State<MainList> {
     double screenHeight = MediaQuery.of(context).size.height -
         80 * getIt<Settings>().userScalingBars.value;
 
-    //if can't fit without scroll
+
+
     if (widgetPositions.isNotEmpty) {
+
+      bool allFitInView = false;
+      if(widgetPositions.last < screenHeight * 2) {
+        //can fit all??
+        allFitInView = true;
+      }
 
       //find center point
       for (int i = 0; i < widgetPositions.length; i++) {
         if (widgetPositions[i] > widgetPositions.last / 2) {
+          if(allFitInView) {
+            if(widgetPositions[i] > screenHeight) {
+              return i;
+            }
+          }
           return i + 1;
         }
       }
