@@ -139,7 +139,10 @@ class SetScenarioCommand extends Command {
       }
     }
 
-    GameMethods.shuffleDecks();
+    if (!section) {
+      GameMethods.shuffleDecks();
+    }
+
     //hack for banner spear solo special rule
     if (_scenario.contains("Banner Spear: Scouting Ambush") ) {
         MonsterAbilityState deck = _gameState.currentAbilityDecks.firstWhere((element) => element.name.contains("Scout"));
