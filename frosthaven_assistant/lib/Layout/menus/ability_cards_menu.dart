@@ -172,10 +172,9 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           var discardPile = widget.monsterAbilityState.discardPile.getList();
           return Container(
               constraints: BoxConstraints(
-                  //minWidth: MediaQuery.of(context).size.width,
                   maxWidth: MediaQuery.of(context)
                       .size
-                      .width, // 184 * 0.8 * scale * 2 + 8,
+                      .width,
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(
                   color: Colors.transparent,

@@ -137,7 +137,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
 
   Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen,
       bool hasDiviner, String name) {
-
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Theme(
@@ -203,175 +202,169 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(
                   color: Colors.transparent,
-                  child: Stack(
-                      //fit: StackFit.expand,
-                      children: [
-                        Column(mainAxisSize: MainAxisSize.max, children: [
-                          Container(
-                              //width: 900, //need some width to fill out
-                              margin: const EdgeInsets.all(2),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(4),
-                                      topRight: Radius.circular(4))),
-                              child: Wrap(
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  runSpacing: 0,
-                                  spacing: 0,
-                                  //mainAxisSize: MainAxisSize.max,
-                                  //crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    if (hasDiviner)
-                                      if (deck.badOmen.value == 0)
-                                        TextButton(
-                                          onPressed: () {
-                                            _gameState.action(BadOmenCommand(
-                                                name == "Allies"));
-                                          },
-                                          child: const Text("Bad Omen"),
-                                        ),
-                                    if (deck.badOmen.value > 0)
-                                      Text(
-                                          "BadOmensLeft: ${deck.badOmen.value}",
-                                          style: getTitleTextStyle(1)),
+                  child: Stack(children: [
+                    Column(mainAxisSize: MainAxisSize.max, children: [
+                      Container(
+                          width: MediaQuery.of(context)
+                              .size
+                              .width, //need some width to fill out
+                          margin: const EdgeInsets.all(2),
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(4),
+                                  topRight: Radius.circular(4))),
+                          child: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              runSpacing: 0,
+                              spacing: 0,
+                              children: [
+                                if (hasDiviner)
+                                  if (deck.badOmen.value == 0)
                                     TextButton(
                                       onPressed: () {
-                                        _gameState.action(EnfeeblingHexCommand(
-                                            name == "Allies"));
+                                        _gameState.action(
+                                            BadOmenCommand(name == "Allies"));
                                       },
-                                      child: Text(
-                                          "Add -1 card (added : ${deck.addedMinusOnes.value})"),
+                                      child: const Text("Bad Omen"),
                                     ),
-                                    TextButton(
-                                      onPressed: () {
-                                        if (deck.hasMinus1()) {
-                                          _gameState.action(
-                                              AMDRemoveMinus1Command(
-                                                  name == "Allies"));
-                                        }
-                                      },
-                                      child: const Text("Remove -1 card"),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        if (deck.hasMinus2()) {
-                                          _gameState.action(
-                                              AMDRemoveMinus2Command(
-                                                  name == "Allies"));
-                                        }
-                                      },
-                                      child: const Text(
-                                        "Remove -2 card",
-                                      ),
-                                    ),
-                                    //todo: (gray out if maxed out)
-                                    CounterButton(
-                                        deck.blesses,
-                                        ChangeBlessCommand.deck(deck),
-                                        10,
-                                        "assets/images/abilities/bless.png",
-                                        true,
-                                        Colors.white,
-                                        figureId: "unknown",
-                                        ownerId: "unknown",
-                                        scale: 1),
-                                    CounterButton(
-                                        deck.curses,
-                                        ChangeCurseCommand.deck(deck),
-                                        10,
-                                        "assets/images/abilities/curse.png",
-                                        true,
-                                        Colors.white,
-                                        figureId: "unknown",
-                                        ownerId: "unknown",
-                                        scale: 1),
-                                    if (GameMethods.getFigure(
-                                            "Incarnate", "Incarnate") !=
-                                        null)
-                                      CounterButton(
-                                          deck.enfeebles,
-                                          ChangeEnfeebleCommand.deck(deck),
-                                          10,
-                                          "assets/images/abilities/enfeeble.png",
-                                          true,
-                                          Colors.white,
-                                          figureId: "unknown",
-                                          ownerId: "unknown",
-                                          scale: 1),
-
-                                    const Text(
-                                      "   Reveal:",
-                                      //style: TextStyle(color: Colors.white)
-                                    ),
-                                    drawPile.length > 0
-                                        ? buildRevealButton(
-                                            drawPile.length, 1, deck)
-                                        : Container(),
-                                    drawPile.length > 1
-                                        ? buildRevealButton(
-                                            drawPile.length, 2, deck)
-                                        : Container(),
-                                    drawPile.length > 2
-                                        ? buildRevealButton(
-                                            drawPile.length, 3, deck)
-                                        : Container(),
-                                    drawPile.length > 3
-                                        ? buildRevealButton(
-                                            drawPile.length, 4, deck)
-                                        : Container(),
-                                    drawPile.length > 4
-                                        ? buildRevealButton(
-                                            drawPile.length, 5, deck)
-                                        : Container(),
-                                    drawPile.length > 5
-                                        ? buildRevealButton(
-                                            drawPile.length, 6, deck)
-                                        : Container(),
-                                  ])),
-                          Flexible(
-                              child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              buildList(drawPile, true, false, hasDiviner,
-                                  widget.name),
-                              buildList(discardPile, false, true, hasDiviner,
-                                  widget.name)
-                            ],
-                          )),
-                          Container(
-                            // color: Colors.white,
-                            height: 32,
-                            margin: const EdgeInsets.all(2),
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(4),
-                                    bottomRight: Radius.circular(4))),
-                          ),
-                        ]),
-                        Positioned(
-                            width: 100,
-                            height: 40,
-                            right: 0,
-                            bottom: 0,
-                            child: TextButton(
-                                child: const Text(
-                                  'Close',
-                                  style: TextStyle(fontSize: 20),
+                                if (deck.badOmen.value > 0)
+                                  Text("BadOmensLeft: ${deck.badOmen.value}",
+                                      style: getTitleTextStyle(1)),
+                                TextButton(
+                                  onPressed: () {
+                                    _gameState.action(
+                                        EnfeeblingHexCommand(name == "Allies"));
+                                  },
+                                  child: Text(
+                                      "Add -1 card (added : ${deck.addedMinusOnes.value})"),
                                 ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                })),
-                        Positioned(
-                            bottom: 4,
-                            left: 20,
-                            child: Text(
-                              name,
-                              style: const TextStyle(fontSize: 20),
-                            ))
-                      ])));
+                                TextButton(
+                                  onPressed: () {
+                                    if (deck.hasMinus1()) {
+                                      _gameState.action(AMDRemoveMinus1Command(
+                                          name == "Allies"));
+                                    }
+                                  },
+                                  child: const Text("Remove -1 card"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    if (deck.hasMinus2()) {
+                                      _gameState.action(AMDRemoveMinus2Command(
+                                          name == "Allies"));
+                                    }
+                                  },
+                                  child: const Text(
+                                    "Remove -2 card",
+                                  ),
+                                ),
+                                //todo: (gray out if maxed out)
+                                CounterButton(
+                                    deck.blesses,
+                                    ChangeBlessCommand.deck(deck),
+                                    10,
+                                    "assets/images/abilities/bless.png",
+                                    true,
+                                    Colors.white,
+                                    figureId: "unknown",
+                                    ownerId: "unknown",
+                                    scale: 1),
+                                CounterButton(
+                                    deck.curses,
+                                    ChangeCurseCommand.deck(deck),
+                                    10,
+                                    "assets/images/abilities/curse.png",
+                                    true,
+                                    Colors.white,
+                                    figureId: "unknown",
+                                    ownerId: "unknown",
+                                    scale: 1),
+                                if (GameMethods.getFigure(
+                                        "Incarnate", "Incarnate") !=
+                                    null)
+                                  CounterButton(
+                                      deck.enfeebles,
+                                      ChangeEnfeebleCommand.deck(deck),
+                                      10,
+                                      "assets/images/abilities/enfeeble.png",
+                                      true,
+                                      Colors.white,
+                                      figureId: "unknown",
+                                      ownerId: "unknown",
+                                      scale: 1),
+
+                                const Text(
+                                  "   Reveal:",
+                                  //style: TextStyle(color: Colors.white)
+                                ),
+                                drawPile.length > 0
+                                    ? buildRevealButton(
+                                        drawPile.length, 1, deck)
+                                    : Container(),
+                                drawPile.length > 1
+                                    ? buildRevealButton(
+                                        drawPile.length, 2, deck)
+                                    : Container(),
+                                drawPile.length > 2
+                                    ? buildRevealButton(
+                                        drawPile.length, 3, deck)
+                                    : Container(),
+                                drawPile.length > 3
+                                    ? buildRevealButton(
+                                        drawPile.length, 4, deck)
+                                    : Container(),
+                                drawPile.length > 4
+                                    ? buildRevealButton(
+                                        drawPile.length, 5, deck)
+                                    : Container(),
+                                drawPile.length > 5
+                                    ? buildRevealButton(
+                                        drawPile.length, 6, deck)
+                                    : Container(),
+                              ])),
+                      Flexible(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildList(
+                              drawPile, true, false, hasDiviner, widget.name),
+                          buildList(
+                              discardPile, false, true, hasDiviner, widget.name)
+                        ],
+                      )),
+                      Container(
+                        height: 32,
+                        margin: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(4),
+                                bottomRight: Radius.circular(4))),
+                      ),
+                    ]),
+                    Positioned(
+                        width: 100,
+                        height: 40,
+                        right: 0,
+                        bottom: 0,
+                        child: TextButton(
+                            child: const Text(
+                              'Close',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            })),
+                    Positioned(
+                        bottom: 4,
+                        left: 20,
+                        child: Text(
+                          name,
+                          style: const TextStyle(fontSize: 20),
+                        ))
+                  ])));
         });
   }
 }
