@@ -12,15 +12,16 @@ class ActivateMonsterTypeCommand extends Command {
   final String name;
   final bool activate;
 
-  ActivateMonsterTypeCommand(this.name, this.activate) {
-  }
+  ActivateMonsterTypeCommand(this.name, this.activate);
 
   @override
   void execute() {
+    Monster? monster;
     for (var item in _gameState.currentList) {
       if (item.id == name) {
         if(item is Monster) {
           item.isActive = activate;
+          monster = item;
         }
       }
     }
@@ -29,7 +30,7 @@ class ActivateMonsterTypeCommand extends Command {
         GameMethods.sortCharactersFirst();
       } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
         GameMethods.drawAbilityCardFromInactiveDeck();
-        GameMethods.sortByInitiative();
+        GameMethods.sortItemToPlace(name, GameMethods.getInitiative(monster!));
       }
     }
     if(getIt<GameState>().roundState.value == RoundState.playTurns) {

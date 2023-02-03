@@ -113,7 +113,7 @@ class AddStandeeCommand extends Command {
         GameMethods.sortCharactersFirst();
       } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
         GameMethods.drawAbilityCardFromInactiveDeck();
-        GameMethods.sortByInitiative();
+        GameMethods.sortItemToPlace(monster.id, GameMethods.getInitiative(monster)); //need to only sort this one item to place
       }
     }
     if(getIt<GameState>().roundState.value == RoundState.playTurns) {

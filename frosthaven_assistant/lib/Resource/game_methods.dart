@@ -213,6 +213,53 @@ class GameMethods {
     //_gameState.currentList = newList;
   }
 
+  static int getInitiative(ListItemData item) {
+    if(item is Character) {
+      return item.characterState.initiative.value;
+    } else if (item is Monster) {
+      if (item.monsterInstances.value.isEmpty && !item.isActive) {
+        return 0;
+      }
+      for (var deck in _gameState.currentAbilityDecks) {
+        if (deck.name == item.type.deck) {
+          if(deck.discardPile.isNotEmpty) {
+            return deck.discardPile.peek.initiative;
+          }
+        }
+      }
+    }
+    return 0;
+  }
+
+  static void sortItemToPlace(String id, int initiative) {
+    var newList = _gameState.currentList.toList();
+    ListItemData? item;
+    for (int i = 0; i < newList.length; i++) {
+      if(newList[i].id == id) {
+        item = newList.removeAt(i);
+        break;
+      }
+    }
+    if (item == null) {
+      return;
+    }
+
+    int init = 0;
+    for (int i = 0; i < newList.length; i++) {
+      ListItemData currentItem = newList[i];
+      int currentItemInitiative = getInitiative(currentItem);
+      if(currentItemInitiative > initiative && currentItemInitiative > init) {
+        newList.insert(i, item);
+        _gameState.currentList = newList;
+        return;
+      }
+      init = currentItemInitiative; //this check is for the case user has moved items around the order may be off
+    }
+
+    newList.add(item);
+    _gameState.currentList = newList;
+  }
+
   static void sortByInitiative() {
     _gameState.currentList.sort((a, b) {
       //dead characters dead last
