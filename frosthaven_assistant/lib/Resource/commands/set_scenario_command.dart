@@ -135,7 +135,7 @@ class SetScenarioCommand extends Command {
           isAlly = true;
         }
         _gameState.currentList.add(GameMethods.createMonster(
-            monster, min(_gameState.level.value + levelAdjust, 7), isAlly)!);
+            monster, (_gameState.level.value + levelAdjust).clamp(0, 7), isAlly)!);
       }
     }
 
