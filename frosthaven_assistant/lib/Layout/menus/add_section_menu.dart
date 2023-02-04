@@ -47,7 +47,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     //TODO:clear search
     _gameState.currentCampaign.value = campaign;
     _foundScenarios = _gameState
-        .modelData.value[_gameState.currentCampaign.value]!.sections.keys
+        .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.keys
         .toList();
     _foundScenarios.sort((a, b) {
       int? aNr = findNrFromScenarioName(a);
@@ -65,11 +65,11 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
       results = _gameState
-          .modelData.value[_gameState.currentCampaign.value]!.sections.keys
+          .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.keys
           .toList();
     } else {
       results = _gameState
-          .modelData.value[_gameState.currentCampaign.value]!.sections.keys
+          .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.keys
           .toList()
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))

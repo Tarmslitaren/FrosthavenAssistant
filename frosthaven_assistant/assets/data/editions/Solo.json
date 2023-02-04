@@ -1900,14 +1900,23 @@
 			"monsters": [ "Cave Bear", "Giant Viper", "Hound", "Vermling Scout", "Vermling Shaman" ]
 		},
 		"#41 Fire Knight: Through the Fire and the Flames": {
-			"monsters": [ "Flame Demon", "Rending Drake #60 Special", "Savvas Lavaflow", "Spitting Drake" ]
+			"monsters": [ "Flame Demon", "Rending Drake #60 Special", "Savvas Lavaflow", "Spitting Drake" ],
+			"sections": {
+				"#68A Scenario 60": {
+					"monsters": [ "Drakefiend" ]
+				}
+			}
 		},
 		"#42 Hierophant: Archaic Preservation": {
 			"monsters": [ "Ancient Artillery", "Black Imp", "Lurker", "Rending Drake", "Stone Golem" ]
 		},
 		"#43 Hollowpact: Hallow Redemption": {
 			"monsters": [ "Aesther Ashblade", "Cave Bear", "Forest Imp", "Vermling Shaman" ],
-
+			"sections": {
+				"#71A Scenario 62": {
+					"monsters": [ "Your Shadow" ]
+				}
+			},
 			"special": [
 				{
 					"type": "LevelAdjust",
@@ -1935,7 +1944,35 @@
 					"name": "Angry Spirit 2",
 					"init": 25,
 					"health": "6"
-				}]
+				}],
+			"sections": {
+				"#73C Scenario 65": {
+					"monsters": [],
+					"special": [
+						{
+							"type": "Objective",
+							"name": "Vile Spirit 1",
+							"health": 4,
+							"init": 50
+						},
+						{
+							"type": "Objective",
+							"name": "Vile Spirit 2",
+							"health": 4,
+							"init": 50
+						}]
+				},
+				"#73D Scenario 65": {
+					"monsters": [],
+					"special": [
+						{
+							"type": "Objective",
+							"name": "Haunted Ghoul Spirit 1",
+							"health": 10,
+							"init": 50
+						}]
+				}
+			}
 		},
 		"#47 Starslinger: Otherworldly Strangers": {
 			"monsters": [ "City Archer", "City Guard", "Earth Demon", "Harrower Infester", "Night Demon", "Sun Demon" ]
@@ -1983,6 +2020,11 @@
 		},
 		"#49 Artificer: Magnum Opus": {
 			"monsters": [  "Clockwork Soldier", "Clockwork Railcaster" ],
+			"sections": {
+				"#2 Mechanical Menace": {
+					"monsters": [ "Clockwork Devastator" ]
+				}
+			},
 			"special": [
 				{
 					"type": "Timer",
@@ -2010,7 +2052,12 @@
 		},
 
 		"#51 Incarnate: Unsouled": {
-			"monsters": [ "Inox Archer", "Inox Guard", "Inox Guard (ally)"]
+			"monsters": [ "Inox Archer", "Inox Guard", "Inox Guard (ally)"],
+			"sections": {
+				"#38A (Scenario 79)": {
+					"monsters": ["Okeda"]
+				}
+			}
 		},
 		"#52 Rimehearth: Conflux of Power": {
 			"monsters": [ "Savvas Acolyte","Inferno Demon", "Glacier Demon", "Flame Demon", "Frost Demon" ]
@@ -2055,46 +2102,6 @@
 		},
 		"#56 Vanquisher: Return to Crystal Gardens": {
 			"monsters": [ "Shardrender (84)", "Smoke Spirit"]
-		}
-	},
-	"sections": {
-		"#68A Scenario 60": {
-			"monsters": [ "Drakefiend" ]
-		},
-		"#71A Scenario 62": {
-			"monsters": [ "Your Shadow" ]
-		},
-		"#73C Scenario 65": {
-			"monsters": [],
-			"special": [
-				{
-					"type": "Objective",
-					"name": "Vile Spirit 1",
-					"health": 4,
-					"init": 50
-				},
-				{
-					"type": "Objective",
-					"name": "Vile Spirit 2",
-					"health": 4,
-					"init": 50
-				}]
-		},
-		"#73D Scenario 65": {
-			"monsters": [],
-			"special": [
-				{
-					"type": "Objective",
-					"name": "Haunted Ghoul Spirit 1",
-					"health": 10,
-					"init": 50
-				}]
-		},
-		"#QA2 Mechanical Menace": {
-			"monsters": [ "Clockwork Devastator" ]
-		},
-		"#38A (Scenario 79)": {
-			"monsters": ["Okeda"]
 		}
 	}
 }

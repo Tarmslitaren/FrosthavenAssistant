@@ -85,22 +85,22 @@ class SetScenarioCommand extends Command {
     List<SpecialRule> specialRules = [];
     String initMessage = "";
     if (section) {
-      monsters = _gameState.modelData.value[_gameState
-          .currentCampaign.value]!.sections[_scenario]!.monsters;
-
-      specialRules = _gameState.modelData.value[_gameState
-          .currentCampaign.value]!.sections[_scenario]!.specialRules.toList();
-
-      initMessage = _gameState.modelData.value[_gameState
-          .currentCampaign.value]!.sections[_scenario]!.initMessage;
+      var sectionData = _gameState.modelData.value[_gameState
+          .currentCampaign.value]?.scenarios[_gameState.scenario.value]?.sections[_scenario];
+      if(sectionData != null) {
+        monsters = sectionData.monsters;
+        specialRules = sectionData.specialRules.toList();
+        initMessage = sectionData.initMessage;
+      }
     }else{
       if(_scenario != "custom") {
-        monsters = _gameState.modelData.value[_gameState
-            .currentCampaign.value]!.scenarios[_scenario]!.monsters;
-        specialRules = _gameState.modelData.value[_gameState
-            .currentCampaign.value]!.scenarios[_scenario]!.specialRules.toList();
-        initMessage = _gameState.modelData.value[_gameState
-            .currentCampaign.value]!.scenarios[_scenario]!.initMessage;
+        var scenarioData = _gameState.modelData.value[_gameState
+            .currentCampaign.value]?.scenarios[_scenario];
+        if (scenarioData != null) {
+          monsters = scenarioData.monsters;
+          specialRules = scenarioData.specialRules.toList();
+          initMessage = scenarioData.initMessage;
+        }
       }
     }
 

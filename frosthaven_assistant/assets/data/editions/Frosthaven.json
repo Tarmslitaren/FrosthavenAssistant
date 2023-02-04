@@ -6050,7 +6050,18 @@
         {
           "type": "Allies",
           "list": ["Algox Priest"]
-        }]
+        }],
+      "sections": {
+        "#6.1 Algox Scouting (2)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Ice Sheet",
+              "health": "(L+2)xC"
+            }
+          ]
+        }
+      }
     },
     "#3 Algox Offensive": {
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest","Hound (FH)" ],
@@ -6076,7 +6087,19 @@
     },
     "#5 Frozen Crypt": {
       "monsters": [ "Frozen Corpse", "Ice Wraith" ],
-      "lootDeck": {"coin":6,"lumber": 4,"metal":3,"hide": 1,"rockroot":2,"corpsecap":2}
+      "lootDeck": {"coin":6,"lumber": 4,"metal":3,"hide": 1,"rockroot":2,"corpsecap":2},
+      "sections": {
+        "#7.2 Frozen Crypt (5)": {
+          "note": "resetting turn tracker is not supported (or in 3 turns from now..)",
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar a",
+              "health": "(L+3)xC"
+            }
+          ]
+        }
+      }
     },
     "#6 Avalanche": {
       "monsters": [ "Frost Demon (FH)", "Snow Imp" ],
@@ -6084,11 +6107,30 @@
     },
     "#7 Edge of the World": {
       "monsters": [ "Lurker Clawcrusher", "Lurker Mindsnipper" ,"Lurker Soldier" ],
-      "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 3,"axenut":1,"snowthistle":2}
+      "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 3,"axenut":1,"snowthistle":2},
+      "sections": {
+        "#48.4 Edge of the World (7)": {
+          "monsters": ["Coral Corpse"]
+        }
+      }
     },
     "#8 Crystal Trench": {
       "monsters": [ "Hound (FH)", "Polar Bear", "Snow Imp" ],
-      "lootDeck": {"coin":6,"lumber": 5,"hide": 5,"axenut":1,"arrowvine":1, "snowthistle": 1}
+      "lootDeck": {"coin":6,"lumber": 5,"hide": 5,"axenut":1,"arrowvine":1, "snowthistle": 1},
+      "sections": {
+        "#21.1 Crystal Trench (8)": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "Spawn one Hound at any empty starting Hex. Normal for 2 characters, elite every other time for 3, elite for 4."
+            }]
+        },
+        "#29.2 The Tempus Forge (8)": {
+          "monsters": ["Blacksmith"]
+        }
+      }
     },
     "#9 Glowing Catacombs": {
       "monsters": [ "Ice Wraith", "Living Doom","Living Spirit (FH)","Ooze (FH)" ],
@@ -6324,11 +6366,67 @@
           "health": "Cx(L+2)",
           "init": 1
         }
-      ]
+      ],
+      "sections": {
+        "#14.3 Temple of Liberation (20)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Glowing Orb",
+              "health": "(L+2)xC"
+            }
+          ]
+        }
+      }
     },
     "#21 Realm of Endless Frost": {
       "monsters": [ "Prince of Frost", "Frost Demon (FH)", "Living Bones (FH)", "Living Spirit (FH)", "Snow Imp" ],
-      "lootDeck": {"coin":6,"lumber": 4,"metal":3,"hide": 3,"flamefruit":1,"snowthistle":2, "treasure": 1}
+      "lootDeck": {"coin":6,"lumber": 4,"metal":3,"hide": 3,"flamefruit":1,"snowthistle":2, "treasure": 1},
+      "sections": {
+        "#48.1 Realm of Endless Frost (21)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Crate 1",
+              "health": "L+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Crate 2",
+              "health": "L+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Crate 3",
+              "health": "L+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Bookshelf 1",
+              "health": "L+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Bookshelf 2",
+              "health": "L+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Bookshelf 3",
+              "health": "L+2"
+            }
+          ]
+        },
+        "#51.1 Realm of Endless Frost (21)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Glowing Orb",
+              "health": "(L+2)xC"
+            }
+          ]
+        }
+      }
     },
     "#22 Ice Floes": {
       "monsters": [ "Lightning Eel", "Lurker Clawcrusher", "Lurker Wavethrower"],
@@ -6336,7 +6434,12 @@
     },
     "#23 Spire Basement": {
       "monsters": [ "Living Bones (FH)", "Living Spirit (FH)" ],
-      "lootDeck": {"coin":8,"lumber": 4,"metal":4,"flamefruit":1,"corpsecap":2, "treasure": 1}
+      "lootDeck": {"coin":8,"lumber": 4,"metal":4,"flamefruit":1,"corpsecap":2, "treasure": 1},
+      "sections": {
+        "#55.3 Spire Basement (23)": {
+          "monsters": ["Hateful Corpse"]
+        }
+      }
     },
     "#24 Upper Spire": {
       "monsters": [ "Chaos Demon (FH)", "Living Bones (FH)", "Wind Demon (FH)" ],
@@ -6344,7 +6447,27 @@
     },
     "#25 Rusted Tunnels": {
       "monsters": [ "Flaming Bladespinner", "Robotic Boltshooter", "Ruined Machine" ],
-      "lootDeck": {"coin":10,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":1}
+      "lootDeck": {"coin":10,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":1},
+      "sections": {
+        "#58.2 Rusted Tunnels (25)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Large Debris 1",
+              "health": "(L+2)xC"
+            }
+          ]
+        },
+        "#61.2 Rusted Tunnels (25)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Large Debris 2",
+              "health": "(L+2)xC"
+            }
+          ]
+        }
+      }
     },
     "#26 Quatryl Library": {
       "monsters": [ "Ancient Artillery (FH)", "Ruined Machine", "Steel Automaton" ],
@@ -6461,7 +6584,18 @@
           "startOfRound": false,
           "note": "Each Frozen Corpse with a token is Replaced by a Shrike Fiend."
         }
-        ]
+        ],
+      "sections": {
+        "#66.1 Ravens' Roost (32)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Raven Nest a",
+              "health": "(L+2)xCx3"
+            }
+          ]
+        }
+      }
     },
     "#33 Thawed Wood": {
       "monsters": [ "Black Imp (FH)", "Earth Demon (FH)", "Flame Demon (FH)", "Shrike Fiend" ],
@@ -6639,7 +6773,27 @@
           "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
           "startOfRound": true,
           "note": "Spawn one Living Spirit at a. Normal for 2 characters, elite for 3-4."
-        }]
+        }],
+      "sections": {
+        "#17.1 Unfettered Shard (41)": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "startOfRound": true,
+              "note": "Spawn one Deep Terror at c. Normal for 2-3 characters, elite for 4."
+            }]
+        },
+        "#65.2 Unfettered Shard (41)": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "startOfRound": true,
+              "note": "Spawn one Night Demon at b. Normal for 2 characters, elite for 3-4."
+            }]
+        }
+      }
     },
     "#42 Sunless Trench": {
       "monsters": [ "Deep Terror (FH)", "Night Demon (FH)", "Ooze (FH)" ],
@@ -6647,7 +6801,18 @@
     },
     "#43 Overrun Barricade": {
       "monsters": [ "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
-      "lootDeck": {"coin":8,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":2, "treasure": 1}
+      "lootDeck": {"coin":8,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":2, "treasure": 1},
+      "sections": {
+        "#2.3 Overrun Barricade (43)": {
+          "special": [
+            {
+              "type": "Timer",
+              "startOfRound": true,
+              "list": [-1],
+              "note": "Spawn one Ruined Machine at either a. Normal for 2 characters. Elite every other time for 3, and always elite for 4."
+            }]
+        }
+      }
     },
     "#44 Nerve Center": {
       "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
@@ -6663,7 +6828,18 @@
     },
     "#45 Living Glacier": {
       "monsters": [ "Abael Herder", "Abael Scout", "Lightning Eel", "Piranha Pig" ],
-      "lootDeck": {"coin":10,"lumber": 3,"hide": 5,"rockroot":1,"flamefruit":1}
+      "lootDeck": {"coin":10,"lumber": 3,"hide": 5,"rockroot":1,"flamefruit":1},
+      "sections": {
+        "#85.2 Living Glacier (45)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Ice Pillar",
+              "health": "(L+2)xCx2"
+            }
+          ]
+        }
+      }
     },
     "#46 Dead Pass": {
       "monsters": [ "Burrowing Blade", "Frozen Corpse", "Shrike Fiend" ],
@@ -6767,7 +6943,18 @@
     },
     "#51 Orphan's Halls": {
       "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
-      "lootDeck": {"coin":12,"lumber": 2,"metal":4,"flamefruit":1,"arrowvine":1}
+      "lootDeck": {"coin":12,"lumber": 2,"metal":4,"flamefruit":1,"arrowvine":1},
+      "sections": {
+        "#137.1 Orphan's Halls (51)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Door 2",
+              "health": "(L+2)xC"
+            }
+          ]
+        }
+      }
     },
     "#52 Fleeting Permanence": {
       "monsters": [ "Frost Demon (FH)", "Snow Imp" ],
@@ -6791,7 +6978,18 @@
     },
     "#55 Change of Heart": {
       "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Priest" ],
-      "lootDeck": {"coin":3,"lumber": 2,"metal":4,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1}
+      "lootDeck": {"coin":3,"lumber": 2,"metal":4,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
+      "sections":  {
+        "#80.2 Change of Heart (55)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Large Ice Crystal",
+              "health": "(L+2)xCx4"
+            }
+          ]
+        }
+      }
     },
     "#56 Call of the Harbinger": {
       "monsters": [ "Harbinger of Shadow", "Black Imp (FH)", "Harrower Infester (FH)", "Shrike Fiend" ],
@@ -7127,7 +7325,19 @@
     },
     "#65 A Strong Foundation": {
       "monsters": [ "Frozen Corpse (65)", "Living Bones (65)", "Snow Imp (65)" ],
-      "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 4,"snowthistle":2,"arrowvine":2}
+      "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 4,"snowthistle":2,"arrowvine":2},
+      "sections": {
+        "#89.1 A Strong Foundation (65)": {
+          "monsters": ["Rimeheart"],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Elemental Anchor",
+              "health": "(L+1)xCx2"
+            }
+          ]
+        }
+      }
     },
     "#66 Elemental Cores": {
       "monsters": [ "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Night Demon (FH)", "Sun Demon (FH)", "Wind Demon (FH)" ],
@@ -7260,7 +7470,12 @@
           "name": "The Great Oak",
           "health": "2xCx(L+3)",
           "init": 1
-        }]
+        }],
+      "sections": {
+        "#106.2 The True Oak (70)": {
+          "monsters": ["Flaming Sword of Justice"]
+        }
+      }
     },
     "#71 Invasion of the Dock": {
       "monsters": [ "Abael Scout", "Lightning Eel", "Lurker Clawcrusher", "Lurker Mindsnipper", "Lurker Wavethrower", "Piranha Pig" ],
@@ -7275,7 +7490,19 @@
           "list": [12],
           "startOfRound": false,
           "note": "Scenario Lost... (unless a character is adjacent to the Artificer)"
-        }]
+        }],
+      "sections": {
+        "#111.2 Invasion of the Dock (71)": {
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Artificer",
+              "health": "(LxC)+2",
+              "init": 99
+            }
+          ]
+        }
+      }
     },
     "#72 A Giant Block of Ice": {
       "monsters": [ "Frozen Corpse", "Ice Wraith", "Living Bones (FH)", "Steel Automaton" ],
@@ -7403,7 +7630,18 @@
           "startOfRound": true,
           "note": "Spawn 1 Aester Scout at any empty starting hex. Normal for 2 characters, elite for 3-4."
         }
-      ]
+      ],
+      "sections": {
+        "#174.3 Ruinous Research Lab (81)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Barricade",
+              "health": "L+5"
+            }
+          ]
+        }
+      }
     },
     "#82 Expedition North": {
       "monsters": [ "Frost Demon (FH)", "Wind Demon (FH)" ],
@@ -7456,11 +7694,27 @@
           "type": "Objective",
           "name": "Tree 1",
           "health": "(2+L)xC"
-        }]
+        }],
+      "sections": {
+        "#181.4 The Lady in White (86)": {
+          "monsters": ["Lady in White"]
+        }
+      }
     },
     "#87 The Collection": {
       "monsters": [ "Algox Archer", "Algox Guard", "Flaming Bladespinner", "Lurker Clawcrusher", "Polar Bear", "Steel Automaton" ],
-      "lootDeck": {"coin":8,"lumber": 2,"metal":4,"hide": 3,"rockroot":1,"arrowvine":1, "corpsecap": 1}
+      "lootDeck": {"coin":8,"lumber": 2,"metal":4,"hide": 3,"rockroot":1,"arrowvine":1, "corpsecap": 1},
+      "sections": {
+        "#73.1 The Collection (87)": {
+          "monsters": ["Brother"],
+          "special": [
+            {
+              "type": "Allies",
+              "list": ["Brother"]
+            }
+          ]
+        }
+      }
     },
     "#88 Collection's Capstone": {
       "monsters": [ "The Collector", "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Lurker Clawcrusher", "Savvas Icestorm (FH)", "Savvas Lavaflow (FH)", "Wind Demon (FH)" ],
@@ -7468,7 +7722,36 @@
     },
     "#89 A Contained Fire": {
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest" ],
-      "lootDeck": {"coin":10,"lumber": 2,"metal":2,"hide": 2,"flamefruit":1,"arrowvine":2, "treasure": 1}
+      "lootDeck": {"coin":10,"lumber": 2,"metal":2,"hide": 2,"flamefruit":1,"arrowvine":2, "treasure": 1},
+      "sections": {
+        "#36.1 A Contained Fire (89)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar a",
+              "health": "(L+1)xCd2"
+            },
+            {
+              "type": "Objective",
+              "name": "Altar b",
+              "health": "(L+1)xCd2"
+            }
+          ]
+        },
+        "#119.2 A Contained Fire (89)": {
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Faye",
+              "health": "(Lx3)+8",
+              "init": 11
+            }
+          ]
+        },
+        "#146.3 A Contained Fire (89)": {
+          "monsters": ["Vanjal"]
+        }
+      }
     },
     "#90 Frozen Treasure": {
       "monsters": [ "Frozen Corpse", "Ice Wraith", "Polar Bear", "Snow Imp" ],
@@ -7606,7 +7889,12 @@
           "startOfRound": true,
           "list": [8],
           "note": "Read section 43.1."
-        }]
+        }],
+      "sections": {
+        "#84.1 To Bury the Dead (95)": {
+          "monsters": ["Reluctant Ghost"]
+        }
+      }
     },
     "#96 Underground Station": {
       "monsters": [ "Ancient Artillery (FH)", "Black Imp (FH)", "Rending Drake (FH)" ],
@@ -7729,7 +8017,63 @@
     },
     "#106 The Tempus Forge": {
       "monsters": [ "City Guard (FH)", "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Wind Demon (FH)" ],
-      "lootDeck": {"coin":7,"lumber": 2,"metal":4,"hide":2,"rockroot":2,"arrowvine":2, "treasure": 1}
+      "lootDeck": {"coin":7,"lumber": 2,"metal":4,"hide":2,"rockroot":2,"arrowvine":2, "treasure": 1},
+      "sections": {
+        "#8.1 The Tempus Forge (106)": {
+          "special": [
+            {
+              "type": "Timer",
+              "startOfRound": false,
+              "list": [-1],
+              "note": "all characters suffer 1 damage until altar 1 is destroyed"
+            },
+            {
+              "type": "Objective",
+              "name": "Altar 1",
+              "health": "(L+2)xCd2"
+            }
+          ]
+        },
+        "#183.1 The Tempus Forge (106)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar 4",
+              "health": "(L+2)xCd2"
+            }
+          ]
+        },
+        "#184.4 The Tempus Forge (106)": {
+          "special": [
+            {
+              "type": "Timer",
+              "startOfRound": false,
+              "list": [-1],
+              "note": "all monsters heal 2 damage until altar 2 is destroyed"
+            },
+            {
+              "type": "Objective",
+              "name": "Altar 2",
+              "health": "(L+2)xCd2"
+            }
+          ]
+        },
+        "#189.2 The Tempus Forge (106)": {
+          "special": [
+            {
+              "type": "Timer",
+              "startOfRound": false,
+              "list": [-1],
+              "note": "all characters gain muddle until altar 3 is destroyed"
+            },
+            {
+              "type": "Objective",
+              "name": "Altar 3",
+              "health": "(L+2)xCd2"
+            }
+          ]
+        }
+      }
     },
     "#107 My Private Empire": {
       "monsters": [ "Flaming Bladespinner", "Living Bones (FH)", "Living Doom", "Living Spirit (FH)", "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
@@ -7741,7 +8085,12 @@
     },
     "#109 Furious Factory": {
       "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
-      "lootDeck": {"coin":11,"lumber": 2,"metal":4,"rockroot":2,"flamefruit":1}
+      "lootDeck": {"coin":11,"lumber": 2,"metal":4,"rockroot":2,"flamefruit":1},
+      "sections": {
+        "#195.2 Furious Factory (109)": {
+          "monsters": ["Laser Spire Controller"]
+        }
+      }
     },
     "#110 Guardian's Temple": {
       "monsters": [ "Living Doom", "Living Spirit (FH)", "Ruined Machine", "Shrike Fiend" ],
@@ -7795,7 +8144,12 @@
           "startOfRound": false,
           "list": [-1],
           "note": "All figures resolve: Corresponding Hex unoccupied: suffer 1 damage. Occupied by enemy: suffer 2 damage. Occupied by ally: heal 1, self."
-        }]
+        }],
+      "sections": {
+        "#182.2 Ice Cave (111)": {
+          "monsters": ["The Shimmer"]
+        }
+      }
     },
     "#112 Raised by Wolves": {
       "monsters": ["Burrowing Blade", "Chaos Demon (FH)","Earth Demon (FH)", "Hound Scenario 112" ],
@@ -7972,15 +8326,48 @@
    },
     "#120 Under the Influence": {
       "monsters": [ "City Guard (FH)", "Hound (FH)" ,"Robotic Boltshooter", "Steel Automaton", "Vermling Priest", "Vermling Scout (FH)" ],
-      "lootDeck": {"coin":8,"lumber": 4,"metal":4,"hide": 4}
+      "lootDeck": {"coin":8,"lumber": 4,"metal":4,"hide": 4},
+      "sections": {
+        "#101.1 Under the Influence (120)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Door 2",
+              "health": "(L+1)xC"
+            }
+          ]
+        },
+        "#157.1 Orphan's Halls (120)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Glowing Orb",
+              "health": "(Lx2)+3"
+            }
+          ]
+        }
+      }
     },
     "#121 Black Memories": {
       "monsters": [ "Vermling Priest", "Vermling Scout (FH)" ],
-      "lootDeck": {"coin":9,"lumber": 3,"metal":3,"hide": 2,"rockroot":1,"axenut":1, "treasure": 1}
+      "lootDeck": {"coin":9,"lumber": 3,"metal":3,"hide": 2,"rockroot":1,"axenut":1, "treasure": 1},
+      "sections": {
+        "#115.2 Black Memories (121)": {
+          "monsters": ["Large Vermling Scout"]
+        },
+        "#123.1 Black Memories (121)": {
+          "monsters": ["Large Vermling Scout", "Augmented Mindthief"]
+        }
+      }
     },
     "#122 The Eternal Crave": {
       "monsters": [ "Ice Wraith", "Polar Bear", "Snow Imp" ],
-      "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 4,"rockroot":2,"axenut":1, "treasure": 1}
+      "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 4,"rockroot":2,"axenut":1, "treasure": 1},
+      "sections": {
+        "#98.1 The Eternal Crave (122)": {
+          "monsters": ["Hungry Maw"]
+        }
+      }
     },
     "#123 The Titan": {
       "monsters": [ "Algox Snowspeaker", "Ancient Artillery (FH)" ],
@@ -7991,7 +8378,12 @@
           "startOfRound": false,
           "list": [-1],
           "note": "Figures not occupying stable hexes fall."
-        }]
+        }],
+      "sections": {
+        "#128.4 The Titan (123)": {
+          "monsters": ["Power Core"]
+        }
+      }
     },
     "#124 A Growing Problem": {
       "monsters": [ "Living Bones (FH)", "Living Spirit (FH)" ],
@@ -8240,7 +8632,12 @@
           "list": [8],
           "note": "Read section 194.2"
         }
-      ]
+      ],
+      "sections": {
+        "#194.2 The Dancing Iceberg (131)": {
+          "monsters": ["Lurker Conductor"]
+        }
+      }
     },
     "#132 Temple of Feline Power": {
       "monsters": [ "Frost Demon (FH)", "Frozen Corpse", "Ice Wraith", "Snow Imp" ],
@@ -8270,7 +8667,12 @@
     },
     "#135 Belara's Keep": {
       "monsters": [ "Earth Demon (FH)", "Flame Demon (FH)", "Rending Drake (FH)", "Sun Demon (FH)" ],
-      "lootDeck": {"coin":7,"lumber": 4,"metal":4,"hide": 2,"corpsecap":1,"flamefruit":1, "treasure": 1}
+      "lootDeck": {"coin":7,"lumber": 4,"metal":4,"hide": 2,"corpsecap":1,"flamefruit":1, "treasure": 1},
+      "sections": {
+        "#195.1 Belara's Keep (135)": {
+          "monsters": ["Belara"]
+        }
+      }
     },
     "#136 Abandoned Hideout": {
       "monsters": [ "Lightning Eel", "Living Bones (FH)", "Living Spirit (FH)", "Lurker Wavethrower", "Piranha Pig" ],
@@ -8279,348 +8681,6 @@
     "#137 The Pirate Queen's Haul": {
       "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Forest Imp (FH)", "Piranha Pig", "Polar Bear" ,"Robotic Boltshooter" ],
       "lootDeck": {"coin":12,"lumber": 4,"metal":4,"hide": 4,"treasure": 1}
-    }
-  },
-  "sections": {
-    "#2.3 Overrun Barricade (43)": {
-      "special": [
-        {
-          "type": "Timer",
-          "startOfRound": true,
-          "list": [-1],
-          "note": "Spawn one Ruined Machine at either a. Normal for 2 characters. Elite every other time for 3, and always elite for 4."
-        }]
-    },
-    "#6.1 Algox Scouting (2)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Ice Sheet",
-          "health": "(L+2)xC"
-        }
-      ]
-    },
-    "#7.2 Frozen Crypt (5)": {
-      "note": "resetting turn tracker is not supported (or in 3 turns from now..)",
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar a",
-          "health": "(L+3)xC"
-        }
-      ]
-    },
-    "#8.1 The Tempus Forge (106)": {
-     "special": [
-       {
-         "type": "Timer",
-         "startOfRound": false,
-         "list": [-1],
-         "note": "all characters suffer 1 damage until altar 1 is destroyed"
-       },
-       {
-         "type": "Objective",
-         "name": "Altar 1",
-         "health": "(L+2)xCd2"
-       }
-      ]
-    },
-    "#14.3 Temple of Liberation (20)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Glowing Orb",
-          "health": "(L+2)xC"
-        }
-      ]
-    },
-    "#17.1 Unfettered Shard (41)": {
-      "special": [
-        {
-          "type": "Timer",
-          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
-          "startOfRound": true,
-          "note": "Spawn one Deep Terror at c. Normal for 2-3 characters, elite for 4."
-        }]
-    },
-    "#21.1 Crystal Trench (8)": {
-      "special": [
-        {
-          "type": "Timer",
-          "list": [-1],
-          "startOfRound": true,
-          "note": "Spawn one Hound at any empty starting Hex. Normal for 2 characters, elite every other time for 3, elite for 4."
-        }]
-    },
-    "#29.2 The Tempus Forge (8)": {
-      "monsters": ["Blacksmith"]
-    },
-    "#36.1 A Contained Fire (89)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar a",
-          "health": "(L+1)xCd2"
-        },
-        {
-          "type": "Objective",
-          "name": "Altar b",
-          "health": "(L+1)xCd2"
-        }
-      ]
-    },
-    "#48.1 Realm of Endless Frost (21)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Crate 1",
-          "health": "L+2"
-        },
-        {
-          "type": "Objective",
-          "name": "Crate 2",
-          "health": "L+2"
-        },
-        {
-          "type": "Objective",
-          "name": "Crate 3",
-          "health": "L+2"
-        },
-        {
-          "type": "Objective",
-          "name": "Bookshelf 1",
-          "health": "L+2"
-        },
-        {
-          "type": "Objective",
-          "name": "Bookshelf 2",
-          "health": "L+2"
-        },
-        {
-          "type": "Objective",
-          "name": "Bookshelf 3",
-          "health": "L+2"
-        }
-      ]
-    },
-    "#48.4 Edge of the World (7)": {
-      "monsters": ["Coral Corpse"]
-    },
-    "#51.1 Realm of Endless Frost (21)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Glowing Orb",
-          "health": "(L+2)xC"
-        }
-      ]
-    },
-    "#55.3 Spire Basement (23)": {
-      "monsters": ["Hateful Corpse"]
-    },
-    "#58.2 Rusted Tunnels (25)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Large Debris 1",
-          "health": "(L+2)xC"
-        }
-      ]
-    },
-    "#61.2 Rusted Tunnels (25)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Large Debris 2",
-          "health": "(L+2)xC"
-        }
-      ]
-    },
-    "#65.2 Unfettered Shard (41)": {
-      "special": [
-        {
-          "type": "Timer",
-          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
-          "startOfRound": true,
-          "note": "Spawn one Night Demon at b. Normal for 2 characters, elite for 3-4."
-        }]
-    },
-    "#66.1 Ravens' Roost (32)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Raven Nest a",
-          "health": "(L+2)xCx3"
-        }
-      ]
-    },
-    "#73.1 The Collection (87)": {
-      "monsters": ["Brother"],
-      "special": [
-        {
-          "type": "Allies",
-          "list": ["Brother"]
-        }
-      ]
-    },
-    "#80.2 Change of Heart (55)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Large Ice Crystal",
-          "health": "(L+2)xCx4"
-        }
-      ]
-    },
-    "#84.1 To Bury the Dead (95)": {
-      "monsters": ["Reluctant Ghost"]
-    },
-    "#85.2 Living Glacier (45)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Ice Pillar",
-          "health": "(L+2)xCx2"
-        }
-      ]
-    },
-    "#89.1 A Strong Foundation (65)": {
-      "monsters": ["Rimeheart"],
-      "special": [
-        {
-          "type": "Escort",
-          "name": "Elemental Anchor",
-          "health": "(L+1)xCx2"
-        }
-      ]
-    },
-    "#98.1 The Eternal Crave (122)": {
-      "monsters": ["Hungry Maw"]
-    },
-    "#101.1 Under the Influence (120)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Door 2",
-          "health": "(L+1)xC"
-        }
-      ]
-    },
-    "#106.2 The True Oak (70)": {
-      "monsters": ["Flaming Sword of Justice"]
-    },
-    "#111.2 Invasion of the Dock (71)": {
-      "special": [
-        {
-          "type": "Escort",
-          "name": "Artificer",
-          "health": "(LxC)+2",
-          "init": 99
-        }
-      ]
-    },
-    "#115.2 Black Memories (121)": {
-      "monsters": ["Large Vermling Scout"]
-    },
-    "#119.2 A Contained Fire (89)": {
-      "special": [
-        {
-          "type": "Escort",
-          "name": "Faye",
-          "health": "(Lx3)+8",
-          "init": 11
-        }
-      ]
-    },
-    "#123.1 Black Memories (121)": {
-      "monsters": ["Large Vermling Scout", "Augmented Mindthief"]
-    },
-    "#128.4 The Titan (123)": {
-      "monsters": ["Power Core"]
-    },
-    "#137.1 Orphan's Halls (51)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Door 2",
-          "health": "(L+2)xC"
-        }
-      ]
-    },
-    "#146.3 A Contained Fire (89)": {
-      "monsters": ["Vanjal"]
-    },
-    "#157.1 Orphan's Halls (120)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Glowing Orb",
-          "health": "(Lx2)+3"
-        }
-      ]
-    },
-    "#174.3 Ruinous Research Lab (81)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Barricade",
-          "health": "L+5"
-        }
-      ]
-    },
-    "#181.4 The Lady in White (86)": {
-      "monsters": ["Lady in White"]
-    },
-    "#182.2 Ice Cave (111)": {
-      "monsters": ["The Shimmer"]
-    },
-    "#183.1 The Tempus Forge (106)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar 4",
-          "health": "(L+2)xCd2"
-        }
-      ]
-    },
-    "#184.4 The Tempus Forge (106)": {
-      "special": [
-        {
-          "type": "Timer",
-          "startOfRound": false,
-          "list": [-1],
-          "note": "all monsters heal 2 damage until altar 2 is destroyed"
-        },
-        {
-          "type": "Objective",
-          "name": "Altar 2",
-          "health": "(L+2)xCd2"
-        }
-      ]
-    },
-    "#189.2 The Tempus Forge (106)": {
-      "special": [
-        {
-          "type": "Timer",
-          "startOfRound": false,
-          "list": [-1],
-          "note": "all characters gain muddle until altar 3 is destroyed"
-        },
-        {
-          "type": "Objective",
-          "name": "Altar 3",
-          "health": "(L+2)xCd2"
-        }
-      ]
-    },
-    "#194.2 The Dancing Iceberg (131)": {
-      "monsters": ["Lurker Conductor"]
-    },
-    "#195.1 Belara's Keep (135)": {
-      "monsters": ["Belara"]
-    },
-    "#195.2 Furious Factory (109)": {
-      "monsters": ["Laser Spire Controller"]
     }
   }
 }

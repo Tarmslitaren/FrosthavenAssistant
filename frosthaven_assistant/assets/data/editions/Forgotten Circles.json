@@ -1474,10 +1474,58 @@
           "startOfRound": false,
           "note": "Spawn Earth Demon at c."
         }
-      ]
+      ],
+      "sections": {
+        "#34 Frozen Cave": {
+          "monsters": [ "Frost Demon" ],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar of Blizzards",
+              "health": "Cx2+L"
+            }]
+        },
+        "#1 Volcanic Wasteland": {
+          "monsters": [ "Flame Demon" ],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar of Wildfire",
+              "health": "C+L+1",
+              "init": 99,
+              "note": "Objective: Altar of Wildfire, C+L+1 "
+            } ]
+        },
+        "#24 Withered Grove": {
+          "monsters": [ "Earth Demon" ],
+
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar of Rot",
+              "health": "Cx2+L+4",
+              "init": 99,
+              "note": "Objective: Altar of Rot Cx2+L+4"
+            }]
+        }
+      }
     },
     "#97 Lore Untold": {
-      "monsters": [ "Black Imp", "Living Bones", "Living Corpse" ]
+      "monsters": [ "Black Imp", "Living Bones", "Living Corpse" ],
+      "sections": {
+        "#23 Narrow Vault": {
+          "monsters": [ "Living Bones", "Living Corpse" ]
+        },
+        "#40 Venerated Tomb": {
+          "monsters": [ "Living Bones", "Living Corpse" ]
+        },
+        "#112 Access Hall": {
+          "monsters": [ "Aesther Scout" ]
+        },
+        "#119 A Multitude of Tomes": {
+          "monsters": [ "Black Imp", "Deep Terror" ]
+        }
+      }
     },
     "#98 Past In Flames": {
       "monsters": [ "Ancient Artillery", "Bandit Archer", "Bandit Guard", "Spitting Drake" ],
@@ -1488,7 +1536,15 @@
           "startOfRound": true,
           "note": "Place damage tokens next to ships."
         }
-      ]
+      ],
+      "sections": {
+        "#4 Barge Ablaze": {
+          "monsters": [ "Bandit Archer", "Bandit Guard", "Spitting Drake" ]
+        },
+        "#32 Flaming Caravel": {
+          "monsters": [ "Bandit Archer", "Bandit Guard", "Spitting Drake" ]
+        }
+      }
     },
     "#99 Aftershocks": {
       "monsters": [ "Black Imp", "Cultist", "Deep Terror" ],
@@ -1511,10 +1567,73 @@
           "health": "2x(L+C)",
           "init": 50
         }
-      ]
+      ],
+      "sections": {
+        "#8 A Life Taken, a Life Given": {
+          "monsters": [ "Valrath Savage" ]
+        },
+        "#100 Sekhem Fountain": {
+          "monsters": [ "Black Imp", "Cultist", "Deep Terror" ],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Civilian 4",
+              "health": "2x(L+C)",
+              "init": 50
+            },
+            {
+              "type": "Escort",
+              "name": "Civilian 5",
+              "health": "2x(L+C)",
+              "init": 50
+            },
+            {
+              "type": "Escort",
+              "name": "Civilian 6",
+              "health": "2x(L+C)",
+              "init": 50
+            },
+            {
+              "type": "Escort",
+              "name": "Civilian 7",
+              "health": "2x(L+C)",
+              "init": 50
+            },
+            {
+              "type": "Escort",
+              "name": "Civilian 8",
+              "health": "2x(L+C)",
+              "init": 50
+            }
+          ]
+        }
+      }
     },
     "#100 Shifting Gears": {
-      "monsters": [ "Stone Golem" ]
+      "monsters": [ "Stone Golem" ],
+      "sections": {
+        "#14 The Floor Moves": {
+          "monsters": [ "Living Spirit", "Stone Golem" ]
+        },
+        "#22 A Rumbling Sound": {
+          "monsters": [ "Living Spirit" ]
+        },
+        "#39 Another Revolution": {
+          "monsters": [ "Ancient Artillery" ]
+        },
+        "#46 Quick Turn": {
+          "monsters": [ "Living Spirit" ]
+        },
+        "#50 Slow Turn": {
+          "monsters": [ "Living Spirit" ]
+        },
+        "#71 Quiet Rotation": {
+          "monsters": [ "Living Spirit", "Stone Golem" ]
+        },
+        "#26 Secret Library": {
+          "monsters": [ "Ancient Artillery" ]
+        }
+      }
     },
     "#101 Shrouded Crypt": {
       "monsters": [ "Rending Drake", "Spitting Drake" ],
@@ -1531,7 +1650,93 @@
           "startOfRound": false,
           "note": "Rending Drake spawns at a and b if adjacent Spitting Drake is alive."
         }
-      ]
+      ],
+      "sections": {
+        "#64 Flooded Catacombs": {
+          "monsters": [ "Living Bones", "Living Corpse" ]
+        },
+        "#72 Clinging Fog": {
+          "monsters": [ "Living Spirit", "Night Demon" ],
+          "special": [
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "startOfRound": true,
+              "note": "Dark waning. Spitting drakes gain immobilize."
+            },
+            {
+              "type": "Timer",
+              "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+              "startOfRound": false,
+              "note": "Spawn Night Demon adjacent and to the right of any door. Spitting drakes gain immobilize."
+            }
+          ]
+        },
+        "#123 Lingering Darkness": {
+          "monsters": [ "Living Spirit", "Night Demon" ],
+          "special": [
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "startOfRound": true,
+              "note": "Dark Strong. Spitting drakes gain immobilize."
+            },
+            {
+              "type": "Timer",
+              "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+              "startOfRound": false,
+              "note": "Spawn Night Demon adjacent and to the right of any door. Spitting drakes gain immobilize."
+            }
+          ]
+        },
+        "#93 Rays of Sunlight": {
+          "monsters": [ "Living Spirit", "Night Demon" ],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar",
+              "health": "5+L+2xC",
+              "init": 99,
+              "note": "Objective: Altar 5+L+2xC"
+            },
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "startOfRound": true,
+              "note": "Spitting drakes gain immobilize."
+            },
+            {
+              "type": "Timer",
+              "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+              "startOfRound": false,
+              "note": "Spitting drakes gain immobilize."
+            }]
+        },
+        "#41 A Sphere of Nightmares": {
+          "monsters": [ "Living Spirit", "Night Demon" ],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar",
+              "health": "20+L+2xC",
+              "init": 99,
+              "note": "Objective: Altar 20+L+2xC"
+            },
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "startOfRound": true,
+              "note": "Dark Strong. Spitting drakes gain immobilize."
+            },
+            {
+              "type": "Timer",
+              "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+              "startOfRound": false,
+              "note": "Spawn Night Demon adjacent to Altar. Spitting drakes gain immobilize."
+            }
+          ]
+        }
+      }
     },
     "#102 Bazaar of Knowledge": {
       "monsters": []
@@ -1579,19 +1784,140 @@
           "startOfRound": false,
           "note": "Spawn Harrower Infester adjacent to Portal 4."
         }
-      ]
+      ],
+      "sections": {
+        "#52 The First Portal": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [2,8, 14, 20,26],
+              "startOfRound": false,
+              "note": "Spawn Sun Demon adjacent to Portal 2."
+            },
+            {
+              "type": "Timer",
+              "list": [4, 10, 16, 22,28],
+              "startOfRound": false,
+              "note": "Spawn Spitting Drake adjacent to Portal 3."
+            },
+            {
+              "type": "Timer",
+              "list": [6, 12, 18,24,30],
+              "startOfRound": false,
+              "note": "Spawn Harrower Infester adjacent to Portal 4."
+            }
+          ]
+        },
+        "#79 The Second Portal": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [2,6,10,14,18,22,26,30],
+              "startOfRound": false,
+              "note": "Spawn Spitting Drake adjacent to Portal 3."
+            },
+            {
+              "type": "Timer",
+              "list": [4,8,12,16,20,24,28,32],
+              "startOfRound": false,
+              "note": "Spawn Harrower Infester adjacent to Portal 4."
+            }
+          ]
+        },
+        "#85 The Third Portal": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
+              "startOfRound": false,
+              "note": "Spawn Harrower Infester adjacent to Portal 4."
+            }
+          ]
+        }
+      }
     },
     "#105 Monstrosities of a Cult": {
-      "monsters": [ "Bandit Guard", "Valrath Tracker" ]
+      "monsters": [ "Bandit Guard", "Valrath Tracker" ],
+      "sections": {
+        "#6 Kennel of Things": {
+          "monsters": [ "Bandit Guard", "Valrath Tracker", "Wolf-Viper Abomination" ]
+        },
+        "#28 A Bear of a Drake": {
+          "monsters": [ "Bandit Guard", "Valrath Tracker", "Bear-Drake Abomination" ]
+        }
+      }
     },
     "#106 Intricate Work": {
-      "monsters": [ "Aesther Scout" ]
+      "monsters": [ "Aesther Scout" ],
+      "sections": {
+        "#13 Shrine of Ashtar": {
+          "monsters": [ "Ancient Artillery", "Earth Demon", "Flame Demon", "Avatar of Ashtar" ]
+        },
+        "#35 Shrine of Thelija": {
+          "monsters": [ "Ancient Artillery", "Frost Demon", "Avatar of Thelija", "Wind Demon" ]
+        },
+        "#133 A Secret Floor": {
+          "monsters": [ "Ancient Artillery" ]
+        }
+      }
     },
     "#107 Mechanical Genius": {
-      "monsters": []
+      "monsters": [],
+      "sections": {
+        "#15 Trash Dump": {
+          "monsters": [ "Vermling Scout", "Vermling Shaman" ]
+        },
+        "#92 Nesting Grounds": {
+          "monsters": [ "Vermling Scout", "Vermling Shaman" ]
+        },
+        "#42 Collapsed Atrium": {
+          "monsters": [ "Living Spirit" ]
+        },
+        "#96 Haunted Treasury": {
+          "monsters": [ "Living Spirit" ]
+        },
+        "#95 The Horde's Kitchen": {
+          "monsters": [ "Vermling Scout" ]
+        },
+        "#126 Training Maneuvers": {
+          "monsters": [ "Vermling Scout", "Vermling Shaman" ]
+        },
+        "#127 Guarded Nursery": {
+          "monsters": [ "Vermling Scout", "Vermling Shaman" ]
+        }
+      }
     },
     "#108 Prologue to the End": {
-      "monsters": [ "City Archer", "City Guard", "Valrath Savage", "Valrath Tracker", "Human Commander", "Valrath Commander" ]
+      "monsters": [  ],
+      "initialMessage": "Choose section. (Bosses use separate decks)",
+      "sections": {
+        "#37 Aiding Diamara": {
+          "monsters": ["City Archer", "City Guard", "Valrath Savage", "Valrath Tracker", "Human Commander", "Valrath Commander"],
+          "special": [
+            {
+              "type": "Allies",
+              "list": ["City Archer", "City Guard", "Human Commander"]
+            }]
+        },
+        "#44 Aiding Xangroth": {
+          "monsters": ["City Archer", "City Guard", "Valrath Savage", "Valrath Tracker", "Human Commander", "Valrath Commander"],
+          "special": [
+            {
+              "type": "Allies",
+              "list": ["Valrath Savage", "Valrath Tracker", "Valrath Commander"]
+            }]
+        },
+        "#101 Getting Both Records": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [15],
+              "startOfRound": false,
+              "note": "Scenario is Lost..."
+            }
+          ]
+        }
+      }
     },
     "#109 Epilogue of a War": {
       "monsters": [ "City Archer", "City Guard", "Valrath Savage", "Valrath Tracker" ]
@@ -1611,7 +1937,15 @@
           "startOfRound": false,
           "note": "Add Section 134"
         }
-      ]
+      ],
+      "sections": {
+        "#129 Fighting Dirty": {
+          "monsters": [ "Ooze" ]
+        },
+        "#134 Clawing at Victory": {
+          "monsters": [ "Lurker" ]
+        }
+      }
     },
     "#111 The Shackles Loosen": {
       "monsters": [ "The Husk", "Aesther Scout", "Black Imp", "Night Demon" ],
@@ -1622,7 +1956,30 @@
           "startOfRound": false,
           "note": "Husk gains invisible."
         }
-      ]
+      ],
+      "sections": {
+        "#66 Sardonic Smile": {
+          "monsters": [ "The Husk (66)" ],
+          "special": [
+            {
+              "type": "Note",
+              "name": "",
+              "note": "Transfer The Husk's conditions and HP to The Husk (66)"
+            } ]
+        },
+        "#128 Cracked Facade": {
+          "monsters": [ "The Husk (128)" ],
+          "special": [
+            {
+              "type": "Note",
+              "name": "",
+              "note": "Transfer The Husk (66)'s conditions and HP to The Husk (128)"
+            } ]
+        },
+        "#106 Strangler's Park": {
+          "monsters": [ "Harrower Infester", "Vermling Shaman" ]
+        }
+      }
     },
     "#112 The Bottom of It": {
       "monsters": [ "Ancient Artillery", "Living Bones", "Stone Golem" ]
@@ -1635,7 +1992,21 @@
           "name": "Naaret",
           "health": "4+2xL",
           "init": 50
-        }]
+        }],
+      "sections": {
+        "#94 Seal of Reanimation": {
+          "monsters": [ "Living Corpse", "Living Spirit" ]
+        },
+        "#60 Seal of Repulsion": {
+          "monsters": [ "Living Corpse", "Living Spirit" ]
+        },
+        "#108 Seal of Distortion": {
+          "monsters": [ "Deep Terror", "Living Bones" ]
+        },
+        "#30 Seal of Attraction": {
+          "monsters": [ "Deep Terror", "Living Bones" ]
+        }
+      }
     },
     "#114 Ink Not Yet Dry": {
       "monsters": [ "Aesther Ashblade", "Aesther Scout", "Wind Demon" ],
@@ -1645,7 +2016,12 @@
           "name": "Hail",
           "health": "4+2xL",
           "init": 99
-        }]
+        }],
+      "sections": {
+        "#17 Escape is Not So Easy": {
+          "monsters": [ "Aesther Ashblade", "Aesther Scout", "Wind Demon" ]
+        }
+      }
     },
     "#115 Future Uncertain": {
       "monsters": [ "Aesther Ashblade", "Aesther Scout", "Black Imp", "Valrath Savage", "Valrath Tracker", "Manifestation of Corruption" ],
@@ -1682,367 +2058,19 @@
         ]
     },
     "#Challenge: Tower to the Stars": {
-      "monsters": [ "Ancient Artillery", "City Archer", "City Guard", "Hound" ]
+      "monsters": [ "Ancient Artillery", "City Archer", "City Guard", "Hound" ],
+      "sections": {
+        "#47 Hall of Horrors": {
+          "monsters": [ "Black Imp", "Deep Terror", "Harrower Infester" ]
+        },
+        "#103 The Thorns of Hate": {
+          "monsters": [ "Earth Demon", "Forest Imp", "Wind Demon" ]
+        },
+        "#84 Gateway to the Firmament": {
+          "monsters": [ "Elham", "Earth Demon", "Flame Demon", "Frost Demon", "Icestorm Guardian of the Firmament", "Lavaflow Guardian of the Firmament" ]
+        }
+      }
 
-    }
-
-  },
-  "sections": {
-    "#1 Volcanic Wasteland": {
-      "monsters": [ "Flame Demon" ],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar of Wildfire",
-          "health": "C+L+1",
-          "init": 99,
-          "note": "Objective: Altar of Wildfire, C+L+1 "
-        } ]
-    },
-    "#4 Barge Ablaze": {
-      "monsters": [ "Bandit Archer", "Bandit Guard", "Spitting Drake" ]
-    },
-    "#6 Kennel of Things": {
-      "monsters": [ "Bandit Guard", "Valrath Tracker", "Wolf-Viper Abomination" ]
-    },
-    "#8 A Life Taken, a Life Given": {
-      "monsters": [ "Valrath Savage" ]
-    },
-    "#13 Shrine of Ashtar": {
-      "monsters": [ "Ancient Artillery", "Earth Demon", "Flame Demon", "Avatar of Ashtar" ]
-    },
-    "#14 The Floor Moves": {
-      "monsters": [ "Living Spirit", "Stone Golem" ]
-    },
-    "#15 Trash Dump": {
-      "monsters": [ "Vermling Scout", "Vermling Shaman" ]
-    },
-    "#17 Escape is Not So Easy": {
-      "monsters": [ "Aesther Ashblade", "Aesther Scout", "Wind Demon" ]
-    },
-    "#22 A Rumbling Sound": {
-      "monsters": [ "Living Spirit" ]
-    },
-    "#23 Narrow Vault": {
-      "monsters": [ "Living Bones", "Living Corpse" ]
-    },
-    "#24 Withered Grove": {
-      "monsters": [ "Earth Demon" ],
-
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar of Rot",
-          "health": "Cx2+L+4",
-          "init": 99,
-          "note": "Objective: Altar of Rot Cx2+L+4"
-        }]
-    },
-    "#26 Secret Library": {
-      "monsters": [ "Ancient Artillery" ]
-    },
-    "#28 A Bear of a Drake": {
-      "monsters": [ "Bandit Guard", "Valrath Tracker", "Bear-Drake Abomination" ]
-    },
-    "#29 Serene Path": {
-      "monsters": [ "Valrath Savage" ]
-    },
-    "#30 Seal of Attraction": {
-      "monsters": [ "Deep Terror", "Living Bones" ]
-    },
-    "#32 Flaming Caravel": {
-      "monsters": [ "Bandit Archer", "Bandit Guard", "Spitting Drake" ]
-    },
-    "#34 Frozen Cave": {
-      "monsters": [ "Frost Demon" ],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar of Blizzards",
-          "health": "Cx2+L"
-        }]
-    },
-    "#35 Shrine of Thelija": {
-      "monsters": [ "Ancient Artillery", "Frost Demon", "Avatar of Thelija", "Wind Demon" ]
-    },
-    "#37 Aiding Diamara": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Note",
-          "name": "",
-          "note": "Bosses use the same deck"
-        } ]
-    },
-    "#39 Another Revolution": {
-      "monsters": [ "Ancient Artillery" ]
-    },
-    "#40 Venerated Tomb": {
-      "monsters": [ "Living Bones", "Living Corpse" ]
-    },
-    "#41 A Sphere of Nightmares": {
-      "monsters": [ "Living Spirit", "Night Demon" ],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar",
-          "health": "20+L+2xC",
-          "init": 99,
-          "note": "Objective: Altar 20+L+2xC"
-        },
-        {
-          "type": "Timer",
-          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
-          "startOfRound": true,
-          "note": "Dark Strong. Spitting drakes gain immobilize."
-        },
-        {
-          "type": "Timer",
-          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
-          "startOfRound": false,
-          "note": "Spawn Night Demon adjacent to Altar. Spitting drakes gain immobilize."
-        }
-      ]
-    },
-    "#42 Collapsed Atrium": {
-      "monsters": [ "Living Spirit" ]
-    },
-    "#46 Quick Turn": {
-      "monsters": [ "Living Spirit" ]
-    },
-    "#47 Hall of Horrors": {
-      "monsters": [ "Black Imp", "Deep Terror", "Harrower Infester" ]
-    },
-    "#50 Slow Turn": {
-      "monsters": [ "Living Spirit" ]
-    },
-    "#52 The First Portal": {
-      "special": [
-        {
-          "type": "Timer",
-          "list": [2,8, 14, 20,26],
-          "startOfRound": false,
-          "note": "Spawn Sun Demon adjacent to Portal 2."
-        },
-        {
-          "type": "Timer",
-          "list": [4, 10, 16, 22,28],
-          "startOfRound": false,
-          "note": "Spawn Spitting Drake adjacent to Portal 3."
-        },
-        {
-          "type": "Timer",
-          "list": [6, 12, 18,24,30],
-          "startOfRound": false,
-          "note": "Spawn Harrower Infester adjacent to Portal 4."
-        }
-      ]
-    },
-    "#60 Seal of Repulsion": {
-      "monsters": [ "Living Corpse", "Living Spirit" ]
-    },
-    "#64 Flooded Catacombs": {
-      "monsters": [ "Living Bones", "Living Corpse" ]
-    },
-    "#66 Sardonic Smile": {
-      "monsters": [ "The Husk (66)" ],
-      "special": [
-        {
-          "type": "Note",
-          "name": "",
-          "note": "Transfer The Husk's conditions and HP to The Husk (66)"
-        } ]
-    },
-    "#71 Quiet Rotation": {
-      "monsters": [ "Living Spirit", "Stone Golem" ]
-    },
-    "#72 Clinging Fog": {
-      "monsters": [ "Living Spirit", "Night Demon" ],
-      "special": [
-        {
-          "type": "Timer",
-          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
-          "startOfRound": true,
-          "note": "Dark waning. Spitting drakes gain immobilize."
-        },
-        {
-          "type": "Timer",
-          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
-          "startOfRound": false,
-          "note": "Spawn Night Demon adjacent and to the right of any door. Spitting drakes gain immobilize."
-        }
-      ]
-    },
-    "#73 Reflecting Road": {
-      "monsters": [ "Valrath Savage" ]
-    },
-    "#79 The Second Portal": {
-      "special": [
-        {
-          "type": "Timer",
-          "list": [2,6,10,14,18,22,26,30],
-          "startOfRound": false,
-          "note": "Spawn Spitting Drake adjacent to Portal 3."
-        },
-        {
-          "type": "Timer",
-          "list": [4,8,12,16,20,24,28,32],
-          "startOfRound": false,
-          "note": "Spawn Harrower Infester adjacent to Portal 4."
-        }
-      ]
-    },
-    "#84 Gateway to the Firmament": {
-      "monsters": [ "Elham", "Earth Demon", "Flame Demon", "Frost Demon", "Icestorm Guardian of the Firmament", "Lavaflow Guardian of the Firmament" ]
-    },
-    "#85 The Third Portal": {
-      "special": [
-        {
-          "type": "Timer",
-          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
-          "startOfRound": false,
-          "note": "Spawn Harrower Infester adjacent to Portal 4."
-        }
-      ]
-    },
-    "#90 Misty Glade": {
-      "monsters": [ "Valrath Savage" ]
-    },
-    "#92 Nesting Grounds": {
-      "monsters": [ "Vermling Scout", "Vermling Shaman" ]
-    },
-    "#93 Rays of Sunlight": {
-      "monsters": [ "Living Spirit", "Night Demon" ],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar",
-          "health": "5+L+2xC",
-          "init": 99,
-          "note": "Objective: Altar 5+L+2xC"
-        },
-        {
-          "type": "Timer",
-          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
-          "startOfRound": true,
-          "note": "Spitting drakes gain immobilize."
-        },
-        {
-          "type": "Timer",
-          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
-          "startOfRound": false,
-          "note": "Spitting drakes gain immobilize."
-        }]
-    },
-    "#94 Seal of Reanimation": {
-      "monsters": [ "Living Corpse", "Living Spirit" ]
-    },
-    "#95 The Horde's Kitchen": {
-      "monsters": [ "Vermling Scout" ]
-    },
-    "#96 Haunted Treasury": {
-      "monsters": [ "Living Spirit" ]
-    },
-    "#100 Sekhem Fountain": {
-      "monsters": [ "Black Imp", "Cultist", "Deep Terror" ],
-      "special": [
-        {
-          "type": "Escort",
-          "name": "Civilian 4",
-          "health": "2x(L+C)",
-          "init": 50
-        },
-        {
-          "type": "Escort",
-          "name": "Civilian 5",
-          "health": "2x(L+C)",
-          "init": 50
-        },
-        {
-          "type": "Escort",
-          "name": "Civilian 6",
-          "health": "2x(L+C)",
-          "init": 50
-        },
-        {
-          "type": "Escort",
-          "name": "Civilian 7",
-          "health": "2x(L+C)",
-          "init": 50
-        },
-        {
-          "type": "Escort",
-          "name": "Civilian 8",
-          "health": "2x(L+C)",
-          "init": 50
-        }
-      ]
-    },
-    "#101 Getting Both Records": {
-      "special": [
-        {
-          "type": "Timer",
-          "list": [15],
-          "startOfRound": false,
-          "note": "Scenario is Lost..."
-        }
-      ]
-    },
-    "#103 The Thorns of Hate": {
-      "monsters": [ "Earth Demon", "Forest Imp", "Wind Demon" ]
-    },
-    "#106 Strangler's Park": {
-      "monsters": [ "Harrower Infester", "Vermling Shaman" ]
-    },
-    "#108 Seal of Distortion": {
-      "monsters": [ "Deep Terror", "Living Bones" ]
-    },
-    "#112 Access Hall": {
-      "monsters": [ "Aesther Scout" ]
-    },
-    "#119 A Multitude of Tomes": {
-      "monsters": [ "Black Imp", "Deep Terror" ]
-    },
-    "#123 Lingering Darkness": {
-      "monsters": [ "Living Spirit", "Night Demon" ],
-      "special": [
-        {
-          "type": "Timer",
-          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
-          "startOfRound": true,
-          "note": "Dark Strong. Spitting drakes gain immobilize."
-        },
-        {
-          "type": "Timer",
-          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
-          "startOfRound": false,
-          "note": "Spawn Night Demon adjacent and to the right of any door. Spitting drakes gain immobilize."
-        }
-      ]
-    },
-    "#126 Training Maneuvers": {
-      "monsters": [ "Vermling Scout", "Vermling Shaman" ]
-    },
-    "#127 Guarded Nursery": {
-      "monsters": [ "Vermling Scout", "Vermling Shaman" ]
-    },
-    "#128 Cracked Facade": {
-      "monsters": [ "The Husk (128)" ],
-      "special": [
-        {
-          "type": "Note",
-          "name": "",
-          "note": "Transfer The Husk (66)'s conditions and HP to The Husk (128)"
-        } ]
-    },
-    "#129 Fighting Dirty": {
-      "monsters": [ "Ooze" ]
-    },
-    "#133 A Secret Floor": {
-      "monsters": [ "Ancient Artillery" ]
-    },
-    "#134 Clawing at Victory": {
-      "monsters": [ "Lurker" ]
     }
   }
 }

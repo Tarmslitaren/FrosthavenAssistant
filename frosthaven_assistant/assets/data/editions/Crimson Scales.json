@@ -4381,7 +4381,12 @@
       "monsters": [ "City Archer", "City Guard", "Blood Ooze", "Flaming Drake", "Toxic Imp" ]
     },
     "#5 Blood of the Oozes": {
-      "monsters": [ "Blood Ooze", "Earth Demon", "Flaming Drake", "Toxic Imp" ]
+      "monsters": [ "Blood Ooze", "Earth Demon", "Flaming Drake", "Toxic Imp" ],
+      "sections" : {
+        "#8A Scenario 5": {
+          "monsters": [ "Gelatinous Giant" ]
+        }
+      }
     },
     "#6 Poisoned Water": {
       "monsters": [ "Blood Ooze", "Flaming Drake", "Toxic Imp", "Water Spirit" ]
@@ -4516,7 +4521,12 @@
       ]
     },
     "#16 Preto Krisanta": {
-      "monsters": [ "Black Imp", "Flame Demon", "Night Demon", "Sun Demon" ]
+      "monsters": [ "Black Imp", "Flame Demon", "Night Demon", "Sun Demon" ],
+      "sections": {
+        "#17D Scenario 16": {
+          "monsters": [ "Apex Demon" ]
+        }
+      }
     },
     "#17 Orb Extraction": {
       "monsters": [ "Earth Demon", "Flame Demon", "Frost Demon", "Savvas Icestorm", "Wind Demon" ]
@@ -4547,7 +4557,12 @@
         }]
     },
     "#21 A Fiery Death": {
-      "monsters": [ "Earth Demon", "Flame Demon" ]
+      "monsters": [ "Earth Demon", "Flame Demon" ],
+      "sections": {
+        "#21B Scenario 21": {
+          "monsters": [ "Lavalite" ]
+        }
+      }
     },
     "#22 Imp Temple": {
       "monsters": [ "Black Imp", "Forest Imp", "Harrower Infester" ]
@@ -4580,22 +4595,76 @@
           "type": "Objective",
           "name": "Cold thermal stone 2",
           "health": "C+3"
-        }]
+        }],
+      "sections": {
+        "#27C Scenario 26": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Hot thermal stone 1",
+              "health": "C+3"
+            },
+            {
+              "type": "Objective",
+              "name": "Hot thermal stone 2",
+              "health": "C+3"
+            }]
+        },
+        "#28A Scenario 26": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Icy Flame thermal stone",
+              "health": "C+6"
+            }]
+        }
+      }
     },
     "#27 Frostbite Cavern": {
-      "monsters": [ "Frost Demon", "Stone Golem", "Wind Demon" ]
+      "monsters": [ "Frost Demon", "Stone Golem", "Wind Demon" ],
+      "sections": {
+        "#29A Scenario 27": {
+          "monsters": [ "Savvas Icebound" ]
+        }
+      }
     },
     "#28 Fountain of Bones": {
-      "monsters": [ "Cultist", "Living Bones", "Ooze" ]
+      "monsters": [ "Cultist", "Living Bones", "Ooze" ],
+      "sections": {
+        "#30B Scenario 28": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Fountain of Bones",
+              "health": "Cx(L+8)"
+            }]
+        }
+      }
     },
     "#29 Burial Chamber": {
       "monsters": [ "Living Bones", "Living Corpse", "Living Spirit" ]
     },
     "#30 Undead Terrors": {
-      "monsters": [ "Black Imp", "Living Corpse", "Stone Golem" ]
+      "monsters": [ "Black Imp", "Living Corpse", "Stone Golem" ],
+      "sections": {
+        "#32A Scenario 30": {
+          "monsters": [ "Shadow Demon" ]
+        },
+        "#32B Scenario 30": {
+          "monsters": [ "Twin Corpse" ]
+        }
+      }
     },
     "#31 Eternal Portals": {
-      "monsters": [ "Harrower Infester", "Living Spirit", "Rending Drake", "Spitting Drake" ]
+      "monsters": [ "Harrower Infester", "Living Spirit", "Rending Drake", "Spitting Drake" ],
+      "sections": {
+        "#33C Scenario 31": {
+          "monsters": [ "Eternal Demon" ]
+        }
+      }
     },
     "#32 Confronting the Past": {
       "monsters": [ "Ancient Artillery", "Inox Archer", "Inox Bodyguard", "Inox Guard", "Living Bones", "Jekserah" ]
@@ -4605,6 +4674,50 @@
     },
     "#34 Great Oak Rescue": {
       "monsters": [ "Hound", "Inox Archer", "Inox Guard", "Inox Shaman" ],
+      "sections": {
+        "#36B Scenario 34": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Holy Monk 1",
+              "health": "C+L+2"
+            },
+            {
+              "type": "Escort",
+              "name": "Holy Monk 2",
+              "health": "C+L+2"
+            },
+            {
+              "type": "Escort",
+              "name": "Holy Monk 3",
+              "health": "C+L+2"
+            }]
+        },
+        "#37C Scenario 34": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Revered Monk 1",
+              "health": "C+L+2"
+            },
+            {
+              "type": "Escort",
+              "name": "Revered Monk 2",
+              "health": "C+L+2"
+            }]
+        },
+        "#38A Scenario 34": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Ordained Monk",
+              "health": "C+L+2"
+            }]
+        }
+      },
       "special": [
         {
           "type": "Escort",
@@ -4638,7 +4751,15 @@
         }]
     },
     "#36 Hunters Bounty": {
-      "monsters": [ "Bandit Archer", "Bandit Guard", "Hound" ]
+      "monsters": [ "Bandit Archer", "Bandit Guard", "Hound" ],
+      "sections": {
+        "#40A Scenario 36": {
+          "monsters": [ "Terrible Two Archer" ]
+        },
+        "#40B Scenario 36": {
+          "monsters": [ "Terrible Two Guard" ]
+        }
+      }
     },
     "#37 Burning Stones": {
       "monsters": [ "Flame Demon", "Frost Demon", "Night Demon", "Sun Demon", "Vermling Scout" ],
@@ -4655,7 +4776,36 @@
         }]
     },
     "#38 Altars of Confusion": {
-      "monsters": [ "Black Imp", "Living Spirit", "Night Demon", "Stone Golem" ]
+      "monsters": [ "Black Imp", "Living Spirit", "Night Demon", "Stone Golem" ],
+      "sections": {
+        "#42B Scenario 38": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar of Mystification",
+              "health": "Cx(L+3)"
+            }]
+        },
+        "#43A Scenario 38": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar of Disorientation",
+              "health": "Cx(L+4)"
+            }]
+        },
+        "#43B Scenario 38": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar of Perplexity",
+              "health": "Cx(L+3)"
+            }]
+        }
+      }
     },
     "#39 Festering Mire": {
       "monsters": [ "Earth Demon", "Giant Viper" ],
@@ -4687,13 +4837,66 @@
       ]
     },
     "#40 Smugglers Hideout": {
-      "monsters": [ "Rending Drake", "Spitting Drake" ]
+      "monsters": [ "Rending Drake", "Spitting Drake" ],
+      "sections": {
+        "#44C Scenario 40": {
+          "monsters": [ "Drake Porter" ]
+        }
+      }
     },
     "#41 Curse of the Void": {
-      "monsters": [ "Bandit Archer", "Bandit Guard" ]
+      "monsters": [ "Bandit Archer", "Bandit Guard" ],
+      "sections": {
+        "#46A Scenario 41": {
+          "monsters": [ "Rogue Hollowpact" ],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Void Pit 1",
+              "health": "C+L"
+            },
+            {
+              "type": "Objective",
+              "name": "Void Pit 2",
+              "health": "C+L"
+            },
+            {
+              "type": "Objective",
+              "name": "Void Pit 3",
+              "health": "C+L"
+            },
+            {
+              "type": "Objective",
+              "name": "Void Pit 4",
+              "health": "C+L"
+            },
+            {
+              "type": "Objective",
+              "name": "Void Pit 5",
+              "health": "C+L"
+            },
+            {
+              "type": "Objective",
+              "name": "Void Pit 6",
+              "health": "C+L"
+            }
+          ]
+        }
+      }
     },
     "#42 Unnatural Beasts": {
-      "monsters": [ "Cave Bear", "Giant Viper", "Hound" ]
+      "monsters": [ "Cave Bear", "Giant Viper", "Hound" ],
+      "sections": {
+        "#45D Scenario 42": {
+          "monsters": [ "Goring Grizzly" ]
+        },
+        "#46B Scenario 42": {
+          "monsters": [ "King Cobra" ]
+        },
+        "#47A Scenario 42": {
+          "monsters": [ "Sly Wolf" ]
+        }
+      }
     },
     "#43 Mansion Maze": {
       "monsters": [ "Ancient Artillery", "City Guard", "Stone Golem" ]
@@ -4711,7 +4914,18 @@
         }]
     },
     "#46 Vermling Gardens": {
-      "monsters": [ "Cave Bear", "Hound", "Vermling Scout", "Vermling Shaman" ]
+      "monsters": [ "Cave Bear", "Hound", "Vermling Scout", "Vermling Shaman" ],
+      "sections": {
+        "#52C Scenario 46": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Tree of Death",
+              "health": "Cx(L+5)"
+            }]
+        }
+      }
     },
     "#47 Viper Marsh": {
       "monsters": [ "Earth Demon", "Giant Viper", "Ooze" ]
@@ -4771,10 +4985,23 @@
       ]
     },
     "#53 Cave of Currents": {
-      "monsters": [ "Lurker", "Spitting Drake", "Water Spirit" ]
+      "monsters": [ "Lurker", "Spitting Drake", "Water Spirit" ],
+      "sections": {
+        "#60A Scenario 53": {
+          "monsters": [ "Morphling" ]
+        }
+      }
     },
     "#54 Lair of Horrors": {
-      "monsters": [ "Hanging Snake", "Dark Lurker"  ]
+      "monsters": [ "Hanging Snake", "Dark Lurker" ],
+      "sections": {
+        "#61B Scenario 54": {
+          "monsters": [ "Undead Archer", "Terror Drone" ]
+        },
+        "#62A Scenario 54": {
+          "monsters": [ "Black Bear", "Cave Imp" ]
+        }
+      }
     },
     "#55 Catacomb Plunder": {
       "monsters": [ "Bandit Archer", "Earth Demon", "Harrower Infester", "Living Bones", "Living Corpse", "Stone Golem"]
@@ -4792,13 +5019,23 @@
       "monsters": [ "Cave Bear", "Giant Viper", "Hound", "Vermling Scout", "Vermling Shaman" ]
     },
     "#60 Through the Fire and the Flames": {
-      "monsters": [ "Flame Demon", "Rending Drake #60 Special", "Savvas Lavaflow", "Spitting Drake" ]
+      "monsters": [ "Flame Demon", "Rending Drake #60 Special", "Savvas Lavaflow", "Spitting Drake" ],
+      "sections": {
+        "#68A Scenario 60": {
+          "monsters": [ "Drakefiend" ]
+        }
+      }
     },
     "#61 Archaic Preservation": {
       "monsters": [ "Ancient Artillery", "Black Imp", "Lurker", "Rending Drake", "Stone Golem" ]
     },
     "#62 Hallow Redemption": {
       "monsters": [ "Aesther Ashblade", "Cave Bear", "Forest Imp", "Vermling Shaman" ],
+      "sections": {
+        "#71A Scenario 62": {
+          "monsters": [ "Your Shadow" ]
+        }
+      },
       "special": [
         {
           "type": "LevelAdjust",
@@ -4814,6 +5051,34 @@
     },
     "#65 Beyond the Grave": {
       "monsters": [ "Vermling Shaman" ],
+      "sections": {
+        "#73C Scenario 65": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Vile Spirit 1",
+              "health": 4,
+              "init": 50
+            },
+            {
+              "type": "Objective",
+              "name": "Vile Spirit 2",
+              "health": 4,
+              "init": 50
+            }]
+        },
+        "#73D Scenario 65": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Haunted Ghoul Spirit 1",
+              "health": 10,
+              "init": 50
+            }]
+        }
+      },
       "special": [
         {
           "type": "Escort",
@@ -4834,6 +5099,17 @@
 
     "#AA1 The Riches of the Steelsilk": {
       "monsters": [ "Harrower Aegis", "Hound", "Bandit Archer", "Bandit Guard", "Wind Demon", "Frost Demon" ],
+      "sections": {
+        "#AA1 The Gilded Condescent": {
+          "monsters": [ "The Gilded One" ],
+          "special": [
+            {
+              "type": "LevelAdjust",
+              "name": "The Gilded One",
+              "level": 1
+            }]
+        }
+      },
       "special": [
         {
           "type": "Timer",
@@ -4874,7 +5150,12 @@
       ]
     },
     "#AA2 Malign Echoes": {
-      "monsters": [ "Giant Viper","Ravenous Gharial", "Black Imp", "Harrower Aegis", "Harrower Infester" ]
+      "monsters": [ "Giant Viper","Ravenous Gharial", "Black Imp", "Harrower Aegis", "Harrower Infester" ],
+      "sections":  {
+        "#AA2 The Banishment": {
+          "monsters": [ "The Echo" ]
+        }
+      }
     },
     "#AA3 Solo: Hive Guardian": {
       "monsters": [ "Flame Demon", "Frost Demon", "Wind Demon", "Earth Demon", "Night Demon", "Sun Demon" ],
@@ -4919,13 +5200,49 @@
     },
 
     "#QA1 Capstone Test": {
-      "monsters": [ "Clockwork Soldier", "Clockwork Railcaster" ]
+      "monsters": [ "Clockwork Soldier", "Clockwork Railcaster" ],
+      "sections": {
+        "#1 Power Conduit Relay": {
+          "monsters": [ "Clockwork Ravager" ]
+        },
+        "#2 Refractor Assembly": {
+          "monsters": [ "Clockwork Bombard" ]
+        },
+        "#3 Cooling Chamber": {
+          "monsters": [ "Clockwork Guardian" ]
+        }
+      }
     },
     "#QA2 Mother Lode": {
-      "monsters": [ "Giant Viper", "Living Bones", "Ooze", "Living Corpse", "Living Spirit" ]
+      "monsters": [ "Giant Viper", "Living Bones", "Ooze", "Living Corpse", "Living Spirit" ],
+      "sections":  {
+        "#3 Inspection Chamber": {
+          "monsters": [ "Steel Construct" ]
+        },
+        "#5 Natural Passage": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Stalagmite 1",
+              "health": "C+L"
+            },
+            {
+              "type": "Objective",
+              "name": "Stalagmite 2",
+              "health": "C+L"
+            }
+          ]
+        }
+      }
     },
     "#QA3 Solo: Magnum Opus": {
       "monsters": [  "Clockwork Soldier", "Clockwork Railcaster" ],
+      "sections": {
+        "#2 Mechanical Menace": {
+          "monsters": [ "Clockwork Devastator" ]
+        }
+      },
       "special": [
         {
           "type": "Timer",
@@ -4943,7 +5260,12 @@
     },
 
     "#RM1 Mind Your Manners": {
-      "monsters": [ "Bandit Guard (Hired Muscle)", "Bandit Archer (Hired Muscle)", "Inox Guard", "Inox Archer" ]
+      "monsters": [ "Bandit Guard (Hired Muscle)", "Bandit Archer (Hired Muscle)", "Inox Guard", "Inox Archer" ],
+      "sections": {
+        "#2 Courtyard": {
+          "monsters": [ "Living Wall" ]
+        }
+      }
     },
     "#RM2 Sinking Kingpin": {
       "monsters": [ "Bandit Guard", "Bandit Archer", "Inox Guard", "Inox Archer", "Inox Bloodguard", "Goremyon Shatter-Mind" ]
@@ -4955,10 +5277,46 @@
       "monsters": [ "Terrorscale Drake", "Gnashing Drake", "Spitting Drake", "Rending Drake" ]
     },
     "#RM5 Unseen Plight": {
-      "monsters": [ "Ravenous Gharial", "Black Imp" ]
+      "monsters": [ "Ravenous Gharial", "Black Imp" ],
+      "sections": {
+        "#1 Broken Homes": {
+          "monsters": [ "Carrion Scavenger" ]
+        },
+        "#2 Guttermaw’s Lair": {
+          "monsters": [ "Guttermaw" ]
+        },
+        "#3 Wrong Turn": {
+          "monsters": [],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Vermling 1",
+              "health": "C+L",
+              "init": 35
+            },
+            {
+              "type": "Escort",
+              "name": "Vermling 2",
+              "health": "C+L",
+              "init": 35
+            },
+            {
+              "type": "Escort",
+              "name": "Vermling 3",
+              "health": "C+L",
+              "init": 35
+            }
+          ]
+        }
+      }
     },
     "#RM6 Solo: The Fall of Shadow’s Respite": {
       "monsters": [ "Gnashing Drake", "Spitting Drake", "Rending Drake", "Vermling Scout (ally)", "Vermling Shaman (ally)" ],
+      "sections": {
+        "#4 The Shadow Falls": {
+          "monsters": [ "Brood Mother" ]
+        }
+      },
       "special": [
         {
           "type": "Escort",
@@ -4969,315 +5327,6 @@
     },
     "#RM7 Insatiable": {
       "monsters": [ "Hound", "Ruinmaw", "Vermling Shaman", "Vermling Scout", "Giant Viper" ]
-    }
-  },
-  "sections" : {
-    "#8A Scenario 5": {
-      "monsters": [ "Gelatinous Giant" ]
-    },
-    "#17D Scenario 16": {
-      "monsters": [ "Apex Demon" ]
-    },
-    "#21B Scenario 21": {
-      "monsters": [ "Lavalite" ]
-    },
-    "#27C Scenario 26": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Hot thermal stone 1",
-          "health": "C+3"
-        },
-        {
-          "type": "Objective",
-          "name": "Hot thermal stone 2",
-          "health": "C+3"
-        }]
-    },
-    "#28A Scenario 26": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Icy Flame thermal stone",
-          "health": "C+6"
-        }]
-    },
-
-    "#29A Scenario 27": {
-      "monsters": [ "Savvas Icebound" ]
-    },
-    "#30B Scenario 28": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Fountain of Bones",
-          "health": "Cx(L+8)"
-        }]
-    },
-    "#32A Scenario 30": {
-      "monsters": [ "Shadow Demon" ]
-    },
-    "#32B Scenario 30": {
-      "monsters": [ "Twin Corpse" ]
-    },
-    "#33C Scenario 31": {
-      "monsters": [ "Eternal Demon" ]
-    },
-    "#36B Scenario 34": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Escort",
-          "name": "Holy Monk 1",
-          "health": "C+L+2"
-        },
-        {
-          "type": "Escort",
-          "name": "Holy Monk 2",
-          "health": "C+L+2"
-        },
-        {
-          "type": "Escort",
-          "name": "Holy Monk 3",
-          "health": "C+L+2"
-        }]
-    },
-    "#37C Scenario 34": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Escort",
-          "name": "Revered Monk 1",
-          "health": "C+L+2"
-        },
-        {
-          "type": "Escort",
-          "name": "Revered Monk 2",
-          "health": "C+L+2"
-        }]
-    },
-    "#38A Scenario 34": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Escort",
-          "name": "Ordained Monk",
-          "health": "C+L+2"
-        }]
-    },
-    "#40A Scenario 36": {
-      "monsters": [ "Terrible Two Archer" ]
-    },
-    "#40B Scenario 36": {
-      "monsters": [ "Terrible Two Guard" ]
-    },
-    "#42B Scenario 38": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar of Mystification",
-          "health": "Cx(L+3)"
-        }]
-    },
-    "#43A Scenario 38": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar of Disorientation",
-          "health": "Cx(L+4)"
-        }]
-    },
-    "#43B Scenario 38": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Altar of Perplexity",
-          "health": "Cx(L+3)"
-        }]
-    },
-
-    "#44C Scenario 40": {
-      "monsters": [ "Drake Porter" ]
-    },
-    "#46A Scenario 41": {
-      "monsters": [ "Rogue Hollowpact" ],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Void Pit 1",
-          "health": "C+L"
-        },
-        {
-          "type": "Objective",
-          "name": "Void Pit 2",
-          "health": "C+L"
-        },
-        {
-          "type": "Objective",
-          "name": "Void Pit 3",
-          "health": "C+L"
-        },
-        {
-          "type": "Objective",
-          "name": "Void Pit 4",
-          "health": "C+L"
-        },
-        {
-          "type": "Objective",
-          "name": "Void Pit 5",
-          "health": "C+L"
-        },
-        {
-          "type": "Objective",
-          "name": "Void Pit 6",
-          "health": "C+L"
-        }
-      ]
-    },
-    "#45D Scenario 42": {
-      "monsters": [ "Goring Grizzly" ]
-    },
-    "#46B Scenario 42": {
-      "monsters": [ "King Cobra" ]
-    },
-    "#47A Scenario 42": {
-      "monsters": [ "Sly Wolf" ]
-    },
-    "#52C Scenario 46": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Tree of Death",
-          "health": "Cx(L+5)"
-        }]
-    },
-    "#60A Scenario 53": {
-      "monsters": [ "Morphling" ]
-    },
-    "#61B Scenario 54": {
-      "monsters": [ "Undead Archer", "Terror Drone" ]
-    },
-    "#62A Scenario 54": {
-      "monsters": [ "Black Bear", "Cave Imp" ]
-    },
-    "#68A Scenario 60": {
-      "monsters": [ "Drakefiend" ]
-    },
-    "#71A Scenario 62": {
-      "monsters": [ "Your Shadow" ]
-    },
-    "#73C Scenario 65": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Vile Spirit 1",
-          "health": 4,
-          "init": 50
-        },
-        {
-          "type": "Objective",
-          "name": "Vile Spirit 2",
-          "health": 4,
-          "init": 50
-        }]
-    },
-    "#73D Scenario 65": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Haunted Ghoul Spirit 1",
-          "health": 10,
-          "init": 50
-        }]
-    },
-
-    "#AA1 The Gilded Condescent": {
-      "monsters": [ "The Gilded One" ],
-      "special": [
-        {
-          "type": "LevelAdjust",
-          "name": "The Gilded One",
-          "level": 1
-        }]
-    },
-    "#AA2 The Banishment": {
-      "monsters": [ "The Echo" ]
-    },
-
-    "#QA1 Power Conduit Relay": {
-      "monsters": [ "Clockwork Ravager" ]
-    },
-    "#QA2 Refractor Assembly": {
-      "monsters": [ "Clockwork Bombard" ]
-    },
-    "#QA3 Cooling Chamber": {
-      "monsters": [ "Clockwork Guardian" ]
-    },
-    "#QA3 Inspection Chamber": {
-      "monsters": [ "Steel Construct" ]
-    },
-    "#QA5 Cooling Chamber": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Stalagmite 1",
-          "health": "C+L"
-        },
-        {
-          "type": "Objective",
-          "name": "Stalagmite 2",
-          "health": "C+L"
-        }
-      ]
-    },
-    "#QA2 Mechanical Menace": {
-      "monsters": [ "Clockwork Devastator" ]
-    },
-
-    "#RM2 Courtyard": {
-      "monsters": [ "Living Wall" ]
-    },
-    "#RM1 Broken Homes": {
-      "monsters": [ "Carrion Scavenger" ]
-    },
-    "#RM2 Guttermaw’s Lair": {
-      "monsters": [ "Guttermaw" ]
-    },
-    "#RM3 Wrong Turn": {
-      "monsters": [],
-      "special": [
-        {
-          "type": "Escort",
-          "name": "Vermling 1",
-          "health": "C+L",
-          "init": 35
-        },
-        {
-          "type": "Escort",
-          "name": "Vermling 2",
-          "health": "C+L",
-          "init": 35
-        },
-        {
-          "type": "Escort",
-          "name": "Vermling 3",
-          "health": "C+L",
-          "init": 35
-        }
-      ]
-    },
-    "#RM4 The Shadow Falls": {
-      "monsters": [ "Brood Mother" ]
     }
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:convert';
 
 class LootDeckModel {
@@ -101,11 +102,12 @@ class SpecialRule {
 
 
 class ScenarioModel {
-  ScenarioModel({required this.monsters, required this.specialRules, required this.lootDeck, required this.initMessage});
+  ScenarioModel({required this.sections, required this.monsters, required this.specialRules, required this.lootDeck, required this.initMessage});
   List<String> monsters;
   List<SpecialRule> specialRules;
   LootDeckModel? lootDeck;
   String initMessage;
+  final Map< String, ScenarioModel> sections;
   factory ScenarioModel.fromJson(Map<String, dynamic> data) {
     List<String> monsterList = [];
     if(data.containsKey('monsters')) {
@@ -130,7 +132,15 @@ class ScenarioModel {
       initMessage = data['initialMessage'];
     }
 
-    return ScenarioModel(monsters: monsterList, specialRules: rulesList, lootDeck: lootDeck, initMessage: initMessage);
+    Map<String, ScenarioModel> sectionMap = HashMap();
+    if(data.containsKey("sections")) {
+      final sections = data['sections'] as Map<dynamic, dynamic>;
+      for (String key in sections.keys){
+        sectionMap[key] = ScenarioModel.fromJson(sections[key]);
+      }
+    }
+
+    return ScenarioModel(monsters: monsterList, specialRules: rulesList, lootDeck: lootDeck, initMessage: initMessage, sections:sectionMap);
   }
 
 }

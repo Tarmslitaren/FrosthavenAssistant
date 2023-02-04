@@ -1297,19 +1297,79 @@
           "type": "Allies",
           "list": ["Inox Shaman", "Talo"]
         }
-      ]
+      ],
+      "sections": {
+        "#19A (Scenario 71)": {
+          "monsters": ["Shardrender (monster)", "Enraged Vanquisher"],
+          "special": [
+            {
+              "type": "Allies",
+              "list": ["Shardrender (monster)"]
+            }
+          ]
+        }
+      }
     },
     "#72 Inox Salvation": {
-      "monsters": [ "Earth Demon","Flame Demon", "Inox Archer","Smoke Spirit"]
+      "monsters": [ "Earth Demon","Flame Demon", "Inox Archer","Smoke Spirit"],
+      "sections": {
+        "#21A (Scenario 72)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Small Tree 1",
+              "health": "L+C"
+            },
+            {
+              "type": "Objective",
+              "name": "Small Tree 2",
+              "health": "L+C"
+            },
+            {
+              "type": "Objective",
+              "name": "Large Tree 1",
+              "health": "L+C"
+            },
+            {
+              "type": "Objective",
+              "name": "Large Tree 2",
+              "health": "L+C"
+            },
+            {
+              "type": "Objective",
+              "name": "Large Tree d",
+              "health": "L+C"
+            }
+          ]
+        }
+      }
     },
     "#73 Lootpalooza": {
-      "monsters": [ "Bandit Archer","Bandit Guard", "Vermling Scavenger"]
+      "monsters": [ "Bandit Archer","Bandit Guard", "Vermling Scavenger"],
+      "sections": {
+        "#22C (Scenario 73)": {
+          "monsters": ["Lootbot"]
+        }
+      }
     },
     "#74 Song of the Harrower": {
       "monsters": [ "Black Imp","Harrower Bugflute", "Harrower Infester"]
     },
     "#75 Sunken Temple": {
-      "monsters": [ "Deep Terror","Lurker", "Stone Golem"]
+      "monsters": [ "Deep Terror","Lurker", "Stone Golem"],
+      "sections": {
+        "#26C (Scenario 75)": {
+          "monsters": ["Active Mechanism"],
+          "special": [
+            {
+              "type": "Timer",
+              "note": "All figures adjacent to at least one wall suffer L/2 damage (rounded up)",
+              "list": [-1],
+              "startOfRound": false
+            }
+          ]
+        }
+      }
     },
     "#76 Untold Woe": {
       "monsters": [ "Flame Demon","Gnashing Drake", "Hound", "Spitting Drake", "Sun Demon"]
@@ -1318,11 +1378,21 @@
       "monsters": [ "Bandit Archer","Living Corpse", "Living Bones", "Living Spirit"]
     },
     "#78 Ternion Tomb": {
-      "monsters": [ "Ancient Artillery","Cultist", "Living Bones", "Stone Golem"]
+      "monsters": [ "Ancient Artillery","Cultist", "Living Bones", "Stone Golem"],
+      "sections": {
+        "#35B (Scenario 78)": {
+          "monsters": ["Reaver", "Conqueror", "Ritualist"]
+        }
+      }
     },
 
     "#79 Unsouled": {
-      "monsters": [ "Inox Archer", "Inox Guard", "Inox Guard (ally)"]
+      "monsters": [ "Inox Archer", "Inox Guard", "Inox Guard (ally)"],
+      "sections": {
+        "#38A (Scenario 79)": {
+          "monsters": ["Okeda"]
+        }
+      }
     },
     "#80 Conflux of Power": {
       "monsters": [ "Savvas Acolyte","Inferno Demon", "Glacier Demon", "Flame Demon", "Frost Demon" ]
@@ -1366,66 +1436,6 @@
     },
     "#84 Return to Crystal Gardens (Vanquisher)": {
       "monsters": [ "Shardrender (84)", "Smoke Spirit"]
-    }
-  },
-  "sections": {
-    "#19A (Scenario 71)": {
-      "monsters": ["Shardrender (monster)", "Enraged Vanquisher"],
-      "special": [
-        {
-          "type": "Allies",
-          "list": ["Shardrender (monster)"]
-        }
-      ]
-    },
-    "#21A (Scenario 72)": {
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Small Tree 1",
-          "health": "L+C"
-        },
-        {
-          "type": "Objective",
-          "name": "Small Tree 2",
-          "health": "L+C"
-        },
-        {
-          "type": "Objective",
-          "name": "Large Tree 1",
-          "health": "L+C"
-        },
-        {
-          "type": "Objective",
-          "name": "Large Tree 2",
-          "health": "L+C"
-        },
-        {
-          "type": "Objective",
-          "name": "Large Tree d",
-          "health": "L+C"
-        }
-      ]
-    },
-    "#22C (Scenario 73)": {
-      "monsters": ["Lootbot"]
-    },
-    "#26C (Scenario 75)": {
-      "monsters": ["Active Mechanism"],
-      "special": [
-        {
-          "type": "Timer",
-          "note": "All figures adjacent to at least one wall suffer L/2 damage (rounded up)",
-          "list": [-1],
-          "startOfRound": false
-        }
-      ]
-    },
-    "#35B (Scenario 78)": {
-      "monsters": ["Reaver", "Conqueror", "Ritualist"]
-    },
-    "#38A (Scenario 79)": {
-      "monsters": ["Okeda"]
     }
   }
 }

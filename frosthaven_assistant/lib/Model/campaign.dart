@@ -8,14 +8,12 @@ import 'package:frosthaven_assistant/Model/scenario.dart';
 
 
 class CampaignModel {
-  CampaignModel({required this.edition, required this.monsterAbilities, required this.monsters, required this.characters, required this.scenarios,required this.sections});
+  CampaignModel({required this.edition, required this.monsterAbilities, required this.monsters, required this.characters, required this.scenarios});
   final String edition;
   final List<MonsterAbilityDeckModel> monsterAbilities;
-  //final List<MonsterModel> monsters;
   final Map< String, MonsterModel> monsters;
   final List<CharacterClass> characters;
   final Map< String, ScenarioModel> scenarios;
-  final Map< String, ScenarioModel> sections;
 
   factory CampaignModel.fromJson(Map<String, dynamic> data) {
     // note the explicit cast to String
@@ -45,13 +43,6 @@ class CampaignModel {
       scenarioMap[key] = ScenarioModel.fromJson(scenarios[key]);
     }
 
-
-    Map<String, ScenarioModel> sectionMap = HashMap();
-    final sections = data['sections'] as Map<dynamic, dynamic>;
-    for (String key in sections.keys){
-      sectionMap[key] = ScenarioModel.fromJson(sections[key]);
-    }
-
-    return CampaignModel(edition: edition, monsterAbilities: deckDataList, monsters: monsterMap, characters: characterDataList, scenarios: scenarioMap, sections: sectionMap);
+    return CampaignModel(edition: edition, monsterAbilities: deckDataList, monsters: monsterMap, characters: characterDataList, scenarios: scenarioMap);
   }
 }
