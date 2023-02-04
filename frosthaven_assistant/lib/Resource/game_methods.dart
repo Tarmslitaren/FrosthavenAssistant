@@ -697,7 +697,7 @@ class GameMethods {
           Monster? monster = _gameState.currentList.firstWhereOrNull((element) => element.id == rule.name) as Monster?;
           if(monster != null) {
             if(_gameState.level.value == monster.level.value) {
-              int newLevel = min(7,monster.level.value + rule.level);
+              int newLevel = (monster.level.value + rule.level).clamp(0, 7);
               monster.level.value = newLevel;
               for(MonsterInstance instance in monster.monsterInstances.value) {
                 instance.setLevel(monster);
