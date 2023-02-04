@@ -548,6 +548,15 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                                     "assets/images/psd/range-stat_fh.png"),
                               ))
                           : Container(),
+                  if(widget.data.type.capture && !isBoss) Positioned(
+                      height: 16 * scale,
+                      left: 74.8 * scale,
+                      top: 66 * scale,
+                      child: const Image(
+                        fit: BoxFit.fitHeight,
+                        image: AssetImage(
+                            "assets/images/psd/capture.png"),
+                      )),
                   !isBoss
                       ? Positioned(
                           bottom: 5 * scale * 0.8,

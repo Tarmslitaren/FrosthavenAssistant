@@ -221,6 +221,7 @@
 			"display": "Black Imp",
 			"deck": "Imp (FH)",
 			"hidden": true,
+			"capture": true,
 			"count": 10,
 			"levels": [
 				{

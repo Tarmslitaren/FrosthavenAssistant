@@ -5,7 +5,8 @@ class MonsterModel {
     this.deck,
     this.count,
       this.levels,
-      this.edition
+      this.edition,
+      this.capture
       );
   final String name; //id
   final String deck;
@@ -14,6 +15,7 @@ class MonsterModel {
   final bool hidden;
   final bool flying;
   final int count;
+  final bool capture;
   final String edition;
   final List<MonsterLevelModel> levels;
 
@@ -47,6 +49,10 @@ class MonsterModel {
     if(data.containsKey('flying')){
       flying = data['flying'] as bool;
     }
+    bool capture = false;
+    if(data.containsKey('capture')){
+      capture = data['capture'] as bool;
+    }
     final deck = data['deck'] as String;
     final count = data['count'] as int;
 
@@ -56,7 +62,7 @@ class MonsterModel {
     for (var item in levels) {
       monsterLevelDataList.add(MonsterLevelModel.fromJson(item));
     }
-    return MonsterModel(name, display, gfx, hidden, flying, deck, count, monsterLevelDataList, anEdition);
+    return MonsterModel(name, display, gfx, hidden, flying, deck, count, monsterLevelDataList, anEdition, capture);
   }
 }
 

@@ -1143,6 +1143,7 @@
       "gfx": "Black Imp",
       "display": "Black Imp",
       "deck": "Imp (FH)",
+      "capture": true,
       "count": 10,
       "levels": [
         {
@@ -1692,6 +1693,7 @@
       "gfx": "Hound",
       "display": "Hound",
       "deck": "Hound (FH)",
+      "capture": true,
       "count": 6,
       "levels": [
         {
@@ -1741,6 +1743,7 @@
       "display": "Hound",
       "deck": "Hound (FH)",
       "hidden": true,
+      "capture": true,
       "count": 6,
       "levels": [
         {
@@ -1789,6 +1792,7 @@
       "gfx": "Hound",
       "display": "Hound",
       "deck": "Hound Scenario 0",
+      "capture": true,
       "hidden": true,
       "count": 6,
       "levels": [
@@ -2066,6 +2070,7 @@
       "gfx": "Ooze",
       "display": "Ooze",
       "deck": "Ooze (FH)",
+      "capture": true,
       "count": 10,
       "levels": [
         {
@@ -2162,6 +2167,7 @@
       "gfx": "Rending Drake",
       "display": "Rending Drake",
       "deck": "Rending Drake (FH)",
+      "capture": true,
       "count": 6,
       "levels": [
         {
@@ -2370,6 +2376,7 @@
       "gfx": "Spitting Drake",
       "display": "Spitting Drake",
       "deck": "Spitting Drake (FH)",
+      "capture": true,
       "count": 6,
       "flying": true,
       "levels": [
@@ -3677,6 +3684,7 @@
     "Lightning Eel": {
       "deck": "Lightning Eel",
       "count": 10,
+      "capture": true,
       "levels": [
         {
           "level": 0,
@@ -4069,6 +4077,7 @@
     "Piranha Pig": {
       "deck": "Piranha Pig",
       "count": 10,
+      "capture": true,
       "levels": [
         {
           "level": 0,
@@ -4310,6 +4319,7 @@
     "Ruined Machine": {
       "deck": "Ruined Machine",
       "count": 10,
+      "capture": true,
       "levels": [
         {
           "level": 0,
@@ -4403,6 +4413,7 @@
       "deck": "Imp (FH)",
       "count": 10,
       "flying": true,
+      "capture": true,
       "levels": [
         {
           "level": 0,
@@ -4453,6 +4464,7 @@
       "deck": "Imp (FH)",
       "count": 10,
       "flying": true,
+      "capture": true,
       "levels": [
         {
           "level": 0,
