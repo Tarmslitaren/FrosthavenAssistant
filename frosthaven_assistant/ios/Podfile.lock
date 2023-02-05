@@ -12,8 +12,9 @@ PODS:
   - ReachabilitySwift (5.0.0)
   - search_choices (0.0.1):
     - Flutter
-  - shared_preferences_ios (0.0.1):
+  - shared_preferences_foundation (0.0.1):
     - Flutter
+    - FlutterMacOS
   - url_launcher_ios (0.0.1):
     - Flutter
   - wakelock (0.0.1):
@@ -26,7 +27,7 @@ DEPENDENCIES:
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - network_info_plus (from `.symlinks/plugins/network_info_plus/ios`)
   - search_choices (from `.symlinks/plugins/search_choices/ios`)
-  - shared_preferences_ios (from `.symlinks/plugins/shared_preferences_ios/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - wakelock (from `.symlinks/plugins/wakelock/ios`)
 
@@ -47,8 +48,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/network_info_plus/ios"
   search_choices:
     :path: ".symlinks/plugins/search_choices/ios"
-  shared_preferences_ios:
-    :path: ".symlinks/plugins/shared_preferences_ios/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
   wakelock:
@@ -62,8 +63,8 @@ SPEC CHECKSUMS:
   network_info_plus: b78876159360f5580608c2cea620d6ceffabd0ad
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   search_choices: b50731e8c425078048f681f39c34375c58d6ce8d
-  shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
-  url_launcher_ios: 839c58cdb4279282219f5e248c3321761ff3c4de
+  shared_preferences_foundation: 297b3ebca31b34ec92be11acd7fb0ba932c822ca
+  url_launcher_ios: ae1517e5e344f5544fb090b079e11f399dfbe4d2
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
 
 PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3

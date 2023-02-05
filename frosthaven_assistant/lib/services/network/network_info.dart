@@ -37,8 +37,8 @@ class NetworkInformation {
 
   final wifiIPv4 = ValueNotifier<String>("");
   final outgoingIPv4 = ValueNotifier<String>("");
-  final wifiName = ValueNotifier<String>("");
-  final wifiBSSID = ValueNotifier<String>("");
+  //final wifiName = ValueNotifier<String>("");
+  //final wifiBSSID = ValueNotifier<String>("");
       //wifiIPv6,
       //wifiGatewayIP,
       //wifiBroadcast,
@@ -51,7 +51,7 @@ class NetworkInformation {
       outgoingIPv4.value = "";
     }
 
-    try {
+    /*try {
       if (!kIsWeb && Platform.isIOS) {
         var status = await networkInfo.getLocationServiceAuthorization();
         if (status == LocationAuthorizationStatus.notDetermined) {
@@ -78,9 +78,9 @@ class NetworkInformation {
     } on PlatformException catch (e) {
       developer.log('Failed to get Wifi Name', error: e);
       wifiName.value = 'Failed to get Wifi Name';
-    }
+    }*/
 
-    try {
+    /*try {
       if (!kIsWeb && Platform.isIOS) {
         var status = await networkInfo.getLocationServiceAuthorization();
         if (status == LocationAuthorizationStatus.notDetermined) {
@@ -107,7 +107,7 @@ class NetworkInformation {
     } on PlatformException catch (e) {
       developer.log('Failed to get Wifi BSSID', error: e);
       wifiBSSID.value = 'Failed to get Wifi BSSID';
-    }
+    }*/
 
     try {
       String? ipv4 = await networkInfo.getWifiIP();
@@ -165,8 +165,9 @@ class NetworkInformation {
       wifiSubmask = 'Failed to get Wifi submask';
     }*/
 
-    developer.log('Wifi Name: ${wifiName.value}\n'
-          'Wifi BSSID: ${wifiBSSID.value}\n'
+    developer.log(
+	//'Wifi Name: ${wifiName.value}\n'
+          //'Wifi BSSID: ${wifiBSSID.value}\n'
           'Wifi IPv4: ${wifiIPv4.value}\n'
           'Outgoing IPv4: ${outgoingIPv4.value}\n'
           //'Wifi Broadcast: $wifiBroadcast\n'
