@@ -2827,49 +2827,49 @@
           "level": 0, "health": "9xC",  "move": 3, "attack": 2, "attributes": [ "%muddle%" ],
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+          "immunities": [  "%stun%", "%disarm%","%immobilize%", "%curse%" ]
         },
         {
           "level": 1, "health": "10xC", "move": 3, "attack": 3, "attributes": [ "%muddle%" ],
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+          "immunities": [  "%stun%", "%disarm%","%immobilize%", "%curse%" ]
         },
         {
           "level": 2, "health": "11xC", "move": 4, "attack": 3, "attributes": [ "%muddle%" ],
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+          "immunities": [  "%stun%", "%disarm%","%immobilize%", "%curse%" ]
         },
         {
           "level": 3, "health": "12xC", "move": 4, "attack": 4,  "attributes": [ "%muddle%" ],
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+          "immunities": [  "%stun%", "%disarm%","%immobilize%", "%curse%" ]
         },
         {
           "level": 4, "health": "14xC", "move": 4, "attack": 4, "attributes": [ "%muddle%" ],
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+          "immunities": [  "%stun%", "%disarm%","%immobilize%", "%curse%" ]
         },
         {
           "level": 5, "health": "15xC", "move": 4, "attack": 5, "attributes": [ "%muddle%" ],
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+          "immunities": [  "%stun%", "%disarm%","%immobilize%", "%curse%" ]
         },
         {
           "level": 6, "health": "17xC", "move": 4, "attack": 6, "attributes": [ "%muddle%" ],
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+          "immunities": [  "%stun%", "%disarm%","%immobilize%", "%curse%" ]
         },
         {
           "level": 7, "health": "19xC", "move": 5, "attack": 7, "attributes": [ "%muddle%" ],
           "special1": [ "Reference the scenario", "Special Rules" ],
           "special2": [ "Reference the scenario", "Special Rules" ],
-          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+          "immunities": [  "%stun%", "%disarm%","%immobilize%", "%curse%" ]
         }
       ]
     },
