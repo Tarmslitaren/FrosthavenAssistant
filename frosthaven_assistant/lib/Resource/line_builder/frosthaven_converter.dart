@@ -61,6 +61,12 @@ class FrosthavenConverter {
         isElementUse = false;
       }
 
+      //remove this special temporarily
+      bool noCalc = false;
+      if(line.startsWith('>^')){
+        line = line.substring(1);
+        noCalc = true;
+      }
       if (line.startsWith("^") && isSubLine && !startOfConditional) {
         if (line[1] == '%' ||
             //these are all very... assuming.
@@ -114,6 +120,10 @@ class FrosthavenConverter {
           } else if(isElementUse && (!lines[i - 2].contains("[c]") && !line.startsWith("^all")&& !line.startsWith("^All"))){
             //isReallySubLine = false; //block useblocks from having straight sublines?
             //hope this doesn't come back to bite me (flame demon 77) - it does savvas lavaflow 51
+          }
+          //add back no calculation marker
+          if(noCalc == true){
+            line = "^$line";
           }
           line = "!$line";
           line = line.replaceFirst("Self", "self");

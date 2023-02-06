@@ -550,7 +550,7 @@
         [ "Parry and Thrust", 746, true, 15, "%shield% + 1","*.........", "%retaliate% + 2" ],
         ["Calculated Strike", 747, false, 70, "%move% - 1","*.........", "%attack% + 1" ],
         [ "Throwing Axe", 748, false, 35, "%move% - 1","*.........", "%attack% + 0", "^%range% 2" ],
-        [ "Venom Shiv", 749, false, 15, "%attack% + 0", "^%poison%","*.........,", "%shield% + 1" ]
+        [ "Venom Shiv", 749, false, 15, "%attack% + 0", "^%poison%","*.........,", "%shield% + 1" ],
         [ "Hasty Assault", 750, false, 30, "%move% + 1","*.........", "%attack% - 1" ],
         ["Nothing Special", 751, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
         [ "Nothing Special", 752, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
@@ -1045,7 +1045,7 @@
         ["Guide the School", 783, false, 12,  "%attack% + 0","^%range% 3","*.........","%strengthen%", "^Target all Piranha Pigs,%range% 3"],
         ["Desperate Herd", 779, false, 72, "%move% - 1", "*.........", "^Grant all Piranha Pigs within %range% 3:", ">%move% - 1",">%attack% - 2", "[r]", "[/r]","^Piranha Pig suffers damage 1."],
         ["Briny Bristles", 778, false, 18, "%move% - 1", "*.........", "^Grant the closest Piranha Pig", "^^within %range% 4:", ">%move% + 0",">%attack% + 1"],
-        ["Heed the Pigs", 784, true, 65,  "%move% + 0", "*.........","%attack% X", "^%range% X + 1","[r]", "[/r]", "^where X is the number of", "^^Piranha Pigs on the map."],
+        ["Heed the Pigs", 784, true, 65,  "%move% + 0", "*.........","%attack% X", ">^%range% X + 1","[r]", "[/r]", "^where X is the number of", "^^Piranha Pigs on the map."],
         ["Pig Parade", 780, true, 68, "^Summon one normal Piranha Pig"]
       ]
     },
