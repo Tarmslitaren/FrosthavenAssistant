@@ -548,13 +548,13 @@
       "name": "Guard (FH)",
       "cards": [
         [ "Parry and Thrust", 746, true, 15, "%shield% + 1","*.........", "%retaliate% + 2" ],
-        [ "Hasty Assault", 750, false, 30, "%move% + 1","*.........", "%attack% - 1" ],
-        [ "Throwing Axe", 748, false, 35, "%move% - 1","*.........", "%attack% + 0", "^%range% 2" ],
-        [ "Nothing Special", 752, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
-        ["Nothing Special", 751, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
         ["Calculated Strike", 747, false, 70, "%move% - 1","*.........", "%attack% + 1" ],
-        [ "Psych Up",753, false, 55, "%move% - 1","*.........", "%attack% + 0","*.........", "%strengthen%", "^Self" ],
-        [ "Venom Shiv", 749, true, 15, "%attack% + 0", "^%poison%","*.........,", "%shield% + 1" ]
+        [ "Throwing Axe", 748, false, 35, "%move% - 1","*.........", "%attack% + 0", "^%range% 2" ],
+        [ "Venom Shiv", 749, false, 15, "%attack% + 0", "^%poison%","*.........,", "%shield% + 1" ]
+        [ "Hasty Assault", 750, false, 30, "%move% + 1","*.........", "%attack% - 1" ],
+        ["Nothing Special", 751, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
+        [ "Nothing Special", 752, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
+        [ "Psych Up",753, true, 55, "%move% - 1","*.........", "%attack% + 0","*.........", "%strengthen%", "^Self" ]
       ]
     },
     {
@@ -728,7 +728,7 @@
     {
       "name": "Scout (FH)",
       "cards": [
-        ["Cruel Bow", 460, true, 29, "%move% - 1","*.........", "%attack% - 1", "^%range% 3,","^%impair%"],
+        ["Cruel Bow", 770, true, 29, "%move% - 1","*.........", "%attack% - 1", "^%range% 3,","^%impair%"],
         ["Hasty Assault", 771, false, 40, "%move% + 1","*.........", "%attack% - 1"],
         ["Nothing Special", 772, false, 53, "%move% + 0","*.........", "%attack% + 0"],
         ["Rancid Arrow", 773, false, 54, "%move% - 2","*.........", "%attack% + 0", "^%range% 3,", "^%poison%"],
@@ -744,7 +744,7 @@
         ["Drain Strength", 763, false, 8, "%move% + 0","*.........", "%attack% - 1", "^%range% 3", "^%disarm%" ],
         ["Drain Speed", 762, false, 8, "%move% - 1","*.........", "%attack% + 0", "^%range% 3", "^%immobilize%" ],
         ["Tend to the Clan",765, true, 23, "%move% + 0", "*.........","%heal% 3", "^%range% 3" ],
-        ["Tend to the Clan",755, true, 23, "%move% + 0","*.........", "%heal% 3", "^%range% 3" ],
+        ["Tend to the Clan",766, true, 23, "%move% + 0","*.........", "%heal% 3", "^%range% 3" ],
         ["Nothing Special", 764, false, 62, "%move% + 0","*.........", "%attack% + 0", "^%range% 3" ],
         ["Calculated Strike", 767, false, 74, "%move% - 1","*.........", "%attack% + 1", "^%range% 3" ],
         ["Divine Energy", 768, false, 89, "%move% - 1","*.........", "%heal% 1", "^Target all allies","^%range% 1", "*.........","%bless%", "^Self" ],
