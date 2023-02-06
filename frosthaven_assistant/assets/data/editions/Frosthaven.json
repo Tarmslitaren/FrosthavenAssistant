@@ -6494,7 +6494,7 @@
           "type": "Timer",
           "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
           "startOfRound": true,
-          "note": "Spawn one Algox Guard at d nad one Algox Archer at e. Normal for 2 characters, elite each second spawning for 3, or all elite for 4 characters."
+          "note": "Spawn one Algox Guard at d and one Algox Archer at e. Normal for 2 characters, elite each second spawning for 3, or all elite for 4 characters."
         },
         {
           "type": "Allies",
