@@ -166,7 +166,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
           return SizedBox(
-            width: (73 + 68) * settings.userScalingBars.value,
+            width: (94 ) * settings.userScalingBars.value,
             height: 58.6666 * settings.userScalingBars.value,
             child: ValueListenableBuilder<int>(
                 valueListenable: _gameState.commandIndex,

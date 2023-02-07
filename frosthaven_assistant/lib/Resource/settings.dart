@@ -33,6 +33,7 @@ class Settings {
   final shimmer = ValueNotifier<bool>(true);
   final showScenarioNames = ValueNotifier<bool>(true);
   final showCustomContent = ValueNotifier<bool>(true);
+  final showSectionsInMainView = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -221,6 +222,10 @@ class Settings {
         showCustomContent.value = data["showCustomContent"];
       }
 
+      if (data["showSectionsInMainView"] != null) {
+        showSectionsInMainView.value = data["showSectionsInMainView"];
+      }
+
       if (data["connectClientOnStartup"] != null && data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
           getIt<Network>().client.connect(lastKnownConnection);
@@ -272,6 +277,7 @@ class Settings {
         '"shimmer": ${shimmer.value}, '
         '"showScenarioNames": ${showScenarioNames.value}, '
         '"showCustomContent": ${showCustomContent.value}, '
+        '"showSectionsInMainView": ${showSectionsInMainView.value}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort" '

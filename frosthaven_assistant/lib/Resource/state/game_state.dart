@@ -90,6 +90,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   final level = ValueNotifier<int>(1);
   final solo = ValueNotifier<bool>(false);
   final scenario = ValueNotifier<String>("");
+  List<String> scenarioSectionsAdded = [];
   List<SpecialRule> scenarioSpecialRules = []; //has both monsters and characters
   late LootDeck lootDeck = LootDeck.empty(); //loot deck for current scenario
   final toastMessage = ValueNotifier<String>("");
@@ -124,6 +125,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
         '"scenario": "${scenario.value}", '
         '"toastMessage": "${toastMessage.value}", '
         '"scenarioSpecialRules": ${scenarioSpecialRules.toString()}, '
+        '"scenarioSectionsAdded": ${json.encode(scenarioSectionsAdded)}, '
         '"currentCampaign": "${currentCampaign.value}", '
         '"currentList": ${currentList.toString()}, '
         '"currentAbilityDecks": ${currentAbilityDecks.toString()}, '

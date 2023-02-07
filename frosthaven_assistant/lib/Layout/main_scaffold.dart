@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
+import 'package:frosthaven_assistant/Layout/section_list.dart';
 import 'package:frosthaven_assistant/Layout/top_bar.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -56,40 +57,99 @@ Widget createMainScaffold(BuildContext context) {
                         return ValueListenableBuilder<int>(
                             valueListenable: getIt<GameState>().commandIndex,
                             builder: (context, value, child) {
-                              return GameMethods.hasAllies()
-                                  ? Positioned(
-                                      bottom: modFitsOnBar
-                                          ? 4
-                                          : 40 *
-                                                  getIt<Settings>()
-                                                      .userScalingBars
-                                                      .value +
-                                              8,
-                                      right: 0,
-                                      child: const ModifierDeckWidget(
-                                          name: 'Allies'))
-                                  : Container();
+                              GameState gameState = getIt<GameState>();
+                              double barScale =
+                                  getIt<Settings>().userScalingBars.value;
+
+                              bool hasLootDeck =
+                                  !getIt<Settings>().hideLootDeck.value;
+                              if (gameState.lootDeck.discardPile.isEmpty &&
+                                  gameState.lootDeck.drawPile.isEmpty) {
+                                hasLootDeck = false;
+                              }
+
+                              double screenWidth =
+                                  MediaQuery.of(context).size.width;
+                              double sectionWidth = screenWidth;
+                              if (hasLootDeck) {
+                                sectionWidth -=
+                                    94 * barScale; //width of loot deck
+                              }
+                              if (!modFitsOnBar || GameMethods.hasAllies()) {
+                                sectionWidth -= 153 * barScale; //width of amd
+                              }
+
+                              //move to separate row if it doesn't fit
+                              bool sectionsOnSeparateRow = false;
+                              int? nrOfSections = gameState
+                                  .modelData
+                                  .value[gameState.currentCampaign.value]
+                                  ?.scenarios[gameState.scenario.value]
+                                  ?.sections
+                                  .length;
+                              if(nrOfSections != null && gameState.scenarioSectionsAdded.length == nrOfSections) {
+                                nrOfSections = null;
+                              }
+                              if(getIt<Settings>().showSectionsInMainView.value == false) {
+                                nrOfSections = null;
+                              }
+                              if ((nrOfSections != null &&
+                                      nrOfSections > 0 &&
+                                      sectionWidth < 58 * barScale) ||
+                                  (nrOfSections != null &&
+                                      nrOfSections > 2 &&
+                                      sectionWidth < 58 * barScale * 2)) {
+                                //in case doesn't fit
+                                sectionsOnSeparateRow = true;
+                                sectionWidth =
+                                    MediaQuery.of(context).size.width;
+                              }
+
+                              return Positioned(
+                                  width: screenWidth,
+                                  bottom: 4 * barScale,
+                                  left: 20,
+                                  child: Column(
+                                      children: [
+                                    Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          if (hasLootDeck)
+                                            const LootDeckWidget(),
+                                          if (!sectionsOnSeparateRow && nrOfSections != null)
+                                            Container(
+                                              width: sectionWidth,
+                                              child: const SectionList(),
+                                            ),
+                                          Column(children: [
+                                            if (GameMethods.hasAllies())
+                                              const ModifierDeckWidget(
+                                                  name: 'Allies'),
+                                            if (!modFitsOnBar)
+                                              Container(
+                                                  margin: EdgeInsets.only(
+                                                    top: 4 * barScale,
+                                                  ),
+                                                  child:
+                                                      const ModifierDeckWidget(
+                                                    name: '',
+                                                  ))
+                                          ])
+                                        ]),
+                                    if (sectionsOnSeparateRow && nrOfSections != null)
+                                      Container(
+                                        width: sectionWidth,
+                                        child: const SectionList(),
+                                      ),
+                                  ]));
                             });
                       }),
-                  modFitsOnBar
-                      ? Container()
-                      : const Positioned(
-                          bottom: 4,
-                          right: 0,
-                          child: ModifierDeckWidget(
-                            name: '',
-                          )),
-                  Positioned(
-                      bottom:  4 *
-                          getIt<Settings>()
-                              .userScalingBars
-                              .value,
-                      left: 20,
-                      child: const LootDeckWidget())
-
                 ],
               ),
-              //floatingActionButton: const ModifierDeckWidget()
             ));
       });
 }

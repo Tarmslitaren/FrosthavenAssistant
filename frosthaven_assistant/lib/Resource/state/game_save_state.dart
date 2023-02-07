@@ -119,6 +119,14 @@ class GameSaveState {
           gameState.toastMessage.value = data['toastMessage']; // as String;
         }
 
+        if (data.containsKey('scenarioSectionsAdded')) {
+          List<dynamic> scenarioSectionsAdded = data['scenarioSectionsAdded'] as List;
+          gameState.scenarioSectionsAdded.clear();
+          for(var item in scenarioSectionsAdded) {
+            gameState.scenarioSectionsAdded.add(item);
+          }
+        }
+
         if (data.containsKey('scenarioSpecialRules')) {
           var scenarioSpecialRulesList = data['scenarioSpecialRules'] as List;
           gameState.scenarioSpecialRules.clear();

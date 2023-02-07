@@ -182,6 +182,17 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),
+                              CheckboxListTile(
+                                  title:
+                                  const Text("Show Sections in Main Screen"),
+                                  value: settings.showSectionsInMainView.value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      settings.showSectionsInMainView.value = value!;
+                                      settings.saveToDisk();
+                                      getIt<GameState>().updateAllUI();
+                                    });
+                                  }),
                               Container(
                                 constraints: const BoxConstraints(
                                     minWidth: double.infinity),

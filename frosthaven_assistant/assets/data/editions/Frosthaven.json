@@ -1039,7 +1039,7 @@
     {
       "name": "Abael Herder",
       "cards": [
-        ["Advancing Horde", 782, false, 88,  "^Grant the closest","^^Piranha Pig within %range% 4:",">%move% + 0",">%attack% + 0", "^%muddle%","*.........", "^If no Piranha Pig was targeted", "^^by the grant ability, summon","^^one normal Piranha Pig" ],
+        ["Advancing Horde", 782, false, 88,  "^Grant the closest","^^Piranha Pig within %range% 4:",">%move% + 0",">%attack% + 0", "^%muddle%","**.........", "^If no Piranha Pig was targeted", "^^by the grant ability, summon","^^one normal Piranha Pig" ],
         ["Fish Net", 781, false, 20, "%move% + 0","*.........","%attack% + 0","^%range% 3,", "^%pull% 2,","^%immobilize%"  ],
         ["Nothing Special", 785, false, 56, "%move% + 0", "*.........","%attack% + 0", "^%range% 3"],
         ["Guide the School", 783, false, 12,  "%attack% + 0","^%range% 3","*.........","%strengthen%", "^Target all Piranha Pigs,%range% 3"],
