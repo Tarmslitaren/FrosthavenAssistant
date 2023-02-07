@@ -424,10 +424,7 @@ class MainListState extends State<MainList> {
           }
           ignoreScroll = false;*/ //there is no easy way to add nice amount of padding for this mode.
 
-          double paddingBottom = 60 * getIt<Settings>().userScalingBars.value;
-          if (GameMethods.hasAllies()) {
-            paddingBottom *= 2;
-          }
+          double paddingBottom = 0.5 * MediaQuery.of(context).size.height ;
           return Container(
               margin: canFit2Columns
                   ? EdgeInsets.only(left: paddingLeft, right: paddingLeft)
