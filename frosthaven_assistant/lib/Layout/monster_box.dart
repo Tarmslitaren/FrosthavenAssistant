@@ -170,7 +170,7 @@ class MonsterBoxState extends State<MonsterBox> {
               ),
             ),
             Positioned(
-              left: 20 * scale,
+              left: data.health.value > 99 ? 22 * scale: 23 * scale,
               //width: width-20*scale,
               top: 0,
 
@@ -179,31 +179,31 @@ class MonsterBoxState extends State<MonsterBox> {
                   margin: EdgeInsets.zero,
                   child: Row(
                       children: [
+                        Column(children: [
                         Image(
                           //fit: BoxFit.contain,
                           color: Colors.red,
-                          height: 11 * scale,
+                          height: 7 * scale,
                           image: const AssetImage("assets/images/blood.png"),
                         ),
                         Container(
                           margin: EdgeInsets.only(bottom: 2 * scale),
-                          width: 16.8 * scale,
+                          width: data.health.value > 99 ? 21 * scale : 16.8 * scale,
                           alignment: Alignment.center,
                           child: Text(
                             textAlign: TextAlign.end,
                             "${data.health.value}",
                             style: TextStyle(
+                              height: 1,
                                 color: Colors.white,
-                                fontSize: data.health.value > 99
-                                    ?  13 * scale
-                                    :  18 * scale,
+                                fontSize: 16 * scale,
                                 shadows: [
                                   shadow
                                 ]),
                           ),
-                        ),
+                        )]),
                         SizedBox(
-                          width: (2.5) *scale,
+                          width:data.health.value > 99 ? 4.5 *scale : 6.5 *  scale,
                         ),
                         ValueListenableBuilder<List<Condition>>(
                             valueListenable: data.conditions,
