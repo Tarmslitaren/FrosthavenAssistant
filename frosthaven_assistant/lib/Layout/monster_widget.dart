@@ -142,15 +142,14 @@ class MonsterWidgetState extends State<MonsterWidget> {
         valueListenable: getIt<GameState>().updateList,
         // widget.data.monsterInstances,
         builder: (context, value, child) {
-          return ColorFiltered(
+          return Column(mainAxisSize: MainAxisSize.max, children: [ ColorFiltered(
               colorFilter: (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive) &&
                       (widget.data.turnState != TurnsState.done ||
                           getIt<GameState>().roundState.value ==
                               RoundState.chooseInitiative)
                   ? ColorFilter.matrix(identity)
                   : ColorFilter.matrix(grayScale),
-              child: Column(mainAxisSize: MainAxisSize.max, children: [
-                SizedBox(
+              child: SizedBox(
                   height: 120 * 0.8 * scale,
                   //this dictates size of the cards
                   width: getMainListWidth(context),
@@ -170,7 +169,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                       MonsterStatCardWidget(data: widget.data),
                     ],
                   ),
-                ),
+                )),
                 Container(
                   //color: Colors.amber,
                   //height: 50,
@@ -184,7 +183,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                         return buildMonsterBoxGrid(scale);
                       }),
                 ),
-              ]));
+              ]);
         });
   }
 }

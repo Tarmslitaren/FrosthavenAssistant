@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
@@ -98,7 +97,6 @@ class CharacterWidgetState extends State<CharacterWidget> {
     }
   }
 
-  //TODO: try wrap
   List<Widget> createConditionList(double scale) {
     List<Widget> conditions = [];
     for (int i = conditions.length;
@@ -117,7 +115,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
         child: IconButton(
           padding: EdgeInsets.zero,
           icon: Image.asset(
-            height: 30*scale,
+              height: 30 * scale,
               fit: BoxFit.fitHeight,
               color: Colors.white24,
               colorBlendMode: BlendMode.modulate,
@@ -303,9 +301,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
     ]);
   }
 
-
   SweepGradient buildGradiantBackground(List<Color> colors) {
-    int nrOfColorEntries = colors.length * 3 +1;
+    int nrOfColorEntries = colors.length * 3 + 1;
 
     List<Color> endList = [];
     for (int i = 0; i < 3; i++) {
@@ -317,8 +314,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
     List<double> stops = [];
     stops.add(0);
-    for (int i = 1; i < nrOfColorEntries-1; i++) {
-      stops.add(i/nrOfColorEntries);
+    for (int i = 1; i < nrOfColorEntries - 1; i++) {
+      stops.add(i / nrOfColorEntries);
     }
     stops.add(1);
 
@@ -344,7 +341,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
           Colors.yellow,
         ],*/
         stops: stops
-      /* [
+        /* [
           0,
           1 / 13,
           2 / 13,
@@ -359,8 +356,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
           12 / 13,
           1
         ]*/
-    );
-
+        );
   }
 
   Widget buildInternal(BuildContext context) {
@@ -374,314 +370,292 @@ class CharacterWidgetState extends State<CharacterWidget> {
       blurRadius: 1 * scale,
     );
 
-    return Column(mainAxisSize: MainAxisSize.max, children: [
-      Container(
-        //padding: EdgeInsets.zero,
-        // color: Colors.amber,
-        //height: 50,
-        margin: EdgeInsets.only(left: 4 * scale * 0.8, right: 4 * scale * 0.8),
-        width: getMainListWidth(context) - 8 * scale * 0.8,
-        child: ValueListenableBuilder<int>(
-            valueListenable: getIt<GameState>().killMonsterStandee,
-            // widget.data.monsterInstances,
-            builder: (context, value, child) {
-              return buildMonsterBoxGrid(scale);
-            }),
-      ),
-      PhysicalShape(
-          color: character.turnState == TurnsState.current
-              ? Colors.tealAccent
-              : Colors.transparent,
-          shadowColor: Colors.black,
-          elevation: 8,
-          clipper: const ShapeBorderClipper(shape: RoundedRectangleBorder()),
-          child: SizedBox(
-              width: getMainListWidth(context),
-              // 408 * scale,
-              height: 60 * scale,
-              child: Stack(
-                //alignment: Alignment.centerLeft,
-                children: [
-                  Container(
-                    //background
-                    margin: EdgeInsets.all(2 * scale),
-                    width: 408 * scale,
-                    height: 58 * scale,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black45,
-                          blurRadius: 4 * scale,
-                          offset:
-                              Offset(2 * scale, 4 * scale), // Shadow position
-                        ),
-                      ],
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          colorFilter:
-                          character.characterClass.name == "Shattersong" || character.characterClass.name == "Rimehearth"
-                                  ?  ColorFilter.mode(
-                              character.characterClass.color,
-                                  BlendMode.softLight
-                          )
-                                  : ColorFilter.mode(
-                                      character.characterClass.colorSecondary,
-                                      BlendMode.color),
-                          image: const AssetImage(
-                              "assets/images/psd/character-bar.png")),
-                      shape: BoxShape.rectangle,
-                      //color: character.characterClass.name == "Shattersong"? null : character.characterClass.colorSecondary,
-                    ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            backgroundBlendMode: (character.characterClass.name == "Shattersong" ||
-                                character.characterClass.name == "Rimehearth")
-                                ? BlendMode.multiply: null,
-                            gradient: (character.characterClass.name == "Shattersong")
-                                ? buildGradiantBackground([
-                                  Colors.yellow,
-                              Colors.purple,
-                              Colors.teal,
-                              Colors.white24])
-                                :
-                            character.characterClass.name == "Rimehearth"
-                                ? buildGradiantBackground([
-                              character.characterClass.colorSecondary,
-                              character.characterClass.color])
-                            :
-                            null
-                            )
-                        ),
+    return PhysicalShape(
+        color: character.turnState == TurnsState.current
+            ? Colors.tealAccent
+            : Colors.transparent,
+        shadowColor: Colors.black,
+        elevation: 8,
+        clipper: const ShapeBorderClipper(shape: RoundedRectangleBorder()),
+        child: SizedBox(
+            width: getMainListWidth(context),
+            // 408 * scale,
+            height: 60 * scale,
+            child: Stack(
+              //alignment: Alignment.centerLeft,
+              children: [
+                Container(
+                  //background
+                  margin: EdgeInsets.all(2 * scale),
+                  width: 408 * scale,
+                  height: 58 * scale,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black45,
+                        blurRadius: 4 * scale,
+                        offset: Offset(2 * scale, 4 * scale), // Shadow position
+                      ),
+                    ],
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        colorFilter: character.characterClass.name ==
+                                    "Shattersong" ||
+                                character.characterClass.name == "Rimehearth"
+                            ? ColorFilter.mode(character.characterClass.color,
+                                BlendMode.softLight)
+                            : ColorFilter.mode(
+                                character.characterClass.colorSecondary,
+                                BlendMode.color),
+                        image: const AssetImage(
+                            "assets/images/psd/character-bar.png")),
+                    shape: BoxShape.rectangle,
+                    //color: character.characterClass.name == "Shattersong"? null : character.characterClass.colorSecondary,
                   ),
-                  Row(
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.6),
-                                spreadRadius: 4,
-                                blurRadius: 13.0 * scale,
-                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          margin: EdgeInsets.only(
-                              left: 26 * scale,
-                              top: 5 * scale,
-                              bottom: 5 * scale),
-                          child: character.characterClass.name == "Shattersong"
-                              ? ShaderMask(
-                                  shaderCallback: (bounds) {
-                                    return LinearGradient(
-                                        transform:
-                                            const GradientRotation(pi * -0.6),
-                                        colors: [
-                                          Color(
-                                              int.parse("ff759a9d", radix: 16)),
-                                          Color(
-                                              int.parse("ffa0a8ac", radix: 16)),
-                                          Color(
-                                              int.parse("ff759a9d", radix: 16)),
-                                        ],
-                                        stops: const [
-                                          0,
-                                          0.2,
-                                          1
-                                        ]).createShader(bounds);
-                                  },
-                                  blendMode: BlendMode.srcATop,
-                                  child: Image.asset(
-                                    "assets/images/class-icons/${character.characterClass.name}.png",
-                                    height: scaledHeight * 0.6,
-                                    fit: BoxFit.contain,
-                                  ),
-                                )
-                              : Image(
-                                  fit: BoxFit.contain,
+                  child: Container(
+                      decoration: BoxDecoration(
+                          backgroundBlendMode: (character.characterClass.name ==
+                                      "Shattersong" ||
+                                  character.characterClass.name == "Rimehearth")
+                              ? BlendMode.multiply
+                              : null,
+                          gradient: (character.characterClass.name ==
+                                  "Shattersong")
+                              ? buildGradiantBackground([
+                                  Colors.yellow,
+                                  Colors.purple,
+                                  Colors.teal,
+                                  Colors.white24
+                                ])
+                              : character.characterClass.name == "Rimehearth"
+                                  ? buildGradiantBackground([
+                                      character.characterClass.colorSecondary,
+                                      character.characterClass.color
+                                    ])
+                                  : null)),
+                ),
+                Row(
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.6),
+                              spreadRadius: 4,
+                              blurRadius: 13.0 * scale,
+                              //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        margin: EdgeInsets.only(
+                            left: 26 * scale,
+                            top: 5 * scale,
+                            bottom: 5 * scale),
+                        child: character.characterClass.name == "Shattersong"
+                            ? ShaderMask(
+                                shaderCallback: (bounds) {
+                                  return LinearGradient(
+                                      transform:
+                                          const GradientRotation(pi * -0.6),
+                                      colors: [
+                                        Color(int.parse("ff759a9d", radix: 16)),
+                                        Color(int.parse("ffa0a8ac", radix: 16)),
+                                        Color(int.parse("ff759a9d", radix: 16)),
+                                      ],
+                                      stops: const [
+                                        0,
+                                        0.2,
+                                        1
+                                      ]).createShader(bounds);
+                                },
+                                blendMode: BlendMode.srcATop,
+                                child: Image.asset(
+                                  "assets/images/class-icons/${character.characterClass.name}.png",
                                   height: scaledHeight * 0.6,
-                                  color: isCharacter
-                                      ? character.characterClass.color
-                                      : null,
-                                  filterQuality: FilterQuality.medium,
-                                  image: AssetImage(
-                                    "assets/images/class-icons/${character.characterClass.name}.png",
-                                  ),
-                                  width: scaledHeight * 0.6,
-                                )),
-                      buildInitiativeWidget(context, scale, scaledHeight,
-                          shadow, frosthavenStyle),
-                      Column(
-                          //mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          //align children to the left
+                                  fit: BoxFit.contain,
+                                ),
+                              )
+                            : Image(
+                                fit: BoxFit.contain,
+                                height: scaledHeight * 0.6,
+                                color: isCharacter
+                                    ? character.characterClass.color
+                                    : null,
+                                filterQuality: FilterQuality.medium,
+                                image: AssetImage(
+                                  "assets/images/class-icons/${character.characterClass.name}.png",
+                                ),
+                                width: scaledHeight * 0.6,
+                              )),
+                    buildInitiativeWidget(
+                        context, scale, scaledHeight, shadow, frosthavenStyle),
+                    Column(
+                        //mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        //align children to the left
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(
+                                top: 10 * scale, left: 10 * scale),
+                            child: ValueListenableBuilder<String>(
+                                valueListenable:
+                                    character.characterState.display,
+                                // widget.data.monsterInstances,
+                                builder: (context, value, child) {
+                                  return Text(
+                                    character.characterState.display.value,
+                                    style: TextStyle(
+                                        fontFamily: frosthavenStyle
+                                            ? 'GermaniaOne'
+                                            : 'Pirata',
+                                        color: Colors.white,
+                                        fontSize: frosthavenStyle
+                                            ? 15 * scale
+                                            : 16 * scale,
+                                        shadows: [shadow]),
+                                  );
+                                }),
+                          ),
+                          ValueListenableBuilder<int>(
+                              valueListenable: character.characterState.health,
+                              //not working?
+                              builder: (context, value, child) {
+                                return Container(
+                                    margin: EdgeInsets.only(left: 10 * scale),
+                                    child: Row(children: [
+                                      Image(
+                                        fit: BoxFit.contain,
+                                        height: scaledHeight * 0.2,
+                                        image: const AssetImage(
+                                            "assets/images/blood.png"),
+                                      ),
+                                      Text(
+                                        frosthavenStyle
+                                            ? '${character.characterState.health.value.toString()}/${character.characterState.maxHealth.value.toString()}'
+                                            : '${character.characterState.health.value.toString()} / ${character.characterState.maxHealth.value.toString()}',
+                                        style: TextStyle(
+                                            fontFamily: frosthavenStyle
+                                                ? 'GermaniaOne'
+                                                : 'Pirata',
+                                            color: Colors.white,
+                                            fontSize: frosthavenStyle
+                                                ? 16 * scale
+                                                : 16 * scale,
+                                            shadows: [shadow]),
+                                      ),
+                                      //add conditions here
+                                      ValueListenableBuilder<List<Condition>>(
+                                          valueListenable: character
+                                              .characterState.conditions,
+                                          builder: (context, value, child) {
+                                            return Row(
+                                              children:
+                                                  createConditionList(scale),
+                                            );
+                                          }),
+                                    ]));
+                              })
+                        ])
+                  ],
+                ),
+                isCharacter
+                    ? Positioned(
+                        top: 10 * scale,
+                        left: 314 * scale,
+                        child: Row(
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  top: 10 * scale, left: 10 * scale),
-                              child: ValueListenableBuilder<String>(
-                                  valueListenable:
-                                      character.characterState.display,
-                                  // widget.data.monsterInstances,
-                                  builder: (context, value, child) {
-                                    return Text(
-                                      character.characterState.display.value,
-                                      style: TextStyle(
-                                          fontFamily: frosthavenStyle
-                                              ? 'GermaniaOne'
-                                              : 'Pirata',
-                                          color: Colors.white,
-                                          fontSize: frosthavenStyle
-                                              ? 15 * scale
-                                              : 16 * scale,
-                                          shadows: [shadow]),
-                                    );
-                                  }),
+                            Image(
+                              height: 20.0 * scale * 0.8,
+                              color: Colors.blue,
+                              colorBlendMode: BlendMode.modulate,
+                              image:
+                                  const AssetImage("assets/images/psd/xp.png"),
                             ),
                             ValueListenableBuilder<int>(
-                                valueListenable:
-                                    character.characterState.health,
-                                //not working?
+                                valueListenable: character.characterState.xp,
                                 builder: (context, value, child) {
-                                  return Container(
-                                      margin: EdgeInsets.only(left: 10 * scale),
-                                      child: Row(children: [
-                                        Image(
-                                          fit: BoxFit.contain,
-                                          height: scaledHeight * 0.2,
-                                          image: const AssetImage(
-                                              "assets/images/blood.png"),
-                                        ),
-                                        Text(
-                                          frosthavenStyle
-                                              ? '${character.characterState.health.value.toString()}/${character.characterState.maxHealth.value.toString()}'
-                                              : '${character.characterState.health.value.toString()} / ${character.characterState.maxHealth.value.toString()}',
-                                          style: TextStyle(
-                                              fontFamily: frosthavenStyle
-                                                  ? 'GermaniaOne'
-                                                  : 'Pirata',
-                                              color: Colors.white,
-                                              fontSize: frosthavenStyle
-                                                  ? 16 * scale
-                                                  : 16 * scale,
-                                              shadows: [shadow]),
-                                        ),
-                                        //add conditions here
-                                        ValueListenableBuilder<List<Condition>>(
-                                            valueListenable: character
-                                                .characterState.conditions,
-                                            builder: (context, value, child) {
-                                              return Row(
-                                                children:
-                                                    createConditionList(scale),
-                                              );
-                                            }),
-                                      ]));
-                                })
-                          ])
-                    ],
-                  ),
-                  isCharacter
-                      ? Positioned(
-                          top: 10 * scale,
-                          left: 314 * scale,
-                          child: Row(
-                            children: [
-                              Image(
-                                height: 20.0 * scale * 0.8,
-                                color: Colors.blue,
-                                colorBlendMode: BlendMode.modulate,
-                                image: const AssetImage(
-                                    "assets/images/psd/xp.png"),
-                              ),
-                              ValueListenableBuilder<int>(
-                                  valueListenable: character.characterState.xp,
-                                  builder: (context, value, child) {
-                                    return Text(
-                                      character.characterState.xp.value
-                                          .toString(),
-                                      style: TextStyle(
-                                          fontFamily: frosthavenStyle
-                                              ? 'GermaniaOne'
-                                              : 'Pirata',
-                                          color: Colors.blue,
-                                          fontSize: 14 * scale,
-                                          shadows: [shadow]),
-                                    );
-                                  }),
-                            ],
-                          ))
-                      : Container(),
-                  isCharacter
-                      ? Positioned(
-                          top: 28 * scale,
-                          left: 316 * scale,
-                          child: Row(
-                            children: [
-                              Image(
-                                height: 12.0 * scale,
-                                image: const AssetImage(
-                                    "assets/images/psd/level.png"),
-                              ),
-                              ValueListenableBuilder<int>(
-                                  valueListenable:
-                                      character.characterState.level,
-                                  builder: (context, value, child) {
-                                    return Text(
-                                      character.characterState.level.value
-                                          .toString(),
-                                      style: TextStyle(
-                                          fontFamily: frosthavenStyle
-                                              ? 'GermaniaOne'
-                                              : 'Pirata',
-                                          color: Colors.white,
-                                          fontSize: 14 * scale,
-                                          shadows: [shadow]),
-                                    );
-                                  }),
-                            ],
-                          ))
-                      : Container(),
-                  isCharacter
-                      ? Positioned(
-                          right: 29 * scale,
-                          top: 14 * scale,
-                          child: summonsButton(scale),
-                        )
-                      : Container(),
-                  if (character.characterState.health.value > 0)
-                    InkWell(
-                        onTap: () {
-                          if (_gameState.roundState.value ==
-                              RoundState.chooseInitiative) {
-                            //if in choose mode - focus the input or open the soft numpad if that option is on
-                            if (getIt<Settings>().softNumpadInput.value ==
-                                true) {
-                              openDialog(
-                                  context,
-                                  NumpadMenu(
-                                    controller: _initTextFieldController,
-                                    maxLength: 2,
-                                  ));
-                            } else {
-                              //focus on
-                              focusNode.requestFocus();
-                            }
-                          } else {
-                            getIt<GameState>()
-                                .action(TurnDoneCommand(character.id));
-                          }
+                                  return Text(
+                                    character.characterState.xp.value
+                                        .toString(),
+                                    style: TextStyle(
+                                        fontFamily: frosthavenStyle
+                                            ? 'GermaniaOne'
+                                            : 'Pirata',
+                                        color: Colors.blue,
+                                        fontSize: 14 * scale,
+                                        shadows: [shadow]),
+                                  );
+                                }),
+                          ],
+                        ))
+                    : Container(),
+                isCharacter
+                    ? Positioned(
+                        top: 28 * scale,
+                        left: 316 * scale,
+                        child: Row(
+                          children: [
+                            Image(
+                              height: 12.0 * scale,
+                              image: const AssetImage(
+                                  "assets/images/psd/level.png"),
+                            ),
+                            ValueListenableBuilder<int>(
+                                valueListenable: character.characterState.level,
+                                builder: (context, value, child) {
+                                  return Text(
+                                    character.characterState.level.value
+                                        .toString(),
+                                    style: TextStyle(
+                                        fontFamily: frosthavenStyle
+                                            ? 'GermaniaOne'
+                                            : 'Pirata',
+                                        color: Colors.white,
+                                        fontSize: 14 * scale,
+                                        shadows: [shadow]),
+                                  );
+                                }),
+                          ],
+                        ))
+                    : Container(),
+                isCharacter
+                    ? Positioned(
+                        right: 29 * scale,
+                        top: 14 * scale,
+                        child: summonsButton(scale),
+                      )
+                    : Container(),
+                if (character.characterState.health.value > 0)
+                  InkWell(
+                      onTap: () {
+                        if (_gameState.roundState.value ==
+                            RoundState.chooseInitiative) {
                           //if in choose mode - focus the input or open the soft numpad if that option is on
-                          //else: mark as done
-                        },
-                        child: SizedBox(
-                          height: 60 * scale,
-                          width: 70 * scale,
-                        )),
-                ],
-              ))),
-    ]);
+                          if (getIt<Settings>().softNumpadInput.value == true) {
+                            openDialog(
+                                context,
+                                NumpadMenu(
+                                  controller: _initTextFieldController,
+                                  maxLength: 2,
+                                ));
+                          } else {
+                            //focus on
+                            focusNode.requestFocus();
+                          }
+                        } else {
+                          getIt<GameState>()
+                              .action(TurnDoneCommand(character.id));
+                        }
+                        //if in choose mode - focus the input or open the soft numpad if that option is on
+                        //else: mark as done
+                      },
+                      child: SizedBox(
+                        height: 60 * scale,
+                        width: 70 * scale,
+                      )),
+              ],
+            )));
   }
 
   @override
@@ -707,11 +681,28 @@ class CharacterWidgetState extends State<CharacterWidget> {
                   (character.turnState != TurnsState.done ||
                       getIt<GameState>().roundState.value ==
                           RoundState.chooseInitiative);
-              return ColorFiltered(
-                  colorFilter: notGrayScale
-                      ? ColorFilter.matrix(identity)
-                      : ColorFilter.matrix(grayScale),
-                  child: buildInternal(context));
+              double scale = getScaleByReference(context);
+              return Column(mainAxisSize: MainAxisSize.max, children: [
+                Container(
+                  //padding: EdgeInsets.zero,
+                  // color: Colors.amber,
+                  //height: 50,
+                  margin: EdgeInsets.only(
+                      left: 4 * scale * 0.8, right: 4 * scale * 0.8),
+                  width: getMainListWidth(context) - 8 * scale * 0.8,
+                  child: ValueListenableBuilder<int>(
+                      valueListenable: getIt<GameState>().killMonsterStandee,
+                      // widget.data.monsterInstances,
+                      builder: (context, value, child) {
+                        return buildMonsterBoxGrid(scale);
+                      }),
+                ),
+                ColorFiltered(
+                    colorFilter: notGrayScale
+                        ? ColorFilter.matrix(identity)
+                        : ColorFilter.matrix(grayScale),
+                    child: buildInternal(context))
+              ]);
             }));
   }
 }
