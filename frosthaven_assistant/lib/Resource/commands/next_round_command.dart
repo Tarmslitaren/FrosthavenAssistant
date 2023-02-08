@@ -19,7 +19,8 @@ class NextRoundCommand extends Command {
         item.nextRound();
       }
       if (item is Monster) {
-        //item.nextRound();
+        //only really needed for ice wraiths
+        GameMethods.sortMonsterInstances(item.monsterInstances.value);
       }
     }
     GameMethods.shuffleDecksIfNeeded();

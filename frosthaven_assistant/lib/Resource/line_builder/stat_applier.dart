@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../Model/monster.dart';
@@ -241,12 +242,14 @@ class StatApplier{
 
   static List<String> applyMonsterStats(final String lineInput,
       String sizeToken, Monster monster, bool forceShowAll) {
-    bool showElite = monster.monsterInstances.value.isNotEmpty &&
-        monster.monsterInstances.value[0].type == MonsterType.elite ||
-        monster.isActive;
-    bool showNormal = monster.monsterInstances.value.isNotEmpty &&
-        monster.monsterInstances.value.last.type != MonsterType.elite ||
-        monster.isActive;
+    bool showElite = false;
+    if(monster.isActive || monster.monsterInstances.value.firstWhereOrNull((element) => element.type == MonsterType.elite) != null) {
+      showElite = true;
+    }
+    bool showNormal = false;
+    if(monster.isActive || monster.monsterInstances.value.firstWhereOrNull((element) => element.type != MonsterType.elite) != null) {
+      showNormal = true;
+    }
     if (forceShowAll) {
       showElite = true;
       showNormal = true;
