@@ -36,7 +36,7 @@ class HealthWheelController extends StatefulWidget {
 
 class HealthWheelControllerState extends State<HealthWheelController> {
   late FigureState data;
-  late OverlayEntry? entry;
+  OverlayEntry? entry;
   SelectHealthWheel? selectHealthWheel;
 
   final wheelDelta = ValueNotifier<double>(0);

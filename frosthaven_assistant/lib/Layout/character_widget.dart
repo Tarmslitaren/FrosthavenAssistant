@@ -104,7 +104,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
         i < character.characterState.conditions.value.length;
         i++) {
       conditions.add(ConditionIcon(character.characterState.conditions.value[i],
-          16, character, character.characterState));
+          16, character, character.characterState, scale: scale,));
     }
     return conditions;
   }
@@ -157,7 +157,9 @@ class CharacterWidgetState extends State<CharacterWidget> {
                       character.characterState.summonList.value[index].standeeNr
                           .toString(),
                   ownerId: character.id,
-                  displayStartAnimation: displayStartAnimation),
+                  displayStartAnimation: displayStartAnimation,
+              blockInput: false,
+              scale: scale),
             ));
     lastList = character.characterState.summonList.value;
     return Wrap(

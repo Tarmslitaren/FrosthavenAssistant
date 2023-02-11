@@ -17,7 +17,7 @@ import '../services/service_locator.dart';
 
 class ConditionIcon extends StatefulWidget {
   ConditionIcon(this.condition, this.size, this.owner, this.figure,
-      {super.key}) {
+      {super.key, required this.scale}) {
     String suffix = "";
     if (GameMethods.isFrosthavenStyle(null)) {
       suffix = "_fh";
@@ -31,6 +31,7 @@ class ConditionIcon extends StatefulWidget {
 
   final Condition condition;
   final double size;
+  final double scale;
   final ListItemData owner;
   final FigureState figure;
   late final String gfx;
@@ -128,7 +129,7 @@ class ConditionIconState extends State<ConditionIcon> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = getScaleByReference(context);
+    double scale = widget.scale;// getScaleByReference(context);
     // lastCommandIndex = gameState.commandIndex.value;
 
     return ValueListenableBuilder<bool>(

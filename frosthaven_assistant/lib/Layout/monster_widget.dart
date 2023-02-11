@@ -76,7 +76,9 @@ class MonsterWidgetState extends State<MonsterWidget> {
                       widget.data.monsterInstances.value[index].standeeNr
                           .toString(),
                   ownerId: widget.data.id,
-                  displayStartAnimation: displayStartAnimation),
+                  displayStartAnimation: displayStartAnimation,
+              blockInput: false,
+              scale: scale),
             ));
     lastList = widget.data.monsterInstances.value;
     return Wrap(

@@ -64,7 +64,7 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
 
   void scrollTheWheel(double delta, int timeMicroSeconds, double scale) {
     int maxHealth = widget.data.maxHealth.value;
-    double deltaMod = delta * min(widget.data.maxHealth.value * 0.4, 8);
+    double deltaMod = delta * min(widget.data.maxHealth.value * 0.5, 8);
 
     double initialPosition = scrollController.initialItem * itemExtent * scale;
     if (currentScrollOffset == 0 && !scrollInited) {

@@ -1,15 +1,10 @@
 import 'package:animated_widgets/animated_widgets.dart';
-import 'package:animated_widgets/widgets/opacity_animated.dart';
-import 'package:animated_widgets/widgets/translation_animated.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Layout/health_wheel_controller.dart';
-import 'package:frosthaven_assistant/Layout/select_health_wheel.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/color_matrices.dart';
 import '../Resource/enums.dart';
@@ -17,19 +12,19 @@ import '../Resource/state/monster.dart';
 import '../Resource/state/monster_instance.dart';
 import '../Resource/ui_utils.dart';
 import 'menus/status_menu.dart';
-import 'dart:io';
 
 class MonsterBox extends StatefulWidget {
-  //final MonsterInstance data;
   final String figureId;
   final String ownerId;
   final String displayStartAnimation;
+  final bool blockInput;
+  final double scale;
 
   const MonsterBox(
       {Key? key,
       required this.figureId,
       required this.ownerId,
-      required this.displayStartAnimation})
+      required this.displayStartAnimation, required this.blockInput, required this.scale})
       : super(key: key);
 
   static const double conditionSize = 14;
@@ -67,7 +62,7 @@ class MonsterBoxState extends State<MonsterBox> {
       for (var item in getIt<GameState>().currentList) {
         if (item.id == widget.ownerId) {
           list.add(
-              ConditionIcon(condition, MonsterBox.conditionSize, item, data));
+              ConditionIcon(condition, MonsterBox.conditionSize, item, data, scale: scale,));
           break;
         }
       }
@@ -257,7 +252,7 @@ class MonsterBoxState extends State<MonsterBox> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = getScaleByReference(context);
+    double scale = widget.scale;
     data = GameMethods.getFigure(widget.ownerId, widget.figureId)
         as MonsterInstance;
     //double height = scale * 40;
@@ -280,13 +275,15 @@ class MonsterBoxState extends State<MonsterBox> {
     return GestureDetector(
       onTap: () {
         //open stats menu
-        openDialog(
-          context,
-          StatusMenu(
-              figureId: figureId,
-              monsterId: getMonster(),
-              characterId: characterId),
-        );
+        if(!widget.blockInput) {
+          openDialog(
+            context,
+            StatusMenu(
+                figureId: figureId,
+                monsterId: getMonster(),
+                characterId: characterId),
+          );
+        }
       },
       child: HealthWheelController(
       figureId: widget.figureId,
@@ -311,7 +308,7 @@ class MonsterBoxState extends State<MonsterBox> {
                 if (widget.displayStartAnimation != widget.figureId) {
                   //if this one is not added - only play death animation
                   return TranslationAnimatedWidget.tween(
-                      enabled: !alive,
+                      enabled: !alive && !widget.blockInput,
                       translationDisabled: const Offset(0, 0),
                       translationEnabled: Offset(0, alive ? 0 : -offset),
                       duration: const Duration(milliseconds: 600),
