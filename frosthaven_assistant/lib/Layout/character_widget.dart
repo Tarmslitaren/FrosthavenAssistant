@@ -17,6 +17,7 @@ import '../Resource/state/monster_instance.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'condition_icon.dart';
+import 'health_wheel_controller.dart';
 import 'menus/add_summon_menu.dart';
 import 'monster_box.dart';
 
@@ -523,6 +524,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                               builder: (context, value, child) {
                                 return Container(
                                     margin: EdgeInsets.only(left: 10 * scale),
+                                    child: HealthWheelController(
+                                    figureId: widget.characterId, ownerId: widget.characterId,
                                     child: Row(children: [
                                       Image(
                                         fit: BoxFit.contain,
@@ -554,7 +557,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                                   createConditionList(scale),
                                             );
                                           }),
-                                    ]));
+                                    ])));
                               })
                         ])
                   ],

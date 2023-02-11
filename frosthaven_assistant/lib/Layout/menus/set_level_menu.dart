@@ -193,7 +193,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
 
     return Container(
         width: 230 * scale,
-        height: showLegend ? 300 * scale : 180 * scale,
+        height: showLegend ? 300 * scale : 187 * scale,
         decoration: BoxDecoration(
           //color: Colors.black,
           //borderRadius: BorderRadius.all(Radius.circular(8)),
