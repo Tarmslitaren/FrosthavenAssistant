@@ -167,7 +167,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 )),
             card.shuffle
                 ? Positioned(
-                    left: 158 * 0.8 * scale,
+                    left: 155 * 0.8 * scale,
                     bottom: 4.0 * 0.8 * scale,
                     child: Image(
                       height: 123 * 0.8 * 0.13 * scale,
