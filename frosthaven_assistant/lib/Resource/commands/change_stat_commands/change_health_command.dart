@@ -13,7 +13,10 @@ class ChangeHealthCommand extends ChangeStatCommand {
 
     FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
 
-    figure.health.value += change;
+    if((0 <= (figure.health.value + change)) && ((figure.health.value + change) <= figure.maxHealth.value)){
+      figure.health.value += change;
+    }
+
     if(change > 0 && figure.health.value == 1) {
       //un death
       getIt<GameState>().updateList.value++;
