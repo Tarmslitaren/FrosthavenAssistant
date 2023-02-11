@@ -1593,7 +1593,7 @@
       ]
     },
     "Forest Imp (FH)": {
-      "gfx": "Forest Imp",
+      "gfx": "Forest Imp FH",
       "display": "Forest Imp",
       "deck": "Imp (FH)",
       "count": 10,
