@@ -689,7 +689,6 @@ class CharacterWidgetState extends State<CharacterWidget> {
             if (8 < ++slideCounter) {
               slideCounter = 0;
               setState(() {
-                // character.characterState.health.value += 1;
                 _gameState.action(ChangeHealthCommand(
                     1, character.id, character.id));
               });
@@ -700,7 +699,6 @@ class CharacterWidgetState extends State<CharacterWidget> {
             if (--slideCounter < -8) {
               slideCounter = 0;
               setState(() {
-                // character.characterState.health.value -= 1;
                 _gameState.action(ChangeHealthCommand(
                     -1, character.id, character.id));
               });
