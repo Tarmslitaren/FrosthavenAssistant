@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 import '../Resource/color_matrices.dart';
+import '../../Resource/commands/change_stat_commands/change_health_command.dart';
 import '../Resource/commands/next_turn_command.dart';
 import '../Resource/enums.dart';
 import '../Resource/state/character.dart';
@@ -42,6 +43,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
   late List<MonsterInstance> lastList = [];
   late Character character;
   final focusNode = FocusNode();
+  late int slideCounter = 0;
 
   void _textFieldControllerListener() {
     for (var item in _gameState.currentList) {
@@ -669,13 +671,41 @@ class CharacterWidgetState extends State<CharacterWidget> {
       }
     }
 
-    return InkWell(
+    return GestureDetector(
         onTap: () {
           //open stats menu
           openDialog(
             context,
             StatusMenu(figureId: character.id, characterId: character.id),
           );
+        },
+        onPanEnd: (details) {
+          slideCounter = 0;
+        },
+        onPanUpdate: (DragUpdateDetails details) {
+          if (details.delta.dx > 0) {
+            //right scroll
+            //increment counter
+            if (8 < ++slideCounter) {
+              slideCounter = 0;
+              setState(() {
+                // character.characterState.health.value += 1;
+                _gameState.action(ChangeHealthCommand(
+                    1, character.id, character.id));
+              });
+            }
+          }
+          else if (details.delta.dx < 0) {
+            //left scroll
+            if (--slideCounter < -8) {
+              slideCounter = 0;
+              setState(() {
+                // character.characterState.health.value -= 1;
+                _gameState.action(ChangeHealthCommand(
+                    -1, character.id, character.id));
+              });
+            }
+          }
         },
         child: ValueListenableBuilder<dynamic>(
             valueListenable: getIt<GameState>().updateList,
