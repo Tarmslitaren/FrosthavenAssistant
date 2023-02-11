@@ -121,9 +121,9 @@
       "cards": [
         [ 722, true, 76, "%move% + 0","*.........", "%attack% + 0", "^%range% 3", "^%target% 2"],
         [ 723, true, 14, "%move% + 0","**.........", "%heal% 2", "^Self", "^%strengthen%", "^%ward%","**.........", "%retaliate% 2", "^Self"],
-        [ 724, false, 17, "%move% + 1", "^%jump%","**.........","^^One adjacent enemy suffers 2 damage.","**.........", "%shield% 1", "^Self","**.........","%retaliate% 1", "^Self"],
+        [ 724, false, 17, "%move% + 1", "^%jump%","**.........","^^One adjacent enemy suffers 2 damage.","**.........", "%shield% + 1", "^Self","**.........","%retaliate% 1", "^Self"],
         [ 725, false, 58, "%move% + 0","*.........","[r]", "%attack% + 0", "Å*", "¤aoe-line-3-with-black", "[/r]"],
-        [ 726, false, 23, "%shield% 3", "^Self"],
+        [ 726, false, 23, "%shield% + 3", "^Self"],
         [ 727, false, 82, "%move% + 1","*.........", "%attack% + 1"]
       ]
     },
