@@ -153,7 +153,7 @@ class SetScenarioCommand extends Command {
             break;
           }
         }
-      }
+    }
 
     //add objectives and escorts
     for(var item in specialRules) {
@@ -191,6 +191,21 @@ class SetScenarioCommand extends Command {
           _gameState.currentList.add(objective);
         }
       }
+
+      //special case for start of round and round is 1
+      if(item.type == "Timer" && item.startOfRound == true) {
+        for(int round in item.list) {
+          //minus 1 means always
+          if(round - 1 == _gameState.round.value || round == -1) {
+            if(initMessage.isNotEmpty) {
+              initMessage += "\n\n${item.note}";
+            } else {
+              initMessage += item.note;
+            }
+          }
+        }
+      }
+
       if (item.type == "ResetRound") {
         _gameState.round.value = 1;
       }

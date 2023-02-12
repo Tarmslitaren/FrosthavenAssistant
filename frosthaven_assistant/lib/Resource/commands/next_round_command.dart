@@ -46,6 +46,24 @@ class NextRoundCommand extends Command {
         }
       }
     }
+
+    //start of next round is now
+    for(var rule in _gameState.scenarioSpecialRules) {
+      if(rule.type == "Timer" && rule.startOfRound == true) {
+        for(int round in rule.list) {
+          //minus 1 means always
+          if(round - 1 == _gameState.round.value || round == -1) {
+            if(_gameState.toastMessage.value.isNotEmpty) {
+              _gameState.toastMessage.value += "\n\n${rule.note}";
+            } else {
+              _gameState.toastMessage.value += rule.note;
+            }
+          }
+        }
+      }
+    }
+
+
     _gameState.round.value++;
 
     Future.delayed(const Duration(milliseconds: 600), () {
