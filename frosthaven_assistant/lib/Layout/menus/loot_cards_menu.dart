@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add__special_loot_card_command.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
@@ -24,14 +25,11 @@ class Item extends StatelessWidget {
     double maxScale = 3;
     double scale = min(maxScale, screenWidth/wantedItemMaxWidth);
 
-    //double scale = MediaQuery.of(context).size.width/wantedItemMaxWidth;// getScaleByReference(context) * 2; //nope
     late final Widget child;
 
     child = LootCardWidget.buildFront(data, scale);
 
     return Container(
-      //width: 40 * scale,
-      //  height: 80 * scale,
         margin: EdgeInsets.all(2 * scale), child: child);
   }
 }
@@ -71,27 +69,16 @@ class LootCardMenuState extends State<LootCardMenu> {
           //other styles
         ),
         child: SizedBox(
-          // constraints: BoxConstraints(
-          //minHeight: 400,
-          // maxHeight: screenSize.height - 50,
-          //),
-          //width: 118 * getScaleByReference(context), //184 * 0.8 *
 
           child: GridView.count(
             controller: AdjustableScrollController(),
-            //gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-
-            // maxCrossAxisExtent: 5
 
             childAspectRatio: 0.72,
-            //),
-            //padding: 0,
             mainAxisSpacing: 0,
             crossAxisSpacing: 0,
             padding: EdgeInsets.zero,
 
             crossAxisCount: max(4,(screenWidth/wantedItemMaxWidth).ceil()),
-            // (MediaQuery.of(context).size.width/ 100).ceil(),
             children: generateList(list).reversed.toList(),
           ),
         ));
@@ -114,11 +101,9 @@ class LootCardMenuState extends State<LootCardMenu> {
               child: Card(
                   color: Colors.transparent,
                   child: Stack(
-                      //fit: StackFit.expand,
                       children: [
                         Column(mainAxisSize: MainAxisSize.max, children: [
                           Container(
-                              //width: 2900, //need some width to fill out
                             width: MediaQuery.of(context).size.width,
                               margin: const EdgeInsets.all(2),
                               decoration: const BoxDecoration(
@@ -132,6 +117,13 @@ class LootCardMenuState extends State<LootCardMenu> {
                                   children: [
                                     Wrap(
                                       children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            openDialog(context,
+                                                const CharacterLootMenu());
+                                          },
+                                          child: const Text("Character loot"),
+                                        ),
                                         TextButton(
                                           onPressed: () {
                                             setState(() {

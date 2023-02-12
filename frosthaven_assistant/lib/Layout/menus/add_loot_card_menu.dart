@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/commands/enhance_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_loot_card_command.dart';
@@ -47,7 +46,9 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
       ),
       // ]),
       trailing: Text(
-          "added: ${getIt<GameState>().lootDeck.addedCards[index]}   "  //todo: use right value
+          "added: ${getIt<GameState>().lootDeck.addedCards[index]}   ",
+          style: const TextStyle(
+            fontSize: 18,)
           ),
     );
     return listTile;
@@ -55,7 +56,6 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
 
   @override
   Widget build(BuildContext context) {
-    GameState _gameState = getIt<GameState>();
     final AdjustableScrollController scrollController =
     AdjustableScrollController();
 
