@@ -6090,7 +6090,6 @@
       "lootDeck": {"coin":6,"lumber": 4,"metal":3,"hide": 1,"rockroot":2,"corpsecap":2},
       "sections": {
         "#7.2 Frozen Crypt (5)": {
-          "note": "resetting turn tracker is not supported (or in 3 turns from now..)",
           "special": [
             {
               "type": "Objective",
@@ -6599,7 +6598,7 @@
           "startOfRound": false,
           "note": "Each Frozen Corpse with a token is Replaced by a Shrike Fiend."
         }
-        ],
+      ],
       "sections": {
         "#66.1 Ravens' Roost (32)": {
           "special": [
@@ -6607,6 +6606,21 @@
               "type": "Objective",
               "name": "Raven Nest a",
               "health": "(L+2)xCx3"
+            },
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2,6,10,14,18,22,26,30],
+              "startOfRound": true,
+              "note": "Place numbered token on each Frozen Corpse. Spawn one Shrike Fiend at the raven nest. It is elite for 4 characters."
+            },
+            {
+              "type": "Timer",
+              "list": [4,8,12,16,20,24,28],
+              "startOfRound": true,
+              "note": "Place numbered token on each Frozen Corpse. Spawn one Shrike Fiend at the raven nest. It is elite for 3-4 characters."
             }
           ]
         }
@@ -6614,7 +6628,28 @@
     },
     "#33 Thawed Wood": {
       "monsters": [ "Black Imp (FH)", "Earth Demon (FH)", "Flame Demon (FH)", "Shrike Fiend" ],
-      "lootDeck": {"coin":8,"lumber": 5,"hide": 3,"rockroot":1,"flamefruit":1, "axenut": 2}
+      "lootDeck": {"coin":8,"lumber": 5,"hide": 3,"rockroot":1,"flamefruit":1, "axenut": 2},
+      "sections": {
+        "#20.1 Thawed Wood (33)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "startOfRound": true,
+              "note": "Spawn One Black im at B. It is elite for 4 characters."
+            },
+            {
+              "type": "Timer",
+              "list": [3,5,7,9,11,13,15,17,19,21,23,25,27,29],
+              "startOfRound": true,
+              "note": "If 3 or 4 characters: Spawn One Black imp at B. It is elite for 4 characters."
+            }
+          ]
+        }
+      }
     },
     "#34 Top of the Spire": {
       "monsters": [ "Lord of Chaos" ]
@@ -7502,37 +7537,37 @@
           "type": "Timer",
           "list": [3,9,15, 21,27],
           "startOfRound": true,
-          "note": "Spawn one Demon at a. Normal for 2 characters, elite for 3-4."
+          "note": "Spawn one Demon at A. Normal for 2 characters, elite for 3-4."
         },
         {
           "type": "Timer",
           "list": [4,10,16,22,28],
           "startOfRound": true,
-          "note": "Spawn one Demon at b. Normal for 2-3 characters, elite for 4."
+          "note": "Spawn one Demon at B. Normal for 2-3 characters, elite for 4."
         },
         {
           "type": "Timer",
           "list": [5,11,17,23,29],
           "startOfRound": true,
-          "note": "Spawn one Chaos Demon at c. Normal for 2 characters, elite for 3-4."
+          "note": "Spawn one Chaos Demon at C. Normal for 2 characters, elite for 3-4."
         },
         {
           "type": "Timer",
           "list": [6,12,18,24,30],
           "startOfRound": true,
-          "note": "Spawn one Demon at a. Normal for 2-3 characters, elite for 4."
+          "note": "Spawn one Demon at A. Normal for 2-3 characters, elite for 4."
         },
         {
           "type": "Timer",
           "list": [7,13,19,25,31],
           "startOfRound": true,
-          "note": "Spawn Demon at b. Normal for 2 characters, elite for 3-4."
+          "note": "Spawn Demon at B. Normal for 2 characters, elite for 3-4."
         },
         {
           "type": "Timer",
           "list": [8,14,20,26,32],
           "startOfRound": true,
-          "note": "Spawn Chaos Demon at c. Normal for -32 characters, elite for 4."
+          "note": "Spawn Chaos Demon at C. Normal for 2-3 characters, elite for 4."
         }
       ]
     },
@@ -7552,7 +7587,30 @@
         }],
       "sections": {
         "#106.2 The True Oak (70)": {
-          "monsters": ["Flaming Sword of Justice"]
+          "monsters": ["Flaming Sword of Justice"],
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Raven Nest a",
+              "health": "(L+2)xCx3"
+            },
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2,6,10,14,18,22,26,30],
+              "startOfRound": true,
+              "note": "If the Flaming Sword of Justice is alive, spawn one Hound at B. It is elite for 4 characters."
+            },
+            {
+              "type": "Timer",
+              "list": [4,8,12,16,20,24,28],
+              "startOfRound": true,
+              "note": "If the Flaming Sword of Justice is alive, spawn one Hound at B. It is elite for 3-4 characters."
+            }
+          ]
+          }
         }
       }
     },
@@ -7824,7 +7882,28 @@
     },
     "#88 Collection's Capstone": {
       "monsters": [ "The Collector", "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Lurker Clawcrusher", "Savvas Icestorm (FH)", "Savvas Lavaflow (FH)", "Wind Demon (FH)" ],
-      "lootDeck": {"coin":8,"lumber": 3,"metal":4,"hide": 2,"rockroot":1,"corpsecap":1, "treasure": 1}
+      "lootDeck": {"coin":8,"lumber": 3,"metal":4,"hide": 2,"rockroot":1,"corpsecap":1, "treasure": 1},
+      "sections": {
+        "#25.1 Collection’s Capstone (88)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2,6,10,14,18,22,26,30],
+              "startOfRound": true,
+              "note": "Spawn one Savvas Lavaflow at A. It is elite for 4 characters."
+            },
+            {
+              "type": "Timer",
+              "list": [4,8,12,16,20,24,28],
+              "startOfRound": true,
+              "note": "Spawn one Savvas Lavaflow at A. It is elite for 3-4 characters."
+            }
+          ]
+        }
+      }
     },
     "#89 A Contained Fire": {
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest" ],
@@ -8691,7 +8770,22 @@
         {
           "type": "Allies",
           "list": ["City Guard (FH)"]
-        }]
+        }],
+      "sections": {
+        "#154.2 How to Lay an Ambush (129)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [4],
+              "startOfRound": true,
+              "note": "Read section 148.5"
+            }
+          ]
+        }
+      }
     },
     "#130 And Then, A Stream": {
       "monsters": [ "Frozen Corpse", "Lightning Eel", "Shrike Fiend" ],
@@ -8747,7 +8841,22 @@
     },
     "#132 Temple of Feline Power": {
       "monsters": [ "Frost Demon (FH)", "Frozen Corpse", "Ice Wraith", "Snow Imp" ],
-      "lootDeck": {"coin":12,"lumber": 2,"metal":2,"hide": 2,"corpsecap":1,"arrowvine":1}
+      "lootDeck": {"coin":12,"lumber": 2,"metal":2,"hide": 2,"corpsecap":1,"arrowvine":1},
+      "sections": {
+        "#110.2 Temple of Feline Power (132)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "startOfRound": false,
+              "note": "The character with the idol adds one damage token to their mat and all other characters remove one (if any)."
+            }
+          ]
+        }
+      }
     },
     "#133 Bolt": {
       "monsters": [ "Forest Imp (FH)", "Polar Bear","Rending Drake (FH)" ,"Spitting Drake (FH)" ],
