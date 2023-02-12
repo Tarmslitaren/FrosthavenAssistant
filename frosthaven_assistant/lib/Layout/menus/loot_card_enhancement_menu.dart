@@ -106,7 +106,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
       return getIt<GameState>().lootDeck.corpsecapPool[index];
     }
     if (type == "flamefruit") {
-      return getIt<GameState>().lootDeck.axenutPool[index];
+      return getIt<GameState>().lootDeck.flamefruitPool[index];
     }
     if (type == "rockroot") {
       return getIt<GameState>().lootDeck.rockrootPool[index];
