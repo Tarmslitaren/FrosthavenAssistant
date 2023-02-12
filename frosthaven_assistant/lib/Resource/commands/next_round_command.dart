@@ -4,6 +4,7 @@ import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../enums.dart';
 import '../game_methods.dart';
+import '../settings.dart';
 import '../state/character.dart';
 import '../state/game_state.dart';
 import '../state/monster.dart';
@@ -36,27 +37,29 @@ class NextRoundCommand extends Command {
     GameMethods.sortCharactersFirst();
 
     _gameState.toastMessage.value = "";
-    for(var rule in _gameState.scenarioSpecialRules) {
-      if(rule.type == "Timer" && rule.startOfRound == false) {
-        for(int round in rule.list) {
-          //minus 1 means always
-          if(round == _gameState.round.value || round == -1) {
-            _gameState.toastMessage.value = rule.note;
+    if(getIt<Settings>().showReminders.value == true) {
+      for (var rule in _gameState.scenarioSpecialRules) {
+        if (rule.type == "Timer" && rule.startOfRound == false) {
+          for (int round in rule.list) {
+            //minus 1 means always
+            if (round == _gameState.round.value || round == -1) {
+              _gameState.toastMessage.value = rule.note;
+            }
           }
         }
       }
-    }
 
-    //start of next round is now
-    for(var rule in _gameState.scenarioSpecialRules) {
-      if(rule.type == "Timer" && rule.startOfRound == true) {
-        for(int round in rule.list) {
-          //minus 1 means always
-          if(round - 1 == _gameState.round.value || round == -1) {
-            if(_gameState.toastMessage.value.isNotEmpty) {
-              _gameState.toastMessage.value += "\n\n${rule.note}";
-            } else {
-              _gameState.toastMessage.value += rule.note;
+      //start of next round is now
+      for (var rule in _gameState.scenarioSpecialRules) {
+        if (rule.type == "Timer" && rule.startOfRound == true) {
+          for (int round in rule.list) {
+            //minus 1 means always
+            if (round - 1 == _gameState.round.value || round == -1) {
+              if (_gameState.toastMessage.value.isNotEmpty) {
+                _gameState.toastMessage.value += "\n\n${rule.note}";
+              } else {
+                _gameState.toastMessage.value += rule.note;
+              }
             }
           }
         }

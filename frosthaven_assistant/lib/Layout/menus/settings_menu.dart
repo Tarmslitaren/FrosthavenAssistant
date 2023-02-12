@@ -193,6 +193,17 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),
+                              CheckboxListTile(
+                                  title:
+                                  const Text("Show Round Special Rule Reminders"),
+                                  value: settings.showReminders.value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      settings.showReminders.value = value!;
+                                      settings.saveToDisk();
+                                      getIt<GameState>().updateAllUI();
+                                    });
+                                  }),
                               Container(
                                 constraints: const BoxConstraints(
                                     minWidth: double.infinity),

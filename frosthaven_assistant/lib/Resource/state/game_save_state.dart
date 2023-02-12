@@ -109,7 +109,6 @@ class GameSaveState {
   Future<void> load() async {
     if (_savedState != null) {
       GameState gameState = getIt<GameState>();
-      Map<String, dynamic> data = {};
       try {
         var data = json.decode(_savedState!) as Map<String, dynamic>;
 

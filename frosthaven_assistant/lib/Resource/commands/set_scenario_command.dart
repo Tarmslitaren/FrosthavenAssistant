@@ -12,6 +12,7 @@ import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../enums.dart';
 import '../game_methods.dart';
+import '../settings.dart';
 import '../state/character.dart';
 import '../state/game_state.dart';
 import '../state/list_item_data.dart';
@@ -231,7 +232,7 @@ class SetScenarioCommand extends Command {
     }
 
     //show init message if exists:
-    if(initMessage.isNotEmpty) {
+    if(initMessage.isNotEmpty && getIt<Settings>().showReminders.value == true) {
       _gameState.toastMessage.value = initMessage;
     }
   }

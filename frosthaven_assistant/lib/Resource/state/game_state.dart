@@ -123,7 +123,7 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
         '"roundState": ${roundState.value.index}, '
         '"round": ${round.value}, '
         '"scenario": "${scenario.value}", '
-        '"toastMessage": "${toastMessage.value}", '
+        '"toastMessage": ${jsonEncode(toastMessage.value)}, '
         '"scenarioSpecialRules": ${scenarioSpecialRules.toString()}, '
         '"scenarioSectionsAdded": ${json.encode(scenarioSectionsAdded)}, '
         '"currentCampaign": "${currentCampaign.value}", '
