@@ -191,6 +191,9 @@ class SetScenarioCommand extends Command {
           _gameState.currentList.add(objective);
         }
       }
+      if (item.type == "ResetRound") {
+        _gameState.round.value = 1;
+      }
     }
 
     if (!section) {
