@@ -218,7 +218,7 @@ class GameMethods {
       return item.characterState.initiative.value;
     } else if (item is Monster) {
       if (item.monsterInstances.value.isEmpty && !item.isActive) {
-        return 0;
+        return 99; //sorted last
       }
       for (var deck in _gameState.currentAbilityDecks) {
         if (deck.name == item.type.deck) {

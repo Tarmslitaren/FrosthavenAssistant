@@ -253,9 +253,10 @@ class MonsterBoxState extends State<MonsterBox> {
   @override
   Widget build(BuildContext context) {
     double scale = widget.scale;
-    data = GameMethods.getFigure(widget.ownerId, widget.figureId)
-        as MonsterInstance;
-    //double height = scale * 40;
+    var figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
+    if(figure != null) {
+      data = figure as MonsterInstance;
+    }
     Color color = Colors.white;
     if (data.type == MonsterType.elite) {
       color = Colors.yellow;
