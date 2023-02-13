@@ -75,7 +75,7 @@ Widget createMainScaffold(BuildContext context) {
                                 sectionWidth -=
                                     94 * barScale; //width of loot deck
                               }
-                              if (!modFitsOnBar || GameMethods.hasAllies()) {
+                              if (!modFitsOnBar || (GameMethods.hasAllies() && getIt<Settings>().hideLootDeck.value == false)) {
                                 sectionWidth -= 153 * barScale; //width of amd
                               }
 
@@ -112,8 +112,8 @@ Widget createMainScaffold(BuildContext context) {
                                   child: Column(
                                       children: [
                                     Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: ((!sectionsOnSeparateRow && nrOfSections != null) || hasLootDeck)?
+                                            MainAxisAlignment.spaceBetween :  MainAxisAlignment.end,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         mainAxisSize: MainAxisSize.max,
