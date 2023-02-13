@@ -6767,8 +6767,19 @@
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"rockroot":1,"arrowvine":2, "treasure": 1}
     },
     "#38 The Way Forward": {
-      "monsters": [ "Hound (FH)", "Polar Bear", "Sun Demon (FH)" ],
-      "lootDeck": {"coin":8,"lumber": 5,"hide": 3,"axenut":2,"arrowvine":1, "treasure": 1},
+      "monsters": [
+        "Hound (FH)",
+        "Polar Bear",
+        "Sun Demon (FH)"
+      ],
+      "lootDeck": {
+        "coin": 8,
+        "lumber": 5,
+        "hide": 3,
+        "axenut": 2,
+        "arrowvine": 1,
+        "treasure": 1
+      },
       "special": [
         {
           "type": "Escort",
@@ -6791,18 +6802,52 @@
             },
             {
               "type": "Timer",
-              "list": [2,3,5,6,8,9,11,12,14,15,17,18,20,21,23,24,26,27,29,30],
+              "list": [
+                2,
+                3,
+                5,
+                6,
+                8,
+                9,
+                11,
+                12,
+                14,
+                15,
+                17,
+                18,
+                20,
+                21,
+                23,
+                24,
+                26,
+                27,
+                29,
+                30
+              ],
               "startOfRound": true,
               "note": "Spawn Hounds at D and E. Only one normal for 2 characters, one normal at both for 3 characters and one elite for 4."
             },
             {
               "type": "Timer",
-              "list": [4,7,10,13,16,19,22,25,28,31],
+              "list": [
+                4,
+                7,
+                10,
+                13,
+                16,
+                19,
+                22,
+                25,
+                28,
+                31
+              ],
               "startOfRound": true,
               "note": "Spawn One Normal Polar Bar at E. Also one Normal Polar Bear at D for 3-4 characters."
-            }]
+            }
+          ]
         }
-      },
+      }
+    },
     "#39 Corrupted Camp": {
       "monsters": [ "Algox Guard", "Algox Scout", "Black Imp (FH)", "Deep Terror (FH)", "Frozen Corpse" ],
       "lootDeck": {"coin":10,"lumber": 4,"metal":2,"hide": 3,"flamefruit":1,"snowthistle":2},
@@ -7610,7 +7655,6 @@
               "note": "If the Flaming Sword of Justice is alive, spawn one Hound at B. It is elite for 3-4 characters."
             }
           ]
-          }
         }
       }
     },
