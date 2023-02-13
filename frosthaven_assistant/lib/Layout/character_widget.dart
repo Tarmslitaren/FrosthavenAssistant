@@ -373,7 +373,9 @@ class CharacterWidgetState extends State<CharacterWidget> {
       blurRadius: 1 * scale,
     );
 
-    return PhysicalShape(
+    return HealthWheelController(
+        figureId: widget.characterId, ownerId: widget.characterId,
+        child: PhysicalShape(
         color: character.turnState == TurnsState.current
             ? Colors.tealAccent
             : Colors.transparent,
@@ -660,7 +662,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                         width: 70 * scale,
                       )),
               ],
-            )));
+            ))));
   }
 
   @override
