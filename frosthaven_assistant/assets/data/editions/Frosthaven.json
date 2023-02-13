@@ -5418,7 +5418,7 @@
           "health": "Cx10",
           "move": 2,
           "attack": 2,
-          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
+          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "Å.", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
           "special2": [ "^Focus on farthest targetable enemy.","%attack% + 0", "^%range% 5,", "^%poison%,","^%pull% 4"],
           "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%muddle%" ]
         },
@@ -5427,7 +5427,7 @@
           "health": "Cx13",
           "move": 2,
           "attack": 2,
-          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
+          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "Å.","[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
           "special2": [ "^Focus on farthest targetable enemy.","%attack% + 0", "^%range% 5,", "^%poison%,","^%pull% 4"],
           "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%muddle%" ]
         },
@@ -5436,7 +5436,7 @@
           "health": "Cx12",
           "move": 3,
           "attack": 5,
-          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
+          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1","Å.", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
           "special2": [ "^Focus on farthest targetable enemy.","%attack% + 0", "^%range% 5,", "^%poison%,","^%pull% 4"],
           "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%muddle%" ]
         },
@@ -5445,7 +5445,7 @@
           "health": "Cx16",
           "move": 4,
           "attack": 5,
-          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
+          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1","Å.", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
           "special2": [ "^Focus on farthest targetable enemy.","%attack% + 0", "^%range% 5,", "^%poison%,","^%pull% 4"],
           "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%muddle%" ]
         },
@@ -5454,7 +5454,7 @@
           "health": "Cx18",
           "move": 4,
           "attack": 6,
-          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
+          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "Å.","[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
           "special2": [ "^Focus on farthest targetable enemy.","%attack% + 0", "^%range% 5,", "^%poison%,","^%pull% 4"],
           "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%muddle%" ]
         },
@@ -5463,7 +5463,7 @@
           "health": "Cx24",
           "move": 4,
           "attack": 6,
-          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
+          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1","Å.", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
           "special2": [ "^Focus on farthest targetable enemy.","%attack% + 0", "^%range% 5,", "^%poison%,","^%pull% 4"],
           "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%muddle%" ]
         },
@@ -5472,7 +5472,7 @@
           "health": "Cx32",
           "move": 4,
           "attack": 7,
-          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
+          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1","Å.", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
           "special2": [ "^Focus on farthest targetable enemy.","%attack% + 0", "^%range% 5,", "^%poison%,","^%pull% 4"],
           "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%muddle%" ]
         },
@@ -5481,7 +5481,7 @@
           "health": "Cx40",
           "move": 4,
           "attack": 8,
-          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
+          "special1": [ "%move% + 0","**.........","[r]", "%attack% - 1", "Å.","[c]", "^%target% all adjacent", "^enemies, %push% 2", "[/c]","[/r]","**.........", "^Summon one Piranha Pig." ],
           "special2": [ "^Focus on farthest targetable enemy.","%attack% + 0", "^%range% 5,", "^%poison%,","^%pull% 4"],
           "immunities": [ "%poison%","%immobilize%","%disarm%", "%stun%", "%muddle%" ]
         }
