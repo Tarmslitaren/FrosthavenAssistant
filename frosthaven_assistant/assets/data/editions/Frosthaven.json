@@ -6140,9 +6140,6 @@
               "startOfRound": true,
               "note": "Spawn one Hound at any empty starting Hex. Normal for 2 characters, elite every other time for 3, elite for 4."
             }]
-        },
-        "#29.2 The Tempus Forge (8)": {
-          "monsters": ["Blacksmith"]
         }
       }
     },
@@ -8274,6 +8271,9 @@
               "health": "(L+2)xCd2"
             }
           ]
+        },
+        "#29.2 The Tempus Forge (106)": {
+          "monsters": ["Blacksmith"]
         },
         "#183.1 The Tempus Forge (106)": {
           "special": [
