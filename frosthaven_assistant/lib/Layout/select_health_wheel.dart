@@ -55,10 +55,13 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
   }
 
   void end() {
-    getIt<GameState>().action(ChangeHealthCommand(
-        selected - widget.data.health.value,
-        widget.figureId,
-        widget.ownerId));
+    int value = selected - widget.data.health.value;
+    if(value != 0) {
+      getIt<GameState>().action(ChangeHealthCommand(
+          value,
+          widget.figureId,
+          widget.ownerId));
+    }
     selected = widget.data.maxHealth.value - (widget.data.maxHealth.value - widget.data.health.value);
   }
 
