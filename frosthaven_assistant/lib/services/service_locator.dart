@@ -10,11 +10,4 @@ void setupGetIt() {
   getIt.registerLazySingleton<Settings>(() => Settings());
   getIt.registerLazySingleton<GameState>(() => GameState());
   getIt.registerLazySingleton<Network>(() => Network());
-
-}
-
-void setupGetItPreMade(GameState gameState, Settings settings, Network network) {
-  getIt.registerLazySingleton<Settings>(() => settings);
-  getIt.registerLazySingleton<GameState>(() => gameState);
-  getIt.registerLazySingleton<Network>(() => network);
 }
