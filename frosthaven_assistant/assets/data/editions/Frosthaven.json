@@ -8414,13 +8414,13 @@
           "type": "Timer",
           "startOfRound": true,
           "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
-          "note": "Spawn one monster at c. 2 characters: normal Hound. 3 characters: elite Hound. 4 characters: normal Polar Bear."
+          "note": "Spawn one monster at C. 2 characters: normal Hound. 3 characters: elite Hound. 4 characters: normal Polar Bear."
         },
         {
           "type": "Timer",
           "startOfRound": true,
           "list": [3,5,7,9,11,13,15,17,19,21,23,25,27,29],
-          "note": "Spawn Snow Imps at d. 2 characters: one normal. 3 characters: one elite. 4 characters: one normal and one elite."
+          "note": "Spawn Snow Imps at D. 2 characters: one normal. 3 characters: one elite. 4 characters: one normal and one elite."
         },
         {
           "type": "Objective",
@@ -8431,8 +8431,56 @@
           "type": "Objective",
           "name": "Ice Pillar 2",
           "health": "(2xL)+2"
+        },
+        {
+          "type": "Objective",
+          "name": "Ice Pillar 3",
+          "health": "(2xL)+2"
+        },
+        {
+          "type": "Objective",
+          "name": "Ice Pillar 4",
+          "health": "(2xL)+2"
         }
-      ]
+      ],
+      "sections": {
+        "#159.1 Work Freeze (114)": {
+          "special": [
+            {
+              "type": "Timer",
+              "startOfRound": true,
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "note": "Spawn one monster at E. 2 characters: normal Hound. 3 characters: elite Hound. 4 characters: normal Polar Bear."
+            },
+            {
+              "type": "Timer",
+              "startOfRound": true,
+              "list": [3,5,7,9,11,13,15,17,19,21,23,25,27,29],
+              "note": "Spawn Snow Imps at F. 2 characters: one normal. 3 characters: one elite. 4 characters: one normal and one elite."
+            },
+            {
+              "type": "Objective",
+              "name": "Ice Pillar 5",
+              "health": "(2xL)+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Ice Pillar 6",
+              "health": "(2xL)+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Ice Pillar 7",
+              "health": "(2xL)+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Ice Pillar 8",
+              "health": "(2xL)+2"
+            }
+          ]
+        }
+      }
     },
     "#115 Pylon Problems": {
       "monsters": [ "Algox Guard", "Algox Snowspeaker", "Snow Imp" ],
