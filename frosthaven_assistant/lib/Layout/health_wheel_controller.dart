@@ -3,6 +3,8 @@ import 'package:frosthaven_assistant/Layout/select_health_wheel.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../Resource/state/figure_state.dart';
+import '../Resource/state/game_state.dart';
+import '../services/service_locator.dart';
 
 extension GlobalPaintBounds on BuildContext {
   Rect? get globalPaintBounds {
@@ -35,9 +37,7 @@ class HealthWheelController extends StatefulWidget {
 }
 
 class HealthWheelControllerState extends State<HealthWheelController> {
-  late FigureState data;
   OverlayEntry? entry;
-  SelectHealthWheel? selectHealthWheel;
 
   final wheelDelta = ValueNotifier<double>(0);
   final wheelTimeDelta = ValueNotifier<int>(0);
@@ -45,22 +45,30 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   @override
   void initState() {
     super.initState();
-    data = GameMethods.getFigure(widget.ownerId, widget.figureId)!;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    hideOverlay();
   }
 
 
-  void hideOverlay() {
+  void hideOverlay() { //TODO: make sure this is called even on cancel drag
     if (entry != null && entry!.mounted) {
       entry!.remove();
       entry!.dispose();
+      entry = null;
+      getIt<GameState>().updateList.value++;
     }
   }
 
   void showOverlay(String figureId, double scale, BuildContext context) {
     double dx = context.globalPaintBounds!.topCenter.dx - 100 * scale;
-    double dy = context.globalPaintBounds!.topCenter.dy - 100; //TODO: why is this not correct?
-    selectHealthWheel ??= SelectHealthWheel(
-        data: data,
+    double dy = context.globalPaintBounds!.topCenter.dy - 100;
+    var selectHealthWheel = SelectHealthWheel(
+        key: UniqueKey(),
+        data: GameMethods.getFigure(widget.ownerId, widget.figureId)!,
         figureId: figureId,
         ownerId: widget.ownerId,
         delta: wheelDelta,
@@ -71,7 +79,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
             top: dy,
             width: 200 * scale,
             child: Material(
-                color: Colors.transparent, child: selectHealthWheel!)));
+                color: Colors.transparent, child: selectHealthWheel)));
     final overlay = Overlay.of(context);
     overlay.insert(entry!);
   }
@@ -89,17 +97,15 @@ class HealthWheelControllerState extends State<HealthWheelController> {
         hideOverlay();
       },
       onHorizontalDragUpdate: (DragUpdateDetails details) {
-        if (selectHealthWheel != null) {
-          int timeDiff = 0;
-          if (lastTimeStamp != null) {
-            timeDiff = details.sourceTimeStamp!.inMicroseconds - lastTimeStamp!;
-          }
-
-          wheelTimeDelta.value = timeDiff;
-          wheelDelta.value = details.delta.dx;
-
-          lastTimeStamp = details.sourceTimeStamp!.inMicroseconds;
+        int timeDiff = 0;
+        if (lastTimeStamp != null) {
+          timeDiff = details.sourceTimeStamp!.inMicroseconds - lastTimeStamp!;
         }
+
+        wheelTimeDelta.value = timeDiff;
+        wheelDelta.value = details.delta.dx;
+
+        lastTimeStamp = details.sourceTimeStamp!.inMicroseconds;
       },
       onHorizontalDragEnd: (details) {
         //close scrollview and run changeHeath command
