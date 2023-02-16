@@ -154,10 +154,7 @@ class Client {
 
   void send(String data) {
     if (_socket != null) {
-      //print('Client sends: $data');
       _socket!.write("S3nD:$data[EOM]");
-    } else {
-
     }
   }
 
