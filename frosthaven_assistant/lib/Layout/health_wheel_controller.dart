@@ -54,7 +54,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   }
 
 
-  void hideOverlay() { //TODO: make sure this is called even on cancel drag
+  void hideOverlay() {
     if (entry != null && entry!.mounted) {
       entry!.remove();
       entry!.dispose();
@@ -91,6 +91,9 @@ class HealthWheelControllerState extends State<HealthWheelController> {
 
     return GestureDetector(
       onHorizontalDragStart: (details) {
+        hideOverlay();
+        final overlay = Overlay.of(context);
+        overlay.deactivate(); //this removes prior popup if it ended up hanging around for some reason
         showOverlay(widget.figureId, scale, context);
       },
       onHorizontalDragCancel: () {

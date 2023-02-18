@@ -126,6 +126,7 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
                   scrollTheWheel(widget.delta.value, widget.time.value, scale);
 
                   return ListWheelScrollView(
+                    physics: const ClampingScrollPhysics(), //force android scrolling...
                       renderChildrenOutsideViewport: true,
                       clipBehavior: Clip.none,
                       onSelectedItemChanged: (x) {
