@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -68,6 +69,10 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
     deltaMod =  max(deltaMod, 2.5);
 
     deltaMod *= delta;
+    if(Platform.isIOS || Platform.isMacOS) {
+      deltaMod /= 2;
+    }
+
     double initialPosition = scrollController.initialItem * itemExtent * scale;
     if (currentScrollOffset == 0 && !scrollInited) {
       scrollInited = true;
@@ -128,7 +133,7 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
                   scrollTheWheel(widget.delta.value, widget.time.value, scale);
 
                   return ListWheelScrollView(
-                    physics: const ClampingScrollPhysics(), //force android scrolling...
+                    physics: const NeverScrollableScrollPhysics(), //force android scrolling...
                       renderChildrenOutsideViewport: true,
                       clipBehavior: Clip.none,
                       onSelectedItemChanged: (x) {
