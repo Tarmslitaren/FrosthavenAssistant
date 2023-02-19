@@ -4,6 +4,7 @@
      {
       "name": "Brute",
       "color": "FF35ACD5",
+       "colorSecondary": "ff313959",
       "edition": "Gloomhaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
@@ -39,6 +40,7 @@
      {
       "name": "Spellweaver",
       "color": "FFB28AC2",
+       "colorSecondary": "ff30254c",
       "edition": "Gloomhaven",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
@@ -78,6 +80,7 @@
      {
       "name": "Mindthief",
       "color": "FF6279A5",
+       "colorSecondary": "ff344c67",
       "edition": "Gloomhaven",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
@@ -112,7 +115,8 @@
     },
      {
       "name": "Quartermaster",
-      "color": "FFAD9477",
+      "color": "ffcd8229",
+       "colorSecondary": "ff6f471e",
       "edition": "Gloomhaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
@@ -121,6 +125,7 @@
      {
       "name": "Summoner",
       "color": "FFE570B3",
+       "colorSecondary": "ff64364e",
       "edition": "Gloomhaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
@@ -205,7 +210,8 @@
     },
      {
       "name": "Nightshroud",
-      "color": "FF7440D4",
+      "color": "ff6e77ba",
+       "colorSecondary": "ff3b3a59",
       "edition": "Gloomhaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
@@ -221,7 +227,8 @@
     },
      {
       "name": "Berserker",
-      "color": "FFF07C4E",
+      "color": "ffd75f49",
+       "colorSecondary": "ff692f27",
       "edition": "Gloomhaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
@@ -229,7 +236,8 @@
     },
      {
       "name": "Soothsinger",
-      "color": "FFDB6E8D",
+      "color": "ffe3726b",
+       "colorSecondary": "ff5d3636",
       "edition": "Gloomhaven",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
@@ -237,7 +245,7 @@
     },
      {
       "name": "Doomstalker",
-      "color": "FF5BC5DC",
+      "color": "ff69cde0",
       "edition": "Gloomhaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
@@ -277,7 +285,8 @@
     },
      {
       "name": "Sawbones",
-      "color": "FFD5CA9C",
+      "color": "ffe3dfcf",
+       "colorSecondary": "ff43413e",
       "edition": "Gloomhaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
@@ -307,7 +316,8 @@
      {
       "note": "the bear is a special summon with scaling hit points. as such it remains hardcoded",
       "name": "Beast Tyrant",
-      "color": "FFB4765A",
+      "color": "ffca9789",
+       "colorSecondary": "ff36221a",
       "edition": "Gloomhaven",
       "health": [6, 7, 8, 9, 10, 11, 12, 13, 14],
       "hidden": true,

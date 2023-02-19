@@ -5,6 +5,7 @@
     {
       "name": "Hatchet",
       "color": "FF7BBBD6",
+      "colorSecondary": "ff224c6c",
       "edition": "Jaws of the Lion",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
@@ -28,7 +29,8 @@
     },
     {
       "name": "Red Guard",
-      "color": "FFD8585D",
+      "color": "ffe2252e",
+      "colorSecondary": "ff5c1614",
       "edition": "Jaws of the Lion",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
