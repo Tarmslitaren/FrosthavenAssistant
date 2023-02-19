@@ -1372,7 +1372,21 @@
       }
     },
     "#76 Untold Woe": {
-      "monsters": [ "Flame Demon","Gnashing Drake", "Hound", "Spitting Drake", "Sun Demon"]
+      "monsters": [ "Flame Demon","Gnashing Drake", "Hound", "Spitting Drake", "Sun Demon"],
+      "sections": {
+        "#30C (Scenario 76)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "startOfRound": true,
+              "list": [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+              "note": "Spawn one elite Gnashing Drake at A at the start of each round."
+            }]
+        }
+      }
     },
     "#77 Rat Traps": {
       "monsters": [ "Bandit Archer","Living Corpse", "Living Bones", "Living Spirit"]
@@ -1381,7 +1395,17 @@
       "monsters": [ "Ancient Artillery","Cultist", "Living Bones", "Stone Golem"],
       "sections": {
         "#35B (Scenario 78)": {
-          "monsters": ["Reaver", "Conqueror", "Ritualist"]
+          "monsters": ["Reaver", "Conqueror", "Ritualist"],
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "startOfRound": true,
+              "list": [2],
+              "note": "Spawn the Reaver, the Conqueror and the Ritualist."
+            }]
         }
       }
     },
