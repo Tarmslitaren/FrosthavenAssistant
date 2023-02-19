@@ -196,7 +196,7 @@ class SetScenarioCommand extends Command {
       if(item.type == "Timer" && item.startOfRound == true) {
         for(int round in item.list) {
           //minus 1 means always
-          if(round - 1 == _gameState.round.value || round == -1) {
+          if(round == 1 || round == -1) {
             if(initMessage.isNotEmpty) {
               initMessage += "\n\n${item.note}";
             } else {
