@@ -118,7 +118,8 @@ class NetworkInformation {
       developer.log('Failed to get Wifi IPv4', error: e);
       wifiIPv4.value = 'Failed to get Wifi IPv4';
       for (var interface in await NetworkInterface.list()) {
-        if (interface.name == "Ethernet") {
+        //searching for eth should fix the ethernet ip address issue on ethernet connections on windows and linux
+        if (interface.name.toLowerCase().contains("eth")) {
           for (var address in interface.addresses) {
             if (address.type == InternetAddressType.IPv4) {
               wifiIPv4.value = address.address; //default to ipv4 ethernet address if no wifi

@@ -400,6 +400,11 @@ class SettingsMenuState extends State<SettingsMenu> {
                                           if (!settings.server.value) {
                                             settings.lastKnownPort =
                                                 _portTextController.text;
+                                            settings.lastKnownHostIP =
+                                                "(${getIt<Network>()
+                                                  .networkInfo
+                                                  .wifiIPv4
+                                                  .value})";
                                             settings.saveToDisk();
                                             getIt<Network>()
                                                 .server

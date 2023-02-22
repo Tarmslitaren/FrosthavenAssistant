@@ -12,15 +12,14 @@ import 'package:window_manager/window_manager.dart';
 import '../services/network/network.dart';
 import '../services/service_locator.dart';
 
-enum Style {
-  frosthaven,
-  gloomhaven,
-  original
-}
+enum Style { frosthaven, gloomhaven, original }
 
 class Settings {
   final userScalingMainList = ValueNotifier<double>(1.0);
-  final userScalingBars = ValueNotifier<double>((Platform.isWindows || Platform.isLinux || Platform.isMacOS)? 1.6 : 1.0); //if ! mobile ->2.0
+  final userScalingBars = ValueNotifier<double>(
+      (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
+          ? 1.6
+          : 1.0); //if ! mobile ->2.0
   final userScalingMenus = ValueNotifier<double>(1.0);
   final fullScreen = ValueNotifier<bool>(true);
   final darkMode = ValueNotifier<bool>(false);
@@ -46,9 +45,9 @@ class Settings {
   final client = ValueNotifier<ClientState>(ClientState.disconnected);
   String lastKnownConnection = "192.168.1.???"; //only these
   String lastKnownPort = "4567";
+  String lastKnownHostIP = "";
 
   bool connectClientOnStartup = false;
-
 
   Future<void> init() async {
     await loadFromDisk();
@@ -60,7 +59,7 @@ class Settings {
   Future<void> setFullscreen(bool fullscreen) async {
     fullScreen.value = fullscreen;
     //to set fullscreen on pc - need to add exit button to quit //would be good to exit/enter mode with ctrl+enter
-    if(Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
       WidgetsFlutterBinding.ensureInitialized();
       windowManager.ensureInitialized();
 
@@ -68,17 +67,17 @@ class Settings {
       windowManager.waitUntilReadyToShow().then((_) async {
         // Hide window title bar
         //await windowManager.setTitleBarStyle('hidden');
-        if(fullscreen) {
+        if (fullscreen) {
           await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
           await windowManager.setFullScreen(true);
           await windowManager.center();
           await windowManager.show();
           await windowManager.setSkipTaskbar(false);
           //await windowManager.setAlwaysOnTop(true);
-          await windowManager.setPosition(const Offset(0,0)); //weird this was needed
+          await windowManager
+              .setPosition(const Offset(0, 0)); //weird this was needed
           await windowManager.show();
-          
-        }else {
+        } else {
           await windowManager.setTitleBarStyle(TitleBarStyle.normal);
           await windowManager.setFullScreen(false);
           await windowManager.center();
@@ -86,7 +85,6 @@ class Settings {
           await windowManager.setSkipTaskbar(false);
           await windowManager.focus();
           await windowManager.setAlwaysOnTop(false);
-
         }
       });
       //await WindowManager.instance.setFullScreen(fullscreen);
@@ -97,7 +95,8 @@ class Settings {
       if (fullscreen) {
         SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
       } else {
-        SystemChrome.setEnabledSystemUIMode(nonFullscreen, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+        SystemChrome.setEnabledSystemUIMode(nonFullscreen,
+            overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
       }
       //to fix issue with system bottom bar on top after keyboard shown on earlier os (24)
       SystemChrome.setSystemUIChangeCallback((systemOverlaysAreVisible) =>
@@ -108,7 +107,8 @@ class Settings {
                 print("force fullscreen 1 sec");
               }
             } else {
-              SystemChrome.setEnabledSystemUIMode(nonFullscreen, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+              SystemChrome.setEnabledSystemUIMode(nonFullscreen,
+                  overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
             }
             //in case the first went too early?
             Future.delayed(const Duration(milliseconds: 301), () {
@@ -119,7 +119,8 @@ class Settings {
                   print("force fullscreen 1.3 sec");
                 }
               } else {
-                SystemChrome.setEnabledSystemUIMode(nonFullscreen, overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+                SystemChrome.setEnabledSystemUIMode(nonFullscreen,
+                    overlays: [SystemUiOverlay.bottom, SystemUiOverlay.top]);
               }
             });
           }));
@@ -212,6 +213,9 @@ class Settings {
       if (data["lastKnownPort"] != null) {
         lastKnownPort = data["lastKnownPort"];
       }
+      if (data["lastKnownHostIP"] != null) {
+        lastKnownHostIP = data["lastKnownHostIP"];
+      }
 
       if (data["shimmer"] != null) {
         shimmer.value = data["shimmer"];
@@ -231,37 +235,36 @@ class Settings {
         showReminders.value = data["showReminders"];
       }
 
-      if (data["connectClientOnStartup"] != null && data["connectClientOnStartup"] != false) {
+      if (data["connectClientOnStartup"] != null &&
+          data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
           getIt<Network>().client.connect(lastKnownConnection);
         });
-
       }
     }
   }
 
   void handleNoStandeesSettingChange() {
     GameState gameState = getIt<GameState>();
-    if(noStandees.value) {
+    if (noStandees.value) {
       for (var item in gameState.currentList) {
-        if(item is Monster) {
+        if (item is Monster) {
           item.monsterInstances.value = [];
         }
       }
-    }else {
+    } else {
       for (var item in gameState.currentList) {
-        if(item is Monster && item.isActive) {
+        if (item is Monster && item.isActive) {
           item.isActive = false;
         }
       }
     }
     //gameState.gameSaveStates.removeRange(0, gameState.gameSaveStates.length-1);
-   // gameState.commands.clear();
-   // gameState.commandIndex.value = -1;
-   // gameState.commandDescriptions.clear();
+    // gameState.commands.clear();
+    // gameState.commandIndex.value = -1;
+    // gameState.commandDescriptions.clear();
     gameState.updateList.value++;
   }
-
 
   @override
   String toString() {
@@ -286,7 +289,8 @@ class Settings {
         '"showReminders": ${showReminders.value}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
-        '"lastKnownPort": "$lastKnownPort" '
+        '"lastKnownPort": "$lastKnownPort", '
+        '"lastKnownHostIP": "$lastKnownHostIP" '
         '}';
   }
 }

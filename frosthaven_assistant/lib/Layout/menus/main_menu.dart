@@ -207,12 +207,19 @@ Drawer createMainMenu(BuildContext context) {
               ValueListenableBuilder<bool>(
                   valueListenable: settings.server,
                   builder: (context, value, child) {
+                    String hostIPText = 'Start Host Server ${settings.lastKnownHostIP}';
                     return CheckboxListTile(
                         title: Text(settings.server.value
-                            ? "Stop Server"
-                            : "Start Host Server"),
+                            ? "Stop Server ${settings.lastKnownHostIP}"
+                            : hostIPText),
                         value: settings.server.value,
                         onChanged: (bool? value) {
+                          settings.lastKnownHostIP =
+                            "(${getIt<Network>()
+                              .networkInfo
+                              .wifiIPv4
+                              .value})";
+                          settings.saveToDisk();
                           //setState(() {
                           //do the thing
                           if (!settings.server.value) {
