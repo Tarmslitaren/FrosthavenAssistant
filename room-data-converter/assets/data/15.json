@@ -1,0 +1,128 @@
+{
+  "index": "15",
+  "name": "Shrine of Strength",
+  "edition": "gh",
+  "monsters": [
+    "frost-demon",
+    "harrower-infester",
+    "savvas-icestorm",
+    "stone-golem",
+    "wind-demon"
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "l1a",
+      "initial": true,
+      "rooms": [
+        2
+      ],
+      "monster": [
+        {
+          "name": "savvas-icestorm",
+          "type": "elite"
+        },
+        {
+          "name": "stone-golem",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "stone-golem",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "ref": "d1a",
+      "rooms": [
+        3,
+        4,
+        5
+      ],
+      "monster": [
+        {
+          "name": "frost-demon",
+          "type": "normal"
+        },
+        {
+          "name": "frost-demon",
+          "type": "normal"
+        },
+        {
+          "name": "savvas-icestorm",
+          "type": "normal"
+        },
+        {
+          "name": "wind-demon",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "wind-demon",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 3,
+      "ref": "h3b",
+      "marker": "a",
+      "monster": [
+        {
+          "name": "harrower-infester",
+          "type": "elite"
+        },
+        {
+          "name": "harrower-infester",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "stone-golem",
+          "player3": "normal",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 4,
+      "ref": "h1b",
+      "marker": "a",
+      "monster": [
+        {
+          "name": "harrower-infester",
+          "type": "elite"
+        },
+        {
+          "name": "harrower-infester",
+          "player4": "normal"
+        },
+        {
+          "name": "stone-golem",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 5,
+      "ref": "c1a",
+      "marker": "b",
+      "treasures": [
+        "G"
+      ],
+      "monster": [
+        {
+          "name": "stone-golem",
+          "type": "elite"
+        },
+        {
+          "name": "stone-golem",
+          "type": "elite"
+        }
+      ]
+    }
+  ]
+}

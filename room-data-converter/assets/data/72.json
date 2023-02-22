@@ -1,0 +1,266 @@
+{
+  "index": "72",
+  "name": "Oozing Grove",
+  "edition": "gh",
+  "monsters": [
+    "forest-imp",
+    "giant-viper",
+    "ooze"
+  ],
+  "objectives": [
+    {
+      "name": "Tree",
+      "health": "Cx(3+L)",
+      "marker": "a"
+    },
+    {
+      "name": "Tree",
+      "health": "Cx(3+L)",
+      "marker": "b"
+    },
+    {
+      "name": "Tree",
+      "health": "Cx(3+L)",
+      "marker": "c"
+    }
+  ],
+  "rules": [
+    {
+      "round": "R % 6 == 1",
+      "spawns": [
+        {
+          "monster": {
+            "name": "ooze",
+            "player2": "normal",
+            "player3": "normal",
+            "player4": "elite"
+          },
+          "marker": "a"
+        }
+      ],
+      "figures": [
+        {
+          "identifier": {
+            "type": "objective",
+            "edition": "objective",
+            "name": "Tree",
+            "marker": "a"
+          },
+          "type": "present"
+        }
+      ]
+    },
+    {
+      "round": "R % 6 == 2",
+      "spawns": [
+        {
+          "monster": {
+            "name": "ooze",
+            "player2": "normal",
+            "player3": "elite",
+            "player4": "elite"
+          },
+          "marker": "b"
+        }
+      ],
+      "figures": [
+        {
+          "identifier": {
+            "type": "objective",
+            "edition": "objective",
+            "name": "Tree",
+            "marker": "b"
+          },
+          "type": "present"
+        }
+      ]
+    },
+    {
+      "round": "R % 6 == 3",
+      "spawns": [
+        {
+          "monster": {
+            "name": "ooze",
+            "player2": "normal",
+            "player3": "normal",
+            "player4": "elite"
+          },
+          "marker": "c"
+        }
+      ],
+      "figures": [
+        {
+          "identifier": {
+            "type": "objective",
+            "edition": "objective",
+            "name": "Tree",
+            "marker": "c"
+          },
+          "type": "present"
+        }
+      ]
+    },
+    {
+      "round": "R % 6 == 4",
+      "spawns": [
+        {
+          "monster": {
+            "name": "ooze",
+            "player2": "normal",
+            "player3": "elite",
+            "player4": "elite"
+          },
+          "marker": "a"
+        }
+      ],
+      "figures": [
+        {
+          "identifier": {
+            "type": "objective",
+            "edition": "objective",
+            "name": "Tree A"
+          },
+          "type": "present"
+        }
+      ]
+    },
+    {
+      "round": "R % 6 == 5",
+      "spawns": [
+        {
+          "monster": {
+            "name": "ooze",
+            "player2": "normal",
+            "player3": "normal",
+            "player4": "elite"
+          },
+          "marker": "b"
+        }
+      ],
+      "figures": [
+        {
+          "identifier": {
+            "type": "objective",
+            "edition": "objective",
+            "name": "Tree B"
+          },
+          "type": "present"
+        }
+      ]
+    },
+    {
+      "round": "R % 6 == 0",
+      "spawns": [
+        {
+          "monster": {
+            "name": "ooze",
+            "player2": "normal",
+            "player3": "elite",
+            "player4": "elite"
+          },
+          "marker": "c"
+        }
+      ],
+      "figures": [
+        {
+          "identifier": {
+            "type": "objective",
+            "edition": "objective",
+            "name": "Tree C"
+          },
+          "type": "present"
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "l1b",
+      "initial": true,
+      "monster": [
+        {
+          "name": "forest-imp",
+          "type": "normal"
+        },
+        {
+          "name": "forest-imp",
+          "type": "elite"
+        },
+        {
+          "name": "forest-imp",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "forest-imp",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "forest-imp",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "forest-imp",
+          "player4": "normal"
+        },
+        {
+          "name": "forest-imp",
+          "player4": "normal"
+        },
+        {
+          "name": "giant-viper",
+          "type": "normal"
+        },
+        {
+          "name": "giant-viper",
+          "type": "elite"
+        },
+        {
+          "name": "giant-viper",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "giant-viper",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "giant-viper",
+          "player4": "normal"
+        },
+        {
+          "name": "ooze",
+          "player2": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "ooze",
+          "player3": "elite"
+        },
+        {
+          "name": "ooze",
+          "player3": "elite"
+        },
+        {
+          "name": "ooze",
+          "player4": "elite"
+        },
+        {
+          "name": "ooze",
+          "player4": "elite"
+        }
+      ],
+      "objectives": [
+        1,
+        2,
+        3
+      ]
+    }
+  ]
+}

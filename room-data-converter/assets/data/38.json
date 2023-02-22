@@ -1,0 +1,182 @@
+{
+  "index": "38",
+  "name": "Slave Pens",
+  "edition": "gh",
+  "unlocks": [
+    "44",
+    "48"
+  ],
+  "links": [
+    "44"
+  ],
+  "monsters": [
+    "inox-archer",
+    "inox-guard",
+    "inox-shaman",
+    "stone-golem"
+  ],
+  "objectives": [
+    {
+      "name": "Orchid",
+      "escort": true,
+      "health": "6+(3xL)",
+      "marker": "a",
+      "actions": [
+        {
+          "type": "move",
+          "value": 3,
+          "subActions": [
+            {
+              "type": "custom",
+              "value": "%data.scenario.rules.gh.38.1%",
+              "small": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "c2a",
+      "initial": true,
+      "rooms": [
+        2
+      ],
+      "monster": [
+        {
+          "name": "inox-guard",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "inox-guard",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        }
+      ],
+      "objectives": [
+        1
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "ref": "a4a",
+      "rooms": [
+        3
+      ],
+      "monster": [
+        {
+          "name": "inox-archer",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "inox-archer",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "stone-golem",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 3,
+      "ref": "m1b",
+      "rooms": [
+        4
+      ],
+      "monster": [
+        {
+          "name": "inox-guard",
+          "type": "normal"
+        },
+        {
+          "name": "inox-guard",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "inox-guard",
+          "player4": "normal"
+        },
+        {
+          "name": "inox-shaman",
+          "type": "normal"
+        },
+        {
+          "name": "stone-golem",
+          "type": "elite"
+        },
+        {
+          "name": "stone-golem",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 4,
+      "ref": "h2b",
+      "rooms": [
+        5
+      ],
+      "treasures": [
+        29
+      ],
+      "monster": [
+        {
+          "name": "inox-archer",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "inox-guard",
+          "type": "elite"
+        },
+        {
+          "name": "inox-guard",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 5,
+      "ref": "d1b",
+      "monster": [
+        {
+          "name": "inox-archer",
+          "type": "normal"
+        },
+        {
+          "name": "inox-archer",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "inox-guard",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "inox-shaman",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    }
+  ]
+}

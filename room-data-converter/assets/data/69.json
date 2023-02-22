@@ -1,0 +1,204 @@
+{
+  "index": "69",
+  "name": "Well of the Unfortunate",
+  "edition": "gh",
+  "monsters": [
+    "forest-imp",
+    "living-spirit",
+    "stone-golem",
+    "vermling-scout",
+    "vermling-shaman"
+  ],
+  "rules": [
+    {
+      "round": "true",
+      "once": true,
+      "always": true,
+      "spawns": [
+        {
+          "monster": {
+            "name": "vermling-scout",
+            "player2": "normal",
+            "player3": "elite",
+            "player4": "elite"
+          },
+          "count": 2,
+          "marker": "c"
+        },
+        {
+          "monster": {
+            "name": "vermling-shaman",
+            "player2": "normal",
+            "player3": "normal",
+            "player4": "elite"
+          },
+          "marker": "c"
+        }
+      ],
+      "requiredRooms": [
+        3
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "l3a",
+      "initial": true,
+      "rooms": [
+        2,
+        3
+      ],
+      "monster": [
+        {
+          "name": "forest-imp",
+          "type": "normal"
+        },
+        {
+          "name": "forest-imp",
+          "type": "normal"
+        },
+        {
+          "name": "forest-imp",
+          "player4": "normal"
+        },
+        {
+          "name": "forest-imp",
+          "player4": "normal"
+        },
+        {
+          "name": "vermling-scout",
+          "type": "elite"
+        },
+        {
+          "name": "vermling-scout",
+          "type": "elite"
+        },
+        {
+          "name": "vermling-scout",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "vermling-scout",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "vermling-shaman",
+          "player2": "normal"
+        },
+        {
+          "name": "vermling-shaman",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "vermling-shaman",
+          "player3": "normal",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "ref": "b1b",
+      "monster": [
+        {
+          "name": "vermling-scout",
+          "type": "normal"
+        },
+        {
+          "name": "vermling-scout",
+          "type": "normal"
+        },
+        {
+          "name": "vermling-scout",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "vermling-scout",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "vermling-shaman",
+          "player2": "normal",
+          "player3": "normal"
+        },
+        {
+          "name": "vermling-shaman",
+          "player4": "normal"
+        },
+        {
+          "name": "vermling-shaman",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 3,
+      "ref": "j1a",
+      "marker": "1",
+      "rooms": [
+        4
+      ],
+      "monster": [
+        {
+          "name": "forest-imp",
+          "type": "elite"
+        },
+        {
+          "name": "forest-imp",
+          "type": "elite"
+        },
+        {
+          "name": "forest-imp",
+          "player4": "normal"
+        },
+        {
+          "name": "forest-imp",
+          "player4": "normal"
+        },
+        {
+          "name": "stone-golem",
+          "player2": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "stone-golem",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "stone-golem",
+          "player3": "normal",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 4,
+      "ref": "d2a",
+      "monster": [
+        {
+          "name": "living-spirit",
+          "type": "normal"
+        },
+        {
+          "name": "living-spirit",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "living-spirit",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        }
+      ]
+    }
+  ]
+}

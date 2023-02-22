@@ -1,0 +1,145 @@
+{
+  "index": "25",
+  "name": "Icecrag Ascent",
+  "edition": "gh",
+  "unlocks": [
+    "33",
+    "34"
+  ],
+  "links": [
+    "34"
+  ],
+  "monsters": [
+    "hound",
+    "rending-drake",
+    "spitting-drake"
+  ],
+  "rules": [
+    {
+      "round": "R == 1",
+      "start": true,
+      "figures": [
+        {
+          "identifier": {
+            "type": "character",
+            "name": ".*"
+          },
+          "type": "amAdd",
+          "value": "minus1:3",
+          "scenarioEffect": true
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "k2a",
+      "initial": true,
+      "rooms": [
+        2
+      ],
+      "monster": [
+        {
+          "name": "hound",
+          "type": "normal"
+        },
+        {
+          "name": "hound",
+          "type": "normal"
+        },
+        {
+          "name": "hound",
+          "type": "elite"
+        },
+        {
+          "name": "hound",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "hound",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "hound",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "ref": "n1a",
+      "marker": "1",
+      "rooms": [
+        3
+      ],
+      "treasures": [
+        58
+      ],
+      "monster": [
+        {
+          "name": "rending-drake",
+          "type": "elite"
+        },
+        {
+          "name": "rending-drake",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "rending-drake",
+          "player4": "normal"
+        },
+        {
+          "name": "spitting-drake",
+          "type": "normal"
+        },
+        {
+          "name": "spitting-drake",
+          "type": "normal"
+        },
+        {
+          "name": "spitting-drake",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 3,
+      "ref": "g2a",
+      "monster": [
+        {
+          "name": "rending-drake",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "rending-drake",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "spitting-drake",
+          "type": "normal"
+        },
+        {
+          "name": "spitting-drake",
+          "player2": "elite",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "spitting-drake",
+          "player3": "normal",
+          "player4": "normal"
+        }
+      ]
+    }
+  ]
+}

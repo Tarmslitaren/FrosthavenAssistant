@@ -1,0 +1,127 @@
+{
+  "index": "83",
+  "name": "Shadows Within",
+  "edition": "gh",
+  "monsters": [
+    "cultist",
+    "flame-demon",
+    "hound",
+    "living-bones",
+    "living-spirit"
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "h1b",
+      "initial": true,
+      "rooms": [
+        2
+      ],
+      "monster": [
+        {
+          "name": "cultist",
+          "type": "elite"
+        },
+        {
+          "name": "cultist",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "cultist",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "cultist",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "hound",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "hound",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "ref": "i1b",
+      "rooms": [
+        3
+      ],
+      "monster": [
+        {
+          "name": "cultist",
+          "type": "elite"
+        },
+        {
+          "name": "cultist",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "living-spirit",
+          "type": "normal"
+        },
+        {
+          "name": "living-spirit",
+          "type": "normal"
+        },
+        {
+          "name": "living-spirit",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "living-spirit",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 3,
+      "ref": "m1a",
+      "marker": "1",
+      "monster": [
+        {
+          "name": "cultist",
+          "type": "elite"
+        },
+        {
+          "name": "cultist",
+          "type": "elite"
+        },
+        {
+          "name": "cultist",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "cultist",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "flame-demon",
+          "type": "elite"
+        },
+        {
+          "name": "flame-demon",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    }
+  ]
+}

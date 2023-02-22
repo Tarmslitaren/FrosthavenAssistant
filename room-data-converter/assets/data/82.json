@@ -1,0 +1,135 @@
+{
+  "index": "82",
+  "name": "Burning Mountain",
+  "edition": "gh",
+  "monsters": [
+    "earth-demon",
+    "flame-demon",
+    "stone-golem"
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "k1a",
+      "initial": true,
+      "rooms": [
+        2,
+        3
+      ],
+      "monster": [
+        {
+          "name": "earth-demon",
+          "type": "elite"
+        },
+        {
+          "name": "earth-demon",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "earth-demon",
+          "player4": "normal"
+        },
+        {
+          "name": "flame-demon",
+          "type": "elite"
+        },
+        {
+          "name": "flame-demon",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "flame-demon",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "ref": "c1a",
+      "marker": "a",
+      "rooms": [
+        4,
+        5
+      ],
+      "monster": [
+        {
+          "name": "stone-golem",
+          "type": "elite"
+        },
+        {
+          "name": "stone-golem",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "stone-golem",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 3,
+      "ref": "d1a",
+      "marker": "b",
+      "rooms": [
+        4,
+        5
+      ],
+      "monster": [
+        {
+          "name": "stone-golem",
+          "type": "elite"
+        },
+        {
+          "name": "stone-golem",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "stone-golem",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 4,
+      "ref": "b2b",
+      "treasures": [
+        62
+      ],
+      "monster": [
+        {
+          "name": "earth-demon",
+          "type": "elite"
+        },
+        {
+          "name": "earth-demon",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "earth-demon",
+          "player4": "normal"
+        },
+        {
+          "name": "flame-demon",
+          "type": "elite"
+        },
+        {
+          "name": "flame-demon",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "flame-demon",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 5
+    }
+  ]
+}

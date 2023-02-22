@@ -1,0 +1,147 @@
+{
+  "index": "37",
+  "name": "Doom Trench",
+  "edition": "gh",
+  "unlocks": [
+    "47"
+  ],
+  "requires": [
+    [
+      "43"
+    ]
+  ],
+  "monsters": [
+    "deep-terror",
+    "harrower-infester",
+    "lurker"
+  ],
+  "rules": [
+    {
+      "round": "R == 1",
+      "start": true,
+      "figures": [
+        {
+          "identifier": {
+            "type": "character",
+            "name": ".*"
+          },
+          "type": "amAdd",
+          "value": "curse:3",
+          "scenarioEffect": true
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "j1b",
+      "initial": true,
+      "rooms": [
+        2
+      ],
+      "monster": [
+        {
+          "name": "deep-terror",
+          "type": "elite"
+        },
+        {
+          "name": "deep-terror",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "deep-terror",
+          "player4": "normal"
+        },
+        {
+          "name": "lurker",
+          "type": "normal"
+        },
+        {
+          "name": "lurker",
+          "type": "normal"
+        },
+        {
+          "name": "lurker",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "ref": "h2a",
+      "rooms": [
+        3
+      ],
+      "treasures": [
+        49
+      ],
+      "monster": [
+        {
+          "name": "harrower-infester",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "lurker",
+          "type": "normal"
+        },
+        {
+          "name": "lurker",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "lurker",
+          "player3": "normal",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 3,
+      "ref": "k2a",
+      "monster": [
+        {
+          "name": "deep-terror",
+          "type": "normal"
+        },
+        {
+          "name": "deep-terror",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "deep-terror",
+          "player2": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "deep-terror",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "deep-terror",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "deep-terror",
+          "player4": "normal"
+        },
+        {
+          "name": "harrower-infester",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    }
+  ]
+}

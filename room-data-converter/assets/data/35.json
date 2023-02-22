@@ -1,0 +1,174 @@
+{
+  "index": "35",
+  "name": "Gloomhaven Battlements A",
+  "edition": "gh",
+  "unlocks": [
+    "45"
+  ],
+  "requires": [
+    [
+      "10"
+    ]
+  ],
+  "blocks": [
+    "36"
+  ],
+  "monsters": [
+    "captain-of-the-guard",
+    "city-archer",
+    "city-guard",
+    "earth-demon",
+    "flame-demon",
+    "frost-demon",
+    "wind-demon"
+  ],
+  "allies": [
+    "earth-demon",
+    "flame-demon",
+    "frost-demon",
+    "wind-demon"
+  ],
+  "objectives": [
+    {
+      "name": "Door",
+      "health": "(7+L)xC",
+      "marker": "1"
+    }
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "l1b",
+      "initial": true,
+      "rooms": [
+        2
+      ],
+      "monster": [
+        {
+          "name": "city-archer",
+          "type": "elite",
+          "marker": "a"
+        },
+        {
+          "name": "city-archer",
+          "type": "elite",
+          "marker": "b"
+        },
+        {
+          "name": "city-archer",
+          "player3": "normal",
+          "player4": "elite",
+          "marker": "a"
+        },
+        {
+          "name": "city-archer",
+          "player3": "normal",
+          "player4": "elite",
+          "marker": "b"
+        },
+        {
+          "name": "city-guard",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "city-guard",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "earth-demon",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "flame-demon",
+          "type": "normal"
+        },
+        {
+          "name": "flame-demon",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "frost-demon",
+          "type": "normal"
+        },
+        {
+          "name": "frost-demon",
+          "player4": "normal"
+        },
+        {
+          "name": "wind-demon",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ],
+      "objectives": [
+        1
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "ref": "i1b",
+      "marker": "1",
+      "treasures": [
+        61
+      ],
+      "monster": [
+        {
+          "name": "captain-of-the-guard",
+          "type": "normal"
+        },
+        {
+          "name": "city-archer",
+          "type": "elite"
+        },
+        {
+          "name": "city-archer",
+          "type": "elite"
+        },
+        {
+          "name": "city-archer",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "city-archer",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "city-guard",
+          "type": "elite"
+        },
+        {
+          "name": "city-guard",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "city-guard",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "city-guard",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "city-guard",
+          "player3": "normal",
+          "player4": "normal"
+        }
+      ]
+    }
+  ]
+}
