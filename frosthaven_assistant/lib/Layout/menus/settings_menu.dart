@@ -140,16 +140,6 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),
-                              if (!Platform.isIOS)
-                                CheckboxListTile(
-                                    title: const Text("Fullscreen"),
-                                    value: settings.fullScreen.value,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        settings.setFullscreen(value!);
-                                        settings.saveToDisk();
-                                      });
-                                    }),
                               CheckboxListTile(
                                   title: const Text("Stat card text shimmers"),
                                   value: settings.shimmer.value,
@@ -204,6 +194,16 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),
+                              if (!Platform.isIOS)
+                                CheckboxListTile(
+                                    title: const Text("Fullscreen"),
+                                    value: settings.fullScreen.value,
+                                    onChanged: (bool? value) {
+                                      setState(() {
+                                        settings.setFullscreen(value!);
+                                        settings.saveToDisk();
+                                      });
+                                    }),
                               Container(
                                 constraints: const BoxConstraints(
                                     minWidth: double.infinity),
