@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 
 import '../enums.dart';
@@ -24,7 +26,7 @@ class CharacterState extends FigureState{
         '"level": ${level.value}, '
         '"xp": ${xp.value}, '
         '"chill": ${chill.value}, '
-        '"display": "${display.value}", '
+        '"display": ${jsonEncode(display.value)}, '
         '"summonList": ${summonList.value.toString()}, '
         '"conditions": ${conditions.value.toString()}, '
         '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.value.toList().toString()}, '
