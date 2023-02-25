@@ -372,7 +372,7 @@ class GameMethods {
 
   static void shuffleDecksIfNeeded() {
     for (var deck in _gameState.currentAbilityDecks) {
-      if (deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle) {
+      if (deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle || deck.drawPile.isEmpty == true) {
         deck.shuffle();
       }
     }
