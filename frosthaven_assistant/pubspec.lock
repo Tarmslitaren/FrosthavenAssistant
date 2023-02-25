@@ -313,6 +313,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  fluent_assertions:
+    dependency: "direct dev"
+    description:
+      name: fluent_assertions
+      sha256: "854b10d6c4b97d5f5f7b2ef558924f4094e89429a5100176e2ead7fa1b5cad69"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -1200,5 +1208,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.19.0 <4.0.0"
+  dart: ">=2.19.0 <3.0.0"
   flutter: ">=3.0.0"

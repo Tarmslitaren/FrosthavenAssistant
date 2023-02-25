@@ -45,8 +45,11 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-#private signing key information
+# private signing key information
 /android/key.properties
 
-#mocks
+# mocks
 *.mocks.dart
+
+# coverage
+lcov.info

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:fluent_assertions/fluent_assertions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
 import 'package:mockito/annotations.dart';
@@ -10,27 +11,53 @@ Communication _sut = Communication();
 @GenerateMocks([Socket])
 void main() {
   test('message is formatted in template', () {
-    //arrange
+    // arrange
     const message = "TestMessage";
-    const expectedMessage = "S3nD:$message[EOM]";
+    final expectedMessage = createValidMessage(data: message);
     var socket = MockSocket();
 
-    //act
+    // act
     _sut.sendTo(socket, message);
 
-    //assert
+    // assert
     verify(socket.write(expectedMessage));
   });
 
   test('data is extracted from message', () {
-    //arrange
+    // arrange
     const expectedData = "TestMessage";
-    const message = "S3nD:$expectedData[EOM]";
+    final message = createValidMessage(data: expectedData);
 
-    //act
+    // act
     final result = _sut.dataFrom(message);
 
-    //assert
+    // assert
     expect(result, expectedData);
   });
+
+  test('message should be valid', () {
+    // arrange
+    final validMessage = createValidMessage();
+
+    // act
+    final result = _sut.isValid(validMessage);
+
+    // assert
+    result.shouldBeTrue();
+  });
+
+  test('message should not be valid', () {
+    // arrange
+    const invalidMessage = "Message";
+
+    // act
+    final result = _sut.isValid(invalidMessage);
+
+    // assert
+    result.shouldBeFalse();
+  });
+}
+
+String createValidMessage({String data = "Message"}) {
+  return "S3nD:$data[EOM]";
 }
