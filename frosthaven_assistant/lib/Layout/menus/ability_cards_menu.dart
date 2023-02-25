@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/state/monster_ability_state.dart';
 import 'package:reorderables/reorderables.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/reorder_ability_list_command.dart';
+import '../../Resource/commands/shuffle_ability_card_command.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/state/monster.dart';
 import '../../Resource/ui_utils.dart';
@@ -205,16 +206,16 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                 //mainAxisSize: MainAxisSize.max,
                                 children: [
                                   const Text(
-                                    " Reveal:",
+                                    "  Reveal:",
                                   ),
                                   if(drawPile.length > 0) buildRevealButton(drawPile.length, 1),
-                                  if(drawPile.length > 1) buildRevealButton(drawPile.length, 2),
                                   if(drawPile.length > 1) buildRevealButton(drawPile.length, 2),
                                   if(drawPile.length > 2) buildRevealButton(drawPile.length, 3),
                                   if(drawPile.length > 3) buildRevealButton(drawPile.length, 4),
                                   if(drawPile.length > 4) buildRevealButton(drawPile.length, 5),
                                   if(drawPile.length > 5) buildRevealButton(drawPile.length, 6),
                                   if(drawPile.length > 6) buildRevealButton(drawPile.length, 7),
+                                  if(drawPile.length > 7) buildRevealButton(drawPile.length, 8),
                                   TextButton(
                                     onPressed: () {
                                       _gameState.action(DrawAbilityCardCommand(widget.monsterData.id
@@ -222,6 +223,15 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                     },
                                     child: const Text(
                                       "Draw card",
+                                    ),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      _gameState.action(ShuffleAbilityCardCommand(widget.monsterData.id
+                                      ));
+                                    },
+                                    child: const Text(
+                                      "Extra Shuffle",
                                     ),
                                   ),
                                 ])),
