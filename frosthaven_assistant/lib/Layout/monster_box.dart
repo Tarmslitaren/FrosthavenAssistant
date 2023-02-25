@@ -96,7 +96,7 @@ class MonsterBoxState extends State<MonsterBox> {
     }
     Color? borderColor = color;
     if (data.type == MonsterType.summon) {
-      borderColor = Colors.green;
+      borderColor = Colors.blue;
     }
     BlendMode blendMode = BlendMode.hue;
     if (color == Colors.red) {
