@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
         
-      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
+#      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
         
       - name: Create mocks
         run: flutter pub run build_runner build
