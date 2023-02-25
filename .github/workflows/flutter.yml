@@ -15,26 +15,16 @@ jobs:
         
     steps:
       - uses: actions/checkout@v3
-#      - uses: subosito/flutter-action@v2
-#        with:
-#          channel: 'stable' # or: 'beta', 'dev' or 'master'
-#      - run: flutter --version
-           
-      - name: Check next action folder
-        run: |
-          ls -la 
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable' # or: 'beta', 'dev' or 'master'
+      - run: flutter --version
           
-      - name: Go to project folder
-        run: |
-          cd frosthaven_assistant
-          ls -la
-
-          
-#      - name: Install dependencies
-#        run: flutter pub get
+      - name: Install dependencies
+        run: flutter pub get
         
-#      - name: Build mocks
-#        run: flutter pub run build_runner build
+      - name: Create mocks
+        run: flutter pub run build_runner build
         
-#      - name: Run tests
-#        run: flutter test
+      - name: Run tests
+        run: flutter test
