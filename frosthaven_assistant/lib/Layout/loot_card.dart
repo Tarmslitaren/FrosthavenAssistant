@@ -81,7 +81,7 @@ class LootCardWidget extends StatefulWidget {
             if (card.enhanced > 0)
               Positioned(
                   bottom: 5 * scale,
-                  child: AnimatedTextKit(
+                  child: getIt<Settings>().shimmer.value == true ? AnimatedTextKit(
                     repeatForever: true,
                     //pause: const Duration(milliseconds: textAnimationDelay),
                     animatedTexts: [
@@ -104,7 +104,12 @@ class LootCardWidget extends StatefulWidget {
                       ),
                     ],
                     // isRepeatingAnimation: true,
-                  )),
+                  ): Text(
+                    "Enhanced: ${card.enhanced.toString()}",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 9 * scale,
+                    )),),
             if (card.owner != "")
               Positioned(
                 height: 15 * scale,
