@@ -9,22 +9,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+    defaults:
+      run:
+        working-directory: ./frosthaven_assistant
+        
     steps:
       - uses: actions/checkout@v3
 #      - uses: subosito/flutter-action@v2
 #        with:
 #          channel: 'stable' # or: 'beta', 'dev' or 'master'
 #      - run: flutter --version
-      
+           
+      - name: Check next action folder
+        run: |
+          ls -la 
+          
       - name: Go to project folder
         run: |
           cd frosthaven_assistant
           ls -la
-           
-      - name: Check next action folder
-        run: |
-          ls -la
+
           
 #      - name: Install dependencies
 #        run: flutter pub get
