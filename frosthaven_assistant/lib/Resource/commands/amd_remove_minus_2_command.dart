@@ -1,17 +1,25 @@
+import 'package:frosthaven_assistant/Resource/state/modifier_deck_state.dart';
+
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
 
 class AMDRemoveMinus2Command extends Command {
   bool allies;
+  late bool remove;
   AMDRemoveMinus2Command(this.allies);
 
   @override
   void execute() {
+    ModifierDeck deck = getIt<GameState>().modifierDeck;
     if (allies) {
-      getIt<GameState>().modifierDeckAllies.removeMinusTwo();
+      deck = getIt<GameState>().modifierDeckAllies;
+    }
+    remove = deck.hasMinus2();
+    if (remove) {
+      deck.removeMinusTwo();
     } else {
-      getIt<GameState>().modifierDeck.removeMinusTwo();
+      deck.addMinusTwo();
     }
   }
 
@@ -21,6 +29,10 @@ class AMDRemoveMinus2Command extends Command {
 
   @override
   String describe() {
-    return "Remove minus two";
+    if (remove){
+      return "Remove minus two";
+    } else {
+      return "Add back minus two";
+    }
   }
 }

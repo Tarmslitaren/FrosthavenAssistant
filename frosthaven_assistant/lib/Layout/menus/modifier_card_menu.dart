@@ -250,13 +250,11 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    if (deck.hasMinus2()) {
-                                      _gameState.action(AMDRemoveMinus2Command(
-                                          name == "Allies"));
-                                    }
+                                    _gameState.action(AMDRemoveMinus2Command(
+                                        name == "Allies"));
                                   },
-                                  child: const Text(
-                                    "Remove -2 card",
+                                  child: Text(
+                                    deck.hasMinus2() ? "Remove -2 card" : "-2 card removed",
                                   ),
                                 ),
                                 //todo: (gray out if maxed out)

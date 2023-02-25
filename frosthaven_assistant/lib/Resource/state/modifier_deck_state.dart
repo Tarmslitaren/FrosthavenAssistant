@@ -154,6 +154,15 @@ class ModifierDeck {
     }
   }
 
+  void addMinusTwo() {
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
+    drawPile.getList().add(ModifierCard(CardType.add, "minus2$suffix"));
+    shuffle();
+  }
+
   void _handleCurseBless(
       CardType type, ValueNotifier<int> notifier, String gfx) {
     //count and add or remove, then shuffle
