@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/network/client.dart';
+import 'package:frosthaven_assistant/services/network/communication.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -10,22 +11,20 @@ import 'client_test.mocks.dart';
 Client _sut = Client();
 final _getIt = GetIt.instance;
 
-// Generate a MockClient using the Mockito package.
-// Create new instances of this class in each test.
-@GenerateMocks([GameState])
+@GenerateNiceMocks([MockSpec<GameState>(), MockSpec<Communication>()])
 void main() {
-  group('fetchAlbum', () {
-    test('returns an Album if the http call completes successfully', () {
-      //arrange
-      const message = "TestMessage";
-      var stubGameState = MockGameState();
-      _getIt.registerLazySingleton<GameState>(() => stubGameState);
+  test('sends a message', () {
+    //arrange
+    const message = "TestMessage";
+    final stubGameState = MockGameState();
+    final mockCommunication = MockCommunication();
+    _getIt.registerFactory<GameState>(() => stubGameState);
+    _getIt.registerFactory<Communication>(() => mockCommunication);
 
-      //act
-      _sut.send(message);
+    //act
+    _sut.send(message);
 
-      //assert
-      expect(1, 1);
-    });
+    //assert
+    verify(mockCommunication.sendTo(any, message));
   });
 }
