@@ -4,10 +4,10 @@ import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
 
-class AMDRemoveMinus2Command extends Command {
+class AMDRemoveNullCommand extends Command {
   bool allies;
   late bool remove;
-  AMDRemoveMinus2Command(this.allies);
+  AMDRemoveNullCommand(this.allies);
 
   @override
   void execute() {
@@ -15,11 +15,11 @@ class AMDRemoveMinus2Command extends Command {
     if (allies) {
       deck = getIt<GameState>().modifierDeckAllies;
     }
-    remove = deck.hasMinus2();
+    remove = deck.hasNull();
     if (remove) {
-      deck.removeMinusTwo();
+      deck.removeNull();
     } else {
-      deck.addMinusTwo();
+      deck.addNull();
     }
   }
 
@@ -30,9 +30,9 @@ class AMDRemoveMinus2Command extends Command {
   @override
   String describe() {
     if (remove){
-      return "Remove minus two";
+      return "Remove null";
     } else {
-      return "Add back minus two";
+      return "Add back null";
     }
   }
 }

@@ -12,6 +12,7 @@ import 'package:reorderables/reorderables.dart';
 
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/amd_remove_minus_2_command.dart';
+import '../../Resource/commands/amd_remove_null_command.dart';
 import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
 import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
@@ -250,13 +251,20 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    if (deck.hasMinus2()) {
-                                      _gameState.action(AMDRemoveMinus2Command(
-                                          name == "Allies"));
-                                    }
+                                    _gameState.action(AMDRemoveMinus2Command(
+                                        name == "Allies"));
                                   },
-                                  child: const Text(
-                                    "Remove -2 card",
+                                  child: Text(
+                                    deck.hasMinus2() ? "Remove -2 card" : "-2 card removed",
+                                  ),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    _gameState.action(AMDRemoveNullCommand(
+                                        name == "Allies"));
+                                  },
+                                  child: Text(
+                                    deck.hasNull() ? "Remove null card" : "null removed",
                                   ),
                                 ),
                                 //todo: (gray out if maxed out)

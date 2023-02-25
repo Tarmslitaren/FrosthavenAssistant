@@ -140,6 +140,38 @@ class ModifierDeck {
         discardPile.getList().firstWhereOrNull((element) => element.gfx == "minus2$suffix") != null;
   }
 
+  bool hasNull(){
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
+    return drawPile.getList().firstWhereOrNull((element) => element.gfx == "nullAttack$suffix") != null ||
+        discardPile.getList().firstWhereOrNull((element) => element.gfx == "nullAttack$suffix") != null;
+  }
+
+  void removeNull() {
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
+    shuffle();
+    var card = drawPile.getList().lastWhereOrNull((element) => element.gfx == "nullAttack$suffix");
+    if (card != null) {
+      drawPile.getList().remove(card);
+      drawPile.shuffle();
+      cardCount.value--;
+    }
+  }
+
+  void addNull() {
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
+    drawPile.getList().add(ModifierCard(CardType.multiply, "nullAttack$suffix"));
+    shuffle();
+  }
+
   void removeMinusTwo() {
     String suffix = "";
     if (name.isNotEmpty){
@@ -152,6 +184,15 @@ class ModifierDeck {
       drawPile.shuffle();
       cardCount.value--;
     }
+  }
+
+  void addMinusTwo() {
+    String suffix = "";
+    if (name.isNotEmpty){
+      suffix = "-$name";
+    }
+    drawPile.getList().add(ModifierCard(CardType.add, "minus2$suffix"));
+    shuffle();
   }
 
   void _handleCurseBless(

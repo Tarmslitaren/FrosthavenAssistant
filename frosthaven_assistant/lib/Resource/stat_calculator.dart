@@ -9,8 +9,8 @@ class StatCalculator {
       return str;
     }
     int C = GameMethods.getCurrentCharacterAmount();
-    if (C == 0) {
-      C = 1;
+    if (C < 2) {
+      C = 2;
     }
     int L = getIt<GameState>().level.value;
     String formula = str.replaceAll("C", C.toString());

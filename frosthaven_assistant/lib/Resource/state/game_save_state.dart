@@ -269,6 +269,8 @@ class GameSaveState {
 
     if (_savedState != null) {
       load();
+    } else {
+      save();
     }
   }
 

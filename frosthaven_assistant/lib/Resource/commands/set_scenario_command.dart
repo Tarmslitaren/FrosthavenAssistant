@@ -74,6 +74,8 @@ class SetScenarioCommand extends Command {
         } else {
           _gameState.lootDeck = LootDeck.from(_gameState.lootDeck);
         }
+      } else {
+        _gameState.lootDeck = LootDeck.from(_gameState.lootDeck);
       }
 
       GameMethods.clearTurnState(true);

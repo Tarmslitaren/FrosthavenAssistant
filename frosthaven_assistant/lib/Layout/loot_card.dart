@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -50,40 +51,76 @@ class LootCardWidget extends StatefulWidget {
                 image: AssetImage("assets/images/loot/${card.gfx}.png"),
               ),
             ),
-            if (value != null) Text(
-              "+$value",
-              style: TextStyle(
-                shadows: [shadow],
-                fontSize: 30 * scale,
-                color: Colors.white,
+            if (value != null)
+              Text(
+                "+$value",
+                style: TextStyle(
+                  shadows: [shadow],
+                  fontSize: 30 * scale,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            if (card.gfx.contains("1418")) Text(
-              "1418",
-              style: TextStyle(
-                shadows: [shadow],
-                fontSize: 25 * scale,
-                color: Colors.white,
+            if (card.gfx.contains("1418"))
+              Text(
+                "1418",
+                style: TextStyle(
+                  shadows: [shadow],
+                  fontSize: 25 * scale,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            if (card.gfx.contains("1419")) Text(
-              "1419",
-              style: TextStyle(
-                shadows: [shadow],
-                fontSize: 25 * scale,
-                color: Colors.white,
+            if (card.gfx.contains("1419"))
+              Text(
+                "1419",
+                style: TextStyle(
+                  shadows: [shadow],
+                  fontSize: 25 * scale,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            if (card.owner != "" ) Positioned(
-              height: 15 * scale,
-              width: 15 * scale,
-              top: 2 * scale,
-              right: 2 * scale,
-              child: Image.asset(
-                 fit: BoxFit.scaleDown,
-                  color: Colors.black,
-                  'assets/images/class-icons/${card.owner}.png'),
-            )
+            if (card.enhanced > 0)
+              Positioned(
+                  bottom: 5 * scale,
+                  child: getIt<Settings>().shimmer.value == true ? AnimatedTextKit(
+                    repeatForever: true,
+                    //pause: const Duration(milliseconds: textAnimationDelay),
+                    animatedTexts: [
+                      ColorizeAnimatedText(
+                        "Enhanced: ${card.enhanced.toString()}",
+                        speed: Duration(milliseconds: (350).ceil()),
+                        textStyle: TextStyle(
+                          fontSize: 9 * scale,
+                        ),
+                        colors: [
+                          Colors.white,
+                          Colors.white,
+                          Colors.blueGrey,
+                          Colors.white,
+                          Colors.blueGrey,
+                          Colors.white,
+                          Colors.blueGrey,
+                          Colors.white,
+                        ],
+                      ),
+                    ],
+                    // isRepeatingAnimation: true,
+                  ): Text(
+                    "Enhanced: ${card.enhanced.toString()}",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 9 * scale,
+                    )),),
+            if (card.owner != "")
+              Positioned(
+                height: 15 * scale,
+                width: 15 * scale,
+                top: 2 * scale,
+                right: 2 * scale,
+                child: Image.asset(
+                    fit: BoxFit.scaleDown,
+                    color: Colors.black,
+                    'assets/images/class-icons/${card.owner}.png'),
+              )
           ]),
     );
   }

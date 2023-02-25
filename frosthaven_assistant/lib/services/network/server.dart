@@ -62,12 +62,6 @@ class Server {
 
         //if has clients when connecting (re connect) run reset/welcome message
         String commandDescription = "";
-        if (_gameState.commandIndex.value <
-            _gameState.commandDescriptions.length &&
-            _gameState.commandIndex.value >= 0) {
-          commandDescription =
-          _gameState.commandDescriptions[_gameState.commandIndex.value];
-        }
         send(
             "Index:${_gameState.commandIndex
                 .value}Description:${commandDescription}GameState:${_gameState
