@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/set_loot_owner_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add__special_loot_card_command.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/remove__special_loot_card_command.dart';
@@ -23,14 +24,19 @@ class Item extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double wantedItemMaxWidth = 200;
     double maxScale = 3;
-    double scale = min(maxScale, screenWidth/wantedItemMaxWidth);
+    double scale = min(maxScale, screenWidth / wantedItemMaxWidth);
 
     late final Widget child;
 
     child = LootCardWidget.buildFront(data, scale);
 
     return Container(
-        margin: EdgeInsets.all(2 * scale), child: child);
+        margin: EdgeInsets.all(2 * scale),
+        child: InkWell(
+            onTap: () {
+              openDialog(context, SetLootOwnerMenu(card: data));
+            },
+            child: child));
   }
 }
 
@@ -69,16 +75,13 @@ class LootCardMenuState extends State<LootCardMenu> {
           //other styles
         ),
         child: SizedBox(
-
           child: GridView.count(
             controller: AdjustableScrollController(),
-
             childAspectRatio: 0.72,
             mainAxisSpacing: 0,
             crossAxisSpacing: 0,
             padding: EdgeInsets.zero,
-
-            crossAxisCount: max(4,(screenWidth/wantedItemMaxWidth).ceil()),
+            crossAxisCount: max(4, (screenWidth / wantedItemMaxWidth).ceil()),
             children: generateList(list).reversed.toList(),
           ),
         ));
@@ -100,115 +103,111 @@ class LootCardMenuState extends State<LootCardMenu> {
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(
                   color: Colors.transparent,
-                  child: Stack(
-                      children: [
-                        Column(mainAxisSize: MainAxisSize.max, children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                              margin: const EdgeInsets.all(2),
-                              decoration: const BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(4),
-                                      topRight: Radius.circular(4))),
-                              child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Stack(children: [
+                    Column(mainAxisSize: MainAxisSize.max, children: [
+                      Container(
+                          width: MediaQuery.of(context).size.width,
+                          margin: const EdgeInsets.all(2),
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(4),
+                                  topRight: Radius.circular(4))),
+                          child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Wrap(
                                   children: [
-                                    Wrap(
-                                      children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            openDialog(context,
-                                                const CharacterLootMenu());
-                                          },
-                                          child: const Text("Character loot"),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              if (_gameState
-                                                  .lootDeck.hasCard1418) {
-                                                _gameState.action(
-                                                    RemoveSpecialLootCardCommand(
-                                                        1418));
-                                              } else {
-                                                _gameState.action(
-                                                    AddSpecialLootCardCommand(
-                                                        1418));
-                                              }
-                                            });
-                                          },
-                                          child: Text(
-                                              _gameState.lootDeck.hasCard1418
-                                                  ? "Remove card 1418"
-                                                  : "Add card 1418"),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              if (_gameState
-                                                  .lootDeck.hasCard1419) {
-                                                _gameState.action(
-                                                    RemoveSpecialLootCardCommand(
-                                                        1419));
-                                              } else {
-                                                _gameState.action(
-                                                    AddSpecialLootCardCommand(
-                                                        1419));
-                                              }
-                                            });
-                                          },
-                                          child: Text(
-                                              _gameState.lootDeck.hasCard1419
-                                                  ? "Remove card 1419"
-                                                  : "Add card 1419"),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            openDialog(context,
-                                                const LootCardEnhancementMenu());
-                                          },
-                                          child: const Text("Enhance cards"),
-                                        ),
-                                        TextButton(
-                                          onPressed: () {
-                                            openDialog(context,
-                                                const AddLootCardMenu());
-                                          },
-                                          child: const Text("Add Card"),
-                                        ),
-                                      ],
+                                    TextButton(
+                                      onPressed: () {
+                                        openDialog(
+                                            context, const CharacterLootMenu());
+                                      },
+                                      child: const Text("Character loot"),
                                     ),
-                                  ])),
-                          Flexible(
-                            fit: FlexFit.tight,
-                              child: buildList(discardPile)),
-                          Container(
-                            // color: Colors.white,
-                            height: 32,
-                            margin: const EdgeInsets.all(2),
-                            decoration: const BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(4),
-                                    bottomRight: Radius.circular(4))),
-                          ),
-                        ]),
-                        Positioned(
-                            width: 100,
-                            height: 40,
-                            right: 0,
-                            bottom: 0,
-                            child: TextButton(
-                                child: const Text(
-                                  'Close',
-                                  style: TextStyle(fontSize: 20),
+                                    TextButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          if (_gameState.lootDeck.hasCard1418) {
+                                            _gameState.action(
+                                                RemoveSpecialLootCardCommand(
+                                                    1418));
+                                          } else {
+                                            _gameState.action(
+                                                AddSpecialLootCardCommand(
+                                                    1418));
+                                          }
+                                        });
+                                      },
+                                      child: Text(
+                                          _gameState.lootDeck.hasCard1418
+                                              ? "Remove card 1418"
+                                              : "Add card 1418"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          if (_gameState.lootDeck.hasCard1419) {
+                                            _gameState.action(
+                                                RemoveSpecialLootCardCommand(
+                                                    1419));
+                                          } else {
+                                            _gameState.action(
+                                                AddSpecialLootCardCommand(
+                                                    1419));
+                                          }
+                                        });
+                                      },
+                                      child: Text(
+                                          _gameState.lootDeck.hasCard1419
+                                              ? "Remove card 1419"
+                                              : "Add card 1419"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        openDialog(context,
+                                            const LootCardEnhancementMenu());
+                                      },
+                                      child: const Text("Enhance cards"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        openDialog(
+                                            context, const AddLootCardMenu());
+                                      },
+                                      child: const Text("Add Card"),
+                                    ),
+                                  ],
                                 ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                })),
-                      ])));
+                              ])),
+                      Flexible(
+                          fit: FlexFit.tight, child: buildList(discardPile)),
+                      Container(
+                        // color: Colors.white,
+                        height: 32,
+                        margin: const EdgeInsets.all(2),
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(4),
+                                bottomRight: Radius.circular(4))),
+                      ),
+                    ]),
+                    Positioned(
+                        width: 100,
+                        height: 40,
+                        right: 0,
+                        bottom: 0,
+                        child: TextButton(
+                            child: const Text(
+                              'Close',
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            })),
+                  ])));
         });
   }
 }
