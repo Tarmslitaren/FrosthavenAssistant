@@ -138,7 +138,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
         Positioned(
           width: 167 * scale,
             left: 2 * scale,
-            top: 3.2 * scale,
+            top: 3.5 * scale,
             child: Text(
               textAlign: TextAlign.center,
               data.type.display,
