@@ -112,9 +112,20 @@ class MonsterBoxState extends State<MonsterBox> {
       blurRadius: 1 * scale,
     );
 
+    bool ownerIsCurrent = true;
+    for (var item in getIt<GameState>().currentList) {
+      if(item.id == widget.ownerId) {
+        if (item.turnState == TurnsState.done) {
+          ownerIsCurrent = false;
+        }
+        break;
+      }
+    }
+
     return ColorFiltered(
-        //gray out if summoned this turn
-        colorFilter: (data.roundSummoned == getIt<GameState>().round.value)
+        //gray out if summoned this turn and it's still the character's/monster's turn
+        colorFilter: (data.roundSummoned == getIt<GameState>().round.value &&
+            ownerIsCurrent)
             ? ColorFilter.matrix(grayScale)
             : ColorFilter.matrix(identity),
         child: Container(
