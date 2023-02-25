@@ -14,8 +14,14 @@ class Communication {
   }
 
   String dataFrom(String message) {
-    //TODO: Validate message - RS
-    var data = message.substring(beggining.length, message.length - end.length);
+    final valid = isValid(message);
+    var data = valid
+        ? message.substring(beggining.length, message.length - end.length)
+        : "";
     return data;
+  }
+
+  bool isValid(String message) {
+    return message.startsWith(beggining) && message.endsWith(end);
   }
 }
