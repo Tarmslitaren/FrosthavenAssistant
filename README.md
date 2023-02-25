@@ -1,5 +1,7 @@
 # X-haven Assistant
 
+[![codecov](https://codecov.io/gh/wonderplayer/FrosthavenAssistant/branch/main/graph/badge.svg?token=RMRI5NZCGG)](https://codecov.io/gh/wonderplayer/FrosthavenAssistant)
+
 ## Support
 For problems and suggestions please file an issue here: https://github.com/Tarmslitaren/FrosthavenAssistant/issues
 or contact me directly at royalhasse@gmail.com
