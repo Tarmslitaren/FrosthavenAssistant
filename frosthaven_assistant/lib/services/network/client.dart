@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:frosthaven_assistant/services/network/communication.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 
 import '../../Resource/state/game_state.dart';
@@ -15,6 +16,7 @@ class Client {
   bool serveResponsive = true;
 
   final GameState _gameState = getIt<GameState>();
+  final Communication _communication = getIt<Communication>();
 
   Future<void> connect(String address) async {
 // connect to the socket server
@@ -153,9 +155,7 @@ class Client {
   }
 
   void send(String data) {
-    if (_socket != null) {
-      _socket!.write("S3nD:$data[EOM]");
-    }
+    _communication.sendTo(_socket, data);
   }
 
   void disconnect(String? message) {
