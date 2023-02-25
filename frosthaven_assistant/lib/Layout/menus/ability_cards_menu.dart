@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
+import 'package:frosthaven_assistant/Resource/commands/draw_ability_card_command.dart';
 import 'package:frosthaven_assistant/Resource/state/monster_ability_state.dart';
 import 'package:reorderables/reorderables.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
@@ -190,7 +191,11 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
 
                           //color: Colors.transparent,
 
-                          child: Column(children: [
+                          child: Column(
+                              children: [
+                                Container(
+                          width: MediaQuery.of(context).size.width,
+                          child:
                             Wrap(
                                 //alignment: WrapAlignment.start,
                                 crossAxisAlignment: WrapCrossAlignment.center,
@@ -202,32 +207,24 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                   const Text(
                                     " Reveal:",
                                   ),
-                                  drawPile.length > 0
-                                      ? buildRevealButton(drawPile.length, 1)
-                                      : Container(),
-                                  drawPile.length > 1
-                                      ? buildRevealButton(drawPile.length, 2)
-                                      : Container(),
-                                  drawPile.length > 2
-                                      ? buildRevealButton(drawPile.length, 3)
-                                      : Container(),
-                                  drawPile.length > 3
-                                      ? buildRevealButton(drawPile.length, 4)
-                                      : Container(),
-                                  drawPile.length > 4
-                                      ? buildRevealButton(drawPile.length, 5)
-                                      : Container(),
-                                  drawPile.length > 5
-                                      ? buildRevealButton(drawPile.length, 6)
-                                      : Container(),
-                                  drawPile.length > 6
-                                      ? buildRevealButton(drawPile.length, 7)
-                                      : Container(),
-                                  drawPile.length > 7
-                                      ? buildRevealButton(drawPile.length, 8)
-                                      : Container(),
-                                  Container()
-                                ]),
+                                  if(drawPile.length > 0) buildRevealButton(drawPile.length, 1),
+                                  if(drawPile.length > 1) buildRevealButton(drawPile.length, 2),
+                                  if(drawPile.length > 1) buildRevealButton(drawPile.length, 2),
+                                  if(drawPile.length > 2) buildRevealButton(drawPile.length, 3),
+                                  if(drawPile.length > 3) buildRevealButton(drawPile.length, 4),
+                                  if(drawPile.length > 4) buildRevealButton(drawPile.length, 5),
+                                  if(drawPile.length > 5) buildRevealButton(drawPile.length, 6),
+                                  if(drawPile.length > 6) buildRevealButton(drawPile.length, 7),
+                                  TextButton(
+                                    onPressed: () {
+                                      _gameState.action(DrawAbilityCardCommand(widget.monsterData.id
+                                      ));
+                                    },
+                                    child: const Text(
+                                      "Draw card",
+                                    ),
+                                  ),
+                                ])),
                           ])),
                       Flexible(
                           child: Row(
