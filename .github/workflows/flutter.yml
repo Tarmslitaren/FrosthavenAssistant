@@ -17,6 +17,9 @@ jobs:
           channel: 'stable' # or: 'beta', 'dev' or 'master'
       - run: flutter --version
       
+      - name: Go to project folder
+        run: cd frosthaven_assistant
+      
       - name: Install dependencies
         run: flutter pub get
         
