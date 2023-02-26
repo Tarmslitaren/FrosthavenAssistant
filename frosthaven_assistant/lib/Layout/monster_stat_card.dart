@@ -531,31 +531,6 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                     : "assets/images/psd/range-stat.png"),
               )),
         Positioned(
-            //bottom: 5 * scale * 0.8,
-            top: 65 * scale,
-            right: 5 * scale * 0.8,
-            child: SizedBox(
-                width: 25 * scale * 0.8 + 8,
-                height: 25 * scale * 0.8 + 8,
-                child: ValueListenableBuilder<List<MonsterInstance>>(
-                    valueListenable: data.monsterInstances,
-                    builder: (context, value, child) {
-                      return IconButton(
-                          padding: const EdgeInsets.only(left: 8, top: 8),
-                          icon: Image.asset(
-                              color: data.monsterInstances.value.length ==
-                                      data.type.count
-                                  ? Colors.white24
-                                  : Colors.grey,
-                              height: 25 * scale * 0.8,
-                              fit: BoxFit.fitHeight,
-                              colorBlendMode: BlendMode.modulate,
-                              'assets/images/psd/add.png'),
-                          onPressed: () {
-                            _handleAddPressed(data, context, false, true);
-                          });
-                    }))),
-        Positioned(
             right: 10 * scale,
             top: 1 * scale,
             child: Row(
@@ -686,7 +661,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                             colorBlendMode: BlendMode.modulate,
                             'assets/images/psd/add.png'),
                         onPressed: () {
-                          _handleAddPressed(widget.data, context, false, false);
+                          _handleAddPressed(widget.data, context, false, isBoss);
                         });
                   }))),
     ]));
