@@ -34,6 +34,7 @@ class Settings {
   final showCustomContent = ValueNotifier<bool>(true);
   final showSectionsInMainView = ValueNotifier<bool>(true);
   final showReminders = ValueNotifier<bool>(true);
+  final longPressToReorder = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -235,6 +236,10 @@ class Settings {
         showReminders.value = data["showReminders"];
       }
 
+      if (data["longPressToReorder"] != null) {
+        longPressToReorder.value = data["longPressToReorder"];
+      }
+
       if (data["connectClientOnStartup"] != null &&
           data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
@@ -287,6 +292,7 @@ class Settings {
         '"showCustomContent": ${showCustomContent.value}, '
         '"showSectionsInMainView": ${showSectionsInMainView.value}, '
         '"showReminders": ${showReminders.value}, '
+        '"longPressToReorder": ${longPressToReorder.value}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort", '

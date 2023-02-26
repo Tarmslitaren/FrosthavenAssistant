@@ -16,6 +16,7 @@ import '../../Resource/commands/amd_remove_null_command.dart';
 import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
 import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
+import '../../Resource/settings.dart';
 import '../../Resource/state/character.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/state/modifier_deck_state.dart';
@@ -150,7 +151,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           width: screenWidth * 0.3,
           child: reorderable
               ? ReorderableColumn(
-                  needsLongPressDraggable: true,
+                  needsLongPressDraggable: getIt<Settings>().longPressToReorder.value,
                   scrollController: scrollController,
                   scrollAnimationDuration: const Duration(milliseconds: 400),
                   reorderAnimationDuration: const Duration(milliseconds: 400),

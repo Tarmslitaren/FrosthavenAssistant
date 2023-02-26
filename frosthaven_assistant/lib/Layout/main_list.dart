@@ -12,7 +12,6 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import 'package:reorderables/reorderables.dart';
 import '../Resource/commands/reorder_list_command.dart';
-import '../Resource/game_methods.dart';
 import '../Resource/state/character.dart';
 import '../Resource/state/list_item_data.dart';
 import '../Resource/state/monster.dart';
@@ -446,7 +445,7 @@ class MainListState extends State<MainList> {
 
                   direction: Axis.vertical,
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
-                  needsLongPressDraggable: true,
+                  needsLongPressDraggable: getIt<Settings>().longPressToReorder.value,
                   controller: scrollController,
                   onReorder: (int oldIndex, int newIndex) {
                     setState(() {

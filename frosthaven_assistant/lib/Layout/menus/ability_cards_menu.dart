@@ -10,6 +10,7 @@ import 'package:reorderables/reorderables.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/reorder_ability_list_command.dart';
 import '../../Resource/commands/shuffle_ability_card_command.dart';
+import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/state/monster.dart';
 import '../../Resource/ui_utils.dart';
@@ -138,7 +139,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           width: screenWidth * 0.4,
           child: reorderable
               ? ReorderableColumn(
-                  needsLongPressDraggable: true,
+                  needsLongPressDraggable: getIt<Settings>().longPressToReorder.value,
                   scrollController: AdjustableScrollController(),
                   scrollAnimationDuration: const Duration(milliseconds: 400),
                   reorderAnimationDuration: const Duration(milliseconds: 400),
