@@ -34,14 +34,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     for (GraphicPositional item in positionals) {
 
       double scaleConstant =0.8 * 0.55; //this is because of the actual size of the assets
-      if(item.gfx == "air"||
-          item.gfx == "earth"||
-          item.gfx == "earthfire"||
-          item.gfx  == "ice"||
-          item.gfx  == "fire"||
-          item.gfx  == "light"||
-          item.gfx  == "dark"
-      ) {
+      if(LineBuilder.isElement(item.gfx)) {
         //because we added new graphics for these that are bigger
         scaleConstant *= 0.6;
       }
