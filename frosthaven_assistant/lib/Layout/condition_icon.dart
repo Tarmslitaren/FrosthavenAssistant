@@ -9,7 +9,6 @@ import '../Resource/enums.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/state/figure_state.dart';
 import '../Resource/state/game_state.dart';
-import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/list_item_data.dart';
 import '../Resource/ui_utils.dart';
@@ -23,8 +22,11 @@ class ConditionIcon extends StatefulWidget {
       suffix = "_fh";
     }
     String imagePath = "assets/images/abilities/${condition.name}.png";
-    if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
-      imagePath = "assets/images/abilities/${condition.name}$suffix.png";
+    if(condition.name.contains("character")) {
+      imagePath = "assets/images/class-icons/${condition.getName()}.png";
+    }
+    else if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
+      imagePath = "assets/images/abilities/${condition.getName()}$suffix.png";
     }
     gfx = imagePath;
   }
@@ -143,7 +145,7 @@ class ConditionIconState extends State<ConditionIcon> {
               child: Image(
                 height: widget.size * scale,
                 filterQuality: FilterQuality.medium,
-                image: AssetImage(widget.gfx),
+                image: AssetImage(widget.gfx), //TODO: for character add colored background
               ));
         });
   }

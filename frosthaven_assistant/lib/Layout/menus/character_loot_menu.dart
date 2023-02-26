@@ -123,11 +123,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
     final AdjustableScrollController scrollController =
         AdjustableScrollController();
 
-    List<Character> characters = GameMethods.getCurrentCharacters()
-        .whereNot((element) =>
-            element.characterClass.name == "Objective" ||
-            element.characterClass.name == "Escort")
-        .toList();
+    List<Character> characters = GameMethods.getCurrentCharacters();
 
     return Card(
         child: Scrollbar(

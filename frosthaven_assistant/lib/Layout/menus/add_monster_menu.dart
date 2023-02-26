@@ -211,10 +211,11 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                               controller: _scrollController,
                               itemCount: _foundMonsters.length,
                               itemBuilder: (context, index) => ListTile(
-                                leading: Image(
+                                leading: Image.asset(
+                                  "assets/images/monsters/${_foundMonsters[index].gfx}.png",
                                   height: 35,
-                                  image: AssetImage(
-                                      "assets/images/monsters/${_foundMonsters[index].gfx}.png"),
+                                  cacheHeight: 75,
+
                                 ),
                                 //iconColor: _foundMonsters[index].color,
                                 title: Text(

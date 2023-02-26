@@ -38,6 +38,6 @@ class RemoveConditionCommand extends Command {
 
   @override
   String describe() {
-    return "Remove ${condition.name}";
+    return "Remove condition: ${condition.getName}";
   }
 }

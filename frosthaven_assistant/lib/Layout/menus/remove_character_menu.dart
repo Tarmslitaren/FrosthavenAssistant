@@ -24,7 +24,12 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
 
   @override
   Widget build(BuildContext context) {
-    List<Character> currentCharacters = GameMethods.getCurrentCharacters();
+    List<Character> currentCharacters = [];
+    for (var data in _gameState.currentList) {
+      if (data is Character) {
+        currentCharacters.add(data);
+      }
+    }
     return Container(
         constraints: const BoxConstraints(maxWidth: 400),
         child: Card(

@@ -42,6 +42,6 @@ class AddConditionCommand extends Command {
 
   @override
   String describe() {
-    return "Add ${condition.name}";
+    return "Add condition: ${condition.getName()}";
   }
 }

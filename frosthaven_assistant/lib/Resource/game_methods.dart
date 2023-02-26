@@ -337,7 +337,7 @@ class GameMethods {
   static List<Character> getCurrentCharacters() {
     List<Character> characters = [];
     for (ListItemData data in _gameState.currentList) {
-      if (data is Character) {
+      if (data is Character && data.characterClass.name != "Escort" && data.characterClass.name != "Objective") {
         characters.add(data);
       }
     }

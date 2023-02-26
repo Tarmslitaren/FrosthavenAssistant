@@ -1,4 +1,8 @@
 
+import 'package:collection/collection.dart';
+import 'package:frosthaven_assistant/Resource/game_methods.dart';
+import 'package:frosthaven_assistant/Resource/state/character.dart';
+
 enum Condition{
   stun,
   immobilize,
@@ -20,10 +24,42 @@ enum Condition{
   invisible,
   regenerate,
   ward,
-  dodge;
+  dodge,
+
+  character1,
+  character2,
+  character3,
+  character4;
+  
+  String _getCharacterName(int index) {
+    List<Character> characters = GameMethods.getCurrentCharacters();
+    characters.sortBy((element) => element.characterClass.name);
+    if(characters.length > index) {
+      return characters[index].characterClass.name;
+    }
+    return "Escort"; //some basic
+  }
+
+  String getName() {
+    //get current characters, sort by name and add to this
+    if(this == Condition.character1) {
+      return _getCharacterName(0);
+    }
+    else if(this == Condition.character2) {
+      return _getCharacterName(1);
+    }
+    else if(this == Condition.character3) {
+      return _getCharacterName(2);
+    }
+    else if(this == Condition.character4) {
+      return _getCharacterName(3);
+    }
+    return name;
+  }
 
   @override
   String toString() {
+
     return index.toString();
   }
 

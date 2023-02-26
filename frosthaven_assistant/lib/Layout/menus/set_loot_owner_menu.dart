@@ -60,11 +60,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
 
   @override
   Widget build(BuildContext context) {
-    List<Character> characters = GameMethods.getCurrentCharacters()
-        .whereNot((element) =>
-            element.characterClass.name == "Objective" ||
-            element.characterClass.name == "Escort")
-        .toList();
+    List<Character> characters = GameMethods.getCurrentCharacters();
     return Container(
         width: 300,
         height: 280,

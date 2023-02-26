@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -25,6 +26,7 @@ class LootCardWidget extends StatefulWidget {
       blurRadius: 1 * scale,
     );
     int? value = card.getValue();
+
     return Container(
       width: 39 * scale,
       height: 58.6666 * scale,
@@ -46,9 +48,12 @@ class LootCardWidget extends StatefulWidget {
             ClipRRect(
               clipBehavior: Clip.hardEdge,
               borderRadius: BorderRadius.circular(4.0 * scale),
-              child: Image(
+              child: Image.asset(
+                "assets/images/loot/${card.gfx}.png",
+                filterQuality: FilterQuality.medium,
+                //cacheWidth: Platform.isIOS || Platform.isAndroid ? 250 : 250,
                 fit: BoxFit.cover,
-                image: AssetImage("assets/images/loot/${card.gfx}.png"),
+                //image: AssetImage("assets/images/loot/${card.gfx}.png"),
               ),
             ),
             if (value != null)

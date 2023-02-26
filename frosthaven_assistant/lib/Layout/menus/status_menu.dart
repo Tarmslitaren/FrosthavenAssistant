@@ -250,8 +250,11 @@ class StatusMenuState extends State<StatusMenu> {
       suffix = "_fh";
     }
     String imagePath = "assets/images/abilities/${condition.name}.png";
-    if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
-      imagePath = "assets/images/abilities/${condition.name}$suffix.png";
+    if(condition.name.contains("character")) {
+      imagePath = "assets/images/class-icons/${condition.getName()}.png";
+    }
+    else if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
+      imagePath = "assets/images/abilities/${condition.getName()}$suffix.png";
     }
     for (var item in immunities) {
       if (condition.name.contains(item.substring(1, item.length - 1))) {
@@ -435,6 +438,8 @@ class StatusMenuState extends State<StatusMenu> {
         scale = 2;
       }
     }
+
+    int nrOfCharacters = GameMethods.getCurrentCharacterAmount();
 
     return Container(
         width: 340 * scale,
@@ -762,7 +767,16 @@ class StatusMenuState extends State<StatusMenu> {
                 if (monster != null)
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [buildSummonButton(figureId, ownerId, scale)],
+                    children: [
+                      if(nrOfCharacters > 0) buildConditionButton(Condition.character1, figureId, ownerId,
+                          immunities, scale),
+                      if(nrOfCharacters > 1) buildConditionButton(Condition.character2, figureId, ownerId,
+                          immunities, scale),
+                      if(nrOfCharacters > 2) buildConditionButton(Condition.character3, figureId, ownerId,
+                          immunities, scale),
+                      if(nrOfCharacters > 3) buildConditionButton(Condition.character4, figureId, ownerId,
+                          immunities, scale),
+                      buildSummonButton(figureId, ownerId, scale)],
                   ),
               ],
             ),
