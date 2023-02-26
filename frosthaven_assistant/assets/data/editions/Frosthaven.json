@@ -5841,7 +5841,7 @@
         },
         {
           "level": 2,
-          "health": "Cx25",
+          "health": "Cx18",
           "move": 3,
           "attack": 7,
           "attributes": [ "%target% 2" ],
@@ -5891,7 +5891,7 @@
         },
         {
           "level": 7,
-          "health": "Cx46",
+          "health": "Cx48",
           "move": 4,
           "attack": 12,
           "attributes": [ "%target% 2" ],
