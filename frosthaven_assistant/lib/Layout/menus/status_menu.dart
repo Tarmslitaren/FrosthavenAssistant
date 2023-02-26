@@ -250,10 +250,9 @@ class StatusMenuState extends State<StatusMenu> {
       suffix = "_fh";
     }
     String imagePath = "assets/images/abilities/${condition.name}.png";
-    if(condition.name.contains("character")) {
+    if (condition.name.contains("character")) {
       imagePath = "assets/images/class-icons/${condition.getName()}.png";
-    }
-    else if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
+    } else if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
       imagePath = "assets/images/abilities/${condition.getName()}$suffix.png";
     }
     for (var item in immunities) {
@@ -293,6 +292,18 @@ class StatusMenuState extends State<StatusMenu> {
                 getIt<Settings>().darkMode.value ? Colors.white : Colors.black;
           }
 
+          bool isCharacter = condition.name.contains("character");
+          Color classColor = Colors.transparent;
+          if (isCharacter) {
+            var characters = GameMethods.getCurrentCharacters();
+            classColor = characters
+                .where((element) =>
+                    element.characterClass.name == condition.getName())
+                .first
+                .characterClass
+                .color;
+          }
+
           return Container(
               width: 42 * scale,
               height: 42 * scale,
@@ -307,13 +318,33 @@ class StatusMenuState extends State<StatusMenu> {
                 //iconSize: 24,
                 icon: enabled
                     ? isActive
-                        ? ConditionIcon(condition, 24 * scale, owner!, figure, scale: scale,)
-                        : Image.asset(
-                            filterQuality: FilterQuality.medium,
-                            //needed because of the edges
-                            height: 24 * scale,
-                            width: 24 * scale,
-                            imagePath)
+                        ? ConditionIcon(
+                            condition,
+                            24 * scale,
+                            owner!,
+                            figure,
+                            scale: scale,
+                          )
+                        : isCharacter
+                            ? Stack(alignment: Alignment.center, children: [
+                                Image(
+                                    color: classColor,
+                                    colorBlendMode: BlendMode.modulate,
+                                    height: 24 * scale,
+                                    filterQuality: FilterQuality.medium,
+                                    image: const AssetImage(
+                                        "assets/images/psd/class-token-bg.png")),
+                                Image(
+                                    height: 24 * scale * 0.45,
+                                    filterQuality: FilterQuality.medium,
+                                    image: AssetImage(imagePath)),
+                              ])
+                            : Image.asset(
+                                filterQuality: FilterQuality.medium,
+                                //needed because of the edges
+                                height: 24 * scale,
+                                width: 24 * scale,
+                                imagePath)
                     : Stack(
                         alignment: Alignment.center,
                         children: [
@@ -471,14 +502,14 @@ class StatusMenuState extends State<StatusMenu> {
                           valueListenable: getIt<GameState>().updateList,
                           builder: (context, value, child) {
                             return Container(
-                              height: 28 * scale,
-                              margin: EdgeInsets.only(top: 2 * scale),
+                                height: 28 * scale,
+                                margin: EdgeInsets.only(top: 2 * scale),
                                 child: MonsterBox(
-                                figureId: figureId,
-                                ownerId: ownerId,
-                                displayStartAnimation: "",
-                                blockInput: true,
-                                scale: scale * 0.9));
+                                    figureId: figureId,
+                                    ownerId: ownerId,
+                                    displayStartAnimation: "",
+                                    blockInput: true,
+                                    scale: scale * 0.9));
                           }),
                     if (isIceWraith)
                       TextButton(
@@ -768,15 +799,20 @@ class StatusMenuState extends State<StatusMenu> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      if(nrOfCharacters > 0) buildConditionButton(Condition.character1, figureId, ownerId,
-                          immunities, scale),
-                      if(nrOfCharacters > 1) buildConditionButton(Condition.character2, figureId, ownerId,
-                          immunities, scale),
-                      if(nrOfCharacters > 2) buildConditionButton(Condition.character3, figureId, ownerId,
-                          immunities, scale),
-                      if(nrOfCharacters > 3) buildConditionButton(Condition.character4, figureId, ownerId,
-                          immunities, scale),
-                      buildSummonButton(figureId, ownerId, scale)],
+                      if (nrOfCharacters > 0)
+                        buildConditionButton(Condition.character1, figureId,
+                            ownerId, immunities, scale),
+                      if (nrOfCharacters > 1)
+                        buildConditionButton(Condition.character2, figureId,
+                            ownerId, immunities, scale),
+                      if (nrOfCharacters > 2)
+                        buildConditionButton(Condition.character3, figureId,
+                            ownerId, immunities, scale),
+                      if (nrOfCharacters > 3)
+                        buildConditionButton(Condition.character4, figureId,
+                            ownerId, immunities, scale),
+                      buildSummonButton(figureId, ownerId, scale)
+                    ],
                   ),
               ],
             ),

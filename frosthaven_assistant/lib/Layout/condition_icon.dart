@@ -137,12 +137,35 @@ class ConditionIconState extends State<ConditionIcon> {
     return ValueListenableBuilder<bool>(
         valueListenable: animate,
         builder: (context, value, child) {
+          bool isCharacter = widget.condition.name.contains("character");
+          Color classColor = Colors.transparent;
+          if (isCharacter) {
+            var characters = GameMethods.getCurrentCharacters();
+            classColor = characters.where((element) => element.characterClass.name == widget.condition.getName()).first.characterClass.color;
+          }
           return ShakeAnimatedWidget(
               duration: const Duration(milliseconds: 333),
               enabled: animate.value,
               alignment: Alignment.center,
               shakeAngle: Rotation.deg(x: 0, y: 0, z: 30),
-              child: Image(
+              child: isCharacter?
+                  Stack(
+                    alignment: Alignment.center,
+                      children: [
+                    Image(
+                      color: classColor,
+                        colorBlendMode: BlendMode.modulate,
+                        height: widget.size * scale,
+                        filterQuality: FilterQuality.medium,
+                        image: const AssetImage("assets/images/psd/class-token-bg.png")),
+                  Image(
+
+                  height: widget.size * scale * 0.45,
+                    filterQuality: FilterQuality.medium,
+                    image: AssetImage(widget.gfx)),
+                    ])
+                  :
+              Image(
                 height: widget.size * scale,
                 filterQuality: FilterQuality.medium,
                 image: AssetImage(widget.gfx), //TODO: for character add colored background
