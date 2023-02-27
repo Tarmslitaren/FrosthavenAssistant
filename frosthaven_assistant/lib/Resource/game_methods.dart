@@ -234,10 +234,13 @@ class GameMethods {
   static void sortItemToPlace(String id, int initiative) {
     var newList = _gameState.currentList.toList();
     ListItemData? item;
+    int currentTurnItemIndex = 0;
     for (int i = 0; i < newList.length; i++) {
+      if(newList[i].turnState == TurnsState.current) {
+        currentTurnItemIndex = i;
+      }
       if(newList[i].id == id) {
         item = newList.removeAt(i);
-        break;
       }
     }
     if (item == null) {
@@ -249,9 +252,16 @@ class GameMethods {
       ListItemData currentItem = newList[i];
       int currentItemInitiative = getInitiative(currentItem);
       if(currentItemInitiative > initiative && currentItemInitiative > init) {
-        newList.insert(i, item);
-        _gameState.currentList = newList;
-        return;
+        if(i > currentTurnItemIndex) {
+          newList.insert(i, item);
+          _gameState.currentList = newList;
+          return;
+        } else {
+          //in case initiative is earlier than current turn, place just after current turn item
+          newList.insert(currentTurnItemIndex+1, item);
+          _gameState.currentList = newList;
+          return;
+        }
       }
       init = currentItemInitiative; //this check is for the case user has moved items around the order may be off
     }
