@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:format/format.dart';
 
@@ -27,6 +29,9 @@ class Communication {
   }
 
   void add(Socket socket) {
+    // TODO RS: add deduplication by ip address and port
+    socket.setOption(SocketOption.tcpNoDelay, true);
+    socket.encoding = utf8;
     _sockets.add(socket);
   }
 
@@ -35,6 +40,25 @@ class Communication {
     for (var socket in _sockets) {
       socket.write(message);
     }
+  }
+
+  void disconnect() {
+    while (_sockets.isNotEmpty) {
+      var socket = _sockets.first;
+      socket.destroy();
+      _sockets.remove(socket);
+    }
+  }
+
+  void listen(
+      Function(Uint8List) onData, Function? onError, Function()? onDone) {
+    for (var socket in _sockets) {
+      socket.listen(onData, onError: onError, onDone: onDone);
+    }
+  }
+
+  bool connected() {
+    return _sockets.isNotEmpty;
   }
 
   String _composeMessageFrom(String data) {

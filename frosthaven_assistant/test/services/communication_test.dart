@@ -9,7 +9,7 @@ import 'communication_test.mocks.dart';
 final _sut = Communication();
 final _socket = MockSocket();
 
-@GenerateMocks([Socket])
+@GenerateNiceMocks([MockSpec<Socket>()])
 void main() {
   test('message is formatted in template', () {
     // arrange
@@ -56,26 +56,47 @@ void main() {
     // assert
     result.shouldBeFalse();
   });
+  group('sockets', () {
+    test('send message to all sockets', () {
+      // arrange
+      const receiverCount = 3;
+      const data = 'Data';
+      final message = createValidMessage(data: data);
+      final sockets = <Socket>[];
+      for (var i = 0; i < receiverCount; i++) {
+        var socket = MockSocket();
+        sockets.add(socket);
+        _sut.add(socket);
+      }
 
-  test('send message to all sockets', () {
-    // arrange
-    const receiverCount = 3;
-    const data = 'Data';
-    final message = createValidMessage(data: data);
-    final sockets = <Socket>[];
-    for (var i = 0; i < receiverCount; i++) {
-      var socket = MockSocket();
-      sockets.add(socket);
-      _sut.add(socket);
-    }
+      // act
+      _sut.sendToAll(data);
 
-    // act
-    _sut.sendToAll(data);
+      // assert
+      for (var socket in sockets) {
+        verify(socket.write(message));
+      }
+    });
 
-    // assert
-    for (var socket in sockets) {
-      verify(socket.write(message));
-    }
+    test('removes all sockets', () {
+      // arrange
+      const receiverCount = 3;
+      final sockets = <Socket>[];
+      for (var i = 0; i < receiverCount; i++) {
+        var socket = MockSocket();
+        sockets.add(socket);
+        _sut.add(socket);
+      }
+
+      // act
+      _sut.disconnect();
+
+      // assert
+      for (var socket in sockets) {
+        verify(socket.destroy());
+      }
+      _sut.connected().shouldBeFalse();
+    });
   });
 }
 
