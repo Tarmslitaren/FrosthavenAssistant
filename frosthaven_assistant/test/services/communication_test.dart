@@ -6,7 +6,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'communication_test.mocks.dart';
 
-Communication _sut = Communication();
+final _sut = Communication();
+final _socket = MockSocket();
 
 @GenerateMocks([Socket])
 void main() {
@@ -14,13 +15,12 @@ void main() {
     // arrange
     const message = "TestMessage";
     final expectedMessage = createValidMessage(data: message);
-    var socket = MockSocket();
 
     // act
-    _sut.sendTo(socket, message);
+    _sut.sendTo(_socket, message);
 
     // assert
-    verify(socket.write(expectedMessage));
+    verify(_socket.write(expectedMessage));
   });
 
   test('data is extracted from message', () {
@@ -55,6 +55,27 @@ void main() {
 
     // assert
     result.shouldBeFalse();
+  });
+
+  test('send message to all sockets', () {
+    // arrange
+    const receiverCount = 3;
+    const data = 'Data';
+    final message = createValidMessage(data: data);
+    final sockets = <Socket>[];
+    for (var i = 0; i < receiverCount; i++) {
+      var socket = MockSocket();
+      sockets.add(socket);
+      _sut.add(socket);
+    }
+
+    // act
+    _sut.sendToAll(data);
+
+    // assert
+    for (var socket in sockets) {
+      verify(socket.write(message));
+    }
   });
 }
 
