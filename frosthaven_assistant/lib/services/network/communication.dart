@@ -6,10 +6,11 @@ class Communication {
   static const beggining = "S3nD:";
   static const end = "[EOM]";
   final messageTemplate = "$beggining{}$end";
+  final _sockets = <Socket>[];
 
-  void sendTo(Socket? socket, String message) {
+  void sendTo(Socket? socket, String data) {
     if (socket != null) {
-      socket.write(messageTemplate.format(message));
+      socket.write(_composeMessageFrom(data));
     }
   }
 
@@ -23,5 +24,20 @@ class Communication {
 
   bool isValid(String message) {
     return message.startsWith(beggining) && message.endsWith(end);
+  }
+
+  void add(Socket socket) {
+    _sockets.add(socket);
+  }
+
+  void sendToAll(String data) {
+    final message = _composeMessageFrom(data);
+    for (var socket in _sockets) {
+      socket.write(message);
+    }
+  }
+
+  String _composeMessageFrom(String data) {
+    return messageTemplate.format(data);
   }
 }
