@@ -13,7 +13,7 @@ final _getIt = GetIt.instance;
 
 @GenerateNiceMocks([MockSpec<GameState>(), MockSpec<Communication>()])
 void main() {
-  test('sends a message', () {
+  test('does not send a message without active connections', () {
     //arrange
     const message = "TestMessage";
     final stubGameState = MockGameState();
@@ -25,6 +25,6 @@ void main() {
     _sut.send(message);
 
     //assert
-    verify(mockCommunication.sendTo(any, message));
+    verifyNever(mockCommunication.sendTo(any, message));
   });
 }
