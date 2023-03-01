@@ -81,7 +81,7 @@ class Client {
     if (serveResponsive != false) {
       getIt<Network>().networkMessage.value = "Lost connection to server";
     }
-    _communication.disconnect();
+    _communication.disconnectAll();
     _cleanup();
   }
 
@@ -159,7 +159,7 @@ class Client {
     if (_communication.connected()) {
       print(message);
       getIt<Network>().networkMessage.value = message;
-      _communication.disconnect();
+      _communication.disconnectAll();
       getIt<Settings>().connectClientOnStartup = false;
       getIt<Settings>().saveToDisk();
       _cleanup();

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:collection/collection.dart';
 import 'package:format/format.dart';
 
 class Communication {
@@ -29,7 +30,12 @@ class Communication {
   }
 
   void add(Socket socket) {
-    // TODO RS: add deduplication by ip address and port
+    // final existingConnections = _sockets.where((x) =>
+    //     x.remoteAddress == socket.remoteAddress && x.port == socket.port);
+    // for (var connection in existingConnections) {
+    //   connection.destroy();
+    //   _sockets.remove(connection);
+    // }
     socket.setOption(SocketOption.tcpNoDelay, true);
     socket.encoding = utf8;
     _sockets.add(socket);
@@ -42,11 +48,25 @@ class Communication {
     }
   }
 
-  void disconnect() {
+  void disconnectAll() {
     while (_sockets.isNotEmpty) {
       var socket = _sockets.first;
       socket.destroy();
       _sockets.remove(socket);
+    }
+  }
+
+  void disconnect(Socket socket) {
+    var toDisconnect = _sockets
+        .where((x) =>
+            x.remoteAddress == socket.remoteAddress && x.port == socket.port)
+        .firstOrNull;
+    if (toDisconnect != null) {
+      toDisconnect.destroy();
+      _sockets.remove(toDisconnect);
+    } else {
+      print('Could not find socket from connected list: [{}]'
+          .format(_sockets.join('; ')));
     }
   }
 
@@ -63,5 +83,13 @@ class Communication {
 
   String _composeMessageFrom(String data) {
     return messageTemplate.format(data);
+  }
+
+  void sendToAllExcept(Socket client, String data) {
+    final recipients = _sockets.where((x) =>
+        x.remoteAddress != client.remoteAddress && x.port != client.port);
+    for (var socket in recipients) {
+      sendTo(socket, data);
+    }
   }
 }

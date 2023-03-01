@@ -89,7 +89,7 @@ void main() {
       }
 
       // act
-      _sut.disconnect();
+      _sut.disconnectAll();
 
       // assert
       for (var socket in sockets) {
