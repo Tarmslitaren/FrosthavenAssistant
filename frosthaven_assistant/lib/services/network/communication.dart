@@ -97,7 +97,7 @@ class Communication {
   // Check if socet was remotely closed, thus address and port are unaccessable
   bool _isClosed(Socket socket) {
     try {
-      final _ = socket.address;
+      final _ = socket.remoteAddress;
       final port = socket.port;
       return false;
     } on SocketException catch (_) {
