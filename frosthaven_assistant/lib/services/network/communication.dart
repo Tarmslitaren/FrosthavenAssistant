@@ -59,6 +59,7 @@ class Communication {
   void disconnect(Socket socket) {
     var toDisconnect = _sockets
         .where((x) =>
+            _isClosed(socket) ||
             x.remoteAddress == socket.remoteAddress && x.port == socket.port)
         .firstOrNull;
     if (toDisconnect != null) {
@@ -90,6 +91,22 @@ class Communication {
         x.remoteAddress != client.remoteAddress && x.port != client.port);
     for (var socket in recipients) {
       sendTo(socket, data);
+    }
+  }
+
+  // Check if socet was remotely closed, thus address and port are unaccessable
+  bool _isClosed(Socket socket) {
+    try {
+      final _ = socket.address;
+      final port = socket.port;
+      return false;
+    } on SocketException catch (_) {
+      return true;
+    } catch (e) {
+      // Close the socket, as something is completely wrong with it
+      print('Unexpected exception in determining socket closure: \'{}\''
+          .format(e.toString()));
+      return true;
     }
   }
 }
