@@ -1,10 +1,15 @@
+//import 'dart:collection';
 import 'dart:collection';
 import 'dart:core';
 
+import 'package:collection/collection.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
+import 'package:frosthaven_assistant/Model/room.dart';
 import 'package:frosthaven_assistant/Model/scenario.dart';
+
+import '../Resource/game_methods.dart';
 
 
 class CampaignModel {
@@ -15,7 +20,7 @@ class CampaignModel {
   final List<CharacterClass> characters;
   final Map< String, ScenarioModel> scenarios;
 
-  factory CampaignModel.fromJson(Map<String, dynamic> data) {
+  factory CampaignModel.fromJson(Map<String, dynamic> data, List<RoomsModel> roomsData) {
     // note the explicit cast to String
     // this is required if robust lint rules are enabled
     final edition = data['edition'] as String;
@@ -40,7 +45,10 @@ class CampaignModel {
     Map<String, ScenarioModel> scenarioMap = HashMap();
     final scenarios = data['scenarios'] as Map<dynamic, dynamic>;
     for (String key in scenarios.keys){
-      scenarioMap[key] = ScenarioModel.fromJson(scenarios[key]);
+      //find right room if exists
+
+      RoomsModel? rooms = roomsData.firstWhereOrNull((element) => element.scenarioName == GameMethods.findNrFromScenarioName(key).toString());
+      scenarioMap[key] = ScenarioModel.fromJson(key, scenarios[key], rooms);
     }
 
     return CampaignModel(edition: edition, monsterAbilities: deckDataList, monsters: monsterMap, characters: characterDataList, scenarios: scenarioMap);

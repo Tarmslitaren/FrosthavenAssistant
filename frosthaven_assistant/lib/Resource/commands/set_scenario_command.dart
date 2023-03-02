@@ -1,8 +1,5 @@
-
-import 'dart:math';
-
-import 'package:collection/collection.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
+import 'package:frosthaven_assistant/Model/room.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/Resource/state/monster_ability_state.dart';
 
@@ -17,6 +14,7 @@ import '../state/character.dart';
 import '../state/game_state.dart';
 import '../state/list_item_data.dart';
 import '../state/loot_deck_state.dart';
+import '../state/monster.dart';
 import '../state/monster_instance.dart';
 
 class SetScenarioCommand extends Command {
@@ -64,7 +62,6 @@ class SetScenarioCommand extends Command {
       _gameState.modifierDeckAllies.initDeck("Allies");
       _gameState.currentList = newList;
 
-
       //loot deck init
       if (_scenario != "custom") {
         LootDeckModel? lootDeckModel = _gameState.modelData.value[_gameState
@@ -85,14 +82,17 @@ class SetScenarioCommand extends Command {
 
     List<String> monsters = [];
     List<SpecialRule> specialRules = [];
+    List<RoomMonsterData> roomMonsterData = [];
+
     String initMessage = "";
     if (section) {
       var sectionData = _gameState.modelData.value[_gameState
-          .currentCampaign.value]?.scenarios[_gameState.scenario.value]?.sections[_scenario];
+          .currentCampaign.value]?.scenarios[_gameState.scenario.value]?.sections.firstWhere((element) => element.name == _scenario);
       if(sectionData != null) {
         monsters = sectionData.monsters;
         specialRules = sectionData.specialRules.toList();
         initMessage = sectionData.initMessage;
+        roomMonsterData = sectionData.monsterStandees != null ? sectionData.monsterStandees! : [];
       }
     }else{
       if(_scenario != "custom") {
@@ -102,6 +102,7 @@ class SetScenarioCommand extends Command {
           monsters = scenarioData.monsters;
           specialRules = scenarioData.specialRules.toList();
           initMessage = scenarioData.initMessage;
+          roomMonsterData = scenarioData.monsterStandees != null ? scenarioData.monsterStandees! : [];
         }
       }
     }
@@ -213,6 +214,56 @@ class SetScenarioCommand extends Command {
       }
     }
 
+    int characterIndex = GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
+    //handle room data
+    if(getIt<Settings>().randomStandees.value == true) {
+      if (initMessage.isNotEmpty) {
+        initMessage += "\n";
+      }
+      for (var roomMonsterData in roomMonsterData) {
+        Monster data = _gameState.currentList.firstWhere((element) => element.id == roomMonsterData.name) as Monster;
+        int eliteAmount = roomMonsterData.elite[characterIndex];
+        int normalAmount = roomMonsterData.normal[characterIndex];
+        //TODO: handle bosses?!
+        initMessage += "\n${data.id} added: "; //todo: don't newline first type
+
+        if(eliteAmount > 0) {
+          initMessage += "\nElite standee nr: ";
+        }
+
+        for (int i = 0; i < eliteAmount; i++) {
+          int randomNr = GameMethods.getRandomStandee(data);
+          if (randomNr != 0) {
+            initMessage += "$randomNr, ";
+            if (i == normalAmount-1) {
+              initMessage = initMessage.substring(0, initMessage.length-2);
+            }
+            GameMethods.addStandee( //todo: nope: this runs a command...
+                randomNr, data, MonsterType.elite, false);
+          }
+        }
+
+        if(normalAmount > 0) {
+          initMessage += "\nNormal standee nr: ";
+        }
+        for (int i = 0; i < normalAmount; i++) {
+          int randomNr = GameMethods.getRandomStandee(data);
+          if (randomNr != 0) {
+            initMessage += "$randomNr, ";
+            if (i == normalAmount-1) {
+              initMessage = initMessage.substring(0, initMessage.length-2);
+            }
+            GameMethods.addStandee(
+                randomNr, data, MonsterType.normal, false);
+          }
+        }
+
+        //Todo: add note that the monsters have been added
+      }
+    } else {
+      //todo: open menu
+    }
+
     if (!section) {
       _gameState.scenarioSpecialRules = specialRules;
       GameMethods.updateElements();
@@ -234,7 +285,7 @@ class SetScenarioCommand extends Command {
 
     //show init message if exists:
     if(initMessage.isNotEmpty && getIt<Settings>().showReminders.value == true) {
-      _gameState.toastMessage.value = initMessage;
+      _gameState.toastMessage.value += initMessage;
     }
   }
 

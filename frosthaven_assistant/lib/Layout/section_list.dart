@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/section_button.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import '../Model/scenario.dart';
 import '../Resource/settings.dart';
-import '../Resource/state/monster_instance.dart';
 import '../services/service_locator.dart';
 
 class SectionList extends StatefulWidget {
@@ -13,19 +13,18 @@ class SectionList extends StatefulWidget {
 }
 
 class SectionListState extends State<SectionList> {
-  late List<MonsterInstance> lastList = [];
 
   @override
   void initState() {
     super.initState();
   }
 
-  List<Widget> generateList(List<String> inputList) {
+  List<Widget> generateList(List<ScenarioModel> inputList) {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
       var item = inputList[index];
       SectionButton value =
-          SectionButton(key: Key(item), data: item);
+          SectionButton(key: Key(item.name), data: item.name);
       list.add(value);
     }
     return list;
@@ -43,7 +42,7 @@ class SectionListState extends State<SectionList> {
         valueListenable: getIt<GameState>().commandIndex,
         builder: (context, value, child) {
           var list = gameState.modelData.value[gameState.currentCampaign.value]
-              ?.scenarios[gameState.scenario.value]?.sections.keys
+              ?.scenarios[gameState.scenario.value]?.sections
               .toList();
           if(list != null && gameState.scenarioSectionsAdded.length == list.length) {
             list = [];

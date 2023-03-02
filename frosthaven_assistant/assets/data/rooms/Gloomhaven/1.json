@@ -1,0 +1,76 @@
+{
+  "sections": [
+    {
+      "L1a": {
+        "Bandit Guard": {
+          "normal": [
+            2,
+            6,
+            4
+          ],
+          "elite": [
+            1,
+            0,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "G1b": {
+        "Bandit Archer": {
+          "normal": [
+            0,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Bandit Guard": {
+          "normal": [
+            2,
+            0,
+            2
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "I1b": {
+        "Bandit Archer": {
+          "normal": [
+            2,
+            1,
+            4
+          ],
+          "elite": [
+            0,
+            1,
+            0
+          ]
+        },
+        "Living Bones": {
+          "normal": [
+            2,
+            1,
+            4
+          ],
+          "elite": [
+            0,
+            1,
+            0
+          ]
+        }
+      }
+    }
+  ]
+}

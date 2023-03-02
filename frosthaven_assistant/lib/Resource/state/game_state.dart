@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
 
 import '../../Model/campaign.dart';
+import '../../Model/room.dart';
 import '../../Model/scenario.dart';
 import '../action_handler.dart';
 import '../enums.dart';
@@ -54,21 +55,43 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
     final Map<String, dynamic> editionData = await json.decode(editions);
     for (String item in editionData["editions"]) {
       this.editions.add(item);
-      await fetchCampaignData(item, map);
-    }
 
-    //TODO:specify campaigns in data, or scrub the directory for files
+
+      //todo await fetchRoomData (decision: one file per scenario, or one file per campaign?)
+
+
+      List<RoomsModel> roomData = [];
+      await fetchRoomData(item,"1").then((value) {if (value != null) roomData.add(value);});
+
+      await fetchCampaignData(item, map, roomData);
+    }
 
     load(); //load saved state from file.
 
     modelData.value = map;
   }
 
-  fetchCampaignData(String campaign, Map<String, CampaignModel> map) async {
+  Future<RoomsModel?> fetchRoomData(String campaign, String scenarioName) async {
+    //todo: find all files and run them (make a library file for each edition to parse?)
+    try {
+      final String response = await rootBundle.loadString(
+          'assets/data/rooms/$campaign/$scenarioName.json');
+      final data = await json.decode(response);
+        return RoomsModel.fromJson(
+            data, scenarioName); //wrong, need a list of rooms per scenario
+
+    } catch (error){
+      print(error.toString());
+      return null;
+    }
+  }
+
+
+  fetchCampaignData(String campaign, Map<String, CampaignModel> map, List<RoomsModel> roomsData) async {
     rootBundle.evict('assets/data/editions/$campaign.json');
     final String response = await rootBundle.loadString('assets/data/editions/$campaign.json', cache: false);
     final data = await json.decode(response);
-    map[campaign] = CampaignModel.fromJson(data);
+    map[campaign] = CampaignModel.fromJson(data, roomsData);
   }
 
   List<String> editions = [];

@@ -59,21 +59,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
           false);
     } else if (data.monsterInstances.value.length < data.type.count - 1) {
       if (settings.randomStandees.value == true) {
-        int nrOfStandees = data.type.count;
-        List<int> available = [];
-        for (int i = 0; i < nrOfStandees; i++) {
-          bool isAvailable = true;
-          for (var item in data.monsterInstances.value) {
-            if (item.standeeNr == i + 1) {
-              isAvailable = false;
-              break;
-            }
-          }
-          if (isAvailable) {
-            available.add(i + 1);
-          }
-        }
-        int standeeNr = available[Random().nextInt(available.length)];
+        int standeeNr = GameMethods.getRandomStandee(data);
         getIt<GameState>().action(AddStandeeCommand(
             standeeNr,
             null,

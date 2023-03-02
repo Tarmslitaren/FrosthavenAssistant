@@ -394,6 +394,29 @@ class GameMethods {
     }
   }
 
+  static int getRandomStandee(Monster data) {
+    int nrOfStandees = data.type.count;
+    List<int> available = [];
+    for (int i = 0; i < nrOfStandees; i++) {
+      bool isAvailable = true;
+      for (var item in data.monsterInstances.value) {
+        if (item.standeeNr == i + 1) {
+          isAvailable = false;
+          break;
+        }
+      }
+      if (isAvailable) {
+        available.add(i + 1);
+      }
+    }
+
+    //in case we run out of standees...
+    if (available.isEmpty) {
+      return 0;
+    }
+    return available[Random().nextInt(available.length)];
+  }
+
   static void addStandee(int? nr, Monster data, MonsterType type, bool addAsSummon) {
     if (nr != null) {
       _gameState.action(AddStandeeCommand(nr, null, data.id, type, addAsSummon));
@@ -717,5 +740,18 @@ class GameMethods {
         }
       }
     }
+  }
+
+  static int? findNrFromScenarioName(String scenario) {
+    String nr = scenario.substring(1);
+    for (int i = 0; i < nr.length; i++) {
+      if (nr[i] == ' ' || nr[i] == ".") {
+        nr = nr.substring(0, i);
+        int? number = int.tryParse(nr);
+        return number;
+      }
+    }
+
+    return null;
   }
 }
