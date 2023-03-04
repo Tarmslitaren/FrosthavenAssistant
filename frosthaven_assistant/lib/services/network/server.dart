@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import '../service_locator.dart';
 
+import 'communication.dart';
 import 'network.dart';
 import 'dart:convert' show utf8;
 
@@ -15,8 +16,7 @@ class Server {
   final int serverVersion = 170;
 
   final GameState _gameState = getIt<GameState>();
-
-  final List<Socket> _clients = [];
+  final _communication = getIt<Communication>();
 
   // bind the socket server to an address and port
   ServerSocket? _serverSocket;
@@ -43,72 +43,62 @@ class Server {
           connectTo; //if not on wifi show local ip
     }
     try {
-    await ServerSocket.bind(connectTo,
-        int.parse(getIt<Settings>().lastKnownPort))
-        .then((ServerSocket serverSocket) {
-      runZoned(() {
-        _serverSocket = serverSocket;
+      await ServerSocket.bind(
+              connectTo, int.parse(getIt<Settings>().lastKnownPort))
+          .then((ServerSocket serverSocket) {
+        runZoned(() {
+          _serverSocket = serverSocket;
 
-        getIt<Settings>().server.value = true;
-        String info = 'Server Online: IP: ${_serverSocket!.address
-            .address}, Port: ${_serverSocket!.port.toString()}';
-        print(info);
-        getIt<Network>().networkMessage.value = info;
-        _gameState.commandIndex.value = -1;
-        _gameState.commands.clear();
-        _gameState.commandDescriptions.clear();
-        _gameState.gameSaveStates
-            .removeRange(0, _gameState.gameSaveStates.length - 1);
+          getIt<Settings>().server.value = true;
+          String info =
+              'Server Online: IP: ${_serverSocket!.address.address}, Port: ${_serverSocket!.port.toString()}';
+          print(info);
+          getIt<Network>().networkMessage.value = info;
+          _gameState.commandIndex.value = -1;
+          _gameState.commands.clear();
+          _gameState.commandDescriptions.clear();
+          _gameState.gameSaveStates
+              .removeRange(0, _gameState.gameSaveStates.length - 1);
 
-        //if has clients when connecting (re connect) run reset/welcome message
-        String commandDescription = "";
-        send(
-            "Index:${_gameState.commandIndex
-                .value}Description:${commandDescription}GameState:${_gameState
-                .gameSaveStates.last!.getState()}");
+          //if has clients when connecting (re connect) run reset/welcome message
+          String commandDescription = "";
+          send(
+              "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}");
 
-
-        _serverSocket!.listen((Socket client) {
-          handleConnection(client);
-        }, onError: (e) {
-          print('Server error: $e');
-          getIt<Network>().networkMessage.value = 'Server error: ${e.toString()}';
+          _serverSocket!.listen((Socket client) {
+            handleConnection(client);
+          }, onError: (e) {
+            print('Server error: $e');
+            getIt<Network>().networkMessage.value =
+                'Server error: ${e.toString()}';
+          });
+          sendPing();
         });
-        sendPing();
       });
-    });
-  } catch (error) {
+    } catch (error) {
       print('Server error: $error');
-      getIt<Network>().networkMessage.value = 'Server error: ${error.toString()}';
+      getIt<Network>().networkMessage.value =
+          'Server error: ${error.toString()}';
     }
   }
 
   void stopServer(String? error) {
     if (_serverSocket != null) {
-      
       print('Server Offline');
-      if(error != null) {
+      if (error != null) {
         getIt<Network>().networkMessage.value = error;
       } else {
         getIt<Network>().networkMessage.value = 'Server Offline';
       }
       _serverSocket!.close().catchError((error) => print(error));
 
-      if(error != null) {
-        for (var item in _clients) {
-          item.destroy();
-        }
-      } else {
-        for (var item in _clients) {
-          item.close();
-        }
-      }
-      _clients.clear();
+      _communication.disconnectAll();
     }
     getIt<Settings>().server.value = false;
     leftOverMessage = "";
 
-    _gameState.gameSaveStates.removeRange(0, _gameState.gameSaveStates.length-1);
+    _gameState.gameSaveStates
+        .removeRange(0, _gameState.gameSaveStates.length - 1);
     _gameState.commands.clear();
     _gameState.commandIndex.value = -1;
     _gameState.commandDescriptions.clear();
@@ -123,16 +113,7 @@ class Server {
     print(info);
     getIt<Network>().networkMessage.value = info;
 
-    for(int i = _clients.length-1; i >= 0; i--) {
-      try {
-        if (_clients[i].remoteAddress == client.remoteAddress) {
-          _clients.removeAt(i);
-        }
-      } catch (e) {
-        _clients.removeAt(i);
-      }
-    }
-    _clients.add(client);
+    _communication.add(client);
 
     // listen for events from the client
     try {
@@ -162,13 +143,14 @@ class Server {
                     'Server Receive Data, index: $indexString, description:$description');
 
                 int newIndex = int.parse(indexString);
-                if(newIndex > _gameState.commandDescriptions.length) {
+                if (newIndex > _gameState.commandDescriptions.length) {
                   //invalid: index too high. send correction to clients
                   String commandDescription = "";
-                  if(_gameState.commandDescriptions.isNotEmpty) {
+                  if (_gameState.commandDescriptions.isNotEmpty) {
                     commandDescription = _gameState.commandDescriptions.last;
                   }
-                  send("Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}");
+                  send(
+                      "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}");
                 } else if (newIndex > _gameState.commandIndex.value) {
                   _gameState.commandIndex.value = int.parse(indexString);
                   if (newIndex >= 0) {
@@ -177,7 +159,9 @@ class Server {
                   }
                   _gameState.loadFromData(data);
                   _gameState.updateAllUI();
-                  sendToOthers("Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last!.getState()}", client);
+                  sendToOthers(
+                      "Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last!.getState()}",
+                      client);
                   //getIt<GameState>().modifierDeck.
                   //client.write('your gameState changes received by server');
                 } else {
@@ -187,10 +171,8 @@ class Server {
 
                   //overwrite client state with current server state.
                   sendToOnly(
-                      "Mismatch:Index:${_gameState.commandIndex
-                          .value}Description:${_gameState
-                          .commandDescriptions[_gameState.commandIndex.value]}GameState:${_gameState
-                          .gameSaveStates.last!.getState()}", client);
+                      "Mismatch:Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions[_gameState.commandIndex.value]}GameState:${_gameState.gameSaveStates.last!.getState()}",
+                      client);
                   //ignore if same index from server
                 }
               } else if (message.startsWith("init")) {
@@ -198,28 +180,28 @@ class Server {
 
                 List<String> initMessageParts = message.split("version:");
                 int version = int.parse(initMessageParts[1]);
-                if(version != serverVersion) {
+                if (version != serverVersion) {
                   //version mismatch
-                  getIt<Network>().networkMessage.value = "Client version mismatch. Please update.";
+                  getIt<Network>().networkMessage.value =
+                      "Client version mismatch. Please update.";
                   sendToOnly(
-                      "Error: Server Version is $serverVersion. client version is $version. Please update your client.", client);
-
+                      "Error: Server Version is $serverVersion. client version is $version. Please update your client.",
+                      client);
                 } else {
                   String commandDescription = "";
-                  if (_gameState.commandIndex.value > 0 && _gameState
-                      .commandDescriptions.length > _gameState.commandIndex.value) {
+                  if (_gameState.commandIndex.value > 0 &&
+                      _gameState.commandDescriptions.length >
+                          _gameState.commandIndex.value) {
                     commandDescription = _gameState
                         .commandDescriptions[_gameState.commandIndex.value];
                   } else {
                     print("wtf");
                   }
                   print(
-                      'Server sends init response: "S3nD:Index:${_gameState
-                          .commandIndex.value}Description:$commandDescription');
+                      'Server sends init response: "S3nD:Index:${_gameState.commandIndex.value}Description:$commandDescription');
                   sendToOnly(
-                      "Index:${_gameState.commandIndex
-                          .value}Description:${commandDescription}GameState:${_gameState
-                          .gameSaveStates.last!.getState()}", client);
+                      "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}",
+                      client);
                 }
               } else if (message.startsWith("undo")) {
                 print('Server Receive undo command');
@@ -229,7 +211,7 @@ class Server {
                 _gameState.redo();
               } else if (message.startsWith("pong")) {
                 print('pong from ${client.remoteAddress}');
-              }else if (message.startsWith("ping")) {
+              } else if (message.startsWith("ping")) {
                 print('ping from ${client.remoteAddress}');
                 sendToOnly("pong", client);
               }
@@ -255,34 +237,19 @@ class Server {
               break;
             }
           }*/
-          if(error is SocketException && error.osError?.errorCode == 103) {
+          if (error is SocketException && error.osError?.errorCode == 103) {
             stopServer(error.toString());
           }
         },
 
         // handle the client closing the connection
         onDone: () {
-          if(getIt<Settings>().server.value == false) {
+          if (getIt<Settings>().server.value == false) {
             //no op
           } else {
-            //easy close
-            for (int i = 0; i < _clients.length; i++) {
-              try {
-                if (_clients[i].remoteAddress == client.remoteAddress) {
-                  print('Client left');
-                  getIt<Network>().networkMessage.value = 'Client left.';
-                  _clients.removeAt(i);
-                  client.destroy();
-                  break;
-                }
-              } catch (e) {
-                _clients.removeAt(i);
-                print('Client left');
-                getIt<Network>().networkMessage.value = 'Client left.';
-                client.destroy();
-                break;
-              }
-            }
+            _communication.disconnect(client);
+            print('Client left');
+            getIt<Network>().networkMessage.value = 'Client left.';
           }
         },
       );
@@ -305,20 +272,14 @@ class Server {
   }
 
   void send(String data) {
-    for (Socket client in _clients) {
-      client.write("S3nD:$data[EOM]");
-    }
+    _communication.sendToAll(data);
   }
 
   void sendToOnly(String data, Socket client) {
-    client.write("S3nD:$data[EOM]");
+    _communication.sendTo(client, data);
   }
 
   void sendToOthers(String data, Socket client) {
-    for (Socket item in _clients) {
-      if (item.remoteAddress != client.remoteAddress) {
-        item.write("S3nD:$data[EOM]");
-      }
-    }
+    _communication.sendToAllExcept(client, data);
   }
 }
