@@ -88,8 +88,6 @@ class MainState extends State<MyHomePage>
     }
   }
 
-  MainState() {}
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<int>(

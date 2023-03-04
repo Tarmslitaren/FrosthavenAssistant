@@ -1,10 +1,12 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/room.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/Resource/state/monster_ability_state.dart';
 
 import '../../Layout/main_list.dart';
+import '../../Layout/menus/auto_add_standee_menu.dart';
 import '../../Model/scenario.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
@@ -17,6 +19,7 @@ import '../state/list_item_data.dart';
 import '../state/loot_deck_state.dart';
 import '../state/monster.dart';
 import '../state/monster_instance.dart';
+import '../ui_utils.dart';
 
 class SetScenarioCommand extends Command {
   final GameState _gameState = getIt<GameState>();
@@ -221,18 +224,19 @@ class SetScenarioCommand extends Command {
 
     int characterIndex = GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
     //handle room data
+
+    for (int i = 0; i < roomMonsterData.length; i++) {
+      var roomMonsters = roomMonsterData[i];
+      _addMonster(roomMonsters.name, _gameState.scenarioSpecialRules);
+    }
+
     if(getIt<Settings>().randomStandees.value == true) {
       if (initMessage.isNotEmpty) {
         initMessage += "\n";
       }
       for (int i = 0; i < roomMonsterData.length; i++) {
         var roomMonsters = roomMonsterData[i];
-        Monster? data = _gameState.currentList.firstWhereOrNull((element) => element.id == roomMonsters.name) as Monster?;
-        if(data == null) {
-          //add missing monster type
-          _addMonster(roomMonsters.name, _gameState.scenarioSpecialRules);
-          data = _gameState.currentList.firstWhereOrNull((element) => element.id == roomMonsters.name) as Monster;
-        }
+        Monster data = _gameState.currentList.firstWhereOrNull((element) => element.id == roomMonsters.name) as Monster;
         
         int eliteAmount = roomMonsters.elite[characterIndex];
         int normalAmount = roomMonsters.normal[characterIndex];
@@ -274,7 +278,14 @@ class SetScenarioCommand extends Command {
         }
       }
     } else {
-      //todo: open menu
+      if(roomMonsterData.isNotEmpty) {
+        openDialog(
+          getIt<BuildContext>(),
+          AutoAddStandeeMenu(
+            monsterData: roomMonsterData,
+          ),
+        );
+      }
     }
 
     if (!section) {

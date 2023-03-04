@@ -551,6 +551,21 @@ class GameMethods {
     return null;
   }
 
+  static String getFigureIdFromNr(String ownerId, int nr) {
+    for(var item in getIt<GameState>().currentList) {
+      if(item.id == ownerId){
+        if(item is Monster) {
+          for (var instance in item.monsterInstances.value) {
+            if(instance.standeeNr == nr){
+              return instance.name + instance.gfx + instance.standeeNr.toString();
+            }
+          }
+        }
+      }
+    }
+    return "";
+  }
+
   static Character? createCharacter(String name, String? display, int level) {
 
     Character? character;

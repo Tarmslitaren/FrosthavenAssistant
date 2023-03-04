@@ -44,7 +44,7 @@ class SectionButtonState extends State<SectionButton> {
                           .action(SetScenarioCommand(widget.data, true)); //TODO: let room be added instead
                     });
                   }
-                : null,
+                : null, 
             child: Text(
               widget.data.split(" ")[0],
               style: getTitleTextStyle(scale),
