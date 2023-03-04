@@ -18,5 +18,6 @@ void setupGetIt() {
 }
 
 void setupMoreGetIt(BuildContext context) {
+  getIt.allowReassignment = true;
   getIt.registerLazySingleton<BuildContext>(() => context);
 }

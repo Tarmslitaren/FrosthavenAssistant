@@ -1,0 +1,92 @@
+{
+  "sections": [
+    {
+      "A4a": {
+        "Spitting Drake": {
+          "normal": [
+            6,
+            4,
+            2
+          ],
+          "elite": [
+            0,
+            2,
+            4
+          ]
+        },
+        "Sun Demon": {
+          "normal": [
+            2,
+            4,
+            5
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Wind Demon": {
+          "normal": [
+            2,
+            2,
+            3
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "A3a": {
+        "Sun Demon": {
+          "normal": [
+            0,
+            1,
+            1
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "G2a": {
+        "Wind Demon": {
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "A2b": {
+        "Wind Demon": {
+          "normal": [
+            1,
+            0,
+            1
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ]
+}

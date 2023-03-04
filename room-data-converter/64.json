@@ -1,0 +1,88 @@
+{
+  "sections": [
+    {
+      "D2b": {
+        "Forest Imp": {
+          "normal": [
+            2,
+            2,
+            0
+          ],
+          "elite": [
+            1,
+            2,
+            4
+          ]
+        },
+        "Ooze": {
+          "normal": [
+            2,
+            3,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "K1b": {
+        "Forest Imp": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        },
+        "Ooze": {
+          "normal": [
+            2,
+            4,
+            4
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "M1b": {
+        "Forest Imp": {
+          "normal": [
+            1,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        },
+        "Rending Drake": {
+          "normal": [
+            3,
+            3,
+            2
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ]
+}

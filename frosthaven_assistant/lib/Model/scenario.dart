@@ -170,6 +170,9 @@ class ScenarioModel {
         }
       }
     }
+    if(rooms != null && rooms.roomData.isEmpty) {
+      rooms = null;
+    }
 
     return ScenarioModel(name: name, monsters: monsterList, specialRules: rulesList, lootDeck: lootDeck, initMessage: initMessage, sections:sectionList, monsterStandees: rooms?.roomData[0].monsterData);
   }

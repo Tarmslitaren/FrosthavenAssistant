@@ -1,0 +1,116 @@
+{
+  "sections": [
+    {
+      "L3a": {
+        "Forest Imp": {
+          "normal": [
+            2,
+            2,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Scout": {
+          "normal": [
+            0,
+            2,
+            0
+          ],
+          "elite": [
+            2,
+            2,
+            4
+          ]
+        },
+        "Vermling Shaman": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "B1b": {
+        "Vermling Scout": {
+          "normal": [
+            2,
+            4,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Shaman": {
+          "normal": [
+            1,
+            1,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "J1a": {
+        "Forest Imp": {
+          "normal": [
+            0,
+            0,
+            2
+          ],
+          "elite": [
+            2,
+            2,
+            2
+          ]
+        },
+        "Stone Golem": {
+          "normal": [
+            1,
+            2,
+            3
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "D2a": {
+        "Living Spirit": {
+          "normal": [
+            3,
+            2,
+            1
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ]
+}

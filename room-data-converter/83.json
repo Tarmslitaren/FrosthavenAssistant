@@ -1,0 +1,88 @@
+{
+  "sections": [
+    {
+      "H1b": {
+        "Cultist": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            2,
+            2
+          ]
+        },
+        "Hound": {
+          "normal": [
+            2,
+            2,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "I1b": {
+        "Cultist": {
+          "normal": [
+            1,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        },
+        "Living Spirit": {
+          "normal": [
+            2,
+            4,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "M1a": {
+        "Cultist": {
+          "normal": [
+            0,
+            2,
+            0
+          ],
+          "elite": [
+            2,
+            2,
+            4
+          ]
+        },
+        "Flame Demon": {
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -16,7 +16,7 @@ import 'main_list.dart';
 import 'menus/main_menu.dart';
 
 Widget createMainScaffold(BuildContext context) {
-  getIt.registerLazySingleton<BuildContext>(() => context);
+  setupMoreGetIt(context);
   return ValueListenableBuilder<double>(
       valueListenable: getIt<Settings>().userScalingBars,
       builder: (context, value, child) {

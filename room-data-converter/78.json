@@ -1,0 +1,100 @@
+{
+  "sections": [
+    {
+      "F1a": {
+        "Bandit Archer": {
+          "normal": [
+            2,
+            2,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            2
+          ]
+        },
+        "Bandit Guard": {
+          "normal": [
+            0,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "M1a": {
+        "Bandit Archer": {
+          "normal": [
+            2,
+            2,
+            1
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        },
+        "Cultist": {
+          "normal": [
+            2,
+            1,
+            3
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        },
+        "Cultist Scenario 78": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            2,
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "I1b": {
+        "Black Imp": {
+          "normal": [
+            2,
+            3,
+            2
+          ],
+          "elite": [
+            2,
+            4,
+            5
+          ]
+        },
+        "Cultist": {
+          "normal": [
+            2,
+            2,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            2
+          ]
+        }
+      }
+    }
+  ]
+}

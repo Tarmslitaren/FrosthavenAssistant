@@ -1,0 +1,32 @@
+{
+  "sections": [
+    {
+      "B2b": {
+        "Living Bones": {
+          "normal": [
+            0,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Living Spirit": {
+          "normal": [
+            2,
+            3,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            2
+          ]
+        }
+      }
+    }
+  ]
+}

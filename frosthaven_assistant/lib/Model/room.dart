@@ -41,10 +41,9 @@ class RoomsModel {
   final List<RoomModel> roomData;
   RoomsModel(this.scenarioName, this.roomData);
 
-  factory RoomsModel.fromJson(Map<String, dynamic> data, String scenarioName) {
+  factory RoomsModel.fromJson(List<dynamic> sectionData, String scenarioName) {
 
     List<RoomModel> roomList = [];
-    List<dynamic> sectionData = data['sections'];
     for (var value in sectionData) {
       roomList.add(RoomModel.fromJson(value));
     }
@@ -52,3 +51,19 @@ class RoomsModel {
     return RoomsModel(scenarioName, roomList);
   }
 }
+
+class EditionRoomsModel {
+  final List<RoomsModel> roomData;
+  EditionRoomsModel( this.roomData);
+
+  factory EditionRoomsModel.fromJson(Map<String, dynamic> data) {
+
+    List<RoomsModel> roomList = [];
+    for(var entry in data.entries) {
+      roomList.add(RoomsModel.fromJson(entry.value, entry.key ));
+    }
+
+    return EditionRoomsModel( roomList);
+  }
+}
+
