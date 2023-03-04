@@ -239,7 +239,7 @@ class Server {
               break;
             }
           }*/
-          if (error is SocketException && error.osError?.errorCode == 103) {
+          if(error is SocketException && (error.osError?.errorCode == 103 || error.osError?.errorCode == 32)) {
             stopServer(error.toString());
           }
         },
