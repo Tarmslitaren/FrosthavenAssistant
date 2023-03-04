@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/room.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
@@ -23,6 +24,40 @@ class SetScenarioCommand extends Command {
   late final bool section;
 
   SetScenarioCommand(this._scenario, this.section);
+
+  void _addMonster(String monster, List<SpecialRule> specialRules) {
+    int levelAdjust = 0;
+    Set<String> alliedMonsters = {};
+    for (var rule in specialRules) {
+      if(rule.name == monster) {
+        if(rule.type == "LevelAdjust") {
+          levelAdjust = rule.level;
+        }
+      }
+      if(rule.type == "Allies"){
+        for (String item in rule.list){
+          alliedMonsters.add(item);
+        }
+      }
+    }
+
+    bool add = true;
+    for (var item in _gameState.currentList) {
+      //don't add duplicates
+      if(item.id == monster) {
+        add = false;
+        break;
+      }
+    }
+    if(add) {
+      bool isAlly = false;
+      if(alliedMonsters.contains(monster)){
+        isAlly = true;
+      }
+      _gameState.currentList.add(GameMethods.createMonster(
+          monster, (_gameState.level.value + levelAdjust).clamp(0, 7), isAlly)!);
+    }
+  }
 
   @override
   void execute() {
@@ -109,37 +144,7 @@ class SetScenarioCommand extends Command {
 
     //handle special rules
     for (String monster in monsters) {
-      int levelAdjust = 0;
-      Set<String> alliedMonsters = {};
-      for (var rule in specialRules) {
-        if(rule.name == monster) {
-          if(rule.type == "LevelAdjust") {
-            levelAdjust = rule.level;
-          }
-        }
-        if(rule.type == "Allies"){
-          for (String item in rule.list){
-            alliedMonsters.add(item);
-          }
-        }
-      }
-
-      bool add = true;
-      for (var item in _gameState.currentList) {
-        //don't add duplicates
-        if(item.id == monster) {
-          add = false;
-          break;
-        }
-      }
-      if(add) {
-        bool isAlly = false;
-        if(alliedMonsters.contains(monster)){
-          isAlly = true;
-        }
-        _gameState.currentList.add(GameMethods.createMonster(
-            monster, (_gameState.level.value + levelAdjust).clamp(0, 7), isAlly)!);
-      }
+      _addMonster(monster, specialRules);
     }
 
     if (!section) {
@@ -220,12 +225,22 @@ class SetScenarioCommand extends Command {
       if (initMessage.isNotEmpty) {
         initMessage += "\n";
       }
-      for (var roomMonsterData in roomMonsterData) {
-        Monster data = _gameState.currentList.firstWhere((element) => element.id == roomMonsterData.name) as Monster;
-        int eliteAmount = roomMonsterData.elite[characterIndex];
-        int normalAmount = roomMonsterData.normal[characterIndex];
+      for (int i = 0; i < roomMonsterData.length; i++) {
+        var roomMonsters = roomMonsterData[i];
+        Monster? data = _gameState.currentList.firstWhereOrNull((element) => element.id == roomMonsters.name) as Monster?;
+        if(data == null) {
+          //add missing monster type
+          _addMonster(roomMonsters.name, _gameState.scenarioSpecialRules);
+          data = _gameState.currentList.firstWhereOrNull((element) => element.id == roomMonsters.name) as Monster;
+        }
+        
+        int eliteAmount = roomMonsters.elite[characterIndex];
+        int normalAmount = roomMonsters.normal[characterIndex];
         //TODO: handle bosses?!
-        initMessage += "\n${data.id} added: "; //todo: don't newline first type
+        if(i != 0) {
+          initMessage += "\n";
+        }
+        initMessage += "${data.type.display} added: ";
 
         if(eliteAmount > 0) {
           initMessage += "\nElite standee nr: ";
@@ -234,12 +249,12 @@ class SetScenarioCommand extends Command {
         for (int i = 0; i < eliteAmount; i++) {
           int randomNr = GameMethods.getRandomStandee(data);
           if (randomNr != 0) {
-            initMessage += "$randomNr, ";
+            initMessage += "$randomNr, "; //todo: sort by nr
             if (i == normalAmount-1) {
               initMessage = initMessage.substring(0, initMessage.length-2);
             }
-            GameMethods.addStandee( //todo: nope: this runs a command...
-                randomNr, data, MonsterType.elite, false);
+            GameMethods.executeAddStandee(
+                randomNr,null, MonsterType.elite, data.id, false);
           }
         }
 
@@ -253,12 +268,10 @@ class SetScenarioCommand extends Command {
             if (i == normalAmount-1) {
               initMessage = initMessage.substring(0, initMessage.length-2);
             }
-            GameMethods.addStandee(
-                randomNr, data, MonsterType.normal, false);
+            GameMethods.executeAddStandee(
+                randomNr,null, MonsterType.normal, data.id, false);
           }
         }
-
-        //Todo: add note that the monsters have been added
       }
     } else {
       //todo: open menu

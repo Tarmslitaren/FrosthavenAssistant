@@ -2,6 +2,7 @@
 import 'dart:math';
 
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/Resource/state/character.dart';
 import 'package:frosthaven_assistant/Resource/state/character_state.dart';
@@ -415,6 +416,90 @@ class GameMethods {
       return 0;
     }
     return available[Random().nextInt(available.length)];
+  }
+
+  static void executeAddStandee(  final int nr, final SummonData? summon, final MonsterType type, final String ownerId, final bool addAsSummon) {
+    MonsterInstance instance;
+    Monster? monster;
+    if (summon == null) {
+      for (var item in getIt<GameState>().currentList) {
+        if (item.id == ownerId && item is Monster) {
+          monster = item;
+        }
+      }
+      instance = MonsterInstance(nr, type, addAsSummon, monster!);
+    } else {
+      instance = MonsterInstance.summon(
+          summon.standeeNr,
+          type,
+          summon.name,
+          summon.health,
+          summon.move,
+          summon.attack,
+          summon.range,
+          summon.gfx,
+          getIt<GameState>().round.value);
+    }
+
+    List<MonsterInstance> newList = [];
+    ValueNotifier<List<MonsterInstance>>? monsterList;
+    //find list
+    if (monster != null) {
+      monsterList = monster.monsterInstances;
+    } else {
+      for (var item in getIt<GameState>().currentList) {
+        if (item.id == ownerId) {
+          monsterList = (item as Character).characterState.summonList;
+          break;
+        }
+      }
+    }
+
+    //make sure summons can not have same gfx and nr:
+    if (instance.standeeNr != 0) {
+      bool ok = false;
+      while (!ok) {
+        ok = true;
+        for (var item in monsterList!.value) {
+          if (item.standeeNr == instance.standeeNr) {
+            if (item.gfx == instance.gfx) {
+              //can not have same gfx and nr
+              instance = MonsterInstance.summon(
+                  instance.standeeNr + 1,
+                  type,
+                  summon!.name,
+                  summon.health,
+                  summon.move,
+                  summon.attack,
+                  summon.range,
+                  summon.gfx,
+                  getIt<GameState>().round.value);
+              ok = false;
+            }
+          }
+        }
+      }
+    }
+
+    newList.addAll(monsterList!.value);
+    newList.add(instance);
+
+    if (monster != null) {
+      GameMethods.sortMonsterInstances(newList);
+    }
+    monsterList.value = newList;
+    if (monsterList.value.length == 1 && monster != null) {
+      //first added
+      if (getIt<GameState>().roundState.value == RoundState.chooseInitiative) {
+        GameMethods.sortCharactersFirst();
+      } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
+        GameMethods.drawAbilityCardFromInactiveDeck();
+        GameMethods.sortItemToPlace(
+            monster.id,
+            GameMethods.getInitiative(
+                monster)); //need to only sort this one item to place
+      }
+    }
   }
 
   static void addStandee(int? nr, Monster data, MonsterType type, bool addAsSummon) {
