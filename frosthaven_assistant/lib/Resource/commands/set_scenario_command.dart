@@ -222,69 +222,70 @@ class SetScenarioCommand extends Command {
       }
     }
 
-    int characterIndex = GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
     //handle room data
-
+    int characterIndex = GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
     for (int i = 0; i < roomMonsterData.length; i++) {
       var roomMonsters = roomMonsterData[i];
       _addMonster(roomMonsters.name, _gameState.scenarioSpecialRules);
     }
-
-    if(getIt<Settings>().randomStandees.value == true) {
-      if (initMessage.isNotEmpty) {
-        initMessage += "\n";
-      }
-      for (int i = 0; i < roomMonsterData.length; i++) {
-        var roomMonsters = roomMonsterData[i];
-        Monster data = _gameState.currentList.firstWhereOrNull((element) => element.id == roomMonsters.name) as Monster;
-        
-        int eliteAmount = roomMonsters.elite[characterIndex];
-        int normalAmount = roomMonsters.normal[characterIndex];
-        //TODO: handle bosses?!
-        if(i != 0) {
+    if(getIt<Settings>().noStandees.value != true) {
+      if (getIt<Settings>().randomStandees.value == true) {
+        if (initMessage.isNotEmpty) {
           initMessage += "\n";
         }
-        initMessage += "${data.type.display} added: ";
+        for (int i = 0; i < roomMonsterData.length; i++) {
+          var roomMonsters = roomMonsterData[i];
+          Monster data = _gameState.currentList.firstWhereOrNull((
+              element) => element.id == roomMonsters.name) as Monster;
 
-        if(eliteAmount > 0) {
-          initMessage += "\nElite standee nr: ";
-        }
+          int eliteAmount = roomMonsters.elite[characterIndex];
+          int normalAmount = roomMonsters.normal[characterIndex];
+          //TODO: handle bosses?!
+          if (i != 0) {
+            initMessage += "\n";
+          }
+          initMessage += "${data.type.display} added: ";
 
-        for (int i = 0; i < eliteAmount; i++) {
-          int randomNr = GameMethods.getRandomStandee(data);
-          if (randomNr != 0) {
-            initMessage += "$randomNr, "; //todo: sort by nr
-            if (i == normalAmount-1) {
-              initMessage = initMessage.substring(0, initMessage.length-2);
+          if (eliteAmount > 0) {
+            initMessage += "\nElite standee nr: ";
+          }
+
+          for (int i = 0; i < eliteAmount; i++) {
+            int randomNr = GameMethods.getRandomStandee(data);
+            if (randomNr != 0) {
+              initMessage += "$randomNr, "; //todo: sort by nr
+              if (i == normalAmount - 1) {
+                initMessage = initMessage.substring(0, initMessage.length - 2);
+              }
+              GameMethods.executeAddStandee(
+                  randomNr, null, MonsterType.elite, data.id, false);
             }
-            GameMethods.executeAddStandee(
-                randomNr,null, MonsterType.elite, data.id, false);
+          }
+
+          if (normalAmount > 0) {
+            initMessage += "\nNormal standee nr: ";
+          }
+          for (int i = 0; i < normalAmount; i++) {
+            int randomNr = GameMethods.getRandomStandee(data);
+            if (randomNr != 0) {
+              initMessage += "$randomNr, ";
+              if (i == normalAmount - 1) {
+                initMessage = initMessage.substring(0, initMessage.length - 2);
+              }
+              GameMethods.executeAddStandee(
+                  randomNr, null, MonsterType.normal, data.id, false);
+            }
           }
         }
-
-        if(normalAmount > 0) {
-          initMessage += "\nNormal standee nr: ";
+      } else {
+        if (roomMonsterData.isNotEmpty) {
+          openDialog(
+            getIt<BuildContext>(),
+            AutoAddStandeeMenu(
+              monsterData: roomMonsterData,
+            ),
+          );
         }
-        for (int i = 0; i < normalAmount; i++) {
-          int randomNr = GameMethods.getRandomStandee(data);
-          if (randomNr != 0) {
-            initMessage += "$randomNr, ";
-            if (i == normalAmount-1) {
-              initMessage = initMessage.substring(0, initMessage.length-2);
-            }
-            GameMethods.executeAddStandee(
-                randomNr,null, MonsterType.normal, data.id, false);
-          }
-        }
-      }
-    } else {
-      if(roomMonsterData.isNotEmpty) {
-        openDialog(
-          getIt<BuildContext>(),
-          AutoAddStandeeMenu(
-            monsterData: roomMonsterData,
-          ),
-        );
       }
     }
 

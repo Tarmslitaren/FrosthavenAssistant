@@ -41,10 +41,10 @@ class SectionButtonState extends State<SectionButton> {
                 ? () {
                     setState(() {
                       getIt<GameState>()
-                          .action(SetScenarioCommand(widget.data, true)); //TODO: let room be added instead
+                          .action(SetScenarioCommand(widget.data, true));
                     });
                   }
-                : null, 
+                : null,
             child: Text(
               widget.data.split(" ")[0],
               style: getTitleTextStyle(scale),
