@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_stat_card.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../../Resource/state/monster.dart';
@@ -27,8 +26,8 @@ class StatCardZoomState extends State<StatCardZoom> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     double cardWidth = 167;
-    double cardHeight = 96.5;
-    double width = cardWidth * scale* zoomValue; //TODO: tweak this
+    double cardHeight = 96.0;
+    double width = cardWidth * scale * zoomValue;
     double height = cardHeight * scale * zoomValue;
     double horizontalMargin = 40;
     if(screenWidth < horizontalMargin + width) {
@@ -53,11 +52,9 @@ class StatCardZoomState extends State<StatCardZoom> {
       onTap: (){
         Navigator.pop(context);
       },
-      child: Container(
-        // color: Colors.amber,
-        //margin: EdgeInsets.all(2 * scale * zoomValue * 0.8),
-        width: width,
-        height: height,
+      child: SizedBox(
+        width: cardWidth * scale * zoomValue,
+        height: cardHeight * scale * zoomValue,
           child:MonsterStatCardWidgetState.buildCard(widget.monster, scaling)
       ),
     );
