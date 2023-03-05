@@ -1142,7 +1142,7 @@
     },
     {
       "E1a": {
-        "Captain Of The Guard": {
+        "Captain of the Guard": {
           "normal": [
             1,
             1,
@@ -3283,7 +3283,7 @@
             6
           ]
         },
-        "Living Corpse:+2": {
+        "Living Corpse": {
           "normal": [
             0,
             2,
@@ -3549,7 +3549,7 @@
     },
     {
       "I1b": {
-        "Captain Of The Guard": {
+        "Captain of the Guard": {
           "normal": [
             1,
             1,
@@ -3879,7 +3879,7 @@
             1
           ]
         },
-        "Prime Demon Scenario 36": {
+        "Prime Demon (36)": {
           "normal": [
             1,
             1,
@@ -5635,7 +5635,7 @@
   "54": [
     {
       "G2a": {
-        "Cave Bear Scenario 54": {
+        "Cave Bear (54)": {
           "normal": [
             2,
             1,
@@ -5998,7 +5998,7 @@
             0
           ]
         },
-        "The Harvester:+1": {
+        "The Harvester": {
           "normal": [
             1,
             1,
@@ -7000,7 +7000,7 @@
     },
     {
       "M1a": {
-        "Arcane Golem:+1": {
+        "Arcane Golem": {
           "normal": [
             0,
             0,
@@ -8082,7 +8082,7 @@
             1
           ]
         },
-        "Cultist Scenario 78": {
+        "Cultist (78)": {
           "normal": [
             0,
             0,
@@ -9050,7 +9050,7 @@
     },
     {
       "B2a": {
-        "Cultist Scenario 89": {
+        "Cultist (89)": {
           "normal": [
             2,
             1,
@@ -9102,7 +9102,7 @@
             2
           ]
         },
-        "Cultist Scenario 89": {
+        "Cultist (89)": {
           "normal": [
             0,
             0,
@@ -9158,7 +9158,7 @@
     },
     {
       "B3a": {
-        "Cultist Scenario 89": {
+        "Cultist (89)": {
           "normal": [
             0,
             0,

@@ -240,7 +240,11 @@ class SetScenarioCommand extends Command {
 
           int eliteAmount = roomMonsters.elite[characterIndex];
           int normalAmount = roomMonsters.normal[characterIndex];
-          //TODO: handle bosses?!
+
+          bool isBoss = false;
+          if(data.type.levels[0].boss != null) {
+            isBoss = true;
+          }
           if (i != 0) {
             initMessage += "\n";
           }
@@ -263,7 +267,11 @@ class SetScenarioCommand extends Command {
           }
 
           if (normalAmount > 0) {
-            initMessage += "\nNormal standee nr: ";
+            if(isBoss) {
+              //initMessage = initMessage.substring(0, initMessage.length-1);
+            } else {
+              initMessage += "\nNormal standee nr: ";
+            }
           }
           for (int i = 0; i < normalAmount; i++) {
             int randomNr = GameMethods.getRandomStandee(data);
@@ -273,7 +281,7 @@ class SetScenarioCommand extends Command {
                 initMessage = initMessage.substring(0, initMessage.length - 2);
               }
               GameMethods.executeAddStandee(
-                  randomNr, null, MonsterType.normal, data.id, false);
+                  randomNr, null, isBoss ? MonsterType.boss : MonsterType.normal, data.id, false);
             }
           }
         }
