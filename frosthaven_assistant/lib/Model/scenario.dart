@@ -152,7 +152,7 @@ class ScenarioModel {
         if(rooms == null) {
           sectionList.add(ScenarioModel.sectionFromJson(key, sections[key], rooms));
         } else {
-          //todo: this is a bit stupid, but will be fixed when the rooms are added as sections in the data files
+          //todo: it might be a bit silly that room data and section data is separate
           //merge if has already
           ScenarioModel? section = sectionList.firstWhereOrNull((element) => element.name == key);
           if(section != null) {

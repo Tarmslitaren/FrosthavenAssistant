@@ -248,17 +248,17 @@ class SetScenarioCommand extends Command {
           if (i != 0) {
             initMessage += "\n";
           }
-          initMessage += "${data.type.display} added: ";
+          initMessage += "${data.type.display} added - ";
 
           if (eliteAmount > 0) {
-            initMessage += "\nElite standee nr: ";
+            initMessage += "Elite: ";
           }
 
           for (int i = 0; i < eliteAmount; i++) {
             int randomNr = GameMethods.getRandomStandee(data);
             if (randomNr != 0) {
               initMessage += "$randomNr, "; //todo: sort by nr
-              if (i == normalAmount - 1) {
+              if (i == eliteAmount - 1) {
                 initMessage = initMessage.substring(0, initMessage.length - 2);
               }
               GameMethods.executeAddStandee(
@@ -270,7 +270,10 @@ class SetScenarioCommand extends Command {
             if(isBoss) {
               //initMessage = initMessage.substring(0, initMessage.length-1);
             } else {
-              initMessage += "\nNormal standee nr: ";
+              if(eliteAmount > 0) {
+                initMessage += ", ";
+              }
+              initMessage += "Normal: ";
             }
           }
           for (int i = 0; i < normalAmount; i++) {
