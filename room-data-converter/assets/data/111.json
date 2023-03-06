@@ -1,0 +1,220 @@
+{
+  "index": "111",
+  "name": "The Shackles Loosen",
+  "edition": "fc",
+  "unlocks": [
+    "114"
+  ],
+  "monsters": [
+    "aesther-scout",
+    "black-imp",
+    "night-demon",
+    "the-husk"
+  ],
+  "rules": [
+    {
+      "round": "R % 3 == 0",
+      "figures": [
+        {
+          "identifier": {
+            "type": "monster",
+            "edition": "fc",
+            "name": "the-husk.*"
+          },
+          "type": "gainCondition",
+          "value": "invisible"
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "f1a",
+      "initial": true,
+      "monster": [
+        {
+          "name": "black-imp",
+          "type": "normal"
+        },
+        {
+          "name": "black-imp",
+          "type": "normal"
+        },
+        {
+          "name": "the-husk",
+          "type": "boss"
+        }
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "ref": "a2a",
+      "initial": true,
+      "monster": [
+        {
+          "name": "aesther-scout",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "black-imp",
+          "player2": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "night-demon",
+          "player3": "elite",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 3,
+      "ref": "67",
+      "initial": true,
+      "treasures": [
+        82
+      ],
+      "monster": [
+        {
+          "name": "aesther-scout",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "aesther-scout",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "black-imp",
+          "type": "normal"
+        },
+        {
+          "name": "black-imp",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "black-imp",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "black-imp",
+          "player3": "normal"
+        },
+        {
+          "name": "night-demon",
+          "player2": "normal"
+        },
+        {
+          "name": "night-demon",
+          "player2": "normal"
+        },
+        {
+          "name": "night-demon",
+          "player3": "normal",
+          "player4": "normal"
+        }
+      ]
+    },
+    {
+      "roomNumber": 4,
+      "ref": "81",
+      "initial": true,
+      "monster": [
+        {
+          "name": "aesther-scout",
+          "player4": "normal"
+        },
+        {
+          "name": "black-imp",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "black-imp",
+          "player2": "normal",
+          "player3": "elite"
+        },
+        {
+          "name": "black-imp",
+          "player3": "elite",
+          "player4": "normal"
+        },
+        {
+          "name": "night-demon",
+          "type": "normal"
+        },
+        {
+          "name": "night-demon",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 5,
+      "ref": "106",
+      "initial": true,
+      "treasures": [
+        92
+      ],
+      "monster": [
+        {
+          "name": "harrower-infester",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "harrower-infester",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "vermling-shaman",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        }
+      ]
+    },
+    {
+      "roomNumber": 6,
+      "ref": "132",
+      "initial": true,
+      "monster": [
+        {
+          "name": "aesther-scout",
+          "player2": "normal",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "black-imp",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "normal"
+        },
+        {
+          "name": "black-imp",
+          "player2": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "night-demon",
+          "player3": "normal",
+          "player4": "normal"
+        }
+      ]
+    }
+  ]
+}

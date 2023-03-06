@@ -1,0 +1,92 @@
+{
+  "index": "110",
+  "name": "A Circular Solution",
+  "edition": "fc",
+  "unlocks": [
+    "114"
+  ],
+  "monsters": [
+    "earth-demon",
+    "flame-demon",
+    "selah-naberis",
+    "sraka-the-wise",
+    "the-steel-lion",
+    "uyart-ikkuma"
+  ],
+  "rules": [
+    {
+      "round": "R == 4",
+      "sections": [
+        "129"
+      ]
+    },
+    {
+      "round": "R == 8",
+      "sections": [
+        "134"
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "roomNumber": 1,
+      "ref": "c1a",
+      "initial": true,
+      "treasures": [
+        84
+      ],
+      "monster": [
+        {
+          "name": "selah-naberis",
+          "type": "boss"
+        },
+        {
+          "name": "sraka-the-wise",
+          "type": "boss"
+        },
+        {
+          "name": "the-steel-lion",
+          "type": "boss"
+        },
+        {
+          "name": "uyart-ikkuma",
+          "type": "boss"
+        }
+      ]
+    },
+    {
+      "roomNumber": 2,
+      "ref": "129",
+      "initial": true,
+      "monster": [
+        {
+          "name": "ooze",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "ooze",
+          "player2": "normal",
+          "player3": "elite",
+          "player4": "elite"
+        },
+        {
+          "name": "ooze",
+          "player2": "elite",
+          "player3": "normal",
+          "player4": "elite"
+        },
+        {
+          "name": "ooze",
+          "player3": "normal",
+          "player4": "normal"
+        },
+        {
+          "name": "ooze",
+          "player4": "normal"
+        }
+      ]
+    }
+  ]
+}
