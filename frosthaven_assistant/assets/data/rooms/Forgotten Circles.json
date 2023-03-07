@@ -505,7 +505,7 @@
       }
     },
     {
-      "22(1)": {
+      "22": {
         "Living Spirit": {
           "normal": [
             2,
@@ -537,7 +537,7 @@
       }
     },
     {
-      "39(1)": {
+      "39": {
         "Ancient Artillery": {
           "normal": [
             0,
@@ -553,7 +553,7 @@
       }
     },
     {
-      "46(1)": {
+      "46": {
         "Living Spirit": {
           "normal": [
             2,
@@ -585,7 +585,7 @@
       }
     },
     {
-      "71(1)": {
+      "71": {
         "Living Spirit": {
           "normal": [
             2,
@@ -894,7 +894,7 @@
             0
           ]
         },
-        "Wolf Viper Abomination": {
+        "Wolf-Viper Abomination": {
           "normal": [
             2,
             3,
@@ -922,16 +922,16 @@
             1
           ]
         },
-        "Bear Drake Abomination": {
+        "Bear-Drake Abomination": {
           "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
             1,
             1,
             1
+          ],
+          "elite": [
+            0,
+            0,
+            0
           ]
         },
         "Valrath Tracker": {
@@ -950,6 +950,9 @@
     }
   ],
   "107": [
+    {
+      "start": {}
+    },
     {
       "15": {
         "Vermling Scout": {
@@ -1142,7 +1145,7 @@
             0
           ]
         },
-        "Avatar Of Ashtar": {
+        "Avatar of Ashtar": {
           "normal": [
             1,
             1,
@@ -1194,7 +1197,7 @@
             0
           ]
         },
-        "Avatar Of Thelija": {
+        "Avatar of Thelija": {
           "normal": [
             1,
             1,
@@ -1250,8 +1253,161 @@
     }
   ],
   "108": [
+    { "start":  {} },
     {
-      "A4a": {
+      "44": {
+        "City Archer": {
+          "normal": [
+            4,
+            1,
+            3
+          ],
+          "elite": [
+            1,
+            3,
+            3
+          ]
+        },
+        "City Guard": {
+          "normal": [
+            1,
+            2,
+            3
+          ],
+          "elite": [
+            1,
+            2,
+            3
+          ]
+        },
+        "Human Commander": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Valrath Commander": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Valrath Savage": {
+          "normal": [
+            2,
+            4,
+            4
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        },
+        "Valrath Tracker": {
+          "normal": [
+            5,
+            4,
+            4
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "37": {
+        "City Archer": {
+          "normal": [
+            4,
+            1,
+            3
+          ],
+          "elite": [
+            1,
+            3,
+            3
+          ]
+        },
+        "City Guard": {
+          "normal": [
+            1,
+            2,
+            3
+          ],
+          "elite": [
+            1,
+            2,
+            3
+          ]
+        },
+        "Human Commander": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Valrath Commander": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Valrath Savage": {
+          "normal": [
+            2,
+            4,
+            4
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        },
+        "Valrath Tracker": {
+          "normal": [
+            5,
+            4,
+            4
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "101": {
         "City Archer": {
           "normal": [
             4,
@@ -1342,7 +1498,7 @@
             0
           ]
         },
-        "Sraka The Wise": {
+        "Sraka the Wise": {
           "normal": [
             1,
             1,
@@ -1392,6 +1548,22 @@
             1,
             2,
             3
+          ]
+        }
+      }
+    },
+    {
+      "134": {
+        "Lurker": {
+          "normal": [
+            2,
+            1,
+            2
+          ],
+          "elite": [
+            0,
+            1,
+            1
           ]
         }
       }
@@ -1934,7 +2106,7 @@
             0
           ]
         },
-        "Manifestation Of Corruption": {
+        "Manifestation of Corruption": {
           "normal": [
             1,
             1,
@@ -1973,7 +2145,7 @@
       }
     }
   ],
-  "Challenge": [
+  "Challenge:": [
     {
       "N1b": {
         "Ancient Artillery": {
@@ -2080,7 +2252,7 @@
             1
           ]
         },
-        "Icestorm Guardian Of The Firmamant": {
+        "Icestorm Guardian of the Firmament": {
           "normal": [
             1,
             2,
@@ -2092,7 +2264,7 @@
             1
           ]
         },
-        "Lavaflow Guardian Of The Firmament": {
+        "Lavaflow Guardian of the Firmament": {
           "normal": [
             1,
             2,

@@ -107,7 +107,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
 
     var screenSize = MediaQuery.of(context).size;
     double xOffset = (screenSize.width / 2 -
-        63 * settings.userScalingBars.value); //TODO: tweak to be exactly center
+        63 * settings.userScalingBars.value);
     double yOffset = -(screenSize.height / 2 - height);
 
     if (!animationsEnabled) {

@@ -47,7 +47,7 @@ class CampaignModel {
     for (String key in scenarios.keys){
       //find right room if exists
 
-      RoomsModel? rooms = roomsData.firstWhereOrNull((element) => element.scenarioName == GameMethods.findNrFromScenarioName(key).toString());
+      RoomsModel? rooms = roomsData.firstWhereOrNull((element) => element.scenarioName == key.substring(1).split(" ")[0]);
       scenarioMap[key] = ScenarioModel.fromJson(key, scenarios[key], rooms);
     }
 
