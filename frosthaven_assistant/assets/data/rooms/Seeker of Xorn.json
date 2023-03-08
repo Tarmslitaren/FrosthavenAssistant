@@ -1,5 +1,5 @@
 {
-  "1": [
+  "SoX1": [
     {
       "A1": {
         "Living Bones": {
@@ -72,20 +72,20 @@
         },
         "Tormented Soul": {
           "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
             1,
             1,
             1
+          ],
+          "elite": [
+            0,
+            0,
+            0
           ]
         }
       }
     }
   ],
-  "2": [
+  "SoX2": [
     {
       "A3": {
         "Lurker": {
@@ -207,7 +207,7 @@
       }
     }
   ],
-  "3": [
+  "SoX3": [
     {
       "G1": {
         "Ancient Artillery": {
