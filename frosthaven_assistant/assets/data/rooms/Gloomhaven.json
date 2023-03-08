@@ -45,7 +45,7 @@
       }
     },
     {
-      "I1b": {
+      "I1b(1)": {
         "Bandit Archer": {
           "normal": [
             2,
@@ -91,7 +91,7 @@
       }
     },
     {
-      "M1a": {
+      "M1a(1)": {
         "Bandit Archer": {
           "normal": [
             0,
@@ -119,7 +119,7 @@
       }
     },
     {
-      "A1a": {
+      "A1a(A)": {
         "Living Corpse": {
           "normal": [
             2,
@@ -135,7 +135,7 @@
       }
     },
     {
-      "A3b": {
+      "A3b(D)": {
         "Living Corpse": {
           "normal": [
             0,
@@ -151,7 +151,7 @@
       }
     },
     {
-      "A2a": {
+      "A2a(C)": {
         "Living Corpse": {
           "normal": [
             0,
@@ -167,7 +167,7 @@
       }
     },
     {
-      "A4b": {
+      "A4b(B)": {
         "Living Corpse": {
           "normal": [
             2,
@@ -241,7 +241,7 @@
       }
     },
     {
-      "C1a": {
+      "C1a(1)": {
         "Earth Demon": {
           "normal": [
             0,
@@ -807,7 +807,7 @@
       }
     },
     {
-      "N1a": {
+      "N1a(1)": {
         "Merciless Overseer": {
           "normal": [
             1,
@@ -869,7 +869,7 @@
       }
     },
     {
-      "G2b": {
+      "G2b(1)": {
         "Inox Bodyguard": {
           "normal": [
             2,
@@ -1141,7 +1141,7 @@
       }
     },
     {
-      "E1a": {
+      "E1a(1)": {
         "Captain of the Guard": {
           "normal": [
             1,
@@ -1351,7 +1351,7 @@
       }
     },
     {
-      "D1a": {
+      "D1a(1)": {
         "Jekserah": {
           "normal": [
             1,
@@ -1409,7 +1409,7 @@
       }
     },
     {
-      "N1b": {
+      "N1b(1)": {
         "Cave Bear": {
           "normal": [
             0,
@@ -1719,7 +1719,7 @@
       }
     },
     {
-      "K2a": {
+      "K2a(1)": {
         "Inox Guard": {
           "normal": [
             2,
@@ -1845,7 +1845,7 @@
       }
     },
     {
-      "M1a": {
+      "M1a(1)": {
         "Ooze": {
           "normal": [
             2,
@@ -2057,7 +2057,7 @@
       }
     },
     {
-      "C2b": {
+      "C2b(1)": {
         "Cultist": {
           "normal": [
             0,
@@ -2085,7 +2085,7 @@
       }
     },
     {
-      "C1a": {
+      "C1a(2)": {
         "Living Corpse": {
           "normal": [
             0,
@@ -2101,7 +2101,7 @@
       }
     },
     {
-      "I1b": {
+      "I1b(3)": {
         "Cultist": {
           "normal": [
             2,
@@ -2203,7 +2203,7 @@
       }
     },
     {
-      "D1a": {
+      "D1a(1)": {
         "Jekserah": {
           "normal": [
             1,
@@ -2329,7 +2329,10 @@
       }
     },
     {
-      "D1a": {
+      "D2a": {}
+    },
+    {
+      "D1a(1)": {
         "Prime Demon": {
           "normal": [
             1,
@@ -2363,7 +2366,7 @@
       }
     },
     {
-      "M1a": {
+      "M1a(1)": {
         "Cultist": {
           "normal": [
             1,
@@ -2607,7 +2610,7 @@
       }
     },
     {
-      "K2b": {
+      "K2b(1)": {
         "Ancient Artillery": {
           "normal": [
             2,
@@ -2721,7 +2724,7 @@
       }
     },
     {
-      "N1a": {
+      "N1a(1)": {
         "Rending Drake": {
           "normal": [
             0,
@@ -2835,7 +2838,7 @@
       }
     },
     {
-      "C1a": {
+      "C1a(1)": {
         "Black Imp": {
           "normal": [
             0,
@@ -3240,7 +3243,7 @@
       }
     },
     {
-      "L2a": {
+      "L2a(1)": {
         "Deep Terror": {
           "normal": [
             2,
@@ -3332,7 +3335,10 @@
   ],
   "33": [
     {
-      "C2b": {
+      "start": {}
+    },
+    {
+      "C2b(b)": {
         "Savvas Icestorm": {
           "normal": [
             1,
@@ -3388,7 +3394,7 @@
       }
     },
     {
-      "M1a": {
+      "M1a(1)": {
         "Flame Demon": {
           "normal": [
             0,
@@ -3548,7 +3554,7 @@
       }
     },
     {
-      "I1b": {
+      "I1b(1)": {
         "Captain of the Guard": {
           "normal": [
             1,
@@ -3960,7 +3966,7 @@
       }
     },
     {
-      "D2b": {
+      "D2b(1)": {
         "Frost Demon": {
           "normal": [
             0,
@@ -4120,7 +4126,7 @@
       }
     },
     {
-      "L1a": {
+      "L1a(1)": {
         "Living Corpse": {
           "normal": [
             0,
@@ -4148,7 +4154,7 @@
       }
     },
     {
-      "E1a": {
+      "E1a(2)": {
         "Living Spirit": {
           "normal": [
             0,
@@ -4734,7 +4740,7 @@
       }
     },
     {
-      "I2a": {
+      "I2a(1)": {
         "Savvas Icestorm": {
           "normal": [
             2,
@@ -4780,7 +4786,7 @@
       }
     },
     {
-      "M1a": {
+      "M1a(1)": {
         "Deep Terror": {
           "normal": [
             2,
@@ -4904,7 +4910,7 @@
       }
     },
     {
-      "L1b": {
+      "L1b(1)": {
         "City Archer": {
           "normal": [
             2,
@@ -5400,7 +5406,7 @@
       }
     },
     {
-      "J1a": {
+      "J1a(A)": {
         "Giant Viper": {
           "normal": [
             2,
@@ -5452,7 +5458,7 @@
       }
     },
     {
-      "D2a": {
+      "D2a(C)": {
         "Giant Viper": {
           "normal": [
             0,
@@ -5516,7 +5522,7 @@
       }
     },
     {
-      "J2a": {
+      "J2a(B)": {
         "Giant Viper": {
           "normal": [
             0,
@@ -5568,7 +5574,7 @@
       }
     },
     {
-      "D1a": {
+      "D1a(D)": {
         "Giant Viper": {
           "normal": [
             0,
@@ -5650,7 +5656,7 @@
       }
     },
     {
-      "N1a": {
+      "N1a(1)": {
         "Frost Demon": {
           "normal": [
             2,
@@ -5764,7 +5770,7 @@
       }
     },
     {
-      "M1b": {
+      "M1b(1)": {
         "Bandit Archer": {
           "normal": [
             2,
@@ -5807,7 +5813,7 @@
   "55": [],
   "57": [
     {
-      "C1a": {
+      "C1a(1)": {
         "City Guard": {
           "normal": [
             1,
@@ -5835,7 +5841,7 @@
       }
     },
     {
-      "I1b": {
+      "I1b(2)": {
         "City Archer": {
           "normal": [
             1,
@@ -5863,7 +5869,10 @@
       }
     },
     {
-      "C2b": {
+      "A1a(3)": {}
+    },
+    {
+      "C2b(4)": {
         "City Archer": {
           "normal": [
             0,
@@ -5933,7 +5942,7 @@
       }
     },
     {
-      "G2b": {
+      "G2b(1)": {
         "Black Imp": {
           "normal": [
             0,
@@ -5973,7 +5982,7 @@
       }
     },
     {
-      "B1a": {
+      "B1a(2)": {
         "Earth Demon": {
           "normal": [
             1,
@@ -6014,6 +6023,9 @@
     }
   ],
   "60": [
+    {
+      "start": {}
+    },
     {
       "B4a": {
         "Hound": {
@@ -6267,6 +6279,9 @@
       }
     },
     {
+      "A1a": {}
+    },
+    {
       "D1a": {
         "Flame Demon": {
           "normal": [
@@ -6319,7 +6334,10 @@
       }
     },
     {
-      "C1a": {
+      "A3b": {}
+    },
+    {
+      "C1a(1)": {
         "Flame Demon": {
           "normal": [
             1,
@@ -6801,7 +6819,7 @@
       }
     },
     {
-      "C1a": {
+      "C1a(1)": {
         "Ancient Artillery": {
           "normal": [
             0,
@@ -6829,7 +6847,7 @@
       }
     },
     {
-      "D1a": {
+      "D1a(F)": {
         "Ancient Artillery": {
           "normal": [
             1,
@@ -6869,7 +6887,7 @@
       }
     },
     {
-      "A1a": {
+      "A1a(J)": {
         "Living Spirit": {
           "normal": [
             1,
@@ -6885,35 +6903,7 @@
       }
     },
     {
-      "C2b": {
-        "Ancient Artillery": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
-        },
-        "Living Spirit": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
-        }
-      }
-    },
-    {
-      "D2a": {
+      "D2a(G)": {
         "Ancient Artillery": {
           "normal": [
             1,
@@ -6953,7 +6943,35 @@
       }
     },
     {
-      "A2a": {
+      "C2b(H)": {
+        "Ancient Artillery": {
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Living Spirit": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "A2a(I)": {
         "Living Spirit": {
           "normal": [
             1,
@@ -6999,7 +7017,10 @@
       }
     },
     {
-      "M1a": {
+      "G1b(1)": {}
+    },
+    {
+      "M1a(2)": {
         "Arcane Golem": {
           "normal": [
             0,
@@ -7203,7 +7224,7 @@
       }
     },
     {
-      "J1a": {
+      "J1a(1)": {
         "Forest Imp": {
           "normal": [
             0,
@@ -7333,7 +7354,10 @@
       }
     },
     {
-      "E1b": {
+      "A2b": {}
+    },
+    {
+      "E1b(1)": {
         "Night Demon": {
           "normal": [
             1,
@@ -7403,7 +7427,7 @@
       }
     },
     {
-      "A3a": {
+      "A3a(C)": {
         "Sun Demon": {
           "normal": [
             0,
@@ -7419,7 +7443,7 @@
       }
     },
     {
-      "G2a": {
+      "G2a(D)": {
         "Wind Demon": {
           "normal": [
             0,
@@ -7435,7 +7459,7 @@
       }
     },
     {
-      "A2b": {
+      "A2b(B)": {
         "Wind Demon": {
           "normal": [
             1,
@@ -7535,7 +7559,7 @@
       }
     },
     {
-      "E1b": {
+      "E1b(1)": {
         "Inox Archer": {
           "normal": [
             1,
@@ -7617,7 +7641,7 @@
       }
     },
     {
-      "I2b": {
+      "I2b(1)": {
         "Bandit Archer": {
           "normal": [
             1,
@@ -7657,7 +7681,7 @@
       }
     },
     {
-      "I1a": {
+      "I1a(2)": {
         "Bandit Archer": {
           "normal": [
             1,
@@ -7739,7 +7763,7 @@
       }
     },
     {
-      "N1b": {
+      "N1b(1)": {
         "City Archer": {
           "normal": [
             2,
@@ -7812,6 +7836,9 @@
     }
   ],
   "76": [
+    {
+      "start": {}
+    },
     {
       "E1b": {
         "Giant Viper": {
@@ -7963,6 +7990,9 @@
           ]
         }
       }
+    },
+    {
+      "A3a": {}
     }
   ],
   "75": [
@@ -8011,7 +8041,7 @@
       }
     },
     {
-      "B1b": {
+      "B1b(1)": {
         "Living Spirit": {
           "normal": [
             1,
@@ -8057,7 +8087,7 @@
       }
     },
     {
-      "M1a": {
+      "M1a(1)": {
         "Bandit Archer": {
           "normal": [
             2,
@@ -8143,7 +8173,7 @@
       }
     },
     {
-      "C2b": {
+      "M1a(1)": {
         "The Betrayer": {
           "normal": [
             1,
@@ -8160,6 +8190,9 @@
     }
   ],
   "80": [
+    {
+      "start": {}
+    },
     {
       "H1b": {
         "Ancient Artillery": {
@@ -8241,7 +8274,7 @@
       }
     },
     {
-      "J1a": {
+      "J1a(1)": {
         "Ancient Artillery": {
           "normal": [
             1,
@@ -8371,7 +8404,7 @@
       }
     },
     {
-      "D1a": {
+      "D1a(1)": {
         "Night Demon": {
           "normal": [
             1,
@@ -8441,7 +8474,7 @@
       }
     },
     {
-      "C1a": {
+      "C1a(A)": {
         "Stone Golem": {
           "normal": [
             0,
@@ -8457,7 +8490,7 @@
       }
     },
     {
-      "D1a": {
+      "D1a(B)": {
         "Stone Golem": {
           "normal": [
             0,
@@ -8559,7 +8592,7 @@
       }
     },
     {
-      "M1a": {
+      "M1a(1)": {
         "Cultist": {
           "normal": [
             0,
@@ -8661,7 +8694,7 @@
       }
     },
     {
-      "D1a": {
+      "D1a(1)": {
         "Night Demon": {
           "normal": [
             2,
@@ -8731,7 +8764,7 @@
       }
     },
     {
-      "A3a": {
+      "A3a(B)": {
         "Earth Demon": {
           "normal": [
             0,
@@ -8771,7 +8804,7 @@
       }
     },
     {
-      "E1b": {
+      "E1b(D)": {
         "Earth Demon": {
           "normal": [
             0,
@@ -8811,7 +8844,7 @@
       }
     },
     {
-      "A2b": {
+      "A2b(C)": {
         "Earth Demon": {
           "normal": [
             1,
@@ -8979,7 +9012,7 @@
       }
     },
     {
-      "L2a": {
+      "L2a(1)": {
         "Black Imp": {
           "normal": [
             2,
@@ -9227,7 +9260,7 @@
       }
     },
     {
-      "G2a": {
+      "G2a(1)": {
         "Frost Demon": {
           "normal": [
             2,
@@ -9391,7 +9424,7 @@
       }
     },
     {
-      "G1a": {
+      "G1a(1)": {
         "Bandit Archer": {
           "normal": [
             1,
@@ -9525,7 +9558,7 @@
       }
     },
     {
-      "F1a": {
+      "F1a(1)": {
         "Bandit Archer": {
           "normal": [
             2,
@@ -9669,7 +9702,7 @@
   ],
   "95": [
     {
-      "E1a": {
+      "E1a(1)": {
         "Earth Demon": {
           "normal": [
             0,
@@ -9707,6 +9740,9 @@
           ]
         }
       }
+    },
+    {
+      "D1a": {}
     },
     {
       "K2b": {
@@ -9823,7 +9859,7 @@
       }
     },
     {
-      "D1b": {
+      "D1b(1)": {
         "Cave Bear": {
           "normal": [
             0,
