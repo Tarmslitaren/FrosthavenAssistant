@@ -1,167 +1,840 @@
 {
-  "index": "2",
-  "name": "Barrow Lair",
-  "edition": "gh",
-  "unlocks": [
-    "3",
-    "4"
-  ],
-  "requires": [
-    [
-      "1"
-    ]
-  ],
-  "monsters": [
-    "bandit-archer",
-    "bandit-commander",
-    "living-bones",
-    "living-corpse"
-  ],
-  "rules": [
+  "name": "Flooded Crypt",
+  "campaign": "Seeker of Xorn",
+  "scenarioPages": [
     {
-      "round": "R == 1",
-      "start": true,
-      "figures": [
+      "image": "http://cloud-3.steamusercontent.com/ugc/1773831988942926653/B1B0AA90C8F583946F748BDB67ABED9865E1C906/"
+    }
+  ],
+  "gridType": 1,
+  "doorTiles": [
+    {
+      "name": "Dark Fog",
+      "tiles": [
         {
-          "identifier": {
-            "type": "character",
-            "name": ".*"
-          },
-          "type": "amAdd",
-          "value": "curse:3",
-          "scenarioEffect": true
+          "rooms": [
+            1,
+            3
+          ],
+          "position": [
+            3.94,
+            1.88,
+            3.79
+          ],
+          "rotation": [
+            0,
+            359.95,
+            0
+          ]
+        },
+        {
+          "rooms": [
+            1,
+            2
+          ],
+          "position": [
+            -3.94,
+            1.88,
+            3.79
+          ],
+          "rotation": [
+            0,
+            359.95,
+            0
+          ]
         }
       ]
     }
   ],
   "rooms": [
     {
-      "roomNumber": 1,
-      "ref": "b3b",
-      "initial": true,
-      "rooms": [
-        2
+      "mapTiles": [
+        {
+          "tile": "A3",
+          "position": [
+            1.32,
+            1.71,
+            11.37
+          ],
+          "rotation": [
+            0,
+            300,
+            0
+          ]
+        },
+        {
+          "tile": "D2",
+          "position": [
+            0,
+            1.65,
+            4.55
+          ],
+          "rotation": [
+            0,
+            150,
+            180
+          ]
+        }
       ],
-      "monster": [
+      "startTiles": {
+        "name": "Stone Corridor 1",
+        "tiles": [
+          {
+            "position": [
+              0,
+              1.88,
+              10.61
+            ],
+            "rotation": [
+              0,
+              0.03,
+              0
+            ]
+          },
+          {
+            "position": [
+              1.31,
+              1.88,
+              11.37
+            ],
+            "rotation": [
+              0,
+              359.99,
+              0
+            ]
+          },
+          {
+            "position": [
+              2.63,
+              1.88,
+              10.61
+            ],
+            "rotation": [
+              0,
+              359.96,
+              0
+            ]
+          },
+          {
+            "position": [
+              3.94,
+              1.88,
+              9.85
+            ],
+            "rotation": [
+              0,
+              359.95,
+              0
+            ]
+          }
+        ]
+      },
+      "overlayTiles": [
         {
-          "name": "bandit-archer",
-          "type": "normal"
+          "bag": 1,
+          "type": [
+            {
+              "name": "Stone Corridor 2",
+              "tiles": [
+                {
+                  "position": [
+                    2.63,
+                    1.88,
+                    7.58
+                  ],
+                  "rotation": [
+                    0,
+                    300,
+                    359.99
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "bandit-archer",
-          "type": "normal"
+          "bag": 5,
+          "type": [
+            {
+              "name": "Rock Column",
+              "tiles": [
+                {
+                  "position": [
+                    -1.31,
+                    1.88,
+                    6.82
+                  ],
+                  "rotation": [
+                    0,
+                    359.98,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    1.31,
+                    1.88,
+                    3.79
+                  ],
+                  "rotation": [
+                    0,
+                    359.98,
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Stalagmites",
+              "tiles": [
+                {
+                  "position": [
+                    2.63,
+                    1.88,
+                    6.06
+                  ],
+                  "rotation": [
+                    0,
+                    0.01,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -1.32,
+                    1.88,
+                    2.27
+                  ],
+                  "rotation": [
+                    0,
+                    0.01,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "bandit-archer",
-          "player3": "normal",
-          "player4": "normal"
+          "bag": 2,
+          "type": [
+            {
+              "name": "Rubble",
+              "tiles": [
+                {
+                  "position": [
+                    -2.63,
+                    1.88,
+                    4.55
+                  ],
+                  "rotation": [
+                    0,
+                    180.01,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -1.31,
+                    1.88,
+                    3.79
+                  ],
+                  "rotation": [
+                    0,
+                    180.01,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    0,
+                    1.88,
+                    4.55
+                  ],
+                  "rotation": [
+                    0,
+                    180.01,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    2.63,
+                    1.88,
+                    3.03
+                  ],
+                  "rotation": [
+                    0,
+                    180.01,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "bandit-archer",
-          "player4": "normal"
+          "bag": 8,
+          "type": [
+            {
+              "name": "Treasure Chest Vertical",
+              "tiles": [
+                {
+                  "position": [
+                    0,
+                    1.88,
+                    1.52
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "action": {
+                    "treasure": "G"
+                  }
+                }
+              ]
+            }
+          ]
         }
-      ]
-    },
-    {
-      "roomNumber": 2,
-      "ref": "m1a",
-      "marker": "1",
-      "rooms": [
-        3,
-        4,
-        5,
-        6
       ],
-      "monster": [
+      "monsters": [
         {
-          "name": "bandit-archer",
-          "type": "elite"
+          "name": "Lurker",
+          "tiles": [
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 2
+              },
+              "position": [
+                -2.63,
+                1.77,
+                6.06
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                2.63,
+                1.77,
+                4.55
+              ]
+            }
+          ]
         },
         {
-          "name": "bandit-archer",
-          "player3": "normal",
-          "player4": "elite"
+          "name": "Giant Viper",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "4": 1
+              },
+              "position": [
+                0,
+                1.77,
+                7.58
+              ]
+            },
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                1.31,
+                1.77,
+                6.82
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -2.63,
+                1.77,
+                3.03
+              ]
+            },
+            {
+              "numCharacters": {
+                "4": 1
+              },
+              "position": [
+                1.31,
+                1.77,
+                2.27
+              ]
+            }
+          ]
         },
         {
-          "name": "bandit-commander",
-          "type": "normal"
+          "name": "Living Spirit",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                0,
+                1.77,
+                3.03
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "roomNumber": 3,
-      "ref": "a1a",
-      "marker": "a",
-      "monster": [
+      "mapTiles": [
         {
-          "name": "living-corpse",
-          "type": "normal"
-        },
-        {
-          "name": "living-corpse",
-          "type": "normal"
-        },
-        {
-          "name": "living-corpse",
-          "player3": "normal",
-          "player4": "elite"
+          "tile": "J2",
+          "position": [
+            -9.19,
+            1.65,
+            0.76
+          ],
+          "rotation": [
+            0,
+            359.97,
+            180
+          ]
         }
-      ]
-    },
-    {
-      "roomNumber": 4,
-      "ref": "a3b",
-      "marker": "b",
-      "treasures": [
-        67
       ],
-      "monster": [
+      "overlayTiles": [
         {
-          "name": "living-corpse",
-          "type": "elite"
+          "bag": 5,
+          "type": [
+            {
+              "name": "Sarcophagus B",
+              "tiles": [
+                {
+                  "position": [
+                    -6.56,
+                    1.88,
+                    3.79
+                  ],
+                  "rotation": [
+                    0,
+                    180.01,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -9.19,
+                    1.88,
+                    -2.27
+                  ],
+                  "rotation": [
+                    0,
+                    240,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "living-corpse",
-          "player3": "normal",
-          "player4": "elite"
+          "bag": 2,
+          "type": [
+            {
+              "name": "Rubble",
+              "tiles": [
+                {
+                  "position": [
+                    -7.88,
+                    1.88,
+                    -3.03
+                  ],
+                  "rotation": [
+                    0,
+                    180.01,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 8,
+          "type": [
+            {
+              "name": "Treasure Chest Vertical",
+              "tiles": [
+                {
+                  "position": [
+                    -11.81,
+                    1.88,
+                    -3.79
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "action": {
+                    "treasure": "G"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": [
+            {
+              "name": "Coin 1",
+              "tiles": [
+                {
+                  "position": [
+                    -7.87,
+                    1.83,
+                    6.06
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -7.87,
+                    1.83,
+                    1.52
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Giant Viper",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "4": 1
+              },
+              "position": [
+                -7.87,
+                1.77,
+                3.03
+              ]
+            },
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -5.25,
+                1.77,
+                1.52
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lurker",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                -10.5,
+                1.77,
+                -1.52
+              ]
+            },
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 2
+              },
+              "position": [
+                -10.5,
+                1.77,
+                -4.55
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Living Spirit",
+          "tiles": [
+            {
+              "numCharacters": {
+                "4": 1
+              },
+              "position": [
+                -5.25,
+                1.77,
+                6.06
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                -6.56,
+                1.77,
+                -0.76
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "roomNumber": 5,
-      "ref": "a2a",
-      "marker": "c",
-      "monster": [
+      "mapTiles": [
         {
-          "name": "living-corpse",
-          "type": "elite"
-        },
-        {
-          "name": "living-corpse",
-          "player3": "normal",
-          "player4": "elite"
+          "tile": "J1",
+          "position": [
+            9.19,
+            1.65,
+            0.76
+          ],
+          "rotation": [
+            0,
+            120,
+            180
+          ]
         }
-      ]
-    },
-    {
-      "roomNumber": 6,
-      "ref": "a4b",
-      "marker": "d",
-      "monster": [
+      ],
+      "overlayTiles": [
         {
-          "name": "living-corpse",
-          "type": "normal"
+          "bag": 5,
+          "type": [
+            {
+              "name": "Sarcophagus B",
+              "tiles": [
+                {
+                  "position": [
+                    6.56,
+                    1.88,
+                    3.79
+                  ],
+                  "rotation": [
+                    0,
+                    180.01,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    9.19,
+                    1.88,
+                    -2.27
+                  ],
+                  "rotation": [
+                    0,
+                    120.01,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "living-corpse",
-          "type": "normal"
+          "bag": 2,
+          "type": [
+            {
+              "name": "Rubble",
+              "tiles": [
+                {
+                  "position": [
+                    9.19,
+                    1.88,
+                    -0.76
+                  ],
+                  "rotation": [
+                    0,
+                    180.01,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "living-corpse",
-          "player3": "normal",
-          "player4": "elite"
+          "bag": 8,
+          "type": [
+            {
+              "name": "Treasure Chest Vertical",
+              "tiles": [
+                {
+                  "position": [
+                    11.81,
+                    1.88,
+                    -3.79
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "action": {
+                    "treasure": "G"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": [
+            {
+              "name": "Coin 1",
+              "tiles": [
+                {
+                  "position": [
+                    7.88,
+                    1.83,
+                    1.52
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    7.87,
+                    1.83,
+                    -3.03
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Giant Viper",
+          "tiles": [
+            {
+              "numCharacters": {
+                "4": 1
+              },
+              "position": [
+                5.25,
+                1.77,
+                1.52
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                7.88,
+                1.77,
+                3.03
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Lurker",
+          "tiles": [
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 2
+              },
+              "position": [
+                6.56,
+                1.77,
+                -2.27
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                10.5,
+                1.77,
+                -4.55
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Living Spirit",
+          "tiles": [
+            {
+              "numCharacters": {
+                "4": 1
+              },
+              "position": [
+                7.88,
+                1.77,
+                6.06
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                10.5,
+                1.77,
+                -1.52
+              ]
+            }
+          ]
         }
       ]
     }
-  ]
+  ],
+  "monsterList": [
+    "Giant Viper",
+    "Living Spirit",
+    "Lurker"
+  ],
+  "id": "SoX2"
 }
