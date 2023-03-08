@@ -1,0 +1,571 @@
+{
+  "name": "Battle of the Bards",
+  "icon": "TrackerSoothsinger",
+  "campaign": "Solo Scenarios",
+  "scenarioPages": [
+    {
+      "image": "http://cloud-3.steamusercontent.com/ugc/878629355914714669/CCD11565F67F894B57CDE9911B8F4A22DD169E55/"
+    },
+    {
+      "image": "http://cloud-3.steamusercontent.com/ugc/1018321821846831659/AAA44099975EA0F09AA33D5D032F7E6780CEFC97/"
+    }
+  ],
+  "doorTiles": [
+    {
+      "name": "Wooden Door Horizontal",
+      "tiles": [
+        {
+          "rooms": [
+            1,
+            2
+          ],
+          "position": [
+            3.96,
+            1.77,
+            3.79
+          ],
+          "rotation": [
+            0,
+            359.96,
+            0
+          ],
+          "tokens": [
+            "1"
+          ]
+        },
+        {
+          "rooms": [
+            2,
+            3
+          ],
+          "position": [
+            -3.94,
+            1.77,
+            6.82
+          ],
+          "rotation": [
+            0,
+            0.01,
+            0
+          ]
+        },
+        {
+          "rooms": [
+            2,
+            3
+          ],
+          "position": [
+            -3.94,
+            1.77,
+            0.76
+          ],
+          "rotation": [
+            0,
+            0.01,
+            0
+          ]
+        },
+        {
+          "rooms": [
+            3,
+            4
+          ],
+          "position": [
+            -9.19,
+            1.77,
+            3.79
+          ],
+          "rotation": [
+            0,
+            0.01,
+            0
+          ],
+          "tokens": [
+            "2"
+          ]
+        }
+      ]
+    }
+  ],
+  "gridType": 1,
+  "rooms": [
+    {
+      "mapTiles": [
+        {
+          "tile": "B1",
+          "position": [
+            6.56,
+            1.71,
+            3.79
+          ],
+          "rotation": [
+            0,
+            0.03,
+            0
+          ]
+        }
+      ],
+      "startTiles": {
+        "name": "Stone Corridor 1",
+        "tiles": [
+          {
+            "position": [
+              9.2,
+              1.88,
+              3.79
+            ],
+            "rotation": [
+              0,
+              179.96,
+              0
+            ]
+          }
+        ]
+      },
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Cabinet",
+              "tiles": [
+                {
+                  "position": [
+                    6.58,
+                    1.88,
+                    3.78
+                  ],
+                  "rotation": [
+                    0,
+                    179.74,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "City Guard",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                5.25,
+                1.77,
+                4.55
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                5.25,
+                1.77,
+                3.03
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Bandit Guard",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                7.88,
+                1.77,
+                6.06
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                7.88,
+                1.77,
+                4.55
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                7.87,
+                1.77,
+                3.04
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                7.88,
+                1.77,
+                1.52
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Bandit Archer",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                9.19,
+                1.77,
+                5.3
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                9.19,
+                1.77,
+                2.27
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "I1",
+          "position": [
+            0,
+            1.77,
+            4.55
+          ],
+          "rotation": [
+            0,
+            359.94,
+            0
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Table",
+              "tiles": [
+                {
+                  "position": [
+                    0,
+                    1.89,
+                    1.52
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    1.31,
+                    1.89,
+                    5.3
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    2.62,
+                    1.89,
+                    1.52
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "City Guard",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                1.31,
+                1.77,
+                3.79
+              ]
+            }
+          ]
+        },
+        {
+          "name": "City Archer",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -2.63,
+                1.77,
+                6.06
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -2.63,
+                1.77,
+                4.55
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -2.63,
+                1.77,
+                3.03
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -2.63,
+                1.77,
+                1.52
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "G2",
+          "position": [
+            -6.56,
+            1.71,
+            3.79
+          ],
+          "rotation": [
+            0,
+            179.98,
+            180
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Barrel",
+              "tiles": [
+                {
+                  "position": [
+                    -7.88,
+                    1.88,
+                    7.58
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -6.56,
+                    1.88,
+                    0.76
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Stone Golem",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                -6.56,
+                1.77,
+                3.79
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "A1",
+          "position": [
+            -10.5,
+            1.71,
+            1.52
+          ],
+          "rotation": [
+            0,
+            180.02,
+            180
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Cabinet",
+              "tiles": [
+                {
+                  "position": [
+                    -11.81,
+                    1.88,
+                    0.76
+                  ],
+                  "rotation": [
+                    0,
+                    179.74,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Vermling Shaman",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                -11.81,
+                1.77,
+                -0.76
+              ]
+            }
+          ]
+        },
+        {
+          "name": "City Guard",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -11.81,
+                1.77,
+                2.27
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -10.5,
+                1.77,
+                1.52
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "monsterList": [
+    "City Archer",
+    "City Guard",
+    "Bandit Guard",
+    "Bandit Archer",
+    "Stone Golem",
+    "Vermling Shaman"
+  ],
+  "id": "Solo Scenario Soothsinger"
+}

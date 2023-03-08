@@ -1,0 +1,344 @@
+{
+  "name": "Stone Defense",
+  "icon": "TrackerCragheart",
+  "campaign": "Solo Scenarios",
+  "scenarioPages": [
+    {
+      "image": "http://cloud-3.steamusercontent.com/ugc/878629355914711606/793AA6F6FA8A877E4E8CE579CB2CBF7EC3962980/"
+    }
+  ],
+  "gridType": 1,
+  "rooms": [
+    {
+      "mapTiles": [
+        {
+          "tile": "N1",
+          "position": [
+            -5.28,
+            1.71,
+            3.03
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "tile": "B4",
+          "position": [
+            2.63,
+            1.71,
+            6.06
+          ],
+          "rotation": [
+            0,
+            180.01,
+            180
+          ]
+        }
+      ],
+      "startTiles": {
+        "name": "Stone Corridor 1",
+        "tiles": [
+          {
+            "position": [
+              -1.33,
+              1.88,
+              6.83
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "position": [
+              -1.31,
+              1.88,
+              5.3
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "overlayTiles": [
+        {
+          "bag": 1,
+          "type": [
+            {
+              "name": "Stone Corridor 1",
+              "tiles": [
+                {
+                  "position": [
+                    0,
+                    1.77,
+                    6.06
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    180
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Start Area",
+              "tiles": [
+                {
+                  "position": [
+                    0,
+                    2.12,
+                    6.06
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 2,
+          "type": [
+            {
+              "name": "Rubble",
+              "tiles": [
+                {
+                  "position": [
+                    -5.25,
+                    1.88,
+                    6.06
+                  ],
+                  "rotation": [
+                    0,
+                    359.97,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -6.56,
+                    1.88,
+                    2.27
+                  ],
+                  "rotation": [
+                    0,
+                    359.97,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -1.31,
+                    1.88,
+                    0.76
+                  ],
+                  "rotation": [
+                    0,
+                    359.97,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Crystal",
+              "tiles": [
+                {
+                  "position": [
+                    5.25,
+                    1.88,
+                    6.06
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Rock Column",
+              "tiles": [
+                {
+                  "position": [
+                    -7.88,
+                    1.88,
+                    4.55
+                  ],
+                  "rotation": [
+                    0,
+                    0.01,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -3.93,
+                    1.88,
+                    6.82
+                  ],
+                  "rotation": [
+                    0.01,
+                    359.4,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -2.63,
+                    1.88,
+                    -1.52
+                  ],
+                  "rotation": [
+                    0,
+                    0.01,
+                    -0.01
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Boulder 2",
+              "tiles": [
+                {
+                  "position": [
+                    -6.55,
+                    1.88,
+                    -2.27
+                  ],
+                  "rotation": [
+                    0.01,
+                    59.98,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -3.94,
+                    1.88,
+                    3.79
+                  ],
+                  "rotation": [
+                    0,
+                    120,
+                    0.01
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": [
+            {
+              "name": "Scenario Aid Token",
+              "tiles": [
+                {
+                  "name": "a",
+                  "position": [
+                    -9.19,
+                    1.77,
+                    -2.27
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "name": "a",
+                  "position": [
+                    0,
+                    1.82,
+                    6.06
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "name": "b",
+                  "position": [
+                    -9.19,
+                    1.77,
+                    5.3
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "name": "c",
+                  "position": [
+                    -9.19,
+                    1.77,
+                    8.34
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "name": "d",
+                  "position": [
+                    -9.19,
+                    1.77,
+                    2.27
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "name": "d",
+                  "position": [
+                    -9.19,
+                    1.77,
+                    0.76
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "monsterList": [
+    "Cave Bear",
+    "Ooze",
+    "Sun Demon"
+  ],
+  "id": "Solo Scenario Cragheart"
+}

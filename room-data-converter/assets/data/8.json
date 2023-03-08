@@ -1,0 +1,389 @@
+{
+  "name": "Elemental Secrets",
+  "icon": "TrackerElementalist",
+  "campaign": "Solo Scenarios",
+  "scenarioPages": [
+    {
+      "image": "http://cloud-3.steamusercontent.com/ugc/878629355914715950/E7C99D2236F5F0FD48FD5E043C00158139161832/"
+    }
+  ],
+  "doorTiles": [
+    {
+      "name": "Stone Door Horizontal",
+      "tiles": [
+        {
+          "rooms": [
+            1,
+            3
+          ],
+          "position": [
+            0,
+            1.77,
+            5.25
+          ],
+          "rotation": [
+            0,
+            270.63,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stone Door Vertical",
+      "tiles": [
+        {
+          "rooms": [
+            1,
+            2
+          ],
+          "position": [
+            -5.3,
+            1.77,
+            3.94
+          ],
+          "rotation": [
+            0,
+            269.99,
+            0
+          ]
+        },
+        {
+          "rooms": [
+            1,
+            4
+          ],
+          "position": [
+            5.3,
+            1.77,
+            3.94
+          ],
+          "rotation": [
+            0,
+            270,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "gridType": 2,
+  "rooms": [
+    {
+      "mapTiles": [
+        {
+          "tile": "H1",
+          "position": [
+            -0.76,
+            1.65,
+            1.31
+          ],
+          "rotation": [
+            0,
+            90.02,
+            0
+          ]
+        }
+      ],
+      "startTiles": {
+        "name": "Stone Corridor 1",
+        "tiles": [
+          {
+            "position": [
+              -0.76,
+              1.88,
+              -3.94
+            ],
+            "rotation": [
+              0,
+              209.91,
+              0
+            ]
+          },
+          {
+            "position": [
+              0.76,
+              1.88,
+              -3.94
+            ],
+            "rotation": [
+              0,
+              209.9,
+              0
+            ]
+          }
+        ]
+      },
+      "overlayTiles": [
+        {
+          "bag": 7,
+          "type": [
+            {
+              "name": "Poison Gas",
+              "statuses": [
+                "Poison",
+                "Damage"
+              ],
+              "tiles": [
+                {
+                  "position": [
+                    0,
+                    1.88,
+                    2.63
+                  ],
+                  "rotation": [
+                    0,
+                    269.96,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Flame Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -4.55,
+                1.77,
+                2.63
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Earth Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -2.27,
+                1.77,
+                3.94
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Frost Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                2.27,
+                1.77,
+                3.94
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Wind Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                4.55,
+                1.77,
+                2.63
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "B3",
+          "position": [
+            -8.34,
+            1.71,
+            3.94
+          ],
+          "rotation": [
+            0,
+            269.98,
+            180
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Wind Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                -9.09,
+                1.77,
+                2.63
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "C2",
+          "position": [
+            0.76,
+            1.77,
+            9.19
+          ],
+          "rotation": [
+            0,
+            90.03,
+            0
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 7,
+          "type": [
+            {
+              "name": "Poison Gas",
+              "statuses": [
+                "Poison",
+                "Damage"
+              ],
+              "tiles": [
+                {
+                  "position": [
+                    -1.52,
+                    1.88,
+                    7.88
+                  ],
+                  "rotation": [
+                    0,
+                    269.96,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    3.03,
+                    1.88,
+                    7.88
+                  ],
+                  "rotation": [
+                    0,
+                    269.96,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Frost Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                0,
+                1.77,
+                10.5
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Earth Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                1.7,
+                1.77,
+                10.66
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "B2",
+          "position": [
+            8.34,
+            1.71,
+            3.94
+          ],
+          "rotation": [
+            0,
+            270.03,
+            180
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Flame Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                9.09,
+                1.77,
+                2.63
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "monsterList": [
+    "Frost Demon",
+    "Earth Demon",
+    "Flame Demon",
+    "Wind Demon"
+  ],
+  "id": "Solo Scenario Elementalist"
+}

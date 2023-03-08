@@ -1,0 +1,492 @@
+{
+  "name": "Armory Heist",
+  "icon": "TrackerScoundrel",
+  "campaign": "Solo Scenarios",
+  "scenarioPages": [
+    {
+      "image": "http://cloud-3.steamusercontent.com/ugc/878629355914711266/646BD9304A01E51804AC971BB5C8669595433278/"
+    }
+  ],
+  "gridType": 2,
+  "doorTiles": [
+    {
+      "name": "Stone Door Vertical",
+      "tiles": [
+        {
+          "rooms": [
+            1,
+            2
+          ],
+          "position": [
+            2.27,
+            1.77,
+            -3.94
+          ],
+          "rotation": [
+            0,
+            90,
+            0
+          ]
+        },
+        {
+          "rooms": [
+            3,
+            4
+          ],
+          "position": [
+            1.51,
+            1.77,
+            7.87
+          ],
+          "rotation": [
+            0,
+            270,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Stone Door Horizontal",
+      "tiles": [
+        {
+          "rooms": [
+            2,
+            3
+          ],
+          "position": [
+            7.58,
+            1.77,
+            5.25
+          ],
+          "rotation": [
+            0,
+            270,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "mapTiles": [
+        {
+          "tile": "E1",
+          "position": [
+            -1.52,
+            1.71,
+            -2.63
+          ],
+          "rotation": [
+            0,
+            180,
+            0
+          ]
+        }
+      ],
+      "startTiles": {
+        "name": "Stone Corridor 1",
+        "tiles": [
+          {
+            "position": [
+              -4.55,
+              1.88,
+              -2.63
+            ],
+            "rotation": [
+              0,
+              90,
+              0
+            ]
+          },
+          {
+            "position": [
+              -3.79,
+              1.88,
+              -3.94
+            ],
+            "rotation": [
+              0,
+              90,
+              0
+            ]
+          },
+          {
+            "position": [
+              -4.54,
+              1.88,
+              -5.24
+            ],
+            "rotation": [
+              0,
+              90,
+              0
+            ]
+          }
+        ]
+      },
+      "overlayTiles": [
+        {
+          "type": [
+            {
+              "name": "Scenario Aid Token",
+              "tiles": [
+                {
+                  "name": "a",
+                  "position": [
+                    -2.27,
+                    1.77,
+                    -3.94
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "City Guard",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                0.76,
+                1.77,
+                -1.31
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                0.76,
+                1.77,
+                -6.56
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "H1",
+          "position": [
+            8.34,
+            1.66,
+            -1.31
+          ],
+          "rotation": [
+            0,
+            270,
+            0
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Stone Pillar",
+              "tiles": [
+                {
+                  "position": [
+                    7.58,
+                    1.94,
+                    2.63
+                  ],
+                  "rotation": [
+                    0,
+                    90,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    7.58,
+                    1.94,
+                    0
+                  ],
+                  "rotation": [
+                    0,
+                    90,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 7,
+          "type": [
+            {
+              "name": "Bear Trap",
+              "statuses": [
+                "Damage"
+              ],
+              "tiles": [
+                {
+                  "position": [
+                    4.55,
+                    1.94,
+                    -2.63
+                  ],
+                  "rotation": [
+                    0,
+                    90,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    7.59,
+                    1.94,
+                    -2.63
+                  ],
+                  "rotation": [
+                    0,
+                    90,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    10.61,
+                    1.94,
+                    -2.63
+                  ],
+                  "rotation": [
+                    0,
+                    90,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "City Guard",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                12.12,
+                1.83,
+                -2.63
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                6.82,
+                1.83,
+                -3.94
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Stone Golem",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                8.33,
+                1.83,
+                3.94
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "A2",
+          "position": [
+            5.31,
+            1.71,
+            6.57
+          ],
+          "rotation": [
+            0,
+            90,
+            0
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "City Guard",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                2.27,
+                1.77,
+                6.57
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Stone Golem",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                7.58,
+                1.77,
+                7.88
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "B2",
+          "position": [
+            -1.52,
+            1.71,
+            7.88
+          ],
+          "rotation": [
+            0,
+            90,
+            180
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Stone Pillar",
+              "tiles": [
+                {
+                  "position": [
+                    -1.52,
+                    1.88,
+                    7.88
+                  ],
+                  "rotation": [
+                    0,
+                    90,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 8,
+          "type": [
+            {
+              "name": "Treasure Chest Horizontal",
+              "tiles": [
+                {
+                  "position": [
+                    -3.03,
+                    1.88,
+                    10.5
+                  ],
+                  "rotation": [
+                    0,
+                    90,
+                    0
+                  ],
+                  "action": {
+                    "treasure": "G"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Ancient Artillery",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                0,
+                1.77,
+                10.5
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                -3.79,
+                1.77,
+                6.56
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "monsterList": [
+    "City Guard",
+    "Stone Golem",
+    "Ancient Artillery"
+  ],
+  "id": "Solo Scenario Scoundrel"
+}

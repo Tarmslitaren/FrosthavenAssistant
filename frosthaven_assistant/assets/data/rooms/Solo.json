@@ -1,0 +1,1316 @@
+{
+  "17": [
+    {
+      "B4": {
+        "Hound": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Forest Imp": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "G2a(1)": {
+        "Rending Drake": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "N1a(2)": {
+        "Hound": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Forest Imp": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "E1b(3)": {
+        "Cave Bear": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Shaman": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "12": [
+    {
+      "G1": {
+        "Living Corpse": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "M1b": {
+        "Cultist": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Living Bones": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "C2a(1)": {
+        "Cultist": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Living Bones": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Living Corpse": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Inox Necromancer": {
+          "elite": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "18": [
+    {
+      "N1": {
+        "Giant Viper": {
+          "normal": [
+            4,
+            4,
+            4
+          ],
+          "elite": [
+            2,
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "L1a": {
+        "Living Spirit": {
+          "normal": [
+            3,
+            3,
+            3
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "M1a": {
+        "Stone Golem": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "1": [
+    {
+      "L1": {
+        "Bandit Guard": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "G1b": {
+        "Bandit Archer": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Bandit Guard": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "I1b(1)": {
+        "Bandit Archer": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Living Bones": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "5": [],
+  "19": [
+    {
+      "M1": {
+        "Earth Demon (Diviner Special)": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Valrath Savage": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "29": {
+        "Valrath Savage": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "73": {
+        "Valrath Savage": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "90": {
+        "Valrath Savage": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "14": [
+    {
+      "D1": {
+        "Ghost Wolf": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "C2a(1)": {
+        "Deep Earth": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "G1a(2)": {
+        "High Flame": {
+          "elite": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "A4a(3)": {
+        "Giant Viper (Angry Face Special)": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            2,
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "F1b": {
+        "Spitting Drake": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "16": [
+    {
+      "H1": {
+        "Flame Demon": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Earth Demon": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Frost Demon": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Wind Demon": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "B3b": {
+        "Wind Demon": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "C2b": {
+        "Frost Demon": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Earth Demon": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "B2b": {
+        "Flame Demon": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "6": [
+    {
+      "E1": {
+        "Vermling Scout": {
+          "normal": [
+            6,
+            6,
+            6
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "H2b(1)": {}
+    },
+    {
+      "D1a(2)": {
+        "Vermling Scout": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Vermling Shaman": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "10": [
+    {
+      "G2a": {
+        "Night Demon": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Deep Terror": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "D2b": {
+        "Night Demon": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Deep Terror": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "L2a": {
+        "Night Demon": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Deep Terror": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "A2b": {
+        "Night Demon": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "B4b": {
+        "Night Demon": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "11": [
+    {
+      "start": {}
+    },
+    {
+      "A1a(B)": {
+        "Giant Viper": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Black Imp": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "C1a(C)": {
+        "Giant Viper": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Black Imp": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "C2b(D)": {
+        "Black Imp": {
+          "normal": [
+            5,
+            5,
+            5
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "D1a(E)": {
+        "Giant Viper": {
+          "normal": [
+            9,
+            9,
+            9
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "15": [
+    {
+      "A1": {
+        "City Guard": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "A3b": {
+        "City Guard": {
+          "normal": [
+            5,
+            5,
+            5
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "N1b(1)": {
+        "City Guard": {
+          "normal": [
+            4,
+            4,
+            4
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Lieutenant": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "8": [
+  ],
+  "4": [
+    {
+      "E1a": {
+        "City Guard (Scoundrel Special)": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "H1b": {
+        "City Guard (Scoundrel Special)": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Stone Golem (Scoundrel Special)": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "A2a": {
+        "City Guard (Scoundrel Special)": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Stone Golem (Scoundrel Special)": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "B2b": {
+        "Ancient Artillery": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "13": [
+    {
+      "B1": {
+        "City Guard": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Bandit Guard (Note Special)": {
+          "normal": [
+            4,
+            4,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Bandit Archer (Note Special)": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "I1a(1)": {
+        "City Guard": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "City Archer": {
+          "normal": [
+            4,
+            4,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "G2b": {
+        "Stone Golem": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "A1b(2)": {
+        "Song of the Deep": {
+          "elite": [
+            0,
+            0,
+            0
+          ],
+          "normal": [
+            1,
+            1,
+            1
+          ]
+        },
+        "City Guard": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "3": [
+    {
+      "G2": {
+        "Black Imp": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Spitting Drake": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "A1b(A)": {
+        "Black Imp": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            2,
+            2,
+            2
+          ]
+        },
+        "Spitting Drake": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "I1b": {
+        "Black Imp": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Spitting Drake": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "A2a(B)": {
+        "Black Imp": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "9": [],
+  "2": [
+    {
+      "G1": {
+        "City Guard (Ally)": {
+          "normal": [
+            4,
+            4,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Scout": {
+          "normal": [
+            6,
+            6,
+            6
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Shaman": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            2,
+            2,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "7": [
+    {
+      "L1": {
+        "City Guard (Sun Special)": {
+          "normal": [
+            6,
+            6,
+            6
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Bandit Guard": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Bandit Archer": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ]
+}

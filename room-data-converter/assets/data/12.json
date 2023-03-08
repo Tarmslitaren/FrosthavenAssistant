@@ -1,0 +1,752 @@
+{
+  "name": "Storage Fees",
+  "icon": "TrackerQuartermaster",
+  "campaign": "Solo Scenarios",
+  "scenarioPages": [
+    {
+      "image": "http://cloud-3.steamusercontent.com/ugc/878629355914713306/4C0470CAB407362C1CC7E30FC5E5BFBB74ADDDCC/"
+    }
+  ],
+  "gridType": 1,
+  "doorTiles": [
+    {
+      "name": "Wooden Door Horizontal",
+      "tiles": [
+        {
+          "rooms": [
+            1,
+            2
+          ],
+          "position": [
+            -2.63,
+            1.77,
+            -4.55
+          ],
+          "rotation": [
+            0,
+            180,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "mapTiles": [
+        {
+          "tile": "B1",
+          "position": [
+            -5.25,
+            1.71,
+            -4.55
+          ],
+          "rotation": [
+            0,
+            180,
+            0
+          ]
+        }
+      ],
+      "startTiles": {
+        "name": "Stone Corridor 1",
+        "tiles": [
+          {
+            "position": [
+              -7.88,
+              1.88,
+              -3.03
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "position": [
+              -7.88,
+              1.88,
+              -4.54
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "position": [
+              -7.88,
+              1.88,
+              -6.06
+            ],
+            "rotation": [
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "overlayTiles": [
+        {
+          "bag": 7,
+          "type": [
+            {
+              "name": "Spike Trap",
+              "statuses": [
+                "Stun"
+              ],
+              "tiles": [
+                {
+                  "position": [
+                    -5.25,
+                    1.88,
+                    -4.55
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Bear Trap",
+              "statuses": [
+                "Damage"
+              ],
+              "tiles": [
+                {
+                  "position": [
+                    -6.57,
+                    1.88,
+                    -2.27
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Barrel",
+              "tiles": [
+                {
+                  "position": [
+                    -6.58,
+                    1.88,
+                    -3.8
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    -5.26,
+                    1.88,
+                    -6.07
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "I1",
+          "position": [
+            1.31,
+            1.77,
+            -5.3
+          ],
+          "rotation": [
+            0,
+            180,
+            0
+          ]
+        },
+        {
+          "tile": "I2",
+          "position": [
+            9.19,
+            1.65,
+            -5.3
+          ],
+          "rotation": [
+            0,
+            180,
+            180
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 7,
+          "type": [
+            {
+              "name": "Spike Trap",
+              "statuses": [
+                "Stun"
+              ],
+              "tiles": [
+                {
+                  "position": [
+                    2.62,
+                    1.88,
+                    -1.52
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    2.63,
+                    1.88,
+                    -4.55
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    10.5,
+                    1.88,
+                    -4.55
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    6.56,
+                    1.88,
+                    -6.82
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    7.88,
+                    1.88,
+                    -7.58
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Bear Trap",
+              "statuses": [
+                "Damage"
+              ],
+              "tiles": [
+                {
+                  "position": [
+                    2.62,
+                    1.89,
+                    -3.03
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    3.94,
+                    1.89,
+                    -3.79
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    0,
+                    1.89,
+                    -4.55
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    7.88,
+                    1.88,
+                    -6.06
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    10.5,
+                    1.88,
+                    -6.06
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Barrel",
+              "tiles": [
+                {
+                  "position": [
+                    3.94,
+                    1.89,
+                    -5.3
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Bookcase",
+              "tiles": [
+                {
+                  "position": [
+                    10.5,
+                    1.88,
+                    -3.03
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    1.33,
+                    1.89,
+                    -3.79
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    9.19,
+                    1.88,
+                    -6.82
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    0,
+                    1.89,
+                    -7.58
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Cabinet",
+              "tiles": [
+                {
+                  "position": [
+                    7.88,
+                    1.88,
+                    -1.52
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    6.56,
+                    1.88,
+                    -8.34
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Crate A",
+              "tiles": [
+                {
+                  "position": [
+                    -1.31,
+                    1.88,
+                    -2.27
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    11.81,
+                    1.88,
+                    -6.82
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Shelf",
+              "tiles": [
+                {
+                  "position": [
+                    5.25,
+                    1.89,
+                    -1.51
+                  ],
+                  "rotation": [
+                    0,
+                    240,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    6.56,
+                    1.88,
+                    -5.31
+                  ],
+                  "rotation": [
+                    0,
+                    240,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 1,
+          "type": [
+            {
+              "name": "Wooden Corridor 1",
+              "tiles": [
+                {
+                  "position": [
+                    5.25,
+                    1.77,
+                    -7.58
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    180
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Wooden Corridor 2",
+              "tiles": [
+                {
+                  "position": [
+                    5.25,
+                    1.89,
+                    -4.55
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 8,
+          "type": [
+            {
+              "name": "Treasure Chest Vertical",
+              "tiles": [
+                {
+                  "position": [
+                    11.81,
+                    1.88,
+                    -0.76
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "action": {
+                    "name": "Loot",
+                    "style": "Treasure",
+                    "confirm": false,
+                    "rooms": [
+                      3
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": [
+            {
+              "name": "Scenario Aid Token",
+              "tiles": [
+                {
+                  "name": "a",
+                  "position": [
+                    9.19,
+                    1.77,
+                    -8.34
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "name": "b",
+                  "position": [
+                    1.31,
+                    1.77,
+                    -8.34
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "name": "c",
+                  "position": [
+                    6.56,
+                    1.77,
+                    -0.76
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "name": "c",
+                  "position": [
+                    -1.31,
+                    1.77,
+                    -0.76
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "name": "d",
+                  "position": [
+                    1.19,
+                    1.84,
+                    -6.85
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                },
+                {
+                  "name": "d",
+                  "position": [
+                    2.63,
+                    1.77,
+                    -7.58
+                  ],
+                  "rotation": [
+                    0,
+                    180,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": {},
+      "monsters": [
+        {
+          "name": "Bandit Guard",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 2
+              },
+              "position": [
+                1.31,
+                1.92,
+                -8.34
+              ]
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": [
+                9.19,
+                1.92,
+                -8.34
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Bandit Archer",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": [
+                -1.31,
+                1.92,
+                -0.76
+              ]
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": [
+                6.56,
+                1.92,
+                -0.76
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Hound",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": [
+                1.31,
+                1.92,
+                -6.82
+              ]
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": [
+                2.62,
+                1.92,
+                -7.58
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "monsterList": [
+    "Bandit Guard",
+    "Bandit Archer",
+    "Hound"
+  ],
+  "id": "Solo Scenario Quartermaster"
+}

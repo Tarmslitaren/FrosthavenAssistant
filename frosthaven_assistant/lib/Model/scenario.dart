@@ -154,7 +154,9 @@ class ScenarioModel {
         } else {
           //todo: it might be a bit silly that room data and section data is separate
           //merge if has already
-          ScenarioModel? section = sectionList.firstWhereOrNull((element) => element.name == key.split(" ")[0]);
+          int splitIndex = 0;
+          //would be nice to know which is solo scenario
+          ScenarioModel? section = sectionList.firstWhereOrNull((element) => element.name == key.split(" ")[splitIndex]);
           if(section != null) {
             //merge
             ScenarioModel model = ScenarioModel.sectionFromJson(key, sections[key], rooms);
@@ -163,8 +165,6 @@ class ScenarioModel {
             section.specialRules = model.specialRules;
 
           } else {
-            //this shouldn't happen (but I guess it could if there are 0 monster sections...
-            print("section room name mismatch perhaps?");
             sectionList.add(ScenarioModel.sectionFromJson(key, sections[key], rooms));
           }
         }

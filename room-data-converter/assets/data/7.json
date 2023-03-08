@@ -1,0 +1,508 @@
+{
+  "name": "Corrupted Hunt",
+  "icon": "TrackerDoomstalker",
+  "campaign": "Solo Scenarios",
+  "scenarioPages": [
+    {
+      "image": "http://cloud-3.steamusercontent.com/ugc/1018321821846968869/D9E0140A30A757A6C6E646965C5416657423705A/"
+    },
+    {
+      "image": "http://cloud-3.steamusercontent.com/ugc/878629355914715311/A512389CEB2B0D287A03CFD94D5C1CC65E2DB930/"
+    }
+  ],
+  "doorTiles": [
+    {
+      "name": "Light Fog",
+      "tiles": [
+        {
+          "rooms": [
+            1,
+            2
+          ],
+          "position": [
+            -1.51,
+            1.88,
+            7.89
+          ],
+          "rotation": [
+            359.99,
+            330,
+            0.01
+          ],
+          "tokens": [
+            "1"
+          ]
+        },
+        {
+          "rooms": [
+            1,
+            3
+          ],
+          "position": [
+            0.76,
+            1.88,
+            1.3
+          ],
+          "rotation": [
+            0,
+            330,
+            0.03
+          ],
+          "tokens": [
+            "2"
+          ]
+        },
+        {
+          "rooms": [
+            3,
+            4
+          ],
+          "position": [
+            3.79,
+            1.88,
+            -1.31
+          ],
+          "rotation": [
+            0.01,
+            330,
+            0.01
+          ],
+          "tokens": [
+            "3"
+          ]
+        },
+        {
+          "rooms": [
+            3,
+            5
+          ],
+          "position": [
+            -8.34,
+            1.88,
+            -1.31
+          ],
+          "rotation": [
+            0.01,
+            330,
+            0.01
+          ]
+        }
+      ]
+    }
+  ],
+  "gridType": 2,
+  "rooms": [
+    {
+      "mapTiles": [
+        {
+          "tile": "D1",
+          "position": [
+            1.52,
+            1.65,
+            5.25
+          ],
+          "rotation": [
+            0,
+            299.93,
+            180
+          ]
+        }
+      ],
+      "startTiles": {
+        "name": "Stone Corridor 1",
+        "tiles": [
+          {
+            "position": [
+              3.03,
+              1.88,
+              7.88
+            ],
+            "rotation": [
+              0,
+              209.98,
+              0
+            ]
+          }
+        ]
+      },
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Tree",
+              "tiles": [
+                {
+                  "position": [
+                    0.76,
+                    1.88,
+                    6.56
+                  ],
+                  "rotation": [
+                    0,
+                    150,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 2,
+          "type": [
+            {
+              "name": "Log",
+              "tiles": [
+                {
+                  "position": [
+                    3.03,
+                    1.88,
+                    5.25
+                  ],
+                  "rotation": [
+                    0,
+                    149.99,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Hound",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                0,
+                1.77,
+                2.63
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "C2",
+          "position": [
+            -3.03,
+            1.65,
+            10.5
+          ],
+          "rotation": [
+            0,
+            330.12,
+            180
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 2,
+          "type": [
+            {
+              "name": "Log",
+              "tiles": [
+                {
+                  "position": [
+                    -3.79,
+                    1.88,
+                    9.19
+                  ],
+                  "rotation": [
+                    0,
+                    210.01,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Earth Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                -4.55,
+                1.77,
+                10.5
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "G1",
+          "position": [
+            -2.29,
+            1.71,
+            -1.3
+          ],
+          "rotation": [
+            0,
+            270.12,
+            0
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Stump",
+              "tiles": [
+                {
+                  "position": [
+                    -3.79,
+                    1.88,
+                    -1.31
+                  ],
+                  "rotation": [
+                    0,
+                    90,
+                    0
+                  ]
+                },
+                {
+                  "position": [
+                    0,
+                    1.88,
+                    -2.63
+                  ],
+                  "rotation": [
+                    0,
+                    90,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Flame Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                -6.82,
+                1.77,
+                -1.31
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "A4",
+          "position": [
+            7.58,
+            1.71,
+            -2.63
+          ],
+          "rotation": [
+            0,
+            90.03,
+            0
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Nest",
+              "tiles": [
+                {
+                  "position": [
+                    7.58,
+                    1.88,
+                    -2.63
+                  ],
+                  "rotation": [
+                    0,
+                    90.13,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Giant Viper",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                6.82,
+                1.77,
+                -1.31
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                8.34,
+                1.77,
+                -1.31
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                6.06,
+                1.77,
+                -2.63
+              ]
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": [
+                9.09,
+                1.77,
+                -2.63
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "F1",
+          "position": [
+            -10.61,
+            1.71,
+            2.63
+          ],
+          "rotation": [
+            0,
+            0.01,
+            0
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Tree",
+              "tiles": [
+                {
+                  "position": [
+                    -10.61,
+                    1.88,
+                    2.62
+                  ],
+                  "rotation": [
+                    0,
+                    210.39,
+                    0
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Nest",
+              "tiles": [
+                {
+                  "position": [
+                    -10.61,
+                    1.88,
+                    7.88
+                  ],
+                  "rotation": [
+                    0,
+                    90.13,
+                    0
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Spitting Drake",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": [
+                -11.37,
+                1.77,
+                6.56
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "monsterList": [
+    "Hound",
+    "Earth Demon",
+    "Flame Demon",
+    "Giant Viper",
+    "Spitting Drake"
+  ],
+  "id": "Solo Scenario Doomstalker"
+}
