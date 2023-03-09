@@ -65,12 +65,11 @@ class Communication {
     if (toDisconnect != null) {
       toDisconnect.destroy();
       _sockets.remove(toDisconnect);
-    } else {
-      print('Could not find socket from connected list: [{}]'
-          .format(_sockets.join('; ')));
     }
   }
 
+  // TODO: Need to test this somehow, or refactor altogether.
+  // If testing, then better to verify assigned functions are being called on specific actions, rather than verify mock socket assignments.
   void listen(
       Function(Uint8List) onData, Function? onError, Function()? onDone) {
     for (var socket in _sockets) {
