@@ -8662,7 +8662,7 @@
             {
               "type": "Objective",
               "name": "Glowing Orb",
-              "health": "(Lx2)+3"
+              "health": "(Lx2)+3)xC"
             }
           ]
         }
