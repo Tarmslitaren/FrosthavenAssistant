@@ -322,6 +322,8 @@ class SetScenarioCommand extends Command {
     //show init message if exists:
     if(initMessage.isNotEmpty && getIt<Settings>().showReminders.value == true) {
       _gameState.toastMessage.value += initMessage;
+    } else {
+      ScaffoldMessenger.of(getIt<BuildContext>()).hideCurrentSnackBar();
     }
   }
 
