@@ -94,7 +94,7 @@ class Server {
       }
       _serverSocket!.close().catchError((error) => print(error));
 
-      _connection.disconnectAll();
+      _connection.removeAll();
     }
     getIt<Settings>().server.value = false;
     leftOverMessage = "";
@@ -115,7 +115,7 @@ class Server {
     print(info);
     getIt<Network>().networkMessage.value = info;
 
-    _connection.connect(client);
+    _connection.add(client);
 
     // listen for events from the client
     try {
@@ -249,7 +249,7 @@ class Server {
           if (getIt<Settings>().server.value == false) {
             //no op
           } else {
-            _connection.disconnect(client);
+            _connection.remove(client);
             print('Client left');
             getIt<Network>().networkMessage.value = 'Client left.';
           }

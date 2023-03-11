@@ -10,7 +10,7 @@ class Connection {
     return _sockets;
   }
 
-  void connect(Socket socket) {
+  void add(Socket socket) {
     _cleanUpClosedConnections();
     if (!_isClosed(socket)) {
       final existingConnections = _find(socket);
@@ -21,13 +21,25 @@ class Connection {
     }
   }
 
+  void removeAll() {
+    _destroy(_sockets);
+  }
+
+  void remove(Socket socket) {
+    _cleanUpClosedConnections();
+    if (!_isClosed(socket)) {
+      var toDisconnect = _find(socket);
+      _destroy(toDisconnect);
+    }
+  }
+
+  bool established() {
+    return _sockets.isNotEmpty;
+  }
+
   Iterable<Socket> _find(Socket socket) {
     return _sockets.where((x) =>
         x.remoteAddress == socket.remoteAddress && x.port == socket.port);
-  }
-
-  void disconnectAll() {
-    _destroy(_sockets);
   }
 
   void _destroy(Iterable<Socket> sockets) {
@@ -38,19 +50,7 @@ class Connection {
     }
   }
 
-  void disconnect(Socket socket) {
-    _cleanUpClosedConnections();
-    if (!_isClosed(socket)) {
-      var toDisconnect = _find(socket);
-      _destroy(toDisconnect);
-    }
-  }
-
-  bool connected() {
-    return _sockets.isNotEmpty;
-  }
-
-  // Check if socet was remotely closed, thus address and port are unaccessable
+  // Check if socket was remotely closed, thus address and port are unaccessable
   bool _isClosed(Socket socket) {
     try {
       socket.remoteAddress;
