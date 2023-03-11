@@ -12,7 +12,7 @@ class Communication {
   final _sockets = <Socket>[];
 
   void sendTo(Socket? socket, String data) {
-    if (socket != null) {
+    if (socket != null && !_isClosed(socket)) {
       socket.write(_composeMessageFrom(data));
     }
   }
@@ -30,18 +30,23 @@ class Communication {
   }
 
   void add(Socket socket) {
-    // final existingConnections = _sockets.where((x) =>
-    //     x.remoteAddress == socket.remoteAddress && x.port == socket.port);
-    // for (var connection in existingConnections) {
-    //   connection.destroy();
-    //   _sockets.remove(connection);
-    // }
-    socket.setOption(SocketOption.tcpNoDelay, true);
-    socket.encoding = utf8;
-    _sockets.add(socket);
+    _cleanUpClosedConnections();
+    if (!_isClosed(socket)) {
+      final existingConnections = _sockets.where((x) =>
+          x.remoteAddress == socket.remoteAddress && x.port == socket.port);
+      while (existingConnections.isNotEmpty) {
+        final socket = existingConnections.first;
+        socket.destroy();
+        _sockets.remove(socket);
+      }
+      socket.setOption(SocketOption.tcpNoDelay, true);
+      socket.encoding = utf8;
+      _sockets.add(socket);
+    }
   }
 
   void sendToAll(String data) {
+    _cleanUpClosedConnections();
     final message = _composeMessageFrom(data);
     for (var socket in _sockets) {
       socket.write(message);
@@ -57,14 +62,16 @@ class Communication {
   }
 
   void disconnect(Socket socket) {
-    var toDisconnect = _sockets
-        .where((x) =>
-            _isClosed(socket) ||
-            x.remoteAddress == socket.remoteAddress && x.port == socket.port)
-        .firstOrNull;
-    if (toDisconnect != null) {
-      toDisconnect.destroy();
-      _sockets.remove(toDisconnect);
+    _cleanUpClosedConnections();
+    if (!_isClosed(socket)) {
+      var toDisconnect = _sockets
+          .where((x) =>
+              x.remoteAddress == socket.remoteAddress && x.port == socket.port)
+          .firstOrNull;
+      if (toDisconnect != null) {
+        toDisconnect.destroy();
+        _sockets.remove(toDisconnect);
+      }
     }
   }
 
@@ -86,6 +93,7 @@ class Communication {
   }
 
   void sendToAllExcept(Socket client, String data) {
+    _cleanUpClosedConnections();
     final recipients = _sockets.where((x) =>
         x.remoteAddress != client.remoteAddress && x.port != client.port);
     for (var socket in recipients) {
@@ -96,8 +104,8 @@ class Communication {
   // Check if socet was remotely closed, thus address and port are unaccessable
   bool _isClosed(Socket socket) {
     try {
-      final _ = socket.remoteAddress;
-      final port = socket.port;
+      socket.remoteAddress;
+      socket.port;
       return false;
     } on SocketException catch (_) {
       return true;
@@ -106,6 +114,15 @@ class Communication {
       print('Unexpected exception in determining socket closure: \'{}\''
           .format(e.toString()));
       return true;
+    }
+  }
+
+  void _cleanUpClosedConnections() {
+    var toDisconnect = _sockets.where((x) => _isClosed(x));
+    while (toDisconnect.isNotEmpty) {
+      var socket = toDisconnect.first;
+      socket.destroy();
+      _sockets.remove(socket);
     }
   }
 }

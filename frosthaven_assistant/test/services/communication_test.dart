@@ -59,6 +59,30 @@ void main() {
   });
 
   group('sockets', () {
+    test('add adds a unique socket', () {
+      // arrange
+      final sut = Communication();
+      final sockets = <Socket>[];
+      for (var i = 0; i < 2; i++) {
+        final socket = MockSocket();
+        sockets.add(socket);
+        when(socket.remoteAddress).thenReturn(InternetAddress.anyIPv4);
+        when(socket.port).thenReturn(0);
+      }
+
+      // act
+      for (var socket in sockets) {
+        sut.add(socket);
+      }
+
+      // assert
+      for (var socket in sockets) {
+        verify(socket.setOption(SocketOption.tcpNoDelay, true));
+      }
+      verify(sockets.first.destroy());
+      verifyNever(sockets.last.destroy());
+    });
+
     test('disconnectAll removes all sockets', () {
       // arrange
       List<Socket> sockets = _setupSockets(_sut);
