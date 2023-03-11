@@ -31,6 +31,7 @@ class Communication {
     }
   }
 
+  // TODO: Change to throw exception if socket is null. Otherwise impossible to test
   void sendTo(Socket? socket, String data) {
     if (socket != null) {
       socket.write(_composeMessageFrom(data));

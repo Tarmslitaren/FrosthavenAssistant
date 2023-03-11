@@ -21,54 +21,43 @@ void main() {
     when(stubConnection.getAll())
         .thenReturn([MockSocket(), MockSocket(), MockSocket()]);
   });
+  group('Message data', () {
+    test('dataFrom data is extracted from message', () {
+      // arrange
+      const expectedData = "TestMessage";
+      final message = createValidMessage(data: expectedData);
 
-  test('message is formatted in template', () {
-    // arrange
-    const message = "TestMessage";
-    final expectedMessage = createValidMessage(data: message);
+      // act
+      final result = _sut.dataFrom(message);
 
-    // act
-    _sut.sendTo(_socket, message);
+      // assert
+      expect(result, expectedData);
+    });
 
-    // assert
-    verify(_socket.write(expectedMessage));
+    test('isValid message should be valid', () {
+      // arrange
+      final validMessage = createValidMessage();
+
+      // act
+      final result = _sut.isValid(validMessage);
+
+      // assert
+      result.shouldBeTrue();
+    });
+
+    test('isValid message should not be valid', () {
+      // arrange
+      const invalidMessage = "Message";
+
+      // act
+      final result = _sut.isValid(invalidMessage);
+
+      // assert
+      result.shouldBeFalse();
+    });
   });
 
-  test('data is extracted from message', () {
-    // arrange
-    const expectedData = "TestMessage";
-    final message = createValidMessage(data: expectedData);
-
-    // act
-    final result = _sut.dataFrom(message);
-
-    // assert
-    expect(result, expectedData);
-  });
-
-  test('message should be valid', () {
-    // arrange
-    final validMessage = createValidMessage();
-
-    // act
-    final result = _sut.isValid(validMessage);
-
-    // assert
-    result.shouldBeTrue();
-  });
-
-  test('message should not be valid', () {
-    // arrange
-    const invalidMessage = "Message";
-
-    // act
-    final result = _sut.isValid(invalidMessage);
-
-    // assert
-    result.shouldBeFalse();
-  });
-
-  group('Messaging', () {
+  group('Message send/recieve', () {
     test('SendToAllExcept sends data to all sockets except one', () {
       // arrange
       const data = 'TestMessage';
@@ -89,7 +78,7 @@ void main() {
       verifyNever(excludedSocket.write(any));
     });
 
-    test('send message to all sockets', () {
+    test('sendToAll sends message to all sockets', () {
       // arrange
       const data = 'Data';
       final message = createValidMessage(data: data);
@@ -102,6 +91,28 @@ void main() {
       for (var socket in sockets) {
         verify(socket.write(message));
       }
+    });
+
+    test('sendTo sends message to a socket', () {
+      // arrange
+      const data = 'Data';
+      final message = createValidMessage(data: data);
+
+      // act
+      _sut.sendTo(_socket, data);
+
+      // assert
+      verify(_socket.write(message));
+    });
+
+    test('sendTo does not send message for no socket', () {
+      // arrange
+      const data = 'Data';
+
+      // act
+      _sut.sendTo(null, data);
+
+      // assert
     });
   });
 }
