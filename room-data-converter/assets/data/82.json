@@ -1,0 +1,584 @@
+{
+  "name": "Storm Mountain",
+  "icon": "http://cloud-3.steamusercontent.com/ugc/2041854257214276432/BC2CB2AF83279E3E6E8EF879BC779CAFB38DF904/",
+  "gridType": 2,
+  "scenarioBook": {
+    "name": "ToA Rulebook and Scenario Guide",
+    "page": 44
+  },
+  "monsters": {
+    "Frost Demon": {
+      "all": {
+        "abilityDeck": "Night Demon"
+      },
+      "normal": {
+        "base": "Normal"
+      },
+      "elite": {
+        "base": "Elite"
+      }
+    },
+    "Stone Golem": {
+      "all": {
+        "stats": {
+          "text": "Movements ignore difficult terrain."
+        }
+      }
+    }
+  },
+  "rooms": [
+    {
+      "mapTiles": [
+        {
+          "tile": "B4",
+          "position": {
+            "x": -7.58,
+            "y": 1.71,
+            "z": 4.38
+          },
+          "rotation": {
+            "x": 0,
+            "y": 210,
+            "z": 180
+          }
+        },
+        {
+          "tile": "D1",
+          "position": {
+            "x": 0,
+            "y": 1.65,
+            "z": 1.75
+          },
+          "rotation": {
+            "x": 0,
+            "y": 360,
+            "z": 180
+          },
+          "scale": {
+            "x": 0.99,
+            "y": 1,
+            "z": 0.99
+          }
+        },
+        {
+          "tile": "J2",
+          "position": {
+            "x": 3.79,
+            "y": 1.65,
+            "z": -2.19
+          },
+          "rotation": {
+            "x": 0,
+            "y": 30,
+            "z": 180
+          }
+        },
+        {
+          "tile": "J1",
+          "position": {
+            "x": 0.76,
+            "y": 1.65,
+            "z": 8.31
+          },
+          "rotation": {
+            "x": 0,
+            "y": 270,
+            "z": 180
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Wind Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 3.79,
+                "y": 1.77,
+                "z": -4.81
+              }
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 4.55,
+                "y": 1.77,
+                "z": 7
+              }
+            }
+          ]
+        },
+        {
+          "name": "Frost Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 7.58,
+                "y": 1.77,
+                "z": 1.75
+              },
+              "named": "Volt Demon"
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": -4.55,
+                "y": 1.77,
+                "z": 9.62
+              },
+              "named": "Volt Demon"
+            }
+          ]
+        }
+      ],
+      "startTiles": {
+        "name": "Start Area",
+        "tiles": [
+          {
+            "position": {
+              "x": 2.27,
+              "y": 1.88,
+              "z": 0.44
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          }
+        ]
+      },
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Scenario Spawn Piece",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -15.16,
+                    "y": 1.79,
+                    "z": 6.13
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  },
+                  "action": {
+                    "name": "46A",
+                    "style": "Door",
+                    "compound": [
+                      {
+                        "rooms": [
+                          2
+                        ]
+                      },
+                      {
+                        "remove": {
+                          "tag": "CS82 Unsuspicious Rock Column"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Stone Pillar",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -6.82,
+                    "y": 1.88,
+                    "z": 5.69
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -8.33,
+                    "y": 1.88,
+                    "z": 5.69
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -9.11,
+                    "y": 1.88,
+                    "z": 4.36
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -8.34,
+                    "y": 1.88,
+                    "z": 3.06
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Crystal",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 0,
+                    "y": 1.88,
+                    "z": 1.75
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Rock Column",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -5.3,
+                    "y": 1.88,
+                    "z": 3.06
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  },
+                  "tags": [
+                    "CS82 Unsuspicious Rock Column"
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Altar Vertical",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -7.58,
+                    "y": 1.88,
+                    "z": 4.38
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  },
+                  "tokens": [
+                    "a"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 2,
+          "type": [
+            {
+              "name": "Stairs Vertical",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -3.03,
+                    "y": 1.88,
+                    "z": 4.38
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -4.55,
+                    "y": 1.88,
+                    "z": 1.74
+                  },
+                  "rotation": {
+                    "x": 360,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Rubble",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -3.79,
+                    "y": 1.88,
+                    "z": 3.06
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 3,
+          "type": [
+            {
+              "name": "Thorns",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -3.78,
+                    "y": 1.88,
+                    "z": 5.68
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -6.82,
+                    "y": 1.88,
+                    "z": 0.44
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 1,
+          "type": [
+            {
+              "name": "Stone Corridor 2",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 0.76,
+                    "y": 1.88,
+                    "z": -2.19
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 3.05,
+                    "y": 1.88,
+                    "z": 4.38
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": [
+            {
+              "name": "Scenario Aid Token",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 9.09,
+                    "y": 1.77,
+                    "z": -0.88
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  },
+                  "name": "b"
+                },
+                {
+                  "position": {
+                    "x": -1.52,
+                    "y": 1.77,
+                    "z": -6.13
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  },
+                  "name": "c"
+                },
+                {
+                  "position": {
+                    "x": -3.03,
+                    "y": 1.77,
+                    "z": 12.25
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  },
+                  "name": "d"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "monsters": [
+        {
+          "name": "Stone Golem",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": -5.3,
+                "y": 1.77,
+                "z": 3.06
+              }
+            }
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Scenario Spawn Piece",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -15.16,
+                    "y": 1.79,
+                    "z": 0
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  },
+                  "action": {
+                    "name": "46B",
+                    "rooms": [
+                      3
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "monsters": [
+        {
+          "name": "Frost Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": -1.53,
+                "y": 1.91,
+                "z": -6.11
+              },
+              "named": "Volt Demon"
+            },
+            {
+              "numCharacters": {
+                "1": 2
+              },
+              "position": {
+                "x": -3.03,
+                "y": 1.91,
+                "z": 12.24
+              },
+              "named": "Volt Demon"
+            }
+          ]
+        },
+        {
+          "name": "Wind Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 9.06,
+                "y": 1.91,
+                "z": -0.86
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "monsterList": [
+    "Wind Demon",
+    "Frost Demon",
+    "Stone Golem"
+  ],
+  "campaign": "Crimson Scales",
+  "id": "CS 82"
+}

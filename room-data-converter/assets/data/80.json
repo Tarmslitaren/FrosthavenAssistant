@@ -1,0 +1,766 @@
+{
+  "name": "Conflux of Power",
+  "icon": "http://cloud-3.steamusercontent.com/ugc/2041854257214275925/3E8863E1E7946EE73206754D2341D6A7CCB19B31/",
+  "gridType": 2,
+  "scenarioBook": {
+    "name": "ToA Rulebook and Scenario Guide",
+    "page": 39
+  },
+  "monsters": {
+    "Flame Demon": {
+      "elite": {
+        "hp": [
+          "*",
+          "H",
+          [
+            "+",
+            "C",
+            1
+          ]
+        ],
+        "base": "Named",
+        "stats": {
+          "text": "Whenever an enemy ends their turn in an adjacent hex, the enemy gains Wound."
+        }
+      }
+    },
+    "Frost Demon": {
+      "elite": {
+        "hp": [
+          "*",
+          "H",
+          [
+            "+",
+            "C",
+            1
+          ]
+        ],
+        "base": "Named",
+        "stats": {
+          "text": "Whenever an enemy ends their turn in an adjacent hex, the enemy gains Chill."
+        }
+      }
+    },
+    "Savvas Icestorm": {
+      "all": {
+        "base": "Ally",
+        "abilityDeck": "CS80 Savvas Acolyte",
+        "stats": {
+          "attributes": {
+            "remove": [
+              "Pierce",
+              "Shield"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "doorTiles": [
+    {
+      "name": "Dark Fog",
+      "tiles": [
+        {
+          "rooms": [
+            2,
+            3
+          ],
+          "position": {
+            "x": 5.3,
+            "y": 1.88,
+            "z": 3.94
+          },
+          "rotation": {
+            "x": 360,
+            "y": 270,
+            "z": 360
+          },
+          "tokens": [
+            "2"
+          ]
+        },
+        {
+          "rooms": [
+            1,
+            2
+          ],
+          "position": {
+            "x": -6.06,
+            "y": 1.88,
+            "z": -2.63
+          },
+          "rotation": {
+            "x": 0,
+            "y": 270,
+            "z": 0
+          },
+          "tokens": [
+            "1"
+          ]
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "mapTiles": [
+        {
+          "tile": "E1",
+          "position": {
+            "x": -9.85,
+            "y": 1.71,
+            "z": -3.94
+          },
+          "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 180
+          },
+          "scale": {
+            "x": 0.206,
+            "y": 0.1,
+            "z": 0.206
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Savvas Icestorm",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": -12.12,
+                "y": 1.92,
+                "z": -2.63
+              },
+              "named": "Savvas Acolyte"
+            }
+          ]
+        },
+        {
+          "name": "Frost Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 2
+              },
+              "position": {
+                "x": -6.85,
+                "y": 1.77,
+                "z": -3.94
+              },
+              "named": "Glacier Demon"
+            }
+          ]
+        },
+        {
+          "name": "Flame Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 2
+              },
+              "position": {
+                "x": -6.85,
+                "y": 1.77,
+                "z": -1.32
+              },
+              "named": "Inferno Demon"
+            }
+          ]
+        }
+      ],
+      "startTiles": {
+        "name": "Start Area",
+        "tiles": [
+          {
+            "position": {
+              "x": -12.09,
+              "y": 1.9,
+              "z": -5.24
+            },
+            "rotation": {
+              "x": 359,
+              "y": 30,
+              "z": 360
+            }
+          },
+          {
+            "position": {
+              "x": -11.35,
+              "y": 1.88,
+              "z": -3.94
+            },
+            "rotation": {
+              "x": 360,
+              "y": 30,
+              "z": 360
+            }
+          },
+          {
+            "position": {
+              "x": -12.85,
+              "y": 1.88,
+              "z": -3.94
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          },
+          {
+            "position": {
+              "x": -12.86,
+              "y": 1.88,
+              "z": -1.32
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          },
+          {
+            "position": {
+              "x": -11.35,
+              "y": 1.88,
+              "z": -1.33
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          },
+          {
+            "position": {
+              "x": -12.1,
+              "y": 1.88,
+              "z": -0.01
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          }
+        ]
+      },
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Bush",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -7.6,
+                    "y": 1.88,
+                    "z": -5.25
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -9.1,
+                    "y": 1.88,
+                    "z": -0.01
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": [
+            {
+              "name": "Scenario Aid Token",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -12.12,
+                    "y": 1.77,
+                    "z": -2.62
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  },
+                  "name": "a"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "J1",
+          "position": {
+            "x": 0,
+            "y": 1.65,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 30,
+            "z": 180
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Flame Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 4.55,
+                "y": 1.77,
+                "z": 2.63
+              }
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 0.76,
+                "y": 1.77,
+                "z": -1.31
+              }
+            }
+          ]
+        },
+        {
+          "name": "Frost Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 3.03,
+                "y": 1.77,
+                "z": 0
+              }
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": -2.27,
+                "y": 1.77,
+                "z": -1.31
+              }
+            }
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Bush",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 2.27,
+                    "y": 1.88,
+                    "z": 1.31
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 3.03,
+                    "y": 1.88,
+                    "z": -2.62
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -0.76,
+                    "y": 1.88,
+                    "z": -3.94
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -5.3,
+                    "y": 1.88,
+                    "z": -1.3
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 331,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "L3",
+          "position": {
+            "x": 6.82,
+            "y": -3.83,
+            "z": 6.56
+          },
+          "rotation": {
+            "x": 0,
+            "y": 30,
+            "z": 0
+          }
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Scenario Spawn Piece",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 18.19,
+                    "y": 1.79,
+                    "z": 4.37
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  },
+                  "action": {
+                    "name": "42A",
+                    "rooms": [
+                      5
+                    ]
+                  }
+                },
+                {
+                  "position": {
+                    "x": 18.19,
+                    "y": 1.79,
+                    "z": 10.5
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  },
+                  "action": {
+                    "name": "40C",
+                    "rooms": [
+                      4
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "monsters": [
+        {
+          "name": "Flame Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 2
+              },
+              "position": {
+                "x": 7.58,
+                "y": 1.77,
+                "z": 7.87
+              },
+              "named": "Inferno Demon"
+            }
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 3,
+          "type": [
+            {
+              "name": "Hot Coals 1",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 9.85,
+                    "y": 1.88,
+                    "z": 6.56
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 210,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 11.37,
+                    "y": 1.88,
+                    "z": 6.56
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 210,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 10.61,
+                    "y": 1.88,
+                    "z": 7.87
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 210,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 4.55,
+                    "y": 1.88,
+                    "z": 7.88
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 210,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 3.79,
+                    "y": 1.88,
+                    "z": 9.19
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 210,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 3.03,
+                    "y": 1.88,
+                    "z": 7.88
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 210,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Altar Horizontal",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 8.34,
+                    "y": 1.88,
+                    "z": 9.19
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "monsters": [
+        {
+          "name": "Frost Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 2
+              },
+              "position": {
+                "x": 7.58,
+                "y": 1.77,
+                "z": 7.87
+              },
+              "named": "Glacier Demon"
+            }
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Rock Column",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 4.54,
+                    "y": 1.94,
+                    "z": 7.89
+                  },
+                  "rotation": {
+                    "x": 358,
+                    "y": 30,
+                    "z": 356
+                  }
+                },
+                {
+                  "position": {
+                    "x": 3.04,
+                    "y": 1.88,
+                    "z": 7.89
+                  },
+                  "rotation": {
+                    "x": 360,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 3.79,
+                    "y": 1.88,
+                    "z": 9.19
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Crystal",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 11.37,
+                    "y": 1.88,
+                    "z": 6.56
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 9.85,
+                    "y": 1.88,
+                    "z": 6.56
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 10.61,
+                    "y": 1.88,
+                    "z": 7.87
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Altar Horizontal",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 8.34,
+                    "y": 1.88,
+                    "z": 9.19
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "monsterList": [
+    "Savvas Icestorm",
+    "Frost Demon",
+    "Flame Demon"
+  ],
+  "campaign": "Crimson Scales",
+  "id": "CS 80"
+}

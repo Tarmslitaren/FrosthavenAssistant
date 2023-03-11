@@ -1,0 +1,1163 @@
+{
+  "name": "Collapsed Cavern",
+  "icon": "http://cloud-3.steamusercontent.com/ugc/2041854257214276780/CED3B5A5EC027BBB0F2EC96EB06A829C4DBAC77B/",
+  "gridType": 2,
+  "scenarioBook": {
+    "name": "ToA Rulebook and Scenario Guide",
+    "page": 47
+  },
+  "overlays": {
+    "Poison Gas": {
+      "conditions": [
+        "Poison"
+      ],
+      "name": "Poison Trap"
+    }
+  },
+  "doorTiles": [
+    {
+      "name": "Dark Fog",
+      "tiles": [
+        {
+          "rooms": [
+            3,
+            4
+          ],
+          "position": {
+            "x": 3.03,
+            "y": 1.88,
+            "z": 6.12
+          },
+          "rotation": {
+            "x": 0,
+            "y": 270,
+            "z": 0
+          },
+          "tokens": [
+            "4"
+          ]
+        },
+        {
+          "rooms": [
+            2,
+            3
+          ],
+          "position": {
+            "x": 6.06,
+            "y": 1.88,
+            "z": -1.75
+          },
+          "rotation": {
+            "x": 0,
+            "y": 270,
+            "z": 0
+          },
+          "tokens": [
+            "3"
+          ]
+        },
+        {
+          "rooms": [
+            1,
+            2
+          ],
+          "position": {
+            "x": 2.27,
+            "y": 1.88,
+            "z": -5.69
+          },
+          "rotation": {
+            "x": 360,
+            "y": 270,
+            "z": 0
+          },
+          "tokens": [
+            "2"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Light Fog",
+      "tiles": [
+        {
+          "rooms": [
+            1,
+            4
+          ],
+          "position": {
+            "x": -6.82,
+            "y": 1.88,
+            "z": 10.06
+          },
+          "rotation": {
+            "x": 360,
+            "y": 330,
+            "z": 0
+          },
+          "tokens": [
+            "1"
+          ]
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "mapTiles": [
+        {
+          "tile": "D2",
+          "position": {
+            "x": -1.52,
+            "y": 1.65,
+            "z": -4.37
+          },
+          "rotation": {
+            "x": 0,
+            "y": 240,
+            "z": 180
+          }
+        },
+        {
+          "tile": "A4",
+          "position": {
+            "x": -9.85,
+            "y": 1.71,
+            "z": 7.44
+          },
+          "rotation": {
+            "x": 0,
+            "y": 90,
+            "z": 0
+          }
+        },
+        {
+          "tile": "D1",
+          "position": {
+            "x": -6.82,
+            "y": 1.65,
+            "z": 2.19
+          },
+          "rotation": {
+            "x": 0,
+            "y": 60,
+            "z": 180
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Forest Imp",
+          "tiles": [
+            {
+              "numCharacters": {
+                "4": 1
+              },
+              "position": {
+                "x": -4.55,
+                "y": 1.77,
+                "z": 0.88
+              }
+            },
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": -5.3,
+                "y": 1.77,
+                "z": 4.81
+              }
+            },
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 2
+              },
+              "position": {
+                "x": -10.61,
+                "y": 1.77,
+                "z": 8.75
+              }
+            },
+            {
+              "numCharacters": {
+                "4": 1
+              },
+              "position": {
+                "x": -12.88,
+                "y": 1.77,
+                "z": 7.44
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cave Bear",
+          "tiles": [
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": -4.55,
+                "y": 1.77,
+                "z": 3.5
+              }
+            },
+            {
+              "numCharacters": {
+                "2": 1
+              },
+              "position": {
+                "x": -7.58,
+                "y": 1.77,
+                "z": 8.75
+              }
+            }
+          ]
+        },
+        {
+          "name": "Living Bones",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 0,
+                "y": 1.77,
+                "z": -1.75
+              }
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 0.76,
+                "y": 1.77,
+                "z": -5.69
+              }
+            }
+          ]
+        },
+        {
+          "name": "Earth Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 0,
+                "y": 1.77,
+                "z": -7
+              }
+            },
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": {
+                "x": -0.76,
+                "y": 1.77,
+                "z": -3.06
+              }
+            }
+          ]
+        },
+        {
+          "name": "Deep Terror",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": -3.03,
+                "y": 1.77,
+                "z": -1.75
+              }
+            }
+          ]
+        }
+      ],
+      "startTiles": {
+        "name": "Start Area",
+        "tiles": [
+          {
+            "position": {
+              "x": -6.82,
+              "y": 1.88,
+              "z": 2.18
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          },
+          {
+            "position": {
+              "x": -7.57,
+              "y": 1.88,
+              "z": 3.5
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          },
+          {
+            "position": {
+              "x": -8.33,
+              "y": 1.88,
+              "z": 4.81
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          },
+          {
+            "position": {
+              "x": -4.55,
+              "y": 1.88,
+              "z": -4.37
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          }
+        ]
+      },
+      "overlayTiles": [
+        {
+          "bag": 1,
+          "type": [
+            {
+              "name": "Earth Corridor 1",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -7.58,
+                    "y": 1.77,
+                    "z": 6.13
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 331,
+                    "z": 180
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": [
+            {
+              "name": "Coin 1",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 1.52,
+                    "y": 1.83,
+                    "z": -4.38
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 2,
+          "type": [
+            {
+              "name": "Rubble",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -3.03,
+                    "y": 1.88,
+                    "z": -7
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -3.78,
+                    "y": 1.88,
+                    "z": -5.7
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 3,
+          "type": [
+            {
+              "name": "Thorns",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -3.02,
+                    "y": 1.88,
+                    "z": -4.37
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -6.06,
+                    "y": 1.88,
+                    "z": 0.87
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 329,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -6.81,
+                    "y": 1.88,
+                    "z": -0.45
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Bush",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -9.09,
+                    "y": 1.88,
+                    "z": 8.75
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -11.37,
+                    "y": 1.88,
+                    "z": 7.44
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Dark Pit",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -8.34,
+                    "y": 1.88,
+                    "z": -0.44
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -9.09,
+                    "y": 1.88,
+                    "z": 3.5
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 150,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -9.85,
+                    "y": 1.88,
+                    "z": 2.19
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 150,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "A3",
+          "position": {
+            "x": 5.3,
+            "y": 1.71,
+            "z": -5.71
+          },
+          "rotation": {
+            "x": 0,
+            "y": 30,
+            "z": 0
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Deep Terror",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 5.3,
+                "y": 1.77,
+                "z": -3.08
+              }
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 6.82,
+                "y": 1.77,
+                "z": -3.08
+              }
+            }
+          ]
+        },
+        {
+          "name": "Living Bones",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 4.54,
+                "y": 1.77,
+                "z": -4.4
+              }
+            },
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": {
+                "x": 6.06,
+                "y": 1.77,
+                "z": -4.4
+              }
+            },
+            {
+              "numCharacters": {
+                "2": 2,
+                "3": 2,
+                "4": 2
+              },
+              "position": {
+                "x": 3.03,
+                "y": 1.77,
+                "z": -7.02
+              }
+            }
+          ]
+        },
+        {
+          "name": "Earth Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 4.54,
+                "y": 1.77,
+                "z": -7.02
+              }
+            }
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "type": [
+            {
+              "name": "Coin 1",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 5.3,
+                    "y": 1.83,
+                    "z": -5.71
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 3.79,
+                    "y": 1.83,
+                    "z": -5.71
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 3.79,
+                    "y": 1.83,
+                    "z": -8.33
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "J2",
+          "position": {
+            "x": 8.34,
+            "y": 1.65,
+            "z": 2.19
+          },
+          "rotation": {
+            "x": 0,
+            "y": 90,
+            "z": 180
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Cave Bear",
+          "tiles": [
+            {
+              "numCharacters": {
+                "4": 1
+              },
+              "position": {
+                "x": 5.3,
+                "y": 1.77,
+                "z": 2.19
+              }
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 9.09,
+                "y": 1.77,
+                "z": 0.88
+              }
+            },
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 2
+              },
+              "position": {
+                "x": 7.58,
+                "y": 1.77,
+                "z": -1.75
+              }
+            }
+          ]
+        },
+        {
+          "name": "Living Bones",
+          "tiles": [
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 6.06,
+                "y": 1.77,
+                "z": 3.5
+              }
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 2,
+                "4": 1
+              },
+              "position": {
+                "x": 9.85,
+                "y": 1.77,
+                "z": -0.44
+              }
+            }
+          ]
+        },
+        {
+          "name": "Black Imp",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 3.79,
+                "y": 1.77,
+                "z": 2.19
+              }
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 4.55,
+                "y": 1.77,
+                "z": 6.12
+              }
+            },
+            {
+              "numCharacters": {
+                "3": 2,
+                "4": 2
+              },
+              "position": {
+                "x": 3.79,
+                "y": 1.77,
+                "z": 4.81
+              }
+            }
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Rock Column",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 5.3,
+                    "y": 1.88,
+                    "z": 4.81
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 11.37,
+                    "y": 1.88,
+                    "z": -0.44
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 8.36,
+                    "y": 1.88,
+                    "z": -0.44
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": [
+            {
+              "name": "Coin 1",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 13.64,
+                    "y": 1.83,
+                    "z": 0.88
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 12.88,
+                    "y": 1.83,
+                    "z": -0.44
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 13.64,
+                    "y": 1.83,
+                    "z": -1.75
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 7,
+          "type": [
+            {
+              "name": "Poison Gas",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 6.83,
+                    "y": 1.88,
+                    "z": -0.43
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 150,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 6.06,
+                    "y": 1.88,
+                    "z": 0.87
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 150,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 4.53,
+                    "y": 1.88,
+                    "z": 0.88
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 150,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 8,
+          "type": [
+            {
+              "name": "Treasure Chest Horizontal",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 5.3,
+                    "y": 1.88,
+                    "z": -0.44
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 330,
+                    "z": 0
+                  },
+                  "action": {
+                    "name": "63",
+                    "treasure": "CS Treasure 63"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "J1",
+          "position": {
+            "x": -2.28,
+            "y": 1.77,
+            "z": 10.08
+          },
+          "rotation": {
+            "x": 0,
+            "y": 150,
+            "z": 0
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Black Imp",
+          "tiles": [
+            {
+              "numCharacters": {
+                "4": 2
+              },
+              "position": {
+                "x": -1.52,
+                "y": 1.77,
+                "z": 11.39
+              }
+            },
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 2.27,
+                "y": 1.77,
+                "z": 10.08
+              }
+            }
+          ]
+        },
+        {
+          "name": "Deep Terror",
+          "tiles": [
+            {
+              "numCharacters": {
+                "4": 1
+              },
+              "position": {
+                "x": 0,
+                "y": 1.77,
+                "z": 8.77
+              }
+            }
+          ]
+        },
+        {
+          "name": "Forest Imp",
+          "tiles": [
+            {
+              "numCharacters": {
+                "2": 1,
+                "3": 2,
+                "4": 2
+              },
+              "position": {
+                "x": -6.82,
+                "y": 1.77,
+                "z": 12.7
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cave Bear",
+          "tiles": [
+            {
+              "numCharacters": {
+                "3": 1,
+                "4": 1
+              },
+              "position": {
+                "x": 0.76,
+                "y": 1.77,
+                "z": 7.45
+              }
+            }
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Boulder",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 3.03,
+                    "y": 1.88,
+                    "z": 8.77
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -0.76,
+                    "y": 1.88,
+                    "z": 10.08
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -0.76,
+                    "y": 1.88,
+                    "z": 12.7
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Boulder 2",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -3.03,
+                    "y": 1.88,
+                    "z": 14.02
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "monsterList": [
+    "Forest Imp",
+    "Cave Bear",
+    "Living Bones",
+    "Earth Demon",
+    "Deep Terror",
+    "Black Imp"
+  ],
+  "campaign": "Crimson Scales",
+  "id": "CS 83"
+}

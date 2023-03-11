@@ -1,0 +1,938 @@
+{
+  "name": "Corrupted Presence",
+  "icon": "http://cloud-3.steamusercontent.com/ugc/2041854257214276186/0422AE2D980468040AC5DECDB26A4A47B134F41C/",
+  "gridType": 2,
+  "scenarioBook": {
+    "name": "ToA Rulebook and Scenario Guide",
+    "page": 41
+  },
+  "monsters": {
+    "The Sightless Eye": {
+      "all": {
+        "abilityDeck": "CS81 Boss",
+        "base": "Boss",
+        "hp": [
+          "*",
+          "this",
+          4
+        ],
+        "stats": {
+          "immunities": {
+            "add": [
+              "Brittle",
+              "Poison",
+              "Wound"
+            ]
+          }
+        }
+      }
+    },
+    "Deep Terror": {
+      "all": {
+        "abilityDeck": "CS81 Deep Terror"
+      }
+    }
+  },
+  "doorTiles": [
+    {
+      "name": "Dark Fog",
+      "tiles": [
+        {
+          "rooms": [
+            4,
+            5
+          ],
+          "position": {
+            "x": 3.79,
+            "y": 1.88,
+            "z": 1.31
+          },
+          "rotation": {
+            "x": 0,
+            "y": 30,
+            "z": 0
+          },
+          "tokens": [
+            "2"
+          ]
+        },
+        {
+          "rooms": [
+            4,
+            5
+          ],
+          "position": {
+            "x": 4.55,
+            "y": 1.88,
+            "z": 2.62
+          },
+          "rotation": {
+            "x": 0,
+            "y": 30,
+            "z": 0
+          },
+          "tokens": [
+            "2"
+          ]
+        },
+        {
+          "rooms": [
+            2,
+            3
+          ],
+          "position": {
+            "x": 11.36,
+            "y": 1.88,
+            "z": -1.32
+          },
+          "rotation": {
+            "x": 0,
+            "y": 30,
+            "z": 0
+          },
+          "tokens": [
+            "1"
+          ]
+        },
+        {
+          "rooms": [
+            2,
+            3
+          ],
+          "position": {
+            "x": 10.61,
+            "y": 1.88,
+            "z": -2.63
+          },
+          "rotation": {
+            "x": 0,
+            "y": 30,
+            "z": 0
+          },
+          "tokens": [
+            "1"
+          ]
+        }
+      ]
+    }
+  ],
+  "rooms": [
+    {
+      "mapTiles": [
+        {
+          "tile": "N1",
+          "position": {
+            "x": -11.36,
+            "y": 1.71,
+            "z": 1.32
+          },
+          "rotation": {
+            "x": 0,
+            "y": 270,
+            "z": 360
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Deep Terror",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": -7.57,
+                "y": 1.77,
+                "z": 2.63
+              }
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": -13.64,
+                "y": 1.77,
+                "z": -2.62
+              }
+            }
+          ]
+        },
+        {
+          "name": "Frost Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": -6.06,
+                "y": 1.77,
+                "z": 5.26
+              }
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": -16.67,
+                "y": 1.77,
+                "z": -2.62
+              }
+            }
+          ]
+        },
+        {
+          "name": "The Sightless Eye",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": -14.39,
+                "y": 1.77,
+                "z": 3.95
+              },
+              "named": "Tendril of Corruption"
+            }
+          ]
+        }
+      ],
+      "startTiles": {
+        "name": "Start Area",
+        "tiles": [
+          {
+            "position": {
+              "x": -7.58,
+              "y": 1.88,
+              "z": -2.62
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          },
+          {
+            "position": {
+              "x": -6.82,
+              "y": 1.88,
+              "z": -1.31
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          },
+          {
+            "position": {
+              "x": -6.06,
+              "y": 1.88,
+              "z": -2.62
+            },
+            "rotation": {
+              "x": 0,
+              "y": 30,
+              "z": 0
+            }
+          }
+        ]
+      },
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Stalagmites",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -8.33,
+                    "y": 1.88,
+                    "z": -1.31
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 90,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -13.64,
+                    "y": 1.88,
+                    "z": 0.01
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 90,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Rock Column",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -10.6,
+                    "y": 1.88,
+                    "z": 5.26
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -10.61,
+                    "y": 1.88,
+                    "z": -2.62
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Scenario Spawn Piece",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -7.58,
+                    "y": 1.79,
+                    "z": 10.5
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  },
+                  "action": {
+                    "name": "42B",
+                    "rooms": [
+                      2
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Dark Pit",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -15.15,
+                    "y": 1.88,
+                    "z": -2.62
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -9.85,
+                    "y": 1.88,
+                    "z": 1.32
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -8.33,
+                    "y": 1.88,
+                    "z": 3.94
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 90,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -13.64,
+                    "y": 1.88,
+                    "z": 2.63
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  },
+                  "tags": [
+                    "CS81 Room 6 Pit"
+                  ]
+                },
+                {
+                  "position": {
+                    "x": -15.92,
+                    "y": 1.88,
+                    "z": 3.95
+                  },
+                  "rotation": {
+                    "x": 360,
+                    "y": 150,
+                    "z": 0
+                  },
+                  "tags": [
+                    "CS81 Room 6 Pit"
+                  ]
+                },
+                {
+                  "position": {
+                    "x": -15.15,
+                    "y": 1.88,
+                    "z": 5.26
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 90,
+                    "z": 0
+                  },
+                  "tags": [
+                    "CS81 Room 6 Pit"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 2,
+          "type": [
+            {
+              "name": "Rubble",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -14.4,
+                    "y": 1.88,
+                    "z": 1.33
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": -10.6,
+                    "y": 1.88,
+                    "z": 2.63
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "J1",
+          "position": {
+            "x": 12.88,
+            "y": 1.65,
+            "z": 1.31
+          },
+          "rotation": {
+            "x": 0,
+            "y": 330,
+            "z": 180
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Night Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 15.16,
+                "y": 1.77,
+                "z": -2.62
+              }
+            }
+          ]
+        },
+        {
+          "name": "Living Spirit",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 11.37,
+                "y": 1.77,
+                "z": -3.94
+              }
+            }
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Rock Column",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 13.63,
+                    "y": 1.88,
+                    "z": 0
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 16.67,
+                    "y": 1.88,
+                    "z": 2.63
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Stalagmites",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 13.64,
+                    "y": 1.88,
+                    "z": 2.62
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 90,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 13.64,
+                    "y": 1.88,
+                    "z": -2.62
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 90,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 2,
+          "type": [
+            {
+              "name": "Rubble",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 15.16,
+                    "y": 1.88,
+                    "z": 0
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 14.4,
+                    "y": 1.88,
+                    "z": 3.94
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": [
+            {
+              "name": "Scenario Aid Token",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 12.88,
+                    "y": 1.77,
+                    "z": 6.56
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  },
+                  "name": "a"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "D2",
+          "position": {
+            "x": 7.58,
+            "y": 1.65,
+            "z": 0
+          },
+          "rotation": {
+            "x": 0,
+            "y": 180,
+            "z": 180
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Deep Terror",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 4.55,
+                "y": 1.77,
+                "z": 0
+              }
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 9.09,
+                "y": 1.77,
+                "z": 2.62
+              }
+            },
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 9.09,
+                "y": 1.77,
+                "z": -2.63
+              }
+            }
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Crystal",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 7.58,
+                    "y": 1.88,
+                    "z": 0
+                  },
+                  "rotation": {
+                    "x": 360,
+                    "y": 270,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Scenario Spawn Piece",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 0,
+                    "y": 1.79,
+                    "z": 10.5
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  },
+                  "action": {
+                    "name": "43C",
+                    "rooms": [
+                      4
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mapTiles": [
+        {
+          "tile": "J2",
+          "position": {
+            "x": 2.27,
+            "y": 1.65,
+            "z": -1.31
+          },
+          "rotation": {
+            "x": 0,
+            "y": 150,
+            "z": 180
+          }
+        }
+      ],
+      "monsters": [
+        {
+          "name": "Living Spirit",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 3.79,
+                "y": 1.77,
+                "z": 3.94
+              }
+            }
+          ]
+        },
+        {
+          "name": "Night Demon",
+          "tiles": [
+            {
+              "numCharacters": {
+                "1": 1
+              },
+              "position": {
+                "x": 0,
+                "y": 1.77,
+                "z": 2.62
+              }
+            }
+          ]
+        }
+      ],
+      "overlayTiles": [
+        {
+          "bag": 2,
+          "type": [
+            {
+              "name": "Rubble",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 0.76,
+                    "y": 1.88,
+                    "z": -3.94
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 0,
+                    "y": 1.88,
+                    "z": 0
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Rock Column",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 1.52,
+                    "y": 1.88,
+                    "z": -2.63
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 1.51,
+                    "y": 1.88,
+                    "z": 2.62
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 30,
+                    "z": 0
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Stalagmites",
+              "tiles": [
+                {
+                  "position": {
+                    "x": -1.51,
+                    "y": 1.88,
+                    "z": -2.63
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 90,
+                    "z": 0
+                  }
+                },
+                {
+                  "position": {
+                    "x": 1.51,
+                    "y": 1.88,
+                    "z": 0
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 90,
+                    "z": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": [
+            {
+              "name": "Scenario Aid Token",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 2.27,
+                    "y": 1.77,
+                    "z": -6.56
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 180,
+                    "z": 0
+                  },
+                  "name": "b"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "overlayTiles": [
+        {
+          "bag": 5,
+          "type": [
+            {
+              "name": "Scenario Spawn Piece",
+              "tiles": [
+                {
+                  "position": {
+                    "x": 7.58,
+                    "y": 1.79,
+                    "z": 10.5
+                  },
+                  "rotation": {
+                    "x": 0,
+                    "y": 270,
+                    "z": 0
+                  },
+                  "action": {
+                    "name": "43D",
+                    "style": "Door",
+                    "remove": {
+                      "tag": "CS81 Room 6 Pit"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "monsterList": [
+    "Deep Terror",
+    "Frost Demon",
+    "The Sightless Eye",
+    "Night Demon",
+    "Living Spirit"
+  ],
+  "campaign": "Crimson Scales",
+  "id": "CS 81"
+}
