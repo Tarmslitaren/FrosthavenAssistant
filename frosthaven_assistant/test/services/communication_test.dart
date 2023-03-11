@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:fluent_assertions/fluent_assertions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
+import 'package:frosthaven_assistant/services/network/connection.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'communication_test.mocks.dart';
@@ -9,9 +11,17 @@ import 'communication_test.mocks.dart';
 final _sut = Communication();
 final _socket = MockSocket();
 const _randomPortNumber = 5647382;
+final _getIt = GetIt.instance;
+final stubConnection = MockConnection();
 
-@GenerateNiceMocks([MockSpec<Socket>()])
+@GenerateNiceMocks([MockSpec<Socket>(), MockSpec<Connection>()])
 void main() {
+  setUpAll(() {
+    _getIt.registerFactory<Connection>(() => stubConnection);
+    when(stubConnection.getAll())
+        .thenReturn([MockSocket(), MockSocket(), MockSocket()]);
+  });
+
   test('message is formatted in template', () {
     // arrange
     const message = "TestMessage";
@@ -58,112 +68,11 @@ void main() {
     result.shouldBeFalse();
   });
 
-  group('sockets', () {
-    test('add adds a unique socket', () {
-      // arrange
-      final sut = Communication();
-      final sockets = <Socket>[];
-      for (var i = 0; i < 2; i++) {
-        final socket = MockSocket();
-        sockets.add(socket);
-        when(socket.remoteAddress).thenReturn(InternetAddress.anyIPv4);
-        when(socket.port).thenReturn(0);
-      }
-
-      // act
-      for (var socket in sockets) {
-        sut.add(socket);
-      }
-
-      // assert
-      for (var socket in sockets) {
-        verify(socket.setOption(SocketOption.tcpNoDelay, true));
-      }
-      verify(sockets.first.destroy());
-      verifyNever(sockets.last.destroy());
-    });
-
-    test('disconnectAll removes all sockets', () {
-      // arrange
-      List<Socket> sockets = _setupSockets(_sut);
-
-      // act
-      _sut.disconnectAll();
-
-      // assert
-      for (var socket in sockets) {
-        verify(socket.destroy());
-      }
-      _sut.connected().shouldBeFalse();
-    });
-
-    test('disconnect removes specific socket', () {
-      // arrange
-      List<Socket> sockets = _setupSockets(_sut);
-      final socketToDisconnect = sockets.first;
-      final socketsToNotDisconnect =
-          sockets.where((socket) => socket != socketToDisconnect);
-      when(socketToDisconnect.remoteAddress)
-          .thenReturn(InternetAddress.anyIPv4);
-      when(socketToDisconnect.port).thenReturn(_randomPortNumber);
-
-      // act
-      _sut.disconnect(socketToDisconnect);
-
-      // assert
-      for (var socket in socketsToNotDisconnect) {
-        verifyNever(socket.destroy());
-      }
-      verify(socketToDisconnect.destroy());
-    });
-
-    test('disconnect removes sockets with unaccessible properties', () {
-      // arrange
-      final sut = Communication();
-      List<Socket> sockets = _setupSockets(sut);
-      final socketToDisconnect = sockets.first;
-      final socketsToNotDisconnect =
-          sockets.where((socket) => socket != socketToDisconnect);
-      when(socketToDisconnect.remoteAddress)
-          .thenThrow(const SocketException('Remote address unavailable'));
-      when(socketToDisconnect.port)
-          .thenThrow(const SocketException('Port unavailable'));
-
-      // act
-      sut.disconnect(socketToDisconnect);
-
-      // assert
-      for (var socket in socketsToNotDisconnect) {
-        verifyNever(socket.destroy());
-      }
-      verify(socketToDisconnect.destroy());
-    });
-    test('disconnect removes sockets with unexpected exception', () {
-      // arrange
-      final sut = Communication();
-      List<Socket> sockets = _setupSockets(sut);
-      final socketToDisconnect = sockets.first;
-      final socketsToNotDisconnect =
-          sockets.where((socket) => socket != socketToDisconnect);
-      when(socketToDisconnect.remoteAddress).thenThrow(Exception(''));
-      when(socketToDisconnect.port).thenThrow(Exception(''));
-
-      // act
-      sut.disconnect(socketToDisconnect);
-
-      // assert
-      for (var socket in socketsToNotDisconnect) {
-        verifyNever(socket.destroy());
-      }
-      verify(socketToDisconnect.destroy());
-    });
-  });
-
   group('Messaging', () {
     test('SendToAllExcept sends data to all sockets except one', () {
       // arrange
       const data = 'TestMessage';
-      List<Socket> sockets = _setupSockets(_sut);
+      List<Socket> sockets = stubConnection.getAll();
       final excludedSocket = sockets.first;
       final includedSockets =
           sockets.where((socket) => socket != excludedSocket);
@@ -184,7 +93,7 @@ void main() {
       // arrange
       const data = 'Data';
       final message = createValidMessage(data: data);
-      List<Socket> sockets = _setupSockets(_sut);
+      List<Socket> sockets = stubConnection.getAll();
 
       // act
       _sut.sendToAll(data);
@@ -195,22 +104,6 @@ void main() {
       }
     });
   });
-}
-
-List<Socket> _setupSockets(Communication communication) {
-  final sockets = <Socket>[];
-  const socketCount = 3;
-  for (var i = 0; i < socketCount; i++) {
-    var socket = MockSocket();
-    _addSocketForTesting(sockets, socket, communication);
-  }
-  return sockets;
-}
-
-void _addSocketForTesting(
-    List<Socket> sockets, MockSocket socket, Communication communication) {
-  sockets.add(socket);
-  communication.add(socket);
 }
 
 String createValidMessage({String data = "Message"}) {
