@@ -29,7 +29,7 @@ class Client {
       await Socket.connect(InternetAddress(address), port)
           .then((Socket socket) {
         runZoned(() {
-          _connection.connect(socket);
+          _connection.add(socket);
           getIt<Settings>().client.value = ClientState.connected;
           String info =
               'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
@@ -53,7 +53,7 @@ class Client {
   }
 
   void _sendPing() {
-    if (_connection.connected() && getIt<Settings>().client.value == ClientState.connected) {
+    if (_connection.established() && getIt<Settings>().client.value == ClientState.connected) {
       Future.delayed(const Duration(seconds: 12), () {
         if (serveResponsive == true) {
           _communication.sendToAll("ping");
@@ -84,7 +84,7 @@ class Client {
     if (serveResponsive != false) {
       getIt<Network>().networkMessage.value = "Lost connection to server";
     }
-    _connection.disconnectAll();
+    _connection.removeAll();
     _cleanup();
   }
 
@@ -159,10 +159,10 @@ class Client {
 
   void disconnect(String? message) {
     message ??= "client disconnected";
-    if (_connection.connected()) {
+    if (_connection.established()) {
       print(message);
       getIt<Network>().networkMessage.value = message;
-      _connection.disconnectAll();
+      _connection.removeAll();
       getIt<Settings>().connectClientOnStartup = false;
       getIt<Settings>().saveToDisk();
       _cleanup();

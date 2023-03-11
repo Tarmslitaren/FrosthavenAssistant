@@ -12,120 +12,141 @@ const _randomPortNumber = 5647382;
 
 @GenerateNiceMocks([MockSpec<Socket>()])
 void main() {
-  group('sockets', () {
-    test('getAll returns list of sockets', () {
-      // arrange
-      final sut = Connection();
-      final expected = <Socket>[];
+  test('getAll returns list of sockets', () {
+    // arrange
+    final sut = Connection();
+    final expected = <Socket>[];
+    final socket = MockSocket();
+    expected.add(socket);
+    sut.add(socket);
+
+    // act
+    final result = sut.getAll();
+
+    // assert
+    result.shouldBeEqualTo(expected);
+  });
+
+  test('add adds a unique socket', () {
+    // arrange
+    final sut = Connection();
+    final sockets = <Socket>[];
+    for (var i = 0; i < 2; i++) {
       final socket = MockSocket();
-      expected.add(socket);
-      sut.connect(socket);
+      sockets.add(socket);
+      when(socket.remoteAddress).thenReturn(InternetAddress.anyIPv4);
+      when(socket.port).thenReturn(0);
+    }
 
-      // act
-      final result = sut.getAll();
+    // act
+    for (var socket in sockets) {
+      sut.add(socket);
+    }
 
-      // assert
-      result.shouldBeEqualTo(expected);
-    });
+    // assert
+    for (var socket in sockets) {
+      verify(socket.setOption(SocketOption.tcpNoDelay, true));
+    }
+    verify(sockets.first.destroy());
+    verifyNever(sockets.last.destroy());
+  });
 
-    test('add adds a unique socket', () {
-      // arrange
-      final sut = Connection();
-      final sockets = <Socket>[];
-      for (var i = 0; i < 2; i++) {
-        final socket = MockSocket();
-        sockets.add(socket);
-        when(socket.remoteAddress).thenReturn(InternetAddress.anyIPv4);
-        when(socket.port).thenReturn(0);
-      }
+  test('removeAll removes all sockets', () {
+    // arrange
+    List<Socket> sockets = _setupSockets(_sut);
 
-      // act
-      for (var socket in sockets) {
-        sut.connect(socket);
-      }
+    // act
+    _sut.removeAll();
 
-      // assert
-      for (var socket in sockets) {
-        verify(socket.setOption(SocketOption.tcpNoDelay, true));
-      }
-      verify(sockets.first.destroy());
-      verifyNever(sockets.last.destroy());
-    });
+    // assert
+    for (var socket in sockets) {
+      verify(socket.destroy());
+    }
+    _sut.established().shouldBeFalse();
+  });
 
-    test('disconnectAll removes all sockets', () {
-      // arrange
-      List<Socket> sockets = _setupSockets(_sut);
+  test('remove removes specific socket', () {
+    // arrange
+    List<Socket> sockets = _setupSockets(_sut);
+    final socketToDisconnect = sockets.first;
+    final socketsToNotDisconnect =
+        sockets.where((socket) => socket != socketToDisconnect);
+    when(socketToDisconnect.remoteAddress).thenReturn(InternetAddress.anyIPv4);
+    when(socketToDisconnect.port).thenReturn(_randomPortNumber);
 
-      // act
-      _sut.disconnectAll();
+    // act
+    _sut.remove(socketToDisconnect);
 
-      // assert
-      for (var socket in sockets) {
-        verify(socket.destroy());
-      }
-      _sut.connected().shouldBeFalse();
-    });
+    // assert
+    for (var socket in socketsToNotDisconnect) {
+      verifyNever(socket.destroy());
+    }
+    verify(socketToDisconnect.destroy());
+  });
 
-    test('disconnect removes specific socket', () {
-      // arrange
-      List<Socket> sockets = _setupSockets(_sut);
-      final socketToDisconnect = sockets.first;
-      final socketsToNotDisconnect =
-          sockets.where((socket) => socket != socketToDisconnect);
-      when(socketToDisconnect.remoteAddress)
-          .thenReturn(InternetAddress.anyIPv4);
-      when(socketToDisconnect.port).thenReturn(_randomPortNumber);
+  test('remove removes sockets with unaccessible properties', () {
+    // arrange
+    final sut = Connection();
+    List<Socket> sockets = _setupSockets(sut);
+    final socketToDisconnect = sockets.first;
+    final socketsToNotDisconnect =
+        sockets.where((socket) => socket != socketToDisconnect);
+    when(socketToDisconnect.remoteAddress)
+        .thenThrow(const SocketException('Remote address unavailable'));
+    when(socketToDisconnect.port)
+        .thenThrow(const SocketException('Port unavailable'));
 
-      // act
-      _sut.disconnect(socketToDisconnect);
+    // act
+    sut.remove(socketToDisconnect);
 
-      // assert
-      for (var socket in socketsToNotDisconnect) {
-        verifyNever(socket.destroy());
-      }
-      verify(socketToDisconnect.destroy());
-    });
+    // assert
+    for (var socket in socketsToNotDisconnect) {
+      verifyNever(socket.destroy());
+    }
+    verify(socketToDisconnect.destroy());
+  });
 
-    test('disconnect removes sockets with unaccessible properties', () {
-      // arrange
-      final sut = Connection();
-      List<Socket> sockets = _setupSockets(sut);
-      final socketToDisconnect = sockets.first;
-      final socketsToNotDisconnect =
-          sockets.where((socket) => socket != socketToDisconnect);
-      when(socketToDisconnect.remoteAddress)
-          .thenThrow(const SocketException('Remote address unavailable'));
-      when(socketToDisconnect.port)
-          .thenThrow(const SocketException('Port unavailable'));
+  test('remove removes sockets with unexpected exception', () {
+    // arrange
+    final sut = Connection();
+    List<Socket> sockets = _setupSockets(sut);
+    final socketToDisconnect = sockets.first;
+    final socketsToNotDisconnect =
+        sockets.where((socket) => socket != socketToDisconnect);
+    when(socketToDisconnect.remoteAddress).thenThrow(Exception(''));
+    when(socketToDisconnect.port).thenThrow(Exception(''));
 
-      // act
-      sut.disconnect(socketToDisconnect);
+    // act
+    sut.remove(socketToDisconnect);
 
-      // assert
-      for (var socket in socketsToNotDisconnect) {
-        verifyNever(socket.destroy());
-      }
-      verify(socketToDisconnect.destroy());
-    });
-    test('disconnect removes sockets with unexpected exception', () {
-      // arrange
-      final sut = Connection();
-      List<Socket> sockets = _setupSockets(sut);
-      final socketToDisconnect = sockets.first;
-      final socketsToNotDisconnect =
-          sockets.where((socket) => socket != socketToDisconnect);
-      when(socketToDisconnect.remoteAddress).thenThrow(Exception(''));
-      when(socketToDisconnect.port).thenThrow(Exception(''));
+    // assert
+    for (var socket in socketsToNotDisconnect) {
+      verifyNever(socket.destroy());
+    }
+    verify(socketToDisconnect.destroy());
+  });
 
-      // act
-      sut.disconnect(socketToDisconnect);
+  test('established returns true if socket was added', () {
+    // arrange
+    final sut = Connection();
+    sut.add(MockSocket());
 
-      // assert
-      for (var socket in socketsToNotDisconnect) {
-        verifyNever(socket.destroy());
-      }
-      verify(socketToDisconnect.destroy());
-    });
+    // act
+    final result = sut.established();
+
+    // assert
+    result.shouldBeTrue();
+  });
+
+  test('established returns false if no sockets were added', () {
+    // arrange
+    final sut = Connection();
+
+    // act
+    final result = sut.established();
+
+    // assert
+    result.shouldBeFalse();
   });
 }
 
@@ -142,5 +163,5 @@ List<Socket> _setupSockets(Connection Connection) {
 void _addSocketForTesting(
     List<Socket> sockets, MockSocket socket, Connection Connection) {
   sockets.add(socket);
-  Connection.connect(socket);
+  Connection.add(socket);
 }
