@@ -1,19 +1,47 @@
-import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:collection/collection.dart';
 import 'package:format/format.dart';
+
+import '../service_locator.dart';
+import 'connection.dart';
 
 class Communication {
   static const beggining = "S3nD:";
   static const end = "[EOM]";
   final messageTemplate = "$beggining{}$end";
-  final _sockets = <Socket>[];
+  final _connection = getIt<Connection>();
+
+  // TODO: Need to test this somehow, or refactor altogether.
+  // If testing, then better to verify assigned functions are being called on specific actions, rather than verify mock socket assignments.
+  void listen(
+      Function(Uint8List) onData, Function? onError, Function()? onDone) {
+    final sockets = _connection.getAll();
+    for (var socket in sockets) {
+      socket.listen(onData, onError: onError, onDone: onDone);
+    }
+  }
+
+  void sendToAllExcept(Socket client, String data) {
+    final sockets = _connection.getAll();
+    final recipients = sockets.where((x) =>
+        x.remoteAddress != client.remoteAddress && x.port != client.port);
+    for (var socket in recipients) {
+      sendTo(socket, data);
+    }
+  }
 
   void sendTo(Socket? socket, String data) {
-    if (socket != null && !_isClosed(socket)) {
+    if (socket != null) {
       socket.write(_composeMessageFrom(data));
+    }
+  }
+
+  void sendToAll(String data) {
+    final message = _composeMessageFrom(data);
+    final sockets = _connection.getAll();
+    for (var socket in sockets) {
+      socket.write(message);
     }
   }
 
@@ -29,100 +57,7 @@ class Communication {
     return message.startsWith(beggining) && message.endsWith(end);
   }
 
-  void add(Socket socket) {
-    _cleanUpClosedConnections();
-    if (!_isClosed(socket)) {
-      final existingConnections = _sockets.where((x) =>
-          x.remoteAddress == socket.remoteAddress && x.port == socket.port);
-      while (existingConnections.isNotEmpty) {
-        final socket = existingConnections.first;
-        socket.destroy();
-        _sockets.remove(socket);
-      }
-      socket.setOption(SocketOption.tcpNoDelay, true);
-      socket.encoding = utf8;
-      _sockets.add(socket);
-    }
-  }
-
-  void sendToAll(String data) {
-    _cleanUpClosedConnections();
-    final message = _composeMessageFrom(data);
-    for (var socket in _sockets) {
-      socket.write(message);
-    }
-  }
-
-  void disconnectAll() {
-    while (_sockets.isNotEmpty) {
-      var socket = _sockets.first;
-      socket.destroy();
-      _sockets.remove(socket);
-    }
-  }
-
-  void disconnect(Socket socket) {
-    _cleanUpClosedConnections();
-    if (!_isClosed(socket)) {
-      var toDisconnect = _sockets
-          .where((x) =>
-              x.remoteAddress == socket.remoteAddress && x.port == socket.port)
-          .firstOrNull;
-      if (toDisconnect != null) {
-        toDisconnect.destroy();
-        _sockets.remove(toDisconnect);
-      }
-    }
-  }
-
-  // TODO: Need to test this somehow, or refactor altogether.
-  // If testing, then better to verify assigned functions are being called on specific actions, rather than verify mock socket assignments.
-  void listen(
-      Function(Uint8List) onData, Function? onError, Function()? onDone) {
-    for (var socket in _sockets) {
-      socket.listen(onData, onError: onError, onDone: onDone);
-    }
-  }
-
-  bool connected() {
-    return _sockets.isNotEmpty;
-  }
-
   String _composeMessageFrom(String data) {
     return messageTemplate.format(data);
-  }
-
-  void sendToAllExcept(Socket client, String data) {
-    _cleanUpClosedConnections();
-    final recipients = _sockets.where((x) =>
-        x.remoteAddress != client.remoteAddress && x.port != client.port);
-    for (var socket in recipients) {
-      sendTo(socket, data);
-    }
-  }
-
-  // Check if socet was remotely closed, thus address and port are unaccessable
-  bool _isClosed(Socket socket) {
-    try {
-      socket.remoteAddress;
-      socket.port;
-      return false;
-    } on SocketException catch (_) {
-      return true;
-    } catch (e) {
-      // Close the socket, as something is completely wrong with it
-      print('Unexpected exception in determining socket closure: \'{}\''
-          .format(e.toString()));
-      return true;
-    }
-  }
-
-  void _cleanUpClosedConnections() {
-    var toDisconnect = _sockets.where((x) => _isClosed(x));
-    while (toDisconnect.isNotEmpty) {
-      var socket = toDisconnect.first;
-      socket.destroy();
-      _sockets.remove(socket);
-    }
   }
 }

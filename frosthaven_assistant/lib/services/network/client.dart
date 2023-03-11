@@ -10,12 +10,15 @@ import '../../Resource/settings.dart';
 import '../service_locator.dart';
 import 'dart:convert' show utf8;
 
+import 'connection.dart';
+
 class Client {
   String _leftOverMessage = "";
   bool serveResponsive = true;
 
   final GameState _gameState = getIt<GameState>();
   final Communication _communication = getIt<Communication>();
+  final Connection _connection = getIt<Connection>();
 
   Future<void> connect(String address) async {
 // connect to the socket server
@@ -26,7 +29,7 @@ class Client {
       await Socket.connect(InternetAddress(address), port)
           .then((Socket socket) {
         runZoned(() {
-          _communication.add(socket);
+          _connection.connect(socket);
           getIt<Settings>().client.value = ClientState.connected;
           String info =
               'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
@@ -50,7 +53,7 @@ class Client {
   }
 
   void _sendPing() {
-    if (_communication.connected() && getIt<Settings>().client.value == ClientState.connected) {
+    if (_connection.connected() && getIt<Settings>().client.value == ClientState.connected) {
       Future.delayed(const Duration(seconds: 12), () {
         if (serveResponsive == true) {
           _communication.sendToAll("ping");
@@ -81,7 +84,7 @@ class Client {
     if (serveResponsive != false) {
       getIt<Network>().networkMessage.value = "Lost connection to server";
     }
-    _communication.disconnectAll();
+    _connection.disconnectAll();
     _cleanup();
   }
 
@@ -156,10 +159,10 @@ class Client {
 
   void disconnect(String? message) {
     message ??= "client disconnected";
-    if (_communication.connected()) {
+    if (_connection.connected()) {
       print(message);
       getIt<Network>().networkMessage.value = message;
-      _communication.disconnectAll();
+      _connection.disconnectAll();
       getIt<Settings>().connectClientOnStartup = false;
       getIt<Settings>().saveToDisk();
       _cleanup();

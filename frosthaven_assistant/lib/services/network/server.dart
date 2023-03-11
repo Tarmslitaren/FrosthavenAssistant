@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import '../service_locator.dart';
 
 import 'communication.dart';
+import 'connection.dart';
 import 'network.dart';
 import 'dart:convert' show utf8;
 
@@ -17,6 +18,7 @@ class Server {
 
   final GameState _gameState = getIt<GameState>();
   final _communication = getIt<Communication>();
+  final _connection = getIt<Connection>();
 
   // bind the socket server to an address and port
   ServerSocket? _serverSocket;
@@ -92,7 +94,7 @@ class Server {
       }
       _serverSocket!.close().catchError((error) => print(error));
 
-      _communication.disconnectAll();
+      _connection.disconnectAll();
     }
     getIt<Settings>().server.value = false;
     leftOverMessage = "";
@@ -113,7 +115,7 @@ class Server {
     print(info);
     getIt<Network>().networkMessage.value = info;
 
-    _communication.add(client);
+    _connection.connect(client);
 
     // listen for events from the client
     try {
@@ -247,7 +249,7 @@ class Server {
           if (getIt<Settings>().server.value == false) {
             //no op
           } else {
-            _communication.disconnect(client);
+            _connection.disconnect(client);
             print('Client left');
             getIt<Network>().networkMessage.value = 'Client left.';
           }
