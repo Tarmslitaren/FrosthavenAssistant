@@ -24,6 +24,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   final GameState _gameState = getIt<GameState>();
   final Settings settings = getIt<Settings>();
 
+  bool _animationsEnabled = false;
+
 
   void _modelDataListener() {
     setState(() {});
@@ -41,6 +43,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
     //to load save state
     _gameState.modelData.addListener(_modelDataListener);
+    _animationsEnabled = initAnimationEnabled();
   }
 
   Widget buildStayAnimation(Widget child) {
@@ -50,7 +53,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   }
 
   Widget buildSlideAnimation(Widget child, Key key) {
-    if (!animationsEnabled) {
+    if (!_animationsEnabled) {
       return Container(
           margin:
               EdgeInsets.only(left: 33.3333 * settings.userScalingBars.value),
@@ -62,7 +65,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
             //curve: Curves.slowMiddle,
             animationFinished: (bool finished) {
               if (finished) {
-                animationsEnabled = false;
+                _animationsEnabled = false;
               }
             },
             duration: const Duration(milliseconds: cardAnimationDuration),
@@ -85,13 +88,20 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   }
 
   static const int cardAnimationDuration = 1200;
-  bool animationsEnabled = initAnimationEnabled();
 
-  static bool initAnimationEnabled() {
-    if(getIt<Settings>().client.value == ClientState.connected || getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0 &&
-    getIt<GameState>().commandDescriptions[getIt<GameState>().commandIndex.value].contains("modifier card")){
+  bool initAnimationEnabled() {
+    if(getIt<Settings>().client.value == ClientState.connected || getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0) {
+      String commandDescription = getIt<GameState>().commandDescriptions[getIt<GameState>().commandIndex.value];
       //todo: also: missing info. need to check for updateForUndo
-      return true;
+      if(widget.name == "Allies") {
+        if(commandDescription.contains("allies modifier card")) {
+          return true;
+        }
+      } else {
+        if(commandDescription.contains("monster modifier card")) {
+          return true;
+        }
+      }
     }
     return false;
   }
@@ -106,7 +116,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         -(screenSize.width / 2 - 63 * settings.userScalingBars.value); //TODO: tweak to be exactly center
     double yOffset = -(screenSize.height / 2 - height / 2); //TODO: not correct depending on position of the deck widget
 
-    if (!animationsEnabled) {
+    if (!_animationsEnabled) {
       return Container(
           child: child);
     }
@@ -114,11 +124,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     return Container(
         key: key,
         //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
-        child: animationsEnabled
+        child: _animationsEnabled
             ? TranslationAnimatedWidget(
                 animationFinished: (bool finished) {
                   if (finished) {
-                    animationsEnabled = false;
+                    _animationsEnabled = false;
                   }
                 },
                 duration: const Duration(milliseconds: cardAnimationDuration),
@@ -175,8 +185,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                 valueListenable: _gameState.commandIndex, //blanket
                 builder: (context, value, child) {
 
-                  if (animationsEnabled != true ) {
-                    animationsEnabled = initAnimationEnabled();
+                  if (_animationsEnabled != true ) {
+                    _animationsEnabled = initAnimationEnabled();
                   }
 
                   return Row(
@@ -184,7 +194,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                       InkWell(
                           onTap: () {
                             setState(() {
-                              animationsEnabled = true;
+                              _animationsEnabled = true;
                               _gameState.action(DrawModifierCardCommand(widget.name));
                             });
                           },

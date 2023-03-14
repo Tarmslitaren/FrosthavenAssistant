@@ -76,9 +76,6 @@ class ActionHandler {
     if (!isClient) {
       if (commandIndex.value < commandDescriptions.length - 1) {
         commandIndex.value++;
-        //if (!isServer && !isClient) {
-        //  commands[commandIndex.value].execute();
-        // } else {
         gameSaveStates[commandIndex.value + 1]!
             .load();
         gameSaveStates[commandIndex.value + 1]!.saveToDisk();
