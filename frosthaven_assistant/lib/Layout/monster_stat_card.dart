@@ -87,22 +87,31 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
     double height = 123 * 0.8 * scale;
 
+    bool noCalculationSetting = getIt<Settings>().noCalculation.value;
+
     //normal stats calculated:
-    int? healthValue = StatCalculator.calculateFormula(normal.health);
     String health = normal.health.toString();
-    if (healthValue != null) {
-      health = healthValue.toString();
+    if(noCalculationSetting == false) {
+      int? healthValue = StatCalculator.calculateFormula(normal.health);
+      if (healthValue != null) {
+        health = healthValue.toString();
+      }
     }
 
-    int? moveValue = StatCalculator.calculateFormula(normal.move);
     String move = normal.move.toString();
-    if (moveValue != null) {
-      move = moveValue.toString();
+    if(noCalculationSetting == false) {
+      int? moveValue = StatCalculator.calculateFormula(normal.move);
+      if (moveValue != null) {
+        move = moveValue.toString();
+      }
     }
-    int? attackValue = StatCalculator.calculateFormula(normal.attack);
+
     String attack = normal.attack.toString();
-    if (attackValue != null) {
-      attack = attackValue.toString();
+    if(noCalculationSetting == false) {
+      int? attackValue = StatCalculator.calculateFormula(normal.attack);
+      if (attackValue != null) {
+        attack = attackValue.toString();
+      }
     }
 
     return Stack(
@@ -271,13 +280,16 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
   static Widget buildBossLayout(Monster data, double scale, var shadow,
       var leftStyle, var rightStyle, bool frosthavenStyle) {
+    bool noCalculationSetting = getIt<Settings>().noCalculation.value;
     double height = 123 * 0.8 * scale;
     MonsterStatsModel normal = data.type.levels[data.level.value].boss!;
     //normal stats calculated:
-    int? healthValue = StatCalculator.calculateFormula(normal.health);
     String health = normal.health.toString();
-    if (healthValue != null) {
-      health = healthValue.toString();
+    if(noCalculationSetting == false) {
+      int? healthValue = StatCalculator.calculateFormula(normal.health);
+      if (healthValue != null) {
+        health = healthValue.toString();
+      }
     }
     //special case:
     if (health == "Hollowpact") {
@@ -302,18 +314,18 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
       }
     }
 
-    int? moveValue = StatCalculator.calculateFormula(normal.move);
-    String move = normal.move.toString();
-    if (moveValue != null) {
-      move = moveValue.toString();
-    }
-    int? attackValue = StatCalculator.calculateFormula(normal.attack);
     String attack = normal.attack.toString();
-    if (attackValue != null) {
-      attack = attackValue.toString();
+    String move = normal.move.toString();
+    if(noCalculationSetting == false) {
+      int? moveValue = StatCalculator.calculateFormula(normal.move);
+      if (moveValue != null) {
+        move = moveValue.toString();
+      }
+      int? attackValue = StatCalculator.calculateFormula(normal.attack);
+      if (attackValue != null) {
+        attack = attackValue.toString();
+      }
     }
-
-    bool noCalculationSetting = getIt<Settings>().noCalculation.value;
 
     String bossAttackAttributes = "";
     List<String> bossOtherAttributes = [];
