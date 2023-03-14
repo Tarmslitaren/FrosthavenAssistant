@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Model/room.dart';
 
 import '../Resource/game_methods.dart';
@@ -140,6 +141,19 @@ class ScenarioModel {
 
     List<ScenarioModel> sectionList = [];
 
+    if(kDebugMode) {
+      if (rooms != null) {
+        List names = []; // List();
+        for (var u in rooms.roomData) {
+          if (names.contains(u.name)) {
+            print("duplicate ${u.name} in${rooms.scenarioName}");
+          } else {
+            names.add(u.name);
+          }
+        }
+      }
+    }
+
     if(rooms != null) {
       for (int i = 1; i < rooms.roomData.length; i++){ //skip first as it is the scenario start room
         sectionList.add(ScenarioModel.sectionFromRoomData(rooms.roomData[i]));
@@ -152,7 +166,7 @@ class ScenarioModel {
         if(rooms == null) {
           sectionList.add(ScenarioModel.sectionFromJson(key, sections[key], rooms));
         } else {
-          //todo: it might be a bit silly that room data and section data is separate
+          //it might be a bit silly that room data and section data is separate
           //merge if has already
           int splitIndex = 0;
           //would be nice to know which is solo scenario
