@@ -1059,7 +1059,7 @@
         ["Nothing Special", 837, false, 41, "%move% + 0", "*.........","%attack% + 0"],
         ["Claw Swipes", 840, false, 61,  "%move% + 0", "*.........","%attack% - 1", "^%target% 2"],
         ["Rampage", 839, true, 80, "%attack% - 1", "*.........","%move% - 2", "*.........","%attack% - 1", "^%impair%"],
-        ["Calculated Strike", 838, false, 10, "%move% - 1","*.........","%attack% + 1" ]
+        ["Calculated Strike", 838, false, 60, "%move% - 1","*.........","%attack% + 1" ]
       ]
     },
     {
