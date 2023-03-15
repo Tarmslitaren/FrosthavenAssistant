@@ -5,15 +5,20 @@ import 'package:room_data_converter/ReCase.dart';
 import 'package:room_data_converter/model.dart';
 
 Future<int> calculate() async {
-  bool ttsData = true;
-  await File('Gloomhaven.json').writeAsString("");
+  bool ttsData = false;
+  //await File('Gloomhaven.json').writeAsString("");
   String res = "{\n";
-  for (int scenarioNumber = 1; scenarioNumber <= 3; scenarioNumber++) {
+  for (int scenarioNumber = 0; scenarioNumber <= 19; scenarioNumber++) {
     File file = File('./assets/data/$scenarioNumber.json');
     Future<String> futureContent = file.readAsString();
     futureContent.then((c) async {
-      Scenario scenario = Scenario(scenarioNumber.toString());
+      String scenarioName = scenarioNumber.toString();
       final data = await json.decode(c.toString());
+     // if (data.containsKey('id')) {
+      //  scenarioName = data['id'];
+      //}
+      //print(scenarioName);
+      Scenario scenario = Scenario(scenarioName);
       if (data.containsKey('rooms')) {
         final rooms = data['rooms'] as List;
         for (var room in rooms) {
@@ -24,7 +29,9 @@ Future<int> calculate() async {
           if (room.containsKey('mapTiles')) {
             var mapTiles = room['mapTiles'];
             var tile = mapTiles[0];
-            roomName = tile['tile'];
+            if(tile != null) {
+              roomName = tile['tile'];
+            }
           }
           roomName = roomName.titleCase;
           var roomMap = <String, Map<String, Monster>>{};
@@ -91,7 +98,6 @@ Future<int> calculate() async {
                           if(val == 1) {
                             monsterAmountNormal[0]++;
                           } else if (val == 2) {
-                            print(val);
                             monsterAmountElite[0]++;
                           }
                         }
@@ -140,7 +146,7 @@ Future<int> calculate() async {
       scenarioJson = scenarioJson.substring(2, scenarioJson.length - 2);
       res += "$scenarioJson,\n";
     }).then((value) async {
-      await File('Seeker of Xorn.json').writeAsString(res, mode: FileMode.append);
+      await File('Frosthaven.json').writeAsString(res, mode: FileMode.append);
     });
   }
 

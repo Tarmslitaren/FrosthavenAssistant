@@ -5,134 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1f3fb458-7797-4f8a-b2f2-beaaae9fd74d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../frosthaven_assistant/assets/data/rooms/Seeker of Xorn.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Seeker of Xorn.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frosthaven_assistant/assets/data/rooms/Crimson Scales.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frosthaven_assistant/assets/data/rooms/Crimson Scales.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frosthaven_assistant/lib/Layout/menus/auto_add_standee_menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frosthaven_assistant/lib/Layout/menus/auto_add_standee_menu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frosthaven_assistant/lib/Layout/modifier_deck_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frosthaven_assistant/lib/Layout/modifier_deck_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frosthaven_assistant/lib/Resource/action_handler.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frosthaven_assistant/lib/Resource/action_handler.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/10.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/11.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/12.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/13.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/14.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/15.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/16.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/17.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/18.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/19.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/2.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/20.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/21.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/22.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/23.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/24.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/25.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/26.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/27.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/28.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/29.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/30.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/31.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/32.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/33.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/34.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/35.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/36.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/37.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/38.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/39.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/4.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/40.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/41.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/42.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/43.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/44.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/45.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/46.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/47.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/48.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/49.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/5.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/50.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/51.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/52.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/53.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/54.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/55.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/56.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/57.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/58.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/59.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/6.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/60.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/61.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/62.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/63.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/64.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/65.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/66.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/67.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/68.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/69.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/7.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/70.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/71.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/72.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/73.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/74.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/75.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/76.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/77.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/78.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/79.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/8.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/80.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/81.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/82.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/83.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/84.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/85.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/86.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/87.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/88.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/89.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/9.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/90.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/91.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/92.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/93.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/94.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/95.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Forgotten Circles.json" beforeDir="false" afterPath="$PROJECT_DIR$/Forgotten Circles.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gloomhaven.json" beforeDir="false" afterPath="$PROJECT_DIR$/Gloomhaven.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frosthaven.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frosthaven.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Seeker of Xorn.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trail of Ashes.json" beforeDir="false" afterPath="$PROJECT_DIR$/Trail of Ashes.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/1.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/10.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/100.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/101.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/102.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/103.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/104.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/105.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/106.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/107.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/108.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/109.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/11.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/110.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/111.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/112.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/113.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/114.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/115.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/116.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/12.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/13.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/14.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/15.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/16.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/17.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/18.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/19.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/10.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/10.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/11.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/11.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/12.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/12.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/13.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/14.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/14.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/15.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/15.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/16.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/16.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/17.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/17.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/18.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/18.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/19.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/19.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/2.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/20.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/21.json" beforeDir="false" />
@@ -155,6 +46,7 @@
       <change beforePath="$PROJECT_DIR$/assets/data/37.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/38.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/39.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/4.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/4.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/40.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/41.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/42.json" beforeDir="false" />
@@ -165,7 +57,7 @@
       <change beforePath="$PROJECT_DIR$/assets/data/47.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/48.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/49.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/5.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/5.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/50.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/51.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/52.json" beforeDir="false" />
@@ -176,7 +68,7 @@
       <change beforePath="$PROJECT_DIR$/assets/data/57.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/58.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/59.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/6.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/6.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/60.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/61.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/62.json" beforeDir="false" />
@@ -187,7 +79,7 @@
       <change beforePath="$PROJECT_DIR$/assets/data/67.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/68.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/69.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/7.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/7.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/7.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/70.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/71.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/72.json" beforeDir="false" />
@@ -198,29 +90,23 @@
       <change beforePath="$PROJECT_DIR$/assets/data/77.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/78.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/79.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/8.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/8.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/80.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/81.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/82.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/83.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/84.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/85.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/86.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/87.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/88.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/89.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/9.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/90.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/91.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/92.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/93.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/94.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/95.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/96.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/97.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/98.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/99.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/9.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/9.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/AA3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/QA1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/QA2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/QA3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM7.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/room_data_converter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/room_data_converter.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -240,17 +126,17 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cidr.known.project.marker": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

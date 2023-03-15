@@ -584,3 +584,619 @@
       }
     }
   ],
+{
+  "0": [
+    {
+      "13 A": {
+        "Hound Scenario 0": {
+          "normal": [
+            2,
+            1,
+            4
+          ],
+          "elite": [
+            0,
+            2,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "1": [
+    {
+      "09 A": {
+        "Algox Archer": {
+          "normal": [
+            1,
+            1,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Algox Guard": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Algox Priest": {
+          "normal": [
+            1,
+            0,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        },
+        "City Guard Scenario 1": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "2": [
+    {
+      "11 A": {
+        "Algox Archer": {
+          "normal": [
+            2,
+            2,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        },
+        "Algox Guard": {
+          "normal": [
+            0,
+            2,
+            1
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "3": [
+    {
+      "13 A": {
+        "Algox Archer": {
+          "normal": [
+            0,
+            2,
+            1
+          ],
+          "elite": [
+            2,
+            2,
+            3
+          ]
+        },
+        "Algox Guard": {
+          "normal": [
+            2,
+            2,
+            1
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        },
+        "Algox Priest": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        },
+        "Hound": {
+          "normal": [
+            2,
+            2,
+            3
+          ],
+          "elite": [
+            0,
+            1,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "4": [
+    {
+      "16 B": {
+        "Algox Guard": {
+          "normal": [
+            2,
+            0,
+            2
+          ],
+          "elite": [
+            1,
+            3,
+            3
+          ]
+        },
+        "Algox Scout": {
+          "normal": [
+            2,
+            4,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "5": [
+    {
+      "07 A": {
+        "Ice Wraith": {
+          "normal": [
+            1,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            2,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "6": [
+    {
+      "07 B": {
+        "Frost Demon": {
+          "normal": [
+            0,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Snow Imp": {
+          "normal": [
+            0,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "7": [
+    {
+      "06 A": {
+        "Lurker Clawcrusher": {
+          "normal": [
+            0,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Lurker Soldier": {
+          "normal": [
+            2,
+            1,
+            2
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "9": [
+    {
+      "16 C": {
+        "Ice Wraith": {
+          "normal": [
+            1,
+            1,
+            2
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        },
+        "Living Doom": {
+          "normal": [
+            2,
+            2,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        },
+        "Living Spirit": {
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "8": [
+    {
+      "11 A": {
+        "Polar Bear": {
+          "normal": [
+            1,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        },
+        "Snow Imp": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            3,
+            3
+          ]
+        }
+      }
+    }
+  ],
+  "10": [
+    {
+      "13 A": {
+        "Algox Guard": {
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Algox Priest": {
+          "normal": [
+            1,
+            2,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "11": [
+    {
+      "15 A": {
+        "Algox Stormcaller": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Frost Demon": {
+          "normal": [
+            1,
+            1,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Wind Demon": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "12": [
+    {
+      "16 C": {
+        "Ancient Artillery": {
+          "normal": [
+            2,
+            3,
+            0
+          ],
+          "elite": [
+            2,
+            3,
+            6
+          ]
+        }
+      }
+    }
+  ],
+  "13": [
+    {
+      "07 B": {
+        "Shrike Fiend": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "01 C": {
+        "Shrike Fiend": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "14": [
+    {
+      "13 A": {
+        "Abael Herder": {
+          "normal": [
+            2,
+            3,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Lightning Eel": {
+          "normal": [
+            2,
+            3,
+            2
+          ],
+          "elite": [
+            2,
+            3,
+            5
+          ]
+        },
+        "Piranha Pig": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "15": [
+    {
+      "15 D": {
+        "Robotic Boltshooter": {
+          "normal": [
+            0,
+            2,
+            2
+          ],
+          "elite": [
+            2,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "01 B": {
+        "Chaos Lieutenant": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "17": [],
+  "16": [
+    {
+      "13 A": {
+        "Ancient Artillery": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        },
+        "Ruined Machine": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    }
+  ],
+  "18": [
+    {
+      "11 A": {
+        "Frozen Corpse": {
+          "normal": [
+            1,
+            3,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "19": [
+    {
+      "16 B": {
+        "Algox Archer": {
+          "normal": [
+            0,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Algox Guard": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
