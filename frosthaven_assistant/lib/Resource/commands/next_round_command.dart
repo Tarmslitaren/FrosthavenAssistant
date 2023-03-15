@@ -16,17 +16,21 @@ class NextRoundCommand extends Command {
   final GameState _gameState = getIt<GameState>();
 
   void _handleTimedSpawns(var rule) {
-    if(rule.name.isNotEmpty) {
-      //get room data and deal with spawns
-      ScenarioModel? scenario = _gameState.modelData.value[_gameState.currentCampaign.value]?.scenarios[_gameState.scenario.value];
-      if(scenario != null) {
-        ScenarioModel? spawnSection = scenario.sections.firstWhereOrNull((element) => element.name.substring(1) == rule.name);
-        if(spawnSection != null && spawnSection.monsterStandees != null) {
-          GameMethods.autoAddStandees(spawnSection.monsterStandees!, rule.note);
+    if(getIt<Settings>().autoAddSpawns.value == true) {
+      if (rule.name.isNotEmpty) {
+        //get room data and deal with spawns
+        ScenarioModel? scenario = _gameState.modelData.value[_gameState
+            .currentCampaign.value]?.scenarios[_gameState.scenario.value];
+        if (scenario != null) {
+          ScenarioModel? spawnSection = scenario.sections.firstWhereOrNull((
+              element) => element.name.substring(1) == rule.name);
+          if (spawnSection != null && spawnSection.monsterStandees != null) {
+            GameMethods.autoAddStandees(
+                spawnSection.monsterStandees!, rule.note);
+          }
         }
       }
     }
-
   }
 
   @override
