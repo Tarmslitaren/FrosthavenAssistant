@@ -2053,7 +2053,25 @@
 			}
 		},
 		"#47 Starslinger: Otherworldly Strangers": {
-			"monsters": [ "City Archer", "City Guard", "Earth Demon", "Harrower Infester", "Night Demon", "Sun Demon" ]
+			"monsters": [ "City Archer", "City Guard", "Earth Demon", "Harrower Infester", "Night Demon", "Sun Demon" ],
+			"special": [
+				{
+					"type": "Allies",
+					"list": ["City Guard", "City Archer"]
+				},
+				{
+					"type": "Timer",
+					"list": [3],
+					"startOfRound": false,
+					"note": "Read section 74C."
+				},
+				{
+					"type": "Timer",
+					"list": [5],
+					"startOfRound": false,
+					"note": "Read section 74F."
+				}
+			]
 		},
 		"#48 Amber Aegis: Hive Guardian": {
 			"monsters": [ "Flame Demon", "Frost Demon", "Wind Demon", "Earth Demon", "Night Demon", "Sun Demon" ],
@@ -2120,7 +2138,24 @@
 		},
 		"#50 Ruinmaw: The Fall of Shadow’s Respite": {
 			"monsters": [ "Gnashing Drake", "Spitting Drake", "Rending Drake", "Vermling Scout (ally)", "Vermling Shaman (ally)" ],
+			"sections": {
+				"#4 The Shadow Falls": {
+					"monsters": [ "Brood Mother" ]
+				}
+			},
 			"special": [
+				{
+					"type": "Timer",
+					"list": [3],
+					"startOfRound": false,
+					"note": "Read Section 1."
+				},
+				{
+					"type": "Timer",
+					"list": [6],
+					"startOfRound": false,
+					"note": "Read Section 2."
+				},
 				{
 					"type": "Escort",
 					"name": "The Chosen",
