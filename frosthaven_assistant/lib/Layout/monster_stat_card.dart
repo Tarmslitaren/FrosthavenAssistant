@@ -59,16 +59,18 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     } else if (data.monsterInstances.value.length < data.type.count - 1) {
       if (settings.randomStandees.value == true) {
         int standeeNr = GameMethods.getRandomStandee(data);
-        getIt<GameState>().action(AddStandeeCommand(
-            standeeNr,
-            null,
-            data.id,
-            isBoss
-                ? MonsterType.boss
-                : left
-                    ? MonsterType.normal
-                    : MonsterType.elite,
-            false));
+        if (standeeNr != 0) {
+          getIt<GameState>().action(AddStandeeCommand(
+              standeeNr,
+              null,
+              data.id,
+              isBoss
+                  ? MonsterType.boss
+                  : left
+                  ? MonsterType.normal
+                  : MonsterType.elite,
+              false));
+        }
       } else {
         openDialog(
           context,

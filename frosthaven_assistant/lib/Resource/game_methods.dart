@@ -396,6 +396,7 @@ class GameMethods {
   }
 
   static int getRandomStandee(Monster data) {
+    //TODO: handle standees used by other special monsters
     int nrOfStandees = data.type.count;
     List<int> available = [];
     for (int i = 0; i < nrOfStandees; i++) {
@@ -404,6 +405,25 @@ class GameMethods {
         if (item.standeeNr == i + 1) {
           isAvailable = false;
           break;
+        }
+      }
+      if(isAvailable) { //check for special monsters with same standees
+        for (var item in _gameState.currentList) {
+          if (item is Monster) {
+            if (item.id != data.id) {
+              if (item.type.gfx == data.type.gfx) {
+                for (var standee in item.monsterInstances.value) {
+                  if (standee.standeeNr == i + 1) {
+                    isAvailable = false;
+                    break;
+                  }
+                }
+              }
+            }
+          }
+          if(!isAvailable) {
+            break;
+          }
         }
       }
       if (isAvailable) {
