@@ -56,6 +56,10 @@ void rebuildAllChildren(BuildContext context) {
 }
 
 void openDialog(BuildContext context, Widget widget) {
+  openDialogWithDismissOption(context, widget, true);
+}
+
+void openDialogWithDismissOption(BuildContext context, Widget widget, bool dismissable) {
   //could potentially modify edge insets based on screen width.
   Widget innerWidget = Stack(children: [
     Positioned(
@@ -71,7 +75,9 @@ void openDialog(BuildContext context, Widget widget) {
               })),
     )
   ]);
-  showDialog(context: context, builder: (BuildContext context) => innerWidget);
+  showDialog(
+    barrierDismissible: dismissable,
+      context: context, builder: (BuildContext context) => innerWidget);
 }
 
 //note: not working properly and not used

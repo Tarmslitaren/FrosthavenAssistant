@@ -255,7 +255,6 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     );
   }
 
-  //TODO: this is absolutely terrible. make it better
   @override
   Widget build(BuildContext context) {
     int characterIndex =

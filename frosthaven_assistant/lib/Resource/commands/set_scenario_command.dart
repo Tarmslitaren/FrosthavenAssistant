@@ -290,11 +290,12 @@ class SetScenarioCommand extends Command {
         }
       } else {
         if (roomMonsterData.isNotEmpty) {
-          openDialog(
+          openDialogWithDismissOption(
             getIt<BuildContext>(),
             AutoAddStandeeMenu(
               monsterData: roomMonsterData,
             ),
+              false
           );
         }
       }
