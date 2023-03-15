@@ -612,7 +612,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
           },
           child: buildCard(widget.data, scale)),
       if(!isBoss) Positioned(
-          top: 65 * scale,
+          bottom: 5 * scale * 0.8,
           left: 5 * scale * 0.8,
           child: SizedBox(
               width: 25 * scale * 0.8 + 8,
@@ -637,8 +637,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                     );
                   }))),
       Positioned(
-        //bottom: 5 * scale * 0.8,
-          top: 65 * scale,
+        bottom: 5 * scale * 0.8,
           right: 5 * scale * 0.8,
           child: SizedBox(
               width: 25 * scale * 0.8 + 8,
