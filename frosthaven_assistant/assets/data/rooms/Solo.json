@@ -1312,5 +1312,372 @@
         }
       }
     }
+  ],
+  "20": [
+    {
+      "drifter": {
+        "Forest Imp (FH)": {
+          "normal": [4, 4, 4],
+          "elite": [0, 0, 0]
+        },
+        "Hound (FH)": {
+          "normal": [4, 4, 4],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "1": {
+        "Flame Demon": {
+          "normal": [1, 1, 1],
+          "elite": [1, 1, 1]
+        },
+        "Hound (FH)": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        }
+      }
+    }
+  ],
+  "21": [
+    {
+      "blinkblade": {
+        "Robotic Boltshooter": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        },
+        "Steel Automaton": {
+          "normal": [2, 2, 2],
+          "elite": [1, 1, 1]
+        }
+      }},
+    {
+      "1": {
+        "Ancient Artillery (FH)": {
+          "normal": [
+            4,
+            4,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "2": {
+        "Steel Automaton": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        }
+      }
+    }
+  ],
+  "22": [
+    {
+      "bannerspear": {
+        "City Guard (Banner Spear Special)": {
+          "normal": [6, 6, 6],
+          "elite": [0, 0, 0]
+        },
+        "Polar Bear": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Vermling Scout (FH)": {
+          "normal": [2, 2, 2],
+          "elite": [2, 2, 2]
+        }
+      }
+    }
+  ],
+  "23": [
+    {
+      "deathwalker": {
+        "Black Imp (Deathwalker Special)": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "24": [
+    {
+      "boneshaper": {
+        "Snow Imp": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }},
+    {
+      "1": {
+        "Earth Demon (FH)": {
+          "normal": [
+            3,
+            3,
+            3
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Snow Imp": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "2": {
+        "Hollow Scholar": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Snow Imp": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "25": [
+    {
+      "geminate": {
+        "Lightning Eel": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        },
+        "Robotic Boltshooter": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }},
+    {
+      "1": {
+        "Ice Wraith": {
+          "normal": [1, 1, 1],
+          "elite": [1, 1, 1]
+        }
+      }
+    }
+  ],
+  "26": [
+    {
+      "infuser": {
+        "Incarnation of Ancestors": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "27": [
+    {
+      "pyroclast": {
+        "Burrowing Blade": {
+          "normal": [1, 1, 1],
+          "elite": [2, 2, 2]
+        }
+      }
+    },
+    {
+      "1": {
+        "Rending Drake (FH)": {
+          "normal": [2, 2, 2],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "2": {
+        "Mountain's Heart": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "28": [
+    {
+      "shattersong": {
+        "Algox Icespeaker (Shattersong Special)": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        },
+        "Algox Archer": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "1": {
+        "Chief of Spikes": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "29": [
+    {
+      "trapper": {
+      }
+    }
+  ],
+  "30": [
+    {
+      "shackles": {
+        "Chaos Demon (FH)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Flame Demon": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "31": [
+    {
+      "snowflake": {
+        "Algox Snowspeaker": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Frost Demon (FH)": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        },
+        "Wind Demon (FH)": {
+          "normal": [0, 0, 0],
+          "elite": [2, 2, 2]
+        }
+      }
+    }
+  ],
+  "32": [
+    {
+      "fist": {
+        "Steel Automaton": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "33": [
+    {
+      "prism": {
+        "Living Bones (FH)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Living Spirit (FH)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "1": {
+        "Energized Corpse": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "34": [
+    {
+      "drill": {
+        "Ancient Artillery (FH)": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        },
+        "Flaming Bladespinner": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "door": {
+        "Ancient Artillery (FH)": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        },
+        "Ruined Machine": {
+          "normal": [2, 2, 2],
+          "elite": [2, 2, 2]
+        }
+      }
+    },
+    {
+      "1": {
+        "Flaming Bladespinner": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        },
+        "Steel Automaton": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "35": [
+    {
+      "seaweed": {
+        "Abael Scout": {
+          "normal": [3, 3, 3],
+          "elite": [0, 0, 0]
+        },
+        "Piranha Pig": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "1": {
+        "Burrowing Blade": {
+          "normal": [0, 0, 0],
+          "elite": [3, 3, 3]
+        }
+      }
+    },
+    {
+      "2": {
+        "Piranha Pig": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        },
+        "Abael Warlord": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "36": [
+    {
+      "coral": {
+      }
+    }
   ]
 }

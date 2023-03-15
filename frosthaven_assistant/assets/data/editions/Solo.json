@@ -266,7 +266,6 @@
 				}
 			]
 		},
-
 		"Night Demon (Deathwalker Special)": {
 			"gfx": "Night Demon",
 			"display": "Night Demon",
@@ -317,7 +316,6 @@
 				}
 			]
 		},
-
 		"Stone Golem (Scoundrel Special)": {
 			"deck": "Stone Golem",
 			"gfx": "Stone Golem",
@@ -1684,7 +1682,7 @@
 				},
 				{
 					"type": "Timer",
-					"list": [5, 9, 13.17, 21, 25, 29],
+					"list": [5, 9, 13, 17, 21, 25, 29],
 					"startOfRound": true,
 					"note": "Altar 4 spawns Orb of Energy d"
 				}
@@ -1818,7 +1816,58 @@
 					"health": "Lx2+6",
 					"init": 99
 				}
-			]
+			],
+			"sections": {
+				"1": {
+					"special": [
+						{
+							"type": "ResetRound"
+						},
+						{
+							"type": "Timer",
+							"list": [2],
+							"startOfRound": true,
+							"note": "Spawn normal Ruined Machines at A and B."
+						},
+						{
+							"type": "Timer",
+							"list": [5],
+							"startOfRound": true,
+							"note": "Spawn normal Ancient Artillery at C."
+						},
+						{
+							"type": "Timer",
+							"list": [7],
+							"startOfRound": true,
+							"note": "Spawn normal Ancient Artillery at D."
+						},
+						{
+							"type": "Timer",
+							"list": [8],
+							"startOfRound": true,
+							"note": "Spawn elite Flaming Bladespinner at A."
+						},
+						{
+							"type": "Timer",
+							"list": [10],
+							"startOfRound": true,
+							"note": "Spawn normal Ruined Machine at C."
+						},
+						{
+							"type": "Timer",
+							"list": [11],
+							"startOfRound": true,
+							"note": "Spawn normal Ruined Machine at D."
+						},
+						{
+							"type": "Timer",
+							"list": [5],
+							"startOfRound": true,
+							"note": "Spawn normal Ancient Artillery at A and B."
+						}
+					]
+				}
+			}
 		},
 		"#33 H.I.V.E.: Recharge": {
 			"monsters": [ "Frozen Corpse", "Living Bones (FH)","Living Spirit (FH)", "Energized Corpse" ],
@@ -1885,7 +1934,36 @@
 					"list": [3],
 					"startOfRound": true,
 					"note": "Spawn Lost in Seaweed at a and Lightning Eels each hex adjacent to it."
-				}]
+				}
+			],
+			"sections": {
+				"1": {
+					"special": [
+						{
+							"type": "ResetRound"
+						},
+						{
+							"type": "Timer",
+							"list": [4],
+							"startOfRound": true,
+							"note": "Spawn Shape BLocke Out the Sun"
+						}
+					]
+				},
+				"2": {
+					"special": [
+						{
+							"type": "ResetRound"
+						},
+						{
+							"type": "Timer",
+							"list": [4],
+							"startOfRound": true,
+							"note": "Spawn Plea for Help Without Answer"
+						}
+					]
+				}
+			}
 		},
 		"#37 Bombard: Disarm the Machine": {
 			"monsters": [ "Ancient Artillery", "Stone Golem" ]
