@@ -258,169 +258,141 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   //TODO: this is absolutely terrible. make it better
   @override
   Widget build(BuildContext context) {
-    RoomMonsterData data = widget.monsterData[currentMonsterIndex];
-    Monster monster = _gameState.currentList
-        .firstWhere((element) => element.id == data.name) as Monster;
-
     int characterIndex =
         GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
-    int nrOfElite = data.elite[characterIndex];
-    int nrOfNormal = data.normal[characterIndex];
-    //change depending on already added standees
-    int preAddedMonsters = initialEliteAdded[currentMonsterIndex] +
-        initialNormalAdded[
-            currentMonsterIndex]; // monster.monsterInstances.value.length - currentNormalAdded - currentEliteAdded;
 
-    int nrOfStandees = monster.type.count;
-    int monstersLeft = nrOfStandees - preAddedMonsters;
-    if (monstersLeft < nrOfElite) {
-      nrOfNormal = 0;
-      nrOfElite = monstersLeft;
-    } else if (monstersLeft < (nrOfElite + nrOfNormal)) {
-      nrOfNormal = monstersLeft - nrOfElite;
-    }
+    return ValueListenableBuilder<int>(
+        valueListenable: getIt<GameState>().updateList,
+        builder: (context, value, child) {
+          RoomMonsterData data = widget.monsterData[currentMonsterIndex];
+          Monster monster = _gameState.currentList
+              .firstWhere((element) => element.id == data.name) as Monster;
 
-    double scale = 1;
-    if (!isPhoneScreen(context)) {
-      scale = 1.5;
-      if (isLargeTablet(context)) {
-        scale = 2;
-      }
-    }
-    //4 nrs per row
-    double height = 140;
-    if (nrOfStandees > 4) {
-      height = 172;
-    }
-    if (nrOfStandees > 8) {
-      height = 211;
-    }
-    if (nrOfElite > 0 && nrOfNormal > 0) {
-      height *= 2;
-    }
+          int nrOfElite = data.elite[characterIndex];
+          int nrOfNormal = data.normal[characterIndex];
+          //change depending on already added standees
+          int preAddedMonsters = initialEliteAdded[currentMonsterIndex] +
+              initialNormalAdded[
+                  currentMonsterIndex]; // monster.monsterInstances.value.length - currentNormalAdded - currentEliteAdded;
 
-    return Container(
-        width: 250 * scale,
-        //need to set any width to center content, overridden by dialog default min width.
-        height: height * scale,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Stack(
-            //alignment: Alignment.center,
-            children: [
-              ValueListenableBuilder<int>(
-                  valueListenable: getIt<GameState>().updateList,
+          int nrOfStandees = monster.type.count;
+          int monstersLeft = nrOfStandees - preAddedMonsters;
+          if (monstersLeft < nrOfElite) {
+            nrOfNormal = 0;
+            nrOfElite = monstersLeft;
+          } else if (monstersLeft < (nrOfElite + nrOfNormal)) {
+            nrOfNormal = monstersLeft - nrOfElite;
+          }
+
+          int currentEliteAdded = 0;
+          int currentNormalAdded = 0;
+
+          for (var item in monster.monsterInstances.value) {
+            if (item.type == MonsterType.elite) {
+              currentEliteAdded++;
+            } else {
+              currentNormalAdded++;
+            }
+          }
+          currentEliteAdded -= initialEliteAdded[currentMonsterIndex];
+          currentNormalAdded -= initialNormalAdded[currentMonsterIndex];
+
+          int allAdded = currentEliteAdded +
+              currentNormalAdded +
+              initialNormalAdded[currentMonsterIndex] +
+              initialEliteAdded[currentMonsterIndex];
+          if (allAdded >= monster.type.count) {
+            closeOrNext(
+                currentEliteAdded, currentNormalAdded, nrOfElite, nrOfNormal);
+          } else if (currentEliteAdded >= nrOfElite &&
+              currentNormalAdded >= nrOfNormal) {
+            closeOrNext(
+                currentEliteAdded, currentNormalAdded, nrOfElite, nrOfNormal);
+          }
+
+          double scale = 1;
+          if (!isPhoneScreen(context)) {
+            scale = 1.5;
+            if (isLargeTablet(context)) {
+              scale = 2;
+            }
+          }
+          //4 nrs per row
+          double height = 140;
+          if (nrOfStandees > 4) {
+            height = 172;
+          }
+          if (nrOfStandees > 8) {
+            height = 211;
+          }
+          if (nrOfElite > 0 && nrOfNormal > 0) {
+            height *= 2;
+          }
+
+          return Container(
+              width: 250 * scale,
+              //need to set any width to center content, overridden by dialog default min width.
+              height: height * scale,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.8), BlendMode.dstATop),
+                  image: AssetImage(getIt<Settings>().darkMode.value
+                      ? 'assets/images/bg/dark_bg.png'
+                      : 'assets/images/bg/white_bg.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: ValueListenableBuilder<List<MonsterInstance>>(
+                  valueListenable: monster.monsterInstances,
                   builder: (context, value, child) {
-                    RoomMonsterData data =
-                        widget.monsterData[currentMonsterIndex];
-                    Monster monster = _gameState.currentList
-                            .firstWhere((element) => element.id == data.name)
-                        as Monster;
-
-                    int nrOfElite = data.elite[characterIndex];
-                    int nrOfNormal = data.normal[characterIndex];
-                    //change depending on already added standees
-                    int preAddedMonsters = initialEliteAdded[
-                            currentMonsterIndex] +
-                        initialNormalAdded[
-                            currentMonsterIndex]; // monster.monsterInstances.value.length - currentNormalAdded - currentEliteAdded;
-
-                    int nrOfStandees = monster.type.count;
-                    int monstersLeft = nrOfStandees - preAddedMonsters;
-                    if (monstersLeft < nrOfElite) {
-                      nrOfNormal = 0;
-                      nrOfElite = monstersLeft;
-                    } else if (monstersLeft < (nrOfElite + nrOfNormal)) {
-                      nrOfNormal = monstersLeft - nrOfElite;
-                    }
-
-                    int currentEliteAdded = 0;
-                    int currentNormalAdded = 0;
-
-                    for (var item in monster.monsterInstances.value) {
-                      if (item.type == MonsterType.elite) {
-                        currentEliteAdded++;
-                      } else {
-                        currentNormalAdded++;
-                      }
-                    }
-                    currentEliteAdded -= initialEliteAdded[currentMonsterIndex];
-                    currentNormalAdded -=
-                        initialNormalAdded[currentMonsterIndex];
-
-                    int allAdded = currentEliteAdded +
-                        currentNormalAdded +
-                        initialNormalAdded[currentMonsterIndex] +
-                        initialEliteAdded[currentMonsterIndex];
-                    if (allAdded >= monster.type.count) {
-                      closeOrNext(currentEliteAdded, currentNormalAdded,
-                          nrOfElite, nrOfNormal);
-                    } else if (currentEliteAdded >= nrOfElite &&
-                        currentNormalAdded >= nrOfNormal) {
-                      closeOrNext(currentEliteAdded, currentNormalAdded,
-                          nrOfElite, nrOfNormal);
-                    }
-
-                    return ValueListenableBuilder<List<MonsterInstance>>(
-                        valueListenable: monster.monsterInstances,
-                        builder: (context, value, child) {
-                          return Column(
+                    return Column(
+                      children: [
+                        if (nrOfElite > 0)
+                          _buildButtonGrid(
+                              scale,
+                              monster,
+                              true,
+                              nrOfStandees,
+                              nrOfElite - currentEliteAdded,
+                              nrOfElite,
+                              nrOfNormal,
+                              currentEliteAdded,
+                              currentNormalAdded),
+                        if (nrOfNormal > 0)
+                          _buildButtonGrid(
+                              scale,
+                              monster,
+                              false,
+                              nrOfStandees,
+                              nrOfNormal - currentNormalAdded,
+                              nrOfElite,
+                              nrOfNormal,
+                              currentEliteAdded,
+                              currentNormalAdded),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              if (nrOfElite > 0)
-                                _buildButtonGrid(
-                                    scale,
-                                    monster,
-                                    true,
-                                    nrOfStandees,
-                                    nrOfElite - currentEliteAdded,
-                                    nrOfElite,
-                                    nrOfNormal,
-                                    currentEliteAdded,
-                                    currentNormalAdded),
-                              if (nrOfNormal > 0)
-                                _buildButtonGrid(
-                                    scale,
-                                    monster,
-                                    false,
-                                    nrOfStandees,
-                                    nrOfNormal - currentNormalAdded,
-                                    nrOfElite,
-                                    nrOfNormal,
-                                    currentEliteAdded,
-                                    currentNormalAdded),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text("Summoned:",
-                                        style: getSmallTextStyle(scale)),
-                                    Checkbox(
-                                      checkColor: Colors.black,
-                                      activeColor: Colors.grey.shade200,
-                                      side: BorderSide(
-                                          color:
-                                              getIt<Settings>().darkMode.value
-                                                  ? Colors.white
-                                                  : Colors.black),
-                                      onChanged: (bool? newValue) {
-                                        setState(() {
-                                          addAsSummon = newValue!;
-                                        });
-                                      },
-                                      value: addAsSummon,
-                                    )
-                                  ])
-                            ],
-                          );
-                        });
-                  }),
-            ]));
+                              Text("Summoned:",
+                                  style: getSmallTextStyle(scale)),
+                              Checkbox(
+                                checkColor: Colors.black,
+                                activeColor: Colors.grey.shade200,
+                                side: BorderSide(
+                                    color: getIt<Settings>().darkMode.value
+                                        ? Colors.white
+                                        : Colors.black),
+                                onChanged: (bool? newValue) {
+                                  setState(() {
+                                    addAsSummon = newValue!;
+                                  });
+                                },
+                                value: addAsSummon,
+                              )
+                            ])
+                      ],
+                    );
+                  }));
+        });
   }
 }
