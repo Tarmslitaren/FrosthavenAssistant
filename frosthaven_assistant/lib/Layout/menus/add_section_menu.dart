@@ -37,6 +37,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     _foundScenarios = _gameState
         .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
         .toList();
+    _foundScenarios = _foundScenarios.where((element) => !element.contains("spawn")).toList();
     _foundScenarios.sort((a, b) {
       int? aNr = GameMethods.findNrFromScenarioName(a);
       int? bNr = GameMethods.findNrFromScenarioName(b);
@@ -55,6 +56,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
       results = _gameState
           .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
           .toList();
+      results = results.where((element) => !element.contains("spawn")).toList();
     } else {
       results = _gameState
           .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
@@ -62,6 +64,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
+      results = results.where((element) => !element.contains("spawn")).toList();
       results.sort((a, b) {
         int? aNr = GameMethods.findNrFromScenarioName(a);
         int? bNr = GameMethods.findNrFromScenarioName(b);

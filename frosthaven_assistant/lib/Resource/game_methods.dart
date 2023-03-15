@@ -12,10 +12,13 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/list_item_data.dart';
 import 'package:frosthaven_assistant/Resource/state/monster.dart';
 import 'package:frosthaven_assistant/Resource/state/monster_instance.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
+import '../Layout/menus/auto_add_standee_menu.dart';
 import '../Model/character_class.dart';
 import '../Model/monster.dart';
+import '../Model/room.dart';
 import '../Model/scenario.dart';
 import 'commands/add_standee_command.dart';
 import 'enums.dart';
@@ -543,6 +546,134 @@ class GameMethods {
     }
   }
 
+  static void addMonster(String monster, List<SpecialRule> specialRules) {
+    int levelAdjust = 0;
+    Set<String> alliedMonsters = {};
+    for (var rule in specialRules) {
+      if(rule.name == monster) {
+        if(rule.type == "LevelAdjust") {
+          levelAdjust = rule.level;
+        }
+      }
+      if(rule.type == "Allies"){
+        for (String item in rule.list){
+          alliedMonsters.add(item);
+        }
+      }
+    }
+
+    bool add = true;
+    for (var item in _gameState.currentList) {
+      //don't add duplicates
+      if(item.id == monster) {
+        add = false;
+        break;
+      }
+    }
+    if(add) {
+      bool isAlly = false;
+      if(alliedMonsters.contains(monster)){
+        isAlly = true;
+      }
+      _gameState.currentList.add(GameMethods.createMonster(
+          monster, (_gameState.level.value + levelAdjust).clamp(0, 7), isAlly)!);
+    }
+  }
+
+  static String autoAddStandees(List<RoomMonsterData> roomMonsterData, String initMessage) {
+    //handle room data
+    int characterIndex = GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
+    for (int i = 0; i < roomMonsterData.length; i++) {
+      var roomMonsters = roomMonsterData[i];
+      addMonster(roomMonsters.name, _gameState.scenarioSpecialRules);
+    }
+    if(getIt<Settings>().noStandees.value != true && getIt<Settings>().autoAddStandees.value != false) {
+      if (getIt<Settings>().randomStandees.value == true) {
+        if (initMessage.isNotEmpty) {
+          initMessage += "\n";
+        }
+        for (int i = 0; i < roomMonsterData.length; i++) {
+          List<int> normals = [];
+          List<int> elites = [];
+          var roomMonsters = roomMonsterData[i];
+          Monster data = _gameState.currentList.firstWhereOrNull((
+              element) => element.id == roomMonsters.name) as Monster;
+
+          int eliteAmount = roomMonsters.elite[characterIndex];
+          int normalAmount = roomMonsters.normal[characterIndex];
+
+          bool isBoss = false;
+          if(data.type.levels[0].boss != null) {
+            isBoss = true;
+          }
+
+          for (int i = 0; i < eliteAmount; i++) {
+            int randomNr = GameMethods.getRandomStandee(data);
+            if (randomNr != 0) {
+              elites.add(randomNr);
+              GameMethods.executeAddStandee(
+                  randomNr, null, MonsterType.elite, data.id, false);
+            }
+          }
+
+          for (int i = 0; i < normalAmount; i++) {
+            int randomNr = GameMethods.getRandomStandee(data);
+            if (randomNr != 0) {
+              normals.add(randomNr);
+              GameMethods.executeAddStandee(
+                  randomNr, null, isBoss ? MonsterType.boss : MonsterType.normal, data.id, false);
+            }
+          }
+
+          if(elites.isNotEmpty || normals.isNotEmpty) {
+            elites.sort();
+            normals.sort();
+            if (i != 0) {
+              initMessage += "\n";
+            }
+            initMessage += "${data.type.display} added - ";
+
+            if(elites.isNotEmpty) {
+              initMessage += "Elite: ";
+              for(int i = 0; i < elites.length; i++) {
+                initMessage += "${elites[i]}, ";
+                if (i == elites.length - 1) {
+                  initMessage = initMessage.substring(0, initMessage.length - 2);
+                }
+              }
+            }
+            if(normals.isNotEmpty) {
+              if(isBoss) {
+                //only numbers matter
+              } else {
+                if(elites.isNotEmpty) {
+                  initMessage += ", ";
+                }
+                initMessage += "Normal: ";
+              }
+              for(int i = 0; i < normals.length; i++) {
+                initMessage += "${normals[i]}, ";
+                if (i == normals.length - 1) {
+                  initMessage = initMessage.substring(0, initMessage.length - 2);
+                }
+              }
+            }
+          }
+        }
+      } else {
+        if (roomMonsterData.isNotEmpty) {
+          openDialogWithDismissOption(
+              getIt<BuildContext>(),
+              AutoAddStandeeMenu(
+                monsterData: roomMonsterData,
+              ),
+              false
+          );
+        }
+      }
+    }
+    return initMessage;
+  }
 
   static FigureState? getFigure(String ownerId, String figureId) {
     for(var item in getIt<GameState>().currentList) {

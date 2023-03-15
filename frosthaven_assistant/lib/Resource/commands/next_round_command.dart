@@ -1,4 +1,7 @@
 
+import 'package:collection/collection.dart';
+import 'package:frosthaven_assistant/Model/scenario.dart';
+
 import '../../Layout/main_list.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
@@ -8,10 +11,23 @@ import '../settings.dart';
 import '../state/character.dart';
 import '../state/game_state.dart';
 import '../state/monster.dart';
-import '../ui_utils.dart';
 
 class NextRoundCommand extends Command {
   final GameState _gameState = getIt<GameState>();
+
+  void _handleTimedSpawns(var rule) {
+    if(rule.name.isNotEmpty) {
+      //get room data and deal with spawns
+      ScenarioModel? scenario = _gameState.modelData.value[_gameState.currentCampaign.value]?.scenarios[_gameState.scenario.value];
+      if(scenario != null) {
+        ScenarioModel? spawnSection = scenario.sections.firstWhereOrNull((element) => element.name.substring(1) == rule.name);
+        if(spawnSection != null && spawnSection.monsterStandees != null) {
+          GameMethods.autoAddStandees(spawnSection.monsterStandees!, rule.note);
+        }
+      }
+    }
+
+  }
 
   @override
   void execute() {
@@ -44,6 +60,8 @@ class NextRoundCommand extends Command {
             //minus 1 means always
             if (round == _gameState.round.value || round == -1) {
               _gameState.toastMessage.value = rule.note;
+
+              _handleTimedSpawns(rule);
             }
           }
         }
@@ -59,6 +77,8 @@ class NextRoundCommand extends Command {
                 _gameState.toastMessage.value += "\n\n${rule.note}";
               } else {
                 _gameState.toastMessage.value += rule.note;
+
+                _handleTimedSpawns(rule);
               }
             }
           }
@@ -84,7 +104,6 @@ class NextRoundCommand extends Command {
 
   @override
   void undo() {
-    //GameMethods.setRoundState(RoundState.playTurns);
     _gameState.updateList.value++;
   }
 
