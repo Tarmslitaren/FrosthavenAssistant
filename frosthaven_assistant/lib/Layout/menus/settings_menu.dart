@@ -112,6 +112,16 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     });
                                   }),
                               CheckboxListTile(
+                                  title: const Text("Auto Add Standees"),
+                                  value: settings.autoAddStandees.value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      settings.autoAddStandees.value = value!;
+                                      settings.saveToDisk();
+                                      getIt<GameState>().updateList.value++;
+                                    });
+                                  }),
+                              CheckboxListTile(
                                   title: const Text("Random Standees"),
                                   value: settings.randomStandees.value,
                                   onChanged: (bool? value) {

@@ -228,7 +228,7 @@ class SetScenarioCommand extends Command {
       var roomMonsters = roomMonsterData[i];
       _addMonster(roomMonsters.name, _gameState.scenarioSpecialRules);
     }
-    if(getIt<Settings>().noStandees.value != true) {
+    if(getIt<Settings>().noStandees.value != true && getIt<Settings>().autoAddStandees.value != false) {
       if (getIt<Settings>().randomStandees.value == true) {
         if (initMessage.isNotEmpty) {
           initMessage += "\n";

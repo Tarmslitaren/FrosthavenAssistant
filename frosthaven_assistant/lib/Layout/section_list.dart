@@ -44,6 +44,23 @@ class SectionListState extends State<SectionList> {
           var list = gameState.modelData.value[gameState.currentCampaign.value]
               ?.scenarios[gameState.scenario.value]?.sections
               .toList();
+
+          if(getIt<Settings>().autoAddStandees.value == false) {
+            //filter out all sections with only room data
+            list = list?.where((element) {
+              if(element.specialRules.isNotEmpty) {
+                return true;
+              }
+              if(element.initMessage.isNotEmpty) {
+                return true;
+              }
+              if(element.monsters.isNotEmpty) {
+                return true;
+              }
+              return false;}).toList();
+
+          }
+
           if(list != null && gameState.scenarioSectionsAdded.length == list.length) {
             list = [];
           }
