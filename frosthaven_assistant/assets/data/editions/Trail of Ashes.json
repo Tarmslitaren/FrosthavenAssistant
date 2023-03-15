@@ -1405,7 +1405,8 @@
               "type": "Timer",
               "startOfRound": true,
               "list": [2],
-              "note": "Spawn the Reaver, the Conqueror and the Ritualist."
+              "note": "Spawn the Reaver, the Conqueror and the Ritualist.",
+              "name": "spawn 1"
             }]
         }
       }

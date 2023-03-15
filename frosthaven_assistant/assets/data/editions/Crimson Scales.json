@@ -4547,7 +4547,8 @@
           "type": "Timer",
           "list": [1],
           "startOfRound": false,
-          "note": "Spawn one normal Inox Guard and one elite Inox Archer on each tile occupied by a character."
+          "note": "Spawn one normal Inox Guard and one elite Inox Archer on each tile occupied by a character.",
+          "name": "spawn 1"
         }
       ]
     },
@@ -4567,55 +4568,64 @@
           "type": "Timer",
           "list": [1],
           "startOfRound": false,
-          "note": "Spawn Hound on hex a."
+          "note": "Spawn Hound on hex a.",
+          "name": "spawn 1"
         },
         {
           "type": "Timer",
           "list": [2],
           "startOfRound": false,
-          "note": "Spawn Cave Bear on hex c."
+          "note": "Spawn Cave Bear on hex c.",
+          "name": "spawn 2"
         },
         {
           "type": "Timer",
           "list": [3],
           "startOfRound": false,
-          "note": "Spawn Giant Viper on hex b and Rending Drake on hex d."
+          "note": "Spawn Giant Viper on hex b and Rending Drake on hex d.",
+          "name": "spawn 3"
         },
         {
           "type": "Timer",
           "list": [4],
           "startOfRound": false,
-          "note": "Spawn Lurker on hex a and Hound on hex c."
+          "note": "Spawn Lurker on hex a and Hound on hex c.",
+          "name": "spawn 4"
         },
         {
           "type": "Timer",
           "list": [5],
           "startOfRound": false,
-          "note": "Spawn Cave Bear on hex b and Giant Viper on hex d."
+          "note": "Spawn Cave Bear on hex b and Giant Viper on hex d.",
+          "name": "spawn 5"
         },
         {
           "type": "Timer",
           "list": [6],
           "startOfRound": false,
-          "note": "Spawn Rending Drake on hex a and Lurker on hex c."
+          "note": "Spawn Rending Drake on hex a and Lurker on hex c.",
+          "name": "spawn 6"
         },
         {
           "type": "Timer",
           "list": [7],
           "startOfRound": false,
-          "note": "Spawn Hound on hex b and Cave Bear on hex d."
+          "note": "Spawn Hound on hex b and Cave Bear on hex d.",
+          "name": "spawn 7"
         },
         {
           "type": "Timer",
           "list": [8],
           "startOfRound": false,
-          "note": "Spawn Giant Viper on hex a and Rending Drake on hex c."
+          "note": "Spawn Giant Viper on hex a and Rending Drake on hex c.",
+          "name": "spawn 8"
         },
         {
           "type": "Timer",
           "list": [9],
           "startOfRound": false,
-          "note": "Spawn Lurker on hex b and Hound on hex d."
+          "note": "Spawn Lurker on hex b and Hound on hex d.",
+          "name": "spawn 9"
         },
         {
           "type": "Timer",
@@ -5083,9 +5093,17 @@
       "special": [
         {
           "type": "Timer",
-          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
+          "list": [2,6,10,14,18,22,26,32],
           "startOfRound": false,
-          "note": "Spawn Spitting Drake at c."
+          "note": "Spawn Spitting Drake at C. It is elite for 4 characters.",
+          "name": "spawn 1"
+        },
+        {
+          "type": "Timer",
+          "list": [4,8,12,16,20,24,30],
+          "startOfRound": false,
+          "note": "Spawn Spitting Drake at C. It is elite for 3-4 characters.",
+          "name": "spawn 2"
         }
       ]
     },
@@ -5254,31 +5272,36 @@
           "type": "Timer",
           "list": [2,6],
           "startOfRound": true,
-          "note": "Spawn C normal Bandit Guards."
+          "note": "Spawn C normal Bandit Guards.",
+          "name": "spawn 1"
         },
         {
           "type": "Timer",
           "list": [3,7],
           "startOfRound": true,
-          "note": "Spawn C normal Bandit Archerss."
+          "note": "Spawn C normal Bandit Archers.",
+          "name": "spawn 2"
         },
         {
           "type": "Timer",
           "list": [4,8],
           "startOfRound": true,
-          "note": "Spawn C normal Hounds."
+          "note": "Spawn C normal Hounds.",
+          "name": "spawn 3"
         },
         {
           "type": "Timer",
           "list": [5],
           "startOfRound": true,
-          "note": "Spawn C normal Wind Demons."
+          "note": "Spawn C normal Wind Demons.",
+          "name": "spawn 4"
         },
         {
           "type": "Timer",
           "list": [9],
           "startOfRound": true,
-          "note": "Spawn C normal Ice Demons."
+          "note": "Spawn C normal Frost Demons.",
+          "name": "spawn 5"
         },
         {
           "type": "Timer",
@@ -5315,25 +5338,29 @@
           "type": "Timer",
           "list": [2,6],
           "startOfRound": true,
-          "note": "Spawn one normal Flame Demon at hex c."
+          "note": "Spawn one normal Flame Demon at hex C.",
+          "name": "spawn 1"
         },
         {
           "type": "Timer",
           "list": [3,7],
           "startOfRound": true,
-          "note": "Spawn two normal Sun Demons at hex d."
+          "note": "Spawn two normal Sun Demons at hex D.",
+          "name": "spawn 2"
         },
         {
           "type": "Timer",
           "list": [4,8],
           "startOfRound": true,
-          "note": "Spawn one normal Night Demon at hex b."
+          "note": "Spawn one normal Night Demon at hex B.",
+          "name": "spawn 3"
         },
         {
           "type": "Timer",
           "list": [5,9],
           "startOfRound": true,
-          "note": "Spawn two normal Wind Demons at hex e."
+          "note": "Spawn two normal Wind Demons at hex E.",
+          "name": "spawn 4"
         }
       ]
     },

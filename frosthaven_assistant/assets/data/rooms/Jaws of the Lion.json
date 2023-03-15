@@ -641,7 +641,7 @@
       }
     },
     {
-      "01": {
+      "1": {
         "Vermling Scout (JotL)": {
           "normal": [
             2,
@@ -655,11 +655,22 @@
           ]
         }
       }
+    },
+    {
+      "2": {
+        "Giant Viper (JotL)": {
+          "normal": [4, 2, 0],
+          "elite": [0, 2, 4]
+        }
+      }
     }
   ],
   "12": [
     {
-      "02": {
+      "start": {}
+    },
+    {
+      "1": {
         "Living Corpse (JotL)": {
           "normal": [
             2,
@@ -881,7 +892,35 @@
       }
     }
   ],
-  "16": [],
+  "16": [
+    {
+      "start": {}
+    },
+    {
+      "1": {
+        "Rat Monstrosity": {
+          "normal": [4, 3, 4],
+          "elite": [1, 3, 4]
+        }
+      }
+    },
+    {
+      "2": {
+        "Rat Monstrosity": {
+          "normal": [6, 8, 4],
+          "elite": [1, 2, 6]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Rat Monstrosity": {
+          "normal": [4, 4, 4],
+          "elite": [2, 4, 6]
+        }
+      }
+    }
+  ],
   "17": [
     {
       "start": {
@@ -942,6 +981,22 @@
           ]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Blood Monstrosity": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Blood Monstrosity": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
     }
   ],
   "20": [
@@ -962,7 +1017,24 @@
       }
     }
   ],
-  "18": [],
+  "18": [
+    {
+      "start": {
+        "Giant Viper (JotL)": {
+          "normal": [4, 2, 0],
+          "elite": [0, 2, 4]
+        }
+      }
+    },
+    {
+      "2": {
+        "Stone Golem (JotL)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        }
+      }
+    }
+  ],
   "19": [
     {
       "start": {
@@ -1245,6 +1317,26 @@
             0,
             1
           ]
+        }
+      }
+    },
+    {
+      "1": {
+        "Black Imp (JotL)": {
+          "normal": [4, 2, 0],
+          "elite": [0, 2, 4]
+        },
+        "Chaos Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "2": {
+        "Chaos Demon": {
+          "normal": [3, 2, 0],
+          "elite": [0, 1, 3]
         }
       }
     }

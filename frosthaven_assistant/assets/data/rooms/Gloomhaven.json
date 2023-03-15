@@ -2878,7 +2878,56 @@
       }
     }
   ],
-  "27": [],
+  "27": [
+    {
+      "start": {}
+    },
+    {
+      "spawn 1": {
+        "Wind Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Frost Demon": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Sun Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Earth Demon": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Flame Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Night Demon": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Wind Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    }
+
+  ],
   "29": [
     {
       "D1a": {
@@ -3908,6 +3957,38 @@
             0,
             1
           ]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Flame Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Earth Demon": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Frost Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Wind Demon": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         }
       }
     }
@@ -6405,6 +6486,14 @@
           ]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Living Bones": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        }
+      }
     }
   ],
   "63": [
@@ -7381,6 +7470,22 @@
             1,
             1
           ]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Living Spirit": {
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Living Spirit": {
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -8990,6 +9095,14 @@
             0,
             0
           ]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Vermling Scout": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         }
       }
     }

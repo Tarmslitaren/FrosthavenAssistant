@@ -1257,6 +1257,22 @@
           ]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Reaver": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Conqueror": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Ritualist": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
     }
   ],
   "79": [
