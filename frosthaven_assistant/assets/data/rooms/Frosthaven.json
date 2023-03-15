@@ -2846,6 +2846,10 @@
           "normal": [1, 1, 1],
           "elite": [0, 0, 0]
         },
+        "Giant Piranha Pig Water": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
         "Ancient Artillery (FH)": {
           "normal": [3, 2, 1],
           "elite": [1, 2, 4]
