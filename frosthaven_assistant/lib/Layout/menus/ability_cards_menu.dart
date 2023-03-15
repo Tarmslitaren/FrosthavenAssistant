@@ -139,7 +139,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           width: screenWidth * 0.4,
           child: reorderable
               ? ReorderableColumn(
-                  needsLongPressDraggable: getIt<Settings>().longPressToReorder.value,
+                  needsLongPressDraggable: true,
                   scrollController: AdjustableScrollController(),
                   scrollAnimationDuration: const Duration(milliseconds: 400),
                   reorderAnimationDuration: const Duration(milliseconds: 400),

@@ -126,7 +126,7 @@ class SetScenarioCommand extends Command {
             }
             if(normals.isNotEmpty) {
               if(isBoss) {
-                //initMessage = initMessage.substring(0, initMessage.length-1);
+                //only numbers matter
               } else {
                 if(elites.isNotEmpty) {
                   initMessage += ", ";
