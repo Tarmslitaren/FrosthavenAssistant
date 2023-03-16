@@ -57,38 +57,42 @@ class NextRoundCommand extends Command {
     GameMethods.sortCharactersFirst();
 
     _gameState.toastMessage.value = "";
-    if(getIt<Settings>().showReminders.value == true) {
-      for (var rule in _gameState.scenarioSpecialRules) {
-        if (rule.type == "Timer" && rule.startOfRound == false) {
-          for (int round in rule.list) {
-            //minus 1 means always
-            if (round == _gameState.round.value || round == -1) {
+
+    for (var rule in _gameState.scenarioSpecialRules) {
+      if (rule.type == "Timer" && rule.startOfRound == false) {
+        for (int round in rule.list) {
+          //minus 1 means always
+          if (round == _gameState.round.value || round == -1) {
+            if(getIt<Settings>().showReminders.value == true) {
               _gameState.toastMessage.value = rule.note;
+            }
+
+            _handleTimedSpawns(rule);
+          }
+        }
+      }
+    }
+
+    //start of next round is now
+    for (var rule in _gameState.scenarioSpecialRules) {
+      if (rule.type == "Timer" && rule.startOfRound == true) {
+        for (int round in rule.list) {
+          //minus 1 means always
+          if (round - 1 == _gameState.round.value || round == -1) {
+            if (_gameState.toastMessage.value.isNotEmpty) {
+              _gameState.toastMessage.value += "\n\n${rule.note}";
+            } else {
+              if(getIt<Settings>().showReminders.value == true) {
+                _gameState.toastMessage.value += rule.note;
+              }
 
               _handleTimedSpawns(rule);
             }
           }
         }
       }
-
-      //start of next round is now
-      for (var rule in _gameState.scenarioSpecialRules) {
-        if (rule.type == "Timer" && rule.startOfRound == true) {
-          for (int round in rule.list) {
-            //minus 1 means always
-            if (round - 1 == _gameState.round.value || round == -1) {
-              if (_gameState.toastMessage.value.isNotEmpty) {
-                _gameState.toastMessage.value += "\n\n${rule.note}";
-              } else {
-                _gameState.toastMessage.value += rule.note;
-
-                _handleTimedSpawns(rule);
-              }
-            }
-          }
-        }
-      }
     }
+
 
 
     _gameState.round.value++;

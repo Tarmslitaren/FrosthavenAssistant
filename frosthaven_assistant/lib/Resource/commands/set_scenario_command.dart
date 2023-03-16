@@ -166,14 +166,16 @@ class SetScenarioCommand extends Command {
       }
 
       //special case for start of round and round is 1
-      if(item.type == "Timer" && item.startOfRound == true) {
-        for(int round in item.list) {
-          //minus 1 means always
-          if(round == 1 || round == -1) {
-            if(initMessage.isNotEmpty) {
-              initMessage += "\n\n${item.note}";
-            } else {
-              initMessage += item.note;
+      if(!section) { //sections are usually not added at start of round.
+        if (item.type == "Timer" && item.startOfRound == true) {
+          for (int round in item.list) {
+            //minus 1 means always
+            if (round == 1 || round == -1) {
+              if (initMessage.isNotEmpty) {
+                initMessage += "\n\n${item.note}";
+              } else {
+                initMessage += item.note;
+              }
             }
           }
         }
@@ -195,6 +197,21 @@ class SetScenarioCommand extends Command {
       _gameState.scenario.value = _scenario;
       _gameState.scenarioSectionsAdded = [];
     }else {
+      //overwrite earlier timers with same time.
+      for (var item in specialRules) {
+        if(item.type == "Timer") {
+          _gameState.scenarioSpecialRules.removeWhere((oldItem) {
+            if(oldItem.type == "Timer" && item.startOfRound == oldItem.startOfRound) {
+              if(item.list.contains(-1) || oldItem.list.contains(-1)) {
+                return true;
+              }
+              var set2 = oldItem.list.toSet();
+              return item.list.any(set2.contains);
+            }
+            return false;
+          });
+        }
+      }
       _gameState.scenarioSpecialRules.addAll(specialRules);
       _gameState.scenarioSectionsAdded.add(_scenario);
     }
