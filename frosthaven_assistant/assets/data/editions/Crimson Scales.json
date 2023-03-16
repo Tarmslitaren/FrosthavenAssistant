@@ -385,7 +385,7 @@
     {
       "name": "Artificer",
       "edition": "Crimson Scales",
-      "health": [7, 8, 9, 12, 13, 14, 15, 17],
+      "health": [7,8,9,10,12,13,14,15,17],
       "hidden": true,
       "color": "ff79bcda",
       "colorSecondary": "ff415054",

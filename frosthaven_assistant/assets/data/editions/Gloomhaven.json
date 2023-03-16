@@ -4455,7 +4455,7 @@
             "type": "Timer",
             "list": [1,5],
             "startOfRound": false,
-            "note": "Spawn Flame Demon at a. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage."
+            "note": "Spawn Flame Demon at a. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage.",
             "name": "spawn 1"
           },
           {
