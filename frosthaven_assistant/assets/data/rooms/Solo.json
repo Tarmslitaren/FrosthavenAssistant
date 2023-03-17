@@ -323,7 +323,36 @@
       }
     }
   ],
-  "5": [],
+  "5": [
+    {
+      "crag": {
+      }
+    },
+    {
+      "spawn 1": {
+        "Cave Bear": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Ooze": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Sun Demon": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Ooze": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
   "19": [
     {
       "M1": {
@@ -1228,10 +1257,55 @@
       }
     }
   ],
-  "9": [],
+  "9": [
+    {
+      "summoner": {
+      }
+    },
+    {
+      "1": {
+        "Cave Bear (Circles special)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Hound": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Spitting Drake": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Hound": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Spitting Drake": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
   "2": [
     {
-      "G1": {
+      "Tinker": {
         "City Guard (Ally)": {
           "normal": [
             4,
@@ -1267,6 +1341,14 @@
             2,
             2
           ]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Vermling Scout": {
+          "normal": [4, 4, 4],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -1392,6 +1474,46 @@
           "elite": [2, 2, 2]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Vermling Scout (FH)": {
+          "normal": [4, 4, 4],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Polar Bear": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Vermling Scout (FH)": {
+          "normal": [0, 0, 0],
+          "elite": [2, 2, 2]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Vermling Scout (FH)": {
+          "normal": [0, 0, 0],
+          "elite": [3, 3, 3]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Polar Bear": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        },
+        "Vermling Scout (FH)": {
+          "normal": [0, 0, 0],
+          "elite": [2, 2, 2]
+        }
+      }
     }
   ],
   "23": [
@@ -1400,6 +1522,38 @@
         "Black Imp (Deathwalker Special)": {
           "normal": [2, 2, 2],
           "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Night Demon (Deathwalker Special)": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Black Imp (Deathwalker Special)": {
+          "normal": [4, 4, 4],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Black Imp (Deathwalker Special)": {
+          "normal": [0, 0, 0],
+          "elite": [2, 2, 2]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Night Demon (Deathwalker Special)": {
+          "normal": [0, 0, 0],
+          "elite": [2, 2, 2]
         }
       }
     }
@@ -1536,6 +1690,42 @@
     {
       "trapper": {
       }
+    },
+    {
+      "spawn 1": {
+        "Algox Guard": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Wind Demon (FH)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Algox Snowspeaker (Trapper Special)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Algox Guard": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Algox Snowspeaker (Trapper Special)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
     }
   ],
   "30": [
@@ -1544,8 +1734,36 @@
         "Chaos Demon (FH)": {
           "normal": [1, 1, 1],
           "elite": [0, 0, 0]
-        },
-        "Flame Demon": {
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Flame Demon (FH)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Sun Demon (FH)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Earth Demon (FH)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Chaos Demon (FH)": {
           "normal": [1, 1, 1],
           "elite": [0, 0, 0]
         }
@@ -1568,6 +1786,30 @@
           "elite": [2, 2, 2]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Frost Demon (FH)": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Wind Demon (FH)": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Algox Snowspeaker": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        }
+      }
     }
   ],
   "32": [
@@ -1575,6 +1817,46 @@
       "fist": {
         "Steel Automaton": {
           "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Ruined Machine": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Ancient Artillery (FH)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Flaming Bladespinner": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Ruined Machine": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 5": {
+        "Ancient Artillery (FH)": {
+          "normal": [2, 2, 2],
           "elite": [0, 0, 0]
         }
       }
@@ -1597,6 +1879,38 @@
       "1": {
         "Energized Corpse": {
           "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Living Bones (FH)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Living Spirit (FH)": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Frozen Corpse": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Living Bones (FH)": {
+          "normal": [2, 2, 2],
           "elite": [0, 0, 0]
         }
       }
@@ -1677,6 +1991,34 @@
   "36": [
     {
       "coral": {
+      }
+    },
+    {
+      "spawn 1": {
+        "Lost in Seaweed": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Lightning Eel": {
+          "normal": [4, 4, 4],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Shape Blocks Out the Sun": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Plea for Help Without Answer": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
       }
     }
   ],
@@ -2530,7 +2872,7 @@
   ],
   "48": [
     {
-      "L2": {
+      "amber aegis": {
         "Earth Demon": {
           "normal": [
             0,
@@ -2590,6 +2932,38 @@
             0,
             1
           ]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Flame Demon": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Sun Demon": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Night Demon": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Wind Demon": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     }

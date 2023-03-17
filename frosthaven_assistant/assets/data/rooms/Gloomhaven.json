@@ -2883,6 +2883,14 @@
       "start": {}
     },
     {
+      "spawn 0": {
+        "Night Demon": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
       "spawn 1": {
         "Wind Demon": {
           "normal": [1, 0, 0],

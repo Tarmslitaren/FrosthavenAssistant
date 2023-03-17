@@ -4328,7 +4328,8 @@
             "type": "Timer",
             "list": [1],
             "startOfRound": false,
-            "note": "Spawn Night Demon on hex B. It is elite for 4 characters."
+            "note": "Spawn Night Demon on hex B. It is elite for 4 characters.",
+            "name": "spawn 0"
           },
           {
             "type": "Timer",

@@ -1353,7 +1353,8 @@
 					"type": "Timer",
 					"list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
 					"startOfRound": false,
-					"note": "Four normal Vermling Scouts spawn at a."
+					"note": "Four normal Vermling Scouts spawn at A.",
+					"name": "spawn 1"
 				}
 			]
 		},
@@ -1376,13 +1377,15 @@
 					"type": "Timer",
 					"list": [1,3,5],
 					"startOfRound": false,
-					"note": "One normal Cave Bear spawns at a and one elite Ooze spawns at b."
+					"note": "One normal Cave Bear spawns at A and one elite Ooze spawns at B.",
+					"name": "spawn 1"
 				},
 				{
 					"type": "Timer",
 					"list": [2,4,6],
 					"startOfRound": false,
-					"note": "One normal Sun Demon spawns at c and two normal Oozes spawn at d. "
+					"note": "One normal Sun Demon spawns at C and two normal Oozes spawn at D.",
+					"name": "spawn 2"
 				}
 			]
 		},
@@ -1424,25 +1427,29 @@
 					"type": "Timer",
 					"list": [1],
 					"startOfRound": false,
-					"note": "One normal Hound spawns at a."
+					"note": "One normal Hound spawns at A.",
+					"name": "spawn 1"
 				},
 				{
 					"type": "Timer",
 					"list": [2],
 					"startOfRound": false,
-					"note": "One normal Spitting Drake spawns at b."
+					"note": "One normal Spitting Drake spawns at B.",
+					"name": "spawn 2"
 				},
 				{
 					"type": "Timer",
 					"list": [3],
 					"startOfRound": false,
-					"note": "Two normal Hounds spawns at c."
+					"note": "Two normal Hounds spawns at C.",
+					"name": "spawn 3"
 				},
 				{
 					"type": "Timer",
 					"list": [4],
 					"startOfRound": false,
-					"note": "One normal Spitting Drake spawns at d."
+					"note": "One normal Spitting Drake spawns at D.",
+					"name": "spawn 4"
 				}
 			]
 		},
@@ -1573,25 +1580,29 @@
 					"type": "Timer",
 					"list": [3],
 					"startOfRound": true,
-					"note": "Spawn normal Vermling Scout at b, c, d, e."
+					"note": "Spawn normal Vermling Scout at B, C, D, E.",
+					"name": "spawn 1"
 				},
 				{
 					"type": "Timer",
 					"list": [5],
 					"startOfRound": true,
-					"note": "Spawn normal Polar Bear at b. Elite Vermling Scout at d and f."
+					"note": "Spawn normal Polar Bear at B. Elite Vermling Scout at D and F.",
+					"name": "spawn 2"
 				},
 				{
 					"type": "Timer",
 					"list": [7],
 					"startOfRound": true,
-					"note": "Spawn elite Vermling Scout at a, b, c."
+					"note": "Spawn elite Vermling Scout at A, B, C.",
+					"name": "spawn 3"
 				},
 				{
 					"type": "Timer",
 					"list": [9],
 					"startOfRound": true,
-					"note": "Spawn elite Polar Bear at e. Elite Vermling Scout at d and f."
+					"note": "Spawn elite Polar Bear at E. Elite Vermling Scout at D and F.",
+					"name": "spawn 4"
 				}
 			]
 		},
@@ -1608,25 +1619,29 @@
 					"type": "Timer",
 					"list": [3],
 					"startOfRound": true,
-					"note": "Spawn normal Night Demon at a and d."
+					"note": "Spawn normal Night Demon at A and D.",
+					"name": "spawn 1"
 				},
 				{
 					"type": "Timer",
 					"list": [5],
 					"startOfRound": true,
-					"note": "Spawn normal Black Imp at a, b, c and d."
+					"note": "Spawn normal Black Imp at A, B, C and D.",
+					"name": "spawn 2"
 				},
 				{
 					"type": "Timer",
 					"list": [7],
 					"startOfRound": true,
-					"note": "Spawn elite Black Imp at a and c."
+					"note": "Spawn elite Black Imp at A and C.",
+					"name": "spawn 3"
 				},
 				{
 					"type": "Timer",
 					"list": [10],
 					"startOfRound": true,
-					"note": "Spawn elite Night Demon at b and d."
+					"note": "Spawn elite Night Demon at B and D.",
+					"name": "spawn 4"
 				}
 			]
 		},
@@ -1700,30 +1715,33 @@
 			"monsters": [ "Algox Guard", "Algox Snowspeaker (Trapper Special)","Wind Demon (FH)" ],
 			"lootDeck": {"coin":15},
 			"special": [
-
 				{
 					"type": "Timer",
 					"list": [3, 7],
 					"startOfRound": true,
-					"note": "Spawn one normal Algox at c."
+					"note": "Spawn one normal Algox Guard at C.",
+					"name": "spawn 1"
 				},
 				{
 					"type": "Timer",
 					"list": [4,6,8],
 					"startOfRound": true,
-					"note": "Spawn one normal Wind Demon at a."
+					"note": "Spawn one normal Wind Demon at A.",
+					"name": "spawn 2"
 				},
 				{
 					"type": "Timer",
 					"list": [5],
 					"startOfRound": true,
-					"note": "Spawn one normal Algox Snowspeaker at b and one normal Algox Guard at c."
+					"note": "Spawn one normal Algox Snowspeaker at B and one normal Algox Guard at C.",
+					"name": "spawn 3"
 				},
 				{
 					"type": "Timer",
 					"list": [9],
 					"startOfRound": true,
-					"note": "Spawn one normal Algox Snowspeaker at b."
+					"note": "Spawn one normal Algox Snowspeaker at B.",
+					"name": "spawn 4"
 				}
 			]
 		},
@@ -1736,25 +1754,29 @@
 					"type": "Timer",
 					"list": [1,5,9,13,17,21,25],
 					"startOfRound": true,
-					"note": "Spawn one normal Flame Demon at a."
+					"note": "Spawn one normal Flame Demon at A.",
+					"name": "spawn 1"
 				},
 				{
 					"type": "Timer",
 					"list": [2,6,10,14,18,22,26],
 					"startOfRound": true,
-					"note": "Spawn one normal Sun Demon at b."
+					"note": "Spawn one normal Sun Demon at B.",
+					"name": "spawn 2"
 				},
 				{
 					"type": "Timer",
 					"list": [3,7,11,15,19,23,27],
 					"startOfRound": true,
-					"note": "Spawn one normal Earth Demon a."
+					"note": "Spawn one normal Earth Demon A.",
+					"name": "spawn 3"
 				},
 				{
 					"type": "Timer",
 					"list": [4,8,12,16,20,24,28],
 					"startOfRound": true,
-					"note": "Spawn one normal Chaos Demon at b."
+					"note": "Spawn one normal Chaos Demon at B.",
+					"name": "spawn 4"
 				}
 			]
 		},
@@ -1778,19 +1800,22 @@
 					"type": "Timer",
 					"list": [4],
 					"startOfRound": true,
-					"note": "Spawn one elite Frost Demon at e."
+					"note": "Spawn one elite Frost Demon at E.",
+					"name": "spawn 1"
 				},
 				{
 					"type": "Timer",
 					"list": [7],
 					"startOfRound": true,
-					"note": "Spawn one normal Wind Demon at both d."
+					"note": "Spawn one normal Wind Demon at both D.",
+					"name": "spawn 2"
 				},
 				{
 					"type": "Timer",
 					"list": [10],
 					"startOfRound": true,
-					"note": "Spawn one elite Algox Snowspeaker at e."
+					"note": "Spawn one elite Algox Snowspeaker at E.",
+					"name": "spawn 3"
 				}
 			]
 		},
@@ -1827,43 +1852,50 @@
 							"type": "Timer",
 							"list": [2],
 							"startOfRound": true,
-							"note": "Spawn normal Ruined Machines at A and B."
+							"note": "Spawn normal Ruined Machines at A and B.",
+							"name": "spawn 1"
 						},
 						{
 							"type": "Timer",
 							"list": [5],
 							"startOfRound": true,
-							"note": "Spawn normal Ancient Artillery at C."
+							"note": "Spawn normal Ancient Artillery at C.",
+							"name": "spawn 2"
 						},
 						{
 							"type": "Timer",
 							"list": [7],
 							"startOfRound": true,
-							"note": "Spawn normal Ancient Artillery at D."
+							"note": "Spawn normal Ancient Artillery at D.",
+							"name": "spawn 2"
 						},
 						{
 							"type": "Timer",
 							"list": [8],
 							"startOfRound": true,
-							"note": "Spawn elite Flaming Bladespinner at A."
+							"note": "Spawn elite Flaming Bladespinner at A.",
+							"name": "spawn 3"
 						},
 						{
 							"type": "Timer",
 							"list": [10],
 							"startOfRound": true,
-							"note": "Spawn normal Ruined Machine at C."
+							"note": "Spawn normal Ruined Machine at C.",
+							"name": "spawn 4"
 						},
 						{
 							"type": "Timer",
 							"list": [11],
 							"startOfRound": true,
-							"note": "Spawn normal Ruined Machine at D."
+							"note": "Spawn normal Ruined Machine at D.",
+							"name": "spawn 4"
 						},
 						{
 							"type": "Timer",
-							"list": [5],
+							"list": [12],
 							"startOfRound": true,
-							"note": "Spawn normal Ancient Artillery at A and B."
+							"note": "Spawn normal Ancient Artillery at A and B.",
+							"name": "spawn 5"
 						}
 					]
 				}
@@ -1877,37 +1909,43 @@
 					"type": "Timer",
 					"list": [3],
 					"startOfRound": true,
-					"note": "Spawn normal Living Bones at d."
+					"note": "Spawn normal Living Bones at D.",
+					"name": "spawn 1"
 				},
 				{
 					"type": "Timer",
 					"list": [4],
 					"startOfRound": true,
-					"note": "Spawn normal Living Bones at e."
+					"note": "Spawn normal Living Bones at E.",
+					"name": "spawn 1"
 				},
 				{
 					"type": "Timer",
 					"list": [5],
 					"startOfRound": true,
-					"note": "Spawn normal Living Spirit at b and c."
+					"note": "Spawn normal Living Spirit at B and C.",
+					"name": "spawn 2"
 				},
 				{
 					"type": "Timer",
 					"list": [7],
 					"startOfRound": true,
-					"note": "Spawn normal Frozen Corpse at d."
+					"note": "Spawn normal Frozen Corpse at D.",
+					"name": "spawn 3"
 				},
 				{
 					"type": "Timer",
 					"list": [8],
 					"startOfRound": true,
-					"note": "Spawn normal Frozen Corpse at e."
+					"note": "Spawn normal Frozen Corpse at E.",
+					"name": "spawn 3"
 				},
 				{
 					"type": "Timer",
 					"list": [10],
 					"startOfRound": true,
-					"note": "Spawn normal Living Bones at d and e."
+					"note": "Spawn normal Living Bones at D and E.",
+					"name": "spawn 4"
 				},
 				{
 					"type": "Timer",
@@ -1933,7 +1971,8 @@
 					"type": "Timer",
 					"list": [3],
 					"startOfRound": true,
-					"note": "Spawn Lost in Seaweed at a and Lightning Eels each hex adjacent to it."
+					"note": "Spawn Lost in Seaweed at A and Lightning Eels each hex adjacent to it.",
+					"name": "spawn 1"
 				}
 			],
 			"sections": {
@@ -1946,7 +1985,8 @@
 							"type": "Timer",
 							"list": [4],
 							"startOfRound": true,
-							"note": "Spawn Shape BLocke Out the Sun"
+							"note": "Spawn Shape BLocke Out the Sun",
+							"name": "spawn 2"
 						}
 					]
 				},
@@ -1959,7 +1999,8 @@
 							"type": "Timer",
 							"list": [4],
 							"startOfRound": true,
-							"note": "Spawn Plea for Help Without Answer"
+							"note": "Spawn Plea for Help Without Answer",
+							"name": "spawn 3"
 						}
 					]
 				}
@@ -2092,25 +2133,29 @@
 					"type": "Timer",
 					"list": [2,6],
 					"startOfRound": true,
-					"note": "Spawn one normal Flame Demon at hex c."
+					"note": "Spawn one normal Flame Demon at hex C.",
+					"name": "spawn 1"
 				},
 				{
 					"type": "Timer",
 					"list": [3,7],
 					"startOfRound": true,
-					"note": "Spawn two normal Sun Demons at hex d."
+					"note": "Spawn two normal Sun Demons at hex D.",
+					"name": "spawn 2"
 				},
 				{
 					"type": "Timer",
 					"list": [4,8],
 					"startOfRound": true,
-					"note": "Spawn one normal Night Demon at hex b."
+					"note": "Spawn one normal Night Demon at hex B.",
+					"name": "spawn 3"
 				},
 				{
 					"type": "Timer",
 					"list": [5,9],
 					"startOfRound": true,
-					"note": "Spawn two normal Wind Demons at hex e."
+					"note": "Spawn two normal Wind Demons at hex E.",
+					"name": "spawn 4"
 				}
 			]
 		},

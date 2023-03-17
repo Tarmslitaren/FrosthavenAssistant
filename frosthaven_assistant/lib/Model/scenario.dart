@@ -146,7 +146,7 @@ class ScenarioModel {
         List names = []; // List();
         for (var u in rooms.roomData) {
           if (names.contains(u.name)) {
-            print("duplicate ${u.name} in${rooms.scenarioName}");
+            print("duplicate ${u.name} in ${rooms.scenarioName}");
           } else {
             names.add(u.name);
           }
