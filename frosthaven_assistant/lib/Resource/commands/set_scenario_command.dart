@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/room.dart';
@@ -102,7 +103,7 @@ class SetScenarioCommand extends Command {
           monsters = scenarioData.monsters;
           specialRules = scenarioData.specialRules.toList();
           initMessage = scenarioData.initMessage;
-          roomMonsterData = scenarioData.monsterStandees != null ? scenarioData.monsterStandees! : [];
+          roomMonsterData = scenarioData.monsterStandees != null ? scenarioData.monsterStandees!.toList() : [];
         }
       }
     }
@@ -166,7 +167,7 @@ class SetScenarioCommand extends Command {
       }
 
       //special case for start of round and round is 1
-      if(!section) { //sections are usually not added at start of round.
+      if(!section) {
         if (item.type == "Timer" && item.startOfRound == true) {
           for (int round in item.list) {
             //minus 1 means always
@@ -185,6 +186,50 @@ class SetScenarioCommand extends Command {
         _gameState.round.value = 1;
       }
     }
+
+    //in case of spawns at round 1 start of round, add to roomMonsterData
+    for (var rule in specialRules) {
+      if (rule.type == "Timer" && rule.startOfRound == true) {
+        for (int round in rule.list) {
+          //minus 1 means always
+          if (round == 1|| round == -1) {
+            if(getIt<Settings>().autoAddSpawns.value == true) {
+              if (rule.name.isNotEmpty) {
+                //get room data and deal with spawns
+                ScenarioModel? scenario = _gameState.modelData.value[_gameState
+                    .currentCampaign.value]?.scenarios[_scenario];
+                if (scenario != null) {
+                  ScenarioModel? spawnSection = scenario.sections.firstWhereOrNull((
+                      element) => element.name.substring(1) == rule.name);
+                  if (spawnSection != null && spawnSection.monsterStandees != null) {
+                    bool existed = false;
+                    for(var spawnItem in spawnSection.monsterStandees!) {
+                      var item = roomMonsterData.firstWhereOrNull((element) => element.name == spawnItem.name);
+                      if(item != null) {
+                        //merge
+                        item.elite[0]+=spawnItem.elite[0];
+                        item.elite[1]+=spawnItem.elite[1];
+                        item.elite[2]+=spawnItem.elite[2];
+                        item.normal[0]+=spawnItem.normal[0];
+                        item.normal[1]+=spawnItem.normal[1];
+                        item.normal[2]+=spawnItem.normal[2];
+                      }else {
+                        roomMonsterData.add(spawnItem);
+                      }
+                    }
+
+                    if(!existed) {
+                      roomMonsterData.addAll(spawnSection.monsterStandees!);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
 
     initMessage = GameMethods.autoAddStandees(roomMonsterData, initMessage);
 
