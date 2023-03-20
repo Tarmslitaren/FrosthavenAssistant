@@ -949,6 +949,9 @@ class GameMethods {
     if(monster != null && monster.edition == "Frosthaven") {
       return true;
     }
+    if(getIt<Settings>().style.value != Style.frosthaven && monster != null && monster.edition != "Frosthaven") {
+      return false;
+    }
     bool frosthavenStyle = getIt<Settings>().style.value == Style.frosthaven ||
         getIt<Settings>().style.value == Style.original && getIt<GameState>().currentCampaign.value == "Frosthaven";
     return frosthavenStyle;

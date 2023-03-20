@@ -85,9 +85,8 @@ class NextRoundCommand extends Command {
               if(getIt<Settings>().showReminders.value == true) {
                 _gameState.toastMessage.value += rule.note;
               }
-
-              _handleTimedSpawns(rule);
             }
+            _handleTimedSpawns(rule);
           }
         }
       }

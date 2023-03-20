@@ -2402,7 +2402,7 @@
     },
     {
       "spawn 4": {
-        "Flaming Bladespinner": {
+        "Ruined Machine": {
           "normal": [4, 2, 0],
           "elite": [0, 2, 4]
         }
@@ -2846,7 +2846,7 @@
     },
     {
       "spawn 1": {
-        "Chaos Demon": {
+        "Chaos Demon (FH)": {
           "normal": [2, 0, 2],
           "elite": [0, 2, 2]
         }

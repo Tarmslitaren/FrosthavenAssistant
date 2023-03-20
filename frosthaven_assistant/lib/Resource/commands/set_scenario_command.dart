@@ -242,6 +242,16 @@ class SetScenarioCommand extends Command {
       _gameState.scenario.value = _scenario;
       _gameState.scenarioSectionsAdded = [];
     }else {
+      //remove earlier times if has "ResetRound"
+      if(specialRules.firstWhereOrNull((element) => element.type == "ResetRound") != null) {
+        _gameState.scenarioSpecialRules.removeWhere((oldItem) {
+          if(oldItem.type == "Timer") {
+            return true;
+          }
+          return false;
+        });
+      }
+
       //overwrite earlier timers with same time.
       for (var item in specialRules) {
         if(item.type == "Timer") {
