@@ -266,15 +266,13 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.updateList,
         builder: (context, value, child) {
-
           //handle undo from other device
-          if(startCommandIndex > _gameState.commandIndex.value) {
+          if (startCommandIndex > _gameState.commandIndex.value) {
             Future.delayed(const Duration(milliseconds: 10), () {
               Navigator.pop(context);
             });
             return Container();
           }
-
 
           RoomMonsterData data = widget.monsterData[currentMonsterIndex];
           Monster monster = _gameState.currentList
@@ -358,52 +356,67 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
               child: ValueListenableBuilder<List<MonsterInstance>>(
                   valueListenable: monster.monsterInstances,
                   builder: (context, value, child) {
-                    return Column(
-                      children: [
-                        if (nrOfElite > 0)
-                          _buildButtonGrid(
-                              scale,
-                              monster,
-                              true,
-                              nrOfStandees,
-                              nrOfElite - currentEliteAdded,
-                              nrOfElite,
-                              nrOfNormal,
-                              currentEliteAdded,
-                              currentNormalAdded),
-                        if (nrOfNormal > 0)
-                          _buildButtonGrid(
-                              scale,
-                              monster,
-                              false,
-                              nrOfStandees,
-                              nrOfNormal - currentNormalAdded,
-                              nrOfElite,
-                              nrOfNormal,
-                              currentEliteAdded,
-                              currentNormalAdded),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Summoned:",
-                                  style: getSmallTextStyle(scale)),
-                              Checkbox(
-                                checkColor: Colors.black,
-                                activeColor: Colors.grey.shade200,
-                                side: BorderSide(
-                                    color: getIt<Settings>().darkMode.value
-                                        ? Colors.white
-                                        : Colors.black),
-                                onChanged: (bool? newValue) {
-                                  setState(() {
-                                    addAsSummon = newValue!;
-                                  });
-                                },
-                                value: addAsSummon,
-                              )
-                            ])
-                      ],
-                    );
+                    return Stack(children: [
+                      Column(
+                        children: [
+                          if (nrOfElite > 0)
+                            _buildButtonGrid(
+                                scale,
+                                monster,
+                                true,
+                                nrOfStandees,
+                                nrOfElite - currentEliteAdded,
+                                nrOfElite,
+                                nrOfNormal,
+                                currentEliteAdded,
+                                currentNormalAdded),
+                          if (nrOfNormal > 0)
+                            _buildButtonGrid(
+                                scale,
+                                monster,
+                                false,
+                                nrOfStandees,
+                                nrOfNormal - currentNormalAdded,
+                                nrOfElite,
+                                nrOfNormal,
+                                currentEliteAdded,
+                                currentNormalAdded),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Summoned:",
+                                    style: getSmallTextStyle(scale)),
+                                Checkbox(
+                                  checkColor: Colors.black,
+                                  activeColor: Colors.grey.shade200,
+                                  side: BorderSide(
+                                      color: getIt<Settings>().darkMode.value
+                                          ? Colors.white
+                                          : Colors.black),
+                                  onChanged: (bool? newValue) {
+                                    setState(() {
+                                      addAsSummon = newValue!;
+                                    });
+                                  },
+                                  value: addAsSummon,
+                                )
+                              ])
+                        ],
+                      ),
+                      Positioned(
+                          width: 100,
+                          height: 40,
+                          right: 0,
+                          bottom: 0,
+                          child: TextButton(
+                              child: const Text(
+                                'Close',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              })),
+                    ]);
                   }));
         });
   }
