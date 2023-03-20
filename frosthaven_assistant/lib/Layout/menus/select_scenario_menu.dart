@@ -185,8 +185,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       ),
       title: Text(text, style: const TextStyle(fontSize: 18)),
       onTap: () {
-        _gameState.action(SetScenarioCommand(name, false));
         Navigator.pop(context);
+        _gameState.action(SetScenarioCommand(name, false));
         //Navigator.pop(context);
       },
     );
@@ -201,8 +201,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     return ListTile(
       title: Text(title, style: const TextStyle(fontSize: 18)),
       onTap: () {
-        _gameState.action(SetScenarioCommand(name, false));
         Navigator.pop(context);
+        _gameState.action(SetScenarioCommand(name, false));
       },
     );
   }
@@ -287,9 +287,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                           },
                           onEditingComplete: () {
                             if (_foundScenarios.isNotEmpty) {
+                              Navigator.pop(context);
                               _gameState.action(SetScenarioCommand(
                                   _foundScenarios[0], false));
-                              Navigator.pop(context);
                             }
                           },
                           decoration: const InputDecoration(

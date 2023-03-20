@@ -112,6 +112,16 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     });
                                   }),
                               CheckboxListTile(
+                                  title: const Text("Auto Add Standees"),
+                                  value: settings.autoAddStandees.value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      settings.autoAddStandees.value = value!;
+                                      settings.saveToDisk();
+                                      getIt<GameState>().updateList.value++;
+                                    });
+                                  }),
+                              CheckboxListTile(
                                   title: const Text("Random Standees"),
                                   value: settings.randomStandees.value,
                                   onChanged: (bool? value) {
@@ -138,16 +148,6 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       settings.hideLootDeck.value = value!;
                                       settings.saveToDisk();
                                       getIt<GameState>().updateAllUI();
-                                    });
-                                  }),
-                              CheckboxListTile(
-                                  title: const Text("Long Press to Reorder"),
-                                  value: settings.longPressToReorder.value,
-                                  onChanged: (bool? value) {
-                                    setState(() {
-                                      settings.longPressToReorder.value = value!;
-                                      settings.saveToDisk();
-                                      getIt<GameState>().updateList.value++;
                                     });
                                   }),
                               CheckboxListTile(

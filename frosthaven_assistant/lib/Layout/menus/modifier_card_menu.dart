@@ -151,7 +151,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           width: screenWidth * 0.3,
           child: reorderable
               ? ReorderableColumn(
-                  needsLongPressDraggable: getIt<Settings>().longPressToReorder.value,
+                  needsLongPressDraggable: true,
                   scrollController: scrollController,
                   scrollAnimationDuration: const Duration(milliseconds: 400),
                   reorderAnimationDuration: const Duration(milliseconds: 400),

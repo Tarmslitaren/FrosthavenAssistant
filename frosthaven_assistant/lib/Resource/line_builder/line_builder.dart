@@ -47,16 +47,23 @@ class LineBuilder {
     "and": "and"
   };
 
+  static bool isElement(String item) {
+    if (item == "air" ||
+        item == "earth" ||
+        item == "earthfire" ||
+        item == "fire" ||
+        item == "ice" ||
+        item == "dark" ||
+        item == "light" ||
+        item == "any") {
+      return true;
+    }
+    return false;
+  }
+
   static double _getIconHeight(
       String iconToken, double height, bool isFrosthavenStyle) {
-    if (iconToken == "air" ||
-        iconToken == "earth" ||
-        iconToken == "earthfire" ||
-        iconToken == "fire" ||
-        iconToken == "ice" ||
-        iconToken == "dark" ||
-        iconToken == "light" ||
-        iconToken == "any") {
+    if (isElement(iconToken)) {
       //FH style: elements have same size as regular icons
       return isFrosthavenStyle ? height : height * 1.2;
     }
@@ -118,19 +125,6 @@ class LineBuilder {
         //need more margin around the over sized condition gfx
         return EdgeInsets.only(left: 0.25 * height, right: 0.25 * height);
       }
-    }
-    if (iconToken == "air" ||
-        iconToken == "earth" ||
-        iconToken == "earthfire" ||
-        iconToken == "fire" ||
-        iconToken == "ice" ||
-        iconToken == "dark" ||
-        iconToken == "light" ||
-        iconToken == "light" ||
-        iconToken == "use" ||
-        iconToken == "any") {
-      //this caused elements to not align well especially noticeable in case of use element to create element
-      // return EdgeInsets.only(top: 0.19 * height); //since icons lager, need lager margin top (make margins in source files instead)
     }
     if (isFrostHavenStyle) {
       return EdgeInsets.zero;
@@ -457,7 +451,6 @@ class LineBuilder {
 
         if (frosthavenStyle && conditional) {
           //might need ot check if in column or row here
-
           FrosthavenConverter.applyConditionalGraphics(widgetsInColumn, scale, elementUse, rightMargin, isBossStatCard, row);
         } else {
           widgetsInColumn.add(row);
@@ -501,6 +494,7 @@ class LineBuilder {
         widgetsInRow = [];
 
         if (frosthavenStyle && conditional) {
+
           FrosthavenConverter.applyConditionalGraphics(lines, scale, elementUse, rightMargin, isBossStatCard, row);
         } else {
           lines.add(row);
@@ -515,14 +509,7 @@ class LineBuilder {
       if (line.startsWith('¤')) {
         double scaleConstant =
             0.8 * 0.55; //this is because of the actual size of the assets
-        if (line.substring(1) == "air" ||
-            line.substring(1) == "earth" ||
-            line.substring(1) == "earthfire" ||
-            line.substring(1) == "ice" ||
-            line.substring(1) == "fire" ||
-            line.substring(1) == "light" ||
-            line.substring(1) == "any" ||
-            line.substring(1) == "dark") {
+        if ( isElement(line.substring(1))) {
           //because we added new graphics for these that are bigger (todo: change this when creating new aoe graphic)
           scaleConstant *= 0.6;
         }
@@ -531,6 +518,7 @@ class LineBuilder {
           //for some reason flutter likes scale to be inverted
           fit: BoxFit.fitHeight,
           filterQuality: FilterQuality.medium,
+          semanticLabel: line.substring(1),
           "assets/images/abilities/${line.substring(1)}.png",
         );
         //create pure picture, not a WidgetSpan (scale 5.5)
@@ -575,6 +563,7 @@ class LineBuilder {
               height: styleToUse == dividerStyleExtraThin? 2 * scale : 6.0 * scale,
               width: 55.0 * scale, //actually 40, but some layout might depend on wider size so not changing now
               filterQuality: FilterQuality.medium,
+              semanticLabel: "divider",
               alignment == CrossAxisAlignment.start? "assets/images/abilities/divider_boss_fh.png" : "assets/images/abilities/divider_fh.png",
             );
             //create pure picture, not a WidgetSpan (scale 5.5)
@@ -672,6 +661,7 @@ class LineBuilder {
                             //alignment: Alignment.topCenter,
                             fit: BoxFit.fitHeight,
                             filterQuality: FilterQuality.medium,
+                            semanticLabel: iconGfx,
                             image: AssetImage(
                                 "assets/images/abilities/${iconGfx + imageSuffix}.png"),
                           ))
@@ -776,6 +766,7 @@ class LineBuilder {
                 //this causes lines to have variable height if height set to less than 1
                 fit: BoxFit.fitHeight,
                 filterQuality: FilterQuality.medium,
+                semanticLabel: iconGfx,
                 image: AssetImage(imagePath),
               );
               child = Container(

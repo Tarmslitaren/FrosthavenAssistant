@@ -1,5 +1,10 @@
-import 'dart:collection';
 import 'dart:convert';
+
+import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
+import 'package:frosthaven_assistant/Model/room.dart';
+
+import '../Resource/game_methods.dart';
 
 class LootDeckModel {
   final int lumber;
@@ -102,13 +107,15 @@ class SpecialRule {
 
 
 class ScenarioModel {
-  ScenarioModel({required this.sections, required this.monsters, required this.specialRules, required this.lootDeck, required this.initMessage});
+  ScenarioModel({required this.name, required this.sections, required this.monsters, required this.specialRules, required this.lootDeck, required this.initMessage, required this.monsterStandees});
+  String name;
   List<String> monsters;
   List<SpecialRule> specialRules;
   LootDeckModel? lootDeck;
   String initMessage;
-  final Map< String, ScenarioModel> sections;
-  factory ScenarioModel.fromJson(Map<String, dynamic> data) {
+  List<RoomMonsterData>? monsterStandees;
+  final List<ScenarioModel> sections;
+  factory ScenarioModel.fromJson(String name, Map<String, dynamic> data, RoomsModel? rooms) {
     List<String> monsterList = [];
     if(data.containsKey('monsters')) {
       final monsters = data['monsters'] as List<dynamic>;
@@ -132,15 +139,86 @@ class ScenarioModel {
       initMessage = data['initialMessage'];
     }
 
-    Map<String, ScenarioModel> sectionMap = HashMap();
-    if(data.containsKey("sections")) {
-      final sections = data['sections'] as Map<dynamic, dynamic>;
-      for (String key in sections.keys){
-        sectionMap[key] = ScenarioModel.fromJson(sections[key]);
+    List<ScenarioModel> sectionList = [];
+
+    if(kDebugMode) {
+      if (rooms != null) {
+        List names = []; // List();
+        for (var u in rooms.roomData) {
+          if (names.contains(u.name)) {
+            print("duplicate ${u.name} in${rooms.scenarioName}");
+          } else {
+            names.add(u.name);
+          }
+        }
       }
     }
 
-    return ScenarioModel(monsters: monsterList, specialRules: rulesList, lootDeck: lootDeck, initMessage: initMessage, sections:sectionMap);
+    if(rooms != null) {
+      for (int i = 1; i < rooms.roomData.length; i++){ //skip first as it is the scenario start room
+        sectionList.add(ScenarioModel.sectionFromRoomData(rooms.roomData[i]));
+      }
+    }
+
+    if(data.containsKey("sections")) {
+      final sections = data['sections'] as Map<dynamic, dynamic>;
+      for (String key in sections.keys){
+        if(rooms == null) {
+          sectionList.add(ScenarioModel.sectionFromJson(key, sections[key], rooms));
+        } else {
+          //it might be a bit silly that room data and section data is separate
+          //merge if has already
+          int splitIndex = 0;
+          //would be nice to know which is solo scenario
+          ScenarioModel? section = sectionList.firstWhereOrNull((element) => element.name == key.split(" ")[splitIndex]);
+          if(section != null) {
+            //merge
+            ScenarioModel model = ScenarioModel.sectionFromJson(key, sections[key], rooms);
+            section.monsters = model.monsters;
+            section.initMessage = model.initMessage;
+            section.specialRules = model.specialRules;
+
+          } else {
+            sectionList.add(ScenarioModel.sectionFromJson(key, sections[key], rooms));
+          }
+        }
+      }
+    }
+    if(rooms != null && rooms.roomData.isEmpty) {
+      rooms = null;
+    }
+
+    return ScenarioModel(name: name, monsters: monsterList, specialRules: rulesList, lootDeck: lootDeck, initMessage: initMessage, sections:sectionList, monsterStandees: rooms?.roomData[0].monsterData);
+  }
+
+  factory ScenarioModel.sectionFromJson(String name, Map<String, dynamic> data, RoomsModel? rooms) {
+    List<String> monsterList = [];
+    if(data.containsKey('monsters')) {
+      final monsters = data['monsters'] as List<dynamic>;
+      for (var monster in monsters) {
+        monsterList.add(monster);
+      }
+    }
+    List<SpecialRule> rulesList = [];
+    if(data.containsKey('special')) {
+      final specialRules = data['special'] as List<dynamic>;
+      for(var rule in specialRules) {
+        rulesList.add(SpecialRule.fromJson(rule));
+      }
+    }
+    String initMessage = "";
+    if(data.containsKey('initialMessage')) {
+      initMessage = data['initialMessage'];
+    }
+
+    //find right room
+    List<RoomMonsterData>? standees = rooms?.roomData.firstWhereOrNull((element) => element.name == GameMethods.findNrFromScenarioName(name).toString())?.monsterData;
+    return ScenarioModel(name: name, monsters: monsterList, specialRules: rulesList, lootDeck: null, initMessage: initMessage, sections:[], monsterStandees: standees);
+  }
+
+  factory ScenarioModel.sectionFromRoomData(RoomModel room) {
+    List<RoomMonsterData>? standees = room.monsterData;
+    return ScenarioModel(name: "#${room.name}", monsters: [], specialRules: [], lootDeck: null, initMessage: "", sections:[], monsterStandees: room.monsterData);
   }
 
 }

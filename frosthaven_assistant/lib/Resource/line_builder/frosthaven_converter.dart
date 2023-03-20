@@ -1,5 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:frosthaven_assistant/Resource/line_builder/line_builder.dart';
 
 class FrosthavenConverter {
   static List<String> convertLinesToFH(List<String> lines, bool applyStats) {
@@ -7,7 +9,7 @@ class FrosthavenConverter {
     //add container markers here as well
     List<String> retVal = [];
     bool isSubLine =
-    false; //marked potential start of sub line after a mainline end
+        false; //marked potential start of sub line after a mainline end
     bool isReallySubLine = false; //when entering a definite sub line
     bool isConditional = false;
     bool isElementUse = false;
@@ -15,8 +17,9 @@ class FrosthavenConverter {
       bool startOfConditional = false;
       String line = lines[i];
 
-      if(line == "[newLine]") { //to force newline when right align does not fit
-        lines[i-1] == lines[i-1].substring(1);
+      if (line == "[newLine]") {
+        //to force newline when right align does not fit
+        lines[i - 1] == lines[i - 1].substring(1);
         line = "";
       }
 
@@ -30,10 +33,15 @@ class FrosthavenConverter {
         isElementUse = false;
       }
 
-      if(i > 0 && lines[i - 1].contains("%use")){
-        startOfConditional = true; //makes sub line gray box not appear straight after a element use
+      if (i > 0 && lines[i - 1].contains("%use")) {
+        startOfConditional =
+            true; //makes sub line gray box not appear straight after a element use
       }
-      if(i > 1 && lines[i - 2].contains("%use") && (lines[i - 1] == "[r]" || lines[i - 1] == "[s]" || lines[i - 1] == "[c]")){
+      if (i > 1 &&
+          lines[i - 2].contains("%use") &&
+          (lines[i - 1] == "[r]" ||
+              lines[i - 1] == "[s]" ||
+              lines[i - 1] == "[c]")) {
         startOfConditional = true;
       }
 
@@ -63,7 +71,7 @@ class FrosthavenConverter {
 
       //remove this special temporarily
       bool noCalc = false;
-      if(line.startsWith('>^')){
+      if (line.startsWith('>^')) {
         line = line.substring(1);
         noCalc = true;
       }
@@ -76,7 +84,8 @@ class FrosthavenConverter {
             line.startsWith("^Advantage") ||
             //only target on same line for non valued tokens - damn myself, what did I mean by that? I was probably wrong
             line.startsWith("^Target") ||
-            line.startsWith("^%target%") || //superseeds the lower ones. In FH target clauses go first so this old code is useless
+            line.startsWith(
+                "^%target%") || //superseeds the lower ones. In FH target clauses go first so this old code is useless
             /*(line.startsWith("^Target") && lines[i - 1].contains('%push%')) ||
             (line.startsWith("^Target") && lines[i - 1].contains('%pull%')) ||
             (line.startsWith("^Target") &&
@@ -91,38 +100,45 @@ class FrosthavenConverter {
             line.startsWith("^all") ||
             line.startsWith("^All") &&
                 !line.startsWith("^All attacks") &&
-                !line.startsWith("^All targets")
-        ) {
-
+                !line.startsWith("^All targets")) {
           //In hope this move does not screw with conditionals or ohter things...
-          if (!isReallySubLine && (!isConditional || (isElementUse
-              && !line.startsWith("^Perform") && !line.startsWith("^^for each") //harrower infester 30
-              // && !line.startsWith("^All enemies") && !line.startsWith("^^target suffer")//(icecrawler 16) - screws with [c]?
-          ))) {
+          if (!isReallySubLine &&
+              (!isConditional ||
+                  (isElementUse &&
+                      !line.startsWith("^Perform") &&
+                      !line.startsWith("^^for each") //harrower infester 30
+                  // && !line.startsWith("^All enemies") && !line.startsWith("^^target suffer")//(icecrawler 16) - screws with [c]?
+                  ))) {
             retVal.add("[subLineStart]");
             isReallySubLine = true;
           }
 
           //make bigger icon and text in element use block
-          if (isElementUse && (lines[i-1].contains("use")  ||
-              (lines[i-2].contains("use") && lines[i-1].contains("[c]")))   // (!lines[i - 2].contains("[c]"))
-              && !line.startsWith("^Target")
-              && !line.startsWith("^all")
-              && !line.startsWith("^All")
-              && !line.contains("instead")
-          ) {
+          if (isElementUse &&
+              (lines[i - 1].contains("use") ||
+                  (lines[i - 2].contains("use") &&
+                      lines[i - 1]
+                          .contains("[c]"))) // (!lines[i - 2].contains("[c]"))
+              &&
+              !line.startsWith("^Target") &&
+              !line.startsWith("^all") &&
+              !line.startsWith("^All") &&
+              !line.contains("instead")) {
             //ok, so if there is a subline, then there has to be a [c]
             line = line.substring(1); //make first sub line into main line
             if (retVal.last == "[subLineStart]") {
               retVal.removeLast();
             }
             isReallySubLine = false;
-          } else if(isElementUse && (!lines[i - 2].contains("[c]") && !line.startsWith("^all")&& !line.startsWith("^All"))){
+          } else if (isElementUse &&
+              (!lines[i - 2].contains("[c]") &&
+                  !line.startsWith("^all") &&
+                  !line.startsWith("^All"))) {
             //isReallySubLine = false; //block useblocks from having straight sublines?
             //hope this doesn't come back to bite me (flame demon 77) - it does savvas lavaflow 51
           }
           //add back no calculation marker
-          if(noCalc == true){
+          if (noCalc == true) {
             line = "^$line";
           }
           line = "!$line";
@@ -221,21 +237,22 @@ class FrosthavenConverter {
       List<Widget> widgetsInColumn,
       List<Widget> widgetsInRow,
       List<Widget> widgetsInInnerRow,
-      bool bossStatCard
-      ) {
+      bool bossStatCard) {
     List<Widget> list1 = [];
     List<List<Widget>> list2 = [];
     bool conditional = false;
     for (int i = 0; i < lastLineTextPartList.length; i++) {
       Widget part = lastLineTextPartList[i];
-      if(part is Container) {
+      if (part is Container) {
         if (part.child! is Text &&
             (part.child as Text).data!.contains("[subLineStart]")) {
           list1 = lastLineTextPartList.sublist(0, i);
           List<Widget> tempSpanList = [];
           for (int j = i + 1; j < lastLineTextPartList.length; j++) {
             Widget part2 = lastLineTextPartList[j];
-            if (part2 is Container && part2.child is Text && (part2.child as Text).data!.contains("[lineBreak]")) {
+            if (part2 is Container &&
+                part2.child is Text &&
+                (part2.child as Text).data!.contains("[lineBreak]")) {
               list2.add(tempSpanList.toList());
               tempSpanList.clear();
             } else {
@@ -245,13 +262,17 @@ class FrosthavenConverter {
           list2.add(tempSpanList);
         }
       }
-      if (part is Container && part.child is Text && (part.child as Text).data!.contains("[conditionalStart]")) {
+      if (part is Container &&
+          part.child is Text &&
+          (part.child as Text).data!.contains("[conditionalStart]")) {
         conditional = true;
         list1 = lastLineTextPartList.sublist(0, i);
         List<Widget> tempSpanList = [];
         for (int j = i + 1; j < lastLineTextPartList.length; j++) {
           Widget part2 = lastLineTextPartList[j];
-          if (part2 is Container && part2.child is Text && (part2.child as Text).data!.contains("[lineBreak]")) {
+          if (part2 is Container &&
+              part2.child is Text &&
+              (part2.child as Text).data!.contains("[lineBreak]")) {
             list2.add(tempSpanList.toList());
             tempSpanList.clear();
           } else {
@@ -276,7 +297,8 @@ class FrosthavenConverter {
         decoration: BoxDecoration(
             color: conditional
                 ? Colors.blue
-                : Color(int.parse(bossStatCard?"45D2D2D2" :"9A808080", radix: 16)),
+                : Color(int.parse(bossStatCard ? "45D2D2D2" : "9A808080",
+                    radix: 16)),
             borderRadius: BorderRadius.all(Radius.circular(6.0 * scale))),
         padding: EdgeInsets.fromLTRB(
             2.0 * scale, 0.35 * scale, 2.5 * scale, 0.2625 * scale),
@@ -311,8 +333,8 @@ class FrosthavenConverter {
           )
           )*/
         ])
-      //)
-    );
+        //)
+        );
     MainAxisAlignment alignment = MainAxisAlignment.center;
     if (textAlign == TextAlign.end) {
       alignment = MainAxisAlignment.end;
@@ -328,7 +350,7 @@ class FrosthavenConverter {
       children: [widget1, widget2],
     );
 
-    if(hasInnerRow) {
+    if (hasInnerRow) {
       if (widgetsInInnerRow.isNotEmpty) {
         widgetsInInnerRow.removeLast();
       }
@@ -348,19 +370,43 @@ class FrosthavenConverter {
     }
   }
 
-  static String getAllTextInWidget(Widget widget) {
-    String retVal = "";
-    if(widget is Row) {
-      for(Widget item in widget.children) {
-        retVal += getAllTextInWidget(item);
+  static List<String> getAllImagesInWidget(Widget widget) {
+    List<String> retVal = [];
+    if (widget is Row) {
+      for (Widget item in widget.children) {
+        retVal.addAll(getAllImagesInWidget(item));
       }
-    }
-    else if(widget is Column) {
-      for(Widget item in widget.children) {
-        retVal += getAllTextInWidget(item);
+    } else if (widget is Column) {
+      for (Widget item in widget.children) {
+        retVal.addAll(getAllImagesInWidget(item));
+      }
+    } else if (widget is Stack) {
+      for (Widget item in widget.children) {
+        retVal.addAll(getAllImagesInWidget(item));
       }
     }
     else if (widget is Container && widget.child != null) {
+      retVal.addAll(getAllImagesInWidget(widget.child!));
+    }
+    else if (widget is Image) {
+      retVal.add(widget.semanticLabel!);
+    }
+
+    return retVal;
+  }
+
+
+  static String getAllTextInWidget(Widget widget) {
+    String retVal = "";
+    if (widget is Row) {
+      for (Widget item in widget.children) {
+        retVal += getAllTextInWidget(item);
+      }
+    } else if (widget is Column) {
+      for (Widget item in widget.children) {
+        retVal += getAllTextInWidget(item);
+      }
+    } else if (widget is Container && widget.child != null) {
       retVal += getAllTextInWidget(widget.child!);
     } else if (widget is Text) {
       retVal += widget.data!;
@@ -369,38 +415,75 @@ class FrosthavenConverter {
     return retVal;
   }
 
-  static void applyConditionalGraphics(var lines, double scale, bool elementUse, double rightMargin, bool bossStatCard, child){
+  static void applyConditionalGraphics(var lines, double scale, bool elementUse,
+      double rightMargin, bool bossStatCard, Row child) {
+
+    bool belongs = true;
+    if(lines.isEmpty) {
+      belongs = false;
+    } else {
+      if(lines.last is Image) {
+        if ((lines.last as Image).semanticLabel!.contains("divider")) {
+          belongs = false;
+        }
+      }
+    }
+
+    //sniff the child if it is a element to element thing
+    List<String> graphics = getAllImagesInWidget(child);
+    if(graphics.length == 2) {
+      if(LineBuilder.isElement(graphics[0]) &&LineBuilder.isElement(graphics[1])){
+        belongs = false;
+      }
+    }
+
     lines.add(Container(
         margin: EdgeInsets.all(2.0 * scale),
         //alignment: Alignment.bottomCenter,
-        child: DottedBorder(
-            color: Colors.white,
-            //borderType: BorderType.Rect,
-            borderType: BorderType.RRect,
-            radius: Radius.circular(10.0 * scale),
-            //strokeCap: StrokeCap.round,
-            padding: const EdgeInsets.all(0),
-            //these are closer to the real values, but looks bad on small scale
-            //dashPattern: [1.2 * scale, 0.5 * scale], //1.2 && 0.5
-            //strokeWidth: 0.5 * scale, //0.4
-            dashPattern: [1.5 * scale, 0.8 * scale],
-            strokeWidth: 0.6 * scale,
-            child: Container(
-                decoration: BoxDecoration(
-                  //backgroundBlendMode: BlendMode.softLight,
-                  //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
-                    color: Color(int.parse(bossStatCard?"45D2D2D2" :"9A808080", radix: 16)),
-                    borderRadius:
-                    BorderRadius.all(Radius.circular(10.0 * scale))),
-                //TODO: should the padding be dependant on nr of lines?
-                padding: EdgeInsets.fromLTRB(
-                    elementUse ? 1.0 * scale : 3.0 * scale,
-                    0.25 * scale,
-                    rightMargin,
-                    0.2625 * scale),
-                //margin: EdgeInsets.only(left: 2 * scale),
-                //child: Expanded(
-                child: child))));
+        child: Stack(
+            clipBehavior: Clip.none,
+            alignment: Alignment.topCenter,
+            children: [
+              if (belongs)
+                Positioned(
+                    top: -3 * scale,
+                    child: Image(
+                        fit: BoxFit.fitWidth,
+                        filterQuality: FilterQuality.medium,
+                        width: scale * 20,
+                        image: const AssetImage(
+                          "assets/images/abilities/element_top.png",
+                        ))),
+              DottedBorder(
+                  color: Colors.white,
+                  //borderType: BorderType.Rect,
+                  borderType: BorderType.RRect,
+                  radius: Radius.circular(10.0 * scale),
+                  //strokeCap: StrokeCap.round,
+                  padding: const EdgeInsets.all(0),
+                  //these are closer to the real values, but looks bad on small scale
+                  //dashPattern: [1.2 * scale, 0.5 * scale], //1.2 && 0.5
+                  //strokeWidth: 0.5 * scale, //0.4
+                  dashPattern: [1.5 * scale, 0.8 * scale],
+                  strokeWidth: 0.6 * scale,
+                  child: Container(
+                      decoration: BoxDecoration(
+                          //backgroundBlendMode: BlendMode.softLight,
+                          //border: Border.fromBorderSide(BorderSide(style: BorderStyle.solid, color: Colors.white)),
+                          color: Color(int.parse(
+                              bossStatCard ? "45D2D2D2" : "9A808080",
+                              radix: 16)),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(10.0 * scale))),
+                      //TODO: should the padding be dependant on nr of lines?
+                      padding: EdgeInsets.fromLTRB(
+                          elementUse ? 1.0 * scale : 3.0 * scale,
+                          0.25 * scale,
+                          rightMargin,
+                          0.2625 * scale),
+                      //margin: EdgeInsets.only(left: 2 * scale),
+                      //child: Expanded(
+                      child: child))
+            ])));
   }
-
 }

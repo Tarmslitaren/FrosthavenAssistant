@@ -1,0 +1,332 @@
+{
+  "SoX1": [
+    {
+      "A1": {
+        "Living Bones": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "L2-L3": {
+        "Living Corpse": {
+          "normal": [
+            4,
+            3,
+            2
+          ],
+          "elite": [
+            0,
+            2,
+            4
+          ]
+        },
+        "Living Spirit": {
+          "normal": [
+            2,
+            3,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Cultist": {
+          "normal": [
+            0,
+            0,
+            1
+          ],
+          "elite": [
+            1,
+            2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "N1a(1)": {
+        "Cultist": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        },
+        "Tormented Soul": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "SoX2": [
+    {
+      "A3": {
+        "Lurker": {
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        },
+        "Water Eel": {
+          "normal": [
+            2,
+            2,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Living Spirit": {
+          "normal": [
+            1,
+            0,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "J2b": {
+        "Water Eel": {
+          "normal": [
+            0,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            0,
+            0
+          ]
+        },
+        "Lurker": {
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        },
+        "Living Spirit": {
+          "normal": [
+            1,
+            0,
+            1
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "J1b": {
+        "Water Eel": {
+          "normal": [
+            0,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            0,
+            0
+          ]
+        },
+        "Lurker": {
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        },
+        "Living Spirit": {
+          "normal": [
+            1,
+            0,
+            1
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "SoX3": [
+    {
+      "G1": {
+        "Ancient Artillery": {
+          "normal": [
+            0,
+            2,
+            4
+          ],
+          "elite": [
+            2,
+            0,
+            0
+          ]
+        },
+        "Stone Golem": {
+          "normal": [
+            0,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "H3b(1)": {
+        "Night Demon #SoX3 Special": {
+          "normal": [
+            2,
+            2,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            4
+          ]
+        },
+        "Stone Golem": {
+          "normal": [
+            1,
+            0,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "A2b": {
+        "Ancient Artillery": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "A4b": {
+        "Ancient Artillery": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "A1b": {
+        "Ancient Artillery": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "A3b": {
+        "Ancient Artillery": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ]
+}

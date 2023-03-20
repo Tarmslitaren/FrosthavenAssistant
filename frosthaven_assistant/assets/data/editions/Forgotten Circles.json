@@ -638,7 +638,7 @@
         }
       ]
     },
-    "Selah Neberis": {
+    "Selah Naberis": {
       "edition": "Forgotten Circles",
       "deck": "Tracker",
       "gfx": "Valrath Tracker",
@@ -1266,28 +1266,44 @@
       "count": 4,
       "levels": [
         {
-          "level": 0, "health": 13, "move": 3, "attack": 3
+          "level": 0,
+          "normal": { "health": 8, "move": 3, "attack": 2 },
+          "elite": { "health": 13, "move": 3, "attack": 3 }
         },
         {
-          "level": 1, "health": 15, "move": 3, "attack": 3, "attributes": [ "%wound%" ]
+          "level": 1,
+          "normal": { "health": 9, "move": 3, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": { "health": 15, "move": 3, "attack": 3, "attributes": [ "%wound%" ]}
         },
         {
-          "level": 2, "health": 18, "move": 3, "attack": 3, "attributes": [ "%poison%", "%wound%" ]
+          "level": 2,
+          "normal": { "health": 11, "move": 3, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": { "health": 18, "move": 3, "attack": 3, "attributes": [ "%poison%", "%wound%" ]}
         },
         {
-          "level": 3, "health": 21, "move": 3, "attack": 4, "attributes": [ "%poison%", "%wound%" ]
+          "level": 3,
+          "normal": { "health": 14, "move": 3, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": { "health": 21, "move": 3, "attack": 4, "attributes": [ "%poison%", "%wound%" ]}
         },
         {
-          "level": 4, "health": 24, "move": 4, "attack": 4, "attributes": [ "%poison%", "%wound%" ]
+          "level": 4,
+          "normal": { "health": 16, "move": 3, "attack": 4, "attributes": [ "%poison%" ]},
+          "elite": { "health": 24, "move": 4, "attack": 4, "attributes": [ "%poison%", "%wound%" ]}
         },
         {
-          "level": 5, "health": 27, "move": 4, "attack": 5, "attributes": [ "%poison%", "%wound%" ]
+          "level": 5,
+          "normal": { "health": 18, "move": 3, "attack": 4, "attributes": [ "%poison%", "%wound%" ]},
+          "elite": { "health": 27, "move": 4, "attack": 5, "attributes": [ "%poison%", "%wound%" ]}
         },
         {
-          "level": 6, "health": 30, "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%" ]
+          "level": 6,
+          "normal": { "health": 20, "move": 4, "attack": 4, "attributes": [ "%poison%", "%wound%" ]},
+          "elite": { "health": 30, "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%" ]}
         },
         {
-          "level": 7, "health": 35, "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%" ]
+          "level": 7,
+          "normal": { "health": 24, "move": 4, "attack": 4, "attributes": [ "%poison%", "%wound%" ]},
+          "elite": { "health": 35, "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%" ]}
         }
       ]
     },
@@ -1298,28 +1314,93 @@
       "count": 4,
       "levels": [
         {
-          "level": 0, "health": 12, "move": 2, "attack": 3, "range": 4, "attributes": [ "%pierce% 3" ]
+          "level": 0,
+          "normal": { "health": 7,  "move": 2,  "attack": 2, "range": 3, "attributes": [ "%pierce% 3" ]},
+          "elite": { "health": 12, "move": 2, "attack": 3, "range": 4, "attributes": [ "%pierce% 3" ]}
         },
         {
-          "level": 1, "health": 12, "move": 2, "attack": 3, "range": 5, "attributes": [ "%pierce% 3", "%shield% 1" ]
+          "level": 1,
+          "normal": { "health": 10, "move": 2, "attack": 2, "range": 4, "attributes": [ "%pierce% 3" ]},
+          "elite": { "health": 12, "move": 2, "attack": 3, "range": 5, "attributes": [ "%pierce% 3", "%shield% 1" ]}
         },
         {
-          "level": 2, "health": 15, "move": 3, "attack": 3, "range": 5, "attributes": [ "%pierce% 3", "%shield% 1" ]
+          "level": 2,
+          "normal": { "health": 12, "move": 3, "attack": 2, "range": 4, "attributes": [ "%pierce% 3" ]},
+          "elite": { "health": 15, "move": 3, "attack": 3, "range": 5, "attributes": [ "%pierce% 3", "%shield% 1" ]}
         },
         {
-          "level": 3, "health": 18, "move": 3, "attack": 4, "range": 6, "attributes": [ "%pierce% 3", "%shield% 1" ]
+          "level": 3,
+          "normal": { "health": 12, "move": 3, "attack": 3, "range": 4, "attributes": [ "%pierce% 3", "%shield% 1" ]},
+          "elite": { "health": 18, "move": 3, "attack": 4, "range": 6, "attributes": [ "%pierce% 3", "%shield% 1" ]}
         },
         {
-          "level": 4, "health": 19, "move": 4, "attack": 4, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]
+          "level": 4,
+          "normal": { "health": 14, "move": 3, "attack": 3, "range": 5, "attributes": [ "%pierce% 3", "%shield% 1" ]},
+          "elite": { "health": 19, "move": 4, "attack": 4, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]}
         },
         {
-          "level": 5, "health": 21, "move": 4, "attack": 5, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]
+          "level": 5,
+          "normal": { "health": 16, "move": 3, "attack": 4, "range": 5, "attributes": [ "%pierce% 3", "%shield% 1" ]},
+          "elite": { "health": 21, "move": 4, "attack": 5, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]}
         },
         {
-          "level": 6, "health": 23, "move": 4, "attack": 6, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]
+          "level": 6,
+          "normal": { "health": 16, "move": 3, "attack": 4, "range": 5, "attributes": [ "%pierce% 3", "%shield% 2" ]},
+          "elite": { "health": 23, "move": 4, "attack": 6, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]}
         },
         {
-          "level": 7, "health": 24, "move": 4, "attack": 6, "range": 6, "attributes": [ "%pierce% 4", "%shield% 3" ]
+          "level": 7,
+          "normal": { "health": 17, "move": 4, "attack": 4, "range": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]},
+          "elite": { "health": 24, "move": 4, "attack": 6, "range": 6, "attributes": [ "%pierce% 4", "%shield% 3" ]}
+        }
+      ]
+    },
+    "Ancient Artillery Section 133": {
+      "deck": "Ancient Artillery",
+      "display": "Ancient Artillery",
+      "gfx": "Ancient Artillery",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 0, "attack": 2, "range": 4,"attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"] },
+          "elite": { "health": 7, "move": 0, "attack": 3, "range": 5, "attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 0, "attack": 2, "range": 4, "attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"]},
+          "elite": { "health": 9, "move": 0, "attack": 3, "range": 5, "attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 0, "attack": 2, "range": 5, "attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"]},
+          "elite": { "health": 11, "move": 0, "attack": 3, "range": 6, "attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 8, "move": 0, "attack": 3, "range": 5, "attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"]},
+          "elite": { "health": 13, "move": 0, "attack": 4, "range": 6, "attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 9, "move": 0, "attack": 4, "range": 5, "attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"]},
+          "elite": { "health": 13, "move": 0, "attack": 4, "range": 6, "attributes": [ "%shield% 2","%target% 2" ],"immunities": [ "%push%", "%pull%"]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 11, "move": 0, "attack": 4, "range": 6, "attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"]},
+          "elite": { "health": 15, "move": 0, "attack": 4, "range": 7, "attributes": ["%shield% 2", "%target% 2" ],"immunities": [ "%push%", "%pull%"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 14, "move": 0, "attack": 4, "range": 6, "attributes": [ "%shield% 2"],"immunities": [ "%push%", "%pull%"]},
+          "elite": { "health": 16, "move": 0, "attack": 5, "range": 7, "attributes": [ "%shield% 2","%target% 2" ],"immunities": [ "%push%", "%pull%"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 16, "move": 0, "attack": 4, "range": 7,"attributes": [ "%shield% 2"], "immunities": [ "%push%", "%pull%"]},
+          "elite": { "health": 20, "move": 0, "attack": 5, "range": 7, "attributes": ["%shield% 2", "%target% 2" ],"immunities": [ "%push%", "%pull%"]}
         }
       ]
     },
@@ -1330,36 +1411,44 @@
       "count": 4,
       "levels": [
         {
-          "level": 0, "health": 13, "move": 3, "attack": 3, "attributes": ["Advantage" ],
-          "immunities": [ "%stun%"]
+          "level": 0,
+          "normal": { "health": 8, "move": 3, "attack": 2, "attributes": [ "Advantage" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 13, "move": 3, "attack": 3, "attributes": [ "Advantage" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 1, "health": 15, "move": 3, "attack": 3, "attributes": ["Advantage", "%wound%" ],
-          "immunities": [ "%stun%"]
+          "level": 1,
+          "normal": { "health": 9, "move": 3, "attack": 2, "attributes": [ "Advantage","%poison%" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 15, "move": 3, "attack": 3, "attributes": ["Advantage", "%wound%" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 2, "health": 18, "move": 3, "attack": 3, "attributes": [ "Advantage","%poison%", "%wound%" ],
-          "immunities": [ "%stun%"]
+          "level": 2,
+          "normal": { "health": 11, "move": 3, "attack": 3, "attributes": [ "Advantage","%poison%" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 18, "move": 3, "attack": 3, "attributes": [ "Advantage","%poison%", "%wound%" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 3, "health": 21, "move": 3, "attack": 4, "attributes": ["Advantage", "%poison%", "%wound%" ],
-          "immunities": [ "%stun%"]
+          "level": 3,
+          "normal": { "health": 14, "move": 3, "attack": 3, "attributes": [ "Advantage","%poison%" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 21, "move": 3, "attack": 4, "attributes": ["Advantage", "%poison%", "%wound%" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 4, "health": 24, "move": 4, "attack": 4, "attributes": [ "Advantage","%poison%", "%wound%" ],
-          "immunities": [ "%stun%"]
+          "level": 4,
+          "normal": { "health": 16, "move": 3, "attack": 4, "attributes": ["Advantage", "%poison%" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 24, "move": 4, "attack": 4, "attributes": ["Advantage", "%poison%", "%wound%" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 5, "health": 27, "move": 4, "attack": 5, "attributes": ["Advantage", "%poison%", "%wound%" ],
-          "immunities": [ "%stun%"]
+          "level": 5,
+          "normal": { "health": 18, "move": 3, "attack": 4, "attributes": [ "Advantage","%poison%", "%wound%" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 27, "move": 4, "attack": 5, "attributes": ["Advantage", "%poison%", "%wound%" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 6, "health": 30, "move": 4, "attack": 6, "attributes": ["Advantage", "%poison%", "%wound%" ],
-          "immunities": [ "%stun%"]
+          "level": 6,
+          "normal": { "health": 20, "move": 4, "attack": 4, "attributes": [ "Advantage","%poison%", "%wound%" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 30, "move": 4, "attack": 6, "attributes": [ "Advantage","%poison%", "%wound%" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 7, "health": 35, "move": 4, "attack": 6, "attributes": ["Advantage", "%poison%", "%wound%" ],
-          "immunities": [ "%stun%"]
+          "level": 7,
+          "normal": { "health": 24, "move": 4, "attack": 4, "attributes": ["Advantage", "%poison%", "%wound%" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 35, "move": 4, "attack": 6, "attributes": [ "Advantage","%poison%", "%wound%" ],"immunities": [ "%stun%"]}
         }
       ]
     },
@@ -1370,84 +1459,141 @@
       "count": 4,
       "levels": [
         {
-          "level": 0, "health": 12, "move": 2, "attack": 3, "range": 4, "attributes": ["Advantage", "%pierce% 3" ],
-          "immunities": [ "%stun%"]
+          "level": 0,
+          "normal": { "health": 7,  "move": 2,  "attack": 2, "range": 3, "attributes": [ "Advantage","%pierce% 3" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 12, "move": 2, "attack": 3, "range": 4, "attributes": [ "Advantage","%pierce% 3" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 1, "health": 12, "move": 2, "attack": 3, "range": 5, "attributes": ["Advantage", "%pierce% 3", "%shield% 1" ],
-          "immunities": [ "%stun%"]
+          "level": 1,
+          "normal": { "health": 10, "move": 2, "attack": 2, "range": 4, "attributes": [ "Advantage","%pierce% 3" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 12, "move": 2, "attack": 3, "range": 5, "attributes": [ "Advantage","%pierce% 3", "%shield% 1" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 2, "health": 15, "move": 3, "attack": 3, "range": 5, "attributes": ["Advantage", "%pierce% 3", "%shield% 1" ],
-          "immunities": [ "%stun%"]
+          "level": 2,
+          "normal": { "health": 12, "move": 3, "attack": 2, "range": 4, "attributes": [ "Advantage","%pierce% 3" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 15, "move": 3, "attack": 3, "range": 5, "attributes": ["Advantage", "%pierce% 3", "%shield% 1" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 3, "health": 18, "move": 3, "attack": 4, "range": 6, "attributes": ["Advantage", "%pierce% 3", "%shield% 1" ],
-          "immunities": [ "%stun%"]
+          "level": 3,
+          "normal": { "health": 12, "move": 3, "attack": 3, "range": 4, "attributes": ["Advantage", "%pierce% 3", "%shield% 1" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 18, "move": 3, "attack": 4, "range": 6, "attributes": ["Advantage", "%pierce% 3", "%shield% 1" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 4, "health": 19, "move": 4, "attack": 4, "range": 6, "attributes": ["Advantage", "%pierce% 3", "%shield% 2" ],
-          "immunities": [ "%stun%"]
+          "level": 4,
+          "normal": { "health": 14, "move": 3, "attack": 3, "range": 5, "attributes": [ "Advantage","%pierce% 3", "%shield% 1" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 19, "move": 4, "attack": 4, "range": 6, "attributes": [ "Advantage","%pierce% 3", "%shield% 2" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 5, "health": 21, "move": 4, "attack": 5, "range": 6, "attributes": ["Advantage", "%pierce% 3", "%shield% 2" ],
-          "immunities": [ "%stun%"]
+          "level": 5,
+          "normal": { "health": 16, "move": 3, "attack": 4, "range": 5, "attributes": [ "Advantage","%pierce% 3", "%shield% 1" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 21, "move": 4, "attack": 5, "range": 6, "attributes": [ "Advantage","%pierce% 3", "%shield% 2" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 6, "health": 23, "move": 4, "attack": 6, "range": 6, "attributes": ["Advantage", "%pierce% 3", "%shield% 2" ],
-          "immunities": [ "%stun%"]
+          "level": 6,
+          "normal": { "health": 16, "move": 3, "attack": 4, "range": 5, "attributes": ["Advantage", "%pierce% 3", "%shield% 2" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 23, "move": 4, "attack": 6, "range": 6, "attributes": [ "Advantage","%pierce% 3", "%shield% 2" ],"immunities": [ "%stun%"]}
         },
         {
-          "level": 7, "health": 24, "move": 4, "attack": 6, "range": 6, "attributes": ["Advantage", "%pierce% 4", "%shield% 3" ],
-          "immunities": [ "%stun%"]
+          "level": 7,
+          "normal": { "health": 17, "move": 4, "attack": 4, "range": 6, "attributes": ["Advantage", "%pierce% 3", "%shield% 2" ],"immunities": [ "%stun%"]},
+          "elite": { "health": 24, "move": 4, "attack": 6, "range": 6, "attributes": ["Advantage", "%pierce% 4", "%shield% 3" ],"immunities": [ "%stun%"]}
         }
       ]
     },
     "Elham": {
+      "edition": "Forgotten Circles",
       "gfx": "Aesther Ashblade",
       "deck": "Ashblade",
       "hidden": true,
       "count": 4,
       "levels": [
         {
-          "level": 0, "health": 12, "move": 3, "attack": 3, "attributes": ["Advantage", "%poison%" ],
-          "immunities": [ "%stun%" ]
-
+          "level": 0,
+          "normal": { "health": 8, "move": 3, "attack": 2, "attributes": [ "Advantage" ],"immunities": [ "%stun%" ]},
+          "elite": {"health": 12, "move": 3, "attack": 3, "attributes": [ "Advantage","%poison%" ],"immunities": [ "%stun%" ]}
         },
         {
-          "level": 1, "health": 14, "move": 4, "attack": 3, "attributes": ["Advantage", "%poison%" ],
-          "immunities": [ "%stun%" ]
-
+          "level": 1,
+          "normal": { "health": 9, "move": 3, "attack": 3, "attributes": [ "Advantage" ],"immunities": [ "%stun%" ]},
+          "elite": {"health": 14, "move": 4, "attack": 3, "attributes": ["Advantage", "%poison%" ],"immunities": [ "%stun%" ]}
         },
         {
-          "level": 2, "health": 16, "move": 4, "attack": 4, "attributes": ["Advantage", "%poison%" ],
-          "immunities": [ "%stun%" ]
-
+          "level": 2,
+          "normal": { "health": 13, "move": 3, "attack": 3, "attributes": [ "Advantage" ],"immunities": [ "%stun%" ]},
+          "elite": {"health": 16, "move": 4, "attack": 4, "attributes": [ "Advantage","%poison%" ],"immunities": [ "%stun%" ]}
         },
         {
-          "level": 3, "health": 18, "move": 4, "attack": 4, "attributes": [ "Advantage","Attackers gain","disadvantage", "%poison%" ],
-          "immunities": [ "%stun%" ]
-
+          "level": 3,
+          "normal": {"health": 15, "move": 3, "attack": 3, "attributes": ["Advantage", "%poison%" ],"immunities": [ "%stun%" ]},
+          "elite": {"health": 18, "move": 4, "attack": 4, "attributes": ["Advantage", "^Attackers gain","^disadvantage", "%poison%" ],"immunities": [ "%stun%" ]}
         },
         {
-          "level": 4, "health": 21, "move": 4, "attack": 5, "attributes": ["Advantage", "Attackers gain","disadvantage", "%poison%" ],
-          "immunities": [ "%stun%" ]
-
+          "level": 4,
+          "normal": {"health": 15, "move": 4, "attack": 4, "attributes": [ "Advantage","%poison%" ],"immunities": [ "%stun%" ]},
+          "elite": {"health": 21, "move": 4, "attack": 5, "attributes": ["Advantage", "^Attackers gain","^disadvantage", "%poison%" ],"immunities": [ "%stun%" ]}
         },
         {
-          "level": 5, "health": 25, "move": 4, "attack": 5, "attributes": ["Advantage", "Attackers gain","disadvantage", "%poison%" ],
-          "immunities": ["%stun%" ]
-
+          "level": 5,
+          "normal": {"health": 18, "move": 4, "attack": 4, "attributes": ["Advantage", "%poison%" ],"immunities": [ "%stun%" ]},
+          "elite": {"health": 25, "move": 4, "attack": 5, "attributes": ["Advantage", "^Attackers gain","^disadvantage", "%poison%" ],"immunities": [ "%stun%" ]}
         },
         {
-          "level": 6, "health": 28, "move": 4, "attack": 6, "attributes": ["Advantage", "Attackers gain","disadvantage", "%poison%" ],
-          "immunities": [ "%stun%" ]
-
+          "level": 6,
+          "normal": {"health": 21, "move": 4, "attack": 4, "attributes": ["Advantage", "%poison%" ],"immunities": [ "%stun%" ]},
+          "elite": {"health": 28, "move": 4, "attack": 6, "attributes": [ "Advantage","^Attackers gain","^disadvantage", "%poison%" ],"immunities": [ "%stun%" ]}
         },
         {
-          "level": 7, "health": 32, "move": 5, "attack": 6, "attributes": ["Advantage", "Attackers gain","disadvantage", "%poison%" ],
-          "immunities": [ "%stun%" ]
-
+          "level": 7,
+          "normal": {"health": 24, "move": 4, "attack": 5, "attributes": [ "Advantage","%poison%" ],"immunities": [ "%stun%" ]},
+          "elite": {"health": 32, "move": 5, "attack": 6, "attributes": [ "Advantage","^Attackers gain","^disadvantage", "%poison%" ],"immunities": [ "%stun%" ]}
+        }
+      ]
+    },
+    "Warden": {
+      "deck": "Stone Golem",
+      "gfx": "Stone Golem",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 10, "move": 1, "attack": 3,"attributes": [ "^^can't be", "^^damaged"] },
+          "elite": { "health": 10, "move": 2, "attack": 4, "attributes": [ "%shield% 1", "^^can't be", "^^damaged"]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 10, "move": 1, "attack": 3, "attributes": [ "%shield% 1", "^^can't be", "^^damaged" ]},
+          "elite": { "health": 11, "move": 2, "attack": 4, "attributes": [ "%shield% 2", "^^can't be", "^^damaged" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 11, "move": 1, "attack": 4, "attributes": [ "%shield% 1", "^^can't be", "^^damaged" ]},
+          "elite": { "health": 14, "move": 2, "attack": 5, "attributes": [ "%shield% 2", "^^can't be", "^^damaged" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 11, "move": 1, "attack": 4, "attributes": [ "%shield% 2", "^^can't be", "^^damaged" ]},
+          "elite": { "health": 15, "move": 2, "attack": 5, "attributes": [ "%shield% 3" , "^^can't be", "^^damaged"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 12, "move": 2, "attack": 4, "attributes": [ "%shield% 2" , "^^can't be", "^^damaged"]},
+          "elite": { "health": 17, "move": 2, "attack": 6, "attributes": [ "%shield% 3" , "^^can't be", "^^damaged"]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 13, "move": 2, "attack": 5, "attributes": [ "%shield% 2", "^^can't be", "^^damaged" ]},
+          "elite": { "health": 19, "move": 3, "attack": 6, "attributes": [ "%shield% 3", "^^can't be", "^^damaged" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 16, "move": 2, "attack": 5, "attributes": [ "%shield% 2" , "^^can't be", "^^damaged"]},
+          "elite": { "health": 20, "move": 3, "attack": 7, "attributes": [ "%shield% 3", "^^can't be", "^^damaged" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 16, "move": 2, "attack": 5, "attributes": [ "%shield% 3" , "^^can't be", "^^damaged"]},
+          "elite": { "health": 21, "move": 3, "attack": 7, "attributes": [ "%shield% 4", "^^can't be", "^^damaged" ]}
         }
       ]
     }
@@ -1858,7 +2004,7 @@
           "monsters": [ "Ancient Artillery", "Frost Demon", "Avatar of Thelija", "Wind Demon" ]
         },
         "#133 A Secret Floor": {
-          "monsters": [ "Ancient Artillery" ]
+          "monsters": [ "Ancient Artillery Section 133" ]
         }
       }
     },
@@ -1909,6 +2055,7 @@
             }]
         },
         "#101 Getting Both Records": {
+          "monsters": ["City Archer", "City Guard", "Valrath Savage", "Valrath Tracker", "Human Commander", "Valrath Commander"],
           "special": [
             {
               "type": "Timer",
@@ -1924,7 +2071,7 @@
       "monsters": [ "City Archer", "City Guard", "Valrath Savage", "Valrath Tracker" ]
     },
     "#110 A Circular Solution": {
-      "monsters": [ "The Steel Lion", "Earth Demon", "Flame Demon", "Uyart Ikkuma", "Selah Neberis", "Sraka the Wise" ],
+      "monsters": [ "The Steel Lion", "Earth Demon", "Flame Demon", "Uyart Ikkuma", "Selah Naberis", "Sraka the Wise" ],
       "special": [
         {
           "type": "Timer",
@@ -1961,21 +2108,11 @@
       "sections": {
         "#66 Sardonic Smile": {
           "monsters": [ "The Husk (66)" ],
-          "special": [
-            {
-              "type": "Note",
-              "name": "",
-              "note": "Transfer The Husk's conditions and HP to The Husk (66)"
-            } ]
+          "initialMessage": "Transfer The Husk's conditions and HP to The Husk (66)"
         },
         "#128 Cracked Facade": {
           "monsters": [ "The Husk (128)" ],
-          "special": [
-            {
-              "type": "Note",
-              "name": "",
-              "note": "Transfer The Husk (66)'s conditions and HP to The Husk (128)"
-            } ]
+          "initialMessage": "Transfer The Husk (66)'s conditions and HP to The Husk (128)"
         },
         "#106 Strangler's Park": {
           "monsters": [ "Harrower Infester", "Vermling Shaman" ]
@@ -1986,7 +2123,7 @@
       "monsters": [ "Ancient Artillery", "Living Bones", "Stone Golem" ]
     },
     "#113 The Lost Thread": {
-      "monsters": [ "Stone Golem" ],
+      "monsters": [ "Warden" ],
       "special": [
         {
           "type": "Escort",
@@ -2026,12 +2163,8 @@
     },
     "#115 Future Uncertain": {
       "monsters": [ "Aesther Ashblade", "Aesther Scout", "Black Imp", "Valrath Savage", "Valrath Tracker", "Manifestation of Corruption" ],
+      "initialMessage": "Manifestation of Corruption: Manual Deck",
       "special": [
-        {
-          "type": "Note",
-          "name" : "",
-          "note": "Manifestation of Corruption: Manual Deck"
-        },
         {
           "type": "Timer",
           "list": [5,10],

@@ -22,6 +22,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
 
+
   _enablePlatformOverrideForDesktop();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {

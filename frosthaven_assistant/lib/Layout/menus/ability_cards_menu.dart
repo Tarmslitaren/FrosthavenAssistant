@@ -139,14 +139,13 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           width: screenWidth * 0.4,
           child: reorderable
               ? ReorderableColumn(
-                  needsLongPressDraggable: getIt<Settings>().longPressToReorder.value,
+                  needsLongPressDraggable: true,
                   scrollController: AdjustableScrollController(),
                   scrollAnimationDuration: const Duration(milliseconds: 400),
                   reorderAnimationDuration: const Duration(milliseconds: 400),
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
 
                   onReorder: (index, dropIndex) {
-                    //make sure this is correct
                     setState(() {
                       dropIndex = list.length - dropIndex - 1;
                       index = list.length - index - 1;
@@ -191,20 +190,16 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                   topLeft: Radius.circular(4),
                                   topRight: Radius.circular(4))),
 
-                          //color: Colors.transparent,
-
                           child: Column(
                               children: [
                                 Container(
                           width: MediaQuery.of(context).size.width,
                           child:
                             Wrap(
-                                //alignment: WrapAlignment.start,
                                 crossAxisAlignment: WrapCrossAlignment.center,
                                 runSpacing: 0,
                                 spacing: 0,
 
-                                //mainAxisSize: MainAxisSize.max,
                                 children: [
                                   const Text(
                                     "  Reveal:",

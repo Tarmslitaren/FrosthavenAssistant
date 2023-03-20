@@ -168,7 +168,7 @@ class ConditionIconState extends State<ConditionIcon> {
               Image(
                 height: widget.size * scale,
                 filterQuality: FilterQuality.medium,
-                image: AssetImage(widget.gfx), //TODO: for character add colored background
+                image: AssetImage(widget.gfx),
               ));
         });
   }

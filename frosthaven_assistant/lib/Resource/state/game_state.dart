@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
 
 import '../../Model/campaign.dart';
+import '../../Model/room.dart';
 import '../../Model/scenario.dart';
 import '../action_handler.dart';
 import '../enums.dart';
@@ -16,14 +17,14 @@ import 'loot_deck_state.dart';
 import 'modifier_deck_state.dart';
 import 'monster_ability_state.dart';
 
-class GameState extends ActionHandler{ //TODO: put action handler in own place
+class GameState extends ActionHandler {
+  //TODO: put action handler in own place
 
   GameState() {
     init();
   }
 
-  void init(){
-
+  void init() {
     elementState.value[Elements.fire] = ElementState.inert;
     elementState.value[Elements.ice] = ElementState.inert;
     elementState.value[Elements.air] = ElementState.inert;
@@ -37,38 +38,58 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   initGame() async {
     rootBundle.evict('assets/data/summon.json');
     //cache false to make hot restart apply changes to base file. Does not work with hot reload...
-    final String response = await rootBundle.loadString('assets/data/summons.json', cache: false);
+    final String response =
+        await rootBundle.loadString('assets/data/summons.json', cache: false);
     final data = await json.decode(response);
 
     //load loose summons
-    if(data.containsKey('summons')) {
+    if (data.containsKey('summons')) {
       final summons = data['summons'] as Map<dynamic, dynamic>;
-      for (String key in summons.keys){
+      for (String key in summons.keys) {
         itemSummonData.add(SummonModel.fromJson(summons[key], key));
       }
     }
 
     Map<String, CampaignModel> map = {};
 
-    final String editions = await rootBundle.loadString('assets/data/editions/editions.json', cache: false);
+    final String editions = await rootBundle
+        .loadString('assets/data/editions/editions.json', cache: false);
     final Map<String, dynamic> editionData = await json.decode(editions);
     for (String item in editionData["editions"]) {
       this.editions.add(item);
-      await fetchCampaignData(item, map);
-    }
 
-    //TODO:specify campaigns in data, or scrub the directory for files
+      List<RoomsModel> roomData = [];
+      await fetchRoomData(item).then((value) {
+        if (value != null) roomData.addAll(value.roomData);
+      });
+
+      await fetchCampaignData(item, map, roomData);
+    }
 
     load(); //load saved state from file.
 
     modelData.value = map;
   }
 
-  fetchCampaignData(String campaign, Map<String, CampaignModel> map) async {
+  Future<EditionRoomsModel?> fetchRoomData(String campaign) async {
+    try {
+      final String response =
+          await rootBundle.loadString('assets/data/rooms/$campaign.json');
+      final data = await json.decode(response);
+      return EditionRoomsModel.fromJson(data);
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  fetchCampaignData(String campaign, Map<String, CampaignModel> map,
+      List<RoomsModel> roomsData) async {
     rootBundle.evict('assets/data/editions/$campaign.json');
-    final String response = await rootBundle.loadString('assets/data/editions/$campaign.json', cache: false);
+    final String response = await rootBundle
+        .loadString('assets/data/editions/$campaign.json', cache: false);
     final data = await json.decode(response);
-    map[campaign] = CampaignModel.fromJson(data);
+    map[campaign] = CampaignModel.fromJson(data, roomsData);
   }
 
   List<String> editions = [];
@@ -91,16 +112,18 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   final solo = ValueNotifier<bool>(false);
   final scenario = ValueNotifier<String>("");
   List<String> scenarioSectionsAdded = [];
-  List<SpecialRule> scenarioSpecialRules = []; //has both monsters and characters
+  List<SpecialRule> scenarioSpecialRules =
+      []; //has both monsters and characters
   late LootDeck lootDeck = LootDeck.empty(); //loot deck for current scenario
   final toastMessage = ValueNotifier<String>("");
 
   List<ListItemData> currentList = []; //has both monsters and characters
 
-  List<MonsterAbilityState> currentAbilityDecks = <MonsterAbilityState>[]; //add to here when adding a monster type
+  List<MonsterAbilityState> currentAbilityDecks =
+      <MonsterAbilityState>[]; //add to here when adding a monster type
 
   //elements
-  final elementState = ValueNotifier< Map<Elements, ElementState> >(HashMap());
+  final elementState = ValueNotifier<Map<Elements, ElementState>>(HashMap());
 
   //modifierDeck
   ModifierDeck modifierDeck = ModifierDeck("");
@@ -109,11 +132,10 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   //unlocked characters
   Set<String> unlockedClasses = {};
 
-
   @override
   String toString() {
     Map<String, int> elements = {};
-    for( var key in elementState.value.keys) {
+    for (var key in elementState.value.keys) {
       elements[key.index.toString()] = elementState.value[key]!.index;
     }
 
@@ -147,7 +169,8 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
   Future<void> load() async {
     GameSaveState state = GameSaveState();
     state.loadFromDisk();
-    gameSaveStates.add(state); //init state: means game save state is one larger than command list
+    gameSaveStates.add(
+        state); //init state: means game save state is one larger than command list
   }
 
   Future<void> loadFromData(String data) async {
@@ -156,6 +179,4 @@ class GameState extends ActionHandler{ //TODO: put action handler in own place
     gameSaveStates.add(state);
     state.saveToDisk();
   }
-
-
 }

@@ -23,12 +23,14 @@ class Monster {
 
 
 class Scenario {
+  String name;
   List<Map<String, Map<String, Monster>>> sections = [];
 
+  Scenario(this.name);
 
   Map<String, dynamic> toJson() {
     return {
-      'sections': sections
+      name: sections
     };
   }
 

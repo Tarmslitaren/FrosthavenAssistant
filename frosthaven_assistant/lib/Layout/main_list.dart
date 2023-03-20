@@ -445,7 +445,7 @@ class MainListState extends State<MainList> {
 
                   direction: Axis.vertical,
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
-                  needsLongPressDraggable: getIt<Settings>().longPressToReorder.value,
+                  needsLongPressDraggable: true,
                   controller: scrollController,
                   onReorder: (int oldIndex, int newIndex) {
                     setState(() {

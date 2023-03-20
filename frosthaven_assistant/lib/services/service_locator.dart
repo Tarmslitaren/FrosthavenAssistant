@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/network/connection.dart';
@@ -14,4 +15,9 @@ void setupGetIt() {
   getIt.registerLazySingleton<Communication>(() => Communication());
   getIt.registerLazySingleton<Network>(() => Network());
   getIt.registerLazySingleton<Connection>(() => Connection());
+}
+
+void setupMoreGetIt(BuildContext context) {
+  getIt.allowReassignment = true;
+  getIt.registerLazySingleton<BuildContext>(() => context);
 }

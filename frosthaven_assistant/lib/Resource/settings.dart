@@ -34,7 +34,7 @@ class Settings {
   final showCustomContent = ValueNotifier<bool>(true);
   final showSectionsInMainView = ValueNotifier<bool>(true);
   final showReminders = ValueNotifier<bool>(true);
-  final longPressToReorder = ValueNotifier<bool>(true);
+  final autoAddStandees = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -236,8 +236,8 @@ class Settings {
         showReminders.value = data["showReminders"];
       }
 
-      if (data["longPressToReorder"] != null) {
-        longPressToReorder.value = data["longPressToReorder"];
+      if (data["autoAddStandees"] != null) {
+        autoAddStandees.value = data["autoAddStandees"];
       }
 
       if (data["connectClientOnStartup"] != null &&
@@ -292,7 +292,7 @@ class Settings {
         '"showCustomContent": ${showCustomContent.value}, '
         '"showSectionsInMainView": ${showSectionsInMainView.value}, '
         '"showReminders": ${showReminders.value}, '
-        '"longPressToReorder": ${longPressToReorder.value}, '
+        '"autoAddStandees": ${autoAddStandees.value}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort", '

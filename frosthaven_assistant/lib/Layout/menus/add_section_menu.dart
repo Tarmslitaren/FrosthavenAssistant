@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/set_scenario_command.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
@@ -30,28 +31,15 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     super.initState();
   }
 
-  int? findNrFromScenarioName(String scenario) {
-    String nr = scenario.substring(1);
-    for (int i = 0; i < nr.length; i++) {
-      if (nr[i] == ' ' || nr[i] == ".") {
-        nr = nr.substring(0, i);
-        int? number = int.tryParse(nr);
-        return number;
-      }
-    }
-
-    return null;
-  }
-
   void setCampaign(String campaign) {
     //TODO:clear search
     _gameState.currentCampaign.value = campaign;
     _foundScenarios = _gameState
-        .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.keys
+        .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
         .toList();
     _foundScenarios.sort((a, b) {
-      int? aNr = findNrFromScenarioName(a);
-      int? bNr = findNrFromScenarioName(b);
+      int? aNr = GameMethods.findNrFromScenarioName(a);
+      int? bNr = GameMethods.findNrFromScenarioName(b);
       if (aNr != null && bNr != null) {
         return aNr.compareTo(bNr);
       }
@@ -65,18 +53,18 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
       results = _gameState
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.keys
+          .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
           .toList();
     } else {
       results = _gameState
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.keys
+          .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
           .toList()
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       results.sort((a, b) {
-        int? aNr = findNrFromScenarioName(a);
-        int? bNr = findNrFromScenarioName(b);
+        int? aNr = GameMethods.findNrFromScenarioName(a);
+        int? bNr = GameMethods.findNrFromScenarioName(b);
         if (aNr != null && bNr != null) {
           return aNr.compareTo(bNr);
         }
@@ -143,7 +131,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                               itemCount: _foundScenarios.length,
                               itemBuilder: (context, index) => ListTile(
                                 title: Text(_foundScenarios[index],
-                                    style: TextStyle(fontSize: 18)),
+                                    style: const TextStyle(fontSize: 18)),
                                 onTap: () {
                                   _gameState.action(SetScenarioCommand(
                                       _foundScenarios[index], true));

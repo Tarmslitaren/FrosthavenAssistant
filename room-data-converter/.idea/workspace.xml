@@ -1,8 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1f3fb458-7797-4f8a-b2f2-beaaae9fd74d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../frosthaven_assistant/assets/data/rooms/Crimson Scales.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frosthaven_assistant/assets/data/rooms/Crimson Scales.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frosthaven_assistant/lib/Layout/menus/auto_add_standee_menu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frosthaven_assistant/lib/Layout/menus/auto_add_standee_menu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frosthaven_assistant/lib/Layout/modifier_deck_widget.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frosthaven_assistant/lib/Layout/modifier_deck_widget.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frosthaven_assistant/lib/Resource/action_handler.dart" beforeDir="false" afterPath="$PROJECT_DIR$/../frosthaven_assistant/lib/Resource/action_handler.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frosthaven.json" beforeDir="false" afterPath="$PROJECT_DIR$/Frosthaven.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Seeker of Xorn.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Trail of Ashes.json" beforeDir="false" afterPath="$PROJECT_DIR$/Trail of Ashes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/1.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/1.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/10.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/10.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/11.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/11.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/12.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/12.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/13.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/13.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/14.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/14.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/15.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/15.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/16.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/16.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/17.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/17.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/18.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/18.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/19.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/19.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/2.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/2.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/20.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/21.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/22.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/23.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/24.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/25.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/26.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/27.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/28.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/29.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/3.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/30.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/31.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/32.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/33.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/34.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/35.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/36.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/37.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/38.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/39.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/4.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/4.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/40.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/41.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/42.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/43.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/44.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/45.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/46.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/47.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/48.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/49.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/5.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/5.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/50.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/51.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/52.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/53.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/54.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/55.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/56.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/57.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/58.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/59.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/6.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/6.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/60.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/61.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/62.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/63.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/64.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/65.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/66.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/67.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/68.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/69.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/7.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/7.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/70.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/71.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/72.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/73.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/74.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/75.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/76.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/77.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/78.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/79.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/8.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/8.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/80.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/81.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/82.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/83.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/9.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/9.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/AA3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/QA1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/QA2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/QA3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM3.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/RM7.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/room_data_converter.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/room_data_converter.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2MixsKSGAfPC2UJ3g2lLrNHxjiL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
 }</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1f3fb458-7797-4f8a-b2f2-beaaae9fd74d" name="Changes" comment="" />
+      <created>1678264412498</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1678264412498</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
 </project>

@@ -2,6 +2,7 @@
 import 'dart:math';
 
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
 import 'package:frosthaven_assistant/Resource/state/character.dart';
 import 'package:frosthaven_assistant/Resource/state/character_state.dart';
@@ -234,10 +235,13 @@ class GameMethods {
   static void sortItemToPlace(String id, int initiative) {
     var newList = _gameState.currentList.toList();
     ListItemData? item;
+    int currentTurnItemIndex = 0;
     for (int i = 0; i < newList.length; i++) {
+      if(newList[i].turnState == TurnsState.current) {
+        currentTurnItemIndex = i;
+      }
       if(newList[i].id == id) {
         item = newList.removeAt(i);
-        break;
       }
     }
     if (item == null) {
@@ -249,9 +253,16 @@ class GameMethods {
       ListItemData currentItem = newList[i];
       int currentItemInitiative = getInitiative(currentItem);
       if(currentItemInitiative > initiative && currentItemInitiative > init) {
-        newList.insert(i, item);
-        _gameState.currentList = newList;
-        return;
+        if(i > currentTurnItemIndex) {
+          newList.insert(i, item);
+          _gameState.currentList = newList;
+          return;
+        } else {
+          //in case initiative is earlier than current turn, place just after current turn item
+          newList.insert(currentTurnItemIndex+1, item);
+          _gameState.currentList = newList;
+          return;
+        }
       }
       init = currentItemInitiative; //this check is for the case user has moved items around the order may be off
     }
@@ -384,6 +395,133 @@ class GameMethods {
     }
   }
 
+  static int getRandomStandee(Monster data) {
+    //TODO: handle standees used by other special monsters
+    int nrOfStandees = data.type.count;
+    List<int> available = [];
+    for (int i = 0; i < nrOfStandees; i++) {
+      bool isAvailable = true;
+      for (var item in data.monsterInstances.value) {
+        if (item.standeeNr == i + 1) {
+          isAvailable = false;
+          break;
+        }
+      }
+      if(isAvailable) { //check for special monsters with same standees
+        for (var item in _gameState.currentList) {
+          if (item is Monster) {
+            if (item.id != data.id) {
+              if (item.type.gfx == data.type.gfx) {
+                for (var standee in item.monsterInstances.value) {
+                  if (standee.standeeNr == i + 1) {
+                    isAvailable = false;
+                    break;
+                  }
+                }
+              }
+            }
+          }
+          if(!isAvailable) {
+            break;
+          }
+        }
+      }
+      if (isAvailable) {
+        available.add(i + 1);
+      }
+    }
+
+    //in case we run out of standees...
+    if (available.isEmpty) {
+      return 0;
+    }
+    return available[Random().nextInt(available.length)];
+  }
+
+  static void executeAddStandee(  final int nr, final SummonData? summon, final MonsterType type, final String ownerId, final bool addAsSummon) {
+    MonsterInstance instance;
+    Monster? monster;
+    if (summon == null) {
+      for (var item in getIt<GameState>().currentList) {
+        if (item.id == ownerId && item is Monster) {
+          monster = item;
+        }
+      }
+      instance = MonsterInstance(nr, type, addAsSummon, monster!);
+    } else {
+      instance = MonsterInstance.summon(
+          summon.standeeNr,
+          type,
+          summon.name,
+          summon.health,
+          summon.move,
+          summon.attack,
+          summon.range,
+          summon.gfx,
+          getIt<GameState>().round.value);
+    }
+
+    List<MonsterInstance> newList = [];
+    ValueNotifier<List<MonsterInstance>>? monsterList;
+    //find list
+    if (monster != null) {
+      monsterList = monster.monsterInstances;
+    } else {
+      for (var item in getIt<GameState>().currentList) {
+        if (item.id == ownerId) {
+          monsterList = (item as Character).characterState.summonList;
+          break;
+        }
+      }
+    }
+
+    //make sure summons can not have same gfx and nr:
+    if (instance.standeeNr != 0) {
+      bool ok = false;
+      while (!ok) {
+        ok = true;
+        for (var item in monsterList!.value) {
+          if (item.standeeNr == instance.standeeNr) {
+            if (item.gfx == instance.gfx) {
+              //can not have same gfx and nr
+              instance = MonsterInstance.summon(
+                  instance.standeeNr + 1,
+                  type,
+                  summon!.name,
+                  summon.health,
+                  summon.move,
+                  summon.attack,
+                  summon.range,
+                  summon.gfx,
+                  getIt<GameState>().round.value);
+              ok = false;
+            }
+          }
+        }
+      }
+    }
+
+    newList.addAll(monsterList!.value);
+    newList.add(instance);
+
+    if (monster != null) {
+      GameMethods.sortMonsterInstances(newList);
+    }
+    monsterList.value = newList;
+    if (monsterList.value.length == 1 && monster != null) {
+      //first added
+      if (getIt<GameState>().roundState.value == RoundState.chooseInitiative) {
+        GameMethods.sortCharactersFirst();
+      } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
+        GameMethods.drawAbilityCardFromInactiveDeck();
+        GameMethods.sortItemToPlace(
+            monster.id,
+            GameMethods.getInitiative(
+                monster)); //need to only sort this one item to place
+      }
+    }
+  }
+
   static void addStandee(int? nr, Monster data, MonsterType type, bool addAsSummon) {
     if (nr != null) {
       _gameState.action(AddStandeeCommand(nr, null, data.id, type, addAsSummon));
@@ -431,6 +569,21 @@ class GameMethods {
       }
     }
     return null;
+  }
+
+  static String getFigureIdFromNr(String ownerId, int nr) {
+    for(var item in getIt<GameState>().currentList) {
+      if(item.id == ownerId){
+        if(item is Monster) {
+          for (var instance in item.monsterInstances.value) {
+            if(instance.standeeNr == nr){
+              return instance.name + instance.gfx + instance.standeeNr.toString();
+            }
+          }
+        }
+      }
+    }
+    return "";
   }
 
   static Character? createCharacter(String name, String? display, int level) {
@@ -707,5 +860,18 @@ class GameMethods {
         }
       }
     }
+  }
+
+  static int? findNrFromScenarioName(String scenario) {
+    String nr = scenario.substring(1);
+    for (int i = 0; i < nr.length; i++) {
+      if (nr[i] == ' ' || nr[i] == ".") {
+        nr = nr.substring(0, i);
+        int? number = int.tryParse(nr);
+        return number;
+      }
+    }
+
+    return null;
   }
 }
