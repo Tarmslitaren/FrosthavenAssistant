@@ -26,6 +26,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
 
   bool addAsSummon = false;
   int currentMonsterIndex = 0;
+  late final int startCommandIndex;
 
   List<int> initialEliteAdded = [];
   List<int> initialNormalAdded = [];
@@ -34,6 +35,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   initState() {
     // at the beginning, all items are shown
     super.initState();
+
+    startCommandIndex = _gameState.commandIndex.value;
 
     for (var data in widget.monsterData) {
       Monster monster = _gameState.currentList
@@ -261,8 +264,18 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
 
     return ValueListenableBuilder<int>(
-        valueListenable: getIt<GameState>().updateList,
+        valueListenable: _gameState.updateList,
         builder: (context, value, child) {
+
+          //handle undo from other device
+          if(startCommandIndex > _gameState.commandIndex.value) {
+            Future.delayed(const Duration(milliseconds: 10), () {
+              Navigator.pop(context);
+            });
+            return Container();
+          }
+
+
           RoomMonsterData data = widget.monsterData[currentMonsterIndex];
           Monster monster = _gameState.currentList
               .firstWhere((element) => element.id == data.name) as Monster;
