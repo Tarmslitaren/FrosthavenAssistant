@@ -3670,14 +3670,6 @@
         "Polar Bear": {
           "normal": [1, 0, 0],
           "elite": [0, 1, 1]
-        },
-        "Lurker Mindsnipper": {
-          "normal": [1, 1, 2],
-          "elite": [1, 2, 2]
-        },
-        "Piranha Pig": {
-          "normal": [4, 4, 1],
-          "elite": [0, 1, 4]
         }
       }},
     {
@@ -3763,7 +3755,7 @@
           "elite": [0, 0, 1]
         }
       }},{
-      "91.3": {
+      "93.1": {
         "Black Imp (FH)": {
           "normal": [1, 1, 1],
           "elite": [0, 1, 1]
