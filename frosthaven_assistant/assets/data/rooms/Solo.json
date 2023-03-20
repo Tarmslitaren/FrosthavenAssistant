@@ -103,7 +103,7 @@
   ],
   "12": [
     {
-      "G1": {
+      "G1-berserker": {
         "Living Corpse": {
           "normal": [
             2,
@@ -629,7 +629,7 @@
   ],
   "6": [
     {
-      "E1": {
+      "minndthief": {
         "Vermling Scout": {
           "normal": [
             6,
@@ -672,6 +672,14 @@
             0,
             0
           ]
+        }
+      }
+    },
+    {
+      "3": {
+        "Earth Demon (Mindthief Special)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -950,6 +958,26 @@
     }
   ],
   "8": [
+    {
+      "3spears": {
+      }
+    },
+    {
+      "1": {
+        "Bandit Guard": {
+          "normal": [1, 1, 1],
+          "elite": [1, 1, 1]
+        },
+        "Bandit Archer": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        },
+        "Hound": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
   ],
   "4": [
     {
@@ -1255,6 +1283,22 @@
           ]
         }
       }
+    },
+    {
+      "1": {
+        "Stone Golem": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
     }
   ],
   "9": [
@@ -1355,7 +1399,7 @@
   ],
   "7": [
     {
-      "L1": {
+      "sun": {
         "City Guard (Sun Special)": {
           "normal": [
             6,
@@ -1391,6 +1435,38 @@
             0,
             0
           ]
+        }
+      }
+    },
+    {
+      "1": {
+        "Inox Guard": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Inox Shaman": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        },
+        "Inox Archer": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "2": {
+        "Vermling Scout": {
+          "normal": [2, 2, 2],
+          "elite": [1, 1, 1]
+        },
+        "Vermling Shaman": {
+          "normal": [0, 0, 0],
+          "elite": [2, 2, 2]
+        },
+        "Cave Bear": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         }
       }
     }
