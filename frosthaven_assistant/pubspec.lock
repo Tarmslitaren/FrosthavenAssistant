@@ -209,6 +209,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.3"
+  console:
+    dependency: transitive
+    description:
+      name: console
+      sha256: e04e7824384c5b39389acdd6dc7d33f3efe6b232f6f16d7626f194f6a01ad69a
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
   convert:
     dependency: transitive
     description:
@@ -481,6 +489,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.13.5"
+  http_methods:
+    dependency: transitive
+    description:
+      name: http_methods
+      sha256: c192bb6fb4ae99d06053f67a2c1c65350a29bc778a39d9a12b96bd2ec820e9dc
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   http_multi_server:
     dependency: transitive
     description:
@@ -593,6 +609,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.3.2"
+  msix:
+    dependency: "direct dev"
+    description:
+      name: msix
+      sha256: e3de4d9f52543ad6e4b0f534991e1303cbd379d24be28dd241ac60bd9439a201
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.7.0"
   network_info_plus:
     dependency: "direct main"
     description:
@@ -873,6 +897,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  shelf_router:
+    dependency: "direct main"
+    description:
+      name: shelf_router
+      sha256: "0b0bfb835e8b2bb43c5341ee689f0d2851e9cea377a4f2db4ec06a1a99beace4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.3"
   shelf_static:
     dependency: transitive
     description:

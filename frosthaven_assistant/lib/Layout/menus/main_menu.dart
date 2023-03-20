@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/settings_menu.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/services/network/web_server.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
@@ -224,9 +225,11 @@ Drawer createMainMenu(BuildContext context) {
                           //do the thing
                           if (!settings.server.value) {
                             getIt<Network>().server.startServer();
+                            getIt<Network>().webServer.startServer();
                           } else {
                             //close server?
                             getIt<Network>().server.stopServer(null);
+                            getIt<Network>().webServer.stopServer(null);
                           }
                         });
                     //});

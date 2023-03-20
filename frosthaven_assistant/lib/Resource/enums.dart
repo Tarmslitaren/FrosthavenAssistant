@@ -63,13 +63,40 @@ enum Condition{
     return index.toString();
   }
 
+  static Condition? fromString(str) {
+    switch(str) {
+      case "poison" : return Condition.poison;
+      case "stun" : return Condition.stun;
+      case "immobilize" : return Condition.immobilize;
+      case "disarm" : return Condition.disarm;
+      case "wound" : return Condition.wound;
+      case "wound2" : return Condition.wound2;
+      case "muddle" : return Condition.muddle;
+      case "poison" : return Condition.poison;
+      case "poison2" : return Condition.poison2;
+      case "poison3" : return Condition.poison3;
+      case "poison4" : return Condition.poison4;
+      case "bane" : return Condition.bane;
+      case "brittle" : return Condition.brittle;
+      case "chill" : return Condition.chill;
+      case "infect" : return Condition.infect;
+      case "impair" : return Condition.impair;
+      case "rupture" : return Condition.rupture;
+      case "strengthen" : return Condition.strengthen;
+      case "invisible" : return Condition.invisible;
+      case "regenerate" : return Condition.regenerate;
+      case "ward" : return Condition.ward;
+      case "dodge" : return Condition.dodge;
+    }
+    return null;
+  }
+
 }
 
 enum ElementState{
   full,
   half,
   inert
-
 }
 
 enum Elements{
@@ -78,7 +105,12 @@ enum Elements{
   air,
   earth,
   light,
-  dark
+  dark;
+
+  static Elements? fromString(input) {
+    print("elements.fromString $input");
+    return Elements.values.firstWhereOrNull((element) => element.name == input);
+  }
 }
 
 enum RoundState{

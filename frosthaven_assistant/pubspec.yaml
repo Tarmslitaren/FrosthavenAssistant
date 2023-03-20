@@ -39,6 +39,7 @@ dependencies:
   #flutter_staggered_grid_view: ^0.6.1
   #reorderableitemsview: ^2.0.1 # builds on staggered grid view. doesn't fit + trashy reorder anims. also uses old version of staggered :(
   reorderables: ^0.6.0
+  shelf_router: ^1.0.0
 
   #scaled_app: ^0.2.0 # wont work well for my use case.
   #dropdown_search: ^4.0.1 this was absolute trash
@@ -118,6 +119,7 @@ dev_dependencies:
   mockito: ^5.3.2
   build_runner: ^2.3.3
   fluent_assertions: ^0.4.0
+  msix: ^3.7.0
   #build_runner: ^2.0.0
   #objectbox_generator: any
 
