@@ -286,7 +286,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           //change depending on already added standees
           int preAddedMonsters = initialEliteAdded[currentMonsterIndex] +
               initialNormalAdded[
-                  currentMonsterIndex]; // monster.monsterInstances.value.length - currentNormalAdded - currentEliteAdded;
+                  currentMonsterIndex];
 
           int nrOfStandees = monster.type.count;
           int monstersLeft = nrOfStandees - preAddedMonsters;
