@@ -92,10 +92,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   bool initAnimationEnabled() {
     if(getIt<Settings>().client.value == ClientState.connected || getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0) {
 
+      final int commandIndex = getIt<GameState>().commandIndex.value;
+      if(commandIndex < 0) {
+        return false;
+      }
       if (getIt<GameState>()
-          .commandDescriptions.length > getIt<GameState>().commandIndex.value) {
+          .commandDescriptions.length > commandIndex) {
         String commandDescription = getIt<GameState>()
-            .commandDescriptions[getIt<GameState>().commandIndex.value];
+            .commandDescriptions[commandIndex];
         //todo: also: missing info. need to check for updateForUndo
         if(widget.name == "Allies") {
           if(commandDescription.contains("allies modifier card")) {
