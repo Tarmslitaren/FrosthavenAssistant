@@ -39,7 +39,7 @@ class Connection {
 
   Iterable<Socket> _find(Socket socket) {
     return _sockets.where((x) =>
-        x.remoteAddress == socket.remoteAddress && x.port == socket.port);
+        x.remoteAddress == socket.remoteAddress);
   }
 
   void _destroy(Iterable<Socket> sockets) {
