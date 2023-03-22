@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
@@ -57,14 +58,12 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
 
   void closeOrNext(int currentEliteAdded, int currentNormalAdded, int nrOfElite,
       int nrOfNormal) {
-    //if(currentEliteAdded == nrOfElite && currentNormalAdded == nrOfNormal) {
     if (currentMonsterIndex + 1 >= widget.monsterData.length) {
-      //close menu
-      Future.delayed(const Duration(milliseconds: 50), () {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.pop(context);
       });
     } else {
-      Future.delayed(const Duration(milliseconds: 50), () {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         getIt<GameState>().updateList.value++;
       });
 
@@ -72,7 +71,6 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
       currentEliteAdded = 0;
       currentNormalAdded = 0;
     }
-    //}
   }
 
   Widget buildNrButton(
@@ -267,19 +265,42 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
 
     return ValueListenableBuilder<int>(
-        valueListenable: _gameState.updateList,
+        valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
-          //handle undo from other device
+          //handle undo from other device - needs to be same index?
           if (startCommandIndex > _gameState.commandIndex.value) {
-            Future.delayed(const Duration(milliseconds: 10), () {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               Navigator.pop(context);
             });
-            return Container();
+            return Container(
+              child: TextButton(
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            );
           }
-
           RoomMonsterData data = widget.monsterData[currentMonsterIndex];
-          Monster monster = _gameState.currentList
-              .firstWhere((element) => element.id == data.name) as Monster;
+          Monster? monster = _gameState.currentList
+              .firstWhereOrNull((element) => element.id == data.name) as Monster?;
+          if(monster == null) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              Navigator.pop(context);
+            });
+            return Container(
+              child: TextButton(
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            );
+          }
 
           int nrOfElite = data.elite[characterIndex];
           int nrOfNormal = data.normal[characterIndex];

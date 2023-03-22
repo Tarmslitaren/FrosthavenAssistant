@@ -23,7 +23,7 @@ class ActionHandler {
 
   void updateAllUI() {
     getIt<GameState>().updateList.value++;
-    getIt<GameState>().updateForUndo.value++; //too harsh?
+    getIt<GameState>().updateForUndo.value++;
     getIt<GameState>().killMonsterStandee.value++;
     //try to update card widget her eif needed
 
