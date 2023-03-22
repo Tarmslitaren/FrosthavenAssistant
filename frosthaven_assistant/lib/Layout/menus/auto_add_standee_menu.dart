@@ -153,14 +153,17 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           } else {
             String figureId = GameMethods.getFigureIdFromNr(monster.id, nr);
             if (figureId.isNotEmpty) {
+              MonsterInstance state = GameMethods.getFigure(monster.id, figureId) as MonsterInstance;
               _gameState
                   .action(ChangeHealthCommand(-10000, figureId, monster.id));
 
-              if (elite) {
-                currentEliteAdded--;
-              } else {
-                currentNormalAdded--;
-              }
+              setState(() {
+                if (state.type == MonsterType.elite) { //this is not correct - could have added a normal and removed as elite.
+                  currentEliteAdded--;
+                } else {
+                  currentNormalAdded--;
+                }
+              });
             }
           }
         },
