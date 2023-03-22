@@ -89,8 +89,13 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   static const int cardAnimationDuration = 1200;
 
+
   bool initAnimationEnabled() {
-    if(getIt<Settings>().client.value == ClientState.connected || getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0) {
+    if(getIt<Settings>().client.value == ClientState.connected) {
+      return true;  //TODO: instead of looking at nonexistent commandDescriptions, look at last gameState
+    }
+
+    if(getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0) {
 
       final int commandIndex = getIt<GameState>().commandIndex.value;
       if(commandIndex < 0) {
