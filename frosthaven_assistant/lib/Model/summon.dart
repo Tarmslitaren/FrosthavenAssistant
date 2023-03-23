@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+
+@immutable
 class SummonModel {
   final String name;
   final dynamic health;
@@ -7,7 +10,7 @@ class SummonModel {
   final int level;
   final String gfx;
   final int standees;
-  SummonModel(this.name, this.health, this.move, this.attack, this.range, this.level, this.gfx, this.standees);
+  const SummonModel(this.name, this.health, this.move, this.attack, this.range, this.level, this.gfx, this.standees);
 
   factory SummonModel.fromJson(Map<String, dynamic> data, String key) {
     String name = key;

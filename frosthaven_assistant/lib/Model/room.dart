@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
+
+@immutable
 class RoomMonsterData {
-  String name;
-  List<int> normal;
-  List<int> elite;
-  RoomMonsterData(this.name, this.normal, this.elite);
+  final String name;
+  final List<int> normal;
+  final List<int> elite;
+  const RoomMonsterData(this.name, this.normal, this.elite);
 
   factory RoomMonsterData.fromJson(Map<String, dynamic> data, String key) {
     String name = key;
@@ -19,10 +22,11 @@ class RoomMonsterData {
   }
 }
 
+@immutable
 class RoomModel {
   final String name;
   final List<RoomMonsterData> monsterData;
-  RoomModel(this.name, this.monsterData);
+  const RoomModel(this.name, this.monsterData);
 
   factory RoomModel.fromJson(Map<String, dynamic> data) {
 
@@ -36,10 +40,11 @@ class RoomModel {
   }
 }
 
+@immutable
 class RoomsModel {
   final String scenarioName;
   final List<RoomModel> roomData;
-  RoomsModel(this.scenarioName, this.roomData);
+  const RoomsModel(this.scenarioName, this.roomData);
 
   factory RoomsModel.fromJson(List<dynamic> sectionData, String scenarioName) {
 
@@ -52,9 +57,10 @@ class RoomsModel {
   }
 }
 
+@immutable
 class EditionRoomsModel {
   final List<RoomsModel> roomData;
-  EditionRoomsModel( this.roomData);
+  const EditionRoomsModel( this.roomData);
 
   factory EditionRoomsModel.fromJson(Map<String, dynamic> data) {
 

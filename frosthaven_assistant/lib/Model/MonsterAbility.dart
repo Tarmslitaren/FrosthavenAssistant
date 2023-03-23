@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 
+@immutable
 class MonsterAbilityDeckModel {
-  MonsterAbilityDeckModel(this.name, this.edition, this.cards);
+  const MonsterAbilityDeckModel(this.name, this.edition, this.cards);
 
   final String name;
   final String edition;
@@ -59,8 +60,9 @@ class MonsterAbilityDeckModel {
   }
 }
 
+@immutable
 class GraphicPositional {
-  GraphicPositional(this.gfx, this.x, this.y, this.scale, this.angle);
+  const GraphicPositional(this.gfx, this.x, this.y, this.scale, this.angle);
   final String gfx;
   final double x;
   final double y;
@@ -68,8 +70,9 @@ class GraphicPositional {
   final double angle;
 }
 
+@immutable
 class MonsterAbilityCardModel {
-  MonsterAbilityCardModel(this.title, this.nr, this.shuffle, this.initiative, this.lines, this.deck, this.graphicPositional);
+  const MonsterAbilityCardModel(this.title, this.nr, this.shuffle, this.initiative, this.lines, this.deck, this.graphicPositional);
   final String deck;
   final String title;
   final int nr;

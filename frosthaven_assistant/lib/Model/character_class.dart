@@ -1,9 +1,9 @@
-import 'dart:ui';
-
+import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
 
+@immutable
 class CharacterClass {
-  CharacterClass(this.name, this.healthByLevel, this.edition, this.color, this.colorSecondary, this.hidden, this.summons);
+  const CharacterClass(this.name, this.healthByLevel, this.edition, this.color, this.colorSecondary, this.hidden, this.summons);
   final String name;
   final String edition;
   final List<int> healthByLevel;

@@ -6,7 +6,7 @@ import 'package:frosthaven_assistant/Model/room.dart';
 
 import '../Resource/state/game_state.dart';
 
-
+@immutable
 class LootDeckModel {
   final int lumber;
   final int hide;
@@ -19,7 +19,7 @@ class LootDeckModel {
   final int flamefruit;
   final int rockroot;
   final int treasure;
-  LootDeckModel(this.lumber, this.hide, this.metal, this.coin, this.arrowvine, this.corpsecap, this.snowthistle, this.axenut, this.flamefruit, this.rockroot, this.treasure);
+  const LootDeckModel(this.lumber, this.hide, this.metal, this.coin, this.arrowvine, this.corpsecap, this.snowthistle, this.axenut, this.flamefruit, this.rockroot, this.treasure);
 
   static int _getValueFromJson(Map<String, dynamic> data, String value) {
     if(data.containsKey(value)) {
@@ -46,6 +46,7 @@ class LootDeckModel {
   }
 }
 
+@immutable
 class SpecialRule {
   final String type;
   final String name;
@@ -55,7 +56,7 @@ class SpecialRule {
   final String note;
   final List<dynamic> list;
   final bool startOfRound;
-  SpecialRule(this.type, this.name, this.health, this.level, this.init, this.note, this.list, this.startOfRound);
+  const SpecialRule(this.type, this.name, this.health, this.level, this.init, this.note, this.list, this.startOfRound);
 
   factory SpecialRule.fromJson(Map<String, dynamic> data) {
     final String type = data['type']; //required
@@ -106,15 +107,15 @@ class SpecialRule {
   }
 }
 
-
+//can't be immutable since merging other data late
 class ScenarioModel {
   ScenarioModel({required this.name, required this.sections, required this.monsters, required this.specialRules, required this.lootDeck, required this.initMessage, required this.monsterStandees});
-  String name;
-  List<String> monsters;
-  List<SpecialRule> specialRules;
-  LootDeckModel? lootDeck;
-  String initMessage;
-  List<RoomMonsterData>? monsterStandees;
+  final String name;
+  late final List<String> monsters;
+  late final List<SpecialRule> specialRules;
+  final LootDeckModel? lootDeck;
+  late final String initMessage;
+  final List<RoomMonsterData>? monsterStandees;
   final List<ScenarioModel> sections;
   factory ScenarioModel.fromJson(String name, Map<String, dynamic> data, RoomsModel? rooms) {
     List<String> monsterList = [];
@@ -218,7 +219,6 @@ class ScenarioModel {
   }
 
   factory ScenarioModel.sectionFromRoomData(RoomModel room) {
-    List<RoomMonsterData>? standees = room.monsterData;
     return ScenarioModel(name: "#${room.name}", monsters: [], specialRules: [], lootDeck: null, initMessage: "", sections:[], monsterStandees: room.monsterData);
   }
 
