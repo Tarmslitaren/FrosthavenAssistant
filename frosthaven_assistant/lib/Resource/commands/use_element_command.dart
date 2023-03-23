@@ -12,7 +12,7 @@ class UseElementCommand extends Command {
 
   @override
   void execute() {
-    _gameState.elementState.value[element] = ElementState.inert;
+    GameMethods.useElement(element);
   }
 
   @override

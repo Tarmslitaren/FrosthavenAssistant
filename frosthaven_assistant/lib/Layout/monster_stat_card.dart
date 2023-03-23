@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/commands/activate_monster_type_command.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';

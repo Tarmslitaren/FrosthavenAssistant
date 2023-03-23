@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
@@ -49,7 +48,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   void setCampaign(String campaign) {
     //TODO:clear search
-    _gameState.currentCampaign.value = campaign;
+    GameMethods.setCampaign(campaign);
     _foundScenarios = _gameState
         .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
         .toList();

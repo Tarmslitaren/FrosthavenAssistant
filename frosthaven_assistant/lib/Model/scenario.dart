@@ -4,7 +4,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Model/room.dart';
 
-import '../Resource/game_methods.dart';
+import '../Resource/state/game_state.dart';
+
 
 class LootDeckModel {
   final int lumber;

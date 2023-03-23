@@ -1,38 +1,14 @@
-
-import 'dart:math';
-
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
-import 'package:frosthaven_assistant/Resource/state/character.dart';
-import 'package:frosthaven_assistant/Resource/state/character_state.dart';
-import 'package:frosthaven_assistant/Resource/state/figure_state.dart';
-import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/Resource/settings.dart';
-import 'package:frosthaven_assistant/Resource/state/list_item_data.dart';
-import 'package:frosthaven_assistant/Resource/state/monster.dart';
-import 'package:frosthaven_assistant/Resource/state/monster_instance.dart';
-import 'package:frosthaven_assistant/Resource/ui_utils.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
-
-import '../Layout/menus/auto_add_standee_menu.dart';
-import '../Model/character_class.dart';
-import '../Model/monster.dart';
-import '../Model/room.dart';
-import '../Model/scenario.dart';
-import 'commands/add_standee_command.dart';
-import 'enums.dart';
-import 'state/monster_ability_state.dart';
+part of game_state;
 
 GameState _gameState = getIt<GameState>();
 
 class GameMethods {
   static void updateElements() {
-    for (var key in _gameState.elementState.value.keys) {
-      if (_gameState.elementState.value[key] == ElementState.full) {
-        _gameState.elementState.value[key] = ElementState.half;
-      } else if (_gameState.elementState.value[key] == ElementState.half) {
-        _gameState.elementState.value[key] = ElementState.inert;
+    for (var key in _gameState.elementState.keys) {
+      if (_gameState._elementState[key] == ElementState.full) {
+        _gameState._elementState[key] = ElementState.half;
+      } else if (_gameState.elementState[key] == ElementState.half) {
+        _gameState._elementState[key] = ElementState.inert;
       }
     }
   }
@@ -86,7 +62,7 @@ class GameMethods {
         return;
       }
     }
-    _gameState.currentAbilityDecks.add(MonsterAbilityState(monster.type.deck));
+    _gameState._currentAbilityDecks.add(MonsterAbilityState(monster.type.deck));
   }
 
   static bool canDraw() {
@@ -152,7 +128,7 @@ class GameMethods {
 
   static void sortCharactersFirst() {
     //late List<ListItemData> newList = List.from(_gameState.currentList);
-    _gameState.currentList.sort((a, b) {
+    _gameState._currentList.sort((a, b) {
       //dead characters dead last
       if (a is Character) {
         if (b is Character) {
@@ -258,12 +234,12 @@ class GameMethods {
       if(currentItemInitiative > initiative && currentItemInitiative > init) {
         if(i > currentTurnItemIndex) {
           newList.insert(i, item);
-          _gameState.currentList = newList;
+          _gameState._currentList = newList;
           return;
         } else {
           //in case initiative is earlier than current turn, place just after current turn item
           newList.insert(currentTurnItemIndex+1, item);
-          _gameState.currentList = newList;
+          _gameState._currentList = newList;
           return;
         }
       }
@@ -271,11 +247,11 @@ class GameMethods {
     }
 
     newList.add(item);
-    _gameState.currentList = newList;
+    _gameState._currentList = newList;
   }
 
   static void sortByInitiative() {
-    _gameState.currentList.sort((a, b) {
+    _gameState._currentList.sort((a, b) {
       //dead characters dead last
       if (a is Character) {
         if (b is Character) {
@@ -381,7 +357,365 @@ class GameMethods {
   }
 
   static void setRoundState(RoundState state) {
-    _gameState.roundState.value = state;
+    _gameState._roundState.value = state;
+  }
+
+  static void setLevel(int level) {
+    _gameState._level.value = level;
+  }
+
+  static void setScenario(String scenario, bool section) {
+    if (!section) {
+      //first reset state
+      GameMethods.setRound(1);
+      _gameState._currentAbilityDecks.clear();
+      _gameState._scenarioSpecialRules.clear();
+      List<ListItemData> newList = [];
+      for (var item in _gameState.currentList) {
+        if (item is Character) {
+          if (item.characterClass.name != "Objective" && item.characterClass.name != "Escort") {
+            item.characterState.initiative.value = 0;
+            item.characterState.health.value =
+            item.characterClass.healthByLevel[item.characterState.level.value -
+                1];
+            item.characterState.maxHealth.value = item.characterState.health.value;
+            item.characterState.xp.value = 0;
+            item.characterState.conditions.value.clear();
+            item.characterState.summonList.value.clear();
+
+            if(item.id == "Beast Tyrant") {
+              //create the bear summon
+              final int bearHp = 8 + item.characterState.level.value * 2;
+              MonsterInstance bear = MonsterInstance.summon(
+                  0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, "beast", -1);
+              item.characterState.summonList.value.add(bear);
+            }
+
+            newList.add(item);
+          }
+        }
+      }
+
+      _gameState.modifierDeck.initDeck("");
+      _gameState.modifierDeckAllies.initDeck("Allies");
+      _gameState._currentList = newList;
+
+      //loot deck init
+      if (scenario != "custom") {
+        LootDeckModel? lootDeckModel = _gameState.modelData.value[_gameState
+            .currentCampaign.value]!.scenarios[scenario]!.lootDeck;
+        if (lootDeckModel != null) {
+          _gameState._lootDeck = LootDeck(lootDeckModel, _gameState.lootDeck);
+        } else {
+          _gameState._lootDeck = LootDeck.from(_gameState.lootDeck);
+        }
+      } else {
+        _gameState._lootDeck = LootDeck.from(_gameState.lootDeck);
+      }
+
+      GameMethods.clearTurnState(true);
+      _gameState._toastMessage.value = "";
+    }
+
+
+    List<String> monsters = [];
+    List<SpecialRule> specialRules = [];
+    List<RoomMonsterData> roomMonsterData = [];
+
+    String initMessage = "";
+    if (section) {
+      var sectionData = _gameState.modelData.value[_gameState
+          .currentCampaign.value]?.scenarios[_gameState.scenario.value]?.sections.firstWhere((element) => element.name == scenario);
+      if(sectionData != null) {
+        monsters = sectionData.monsters;
+        specialRules = sectionData.specialRules.toList();
+        initMessage = sectionData.initMessage;
+        roomMonsterData = sectionData.monsterStandees != null ? sectionData.monsterStandees! : [];
+      }
+    }else{
+      if(scenario != "custom") {
+        var scenarioData = _gameState.modelData.value[_gameState
+            .currentCampaign.value]?.scenarios[scenario];
+        if (scenarioData != null) {
+          monsters = scenarioData.monsters;
+          specialRules = scenarioData.specialRules.toList();
+          initMessage = scenarioData.initMessage;
+          roomMonsterData = scenarioData.monsterStandees != null ? scenarioData.monsterStandees!.toList() : [];
+        }
+      }
+    }
+
+    //handle special rules
+    for (String monster in monsters) {
+      GameMethods.addMonster(monster, specialRules);
+    }
+
+    if (!section) {
+      GameMethods.shuffleDecks();
+    }
+
+    //hack for banner spear solo special rule
+    if (scenario.contains("Banner Spear: Scouting Ambush") ) {
+      MonsterAbilityState deck = _gameState.currentAbilityDecks.firstWhere((element) => element.name.contains("Scout"));
+      List<MonsterAbilityCardModel> list = deck.drawPile.getList();
+      for (int i = 0; i < list.length; i++) {
+        if(list[i].title == "Rancid Arrow") {
+          list.add(list.removeAt(i));
+          break;
+        }
+      }
+    }
+
+    //add objectives and escorts
+    for(var item in specialRules) {
+      if(item.type == "Objective"){
+        Character objective = GameMethods.createCharacter("Objective", item.name, _gameState.level.value+1)!;
+        objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
+        objective.characterState.health.value = objective.characterState.maxHealth.value;
+        objective.characterState.initiative.value = item.init;
+        bool add = true;
+        for (var item2 in _gameState.currentList) {
+          //don't add duplicates
+          if(item2 is Character && (item2).characterState.display.value == item.name) {
+            add = false;
+            break;
+          }
+        }
+        if(add) {
+          _gameState._currentList.add(objective);
+        }
+      }
+      if (item.type == "Escort") {
+        Character objective = GameMethods.createCharacter("Escort", item.name, _gameState.level.value+1)!;
+        objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
+        objective.characterState.health.value = objective.characterState.maxHealth.value;
+        objective.characterState.initiative.value = item.init;
+        bool add = true;
+        for (var item2 in _gameState.currentList) {
+          //don't add duplicates
+          if(item2 is Character && (item2).characterState.display.value == item.name) {
+            add = false;
+            break;
+          }
+        }
+        if(add) {
+          _gameState._currentList.add(objective);
+        }
+      }
+
+      //special case for start of round and round is 1
+      if(!section) {
+        if (item.type == "Timer" && item.startOfRound == true) {
+          for (int round in item.list) {
+            //minus 1 means always
+            if (round == 1 || round == -1) {
+              if (initMessage.isNotEmpty) {
+                initMessage += "\n\n${item.note}";
+              } else {
+                initMessage += item.note;
+              }
+            }
+          }
+        }
+      }
+
+      if (item.type == "ResetRound") {
+        GameMethods.setRound(1);
+      }
+    }
+
+    //in case of spawns at round 1 start of round, add to roomMonsterData
+    for (var rule in specialRules) {
+      if (rule.type == "Timer" && rule.startOfRound == true) {
+        for (int round in rule.list) {
+          //minus 1 means always
+          if (round == 1|| round == -1) {
+            if(getIt<Settings>().autoAddSpawns.value == true) {
+              if (rule.name.isNotEmpty) {
+                //get room data and deal with spawns
+                ScenarioModel? scenarioModel = _gameState.modelData.value[_gameState
+                    .currentCampaign.value]?.scenarios[scenario];
+                if (scenarioModel != null) {
+                  ScenarioModel? spawnSection = scenarioModel.sections.firstWhereOrNull((
+                      element) => element.name.substring(1) == rule.name);
+                  if (spawnSection != null && spawnSection.monsterStandees != null) {
+                    bool existed = false;
+                    for(var spawnItem in spawnSection.monsterStandees!) {
+                      var item = roomMonsterData.firstWhereOrNull((element) => element.name == spawnItem.name);
+                      if(item != null) {
+                        //merge
+                        item.elite[0]+=spawnItem.elite[0];
+                        item.elite[1]+=spawnItem.elite[1];
+                        item.elite[2]+=spawnItem.elite[2];
+                        item.normal[0]+=spawnItem.normal[0];
+                        item.normal[1]+=spawnItem.normal[1];
+                        item.normal[2]+=spawnItem.normal[2];
+                      }else {
+                        roomMonsterData.add(spawnItem);
+                      }
+                    }
+
+                    if(!existed) {
+                      roomMonsterData.addAll(spawnSection.monsterStandees!);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    initMessage = GameMethods.autoAddStandees(roomMonsterData, initMessage);
+
+    if (!section) {
+      _gameState._scenarioSpecialRules = specialRules;
+
+      //todo: create a gamestate set scenario method to handle all these
+      GameMethods.updateElements();
+      GameMethods.updateElements(); //twice to make sure they are inert.
+      GameMethods.setRoundState(RoundState.chooseInitiative);
+      GameMethods.sortCharactersFirst();
+      _gameState._scenario.value = scenario;
+      _gameState._scenarioSectionsAdded = [];
+    }else {
+      //remove earlier times if has "ResetRound"
+      if(specialRules.firstWhereOrNull((element) => element.type == "ResetRound") != null) {
+        _gameState._scenarioSpecialRules.removeWhere((oldItem) {
+          if(oldItem.type == "Timer") {
+            return true;
+          }
+          return false;
+        });
+      }
+
+      //overwrite earlier timers with same time.
+      for (var item in specialRules) {
+        if(item.type == "Timer") {
+          _gameState._scenarioSpecialRules.removeWhere((oldItem) {
+            if(oldItem.type == "Timer" && item.startOfRound == oldItem.startOfRound) {
+              if(item.list.contains(-1) || oldItem.list.contains(-1)) {
+                return true;
+              }
+              var set2 = oldItem.list.toSet();
+              return item.list.any(set2.contains);
+            }
+            return false;
+          });
+        }
+      }
+      _gameState._scenarioSpecialRules.addAll(specialRules);
+      _gameState._scenarioSectionsAdded.add(scenario);
+    }
+
+    _gameState.updateList.value++;
+
+    if (!section) {
+      MainList.scrollToTop();
+    }
+
+    //show init message if exists:
+    if(initMessage.isNotEmpty && getIt<Settings>().showReminders.value == true) {
+      _gameState._toastMessage.value += initMessage;
+    } else {
+      ScaffoldMessenger.of(getIt<BuildContext>()).hideCurrentSnackBar();
+    }
+  }
+
+  static void removeCharacters(List<Character> characters) {
+    List<ListItemData> newList = [];
+    for (var item in _gameState.currentList) {
+      if (item is Character) {
+        bool remove = false;
+        for (var name in characters) {
+          if (item.characterState.display.value == name.characterState.display.value) {
+            remove = true;
+            break;
+          }
+        }
+        if (!remove) {
+          newList.add(item);
+        }
+      } else {
+        newList.add(item);
+      }
+    }
+    _gameState._currentList = newList;
+    GameMethods.updateForSpecialRules();
+    _gameState.updateList.value++;
+  }
+
+  static void removeMonsters(List<Monster> items) {
+    List<String> deckIds = [];
+    List<ListItemData> newList = [];
+    for (var item in _gameState.currentList) {
+      if (item is Monster) {
+        bool remove = false;
+        for(var name in items) {
+          if (item.id == name.id) {
+            remove = true;
+            deckIds.add(item.type.deck);
+          }
+        }
+        if (!remove) {
+          newList.add(item);
+        }
+      } else {
+        newList.add(item);
+      }
+    }
+
+
+    _gameState._currentList = newList;
+
+    for (var deck in deckIds) {
+      bool removeDeck = true;
+      for(var item in _gameState.currentList) {
+        if (item is Monster){
+          if(item.type.deck == deck){
+            removeDeck = false;
+          }
+        }
+      }
+
+      if(removeDeck) {
+        for (var item in _gameState.currentAbilityDecks) {
+          if(item.name == deck) {
+            _gameState._currentAbilityDecks.remove(item);
+            break;
+          }
+        }
+      }
+    }
+
+    _gameState.updateList.value++;
+  }
+
+  static void reorderMainList(int newIndex, int oldIndex) {
+    _gameState._currentList.insert(newIndex,
+        _gameState._currentList.removeAt(oldIndex));
+  }
+
+  static void addToMainList(int? index, ListItemData item) {
+    List<ListItemData> newList = [];
+    for (var item in _gameState.currentList) {
+      newList.add(item);
+    }
+    if(index != null) {
+      newList.insert(index, item);
+    } else {
+      newList.add(item);
+    }
+    _gameState._currentList = newList;
+  }
+
+  static void setToastMessage(String message) {
+    _gameState._toastMessage.value = message;
+  }
+
+  static void setSolo(bool solo) {
+    _gameState._solo.value = solo;
   }
 
   static void shuffleDecksIfNeeded() {
@@ -575,7 +909,7 @@ class GameMethods {
       if(alliedMonsters.contains(monster)){
         isAlly = true;
       }
-      _gameState.currentList.add(GameMethods.createMonster(
+      _gameState._currentList.add(GameMethods.createMonster(
           monster, (_gameState.level.value + levelAdjust).clamp(0, 7), isAlly)!);
     }
   }
@@ -585,7 +919,7 @@ class GameMethods {
     int characterIndex = GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
     for (int i = 0; i < roomMonsterData.length; i++) {
       var roomMonsters = roomMonsterData[i];
-      addMonster(roomMonsters.name, _gameState.scenarioSpecialRules);
+      addMonster(roomMonsters.name, _gameState._scenarioSpecialRules);
     }
     if(getIt<Settings>().noStandees.value != true && getIt<Settings>().autoAddStandees.value != false) {
       if (getIt<Settings>().randomStandees.value == true) {
@@ -1007,5 +1341,32 @@ class GameMethods {
     }
 
     return null;
+  }
+
+  static void setRound(int round) {
+    _gameState._round.value = round;
+  }
+
+  static void setCampaign(String campaign) {
+    _gameState._currentCampaign.value = campaign;
+  }
+
+  static void imbueElement(Elements element, bool half) {
+    _gameState._elementState[element] = ElementState.full;
+    if (half) {
+      _gameState._elementState[element] = ElementState.half;
+    }
+  }
+
+  static void useElement(Elements element) {
+    _gameState._elementState[element] = ElementState.inert;
+  }
+
+  static void unlockClass(String name) {
+    _gameState._unlockedClasses.add(name);
+  }
+
+  static void clearUnlockedClasses() {
+    getIt<GameState>()._unlockedClasses = {};
   }
 }

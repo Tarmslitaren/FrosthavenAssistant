@@ -6,7 +6,6 @@ import '../../Layout/main_list.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../enums.dart';
-import '../game_methods.dart';
 import '../settings.dart';
 import '../state/character.dart';
 import '../state/game_state.dart';
@@ -56,7 +55,7 @@ class NextRoundCommand extends Command {
     GameMethods.clearTurnState(false);
     GameMethods.sortCharactersFirst();
 
-    _gameState.toastMessage.value = "";
+    GameMethods.setToastMessage("");
 
     for (var rule in _gameState.scenarioSpecialRules) {
       if (rule.type == "Timer" && rule.startOfRound == false) {
@@ -64,7 +63,7 @@ class NextRoundCommand extends Command {
           //minus 1 means always
           if (round == _gameState.round.value || round == -1) {
             if(getIt<Settings>().showReminders.value == true) {
-              _gameState.toastMessage.value = rule.note;
+              GameMethods.setToastMessage(rule.note);
             }
 
             _handleTimedSpawns(rule);
@@ -80,10 +79,10 @@ class NextRoundCommand extends Command {
           //minus 1 means always
           if (round - 1 == _gameState.round.value || round == -1) {
             if (_gameState.toastMessage.value.isNotEmpty) {
-              _gameState.toastMessage.value += "\n\n${rule.note}";
+              GameMethods.setToastMessage("${_gameState.toastMessage.value}\n\n${rule.note}");
             } else {
               if(getIt<Settings>().showReminders.value == true) {
-                _gameState.toastMessage.value += rule.note;
+                GameMethods.setToastMessage("${_gameState.toastMessage.value}${rule.note}");
               }
             }
             _handleTimedSpawns(rule);
@@ -92,9 +91,7 @@ class NextRoundCommand extends Command {
       }
     }
 
-
-
-    _gameState.round.value++;
+    GameMethods.setRound(_gameState.round.value + 1);
 
     Future.delayed(const Duration(milliseconds: 600), () {
         _gameState.updateList.value++;

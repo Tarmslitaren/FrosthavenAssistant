@@ -9,7 +9,6 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/enums.dart';
-import '../Resource/game_methods.dart';
 import '../Resource/state/monster.dart';
 import '../Resource/ui_utils.dart';
 import '../Resource/line_builder/line_builder.dart';

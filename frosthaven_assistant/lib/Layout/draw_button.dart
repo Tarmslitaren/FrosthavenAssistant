@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../Resource/commands/draw_command.dart';
 import '../Resource/commands/next_round_command.dart';
 import '../Resource/enums.dart';
-import '../Resource/game_methods.dart';
 import '../Resource/state/game_state.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';

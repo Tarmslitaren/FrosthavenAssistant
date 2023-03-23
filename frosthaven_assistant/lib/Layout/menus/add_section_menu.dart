@@ -4,7 +4,6 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/set_scenario_command.dart';
-import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
@@ -33,7 +32,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
 
   void setCampaign(String campaign) {
     //TODO:clear search
-    _gameState.currentCampaign.value = campaign;
+    GameMethods.setCampaign(campaign);
     _foundScenarios = _gameState
         .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
         .toList();

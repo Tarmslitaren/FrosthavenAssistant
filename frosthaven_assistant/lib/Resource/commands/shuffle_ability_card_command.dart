@@ -1,5 +1,6 @@
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
+
 import '../action_handler.dart';
+import '../state/game_state.dart';
 import '../state/monster.dart';
 import '../state/monster_ability_state.dart';
 

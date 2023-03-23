@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/counter_button.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_max_health_command.dart';
 import '../../Resource/commands/set_level_command.dart';
-import '../../Resource/game_methods.dart';
 import '../../Resource/state/character_state.dart';
 import '../../Resource/state/figure_state.dart';
 import '../../Resource/state/game_state.dart';
@@ -257,7 +256,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                                               ? Colors.white
                                               : Colors.black),
                                       onChanged: (bool? newValue) {
-                                        _gameState.solo.value = newValue!;
+                                        GameMethods.setSolo(newValue!);
                                       },
                                       value: _gameState.solo.value,
                                     );

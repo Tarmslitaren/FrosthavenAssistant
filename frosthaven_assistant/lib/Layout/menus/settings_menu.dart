@@ -338,7 +338,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       const Text("Clear unlocked characters"),
                                   onTap: () {
                                     setState(() {
-                                      getIt<GameState>().unlockedClasses = {};
+                                      GameMethods.clearUnlockedClasses();
                                     });
                                   }),
                               const Text("Connect devices on local wifi:"),

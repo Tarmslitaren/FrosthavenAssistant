@@ -1,21 +1,45 @@
+library game_state;
+import 'package:built_collection/built_collection.dart';
 import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
 
+import '../../Layout/main_list.dart';
 import '../../Model/campaign.dart';
 import '../../Model/room.dart';
 import '../../Model/scenario.dart';
 import '../action_handler.dart';
 import '../enums.dart';
-import 'game_save_state.dart';
 import 'list_item_data.dart';
 import 'loot_deck_state.dart';
 import 'modifier_deck_state.dart';
 import 'monster_ability_state.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../Model/MonsterAbility.dart';
+import '../../services/service_locator.dart';
+import 'character.dart';
+import 'monster.dart';
+
+import 'dart:math';
+import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
+import 'package:frosthaven_assistant/Resource/state/character_state.dart';
+import 'package:frosthaven_assistant/Resource/state/figure_state.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/Resource/state/monster_instance.dart';
+import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+import '../../Layout/menus/auto_add_standee_menu.dart';
+import '../../Model/character_class.dart';
+import '../../Model/monster.dart';
+import '../commands/add_standee_command.dart';
+
+part "game_save_state.dart";
+part "../game_methods.dart";
 
 class GameState extends ActionHandler {
   //TODO: put action handler in own place
@@ -25,12 +49,12 @@ class GameState extends ActionHandler {
   }
 
   void init() {
-    elementState.value[Elements.fire] = ElementState.inert;
-    elementState.value[Elements.ice] = ElementState.inert;
-    elementState.value[Elements.air] = ElementState.inert;
-    elementState.value[Elements.earth] = ElementState.inert;
-    elementState.value[Elements.light] = ElementState.inert;
-    elementState.value[Elements.dark] = ElementState.inert;
+    _elementState[Elements.fire] = ElementState.inert;
+    _elementState[Elements.ice] = ElementState.inert;
+    _elementState[Elements.air] = ElementState.inert;
+    _elementState[Elements.earth] = ElementState.inert;
+    _elementState[Elements.light] = ElementState.inert;
+    _elementState[Elements.dark] = ElementState.inert;
 
     initGame();
   }
@@ -78,7 +102,9 @@ class GameState extends ActionHandler {
       final data = await json.decode(response);
       return EditionRoomsModel.fromJson(data);
     } catch (error) {
-      print(error.toString());
+      if (kDebugMode) {
+        print(error.toString());
+      }
       return null;
     }
   }
@@ -92,68 +118,88 @@ class GameState extends ActionHandler {
     map[campaign] = CampaignModel.fromJson(data, roomsData);
   }
 
+  //data todo: move out of here
   List<String> editions = [];
-
-  //data
   final modelData = ValueNotifier<Map<String, CampaignModel>>({});
   List<SummonModel> itemSummonData = [];
-
-  //state
-  final currentCampaign = ValueNotifier<String>("Jaws of the Lion");
-  final round = ValueNotifier<int>(1);
-  final roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
 
   //TODO: ugly hacks to delay list update (doesn't need to be here though)
   final updateList = ValueNotifier<int>(0);
   final killMonsterStandee = ValueNotifier<int>(-1);
   final updateForUndo = ValueNotifier<int>(0);
 
-  final level = ValueNotifier<int>(1);
-  final solo = ValueNotifier<bool>(false);
-  final scenario = ValueNotifier<String>("");
-  List<String> scenarioSectionsAdded = [];
-  List<SpecialRule> scenarioSpecialRules =
-      []; //has both monsters and characters
-  late LootDeck lootDeck = LootDeck.empty(); //loot deck for current scenario
-  final toastMessage = ValueNotifier<String>("");
+  //state
+  ValueListenable<String> get currentCampaign => _currentCampaign;
+  final _currentCampaign = ValueNotifier<String>("Jaws of the Lion");
 
-  List<ListItemData> currentList = []; //has both monsters and characters
+  ValueListenable<int> get round => _round;
+  final _round = ValueNotifier<int>(1);
 
-  List<MonsterAbilityState> currentAbilityDecks =
+  ValueListenable<RoundState> get roundState => _roundState;
+  final _roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
+
+  ValueListenable<int> get level => _level;
+  final _level = ValueNotifier<int>(1);
+  ValueListenable<bool> get solo => _solo;
+  final _solo = ValueNotifier<bool>(false);
+  ValueListenable<String> get scenario => _scenario;
+  final _scenario = ValueNotifier<String>("");
+
+  BuiltList<String> get scenarioSectionsAdded => BuiltList.of(_scenarioSectionsAdded);
+  List<String> _scenarioSectionsAdded = [];
+
+  BuiltList<SpecialRule> get scenarioSpecialRules => BuiltList.of(_scenarioSpecialRules);
+  List<SpecialRule> _scenarioSpecialRules = []; //has both monsters and characters
+
+  LootDeck get lootDeck => _lootDeck; //todo: still mutable
+  late LootDeck _lootDeck = LootDeck.empty(); //loot deck for current scenario
+
+  ValueListenable<String> get toastMessage => _toastMessage;
+  final _toastMessage = ValueNotifier<String>("");
+
+  BuiltList<ListItemData> get currentList => BuiltList.of(_currentList);
+  List<ListItemData> _currentList = []; //has both monsters and characters
+
+  BuiltList<MonsterAbilityState> get currentAbilityDecks => BuiltList.of(_currentAbilityDecks);
+  List<MonsterAbilityState> _currentAbilityDecks =
       <MonsterAbilityState>[]; //add to here when adding a monster type
 
   //elements
-  final elementState = ValueNotifier<Map<Elements, ElementState>>(HashMap());
+  BuiltMap<Elements, ElementState> get elementState => BuiltMap.of(_elementState);
+  final Map<Elements, ElementState> _elementState = HashMap();
 
   //modifierDeck
-  ModifierDeck modifierDeck = ModifierDeck("");
-  ModifierDeck modifierDeckAllies = ModifierDeck("Allies");
+  ModifierDeck get modifierDeck => _modifierDeck; //todo: still mutable
+  ModifierDeck _modifierDeck = ModifierDeck("");
+  ModifierDeck get modifierDeckAllies => _modifierDeckAllies; //todo: still mutable
+  ModifierDeck _modifierDeckAllies = ModifierDeck("Allies");
 
   //unlocked characters
-  Set<String> unlockedClasses = {};
+  BuiltSet<String> get unlockedClasses => BuiltSet.of(_unlockedClasses);
+  Set<String> _unlockedClasses = {};
 
   @override
   String toString() {
     Map<String, int> elements = {};
-    for (var key in elementState.value.keys) {
-      elements[key.index.toString()] = elementState.value[key]!.index;
+    for (var key in elementState.keys) {
+      elements[key.index.toString()] = elementState[key]!.index;
     }
 
     return '{'
-        '"level": ${level.value}, '
-        '"solo": ${solo.value}, '
-        '"roundState": ${roundState.value.index}, '
-        '"round": ${round.value}, '
-        '"scenario": "${scenario.value}", '
-        '"toastMessage": ${jsonEncode(toastMessage.value)}, '
-        '"scenarioSpecialRules": ${scenarioSpecialRules.toString()}, '
-        '"scenarioSectionsAdded": ${json.encode(scenarioSectionsAdded)}, '
-        '"currentCampaign": "${currentCampaign.value}", '
-        '"currentList": ${currentList.toString()}, '
-        '"currentAbilityDecks": ${currentAbilityDecks.toString()}, '
-        '"modifierDeck": ${modifierDeck.toString()}, '
-        '"modifierDeckAllies": ${modifierDeckAllies.toString()}, '
-        '"lootDeck": ${lootDeck.toString()}, ' //does this work if null?
+        '"level": ${_level.value}, '
+        '"solo": ${_solo.value}, '
+        '"roundState": ${_roundState.value.index}, '
+        '"round": ${_round.value}, '
+        '"scenario": "${_scenario.value}", '
+        '"toastMessage": ${jsonEncode(_toastMessage.value)}, '
+        '"scenarioSpecialRules": ${_scenarioSpecialRules.toString()}, '
+        '"scenarioSectionsAdded": ${json.encode(_scenarioSectionsAdded)}, '
+        '"currentCampaign": "${_currentCampaign.value}", '
+        '"currentList": ${_currentList.toString()}, '
+        '"currentAbilityDecks": ${_currentAbilityDecks.toString()}, '
+        '"modifierDeck": ${_modifierDeck.toString()}, '
+        '"modifierDeckAllies": ${_modifierDeckAllies.toString()}, '
+        '"lootDeck": ${_lootDeck.toString()}, ' //does this work if null?
         '"unlockedClasses": ${jsonEncode(unlockedClasses.toList())}, '
         '"elementState": ${json.encode(elements)} '
         '}';

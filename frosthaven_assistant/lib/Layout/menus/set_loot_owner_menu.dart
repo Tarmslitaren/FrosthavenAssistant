@@ -1,8 +1,6 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 import 'package:frosthaven_assistant/Resource/commands/set_loot_owner_command.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/loot_deck_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../Resource/state/character.dart';

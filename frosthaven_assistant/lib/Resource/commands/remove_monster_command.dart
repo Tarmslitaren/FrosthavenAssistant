@@ -13,49 +13,7 @@ class RemoveMonsterCommand extends Command {
 
   @override
   void execute() {
-    List<String> deckIds = [];
-    List<ListItemData> newList = [];
-    for (var item in _gameState.currentList) {
-      if (item is Monster) {
-        bool remove = false;
-        for(var name in names) {
-          if (item.id == name.id) {
-            remove = true;
-            deckIds.add(item.type.deck);
-          }
-        }
-        if (!remove) {
-          newList.add(item);
-        }
-      } else {
-        newList.add(item);
-      }
-    }
-
-
-    _gameState.currentList = newList;
-
-    for (var deck in deckIds) {
-    bool removeDeck = true;
-    for(var item in _gameState.currentList) {
-      if (item is Monster){
-        if(item.type.deck == deck){
-          removeDeck = false;
-        }
-      }
-    }
-
-    if(removeDeck) {
-      for (var item in _gameState.currentAbilityDecks) {
-        if(item.name == deck) {
-          _gameState.currentAbilityDecks.remove(item);
-          break;
-        }
-      }
-    }
-    }
-
-    _gameState.updateList.value++;
+    GameMethods.removeMonsters(names);
   }
 
   @override

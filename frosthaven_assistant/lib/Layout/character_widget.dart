@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_init_command.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 import '../Resource/color_matrices.dart';

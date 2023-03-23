@@ -1,6 +1,5 @@
 
 import '../../../services/service_locator.dart';
-import '../../game_methods.dart';
 import '../../state/figure_state.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
