@@ -18,7 +18,6 @@ import 'package:frosthaven_assistant/Resource/commands/set_loot_owner_command.da
 import 'package:frosthaven_assistant/Resource/commands/set_scenario_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/use_element_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/character.dart';
 import 'package:frosthaven_assistant/Resource/state/loot_deck_state.dart';
 import 'package:frosthaven_assistant/Resource/state/monster.dart';
@@ -74,7 +73,7 @@ class WebServer {
 
   Response _getStateHandler(Request request) {
     Map<String, int> elements = {};
-    var elementState = _gameState.elementState.value;
+    var elementState = _gameState.elementState;
     for (var key in elementState.keys) {
       int value = 0;
       switch (elementState[key]!) {
@@ -109,7 +108,7 @@ class WebServer {
       var scenario = info["scenario"];
       var campaign = info["campaign"] ?? "Frosthaven";
       print("$scenario / $campaign");
-      _gameState.currentCampaign.value = campaign;
+      GameMethods.setCampaign(campaign);
       _gameState.action(SetScenarioCommand(scenario, false));
       return Response.ok("");
     }
