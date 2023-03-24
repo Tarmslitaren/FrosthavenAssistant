@@ -6,6 +6,7 @@ import 'package:collection/collection.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_condition_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_health_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_xp_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/ice_wraith_change_form_command.dart';
@@ -48,6 +49,7 @@ class WebServer {
       ..post('/setScenario', _setScenarioHandler)
       ..post('/applyCondition', _applyConditionHandler)
       ..post('/changeHealth', _applyHealthChangeHandler)
+      ..post('/change', _applyChangeHandler)
       ..post('/setElement', _applySetElementHandler)
       ..post('/loot', _lootHandler);
 
@@ -228,6 +230,26 @@ class WebServer {
     var target = findTarget(name, nr);
     if (target != null) {
       _gameState.action(ChangeHealthCommand(change, target.id, target.ownerId));
+    }
+    return _getStateHandler(request);
+  }
+
+  Future<Response> _applyChangeHandler(Request request) async {
+    var data = Uri.decodeFull(await request.readAsString());
+    Map<String, dynamic> info = jsonDecode(data);
+    String name = info["target"] ?? "";
+    var nr = info["nr"] ?? 0;
+    var what = info["what"] ?? "";
+    var change = info["change"] ?? 0;
+    var target = findTarget(name, nr);
+    if (target != null) {
+      if (what == "hp" || what == "health") {
+        _gameState.action(
+            ChangeHealthCommand(change, target.id, target.ownerId));
+      } else if (what == "xp") {
+        _gameState.action(
+            ChangeXPCommand(change, target.id, target.ownerId));
+      }
     }
     return _getStateHandler(request);
   }
