@@ -3532,7 +3532,7 @@
         }
       ]
     },
-    "The Lady in White": {
+    "Lady in White": {
       "deck": "Ice Wraith",
       "gfx": "Ice Wraith",
       "hidden": true,
@@ -8179,7 +8179,7 @@
       "monsters": [ "Black Imp (FH)", "Burrowing Blade", "Lightning Eel", "Polar Bear" ],
       "lootDeck": {"coin":7,"lumber": 2,"metal":3,"hide": 4,"rockroot":2,"snowthistle":1, "treasure": 1}
     },
-    "#86 Lady in White": {
+    "#86 The Lady in White": {
       "monsters": [ "Black Imp (FH)", "Earth Demon (FH)", "Ice Wraith" ],
       "lootDeck": {"coin":10,"lumber": 4,"hide": 2,"axenut":1,"arrowvine":2, "flamefruit": 1},
       "special": [
