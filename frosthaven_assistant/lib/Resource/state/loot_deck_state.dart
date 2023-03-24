@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/scenario.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../../services/service_locator.dart';
@@ -400,40 +399,67 @@ class LootDeck {
     _initPools();
     shuffle();
     if (identifier == "hide") {
-      drawPile.getList().add(_getAvailableCards(hidePool)[0]);
-      addedCards[0]++;
+      var pool = _getAvailableCards(hidePool);
+      if(pool.isNotEmpty) {
+        drawPile.getList().add(pool[0]);
+        addedCards[0]++;
+      }
     }
     if (identifier == "lumber") {
-      drawPile.getList().add(_getAvailableCards(lumberPool)[1]);
-      addedCards[1]++;
+      var pool = _getAvailableCards(lumberPool);
+      if(pool.isNotEmpty) {
+        drawPile.getList().add(pool[0]);
+        addedCards[1]++;
+      }
     }
     if (identifier == "metal") {
-      drawPile.getList().add(_getAvailableCards(metalPool)[2]);
-      addedCards[2]++;
+      var pool = _getAvailableCards(metalPool);
+      if(pool.isNotEmpty) {
+        drawPile.getList().add(pool[0]);
+        addedCards[2]++;
+      }
     }
     if (identifier == "arrowvine") {
-      drawPile.getList().add(_getAvailableCards(arrowvinePool)[3]);
-      addedCards[3]++;
+      var pool = _getAvailableCards(arrowvinePool);
+      if(pool.isNotEmpty) {
+        drawPile.getList().add(pool[0]);
+        addedCards[3]++;
+      }
     }
     if (identifier == "axenut") {
-      drawPile.getList().add(_getAvailableCards(axenutPool)[4]);
-      addedCards[4]++;
+      var pool = _getAvailableCards(axenutPool);
+      if(pool.isNotEmpty) {
+        drawPile.getList().add(pool[0]);
+        addedCards[4]++;
+      }
     }
     if (identifier == "corpsecap") {
-      drawPile.getList().add(_getAvailableCards(corpsecapPool)[5]);
-      addedCards[5]++;
+      var pool = _getAvailableCards(corpsecapPool);
+      if(pool.isNotEmpty) {
+        drawPile.getList().add(pool[0]);
+        addedCards[5]++;
+      }
     }
     if (identifier == "flamefruit") {
-      drawPile.getList().add(_getAvailableCards(flamefruitPool)[6]);
-      addedCards[6]++;
+      var pool = _getAvailableCards(flamefruitPool);
+      if(pool.isNotEmpty) {
+        drawPile.getList().add(pool[0]);
+        addedCards[6]++;
+      }
     }
     if (identifier == "rockroot") {
-      drawPile.getList().add(_getAvailableCards(rockrootPool)[7]);
-      addedCards[7]++;
+      var pool = _getAvailableCards(rockrootPool);
+      if(pool.isNotEmpty) {
+        drawPile.getList().add(pool[0]);
+        addedCards[7]++;
+      }
     }
     if (identifier == "snowthistle") {
-      drawPile.getList().add(_getAvailableCards(snowthistlePool)[8]);
-      addedCards[8]++;
+      var pool = _getAvailableCards(snowthistlePool);
+      if(pool.isNotEmpty) {
+        drawPile.getList().add(pool[0]);
+        addedCards[8]++;
+      }
     }
     shuffle();
   }

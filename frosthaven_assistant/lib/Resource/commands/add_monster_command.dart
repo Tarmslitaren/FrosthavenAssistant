@@ -1,10 +1,7 @@
 
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
-import '../state/list_item_data.dart';
 import '../state/monster.dart';
 class AddMonsterCommand extends Command {
   final GameState _gameState = getIt<GameState>();
@@ -19,19 +16,13 @@ class AddMonsterCommand extends Command {
 
   @override
   void execute() {
-    //add new character on bottom of list
-    List<ListItemData> newList = [];
-    for (var item in _gameState.currentList) {
-      newList.add(item);
-    }
-    newList.add(monster);
-    _gameState.currentList = newList;
+    GameMethods.addToMainList(null, monster);
+
     _gameState.updateList.value++;
   }
 
   @override
   void undo() {
-    //_gameState.currentList.remove(monster);
     _gameState.updateList.value++;
   }
 

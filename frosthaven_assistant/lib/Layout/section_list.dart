@@ -23,9 +23,11 @@ class SectionListState extends State<SectionList> {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
       var item = inputList[index];
-      SectionButton value =
-          SectionButton(key: Key(item.name), data: item.name);
-      list.add(value);
+      if(!item.name.contains("spawn")) {
+        SectionButton value =
+        SectionButton(key: Key(item.name), data: item.name);
+        list.add(value);
+      }
     }
     return list;
   }

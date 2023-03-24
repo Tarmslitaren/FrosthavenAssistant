@@ -36,13 +36,13 @@ class AnimatedContainerButtonState extends State<ElementButton> {
 
   @override
   void dispose() {
-    _gameState.elementState.removeListener(elementListener);
+    //_gameState.elementState.removeListener(elementListener);
     super.dispose();
   }
 
   void elementListener() {
-    if (_gameState.elementState.value[widget.element] != null) {
-      ElementState state = _gameState.elementState.value[widget.element]!;
+    if (_gameState.elementState[widget.element] != null) {
+      ElementState state = _gameState.elementState[widget.element]!;
       if (state == ElementState.full) {
         if (mounted) {
           setState(() {
@@ -69,7 +69,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
             widget.borderWidth * settings.userScalingBars.value * 2));
 
     //to load save state
-    _gameState.elementState.addListener(elementListener);
+    //_gameState.elementState.addListener(elementListener);
   }
 
   void setHalf() {
@@ -108,36 +108,23 @@ class AnimatedContainerButtonState extends State<ElementButton> {
             splashColor: Colors.transparent,
             focusColor: Colors.transparent,
             highlightColor: Colors.transparent,
-            //behavior: HitTestBehavior.opaque,
 
             onLongPress: () {
               setState(() {
-                _gameState.elementState.value
-                    .update(widget.element, (value) => ElementState.half);
                 _gameState.action(ImbueElementCommand(widget.element, true));
-                // setHalf();
               });
             },
             onTapDown: (TapDownDetails details) {
               setState(() {
-                if (_gameState.elementState.value[widget.element] !=
-                    ElementState.inert) {
-                  _gameState.elementState.value
-                      .update(widget.element, (value) => ElementState.inert);
-                } else {
-                  _gameState.elementState.value
-                      .update(widget.element, (value) => ElementState.full);
-                }
-                if (_gameState.elementState.value[widget.element] ==
+                if (_gameState.elementState[widget.element] ==
                     ElementState.half) {
-                  _gameState.action(ImbueElementCommand(widget.element, true));
-
-                  //setHalf();
-                } else if (_gameState.elementState.value[widget.element] ==
-                    ElementState.full) {
-                  _gameState.action(ImbueElementCommand(widget.element, false));
-                } else {
                   _gameState.action(UseElementCommand(widget.element));
+
+                } else if (_gameState.elementState[widget.element] ==
+                    ElementState.full) {
+                  _gameState.action(UseElementCommand(widget.element));
+                } else {
+                  _gameState.action(ImbueElementCommand(widget.element, false));
                 }
               });
             },
@@ -152,15 +139,15 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                       child: ValueListenableBuilder<int>(
                           valueListenable: _gameState.commandIndex,
                           builder: (context, value, child) {
-                            if (_gameState.elementState.value[widget.element] ==
+                            if (_gameState.elementState[widget.element] ==
                                 ElementState.inert) {
                               setInert();
                             } else if (_gameState
-                                    .elementState.value[widget.element] ==
+                                    .elementState[widget.element] ==
                                 ElementState.half) {
                               setHalf();
                             } else if (_gameState
-                                    .elementState.value[widget.element] ==
+                                    .elementState[widget.element] ==
                                 ElementState.full) {
                               setFull();
                             }
@@ -182,7 +169,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                                     borderRadius: _borderRadius,
                                     boxShadow: [
                                       _gameState.elementState
-                                                  .value[widget.element] !=
+                                                  [widget.element] !=
                                               ElementState.inert
                                           ? BoxShadow(
                                               //blurStyle: BlurStyle.solid,
@@ -210,7 +197,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                         color = Colors.black;
                       }
                       if (ElementState.inert !=
-                          _gameState.elementState.value[widget.element]) {
+                          _gameState.elementState[widget.element]) {
                         color = null;
                       }
 

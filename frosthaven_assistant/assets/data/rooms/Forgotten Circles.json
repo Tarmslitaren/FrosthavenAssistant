@@ -99,6 +99,30 @@
           ]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Frost Demon": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Flame Demon": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Earth Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
     }
   ],
   "97": [
@@ -781,6 +805,30 @@
           ]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Night Demon": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Night Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Night Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
     }
   ],
   "102": [],
@@ -835,6 +883,38 @@
             0,
             1
           ]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Lurker": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Sun Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Spitting Drake": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Harrower Infester": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
         }
       }
     }

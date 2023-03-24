@@ -10,9 +10,7 @@ class ReorderListCommand extends Command {
 
   @override
   void execute() {
-    GameState gameState = getIt<GameState>();
-    gameState.currentList.insert(newIndex,
-        gameState.currentList.removeAt(oldIndex));
+    GameMethods.reorderMainList(newIndex, oldIndex);
   }
 
   @override

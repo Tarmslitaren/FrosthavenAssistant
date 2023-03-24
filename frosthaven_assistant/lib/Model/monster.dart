@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 
+@immutable
 class MonsterModel {
-  MonsterModel(this.name, this.display, this.gfx, this.hidden, this.flying,
+  const MonsterModel(this.name, this.display, this.gfx, this.hidden, this.flying,
     this.deck,
     this.count,
       this.levels,
@@ -66,12 +67,13 @@ class MonsterModel {
   }
 }
 
+@immutable
 class MonsterLevelModel {
-  MonsterLevelModel(this.level, this.normal, this.elite, this.boss);
+  const MonsterLevelModel(this.level, this.normal, this.elite, this.boss);
   final int level;
-  MonsterStatsModel? normal;
-  MonsterStatsModel? elite;
-  MonsterStatsModel? boss;
+  final MonsterStatsModel? normal;
+  final MonsterStatsModel? elite;
+  final MonsterStatsModel? boss;
 
   factory MonsterLevelModel.fromJson(Map<String, dynamic> data) {
     // note the explicit cast to String
@@ -91,8 +93,9 @@ class MonsterLevelModel {
   }
 }
 
+@immutable
 class MonsterStatsModel {
-  MonsterStatsModel(this.health, this.move, this.attack, this.range, this.attributes, this.immunities, this.special1, this.special2);
+  const MonsterStatsModel(this.health, this.move, this.attack, this.range, this.attributes, this.immunities, this.special1, this.special2);
   final dynamic health;
   final dynamic move;
   final dynamic attack;

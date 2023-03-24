@@ -35,6 +35,7 @@ class Settings {
   final showSectionsInMainView = ValueNotifier<bool>(true);
   final showReminders = ValueNotifier<bool>(true);
   final autoAddStandees = ValueNotifier<bool>(true);
+  final autoAddSpawns = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -240,6 +241,10 @@ class Settings {
         autoAddStandees.value = data["autoAddStandees"];
       }
 
+      if (data["autoAddSpawns"] != null) {
+        autoAddSpawns.value = data["autoAddSpawns"];
+      }
+
       if (data["connectClientOnStartup"] != null &&
           data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
@@ -293,6 +298,7 @@ class Settings {
         '"showSectionsInMainView": ${showSectionsInMainView.value}, '
         '"showReminders": ${showReminders.value}, '
         '"autoAddStandees": ${autoAddStandees.value}, '
+        '"autoAddSpawns": ${autoAddSpawns.value}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort", '

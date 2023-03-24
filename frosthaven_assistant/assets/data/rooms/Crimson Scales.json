@@ -995,6 +995,18 @@
           ]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Inox Guard": {
+          "normal": [2, 3, 4],
+          "elite": [0, 0, 0]
+        },
+        "Inox Archer": {
+          "normal": [2, 3, 4],
+          "elite": [0, 0, 0]
+        }
+      }
     }
   ],
   "12": [
@@ -1329,6 +1341,106 @@
             3,
             4
           ]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Hound": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Cave Bear": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Giant Viper": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        },
+        "Rending Drake": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Hound": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        },
+        "Lurker": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 5": {
+        "Cave Bear": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Giant Viper": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 6": {
+        "Rending Drake": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Lurker": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 7": {
+        "Cave Bear": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Hound": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 8": {
+        "Rending Drake": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Giant Viper": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 9": {
+        "Hound": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        },
+        "Lurker": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
         }
       }
     }
@@ -5156,6 +5268,22 @@
           ]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Spitting Drake": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Spitting Drake": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
     }
   ],
   "53": [
@@ -6332,6 +6460,46 @@
           ]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Bandit Guard": {
+          "normal": [2, 3, 4],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Bandit Archer": {
+          "normal": [2, 3, 4],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Hound": {
+          "normal": [2, 3, 4],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Wind Demon": {
+          "normal": [2, 3, 4],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 5": {
+        "Frost Demon": {
+          "normal": [2, 3, 4],
+          "elite": [0, 0, 0]
+        }
+      }
     }
   ],
   "AA2": [
@@ -6506,6 +6674,38 @@
             0,
             1
           ]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Flame Demon": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Sun Demon": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 3": {
+        "Night Demon": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 4": {
+        "Wind Demon": {
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -7344,6 +7544,22 @@
           "elite": [
             1,
             2,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "4": {
+        "Ravenous Gharial": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
             2
           ]
         }

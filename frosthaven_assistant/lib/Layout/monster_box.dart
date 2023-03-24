@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Layout/health_wheel_controller.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/color_matrices.dart';

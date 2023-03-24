@@ -1,8 +1,5 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/Resource/state/loot_deck_state.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/state/character.dart';
 import '../../services/service_locator.dart';

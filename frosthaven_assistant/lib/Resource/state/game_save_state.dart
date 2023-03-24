@@ -1,19 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../Model/MonsterAbility.dart';
-import '../../Model/scenario.dart';
-import '../../services/service_locator.dart';
-import '../enums.dart';
-import 'character.dart';
-import 'game_state.dart';
-import 'list_item_data.dart';
-import 'loot_deck_state.dart';
-import 'modifier_deck_state.dart';
-import 'monster.dart';
-import 'monster_ability_state.dart';
+part of game_state;
 
 class GameSaveState {
   String getState() {
@@ -29,8 +14,7 @@ class GameSaveState {
   void loadLootDeck(var data) {
     var lootDeckData = data["lootDeck"];
     LootDeck state = LootDeck.fromJson(lootDeckData);
-    //LootDeck.empty();
-    getIt<GameState>().lootDeck = state;
+    getIt<GameState>()._lootDeck = state;
   }
 
   void loadModifierDeck(String identifier, var data) {
@@ -100,9 +84,9 @@ class GameSaveState {
     }
 
     if (identifier == 'modifierDeck') {
-      getIt<GameState>().modifierDeck = state;
+      getIt<GameState>()._modifierDeck = state;
     } else {
-      getIt<GameState>().modifierDeckAllies = state;
+      getIt<GameState>()._modifierDeckAllies = state;
     }
   }
 
@@ -112,37 +96,37 @@ class GameSaveState {
       try {
         var data = json.decode(_savedState!) as Map<String, dynamic>;
 
-        gameState.level.value = data['level'] as int;
-        gameState.scenario.value = data['scenario']; // as String;
+        gameState._level.value = data['level'] as int;
+        gameState._scenario.value = data['scenario']; // as String;
         if (data.containsKey('toastMessage')) {
-          gameState.toastMessage.value = data['toastMessage']; // as String;
+          gameState._toastMessage.value = data['toastMessage']; // as String;
         }
 
         if (data.containsKey('scenarioSectionsAdded')) {
           List<dynamic> scenarioSectionsAdded = data['scenarioSectionsAdded'] as List;
-          gameState.scenarioSectionsAdded.clear();
+          gameState._scenarioSectionsAdded.clear();
           for(var item in scenarioSectionsAdded) {
-            gameState.scenarioSectionsAdded.add(item);
+            gameState._scenarioSectionsAdded.add(item);
           }
         }
 
         if (data.containsKey('scenarioSpecialRules')) {
           var scenarioSpecialRulesList = data['scenarioSpecialRules'] as List;
-          gameState.scenarioSpecialRules.clear();
+          gameState._scenarioSpecialRules.clear();
           for (Map<String, dynamic> item in scenarioSpecialRulesList) {
-            gameState.scenarioSpecialRules.add(SpecialRule.fromJson(item));
+            gameState._scenarioSpecialRules.add(SpecialRule.fromJson(item));
           }
         }
-        gameState.currentCampaign.value = data['currentCampaign'];
+        gameState._currentCampaign.value = data['currentCampaign'];
         //TODO: currentCampaign does not update properly (because changing it is not a command)
-        gameState.round.value = data['round'] as int;
-        gameState.roundState.value = RoundState.values[data['roundState']];
-        gameState.solo.value = data['solo']
+        gameState._round.value = data['round'] as int;
+        gameState._roundState.value = RoundState.values[data['roundState']];
+        gameState._solo.value = data['solo']
             as bool; //TODO: does not update properly (because changing it is not a command)
 
         //main list
         var list = data['currentList'] as List;
-        gameState.currentList.clear();
+        gameState._currentList.clear();
         List<ListItemData> newList = [];
         for (Map<String, dynamic> item in list) {
           if (item["characterClass"] != null) {
@@ -155,17 +139,17 @@ class GameSaveState {
             newList.add(monster);
           }
         }
-        gameState.currentList = newList;
+        gameState._currentList = newList;
 
         var unlockedClassesList = data['unlockedClasses'] as List;
-        gameState.unlockedClasses.clear();
+        gameState._unlockedClasses.clear();
         for (String item in unlockedClassesList) {
-          gameState.unlockedClasses.add(item);
+          gameState._unlockedClasses.add(item);
         }
 
         //ability decks
         var decks = data['currentAbilityDecks'] as List;
-        gameState.currentAbilityDecks.clear();
+        gameState._currentAbilityDecks.clear();
         for (Map<String, dynamic> item in decks) {
           MonsterAbilityState state = MonsterAbilityState(item["name"]);
 
@@ -198,7 +182,7 @@ class GameSaveState {
           state.discardPile.getList().clear();
           state.drawPile.setList(newDrawList);
           state.discardPile.setList(newDiscardList);
-          gameState.currentAbilityDecks.add(state);
+          gameState._currentAbilityDecks.add(state);
         }
 
         loadModifierDeck('modifierDeck', data);
@@ -207,20 +191,20 @@ class GameSaveState {
 
         //////elements
         Map elementData = data['elementState'];
-        Map<Elements, ElementState> newMap = {};
-        newMap[Elements.fire] =
+        //Map<Elements, ElementState> newMap = {};
+        gameState._elementState.clear();
+        gameState._elementState[Elements.fire] =
             ElementState.values[elementData[Elements.fire.index.toString()]];
-        newMap[Elements.ice] =
+        gameState._elementState[Elements.ice] =
             ElementState.values[elementData[Elements.ice.index.toString()]];
-        newMap[Elements.air] =
+        gameState._elementState[Elements.air] =
             ElementState.values[elementData[Elements.air.index.toString()]];
-        newMap[Elements.earth] =
+        gameState._elementState[Elements.earth] =
             ElementState.values[elementData[Elements.earth.index.toString()]];
-        newMap[Elements.light] =
+        gameState._elementState[Elements.light] =
             ElementState.values[elementData[Elements.light.index.toString()]];
-        newMap[Elements.dark] =
+        gameState._elementState[Elements.dark] =
             ElementState.values[elementData[Elements.dark.index.toString()]];
-        gameState.elementState.value = newMap;
       } catch (e) {
         if (kDebugMode) {
           print(e.toString());

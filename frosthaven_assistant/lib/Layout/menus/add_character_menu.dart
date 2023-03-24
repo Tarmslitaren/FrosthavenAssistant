@@ -4,7 +4,6 @@ import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart'
 import '../../Model/character_class.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_character_command.dart';
-import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/character.dart';
 import '../../Resource/state/game_state.dart';

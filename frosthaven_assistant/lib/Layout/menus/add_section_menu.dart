@@ -4,7 +4,6 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/set_scenario_command.dart';
-import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
@@ -33,10 +32,11 @@ class AddSectionMenuState extends State<AddSectionMenu> {
 
   void setCampaign(String campaign) {
     //TODO:clear search
-    _gameState.currentCampaign.value = campaign;
+    GameMethods.setCampaign(campaign);
     _foundScenarios = _gameState
         .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
         .toList();
+    _foundScenarios = _foundScenarios.where((element) => !element.contains("spawn")).toList();
     _foundScenarios.sort((a, b) {
       int? aNr = GameMethods.findNrFromScenarioName(a);
       int? bNr = GameMethods.findNrFromScenarioName(b);
@@ -55,6 +55,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
       results = _gameState
           .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
           .toList();
+      results = results.where((element) => !element.contains("spawn")).toList();
     } else {
       results = _gameState
           .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
@@ -62,6 +63,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
+      results = results.where((element) => !element.contains("spawn")).toList();
       results.sort((a, b) {
         int? aNr = GameMethods.findNrFromScenarioName(a);
         int? bNr = GameMethods.findNrFromScenarioName(b);

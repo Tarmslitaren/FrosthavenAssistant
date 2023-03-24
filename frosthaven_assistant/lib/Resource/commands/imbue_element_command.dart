@@ -13,10 +13,7 @@ class ImbueElementCommand extends Command {
 
   @override
   void execute() {
-    _gameState.elementState.value[element] = ElementState.full;
-    if (half) {
-      _gameState.elementState.value[element] = ElementState.half;
-    }
+    GameMethods.imbueElement(element, half);
   }
 
   @override

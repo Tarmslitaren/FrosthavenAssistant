@@ -1,19 +1,17 @@
-//import 'dart:collection';
 import 'dart:collection';
 import 'dart:core';
 
 import 'package:collection/collection.dart';
+import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Model/room.dart';
 import 'package:frosthaven_assistant/Model/scenario.dart';
 
-import '../Resource/game_methods.dart';
-
-
+@immutable
 class CampaignModel {
-  CampaignModel({required this.edition, required this.monsterAbilities, required this.monsters, required this.characters, required this.scenarios});
+  const CampaignModel({required this.edition, required this.monsterAbilities, required this.monsters, required this.characters, required this.scenarios});
   final String edition;
   final List<MonsterAbilityDeckModel> monsterAbilities;
   final Map< String, MonsterModel> monsters;

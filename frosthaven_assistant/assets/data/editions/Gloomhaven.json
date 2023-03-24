@@ -4328,31 +4328,36 @@
             "type": "Timer",
             "list": [1],
             "startOfRound": false,
-            "note": "Spawn Night Demon on hex b"
+            "note": "Spawn Night Demon on hex B. It is elite for 4 characters.",
+            "name": "spawn 0"
           },
           {
             "type": "Timer",
             "list": [2],
             "startOfRound": false,
-            "note": "Spawn Wind Demon on hex c"
+            "note": "Spawn Wind Demon on hex C. It is elite for 3-4 characters.",
+            "name": "spawn 1"
           },
           {
             "type": "Timer",
             "list": [3,6,9],
             "startOfRound": false,
-            "note": "Frost Demon Spawns on hex d and Sun Demon Spawns on hex e"
+            "note": "Frost Demon Spawns on hex D and Sun Demon Spawns on hex E.",
+            "name": "spawn 2"
           },
           {
             "type": "Timer",
             "list": [4, 7],
             "startOfRound": false,
-            "note": "Earth Demon Spawns on hex b and Flame Demon Spawns on hex c"
+            "note": "Earth Demon Spawns on hex B and Flame Demon Spawns on hex C.",
+            "name": "spawn 3"
           },
           {
             "type": "Timer",
             "list": [5, 8],
             "startOfRound": false,
-            "note": "Night Demon Spawns on hex d and Wind Demon Spawns on hex e"
+            "note": "Night Demon Spawns on hex D and Wind Demon Spawns on hex E.",
+            "name": "spawn 4"
           },
           {
             "type": "Timer",
@@ -4414,13 +4419,52 @@
             "startOfRound": true,
             "note": "Dark strong, Light inert."
           }
-        ]
+        ],
+        "sections": {
+          "#L2a(1)": {
+            "special": [
+              {
+                "type": "ResetRound"
+              },
+              {
+                "type": "Timer",
+                "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29],
+                "startOfRound": false,
+                "note": "Summon Night Demon at B. It is elite for 4 characters.",
+                "name": "spawn 1"
+              },
+              {
+                "type": "Timer",
+                "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+                "startOfRound": false,
+                "note": "Summon Night Demon at C. It is elite for 3-4 characters.",
+                "name": "spawn 2"
+              }
+            ]
+          }
+        }
       },
       "#32 Decrepit Wood": {
         "monsters": [ "Harrower Infester", "Giant Viper", "Deep Terror", "Black Imp" ]
       },
       "#33 Savvas Armory": {
-        "monsters": [ "Savvas Icestorm", "Savvas Lavaflow", "Frost Demon", "Flame Demon", "Wind Demon", "Earth Demon" ]
+        "monsters": [ "Savvas Icestorm", "Savvas Lavaflow", "Frost Demon", "Flame Demon", "Wind Demon", "Earth Demon" ],
+        "sections": {
+          "#M1a(1)": {
+            "special": [
+              {
+                "type": "ResetRound"
+              },
+              {
+                "type": "Timer",
+                "list": [1],
+                "startOfRound": false,
+                "note": "Summon Savvas Lavaflow at D. It is elite for 3-4 characters.",
+                "name": "spawn 1"
+              }
+            ]
+          }
+        }
       },
       "#34 Scorched Summit": {
         "monsters": [ "Rending Drake", "Spitting Drake", "Elder Drake" ]
@@ -4451,55 +4495,64 @@
             "type": "Timer",
             "list": [1,5],
             "startOfRound": false,
-            "note": "Spawn Flame Demon at a. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage."
+            "note": "Spawn Flame Demon at a. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage.",
+            "name": "spawn 1"
           },
           {
             "type": "Timer",
             "list": [2,6],
             "startOfRound": false,
-            "note": "Spawn Earth Demon at b. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage."
+            "note": "Spawn Earth Demon at B. It is elite for 4 characters. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage.",
+            "name": "spawn 2"
           },
           {
             "type": "Timer",
             "list": [3,7],
             "startOfRound": false,
-            "note": "Spawn Frost Demon at c. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage."
+            "note": "Spawn Frost Demon at C. It is elite for 3-4 characters. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage.",
+            "name": "spawn 3"
           },
           {
             "type": "Timer",
             "list": [4],
             "startOfRound": false,
-            "note": "Spawn Wind Demon at d. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage."
+            "note": "Spawn Wind Demon at D. It is elite for 4 characters. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage.",
+            "name": "spawn 4"
           },
           {
             "type": "Timer",
             "list": [8],
             "startOfRound": false,
-            "note": "Spawn Wind Demon at d. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage. Door I is destroyed."
+            "note": "Spawn Wind Demon at D. It is elite for 4 characters. If door I is not destroyed: Prime Demon suffers (2xC)+L-2 damage. Door I is destroyed.",
+            "name": "spawn 4"
           },
           {
             "type": "Timer",
             "list": [9,13,17,21,25,29],
             "startOfRound": false,
-            "note": "Spawn Flame Demon at a"
+            "note": "Spawn Flame Demon at A. It is elite for 3-4 characters.",
+            "name": "spawn 1"
           },
           {
             "type": "Timer",
             "list": [10,14,18,22,26,30],
             "startOfRound": false,
-            "note": "Spawn Earth Demon at b"
+            "note": "Spawn Earth Demon at B. It is elite for 4 characters.",
+            "name": "spawn 2"
           },
           {
             "type": "Timer",
             "list": [11,15,19,23,27,31],
             "startOfRound": false,
-            "note": "Spawn Frost Demon at c"
+            "note": "Spawn Frost Demon at C. It is elite for 3-4 characters.",
+            "name": "spawn 3"
           },
           {
             "type": "Timer",
             "list": [12,16,20,24,28,32],
             "startOfRound": false,
-            "note": "Spawn Wind Demon at d"
+            "note": "Spawn Wind Demon at D. It is elite for 4 characters.",
+            "name": "spawn 4"
           }
         ]
       },
@@ -4794,7 +4847,8 @@
             "type": "Timer",
             "list": [-1],
             "startOfRound": true,
-            "note": "Living Bones Spawn."
+            "note": "Living Bones Spawn at A and B. A is elite for 3 characters and both elite for 4 characters.",
+            "name": "spawn 1"
           }
         ]
       },
@@ -4841,13 +4895,15 @@
             "type": "Timer",
             "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
             "startOfRound": false,
-            "note": "Spawn Living Spirits. At a for 2-3 characters. At both a and b for 4 characters."
+            "note": "Spawn Living Spirits. At A for 2-3 characters. At both A and B for 4 characters.",
+            "name": "spawn 1"
           },
           {
             "type": "Timer",
             "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
             "startOfRound": false,
-            "note": "Spawn Living Spirits. At b for 2 characters. At both a and b for 3-4 characters."
+            "note": "Spawn Living Spirits. At B for 2 characters. At both A and B for 3-4 characters.",
+            "name": "spawn 2"
           }
         ]
       },
@@ -5021,13 +5077,15 @@
             "type": "Timer",
             "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
             "startOfRound": true,
-            "note": "Spawn Vermling Scouts at c and d."
+            "note": "Spawn Vermling Scouts at C and D. Elite at C for 3 character or Both for 4 characters.",
+            "name": "spawn 1"
           },
           {
             "type": "Timer",
             "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
             "startOfRound": true,
-            "note": "Spawn Vermling Scouts at e and f."
+            "note": "Spawn Vermling Scouts at E and F. Elite at F for 3 character or Both for 4 characters.",
+            "name": "spawn 1"
           }
         ]
       },

@@ -1,5 +1,5 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../Model/room.dart';
 import '../../Resource/commands/add_standee_command.dart';
@@ -26,6 +26,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
 
   bool addAsSummon = false;
   int currentMonsterIndex = 0;
+  late final int startCommandIndex;
 
   List<int> initialEliteAdded = [];
   List<int> initialNormalAdded = [];
@@ -34,6 +35,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   initState() {
     // at the beginning, all items are shown
     super.initState();
+
+    startCommandIndex = _gameState.commandIndex.value;
 
     for (var data in widget.monsterData) {
       Monster monster = _gameState.currentList
@@ -54,14 +57,12 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
 
   void closeOrNext(int currentEliteAdded, int currentNormalAdded, int nrOfElite,
       int nrOfNormal) {
-    //if(currentEliteAdded == nrOfElite && currentNormalAdded == nrOfNormal) {
     if (currentMonsterIndex + 1 >= widget.monsterData.length) {
-      //close menu
-      Future.delayed(const Duration(milliseconds: 50), () {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.pop(context);
       });
     } else {
-      Future.delayed(const Duration(milliseconds: 50), () {
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         getIt<GameState>().updateList.value++;
       });
 
@@ -69,7 +70,6 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
       currentEliteAdded = 0;
       currentNormalAdded = 0;
     }
-    //}
   }
 
   Widget buildNrButton(
@@ -150,14 +150,17 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           } else {
             String figureId = GameMethods.getFigureIdFromNr(monster.id, nr);
             if (figureId.isNotEmpty) {
+              MonsterInstance state = GameMethods.getFigure(monster.id, figureId) as MonsterInstance;
               _gameState
                   .action(ChangeHealthCommand(-10000, figureId, monster.id));
 
-              if (elite) {
-                currentEliteAdded--;
-              } else {
-                currentNormalAdded--;
-              }
+              setState(() {
+                if (state.type == MonsterType.elite) { //this is not correct - could have added a normal and removed as elite.
+                  currentEliteAdded--;
+                } else {
+                  currentNormalAdded--;
+                }
+              });
             }
           }
         },
@@ -261,18 +264,49 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
 
     return ValueListenableBuilder<int>(
-        valueListenable: getIt<GameState>().updateList,
+        valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
+          //handle undo from other device - needs to be same index?
+          if (startCommandIndex > _gameState.commandIndex.value) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              Navigator.pop(context);
+            });
+            return Container(
+              child: TextButton(
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            );
+          }
           RoomMonsterData data = widget.monsterData[currentMonsterIndex];
-          Monster monster = _gameState.currentList
-              .firstWhere((element) => element.id == data.name) as Monster;
+          Monster? monster = _gameState.currentList
+              .firstWhereOrNull((element) => element.id == data.name) as Monster?;
+          if(monster == null) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              Navigator.pop(context);
+            });
+            return Container(
+              child: TextButton(
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+            );
+          }
 
           int nrOfElite = data.elite[characterIndex];
           int nrOfNormal = data.normal[characterIndex];
           //change depending on already added standees
           int preAddedMonsters = initialEliteAdded[currentMonsterIndex] +
               initialNormalAdded[
-                  currentMonsterIndex]; // monster.monsterInstances.value.length - currentNormalAdded - currentEliteAdded;
+                  currentMonsterIndex];
 
           int nrOfStandees = monster.type.count;
           int monstersLeft = nrOfStandees - preAddedMonsters;
@@ -345,52 +379,67 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
               child: ValueListenableBuilder<List<MonsterInstance>>(
                   valueListenable: monster.monsterInstances,
                   builder: (context, value, child) {
-                    return Column(
-                      children: [
-                        if (nrOfElite > 0)
-                          _buildButtonGrid(
-                              scale,
-                              monster,
-                              true,
-                              nrOfStandees,
-                              nrOfElite - currentEliteAdded,
-                              nrOfElite,
-                              nrOfNormal,
-                              currentEliteAdded,
-                              currentNormalAdded),
-                        if (nrOfNormal > 0)
-                          _buildButtonGrid(
-                              scale,
-                              monster,
-                              false,
-                              nrOfStandees,
-                              nrOfNormal - currentNormalAdded,
-                              nrOfElite,
-                              nrOfNormal,
-                              currentEliteAdded,
-                              currentNormalAdded),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Summoned:",
-                                  style: getSmallTextStyle(scale)),
-                              Checkbox(
-                                checkColor: Colors.black,
-                                activeColor: Colors.grey.shade200,
-                                side: BorderSide(
-                                    color: getIt<Settings>().darkMode.value
-                                        ? Colors.white
-                                        : Colors.black),
-                                onChanged: (bool? newValue) {
-                                  setState(() {
-                                    addAsSummon = newValue!;
-                                  });
-                                },
-                                value: addAsSummon,
-                              )
-                            ])
-                      ],
-                    );
+                    return Stack(children: [
+                      Column(
+                        children: [
+                          if (nrOfElite > 0)
+                            _buildButtonGrid(
+                                scale,
+                                monster,
+                                true,
+                                nrOfStandees,
+                                nrOfElite - currentEliteAdded,
+                                nrOfElite,
+                                nrOfNormal,
+                                currentEliteAdded,
+                                currentNormalAdded),
+                          if (nrOfNormal > 0)
+                            _buildButtonGrid(
+                                scale,
+                                monster,
+                                false,
+                                nrOfStandees,
+                                nrOfNormal - currentNormalAdded,
+                                nrOfElite,
+                                nrOfNormal,
+                                currentEliteAdded,
+                                currentNormalAdded),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Summoned:",
+                                    style: getSmallTextStyle(scale)),
+                                Checkbox(
+                                  checkColor: Colors.black,
+                                  activeColor: Colors.grey.shade200,
+                                  side: BorderSide(
+                                      color: getIt<Settings>().darkMode.value
+                                          ? Colors.white
+                                          : Colors.black),
+                                  onChanged: (bool? newValue) {
+                                    setState(() {
+                                      addAsSummon = newValue!;
+                                    });
+                                  },
+                                  value: addAsSummon,
+                                )
+                              ])
+                        ],
+                      ),
+                      Positioned(
+                          width: 100,
+                          height: 40,
+                          right: 0,
+                          bottom: 0,
+                          child: TextButton(
+                              child: const Text(
+                                'Close',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              })),
+                    ]);
                   }));
         });
   }

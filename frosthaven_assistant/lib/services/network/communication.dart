@@ -25,7 +25,7 @@ class Communication {
   void sendToAllExcept(Socket client, String data) {
     final sockets = _connection.getAll();
     final recipients = sockets.where((x) =>
-        x.remoteAddress != client.remoteAddress && x.port != client.port);
+        x.remoteAddress != client.remoteAddress);
     for (var socket in recipients) {
       sendTo(socket, data);
     }

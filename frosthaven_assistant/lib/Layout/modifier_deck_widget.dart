@@ -89,19 +89,34 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   static const int cardAnimationDuration = 1200;
 
+
   bool initAnimationEnabled() {
-    if(getIt<Settings>().client.value == ClientState.connected || getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0) {
-      String commandDescription = getIt<GameState>().commandDescriptions[getIt<GameState>().commandIndex.value];
-      //todo: also: missing info. need to check for updateForUndo
-      if(widget.name == "Allies") {
-        if(commandDescription.contains("allies modifier card")) {
-          return true;
-        }
-      } else {
-        if(commandDescription.contains("monster modifier card")) {
-          return true;
+    if(getIt<Settings>().client.value == ClientState.connected) {
+      return true;  //TODO: instead of looking at nonexistent commandDescriptions, look at last gameState
+    }
+
+    if(getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0) {
+
+      final int commandIndex = getIt<GameState>().commandIndex.value;
+      if(commandIndex < 0) {
+        return false;
+      }
+      if (getIt<GameState>()
+          .commandDescriptions.length > commandIndex) {
+        String commandDescription = getIt<GameState>()
+            .commandDescriptions[commandIndex];
+        //todo: also: missing info. need to check for updateForUndo
+        if(widget.name == "Allies") {
+          if(commandDescription.contains("allies modifier card")) {
+            return true;
+          }
+        } else {
+          if(commandDescription.contains("monster modifier card")) {
+            return true;
+          }
         }
       }
+
     }
     return false;
   }

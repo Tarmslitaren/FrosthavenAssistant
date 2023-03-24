@@ -2,7 +2,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/frosthaven_converter.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/stat_applier.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
@@ -344,7 +343,6 @@ class LineBuilder {
       Colors.blueGrey,
       alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
     ];
-    const int textAnimationDelay = 3500;
     const int animationSpeed = 3500;
 
     for (int i = 0; i < localStrings.length; i++) {

@@ -236,7 +236,7 @@ showToastSticky(BuildContext context, String text) {
   )).closed
       .then((value) {
         if(getIt<GameState>().toastMessage.value == text) {
-          getIt<GameState>().toastMessage.value = "";
+          GameMethods.setToastMessage("");
         }
       });
 

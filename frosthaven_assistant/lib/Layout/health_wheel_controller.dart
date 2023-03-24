@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/select_health_wheel.dart';
-import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../Resource/state/game_state.dart';
 import '../services/service_locator.dart';
