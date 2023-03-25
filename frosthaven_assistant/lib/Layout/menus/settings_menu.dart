@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
+import '../../services/network/client.dart';
 import '../../services/network/network.dart';
 import '../../services/service_locator.dart';
 
@@ -364,8 +365,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                               settings.client.value = ClientState.connecting;
                                               settings.lastKnownPort =
                                                   _portTextController.text;
-                                              getIt<Network>()
-                                                  .client
+                                              getIt<Client>()
                                                   .connect(_serverTextController
                                                       .text)
                                                   .then((value) => null);
@@ -373,8 +373,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                                   _serverTextController.text;
                                               settings.saveToDisk();
                                             } else {
-                                              getIt<Network>()
-                                                  .client
+                                              getIt<Client>()
                                                   .disconnect(null);
                                             }
                                           });

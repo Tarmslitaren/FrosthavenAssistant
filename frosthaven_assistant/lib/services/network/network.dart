@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:frosthaven_assistant/services/network/server.dart';
 
+import '../service_locator.dart';
 import 'client.dart';
 import 'network_info.dart';
 
@@ -11,7 +12,6 @@ enum ClientState{
 }
 
 class Network {
-  final Client client = Client();
   final Server server = Server();
   final NetworkInformation networkInfo = NetworkInformation();
   final networkMessage = ValueNotifier<String>("");

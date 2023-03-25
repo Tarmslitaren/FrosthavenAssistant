@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/monster.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
+import '../services/network/client.dart';
 import '../services/network/network.dart';
 import '../services/service_locator.dart';
 
@@ -248,7 +249,7 @@ class Settings {
       if (data["connectClientOnStartup"] != null &&
           data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
-          getIt<Network>().client.connect(lastKnownConnection);
+          getIt<Client>().connect(lastKnownConnection);
         });
       }
     }

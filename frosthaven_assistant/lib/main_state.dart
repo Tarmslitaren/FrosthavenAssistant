@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/services/network/client.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:override_text_scale_factor/override_text_scale_factor.dart';
@@ -37,7 +38,7 @@ class MainState extends State<MyHomePage>
         if(getIt<Network>().clientDisconnectedWhileInBackground == true || getIt<Settings>().connectClientOnStartup == true) {
           print("client was disconnected in background so try reconnect");
           getIt<Network>().clientDisconnectedWhileInBackground = false;
-          getIt<Network>().client.connect(getIt<Settings>().lastKnownConnection);
+          getIt<Client>().connect(getIt<Settings>().lastKnownConnection);
         }
         break;
       case AppLifecycleState.inactive: //goes background but still alive.
