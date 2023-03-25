@@ -9143,7 +9143,7 @@
       "monsters": [ "Ancient Artillery (FH)", "Frozen Corpse", "Ice Wraith" ],
       "lootDeck": {"coin":5,"lumber": 6,"metal":4,"hide": 4,"treasure": 1}
     },
-    "#128 A Tall Drunken Trail": {
+    "#128 A Tall Drunken Tale": {
       "monsters": [ "Abael Scout", "Lurker wavethrower Scenario 128", "Snow Imp", "Steel Automaton Scenario 128", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":2,"lumber": 3,"metal":1,"hide": 8,"snowthistle":1,"arrowvine":1, "flamefruit": 2},
       "special": [
@@ -9232,7 +9232,7 @@
         }
       }
     },
-    "#130 And Then, A Stream": {
+    "#130 And Then, a Stream": {
       "monsters": [ "Frozen Corpse", "Lightning Eel", "Shrike Fiend" ],
       "lootDeck": {"coin":6,"lumber": 5,"metal":2,"hide": 3,"flamefruit":1,"arrowvine":2, "treasure": 1},
       "special": [
@@ -9347,7 +9347,7 @@
       "monsters": [ "Lightning Eel", "Living Bones (FH)", "Living Spirit (FH)", "Lurker Wavethrower", "Piranha Pig" ],
       "lootDeck": {"coin":8,"lumber": 4,"hide": 4,"snowthistle":1,"arrowvine":1}
     },
-    "#137 The Pirate Queen's Haul": {
+    "#137 Pirate Queen's Haul": {
       "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Forest Imp (FH)", "Piranha Pig", "Polar Bear" ,"Robotic Boltshooter" ],
       "lootDeck": {"coin":12,"lumber": 4,"metal":4,"hide": 4,"treasure": 1}
     }
