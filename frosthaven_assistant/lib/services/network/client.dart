@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 
@@ -25,7 +25,7 @@ class Client {
     serveResponsive = true;
     try {
       int port = int.parse(getIt<Settings>().lastKnownPort);
-      print("port nr: ${port.toString()}");
+      debugPrint("port nr: ${port.toString()}");
       await Socket.connect(InternetAddress(address), port)
           .then((Socket socket) {
         runZoned(() {
@@ -33,7 +33,7 @@ class Client {
           getIt<Settings>().client.value = ClientState.connected;
           String info =
               'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
-          print(info);
+          debugPrint(info);
           _gameState.commands.clear();
           getIt<Network>().networkMessage.value = info;
           getIt<Settings>().connectClientOnStartup = true;
@@ -44,7 +44,7 @@ class Client {
         });
       });
     } catch (error) {
-      print("client error: $error");
+      debugPrint("client error: $error");
       getIt<Network>().networkMessage.value = "client error: $error";
       getIt<Settings>().client.value = ClientState.disconnected;
       getIt<Settings>().connectClientOnStartup = false;
@@ -71,7 +71,7 @@ class Client {
     try {
       _communication.listen(onListenData, onListenError, onListenDone);
     } catch (error) {
-      print(error);
+      debugPrint(error.toString());
       //_socket?.destroy();
       getIt<Network>().networkMessage.value =
           'Client listen error: ${error.toString()}';
@@ -89,7 +89,7 @@ class Client {
   }
 
   onListenError(error) {
-    print('Client error: ${error.toString()}');
+    debugPrint('Client error: ${error.toString()}');
     getIt<Network>().networkMessage.value = "client error: ${error.toString()}";
     //_socket?.destroy();
     //_cleanup();
@@ -117,27 +117,13 @@ class Client {
           String description = messageParts2[0];
           String data = messageParts2[1];
 
-          print(
+          debugPrint(
               'Client Receive Data, index: $indexString, description:$description');
 
           int newIndex = int.parse(indexString);
           //overwrite states if needed
           _gameState.commandIndex.value = newIndex;
 
-          //don't worry about this, just run undo/redo without descriptions?
-          /*if (newIndex + 1 < _gameState.commandDescriptions.length) {
-              _gameState.commandDescriptions.removeRange(
-                  newIndex + 1, _gameState.commandDescriptions.length);
-            }
-            if(newIndex >= _gameState.commandDescriptions.length) {
-              for(int i = 0; i < newIndex-_gameState.commandDescriptions.length; i++) {
-                _gameState.commandDescriptions.add(""); //add dummy descriptions since we don't have the data?
-              }
-              _gameState.commandDescriptions.add(description);
-            }
-            if (newIndex >= 0) {
-              _gameState.commandDescriptions.add(description);
-            }*/
           _gameState.loadFromData(data);
           _gameState.updateAllUI();
         } else if (message.startsWith("Error")) {
@@ -160,7 +146,7 @@ class Client {
   void disconnect(String? message) {
     message ??= "client disconnected";
     if (_connection.established()) {
-      print(message);
+      debugPrint(message);
       getIt<Network>().networkMessage.value = message;
       _connection.removeAll();
       getIt<Settings>().connectClientOnStartup = false;
