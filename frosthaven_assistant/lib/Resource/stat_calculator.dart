@@ -20,6 +20,11 @@ class StatCalculator {
   static int? eval(final String str) {
     return Parser(str).parse();
   }
+
+  static bool evaluateCondition(final dynamic str) {
+    return calculateFormula(str) == 1;
+  }
+
 }
 
 class Parser {
@@ -47,7 +52,7 @@ class Parser {
   int? parse() {
     try {
       nextChar();
-      int x = parseExpression()!;
+      int x = parseCondition()!;
       if (pos < str.length) {
         if (kDebugMode) {
           print("Unexpected: $ch");
@@ -62,11 +67,31 @@ class Parser {
   }
 
   // Grammar:
+  // condition = expression | `>` expression | `<` expression | '=' expression
   // expression = term | expression `+` term | expression `-` term
   // term = factor | term `*` factor | term `/` factor
   // factor = `+` factor | `-` factor | `(` expression `)` | number
   //        | functionName `(` expression `)` | functionName factor
   //        | factor `^` factor
+
+  int? parseCondition() {
+    try {
+      int x = parseExpression()!;
+      for (;;) {
+        if (eat('<')) {
+          x =  x < parseExpression()! ? 1 : 0;
+        } else if (eat('>')) {
+          x = x > parseExpression()! ? 1 : 0;
+        } else if (eat('=')) {
+          x = x == parseExpression()! ? 1 : 0;
+        } else {
+          return x;
+        }
+      }
+    } catch (_) {
+      return null;
+    }
+  }
 
   int? parseExpression() {
     try {

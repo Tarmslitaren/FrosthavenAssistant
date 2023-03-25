@@ -56,7 +56,9 @@ class SpecialRule {
   final String note;
   final List<dynamic> list;
   final bool startOfRound;
-  const SpecialRule(this.type, this.name, this.health, this.level, this.init, this.note, this.list, this.startOfRound);
+  final dynamic condition;
+
+  const SpecialRule(this.type, this.name, this.health, this.level, this.init, this.note, this.list, this.startOfRound, this.condition);
 
   factory SpecialRule.fromJson(Map<String, dynamic> data) {
     final String type = data['type']; //required
@@ -67,6 +69,10 @@ class SpecialRule {
     dynamic health = "";
     if(data.containsKey('health')) {
       health = data['health'];
+    }
+    dynamic condition = "";
+    if(data.containsKey('condition')) {
+      condition = data['condition'];
     }
     int level = 0;
     if(data.containsKey('level')) {
@@ -88,7 +94,7 @@ class SpecialRule {
     if(data.containsKey('list')) {
       aList = data['list'];
     }
-    return SpecialRule(type,name,health, level, init, note, aList, startOfRound);
+    return SpecialRule(type,name,health, level, init, note, aList, startOfRound, condition);
   }
 
   //is this used at all?
@@ -99,6 +105,7 @@ class SpecialRule {
         '"note": "$note", '
         '"name": "$name", '
         '"health": "$health", '
+        '"condition": "$condition", '
         '"init": $init, '
         '"level": $level, '
         '"startOfRound": ${startOfRound.toString()}, '
