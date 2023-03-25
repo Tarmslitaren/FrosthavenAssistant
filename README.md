@@ -1,3 +1,5 @@
+# This fork introduces a web server component to X-haven Assistant, in order to support an integration with Tabletop Simulator.
+
 # X-haven Assistant
 
 [![codecov](https://codecov.io/gh/wonderplayer/FrosthavenAssistant/branch/main/graph/badge.svg?token=RMRI5NZCGG)](https://codecov.io/gh/wonderplayer/FrosthavenAssistant)
