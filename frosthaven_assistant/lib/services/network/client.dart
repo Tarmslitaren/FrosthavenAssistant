@@ -16,9 +16,10 @@ class Client {
   String _leftOverMessage = "";
   bool serveResponsive = true;
 
-  final GameState _gameState = getIt<GameState>();
-  final Communication _communication = getIt<Communication>();
-  final Connection _connection = getIt<Connection>();
+  final _gameState = getIt<GameState>();
+  final _communication = getIt<Communication>();
+  final _connection = getIt<Connection>();
+  final _network = getIt<Network>();
 
   Future<void> connect(String address) async {
 // connect to the socket server
@@ -35,17 +36,17 @@ class Client {
               'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
           debugPrint(info);
           _gameState.commands.clear();
-          getIt<Network>().networkMessage.value = info;
+          _network.networkMessage.value = info;
           getIt<Settings>().connectClientOnStartup = true;
           getIt<Settings>().saveToDisk();
-          _send("init version:${getIt<Network>().server.serverVersion}");
+          _send("init version:${_network.server.serverVersion}");
           _sendPing();
           _listen();
         });
       });
     } catch (error) {
       debugPrint("client error: $error");
-      getIt<Network>().networkMessage.value = "client error: $error";
+      _network.networkMessage.value = "client error: $error";
       getIt<Settings>().client.value = ClientState.disconnected;
       getIt<Settings>().connectClientOnStartup = false;
       getIt<Settings>().saveToDisk();
@@ -53,7 +54,8 @@ class Client {
   }
 
   void _sendPing() {
-    if (_connection.established() && getIt<Settings>().client.value == ClientState.connected) {
+    if (_connection.established() &&
+        getIt<Settings>().client.value == ClientState.connected) {
       Future.delayed(const Duration(seconds: 12), () {
         if (serveResponsive == true) {
           _communication.sendToAll("ping");
@@ -73,7 +75,7 @@ class Client {
     } catch (error) {
       debugPrint(error.toString());
       //_socket?.destroy();
-      getIt<Network>().networkMessage.value =
+      _network.networkMessage.value =
           'Client listen error: ${error.toString()}';
       //_cleanup();
     }
@@ -82,7 +84,7 @@ class Client {
   void onListenDone() {
     print('Lost connection to server.');
     if (serveResponsive != false) {
-      getIt<Network>().networkMessage.value = "Lost connection to server";
+      _network.networkMessage.value = "Lost connection to server";
     }
     _connection.removeAll();
     _cleanup();
@@ -90,7 +92,7 @@ class Client {
 
   onListenError(error) {
     debugPrint('Client error: ${error.toString()}');
-    getIt<Network>().networkMessage.value = "client error: ${error.toString()}";
+    _network.networkMessage.value = "client error: ${error.toString()}";
     //_socket?.destroy();
     //_cleanup();
   }
@@ -107,7 +109,7 @@ class Client {
         message = message.substring(0, message.length - "[EOM]".length);
         if (message.startsWith("Mismatch:")) {
           message = message.substring("Mismatch:".length);
-          getIt<Network>().networkMessage.value =
+          _network.networkMessage.value =
               "Your state was not up to date, try again.";
         }
         if (message.startsWith("Index:")) {
@@ -147,7 +149,7 @@ class Client {
     message ??= "client disconnected";
     if (_connection.established()) {
       debugPrint(message);
-      getIt<Network>().networkMessage.value = message;
+      _network.networkMessage.value = message;
       _connection.removeAll();
       getIt<Settings>().connectClientOnStartup = false;
       getIt<Settings>().saveToDisk();
@@ -164,8 +166,8 @@ class Client {
         .removeRange(0, _gameState.gameSaveStates.length - 1);
     _leftOverMessage = "";
 
-    if (getIt<Network>().appInBackground == true) {
-      getIt<Network>().clientDisconnectedWhileInBackground = true;
+    if (_network.appInBackground == true) {
+      _network.clientDisconnectedWhileInBackground = true;
     }
     serveResponsive = true;
   }
