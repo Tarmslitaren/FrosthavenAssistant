@@ -20,25 +20,26 @@ class Client {
   final _communication = getIt<Communication>();
   final _connection = getIt<Connection>();
   final _network = getIt<Network>();
+  final _settings = getIt<Settings>();
 
   Future<void> connect(String address) async {
 // connect to the socket server
     serveResponsive = true;
     try {
-      int port = int.parse(getIt<Settings>().lastKnownPort);
+      int port = int.parse(_settings.lastKnownPort);
       debugPrint("port nr: ${port.toString()}");
       await Socket.connect(InternetAddress(address), port)
           .then((Socket socket) {
         runZoned(() {
           _connection.add(socket);
-          getIt<Settings>().client.value = ClientState.connected;
+          _settings.client.value = ClientState.connected;
           String info =
               'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
           debugPrint(info);
           _gameState.commands.clear();
           _network.networkMessage.value = info;
-          getIt<Settings>().connectClientOnStartup = true;
-          getIt<Settings>().saveToDisk();
+          _settings.connectClientOnStartup = true;
+          _settings.saveToDisk();
           _send("init version:${_network.server.serverVersion}");
           _sendPing();
           _listen();
@@ -47,15 +48,15 @@ class Client {
     } catch (error) {
       debugPrint("client error: $error");
       _network.networkMessage.value = "client error: $error";
-      getIt<Settings>().client.value = ClientState.disconnected;
-      getIt<Settings>().connectClientOnStartup = false;
-      getIt<Settings>().saveToDisk();
+      _settings.client.value = ClientState.disconnected;
+      _settings.connectClientOnStartup = false;
+      _settings.saveToDisk();
     }
   }
 
   void _sendPing() {
     if (_connection.established() &&
-        getIt<Settings>().client.value == ClientState.connected) {
+        _settings.client.value == ClientState.connected) {
       Future.delayed(const Duration(seconds: 12), () {
         if (serveResponsive == true) {
           _communication.sendToAll("ping");
@@ -151,14 +152,14 @@ class Client {
       debugPrint(message);
       _network.networkMessage.value = message;
       _connection.removeAll();
-      getIt<Settings>().connectClientOnStartup = false;
-      getIt<Settings>().saveToDisk();
+      _settings.connectClientOnStartup = false;
+      _settings.saveToDisk();
       _cleanup();
     }
   }
 
   void _cleanup() {
-    getIt<Settings>().client.value = ClientState.disconnected;
+    _settings.client.value = ClientState.disconnected;
     _gameState.commandIndex.value = -1;
     _gameState.commands.clear();
     _gameState.commandDescriptions.clear();
