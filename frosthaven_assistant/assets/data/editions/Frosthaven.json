@@ -1273,7 +1273,7 @@
       "gfx": "City Guard",
       "hidden": true,
       "deck": "Boss (FH)",
-      "count": 6,
+      "count": 2,
       "levels": [
         {
           "level": 0, "health": "2xC",  "move": 0,  "attack": 4,
