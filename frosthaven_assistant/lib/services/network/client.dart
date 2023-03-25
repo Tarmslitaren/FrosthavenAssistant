@@ -38,7 +38,7 @@ class Client {
           getIt<Network>().networkMessage.value = info;
           getIt<Settings>().connectClientOnStartup = true;
           getIt<Settings>().saveToDisk();
-          send("init version:${getIt<Network>().server.serverVersion}");
+          _send("init version:${getIt<Network>().server.serverVersion}");
           _sendPing();
           _listen();
         });
@@ -143,7 +143,7 @@ class Client {
         } else if (message.startsWith("Error")) {
           throw (message);
         } else if (message.startsWith("ping")) {
-          send("pong");
+          _send("pong");
         } else if (message.startsWith("pong")) {
           serveResponsive = true;
         }
@@ -153,7 +153,7 @@ class Client {
     }
   }
 
-  void send(String data) {
+  void _send(String data) {
     _communication.sendToAll(data);
   }
 
