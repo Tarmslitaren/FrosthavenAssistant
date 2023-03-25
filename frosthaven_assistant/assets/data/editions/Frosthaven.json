@@ -6623,7 +6623,75 @@
     "#27 Depths of Delirium": {
       "monsters": [ "Deep Terror (FH)", "Living Bones (FH)", "Ooze (FH)" ],
       "lootDeck": {"coin":13,"lumber": 2,"metal":2,"hide": 2, "treasure": 1},
-      "note": "all altars have L+2 hitpoints. no altar in first room (sections 95.1, 68.3, 69.2, 148.?, 71.5)"
+      "sections" : {
+        "#95.1 Depths of Delirium (27)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar 1",
+              "health": "L+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Altar 2",
+              "health": "L+2",
+              "condition": "C>2"
+            }
+          ]
+        },
+        "#68.3 Depths of Delirium (27)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar 3",
+              "health": "L+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Altar 4",
+              "health": "L+2",
+              "condition": "C>2"
+            }
+          ]
+        },
+        "#69.2 Depths of Delirium (27)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar 5",
+              "health": "L+2"
+            }
+          ]
+        },
+        "#148.4 Depths of Delirium (27)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar 6",
+              "health": "L+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Altar 7",
+              "health": "L+2"
+            }
+          ]
+        },
+        "#71.5 Depths of Delirium (27)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar 8",
+              "health": "L+2"
+            },
+            {
+              "type": "Objective",
+              "name": "Altar 9",
+              "health": "L+2"
+            }
+          ]
+        }
+      }
     },
     "#28 Summit Meeting": {
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Icespeaker", "Algox Snowspeaker" ],

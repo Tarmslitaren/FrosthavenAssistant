@@ -469,20 +469,26 @@ class GameMethods {
     //add objectives and escorts
     for(var item in specialRules) {
       if(item.type == "Objective"){
-        Character objective = GameMethods.createCharacter("Objective", item.name, _gameState.level.value+1)!;
-        objective.characterState.maxHealth.value = StatCalculator.calculateFormula(item.health.toString())!;
-        objective.characterState.health.value = objective.characterState.maxHealth.value;
-        objective.characterState.initiative.value = item.init;
-        bool add = true;
-        for (var item2 in _gameState.currentList) {
-          //don't add duplicates
-          if(item2 is Character && (item2).characterState.display.value == item.name) {
-            add = false;
-            break;
+        if (item.condition == ""  || StatCalculator.evaluateCondition(item.condition)) {
+          Character objective = GameMethods.createCharacter(
+              "Objective", item.name, _gameState.level.value + 1)!;
+          objective.characterState.maxHealth.value =
+          StatCalculator.calculateFormula(item.health.toString())!;
+          objective.characterState.health.value =
+              objective.characterState.maxHealth.value;
+          objective.characterState.initiative.value = item.init;
+          bool add = true;
+          for (var item2 in _gameState.currentList) {
+            //don't add duplicates
+            if (item2 is Character &&
+                (item2).characterState.display.value == item.name) {
+              add = false;
+              break;
+            }
           }
-        }
-        if(add) {
-          _gameState._currentList.add(objective);
+          if (add) {
+            _gameState._currentList.add(objective);
+          }
         }
       }
       if (item.type == "Escort") {
