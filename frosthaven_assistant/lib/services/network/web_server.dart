@@ -137,10 +137,11 @@ class WebServer {
   }
 
   Target? findTarget(String target, int nr) {
-    // A bit of hackery for the shambling skeletons ...
-    if (target.startsWith(SHAMBLING_SKELETON)) {
-      nr = int.parse(target.substring(SHAMBLING_SKELETON.length + 1));
-      target = SHAMBLING_SKELETON;
+    // A bit of hackery for targets which include their number in their name
+    // eg. Shambling Skeletons and Brothers in #87
+    if(target.substring(target.length-2, target.length-1) == " " && "123456789".contains(target.substring(target.length-1))) {
+      nr = int.parse(target.substring(target.length - 1));
+      target = target.substring(0, target.length - 2);
     }
     print("findTarget target:$target, nr:$nr");
     for (var item in _gameState.currentList) {
@@ -172,7 +173,9 @@ class WebServer {
       } else if (item is Character) {
         print(item);
         // Special casing for Objectives & Targets
-        if (item.id == target) {
+        // In some cases, where the nr is in the name, we need to reconstruct it
+        // As we've split name and nr above.
+        if (item.id == target || item.id == "$target $nr") {
           return Target(null, item.characterState, item.id, item.id);
         } else if (item.characterClass.name == target) {
           return Target(null, item.characterState, item.id, item.id);
