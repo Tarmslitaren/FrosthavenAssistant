@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/settings_menu.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import 'package:frosthaven_assistant/services/network/client.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
@@ -194,13 +195,12 @@ Drawer createMainMenu(BuildContext context) {
                         onChanged: (bool? value) {
                           if (settings.client.value != ClientState.connected) {
                             settings.client.value = ClientState.connecting;
-                            getIt<Network>()
-                                .client
+                            getIt<Client>()
                                 .connect(settings.lastKnownConnection)
                                 .then((value) => null);
                             settings.saveToDisk();
                           } else {
-                            getIt<Network>().client.disconnect(null);
+                            getIt<Client>().disconnect(null);
                           }
                         });
                   }),
