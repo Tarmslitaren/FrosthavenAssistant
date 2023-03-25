@@ -1,4 +1,4 @@
-# This fork introduces a web server component to X-haven Assistant, in order to support an integration with Tabletop Simulator.
+## This fork introduces a web server component to X-haven Assistant, in order to support an integration with Tabletop Simulator.
 
 # X-haven Assistant
 
