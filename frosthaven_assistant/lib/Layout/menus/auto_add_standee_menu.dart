@@ -50,6 +50,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           normals++;
         }
       }
+
       initialEliteAdded.add(elites);
       initialNormalAdded.add(normals);
     }
@@ -271,38 +272,49 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               Navigator.pop(context);
             });
-            return Container(
-              child: TextButton(
-                  child: const Text(
-                    'Close',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }),
-            );
+            return TextButton(
+                child: const Text(
+                  'Close',
+                  style: TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                });
           }
           RoomMonsterData data = widget.monsterData[currentMonsterIndex];
+          int nrOfElite = data.elite[characterIndex];
+          int nrOfNormal = data.normal[characterIndex];
+          while(nrOfElite+nrOfNormal == 0) { //for case where both normal and elite added are 0
+            if(currentMonsterIndex < widget.monsterData.length-1) {
+              currentMonsterIndex++;
+              data = widget.monsterData[currentMonsterIndex];
+              nrOfElite = data.elite[characterIndex];
+              nrOfNormal = data.normal[characterIndex];
+            }else {
+              //WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              //  Navigator.pop(context);
+              //});
+              break;
+            }
+          }
+
           Monster? monster = _gameState.currentList
               .firstWhereOrNull((element) => element.id == data.name) as Monster?;
           if(monster == null) {
+            //todo: should add the monster instead?!
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               Navigator.pop(context);
             });
-            return Container(
-              child: TextButton(
-                  child: const Text(
-                    'Close',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }),
-            );
+            return TextButton(
+                child: const Text(
+                  'Close',
+                  style: TextStyle(fontSize: 20),
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                });
           }
 
-          int nrOfElite = data.elite[characterIndex];
-          int nrOfNormal = data.normal[characterIndex];
           //change depending on already added standees
           int preAddedMonsters = initialEliteAdded[currentMonsterIndex] +
               initialNormalAdded[
