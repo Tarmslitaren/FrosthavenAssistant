@@ -4771,13 +4771,17 @@
           "normal": [0, 0, 0],
           "elite": [5, 7, 10]
         }
-      }},{
+      }
+    },
+    {
       "103.1": {
         "Steel Automaton": {
           "normal": [0, 1, 0],
           "elite": [1, 1, 2]
         }
-      }},{
+      }
+    },
+    {
       "116.1": {
         "Living Bones (FH)": {
           "normal": [0, 2, 4],
@@ -4801,7 +4805,7 @@
           "normal": [2, 3, 4],
           "elite": [0, 0, 0]
         },
-        "Ruined Machine": {
+        "Robotic Boltshooter": {
           "normal": [2, 3, 4],
           "elite": [0, 0, 0]
         }

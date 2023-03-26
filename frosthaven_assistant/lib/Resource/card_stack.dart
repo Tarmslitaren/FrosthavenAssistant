@@ -23,8 +23,6 @@ class CardStack<E> {
     }
     retVal += "]";
     return retVal;
-
-    return _list.toString();
   }
 
   void init(List<E> list) {

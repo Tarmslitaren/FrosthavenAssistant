@@ -118,10 +118,10 @@ class SpecialRule {
 class ScenarioModel {
   ScenarioModel({required this.name, required this.sections, required this.monsters, required this.specialRules, required this.lootDeck, required this.initMessage, required this.monsterStandees});
   final String name;
-  late final List<String> monsters;
-  late final List<SpecialRule> specialRules;
+  List<String> monsters;
+  List<SpecialRule> specialRules;
   final LootDeckModel? lootDeck;
-  late final String initMessage;
+  String initMessage;
   final List<RoomMonsterData>? monsterStandees;
   final List<ScenarioModel> sections;
   factory ScenarioModel.fromJson(String name, Map<String, dynamic> data, RoomsModel? rooms) {
