@@ -9130,12 +9130,14 @@
           "type": "Escort",
           "name": "Helper 6",
           "health": "2xL+3",
+          "condition": "C>2",
           "init": 50
         },
         {
           "type": "Escort",
           "name": "Helper 7",
           "health": "2xL+3",
+          "condition": "C>3",
           "init": 50
         },
         {
