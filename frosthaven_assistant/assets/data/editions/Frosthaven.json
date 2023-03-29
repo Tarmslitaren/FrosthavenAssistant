@@ -6355,6 +6355,7 @@
           "name": "Spectral Helper 1",
           "health": "2",
           "init": 50,
+          "condition": "C<4",
           "note": "should spawn only 4-C helpers"
         },
         {
@@ -6362,6 +6363,7 @@
           "name": "Spectral Helper 2",
           "health": "2",
           "init": 50,
+          "condition": "C<3",
           "note": "should spawn only 4-C helpers"
         }
         ]
