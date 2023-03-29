@@ -4732,7 +4732,7 @@
             {
               "type": "Objective",
               "name": "Icy Flame thermal stone",
-              "health": "C+6"
+              "health": "Cx6"
             }]
         }
       }
