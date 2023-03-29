@@ -2076,8 +2076,8 @@
           "elite": [0, 0, 0]
         },
         "Lightning Eel": {
-          "normal": [4, 4, 4],
-          "elite": [0, 0, 0]
+          "normal": [0, 0, 0],
+          "elite": [4, 4, 4]
         }
       }
     },
