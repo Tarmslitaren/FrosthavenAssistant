@@ -8257,6 +8257,20 @@
           "health": "(2+L)xC"
         }],
       "sections": {
+        "#6.3 The Lady in White (86)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Tree 2",
+              "health": "(2+L)xC"
+            },
+            {
+              "type": "Objective",
+              "name": "Tree 3",
+              "health": "(2+L)xC"
+            }
+          ]
+        },
         "#181.4 The Lady in White (86)": {
           "monsters": ["Lady in White"]
         }

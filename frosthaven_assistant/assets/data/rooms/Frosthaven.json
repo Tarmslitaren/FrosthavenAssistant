@@ -3824,6 +3824,18 @@
       }
     },
     {
+      "6.3": {
+        "Earth Demon (FH)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        },
+        "Ice Wraith": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
       "181.4": {
         "Lady in White": {
           "normal": [1, 1, 1],
