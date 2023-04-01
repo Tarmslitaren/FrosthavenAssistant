@@ -6111,11 +6111,21 @@
         {
           "type": "Allies",
           "list": ["Algox Archer", "Algox Guard"]
-        }]
+        }],
+      "sections": {
+        "#75.1 Heart of Ice (4)": {
+          "initialMessage": "Bosses use separate decks. (Not according to the rules)"
+        }
+      }
     },
     "#4B Heart of Ice": {
       "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Scout" ],
-      "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1}
+      "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
+      "sections": {
+        "#75.1 Heart of Ice (4)": {
+          "initialMessage": "Bosses use separate decks. (Not according to the rules)"
+        }
+      }
     },
     "#5 Frozen Crypt": {
       "monsters": [ "Frozen Corpse", "Ice Wraith" ],
