@@ -1376,6 +1376,14 @@
       }
     },
     {
+      "144.1": {
+        "Living Bones (FH)": {
+          "normal": [2, 2, 2],
+          "elite": [1, 2, 3]
+        }
+      }
+    },
+    {
       "spawn 1": {
         "Living Spirit (FH)": {
           "normal": [1, 1, 0],
