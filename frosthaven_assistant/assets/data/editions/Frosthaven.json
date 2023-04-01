@@ -6219,27 +6219,29 @@
             {
               "type": "Objective",
               "name": "Ice Pillar 4",
-              "health": "(2+L)xCd2"
+              "health": "4+(LxC)d2"
             },
             {
               "type": "Objective",
               "name": "Ice Pillar 5",
-              "health": "(2+L)xCd2"
+              "health": "4+(LxC)d2"
             },
             {
               "type": "Objective",
               "name": "Ice Pillar 6",
-              "health": "(2+L)xCd2"
+              "health": "4+(LxC)d2"
             },
             {
               "type": "Objective",
               "name": "Ice Pillar A",
-              "health": "(2+L)xCd2"
+              "health": "4+(LxC)d2",
+              "condition": "C>2"
             },
             {
               "type": "Objective",
               "name": "Ice Pillar B",
-              "health": "(2+L)xCd2"
+              "health": "4+(LxC)d2",
+              "condition": "C>3"
             }
           ]
         }
