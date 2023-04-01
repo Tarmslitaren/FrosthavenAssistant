@@ -1302,6 +1302,74 @@
         }
       ]
     },
+    "Gelatinous Giant v2": {
+      "deck": "Blood Ooze",
+      "gfx": "Ooze",
+      "edition": "Crimson Scales",
+      "count": 10,
+      "hidden": true,
+      "levels": [
+        {
+          "level": 0, "health": "8xC","move": 1, "attack": 2, "range": 3
+        },
+        {
+          "level": 1,
+          "health": "9xC",
+          "move": 1,
+          "attack": 2,
+          "range": 3,
+          "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 2,
+          "health": "11xC",
+          "move": 1,
+          "attack": 3,
+          "range": 3,
+          "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 3,
+          "health": "11xC",
+          "move": 2,
+          "attack": 3,
+          "range": 4,
+          "attributes": [ "%poison%", "%shield% 1" ]
+        },
+        {
+          "level": 4,
+          "health": "13xC",
+          "move": 2,
+          "attack": 4,
+          "range": 4,
+          "attributes": [ "%poison%", "%shield% 1" ]
+        },
+        {
+          "level": 5,
+          "health": "15xC",
+          "move": 3,
+          "attack": 4,
+          "range": 4,
+          "attributes": [ "%poison%", "%shield% 1" ]
+        },
+        {
+          "level": 6,
+          "health": "16xC",
+          "move": 3,
+          "attack": 4,
+          "range": 4,
+          "attributes": [ "%poison%", "%shield% 2" ]
+        },
+        {
+          "level": 7,
+          "health": "18xC",
+          "move": 3,
+          "attack": 5,
+          "range": 4,
+          "attributes": [ "%poison%", "%shield% 2" ]
+        }
+      ]
+    },
     "Flaming Drake": {
       "deck": "Flaming Drake",
       "edition": "Crimson Scales",
@@ -4490,6 +4558,10 @@
       "sections" : {
         "#8A Scenario 5": {
           "monsters": [ "Gelatinous Giant" ]
+        },
+        "#8B Scenario 5": {
+          "initialMessage": "Transfer Gelatinous Giant health and stats to v2.",
+          "monsters": [ "Gelatinous Giant v2" ]
         }
       }
     },
