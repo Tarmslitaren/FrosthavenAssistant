@@ -4254,6 +4254,55 @@
         }
       ]
     },
+    "Polar Bear 117": {
+      "deck": "Polar Bear",
+      "count": 5,
+      "hidden": true,
+      "gfx": "Polar Bear",
+      "display": "Polar Bear",
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 6, "move": 2, "attack": 3,"immunities": [ "%immobilize%", "%stun%"]  },
+          "elite": { "health": 10, "move": 2, "attack": 4, "attributes": [ "%wound%" ],"immunities": [ "%immobilize%", "%stun%"]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 8, "move": 2, "attack": 3,"immunities": [ "%immobilize%", "%stun%"] },
+          "elite": { "health": 12, "move": 2, "attack": 4,"attributes": [ "%wound%" ], "immunities": [ "%immobilize%", "%stun%"]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 10, "move": 2, "attack": 3,"immunities": [ "%immobilize%", "%stun%"]},
+          "elite": { "health": 14, "move": 3, "attack": 4,"attributes": [ "%wound%"], "immunities": [ "%immobilize%", "%stun%"]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%wound%" ],"immunities": [ "%immobilize%", "%stun%"]},
+          "elite": { "health": 16, "move": 3, "attack": 5, "attributes": [ "%wound%" ],"immunities": [ "%immobilize%", "%stun%"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 12, "move": 3, "attack": 4, "attributes": [ "%wound%" ],"immunities": [ "%immobilize%", "%stun%"] },
+          "elite": { "health": 20, "move": 4, "attack": 5, "attributes": [ "%wound%" ],"immunities": [ "%immobilize%", "%stun%"] }
+        },
+        {
+          "level": 5,
+          "normal": { "health": 16, "move": 3, "attack": 4,"attributes": [ "%wound%" ],"immunities": [ "%immobilize%", "%stun%"] },
+          "elite": { "health": 24, "move": 4, "attack": 6, "attributes": [ "%wound%" ],"immunities": [ "%immobilize%", "%stun%"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 23, "move": 4, "attack": 4, "attributes": [ "%wound%" ],"immunities": [ "%immobilize%", "%stun%"] },
+          "elite": { "health": 36, "move": 4, "attack": 6, "attributes": [ "%wound%" ],"immunities": [ "%immobilize%","%disarm%",  "%stun%"] }
+        },
+        {
+          "level": 7,
+          "normal": { "health": 29, "move": 4, "attack": 5,"attributes": [ "%wound%" ],"immunities": [ "%immobilize%","%disarm%",  "%stun%"] },
+          "elite": { "health": 44, "move": 4, "attack": 7, "attributes": [ "%wound%" ],"immunities": [ "%immobilize%","%disarm%", "%stun%"] }
+        }
+      ]
+    },
     "Large Vermling Scout": {
       "gfx": "Vermling Scout",
       "hidden": true,
@@ -7980,11 +8029,6 @@
           "monsters": ["Flaming Sword of Justice"],
           "special": [
             {
-              "type": "Objective",
-              "name": "Raven Nest a",
-              "health": "(L+2)xCx3"
-            },
-            {
               "type": "ResetRound"
             },
             {
@@ -9027,7 +9071,7 @@
       ]
     },
     "#117 A Waiting Game": {
-      "monsters": [ "Hound (FH)", "Polar Bear", "Vermling Priest", "Vermling Scout (FH)"],
+      "monsters": [ "Hound (FH)", "Polar Bear 117", "Vermling Priest", "Vermling Scout (FH)"],
       "lootDeck": {"coin":6,"lumber": 4,"hide": 6,"axenut":1,"arrowvine":2, "flamefruit": 1}
     },
     "#118 Lurker Necromancy": {
