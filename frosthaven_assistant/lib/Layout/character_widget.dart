@@ -522,7 +522,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                 }),
                           ),
                           ValueListenableBuilder<int>(
-                              valueListenable: character.characterState.health,
+                              valueListenable: _gameState.commandIndex,
                               //not working?
                               builder: (context, value, child) {
                                 return Container(
