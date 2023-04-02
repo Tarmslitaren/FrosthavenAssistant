@@ -2165,6 +2165,18 @@
           "elite": [0, 0, 1]
         }
       }
+    },
+    {
+      "spawn 1": {
+        "Ruined Machine": {
+          "normal": [2, 2, 0],
+          "elite": [0, 0, 2]
+        },
+        "Steel Automaton": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
     }
   ],
   "52": [
@@ -2599,7 +2611,7 @@
   "64": [
     {
       "start": {
-        "City Guard (FH)": {
+        "Guard Captain": {
           "normal": [0, 0, 0],
           "elite": [4, 4, 4]
         }

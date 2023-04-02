@@ -1236,6 +1236,55 @@
         }
       ]
     },
+    "Guard Captain": {
+      "display": "Guard Captain",
+      "gfx": "City Guard",
+      "hidden": true,
+      "deck": "Guard (FH)",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 2 },
+          "elite": { "health": 6,  "move": 2,  "attack": 3, "attributes": [ "%shield% 1" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 6, "move": 2, "attack": 3, "attributes": [ "%shield% 2" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 9, "move": 2, "attack": 3, "attributes": [ "%shield% 2" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 8, "move": 2, "attack": 3, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 9, "move": 2, "attack": 4, "attributes": [ "%shield% 2", "%retaliate% 1"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 9, "move": 3, "attack": 3, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 10, "move": 3, "attack": 4, "attributes": [  "%shield% 2","%retaliate% 2"]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 13, "move": 3, "attack": 4, "attributes": [  "%shield% 2","%retaliate% 2"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 13, "move": 3, "attack": 4, "attributes": [  "%shield% 2","%retaliate% 2"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 13, "move": 3, "attack": 4, "attributes": [  "%shield% 2","%retaliate% 2"]}
+        }
+      ]
+    },
     "Flaming Sword of Justice": {
       "gfx": "City Guard",
       "deck": "Guard (FH)",
@@ -7465,6 +7514,17 @@
       "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":12,"lumber": 2,"metal":4,"flamefruit":1,"arrowvine":1},
       "sections": {
+        "#32.1 Orphan's Halls (51)": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "Spawn 1 Ruined Machine at both A and 1 Steel Automation at B. All normal for 2 characters, Steel Automaton elite for 3-4 and all elite for 4 characters.",
+              "name": "spawn 1"
+            }
+          ]
+        },
         "#137.1 Orphan's Halls (51)": {
           "special": [
             {
@@ -7524,10 +7584,29 @@
         {
           "type": "Objective",
           "name": "Altar 1",
-          "health": "(L+1)xC",
-          "note": "more altars later on: 99.4 (3.2)"
+          "health": "(L+1)xC"
         }
-      ]
+      ],
+      "sections":  {
+        "#90.4 Call of the Harbinger (56)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar 3",
+              "health": "(L+1)xC"
+            }
+          ]
+        },
+        "#99.4 Call of the Harbinger (56)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar 2",
+              "health": "(L+1)xC"
+            }
+          ]
+        }
+      }
     },
     "#57 Sanctuary of Snow": {
       "monsters": [ "Render", "Wind Demon (FH)" ],
@@ -7728,12 +7807,12 @@
       ]
     },
     "#64 The Frosthaven Seal": {
-      "monsters": [ "Vestige of the Imprisoned God", "Burrowing Blade", "City Guard (FH)", "Living Doom", "Living Spirit (FH)" ,"Shrike Fiend" ],
+      "monsters": [ "Vestige of the Imprisoned God", "Burrowing Blade", "Guard Captain", "Living Doom", "Living Spirit (FH)" ,"Shrike Fiend" ],
       "lootDeck": {"coin":5,"lumber": 4,"metal":4,"hide": 4,"axenut":2,"flamefruit":2, "treasure": 1},
       "special": [
         {
           "type": "Allies",
-          "list": ["City Guard (FH)"]
+          "list": ["Guard Captain"]
         },
         {
           "type": "Escort",
@@ -8137,8 +8216,19 @@
           "type": "Objective",
           "name": "Small Tree 1",
           "health": "CxL/2"
-
-        }]
+        }
+      ],
+      "sections": {
+        "#55.2 Gaps in the Road (74)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Small Tree 2",
+              "health": "CxL/2"
+            }
+          ]
+        }
+      }
     },
     "#75 Infiltrating the Lair": {
       "monsters": [ "Abael Herder", "Abael Scout", "Chaos Demon (FH)", "Frost Demon (FH)", "Lightning Eel", "Piranha Pig" ],
@@ -8592,11 +8682,61 @@
       "lootDeck": {"coin":14,"lumber": 1,"metal":3,"axenut": 1,"rockroot":1},
       "special": [
         {
-          "type": "Timer",
-          "startOfRound": false,
-          "list": [-1],
-          "note": "The floating platform moves."
-        }]
+          "type": "Objective",
+          "name": "Small Debris 1",
+          "health": "L+10"
+        },
+        {
+          "type": "Objective",
+          "name": "Large Debris 1",
+          "health": "L+10"
+        }
+      ],
+      "sections": {
+        "#18.1 Underground Station (96)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Small Debris 2",
+              "health": "L+10"
+            },
+            {
+              "type": "Objective",
+              "name": "Large Debris 2",
+              "health": "L+10"
+            },
+            {
+              "type": "Objective",
+              "name": "Large Debris 3",
+              "health": "L+10"
+            }
+          ]
+        },
+        "#116.2 Underground Station (96)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Small Debris 3",
+              "health": "L+10"
+            },
+            {
+              "type": "Objective",
+              "name": "Small Debris 4",
+              "health": "L+10"
+            },
+            {
+              "type": "Objective",
+              "name": "Small Debris 5",
+              "health": "L+10"
+            },
+            {
+              "type": "Objective",
+              "name": "Large Debris 4",
+              "health": "L+10"
+            }
+          ]
+        }
+      }
     },
     "#97 Program Control Nexus": {
       "monsters": [ "Program Director", "Flaming Bladespinner", "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
@@ -8659,18 +8799,28 @@
           "type": "Objective",
           "name": "Ice Pillar 4",
           "health": "(2xL)+4"
-        },
-        {
-          "type": "Objective",
-          "name": "Ice Pillar 5",
-          "health": "(2xL)+4"
-        },
-        {
-          "type": "Objective",
-          "name": "Ice Pillar 6",
-          "health": "(2xL)+4"
         }
-      ]
+      ],
+      "sections": {
+        "#11.7 The Lead Door (103)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Ice Pillar 5",
+              "health": "(2xL)+4"
+            }
+          ]
+        },
+        "#30.4 The Lead Door (103)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Ice Pillar 6",
+              "health": "(2xL)+4"
+            }
+          ]
+        }
+      }
     },
     "#104 Ruins of the Solstice": {
       "monsters": [ "Earth Demon (FH)", "Forest Imp (FH)", "Frost Demon (FH)", "Savvas Icestorm (FH)", "Wind Demon (FH)"],
@@ -8788,6 +8938,42 @@
       "sections": {
         "#195.2 Furious Factory (109)": {
           "monsters": ["Laser Spire Controller"]
+        },
+        "#162.1 Furious Factory (109)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Metal Cabinet 1",
+              "health": "(2+L)xC/2"
+            }
+          ]
+        },
+        "#166.3 Furious Factory (109)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Metal Cabinet 2",
+              "health": "(2+L)xC/2"
+            }
+          ]
+        },
+        "#172.5 Furious Factory (109)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Metal Cabinet 3",
+              "health": "(2+L)xC/2"
+            }
+          ]
+        },
+        "#186.2 Furious Factory (109)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Metal Cabinet 4",
+              "health": "(2+L)xC/2"
+            }
+          ]
         }
       }
     },
@@ -9473,7 +9659,38 @@
           "startOfRound": false,
           "list": [2,4,6,8,10,12,14,16,18,20,22,24,25,28,30],
           "note": "All characters and character summons move one hex to the bottom."
+        },
+        {
+          "type": "Objective",
+          "name": "Barrel 1",
+          "health": "3"
+        },
+        {
+          "type": "Objective",
+          "name": "Barrel 2",
+          "health": "3"
+        },
+        {
+          "type": "Objective",
+          "name": "Crate 1",
+          "health": "3"
+        },
+        {
+          "type": "Objective",
+          "name": "Crate 2",
+          "health": "3"
+        },
+        {
+          "type": "Objective",
+          "name": "Crate 3",
+          "health": "3"
+        },
+        {
+          "type": "Objective",
+          "name": "Crate 4",
+          "health": "3"
         }
+
       ]
     },
     "#135 Belara's Keep": {
