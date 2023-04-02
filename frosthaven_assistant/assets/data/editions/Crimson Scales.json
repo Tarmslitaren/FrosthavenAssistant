@@ -4765,7 +4765,7 @@
       "special": [
         {
           "type": "Escort",
-          "name": "Brightspark",
+          "name": "Brightspark ",
           "health": "C+(Lx3)",
           "init": 50
         }]
