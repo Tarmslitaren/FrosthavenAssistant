@@ -1691,7 +1691,7 @@
           "elite": [1, 1, 1]
         },
         "Robotic Boltshooter": {
-          "normal": [1, 1, 1],
+          "normal": [2, 2, 2],
           "elite": [0, 0, 0]
         }
       }},
