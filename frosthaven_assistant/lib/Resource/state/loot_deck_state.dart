@@ -122,6 +122,12 @@ class LootDeck {
     hasCard1418 = lootDeckData["1418"];
     hasCard1419 = lootDeckData["1419"];
 
+    if(lootDeckData.containsKey('addedCards')) {
+      addedCards = List<int>.from(lootDeckData['addedCards']);
+    } else {
+      addedCards = [0,0,0,0,0,0,0,0,0];
+    }
+
     if(lootDeckData.containsKey('enhancements')) {
       enhancements = Map<String, int>.from(lootDeckData['enhancements']);
     } else {
