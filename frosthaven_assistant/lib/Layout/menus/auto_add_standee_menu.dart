@@ -64,12 +64,17 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
       });
     } else {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        getIt<GameState>().updateList.value++;
+        setState(() {
+          WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+            getIt<GameState>().updateList.value++;
+          });
+
+          currentMonsterIndex++; //next set
+          currentEliteAdded = 0;
+          currentNormalAdded = 0;
+        });
       });
 
-      currentMonsterIndex++; //next set
-      currentEliteAdded = 0;
-      currentNormalAdded = 0;
     }
   }
 
