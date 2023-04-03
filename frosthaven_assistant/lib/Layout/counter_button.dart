@@ -56,7 +56,7 @@ class CounterButtonState extends State<CounterButton> {
                 }
               })),
       Stack(children: [
-        Container(
+        SizedBox(
           width: 30 * widget.scale,
           height: 30 * widget.scale,
           child: Image(

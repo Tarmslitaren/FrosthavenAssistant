@@ -10,7 +10,6 @@ import 'package:reorderables/reorderables.dart';
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/reorder_ability_list_command.dart';
 import '../../Resource/commands/shuffle_ability_card_command.dart';
-import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/state/monster.dart';
 import '../../Resource/ui_utils.dart';

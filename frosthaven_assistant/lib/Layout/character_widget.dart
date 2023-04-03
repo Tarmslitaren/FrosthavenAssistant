@@ -323,7 +323,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
     return SweepGradient(
         center: FractionalOffset.bottomRight,
-        transform: GradientRotation(2),
+        transform: const GradientRotation(2),
         tileMode: TileMode.mirror,
         colors: endList,
 
