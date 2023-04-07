@@ -4505,7 +4505,7 @@
         {
           "level": 1,
           "normal": { "health": 8, "move": 1, "attack": 2,"immunities": [ "%poison%","%wound%", "%muddle%"]},
-          "elite": { "health": 9, "move": 2, "attack": 3,"immunities": [ "%poison%","%wound%", "%muddle%"] }
+          "elite": { "health": 10, "move": 2, "attack": 3,"immunities": [ "%poison%","%wound%", "%muddle%"] }
         },
         {
           "level": 2,
@@ -6437,6 +6437,18 @@
         },
         {
           "type": "Timer",
+          "list": [4],
+          "startOfRound": true,
+          "note": "Read section 27.2"
+        },
+        {
+          "type": "Timer",
+          "list": [7],
+          "startOfRound": true,
+          "note": "Read section 44.2"
+        },
+        {
+          "type": "Timer",
           "list": [9],
           "startOfRound": true,
           "note": "Read section 15.3"
@@ -6449,7 +6461,7 @@
         },
         {
           "type": "Timer",
-          "list": [12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+          "list": [12],
           "startOfRound": false,
           "note": "Descend one floor. Scenario Complete when all enemies are dead."
         }
