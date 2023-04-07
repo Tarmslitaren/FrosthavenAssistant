@@ -388,6 +388,7 @@ class GameMethods {
                 item.characterState.health.value;
             item.characterState.xp.value = 0;
             item.characterState.conditions.value.clear();
+            item.characterState.chill.value = 0;
             item.characterState.summonList.value.clear();
 
             if (item.id == "Beast Tyrant") {
