@@ -1309,8 +1309,8 @@
     {
       "1": {
         "Cave Bear (Circles special)": {
-          "normal": [1, 1, 1],
-          "elite": [0, 0, 0]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         }
       }
     },
