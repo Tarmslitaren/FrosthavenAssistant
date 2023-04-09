@@ -10,6 +10,12 @@ class Connection {
     return _sockets;
   }
 
+  Future<Socket> connect(InternetAddress address, int port) async {
+    var socket = await Socket.connect(address, port);
+    add(socket);
+    return socket;
+  }
+
   void add(Socket socket) {
     _cleanUpClosedConnections();
     if (!_isClosed(socket)) {
@@ -38,8 +44,7 @@ class Connection {
   }
 
   Iterable<Socket> _find(Socket socket) {
-    return _sockets.where((x) =>
-        x.remoteAddress == socket.remoteAddress);
+    return _sockets.where((x) => x.remoteAddress == socket.remoteAddress);
   }
 
   void _destroy(Iterable<Socket> sockets) {

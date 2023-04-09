@@ -7,8 +7,7 @@ import 'package:mockito/mockito.dart';
 import 'connection_test.mocks.dart';
 
 final _sut = Connection();
-final _socket = MockSocket();
-const _randomPortNumber = 5647382;
+const _randomPortNumber = 54632;
 
 @GenerateNiceMocks([MockSpec<Socket>()])
 void main() {
@@ -148,6 +147,18 @@ void main() {
     // assert
     result.shouldBeFalse();
   });
+
+  test('connect returns socket connected to', () async {
+    // arrange
+    final expectedAddress = InternetAddress('127.0.0.1');
+
+    // act
+    final result = await _sut.connect(expectedAddress, 80);
+    // assert
+
+    result.port.shouldBe(80);
+    result.address.shouldBe(expectedAddress);
+  }, skip: 'Can not figure out port number to be tested on');
 }
 
 List<Socket> _setupSockets(Connection Connection) {

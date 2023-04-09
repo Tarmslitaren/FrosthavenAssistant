@@ -14,8 +14,7 @@ import 'connection.dart';
 
 class Client {
   String _leftOverMessage = "";
-  bool serveResponsive = true;
-
+  bool _serverResponsive = true;
   final _gameState = getIt<GameState>();
   final _communication = getIt<Communication>();
   final _connection = getIt<Connection>();
@@ -23,15 +22,13 @@ class Client {
   final _settings = getIt<Settings>();
 
   Future<void> connect(String address) async {
-// connect to the socket server
-    serveResponsive = true;
+    _serverResponsive = true;
     try {
       int port = int.parse(_settings.lastKnownPort);
       debugPrint("port nr: ${port.toString()}");
-      await Socket.connect(InternetAddress(address), port)
+      await _connection.connect(InternetAddress(address), port)
           .then((Socket socket) {
         runZoned(() {
-          _connection.add(socket);
           _settings.client.value = ClientState.connected;
           String info =
               'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
@@ -58,10 +55,10 @@ class Client {
     if (_connection.established() &&
         _settings.client.value == ClientState.connected) {
       Future.delayed(const Duration(seconds: 12), () {
-        if (serveResponsive == true) {
+        if (_serverResponsive == true) {
           _communication.sendToAll("ping");
           _sendPing();
-          serveResponsive = false; //set back to true when get response
+          _serverResponsive = false; //set back to true when get response
         } else {
           disconnect("Server unresponsive. Client disconnected.");
         }
@@ -83,8 +80,8 @@ class Client {
   }
 
   void onListenDone() {
-    print('Lost connection to server.');
-    if (serveResponsive != false) {
+    debugPrint('Lost connection to server.');
+    if (_serverResponsive != false) {
       _network.networkMessage.value = "Lost connection to server";
     }
     _connection.removeAll();
@@ -94,8 +91,6 @@ class Client {
   onListenError(error) {
     debugPrint('Client error: ${error.toString()}');
     _network.networkMessage.value = "client error: ${error.toString()}";
-    //_socket?.destroy();
-    //_cleanup();
   }
 
   void onListenData(Uint8List data) {
@@ -134,7 +129,7 @@ class Client {
         } else if (message.startsWith("ping")) {
           _send("pong");
         } else if (message.startsWith("pong")) {
-          serveResponsive = true;
+          _serverResponsive = true;
         }
       } else {
         _leftOverMessage = message;
@@ -170,6 +165,6 @@ class Client {
     if (_network.appInBackground == true) {
       _network.clientDisconnectedWhileInBackground = true;
     }
-    serveResponsive = true;
+    _serverResponsive = true;
   }
 }
