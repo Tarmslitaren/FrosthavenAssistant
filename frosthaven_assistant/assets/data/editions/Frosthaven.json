@@ -8883,7 +8883,18 @@
           "startOfRound": false,
           "list": [3,6,9,12,15,18,21,24,27,30],
           "note": "All characters move 1 hex to the right. Move Air to row a."
-        }]
+        }],
+      "sections": {
+        "#191.3 Ruins of the Equinox (105)": {
+          "special": [
+            {
+              "type": "Timer",
+              "startOfRound": false,
+              "list": [-1],
+              "note": "All characters suffer 1 damage."
+            }]
+          }
+        }
     },
     "#106 The Tempus Forge": {
       "monsters": [ "City Guard (FH)", "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Wind Demon (FH)" ],
