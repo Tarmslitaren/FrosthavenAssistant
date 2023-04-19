@@ -10,7 +10,7 @@ class DrawModifierCardCommand extends Command {
 
   @override
   void execute() {
-    if(name == "Allies"){
+    if(name == "allies"){
       _gameState.modifierDeckAllies.draw();
     }else {
       _gameState.modifierDeck.draw();
@@ -23,7 +23,7 @@ class DrawModifierCardCommand extends Command {
 
   @override
   String describe() {
-    if(name == "Allies"){
+    if(name == "allies"){
       return "Draw allies modifier card";
     }
     return "Draw monster modifier card";

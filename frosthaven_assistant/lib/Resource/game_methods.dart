@@ -405,7 +405,7 @@ class GameMethods {
       }
 
       _gameState.modifierDeck.initDeck("");
-      _gameState.modifierDeckAllies.initDeck("Allies");
+      _gameState.modifierDeckAllies.initDeck("allies");
       _gameState._currentList = newList;
 
       //loot deck init
