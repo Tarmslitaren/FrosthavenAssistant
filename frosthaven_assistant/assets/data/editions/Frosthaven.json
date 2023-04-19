@@ -8775,7 +8775,19 @@
     },
     "#101 Harrower Library": {
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest" ],
-      "lootDeck": {"coin":8,"lumber": 3,"metal":3,"hide": 3,"rockroot":1,"arrowvine":1, "snowthistle": 1}
+      "lootDeck": {"coin":8,"lumber": 3,"metal":3,"hide": 3,"rockroot":1,"arrowvine":1, "snowthistle": 1},
+      "sections": {
+        "#126.2 Harrower Library (101)": {
+          "special": [
+            {
+              "type": "Timer",
+              "startOfRound": false,
+              "list": [-1],
+              "note": "Swarms move 2 hexes towards Zu. Zu move 2 focusing on closest swarm."
+            }
+          ]
+        }
+      }
     },
     "#102 Into the Black": {
       "note": "most likely a named monster in section",
