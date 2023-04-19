@@ -3309,6 +3309,14 @@
       }
     },
     {
+      "spawn 1": {
+        "Chaos Demon (FH)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        }
+      }
+    },
+    {
       "177.2": {
         "Frost Demon (FH)": {
           "normal": [2, 1, 0],
