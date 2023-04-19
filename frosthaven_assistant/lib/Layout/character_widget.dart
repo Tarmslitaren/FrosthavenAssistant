@@ -110,8 +110,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
   Widget summonsButton(double scale) {
     return SizedBox(
-        width: 30 * scale,
-        height: 30 * scale,
+        width: 50 * scale,
+        height: 50 * scale,
         child: IconButton(
           padding: EdgeInsets.zero,
           icon: Image.asset(
@@ -123,7 +123,6 @@ class CharacterWidgetState extends State<CharacterWidget> {
           onPressed: () {
             openDialog(
               context,
-              //problem: context is of stat card widget, not the + button
               AddSummonMenu(
                 character: character,
               ),
@@ -627,8 +626,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                     : Container(),
                 isCharacter
                     ? Positioned(
-                        right: 29 * scale,
-                        top: 14 * scale,
+                        right: 19 * scale,
+                        top: 4 * scale,
                         child: summonsButton(scale),
                       )
                     : Container(),
