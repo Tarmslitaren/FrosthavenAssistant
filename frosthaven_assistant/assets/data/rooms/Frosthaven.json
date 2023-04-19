@@ -1650,8 +1650,8 @@
     {
       "spawn 1": {
         "Living Spirit (FH)": {
-          "normal": [1, 0, 0],
-          "elite": [0, 1, 1]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         }
       }
     },
@@ -3068,8 +3068,8 @@
           "elite": [0, 0, 1]
         },
         "Piranha Pig": {
-          "normal": [2, 0, 0],
-          "elite": [0, 2, 2]
+          "normal": [2, 2, 0],
+          "elite": [0, 0, 2]
         }
       }
     }
