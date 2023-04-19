@@ -5245,7 +5245,7 @@
     {
       "spawn 1": {
         "Algox Guard": {
-          "normal": [2, 2, 0],
+          "normal": [4, 2, 0],
           "elite": [0, 2, 4]
         }
       }
