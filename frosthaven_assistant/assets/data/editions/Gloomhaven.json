@@ -4410,10 +4410,6 @@
             "health": "(8+L)xC"
           },
           {
-            "type": "Allies",
-            "list": ["Night Demon"]
-          },
-          {
             "type": "Timer",
             "list": [-1],
             "startOfRound": true,
