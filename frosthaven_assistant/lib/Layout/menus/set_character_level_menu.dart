@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/commands/change_name_command.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/change_stat_commands/change_max_health_command.dart';
@@ -174,10 +175,9 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     style: getTitleTextStyle(scale),
                     onSubmitted: (String string) {
                       //set the name
-
                       if (nameController.text.isNotEmpty) {
-                        widget.character.characterState.display.value =
-                            nameController.text;
+                        _gameState.action(
+                            ChangeNameCommand(nameController.text, widget.character.id));
                       }
                     },
                   ))
