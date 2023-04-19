@@ -172,7 +172,7 @@ class GameState extends ActionHandler {
   ModifierDeck get modifierDeck => _modifierDeck; //todo: still mutable
   ModifierDeck _modifierDeck = ModifierDeck("");
   ModifierDeck get modifierDeckAllies => _modifierDeckAllies; //todo: still mutable
-  ModifierDeck _modifierDeckAllies = ModifierDeck("Allies");
+  ModifierDeck _modifierDeckAllies = ModifierDeck("allies");
 
   //unlocked characters
   BuiltSet<String> get unlockedClasses => BuiltSet.of(_unlockedClasses);

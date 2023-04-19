@@ -21,7 +21,7 @@ class GameSaveState {
     //modifier deck
     String name = "";
     if (identifier == 'modifierDeckAllies') {
-      name = "Allies";
+      name = "allies";
     }
     var modifierDeckData = data[identifier];
     ModifierDeck state = ModifierDeck(name);

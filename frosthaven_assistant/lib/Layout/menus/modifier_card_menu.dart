@@ -122,7 +122,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                       .toString()
                       .substring(3, value.key.toString().length - 3)),
                   length: inputList.length,
-                  allies: name == "Allies",
+                  allies: name == "allies",
                 ));
           },
           child: value,
@@ -160,7 +160,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                       index = list.length - index - 1;
                       list.insert(dropIndex, list.removeAt(index));
                       _gameState.action(ReorderModifierListCommand(
-                          dropIndex, index, name == "Allies"));
+                          dropIndex, index, name == "allies"));
                     });
                   },
                   children: generateList(list, allOpen, name),
@@ -224,7 +224,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                     TextButton(
                                       onPressed: () {
                                         _gameState.action(
-                                            BadOmenCommand(name == "Allies"));
+                                            BadOmenCommand(name == "allies"));
                                       },
                                       child: const Text("Bad Omen"),
                                     ),
@@ -234,7 +234,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 TextButton(
                                   onPressed: () {
                                     _gameState.action(
-                                        EnfeeblingHexCommand(name == "Allies"));
+                                        EnfeeblingHexCommand(name == "allies"));
                                   },
                                   child: Text(
                                       "Add -1 card (added : ${deck.addedMinusOnes.value})"),
@@ -243,7 +243,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                   onPressed: () {
                                     if (deck.hasMinus1()) {
                                       _gameState.action(AMDRemoveMinus1Command(
-                                          name == "Allies"));
+                                          name == "allies"));
                                     }
                                   },
                                   child: const Text("Remove -1 card"),
@@ -251,7 +251,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 TextButton(
                                   onPressed: () {
                                     _gameState.action(AMDRemoveMinus2Command(
-                                        name == "Allies"));
+                                        name == "allies"));
                                   },
                                   child: Text(
                                     deck.hasMinus2() ? "Remove -2 card" : "-2 card removed",
@@ -260,7 +260,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 TextButton(
                                   onPressed: () {
                                     _gameState.action(AMDRemoveNullCommand(
-                                        name == "Allies"));
+                                        name == "allies"));
                                   },
                                   child: Text(
                                     deck.hasNull() ? "Remove null card" : "null removed",

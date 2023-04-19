@@ -106,7 +106,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         String commandDescription = getIt<GameState>()
             .commandDescriptions[commandIndex];
         //todo: also: missing info. need to check for updateForUndo
-        if(widget.name == "Allies") {
+        if(widget.name == "allies") {
           if(commandDescription.contains("allies modifier card")) {
             return true;
           }
@@ -184,7 +184,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   @override
   Widget build(BuildContext context) {
     ModifierDeck deck = _gameState.modifierDeck;
-    if(widget.name == "Allies") {
+    if(widget.name == "allies") {
       deck = _gameState.modifierDeckAllies;
     }
 

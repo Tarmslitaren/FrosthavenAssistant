@@ -128,7 +128,7 @@ Widget createMainScaffold(BuildContext context) {
                                           Column(children: [
                                             if (GameMethods.hasAllies())
                                               const ModifierDeckWidget(
-                                                  name: 'Allies'),
+                                                  name: 'allies'),
                                             if (!modFitsOnBar)
                                               Container(
                                                   margin: EdgeInsets.only(
