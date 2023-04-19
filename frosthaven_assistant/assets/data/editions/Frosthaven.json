@@ -8244,7 +8244,23 @@
     },
     "#75 Infiltrating the Lair": {
       "monsters": [ "Abael Herder", "Abael Scout", "Chaos Demon (FH)", "Frost Demon (FH)", "Lightning Eel", "Piranha Pig" ],
-      "lootDeck": {"coin":8,"metal":2,"hide": 5,"axenut":1,"snowthistle":2, "treasure": 1}
+      "lootDeck": {"coin":8,"metal":2,"hide": 5,"axenut":1,"snowthistle":2, "treasure": 1},
+      "sections": {
+        "#167.3 Infiltrating the Lair (75)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2],
+              "startOfRound": true,
+              "note": "Spawn two Chaos Demons at C. one is elite for 3 characters and both are elite for 4 characters.",
+              "name": "spawn 1"
+            }
+          ]
+        }
+      }
     },
     "#76 Apotheosis": {
       "monsters": [ "Fish King", "Algox Archer", "Algox Guard", "Flaming Bladespinner", "Lurker Mindsnipper", "Piranha Pig" ],
