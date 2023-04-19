@@ -871,7 +871,7 @@
     {
       "name": "Ice Wraith",
       "cards": [
-        ["Shift Form", 642, true, 95,"^^All elite Ice Wraiths","^^become normal, and all","^^normal Ice Wraiths become elite.", "**.........", "%heal% 1", "^Self", "**.........",  "%move% + 0", "**.........","%attack% + 0", "^Normal:%range% 4"],
+        ["Shift Form", 642, true, 95,"^^All elite Ice Wraiths","^^become normal, and all","^^normal Ice Wraiths become elite.", "**.........", "%heal% 1", "^Self", "**.........",  "%move% + 0", "**.........","%attack% - 1", "^Normal:%range% 4"],
         ["Renewed Aggression", 643, true, 44,"%heal% 1", "^Self", "*.........",  "%move% + 0", "*.........","%attack% + 0","^Normal:%range% 4", "%ice%" ],
         ["Unholy Strength", 644, false, 59, "[r]", "%ice%%use%", "[c]","%bless%, %strengthen%", "^Self","[/c]", "[/r]",  "*.........","%attack% + 0", "^%range% 3"],
         ["Fade Out", 645, false, 59, "%invisible%", "^Self","*.........", "[r]","%ice%%use%", "[c]","%strengthen%, %bless%", "^Self","[/c]", "[/r]", "%ice%"],
