@@ -10,10 +10,20 @@ class Connection {
     return _sockets;
   }
 
-  Future<Socket> connect(InternetAddress address, int port) async {
-    var socket = await Socket.connect(address, port);
+  Future<Socket> connect(String address, int port) async {
+    final resolvedAddresses = await _resolveAddress(address);
+    var socket = await Socket.connect(resolvedAddresses.first, port);
     add(socket);
     return socket;
+  }
+
+  Future<List<InternetAddress>> _resolveAddress(String address) async {
+    List<InternetAddress> resolvedAddresses =
+          await InternetAddress.lookup(address);
+      if (resolvedAddresses.isEmpty) {
+        throw Exception("Unable to resolve host");
+      }
+    return resolvedAddresses;
   }
 
   void add(Socket socket) {
