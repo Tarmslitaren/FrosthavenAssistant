@@ -26,13 +26,8 @@ class Client {
     try {
       int port = int.parse(_settings.lastKnownPort);
       debugPrint("port nr: ${port.toString()}");
-      List<InternetAddress> resolvedAddress =
-          await InternetAddress.lookup(address);
-      if (resolvedAddress.isEmpty) {
-        throw Exception("Unable to resolve host");
-      }
       await _connection
-          .connect(resolvedAddress.first, port)
+          .connect(address, port)
           .then((Socket socket) {
         runZoned(() {
           _settings.client.value = ClientState.connected;

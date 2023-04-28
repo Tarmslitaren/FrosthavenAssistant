@@ -153,7 +153,7 @@ void main() {
     final expectedAddress = InternetAddress('127.0.0.1');
 
     // act
-    final result = await _sut.connect(expectedAddress, 80);
+    final result = await _sut.connect(expectedAddress.toString(), 80);
     // assert
 
     result.port.shouldBe(80);
@@ -161,18 +161,18 @@ void main() {
   }, skip: 'Can not figure out port number to be tested on');
 }
 
-List<Socket> _setupSockets(Connection Connection) {
+List<Socket> _setupSockets(Connection connection) {
   final sockets = <Socket>[];
   const socketCount = 3;
   for (var i = 0; i < socketCount; i++) {
     var socket = MockSocket();
-    _addSocketForTesting(sockets, socket, Connection);
+    _addSocketForTesting(sockets, socket, connection);
   }
   return sockets;
 }
 
 void _addSocketForTesting(
-    List<Socket> sockets, MockSocket socket, Connection Connection) {
+    List<Socket> sockets, MockSocket socket, Connection connection) {
   sockets.add(socket);
-  Connection.add(socket);
+  connection.add(socket);
 }
