@@ -4074,7 +4074,7 @@
         }
       ]
     },
-    "Lurker wavethrower Scenario 128": {
+    "Lurker Wavethrower Scenario 128": {
       "deck": "Lurker Wavethrower Scenario 128",
       "gfx": "Lurker Wavethrower",
       "display":"Lurker Wavethrower",
@@ -9523,7 +9523,7 @@
       "lootDeck": {"coin":5,"lumber": 6,"metal":4,"hide": 4,"treasure": 1}
     },
     "#128 A Tall Drunken Tale": {
-      "monsters": [ "Abael Scout", "Lurker wavethrower Scenario 128", "Snow Imp", "Steel Automaton Scenario 128", "Vermling Scout (FH)" ],
+      "monsters": [ "Abael Scout", "Lurker Wavethrower Scenario 128", "Snow Imp", "Steel Automaton Scenario 128", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":2,"lumber": 3,"metal":1,"hide": 8,"snowthistle":1,"arrowvine":1, "flamefruit": 2},
       "special": [
         {
