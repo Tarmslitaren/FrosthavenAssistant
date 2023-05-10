@@ -1,19 +1,60 @@
+
 # X-haven Assistant
 
-[![codecov](https://codecov.io/gh/wonderplayer/FrosthavenAssistant/branch/main/graph/badge.svg?token=RMRI5NZCGG)](https://codecov.io/gh/wonderplayer/FrosthavenAssistant)
+<img width="776" alt="image" src="https://github.com/alexzhaohong/FrosthavenAssistant/assets/12620082/cfedba27-f69d-4c97-bda3-264973570067">
 
-## Support
-For problems and suggestions please file an issue here: https://github.com/Tarmslitaren/FrosthavenAssistant/issues
-or contact me directly at royalhasse@gmail.com
-Please check out 'known issues' and 'usage' below before submitting, thanks!
+> Scenario 1 of Gloomhaven with starting classes of X-haven games
 
-## What is it?
-A helper app for the boardgames Gloomhaven, Frosthaven and any derivative.
-The aim is to be a good replacement for the Gloomhaven Helper by Esoteric Software that is no longer available.
-The focus is on good user experience, and to be like a boardgame component rather than a typical material style app.
-That means most of the functionality will be in one single screen, which makes it seem slightly busy at first glance, but is really necessary to minimize need for user input which is a key factor to good UX for a boardgame component.
+## Introduction
+**X-Haven Assistant** is a helper app for **Gloomhaven** and its family of board games. The app currently supports **Gloomhaven**, **Frosthaven**, **Jaws of the Lion**, **Forgotten Circles**, **Crimson Scales**, **Trail of Ashes**, and any derivatives including solo, custom, and retirement scenarios. 
 
-This is also an opportunity for me to learn the Flutter framework.
+This is a feature-complete replacement for the defunct Gloomhaven Helper app. This single-screen app streamlines combat and minimizes the need for user input. It complements physical play by tracking monster turns, enforcing scenario-specific rules and spawns, facilitating loot deck construction and enhancement, and much more. Multi-device control is available via local area networking. Please note that campaign progress is not within scope of this combat helper app.
+
+For problems and suggestions please file a [Github Issue](issues) or contact me directly at royalhasse@gmail.com. Please check out [Known Issues](#known-issues) and [Usage](#usage) below before submitting. Thanks!
+
+Written with the Flutter framework. [![codecov](https://codecov.io/gh/wonderplayer/FrosthavenAssistant/branch/main/graph/badge.svg?token=RMRI5NZCGG)](https://codecov.io/gh/wonderplayer/FrosthavenAssistant)
+
+## Set-up Guide
+
+This will walk you through app installation through your first scenario. 
+
+<img width="575" alt="image" src="https://github.com/alexzhaohong/FrosthavenAssistant/assets/12620082/13657352-1360-4663-b4b1-8e1b81c93110">
+
+ - Installation
+	 - Visit [Github Releases](/releases) and download the appropriate file for your system (Windows, Linux, Mac, Android, iOS). The app is also available via the [Google Play store](https://play.google.com/store/apps/details?id=com.tarmslitaren.frosthaven_assistant) and the [Apple App Store](https://apps.apple.com/ua/app/x-haven-assistant/id1639494414)
+	 - Open the application and set the device near the gaming board
+	 - Set *Dark Mode* for a red Gloomhaven theme (Default is the Frosthaven theme)
+
+<img width="575" alt="image" src="https://github.com/alexzhaohong/FrosthavenAssistant/assets/12620082/2089c28b-e51f-46d5-af10-1eeef9804925">
+
+ - Add characters
+	 - Click the top-left menu icon (≡), then click *Add Character*
+	 -  Choose or type a class name
+	 - Add the character's name
+ - Start a scenario
+	 - In the sidebar menu (≡) click *Set Scenario*
+	 - In the top drop-down menu (⌄) choose the current campaign
+	 - Choose the scenario number
+	 - Select monster numbers. Monsters auto-populate by player count and difficulty
+ - Round structure
+	 - Choose two cards and input initiative 
+		 - **For tablet/mouse users:** "*Soft numpad for input*" displays virtual numpad for accessibility
+		 - If the "*Don't ask for initative*" setting is on, drag and drop banners after drawing monster cards
+	 - Reveal monster actions. Click *Draw* in the bottom-left corner
+	 - Resolve combat
+		 - Click on health to adjust health and status effects
+		 - Click element in top-right to set as full. Long-press to set as waning
+		 - Monster Ability Modifier Deck (AMD) is provided in the bottom-right
+		 - Players track their AMD physically
+		 - *Undo* and *Redo* are available in the sidebar menu (≡)
+		 - See [Usage](#usage) for further tips and tricks
+	 - End the active turn. Click the active banner's icon on the left
+	 - End the round. Click *Next Round* in the bottom-left
+	 -  Repeat as necessary
+ - Complete the scenario
+	 - Congratulations!
+	 - Look at the bottom bar for successful Experience rewards and the Looted Gold multiplier
+ 
 
 ## Key features
 - Full support for Frosthaven, Gloomhaven, Forgotten Circles, Jaws of the Lion and Crimson Scales!
@@ -42,84 +83,83 @@ This is also an opportunity for me to learn the Flutter framework.
 - Loot Deck for Frosthaven
 
 
-## Usage:
-- Press hamburger icon to open main menu.
-- Add characters you play with in the add character menu. Class names can be searched.
-- Set the current scenario from the Set scenario menu. 
-- Alternatively you may add monsters separately from the add monsters menu.
-- To set initiative press under the initiative marker, to the right of the class Icon on your character.
-- If you prefer a soft numpad input (useful on PC if your keyboard is not close at hand) that can be set from options menu.
-- Options menu also has options for scaling the list (you can scale down to fit 2 columns in the list for example) and 
-scaling the bottom/top bars (for better visibility on some screens for example).
-- Fullscreen option: On android this will hide system navigation buttons. 
+## Usage
+- Tap the hamburger icon (≡) for settings
+- Add characters with the *Add Character* menu. Class names can be searched
+- Set the current scenario with the *Set Scenario* menu 
+- You may add monsters from the *Add Monsters* menu
+- To set initiative press under the initiative marker, to the right of the class icon
+- If you prefer to input via virtual numpad, that can be set from the *Settings* menu
+- *Settings* menu has options for scaling banners, header, and footer (eg scale down to fit 2 columns)
+- Fullscreen option: On Android this will hide system navigation buttons
   - If you experience glitches (especially when the soft keyboard appears) you may want to turn this off.
-- Dark Mode option: in case the bright blue background is too much.
-- Press + signs on the Monster stats card to add monster standees.
-- Press Draw/next turn button to flip the monster ability cards for the turn.
-- Next to Draw button is a turn counter.
-- Center on the bottom bar is the level widget, showing the current scenario name, and the current level stats in order:
-  - Level, Trap Damage, Hazardous Terrain Damage, XP Gain and Coin Multiplier.
-  - Tap/click the level widget to open set level menu.
-- To set character level tap/click the character to open stat menu, then tap/click the crown to open set character level menu.
-- Character name can be changed from the same menu
-- To open stats menu for monster, tap/click the standee.
-- On the stats menu you can add conditions and set current health values etc.
-- To the right on bottom bar, or above in case screen to narrow is the monster modifier deck.
-- In case a scenario has monsters be allied to you, there will appear also a second allies modifier deck above the enemies one.
-- Tapping the amd discard pile opens amd menu. In the menu, tapping cards will give some options. you may also long press to reorder if needed.
-- Top bar hosts element infusions. press to infuse, long press to set waning.
-- Main list items can be reordered on a long press.
-- Monster Ability Cards can be double tapped to open a bigger view of them.
-- Monster Ability Cards and Modifier Deck can be tapped/clicked to open card menu with info on discard pile content and such.
-- In the monster ability deck menu, tapping cards will give some options. you may also long press to reorder if needed.
-- To add a summon, press the big plus on the right of the character widget.
-  - On the add summon menu, fist choose the color and nr before pressing your desired summon from the list.
-- From any menu: tapping/clicking anywhere outside the menu will close it.
-- Sometimes you will want a monster type have different level than the current level, or have different max health value than usual. This can be set from the set level menu accessed from a monster standees stat menu.
-- Objectives and Escorts are special characters, representing special rules from scenarios.
-- If some special rules or monsters appear from an added section in the scenario/sections booklets, they can be added from the add sections menu.
-- If you make a mistake, there is an undo button in the main menu. and if the mistake was to undo, there is also redo ;)
-- If playing a Frosthaven Scenario,the loot decks have been predefined, and values are pre-calulated based on nr of characters.
-- Make sure to select who's turn it is before drawing loot cards, to mark the cards owner.
-- To Enhance loot deck tap the loot deck discard pile to enter loot deck menu.
+- Tap the plus icon (+) on the Monster stats card to add normal or elite monsters
+- Tap the Draw button to reveal the monster ability cards
+- Next to the Draw button is the turn counter
+- Center on the bottom bar shows the current scenario name and the scenario difficulty stats
+  - in order: Level, Trap Damage, Hazardous Terrain Damage, XP Gain and Coin Multiplier
+- To set character level, tap the character to open stat menu, then tap the crown to set character level. Character name can be changed from the same menu
+- To open stats menu for monster, tap the standee image
+- On the stats menu you can add conditions and set current health values
+- On the bottom-right is the monster Attack Modifier Deck (AMD). (Above if the screen is narrow)
+- If a scenario has allied monsters, there will be a second ally modifier deck above the monster AMD
+- Tapping the AMD discard pile opens the AMD menu. In the menu, tap cards for more options. you may also long press to reorder if needed
+- Top bar hosts element infusions. press to infuse, long press to set waning
+- Main list items can be reordered on a long press
+- Monster Ability Cards can be double tapped to zoom in
+- Monster Ability Cards and Modifier Deck can be tapped to see info on their discard pile
+- In the monster ability deck, tapping cards will give some options. Long press to reorder
+- To add a summon, press the plus icon (+) on the right of the character widget
+  - On the add summon menu, fist choose the color and nr before pressing your desired summon from the list
+- From any menu: tapping/clicking anywhere outside the menu will close it
+- For custom difficulty, you may want to change a monster's level or change their max health. This can be set by tapping their health and tapping their level crown
+- Objectives and Escorts are special characters, representing special rules from scenarios
+- If special rules or monsters appear from an added section in the scenario or sections booklets, they can be added from the *Add Section* menu
+- If you make a mistake, you can *Undo* in the menu (≡). and if the undo were also a mistake, there is *Redo* ;)
+- For Frosthaven, the loot deck values are calulated based on number of characters
+- Select the active turn when drawing loot cards to mark the loot's owner. Click on a loot card to change owner
+- To Enhance the loot deck, tap the loot discard pile and tap *Enhance*. This is saved for future scenarios
 - Networking:
   - To start a server, be sure to be on a wifi network and press 'start host server' from the settings menu
   - To connect to a server in a local network, type in the local ip of the server (usually 192.168.something) and press 'Connect as client'.
 
-## Connection Usage:
-# Starting:
-- From the settings menu, have one device start a server. Be sure to be on wifi or ethernet (a local ip will be shown i.e. 192.168.X.XXX)
-- A Port can also be defined if needed. be aware that ports under 1024 are typically blocked.
-- Other devices on the same network may connect from the settings menu, by typing in the server's ip, and port.
-# Info:
-- Be aware, when connecting to a server, the server's game state will overwrite the local state.
-- Mobile devices might cut connections when they are not in foreground. This is especially crucial for Server device: Best to put the server on a windows or mac if available.
-- Clients will try to auto reconnect when coming back to foreground if connection was cut.
-- If a client gets out of sync with the server (by disconnecting, or making an update before it gets the latest state from server), the client's state change will be ignored and overwritten by latest state from server to get you back on track. And a message index out of sync will be shown.
-- There should be no issue having several users change things simultaneously: the menus will not close when getting an update.
-- Local settings are not affected by the game state (Except for no standees option). It is up to the users to decide on options that affect the game.
+## Connection Usage
 
-## Known Issues:
-- Does not handle character modifier decks.
-- Severe flickering on lineage os 16, 17 and 18 on older phones using adreno 300 series graphic chip. 
-- Some animations will not play, (and some may play when they shouldn't) when receiving updates over wifi.
-- When trying to connect without a server on same network, may result in a lot of error messages shown when it tries connecting.
-- A device sharing a wifi-hotspot can not connect itself.
-- Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself.
-- Some text alignment issues with small texts on small (mobile) screens.
-- Condition Animations do not play when connected.
-- When connected and device goes to background, the connection may be broken. Try to avoid having the server device's app go to background for this reason.
-- All Data is added by hand. Please Report any error in a ticket on github.
+### Starting
+- From the settings menu, have one device start a server. Be sure to be on wifi or ethernet (a local IP will be shown i.e. 192.168.X.XXX)
+- A Port can also be defined if needed. Be aware that ports under 1024 are typically blocked. If using a port, make sure to allow port forwarding in your router's settings. Search the internet for this
+- Other devices on the same network may connect from the settings menu, by typing in the host server's IP and port. There are two IP numbers, local IP address and public IP address. Try the first one
+
+### Info
+- Be aware, when connecting to a server, the server's game state will overwrite the local state
+- Mobile devices might cut connections when they are not in foreground. This is especially crucial for Server device: Best to put the server on a windows or mac if available
+- Clients will try to auto reconnect when coming back to foreground if connection was cut
+- If a client gets out of sync with the server (by disconnecting, or making an update before it gets the latest state from server), the client's state change will be ignored and overwritten by latest state from server to get you back on track. And a message index out of sync will be shown
+- There should be no issue having several users change things simultaneously: the menus will not close when getting an update
+- Local settings are not affected by the game state (Except for no standees option). It is up to the users to decide on options that affect the game
+
+## Known Issues
+- Does not handle character modifier decks
+- Severe flickering on lineage os 16, 17 and 18 on older phones using adreno 300 series graphic chip.
+- Some animations will not play, (and some may play when they shouldn't) when receiving updates over wifi
+- When trying to connect without a server on same network, may result in a lot of error messages shown when it tries connecting
+- A device sharing a wifi-hotspot can not connect itself
+- Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself
+- Some text alignment issues with small texts on small screens
+- Condition Animations do not play when connected
+- When connected and the server device goes to background, the connection may be broken. Try to avoid having the server device's app go to background
+- All data is added by hand. Please report any error in a ticket on Github
+
 ## Roadmap
 - Next:
-  - Something special.
+  - Something special
   - More minor improvements
 - And then:
   - Maybe language support
 
 ## Developer Notes
 
-#Calculations:
+#### Calculations
 health and attack may be using a string formula instead of integer.
 Calculations handle division (integer only) '/' rounds up, 'd' rounds down
 multiplications (* or x means same thing)
@@ -127,7 +167,7 @@ addition (- or +)
 and parenthesis.
 variables: C (nr of characters), L (scenario level)
 
-#Special Rules:
+#### Special Rules
 Allies: 
  - need a "list" of strings of monsters
 Timer: 
@@ -144,7 +184,7 @@ LevelAdjust:,
 Named or otherwise special enemies are not added as special rules, but as their own monster type
 Since named monsters are like bosses, they should be added as if they were a boss (i.e only one type instead of normal+elite types)
 
-#special signs for text layout:
+#### special signs for text layout
  - *small style - only used for longer texts usually.
  - ^mid style - also denotes subline in case last line was main line sized. if you want a line to be a subline you NEED to use this or ^^.
  - ^^mid style squished. makes the line height smaller. can cause alignment issues if text contains icons. best to use this from the second row onwards in a text block.
@@ -177,16 +217,16 @@ FH special considerations:
  - subline text is somewhat larger than the physical counterpart due to the fact it was just too small to see easily on smaller screens.
  
 
-## Copyright / License
+## Copyright and License
 
 Gloomhaven and all related properties, images and text are owned by [Cephalofair Games](https://cephalofair.com).
 
-Assets/Data used:
+Assets and Data used:
 
-- [Creator Pack by Isaac Childres](https://boardgamegeek.com/thread/1733586/files-creation) CC BY-NC-SA 4.0
-- [Frosthaven rulebook sneak peak] (https://drive.google.com/file/d/1sz6nbQNM5wylz2sXJBBSWMLaiBFqqFLl/view)
-- [Frosthaven spoilers compiled by u/Juar99] (https://drive.google.com/drive/u/0/folders/1sMFWoFehBdkJmzstR0CKNXfzhP-YSphP?sort=13&direction=a)
-- [Worldhaven](https://github.com/any2cards/worldhaven)
-- some other assets used are public domain licensed.
+- [BoardGameGeek Creator Pack by Isaac Childres](https://boardgamegeek.com/thread/1733586/files-creation) CC BY-NC-SA 4.0
+- [Frosthaven rulebook sneak peak, Google Drive](https://drive.google.com/file/d/1sz6nbQNM5wylz2sXJBBSWMLaiBFqqFLl/view)
+- [Frosthaven spoilers compiled by u/Juar99, Google Drive](https://drive.google.com/drive/u/0/folders/1sMFWoFehBdkJmzstR0CKNXfzhP-YSphP?sort=13&direction=a)
+- [Worldhaven Github](https://github.com/any2cards/worldhaven)
+- other assets are licensed in the public domain
 
 Source code is licenced under [AGPL](/LICENSE)
