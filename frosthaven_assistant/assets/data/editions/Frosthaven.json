@@ -7344,7 +7344,42 @@
           "health": "Cx(L+3)/2",
           "note": "more cabinets later on: 52.1"
         }
-      ]
+      ],
+      "sections": {
+        "#52.1 Dead Pass (44)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Metal Cabinet 2",
+              "health": "Cx(L+3)/2"
+            },
+            {
+              "type": "Objective",
+              "name": "Metal Cabinet 3",
+              "health": "Cx(L+3)/2"
+            },
+            {
+              "type": "Objective",
+              "name": "Metal Cabinet 4",
+              "health": "Cx(L+3)/2"
+            },
+            {
+              "type": "Objective",
+              "name": "Metal Cabinet 5",
+              "health": "Cx(L+3)/2"
+            }
+          ]
+        },
+        "#149.1 Dead Pass (44)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Metal Cabinet 6",
+              "health": "Cx(L+3)/2"
+            }
+          ]
+        }
+      }
     },
     "#45 Living Glacier": {
       "monsters": [ "Abael Herder", "Abael Scout", "Lightning Eel", "Piranha Pig" ],
