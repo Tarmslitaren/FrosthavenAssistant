@@ -21,7 +21,7 @@ This will walk you through app installation through your first scenario.
 <img width="575" alt="image" src="https://github.com/alexzhaohong/FrosthavenAssistant/assets/12620082/13657352-1360-4663-b4b1-8e1b81c93110">
 
  - Installation
-	 - Visit [Github Releases](/releases) and download the appropriate file for your system (Windows, Linux, Mac, Android, iOS). The app is also available via the [Google Play store](https://play.google.com/store/apps/details?id=com.tarmslitaren.frosthaven_assistant) and the [Apple App Store](https://apps.apple.com/ua/app/x-haven-assistant/id1639494414)
+	 - Visit [Github Releases](https://github.com/Tarmslitaren/FrosthavenAssistant/releases/latest) and download the appropriate file for your system (Windows, Linux, Mac, Android, iOS). The app is also available via the [Google Play store](https://play.google.com/store/apps/details?id=com.tarmslitaren.frosthaven_assistant) and the [Apple App Store](https://apps.apple.com/ua/app/x-haven-assistant/id1639494414)
 	 - Open the application and set the device near the gaming board
 	 - Set *Dark Mode* for a red Gloomhaven theme (Default is the Frosthaven theme)
 
