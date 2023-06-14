@@ -54,7 +54,7 @@ class Connection {
   }
 
   Iterable<Socket> _find(Socket socket) {
-    return _sockets.where((x) => x.remoteAddress == socket.remoteAddress);
+    return _sockets.where((x) => x.remoteAddress == socket.remoteAddress && x.remotePort == socket.remotePort);
   }
 
   void _destroy(Iterable<Socket> sockets) {
