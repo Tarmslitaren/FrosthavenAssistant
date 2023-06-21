@@ -217,7 +217,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                       ));
                                     },
                                     child: const Text(
-                                      "Draw card",
+                                      "Draw extra card",
                                     ),
                                   ),
                                   TextButton(
