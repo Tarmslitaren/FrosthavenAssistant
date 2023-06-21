@@ -46,14 +46,14 @@ class Server {
     }
     try {
       await ServerSocket.bind(
-              connectTo, int.parse(getIt<Settings>().lastKnownPort))
+          InternetAddress.anyIPv4.address, int.parse(getIt<Settings>().lastKnownPort))
           .then((ServerSocket serverSocket) {
         runZoned(() {
           _serverSocket = serverSocket;
 
           getIt<Settings>().server.value = true;
           String info =
-              'Server Online: IP: ${_serverSocket!.address.address}, Port: ${_serverSocket!.port.toString()}';
+              'Server Online: IP: $connectTo, Port: ${_serverSocket!.port.toString()}';
           print(info);
           getIt<Network>().networkMessage.value = info;
           _gameState.commandIndex.value = -1;
