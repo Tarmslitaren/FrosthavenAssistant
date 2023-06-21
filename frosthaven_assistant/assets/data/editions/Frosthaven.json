@@ -1647,6 +1647,7 @@
       "deck": "Imp (FH)",
       "count": 10,
       "flying": true,
+      "capture": true,
       "levels": [
         {
           "level": 0,
