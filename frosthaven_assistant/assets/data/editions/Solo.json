@@ -1797,6 +1797,30 @@
 					"init": 99
 				},
 				{
+					"type": "Escort",
+					"name": "Rune Worker 3",
+					"health": "L+1",
+					"init": 99
+				},
+				{
+					"type": "Escort",
+					"name": "Rune Worker 4",
+					"health": "L+1",
+					"init": 99
+				},
+				{
+					"type": "Escort",
+					"name": "Rune Worker 5",
+					"health": "L+1",
+					"init": 99
+				},
+				{
+					"type": "Escort",
+					"name": "Rune Worker 6",
+					"health": "L+1",
+					"init": 99
+				},
+				{
 					"type": "Timer",
 					"list": [4],
 					"startOfRound": true,
