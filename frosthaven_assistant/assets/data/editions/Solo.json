@@ -1053,7 +1053,7 @@
 				{
 					"level": 3,
 					"normal": { "health": 12, "move": 3, "attack": 3,"attributes": ["%shield% 1"  ],"immunities": [  "%stun%"] },
-					"elite": { "health": 12, "move": 2, "attack": 5,"attributes": ["%shield% 2", "%brittle%" ],"immunities": [  "%stun%"] }
+					"elite": { "health": 12, "move": 3, "attack": 5,"attributes": ["%shield% 2", "%brittle%" ],"immunities": [  "%stun%"] }
 				},
 				{
 					"level": 4,
