@@ -16,16 +16,15 @@ class NetworkInformation {
   NetworkInformation() {
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
-      if (_connectionStatus != result) {
-        if (_connectionStatus != null) {
-          //null just to not show message on start.
-          getIt<Network>().networkMessage.value =
-              "Network connection: ${result.name}";
-        }
-      }
-      _connectionStatus = result;
-      initNetworkInfo();
-    });
+          if (_connectionStatus != result) {
+            if (_connectionStatus != null) {
+              //null just to not show message on start.
+              getIt<Network>().networkMessage.value = "Network connection: ${result.name}";
+            }
+          }
+          _connectionStatus = result;
+          initNetworkInfo();
+        });
   }
 
   final NetworkInfo networkInfo = NetworkInfo();
@@ -53,7 +52,8 @@ class NetworkInformation {
       developer.log('Failed to get Wifi IPv4', error: e);
       wifiIPv4.value = "";
       for (var interface in await NetworkInterface.list()) {
-        //searching for eth should fix the ethernet ip address issue on ethernet connections on windows and linux
+        //searching for eth should fix the ethernet ip address issue on
+        // ethernet connections on windows and linux
         if (interface.name.toLowerCase().contains("eth") &&
             !interface.name.toLowerCase().contains("switch") &&
             !interface.name.toLowerCase().contains("veth")) {

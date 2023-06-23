@@ -10,6 +10,15 @@ import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'modifier_deck_widget.dart';
 
+
+String formattedScenarioName(GameState gameState) {
+  String scenario = gameState.scenario.value;
+  if (gameState.currentCampaign.value == "Solo") {
+    return scenario.split(':')[1];
+  }
+  return scenario;
+}
+
 Widget createLevelWidget(BuildContext context) {
   GameState gameState = getIt<GameState>();
   Settings settings = getIt<Settings>();
@@ -26,24 +35,21 @@ Widget createLevelWidget(BuildContext context) {
   var textStyle = TextStyle(
       color: settings.darkMode.value ? Colors.white : Colors.black,
       overflow: TextOverflow.fade,
-      //fontWeight: FontWeight.bold,
-      //backgroundColor: Colors.transparent.withAlpha(100),
       fontSize: fontHeight,
       shadows: settings.darkMode.value
           ? [shadow]
           : [
-              Shadow(
-                  offset: Offset(1.0 * settings.userScalingBars.value,
-                      1.0 * settings.userScalingBars.value),
-                  blurRadius: 3.0 * settings.userScalingBars.value,
-                  color: Colors.white),
-              Shadow(
-                  offset: Offset(1.0 * settings.userScalingBars.value,
-                      1.0 * settings.userScalingBars.value),
-                  blurRadius: 8.0 * settings.userScalingBars.value,
-                  color: Colors.white), //*/
-              //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
-            ]);
+        Shadow(
+            offset: Offset(1.0 * settings.userScalingBars.value,
+                1.0 * settings.userScalingBars.value),
+            blurRadius: 3.0 * settings.userScalingBars.value,
+            color: Colors.white),
+        Shadow(
+            offset: Offset(1.0 * settings.userScalingBars.value,
+                1.0 * settings.userScalingBars.value),
+            blurRadius: 8.0 * settings.userScalingBars.value,
+            color: Colors.white),
+      ]);
 
   return InkWell(
     onTap: () {
@@ -63,7 +69,7 @@ Widget createLevelWidget(BuildContext context) {
                   width: 174 * settings.userScalingBars.value,
                   child: Text(
                     overflow: TextOverflow.ellipsis,
-                    gameState.scenario.value,
+                    formattedScenarioName(gameState),
                     textAlign: TextAlign.center,
                     style: textStyle,
                   ));
@@ -75,7 +81,6 @@ Widget createLevelWidget(BuildContext context) {
               const double spreadRadius = 1.0;
               const double opacity = 0.3;
               return Text.rich(
-                //textAlign: textAlign,
                 TextSpan(children: [
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
@@ -87,9 +92,7 @@ Widget createLevelWidget(BuildContext context) {
                               BoxShadow(
                                 color: Colors.black.withOpacity(opacity),
                                 spreadRadius: spreadRadius,
-                                blurRadius:
-                                    blurRadius * settings.userScalingBars.value,
-                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                                blurRadius: blurRadius * settings.userScalingBars.value,
                               ),
                             ],
                           ),
@@ -97,8 +100,7 @@ Widget createLevelWidget(BuildContext context) {
                             height: fontHeight * 0.6,
                             filterQuality: FilterQuality
                                 .medium, //needed because of the edges
-                            image:
-                                const AssetImage("assets/images/psd/level.png"),
+                            image: const AssetImage("assets/images/psd/level.png"),
                           ))),
                   TextSpan(
                     text: ": ${gameState.level.value} ",
@@ -114,9 +116,7 @@ Widget createLevelWidget(BuildContext context) {
                               BoxShadow(
                                 color: Colors.black.withOpacity(opacity),
                                 spreadRadius: spreadRadius,
-                                blurRadius:
-                                    blurRadius * settings.userScalingBars.value,
-                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                                blurRadius: blurRadius * settings.userScalingBars.value,
                               ),
                             ],
                           ),
@@ -141,9 +141,7 @@ Widget createLevelWidget(BuildContext context) {
                               BoxShadow(
                                 color: Colors.black.withOpacity(opacity),
                                 spreadRadius: spreadRadius,
-                                blurRadius:
-                                    blurRadius * settings.userScalingBars.value,
-                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                                blurRadius: blurRadius * settings.userScalingBars.value,
                               ),
                             ],
                           ),
@@ -168,9 +166,7 @@ Widget createLevelWidget(BuildContext context) {
                               BoxShadow(
                                 color: Colors.black.withOpacity(opacity),
                                 spreadRadius: spreadRadius,
-                                blurRadius:
-                                    blurRadius * settings.userScalingBars.value,
-                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                                blurRadius: blurRadius * settings.userScalingBars.value,
                               ),
                             ],
                           ),
@@ -194,9 +190,7 @@ Widget createLevelWidget(BuildContext context) {
                               BoxShadow(
                                 color: Colors.black.withOpacity(opacity),
                                 spreadRadius: spreadRadius,
-                                blurRadius:
-                                    blurRadius * settings.userScalingBars.value,
-                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                                blurRadius: blurRadius * settings.userScalingBars.value,
                               ),
                             ],
                           ),
@@ -212,11 +206,6 @@ Widget createLevelWidget(BuildContext context) {
                     style: textStyle,
                   ),
                 ]),
-              );
-
-              Text(
-                "level: ${gameState.level.value} trap: ${GameMethods.getTrapValue()} hazard: ${GameMethods.getHazardValue()} xp: +${GameMethods.getXPValue()} coin: x${GameMethods.getCoinValue()}",
-                style: textStyle,
               );
             }),
       ],
@@ -240,7 +229,10 @@ Widget createBottomBar(BuildContext context) {
                     builder: (context, value, child) {
                       return Container(
                           height: 40 * settings.userScalingBars.value,
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery
+                              .of(context)
+                              .size
+                              .width,
                           decoration: BoxDecoration(
                             color: Colors.transparent,
                             boxShadow: const [
@@ -251,10 +243,9 @@ Widget createBottomBar(BuildContext context) {
                               )
                             ],
                             image: DecorationImage(
-                                //colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.85), BlendMode.dstATop),
                                 image: AssetImage(getIt<Settings>()
-                                        .darkMode
-                                        .value
+                                    .darkMode
+                                    .value
                                     ? 'assets/images/psd/gloomhaven-bar.png'
                                     : 'assets/images/psd/frosthaven-bar.png'),
                                 fit: BoxFit.cover,
@@ -267,15 +258,12 @@ Widget createBottomBar(BuildContext context) {
                               createLevelWidget(context),
                               const NetworkUI(),
                               modifiersFitOnBar(context)
-                                  ? const ModifierDeckWidget(
-                                      name: '',
-                                    )
+                                  ? const ModifierDeckWidget(name: '',)
                                   : Container()
                             ],
                           ));
                     }),
               )
-              //const ModifierDeckWidget(),
             ]));
       });
 }
