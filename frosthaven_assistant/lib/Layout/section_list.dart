@@ -65,7 +65,7 @@ class SectionListState extends State<SectionList> {
                 }
 
                 if (list != null &&
-                    gameState.scenarioSectionsAdded.length == list.length) {
+                    gameState.scenarioSectionsAdded.length == list.length - list.where((section) => section.name.contains("spawn")).length) {
                   list = [];
                 }
                 list ??= [];

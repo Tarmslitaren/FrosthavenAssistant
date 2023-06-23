@@ -57,7 +57,7 @@ void main() {
     });
   });
 
-  group('Message send/recieve', () {
+  group('Message send/receive', () {
     test('SendToAllExcept sends data to all sockets except one', () {
       // arrange
       const data = 'TestMessage';
