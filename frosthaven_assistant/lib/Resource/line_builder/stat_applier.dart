@@ -201,6 +201,11 @@ class StatApplier {
       }
     }
 
+    //special case for uncalculable and only elites
+    if(elite != null && skipCalculation && showElite && !showNormal) {
+      newStartOfLine += normalResult;
+    }
+
     if (elite != null && !skipCalculation && showElite) {
       if (showNormal) {
         newStartOfLine += "/";

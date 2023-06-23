@@ -153,8 +153,7 @@ class LineBuilder {
         children: lines);
   }
 
-  static Widget createLines(
-      List<String> strings,
+  static Widget createLines(List<String> strings,
       final bool left,
       final bool applyStats,
       final bool applyAll,
@@ -216,12 +215,12 @@ class LineBuilder {
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: ((alignment == CrossAxisAlignment.center
-                ? frosthavenStyle
-                    ? 9.52 //7.52 is closer to physical size, but too hard to see on smaller screens
-                    : 8.8
-                : frosthavenStyle
-                    ? 8.8
-                    : 9.9) *
+            ? frosthavenStyle
+            ? 9.52 //7.52 is closer to physical size, but too hard to see on smaller screens
+            : 8.8
+            : frosthavenStyle
+            ? 8.8
+            : 9.9) *
             scale), //.floorToDouble()+0.5, //not sur eif flooring the mid scale is realy the best option. or onl yhappens tp work on my android
         //sizes are larger on stat cards
         height: (alignment == CrossAxisAlignment.center
@@ -602,7 +601,7 @@ class LineBuilder {
         }
       }
       if (line.startsWith('>')) {
-        //disable apply stats (for granted lines)
+        //disable apply stats (for granted lines) //Too bad it doesn't work here
         line = line.substring(1, line.length);
       } else if (applyStats) {
         List<String> statLines =
