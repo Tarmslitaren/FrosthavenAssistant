@@ -39,11 +39,11 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   }
 
   int compareEditions(String a, String b) {
-    for(String item in _gameState.editions) {
-      if(b == item && a != item) {
+    for (String item in _gameState.editions) {
+      if (b == item && a != item) {
         return 1;
       }
-      if(a == item && b != item) {
+      if (a == item && b != item) {
         return -1;
       }
     }
@@ -108,7 +108,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     if (campaign != "All") {
       _foundMonsters.removeWhere((monster) => monster.edition != campaign);
     } else if (getIt<Settings>().showCustomContent.value == false) {
-      _foundMonsters.removeWhere((monster) => GameMethods.isCustomCampaign(monster.edition));
+      _foundMonsters.removeWhere(
+          (monster) => GameMethods.isCustomCampaign(monster.edition));
     }
 
     if (!_showSpecial) {
@@ -121,17 +122,16 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     sortMonsters(_foundMonsters);
   }
 
-  List<DropdownMenuItem<String>> buildEditionDroopDownMenuItems(){
+  List<DropdownMenuItem<String>> buildEditionDroopDownMenuItems() {
     List<DropdownMenuItem<String>> retVal = [];
     retVal.add(const DropdownMenuItem<String>(
         value: "All", child: Text("All Campaigns")));
 
-    for(String item in _gameState.editions) {
-      if(item != "na") {
-        if(!GameMethods.isCustomCampaign(item) || getIt<Settings>().showCustomContent.value == true) {
-          retVal.add(DropdownMenuItem<String>(
-              value: item,
-              child: Text(item)));
+    for (String item in _gameState.editions) {
+      if (item != "na") {
+        if (!GameMethods.isCustomCampaign(item) ||
+            getIt<Settings>().showCustomContent.value == true) {
+          retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
         }
       }
     }
@@ -214,7 +214,6 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                   "assets/images/monsters/${_foundMonsters[index].gfx}.png",
                                   height: 35,
                                   cacheHeight: 75,
-
                                 ),
                                 //iconColor: _foundMonsters[index].color,
                                 title: Text(

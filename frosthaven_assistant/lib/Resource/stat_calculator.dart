@@ -24,7 +24,6 @@ class StatCalculator {
   static bool evaluateCondition(final dynamic str) {
     return calculateFormula(str) == 1;
   }
-
 }
 
 class Parser {
@@ -79,7 +78,7 @@ class Parser {
       int x = parseExpression()!;
       for (;;) {
         if (eat('<')) {
-          x =  x < parseExpression()! ? 1 : 0;
+          x = x < parseExpression()! ? 1 : 0;
         } else if (eat('>')) {
           x = x > parseExpression()! ? 1 : 0;
         } else if (eat('=')) {
@@ -125,7 +124,7 @@ class Parser {
           return x;
         }
       }
-    } catch(_) {
+    } catch (_) {
       return null;
     }
   }

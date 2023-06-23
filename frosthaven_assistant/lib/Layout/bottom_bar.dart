@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/draw_button.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
@@ -18,30 +17,33 @@ Widget createLevelWidget(BuildContext context) {
   double fontHeight = 14 * settings.userScalingBars.value;
 
   var shadow = Shadow(
-    offset: Offset(1 * settings.userScalingBars.value, 1 * settings.userScalingBars.value),
+    offset: Offset(
+        1 * settings.userScalingBars.value, 1 * settings.userScalingBars.value),
     color: Colors.black87,
     blurRadius: 1 * settings.userScalingBars.value,
   );
 
   var textStyle = TextStyle(
-      color: settings.darkMode.value? Colors.white :Colors.black,
+      color: settings.darkMode.value ? Colors.white : Colors.black,
       overflow: TextOverflow.fade,
       //fontWeight: FontWeight.bold,
       //backgroundColor: Colors.transparent.withAlpha(100),
       fontSize: fontHeight,
-      shadows: settings.darkMode.value? [shadow]: [
-        Shadow(
-            offset: Offset(1.0 * settings.userScalingBars.value,
-                1.0 * settings.userScalingBars.value),
-            blurRadius: 3.0 * settings.userScalingBars.value,
-            color: Colors.white),
-        Shadow(
-            offset: Offset(1.0 * settings.userScalingBars.value,
-                1.0 * settings.userScalingBars.value),
-            blurRadius: 8.0 * settings.userScalingBars.value,
-            color: Colors.white),//*/
-        //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
-      ]);
+      shadows: settings.darkMode.value
+          ? [shadow]
+          : [
+              Shadow(
+                  offset: Offset(1.0 * settings.userScalingBars.value,
+                      1.0 * settings.userScalingBars.value),
+                  blurRadius: 3.0 * settings.userScalingBars.value,
+                  color: Colors.white),
+              Shadow(
+                  offset: Offset(1.0 * settings.userScalingBars.value,
+                      1.0 * settings.userScalingBars.value),
+                  blurRadius: 8.0 * settings.userScalingBars.value,
+                  color: Colors.white), //*/
+              //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
+            ]);
 
   return InkWell(
     onTap: () {
@@ -78,26 +80,26 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child:
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(opacity),
-                              spreadRadius: spreadRadius,
-                              blurRadius: blurRadius * settings.userScalingBars.value,
-                              //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        child:
-
-                      Image(
-                        height: fontHeight * 0.6,
-                        filterQuality: FilterQuality.medium, //needed because of the edges
-                        image: const AssetImage("assets/images/psd/level.png"),
-                      ))),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(opacity),
+                                spreadRadius: spreadRadius,
+                                blurRadius:
+                                    blurRadius * settings.userScalingBars.value,
+                                //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Image(
+                            height: fontHeight * 0.6,
+                            filterQuality: FilterQuality
+                                .medium, //needed because of the edges
+                            image:
+                                const AssetImage("assets/images/psd/level.png"),
+                          ))),
                   TextSpan(
                     text: ": ${gameState.level.value} ",
                     style: textStyle,
@@ -105,24 +107,26 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child:Container(
+                      child: Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(opacity),
                                 spreadRadius: spreadRadius,
-                                blurRadius: blurRadius * settings.userScalingBars.value,
+                                blurRadius:
+                                    blurRadius * settings.userScalingBars.value,
                                 //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                               ),
                             ],
                           ),
                           child: Image(
-                        height: fontHeight,
-                            filterQuality: FilterQuality.medium, //needed because of the edges
-                        image:
-                            const AssetImage("assets/images/psd/traps-fh.png"),
-                      ))),
+                            height: fontHeight,
+                            filterQuality: FilterQuality
+                                .medium, //needed because of the edges
+                            image: const AssetImage(
+                                "assets/images/psd/traps-fh.png"),
+                          ))),
                   TextSpan(
                     text: ": ${GameMethods.getTrapValue()} ",
                     style: textStyle,
@@ -137,17 +141,19 @@ Widget createLevelWidget(BuildContext context) {
                               BoxShadow(
                                 color: Colors.black.withOpacity(opacity),
                                 spreadRadius: spreadRadius,
-                                blurRadius: blurRadius * settings.userScalingBars.value,
+                                blurRadius:
+                                    blurRadius * settings.userScalingBars.value,
                                 //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                               ),
                             ],
                           ),
-                          child:Image(
-                        height: fontHeight,
-                            filterQuality: FilterQuality.medium, //needed because of the edges
-                        image:
-                            const AssetImage("assets/images/psd/hazard-fh.png"),
-                      ))),
+                          child: Image(
+                            height: fontHeight,
+                            filterQuality: FilterQuality
+                                .medium, //needed because of the edges
+                            image: const AssetImage(
+                                "assets/images/psd/hazard-fh.png"),
+                          ))),
                   TextSpan(
                     text: ": ${GameMethods.getHazardValue()} ",
                     style: textStyle,
@@ -155,23 +161,25 @@ Widget createLevelWidget(BuildContext context) {
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
                       style: textStyle,
-                      child:Container(
+                      child: Container(
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(opacity),
                                 spreadRadius: spreadRadius,
-                                blurRadius: blurRadius * settings.userScalingBars.value,
+                                blurRadius:
+                                    blurRadius * settings.userScalingBars.value,
                                 //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                               ),
                             ],
                           ),
                           child: Image(
-                        height: fontHeight * 0.9,
-                            filterQuality: FilterQuality.medium, //needed because of the edges
-                        image: const AssetImage("assets/images/psd/xp.png"),
-                      ))),
+                            height: fontHeight * 0.9,
+                            filterQuality: FilterQuality
+                                .medium, //needed because of the edges
+                            image: const AssetImage("assets/images/psd/xp.png"),
+                          ))),
                   TextSpan(
                     text: ": +${GameMethods.getXPValue()} ",
                     style: textStyle,
@@ -186,17 +194,19 @@ Widget createLevelWidget(BuildContext context) {
                               BoxShadow(
                                 color: Colors.black.withOpacity(opacity),
                                 spreadRadius: spreadRadius,
-                                blurRadius: blurRadius * settings.userScalingBars.value,
+                                blurRadius:
+                                    blurRadius * settings.userScalingBars.value,
                                 //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                               ),
                             ],
                           ),
-                          child:Image(
-                        height: fontHeight,
-                            filterQuality: FilterQuality.medium, //needed because of the edges
-                        image:
-                            const AssetImage("assets/images/psd/coins-fh.png"),
-                      ))),
+                          child: Image(
+                            height: fontHeight,
+                            filterQuality: FilterQuality
+                                .medium, //needed because of the edges
+                            image: const AssetImage(
+                                "assets/images/psd/coins-fh.png"),
+                          ))),
                   TextSpan(
                     text: ": x${GameMethods.getCoinValue()}",
                     style: textStyle,
@@ -235,11 +245,11 @@ Widget createBottomBar(BuildContext context) {
                             color: Colors.transparent,
                             boxShadow: const [
                               BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 10,
-                              offset: Offset(0,
-                                  -4 ), // Shadow position
-                            )],
+                                color: Colors.black26,
+                                blurRadius: 10,
+                                offset: Offset(0, -4), // Shadow position
+                              )
+                            ],
                             image: DecorationImage(
                                 //colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.85), BlendMode.dstATop),
                                 image: AssetImage(getIt<Settings>()
@@ -257,7 +267,9 @@ Widget createBottomBar(BuildContext context) {
                               createLevelWidget(context),
                               const NetworkUI(),
                               modifiersFitOnBar(context)
-                                  ? const ModifierDeckWidget(name: '',)
+                                  ? const ModifierDeckWidget(
+                                      name: '',
+                                    )
                                   : Container()
                             ],
                           ));

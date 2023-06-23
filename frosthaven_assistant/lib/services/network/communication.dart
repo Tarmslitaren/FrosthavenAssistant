@@ -7,9 +7,9 @@ import '../service_locator.dart';
 import 'connection.dart';
 
 class Communication {
-  static const beggining = "S3nD:";
+  static const begining = "S3nD:";
   static const end = "[EOM]";
-  final messageTemplate = "$beggining{}$end";
+  final messageTemplate = "$begining{}$end";
   final _connection = getIt<Connection>();
 
   // TODO: Need to test this somehow, or refactor altogether.
@@ -24,8 +24,8 @@ class Communication {
 
   void sendToAllExcept(Socket client, String data) {
     final sockets = _connection.getAll();
-    final recipients = sockets.where((x) =>
-        x.remoteAddress != client.remoteAddress);
+    final recipients =
+        sockets.where((x) => x.remoteAddress != client.remoteAddress);
     for (var socket in recipients) {
       sendTo(socket, data);
     }
@@ -49,13 +49,13 @@ class Communication {
   String dataFrom(String message) {
     final valid = isValid(message);
     var data = valid
-        ? message.substring(beggining.length, message.length - end.length)
+        ? message.substring(begining.length, message.length - end.length)
         : "";
     return data;
   }
 
   bool isValid(String message) {
-    return message.startsWith(beggining) && message.endsWith(end);
+    return message.startsWith(begining) && message.endsWith(end);
   }
 
   String _composeMessageFrom(String data) {

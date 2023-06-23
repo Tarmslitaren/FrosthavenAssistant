@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/character.dart';
@@ -24,7 +23,7 @@ class RemoveCharacterCommand extends Command {
 
   @override
   String describe() {
-    if(names.length > 1) {
+    if (names.length > 1) {
       return "Remove all characters";
     }
     return "Remove ${names[0].id}";

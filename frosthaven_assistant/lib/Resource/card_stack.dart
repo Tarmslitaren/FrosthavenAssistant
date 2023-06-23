@@ -18,7 +18,7 @@ class CardStack<E> {
     for (var item in _list) {
       retVal += "${item.toString()},";
     }
-    if(_list.isNotEmpty) {
+    if (_list.isNotEmpty) {
       retVal = retVal.substring(0, retVal.length - 1);
     }
     retVal += "]";
@@ -28,6 +28,7 @@ class CardStack<E> {
   void init(List<E> list) {
     _list.addAll(list);
   }
+
   void shuffle() {
     _list.shuffle(Random());
   }
@@ -36,7 +37,8 @@ class CardStack<E> {
     return _list.length;
   }
 
-  List<E> getList(){ //TODO: try to return a copy for safety?
+  List<E> getList() {
+    //TODO: try to return a copy for safety?
     return _list;
   }
 

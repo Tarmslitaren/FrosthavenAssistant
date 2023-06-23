@@ -21,10 +21,9 @@ class ConditionIcon extends StatefulWidget {
       suffix = "_fh";
     }
     String imagePath = "assets/images/abilities/${condition.name}.png";
-    if(condition.name.contains("character")) {
+    if (condition.name.contains("character")) {
       imagePath = "assets/images/class-icons/${condition.getName()}.png";
-    }
-    else if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
+    } else if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
       imagePath = "assets/images/abilities/${condition.getName()}$suffix.png";
     }
     gfx = imagePath;
@@ -69,7 +68,8 @@ class ConditionIconState extends State<ConditionIcon> {
     GameState gameState = getIt<GameState>();
     Command? command;
     //TODO: does not work at all when networked. index value wrong
-    if (gameState.commandIndex.value >= 0 && gameState.commands.length > gameState.commandIndex.value) {
+    if (gameState.commandIndex.value >= 0 &&
+        gameState.commands.length > gameState.commandIndex.value) {
       command = gameState.commands[gameState.commandIndex.value];
     }
     if (command is TurnDoneCommand) {
@@ -130,7 +130,7 @@ class ConditionIconState extends State<ConditionIcon> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = widget.scale;// getScaleByReference(context);
+    double scale = widget.scale; // getScaleByReference(context);
     // lastCommandIndex = gameState.commandIndex.value;
 
     return ValueListenableBuilder<bool>(
@@ -140,35 +140,37 @@ class ConditionIconState extends State<ConditionIcon> {
           Color classColor = Colors.transparent;
           if (isCharacter) {
             var characters = GameMethods.getCurrentCharacters();
-            classColor = characters.where((element) => element.characterClass.name == widget.condition.getName()).first.characterClass.color;
+            classColor = characters
+                .where((element) =>
+                    element.characterClass.name == widget.condition.getName())
+                .first
+                .characterClass
+                .color;
           }
           return ShakeAnimatedWidget(
               duration: const Duration(milliseconds: 333),
               enabled: animate.value,
               alignment: Alignment.center,
               shakeAngle: Rotation.deg(x: 0, y: 0, z: 30),
-              child: isCharacter?
-                  Stack(
-                    alignment: Alignment.center,
-                      children: [
-                    Image(
-                      color: classColor,
-                        colorBlendMode: BlendMode.modulate,
-                        height: widget.size * scale,
-                        filterQuality: FilterQuality.medium,
-                        image: const AssetImage("assets/images/psd/class-token-bg.png")),
-                  Image(
-
-                  height: widget.size * scale * 0.45,
-                    filterQuality: FilterQuality.medium,
-                    image: AssetImage(widget.gfx)),
+              child: isCharacter
+                  ? Stack(alignment: Alignment.center, children: [
+                      Image(
+                          color: classColor,
+                          colorBlendMode: BlendMode.modulate,
+                          height: widget.size * scale,
+                          filterQuality: FilterQuality.medium,
+                          image: const AssetImage(
+                              "assets/images/psd/class-token-bg.png")),
+                      Image(
+                          height: widget.size * scale * 0.45,
+                          filterQuality: FilterQuality.medium,
+                          image: AssetImage(widget.gfx)),
                     ])
-                  :
-              Image(
-                height: widget.size * scale,
-                filterQuality: FilterQuality.medium,
-                image: AssetImage(widget.gfx),
-              ));
+                  : Image(
+                      height: widget.size * scale,
+                      filterQuality: FilterQuality.medium,
+                      image: AssetImage(widget.gfx),
+                    ));
         });
   }
 }

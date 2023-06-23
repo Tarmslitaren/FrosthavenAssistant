@@ -45,8 +45,8 @@ class Server {
           connectTo; //if not on wifi show local ip
     }
     try {
-      await ServerSocket.bind(
-          InternetAddress.anyIPv4.address, int.parse(getIt<Settings>().lastKnownPort))
+      await ServerSocket.bind(InternetAddress.anyIPv4.address,
+              int.parse(getIt<Settings>().lastKnownPort))
           .then((ServerSocket serverSocket) {
         runZoned(() {
           _serverSocket = serverSocket;
@@ -239,7 +239,9 @@ class Server {
               break;
             }
           }*/
-          if(error is SocketException && (error.osError?.errorCode == 103 || error.osError?.errorCode == 32)) {
+          if (error is SocketException &&
+              (error.osError?.errorCode == 103 ||
+                  error.osError?.errorCode == 32)) {
             stopServer(error.toString());
           }
         },

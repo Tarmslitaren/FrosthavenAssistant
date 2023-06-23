@@ -1,8 +1,8 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
 import '../state/monster.dart';
+
 class AddMonsterCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final String _name;

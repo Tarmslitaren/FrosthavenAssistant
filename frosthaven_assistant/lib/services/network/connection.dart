@@ -19,10 +19,10 @@ class Connection {
 
   Future<List<InternetAddress>> _resolveAddress(String address) async {
     List<InternetAddress> resolvedAddresses =
-          await InternetAddress.lookup(address);
-      if (resolvedAddresses.isEmpty) {
-        throw Exception("Unable to resolve host");
-      }
+        await InternetAddress.lookup(address);
+    if (resolvedAddresses.isEmpty) {
+      throw Exception("Unable to resolve host");
+    }
     return resolvedAddresses;
   }
 
@@ -54,7 +54,9 @@ class Connection {
   }
 
   Iterable<Socket> _find(Socket socket) {
-    return _sockets.where((x) => x.remoteAddress == socket.remoteAddress && x.remotePort == socket.remotePort);
+    return _sockets.where((x) =>
+        x.remoteAddress == socket.remoteAddress &&
+        x.remotePort == socket.remotePort);
   }
 
   void _destroy(Iterable<Socket> sockets) {
@@ -65,7 +67,7 @@ class Connection {
     }
   }
 
-  // Check if socket was remotely closed, thus address and port are unaccessable
+  // Check if socket was remotely closed, thus address and port are not accessible
   bool _isClosed(Socket socket) {
     try {
       socket.remoteAddress;

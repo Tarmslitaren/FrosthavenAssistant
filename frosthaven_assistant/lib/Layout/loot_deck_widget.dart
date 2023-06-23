@@ -106,8 +106,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     double height = 58.6666 * settings.userScalingBars.value;
 
     var screenSize = MediaQuery.of(context).size;
-    double xOffset = (screenSize.width / 2 -
-        63 * settings.userScalingBars.value);
+    double xOffset =
+        (screenSize.width / 2 - 63 * settings.userScalingBars.value);
     double yOffset = -(screenSize.height / 2 - height);
 
     if (!animationsEnabled) {
@@ -166,7 +166,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
           return SizedBox(
-            width: (94 ) * settings.userScalingBars.value,
+            width: (94) * settings.userScalingBars.value,
             height: 58.6666 * settings.userScalingBars.value,
             child: ValueListenableBuilder<int>(
                 valueListenable: _gameState.commandIndex,
@@ -186,10 +186,11 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
 
                         Color currentCharacterColor = Colors.transparent;
                         String? currentCharacterName;
-                        for(var item in _gameState.currentList) {
-                          if(item.turnState == TurnsState.current) {
-                            if(item is Character) {
-                              if(item.characterClass.name != "Objective" && item.characterClass.name != "Escort") {
+                        for (var item in _gameState.currentList) {
+                          if (item.turnState == TurnsState.current) {
+                            if (item is Character) {
+                              if (item.characterClass.name != "Objective" &&
+                                  item.characterClass.name != "Escort") {
                                 currentCharacterColor =
                                     Colors.black; //item.characterClass.color;
                                 currentCharacterName = item.characterClass.name;
@@ -244,17 +245,21 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                                   color: Colors.black)
                                             ]),
                                       )),
-                                  if (currentCharacterName != null ) Positioned(
-                                    height: 35 * settings.userScalingBars.value,
-                                    width: 35 * settings.userScalingBars.value,
-                                    top:
-                                        24 * settings.userScalingBars.value / 2,
-                                    left: 2 * settings.userScalingBars.value,
-                                    child: Image.asset(
-                                       // fit: BoxFit.fitWidth,
-                                      color: currentCharacterColor,
-                                        'assets/images/class-icons/$currentCharacterName.png'),
-                                  )
+                                  if (currentCharacterName != null)
+                                    Positioned(
+                                      height:
+                                          35 * settings.userScalingBars.value,
+                                      width:
+                                          35 * settings.userScalingBars.value,
+                                      top: 24 *
+                                          settings.userScalingBars.value /
+                                          2,
+                                      left: 2 * settings.userScalingBars.value,
+                                      child: Image.asset(
+                                          // fit: BoxFit.fitWidth,
+                                          color: currentCharacterColor,
+                                          'assets/images/class-icons/$currentCharacterName.png'),
+                                    )
                                 ])),
                             SizedBox(
                               width: 2 * settings.userScalingBars.value,

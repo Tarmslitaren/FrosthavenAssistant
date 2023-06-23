@@ -103,9 +103,10 @@ class GameSaveState {
         }
 
         if (data.containsKey('scenarioSectionsAdded')) {
-          List<dynamic> scenarioSectionsAdded = data['scenarioSectionsAdded'] as List;
+          List<dynamic> scenarioSectionsAdded =
+              data['scenarioSectionsAdded'] as List;
           gameState._scenarioSectionsAdded.clear();
-          for(var item in scenarioSectionsAdded) {
+          for (var item in scenarioSectionsAdded) {
             gameState._scenarioSectionsAdded.add(item);
           }
         }

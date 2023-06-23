@@ -1,4 +1,3 @@
-
 import '../../../services/service_locator.dart';
 import '../../state/game_state.dart';
 import '../../state/modifier_deck_state.dart';
@@ -13,8 +12,7 @@ class ChangeEnfeebleCommand extends ChangeStatCommand {
 
   @override
   void execute() {
-
-    if(deck == null) {
+    if (deck == null) {
       deck = getIt<GameState>().modifierDeck;
       //Figure figure = getFigure(ownerId, figureId)!;
       for (var item in getIt<GameState>().currentList) {
@@ -26,7 +24,6 @@ class ChangeEnfeebleCommand extends ChangeStatCommand {
       }
     }
     deck!.enfeebles.value += change;
-
   }
 
   @override

@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
@@ -17,8 +16,7 @@ class EnfeeblingHexCommand extends Command {
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {

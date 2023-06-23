@@ -29,10 +29,10 @@ Future<void> launchUrlInBrowser(Uri url) async {
 
 bool undoEnabled() {
   GameState gameState = getIt<GameState>();
-  if(getIt<Settings>().client.value == ClientState.connected) {
+  if (getIt<Settings>().client.value == ClientState.connected) {
     return true;
   }
-  if(getIt<Settings>().server.value == true) {
+  if (getIt<Settings>().server.value == true) {
     //TDO make the logic
     return gameState.commandIndex.value >= 0 &&
         gameState.commandIndex.value < gameState.commandDescriptions.length &&
@@ -40,25 +40,25 @@ bool undoEnabled() {
             gameState.commandDescriptions[gameState.commandIndex.value - 1] !=
                 "");
   }
-  return
-      gameState.commandIndex.value >= 0 &&
+  return gameState.commandIndex.value >= 0 &&
       gameState.commandIndex.value < gameState.commands.length &&
       (gameState.commandIndex.value == 0 ||
-          gameState.commands[gameState.commandIndex.value - 1] !=
-              null);
+          gameState.commands[gameState.commandIndex.value - 1] != null);
 }
 
 bool redoEnabled() {
   GameState gameState = getIt<GameState>();
-  if(getIt<Settings>().client.value == ClientState.connected) {
+  if (getIt<Settings>().client.value == ClientState.connected) {
     return true;
   }
-  if(getIt<Settings>().server.value == true) {
+  if (getIt<Settings>().server.value == true) {
     return gameState.commandDescriptions.isNotEmpty &&
-        gameState.gameSaveStates.length >= gameState.commandDescriptions.length &&
+        gameState.gameSaveStates.length >=
+            gameState.commandDescriptions.length &&
         gameState.commandIndex.value < gameState.commandDescriptions.length - 1;
   }
-  return gameState.commandIndex.value < gameState.commandDescriptions.length - 1;
+  return gameState.commandIndex.value <
+      gameState.commandDescriptions.length - 1;
 }
 
 Drawer createMainMenu(BuildContext context) {
@@ -70,15 +70,17 @@ Drawer createMainMenu(BuildContext context) {
       valueListenable: gameState.commandIndex,
       builder: (context, value, child) {
         String undoText = "Undo";
-        if (settings.client.value != ClientState.connected && gameState.commandIndex.value >= 0 &&
+        if (settings.client.value != ClientState.connected &&
+            gameState.commandIndex.value >= 0 &&
             gameState.commandDescriptions.length >
                 gameState.commandIndex.value) {
           undoText +=
               ": ${gameState.commandDescriptions[gameState.commandIndex.value]}";
         }
         String redoText = "Redo";
-        if (settings.client.value != ClientState.connected && gameState.commandIndex.value <
-            gameState.commandDescriptions.length - 1) {
+        if (settings.client.value != ClientState.connected &&
+            gameState.commandIndex.value <
+                gameState.commandDescriptions.length - 1) {
           redoText +=
               ": ${gameState.commandDescriptions[gameState.commandIndex.value + 1]}";
         }
@@ -175,39 +177,43 @@ Drawer createMainMenu(BuildContext context) {
                 },
               ),
               const Divider(),
-              if(!settings.lastKnownConnection.endsWith('?')) ValueListenableBuilder<ClientState>(
-                  valueListenable: settings.client,
-                  builder: (context, value, child) {
-                    bool connected = false;
-                    String connectionText = "Connect as Client (${settings.lastKnownConnection})";
-                    if (settings.client.value == ClientState.connected) {
-                      connected = true;
-                      connectionText = "Connected as Client";
-                    }
-                    if (settings.client.value == ClientState.connecting) {
-                      connectionText = "Connecting...";
-                    }
-                    return CheckboxListTile(
-                        enabled: settings.server.value == false &&
-                            settings.client.value != ClientState.connecting,
-                        title: Text(connectionText),
-                        value: connected,
-                        onChanged: (bool? value) {
-                          if (settings.client.value != ClientState.connected) {
-                            settings.client.value = ClientState.connecting;
-                            getIt<Client>()
-                                .connect(settings.lastKnownConnection)
-                                .then((value) => null);
-                            settings.saveToDisk();
-                          } else {
-                            getIt<Client>().disconnect(null);
-                          }
-                        });
-                  }),
+              if (!settings.lastKnownConnection.endsWith('?'))
+                ValueListenableBuilder<ClientState>(
+                    valueListenable: settings.client,
+                    builder: (context, value, child) {
+                      bool connected = false;
+                      String connectionText =
+                          "Connect as Client (${settings.lastKnownConnection})";
+                      if (settings.client.value == ClientState.connected) {
+                        connected = true;
+                        connectionText = "Connected as Client";
+                      }
+                      if (settings.client.value == ClientState.connecting) {
+                        connectionText = "Connecting...";
+                      }
+                      return CheckboxListTile(
+                          enabled: settings.server.value == false &&
+                              settings.client.value != ClientState.connecting,
+                          title: Text(connectionText),
+                          value: connected,
+                          onChanged: (bool? value) {
+                            if (settings.client.value !=
+                                ClientState.connected) {
+                              settings.client.value = ClientState.connecting;
+                              getIt<Client>()
+                                  .connect(settings.lastKnownConnection)
+                                  .then((value) => null);
+                              settings.saveToDisk();
+                            } else {
+                              getIt<Client>().disconnect(null);
+                            }
+                          });
+                    }),
               ValueListenableBuilder<bool>(
                   valueListenable: settings.server,
                   builder: (context, value, child) {
-                    String hostIPText = 'Start Host Server ${settings.lastKnownHostIP}';
+                    String hostIPText =
+                        'Start Host Server ${settings.lastKnownHostIP}';
                     return CheckboxListTile(
                         title: Text(settings.server.value
                             ? "Stop Server ${settings.lastKnownHostIP}"
@@ -215,10 +221,7 @@ Drawer createMainMenu(BuildContext context) {
                         value: settings.server.value,
                         onChanged: (bool? value) {
                           settings.lastKnownHostIP =
-                            "(${getIt<Network>()
-                              .networkInfo
-                              .wifiIPv4
-                              .value})";
+                              "(${getIt<Network>().networkInfo.wifiIPv4.value})";
                           settings.saveToDisk();
                           //setState(() {
                           //do the thing

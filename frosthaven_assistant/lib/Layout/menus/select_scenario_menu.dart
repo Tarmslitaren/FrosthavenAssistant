@@ -73,14 +73,16 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       }
     }
 
-    if(campaign == "Solo" && getIt<Settings>().showCustomContent.value == false) {
+    if (campaign == "Solo" &&
+        getIt<Settings>().showCustomContent.value == false) {
       _foundScenarios.removeWhere((scenario) {
         List<String> strings = scenario.split(':');
         strings[0] = strings[0].replaceFirst(" ", "Å");
         String characterName = strings[0].split("Å")[1];
-        if(_gameState.modelData.value.entries.any((element) =>
-        GameMethods.isCustomCampaign(element.value.edition) && element.value.characters.any(
-                (element) => element.name == characterName))) {
+        if (_gameState.modelData.value.entries.any((element) =>
+            GameMethods.isCustomCampaign(element.value.edition) &&
+            element.value.characters
+                .any((element) => element.name == characterName))) {
           return true;
         }
 
@@ -130,7 +132,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       });
       // we use the toLowerCase() method to make it case-insensitive
       //special hack for solo BladeSwarm
-      if (_gameState.currentCampaign.value == "Solo" ||_gameState.currentCampaign.value == "Trail of Ashes") {
+      if (_gameState.currentCampaign.value == "Solo" ||
+          _gameState.currentCampaign.value == "Trail of Ashes") {
         if (!_gameState.unlockedClasses.contains("Bladeswarm")) {
           for (var item in results) {
             if (item.contains("Bladeswarm")) {
@@ -208,17 +211,17 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   List<Widget> buildCampaignButtons() {
     List<Widget> retVal = [];
-    for( String item in _gameState.editions) {
-      if(item != "na") {
-        if(getIt<Settings>().showCustomContent.value == true || !GameMethods.isCustomCampaign(item)) {
+    for (String item in _gameState.editions) {
+      if (item != "na") {
+        if (getIt<Settings>().showCustomContent.value == true ||
+            !GameMethods.isCustomCampaign(item)) {
           retVal.add(TextButton(
               onPressed: () {
                 setState(() {
                   setCampaign(item);
                 });
               },
-              child: Text(item)
-          ));
+              child: Text(item)));
         }
       }
     }

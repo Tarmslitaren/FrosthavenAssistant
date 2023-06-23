@@ -34,7 +34,6 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   int currentEliteAdded = 0;
   int currentNormalAdded = 0;
 
-
   @override
   initState() {
     // at the beginning, all items are shown
@@ -60,8 +59,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     }
   }
 
-  void closeOrNext(int nrOfElite,
-      int nrOfNormal) {
+  void closeOrNext(int nrOfElite, int nrOfNormal) {
     if (currentMonsterIndex + 1 >= widget.monsterData.length) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.pop(context);
@@ -78,17 +76,11 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           currentNormalAdded = 0;
         });
       });
-
     }
   }
 
-  Widget buildNrButton(
-      final int nr,
-      final double scale,
-      Monster monster,
-      bool elite,
-      int nrOfElite,
-      int nrOfNormal) {
+  Widget buildNrButton(final int nr, final double scale, Monster monster,
+      bool elite, int nrOfElite, int nrOfNormal) {
     bool boss = monster.type.levels[0].boss != null;
     MonsterType type = MonsterType.normal;
     Color color = Colors.white;
@@ -141,9 +133,9 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                 currentEliteAdded++;
               });
             } else {
-                setState(() {
-                  currentNormalAdded++;
-                  });
+              setState(() {
+                currentNormalAdded++;
+              });
             }
 
             setState(() {
@@ -162,10 +154,15 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           } else {
             String figureId = GameMethods.getFigureIdFromNr(monster.id, nr);
             if (figureId.isNotEmpty) {
-              MonsterInstance state = GameMethods.getFigure(monster.id, figureId) as MonsterInstance;
-              if(!initialEliteAdded[currentMonsterIndex].contains(state.standeeNr) && ! initialNormalAdded[currentMonsterIndex].contains(state.standeeNr)) {
-                _gameState.action(
-                    ChangeHealthCommand(-10000, figureId, monster.id));
+              MonsterInstance state =
+                  GameMethods.getFigure(monster.id, figureId)
+                      as MonsterInstance;
+              if (!initialEliteAdded[currentMonsterIndex]
+                      .contains(state.standeeNr) &&
+                  !initialNormalAdded[currentMonsterIndex]
+                      .contains(state.standeeNr)) {
+                _gameState
+                    .action(ChangeHealthCommand(-10000, figureId, monster.id));
 
                 setState(() {
                   if (state.type == MonsterType.elite) {
@@ -182,14 +179,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     );
   }
 
-  Widget _buildButtonGrid(
-      double scale,
-      Monster monster,
-      bool elite,
-      int nrOfStandees,
-      int nrLeft,
-      int nrOfElite,
-      int nrOfNormal) {
+  Widget _buildButtonGrid(double scale, Monster monster, bool elite,
+      int nrOfStandees, int nrLeft, int nrOfElite, int nrOfNormal) {
     String text;
     if (elite) {
       text = "Add $nrLeft Elite ${monster.type.display}";
@@ -229,20 +220,20 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   nrOfStandees > 4
-                      ? buildNrButton(5, scale, monster, elite, nrOfElite,
-                          nrOfNormal)
+                      ? buildNrButton(
+                          5, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                   nrOfStandees > 5
-                      ? buildNrButton(6, scale, monster, elite, nrOfElite,
-                          nrOfNormal)
+                      ? buildNrButton(
+                          6, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                   nrOfStandees > 6
-                      ? buildNrButton(7, scale, monster, elite, nrOfElite,
-                          nrOfNormal)
+                      ? buildNrButton(
+                          7, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                   nrOfStandees > 7
-                      ? buildNrButton(8, scale, monster, elite, nrOfElite,
-                          nrOfNormal)
+                      ? buildNrButton(
+                          8, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                 ],
               )
@@ -252,12 +243,12 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   nrOfStandees > 8
-                      ? buildNrButton(9, scale, monster, elite, nrOfElite,
-                          nrOfNormal)
+                      ? buildNrButton(
+                          9, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                   nrOfStandees > 9
-                      ? buildNrButton(10, scale, monster, elite, nrOfElite,
-                          nrOfNormal)
+                      ? buildNrButton(
+                          10, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                 ],
               )
@@ -291,13 +282,14 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           RoomMonsterData data = widget.monsterData[currentMonsterIndex];
           int nrOfElite = data.elite[characterIndex];
           int nrOfNormal = data.normal[characterIndex];
-          while(nrOfElite+nrOfNormal == 0) { //for case where both normal and elite added are 0
-            if(currentMonsterIndex < widget.monsterData.length-1) {
+          while (nrOfElite + nrOfNormal == 0) {
+            //for case where both normal and elite added are 0
+            if (currentMonsterIndex < widget.monsterData.length - 1) {
               currentMonsterIndex++;
               data = widget.monsterData[currentMonsterIndex];
               nrOfElite = data.elite[characterIndex];
               nrOfNormal = data.normal[characterIndex];
-            }else {
+            } else {
               //WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               //  Navigator.pop(context);
               //});
@@ -306,8 +298,9 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           }
 
           Monster? monster = _gameState.currentList
-              .firstWhereOrNull((element) => element.id == data.name) as Monster?;
-          if(monster == null) {
+                  .firstWhereOrNull((element) => element.id == data.name)
+              as Monster?;
+          if (monster == null) {
             //todo: should add the monster instead?!
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               Navigator.pop(context);
@@ -324,8 +317,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
 
           //change depending on already added standees
           int preAddedMonsters = initialEliteAdded[currentMonsterIndex].length +
-              initialNormalAdded[
-                  currentMonsterIndex].length;
+              initialNormalAdded[currentMonsterIndex].length;
 
           int nrOfStandees = monster.type.count;
           int monstersLeft = nrOfStandees - preAddedMonsters;

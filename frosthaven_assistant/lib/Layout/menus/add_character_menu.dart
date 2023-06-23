@@ -27,13 +27,12 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   final AdjustableScrollController _scrollController =
       AdjustableScrollController();
 
-
   int compareEditions(String a, String b) {
-    for(String item in _gameState.editions) {
-      if(b == item && a != item) {
+    for (String item in _gameState.editions) {
+      if (b == item && a != item) {
         return 1;
       }
-      if(a == item && b != item) {
+      if (a == item && b != item) {
         return -1;
       }
     }
@@ -62,15 +61,16 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       }
     }
 
-    if(getIt<Settings>().showCustomContent.value == false) {
-      _allCharacters.removeWhere((character) => GameMethods.isCustomCampaign(character.edition));
+    if (getIt<Settings>().showCustomContent.value == false) {
+      _allCharacters.removeWhere(
+          (character) => GameMethods.isCustomCampaign(character.edition));
     }
 
     _foundCharacters = _allCharacters;
     _foundCharacters.sort((a, b) {
       if (a.edition != b.edition) {
-        return  compareEditions(a.edition, b.edition);
-              }
+        return compareEditions(a.edition, b.edition);
+      }
       if (a.hidden && !b.hidden) {
         return 1;
       }

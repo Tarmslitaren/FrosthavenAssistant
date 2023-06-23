@@ -1,9 +1,8 @@
-
 import 'package:collection/collection.dart';
 import 'package:frosthaven_assistant/Resource/state/character.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
-enum Condition{
+enum Condition {
   stun,
   immobilize,
   disarm,
@@ -30,11 +29,11 @@ enum Condition{
   character2,
   character3,
   character4;
-  
+
   String _getCharacterName(int index) {
     List<Character> characters = GameMethods.getCurrentCharacters();
     characters.sortBy((element) => element.characterClass.name);
-    if(characters.length > index) {
+    if (characters.length > index) {
       return characters[index].characterClass.name;
     }
     return "Escort"; //some basic
@@ -42,16 +41,13 @@ enum Condition{
 
   String getName() {
     //get current characters, sort by name and add to this
-    if(this == Condition.character1) {
+    if (this == Condition.character1) {
       return _getCharacterName(0);
-    }
-    else if(this == Condition.character2) {
+    } else if (this == Condition.character2) {
       return _getCharacterName(1);
-    }
-    else if(this == Condition.character3) {
+    } else if (this == Condition.character3) {
       return _getCharacterName(2);
-    }
-    else if(this == Condition.character4) {
+    } else if (this == Condition.character4) {
       return _getCharacterName(3);
     }
     return name;
@@ -59,29 +55,15 @@ enum Condition{
 
   @override
   String toString() {
-
     return index.toString();
   }
-
 }
 
-enum ElementState{
-  full,
-  half,
-  inert
+enum ElementState { full, half, inert }
 
-}
+enum Elements { fire, ice, air, earth, light, dark }
 
-enum Elements{
-  fire,
-  ice,
-  air,
-  earth,
-  light,
-  dark
-}
-
-enum RoundState{
+enum RoundState {
   chooseInitiative,
   playTurns,
 }
@@ -107,9 +89,4 @@ enum TurnsState {
   done //mark conditions added here to not be removed yet
 }
 
-enum NetworkMessage {
-  init,
-  action,
-  undo,
-  redo
-}
+enum NetworkMessage { init, action, undo, redo }

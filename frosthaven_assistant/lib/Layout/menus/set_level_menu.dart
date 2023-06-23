@@ -60,7 +60,8 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                     border: Border.all(
                       color: color,
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(30 * scale))),
+                    borderRadius:
+                        BorderRadius.all(Radius.circular(30 * scale))),
                 child: TextButton(
                   child: Text(
                     text,
@@ -101,7 +102,6 @@ class SetLevelMenuState extends State<SetLevelMenu> {
   }
 
   Widget createLegend(String name, String gfx, String value, double scale) {
-
     var shadow = Shadow(
       offset: Offset(1 * scale, 1 * scale),
       color: Colors.black87,
@@ -183,9 +183,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     bool darkMode = getIt<Settings>().darkMode.value;
 
     double scale = 1;
-    if(!isPhoneScreen(context)) {
+    if (!isPhoneScreen(context)) {
       scale = 1.5;
-      if(isLargeTablet(context)) {
+      if (isLargeTablet(context)) {
         scale = 2;
       }
     }
@@ -287,21 +287,25 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                         createLegend(
                             "trap damage",
                             "assets/images/psd/traps-fh.png",
-                            ": ${GameMethods.getTrapValue()}",scale),
+                            ": ${GameMethods.getTrapValue()}",
+                            scale),
                         createLegend(
                             "hazardous terrain damage",
                             "assets/images/psd/hazard-fh.png",
-                            ": ${GameMethods.getHazardValue()}",scale),
+                            ": ${GameMethods.getHazardValue()}",
+                            scale),
                         createLegend(
                             "experience added",
                             "assets/images/psd/xp.png",
-                            ": +${GameMethods.getXPValue()}",scale),
+                            ": +${GameMethods.getXPValue()}",
+                            scale),
                         createLegend(
                             "gold coin value",
                             "assets/images/psd/coins-fh.png",
-                            ": x${GameMethods.getCoinValue()}",scale),
+                            ": x${GameMethods.getCoinValue()}",
+                            scale),
                         createLegend("level", "assets/images/psd/level.png",
-                            ": ${_gameState.level.value}",scale),
+                            ": ${_gameState.level.value}", scale),
                       ],
                     )
                 ],

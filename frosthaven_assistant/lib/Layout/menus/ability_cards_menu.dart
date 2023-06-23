@@ -31,8 +31,8 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     double scale = max((screenSize.height / (40 * 14)), 0.5);
-    if(screenSize.width * 0.4 < 178*0.8*scale) {
-      scale = screenSize.width * 0.4/(178*0.8);
+    if (screenSize.width * 0.4 < 178 * 0.8 * scale) {
+      scale = screenSize.width * 0.4 / (178 * 0.8);
     }
     late final Widget child;
 
@@ -143,7 +143,6 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                   scrollAnimationDuration: const Duration(milliseconds: 400),
                   reorderAnimationDuration: const Duration(milliseconds: 400),
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
-
                   onReorder: (index, dropIndex) {
                     setState(() {
                       dropIndex = list.length - dropIndex - 1;
@@ -157,7 +156,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                 )
               : ListView(
                   controller: AdjustableScrollController(),
-                  padding: EdgeInsets.zero ,
+                  padding: EdgeInsets.zero,
                   children: generateList(list, allOpen).reversed.toList(),
                 ),
         ));
@@ -173,9 +172,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           var discardPile = widget.monsterAbilityState.discardPile.getList();
           return Container(
               constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context)
-                      .size
-                      .width,
+                  maxWidth: MediaQuery.of(context).size.width,
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(
                   color: Colors.transparent,
@@ -188,48 +185,55 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(4),
                                   topRight: Radius.circular(4))),
-
-                          child: Column(
-                              children: [
-                                Container(
-                          width: MediaQuery.of(context).size.width,
-                          child:
-                            Wrap(
-                                crossAxisAlignment: WrapCrossAlignment.center,
-                                runSpacing: 0,
-                                spacing: 0,
-
-                                children: [
-                                  const Text(
-                                    "  Reveal:",
-                                  ),
-                                  if(drawPile.length > 0) buildRevealButton(drawPile.length, 1),
-                                  if(drawPile.length > 1) buildRevealButton(drawPile.length, 2),
-                                  if(drawPile.length > 2) buildRevealButton(drawPile.length, 3),
-                                  if(drawPile.length > 3) buildRevealButton(drawPile.length, 4),
-                                  if(drawPile.length > 4) buildRevealButton(drawPile.length, 5),
-                                  if(drawPile.length > 5) buildRevealButton(drawPile.length, 6),
-                                  if(drawPile.length > 6) buildRevealButton(drawPile.length, 7),
-                                  if(drawPile.length > 7) buildRevealButton(drawPile.length, 8),
-                                  TextButton(
-                                    onPressed: () {
-                                      _gameState.action(DrawAbilityCardCommand(widget.monsterData.id
-                                      ));
-                                    },
-                                    child: const Text(
-                                      "Draw extra card",
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {
-                                      _gameState.action(ShuffleAbilityCardCommand(widget.monsterData.id
-                                      ));
-                                    },
-                                    child: const Text(
-                                      "Extra Shuffle",
-                                    ),
-                                  ),
-                                ])),
+                          child: Column(children: [
+                            Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: Wrap(
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    runSpacing: 0,
+                                    spacing: 0,
+                                    children: [
+                                      const Text(
+                                        "  Reveal:",
+                                      ),
+                                      if (drawPile.length > 0)
+                                        buildRevealButton(drawPile.length, 1),
+                                      if (drawPile.length > 1)
+                                        buildRevealButton(drawPile.length, 2),
+                                      if (drawPile.length > 2)
+                                        buildRevealButton(drawPile.length, 3),
+                                      if (drawPile.length > 3)
+                                        buildRevealButton(drawPile.length, 4),
+                                      if (drawPile.length > 4)
+                                        buildRevealButton(drawPile.length, 5),
+                                      if (drawPile.length > 5)
+                                        buildRevealButton(drawPile.length, 6),
+                                      if (drawPile.length > 6)
+                                        buildRevealButton(drawPile.length, 7),
+                                      if (drawPile.length > 7)
+                                        buildRevealButton(drawPile.length, 8),
+                                      TextButton(
+                                        onPressed: () {
+                                          _gameState.action(
+                                              DrawAbilityCardCommand(
+                                                  widget.monsterData.id));
+                                        },
+                                        child: const Text(
+                                          "Draw extra card",
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          _gameState.action(
+                                              ShuffleAbilityCardCommand(
+                                                  widget.monsterData.id));
+                                        },
+                                        child: const Text(
+                                          "Extra Shuffle",
+                                        ),
+                                      ),
+                                    ])),
                           ])),
                       Flexible(
                           child: Row(

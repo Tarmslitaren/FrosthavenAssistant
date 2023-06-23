@@ -20,9 +20,7 @@ class ScrollDetector extends StatelessWidget {
       onPointerSignal: (pointerSignal) {
         if (pointerSignal is PointerScrollEvent) {
           onPointerScroll(pointerSignal);
-        } else {
-
-        }
+        } else {}
       },
       child: child,
     );
@@ -43,9 +41,10 @@ class AdjustableScrollController extends ScrollController {
           scrollEnd = min(super.position.maxScrollExtent,
               max(super.position.minScrollExtent, scrollEnd));
           jumpTo(scrollEnd);
-          //totally screws up non mousewheel scrolling...
+          //totally screws up non mouse wheel scrolling...
         }
       }
-    })*/;
+    })*/
+    ;
   }
 }

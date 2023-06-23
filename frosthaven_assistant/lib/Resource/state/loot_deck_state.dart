@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -23,13 +22,11 @@ class LootCard {
   late String owner;
 
   LootCard(
-      {
-        required this.id,
-        required this.lootType,
-        required this.baseValue,
-        required this.enhanced,
-        required this.gfx
-      }) {
+      {required this.id,
+      required this.lootType,
+      required this.baseValue,
+      required this.enhanced,
+      required this.gfx}) {
     owner = "";
   }
 
@@ -48,13 +45,13 @@ class LootCard {
   int? getValue() {
     int value = 1;
     if (lootType == LootType.other) {
-      if(enhanced > 0) {
+      if (enhanced > 0) {
         return enhanced;
       }
       return null;
     }
     if (enhanced > 0) {
-      value+= enhanced;
+      value += enhanced;
     }
     int characters = GameMethods.getCurrentCharacterAmount();
     if (characters >= 4) {
@@ -82,10 +79,9 @@ class LootDeck {
   List<LootCard> rockrootPool = [];
   List<LootCard> snowthistlePool = [];
 
-
   //2 +1, 3 oneIf3or4twoIfNot, 3 oneIf4twoIfNot
 
-  List<int> addedCards = [0,0,0,0,0,0,0,0,0];
+  List<int> addedCards = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   Map<String, int> enhancements = {};
 
   final CardStack<LootCard> drawPile = CardStack<LootCard>();
@@ -122,13 +118,13 @@ class LootDeck {
     hasCard1418 = lootDeckData["1418"];
     hasCard1419 = lootDeckData["1419"];
 
-    if(lootDeckData.containsKey('addedCards')) {
+    if (lootDeckData.containsKey('addedCards')) {
       addedCards = List<int>.from(lootDeckData['addedCards']);
     } else {
-      addedCards = [0,0,0,0,0,0,0,0,0];
+      addedCards = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     }
 
-    if(lootDeckData.containsKey('enhancements')) {
+    if (lootDeckData.containsKey('enhancements')) {
       enhancements = Map<String, int>.from(lootDeckData['enhancements']);
     } else {
       enhancements = {};
@@ -142,16 +138,16 @@ class LootDeck {
     for (var item in drawPile) {
       String owner = "";
       String gfx = item["gfx"];
-      if(item.containsKey('owner')) {
+      if (item.containsKey('owner')) {
         owner = item["owner"];
       }
-      if(item.containsKey('id')) {
+      if (item.containsKey('id')) {
         id = item["id"];
       }
       int enhanced = 0;
-      if(item['enhanced'].runtimeType == bool) {
+      if (item['enhanced'].runtimeType == bool) {
         bool enh = item['enhanced'];
-        if(enh) {
+        if (enh) {
           enhanced = 1;
         }
       } else {
@@ -159,7 +155,12 @@ class LootDeck {
       }
       LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
       LootType lootType = LootType.values[item["lootType"]];
-      LootCard lootCard = LootCard(id: id, gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
+      LootCard lootCard = LootCard(
+          id: id,
+          gfx: gfx,
+          enhanced: enhanced,
+          baseValue: baseValue,
+          lootType: lootType);
       lootCard.owner = owner;
       newDrawList.add(lootCard);
     }
@@ -167,17 +168,17 @@ class LootDeck {
     for (var item in lootDeckData["discardPile"] as List) {
       String gfx = item["gfx"];
       String owner = "";
-      if(item.containsKey('owner')) {
+      if (item.containsKey('owner')) {
         owner = item["owner"];
       }
-      if(item.containsKey('id')) {
+      if (item.containsKey('id')) {
         id = item["id"];
       }
 
       int enhanced = 0;
-      if(item['enhanced'].runtimeType == bool) {
+      if (item['enhanced'].runtimeType == bool) {
         bool enh = item['enhanced'];
-        if(enh) {
+        if (enh) {
           enhanced = 1;
         }
       } else {
@@ -185,7 +186,12 @@ class LootDeck {
       }
       LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
       LootType lootType = LootType.values[item["lootType"]];
-      LootCard lootCard = LootCard(id: id, gfx: gfx, enhanced: enhanced, baseValue: baseValue, lootType: lootType);
+      LootCard lootCard = LootCard(
+          id: id,
+          gfx: gfx,
+          enhanced: enhanced,
+          baseValue: baseValue,
+          lootType: lootType);
       lootCard.owner = owner;
       newDiscardList.add(lootCard);
     }
@@ -198,13 +204,13 @@ class LootDeck {
 
   void _addCardFromPool(int amount, List<LootCard> pool, List<LootCard> cards) {
     pool.shuffle();
-    if(amount > pool.length) {
+    if (amount > pool.length) {
       amount = pool.length;
     }
     for (int i = 0; i < amount; i++) {
       cards.add(pool[i]);
     }
-    pool.sort((a,b) => a.id - b.id); //may not be needed
+    pool.sort((a, b) => a.id - b.id); //may not be needed
   }
 
   void setDeck(LootDeckModel model) {
@@ -217,17 +223,17 @@ class LootDeck {
       _addOtherType(1418, cards, "special 1418");
     }
 
-    _addCardFromPool(model.arrowvine, arrowvinePool,cards);
-    _addCardFromPool(model.corpsecap, corpsecapPool,cards);
-    _addCardFromPool(model.axenut, axenutPool,cards);
-    _addCardFromPool(model.flamefruit, flamefruitPool,cards);
-    _addCardFromPool(model.rockroot, rockrootPool,cards);
-    _addCardFromPool(model.snowthistle, snowthistlePool,cards);
+    _addCardFromPool(model.arrowvine, arrowvinePool, cards);
+    _addCardFromPool(model.corpsecap, corpsecapPool, cards);
+    _addCardFromPool(model.axenut, axenutPool, cards);
+    _addCardFromPool(model.flamefruit, flamefruitPool, cards);
+    _addCardFromPool(model.rockroot, rockrootPool, cards);
+    _addCardFromPool(model.snowthistle, snowthistlePool, cards);
 
-    _addCardFromPool(model.coin, coinPool,cards);
-    _addCardFromPool(model.metal, metalPool,cards);
-    _addCardFromPool(model.hide, hidePool,cards);
-    _addCardFromPool(model.lumber, lumberPool,cards);
+    _addCardFromPool(model.coin, coinPool, cards);
+    _addCardFromPool(model.metal, metalPool, cards);
+    _addCardFromPool(model.hide, hidePool, cards);
+    _addCardFromPool(model.lumber, lumberPool, cards);
 
     for (int i = 0; i < model.treasure; i++) {
       _addOtherType(9999, cards, "treasure");
@@ -241,22 +247,25 @@ class LootDeck {
 
   void _addOtherType(int id, List<LootCard> cards, String gfx) {
     cards.add(LootCard(
-        id: id,
-        baseValue: LootBaseValue.one,
-        enhanced: enhancements[id.toString()] != null ? enhancements[id.toString()]!:0,
-        lootType: LootType.other,
-        gfx: gfx,
+      id: id,
+      baseValue: LootBaseValue.one,
+      enhanced: enhancements[id.toString()] != null
+          ? enhancements[id.toString()]!
+          : 0,
+      lootType: LootType.other,
+      gfx: gfx,
     ));
   }
 
-  void _initMaterialPool(int startId,
-      List<LootCard> list, String gfx) {
+  void _initMaterialPool(int startId, List<LootCard> list, String gfx) {
     list.clear();
     for (int i = 0; i < 2; i++) {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.one,
-          enhanced: enhancements[startId.toString()] != null ? enhancements[startId.toString()]!:0,
+          enhanced: enhancements[startId.toString()] != null
+              ? enhancements[startId.toString()]!
+              : 0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -265,7 +274,9 @@ class LootDeck {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.oneIf3or4twoIfNot,
-          enhanced: enhancements[startId.toString()] != null ? enhancements[startId.toString()]!:0,
+          enhanced: enhancements[startId.toString()] != null
+              ? enhancements[startId.toString()]!
+              : 0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -274,7 +285,9 @@ class LootDeck {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.oneIf4twoIfNot,
-          enhanced: enhancements[startId.toString()] != null ? enhancements[startId.toString()]!:0,
+          enhanced: enhancements[startId.toString()] != null
+              ? enhancements[startId.toString()]!
+              : 0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -282,14 +295,15 @@ class LootDeck {
     //list.shuffle();
   }
 
-  void _initHerbPool(int startId,
-      List<LootCard> list, String gfx) {
+  void _initHerbPool(int startId, List<LootCard> list, String gfx) {
     list.clear();
     for (int i = 0; i < 2; i++) {
       list.add(LootCard(
           id: startId,
           baseValue: LootBaseValue.one,
-          enhanced: enhancements[startId.toString()] != null ? enhancements[startId.toString()]!:0,
+          enhanced: enhancements[startId.toString()] != null
+              ? enhancements[startId.toString()]!
+              : 0,
           lootType: LootType.materiel,
           gfx: gfx));
       startId++;
@@ -342,14 +356,13 @@ class LootDeck {
     _initHerbPool(id, snowthistlePool, "snowthistle");
     id += 2;
     _initHerbPool(id, rockrootPool, "rockroot");
-
   }
 
   void addSpecial1418() {
     if (hasCard1418 != true) {
       hasCard1418 = true;
       drawPile.getList().add(LootCard(
-          id:1418,
+          id: 1418,
           lootType: LootType.other,
           baseValue: LootBaseValue.one,
           enhanced: 0,
@@ -375,25 +388,21 @@ class LootDeck {
   void removeSpecial1418() {
     hasCard1418 = false;
     drawPile.getList().removeWhere((element) => element.id == 1418);
-    discardPile
-        .getList()
-        .removeWhere((element) => element.id == 1418);
+    discardPile.getList().removeWhere((element) => element.id == 1418);
     cardCount.value = drawPile.size();
   }
 
   void removeSpecial1419() {
     hasCard1419 = false;
     drawPile.getList().removeWhere((element) => element.id == 1419);
-    discardPile
-        .getList()
-        .removeWhere((element) => element.id == 1419);
+    discardPile.getList().removeWhere((element) => element.id == 1419);
     cardCount.value = drawPile.size();
   }
 
   List<LootCard> _getAvailableCards(List<LootCard> pool) {
     List<LootCard> list = [];
     for (var item in pool) {
-      if(!drawPile.getList().any((element) => element.id == item.id)) {
+      if (!drawPile.getList().any((element) => element.id == item.id)) {
         list.add(item);
       }
     }
@@ -406,63 +415,63 @@ class LootDeck {
     shuffle();
     if (identifier == "hide") {
       var pool = _getAvailableCards(hidePool);
-      if(pool.isNotEmpty) {
+      if (pool.isNotEmpty) {
         drawPile.getList().add(pool[0]);
         addedCards[0]++;
       }
     }
     if (identifier == "lumber") {
       var pool = _getAvailableCards(lumberPool);
-      if(pool.isNotEmpty) {
+      if (pool.isNotEmpty) {
         drawPile.getList().add(pool[0]);
         addedCards[1]++;
       }
     }
     if (identifier == "metal") {
       var pool = _getAvailableCards(metalPool);
-      if(pool.isNotEmpty) {
+      if (pool.isNotEmpty) {
         drawPile.getList().add(pool[0]);
         addedCards[2]++;
       }
     }
     if (identifier == "arrowvine") {
       var pool = _getAvailableCards(arrowvinePool);
-      if(pool.isNotEmpty) {
+      if (pool.isNotEmpty) {
         drawPile.getList().add(pool[0]);
         addedCards[3]++;
       }
     }
     if (identifier == "axenut") {
       var pool = _getAvailableCards(axenutPool);
-      if(pool.isNotEmpty) {
+      if (pool.isNotEmpty) {
         drawPile.getList().add(pool[0]);
         addedCards[4]++;
       }
     }
     if (identifier == "corpsecap") {
       var pool = _getAvailableCards(corpsecapPool);
-      if(pool.isNotEmpty) {
+      if (pool.isNotEmpty) {
         drawPile.getList().add(pool[0]);
         addedCards[5]++;
       }
     }
     if (identifier == "flamefruit") {
       var pool = _getAvailableCards(flamefruitPool);
-      if(pool.isNotEmpty) {
+      if (pool.isNotEmpty) {
         drawPile.getList().add(pool[0]);
         addedCards[6]++;
       }
     }
     if (identifier == "rockroot") {
       var pool = _getAvailableCards(rockrootPool);
-      if(pool.isNotEmpty) {
+      if (pool.isNotEmpty) {
         drawPile.getList().add(pool[0]);
         addedCards[7]++;
       }
     }
     if (identifier == "snowthistle") {
       var pool = _getAvailableCards(snowthistlePool);
-      if(pool.isNotEmpty) {
+      if (pool.isNotEmpty) {
         drawPile.getList().add(pool[0]);
         addedCards[8]++;
       }
@@ -497,9 +506,10 @@ class LootDeck {
     LootCard card = drawPile.pop();
 
     //mark owner
-    for(var item in getIt<GameState>().currentList){
-      if(item.turnState == TurnsState.current && item is Character) {
-        if(item.characterClass.name != "Objective" && item.characterClass.name != "Escort") {
+    for (var item in getIt<GameState>().currentList) {
+      if (item.turnState == TurnsState.current && item is Character) {
+        if (item.characterClass.name != "Objective" &&
+            item.characterClass.name != "Escort") {
           card.owner = item.characterClass.name;
           break;
         }

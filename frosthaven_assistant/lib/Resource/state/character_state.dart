@@ -6,8 +6,7 @@ import '../enums.dart';
 import 'figure_state.dart';
 import 'monster_instance.dart';
 
-class CharacterState extends FigureState{
-
+class CharacterState extends FigureState {
   CharacterState();
 
   final display = ValueNotifier<String>("");
@@ -15,7 +14,6 @@ class CharacterState extends FigureState{
   final xp = ValueNotifier<int>(0);
 
   final summonList = ValueNotifier<List<MonsterInstance>>([]);
-
 
   @override
   String toString() {
@@ -44,22 +42,22 @@ class CharacterState extends FigureState{
     display.value = json['display'];
 
     List<dynamic> summons = json["summonList"];
-    for(var item in summons){
+    for (var item in summons) {
       summonList.value.add(MonsterInstance.fromJson(item));
     }
 
     List<dynamic> condis = json["conditions"];
-    for(int item in condis){
+    for (int item in condis) {
       conditions.value.add(Condition.values[item]);
     }
 
-    if(json.containsKey("conditionsAddedThisTurn")) {
+    if (json.containsKey("conditionsAddedThisTurn")) {
       List<dynamic> condis2 = json["conditionsAddedThisTurn"];
       for (int item in condis2) {
         conditionsAddedThisTurn.value.add(Condition.values[item]);
       }
     }
-    if(json.containsKey("conditionsAddedPreviousTurn")) {
+    if (json.containsKey("conditionsAddedPreviousTurn")) {
       List<dynamic> condis3 = json["conditionsAddedPreviousTurn"];
       for (int item in condis3) {
         conditionsAddedPreviousTurn.value.add(Condition.values[item]);

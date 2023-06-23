@@ -1,7 +1,7 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
+
 class DrawModifierCardCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final String name;
@@ -10,20 +10,19 @@ class DrawModifierCardCommand extends Command {
 
   @override
   void execute() {
-    if(name == "allies"){
+    if (name == "allies") {
       _gameState.modifierDeckAllies.draw();
-    }else {
+    } else {
       _gameState.modifierDeck.draw();
     }
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {
-    if(name == "allies"){
+    if (name == "allies") {
       return "Draw allies modifier card";
     }
     return "Draw monster modifier card";

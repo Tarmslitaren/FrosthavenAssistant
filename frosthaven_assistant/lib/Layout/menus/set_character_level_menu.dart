@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_name_command.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
@@ -66,7 +65,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     fontSize: 18 * scale,
                     shadows: [
                       Shadow(
-                        offset: Offset(1 *scale, 1 * scale),
+                        offset: Offset(1 * scale, 1 * scale),
                         color: isCurrentlySelected
                             ? Colors.black54
                             : Colors.black87,
@@ -92,9 +91,9 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   @override
   Widget build(BuildContext context) {
     double scale = 1;
-    if(!isPhoneScreen(context)) {
+    if (!isPhoneScreen(context)) {
       scale = 1.5;
-      if(isLargeTablet(context)) {
+      if (isLargeTablet(context)) {
         scale = 2;
       }
     }
@@ -124,35 +123,36 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                 height: 20 * scale,
               ),
               ValueListenableBuilder<String>(
-                  valueListenable:
-                  widget.character.characterState.display,
+                  valueListenable: widget.character.characterState.display,
                   // widget.data.monsterInstances,
                   builder: (context, value, child) {
                     return Text(
-                        isObjective ? "Set ${widget.character.characterState.display.value}'s Health"
-                            :"Set ${widget.character.characterState.display.value}'s Level",
-                        style: getTitleTextStyle(scale)
-                    );
+                        isObjective
+                            ? "Set ${widget.character.characterState.display.value}'s Health"
+                            : "Set ${widget.character.characterState.display.value}'s Level",
+                        style: getTitleTextStyle(scale));
                   }),
-              if (!isObjective) Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  buildLevelButton(1, scale),
-                  buildLevelButton(2, scale),
-                  buildLevelButton(3, scale),
-                  buildLevelButton(4, scale),
-                ],
-              ),
-              if (!isObjective) Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  buildLevelButton(5, scale),
-                  buildLevelButton(6, scale),
-                  buildLevelButton(7, scale),
-                  buildLevelButton(8, scale),
-                  buildLevelButton(9, scale),
-                ],
-              ),
+              if (!isObjective)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    buildLevelButton(1, scale),
+                    buildLevelButton(2, scale),
+                    buildLevelButton(3, scale),
+                    buildLevelButton(4, scale),
+                  ],
+                ),
+              if (!isObjective)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    buildLevelButton(5, scale),
+                    buildLevelButton(6, scale),
+                    buildLevelButton(7, scale),
+                    buildLevelButton(8, scale),
+                    buildLevelButton(9, scale),
+                  ],
+                ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 CounterButton(
                     widget.character.characterState.maxHealth,
@@ -164,7 +164,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     Colors.red,
                     figureId: widget.character.id,
                     ownerId: widget.character.id,
-                scale: scale)
+                    scale: scale)
               ]),
               Text("Change name:", style: getTitleTextStyle(scale)),
               SizedBox(
@@ -176,8 +176,8 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     onSubmitted: (String string) {
                       //set the name
                       if (nameController.text.isNotEmpty) {
-                        _gameState.action(
-                            ChangeNameCommand(nameController.text, widget.character.id));
+                        _gameState.action(ChangeNameCommand(
+                            nameController.text, widget.character.id));
                       }
                     },
                   ))

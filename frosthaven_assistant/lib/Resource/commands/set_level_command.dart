@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
@@ -16,29 +15,27 @@ class SetLevelCommand extends Command {
     if (monsterId == null) {
       GameMethods.setLevel(level);
       for (var item in _gameState.currentList) {
-        if(item is Monster) {
+        if (item is Monster) {
           item.setLevel(level);
         }
       }
       GameMethods.updateForSpecialRules();
     } else {
       Monster? monster;
-      for(var item in _gameState.currentList) {
+      for (var item in _gameState.currentList) {
         if (item.id == monsterId) {
           monster = item as Monster;
         }
       }
       monster!.level.value = level;
-      for(var item in monster.monsterInstances.value){
+      for (var item in monster.monsterInstances.value) {
         item.setLevel(monster);
       }
-
     }
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {
@@ -47,5 +44,4 @@ class SetLevelCommand extends Command {
     }
     return "Set Level";
   }
-
 }

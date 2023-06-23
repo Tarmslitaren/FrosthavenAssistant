@@ -24,11 +24,10 @@ class HealthWheelController extends StatefulWidget {
 
   const HealthWheelController(
       {Key? key,
-        required this.figureId,
-        required this.ownerId,
-        required this.child})
+      required this.figureId,
+      required this.ownerId,
+      required this.child})
       : super(key: key);
-
 
   @override
   HealthWheelControllerState createState() => HealthWheelControllerState();
@@ -50,7 +49,6 @@ class HealthWheelControllerState extends State<HealthWheelController> {
     super.dispose();
     hideOverlay();
   }
-
 
   void hideOverlay() {
     if (entry != null && entry!.mounted) {
@@ -77,8 +75,8 @@ class HealthWheelControllerState extends State<HealthWheelController> {
             top: dy,
             width: 200 * scale,
             height: 50 * scale,
-            child: Material(
-                color: Colors.transparent, child: selectHealthWheel)));
+            child:
+                Material(color: Colors.transparent, child: selectHealthWheel)));
     final overlay = Overlay.of(context);
     overlay.insert(entry!);
   }
@@ -89,30 +87,31 @@ class HealthWheelControllerState extends State<HealthWheelController> {
     int? lastTimeStamp;
 
     return GestureDetector(
-      onHorizontalDragStart: (details) {
-        hideOverlay();
-        final overlay = Overlay.of(context);
-        overlay.deactivate(); //this removes prior popup if it ended up hanging around for some reason
-        showOverlay(widget.figureId, scale, context);
-      },
-      onHorizontalDragCancel: () {
-        hideOverlay();
-      },
-      onHorizontalDragUpdate: (DragUpdateDetails details) {
-        int timeDiff = 0;
-        if (lastTimeStamp != null) {
-          timeDiff = details.sourceTimeStamp!.inMicroseconds - lastTimeStamp!;
-        }
+        onHorizontalDragStart: (details) {
+          hideOverlay();
+          final overlay = Overlay.of(context);
+          overlay
+              .deactivate(); //this removes prior popup if it ended up hanging around for some reason
+          showOverlay(widget.figureId, scale, context);
+        },
+        onHorizontalDragCancel: () {
+          hideOverlay();
+        },
+        onHorizontalDragUpdate: (DragUpdateDetails details) {
+          int timeDiff = 0;
+          if (lastTimeStamp != null) {
+            timeDiff = details.sourceTimeStamp!.inMicroseconds - lastTimeStamp!;
+          }
 
-        wheelTimeDelta.value = timeDiff;
-        wheelDelta.value = details.delta.dx;
+          wheelTimeDelta.value = timeDiff;
+          wheelDelta.value = details.delta.dx;
 
-        lastTimeStamp = details.sourceTimeStamp!.inMicroseconds;
-      },
-      onHorizontalDragEnd: (details) {
-        //close scrollview and run changeHeath command
-        hideOverlay();
-      },
-      child: widget.child);
+          lastTimeStamp = details.sourceTimeStamp!.inMicroseconds;
+        },
+        onHorizontalDragEnd: (details) {
+          //close scrollview and run changeHeath command
+          hideOverlay();
+        },
+        child: widget.child);
   }
 }

@@ -50,10 +50,10 @@ class AddSummonMenuState extends State<AddSummonMenu> {
       }
     }
     _summonList.addAll(_gameState.itemSummonData);
-    
-    if(getIt<Settings>().showCustomContent.value == false) {
+
+    if (getIt<Settings>().showCustomContent.value == false) {
       //-4 because there are 4 custom summons. I know.
-      _summonList.removeRange(_summonList.length-4, _summonList.length);
+      _summonList.removeRange(_summonList.length - 4, _summonList.length);
     }
   }
 
@@ -245,7 +245,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                               }
                               if (model.standees < 2 && model.gfx.isNotEmpty) {
                                 chosenNr =
-                                    0; //don't show on monsterbox unless standees are numbered
+                                    0; //don't show on monster box unless standees are numbered
                               }
                               SummonData summonData = SummonData(
                                   chosenNr,

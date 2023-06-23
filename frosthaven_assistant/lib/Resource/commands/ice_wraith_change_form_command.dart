@@ -1,4 +1,3 @@
-
 import 'package:frosthaven_assistant/Resource/enums.dart';
 
 import '../../services/service_locator.dart';
@@ -14,7 +13,8 @@ class IceWraithChangeFormCommand extends Command {
 
   @override
   void execute() {
-    MonsterInstance figure = GameMethods.getFigure(ownerId, figureId)! as MonsterInstance;
+    MonsterInstance figure =
+        GameMethods.getFigure(ownerId, figureId)! as MonsterInstance;
     if (isElite) {
       figure.type = MonsterType.normal;
     } else {
@@ -31,12 +31,11 @@ class IceWraithChangeFormCommand extends Command {
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {
-    if(isElite == false) {
+    if (isElite == false) {
       return "Ice Wraith turn normal";
     }
     return "Ice Wraith turn elite";

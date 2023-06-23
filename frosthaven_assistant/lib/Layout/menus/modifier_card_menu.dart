@@ -254,16 +254,20 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                         name == "allies"));
                                   },
                                   child: Text(
-                                    deck.hasMinus2() ? "Remove -2 card" : "-2 card removed",
+                                    deck.hasMinus2()
+                                        ? "Remove -2 card"
+                                        : "-2 card removed",
                                   ),
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    _gameState.action(AMDRemoveNullCommand(
-                                        name == "allies"));
+                                    _gameState.action(
+                                        AMDRemoveNullCommand(name == "allies"));
                                   },
                                   child: Text(
-                                    deck.hasNull() ? "Remove null card" : "null removed",
+                                    deck.hasNull()
+                                        ? "Remove null card"
+                                        : "null removed",
                                   ),
                                 ),
                                 //todo: (gray out if maxed out)

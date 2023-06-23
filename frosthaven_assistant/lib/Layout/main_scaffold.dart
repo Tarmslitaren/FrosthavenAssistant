@@ -87,10 +87,15 @@ Widget createMainScaffold(BuildContext context) {
                                   ?.scenarios[gameState.scenario.value]
                                   ?.sections
                                   .length;
-                              if(nrOfSections != null && gameState.scenarioSectionsAdded.length == nrOfSections) {
+                              if (nrOfSections != null &&
+                                  gameState.scenarioSectionsAdded.length ==
+                                      nrOfSections) {
                                 nrOfSections = null;
                               }
-                              if(getIt<Settings>().showSectionsInMainView.value == false) {
+                              if (getIt<Settings>()
+                                      .showSectionsInMainView
+                                      .value ==
+                                  false) {
                                 nrOfSections = null;
                               }
                               if ((nrOfSections != null &&
@@ -109,18 +114,22 @@ Widget createMainScaffold(BuildContext context) {
                                   width: screenWidth,
                                   bottom: 4 * barScale,
                                   left: 20,
-                                  child: Column(
-                                      children: [
+                                  child: Column(children: [
                                     Row(
-                                        mainAxisAlignment: ((!sectionsOnSeparateRow && nrOfSections != null) || hasLootDeck)?
-                                            MainAxisAlignment.spaceBetween :  MainAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            ((!sectionsOnSeparateRow &&
+                                                        nrOfSections != null) ||
+                                                    hasLootDeck)
+                                                ? MainAxisAlignment.spaceBetween
+                                                : MainAxisAlignment.end,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           if (hasLootDeck)
                                             const LootDeckWidget(),
-                                          if (!sectionsOnSeparateRow && nrOfSections != null)
+                                          if (!sectionsOnSeparateRow &&
+                                              nrOfSections != null)
                                             Container(
                                               width: sectionWidth,
                                               child: const SectionList(),
@@ -140,7 +149,8 @@ Widget createMainScaffold(BuildContext context) {
                                                   ))
                                           ])
                                         ]),
-                                    if (sectionsOnSeparateRow && nrOfSections != null)
+                                    if (sectionsOnSeparateRow &&
+                                        nrOfSections != null)
                                       Container(
                                         width: sectionWidth,
                                         child: const SectionList(),

@@ -24,12 +24,11 @@ class AMDRemoveNullCommand extends Command {
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {
-    if (remove){
+    if (remove) {
       return "Remove null";
     } else {
       return "Add back null";

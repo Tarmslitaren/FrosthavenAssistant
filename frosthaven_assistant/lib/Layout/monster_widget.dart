@@ -29,7 +29,6 @@ class MonsterWidget extends StatefulWidget {
 }
 
 class MonsterWidgetState extends State<MonsterWidget> {
-
   late List<MonsterInstance> lastList = [];
 
   @override
@@ -76,8 +75,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
                           .toString(),
                   ownerId: widget.data.id,
                   displayStartAnimation: displayStartAnimation,
-              blockInput: false,
-              scale: scale),
+                  blockInput: false,
+                  scale: scale),
             ));
     lastList = widget.data.monsterInstances.value;
     return Wrap(
@@ -116,20 +115,20 @@ class MonsterWidgetState extends State<MonsterWidget> {
           width: height * 0.95,
           //height: height,
           alignment: Alignment.bottomCenter,
-          margin: EdgeInsets.only(bottom: frosthavenStyle? 2 * scale : 0),
+          margin: EdgeInsets.only(bottom: frosthavenStyle ? 2 * scale : 0),
           child: Text(
             textAlign: TextAlign.center,
             widget.data.type.display,
             style: TextStyle(
-                fontFamily: frosthavenStyle?"GermaniaOne" : 'Pirata',
+                fontFamily: frosthavenStyle ? "GermaniaOne" : 'Pirata',
                 color: Colors.white,
                 fontSize: 14.4 * scale,
                 shadows: [
-                Shadow(
-                offset: Offset(1 * scale, 1 * scale),
-    color: Colors.black87,
-    blurRadius: 1 * scale,
-    )
+                  Shadow(
+                    offset: Offset(1 * scale, 1 * scale),
+                    color: Colors.black87,
+                    blurRadius: 1 * scale,
+                  )
                 ]),
           ))
     ]);
@@ -143,14 +142,16 @@ class MonsterWidgetState extends State<MonsterWidget> {
         valueListenable: getIt<GameState>().updateList,
         // widget.data.monsterInstances,
         builder: (context, value, child) {
-          return Column(mainAxisSize: MainAxisSize.max, children: [ ColorFiltered(
-              colorFilter: (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive) &&
-                      (widget.data.turnState != TurnsState.done ||
-                          getIt<GameState>().roundState.value ==
-                              RoundState.chooseInitiative)
-                  ? ColorFilter.matrix(identity)
-                  : ColorFilter.matrix(grayScale),
-              child: SizedBox(
+          return Column(mainAxisSize: MainAxisSize.max, children: [
+            ColorFiltered(
+                colorFilter: (widget.data.monsterInstances.value.isNotEmpty ||
+                            widget.data.isActive) &&
+                        (widget.data.turnState != TurnsState.done ||
+                            getIt<GameState>().roundState.value ==
+                                RoundState.chooseInitiative)
+                    ? ColorFilter.matrix(identity)
+                    : ColorFilter.matrix(grayScale),
+                child: SizedBox(
                   height: 120 * 0.8 * scale,
                   //this dictates size of the cards
                   width: getMainListWidth(context),
@@ -158,7 +159,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
                     children: [
                       getIt<GameState>().roundState.value ==
                                   RoundState.playTurns &&
-                          (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive)
+                              (widget.data.monsterInstances.value.isNotEmpty ||
+                                  widget.data.isActive)
                           ? InkWell(
                               onTap: () {
                                 getIt<GameState>()
@@ -171,20 +173,20 @@ class MonsterWidgetState extends State<MonsterWidget> {
                     ],
                   ),
                 )),
-                Container(
-                  //color: Colors.amber,
-                  //height: 50,
-                  margin: EdgeInsets.only(
-                      left: 4 * scale * 0.8, right: 4 * scale * 0.8),
-                  width: getMainListWidth(context) - 4 * scale * 0.8,
-                  child: ValueListenableBuilder<int>(
-                      valueListenable: getIt<GameState>().killMonsterStandee,
-                      // widget.data.monsterInstances,
-                      builder: (context, value, child) {
-                        return buildMonsterBoxGrid(scale);
-                      }),
-                ),
-              ]);
+            Container(
+              //color: Colors.amber,
+              //height: 50,
+              margin: EdgeInsets.only(
+                  left: 4 * scale * 0.8, right: 4 * scale * 0.8),
+              width: getMainListWidth(context) - 4 * scale * 0.8,
+              child: ValueListenableBuilder<int>(
+                  valueListenable: getIt<GameState>().killMonsterStandee,
+                  // widget.data.monsterInstances,
+                  builder: (context, value, child) {
+                    return buildMonsterBoxGrid(scale);
+                  }),
+            ),
+          ]);
         });
   }
 }

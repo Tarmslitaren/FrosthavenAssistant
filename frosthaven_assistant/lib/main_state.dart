@@ -21,7 +21,6 @@ class DataLoadedNotification extends Notification {
 
 class MainState extends State<MyHomePage>
     with WindowListener, WidgetsBindingObserver {
-
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
@@ -34,15 +33,17 @@ class MainState extends State<MyHomePage>
       case AppLifecycleState.resumed:
         getIt<Network>().appInBackground = false;
         print("app in resumed");
-        rebuildAllChildren(context); //might be a bit performance heavy, but ensures app state visually up to date with server.
-        if(getIt<Network>().clientDisconnectedWhileInBackground == true || getIt<Settings>().connectClientOnStartup == true) {
+        rebuildAllChildren(
+            context); //might be a bit performance heavy, but ensures app state visually up to date with server.
+        if (getIt<Network>().clientDisconnectedWhileInBackground == true ||
+            getIt<Settings>().connectClientOnStartup == true) {
           print("client was disconnected in background so try reconnect");
           getIt<Network>().clientDisconnectedWhileInBackground = false;
           getIt<Client>().connect(getIt<Settings>().lastKnownConnection);
         }
         break;
       case AppLifecycleState.inactive: //goes background but still alive.
-      //ave client state. if somehow disconnected while in background (wifi strangled etc.), reconnect on resume
+        //ave client state. if somehow disconnected while in background (wifi strangled etc.), reconnect on resume
         print("app in inactive");
         getIt<Network>().appInBackground = true;
         break;
@@ -52,8 +53,9 @@ class MainState extends State<MyHomePage>
       case AppLifecycleState.detached:
         print("app in detached");
         //means shut down. save client state here. and try connect at startup if so.
-        if(getIt<Settings>().client.value == ClientState.connected) {
-          print("client was disconnected in background so try reconnect on restart");
+        if (getIt<Settings>().client.value == ClientState.connected) {
+          print(
+              "client was disconnected in background so try reconnect on restart");
           getIt<Network>().clientDisconnectedWhileInBackground = true;
           getIt<Settings>().connectClientOnStartup = true;
           getIt<Settings>().saveToDisk();
@@ -96,8 +98,7 @@ class MainState extends State<MyHomePage>
         builder: (context, value, child) {
           rebuildAllChildren(
               context); //only way to remake the value listenable builders with broken references
-          return OverrideTextScaleFactor(
-              child: createMainScaffold(context));
+          return OverrideTextScaleFactor(child: createMainScaffold(context));
         });
   }
 

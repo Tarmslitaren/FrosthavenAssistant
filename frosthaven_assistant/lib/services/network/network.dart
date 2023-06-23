@@ -5,11 +5,7 @@ import '../service_locator.dart';
 import 'client.dart';
 import 'network_info.dart';
 
-enum ClientState{
-  connected,
-  disconnected,
-  connecting
-}
+enum ClientState { connected, disconnected, connecting }
 
 class Network {
   final Server server = Server();

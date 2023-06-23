@@ -584,16 +584,17 @@ class GameMethods {
                         List<int> normal = [
                           item.normal[0] + spawnItem.normal[0],
                           item.normal[1] + spawnItem.normal[1],
-                          item.normal[2] +  spawnItem.normal[2]
+                          item.normal[2] + spawnItem.normal[2]
                         ];
                         List<int> elite = [
                           item.elite[0] + spawnItem.elite[0],
                           item.elite[1] + spawnItem.elite[1],
-                          item.elite[2] +  spawnItem.elite[2]
+                          item.elite[2] + spawnItem.elite[2]
                         ];
-                        RoomMonsterData mergedItem = RoomMonsterData(item.name, normal, elite);
+                        RoomMonsterData mergedItem =
+                            RoomMonsterData(item.name, normal, elite);
                         for (int i = 0; i < roomMonsterData.length; i++) {
-                          if(roomMonsterData[i].name == item.name) {
+                          if (roomMonsterData[i].name == item.name) {
                             roomMonsterData[i] = mergedItem;
                             break;
                           }
@@ -616,7 +617,7 @@ class GameMethods {
     if (!section) {
       _gameState._scenarioSpecialRules = specialRules;
 
-      //todo: create a gamestate set scenario method to handle all these
+      //todo: create a game state set scenario method to handle all these
       GameMethods.updateElements();
       GameMethods.updateElements(); //twice to make sure they are inert.
       GameMethods.setRoundState(RoundState.chooseInitiative);

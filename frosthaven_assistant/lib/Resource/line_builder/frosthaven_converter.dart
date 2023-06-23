@@ -384,17 +384,14 @@ class FrosthavenConverter {
       for (Widget item in widget.children) {
         retVal.addAll(getAllImagesInWidget(item));
       }
-    }
-    else if (widget is Container && widget.child != null) {
+    } else if (widget is Container && widget.child != null) {
       retVal.addAll(getAllImagesInWidget(widget.child!));
-    }
-    else if (widget is Image) {
+    } else if (widget is Image) {
       retVal.add(widget.semanticLabel!);
     }
 
     return retVal;
   }
-
 
   static String getAllTextInWidget(Widget widget) {
     String retVal = "";
@@ -417,12 +414,11 @@ class FrosthavenConverter {
 
   static void applyConditionalGraphics(var lines, double scale, bool elementUse,
       double rightMargin, bool bossStatCard, Row child) {
-
     bool belongs = true;
-    if(lines.isEmpty) {
+    if (lines.isEmpty) {
       belongs = false;
     } else {
-      if(lines.last is Image) {
+      if (lines.last is Image) {
         if ((lines.last as Image).semanticLabel!.contains("divider")) {
           belongs = false;
         }
@@ -431,8 +427,9 @@ class FrosthavenConverter {
 
     //sniff the child if it is a element to element thing
     List<String> graphics = getAllImagesInWidget(child);
-    if(graphics.length == 2) {
-      if(LineBuilder.isElement(graphics[0]) &&LineBuilder.isElement(graphics[1])){
+    if (graphics.length == 2) {
+      if (LineBuilder.isElement(graphics[0]) &&
+          LineBuilder.isElement(graphics[1])) {
         belongs = false;
       }
     }

@@ -8,7 +8,12 @@ class NumpadMenu extends StatefulWidget {
   final TextEditingController controller;
   final int maxLength;
   final Function(String)? onChange;
-  const NumpadMenu({Key? key, required this.controller, required this.maxLength, this.onChange}) : super(key: key);
+  const NumpadMenu(
+      {Key? key,
+      required this.controller,
+      required this.maxLength,
+      this.onChange})
+      : super(key: key);
 
   @override
   NumpadMenuState createState() => NumpadMenuState();
@@ -25,41 +30,38 @@ class NumpadMenuState extends State<NumpadMenu> {
   }
 
   Widget buildNrButton(int nr, double scale) {
-    return  SizedBox(
-            width: 40 * scale,
-            height: 40 * scale,
-            child: TextButton(
-              child: Text(
-                nr.toString(),
-                //textScaleFactor: scale,//maybe not right
-                style: getTitleTextStyle(scale),
-              ),
-              onPressed: () {
-                text += nr.toString();
-                widget.controller.text = text;
+    return SizedBox(
+      width: 40 * scale,
+      height: 40 * scale,
+      child: TextButton(
+        child: Text(
+          nr.toString(),
+          //textScaleFactor: scale,//maybe not right
+          style: getTitleTextStyle(scale),
+        ),
+        onPressed: () {
+          text += nr.toString();
+          widget.controller.text = text;
 
-                if(widget.onChange != null) {
-                  widget.onChange!(text);
-                }
+          if (widget.onChange != null) {
+            widget.onChange!(text);
+          }
 
-                if (text.length >= widget.maxLength){
-                  Navigator.pop(context);
-                }
-                FocusManager
-                    .instance.primaryFocus
-                    ?.unfocus();
-              },
-            ),
-          );
-
+          if (text.length >= widget.maxLength) {
+            Navigator.pop(context);
+          }
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     double scale = 1;
-    if(!isPhoneScreen(context)) {
+    if (!isPhoneScreen(context)) {
       scale = 1.5;
-      if(isLargeTablet(context)) {
+      if (isLargeTablet(context)) {
         scale = 2;
       }
     }
@@ -77,14 +79,14 @@ class NumpadMenuState extends State<NumpadMenu> {
           image: DecorationImage(
             colorFilter: ColorFilter.mode(
                 Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value?
-            'assets/images/bg/dark_bg.png'
-                :'assets/images/bg/white_bg.png'),
+            image: AssetImage(getIt<Settings>().darkMode.value
+                ? 'assets/images/bg/dark_bg.png'
+                : 'assets/images/bg/white_bg.png'),
             fit: BoxFit.cover,
           ),
         ),
         child: Stack(
-          //alignment: Alignment.center,
+            //alignment: Alignment.center,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

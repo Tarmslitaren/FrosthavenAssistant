@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../Resource/commands/add_standee_command.dart';
@@ -31,7 +30,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
     super.initState();
   }
 
-  Widget buildNrButton(final int nr,final double scale) {
+  Widget buildNrButton(final int nr, final double scale) {
     bool boss = widget.monster.type.levels[0].boss != null;
     MonsterType type = MonsterType.normal;
     Color color = Colors.white;
@@ -66,17 +65,18 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
       height: 40 * scale,
       child: TextButton(
         child: Text(
-      text,
-      style: TextStyle(
-        color: color,
-        fontSize: 18 * scale,
-        shadows: [shadow],
-      ),
+          text,
+          style: TextStyle(
+            color: color,
+            fontSize: 18 * scale,
+            shadows: [shadow],
+          ),
         ),
         onPressed: () {
-      if (!isOut) {
-        _gameState.action(AddStandeeCommand(nr, null, widget.monster.id, type, addAsSummon));
-      }
+          if (!isOut) {
+            _gameState.action(AddStandeeCommand(
+                nr, null, widget.monster.id, type, addAsSummon));
+          }
         },
       ),
     );
@@ -86,22 +86,23 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
   Widget build(BuildContext context) {
     int nrOfStandees = widget.monster.type.count;
     double scale = 1;
-    if(!isPhoneScreen(context)) {
+    if (!isPhoneScreen(context)) {
       scale = 1.5;
-      if(isLargeTablet(context)) {
+      if (isLargeTablet(context)) {
         scale = 2;
       }
     }
     //4 nrs per row
-    double height =140;
+    double height = 140;
     if (nrOfStandees > 4) {
-      height = 172 ;
+      height = 172;
     }
     if (nrOfStandees > 8) {
       height = 211;
     }
     return Container(
-        width: 250 * scale, //need to set any width to center content, overridden by dialog default min width.
+        width: 250 *
+            scale, //need to set any width to center content, overridden by dialog default min width.
         height: height * scale,
         decoration: BoxDecoration(
           //color: Colors.black,
@@ -112,10 +113,11 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
             width: 10
           )),*/
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value?
-            'assets/images/bg/dark_bg.png'
-                :'assets/images/bg/white_bg.png'),
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            image: AssetImage(getIt<Settings>().darkMode.value
+                ? 'assets/images/bg/dark_bg.png'
+                : 'assets/images/bg/white_bg.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -131,15 +133,20 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                         SizedBox(
                           height: 20 * scale,
                         ),
-                        Text("Add Standee Nr",
-                            style: getTitleTextStyle(scale)),
+                        Text("Add Standee Nr", style: getTitleTextStyle(scale)),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             buildNrButton(1, scale),
-                            nrOfStandees > 1 ? buildNrButton(2, scale) : Container(),
-                            nrOfStandees > 2 ? buildNrButton(3, scale) : Container(),
-                            nrOfStandees > 3 ? buildNrButton(4, scale) : Container(),
+                            nrOfStandees > 1
+                                ? buildNrButton(2, scale)
+                                : Container(),
+                            nrOfStandees > 2
+                                ? buildNrButton(3, scale)
+                                : Container(),
+                            nrOfStandees > 3
+                                ? buildNrButton(4, scale)
+                                : Container(),
                           ],
                         ),
                         nrOfStandees > 4
@@ -177,7 +184,8 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Summoned:", style: getSmallTextStyle(scale)),
+                              Text("Summoned:",
+                                  style: getSmallTextStyle(scale)),
                               Checkbox(
                                 checkColor: Colors.black,
                                 activeColor: Colors.grey.shade200,
@@ -192,7 +200,6 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                                 },
                                 value: addAsSummon,
                               )
-
                             ])
                       ],
                     );

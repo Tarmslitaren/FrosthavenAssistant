@@ -9,17 +9,16 @@ class AddSpecialLootCardCommand extends Command {
   @override
   void execute() {
     GameState gameState = getIt<GameState>();
-    if(nr == 1418) {
+    if (nr == 1418) {
       gameState.lootDeck.addSpecial1418();
     }
-    if(nr == 1419) {
+    if (nr == 1419) {
       gameState.lootDeck.addSpecial1419();
     }
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {

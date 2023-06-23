@@ -1,4 +1,3 @@
-
 import 'package:frosthaven_assistant/Resource/action_handler.dart';
 
 import '../../services/service_locator.dart';
@@ -19,7 +18,8 @@ class RemoveConditionCommand extends Command {
     newList.addAll(figure.conditions.value);
     newList.remove(condition);
     figure.conditions.value = newList;
-    if(condition != Condition.chill || !figure.conditions.value.contains(Condition.chill)) {
+    if (condition != Condition.chill ||
+        !figure.conditions.value.contains(Condition.chill)) {
       figure.conditionsAddedThisTurn.value.remove(condition);
     }
     figure.conditionsAddedPreviousTurn.value.remove(condition);

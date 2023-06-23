@@ -21,7 +21,7 @@ class SetScenarioCommand extends Command {
 
   @override
   String describe() {
-    if(!_section) {
+    if (!_section) {
       return "Set Scenario";
     }
     return "Add Section";

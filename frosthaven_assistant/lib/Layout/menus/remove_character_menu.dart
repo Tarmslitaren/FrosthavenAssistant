@@ -65,7 +65,8 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                           "assets/images/class-icons/${currentCharacters[index].characterClass.name}.png"),
                     ),
                     iconColor: currentCharacters[index].characterClass.color,
-                    title: Text(currentCharacters[index].characterState.display.value,
+                    title: Text(
+                        currentCharacters[index].characterState.display.value,
                         style: const TextStyle(fontSize: 18)),
                     trailing: Text(
                         "(${currentCharacters[index].characterClass.edition})",

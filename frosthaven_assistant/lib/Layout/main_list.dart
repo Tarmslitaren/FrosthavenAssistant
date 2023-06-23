@@ -305,12 +305,9 @@ class MainListState extends State<MainList> {
     double screenHeight = MediaQuery.of(context).size.height -
         80 * getIt<Settings>().userScalingBars.value;
 
-
-
     if (widgetPositions.isNotEmpty) {
-
       bool allFitInView = false;
-      if(widgetPositions.last < screenHeight * 2) {
+      if (widgetPositions.last < screenHeight * 2) {
         //can fit all??
         allFitInView = true;
       }
@@ -318,8 +315,8 @@ class MainListState extends State<MainList> {
       //find center point
       for (int i = 0; i < widgetPositions.length; i++) {
         if (widgetPositions[i] > widgetPositions.last / 2) {
-          if(allFitInView) {
-            if(widgetPositions[i] > screenHeight) {
+          if (allFitInView) {
+            if (widgetPositions[i] > screenHeight) {
               return i;
             }
           }
@@ -408,7 +405,8 @@ class MainListState extends State<MainList> {
                   2 * getMainListWidth(context)) /
               2;
           List<double> itemHeights = getItemHeights(context);
-          int itemsPerColumn = getItemsForHalfTotalHeight(itemHeights); //no good
+          int itemsPerColumn =
+              getItemsForHalfTotalHeight(itemHeights); //no good
           int itemsColumn2 = itemHeights.length - itemsPerColumn;
           itemsPerColumn = max(itemsPerColumn, itemsColumn2);
           bool ignoreScroll = false;
@@ -423,7 +421,7 @@ class MainListState extends State<MainList> {
           }
           ignoreScroll = false;*/ //there is no easy way to add nice amount of padding for this mode.
 
-          double paddingBottom = 0.5 * MediaQuery.of(context).size.height ;
+          double paddingBottom = 0.5 * MediaQuery.of(context).size.height;
           return Container(
               margin: canFit2Columns
                   ? EdgeInsets.only(left: paddingLeft, right: paddingLeft)

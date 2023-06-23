@@ -34,9 +34,14 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     //TODO:clear search
     GameMethods.setCampaign(campaign);
     _foundScenarios = _gameState
-        .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
+        .modelData
+        .value[_gameState.currentCampaign.value]!
+        .scenarios[_gameState.scenario.value]!
+        .sections
+        .map((e) => e.name)
         .toList();
-    _foundScenarios = _foundScenarios.where((element) => !element.contains("spawn")).toList();
+    _foundScenarios =
+        _foundScenarios.where((element) => !element.contains("spawn")).toList();
     _foundScenarios.sort((a, b) {
       int? aNr = GameMethods.findNrFromScenarioName(a);
       int? bNr = GameMethods.findNrFromScenarioName(b);
@@ -52,13 +57,15 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     List<String> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameState
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
+      results = _gameState.modelData.value[_gameState.currentCampaign.value]!
+          .scenarios[_gameState.scenario.value]!.sections
+          .map((e) => e.name)
           .toList();
       results = results.where((element) => !element.contains("spawn")).toList();
     } else {
-      results = _gameState
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
+      results = _gameState.modelData.value[_gameState.currentCampaign.value]!
+          .scenarios[_gameState.scenario.value]!.sections
+          .map((e) => e.name)
           .toList()
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))

@@ -7,19 +7,18 @@ class DrawAbilityCardCommand extends Command {
   final String ownerId;
   DrawAbilityCardCommand(this.ownerId);
 
-
   @override
   void execute() {
-    Monster monster = GameMethods.getCurrentMonsters().firstWhere((element) => element.id == ownerId);
+    Monster monster = GameMethods.getCurrentMonsters()
+        .firstWhere((element) => element.id == ownerId);
     MonsterAbilityState deck = GameMethods.getDeck(monster.type.deck)!;
-    if(deck.drawPile.isNotEmpty) {
+    if (deck.drawPile.isNotEmpty) {
       deck.draw();
     }
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {

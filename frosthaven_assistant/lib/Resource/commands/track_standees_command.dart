@@ -1,4 +1,3 @@
-
 import 'package:get_it/get_it.dart';
 
 import '../../services/service_locator.dart';
@@ -10,8 +9,7 @@ class TrackStandeesCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final bool track;
 
-  TrackStandeesCommand(this.track) {
-  }
+  TrackStandeesCommand(this.track) {}
 
   @override
   void execute() {
@@ -26,7 +24,7 @@ class TrackStandeesCommand extends Command {
 
   @override
   String describe() {
-    if(!track) {
+    if (!track) {
       return "Don't track standees";
     }
     return "Track Standees";

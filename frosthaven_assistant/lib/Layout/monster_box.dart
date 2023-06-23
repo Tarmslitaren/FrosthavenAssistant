@@ -23,7 +23,9 @@ class MonsterBox extends StatefulWidget {
       {Key? key,
       required this.figureId,
       required this.ownerId,
-      required this.displayStartAnimation, required this.blockInput, required this.scale})
+      required this.displayStartAnimation,
+      required this.blockInput,
+      required this.scale})
       : super(key: key);
 
   static const double conditionSize = 14;
@@ -60,8 +62,13 @@ class MonsterBoxState extends State<MonsterBox> {
     for (var condition in data.conditions.value) {
       for (var item in getIt<GameState>().currentList) {
         if (item.id == widget.ownerId) {
-          list.add(
-              ConditionIcon(condition, MonsterBox.conditionSize, item, data, scale: scale,));
+          list.add(ConditionIcon(
+            condition,
+            MonsterBox.conditionSize,
+            item,
+            data,
+            scale: scale,
+          ));
           break;
         }
       }
@@ -113,7 +120,7 @@ class MonsterBoxState extends State<MonsterBox> {
 
     bool ownerIsCurrent = true;
     for (var item in getIt<GameState>().currentList) {
-      if(item.id == widget.ownerId) {
+      if (item.id == widget.ownerId) {
         if (item.turnState == TurnsState.done) {
           ownerIsCurrent = false;
         }
@@ -124,7 +131,7 @@ class MonsterBoxState extends State<MonsterBox> {
     return ColorFiltered(
         //gray out if summoned this turn and it's still the character's/monster's turn
         colorFilter: (data.roundSummoned == getIt<GameState>().round.value &&
-            ownerIsCurrent)
+                ownerIsCurrent)
             ? ColorFilter.matrix(grayScale)
             : ColorFilter.matrix(identity),
         child: Container(
@@ -264,7 +271,7 @@ class MonsterBoxState extends State<MonsterBox> {
   Widget build(BuildContext context) {
     double scale = widget.scale;
     var figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
-    if(figure != null) {
+    if (figure != null) {
       data = figure as MonsterInstance;
     }
     Color color = Colors.white;
@@ -282,64 +289,63 @@ class MonsterBoxState extends State<MonsterBox> {
       characterId = widget.ownerId; //this is probably wrong
     }
 
-
     return GestureDetector(
-      onTap: () {
-        //open stats menu
-        if(!widget.blockInput) {
-          openDialog(
-            context,
-            StatusMenu(
-                figureId: figureId,
-                monsterId: getMonster(),
-                characterId: characterId),
-          );
-        }
-      },
-      child: HealthWheelController(
-      figureId: widget.figureId,
-      ownerId: widget.ownerId,
-      child: AnimatedContainer(
-          //makes it grow nicely when adding conditions
-          key: Key(figureId.toString()),
-          width: width,
-          curve: Curves.easeInOut,
-          duration: const Duration(milliseconds: 300),
-          child: ValueListenableBuilder<int>(
-              valueListenable: data.health,
-              builder: (context, value, child) {
-                bool alive = true;
-                if (data.health.value <= 0) {
-                  alive = false;
-                }
+        onTap: () {
+          //open stats menu
+          if (!widget.blockInput) {
+            openDialog(
+              context,
+              StatusMenu(
+                  figureId: figureId,
+                  monsterId: getMonster(),
+                  characterId: characterId),
+            );
+          }
+        },
+        child: HealthWheelController(
+          figureId: widget.figureId,
+          ownerId: widget.ownerId,
+          child: AnimatedContainer(
+              //makes it grow nicely when adding conditions
+              key: Key(figureId.toString()),
+              width: width,
+              curve: Curves.easeInOut,
+              duration: const Duration(milliseconds: 300),
+              child: ValueListenableBuilder<int>(
+                  valueListenable: data.health,
+                  builder: (context, value, child) {
+                    bool alive = true;
+                    if (data.health.value <= 0) {
+                      alive = false;
+                    }
 
-                double offset = -30 * scale;
-                Widget child = buildInternal(scale, width, color);
+                    double offset = -30 * scale;
+                    Widget child = buildInternal(scale, width, color);
 
-                if (widget.displayStartAnimation != widget.figureId) {
-                  //if this one is not added - only play death animation
-                  return TranslationAnimatedWidget.tween(
-                      enabled: !alive && !widget.blockInput,
-                      translationDisabled: const Offset(0, 0),
-                      translationEnabled: Offset(0, alive ? 0 : -offset),
-                      duration: const Duration(milliseconds: 600),
-                      curve: Curves.linear,
-                      child: child);
-                }
+                    if (widget.displayStartAnimation != widget.figureId) {
+                      //if this one is not added - only play death animation
+                      return TranslationAnimatedWidget.tween(
+                          enabled: !alive && !widget.blockInput,
+                          translationDisabled: const Offset(0, 0),
+                          translationEnabled: Offset(0, alive ? 0 : -offset),
+                          duration: const Duration(milliseconds: 600),
+                          curve: Curves.linear,
+                          child: child);
+                    }
 
-                return TranslationAnimatedWidget.tween(
-                    enabled: true,
-                    //fix is to only set enabled on added/removed ones?
-                    translationDisabled: Offset(0, alive ? offset : 0),
-                    translationEnabled: Offset(0, alive ? 0 : -offset),
-                    duration: const Duration(milliseconds: 600),
-                    curve: Curves.linear,
-                    child: OpacityAnimatedWidget.tween(
-                        enabled: alive,
-                        opacityDisabled: 0,
-                        opacityEnabled: 1,
-                        child: child));
-              })),
-    ));
+                    return TranslationAnimatedWidget.tween(
+                        enabled: true,
+                        //fix is to only set enabled on added/removed ones?
+                        translationDisabled: Offset(0, alive ? offset : 0),
+                        translationEnabled: Offset(0, alive ? 0 : -offset),
+                        duration: const Duration(milliseconds: 600),
+                        curve: Curves.linear,
+                        child: OpacityAnimatedWidget.tween(
+                            enabled: alive,
+                            opacityDisabled: 0,
+                            opacityEnabled: 1,
+                            child: child));
+                  })),
+        ));
   }
 }

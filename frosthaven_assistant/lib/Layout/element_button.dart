@@ -108,7 +108,6 @@ class AnimatedContainerButtonState extends State<ElementButton> {
             splashColor: Colors.transparent,
             focusColor: Colors.transparent,
             highlightColor: Colors.transparent,
-
             onLongPress: () {
               setState(() {
                 _gameState.action(ImbueElementCommand(widget.element, true));
@@ -119,7 +118,6 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                 if (_gameState.elementState[widget.element] ==
                     ElementState.half) {
                   _gameState.action(UseElementCommand(widget.element));
-
                 } else if (_gameState.elementState[widget.element] ==
                     ElementState.full) {
                   _gameState.action(UseElementCommand(widget.element));
@@ -168,8 +166,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                                     color: _color,
                                     borderRadius: _borderRadius,
                                     boxShadow: [
-                                      _gameState.elementState
-                                                  [widget.element] !=
+                                      _gameState.elementState[widget.element] !=
                                               ElementState.inert
                                           ? BoxShadow(
                                               //blurStyle: BlurStyle.solid,

@@ -1,4 +1,3 @@
-
 import '../../../services/service_locator.dart';
 import '../../state/game_state.dart';
 import '../../state/modifier_deck_state.dart';
@@ -6,14 +5,12 @@ import '../../state/monster.dart';
 import 'change_stat_command.dart';
 
 class ChangeBlessCommand extends ChangeStatCommand {
-
   ModifierDeck? deck;
   ChangeBlessCommand(super.change, super.figureId, super.ownerId);
   ChangeBlessCommand.deck(this.deck) : super(0, '', '');
 
   @override
   void execute() {
-
     //Figure figure = getFigure(ownerId, figureId)!;
     if (deck == null) {
       deck = getIt<GameState>().modifierDeck;
@@ -25,7 +22,6 @@ class ChangeBlessCommand extends ChangeStatCommand {
         }
       }
     }
-
 
     deck!.blesses.value += change;
   }

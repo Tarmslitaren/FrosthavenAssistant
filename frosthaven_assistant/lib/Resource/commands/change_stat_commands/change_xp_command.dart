@@ -1,5 +1,3 @@
-
-
 import '../../../services/service_locator.dart';
 import '../../state/character_state.dart';
 import '../../state/game_state.dart';
@@ -10,10 +8,9 @@ class ChangeXPCommand extends ChangeStatCommand {
 
   @override
   void execute() {
-
-    CharacterState figure = GameMethods.getFigure(ownerId, figureId)! as CharacterState;
+    CharacterState figure =
+        GameMethods.getFigure(ownerId, figureId)! as CharacterState;
     figure.xp.value += change;
-
   }
 
   @override
@@ -24,7 +21,7 @@ class ChangeXPCommand extends ChangeStatCommand {
 
   @override
   String describe() {
-    if(change > 0) {
+    if (change > 0) {
       return "Increase $figureId's xp";
     }
     return "Decrease $figureId's xp";
