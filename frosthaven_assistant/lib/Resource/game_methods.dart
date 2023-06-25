@@ -421,7 +421,13 @@ class GameMethods {
           _gameState._lootDeck = LootDeck.from(_gameState.lootDeck);
         }
       } else {
-        _gameState._lootDeck = LootDeck.from(_gameState.lootDeck);
+        if (_gameState.currentCampaign.value == "Frosthaven") {
+          //add loot deck for random scenarios
+          LootDeckModel? lootDeckModel = const LootDeckModel(2, 2, 2, 12, 1, 1, 1, 1, 1, 1, 0);
+          _gameState._lootDeck = LootDeck(lootDeckModel, _gameState.lootDeck);
+        } else {
+          _gameState._lootDeck = LootDeck.from(_gameState.lootDeck);
+        }
       }
 
       GameMethods.clearTurnState(true);
