@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_remove_minus_1_command.dart';
@@ -11,7 +13,6 @@ import 'package:reorderables/reorderables.dart';
 
 import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/amd_remove_minus_2_command.dart';
-import '../../Resource/commands/amd_remove_null_command.dart';
 import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
 import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
@@ -129,7 +130,20 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         );
         list.add(gestureDetector);
       } else {
-        list.add(value);
+        InkWell gestureDetector = InkWell(
+          key: Key(index.toString()),
+          onTap: () {
+            //open remove card menu
+            openDialog(
+                context,
+                RemoveAMDCardMenu(
+                  index: index,
+                  allyDeck: name == "allies",
+                ));
+          },
+          child: value,
+        );
+        list.add(gestureDetector);
       }
     }
     return list;
@@ -257,17 +271,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                     deck.hasMinus2()
                                         ? "Remove -2 card"
                                         : "-2 card removed",
-                                  ),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    _gameState.action(
-                                        AMDRemoveNullCommand(name == "allies"));
-                                  },
-                                  child: Text(
-                                    deck.hasNull()
-                                        ? "Remove null card"
-                                        : "null removed",
                                   ),
                                 ),
                                 //todo: (gray out if maxed out)
