@@ -9183,7 +9183,6 @@
     "#112 Raised by Wolves": {
       "monsters": ["Burrowing Blade", "Chaos Demon (FH)","Earth Demon (FH)", "Hound Scenario 112" ],
       "lootDeck": {"coin":8,"lumber": 1,"metal":3,"hide": 5,"rockroot":2,"axenut":1},
-      "note": "sections: make sure there are no normal hounds in scenario 97.1",
       "special": [
         {
           "type": "Allies",
