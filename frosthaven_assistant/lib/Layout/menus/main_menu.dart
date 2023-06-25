@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_section_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/loot_cards_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/settings_menu.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/network/client.dart';
@@ -89,16 +92,16 @@ Drawer createMainMenu(BuildContext context) {
 // Important: Remove any padding from the ListView.
             padding: EdgeInsets.zero,
             children: [
-              DrawerHeader(
+              const DrawerHeader(
                 padding: EdgeInsets.zero,
                 margin: EdgeInsets.zero,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     color: Colors.blue,
                     image: DecorationImage(
                         fit: BoxFit.fitWidth,
                         image: AssetImage("assets/images/icon.png"))),
                 child: Stack(
-                  children: const [
+                  children: [
                     Positioned(
                         right: 6, bottom: 0, child: Text("Version 1.8.4"))
                   ],
@@ -121,9 +124,7 @@ Drawer createMainMenu(BuildContext context) {
                 },
               ),
               const Divider(),
-              gameState.modelData.value == null
-                  ? Container()
-                  : ListTile(
+              ListTile(
                       title: const Text('Set Scenario'),
                       onTap: () {
                         Navigator.pop(context);
@@ -153,6 +154,21 @@ Drawer createMainMenu(BuildContext context) {
                   openDialog(context, const RemoveCharacterMenu());
                 },
               ),
+              ListTile(
+                title: const Text('Set Level'),
+                onTap: () {
+                  Navigator.pop(context);
+                  openDialog(context, const SetLevelMenu());
+                },
+              ),
+              if(gameState.currentCampaign.value == "Frosthaven")
+                ListTile(
+                  title: const Text('Loot Deck Menu'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    openDialog(context, const LootCardMenu());
+                  },
+                ),
               const Divider(),
               ListTile(
                 title: const Text('Add Monsters'),
