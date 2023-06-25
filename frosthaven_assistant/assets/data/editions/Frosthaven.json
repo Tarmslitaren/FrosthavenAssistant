@@ -3232,28 +3232,69 @@
       "count": 6,
       "levels": [
         {
-          "level": 0, "health": 10, "move": 4, "attack": 3, "attributes": [ "%muddle%" ], "immunities": [ "%disarm%","%stun%"]
+          "level": 0, "health": 10, "move": 4, "attack": 3, "attributes": [ "%muddle%",
+          "^At the end of each round:",
+          "%heal% X", "^Self", "*",
+          "^^where X is (RxL)/2(rounded down)",
+          "^^and R is the number of",
+          "^^Ruined Machines on the map."
+        ], "immunities": [ "%disarm%","%stun%"]
         },
         {
-          "level": 1, "health": 12, "move": 4, "attack": 4, "attributes": [ "%muddle%" ], "immunities": [ "%disarm%","%stun%"]
+          "level": 1, "health": 12, "move": 4, "attack": 4, "attributes": [ "%muddle%",
+          "^At the end of each round:",
+          "%heal% X", "^Self", "*",
+          "^^where X is (RxL)/2(rounded down)",
+          "^^and R is the number of",
+          "^^Ruined Machines on the map."], "immunities": [ "%disarm%","%stun%"]
         },
         {
-          "level": 2, "health": 14, "move": 4, "attack": 5, "attributes": [ "%muddle%" ], "immunities": [ "%disarm%","%stun%"]
+          "level": 2, "health": 14, "move": 4, "attack": 5, "attributes": [ "%muddle%",
+          "^At the end of each round:",
+          "%heal% X", "^Self", "*",
+          "^^where X is (RxL)/2(rounded down)",
+          "^^and R is the number of",
+          "^^Ruined Machines on the map."], "immunities": [ "%disarm%","%stun%"]
         },
         {
-          "level": 3, "health": 18, "move": 5, "attack": 5, "attributes": [ "%muddle%" ], "immunities": [ "%disarm%","%stun%"]
+          "level": 3, "health": 18, "move": 5, "attack": 5, "attributes": [ "%muddle%",
+          "^At the end of each round:",
+          "%heal% X", "^Self", "*",
+          "^^where X is (RxL)/2(rounded down)",
+          "^^and R is the number of",
+          "^^Ruined Machines on the map."], "immunities": [ "%disarm%","%stun%"]
         },
         {
-          "level": 4, "health": 21, "move": 5, "attack": 6, "attributes": [ "%muddle%" ], "immunities": [ "%disarm%","%stun%"]
+          "level": 4, "health": 21, "move": 5, "attack": 6, "attributes": [ "%muddle%",
+          "^At the end of each round:",
+          "%heal% X", "^Self", "*",
+          "^^where X is (RxL)/2(rounded down)",
+          "^^and R is the number of",
+          "^^Ruined Machines on the map."], "immunities": [ "%disarm%","%stun%"]
         },
         {
-          "level": 5, "health": 26, "move": 5, "attack": 6, "attributes": [ "%muddle%" ], "immunities": [ "%disarm%","%stun%"]
+          "level": 5, "health": 26, "move": 5, "attack": 6, "attributes": [ "%muddle%",
+          "^At the end of each round:",
+          "%heal% X", "^Self", "*",
+          "^^where X is (RxL)/2(rounded down)",
+          "^^and R is the number of",
+          "^^Ruined Machines on the map."], "immunities": [ "%disarm%","%stun%"]
         },
         {
-          "level": 6, "health": 33, "move": 5, "attack": 8, "attributes": [ "%muddle%" ],"immunities": ["%disarm%","%stun%", "%curse%"]
+          "level": 6, "health": 33, "move": 5, "attack": 8, "attributes": [ "%muddle%",
+          "^At the end of each round:",
+          "%heal% X", "^Self", "*",
+          "^^where X is (RxL)/2(rounded down)",
+          "^^and R is the number of",
+          "^^Ruined Machines on the map."],"immunities": ["%disarm%","%stun%", "%curse%"]
         },
         {
-          "level": 7, "health": 39, "move": 6, "attack": 9, "attributes": [ "%muddle%" ], "immunities": [ "%disarm%","%stun%","%curse%"]
+          "level": 7, "health": 39, "move": 6, "attack": 9, "attributes": [ "%muddle%",
+          "^At the end of each round:",
+          "%heal% X", "^Self", "*",
+          "^^where X is (RxL)/2(rounded down)",
+          "^^and R is the number of",
+          "^^Ruined Machines on the map."], "immunities": [ "%disarm%","%stun%","%curse%"]
         }
       ]
     },
@@ -6300,7 +6341,19 @@
     },
     "#9 Glowing Catacombs": {
       "monsters": [ "Ice Wraith", "Living Doom","Living Spirit (FH)","Ooze (FH)" ],
-      "lootDeck": {"coin":8,"lumber": 5,"metal":3,"rockroot":2,"corpsecap":1, "treasure": 1}
+      "lootDeck": {"coin":8,"lumber": 5,"metal":3,"rockroot":2,"corpsecap":1, "treasure": 1},
+      "sections": {
+        "#26.1 Glowing Catacombs (9)": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "Any switch not activated spawns one Ooze."
+            }
+          ]
+        }
+      }
     },
     "#10 Crystal Enclosure": {
       "monsters": [ "Algox Guard", "Algox Priest", "Algox Icespeaker"],
