@@ -14,7 +14,7 @@ import 'network.dart';
 import 'dart:convert' show utf8;
 
 class Server {
-  final int serverVersion = 181;
+  final int serverVersion = 184;
 
   final GameState _gameState = getIt<GameState>();
   final _communication = getIt<Communication>();
