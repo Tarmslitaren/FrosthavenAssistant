@@ -679,6 +679,16 @@ class GameMethods {
     }
   }
 
+  static void returnLootCard(bool top) {
+    var card = _gameState._lootDeck.discardPile.pop();
+      card.owner = "";
+      if(top) {
+        _gameState._lootDeck.drawPile.push(card);
+      } else {
+        _gameState._lootDeck.drawPile.getList().insert(0, card);
+    }
+  }
+
   static void removeCharacters(List<Character> characters) {
     List<ListItemData> newList = [];
     for (var item in _gameState.currentList) {
