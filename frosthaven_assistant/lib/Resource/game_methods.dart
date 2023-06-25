@@ -92,7 +92,7 @@ class GameMethods {
         if (item is Monster) {
           if (item.type.deck == deck.name) {
             if (item.monsterInstances.value.isNotEmpty || item.isActive) {
-              if (deck.lastRoundDrawn != _gameState.round.value) {
+              if (deck.lastRoundDrawn < _gameState.round.value) {
                 deck.draw();
                 break;
               }
