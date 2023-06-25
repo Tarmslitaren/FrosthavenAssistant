@@ -75,7 +75,7 @@ Widget createMainScaffold(BuildContext context) {
                                 sectionWidth -=
                                     94 * barScale; //width of loot deck
                               }
-                              if (!modFitsOnBar || GameMethods.hasAllies()) {
+                              if ((!modFitsOnBar || GameMethods.shouldShowAlliesDeck()) && getIt<Settings>().showAmdDeck.value) {
                                 sectionWidth -= 153 * barScale; //width of amd
                               }
 
@@ -135,10 +135,10 @@ Widget createMainScaffold(BuildContext context) {
                                               child: const SectionList(),
                                             ),
                                           Column(children: [
-                                            if (GameMethods.hasAllies())
+                                            if (GameMethods.shouldShowAlliesDeck())
                                               const ModifierDeckWidget(
                                                   name: "allies"),
-                                            if (!modFitsOnBar)
+                                            if (!modFitsOnBar && getIt<Settings>().showAmdDeck.value)
                                               Container(
                                                   margin: EdgeInsets.only(
                                                     top: 4 * barScale,

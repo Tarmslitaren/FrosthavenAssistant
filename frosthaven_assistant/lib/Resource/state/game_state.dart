@@ -185,6 +185,8 @@ class GameState extends ActionHandler {
   BuiltSet<String> get unlockedClasses => BuiltSet.of(_unlockedClasses);
   Set<String> _unlockedClasses = {};
 
+  final showAllyDeck = ValueNotifier<bool>(false);
+
   @override
   String toString() {
     Map<String, int> elements = {};
@@ -208,6 +210,7 @@ class GameState extends ActionHandler {
         '"modifierDeckAllies": ${_modifierDeckAllies.toString()}, '
         '"lootDeck": ${_lootDeck.toString()}, ' //does this work if null?
         '"unlockedClasses": ${jsonEncode(unlockedClasses.toList())}, '
+        '"showAllyDeck": ${showAllyDeck.value}, '
         '"elementState": ${json.encode(elements)} '
         '}';
   }

@@ -215,6 +215,18 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),
+                              CheckboxListTile(
+                                  title: const Text(
+                                      "Show Attack Modifier Decks"),
+                                  value: settings.showAmdDeck.value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      settings.showAmdDeck.value =
+                                      value!;
+                                      settings.saveToDisk();
+                                      getIt<GameState>().updateAllUI();
+                                    });
+                                  }),
                               if (!Platform.isIOS)
                                 CheckboxListTile(
                                     title: const Text("Fullscreen"),

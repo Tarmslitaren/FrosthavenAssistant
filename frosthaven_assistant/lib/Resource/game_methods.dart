@@ -374,6 +374,7 @@ class GameMethods {
     if (!section) {
       //first reset state
       GameMethods.setRound(1);
+      _gameState.showAllyDeck.value = false;
       _gameState._currentAbilityDecks.clear();
       _gameState._scenarioSpecialRules.clear();
       List<ListItemData> newList = [];
@@ -1172,7 +1173,17 @@ class GameMethods {
     return monster;
   }
 
-  static bool hasAllies() {
+  static void showAllyDeck() {
+    _gameState.showAllyDeck.value = true;
+  }
+
+  static bool shouldShowAlliesDeck() {
+    if (!getIt<Settings>().showAmdDeck.value ) {
+      return false;
+    }
+    if (_gameState.showAllyDeck.value ) {
+      return true;
+    }
     for (var item in _gameState.currentList) {
       if (item is Monster) {
         if (item.isAlly) {

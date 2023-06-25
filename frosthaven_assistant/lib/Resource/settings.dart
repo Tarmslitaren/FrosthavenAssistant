@@ -37,6 +37,7 @@ class Settings {
   final showReminders = ValueNotifier<bool>(true);
   final autoAddStandees = ValueNotifier<bool>(true);
   final autoAddSpawns = ValueNotifier<bool>(true);
+  final showAmdDeck = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -246,6 +247,10 @@ class Settings {
         autoAddSpawns.value = data["autoAddSpawns"];
       }
 
+      if (data["showAmdDeck"] != null) {
+        showAmdDeck.value = data["showAmdDeck"];
+      }
+
       if (data["connectClientOnStartup"] != null &&
           data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
@@ -300,6 +305,7 @@ class Settings {
         '"showReminders": ${showReminders.value}, '
         '"autoAddStandees": ${autoAddStandees.value}, '
         '"autoAddSpawns": ${autoAddSpawns.value}, '
+        '"showAmdDeck": ${showAmdDeck.value}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort", '

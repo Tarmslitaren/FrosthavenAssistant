@@ -16,6 +16,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../../Resource/commands/show_ally_deck_command.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/network/network.dart';
@@ -184,6 +185,16 @@ Drawer createMainMenu(BuildContext context) {
                   openDialog(context, const RemoveMonsterMenu());
                 },
               ),
+              if (gameState.showAllyDeck.value == false && !GameMethods.shouldShowAlliesDeck() && settings.showAmdDeck.value)
+                ListTile(
+                  title: const Text('Show Ally Attack Modifier Deck'),
+                  onTap: () {
+                    Navigator.pop(context);
+
+                    gameState.action(ShowAllyDeckCommand());
+                    getIt<GameState>().updateAllUI();
+                  },
+                ),
               const Divider(),
               ListTile(
                 title: const Text('Settings'),

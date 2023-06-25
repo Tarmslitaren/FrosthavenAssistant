@@ -257,7 +257,7 @@ Widget createBottomBar(BuildContext context) {
                               const DrawButton(),
                               createLevelWidget(context),
                               const NetworkUI(),
-                              modifiersFitOnBar(context)
+                              modifiersFitOnBar(context) && getIt<Settings>().showAmdDeck.value
                                   ? const ModifierDeckWidget(name: '',)
                                   : Container()
                             ],

@@ -190,6 +190,11 @@ class GameSaveState {
         loadModifierDeck('modifierDeckAllies', data);
         loadLootDeck(data);
 
+        //this is not really a setting, but a scenario command?
+        if (data["showAllyDeck"] != null) {
+          gameState.showAllyDeck.value = data["showAllyDeck"];
+        }
+
         //////elements
         Map elementData = data['elementState'];
         //Map<Elements, ElementState> newMap = {};
