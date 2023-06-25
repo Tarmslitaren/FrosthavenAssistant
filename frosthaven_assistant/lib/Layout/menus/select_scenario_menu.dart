@@ -212,7 +212,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   List<Widget> buildCampaignButtons() {
     List<Widget> retVal = [];
     for (String item in _gameState.editions) {
-      if (item != "na") {
+      if (item != "na" && item != "CCUG") {
         if (getIt<Settings>().showCustomContent.value == true ||
             !GameMethods.isCustomCampaign(item)) {
           retVal.add(TextButton(

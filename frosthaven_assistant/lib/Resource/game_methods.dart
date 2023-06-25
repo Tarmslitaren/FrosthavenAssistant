@@ -1360,6 +1360,9 @@ class GameMethods {
     if (campaign == "Trail of Ashes") {
       return true;
     }
+    if (campaign == "CCUG") {
+      return true;
+    }
     return false;
   }
 
