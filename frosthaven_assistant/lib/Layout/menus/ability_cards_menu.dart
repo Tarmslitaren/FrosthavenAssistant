@@ -7,7 +7,6 @@ import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_ability_card_command.dart';
 import 'package:frosthaven_assistant/Resource/state/monster_ability_state.dart';
 import 'package:reorderables/reorderables.dart';
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/reorder_ability_list_command.dart';
 import '../../Resource/commands/shuffle_ability_card_command.dart';
 import '../../Resource/state/game_state.dart';
@@ -139,7 +138,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           child: reorderable
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
-                  scrollController: AdjustableScrollController(),
+                  scrollController: ScrollController(),
                   scrollAnimationDuration: const Duration(milliseconds: 400),
                   reorderAnimationDuration: const Duration(milliseconds: 400),
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
@@ -155,7 +154,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                   children: generateList(list, allOpen),
                 )
               : ListView(
-                  controller: AdjustableScrollController(),
+                  controller: ScrollController(),
                   padding: EdgeInsets.zero,
                   children: generateList(list, allOpen).reversed.toList(),
                 ),
@@ -186,7 +185,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                   topLeft: Radius.circular(4),
                                   topRight: Radius.circular(4))),
                           child: Column(children: [
-                            Container(
+                            SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: Wrap(
                                     crossAxisAlignment:

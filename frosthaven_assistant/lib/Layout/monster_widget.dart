@@ -1,7 +1,4 @@
-//portrait + name
-//ability card
-//stat sheet
-//monster boxes
+
 import 'package:flutter/material.dart';
 
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
@@ -107,7 +104,6 @@ class MonsterWidgetState extends State<MonsterWidget> {
                 width: height,
                 image: AssetImage(
                     "assets/images/monsters/${widget.data.type.gfx}.png"),
-                //width: widget.height*0.8,
               ),
             ),
           )),
@@ -140,7 +136,6 @@ class MonsterWidgetState extends State<MonsterWidget> {
     double height = scale * 0.8 * 120;
     return ValueListenableBuilder<int>(
         valueListenable: getIt<GameState>().updateList,
-        // widget.data.monsterInstances,
         builder: (context, value, child) {
           return Column(mainAxisSize: MainAxisSize.max, children: [
             ColorFiltered(
@@ -174,8 +169,6 @@ class MonsterWidgetState extends State<MonsterWidget> {
                   ),
                 )),
             Container(
-              //color: Colors.amber,
-              //height: 50,
               margin: EdgeInsets.only(
                   left: 4 * scale * 0.8, right: 4 * scale * 0.8),
               width: getMainListWidth(context) - 4 * scale * 0.8,

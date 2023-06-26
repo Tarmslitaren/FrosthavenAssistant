@@ -512,7 +512,7 @@ class LineBuilder {
         double scaleConstant =
             0.8 * 0.55; //this is because of the actual size of the assets
         if (isElement(line.substring(1))) {
-          //because we added new graphics for these that are bigger (todo: change this when creating new aoe graphic)
+          //because we added new graphics for these that are bigger
           scaleConstant *= 0.6;
         }
         Widget image = Image.asset(
@@ -621,7 +621,6 @@ class LineBuilder {
           addText = false;
         }
         if (line[i] == '%') {
-          //TODO: do for all conditions + jump.
 
           if (isIconPart) {
             //create token part
@@ -706,8 +705,6 @@ class LineBuilder {
               if (frosthavenStyle &&
                   styleToUse == midStyle &&
                   !FrosthavenConverter.shouldOverflow(true, iconToken, false)) {
-                //height *= 0.7; //sub line icons too big? don't do this for conditions.
-                //todo: larger margins on range icon instead
               }
               if (addText) {
                 String? iconTokenText = _tokens[iconToken];
@@ -742,7 +739,6 @@ class LineBuilder {
                                       milliseconds: (animationSpeed /
                                               iconTokenText.length)
                                           .ceil()),
-                                  //TODO: make speed relative to text length
                                   textStyle: styleToUse,
                                   colors: colorizeColors,
                                 ),

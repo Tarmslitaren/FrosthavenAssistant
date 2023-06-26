@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
@@ -20,8 +19,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
   final TextEditingController _controller = TextEditingController();
-  final AdjustableScrollController _scrollController =
-      AdjustableScrollController();
+  final ScrollController _scrollController =
+      ScrollController();
 
   @override
   initState() {

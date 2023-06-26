@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/enums.dart';
 import '../Resource/state/monster.dart';
+import '../Resource/state/monster_ability_state.dart';
 import '../Resource/ui_utils.dart';
 import '../Resource/line_builder/line_builder.dart';
 import 'menus/ability_card_zoom.dart';
@@ -297,7 +298,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
           }
 
           //get size for back
-          var deckk;
+          late MonsterAbilityState deckk;
           _deckSize = 8;
           for (var deck in _gameState.currentAbilityDecks) {
             if (deck.name == widget.data.type.deck) {
@@ -341,8 +342,6 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 layoutBuilder: (widget, list) => Stack(
                   children: [widget!, ...list],
                 ),
-                //switchInCurve: Curves.easeInBack,
-                //switchOutCurve: Curves.easeInBack.flipped,
                 child: _gameState.roundState.value == RoundState.playTurns &&
                         (widget.data.monsterInstances.value.isNotEmpty ||
                             widget.data.isActive) &&
@@ -351,8 +350,6 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                         card, widget.data, scale, false)
                     : MonsterAbilityCardWidget.buildRear(
                         scale, _deckSize, widget.data),
-                //AnimationController(duration: Duration(seconds: 1), vsync: 0);
-                //CurvedAnimation(parent: null, curve: Curves.easeIn)
                 //),
               ));
         });

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:format/format.dart';
@@ -77,7 +78,7 @@ class Connection {
       return true;
     } catch (e) {
       // Close the socket, as something is completely wrong with it
-      print('Unexpected exception in determining socket closure: \'{}\''
+      log('Unexpected exception in determining socket closure: \'{}\''
           .format(e.toString()));
       return true;
     }

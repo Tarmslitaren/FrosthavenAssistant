@@ -130,7 +130,7 @@ Widget createMainScaffold(BuildContext context) {
                                             const LootDeckWidget(),
                                           if (!sectionsOnSeparateRow &&
                                               nrOfSections != null)
-                                            Container(
+                                            SizedBox(
                                               width: sectionWidth,
                                               child: const SectionList(),
                                             ),
@@ -151,7 +151,7 @@ Widget createMainScaffold(BuildContext context) {
                                         ]),
                                     if (sectionsOnSeparateRow &&
                                         nrOfSections != null)
-                                      Container(
+                                      SizedBox(
                                         width: sectionWidth,
                                         child: const SectionList(),
                                       ),

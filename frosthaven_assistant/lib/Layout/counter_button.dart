@@ -16,13 +16,13 @@ class CounterButton extends StatefulWidget {
   final Color color;
   final double scale;
 
-  CounterButton(this.notifier, this.command, this.maxValue, this.image,
+  const CounterButton(this.notifier, this.command, this.maxValue, this.image,
       this.showTotalValue, this.color,
       {Key? key,
       required this.figureId,
       required this.ownerId,
       required this.scale})
-      : super(key: key) {}
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/character_widget.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
-import 'package:frosthaven_assistant/Resource/adjustable_scroll_controller.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
@@ -162,7 +161,7 @@ class ListAnimationState extends State<ListAnimation> {
 class MainListState extends State<MainList> {
   final GameState _gameState = getIt<GameState>();
   List<Widget> _generatedList = [];
-  static final scrollController = AdjustableScrollController();
+  static final scrollController = ScrollController();
 
   static late List<double> lastPositions;
 

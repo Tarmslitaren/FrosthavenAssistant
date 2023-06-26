@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 
 import '../../Model/character_class.dart';
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_character_command.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/character.dart';
@@ -24,8 +23,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   late CharacterClass bs;
   late CharacterClass vq;
   final GameState _gameState = getIt<GameState>();
-  final AdjustableScrollController _scrollController =
-      AdjustableScrollController();
+  final ScrollController _scrollController =
+      ScrollController();
 
   int compareEditions(String a, String b) {
     for (String item in _gameState.editions) {

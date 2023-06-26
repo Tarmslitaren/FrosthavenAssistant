@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'dart:async';
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -54,7 +54,7 @@ class Server {
           getIt<Settings>().server.value = true;
           String info =
               'Server Online: IP: $connectTo, Port: ${_serverSocket!.port.toString()}';
-          print(info);
+          log(info);
           getIt<Network>().networkMessage.value = info;
           _gameState.commandIndex.value = -1;
           _gameState.commands.clear();
@@ -70,7 +70,7 @@ class Server {
           _serverSocket!.listen((Socket client) {
             handleConnection(client);
           }, onError: (e) {
-            print('Server error: $e');
+            log('Server error: $e');
             getIt<Network>().networkMessage.value =
                 'Server error: ${e.toString()}';
           });
@@ -78,7 +78,7 @@ class Server {
         });
       });
     } catch (error) {
-      print('Server error: $error');
+      log('Server error: $error');
       getIt<Network>().networkMessage.value =
           'Server error: ${error.toString()}';
     }
@@ -86,13 +86,15 @@ class Server {
 
   void stopServer(String? error) {
     if (_serverSocket != null) {
-      print('Server Offline');
+      log('Server Offline');
       if (error != null) {
         getIt<Network>().networkMessage.value = error;
       } else {
         getIt<Network>().networkMessage.value = 'Server Offline';
       }
-      _serverSocket!.close().catchError((error) => print(error));
+      _serverSocket!.close().catchError((error) =>
+        log(error.toString())
+      );
 
       _connection.removeAll();
     }
@@ -112,7 +114,7 @@ class Server {
 
     String info = 'Connection from'
         ' ${client.remoteAddress.address}:${client.remotePort}';
-    print(info);
+    log(info);
     getIt<Network>().networkMessage.value = info;
 
     _connection.add(client);
@@ -132,7 +134,7 @@ class Server {
             if (message.endsWith("[EOM]")) {
               message = message.substring(0, message.length - "[EOM]".length);
               if (message.startsWith("Index:")) {
-                print('Server Receive data');
+                log('Server Receive data');
                 List<String> messageParts1 = message.split("Description:");
                 String indexString =
                     messageParts1[0].substring("Index:".length);
@@ -141,7 +143,7 @@ class Server {
                 String description = messageParts2[0];
                 String data = messageParts2[1];
 
-                print(
+                log(
                     'Server Receive Data, index: $indexString, description:$description');
 
                 int newIndex = int.parse(indexString);
@@ -168,7 +170,7 @@ class Server {
                   //client.write('your gameState changes received by server');
                 } else {
                   //getIt<Network>().networkMessage.value = "index mismatch: ignoring incoming message";
-                  print(
+                  log(
                       'Got same or lower index. ignoring: received index: $newIndex current index ${_gameState.commandIndex.value}');
 
                   //overwrite client state with current server state.
@@ -178,7 +180,7 @@ class Server {
                   //ignore if same index from server
                 }
               } else if (message.startsWith("init")) {
-                print('Server Receive init');
+                log('Server Receive init');
 
                 List<String> initMessageParts = message.split("version:");
                 int version = int.parse(initMessageParts[1]);
@@ -197,24 +199,27 @@ class Server {
                     commandDescription = _gameState
                         .commandDescriptions[_gameState.commandIndex.value];
                   } else {
-                    print("wtf");
+                    //should not happen
+                    if (kDebugMode) {
+                      print("?");
+                    }
                   }
-                  print(
+                  log(
                       'Server sends init response: "S3nD:Index:${_gameState.commandIndex.value}Description:$commandDescription');
                   sendToOnly(
                       "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}",
                       client);
                 }
               } else if (message.startsWith("undo")) {
-                print('Server Receive undo command');
+                log('Server Receive undo command');
                 _gameState.undo();
               } else if (message.startsWith("redo")) {
-                print('Server Receive redo command');
+                log('Server Receive redo command');
                 _gameState.redo();
               } else if (message.startsWith("pong")) {
-                print('pong from ${client.remoteAddress}');
+                log('pong from ${client.remoteAddress}');
               } else if (message.startsWith("ping")) {
-                print('ping from ${client.remoteAddress}');
+                log('ping from ${client.remoteAddress}');
                 sendToOnly("pong", client);
               }
             } else {
@@ -225,7 +230,7 @@ class Server {
 
         // handle errors
         onError: (error) {
-          print(error);
+          log(error);
           getIt<Network>().networkMessage.value = error.toString();
           /*stopServer(error.toString());
           for (int i = 0; i < _clients.length; i++) {
@@ -252,13 +257,13 @@ class Server {
             //no op
           } else {
             _connection.remove(client);
-            print('Client left');
+            log('Client left');
             getIt<Network>().networkMessage.value = 'Client left.';
           }
         },
       );
     } catch (error) {
-      print(error);
+      log(error.toString());
       getIt<Network>().networkMessage.value = error.toString();
       //client.close();
       /*for (int i = 0; i < _clients.length; i++) {

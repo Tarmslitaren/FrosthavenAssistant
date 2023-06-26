@@ -224,38 +224,31 @@ class GameSaveState {
       save();
     }
     const sharedPrefsKey = 'gameState';
-    bool _hasError = false;
-    bool _isWaiting = true;
-    //notifyListeners();
     try {
       final prefs = await SharedPreferences.getInstance();
       // save
-      // uncomment this to simulate an error-during-save
-      // if (_value > 3) throw Exception("Artificial Error");
       await prefs.setString(sharedPrefsKey, _savedState!);
-      _hasError = false;
     } catch (error) {
-      _hasError = true;
+      if (kDebugMode) {
+        print(error);
+      }
     }
-    _isWaiting = false;
-    //notifyListeners();
   }
 
   Future<void> loadFromDisk() async {
     //have to call after init or element state overridden
 
     const sharedPrefsKey = 'gameState';
-    bool _hasError = false;
-    bool _isWaiting = true;
-    //notifyListeners();
+    bool hasError = false;
+    bool isWaiting = true;
     try {
       final prefs = await SharedPreferences.getInstance();
       _savedState = prefs.getString(sharedPrefsKey);
-      _hasError = false;
+      hasError = false;
     } catch (error) {
-      _hasError = true;
+      hasError = true;
     }
-    _isWaiting = false;
+    isWaiting = false;
 
     if (_savedState != null) {
       load();

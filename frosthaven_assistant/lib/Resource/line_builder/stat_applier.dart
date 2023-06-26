@@ -141,7 +141,6 @@ class StatApplier {
       if (elite != null) {
         eliteValue = eliteValue = StatCalculator.calculateFormula(elite.move)!;
       }
-      //TODO: add jump if has innate jump
     } else if (lastToken == "shield") {
       int? value = normalTokens["shield"];
       int? eValue = eliteTokens["shield"];
@@ -262,7 +261,7 @@ class StatApplier {
       showElite = true;
       showNormal = true;
     }
-    String line = "" + lineInput; //make sure lineInput is not altered
+    String line = lineInput;
     if (kDebugMode) {
       //print("monster: ${monster.id}");
       //print("line: $line");

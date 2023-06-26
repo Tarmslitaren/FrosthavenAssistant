@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/commands/enhance_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/state/loot_deck_state.dart';
 import '../../services/service_locator.dart';
 
@@ -118,9 +117,8 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
 
   @override
   Widget build(BuildContext context) {
-    GameState _gameState = getIt<GameState>();
-    final AdjustableScrollController scrollController =
-        AdjustableScrollController();
+    final ScrollController scrollController =
+      ScrollController();
 
     return Card(
         child: Scrollbar(
@@ -136,8 +134,6 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                       Container(
                         constraints: const BoxConstraints(maxWidth: 300),
                         child: Column(
-                            //mainAxisAlignment: MainAxisAlignment.start,
-                            //crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
                                 "Loot Card Enhancements",

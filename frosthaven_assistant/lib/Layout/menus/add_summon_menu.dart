@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/state/character.dart';
@@ -25,8 +24,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   String chosenGfx = "blue";
 
   final List<SummonModel> _summonList = [];
-  final AdjustableScrollController _scrollController =
-      AdjustableScrollController();
+  final ScrollController _scrollController =
+      ScrollController();
 
   @override
   initState() {

@@ -135,21 +135,15 @@ class Settings {
     String saveState = toString();
 
     const sharedPrefsKey = 'settingsState';
-    bool _hasError = false;
-    bool _isWaiting = true;
-    //notifyListeners();
     try {
       final prefs = await SharedPreferences.getInstance();
       // save
-      // uncomment this to simulate an error-during-save
-      // if (_value > 3) throw Exception("Artificial Error");
       await prefs.setString(sharedPrefsKey, saveState);
-      _hasError = false;
     } catch (error) {
-      _hasError = true;
+      if (kDebugMode) {
+        print(error);
+      }
     }
-    _isWaiting = false;
-    //notifyListeners();
   }
 
   Future<void> loadFromDisk() async {
@@ -157,17 +151,14 @@ class Settings {
 
     const sharedPrefsKey = 'settingsState';
     String? state;
-    bool _hasError = false;
-    bool _isWaiting = true;
-    //notifyListeners();
     try {
       final prefs = await SharedPreferences.getInstance();
       state = prefs.getString(sharedPrefsKey);
-      _hasError = false;
     } catch (error) {
-      _hasError = true;
+      if (kDebugMode) {
+        print(error);
+      }
     }
-    _isWaiting = false;
     if (state != null) {
       Map<String, dynamic> data = jsonDecode(state);
 

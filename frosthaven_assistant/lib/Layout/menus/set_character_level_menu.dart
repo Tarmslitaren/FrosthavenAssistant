@@ -81,7 +81,6 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                   _gameState.action(
                       SetCharacterLevelCommand(nr, widget.character.id));
                 }
-                //Navigator.pop(context);
               },
             ),
           );

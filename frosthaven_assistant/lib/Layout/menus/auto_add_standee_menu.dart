@@ -301,7 +301,6 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                   .firstWhereOrNull((element) => element.id == data.name)
               as Monster?;
           if (monster == null) {
-            //todo: should add the monster instead?!
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               Navigator.pop(context);
             });

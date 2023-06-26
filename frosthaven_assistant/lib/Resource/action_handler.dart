@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import '../services/network/communication.dart';
@@ -53,7 +55,7 @@ class ActionHandler {
 
           //send last game state if connected
           if (isServer) {
-            print(
+            log(
                 'server sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
             //should send a special undo message? yes
             getIt<Network>().server.send(
@@ -87,7 +89,7 @@ class ActionHandler {
 
       //send last game state if connected
       if (isServer) {
-        print(
+        log(
             'server sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
         getIt<Network>().server.send(
             "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates[commandIndex.value + 1]!.getState()}");
@@ -124,12 +126,12 @@ class ActionHandler {
 
     //send last game state if connected
     if (isServer) {
-      print(
+      log(
           'server sends, index: ${commandIndex.value}, description:${command.describe()}');
       getIt<Network>().server.send(
           "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameSaveStates.last!.getState()}");
     } else if (isClient) {
-      print(
+      log(
           'client sends, index: ${commandIndex.value}, description:${command.describe()}');
       _communication.sendToAll(
           "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameSaveStates.last!.getState()}");

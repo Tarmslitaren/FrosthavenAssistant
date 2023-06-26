@@ -114,9 +114,9 @@ class Parser {
       int x = parseFactor()!;
       for (;;) {
         if (eat('*')) x *= parseFactor()!; // multiplication
-        if (eat('x'))
+        if (eat('x')) {
           x *= parseFactor()!; // multiplication
-        else if (eat('/')) {
+        } else if (eat('/')) {
           x = (x / parseFactor()!).ceil();
         } else if (eat('d')) {
           x = (x / parseFactor()!).floor();

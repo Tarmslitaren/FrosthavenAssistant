@@ -14,10 +14,10 @@ class DrawButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _DrawButtonState createState() => _DrawButtonState();
+   DrawButtonState createState() => DrawButtonState();
 }
 
-class _DrawButtonState extends State<DrawButton> {
+class DrawButtonState extends State<DrawButton> {
   final GameState _gameState = getIt<GameState>();
 
   @override

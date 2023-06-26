@@ -9,10 +9,10 @@ class RemoveMonsterMenu extends StatefulWidget {
   const RemoveMonsterMenu({Key? key}) : super(key: key);
 
   @override
-  _RemoveMonsterMenuState createState() => _RemoveMonsterMenuState();
+  RemoveMonsterMenuState createState() => RemoveMonsterMenuState();
 }
 
-class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
+class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
   final GameState _gameState = getIt<GameState>();
 
   @override
@@ -60,8 +60,6 @@ class _RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                         _gameState.action(
                             RemoveMonsterCommand([currentMonsters[index]])); //
                       });
-
-                      //Navigator.pop(context);
                     },
                   ),
                 ),

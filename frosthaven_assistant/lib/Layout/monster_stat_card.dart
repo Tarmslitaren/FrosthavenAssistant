@@ -86,7 +86,6 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
       var leftStyle, var rightStyle, bool frosthavenStyle) {
     MonsterStatsModel normal = data.type.levels[data.level.value].normal!;
     MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
-    double height = 123 * 0.8 * scale;
 
     bool noCalculationSetting = getIt<Settings>().noCalculation.value;
 
@@ -116,7 +115,6 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     }
 
     return Stack(
-      //alignment: Alignment.center,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0 * scale),
@@ -282,7 +280,6 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
   static Widget buildBossLayout(Monster data, double scale, var shadow,
       var leftStyle, var rightStyle, bool frosthavenStyle) {
     bool noCalculationSetting = getIt<Settings>().noCalculation.value;
-    double height = 123 * 0.8 * scale;
     MonsterStatsModel normal = data.type.levels[data.level.value].boss!;
     //normal stats calculated:
     String health = normal.health.toString();
@@ -597,7 +594,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
     bool isBoss = widget.data.type.levels[widget.data.level.value].boss != null;
 
-    return Container(
+    return SizedBox(
         //height: 93.5 * scale,
         width: 166 * scale, //167
         child: Stack(children: [

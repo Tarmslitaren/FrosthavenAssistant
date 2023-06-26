@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../Model/character_class.dart';
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
@@ -23,8 +22,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
   final TextEditingController _controller = TextEditingController();
-  final AdjustableScrollController _scrollController =
-      AdjustableScrollController();
+  final ScrollController _scrollController =
+      ScrollController();
 
   @override
   initState() {

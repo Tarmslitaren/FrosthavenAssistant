@@ -800,7 +800,6 @@ class GameMethods {
   }
 
   static int getRandomStandee(Monster data) {
-    //TODO: handle standees used by other special monsters
     int nrOfStandees = data.type.count;
     List<int> available = [];
     for (int i = 0; i < nrOfStandees; i++) {
@@ -1245,7 +1244,6 @@ class GameMethods {
   }
 
   static bool canExpire(Condition condition) {
-    //TODO look it up
     if (
         //condition == Condition.bane || //don't remove bane because user need to remember to remove 10hp as well
         condition == Condition.strengthen ||

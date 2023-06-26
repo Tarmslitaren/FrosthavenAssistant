@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_loot_card_command.dart';
 import '../../services/service_locator.dart';
 
@@ -55,8 +54,8 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final AdjustableScrollController scrollController =
-        AdjustableScrollController();
+    final ScrollController scrollController =
+        ScrollController();
 
     return Card(
         child: Scrollbar(

@@ -8,9 +8,8 @@ import 'list_item_data.dart';
 import 'monster_instance.dart';
 
 class Monster extends ListItemData {
-  Monster(String name, int level, {required bool isAlly}) : isAlly = isAlly {
+  Monster(String name, int level, {required this.isAlly}) {
     id = name;
-    this.isAlly = isAlly;
     this.level.value = level;
     GameState gameState = getIt<GameState>();
     Map<String, MonsterModel> monsters = {};

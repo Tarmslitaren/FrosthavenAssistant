@@ -6,7 +6,6 @@ import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dar
 import 'package:frosthaven_assistant/Layout/menus/set_loot_owner_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add__special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/return_loot_card_command.dart';
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/remove__special_loot_card_command.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/state/loot_deck_state.dart';
@@ -77,7 +76,7 @@ class LootCardMenuState extends State<LootCardMenu> {
         ),
         child: SizedBox(
           child: GridView.count(
-            controller: AdjustableScrollController(),
+            controller: ScrollController(),
             childAspectRatio: 0.72,
             mainAxisSpacing: 0,
             crossAxisSpacing: 0,
@@ -88,7 +87,7 @@ class LootCardMenuState extends State<LootCardMenu> {
         ));
   }
 
-  final scrollController = AdjustableScrollController();
+  final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {

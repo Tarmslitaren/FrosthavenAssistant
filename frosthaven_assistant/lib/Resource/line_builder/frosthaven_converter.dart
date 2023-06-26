@@ -1,6 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/line_builder.dart';
 
 class FrosthavenConverter {
@@ -273,14 +272,6 @@ class FrosthavenConverter {
       }
     }
 
-    /*Widget widget1 = Text.rich(
-      textHeightBehavior: const TextHeightBehavior(
-          leadingDistribution: TextLeadingDistribution.even),
-      textAlign: textAlign,
-      TextSpan(
-        children: list1,
-      ),
-    );*/
     Row widget1 = Row(children: list1);
 
     Widget widget2 = Container(
@@ -308,30 +299,8 @@ class FrosthavenConverter {
             Row(
               children: list2[3],
             )
-
-          //can't figure out why the builder does not work
-          /*ListView.builder(
-            itemCount: list2.length,
-            itemBuilder: (context, index) => Text.rich(
-              textHeightBehavior: const TextHeightBehavior(
-                  leadingDistribution: TextLeadingDistribution.even
-              ),
-              textAlign: textAlign,
-              TextSpan(
-                children: list2[index],
-              ),
-          )
-          )*/
         ])
-        //)
         );
-    MainAxisAlignment alignment = MainAxisAlignment.center;
-    if (textAlign == TextAlign.end) {
-      alignment = MainAxisAlignment.end;
-    }
-    if (textAlign == TextAlign.start) {
-      alignment = MainAxisAlignment.start;
-    }
 
     Widget row = Row(
       mainAxisSize: MainAxisSize.max,
@@ -462,7 +431,6 @@ class FrosthavenConverter {
                               radix: 16)),
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.0 * scale))),
-                      //TODO: should the padding be dependant on nr of lines?
                       padding: EdgeInsets.fromLTRB(
                           elementUse ? 1.0 * scale : 3.0 * scale,
                           0.25 * scale,

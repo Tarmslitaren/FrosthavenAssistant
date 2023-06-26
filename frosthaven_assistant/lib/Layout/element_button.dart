@@ -36,7 +36,6 @@ class AnimatedContainerButtonState extends State<ElementButton> {
 
   @override
   void dispose() {
-    //_gameState.elementState.removeListener(elementListener);
     super.dispose();
   }
 
@@ -67,9 +66,6 @@ class AnimatedContainerButtonState extends State<ElementButton> {
     _borderRadius = BorderRadius.all(Radius.circular(
         widget.width * settings.userScalingBars.value -
             widget.borderWidth * settings.userScalingBars.value * 2));
-
-    //to load save state
-    //_gameState.elementState.addListener(elementListener);
   }
 
   void setHalf() {

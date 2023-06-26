@@ -20,7 +20,6 @@ class NumpadMenu extends StatefulWidget {
 }
 
 class NumpadMenuState extends State<NumpadMenu> {
-  final GameState _gameState = getIt<GameState>();
   String text = "";
 
   @override

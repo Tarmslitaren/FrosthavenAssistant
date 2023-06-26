@@ -51,7 +51,6 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
           TextButton(
               onPressed: () {
                 int oldIndex = widget.length - 1 - widget.currentIndex;
-                int newIndex = widget.length - 1;
                 _gameState.action(
                     ReorderModifierListCommand(0, oldIndex, widget.allies));
                 Navigator.pop(context);
