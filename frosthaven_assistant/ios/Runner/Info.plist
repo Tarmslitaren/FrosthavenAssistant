@@ -4,6 +4,8 @@
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>This app does not access your location.</string>
+	<key>FLTEnableImpeller</key>
+	<string>false</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>This app does not access your location.</string>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
