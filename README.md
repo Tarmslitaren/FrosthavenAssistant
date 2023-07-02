@@ -215,7 +215,9 @@ FH special considerations:
  - if you need a subline to be in 2 parts, one to the right and one below, add empty row like this to separate: "[r]","[/r]",
  - don't use ^^ on first line of subline of conditional block as the gray background will be squished as well and look bad.
  - subline text is somewhat larger than the physical counterpart due to the fact it was just too small to see easily on smaller screens.
- 
+
+## ios beta link
+for those interested in occationally testing builds befor they show up on app store: https://testflight.apple.com/join/FXRPO9oJ
 
 ## Copyright and License
 
