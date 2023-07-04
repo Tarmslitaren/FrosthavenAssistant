@@ -8,7 +8,6 @@ import 'package:frosthaven_assistant/Resource/commands/add__special_loot_card_co
 import 'package:frosthaven_assistant/Resource/commands/return_loot_card_command.dart';
 import '../../Resource/commands/remove__special_loot_card_command.dart';
 import '../../Resource/state/game_state.dart';
-import '../../Resource/state/loot_deck_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import '../loot_card.dart';

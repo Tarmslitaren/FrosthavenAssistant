@@ -1,5 +1,4 @@
-import '../action_handler.dart';
-import '../state/loot_deck_state.dart';
+import '../state/game_state.dart';
 
 class SetLootOwnerCommand extends Command {
   final String ownerId;

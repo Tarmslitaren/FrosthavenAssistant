@@ -1,13 +1,4 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Model/scenario.dart';
-import 'package:frosthaven_assistant/Resource/enums.dart';
-import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-
-import '../../services/service_locator.dart';
-import '../card_stack.dart';
-import 'character.dart';
+part of game_state;
 
 enum LootType { materiel, other }
 

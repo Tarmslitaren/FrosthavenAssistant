@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_stat_card.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
-import '../../Resource/state/monster.dart';
+import '../../Resource/state/game_state.dart';
 
 class StatCardZoom extends StatefulWidget {
   const StatCardZoom({Key? key, required this.monster}) : super(key: key);

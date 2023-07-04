@@ -4,7 +4,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-import '../Resource/state/loot_deck_state.dart';
+
+import '../Resource/state/game_state.dart';
 
 class LootCardWidget extends StatefulWidget {
   final LootCard card;

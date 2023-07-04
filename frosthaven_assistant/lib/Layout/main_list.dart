@@ -11,9 +11,6 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import 'package:reorderables/reorderables.dart';
 import '../Resource/commands/reorder_list_command.dart';
-import '../Resource/state/character.dart';
-import '../Resource/state/list_item_data.dart';
-import '../Resource/state/monster.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
@@ -41,9 +38,9 @@ class Item extends StatelessWidget {
           characterId: character.id,
           initPreset: initPreset);
       height = 60 * scale;
-      if (character.characterState.summonList.value.isNotEmpty) {
+      if (character.characterState.summonList.isNotEmpty) {
         double summonsTotalWidth = 0;
-        for (var monsterInstance in character.characterState.summonList.value) {
+        for (var monsterInstance in character.characterState.summonList) {
           summonsTotalWidth +=
               MonsterBox.getWidth(scale, monsterInstance) + 2 * scale;
         }
@@ -54,11 +51,11 @@ class Item extends StatelessWidget {
       Monster monster = data as Monster;
       child = MonsterWidget(key: Key(monster.id), data: monster);
       int standeeRows = 0;
-      if (monster.monsterInstances.value.isNotEmpty) {
+      if (monster.monsterInstances.isNotEmpty) {
         standeeRows = 1;
       }
       double totalWidthOfMonsterBoxes = 0;
-      for (var item in monster.monsterInstances.value) {
+      for (var item in monster.monsterInstances) {
         totalWidthOfMonsterBoxes +=
             MonsterBox.getWidth(scale, item) + 2 * scale;
       }
@@ -234,9 +231,9 @@ class MainListState extends State<MainList> {
       var item = gameState.currentList[i];
       if (item is Character) {
         listHeight += 60;
-        if (item.characterState.summonList.value.isNotEmpty) {
+        if (item.characterState.summonList.isNotEmpty) {
           double listWidth = 0;
-          for (var monsterInstance in item.characterState.summonList.value) {
+          for (var monsterInstance in item.characterState.summonList) {
             listWidth += MonsterBox.getWidth(scale, monsterInstance);
           }
           double rows = listWidth / mainListWidth;
@@ -245,9 +242,9 @@ class MainListState extends State<MainList> {
       }
       if (item is Monster) {
         listHeight += 120 * 0.8;
-        if (item.monsterInstances.value.isNotEmpty) {
+        if (item.monsterInstances.isNotEmpty) {
           double listWidth = 0;
-          for (var monsterInstance in item.monsterInstances.value) {
+          for (var monsterInstance in item.monsterInstances) {
             listWidth += MonsterBox.getWidth(scale, monsterInstance);
           }
 

@@ -1,7 +1,5 @@
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../enums.dart';
-import '../state/figure_state.dart';
 import '../state/game_state.dart';
 
 class AddConditionCommand extends Command {
@@ -22,7 +20,7 @@ class AddConditionCommand extends Command {
       if (item.id == ownerId) {
         if (item.turnState != TurnsState.notDone &&
             getIt<GameState>().roundState.value == RoundState.playTurns) {
-          figure.conditionsAddedThisTurn.value.add(condition);
+          figure.getMutableConditionsAddedThisTurn(stateAccess).add(condition);
         }
       }
     }

@@ -1,5 +1,4 @@
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../state/game_state.dart';
 
 class SetScenarioCommand extends Command {
@@ -11,6 +10,7 @@ class SetScenarioCommand extends Command {
 
   @override
   void execute() {
+
     GameMethods.setScenario(_scenario, _section);
   }
 

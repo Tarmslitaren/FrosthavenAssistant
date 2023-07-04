@@ -1,6 +1,5 @@
 import '../../Layout/main_list.dart';
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../enums.dart';
 import '../state/game_state.dart';
 
@@ -15,7 +14,7 @@ class DrawCommand extends Command {
     GameMethods.sortByInitiative();
     GameMethods.setRoundState(RoundState.playTurns);
     if (_gameState.currentList.isNotEmpty) {
-      _gameState.currentList[0].turnState = TurnsState.current;
+      _gameState.currentList[0].setTurnState(stateAccess, TurnsState.current);
     }
 
     Future.delayed(const Duration(milliseconds: 600), () {
@@ -26,9 +25,6 @@ class DrawCommand extends Command {
 
   @override
   void undo() {
-    /*GameMethods.unDrawAbilityCards();
-    _gameState.round.value--;
-    GameMethods.setRoundState(RoundState.chooseInitiative);*/
     _gameState.updateList.value++;
   }
 

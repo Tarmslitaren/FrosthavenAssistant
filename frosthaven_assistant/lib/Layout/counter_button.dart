@@ -1,12 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../Resource/commands/change_stat_commands/change_stat_command.dart';
-import '../Resource/state/figure_state.dart';
 import '../Resource/state/game_state.dart';
 import '../services/service_locator.dart';
 
 class CounterButton extends StatefulWidget {
-  final ValueNotifier<int> notifier;
+  final ValueListenable<int> notifier;
   final ChangeStatCommand command;
   final int maxValue;
   final String image;

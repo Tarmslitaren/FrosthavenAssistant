@@ -1,7 +1,5 @@
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../state/game_state.dart';
-import '../state/monster.dart';
 
 class SetLevelCommand extends Command {
   final GameState _gameState = getIt<GameState>();
@@ -27,10 +25,7 @@ class SetLevelCommand extends Command {
           monster = item as Monster;
         }
       }
-      monster!.level.value = level;
-      for (var item in monster.monsterInstances.value) {
-        item.setLevel(monster);
-      }
+      monster!.setLevel(level);
     }
   }
 

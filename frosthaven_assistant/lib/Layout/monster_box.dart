@@ -7,8 +7,6 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/color_matrices.dart';
 import '../Resource/enums.dart';
-import '../Resource/state/monster.dart';
-import '../Resource/state/monster_instance.dart';
 import '../Resource/ui_utils.dart';
 import 'menus/status_menu.dart';
 
@@ -222,7 +220,7 @@ class MonsterBoxState extends State<MonsterBox> {
                             data.health.value > 99 ? 4.5 * scale : 6.5 * scale,
                       ),
                       ValueListenableBuilder<List<Condition>>(
-                          valueListenable: data.conditions,
+                          valueListenable: data.conditions, //todo: dont use valuelistenabel for lists or sets
                           builder: (context, value, child) {
                             return SizedBox(
                                 height: 30 * scale,

@@ -7,14 +7,6 @@ import '../services/network/network.dart';
 import '../services/service_locator.dart';
 import 'state/game_state.dart';
 
-abstract class Command {
-  void execute();
-
-  void undo();
-
-  String describe();
-}
-
 class ActionHandler {
   final commandIndex = ValueNotifier<int>(-1);
   final List<Command?> commands = [];

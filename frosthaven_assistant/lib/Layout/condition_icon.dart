@@ -3,13 +3,10 @@ import 'package:animated_widgets/widgets/shake_animated_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_health_command.dart';
 
-import '../Resource/action_handler.dart';
 import '../Resource/commands/next_turn_command.dart';
 import '../Resource/enums.dart';
-import '../Resource/state/figure_state.dart';
 import '../Resource/state/game_state.dart';
 import '../Resource/settings.dart';
-import '../Resource/state/list_item_data.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 
@@ -84,7 +81,7 @@ class ConditionIconState extends State<ConditionIcon> {
       if (widget.owner.turnState == TurnsState.done &&
           gameState.currentList[command.index].id == widget.owner.id) {
         //was current last round but is no more
-        if (widget.figure.conditionsAddedPreviousTurn.value
+        if (widget.figure.conditionsAddedPreviousTurn
             .contains(widget.condition)) {
           if (widget.condition == Condition.bane) {
             _runAnimation();

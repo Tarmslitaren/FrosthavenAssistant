@@ -10,9 +10,6 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/commands/add_standee_command.dart';
 import '../Resource/enums.dart';
 import '../Resource/stat_calculator.dart';
-import '../Resource/state/character.dart';
-import '../Resource/state/monster.dart';
-import '../Resource/state/monster_instance.dart';
 import '../Resource/ui_utils.dart';
 import '../Resource/line_builder/line_builder.dart';
 import 'menus/stat_card_zoom.dart';
@@ -44,7 +41,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
       return;
     }
 
-    if (data.monsterInstances.value.length == data.type.count - 1) {
+    if (data.monsterInstances.length == data.type.count - 1) {
       //directly add last standee
       GameMethods.addStandee(
           null,
@@ -55,7 +52,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                   ? MonsterType.normal
                   : MonsterType.elite,
           false);
-    } else if (data.monsterInstances.value.length < data.type.count - 1) {
+    } else if (data.monsterInstances.length < data.type.count - 1) {
       if (settings.randomStandees.value == true) {
         int standeeNr = GameMethods.getRandomStandee(data);
         if (standeeNr != 0) {
@@ -615,11 +612,11 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
                 child: SizedBox(
                     width: 25 * scale * 0.8 + 8,
                     height: 25 * scale * 0.8 + 8,
-                    child: ValueListenableBuilder<List<MonsterInstance>>(
-                        valueListenable: widget.data.monsterInstances,
+                    child: ValueListenableBuilder<int>(
+                        valueListenable: getIt<GameState>().commandIndex,//todo: test widget.data.monsterInstances,
                         builder: (context, value, child) {
                           bool allStandeesOut =
-                              widget.data.monsterInstances.value.length ==
+                              widget.data.monsterInstances.length ==
                                   widget.data.type.count;
                           return IconButton(
                             padding: const EdgeInsets.only(right: 8, top: 8),
@@ -643,14 +640,14 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
               child: SizedBox(
                   width: 25 * scale * 0.8 + 8,
                   height: 25 * scale * 0.8 + 8,
-                  child: ValueListenableBuilder<List<MonsterInstance>>(
-                      valueListenable: widget.data.monsterInstances,
+                  child: ValueListenableBuilder<int>(
+                      valueListenable: getIt<GameState>().commandIndex,//TODO: test //widget.data.monsterInstances,
                       builder: (context, value, child) {
                         return IconButton(
                             padding: const EdgeInsets.only(left: 8, top: 8),
                             icon: Image.asset(
                                 color:
-                                    widget.data.monsterInstances.value.length ==
+                                    widget.data.monsterInstances.length ==
                                             widget.data.type.count
                                         ? Colors.white24
                                         : Colors.grey,

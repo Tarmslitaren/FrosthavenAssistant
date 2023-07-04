@@ -5,7 +5,6 @@ import 'package:frosthaven_assistant/Resource/line_builder/frosthaven_converter.
 import 'package:frosthaven_assistant/Resource/line_builder/stat_applier.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../state/game_state.dart';
-import '../state/monster.dart';
 
 class LineBuilder {
   static const bool debugColors = false;
@@ -717,7 +716,7 @@ class LineBuilder {
                           line.contains('retaliate') ||
                           line.contains('shield')) &&
                       (monster.isActive ||
-                          monster.monsterInstances.value.isNotEmpty);
+                          monster.monsterInstances.isNotEmpty);
                   if (monster.turnState == TurnsState.current) {
                     if (line.contains("Advantage")) {
                       shouldAnimate = true;
@@ -840,7 +839,7 @@ class LineBuilder {
           (line.contains('Disadvantage') ||
               line.contains('retaliate') ||
               line.contains('shield')) &&
-          (monster.isActive || monster.monsterInstances.value.isNotEmpty);
+          (monster.isActive || monster.monsterInstances.isNotEmpty);
       if (monster.turnState == TurnsState.current) {
         if (line.contains("Advantage")) {
           shouldAnimate = true;

@@ -1,8 +1,6 @@
-import 'package:frosthaven_assistant/Resource/action_handler.dart';
 
 import '../../services/service_locator.dart';
 import '../enums.dart';
-import '../state/figure_state.dart';
 import '../state/game_state.dart';
 
 class RemoveConditionCommand extends Command {
@@ -20,9 +18,9 @@ class RemoveConditionCommand extends Command {
     figure.conditions.value = newList;
     if (condition != Condition.chill ||
         !figure.conditions.value.contains(Condition.chill)) {
-      figure.conditionsAddedThisTurn.value.remove(condition);
+      figure.getMutableConditionsAddedThisTurn(stateAccess).remove(condition);
     }
-    figure.conditionsAddedPreviousTurn.value.remove(condition);
+    figure.getMutableConditionsAddedPreviousTurn(stateAccess).remove(condition);
     getIt<GameState>().updateList.value++;
   }
 

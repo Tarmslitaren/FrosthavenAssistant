@@ -1,8 +1,4 @@
-import 'package:frosthaven_assistant/Resource/state/monster_instance.dart';
-
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
-import '../state/figure_state.dart';
 import '../state/game_state.dart';
 
 class SetAsSummonCommand extends Command {
@@ -14,10 +10,9 @@ class SetAsSummonCommand extends Command {
   void execute() {
     FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
     if (summoned) {
-      (figure as MonsterInstance).roundSummoned =
-          getIt<GameState>().round.value;
+      (figure as MonsterInstance).setRoundSummoned(stateAccess, getIt<GameState>().round.value);
     } else {
-      (figure as MonsterInstance).roundSummoned = -1;
+      (figure as MonsterInstance).setRoundSummoned(stateAccess, -1);
     }
     getIt<GameState>().updateList.value++;
   }

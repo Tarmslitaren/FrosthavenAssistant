@@ -1,9 +1,4 @@
-import '../../Model/character_class.dart';
-import '../../services/service_locator.dart';
-import '../enums.dart';
-import 'character_state.dart';
-import 'game_state.dart';
-import 'list_item_data.dart';
+part of game_state;
 
 class Character extends ListItemData {
   Character(this.characterState, this.characterClass) {
@@ -13,7 +8,7 @@ class Character extends ListItemData {
   late final CharacterClass characterClass;
   void nextRound() {
     if (characterClass.name != "Objective" && characterClass.name != "Escort") {
-      characterState.initiative.value = 0;
+      characterState._initiative.value = 0;
     }
   }
 
@@ -29,7 +24,7 @@ class Character extends ListItemData {
 
   Character.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    turnState = TurnsState.values[json['turnState']];
+    _turnState = TurnsState.values[json['turnState']];
     characterState = CharacterState.fromJson(json['characterState']);
     String className = json['characterClass'];
     GameState gameState = getIt<GameState>();

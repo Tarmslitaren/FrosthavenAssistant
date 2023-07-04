@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import '../../Model/monster.dart';
 import '../enums.dart';
 import '../stat_calculator.dart';
-import '../state/monster.dart';
+import '../state/game_state.dart';
 
 class StatApplier {
   static Map<String, int> _getStatTokens(Monster monster, bool elite) {
@@ -245,14 +245,14 @@ class StatApplier {
       String sizeToken, Monster monster, bool forceShowAll) {
     bool showElite = false;
     if (monster.isActive ||
-        monster.monsterInstances.value.firstWhereOrNull(
+        monster.monsterInstances.firstWhereOrNull(
                 (element) => element.type == MonsterType.elite) !=
             null) {
       showElite = true;
     }
     bool showNormal = false;
     if (monster.isActive ||
-        monster.monsterInstances.value.firstWhereOrNull(
+        monster.monsterInstances.firstWhereOrNull(
                 (element) => element.type != MonsterType.elite) !=
             null) {
       showNormal = true;

@@ -1,16 +1,9 @@
-import 'package:flutter/widgets.dart';
-
-import '../../Model/monster.dart';
-import '../../services/service_locator.dart';
-import '../enums.dart';
-import 'game_state.dart';
-import 'list_item_data.dart';
-import 'monster_instance.dart';
+part of game_state;
 
 class Monster extends ListItemData {
-  Monster(String name, int level, {required this.isAlly}) {
+  Monster(String name, int level, this._isAlly) {
     id = name;
-    this.level.value = level;
+    _level.value = level;
     GameState gameState = getIt<GameState>();
     Map<String, MonsterModel> monsters = {};
     for (String key in gameState.modelData.value.keys) {
@@ -25,14 +18,25 @@ class Monster extends ListItemData {
     GameMethods.addAbilityDeck(this);
   }
   late final MonsterModel type;
-  final monsterInstances = ValueNotifier<List<MonsterInstance>>([]);
-  final level = ValueNotifier<int>(0);
-  bool isAlly;
+
+
+  BuiltList<MonsterInstance> get monsterInstances => BuiltList.of(_monsterInstances);
+  getMutableMonsterInstancesList(_StateModifier stateModifier) {return _monsterInstances;}
+  final List<MonsterInstance> _monsterInstances = [];
+
+  ValueListenable<int> get level => _level;
+  final _level = ValueNotifier<int>(0);
+
+  bool get isAlly => _isAlly;
+  bool _isAlly;
+
   //note: this is only used for the no standee tracking setting
-  bool isActive = false;
+  bool get isActive => _isActive;
+  setActive(_StateModifier stateModifier, bool value) {_isActive = value;}
+  bool _isActive = false;
 
   bool hasElites() {
-    for (var instance in monsterInstances.value) {
+    for (var instance in _monsterInstances) {
       if (instance.type == MonsterType.elite) {
         return true;
       }
@@ -42,7 +46,7 @@ class Monster extends ListItemData {
 
   //includes boss
   bool hasNormal() {
-    for (var instance in monsterInstances.value) {
+    for (var instance in _monsterInstances) {
       if (instance.type != MonsterType.elite) {
         return true;
       }
@@ -51,8 +55,8 @@ class Monster extends ListItemData {
   }
 
   void setLevel(int level) {
-    this.level.value = level;
-    for (var item in monsterInstances.value) {
+    _level.value = level;
+    for (var item in _monsterInstances) {
       item.setLevel(this);
     }
   }
@@ -64,25 +68,23 @@ class Monster extends ListItemData {
         '"turnState": ${turnState.index}, '
         '"isActive": $isActive, '
         '"type": "${type.name}", '
-        '"monsterInstances": ${monsterInstances.value.toString()}, '
-        //'"state": ${state.index}, '
+        '"monsterInstances": ${_monsterInstances.toString()}, '
         '"isAlly": $isAlly, '
         '"level": ${level.value} '
         '}';
   }
 
-  Monster.fromJson(Map<String, dynamic> json) : isAlly = false {
+  Monster.fromJson(Map<String, dynamic> json) : _isAlly = false {
     id = json['id'];
-    turnState = TurnsState.values[json['turnState']];
-    level.value = json['level'];
+    _turnState = TurnsState.values[json['turnState']];
+    _level.value = json['level'];
     if (json.containsKey("isAlly")) {
-      isAlly = json['isAlly'];
+      _isAlly = json['isAlly'];
     }
     if (json.containsKey("isActive")) {
-      isActive = json['isActive'];
+      _isActive = json['isActive'];
     }
     String modelName = json['type'];
-    //state = ListItemState.values[json["state"]];
 
     GameState gameState = getIt<GameState>();
     Map<String, MonsterModel> monsters = {};
@@ -98,11 +100,10 @@ class Monster extends ListItemData {
 
     List<dynamic> instanceList = json["monsterInstances"];
 
-    List<MonsterInstance> newList = [];
+    _monsterInstances.clear();
     for (Map<String, dynamic> item in instanceList) {
       var instance = MonsterInstance.fromJson(item);
-      newList.add(instance);
+      _monsterInstances.add(instance);
     }
-    monsterInstances.value = newList;
   }
 }

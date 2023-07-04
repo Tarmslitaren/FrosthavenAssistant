@@ -9,8 +9,6 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Resource/color_matrices.dart';
-import '../Resource/state/monster.dart';
-import '../Resource/state/monster_instance.dart';
 import '../services/service_locator.dart';
 import 'monster_stat_card.dart';
 
@@ -31,16 +29,16 @@ class MonsterWidgetState extends State<MonsterWidget> {
   @override
   void initState() {
     super.initState();
-    lastList = widget.data.monsterInstances.value;
+    lastList = widget.data.monsterInstances.asList();
   }
 
   Widget buildMonsterBoxGrid(double scale) {
     String displayStartAnimation = "";
 
-    if (lastList.length < widget.data.monsterInstances.value.length) {
+    if (lastList.length < widget.data.monsterInstances.length) {
       //find which is new
 
-      for (var item in widget.data.monsterInstances.value) {
+      for (var item in widget.data.monsterInstances) {
         bool found = false;
         for (var oldItem in lastList) {
           if (item.standeeNr == oldItem.standeeNr) {
@@ -56,26 +54,26 @@ class MonsterWidgetState extends State<MonsterWidget> {
     }
 
     final generatedChildren = List<Widget>.generate(
-        widget.data.monsterInstances.value.length,
+        widget.data.monsterInstances.length,
         (index) => AnimatedSize(
               //not really needed now
               //TODO: try change to AnimatedContainer, and make sure to update the width on death (same time as death animation)
-              key: Key(widget.data.monsterInstances.value[index].standeeNr
+              key: Key(widget.data.monsterInstances[index].standeeNr
                   .toString()),
               duration: const Duration(milliseconds: 300),
               child: MonsterBox(
-                  key: Key(widget.data.monsterInstances.value[index].standeeNr
+                  key: Key(widget.data.monsterInstances[index].standeeNr
                       .toString()),
-                  figureId: widget.data.monsterInstances.value[index].name +
-                      widget.data.monsterInstances.value[index].gfx +
-                      widget.data.monsterInstances.value[index].standeeNr
+                  figureId: widget.data.monsterInstances[index].name +
+                      widget.data.monsterInstances[index].gfx +
+                      widget.data.monsterInstances[index].standeeNr
                           .toString(),
                   ownerId: widget.data.id,
                   displayStartAnimation: displayStartAnimation,
                   blockInput: false,
                   scale: scale),
             ));
-    lastList = widget.data.monsterInstances.value;
+    lastList = widget.data.monsterInstances.toList();
     return Wrap(
       runSpacing: 2.0 * scale,
       spacing: 2.0 * scale,
@@ -139,7 +137,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
         builder: (context, value, child) {
           return Column(mainAxisSize: MainAxisSize.max, children: [
             ColorFiltered(
-                colorFilter: (widget.data.monsterInstances.value.isNotEmpty ||
+                colorFilter: (widget.data.monsterInstances.isNotEmpty ||
                             widget.data.isActive) &&
                         (widget.data.turnState != TurnsState.done ||
                             getIt<GameState>().roundState.value ==
@@ -154,7 +152,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                     children: [
                       getIt<GameState>().roundState.value ==
                                   RoundState.playTurns &&
-                              (widget.data.monsterInstances.value.isNotEmpty ||
+                              (widget.data.monsterInstances.isNotEmpty ||
                                   widget.data.isActive)
                           ? InkWell(
                               onTap: () {

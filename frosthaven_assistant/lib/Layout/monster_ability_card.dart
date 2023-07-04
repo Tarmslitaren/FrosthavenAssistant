@@ -8,8 +8,6 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/enums.dart';
-import '../Resource/state/monster.dart';
-import '../Resource/state/monster_ability_state.dart';
 import '../Resource/ui_utils.dart';
 import '../Resource/line_builder/line_builder.dart';
 import 'menus/ability_card_zoom.dart';
@@ -288,7 +286,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
         builder: (context, value, child) {
           MonsterAbilityCardModel? card;
           if (_gameState.roundState.value == RoundState.playTurns &&
-              (widget.data.monsterInstances.value.isNotEmpty ||
+              (widget.data.monsterInstances.isNotEmpty ||
                   widget.data.isActive)) {
             CardStack stack =
                 GameMethods.getDeck(widget.data.type.deck)!.discardPile;
@@ -322,7 +320,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
               },
               onDoubleTap: () {
                 if (_gameState.roundState.value == RoundState.playTurns &&
-                    (widget.data.monsterInstances.value.isNotEmpty ||
+                    (widget.data.monsterInstances.isNotEmpty ||
                         widget.data.isActive) &&
                     card != null) {
                   setState(() {
@@ -343,7 +341,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                   children: [widget!, ...list],
                 ),
                 child: _gameState.roundState.value == RoundState.playTurns &&
-                        (widget.data.monsterInstances.value.isNotEmpty ||
+                        (widget.data.monsterInstances.isNotEmpty ||
                             widget.data.isActive) &&
                         card != null
                     ? MonsterAbilityCardWidget.buildFront(

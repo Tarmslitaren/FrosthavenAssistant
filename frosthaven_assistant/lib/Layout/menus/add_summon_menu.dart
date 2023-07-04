@@ -4,7 +4,6 @@ import 'package:frosthaven_assistant/Model/summon.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
-import '../../Resource/state/character.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
@@ -37,7 +36,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     for (var item in widget.character.characterClass.summons) {
       if (item.level <= widget.character.characterState.level.value) {
         int standeesOut = 0;
-        for (var item2 in widget.character.characterState.summonList.value) {
+        for (var item2 in widget.character.characterState.summonList) {
           if (item2.name == item.name) {
             standeesOut++;
           }
@@ -267,7 +266,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                 context,
                                 SetLevelMenu(
                                   figure: widget.character.characterState
-                                      .summonList.value.last,
+                                      .summonList.last,
                                   characterId: widget.character.id,
                                 ));
                           });

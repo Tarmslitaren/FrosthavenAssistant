@@ -1,6 +1,9 @@
-import '../enums.dart';
+part of game_state;
 
 class ListItemData {
-  late String id;
-  TurnsState turnState = TurnsState.notDone;
+  late final String id;
+
+  TurnsState get turnState => _turnState;
+  TurnsState _turnState = TurnsState.notDone;
+  setTurnState(_StateModifier stateModifier, TurnsState value) {_turnState = value;}
 }

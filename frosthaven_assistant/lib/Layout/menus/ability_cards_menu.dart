@@ -5,12 +5,10 @@ import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_ability_card_command.dart';
-import 'package:frosthaven_assistant/Resource/state/monster_ability_state.dart';
 import 'package:reorderables/reorderables.dart';
 import '../../Resource/commands/reorder_ability_list_command.dart';
 import '../../Resource/commands/shuffle_ability_card_command.dart';
 import '../../Resource/state/game_state.dart';
-import '../../Resource/state/monster.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 

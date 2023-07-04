@@ -1,6 +1,4 @@
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
-import '../state/character.dart';
 import '../state/game_state.dart';
 
 class SetInitCommand extends Command {
@@ -8,14 +6,14 @@ class SetInitCommand extends Command {
   final String _characterId;
   final int _init;
 
-  SetInitCommand(this._characterId, this._init) {}
+  SetInitCommand(this._characterId, this._init);
 
   @override
   void execute() {
     //add new character on top of list
     for (var item in _gameState.currentList) {
       if (item.id == _characterId) {
-        (item as Character).characterState.initiative.value = _init;
+        (item as Character).characterState.setInitiative(stateAccess, _init);
       }
     }
   }

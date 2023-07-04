@@ -1,7 +1,4 @@
-import '../../Model/MonsterAbility.dart';
-import '../../services/service_locator.dart';
-import '../card_stack.dart';
-import 'game_state.dart';
+part of game_state;
 
 class MonsterAbilityState {
   final String name;
@@ -9,7 +6,9 @@ class MonsterAbilityState {
       CardStack<MonsterAbilityCardModel>();
   final CardStack<MonsterAbilityCardModel> discardPile =
       CardStack<MonsterAbilityCardModel>();
-  int lastRoundDrawn = 0;
+
+  int get lastRoundDrawn => _lastRoundDrawn;
+  int _lastRoundDrawn = 0;
 
   MonsterAbilityState(this.name) {
     GameState gameState = getIt<GameState>();
@@ -26,7 +25,7 @@ class MonsterAbilityState {
       }
     }
 
-    lastRoundDrawn = 0;
+    _lastRoundDrawn = 0;
   }
 
   void shuffle() {
@@ -39,7 +38,7 @@ class MonsterAbilityState {
   void draw() {
     //put top of draw pile on discard pile
     discardPile.push(drawPile.pop());
-    lastRoundDrawn = getIt<GameState>().round.value;
+    _lastRoundDrawn = getIt<GameState>().round.value;
   }
 
   @override

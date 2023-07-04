@@ -4,8 +4,6 @@ import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
-import '../../Resource/state/monster.dart';
-import '../../Resource/state/monster_instance.dart';
 import '../../services/service_locator.dart';
 
 class AddStandeeMenu extends StatefulWidget {
@@ -45,7 +43,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
       type = MonsterType.boss;
     }
     bool isOut = false;
-    for (var item in widget.monster.monsterInstances.value) {
+    for (var item in widget.monster.monsterInstances) {
       if (item.standeeNr == nr) {
         isOut = true;
         break;
@@ -122,10 +120,9 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
           ),
         ),
         child: Stack(
-            //alignment: Alignment.center,
             children: [
-              ValueListenableBuilder<List<MonsterInstance>>(
-                  valueListenable: widget.monster.monsterInstances,
+              ValueListenableBuilder<int>(
+                  valueListenable: _gameState.commandIndex,//todo test. widget.monster.monsterInstances,
                   builder: (context, value, child) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

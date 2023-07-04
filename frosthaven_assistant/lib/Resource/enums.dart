@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:frosthaven_assistant/Resource/state/character.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 enum Condition {

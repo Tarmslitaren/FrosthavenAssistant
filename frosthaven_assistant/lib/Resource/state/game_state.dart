@@ -1,5 +1,8 @@
 library game_state;
 
+import '../card_stack.dart';
+import '../enums.dart';
+
 import 'package:built_collection/built_collection.dart';
 import 'dart:collection';
 import 'dart:convert';
@@ -14,25 +17,16 @@ import '../../Model/room.dart';
 import '../../Model/scenario.dart';
 import '../action_handler.dart';
 import '../enums.dart';
-import 'list_item_data.dart';
-import 'loot_deck_state.dart';
-import 'modifier_deck_state.dart';
-import 'monster_ability_state.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../Model/MonsterAbility.dart';
 import '../../services/service_locator.dart';
-import 'character.dart';
-import 'monster.dart';
 
 import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/stat_calculator.dart';
-import 'package:frosthaven_assistant/Resource/state/character_state.dart';
-import 'package:frosthaven_assistant/Resource/state/figure_state.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
-import 'package:frosthaven_assistant/Resource/state/monster_instance.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../Layout/menus/auto_add_standee_menu.dart';
 import '../../Model/character_class.dart';
@@ -40,7 +34,27 @@ import '../../Model/monster.dart';
 import '../commands/add_standee_command.dart';
 
 part "game_save_state.dart";
+part "character.dart";
+part "character_state.dart";
+part "figure_state.dart";
+part "loot_deck_state.dart";
+part "modifier_deck_state.dart";
+part "monster.dart";
+part "monster_ability_state.dart";
+part "monster_instance.dart";
+part "list_item_data.dart";
 part "../game_methods.dart";
+
+abstract class Command {
+  void execute();
+  void undo();
+  String describe();
+
+  //private class so only this class and it's children is allowed to change state
+  _StateModifier stateAccess = _StateModifier();
+}
+
+class _StateModifier {}
 
 class GameState extends ActionHandler {
   //TODO: put action handler in own place
@@ -124,7 +138,7 @@ class GameState extends ActionHandler {
   final modelData = ValueNotifier<Map<String, CampaignModel>>({});
   List<SummonModel> itemSummonData = [];
 
-  //TODO: ugly hacks to delay list update (doesn't need to be here though)
+  //todo: ugly hacks to delay list update (doesn't need to be here though)
   final updateList = ValueNotifier<int>(0);
   final killMonsterStandee = ValueNotifier<int>(-1);
   final updateForUndo = ValueNotifier<int>(0);
@@ -132,22 +146,27 @@ class GameState extends ActionHandler {
   //state
   ValueListenable<String> get currentCampaign => _currentCampaign;
   final _currentCampaign = ValueNotifier<String>("Jaws of the Lion");
+  setCampaign(_StateModifier stateModifier, String value) {_currentCampaign.value = value;}
 
   ValueListenable<int> get round => _round;
   final _round = ValueNotifier<int>(1);
+  setRound(_StateModifier stateModifier, int value) {_round.value = value;}
 
   ValueListenable<RoundState> get roundState => _roundState;
   final _roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
+  setRoundState(_StateModifier stateModifier, RoundState value) {_roundState.value = value;}
 
   ValueListenable<int> get level => _level;
   final _level = ValueNotifier<int>(1);
+  setLevel(_StateModifier stateModifier, int value) {_level.value = value;}
   ValueListenable<bool> get solo => _solo;
   final _solo = ValueNotifier<bool>(false);
+  setSolo(_StateModifier stateModifier, bool value) {_solo.value = value;}
   ValueListenable<String> get scenario => _scenario;
   final _scenario = ValueNotifier<String>("");
+  setScenario(_StateModifier stateModifier, String value) {_scenario.value = value;}
 
-  BuiltList<String> get scenarioSectionsAdded =>
-      BuiltList.of(_scenarioSectionsAdded);
+  BuiltList<String> get scenarioSectionsAdded => BuiltList.of(_scenarioSectionsAdded);
   List<String> _scenarioSectionsAdded = [];
 
   BuiltList<SpecialRule> get scenarioSpecialRules =>
@@ -160,18 +179,17 @@ class GameState extends ActionHandler {
 
   ValueListenable<String> get toastMessage => _toastMessage;
   final _toastMessage = ValueNotifier<String>("");
+  setToastMessage(_StateModifier stateModifier, String value) {_toastMessage.value = value;}
 
   BuiltList<ListItemData> get currentList => BuiltList.of(_currentList);
   List<ListItemData> _currentList = []; //has both monsters and characters
 
-  BuiltList<MonsterAbilityState> get currentAbilityDecks =>
-      BuiltList.of(_currentAbilityDecks);
-  List<MonsterAbilityState> _currentAbilityDecks =
-      <MonsterAbilityState>[]; //add to here when adding a monster type
+  BuiltList<MonsterAbilityState> get currentAbilityDecks => BuiltList.of(_currentAbilityDecks);
+  List<MonsterAbilityState> _currentAbilityDecks = <MonsterAbilityState>[];
+  //add to here when adding a monster type
 
   //elements
-  BuiltMap<Elements, ElementState> get elementState =>
-      BuiltMap.of(_elementState);
+  BuiltMap<Elements, ElementState> get elementState => BuiltMap.of(_elementState);
   final Map<Elements, ElementState> _elementState = HashMap();
 
   //modifierDeck
@@ -185,7 +203,8 @@ class GameState extends ActionHandler {
   BuiltSet<String> get unlockedClasses => BuiltSet.of(_unlockedClasses);
   Set<String> _unlockedClasses = {};
 
-  final showAllyDeck = ValueNotifier<bool>(false);
+  final showAllyDeck = ValueNotifier<bool>(false); //TODO?
+
 
   @override
   String toString() {

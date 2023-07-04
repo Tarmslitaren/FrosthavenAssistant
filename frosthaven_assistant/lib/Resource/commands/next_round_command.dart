@@ -3,12 +3,9 @@ import 'package:frosthaven_assistant/Model/scenario.dart';
 
 import '../../Layout/main_list.dart';
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../enums.dart';
 import '../settings.dart';
-import '../state/character.dart';
 import '../state/game_state.dart';
-import '../state/monster.dart';
 
 class NextRoundCommand extends Command {
   final GameState _gameState = getIt<GameState>();
@@ -41,7 +38,7 @@ class NextRoundCommand extends Command {
       }
       if (item is Monster) {
         //only really needed for ice wraiths
-        GameMethods.sortMonsterInstances(item.monsterInstances.value);
+        GameMethods.sortMonsterInstances(item.getMutableMonsterInstancesList(stateAccess));
       }
     }
     GameMethods.shuffleDecksIfNeeded();

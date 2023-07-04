@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
-import 'package:frosthaven_assistant/Resource/state/monster.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 import '../services/network/client.dart';
@@ -251,27 +250,6 @@ class Settings {
     }
   }
 
-  void handleNoStandeesSettingChange() {
-    GameState gameState = getIt<GameState>();
-    if (noStandees.value) {
-      for (var item in gameState.currentList) {
-        if (item is Monster) {
-          item.monsterInstances.value = [];
-        }
-      }
-    } else {
-      for (var item in gameState.currentList) {
-        if (item is Monster && item.isActive) {
-          item.isActive = false;
-        }
-      }
-    }
-    //gameState.gameSaveStates.removeRange(0, gameState.gameSaveStates.length-1);
-    // gameState.commands.clear();
-    // gameState.commandIndex.value = -1;
-    // gameState.commandDescriptions.clear();
-    gameState.updateList.value++;
-  }
 
   @override
   String toString() {

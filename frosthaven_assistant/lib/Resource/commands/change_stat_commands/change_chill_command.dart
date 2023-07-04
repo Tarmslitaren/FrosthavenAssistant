@@ -1,5 +1,4 @@
 import '../../../services/service_locator.dart';
-import '../../state/figure_state.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
 
@@ -10,7 +9,7 @@ class ChangeChillCommand extends ChangeStatCommand {
   void execute() {
     FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
 
-    figure.chill.value += change;
+    figure.setChill(stateAccess, figure.chill.value + change);
   }
 
   @override

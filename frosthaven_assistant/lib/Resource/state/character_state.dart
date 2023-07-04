@@ -1,19 +1,23 @@
-import 'dart:convert';
-
-import 'package:flutter/widgets.dart';
-
-import '../enums.dart';
-import 'figure_state.dart';
-import 'monster_instance.dart';
+part of game_state;
 
 class CharacterState extends FigureState {
   CharacterState();
 
-  final display = ValueNotifier<String>("");
-  final initiative = ValueNotifier<int>(0);
-  final xp = ValueNotifier<int>(0);
+  ValueListenable<String> get display => _display;
+  setDisplay(_StateModifier stateModifier, String value) {_display.value = value;}
+  final _display = ValueNotifier<String>("");
 
-  final summonList = ValueNotifier<List<MonsterInstance>>([]);
+  ValueListenable<int> get initiative => _initiative;
+  setInitiative(_StateModifier stateModifier, int value) {_initiative.value = value;}
+  final _initiative = ValueNotifier<int>(0);
+
+  ValueListenable<int> get xp => _xp;
+  setXp(_StateModifier stateModifier, int value) {_xp.value = value;}
+  final _xp = ValueNotifier<int>(0);
+
+  BuiltList<MonsterInstance> get summonList => BuiltList.of(_summonList);
+  getMutableSummonList(_StateModifier stateModifier) {return _summonList;}
+  final List<MonsterInstance> _summonList = [];
 
   @override
   String toString() {
@@ -25,25 +29,25 @@ class CharacterState extends FigureState {
         '"xp": ${xp.value}, '
         '"chill": ${chill.value}, '
         '"display": ${jsonEncode(display.value)}, '
-        '"summonList": ${summonList.value.toString()}, '
+        '"summonList": ${_summonList.toString()}, '
         '"conditions": ${conditions.value.toString()}, '
-        '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.value.toList().toString()}, '
-        '"conditionsAddedPreviousTurn": ${conditionsAddedPreviousTurn.value.toList().toString()} '
+        '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.toList().toString()}, '
+        '"conditionsAddedPreviousTurn": ${conditionsAddedPreviousTurn.toList().toString()} '
         '}';
   }
 
   CharacterState.fromJson(Map<String, dynamic> json) {
-    initiative.value = json['initiative'];
-    xp.value = json['xp'];
-    chill.value = json['chill'];
-    health.value = json["health"];
-    level.value = json["level"];
-    maxHealth.value = json["maxHealth"];
-    display.value = json['display'];
+    _initiative.value = json['initiative'];
+    _xp.value = json['xp'];
+    _chill.value = json['chill'];
+    _health.value = json["health"];
+    _level.value = json["level"];
+    _maxHealth.value = json["maxHealth"];
+    _display.value = json['display'];
 
     List<dynamic> summons = json["summonList"];
     for (var item in summons) {
-      summonList.value.add(MonsterInstance.fromJson(item));
+      _summonList.add(MonsterInstance.fromJson(item));
     }
 
     List<dynamic> condis = json["conditions"];
@@ -54,13 +58,13 @@ class CharacterState extends FigureState {
     if (json.containsKey("conditionsAddedThisTurn")) {
       List<dynamic> condis2 = json["conditionsAddedThisTurn"];
       for (int item in condis2) {
-        conditionsAddedThisTurn.value.add(Condition.values[item]);
+        _conditionsAddedThisTurn.add(Condition.values[item]);
       }
     }
     if (json.containsKey("conditionsAddedPreviousTurn")) {
       List<dynamic> condis3 = json["conditionsAddedPreviousTurn"];
       for (int item in condis3) {
-        conditionsAddedPreviousTurn.value.add(Condition.values[item]);
+        _conditionsAddedPreviousTurn.add(Condition.values[item]);
       }
     }
   }

@@ -1,8 +1,6 @@
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../enums.dart';
 import '../state/game_state.dart';
-import '../state/monster.dart';
 
 class ActivateMonsterTypeCommand extends Command {
   final GameState _gameState = getIt<GameState>();
@@ -17,7 +15,7 @@ class ActivateMonsterTypeCommand extends Command {
     for (var item in _gameState.currentList) {
       if (item.id == name) {
         if (item is Monster) {
-          item.isActive = activate;
+          item.setActive(stateAccess, activate);
           monster = item;
         }
       }

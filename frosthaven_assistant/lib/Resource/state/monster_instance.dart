@@ -1,13 +1,7 @@
-import '../../services/service_locator.dart';
-import '../enums.dart';
-import '../stat_calculator.dart';
-import 'character.dart';
-import 'figure_state.dart';
-import 'game_state.dart';
-import 'monster.dart';
+part of game_state;
 
 class MonsterInstance extends FigureState {
-  MonsterInstance(this.standeeNr, this.type, bool summoned, Monster monster) {
+  MonsterInstance(this.standeeNr, this._type, bool summoned, Monster monster) {
     setLevel(monster);
     gfx = monster.type.gfx;
     name = monster.type.name;
@@ -15,17 +9,17 @@ class MonsterInstance extends FigureState {
     attack = 0;
     range = 0;
     if (summoned) {
-      roundSummoned = getIt<GameState>().round.value;
+      _roundSummoned = getIt<GameState>().round.value;
     } else {
-      roundSummoned = -1;
+      _roundSummoned = -1;
     }
   }
 
-  MonsterInstance.summon(this.standeeNr, this.type, this.name, int summonHealth,
-      this.move, this.attack, this.range, this.gfx, this.roundSummoned) {
+  MonsterInstance.summon(this.standeeNr, this._type, this.name, int summonHealth,
+      this.move, this.attack, this.range, this.gfx, this._roundSummoned) {
     //deal with summon init
-    maxHealth.value = summonHealth;
-    health.value = summonHealth;
+    _maxHealth.value = summonHealth;
+    _health.value = summonHealth;
   }
 
   String getId() {
@@ -33,15 +27,22 @@ class MonsterInstance extends FigureState {
   }
 
   late final int standeeNr;
-  late MonsterType type;
+
+  setType(_StateModifier stateModifier, MonsterType value) {_type = value;}
+  MonsterType get type => _type;
+  late MonsterType _type; //can't be fina due to ice wraith special
   late final String name;
   late final String gfx;
 
-  //summon stats
-  late int move;
-  late int attack;
-  late int range;
-  int roundSummoned = -1;
+  //summon stats. not used currenty
+  late final int move;
+  late final int attack;
+  late final int range;
+
+  int get roundSummoned => _roundSummoned;
+  setRoundSummoned(_StateModifier stateModifier, int value) {_roundSummoned = value;}
+  late int _roundSummoned;
+
 
   void setLevel(Monster monster) {
     dynamic newHealthValue =
@@ -55,7 +56,7 @@ class MonsterInstance extends FigureState {
     }
     int? value = StatCalculator.calculateFormula(newHealthValue);
     if (value != null) {
-      maxHealth.value = value;
+      _maxHealth.value = value;
     } else {
       //handle edge case
       if (newHealthValue == "Hollowpact") {
@@ -67,7 +68,7 @@ class MonsterInstance extends FigureState {
             break;
           }
         }
-        maxHealth.value = value;
+        _maxHealth.value = value;
       }
       if (newHealthValue == "Incarnate") {
         int value = 36; //double Incarante's level 5 health
@@ -79,12 +80,11 @@ class MonsterInstance extends FigureState {
             break;
           }
         }
-        maxHealth.value = value;
+        _maxHealth.value = value;
       }
     }
-    //maxHealth.value = StatCalculator.calculateFormula(newHealthValue)!;
-    level.value = monster.level.value;
-    health.value = maxHealth.value;
+    _level.value = monster.level.value;
+    _health.value = maxHealth.value;
   }
 
   @override
@@ -103,28 +103,28 @@ class MonsterInstance extends FigureState {
         '"type": ${type.index}, '
         '"chill": ${chill.value}, '
         '"conditions": ${conditions.value.toString()}, '
-        '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.value.toList().toString()}, '
-        '"conditionsAddedPreviousTurn": ${conditionsAddedPreviousTurn.value.toList().toString()} '
+        '"conditionsAddedThisTurn": ${_conditionsAddedThisTurn.toList().toString()}, '
+        '"conditionsAddedPreviousTurn": ${_conditionsAddedPreviousTurn.toList().toString()} '
         '}';
   }
 
   MonsterInstance.fromJson(Map<String, dynamic> json) {
     standeeNr = json["standeeNr"];
-    health.value = json["health"];
-    level.value = json["level"];
-    maxHealth.value = json["maxHealth"];
+    _health.value = json["health"];
+    _level.value = json["level"];
+    _maxHealth.value = json["maxHealth"];
     name = json["name"];
     gfx = json["gfx"];
-    type = MonsterType.values[json["type"]];
+    _type = MonsterType.values[json["type"]];
     move = json["move"];
     attack = json["attack"];
     range = json["range"];
     if (json.containsKey("roundSummoned")) {
-      roundSummoned = json["roundSummoned"];
+      _roundSummoned = json["roundSummoned"];
     } else {
-      roundSummoned = -1;
+      _roundSummoned = -1;
     }
-    chill.value = json["chill"];
+    _chill.value = json["chill"];
     List<dynamic> condis = json["conditions"];
     for (int item in condis) {
       conditions.value.add(Condition.values[item]);
@@ -133,13 +133,13 @@ class MonsterInstance extends FigureState {
     if (json.containsKey("conditionsAddedThisTurn")) {
       List<dynamic> condis2 = json["conditionsAddedThisTurn"];
       for (int item in condis2) {
-        conditionsAddedThisTurn.value.add(Condition.values[item]);
+        _conditionsAddedThisTurn.add(Condition.values[item]);
       }
     }
     if (json.containsKey("conditionsAddedPreviousTurn")) {
       List<dynamic> condis3 = json["conditionsAddedPreviousTurn"];
       for (int item in condis3) {
-        conditionsAddedPreviousTurn.value.add(Condition.values[item]);
+        _conditionsAddedPreviousTurn.add(Condition.values[item]);
       }
     }
   }

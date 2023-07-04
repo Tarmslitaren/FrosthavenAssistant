@@ -1,10 +1,6 @@
 import '../../../services/service_locator.dart';
-import '../../action_handler.dart';
 import '../../enums.dart';
-import '../../state/character.dart';
 import '../../state/game_state.dart';
-import '../../state/monster.dart';
-import '../../state/monster_instance.dart';
 
 abstract class ChangeStatCommand extends Command {
   final String ownerId;
@@ -20,17 +16,17 @@ abstract class ChangeStatCommand extends Command {
     for (var item in getIt<GameState>().currentList) {
       if (item is Monster) {
         List<MonsterInstance> newList = [];
-        newList.addAll(item.monsterInstances.value);
-        for (var instance in item.monsterInstances.value) {
+        newList.addAll(item.monsterInstances);
+        for (var instance in item.monsterInstances) {
           if (instance.health.value == 0) {
             newList.remove(instance);
-            item.monsterInstances.value = newList;
-            //item.monsterInstances.value.remove(instance);
+            item.getMutableMonsterInstancesList(stateAccess).clear();
+            item.getMutableMonsterInstancesList(stateAccess).addAll(newList);
             Future.delayed(const Duration(milliseconds: 600), () {
               getIt<GameState>().killMonsterStandee.value++;
             });
 
-            if (item.monsterInstances.value.isEmpty) {
+            if (item.monsterInstances.isEmpty) {
               if (getIt<GameState>().roundState.value ==
                   RoundState.chooseInitiative) {
                 GameMethods.sortCharactersFirst();
@@ -58,14 +54,14 @@ abstract class ChangeStatCommand extends Command {
         }
 
         //handle summon death
-        for (var instance in item.characterState.summonList.value) {
+        for (var instance in item.characterState.summonList) {
           if (instance.health.value == 0) {
-            item.characterState.summonList.value.remove(instance);
+            item.characterState.getMutableSummonList(stateAccess).remove(instance);
             Future.delayed(const Duration(milliseconds: 600), () {
               getIt<GameState>().killMonsterStandee.value++;
             });
 
-            if (item.characterState.summonList.value.isEmpty) {
+            if (item.characterState.summonList.isEmpty) {
               if (getIt<GameState>().roundState.value == RoundState.playTurns) {
                 Future.delayed(const Duration(milliseconds: 600), () {
                   getIt<GameState>().updateList.value++;
@@ -85,7 +81,6 @@ abstract class ChangeStatCommand extends Command {
 
   @override
   void undo() {
-    //stat.value -= change;
     getIt<GameState>().updateList.value++;
   }
 

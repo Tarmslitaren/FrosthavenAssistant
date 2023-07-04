@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_health_command.dart';
-import 'package:frosthaven_assistant/Resource/state/figure_state.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Resource/scaling.dart';

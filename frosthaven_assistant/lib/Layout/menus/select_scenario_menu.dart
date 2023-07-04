@@ -47,6 +47,13 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   void setCampaign(String campaign) {
     //TODO:clear search
+
+    //check value ok
+    if (_gameState.modelData.value[campaign] == null) {
+      campaign = "Jaws of the Lion";
+    }
+
+
     GameMethods.setCampaign(campaign);
     _foundScenarios = _gameState
         .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys

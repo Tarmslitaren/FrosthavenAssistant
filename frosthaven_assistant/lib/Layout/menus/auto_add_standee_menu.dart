@@ -7,8 +7,6 @@ import '../../Resource/commands/change_stat_commands/change_health_command.dart'
 import '../../Resource/enums.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
-import '../../Resource/state/monster.dart';
-import '../../Resource/state/monster_instance.dart';
 import '../../services/service_locator.dart';
 
 class AutoAddStandeeMenu extends StatefulWidget {
@@ -46,7 +44,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           .firstWhere((element) => element.id == data.name) as Monster;
       List<int> someElites = [];
       List<int> someNormals = [];
-      for (var item in monster.monsterInstances.value) {
+      for (var item in monster.monsterInstances) {
         if (item.type == MonsterType.elite) {
           someElites.add(item.standeeNr);
         } else {
@@ -95,7 +93,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
       type = MonsterType.boss;
     }
     bool isOut = false;
-    for (var item in monster.monsterInstances.value) {
+    for (var item in monster.monsterInstances) {
       if (item.standeeNr == nr ||
           (elite == true && nrOfElite <= currentEliteAdded) ||
           (elite == false && nrOfNormal <= currentNormalAdded)) {
@@ -330,7 +328,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           int currentEliteAdded = 0;
           int currentNormalAdded = 0;
 
-          for (var item in monster.monsterInstances.value) {
+          for (var item in monster.monsterInstances) {
             if (item.type == MonsterType.elite) {
               currentEliteAdded++;
             } else {
@@ -384,8 +382,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: ValueListenableBuilder<List<MonsterInstance>>(
-                  valueListenable: monster.monsterInstances,
+              child: ValueListenableBuilder<int>(
+                  valueListenable: _gameState.commandIndex,//monster.monsterInstances, //TODO fix me also check if working ok
                   builder: (context, value, child) {
                     return Stack(children: [
                       Column(

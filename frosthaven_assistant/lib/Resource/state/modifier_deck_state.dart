@@ -1,8 +1,4 @@
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
-
-import '../card_stack.dart';
-
+part of game_state;
 enum CardType { add, multiply, curse, bless, enfeeble }
 
 class ModifierCard {

@@ -4,7 +4,6 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/change_stat_commands/change_max_health_command.dart';
 import '../../Resource/commands/set_character_level_command.dart';
-import '../../Resource/state/character.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
@@ -28,7 +27,8 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   void _focusNodeListener() {
     if (!focusNode.hasFocus) {
       if (nameController.text.isNotEmpty) {
-        widget.character.characterState.display.value = nameController.text;
+        _gameState.action(ChangeNameCommand(
+            nameController.text, widget.character.id));
       }
     }
   }

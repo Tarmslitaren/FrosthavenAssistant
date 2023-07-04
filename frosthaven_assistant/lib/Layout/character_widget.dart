@@ -9,10 +9,8 @@ import 'package:frosthaven_assistant/services/network/network.dart';
 import '../Resource/color_matrices.dart';
 import '../Resource/commands/next_turn_command.dart';
 import '../Resource/enums.dart';
-import '../Resource/state/character.dart';
 import '../Resource/state/game_state.dart';
 import '../Resource/settings.dart';
-import '../Resource/state/monster_instance.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'condition_icon.dart';
@@ -77,7 +75,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
         character = item;
       }
     }
-    lastList = character.characterState.summonList.value;
+    lastList = character.characterState.summonList.toList();
 
     if (widget.initPreset != null) {
       _initTextFieldController.text = widget.initPreset.toString();
@@ -139,32 +137,32 @@ class CharacterWidgetState extends State<CharacterWidget> {
   Widget buildMonsterBoxGrid(double scale) {
     String displayStartAnimation = "";
 
-    if (lastList.length < character.characterState.summonList.value.length) {
+    if (lastList.length < character.characterState.summonList.length) {
       //find which is new - always the last one
       displayStartAnimation =
-          character.characterState.summonList.value.last.getId();
+          character.characterState.summonList.last.getId();
     }
 
     final generatedChildren = List<Widget>.generate(
-        character.characterState.summonList.value.length,
+        character.characterState.summonList.length,
         (index) => AnimatedSize(
               //not really needed now
               key: Key(index.toString()),
               duration: const Duration(milliseconds: 300),
               child: MonsterBox(
                   key: Key(
-                      character.characterState.summonList.value[index].getId()),
+                      character.characterState.summonList[index].getId()),
                   figureId: character
-                          .characterState.summonList.value[index].name +
-                      character.characterState.summonList.value[index].gfx +
-                      character.characterState.summonList.value[index].standeeNr
+                          .characterState.summonList[index].name +
+                      character.characterState.summonList[index].gfx +
+                      character.characterState.summonList[index].standeeNr
                           .toString(),
                   ownerId: character.id,
                   displayStartAnimation: displayStartAnimation,
                   blockInput: false,
                   scale: scale),
             ));
-    lastList = character.characterState.summonList.value;
+    lastList = character.characterState.summonList.toList();
     return Wrap(
       runSpacing: 2.0 * scale,
       spacing: 2.0 * scale,

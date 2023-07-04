@@ -1,8 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:frosthaven_assistant/Resource/state/character.dart';
-
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../state/game_state.dart';
 
 class ChangeNameCommand extends Command {
@@ -14,9 +11,9 @@ class ChangeNameCommand extends Command {
   void execute() {
     GameState gameState = getIt<GameState>();
     Character? character = gameState.currentList
-        .firstWhereOrNull((element) => element.id == name) as Character?;
+        .firstWhereOrNull((element) => element.id == characterId) as Character?;
     if (character != null) {
-      character.characterState.display.value = name;
+      character.characterState.setDisplay(stateAccess, name);
     }
   }
 

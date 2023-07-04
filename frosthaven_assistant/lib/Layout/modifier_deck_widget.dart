@@ -7,8 +7,6 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-
-import '../Resource/state/modifier_deck_state.dart';
 import '../Resource/settings.dart';
 
 class ModifierDeckWidget extends StatefulWidget {
