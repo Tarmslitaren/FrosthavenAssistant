@@ -11,13 +11,13 @@ class GameSaveState {
     _savedState = getIt<GameState>().toString();
   }
 
-  void loadLootDeck(var data) {
+  void _loadLootDeck(var data) {
     var lootDeckData = data["lootDeck"];
     LootDeck state = LootDeck.fromJson(lootDeckData);
     getIt<GameState>()._lootDeck = state;
   }
 
-  void loadModifierDeck(String identifier, var data) {
+  void _loadModifierDeck(String identifier, var data) {
     //modifier deck
     String name = "";
     if (identifier == 'modifierDeckAllies') {
@@ -52,35 +52,35 @@ class GameSaveState {
         newDiscardList.add(ModifierCard(CardType.bless, gfx));
       } else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
         newDiscardList.add(ModifierCard(CardType.multiply, gfx));
-        state.needsShuffle = true;
+        state._needsShuffle = true;
       } else {
         newDiscardList.add(ModifierCard(CardType.add, gfx));
       }
     }
-    state.drawPile.getList().clear();
-    state.discardPile.getList().clear();
-    state.drawPile.setList(newDrawList);
-    state.discardPile.setList(newDiscardList);
-    state.cardCount.value = state.drawPile.size();
+    state._drawPile.getList().clear();
+    state._discardPile.getList().clear();
+    state._drawPile.setList(newDrawList);
+    state._discardPile.setList(newDiscardList);
+    state._cardCount.value = state._drawPile.size();
 
     if (modifierDeckData.containsKey("curses")) {
       int curses = modifierDeckData['curses'];
-      state.curses.value = curses;
+      state._curses.value = curses;
     }
     if (modifierDeckData.containsKey("enfeebles")) {
       int enfeebles = modifierDeckData['enfeebles'];
-      state.enfeebles.value = enfeebles;
+      state._enfeebles.value = enfeebles;
     }
     if (modifierDeckData.containsKey("blesses")) {
       int blesses = modifierDeckData['blesses'];
-      state.blesses.value = blesses;
+      state._blesses.value = blesses;
     }
 
     if (modifierDeckData.containsKey('badOmen')) {
-      state.badOmen.value = modifierDeckData["badOmen"] as int;
+      state._badOmen.value = modifierDeckData["badOmen"] as int;
     }
     if (modifierDeckData.containsKey('addedMinusOnes')) {
-      state.addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
+      state._addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
     }
 
     if (identifier == 'modifierDeck') {
@@ -186,9 +186,9 @@ class GameSaveState {
           gameState._currentAbilityDecks.add(state);
         }
 
-        loadModifierDeck('modifierDeck', data);
-        loadModifierDeck('modifierDeckAllies', data);
-        loadLootDeck(data);
+        _loadModifierDeck('modifierDeck', data);
+        _loadModifierDeck('modifierDeckAllies', data);
+        _loadLootDeck(data);
 
         //this is not really a setting, but a scenario command?
         if (data["showAllyDeck"] != null) {

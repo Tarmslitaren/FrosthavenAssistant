@@ -22,7 +22,7 @@ class NextRoundCommand extends Command {
           ScenarioModel? spawnSection = scenario.sections.firstWhereOrNull(
               (element) => element.name.substring(1) == rule.name);
           if (spawnSection != null && spawnSection.monsterStandees != null) {
-            GameMethods.autoAddStandees(
+            GameMethods.autoAddStandees(stateAccess,
                 spawnSection.monsterStandees!, rule.note);
           }
         }
@@ -34,24 +34,24 @@ class NextRoundCommand extends Command {
   void execute() {
     for (var item in _gameState.currentList) {
       if (item is Character) {
-        item.nextRound();
+        item.nextRound(stateAccess);
       }
       if (item is Monster) {
         //only really needed for ice wraiths
-        GameMethods.sortMonsterInstances(item.getMutableMonsterInstancesList(stateAccess));
+        GameMethods.sortMonsterInstances(stateAccess, item.getMutableMonsterInstancesList(stateAccess));
       }
     }
-    GameMethods.shuffleDecksIfNeeded();
-    GameMethods.updateElements();
-    GameMethods.setRoundState(RoundState.chooseInitiative);
+    GameMethods.shuffleDecksIfNeeded(stateAccess);
+    GameMethods.updateElements(stateAccess);
+    GameMethods.setRoundState(stateAccess, RoundState.chooseInitiative);
     if (_gameState.currentList.last.turnState != TurnsState.done) {
-      GameMethods.setTurnDone(_gameState.currentList.length - 1);
+      GameMethods.setTurnDone(stateAccess, _gameState.currentList.length - 1);
     }
     if (_gameState.currentList.last.turnState != TurnsState.done) {
-      GameMethods.setTurnDone(_gameState.currentList.length - 1);
+      GameMethods.setTurnDone(stateAccess, _gameState.currentList.length - 1);
     }
-    GameMethods.clearTurnState(false);
-    GameMethods.sortCharactersFirst();
+    GameMethods.clearTurnState(stateAccess, false);
+    GameMethods.sortCharactersFirst(stateAccess);
 
     GameMethods.setToastMessage("");
 
@@ -91,7 +91,7 @@ class NextRoundCommand extends Command {
       }
     }
 
-    GameMethods.setRound(_gameState.round.value + 1);
+    GameMethods.setRound(stateAccess, _gameState.round.value + 1);
 
     Future.delayed(const Duration(milliseconds: 600), () {
       _gameState.updateList.value++;
@@ -99,10 +99,10 @@ class NextRoundCommand extends Command {
     });
 
     if (_gameState.modifierDeck.needsShuffle) {
-      _gameState.modifierDeck.shuffle();
+      _gameState.modifierDeck.shuffle(stateAccess);
     }
     if (_gameState.modifierDeckAllies.needsShuffle) {
-      _gameState.modifierDeckAllies.shuffle();
+      _gameState.modifierDeckAllies.shuffle(stateAccess);
     }
   }
 

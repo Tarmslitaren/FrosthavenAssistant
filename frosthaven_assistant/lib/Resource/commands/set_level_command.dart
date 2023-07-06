@@ -11,13 +11,13 @@ class SetLevelCommand extends Command {
   @override
   void execute() {
     if (monsterId == null) {
-      GameMethods.setLevel(level);
+      GameMethods.setLevel(stateAccess, level);
       for (var item in _gameState.currentList) {
         if (item is Monster) {
-          item.setLevel(level);
+          item.setLevel(stateAccess, level);
         }
       }
-      GameMethods.updateForSpecialRules();
+      GameMethods.updateForSpecialRules(stateAccess);
     } else {
       Monster? monster;
       for (var item in _gameState.currentList) {
@@ -25,7 +25,7 @@ class SetLevelCommand extends Command {
           monster = item as Monster;
         }
       }
-      monster!.setLevel(level);
+      monster!.setLevel(stateAccess, level);
     }
   }
 

@@ -2,8 +2,8 @@ part of game_state;
 enum CardType { add, multiply, curse, bless, enfeeble }
 
 class ModifierCard {
-  CardType type;
-  String gfx;
+  final CardType type;
+  final String gfx;
 
   ModifierCard(this.type, this.gfx);
 
@@ -18,29 +18,33 @@ class ModifierCard {
 class ModifierDeck {
   ModifierDeck(this.name) {
     //build deck
-    initDeck(name);
-    curses.removeListener(_curseListener);
-    blesses.removeListener(_blessListener);
-    enfeebles.removeListener(_enfeebleListener);
+    _initDeck(name);
+    _curses.removeListener(_curseListener);
+    _blesses.removeListener(_blessListener);
+    _enfeebles.removeListener(_enfeebleListener);
 
-    curses.addListener(_curseListener);
-    blesses.addListener(_blessListener);
-    enfeebles.addListener(_enfeebleListener);
+    _curses.addListener(_curseListener);
+    _blesses.addListener(_blessListener);
+    _enfeebles.addListener(_enfeebleListener);
   }
 
   void _curseListener() {
-    _handleCurseBless(CardType.curse, curses, "curse");
+    _handleCurseBless(CardType.curse, _curses, "curse");
   }
 
   void _blessListener() {
-    _handleCurseBless(CardType.bless, blesses, "bless");
+    _handleCurseBless(CardType.bless, _blesses, "bless");
   }
 
   void _enfeebleListener() {
-    _handleCurseBless(CardType.enfeeble, enfeebles, "enfeeble");
+    _handleCurseBless(CardType.enfeeble, _enfeebles, "enfeeble");
   }
 
-  void initDeck(String name) {
+  void initDeck(_StateModifier _, String name) {
+    _initDeck(name);
+  }
+
+  void _initDeck(String name) {
     String suffix = "";
     if (name.isNotEmpty) {
       suffix = "-$name";
@@ -57,58 +61,84 @@ class ModifierDeck {
     for (int i = 0; i < 6; i++) {
       cards.add(ModifierCard(CardType.add, "plus0$suffix"));
     }
-    drawPile.setList(cards);
-    discardPile.setList([]);
-    shuffle();
-    cardCount.value = drawPile.size();
-    curses.value = 0;
-    blesses.value = 0;
-    enfeebles.value = 0;
-    badOmen.value = 0;
-    addedMinusOnes.value = 0;
-    needsShuffle = false;
+    _drawPile.setList(cards);
+    _discardPile.setList([]);
+    _shuffle();
+    _cardCount.value = _drawPile.size();
+    _curses.value = 0;
+    _blesses.value = 0;
+    _enfeebles.value = 0;
+    _badOmen.value = 0;
+    _addedMinusOnes.value = 0;
+    _needsShuffle = false;
     name = name;
   }
 
   final String name;
-  bool needsShuffle = false;
-  final CardStack<ModifierCard> drawPile = CardStack<ModifierCard>();
-  final CardStack<ModifierCard> discardPile = CardStack<ModifierCard>();
 
-  final curses = ValueNotifier<int>(0);
-  final blesses = ValueNotifier<int>(0);
-  final enfeebles = ValueNotifier<int>(0);
-  final cardCount = ValueNotifier<int>(
+  bool get needsShuffle => _needsShuffle;
+  bool _needsShuffle = false;
+
+  //TODO: better safety for these getters
+  CardStack<ModifierCard> get drawPile => _drawPile;
+  CardStack<ModifierCard> get discardPile => _discardPile;
+
+  final CardStack<ModifierCard> _drawPile = CardStack<ModifierCard>();
+  final CardStack<ModifierCard> _discardPile = CardStack<ModifierCard>();
+
+  ValueListenable<int> get curses => _curses;
+  final _curses = ValueNotifier<int>(0);
+  ValueListenable<int> get blesses => _blesses;
+  final _blesses = ValueNotifier<int>(0);
+  ValueListenable<int> get enfeebles => _enfeebles;
+  final _enfeebles = ValueNotifier<int>(0);
+  ValueListenable<int> get cardCount => _cardCount;
+  final _cardCount = ValueNotifier<int>(
       0); //TODO: everything is a hammer - use maybe change notifier instead?
 
-  final badOmen = ValueNotifier<int>(0);
-  final addedMinusOnes = ValueNotifier<int>(0);
+  ValueListenable<int> get badOmen => _badOmen;
+  final _badOmen = ValueNotifier<int>(0);
+  ValueListenable<int> get addedMinusOnes => _addedMinusOnes;
+  final _addedMinusOnes = ValueNotifier<int>(0);
 
-  void addMinusOne() {
-    String suffix = "";
-    if (name.isNotEmpty) {
-      suffix = "-$name";
-    }
-    addedMinusOnes.value++;
-    drawPile.getList().add(ModifierCard(CardType.add, "minus1$suffix"));
-    drawPile.shuffle();
-    cardCount.value++;
+  void setCurse(_StateModifier _, int value) {
+    _curses.value = value;
+  }
+  void setEnfeeble(_StateModifier _, int value) {
+    _enfeebles.value = value;
+  }
+  void setBless(_StateModifier _, int value) {
+    _blesses.value = value;
+  }
+  void setBadOmen(_StateModifier _, int value) {
+    _badOmen.value = value;
   }
 
-  void removeMinusOne() {
+  void addMinusOne(_StateModifier _) {
     String suffix = "";
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    shuffle();
-    addedMinusOnes.value--;
-    var card = drawPile
+    _addedMinusOnes.value++;
+    _drawPile.getList().add(ModifierCard(CardType.add, "minus1$suffix"));
+    _drawPile.shuffle();
+    _cardCount.value++;
+  }
+
+  void removeMinusOne(_StateModifier _) {
+    String suffix = "";
+    if (name.isNotEmpty) {
+      suffix = "-$name";
+    }
+    _shuffle();
+    _addedMinusOnes.value--;
+    var card = _drawPile
         .getList()
         .lastWhereOrNull((element) => element.gfx == "minus1$suffix");
     if (card != null) {
-      drawPile.getList().remove(card);
-      drawPile.shuffle();
-      cardCount.value--;
+      _drawPile.getList().remove(card);
+      _drawPile.shuffle();
+      _cardCount.value--;
     }
   }
 
@@ -117,10 +147,10 @@ class ModifierDeck {
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    return drawPile.getList().firstWhereOrNull(
+    return _drawPile.getList().firstWhereOrNull(
                 (element) => element.gfx == "minus1$suffix") !=
             null ||
-        discardPile.getList().firstWhereOrNull(
+        _discardPile.getList().firstWhereOrNull(
                 (element) => element.gfx == "minus1$suffix") !=
             null;
   }
@@ -130,10 +160,10 @@ class ModifierDeck {
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    return drawPile.getList().firstWhereOrNull(
+    return _drawPile.getList().firstWhereOrNull(
                 (element) => element.gfx == "minus2$suffix") !=
             null ||
-        discardPile.getList().firstWhereOrNull(
+        _discardPile.getList().firstWhereOrNull(
                 (element) => element.gfx == "minus2$suffix") !=
             null;
   }
@@ -143,64 +173,64 @@ class ModifierDeck {
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    return drawPile.getList().firstWhereOrNull(
+    return _drawPile.getList().firstWhereOrNull(
                 (element) => element.gfx == "nullAttack$suffix") !=
             null ||
-        discardPile.getList().firstWhereOrNull(
+        _discardPile.getList().firstWhereOrNull(
                 (element) => element.gfx == "nullAttack$suffix") !=
             null;
   }
 
-  void removeNull() {
+  void removeNull(_StateModifier _) {
     String suffix = "";
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    shuffle();
-    var card = drawPile
+    _shuffle();
+    var card = _drawPile
         .getList()
         .lastWhereOrNull((element) => element.gfx == "nullAttack$suffix");
     if (card != null) {
-      drawPile.getList().remove(card);
-      drawPile.shuffle();
-      cardCount.value--;
+      _drawPile.getList().remove(card);
+      _drawPile.shuffle();
+      _cardCount.value--;
     }
   }
 
-  void addNull() {
+  void addNull(_StateModifier _) {
     String suffix = "";
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    drawPile
+    _drawPile
         .getList()
         .add(ModifierCard(CardType.multiply, "nullAttack$suffix"));
-    shuffle();
+    _shuffle();
   }
 
-  void removeMinusTwo() {
+  void removeMinusTwo(_StateModifier _) {
     String suffix = "";
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    shuffle();
-    var card = drawPile
+    _shuffle();
+    var card = _drawPile
         .getList()
         .lastWhereOrNull((element) => element.gfx == "minus2$suffix");
     if (card != null) {
-      drawPile.getList().remove(card);
-      drawPile.shuffle();
-      cardCount.value--;
+      _drawPile.getList().remove(card);
+      _drawPile.shuffle();
+      _cardCount.value--;
     }
   }
 
-  void addMinusTwo() {
+  void addMinusTwo(_StateModifier _) {
     String suffix = "";
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    drawPile.getList().add(ModifierCard(CardType.add, "minus2$suffix"));
-    shuffle();
+    _drawPile.getList().add(ModifierCard(CardType.add, "minus2$suffix"));
+    _shuffle();
   }
 
   void _handleCurseBless(
@@ -208,7 +238,7 @@ class ModifierDeck {
     //count and add or remove, then shuffle
     int count = 0;
     bool shuffle = true;
-    for (var item in drawPile.getList()) {
+    for (var item in _drawPile.getList()) {
       if (item.type == type) {
         count++;
       }
@@ -218,88 +248,93 @@ class ModifierDeck {
     } else if (count < notifier.value) {
       for (int i = count; i < notifier.value; i++) {
         if (type == CardType.curse && badOmen.value > 0) {
-          badOmen.value--;
+          _badOmen.value--;
           shuffle = false;
           //put in sixth or as far down as it goes.
           int position = 5;
-          if (drawPile.getList().length < 6) {
-            position = drawPile.getList().length;
+          if (_drawPile.getList().length < 6) {
+            position = _drawPile.getList().length;
           }
-          drawPile.getList().insert(
-              drawPile.getList().length - position, ModifierCard(type, gfx));
+          _drawPile.getList().insert(
+              _drawPile.getList().length - position, ModifierCard(type, gfx));
         } else {
-          drawPile.push(ModifierCard(type, gfx));
+          _drawPile.push(ModifierCard(type, gfx));
         }
       }
     } else {
       int toRemove = count - notifier.value;
       for (int i = 0; i < toRemove; i++) {
-        for (int j = drawPile.getList().length - 1; j >= 0; j--) {
-          if (drawPile.getList()[j].type == type) {
-            drawPile.getList().removeAt(j);
+        for (int j = _drawPile.getList().length - 1; j >= 0; j--) {
+          if (_drawPile.getList()[j].type == type) {
+            _drawPile.getList().removeAt(j);
             break;
           }
         }
       }
     }
     if (shuffle) {
-      drawPile.shuffle();
+      _drawPile.shuffle();
     }
-    cardCount.value = drawPile.size();
+    _cardCount.value = _drawPile.size();
   }
 
-  void shuffle() {
-    while (discardPile.isNotEmpty) {
-      ModifierCard card = discardPile.pop();
+  void shuffle(_StateModifier _) {
+    _shuffle();
+  }
+
+  void _shuffle() {
+    while (_discardPile.isNotEmpty) {
+      ModifierCard card = _discardPile.pop();
       //remove curse and bless
       if (card.type != CardType.bless &&
           card.type != CardType.curse &&
           card.type != CardType.enfeeble) {
-        drawPile.push(card);
+        _drawPile.push(card);
       }
     }
-    drawPile.shuffle();
-    needsShuffle = false;
-    cardCount.value = drawPile.size();
+    _drawPile.shuffle();
+
+    _needsShuffle = false;
+    _cardCount.value = _drawPile.size();
   }
 
-  void draw() {
+  void draw(_StateModifier _) {
     //shuffle deck, for the case the deck ends during play
-    if (drawPile.isEmpty) {
-      shuffle();
+    if (_drawPile.isEmpty) {
+      _shuffle();
     }
     //put top of draw pile on discard pile
-    ModifierCard card = drawPile.pop();
+    ModifierCard card = _drawPile.pop();
     if (card.type == CardType.multiply) {
-      needsShuffle = true;
+      _needsShuffle = true;
     }
 
     if (card.type == CardType.curse) {
-      curses.value--;
+      _curses.value--;
     }
     if (card.type == CardType.bless) {
-      blesses.value--;
+      _blesses.value--;
     }
     if (card.type == CardType.enfeeble) {
-      enfeebles.value--;
+      _enfeebles.value--;
     }
 
-    discardPile.push(card);
-    cardCount.value = drawPile.size();
+    _discardPile.push(card);
+    _cardCount.value = _drawPile.size();
   }
 
   @override
   String toString() {
     return '{'
         //'"cardCount": ${cardCount.value}, '
-        '"blesses": ${blesses.value}, '
-        '"curses": ${curses.value}, '
-        '"enfeebles": ${enfeebles.value}, '
+        '"blesses": ${_blesses.value}, '
+        '"curses": ${_curses.value}, '
+        '"enfeebles": ${_enfeebles.value}, '
         // '"needsShuffle": ${needsShuffle}, '
-        '"addedMinusOnes": ${addedMinusOnes.value.toString()}, '
-        '"badOmen": ${badOmen.value.toString()}, '
-        '"drawPile": ${drawPile.toString()}, '
-        '"discardPile": ${discardPile.toString()} '
+        '"addedMinusOnes": ${_addedMinusOnes.value.toString()}, '
+        '"badOmen": ${_badOmen.value.toString()}, '
+        '"drawPile": ${_drawPile.toString()}, '
+        '"discardPile": ${_discardPile.toString()} '
         '}';
   }
 }

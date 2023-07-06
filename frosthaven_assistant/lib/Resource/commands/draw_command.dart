@@ -10,9 +10,9 @@ class DrawCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.drawAbilityCards();
-    GameMethods.sortByInitiative();
-    GameMethods.setRoundState(RoundState.playTurns);
+    GameMethods.drawAbilityCards(stateAccess);
+    GameMethods.sortByInitiative(stateAccess);
+    GameMethods.setRoundState(stateAccess, RoundState.playTurns);
     if (_gameState.currentList.isNotEmpty) {
       _gameState.currentList[0].setTurnState(stateAccess, TurnsState.current);
     }

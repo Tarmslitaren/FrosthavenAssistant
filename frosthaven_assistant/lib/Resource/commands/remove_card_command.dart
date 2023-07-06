@@ -27,8 +27,8 @@ class RemoveCardCommand extends Command {
             break;
           }
         }
-        deck.shuffle();
-        deck.draw();
+        deck.shuffle(stateAccess);
+        deck.draw(stateAccess);
         break;
       }
     }

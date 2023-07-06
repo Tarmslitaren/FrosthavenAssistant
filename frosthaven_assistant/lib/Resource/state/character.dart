@@ -6,7 +6,7 @@ class Character extends ListItemData {
   }
   late final CharacterState characterState;
   late final CharacterClass characterClass;
-  void nextRound() {
+  void nextRound(_StateModifier _) {
     if (characterClass.name != "Objective" && characterClass.name != "Escort") {
       characterState._initiative.value = 0;
     }

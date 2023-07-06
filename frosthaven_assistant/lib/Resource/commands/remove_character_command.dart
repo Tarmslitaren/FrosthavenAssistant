@@ -9,7 +9,7 @@ class RemoveCharacterCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.removeCharacters(names);
+    GameMethods.removeCharacters(stateAccess, names);
   }
 
   @override

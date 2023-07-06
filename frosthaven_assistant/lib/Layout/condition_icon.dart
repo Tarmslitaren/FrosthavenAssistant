@@ -127,8 +127,7 @@ class ConditionIconState extends State<ConditionIcon> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = widget.scale; // getScaleByReference(context);
-    // lastCommandIndex = gameState.commandIndex.value;
+    double scale = widget.scale;
 
     return ValueListenableBuilder<bool>(
         valueListenable: animate,

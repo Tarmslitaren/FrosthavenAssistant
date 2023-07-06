@@ -9,12 +9,12 @@ class AddMonsterCommand extends Command {
   late Monster monster;
 
   AddMonsterCommand(this._name, this._level, this._isAlly) {
-    monster = GameMethods.createMonster(_name, _level, _isAlly)!;
+    monster = GameMethods.createMonster(stateAccess, _name, _level, _isAlly)!;
   }
 
   @override
   void execute() {
-    GameMethods.addToMainList(null, monster);
+    GameMethods.addToMainList(stateAccess, null, monster);
 
     _gameState.updateList.value++;
   }

@@ -9,7 +9,7 @@ class ReorderListCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.reorderMainList(newIndex, oldIndex);
+    GameMethods.reorderMainList(stateAccess, newIndex, oldIndex);
   }
 
   @override

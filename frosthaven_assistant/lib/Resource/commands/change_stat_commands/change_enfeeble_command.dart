@@ -21,7 +21,7 @@ class ChangeEnfeebleCommand extends ChangeStatCommand {
         }
       }
     }
-    deck!.enfeebles.value += change;
+    deck!.setEnfeeble(stateAccess, deck!.enfeebles.value + change);
   }
 
   @override

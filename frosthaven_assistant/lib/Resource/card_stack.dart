@@ -1,5 +1,7 @@
 import 'dart:math';
 
+//todo: make whole thing safe
+
 class CardStack<E> {
   final _list = <E>[];
 

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands/set_scenario_command.dart';
@@ -53,8 +54,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       campaign = "Jaws of the Lion";
     }
 
-
-    GameMethods.setCampaign(campaign);
+    if(_gameState.currentCampaign.value != campaign) {
+      _gameState.action(SetCampaignCommand(campaign));
+    }
     _foundScenarios = _gameState
         .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
         .toList();

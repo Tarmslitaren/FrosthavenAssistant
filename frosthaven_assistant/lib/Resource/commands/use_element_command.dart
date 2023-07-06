@@ -11,7 +11,7 @@ class UseElementCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.useElement(element);
+    GameMethods.useElement(stateAccess, element);
   }
 
   @override

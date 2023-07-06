@@ -8,7 +8,7 @@ class AddLootCardCommand extends Command {
 
   @override
   void execute() {
-    getIt<GameState>().lootDeck.addExtraCard(resourceType);
+    getIt<GameState>().lootDeck.addExtraCard(stateAccess, resourceType);
   }
 
   @override

@@ -2,6 +2,7 @@ part of game_state;
 
 class MonsterAbilityState {
   final String name;
+
   final CardStack<MonsterAbilityCardModel> drawPile =
       CardStack<MonsterAbilityCardModel>();
   final CardStack<MonsterAbilityCardModel> discardPile =
@@ -20,7 +21,7 @@ class MonsterAbilityState {
     for (MonsterAbilityDeckModel model in monsters) {
       if (name == model.name) {
         drawPile.init(model.cards);
-        shuffle();
+        _shuffle();
         break;
       }
     }
@@ -28,14 +29,18 @@ class MonsterAbilityState {
     _lastRoundDrawn = 0;
   }
 
-  void shuffle() {
+  void shuffle(_StateModifier _) {
+    _shuffle();
+  }
+
+  void _shuffle() {
     while (discardPile.isNotEmpty) {
       drawPile.push(discardPile.pop());
     }
     drawPile.shuffle();
   }
 
-  void draw() {
+  void draw(_StateModifier _) {
     //put top of draw pile on discard pile
     discardPile.push(drawPile.pop());
     _lastRoundDrawn = getIt<GameState>().round.value;

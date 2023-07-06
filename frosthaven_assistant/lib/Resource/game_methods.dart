@@ -3,7 +3,7 @@ part of game_state;
 GameState _gameState = getIt<GameState>();
 
 class GameMethods {
-  static void updateElements() {
+  static void updateElements(_StateModifier _) {
     for (var key in _gameState.elementState.keys) {
       if (_gameState.elementState[key] == ElementState.full) {
         _gameState._elementState[key] = ElementState.half;
@@ -58,15 +58,6 @@ class GameMethods {
     return (totalLevels / nrOfCharacters / 2.0).ceil();
   }
 
-  static void addAbilityDeck(Monster monster) {
-    for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
-      if (deck.name == monster.type.deck) {
-        return;
-      }
-    }
-    _gameState._currentAbilityDecks.add(MonsterAbilityState(monster.type.deck));
-  }
-
   static bool canDraw() {
     if (_gameState.currentList.isEmpty) {
       return false;
@@ -86,14 +77,14 @@ class GameMethods {
     return true;
   }
 
-  static void drawAbilityCardFromInactiveDeck() {
+  static void drawAbilityCardFromInactiveDeck(_StateModifier stateModifier) {
     for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
       for (var item in _gameState.currentList) {
         if (item is Monster) {
           if (item.type.deck == deck.name) {
             if (item.monsterInstances.isNotEmpty || item.isActive) {
               if (deck.lastRoundDrawn < _gameState.round.value) {
-                deck.draw();
+                deck.draw(stateModifier);
                 break;
               }
             }
@@ -103,13 +94,13 @@ class GameMethods {
     }
   }
 
-  static void drawAbilityCards() {
+  static void drawAbilityCards(_StateModifier stateModifier) {
     for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
       for (var item in _gameState.currentList) {
         if (item is Monster) {
           if (item.type.deck == deck.name) {
             if (item.monsterInstances.isNotEmpty || item.isActive) {
-              deck.draw();
+              deck.draw(stateModifier);
               //only draw once from each deck
               break;
             }
@@ -128,7 +119,7 @@ class GameMethods {
     return null;
   }
 
-  static void sortCharactersFirst() {
+  static void sortCharactersFirst(_StateModifier _) {
     _gameState._currentList.sort((a, b) {
       //dead characters dead last
       if (a is Character) {
@@ -211,7 +202,7 @@ class GameMethods {
     return 0;
   }
 
-  static void sortItemToPlace(String id, int initiative) {
+  static void sortItemToPlace(_StateModifier _, String id, int initiative) {
     var newList = _gameState.currentList.toList();
     ListItemData? item;
     int currentTurnItemIndex = 0;
@@ -251,7 +242,7 @@ class GameMethods {
     _gameState._currentList = newList;
   }
 
-  static void sortByInitiative() {
+  static void sortByInitiative(_StateModifier _) {
     _gameState._currentList.sort((a, b) {
       //dead characters dead last
       if (a is Character) {
@@ -313,7 +304,7 @@ class GameMethods {
     });
   }
 
-  static void sortMonsterInstances(List<MonsterInstance> instances) {
+  static void sortMonsterInstances(_StateModifier _, List<MonsterInstance> instances) {
     instances.sort((a, b) {
       if (a.type == MonsterType.elite && b.type != MonsterType.elite) {
         return -1;
@@ -360,18 +351,18 @@ class GameMethods {
     return monsters;
   }
 
-  static void setRoundState(RoundState state) {
+  static void setRoundState(_StateModifier _, RoundState state) {
     _gameState._roundState.value = state;
   }
 
-  static void setLevel(int level) {
+  static void setLevel(_StateModifier _, int level) {
     _gameState._level.value = level;
   }
 
-  static void setScenario(String scenario, bool section) {
+  static void setScenario(_StateModifier _, String scenario, bool section) {
     if (!section) {
       //first reset state
-      GameMethods.setRound(1);
+      GameMethods.setRound(_, 1);
       _gameState.showAllyDeck.value = false;
       _gameState._currentAbilityDecks.clear();
       _gameState._scenarioSpecialRules.clear();
@@ -403,8 +394,8 @@ class GameMethods {
         }
       }
 
-      _gameState.modifierDeck.initDeck("");
-      _gameState.modifierDeckAllies.initDeck("allies");
+      _gameState.modifierDeck._initDeck("");
+      _gameState.modifierDeckAllies._initDeck("allies");
       _gameState._currentList = newList;
 
       //loot deck init
@@ -429,7 +420,7 @@ class GameMethods {
         }
       }
 
-      GameMethods.clearTurnState(true);
+      GameMethods.clearTurnState(_, true);
       _gameState._toastMessage.value = "";
     }
 
@@ -470,11 +461,11 @@ class GameMethods {
 
     //handle special rules
     for (String monster in monsters) {
-      GameMethods.addMonster(monster, specialRules);
+      GameMethods.addMonster(_, monster, specialRules);
     }
 
     if (!section) {
-      GameMethods.shuffleDecks();
+      GameMethods.shuffleDecks(_);
     }
 
     //hack for banner spear solo special rule
@@ -495,7 +486,7 @@ class GameMethods {
       if (item.type == "Objective") {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {
-          Character objective = GameMethods.createCharacter(
+          Character objective = GameMethods.createCharacter(_,
               "Objective", item.name, _gameState.level.value + 1)!;
           objective.characterState._maxHealth.value =
               StatCalculator.calculateFormula(item.health.toString())!;
@@ -519,7 +510,7 @@ class GameMethods {
       if (item.type == "Escort") {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {
-          Character objective = GameMethods.createCharacter(
+          Character objective = GameMethods.createCharacter(_,
               "Escort", item.name, _gameState.level.value + 1)!;
           objective.characterState._maxHealth.value =
               StatCalculator.calculateFormula(item.health.toString())!;
@@ -558,7 +549,7 @@ class GameMethods {
       }
 
       if (item.type == "ResetRound") {
-        GameMethods.setRound(1);
+        GameMethods.setRound(_, 1);
       }
     }
 
@@ -617,16 +608,16 @@ class GameMethods {
       }
     }
 
-    initMessage = GameMethods.autoAddStandees(roomMonsterData, initMessage);
+    initMessage = GameMethods.autoAddStandees(_, roomMonsterData, initMessage);
 
     if (!section) {
       _gameState._scenarioSpecialRules = specialRules;
 
       //todo: create a game state set scenario method to handle all these
-      GameMethods.updateElements();
-      GameMethods.updateElements(); //twice to make sure they are inert.
-      GameMethods.setRoundState(RoundState.chooseInitiative);
-      GameMethods.sortCharactersFirst();
+      GameMethods.updateElements(_);
+      GameMethods.updateElements(_); //twice to make sure they are inert.
+      GameMethods.setRoundState(_, RoundState.chooseInitiative);
+      GameMethods.sortCharactersFirst(_);
       _gameState._scenario.value = scenario;
       _gameState._scenarioSectionsAdded = [];
     } else {
@@ -678,16 +669,16 @@ class GameMethods {
   }
 
   static void returnLootCard(bool top) {
-    var card = _gameState._lootDeck.discardPile.pop();
+    var card = _gameState._lootDeck._discardPile.pop();
       card.owner = "";
       if(top) {
-        _gameState._lootDeck.drawPile.push(card);
+        _gameState._lootDeck._drawPile.push(card);
       } else {
-        _gameState._lootDeck.drawPile.getList().insert(0, card);
+        _gameState._lootDeck._drawPile.getList().insert(0, card);
     }
   }
 
-  static void removeCharacters(List<Character> characters) {
+  static void removeCharacters(_StateModifier _, List<Character> characters) {
     List<ListItemData> newList = [];
     for (var item in _gameState.currentList) {
       if (item is Character) {
@@ -707,11 +698,11 @@ class GameMethods {
       }
     }
     _gameState._currentList = newList;
-    GameMethods.updateForSpecialRules();
+    GameMethods.updateForSpecialRules(_);
     _gameState.updateList.value++;
   }
 
-  static void removeMonsters(List<Monster> items) {
+  static void removeMonsters(_StateModifier _, List<Monster> items) {
     List<String> deckIds = [];
     List<ListItemData> newList = [];
     for (var item in _gameState.currentList) {
@@ -756,12 +747,12 @@ class GameMethods {
     _gameState.updateList.value++;
   }
 
-  static void reorderMainList(int newIndex, int oldIndex) {
+  static void reorderMainList(_StateModifier _, int newIndex, int oldIndex) {
     _gameState._currentList
         .insert(newIndex, _gameState._currentList.removeAt(oldIndex));
   }
 
-  static void addToMainList(int? index, ListItemData item) {
+  static void addToMainList(_StateModifier _, int? index, ListItemData item) {
     List<ListItemData> newList = [];
     for (var item in _gameState.currentList) {
       newList.add(item);
@@ -774,26 +765,28 @@ class GameMethods {
     _gameState._currentList = newList;
   }
 
+  //note: while this changes the game state, it is a state used also by non game related instances.
+  //todo: this should potentially NOT be a state variable?
   static void setToastMessage(String message) {
     _gameState._toastMessage.value = message;
   }
 
-  static void setSolo(bool solo) {
+  static void setSolo(_StateModifier _, bool solo) {
     _gameState._solo.value = solo;
   }
 
-  static void shuffleDecksIfNeeded() {
+  static void shuffleDecksIfNeeded(_StateModifier _) {
     for (var deck in _gameState.currentAbilityDecks) {
       if (deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle ||
           deck.drawPile.isEmpty == true) {
-        deck.shuffle();
+        deck._shuffle();
       }
     }
   }
 
-  static void shuffleDecks() {
+  static void shuffleDecks(_StateModifier _) {
     for (var deck in _gameState.currentAbilityDecks) {
-      deck.shuffle();
+      deck._shuffle();
     }
   }
 
@@ -840,7 +833,7 @@ class GameMethods {
     return available[Random().nextInt(available.length)];
   }
 
-  static void executeAddStandee(final int nr, final SummonData? summon,
+  static void executeAddStandee(_StateModifier _, final int nr, final SummonData? summon,
       final MonsterType type, final String ownerId, final bool addAsSummon) {
     MonsterInstance instance;
     Monster? monster;
@@ -905,15 +898,15 @@ class GameMethods {
 
     monsterList!.add(instance);
     if (monster != null) {
-      GameMethods.sortMonsterInstances(monsterList);
+      GameMethods.sortMonsterInstances(_, monsterList);
     }
     if (monsterList.length == 1 && monster != null) {
       //first added
       if (getIt<GameState>().roundState.value == RoundState.chooseInitiative) {
-        GameMethods.sortCharactersFirst();
+        GameMethods.sortCharactersFirst(_);
       } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
-        GameMethods.drawAbilityCardFromInactiveDeck();
-        GameMethods.sortItemToPlace(
+        GameMethods.drawAbilityCardFromInactiveDeck(_);
+        GameMethods.sortItemToPlace(_,
             monster.id,
             GameMethods.getInitiative(
                 monster)); //need to only sort this one item to place
@@ -945,7 +938,7 @@ class GameMethods {
     }
   }
 
-  static void addMonster(String monster, List<SpecialRule> specialRules) {
+  static void addMonster(_StateModifier _, String monster, List<SpecialRule> specialRules) {
     int levelAdjust = 0;
     Set<String> alliedMonsters = {};
     for (var rule in specialRules) {
@@ -974,19 +967,19 @@ class GameMethods {
       if (alliedMonsters.contains(monster)) {
         isAlly = true;
       }
-      _gameState._currentList.add(GameMethods.createMonster(monster,
+      _gameState._currentList.add(GameMethods.createMonster(_, monster,
           (_gameState.level.value + levelAdjust).clamp(0, 7), isAlly)!);
     }
   }
 
-  static String autoAddStandees(
+  static String autoAddStandees(_StateModifier stateModifier,
       List<RoomMonsterData> roomMonsterData, String initMessage) {
     //handle room data
     int characterIndex =
         GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
     for (int i = 0; i < roomMonsterData.length; i++) {
       var roomMonsters = roomMonsterData[i];
-      addMonster(roomMonsters.name, _gameState._scenarioSpecialRules);
+      addMonster(stateModifier, roomMonsters.name, _gameState._scenarioSpecialRules);
     }
     if (getIt<Settings>().noStandees.value != true &&
         getIt<Settings>().autoAddStandees.value != false) {
@@ -1013,7 +1006,7 @@ class GameMethods {
             int randomNr = GameMethods.getRandomStandee(data);
             if (randomNr != 0) {
               elites.add(randomNr);
-              GameMethods.executeAddStandee(
+              GameMethods.executeAddStandee(stateModifier,
                   randomNr, null, MonsterType.elite, data.id, false);
             }
           }
@@ -1022,7 +1015,7 @@ class GameMethods {
             int randomNr = GameMethods.getRandomStandee(data);
             if (randomNr != 0) {
               normals.add(randomNr);
-              GameMethods.executeAddStandee(
+              GameMethods.executeAddStandee(stateModifier,
                   randomNr,
                   null,
                   isBoss ? MonsterType.boss : MonsterType.normal,
@@ -1127,7 +1120,7 @@ class GameMethods {
     return "";
   }
 
-  static Character? createCharacter(String name, String? display, int level) {
+  static Character? createCharacter(_StateModifier _, String name, String? display, int level) {
     Character? character;
     List<CharacterClass> characters = [];
     for (String key in _gameState.modelData.value.keys) {
@@ -1166,7 +1159,7 @@ class GameMethods {
     return character;
   }
 
-  static Monster? createMonster(String name, int? level, bool isAlly) {
+  static Monster? createMonster(_StateModifier _, String name, int? level, bool isAlly) {
     Map<String, MonsterModel> monsters = {};
     for (String key in _gameState.modelData.value.keys) {
       monsters.addAll(_gameState.modelData.value[key]!.monsters);
@@ -1176,7 +1169,7 @@ class GameMethods {
     return monster;
   }
 
-  static void showAllyDeck() {
+  static void showAllyDeck(_StateModifier _) {
     _gameState.showAllyDeck.value = true;
   }
 
@@ -1197,7 +1190,7 @@ class GameMethods {
     return false;
   }
 
-  static void clearTurnStateConditions(
+  static void clearTurnStateConditions(_StateModifier _,
       FigureState figure, bool clearLastTurnToo) {
     if (!clearLastTurnToo) {
       figure._conditionsAddedPreviousTurn.clear();
@@ -1223,17 +1216,17 @@ class GameMethods {
     }
   }
 
-  static void clearTurnState(bool clearLastTurnToo) {
+  static void clearTurnState(_StateModifier stateModifier, bool clearLastTurnToo) {
     for (var item in _gameState._currentList) {
       item._turnState = TurnsState.notDone;
       if (item is Character) {
-        clearTurnStateConditions(item.characterState, clearLastTurnToo);
+        clearTurnStateConditions(stateModifier, item.characterState, clearLastTurnToo);
         for (var instance in item.characterState._summonList) {
-          clearTurnStateConditions(instance, clearLastTurnToo);
+          clearTurnStateConditions(stateModifier, instance, clearLastTurnToo);
         }
       } else if (item is Monster) {
         for (var instance in item._monsterInstances) {
-          clearTurnStateConditions(instance, clearLastTurnToo);
+          clearTurnStateConditions(stateModifier, instance, clearLastTurnToo);
         }
       }
     }
@@ -1255,7 +1248,7 @@ class GameMethods {
     return false;
   }
 
-  static void removeExpiringConditions(FigureState figure) {
+  static void removeExpiringConditions(_StateModifier _, FigureState figure) {
     if (getIt<Settings>().expireConditions.value == true) {
       bool chillRemoved = false;
       for (int i = figure.conditions.value.length - 1; i >= 0; i--) {
@@ -1276,20 +1269,20 @@ class GameMethods {
     }
   }
 
-  static void removeExpiringConditionsFromListItem(ListItemData item) {
+  static void removeExpiringConditionsFromListItem(_StateModifier _, ListItemData item) {
     if (item is Character) {
-      removeExpiringConditions(item.characterState);
+      removeExpiringConditions(_, item.characterState);
       for (var summon in item.characterState._summonList) {
-        removeExpiringConditions(summon);
+        removeExpiringConditions(_, summon);
       }
     } else if (item is Monster) {
       for (var instance in item._monsterInstances) {
-        removeExpiringConditions(instance);
+        removeExpiringConditions(_, instance);
       }
     }
   }
 
-  static void reapplyConditions(FigureState figure) {
+  static void reapplyConditions(_StateModifier _, FigureState figure) {
     for (var condition in figure.conditionsAddedPreviousTurn) {
       if (!figure.conditions.value.contains(condition) ||
           condition == Condition.chill) {
@@ -1302,31 +1295,31 @@ class GameMethods {
     }
   }
 
-  static void reapplyConditionsFromListItem(ListItemData item) {
+  static void reapplyConditionsFromListItem(_StateModifier _, ListItemData item) {
     if (item is Character) {
-      reapplyConditions(item.characterState);
+      reapplyConditions(_, item.characterState);
       for (var summon in item.characterState.summonList) {
-        reapplyConditions(summon);
+        reapplyConditions(_, summon);
       }
     } else if (item is Monster) {
       for (var instance in item._monsterInstances) {
-        reapplyConditions(instance);
+        reapplyConditions(_, instance);
       }
     }
   }
 
-  static void setTurnDone(int index) {
+  static void setTurnDone(_StateModifier _, int index) {
     for (int i = 0; i < index; i++) {
       if (_gameState.currentList[i].turnState != TurnsState.done) {
         _gameState.currentList[i]._turnState = TurnsState.done;
-        removeExpiringConditionsFromListItem(_gameState.currentList[i]);
+        removeExpiringConditionsFromListItem(_, _gameState.currentList[i]);
       }
     }
     //if on index is NOT current then set to current else set to done
     int newIndex = index + 1;
     if (_gameState.currentList[index].turnState == TurnsState.current) {
       _gameState.currentList[index]._turnState = TurnsState.done;
-      removeExpiringConditionsFromListItem(_gameState.currentList[index]);
+      removeExpiringConditionsFromListItem(_, _gameState.currentList[index]);
       //remove expiring conditions
     } else {
       newIndex = index;
@@ -1338,7 +1331,7 @@ class GameMethods {
       if (data is Monster) {
         if (data.monsterInstances.isNotEmpty || data.isActive) {
           if (data.turnState == TurnsState.done) {
-            reapplyConditionsFromListItem(data);
+            reapplyConditionsFromListItem(_, data);
           }
           data._turnState = TurnsState.current;
           break;
@@ -1346,7 +1339,7 @@ class GameMethods {
       } else if (data is Character) {
         if (data.characterState.health.value > 0) {
           if (data.turnState == TurnsState.done) {
-            reapplyConditionsFromListItem(data);
+            reapplyConditionsFromListItem(_, data);
           }
           data._turnState = TurnsState.current;
           break;
@@ -1355,7 +1348,7 @@ class GameMethods {
     }
     for (int i = newIndex + 1; i < _gameState.currentList.length; i++) {
       if (_gameState.currentList[i].turnState == TurnsState.done) {
-        reapplyConditionsFromListItem(_gameState.currentList[i]);
+        reapplyConditionsFromListItem(_, _gameState.currentList[i]);
       }
       _gameState.currentList[i]._turnState = TurnsState.notDone;
     }
@@ -1389,7 +1382,7 @@ class GameMethods {
     return false;
   }
 
-  static void updateForSpecialRules() {
+  static void updateForSpecialRules(_StateModifier _) {
     List<SpecialRule>? rules = _gameState
         .modelData
         .value[_gameState.currentCampaign.value]
@@ -1418,7 +1411,7 @@ class GameMethods {
               int newLevel = (monster.level.value + rule.level).clamp(0, 7);
               monster._level.value = newLevel;
               for (MonsterInstance instance in monster._monsterInstances) {
-                instance.setLevel(monster);
+                instance._setLevel(monster);
               }
             }
           }
@@ -1440,30 +1433,30 @@ class GameMethods {
     return null;
   }
 
-  static void setRound(int round) {
+  static void setRound(_StateModifier _, int round) {
     _gameState._round.value = round;
   }
 
-  static void setCampaign(String campaign) {
+  static void setCampaign(_StateModifier _, String campaign) {
     _gameState._currentCampaign.value = campaign;
   }
 
-  static void imbueElement(Elements element, bool half) {
+  static void imbueElement(_StateModifier _, Elements element, bool half) {
     _gameState._elementState[element] = ElementState.full;
     if (half) {
       _gameState._elementState[element] = ElementState.half;
     }
   }
 
-  static void useElement(Elements element) {
+  static void useElement(_StateModifier _, Elements element) {
     _gameState._elementState[element] = ElementState.inert;
   }
 
-  static void unlockClass(String name) {
+  static void unlockClass(_StateModifier _, String name) {
     _gameState._unlockedClasses.add(name);
   }
 
-  static void clearUnlockedClasses() {
+  static void clearUnlockedClasses(_StateModifier _) {
     getIt<GameState>()._unlockedClasses = {};
   }
 }

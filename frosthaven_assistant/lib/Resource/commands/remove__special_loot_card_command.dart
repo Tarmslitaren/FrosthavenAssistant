@@ -10,10 +10,10 @@ class RemoveSpecialLootCardCommand extends Command {
   void execute() {
     GameState gameState = getIt<GameState>();
     if (nr == 1418) {
-      gameState.lootDeck.removeSpecial1418();
+      gameState.lootDeck.removeSpecial1418(stateAccess);
     }
     if (nr == 1419) {
-      gameState.lootDeck.removeSpecial1419();
+      gameState.lootDeck.removeSpecial1419(stateAccess);
     }
   }
 

@@ -9,9 +9,9 @@ class EnfeeblingHexCommand extends Command {
   @override
   void execute() {
     if (allies) {
-      getIt<GameState>().modifierDeckAllies.addMinusOne();
+      getIt<GameState>().modifierDeckAllies.addMinusOne(stateAccess);
     } else {
-      getIt<GameState>().modifierDeck.addMinusOne();
+      getIt<GameState>().modifierDeck.addMinusOne(stateAccess);
     }
   }
 

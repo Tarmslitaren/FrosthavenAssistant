@@ -1,5 +1,4 @@
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../state/game_state.dart';
 
 class DrawModifierCardCommand extends Command {
@@ -11,9 +10,9 @@ class DrawModifierCardCommand extends Command {
   @override
   void execute() {
     if (name == "allies") {
-      _gameState.modifierDeckAllies.draw();
+      _gameState.modifierDeckAllies.draw(stateAccess);
     } else {
-      _gameState.modifierDeck.draw();
+      _gameState.modifierDeck.draw(stateAccess);
     }
   }
 

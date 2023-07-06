@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/commands/clear_unlocked_classes_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/track_standees_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:network_info_plus/network_info_plus.dart';
@@ -350,7 +351,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       const Text("Clear unlocked characters"),
                                   onTap: () {
                                     setState(() {
-                                      GameMethods.clearUnlockedClasses();
+                                      getIt<GameState>().action(ClearUnlockedClassesCommand());
                                     });
                                   }),
                               const Text("Connect devices on local wifi:"),

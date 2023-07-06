@@ -1,5 +1,3 @@
-import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../state/game_state.dart';
 
 class ShowAllyDeckCommand extends Command {
@@ -8,7 +6,7 @@ class ShowAllyDeckCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.showAllyDeck();
+    GameMethods.showAllyDeck(stateAccess);
   }
 
   @override

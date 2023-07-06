@@ -22,10 +22,10 @@ class ActivateMonsterTypeCommand extends Command {
     }
     if (activate) {
       if (getIt<GameState>().roundState.value == RoundState.chooseInitiative) {
-        GameMethods.sortCharactersFirst();
+        GameMethods.sortCharactersFirst(stateAccess);
       } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
-        GameMethods.drawAbilityCardFromInactiveDeck();
-        GameMethods.sortItemToPlace(name, GameMethods.getInitiative(monster!));
+        GameMethods.drawAbilityCardFromInactiveDeck(stateAccess);
+        GameMethods.sortItemToPlace(stateAccess, name, GameMethods.getInitiative(monster!));
       }
     }
     if (getIt<GameState>().roundState.value == RoundState.playTurns) {

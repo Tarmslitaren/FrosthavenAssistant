@@ -29,7 +29,7 @@ abstract class ChangeStatCommand extends Command {
             if (item.monsterInstances.isEmpty) {
               if (getIt<GameState>().roundState.value ==
                   RoundState.chooseInitiative) {
-                GameMethods.sortCharactersFirst();
+                GameMethods.sortCharactersFirst(stateAccess);
               } else if (getIt<GameState>().roundState.value ==
                   RoundState.playTurns) {
                 //GameMethods.sortItemToPlace(item.id, 99); //TODO: don't? leave in place until end of round?

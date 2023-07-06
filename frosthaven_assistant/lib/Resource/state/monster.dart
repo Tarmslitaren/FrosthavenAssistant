@@ -15,7 +15,7 @@ class Monster extends ListItemData {
       }
     }
 
-    GameMethods.addAbilityDeck(this);
+    _addAbilityDeck();
   }
   late final MonsterModel type;
 
@@ -34,6 +34,16 @@ class Monster extends ListItemData {
   bool get isActive => _isActive;
   setActive(_StateModifier stateModifier, bool value) {_isActive = value;}
   bool _isActive = false;
+
+  void _addAbilityDeck() {
+    for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
+      if (deck.name == type.deck) {
+        return;
+      }
+    }
+    _gameState._currentAbilityDecks.add(MonsterAbilityState(type.deck));
+  }
+
 
   bool hasElites() {
     for (var instance in _monsterInstances) {
@@ -54,10 +64,10 @@ class Monster extends ListItemData {
     return false;
   }
 
-  void setLevel(int level) {
+  void setLevel(_StateModifier _, int level) {
     _level.value = level;
     for (var item in _monsterInstances) {
-      item.setLevel(this);
+      item._setLevel(this);
     }
   }
 

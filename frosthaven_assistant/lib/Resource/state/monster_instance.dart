@@ -2,7 +2,7 @@ part of game_state;
 
 class MonsterInstance extends FigureState {
   MonsterInstance(this.standeeNr, this._type, bool summoned, Monster monster) {
-    setLevel(monster);
+    _setLevel(monster);
     gfx = monster.type.gfx;
     name = monster.type.name;
     move = 0; //only used for summons
@@ -44,7 +44,8 @@ class MonsterInstance extends FigureState {
   late int _roundSummoned;
 
 
-  void setLevel(Monster monster) {
+
+  void _setLevel(Monster monster) {
     dynamic newHealthValue =
         10; //need to put something outer than 0 or the standee will die immediately causing glitch
     if (type == MonsterType.boss) {

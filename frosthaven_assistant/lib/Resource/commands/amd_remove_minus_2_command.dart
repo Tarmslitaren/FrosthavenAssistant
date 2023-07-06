@@ -15,9 +15,9 @@ class AMDRemoveMinus2Command extends Command {
     }
     remove = deck.hasMinus2();
     if (remove) {
-      deck.removeMinusTwo();
+      deck.removeMinusTwo(stateAccess);
     } else {
-      deck.addMinusTwo();
+      deck.addMinusTwo(stateAccess);
     }
   }
 

@@ -1,5 +1,4 @@
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../state/game_state.dart';
 
 class BadOmenCommand extends Command {
@@ -10,9 +9,9 @@ class BadOmenCommand extends Command {
   void execute() {
     GameState gameState = getIt<GameState>();
     if (allies) {
-      gameState.modifierDeckAllies.badOmen.value += 6;
+      gameState.modifierDeckAllies.setBadOmen(stateAccess, gameState.modifierDeckAllies.badOmen.value + 6);
     } else {
-      gameState.modifierDeck.badOmen.value += 6;
+      gameState.modifierDeck.setBadOmen(stateAccess, gameState.modifierDeck.badOmen.value + 6);
     }
   }
 

@@ -9,9 +9,9 @@ class AMDRemoveMinus1Command extends Command {
   @override
   void execute() {
     if (allies) {
-      getIt<GameState>().modifierDeckAllies.removeMinusOne();
+      getIt<GameState>().modifierDeckAllies.removeMinusOne(stateAccess);
     } else {
-      getIt<GameState>().modifierDeck.removeMinusOne();
+      getIt<GameState>().modifierDeck.removeMinusOne(stateAccess);
     }
   }
 

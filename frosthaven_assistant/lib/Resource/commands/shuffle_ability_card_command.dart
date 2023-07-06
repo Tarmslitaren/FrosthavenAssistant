@@ -9,7 +9,7 @@ class ShuffleAbilityCardCommand extends Command {
     Monster monster = GameMethods.getCurrentMonsters()
         .firstWhere((element) => element.id == ownerId);
     MonsterAbilityState deck = GameMethods.getDeck(monster.type.deck)!;
-    deck.shuffle();
+    deck.shuffle(stateAccess);
   }
 
   @override
