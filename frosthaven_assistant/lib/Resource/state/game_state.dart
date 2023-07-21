@@ -203,7 +203,7 @@ class GameState extends ActionHandler {
   BuiltSet<String> get unlockedClasses => BuiltSet.of(_unlockedClasses);
   Set<String> _unlockedClasses = {};
 
-  final showAllyDeck = ValueNotifier<bool>(false); //TODO?
+  final showAllyDeck = ValueNotifier<bool>(false); //TODO? make command etc
 
 
   @override

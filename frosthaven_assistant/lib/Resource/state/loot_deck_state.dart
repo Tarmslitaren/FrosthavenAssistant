@@ -207,8 +207,8 @@ class LootDeck {
       lootCard.owner = owner;
       newDiscardList.add(lootCard);
     }
-    _drawPile.getList().clear();
-    _discardPile.getList().clear();
+    _drawPile.clear();
+    _discardPile.clear();
     _drawPile.setList(newDrawList);
     _discardPile.setList(newDiscardList);
     _cardCount.value = _drawPile.size();
@@ -324,7 +324,6 @@ class LootDeck {
           gfx: gfx));
       startId++;
     }
-    //list.shuffle();
   }
 
   void _initPools() {
@@ -353,7 +352,6 @@ class LootDeck {
     id++;
     _addOtherType(id, _coinPool, "coin 3");
     id++;
-    //coinPool.shuffle();
 
     _initMaterialPool(id, _lumberPool, "lumber");
     id += 8;
@@ -377,7 +375,7 @@ class LootDeck {
   void addSpecial1418(_StateModifier _) {
     if (_hasCard1418 != true) {
       _hasCard1418 = true;
-      _drawPile.getList().add(LootCard(
+      _drawPile.add(LootCard(
           id: 1418,
           lootType: LootType.other,
           baseValue: LootBaseValue.one,
@@ -391,7 +389,7 @@ class LootDeck {
   void addSpecial1419(_StateModifier _) {
     if (_hasCard1419 != true) {
       _hasCard1419 = true;
-      _drawPile.getList().add(LootCard(
+      _drawPile.add(LootCard(
           id: 1419,
           lootType: LootType.other,
           baseValue: LootBaseValue.one,
@@ -403,15 +401,15 @@ class LootDeck {
 
   void removeSpecial1418(_StateModifier _) {
     _hasCard1418 = false;
-    _drawPile.getList().removeWhere((element) => element.id == 1418);
-    _discardPile.getList().removeWhere((element) => element.id == 1418);
+    _drawPile.removeWhere((element) => element.id == 1418);
+    _discardPile.removeWhere((element) => element.id == 1418);
     _cardCount.value = _drawPile.size();
   }
 
   void removeSpecial1419(_StateModifier _) {
     _hasCard1419 = false;
-    _drawPile.getList().removeWhere((element) => element.id == 1419);
-    _discardPile.getList().removeWhere((element) => element.id == 1419);
+    _drawPile.removeWhere((element) => element.id == 1419);
+    _discardPile.removeWhere((element) => element.id == 1419);
     _cardCount.value = _drawPile.size();
   }
 
@@ -432,63 +430,63 @@ class LootDeck {
     if (identifier == "hide") {
       var pool = _getAvailableCards(_hidePool);
       if (pool.isNotEmpty) {
-        _drawPile.getList().add(pool[0]);
+        _drawPile.add(pool[0]);
         _addedCards[0]++;
       }
     }
     if (identifier == "lumber") {
       var pool = _getAvailableCards(_lumberPool);
       if (pool.isNotEmpty) {
-        _drawPile.getList().add(pool[0]);
+        _drawPile.add(pool[0]);
         _addedCards[1]++;
       }
     }
     if (identifier == "metal") {
       var pool = _getAvailableCards(_metalPool);
       if (pool.isNotEmpty) {
-        _drawPile.getList().add(pool[0]);
+        _drawPile.add(pool[0]);
         _addedCards[2]++;
       }
     }
     if (identifier == "arrowvine") {
       var pool = _getAvailableCards(_arrowvinePool);
       if (pool.isNotEmpty) {
-        _drawPile.getList().add(pool[0]);
+        _drawPile.add(pool[0]);
         _addedCards[3]++;
       }
     }
     if (identifier == "axenut") {
       var pool = _getAvailableCards(_axenutPool);
       if (pool.isNotEmpty) {
-        _drawPile.getList().add(pool[0]);
+        _drawPile.add(pool[0]);
         _addedCards[4]++;
       }
     }
     if (identifier == "corpsecap") {
       var pool = _getAvailableCards(_corpsecapPool);
       if (pool.isNotEmpty) {
-        _drawPile.getList().add(pool[0]);
+        _drawPile.add(pool[0]);
         _addedCards[5]++;
       }
     }
     if (identifier == "flamefruit") {
       var pool = _getAvailableCards(_flamefruitPool);
       if (pool.isNotEmpty) {
-        _drawPile.getList().add(pool[0]);
+        _drawPile.add(pool[0]);
         _addedCards[6]++;
       }
     }
     if (identifier == "rockroot") {
       var pool = _getAvailableCards(_rockrootPool);
       if (pool.isNotEmpty) {
-        _drawPile.getList().add(pool[0]);
+        _drawPile.add(pool[0]);
         _addedCards[7]++;
       }
     }
     if (identifier == "snowthistle") {
       var pool = _getAvailableCards(_snowthistlePool);
       if (pool.isNotEmpty) {
-        _drawPile.getList().add(pool[0]);
+        _drawPile.add(pool[0]);
         _addedCards[8]++;
       }
     }

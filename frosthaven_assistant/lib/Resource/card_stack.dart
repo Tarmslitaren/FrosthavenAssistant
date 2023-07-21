@@ -40,8 +40,35 @@ class CardStack<E> {
   }
 
   List<E> getList() {
-    //TODO: try to return a copy for safety?
-    return _list;
+    return _list.toList();
+  }
+
+  void remove(E card) {
+    _list.remove(card);
+  }
+
+  E removeAt(int index) {
+    return _list.removeAt(index);
+  }
+
+  void clear() {
+    _list.clear();
+  }
+
+  void removeWhere(bool Function (E) test) {
+    _list.removeWhere(test);
+  }
+
+  void add(E card) {
+    _list.add(card);
+  }
+
+ // void insert(E card) {
+ //   return _list.insert(card);
+  //}
+
+  void insert(int index, E card) {
+    _list.insert(index, card);
   }
 
   void setList(List<E> list) {

@@ -472,10 +472,9 @@ class GameMethods {
     if (scenario.contains("Banner Spear: Scouting Ambush")) {
       MonsterAbilityState deck = _gameState.currentAbilityDecks
           .firstWhere((element) => element.name.contains("Scout"));
-      List<MonsterAbilityCardModel> list = deck.drawPile.getList();
-      for (int i = 0; i < list.length; i++) {
-        if (list[i].title == "Rancid Arrow") {
-          list.add(list.removeAt(i));
+      for (int i = 0; i < deck.drawPile.getList().length; i++) {
+        if (deck.drawPile.getList()[i].title == "Rancid Arrow") {
+          deck.drawPile.add(deck.drawPile.removeAt(i));
           break;
         }
       }
@@ -674,7 +673,7 @@ class GameMethods {
       if(top) {
         _gameState._lootDeck._drawPile.push(card);
       } else {
-        _gameState._lootDeck._drawPile.getList().insert(0, card);
+        _gameState._lootDeck._drawPile.insert(0, card);
     }
   }
 

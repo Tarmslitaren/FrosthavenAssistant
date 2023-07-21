@@ -13,17 +13,15 @@ class RemoveCardCommand extends Command {
   void execute() {
     for (var deck in _gameState.currentAbilityDecks) {
       if (deck.name == card.deck) {
-        var drawPile = deck.drawPile.getList();
-        var discardPile = deck.discardPile.getList();
-        for (var drawPileCard in drawPile) {
+        for (var drawPileCard in deck.drawPile.getList()) {
           if (drawPileCard.nr == card.nr) {
-            drawPile.remove(card);
+            deck.drawPile.remove(card);
             break;
           }
         }
-        for (var discardPileCard in discardPile) {
+        for (var discardPileCard in deck.discardPile.getList()) {
           if (discardPileCard.nr == card.nr) {
-            discardPile.remove(card);
+            deck.discardPile.remove(card);
             break;
           }
         }

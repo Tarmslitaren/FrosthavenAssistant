@@ -120,7 +120,7 @@ class ModifierDeck {
       suffix = "-$name";
     }
     _addedMinusOnes.value++;
-    _drawPile.getList().add(ModifierCard(CardType.add, "minus1$suffix"));
+    _drawPile.add(ModifierCard(CardType.add, "minus1$suffix"));
     _drawPile.shuffle();
     _cardCount.value++;
   }
@@ -136,7 +136,7 @@ class ModifierDeck {
         .getList()
         .lastWhereOrNull((element) => element.gfx == "minus1$suffix");
     if (card != null) {
-      _drawPile.getList().remove(card);
+      _drawPile.remove(card);
       _drawPile.shuffle();
       _cardCount.value--;
     }
@@ -191,7 +191,7 @@ class ModifierDeck {
         .getList()
         .lastWhereOrNull((element) => element.gfx == "nullAttack$suffix");
     if (card != null) {
-      _drawPile.getList().remove(card);
+      _drawPile.remove(card);
       _drawPile.shuffle();
       _cardCount.value--;
     }
@@ -203,7 +203,6 @@ class ModifierDeck {
       suffix = "-$name";
     }
     _drawPile
-        .getList()
         .add(ModifierCard(CardType.multiply, "nullAttack$suffix"));
     _shuffle();
   }
@@ -218,7 +217,7 @@ class ModifierDeck {
         .getList()
         .lastWhereOrNull((element) => element.gfx == "minus2$suffix");
     if (card != null) {
-      _drawPile.getList().remove(card);
+      _drawPile.remove(card);
       _drawPile.shuffle();
       _cardCount.value--;
     }
@@ -229,7 +228,7 @@ class ModifierDeck {
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    _drawPile.getList().add(ModifierCard(CardType.add, "minus2$suffix"));
+    _drawPile.add(ModifierCard(CardType.add, "minus2$suffix"));
     _shuffle();
   }
 
@@ -255,7 +254,7 @@ class ModifierDeck {
           if (_drawPile.getList().length < 6) {
             position = _drawPile.getList().length;
           }
-          _drawPile.getList().insert(
+          _drawPile.insert(
               _drawPile.getList().length - position, ModifierCard(type, gfx));
         } else {
           _drawPile.push(ModifierCard(type, gfx));
@@ -266,7 +265,7 @@ class ModifierDeck {
       for (int i = 0; i < toRemove; i++) {
         for (int j = _drawPile.getList().length - 1; j >= 0; j--) {
           if (_drawPile.getList()[j].type == type) {
-            _drawPile.getList().removeAt(j);
+            _drawPile.removeAt(j);
             break;
           }
         }

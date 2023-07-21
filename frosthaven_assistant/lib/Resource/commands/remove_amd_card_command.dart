@@ -11,9 +11,9 @@ class RemoveAMDCardCommand extends Command {
   @override
   void execute() {
     if (allyDeck) {
-      _gameState.modifierDeckAllies.discardPile.getList().removeAt(index);
+      _gameState.modifierDeckAllies.discardPile.removeAt(index);
     } else {
-      _gameState.modifierDeck.discardPile.getList().removeAt(index);
+      _gameState.modifierDeck.discardPile.removeAt(index);
     }
   }
 

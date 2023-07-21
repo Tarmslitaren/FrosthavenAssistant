@@ -57,8 +57,8 @@ class GameSaveState {
         newDiscardList.add(ModifierCard(CardType.add, gfx));
       }
     }
-    state._drawPile.getList().clear();
-    state._discardPile.getList().clear();
+    state._drawPile.clear();
+    state._discardPile.clear();
     state._drawPile.setList(newDrawList);
     state._discardPile.setList(newDiscardList);
     state._cardCount.value = state._drawPile.size();
@@ -179,8 +179,8 @@ class GameSaveState {
             state._lastRoundDrawn = item["lastRoundDrawn"];
           }
 
-          state.drawPile.getList().clear();
-          state.discardPile.getList().clear();
+          state.drawPile.clear();
+          state.discardPile.clear();
           state.drawPile.setList(newDrawList);
           state.discardPile.setList(newDiscardList);
           gameState._currentAbilityDecks.add(state);

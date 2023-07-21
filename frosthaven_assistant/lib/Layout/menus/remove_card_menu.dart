@@ -66,7 +66,6 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                 for (var item in _gameState.currentAbilityDecks) {
                   if (item.name == widget.card.deck) {
                     var list = item.drawPile.getList();
-                    //newIndex = list.length-1;
                     for (int i = 0; i < list.length; i++) {
                       if (list[i].nr == widget.card.nr) {
                         oldIndex = i;
