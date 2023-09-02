@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/services/network/client.dart';
 
 import '../../Resource/ui_utils.dart';
 import '../service_locator.dart';
@@ -30,7 +32,18 @@ class NetworkUIState extends State<NetworkUI> {
               if (message.toLowerCase().contains("error") ||
                   message.toLowerCase().contains("disconnected") ||
                   message.toLowerCase().contains("lost")) {
-                showToastSticky(context, getIt<Network>().networkMessage.value);
+                showErrorToastStickyWithRetry(
+                    context, getIt<Network>().networkMessage.value, () {
+                  Settings settings = getIt<Settings>();
+                  if (settings.client.value != ClientState.connected &&
+                      settings.lastKnownConnection != "") {
+                    settings.client.value = ClientState.connecting;
+                    getIt<Client>()
+                        .connect(settings.lastKnownConnection)
+                        .then((value) => null);
+                    settings.saveToDisk();
+                  }
+                });
               } else {
                 showToast(context, getIt<Network>().networkMessage.value);
               }

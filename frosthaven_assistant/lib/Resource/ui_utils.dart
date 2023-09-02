@@ -113,7 +113,7 @@ void openDialogAtPosition(
       ]));
 }
 
-//used to get transpaarant background when dragging in reorderable widgets
+//used to get transparent background when dragging in re-orderable widgets
 Widget defaultBuildDraggableFeedback(
     BuildContext context, BoxConstraints constraints, Widget child) {
   return Transform(
@@ -201,18 +201,20 @@ bool hasGHVersion(String name) {
   return true;
 }
 
+const TextStyle toastTextStyle = TextStyle(fontFamily: "markazi", fontSize: 28);
+createToastContent(BuildContext context, String text) {
+  return GestureDetector(
+    onTap: () {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    },
+    child: Text(text, style: toastTextStyle),
+  );
+}
+
 showToast(BuildContext context, String text) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    content: GestureDetector(
-      onTap: () {
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      },
-      child: Text(
-        text,
-        style: const TextStyle(fontFamily: "markazi", fontSize: 28),
-      ),
-    ),
     backgroundColor: Colors.teal,
+    content: createToastContent(context, text),
   ));
 }
 
@@ -221,16 +223,40 @@ showToastSticky(BuildContext context, String text) {
   ScaffoldMessenger.of(context)
       .showSnackBar(SnackBar(
         duration: const Duration(days: 1),
-        content: GestureDetector(
-          onTap: () {
-            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-          },
-          child: Text(
-            text,
-            style: const TextStyle(fontFamily: "markazi", fontSize: 28),
-          ),
-        ),
         backgroundColor: Colors.teal,
+        content: createToastContent(context, text),
+      ))
+      .closed
+      .then((value) {
+    if (getIt<GameState>().toastMessage.value == text) {
+      GameMethods.setToastMessage("");
+    }
+  });
+}
+
+showErrorToastStickyWithRetry(
+    BuildContext context, String text, Function() retry) {
+  ScaffoldMessenger.of(context).clearSnackBars();
+  ScaffoldMessenger.of(context)
+      .showSnackBar(SnackBar(
+        duration: const Duration(days: 1),
+        backgroundColor: Colors.redAccent,
+        content: Row(
+          children: [
+            Expanded(child: createToastContent(context, text)),
+            TextButton(
+                onPressed: () {
+                  retry();
+                  ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                },
+                child: const Text("RETRY",
+                    style: TextStyle(
+                        fontFamily: "markazi",
+                        fontSize: 28,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold))),
+          ],
+        ),
       ))
       .closed
       .then((value) {
