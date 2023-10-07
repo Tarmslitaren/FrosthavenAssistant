@@ -62,7 +62,7 @@ dependencies:
 
   dart_ipify: ^1.1.1 #get outgoing ip
 
-  connectivity_plus: ^3.0.3 #poll for network changes
+  connectivity_plus: ^4.0.2 #poll for network changes
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -84,7 +84,7 @@ dependencies:
 
   window_manager: ^0.3.0 #to be able to set fullscreen on windows
 
-  flutter_launcher_icons: ^0.11.0 #I can't believe we need a third party package to do icons..
+  flutter_launcher_icons: ^0.13.1 #I can't believe we need a third party package to do icons..
 
   flutter_native_splash: ^2.2.8 # and same for splash :)
 
@@ -92,11 +92,11 @@ dependencies:
 
   flutter_keyboard_visibility: ^5.3.0 #only way to check for keyboard closed event.
 
-  responsive_framework: ^0.2.0
+  responsive_framework: ^1.1.1
 
   override_text_scale_factor: ^1.0.2
 
-  collection: ^1.17.0
+  collection: ^1.17.2
 
   window_size:
     git:
@@ -116,7 +116,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.1
-  test: ^1.22.0
+  test: ^1.24.3
   mockito: ^5.3.2
   build_runner: ^2.3.3
   fluent_assertions: ^0.4.0
