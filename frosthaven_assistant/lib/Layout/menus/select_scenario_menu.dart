@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands/set_scenario_command.dart';
+import '../../Resource/game_data.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
@@ -22,6 +23,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
+  final GameData _gameData = getIt<GameData>();
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController =
       ScrollController();
@@ -50,14 +52,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     //TODO:clear search
 
     //check value ok
-    if (_gameState.modelData.value[campaign] == null) {
+    if (_gameData.modelData.value[campaign] == null) {
       campaign = "Jaws of the Lion";
     }
 
     if(_gameState.currentCampaign.value != campaign) {
       _gameState.action(SetCampaignCommand(campaign));
     }
-    _foundScenarios = _gameState
+    _foundScenarios = _gameData
         .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
         .toList();
 
@@ -87,7 +89,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         List<String> strings = scenario.split(':');
         strings[0] = strings[0].replaceFirst(" ", "Å");
         String characterName = strings[0].split("Å")[1];
-        if (_gameState.modelData.value.entries.any((element) =>
+        if (_gameData.modelData.value.entries.any((element) =>
             GameMethods.isCustomCampaign(element.value.edition) &&
             element.value.characters
                 .any((element) => element.name == characterName))) {
@@ -117,14 +119,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     List<String> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameState
+      results = _gameData
           .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
           .toList();
       if (_gameState.currentCampaign.value != "Solo") {
         results.insert(0, "custom");
       }
     } else {
-      results = _gameState
+      results = _gameData
           .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
           .toList()
           .where((user) =>
@@ -173,9 +175,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     String characterName = strings[0].split("Å")[1];
 
     String text = strings[1];
-    for (String key in _gameState.modelData.value.keys) {
+    for (String key in _gameData.modelData.value.keys) {
       for (CharacterClass character
-          in _gameState.modelData.value[key]!.characters) {
+          in _gameData.modelData.value[key]!.characters) {
         if (character.name == characterName) {
           if (character.hidden &&
               !_gameState.unlockedClasses.contains(character.name)) {
@@ -219,7 +221,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   List<Widget> buildCampaignButtons() {
     List<Widget> retVal = [];
-    for (String item in _gameState.editions) {
+    for (String item in _gameData.editions) {
       if (item != "na" && item != "CCUG") {
         if (getIt<Settings>().showCustomContent.value == true ||
             !GameMethods.isCustomCampaign(item)) {

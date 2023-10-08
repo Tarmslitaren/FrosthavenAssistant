@@ -1,6 +1,7 @@
 library game_state;
 
 import '../card_stack.dart';
+import '../game_data.dart';
 import '../enums.dart';
 
 import 'package:built_collection/built_collection.dart';
@@ -8,15 +9,11 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
-import 'package:frosthaven_assistant/Model/summon.dart';
 
 import '../../Layout/main_list.dart';
-import '../../Model/campaign.dart';
 import '../../Model/room.dart';
 import '../../Model/scenario.dart';
 import '../action_handler.dart';
-import '../enums.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../Model/MonsterAbility.dart';
@@ -64,6 +61,7 @@ class GameState extends ActionHandler {
   }
 
   void init() {
+
     _elementState[Elements.fire] = ElementState.inert;
     _elementState[Elements.ice] = ElementState.inert;
     _elementState[Elements.air] = ElementState.inert;
@@ -71,72 +69,10 @@ class GameState extends ActionHandler {
     _elementState[Elements.light] = ElementState.inert;
     _elementState[Elements.dark] = ElementState.inert;
 
-    initGame();
+    getIt<GameData>().loadData("assets/data/")//todo: don't do this here?
+        .then((value) => load());
   }
 
-  initGame() async {
-    rootBundle.evict('assets/data/summon.json');
-    //cache false to make hot restart apply changes to base file. Does not work with hot reload...
-    final String response =
-        await rootBundle.loadString('assets/data/summons.json', cache: false);
-    final data = await json.decode(response);
-
-    //load loose summons
-    if (data.containsKey('summons')) {
-      final summons = data['summons'] as Map<dynamic, dynamic>;
-      for (String key in summons.keys) {
-        itemSummonData.add(SummonModel.fromJson(summons[key], key));
-      }
-    }
-
-    Map<String, CampaignModel> map = {};
-
-    final String editions = await rootBundle
-        .loadString('assets/data/editions/editions.json', cache: false);
-    final Map<String, dynamic> editionData = await json.decode(editions);
-    for (String item in editionData["editions"]) {
-      this.editions.add(item);
-
-      List<RoomsModel> roomData = [];
-      await fetchRoomData(item).then((value) {
-        if (value != null) roomData.addAll(value.roomData);
-      });
-
-      await fetchCampaignData(item, map, roomData);
-    }
-
-    load(); //load saved state from file.
-
-    modelData.value = map;
-  }
-
-  Future<EditionRoomsModel?> fetchRoomData(String campaign) async {
-    try {
-      final String response =
-          await rootBundle.loadString('assets/data/rooms/$campaign.json');
-      final data = await json.decode(response);
-      return EditionRoomsModel.fromJson(data);
-    } catch (error) {
-      if (kDebugMode) {
-        print(error.toString());
-      }
-      return null;
-    }
-  }
-
-  fetchCampaignData(String campaign, Map<String, CampaignModel> map,
-      List<RoomsModel> roomsData) async {
-    rootBundle.evict('assets/data/editions/$campaign.json');
-    final String response = await rootBundle
-        .loadString('assets/data/editions/$campaign.json', cache: false);
-    final data = await json.decode(response);
-    map[campaign] = CampaignModel.fromJson(data, roomsData);
-  }
-
-  //data todo: move out of here
-  List<String> editions = [];
-  final modelData = ValueNotifier<Map<String, CampaignModel>>({});
-  List<SummonModel> itemSummonData = [];
 
   //todo: ugly hacks to delay list update (doesn't need to be here though)
   final updateList = ValueNotifier<int>(0);

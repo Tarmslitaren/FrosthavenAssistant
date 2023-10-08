@@ -12,11 +12,11 @@ class MonsterAbilityState {
   int _lastRoundDrawn = 0;
 
   MonsterAbilityState(this.name) {
-    GameState gameState = getIt<GameState>();
+    GameData gameData = getIt<GameData>();
 
     List<MonsterAbilityDeckModel> monsters = [];
-    for (String key in gameState.modelData.value.keys) {
-      monsters.addAll(gameState.modelData.value[key]!.monsterAbilities);
+    for (String key in gameData.modelData.value.keys) {
+      monsters.addAll(gameData.modelData.value[key]!.monsterAbilities);
     }
     for (MonsterAbilityDeckModel model in monsters) {
       if (name == model.name) {

@@ -4,10 +4,10 @@ class Monster extends ListItemData {
   Monster(String name, int level, this._isAlly) {
     id = name;
     _level.value = level;
-    GameState gameState = getIt<GameState>();
+    GameData gameData = getIt<GameData>();
     Map<String, MonsterModel> monsters = {};
-    for (String key in gameState.modelData.value.keys) {
-      monsters.addAll(gameState.modelData.value[key]!.monsters);
+    for (String key in gameData.modelData.value.keys) {
+      monsters.addAll(gameData.modelData.value[key]!.monsters);
     }
     for (String key in monsters.keys) {
       if (key == name) {
@@ -96,10 +96,10 @@ class Monster extends ListItemData {
     }
     String modelName = json['type'];
 
-    GameState gameState = getIt<GameState>();
+    GameData gameData = getIt<GameData>();
     Map<String, MonsterModel> monsters = {};
-    for (String key in gameState.modelData.value.keys) {
-      monsters.addAll(gameState.modelData.value[key]!.monsters);
+    for (String key in gameData.modelData.value.keys) {
+      monsters.addAll(gameData.modelData.value[key]!.monsters);
     }
     for (var item in monsters.keys) {
       if (item == modelName) {

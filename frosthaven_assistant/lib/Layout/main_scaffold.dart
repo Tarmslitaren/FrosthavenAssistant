@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Layout/top_bar.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Model/campaign.dart';
+import '../Resource/game_data.dart';
 import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
@@ -52,12 +53,13 @@ Widget createMainScaffold(BuildContext context) {
                         );
                       }),
                   ValueListenableBuilder<Map<String, CampaignModel>>(
-                      valueListenable: getIt<GameState>().modelData,
+                      valueListenable: getIt<GameData>().modelData,
                       builder: (context, value, child) {
                         return ValueListenableBuilder<int>(
                             valueListenable: getIt<GameState>().commandIndex,
                             builder: (context, value, child) {
                               GameState gameState = getIt<GameState>();
+                              final GameData gameData = getIt<GameData>();
                               double barScale =
                                   getIt<Settings>().userScalingBars.value;
 
@@ -81,7 +83,7 @@ Widget createMainScaffold(BuildContext context) {
 
                               //move to separate row if it doesn't fit
                               bool sectionsOnSeparateRow = false;
-                              int? nrOfSections = gameState
+                              int? nrOfSections = gameData
                                   .modelData
                                   .value[gameState.currentCampaign.value]
                                   ?.scenarios[gameState.scenario.value]

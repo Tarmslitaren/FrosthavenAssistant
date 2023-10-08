@@ -498,8 +498,9 @@ class LootDeck {
     //reset loot deck
     _initPools();
     GameState gameState = getIt<GameState>();
+    GameData gameData = getIt<GameData>();
     String scenario = gameState.scenario.value;
-    LootDeckModel? lootDeckModel = gameState.modelData
+    LootDeckModel? lootDeckModel = gameData.modelData
         .value[gameState.currentCampaign.value]!.scenarios[scenario]!.lootDeck;
     if (lootDeckModel != null) {
       _setDeck(lootDeckModel);

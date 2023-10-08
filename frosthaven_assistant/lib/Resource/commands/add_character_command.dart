@@ -24,7 +24,6 @@ class AddCharacterCommand extends Command {
 
   @override
   void undo() {
-    //_gameState.currentList.remove(character);
     _gameState.updateList.value++;
   }
 

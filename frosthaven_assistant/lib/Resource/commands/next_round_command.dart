@@ -4,17 +4,19 @@ import 'package:frosthaven_assistant/Model/scenario.dart';
 import '../../Layout/main_list.dart';
 import '../../services/service_locator.dart';
 import '../enums.dart';
+import '../game_data.dart';
 import '../settings.dart';
 import '../state/game_state.dart';
 
 class NextRoundCommand extends Command {
   final GameState _gameState = getIt<GameState>();
+  final GameData _gameData = getIt<GameData>();
 
   void _handleTimedSpawns(var rule) {
     if (getIt<Settings>().autoAddSpawns.value == true) {
       if (rule.name.isNotEmpty) {
         //get room data and deal with spawns
-        ScenarioModel? scenario = _gameState
+        ScenarioModel? scenario = _gameData
             .modelData
             .value[_gameState.currentCampaign.value]
             ?.scenarios[_gameState.scenario.value];

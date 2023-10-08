@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Model/summon.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
+import '../../Resource/game_data.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
@@ -19,6 +20,7 @@ class AddSummonMenu extends StatefulWidget {
 
 class AddSummonMenuState extends State<AddSummonMenu> {
   final GameState _gameState = getIt<GameState>();
+  final GameData _gameData = getIt<GameData>();
   int chosenNr = 1;
   String chosenGfx = "blue";
 
@@ -47,7 +49,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
         }
       }
     }
-    _summonList.addAll(_gameState.itemSummonData);
+    _summonList.addAll(_gameData.itemSummonData);
 
     if (getIt<Settings>().showCustomContent.value == false) {
       //-4 because there are 4 custom summons. I know.

@@ -3,6 +3,7 @@ import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart'
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands/add_character_command.dart';
+import '../../Resource/game_data.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
@@ -22,11 +23,12 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   late CharacterClass bs;
   late CharacterClass vq;
   final GameState _gameState = getIt<GameState>();
+  final GameData _gameData = getIt<GameData>();
   final ScrollController _scrollController =
       ScrollController();
 
   int compareEditions(String a, String b) {
-    for (String item in _gameState.editions) {
+    for (String item in _gameData.editions) {
       if (b == item && a != item) {
         return 1;
       }
@@ -40,8 +42,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   @override
   initState() {
     // at the beginning, all users are shown
-    for (String key in _gameState.modelData.value.keys) {
-      _allCharacters.addAll(_gameState.modelData.value[key]!.characters);
+    for (String key in _gameData.modelData.value.keys) {
+      _allCharacters.addAll(_gameData.modelData.value[key]!.characters);
     }
 
     for (var item in _allCharacters) {

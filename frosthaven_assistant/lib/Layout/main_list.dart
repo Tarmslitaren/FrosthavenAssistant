@@ -11,6 +11,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import 'package:reorderables/reorderables.dart';
 import '../Resource/commands/reorder_list_command.dart';
+import '../Resource/game_data.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
@@ -157,6 +158,7 @@ class ListAnimationState extends State<ListAnimation> {
 
 class MainListState extends State<MainList> {
   final GameState _gameState = getIt<GameState>();
+  final GameData _gameData = getIt<GameData>();
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
 
@@ -195,7 +197,7 @@ class MainListState extends State<MainList> {
               ),
               child: ValueListenableBuilder<Map<String, CampaignModel>>(
                   //TODO: show loading animation while waiting to load from disk.
-                  valueListenable: _gameState.modelData,
+                  valueListenable: _gameData.modelData,
                   builder: (context, value, child) {
                     return ValueListenableBuilder<double>(
                         valueListenable: getIt<Settings>().userScalingMainList,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 
 import '../../Resource/commands/add_monster_command.dart';
+import '../../Resource/game_data.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
@@ -18,6 +19,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   List<MonsterModel> _foundMonsters = [];
   final List<MonsterModel> _allMonsters = [];
   final GameState _gameState = getIt<GameState>();
+  final GameData _gameData = getIt<GameData>();
   bool _addAsAlly = false;
   bool _showSpecial = false;
   bool _showBoss = true;
@@ -28,8 +30,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   @override
   initState() {
     // at the beginning, all users are shown
-    for (String key in _gameState.modelData.value.keys) {
-      _allMonsters.addAll(_gameState.modelData.value[key]!.monsters.values);
+    for (String key in _gameData.modelData.value.keys) {
+      _allMonsters.addAll(_gameData.modelData.value[key]!.monsters.values);
     }
     _currentCampaign = _gameState.currentCampaign.value;
     _setCampaign(_currentCampaign);
@@ -38,7 +40,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   }
 
   int compareEditions(String a, String b) {
-    for (String item in _gameState.editions) {
+    for (String item in _gameData.editions) {
       if (b == item && a != item) {
         return 1;
       }
@@ -120,7 +122,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     retVal.add(const DropdownMenuItem<String>(
         value: "All", child: Text("All Campaigns")));
 
-    for (String item in _gameState.editions) {
+    for (String item in _gameData.editions) {
       if (item != "na") {
         if (!GameMethods.isCustomCampaign(item) ||
             getIt<Settings>().showCustomContent.value == true) {

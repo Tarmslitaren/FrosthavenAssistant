@@ -1,6 +1,7 @@
 part of game_state;
 
 GameState _gameState = getIt<GameState>();
+GameData _gameData = getIt<GameData>();
 
 class GameMethods {
   static void updateElements(_StateModifier _) {
@@ -400,7 +401,7 @@ class GameMethods {
 
       //loot deck init
       if (scenario != "custom") {
-        LootDeckModel? lootDeckModel = _gameState
+        LootDeckModel? lootDeckModel = _gameData
             .modelData
             .value[_gameState.currentCampaign.value]!
             .scenarios[scenario]!
@@ -430,7 +431,7 @@ class GameMethods {
 
     String initMessage = "";
     if (section) {
-      var sectionData = _gameState
+      var sectionData = _gameData
           .modelData
           .value[_gameState.currentCampaign.value]
           ?.scenarios[_gameState.scenario.value]
@@ -446,7 +447,7 @@ class GameMethods {
       }
     } else {
       if (scenario != "custom") {
-        var scenarioData = _gameState.modelData
+        var scenarioData = _gameData.modelData
             .value[_gameState.currentCampaign.value]?.scenarios[scenario];
         if (scenarioData != null) {
           monsters = scenarioData.monsters;
@@ -561,7 +562,7 @@ class GameMethods {
             if (getIt<Settings>().autoAddSpawns.value == true) {
               if (rule.name.isNotEmpty) {
                 //get room data and deal with spawns
-                ScenarioModel? scenarioModel = _gameState
+                ScenarioModel? scenarioModel = _gameData
                     .modelData
                     .value[_gameState.currentCampaign.value]
                     ?.scenarios[scenario];
@@ -1122,8 +1123,8 @@ class GameMethods {
   static Character? createCharacter(_StateModifier _, String name, String? display, int level) {
     Character? character;
     List<CharacterClass> characters = [];
-    for (String key in _gameState.modelData.value.keys) {
-      characters.addAll(_gameState.modelData.value[key]!.characters);
+    for (String key in _gameData.modelData.value.keys) {
+      characters.addAll(_gameData.modelData.value[key]!.characters);
     }
     for (CharacterClass characterClass in characters) {
       if (characterClass.name == name) {
@@ -1160,8 +1161,8 @@ class GameMethods {
 
   static Monster? createMonster(_StateModifier _, String name, int? level, bool isAlly) {
     Map<String, MonsterModel> monsters = {};
-    for (String key in _gameState.modelData.value.keys) {
-      monsters.addAll(_gameState.modelData.value[key]!.monsters);
+    for (String key in _gameData.modelData.value.keys) {
+      monsters.addAll(_gameData.modelData.value[key]!.monsters);
     }
     level ??= getIt<GameState>().level.value;
     Monster monster = Monster(name, level, isAlly);
@@ -1324,7 +1325,7 @@ class GameMethods {
       newIndex = index;
     }
 
-    //TODO: can get mutable item from builtlist?! or is this non functioning?
+    //TODO: can get mutable item from builtList?! or is this non functioning?
     for (; newIndex < _gameState.currentList.length; newIndex++) {
       ListItemData data = _gameState.currentList[newIndex];
       if (data is Monster) {
@@ -1382,7 +1383,7 @@ class GameMethods {
   }
 
   static void updateForSpecialRules(_StateModifier _) {
-    List<SpecialRule>? rules = _gameState
+    List<SpecialRule>? rules = _gameData
         .modelData
         .value[_gameState.currentCampaign.value]
         ?.scenarios[_gameState.scenario.value]

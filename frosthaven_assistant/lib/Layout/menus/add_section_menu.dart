@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/set_scenario_command.dart';
+import '../../Resource/game_data.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
@@ -19,6 +20,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
+  final GameData _gameData = getIt<GameData>();
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController =
       ScrollController();
@@ -33,7 +35,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   void setCampaign(String campaign) {
     //TODO:clear search
     _gameState.action(SetCampaignCommand(campaign));
-    _foundScenarios = _gameState
+    _foundScenarios = _gameData
         .modelData
         .value[_gameState.currentCampaign.value]!
         .scenarios[_gameState.scenario.value]!
@@ -57,13 +59,13 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     List<String> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameState.modelData.value[_gameState.currentCampaign.value]!
+      results = _gameData.modelData.value[_gameState.currentCampaign.value]!
           .scenarios[_gameState.scenario.value]!.sections
           .map((e) => e.name)
           .toList();
       results = results.where((element) => !element.contains("spawn")).toList();
     } else {
-      results = _gameState.modelData.value[_gameState.currentCampaign.value]!
+      results = _gameData.modelData.value[_gameState.currentCampaign.value]!
           .scenarios[_gameState.scenario.value]!.sections
           .map((e) => e.name)
           .toList()

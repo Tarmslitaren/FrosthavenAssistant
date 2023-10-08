@@ -27,10 +27,10 @@ class Character extends ListItemData {
     _turnState = TurnsState.values[json['turnState']];
     characterState = CharacterState.fromJson(json['characterState']);
     String className = json['characterClass'];
-    GameState gameState = getIt<GameState>();
+    GameData data = getIt<GameData>();
     List<CharacterClass> characters = [];
-    for (String key in gameState.modelData.value.keys) {
-      characters.addAll(gameState.modelData.value[key]!.characters);
+    for (String key in data.modelData.value.keys) {
+      characters.addAll(data.modelData.value[key]!.characters);
     }
     for (var item in characters) {
       if (item.name == className) {

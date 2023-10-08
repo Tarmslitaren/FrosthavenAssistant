@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/commands/draw_loot_card_command.dart';
+import '../Resource/game_data.dart';
 import '../Resource/settings.dart';
 import 'loot_card.dart';
 import 'menus/loot_cards_menu.dart';
@@ -20,6 +21,7 @@ class LootDeckWidget extends StatefulWidget {
 
 class LootDeckWidgetState extends State<LootDeckWidget> {
   final GameState _gameState = getIt<GameState>();
+  final GameData _gameData = getIt<GameData>();
   final Settings settings = getIt<Settings>();
 
   void _modelDataListenerLootDeck() {
@@ -28,7 +30,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
 
   @override
   void dispose() {
-    _gameState.modelData.removeListener(_modelDataListenerLootDeck);
+    _gameData.modelData.removeListener(_modelDataListenerLootDeck);
     super.dispose();
   }
 
@@ -37,7 +39,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     super.initState();
 
     //to load save state
-    _gameState.modelData.addListener(_modelDataListenerLootDeck);
+    _gameData.modelData.addListener(_modelDataListenerLootDeck);
   }
 
   Widget buildStayAnimation(Widget child) {

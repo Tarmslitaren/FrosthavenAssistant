@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/section_button.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import '../Model/scenario.dart';
+import '../Resource/game_data.dart';
 import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 
@@ -37,11 +38,12 @@ class SectionListState extends State<SectionList> {
         valueListenable: getIt<Settings>().userScalingBars,
         builder: (context, value, child) {
           double scale = getIt<Settings>().userScalingBars.value;
-          GameState gameState = getIt<GameState>();
+          final GameData gameData = getIt<GameData>();
+          final GameState gameState = getIt<GameState>();
           return ValueListenableBuilder<int>(
               valueListenable: getIt<GameState>().commandIndex,
               builder: (context, value, child) {
-                var list = gameState
+                var list = gameData
                     .modelData
                     .value[gameState.currentCampaign.value]
                     ?.scenarios[gameState.scenario.value]

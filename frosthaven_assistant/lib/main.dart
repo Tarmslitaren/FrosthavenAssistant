@@ -29,8 +29,8 @@ void main() {
     if (!Platform.isMacOS) {
       windowManager.setMinimumSize(const Size(400, 600));
     }
-    setWindowMinSize(const Size(400,
-        600)); //when updating flutter you may need to re-set these values in main.cpp
+    setWindowMinSize(const Size(
+        400, 600)); //when updating flutter you may need to re-set these values in main.cpp
     setWindowMaxSize(Size.infinite);
   }
 
@@ -57,43 +57,17 @@ class MyApp extends StatelessWidget {
       Wakelock.enable();
       //should force app to be in foreground and disable screen lock
     }
-    //Screen.keepOn(true);
 
     getIt<Settings>().init();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      //debugShowMaterialGrid: true,
+      debugShowMaterialGrid: false,
       checkerboardOffscreenLayers: false,
-      //showPerformanceOverlay: true,
+      showPerformanceOverlay: false,
       title: 'X-haven Assistant',
       theme: ThemeSwitcher.of(context).themeData,
       home: const MyHomePage(title: 'X-haven Assistant'),
-
-      /* builder: (context, child) => ResponsiveWrapper.builder(
-
-          const Navigator(
-              pages: [
-                MaterialPage(child: MyHomePage(title: 'X-haven Assistant')),
-              ]
-          ),
-
-
-          defaultScale: true,
-
-          background: Container(color: Colors.deepPurpleAccent)),
-      initialRoute: "/",*/
-
-      /*builder: (context, child) {
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0), //to disable os large font setting
-          child: const Navigator(
-            pages: [
-              MaterialPage(child: MyHomePage(title: 'X-haven Assistant'))
-            ]
-          )
-        );
-      },*/
     );
   }
 }

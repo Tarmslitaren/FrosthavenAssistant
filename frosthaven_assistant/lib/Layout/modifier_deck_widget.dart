@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import '../Resource/game_data.dart';
 import '../Resource/settings.dart';
 
 class ModifierDeckWidget extends StatefulWidget {
@@ -20,6 +21,7 @@ class ModifierDeckWidget extends StatefulWidget {
 
 class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   final GameState _gameState = getIt<GameState>();
+  final GameData _gameData = getIt<GameData>();
   final Settings settings = getIt<Settings>();
 
   bool _animationsEnabled = false;
@@ -30,7 +32,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   @override
   void dispose() {
-    _gameState.modelData.removeListener(_modelDataListener);
+    _gameData.modelData.removeListener(_modelDataListener);
     super.dispose();
   }
 
@@ -39,7 +41,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     super.initState();
 
     //to load save state
-    _gameState.modelData.addListener(_modelDataListener);
+    _gameData.modelData.addListener(_modelDataListener);
     _animationsEnabled = initAnimationEnabled();
   }
 
