@@ -192,13 +192,6 @@ class StatusMenuState extends State<StatusMenu> {
           if (figure == null) {
             return Container();
           }
-          ListItemData? owner;
-          for (var item in _gameState.currentList) {
-            if (item.id == ownerId) {
-              owner = item;
-              break;
-            }
-          }
 
           bool isActive = (figure as MonsterInstance).roundSummoned != -1;
           if (isActive) {
@@ -357,7 +350,7 @@ class StatusMenuState extends State<StatusMenu> {
                                 image: AssetImage(imagePath),
                               )),
                           Positioned(
-                              //TODO: should be 19  but there is a clipping issue
+                              //should be 19  but there is a clipping issue
                               left: 15.75 * scale,
                               top: 7.35 * scale,
                               child: Image(

@@ -65,11 +65,11 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
 
   void scrollTheWheel(double delta, int timeMicroSeconds, double scale) {
     int maxHealth = widget.data.maxHealth.value;
-    double deltaMod = min(widget.data.maxHealth.value * 0.4, 6.5 );
-    deltaMod =  max(deltaMod, 2.5);
+    double deltaMod = min(widget.data.maxHealth.value * 0.4, 6.5);
+    deltaMod = max(deltaMod, 2.5);
 
     deltaMod *= delta;
-    if(Platform.isIOS || Platform.isMacOS) {
+    if (Platform.isIOS || Platform.isMacOS) {
       deltaMod /= 2;
     }
 
@@ -133,7 +133,8 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
                   scrollTheWheel(widget.delta.value, widget.time.value, scale);
 
                   return ListWheelScrollView(
-                    physics: const NeverScrollableScrollPhysics(), //force android scrolling...
+                      physics:
+                          const NeverScrollableScrollPhysics(), //force android scrolling...
                       renderChildrenOutsideViewport: true,
                       clipBehavior: Clip.none,
                       onSelectedItemChanged: (x) {

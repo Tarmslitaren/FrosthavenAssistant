@@ -1002,28 +1002,44 @@
 			"count": 6,
 			"levels": [
 				{
-					"level": 0, "health": 20, "move": 2, "attack": 4
+					"level": 0, "health": 20, "move": 2, "attack": 4,"attributes": [
+					"At the start of each of its","turns, remove one 1-hex",
+					"hazardous terrain tile","closest to it."]
 				},
 				{
-					"level": 1, "health": 26, "move": 2, "attack": 4
+					"level": 1, "health": 26, "move": 2, "attack": 4,"attributes": [
+					"At the start of each of its","turns, remove one 1-hex",
+					"hazardous terrain tile","closest to it."]
 				},
 				{
-					"level": 2, "health": 36, "move": 2, "attack": 4
+					"level": 2, "health": 36, "move": 2, "attack": 4,"attributes": [
+					"At the start of each of its","turns, remove one 1-hex",
+					"hazardous terrain tile","closest to it."]
 				},
 				{
-					"level": 3, "health": 40, "move": 2, "attack": 4, "attributes": [ "%immobilize%" ]
+					"level": 3, "health": 40, "move": 2, "attack": 4, "attributes": [ "%immobilize%",
+					"At the start of each of its","turns, remove one 1-hex",
+					"hazardous terrain tile","closest to it."]
 				},
 				{
-					"level": 4, "health": 42, "move": 3, "attack": 5, "attributes": [ "%immobilize%" ]
+					"level": 4, "health": 42, "move": 3, "attack": 5, "attributes": [ "%immobilize%",
+					"At the start of each of its","turns, remove one 1-hex",
+					"hazardous terrain tile","closest to it."]
 				},
 				{
-					"level": 5, "health": 50, "move": 3, "attack": 5, "attributes": [ "%immobilize%" ]
+					"level": 5, "health": 50, "move": 3, "attack": 5, "attributes": [ "%immobilize%",
+					"At the start of each of its","turns, remove one 1-hex",
+					"hazardous terrain tile","closest to it."]
 				},
 				{
-					"level": 6, "health": 64, "move": 3, "attack": 6, "attributes": [ "%immobilize%" ]
+					"level": 6, "health": 64, "move": 3, "attack": 6, "attributes": [ "%immobilize%",
+					"At the start of each of its","turns, remove one 1-hex",
+					"hazardous terrain tile","closest to it."]
 				},
 				{
-					"level": 7, "health": 84, "move": 3, "attack": 7, "attributes": [ "%immobilize%" ]
+					"level": 7, "health": 84, "move": 3, "attack": 7, "attributes": [ "%immobilize%",
+					"At the start of each of its","turns, remove one 1-hex",
+					"hazardous terrain tile","closest to it."]
 				}
 			]
 		},
@@ -1053,7 +1069,7 @@
 				{
 					"level": 3,
 					"normal": { "health": 12, "move": 3, "attack": 3,"attributes": ["%shield% 1"  ],"immunities": [  "%stun%"] },
-					"elite": { "health": 12, "move": 2, "attack": 5,"attributes": ["%shield% 2", "%brittle%" ],"immunities": [  "%stun%"] }
+					"elite": { "health": 12, "move": 3, "attack": 5,"attributes": ["%shield% 2", "%brittle%" ],"immunities": [  "%stun%"] }
 				},
 				{
 					"level": 4,
@@ -1793,6 +1809,30 @@
 				{
 					"type": "Escort",
 					"name": "Rune Worker 2",
+					"health": "L+1",
+					"init": 99
+				},
+				{
+					"type": "Escort",
+					"name": "Rune Worker 3",
+					"health": "L+1",
+					"init": 99
+				},
+				{
+					"type": "Escort",
+					"name": "Rune Worker 4",
+					"health": "L+1",
+					"init": 99
+				},
+				{
+					"type": "Escort",
+					"name": "Rune Worker 5",
+					"health": "L+1",
+					"init": 99
+				},
+				{
+					"type": "Escort",
+					"name": "Rune Worker 6",
 					"health": "L+1",
 					"init": 99
 				},

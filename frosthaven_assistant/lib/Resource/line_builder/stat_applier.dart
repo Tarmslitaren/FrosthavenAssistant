@@ -6,8 +6,7 @@ import '../enums.dart';
 import '../stat_calculator.dart';
 import '../state/monster.dart';
 
-class StatApplier{
-
+class StatApplier {
   static Map<String, int> _getStatTokens(Monster monster, bool elite) {
     var map = <String, int>{};
     MonsterStatsModel data;
@@ -69,7 +68,6 @@ class StatApplier{
     return map;
   }
 
-
   static List<String> _applyStatForToken(
       String formula,
       String line,
@@ -110,7 +108,7 @@ class StatApplier{
       }
 
       RegExp regEx =
-      RegExp(r"(?=.*[a-z])"); //not sure why I do this. only letters?
+          RegExp(r"(?=.*[a-z])"); //not sure why I do this. only letters?
       for (var item in normalTokens.keys) {
         if (regEx.hasMatch(item) == true) {
           if (item != "shield" &&
@@ -138,13 +136,11 @@ class StatApplier{
           eliteValue = elite.range;
         }
       }
-
     } else if (lastToken == "move") {
       normalValue = StatCalculator.calculateFormula(normal!.move)!;
       if (elite != null) {
         eliteValue = eliteValue = StatCalculator.calculateFormula(elite.move)!;
       }
-      //TODO: add jump if has innate jump
     } else if (lastToken == "shield") {
       int? value = normalTokens["shield"];
       int? eValue = eliteTokens["shield"];
@@ -204,6 +200,11 @@ class StatApplier{
       }
     }
 
+    //special case for uncalculable and only elites (heed the pigs)
+    if(elite != null && skipCalculation && showElite && !showNormal) {
+      newStartOfLine += normalResult;
+    }
+
     if (elite != null && !skipCalculation && showElite) {
       if (showNormal) {
         newStartOfLine += "/";
@@ -211,7 +212,7 @@ class StatApplier{
       retVal.add(newStartOfLine);
 
       int eliteResult =
-      StatCalculator.calculateFormula("$formula+$eliteValue")!;
+          StatCalculator.calculateFormula("$formula+$eliteValue")!;
       if (eliteResult < 0) {
         eliteResult = 0;
       }
@@ -243,18 +244,24 @@ class StatApplier{
   static List<String> applyMonsterStats(final String lineInput,
       String sizeToken, Monster monster, bool forceShowAll) {
     bool showElite = false;
-    if(monster.isActive || monster.monsterInstances.value.firstWhereOrNull((element) => element.type == MonsterType.elite) != null) {
+    if (monster.isActive ||
+        monster.monsterInstances.value.firstWhereOrNull(
+                (element) => element.type == MonsterType.elite) !=
+            null) {
       showElite = true;
     }
     bool showNormal = false;
-    if(monster.isActive || monster.monsterInstances.value.firstWhereOrNull((element) => element.type != MonsterType.elite) != null) {
+    if (monster.isActive ||
+        monster.monsterInstances.value.firstWhereOrNull(
+                (element) => element.type != MonsterType.elite) !=
+            null) {
       showNormal = true;
     }
     if (forceShowAll) {
       showElite = true;
       showNormal = true;
     }
-    String line = "" + lineInput; //make sure lineInput is not altered
+    String line = lineInput;
     if (kDebugMode) {
       //print("monster: ${monster.id}");
       //print("line: $line");
@@ -283,16 +290,20 @@ class StatApplier{
         }
       }
       if (!isInToken &&
-          (line[i] == '+' ||
-              line[i] == '-' ||
-              line[i] == 'C' ||
-              line[i] == 'L') ||
-          line[i] == 'X' || //hax: X doesn't work in formula, but if a formula starts wit X it should bork. Hopefully there are no wild 'X's anywhere.
-          (line[i].contains(regExpNumbers) &&
-              lastToken
-                  .isEmpty) //plain numbers cant be calculated for tokens (e.g. attack 1 is not same as attack +1)
-              && (i == 0 || line[i - 1] == ' ') //supposing there is always a leading whitespace to any formula
-      ) {
+                  (line[i] == '+' ||
+                      line[i] == '-' ||
+                      line[i] == 'C' ||
+                      line[i] == 'L') ||
+              line[i] ==
+                  'X' || //hax: X doesn't work in formula, but if a formula starts wit X it should bork. Hopefully there are no wild 'X's anywhere.
+              (line[i].contains(regExpNumbers) &&
+                      lastToken
+                          .isEmpty) //plain numbers cant be calculated for tokens (e.g. attack 1 is not same as attack +1)
+                  &&
+                  (i == 0 ||
+                      line[i - 1] ==
+                          ' ') //supposing there is always a leading whitespace to any formula
+          ) {
         String formula = line[i];
         int startIndex = i;
         int endIndex = i;

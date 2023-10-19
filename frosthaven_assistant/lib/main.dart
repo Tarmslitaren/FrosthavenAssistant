@@ -22,29 +22,26 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
 
-
   _enablePlatformOverrideForDesktop();
 
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle('X-haven Assistant');
-    if(!Platform.isMacOS) {
+    if (!Platform.isMacOS) {
       windowManager.setMinimumSize(const Size(400, 600));
     }
-    setWindowMinSize(const Size(400, 600)); //when updating flutter you may need to re-set these values in main.cpp
+    setWindowMinSize(const Size(400,
+        600)); //when updating flutter you may need to re-set these values in main.cpp
     setWindowMaxSize(Size.infinite);
   }
 
   if (kReleaseMode) {
     ErrorWidget.builder = ((e) {
       //to not show the gray boxes, when there are exceptions
-      return Container(
-      );
+      return Container();
     });
   }
 
-  runApp(
-    ThemeSwitcherWidget(initialTheme: theme, child: const MyApp())
-  );
+  runApp(ThemeSwitcherWidget(initialTheme: theme, child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -55,7 +52,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     debugInvertOversizedImages = false;
 
-     //call after keyboard
+    //call after keyboard
     if (Platform.isIOS || Platform.isAndroid) {
       Wakelock.enable();
       //should force app to be in foreground and disable screen lock
@@ -65,15 +62,15 @@ class MyApp extends StatelessWidget {
     getIt<Settings>().init();
 
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        //debugShowMaterialGrid: true,
-        checkerboardOffscreenLayers: false,
-        //showPerformanceOverlay: true,
-        title: 'X-haven Assistant',
-        theme: ThemeSwitcher.of(context).themeData,
-        home: const MyHomePage(title: 'X-haven Assistant'),
+      debugShowCheckedModeBanner: false,
+      //debugShowMaterialGrid: true,
+      checkerboardOffscreenLayers: false,
+      //showPerformanceOverlay: true,
+      title: 'X-haven Assistant',
+      theme: ThemeSwitcher.of(context).themeData,
+      home: const MyHomePage(title: 'X-haven Assistant'),
 
-     /* builder: (context, child) => ResponsiveWrapper.builder(
+      /* builder: (context, child) => ResponsiveWrapper.builder(
 
           const Navigator(
               pages: [
@@ -97,11 +94,8 @@ class MyApp extends StatelessWidget {
           )
         );
       },*/
-      );
-
+    );
   }
-
-
 }
 
 class MyHomePage extends StatefulWidget {

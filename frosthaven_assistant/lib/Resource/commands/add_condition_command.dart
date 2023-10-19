@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../enums.dart';
@@ -19,9 +18,10 @@ class AddConditionCommand extends Command {
     figure.conditions.value = newList;
 
     //only added this turn if is current or done
-    for(var item in getIt<GameState>().currentList) {
+    for (var item in getIt<GameState>().currentList) {
       if (item.id == ownerId) {
-        if (item.turnState != TurnsState.notDone && getIt<GameState>().roundState.value == RoundState.playTurns) {
+        if (item.turnState != TurnsState.notDone &&
+            getIt<GameState>().roundState.value == RoundState.playTurns) {
           figure.conditionsAddedThisTurn.value.add(condition);
         }
       }

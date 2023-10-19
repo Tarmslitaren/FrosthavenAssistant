@@ -14,10 +14,10 @@ class DrawButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _DrawButtonState createState() => _DrawButtonState();
+   DrawButtonState createState() => DrawButtonState();
 }
 
-class _DrawButtonState extends State<DrawButton> {
+class DrawButtonState extends State<DrawButton> {
   final GameState _gameState = getIt<GameState>();
 
   @override
@@ -31,8 +31,9 @@ class _DrawButtonState extends State<DrawButton> {
         _gameState.action(DrawCommand());
       } else {
         //show toast
-        String text = "Player Initiative numbers must be set (under the initiative marker to the right of the character symbol)";
-        if(_gameState.currentList.isEmpty) {
+        String text =
+            "Player Initiative numbers must be set (under the initiative marker to the right of the character symbol)";
+        if (_gameState.currentList.isEmpty) {
           text = "Add characters first.";
         }
         //TODO: show other message if no characters or no monsters
@@ -53,9 +54,9 @@ class _DrawButtonState extends State<DrawButton> {
     return ValueListenableBuilder<double>(
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
-
           var shadow = Shadow(
-            offset: Offset(1 * settings.userScalingBars.value, 1 * settings.userScalingBars.value),
+            offset: Offset(1 * settings.userScalingBars.value,
+                1 * settings.userScalingBars.value),
             color: Colors.black87,
             blurRadius: 1 * settings.userScalingBars.value,
           );
@@ -86,9 +87,7 @@ class _DrawButtonState extends State<DrawButton> {
                             height: 0.8,
                             fontSize: 16 * settings.userScalingBars.value,
                             color: Colors.white,
-                            shadows: [
-                              shadow
-                            ],
+                            shadows: [shadow],
                           ),
                         )));
               },
@@ -104,9 +103,7 @@ class _DrawButtonState extends State<DrawButton> {
                         style: TextStyle(
                           fontSize: 14 * settings.userScalingBars.value,
                           color: Colors.white,
-                          shadows: [
-                            shadow
-                          ],
+                          shadows: [shadow],
                         )));
               },
             )

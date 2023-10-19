@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -85,36 +84,38 @@ class LootCardWidget extends StatefulWidget {
               ),
             if (card.enhanced > 0)
               Positioned(
-                  bottom: 5 * scale,
-                  child: getIt<Settings>().shimmer.value == true ? AnimatedTextKit(
-                    repeatForever: true,
-                    //pause: const Duration(milliseconds: textAnimationDelay),
-                    animatedTexts: [
-                      ColorizeAnimatedText(
-                        "Enhanced: ${card.enhanced.toString()}",
-                        speed: Duration(milliseconds: (350).ceil()),
-                        textStyle: TextStyle(
-                          fontSize: 9 * scale,
-                        ),
-                        colors: [
-                          Colors.white,
-                          Colors.white,
-                          Colors.blueGrey,
-                          Colors.white,
-                          Colors.blueGrey,
-                          Colors.white,
-                          Colors.blueGrey,
-                          Colors.white,
+                bottom: 5 * scale,
+                child: getIt<Settings>().shimmer.value == true
+                    ? AnimatedTextKit(
+                        repeatForever: true,
+                        //pause: const Duration(milliseconds: textAnimationDelay),
+                        animatedTexts: [
+                          ColorizeAnimatedText(
+                            "Enhanced: ${card.enhanced.toString()}",
+                            speed: Duration(milliseconds: (350).ceil()),
+                            textStyle: TextStyle(
+                              fontSize: 9 * scale,
+                            ),
+                            colors: [
+                              Colors.white,
+                              Colors.white,
+                              Colors.blueGrey,
+                              Colors.white,
+                              Colors.blueGrey,
+                              Colors.white,
+                              Colors.blueGrey,
+                              Colors.white,
+                            ],
+                          ),
                         ],
-                      ),
-                    ],
-                    // isRepeatingAnimation: true,
-                  ): Text(
-                    "Enhanced: ${card.enhanced.toString()}",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 9 * scale,
-                    )),),
+                        // isRepeatingAnimation: true,
+                      )
+                    : Text("Enhanced: ${card.enhanced.toString()}",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 9 * scale,
+                        )),
+              ),
             if (card.owner != "")
               Positioned(
                 height: 15 * scale,

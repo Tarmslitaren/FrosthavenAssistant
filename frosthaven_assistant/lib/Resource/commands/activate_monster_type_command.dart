@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../enums.dart';
@@ -17,7 +16,7 @@ class ActivateMonsterTypeCommand extends Command {
     Monster? monster;
     for (var item in _gameState.currentList) {
       if (item.id == name) {
-        if(item is Monster) {
+        if (item is Monster) {
           item.isActive = activate;
           monster = item;
         }
@@ -31,11 +30,11 @@ class ActivateMonsterTypeCommand extends Command {
         GameMethods.sortItemToPlace(name, GameMethods.getInitiative(monster!));
       }
     }
-    if(getIt<GameState>().roundState.value == RoundState.playTurns) {
+    if (getIt<GameState>().roundState.value == RoundState.playTurns) {
       Future.delayed(const Duration(milliseconds: 600), () {
         getIt<GameState>().updateList.value++;
       });
-    }else {
+    } else {
       getIt<GameState>().updateList.value++;
     }
   }

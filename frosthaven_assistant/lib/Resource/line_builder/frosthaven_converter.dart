@@ -1,6 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/line_builder.dart';
 
 class FrosthavenConverter {
@@ -69,12 +68,6 @@ class FrosthavenConverter {
         isElementUse = false;
       }
 
-      //remove this special temporarily
-      bool noCalc = false;
-      if (line.startsWith('>^')) {
-        line = line.substring(1);
-        noCalc = true;
-      }
       if (line.startsWith("^") && isSubLine && !startOfConditional) {
         if (line[1] == '%' ||
             //these are all very... assuming.
@@ -136,10 +129,6 @@ class FrosthavenConverter {
                   !line.startsWith("^All"))) {
             //isReallySubLine = false; //block useblocks from having straight sublines?
             //hope this doesn't come back to bite me (flame demon 77) - it does savvas lavaflow 51
-          }
-          //add back no calculation marker
-          if (noCalc == true) {
-            line = "^$line";
           }
           line = "!$line";
           line = line.replaceFirst("Self", "self");
@@ -283,14 +272,6 @@ class FrosthavenConverter {
       }
     }
 
-    /*Widget widget1 = Text.rich(
-      textHeightBehavior: const TextHeightBehavior(
-          leadingDistribution: TextLeadingDistribution.even),
-      textAlign: textAlign,
-      TextSpan(
-        children: list1,
-      ),
-    );*/
     Row widget1 = Row(children: list1);
 
     Widget widget2 = Container(
@@ -318,30 +299,8 @@ class FrosthavenConverter {
             Row(
               children: list2[3],
             )
-
-          //can't figure out why the builder does not work
-          /*ListView.builder(
-            itemCount: list2.length,
-            itemBuilder: (context, index) => Text.rich(
-              textHeightBehavior: const TextHeightBehavior(
-                  leadingDistribution: TextLeadingDistribution.even
-              ),
-              textAlign: textAlign,
-              TextSpan(
-                children: list2[index],
-              ),
-          )
-          )*/
         ])
-        //)
         );
-    MainAxisAlignment alignment = MainAxisAlignment.center;
-    if (textAlign == TextAlign.end) {
-      alignment = MainAxisAlignment.end;
-    }
-    if (textAlign == TextAlign.start) {
-      alignment = MainAxisAlignment.start;
-    }
 
     Widget row = Row(
       mainAxisSize: MainAxisSize.max,
@@ -384,17 +343,14 @@ class FrosthavenConverter {
       for (Widget item in widget.children) {
         retVal.addAll(getAllImagesInWidget(item));
       }
-    }
-    else if (widget is Container && widget.child != null) {
+    } else if (widget is Container && widget.child != null) {
       retVal.addAll(getAllImagesInWidget(widget.child!));
-    }
-    else if (widget is Image) {
+    } else if (widget is Image) {
       retVal.add(widget.semanticLabel!);
     }
 
     return retVal;
   }
-
 
   static String getAllTextInWidget(Widget widget) {
     String retVal = "";
@@ -417,12 +373,11 @@ class FrosthavenConverter {
 
   static void applyConditionalGraphics(var lines, double scale, bool elementUse,
       double rightMargin, bool bossStatCard, Row child) {
-
     bool belongs = true;
-    if(lines.isEmpty) {
+    if (lines.isEmpty) {
       belongs = false;
     } else {
-      if(lines.last is Image) {
+      if (lines.last is Image) {
         if ((lines.last as Image).semanticLabel!.contains("divider")) {
           belongs = false;
         }
@@ -431,8 +386,9 @@ class FrosthavenConverter {
 
     //sniff the child if it is a element to element thing
     List<String> graphics = getAllImagesInWidget(child);
-    if(graphics.length == 2) {
-      if(LineBuilder.isElement(graphics[0]) &&LineBuilder.isElement(graphics[1])){
+    if (graphics.length == 2) {
+      if (LineBuilder.isElement(graphics[0]) &&
+          LineBuilder.isElement(graphics[1])) {
         belongs = false;
       }
     }
@@ -475,7 +431,6 @@ class FrosthavenConverter {
                               radix: 16)),
                           borderRadius:
                               BorderRadius.all(Radius.circular(10.0 * scale))),
-                      //TODO: should the padding be dependant on nr of lines?
                       padding: EdgeInsets.fromLTRB(
                           elementUse ? 1.0 * scale : 3.0 * scale,
                           0.25 * scale,

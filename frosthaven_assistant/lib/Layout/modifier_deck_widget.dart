@@ -26,7 +26,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   bool _animationsEnabled = false;
 
-
   void _modelDataListener() {
     setState(() {});
   }
@@ -89,34 +88,31 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   static const int cardAnimationDuration = 1200;
 
-
   bool initAnimationEnabled() {
-    if(getIt<Settings>().client.value == ClientState.connected) {
-      return true;  //TODO: instead of looking at nonexistent commandDescriptions, look at last gameState
+    if (getIt<Settings>().client.value == ClientState.connected) {
+      return true; //TODO: instead of looking at nonexistent commandDescriptions, look at last gameState
     }
 
-    if(getIt<Settings>().server.value && getIt<GameState>().commandIndex.value >= 0) {
-
+    if (getIt<Settings>().server.value &&
+        getIt<GameState>().commandIndex.value >= 0) {
       final int commandIndex = getIt<GameState>().commandIndex.value;
-      if(commandIndex < 0) {
+      if (commandIndex < 0) {
         return false;
       }
-      if (getIt<GameState>()
-          .commandDescriptions.length > commandIndex) {
-        String commandDescription = getIt<GameState>()
-            .commandDescriptions[commandIndex];
+      if (getIt<GameState>().commandDescriptions.length > commandIndex) {
+        String commandDescription =
+            getIt<GameState>().commandDescriptions[commandIndex];
         //todo: also: missing info. need to check for updateForUndo
-        if(widget.name == "allies") {
-          if(commandDescription.contains("allies modifier card")) {
+        if (widget.name == "allies") {
+          if (commandDescription.contains("allies modifier card")) {
             return true;
           }
         } else {
-          if(commandDescription.contains("monster modifier card")) {
+          if (commandDescription.contains("monster modifier card")) {
             return true;
           }
         }
       }
-
     }
     return false;
   }
@@ -127,13 +123,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     double height = 39 * settings.userScalingBars.value;
 
     var screenSize = MediaQuery.of(context).size;
-    double xOffset =
-        -(screenSize.width / 2 - 63 * settings.userScalingBars.value); //TODO: tweak to be exactly center
-    double yOffset = -(screenSize.height / 2 - height / 2); //TODO: not correct depending on position of the deck widget
+    double xOffset = -(screenSize.width / 2 -
+        63 * settings.userScalingBars.value); //TODO: tweak to be exactly center
+    double yOffset = -(screenSize.height / 2 -
+        height /
+            2); //TODO: not correct depending on position of the deck widget
 
     if (!_animationsEnabled) {
-      return Container(
-          child: child);
+      return Container(child: child);
     }
 
     return Container(
@@ -163,7 +160,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                 child: ScaleAnimatedWidget(
                     //does nothing
                     enabled: true,
-                    duration: const Duration(milliseconds: cardAnimationDuration),
+                    duration:
+                        const Duration(milliseconds: cardAnimationDuration),
                     values: const [1, 4, 4, 4, 1],
                     child: RotationAnimatedWidget(
                         enabled: true,
@@ -184,7 +182,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   @override
   Widget build(BuildContext context) {
     ModifierDeck deck = _gameState.modifierDeck;
-    if(widget.name == "allies") {
+    if (widget.name == "allies") {
       deck = _gameState.modifierDeckAllies;
     }
 
@@ -199,8 +197,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
             child: ValueListenableBuilder<int>(
                 valueListenable: _gameState.commandIndex, //blanket
                 builder: (context, value, child) {
-
-                  if (_animationsEnabled != true ) {
+                  if (_animationsEnabled != true) {
                     _animationsEnabled = initAnimationEnabled();
                   }
 
@@ -210,7 +207,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                           onTap: () {
                             setState(() {
                               _animationsEnabled = true;
-                              _gameState.action(DrawModifierCardCommand(widget.name));
+                              _gameState
+                                  .action(DrawModifierCardCommand(widget.name));
                             });
                           },
                           child: Stack(children: [
@@ -229,8 +227,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 bottom: 0,
                                 right: 2 * settings.userScalingBars.value,
                                 child: Text(
-                                  deck.cardCount.value
-                                      .toString(),
+                                  deck.cardCount.value.toString(),
                                   style: TextStyle(
                                       fontSize:
                                           12 * settings.userScalingBars.value,
@@ -252,64 +249,59 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         width: 2 * settings.userScalingBars.value,
                       ),
                       InkWell(
-                        //behavior: HitTestBehavior.opaque, //makes tappable when no graphics
+                          //behavior: HitTestBehavior.opaque, //makes tappable when no graphics
                           onTap: () {
-                            openDialog(context, ModifierCardMenu(name: deck.name));
+                            openDialog(
+                                context, ModifierCardMenu(name: deck.name));
                           },
                           child: Stack(children: [
-
                             deck.discardPile.size() > 2
-                            ? buildStayAnimation(
-                                RotationTransition(
-                                    turns: const AlwaysStoppedAnimation(
-                                        15 / 360),
-                                    child: ModifierCardWidget(
-                                      name: deck.name,
-                                      card: deck.discardPile
-                                          .getList()[deck.discardPile
-                                              .getList()
-                                              .length -
-                                          3],
-                                      revealed: true,
-                                    )),
-                              )
-                            : Container(),
+                                ? buildStayAnimation(
+                                    RotationTransition(
+                                        turns: const AlwaysStoppedAnimation(
+                                            15 / 360),
+                                        child: ModifierCardWidget(
+                                          name: deck.name,
+                                          card: deck.discardPile.getList()[deck
+                                                  .discardPile
+                                                  .getList()
+                                                  .length -
+                                              3],
+                                          revealed: true,
+                                        )),
+                                  )
+                                : Container(),
                             deck.discardPile.size() > 1
-                            ? buildSlideAnimation(
-                                RotationTransition(
-                                    turns: const AlwaysStoppedAnimation(
-                                        15 / 360),
-                                    child: ModifierCardWidget(
-                                      name: deck.name,
-                                      card: deck.discardPile
-                                          .getList()[deck.discardPile
-                                              .getList()
-                                              .length -
-                                          2],
-                                      revealed: true,
-                                    )),
-                                Key(deck.discardPile
-                                    .size()
-                                    .toString()))
-                            : Container(),
+                                ? buildSlideAnimation(
+                                    RotationTransition(
+                                        turns: const AlwaysStoppedAnimation(
+                                            15 / 360),
+                                        child: ModifierCardWidget(
+                                          name: deck.name,
+                                          card: deck.discardPile.getList()[deck
+                                                  .discardPile
+                                                  .getList()
+                                                  .length -
+                                              2],
+                                          revealed: true,
+                                        )),
+                                    Key(deck.discardPile.size().toString()))
+                                : Container(),
                             deck.discardPile.isNotEmpty
-                            ? buildDrawAnimation(
-                                ModifierCardWidget(
-                                  name: deck.name,
-                                  key: Key(deck.discardPile
-                                      .size()
-                                      .toString()),
-                                  card: deck.discardPile.peek,
-                                  revealed: true,
-                                ),
-                                Key((-deck.discardPile
-                                        .size())
-                                    .toString()))
-                            : SizedBox(
-                                width: 66.6666 *
-                                    settings.userScalingBars.value,
-                                height: 39 * settings.userScalingBars.value,
-                              ),
+                                ? buildDrawAnimation(
+                                    ModifierCardWidget(
+                                      name: deck.name,
+                                      key: Key(
+                                          deck.discardPile.size().toString()),
+                                      card: deck.discardPile.peek,
+                                      revealed: true,
+                                    ),
+                                    Key((-deck.discardPile.size()).toString()))
+                                : SizedBox(
+                                    width: 66.6666 *
+                                        settings.userScalingBars.value,
+                                    height: 39 * settings.userScalingBars.value,
+                                  ),
                           ]))
                     ],
                   );

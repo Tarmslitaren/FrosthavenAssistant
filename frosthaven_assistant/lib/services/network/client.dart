@@ -26,9 +26,7 @@ class Client {
     try {
       int port = int.parse(_settings.lastKnownPort);
       debugPrint("port nr: ${port.toString()}");
-      await _connection
-          .connect(address, port)
-          .then((Socket socket) {
+      await _connection.connect(address, port).then((Socket socket) {
         runZoned(() {
           _settings.client.value = ClientState.connected;
           String info =

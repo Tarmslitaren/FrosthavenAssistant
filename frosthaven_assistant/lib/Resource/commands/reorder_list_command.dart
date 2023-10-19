@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
@@ -22,5 +21,4 @@ class ReorderListCommand extends Command {
   String describe() {
     return "Reorder List";
   }
-
 }

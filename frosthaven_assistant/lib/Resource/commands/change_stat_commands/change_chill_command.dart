@@ -1,4 +1,3 @@
-
 import '../../../services/service_locator.dart';
 import '../../state/figure_state.dart';
 import '../../state/game_state.dart';
@@ -9,11 +8,9 @@ class ChangeChillCommand extends ChangeStatCommand {
 
   @override
   void execute() {
-
     FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
 
     figure.chill.value += change;
-
   }
 
   @override
@@ -25,8 +22,7 @@ class ChangeChillCommand extends ChangeStatCommand {
   @override
   String describe() {
     //todo: not correct for summons?
-    if(change > 0) {
-
+    if (change > 0) {
       return "Increase $ownerId's chill";
     }
     return "Decrease $ownerId's chill";

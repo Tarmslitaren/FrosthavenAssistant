@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import '../services/network/communication.dart';
@@ -53,7 +55,7 @@ class ActionHandler {
 
           //send last game state if connected
           if (isServer) {
-            print(
+            log(
                 'server sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
             //should send a special undo message? yes
             getIt<Network>().server.send(
@@ -87,7 +89,7 @@ class ActionHandler {
 
       //send last game state if connected
       if (isServer) {
-        print(
+        log(
             'server sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
         getIt<Network>().server.send(
             "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates[commandIndex.value + 1]!.getState()}");
@@ -122,21 +124,21 @@ class ActionHandler {
     }
     getIt<GameState>().save(); //save after each action
 
-    //send last gamestate if connected
+    //send last game state if connected
     if (isServer) {
-      print(
+      log(
           'server sends, index: ${commandIndex.value}, description:${command.describe()}');
       getIt<Network>().server.send(
           "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameSaveStates.last!.getState()}");
     } else if (isClient) {
-      print(
+      log(
           'client sends, index: ${commandIndex.value}, description:${command.describe()}');
       _communication.sendToAll(
           "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameSaveStates.last!.getState()}");
     }
 
-    //TODO: this is breaking if commandindex is not in sync with commands. aa in connected state.
-    //really need to go over this again: do we really need to save commands at all, or are savestates + descriptions enough also for offline?
+    //TODO: this is breaking if command index is not in sync with commands. aa in connected state.
+    //really need to go over this again: do we really need to save commands at all, or are save states + descriptions enough also for offline?
     if (commandIndex.value >= maxUndo) {
       if (commands.length > commandIndex.value) {
         commands[commandIndex.value - maxUndo] = null;

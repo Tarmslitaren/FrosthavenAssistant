@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/state/character.dart';
@@ -25,8 +24,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   String chosenGfx = "blue";
 
   final List<SummonModel> _summonList = [];
-  final AdjustableScrollController _scrollController =
-      AdjustableScrollController();
+  final ScrollController _scrollController =
+      ScrollController();
 
   @override
   initState() {
@@ -50,10 +49,10 @@ class AddSummonMenuState extends State<AddSummonMenu> {
       }
     }
     _summonList.addAll(_gameState.itemSummonData);
-    
-    if(getIt<Settings>().showCustomContent.value == false) {
+
+    if (getIt<Settings>().showCustomContent.value == false) {
       //-4 because there are 4 custom summons. I know.
-      _summonList.removeRange(_summonList.length-4, _summonList.length);
+      _summonList.removeRange(_summonList.length - 4, _summonList.length);
     }
   }
 
@@ -245,7 +244,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                               }
                               if (model.standees < 2 && model.gfx.isNotEmpty) {
                                 chosenNr =
-                                    0; //don't show on monsterbox unless standees are numbered
+                                    0; //don't show on monster box unless standees are numbered
                               }
                               SummonData summonData = SummonData(
                                   chosenNr,

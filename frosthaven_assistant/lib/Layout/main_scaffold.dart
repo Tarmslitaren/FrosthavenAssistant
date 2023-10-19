@@ -75,7 +75,7 @@ Widget createMainScaffold(BuildContext context) {
                                 sectionWidth -=
                                     94 * barScale; //width of loot deck
                               }
-                              if (!modFitsOnBar || GameMethods.hasAllies()) {
+                              if ((!modFitsOnBar || GameMethods.shouldShowAlliesDeck()) && getIt<Settings>().showAmdDeck.value) {
                                 sectionWidth -= 153 * barScale; //width of amd
                               }
 
@@ -87,10 +87,15 @@ Widget createMainScaffold(BuildContext context) {
                                   ?.scenarios[gameState.scenario.value]
                                   ?.sections
                                   .length;
-                              if(nrOfSections != null && gameState.scenarioSectionsAdded.length == nrOfSections) {
+                              if (nrOfSections != null &&
+                                  gameState.scenarioSectionsAdded.length ==
+                                      nrOfSections) {
                                 nrOfSections = null;
                               }
-                              if(getIt<Settings>().showSectionsInMainView.value == false) {
+                              if (getIt<Settings>()
+                                      .showSectionsInMainView
+                                      .value ==
+                                  false) {
                                 nrOfSections = null;
                               }
                               if ((nrOfSections != null &&
@@ -109,27 +114,31 @@ Widget createMainScaffold(BuildContext context) {
                                   width: screenWidth,
                                   bottom: 4 * barScale,
                                   left: 20,
-                                  child: Column(
-                                      children: [
+                                  child: Column(children: [
                                     Row(
-                                        mainAxisAlignment: ((!sectionsOnSeparateRow && nrOfSections != null) || hasLootDeck)?
-                                            MainAxisAlignment.spaceBetween :  MainAxisAlignment.end,
+                                        mainAxisAlignment:
+                                            ((!sectionsOnSeparateRow &&
+                                                        nrOfSections != null) ||
+                                                    hasLootDeck)
+                                                ? MainAxisAlignment.spaceBetween
+                                                : MainAxisAlignment.end,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.end,
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           if (hasLootDeck)
                                             const LootDeckWidget(),
-                                          if (!sectionsOnSeparateRow && nrOfSections != null)
-                                            Container(
+                                          if (!sectionsOnSeparateRow &&
+                                              nrOfSections != null)
+                                            SizedBox(
                                               width: sectionWidth,
                                               child: const SectionList(),
                                             ),
                                           Column(children: [
-                                            if (GameMethods.hasAllies())
+                                            if (GameMethods.shouldShowAlliesDeck())
                                               const ModifierDeckWidget(
                                                   name: "allies"),
-                                            if (!modFitsOnBar)
+                                            if (!modFitsOnBar && getIt<Settings>().showAmdDeck.value)
                                               Container(
                                                   margin: EdgeInsets.only(
                                                     top: 4 * barScale,
@@ -140,8 +149,9 @@ Widget createMainScaffold(BuildContext context) {
                                                   ))
                                           ])
                                         ]),
-                                    if (sectionsOnSeparateRow && nrOfSections != null)
-                                      Container(
+                                    if (sectionsOnSeparateRow &&
+                                        nrOfSections != null)
+                                      SizedBox(
                                         width: sectionWidth,
                                         child: const SectionList(),
                                       ),

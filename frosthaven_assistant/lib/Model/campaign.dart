@@ -11,14 +11,20 @@ import 'package:frosthaven_assistant/Model/scenario.dart';
 
 @immutable
 class CampaignModel {
-  const CampaignModel({required this.edition, required this.monsterAbilities, required this.monsters, required this.characters, required this.scenarios});
+  const CampaignModel(
+      {required this.edition,
+      required this.monsterAbilities,
+      required this.monsters,
+      required this.characters,
+      required this.scenarios});
   final String edition;
   final List<MonsterAbilityDeckModel> monsterAbilities;
-  final Map< String, MonsterModel> monsters;
+  final Map<String, MonsterModel> monsters;
   final List<CharacterClass> characters;
-  final Map< String, ScenarioModel> scenarios;
+  final Map<String, ScenarioModel> scenarios;
 
-  factory CampaignModel.fromJson(Map<String, dynamic> data, List<RoomsModel> roomsData) {
+  factory CampaignModel.fromJson(
+      Map<String, dynamic> data, List<RoomsModel> roomsData) {
     // note the explicit cast to String
     // this is required if robust lint rules are enabled
     final edition = data['edition'] as String;
@@ -30,7 +36,7 @@ class CampaignModel {
 
     Map<String, MonsterModel> monsterMap = HashMap();
     final monsters = data['monsters'] as Map<dynamic, dynamic>;
-    for (String key in monsters.keys){
+    for (String key in monsters.keys) {
       monsterMap[key] = MonsterModel.fromJson(monsters[key], key, edition);
     }
 
@@ -42,13 +48,19 @@ class CampaignModel {
 
     Map<String, ScenarioModel> scenarioMap = HashMap();
     final scenarios = data['scenarios'] as Map<dynamic, dynamic>;
-    for (String key in scenarios.keys){
+    for (String key in scenarios.keys) {
       //find right room if exists
 
-      RoomsModel? rooms = roomsData.firstWhereOrNull((element) => element.scenarioName == key.substring(1).split(" ")[0]);
+      RoomsModel? rooms = roomsData.firstWhereOrNull(
+          (element) => element.scenarioName == key.substring(1).split(" ")[0]);
       scenarioMap[key] = ScenarioModel.fromJson(key, scenarios[key], rooms);
     }
 
-    return CampaignModel(edition: edition, monsterAbilities: deckDataList, monsters: monsterMap, characters: characterDataList, scenarios: scenarioMap);
+    return CampaignModel(
+        edition: edition,
+        monsterAbilities: deckDataList,
+        monsters: monsterMap,
+        characters: characterDataList,
+        scenarios: scenarioMap);
   }
 }

@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
@@ -15,12 +14,11 @@ class EnhanceLootCardCommand extends Command {
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {
-    if(value <= 0) {
+    if (value <= 0) {
       return "Remove Loot Enhancement";
     }
     return "Add Loot Enhancement";

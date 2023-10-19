@@ -26,10 +26,12 @@ class NetworkUIState extends State<NetworkUI> {
         builder: (context, value, child) {
           Future.delayed(const Duration(milliseconds: 200), () {
             String message = getIt<Network>().networkMessage.value;
-            if(message != "") {
-              if(message.toLowerCase().contains("error") ||message.toLowerCase().contains("disconnected")||message.toLowerCase().contains("lost")) {
+            if (message != "") {
+              if (message.toLowerCase().contains("error") ||
+                  message.toLowerCase().contains("disconnected") ||
+                  message.toLowerCase().contains("lost")) {
                 showToastSticky(context, getIt<Network>().networkMessage.value);
-              }else {
+              } else {
                 showToast(context, getIt<Network>().networkMessage.value);
               }
               getIt<Network>().networkMessage.value = "";

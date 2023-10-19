@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/character.dart';
@@ -13,7 +12,7 @@ class AddCharacterCommand extends Command {
   late Character character;
 
   AddCharacterCommand(this._name, this._display, this._level) {
-    character = GameMethods.createCharacter(_name,_display, _level)!;
+    character = GameMethods.createCharacter(_name, _display, _level)!;
   }
 
   @override

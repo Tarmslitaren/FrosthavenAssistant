@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
@@ -13,8 +12,7 @@ class AddLootCardCommand extends Command {
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {

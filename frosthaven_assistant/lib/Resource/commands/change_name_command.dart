@@ -1,4 +1,3 @@
-
 import 'package:collection/collection.dart';
 import 'package:frosthaven_assistant/Resource/state/character.dart';
 
@@ -11,21 +10,18 @@ class ChangeNameCommand extends Command {
   final String name;
   final String characterId;
 
-
   @override
   void execute() {
     GameState gameState = getIt<GameState>();
     Character? character = gameState.currentList
         .firstWhereOrNull((element) => element.id == name) as Character?;
-    if(character != null) {
+    if (character != null) {
       character.characterState.display.value = name;
     }
-
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 
@@ -25,10 +24,10 @@ TextStyle getSmallTextStyle(double scale) {
 bool isLargeTablet(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;
-  if(screenWidth < screenHeight && screenHeight > 1200) {
+  if (screenWidth < screenHeight && screenHeight > 1200) {
     return true;
   }
-  if(screenWidth > screenHeight && screenWidth > 1200) {
+  if (screenWidth > screenHeight && screenWidth > 1200) {
     return true;
   }
   return false;
@@ -37,10 +36,10 @@ bool isLargeTablet(BuildContext context) {
 bool isPhoneScreen(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;
-  if(screenWidth > screenHeight && screenHeight < 600) {
+  if (screenWidth > screenHeight && screenHeight < 600) {
     return true;
   }
-  if(screenWidth < screenHeight && screenWidth < 600) {
+  if (screenWidth < screenHeight && screenWidth < 600) {
     return true;
   }
   return false;
@@ -59,7 +58,8 @@ void openDialog(BuildContext context, Widget widget) {
   openDialogWithDismissOption(context, widget, true);
 }
 
-void openDialogWithDismissOption(BuildContext context, Widget widget, bool dismissable) {
+void openDialogWithDismissOption(
+    BuildContext context, Widget widget, bool dismissable) {
   //could potentially modify edge insets based on screen width.
   Widget innerWidget = Stack(children: [
     Positioned(
@@ -76,8 +76,9 @@ void openDialogWithDismissOption(BuildContext context, Widget widget, bool dismi
     )
   ]);
   showDialog(
-    barrierDismissible: dismissable,
-      context: context, builder: (BuildContext context) => innerWidget);
+      barrierDismissible: dismissable,
+      context: context,
+      builder: (BuildContext context) => innerWidget);
 }
 
 //note: not working properly and not used
@@ -208,10 +209,8 @@ showToast(BuildContext context, String text) {
       },
       child: Text(
         text,
-        style: const TextStyle(
-            fontFamily: "markazi",
-            fontSize: 28
-        ),),
+        style: const TextStyle(fontFamily: "markazi", fontSize: 28),
+      ),
     ),
     backgroundColor: Colors.teal,
   ));
@@ -219,25 +218,24 @@ showToast(BuildContext context, String text) {
 
 showToastSticky(BuildContext context, String text) {
   ScaffoldMessenger.of(context).clearSnackBars();
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    duration: const Duration(days: 1),
-    content: GestureDetector(
-      onTap: () {
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      },
-      child: Text(
-        text,
-        style: const TextStyle(
-            fontFamily: "markazi",
-            fontSize: 28
-        ),),
-    ),
-    backgroundColor: Colors.teal,
-  )).closed
+  ScaffoldMessenger.of(context)
+      .showSnackBar(SnackBar(
+        duration: const Duration(days: 1),
+        content: GestureDetector(
+          onTap: () {
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+          },
+          child: Text(
+            text,
+            style: const TextStyle(fontFamily: "markazi", fontSize: 28),
+          ),
+        ),
+        backgroundColor: Colors.teal,
+      ))
+      .closed
       .then((value) {
-        if(getIt<GameState>().toastMessage.value == text) {
-          GameMethods.setToastMessage("");
-        }
-      });
-
+    if (getIt<GameState>().toastMessage.value == text) {
+      GameMethods.setToastMessage("");
+    }
+  });
 }

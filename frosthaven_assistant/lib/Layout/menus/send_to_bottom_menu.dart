@@ -4,15 +4,18 @@ import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
 
-class SendToBottomMenu extends StatefulWidget { //it's for modifier deck
+class SendToBottomMenu extends StatefulWidget {
+  //it's for modifier deck
   final int currentIndex;
   final int length;
   final bool allies;
 
-  const SendToBottomMenu({
-    Key? key,
-    required this.currentIndex, required this.length, required this.allies
-  }) : super(key: key);
+  const SendToBottomMenu(
+      {Key? key,
+      required this.currentIndex,
+      required this.length,
+      required this.allies})
+      : super(key: key);
 
   @override
   SendToBottomMenuState createState() => SendToBottomMenuState();
@@ -47,13 +50,13 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
           ),
           TextButton(
               onPressed: () {
-                int oldIndex = widget.length-1 - widget.currentIndex;
-                int newIndex = widget.length-1;
-                _gameState.action(ReorderModifierListCommand(0, oldIndex, widget.allies));
+                int oldIndex = widget.length - 1 - widget.currentIndex;
+                _gameState.action(
+                    ReorderModifierListCommand(0, oldIndex, widget.allies));
                 Navigator.pop(context);
               },
               child:
-              const Text("Send to Bottom", style: TextStyle(fontSize: 20))),
+                  const Text("Send to Bottom", style: TextStyle(fontSize: 20))),
         ]));
   }
 }

@@ -1248,14 +1248,14 @@
         },
         "Stone Golem (22)": {
           "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
             0,
             0,
             0
+          ],
+          "elite": [
+            1,
+            1,
+            1
           ]
         },
         "Vermling Raider (22)": {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_loot_card_command.dart';
 import '../../services/service_locator.dart';
 
@@ -20,10 +19,9 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
 
   Widget createListTile(name, index) {
     ListTile listTile = ListTile(
-      onTap: (){
+      onTap: () {
         setState(() {
-          getIt<GameState>().action(
-              AddLootCardCommand(name));
+          getIt<GameState>().action(AddLootCardCommand(name));
         });
       },
       contentPadding: const EdgeInsets.only(left: 14),
@@ -31,8 +29,8 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
       minLeadingWidth: 0,
       horizontalTitleGap: 6,
       leading:
-      //Row(children: [
-      Image(
+          //Row(children: [
+          Image(
         filterQuality: FilterQuality.medium,
         height: 30,
         width: 30,
@@ -45,19 +43,19 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
         maxLines: 1,
       ),
       // ]),
-      trailing: Text(
-          "added: ${getIt<GameState>().lootDeck.addedCards[index]}   ",
-          style: const TextStyle(
-            fontSize: 18,)
-          ),
+      trailing:
+          Text("added: ${getIt<GameState>().lootDeck.addedCards[index]}   ",
+              style: const TextStyle(
+                fontSize: 18,
+              )),
     );
     return listTile;
   }
 
   @override
   Widget build(BuildContext context) {
-    final AdjustableScrollController scrollController =
-    AdjustableScrollController();
+    final ScrollController scrollController =
+        ScrollController();
 
     return Card(
         child: Scrollbar(
@@ -73,8 +71,8 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
                       Container(
                         constraints: const BoxConstraints(maxWidth: 300),
                         child: Column(
-                          //mainAxisAlignment: MainAxisAlignment.start,
-                          //crossAxisAlignment: CrossAxisAlignment.start,
+                            //mainAxisAlignment: MainAxisAlignment.start,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
                                 "Add Extra Loot Card",

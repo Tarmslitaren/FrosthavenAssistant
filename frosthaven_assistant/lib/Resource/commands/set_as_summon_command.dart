@@ -1,4 +1,3 @@
-
 import 'package:frosthaven_assistant/Resource/state/monster_instance.dart';
 
 import '../../services/service_locator.dart';
@@ -14,8 +13,9 @@ class SetAsSummonCommand extends Command {
   @override
   void execute() {
     FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
-    if(summoned) {
-      (figure as MonsterInstance).roundSummoned = getIt<GameState>().round.value;
+    if (summoned) {
+      (figure as MonsterInstance).roundSummoned =
+          getIt<GameState>().round.value;
     } else {
       (figure as MonsterInstance).roundSummoned = -1;
     }
@@ -29,7 +29,7 @@ class SetAsSummonCommand extends Command {
 
   @override
   String describe() {
-    if(summoned) {
+    if (summoned) {
       return "Mark $ownerId as summon";
     }
     return "Remove $ownerId's summon mark";

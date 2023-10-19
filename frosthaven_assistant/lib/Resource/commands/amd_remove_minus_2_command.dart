@@ -24,12 +24,11 @@ class AMDRemoveMinus2Command extends Command {
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {
-    if (remove){
+    if (remove) {
       return "Remove minus two";
     } else {
       return "Add back minus two";

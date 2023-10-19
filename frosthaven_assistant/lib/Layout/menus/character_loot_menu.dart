@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/state/character.dart';
 import '../../services/service_locator.dart';
 
@@ -117,8 +116,8 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final AdjustableScrollController scrollController =
-        AdjustableScrollController();
+    final ScrollController scrollController =
+        ScrollController();
 
     List<Character> characters = GameMethods.getCurrentCharacters();
 

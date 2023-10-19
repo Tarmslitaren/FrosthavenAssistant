@@ -37,6 +37,7 @@ class Settings {
   final showReminders = ValueNotifier<bool>(true);
   final autoAddStandees = ValueNotifier<bool>(true);
   final autoAddSpawns = ValueNotifier<bool>(true);
+  final showAmdDeck = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -134,21 +135,15 @@ class Settings {
     String saveState = toString();
 
     const sharedPrefsKey = 'settingsState';
-    bool _hasError = false;
-    bool _isWaiting = true;
-    //notifyListeners();
     try {
       final prefs = await SharedPreferences.getInstance();
       // save
-      // uncomment this to simulate an error-during-save
-      // if (_value > 3) throw Exception("Artificial Error");
       await prefs.setString(sharedPrefsKey, saveState);
-      _hasError = false;
     } catch (error) {
-      _hasError = true;
+      if (kDebugMode) {
+        print(error);
+      }
     }
-    _isWaiting = false;
-    //notifyListeners();
   }
 
   Future<void> loadFromDisk() async {
@@ -156,17 +151,14 @@ class Settings {
 
     const sharedPrefsKey = 'settingsState';
     String? state;
-    bool _hasError = false;
-    bool _isWaiting = true;
-    //notifyListeners();
     try {
       final prefs = await SharedPreferences.getInstance();
       state = prefs.getString(sharedPrefsKey);
-      _hasError = false;
     } catch (error) {
-      _hasError = true;
+      if (kDebugMode) {
+        print(error);
+      }
     }
-    _isWaiting = false;
     if (state != null) {
       Map<String, dynamic> data = jsonDecode(state);
 
@@ -246,6 +238,10 @@ class Settings {
         autoAddSpawns.value = data["autoAddSpawns"];
       }
 
+      if (data["showAmdDeck"] != null) {
+        showAmdDeck.value = data["showAmdDeck"];
+      }
+
       if (data["connectClientOnStartup"] != null &&
           data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
@@ -300,6 +296,7 @@ class Settings {
         '"showReminders": ${showReminders.value}, '
         '"autoAddStandees": ${autoAddStandees.value}, '
         '"autoAddSpawns": ${autoAddSpawns.value}, '
+        '"showAmdDeck": ${showAmdDeck.value}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort", '

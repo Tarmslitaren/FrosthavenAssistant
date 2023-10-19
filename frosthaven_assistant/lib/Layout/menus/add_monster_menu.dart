@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/add_monster_command.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
@@ -23,8 +22,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   bool _showSpecial = false;
   bool _showBoss = true;
   late String _currentCampaign;
-  final AdjustableScrollController _scrollController =
-      AdjustableScrollController();
+  final ScrollController _scrollController =
+      ScrollController();
 
   @override
   initState() {
@@ -39,11 +38,11 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   }
 
   int compareEditions(String a, String b) {
-    for(String item in _gameState.editions) {
-      if(b == item && a != item) {
+    for (String item in _gameState.editions) {
+      if (b == item && a != item) {
         return 1;
       }
-      if(a == item && b != item) {
+      if (a == item && b != item) {
         return -1;
       }
     }
@@ -73,19 +72,13 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
 
   // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
-    List<MonsterModel> results = [];
     _setCampaign(_currentCampaign);
     if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
-      // results = _allMonsters.toList();
-      // _setCampaign(_currentCampaign);
-      // results = _foundMonsters;
     } else {
       _foundMonsters = _foundMonsters
           .where((user) =>
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
-      // we use the toLowerCase() method to make it case-insensitive
     }
 
     // Refresh the UI
@@ -108,7 +101,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     if (campaign != "All") {
       _foundMonsters.removeWhere((monster) => monster.edition != campaign);
     } else if (getIt<Settings>().showCustomContent.value == false) {
-      _foundMonsters.removeWhere((monster) => GameMethods.isCustomCampaign(monster.edition));
+      _foundMonsters.removeWhere(
+          (monster) => GameMethods.isCustomCampaign(monster.edition));
     }
 
     if (!_showSpecial) {
@@ -121,17 +115,16 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     sortMonsters(_foundMonsters);
   }
 
-  List<DropdownMenuItem<String>> buildEditionDroopDownMenuItems(){
+  List<DropdownMenuItem<String>> buildEditionDroopDownMenuItems() {
     List<DropdownMenuItem<String>> retVal = [];
     retVal.add(const DropdownMenuItem<String>(
         value: "All", child: Text("All Campaigns")));
 
-    for(String item in _gameState.editions) {
-      if(item != "na") {
-        if(!GameMethods.isCustomCampaign(item) || getIt<Settings>().showCustomContent.value == true) {
-          retVal.add(DropdownMenuItem<String>(
-              value: item,
-              child: Text(item)));
+    for (String item in _gameState.editions) {
+      if (item != "na") {
+        if (!GameMethods.isCustomCampaign(item) ||
+            getIt<Settings>().showCustomContent.value == true) {
+          retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
         }
       }
     }
@@ -214,7 +207,6 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                   "assets/images/monsters/${_foundMonsters[index].gfx}.png",
                                   height: 35,
                                   cacheHeight: 75,
-
                                 ),
                                 //iconColor: _foundMonsters[index].color,
                                 title: Text(

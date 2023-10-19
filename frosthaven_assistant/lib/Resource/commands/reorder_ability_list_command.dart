@@ -1,4 +1,3 @@
-
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 
 import '../../services/service_locator.dart';
@@ -14,8 +13,8 @@ class ReorderAbilityListCommand extends Command {
   @override
   void execute() {
     GameState gameState = getIt<GameState>();
-    for(var item in gameState.currentAbilityDecks){
-      if(item.name == deck) {
+    for (var item in gameState.currentAbilityDecks) {
+      if (item.name == deck) {
         List<MonsterAbilityCardModel> list = List.from(item.drawPile.getList());
         list.insert(newIndex, list.removeAt(oldIndex));
         item.drawPile.setList(list);
@@ -25,12 +24,10 @@ class ReorderAbilityListCommand extends Command {
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {
     return "Reorder Ability Cards";
   }
-
 }

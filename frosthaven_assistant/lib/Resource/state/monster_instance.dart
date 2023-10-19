@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../enums.dart';
 import '../stat_calculator.dart';
@@ -7,7 +6,7 @@ import 'figure_state.dart';
 import 'game_state.dart';
 import 'monster.dart';
 
-class MonsterInstance extends FigureState{
+class MonsterInstance extends FigureState {
   MonsterInstance(this.standeeNr, this.type, bool summoned, Monster monster) {
     setLevel(monster);
     gfx = monster.type.gfx;
@@ -15,20 +14,21 @@ class MonsterInstance extends FigureState{
     move = 0; //only used for summons
     attack = 0;
     range = 0;
-    if(summoned) {
+    if (summoned) {
       roundSummoned = getIt<GameState>().round.value;
     } else {
       roundSummoned = -1;
     }
   }
 
-  MonsterInstance.summon(this.standeeNr, this.type, this.name, int summonHealth, this.move, this.attack, this.range, this.gfx, this.roundSummoned) {
+  MonsterInstance.summon(this.standeeNr, this.type, this.name, int summonHealth,
+      this.move, this.attack, this.range, this.gfx, this.roundSummoned) {
     //deal with summon init
     maxHealth.value = summonHealth;
     health.value = summonHealth;
   }
 
-  String getId(){
+  String getId() {
     return name + gfx + standeeNr.toString();
   }
 
@@ -44,11 +44,12 @@ class MonsterInstance extends FigureState{
   int roundSummoned = -1;
 
   void setLevel(Monster monster) {
-    dynamic newHealthValue = 10; //need to put something outer than 0 or the standee will die immediately causing glitch
+    dynamic newHealthValue =
+        10; //need to put something outer than 0 or the standee will die immediately causing glitch
     if (type == MonsterType.boss) {
       newHealthValue = monster.type.levels[monster.level.value].boss!.health;
     } else if (type == MonsterType.elite) {
-      newHealthValue= monster.type.levels[monster.level.value].elite!.health;
+      newHealthValue = monster.type.levels[monster.level.value].elite!.health;
     } else if (type == MonsterType.normal) {
       newHealthValue = monster.type.levels[monster.level.value].normal!.health;
     }
@@ -57,27 +58,29 @@ class MonsterInstance extends FigureState{
       maxHealth.value = value;
     } else {
       //handle edge case
-      if(newHealthValue == "Hollowpact"){
+      if (newHealthValue == "Hollowpact") {
         int value = 7;
-        for(var item in getIt<GameState>().currentList) {
-          if(item is Character && item.id == "Hollowpact") {
-            value = item.characterClass.healthByLevel[item.characterState.level.value-1];
+        for (var item in getIt<GameState>().currentList) {
+          if (item is Character && item.id == "Hollowpact") {
+            value = item.characterClass
+                .healthByLevel[item.characterState.level.value - 1];
             break;
           }
         }
         maxHealth.value = value;
       }
-      if(newHealthValue == "Incarnate"){
+      if (newHealthValue == "Incarnate") {
         int value = 36; //double Incarante's level 5 health
-        for(var item in getIt<GameState>().currentList) {
-          if(item is Character && item.id == "Incarnate") {
-            value = item.characterClass.healthByLevel[item.characterState.level.value-1] * 2;
+        for (var item in getIt<GameState>().currentList) {
+          if (item is Character && item.id == "Incarnate") {
+            value = item.characterClass
+                    .healthByLevel[item.characterState.level.value - 1] *
+                2;
             break;
           }
         }
         maxHealth.value = value;
       }
-
     }
     //maxHealth.value = StatCalculator.calculateFormula(newHealthValue)!;
     level.value = monster.level.value;
@@ -116,29 +119,28 @@ class MonsterInstance extends FigureState{
     move = json["move"];
     attack = json["attack"];
     range = json["range"];
-    if(json.containsKey("roundSummoned")) {
+    if (json.containsKey("roundSummoned")) {
       roundSummoned = json["roundSummoned"];
     } else {
       roundSummoned = -1;
     }
     chill.value = json["chill"];
     List<dynamic> condis = json["conditions"];
-    for(int item in condis){
+    for (int item in condis) {
       conditions.value.add(Condition.values[item]);
     }
 
-    if(json.containsKey("conditionsAddedThisTurn")) {
+    if (json.containsKey("conditionsAddedThisTurn")) {
       List<dynamic> condis2 = json["conditionsAddedThisTurn"];
       for (int item in condis2) {
         conditionsAddedThisTurn.value.add(Condition.values[item]);
       }
     }
-    if(json.containsKey("conditionsAddedPreviousTurn")) {
+    if (json.containsKey("conditionsAddedPreviousTurn")) {
       List<dynamic> condis3 = json["conditionsAddedPreviousTurn"];
       for (int item in condis3) {
         conditionsAddedPreviousTurn.value.add(Condition.values[item]);
       }
     }
   }
-
 }

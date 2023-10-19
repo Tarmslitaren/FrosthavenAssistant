@@ -1,4 +1,3 @@
-
 import 'package:frosthaven_assistant/Resource/state/modifier_deck_state.dart';
 
 import '../../services/service_locator.dart';
@@ -15,7 +14,7 @@ class ReorderModifierListCommand extends Command {
   void execute() {
     GameState gameState = getIt<GameState>();
     ModifierDeck deck = gameState.modifierDeck;
-    if(allies) {
+    if (allies) {
       deck = gameState.modifierDeckAllies;
     }
     List<ModifierCard> list = List.from(deck.drawPile.getList());
@@ -25,10 +24,8 @@ class ReorderModifierListCommand extends Command {
     deck.drawPile.setList(list);
   }
 
-
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {

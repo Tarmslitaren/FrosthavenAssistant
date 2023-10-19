@@ -3,7 +3,8 @@ import 'package:frosthaven_assistant/Model/summon.dart';
 
 @immutable
 class CharacterClass {
-  const CharacterClass(this.name, this.healthByLevel, this.edition, this.color, this.colorSecondary, this.hidden, this.summons);
+  const CharacterClass(this.name, this.healthByLevel, this.edition, this.color,
+      this.colorSecondary, this.hidden, this.summons);
   final String name;
   final String edition;
   final List<int> healthByLevel;
@@ -16,7 +17,7 @@ class CharacterClass {
     final edition = data['edition'] as String;
     final name = data['name'] as String;
     bool hidden = false;
-    if(data.containsKey('hidden')) {
+    if (data.containsKey('hidden')) {
       hidden = data['hidden'] as bool;
     }
     //TODO: noListing value
@@ -25,27 +26,30 @@ class CharacterClass {
     int radix = 16;
     var colorValue = data['color'];
     Color color;
-    if(colorValue is List<dynamic>) {
-      color = Color(int.parse(colorValue[0], radix: radix)); //TODO: handle lists
+    if (colorValue is List<dynamic>) {
+      color =
+          Color(int.parse(colorValue[0], radix: radix)); //TODO: handle lists
     } else {
       color = Color(int.parse(colorValue, radix: radix));
     }
     Color colorSecondary = color;
-    if(data.containsKey("colorSecondary")) {
-      if(data["colorSecondary"] is List<dynamic>) {
-        colorSecondary = Color(int.parse(data['colorSecondary'][0], radix: radix)); //TODO: handle lists
+    if (data.containsKey("colorSecondary")) {
+      if (data["colorSecondary"] is List<dynamic>) {
+        colorSecondary = Color(int.parse(data['colorSecondary'][0],
+            radix: radix)); //TODO: handle lists
       } else {
         colorSecondary = Color(int.parse(data['colorSecondary'], radix: radix));
       }
     }
 
     List<SummonModel> summonList = [];
-    if(data.containsKey('summons')) {
+    if (data.containsKey('summons')) {
       final summons = data['summons'] as Map<dynamic, dynamic>;
-      for (String key in summons.keys){
+      for (String key in summons.keys) {
         summonList.add(SummonModel.fromJson(summons[key], key));
       }
     }
-    return CharacterClass(name, healthByLevel, edition, color, colorSecondary, hidden, summonList);
+    return CharacterClass(name, healthByLevel, edition, color, colorSecondary,
+        hidden, summonList);
   }
 }

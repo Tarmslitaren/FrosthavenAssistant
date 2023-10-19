@@ -1,7 +1,7 @@
-
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../state/game_state.dart';
+
 class DrawLootCardCommand extends Command {
   final GameState _gameState = getIt<GameState>();
 
@@ -9,15 +9,13 @@ class DrawLootCardCommand extends Command {
 
   @override
   void execute() {
-
-    if(_gameState.lootDeck.drawPile.isNotEmpty) {
+    if (_gameState.lootDeck.drawPile.isNotEmpty) {
       _gameState.lootDeck.draw();
     }
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {

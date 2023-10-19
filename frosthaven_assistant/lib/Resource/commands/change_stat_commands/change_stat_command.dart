@@ -1,4 +1,3 @@
-
 import '../../../services/service_locator.dart';
 import '../../action_handler.dart';
 import '../../enums.dart';
@@ -17,13 +16,13 @@ abstract class ChangeStatCommand extends Command {
     this.change = change;
   }
 
-  void handleDeath(){
-    for(var item in getIt<GameState>().currentList){
-      if(item is Monster){
+  void handleDeath() {
+    for (var item in getIt<GameState>().currentList) {
+      if (item is Monster) {
         List<MonsterInstance> newList = [];
         newList.addAll(item.monsterInstances.value);
         for (var instance in item.monsterInstances.value) {
-          if(instance.health.value == 0) {
+          if (instance.health.value == 0) {
             newList.remove(instance);
             item.monsterInstances.value = newList;
             //item.monsterInstances.value.remove(instance);
@@ -35,46 +34,46 @@ abstract class ChangeStatCommand extends Command {
               if (getIt<GameState>().roundState.value ==
                   RoundState.chooseInitiative) {
                 GameMethods.sortCharactersFirst();
-              } else
-              if (getIt<GameState>().roundState.value == RoundState.playTurns) {
+              } else if (getIt<GameState>().roundState.value ==
+                  RoundState.playTurns) {
                 //GameMethods.sortItemToPlace(item.id, 99); //TODO: don't? leave in place until end of round?
               }
-              if(getIt<GameState>().roundState.value == RoundState.playTurns) {
+              if (getIt<GameState>().roundState.value == RoundState.playTurns) {
                 Future.delayed(const Duration(milliseconds: 600), () {
                   getIt<GameState>().updateList.value++;
                 });
-              }else {
+              } else {
                 getIt<GameState>().updateList.value++;
               }
-            }else {
-             // getIt<GameState>().updateList.value++; //check if this was needed for something (will block standee death anim)
+            } else {
+              // getIt<GameState>().updateList.value++; //check if this was needed for something (will block standee death anim)
             }
             break;
           }
         }
       } else if (item is Character) {
         //handle character death
-        if(item.characterState.health.value <= 0) {
+        if (item.characterState.health.value <= 0) {
           getIt<GameState>().updateList.value++;
         }
 
         //handle summon death
         for (var instance in item.characterState.summonList.value) {
-          if(instance.health.value == 0) {
+          if (instance.health.value == 0) {
             item.characterState.summonList.value.remove(instance);
             Future.delayed(const Duration(milliseconds: 600), () {
               getIt<GameState>().killMonsterStandee.value++;
             });
 
             if (item.characterState.summonList.value.isEmpty) {
-              if(getIt<GameState>().roundState.value == RoundState.playTurns) {
+              if (getIt<GameState>().roundState.value == RoundState.playTurns) {
                 Future.delayed(const Duration(milliseconds: 600), () {
                   getIt<GameState>().updateList.value++;
                 });
-              }else {
+              } else {
                 getIt<GameState>().updateList.value++;
               }
-            }else {
+            } else {
               getIt<GameState>().updateList.value++;
             }
             break;

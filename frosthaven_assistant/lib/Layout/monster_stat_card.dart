@@ -66,8 +66,8 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
               isBoss
                   ? MonsterType.boss
                   : left
-                  ? MonsterType.normal
-                  : MonsterType.elite,
+                      ? MonsterType.normal
+                      : MonsterType.elite,
               false));
         }
       } else {
@@ -86,13 +86,12 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
       var leftStyle, var rightStyle, bool frosthavenStyle) {
     MonsterStatsModel normal = data.type.levels[data.level.value].normal!;
     MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
-    double height = 123 * 0.8 * scale;
 
     bool noCalculationSetting = getIt<Settings>().noCalculation.value;
 
     //normal stats calculated:
     String health = normal.health.toString();
-    if(noCalculationSetting == false) {
+    if (noCalculationSetting == false) {
       int? healthValue = StatCalculator.calculateFormula(normal.health);
       if (healthValue != null) {
         health = healthValue.toString();
@@ -100,7 +99,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     }
 
     String move = normal.move.toString();
-    if(noCalculationSetting == false) {
+    if (noCalculationSetting == false) {
       int? moveValue = StatCalculator.calculateFormula(normal.move);
       if (moveValue != null) {
         move = moveValue.toString();
@@ -108,7 +107,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     }
 
     String attack = normal.attack.toString();
-    if(noCalculationSetting == false) {
+    if (noCalculationSetting == false) {
       int? attackValue = StatCalculator.calculateFormula(normal.attack);
       if (attackValue != null) {
         attack = attackValue.toString();
@@ -116,7 +115,6 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     }
 
     return Stack(
-      //alignment: Alignment.center,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0 * scale),
@@ -282,11 +280,10 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
   static Widget buildBossLayout(Monster data, double scale, var shadow,
       var leftStyle, var rightStyle, bool frosthavenStyle) {
     bool noCalculationSetting = getIt<Settings>().noCalculation.value;
-    double height = 123 * 0.8 * scale;
     MonsterStatsModel normal = data.type.levels[data.level.value].boss!;
     //normal stats calculated:
     String health = normal.health.toString();
-    if(noCalculationSetting == false) {
+    if (noCalculationSetting == false) {
       int? healthValue = StatCalculator.calculateFormula(normal.health);
       if (healthValue != null) {
         health = healthValue.toString();
@@ -317,7 +314,7 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
     String attack = normal.attack.toString();
     String move = normal.move.toString();
-    if(noCalculationSetting == false) {
+    if (noCalculationSetting == false) {
       int? moveValue = StatCalculator.calculateFormula(normal.move);
       if (moveValue != null) {
         move = moveValue.toString();
@@ -597,71 +594,76 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
 
     bool isBoss = widget.data.type.levels[widget.data.level.value].boss != null;
 
-    return Container(
-      //height: 93.5 * scale,
+    return SizedBox(
+        //height: 93.5 * scale,
         width: 166 * scale, //167
-        child: Stack(
-        children: [
-      GestureDetector(
-          onDoubleTap: () {
-            setState(() {
-              openDialog(
-                  context,
-                  //problem: context is of stat card widget, not the + button
-                  StatCardZoom(monster: widget.data));
-            });
-          },
-          child: buildCard(widget.data, scale)),
-      if(!isBoss) Positioned(
-          bottom: 5 * scale * 0.8,
-          left: 5 * scale * 0.8,
-          child: SizedBox(
-              width: 25 * scale * 0.8 + 8,
-              height: 25 * scale * 0.8 + 8,
-              child: ValueListenableBuilder<List<MonsterInstance>>(
-                  valueListenable: widget.data.monsterInstances,
-                  builder: (context, value, child) {
-                    bool allStandeesOut =
-                        widget.data.monsterInstances.value.length == widget.data.type.count;
-                    return IconButton(
-                      padding: const EdgeInsets.only(right: 8, top: 8),
-                      icon: Image.asset(
-                          height: 25 * scale * 0.8,
-                          fit: BoxFit.fitHeight,
-                          color:
-                          allStandeesOut ? Colors.white24 : Colors.grey,
-                          colorBlendMode: BlendMode.modulate,
-                          'assets/images/psd/add.png'),
-                      onPressed: () {
-                        _handleAddPressed(widget.data, context, true, false);
-                      },
-                    );
-                  }))),
-      Positioned(
-        bottom: 5 * scale * 0.8,
-          right: 5 * scale * 0.8,
-          child: SizedBox(
-              width: 25 * scale * 0.8 + 8,
-              height: 25 * scale * 0.8 + 8,
-              child: ValueListenableBuilder<List<MonsterInstance>>(
-                  valueListenable: widget.data.monsterInstances,
-                  builder: (context, value, child) {
-                    return IconButton(
-                        padding: const EdgeInsets.only(left: 8, top: 8),
-                        icon: Image.asset(
-                            color: widget.data.monsterInstances.value.length ==
-                                widget.data.type.count
-                                ? Colors.white24
-                                : Colors.grey,
-                            height: 25 * scale * 0.8,
-                            fit: BoxFit.fitHeight,
-                            colorBlendMode: BlendMode.modulate,
-                            'assets/images/psd/add.png'),
-                        onPressed: () {
-                          _handleAddPressed(widget.data, context, false, isBoss);
-                        });
-                  }))),
-    ]));
+        child: Stack(children: [
+          GestureDetector(
+              onDoubleTap: () {
+                setState(() {
+                  openDialog(
+                      context,
+                      //problem: context is of stat card widget, not the + button
+                      StatCardZoom(monster: widget.data));
+                });
+              },
+              child: buildCard(widget.data, scale)),
+          if (!isBoss)
+            Positioned(
+                bottom: 5 * scale * 0.8,
+                left: 5 * scale * 0.8,
+                child: SizedBox(
+                    width: 25 * scale * 0.8 + 8,
+                    height: 25 * scale * 0.8 + 8,
+                    child: ValueListenableBuilder<List<MonsterInstance>>(
+                        valueListenable: widget.data.monsterInstances,
+                        builder: (context, value, child) {
+                          bool allStandeesOut =
+                              widget.data.monsterInstances.value.length ==
+                                  widget.data.type.count;
+                          return IconButton(
+                            padding: const EdgeInsets.only(right: 8, top: 8),
+                            icon: Image.asset(
+                                height: 25 * scale * 0.8,
+                                fit: BoxFit.fitHeight,
+                                color: allStandeesOut
+                                    ? Colors.white24
+                                    : Colors.grey,
+                                colorBlendMode: BlendMode.modulate,
+                                'assets/images/psd/add.png'),
+                            onPressed: () {
+                              _handleAddPressed(
+                                  widget.data, context, true, false);
+                            },
+                          );
+                        }))),
+          Positioned(
+              bottom: 5 * scale * 0.8,
+              right: 5 * scale * 0.8,
+              child: SizedBox(
+                  width: 25 * scale * 0.8 + 8,
+                  height: 25 * scale * 0.8 + 8,
+                  child: ValueListenableBuilder<List<MonsterInstance>>(
+                      valueListenable: widget.data.monsterInstances,
+                      builder: (context, value, child) {
+                        return IconButton(
+                            padding: const EdgeInsets.only(left: 8, top: 8),
+                            icon: Image.asset(
+                                color:
+                                    widget.data.monsterInstances.value.length ==
+                                            widget.data.type.count
+                                        ? Colors.white24
+                                        : Colors.grey,
+                                height: 25 * scale * 0.8,
+                                fit: BoxFit.fitHeight,
+                                colorBlendMode: BlendMode.modulate,
+                                'assets/images/psd/add.png'),
+                            onPressed: () {
+                              _handleAddPressed(
+                                  widget.data, context, false, isBoss);
+                            });
+                      }))),
+        ]));
   }
 
   static List<Widget> _createConditionList(

@@ -1,4 +1,3 @@
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
@@ -136,15 +135,14 @@ class LineBuilder {
     double height = style.fontSize!;
     bool markazi = style.fontFamily == "Markazi";
 
-    if(!markazi && style.height == 0.85){
+    if (!markazi && style.height == 0.85) {
       return height * 0.25;
     }
-    if(markazi && style.height == 0.84) {
+    if (markazi && style.height == 0.84) {
       return height * 0.1;
     }
     return 0;
   }
-
 
   static Widget createLinesColumn(
       CrossAxisAlignment alignment, List<Widget> lines) {
@@ -155,20 +153,16 @@ class LineBuilder {
         children: lines);
   }
 
-  static Widget createLines(
-      List<String> strings,
+  static Widget createLines(List<String> strings,
       final bool left,
       final bool applyStats,
       final bool applyAll,
       final Monster monster,
       final CrossAxisAlignment alignment,
       final double scale,
-      final bool animate
-      ) {
-
-
-
-    bool isBossStatCard = monster.type.levels[0].boss != null && alignment == CrossAxisAlignment.start;
+      final bool animate) {
+    bool isBossStatCard = monster.type.levels[0].boss != null &&
+        alignment == CrossAxisAlignment.start;
 
     String imageSuffix = "";
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster.type);
@@ -212,25 +206,29 @@ class LineBuilder {
         fontSize: (alignment == CrossAxisAlignment.center ? 8.0 : 7.4) * scale,
         //sizes are larger on stat cards
         height: 0.8,
-        backgroundColor: debugColors? Colors.amber: null,
+        backgroundColor: debugColors ? Colors.amber : null,
         //0.85,
         shadows: [shadow]);
     var midStyle = TextStyle(
-        backgroundColor: debugColors? Colors.greenAccent : null,
+        backgroundColor: debugColors ? Colors.greenAccent : null,
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: ((alignment == CrossAxisAlignment.center
-                ? frosthavenStyle
-                    ? 9.52 //7.52 is closer to physical size, but too hard to see on smaller screens
-                    : 8.8
-                :frosthavenStyle? 8.8 : 9.9) *
-            scale),//.floorToDouble()+0.5, //not sur eif flooring the mid scale is realy the best option. or onl yhappens tp work on my android
+            ? frosthavenStyle
+            ? 9.52 //7.52 is closer to physical size, but too hard to see on smaller screens
+            : 8.8
+            : frosthavenStyle
+            ? 8.8
+            : 9.9) *
+            scale), //.floorToDouble()+0.5, //not sur eif flooring the mid scale is realy the best option. or onl yhappens tp work on my android
         //sizes are larger on stat cards
-        height: (alignment == CrossAxisAlignment.center ? frosthavenStyle? 1.0 //he one problem here: one line no icons -> squished
-            : 0.85 :
-        0.85//0.8
-        ),
+        height: (alignment == CrossAxisAlignment.center
+                ? frosthavenStyle
+                    ? 1.0 //he one problem here: one line no icons -> squished
+                    : 0.85
+                : 0.85 //0.8
+            ),
         // 0.9,
         shadows: [shadow]);
     var normalStyle = TextStyle(
@@ -239,7 +237,7 @@ class LineBuilder {
         //textBaseline: TextBaseline.alphabetic,
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: left ? Colors.black : Colors.white,
-        backgroundColor: debugColors? Colors.lightGreen : null,
+        backgroundColor: debugColors ? Colors.lightGreen : null,
         fontSize: (alignment == CrossAxisAlignment.center
                 ? frosthavenStyle
                     ? 13.1
@@ -250,22 +248,23 @@ class LineBuilder {
             ? frosthavenStyle
                 ? 0.84
                 : 0.85 //need a little more than 1 to align the icons? why?
-            : frosthavenStyle? 0.84
-            :0.85,// needs to be at least one for the icon alignment...
+            : frosthavenStyle
+                ? 0.84
+                : 0.85, // needs to be at least one for the icon alignment...
         //height is really low for gh style due to text not being center aligned in font - so to force to center the height is reduced. this is a shitty solution to a shitty problem.
         // 0.84,
 
         shadows: [shadow]);
 
     var eliteStyle = TextStyle(
-        backgroundColor: debugColors? Colors.lightGreen : null,
+        backgroundColor: debugColors ? Colors.lightGreen : null,
         //leadingDistribution: TextLeadingDistribution.even,
         //textBaseline: TextBaseline.alphabetic,
         //maybe slightly bigger between chars space?
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 13.1 * scale : 12.56 * scale,
-        height:  frosthavenStyle ? 0.84 : 0.85,
+        height: frosthavenStyle ? 0.84 : 0.85,
         //0.8,
         shadows: [shadow]);
 
@@ -280,24 +279,24 @@ class LineBuilder {
         fontFamily: 'Majalla',
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 9.52 * scale : 8.8 * scale,
-        height: frosthavenStyle? 1.0: 0.85,
+        height: frosthavenStyle ? 1.0 : 0.85,
         shadows: [shadow]);
 
     var midStyleSquished = TextStyle(
-      backgroundColor: debugColors? Colors.greenAccent : null,
+        backgroundColor: debugColors ? Colors.greenAccent : null,
         leadingDistribution: TextLeadingDistribution.even,
         fontFamily: 'Majalla',
         color: left ? Colors.black : Colors.white,
         fontSize: (alignment == CrossAxisAlignment.center
-            ? frosthavenStyle
-            ? 9.52
-            : 8.8
-            : frosthavenStyle? 8.8 : 9.9) *
+                ? frosthavenStyle
+                    ? 9.52
+                    : 8.8
+                : frosthavenStyle
+                    ? 8.8
+                    : 9.9) *
             scale,
         //sizes are larger on stat cards
-        height: (alignment == CrossAxisAlignment.center ? 0.8 :
-        0.8
-        ),
+        height: (alignment == CrossAxisAlignment.center ? 0.8 : 0.8),
         // 0.9,
         shadows: [shadow]);
 
@@ -308,7 +307,8 @@ class LineBuilder {
     List<Widget> lastLineTextPartListRowContent = [];
 
     if (frosthavenStyle) {
-      localStrings =  FrosthavenConverter.convertLinesToFH(localStrings, applyStats);
+      localStrings =
+          FrosthavenConverter.convertLinesToFH(localStrings, applyStats);
     } else {
       localStrings.removeWhere((element) => element == "[newLine]");
       localStrings.removeWhere((element) => element == "[subLineEnd]");
@@ -334,14 +334,14 @@ class LineBuilder {
     }
 
     var colorizeColors = [
-      alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
-      alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
+      alignment == CrossAxisAlignment.end ? Colors.black : Colors.white,
+      alignment == CrossAxisAlignment.end ? Colors.black : Colors.white,
       Colors.blueGrey,
-      alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
+      alignment == CrossAxisAlignment.end ? Colors.black : Colors.white,
       Colors.blueGrey,
-      alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
+      alignment == CrossAxisAlignment.end ? Colors.black : Colors.white,
       Colors.blueGrey,
-      alignment == CrossAxisAlignment.end? Colors.black : Colors.white,
+      alignment == CrossAxisAlignment.end ? Colors.black : Colors.white,
     ];
     const int animationSpeed = 3500;
 
@@ -370,9 +370,8 @@ class LineBuilder {
             hasInnerRow,
             widgetsInColumn,
             widgetsInRow,
-          widgetsInInnerRow,
-            isBossStatCard
-        );
+            widgetsInInnerRow,
+            isBossStatCard);
         continue;
       }
 
@@ -410,7 +409,8 @@ class LineBuilder {
         //start row
         continue;
       }
-      if (line == "[s]") { //inner row. sort of
+      if (line == "[s]") {
+        //inner row. sort of
         hasInnerRow = true;
         continue;
       }
@@ -429,12 +429,13 @@ class LineBuilder {
           elementUse = true;
           conditional = true;
         }
-        if(texts.lastIndexOf(" :") != texts.indexOf(" :")) {
+        if (texts.lastIndexOf(" :") != texts.indexOf(" :")) {
           columnHack = true;
         }
 
         double rightMargin = 3.0 * scale;
-        if (texts == " :") { //has only element to element:
+        if (texts == " :") {
+          //has only element to element:
           rightMargin = 1.0 * scale;
         }
 
@@ -442,14 +443,16 @@ class LineBuilder {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: rowMainAxisAlignment,
-          children:
-          columnHack ? widgetsInInnerRow.sublist(1) : widgetsInInnerRow.toList(),
+          children: columnHack
+              ? widgetsInInnerRow.sublist(1)
+              : widgetsInInnerRow.toList(),
         );
         widgetsInInnerRow = [];
 
         if (frosthavenStyle && conditional) {
           //might need ot check if in column or row here
-          FrosthavenConverter.applyConditionalGraphics(widgetsInColumn, scale, elementUse, rightMargin, isBossStatCard, row);
+          FrosthavenConverter.applyConditionalGraphics(widgetsInColumn, scale,
+              elementUse, rightMargin, isBossStatCard, row);
         } else {
           widgetsInColumn.add(row);
         }
@@ -473,12 +476,13 @@ class LineBuilder {
           elementUse = true;
           conditional = true;
         }
-        if(texts.lastIndexOf(" :") != texts.indexOf(" :")) {
+        if (texts.lastIndexOf(" :") != texts.indexOf(" :")) {
           columnHack = true;
         }
 
         double rightMargin = 3.0 * scale;
-        if (texts == " :") { //has only element to element:
+        if (texts == " :") {
+          //has only element to element:
           rightMargin = 1.0 * scale;
         }
 
@@ -492,8 +496,8 @@ class LineBuilder {
         widgetsInRow = [];
 
         if (frosthavenStyle && conditional) {
-
-          FrosthavenConverter.applyConditionalGraphics(lines, scale, elementUse, rightMargin, isBossStatCard, row);
+          FrosthavenConverter.applyConditionalGraphics(
+              lines, scale, elementUse, rightMargin, isBossStatCard, row);
         } else {
           lines.add(row);
         }
@@ -507,8 +511,8 @@ class LineBuilder {
       if (line.startsWith('¤')) {
         double scaleConstant =
             0.8 * 0.55; //this is because of the actual size of the assets
-        if ( isElement(line.substring(1))) {
-          //because we added new graphics for these that are bigger (todo: change this when creating new aoe graphic)
+        if (isElement(line.substring(1))) {
+          //because we added new graphics for these that are bigger
           scaleConstant *= 0.6;
         }
         Widget image = Image.asset(
@@ -520,7 +524,7 @@ class LineBuilder {
           "assets/images/abilities/${line.substring(1)}.png",
         );
         //create pure picture, not a WidgetSpan (scale 5.5)
-        if(hasInnerRow) {
+        if (hasInnerRow) {
           widgetsInInnerRow.add(image);
         } else if (isInColumn && (!isInRow || isColumnInRow)) {
           widgetsInColumn.add(image);
@@ -544,30 +548,35 @@ class LineBuilder {
         sizeToken = '*';
         styleToUse = smallStyle;
         line = line.substring(1, line.length);
-        if (line.startsWith("....") ||line.startsWith("*....")) {
+        if (line.startsWith("....") || line.startsWith("*....")) {
           styleToUse = dividerStyle;
-          if(line.startsWith('*')){
+          if (line.startsWith('*')) {
             line = line.substring(1, line.length);
             styleToUse = dividerStyleExtraThin;
           }
 
           if (frosthavenStyle || alignment == CrossAxisAlignment.start) {
-
             Widget image = Image.asset(
-              alignment: alignment == CrossAxisAlignment.start? Alignment.centerLeft : Alignment.center,
-              scale: 1/(scale * 0.15),
+              alignment: alignment == CrossAxisAlignment.start
+                  ? Alignment.centerLeft
+                  : Alignment.center,
+              scale: 1 / (scale * 0.15),
               //for some reason flutter likes scale to be inverted
               //fit: BoxFit.fitHeight,
-              height: styleToUse == dividerStyleExtraThin? 2 * scale : 6.0 * scale,
-              width: 55.0 * scale, //actually 40, but some layout might depend on wider size so not changing now
+              height:
+                  styleToUse == dividerStyleExtraThin ? 2 * scale : 6.0 * scale,
+              width: 55.0 *
+                  scale, //actually 40, but some layout might depend on wider size so not changing now
               filterQuality: FilterQuality.medium,
               semanticLabel: "divider",
-              alignment == CrossAxisAlignment.start? "assets/images/abilities/divider_boss_fh.png" : "assets/images/abilities/divider_fh.png",
+              alignment == CrossAxisAlignment.start
+                  ? "assets/images/abilities/divider_boss_fh.png"
+                  : "assets/images/abilities/divider_fh.png",
             );
             //create pure picture, not a WidgetSpan (scale 5.5)
-            if(hasInnerRow) {
+            if (hasInnerRow) {
               widgetsInInnerRow.add(image);
-            }else if (isInColumn && (!isInRow || isColumnInRow)) {
+            } else if (isInColumn && (!isInRow || isColumnInRow)) {
               widgetsInColumn.add(image);
             } else if (isInRow && (!isInColumn)) {
               widgetsInRow.add(image);
@@ -585,15 +594,16 @@ class LineBuilder {
         sizeToken = '^';
         styleToUse = midStyle;
         line = line.substring(1, line.length);
-        if(line.startsWith('^')) { //double ^^ : no means no, you bastard!
+        if (line.startsWith('^')) {
+          //double ^^ : no means no, you bastard!
           styleToUse = midStyleSquished;
           line = line.substring(1, line.length);
         }
       }
-      if (line.startsWith('>')) { //disable apply stats (for granted lines)
+      if (line.startsWith('>')) {
+        //disable apply stats (for granted lines) //Too bad it doesn't work here
         line = line.substring(1, line.length);
-      }
-      else if (applyStats) {
+      } else if (applyStats) {
         List<String> statLines =
             StatApplier.applyMonsterStats(line, sizeToken, monster, applyAll);
         line = statLines.removeAt(0);
@@ -611,7 +621,6 @@ class LineBuilder {
           addText = false;
         }
         if (line[i] == '%') {
-          //TODO: do for all conditions + jump.
 
           if (isIconPart) {
             //create token part
@@ -637,7 +646,7 @@ class LineBuilder {
               }
               //Image lastImage = ((part.child as Container).child as OverflowBox).child as Image;
               textPartListRowContent.add(Container(
-                  color: debugColors? Colors.amber : null,
+                  color: debugColors ? Colors.amber : null,
                   //margin: margin,
                   child: Stack(
                     clipBehavior: Clip.none,
@@ -665,13 +674,14 @@ class LineBuilder {
                           ))
                     ],
                   )));
-              textPartListRowContent.add(
-                  Container(
-                    color: debugColors? Colors.red : null,
-                      padding: EdgeInsets.only(top: getTopPaddingForStyle(normalStyle)*0.5),
-                      child:
-                  Text(frosthavenStyle ? " :" : " : ",
-                  style: normalStyle,/*TextStyle(
+              textPartListRowContent.add(Container(
+                  color: debugColors ? Colors.red : null,
+                  padding: EdgeInsets.only(
+                      top: getTopPaddingForStyle(normalStyle) * 0.5),
+                  child: Text(
+                    frosthavenStyle ? " :" : " : ",
+                    style:
+                        normalStyle, /*TextStyle(
                       //maybe slightly bigger between chars space?
                       fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
                       color: left ? Colors.black : Colors.white,
@@ -688,56 +698,54 @@ class LineBuilder {
                       shadows: [
                         shadow
                       ]))*/
-                      )));
+                  )));
             } else {
               double height = _getIconHeight(
                   iconToken, styleToUse.fontSize!, frosthavenStyle);
-              if(frosthavenStyle && styleToUse == midStyle && !FrosthavenConverter.shouldOverflow(true, iconToken, false)){
-                //height *= 0.7; //sub line icons too big? don't do this for conditions.
-                //todo: larger margins on range icon instead
+              if (frosthavenStyle &&
+                  styleToUse == midStyle &&
+                  !FrosthavenConverter.shouldOverflow(true, iconToken, false)) {
               }
               if (addText) {
                 String? iconTokenText = _tokens[iconToken];
                 if (frosthavenStyle) {
                   iconTokenText = null;
                 } else if (iconTokenText != null) {
-
                   //TODO: add animation on other texts too? and need to animate icons as well then for FH style
-                  bool shouldAnimate = animate && (
-                      line.contains('Disadvantage') ||
+                  bool shouldAnimate = animate &&
+                      (line.contains('Disadvantage') ||
                           line.contains('retaliate') ||
-                          line.contains('shield')
-                  ) && (monster.isActive || monster.monsterInstances.value.isNotEmpty);
-                  if (monster.turnState  == TurnsState.current) {
-                    if(line.contains("Advantage")){
+                          line.contains('shield')) &&
+                      (monster.isActive ||
+                          monster.monsterInstances.value.isNotEmpty);
+                  if (monster.turnState == TurnsState.current) {
+                    if (line.contains("Advantage")) {
                       shouldAnimate = true;
                     }
                   }
 
-
-                  textPartListRowContent
-                      .add(Container(
-                    color: debugColors? Colors.red : null,
-                    padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
-                      child:
-                      shouldAnimate?
-                      AnimatedTextKit(
-                        repeatForever: true,
-                        //pause: const Duration(milliseconds: textAnimationDelay),
-                        animatedTexts: [
-                          ColorizeAnimatedText(
-                            iconTokenText,
-                            speed: Duration(milliseconds: (animationSpeed / iconTokenText.length).ceil()),
-                            //TODO: make speed relative to text length
-                            textStyle: styleToUse,
-                            colors: colorizeColors,
-                          ),
-                        ],
-                        // isRepeatingAnimation: true,
-                      )
-                          :
-
-                      Text(iconTokenText, style: styleToUse)));
+                  textPartListRowContent.add(Container(
+                      color: debugColors ? Colors.red : null,
+                      padding: EdgeInsets.only(
+                          top: getTopPaddingForStyle(styleToUse)),
+                      child: shouldAnimate
+                          ? AnimatedTextKit(
+                              repeatForever: true,
+                              //pause: const Duration(milliseconds: textAnimationDelay),
+                              animatedTexts: [
+                                ColorizeAnimatedText(
+                                  iconTokenText,
+                                  speed: Duration(
+                                      milliseconds: (animationSpeed /
+                                              iconTokenText.length)
+                                          .ceil()),
+                                  textStyle: styleToUse,
+                                  colors: colorizeColors,
+                                ),
+                              ],
+                              // isRepeatingAnimation: true,
+                            )
+                          : Text(iconTokenText, style: styleToUse)));
                 }
               }
               bool mainLine =
@@ -751,8 +759,8 @@ class LineBuilder {
               if (imageSuffix.isNotEmpty && hasGHVersion(iconGfx)) {
                 imagePath = "assets/images/abilities/$iconGfx$imageSuffix.png";
               }
-              bool overflow =
-              FrosthavenConverter.shouldOverflow(frosthavenStyle, iconGfx, mainLine);
+              bool overflow = FrosthavenConverter.shouldOverflow(
+                  frosthavenStyle, iconGfx, mainLine);
               double heightMod = mainLine
                   ? 1.0
                   : 1.35 *
@@ -760,7 +768,7 @@ class LineBuilder {
               Widget child = Image(
                 //could do funk stuff with the color value for cool effects maybe?
                 height: overflow ? height * heightMod : height,
-               // isAntiAlias: true,
+                // isAntiAlias: true,
                 //this causes lines to have variable height if height set to less than 1
                 fit: BoxFit.fitHeight,
                 filterQuality: FilterQuality.medium,
@@ -768,7 +776,7 @@ class LineBuilder {
                 image: AssetImage(imagePath),
               );
               child = Container(
-                  color: debugColors? Colors.blue : null,
+                  color: debugColors ? Colors.blue : null,
                   height: height,
                   width: overflow ? height : null,
                   margin: margin,
@@ -797,8 +805,9 @@ class LineBuilder {
               }
 
               textPartListRowContent.add(Container(
-                  color: debugColors? Colors.red : null,
-                  padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
+                  color: debugColors ? Colors.red : null,
+                  padding:
+                      EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
                   child: Text(textPart, style: styleToUse)));
             }
             isIconPart = true;
@@ -818,8 +827,7 @@ class LineBuilder {
         }
         if (line[i] == "Å") {
           styleToUse = TextStyle(
-
-              backgroundColor: debugColors? Colors.amber : null,
+              backgroundColor: debugColors ? Colors.amber : null,
               fontFamily: 'Majalla',
               color: Colors.transparent,
               fontSize: 11 * 0.8 * scale,
@@ -828,41 +836,39 @@ class LineBuilder {
       }
 
       //TODO: add animation on other texts too? and need to animate icons as well then for FH style
-      bool shouldAnimate = animate && (
-          line.contains('Disadvantage') ||
+      bool shouldAnimate = animate &&
+          (line.contains('Disadvantage') ||
               line.contains('retaliate') ||
-              line.contains('shield')
-      ) && (monster.isActive || monster.monsterInstances.value.isNotEmpty);
-      if (monster.turnState  == TurnsState.current) {
-        if(line.contains("Advantage")){
+              line.contains('shield')) &&
+          (monster.isActive || monster.monsterInstances.value.isNotEmpty);
+      if (monster.turnState == TurnsState.current) {
+        if (line.contains("Advantage")) {
           shouldAnimate = true;
         }
       }
 
-
       if (partStartIndex < line.length) {
         String textPart = line.substring(partStartIndex, line.length);
         textPartListRowContent.add(Container(
-            color: debugColors? Colors.red : null,
+            color: debugColors ? Colors.red : null,
             padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
-            child:
-            shouldAnimate?
-            AnimatedTextKit(
-              repeatForever: true,
-              //pause: const Duration(milliseconds: textAnimationDelay),
-              animatedTexts: [
-                ColorizeAnimatedText(
-                  speed: Duration(milliseconds: (animationSpeed / textPart.length).ceil()),
-                  textPart,
-                  textStyle: styleToUse,
-                  colors: colorizeColors,
-                ),
-              ],
-             // isRepeatingAnimation: true,
-            )
-                :
-
-            Text(textPart, style: styleToUse)));
+            child: shouldAnimate
+                ? AnimatedTextKit(
+                    repeatForever: true,
+                    //pause: const Duration(milliseconds: textAnimationDelay),
+                    animatedTexts: [
+                      ColorizeAnimatedText(
+                        speed: Duration(
+                            milliseconds:
+                                (animationSpeed / textPart.length).ceil()),
+                        textPart,
+                        textStyle: styleToUse,
+                        colors: colorizeColors,
+                      ),
+                    ],
+                    // isRepeatingAnimation: true,
+                  )
+                : Text(textPart, style: styleToUse)));
       }
 
       Row row = Row(
@@ -872,8 +878,8 @@ class LineBuilder {
           children: textPartListRowContent);
 
       if (isRightPartOfLastLine) {
-        if(hasInnerRow) {
-          if(widgetsInInnerRow.isNotEmpty) {
+        if (hasInnerRow) {
+          if (widgetsInInnerRow.isNotEmpty) {
             widgetsInInnerRow.removeLast();
           }
         } else if (isInColumn && (!isInRow || isColumnInRow)) {
@@ -893,14 +899,12 @@ class LineBuilder {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: rowMainAxisAlignment,
-            children: textPartListRowContent
-        );
+            children: textPartListRowContent);
       }
 
-      if(hasInnerRow) {
+      if (hasInnerRow) {
         widgetsInInnerRow.add(row);
-      }
-      else if (isInColumn && (!isInRow || isColumnInRow)) {
+      } else if (isInColumn && (!isInRow || isColumnInRow)) {
         widgetsInColumn.add(row);
       } else if (isInRow && (!isInColumn)) {
         widgetsInRow.add(row);

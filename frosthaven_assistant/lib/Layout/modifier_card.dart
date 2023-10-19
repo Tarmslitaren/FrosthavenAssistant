@@ -10,7 +10,12 @@ class ModifierCardWidget extends StatefulWidget {
   final revealed = ValueNotifier<bool>(false);
   final String name;
 
-  ModifierCardWidget({Key? key, required this.card, required bool revealed, required this.name}) : super(key: key) {
+  ModifierCardWidget(
+      {Key? key,
+      required this.card,
+      required bool revealed,
+      required this.name})
+      : super(key: key) {
     this.revealed.value = revealed;
   }
 
@@ -19,8 +24,8 @@ class ModifierCardWidget extends StatefulWidget {
 
   static Widget buildFront(ModifierCard card, double scale) {
     return Container(
-      width: 58.6666 * scale ,
-      height: 39*scale,
+      width: 58.6666 * scale,
+      height: 39 * scale,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -31,7 +36,7 @@ class ModifierCardWidget extends StatefulWidget {
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(4.0* scale),
+        borderRadius: BorderRadius.circular(4.0 * scale),
         child: Image(
           fit: BoxFit.fitHeight,
           //height: 56,
@@ -49,7 +54,7 @@ class ModifierCardWidget extends StatefulWidget {
     }
     return Container(
       width: 58.6666 * scale,
-      height: 39*scale,
+      height: 39 * scale,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
@@ -71,7 +76,6 @@ class ModifierCardWidget extends StatefulWidget {
 }
 
 class ModifierCardWidgetState extends State<ModifierCardWidget> {
-
   @override
   void initState() {
     super.initState();
@@ -95,8 +99,10 @@ class ModifierCardWidgetState extends State<ModifierCardWidget> {
   @override
   Widget build(BuildContext context) {
     Settings settings = getIt<Settings>();
-    return  widget.revealed.value
-                ? ModifierCardWidget.buildFront(widget.card,  settings.userScalingBars.value)
-                : ModifierCardWidget.buildRear(settings.userScalingBars.value, widget.name );
+    return widget.revealed.value
+        ? ModifierCardWidget.buildFront(
+            widget.card, settings.userScalingBars.value)
+        : ModifierCardWidget.buildRear(
+            settings.userScalingBars.value, widget.name);
   }
 }

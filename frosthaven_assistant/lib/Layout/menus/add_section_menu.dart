@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
-import '../../Resource/adjustable_scroll_controller.dart';
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
@@ -20,8 +19,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   List<String> _foundScenarios = [];
   final GameState _gameState = getIt<GameState>();
   final TextEditingController _controller = TextEditingController();
-  final AdjustableScrollController _scrollController =
-      AdjustableScrollController();
+  final ScrollController _scrollController =
+      ScrollController();
 
   @override
   initState() {
@@ -34,9 +33,14 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     //TODO:clear search
     GameMethods.setCampaign(campaign);
     _foundScenarios = _gameState
-        .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
+        .modelData
+        .value[_gameState.currentCampaign.value]!
+        .scenarios[_gameState.scenario.value]!
+        .sections
+        .map((e) => e.name)
         .toList();
-    _foundScenarios = _foundScenarios.where((element) => !element.contains("spawn")).toList();
+    _foundScenarios =
+        _foundScenarios.where((element) => !element.contains("spawn")).toList();
     _foundScenarios.sort((a, b) {
       int? aNr = GameMethods.findNrFromScenarioName(a);
       int? bNr = GameMethods.findNrFromScenarioName(b);
@@ -52,13 +56,15 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     List<String> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameState
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
+      results = _gameState.modelData.value[_gameState.currentCampaign.value]!
+          .scenarios[_gameState.scenario.value]!.sections
+          .map((e) => e.name)
           .toList();
       results = results.where((element) => !element.contains("spawn")).toList();
     } else {
-      results = _gameState
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios[_gameState.scenario.value]!.sections.map((e) => e.name)
+      results = _gameState.modelData.value[_gameState.currentCampaign.value]!
+          .scenarios[_gameState.scenario.value]!.sections
+          .map((e) => e.name)
           .toList()
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))

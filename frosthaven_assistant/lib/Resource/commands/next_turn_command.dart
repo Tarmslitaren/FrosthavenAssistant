@@ -5,10 +5,10 @@ import '../state/game_state.dart';
 class TurnDoneCommand extends Command {
   late int index;
   late String id;
-  TurnDoneCommand(this.id){
+  TurnDoneCommand(this.id) {
     index = 0;
     for (int i = 0; i < getIt<GameState>().currentList.length; i++) {
-      if(id == getIt<GameState>().currentList[i].id) {
+      if (id == getIt<GameState>().currentList[i].id) {
         index = i;
       }
     }

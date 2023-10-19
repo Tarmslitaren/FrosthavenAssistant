@@ -13,7 +13,6 @@ class SectionList extends StatefulWidget {
 }
 
 class SectionListState extends State<SectionList> {
-
   @override
   void initState() {
     super.initState();
@@ -23,9 +22,9 @@ class SectionListState extends State<SectionList> {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
       var item = inputList[index];
-      if(!item.name.contains("spawn")) {
+      if (!item.name.contains("spawn")) {
         SectionButton value =
-        SectionButton(key: Key(item.name), data: item.name);
+            SectionButton(key: Key(item.name), data: item.name);
         list.add(value);
       }
     }
@@ -34,45 +33,48 @@ class SectionListState extends State<SectionList> {
 
   @override
   Widget build(BuildContext context) {
-
     return ValueListenableBuilder<double>(
         valueListenable: getIt<Settings>().userScalingBars,
         builder: (context, value, child) {
           double scale = getIt<Settings>().userScalingBars.value;
           GameState gameState = getIt<GameState>();
-    return ValueListenableBuilder<int>(
-        valueListenable: getIt<GameState>().commandIndex,
-        builder: (context, value, child) {
-          var list = gameState.modelData.value[gameState.currentCampaign.value]
-              ?.scenarios[gameState.scenario.value]?.sections
-              .toList();
+          return ValueListenableBuilder<int>(
+              valueListenable: getIt<GameState>().commandIndex,
+              builder: (context, value, child) {
+                var list = gameState
+                    .modelData
+                    .value[gameState.currentCampaign.value]
+                    ?.scenarios[gameState.scenario.value]
+                    ?.sections
+                    .toList();
 
-          if(getIt<Settings>().autoAddStandees.value == false) {
-            //filter out all sections with only room data
-            list = list?.where((element) {
-              if(element.specialRules.isNotEmpty) {
-                return true;
-              }
-              if(element.initMessage.isNotEmpty) {
-                return true;
-              }
-              if(element.monsters.isNotEmpty) {
-                return true;
-              }
-              return false;}).toList();
+                if (getIt<Settings>().autoAddStandees.value == false) {
+                  //filter out all sections with only room data
+                  list = list?.where((element) {
+                    if (element.specialRules.isNotEmpty) {
+                      return true;
+                    }
+                    if (element.initMessage.isNotEmpty) {
+                      return true;
+                    }
+                    if (element.monsters.isNotEmpty) {
+                      return true;
+                    }
+                    return false;
+                  }).toList();
+                }
 
-          }
-
-          if(list != null && gameState.scenarioSectionsAdded.length == list.length) {
-            list = [];
-          }
-          list ??= [];
-          return Wrap(
-            alignment: WrapAlignment.center,
-            spacing: 4 * scale,
-              runSpacing: 0 * scale,
-              children: generateList(list));
-        });
+                if (list != null &&
+                    gameState.scenarioSectionsAdded.length == list.length - list.where((section) => section.name.contains("spawn")).length) {
+                  list = [];
+                }
+                list ??= [];
+                return Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 4 * scale,
+                    runSpacing: 0 * scale,
+                    children: generateList(list));
+              });
         });
   }
 }

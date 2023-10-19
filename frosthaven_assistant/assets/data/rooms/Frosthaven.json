@@ -257,7 +257,7 @@
         },
         "Snow Imp": {
           "normal": [0, 2, 0],
-          "elite": [2, 2, 2]
+          "elite": [2, 2, 4]
         }
       }
     }
@@ -1519,7 +1519,7 @@
         },
         "Deep Terror (FH)": {
           "normal": [1, 2, 1],
-          "elite": [1, 1, 1]
+          "elite": [1, 1, 2]
         }
       }},{
       "91.3": {
@@ -1639,7 +1639,7 @@
       "65.2": {
         "Deep Terror (FH)": {
           "normal": [2, 2, 0],
-          "elite": [1, 3,4]
+          "elite": [1, 2, 4]
         },
         "Night Demon (FH)": {
           "normal": [2, 0, 0],
@@ -1784,7 +1784,7 @@
           "elite": [0, 1, 2]
         },
         "Ruined Machine": {
-          "normal": [0, 2, 0],
+          "normal": [0, 3, 0],
           "elite": [0, 0, 0]
         },
         "Steel Automaton": {
@@ -2814,7 +2814,7 @@
           "elite": [0, 0, 0]
         },
         "Wind Demon (FH)": {
-          "normal": [2, 2, 1],
+          "normal": [2, 2, 2],
           "elite": [0, 0, 1]
         }
       }
@@ -4319,7 +4319,7 @@
           "elite": [1, 1, 2]
         },
         "Steel Automaton": {
-          "normal": [1, 0, 2],
+          "normal": [1, 0, 3],
           "elite": [0, 1, 0]
         }
       }

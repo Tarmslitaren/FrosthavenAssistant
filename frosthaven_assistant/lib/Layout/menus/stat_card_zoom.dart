@@ -1,15 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_stat_card.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../../Resource/state/monster.dart';
 
-
 class StatCardZoom extends StatefulWidget {
-  const StatCardZoom(
-      {Key? key, required this.monster})
-      : super(key: key);
+  const StatCardZoom({Key? key, required this.monster}) : super(key: key);
 
   final Monster monster;
 
@@ -18,7 +14,6 @@ class StatCardZoom extends StatefulWidget {
 }
 
 class StatCardZoomState extends State<StatCardZoom> {
-
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
@@ -30,34 +25,28 @@ class StatCardZoomState extends State<StatCardZoom> {
     double width = cardWidth * scale * zoomValue;
     double height = cardHeight * scale * zoomValue;
     double horizontalMargin = 40;
-    if(screenWidth < horizontalMargin + width) {
-      zoomValue = (screenWidth-horizontalMargin)/ (cardWidth * scale);// 2;
+    if (screenWidth < horizontalMargin + width) {
+      zoomValue = (screenWidth - horizontalMargin) / (cardWidth * scale); // 2;
     }
 
     double verticalMargin = 60;
-    if(screenHeight < verticalMargin + height) {
-      zoomValue = (screenHeight-verticalMargin)/ (cardHeight * scale);// 2;
+    if (screenHeight < verticalMargin + height) {
+      zoomValue = (screenHeight - verticalMargin) / (cardHeight * scale); // 2;
     }
 
     double scaling = scale * zoomValue;
-    if (scaling < 269/cardWidth && screenWidth > horizontalMargin + width) {
-      scaling = 269/cardWidth;
-
+    if (scaling < 269 / cardWidth && screenWidth > horizontalMargin + width) {
+      scaling = 269 / cardWidth;
     }
 
-
-
-
     return InkWell(
-      onTap: (){
+      onTap: () {
         Navigator.pop(context);
       },
       child: SizedBox(
-        width: cardWidth * scale * zoomValue,
-        height: cardHeight * scale * zoomValue,
-          child:MonsterStatCardWidgetState.buildCard(widget.monster, scaling)
-      ),
+          width: cardWidth * scale * zoomValue,
+          height: cardHeight * scale * zoomValue,
+          child: MonsterStatCardWidgetState.buildCard(widget.monster, scaling)),
     );
   }
 }
-

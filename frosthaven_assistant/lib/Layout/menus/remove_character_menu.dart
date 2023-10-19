@@ -9,10 +9,10 @@ class RemoveCharacterMenu extends StatefulWidget {
   const RemoveCharacterMenu({Key? key}) : super(key: key);
 
   @override
-  _RemoveCharacterMenuState createState() => _RemoveCharacterMenuState();
+  RemoveCharacterMenuState createState() => RemoveCharacterMenuState();
 }
 
-class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
+class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
   final GameState _gameState = getIt<GameState>();
 
   @override
@@ -65,7 +65,8 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                           "assets/images/class-icons/${currentCharacters[index].characterClass.name}.png"),
                     ),
                     iconColor: currentCharacters[index].characterClass.color,
-                    title: Text(currentCharacters[index].characterState.display.value,
+                    title: Text(
+                        currentCharacters[index].characterState.display.value,
                         style: const TextStyle(fontSize: 18)),
                     trailing: Text(
                         "(${currentCharacters[index].characterClass.edition})",
@@ -76,8 +77,6 @@ class _RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                         _gameState.action(RemoveCharacterCommand(
                             [currentCharacters[index]])); //
                       });
-
-                      //Navigator.pop(context);
                     },
                   ),
                 ),

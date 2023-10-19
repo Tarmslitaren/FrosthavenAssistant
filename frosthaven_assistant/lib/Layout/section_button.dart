@@ -35,16 +35,15 @@ class SectionButtonState extends State<SectionButton> {
               backgroundColor: Colors.white70,
               elevation: 4,
             ),
-            onPressed: !getIt<GameState>()
-                    .scenarioSectionsAdded
-                    .contains(widget.data)
-                ? () {
-                    setState(() {
-                      getIt<GameState>()
-                          .action(SetScenarioCommand(widget.data, true));
-                    });
-                  }
-                : null,
+            onPressed:
+                !getIt<GameState>().scenarioSectionsAdded.contains(widget.data)
+                    ? () {
+                        setState(() {
+                          getIt<GameState>()
+                              .action(SetScenarioCommand(widget.data, true));
+                        });
+                      }
+                    : null,
             child: Text(
               widget.data.split(" ")[0],
               style: getTitleTextStyle(scale),

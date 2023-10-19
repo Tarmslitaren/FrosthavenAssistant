@@ -1,4 +1,3 @@
-
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
@@ -10,10 +9,10 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../Resource/enums.dart';
 import '../Resource/state/monster.dart';
+import '../Resource/state/monster_ability_state.dart';
 import '../Resource/ui_utils.dart';
 import '../Resource/line_builder/line_builder.dart';
 import 'menus/ability_card_zoom.dart';
-
 
 class MonsterAbilityCardWidget extends StatefulWidget {
   final Monster data;
@@ -25,41 +24,41 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   MonsterAbilityCardWidgetState createState() =>
       MonsterAbilityCardWidgetState();
 
-  static List<Widget> buildGraphicPositionals(double scale, List<GraphicPositional> positionals) {
+  static List<Widget> buildGraphicPositionals(
+      double scale, List<GraphicPositional> positionals) {
     List<Widget> list = [];
     double cardWidth = 178 * 0.8 * scale;
     double cardHeight = 118 * 0.8 * scale;
 
     for (GraphicPositional item in positionals) {
-
-      double scaleConstant =0.8 * 0.55; //this is because of the actual size of the assets
-      if(LineBuilder.isElement(item.gfx)) {
+      double scaleConstant =
+          0.8 * 0.55; //this is because of the actual size of the assets
+      if (LineBuilder.isElement(item.gfx)) {
         //because we added new graphics for these that are bigger
         scaleConstant *= 0.6;
       }
-
 
       Positioned pos = Positioned(
           left: item.x * cardWidth,
           top: item.y * cardHeight,
           child: Transform.rotate(
-            alignment: Alignment.topLeft,
-            angle: item.angle * pi / 180,
-            child: Transform.scale(
-              scale: item.scale * scale * scaleConstant,
               alignment: Alignment.topLeft,
-              child: Image.asset(
-                "assets/images/abilities/${item.gfx}.png",
-            ), //note: default scale is 0.6? since all pngs are uniformly sized (probably)
-          ))
-      );
+              angle: item.angle * pi / 180,
+              child: Transform.scale(
+                scale: item.scale * scale * scaleConstant,
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  "assets/images/abilities/${item.gfx}.png",
+                ), //note: default scale is 0.6? since all pngs are uniformly sized (probably)
+              )));
       list.add(pos);
     }
 
     return list;
   }
 
-  static Widget buildFront(MonsterAbilityCardModel? card, Monster data, double scale, bool calculateAll) {
+  static Widget buildFront(MonsterAbilityCardModel? card, Monster data,
+      double scale, bool calculateAll) {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
 
     String initText = card!.initiative.toString();
@@ -73,7 +72,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
       blurRadius: 1 * scale,
     );
 
-    List<Widget> positionals = buildGraphicPositionals(scale, card.graphicPositional);
+    List<Widget> positionals =
+        buildGraphicPositionals(scale, card.graphicPositional);
 
     return Container(
         decoration: BoxDecoration(
@@ -102,38 +102,36 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 height: 116 * 0.8 * scale,
                 width: 178 * 0.8 * scale,
                 //height: 123 * 0.8 * scale,
-                image: AssetImage(frosthavenStyle?
-                "assets/images/psd/monsterAbility-front_fh.png" :
-                    "assets/images/psd/monsterAbility-front.png"),
+                image: AssetImage(frosthavenStyle
+                    ? "assets/images/psd/monsterAbility-front_fh.png"
+                    : "assets/images/psd/monsterAbility-front.png"),
               ),
             ),
             Positioned(
-              top:frosthavenStyle? 2 * scale : 0 * scale,
-              //left: 40 * scale,
+                top: frosthavenStyle ? 2 * scale : 0 * scale,
+                //left: 40 * scale,
                 child: SizedBox(
-                  height: 110 * scale * 0.8 ,
+                  height: 110 * scale * 0.8,
                   width: 178 * scale * 0.8, //needed for line breaks in lines
 
                   child: Column(
-
                     mainAxisAlignment: MainAxisAlignment.start,
-
                     crossAxisAlignment: CrossAxisAlignment.center,
-
                     mainAxisSize: MainAxisSize.max,
-
-                    children:   [
+                    children: [
                       Text(
-                    card.title,
-                    style: TextStyle(
-                        fontFamily: frosthavenStyle? "GermaniaOne" : 'Pirata',
-                        color: Colors.white,
-                        fontSize: frosthavenStyle? 10 * scale : 11.2 * scale,
-                        shadows: [shadow]),
+                        card.title,
+                        style: TextStyle(
+                            fontFamily:
+                                frosthavenStyle ? "GermaniaOne" : 'Pirata',
+                            color: Colors.white,
+                            fontSize:
+                                frosthavenStyle ? 10 * scale : 11.2 * scale,
+                            shadows: [shadow]),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )),
+                )),
             Positioned(
                 left: 4.0 * scale,
                 top: 16.0 * 0.8 * scale,
@@ -141,9 +139,9 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                   textAlign: TextAlign.center,
                   initText,
                   style: TextStyle(
-                    fontFamily: frosthavenStyle? "GermaniaOne" : 'Pirata',
+                      fontFamily: frosthavenStyle ? "GermaniaOne" : 'Pirata',
                       color: Colors.white,
-                      fontSize: frosthavenStyle? 15 * scale: 16 * scale,
+                      fontSize: frosthavenStyle ? 15 * scale : 16 * scale,
                       shadows: [shadow]),
                 )),
             Positioned(
@@ -152,7 +150,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 child: Text(
                   card.nr.toString(),
                   style: TextStyle(
-                      fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
+                      fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
                       color: Colors.white,
                       fontSize: 8 * 0.8 * scale,
                       shadows: [shadow]),
@@ -175,40 +173,44 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             if (positionals.length > 2) positionals[2],
             if (positionals.length > 3) positionals[3],
 
-
             Positioned(
               top: 11 * scale,
               //alignment: Alignment.center,
               child: SizedBox(
-                height: 110 * scale * 0.8 ,
+                height: 110 * scale * 0.8,
                 width: 178 * scale * 0.8, //needed for line breaks in lines
                 //color: Colors.amber,
                 child: LineBuilder.createLines(
-                    card.lines, false, !getIt<Settings>().noCalculation.value, calculateAll, data, CrossAxisAlignment.center, scale, false),
+                    card.lines,
+                    false,
+                    !getIt<Settings>().noCalculation.value,
+                    calculateAll,
+                    data,
+                    CrossAxisAlignment.center,
+                    scale,
+                    false),
               ),
             )
           ],
         ));
   }
 
-
-
   static Widget buildRear(double scale, int size, Monster monster) {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster.type);
     return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45,
-            blurRadius: 4 * scale,
-            offset: Offset(2 * scale, 4 * scale), // Shadow position
-          ),
-        ],
-      ),
-
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black45,
+              blurRadius: 4 * scale,
+              offset: Offset(2 * scale, 4 * scale), // Shadow position
+            ),
+          ],
+        ),
         key: const ValueKey<int>(0),
         margin: EdgeInsets.all(2 * scale * 0.8),
-        width: 178*0.8*scale, //this evaluates to same space as front somehow.
+        width:
+            178 * 0.8 * scale, //this evaluates to same space as front somehow.
         height: 118 * 0.8 * scale,
         child: Stack(
           alignment: Alignment.center,
@@ -218,9 +220,9 @@ class MonsterAbilityCardWidget extends StatefulWidget {
               child: Image(
                 fit: BoxFit.fitHeight,
                 height: 114 * 0.8 * scale,
-                image: AssetImage(frosthavenStyle?
-                "assets/images/psd/MonsterAbility-back_fh.png"
-                   : "assets/images/psd/MonsterAbility-back.png"),
+                image: AssetImage(frosthavenStyle
+                    ? "assets/images/psd/MonsterAbility-back_fh.png"
+                    : "assets/images/psd/MonsterAbility-back.png"),
               ),
             ),
             size >= 0
@@ -230,7 +232,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                     child: Text(
                       size.toString(),
                       style: TextStyle(
-                          fontFamily: frosthavenStyle? 'Markazi' : 'Majalla',
+                          fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
                           color: Colors.white,
                           fontSize: 16 * 0.8 * scale,
                           shadows: const [
@@ -285,17 +287,18 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
           MonsterAbilityCardModel? card;
-          if (_gameState.roundState.value == RoundState.playTurns && (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive)) {
-            CardStack stack = GameMethods
-                .getDeck(widget.data.type.deck)!
-                .discardPile;
-            if(stack.isNotEmpty){
+          if (_gameState.roundState.value == RoundState.playTurns &&
+              (widget.data.monsterInstances.value.isNotEmpty ||
+                  widget.data.isActive)) {
+            CardStack stack =
+                GameMethods.getDeck(widget.data.type.deck)!.discardPile;
+            if (stack.isNotEmpty) {
               card = stack.peek;
             }
           }
 
           //get size for back
-          var deckk;
+          late MonsterAbilityState deckk;
           _deckSize = 8;
           for (var deck in _gameState.currentAbilityDecks) {
             if (deck.name == widget.data.type.deck) {
@@ -305,43 +308,50 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
             }
           }
 
-
           return InkWell(
-            onTap: () {
-              //open deck menu
-              openDialog(context, AbilityCardMenu(monsterAbilityState: deckk, monsterData: widget.data,));
+              onTap: () {
+                //open deck menu
+                openDialog(
+                    context,
+                    AbilityCardMenu(
+                      monsterAbilityState: deckk,
+                      monsterData: widget.data,
+                    ));
 
-              setState(() {});
-            },
-              onDoubleTap: (){
-              if(_gameState.roundState.value == RoundState.playTurns && (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive) && card != null) {
-                setState(() {
-                  openDialog(
-                      context,
-                      //problem: context is of stat card widget, not the + button
-                      AbilityCardZoom(card: card!,
-                          monster: widget.data,
-                          calculateAll: false)
-                  );
-                });
-              }
-
+                setState(() {});
               },
-            child: AnimatedSwitcher(
+              onDoubleTap: () {
+                if (_gameState.roundState.value == RoundState.playTurns &&
+                    (widget.data.monsterInstances.value.isNotEmpty ||
+                        widget.data.isActive) &&
+                    card != null) {
+                  setState(() {
+                    openDialog(
+                        context,
+                        //problem: context is of stat card widget, not the + button
+                        AbilityCardZoom(
+                            card: card!,
+                            monster: widget.data,
+                            calculateAll: false));
+                  });
+                }
+              },
+              child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 600),
                 transitionBuilder: _transitionBuilder,
                 layoutBuilder: (widget, list) => Stack(
-                      children: [widget!, ...list],
-                    ),
-                //switchInCurve: Curves.easeInBack,
-                //switchOutCurve: Curves.easeInBack.flipped,
-                child: _gameState.roundState.value == RoundState.playTurns && (widget.data.monsterInstances.value.isNotEmpty || widget.data.isActive) && card != null
-                    ? MonsterAbilityCardWidget.buildFront(card, widget.data, scale, false)
-                    : MonsterAbilityCardWidget.buildRear(scale, _deckSize, widget.data),
-            //AnimationController(duration: Duration(seconds: 1), vsync: 0);
-            //CurvedAnimation(parent: null, curve: Curves.easeIn)
-            //),
-            ));
+                  children: [widget!, ...list],
+                ),
+                child: _gameState.roundState.value == RoundState.playTurns &&
+                        (widget.data.monsterInstances.value.isNotEmpty ||
+                            widget.data.isActive) &&
+                        card != null
+                    ? MonsterAbilityCardWidget.buildFront(
+                        card, widget.data, scale, false)
+                    : MonsterAbilityCardWidget.buildRear(
+                        scale, _deckSize, widget.data),
+                //),
+              ));
         });
   }
 }

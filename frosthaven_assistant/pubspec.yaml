@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.8.3+29
+version: 1.8.5+31
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
@@ -151,6 +151,7 @@ flutter:
   assets:
     - assets/data/
     - assets/data/editions/
+    - assets/data/rooms/
     - assets/images/abilities/ #for use with monster ability card
     - assets/images/attack/ #modifier deck
     - assets/images/loot/ #loot deck
