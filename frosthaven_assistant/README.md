@@ -1,16 +1,19 @@
 # frosthaven_assistant
 
-A new Flutter project.
+README for developers contributing to frosthaven_assistant.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+For first time flutter developers, follow the [Flutter Installation Steps](https://docs.flutter.dev/get-started/install).
 
-A few resources to get you started if this is your first Flutter project:
+To see if there are any dependencies you need to install to complete setup, run `flutter doctor` from the terminal.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Run the app with `flutter run`.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Running Unit Tests
+
+frosthaven_assistant's unit tests rely on [mockito](https://github.com/dart-lang/mockito).
+
+Before running unit tests, run `dart run build_runner build` to generate mockito's `.mocks.dart` files that the unit tests rely on. If encountering errors upon executing build_runner, try running `dart pub upgrade` and rerunning.
+
+Once `.mocks.dart` files are generated, run unit tests with `flutter test`.
