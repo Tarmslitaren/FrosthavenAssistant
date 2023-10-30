@@ -6,10 +6,10 @@ class ThemeSwitcher extends InheritedWidget {
   final ThemeSwitcherWidgetState data;
 
   const ThemeSwitcher({
-    Key? key,
+    super.key,
     required this.data,
-    required Widget child,
-  }) : super(key: key, child: child);
+    required super.child,
+  });
 
   static ThemeSwitcherWidgetState of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<ThemeSwitcher>()!.data;
@@ -26,8 +26,7 @@ class ThemeSwitcherWidget extends StatefulWidget {
   final Widget child;
 
   const ThemeSwitcherWidget(
-      {Key? key, required this.initialTheme, required this.child})
-      : super(key: key);
+      {super.key, required this.initialTheme, required this.child});
 
   @override
   ThemeSwitcherWidgetState createState() {
@@ -38,9 +37,9 @@ class ThemeSwitcherWidget extends StatefulWidget {
 class ThemeSwitcherWidgetState extends State<ThemeSwitcherWidget> {
   ThemeData themeData = theme;
 
-  void switchTheme(ThemeData themee) {
+  void switchTheme(ThemeData theme) {
     setState(() {
-      themeData = themee;
+      themeData = theme;
     });
   }
 

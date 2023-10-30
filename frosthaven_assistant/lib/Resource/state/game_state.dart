@@ -42,6 +42,8 @@ part "monster_instance.dart";
 part "list_item_data.dart";
 part "../game_methods.dart";
 
+// ignore_for_file: library_private_types_in_public_api
+
 abstract class Command {
   void execute();
   void undo();

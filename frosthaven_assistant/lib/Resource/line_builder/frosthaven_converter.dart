@@ -78,7 +78,7 @@ class FrosthavenConverter {
             //only target on same line for non valued tokens - damn myself, what did I mean by that? I was probably wrong
             line.startsWith("^Target") ||
             line.startsWith(
-                "^%target%") || //superseeds the lower ones. In FH target clauses go first so this old code is useless
+                "^%target%") || //supersedes the lower ones. In FH target clauses go first so this old code is useless
             /*(line.startsWith("^Target") && lines[i - 1].contains('%push%')) ||
             (line.startsWith("^Target") && lines[i - 1].contains('%pull%')) ||
             (line.startsWith("^Target") &&
@@ -94,7 +94,7 @@ class FrosthavenConverter {
             line.startsWith("^All") &&
                 !line.startsWith("^All attacks") &&
                 !line.startsWith("^All targets")) {
-          //In hope this move does not screw with conditionals or ohter things...
+          //In hope this move does not screw with conditionals or other things...
           if (!isReallySubLine &&
               (!isConditional ||
                   (isElementUse &&

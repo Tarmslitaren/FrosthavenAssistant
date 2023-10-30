@@ -220,7 +220,7 @@ class LineBuilder {
             : frosthavenStyle
             ? 8.8
             : 9.9) *
-            scale), //.floorToDouble()+0.5, //not sur eif flooring the mid scale is realy the best option. or onl yhappens tp work on my android
+            scale), //.floorToDouble()+0.5, //not sur eif flooring the mid scale is really the best option. or only happens to work on my android
         //sizes are larger on stat cards
         height: (alignment == CrossAxisAlignment.center
                 ? frosthavenStyle

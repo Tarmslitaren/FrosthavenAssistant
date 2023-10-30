@@ -1,4 +1,5 @@
-part of game_state;
+part of 'state/game_state.dart';
+// ignore_for_file: library_private_types_in_public_api
 
 GameState _gameState = getIt<GameState>();
 GameData _gameData = getIt<GameData>();

@@ -200,7 +200,7 @@ class StatApplier {
       }
     }
 
-    //special case for uncalculable and only elites (heed the pigs)
+    //special case for incalculable and only elites (heed the pigs)
     if(elite != null && skipCalculation && showElite && !showNormal) {
       newStartOfLine += normalResult;
     }

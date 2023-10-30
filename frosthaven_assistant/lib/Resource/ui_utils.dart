@@ -59,7 +59,7 @@ void openDialog(BuildContext context, Widget widget) {
 }
 
 void openDialogWithDismissOption(
-    BuildContext context, Widget widget, bool dismissable) {
+    BuildContext context, Widget widget, bool dismissible) {
   //could potentially modify edge insets based on screen width.
   Widget innerWidget = Stack(children: [
     Positioned(
@@ -70,13 +70,13 @@ void openDialogWithDismissOption(
               valueListenable: getIt<GameState>().updateForUndo,
               builder: (context, value, child) {
                 rebuildAllChildren(
-                    context); //only way to remake the valuelistenable builders with broken references
+                    context); //only way to remake the value listenable builders with broken references
                 return widget;
               })),
     )
   ]);
   showDialog(
-      barrierDismissible: dismissable,
+      barrierDismissible: dismissible,
       context: context,
       builder: (BuildContext context) => innerWidget);
 }

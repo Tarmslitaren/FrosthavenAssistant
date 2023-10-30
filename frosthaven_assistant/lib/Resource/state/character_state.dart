@@ -1,4 +1,4 @@
-part of game_state;
+part of 'game_state.dart';
 
 class CharacterState extends FigureState {
   CharacterState();
