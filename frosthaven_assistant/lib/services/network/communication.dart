@@ -7,9 +7,9 @@ import '../service_locator.dart';
 import 'connection.dart';
 
 class Communication {
-  static const begining = "S3nD:";
+  static const beginning = "S3nD:";
   static const end = "[EOM]";
-  final messageTemplate = "$begining{}$end";
+  final messageTemplate = "$beginning{}$end";
   final _connection = getIt<Connection>();
 
   // TODO: Need to test this somehow, or refactor altogether.
@@ -49,13 +49,13 @@ class Communication {
   String dataFrom(String message) {
     final valid = isValid(message);
     var data = valid
-        ? message.substring(begining.length, message.length - end.length)
+        ? message.substring(beginning.length, message.length - end.length)
         : "";
     return data;
   }
 
   bool isValid(String message) {
-    return message.startsWith(begining) && message.endsWith(end);
+    return message.startsWith(beginning) && message.endsWith(end);
   }
 
   String _composeMessageFrom(String data) {

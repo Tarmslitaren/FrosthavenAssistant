@@ -59,7 +59,6 @@ class GameState extends ActionHandler {
   //TODO: put action handler in own place
 
   GameState() {
-    init();
   }
 
   void init() {
@@ -71,8 +70,6 @@ class GameState extends ActionHandler {
     _elementState[Elements.light] = ElementState.inert;
     _elementState[Elements.dark] = ElementState.inert;
 
-    getIt<GameData>().loadData("assets/data/")//todo: don't do this here?
-        .then((value) => load());
   }
 
 
@@ -141,7 +138,7 @@ class GameState extends ActionHandler {
   BuiltSet<String> get unlockedClasses => BuiltSet.of(_unlockedClasses);
   Set<String> _unlockedClasses = {};
 
-  final showAllyDeck = ValueNotifier<bool>(false); //TODO? make command etc
+  final showAllyDeck = ValueNotifier<bool>(false);
 
 
   @override

@@ -63,6 +63,9 @@ class MainState extends State<MyHomePage>
           getIt<Network>().appInBackground = true;
         }
         break;
+      case AppLifecycleState.hidden:
+        // TODO: Handle this case.
+        break;
     }
   }
 

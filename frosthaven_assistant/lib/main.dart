@@ -4,12 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
+import 'Resource/game_data.dart';
 import 'Resource/theme_switcher.dart';
 
 void _enablePlatformOverrideForDesktop() {
@@ -45,7 +47,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -58,6 +60,10 @@ class MyApp extends StatelessWidget {
       //should force app to be in foreground and disable screen lock
     }
 
+    //initialize game
+    getIt<GameState>().init();
+    getIt<GameData>().loadData("assets/data/")
+        .then((value) => getIt<GameState>().load());
     getIt<Settings>().init();
 
     return MaterialApp(
@@ -73,7 +79,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 

@@ -7,7 +7,7 @@ import '../service_locator.dart';
 import 'network.dart';
 
 class NetworkUI extends StatefulWidget {
-  const NetworkUI({Key? key}) : super(key: key);
+  const NetworkUI({super.key});
 
   @override
   NetworkUIState createState() => NetworkUIState();
