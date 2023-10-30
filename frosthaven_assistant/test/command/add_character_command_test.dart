@@ -15,7 +15,6 @@ Future<void> setUpAll() async {
   await getIt<GameData>().loadData("assets/data/");//todo: should use mock data
   await _gameState.load();
 
-
 }
 
 void tests() {

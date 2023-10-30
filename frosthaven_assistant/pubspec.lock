@@ -113,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.2.11"
+  build_test:
+    dependency: "direct dev"
+    description:
+      name: build_test
+      sha256: "178a9e8989cbd40b3104b88cb6ab8cbf6e3293d90b31ba44420745cba54730f1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.1"
   built_collection:
     dependency: "direct main"
     description:

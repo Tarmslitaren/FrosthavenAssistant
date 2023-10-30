@@ -20,7 +20,6 @@ final _getIt = GetIt.instance;
 const _address = '127.0.0.1';
 
 @GenerateNiceMocks([
-  MockSpec<GameState>(),
   MockSpec<Communication>(),
   MockSpec<Connection>(),
   MockSpec<Network>(),
@@ -30,7 +29,7 @@ const _address = '127.0.0.1';
       as: Symbol('MockValueNotifierClientState'))
 ])
 final _connection = MockConnection();
-final _gameState = MockGameState();
+final _gameState = GameState();
 final _communication = MockCommunication();
 final _network = MockNetwork();
 final _settings = MockSettings();
