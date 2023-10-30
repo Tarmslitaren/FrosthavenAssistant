@@ -21,6 +21,7 @@ void _enablePlatformOverrideForDesktop() {
 }
 
 void main() {
+
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
 
@@ -44,6 +45,7 @@ void main() {
   }
 
   runApp(ThemeSwitcherWidget(initialTheme: theme, child: const MyApp()));
+
 }
 
 class MyApp extends StatelessWidget {
