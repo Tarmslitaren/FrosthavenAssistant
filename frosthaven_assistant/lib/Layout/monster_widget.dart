@@ -131,7 +131,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double height = scale * 0.8 * 120;
+    double height = scale * 96;
     return ValueListenableBuilder<int>(
         valueListenable: getIt<GameState>().updateList,
         builder: (context, value, child) {
@@ -145,7 +145,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                     ? ColorFilter.matrix(identity)
                     : ColorFilter.matrix(grayScale),
                 child: SizedBox(
-                  height: 120 * 0.8 * scale,
+                  height: 96 * scale,
                   //this dictates size of the cards
                   width: getMainListWidth(context),
                   child: Row(
@@ -168,8 +168,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
                 )),
             Container(
               margin: EdgeInsets.only(
-                  left: 4 * scale * 0.8, right: 4 * scale * 0.8),
-              width: getMainListWidth(context) - 4 * scale * 0.8,
+                  left: 3.2 * scale, right: 3.2 * scale),
+              width: getMainListWidth(context) - 3.2 * scale,
               child: ValueListenableBuilder<int>(
                   valueListenable: getIt<GameState>().killMonsterStandee,
                   // widget.data.monsterInstances,

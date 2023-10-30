@@ -185,8 +185,8 @@ class LineBuilder {
         fontFamily: 'Majalla',
         leadingDistribution: TextLeadingDistribution.proportional,
         color: left ? Colors.black : Colors.white,
-        fontSize: 8.0 * 0.8 * scale,
-        letterSpacing: 2.0 * 0.8 * scale,
+        fontSize: 6.4 * scale,
+        letterSpacing: 1.6 * scale,
         height: 0.7,
         shadows: [shadow]);
 
@@ -194,8 +194,8 @@ class LineBuilder {
         fontFamily: 'Majalla',
         leadingDistribution: TextLeadingDistribution.proportional,
         color: left ? Colors.black : Colors.white,
-        fontSize: 6.0 * 0.8 * scale,
-        letterSpacing: 2.0 * 0.8 * scale,
+        fontSize: 4.8 * scale,
+        letterSpacing: 1.6 * scale,
         height: 0.1,
         shadows: [shadow]);
 
@@ -829,7 +829,7 @@ class LineBuilder {
               backgroundColor: debugColors ? Colors.amber : null,
               fontFamily: 'Majalla',
               color: Colors.transparent,
-              fontSize: 11 * 0.8 * scale,
+              fontSize: 8.8 * scale,
               height: 1);
         }
       }

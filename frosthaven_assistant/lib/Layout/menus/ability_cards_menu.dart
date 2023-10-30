@@ -28,8 +28,8 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
     double scale = max((screenSize.height / (40 * 14)), 0.5);
-    if (screenSize.width * 0.4 < 178 * 0.8 * scale) {
-      scale = screenSize.width * 0.4 / (178 * 0.8);
+    if (screenSize.width * 0.4 < 142.4 * scale) {
+      scale = screenSize.width * 0.4 / (142.4);
     }
     late final Widget child;
 

@@ -66,7 +66,7 @@ class Item extends StatelessWidget {
       if (totalWidthOfMonsterBoxes > 2 * listWidth) {
         standeeRows = 3;
       }
-      height = 122 * 0.8 * scale + standeeRows * 32 * scale;
+      height = 97.6 * scale + standeeRows * 32 * scale;
     } else {
       height = 0;
     }
@@ -243,7 +243,7 @@ class MainListState extends State<MainList> {
         }
       }
       if (item is Monster) {
-        listHeight += 120 * 0.8;
+        listHeight += 96;
         if (item.monsterInstances.isNotEmpty) {
           double listWidth = 0;
           for (var monsterInstance in item.monsterInstances) {

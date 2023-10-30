@@ -575,7 +575,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                     child: Row(
                       children: [
                         Image(
-                          height: 20.0 * scale * 0.8,
+                          height: 16 * scale,
                           color: Colors.blue,
                           colorBlendMode: BlendMode.modulate,
                           image: const AssetImage("assets/images/psd/xp.png"),
@@ -693,8 +693,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                   // color: Colors.amber,
                   //height: 50,
                   margin: EdgeInsets.only(
-                      left: 4 * scale * 0.8, right: 4 * scale * 0.8),
-                  width: getMainListWidth(context) - 8 * scale * 0.8,
+                      left: 3.2 * scale, right: 3.2 * scale),
+                  width: getMainListWidth(context) - 6.4 * scale,
                   child: ValueListenableBuilder<int>(
                       valueListenable: getIt<GameState>().killMonsterStandee,
                       // widget.data.monsterInstances,
