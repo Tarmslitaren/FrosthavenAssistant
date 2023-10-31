@@ -95,7 +95,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
                 width: 10,
               ),
               Text(
-                "$characterId's loot:", //todo: get name instead
+                "$characterId's loot:",
                 style: const TextStyle(fontSize: 18),
               )
             ]),
