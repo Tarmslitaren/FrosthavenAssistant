@@ -8255,14 +8255,14 @@
               "type": "Timer",
               "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
               "startOfRound": true,
-              "note": "Spawn Piranha Pigs at each F. Normal for 2 character and elite fro 3-4 characters.",
+              "note": "Spawn Piranha Pigs at each F. Normal for 2 character and elite for 3-4 characters.",
               "name": "spawn 1"
             },
             {
               "type": "Timer",
               "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29],
               "startOfRound": true,
-              "note": "Spawn Lurker Clawcrusher at D. It is Elite for 3-4 characters. Spawn Lurker Wavethrower at E. It is Elite for 4 characters. Spawn Piranha Pigs at each F. They are elite fro 3-4 characters.",
+              "note": "Spawn Lurker Clawcrusher at D. It is Elite for 3-4 characters. Spawn Lurker Wavethrower at E. It is Elite for 4 characters. Spawn Piranha Pigs at each F. They are elite for 3-4 characters.",
               "name": "spawn 2"
             }
           ]
