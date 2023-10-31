@@ -6254,7 +6254,7 @@
         }],
       "sections": {
         "#75.1 Heart of Ice (4)": {
-          "initialMessage": "Bosses use separate decks. (Not according to the rules)"
+          "initialMessage": "Bosses use separate ability card decks. (Not according to the rules)"
         }
       }
     },
@@ -6263,7 +6263,7 @@
       "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
       "sections": {
         "#75.1 Heart of Ice (4)": {
-          "initialMessage": "Bosses use separate decks. (Not according to the rules)"
+          "initialMessage": "Bosses use separate ability card decks. (Not according to the rules)"
         }
       }
     },

@@ -2052,7 +2052,7 @@
     },
     "#108 Prologue to the End": {
       "monsters": [  ],
-      "initialMessage": "Choose section. (Bosses use separate decks)",
+      "initialMessage": "Choose section. (Bosses use separate ability card decks)",
       "sections": {
         "#37 Aiding Diamara": {
           "monsters": ["City Archer", "City Guard", "Valrath Savage", "Valrath Tracker", "Human Commander", "Valrath Commander"],
