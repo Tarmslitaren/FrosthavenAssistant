@@ -9125,13 +9125,21 @@
           "type": "Timer",
           "startOfRound": true,
           "list": [1],
-          "note": "Ice Pillars a active."
+          "note": "Ice Pillars A active."
         },
         {
           "type": "Timer",
           "startOfRound": true,
-          "list": [4,7,10,13,16,19,22,25,28],
-          "note": "Ice Pillars a active."
+          "list": [4,10,16,22,28],
+          "note": "Ice Pillars A active. Spawn 1 Ruined Machine at D. normal for 2 characters, elite for 3-4.",
+          "name": "spawn 1"
+        },
+        {
+          "type": "Timer",
+          "startOfRound": true,
+          "list": [7,13,19,25],
+          "note": "Ice Pillars A active. Spawn 1 Ruined Machine at D. normal for 2 characters, elite for 3-4.",
+          "name": "spawn 2"
         },
         {
           "type": "Timer",
