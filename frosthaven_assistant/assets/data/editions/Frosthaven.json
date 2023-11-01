@@ -5234,7 +5234,7 @@
         },
         {
           "level": 6,
-          "health": "Cx53",
+          "health": "Cx33",
           "move": 6,
           "attack": 7,
           "attributes": [ "%retaliate% 3" ],
