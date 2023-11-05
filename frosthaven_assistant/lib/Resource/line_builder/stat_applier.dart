@@ -114,6 +114,7 @@ class StatApplier {
           if (item != "shield" &&
               item != "retaliate" &&
               item != "range" &&
+              item != "heal" &&
               item != "jump") {
             tokens.add("%$item%");
           }
@@ -124,6 +125,7 @@ class StatApplier {
           if (item != "shield" &&
               item != "retaliate" &&
               item != "range" &&
+              item != "heal" &&
               item != "jump") {
             eTokens.add("%$item%");
           }

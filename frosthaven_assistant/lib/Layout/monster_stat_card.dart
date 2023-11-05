@@ -326,12 +326,12 @@ class MonsterStatCardWidgetState extends State<MonsterStatCardWidget> {
     List<String> bossOtherAttributes = [];
 
     for (String item in normal.attributes) {
-      if (frosthavenStyle &&
+      if (frosthavenStyle && !bossAttackAttributes.contains("target") &&
           (item.startsWith('%wound%') ||
               item.startsWith('%poison%') ||
               item.startsWith("%brittle%"))) {
         bossAttackAttributes += item;
-      } else if (item.startsWith("%target%")) {
+      } else if (frosthavenStyle && item.startsWith("%target%")) {
         bossAttackAttributes += "^$item";
       } else {
         bossOtherAttributes.add(item);
