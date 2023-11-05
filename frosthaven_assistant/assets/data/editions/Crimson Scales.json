@@ -480,7 +480,7 @@
         [1225, false, 30, "%heal% 2", "^Self","*.........", "%chill%", "^Target one enemy with no %chill%", "^tokens within %range% 3" ],
         [1226, false, 26, "%move% + 0","*.........", "%attack% - 1","^%range% + 0","*.........", "^Create a %chill% trap in an adjacent", "^empty hex closest to an enemy." ],
         [1227, false, 10, "%retaliate% 3", "^%range% 3","*.........", "[r]","%air%%use%", "[c]", "^%attack% - 1", "^%range% - 1","[/c]", "[/r]" ],
-        [1228, false, 22, "%pull% 2", "^Target one enemy within %range% 3","*.........", "[r]","[c]","%attack% - 1","^%range% + 0","[/c]","¤aoe-arc-3","[/r]", "%air%" ],
+        [1228, false, 22, "%pull% 2", "^Target one enemy within %range% 3","*.........", "[r]","[c]","%attack% - 1","[/c]","¤aoe-arc-3","[/r]", "%air%" ],
         [1229, false, 19, "%attack% - 1", "^Target all enemies within %range% 2", "[r]","%ice%%use%", "%air%", "[/r]" ]
       ]
     },
