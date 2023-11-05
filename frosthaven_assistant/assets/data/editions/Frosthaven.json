@@ -6442,14 +6442,14 @@
           "type": "Timer",
           "list": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29],
           "startOfRound": true,
-          "note": "Spawn 1 Piranha Pig (normal for 2 characters, elite for 3-4) and 2 Lightning Eels (normal for 2-3 characters, elite for 4)",
+          "note": "Spawn 1 Piranha Pig at B (normal for 2 characters, elite for 3-4) and 2 Lightning Eels at C (normal for 2-3 characters, elite for 4)",
           "name": "spawn 1"
         },
         {
           "type": "Timer",
           "list": [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30],
           "startOfRound": true,
-          "note": "Spawn 1 Piranha Pig (normal for 2-3 characters, elite for 4) and 2 Lightning Eels (normal for 2 characters, elite for 3-4)",
+          "note": "Spawn 1 Piranha Pig at D (normal for 2-3 characters, elite for 4) and 2 Lightning Eels at E (normal for 2 characters, elite for 3-4)",
           "name": "spawn 2"
         }
       ]
@@ -6542,7 +6542,12 @@
           "condition": "C<3",
           "note": "should spawn only 4-C helpers"
         }
-        ]
+        ],
+      "sections": {
+        "#25.3 Haunted Vault (17)": {
+          "initialMessage": "ERRATA: When Door 1 is opened, read section 62.3"
+        }
+      }
     },
     "#18 Crystal Fields": {
       "initialMessage": "ERRATA: Map layout and map: The right 11 tile should be 11-C.",
@@ -7080,6 +7085,7 @@
     "#36 Buried Ducts": {
       "monsters": [ "Flaming Bladespinner", "Robotic Boltshooter", "Ruined Machine" ],
       "lootDeck": {"coin":9,"lumber": 3,"metal":5,"arrowvine":2, "treasure": 1},
+      "initialMessage": "ERRATA: Missing reward for completing: item 67",
       "special": [
         {
           "type": "Objective",
@@ -7188,6 +7194,7 @@
     "#37 The Dead Mile": {
       "monsters": [ "Living Bones (FH)", "Living Spirit (FH)" ,"Ruined Machine" ],
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"rockroot":1,"arrowvine":2, "treasure": 1},
+      "initialMessage": "ERRATA: Missing reward for completing: item 67",
       "sections": {
         "#70.1 The Dead Mile (37)": {
           "initialMessage": "ERRATA: Treasure Chest should be #56",
@@ -7282,7 +7289,7 @@
               "type": "Timer",
               "list": [2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30],
               "startOfRound": true,
-              "note": "Spawn Hounds at D and E. Only one normal for 2 characters, one normal at both for 3 characters and one elite for 4.",
+              "note": "Spawn Hounds at D and E. Normal for 2-3 characters and elite for 4.",
               "name": "spawn 1"
             },
             {
@@ -7783,7 +7790,8 @@
     "#60 Uniting the Crown": {
       "monsters": [ "Fracture of the Deep", "Lightning Eel", "Lurker Clawcrusher", "Lurker Mindsnipper", "Lurker Wavethrower" ],
       "lootDeck": {"coin":8,"arrowvine": 1,"axenut":1,"corpsecap": 1,"rockroot":1,"flamefruit":1,"snowthistle":1, "treasure": 1},
-      "note": "didn't bother to make 3 fractured lieutenants (only +1 attack anyway)"
+      "note": "didn't bother to make 3 fractured lieutenants (only +1 attack anyway)",
+      "initialMessage": "ERRATA: Missing reward for completing: item 224"
     },
     "#61 Life and Death": {
       "monsters": [ "Deep Terror (FH)", "Earth Demon (FH)", "Harrower Infester (FH)" ],
@@ -8431,12 +8439,14 @@
         {
           "type": "Objective",
           "name": "Door 1",
-          "health": "(1+L)x2"
+          "health": "(1+L)x2",
+          "init": 20
         },
         {
           "type": "Objective",
           "name": "Door 2",
-          "health": "(1+L)x2"
+          "health": "(1+L)x2",
+          "init": 20
         },
         {
           "type": "Timer",
@@ -9180,7 +9190,7 @@
           "type": "Timer",
           "startOfRound": false,
           "list": [-1],
-          "note": "All figures resolve: Corresponding Hex unoccupied: suffer 1 damage. Occupied by enemy: suffer 2 damage. Occupied by ally: heal 1, self."
+          "note": "All characters and monsters resolve: Corresponding Hex unoccupied: suffer 1 damage. Occupied by enemy: suffer 2 damage. Occupied by ally: heal 1, self."
         }],
       "sections": {
         "#182.2 Ice Cave (111)": {

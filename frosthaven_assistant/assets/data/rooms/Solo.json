@@ -2000,8 +2000,8 @@
           "elite": [0, 0, 0]
         },
         "Flaming Bladespinner": {
-          "normal": [1, 1, 1],
-          "elite": [0, 0, 0]
+          "elite": [1, 1, 1],
+          "normal": [0, 0, 0]
         }
       }
     },

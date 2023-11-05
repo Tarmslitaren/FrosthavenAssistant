@@ -808,7 +808,7 @@
     {
       "start": {
         "Lurker Clawcrusher": {
-          "normal": [2, 1, 1],
+          "normal": [2, 1, 0],
           "elite": [0, 1, 2]
         },
         "Lurker Wavethrower": {
@@ -1478,8 +1478,8 @@
     {
       "spawn 1": {
         "Hound (FH)": {
-          "normal": [1, 2, 0],
-          "elite": [0, 0, 1]
+          "normal": [2, 2, 0],
+          "elite": [0, 0, 2]
         }
       }
     },
