@@ -564,6 +564,12 @@
       ]
     },
     {
+      "name": "Chaos Spark",
+      "cards": [
+        [ "Nothing Special", 0, true, 90, "%move% + 0","*.........","%attack% + 0", "^Add 2 x T to Attack Value", "^^where T is the amount of damage tokens", "^^on the target's character map" ]
+      ]
+    },
+    {
       "name": "Harrower Infester (FH)",
       "cards": [
         ["Biting Gnats", 802, false, 38, "%move% - 1","*.........", "%attack% + 1", "^%target% 2" ],
@@ -4244,6 +4250,38 @@
         }
       ]
     },
+    "Chaos Spark": {
+      "deck": "Chaos Spark",
+      "gfx": "nothing",
+      "hidden": true,
+      "count": 10,
+      "levels": [
+        {
+          "level": 0, "health": 1, "move": 2, "attack": "C-2"
+        },
+        {
+          "level": 1, "health": 2, "move": 2, "attack": "C-2"
+        },
+        {
+          "level": 2, "health": 3, "move": 2, "attack": "C-2"
+        },
+        {
+          "level": 3, "health": 4, "move": 2, "attack": "C-2"
+        },
+        {
+          "level": 4, "health": 5, "move": 2, "attack": "C-2"
+        },
+        {
+          "level": 5, "health": 6, "move": 2, "attack": "C-2"
+        },
+        {
+          "level": 6, "health": 7, "move": 2, "attack": "C-2"
+        },
+        {
+          "level": 7, "health": 8, "move": 2, "attack": "C-2"
+        }
+      ]
+    },
     "Giant Piranha Pig Water": {
       "deck": "Boss (FH)",
       "gfx": "nothing",
@@ -6455,7 +6493,7 @@
       ]
     },
     "#15 Ancient Spire": {
-      "monsters": [ "Chaos Lieutenant", "Robotic Boltshooter", "Ruined Machine"],
+      "monsters": [ "Chaos Lieutenant", "Chaos Spark", "Robotic Boltshooter", "Ruined Machine"],
       "lootDeck": {"coin":8,"lumber": 4,"metal":5,"hide": 2,"corpsecap":1,"flamefruit":1, "treasure": 1},
       "special": [
         {
