@@ -6493,7 +6493,7 @@
       ]
     },
     "#15 Ancient Spire": {
-      "monsters": [ "Chaos Lieutenant", "Chaos Spark", "Robotic Boltshooter", "Ruined Machine"],
+      "monsters": [ "Chaos Lieutenant", "Robotic Boltshooter", "Ruined Machine"],
       "lootDeck": {"coin":8,"lumber": 4,"metal":5,"hide": 2,"corpsecap":1,"flamefruit":1, "treasure": 1},
       "special": [
         {
@@ -7082,7 +7082,7 @@
       }
     },
     "#34 Top of the Spire": {
-      "monsters": [ "Lord of Chaos" ]
+      "monsters": [ "Lord of Chaos", "Chaos Spark" ]
     },
     "#35 Scrap Pit": {
       "monsters": [ "Living Bones (FH)", "Ruined Machine", "Spitting Drake (FH)" ],
