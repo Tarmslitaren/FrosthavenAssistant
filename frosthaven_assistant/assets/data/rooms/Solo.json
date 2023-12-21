@@ -1475,12 +1475,24 @@
     {
       "drifter": {
         "Forest Imp (FH)": {
-          "normal": [4, 4, 4],
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        },
+        "Hound (FH)": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "door": {
+        "Forest Imp (FH)": {
+          "normal": [2, 2, 2],
           "elite": [0, 0, 0]
         },
         "Hound (FH)": {
           "normal": [4, 4, 4],
-          "elite": [1, 1, 1]
+          "elite": [0, 0, 0]
         }
       }
     },
