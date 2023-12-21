@@ -160,6 +160,8 @@ class LineBuilder {
       final CrossAxisAlignment alignment,
       final double scale,
       final bool animate) {
+
+    //todo: for performance - check how often is this being run
     bool isBossStatCard = monster.type.levels[0].boss != null &&
         alignment == CrossAxisAlignment.start;
 
@@ -332,15 +334,16 @@ class LineBuilder {
       textAlign = TextAlign.end;
     }
 
+    var textColor = alignment == CrossAxisAlignment.end ? Colors.black : Colors.white;
     var colorizeColors = [
-      alignment == CrossAxisAlignment.end ? Colors.black : Colors.white,
-      alignment == CrossAxisAlignment.end ? Colors.black : Colors.white,
+      textColor,
+      textColor,
       Colors.blueGrey,
-      alignment == CrossAxisAlignment.end ? Colors.black : Colors.white,
+      textColor,
       Colors.blueGrey,
-      alignment == CrossAxisAlignment.end ? Colors.black : Colors.white,
+      textColor,
       Colors.blueGrey,
-      alignment == CrossAxisAlignment.end ? Colors.black : Colors.white,
+      textColor,
     ];
     const int animationSpeed = 3500;
 

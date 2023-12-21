@@ -25,11 +25,10 @@ class Item extends StatelessWidget {
   final String name;
 
   const Item(
-      {Key? key,
+      {super.key,
       required this.data,
       required this.revealed,
-      required this.name})
-      : super(key: key);
+      required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class Item extends StatelessWidget {
 }
 
 class ModifierCardMenu extends StatefulWidget {
-  const ModifierCardMenu({Key? key, required this.name}) : super(key: key);
+  const ModifierCardMenu({super.key, required this.name});
 
   final String name;
 
