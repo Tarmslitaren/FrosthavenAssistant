@@ -15,10 +15,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.8.7+32
+version: 1.8.7+33
 
 environment:
-  sdk: ">=3.0.0 <3.4.0"
+  sdk: ">=3.1.0 <3.4.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -52,7 +52,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1 #I can't believe we need a third party package to do icons..
   flutter_native_splash: ^2.2.8 # and same for splash :)
   url_launcher: ^6.2.1
-  flutter_keyboard_visibility: ^5.4.1 #only way to check for keyboard closed event.
+  flutter_keyboard_visibility: ^6.0.0 #only way to check for keyboard closed event.
   responsive_framework: ^1.1.1
   override_text_scale_factor: ^1.0.2
   collection: ^1.17.2
