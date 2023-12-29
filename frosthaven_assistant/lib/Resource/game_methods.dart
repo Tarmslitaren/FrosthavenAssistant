@@ -665,7 +665,9 @@ class GameMethods {
         getIt<Settings>().showReminders.value == true) {
       _gameState._toastMessage.value += initMessage;
     } else {
-      ScaffoldMessenger.of(getIt<BuildContext>()).hideCurrentSnackBar();
+      if(getIt.isRegistered<BuildContext>()) {
+        ScaffoldMessenger.of(getIt<BuildContext>()).hideCurrentSnackBar();
+      }
     }
   }
 
@@ -1064,12 +1066,14 @@ class GameMethods {
         }
       } else {
         if (roomMonsterData.isNotEmpty) {
-          openDialogWithDismissOption(
-              getIt<BuildContext>(),
-              AutoAddStandeeMenu(
-                monsterData: roomMonsterData,
-              ),
-              false);
+          if(getIt.isRegistered<BuildContext>()) {
+            openDialogWithDismissOption(
+                getIt<BuildContext>(),
+                AutoAddStandeeMenu(
+                  monsterData: roomMonsterData,
+                ),
+                false);
+          }
         }
       }
     }

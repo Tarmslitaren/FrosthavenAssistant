@@ -26,6 +26,8 @@ void tests() {
     //assert(_gameState.commands.last?.describe() == "Add Hatchet");
   });
 
+  //todo: test objective/escort/2-mini
+
   checkSaveState();
 }
 
