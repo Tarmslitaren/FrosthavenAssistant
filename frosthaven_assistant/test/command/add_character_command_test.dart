@@ -22,13 +22,21 @@ Future<void> setUpAll() async {
 
   //todo: test there is no side effects -> check that _gameState does not change aside from the changes
   //todo: also test savestate: after each change test save+restore and that the state is equal
+}
 
+void checkSaveState() {
+  String state = _gameState.gameSaveStates.last.toString();
+  _gameState.save();
+  _gameState.load();
+  String newState = _gameState.gameSaveStates.last.toString();
+  assert(newState == state);
 }
 
 void tests() {
   AddCharacterCommand command = AddCharacterCommand("Hatchet", "Arnold", 9);
 
   command.execute();
+  checkSaveState();
 
   test("added ok", (){
     assert(_gameState.currentList.first is Character);
