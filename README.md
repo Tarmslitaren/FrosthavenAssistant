@@ -152,12 +152,9 @@ This will walk you through app installation through your first scenario.
 
 ## Roadmap
 - Next:
-  - Something special
   - More minor improvements
-- And then:
-  - Maybe language support
 
-## Developer Notes
+## Developer Notes for adding game data
 
 #### Calculations
 health and attack may be using a string formula instead of integer.
