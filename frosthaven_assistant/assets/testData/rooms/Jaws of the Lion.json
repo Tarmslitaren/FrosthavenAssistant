@@ -1,0 +1,1446 @@
+{
+  "2": [
+    {
+      "01": {
+        "Basic Vermling Raider": {
+          "normal": [
+            3,
+            3,
+            4
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "door": {
+        "Basic Vermling Raider": {
+          "normal": [
+            2,
+            3,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "3": [
+    {
+      "start": {
+        "Basic Zealot": {
+          "normal": [
+            2,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "01": {
+        "Basic Giant Viper": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Basic Zealot": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "02": {
+        "Basic Giant Viper": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Basic Zealot": {
+          "normal": [
+            1,
+            2,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "1": [
+    {
+      "01": {
+        "Common Vermling Raider": {
+          "normal": [
+            3,
+            5,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "4": [
+    {
+      "01": {
+        "Stone Golem (JotL)": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            2,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    }
+  ],
+  "5": [
+    {
+      "start": {
+        "Chaos Demon": {
+          "normal": [
+            2,
+            3,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "door": {
+        "Chaos Demon": {
+          "normal": [
+            1,
+            2,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "01": {
+        "Blood Tumor": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "6": [
+    {
+      "01": {
+        "Black Sludge": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        },
+        "Rat Monstrosity": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "door": {
+        "Black Sludge": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        },
+        "Rat Monstrosity": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "9": [
+    {
+      "start": {
+        "Blood Horror": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "01": {
+        "Zealot": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "02": {
+        "Zealot": {
+          "normal": [
+            0,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "03": {
+        "Zealot": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "7": [
+    {
+      "start": {
+        "Vermling Scout (JotL)": {
+          "normal": [
+            1,
+            1,
+            3
+          ],
+          "elite": [
+            1,
+            2,
+            2
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "door": {
+        "Vermling Scout (JotL)": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            2,
+            3
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "01": {
+        "Blood Tumor": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "8": [
+    {
+      "start": {
+        "Chaos Demon": {
+          "normal": [
+            2,
+            3,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            2,
+            2,
+            0
+          ],
+          "elite": [
+            1,
+            2,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "01": {
+        "Blood Tumor": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "10": [
+    {
+      "start": {
+        "Black Sludge": {
+          "normal": [
+            3,
+            4,
+            2
+          ],
+          "elite": [
+            1,
+            2,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "01": {
+        "Stone Golem (JotL)": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "02": {
+        "Black Sludge": {
+          "normal": [
+            1,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            2,
+            2
+          ]
+        },
+        "Chaos Demon": {
+          "normal": [
+            1,
+            2,
+            3
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "11": [
+    {
+      "start": {
+        "Black Sludge": {
+          "normal": [
+            1,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        },
+        "Giant Viper (JotL)": {
+          "normal": [
+            2,
+            3,
+            2
+          ],
+          "elite": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "door": {
+        "Black Sludge": {
+          "normal": [
+            0,
+            3,
+            2
+          ],
+          "elite": [
+            1,
+            0,
+            1
+          ]
+        },
+        "Giant Viper (JotL)": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        },
+        "Vermling Scout (JotL)": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "1": {
+        "Vermling Scout (JotL)": {
+          "normal": [
+            2,
+            3,
+            2
+          ],
+          "elite": [
+            2,
+            3,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "2": {
+        "Giant Viper (JotL)": {
+          "normal": [4, 2, 0],
+          "elite": [0, 2, 4]
+        }
+      }
+    }
+  ],
+  "12": [
+    {
+      "start": {}
+    },
+    {
+      "1": {
+        "Living Corpse (JotL)": {
+          "normal": [
+            2,
+            3,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Living Spirit (JotL)": {
+          "normal": [
+            4,
+            2,
+            0
+          ],
+          "elite": [
+            0,
+            2,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "13": [
+    {
+      "start": {
+        "Black Sludge": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        },
+        "Blood Imp": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "door": {
+        "Blood Imp": {
+          "normal": [
+            2,
+            2,
+            0
+          ],
+          "elite": [
+            1,
+            2,
+            4
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            1,
+            3,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "01": {
+        "Black Sludge": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "14": [
+    {
+      "01": {
+        "Giant Viper (JotL)": {
+          "normal": [
+            2,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            3,
+            4
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "door": {
+        "Giant Viper (JotL)": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            2,
+            5,
+            8
+          ]
+        },
+        "Zealot": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            2,
+            3
+          ]
+        }
+      }
+    }
+  ],
+  "15": [
+    {
+      "start": {
+        "Zealot": {
+          "normal": [
+            1,
+            0,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "door": {
+        "Zealot": {
+          "normal": [
+            3,
+            2,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "D": {
+        "Zealot": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "16": [
+    {
+      "start": {}
+    },
+    {
+      "1": {
+        "Rat Monstrosity": {
+          "normal": [4, 3, 4],
+          "elite": [1, 3, 4]
+        }
+      }
+    },
+    {
+      "2": {
+        "Rat Monstrosity": {
+          "normal": [6, 8, 4],
+          "elite": [1, 2, 6]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Rat Monstrosity": {
+          "normal": [4, 4, 4],
+          "elite": [2, 4, 6]
+        }
+      }
+    }
+  ],
+  "17": [
+    {
+      "start": {
+        "Blood Monstrosity": {
+          "normal": [
+            2,
+            2,
+            0
+          ],
+          "elite": [
+            1,
+            2,
+            4
+          ]
+        }
+      }
+    },
+    {
+      "A-B": {
+        "Blood Imp": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        },
+        "Blood Monstrosity": {
+          "normal": [
+            0,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "01": {
+        "First of the Order": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Blood Monstrosity": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Blood Monstrosity": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    }
+  ],
+  "20": [
+    {
+      "01": {
+        "Chaos Demon": {
+          "normal": [
+            2,
+            1,
+            2
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    }
+  ],
+  "18": [
+    {
+      "start": {
+        "Giant Viper (JotL)": {
+          "normal": [4, 2, 0],
+          "elite": [0, 2, 4]
+        }
+      }
+    },
+    {
+      "2": {
+        "Stone Golem (JotL)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        }
+      }
+    }
+  ],
+  "19": [
+    {
+      "start": {
+        "Vermling Raider": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Scout (JotL)": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "01": {
+        "Rat Monstrosity": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            3,
+            4
+          ]
+        },
+        "Vermling Raider": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Scout (JotL)": {
+          "normal": [
+            0,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "02": {
+        "Rat Monstrosity": {
+          "normal": [
+            2,
+            3,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            4
+          ]
+        },
+        "Vermling Raider": {
+          "normal": [
+            1,
+            1,
+            1
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Scout (JotL)": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            2,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "03": {
+        "Rat Monstrosity": {
+          "normal": [
+            2,
+            3,
+            0
+          ],
+          "elite": [
+            2,
+            3,
+            6
+          ]
+        }
+      }
+    }
+  ],
+  "21": [
+    {
+      "start": {
+      }
+    },
+    {
+      "01": {
+      }
+    },
+    {
+      "02": {
+        "Chaos Demon": {
+          "normal": [
+            1,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "door": {
+        "Chaos Demon": {
+          "normal": [
+            1,
+            0,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "03": {
+        "Chaos Demon": {
+          "normal": [
+            1,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        },
+        "Giant Viper (21)": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            2,
+            3,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "22": [
+    {
+      "01": {
+        "Giant Viper (JotL)": {
+          "normal": [
+            0,
+            4,
+            2
+          ],
+          "elite": [
+            2,
+            1,
+            3
+          ]
+        },
+        "Stone Golem (22)": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Vermling Raider (22)": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "23": [
+    {
+      "01": {
+        "Rat Monstrosity": {
+          "normal": [
+            2,
+            2,
+            2
+          ],
+          "elite": [
+            2,
+            2,
+            2
+          ]
+        }
+      }
+    }
+  ],
+  "24": [
+    {
+      "01": {
+        "Black Imp (JotL)": {
+          "normal": [
+            2,
+            3,
+            4
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Chaos Demon": {
+          "normal": [
+            2,
+            3,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "1": {
+        "Black Imp (JotL)": {
+          "normal": [4, 2, 0],
+          "elite": [0, 2, 4]
+        },
+        "Chaos Demon": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "2": {
+        "Chaos Demon": {
+          "normal": [3, 2, 0],
+          "elite": [0, 1, 3]
+        }
+      }
+    }
+  ],
+  "25": [
+    {
+      "start": {
+        "Living Spirit (JotL)": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "01": {
+        "Living Spirit (JotL)": {
+          "normal": [
+            1,
+            1,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Raider": {
+          "normal": [
+            1,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Scout (JotL)": {
+          "normal": [
+            2,
+            5,
+            2
+          ],
+          "elite": [
+            1,
+            0,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "02": {
+        "Living Spirit (JotL)": {
+          "normal": [
+            0,
+            1,
+            2
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "03": {
+        "Living Spirit (JotL)": {
+          "normal": [
+            1,
+            1,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
+          ]
+        },
+        "Vermling Scout (JotL)": {
+          "normal": [
+            2,
+            1,
+            0
+          ],
+          "elite": [
+            1,
+            3,
+            4
+          ]
+        }
+      }
+    }
+  ]
+}

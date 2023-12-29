@@ -1,0 +1,49 @@
+{
+  "summons": {
+    "Jade Falcon": {
+      "health": 2,
+      "move": 3,
+      "attack":  2
+    },
+    "Warrior Spirit": {
+      "health": 4,
+      "move": 1,
+      "attack":  3
+    },
+    "Skeleton": {
+      "health": 3,
+      "move": 2,
+      "attack":  2
+    },
+    "Steel Construct": {
+      "health": 5,
+      "move": 2,
+      "attack":  3
+    },
+    "custom": {
+      "health": 2,
+      "move": 2,
+      "attack":  2
+    },
+    "Delicate Model": {
+      "health": 1,
+      "move": 1,
+      "attack":  0
+    },
+    "Harrower Swarm": {
+      "health": 3,
+      "move": 3,
+      "attack":  2
+    },
+    "Smoke Spirit": {
+      "health": 6,
+      "move": 3,
+      "attack":  1
+    },
+    "Water Spirit": {
+      "health": 3,
+      "move": 2,
+      "attack":  2
+    }
+  }
+}
