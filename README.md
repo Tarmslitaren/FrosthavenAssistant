@@ -12,7 +12,7 @@ This is a feature-complete replacement for the defunct Gloomhaven Helper app. Th
 
 For problems and suggestions please file a [Github Issue](issues) or contact me directly at royalhasse@gmail.com. Please check out [Known Issues](#known-issues) and [Usage](#usage) below before submitting. Thanks!
 
-Written with the Flutter framework. [![codecov](https://codecov.io/gh/wonderplayer/FrosthavenAssistant/branch/main/graph/badge.svg?token=RMRI5NZCGG)](https://codecov.io/gh/wonderplayer/FrosthavenAssistant)
+Written with the Flutter framework. [![codecov](https://codecov.io/gh/tarmslitaren/FrosthavenAssistant/branch/main/graph/badge.svg?token=RMRI5NZCGG)](https://codecov.io/gh/tarmslitaren/FrosthavenAssistant)
 
 ## Set-up Guide
 
