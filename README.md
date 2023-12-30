@@ -6,7 +6,7 @@
 > Scenario 1 of Gloomhaven with starting classes of X-haven games
 
 ## Introduction
-**X-Haven Assistant** is a helper app for **Gloomhaven** and its family of board games. The app currently supports **Gloomhaven**, **Frosthaven**, **Jaws of the Lion**, **Forgotten Circles**, **Crimson Scales**, **Trail of Ashes**, and any derivatives including solo, custom, and retirement scenarios. 
+**X-Haven Assistant** is a helper app for **Gloomhaven** and its family of board games. The app currently supports **Gloomhaven**, **Frosthaven**, **Jaws of the Lion**, **Forgotten Circles**, **Crimson Scales**, **Trail of Ashes**, and the **Seeker of Xorn** scenarios. 
 
 This is a feature-complete replacement for the defunct Gloomhaven Helper app. This single-screen app streamlines combat and minimizes the need for user input. It complements physical play by tracking monster turns, enforcing scenario-specific rules and spawns, facilitating loot deck construction and enhancement, and much more. Multi-device control is available via local area networking. Please note that campaign progress is not within scope of this combat helper app.
 
@@ -21,7 +21,7 @@ This will walk you through app installation through your first scenario.
 <img width="575" alt="image" src="https://github.com/alexzhaohong/FrosthavenAssistant/assets/12620082/13657352-1360-4663-b4b1-8e1b81c93110">
 
  - Installation
-	 - Visit [Github Releases](https://github.com/Tarmslitaren/FrosthavenAssistant/releases/latest) and download the appropriate file for your system (Windows, Linux, Mac, Android). The app is also available via the [Google Play store](https://play.google.com/store/apps/details?id=com.tarmslitaren.frosthaven_assistant) and the [Apple App Store](https://apps.apple.com/ua/app/x-haven-assistant/id1639494414)
+	 - Visit [Github Releases](https://github.com/Tarmslitaren/FrosthavenAssistant/releases/latest) and download the appropriate file for your system (Windows, Linux, Mac, Android). The app is also available via the [Google Play store](https://play.google.com/store/apps/details?id=com.tarmslitaren.frosthaven_assistant) and for IOS at the [Apple App Store](https://apps.apple.com/ua/app/x-haven-assistant/id1639494414)
 	 - Open the application and set the device near the gaming board
 	 - Set *Dark Mode* for a red Gloomhaven theme (Default is the Frosthaven theme)
 
@@ -30,16 +30,17 @@ This will walk you through app installation through your first scenario.
  - Add characters
 	 - Click the top-left menu icon (≡), then click *Add Character*
 	 -  Choose or type a class name
-	 - Add the character's name
+	 - Add the character's name if you wish
  - Start a scenario
 	 - In the sidebar menu (≡) click *Set Scenario*
 	 - In the top drop-down menu (⌄) choose the current campaign
 	 - Choose the scenario number
 	 - Select monster numbers. Monsters auto-populate by player count and difficulty
+         - if you now want to change the difficulty, it can be done by tapping the bottom bar center or from the side menu
  - Round structure
 	 - Choose two cards and input initiative 
 		 - **For tablet/mouse users:** "*Soft numpad for input*" displays virtual numpad for accessibility
-		 - If the "*Don't ask for initative*" setting is on, drag and drop banners after drawing monster cards
+		 - If the "*Don't ask for initative*" setting is on, long press and drag and drop banners after drawing monster cards
 	 - Reveal monster actions. Click *Draw* in the bottom-left corner
 	 - Resolve combat
 		 - Click on health to adjust health and status effects
