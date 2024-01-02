@@ -5,6 +5,7 @@ import 'test_helpers.dart';
 
 
 void tests() {
+  String oldState = gameState.toString();
   SetScenarioCommand("#5 A Deeper Understanding", false).execute();
   test("basic scenario", (){
     assert(gameState.currentList.length == 3);
@@ -13,10 +14,17 @@ void tests() {
     assert(gameState.scenario.value == "#5 A Deeper Understanding");
     assert(gameState.currentAbilityDecks.length == 3);
     assert(gameState.lootDeck.cardCount.value == 0);
+    checkNoSideEffects([
+      "scenario",
+      "currentAbilityDecks",
+      "currentList",
+      "modifierDeck",
+      "modifierDeckAllies"
+    ], oldState);
+    checkSaveState();
   });
-  checkSaveState();
 
-  //todo: test, all kind of specials, sections, etc, set other scenario after.
+  //todo: test, all kind of specials, sections, loot deck etc, set other scenario after.
 }
 
 main() async {
