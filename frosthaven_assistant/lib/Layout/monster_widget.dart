@@ -17,7 +17,7 @@ class MonsterWidget extends StatefulWidget {
 
   final updateList = ValueNotifier<int>(0);
 
-  MonsterWidget({Key? key, required this.data}) : super(key: key);
+  MonsterWidget({super.key, required this.data});
 
   @override
   MonsterWidgetState createState() => MonsterWidgetState();

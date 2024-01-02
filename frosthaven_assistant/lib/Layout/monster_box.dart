@@ -10,21 +10,22 @@ import '../Resource/enums.dart';
 import '../Resource/ui_utils.dart';
 import 'menus/status_menu.dart';
 
-class MonsterBox extends StatefulWidget {
+class MonsterBox extends StatelessWidget {
   final String figureId;
   final String ownerId;
   final String displayStartAnimation;
   final bool blockInput;
   final double scale;
 
-  const MonsterBox(
-      {Key? key,
+  MonsterBox(
+      {super.key,
       required this.figureId,
       required this.ownerId,
       required this.displayStartAnimation,
       required this.blockInput,
-      required this.scale})
-      : super(key: key);
+      required this.scale}) {
+    data = GameMethods.getFigure(ownerId, figureId) as MonsterInstance;
+  }
 
   static const double conditionSize = 14;
 
@@ -41,25 +42,13 @@ class MonsterBox extends StatefulWidget {
     return width;
   }
 
-  @override
-  MonsterBoxState createState() => MonsterBoxState();
-}
-
-class MonsterBoxState extends State<MonsterBox> {
-  late MonsterInstance data;
-
-  @override
-  void initState() {
-    super.initState();
-    data = GameMethods.getFigure(widget.ownerId, widget.figureId)
-        as MonsterInstance;
-  }
+  late final MonsterInstance data;
 
   List<Widget> createConditionList(double scale) {
     List<Widget> list = [];
     for (var condition in data.conditions.value) {
       for (var item in getIt<GameState>().currentList) {
-        if (item.id == widget.ownerId) {
+        if (item.id == ownerId) {
           list.add(ConditionIcon(
             condition,
             MonsterBox.conditionSize,
@@ -118,7 +107,7 @@ class MonsterBoxState extends State<MonsterBox> {
 
     bool ownerIsCurrent = true;
     for (var item in getIt<GameState>().currentList) {
-      if (item.id == widget.ownerId) {
+      if (item.id == ownerId) {
         if (item.turnState == TurnsState.done) {
           ownerIsCurrent = false;
         }
@@ -128,8 +117,7 @@ class MonsterBoxState extends State<MonsterBox> {
 
     return ColorFiltered(
         //gray out if summoned this turn and it's still the character's/monster's turn
-        colorFilter: (data.roundSummoned == getIt<GameState>().round.value &&
-                ownerIsCurrent)
+        colorFilter: (data.roundSummoned == getIt<GameState>().round.value && ownerIsCurrent)
             ? ColorFilter.matrix(grayScale)
             : ColorFilter.matrix(identity),
         child: Container(
@@ -160,8 +148,7 @@ class MonsterBoxState extends State<MonsterBox> {
                 image: const AssetImage("assets/images/psd/monster-box.png"),
               ),
               Container(
-                margin: EdgeInsets.only(
-                    left: 3 * scale, top: 3 * scale, bottom: 2 * scale),
+                margin: EdgeInsets.only(left: 3 * scale, top: 3 * scale, bottom: 2 * scale),
                 child: Image(
                   //fit: BoxFit.contain,
                   height: 100 * scale,
@@ -178,8 +165,7 @@ class MonsterBoxState extends State<MonsterBox> {
                 child: Text(
                   textAlign: TextAlign.center,
                   standeeNr,
-                  style: TextStyle(
-                      color: color, fontSize: 20 * scale, shadows: [shadow]),
+                  style: TextStyle(color: color, fontSize: 20 * scale, shadows: [shadow]),
                 ),
               ),
               Positioned(
@@ -200,9 +186,7 @@ class MonsterBoxState extends State<MonsterBox> {
                         ),
                         Container(
                           margin: EdgeInsets.only(bottom: 2 * scale),
-                          width: data.health.value > 99
-                              ? 21 * scale
-                              : 16.8 * scale,
+                          width: data.health.value > 99 ? 21 * scale : 16.8 * scale,
                           alignment: Alignment.center,
                           child: Text(
                             textAlign: TextAlign.end,
@@ -216,11 +200,11 @@ class MonsterBoxState extends State<MonsterBox> {
                         )
                       ]),
                       SizedBox(
-                        width:
-                            data.health.value > 99 ? 4.5 * scale : 6.5 * scale,
+                        width: data.health.value > 99 ? 4.5 * scale : 6.5 * scale,
                       ),
                       ValueListenableBuilder<List<Condition>>(
-                          valueListenable: data.conditions, //todo: dont use valuelistenabel for lists or sets
+                          valueListenable: data.conditions,
+                          //todo: dont use valuelistenabel for lists or sets
                           builder: (context, value, child) {
                             return SizedBox(
                                 height: 30 * scale,
@@ -237,10 +221,8 @@ class MonsterBoxState extends State<MonsterBox> {
               ),
               Container(
                   //the hp bar
-                  margin: EdgeInsets.only(
-                      bottom: 2.5 * scale,
-                      left: 2.5 * scale,
-                      right: 2.7 * scale),
+                  margin:
+                      EdgeInsets.only(bottom: 2.5 * scale, left: 2.5 * scale, right: 2.7 * scale),
                   alignment: Alignment.bottomCenter,
                   width: 42 * scale,
                   child: ValueListenableBuilder<int>(
@@ -267,11 +249,7 @@ class MonsterBoxState extends State<MonsterBox> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = widget.scale;
-    var figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
-    if (figure != null) {
-      data = figure as MonsterInstance;
-    }
+    String figureId = data.getId();
     Color color = Colors.white;
     if (data.type == MonsterType.elite) {
       color = Colors.yellow;
@@ -281,28 +259,24 @@ class MonsterBoxState extends State<MonsterBox> {
     }
 
     double width = MonsterBox.getWidth(scale, data);
-    String figureId = data.getId();
     String? characterId;
-    if (widget.ownerId != data.name) {
-      characterId = widget.ownerId; //this is probably wrong
+    if (ownerId != data.name) {
+      characterId = ownerId; //this is probably wrong
     }
 
     return GestureDetector(
         onTap: () {
           //open stats menu
-          if (!widget.blockInput) {
+          if (!blockInput) {
             openDialog(
               context,
-              StatusMenu(
-                  figureId: figureId,
-                  monsterId: getMonster(),
-                  characterId: characterId),
+              StatusMenu(figureId: figureId, monsterId: getMonster(), characterId: characterId),
             );
           }
         },
         child: HealthWheelController(
-          figureId: widget.figureId,
-          ownerId: widget.ownerId,
+          figureId: figureId,
+          ownerId: ownerId,
           child: AnimatedContainer(
               //makes it grow nicely when adding conditions
               key: Key(figureId.toString()),
@@ -320,10 +294,10 @@ class MonsterBoxState extends State<MonsterBox> {
                     double offset = -30 * scale;
                     Widget child = buildInternal(scale, width, color);
 
-                    if (widget.displayStartAnimation != widget.figureId) {
+                    if (displayStartAnimation != figureId) {
                       //if this one is not added - only play death animation
                       return TranslationAnimatedWidget.tween(
-                          enabled: !alive && !widget.blockInput,
+                          enabled: !alive && !blockInput,
                           translationDisabled: const Offset(0, 0),
                           translationEnabled: Offset(0, alive ? 0 : -offset),
                           duration: const Duration(milliseconds: 600),
@@ -339,10 +313,7 @@ class MonsterBoxState extends State<MonsterBox> {
                         duration: const Duration(milliseconds: 600),
                         curve: Curves.linear,
                         child: OpacityAnimatedWidget.tween(
-                            enabled: alive,
-                            opacityDisabled: 0,
-                            opacityEnabled: 1,
-                            child: child));
+                            enabled: alive, opacityDisabled: 0, opacityEnabled: 1, child: child));
                   })),
         ));
   }

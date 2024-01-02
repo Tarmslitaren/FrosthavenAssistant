@@ -15,11 +15,10 @@ class ElementButton extends StatefulWidget {
   final double borderWidth = 2;
 
   const ElementButton(
-      {Key? key,
+      {super.key,
       required this.icon,
       required this.color,
-      required this.element})
-      : super(key: key);
+      required this.element});
 
   @override
   AnimatedContainerButtonState createState() => AnimatedContainerButtonState();

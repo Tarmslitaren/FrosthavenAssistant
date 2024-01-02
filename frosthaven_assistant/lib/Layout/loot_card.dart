@@ -7,17 +7,13 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/state/game_state.dart';
 
-class LootCardWidget extends StatefulWidget {
+class LootCardWidget extends StatelessWidget {
   final LootCard card;
   final revealed = ValueNotifier<bool>(false);
 
-  LootCardWidget({Key? key, required this.card, required bool revealed})
-      : super(key: key) {
+  LootCardWidget({super.key, required this.card, required bool revealed}) {
     this.revealed.value = revealed;
   }
-
-  @override
-  LootCardWidgetState createState() => LootCardWidgetState();
 
   static Widget buildFront(LootCard card, double scale) {
     var shadow = Shadow(
@@ -154,13 +150,6 @@ class LootCardWidget extends StatefulWidget {
       ),
     );
   }
-}
-
-class LootCardWidgetState extends State<LootCardWidget> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   Widget transitionBuilder(Widget widget, Animation<double> animation) {
     final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
@@ -180,8 +169,8 @@ class LootCardWidgetState extends State<LootCardWidget> {
   @override
   Widget build(BuildContext context) {
     Settings settings = getIt<Settings>();
-    return widget.revealed.value
-        ? LootCardWidget.buildFront(widget.card, settings.userScalingBars.value)
+    return revealed.value
+        ? LootCardWidget.buildFront(card, settings.userScalingBars.value)
         : LootCardWidget.buildRear(settings.userScalingBars.value);
   }
 }

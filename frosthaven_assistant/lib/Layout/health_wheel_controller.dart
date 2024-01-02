@@ -23,11 +23,10 @@ class HealthWheelController extends StatefulWidget {
   final Widget child;
 
   const HealthWheelController(
-      {Key? key,
+      {super.key,
       required this.figureId,
       required this.ownerId,
-      required this.child})
-      : super(key: key);
+      required this.child});
 
   @override
   HealthWheelControllerState createState() => HealthWheelControllerState();

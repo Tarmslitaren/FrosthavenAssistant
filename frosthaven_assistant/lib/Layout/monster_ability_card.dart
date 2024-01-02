@@ -15,8 +15,7 @@ import 'menus/ability_card_zoom.dart';
 class MonsterAbilityCardWidget extends StatefulWidget {
   final Monster data;
 
-  const MonsterAbilityCardWidget({Key? key, required this.data})
-      : super(key: key);
+  const MonsterAbilityCardWidget({super.key, required this.data});
 
   @override
   MonsterAbilityCardWidgetState createState() =>

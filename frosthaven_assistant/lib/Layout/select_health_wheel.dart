@@ -33,9 +33,7 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
   late final FixedExtentScrollController scrollController;
   double currentScrollOffset = 0;
   late int itemIndex;
-
   final double itemExtent = 25;
-
   bool scrollInited = false;
 
   @override

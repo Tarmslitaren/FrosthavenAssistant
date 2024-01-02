@@ -11,7 +11,7 @@ import '../Resource/game_data.dart';
 import '../Resource/settings.dart';
 
 class ModifierDeckWidget extends StatefulWidget {
-  const ModifierDeckWidget({Key? key, required this.name}) : super(key: key);
+  const ModifierDeckWidget({super.key, required this.name});
 
   final String name;
 

@@ -6,18 +6,8 @@ import '../Resource/game_data.dart';
 import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 
-class SectionList extends StatefulWidget {
-  const SectionList({Key? key}) : super(key: key);
-
-  @override
-  SectionListState createState() => SectionListState();
-}
-
-class SectionListState extends State<SectionList> {
-  @override
-  void initState() {
-    super.initState();
-  }
+class SectionList extends StatelessWidget {
+  const SectionList({super.key});
 
   List<Widget> generateList(List<ScenarioModel> inputList) {
     List<Widget> list = [];

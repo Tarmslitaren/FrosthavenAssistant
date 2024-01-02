@@ -10,8 +10,8 @@ import '../services/service_locator.dart';
 
 class DrawButton extends StatefulWidget {
   const DrawButton({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
    DrawButtonState createState() => DrawButtonState();

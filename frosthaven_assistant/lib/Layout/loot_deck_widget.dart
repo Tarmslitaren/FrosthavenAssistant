@@ -13,7 +13,7 @@ import 'loot_card.dart';
 import 'menus/loot_cards_menu.dart';
 
 class LootDeckWidget extends StatefulWidget {
-  const LootDeckWidget({Key? key}) : super(key: key);
+  const LootDeckWidget({super.key});
 
   @override
   LootDeckWidgetState createState() => LootDeckWidgetState();

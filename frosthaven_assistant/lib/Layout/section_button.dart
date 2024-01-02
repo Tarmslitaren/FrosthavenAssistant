@@ -5,20 +5,10 @@ import '../Resource/commands/set_scenario_command.dart';
 import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 
-class SectionButton extends StatefulWidget {
+class SectionButton extends StatelessWidget {
   final String data;
 
-  const SectionButton({Key? key, required this.data}) : super(key: key);
-
-  @override
-  SectionButtonState createState() => SectionButtonState();
-}
-
-class SectionButtonState extends State<SectionButton> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  const SectionButton({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -35,17 +25,13 @@ class SectionButtonState extends State<SectionButton> {
               backgroundColor: Colors.white70,
               elevation: 4,
             ),
-            onPressed:
-                !getIt<GameState>().scenarioSectionsAdded.contains(widget.data)
-                    ? () {
-                        setState(() {
-                          getIt<GameState>()
-                              .action(SetScenarioCommand(widget.data, true));
-                        });
-                      }
-                    : null,
+            onPressed: !getIt<GameState>().scenarioSectionsAdded.contains(data)
+                ? () {
+                    getIt<GameState>().action(SetScenarioCommand(data, true));
+                  }
+                : null,
             child: Text(
-              widget.data.split(" ")[0],
+              data.split(" ")[0],
               style: getTitleTextStyle(scale),
               maxLines: 1,
             ),

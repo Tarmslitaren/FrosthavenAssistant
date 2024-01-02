@@ -46,7 +46,7 @@ class StatCardZoomState extends State<StatCardZoom> {
       child: SizedBox(
           width: cardWidth * scale * zoomValue,
           height: cardHeight * scale * zoomValue,
-          child: MonsterStatCardWidgetState.buildCard(widget.monster, scaling)),
+          child: MonsterStatCardWidget.buildCard(widget.monster, scaling)),
     );
   }
 }

@@ -18,11 +18,10 @@ class CounterButton extends StatefulWidget {
 
   const CounterButton(this.notifier, this.command, this.maxValue, this.image,
       this.showTotalValue, this.color,
-      {Key? key,
+      {super.key,
       required this.figureId,
       required this.ownerId,
-      required this.scale})
-      : super(key: key);
+      required this.scale});
 
   @override
   State<StatefulWidget> createState() {

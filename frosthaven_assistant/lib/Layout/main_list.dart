@@ -19,7 +19,7 @@ import 'monster_widget.dart';
 class Item extends StatelessWidget {
   final ListItemData data;
 
-  const Item({Key? key, required this.data}) : super(key: key);
+  const Item({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +85,7 @@ class Item extends StatelessWidget {
 }
 
 class MainList extends StatefulWidget {
-  const MainList({Key? key}) : super(key: key);
+  const MainList({super.key});
 
   static void scrollToTop() {
     MainListState.scrollToTop();
@@ -101,11 +101,10 @@ class ListAnimation extends StatefulWidget {
   final Widget child;
 
   const ListAnimation(
-      {Key? key,
+      {super.key,
       required this.index,
       required this.lastIndex,
-      required this.child})
-      : super(key: key);
+      required this.child});
 
   @override
   State<StatefulWidget> createState() {

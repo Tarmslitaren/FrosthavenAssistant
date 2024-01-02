@@ -6,22 +6,14 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/state/game_state.dart';
 
-class ModifierCardWidget extends StatefulWidget {
+class ModifierCardWidget extends StatelessWidget {
   final ModifierCard card;
   final revealed = ValueNotifier<bool>(false);
   final String name;
 
-  ModifierCardWidget(
-      {Key? key,
-      required this.card,
-      required bool revealed,
-      required this.name})
-      : super(key: key) {
+  ModifierCardWidget({super.key, required this.card, required bool revealed, required this.name}) {
     this.revealed.value = revealed;
   }
-
-  @override
-  ModifierCardWidgetState createState() => ModifierCardWidgetState();
 
   static Widget buildFront(ModifierCard card, double scale) {
     return Container(
@@ -74,13 +66,6 @@ class ModifierCardWidget extends StatefulWidget {
       ),
     );
   }
-}
-
-class ModifierCardWidgetState extends State<ModifierCardWidget> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   Widget transitionBuilder(Widget widget, Animation<double> animation) {
     final rotateAnim = Tween(begin: pi, end: 0.0).animate(animation);
@@ -100,10 +85,8 @@ class ModifierCardWidgetState extends State<ModifierCardWidget> {
   @override
   Widget build(BuildContext context) {
     Settings settings = getIt<Settings>();
-    return widget.revealed.value
-        ? ModifierCardWidget.buildFront(
-            widget.card, settings.userScalingBars.value)
-        : ModifierCardWidget.buildRear(
-            settings.userScalingBars.value, widget.name);
+    return revealed.value
+        ? ModifierCardWidget.buildFront(card, settings.userScalingBars.value)
+        : ModifierCardWidget.buildRear(settings.userScalingBars.value, name);
   }
 }
