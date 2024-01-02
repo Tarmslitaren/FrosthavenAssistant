@@ -10,8 +10,7 @@ class AddStandeeMenu extends StatefulWidget {
   final Monster monster;
   final bool elite;
 
-  const AddStandeeMenu({Key? key, required this.monster, required this.elite})
-      : super(key: key);
+  const AddStandeeMenu({super.key, required this.monster, required this.elite});
 
   @override
   AddStandeeMenuState createState() => AddStandeeMenuState();
@@ -72,8 +71,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
         ),
         onPressed: () {
           if (!isOut) {
-            _gameState.action(AddStandeeCommand(
-                nr, null, widget.monster.id, type, addAsSummon));
+            _gameState.action(AddStandeeCommand(nr, null, widget.monster.id, type, addAsSummon));
           }
         },
       ),
@@ -99,8 +97,8 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
       height = 211;
     }
     return Container(
-        width: 250 *
-            scale, //need to set any width to center content, overridden by dialog default min width.
+        width: 250 * scale,
+        //need to set any width to center content, overridden by dialog default min width.
         height: height * scale,
         decoration: BoxDecoration(
           //color: Colors.black,
@@ -111,96 +109,72 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
             width: 10
           )),*/
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value
                 ? 'assets/images/bg/dark_bg.png'
                 : 'assets/images/bg/white_bg.png'),
             fit: BoxFit.cover,
           ),
         ),
-        child: Stack(
-            children: [
-              ValueListenableBuilder<int>(
-                  valueListenable: _gameState.commandIndex,//todo test. widget.monster.monsterInstances,
-                  builder: (context, value, child) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+        child: Stack(children: [
+          ValueListenableBuilder<int>(
+              valueListenable: _gameState.commandIndex,
+              //todo test. widget.monster.monsterInstances,
+              builder: (context, value, child) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20 * scale,
+                    ),
+                    Text("Add Standee Nr", style: getTitleTextStyle(scale)),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: 20 * scale,
-                        ),
-                        Text("Add Standee Nr", style: getTitleTextStyle(scale)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            buildNrButton(1, scale),
-                            nrOfStandees > 1
-                                ? buildNrButton(2, scale)
-                                : Container(),
-                            nrOfStandees > 2
-                                ? buildNrButton(3, scale)
-                                : Container(),
-                            nrOfStandees > 3
-                                ? buildNrButton(4, scale)
-                                : Container(),
-                          ],
-                        ),
-                        nrOfStandees > 4
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  nrOfStandees > 4
-                                      ? buildNrButton(5, scale)
-                                      : Container(),
-                                  nrOfStandees > 5
-                                      ? buildNrButton(6, scale)
-                                      : Container(),
-                                  nrOfStandees > 6
-                                      ? buildNrButton(7, scale)
-                                      : Container(),
-                                  nrOfStandees > 7
-                                      ? buildNrButton(8, scale)
-                                      : Container(),
-                                ],
-                              )
-                            : Container(),
-                        nrOfStandees > 8
-                            ? Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  nrOfStandees > 8
-                                      ? buildNrButton(9, scale)
-                                      : Container(),
-                                  nrOfStandees > 9
-                                      ? buildNrButton(10, scale)
-                                      : Container(),
-                                ],
-                              )
-                            : Container(),
-                        Row(
+                        buildNrButton(1, scale),
+                        nrOfStandees > 1 ? buildNrButton(2, scale) : Container(),
+                        nrOfStandees > 2 ? buildNrButton(3, scale) : Container(),
+                        nrOfStandees > 3 ? buildNrButton(4, scale) : Container(),
+                      ],
+                    ),
+                    nrOfStandees > 4
+                        ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Summoned:",
-                                  style: getSmallTextStyle(scale)),
-                              Checkbox(
-                                checkColor: Colors.black,
-                                activeColor: Colors.grey.shade200,
-                                side: BorderSide(
-                                    color: getIt<Settings>().darkMode.value
-                                        ? Colors.white
-                                        : Colors.black),
-                                onChanged: (bool? newValue) {
-                                  setState(() {
-                                    addAsSummon = newValue!;
-                                  });
-                                },
-                                value: addAsSummon,
-                              )
-                            ])
-                      ],
-                    );
-                  }),
-            ]));
+                              nrOfStandees > 4 ? buildNrButton(5, scale) : Container(),
+                              nrOfStandees > 5 ? buildNrButton(6, scale) : Container(),
+                              nrOfStandees > 6 ? buildNrButton(7, scale) : Container(),
+                              nrOfStandees > 7 ? buildNrButton(8, scale) : Container(),
+                            ],
+                          )
+                        : Container(),
+                    nrOfStandees > 8
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              nrOfStandees > 8 ? buildNrButton(9, scale) : Container(),
+                              nrOfStandees > 9 ? buildNrButton(10, scale) : Container(),
+                            ],
+                          )
+                        : Container(),
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Text("Summoned:", style: getSmallTextStyle(scale)),
+                      Checkbox(
+                        checkColor: Colors.black,
+                        activeColor: Colors.grey.shade200,
+                        side: BorderSide(
+                            color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black),
+                        onChanged: (bool? newValue) {
+                          setState(() {
+                            addAsSummon = newValue!;
+                          });
+                        },
+                        value: addAsSummon,
+                      )
+                    ])
+                  ],
+                );
+              }),
+        ]));
   }
 }

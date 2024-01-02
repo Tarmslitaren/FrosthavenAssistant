@@ -2,7 +2,6 @@ import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 
 import '../../services/service_locator.dart';
-import '../action_handler.dart';
 import '../state/game_state.dart';
 
 class RemoveCardCommand extends Command {

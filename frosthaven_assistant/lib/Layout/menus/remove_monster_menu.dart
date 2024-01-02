@@ -5,7 +5,7 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class RemoveMonsterMenu extends StatefulWidget {
-  const RemoveMonsterMenu({Key? key}) : super(key: key);
+  const RemoveMonsterMenu({super.key});
 
   @override
   RemoveMonsterMenuState createState() => RemoveMonsterMenuState();
@@ -52,12 +52,10 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                     title: Text(currentMonsters[index].type.display,
                         style: const TextStyle(fontSize: 18)),
                     trailing: Text("(${currentMonsters[index].type.edition})",
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.grey)),
+                        style: const TextStyle(fontSize: 14, color: Colors.grey)),
                     onTap: () {
                       setState(() {
-                        _gameState.action(
-                            RemoveMonsterCommand([currentMonsters[index]])); //
+                        _gameState.action(RemoveMonsterCommand([currentMonsters[index]])); //
                       });
                     },
                   ),

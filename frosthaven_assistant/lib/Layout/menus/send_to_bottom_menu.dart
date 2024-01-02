@@ -11,11 +11,7 @@ class SendToBottomMenu extends StatefulWidget {
   final bool allies;
 
   const SendToBottomMenu(
-      {Key? key,
-      required this.currentIndex,
-      required this.length,
-      required this.allies})
-      : super(key: key);
+      {super.key, required this.currentIndex, required this.length, required this.allies});
 
   @override
   SendToBottomMenuState createState() => SendToBottomMenuState();
@@ -36,8 +32,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
         height: 140,
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value
                 ? 'assets/images/bg/dark_bg.png'
                 : 'assets/images/bg/white_bg.png'),
@@ -51,12 +46,10 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
           TextButton(
               onPressed: () {
                 int oldIndex = widget.length - 1 - widget.currentIndex;
-                _gameState.action(
-                    ReorderModifierListCommand(0, oldIndex, widget.allies));
+                _gameState.action(ReorderModifierListCommand(0, oldIndex, widget.allies));
                 Navigator.pop(context);
               },
-              child:
-                  const Text("Send to Bottom", style: TextStyle(fontSize: 20))),
+              child: const Text("Send to Bottom", style: TextStyle(fontSize: 20))),
         ]));
   }
 }

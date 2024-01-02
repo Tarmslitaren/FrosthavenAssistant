@@ -10,7 +10,7 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class AddCharacterMenu extends StatefulWidget {
-  const AddCharacterMenu({Key? key}) : super(key: key);
+  const AddCharacterMenu({super.key});
 
   @override
   AddCharacterMenuState createState() => AddCharacterMenuState();
@@ -24,8 +24,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   late CharacterClass vq;
   final GameState _gameState = getIt<GameState>();
   final GameData _gameData = getIt<GameData>();
-  final ScrollController _scrollController =
-      ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   int compareEditions(String a, String b) {
     for (String item in _gameData.editions) {
@@ -62,8 +61,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     }
 
     if (getIt<Settings>().showCustomContent.value == false) {
-      _allCharacters.removeWhere(
-          (character) => GameMethods.isCustomCampaign(character.edition));
+      _allCharacters.removeWhere((character) => GameMethods.isCustomCampaign(character.edition));
     }
 
     _foundCharacters = _allCharacters;
@@ -90,8 +88,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       results = _allCharacters;
     } else {
       results = _allCharacters
-          .where((user) =>
-              user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .where((user) => user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       if (enteredKeyword.toLowerCase() == "bladeswarm") {
         //unlocked it!
@@ -144,8 +141,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                     child: TextField(
                       onChanged: (value) => _runFilter(value),
                       decoration: const InputDecoration(
-                          labelText:
-                              'Add Character (type name for hidden character classes)',
+                          labelText: 'Add Character (type name for hidden character classes)',
                           suffixIcon: Icon(Icons.search)),
                     ),
                   ),
@@ -166,13 +162,9 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                                   fit: BoxFit.contain,
                                   color: _foundCharacters[index].hidden &&
                                               !_gameState.unlockedClasses
-                                                  .contains(
-                                                      _foundCharacters[index]
-                                                          .name) ||
-                                          _foundCharacters[index].name ==
-                                              "Escort" ||
-                                          _foundCharacters[index].name ==
-                                              "Objective"
+                                                  .contains(_foundCharacters[index].name) ||
+                                          _foundCharacters[index].name == "Escort" ||
+                                          _foundCharacters[index].name == "Objective"
                                       ? null
                                       : _foundCharacters[index].color,
                                   filterQuality: FilterQuality.medium,
@@ -183,39 +175,28 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                                 title: Text(
                                     _foundCharacters[index].hidden &&
                                             !_gameState.unlockedClasses
-                                                .contains(
-                                                    _foundCharacters[index]
-                                                        .name)
+                                                .contains(_foundCharacters[index].name)
                                         ? "???"
                                         : _foundCharacters[index].name,
                                     style: TextStyle(
                                         fontSize: 18,
-                                        color: _characterAlreadyAdded(
-                                                _foundCharacters[index].name)
+                                        color: _characterAlreadyAdded(_foundCharacters[index].name)
                                             ? Colors.grey
                                             : Colors.black)),
-                                trailing: Text(
-                                    "(${_foundCharacters[index].edition})",
-                                    style: const TextStyle(
-                                        fontSize: 14, color: Colors.grey)),
+                                trailing: Text("(${_foundCharacters[index].edition})",
+                                    style: const TextStyle(fontSize: 14, color: Colors.grey)),
                                 onTap: () {
-                                  if (!_characterAlreadyAdded(
-                                      _foundCharacters[index].name)) {
+                                  if (!_characterAlreadyAdded(_foundCharacters[index].name)) {
                                     setState(() {
-                                      String display =
-                                          _foundCharacters[index].name;
+                                      String display = _foundCharacters[index].name;
                                       int count = 1;
-                                      if (_foundCharacters[index].name ==
-                                              "Objective" ||
-                                          _foundCharacters[index].name ==
-                                              "Escort") {
+                                      if (_foundCharacters[index].name == "Objective" ||
+                                          _foundCharacters[index].name == "Escort") {
                                         //add a number to name if already exists
-                                        for (var item
-                                            in _gameState.currentList) {
+                                        for (var item in _gameState.currentList) {
                                           if (item is Character &&
                                               item.characterClass.name ==
-                                                  _foundCharacters[index]
-                                                      .name) {
+                                                  _foundCharacters[index].name) {
                                             count++;
                                           }
                                         }
@@ -223,17 +204,12 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                                           display += " $count";
                                         }
                                       }
-                                      AddCharacterCommand command =
-                                          AddCharacterCommand(
-                                              _foundCharacters[index].name,
-                                              display,
-                                              1);
+                                      AddCharacterCommand command = AddCharacterCommand(
+                                          _foundCharacters[index].name, display, 1);
                                       _gameState.action(command); //
                                       //open level menu
-                                      openDialog(
-                                          context,
-                                          SetCharacterLevelMenu(
-                                              character: command.character));
+                                      openDialog(context,
+                                          SetCharacterLevelMenu(character: command.character));
                                     });
                                   }
                                 },

@@ -9,8 +9,7 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class SetLevelMenu extends StatefulWidget {
-  const SetLevelMenu({Key? key, this.monster, this.figure, this.characterId})
-      : super(key: key);
+  const SetLevelMenu({super.key, this.monster, this.figure, this.characterId});
 
   final Monster? monster;
   final String? characterId;
@@ -57,8 +56,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                     border: Border.all(
                       color: color,
                     ),
-                    borderRadius:
-                        BorderRadius.all(Radius.circular(30 * scale))),
+                    borderRadius: BorderRadius.all(Radius.circular(30 * scale))),
                 child: TextButton(
                   child: Text(
                     text,
@@ -199,11 +197,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
             width: 10
           )),*/
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(darkMode
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            image: AssetImage(
+                darkMode ? 'assets/images/bg/dark_bg.png' : 'assets/images/bg/white_bg.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -238,69 +234,50 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                       ],
                     ),
                   widget.figure == null
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                              Text("Solo:", style: getSmallTextStyle(scale)),
-                              ValueListenableBuilder<bool>(
-                                  valueListenable: _gameState.solo,
-                                  builder: (context, value, child) {
-                                    return Checkbox(
-                                      checkColor: Colors.black,
-                                      activeColor: Colors.grey.shade200,
-                                      side: BorderSide(
-                                          color: darkMode
-                                              ? Colors.white
-                                              : Colors.black),
-                                      onChanged: (bool? newValue) {
-                                        _gameState.action(SetSoloCommand(newValue!));
-                                      },
-                                      value: _gameState.solo.value,
-                                    );
-                                  })
-                            ])
+                      ? Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          Text("Solo:", style: getSmallTextStyle(scale)),
+                          ValueListenableBuilder<bool>(
+                              valueListenable: _gameState.solo,
+                              builder: (context, value, child) {
+                                return Checkbox(
+                                  checkColor: Colors.black,
+                                  activeColor: Colors.grey.shade200,
+                                  side: BorderSide(color: darkMode ? Colors.white : Colors.black),
+                                  onChanged: (bool? newValue) {
+                                    _gameState.action(SetSoloCommand(newValue!));
+                                  },
+                                  value: _gameState.solo.value,
+                                );
+                              })
+                        ])
                       : Container(),
                   widget.figure != null
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                              CounterButton(
-                                  widget.figure!.maxHealth,
-                                  ChangeMaxHealthCommand(0, figureId, ownerId),
-                                  900,
-                                  "assets/images/abilities/heal.png",
-                                  true,
-                                  Colors.red,
-                                  figureId: figureId,
-                                  ownerId: ownerId,
-                                  scale: scale)
-                            ])
+                      ? Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          CounterButton(
+                              widget.figure!.maxHealth,
+                              ChangeMaxHealthCommand(0, figureId, ownerId),
+                              900,
+                              "assets/images/abilities/heal.png",
+                              true,
+                              Colors.red,
+                              figureId: figureId,
+                              ownerId: ownerId,
+                              scale: scale)
+                        ])
                       : Container(),
                   if (showLegend == true)
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        createLegend(
-                            "trap damage",
-                            "assets/images/psd/traps-fh.png",
-                            ": ${GameMethods.getTrapValue()}",
-                            scale),
-                        createLegend(
-                            "hazardous terrain damage",
-                            "assets/images/psd/hazard-fh.png",
-                            ": ${GameMethods.getHazardValue()}",
-                            scale),
-                        createLegend(
-                            "experience added",
-                            "assets/images/psd/xp.png",
-                            ": +${GameMethods.getXPValue()}",
-                            scale),
-                        createLegend(
-                            "gold coin value",
-                            "assets/images/psd/coins-fh.png",
-                            ": x${GameMethods.getCoinValue()}",
-                            scale),
+                        createLegend("trap damage", "assets/images/psd/traps-fh.png",
+                            ": ${GameMethods.getTrapValue()}", scale),
+                        createLegend("hazardous terrain damage", "assets/images/psd/hazard-fh.png",
+                            ": ${GameMethods.getHazardValue()}", scale),
+                        createLegend("experience added", "assets/images/psd/xp.png",
+                            ": +${GameMethods.getXPValue()}", scale),
+                        createLegend("gold coin value", "assets/images/psd/coins-fh.png",
+                            ": x${GameMethods.getCoinValue()}", scale),
                         createLegend("level", "assets/images/psd/level.png",
                             ": ${_gameState.level.value}", scale),
                       ],

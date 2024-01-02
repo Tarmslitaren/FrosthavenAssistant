@@ -10,7 +10,7 @@ import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
 
 class AddSectionMenu extends StatefulWidget {
-  const AddSectionMenu({Key? key}) : super(key: key);
+  const AddSectionMenu({super.key});
 
   @override
   AddSectionMenuState createState() => AddSectionMenuState();
@@ -22,8 +22,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   final GameState _gameState = getIt<GameState>();
   final GameData _gameData = getIt<GameData>();
   final TextEditingController _controller = TextEditingController();
-  final ScrollController _scrollController =
-      ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
@@ -35,15 +34,11 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   void setCampaign(String campaign) {
     //TODO:clear search
     _gameState.action(SetCampaignCommand(campaign));
-    _foundScenarios = _gameData
-        .modelData
-        .value[_gameState.currentCampaign.value]!
-        .scenarios[_gameState.scenario.value]!
-        .sections
+    _foundScenarios = _gameData.modelData.value[_gameState.currentCampaign.value]!
+        .scenarios[_gameState.scenario.value]!.sections
         .map((e) => e.name)
         .toList();
-    _foundScenarios =
-        _foundScenarios.where((element) => !element.contains("spawn")).toList();
+    _foundScenarios = _foundScenarios.where((element) => !element.contains("spawn")).toList();
     _foundScenarios.sort((a, b) {
       int? aNr = GameMethods.findNrFromScenarioName(a);
       int? bNr = GameMethods.findNrFromScenarioName(b);
@@ -69,8 +64,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
           .scenarios[_gameState.scenario.value]!.sections
           .map((e) => e.name)
           .toList()
-          .where((user) =>
-              user.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .where((user) => user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       results = results.where((element) => !element.contains("spawn")).toList();
       results.sort((a, b) {
@@ -126,8 +120,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                         }
                       },
                       decoration: const InputDecoration(
-                          labelText: 'Add Section',
-                          suffixIcon: Icon(Icons.search)),
+                          labelText: 'Add Section', suffixIcon: Icon(Icons.search)),
                     ),
                   ),
                   const SizedBox(
@@ -144,8 +137,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                                 title: Text(_foundScenarios[index],
                                     style: const TextStyle(fontSize: 18)),
                                 onTap: () {
-                                  _gameState.action(SetScenarioCommand(
-                                      _foundScenarios[index], true));
+                                  _gameState
+                                      .action(SetScenarioCommand(_foundScenarios[index], true));
                                   Navigator.pop(context);
                                 },
                               ),

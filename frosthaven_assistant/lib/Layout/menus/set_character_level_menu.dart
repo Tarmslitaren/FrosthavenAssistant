@@ -10,8 +10,7 @@ import '../../services/service_locator.dart';
 import '../counter_button.dart';
 
 class SetCharacterLevelMenu extends StatefulWidget {
-  const SetCharacterLevelMenu({Key? key, required this.character})
-      : super(key: key);
+  const SetCharacterLevelMenu({super.key, required this.character});
 
   final Character character;
 
@@ -27,8 +26,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   void _focusNodeListener() {
     if (!focusNode.hasFocus) {
       if (nameController.text.isNotEmpty) {
-        _gameState.action(ChangeNameCommand(
-            nameController.text, widget.character.id));
+        _gameState.action(ChangeNameCommand(nameController.text, widget.character.id));
       }
     }
   }
@@ -51,8 +49,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
-          bool isCurrentlySelected =
-              nr == widget.character.characterState.level.value;
+          bool isCurrentlySelected = nr == widget.character.characterState.level.value;
           String text = nr.toString();
           bool darkMode = getIt<Settings>().darkMode.value;
           return SizedBox(
@@ -66,9 +63,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     shadows: [
                       Shadow(
                         offset: Offset(1 * scale, 1 * scale),
-                        color: isCurrentlySelected
-                            ? Colors.black54
-                            : Colors.black87,
+                        color: isCurrentlySelected ? Colors.black54 : Colors.black87,
                         blurRadius: 1 * scale,
                       ),
                     ],
@@ -78,8 +73,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
               ),
               onPressed: () {
                 if (!isCurrentlySelected) {
-                  _gameState.action(
-                      SetCharacterLevelCommand(nr, widget.character.id));
+                  _gameState.action(SetCharacterLevelCommand(nr, widget.character.id));
                 }
               },
             ),
@@ -105,8 +99,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
         height: 240 * scale,
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value
                 ? 'assets/images/bg/dark_bg.png'
                 : 'assets/images/bg/white_bg.png'),
@@ -155,8 +148,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 CounterButton(
                     widget.character.characterState.maxHealth,
-                    ChangeMaxHealthCommand(
-                        0, widget.character.id, widget.character.id),
+                    ChangeMaxHealthCommand(0, widget.character.id, widget.character.id),
                     900,
                     "assets/images/abilities/heal.png",
                     true,
@@ -175,8 +167,8 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     onSubmitted: (String string) {
                       //set the name
                       if (nameController.text.isNotEmpty) {
-                        _gameState.action(ChangeNameCommand(
-                            nameController.text, widget.character.id));
+                        _gameState
+                            .action(ChangeNameCommand(nameController.text, widget.character.id));
                       }
                     },
                   ))

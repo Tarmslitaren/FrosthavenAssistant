@@ -8,7 +8,7 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddMonsterMenu extends StatefulWidget {
-  const AddMonsterMenu({Key? key}) : super(key: key);
+  const AddMonsterMenu({super.key});
 
   @override
   AddMonsterMenuState createState() => AddMonsterMenuState();
@@ -24,8 +24,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   bool _showSpecial = false;
   bool _showBoss = true;
   late String _currentCampaign;
-  final ScrollController _scrollController =
-      ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
@@ -78,8 +77,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     if (enteredKeyword.isEmpty) {
     } else {
       _foundMonsters = _foundMonsters
-          .where((user) =>
-              user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .where((user) => user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
     }
 
@@ -103,8 +101,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     if (campaign != "All") {
       _foundMonsters.removeWhere((monster) => monster.edition != campaign);
     } else if (getIt<Settings>().showCustomContent.value == false) {
-      _foundMonsters.removeWhere(
-          (monster) => GameMethods.isCustomCampaign(monster.edition));
+      _foundMonsters.removeWhere((monster) => GameMethods.isCustomCampaign(monster.edition));
     }
 
     if (!_showSpecial) {
@@ -119,8 +116,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
 
   List<DropdownMenuItem<String>> buildEditionDroopDownMenuItems() {
     List<DropdownMenuItem<String>> retVal = [];
-    retVal.add(const DropdownMenuItem<String>(
-        value: "All", child: Text("All Campaigns")));
+    retVal.add(const DropdownMenuItem<String>(value: "All", child: Text("All Campaigns")));
 
     for (String item in _gameData.editions) {
       if (item != "na") {
@@ -190,8 +186,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                     child: TextField(
                       onChanged: (value) => _runFilter(value),
                       decoration: const InputDecoration(
-                          labelText: 'Add Monster',
-                          suffixIcon: Icon(Icons.search)),
+                          labelText: 'Add Monster', suffixIcon: Icon(Icons.search)),
                     ),
                   ),
                   const SizedBox(
@@ -217,22 +212,16 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                         : _foundMonsters[index].display,
                                     style: TextStyle(
                                         fontSize: 18,
-                                        color: _monsterAlreadyAdded(
-                                                _foundMonsters[index].name)
+                                        color: _monsterAlreadyAdded(_foundMonsters[index].name)
                                             ? Colors.grey
                                             : Colors.black)),
-                                trailing: Text(
-                                    "(${_foundMonsters[index].edition})",
-                                    style: const TextStyle(
-                                        fontSize: 14, color: Colors.grey)),
+                                trailing: Text("(${_foundMonsters[index].edition})",
+                                    style: const TextStyle(fontSize: 14, color: Colors.grey)),
                                 onTap: () {
-                                  if (!_monsterAlreadyAdded(
-                                      _foundMonsters[index].name)) {
+                                  if (!_monsterAlreadyAdded(_foundMonsters[index].name)) {
                                     setState(() {
                                       _gameState.action(AddMonsterCommand(
-                                          _foundMonsters[index].name,
-                                          null,
-                                          _addAsAlly)); //
+                                          _foundMonsters[index].name, null, _addAsAlly)); //
                                     });
 
                                     //Navigator.pop(context);

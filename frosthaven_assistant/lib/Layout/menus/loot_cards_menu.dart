@@ -16,7 +16,7 @@ import 'add_loot_card_menu.dart';
 class Item extends StatelessWidget {
   final LootCard data;
 
-  const Item({Key? key, required this.data}) : super(key: key);
+  const Item({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class Item extends StatelessWidget {
 }
 
 class LootCardMenu extends StatefulWidget {
-  const LootCardMenu({Key? key}) : super(key: key);
+  const LootCardMenu({super.key});
 
   @override
   LootCardMenuState createState() => LootCardMenuState();
@@ -69,8 +69,8 @@ class LootCardMenuState extends State<LootCardMenu> {
     double wantedItemMaxWidth = 200;
     return Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Colors
-              .transparent, //needed to make background transparent if reorder is enabled
+          canvasColor:
+              Colors.transparent, //needed to make background transparent if reorder is enabled
           //other styles
         ),
         child: SizedBox(
@@ -110,8 +110,7 @@ class LootCardMenuState extends State<LootCardMenu> {
                           decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(4),
-                                  topRight: Radius.circular(4))),
+                                  topLeft: Radius.circular(4), topRight: Radius.circular(4))),
                           child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,8 +119,7 @@ class LootCardMenuState extends State<LootCardMenu> {
                                   children: [
                                     TextButton(
                                       onPressed: () {
-                                        openDialog(
-                                            context, const CharacterLootMenu());
+                                        openDialog(context, const CharacterLootMenu());
                                       },
                                       child: const Text("Character loot"),
                                     ),
@@ -129,71 +127,60 @@ class LootCardMenuState extends State<LootCardMenu> {
                                       onPressed: () {
                                         setState(() {
                                           if (_gameState.lootDeck.hasCard1418) {
-                                            _gameState.action(
-                                                RemoveSpecialLootCardCommand(
-                                                    1418));
+                                            _gameState.action(RemoveSpecialLootCardCommand(1418));
                                           } else {
-                                            _gameState.action(
-                                                AddSpecialLootCardCommand(
-                                                    1418));
+                                            _gameState.action(AddSpecialLootCardCommand(1418));
                                           }
                                         });
                                       },
-                                      child: Text(
-                                          _gameState.lootDeck.hasCard1418
-                                              ? "Remove card 1418"
-                                              : "Add card 1418"),
+                                      child: Text(_gameState.lootDeck.hasCard1418
+                                          ? "Remove card 1418"
+                                          : "Add card 1418"),
                                     ),
                                     TextButton(
                                       onPressed: () {
                                         setState(() {
                                           if (_gameState.lootDeck.hasCard1419) {
-                                            _gameState.action(
-                                                RemoveSpecialLootCardCommand(
-                                                    1419));
+                                            _gameState.action(RemoveSpecialLootCardCommand(1419));
                                           } else {
-                                            _gameState.action(
-                                                AddSpecialLootCardCommand(
-                                                    1419));
+                                            _gameState.action(AddSpecialLootCardCommand(1419));
                                           }
                                         });
                                       },
-                                      child: Text(
-                                          _gameState.lootDeck.hasCard1419
-                                              ? "Remove card 1419"
-                                              : "Add card 1419"),
+                                      child: Text(_gameState.lootDeck.hasCard1419
+                                          ? "Remove card 1419"
+                                          : "Add card 1419"),
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        openDialog(context,
-                                            const LootCardEnhancementMenu());
+                                        openDialog(context, const LootCardEnhancementMenu());
                                       },
                                       child: const Text("Enhance cards"),
                                     ),
                                     TextButton(
                                       onPressed: () {
-                                        openDialog(
-                                            context, const AddLootCardMenu());
+                                        openDialog(context, const AddLootCardMenu());
                                       },
                                       child: const Text("Add Card"),
                                     ),
-                                    if(_gameState.lootDeck.discardPile.isNotEmpty)TextButton(
-                                      onPressed: () {
-                                        _gameState.action(ReturnLootCardCommand(true));
-                                      },
-                                      child: const Text("Return to Top"),
-                                    ),
-                                    if(_gameState.lootDeck.discardPile.isNotEmpty)TextButton(
-                                      onPressed: () {
-                                        _gameState.action(ReturnLootCardCommand(false));
-                                      },
-                                      child: const Text("Return to Bottom"),
-                                    ),
+                                    if (_gameState.lootDeck.discardPile.isNotEmpty)
+                                      TextButton(
+                                        onPressed: () {
+                                          _gameState.action(ReturnLootCardCommand(true));
+                                        },
+                                        child: const Text("Return to Top"),
+                                      ),
+                                    if (_gameState.lootDeck.discardPile.isNotEmpty)
+                                      TextButton(
+                                        onPressed: () {
+                                          _gameState.action(ReturnLootCardCommand(false));
+                                        },
+                                        child: const Text("Return to Bottom"),
+                                      ),
                                   ],
                                 ),
                               ])),
-                      Flexible(
-                          fit: FlexFit.tight, child: buildList(discardPile)),
+                      Flexible(fit: FlexFit.tight, child: buildList(discardPile)),
                       Container(
                         // color: Colors.white,
                         height: 32,
@@ -201,8 +188,7 @@ class LootCardMenuState extends State<LootCardMenu> {
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(4),
-                                bottomRight: Radius.circular(4))),
+                                bottomLeft: Radius.circular(4), bottomRight: Radius.circular(4))),
                       ),
                     ]),
                     Positioned(

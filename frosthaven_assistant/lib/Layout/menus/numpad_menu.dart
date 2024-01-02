@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
@@ -8,12 +7,8 @@ class NumpadMenu extends StatefulWidget {
   final TextEditingController controller;
   final int maxLength;
   final Function(String)? onChange;
-  const NumpadMenu(
-      {Key? key,
-      required this.controller,
-      required this.maxLength,
-      this.onChange})
-      : super(key: key);
+
+  const NumpadMenu({super.key, required this.controller, required this.maxLength, this.onChange});
 
   @override
   NumpadMenuState createState() => NumpadMenuState();
@@ -76,8 +71,7 @@ class NumpadMenuState extends State<NumpadMenu> {
             width: 10
           )),*/
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value
                 ? 'assets/images/bg/dark_bg.png'
                 : 'assets/images/bg/white_bg.png'),

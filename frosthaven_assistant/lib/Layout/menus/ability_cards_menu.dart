@@ -17,12 +17,7 @@ class Item extends StatelessWidget {
   final Monster monsterData;
   final bool revealed;
 
-  const Item(
-      {Key? key,
-      required this.data,
-      required this.revealed,
-      required this.monsterData})
-      : super(key: key);
+  const Item({super.key, required this.data, required this.revealed, required this.monsterData});
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +37,7 @@ class Item extends StatelessWidget {
 }
 
 class AbilityCardMenu extends StatefulWidget {
-  const AbilityCardMenu(
-      {Key? key, required this.monsterAbilityState, required this.monsterData})
-      : super(key: key);
+  const AbilityCardMenu({super.key, required this.monsterAbilityState, required this.monsterData});
 
   final MonsterAbilityState monsterAbilityState;
   final Monster monsterData;
@@ -66,8 +59,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
   void markAsOpen(int revealed) {
     setState(() {
       revealedList = [];
-      var drawPile =
-          widget.monsterAbilityState.drawPile.getList().reversed.toList();
+      var drawPile = widget.monsterAbilityState.drawPile.getList().reversed.toList();
       for (int i = 0; i < revealed; i++) {
         revealedList.add(drawPile[i]);
       }
@@ -83,8 +75,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
     return false;
   }
 
-  List<Widget> generateList(
-      List<MonsterAbilityCardModel> inputList, bool allOpen) {
+  List<Widget> generateList(List<MonsterAbilityCardModel> inputList, bool allOpen) {
     List<Widget> list = [];
     for (var item in inputList) {
       Item value = Item(
@@ -122,13 +113,12 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
         ));
   }
 
-  Widget buildList(
-      List<MonsterAbilityCardModel> list, bool reorderable, bool allOpen) {
+  Widget buildList(List<MonsterAbilityCardModel> list, bool reorderable, bool allOpen) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Colors
-              .transparent, //needed to make background transparent if reorder is enabled
+          canvasColor:
+              Colors.transparent, //needed to make background transparent if reorder is enabled
           //other styles
         ),
         child: SizedBox(
@@ -164,8 +154,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
-          var drawPile =
-              widget.monsterAbilityState.drawPile.getList().reversed.toList();
+          var drawPile = widget.monsterAbilityState.drawPile.getList().reversed.toList();
           var discardPile = widget.monsterAbilityState.discardPile.getList();
           return Container(
               constraints: BoxConstraints(
@@ -180,14 +169,12 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                           decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(4),
-                                  topRight: Radius.circular(4))),
+                                  topLeft: Radius.circular(4), topRight: Radius.circular(4))),
                           child: Column(children: [
                             SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: Wrap(
-                                    crossAxisAlignment:
-                                        WrapCrossAlignment.center,
+                                    crossAxisAlignment: WrapCrossAlignment.center,
                                     runSpacing: 0,
                                     spacing: 0,
                                     children: [
@@ -213,8 +200,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                       TextButton(
                                         onPressed: () {
                                           _gameState.action(
-                                              DrawAbilityCardCommand(
-                                                  widget.monsterData.id));
+                                              DrawAbilityCardCommand(widget.monsterData.id));
                                         },
                                         child: const Text(
                                           "Draw extra card",
@@ -223,8 +209,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                       TextButton(
                                         onPressed: () {
                                           _gameState.action(
-                                              ShuffleAbilityCardCommand(
-                                                  widget.monsterData.id));
+                                              ShuffleAbilityCardCommand(widget.monsterData.id));
                                         },
                                         child: const Text(
                                           "Extra Shuffle",
@@ -247,8 +232,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(4),
-                                bottomRight: Radius.circular(4))),
+                                bottomLeft: Radius.circular(4), bottomRight: Radius.circular(4))),
                       )
                     ]),
                     Positioned(

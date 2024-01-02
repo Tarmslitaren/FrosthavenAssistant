@@ -24,11 +24,7 @@ class Item extends StatelessWidget {
   final bool revealed;
   final String name;
 
-  const Item(
-      {super.key,
-      required this.data,
-      required this.revealed,
-      required this.name});
+  const Item({super.key, required this.data, required this.revealed, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -96,8 +92,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         ));
   }
 
-  List<Widget> generateList(
-      List<ModifierCard> inputList, bool allOpen, String name) {
+  List<Widget> generateList(List<ModifierCard> inputList, bool allOpen, String name) {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
       var item = inputList[index];
@@ -114,9 +109,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
             openDialog(
                 context,
                 SendToBottomMenu(
-                  currentIndex: int.parse(value.key
-                      .toString()
-                      .substring(3, value.key.toString().length - 3)),
+                  currentIndex:
+                      int.parse(value.key.toString().substring(3, value.key.toString().length - 3)),
                   length: inputList.length,
                   allies: name == "allies",
                 ));
@@ -144,14 +138,14 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     return list;
   }
 
-  Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen,
-      bool hasDiviner, String name) {
+  Widget buildList(
+      List<ModifierCard> list, bool reorderable, bool allOpen, bool hasDiviner, String name) {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Theme(
         data: Theme.of(context).copyWith(
-          canvasColor: Colors
-              .transparent, //needed to make background transparent if reorder is enabled
+          canvasColor:
+              Colors.transparent, //needed to make background transparent if reorder is enabled
           //other styles
         ),
         child: SizedBox(
@@ -168,8 +162,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                       dropIndex = list.length - dropIndex - 1;
                       index = list.length - index - 1;
                       list.insert(dropIndex, list.removeAt(index));
-                      _gameState.action(ReorderModifierListCommand(
-                          dropIndex, index, name == "allies"));
+                      _gameState
+                          .action(ReorderModifierListCommand(dropIndex, index, name == "allies"));
                     });
                   },
                   children: generateList(list, allOpen, name),
@@ -214,15 +208,12 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                   child: Stack(children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
                       Container(
-                          width: MediaQuery.of(context)
-                              .size
-                              .width, //need some width to fill out
+                          width: MediaQuery.of(context).size.width, //need some width to fill out
                           margin: const EdgeInsets.all(2),
                           decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(4),
-                                  topRight: Radius.circular(4))),
+                                  topLeft: Radius.circular(4), topRight: Radius.circular(4))),
                           child: Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
                               runSpacing: 0,
@@ -232,8 +223,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                   if (deck.badOmen.value == 0)
                                     TextButton(
                                       onPressed: () {
-                                        _gameState.action(
-                                            BadOmenCommand(name == "allies"));
+                                        _gameState.action(BadOmenCommand(name == "allies"));
                                       },
                                       child: const Text("Bad Omen"),
                                     ),
@@ -242,56 +232,34 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                       style: getTitleTextStyle(1)),
                                 TextButton(
                                   onPressed: () {
-                                    _gameState.action(
-                                        EnfeeblingHexCommand(name == "allies"));
+                                    _gameState.action(EnfeeblingHexCommand(name == "allies"));
                                   },
-                                  child: Text(
-                                      "Add -1 card (added : ${deck.addedMinusOnes.value})"),
+                                  child: Text("Add -1 card (added : ${deck.addedMinusOnes.value})"),
                                 ),
                                 TextButton(
                                   onPressed: () {
                                     if (deck.hasMinus1()) {
-                                      _gameState.action(AMDRemoveMinus1Command(
-                                          name == "allies"));
+                                      _gameState.action(AMDRemoveMinus1Command(name == "allies"));
                                     }
                                   },
                                   child: const Text("Remove -1 card"),
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    _gameState.action(AMDRemoveMinus2Command(
-                                        name == "allies"));
+                                    _gameState.action(AMDRemoveMinus2Command(name == "allies"));
                                   },
                                   child: Text(
-                                    deck.hasMinus2()
-                                        ? "Remove -2 card"
-                                        : "-2 card removed",
+                                    deck.hasMinus2() ? "Remove -2 card" : "-2 card removed",
                                   ),
                                 ),
                                 //todo: (gray out if maxed out)
-                                CounterButton(
-                                    deck.blesses,
-                                    ChangeBlessCommand.deck(deck),
-                                    10,
-                                    "assets/images/abilities/bless.png",
-                                    true,
-                                    Colors.white,
-                                    figureId: "unknown",
-                                    ownerId: "unknown",
-                                    scale: 1),
-                                CounterButton(
-                                    deck.curses,
-                                    ChangeCurseCommand.deck(deck),
-                                    10,
-                                    "assets/images/abilities/curse.png",
-                                    true,
-                                    Colors.white,
-                                    figureId: "unknown",
-                                    ownerId: "unknown",
-                                    scale: 1),
-                                if (GameMethods.getFigure(
-                                        "Incarnate", "Incarnate") !=
-                                    null)
+                                CounterButton(deck.blesses, ChangeBlessCommand.deck(deck), 10,
+                                    "assets/images/abilities/bless.png", true, Colors.white,
+                                    figureId: "unknown", ownerId: "unknown", scale: 1),
+                                CounterButton(deck.curses, ChangeCurseCommand.deck(deck), 10,
+                                    "assets/images/abilities/curse.png", true, Colors.white,
+                                    figureId: "unknown", ownerId: "unknown", scale: 1),
+                                if (GameMethods.getFigure("Incarnate", "Incarnate") != null)
                                   CounterButton(
                                       deck.enfeebles,
                                       ChangeEnfeebleCommand.deck(deck),
@@ -308,28 +276,22 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                   //style: TextStyle(color: Colors.white)
                                 ),
                                 drawPile.length > 0
-                                    ? buildRevealButton(
-                                        drawPile.length, 1, deck)
+                                    ? buildRevealButton(drawPile.length, 1, deck)
                                     : Container(),
                                 drawPile.length > 1
-                                    ? buildRevealButton(
-                                        drawPile.length, 2, deck)
+                                    ? buildRevealButton(drawPile.length, 2, deck)
                                     : Container(),
                                 drawPile.length > 2
-                                    ? buildRevealButton(
-                                        drawPile.length, 3, deck)
+                                    ? buildRevealButton(drawPile.length, 3, deck)
                                     : Container(),
                                 drawPile.length > 3
-                                    ? buildRevealButton(
-                                        drawPile.length, 4, deck)
+                                    ? buildRevealButton(drawPile.length, 4, deck)
                                     : Container(),
                                 drawPile.length > 4
-                                    ? buildRevealButton(
-                                        drawPile.length, 5, deck)
+                                    ? buildRevealButton(drawPile.length, 5, deck)
                                     : Container(),
                                 drawPile.length > 5
-                                    ? buildRevealButton(
-                                        drawPile.length, 6, deck)
+                                    ? buildRevealButton(drawPile.length, 6, deck)
                                     : Container(),
                               ])),
                       Flexible(
@@ -337,10 +299,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildList(
-                              drawPile, true, false, hasDiviner, widget.name),
-                          buildList(
-                              discardPile, false, true, hasDiviner, widget.name)
+                          buildList(drawPile, true, false, hasDiviner, widget.name),
+                          buildList(discardPile, false, true, hasDiviner, widget.name)
                         ],
                       )),
                       Container(
@@ -349,8 +309,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(4),
-                                bottomRight: Radius.circular(4))),
+                                bottomLeft: Radius.circular(4), bottomRight: Radius.circular(4))),
                       ),
                     ]),
                     Positioned(

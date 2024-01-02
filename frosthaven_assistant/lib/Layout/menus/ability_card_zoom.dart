@@ -8,11 +8,10 @@ import '../../Resource/state/game_state.dart';
 
 class AbilityCardZoom extends StatefulWidget {
   const AbilityCardZoom(
-      {Key? key,
+      {super.key,
       required this.card,
       required this.monster,
-      required this.calculateAll})
-      : super(key: key);
+      required this.calculateAll});
 
   final MonsterAbilityCardModel card;
   final Monster monster;

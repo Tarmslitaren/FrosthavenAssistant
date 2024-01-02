@@ -7,16 +7,14 @@ class MonsterAbilityDeckModel {
   final String name;
   final String edition;
   final List<MonsterAbilityCardModel>
-      cards; //need to interpret strings later on
+      cards;
 
   factory MonsterAbilityDeckModel.fromJson(
       Map<String, dynamic> data, String edition) {
     final name = data['name'] as String;
-    //final edition = data['edition'] as String;
     final List<dynamic> dynamicCards = data['cards'] as List<dynamic>;
     List<MonsterAbilityCardModel> cards = [];
     for (var card in dynamicCards) {
-      //["Nothing special", 384, false, 50, "%move% + 0","*.........", "%attack% + 0" ],
       String title = name;
       if (card[0] is String) {
         title = card[0] as String;
@@ -82,7 +80,7 @@ class MonsterAbilityCardModel {
   final String title;
   final int nr;
   final bool shuffle;
-  final int initiative; //or String
+  final int initiative;
   final List<String> lines;
   final List<GraphicPositional> graphicPositional;
 
@@ -90,7 +88,7 @@ class MonsterAbilityCardModel {
   String toString() {
     return '{'
         '"nr": $nr, '
-        '"deck": "$deck" '
+        '"deck": "$deck" ' //todo: is this really needed? bloats the save states
         '}';
   }
 }

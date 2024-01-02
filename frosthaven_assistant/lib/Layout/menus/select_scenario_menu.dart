@@ -13,7 +13,7 @@ import '../../services/service_locator.dart';
 import 'numpad_menu.dart';
 
 class SelectScenarioMenu extends StatefulWidget {
-  const SelectScenarioMenu({Key? key}) : super(key: key);
+  const SelectScenarioMenu({super.key});
 
   @override
   SelectScenarioMenuState createState() => SelectScenarioMenuState();
@@ -25,8 +25,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   final GameState _gameState = getIt<GameState>();
   final GameData _gameData = getIt<GameData>();
   final TextEditingController _controller = TextEditingController();
-  final ScrollController _scrollController =
-      ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
@@ -56,12 +55,11 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       campaign = "Jaws of the Lion";
     }
 
-    if(_gameState.currentCampaign.value != campaign) {
+    if (_gameState.currentCampaign.value != campaign) {
       _gameState.action(SetCampaignCommand(campaign));
     }
-    _foundScenarios = _gameData
-        .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
-        .toList();
+    _foundScenarios =
+        _gameData.modelData.value[_gameState.currentCampaign.value]!.scenarios.keys.toList();
 
     //special hack for solo BladeSwarm
     if (campaign == "Solo" || campaign == "Trail of Ashes") {
@@ -83,16 +81,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       }
     }
 
-    if (campaign == "Solo" &&
-        getIt<Settings>().showCustomContent.value == false) {
+    if (campaign == "Solo" && getIt<Settings>().showCustomContent.value == false) {
       _foundScenarios.removeWhere((scenario) {
         List<String> strings = scenario.split(':');
         strings[0] = strings[0].replaceFirst(" ", "Å");
         String characterName = strings[0].split("Å")[1];
         if (_gameData.modelData.value.entries.any((element) =>
             GameMethods.isCustomCampaign(element.value.edition) &&
-            element.value.characters
-                .any((element) => element.name == characterName))) {
+            element.value.characters.any((element) => element.name == characterName))) {
           return true;
         }
 
@@ -119,18 +115,15 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     List<String> results = [];
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameData
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
-          .toList();
+      results =
+          _gameData.modelData.value[_gameState.currentCampaign.value]!.scenarios.keys.toList();
       if (_gameState.currentCampaign.value != "Solo") {
         results.insert(0, "custom");
       }
     } else {
-      results = _gameData
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
+      results = _gameData.modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
           .toList()
-          .where((user) =>
-              user.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .where((user) => user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       results.sort((a, b) {
         int? aNr = findNrFromScenarioName(a);
@@ -176,11 +169,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
     String text = strings[1];
     for (String key in _gameData.modelData.value.keys) {
-      for (CharacterClass character
-          in _gameData.modelData.value[key]!.characters) {
+      for (CharacterClass character in _gameData.modelData.value[key]!.characters) {
         if (character.name == characterName) {
-          if (character.hidden &&
-              !_gameState.unlockedClasses.contains(character.name)) {
+          if (character.hidden && !_gameState.unlockedClasses.contains(character.name)) {
             text = "???";
           }
           break;
@@ -256,8 +247,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                     const Text("Set Scenario", style: TextStyle(fontSize: 18)),
                     ExpansionTile(
                       key: UniqueKey(),
-                      title: Text(
-                          "Current Campaign: ${_gameState.currentCampaign.value}"),
+                      title: Text("Current Campaign: ${_gameState.currentCampaign.value}"),
                       children: buildCampaignButtons(),
                     ),
                   ]),
@@ -300,13 +290,11 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                           onEditingComplete: () {
                             if (_foundScenarios.isNotEmpty) {
                               Navigator.pop(context);
-                              _gameState.action(SetScenarioCommand(
-                                  _foundScenarios[0], false));
+                              _gameState.action(SetScenarioCommand(_foundScenarios[0], false));
                             }
                           },
                           decoration: const InputDecoration(
-                              labelText: 'Set Scenario',
-                              suffixIcon: Icon(Icons.search)),
+                              labelText: 'Set Scenario', suffixIcon: Icon(Icons.search)),
                         )),
                   ),
                   const SizedBox(

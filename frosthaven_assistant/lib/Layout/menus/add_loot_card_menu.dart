@@ -4,7 +4,7 @@ import '../../Resource/commands/add_loot_card_command.dart';
 import '../../services/service_locator.dart';
 
 class AddLootCardMenu extends StatefulWidget {
-  const AddLootCardMenu({Key? key}) : super(key: key);
+  const AddLootCardMenu({super.key});
 
   @override
   AddLootCardMenuState createState() => AddLootCardMenuState();
@@ -43,19 +43,17 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
         maxLines: 1,
       ),
       // ]),
-      trailing:
-          Text("added: ${getIt<GameState>().lootDeck.addedCards[index]}   ",
-              style: const TextStyle(
-                fontSize: 18,
-              )),
+      trailing: Text("added: ${getIt<GameState>().lootDeck.addedCards[index]}   ",
+          style: const TextStyle(
+            fontSize: 18,
+          )),
     );
     return listTile;
   }
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController scrollController =
-        ScrollController();
+    final ScrollController scrollController = ScrollController();
 
     return Card(
         child: Scrollbar(

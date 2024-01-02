@@ -10,9 +10,9 @@ class SetLootOwnerMenu extends StatefulWidget {
   final LootCard card;
 
   const SetLootOwnerMenu({
-    Key? key,
+    super.key,
     required this.card,
-  }) : super(key: key);
+  });
 
   @override
   SetLootOwnerMenuState createState() => SetLootOwnerMenuState();
@@ -33,8 +33,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
       ),
       TextButton(
           onPressed: () {
-            _gameState.action(SetLootOwnerCommand(
-                character.characterClass.name, widget.card));
+            _gameState.action(SetLootOwnerCommand(character.characterClass.name, widget.card));
             Navigator.pop(context);
           },
           child: Row(children: [
@@ -43,13 +42,12 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
                 height: 30,
                 width: 30,
                 fit: BoxFit.contain,
-                image: AssetImage(
-                    "assets/images/class-icons/${character.characterClass.name}.png")),
+                image:
+                    AssetImage("assets/images/class-icons/${character.characterClass.name}.png")),
             const SizedBox(
               width: 10,
             ),
-            Text(character.id,
-                textAlign: TextAlign.center, style: getTitleTextStyle(1))
+            Text(character.id, textAlign: TextAlign.center, style: getTitleTextStyle(1))
           ]))
     ]);
   }
@@ -62,8 +60,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
         height: 280,
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value
                 ? 'assets/images/bg/dark_bg.png'
                 : 'assets/images/bg/white_bg.png'),

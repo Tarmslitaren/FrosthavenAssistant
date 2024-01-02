@@ -12,8 +12,7 @@ import '../../services/service_locator.dart';
 class AutoAddStandeeMenu extends StatefulWidget {
   final List<RoomMonsterData> monsterData;
 
-  const AutoAddStandeeMenu({Key? key, required this.monsterData})
-      : super(key: key);
+  const AutoAddStandeeMenu({super.key, required this.monsterData});
 
   @override
   AddStandeeMenuState createState() => AddStandeeMenuState();
@@ -40,8 +39,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     startCommandIndex = _gameState.commandIndex.value;
 
     for (var data in widget.monsterData) {
-      Monster monster = _gameState.currentList
-          .firstWhere((element) => element.id == data.name) as Monster;
+      Monster monster =
+          _gameState.currentList.firstWhere((element) => element.id == data.name) as Monster;
       List<int> someElites = [];
       List<int> someNormals = [];
       for (var item in monster.monsterInstances) {
@@ -77,8 +76,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     }
   }
 
-  Widget buildNrButton(final int nr, final double scale, Monster monster,
-      bool elite, int nrOfElite, int nrOfNormal) {
+  Widget buildNrButton(final int nr, final double scale, Monster monster, bool elite, int nrOfElite,
+      int nrOfNormal) {
     bool boss = monster.type.levels[0].boss != null;
     MonsterType type = MonsterType.normal;
     Color color = Colors.white;
@@ -124,8 +123,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         ),
         onPressed: () {
           if (!isOut) {
-            _gameState.action(
-                AddStandeeCommand(nr, null, monster.id, type, addAsSummon));
+            _gameState.action(AddStandeeCommand(nr, null, monster.id, type, addAsSummon));
             if (elite) {
               setState(() {
                 currentEliteAdded++;
@@ -137,8 +135,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             }
 
             setState(() {
-              if (currentEliteAdded == nrOfElite &&
-                  currentNormalAdded == nrOfNormal) {
+              if (currentEliteAdded == nrOfElite && currentNormalAdded == nrOfNormal) {
                 if (currentMonsterIndex + 1 >= widget.monsterData.length) {
                   //close menu
                   //Navigator.pop(context);
@@ -153,14 +150,10 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             String figureId = GameMethods.getFigureIdFromNr(monster.id, nr);
             if (figureId.isNotEmpty) {
               MonsterInstance state =
-                  GameMethods.getFigure(monster.id, figureId)
-                      as MonsterInstance;
-              if (!initialEliteAdded[currentMonsterIndex]
-                      .contains(state.standeeNr) &&
-                  !initialNormalAdded[currentMonsterIndex]
-                      .contains(state.standeeNr)) {
-                _gameState
-                    .action(ChangeHealthCommand(-10000, figureId, monster.id));
+                  GameMethods.getFigure(monster.id, figureId) as MonsterInstance;
+              if (!initialEliteAdded[currentMonsterIndex].contains(state.standeeNr) &&
+                  !initialNormalAdded[currentMonsterIndex].contains(state.standeeNr)) {
+                _gameState.action(ChangeHealthCommand(-10000, figureId, monster.id));
 
                 setState(() {
                   if (state.type == MonsterType.elite) {
@@ -177,8 +170,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     );
   }
 
-  Widget _buildButtonGrid(double scale, Monster monster, bool elite,
-      int nrOfStandees, int nrLeft, int nrOfElite, int nrOfNormal) {
+  Widget _buildButtonGrid(double scale, Monster monster, bool elite, int nrOfStandees, int nrLeft,
+      int nrOfElite, int nrOfNormal) {
     String text;
     if (elite) {
       text = "Add $nrLeft Elite ${monster.type.display}";
@@ -218,20 +211,16 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   nrOfStandees > 4
-                      ? buildNrButton(
-                          5, scale, monster, elite, nrOfElite, nrOfNormal)
+                      ? buildNrButton(5, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                   nrOfStandees > 5
-                      ? buildNrButton(
-                          6, scale, monster, elite, nrOfElite, nrOfNormal)
+                      ? buildNrButton(6, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                   nrOfStandees > 6
-                      ? buildNrButton(
-                          7, scale, monster, elite, nrOfElite, nrOfNormal)
+                      ? buildNrButton(7, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                   nrOfStandees > 7
-                      ? buildNrButton(
-                          8, scale, monster, elite, nrOfElite, nrOfNormal)
+                      ? buildNrButton(8, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                 ],
               )
@@ -241,12 +230,10 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   nrOfStandees > 8
-                      ? buildNrButton(
-                          9, scale, monster, elite, nrOfElite, nrOfNormal)
+                      ? buildNrButton(9, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                   nrOfStandees > 9
-                      ? buildNrButton(
-                          10, scale, monster, elite, nrOfElite, nrOfNormal)
+                      ? buildNrButton(10, scale, monster, elite, nrOfElite, nrOfNormal)
                       : Container(),
                 ],
               )
@@ -257,8 +244,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
 
   @override
   Widget build(BuildContext context) {
-    int characterIndex =
-        GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
+    int characterIndex = GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
 
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
@@ -296,8 +282,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           }
 
           Monster? monster = _gameState.currentList
-                  .firstWhereOrNull((element) => element.id == data.name)
-              as Monster?;
+              .firstWhereOrNull((element) => element.id == data.name) as Monster?;
           if (monster == null) {
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               Navigator.pop(context);
@@ -344,8 +329,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
               initialEliteAdded[currentMonsterIndex].length;
           if (allAdded >= monster.type.count) {
             closeOrNext(nrOfElite, nrOfNormal);
-          } else if (currentEliteAdded >= nrOfElite &&
-              currentNormalAdded >= nrOfNormal) {
+          } else if (currentEliteAdded >= nrOfElite && currentNormalAdded >= nrOfNormal) {
             closeOrNext(nrOfElite, nrOfNormal);
           }
 
@@ -374,8 +358,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
               height: height * scale,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.8), BlendMode.dstATop),
+                  colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
                   image: AssetImage(getIt<Settings>().darkMode.value
                       ? 'assets/images/bg/dark_bg.png'
                       : 'assets/images/bg/white_bg.png'),
@@ -383,49 +366,35 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                 ),
               ),
               child: ValueListenableBuilder<int>(
-                  valueListenable: _gameState.commandIndex,//monster.monsterInstances, //TODO fix me also check if working ok
+                  valueListenable: _gameState.commandIndex,
+                  //monster.monsterInstances, //TODO fix me also check if working ok
                   builder: (context, value, child) {
                     return Stack(children: [
                       Column(
                         children: [
                           if (nrOfElite > 0)
-                            _buildButtonGrid(
-                                scale,
-                                monster,
-                                true,
-                                nrOfStandees,
-                                nrOfElite - currentEliteAdded,
-                                nrOfElite,
-                                nrOfNormal),
+                            _buildButtonGrid(scale, monster, true, nrOfStandees,
+                                nrOfElite - currentEliteAdded, nrOfElite, nrOfNormal),
                           if (nrOfNormal > 0)
-                            _buildButtonGrid(
-                                scale,
-                                monster,
-                                false,
-                                nrOfStandees,
-                                nrOfNormal - currentNormalAdded,
-                                nrOfElite,
-                                nrOfNormal),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Summoned:",
-                                    style: getSmallTextStyle(scale)),
-                                Checkbox(
-                                  checkColor: Colors.black,
-                                  activeColor: Colors.grey.shade200,
-                                  side: BorderSide(
-                                      color: getIt<Settings>().darkMode.value
-                                          ? Colors.white
-                                          : Colors.black),
-                                  onChanged: (bool? newValue) {
-                                    setState(() {
-                                      addAsSummon = newValue!;
-                                    });
-                                  },
-                                  value: addAsSummon,
-                                )
-                              ])
+                            _buildButtonGrid(scale, monster, false, nrOfStandees,
+                                nrOfNormal - currentNormalAdded, nrOfElite, nrOfNormal),
+                          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                            Text("Summoned:", style: getSmallTextStyle(scale)),
+                            Checkbox(
+                              checkColor: Colors.black,
+                              activeColor: Colors.grey.shade200,
+                              side: BorderSide(
+                                  color: getIt<Settings>().darkMode.value
+                                      ? Colors.white
+                                      : Colors.black),
+                              onChanged: (bool? newValue) {
+                                setState(() {
+                                  addAsSummon = newValue!;
+                                });
+                              },
+                              value: addAsSummon,
+                            )
+                          ])
                         ],
                       ),
                       Positioned(

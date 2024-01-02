@@ -12,7 +12,7 @@ import '../../services/service_locator.dart';
 class AddSummonMenu extends StatefulWidget {
   final Character character;
 
-  const AddSummonMenu({Key? key, required this.character}) : super(key: key);
+  const AddSummonMenu({super.key, required this.character});
 
   @override
   AddSummonMenuState createState() => AddSummonMenuState();
@@ -25,8 +25,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   String chosenGfx = "blue";
 
   final List<SummonModel> _summonList = [];
-  final ScrollController _scrollController =
-      ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
@@ -145,8 +144,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
       height: 452 * scale,
       decoration: BoxDecoration(
         image: DecorationImage(
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.8), BlendMode.dstATop),
+          colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
           image: AssetImage(getIt<Settings>().darkMode.value
               ? 'assets/images/bg/dark_bg.png'
               : 'assets/images/bg/white_bg.png'),
@@ -212,13 +210,11 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                       }
 
                       return ListTile(
-                          leading:
-                              Stack(alignment: Alignment.center, children: [
+                          leading: Stack(alignment: Alignment.center, children: [
                             Image(
                               height: 30 * scale,
                               width: 30 * scale,
-                              image:
-                                  AssetImage("assets/images/summon/$gfx.png"),
+                              image: AssetImage("assets/images/summon/$gfx.png"),
                             ),
                             if (showNr)
                               Text(chosenNr.toString(),
@@ -234,8 +230,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                       ])),
                           ]),
                           //iconColor: _foundMonsters[index].color,
-                          title: Text(_summonList[index].name,
-                              style: getTitleTextStyle(scale)),
+                          title: Text(_summonList[index].name, style: getTitleTextStyle(scale)),
                           onTap: () {
                             setState(() {
                               SummonModel model = _summonList[index];
@@ -247,28 +242,17 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                 chosenNr =
                                     0; //don't show on monster box unless standees are numbered
                               }
-                              SummonData summonData = SummonData(
-                                  chosenNr,
-                                  model.name,
-                                  model.health,
-                                  model.move,
-                                  model.attack,
-                                  model.range,
-                                  gfx);
-                              _gameState.action(AddStandeeCommand(
-                                  chosenNr,
-                                  summonData,
-                                  widget.character.id,
-                                  MonsterType.summon,
-                                  true));
+                              SummonData summonData = SummonData(chosenNr, model.name, model.health,
+                                  model.move, model.attack, model.range, gfx);
+                              _gameState.action(AddStandeeCommand(chosenNr, summonData,
+                                  widget.character.id, MonsterType.summon, true));
                             });
                             Navigator.pop(context);
                             //open the level menu here for convenience
                             openDialog(
                                 context,
                                 SetLevelMenu(
-                                  figure: widget.character.characterState
-                                      .summonList.last,
+                                  figure: widget.character.characterState.summonList.last,
                                   characterId: widget.character.id,
                                 ));
                           });

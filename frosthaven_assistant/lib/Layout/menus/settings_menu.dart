@@ -13,7 +13,7 @@ import '../../services/network/network.dart';
 import '../../services/service_locator.dart';
 
 class SettingsMenu extends StatefulWidget {
-  const SettingsMenu({Key? key}) : super(key: key);
+  const SettingsMenu({super.key});
 
   @override
   SettingsMenuState createState() => SettingsMenuState();
@@ -32,8 +32,7 @@ class SettingsMenuState extends State<SettingsMenu> {
   final TextEditingController _serverTextController = TextEditingController();
   final TextEditingController _portTextController = TextEditingController();
 
-  final ScrollController scrollController =
-      ScrollController();
+  final ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -107,8 +106,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.noStandees.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      getIt<GameState>().action(
-                                          TrackStandeesCommand(!value!));
+                                      getIt<GameState>().action(TrackStandeesCommand(!value!));
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -172,8 +170,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     });
                                   }),
                               CheckboxListTile(
-                                  title:
-                                      const Text("Show Scenario names in list"),
+                                  title: const Text("Show Scenario names in list"),
                                   value: settings.showScenarioNames.value,
                                   onChanged: (bool? value) {
                                     setState(() {
@@ -193,20 +190,17 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     });
                                   }),
                               CheckboxListTile(
-                                  title: const Text(
-                                      "Show Sections in Main Screen"),
+                                  title: const Text("Show Sections in Main Screen"),
                                   value: settings.showSectionsInMainView.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showSectionsInMainView.value =
-                                          value!;
+                                      settings.showSectionsInMainView.value = value!;
                                       settings.saveToDisk();
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
-                                  title: const Text(
-                                      "Show Round Special Rule Reminders"),
+                                  title: const Text("Show Round Special Rule Reminders"),
                                   value: settings.showReminders.value,
                                   onChanged: (bool? value) {
                                     setState(() {
@@ -216,13 +210,11 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     });
                                   }),
                               CheckboxListTile(
-                                  title: const Text(
-                                      "Show Attack Modifier Decks"),
+                                  title: const Text("Show Attack Modifier Decks"),
                                   value: settings.showAmdDeck.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      settings.showAmdDeck.value =
-                                      value!;
+                                      settings.showAmdDeck.value = value!;
                                       settings.saveToDisk();
                                       getIt<GameState>().updateAllUI();
                                     });
@@ -238,10 +230,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       });
                                     }),
                               Container(
-                                constraints: const BoxConstraints(
-                                    minWidth: double.infinity),
-                                padding:
-                                    const EdgeInsets.only(left: 16, top: 10),
+                                constraints: const BoxConstraints(minWidth: double.infinity),
+                                padding: const EdgeInsets.only(left: 16, top: 10),
                                 alignment: Alignment.bottomLeft,
                                 child: const Text("Main List Scaling:"),
                               ),
@@ -259,10 +249,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 },
                               ),
                               Container(
-                                constraints: const BoxConstraints(
-                                    minWidth: double.infinity),
-                                padding:
-                                    const EdgeInsets.only(left: 16, top: 10),
+                                constraints: const BoxConstraints(minWidth: double.infinity),
+                                padding: const EdgeInsets.only(left: 16, top: 10),
                                 alignment: Alignment.bottomLeft,
                                 child: const Text("App Bar Scaling:"),
                               ),
@@ -283,8 +271,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 style: TextStyle(fontSize: 18),
                               ),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 children: [
                                   Row(
                                     children: [
@@ -293,13 +280,10 @@ class SettingsMenuState extends State<SettingsMenu> {
                                           groupValue: settings.style.value,
                                           onChanged: (index) {
                                             setState(() {
-                                              settings.style.value =
-                                                  Style.frosthaven;
+                                              settings.style.value = Style.frosthaven;
                                               settings.saveToDisk();
                                               //ThemeSwitcher.of(context).switchTheme(themeFH);
-                                              getIt<GameState>()
-                                                  .updateList
-                                                  .value++;
+                                              getIt<GameState>().updateList.value++;
                                             });
                                           }),
                                       const Text('Frosthaven')
@@ -325,20 +309,15 @@ class SettingsMenuState extends State<SettingsMenu> {
                                           groupValue: settings.style.value,
                                           onChanged: (index) {
                                             setState(() {
-                                              settings.style.value =
-                                                  Style.original;
+                                              settings.style.value = Style.original;
                                               settings.saveToDisk();
-                                              if (getIt<GameState>()
-                                                      .currentCampaign
-                                                      .value ==
+                                              if (getIt<GameState>().currentCampaign.value ==
                                                   "Frosthaven") {
                                                 //ThemeSwitcher.of(context).switchTheme(themeFH);
                                               } else {
                                                 //ThemeSwitcher.of(context).switchTheme(theme);
                                               }
-                                              getIt<GameState>()
-                                                  .updateList
-                                                  .value++;
+                                              getIt<GameState>().updateList.value++;
                                             });
                                           }),
                                       const Text('Original')
@@ -347,8 +326,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 ],
                               ),
                               ListTile(
-                                  title:
-                                      const Text("Clear unlocked characters"),
+                                  title: const Text("Clear unlocked characters"),
                                   onTap: () {
                                     setState(() {
                                       getIt<GameState>().action(ClearUnlockedClassesCommand());
@@ -360,33 +338,25 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   builder: (context, value, child) {
                                     bool connected = false;
                                     String connectionText = "Connect as Client";
-                                    if (settings.client.value ==
-                                        ClientState.connected) {
+                                    if (settings.client.value == ClientState.connected) {
                                       connected = true;
                                       connectionText = "Connected as Client";
                                     }
-                                    if (settings.client.value ==
-                                        ClientState.connecting) {
+                                    if (settings.client.value == ClientState.connecting) {
                                       connectionText = "Connecting...";
                                     }
                                     return CheckboxListTile(
-                                        enabled:
-                                            settings.server.value == false &&
-                                                settings.client.value !=
-                                                    ClientState.connecting,
+                                        enabled: settings.server.value == false &&
+                                            settings.client.value != ClientState.connecting,
                                         title: Text(connectionText),
                                         value: connected,
                                         onChanged: (bool? value) {
                                           setState(() {
-                                            if (settings.client.value !=
-                                                ClientState.connected) {
-                                              settings.client.value =
-                                                  ClientState.connecting;
-                                              settings.lastKnownPort =
-                                                  _portTextController.text;
+                                            if (settings.client.value != ClientState.connected) {
+                                              settings.client.value = ClientState.connecting;
+                                              settings.lastKnownPort = _portTextController.text;
                                               getIt<Client>()
-                                                  .connect(_serverTextController
-                                                      .text)
+                                                  .connect(_serverTextController.text)
                                                   .then((value) => null);
                                               settings.lastKnownConnection =
                                                   _serverTextController.text;
@@ -435,45 +405,33 @@ class SettingsMenuState extends State<SettingsMenu> {
                                         value: settings.server.value,
                                         onChanged: (bool? value) {
                                           if (!settings.server.value) {
-                                            settings.lastKnownPort =
-                                                _portTextController.text;
+                                            settings.lastKnownPort = _portTextController.text;
                                             settings.lastKnownHostIP =
                                                 "(${getIt<Network>().networkInfo.wifiIPv4.value})";
                                             settings.saveToDisk();
-                                            getIt<Network>()
-                                                .server
-                                                .startServer();
+                                            getIt<Network>().server.startServer();
                                           } else {
                                             //close server
-                                            getIt<Network>()
-                                                .server
-                                                .stopServer(null);
+                                            getIt<Network>().server.stopServer(null);
                                           }
                                         });
                                   }),
                               ValueListenableBuilder<String>(
-                                  valueListenable:
-                                      getIt<Network>().networkInfo.wifiIPv4,
+                                  valueListenable: getIt<Network>().networkInfo.wifiIPv4,
                                   builder: (context, value, child) {
                                     return SizedBox(
                                         width: 200,
                                         height: 20,
-                                        child: Text(getIt<Network>()
-                                            .networkInfo
-                                            .wifiIPv4
-                                            .value));
+                                        child: Text(getIt<Network>().networkInfo.wifiIPv4.value));
                                   }),
                               ValueListenableBuilder<String>(
-                                  valueListenable:
-                                      getIt<Network>().networkInfo.outgoingIPv4,
+                                  valueListenable: getIt<Network>().networkInfo.outgoingIPv4,
                                   builder: (context, value, child) {
                                     return SizedBox(
                                         width: 200,
                                         height: 20,
-                                        child: Text(getIt<Network>()
-                                            .networkInfo
-                                            .outgoingIPv4
-                                            .value));
+                                        child:
+                                            Text(getIt<Network>().networkInfo.outgoingIPv4.value));
                                   }),
                               Container(
                                 margin: const EdgeInsets.only(top: 20),

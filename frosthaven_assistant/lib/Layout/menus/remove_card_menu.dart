@@ -11,9 +11,9 @@ class RemoveCardMenu extends StatefulWidget {
   final MonsterAbilityCardModel card;
 
   const RemoveCardMenu({
-    Key? key,
+    super.key,
     required this.card,
-  }) : super(key: key);
+  });
 
   @override
   RemoveCardMenuState createState() => RemoveCardMenuState();
@@ -34,8 +34,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
         height: 180,
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value
                 ? 'assets/images/bg/dark_bg.png'
                 : 'assets/images/bg/white_bg.png'),
@@ -52,10 +51,8 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
 
                 Navigator.pop(context);
               },
-              child: Text(
-                  "Remove ${widget.card.title}\n(card nr: ${widget.card.nr})",
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 20))),
+              child: Text("Remove ${widget.card.title}\n(card nr: ${widget.card.nr})",
+                  textAlign: TextAlign.center, style: const TextStyle(fontSize: 20))),
           const SizedBox(
             height: 20,
           ),
@@ -75,13 +72,11 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                     break;
                   }
                 }
-                _gameState.action(ReorderAbilityListCommand(
-                    widget.card.deck, newIndex, oldIndex));
+                _gameState.action(ReorderAbilityListCommand(widget.card.deck, newIndex, oldIndex));
 
                 Navigator.pop(context);
               },
-              child:
-                  const Text("Send to Bottom", style: TextStyle(fontSize: 20))),
+              child: const Text("Send to Bottom", style: TextStyle(fontSize: 20))),
         ]));
   }
 }

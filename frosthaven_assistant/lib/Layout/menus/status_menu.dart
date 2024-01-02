@@ -23,8 +23,7 @@ import '../../services/service_locator.dart';
 import '../counter_button.dart';
 
 class StatusMenu extends StatefulWidget {
-  const StatusMenu({Key? key, required this.figureId, this.characterId, this.monsterId})
-      : super(key: key);
+  const StatusMenu({super.key, required this.figureId, this.characterId, this.monsterId});
 
   final String figureId;
   final String? monsterId;

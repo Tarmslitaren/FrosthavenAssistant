@@ -5,7 +5,7 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class RemoveCharacterMenu extends StatefulWidget {
-  const RemoveCharacterMenu({Key? key}) : super(key: key);
+  const RemoveCharacterMenu({super.key});
 
   @override
   RemoveCharacterMenuState createState() => RemoveCharacterMenuState();
@@ -40,8 +40,7 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
               ListTile(
                 title: const Text("Remove All", style: TextStyle(fontSize: 18)),
                 onTap: () {
-                  _gameState
-                      .action(RemoveCharacterCommand(currentCharacters)); //
+                  _gameState.action(RemoveCharacterCommand(currentCharacters)); //
                   Navigator.pop(context);
                 },
               ),
@@ -54,27 +53,21 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
                       width: 30,
                       filterQuality: FilterQuality.medium,
                       fit: BoxFit.scaleDown,
-                      color: currentCharacters[index].characterClass.name ==
-                                  "Escort" ||
-                              currentCharacters[index].characterClass.name ==
-                                  "Objective"
+                      color: currentCharacters[index].characterClass.name == "Escort" ||
+                              currentCharacters[index].characterClass.name == "Objective"
                           ? null
                           : currentCharacters[index].characterClass.color,
                       image: AssetImage(
                           "assets/images/class-icons/${currentCharacters[index].characterClass.name}.png"),
                     ),
                     iconColor: currentCharacters[index].characterClass.color,
-                    title: Text(
-                        currentCharacters[index].characterState.display.value,
+                    title: Text(currentCharacters[index].characterState.display.value,
                         style: const TextStyle(fontSize: 18)),
-                    trailing: Text(
-                        "(${currentCharacters[index].characterClass.edition})",
-                        style:
-                            const TextStyle(fontSize: 14, color: Colors.grey)),
+                    trailing: Text("(${currentCharacters[index].characterClass.edition})",
+                        style: const TextStyle(fontSize: 14, color: Colors.grey)),
                     onTap: () {
                       setState(() {
-                        _gameState.action(RemoveCharacterCommand(
-                            [currentCharacters[index]])); //
+                        _gameState.action(RemoveCharacterCommand([currentCharacters[index]])); //
                       });
                     },
                   ),
