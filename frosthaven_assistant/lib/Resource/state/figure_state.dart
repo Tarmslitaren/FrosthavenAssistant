@@ -17,7 +17,7 @@ class FigureState {
   final _chill = ValueNotifier<int>(0);
   setChill(_StateModifier stateModifier, int value) {_chill.value = value;}
 
-  //TODO:  no valuenotifier for lists - make non mutable vrsion
+  //TODO:  no valuenotifier for lists - make non mutable version
   final conditions = ValueNotifier<List<Condition>>([]);
 
   BuiltSet<Condition> get conditionsAddedThisTurn => BuiltSet.of(_conditionsAddedThisTurn);

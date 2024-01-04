@@ -119,7 +119,6 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
         child: Stack(children: [
           ValueListenableBuilder<int>(
               valueListenable: _gameState.commandIndex,
-              //todo test. widget.monster.monsterInstances,
               builder: (context, value, child) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

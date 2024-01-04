@@ -367,7 +367,6 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
               ),
               child: ValueListenableBuilder<int>(
                   valueListenable: _gameState.commandIndex,
-                  //monster.monsterInstances, //TODO fix me also check if working ok
                   builder: (context, value, child) {
                     return Stack(children: [
                       Column(

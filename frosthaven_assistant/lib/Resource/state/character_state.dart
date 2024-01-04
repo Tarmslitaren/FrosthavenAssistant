@@ -1,4 +1,5 @@
 part of 'game_state.dart';
+// ignore_for_file: library_private_types_in_public_api
 
 class CharacterState extends FigureState {
   CharacterState();

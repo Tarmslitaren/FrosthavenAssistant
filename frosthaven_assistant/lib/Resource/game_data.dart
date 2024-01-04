@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -8,10 +9,9 @@ import '../Model/room.dart';
 import '../Model/summon.dart';
 
 class GameData {
-  //todo: make these lists immutable
-  List<String> editions = [];
-  final modelData = ValueNotifier<Map<String, CampaignModel>>({});
-  List<SummonModel> itemSummonData = [];
+  late final BuiltList<String> editions;
+  final modelData = ValueNotifier<Map<String, CampaignModel>>({}); //todo: make map immutable?
+  late final BuiltList<SummonModel> itemSummonData;
 
   Future<void> loadData(String root) async {
     rootBundle.evict('${root}summon.json');
@@ -22,9 +22,11 @@ class GameData {
     //load loose summons
     if (data.containsKey('summons')) {
       final summons = data['summons'] as Map<dynamic, dynamic>;
+      List<SummonModel> summonModels = [];
       for (String key in summons.keys) {
-        itemSummonData.add(SummonModel.fromJson(summons[key], key));
+        summonModels.add(SummonModel.fromJson(summons[key], key));
       }
+      itemSummonData = BuiltList.of(summonModels);
     }
 
     Map<String, CampaignModel> map = {};
@@ -32,8 +34,9 @@ class GameData {
     final String editions =
         await rootBundle.loadString('${root}editions/editions.json', cache: false);
     final Map<String, dynamic> editionData = await json.decode(editions);
+    List<String> editionList = [];
     for (String item in editionData["editions"]) {
-      this.editions.add(item);
+      editionList.add(item);
 
       List<RoomsModel> roomData = [];
       await fetchRoomData(item, root).then((value) {
@@ -42,6 +45,7 @@ class GameData {
 
       await fetchCampaignData(item, root, map, roomData);
     }
+    this.editions = BuiltList.of(editionList);
 
     modelData.value = map;
   }

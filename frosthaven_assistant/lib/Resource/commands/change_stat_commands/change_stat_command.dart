@@ -30,8 +30,7 @@ abstract class ChangeStatCommand extends Command {
               if (getIt<GameState>().roundState.value ==
                   RoundState.chooseInitiative) {
                 GameMethods.sortCharactersFirst(stateAccess);
-              } else if (getIt<GameState>().roundState.value ==
-                  RoundState.playTurns) {
+              } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
                 //GameMethods.sortItemToPlace(item.id, 99); //TODO: don't? leave in place until end of round?
               }
               if (getIt<GameState>().roundState.value == RoundState.playTurns) {

@@ -569,7 +569,6 @@ class MonsterStatCardWidget extends StatelessWidget {
                     height: 20 * scale + 8,
                     child: ValueListenableBuilder<int>(
                         valueListenable: getIt<GameState>().commandIndex,
-                        //todo: test widget.data.monsterInstances,
                         builder: (context, value, child) {
                           bool allStandeesOut = data.monsterInstances.length == data.type.count;
                           return IconButton(
@@ -593,7 +592,6 @@ class MonsterStatCardWidget extends StatelessWidget {
                   height: 20 * scale + 8,
                   child: ValueListenableBuilder<int>(
                       valueListenable: getIt<GameState>().commandIndex,
-                      //TODO: test //widget.data.monsterInstances,
                       builder: (context, value, child) {
                         return IconButton(
                             padding: const EdgeInsets.only(left: 8, top: 8),

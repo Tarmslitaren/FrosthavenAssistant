@@ -56,8 +56,6 @@ class MonsterWidgetState extends State<MonsterWidget> {
     final generatedChildren = List<Widget>.generate(
         widget.data.monsterInstances.length,
         (index) => AnimatedSize(
-              //not really needed now
-              //TODO: try change to AnimatedContainer, and make sure to update the width on death (same time as death animation)
               key: Key(widget.data.monsterInstances[index].standeeNr
                   .toString()),
               duration: const Duration(milliseconds: 300),

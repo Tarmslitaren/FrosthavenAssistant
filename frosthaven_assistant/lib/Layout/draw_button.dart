@@ -36,7 +36,6 @@ class DrawButtonState extends State<DrawButton> {
         if (_gameState.currentList.isEmpty) {
           text = "Add characters first.";
         }
-        //TODO: show other message if no characters or no monsters
         showToast(context, text);
       }
     } else {

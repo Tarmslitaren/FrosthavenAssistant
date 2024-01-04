@@ -91,7 +91,7 @@ class LootDeck {
   List<int> _addedCards = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   Map<String, int> _enhancements = {};
 
-  CardStack<LootCard> get drawPile => _drawPile; //todo: can hide more of these
+  CardStack<LootCard> get drawPile => _drawPile;
   CardStack<LootCard> get discardPile => _discardPile;
   final CardStack<LootCard> _drawPile = CardStack<LootCard>();
   final CardStack<LootCard> _discardPile = CardStack<LootCard>();

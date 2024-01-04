@@ -20,15 +20,14 @@ class CharacterClass {
     if (data.containsKey('hidden')) {
       hidden = data['hidden'] as bool;
     }
-    //TODO: noListing value
-    //TODO: color array + gradiantType
+    //TODO: color array + gradiantType support
     final healthByLevel = (data['health'] as List<dynamic>).cast<int>();
     int radix = 16;
     var colorValue = data['color'];
     Color color;
     if (colorValue is List<dynamic>) {
       color =
-          Color(int.parse(colorValue[0], radix: radix)); //TODO: handle lists
+          Color(int.parse(colorValue[0], radix: radix));
     } else {
       color = Color(int.parse(colorValue, radix: radix));
     }
@@ -36,7 +35,7 @@ class CharacterClass {
     if (data.containsKey("colorSecondary")) {
       if (data["colorSecondary"] is List<dynamic>) {
         colorSecondary = Color(int.parse(data['colorSecondary'][0],
-            radix: radix)); //TODO: handle lists
+            radix: radix));
       } else {
         colorSecondary = Color(int.parse(data['colorSecondary'], radix: radix));
       }

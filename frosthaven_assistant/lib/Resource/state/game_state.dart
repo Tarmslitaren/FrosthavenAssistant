@@ -58,8 +58,7 @@ class _StateModifier {}
 class GameState extends ActionHandler {
   //TODO: put action handler in own place
 
-  GameState() {
-  }
+  GameState();
 
   void init() {
 

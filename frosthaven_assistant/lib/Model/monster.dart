@@ -26,12 +26,6 @@ class MonsterModel {
 
   factory MonsterModel.fromJson(
       Map<String, dynamic> data, String name, String edition) {
-    // note the explicit cast to String
-    // this is required if robust lint rules are enabled
-    //final name = data['name'] as String;
-    if (kDebugMode) {
-      //print(name);
-    }
 
     String anEdition = edition;
     if (data.containsKey('edition')) {
@@ -61,7 +55,6 @@ class MonsterModel {
     final deck = data['deck'] as String;
     final count = data['count'] as int;
 
-    //final levels = data['levels'] as List<MonsterLevelData>;
     final levels = data['levels'] as List<dynamic>;
     List<MonsterLevelModel> monsterLevelDataList = [];
     for (var item in levels) {
@@ -81,8 +74,6 @@ class MonsterLevelModel {
   final MonsterStatsModel? boss;
 
   factory MonsterLevelModel.fromJson(Map<String, dynamic> data) {
-    // note the explicit cast to String
-    // this is required if robust lint rules are enabled
     final level = data['level'] as int;
     MonsterStatsModel normal;
     MonsterStatsModel elite;
@@ -91,8 +82,6 @@ class MonsterLevelModel {
       elite = MonsterStatsModel.fromJson(data['elite']);
       return MonsterLevelModel(level, normal, elite, null);
     } else {
-      //boss
-      //could change the json though...
       return MonsterLevelModel(
           level, null, null, MonsterStatsModel.fromJson(data));
     }
@@ -113,8 +102,6 @@ class MonsterStatsModel {
   final List<String> special2;
 
   factory MonsterStatsModel.fromJson(Map<String, dynamic> data) {
-    // note the explicit cast to String
-    // this is required if robust lint rules are enabled
     final health = data['health'];
     final move = data['move'] as int;
     final attack = data['attack'];
