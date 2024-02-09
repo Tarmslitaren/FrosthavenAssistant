@@ -10,7 +10,7 @@ import '../Model/summon.dart';
 
 class GameData {
   late final BuiltList<String> editions;
-  final modelData = ValueNotifier<Map<String, CampaignModel>>({}); //todo: make map immutable?
+  final modelData = ValueNotifier<Map<String, CampaignModel>>({}); //todo: make map immutable
   late final BuiltList<SummonModel> itemSummonData;
 
   Future<void> loadData(String root) async {

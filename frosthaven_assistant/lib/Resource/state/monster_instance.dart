@@ -35,7 +35,7 @@ class MonsterInstance extends FigureState {
   late final String name;
   late final String gfx;
 
-  //summon stats. not used currenty
+  //summon stats. not used currently
   late final int move;
   late final int attack;
   late final int range;
@@ -73,7 +73,7 @@ class MonsterInstance extends FigureState {
         _maxHealth.value = value;
       }
       if (newHealthValue == "Incarnate") {
-        int value = 36; //double Incarante's level 5 health
+        int value = 36; //double Incarnates level 5 health
         for (var item in getIt<GameState>().currentList) {
           if (item is Character && item.id == "Incarnate") {
             value = item.characterClass

@@ -166,10 +166,7 @@ class Server {
                   sendToOthers(
                       "Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last!.getState()}",
                       client);
-                  //getIt<GameState>().modifierDeck.
-                  //client.write('your gameState changes received by server');
                 } else {
-                  //getIt<Network>().networkMessage.value = "index mismatch: ignoring incoming message";
                   log(
                       'Got same or lower index. ignoring: received index: $newIndex current index ${_gameState.commandIndex.value}');
 

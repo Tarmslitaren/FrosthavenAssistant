@@ -78,7 +78,6 @@ enum MonsterType {
   normal,
   elite,
   boss,
-  //named?
   summon
 }
 

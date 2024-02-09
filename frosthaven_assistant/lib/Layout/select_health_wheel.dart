@@ -16,13 +16,12 @@ class SelectHealthWheel extends StatefulWidget {
   final ValueNotifier<int> time;
 
   const SelectHealthWheel(
-      {Key? key,
+      {super.key,
       required this.data,
       required this.figureId,
       required this.ownerId,
       required this.delta,
-      required this.time})
-      : super(key: key);
+      required this.time});
 
   @override
   SelectHealthWheelState createState() => SelectHealthWheelState();

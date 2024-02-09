@@ -309,7 +309,6 @@ class LootDeck {
           gfx: gfx));
       startId++;
     }
-    //list.shuffle();
   }
 
   void _initHerbPool(int startId, List<LootCard> list, String gfx) {

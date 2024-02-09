@@ -204,7 +204,7 @@ class MonsterBox extends StatelessWidget {
                       ),
                       ValueListenableBuilder<List<Condition>>(
                           valueListenable: data.conditions,
-                          //todo: dont use valuelistenabel for lists or sets
+                          //todo: don't use value listenable for lists or sets
                           builder: (context, value, child) {
                             return SizedBox(
                                 height: 30 * scale,

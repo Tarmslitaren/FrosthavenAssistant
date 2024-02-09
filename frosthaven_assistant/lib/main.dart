@@ -39,8 +39,12 @@ void main() {
 
   if (kReleaseMode) {
     ErrorWidget.builder = ((e) {
-      //to not show the gray boxes, when there are exceptions
-      return Container();
+      if(!kDebugMode) {
+        //to not show the gray boxes, when there are exceptions
+        return Container();
+      }
+      //show the error in debug builds
+      return ErrorWidget(e);
     });
   }
 

@@ -197,7 +197,6 @@ class GameSaveState {
 
         //////elements
         Map elementData = data['elementState'];
-        //Map<Elements, ElementState> newMap = {};
         gameState._elementState.clear();
         gameState._elementState[Elements.fire] =
             ElementState.values[elementData[Elements.fire.index.toString()]];

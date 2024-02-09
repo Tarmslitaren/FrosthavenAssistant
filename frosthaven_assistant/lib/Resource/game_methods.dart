@@ -769,7 +769,6 @@ class GameMethods {
   }
 
   //note: while this changes the game state, it is a state used also by non game related instances.
-  //todo: this should potentially NOT be a state variable?
   static void setToastMessage(String message) {
     _gameState._toastMessage.value = message;
   }
@@ -1330,7 +1329,7 @@ class GameMethods {
       newIndex = index;
     }
 
-    //TODO: can get mutable item from builtList?! or is this non functioning?
+    //can get mutable item from builtList?! or is this non functioning?
     for (; newIndex < _gameState.currentList.length; newIndex++) {
       ListItemData data = _gameState.currentList[newIndex];
       if (data is Monster) {

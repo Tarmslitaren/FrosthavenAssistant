@@ -81,38 +81,6 @@ void openDialogWithDismissOption(
       builder: (BuildContext context) => innerWidget);
 }
 
-//note: not working properly and not used
-void openDialogAtPosition(
-    BuildContext context, Widget widget, double x, double y) {
-  double xOffset =
-      (context.findRenderObject() as RenderBox).localToGlobal(Offset.zero).dx;
-  double yOffset =
-      (context.findRenderObject() as RenderBox).localToGlobal(Offset.zero).dy;
-  openDialogOld(
-      context,
-      Stack(children: [
-        Positioned(
-            left: x + xOffset, // left coordinate
-            top: y + yOffset, // top coordinate
-            child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Dialog(
-                    backgroundColor: Colors.transparent,
-                    /*shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                  side: BorderSide(
-                    color: Colors.green,
-                  ),
-                ),*/
-                    insetPadding: const EdgeInsets.all(0),
-                    insetAnimationCurve: Curves.easeInOut, //does nothing?
-                    //insetAnimationDuration: Duration(milliseconds: 1500),
-                    child: widget))),
-      ]));
-}
-
 //used to get transparent background when dragging in re-orderable widgets
 Widget defaultBuildDraggableFeedback(
     BuildContext context, BoxConstraints constraints, Widget child) {

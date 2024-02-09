@@ -20,8 +20,7 @@ class ActionHandler {
     getIt<GameState>().updateList.value++;
     getIt<GameState>().updateForUndo.value++;
     getIt<GameState>().killMonsterStandee.value++;
-    //try to update card widget her eif needed
-
+    //try to update card widget here if needed
     //try to update element buttons here if needed
   }
 
@@ -40,7 +39,7 @@ class ActionHandler {
         gameSaveStates[commandIndex.value]!.saveToDisk();
         if (!isServer && !isClient) {
           commands[commandIndex.value]!
-              .undo(); //currently undo only makes sure ui is updated...
+              .undo(); //undo only makes sure ui is updated
         } else {
           updateAllUI();
           //run generic update all function instead, as commands list is not retained

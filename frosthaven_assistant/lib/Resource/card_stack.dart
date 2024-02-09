@@ -1,6 +1,6 @@
 import 'dart:math';
 
-//todo: make whole thing safe
+//todo: make whole thing safe (only expose immutable values)
 
 class CardStack<E> {
   final _list = <E>[];

@@ -93,7 +93,7 @@ class Client {
   }
 
   void onListenData(Uint8List data) {
-    String message = utf8.decode(data); // String.fromCharCodes(data);
+    String message = utf8.decode(data);
     message = _leftOverMessage + message;
     _leftOverMessage = "";
 

@@ -266,7 +266,6 @@ class LineBuilder {
         color: Colors.yellow,
         fontSize: frosthavenStyle ? 13.1 * scale : 12.56 * scale,
         height: frosthavenStyle ? 0.84 : 0.85,
-        //0.8,
         shadows: [shadow]);
 
     var eliteSmallStyle = TextStyle(
@@ -695,7 +694,6 @@ class LineBuilder {
                               ? 1.0
                               : 1.1
                           : 1.0,
-                      // 0.8,
 
                       shadows: [
                         shadow

@@ -89,7 +89,6 @@ class Settings {
           await windowManager.setAlwaysOnTop(false);
         }
       });
-      //await WindowManager.instance.setFullScreen(fullscreen);
     } else {
       //android:
       //to hide ui top and bottom on android
