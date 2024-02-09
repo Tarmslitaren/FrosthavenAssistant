@@ -6583,12 +6583,12 @@
         ],
       "sections": {
         "#25.3 Haunted Vault (17)": {
-          "initialMessage": "ERRATA: When Door 1 is opened, read section 62.3"
+          "initialMessage": "1st printing ERRATA: When Door 1 is opened, read section 62.3"
         }
       }
     },
     "#18 Crystal Fields": {
-      "initialMessage": "ERRATA: Map layout and map: The right 11 tile should be 11-C.",
+      "initialMessage": "1st printing ERRATA: Map layout and map: The right 11 tile should be 11-C.",
       "monsters": [ "Algox Guard", "Burrowing Blade", "Frozen Corpse" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":2,"hide": 5,"corpsecap":1,"arrowvine":2, "snowthistle": 1},
       "special": [
@@ -7123,7 +7123,7 @@
     "#36 Buried Ducts": {
       "monsters": [ "Flaming Bladespinner", "Robotic Boltshooter", "Ruined Machine" ],
       "lootDeck": {"coin":9,"lumber": 3,"metal":5,"arrowvine":2, "treasure": 1},
-      "initialMessage": "ERRATA: Missing reward for completing: item 67",
+      "initialMessage": "1st printing ERRATA: Missing reward for completing: item 67",
       "special": [
         {
           "type": "Objective",
@@ -7232,10 +7232,10 @@
     "#37 The Dead Mile": {
       "monsters": [ "Living Bones (FH)", "Living Spirit (FH)" ,"Ruined Machine" ],
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"rockroot":1,"arrowvine":2, "treasure": 1},
-      "initialMessage": "ERRATA: Missing reward for completing: item 67",
+      "initialMessage": "1st printing ERRATA: Missing reward for completing: item 67",
       "sections": {
         "#70.1 The Dead Mile (37)": {
-          "initialMessage": "ERRATA: Treasure Chest should be #56",
+          "initialMessage": "1st printing ERRATA: Treasure Chest should be #56",
           "special": [
             {
               "type": "ResetRound"
@@ -7829,7 +7829,7 @@
       "monsters": [ "Fracture of the Deep", "Lightning Eel", "Lurker Clawcrusher", "Lurker Mindsnipper", "Lurker Wavethrower" ],
       "lootDeck": {"coin":8,"arrowvine": 1,"axenut":1,"corpsecap": 1,"rockroot":1,"flamefruit":1,"snowthistle":1, "treasure": 1},
       "note": "didn't bother to make 3 fractured lieutenants (only +1 attack anyway)",
-      "initialMessage": "ERRATA: Missing reward for completing: item 224"
+      "initialMessage": "1st printing ERRATA: Missing reward for completing: item 224"
     },
     "#61 Life and Death": {
       "monsters": [ "Deep Terror (FH)", "Earth Demon (FH)", "Harrower Infester (FH)" ],
@@ -8289,7 +8289,7 @@
         }],
       "sections": {
         "#111.2 Invasion of the Dock (71)": {
-          "initialMessage": "ERRATA: Map: Lurker Soldier should be Lurker Clawcrusher",
+          "initialMessage": "1st printing ERRATA: Map: Lurker Soldier should be Lurker Clawcrusher",
           "special": [
             {
               "type": "Escort",
@@ -9011,7 +9011,7 @@
         }],
       "sections": {
         "#14.2 Ruins of the Solstice (104)": {
-          "initialMessage": "ERRATA: Map: Ice Wraith should be Frost Demon"
+          "initialMessage": "1st printing ERRATA: Map: Ice Wraith should be Frost Demon"
         }
       }
     },
@@ -9250,7 +9250,7 @@
       "lootDeck": {"coin":8,"lumber": 4,"rockroot":2,"arrowvine":2, "flamefruit": 1, "snowthistle": 2, "axenut": 1, "corpsecap":  1},
       "sections": {
         "#154.1 Lush Grotto (113)": {
-          "initialMessage": "ERRATA: Map: Black Imp should be Forest Imp"
+          "initialMessage": "1st printing ERRATA: Map: Black Imp should be Forest Imp"
         }
       }
     },
