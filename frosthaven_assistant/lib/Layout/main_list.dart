@@ -35,15 +35,12 @@ class Item extends StatelessWidget {
         initPreset = character.characterState.initiative.value;
       }
       child = CharacterWidget(
-          key: Key(character.id),
-          characterId: character.id,
-          initPreset: initPreset);
+          key: Key(character.id), characterId: character.id, initPreset: initPreset);
       height = 60 * scale;
       if (character.characterState.summonList.isNotEmpty) {
         double summonsTotalWidth = 0;
         for (var monsterInstance in character.characterState.summonList) {
-          summonsTotalWidth +=
-              MonsterBox.getWidth(scale, monsterInstance) + 2 * scale;
+          summonsTotalWidth += MonsterBox.getWidth(scale, monsterInstance) + 2 * scale;
         }
         double rows = summonsTotalWidth / listWidth;
         height += 32 * rows.ceil() * scale;
@@ -57,8 +54,7 @@ class Item extends StatelessWidget {
       }
       double totalWidthOfMonsterBoxes = 0;
       for (var item in monster.monsterInstances) {
-        totalWidthOfMonsterBoxes +=
-            MonsterBox.getWidth(scale, item) + 2 * scale;
+        totalWidthOfMonsterBoxes += MonsterBox.getWidth(scale, item) + 2 * scale;
       }
       if (totalWidthOfMonsterBoxes > listWidth) {
         standeeRows = 2;
@@ -101,10 +97,7 @@ class ListAnimation extends StatefulWidget {
   final Widget child;
 
   const ListAnimation(
-      {super.key,
-      required this.index,
-      required this.lastIndex,
-      required this.child});
+      {super.key, required this.index, required this.lastIndex, required this.child});
 
   @override
   State<StatefulWidget> createState() {
@@ -119,8 +112,8 @@ class ListAnimationState extends State<ListAnimation> {
   Widget build(BuildContext context) {
     {
       //need also last positions
-      List<double> positions = MainListState.getItemHeights(
-          context); // - the end resulting positions.
+      List<double> positions =
+          MainListState.getItemHeights(context); // - the end resulting positions.
       double position = 0;
       if (widget.index > 0) {
         position = positions[widget.index - 1];
@@ -260,14 +253,12 @@ class MainListState extends State<MainList> {
 
   int getItemsCanFitOneColumn(List<double> widgetPositions) {
     //too bad this has to be done
-    bool canFit2Columns =
-        MediaQuery.of(context).size.width >= getMainListWidth(context) * 2;
+    bool canFit2Columns = MediaQuery.of(context).size.width >= getMainListWidth(context) * 2;
     if (!canFit2Columns) {
-      return _gameState
-          .currentList.length; //don't wrap if no space. Probably not needed
+      return _gameState.currentList.length; //don't wrap if no space. Probably not needed
     }
-    double screenHeight = MediaQuery.of(context).size.height -
-        80 * getIt<Settings>().userScalingBars.value;
+    double screenHeight =
+        MediaQuery.of(context).size.height - 80 * getIt<Settings>().userScalingBars.value;
 
     //if can't fit without scroll
     if (widgetPositions.isNotEmpty) {
@@ -293,14 +284,12 @@ class MainListState extends State<MainList> {
 
   int getItemsForHalfTotalHeight(List<double> widgetPositions) {
     //too bad this has to be done
-    bool canFit2Columns =
-        MediaQuery.of(context).size.width >= getMainListWidth(context) * 2;
+    bool canFit2Columns = MediaQuery.of(context).size.width >= getMainListWidth(context) * 2;
     if (!canFit2Columns) {
-      return _gameState
-          .currentList.length; //don't wrap if no space. Probably not needed
+      return _gameState.currentList.length; //don't wrap if no space. Probably not needed
     }
-    double screenHeight = MediaQuery.of(context).size.height -
-        80 * getIt<Settings>().userScalingBars.value;
+    double screenHeight =
+        MediaQuery.of(context).size.height - 80 * getIt<Settings>().userScalingBars.value;
 
     if (widgetPositions.isNotEmpty) {
       bool allFitInView = false;
@@ -347,9 +336,8 @@ class MainListState extends State<MainList> {
     List<Widget> newList = List<Widget>.generate(
       _gameState.currentList.length,
       (index) {
-        var item = Item(
-            key: Key(_gameState.currentList[index].id),
-            data: _gameState.currentList[index]);
+        var item =
+            Item(key: Key(_gameState.currentList[index].id), data: _gameState.currentList[index]);
         return item;
       },
     );
@@ -367,22 +355,17 @@ class MainListState extends State<MainList> {
 
     if (_generatedList.length > generatedListAnimators.length) {
       //make the list longer
-      for (int i = generatedListAnimators.length;
-          i < _generatedList.length;
-          i++) {
-        generatedListAnimators.add(ListAnimation(
-                index: i, lastIndex: indices[i], child: _generatedList[i])
-            //createAnimatedSwitcher(i, indices[i])
-            );
+      for (int i = generatedListAnimators.length; i < _generatedList.length; i++) {
+        generatedListAnimators
+            .add(ListAnimation(index: i, lastIndex: indices[i], child: _generatedList[i])
+                //createAnimatedSwitcher(i, indices[i])
+                );
       }
     }
 
     if (generatedListAnimators.length > _generatedList.length) {
-      for (int i = _generatedList.length;
-          i < generatedListAnimators.length;
-          i++) {
-        _generatedList
-            .add(Container()); //add empty widget to override the current
+      for (int i = _generatedList.length; i < generatedListAnimators.length; i++) {
+        _generatedList.add(Container()); //add empty widget to override the current
       }
     }
 
@@ -398,60 +381,41 @@ class MainListState extends State<MainList> {
           if (canFit2Columns) {
             width *= 2;
           }
-          double paddingLeft = (MediaQuery.of(context).size.width -
-                  2 * getMainListWidth(context)) /
-              2;
           List<double> itemHeights = getItemHeights(context);
-          int itemsPerColumn =
-              getItemsForHalfTotalHeight(itemHeights); //no good
+          int itemsPerColumn = getItemsForHalfTotalHeight(itemHeights); //no good
           int itemsColumn2 = itemHeights.length - itemsPerColumn;
           itemsPerColumn = max(itemsPerColumn, itemsColumn2);
           bool ignoreScroll = false;
-          /*bool canFit2ColumnsWithoutScroll = canFit2Columns &&
-              itemHeights.isNotEmpty &&
-              itemHeights.last <
-                  2 * MediaQuery.of(context).size.height -
-                      160 * getIt<Settings>().userScalingBars.value;
-          //ignoreScroll = true;
-          if (canFit2ColumnsWithoutScroll) {
-            ignoreScroll = true;
-          }
-          ignoreScroll = false;*/ //there is no easy way to add nice amount of padding for this mode.
-
           double paddingBottom = 0.5 * MediaQuery.of(context).size.height;
           return Container(
-              margin: canFit2Columns
-                  ? EdgeInsets.only(left: paddingLeft, right: paddingLeft)
-                  : null,
-              alignment:
-                  canFit2Columns ? Alignment.topLeft : Alignment.topCenter,
-              width: canFit2Columns ? width : MediaQuery.of(context).size.width,
-              //height: 200,
+              alignment: Alignment.topCenter,
               child: Scrollbar(
-                interactive: !ignoreScroll,
-                controller: scrollController,
-                child: ReorderableWrap(
-                  padding: EdgeInsets.only(bottom: paddingBottom),
-                  scrollAnimationDuration: const Duration(milliseconds: 400),
-                  reorderAnimationDuration: const Duration(milliseconds: 400),
-                  maxMainAxisCount: itemsPerColumn,
-                  ignorePrimaryScrollController: ignoreScroll,
-                  //this makes it wrap at screen height. turn on if can fit 2 columns and can fit all items in screen
-
-                  direction: Axis.vertical,
-                  buildDraggableFeedback: defaultBuildDraggableFeedback,
-                  needsLongPressDraggable: true,
+                  interactive: !ignoreScroll,
                   controller: scrollController,
-                  onReorder: (int oldIndex, int newIndex) {
-                    setState(() {
-                      _gameState.action(ReorderListCommand(newIndex, oldIndex));
-                    });
-                  },
-                  children: generateChildren(),
-                ),
-                // )
-                //)
-              ));
+                  child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Container(
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        child: ReorderableWrap(
+                          padding: EdgeInsets.only(bottom: paddingBottom),
+                          scrollAnimationDuration: const Duration(milliseconds: 400),
+                          reorderAnimationDuration: const Duration(milliseconds: 400),
+                          maxMainAxisCount: itemsPerColumn,
+                          ignorePrimaryScrollController: ignoreScroll,
+                          //this makes it wrap at screen height. turn on if can fit 2 columns and can fit all items in screen
+
+                          direction: Axis.vertical,
+                          buildDraggableFeedback: defaultBuildDraggableFeedback,
+                          needsLongPressDraggable: true,
+                          onReorder: (int oldIndex, int newIndex) {
+                            setState(() {
+                              _gameState.action(ReorderListCommand(newIndex, oldIndex));
+                            });
+                          },
+                          children: generateChildren(),
+                        ),
+                      ))));
         });
   }
 }

@@ -25,8 +25,7 @@ class CharacterWidget extends StatefulWidget {
   final int? initPreset;
 
   const CharacterWidget(
-      {required this.characterId, required this.initPreset, Key? key})
-      : super(key: key);
+      {required this.characterId, required this.initPreset, super.key});
 
   @override
   CharacterWidgetState createState() => CharacterWidgetState();
