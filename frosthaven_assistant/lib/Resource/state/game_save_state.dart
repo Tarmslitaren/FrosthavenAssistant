@@ -119,11 +119,15 @@ class GameSaveState {
           }
         }
         gameState._currentCampaign.value = data['currentCampaign'];
-        //TODO: currentCampaign does not update properly (because changing it is not a command)
         gameState._round.value = data['round'] as int;
+        if (data.containsKey('totalRounds')) {
+          gameState._totalRounds.value = data['totalRounds'] as int;
+        } else {
+          gameState._totalRounds.value = gameState._round.value;
+        }
         gameState._roundState.value = RoundState.values[data['roundState']];
         gameState._solo.value = data['solo']
-            as bool; //TODO: does not update properly (because changing it is not a command)
+            as bool;
 
         //main list
         var list = data['currentList'] as List;

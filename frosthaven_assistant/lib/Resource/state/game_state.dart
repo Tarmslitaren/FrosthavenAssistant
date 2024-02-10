@@ -84,7 +84,8 @@ class GameState extends ActionHandler {
 
   ValueListenable<int> get round => _round;
   final _round = ValueNotifier<int>(1);
-  setRound(_StateModifier stateModifier, int value) {_round.value = value;}
+  ValueListenable<int> get totalRounds => _totalRounds;
+  final _totalRounds = ValueNotifier<int>(1);
 
   ValueListenable<RoundState> get roundState => _roundState;
   final _roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
@@ -152,6 +153,7 @@ class GameState extends ActionHandler {
         '"solo": ${_solo.value}, '
         '"roundState": ${_roundState.value.index}, '
         '"round": ${_round.value}, '
+        '"totalRounds": ${_totalRounds.value}, '
         '"scenario": "${_scenario.value}", '
         '"toastMessage": ${jsonEncode(_toastMessage.value)}, '
         '"scenarioSpecialRules": ${_scenarioSpecialRules.toString()}, '

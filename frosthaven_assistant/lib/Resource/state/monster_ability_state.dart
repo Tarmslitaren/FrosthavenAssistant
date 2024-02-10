@@ -44,7 +44,7 @@ class MonsterAbilityState {
   void draw(_StateModifier _) {
     //put top of draw pile on discard pile
     discardPile.push(drawPile.pop());
-    _lastRoundDrawn = getIt<GameState>().round.value;
+    _lastRoundDrawn = getIt<GameState>().totalRounds.value;
   }
 
   @override

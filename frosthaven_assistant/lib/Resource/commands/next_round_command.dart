@@ -93,7 +93,7 @@ class NextRoundCommand extends Command {
       }
     }
 
-    GameMethods.setRound(stateAccess, _gameState.round.value + 1);
+    GameMethods.setRound(stateAccess, _gameState.round.value + 1, false);
 
     Future.delayed(const Duration(milliseconds: 600), () {
       _gameState.updateList.value++;

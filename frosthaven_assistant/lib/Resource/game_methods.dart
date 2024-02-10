@@ -85,7 +85,7 @@ class GameMethods {
         if (item is Monster) {
           if (item.type.deck == deck.name) {
             if (item.monsterInstances.isNotEmpty || item.isActive) {
-              if (deck.lastRoundDrawn < _gameState.round.value) {
+              if (deck.lastRoundDrawn != _gameState.totalRounds.value) { //do not draw new card in case drawn already this round
                 deck.draw(stateModifier);
                 break;
               }
@@ -364,7 +364,7 @@ class GameMethods {
   static void setScenario(_StateModifier _, String scenario, bool section) {
     if (!section) {
       //first reset state
-      GameMethods.setRound(_, 1);
+      GameMethods.setRound(_, 1, true);
       _gameState.showAllyDeck.value = false;
       _gameState._currentAbilityDecks.clear();
       _gameState._scenarioSpecialRules.clear();
@@ -550,7 +550,7 @@ class GameMethods {
       }
 
       if (item.type == "ResetRound") {
-        GameMethods.setRound(_, 1);
+        GameMethods.setRound(_, 1, false);
       }
     }
 
@@ -1437,8 +1437,13 @@ class GameMethods {
     return null;
   }
 
-  static void setRound(_StateModifier _, int round) {
+  static void setRound(_StateModifier _, int round, bool resetTotal) {
     _gameState._round.value = round;
+    if(resetTotal) {
+      _gameState._totalRounds.value = round;
+    } else {
+      _gameState._totalRounds.value++;
+    }
   }
 
   static void setCampaign(_StateModifier _, String campaign) {
