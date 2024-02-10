@@ -28,7 +28,7 @@ class Settings {
   final noCalculation = ValueNotifier<bool>(false);
   final expireConditions = ValueNotifier<bool>(false);
   final hideLootDeck = ValueNotifier<bool>(false);
-  final shimmer = ValueNotifier<bool>(false);
+  final shimmer = ValueNotifier<bool>((Platform.isWindows || Platform.isLinux || Platform.isMacOS) ? true : false);
   final showScenarioNames = ValueNotifier<bool>(true);
   final showCustomContent = ValueNotifier<bool>(true);
   final showSectionsInMainView = ValueNotifier<bool>(true);
