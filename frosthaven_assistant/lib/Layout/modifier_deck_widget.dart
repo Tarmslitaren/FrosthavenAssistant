@@ -122,6 +122,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     double width = 58.6666 * settings.userScalingBars.value;
     double height = 39 * settings.userScalingBars.value;
 
+
     var screenSize = MediaQuery.of(context).size;
     double xOffset = -(screenSize.width / 2 -
         63 * settings.userScalingBars.value); //TODO: tweak to be exactly center

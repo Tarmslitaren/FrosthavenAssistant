@@ -263,6 +263,17 @@ Drawer createMainMenu(BuildContext context) {
                   Navigator.pop(context);
                 },
               ),
+              ListTile(
+                title: const Text('Donate'),
+                onTap: () {
+                  final Uri toLaunch = Uri(
+                      scheme: 'https',
+                      host: 'ko-fi.com',
+                      path: 'tarmslitaren');
+                  launchUrlInBrowser(toLaunch);
+                  Navigator.pop(context);
+                },
+              ),
               Platform.isMacOS || Platform.isLinux || Platform.isWindows
                   ? ListTile(
                       title: const Text('Exit'),
