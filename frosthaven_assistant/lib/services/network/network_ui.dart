@@ -52,6 +52,7 @@ class NetworkUIState extends State<NetworkUI> {
           });
 
           return const SizedBox(
+            //todo: remove hack?
             width: 0.00001,
             height: 0.00001,
           );

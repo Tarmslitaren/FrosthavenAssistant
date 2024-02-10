@@ -34,6 +34,14 @@ class SettingsMenuState extends State<SettingsMenu> {
 
   final ScrollController scrollController = ScrollController();
 
+  List<DropdownMenuItem<String>> getIPList() {
+    List<DropdownMenuItem<String>> retVal = [];
+    for( var item in getIt<Network>().networkInfo.wifiIPv4List) {
+      retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
+    }
+    return retVal;
+  }
+
   @override
   Widget build(BuildContext context) {
     Settings settings = getIt<Settings>();
@@ -422,7 +430,13 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     return SizedBox(
                                         width: 200,
                                         height: 20,
-                                        child: Text(getIt<Network>().networkInfo.wifiIPv4.value));
+                                        child: DropdownButtonHideUnderline(
+                                            child: DropdownButton(
+                                                value: getIt<Network>().networkInfo.wifiIPv4.value,
+                                                items: getIPList(),
+                                                onChanged: (value) => getIt<Network>().networkInfo.wifiIPv4.value = value!
+                                            )),
+                                    );
                                   }),
                               ValueListenableBuilder<String>(
                                   valueListenable: getIt<Network>().networkInfo.outgoingIPv4,
