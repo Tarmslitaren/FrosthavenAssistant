@@ -230,8 +230,15 @@ class GameMethods {
           _gameState._currentList = newList;
           return;
         } else {
-          //in case initiative is earlier than current turn, place just after current turn item
-          newList.insert(currentTurnItemIndex + 1, item);
+          //in case initiative is earlier than current turn, ignore anything current turn, and earlier and place later
+          int insertIndex = currentTurnItemIndex + 1;
+          for (int j = currentTurnItemIndex + 1; j < newList.length; j++) {
+            if( getInitiative(newList[j]) >= initiative) {
+              insertIndex = j;
+              break;
+            }
+          }
+          newList.insert(insertIndex, item);
           _gameState._currentList = newList;
           return;
         }

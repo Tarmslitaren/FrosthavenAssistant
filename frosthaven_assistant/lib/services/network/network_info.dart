@@ -61,9 +61,6 @@ class NetworkInformation {
     if (wifiIPv4.value == "") {
       wifiIPv4.value = "Failed to get Wifi IPv4";
     }
-
-    wifiIPv4List.add("grenol");
-    wifiIPv4List.add("apa");
   }
 
   Future<void> initNetworkInfo() async {
