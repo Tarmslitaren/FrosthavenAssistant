@@ -37,7 +37,7 @@ void main() {
     setWindowMaxSize(Size.infinite);
   }
 
-  if (kReleaseMode) {
+  //if (kReleaseMode) {
     ErrorWidget.builder = ((e) {
       if(!kDebugMode) {
         //to not show the gray boxes, when there are exceptions
@@ -46,11 +46,14 @@ void main() {
       //show the error in debug builds
       return ErrorWidget(e);
     });
-  }
+  //}
+
 
   runApp(ThemeSwitcherWidget(initialTheme: theme, child: const MyApp()));
 
 }
+
+final loading = ValueNotifier<bool>(true);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -69,8 +72,8 @@ class MyApp extends StatelessWidget {
     //initialize game
     getIt<GameState>().init();
     getIt<GameData>().loadData("assets/data/")
-        .then((value) => getIt<GameState>().load());
-    getIt<Settings>().init();
+        .then((value) => getIt<GameState>().load()).then((value) =>
+        getIt<Settings>().init()).then((value) => loading.value = false);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
