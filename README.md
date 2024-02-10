@@ -14,6 +14,10 @@ For problems and suggestions please file a [Github Issue](issues) or contact me 
 
 Written with the Flutter framework. [![codecov](https://codecov.io/gh/tarmslitaren/FrosthavenAssistant/branch/main/graph/badge.svg?token=RMRI5NZCGG)](https://codecov.io/gh/tarmslitaren/FrosthavenAssistant)
 
+## Support me
+
+☕ [Buy me a coffee?](https://ko-fi.com/tarmslitaren)
+
 ## Set-up Guide
 
 This will walk you through app installation through your first scenario. 
