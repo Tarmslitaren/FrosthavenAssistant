@@ -69,11 +69,16 @@ class MyApp extends StatelessWidget {
       //should force app to be in foreground and disable screen lock
     }
 
-    //initialize game
-    getIt<GameState>().init();
-    getIt<GameData>().loadData("assets/data/")
-        .then((value) => getIt<GameState>().load()).then((value) =>
-        getIt<Settings>().init()).then((value) => loading.value = false);
+    try {
+      //initialize game
+      getIt<GameState>().init();
+      getIt<GameData>().loadData("assets/data/")
+          .then((value) => getIt<GameState>().load()).then((value) =>
+          getIt<Settings>().init()).then((value) => loading.value = false);
+    } catch (error) {
+
+      loading.value = false;
+    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
