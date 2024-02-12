@@ -29,6 +29,21 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
 
   @override
   Widget build(BuildContext context) {
+
+    bool isInDrawPile = false;
+    for (var item in _gameState.currentAbilityDecks) {
+      if (item.name == widget.card.deck) {
+        var list = item.drawPile.getList();
+        for (int i = 0; i < list.length; i++) {
+          if (list[i].nr == widget.card.nr) {
+            isInDrawPile = true;
+            break;
+          }
+        }
+        break;
+      }
+    }
+
     return Container(
         width: 300,
         height: 180,
@@ -56,7 +71,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
           const SizedBox(
             height: 20,
           ),
-          TextButton(
+          if (isInDrawPile) TextButton(
               onPressed: () {
                 int oldIndex = 0;
                 int newIndex = 0;
