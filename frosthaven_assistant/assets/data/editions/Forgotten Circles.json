@@ -119,6 +119,19 @@
         [ 594, false, 89, "%move% - 1","*.........", "%heal% 2", "^Affect all adjacent allies", "%bless%|%bless%", "^Self" ],
         [ 595, false, 9, "%move% + 1","*.........", "%attack% - 1", "^%range% + 0", "^%curse%|%curse%", "^%target% 2" ]
       ]
+    },
+    {
+      "name": "Cultist (FC99)",
+      "cards": [
+        [ 604, false, 10, "%move% - 1","*.........", "%attack% - 1","*.........", "[r]","[c]","On Death:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        [ 605, false, 10, "%move% - 1","*.........", "%attack% - 1","*.........", "[r]","[c]","On Death:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        [ 606, false, 27, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 607, false, 27, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 608, false, 39, "%move% - 1","*.........", "%attack% + 0","*.........", "%heal% 1", "^Self" ],
+        [ 609, true, 63, "*", "Summon","Black Imp","*", "^Cultist suffers 2 damage." ],
+        [ 610, true, 63, "*", "Summon", "Black Imp","*", "^Cultist suffers 2 damage." ],
+        [ 611, false, 31, "%move% - 1","*.........", "%heal% 3", "^%range% 3" ]
+      ]
     }
   ],
   "monsters": {
@@ -1549,6 +1562,55 @@
         }
       ]
     },
+    "Cultist (FC99)": {
+      "edition": "Forgotten Circles",
+      "deck": "Cultist (FC99)",
+      "display": "Cultist",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 2, "attack": 1 },
+          "elite": { "health": 7, "move": 2, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 5, "move": 2, "attack": 1 },
+          "elite": { "health": 9, "move": 2, "attack": 2 }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 2, "attack": 1 },
+          "elite": { "health": 12, "move": 2, "attack": 2 }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 9, "move": 3, "attack": 1 },
+          "elite": { "health": 13, "move": 3, "attack": 2, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 10, "move": 3, "attack": 2 },
+          "elite": { "health": 15, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 11, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 18, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 14, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 22, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 15, "move": 3, "attack": 3, "attributes": [ "%curse%" ]},
+          "elite": { "health": 25, "move": 3, "attack": 4, "attributes": [ "%curse%" ]}
+        }
+      ]
+    },
     "Warden": {
       "deck": "Stone Golem",
       "gfx": "Stone Golem",
@@ -1697,7 +1759,7 @@
       }
     },
     "#99 Aftershocks": {
-      "monsters": [ "Black Imp", "Cultist", "Deep Terror" ],
+      "monsters": [ "Black Imp", "Cultist (FC99)", "Deep Terror" ],
       "special": [
         {
           "type": "Escort",
@@ -1723,7 +1785,7 @@
           "monsters": [ "Valrath Savage" ]
         },
         "#100 Sekhem Fountain": {
-          "monsters": [ "Black Imp", "Cultist", "Deep Terror" ],
+          "monsters": [ "Black Imp", "Cultist (FC99)", "Deep Terror" ],
           "special": [
             {
               "type": "Escort",
