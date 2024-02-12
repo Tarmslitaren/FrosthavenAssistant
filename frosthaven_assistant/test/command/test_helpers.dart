@@ -1,11 +1,5 @@
 
 import 'dart:convert';
-
-import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:frosthaven_assistant/Resource/commands/set_level_command.dart';
-import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -24,7 +18,6 @@ Future<void> setUpGame() async {
   await getIt<GameData>().loadData("assets/testData/");
   await gameState.load();
 
-  //todo: test there is no side effects -> check that _gameState does not change aside from the changes
 }
 void checkSaveState() async {
   String state = gameState.toString();

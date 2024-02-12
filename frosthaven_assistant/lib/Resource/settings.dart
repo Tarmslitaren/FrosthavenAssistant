@@ -5,11 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 import '../services/network/client.dart';
 import '../services/network/network.dart';
 import '../services/service_locator.dart';
+import 'commands/load_save_command.dart';
 
 enum Style { frosthaven, gloomhaven, original }
 
@@ -42,6 +44,8 @@ class Settings {
 
   final style = ValueNotifier<Style>(Style.original);
 
+  final saves = ValueNotifier<Map<String, String>>({});
+
   //network
   final server = ValueNotifier<bool>(false); //not saving these
   final client = ValueNotifier<ClientState>(ClientState.disconnected);
@@ -56,6 +60,31 @@ class Settings {
     setFullscreen(fullScreen.value);
 
     getIt<Network>().networkInfo.initNetworkInfo();
+  }
+
+  void loadSave(String saveName) {
+    String? save = saves.value[saveName];
+    if(save != null) {
+      getIt<GameState>().action(LoadSaveCommand(saveName, save));
+    }
+  }
+
+  void saveState(String saveName) {
+    saves.value[saveName] = getIt<GameState>().toString();
+    Map<String, String> newMap = {};
+    for (String key in saves.value.keys) {
+      newMap[key] = saves.value[key]!;
+    } saves.value = newMap;
+    saveToDisk();
+  }
+
+  void deleteSave(String saveName) {
+    saves.value.remove(saveName);
+    Map<String, String> newMap = {};
+    for (String key in saves.value.keys) {
+      newMap[key] = saves.value[key]!;
+    } saves.value = newMap;
+    saveToDisk();
   }
 
   Future<void> setFullscreen(bool fullscreen) async {
@@ -239,6 +268,13 @@ class Settings {
         showAmdDeck.value = data["showAmdDeck"];
       }
 
+      if (data["saves"] != null) {
+        Map<String, dynamic> map = data["saves"];
+        for (var key in map.keys) {
+          saves.value[key] = map[key];
+        }
+      }
+
       if (data["connectClientOnStartup"] != null &&
           data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
@@ -273,6 +309,7 @@ class Settings {
         '"autoAddStandees": ${autoAddStandees.value}, '
         '"autoAddSpawns": ${autoAddSpawns.value}, '
         '"showAmdDeck": ${showAmdDeck.value}, '
+        '"saves": ${jsonEncode(saves.value)}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort", '

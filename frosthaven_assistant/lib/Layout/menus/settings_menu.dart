@@ -2,12 +2,14 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/save_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/clear_unlocked_classes_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/track_standees_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
+import '../../Resource/ui_utils.dart';
 import '../../services/network/client.dart';
 import '../../services/network/network.dart';
 import '../../services/service_locator.dart';
@@ -460,7 +462,14 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   ),
                                   maxLength: 6,
                                 ),
-                              )
+                              ),
+                              ListTile(
+                                  title: const Text("Load/Save State"),
+                                  onTap: () {
+                                    openDialog(
+                                        context,
+                                        const SaveMenu());
+                                  }),
                               //checkbox client + host + port
                               //checkbox server - show ip, port
                             ],

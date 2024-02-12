@@ -7,12 +7,19 @@ import 'test_helpers.dart';
 
 
 void tests() {
+  String oldState = gameState.toString();
   AddCharacterCommand("Hatchet", "Arnold", 9).execute();
   RemoveCharacterCommand(List.of([gameState.currentList.last as Character])).execute();
   test("removed ok", (){
     assert(gameState.currentList.isEmpty);
+    assert(gameState.unlockedClasses.first == "Hatchet");
+
+    checkNoSideEffects(
+        ["unlockedClasses"],
+        oldState
+    );
+    checkSaveState();
   });
-  checkSaveState();
 }
 
 main() async {

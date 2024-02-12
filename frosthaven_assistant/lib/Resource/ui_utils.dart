@@ -21,6 +21,13 @@ TextStyle getSmallTextStyle(double scale) {
   );
 }
 
+TextStyle getButtonTextStyle(double scale) {
+  return TextStyle(
+    fontSize: 14 * scale,
+    color: Colors.blue
+  );
+}
+
 bool isLargeTablet(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;

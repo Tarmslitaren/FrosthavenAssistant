@@ -6,6 +6,7 @@ import 'test_helpers.dart';
 
 
 void tests() {
+  String oldState = gameState.toString();
   AddCharacterCommand command = AddCharacterCommand("Hatchet", "Arnold", 9);
   command.execute();
 
@@ -17,6 +18,12 @@ void tests() {
     Character brute = GameMethods.getCurrentCharacters().first;
     assert(brute.characterState.display.value == "Arnold");
     assert(brute.characterState.level.value == 9);
+    assert(gameState.unlockedClasses.first == "Hatchet");
+    checkNoSideEffects(
+      ["currentList", "unlockedClasses"],
+      oldState
+    );
+    checkSaveState();
   });
 
   test("description is ok", (){
@@ -26,7 +33,7 @@ void tests() {
 
   //todo: test objective/escort/2-mini
 
-  checkSaveState();
+
 }
 
 main() async {

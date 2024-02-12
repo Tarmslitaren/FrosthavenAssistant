@@ -189,5 +189,6 @@ class GameState extends ActionHandler {
     state.loadFromData(data);
     gameSaveStates.add(state);
     state.saveToDisk();
+
   }
 }
