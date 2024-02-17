@@ -7,17 +7,17 @@ class GameSaveState {
 
   String? _savedState;
 
-  void save() {
-    _savedState = getIt<GameState>().toString();
+  void save(GameState gameState) {
+    _savedState = gameState.toString();
   }
 
-  void _loadLootDeck(var data) {
+  void _loadLootDeck(var data, GameState gameState) {
     var lootDeckData = data["lootDeck"];
     LootDeck state = LootDeck.fromJson(lootDeckData);
-    getIt<GameState>()._lootDeck = state;
+    gameState._lootDeck = state;
   }
 
-  void _loadModifierDeck(String identifier, var data) {
+  void _loadModifierDeck(String identifier, var data ,GameState gameState) {
     //modifier deck
     String name = "";
     if (identifier == 'modifierDeckAllies') {
@@ -84,15 +84,14 @@ class GameSaveState {
     }
 
     if (identifier == 'modifierDeck') {
-      getIt<GameState>()._modifierDeck = state;
+      gameState._modifierDeck = state;
     } else {
-      getIt<GameState>()._modifierDeckAllies = state;
+      gameState._modifierDeckAllies = state;
     }
   }
 
-  Future<void> load() async {
+  Future<void> load(GameState gameState) async {
     if (_savedState != null) {
-      GameState gameState = getIt<GameState>();
       try {
         var data = json.decode(_savedState!) as Map<String, dynamic>;
 
@@ -190,9 +189,9 @@ class GameSaveState {
           gameState._currentAbilityDecks.add(state);
         }
 
-        _loadModifierDeck('modifierDeck', data);
-        _loadModifierDeck('modifierDeckAllies', data);
-        _loadLootDeck(data);
+        _loadModifierDeck('modifierDeck', data, gameState);
+        _loadModifierDeck('modifierDeckAllies', data, gameState);
+        _loadLootDeck(data, gameState);
 
         //this is not really a setting, but a scenario command?
         if (data["showAllyDeck"] != null) {
@@ -222,9 +221,9 @@ class GameSaveState {
     }
   }
 
-  Future<void> saveToDisk() async {
+  Future<void> saveToDisk(GameState gameState) async {
     if (_savedState == null) {
-      save();
+      save(gameState);
     }
     const sharedPrefsKey = 'gameState';
     try {
@@ -238,7 +237,7 @@ class GameSaveState {
     }
   }
 
-  Future<void> loadFromDisk() async {
+  Future<void> loadFromDisk(GameState gameState) async {
     //have to call after init or element state overridden
 
     const sharedPrefsKey = 'gameState';
@@ -254,15 +253,15 @@ class GameSaveState {
     isWaiting = false;
 
     if (_savedState != null) {
-      load();
+      load(gameState);
     } else {
-      save();
+      save(gameState);
     }
   }
 
-  Future<void> loadFromData(String data) async {
+  Future<void> loadFromData(String data, GameState gameState) async {
     //have to call after init or element state overridden
     _savedState = data;
-    load();
+    load(gameState);
   }
 }

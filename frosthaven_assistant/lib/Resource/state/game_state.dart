@@ -172,23 +172,23 @@ class GameState extends ActionHandler {
 
   Future<void> save() async {
     GameSaveState state = GameSaveState();
-    state.save();
-    state.saveToDisk();
+    state.save(this);
+    state.saveToDisk(this);
     gameSaveStates.add(state); //do this from action handler instead
   }
 
   Future<void> load() async {
     GameSaveState state = GameSaveState();
-    state.loadFromDisk();
+    state.loadFromDisk(this);
     gameSaveStates.add(
         state); //init state: means game save state is one larger than command list
   }
 
   Future<void> loadFromData(String data) async {
     GameSaveState state = GameSaveState();
-    state.loadFromData(data);
+    state.loadFromData(data, this);
     gameSaveStates.add(state);
-    state.saveToDisk();
+    state.saveToDisk(this);
 
   }
 }

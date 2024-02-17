@@ -101,6 +101,7 @@ class Client {
     //handle
     for (var message in messages) {
       if (message.endsWith("[EOM]")) {
+        _serverResponsive = true;
         message = message.substring(0, message.length - "[EOM]".length);
         if (message.startsWith("Mismatch:")) {
           message = message.substring("Mismatch:".length);
@@ -127,8 +128,6 @@ class Client {
           throw (message);
         } else if (message.startsWith("ping")) {
           _send("pong");
-        } else if (message.startsWith("pong")) {
-          _serverResponsive = true;
         }
       } else {
         _leftOverMessage = message;
