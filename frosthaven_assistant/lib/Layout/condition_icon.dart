@@ -61,16 +61,13 @@ class ConditionIconState extends State<ConditionIcon> {
   void _animateListener() {
     GameState gameState = getIt<GameState>();
     GameState oldState = GameState();
-    int fuckingOffset = 1;
-    //again this works fine locally, but not when connected.
-    // it's like the last save state is not available until next round...
-    //if index-1 is used we get results .. for state before last state. but no results at all for index - 0
-    if(gameState.gameSaveStates.length <= fuckingOffset ||
-        gameState.gameSaveStates[gameState.gameSaveStates.length-fuckingOffset] == null) {
+    int offset = 1;
+    if(gameState.gameSaveStates.length <= offset ||
+        gameState.gameSaveStates[gameState.gameSaveStates.length-offset] == null) {
       return;
     }
 
-    String oldSave = gameState.gameSaveStates[gameState.gameSaveStates.length-fuckingOffset]!.getState();
+    String oldSave = gameState.gameSaveStates[gameState.gameSaveStates.length-offset]!.getState();
     oldState.loadFromData(oldSave);
     GameState currentState = gameState;
     bool turnChanged = false;

@@ -880,7 +880,7 @@ class GameMethods {
     }
 
     //make sure summons can not have same gfx and nr:
-    if (instance.standeeNr != 0) {
+    if (instance.standeeNr != 0 && summon != null) {
       bool ok = false;
       while (!ok) {
         ok = true;
@@ -891,7 +891,7 @@ class GameMethods {
               instance = MonsterInstance.summon(
                   instance.standeeNr + 1,
                   type,
-                  summon!.name,
+                  summon.name,
                   summon.health,
                   summon.move,
                   summon.attack,

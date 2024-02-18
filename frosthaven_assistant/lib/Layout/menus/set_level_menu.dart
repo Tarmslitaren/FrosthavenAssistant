@@ -105,12 +105,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     var textStyleLevelWidget = TextStyle(
         color: Colors.white,
         overflow: TextOverflow.fade,
-        //fontWeight: FontWeight.bold,
-        //backgroundColor: Colors.transparent.withAlpha(100),
         fontSize: 18 * scale,
         shadows: [
           shadow
-          //Shadow(offset: Offset(1, 1),blurRadius: 2, color: Colors.black)
         ]);
     double height = 20 * scale;
     if (gfx.contains("level")) {
@@ -130,7 +127,6 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   color: Colors.black.withOpacity(0.3),
                   spreadRadius: 1,
                   blurRadius: 3.0,
-                  //offset: Offset(1* settings.userScalingBars.value, 1* settings.userScalingBars.value), // changes position of shadow
                 ),
               ],
             ),
@@ -145,7 +141,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
   Widget build(BuildContext context) {
     String title = "Set Scenario Level";
     if (widget.monster != null) {
-      title = "Set ${widget.monster!.type.display}'s level";
+      title = "Set ${widget.monster!.type.display}'s level"; //todo: ies if ends in y
     }
     //if summon:
     bool isSummon = widget.monster == null && widget.figure is MonsterInstance;
@@ -189,13 +185,6 @@ class SetLevelMenuState extends State<SetLevelMenu> {
         width: 230 * scale,
         height: showLegend ? 300 * scale : 187 * scale,
         decoration: BoxDecoration(
-          //color: Colors.black,
-          //borderRadius: BorderRadius.all(Radius.circular(8)),
-
-          /*border: Border.fromBorderSide(BorderSide(
-            color: Colors.blueGrey,
-            width: 10
-          )),*/
           image: DecorationImage(
             colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(
@@ -204,7 +193,6 @@ class SetLevelMenuState extends State<SetLevelMenu> {
           ),
         ),
         child: Stack(
-            //alignment: Alignment.center,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

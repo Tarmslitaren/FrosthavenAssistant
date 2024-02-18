@@ -228,7 +228,7 @@ class Server {
 
         // handle errors
         onError: (error) {
-          log(error);
+          log(error.toString());
           getIt<Network>().networkMessage.value = error.toString();
           /*stopServer(error.toString());
           for (int i = 0; i < _clients.length; i++) {

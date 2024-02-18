@@ -253,7 +253,10 @@ class StatusMenuState extends State<StatusMenu> {
           Color color = Colors.transparent;
           FigureState? figure = GameMethods.getFigure(ownerId, figureId);
           if (figure == null) {
-            return Container();
+            return const SizedBox(
+              width: 0,
+              height: 0,
+            );
           }
           ListItemData? owner;
           for (var item in _gameState.currentList) {
@@ -388,7 +391,13 @@ class StatusMenuState extends State<StatusMenu> {
     String figureId = widget.figureId;
     FigureState? figure = GameMethods.getFigure(ownerId, figureId);
     if (figure == null) {
-      return Container();
+      //close menu here, since nothing will be valid
+      Navigator.pop(context);
+
+      return const SizedBox(
+        height: 0,
+        width: 0,
+      );
     }
 
     List<String> immunities = [];

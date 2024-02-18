@@ -22,7 +22,7 @@ Future<void> setUpGame() async {
 void checkSaveState() async {
   String state = gameState.toString();
   int nrStates = gameState.gameSaveStates.length;
-  await gameState.save();
+  gameState.save();
   await gameState.load();
   String newState = gameState.toString();
   assert(gameState.gameSaveStates.length == nrStates + 2); //for some reason a null state is added on load.
