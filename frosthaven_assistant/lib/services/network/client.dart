@@ -118,16 +118,21 @@ class Client {
           debugPrint(
               'Client Receive Data, index: $indexString, description:$description');
 
+          //the order here is important, when animation checks are comparing to old state: update ui needs to be after load
+          //and save needs to be last
+          _gameState.loadFromData(data);
           int newIndex = int.parse(indexString);
           //overwrite states if needed
           _gameState.commandIndex.value = newIndex;
-
-          _gameState.loadFromData(data);
           _gameState.updateAllUI();
+          _gameState.save();
+
         } else if (message.startsWith("Error")) {
           throw (message);
         } else if (message.startsWith("ping")) {
           _send("pong");
+        } else if (message.startsWith("pong")) {
+          _serverResponsive = true;
         }
       } else {
         _leftOverMessage = message;

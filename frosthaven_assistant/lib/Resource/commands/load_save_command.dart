@@ -9,6 +9,7 @@ class LoadSaveCommand extends Command {
   @override
   void execute() {
     getIt<GameState>().loadFromData(saveData);
+    getIt<GameState>().save();
     getIt<GameState>().updateForUndo.value++;
   }
 

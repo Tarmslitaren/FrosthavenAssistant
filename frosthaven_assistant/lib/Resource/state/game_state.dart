@@ -170,9 +170,8 @@ class GameState extends ActionHandler {
         '}';
   }
 
-  Future<void> save() async {
+  void save() {
     GameSaveState state = GameSaveState();
-    state.save(this);
     state.saveToDisk(this);
     gameSaveStates.add(state); //do this from action handler instead
   }
@@ -184,11 +183,8 @@ class GameState extends ActionHandler {
         state); //init state: means game save state is one larger than command list
   }
 
-  Future<void> loadFromData(String data) async {
+  loadFromData(String data) {
     GameSaveState state = GameSaveState();
     state.loadFromData(data, this);
-    gameSaveStates.add(state);
-    state.saveToDisk(this);
-
   }
 }

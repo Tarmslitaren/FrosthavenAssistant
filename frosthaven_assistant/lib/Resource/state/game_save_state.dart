@@ -90,7 +90,7 @@ class GameSaveState {
     }
   }
 
-  Future<void> load(GameState gameState) async {
+  void load(GameState gameState) {
     if (_savedState != null) {
       try {
         var data = json.decode(_savedState!) as Map<String, dynamic>;
@@ -259,7 +259,7 @@ class GameSaveState {
     }
   }
 
-  Future<void> loadFromData(String data, GameState gameState) async {
+  void loadFromData(String data, GameState gameState) {
     //have to call after init or element state overridden
     _savedState = data;
     load(gameState);

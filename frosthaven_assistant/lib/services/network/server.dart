@@ -162,6 +162,7 @@ class Server {
                         .insert(_gameState.commandIndex.value, description);
                   }
                   _gameState.loadFromData(data);
+                  _gameState.save();
                   _gameState.updateAllUI();
                   sendToOthers(
                       "Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last!.getState()}",
