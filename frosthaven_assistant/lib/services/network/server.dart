@@ -1,17 +1,17 @@
+import 'dart:async';
+import 'dart:convert' show utf8;
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
-import '../service_locator.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
+import '../service_locator.dart';
 import 'communication.dart';
 import 'connection.dart';
 import 'network.dart';
-import 'dart:convert' show utf8;
 
 class Server {
   final int serverVersion = 184;

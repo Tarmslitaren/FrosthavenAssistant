@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
+
 import '../services/network/communication.dart';
 import '../services/network/network.dart';
 import '../services/service_locator.dart';

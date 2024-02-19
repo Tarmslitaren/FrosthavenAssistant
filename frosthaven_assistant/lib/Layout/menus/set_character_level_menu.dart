@@ -4,8 +4,8 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/change_stat_commands/change_max_health_command.dart';
 import '../../Resource/commands/set_character_level_command.dart';
-import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
+import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 import '../counter_button.dart';
 

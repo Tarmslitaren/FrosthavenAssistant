@@ -1,7 +1,7 @@
 
 import '../../services/service_locator.dart';
-import '../state/game_state.dart';
 import '../settings.dart';
+import '../state/game_state.dart';
 
 class TrackStandeesCommand extends Command {
   final GameState _gameState = getIt<GameState>();

@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Resource/commands/clear_unlocked_classes_co
 import 'package:frosthaven_assistant/Resource/commands/track_standees_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:network_info_plus/network_info_plus.dart';
+
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';

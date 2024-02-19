@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/commands/activate_monster_type_command.dart';
-import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/commands/add_standee_command.dart';
 import '../Resource/enums.dart';
+import '../Resource/line_builder/line_builder.dart';
 import '../Resource/stat_calculator.dart';
 import '../Resource/ui_utils.dart';
-import '../Resource/line_builder/line_builder.dart';
 import 'menus/stat_card_zoom.dart';
 
 class MonsterStatCardWidget extends StatelessWidget {

@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
+
 import '../services/network/client.dart';
 import '../services/network/network.dart';
 import '../services/service_locator.dart';

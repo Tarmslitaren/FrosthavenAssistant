@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+
 import '../Resource/commands/set_scenario_command.dart';
 import '../Resource/settings.dart';
 import '../services/service_locator.dart';

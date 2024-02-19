@@ -1,15 +1,17 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Resource/card_stack.dart';
-import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+
 import '../Resource/enums.dart';
-import '../Resource/ui_utils.dart';
 import '../Resource/line_builder/line_builder.dart';
+import '../Resource/ui_utils.dart';
 import 'menus/ability_card_zoom.dart';
 
 class MonsterAbilityCardWidget extends StatefulWidget {

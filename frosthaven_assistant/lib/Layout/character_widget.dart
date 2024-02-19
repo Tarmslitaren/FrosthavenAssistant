@@ -6,11 +6,12 @@ import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_init_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
+
 import '../Resource/color_matrices.dart';
 import '../Resource/commands/next_turn_command.dart';
 import '../Resource/enums.dart';
-import '../Resource/state/game_state.dart';
 import '../Resource/settings.dart';
+import '../Resource/state/game_state.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'condition_icon.dart';

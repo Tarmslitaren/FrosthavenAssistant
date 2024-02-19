@@ -1,13 +1,12 @@
+import 'dart:async';
+import 'dart:developer' as developer;
 import 'dart:io';
 
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dart_ipify/dart_ipify.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:network_info_plus/network_info_plus.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'dart:developer' as developer;
-
-import 'dart:async';
 
 import '../service_locator.dart';
 import 'network.dart';

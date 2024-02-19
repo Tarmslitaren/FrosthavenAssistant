@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dar
 import 'package:frosthaven_assistant/Layout/menus/set_loot_owner_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add__special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/return_loot_card_command.dart';
+
 import '../../Resource/commands/remove__special_loot_card_command.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';

@@ -10,6 +10,7 @@ import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:override_text_scale_factor/override_text_scale_factor.dart';
 import 'package:window_manager/window_manager.dart';
+
 import 'Layout/main_scaffold.dart';
 import 'Model/campaign.dart';
 import 'Resource/state/game_state.dart';

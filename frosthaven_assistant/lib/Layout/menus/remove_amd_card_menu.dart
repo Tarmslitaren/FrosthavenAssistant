@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../Resource/commands/remove_amd_card_command.dart';
-import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
+import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class RemoveAMDCardMenu extends StatefulWidget {

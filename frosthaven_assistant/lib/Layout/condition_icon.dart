@@ -1,9 +1,10 @@
 import 'package:animated_widgets/widgets/rotation_animated.dart';
 import 'package:animated_widgets/widgets/shake_animated_widget.dart';
 import 'package:flutter/material.dart';
+
 import '../Resource/enums.dart';
-import '../Resource/state/game_state.dart';
 import '../Resource/settings.dart';
+import '../Resource/state/game_state.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 

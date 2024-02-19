@@ -5,8 +5,8 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_data.dart';
-import '../../Resource/state/game_state.dart';
 import '../../Resource/settings.dart';
+import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddSectionMenu extends StatefulWidget {
