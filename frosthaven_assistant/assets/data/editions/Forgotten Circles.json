@@ -2257,13 +2257,13 @@
         },
         {
           "type": "Timer",
-          "list": [1,2,3,4,5,6,7,8,9,10],
+          "list": [1,2,3,4,5,6,7,8,9,10,12,13,14,15],
           "startOfRound": true,
           "note": "Remove one damage token from each Altar. Manifestation of Corruption heals C/2 hit points (rounded down) for each token removed."
         },
         {
           "type": "Timer",
-          "list": [11,12,13,14],
+          "list": [11],
           "startOfRound": true,
           "note": "Remove two damage tokens from each Altar. Manifestation of Corruption heals C/2 hit points (rounded down) for each token removed."
         }
