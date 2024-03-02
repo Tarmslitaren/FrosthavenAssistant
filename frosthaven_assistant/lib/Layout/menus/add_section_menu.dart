@@ -27,17 +27,13 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   @override
   initState() {
     // at the beginning, all items are shown
-    setCampaign(_gameState.currentCampaign.value);
-    super.initState();
-  }
-
-  void setCampaign(String campaign) {
-    //TODO:clear search
-    _gameState.action(SetCampaignCommand(campaign));
-    _foundScenarios = _gameData.modelData.value[_gameState.currentCampaign.value]!
-        .scenarios[_gameState.scenario.value]!.sections
+    var scenarios =  _gameData.modelData.value[_gameState.currentCampaign.value]
+        ?.scenarios[_gameState.scenario.value]?.sections
         .map((e) => e.name)
         .toList();
+    if(scenarios != null) {
+      _foundScenarios = scenarios;
+    }
     _foundScenarios = _foundScenarios.where((element) => !element.contains("spawn")).toList();
     _foundScenarios.sort((a, b) {
       int? aNr = GameMethods.findNrFromScenarioName(a);
@@ -47,6 +43,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
       }
       return a.compareTo(b);
     });
+
+    super.initState();
   }
 
   // This function is called whenever the text field changes
@@ -135,11 +133,15 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                               itemCount: _foundScenarios.length,
                               itemBuilder: (context, index) => ListTile(
                                 title: Text(_foundScenarios[index],
-                                    style: const TextStyle(fontSize: 18)),
+                                    style: TextStyle(
+                                      color: _gameState.scenarioSectionsAdded.contains(_foundScenarios[index]) ? Colors.blueGrey : Colors.black,
+                                        fontSize: 18
+                                    )),
                                 onTap: () {
-                                  _gameState
-                                      .action(SetScenarioCommand(_foundScenarios[index], true));
-                                  Navigator.pop(context);
+                                  if(!_gameState.scenarioSectionsAdded.contains(_foundScenarios[index])) {
+                                    Navigator.pop(context);
+                                    _gameState.action(SetScenarioCommand(_foundScenarios[index], true));
+                                  }
                                 },
                               ),
                             ))
