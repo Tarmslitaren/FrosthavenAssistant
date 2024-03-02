@@ -265,7 +265,11 @@ class MonsterBox extends StatelessWidget {
       characterId = ownerId; //this is probably wrong
     }
 
-    return GestureDetector(
+    return Material(
+    color: Colors.amberAccent,
+        child:InkWell(
+          splashColor: Colors.brown,
+          focusColor: Colors.amber,
         onTap: () {
           //open stats menu
           if (!blockInput) {
@@ -316,6 +320,6 @@ class MonsterBox extends StatelessWidget {
                         child: OpacityAnimatedWidget.tween(
                             enabled: alive, opacityDisabled: 0, opacityEnabled: 1, child: child));
                   })),
-        ));
+        )));
   }
 }

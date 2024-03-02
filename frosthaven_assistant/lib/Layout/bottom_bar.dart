@@ -51,7 +51,9 @@ Widget createLevelWidget(BuildContext context) {
             color: Colors.white),
       ]);
 
-  return InkWell(
+  return Material(
+    color: Colors.transparent,
+      child :InkWell(
     onTap: () {
       //open stats menu
       openDialog(
@@ -210,7 +212,7 @@ Widget createLevelWidget(BuildContext context) {
             }),
       ],
     ),
-  );
+  ));
 }
 
 Widget createBottomBar(BuildContext context) {
