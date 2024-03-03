@@ -4197,6 +4197,12 @@
   },
 
   "scenarios": {
+      "#Random Dungeon": {
+        "special": [
+          {
+            "type": "RandomSections"
+          }]
+      },
       "#1 Black Barrow": {
         "monsters": [ "Bandit Guard", "Bandit Archer", "Living Bones" ]
       },
@@ -4732,7 +4738,11 @@
         "monsters": [ "Cave Bear (54)", "Living Spirit", "Frost Demon", "Harrower Infester" ]
       },
       "#55 Foggy Thicket": {
-        "monsters": []
+        "monsters": [],
+        "special": [
+          {
+            "type": "RandomSections"
+          }]
       },
       "#56 Bandit's Wood": {
         "monsters": [ "Hound", "Bandit Archer", "Rending Drake", "Bandit Guard" ],

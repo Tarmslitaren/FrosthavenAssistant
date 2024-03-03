@@ -121,7 +121,10 @@ Drawer createMainMenu(BuildContext context) {
                 },
               ),
               ListTile(
-                title: const Text('Add Section'),
+                title: Text(
+                  getIt<GameState>().scenario.value == "#Random Dungeon"
+                      ? 'Add Random Dungeon Card'
+                      : 'Add Section'),
                 enabled: true,
                 onTap: () {
                   Navigator.pop(context);

@@ -6240,6 +6240,12 @@
   },
 
   "scenarios": {
+    "#Random Dungeon": {
+      "special": [
+        {
+          "type": "RandomSections"
+        }]
+    },
     "#0 Howling in the Snow": {
       "monsters": [ "Hound Scenario 0" ],
       "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 2}

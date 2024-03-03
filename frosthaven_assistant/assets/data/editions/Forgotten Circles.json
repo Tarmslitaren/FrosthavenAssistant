@@ -1662,6 +1662,12 @@
   },
 
   "scenarios": {
+    "#Random Dungeon": {
+      "special": [
+        {
+          "type": "RandomSections"
+        }]
+    },
     "#96 Unexpected Visitors": {
       "monsters": [ "Earth Demon", "Flame Demon", "Frost Demon", "Wind Demon" ],
       "special": [
@@ -1959,6 +1965,9 @@
     "#103 Where It Is Needed": {
       "monsters": [],
       "special": [
+        {
+          "type": "RandomSections"
+        },
         {
           "type": "Escort",
           "name": "Caravan",

@@ -8,7 +8,7 @@ Future<int> calculate() async {
   bool ttsData = false;
   //await File('Gloomhaven.json').writeAsString("");
   String res = "{\n";
-  for (int scenarioNumber = 0; scenarioNumber <= 19; scenarioNumber++) {
+  for (int scenarioNumber = 1; scenarioNumber <= 24; scenarioNumber++) {
     File file = File('./assets/data/$scenarioNumber.json');
     Future<String> futureContent = file.readAsString();
     futureContent.then((c) async {
@@ -23,6 +23,9 @@ Future<int> calculate() async {
         final rooms = data['rooms'] as List;
         for (var room in rooms) {
           String roomName = "unknown";
+          if(data.containsKey("name") && data.containsKey("index")) {
+            roomName = data['index'] + " " + data['name'];
+          }
           if (room.containsKey('ref')) {
             roomName = room['ref'];
           }
@@ -146,7 +149,7 @@ Future<int> calculate() async {
       scenarioJson = scenarioJson.substring(2, scenarioJson.length - 2);
       res += "$scenarioJson,\n";
     }).then((value) async {
-      await File('Frosthaven.json').writeAsString(res, mode: FileMode.append);
+      await File('random.json').writeAsString(res, mode: FileMode.append);
     });
   }
 

@@ -27,11 +27,11 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   @override
   initState() {
     // at the beginning, all items are shown
-    var scenarios =  _gameData.modelData.value[_gameState.currentCampaign.value]
+    var scenarios = _gameData.modelData.value[_gameState.currentCampaign.value]
         ?.scenarios[_gameState.scenario.value]?.sections
         .map((e) => e.name)
         .toList();
-    if(scenarios != null) {
+    if (scenarios != null) {
       _foundScenarios = scenarios;
     }
     _foundScenarios = _foundScenarios.where((element) => !element.contains("spawn")).toList();
@@ -87,8 +87,6 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     return Container(
         constraints: const BoxConstraints(maxWidth: 400),
         child: Card(
-            //color: Colors.transparent,
-            // shadowColor: Colors.transparent,
             margin: const EdgeInsets.all(2),
             child: Stack(children: [
               Column(
@@ -117,8 +115,11 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                                   }));
                         }
                       },
-                      decoration: const InputDecoration(
-                          labelText: 'Add Section', suffixIcon: Icon(Icons.search)),
+                      decoration: InputDecoration(
+                          labelText: _gameState.scenario.value == "#Random Dungeon"
+                              ? 'Add Random Dungeon Card'
+                              : 'Add Section',
+                          suffixIcon: const Icon(Icons.search)),
                     ),
                   ),
                   const SizedBox(
@@ -134,13 +135,17 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                               itemBuilder: (context, index) => ListTile(
                                 title: Text(_foundScenarios[index],
                                     style: TextStyle(
-                                      color: _gameState.scenarioSectionsAdded.contains(_foundScenarios[index]) ? Colors.blueGrey : Colors.black,
-                                        fontSize: 18
-                                    )),
+                                        color: _gameState.scenarioSectionsAdded
+                                                .contains(_foundScenarios[index])
+                                            ? Colors.blueGrey
+                                            : Colors.black,
+                                        fontSize: 18)),
                                 onTap: () {
-                                  if(!_gameState.scenarioSectionsAdded.contains(_foundScenarios[index])) {
+                                  if (!_gameState.scenarioSectionsAdded
+                                      .contains(_foundScenarios[index])) {
                                     Navigator.pop(context);
-                                    _gameState.action(SetScenarioCommand(_foundScenarios[index], true));
+                                    _gameState
+                                        .action(SetScenarioCommand(_foundScenarios[index], true));
                                   }
                                 },
                               ),

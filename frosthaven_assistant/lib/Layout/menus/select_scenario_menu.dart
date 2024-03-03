@@ -48,7 +48,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   }
 
   void setCampaign(String campaign) {
-    //TODO:clear search
+    //TODO: clear search
 
     //check value ok
     if (_gameData.modelData.value[campaign] == null) {
@@ -104,6 +104,12 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       }
       return a.compareTo(b);
     });
+
+    //sort random dungeon first for visibility of special feature
+    if(_foundScenarios.last == "#Random Dungeon") {
+      _foundScenarios.insert(0, _foundScenarios.last);
+      _foundScenarios.removeAt(_foundScenarios.length-1);
+    }
 
     if (campaign != "Solo") {
       _foundScenarios.insert(0, "custom");

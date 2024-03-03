@@ -104,7 +104,7 @@ class GameState extends ActionHandler {
   BuiltList<SpecialRule> get scenarioSpecialRules =>
       BuiltList.of(_scenarioSpecialRules);
   List<SpecialRule> _scenarioSpecialRules =
-      []; //has both monsters and characters
+      [];
 
   LootDeck get lootDeck => _lootDeck; //todo: still mutable
   late LootDeck _lootDeck = LootDeck.empty(); //loot deck for current scenario
