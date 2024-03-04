@@ -9,19 +9,21 @@ class ChangeMaxHealthCommand extends ChangeStatCommand {
   void execute() {
     FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
 
-    figure.setMaxHealth(stateAccess, figure.maxHealth.value + change);
+    int newValue = figure.maxHealth.value + change;
+    if(newValue <= 0 ) {
+      //can't lower maxvalue less than 1
+      return;
+    }
 
-    //lower healh if max health lowers
+    figure.setMaxHealth(stateAccess, newValue);
+
+    //lower health if max health lowers
     if (figure.maxHealth.value < figure.health.value) {
       figure.setHealth(stateAccess, figure.maxHealth.value);
     }
     //if health same as max health, then let health follow?
     if (figure.maxHealth.value - change == figure.health.value) {
       figure.setHealth(stateAccess, figure.maxHealth.value);
-    }
-
-    if (figure.maxHealth.value <= 0) {
-      handleDeath();
     }
   }
 

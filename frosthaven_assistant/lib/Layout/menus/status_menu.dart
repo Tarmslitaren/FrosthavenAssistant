@@ -472,6 +472,11 @@ class StatusMenuState extends State<StatusMenu> {
                   ValueListenableBuilder<int>(
                       valueListenable: getIt<GameState>().updateList,
                       builder: (context, value, child) {
+                        //handle case when health is changed to zero: don't instantiate monster box
+                        if(GameMethods.getFigure(ownerId, figureId) == null) {
+                          //todo: should somehow pop context in case dead by health wheel
+                          return Container();
+                        }
                         return Container(
                             height: 28 * scale,
                             margin: EdgeInsets.only(top: 2 * scale),
