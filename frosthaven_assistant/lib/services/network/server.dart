@@ -14,7 +14,7 @@ import 'connection.dart';
 import 'network.dart';
 
 class Server {
-  final int serverVersion = 184;
+  final int serverVersion = 190;
 
   final GameState _gameState = getIt<GameState>();
   final _communication = getIt<Communication>();
