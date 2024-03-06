@@ -125,8 +125,19 @@ class GameSaveState {
           gameState._totalRounds.value = gameState._round.value;
         }
         gameState._roundState.value = RoundState.values[data['roundState']];
-        gameState._solo.value = data['solo']
-            as bool;
+        gameState._solo.value = data['solo'] as bool;
+
+        if (data.containsKey('autoScenarioLevel')) {
+          gameState._autoScenarioLevel.value = data['autoScenarioLevel'] as bool;
+        } else {
+          gameState._autoScenarioLevel.value = true;
+        }
+
+        if (data.containsKey('difficulty')) {
+          gameState._difficulty.value = data['difficulty'] as int;
+        } else {
+          gameState._difficulty.value = 1;
+        }
 
         //main list
         var list = data['currentList'] as List;

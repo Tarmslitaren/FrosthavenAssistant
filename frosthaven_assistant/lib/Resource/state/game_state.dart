@@ -2,6 +2,7 @@ library game_state;
 
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:built_collection/built_collection.dart';
@@ -91,9 +92,19 @@ class GameState extends ActionHandler {
   ValueListenable<int> get level => _level;
   final _level = ValueNotifier<int>(1);
   setLevel(_StateModifier stateModifier, int value) {_level.value = value;}
+
   ValueListenable<bool> get solo => _solo;
   final _solo = ValueNotifier<bool>(false);
   setSolo(_StateModifier stateModifier, bool value) {_solo.value = value;}
+
+  ValueListenable<bool> get autoScenarioLevel => _autoScenarioLevel;
+  final _autoScenarioLevel = ValueNotifier<bool>(false);
+  setAutoScenarioLevel(_StateModifier stateModifier, bool value) {_autoScenarioLevel.value = value;}
+
+  ValueListenable<int> get difficulty => _difficulty;
+  final _difficulty = ValueNotifier<int>(1);
+  setDifficulty(_StateModifier stateModifier, int value) {_difficulty.value = value;}
+
   ValueListenable<String> get scenario => _scenario;
   final _scenario = ValueNotifier<String>("");
   setScenario(_StateModifier stateModifier, String value) {_scenario.value = value;}
@@ -148,6 +159,8 @@ class GameState extends ActionHandler {
     return '{'
         '"level": ${_level.value}, '
         '"solo": ${_solo.value}, '
+        '"autoScenarioLevel": ${_autoScenarioLevel.value}, '
+        '"difficulty": ${_difficulty.value}, '
         '"roundState": ${_roundState.value.index}, '
         '"round": ${_round.value}, '
         '"totalRounds": ${_totalRounds.value}, '

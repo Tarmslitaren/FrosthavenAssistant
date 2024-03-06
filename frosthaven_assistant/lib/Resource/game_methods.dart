@@ -364,8 +364,59 @@ class GameMethods {
     _gameState._roundState.value = state;
   }
 
-  static void setLevel(_StateModifier _, int level) {
-    _gameState._level.value = level;
+  static void setLevel(_StateModifier _, int level, String? monsterId) {
+    if (monsterId == null) {
+      _gameState._level.value = level;
+      for (var item in _gameState.currentList) {
+        if (item is Monster) {
+          item.setLevel(_, level);
+        }
+      }
+      GameMethods.updateForSpecialRules(_);
+    } else {
+      Monster? monster;
+      for (var item in _gameState.currentList) {
+        if (item.id == monsterId) {
+          monster = item as Monster;
+        }
+      }
+      monster!.setLevel(_, level);
+    }
+  }
+
+  static void applyDifficulty(_StateModifier _) {
+    if(_gameState.autoScenarioLevel.value == true) {//adjust difficulty
+      int newLevel = GameMethods.getRecommendedLevel() + _gameState.difficulty.value;
+      if(newLevel > 7) {
+        newLevel = 7;
+      }
+      GameMethods.setLevel(_, newLevel, null);
+    }
+  }
+
+  static void setCharacterLevel(_StateModifier _, int level, String characterId) {
+    Character? character;
+    for (var item in _gameState.currentList) {
+      if (item.id == characterId) {
+        character = item as Character;
+        break;
+      }
+    }
+    character!.characterState.setFigureLevel(_, level);
+    character.characterState.setHealth(_,
+        character.characterClass.healthByLevel[level - 1]);
+    character.characterState.setMaxHealth(_, character.characterState.health.value);
+
+    if (character.id == "Beast Tyrant") {
+      if (character.characterState.summonList.isNotEmpty) {
+        //create the bear summon
+        final int bearHp = 8 + character.characterState.level.value * 2;
+        character.characterState.summonList[0].setMaxHealth(_, bearHp);
+        character.characterState.summonList[0].setHealth(_, bearHp);
+      }
+    }
+
+    GameMethods.applyDifficulty(_);
   }
 
   static void setScenario(_StateModifier _, String scenario, bool section) {

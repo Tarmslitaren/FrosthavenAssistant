@@ -8,6 +8,7 @@ class SetSoloCommand extends Command {
   @override
   void execute() {
     GameMethods.setSolo(stateAccess, solo);
+    GameMethods.applyDifficulty(stateAccess);
   }
 
   @override
