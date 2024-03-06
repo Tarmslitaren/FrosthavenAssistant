@@ -1300,7 +1300,6 @@ class GameMethods {
       newIndex = index;
     }
 
-    //can get mutable item from builtList?! or is this non functioning?
     for (; newIndex < _gameState.currentList.length; newIndex++) {
       ListItemData data = _gameState.currentList[newIndex];
       if (data is Monster) {

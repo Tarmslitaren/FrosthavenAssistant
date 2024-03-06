@@ -139,12 +139,15 @@ class ConditionIconState extends State<ConditionIcon> {
       }
       if (widget.owner.turnState == TurnsState.done &&
           currentState.currentList[turnIndex].id == widget.owner.id) {
+
+        if(widget.condition == Condition.bane && !widget.figure.conditionsAddedThisTurn.contains(widget.condition)) {
+          _runAnimation();
+        }
+
         //was current last round but is no more
         if (widget.figure.conditionsAddedPreviousTurn
             .contains(widget.condition)) {
-          if (widget.condition == Condition.bane) {
-            _runAnimation();
-          }
+
           //only run these if not automatically taken off. TODO: maybe run animations before removing is good?
           if (getIt<Settings>().expireConditions.value == false) {
             if (widget.condition == Condition.chill ||
