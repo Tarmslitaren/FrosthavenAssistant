@@ -38,8 +38,11 @@ class MainState extends State<MyHomePage> with WindowListener, WidgetsBindingObs
         rebuildAllChildren(
             context); //might be a bit performance heavy, but ensures app state visually up to date with server.
         if (getIt<Network>().clientDisconnectedWhileInBackground == true ||
-            (getIt<Settings>().connectClientOnStartup == true &&
-                getIt<Settings>().client.value == ClientState.disconnected)) {
+            (getIt<Settings>().connectClientOnStartup == true
+                //todo: reevaluate if this is a good idea: might be good to do an actual check, since this boo might be wrong
+               // && getIt<Settings>().client.value == ClientState.disconnected
+            )
+        ) {
           log("client was disconnected in background so try reconnect");
           getIt<Network>().clientDisconnectedWhileInBackground = false;
           getIt<Client>().connect(
