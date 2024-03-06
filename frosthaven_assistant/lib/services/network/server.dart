@@ -92,9 +92,11 @@ class Server {
       } else {
         getIt<Network>().networkMessage.value = 'Server Offline';
       }
-      _serverSocket!.close().catchError((error) =>
-        log(error.toString())
-      );
+
+      _serverSocket!.close().catchError((error) {
+        log(error.toString());
+        return error;
+      });
 
       _connection.removeAll();
     }

@@ -195,7 +195,7 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ffeb5b38",
-      "colorSecondary": "ff303030",
+      "colorSecondary": "ff2b0405",
       "summons": {}
     },
     {
@@ -233,7 +233,7 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ff7476a7",
-      "colorSecondary": "ff2b2b2b",
+      "colorSecondary": "ff1c1124",
       "summons": {
         "Flesh Fiend": {
           "level": 1,
@@ -257,7 +257,7 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
       "color": "ff83b5be",
-      "colorSecondary": "ff4b4b4d",
+      "colorSecondary": "ff83b5be",
       "summons": {
         "Snow Fox": {
           "level": 1,
@@ -425,7 +425,7 @@
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
       "color": "ffad8f68",
-      "colorSecondary": "ff363637",
+      "colorSecondary": "ff190e02",
       "summons": {}
     }
   ],

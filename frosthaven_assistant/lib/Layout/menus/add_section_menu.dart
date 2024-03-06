@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
-import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/set_scenario_command.dart';
