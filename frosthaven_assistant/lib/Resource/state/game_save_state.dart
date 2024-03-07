@@ -136,7 +136,7 @@ class GameSaveState {
         if (data.containsKey('difficulty')) {
           gameState._difficulty.value = data['difficulty'] as int;
         } else {
-          gameState._difficulty.value = 1;
+          gameState._difficulty.value = 0;
         }
 
         //main list
