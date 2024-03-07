@@ -6241,6 +6241,7 @@
 
   "scenarios": {
     "#Random Dungeon": {
+      "lootDeck": {"coin":12,"lumber": 2,"metal":2,"hide": 2,"snowthistle":1,"arrowvine":1,"axenut": 1,"flamefruit": 1,"corpsecap": 1, "rockroot": 1 },
       "special": [
         {
           "type": "RandomSections"
@@ -6248,7 +6249,8 @@
     },
     "#0 Howling in the Snow": {
       "monsters": [ "Hound Scenario 0" ],
-      "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 2}
+      "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 2},
+      "initialMessage": "Masteries cannot be completed in this scenario."
     },
     "#1 A Town in Flames": {
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest", "City Guard Scenario 1" ],
@@ -6589,7 +6591,7 @@
         ],
       "sections": {
         "#25.3 Haunted Vault (17)": {
-          "initialMessage": "1st printing ERRATA: When Door 1 is opened, read section 62.3"
+          "initialMessage": "1st printing ERRATA: When Door 1 (not door 3) is opened, read section 62.3"
         }
       }
     },
@@ -7129,7 +7131,7 @@
     "#36 Buried Ducts": {
       "monsters": [ "Flaming Bladespinner", "Robotic Boltshooter", "Ruined Machine" ],
       "lootDeck": {"coin":9,"lumber": 3,"metal":5,"arrowvine":2, "treasure": 1},
-      "initialMessage": "1st printing ERRATA: Missing reward for completing: item 67",
+      "initialMessage": "1st printing ERRATA: Missing reward for completing: item 67 blueprint.",
       "special": [
         {
           "type": "Objective",
@@ -7238,7 +7240,7 @@
     "#37 The Dead Mile": {
       "monsters": [ "Living Bones (FH)", "Living Spirit (FH)" ,"Ruined Machine" ],
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"rockroot":1,"arrowvine":2, "treasure": 1},
-      "initialMessage": "1st printing ERRATA: Missing reward for completing: item 67",
+      "initialMessage": "1st printing ERRATA: Missing reward for completing: item 67 blueprint.",
       "sections": {
         "#70.1 The Dead Mile (37)": {
           "initialMessage": "1st printing ERRATA: Treasure Chest should be #56",
@@ -9120,7 +9122,12 @@
     },
     "#107 My Private Empire": {
       "monsters": [ "Flaming Bladespinner", "Living Bones (FH)", "Living Doom", "Living Spirit (FH)", "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
-      "lootDeck": {"coin":10,"lumber": 3,"metal":3,"flamefruit":1,"axenut":1,"arrowvine":1, "treasure": 1}
+      "lootDeck": {"coin":10,"lumber": 3,"metal":3,"flamefruit":1,"axenut":1,"arrowvine":1, "treasure": 1},
+      "sections": {
+        "#168.4 Furious Factory (109)": {
+          "initialMessage": "Treat the new monsters as spawns."
+        }
+      }
     },
     "#108 Lustrous Pit": {
       "monsters": [ "Ice Wraith", "Snow Imp" ],
