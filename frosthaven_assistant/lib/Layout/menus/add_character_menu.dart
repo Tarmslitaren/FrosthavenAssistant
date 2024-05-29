@@ -183,63 +183,61 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
             ])));
   }
 
-  Widget? characterTile(BuildContext context, int index) => ListTile(
-        leading: Image(
-          height: 40,
-          width: 40,
-          fit: BoxFit.contain,
-          color: _foundCharacters[index].hidden &&
-                      !_gameState.unlockedClasses
-                          .contains(_foundCharacters[index].name) ||
-                  _foundCharacters[index].name == "Escort" ||
-                  _foundCharacters[index].name == "Objective"
-              ? null
-              : _foundCharacters[index].color,
-          filterQuality: FilterQuality.medium,
-          image: AssetImage(
-              "assets/images/class-icons/${_foundCharacters[index].name}.png"),
-        ),
-        //iconColor: _foundCharacters[index].color,
-        title: Text(
-            _foundCharacters[index].hidden &&
-                    !_gameState.unlockedClasses
-                        .contains(_foundCharacters[index].name)
-                ? "???"
-                : _foundCharacters[index].name,
-            style: TextStyle(
-                fontSize: 18,
-                color: _characterAlreadyAdded(_foundCharacters[index].name)
-                    ? Colors.grey
-                    : Colors.black)),
-        trailing: Text("(${_foundCharacters[index].edition})",
-            style: const TextStyle(fontSize: 14, color: Colors.grey)),
-        onTap: () {
-          if (!_characterAlreadyAdded(_foundCharacters[index].name)) {
-            setState(() {
-              String display = _foundCharacters[index].name;
-              int count = 1;
-              if (_foundCharacters[index].name == "Objective" ||
-                  _foundCharacters[index].name == "Escort") {
-                //add a number to name if already exists
-                for (var item in _gameState.currentList) {
-                  if (item is Character &&
-                      item.characterClass.name ==
-                          _foundCharacters[index].name) {
-                    count++;
-                  }
-                }
-                if (count > 1) {
-                  display += " $count";
+  Widget? characterTile(BuildContext context, int index) {
+    CharacterClass character = _foundCharacters[index];
+    bool characterUnlocked =
+        _gameState.unlockedClasses.contains(character.name);
+    bool characterAlreadyAdded = _characterAlreadyAdded(character.name);
+    bool characterIsObjective = character.name == "Objective";
+    bool characterIsEscort = character.name == "Escort";
+
+    return ListTile(
+      leading: Image(
+        height: 40,
+        width: 40,
+        fit: BoxFit.contain,
+        color: character.hidden && !characterUnlocked ||
+                characterIsEscort ||
+                characterIsObjective
+            ? null
+            : character.color,
+        filterQuality: FilterQuality.medium,
+        image: AssetImage("assets/images/class-icons/${character.name}.png"),
+      ),
+      //iconColor: character.color,
+      title: Text(
+          character.hidden && !characterUnlocked ? "???" : character.name,
+          style: TextStyle(
+              fontSize: 18,
+              color: characterAlreadyAdded ? Colors.grey : Colors.black)),
+      trailing: Text("(${character.edition})",
+          style: const TextStyle(fontSize: 14, color: Colors.grey)),
+      onTap: () {
+        if (!characterAlreadyAdded) {
+          setState(() {
+            String display = character.name;
+            int count = 1;
+            if (characterIsObjective || characterIsEscort) {
+              //add a number to name if already exists
+              for (var item in _gameState.currentList) {
+                if (item is Character &&
+                    item.characterClass.name == character.name) {
+                  count++;
                 }
               }
-              AddCharacterCommand command =
-                  AddCharacterCommand(_foundCharacters[index].name, display, 1);
-              _gameState.action(command); //
-              //open level menu
-              openDialog(
-                  context, SetCharacterLevelMenu(character: command.character));
-            });
-          }
-        },
-      );
+              if (count > 1) {
+                display += " $count";
+              }
+            }
+            AddCharacterCommand command =
+                AddCharacterCommand(character.name, display, 1);
+            _gameState.action(command); //
+            //open level menu
+            openDialog(
+                context, SetCharacterLevelMenu(character: command.character));
+          });
+        }
+      },
+    );
+  }
 }
