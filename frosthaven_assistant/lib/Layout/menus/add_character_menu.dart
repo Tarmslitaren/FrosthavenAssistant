@@ -132,6 +132,22 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
 
     //open level menu
     openDialog(context, SetCharacterLevelMenu(character: command.character));
+
+    //update UI to disable added character
+    setState(() {});
+  }
+
+  bool _characterAlreadyAdded(String newCharacter) {
+    if (newCharacter == "Escort" || newCharacter == "Objective") {
+      return false;
+    }
+    var characters = GameMethods.getCurrentCharacters();
+    for (var character in characters) {
+      if (character.characterClass.name == newCharacter) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @override
@@ -172,7 +188,9 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                               itemBuilder: (context, index) {
                                 return CharacterTile(
                                   character: _foundCharacters[index],
-                                  onAddCharacter: _addCharacter,
+                                  onSelect: _addCharacter,
+                                  disabled: _characterAlreadyAdded(
+                                      _foundCharacters[index].name),
                                 );
                               },
                             ))
