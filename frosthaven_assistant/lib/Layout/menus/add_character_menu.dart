@@ -107,17 +107,30 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     });
   }
 
-  bool _characterAlreadyAdded(String newCharacter) {
-    if (newCharacter == "Escort" || newCharacter == "Objective") {
-      return false;
-    }
-    var characters = GameMethods.getCurrentCharacters();
-    for (var character in characters) {
-      if (character.characterClass.name == newCharacter) {
-        return true;
+  void _addCharacter(CharacterClass character) {
+    String display = character.name;
+    int count = 1;
+    bool characterIsObjective = character.name == "Objective";
+    bool characterIsEscort = character.name == "Escort";
+
+    if (characterIsObjective || characterIsEscort) {
+      //add a number to name if already exists
+      for (var item in _gameState.currentList) {
+        if (item is Character && item.characterClass.name == character.name) {
+          count++;
+        }
+      }
+      if (count > 1) {
+        display += " $count";
       }
     }
-    return false;
+
+    AddCharacterCommand command =
+        AddCharacterCommand(character.name, display, 1);
+    _gameState.action(command);
+
+    //open level menu
+    openDialog(context, SetCharacterLevelMenu(character: command.character));
   }
 
   @override
@@ -155,7 +168,12 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                             child: ListView.builder(
                               controller: _scrollController,
                               itemCount: _foundCharacters.length,
-                              itemBuilder: characterTile,
+                              itemBuilder: (context, index) {
+                                return CharacterTile(
+                                  character: _foundCharacters[index],
+                                  onAddCharacter: _addCharacter,
+                                );
+                              },
                             ))
                         : const Text(
                             'No results found',
@@ -182,62 +200,84 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                       }))
             ])));
   }
+}
 
-  Widget? characterTile(BuildContext context, int index) {
-    CharacterClass character = _foundCharacters[index];
+class CharacterTile extends StatefulWidget {
+  // Constructor
+  const CharacterTile(
+      {super.key, required this.character, required this.onAddCharacter});
+
+  final CharacterClass character;
+  final void Function(CharacterClass) onAddCharacter;
+
+  @override
+  State<CharacterTile> createState() => _CharacterTileState();
+}
+
+class _CharacterTileState extends State<CharacterTile> {
+  final GameState _gameState = getIt<GameState>();
+  late bool characterAlreadyAdded;
+
+  @override
+  void initState() {
+    super.initState();
+    characterAlreadyAdded = _characterAlreadyAdded(widget.character.name);
+  }
+
+  bool _characterAlreadyAdded(String newCharacter) {
+    if (newCharacter == "Escort" || newCharacter == "Objective") {
+      return false;
+    }
+    var characters = GameMethods.getCurrentCharacters();
+    for (var character in characters) {
+      if (character.characterClass.name == newCharacter) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void _handleAddCharacter() {
+    if (!characterAlreadyAdded) {
+      widget.onAddCharacter(widget.character);
+      setState(() {
+        characterAlreadyAdded = true;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     bool characterUnlocked =
-        _gameState.unlockedClasses.contains(character.name);
-    bool characterAlreadyAdded = _characterAlreadyAdded(character.name);
-    bool characterIsObjective = character.name == "Objective";
-    bool characterIsEscort = character.name == "Escort";
+        _gameState.unlockedClasses.contains(widget.character.name);
+    bool characterIsObjective = widget.character.name == "Objective";
+    bool characterIsEscort = widget.character.name == "Escort";
 
     return ListTile(
       leading: Image(
         height: 40,
         width: 40,
         fit: BoxFit.contain,
-        color: character.hidden && !characterUnlocked ||
+        color: widget.character.hidden && !characterUnlocked ||
                 characterIsEscort ||
                 characterIsObjective
             ? null
-            : character.color,
+            : widget.character.color,
         filterQuality: FilterQuality.medium,
-        image: AssetImage("assets/images/class-icons/${character.name}.png"),
+        image: AssetImage(
+            "assets/images/class-icons/${widget.character.name}.png"),
       ),
       //iconColor: character.color,
       title: Text(
-          character.hidden && !characterUnlocked ? "???" : character.name,
+          widget.character.hidden && !characterUnlocked
+              ? "???"
+              : widget.character.name,
           style: TextStyle(
               fontSize: 18,
               color: characterAlreadyAdded ? Colors.grey : Colors.black)),
-      trailing: Text("(${character.edition})",
+      trailing: Text("(${widget.character.edition})",
           style: const TextStyle(fontSize: 14, color: Colors.grey)),
-      onTap: () {
-        if (!characterAlreadyAdded) {
-          setState(() {
-            String display = character.name;
-            int count = 1;
-            if (characterIsObjective || characterIsEscort) {
-              //add a number to name if already exists
-              for (var item in _gameState.currentList) {
-                if (item is Character &&
-                    item.characterClass.name == character.name) {
-                  count++;
-                }
-              }
-              if (count > 1) {
-                display += " $count";
-              }
-            }
-            AddCharacterCommand command =
-                AddCharacterCommand(character.name, display, 1);
-            _gameState.action(command); //
-            //open level menu
-            openDialog(
-                context, SetCharacterLevelMenu(character: command.character));
-          });
-        }
-      },
+      onTap: _handleAddCharacter,
     );
   }
 }
