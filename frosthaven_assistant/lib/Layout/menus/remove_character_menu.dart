@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../Model/character_class.dart';
 import '../../Resource/commands/remove_character_command.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
+import './character_tile.dart';
 
 class RemoveCharacterMenu extends StatefulWidget {
   const RemoveCharacterMenu({super.key});
@@ -28,6 +30,19 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
         currentCharacters.add(data);
       }
     }
+
+    void removeCharacter(CharacterClass characterClassToRemove) {
+      setState(() {
+        int indexToRemove = currentCharacters.indexWhere(
+            (character) => character.characterClass == characterClassToRemove);
+
+        if (indexToRemove != -1) {
+          _gameState.action(
+              RemoveCharacterCommand([currentCharacters[indexToRemove]]));
+        }
+      });
+    }
+
     return Container(
         constraints: const BoxConstraints(maxWidth: 400),
         child: Card(
@@ -40,38 +55,19 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
               ListTile(
                 title: const Text("Remove All", style: TextStyle(fontSize: 18)),
                 onTap: () {
-                  _gameState.action(RemoveCharacterCommand(currentCharacters)); //
+                  _gameState
+                      .action(RemoveCharacterCommand(currentCharacters)); //
                   Navigator.pop(context);
                 },
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: currentCharacters.length,
-                  itemBuilder: (context, index) => ListTile(
-                    leading: Image(
-                      height: 30,
-                      width: 30,
-                      filterQuality: FilterQuality.medium,
-                      fit: BoxFit.scaleDown,
-                      color: currentCharacters[index].characterClass.name == "Escort" ||
-                              currentCharacters[index].characterClass.name == "Objective"
-                          ? null
-                          : currentCharacters[index].characterClass.color,
-                      image: AssetImage(
-                          "assets/images/class-icons/${currentCharacters[index].characterClass.name}.png"),
-                    ),
-                    iconColor: currentCharacters[index].characterClass.color,
-                    title: Text(currentCharacters[index].characterState.display.value,
-                        style: const TextStyle(fontSize: 18)),
-                    trailing: Text("(${currentCharacters[index].characterClass.edition})",
-                        style: const TextStyle(fontSize: 14, color: Colors.grey)),
-                    onTap: () {
-                      setState(() {
-                        _gameState.action(RemoveCharacterCommand([currentCharacters[index]])); //
-                      });
-                    },
-                  ),
-                ),
+                    itemCount: currentCharacters.length,
+                    itemBuilder: (context, index) {
+                      return CharacterTile(
+                          character: currentCharacters[index].characterClass,
+                          onSelect: removeCharacter);
+                    }),
               ),
               const SizedBox(
                 height: 34,
