@@ -8,6 +8,7 @@ import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
+import 'character_tile.dart';
 
 class AddCharacterMenu extends StatefulWidget {
   const AddCharacterMenu({super.key});
@@ -107,6 +108,35 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     });
   }
 
+  void _addCharacter(CharacterClass character) {
+    String display = character.name;
+    int count = 1;
+    bool characterIsObjective = character.name == "Objective";
+    bool characterIsEscort = character.name == "Escort";
+
+    if (characterIsObjective || characterIsEscort) {
+      //add a number to name if already exists
+      for (var item in _gameState.currentList) {
+        if (item is Character && item.characterClass.name == character.name) {
+          count++;
+        }
+      }
+      if (count > 1) {
+        display += " $count";
+      }
+    }
+
+    AddCharacterCommand command =
+        AddCharacterCommand(character.name, display, 1);
+    _gameState.action(command);
+
+    //open level menu
+    openDialog(context, SetCharacterLevelMenu(character: command.character));
+
+    //update UI to disable added character
+    setState(() {});
+  }
+
   bool _characterAlreadyAdded(String newCharacter) {
     if (newCharacter == "Escort" || newCharacter == "Objective") {
       return false;
@@ -155,65 +185,14 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                             child: ListView.builder(
                               controller: _scrollController,
                               itemCount: _foundCharacters.length,
-                              itemBuilder: (context, index) => ListTile(
-                                leading: Image(
-                                  height: 40,
-                                  width: 40,
-                                  fit: BoxFit.contain,
-                                  color: _foundCharacters[index].hidden &&
-                                              !_gameState.unlockedClasses
-                                                  .contains(_foundCharacters[index].name) ||
-                                          _foundCharacters[index].name == "Escort" ||
-                                          _foundCharacters[index].name == "Objective"
-                                      ? null
-                                      : _foundCharacters[index].color,
-                                  filterQuality: FilterQuality.medium,
-                                  image: AssetImage(
-                                      "assets/images/class-icons/${_foundCharacters[index].name}.png"),
-                                ),
-                                //iconColor: _foundCharacters[index].color,
-                                title: Text(
-                                    _foundCharacters[index].hidden &&
-                                            !_gameState.unlockedClasses
-                                                .contains(_foundCharacters[index].name)
-                                        ? "???"
-                                        : _foundCharacters[index].name,
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: _characterAlreadyAdded(_foundCharacters[index].name)
-                                            ? Colors.grey
-                                            : Colors.black)),
-                                trailing: Text("(${_foundCharacters[index].edition})",
-                                    style: const TextStyle(fontSize: 14, color: Colors.grey)),
-                                onTap: () {
-                                  if (!_characterAlreadyAdded(_foundCharacters[index].name)) {
-                                    setState(() {
-                                      String display = _foundCharacters[index].name;
-                                      int count = 1;
-                                      if (_foundCharacters[index].name == "Objective" ||
-                                          _foundCharacters[index].name == "Escort") {
-                                        //add a number to name if already exists
-                                        for (var item in _gameState.currentList) {
-                                          if (item is Character &&
-                                              item.characterClass.name ==
-                                                  _foundCharacters[index].name) {
-                                            count++;
-                                          }
-                                        }
-                                        if (count > 1) {
-                                          display += " $count";
-                                        }
-                                      }
-                                      AddCharacterCommand command = AddCharacterCommand(
-                                          _foundCharacters[index].name, display, 1);
-                                      _gameState.action(command); //
-                                      //open level menu
-                                      openDialog(context,
-                                          SetCharacterLevelMenu(character: command.character));
-                                    });
-                                  }
-                                },
-                              ),
+                              itemBuilder: (context, index) {
+                                return CharacterTile(
+                                  character: _foundCharacters[index],
+                                  onSelect: _addCharacter,
+                                  disabled: _characterAlreadyAdded(
+                                      _foundCharacters[index].name),
+                                );
+                              },
                             ))
                         : const Text(
                             'No results found',
