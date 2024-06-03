@@ -1,0 +1,1897 @@
+{
+  "edition": "Gloomhaven 2nd Edition",
+  "classes": [
+     {
+      "name": "Bruiser",
+      "color": "FF35ACD5",
+       "colorSecondary": "ff313959",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "hidden": false,
+      "summons": {}
+    },
+     {
+      "name": "Tinkerer",
+      "color": "FFD1C3A2",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {
+        "Decoy": {
+          "level": 1,
+          "health": 10,
+          "move": 3
+        },
+        "Battle Bot": {
+          "level": 4,
+          "health": 7,
+          "move": 3,
+          "attack": 3
+        },
+        "Kill Bot": {
+          "level": 7,
+          "health": 8,
+          "move": 4,
+          "attack": 3
+        }
+      }
+
+    },
+     {
+      "name": "Spellweaver",
+      "color": "FFB28AC2",
+       "colorSecondary": "ff30254c",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+      }
+    },
+     {
+      "name": "Silent Knife",
+      "color": "FF9ECF5F",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {}
+    },
+    {
+      "name": "Cragheart",
+      "color": "FF828B3B",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "hidden": false,
+      "summons": {}
+    },
+     {
+      "name": "Mindthief",
+      "color": "FF6279A5",
+       "colorSecondary": "ff344c67",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+        "Rat Swarm": {
+          "level": 1,
+          "health": 5,
+          "move": 2,
+          "attack": 2
+        },
+        "Rat Monstrosity": {
+          "level": 5,
+          "health": 8,
+          "move": 3,
+          "attack": 3
+        },
+        "Rat King": {
+          "level": 9,
+          "health": 10,
+          "move": 3
+        }
+      }
+    },
+
+     {
+      "name": "Sunkeeper",
+      "color": "FFFCE434",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "hidden": true,
+      "summons": {}
+    },
+     {
+      "name": "Quartermaster",
+      "color": "ffcd8229",
+       "colorSecondary": "ff6f471e",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "hidden": true,
+      "summons": {}
+    },
+     {
+      "name": "Soultether",
+      "color": "FFE570B3",
+       "colorSecondary": "ff64364e",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "summons": {
+        "Shadow Wolf": {
+          "level": 1,
+          "health": 2,
+          "move": 3,
+          "attack": 2,
+          "standees": 2
+        },
+        "Iron Beast ": {
+          "level": 1,
+          "health": 7,
+          "move": 2,
+          "attack": 1
+        },
+        "Thorn Shooter": {
+          "level": 1,
+          "health": 3,
+          "move": 2,
+          "range": 4
+        },
+        "Rift Spirit": {
+          "level": 1,
+          "health": 2,
+          "move": 2,
+          "range": 3
+        },
+        "Floating Jellyfish": {
+          "level": 1,
+          "health": 5,
+          "move": 1,
+          "attack": 3
+        },
+        "Covetous Imp": {
+          "level": 2,
+          "health": 5,
+          "move": 3,
+          "attack": 3
+        },
+        "Slime Spirit": {
+          "level": 6,
+          "health": 5,
+          "move": 2,
+          "attack": 2
+        }
+      }
+    },
+     {
+      "name": "Nightshroud",
+      "color": "ff6e77ba",
+       "colorSecondary": "ff3b3a59",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "summons": {}
+    },
+     {
+      "name": "Plagueherald",
+      "color": "FF72E0BE",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": true,
+      "summons": {}
+    },
+     {
+      "name": "Berserker",
+      "color": "ffd75f49",
+       "colorSecondary": "ff692f27",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "hidden": true,
+      "summons": {}
+    },
+     {
+      "name": "Soothsinger",
+      "color": "ffe3726b",
+       "colorSecondary": "ff5d3636",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": true,
+      "summons": {}
+    },
+     {
+      "name": "Doomstalker",
+      "color": "ff69cde0",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "summons": {
+        "Green Snake": {
+          "level": 1,
+          "health": 5,
+          "move": 3,
+          "attack": 2
+        },
+        "Vicious Jackal": {
+          "level": 1,
+          "health": 4,
+          "move": 3,
+          "attack": 2
+        },
+        "Battle Boar": {
+          "level": 1,
+          "health": 7,
+          "move": 2,
+          "attack": 2
+        },
+        "Staunch Garralev": {
+          "level": 3,
+          "health": 8,
+          "move": 2,
+          "attack": 2
+        },
+        "War Raptor": {
+          "level": 4,
+          "health": 6,
+          "move": 5,
+          "attack": 3
+        },
+        "Horned Hristek": {
+          "level": 7,
+          "health": 7,
+          "move": 3,
+          "attack": 2
+        }
+      }
+    },
+     {
+      "name": "Sawbones",
+      "color": "ffe3dfcf",
+       "colorSecondary": "ff43413e",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "summons": {}
+    },
+     {
+      "name": "Elementalist",
+      "color": "FFDCDCDC",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": true,
+      "summons": {
+      }
+    },
+     {
+      "note": "the bear is a special summon with scaling hit points. as such it remains hardcoded",
+      "name": "Wildfury",
+      "color": "ffca9789",
+       "colorSecondary": "ff36221a",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [6, 7, 8, 9, 10, 11, 12, 13, 14],
+      "hidden": true,
+      "summons": {
+        "Wind Idol": {
+          "level": 1,
+          "health": 2,
+          "move": 4,
+          "attack": 2
+        },
+        "Monolith": {
+          "level": 3,
+          "health": 2
+        }
+      }
+    },
+
+     {
+      "name": "Bladeswarm",
+      "color": "FFCB9070",
+      "edition": "Gloomhaven 2nd Edition",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": true,
+      "noListing": true,
+      "summons": {
+        "Soul Leeches": {
+          "level": 1,
+          "gfx": "BLA soul leeches",
+          "health": 4,
+          "move": 3
+        },
+        "Creeping Beetles": {
+          "level": 1,
+          "gfx": "BLA creeping beetles",
+          "health": 5,
+          "move": 2,
+          "attack": 2
+        },
+        "Angry Wasps": {
+          "level": 1,
+          "gfx": "BLA angry wasps",
+          "health": 3,
+          "move": 4,
+          "attack": 2
+        },
+        "Steel Scarabs": {
+          "level": 1,
+          "gfx": "BLA steel scarabs",
+          "health": 4,
+          "move": 2,
+          "attack": 1
+        },
+        "Bloat Maggot": {
+          "level": 3,
+          "gfx": "BLA bloat maggots",
+          "standees": 3,
+          "health": 3,
+          "move": 3,
+          "attack": 1
+        },
+        "Lightning Moth": {
+          "level": 5,
+          "gfx": "BLA lightning moth",
+          "standees": 2,
+          "health": 3,
+          "move": 3
+        },
+        "Rage Hornets": {
+          "level": 7,
+          "gfx": "BLA rage hornets",
+          "health": 5,
+          "move": 3,
+          "attack": 3
+        },
+        "Rust Vermin": {
+          "level": 9,
+          "gfx": "BLA rust vermin",
+          "health": 7,
+          "move": 4,
+          "attack": 3
+        }
+      }
+    }
+  ],
+
+  "monsterAbilities": [
+    {
+      "name": "Cave Bear (2e)",
+      "cards": [
+        [ 596, false, 13, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 587, false, 14, "%move% - 1","*.........", "%attack% - 1", "^%immobilize%" ],
+        [ 598, true, 34, "%attack% + 1", "^%wound%" ],
+        [ 599, false, 41, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 600, false, 60, "%move% - 1","*.........", "%attack% + 1" ],
+        [ 601, true, 80, "%attack% - 1","*.........", "%move% - 2", "*.........","%attack% - 1", "^%wound%" ],
+        [ 602, false, 61, "%move% + 0","*.........", "%attack% - 1", "^%target% 2" ],
+        [ 603, false, 3, "%shield% + 1","*.........", "%retaliate% 2","*.........", "%heal% 2", "^Self" ]
+      ]
+    },
+    {
+      "name": "Cultist (2e)",
+      "cards": [
+        [ 604, false, 10, "%move% - 1","*.........", "%attack% - 1","*.........", "[r]","[c]","On Death:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        [ 605, false, 10, "%move% - 1","*.........", "%attack% - 1","*.........", "[r]","[c]","On Death:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        [ 606, false, 27, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 607, false, 27, "%move% + 0","*.........", "%attack% + 0" ],
+        [ 608, false, 39, "%move% - 1","*.........", "%attack% + 0","*.........", "%heal% 1", "^Self" ],
+        [ 609, true, 63, "*", "Summon normal","Living Bones","*", "^Cultist suffers 2 damage." ],
+        [ 610, true, 63, "*", "Summon normal","Living Bones","*", "^Cultist suffers 2 damage." ],
+        [ 611, false, 31, "%move% - 1","*.........", "%heal% 3", "^%range% 3" ]
+      ]
+    },
+    {
+      "name": "Living Corpse (2e)",
+      "cards": [
+        [ 564, false, 21, "%move% + 1","*.........", "%muddle% and", "%immobilize%", "^Target one adjacent enemy" ],
+        [ 565, false, 47, "%move% + 1","*.........", "%attack% - 1" ],
+        [ 566, true, 66, "%move% + 0", "*.........","%attack% + 0" ],
+        [ 567, true, 66, "%move% + 0", "*.........","%attack% + 0" ],
+        [ 568, false, 82, "%move% - 1", "*.........","%attack% + 1" ],
+        [ 569, false, 91, "%move% + 1","*.........", "Living Corpse suffers 1 damage." ],
+        [ 570, false, 71, "%move% + 0", "*.........","%attack% + 1","*.........", "%poison%", "^Target all adjacent enemies" ],
+        [ 571, false, 32, "%attack% + 2", "^%push% 1","*.........", "Living Corpse suffers 1 damage." ]
+      ]
+    }
+
+  ],
+  "monsters": {
+    "Bandit Archer (2e)": {
+      "deck": "Archer (FH)",
+      "display": "Bandit Archer",
+      "gfx": "Bandit Archer",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 2, "attack": 2 },
+          "elite": { "health": 6, "move": 2, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 5, "move": 2, "attack": 2 },
+          "elite": { "health": 7, "move": 2, "attack": 3}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 6, "move": 3, "attack": 2},
+          "elite": { "health": 9, "move": 3, "attack": 3 }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 6, "move": 3, "attack": 3 },
+          "elite": { "health": 10, "move": 3, "attack": 4}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 8, "move": 3, "attack": 3 },
+          "elite": { "health": 10, "move": 3, "attack": 4, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 10, "move": 3, "attack": 3 },
+          "elite": {"health": 12, "move": 4, "attack": 4, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 10, "move": 3, "attack": 4 },
+          "elite": {"health": 13, "move": 4, "attack": 5, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 13, "move": 3, "attack": 4 },
+          "elite": {"health": 17, "move": 4, "attack": 5, "attributes": [ "%poison%" ]}
+        }
+      ]
+    },
+    "Bandit Guard (2e)": {
+      "deck": "Guard (FH)",
+      "display": "Bandit Guard",
+      "gfx": "Bandit Guard",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 2 },
+          "elite": { "health": 9, "move": 2, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 3, "attack": 2 },
+          "elite": { "health": 9, "move": 2, "attack": 3, "attributes": [ "%shield% 1" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 6, "move": 3, "attack": 3 },
+          "elite": { "health": 10, "move": 2, "attack": 4, "attributes": [ "%shield% 1" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 9, "move": 3, "attack": 3 },
+          "elite": { "health": 10, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 10, "move": 4, "attack": 3 },
+          "elite": { "health": 11, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 2" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 11, "move": 4, "attack": 4 },
+          "elite": { "health": 12, "move": 3, "attack": 5, "attributes": [ "%muddle%", "%shield% 2" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 14, "move": 4, "attack": 4 },
+          "elite": { "health": 14, "move": 4, "attack": 5, "attributes": [ "%muddle%", "%shield% 2" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 16, "move": 5, "attack": 4 },
+          "elite": { "health": 14, "move": 3, "attack": 5, "attributes": [ "%muddle%", "%shield% 3" ]}
+        }
+      ]
+    },
+    "Cave Bear (2e)": {
+      "deck": "Cave Bear (2e)",
+      "display": "Cave Bear",
+      "gfx": "Cave Bear",
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 7, "move": 3, "attack": 3 },
+          "elite": { "health": 11, "move": 3, "attack": 4 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 9, "move": 3, "attack": 3 },
+          "elite": { "health": 14, "move": 3, "attack": 4 }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 11, "move": 4, "attack": 3 },
+          "elite": { "health": 17, "move": 4, "attack": 4 }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 13, "move": 4, "attack": 4 },
+          "elite": { "health": 20, "move": 4, "attack": 5 }
+        },
+        {
+          "level": 4,
+          "normal": { "health": 16, "move": 4, "attack": 4 },
+          "elite": { "health": 21, "move": 5, "attack": 5, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 17, "move": 5, "attack": 4, "attributes": [ "%wound%" ]},
+          "elite": { "health": 24, "move": 5, "attack": 6, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 19, "move": 5, "attack": 5, "attributes": [ "%wound%" ]},
+          "elite": { "health": 28, "move": 5, "attack": 7, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 7,
+          "normal": {"health": 22, "move": 5, "attack": 5, "attributes": [ "%wound%" ]},
+          "elite": { "health": 33, "move": 5, "attack": 7, "attributes": [ "%wound%" ]}
+        }
+      ]
+    },
+    "City Archer (2e)": {
+      "deck": "Archer (FH)",
+      "display": "City Archer",
+      "gfx": "City Archer",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 1, "attack": 2 },
+          "elite": { "health": 6, "move": 1, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 5, "move": 1, "attack": 2 },
+          "elite": { "health": 6, "move": 1, "attack": 3, "attributes": [ "%pierce% 1", "%shield% 1" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 6, "move": 1, "attack": 3 },
+          "elite": { "health": 7, "move": 1, "attack": 4, "attributes": [ "%pierce% 2", "%shield% 1" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 6, "move": 2, "attack": 3, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 8, "move": 2, "attack": 4, "attributes": [ "%pierce% 2", "%shield% 2" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 8, "move": 2, "attack": 3, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 10, "move": 2, "attack": 4, "attributes": [ "%pierce% 2", "%shield% 2" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 9, "move": 2, "attack": 4, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 11, "move": 2, "attack": 5, "attributes": [ "%pierce% 3", "%shield% 2" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 9, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 12, "move": 3, "attack": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 10, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 13, "move": 3, "attack": 6, "attributes": [ "%pierce% 3", "%shield% 3" ]}
+        }
+      ]
+    },
+    "Cultist (2e)": {
+      "deck": "Cultist (2e)",
+      "display": "Cultist",
+      "gfx": "Cultist",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 2, "attack": 1 },
+          "elite": { "health": 7, "move": 2, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 5, "move": 2, "attack": 1 },
+          "elite": { "health": 9, "move": 2, "attack": 2 }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 2, "attack": 1 },
+          "elite": { "health": 12, "move": 2, "attack": 2 }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 9, "move": 3, "attack": 1 },
+          "elite": { "health": 13, "move": 3, "attack": 2, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 10, "move": 3, "attack": 2 },
+          "elite": { "health": 15, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 11, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 18, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 14, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 22, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 15, "move": 3, "attack": 3, "attributes": [ "%curse%" ]},
+          "elite": { "health": 25, "move": 3, "attack": 4, "attributes": [ "%curse%" ]}
+        }
+      ]
+    },
+    "Inox Archer (2e)": {
+      "deck": "Archer (FH)",
+      "display": "Cultist",
+      "gfx": "Cultist",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 2 },
+          "elite": { "health": 7, "move": 2, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 2, "attack": 2 },
+          "elite": { "health": 8, "move": 2, "attack": 3}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 8, "move": 2, "attack": 2 },
+          "elite": { "health": 11, "move": 2, "attack": 3}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 9, "move": 2, "attack": 3},
+          "elite": { "health": 13, "move": 2, "attack": 4}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 10, "move": 3, "attack": 3 },
+          "elite": { "health": 14, "move": 3, "attack": 4, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 12, "move": 3, "attack": 3 },
+          "elite": { "health": 17, "move": 3, "attack": 4, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 12, "move": 3, "attack": 4, "attributes": [ "%wound%" ]},
+          "elite": { "health": 19, "move": 3, "attack": 5, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 15, "move": 3, "attack": 4, "attributes": [ "%wound%" ]},
+          "elite": { "health": 23, "move": 3, "attack": 5, "attributes": [ "%wound%" ]}
+        }
+      ]
+    },
+    "Inox Guard (2e)": {
+      "deck": "Guard (FH)",
+      "display": "Cultist",
+      "gfx": "Cultist",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 2 },
+          "elite": { "health": 9, "move": 1, "attack": 3, "attributes": [ "%retaliate% 1" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 8, "move": 2, "attack": 2 },
+          "elite": { "health": 10, "move": 2, "attack": 3, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 9, "move": 2, "attack": 3 },
+          "elite": {"health": 12, "move": 2, "attack": 4, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 11, "move": 3, "attack": 3 },
+          "elite": { "health": 15, "move": 2, "attack": 4, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 12, "move": 3, "attack": 3, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 17, "move": 2, "attack": 5, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 13, "move": 3, "attack": 4, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 19, "move": 2, "attack": 5, "attributes": [ "%retaliate% 4" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 16, "move": 3, "attack": 4, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 21, "move": 3, "attack": 5, "attributes": [ "%retaliate% 4" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 19, "move": 3, "attack": 4, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 23, "move": 3, "attack": 6, "attributes": [ "%retaliate% 4" ]}
+        }
+      ]
+    },
+    "Inox Priest (2e)": {
+      "deck": "Priest",
+      "display": "Inox Priest",
+      "gfx": "Inox Priest",
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 1, "attack": 2 },
+          "elite": { "health": 6, "move": 2, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 1, "attack": 2 },
+          "elite": { "health": 9, "move": 2, "attack": 3 }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 2, "attack": 2 },
+          "elite": { "health": 11, "move": 3, "attack": 3 }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 9, "move": 2, "attack": 2 },
+          "elite": { "health": 14, "move": 3, "attack": 3 }
+        },
+        {
+          "level": 4,
+          "normal": { "health": 10, "move": 2, "attack": 3 },
+          "elite": { "health": 16, "move": 3, "attack": 4 }
+        },
+        {
+          "level": 5,
+          "normal": { "health": 13, "move": 2, "attack": 3 },
+          "elite": { "health": 20, "move": 3, "attack": 4}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 15, "move": 3, "attack": 3 },
+          "elite": { "health": 24, "move": 4, "attack": 4 }
+        },
+        {
+          "level": 7,
+          "normal": { "health": 16, "move": 3, "attack": 4 },
+          "elite": { "health": 27, "move": 4, "attack": 5 }
+        }
+      ]
+    },
+    "Living Corpse (2e)": {
+      "deck": "Living Corpse (2e)",
+      "display": "Living Corpse",
+      "gfx": "Living Corpse",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 1, "attack": 3 },
+          "elite": { "health": 10, "move": 1, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 7, "move": 1, "attack": 3 },
+          "elite": { "health": 10, "move": 1, "attack": 4 }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 9, "move": 1, "attack": 3 },
+          "elite": { "health": 13, "move": 1, "attack": 4 }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 10, "move": 1, "attack": 4 },
+          "elite": { "health": 13, "move": 2, "attack": 5 }
+        },
+        {
+          "level": 4,
+          "normal": { "health": 11, "move": 2, "attack": 4 },
+          "elite": { "health": 15, "move": 2, "attack": 5, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 13, "move": 2, "attack": 4 },
+          "elite": { "health": 17, "move": 2, "attack": 6, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 14, "move": 2, "attack": 4, "attributes": [ "%poison%" ]},
+          "elite": { "health": 21, "move": 2, "attack": 6, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 15, "move": 2, "attack": 5, "attributes": [ "%poison%" ]},
+          "elite": { "health": 25, "move": 2, "attack": 6, "attributes": [ "%poison%" ]}
+        }
+      ]
+    },
+    "Vermling Priest (2e)": {
+      "deck": "Priest",
+      "display": "Vermling Priest",
+      "gfx": "Vermling Shaman",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 2, "move": 2, "attack": 1, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 3, "move": 3, "attack": 2, "attributes": [ "%shield% 2" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 2, "move": 2, "attack": 1, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 3, "move": 3, "attack": 2, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 3, "move": 2, "attack": 1, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 4, "move": 3, "attack": 2, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 3, "move": 2, "attack": 2, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 5, "move": 3, "attack": 3, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 3, "move": 3, "attack": 2, "attributes": [ "%muddle%", "%shield% 3" ]},
+          "elite": { "health": 5, "move": 3, "attack": 3, "attributes": [ "%muddle%", "%shield% 4" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 4, "move": 3, "attack": 3, "attributes": [ "%muddle%", "%shield% 3" ]},
+          "elite": { "health": 6, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 4" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 5, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 3" ]},
+          "elite": { "health": 6, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 5" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 7, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 3" ]},
+          "elite": { "health": 8, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 5" ]}
+        }
+      ]
+    },
+
+    "Bandit Commander (2e)": {
+      "deck": "Boss (FH)",
+      "display": "Bandit Commander",
+      "gfx": "Bandit Commander",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "8xC",
+          "move": 3,
+          "attack": 3,
+          "special1": [ "Move to next door and","reveal room" ],
+          "special2": [ "Summon Living Bones" ],
+          "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
+        },
+        {
+          "level": 1,
+          "health": "10xC",
+          "move": 3,
+          "attack": 3,
+          "special1": [ "Move to next door and","reveal room" ],
+          "special2": [ "Summon Living Bones" ],
+          "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
+        },
+        {
+          "level": 2,
+          "health": "12xC",
+          "move": 4,
+          "attack": 3,
+          "special1": [ "Move to next door and","reveal room" ],
+          "special2": [ "Summon Living Bones" ],
+          "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
+        },
+        {
+          "level": 3,
+          "health": "13xC",
+          "move": 4,
+          "attack": 4,
+          "special1": [ "Move to next door and","reveal room"],
+          "special2": [ "Summon Living Bones" ],
+          "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
+        },
+        {
+          "level": 4,
+          "health": "15xC",
+          "move": 4,
+          "attack": 4,
+          "special1": [ "Move to next door and","reveal room" ],
+          "special2": [ "Summon Living Bones" ],
+          "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
+        },
+        {
+          "level": 5,
+          "health": "16xC",
+          "move": 5,
+          "attack": 5,
+          "special1": [ "Move to next door and","reveal room" ],
+          "special2": [ "Summon Living Bones" ],
+          "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
+        },
+        {
+          "level": 6,
+          "health": "19xC",
+          "move": 5,
+          "attack": 5,
+          "special1": ["Move to next door and","reveal room" ],
+          "special2": [ "Summon Living Bones" ],
+          "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
+        },
+        {
+          "level": 7,
+          "health": "23xC",
+          "move": 5,
+          "attack": 5,
+          "special1": [ "Move to next door and","reveal room" ],
+          "special2": [ "Summon Living Bones" ],
+          "immunities": [ "%stun%", "%immobilize%", "%curse%" ]
+        }
+      ]
+    },
+    "The Betrayer (2e)": {
+      "deck": "Boss (FH)",
+      "display": "The Betrayer",
+      "gfx": "The Betrayer",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "10xC",
+          "move": 3,
+          "attack": 4,
+          "special1": [ "Summon Giant Viper and Fear" ],
+          "special2": [ "Mind Control" ],
+          "immunities": [ "%wound%", "%poison%", "%stun%", "%disarm%", "%curse%" ]
+        },
+        {
+          "level": 1,
+          "health": "12xC",
+          "move": 3,
+          "attack": 5,
+          "special1": [ "Summon Giant Viper and Fear" ],
+          "special2": [ "Mind Control" ],
+          "immunities": [ "%wound%", "%poison%", "%stun%", "%disarm%", "%curse%" ]
+        },
+        {
+          "level": 2,
+          "health": "14xC",
+          "move": 3,
+          "attack": 6,
+          "special1": [ "Summon Giant Viper and Fear" ],
+          "special2": [ "Mind Control" ],
+          "immunities": [ "%wound%", "%poison%", "%stun%", "%disarm%", "%curse%" ]
+        },
+        {
+          "level": 3,
+          "health": "16xC",
+          "move": 4,
+          "attack": 7,
+          "special1": [ "Summon Giant Viper and Fear" ],
+          "special2": [ "Mind Control" ],
+          "immunities": [ "%wound%", "%poison%", "%stun%", "%disarm%", "%curse%" ]
+        },
+        {
+          "level": 4,
+          "health": "18xC",
+          "move": 4,
+          "attack": 8,
+          "special1": [ "Summon Giant Viper and Fear" ],
+          "special2": [ "Mind Control" ],
+          "immunities": [ "%wound%", "%poison%", "%stun%", "%disarm%", "%curse%" ]
+        },
+        {
+          "level": 5,
+          "health": "20xC",
+          "move": 5,
+          "attack": 8,
+          "special1": [ "Summon Giant Viper and Fear" ],
+          "special2": [ "Mind Control" ],
+          "immunities": [ "%wound%", "%poison%", "%stun%", "%disarm%", "%curse%" ]
+        },
+        {
+          "level": 6,
+          "health": "23xC",
+          "move": 5,
+          "attack": 9,
+          "special1": [ "Summon Giant Viper and Fear" ],
+          "special2": [ "Mind Control" ],
+          "immunities": [ "%wound%", "%poison%", "%stun%", "%disarm%", "%curse%" ]
+        },
+        {
+          "level": 7,
+          "health": "27xC",
+          "move": 5,
+          "attack": 9,
+          "special1": [ "Summon Giant Viper and Fear" ],
+          "special2": [ "Mind Control" ],
+          "immunities": [ "%wound%", "%poison%", "%stun%", "%disarm%", "%curse%" ]
+        }
+      ]
+    },
+    "Captain of the Guard (2e)": {
+      "deck": "Boss (FH)",
+      "display": "Captain of the Guard",
+      "gfx": "Captain of the Guard",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "7xC",
+          "move": 2,
+          "attack": 3,
+          "special1": [ "%heal% 2, Affect self", "and all allies" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round","**.........", "%attack% + 1" ],
+          "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 1,
+          "health": "9xC",
+          "move": 2,
+          "attack": 3,
+          "special1": [ "%heal% 2, Affect self", "and all allies" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round","**.........", "%attack% + 1" ],
+          "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 2,
+          "health": "11xC",
+          "move": 2,
+          "attack": 4,
+          "special1": [ "%heal% 2, Affect self", "and all allies" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round", "**.........","%attack% + 1" ],
+          "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 3,
+          "health": "14xC",
+          "move": 3,
+          "attack": 4,
+          "special1": [ "%heal% 2, Affect self", "and all allies" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round","**.........", "%attack% + 1" ],
+          "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 4,
+          "health": "16xC",
+          "move": 3,
+          "attack": 5,
+          "special1": [ "%heal% 2, Affect self", "and all allies" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round","**.........", "%attack% + 1" ],
+          "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 5,
+          "health": "20xC",
+          "move": 3,
+          "attack": 5,
+          "special1": [ "%heal% 2, Affect self", "and all allies" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round","**.........", "%attack% + 1" ],
+          "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 6,
+          "health": "21xC",
+          "move": 4,
+          "attack": 6,
+          "special1": [ "%heal% 2, Affect self", "and all allies" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round","**.........", "%attack% + 1" ],
+          "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 7,
+          "health": "25xC",
+          "move": 4,
+          "attack": 6,
+          "special1": [ "%heal% 2, Affect self", "and all allies" ],
+          "special2": [ "All allies add +1 Attack to","all attacks this round","**.........", "%attack% + 1" ],
+          "immunities": [ "%disarm%", "%wound%", "%muddle%", "%stun%" ]
+        }
+      ]
+    },
+    "The Colorless (2e)": {
+      "deck": "Boss (FH)",
+      "display": "The Colorless",
+      "gfx": "The Colorless",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0, "health": "9xC", "move": 3, "attack": 2,
+          "special1": [ "[r]","%dark%%use%", "Summon Night Demon","[/r]", "%invisible%, Self" ],
+          "special2": [ "[r]","%light%%use%", "Summon Sun Demon","[/r]", "%heal% 4, Self", "%shield% + 1" ],
+          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 1, "health": "10xC", "move": 3, "attack": 3,
+          "special1": [ "[r]","%dark%%use%", "Summon Night Demon","[/r]", "%invisible%, Self" ],
+          "special2": ["[r]", "%light%%use%", "Summon Sun Demon","[/r]", "%heal% 4, Self", "%shield% + 1" ],
+          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 2, "health": "11xC", "move": 4, "attack": 3,
+          "special1": [ "[r]","%dark%%use%", "Summon Night Demon","[/r]", "%invisible%, Self" ],
+          "special2": ["[r]", "%light%%use%", "Summon Sun Demon", "[/r]","%heal% 5, Self", "%shield% + 1" ],
+          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 3, "health": "12xC", "move": 4, "attack": 4,
+          "special1": [ "[r]","%dark%%use%", "Summon Night Demon","[/r]", "%invisible%, Self" ],
+          "special2": [ "[r]","%light%%use%", "Summon Sun Demon","[/r]", "%heal% 5, Self", "%shield% + 1" ],
+          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 4, "health": "14xC", "move": 4, "attack": 4,
+          "special1": [ "[r]","%dark%%use%", "Summon Night Demon","[/r]", "%invisible%, Self" ],
+          "special2": [ "[r]","%light%%use%", "Summon Sun Demon","[/r]", "%heal% 6, Self", "%shield% + 1" ],
+          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 5, "health": "15xC", "move": 4, "attack": 5,
+          "special1": [ "[r]","%dark%%use%", "Summon Night Demon","[/r]", "%invisible%, Self" ],
+          "special2": ["[r]", "%light%%use%", "Summon Sun Demon", "[/r]","%heal% 6, Self", "%shield% + 1" ],
+          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 6, "health": "17xC", "move": 4, "attack": 6,
+          "special1": ["[r]", "%dark%%use%", "Summon Night Demon","[/r]", "%invisible%, Self" ],
+          "special2": [ "[r]","%light%%use%", "Summon Sun Demon","[/r]", "%heal% 7, Self", "%shield% + 1" ],
+          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 7, "health": "19xC", "move": 5, "attack": 7,
+          "special1": [ "[r]","%dark%%use%", "Summon Night Demon", "[/r]", "%invisible%, Self" ],
+          "special2": [ "[r]","%light%%use%", "Summon Sun Demon", "[/r]", "%heal% 7, Self", "%shield% + 1" ],
+          "immunities": [ "%wound%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        }
+      ]
+    },
+    "Dark Rider (2e)": {
+      "deck": "Boss (FH)",
+      "display": "Dark Rider",
+      "gfx": "Dark Rider",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "9xC",
+          "move": 2,
+          "attack": "3+X",
+          "special1": [ "%move% + 2", "%attack% + 0" ],
+          "special2": [ "%move% + 0", "Summon Imp", "%attack% - 1" ],
+          "immunities": [ "%immobilize%", "%poison%", "%stun%", "%disarm%" ],
+          "notes": "X = Hexes moved"
+        },
+        {
+          "level": 1,
+          "health": "10xC",
+          "move": 3,
+          "attack": "3+X",
+          "special1": [ "%move% + 2", "%attack% + 0" ],
+          "special2": [ "%move% + 0", "Summon Imp", "%attack% - 1" ],
+          "immunities": [ "%immobilize%", "%poison%", "%stun%", "%disarm%" ],
+          "notes": "X = Hexes moved"
+        },
+        {
+          "level": 2,
+          "health": "12xC",
+          "move": 3,
+          "attack": "3+X",
+          "special1": [ "%move% + 2", "%attack% + 0" ],
+          "special2": [ "%move% + 0", "Summon Imp", "%attack% - 1" ],
+          "immunities": [ "%immobilize%", "%poison%", "%stun%", "%disarm%" ],
+          "notes": "X = Hexes moved"
+        },
+        {
+          "level": 3,
+          "health": "13xC",
+          "move": 3,
+          "attack": "4+X",
+          "special1": [ "%move% + 2", "%attack% + 0" ],
+          "special2": [ "%move% + 0", "Summon Imp", "%attack% - 1" ],
+          "immunities": [ "%immobilize%", "%poison%", "%stun%", "%disarm%" ],
+          "notes": "X = Hexes moved"
+        },
+        {
+          "level": 4,
+          "health": "15xC",
+          "move": 3,
+          "attack": "4+X",
+          "special1": [ "%move% + 2", "%attack% + 0" ],
+          "special2": [ "%move% + 0", "Summon Imp", "%attack% - 1" ],
+          "immunities": [ "%immobilize%", "%poison%", "%stun%", "%disarm%" ],
+          "notes": "X = Hexes moved"
+        },
+        {
+          "level": 5,
+          "health": "16xC",
+          "move": 3,
+          "attack": "5+X",
+          "special1": [ "%move% + 2", "%attack% + 0" ],
+          "special2": [ "%move% + 0", "Summon Imp", "%attack% - 1" ],
+          "immunities": [ "%immobilize%", "%poison%", "%stun%", "%disarm%" ],
+          "notes": "X = Hexes moved"
+        },
+        {
+          "level": 6,
+          "health": "16xC",
+          "move": 4,
+          "attack": "5+X",
+          "special1": [ "%move% + 2", "%attack% + 0" ],
+          "special2": [ "%move% + 0", "Summon Imp", "%attack% - 1" ],
+          "immunities": [ "%immobilize%", "%poison%", "%stun%", "%disarm%" ],
+          "notes": "X = Hexes moved"
+        },
+        {
+          "level": 7,
+          "health": "18xC",
+          "move": 4,
+          "attack": "6+X",
+          "special1": [ "%move% + 2", "%attack% + 0" ],
+          "special2": [ "%move% + 0", "Summon Imp", "%attack% - 1" ],
+          "immunities": [ "%immobilize%", "%poison%", "%stun%", "%disarm%" ],
+          "notes": "X = Hexes moved"
+        }
+      ]
+    },
+    "Elder Drake (2e)": {
+      "deck": "Boss (FH)",
+      "display": "Elder Drake",
+      "gfx": "Elder Drake",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0, "health": "11xC", "move": 0, "attack": 3,
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special2": [ "%move%", "Summon 2 Zephyrs" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
+        },
+        {
+          "level": 1, "health": "12xC", "move": 0, "attack": 4,
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special2": [ "%move%", "Summon 2 Zephyrs" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
+        },
+        {
+          "level": 2, "health": "15xC", "move": 0, "attack": 4,
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special2": [ "%move%", "Summon 2 Zephyrs" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
+        },
+        {
+          "level": 3, "health": "16xC", "move": 0, "attack": 5,
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special2": [ "%move%", "Summon 2 Zephyrs" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
+        },
+        {
+          "level": 4, "health": "20xC", "move": 0, "attack": 5,
+          "special1":[ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special2": [ "%move%", "Summon 2 Zephyrs" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
+        },
+        {
+          "level": 5, "health": "22xC", "move": 0, "attack": 6,
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special2": [ "%move%", "Summon 2 Zephyrs" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
+        },
+        {
+          "level": 6, "health": "27xC", "move": 0, "attack": 6,
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special2": [ "%move%", "Summon 2 Zephyrs" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
+        },
+        {
+          "level": 7, "health": "29xC", "move": 0, "attack": 7,
+          "special1": [ "[r]","%attack% + 0","ÅKKKK", "¤boss-aoe-elder-drake-sp1", "[/r]" ],
+          "special2": [ "%move%", "Summon 2 Zephyrs" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%", "%pull%", "%push%" ]
+        }
+      ]
+    },
+    "The Gloom (2e)": {
+      "deck": "Boss (FH)",
+      "display": "The Gloom",
+      "gfx": "The Gloom",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "20xC",
+          "move": 2,
+          "attack": 5,
+          "special1": [ "%move% + 9", "**........."," %attack% + 9" ],
+          "special2": [ "^Teleport", "%attack% + 1", "^%range% 5", "^%poison%, %wound%, %stun%" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 1,
+          "health": "25xC",
+          "move": 2,
+          "attack": 5,
+          "special1": [ "%move% + 9", "**........."," %attack% + 9" ],
+          "special2": [ "^Teleport", "%attack% + 1", "^%range% 5", "^%poison%, %wound%, %stun%" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 2,
+          "health": "29xC",
+          "move": 2,
+          "attack": 6,
+          "special1": [ "%move% + 9", "**........."," %attack% + 9" ],
+          "special2": [ "^Teleport", "%attack% + 1", "^%range% 5", "^%poison%, %wound%, %stun%" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 3,
+          "health": "35xC",
+          "move": 2,
+          "attack": 6,
+          "special1": [ "%move% + 9", "**........."," %attack% + 9" ],
+          "special2": [ "^Teleport", "%attack% + 1", "^%range% 5", "^%poison%, %wound%, %stun%" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 4,
+          "health": "39xC",
+          "move": 3,
+          "attack": 7,
+          "special1": [ "%move% + 9", "**........."," %attack% + 9" ],
+          "special2": [ "^Teleport", "%attack% + 1", "^%range% 5", "^%poison%, %wound%, %stun%" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 5,
+          "health": "46xC",
+          "move": 3,
+          "attack": 7,
+          "special1": [ "%move% + 9", "**........."," %attack% + 9" ],
+          "special2": [ "^Teleport", "%attack% + 1", "^%range% 5", "^%poison%, %wound%, %stun%" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 6,
+          "health": "50xC",
+          "move": 3,
+          "attack": 8,
+          "special1": [ "%move% + 9", "**........."," %attack% + 9" ],
+          "special2": [ "^Teleport", "%attack% + 1", "^%range% 5", "^%poison%, %wound%, %stun%" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 7,
+          "health": "56xC",
+          "move": 3,
+          "attack": 9,
+          "special1": [ "%move% + 9", "**........."," %attack% + 9" ],
+          "special2": [ "^Teleport", "%attack% + 1", "^%range% 5", "^%poison%, %wound%, %stun%" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%", "%curse%" ]
+        }
+      ]
+    },
+    "Inox Bodyguard (2e)": {
+      "deck": "Boss (FH)",
+      "display": "Inox Bodyguard",
+      "gfx": "Inox Bodyguard",
+      "count": 2,
+      "levels": [
+        {
+          "level": 0,
+          "health": "6xC",
+          "move": 2,
+          "attack": "C",
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 3" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 1,
+          "health": "7xC",
+          "move": 2,
+          "attack": "1+C",
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 3" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 2,
+          "health": "9xC",
+          "move": 2,
+          "attack": "1+C",
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 3" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 3,
+          "health": "10xC",
+          "move": 3,
+          "attack": "2+C",
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 4" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 4,
+          "health": "11xC",
+          "move": 3,
+          "attack": "2+C",
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 4" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 5,
+          "health": "13xC",
+          "move": 3,
+          "attack": "3+C",
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 5" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 6,
+          "health": "15xC",
+          "move": 4,
+          "attack": "3+C",
+          "special1":[ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 5" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 7,
+          "health": "17xC",
+          "move": 4,
+          "attack": "4+C",
+          "special1": [ "[r]", "[c]","%move% - 1", "%attack% - 1", "[/c]","ÅKKKKK","¤boss-aoe-inox-bodyguard-sp1","[/r]" ],
+          "special2": [ "%move% + 0", "%attack% + 0", "%retaliate% + 5" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%" ]
+        }
+      ]
+    },
+    "Jekserah (2e)": {
+      "deck": "Boss (FH)",
+      "display": "Jekserah",
+      "gfx": "Jekserah",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "6xC",
+          "move": 2,
+          "attack": 2,
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
+        },
+        {
+          "level": 1,
+          "health": "7xC",
+          "move": 2,
+          "attack": 3,
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
+        },
+        {
+          "level": 2,
+          "health": "9xC",
+          "move": 3,
+          "attack": 3,
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
+        },
+        {
+          "level": 3,
+          "health": "12xC",
+          "move": 4,
+          "attack": 4,
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
+        },
+        {
+          "level": 4,
+          "health": "13xC",
+          "move": 4,
+          "attack": 5,
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
+        },
+        {
+          "level": 5,
+          "health": "15xC",
+          "move": 5,
+          "attack": 5,
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
+        },
+        {
+          "level": 6,
+          "health": "18xC",
+          "move": 5,
+          "attack": 5,
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
+        },
+        {
+          "level": 7,
+          "health": "22xC",
+          "move": 5,
+          "attack": 5,
+          "special1": [ "^Summon Living Bones", "^%attack% - 1, Target all", "^adjacent enemies" ],
+          "special2": [ "^Summon Living Corpse", "^%move% - 1", "^%attack% + 2" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ]
+        }
+      ]
+    },
+    "Merciless Overseer (2e)": {
+      "deck": "Boss (FH)",
+      "display": "Merciless Overseer",
+      "gfx": "Merciless Overseer",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "6xC",
+          "move": 2,
+          "attack": "V",
+          "special1": [ "All Scouts act again" ],
+          "special2": [ "Summon Vermling Scout" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ],
+          "notes": "V = Number of Scouts present"
+        },
+        {
+          "level": 1,
+          "health": "8xC",
+          "move": 2,
+          "attack": "V",
+          "special1": [ "All Scouts act again" ],
+          "special2": [ "Summon Vermling Scout" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ],
+          "notes": "V = Number of Scouts present"
+        },
+        {
+          "level": 2,
+          "health": "9xC",
+          "move": 3,
+          "attack": "V",
+          "special1": [ "All Scouts act again" ],
+          "special2": [ "Summon Vermling Scout" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ],
+          "notes": "V = Number of Scouts present"
+        },
+        {
+          "level": 3,
+          "health": "11xC",
+          "move": 3,
+          "attack": "V",
+          "special1": [ "All Scouts act again" ],
+          "special2": [ "Summon Vermling Scout" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ],
+          "notes": "V = Number of Scouts present"
+        },
+        {
+          "level": 4,
+          "health": "12xC",
+          "move": 4,
+          "attack": "V",
+          "special1": [ "All Scouts act again" ],
+          "special2": [ "Summon Vermling Scout" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ],
+          "notes": "V = Number of Scouts present"
+        },
+        {
+          "level": 5,
+          "health": "14xC",
+          "move": 4,
+          "attack": "V",
+          "special1": [ "All Scouts act again" ],
+          "special2": [ "Summon Vermling Scout" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ],
+          "notes": "V = Number of Scouts present"
+        },
+        {
+          "level": 6,
+          "health": "16xC",
+          "move": 4,
+          "attack": "V",
+          "special1": [ "All Scouts act again" ],
+          "special2": [ "Summon Vermling Scout" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ],
+          "notes": "V = Number of Scouts present"
+        },
+        {
+          "level": 7,
+          "health": "19xC",
+          "move": 4,
+          "attack": "V",
+          "special1": [ "All Scouts act again" ],
+          "special2": [ "Summon Vermling Scout" ],
+          "immunities": [ "%disarm%", "%wound%", "%curse%", "%stun%" ],
+          "notes": "V = Number of Scouts present"
+        }
+      ]
+    },
+    "Prime Demon (2e)": {
+      "deck": "Boss (FH)",
+      "display": "Prime Demon",
+      "gfx": "Prime Demon",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "8xC",
+          "move": 3,
+          "attack": 4,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 1,
+          "health": "9xC",
+          "move": 4,
+          "attack": 4,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 2,
+          "health": "10xC",
+          "move": 4,
+          "attack": 5,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 3,
+          "health": "12xC",
+          "move": 4,
+          "attack": 6,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 4,
+          "health": "14xC",
+          "move": 5,
+          "attack": 6,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 5,
+          "health": "16xC",
+          "move": 5,
+          "attack": 7,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 6,
+          "health": "20xC",
+          "move": 5,
+          "attack": 7,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        },
+        {
+          "level": 7,
+          "health": "22xC",
+          "move": 5,
+          "attack": 8,
+          "special1": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "special2": [ "^Throne moves", "^Summon Demon", "^%move% + 2, %attack% - 1" ],
+          "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%muddle%", "%stun%" ]
+        }
+      ]
+    },
+    "The Sightless Eye (2e)": {
+      "deck": "Boss (FH)",
+      "display": "The Sightless Eye",
+      "gfx": "The Sightless Eye",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "7xC",
+          "move": 0,
+          "attack": 5,
+          "special1": [ "[r]","[c]","^^Summon","^^Deep Terror", "*.........","^^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKK","[/r]" ],
+          "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
+        },
+        {
+          "level": 1,
+          "health": "8xC",
+          "move": 0,
+          "attack": 6,
+          "special1": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKK","[/r]" ],
+          "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
+        },
+        {
+          "level": 2,
+          "health": "10xC",
+          "move": 0,
+          "attack": 6,
+          "special1": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKK","[/r]" ],
+          "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
+        },
+        {
+          "level": 3,
+          "health": "11xC",
+          "move": 0,
+          "attack": 7,
+          "special1": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKK","[/r]" ],
+          "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
+        },
+        {
+          "level": 4,
+          "health": "14xC",
+          "move": 0,
+          "attack": 7,
+          "special1": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKK","[/r]" ],
+          "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
+        },
+        {
+          "level": 5,
+          "health": "15xC",
+          "move": 0,
+          "attack": 8,
+          "special1": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKK","[/r]" ],
+          "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
+        },
+        {
+          "level": 6,
+          "health": "18xC",
+          "move": 0,
+          "attack": 8,
+          "special1": [ "[r]","[c]","^^Summon","^^Deep Terror", "*.........","^^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKK","[/r]" ],
+          "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
+        },
+        {
+          "level": 7,
+          "health": "20xC",
+          "move": 0,
+          "attack": 9,
+          "special1": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 3", "[/c]","Å.","¤boss-aoe-sightless-eye-sp1","ÅKKK", "[/r]" ],
+          "special2": [ "[r]","[c]","^^Summon","^^Deep Terror","*.........", "^^%attack% - 2", "[/c]","¤boss-aoe-sightless-eye-sp2","ÅKKKKKK","[/r]" ],
+          "immunities": [ "%stun%", "%disarm%", "%curse%", "%muddle%" ]
+        }
+      ]
+    },
+    "Winged Horror (2e)": {
+      "deck": "Boss (FH)",
+      "display": "Winged Horror",
+      "gfx": "Winged Horror",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": "6xC",
+          "move": 3,
+          "attack": 3,
+          "special1": [ "^%attack% - 1","*Target all adjacent enemies","**.........", "^%attack% + 0, %range% 3","**.........", "^^Hatch eggs" ],
+          "special2": [ "^^Summon C eggs","**.........", "^%move% - 1", "**.........","^%attack% + 0" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 1,
+          "health": "7xC",
+          "move": 4,
+          "attack": 3,
+          "special1": [ "^%attack% - 1","*Target all adjacent enemies","**.........", "^%attack% + 0, %range% 3","**.........", "^^Hatch eggs" ],
+          "special2": [ "^^Summon C eggs","**.........", "^%move% - 1", "**.........","^%attack% + 0" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 2,
+          "health": "8xC",
+          "move": 4,
+          "attack": 4,
+          "special1": [ "^%attack% - 1","*Target all adjacent enemies","**.........", "^%attack% + 0, %range% 3","**.........", "^^Hatch eggs" ],
+          "special2": [ "^^Summon C eggs","**.........", "^%move% - 1", "**.........","^%attack% + 0" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 3,
+          "health": "10xC",
+          "move": 4,
+          "attack": 4,
+          "special1": [ "^%attack% - 1","*Target all adjacent enemies","**.........", "^%attack% + 0, %range% 3","**.........", "^^Hatch eggs" ],
+          "special2": [ "^^Summon C eggs","**.........", "^%move% - 1", "**.........","^%attack% + 0" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 4,
+          "health": "12xC",
+          "move": 5,
+          "attack": 4,
+          "special1": [ "^%attack% - 1","*Target all adjacent enemies","**.........", "^%attack% + 0, %range% 3","**.........", "^^Hatch eggs" ],
+          "special2": [ "^^Summon C eggs","**.........", "^%move% - 1", "**.........","^%attack% + 0" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 5,
+          "health": "14xC",
+          "move": 5,
+          "attack": 5,
+          "special1": [ "^%attack% - 1","*Target all adjacent enemies","**.........", "^%attack% + 0, %range% 3","**.........", "^^Hatch eggs" ],
+          "special2": [ "^^Summon C eggs","**.........", "^%move% - 1", "**.........","^%attack% + 0" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 6,
+          "health": "17xC",
+          "move": 5,
+          "attack": 5,
+          "special1": [ "^%attack% - 1","*Target all adjacent enemies","**.........", "^%attack% + 0, %range% 3","**.........", "^^Hatch eggs" ],
+          "special2": [ "^^Summon C eggs","**.........", "^%move% - 1", "**.........","^%attack% + 0" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        },
+        {
+          "level": 7,
+          "health": "20xC",
+          "move": 5,
+          "attack": 5,
+          "special1": [ "^%attack% - 1","*Target all adjacent enemies","**.........", "^%attack% + 0, %range% 3","**.........", "^^Hatch eggs" ],
+          "special2": [ "^^Summon C eggs","**.........", "^%move% - 1", "**.........","^%attack% + 0" ],
+          "immunities": [ "%disarm%", "%poison%", "%muddle%", "%stun%", "%curse%" ]
+        }
+      ]
+    }
+  },
+
+  "scenarios": {
+      "#Random Dungeon": {
+        "special": [
+          {
+            "type": "RandomSections"
+          }]
+      },
+      "#1 Black Barrow": {
+        "monsters": [ "Bandit Guard (2e)", "Bandit Archer (2e)", "Living Bones (FH)" ]
+      }
+    }
+}
