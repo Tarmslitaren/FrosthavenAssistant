@@ -17,7 +17,10 @@ class AddCharacterCommand extends Command {
     //add new character on top of list
     GameMethods.addToMainList(stateAccess, 0, character);
 
-    GameMethods.applyDifficulty(stateAccess);
+    if (character.characterClass.name != "Escort" &&
+        character.characterClass.name != "Objective") {
+      GameMethods.applyDifficulty(stateAccess);
+    }
 
 
     GameMethods.updateForSpecialRules(stateAccess);

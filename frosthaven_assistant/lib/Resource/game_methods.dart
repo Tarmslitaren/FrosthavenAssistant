@@ -426,6 +426,7 @@ class GameMethods {
       _gameState.showAllyDeck.value = false;
       _gameState._currentAbilityDecks.clear();
       _gameState._scenarioSpecialRules.clear();
+      GameMethods.applyDifficulty(_);
       List<ListItemData> newList = [];
       for (var item in _gameState.currentList) {
         if (item is Character) {

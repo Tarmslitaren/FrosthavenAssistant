@@ -1,8 +1,6 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class SetCharacterLevelCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
   late final int level;
   late final String characterId;
 

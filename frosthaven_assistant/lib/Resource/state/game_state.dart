@@ -2,7 +2,6 @@ library game_state;
 
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:built_collection/built_collection.dart';
