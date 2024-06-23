@@ -14,7 +14,7 @@ class DrawButton extends StatefulWidget {
   });
 
   @override
-   DrawButtonState createState() => DrawButtonState();
+  DrawButtonState createState() => DrawButtonState();
 }
 
 class DrawButtonState extends State<DrawButton> {
@@ -30,7 +30,6 @@ class DrawButtonState extends State<DrawButton> {
       if (GameMethods.canDraw()) {
         _gameState.action(DrawCommand());
       } else {
-        //show toast
         String text =
             "Player Initiative numbers must be set (under the initiative marker to the right of the character symbol)";
         if (_gameState.currentList.isEmpty) {
@@ -54,8 +53,7 @@ class DrawButtonState extends State<DrawButton> {
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
           var shadow = Shadow(
-            offset: Offset(1 * settings.userScalingBars.value,
-                1 * settings.userScalingBars.value),
+            offset: Offset(1 * settings.userScalingBars.value, 1 * settings.userScalingBars.value),
             color: Colors.black87,
             blurRadius: 1 * settings.userScalingBars.value,
           );
@@ -65,13 +63,12 @@ class DrawButtonState extends State<DrawButton> {
               valueListenable: _gameState.round,
               builder: (context, value, child) {
                 String text = _gameState.round.value.toString();
-                if(_gameState.totalRounds.value != _gameState.round.value) {
+                if (_gameState.totalRounds.value != _gameState.round.value) {
                   text = "${"$text(${_gameState.totalRounds.value}"})";
                 }
                 return Positioned(
                     bottom: 2 * settings.userScalingBars.value,
                     left: 45 * settings.userScalingBars.value,
-                    // width: 60,
                     child: Text(text,
                         style: TextStyle(
                           fontSize: 14 * settings.userScalingBars.value,
@@ -80,25 +77,23 @@ class DrawButtonState extends State<DrawButton> {
                         )));
               },
             ),
-            ValueListenableBuilder<RoundState>(
-              valueListenable: _gameState.roundState,
+            ValueListenableBuilder<int>(
+              valueListenable: _gameState.commandIndex,
               builder: (context, value, child) {
                 return Container(
                     margin: EdgeInsets.zero,
                     height: 40 * settings.userScalingBars.value,
-                    width: (_gameState.totalRounds.value != _gameState.round.value ? 75 : 60) * settings.userScalingBars.value,
+                    width: (_gameState.totalRounds.value != _gameState.round.value ? 75 : 60) *
+                        settings.userScalingBars.value,
                     child: TextButton(
                         style: TextButton.styleFrom(
                             padding: EdgeInsets.only(
                                 left: 10 * settings.userScalingBars.value,
                                 right: 10 * settings.userScalingBars.value),
-                            //minimumSize: Size(50, 30),
-                            //tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             alignment: Alignment.center),
                         onPressed: onPressed,
                         child: Text(
-                          _gameState.roundState.value ==
-                                  RoundState.chooseInitiative
+                          _gameState.roundState.value == RoundState.chooseInitiative
                               ? "Draw"
                               : " Next Round",
                           style: TextStyle(
