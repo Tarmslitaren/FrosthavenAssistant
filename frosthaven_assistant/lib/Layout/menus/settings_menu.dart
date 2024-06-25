@@ -26,6 +26,7 @@ final networkInfo = NetworkInfo();
 
 class SettingsMenuState extends State<SettingsMenu> {
   final TextEditingController _serverTextController = TextEditingController();
+  final TextEditingController _portTextController = TextEditingController();
 
   late Settings settings;
 
@@ -36,9 +37,8 @@ class SettingsMenuState extends State<SettingsMenu> {
     settings = getIt<Settings>();
     getIt<Network>().networkInfo.initNetworkInfo();
     _serverTextController.text = settings.lastKnownConnection;
+    _portTextController.text = settings.lastKnownPort;
   }
-
-  final TextEditingController _portTextController = TextEditingController();
 
   final ScrollController scrollController = ScrollController();
 
@@ -55,7 +55,6 @@ class SettingsMenuState extends State<SettingsMenu> {
     double screenWidth = MediaQuery.of(context).size.width;
     double referenceMinBarWidth = 40 * 6.5;
     double maxBarScale = screenWidth / referenceMinBarWidth;
-    _portTextController.text = settings.lastKnownPort;
 
     return Card(
         child: Scrollbar(
