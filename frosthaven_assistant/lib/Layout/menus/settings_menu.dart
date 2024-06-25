@@ -25,6 +25,8 @@ class SettingsMenu extends StatefulWidget {
 final networkInfo = NetworkInfo();
 
 class SettingsMenuState extends State<SettingsMenu> {
+  final TextEditingController _serverTextController = TextEditingController();
+
   late Settings settings;
 
   @override
@@ -33,9 +35,9 @@ class SettingsMenuState extends State<SettingsMenu> {
     super.initState();
     settings = getIt<Settings>();
     getIt<Network>().networkInfo.initNetworkInfo();
+    _serverTextController.text = settings.lastKnownConnection;
   }
 
-  final TextEditingController _serverTextController = TextEditingController();
   final TextEditingController _portTextController = TextEditingController();
 
   final ScrollController scrollController = ScrollController();
@@ -53,7 +55,6 @@ class SettingsMenuState extends State<SettingsMenu> {
     double screenWidth = MediaQuery.of(context).size.width;
     double referenceMinBarWidth = 40 * 6.5;
     double maxBarScale = screenWidth / referenceMinBarWidth;
-    _serverTextController.text = settings.lastKnownConnection;
     _portTextController.text = settings.lastKnownPort;
 
     return Card(
