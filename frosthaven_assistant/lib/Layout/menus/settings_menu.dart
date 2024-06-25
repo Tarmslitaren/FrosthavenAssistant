@@ -25,10 +25,13 @@ class SettingsMenu extends StatefulWidget {
 final networkInfo = NetworkInfo();
 
 class SettingsMenuState extends State<SettingsMenu> {
+  late Settings settings;
+
   @override
   initState() {
     // at the beginning, all items are shown
     super.initState();
+    settings = getIt<Settings>();
     getIt<Network>().networkInfo.initNetworkInfo();
   }
 
@@ -47,8 +50,6 @@ class SettingsMenuState extends State<SettingsMenu> {
 
   @override
   Widget build(BuildContext context) {
-    Settings settings = getIt<Settings>();
-
     double screenWidth = MediaQuery.of(context).size.width;
     double referenceMinBarWidth = 40 * 6.5;
     double maxBarScale = screenWidth / referenceMinBarWidth;
