@@ -28,6 +28,8 @@ class SettingsMenuState extends State<SettingsMenu> {
   final TextEditingController _serverTextController = TextEditingController();
   final TextEditingController _portTextController = TextEditingController();
 
+  final ScrollController scrollController = ScrollController();
+
   late Settings settings;
 
   @override
@@ -40,11 +42,9 @@ class SettingsMenuState extends State<SettingsMenu> {
     _portTextController.text = settings.lastKnownPort;
   }
 
-  final ScrollController scrollController = ScrollController();
-
   List<DropdownMenuItem<String>> getIPList() {
     List<DropdownMenuItem<String>> retVal = [];
-    for( var item in getIt<Network>().networkInfo.wifiIPv4List) {
+    for (var item in getIt<Network>().networkInfo.wifiIPv4List) {
       retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
     }
     return retVal;
