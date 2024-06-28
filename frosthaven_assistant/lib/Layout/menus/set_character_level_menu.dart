@@ -90,9 +90,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
         scale = 2;
       }
     }
-
-    bool isObjective = widget.character.characterClass.name == "Objective" ||
-        widget.character.characterClass.name == "Escort";
+    bool isObjective = GameMethods.isObjectiveOrEscort(widget.character.characterClass);
 
     return Container(
         width: 240 * scale,

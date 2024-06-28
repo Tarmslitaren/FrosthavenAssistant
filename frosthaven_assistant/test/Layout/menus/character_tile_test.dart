@@ -26,6 +26,7 @@ Widget buildTestWidget(Widget child) {
 
 CharacterClass getTestCharacter({String name = 'CORE', bool hidden = false}) {
   return CharacterClass(
+    'CORE', //id
     'CORE', // name
     const [10, 20, 30], // healthByLevel
     'First', // edition

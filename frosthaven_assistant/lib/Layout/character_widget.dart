@@ -81,7 +81,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
     }
     _initTextFieldController.addListener(_textFieldControllerListener);
 
-    if (character.characterClass.name == "Objective" || character.characterClass.name == "Escort") {
+    if (GameMethods.isObjectiveOrEscort(character.characterClass)) {
       isCharacter = false;
     }
     if (isCharacter) {

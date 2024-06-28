@@ -3,8 +3,9 @@ import 'package:frosthaven_assistant/Model/summon.dart';
 
 @immutable
 class CharacterClass {
-  const CharacterClass(this.name, this.healthByLevel, this.edition, this.color,
+  const CharacterClass(this.id, this.name, this.healthByLevel, this.edition, this.color,
       this.colorSecondary, this.hidden, this.summons);
+  final String id;
   final String name;
   final String edition;
   final List<int> healthByLevel;
@@ -16,6 +17,10 @@ class CharacterClass {
   factory CharacterClass.fromJson(Map<String, dynamic> data) {
     final edition = data['edition'] as String;
     final name = data['name'] as String;
+    String id = name; //default to name if no id
+    if (data.containsKey('id')) {
+      id = data['id'] as String;
+    }
     bool hidden = false;
     if (data.containsKey('hidden')) {
       hidden = data['hidden'] as bool;
@@ -48,7 +53,7 @@ class CharacterClass {
         summonList.add(SummonModel.fromJson(summons[key], key));
       }
     }
-    return CharacterClass(name, healthByLevel, edition, color, colorSecondary,
+    return CharacterClass(id, name, healthByLevel, edition, color, colorSecondary,
         hidden, summonList);
   }
 }

@@ -3,13 +3,13 @@ import '../state/game_state.dart';
 
 class AddCharacterCommand extends Command {
   final GameState _gameState = getIt<GameState>();
-  final String _name;
+  final String _id;
   final int _level;
   final String? _display;
   late Character character;
 
-  AddCharacterCommand(this._name, this._display, this._level) {
-    character = GameMethods.createCharacter(stateAccess, _name, _display, _level)!;
+  AddCharacterCommand(this._id, this._display, this._level) {
+    character = GameMethods.createCharacter(stateAccess, _id, _display, _level)!;
   }
 
   @override
@@ -17,15 +17,14 @@ class AddCharacterCommand extends Command {
     //add new character on top of list
     GameMethods.addToMainList(stateAccess, 0, character);
 
-    if (character.characterClass.name != "Escort" &&
-        character.characterClass.name != "Objective") {
+    if(!GameMethods.isObjectiveOrEscort(character.characterClass)) {
       GameMethods.applyDifficulty(stateAccess);
     }
 
 
     GameMethods.updateForSpecialRules(stateAccess);
     _gameState.updateList.value++;
-    GameMethods.unlockClass(stateAccess, character.characterClass.name);
+    GameMethods.unlockClass(stateAccess, character.characterClass.id);
 
   }
 
@@ -36,6 +35,6 @@ class AddCharacterCommand extends Command {
 
   @override
   String describe() {
-    return "Add $_name";
+    return "Add $_id";
   }
 }

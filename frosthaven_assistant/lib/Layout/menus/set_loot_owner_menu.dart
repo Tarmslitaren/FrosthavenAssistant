@@ -33,7 +33,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
       ),
       TextButton(
           onPressed: () {
-            _gameState.action(SetLootOwnerCommand(character.characterClass.name, widget.card));
+            _gameState.action(SetLootOwnerCommand(character.characterClass.id, widget.card));
             Navigator.pop(context);
           },
           child: Row(children: [
@@ -47,7 +47,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
             const SizedBox(
               width: 10,
             ),
-            Text(character.id, textAlign: TextAlign.center, style: getTitleTextStyle(1))
+            Text(character.characterState.display.value, textAlign: TextAlign.center, style: getTitleTextStyle(1))
           ]))
     ]);
   }

@@ -12,8 +12,7 @@ class RemoveCharacterCommand extends Command {
     GameMethods.removeCharacters(stateAccess, names);
 
     if (names.length != 1 ||
-        (names.first.characterClass.name != "Escort" &&
-            names.first.characterClass.name != "Objective")) {
+        !GameMethods.isObjectiveOrEscort(names.first.characterClass)) {
       GameMethods.applyDifficulty(stateAccess);
     }
   }

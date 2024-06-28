@@ -63,7 +63,6 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
           overflow: TextOverflow.visible,
           maxLines: 1,
         ),
-        // ]),
         trailing: Container(
             padding: const EdgeInsets.only(right: 16),
             child: Text(
@@ -76,7 +75,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
     return listTile;
   }
 
-  Widget buildCharacterLootWidget(String characterId) {
+  Widget buildCharacterLootWidget(String characterId, String characterName) {
     return Container(
       constraints: const BoxConstraints(maxWidth: 300),
       child: Column(children: [
@@ -96,7 +95,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
                 width: 10,
               ),
               Text(
-                "$characterId's loot:",
+                "$characterName's loot:",
                 style: const TextStyle(fontSize: 18),
               )
             ]),
@@ -132,7 +131,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
                         height: 20,
                       ),
                       for (Character character in characters)
-                        buildCharacterLootWidget(character.characterClass.name),
+                        buildCharacterLootWidget(character.characterClass.id, character.characterState.display.value),
                       const SizedBox(
                         height: 34,
                       ),

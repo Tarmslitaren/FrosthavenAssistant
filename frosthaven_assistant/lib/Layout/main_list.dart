@@ -30,8 +30,7 @@ class Item extends StatelessWidget {
     if (data is Character) {
       Character character = data as Character;
       int? initPreset;
-      if (character.characterClass.name == "Escort" ||
-          character.characterClass.name == "Objective") {
+      if (GameMethods.isObjectiveOrEscort(character.characterClass)) {
         initPreset = character.characterState.initiative.value;
       }
       child = CharacterWidget(

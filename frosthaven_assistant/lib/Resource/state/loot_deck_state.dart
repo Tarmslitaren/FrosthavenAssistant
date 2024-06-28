@@ -524,9 +524,8 @@ class LootDeck {
     //mark owner
     for (var item in getIt<GameState>().currentList) {
       if (item.turnState == TurnsState.current && item is Character) {
-        if (item.characterClass.name != "Objective" &&
-            item.characterClass.name != "Escort") {
-          card.owner = item.characterClass.name;
+        if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
+          card.owner = item.characterClass.id;
           break;
         }
       }

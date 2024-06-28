@@ -189,10 +189,9 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                         for (var item in _gameState.currentList) {
                           if (item.turnState == TurnsState.current) {
                             if (item is Character) {
-                              if (item.characterClass.name != "Objective" &&
-                                  item.characterClass.name != "Escort") {
+                              if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
                                 currentCharacterColor =
-                                    Colors.black; //item.characterClass.color;
+                                    Colors.black;
                                 currentCharacterName = item.characterClass.name;
                               }
                             }

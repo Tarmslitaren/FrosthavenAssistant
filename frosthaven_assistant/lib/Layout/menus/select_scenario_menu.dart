@@ -177,7 +177,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     for (String key in _gameData.modelData.value.keys) {
       for (CharacterClass character in _gameData.modelData.value[key]!.characters) {
         if (character.name == characterName) {
-          if (character.hidden && !_gameState.unlockedClasses.contains(character.name)) {
+          if (character.hidden && !_gameState.unlockedClasses.contains(character.id)) {
             text = "???";
           }
           break;

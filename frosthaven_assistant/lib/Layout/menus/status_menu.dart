@@ -524,8 +524,7 @@ class StatusMenuState extends State<StatusMenu> {
                     hasXp = true;
                     for (var item in _gameState.currentList) {
                       if (item.id == widget.characterId) {
-                        if ((item as Character).characterClass.name == "Objective" ||
-                            (item).characterClass.name == "Escort") {
+                        if (GameMethods.isObjectiveOrEscort((item as Character).characterClass)) {
                           hasXp = false;
                           isObjective = true;
                         }

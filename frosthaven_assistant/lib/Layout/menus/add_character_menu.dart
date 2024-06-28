@@ -111,10 +111,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   void _addCharacter(CharacterClass character) {
     String display = character.name;
     int count = 1;
-    bool characterIsObjective = character.name == "Objective";
-    bool characterIsEscort = character.name == "Escort";
 
-    if (characterIsObjective || characterIsEscort) {
+    if (GameMethods.isObjectiveOrEscort(character)) {
       //add a number to name if already exists
       for (var item in _gameState.currentList) {
         if (item is Character && item.characterClass.name == character.name) {
@@ -127,7 +125,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     }
 
     AddCharacterCommand command =
-        AddCharacterCommand(character.name, display, 1);
+        AddCharacterCommand(character.id, display, 1);
     _gameState.action(command);
 
     //open level menu
@@ -137,13 +135,13 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     setState(() {});
   }
 
-  bool _characterAlreadyAdded(String newCharacter) {
-    if (newCharacter == "Escort" || newCharacter == "Objective") {
+  bool _characterAlreadyAdded(CharacterClass newCharacter) {
+    if (GameMethods.isObjectiveOrEscort(newCharacter)) {
       return false;
     }
     var characters = GameMethods.getCurrentCharacters();
     for (var character in characters) {
-      if (character.characterClass.name == newCharacter) {
+      if (character.characterClass.id == newCharacter.id) {
         return true;
       }
     }
@@ -152,13 +150,9 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
 
   @override
   Widget build(BuildContext context) {
-    //edge insets if width not too small
-
     return Container(
         constraints: const BoxConstraints(maxWidth: 400),
         child: Card(
-            //color: Colors.transparent,
-            // shadowColor: Colors.transparent,
             margin: const EdgeInsets.all(2),
             child: Stack(children: [
               Column(
@@ -190,7 +184,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                                   character: _foundCharacters[index],
                                   onSelect: _addCharacter,
                                   disabled: _characterAlreadyAdded(
-                                      _foundCharacters[index].name),
+                                      _foundCharacters[index]),
                                 );
                               },
                             ))

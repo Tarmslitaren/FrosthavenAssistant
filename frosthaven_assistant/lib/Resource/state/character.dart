@@ -3,12 +3,18 @@ part of 'game_state.dart';
 
 class Character extends ListItemData {
   Character(this.characterState, this.characterClass) {
-    id = characterState.display.value; //characterClass.name;
+    if (GameMethods.isObjectiveOrEscort(characterClass)) {
+      id = characterState.display.value;
+    } else {
+      id = characterClass.id;
+    }
   }
+
   late final CharacterState characterState;
   late final CharacterClass characterClass;
+
   void nextRound(_StateModifier _) {
-    if (characterClass.name != "Objective" && characterClass.name != "Escort") {
+    if (!GameMethods.isObjectiveOrEscort(characterClass)) {
       characterState._initiative.value = 0;
     }
   }
@@ -19,25 +25,30 @@ class Character extends ListItemData {
         '"id": "$id", '
         '"turnState": ${turnState.index}, '
         '"characterState": ${characterState.toString()}, '
-        '"characterClass": "${characterClass.name}" '
+        '"characterClass": "${characterClass.id}" '
         '}';
   }
 
   Character.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    var anId = json['characterClass'];
     _turnState = TurnsState.values[json['turnState']];
     characterState = CharacterState.fromJson(json['characterState']);
-    String className = json['characterClass'];
     GameData data = getIt<GameData>();
     List<CharacterClass> characters = [];
     for (String key in data.modelData.value.keys) {
       characters.addAll(data.modelData.value[key]!.characters);
     }
     for (var item in characters) {
-      if (item.name == className) {
+      if (item.id == anId) {
         characterClass = item;
         break;
       }
+    }
+
+    if (!GameMethods.isObjectiveOrEscort(characterClass)) {
+      id = characterClass.id;
+    } else {
+      id = characterState.display.value;
     }
   }
 }
