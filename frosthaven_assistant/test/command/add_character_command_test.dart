@@ -12,7 +12,8 @@ void tests() {
 
   test("added ok", (){
     assert(gameState.currentList.first is Character);
-    assert(gameState.currentList.first.id == "Arnold");
+    assert((gameState.currentList.first as Character).characterState.display.value == "Arnold");
+    assert(gameState.currentList.first.id == "Hatchet");
     assert((gameState.currentList.first as Character).characterClass.name == "Hatchet");
     assert(gameState.currentList.length == 1);
     Character brute = GameMethods.getCurrentCharacters().first;
