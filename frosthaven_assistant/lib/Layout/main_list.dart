@@ -176,18 +176,14 @@ class MainListState extends State<MainList> {
         valueListenable: getIt<Settings>().darkMode,
         builder: (context, value, child) {
           return Container(
-              //alignment: Alignment.center,
-              //width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    //repeat: ImageRepeat.repeat,
                     image: AssetImage(getIt<Settings>().darkMode.value
                         ? 'assets/images/bg/bg.png'
                         : 'assets/images/bg/frosthaven-bg.png')),
               ),
               child: ValueListenableBuilder<Map<String, CampaignModel>>(
-                  //TODO: show loading animation while waiting to load from disk.
                   valueListenable: _gameData.modelData,
                   builder: (context, value, child) {
                     return ValueListenableBuilder<double>(

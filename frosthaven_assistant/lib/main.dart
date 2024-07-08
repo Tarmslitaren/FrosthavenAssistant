@@ -74,9 +74,11 @@ class MyApp extends StatelessWidget {
       getIt<GameState>().init();
       getIt<GameData>().loadData("assets/data/")
           .then((value) => getIt<GameState>().load()).then((value) =>
-          getIt<Settings>().init()).then((value) => loading.value = false);
+          getIt<Settings>().init()).then((value) => {
+            loading.value = false
+          }
+      );
     } catch (error) {
-
       loading.value = false;
     }
 
