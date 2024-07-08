@@ -7,7 +7,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
 
     //call after keyboard
     if (Platform.isIOS || Platform.isAndroid) {
-      Wakelock.enable();
+      WakelockPlus.enable();
       //should force app to be in foreground and disable screen lock
     }
 
