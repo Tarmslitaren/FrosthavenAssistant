@@ -15,7 +15,7 @@ import 'Resource/game_data.dart';
 import 'Resource/theme_switcher.dart';
 
 void _enablePlatformOverrideForDesktop() {
-  if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
+  if (kDebugMode && !kIsWeb && (Platform.isWindows || Platform.isLinux)) {
     debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
   }
 }
