@@ -102,7 +102,7 @@ class StandaloneServer extends GameServer {
   void sendToOthers(String data, Socket client) {
     final String message = _createMessage(data);
     for(Socket clientConnection in _clientConnections){
-      if (client.remoteAddress != clientConnection.remoteAddress){
+      if (client.remoteAddress != clientConnection.remoteAddress || clientConnection.remotePort != client.remotePort){
         _writeToClient(clientConnection, message);
       }
     }
