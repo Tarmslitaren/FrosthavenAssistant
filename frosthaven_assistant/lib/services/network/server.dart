@@ -12,7 +12,8 @@ import 'communication.dart';
 import 'connection.dart';
 import 'network.dart';
 
-class Server extends GameServer {
+class Server extends GameServer{
+  final int serverVersion = 191;
 
   final GameState _gameState = getIt<GameState>();
   final _communication = getIt<Communication>();

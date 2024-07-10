@@ -7,7 +7,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
-import 'package:wakelock/wakelock.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
 
@@ -15,7 +15,7 @@ import 'Resource/game_data.dart';
 import 'Resource/theme_switcher.dart';
 
 void _enablePlatformOverrideForDesktop() {
-  if (!kIsWeb && (Platform.isWindows || Platform.isLinux)) {
+  if (kDebugMode && !kIsWeb && (Platform.isWindows || Platform.isLinux)) {
     debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
   }
 }
@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
 
     //call after keyboard
     if (Platform.isIOS || Platform.isAndroid) {
-      Wakelock.enable();
+      WakelockPlus.enable();
       //should force app to be in foreground and disable screen lock
     }
 
@@ -74,9 +74,11 @@ class MyApp extends StatelessWidget {
       getIt<GameState>().init();
       getIt<GameData>().loadData("assets/data/")
           .then((value) => getIt<GameState>().load()).then((value) =>
-          getIt<Settings>().init()).then((value) => loading.value = false);
+          getIt<Settings>().init()).then((value) => {
+            loading.value = false
+          }
+      );
     } catch (error) {
-
       loading.value = false;
     }
 

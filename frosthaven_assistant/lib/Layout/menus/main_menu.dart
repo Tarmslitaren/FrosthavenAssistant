@@ -93,7 +93,7 @@ Drawer createMainMenu(BuildContext context) {
                     image: DecorationImage(
                         fit: BoxFit.fitWidth, image: AssetImage("assets/images/icon.png"))),
                 child: Stack(
-                  children: [Positioned(right: 6, bottom: 0, child: Text("Version 1.9.0"))],
+                  children: [Positioned(right: 6, bottom: 0, child: Text("Version 1.9.1"))],
                 ),
               ),
               ListTile(

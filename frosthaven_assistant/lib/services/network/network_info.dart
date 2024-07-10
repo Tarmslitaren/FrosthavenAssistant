@@ -14,14 +14,20 @@ import 'network.dart';
 class NetworkInformation {
   NetworkInformation() {
     _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
-      if (_connectionStatus != result) {
+        _connectivity.onConnectivityChanged.listen((List<ConnectivityResult> result) {
+      if (result.isNotEmpty && _connectionStatus != result.first) {
         if (_connectionStatus != null) {
           //null just to not show message on start.
-          getIt<Network>().networkMessage.value = "Network connection: ${result.name}";
+          String connection = result.first.name;
+          if (result.contains(ConnectivityResult.wifi)) {
+            //default to show wifi if available
+            connection = ConnectivityResult.wifi.name;
+          }
+          getIt<Network>().networkMessage.value = "Network connection: $connection";
         }
+        _connectionStatus = result.first;
       }
-      _connectionStatus = result;
+
       initNetworkInfo();
     });
   }
@@ -30,7 +36,7 @@ class NetworkInformation {
 
   ConnectivityResult? _connectionStatus;
   final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
   final Set<String> wifiIPv4List = {};
   final wifiIPv4 = ValueNotifier<String>("");
