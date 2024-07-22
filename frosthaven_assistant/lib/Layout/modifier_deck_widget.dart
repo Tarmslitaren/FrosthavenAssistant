@@ -59,7 +59,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     return Container(
         key: key,
         child: TranslationAnimatedWidget(
-            //curve: Curves.slowMiddle,
             animationFinished: (bool finished) {
               if (finished) {
                 _animationsEnabled = false;
@@ -194,19 +193,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
                   return Row(
                     children: [
-                      //Material(
-                      //   color: Colors.transparent,
-                      //child:
-                      /* InkWell(
-                        focusColor: Colors.red,
-                          onTap: () {
-                            setState(() {
-                              _animationsEnabled = true;
-                              _gameState
-                                  .action(DrawModifierCardCommand(widget.name));
-                            });
-                          },
-                          child: */
                       Stack(children: [
                         deck.drawPile.isNotEmpty
                             ? Stack(children: [

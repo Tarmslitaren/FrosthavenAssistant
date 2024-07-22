@@ -98,7 +98,6 @@ class LootCardMenuState extends State<LootCardMenu> {
 
           return Container(
               constraints: BoxConstraints(
-                  //maxWidth: 118 * scale * 2 + 98,
                   maxWidth: MediaQuery.of(context).size.width,
                   maxHeight: MediaQuery.of(context).size.height * 0.9),
               child: Card(
@@ -183,7 +182,6 @@ class LootCardMenuState extends State<LootCardMenu> {
                               ])),
                       Flexible(fit: FlexFit.tight, child: buildList(discardPile)),
                       Container(
-                        // color: Colors.white,
                         height: 32,
                         margin: const EdgeInsets.all(2),
                         decoration: const BoxDecoration(

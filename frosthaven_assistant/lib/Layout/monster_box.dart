@@ -135,8 +135,6 @@ class MonsterBox extends StatelessWidget {
                 ),
               ],
             ),
-            //color: Color(int.parse("7A000000", radix: 16)),
-            //black with some opacity
             child: Stack(alignment: Alignment.centerLeft, children: [
               Image(
                 height: 30 * scale,
@@ -151,7 +149,6 @@ class MonsterBox extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(left: 3 * scale, top: 3 * scale, bottom: 2 * scale),
                 child: Image(
-                  //fit: BoxFit.contain,
                   height: 100 * scale,
                   width: 17 * scale,
                   fit: BoxFit.cover,
@@ -171,7 +168,6 @@ class MonsterBox extends StatelessWidget {
               ),
               Positioned(
                 left: data.health.value > 99 ? 22 * scale : 23 * scale,
-                //width: width-20*scale,
                 top: 0,
 
                 child: Container(
@@ -180,7 +176,6 @@ class MonsterBox extends StatelessWidget {
                     child: Row(children: [
                       Column(children: [
                         Image(
-                          //fit: BoxFit.contain,
                           color: Colors.red,
                           height: 7 * scale,
                           image: const AssetImage("assets/images/blood.png"),
@@ -283,8 +278,6 @@ class MonsterBox extends StatelessWidget {
     return Material(
     color: Colors.transparent,
         child:InkWell(
-          //splashColor: Colors.brown,
-          //focusColor: Colors.amber,
         onTap: () {
           //open stats menu
           if (!blockInput) {

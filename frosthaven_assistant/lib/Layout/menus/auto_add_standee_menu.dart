@@ -138,8 +138,6 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             setState(() {
               if (currentEliteAdded == nrOfElite && currentNormalAdded == nrOfNormal) {
                 if (currentMonsterIndex + 1 >= widget.monsterData.length) {
-                  //close menu
-                  //Navigator.pop(context);
                 } else {
                   currentMonsterIndex++; //next set
                   currentEliteAdded = 0;
@@ -275,9 +273,6 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
               nrOfElite = data.elite[characterIndex];
               nrOfNormal = data.normal[characterIndex];
             } else {
-              //WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              //  Navigator.pop(context);
-              //});
               break;
             }
           }

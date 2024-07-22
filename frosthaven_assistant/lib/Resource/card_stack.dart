@@ -63,10 +63,6 @@ class CardStack<E> {
     _list.add(card);
   }
 
- // void insert(E card) {
- //   return _list.insert(card);
-  //}
-
   void insert(int index, E card) {
     _list.insert(index, card);
   }

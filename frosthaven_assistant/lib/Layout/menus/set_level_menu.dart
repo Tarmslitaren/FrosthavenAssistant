@@ -51,9 +51,6 @@ class SetLevelMenuState extends State<SetLevelMenu> {
           if (isRecommended) {
             color = Colors.grey;
           }
-          if (isCurrentlySelected) {
-            //color = Colors.black;
-          }
           String text = nr.toString();
           bool darkMode = getIt<Settings>().darkMode.value;
           return SizedBox(

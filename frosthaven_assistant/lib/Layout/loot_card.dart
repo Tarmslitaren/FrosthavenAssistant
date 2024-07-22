@@ -36,7 +36,6 @@ class LootCardWidget extends StatelessWidget {
         ],
       ),
       child: Stack(
-          //fit: StackFit.loose,
           alignment: AlignmentDirectional.center,
           clipBehavior: Clip.none, //if text overflows it still visible
 
@@ -47,9 +46,7 @@ class LootCardWidget extends StatelessWidget {
               child: Image.asset(
                 "assets/images/loot/${card.gfx}.png",
                 filterQuality: FilterQuality.medium,
-                //cacheWidth: Platform.isIOS || Platform.isAndroid ? 250 : 250,
                 fit: BoxFit.cover,
-                //image: AssetImage("assets/images/loot/${card.gfx}.png"),
               ),
             ),
             if (value != null)
@@ -85,7 +82,6 @@ class LootCardWidget extends StatelessWidget {
                 child: getIt<Settings>().shimmer.value == true
                     ? AnimatedTextKit(
                         repeatForever: true,
-                        //pause: const Duration(milliseconds: textAnimationDelay),
                         animatedTexts: [
                           ColorizeAnimatedText(
                             "Enhanced: ${card.enhanced.toString()}",
@@ -105,7 +101,6 @@ class LootCardWidget extends StatelessWidget {
                             ],
                           ),
                         ],
-                        // isRepeatingAnimation: true,
                       )
                     : Text("Enhanced: ${card.enhanced.toString()}",
                         style: TextStyle(

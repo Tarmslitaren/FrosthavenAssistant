@@ -1304,7 +1304,7 @@ class GameMethods {
 
   static bool canExpire(Condition condition) {
     if (
-        //condition == Condition.bane || //don't remove bane because user need to remember to remove 10hp as well
+        //don't remove bane because user need to remember to remove 10hp as well
         condition == Condition.strengthen ||
             condition == Condition.stun ||
             condition == Condition.immobilize ||

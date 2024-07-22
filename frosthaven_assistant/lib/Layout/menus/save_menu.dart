@@ -36,8 +36,6 @@ class SaveMenuState extends State<SaveMenu> {
     return Container(
         constraints: const BoxConstraints(maxWidth: 400),
         child: Card(
-            //color: Colors.transparent,
-            // shadowColor: Colors.transparent,
             margin: const EdgeInsets.all(2),
             child: Stack(children: [
               Column(
@@ -88,7 +86,6 @@ class SaveMenuState extends State<SaveMenu> {
                                 controller: _scrollController,
                                 itemCount: _saves.length,
                                 itemBuilder: (context, index) => ListTile(
-                                  //iconColor: _foundCharacters[index].color,
                                   title: Text(_saves[index], style: const TextStyle(fontSize: 18)),
                                   onTap: () {
                                     openDialog(context, SaveModalMenu(saveName: _saves[index], saveOnly: false));

@@ -12,7 +12,6 @@ class ChangeEnfeebleCommand extends ChangeStatCommand {
   void execute() {
     if (deck == null) {
       deck = getIt<GameState>().modifierDeck;
-      //Figure figure = getFigure(ownerId, figureId)!;
       for (var item in getIt<GameState>().currentList) {
         if (item.id == ownerId) {
           if (item is Monster && item.isAlly) {
@@ -26,7 +25,6 @@ class ChangeEnfeebleCommand extends ChangeStatCommand {
 
   @override
   void undo() {
-    //stat.value -= change;
     getIt<GameState>().updateList.value++;
   }
 

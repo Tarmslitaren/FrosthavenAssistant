@@ -9,7 +9,6 @@ class ChangeBlessCommand extends ChangeStatCommand {
 
   @override
   void execute() {
-    //Figure figure = getFigure(ownerId, figureId)!;
     if (deck == null) {
       deck = getIt<GameState>().modifierDeck;
       for (var item in getIt<GameState>().currentList) {
@@ -26,7 +25,6 @@ class ChangeBlessCommand extends ChangeStatCommand {
 
   @override
   void undo() {
-    //stat.value -= change;
     getIt<GameState>().updateList.value++;
   }
 

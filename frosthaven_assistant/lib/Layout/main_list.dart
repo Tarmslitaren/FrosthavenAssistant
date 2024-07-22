@@ -70,9 +70,6 @@ class Item extends StatelessWidget {
       key: child.key,
       height: height,
       duration: const Duration(milliseconds: 500),
-      //decoration: const BoxDecoration(
-      //  color: Colors.transparent,
-      //),
       child: child,
     );
     return animatedContainer;
@@ -352,9 +349,7 @@ class MainListState extends State<MainList> {
       //make the list longer
       for (int i = generatedListAnimators.length; i < _generatedList.length; i++) {
         generatedListAnimators
-            .add(ListAnimation(index: i, lastIndex: indices[i], child: _generatedList[i])
-                //createAnimatedSwitcher(i, indices[i])
-                );
+            .add(ListAnimation(index: i, lastIndex: indices[i], child: _generatedList[i]));
       }
     }
 
@@ -364,7 +359,7 @@ class MainListState extends State<MainList> {
       }
     }
 
-    return generatedListAnimators; //_generatedList;
+    return generatedListAnimators;
   }
 
   Widget buildList() {

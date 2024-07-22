@@ -34,7 +34,6 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     super.initState();
 
     //populate the summon list
-    //_summonList.addAll(widget.character.characterClass.summons);
     for (var item in widget.character.characterClass.summons) {
       if (item.level <= widget.character.characterState.level.value) {
         int standeesOut = 0;
@@ -80,11 +79,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                   chosenGfx = summonGfx;
                 });
               }
-              //if all selected then pop
-              //Navigator.pop(context);
             },
             icon: Image.asset('assets/images/summon/$summonGfx.png'),
-            //iconSize: 30,,
           )),
     );
   }
@@ -93,9 +89,6 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     bool isCurrentlySelected;
     isCurrentlySelected = nr == chosenNr;
     Color color = Colors.transparent;
-    if (isCurrentlySelected) {
-      //color = Colors.black;
-    }
     String text = nr.toString();
     bool darkMode = getIt<Settings>().darkMode.value;
     return SizedBox(
@@ -124,8 +117,6 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                   chosenNr = nr;
                 });
               }
-              //do if last thing
-              //Navigator.pop(context);
             },
           )),
     );
@@ -230,7 +221,6 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                         )
                                       ])),
                           ]),
-                          //iconColor: _foundMonsters[index].color,
                           title: Text(_summonList[index].name, style: getTitleTextStyle(scale)),
                           onTap: () {
                             setState(() {

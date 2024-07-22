@@ -101,7 +101,6 @@ Drawer createMainMenu(BuildContext context) {
                 enabled: undoEnabled(),
                 onTap: () {
                   gameState.undo();
-                  //Navigator.pop(context);
                 },
               ),
               ListTile(
@@ -109,7 +108,6 @@ Drawer createMainMenu(BuildContext context) {
                 enabled: redoEnabled(),
                 onTap: () {
                   gameState.redo();
-                  //Navigator.pop(context);
                 },
               ),
               const Divider(),
@@ -240,7 +238,6 @@ Drawer createMainMenu(BuildContext context) {
                           settings.lastKnownHostIP =
                               "(${getIt<Network>().networkInfo.wifiIPv4.value})";
                           settings.saveToDisk();
-                          //setState(() {
                           //do the thing
                           if (!settings.server.value) {
                             getIt<Network>().server.startServer();
@@ -249,7 +246,6 @@ Drawer createMainMenu(BuildContext context) {
                             getIt<Network>().server.stopServer(null);
                           }
                         });
-                    //});
                   }),
               //checkbox client + host + port
               //checkbox server - show ip, port

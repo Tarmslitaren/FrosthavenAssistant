@@ -42,7 +42,7 @@ double getMainListWidth(BuildContext context) {
   var screenSize = MediaQuery.of(context).size;
   var width = min(screenSize.width, maxWidth);
 
-  return width; // - getMainListMargin(context)*2;
+  return width;
 }
 
 double _scaleByReference(

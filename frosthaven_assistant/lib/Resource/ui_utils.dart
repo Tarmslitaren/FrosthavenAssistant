@@ -99,7 +99,6 @@ Widget defaultBuildDraggableFeedback(
       color: Colors.transparent,
       borderRadius: BorderRadius.zero,
       child: Card(
-          //shadowColor: Colors.red,
           color: Colors.transparent,
           child: ConstrainedBox(constraints: constraints, child: child)),
     ),

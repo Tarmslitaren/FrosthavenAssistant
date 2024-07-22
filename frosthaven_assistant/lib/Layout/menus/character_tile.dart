@@ -5,7 +5,6 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class CharacterTile extends StatelessWidget {
-  // Constructor
   CharacterTile(
       {super.key,
       required this.character,
@@ -39,7 +38,6 @@ class CharacterTile extends StatelessWidget {
         filterQuality: FilterQuality.medium,
         image: AssetImage("assets/images/class-icons/${character.name}.png"),
       ),
-      //iconColor: character.color,
       title: Text(
           character.hidden && !characterUnlocked ? "???" : character.name,
           style: TextStyle(

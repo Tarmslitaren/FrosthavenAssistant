@@ -119,13 +119,6 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
         //need to set any width to center content, overridden by dialog default min width.
         height: height * scale,
         decoration: BoxDecoration(
-          //color: Colors.black,
-          //borderRadius: BorderRadius.all(Radius.circular(8)),
-
-          /*border: Border.fromBorderSide(BorderSide(
-            color: Colors.blueGrey,
-            width: 10
-          )),*/
           image: DecorationImage(
             colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value

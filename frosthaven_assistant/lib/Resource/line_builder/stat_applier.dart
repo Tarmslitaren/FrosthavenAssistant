@@ -81,7 +81,7 @@ class StatApplier {
       Map<String, int> normalTokens,
       Map<String, int> eliteTokens) {
     if (!showElite && !showNormal) {
-      return [line]; //?
+      return [line];
     }
 
     List<String> retVal = [];

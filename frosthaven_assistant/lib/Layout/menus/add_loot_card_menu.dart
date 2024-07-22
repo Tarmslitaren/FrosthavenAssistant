@@ -30,7 +30,6 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
       minLeadingWidth: 0,
       horizontalTitleGap: 6,
       leading:
-          //Row(children: [
           Image(
         filterQuality: FilterQuality.medium,
         height: 30,
@@ -43,7 +42,6 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
         overflow: TextOverflow.visible,
         maxLines: 1,
       ),
-      // ]),
       trailing: Text("added: ${getIt<GameState>().lootDeck.addedCards[index]}   ",
           style: const TextStyle(
             fontSize: 18,
@@ -70,8 +68,6 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
                       Container(
                         constraints: const BoxConstraints(maxWidth: 300),
                         child: Column(
-                            //mainAxisAlignment: MainAxisAlignment.start,
-                            //crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
                                 "Add Extra Loot Card",

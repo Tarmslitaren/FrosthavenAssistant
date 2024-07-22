@@ -171,7 +171,7 @@ class ScenarioModel {
 
     if (kDebugMode) {
       if (rooms != null) {
-        List names = []; // List();
+        List names = [];
         for (var u in rooms.roomData) {
           if (names.contains(u.name)) {
             print("duplicate ${u.name} in ${rooms.scenarioName}");

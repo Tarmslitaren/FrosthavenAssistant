@@ -32,8 +32,6 @@ class ModifierCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(4.0 * scale),
         child: Image(
           fit: BoxFit.fitHeight,
-          //height: 56,
-          //height: 123 * tempScale * scale,
           image: AssetImage("assets/images/attack/${card.gfx}.png"),
         ),
       ),

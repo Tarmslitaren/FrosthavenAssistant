@@ -58,7 +58,6 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     return Container(
         key: key,
         child: TranslationAnimatedWidget(
-            //curve: Curves.slowMiddle,
             animationFinished: (bool finished) {
               if (finished) {
                 animationsEnabled = false;
@@ -255,7 +254,6 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           2,
                                       left: 2 * settings.userScalingBars.value,
                                       child: Image.asset(
-                                          // fit: BoxFit.fitWidth,
                                           color: currentCharacterColor,
                                           'assets/images/class-icons/$currentCharacterName.png'),
                                     )
@@ -264,7 +262,6 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                               width: 2 * settings.userScalingBars.value,
                             ),
                             InkWell(
-                                //behavior: HitTestBehavior.opaque, //makes tappable when no graphics
                                 onTap: () {
                                   openDialog(context, const LootCardMenu());
                                 },

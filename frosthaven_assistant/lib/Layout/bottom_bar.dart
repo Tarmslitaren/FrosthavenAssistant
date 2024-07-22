@@ -55,7 +55,6 @@ Widget createLevelWidget(BuildContext context) {
     color: Colors.transparent,
       child :InkWell(
     onTap: () {
-      //open stats menu
       openDialog(
         context,
         const SetLevelMenu(),

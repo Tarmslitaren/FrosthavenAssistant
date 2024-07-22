@@ -46,7 +46,6 @@ class CounterButtonState extends State<CounterButton> {
           height: 40 * widget.scale,
           child: IconButton(
               icon: Image.asset('assets/images/psd/sub.png'),
-//iconSize: 30,
               onPressed: () {
                 widget.command.setChange(-1);
                 if (widget.notifier.value > 0) {
@@ -98,7 +97,7 @@ class CounterButtonState extends State<CounterButton> {
                     style: TextStyle(
                         height: 0.5,
                         fontSize: 16 * widget.scale,
-                        color: Colors.white, //widget.color,
+                        color: Colors.white,
                         shadows: [shadow]),
                   ));
             })
@@ -108,7 +107,6 @@ class CounterButtonState extends State<CounterButton> {
           height: 40 * widget.scale,
           child: IconButton(
             icon: Image.asset('assets/images/psd/add.png'),
-//iconSize: 30,
             onPressed: () {
               widget.command.setChange(1);
               if (widget.notifier.value < widget.maxValue) {
@@ -120,7 +118,6 @@ class CounterButtonState extends State<CounterButton> {
                   Navigator.pop(context);
                 }
               }
-//increment
             },
           )),
     ]);

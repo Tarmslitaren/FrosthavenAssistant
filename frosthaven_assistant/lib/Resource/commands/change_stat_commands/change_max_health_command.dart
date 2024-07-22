@@ -29,7 +29,6 @@ class ChangeMaxHealthCommand extends ChangeStatCommand {
 
   @override
   void undo() {
-    //stat.value -= change;
     getIt<GameState>().updateList.value++;
   }
 

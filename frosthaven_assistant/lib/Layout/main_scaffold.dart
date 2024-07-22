@@ -34,7 +34,6 @@ Widget createMainScaffold(BuildContext context) {
                   maintainBottomViewPadding: true,
                   child: Scaffold(
                     resizeToAvoidBottomInset: false,
-                    //drawerScrimColor: Colors.yellow,
                     bottomNavigationBar: createBottomBar(context),
                     appBar: createTopBar(),
                     drawer: createMainMenu(context),

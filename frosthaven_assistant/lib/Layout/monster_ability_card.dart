@@ -89,8 +89,6 @@ class MonsterAbilityCardWidget extends StatefulWidget {
         width: 142.4 * scale,
         height: 94.4 * scale,
         child: Stack(
-          //fit: StackFit.loose,
-          //alignment: Alignment.topCenter,
           clipBehavior: Clip.none, //if text overflows it still visible
 
           children: [
@@ -100,7 +98,6 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 fit: BoxFit.fill,
                 height: 92.8 * scale,
                 width: 142.4 * scale,
-                //height: 123 * 0.8 * scale,
                 image: AssetImage(frosthavenStyle
                     ? "assets/images/psd/monsterAbility-front_fh.png"
                     : "assets/images/psd/monsterAbility-front.png"),
@@ -108,7 +105,6 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             ),
             Positioned(
                 top: frosthavenStyle ? 2 * scale : 0 * scale,
-                //left: 40 * scale,
                 child: SizedBox(
                   height: 88 * scale,
                   width: 142.4 * scale, //needed for line breaks in lines
@@ -178,7 +174,6 @@ class MonsterAbilityCardWidget extends StatefulWidget {
               child: SizedBox(
                 height: 88 * scale,
                 width: 142.4 * scale, //needed for line breaks in lines
-                //color: Colors.amber,
                 child: LineBuilder.createLines(
                     card.lines,
                     false,
@@ -349,7 +344,6 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                         card, widget.data, scale, false)
                     : MonsterAbilityCardWidget.buildRear(
                         scale, _deckSize, widget.data),
-                //),
               ));
         });
   }

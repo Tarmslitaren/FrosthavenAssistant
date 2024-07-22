@@ -135,8 +135,6 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     return Container(
         constraints: const BoxConstraints(maxWidth: 450),
         child: Card(
-            //color: Colors.transparent,
-            // shadowColor: Colors.transparent,
             margin: const EdgeInsets.all(2),
             child: Stack(children: [
               Column(
@@ -205,7 +203,6 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                   height: 35,
                                   cacheHeight: 75,
                                 ),
-                                //iconColor: _foundMonsters[index].color,
                                 title: Text(
                                     _foundMonsters[index].hidden
                                         ? "${_foundMonsters[index].display} (special)"
@@ -221,10 +218,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                   if (!_monsterAlreadyAdded(_foundMonsters[index].name)) {
                                     setState(() {
                                       _gameState.action(AddMonsterCommand(
-                                          _foundMonsters[index].name, null, _addAsAlly)); //
+                                          _foundMonsters[index].name, null, _addAsAlly));
                                     });
-
-                                    //Navigator.pop(context);
                                   }
                                 },
                               ),

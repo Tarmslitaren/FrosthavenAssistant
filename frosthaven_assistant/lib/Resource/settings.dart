@@ -21,7 +21,7 @@ class Settings {
   final userScalingBars = ValueNotifier<double>(
       (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
           ? 1.6
-          : 1.0); //if ! mobile ->2.0
+          : 1.0);
   final userScalingMenus = ValueNotifier<double>(1.0);
   final fullScreen = ValueNotifier<bool>(true);
   final darkMode = ValueNotifier<bool>(false);
@@ -98,14 +98,12 @@ class Settings {
       // Use it only after calling `hiddenWindowAtLaunch`
       windowManager.waitUntilReadyToShow().then((_) async {
         // Hide window title bar
-        //await windowManager.setTitleBarStyle('hidden');
         if (fullscreen) {
           await windowManager.setTitleBarStyle(TitleBarStyle.hidden);
           await windowManager.setFullScreen(true);
           await windowManager.center();
           await windowManager.show();
           await windowManager.setSkipTaskbar(false);
-          //await windowManager.setAlwaysOnTop(true);
           await windowManager
               .setPosition(const Offset(0, 0)); //weird this was needed
           await windowManager.show();

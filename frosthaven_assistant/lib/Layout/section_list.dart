@@ -13,7 +13,6 @@ class SectionList extends StatelessWidget {
 
   List<Widget> generateList(List<ScenarioModel> inputList) {
     List<Widget> list = [];
-   // if(inputList.length <=20) { //arbitrary limit, so view is not filled up with extra buttons
       for (int index = 0; index < inputList.length; index++) {
         var item = inputList[index];
         if (!item.name.contains("spawn")) {
@@ -22,7 +21,6 @@ class SectionList extends StatelessWidget {
           list.add(value);
         }
       }
-    //}
     return list;
   }
 

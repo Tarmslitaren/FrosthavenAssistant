@@ -196,7 +196,6 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       onTap: () {
         Navigator.pop(context);
         _gameState.action(SetScenarioCommand(name, false));
-        //Navigator.pop(context);
       },
     );
   }
@@ -269,11 +268,6 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                           if (event.runtimeType == RawKeyDownEvent &&
                               (event.logicalKey.keyId == 13)) {
                             if (_foundScenarios.isNotEmpty) {
-                              //_gameState.action(
-                              //    SetScenarioCommand(_foundScenarios[0], false));
-                              //Navigator.pop(context);
-                            }
-                            //Navigator.pop(context, this._textController.text);
                           }
                         },
                         child: TextField(

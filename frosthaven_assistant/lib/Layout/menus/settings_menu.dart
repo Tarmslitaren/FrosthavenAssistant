@@ -70,8 +70,6 @@ class SettingsMenuState extends State<SettingsMenu> {
                       Container(
                           constraints: const BoxConstraints(maxWidth: 300),
                           child: Column(
-                            //mainAxisAlignment: MainAxisAlignment.start,
-                            //crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
                                 "Settings",
@@ -250,7 +248,6 @@ class SettingsMenuState extends State<SettingsMenu> {
                               Slider(
                                 min: 0.2,
                                 max: 3.0,
-                                //divisions: 1,
                                 value: settings.userScalingMainList.value,
                                 onChanged: (value) {
                                   setState(() {
@@ -269,7 +266,6 @@ class SettingsMenuState extends State<SettingsMenu> {
                               Slider(
                                 min: min(0.8, maxBarScale),
                                 max: min(maxBarScale, 3.0),
-                                //divisions: 1,
                                 value: settings.userScalingBars.value,
                                 onChanged: (value) {
                                   setState(() {
@@ -294,26 +290,12 @@ class SettingsMenuState extends State<SettingsMenu> {
                                             setState(() {
                                               settings.style.value = Style.frosthaven;
                                               settings.saveToDisk();
-                                              //ThemeSwitcher.of(context).switchTheme(themeFH);
                                               getIt<GameState>().updateList.value++;
                                             });
                                           }),
                                       const Text('Frosthaven')
                                     ],
                                   ),
-                                  /*Row(
-                      children: [
-                        Radio(value: Style.gloomhaven, groupValue: settings.style.value, onChanged: (index) {
-                          setState(() {
-                            settings.style.value = Style.gloomhaven;
-                            settings.saveToDisk();
-                            //ThemeSwitcher.of(context).switchTheme(theme);
-                            getIt<GameState>().updateList.value++;
-                          });
-                        }),
-                        const Text('Gloomhaven')
-                      ],
-                    ),*/
                                   Row(
                                     children: [
                                       Radio(
@@ -325,9 +307,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                               settings.saveToDisk();
                                               if (getIt<GameState>().currentCampaign.value ==
                                                   "Frosthaven") {
-                                                //ThemeSwitcher.of(context).switchTheme(themeFH);
                                               } else {
-                                                //ThemeSwitcher.of(context).switchTheme(theme);
                                               }
                                               getIt<GameState>().updateList.value++;
                                             });

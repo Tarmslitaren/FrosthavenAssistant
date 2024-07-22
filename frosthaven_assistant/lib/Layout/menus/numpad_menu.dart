@@ -31,7 +31,6 @@ class NumpadMenuState extends State<NumpadMenu> {
       child: TextButton(
         child: Text(
           nr.toString(),
-          //textScaleFactor: scale,//maybe not right
           style: getTitleTextStyle(scale),
         ),
         onPressed: () {
@@ -64,13 +63,6 @@ class NumpadMenuState extends State<NumpadMenu> {
         width: 10,
         height: 180 * scale,
         decoration: BoxDecoration(
-          //color: Colors.black,
-          //borderRadius: BorderRadius.all(Radius.circular(8)),
-
-          /*border: Border.fromBorderSide(BorderSide(
-            color: Colors.blueGrey,
-            width: 10
-          )),*/
           image: DecorationImage(
             colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value
@@ -80,7 +72,6 @@ class NumpadMenuState extends State<NumpadMenu> {
           ),
         ),
         child: Stack(
-            //alignment: Alignment.center,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

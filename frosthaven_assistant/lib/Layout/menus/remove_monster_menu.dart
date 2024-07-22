@@ -48,14 +48,13 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                       image: AssetImage(
                           "assets/images/monsters/${currentMonsters[index].type.gfx}.png"),
                     ),
-                    //iconColor: currentCharacters[index].characterClass.color,
                     title: Text(currentMonsters[index].type.display,
                         style: const TextStyle(fontSize: 18)),
                     trailing: Text("(${currentMonsters[index].type.edition})",
                         style: const TextStyle(fontSize: 14, color: Colors.grey)),
                     onTap: () {
                       setState(() {
-                        _gameState.action(RemoveMonsterCommand([currentMonsters[index]])); //
+                        _gameState.action(RemoveMonsterCommand([currentMonsters[index]]));
                       });
                     },
                   ),

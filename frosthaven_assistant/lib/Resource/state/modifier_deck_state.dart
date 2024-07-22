@@ -326,11 +326,9 @@ class ModifierDeck {
   @override
   String toString() {
     return '{'
-        //'"cardCount": ${cardCount.value}, '
         '"blesses": ${_blesses.value}, '
         '"curses": ${_curses.value}, '
         '"enfeebles": ${_enfeebles.value}, '
-        // '"needsShuffle": ${needsShuffle}, '
         '"addedMinusOnes": ${_addedMinusOnes.value.toString()}, '
         '"badOmen": ${_badOmen.value.toString()}, '
         '"drawPile": ${_drawPile.toString()}, '

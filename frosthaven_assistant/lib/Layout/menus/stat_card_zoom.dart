@@ -26,12 +26,12 @@ class StatCardZoomState extends State<StatCardZoom> {
     double height = cardHeight * scale * zoomValue;
     double horizontalMargin = 40;
     if (screenWidth < horizontalMargin + width) {
-      zoomValue = (screenWidth - horizontalMargin) / (cardWidth * scale); // 2;
+      zoomValue = (screenWidth - horizontalMargin) / (cardWidth * scale);
     }
 
     double verticalMargin = 60;
     if (screenHeight < verticalMargin + height) {
-      zoomValue = (screenHeight - verticalMargin) / (cardHeight * scale); // 2;
+      zoomValue = (screenHeight - verticalMargin) / (cardHeight * scale);
     }
 
     double scaling = scale * zoomValue;

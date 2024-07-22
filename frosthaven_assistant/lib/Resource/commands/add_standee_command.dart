@@ -38,7 +38,6 @@ class AddStandeeCommand extends Command {
     } else {
       getIt<GameState>().updateList.value++;
     }
-    //getIt<GameState>().updateList.value++;
   }
 
   @override

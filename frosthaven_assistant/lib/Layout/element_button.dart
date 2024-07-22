@@ -162,8 +162,6 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                                       _gameState.elementState[widget.element] !=
                                               ElementState.inert
                                           ? BoxShadow(
-                                              //blurStyle: BlurStyle.solid,
-                                              //spreadRadius: 2 * settings.userScalingBars.value,
                                               blurRadius: 4 *
                                                   settings
                                                       .userScalingBars.value)
@@ -175,7 +173,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                                 duration: const Duration(milliseconds: 350),
                                 // Provide an optional curve to make the animation feel smoother.
                                 curve:
-                                    Curves.decelerate //Curves.linearToEaseOut
+                                    Curves.decelerate
                                 );
                           }),
                     )),
@@ -192,7 +190,6 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                       }
 
                       return Image(
-                        //fit: BoxFit.contain,
                         height: widget.width *
                             settings.userScalingBars.value *
                             0.65,
