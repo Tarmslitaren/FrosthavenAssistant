@@ -28,6 +28,17 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   final ScrollController _scrollController = ScrollController();
 
   int compareEditions(String a, String b) {
+
+    //sort current edition to top
+    String currentEdition = _gameState.currentCampaign.value;
+    if (b == currentEdition && a != currentEdition && a != "na") {
+      return 1;
+    }
+    if (a == currentEdition && b != currentEdition && b != "na") {
+      return -1;
+    }
+
+    //sort by edition
     for (String item in _gameData.editions) {
       if (b == item && a != item) {
         return 1;

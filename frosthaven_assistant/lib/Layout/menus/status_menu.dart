@@ -384,7 +384,7 @@ class StatusMenuState extends State<StatusMenu> {
       name = widget.monsterId!; //this is no good
       ownerId = widget.monsterId!;
     } else if (widget.characterId != null) {
-      name = widget.characterId!;
+      name = widget.characterId!; //now this is no good either...
       ownerId = name;
     }
 
@@ -437,6 +437,10 @@ class StatusMenuState extends State<StatusMenu> {
           character = item as Character;
         }
       }
+    }
+
+    if (figure is CharacterState && character != null) {
+      name = character.characterClass.name;
     }
 
     double scale = 1;

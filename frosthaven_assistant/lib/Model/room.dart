@@ -12,10 +12,14 @@ class RoomMonsterData {
     List<int> normal = [];
     if (data.containsKey('normal')) {
       normal = data['normal'].cast<int>();
+    } else {
+      normal = [0,0,0];
     }
     List<int> elite = [];
     if (data.containsKey('elite')) {
       elite = data['elite'].cast<int>();
+    } else {
+      elite = [0,0,0];
     }
 
     return RoomMonsterData(name, normal, elite);

@@ -42,6 +42,23 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
       color = Colors.red;
       type = MonsterType.boss;
     }
+
+    if (getIt<GameState>().currentCampaign.value == "Buttons and Bugs") {
+      if(nr == 1) {
+        color = Colors.green;
+      }
+      if(nr == 2) {
+        color = Colors.blue;
+      }
+      if(nr == 3) {
+        color = Colors.purple;
+      }
+      if(nr == 4) {
+        color = Colors.red;
+      }
+    }
+
+
     bool isOut = false;
     for (var item in widget.monster.monsterInstances) {
       if (item.standeeNr == nr) {

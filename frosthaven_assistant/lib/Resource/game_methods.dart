@@ -38,8 +38,7 @@ class GameMethods {
     double totalLevels = 0;
     double nrOfCharacters = 0;
     for (var item in _gameState.currentList) {
-      if (item is Character &&
-          !GameMethods.isObjectiveOrEscort(item.characterClass)) {
+      if (item is Character && !GameMethods.isObjectiveOrEscort(item.characterClass)) {
         totalLevels += item.characterState.level.value;
         nrOfCharacters++;
       }
@@ -382,9 +381,10 @@ class GameMethods {
   }
 
   static void applyDifficulty(_StateModifier _) {
-    if(_gameState.autoScenarioLevel.value == true) {//adjust difficulty
+    if (_gameState.autoScenarioLevel.value == true) {
+      //adjust difficulty
       int newLevel = GameMethods.getRecommendedLevel() + _gameState.difficulty.value;
-      if(newLevel > 7) {
+      if (newLevel > 7) {
         newLevel = 7;
       }
       GameMethods.setLevel(_, newLevel, null);
@@ -399,9 +399,11 @@ class GameMethods {
         break;
       }
     }
-    character!.characterState.setFigureLevel(_, level);
-    character.characterState.setHealth(_,
-        character.characterClass.healthByLevel[level - 1]);
+    if (character!.characterClass.healthByLevel.length < level) {
+      level = character.characterClass.healthByLevel.length;
+    }
+    character.characterState.setFigureLevel(_, level);
+    character.characterState.setHealth(_, character.characterClass.healthByLevel[level - 1]);
     character.characterState.setMaxHealth(_, character.characterState.health.value);
 
     if (character.id == "Beast Tyrant") {
@@ -495,8 +497,7 @@ class GameMethods {
         roomMonsterData =
             sectionData.monsterStandees != null ? sectionData.monsterStandees!.toList() : [];
       }
-    }
-    else {
+    } else {
       if (scenario != "custom") {
         var scenarioData =
             _gameData.modelData.value[_gameState.currentCampaign.value]?.scenarios[scenario];
@@ -506,7 +507,7 @@ class GameMethods {
           initMessage = scenarioData.initMessage;
           roomMonsterData =
               scenarioData.monsterStandees != null ? scenarioData.monsterStandees!.toList() : [];
-          for(var item in scenarioData.sections) {
+          for (var item in scenarioData.sections) {
             subSections.add(item.name);
           }
         }
@@ -694,10 +695,11 @@ class GameMethods {
 
     //handle random sections
     var rule = specialRules.firstWhereOrNull((element) => element.type == "RandomSections");
-    if(rule != null) {
+    if (rule != null) {
       subSections.shuffle();
       //add the random selected to rule.list
-      SpecialRule newRule = SpecialRule("RandomSections", "", 0, 0, 0, "", subSections.sublist(0,3), false, "");
+      SpecialRule newRule =
+          SpecialRule("RandomSections", "", 0, 0, 0, "", subSections.sublist(0, 3), false, "");
       specialRules.remove(rule);
       specialRules.add(newRule);
     }
@@ -711,8 +713,7 @@ class GameMethods {
     //show init message if exists:
     if (initMessage.isNotEmpty && getIt<Settings>().showReminders.value == true) {
       _gameState._toastMessage.value += initMessage;
-    }
-    else {
+    } else {
       if (getIt.isRegistered<BuildContext>()) {
         ScaffoldMessenger.of(getIt<BuildContext>()).hideCurrentSnackBar();
       }
@@ -836,6 +837,42 @@ class GameMethods {
     for (var deck in _gameState.currentAbilityDecks) {
       deck._shuffle();
     }
+  }
+
+  static int getNextAvailableBnBStandee(Monster data) {
+    int nrOfStandees = data.type.count;
+    for (int i = 0; i < nrOfStandees; i++) {
+      bool isAvailable = true;
+      for (var item in data.monsterInstances) {
+        if (item.standeeNr == i + 1) {
+          isAvailable = false;
+          break;
+        }
+      }
+
+      if (isAvailable) {
+        //check for other monsters with same standees
+        for (var item in _gameState.currentList) {
+          if (item is Monster) {
+            if (item.id != data.id) {
+              for (var standee in item.monsterInstances) {
+                if (standee.standeeNr == i + 1) {
+                  isAvailable = false;
+                  break;
+                }
+              }
+            }
+          }
+          if (!isAvailable) {
+            break;
+          }
+        }
+      }
+      if (isAvailable) {
+        return i + 1;
+      }
+    }
+    return 0;
   }
 
   static int getRandomStandee(Monster data) {
@@ -1015,10 +1052,11 @@ class GameMethods {
       var roomMonsters = roomMonsterData[i];
       addMonster(stateModifier, roomMonsters.name, _gameState._scenarioSpecialRules);
     }
+    bool addSorted = _gameState.currentCampaign.value == "Buttons and Bugs";
     if (getIt<Settings>().noStandees.value != true &&
         getIt<Settings>().autoAddStandees.value != false) {
-      if (getIt<Settings>().randomStandees.value == true) {
-        if (initMessage.isNotEmpty) {
+      if (getIt<Settings>().randomStandees.value == true || addSorted) {
+        if (initMessage.isNotEmpty && !addSorted) {
           initMessage += "\n";
         }
         for (int i = 0; i < roomMonsterData.length; i++) {
@@ -1047,6 +1085,9 @@ class GameMethods {
 
           for (int i = 0; i < normalAmount; i++) {
             int randomNr = GameMethods.getRandomStandee(data);
+            if(addSorted) {
+              randomNr = GameMethods.getNextAvailableBnBStandee(data);
+            }
             if (randomNr != 0) {
               normals.add(randomNr);
               GameMethods.executeAddStandee(stateModifier, randomNr, null,
@@ -1054,7 +1095,7 @@ class GameMethods {
             }
           }
 
-          if (elites.isNotEmpty || normals.isNotEmpty) {
+          if (!addSorted && (elites.isNotEmpty || normals.isNotEmpty)) {
             elites.sort();
             normals.sort();
             if (i != 0) {
@@ -1147,8 +1188,7 @@ class GameMethods {
   }
 
   static bool isObjectiveOrEscort(CharacterClass character) {
-    return character.id == "Escort" ||
-        character.id == "Objective";
+    return character.id == "Escort" || character.id == "Objective";
   }
 
   static Character? createCharacter(_StateModifier _, String id, String? display, int level) {
@@ -1168,7 +1208,7 @@ class GameMethods {
         characterState._health.value = characterClass.healthByLevel[level - 1];
         characterState._maxHealth.value = characterState.health.value;
 
-        if(display != null) {
+        if (display != null) {
           characterState._display.value = display;
         } else {
           characterState._display.value = characterClass.name;
@@ -1382,18 +1422,25 @@ class GameMethods {
     }
   }
 
+  static bool isFrosthavenStyledEdition(String edition) {
+    return edition == "Frosthaven" || edition == "Buttons and Bugs";
+  }
+
   static bool isFrosthavenStyle(MonsterModel? monster) {
-    if (monster != null && monster.edition == "Frosthaven") {
+    //frosthaven monster
+    if (monster != null && isFrosthavenStyledEdition(monster.edition)) {
       return true;
     }
+    //frosthaven monsters in other campaigns
     if (getIt<Settings>().style.value != Style.frosthaven &&
         monster != null &&
-        monster.edition != "Frosthaven") {
+        !isFrosthavenStyledEdition(monster.edition)) {
       return false;
     }
+    //frosthaven style settings
     bool frosthavenStyle = getIt<Settings>().style.value == Style.frosthaven ||
         getIt<Settings>().style.value == Style.original &&
-            getIt<GameState>().currentCampaign.value == "Frosthaven";
+            isFrosthavenStyledEdition(getIt<GameState>().currentCampaign.value);
     return frosthavenStyle;
   }
 

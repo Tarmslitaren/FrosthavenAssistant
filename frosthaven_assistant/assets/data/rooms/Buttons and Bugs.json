@@ -1,0 +1,335 @@
+{
+  "1": [
+    {
+      "start": {
+        "Bandit Guard (BnB)": {
+          "normal": [
+            2, 2, 2
+          ]
+        }
+      }
+    }
+  ],
+  "2": [
+    {
+      "start": {
+        "Bandit Guard (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Bandit Archer (BnB)": {
+          "normal": [
+            2, 2, 2
+          ]
+        }
+      }
+    }
+  ],
+  "3": [
+    {
+      "start": {
+        "Mouse": {
+          "normal": [
+            3,3,3
+          ]
+        }
+      }
+    }
+  ],
+  "4": [
+    {
+      "start": {
+        "Bandit Archer (BnB)": {
+          "normal": [
+            2, 2, 2
+          ]
+        },
+        "Bandit Guard (BnB)": {
+          "normal": [
+            2, 2, 2
+          ]
+        }
+      }
+    }
+  ],
+  "5": [
+    {
+      "start": {
+        "King Button": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Arena Sorcerer": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Rending Beetle": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ],
+  "6": [
+    {
+      "start": {
+        "Harrowing Infestation": {
+          "normal": [
+            1, 1, 1
+          ]
+        },
+        "Spitting Moth": {
+          "normal": [
+            1, 1, 1
+          ]
+        },
+        "Sewer Rat": {
+          "normal": [
+            1, 1, 1
+          ]
+        }
+      }
+    }
+  ],
+  "7": [
+    {
+      "start": {
+        "Arena Sorcerer": {
+          "normal": [
+            2, 2, 2
+          ]
+        },
+        "Gloomtoad": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ],
+  "8": [
+    {
+      "start": {
+        "Spitting Moth": {
+          "normal": [
+            1, 1, 1
+          ]
+        },
+        "Venomous Centipede": {
+          "normal": [
+            1, 1, 1
+          ]
+        }
+      }
+    }
+  ],
+  "9": [
+    {
+      "start": {
+        "Mouse": {
+          "normal": [
+            4,4,4
+          ]
+        }
+      }
+    }
+  ],
+  "10": [
+    {
+      "start": {
+        "Gloomtoad": {
+          "normal": [
+            2, 2, 2
+          ]
+        },
+        "Rending Beetle": {
+          "normal": [1, 1, 1]
+        }
+      }
+    }
+  ],
+  "11": [
+    {
+      "start": {
+        "Venomous Centipede": {
+          "normal": [
+            3, 3, 3
+          ]
+        },
+        "Sewer Rat": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ],
+  "12": [
+    {
+      "start": {
+        "Spitting Moth": {
+          "normal": [
+            2, 2, 2
+          ]
+        },
+        "Sewer Rat": {
+          "normal": [
+            2, 2, 2
+          ]
+        }
+      }
+    }
+  ],
+  "13": [
+    {
+      "start": {
+        "Harrowing Infestation": {
+          "normal": [
+            2, 2, 2
+          ]
+        },
+        "Spitting Moth": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ],
+  "14": [
+    {
+      "start": {
+        "Stuffed Construct": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ],
+  "15": [
+    {
+      "start": {
+        "Earth Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Flame Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Frost Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ],
+  "16": [
+    {
+      "start": {
+        "Earth Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Wind Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Flame Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ],
+  "17": [
+    {
+      "start": {
+        "Flame Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Wind Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Frost Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ],
+  "18": [
+    {
+      "start": {
+        "Earth Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Wind Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Frost Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ],
+  "19": [
+    {
+      "start": {
+        "Earth Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Wind Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Frost Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        },
+        "Flame Demon (BnB)": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ],
+  "20": [
+    {
+      "start": {
+        "Mounted Prince": {
+          "normal": [
+            1,1,1
+          ]
+        }
+      }
+    }
+  ]
+}

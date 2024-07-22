@@ -46,13 +46,12 @@ class LineBuilder {
   };
 
   static bool isElement(String item) {
-    if (item == "air" ||
-        item == "earth" ||
-        item == "earthfire" ||
-        item == "fire" ||
-        item == "ice" ||
-        item == "dark" ||
-        item == "light" ||
+    if (item.contains("air") ||
+        item.contains("earth") ||
+        item.contains("fire") ||
+        item.contains("ice") ||
+        item.contains("dark") ||
+        item.contains("light") ||
         item == "any") {
       return true;
     }

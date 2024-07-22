@@ -259,6 +259,21 @@ class MonsterBox extends StatelessWidget {
       color = Colors.red;
     }
 
+    if (getIt<GameState>().currentCampaign.value == "Buttons and Bugs") {
+      if(data.standeeNr == 1) {
+        color = Colors.green;
+      }
+      if(data.standeeNr == 2) {
+        color = Colors.blue;
+      }
+      if(data.standeeNr == 3) {
+        color = Colors.purple;
+      }
+      if(data.standeeNr == 4) {
+        color = Colors.red;
+      }
+    }
+
     double width = MonsterBox.getWidth(scale, data);
     String? characterId;
     if (ownerId != data.name) {

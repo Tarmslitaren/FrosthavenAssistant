@@ -132,6 +132,7 @@ Widget createMainScaffold(BuildContext context) {
                                                   if (GameMethods.shouldShowAlliesDeck())
                                                     const ModifierDeckWidget(name: "allies"),
                                                   if (!modFitsOnBar &&
+                                                      gameState.currentCampaign.value != "Buttons and Bugs" && //hide amd deck for buttons and bugs
                                                       getIt<Settings>().showAmdDeck.value)
                                                     Container(
                                                         margin: EdgeInsets.only(

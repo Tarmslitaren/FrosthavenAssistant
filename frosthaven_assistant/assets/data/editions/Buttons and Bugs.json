@@ -1,0 +1,587 @@
+{
+  "edition": "Buttons and Bugs",
+  "classes": [
+     {
+       "name": "Bruiser",
+       "id": "Bruiser BnB",
+       "color": "FF35ACD5",
+       "colorSecondary": "ff313959",
+       "edition": "Buttons and Bugs",
+       "health": [12, 13, 15, 16, 18],
+       "hidden": false,
+       "summons": {}
+    },
+     {
+       "name": "Tinkerer",
+       "id": "Tinkerer BnB",
+       "color": "FFD1C3A2",
+       "edition": "Buttons and Bugs",
+       "health": [11,12,14,15,17],
+       "hidden": false,
+       "summons": {}
+    },
+     {
+       "name": "Spellweaver",
+       "id": "Spellweaver BnB",
+       "color": "FFB28AC2",
+       "colorSecondary": "ff30254c",
+       "edition": "Buttons and Bugs",
+       "health": [10,11,13,14,16],
+       "hidden": false,
+       "summons": {}
+    },
+     {
+       "name": "Silent Knife",
+       "id": "Silent Knife BnB",
+       "color": "FF9ECF5F",
+       "edition": "Buttons and Bugs",
+       "health": [11,12,14,15,17],
+       "hidden": false,
+       "summons": {}
+    },
+    {
+      "name": "Cragheart",
+      "id": "Cragheart BnB",
+      "color": "FF828B3B",
+      "edition": "Buttons and Bugs",
+      "health": [12, 13, 15, 16, 18],
+      "hidden": false,
+      "summons": {}
+    },
+     {
+      "name": "Mindthief",
+       "id": "Mindthief BnB",
+       "color": "FF6279A5",
+       "colorSecondary": "ff344c67",
+       "edition": "Buttons and Bugs",
+       "health": [10,11,13,14,16],
+       "hidden": false,
+       "summons": {}
+    }
+  ],
+
+  "monsterAbilities": [
+    {
+      "name": "Bandit Guard",
+      "cards": [
+        [ 1, true, 30, "%move% 2","*.........", "%attack% 1","*.........",  "%shield% + 1"],
+        [ 2, true, 50, "%move% 1","*.........", "%attack% 2" ],
+        [ 3, true, 70,  "%move% 2","*.........", "%attack% 2" ]
+      ]
+    },
+    {
+      "name": "Bandit Archer",
+      "cards": [
+        [ 1, true, 16, "%move% 1","*.........", "%attack% 2", "^%range% 2"],
+        [ 2, true, 31, "%move% 1","*.........", "%attack% 2", "^%range% 3" ],
+        [ 3, true, 64,  "%attack% 3", "^%range% 3"  ]
+      ]
+    },
+    {
+      "name": "Mouse",
+      "note": "check if retaliate stacks properly, and ert+eound works",
+      "cards": [
+        [ 1, true, 6, "%move% 2","*.........", "%attack% 1","*.........", "%retaliate% + 1","^%wound%"],
+        [ 2, true, 19, "%move% 3","*.........", "%attack% 2" ],
+        [ 3, true, 46,  "%attack% 1", "*.........", "%move% 2", "*.........", "%attack% 2" ,"^%pierce% 2"]
+      ]
+    },
+    {
+      "name": "Rending Beetle",
+      "cards": [
+        [ 1, true, 13, "%attack% 1", "^%wound%","*.........", "%move% 2","*.........", "%attack% 1", "^%wound%"],
+        [ 2, true, 25, "%move% 2","*.........", "%attack% 3", "^%wound%" ],
+        [ 3, true, 59,  "%move% 1", "*.........", "%attack% 2", "^%wound%", "*.........", "%attack% 2", "^%wound%"]
+      ]
+    },
+    {
+      "name": "Arena Sorcerer",
+      "cards": [
+        [ 1, true, 22, "%dark%","*.........", "%move% 3","*.........", "%attack% 2","[r]","%earth%%use%", "^%pierce% 2", "[/r]"],
+        [ 2, true, 51, "%attack% 2","^%range% 4", "[r]","%fire%%use%","%wound%","[/r]", "[r]" ,"%ice%%use%","%muddle%", "[/r]" ],
+        [ 3, true, 68,  "%move% 1", "*.........", "%attack% 3", "^%range% 3"]
+      ]
+    },
+    {
+      "name": "Harrowing Infestation",
+      "cards": [
+        [ 1, true, 7, "%attack% 1", "^%range% 3", "^%muddle%","*.........", "%heal% 2", "^Self"],
+        [ 2, true, 16, "%move% 2","*.........", "%attack% 2","*.........", "%heal% 3", "^Self" ],
+        [ 3, true, 38,  "%move% 2", "*.........", "%attack% 2","[r]", "%any%%use%", "^+1 %attack%, %muddle%", "[/r]"]
+      ]
+    },
+    {
+      "name": "Spitting Moth",
+      "cards": [
+        [ 1, true, 27, "%air% ","*.........", "%attack% 1","^%range% 4, %muddle%, %poison%"],
+        [ 2, true, 52, "%move% 2","*.........", "%attack% 2", "^%range% 3, %muddle%" ],
+        [ 3, true, 87,  "%move% 1", "*.........", "%attack% 2", "^%range% 4, %muddle%"]
+      ]
+    },
+    {
+      "name": "Sewer Rat",
+      "cards": [
+        [ 1, true, 3, "%move% 2","*.........", "%retaliate% 2","^%poison%","*.........", "%heal% 2", "^Self"],
+        [ 2, true, 41, "%move% 3","*.........", "%attack% 3" ],
+        [ 3, true, 80,  "%attack% 2", "*.........", "%move% 2", "*.........", "%attack% 2", "^%poison%"]
+      ]
+    },
+    {
+      "name": "Gloomtoad",
+      "cards": [
+        [ 1, true, 24, "%strengthen%", "^%target% 2, %range% 3","*.........", "%poison%, %muddle%","^%range% 3"],
+        [ 2, true, 37, "%move% 2","^%jump%","*.........", "%attack% 2", "^%range% 2, %poison%" ],
+        [ 3, true, 43,  "%move% 1", "*.........", "%attack% 3", "^%range% 2", "[r]","%earthdark%%use%","%muddle%", "[/r]"]
+      ]
+    },
+    {
+      "name": "Venomous Centipede",
+      "cards": [
+        [ 1, true, 18, "%move% 2", "^%jump%","*.........", "%attack% 1","^%muddle%, %poison%"],
+        [ 2, true, 33, "%move% 2", "^%jump%","*.........", "%attack% 1", "^%poison%", "*.........", "%attack% 1", "^%poison%"],
+        [ 3, true, 58,  "%move% 3", "*.........", "%attack% 2","^%poison%"]
+      ]
+    },
+    {
+      "name": "King Button",
+      "cards": [
+        [ 1, true, 5, "%iceearth%","*.........", "%shield% 2","*.........", "%heal% 2", "^Self"],
+        [ 2, true, 43, "%move% 2","*.........", "%attack% 2", "^%range% 3", "[r]","%earthdark%%use%", "^%poison%", "[/r]"],
+        [ 3, true, 76,  "%move% 1", "*.........", "%attack% 3", "^%range% 3"]
+      ]
+    },
+    {
+      "name": "Stuffed Construct",
+      "cards": [
+        [ 1, true, 10, "%ice%","*.........", "%shield% + 2","*.........", "%strengthen%, %wound%", "^Self"],
+        [ 2, true, 45, "%move% 2","*.........", "%attack% 4", "^%push% 2" ],
+        [ 3, true, 70,  "%move% 2", "*.........", "%attack% 3", "^%range% 3, %immobilize%"]
+      ]
+    },
+    {
+      "name": "Tattered Construct",
+      "cards": [
+        [ 1, true, 4, "%air%","*.........", "%move% 2","*.........", "%retaliate% 3", "^%range% 4"],
+        [ 2, true, 76, "%attack% 3", "^%range% 5, %disarm%","*.........", "%wound%", "^Self" ],
+        [ 3, true, 95,  "%move% 3", "*.........", "%attack% 4", "*.........", "%strengthen%", "^Self"]
+      ]
+    },
+    {
+      "name": "Mounted Prince",
+      "cards": [
+        [ 1, true, 3, "%pull% 3","^%range% 5, %immobilize%","*.........", "%retaliate% 3","^%range% 3, %push% 2"],
+        [ 2, true, 42, "%attack% 2", "^%range% 4","*.........", "%move% 3", "*.........", "%attack% 2"],
+        [ 3, true, 80, "%iceair%", "*.........", "%move% 1", "*.........", "%attack% 5", "[r]","%any%%use%", "%range% 3", "[/r]"]
+      ]
+    },
+    {
+      "name": "Goring Beetle",
+      "cards": [
+        [ 1, true, 11, "%iceearth%","*.........", "%move% 4","*.........", "%retaliate% 2", "^%push% 2"],
+        [ 2, true, 33, "%move% 2","[r]","%earthfire%%use%","+2 %move%", "[/r]", "*.........", "%attack% 4", "^%push% 2, %pierce% 2" ],
+        [ 3, true, 61,  "%move% 3", "^%jump%", "*.........", "%attack% 3", "^%push% 2, %pierce% 2", "[r]","%earthdark%%use%", "%wound%", "[/r]"]
+      ]
+    },
+    {
+      "name": "Demon Prince",
+      "cards": [
+        [ 1, true, 1, "%firedark%","*.........", "%heal% 2", "^%range% 5", "*.........", "%retaliate% 2", "^%range% 5"],
+        [ 2, true, 22, "%move% 2","*.........", "%attack% 4", "^%range% 3 ,%pull% 2","[r]", "%iceair%%use%","%muddle%", "[/r]" ],
+        [ 3, true, 38,  "%move% 1", "*.........", "%attack% 2", "^%range% 4, %pull% 2", "[r]", "%airearth%%use%","%poison%","[/r]", "*.........", "%attack% 2"]
+      ]
+    },
+    {
+      "name": "Frost Demon (BnB)",
+      "cards": [
+        [ 1, true, 18, "%ice%","*.........", "%immobilize%", "^%range% 3","*.........", "%shield% + 2"],
+        [ 2, true, 58, "%move% 2","*.........", "%attack% 3","[r]", "%iceair%%use%", "%pierce% 3" , "[/r]"],
+        [ 3, true, 78,  "%move% 2", "*.........", "%attack% 3", "[r]", "%earthfire%%use%", "%wound%", "[/r]"]
+      ]
+    },
+    {
+      "name": "Flame Demon (BnB)",
+      "cards": [
+        [ 1, true, 3, "%fire%","*.........", "%move% 1","*.........", "%attack% 3", "^%range% 2"],
+        [ 2, true, 49, "%move% 2","*.........", "%attack% 4", "[r]", "%fireair%%use%", "%range% 3", "[/r]" ],
+        [ 3, true, 67,  "%move% 2", "*.........", "%attack% 3", "^%range% 2", "[r]","%iceearth%%use%", "%pierce% 2", "[/r]"]
+      ]
+    },
+    {
+      "name": "Earth Demon (BnB)",
+      "cards": [
+        [ 1, true, 62, "%earth%","*.........", "%move% 2","*.........", "%attack% 3","^%immobilize%"],
+        [ 2, true, 79, "%move% 1", "[r]","%fireair%%use%", "+2 %move%", "[/r]","*.........", "%attack% 3","^%immobilize%" ],
+        [ 3, true, 93,  "%move% 2", "*.........", "%attack% 3", "^%immobilize%", "[r]", "%iceearth%%use%", "%push% 1", "[/r]"]
+      ]
+    },
+    {
+      "name": "Wind Demon (BnB)",
+      "cards": [
+        [ 1, true, 9, "%air%","*.........", "%move% 3","*.........", "%attack% 3", "^%range% 2"],
+        [ 2, true, 21, "%push% 1", "^%range% 2","*.........", "%attack% 3", "^%range% 4", "[r]","%iceearth%%use%", "%disarm%", "[/r]" ],
+        [ 3, true, 43,  "%attack% 2", "^%range% 4", "*.........", "%invisible%", "^Self", "[r]","%earthfire%%use%", "%heal% 1", "[/r]"]
+      ]
+    }
+  ],
+  "monsters": {
+    "Bandit Archer (BnB)": {
+      "deck": "Bandit Archer",
+      "display": "Bandit Archer",
+      "gfx": "Bandit Archer BB",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 7},
+        {"level": 1, "health": 7},
+        {"level": 2, "health": 7},
+        {"level": 3, "health": 7},
+        {"level": 4, "health": 7},
+        {"level": 5, "health": 7},
+        {"level": 6, "health": 7},
+        {"level": 7, "health": 7}
+      ]
+    },
+    "Bandit Guard (BnB)": {
+      "deck": "Bandit Guard",
+      "display": "Bandit Guard",
+      "gfx": "Bandit Guard BB",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 8,"attributes": [ "%shield% 1" ]},
+        {"level": 1, "health": 8,"attributes": [ "%shield% 1" ]},
+        {"level": 2, "health": 8,"attributes": [ "%shield% 1" ]},
+        {"level": 3, "health": 8,"attributes": [ "%shield% 1" ]},
+        {"level": 4, "health": 8,"attributes": [ "%shield% 1" ]},
+        {"level": 5, "health": 8,"attributes": [ "%shield% 1" ]},
+        {"level": 6, "health": 8,"attributes": [ "%shield% 1" ]},
+        {"level": 7, "health": 8,"attributes": [ "%shield% 1" ]}
+      ]
+    },
+    "Wind Demon (BnB)": {
+      "deck": "Wind Demon (BnB)",
+      "display": "Wind Demon",
+      "gfx": "Wind Demon BB",
+      "count": 4,
+      "flying": true,
+      "levels": [
+        {"level": 0, "health": 8,"attributes": [ "%shield% 3" ]},
+        {"level": 1, "health": 8,"attributes": [ "%shield% 3" ]},
+        {"level": 2, "health": 8,"attributes": [ "%shield% 3" ]},
+        {"level": 3, "health": 8,"attributes": [ "%shield% 3" ]},
+        {"level": 4, "health": 8,"attributes": [ "%shield% 3" ]},
+        {"level": 5, "health": 8,"attributes": [ "%shield% 3" ]},
+        {"level": 6, "health": 8,"attributes": [ "%shield% 3" ]},
+        {"level": 7, "health": 8,"attributes": [ "%shield% 3" ]}
+      ]
+    },
+    "Earth Demon (BnB)": {
+      "deck": "Earth Demon (BnB)",
+      "display": "Earth Demon",
+      "gfx": "Earth Demon BB",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 18,"attributes": [ "%immobilize%" ]},
+        {"level": 1, "health": 18,"attributes": [ "%immobilize%" ]},
+        {"level": 2, "health": 18,"attributes": [ "%immobilize%" ]},
+        {"level": 3, "health": 18,"attributes": [ "%immobilize%" ]},
+        {"level": 4, "health": 18,"attributes": [ "%immobilize%" ]},
+        {"level": 5, "health": 18,"attributes": [ "%immobilize%" ]},
+        {"level": 6, "health": 18,"attributes": [ "%immobilize%" ]},
+        {"level": 7, "health": 18,"attributes": [ "%immobilize%" ]}
+      ]
+    },
+    "Flame Demon (BnB)": {
+      "deck": "Flame Demon (BnB)",
+      "display": "Flame Demon",
+      "gfx": "Flame Demon BB",
+      "flying": true,
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 12,"attributes": [ "%shield% 1", "%retaliate% 2" ]},
+        {"level": 1, "health": 12,"attributes": [ "%shield% 1", "%retaliate% 2" ]},
+        {"level": 2, "health": 12,"attributes": [ "%shield% 1", "%retaliate% 2" ]},
+        {"level": 3, "health": 12,"attributes": [ "%shield% 1", "%retaliate% 2" ]},
+        {"level": 4, "health": 12,"attributes": [ "%shield% 1", "%retaliate% 2" ]},
+        {"level": 5, "health": 12,"attributes": [ "%shield% 1", "%retaliate% 2" ]},
+        {"level": 6, "health": 12,"attributes": [ "%shield% 1", "%retaliate% 2" ]},
+        {"level": 7, "health": 12,"attributes": [ "%shield% 1", "%retaliate% 2" ]}
+      ]
+    },
+    "Frost Demon (BnB)": {
+      "deck": "Frost Demon (BnB)",
+      "display": "Frost Demon",
+      "gfx": "Frost Demon BB",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 14,"attributes": [ "%shield% 2", "%retaliate% 1", "^%muddle% " ]},
+        {"level": 1, "health": 14,"attributes": [ "%shield% 2", "%retaliate% 1", "^%muddle% " ]},
+        {"level": 2, "health": 14,"attributes": [ "%shield% 2", "%retaliate% 1", "^%muddle% " ]},
+        {"level": 3, "health": 14,"attributes": [ "%shield% 2", "%retaliate% 1", "^%muddle% " ]},
+        {"level": 4, "health": 14,"attributes": [ "%shield% 2", "%retaliate% 1", "^%muddle% " ]},
+        {"level": 5, "health": 14,"attributes": [ "%shield% 2", "%retaliate% 1", "^%muddle% " ]},
+        {"level": 6, "health": 14,"attributes": [ "%shield% 2", "%retaliate% 1", "^%muddle% " ]},
+        {"level": 7, "health": 14,"attributes": [ "%shield% 2", "%retaliate% 1", "^%muddle% " ]}
+      ]
+    },
+    "Demon Prince": {
+      "deck": "Demon Prince",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 18,"attributes": [ "%pull% 2", "%shield% 1" ], "immunities":  ["%disarm%"]},
+        {"level": 1, "health": 18,"attributes": [ "%pull% 2", "%shield% 1" ], "immunities":  ["%disarm%"]},
+        {"level": 2, "health": 18,"attributes": [ "%pull% 2", "%shield% 1" ], "immunities":  ["%disarm%"]},
+        {"level": 3, "health": 18,"attributes": [ "%pull% 2", "%shield% 1" ], "immunities":  ["%disarm%"]},
+        {"level": 4, "health": 18,"attributes": [ "%pull% 2", "%shield% 1" ], "immunities":  ["%disarm%"]},
+        {"level": 5, "health": 18,"attributes": [ "%pull% 2", "%shield% 1" ], "immunities":  ["%disarm%"]},
+        {"level": 6, "health": 18,"attributes": [ "%pull% 2", "%shield% 1" ], "immunities":  ["%disarm%"]},
+        {"level": 7, "health": 18,"attributes": [ "%pull% 2", "%shield% 1" ], "immunities":  ["%disarm%"]}
+      ]
+    },
+    "Goring Beetle": {
+      "deck": "Goring Beetle",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 10,"attributes": [ "%pierce% 2", "%shield% 3" ], "immunities":  ["%immobilize%"]},
+        {"level": 1, "health": 10,"attributes": [ "%pierce% 2", "%shield% 3" ], "immunities":  ["%immobilize%"]},
+        {"level": 2, "health": 10,"attributes": [ "%pierce% 2", "%shield% 3" ], "immunities":  ["%immobilize%"]},
+        {"level": 3, "health": 10,"attributes": [ "%pierce% 2", "%shield% 3" ], "immunities":  ["%immobilize%"]},
+        {"level": 4, "health": 10,"attributes": [ "%pierce% 2", "%shield% 3" ], "immunities":  ["%immobilize%"]},
+        {"level": 5, "health": 10,"attributes": [ "%pierce% 2", "%shield% 3" ], "immunities":  ["%immobilize%"]},
+        {"level": 6, "health": 10,"attributes": [ "%pierce% 2", "%shield% 3" ], "immunities":  ["%immobilize%"]},
+        {"level": 7, "health": 10,"attributes": [ "%pierce% 2", "%shield% 3" ], "immunities":  ["%immobilize%"]}
+      ]
+    },
+    "Mounted Prince": {
+      "deck": "Mounted Prince",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 18,"attributes": [  "%shield% 2" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 1, "health": 18,"attributes": [  "%shield% 2" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 2, "health": 18,"attributes": [  "%shield% 2" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 3, "health": 18,"attributes": [  "%shield% 2" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 4, "health": 18,"attributes": [  "%shield% 2" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 5, "health": 18,"attributes": [  "%shield% 2" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 6, "health": 18,"attributes": [  "%shield% 2" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 7, "health": 18,"attributes": [  "%shield% 2" ], "immunities":  ["%disarm%","%immobilize%"]}
+      ]
+    },
+    "Tattered Construct": {
+      "deck": "Tattered Construct",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 16,"attributes": [  "%shield% 1" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 1, "health": 16,"attributes": [  "%shield% 1" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 2, "health": 16,"attributes": [  "%shield% 1" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 3, "health": 16,"attributes": [  "%shield% 1" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 4, "health": 16,"attributes": [  "%shield% 1" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 5, "health": 16,"attributes": [  "%shield% 1" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 6, "health": 16,"attributes": [  "%shield% 1" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 7, "health": 16,"attributes": [  "%shield% 1" ], "immunities":  ["%disarm%","%immobilize%"]}
+      ]
+    },
+    "Stuffed Construct": {
+      "deck": "Stuffed Construct",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 12,"attributes": [  "%shield% 3" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 1, "health": 12,"attributes": [  "%shield% 3" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 2, "health": 12,"attributes": [  "%shield% 3" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 3, "health": 12,"attributes": [  "%shield% 3" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 4, "health": 12,"attributes": [  "%shield% 3" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 5, "health": 12,"attributes": [  "%shield% 3" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 6, "health": 12,"attributes": [  "%shield% 3" ], "immunities":  ["%disarm%","%immobilize%"]},
+        {"level": 7, "health": 12,"attributes": [  "%shield% 3" ], "immunities":  ["%disarm%","%immobilize%"]}
+      ]
+    },
+    "King Button": {
+      "deck": "King Button",
+      "count": 4,
+      "flying": true,
+      "levels": [
+        {"level": 0, "health": 6,"attributes": [  "%shield% 3" ]},
+        {"level": 1, "health": 6,"attributes": [  "%shield% 3" ]},
+        {"level": 2, "health": 6,"attributes": [  "%shield% 3" ]},
+        {"level": 3, "health": 6,"attributes": [  "%shield% 3" ]},
+        {"level": 4, "health": 6,"attributes": [  "%shield% 3" ]},
+        {"level": 5, "health": 6,"attributes": [  "%shield% 3" ]},
+        {"level": 6, "health": 6,"attributes": [  "%shield% 3" ]},
+        {"level": 7, "health": 6,"attributes": [  "%shield% 3" ]}
+      ]
+    },
+    "Spitting Moth": {
+      "deck": "Spitting Moth",
+      "count": 4,
+      "flying": true,
+      "levels": [
+        {"level": 0, "health": 8,"attributes": [  "%muddle%" ]},
+        {"level": 1, "health": 8,"attributes": [  "%muddle%" ]},
+        {"level": 2, "health": 8,"attributes": [  "%muddle%" ]},
+        {"level": 3, "health": 8,"attributes": [  "%muddle%" ]},
+        {"level": 4, "health": 8,"attributes": [  "%muddle%" ]},
+        {"level": 5, "health": 8,"attributes": [  "%muddle%" ]},
+        {"level": 6, "health": 8,"attributes": [  "%muddle%" ]},
+        {"level": 7, "health": 8,"attributes": [  "%muddle%" ]}
+      ]
+    },
+    "Harrowing Infestation": {
+      "deck": "Harrowing Infestation",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 9,"attributes": [  "%retaliate% 1","^%muddle% " ]},
+        {"level": 1, "health": 9,"attributes": [  "%retaliate% 1","^%muddle% " ]},
+        {"level": 2, "health": 9,"attributes": [  "%retaliate% 1","^%muddle% " ]},
+        {"level": 3, "health": 9,"attributes": [  "%retaliate% 1","^%muddle% " ]},
+        {"level": 4, "health": 9,"attributes": [  "%retaliate% 1","^%muddle% " ]},
+        {"level": 5, "health": 9,"attributes": [  "%retaliate% 1","^%muddle% " ]},
+        {"level": 6, "health": 9,"attributes": [  "%retaliate% 1","^%muddle% " ]},
+        {"level": 7, "health": 9,"attributes": [  "%retaliate% 1","^%muddle% " ]}
+      ]
+    },
+    "Arena Sorcerer": {
+      "deck": "Arena Sorcerer",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 11,"attributes": [  "%retaliate% 1","^%range% 3" ]},
+        {"level": 1, "health": 11,"attributes": [  "%retaliate% 1","^%range% 3" ]},
+        {"level": 2, "health": 11,"attributes": [  "%retaliate% 1","^%range% 3" ]},
+        {"level": 3, "health": 11,"attributes": [  "%retaliate% 1","^%range% 3" ]},
+        {"level": 4, "health": 11,"attributes": [  "%retaliate% 1","^%range% 3" ]},
+        {"level": 5, "health": 11,"attributes": [  "%retaliate% 1","^%range% 3" ]},
+        {"level": 6, "health": 11,"attributes": [  "%retaliate% 1","^%range% 3" ]},
+        {"level": 7, "health": 11,"attributes": [  "%retaliate% 1","^%range% 3" ]}
+      ]
+    },
+    "Rending Beetle": {
+      "deck": "Rending Beetle",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 12,"attributes": [  "%wound%","%shield% 2" ]},
+        {"level": 1, "health": 12,"attributes": [  "%wound%","%shield% 2" ]},
+        {"level": 2, "health": 12,"attributes": [  "%wound%","%shield% 2" ]},
+        {"level": 3, "health": 12,"attributes": [  "%wound%","%shield% 2" ]},
+        {"level": 4, "health": 12,"attributes": [  "%wound%","%shield% 2" ]},
+        {"level": 5, "health": 12,"attributes": [  "%wound%","%shield% 2" ]},
+        {"level": 6, "health": 12,"attributes": [  "%wound%","%shield% 2" ]},
+        {"level": 7, "health": 12,"attributes": [  "%wound%","%shield% 2" ]}
+      ]
+    },
+    "Venomous Centipede": {
+      "deck": "Venomous Centipede",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 7,"attributes": [  "%poison%" ]},
+        {"level": 1, "health": 7,"attributes": [  "%poison%" ]},
+        {"level": 2, "health": 7,"attributes": [  "%poison%" ]},
+        {"level": 3, "health": 7,"attributes": [  "%poison%" ]},
+        {"level": 4, "health": 7,"attributes": [  "%poison%" ]},
+        {"level": 5, "health": 7,"attributes": [  "%poison%" ]},
+        {"level": 6, "health": 7,"attributes": [  "%poison%" ]},
+        {"level": 7, "health": 7,"attributes": [  "%poison%" ]}
+      ]
+    },
+    "Gloomtoad": {
+      "deck": "Gloomtoad",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 8,"attributes": [  "%shield% 3" ]},
+        {"level": 1, "health": 8,"attributes": [  "%shield% 3" ]},
+        {"level": 2, "health": 8,"attributes": [  "%shield% 3" ]},
+        {"level": 3, "health": 8,"attributes": [  "%shield% 3" ]},
+        {"level": 4, "health": 8,"attributes": [  "%shield% 3" ]},
+        {"level": 5, "health": 8,"attributes": [  "%shield% 3" ]},
+        {"level": 6, "health": 8,"attributes": [  "%shield% 3" ]},
+        {"level": 7, "health": 8,"attributes": [  "%shield% 3" ]}
+      ]
+    },
+    "Mouse": {
+      "deck": "Mouse",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 9,"attributes": [  "%retaliate% 1" ]},
+        {"level": 1, "health": 9,"attributes": [  "%retaliate% 1" ]},
+        {"level": 2, "health": 9,"attributes": [  "%retaliate% 1" ]},
+        {"level": 3, "health": 9,"attributes": [  "%retaliate% 1" ]},
+        {"level": 4, "health": 9,"attributes": [  "%retaliate% 1" ]},
+        {"level": 5, "health": 9,"attributes": [  "%retaliate% 1" ]},
+        {"level": 6, "health": 9,"attributes": [  "%retaliate% 1" ]},
+        {"level": 7, "health": 9,"attributes": [  "%retaliate% 1" ]}
+      ]
+    },
+    "Sewer Rat": {
+      "deck": "Sewer Rat",
+      "count": 4,
+      "levels": [
+        {"level": 0, "health": 16},
+        {"level": 1, "health": 16},
+        {"level": 2, "health": 16},
+        {"level": 3, "health": 16},
+        {"level": 4, "health": 16},
+        {"level": 5, "health": 16},
+        {"level": 6, "health": 16},
+        {"level": 7, "health": 16}
+      ]
+    }
+  },
+
+  "scenarios": {
+      "#1 A Rude Welcome": {
+        "monsters": [ "Bandit Guard (BnB)" ]
+      },
+      "#2 Crossing the Road": {
+        "monsters": [ "Bandit Guard (BnB)", "Bandit Archer (BnB)" ]
+      },
+    "#3 In the Walls": {
+      "monsters": [ "Mouse" ]
+    },
+    "#4 Barging In": {
+      "monsters": [ "Bandit Guard (BnB)", "Bandit Archer (BnB)" ]
+    },
+    "#5 Button's Arena": {
+      "monsters": [ "Rending Beetle", "Arena Sorcerer" ,"King Button" ]
+    },
+    "#6 Pest Control": {
+      "monsters": [ "Harrowing Infestation", "Sewer Rat", "Spitting Moth"]
+    },
+    "#7 Mind Control": {
+      "monsters": [ "Arena Sorcerer", "Gloomtoad" ]
+    },
+    "#8 Going Up": {
+      "monsters": [ "Spitting Moth", "Venomous Centipede" ]
+    },
+    "#9 Back in the Walls": {
+      "monsters": [ "Mouse" ]
+    },
+    "#10 Into the Darkness": {
+      "monsters": ["Rending Beetle", "Gloomtoad" ]
+    },
+    "#11 Up in the Window": {
+      "monsters": [ "Sewer Rat", "Venomous Centipede" ]
+    },
+    "#12 Gathering Materials": {
+      "monsters": [ "Spitting Moth", "Sewer Rat" ]
+    },
+    "#13 Zipping Across": {
+      "monsters": [ "Harrowing Infestation", "Spitting Moth" ]
+    },
+    "#14 The Bouncer": {
+      "monsters": [ "Stuffed Construct", "Tattered Construct" ]
+    },
+    "#15 Ringing the Bell": {
+      "monsters": [ "Earth Demon (BnB)", "Flame Demon (BnB)", "Frost Demon (BnB)" ]
+    },
+    "#16 Signal Flare": {
+      "monsters": [ "Earth Demon (BnB)", "Flame Demon (BnB)", "Wind Demon (BnB)" ]
+    },
+    "#17 The Long Way Through": {
+      "monsters": [ "Flame Demon (BnB)", "Frost Demon (BnB)","Wind Demon (BnB)" ]
+    },
+    "#18 Crush the Clutter": {
+      "monsters": [ "Earth Demon (BnB)", "Frost Demon (BnB)","Wind Demon (BnB)" ]
+    },
+    "#19 Hide and Seek": {
+      "monsters": [  "Earth Demon (BnB)", "Flame Demon (BnB)","Frost Demon (BnB)","Wind Demon (BnB)"]
+    },
+    "#20 Showdown": {
+      "monsters": [ "Mounted Prince", "Goring Beetle", "Demon Prince" ]
+    }
+  }
+}

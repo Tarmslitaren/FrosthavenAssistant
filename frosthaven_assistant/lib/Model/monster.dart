@@ -103,8 +103,14 @@ class MonsterStatsModel {
 
   factory MonsterStatsModel.fromJson(Map<String, dynamic> data) {
     final health = data['health'];
-    final move = data['move'] as int;
-    final attack = data['attack'];
+    dynamic move = 0;
+    if (data.containsKey('move')) {
+      move = data['move'];
+    }
+    dynamic attack = 0;
+    if (data.containsKey('attack')) {
+      attack = data['attack'];
+    }
     int range = 0;
     if (data.containsKey('range')) {
       range = data['range'] as int;

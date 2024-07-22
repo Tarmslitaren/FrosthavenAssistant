@@ -130,13 +130,13 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     buildLevelButton(2, scale),
                     buildLevelButton(3, scale),
                     buildLevelButton(4, scale),
+                    buildLevelButton(5, scale),
                   ],
                 ),
-              if (!isObjective)
+              if (!isObjective && widget.character.characterClass.healthByLevel.length > 5)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    buildLevelButton(5, scale),
                     buildLevelButton(6, scale),
                     buildLevelButton(7, scale),
                     buildLevelButton(8, scale),

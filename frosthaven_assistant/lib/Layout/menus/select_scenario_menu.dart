@@ -240,8 +240,6 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     return Container(
         constraints: const BoxConstraints(maxWidth: 400),
         child: Card(
-            //color: Colors.transparent,
-            // shadowColor: Colors.transparent,
             margin: const EdgeInsets.all(2),
             child: Stack(children: [
               Column(
@@ -249,6 +247,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                   const SizedBox(
                     height: 20,
                   ),
+
                   Column(children: [
                     const Text("Set Scenario", style: TextStyle(fontSize: 18)),
                     ExpansionTile(
