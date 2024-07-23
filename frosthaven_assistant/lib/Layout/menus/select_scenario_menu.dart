@@ -231,6 +231,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         }
       }
     }
+    return [Wrap(
+      children: retVal,
+    )];
     return retVal;
   }
 
@@ -268,6 +271,10 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                           if (event.runtimeType == RawKeyDownEvent &&
                               (event.logicalKey.keyId == 13)) {
                             if (_foundScenarios.isNotEmpty) {
+                              //_gameState.action(
+                              //    SetScenarioCommand(_foundScenarios[0], false));
+                              //Navigator.pop(context);
+                            }
                           }
                         },
                         child: TextField(
