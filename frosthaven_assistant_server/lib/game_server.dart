@@ -13,7 +13,7 @@ class StateUpdateMessage {
 
 abstract class GameServer {
 
-  final int serverVersion = 190;
+  final int serverVersion = 191;
 
   ServerSocket? _serverSocket;
   ServerSocket? get serverSocket {
@@ -122,14 +122,18 @@ abstract class GameServer {
     resetState();
   }
 
-  void handleConnection(Socket client) {
-    client.setOption(SocketOption.tcpNoDelay, true);
-    client.encoding = utf8;
-
+  void logHandleConnection(Socket client){
     String info = 'Connection from'
         ' ${client.remoteAddress.address}:${client.remotePort}';
     log(info);
     setNetworkMessage(info);
+  }
+
+  void handleConnection(Socket client) {
+    client.setOption(SocketOption.tcpNoDelay, true);
+    client.encoding = utf8;
+
+    logHandleConnection(client);
 
     addClientConnection(client);
 

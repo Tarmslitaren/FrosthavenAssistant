@@ -29,7 +29,12 @@ class ServerState {
       print('server sends, undo index: $commandIndex, description:${commandDescriptions[commandIndex]}');
       //should send a special undo message? yes
       commandIndex--;
-      return "Index:${commandIndex}Description:${commandDescriptions[commandIndex]}GameState:${gameSaveStates[commandIndex]!.getState()}";
+      if (commandIndex >= 0){
+        return "Index:${commandIndex}Description:${commandDescriptions[commandIndex]}GameState:${gameSaveStates[commandIndex]!.getState()}";
+      } else {
+        commandIndex = 0;
+        return "";
+      }
     }
     return "";
   }

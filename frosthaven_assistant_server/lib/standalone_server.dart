@@ -2,6 +2,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:frosthaven_assistant_server/connection_health.dart';
 import 'package:frosthaven_assistant_server/game_server.dart';
 import 'package:frosthaven_assistant_server/server_state.dart';
 
@@ -9,10 +10,14 @@ class StandaloneServer extends GameServer {
 
   final List<Socket> _clientConnections = List.empty(growable: true);
   final ServerState _state = ServerState();
+  final Map<Socket,ConnectionHealth> _connectionHealth = {};
+  int pingCount = 0;
 
 
   @override
   void addClientConnection(Socket client) {
+    print("Add client connection ${safeGetClientAddress(client)}");
+    _connectionHealth[client] = ConnectionHealth();
     _clientConnections.add(client);
   }
 
@@ -45,15 +50,27 @@ class StandaloneServer extends GameServer {
 
   @override
   void removeAllClientConnections() {
+    print("Remove all Client Connections");
     for (var client in _clientConnections) {
-      client.close();
+      print("Close Connection ${safeGetClientAddress(client)} ${_connectionHealth[client]}");
+      try {
+        client.close();
+      } catch (exception) {
+        print("Client already closed");
+      }
     }
     _clientConnections.clear();
   }
 
   @override
   void removeClientConnection(Socket client) {
-    client.close();
+    print("Remove client connection ${safeGetClientAddress(client)}");
+    print("Close Connection ${safeGetClientAddress(client)} ${_connectionHealth[client]}");
+    try {
+      client.close();
+    } catch (exception) {
+      print("Client already closed");
+    }
     _clientConnections.remove(client);
   }
 
@@ -102,14 +119,19 @@ class StandaloneServer extends GameServer {
   void sendToOthers(String data, Socket client) {
     final String message = _createMessage(data);
     for(Socket clientConnection in _clientConnections){
-      if (client.remoteAddress != clientConnection.remoteAddress || clientConnection.remotePort != client.remotePort){
-        _writeToClient(clientConnection, message);
+      try {
+        if (client.remoteAddress != clientConnection.remoteAddress || clientConnection.remotePort != client.remotePort){
+          _writeToClient(clientConnection, message);
+        }
+      } catch (exception) {
+        print("Attempted to access properties on a closed client $exception");
       }
     }
   }
 
   void _writeToClient(Socket client, String message) {
     try {
+      _connectionHealth[client]?.logMessageSent();
       client.write(message);
     } catch (error) {
       print(error);
@@ -126,6 +148,8 @@ class StandaloneServer extends GameServer {
     String message = _state.undoState();
     if (message.isNotEmpty) {
       send(message);
+    } else {
+      setNetworkMessage("Unable to undo command");
     }
   }
 
@@ -166,15 +190,58 @@ class StandaloneServer extends GameServer {
     if (serverSocket != null && serverEnabled) {
       Future.delayed(const Duration(seconds: 5), () {
         send("ping");
+        for(Socket client in _clientConnections){
+          _connectionHealth[client]?.logPing();
+        }
+        pingCount ++;
+        if (pingCount % 30 == 0){
+          printHealthReport();
+        }
         sendPing();
       });
     }
+  }
+
+  @override
+  void handlePongMessage(Socket client){
+    super.handlePongMessage(client);
+    _connectionHealth[client]?.logPong();
+  }
+
+  @override
+  void processMessages(String socketMessages, Socket client){
+    _connectionHealth[client]?.logMessageReceived();
+    super.processMessages(socketMessages, client);
   }
 
   String _createMessage(String data){
     const beginning = "S3nD:";
     const end = "[EOM]";
     return "$beginning$data$end";
+  }
+
+  void printHealthReport(){
+    print("=======================================");
+    print("|           HEALTH REPORT             |");
+    print("=======================================");
+    print("ACTIVE CONNNECTIONS: ${_clientConnections.length}");
+    for(Socket client in _clientConnections){
+      print("Client ${safeGetClientAddress(client)} ${_connectionHealth[client]}");
+    }
+    print("");
+    print("TOTAL CONNECTIONS: ${_connectionHealth.keys.length}");
+    print("HEALTH DATA: ");
+    for (ConnectionHealth data in _connectionHealth.values){
+      print(data);
+    }
+  }
+
+  String safeGetClientAddress(Socket client){
+    try{
+      return "Client ${client.remoteAddress}:${client.remotePort}";
+    } catch (exception) {
+      return "Closed client: ";
+    }
   }
   
 }
