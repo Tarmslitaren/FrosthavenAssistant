@@ -123,8 +123,7 @@ abstract class GameServer {
   }
 
   void logHandleConnection(Socket client){
-    String info = 'Connection from'
-        ' ${client.remoteAddress.address}:${client.remotePort}';
+    String info = 'Connection from ${safeGetClientAddress(client)}';
     log(info);
     setNetworkMessage(info);
   }
@@ -225,10 +224,23 @@ abstract class GameServer {
     redoState();
   }
   void handlePongMessage(Socket client){
-    log('pong from ${client.remoteAddress}');
+    log('pong from ${safeGetClientAddress(client)}');
   }
   void handlePingMessage(Socket client) {
-    log('ping from ${client.remoteAddress}');
+    log('ping from ${safeGetClientAddress(client)}');
     sendToOnly("pong", client);
+  }
+
+  String safeGetClientAddress(Socket client){
+    try {
+      return "${client.remoteAddress}:${client.remotePort}";
+    } catch (exception) {
+      log("Encountered error accessing client");
+      log(exception.toString());
+      // There might be a chance that is is for a different 
+      // reason, but this is the most common reason I've 
+      // seen so far
+      return "Closed socket"; 
+    }
   }
 }
