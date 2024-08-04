@@ -206,7 +206,7 @@ abstract class GameServer {
     int version = int.parse(initMessageParts[1]);
     if (version != serverVersion) {
       //version mismatch
-      setNetworkMessage("Client version mismatch. Please update.");
+      setNetworkMessage("Client version mismatch. Please update. Client $version Server $serverVersion");
       sendToOnly(
           "Error: Server Version is $serverVersion. client version is $version. Please update your client.",
           client);
