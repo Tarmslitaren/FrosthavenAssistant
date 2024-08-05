@@ -64,6 +64,8 @@ dependencies:
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/window_size
   format: ^1.4.0
+  frosthaven_assistant_server:
+    path: ../frosthaven_assistant_server
 
 
 
