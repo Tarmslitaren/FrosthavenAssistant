@@ -2614,12 +2614,12 @@
         {
           "level": 6,
           "normal": { "health": 5, "move": 3, "attack": 4, "attributes": [  "%shield% 3","%muddle%" ]},
-          "elite": { "health": 8, "move": 3, "attack": 5, "attributes": [  "%shield% 5","%muddle%" ]}
+          "elite": { "health": 8, "move": 3, "attack": 5, "attributes": [  "%shield% 4","%muddle%" ]}
         },
         {
           "level": 7,
           "normal": { "health": 8, "move": 3, "attack": 4, "attributes": [ "%shield% 3","%muddle%" ]},
-          "elite": { "health": 11, "move": 3, "attack": 5, "attributes": [ "%shield% 5","%muddle%" ]}
+          "elite": { "health": 11, "move": 3, "attack": 5, "attributes": [ "%shield% 4","%muddle%" ]}
         }
       ]
     },
