@@ -266,7 +266,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                               Slider(
                                 min: min(0.8, maxBarScale),
                                 max: min(maxBarScale, 3.0),
-                                value: settings.userScalingBars.value,
+                                value: min (settings.userScalingBars.value, maxBarScale),
                                 onChanged: (value) {
                                   setState(() {
                                     settings.userScalingBars.value = value;

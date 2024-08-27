@@ -53,12 +53,10 @@ class SaveMenuState extends State<SaveMenu> {
 
                   ),
                   Container(
-                      height: 40,
                       margin: const EdgeInsets.only(left: 10, right: 10),
                       child: const Text(
                         'Please note that the app automatically saves your progress after every action. These are for backups or multiple campaigns.',
                       )
-
                   ),
                   const SizedBox(
                     height: 20,

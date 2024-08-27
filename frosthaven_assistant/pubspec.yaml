@@ -18,8 +18,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.9.1+36
 
 environment:
-  sdk: ">=3.1.0 <3.6.0"
-  #for some reason main list animations do not play on flutter 3.22.x, so pegging flutter version.
+  sdk: ">=3.4.0 <3.6.0"
+  #uncomment to peg flutter version to specific one.
   #flutter: '3.19.6'
 
 # Dependencies specify other packages that your package needs in order to work.
@@ -144,7 +144,6 @@ flutter:
      # fonts:
       #  - asset: assets/fonts/nyala.ttf
     #         style: italic
-    - family: Majalla
     - family: Majalla
       fonts:
         - asset: assets/fonts/majallab.ttf
