@@ -20,7 +20,7 @@ version: 1.9.1+36
 environment:
   sdk: ">=3.1.0 <3.6.0"
   #for some reason main list animations do not play on flutter 3.22.x, so pegging flutter version.
-  flutter: '3.19.6'
+  #flutter: '3.19.6'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -144,6 +144,7 @@ flutter:
      # fonts:
       #  - asset: assets/fonts/nyala.ttf
     #         style: italic
+    - family: Majalla
     - family: Majalla
       fonts:
         - asset: assets/fonts/majallab.ttf

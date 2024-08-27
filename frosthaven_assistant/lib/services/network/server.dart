@@ -87,7 +87,6 @@ class Server extends GameServer{
     } else {
       log(
           'Got same or lower index. ignoring: received index: ${message.indexString} current index ${_gameState.commandIndex.value}');
-
       //overwrite client state with current server state.
       sendToOnly(
           "Mismatch:Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions[_gameState.commandIndex.value]}GameState:${_gameState.gameSaveStates.last!.getState()}",
