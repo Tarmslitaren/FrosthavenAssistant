@@ -877,6 +877,9 @@ class GameMethods {
 
   static int getRandomStandee(Monster data) {
     int nrOfStandees = data.type.count;
+    if(data.type.name == "Polar Bear") {
+      nrOfStandees = 4; //for the special case where there are only 4 standees in first printing
+    }
     List<int> available = [];
     for (int i = 0; i < nrOfStandees; i++) {
       bool isAvailable = true;

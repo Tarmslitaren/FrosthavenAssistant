@@ -13,7 +13,6 @@ import 'connection.dart';
 import 'network.dart';
 
 class Server extends GameServer{
-  final int serverVersion = 191;
 
   final GameState _gameState = getIt<GameState>();
   final _communication = getIt<Communication>();
@@ -87,6 +86,7 @@ class Server extends GameServer{
     } else {
       log(
           'Got same or lower index. ignoring: received index: ${message.indexString} current index ${_gameState.commandIndex.value}');
+
       //overwrite client state with current server state.
       sendToOnly(
           "Mismatch:Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions[_gameState.commandIndex.value]}GameState:${_gameState.gameSaveStates.last!.getState()}",
@@ -132,7 +132,7 @@ class Server extends GameServer{
 
   Future<void> startServer() async {
     startServerInternal(InternetAddress.anyIPv4.address,
-              int.parse(getIt<Settings>().lastKnownPort));
+        int.parse(getIt<Settings>().lastKnownPort));
   }
 
   @override
