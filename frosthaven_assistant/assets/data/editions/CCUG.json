@@ -9,6 +9,24 @@
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
       "summons": {}
+    },
+    {
+      "name": "Wildborn",
+      "color": "FFb18dbd",
+      "colorSecondary": "ff8c7694",
+      "edition": "CCUG",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {}
+    },
+    {
+      "name": "Woebound",
+      "color": "FFB18DBD",
+      "colorSecondary": "ff796876",
+      "edition": "CCUG",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {}
     }
   ],
   "monsterAbilities": [

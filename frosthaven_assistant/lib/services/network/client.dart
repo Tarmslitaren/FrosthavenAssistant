@@ -99,8 +99,8 @@ class Client {
     List<String> messages = message.split("S3nD:");
     //handle
     for (var message in messages) {
+      _serverResponsive = true;
       if (message.endsWith("[EOM]")) {
-        _serverResponsive = true;
         message = message.substring(0, message.length - "[EOM]".length);
         if (message.startsWith("Mismatch:")) {
           message = message.substring("Mismatch:".length);

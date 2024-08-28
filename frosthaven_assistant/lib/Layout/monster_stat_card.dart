@@ -42,6 +42,7 @@ class MonsterStatCardWidget extends StatelessWidget {
           false);
     } else if (data.monsterInstances.length < data.type.count - 1) {
       if (settings.randomStandees.value == true) {
+        //todo: no logic in layout
         int standeeNr = GameMethods.getRandomStandee(data);
         if(getIt<GameState>().currentCampaign.value == "Buttons and Bugs") {
           standeeNr = GameMethods.getNextAvailableBnBStandee(data);
