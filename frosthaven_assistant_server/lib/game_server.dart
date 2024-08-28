@@ -13,7 +13,7 @@ class StateUpdateMessage {
 
 abstract class GameServer {
 
-  final int serverVersion = 191;
+  final int serverVersion = 1100;
 
   ServerSocket? _serverSocket;
   ServerSocket? get serverSocket {
@@ -219,13 +219,16 @@ abstract class GameServer {
     log('Server Receive undo command');
     undoState();
   }
+
   void handleRedoMessage(){
     log('Server Receive redo command');
     redoState();
   }
+
   void handlePongMessage(Socket client){
     log('pong from ${safeGetClientAddress(client)}');
   }
+
   void handlePingMessage(Socket client) {
     log('ping from ${safeGetClientAddress(client)}');
     sendToOnly("pong", client);
