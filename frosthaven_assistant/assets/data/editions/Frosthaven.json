@@ -907,7 +907,7 @@
         ["Face of Darkness", 651, false, 82,"%move% - 1", "*.........","%attack% + 1","[r]","%dark%%use%",  "^%disarm%", "[/r]"],
         ["Arresting Advance", 652, false, 32, "%move% + 1", "*.........","%attack% - 1","[r]","%ice%%use%",  "^%immobilize%", "[/r]"],
         ["Nothing Special", 653, false, 57, "%move% + 0", "*.........","%attack% + 0", "%dark%"],
-        ["Sunless Abyss", 654, false, 11, "%curse%", "^%range% 2","*.........","%shield% + 1", "*.........","%retaliate% + 2", "[r]","%ice%","Å.", "%dark%", "[/r]"],
+        ["Sunless Abyss", 654, false, 11, "%curse%", "^%range% 2","*.........","%shield% + 1", "*.........","%retaliate% + 2","^%range% 2", "[r]","%ice%","Å.", "%dark%", "[/r]"],
         ["Hateful Spikes", 655, false, 17,  "%attack% + 1","*.........","%retaliate% + 2", "%dark%"],
         ["Pull of the Grave", 656, true, 98, "%move% + 1", "*.........","%attack% - 3","^%bane%"],
         ["Call for Souls", 657, true, 78,  "Summon X normal","Living Spirits", "Å*", "^Where X is the Living","^^Doom's current hit point value", "^^divided by 5 (rounded down)," ,"^^up to a maximum of three."]
