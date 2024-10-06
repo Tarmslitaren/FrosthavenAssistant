@@ -153,9 +153,20 @@ Widget createLevelWidget(BuildContext context) {
                             image: const AssetImage(
                                 "assets/images/psd/hazard-fh.png"),
                           ))),
-                  TextSpan(
-                    text: ": ${GameMethods.getHazardValue()} ",
+                  WidgetSpan(
+                    alignment: PlaceholderAlignment.middle,
                     style: textStyle,
+                    child: ValueListenableBuilder<String>(
+                      valueListenable: gameState.currentCampaign,
+                      builder: (context, value, child) {
+                        return Text.rich(
+                            TextSpan(
+                            text: ": ${GameMethods.getHazardValue()} ",
+                            style: textStyle,
+                          ),
+                        );
+                      }
+                    ),
                   ),
                   WidgetSpan(
                       alignment: PlaceholderAlignment.middle,
