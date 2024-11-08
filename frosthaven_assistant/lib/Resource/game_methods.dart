@@ -20,6 +20,9 @@ class GameMethods {
   }
 
   static int getHazardValue() {
+    if (getIt<GameState>().currentCampaign.value == "Gloomhaven") {
+      return (getTrapValue() / 2.0).floor();
+    }
     return 1 + (_gameState.level.value / 3.0).ceil();
   }
 
