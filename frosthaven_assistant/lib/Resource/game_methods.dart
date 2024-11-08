@@ -1017,7 +1017,7 @@ class GameMethods {
     int levelAdjust = 0;
     Set<String> alliedMonsters = {};
     for (var rule in specialRules) {
-      if (rule.name == monster) {
+      if (rule.name == monster || rule.name == "Enemies") {
         if (rule.type == "LevelAdjust") {
           levelAdjust = rule.level;
         }

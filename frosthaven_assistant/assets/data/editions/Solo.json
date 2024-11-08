@@ -1360,7 +1360,15 @@
 	},
 	"scenarios": {
 		"#1 Brute: Return to the Black Barrow": {
-			"monsters":  ["Bandit Guard", "Bandit Archer", "Living Bones" ]
+			"monsters":  ["Bandit Guard", "Bandit Archer", "Living Bones" ],
+			"special": [
+				{
+					"type": "LevelAdjust",
+					"name": "Enemies",
+					"level": -1,
+					"note":  "All enemies: -1 levels"
+				}
+			]
 		},
 		"#2 Tinkerer: An Unfortunate Intrusion": {
 			"monsters":  ["City Guard (Ally)", "Vermling Scout", "Vermling Shaman" ],
