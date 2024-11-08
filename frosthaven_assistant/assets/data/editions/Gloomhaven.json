@@ -4451,6 +4451,13 @@
       },
       "#33 Savvas Armory": {
         "monsters": [ "Savvas Icestorm", "Savvas Lavaflow", "Frost Demon", "Flame Demon", "Wind Demon", "Earth Demon" ],
+        "special": [
+          {
+            "type": "Objective",
+            "name": "Door",
+            "health": "(4+L)"
+          }
+        ],
         "sections": {
           "#M1a(1)": {
             "special": [
