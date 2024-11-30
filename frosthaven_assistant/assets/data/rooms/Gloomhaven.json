@@ -10013,46 +10013,6 @@
       }
     },
     {
-      "E1b(D)": {
-        "Earth Demon": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
-        },
-        "Flame Demon": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        },
-        "Frost Demon": {
-          "normal": [
-            0,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
-        }
-      }
-    },
-    {
       "A2b(C)": {
         "Earth Demon": {
           "normal": [
@@ -10088,6 +10048,46 @@
             1,
             1,
             1
+          ]
+        }
+      }
+    },
+    {
+      "E1b(D)": {
+        "Earth Demon": {
+          "normal": [
+            0,
+            0,
+            0
+          ],
+          "elite": [
+            1,
+            1,
+            1
+          ]
+        },
+        "Flame Demon": {
+          "normal": [
+            1,
+            1,
+            0
+          ],
+          "elite": [
+            0,
+            0,
+            1
+          ]
+        },
+        "Frost Demon": {
+          "normal": [
+            0,
+            2,
+            2
+          ],
+          "elite": [
+            0,
+            0,
+            0
           ]
         }
       }

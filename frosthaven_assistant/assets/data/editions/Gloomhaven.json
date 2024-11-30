@@ -5077,6 +5077,24 @@
             "type": "Escort",
             "name": "The Crystal",
             "health": "4+C+(2xL)"
+          },
+          {
+            "type": "Timer",
+            "list": [4],
+            "startOfRound": true,
+            "note": "Place a corridor tile on hexes B and reveal tile A3a."
+          },
+          {
+            "type": "Timer",
+            "list": [6],
+            "startOfRound": true,
+            "note": "Place a corridor tile on hexes C and reveal tile A2b."
+          },
+          {
+            "type": "Timer",
+            "list": [9],
+            "startOfRound": true,
+            "note": "Place a corridor tile on hex D and reveal tile E1b."
           }
         ]
       },
