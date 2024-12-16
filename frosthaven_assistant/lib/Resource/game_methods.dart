@@ -514,13 +514,20 @@ class GameMethods {
             : [];
       }
     } else {
+      if (getIt<Settings>().showBattleGoalReminder.value) {
+        initMessage += "Remember to choose your Battle Goals.";
+      }
       if (scenario != "custom") {
         var scenarioData = _gameData.modelData
             .value[_gameState.currentCampaign.value]?.scenarios[scenario];
         if (scenarioData != null) {
           monsters = scenarioData.monsters;
           specialRules = scenarioData.specialRules.toList();
-          initMessage = scenarioData.initMessage;
+          if (initMessage.isNotEmpty && scenarioData.initMessage.isNotEmpty) {
+            initMessage += "\n\n${scenarioData.initMessage}";
+          } else {
+            initMessage += scenarioData.initMessage;
+          }
           roomMonsterData = scenarioData.monsterStandees != null
               ? scenarioData.monsterStandees!.toList()
               : [];

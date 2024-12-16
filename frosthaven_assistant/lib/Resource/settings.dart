@@ -19,9 +19,7 @@ enum Style { frosthaven, gloomhaven, original }
 class Settings {
   final userScalingMainList = ValueNotifier<double>(1.0);
   final userScalingBars = ValueNotifier<double>(
-      (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
-          ? 1.6
-          : 1.0);
+      (Platform.isWindows || Platform.isLinux || Platform.isMacOS) ? 1.6 : 1.0);
   final userScalingMenus = ValueNotifier<double>(1.0);
   final fullScreen = ValueNotifier<bool>(true);
   final darkMode = ValueNotifier<bool>(false);
@@ -31,7 +29,10 @@ class Settings {
   final noCalculation = ValueNotifier<bool>(false);
   final expireConditions = ValueNotifier<bool>(false);
   final hideLootDeck = ValueNotifier<bool>(false);
-  final shimmer = ValueNotifier<bool>((Platform.isWindows || Platform.isLinux || Platform.isMacOS) ? true : false);
+  final shimmer = ValueNotifier<bool>(
+      (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
+          ? true
+          : false);
   final showScenarioNames = ValueNotifier<bool>(true);
   final showCustomContent = ValueNotifier<bool>(true);
   final showSectionsInMainView = ValueNotifier<bool>(true);
@@ -39,6 +40,7 @@ class Settings {
   final autoAddStandees = ValueNotifier<bool>(true);
   final autoAddSpawns = ValueNotifier<bool>(true);
   final showAmdDeck = ValueNotifier<bool>(true);
+  final showBattleGoalReminder = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -65,7 +67,7 @@ class Settings {
 
   void loadSave(String saveName) {
     String? save = saves.value[saveName];
-    if(save != null) {
+    if (save != null) {
       getIt<GameState>().action(LoadSaveCommand(saveName, save));
     }
   }
@@ -75,7 +77,8 @@ class Settings {
     Map<String, String> newMap = {};
     for (String key in saves.value.keys) {
       newMap[key] = saves.value[key]!;
-    } saves.value = newMap;
+    }
+    saves.value = newMap;
     saveToDisk();
   }
 
@@ -84,7 +87,8 @@ class Settings {
     Map<String, String> newMap = {};
     for (String key in saves.value.keys) {
       newMap[key] = saves.value[key]!;
-    } saves.value = newMap;
+    }
+    saves.value = newMap;
     saveToDisk();
   }
 
@@ -267,6 +271,10 @@ class Settings {
         showAmdDeck.value = data["showAmdDeck"];
       }
 
+      if (data["showBattleGoalReminder"] != null) {
+        showBattleGoalReminder.value = data["showBattleGoalReminder"];
+      }
+
       if (data["saves"] != null) {
         Map<String, dynamic> map = data["saves"];
         for (var key in map.keys) {
@@ -282,7 +290,6 @@ class Settings {
       }
     }
   }
-
 
   @override
   String toString() {
@@ -308,6 +315,7 @@ class Settings {
         '"autoAddStandees": ${autoAddStandees.value}, '
         '"autoAddSpawns": ${autoAddSpawns.value}, '
         '"showAmdDeck": ${showAmdDeck.value}, '
+        '"showBattleGoalReminder": ${showBattleGoalReminder.value}, '
         '"saves": ${jsonEncode(saves.value)}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
