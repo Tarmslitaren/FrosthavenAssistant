@@ -38,7 +38,8 @@ class GameMethods {
     double totalLevels = 0;
     double nrOfCharacters = 0;
     for (var item in _gameState.currentList) {
-      if (item is Character && !GameMethods.isObjectiveOrEscort(item.characterClass)) {
+      if (item is Character &&
+          !GameMethods.isObjectiveOrEscort(item.characterClass)) {
         totalLevels += item.characterState.level.value;
         nrOfCharacters++;
       }
@@ -312,7 +313,8 @@ class GameMethods {
     });
   }
 
-  static void sortMonsterInstances(_StateModifier _, List<MonsterInstance> instances) {
+  static void sortMonsterInstances(
+      _StateModifier _, List<MonsterInstance> instances) {
     instances.sort((a, b) {
       if (a.type == MonsterType.elite && b.type != MonsterType.elite) {
         return -1;
@@ -327,7 +329,8 @@ class GameMethods {
   static List<Character> getCurrentCharacters() {
     List<Character> characters = [];
     for (ListItemData data in _gameState.currentList) {
-      if (data is Character && !GameMethods.isObjectiveOrEscort(data.characterClass)) {
+      if (data is Character &&
+          !GameMethods.isObjectiveOrEscort(data.characterClass)) {
         characters.add(data);
       }
     }
@@ -383,7 +386,8 @@ class GameMethods {
   static void applyDifficulty(_StateModifier _) {
     if (_gameState.autoScenarioLevel.value == true) {
       //adjust difficulty
-      int newLevel = GameMethods.getRecommendedLevel() + _gameState.difficulty.value;
+      int newLevel =
+          GameMethods.getRecommendedLevel() + _gameState.difficulty.value;
       if (newLevel > 7) {
         newLevel = 7;
       }
@@ -391,7 +395,8 @@ class GameMethods {
     }
   }
 
-  static void setCharacterLevel(_StateModifier _, int level, String characterId) {
+  static void setCharacterLevel(
+      _StateModifier _, int level, String characterId) {
     Character? character;
     for (var item in _gameState.currentList) {
       if (item.id == characterId) {
@@ -403,8 +408,10 @@ class GameMethods {
       level = character.characterClass.healthByLevel.length;
     }
     character.characterState.setFigureLevel(_, level);
-    character.characterState.setHealth(_, character.characterClass.healthByLevel[level - 1]);
-    character.characterState.setMaxHealth(_, character.characterState.health.value);
+    character.characterState
+        .setHealth(_, character.characterClass.healthByLevel[level - 1]);
+    character.characterState
+        .setMaxHealth(_, character.characterState.health.value);
 
     if (character.id == "Beast Tyrant") {
       if (character.characterState.summonList.isNotEmpty) {
@@ -431,9 +438,10 @@ class GameMethods {
         if (item is Character) {
           if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
             item.characterState._initiative.value = 0;
-            item.characterState._health.value =
-                item.characterClass.healthByLevel[item.characterState.level.value - 1];
-            item.characterState._maxHealth.value = item.characterState.health.value;
+            item.characterState._health.value = item.characterClass
+                .healthByLevel[item.characterState.level.value - 1];
+            item.characterState._maxHealth.value =
+                item.characterState.health.value;
             item.characterState._xp.value = 0;
             item.characterState.conditions.value.clear();
             item.characterState._chill.value = 0;
@@ -459,7 +467,10 @@ class GameMethods {
       //loot deck init
       if (scenario != "custom") {
         LootDeckModel? lootDeckModel = _gameData
-            .modelData.value[_gameState.currentCampaign.value]!.scenarios[scenario]!.lootDeck;
+            .modelData
+            .value[_gameState.currentCampaign.value]!
+            .scenarios[scenario]!
+            .lootDeck;
         if (lootDeckModel != null) {
           _gameState._lootDeck = LootDeck(lootDeckModel, _gameState.lootDeck);
         } else {
@@ -469,7 +480,8 @@ class GameMethods {
         //todo: remove. no need for custom loot deck
         if (_gameState.currentCampaign.value == "Frosthaven") {
           //add loot deck for random scenarios
-          LootDeckModel? lootDeckModel = const LootDeckModel(2, 2, 2, 12, 1, 1, 1, 1, 1, 1, 0);
+          LootDeckModel? lootDeckModel =
+              const LootDeckModel(2, 2, 2, 12, 1, 1, 1, 1, 1, 1, 0);
           _gameState._lootDeck = LootDeck(lootDeckModel, _gameState.lootDeck);
         } else {
           _gameState._lootDeck = LootDeck.from(_gameState.lootDeck);
@@ -487,26 +499,31 @@ class GameMethods {
 
     String initMessage = "";
     if (section) {
-      var sectionData = _gameData.modelData.value[_gameState.currentCampaign.value]
-          ?.scenarios[_gameState.scenario.value]?.sections
+      var sectionData = _gameData
+          .modelData
+          .value[_gameState.currentCampaign.value]
+          ?.scenarios[_gameState.scenario.value]
+          ?.sections
           .firstWhere((element) => element.name == scenario);
       if (sectionData != null) {
         monsters = sectionData.monsters;
         specialRules = sectionData.specialRules.toList();
         initMessage = sectionData.initMessage;
-        roomMonsterData =
-            sectionData.monsterStandees != null ? sectionData.monsterStandees!.toList() : [];
+        roomMonsterData = sectionData.monsterStandees != null
+            ? sectionData.monsterStandees!.toList()
+            : [];
       }
     } else {
       if (scenario != "custom") {
-        var scenarioData =
-            _gameData.modelData.value[_gameState.currentCampaign.value]?.scenarios[scenario];
+        var scenarioData = _gameData.modelData
+            .value[_gameState.currentCampaign.value]?.scenarios[scenario];
         if (scenarioData != null) {
           monsters = scenarioData.monsters;
           specialRules = scenarioData.specialRules.toList();
           initMessage = scenarioData.initMessage;
-          roomMonsterData =
-              scenarioData.monsterStandees != null ? scenarioData.monsterStandees!.toList() : [];
+          roomMonsterData = scenarioData.monsterStandees != null
+              ? scenarioData.monsterStandees!.toList()
+              : [];
           for (var item in scenarioData.sections) {
             subSections.add(item.name);
           }
@@ -525,8 +542,8 @@ class GameMethods {
 
     //hack for banner spear solo special rule
     if (scenario.contains("Banner Spear: Scouting Ambush")) {
-      MonsterAbilityState deck =
-          _gameState.currentAbilityDecks.firstWhere((element) => element.name.contains("Scout"));
+      MonsterAbilityState deck = _gameState.currentAbilityDecks
+          .firstWhere((element) => element.name.contains("Scout"));
       for (int i = 0; i < deck.drawPile.getList().length; i++) {
         if (deck.drawPile.getList()[i].title == "Rancid Arrow") {
           deck.drawPile.add(deck.drawPile.removeAt(i));
@@ -538,17 +555,20 @@ class GameMethods {
     //add objectives and escorts
     for (var item in specialRules) {
       if (item.type == "Objective") {
-        if (item.condition == "" || StatCalculator.evaluateCondition(item.condition)) {
-          Character objective =
-              GameMethods.createCharacter(_, "Objective", item.name, _gameState.level.value + 1)!;
+        if (item.condition == "" ||
+            StatCalculator.evaluateCondition(item.condition)) {
+          Character objective = GameMethods.createCharacter(
+              _, "Objective", item.name, _gameState.level.value + 1)!;
           objective.characterState._maxHealth.value =
               StatCalculator.calculateFormula(item.health.toString())!;
-          objective.characterState._health.value = objective.characterState.maxHealth.value;
+          objective.characterState._health.value =
+              objective.characterState.maxHealth.value;
           objective.characterState._initiative.value = item.init;
           bool add = true;
           for (var item2 in _gameState.currentList) {
             //don't add duplicates
-            if (item2 is Character && (item2).characterState.display.value == item.name) {
+            if (item2 is Character &&
+                (item2).characterState.display.value == item.name) {
               add = false;
               break;
             }
@@ -559,17 +579,20 @@ class GameMethods {
         }
       }
       if (item.type == "Escort") {
-        if (item.condition == "" || StatCalculator.evaluateCondition(item.condition)) {
-          Character objective =
-              GameMethods.createCharacter(_, "Escort", item.name, _gameState.level.value + 1)!;
+        if (item.condition == "" ||
+            StatCalculator.evaluateCondition(item.condition)) {
+          Character objective = GameMethods.createCharacter(
+              _, "Escort", item.name, _gameState.level.value + 1)!;
           objective.characterState._maxHealth.value =
               StatCalculator.calculateFormula(item.health.toString())!;
-          objective.characterState._health.value = objective.characterState.maxHealth.value;
+          objective.characterState._health.value =
+              objective.characterState.maxHealth.value;
           objective.characterState._initiative.value = item.init;
           bool add = true;
           for (var item2 in _gameState.currentList) {
             //don't add duplicates
-            if (item2 is Character && (item2).characterState.display.value == item.name) {
+            if (item2 is Character &&
+                (item2).characterState.display.value == item.name) {
               add = false;
               break;
             }
@@ -611,14 +634,18 @@ class GameMethods {
               if (rule.name.isNotEmpty) {
                 //get room data and deal with spawns
                 ScenarioModel? scenarioModel = _gameData
-                    .modelData.value[_gameState.currentCampaign.value]?.scenarios[scenario];
+                    .modelData
+                    .value[_gameState.currentCampaign.value]
+                    ?.scenarios[scenario];
                 if (scenarioModel != null) {
                   ScenarioModel? spawnSection = scenarioModel.sections
-                      .firstWhereOrNull((element) => element.name.substring(1) == rule.name);
-                  if (spawnSection != null && spawnSection.monsterStandees != null) {
+                      .firstWhereOrNull(
+                          (element) => element.name.substring(1) == rule.name);
+                  if (spawnSection != null &&
+                      spawnSection.monsterStandees != null) {
                     for (var spawnItem in spawnSection.monsterStandees!) {
-                      var item = roomMonsterData
-                          .firstWhereOrNull((element) => element.name == spawnItem.name);
+                      var item = roomMonsterData.firstWhereOrNull(
+                          (element) => element.name == spawnItem.name);
                       if (item != null) {
                         //merge
                         List<int> normal = [
@@ -631,7 +658,8 @@ class GameMethods {
                           item.elite[1] + spawnItem.elite[1],
                           item.elite[2] + spawnItem.elite[2]
                         ];
-                        RoomMonsterData mergedItem = RoomMonsterData(item.name, normal, elite);
+                        RoomMonsterData mergedItem =
+                            RoomMonsterData(item.name, normal, elite);
                         for (int i = 0; i < roomMonsterData.length; i++) {
                           if (roomMonsterData[i].name == item.name) {
                             roomMonsterData[i] = mergedItem;
@@ -665,7 +693,9 @@ class GameMethods {
       _gameState._scenarioSectionsAdded = [];
     } else {
       //remove earlier times if has "ResetRound"
-      if (specialRules.firstWhereOrNull((element) => element.type == "ResetRound") != null) {
+      if (specialRules
+              .firstWhereOrNull((element) => element.type == "ResetRound") !=
+          null) {
         _gameState._scenarioSpecialRules.removeWhere((oldItem) {
           if (oldItem.type == "Timer") {
             return true;
@@ -678,7 +708,8 @@ class GameMethods {
       for (var item in specialRules) {
         if (item.type == "Timer") {
           _gameState._scenarioSpecialRules.removeWhere((oldItem) {
-            if (oldItem.type == "Timer" && item.startOfRound == oldItem.startOfRound) {
+            if (oldItem.type == "Timer" &&
+                item.startOfRound == oldItem.startOfRound) {
               if (item.list.contains(-1) || oldItem.list.contains(-1)) {
                 return true;
               }
@@ -694,12 +725,13 @@ class GameMethods {
     }
 
     //handle random sections
-    var rule = specialRules.firstWhereOrNull((element) => element.type == "RandomSections");
+    var rule = specialRules
+        .firstWhereOrNull((element) => element.type == "RandomSections");
     if (rule != null) {
       subSections.shuffle();
       //add the random selected to rule.list
-      SpecialRule newRule =
-          SpecialRule("RandomSections", "", 0, 0, 0, "", subSections.sublist(0, 3), false, "");
+      SpecialRule newRule = SpecialRule("RandomSections", "", 0, 0, 0, "",
+          subSections.sublist(0, 3), false, "");
       specialRules.remove(rule);
       specialRules.add(newRule);
     }
@@ -711,7 +743,8 @@ class GameMethods {
     }
 
     //show init message if exists:
-    if (initMessage.isNotEmpty && getIt<Settings>().showReminders.value == true) {
+    if (initMessage.isNotEmpty &&
+        getIt<Settings>().showReminders.value == true) {
       _gameState._toastMessage.value += initMessage;
     } else {
       if (getIt.isRegistered<BuildContext>()) {
@@ -736,7 +769,8 @@ class GameMethods {
       if (item is Character) {
         bool remove = false;
         for (var name in characters) {
-          if (item.characterState.display.value == name.characterState.display.value) {
+          if (item.characterState.display.value ==
+              name.characterState.display.value) {
             remove = true;
             break;
           }
@@ -799,7 +833,8 @@ class GameMethods {
   }
 
   static void reorderMainList(_StateModifier _, int newIndex, int oldIndex) {
-    _gameState._currentList.insert(newIndex, _gameState._currentList.removeAt(oldIndex));
+    _gameState._currentList
+        .insert(newIndex, _gameState._currentList.removeAt(oldIndex));
   }
 
   static void addToMainList(_StateModifier _, int? index, ListItemData item) {
@@ -877,8 +912,9 @@ class GameMethods {
 
   static int getRandomStandee(Monster data) {
     int nrOfStandees = data.type.count;
-    if(data.type.name == "Polar Bear") {
-      nrOfStandees = 4; //for the special case where there are only 4 standees in first printing
+    if (data.type.name == "Polar Bear") {
+      nrOfStandees =
+          4; //for the special case where there are only 4 standees in first printing
     }
     List<int> available = [];
     for (int i = 0; i < nrOfStandees; i++) {
@@ -921,8 +957,13 @@ class GameMethods {
     return available[Random().nextInt(available.length)];
   }
 
-  static void executeAddStandee(_StateModifier _, final int nr, final SummonData? summon,
-      final MonsterType type, final String ownerId, final bool addAsSummon) {
+  static void executeAddStandee(
+      _StateModifier _,
+      final int nr,
+      final SummonData? summon,
+      final MonsterType type,
+      final String ownerId,
+      final bool addAsSummon) {
     MonsterInstance instance;
     Monster? monster;
     if (summon == null) {
@@ -933,8 +974,16 @@ class GameMethods {
       }
       instance = MonsterInstance(nr, type, addAsSummon, monster!);
     } else {
-      instance = MonsterInstance.summon(summon.standeeNr, type, summon.name, summon.health,
-          summon.move, summon.attack, summon.range, summon.gfx, getIt<GameState>().round.value);
+      instance = MonsterInstance.summon(
+          summon.standeeNr,
+          type,
+          summon.name,
+          summon.health,
+          summon.move,
+          summon.attack,
+          summon.range,
+          summon.gfx,
+          getIt<GameState>().round.value);
     }
 
     List<MonsterInstance>? monsterList;
@@ -986,15 +1035,20 @@ class GameMethods {
         GameMethods.sortCharactersFirst(_);
       } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
         GameMethods.drawAbilityCardFromInactiveDeck(_);
-        GameMethods.sortItemToPlace(_, monster.id,
-            GameMethods.getInitiative(monster)); //need to only sort this one item to place
+        GameMethods.sortItemToPlace(
+            _,
+            monster.id,
+            GameMethods.getInitiative(
+                monster)); //need to only sort this one item to place
       }
     }
   }
 
-  static void addStandee(int? nr, Monster data, MonsterType type, bool addAsSummon) {
+  static void addStandee(
+      int? nr, Monster data, MonsterType type, bool addAsSummon) {
     if (nr != null) {
-      _gameState.action(AddStandeeCommand(nr, null, data.id, type, addAsSummon));
+      _gameState
+          .action(AddStandeeCommand(nr, null, data.id, type, addAsSummon));
     } else {
       //add first un added nr
       for (int i = 1; i <= data.type.count; i++) {
@@ -1006,14 +1060,16 @@ class GameMethods {
           }
         }
         if (!added) {
-          _gameState.action(AddStandeeCommand(i, null, data.id, type, addAsSummon));
+          _gameState
+              .action(AddStandeeCommand(i, null, data.id, type, addAsSummon));
           return;
         }
       }
     }
   }
 
-  static void addMonster(_StateModifier _, String monster, List<SpecialRule> specialRules) {
+  static void addMonster(
+      _StateModifier _, String monster, List<SpecialRule> specialRules) {
     int levelAdjust = 0;
     Set<String> alliedMonsters = {};
     for (var rule in specialRules) {
@@ -1042,18 +1098,20 @@ class GameMethods {
       if (alliedMonsters.contains(monster)) {
         isAlly = true;
       }
-      _gameState._currentList.add(GameMethods.createMonster(
-          _, monster, (_gameState.level.value + levelAdjust).clamp(0, 7), isAlly)!);
+      _gameState._currentList.add(GameMethods.createMonster(_, monster,
+          (_gameState.level.value + levelAdjust).clamp(0, 7), isAlly)!);
     }
   }
 
-  static String autoAddStandees(
-      _StateModifier stateModifier, List<RoomMonsterData> roomMonsterData, String initMessage) {
+  static String autoAddStandees(_StateModifier stateModifier,
+      List<RoomMonsterData> roomMonsterData, String initMessage) {
     //handle room data
-    int characterIndex = GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
+    int characterIndex =
+        GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
     for (int i = 0; i < roomMonsterData.length; i++) {
       var roomMonsters = roomMonsterData[i];
-      addMonster(stateModifier, roomMonsters.name, _gameState._scenarioSpecialRules);
+      addMonster(
+          stateModifier, roomMonsters.name, _gameState._scenarioSpecialRules);
     }
     bool addSorted = _gameState.currentCampaign.value == "Buttons and Bugs";
     if (getIt<Settings>().noStandees.value != true &&
@@ -1066,8 +1124,8 @@ class GameMethods {
           List<int> normals = [];
           List<int> elites = [];
           var roomMonsters = roomMonsterData[i];
-          Monster data = _gameState.currentList
-              .firstWhereOrNull((element) => element.id == roomMonsters.name) as Monster;
+          Monster data = _gameState.currentList.firstWhereOrNull(
+              (element) => element.id == roomMonsters.name) as Monster;
 
           int eliteAmount = roomMonsters.elite[characterIndex];
           int normalAmount = roomMonsters.normal[characterIndex];
@@ -1081,20 +1139,25 @@ class GameMethods {
             int randomNr = GameMethods.getRandomStandee(data);
             if (randomNr != 0) {
               elites.add(randomNr);
-              GameMethods.executeAddStandee(
-                  stateModifier, randomNr, null, MonsterType.elite, data.id, false);
+              GameMethods.executeAddStandee(stateModifier, randomNr, null,
+                  MonsterType.elite, data.id, false);
             }
           }
 
           for (int i = 0; i < normalAmount; i++) {
             int randomNr = GameMethods.getRandomStandee(data);
-            if(addSorted) {
+            if (addSorted) {
               randomNr = GameMethods.getNextAvailableBnBStandee(data);
             }
             if (randomNr != 0) {
               normals.add(randomNr);
-              GameMethods.executeAddStandee(stateModifier, randomNr, null,
-                  isBoss ? MonsterType.boss : MonsterType.normal, data.id, false);
+              GameMethods.executeAddStandee(
+                  stateModifier,
+                  randomNr,
+                  null,
+                  isBoss ? MonsterType.boss : MonsterType.normal,
+                  data.id,
+                  false);
             }
           }
 
@@ -1111,7 +1174,8 @@ class GameMethods {
               for (int i = 0; i < elites.length; i++) {
                 initMessage += "${elites[i]}, ";
                 if (i == elites.length - 1) {
-                  initMessage = initMessage.substring(0, initMessage.length - 2);
+                  initMessage =
+                      initMessage.substring(0, initMessage.length - 2);
                 }
               }
             }
@@ -1127,7 +1191,8 @@ class GameMethods {
               for (int i = 0; i < normals.length; i++) {
                 initMessage += "${normals[i]}, ";
                 if (i == normals.length - 1) {
-                  initMessage = initMessage.substring(0, initMessage.length - 2);
+                  initMessage =
+                      initMessage.substring(0, initMessage.length - 2);
                 }
               }
             }
@@ -1157,14 +1222,16 @@ class GameMethods {
       if (item.id == ownerId) {
         if (item is Monster) {
           for (var instance in item.monsterInstances) {
-            String id = instance.name + instance.gfx + instance.standeeNr.toString();
+            String id =
+                instance.name + instance.gfx + instance.standeeNr.toString();
             if (id == figureId) {
               return instance;
             }
           }
         } else if (item is Character) {
           for (var instance in item.characterState.summonList) {
-            String id = instance.name + instance.gfx + instance.standeeNr.toString();
+            String id =
+                instance.name + instance.gfx + instance.standeeNr.toString();
             if (id == figureId) {
               return instance;
             }
@@ -1181,7 +1248,9 @@ class GameMethods {
         if (item is Monster) {
           for (var instance in item.monsterInstances) {
             if (instance.standeeNr == nr) {
-              return instance.name + instance.gfx + instance.standeeNr.toString();
+              return instance.name +
+                  instance.gfx +
+                  instance.standeeNr.toString();
             }
           }
         }
@@ -1194,7 +1263,8 @@ class GameMethods {
     return character.id == "Escort" || character.id == "Objective";
   }
 
-  static Character? createCharacter(_StateModifier _, String id, String? display, int level) {
+  static Character? createCharacter(
+      _StateModifier _, String id, String? display, int level) {
     Character? character;
     List<CharacterClass> characters = [];
     for (String key in _gameData.modelData.value.keys) {
@@ -1222,8 +1292,8 @@ class GameMethods {
           //create the bear summon
           final int bearHp = 8 + characterState.level.value * 2;
 
-          MonsterInstance bear =
-              MonsterInstance.summon(0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, "beast", -1);
+          MonsterInstance bear = MonsterInstance.summon(
+              0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, "beast", -1);
 
           character.characterState._summonList.add(bear);
         }
@@ -1233,7 +1303,8 @@ class GameMethods {
     return character;
   }
 
-  static Monster? createMonster(_StateModifier _, String name, int? level, bool isAlly) {
+  static Monster? createMonster(
+      _StateModifier _, String name, int? level, bool isAlly) {
     Map<String, MonsterModel> monsters = {};
     for (String key in _gameData.modelData.value.keys) {
       monsters.addAll(_gameData.modelData.value[key]!.monsters);
@@ -1245,6 +1316,10 @@ class GameMethods {
 
   static void showAllyDeck(_StateModifier _) {
     _gameState.showAllyDeck.value = true;
+  }
+
+  static void hideAllyDeck(_StateModifier _) {
+    _gameState.showAllyDeck.value = false;
   }
 
   static bool shouldShowAlliesDeck() {
@@ -1268,7 +1343,8 @@ class GameMethods {
       _StateModifier _, FigureState figure, bool clearLastTurnToo) {
     if (!clearLastTurnToo) {
       figure._conditionsAddedPreviousTurn.clear();
-      figure._conditionsAddedPreviousTurn.addAll(figure.conditionsAddedThisTurn.toSet());
+      figure._conditionsAddedPreviousTurn
+          .addAll(figure.conditionsAddedThisTurn.toSet());
     } else {
       figure._conditionsAddedPreviousTurn.clear();
     }
@@ -1289,11 +1365,13 @@ class GameMethods {
     }
   }
 
-  static void clearTurnState(_StateModifier stateModifier, bool clearLastTurnToo) {
+  static void clearTurnState(
+      _StateModifier stateModifier, bool clearLastTurnToo) {
     for (var item in _gameState._currentList) {
       item._turnState = TurnsState.notDone;
       if (item is Character) {
-        clearTurnStateConditions(stateModifier, item.characterState, clearLastTurnToo);
+        clearTurnStateConditions(
+            stateModifier, item.characterState, clearLastTurnToo);
         for (var instance in item.characterState._summonList) {
           clearTurnStateConditions(stateModifier, instance, clearLastTurnToo);
         }
@@ -1342,7 +1420,8 @@ class GameMethods {
     }
   }
 
-  static void removeExpiringConditionsFromListItem(_StateModifier _, ListItemData item) {
+  static void removeExpiringConditionsFromListItem(
+      _StateModifier _, ListItemData item) {
     if (item is Character) {
       removeExpiringConditions(_, item.characterState);
       for (var summon in item.characterState._summonList) {
@@ -1357,7 +1436,8 @@ class GameMethods {
 
   static void reapplyConditions(_StateModifier _, FigureState figure) {
     for (var condition in figure.conditionsAddedPreviousTurn) {
-      if (!figure.conditions.value.contains(condition) || condition == Condition.chill) {
+      if (!figure.conditions.value.contains(condition) ||
+          condition == Condition.chill) {
         figure.conditions.value.add(condition);
         figure._conditionsAddedThisTurn.remove(condition);
       }
@@ -1367,7 +1447,8 @@ class GameMethods {
     }
   }
 
-  static void reapplyConditionsFromListItem(_StateModifier _, ListItemData item) {
+  static void reapplyConditionsFromListItem(
+      _StateModifier _, ListItemData item) {
     if (item is Character) {
       reapplyConditions(_, item.characterState);
       for (var summon in item.characterState.summonList) {
@@ -1461,15 +1542,20 @@ class GameMethods {
   }
 
   static void updateForSpecialRules(_StateModifier _) {
-    List<SpecialRule>? rules = _gameData.modelData.value[_gameState.currentCampaign.value]
-        ?.scenarios[_gameState.scenario.value]?.specialRules;
+    List<SpecialRule>? rules = _gameData
+        .modelData
+        .value[_gameState.currentCampaign.value]
+        ?.scenarios[_gameState.scenario.value]
+        ?.specialRules;
     if (rules != null) {
       for (SpecialRule rule in rules) {
         if (rule.type == "Objective" || rule.type == "Escort") {
           Character? character = _gameState.currentList
-              .firstWhereOrNull((element) => element.id == rule.name) as Character?;
+                  .firstWhereOrNull((element) => element.id == rule.name)
+              as Character?;
           if (character != null) {
-            int newHealth = StatCalculator.calculateFormula(rule.health.toString())!;
+            int newHealth =
+                StatCalculator.calculateFormula(rule.health.toString())!;
             if (newHealth != character.characterState.maxHealth.value) {
               character.characterState._maxHealth.value = newHealth;
               character.characterState._health.value = newHealth;
@@ -1477,7 +1563,8 @@ class GameMethods {
           }
         } else if (rule.type == "LevelAdjust") {
           Monster? monster = _gameState.currentList
-              .firstWhereOrNull((element) => element.id == rule.name) as Monster?;
+                  .firstWhereOrNull((element) => element.id == rule.name)
+              as Monster?;
           if (monster != null) {
             if (_gameState.level.value == monster.level.value) {
               int newLevel = (monster.level.value + rule.level).clamp(0, 7);

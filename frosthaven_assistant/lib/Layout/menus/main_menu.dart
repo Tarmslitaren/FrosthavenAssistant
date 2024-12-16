@@ -15,6 +15,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
+import '../../Resource/commands/hide_ally_deck_command.dart';
 import '../../Resource/commands/show_ally_deck_command.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
@@ -40,7 +41,8 @@ bool undoEnabled() {
     return gameState.commandIndex.value >= 0 &&
         gameState.commandIndex.value < gameState.commandDescriptions.length &&
         (gameState.commandIndex.value == 0 ||
-            gameState.commandDescriptions[gameState.commandIndex.value - 1] != "");
+            gameState.commandDescriptions[gameState.commandIndex.value - 1] !=
+                "");
   }
   return gameState.commandIndex.value >= 0 &&
       gameState.commandIndex.value < gameState.commands.length &&
@@ -55,10 +57,12 @@ bool redoEnabled() {
   }
   if (getIt<Settings>().server.value == true) {
     return gameState.commandDescriptions.isNotEmpty &&
-        gameState.gameSaveStates.length >= gameState.commandDescriptions.length &&
+        gameState.gameSaveStates.length >=
+            gameState.commandDescriptions.length &&
         gameState.commandIndex.value < gameState.commandDescriptions.length - 1;
   }
-  return gameState.commandIndex.value < gameState.commandDescriptions.length - 1;
+  return gameState.commandIndex.value <
+      gameState.commandDescriptions.length - 1;
 }
 
 Drawer createMainMenu(BuildContext context) {
@@ -72,13 +76,17 @@ Drawer createMainMenu(BuildContext context) {
         String undoText = "Undo";
         if (settings.client.value != ClientState.connected &&
             gameState.commandIndex.value >= 0 &&
-            gameState.commandDescriptions.length > gameState.commandIndex.value) {
-          undoText += ": ${gameState.commandDescriptions[gameState.commandIndex.value]}";
+            gameState.commandDescriptions.length >
+                gameState.commandIndex.value) {
+          undoText +=
+              ": ${gameState.commandDescriptions[gameState.commandIndex.value]}";
         }
         String redoText = "Redo";
         if (settings.client.value != ClientState.connected &&
-            gameState.commandIndex.value < gameState.commandDescriptions.length - 1) {
-          redoText += ": ${gameState.commandDescriptions[gameState.commandIndex.value + 1]}";
+            gameState.commandIndex.value <
+                gameState.commandDescriptions.length - 1) {
+          redoText +=
+              ": ${gameState.commandDescriptions[gameState.commandIndex.value + 1]}";
         }
 
         return ListView(
@@ -91,9 +99,13 @@ Drawer createMainMenu(BuildContext context) {
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     image: DecorationImage(
-                        fit: BoxFit.fitWidth, image: AssetImage("assets/images/icon.png"))),
+                        fit: BoxFit.fitWidth,
+                        image: AssetImage("assets/images/icon.png"))),
                 child: Stack(
-                  children: [Positioned(right: 6, bottom: 0, child: Text("Version 1.10.0"))],
+                  children: [
+                    Positioned(
+                        right: 6, bottom: 0, child: Text("Version 1.10.0"))
+                  ],
                 ),
               ),
               ListTile(
@@ -120,9 +132,9 @@ Drawer createMainMenu(BuildContext context) {
               ),
               ListTile(
                 title: Text(
-                  getIt<GameState>().scenario.value == "#Random Dungeon"
-                      ? 'Add Random Dungeon Card'
-                      : 'Add Section'),
+                    getIt<GameState>().scenario.value == "#Random Dungeon"
+                        ? 'Add Random Dungeon Card'
+                        : 'Add Section'),
                 enabled: true,
                 onTap: () {
                   Navigator.pop(context);
@@ -181,11 +193,22 @@ Drawer createMainMenu(BuildContext context) {
                   title: const Text('Show Ally Attack Modifier Deck'),
                   onTap: () {
                     Navigator.pop(context);
-
                     gameState.action(ShowAllyDeckCommand());
                     getIt<GameState>().updateAllUI();
                   },
                 ),
+
+              if (gameState.showAllyDeck.value == true &&
+                  settings.showAmdDeck.value)
+                ListTile(
+                  title: const Text('Hide Ally Attack Modifier Deck'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    gameState.action(HideAllyDeckCommand());
+                    getIt<GameState>().updateAllUI();
+                  },
+                ),
+
               const Divider(),
               ListTile(
                 title: const Text('Settings'),
@@ -200,7 +223,8 @@ Drawer createMainMenu(BuildContext context) {
                     valueListenable: settings.client,
                     builder: (context, value, child) {
                       bool connected = false;
-                      String connectionText = "Connect as Client (${settings.lastKnownConnection})";
+                      String connectionText =
+                          "Connect as Client (${settings.lastKnownConnection})";
                       if (settings.client.value == ClientState.connected) {
                         connected = true;
                         connectionText = "Connected as Client";
@@ -214,7 +238,8 @@ Drawer createMainMenu(BuildContext context) {
                           title: Text(connectionText),
                           value: connected,
                           onChanged: (bool? value) {
-                            if (settings.client.value != ClientState.connected) {
+                            if (settings.client.value !=
+                                ClientState.connected) {
                               settings.client.value = ClientState.connecting;
                               getIt<Client>()
                                   .connect(settings.lastKnownConnection)
@@ -228,7 +253,8 @@ Drawer createMainMenu(BuildContext context) {
               ValueListenableBuilder<bool>(
                   valueListenable: settings.server,
                   builder: (context, value, child) {
-                    String hostIPText = 'Start Host Server ${settings.lastKnownHostIP}';
+                    String hostIPText =
+                        'Start Host Server ${settings.lastKnownHostIP}';
                     return CheckboxListTile(
                         title: Text(settings.server.value
                             ? "Stop Server ${settings.lastKnownHostIP}"
@@ -266,9 +292,7 @@ Drawer createMainMenu(BuildContext context) {
                 title: const Text('Donate'),
                 onTap: () {
                   final Uri toLaunch = Uri(
-                      scheme: 'https',
-                      host: 'ko-fi.com',
-                      path: 'tarmslitaren');
+                      scheme: 'https', host: 'ko-fi.com', path: 'tarmslitaren');
                   launchUrlInBrowser(toLaunch);
                   Navigator.pop(context);
                 },
