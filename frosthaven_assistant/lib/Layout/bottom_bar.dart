@@ -10,7 +10,6 @@ import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'modifier_deck_widget.dart';
 
-
 String formattedScenarioName(GameState gameState) {
   String scenario = gameState.scenario.value;
   if (gameState.currentCampaign.value == "Solo") {
@@ -39,179 +38,186 @@ Widget createLevelWidget(BuildContext context) {
       shadows: settings.darkMode.value
           ? [shadow]
           : [
-        Shadow(
-            offset: Offset(1.0 * settings.userScalingBars.value,
-                1.0 * settings.userScalingBars.value),
-            blurRadius: 3.0 * settings.userScalingBars.value,
-            color: Colors.white),
-        Shadow(
-            offset: Offset(1.0 * settings.userScalingBars.value,
-                1.0 * settings.userScalingBars.value),
-            blurRadius: 8.0 * settings.userScalingBars.value,
-            color: Colors.white),
-      ]);
+              Shadow(
+                  offset: Offset(1.0 * settings.userScalingBars.value,
+                      1.0 * settings.userScalingBars.value),
+                  blurRadius: 3.0 * settings.userScalingBars.value,
+                  color: Colors.white),
+              Shadow(
+                  offset: Offset(1.0 * settings.userScalingBars.value,
+                      1.0 * settings.userScalingBars.value),
+                  blurRadius: 8.0 * settings.userScalingBars.value,
+                  color: Colors.white),
+            ]);
 
   return Material(
-    color: Colors.transparent,
-      child :InkWell(
-    onTap: () {
-      openDialog(
-        context,
-        const SetLevelMenu(),
-      );
-    },
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ValueListenableBuilder<String>(
-            valueListenable: gameState.scenario,
-            builder: (context, value, child) {
-              return SizedBox(
-                  width: 174 * settings.userScalingBars.value,
-                  child: Text(
-                    overflow: TextOverflow.ellipsis,
-                    formattedScenarioName(gameState),
-                    textAlign: TextAlign.center,
-                    style: textStyle,
-                  ));
-            }),
-        ValueListenableBuilder<int>(
-            valueListenable: gameState.level,
-            builder: (context, value, child) {
-              const double blurRadius = 3.0;
-              const double spreadRadius = 1.0;
-              const double opacity = 0.3;
-              return Text.rich(
-                TextSpan(children: [
-                  WidgetSpan(
-                      alignment: PlaceholderAlignment.middle,
-                      style: textStyle,
-                      child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(opacity),
-                                spreadRadius: spreadRadius,
-                                blurRadius: blurRadius * settings.userScalingBars.value,
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          openDialog(
+            context,
+            const SetLevelMenu(),
+          );
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ValueListenableBuilder<String>(
+                valueListenable: gameState.scenario,
+                builder: (context, value, child) {
+                  return SizedBox(
+                      width: 174 * settings.userScalingBars.value,
+                      child: Text(
+                        overflow: TextOverflow.ellipsis,
+                        formattedScenarioName(gameState),
+                        textAlign: TextAlign.center,
+                        style: textStyle,
+                      ));
+                }),
+            ValueListenableBuilder<int>(
+                valueListenable: gameState.commandIndex,
+                builder: (context, value, child) {
+                  const double blurRadius = 3.0;
+                  const double spreadRadius = 1.0;
+                  const double opacity = 0.3;
+                  return Text.rich(
+                    TextSpan(children: [
+                      WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          style: textStyle,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(opacity),
+                                    spreadRadius: spreadRadius,
+                                    blurRadius: blurRadius *
+                                        settings.userScalingBars.value,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Image(
-                            height: fontHeight * 0.6,
-                            filterQuality: FilterQuality
-                                .medium, //needed because of the edges
-                            image: const AssetImage("assets/images/psd/level.png"),
-                          ))),
-                  TextSpan(
-                    text: ": ${gameState.level.value} ",
-                    style: textStyle,
-                  ),
-                  WidgetSpan(
-                      alignment: PlaceholderAlignment.middle,
-                      style: textStyle,
-                      child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(opacity),
-                                spreadRadius: spreadRadius,
-                                blurRadius: blurRadius * settings.userScalingBars.value,
+                              child: Image(
+                                height: fontHeight * 0.6,
+                                filterQuality: FilterQuality
+                                    .medium, //needed because of the edges
+                                image: const AssetImage(
+                                    "assets/images/psd/level.png"),
+                              ))),
+                      TextSpan(
+                        text: ": ${gameState.level.value} ",
+                        style: textStyle,
+                      ),
+                      WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          style: textStyle,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(opacity),
+                                    spreadRadius: spreadRadius,
+                                    blurRadius: blurRadius *
+                                        settings.userScalingBars.value,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Image(
-                            height: fontHeight,
-                            filterQuality: FilterQuality
-                                .medium, //needed because of the edges
-                            image: const AssetImage(
-                                "assets/images/psd/traps-fh.png"),
-                          ))),
-                  TextSpan(
-                    text: ": ${GameMethods.getTrapValue()} ",
-                    style: textStyle,
-                  ),
-                  WidgetSpan(
-                      alignment: PlaceholderAlignment.middle,
-                      style: textStyle,
-                      child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(opacity),
-                                spreadRadius: spreadRadius,
-                                blurRadius: blurRadius * settings.userScalingBars.value,
+                              child: Image(
+                                height: fontHeight,
+                                filterQuality: FilterQuality
+                                    .medium, //needed because of the edges
+                                image: const AssetImage(
+                                    "assets/images/psd/traps-fh.png"),
+                              ))),
+                      TextSpan(
+                        text: ": ${GameMethods.getTrapValue()} ",
+                        style: textStyle,
+                      ),
+                      WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          style: textStyle,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(opacity),
+                                    spreadRadius: spreadRadius,
+                                    blurRadius: blurRadius *
+                                        settings.userScalingBars.value,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Image(
-                            height: fontHeight,
-                            filterQuality: FilterQuality
-                                .medium, //needed because of the edges
-                            image: const AssetImage(
-                                "assets/images/psd/hazard-fh.png"),
-                          ))),
-                  TextSpan(
-                    text: ": ${GameMethods.getHazardValue()} ",
-                    style: textStyle,
-                  ),
-                  WidgetSpan(
-                      alignment: PlaceholderAlignment.middle,
-                      style: textStyle,
-                      child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(opacity),
-                                spreadRadius: spreadRadius,
-                                blurRadius: blurRadius * settings.userScalingBars.value,
+                              child: Image(
+                                height: fontHeight,
+                                filterQuality: FilterQuality
+                                    .medium, //needed because of the edges
+                                image: const AssetImage(
+                                    "assets/images/psd/hazard-fh.png"),
+                              ))),
+                      TextSpan(
+                        text: ": ${GameMethods.getHazardValue()} ",
+                        style: textStyle,
+                      ),
+                      WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          style: textStyle,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(opacity),
+                                    spreadRadius: spreadRadius,
+                                    blurRadius: blurRadius *
+                                        settings.userScalingBars.value,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Image(
-                            height: fontHeight * 0.9,
-                            filterQuality: FilterQuality
-                                .medium, //needed because of the edges
-                            image: const AssetImage("assets/images/psd/xp.png"),
-                          ))),
-                  TextSpan(
-                    text: ": +${GameMethods.getXPValue()} ",
-                    style: textStyle,
-                  ),
-                  WidgetSpan(
-                      alignment: PlaceholderAlignment.middle,
-                      style: textStyle,
-                      child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(opacity),
-                                spreadRadius: spreadRadius,
-                                blurRadius: blurRadius * settings.userScalingBars.value,
+                              child: Image(
+                                height: fontHeight * 0.9,
+                                filterQuality: FilterQuality
+                                    .medium, //needed because of the edges
+                                image: const AssetImage(
+                                    "assets/images/psd/xp.png"),
+                              ))),
+                      TextSpan(
+                        text: ": +${GameMethods.getXPValue()} ",
+                        style: textStyle,
+                      ),
+                      WidgetSpan(
+                          alignment: PlaceholderAlignment.middle,
+                          style: textStyle,
+                          child: Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(opacity),
+                                    spreadRadius: spreadRadius,
+                                    blurRadius: blurRadius *
+                                        settings.userScalingBars.value,
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          child: Image(
-                            height: fontHeight,
-                            filterQuality: FilterQuality
-                                .medium, //needed because of the edges
-                            image: const AssetImage(
-                                "assets/images/psd/coins-fh.png"),
-                          ))),
-                  TextSpan(
-                    text: ": x${GameMethods.getCoinValue()}",
-                    style: textStyle,
-                  ),
-                ]),
-              );
-            }),
-      ],
-    ),
-  ));
+                              child: Image(
+                                height: fontHeight,
+                                filterQuality: FilterQuality
+                                    .medium, //needed because of the edges
+                                image: const AssetImage(
+                                    "assets/images/psd/coins-fh.png"),
+                              ))),
+                      TextSpan(
+                        text: ": x${GameMethods.getCoinValue()}",
+                        style: textStyle,
+                      ),
+                    ]),
+                  );
+                }),
+          ],
+        ),
+      ));
 }
 
 Widget createBottomBar(BuildContext context) {
@@ -230,10 +236,7 @@ Widget createBottomBar(BuildContext context) {
                     builder: (context, value, child) {
                       return Container(
                           height: 40 * settings.userScalingBars.value,
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
+                          width: MediaQuery.of(context).size.width,
                           decoration: BoxDecoration(
                             color: Colors.transparent,
                             boxShadow: const [
@@ -245,8 +248,8 @@ Widget createBottomBar(BuildContext context) {
                             ],
                             image: DecorationImage(
                                 image: AssetImage(getIt<Settings>()
-                                    .darkMode
-                                    .value
+                                        .darkMode
+                                        .value
                                     ? 'assets/images/psd/gloomhaven-bar.png'
                                     : 'assets/images/psd/frosthaven-bar.png'),
                                 fit: BoxFit.cover,
@@ -259,9 +262,14 @@ Widget createBottomBar(BuildContext context) {
                               createLevelWidget(context),
                               const NetworkUI(),
                               modifiersFitOnBar(context) &&
-                                  getIt<Settings>().showAmdDeck.value &&
-                                  getIt<GameState>().currentCampaign.value != "Buttons and Bugs" //hide amd deck for buttons and bugs
-                                  ? const ModifierDeckWidget(name: '',)
+                                      getIt<Settings>().showAmdDeck.value &&
+                                      getIt<GameState>()
+                                              .currentCampaign
+                                              .value !=
+                                          "Buttons and Bugs" //hide amd deck for buttons and bugs
+                                  ? const ModifierDeckWidget(
+                                      name: '',
+                                    )
                                   : Container()
                             ],
                           ));

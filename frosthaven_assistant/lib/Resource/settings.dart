@@ -41,6 +41,7 @@ class Settings {
   final autoAddSpawns = ValueNotifier<bool>(true);
   final showAmdDeck = ValueNotifier<bool>(true);
   final showBattleGoalReminder = ValueNotifier<bool>(true);
+  final fhHazTerrainCalcInOGGloom = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -275,6 +276,10 @@ class Settings {
         showBattleGoalReminder.value = data["showBattleGoalReminder"];
       }
 
+      if (data["fhHazTerrainCalcInOGGloom"] != null) {
+        fhHazTerrainCalcInOGGloom.value = data["fhHazTerrainCalcInOGGloom"];
+      }
+
       if (data["saves"] != null) {
         Map<String, dynamic> map = data["saves"];
         for (var key in map.keys) {
@@ -316,6 +321,7 @@ class Settings {
         '"autoAddSpawns": ${autoAddSpawns.value}, '
         '"showAmdDeck": ${showAmdDeck.value}, '
         '"showBattleGoalReminder": ${showBattleGoalReminder.value}, '
+        '"fhHazTerrainCalcInOGGloom": ${fhHazTerrainCalcInOGGloom.value}, '
         '"saves": ${jsonEncode(saves.value)}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '

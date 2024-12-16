@@ -20,6 +20,11 @@ class GameMethods {
   }
 
   static int getHazardValue() {
+    if (isOgGloomEdition(
+            _gameState.currentCampaign.value, _gameState.scenario.value) &&
+        !getIt<Settings>().fhHazTerrainCalcInOGGloom.value) {
+      return (getTrapValue() / 2).floor();
+    }
     return 1 + (_gameState.level.value / 3.0).ceil();
   }
 
@@ -1633,5 +1638,23 @@ class GameMethods {
 
   static void clearUnlockedClasses(_StateModifier _) {
     getIt<GameState>()._unlockedClasses = {};
+  }
+
+  static bool isOgGloomEdition(String edition, String scenario) {
+    if (edition == "Solo") {
+      //#1-19, #37-56 are og solo scenarios
+      for (int i = 1; i <= 19; i++) {
+        if (scenario.contains("${"#$i"} ")) {
+          return true;
+        }
+      }
+      for (int i = 37; i <= 56; i++) {
+        if (scenario.contains("${"#$i"} ")) {
+          return true;
+        }
+      }
+      return false;
+    }
+    return edition != "Frosthaven";
   }
 }

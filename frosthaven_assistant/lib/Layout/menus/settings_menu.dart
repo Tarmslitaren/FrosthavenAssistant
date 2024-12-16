@@ -181,6 +181,19 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     });
                                   }),
                               CheckboxListTile(
+                                  title: const Text(
+                                      "Use Frosthaven Hazardous Terrain Calculation in OG Gloomhaven"),
+                                  value:
+                                      settings.fhHazTerrainCalcInOGGloom.value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      settings.fhHazTerrainCalcInOGGloom.value =
+                                          value!;
+                                      settings.saveToDisk();
+                                      getIt<GameState>().updateAllUI();
+                                    });
+                                  }),
+                              CheckboxListTile(
                                   title:
                                       const Text("Show Scenario names in list"),
                                   value: settings.showScenarioNames.value,
