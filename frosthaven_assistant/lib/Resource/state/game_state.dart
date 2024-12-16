@@ -58,16 +58,13 @@ class GameState extends ActionHandler {
   GameState();
 
   void init() {
-
     _elementState[Elements.fire] = ElementState.inert;
     _elementState[Elements.ice] = ElementState.inert;
     _elementState[Elements.air] = ElementState.inert;
     _elementState[Elements.earth] = ElementState.inert;
     _elementState[Elements.light] = ElementState.inert;
     _elementState[Elements.dark] = ElementState.inert;
-
   }
-
 
   //todo: ugly hacks to delay list update (doesn't need to be here)
   final updateList = ValueNotifier<int>(0);
@@ -77,7 +74,9 @@ class GameState extends ActionHandler {
   //state
   ValueListenable<String> get currentCampaign => _currentCampaign;
   final _currentCampaign = ValueNotifier<String>("Jaws of the Lion");
-  setCampaign(_StateModifier stateModifier, String value) {_currentCampaign.value = value;}
+  setCampaign(_StateModifier stateModifier, String value) {
+    _currentCampaign.value = value;
+  }
 
   ValueListenable<int> get round => _round;
   final _round = ValueNotifier<int>(1);
@@ -86,52 +85,69 @@ class GameState extends ActionHandler {
 
   ValueListenable<RoundState> get roundState => _roundState;
   final _roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
-  setRoundState(_StateModifier stateModifier, RoundState value) {_roundState.value = value;}
+  setRoundState(_StateModifier stateModifier, RoundState value) {
+    _roundState.value = value;
+  }
 
   ValueListenable<int> get level => _level;
   final _level = ValueNotifier<int>(1);
-  setLevel(_StateModifier stateModifier, int value) {_level.value = value;}
+  setLevel(_StateModifier stateModifier, int value) {
+    _level.value = value;
+  }
 
   ValueListenable<bool> get solo => _solo;
   final _solo = ValueNotifier<bool>(false);
-  setSolo(_StateModifier stateModifier, bool value) {_solo.value = value;}
+  setSolo(_StateModifier stateModifier, bool value) {
+    _solo.value = value;
+  }
 
   ValueListenable<bool> get autoScenarioLevel => _autoScenarioLevel;
   final _autoScenarioLevel = ValueNotifier<bool>(false);
-  setAutoScenarioLevel(_StateModifier stateModifier, bool value) {_autoScenarioLevel.value = value;}
+  setAutoScenarioLevel(_StateModifier stateModifier, bool value) {
+    _autoScenarioLevel.value = value;
+  }
 
   ValueListenable<int> get difficulty => _difficulty;
   final _difficulty = ValueNotifier<int>(1);
-  setDifficulty(_StateModifier stateModifier, int value) {_difficulty.value = value;}
+  setDifficulty(_StateModifier stateModifier, int value) {
+    _difficulty.value = value;
+  }
 
   ValueListenable<String> get scenario => _scenario;
   final _scenario = ValueNotifier<String>("");
-  setScenario(_StateModifier stateModifier, String value) {_scenario.value = value;}
+  setScenario(_StateModifier stateModifier, String value) {
+    _scenario.value = value;
+  }
 
-  BuiltList<String> get scenarioSectionsAdded => BuiltList.of(_scenarioSectionsAdded);
+  BuiltList<String> get scenarioSectionsAdded =>
+      BuiltList.of(_scenarioSectionsAdded);
   List<String> _scenarioSectionsAdded = [];
 
   BuiltList<SpecialRule> get scenarioSpecialRules =>
       BuiltList.of(_scenarioSpecialRules);
-  List<SpecialRule> _scenarioSpecialRules =
-      [];
+  List<SpecialRule> _scenarioSpecialRules = [];
 
   LootDeck get lootDeck => _lootDeck; //todo: still mutable
   late LootDeck _lootDeck = LootDeck.empty(); //loot deck for current scenario
 
   ValueListenable<String> get toastMessage => _toastMessage;
   final _toastMessage = ValueNotifier<String>("");
-  setToastMessage(_StateModifier stateModifier, String value) {_toastMessage.value = value;}
+  setToastMessage(_StateModifier stateModifier, String value) {
+    _toastMessage.value = value;
+  }
 
   BuiltList<ListItemData> get currentList => BuiltList.of(_currentList);
   List<ListItemData> _currentList = []; //has both monsters and characters
 
-  BuiltList<MonsterAbilityState> get currentAbilityDecks => BuiltList.of(_currentAbilityDecks);
-  List<MonsterAbilityState> _currentAbilityDecks = <MonsterAbilityState>[];
+  BuiltList<MonsterAbilityState> get currentAbilityDecks =>
+      BuiltList.of(_currentAbilityDecks);
+  final List<MonsterAbilityState> _currentAbilityDecks =
+      <MonsterAbilityState>[];
   //add to here when adding a monster type
 
   //elements
-  BuiltMap<Elements, ElementState> get elementState => BuiltMap.of(_elementState);
+  BuiltMap<Elements, ElementState> get elementState =>
+      BuiltMap.of(_elementState);
   final Map<Elements, ElementState> _elementState = HashMap();
 
   //modifierDeck
@@ -146,7 +162,6 @@ class GameState extends ActionHandler {
   Set<String> _unlockedClasses = {};
 
   final showAllyDeck = ValueNotifier<bool>(false);
-
 
   @override
   String toString() {

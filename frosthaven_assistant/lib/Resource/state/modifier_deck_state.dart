@@ -1,4 +1,5 @@
 part of 'game_state.dart';
+
 // ignore_for_file: library_private_types_in_public_api
 enum CardType { add, multiply, curse, bless, enfeeble }
 
@@ -105,12 +106,15 @@ class ModifierDeck {
   void setCurse(_StateModifier _, int value) {
     _curses.value = value;
   }
+
   void setEnfeeble(_StateModifier _, int value) {
     _enfeebles.value = value;
   }
+
   void setBless(_StateModifier _, int value) {
     _blesses.value = value;
   }
+
   void setBadOmen(_StateModifier _, int value) {
     _badOmen.value = value;
   }
@@ -203,8 +207,7 @@ class ModifierDeck {
     if (name.isNotEmpty) {
       suffix = "-$name";
     }
-    _drawPile
-        .add(ModifierCard(CardType.multiply, "nullAttack$suffix"));
+    _drawPile.add(ModifierCard(CardType.multiply, "nullAttack$suffix"));
     _shuffle();
   }
 
@@ -280,6 +283,10 @@ class ModifierDeck {
 
   void shuffle(_StateModifier _) {
     _shuffle();
+  }
+
+  void shuffleUnDrawn(_StateModifier _) {
+    _drawPile.shuffle();
   }
 
   void _shuffle() {

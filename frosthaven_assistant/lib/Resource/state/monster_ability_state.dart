@@ -34,6 +34,10 @@ class MonsterAbilityState {
     _shuffle();
   }
 
+  void shuffleUnDrawn(_StateModifier _) {
+    drawPile.shuffle();
+  }
+
   void _shuffle() {
     while (discardPile.isNotEmpty) {
       drawPile.push(discardPile.pop());

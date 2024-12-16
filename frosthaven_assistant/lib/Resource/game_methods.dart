@@ -363,15 +363,15 @@ class GameMethods {
     _gameState._roundState.value = state;
   }
 
-  static void setLevel(_StateModifier _, int level, String? monsterId) {
+  static void setLevel(_StateModifier s, int level, String? monsterId) {
     if (monsterId == null) {
       _gameState._level.value = level;
       for (var item in _gameState.currentList) {
         if (item is Monster) {
-          item.setLevel(_, level);
+          item.setLevel(s, level);
         }
       }
-      GameMethods.updateForSpecialRules(_);
+      GameMethods.updateForSpecialRules(s);
     } else {
       Monster? monster;
       for (var item in _gameState.currentList) {
@@ -379,11 +379,11 @@ class GameMethods {
           monster = item as Monster;
         }
       }
-      monster!.setLevel(_, level);
+      monster!.setLevel(s, level);
     }
   }
 
-  static void applyDifficulty(_StateModifier _) {
+  static void applyDifficulty(_StateModifier s) {
     if (_gameState.autoScenarioLevel.value == true) {
       //adjust difficulty
       int newLevel =
@@ -391,12 +391,12 @@ class GameMethods {
       if (newLevel > 7) {
         newLevel = 7;
       }
-      GameMethods.setLevel(_, newLevel, null);
+      GameMethods.setLevel(s, newLevel, null);
     }
   }
 
   static void setCharacterLevel(
-      _StateModifier _, int level, String characterId) {
+      _StateModifier s, int level, String characterId) {
     Character? character;
     for (var item in _gameState.currentList) {
       if (item.id == characterId) {
@@ -407,32 +407,33 @@ class GameMethods {
     if (character!.characterClass.healthByLevel.length < level) {
       level = character.characterClass.healthByLevel.length;
     }
-    character.characterState.setFigureLevel(_, level);
+    character.characterState.setFigureLevel(s, level);
     character.characterState
-        .setHealth(_, character.characterClass.healthByLevel[level - 1]);
+        .setHealth(s, character.characterClass.healthByLevel[level - 1]);
     character.characterState
-        .setMaxHealth(_, character.characterState.health.value);
+        .setMaxHealth(s, character.characterState.health.value);
 
     if (character.id == "Beast Tyrant") {
       if (character.characterState.summonList.isNotEmpty) {
         //create the bear summon
         final int bearHp = 8 + character.characterState.level.value * 2;
-        character.characterState.summonList[0].setMaxHealth(_, bearHp);
-        character.characterState.summonList[0].setHealth(_, bearHp);
+        character.characterState.summonList[0].setMaxHealth(s, bearHp);
+        character.characterState.summonList[0].setHealth(s, bearHp);
       }
     }
 
-    GameMethods.applyDifficulty(_);
+    GameMethods.applyDifficulty(s);
   }
 
-  static void setScenario(_StateModifier _, String scenario, bool section) {
+  //todo: too long method - split
+  static void setScenario(_StateModifier s, String scenario, bool section) {
     if (!section) {
       //first reset state
-      GameMethods.resetRound(_, 1, true);
+      GameMethods.resetRound(s, 1, true);
       _gameState.showAllyDeck.value = false;
       _gameState._currentAbilityDecks.clear();
       _gameState._scenarioSpecialRules.clear();
-      GameMethods.applyDifficulty(_);
+      GameMethods.applyDifficulty(s);
       List<ListItemData> newList = [];
       for (var item in _gameState.currentList) {
         if (item is Character) {
@@ -488,7 +489,7 @@ class GameMethods {
         }
       }
 
-      GameMethods.clearTurnState(_, true);
+      GameMethods.clearTurnState(s, true);
       _gameState._toastMessage.value = "";
     }
 
@@ -540,11 +541,11 @@ class GameMethods {
 
     //handle special rules
     for (String monster in monsters) {
-      GameMethods.addMonster(_, monster, specialRules);
+      GameMethods.addMonster(s, monster, specialRules);
     }
 
     if (!section) {
-      GameMethods.shuffleDecks(_);
+      GameMethods.shuffleDecks(s);
     }
 
     //hack for banner spear solo special rule
@@ -565,7 +566,7 @@ class GameMethods {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {
           Character objective = GameMethods.createCharacter(
-              _, "Objective", item.name, _gameState.level.value + 1)!;
+              s, "Objective", item.name, _gameState.level.value + 1)!;
           objective.characterState._maxHealth.value =
               StatCalculator.calculateFormula(item.health.toString())!;
           objective.characterState._health.value =
@@ -589,7 +590,7 @@ class GameMethods {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {
           Character objective = GameMethods.createCharacter(
-              _, "Escort", item.name, _gameState.level.value + 1)!;
+              s, "Escort", item.name, _gameState.level.value + 1)!;
           objective.characterState._maxHealth.value =
               StatCalculator.calculateFormula(item.health.toString())!;
           objective.characterState._health.value =
@@ -627,7 +628,7 @@ class GameMethods {
       }
 
       if (item.type == "ResetRound") {
-        GameMethods.resetRound(_, 1, false);
+        GameMethods.resetRound(s, 1, false);
       }
     }
 
@@ -686,16 +687,16 @@ class GameMethods {
       }
     }
 
-    initMessage = GameMethods.autoAddStandees(_, roomMonsterData, initMessage);
+    initMessage = GameMethods.autoAddStandees(s, roomMonsterData, initMessage);
 
     if (!section) {
       _gameState._scenarioSpecialRules = specialRules;
 
       //todo: create a game state set scenario method to handle all these
-      GameMethods.updateElements(_);
-      GameMethods.updateElements(_); //twice to make sure they are inert.
-      GameMethods.setRoundState(_, RoundState.chooseInitiative);
-      GameMethods.sortCharactersFirst(_);
+      GameMethods.updateElements(s);
+      GameMethods.updateElements(s); //twice to make sure they are inert.
+      GameMethods.setRoundState(s, RoundState.chooseInitiative);
+      GameMethods.sortCharactersFirst(s);
       _gameState._scenario.value = scenario;
       _gameState._scenarioSectionsAdded = [];
     } else {
@@ -770,7 +771,7 @@ class GameMethods {
     }
   }
 
-  static void removeCharacters(_StateModifier _, List<Character> characters) {
+  static void removeCharacters(_StateModifier s, List<Character> characters) {
     List<ListItemData> newList = [];
     for (var item in _gameState.currentList) {
       if (item is Character) {
@@ -790,7 +791,7 @@ class GameMethods {
       }
     }
     _gameState._currentList = newList;
-    GameMethods.updateForSpecialRules(_);
+    GameMethods.updateForSpecialRules(s);
     _gameState.updateList.value++;
   }
 
@@ -965,7 +966,7 @@ class GameMethods {
   }
 
   static void executeAddStandee(
-      _StateModifier _,
+      _StateModifier s,
       final int nr,
       final SummonData? summon,
       final MonsterType type,
@@ -1034,16 +1035,16 @@ class GameMethods {
 
     monsterList!.add(instance);
     if (monster != null) {
-      GameMethods.sortMonsterInstances(_, monsterList);
+      GameMethods.sortMonsterInstances(s, monsterList);
     }
     if (monsterList.length == 1 && monster != null) {
       //first added
       if (getIt<GameState>().roundState.value == RoundState.chooseInitiative) {
-        GameMethods.sortCharactersFirst(_);
+        GameMethods.sortCharactersFirst(s);
       } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
-        GameMethods.drawAbilityCardFromInactiveDeck(_);
+        GameMethods.drawAbilityCardFromInactiveDeck(s);
         GameMethods.sortItemToPlace(
-            _,
+            s,
             monster.id,
             GameMethods.getInitiative(
                 monster)); //need to only sort this one item to place
@@ -1076,7 +1077,7 @@ class GameMethods {
   }
 
   static void addMonster(
-      _StateModifier _, String monster, List<SpecialRule> specialRules) {
+      _StateModifier s, String monster, List<SpecialRule> specialRules) {
     int levelAdjust = 0;
     Set<String> alliedMonsters = {};
     for (var rule in specialRules) {
@@ -1105,7 +1106,7 @@ class GameMethods {
       if (alliedMonsters.contains(monster)) {
         isAlly = true;
       }
-      _gameState._currentList.add(GameMethods.createMonster(_, monster,
+      _gameState._currentList.add(GameMethods.createMonster(s, monster,
           (_gameState.level.value + levelAdjust).clamp(0, 7), isAlly)!);
     }
   }
@@ -1428,15 +1429,15 @@ class GameMethods {
   }
 
   static void removeExpiringConditionsFromListItem(
-      _StateModifier _, ListItemData item) {
+      _StateModifier s, ListItemData item) {
     if (item is Character) {
-      removeExpiringConditions(_, item.characterState);
+      removeExpiringConditions(s, item.characterState);
       for (var summon in item.characterState._summonList) {
-        removeExpiringConditions(_, summon);
+        removeExpiringConditions(s, summon);
       }
     } else if (item is Monster) {
       for (var instance in item._monsterInstances) {
-        removeExpiringConditions(_, instance);
+        removeExpiringConditions(s, instance);
       }
     }
   }
@@ -1455,31 +1456,31 @@ class GameMethods {
   }
 
   static void reapplyConditionsFromListItem(
-      _StateModifier _, ListItemData item) {
+      _StateModifier s, ListItemData item) {
     if (item is Character) {
-      reapplyConditions(_, item.characterState);
+      reapplyConditions(s, item.characterState);
       for (var summon in item.characterState.summonList) {
-        reapplyConditions(_, summon);
+        reapplyConditions(s, summon);
       }
     } else if (item is Monster) {
       for (var instance in item._monsterInstances) {
-        reapplyConditions(_, instance);
+        reapplyConditions(s, instance);
       }
     }
   }
 
-  static void setTurnDone(_StateModifier _, int index) {
+  static void setTurnDone(_StateModifier s, int index) {
     for (int i = 0; i < index; i++) {
       if (_gameState.currentList[i].turnState != TurnsState.done) {
         _gameState.currentList[i]._turnState = TurnsState.done;
-        removeExpiringConditionsFromListItem(_, _gameState.currentList[i]);
+        removeExpiringConditionsFromListItem(s, _gameState.currentList[i]);
       }
     }
     //if on index is NOT current then set to current else set to done
     int newIndex = index + 1;
     if (_gameState.currentList[index].turnState == TurnsState.current) {
       _gameState.currentList[index]._turnState = TurnsState.done;
-      removeExpiringConditionsFromListItem(_, _gameState.currentList[index]);
+      removeExpiringConditionsFromListItem(s, _gameState.currentList[index]);
       //remove expiring conditions
     } else {
       newIndex = index;
@@ -1490,7 +1491,7 @@ class GameMethods {
       if (data is Monster) {
         if (data.monsterInstances.isNotEmpty || data.isActive) {
           if (data.turnState == TurnsState.done) {
-            reapplyConditionsFromListItem(_, data);
+            reapplyConditionsFromListItem(s, data);
           }
           data._turnState = TurnsState.current;
           break;
@@ -1498,7 +1499,7 @@ class GameMethods {
       } else if (data is Character) {
         if (data.characterState.health.value > 0) {
           if (data.turnState == TurnsState.done) {
-            reapplyConditionsFromListItem(_, data);
+            reapplyConditionsFromListItem(s, data);
           }
           data._turnState = TurnsState.current;
           break;
@@ -1507,7 +1508,7 @@ class GameMethods {
     }
     for (int i = newIndex + 1; i < _gameState.currentList.length; i++) {
       if (_gameState.currentList[i].turnState == TurnsState.done) {
-        reapplyConditionsFromListItem(_, _gameState.currentList[i]);
+        reapplyConditionsFromListItem(s, _gameState.currentList[i]);
       }
       _gameState.currentList[i]._turnState = TurnsState.notDone;
     }
