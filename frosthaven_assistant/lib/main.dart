@@ -21,7 +21,6 @@ void _enablePlatformOverrideForDesktop() {
 }
 
 void main() {
-
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
 
@@ -32,25 +31,24 @@ void main() {
     if (!Platform.isMacOS) {
       windowManager.setMinimumSize(const Size(400, 600));
     }
-    setWindowMinSize(const Size(
-        400, 600)); //when updating flutter you may need to re-set these values in main.cpp
+    setWindowMinSize(const Size(400,
+        600)); //when updating flutter you may need to re-set these values in main.cpp
     setWindowMaxSize(Size.infinite);
   }
 
   //if (kReleaseMode) {
-    ErrorWidget.builder = ((e) {
-      if(!kDebugMode) {
-        //to not show the gray boxes, when there are exceptions
-        return Container();
-      }
-      //show the error in debug builds
-      return ErrorWidget(e);
-    });
+  ErrorWidget.builder = ((e) {
+    if (!kDebugMode) {
+      //to not show the gray boxes, when there are exceptions
+      return Container();
+      //todo: save a log?
+    }
+    //show the error in debug builds
+    return ErrorWidget(e);
+  });
   //}
 
-
   runApp(ThemeSwitcherWidget(initialTheme: theme, child: const MyApp()));
-
 }
 
 final loading = ValueNotifier<bool>(true);
@@ -72,12 +70,11 @@ class MyApp extends StatelessWidget {
     try {
       //initialize game
       getIt<GameState>().init();
-      getIt<GameData>().loadData("assets/data/")
-          .then((value) => getIt<GameState>().load()).then((value) =>
-          getIt<Settings>().init()).then((value) => {
-            loading.value = false
-          }
-      );
+      getIt<GameData>()
+          .loadData("assets/data/")
+          .then((value) => getIt<GameState>().load())
+          .then((value) => getIt<Settings>().init())
+          .then((value) => {loading.value = false});
     } catch (error) {
       loading.value = false;
     }

@@ -24,7 +24,7 @@ Widget createMainScaffold(BuildContext context) {
       valueListenable: loading,
       builder: (context, value, child) {
         if (kDebugMode) {
-          print("loading is: $loading");
+          print("loading is: ${loading.value}");
         }
         return ValueListenableBuilder<double>(
             valueListenable: getIt<Settings>().userScalingBars,
@@ -47,9 +47,12 @@ Widget createMainScaffold(BuildContext context) {
                         ValueListenableBuilder<String>(
                             valueListenable: getIt<GameState>().toastMessage,
                             builder: (context, value, child) {
-                              Future.delayed(const Duration(milliseconds: 200), () {
-                                if (getIt<GameState>().toastMessage.value != "") {
-                                  showToastSticky(context, getIt<GameState>().toastMessage.value);
+                              Future.delayed(const Duration(milliseconds: 200),
+                                  () {
+                                if (getIt<GameState>().toastMessage.value !=
+                                    "") {
+                                  showToastSticky(context,
+                                      getIt<GameState>().toastMessage.value);
                                   //getIt<GameState>().toastMessage.value = "";
                                 } else {
                                   //ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -65,24 +68,32 @@ Widget createMainScaffold(BuildContext context) {
                             valueListenable: getIt<GameData>().modelData,
                             builder: (context, value, child) {
                               return ValueListenableBuilder<int>(
-                                  valueListenable: getIt<GameState>().commandIndex,
+                                  valueListenable:
+                                      getIt<GameState>().commandIndex,
                                   builder: (context, value, child) {
                                     GameState gameState = getIt<GameState>();
                                     final GameData gameData = getIt<GameData>();
-                                    double barScale = getIt<Settings>().userScalingBars.value;
+                                    double barScale =
+                                        getIt<Settings>().userScalingBars.value;
 
-                                    bool hasLootDeck = !getIt<Settings>().hideLootDeck.value;
-                                    if (gameState.lootDeck.discardPile.isEmpty &&
+                                    bool hasLootDeck =
+                                        !getIt<Settings>().hideLootDeck.value;
+                                    if (gameState
+                                            .lootDeck.discardPile.isEmpty &&
                                         gameState.lootDeck.drawPile.isEmpty) {
                                       hasLootDeck = false;
                                     }
                                     double sectionWidth = screenWidth;
                                     if (hasLootDeck) {
-                                      sectionWidth -= 94 * barScale; //width of loot deck
+                                      sectionWidth -=
+                                          94 * barScale; //width of loot deck
                                     }
-                                    if ((!modFitsOnBar || GameMethods.shouldShowAlliesDeck()) &&
+                                    if ((!modFitsOnBar ||
+                                            GameMethods
+                                                .shouldShowAlliesDeck()) &&
                                         getIt<Settings>().showAmdDeck.value) {
-                                      sectionWidth -= 153 * barScale; //width of amd
+                                      sectionWidth -=
+                                          153 * barScale; //width of amd
                                     }
 
                                     //move to separate row if it doesn't fit
@@ -94,10 +105,15 @@ Widget createMainScaffold(BuildContext context) {
                                         ?.sections
                                         .length;
                                     if (nrOfSections != null &&
-                                        gameState.scenarioSectionsAdded.length == nrOfSections) {
+                                        gameState
+                                                .scenarioSectionsAdded.length ==
+                                            nrOfSections) {
                                       nrOfSections = null;
                                     }
-                                    if (getIt<Settings>().showSectionsInMainView.value == false) {
+                                    if (getIt<Settings>()
+                                            .showSectionsInMainView
+                                            .value ==
+                                        false) {
                                       nrOfSections = null;
                                     }
                                     if ((nrOfSections != null &&
@@ -108,7 +124,8 @@ Widget createMainScaffold(BuildContext context) {
                                             sectionWidth < 58 * barScale * 2)) {
                                       //in case doesn't fit
                                       sectionsOnSeparateRow = true;
-                                      sectionWidth = MediaQuery.of(context).size.width;
+                                      sectionWidth =
+                                          MediaQuery.of(context).size.width;
                                     }
 
                                     return Positioned(
@@ -117,36 +134,50 @@ Widget createMainScaffold(BuildContext context) {
                                         left: 20,
                                         child: Column(children: [
                                           Row(
-                                              mainAxisAlignment: ((!sectionsOnSeparateRow &&
-                                                          nrOfSections != null) ||
-                                                      hasLootDeck)
-                                                  ? MainAxisAlignment.spaceBetween
-                                                  : MainAxisAlignment.end,
-                                              crossAxisAlignment: CrossAxisAlignment.end,
+                                              mainAxisAlignment:
+                                                  ((!sectionsOnSeparateRow &&
+                                                              nrOfSections !=
+                                                                  null) ||
+                                                          hasLootDeck)
+                                                      ? MainAxisAlignment
+                                                          .spaceBetween
+                                                      : MainAxisAlignment.end,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                if (hasLootDeck) const LootDeckWidget(),
-                                                if (!sectionsOnSeparateRow && nrOfSections != null)
+                                                if (hasLootDeck)
+                                                  const LootDeckWidget(),
+                                                if (!sectionsOnSeparateRow &&
+                                                    nrOfSections != null)
                                                   SizedBox(
                                                     width: sectionWidth,
                                                     child: const SectionList(),
                                                   ),
                                                 Column(children: [
-                                                  if (GameMethods.shouldShowAlliesDeck())
-                                                    const ModifierDeckWidget(name: "allies"),
+                                                  if (GameMethods
+                                                      .shouldShowAlliesDeck())
+                                                    const ModifierDeckWidget(
+                                                        name: "allies"),
                                                   if (!modFitsOnBar &&
-                                                      gameState.currentCampaign.value != "Buttons and Bugs" && //hide amd deck for buttons and bugs
-                                                      getIt<Settings>().showAmdDeck.value)
+                                                      gameState.currentCampaign
+                                                              .value !=
+                                                          "Buttons and Bugs" && //hide amd deck for buttons and bugs
+                                                      getIt<Settings>()
+                                                          .showAmdDeck
+                                                          .value)
                                                     Container(
                                                         margin: EdgeInsets.only(
                                                           top: 4 * barScale,
                                                         ),
-                                                        child: const ModifierDeckWidget(
+                                                        child:
+                                                            const ModifierDeckWidget(
                                                           name: '',
                                                         ))
                                                 ])
                                               ]),
-                                          if (sectionsOnSeparateRow && nrOfSections != null)
+                                          if (sectionsOnSeparateRow &&
+                                              nrOfSections != null)
                                             SizedBox(
                                               width: sectionWidth,
                                               child: const SectionList(),

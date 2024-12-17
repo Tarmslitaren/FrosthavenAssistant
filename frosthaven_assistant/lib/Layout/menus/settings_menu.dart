@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/clear_unlocked_classes_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_ally_deck_in_og_gloom_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/track_standees_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:network_info_plus/network_info_plus.dart';
@@ -190,6 +191,19 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       settings.fhHazTerrainCalcInOGGloom.value =
                                           value!;
                                       settings.saveToDisk();
+                                      getIt<GameState>().updateAllUI();
+                                    });
+                                  }),
+                              CheckboxListTile(
+                                  title: const Text(
+                                      "Use Ally Attack Modifier Deck in OG Gloomhaven"),
+                                  value: getIt<GameState>()
+                                      .allyDeckInOGGloom
+                                      .value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      getIt<GameState>().action(
+                                          SetAllyDeckInOgGloomCommand(value!));
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),

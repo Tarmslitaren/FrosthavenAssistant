@@ -107,6 +107,12 @@ class GameState extends ActionHandler {
     _autoScenarioLevel.value = value;
   }
 
+  ValueListenable<bool> get allyDeckInOGGloom => _allyDeckInOGGloom;
+  final _allyDeckInOGGloom = ValueNotifier<bool>(true);
+  setAllyDeckInOGGloom(_StateModifier stateModifier, bool value) {
+    _allyDeckInOGGloom.value = value;
+  }
+
   ValueListenable<int> get difficulty => _difficulty;
   final _difficulty = ValueNotifier<int>(1);
   setDifficulty(_StateModifier stateModifier, int value) {
@@ -190,6 +196,7 @@ class GameState extends ActionHandler {
         '"lootDeck": ${_lootDeck.toString()}, ' //does this work if null?
         '"unlockedClasses": ${jsonEncode(unlockedClasses.toList())}, '
         '"showAllyDeck": ${showAllyDeck.value}, '
+        '"allyDeckInOGGloom": ${allyDeckInOGGloom.value}, '
         '"elementState": ${json.encode(elements)} '
         '}';
   }

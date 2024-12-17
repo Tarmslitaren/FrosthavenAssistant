@@ -17,7 +17,7 @@ class GameSaveState {
     gameState._lootDeck = state;
   }
 
-  void _loadModifierDeck(String identifier, var data ,GameState gameState) {
+  void _loadModifierDeck(String identifier, var data, GameState gameState) {
     //modifier deck
     String name = "";
     if (identifier == 'modifierDeckAllies') {
@@ -128,9 +128,17 @@ class GameSaveState {
         gameState._solo.value = data['solo'] as bool;
 
         if (data.containsKey('autoScenarioLevel')) {
-          gameState._autoScenarioLevel.value = data['autoScenarioLevel'] as bool;
+          gameState._autoScenarioLevel.value =
+              data['autoScenarioLevel'] as bool;
         } else {
           gameState._autoScenarioLevel.value = true;
+        }
+
+        if (data.containsKey("allyDeckInOGGloom")) {
+          gameState._allyDeckInOGGloom.value =
+              data["allyDeckInOGGloom"] as bool;
+        } else {
+          gameState._allyDeckInOGGloom.value = true;
         }
 
         if (data.containsKey('difficulty')) {

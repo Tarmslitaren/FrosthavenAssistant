@@ -20,8 +20,7 @@ class GameMethods {
   }
 
   static int getHazardValue() {
-    if (isOgGloomEdition(
-            _gameState.currentCampaign.value, _gameState.scenario.value) &&
+    if (isOgGloomEdition() &&
         !getIt<Settings>().fhHazTerrainCalcInOGGloom.value) {
       return (getTrapValue() / 2).floor();
     }
@@ -1342,6 +1341,9 @@ class GameMethods {
     if (_gameState.showAllyDeck.value) {
       return true;
     }
+    if (!_gameState.allyDeckInOGGloom.value && isOgGloomEdition()) {
+      return false;
+    }
     for (var item in _gameState.currentList) {
       if (item is Monster) {
         if (item.isAlly) {
@@ -1640,7 +1642,9 @@ class GameMethods {
     getIt<GameState>()._unlockedClasses = {};
   }
 
-  static bool isOgGloomEdition(String edition, String scenario) {
+  static bool isOgGloomEdition() {
+    String edition = _gameState.currentCampaign.value;
+    String scenario = _gameState.scenario.value;
     if (edition == "Solo") {
       //#1-19, #37-56 are og solo scenarios
       for (int i = 1; i <= 19; i++) {
@@ -1655,6 +1659,6 @@ class GameMethods {
       }
       return false;
     }
-    return edition != "Frosthaven";
+    return edition != "Frosthaven" && edition != "Gloomhaven 2nd Edition";
   }
 }
