@@ -75,7 +75,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
             "Set Loot Owner:",
             style: getTitleTextStyle(1),
           ),
-          if (characters.length > 0) buildCharacterButton(characters[0]),
+          if (characters.isNotEmpty) buildCharacterButton(characters[0]),
           if (characters.length > 1) buildCharacterButton(characters[1]),
           if (characters.length > 2) buildCharacterButton(characters[2]),
           if (characters.length > 3) buildCharacterButton(characters[3]),

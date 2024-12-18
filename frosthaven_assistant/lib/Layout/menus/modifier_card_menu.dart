@@ -274,7 +274,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 const Text(
                                   "   Reveal:",
                                 ),
-                                drawPile.length > 0
+                                drawPile.isNotEmpty
                                     ? buildRevealButton(drawPile.length, 1, deck)
                                     : Container(),
                                 drawPile.length > 1

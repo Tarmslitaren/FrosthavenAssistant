@@ -182,7 +182,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                       const Text(
                                         "  Reveal:",
                                       ),
-                                      if (drawPile.length > 0)
+                                      if (drawPile.isNotEmpty)
                                         buildRevealButton(drawPile.length, 1),
                                       if (drawPile.length > 1)
                                         buildRevealButton(drawPile.length, 2),
