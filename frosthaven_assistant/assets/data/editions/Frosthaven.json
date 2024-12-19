@@ -7885,8 +7885,16 @@
     "#60 Uniting the Crown": {
       "monsters": [ "Fracture of the Deep", "Lightning Eel", "Lurker Clawcrusher", "Lurker Mindsnipper", "Lurker Wavethrower" ],
       "lootDeck": {"coin":8,"arrowvine": 1,"axenut":1,"corpsecap": 1,"rockroot":1,"flamefruit":1,"snowthistle":1, "treasure": 1},
-      "note": "didn't bother to make 3 fractured lieutenants (only +1 attack anyway)",
-      "initialMessage": "1st printing ERRATA: Missing reward for completing: item 224"
+      "note": "didn't bother to make 6 fractured lieutenants (only +1 attack anyway)",
+      "initialMessage": "1st printing ERRATA: Missing reward for completing: item 224",
+      "special": [
+        {
+          "type": "Timer",
+          "list": [-1],
+          "startOfRound": true,
+          "note": "Set Elements Strong for the live Lieutenants. (Lieutenants have +1 attack)"
+        }
+      ]
     },
     "#61 Life and Death": {
       "monsters": [ "Deep Terror (FH)", "Earth Demon (FH)", "Harrower Infester (FH)" ],
