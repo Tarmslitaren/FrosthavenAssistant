@@ -7893,6 +7893,9 @@
       "lootDeck": {"coin":5,"lumber": 4,"metal":4,"hide": 4,"rockroot":2,"corpsecap":2, "treasure": 1},
       "special": [
         {
+          "type": "AllyDeck"
+        },
+        {
           "type": "Escort",
           "name": "Moonshard",
           "health": "(L+Cx2)x2",
@@ -8709,6 +8712,9 @@
         "#119.2 A Contained Fire (89)": {
           "special": [
             {
+              "type": "AllyDeck"
+            },
+            {
               "type": "Escort",
               "name": "Faye",
               "health": "(Lx3)+8",
@@ -8747,6 +8753,9 @@
       "monsters": [ "Lightning Eel", "Lurker Clawcrusher", "Lurker Mindsnipper", "Lurker Soldier", "Lurker Wavethrower" ],
       "lootDeck": {"coin":7,"lumber": 4,"metal":3,"hide": 2,"flamefruit":1,"axenut":2, "treasure": 1},
       "special": [
+        {
+          "type": "AllyDeck"
+        },
         {
           "type": "Timer",
           "startOfRound": false,

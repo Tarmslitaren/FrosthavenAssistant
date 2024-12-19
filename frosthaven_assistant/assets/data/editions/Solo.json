@@ -1387,7 +1387,11 @@
 		},
 		"#4 Scoundrel: Armory Heist": {
 			"monsters":  ["City Guard (Scoundrel Special)", "Stone Golem (Scoundrel Special)", "Ancient Artillery" ],
-			"special": [{
+			"special": [
+				{
+					"type": "AllyDeck"
+				},
+				{
 					"type": "Escort",
 					"name": "Rikharn",
 					"health": "15+5xL",

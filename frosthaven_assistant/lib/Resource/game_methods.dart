@@ -566,6 +566,9 @@ class GameMethods {
 
     //add objectives and escorts
     for (var item in specialRules) {
+      if (item.type == "AllyDeck") {
+        _gameState.showAllyDeck.value = true;
+      }
       if (item.type == "Objective") {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {

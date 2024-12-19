@@ -4980,6 +4980,9 @@
       "monsters": [ "Bandit Archer", "Bandit Guard", "Night Demon", "Wind Demon" ],
       "special": [
         {
+          "type": "AllyDeck"
+        },
+        {
           "type": "Escort",
           "name": "Chainguard",
           "health": "6+(3xL)",

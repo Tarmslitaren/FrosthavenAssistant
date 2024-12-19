@@ -5043,6 +5043,9 @@
         "monsters": [ "Stone Golem", "Giant Viper", "The Betrayer" ],
         "special": [
           {
+            "type": "AllyDeck"
+          },
+          {
             "type": "Escort",
             "name": "Fish",
             "health": "6+2xL",
