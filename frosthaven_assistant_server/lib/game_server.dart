@@ -13,7 +13,7 @@ class StateUpdateMessage {
 
 abstract class GameServer {
 
-  final int serverVersion = 1100;
+  final int serverVersion = 1101;
 
   ServerSocket? _serverSocket;
   ServerSocket? get serverSocket {
