@@ -12,8 +12,7 @@ import 'communication.dart';
 import 'connection.dart';
 import 'network.dart';
 
-class Server extends GameServer{
-
+class Server extends GameServer {
   final GameState _gameState = getIt<GameState>();
   final _communication = getIt<Communication>();
   final _connection = getIt<Connection>();
@@ -24,13 +23,13 @@ class Server extends GameServer{
   }
 
   @override
-  set serverEnabled(bool value){
+  set serverEnabled(bool value) {
     getIt<Settings>().server.value = value;
     super.serverEnabled = value;
   }
 
   @override
-  Future<String> getConnectToIP() async{
+  Future<String> getConnectToIP() async {
     String connectTo = InternetAddress.anyIPv4.address; //"0.0.0.0";
     if (getIt<Network>().networkInfo.wifiIPv4.value.isNotEmpty &&
         !getIt<Network>().networkInfo.wifiIPv4.value.contains("Fail")) {
@@ -43,7 +42,7 @@ class Server extends GameServer{
   }
 
   @override
-  void resetState(){
+  void resetState() {
     _gameState.commandIndex.value = -1;
     _gameState.commands.clear();
     _gameState.commandDescriptions.clear();
@@ -52,17 +51,17 @@ class Server extends GameServer{
   }
 
   @override
-  void undoState(){
+  void undoState() {
     _gameState.undo();
   }
 
   @override
-  void redoState(){
+  void redoState() {
     _gameState.redo();
   }
 
   @override
-  void updateStateFromMessage(StateUpdateMessage message, Socket client){
+  void updateStateFromMessage(StateUpdateMessage message, Socket client) {
     if (message.index > _gameState.commandDescriptions.length) {
       //invalid: index too high. send correction to clients
       String commandDescription = "";
@@ -84,8 +83,7 @@ class Server extends GameServer{
           "Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last!.getState()}",
           client);
     } else {
-      log(
-          'Got same or lower index. ignoring: received index: ${message.indexString} current index ${_gameState.commandIndex.value}');
+      log('Got same or lower index. ignoring: received index: ${message.indexString} current index ${_gameState.commandIndex.value}');
 
       //overwrite client state with current server state.
       sendToOnly(
@@ -96,37 +94,46 @@ class Server extends GameServer{
   }
 
   @override
-  void setNetworkMessage(String data){
+  void setNetworkMessage(String data) {
     getIt<Network>().networkMessage.value = data;
   }
 
   @override
-  String currentStateMessage(String commandDescription){
+  String currentStateMessage(String commandDescription) {
     return "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}";
   }
 
+  //to not restart this ping sub process, if one is running
+  static bool pinging = false;
   @override
   void sendPing() {
-    if (serverSocket != null && getIt<Settings>().server.value != false) {
+    if (serverSocket != null &&
+        getIt<Settings>().server.value != false &&
+        pinging == false) {
       Future.delayed(const Duration(seconds: 20), () {
-        send("ping");
-        sendPing();
+        if (serverSocket == null || getIt<Settings>().server.value == false) {
+          pinging = false;
+        } else {
+          pinging = true;
+          send("ping");
+          sendPing();
+        }
       });
     }
   }
 
   @override
-  void addClientConnection(Socket client){
+  void addClientConnection(Socket client) {
     _connection.add(client);
   }
 
   @override
-  void removeClientConnection(Socket client){
+  void removeClientConnection(Socket client) {
     _connection.remove(client);
   }
 
   @override
-  void removeAllClientConnections(){
+  void removeAllClientConnections() {
     _connection.removeAll();
   }
 
@@ -151,21 +158,19 @@ class Server extends GameServer{
   }
 
   @override
-  void sendInitResponse(Socket client){
+  void sendInitResponse(Socket client) {
     String commandDescription = "";
     if (_gameState.commandIndex.value > 0 &&
-        _gameState.commandDescriptions.length >
-            _gameState.commandIndex.value) {
-      commandDescription = _gameState
-          .commandDescriptions[_gameState.commandIndex.value];
+        _gameState.commandDescriptions.length > _gameState.commandIndex.value) {
+      commandDescription =
+          _gameState.commandDescriptions[_gameState.commandIndex.value];
     } else {
       //should not happen
       if (kDebugMode) {
         print("?");
       }
     }
-    log(
-        'Server sends init response: "S3nD:Index:${_gameState.commandIndex.value}Description:$commandDescription');
+    log('Server sends init response: "S3nD:Index:${_gameState.commandIndex.value}Description:$commandDescription');
     sendToOnly(
         "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}",
         client);

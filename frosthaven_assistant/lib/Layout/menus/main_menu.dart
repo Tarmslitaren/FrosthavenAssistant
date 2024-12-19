@@ -104,7 +104,7 @@ Drawer createMainMenu(BuildContext context) {
                 child: Stack(
                   children: [
                     Positioned(
-                        right: 6, bottom: 0, child: Text("Version 1.10.0"))
+                        right: 6, bottom: 0, child: Text("Version 1.10.1"))
                   ],
                 ),
               ),
@@ -253,24 +253,29 @@ Drawer createMainMenu(BuildContext context) {
               ValueListenableBuilder<bool>(
                   valueListenable: settings.server,
                   builder: (context, value, child) {
-                    String hostIPText =
-                        'Start Host Server ${settings.lastKnownHostIP}';
-                    return CheckboxListTile(
-                        title: Text(settings.server.value
-                            ? "Stop Server ${settings.lastKnownHostIP}"
-                            : hostIPText),
-                        value: settings.server.value,
-                        onChanged: (bool? value) {
-                          settings.lastKnownHostIP =
+                    return ValueListenableBuilder<String>(
+                        valueListenable: getIt<Network>().networkInfo.wifiIPv4,
+                        builder: (context, value, child) {
+                          String ip =
                               "(${getIt<Network>().networkInfo.wifiIPv4.value})";
-                          settings.saveToDisk();
-                          //do the thing
-                          if (!settings.server.value) {
-                            getIt<Network>().server.startServer();
-                          } else {
-                            //close server?
-                            getIt<Network>().server.stopServer(null);
-                          }
+                          String hostIPText = 'Start Host Server $ip';
+                          return CheckboxListTile(
+                              title: Text(settings.server.value
+                                  ? "Stop Server $ip"
+                                  : hostIPText),
+                              value: settings.server.value,
+                              onChanged: (bool? value) {
+                                settings.lastKnownHostIP =
+                                    "(${getIt<Network>().networkInfo.wifiIPv4.value})";
+                                settings.saveToDisk();
+                                //do the thing
+                                if (!settings.server.value) {
+                                  getIt<Network>().server.startServer();
+                                } else {
+                                  //close server?
+                                  getIt<Network>().server.stopServer(null);
+                                }
+                              });
                         });
                   }),
               //checkbox client + host + port
