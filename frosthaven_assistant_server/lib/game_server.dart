@@ -150,9 +150,13 @@ abstract class GameServer {
         onError: (error) {
           log(error.toString());
           setNetworkMessage(error.toString());
+          // Tolerate aborted connections if we're in a consistent state (i.e.,
+          // not mid-message). This is particularly relevant for iOS clients,
+          // where the app usually doesn't get a chance to close the socket
+          // gracefully when the device is locked.
           if (error is SocketException &&
               (error.osError?.errorCode == 103 ||
-                  error.osError?.errorCode == 32)) {
+                  !leftOverMessage.isEmpty)) {
             stopServer(error.toString());
           }
         },
