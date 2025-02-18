@@ -929,7 +929,7 @@
     {
       "name": "Lurker Mindsnipper",
       "cards": [
-        ["Psychic Shock", 682, true, 6, "%retaliate% + 3", "^%range% 3", "*.........","[r]","%dark%%use%", "^+2%retaliate%", "[/r]","*.........", "%muddle%", "^Target all, %range% 3" ],
+        ["Psychic Shock", 682, true, 6, "%retaliate% + 3", "^%range% 3", "[r]","%dark%%use%", "^+2%retaliate%", "[/r]","*.........", "%muddle%", "^Target all, %range% 3" ],
         ["Hasty Assault", 683, false, 10,  "%move% + 2", "*.........","%attack% - 1", "^%range% 3", "%dark%"],
         ["Consume All Hope", 684, false, 22, "%move% + 0", "*.........","%attack% - 1","^%range% 3,", "^^%curse%", "[subLineEnd]", "%dark%"],
         ["Calculated Strike", 685, false, 34, "%move% - 2", "*.........","%attack% + 1","^%range% 3", "%dark%"],
