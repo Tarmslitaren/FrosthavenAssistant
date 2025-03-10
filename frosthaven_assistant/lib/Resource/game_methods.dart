@@ -519,7 +519,7 @@ class GameMethods {
             : [];
       }
     } else {
-      if (getIt<Settings>().showBattleGoalReminder.value) {
+      if (getIt<Settings>().showBattleGoalReminder.value && _gameState.currentCampaign.value != "Buttons and Bugs") {
         initMessage += "Remember to choose your Battle Goals.";
       }
       if (scenario != "custom") {
