@@ -33,7 +33,7 @@ class SectionButton extends StatelessWidget {
                 : null,
             child: Text(
               data.split(" ")[0],
-              style: getTitleTextStyle(scale),
+              style: getTitleTextStyle(scale * 0.8),
               maxLines: 1,
             ),
           );

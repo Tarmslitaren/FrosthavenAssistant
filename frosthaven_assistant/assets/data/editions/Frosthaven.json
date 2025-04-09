@@ -6312,14 +6312,15 @@
     },
     "#2 Algox Scouting": {
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest", "Algox Scout" ],
-      "lootDeck": {"coin":4,"lumber": 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1},
+      "lootDeck": {"coin":4,"lumber"
+      : 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1},
       "special": [
         {
           "type": "Allies",
           "list": ["Algox Priest"]
         }],
       "sections": {
-        "#6.1 Algox Scouting (2)": {
+        "#6.1(2) Algox Scouting (2)": {
           "special": [
             {
               "type": "Objective",
@@ -6348,7 +6349,7 @@
           "list": ["Algox Archer", "Algox Guard"]
         }],
       "sections": {
-        "#75.1 Heart of Ice (4)": {
+        "#75.1(1) Heart of Ice (4)": {
           "initialMessage": "Bosses use separate ability card decks. (Not according to the rules)"
         }
       }
@@ -6357,7 +6358,7 @@
       "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Scout" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
       "sections": {
-        "#75.1 Heart of Ice (4)": {
+        "#75.1(1) Heart of Ice (4)": {
           "initialMessage": "Bosses use separate ability card decks. (Not according to the rules)"
         }
       }
@@ -6366,7 +6367,7 @@
       "monsters": [ "Frozen Corpse", "Ice Wraith" ],
       "lootDeck": {"coin":6,"lumber": 4,"metal":3,"hide": 1,"rockroot":2,"corpsecap":2},
       "sections": {
-        "#7.2 Frozen Crypt (5)": {
+        "#7.2(1) Frozen Crypt (5)": {
           "special": [
             {
               "type": "Objective",
@@ -6402,7 +6403,7 @@
       "monsters": [ "Lurker Clawcrusher", "Lurker Mindsnipper" ,"Lurker Soldier" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 3,"axenut":1,"snowthistle":2},
       "sections": {
-        "#48.4 Edge of the World (7)": {
+        "#48.4(2) Edge of the World (7)": {
           "monsters": ["Coral Corpse"]
         }
       }
@@ -6411,7 +6412,7 @@
       "monsters": [ "Hound (FH)", "Polar Bear", "Snow Imp" ],
       "lootDeck": {"coin":6,"lumber": 5,"hide": 5,"axenut":1,"arrowvine":1, "snowthistle": 1},
       "sections": {
-        "#21.1 Crystal Trench (8)": {
+        "#21.1(1) Crystal Trench (8)": {
           "special": [
             {
               "type": "ResetRound"
@@ -6438,7 +6439,7 @@
       "monsters": [ "Ice Wraith", "Living Doom","Living Spirit (FH)","Ooze (FH)" ],
       "lootDeck": {"coin":8,"lumber": 5,"metal":3,"rockroot":2,"corpsecap":1, "treasure": 1},
       "sections": {
-        "#26.1 Glowing Catacombs (9)": {
+        "#26.1(2) Glowing Catacombs (9)": {
           "special": [
             {
               "type": "Timer",
@@ -6471,7 +6472,7 @@
         }
       ],
       "sections": {
-        "#65.3 Crystal Enclosure (10)": {
+        "#65.3(1) Crystal Enclosure (10)": {
           "special": [
             {
               "type": "Objective",
@@ -6639,7 +6640,7 @@
         }
         ],
       "sections": {
-        "#25.3 Haunted Vault (17)": {
+        "#25.3(2) Haunted Vault (17)": {
           "initialMessage": "1st printing ERRATA: When Door 1 (not door 3) is opened, read section 62.3"
         }
       }
@@ -6800,7 +6801,7 @@
       "monsters": [ "Prince of Frost", "Frost Demon (FH)", "Living Bones (FH)", "Living Spirit (FH)", "Snow Imp" ],
       "lootDeck": {"coin":6,"lumber": 4,"metal":3,"hide": 3,"flamefruit":1,"snowthistle":2, "treasure": 1},
       "sections": {
-        "#48.1 Realm of Endless Frost (21)": {
+        "#48.1(2) Realm of Endless Frost (21)": {
           "special": [
             {
               "type": "Objective",
@@ -6834,7 +6835,7 @@
             }
           ]
         },
-        "#51.1 Realm of Endless Frost (21)": {
+        "#51.1(1) Realm of Endless Frost (21)": {
           "special": [
             {
               "type": "Objective",
@@ -6853,7 +6854,7 @@
       "monsters": [ "Living Bones (FH)", "Living Spirit (FH)" ],
       "lootDeck": {"coin":8,"lumber": 4,"metal":4,"flamefruit":1,"corpsecap":2, "treasure": 1},
       "sections": {
-        "#55.3 Spire Basement (23)": {
+        "#55.3(2) Spire Basement (23)": {
           "monsters": ["Hateful Corpse"]
         }
       }
@@ -6866,7 +6867,7 @@
       "monsters": [ "Flaming Bladespinner", "Robotic Boltshooter", "Ruined Machine" ],
       "lootDeck": {"coin":10,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":1},
       "sections": {
-        "#58.2 Rusted Tunnels (25)": {
+        "#58.2(1) Rusted Tunnels (25)": {
           "special": [
             {
               "type": "Objective",
@@ -6875,7 +6876,7 @@
             }
           ]
         },
-        "#61.2 Rusted Tunnels (25)": {
+        "#61.2(2) Rusted Tunnels (25)": {
           "special": [
             {
               "type": "Objective",
@@ -6902,7 +6903,7 @@
       "monsters": [ "Deep Terror (FH)", "Living Bones (FH)", "Ooze (FH)" ],
       "lootDeck": {"coin":13,"lumber": 2,"metal":2,"hide": 2, "treasure": 1},
       "sections" : {
-        "#95.1 Depths of Delirium (27)": {
+        "#95.1(1) Depths of Delirium (27)": {
           "special": [
             {
               "type": "Objective",
@@ -6917,7 +6918,7 @@
             }
           ]
         },
-        "#68.3 Depths of Delirium (27)": {
+        "#68.3(2) Depths of Delirium (27)": {
           "special": [
             {
               "type": "Objective",
@@ -6932,7 +6933,7 @@
             }
           ]
         },
-        "#69.2 Depths of Delirium (27)": {
+        "#69.2(3) Depths of Delirium (27)": {
           "special": [
             {
               "type": "Objective",
@@ -6941,7 +6942,7 @@
             }
           ]
         },
-        "#148.4 Depths of Delirium (27)": {
+        "#148.4(4) Depths of Delirium (27)": {
           "special": [
             {
               "type": "Objective",
@@ -6955,7 +6956,7 @@
             }
           ]
         },
-        "#71.5 Depths of Delirium (27)": {
+        "#71.5(5) Depths of Delirium (27)": {
           "special": [
             {
               "type": "Objective",
@@ -7083,7 +7084,7 @@
         }
       ],
       "sections": {
-        "#66.1 Ravens' Roost (32)": {
+        "#66.1(1) Ravens' Roost (32)": {
           "special": [
             {
               "type": "Objective",
@@ -7115,7 +7116,7 @@
       "monsters": [ "Black Imp (FH)", "Earth Demon (FH)", "Flame Demon (FH)", "Shrike Fiend" ],
       "lootDeck": {"coin":8,"lumber": 5,"hide": 3,"rockroot":1,"flamefruit":1, "axenut": 2},
       "sections": {
-        "#20.1 Thawed Wood (33)": {
+        "#20.1(1) Thawed Wood (33)": {
           "special": [
             {
               "type": "ResetRound"
@@ -7153,7 +7154,7 @@
         }
         ],
       "sections": {
-        "#117.3 Scrap Pit (35)": {
+        "#117.3(c) Scrap Pit (35)": {
           "special": [
             {
               "type": "Timer",
@@ -7164,7 +7165,7 @@
             }
           ]
         },
-        "#126.3 Scrap Pit (35)": {
+        "#126.3(d) Scrap Pit (35)": {
           "special": [
             {
               "type": "Timer",
@@ -7291,7 +7292,7 @@
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"rockroot":1,"arrowvine":2, "treasure": 1},
       "initialMessage": "1st printing ERRATA: Missing reward for completing: item 67 blueprint.",
       "sections": {
-        "#70.1 The Dead Mile (37)": {
+        "#70.1(1) The Dead Mile (37)": {
           "initialMessage": "1st printing ERRATA: Treasure Chest should be #56",
           "special": [
             {
@@ -7313,7 +7314,7 @@
             }
           ]
         },
-        "#81.5 The Dead Mile (37)": {
+        "#81.5(2) The Dead Mile (37)": {
           "special": [
             {
               "type": "ResetRound"
@@ -7334,7 +7335,7 @@
             }
           ]
         },
-        "#144.1 The Dead Mile (37)": {
+        "#144.1(3) The Dead Mile (37)": {
           "special": [
             {
               "type": "ResetRound"
@@ -7375,7 +7376,7 @@
         }
       ],
       "sections": {
-        "#23.1 The Way Forward (38)": {
+        "#23.1(c) The Way Forward (38)": {
           "special": [
             {
               "type": "ResetRound"
@@ -7470,7 +7471,7 @@
       "monsters": [ "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":8,"lumber": 2,"metal":4,"rockroot":1,"arrowvine":2, "treasure": 1},
       "sections": {
-        "#2.3 Overrun Barricade (43)": {
+        "#2.3(2) Overrun Barricade (43)": {
           "special": [
             {
               "type": "Timer",
@@ -7502,7 +7503,7 @@
         }
       ],
       "sections": {
-        "#52.1 Dead Pass (44)": {
+        "#52.1(1) Dead Pass (44)": {
           "special": [
             {
               "type": "Objective",
@@ -7526,7 +7527,7 @@
             }
           ]
         },
-        "#149.1 Dead Pass (44)": {
+        "#149.1(2) Dead Pass (44)": {
           "special": [
             {
               "type": "Objective",
@@ -7541,7 +7542,7 @@
       "monsters": [ "Abael Herder", "Abael Scout", "Lightning Eel", "Piranha Pig" ],
       "lootDeck": {"coin":10,"lumber": 3,"hide": 5,"rockroot":1,"flamefruit":1},
       "sections": {
-        "#85.2 Living Glacier (45)": {
+        "#85.2(1) Living Glacier (45)": {
           "special": [
             {
               "type": "Objective",
@@ -7556,7 +7557,7 @@
       "monsters": [ "Burrowing Blade", "Frozen Corpse", "Shrike Fiend" ],
       "lootDeck": {"coin":9,"lumber": 3,"metal":3,"hide": 3,"rockroot":1,"corpsecap":1},
       "sections": {
-        "#40.2 Dead Pass (46)": {
+        "#40.2(1) Dead Pass (46)": {
           "special": [
             {
               "type": "ResetRound"
@@ -7717,7 +7718,7 @@
       "monsters": [ "Ancient Artillery (FH)", "Flaming Bladespinner", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":12,"lumber": 2,"metal":4,"flamefruit":1,"arrowvine":1},
       "sections": {
-        "#32.1 Orphan's Halls (51)": {
+        "#32.1(1) Orphan's Halls (51)": {
           "special": [
             {
               "type": "Timer",
@@ -7728,7 +7729,7 @@
             }
           ]
         },
-        "#137.1 Orphan's Halls (51)": {
+        "#137.1(2) Orphan's Halls (51)": {
           "special": [
             {
               "type": "Objective",
@@ -7769,7 +7770,7 @@
       "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Priest" ],
       "lootDeck": {"coin":3,"lumber": 2,"metal":4,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
       "sections":  {
-        "#80.2 Change of Heart (55)": {
+        "#80.2(1) Change of Heart (55)": {
           "special": [
             {
               "type": "Objective",
@@ -7791,7 +7792,7 @@
         }
       ],
       "sections":  {
-        "#90.4 Call of the Harbinger (56)": {
+        "#90.4(2) Call of the Harbinger (56)": {
           "special": [
             {
               "type": "Objective",
@@ -7800,7 +7801,7 @@
             }
           ]
         },
-        "#99.4 Call of the Harbinger (56)": {
+        "#99.4(1) Call of the Harbinger (56)": {
           "special": [
             {
               "type": "Objective",
@@ -8171,7 +8172,7 @@
       "monsters": [ "Frozen Corpse (65)", "Living Bones (65)", "Snow Imp (65)" ],
       "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 4,"snowthistle":2,"arrowvine":2},
       "sections": {
-        "#89.1 A Strong Foundation (65)": {
+        "#89.1(2) A Strong Foundation (65)": {
           "monsters": ["Rimeheart"],
           "special": [
             {
@@ -8319,7 +8320,7 @@
           "init": 1
         }],
       "sections": {
-        "#106.2 The True Oak (70)": {
+        "#106.2(2) The True Oak (70)": {
           "monsters": ["Flaming Sword of Justice"],
           "special": [
             {
@@ -8387,7 +8388,7 @@
       "monsters": [ "Frozen Corpse", "Ice Wraith", "Living Bones (FH)", "Steel Automaton" ],
       "lootDeck": {"coin":9,"lumber": 3,"metal":5,"corpsecap":2, "treasure": 1},
       "sections": {
-        "#132.2 A Giant Block of Ice (72)": {
+        "#132.2(3) A Giant Block of Ice (72)": {
           "special": [
             {
               "type": "ResetRound"
@@ -8434,7 +8435,7 @@
         }
       ],
       "sections": {
-        "#55.2 Gaps in the Road (74)": {
+        "#55.2(1) Gaps in the Road (74)": {
           "special": [
             {
               "type": "Objective",
@@ -8570,7 +8571,7 @@
         }
       ],
       "sections": {
-        "#174.3 Ruinous Research Lab (81)": {
+        "#174.3(1) Ruinous Research Lab (81)": {
           "special": [
             {
               "type": "Objective",
@@ -8638,7 +8639,7 @@
           "health": "(2+L)xC"
         }],
       "sections": {
-        "#6.3 The Lady in White (86)": {
+        "#6.3(1) The Lady in White (86)": {
           "special": [
             {
               "type": "Objective",
@@ -8661,7 +8662,7 @@
       "monsters": [ "Algox Archer", "Algox Guard", "Flaming Bladespinner", "Lurker Clawcrusher", "Polar Bear", "Steel Automaton" ],
       "lootDeck": {"coin":8,"lumber": 2,"metal":4,"hide": 3,"rockroot":1,"arrowvine":1, "corpsecap": 1},
       "sections": {
-        "#73.1 The Collection (87)": {
+        "#73.1(4) The Collection (87)": {
           "monsters": ["Brother"],
           "special": [
             {
@@ -8676,7 +8677,7 @@
       "monsters": [ "The Collector", "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Lurker Clawcrusher", "Savvas Icestorm (FH)", "Savvas Lavaflow (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":8,"lumber": 3,"metal":4,"hide": 2,"rockroot":1,"corpsecap":1, "treasure": 1},
       "sections": {
-        "#25.1 Collection’s Capstone (88)": {
+        "#25.1(2) Collection’s Capstone (88)": {
           "special": [
             {
               "type": "ResetRound"
@@ -8703,7 +8704,7 @@
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest" ],
       "lootDeck": {"coin":10,"lumber": 2,"metal":2,"hide": 2,"flamefruit":1,"arrowvine":2, "treasure": 1},
       "sections": {
-        "#36.1 A Contained Fire (89)": {
+        "#36.1(c) A Contained Fire (89)": {
           "special": [
             {
               "type": "Objective",
@@ -8911,7 +8912,7 @@
           "note": "Read section 43.1."
         }],
       "sections": {
-        "#84.1 To Bury the Dead (95)": {
+        "#84.1(1) To Bury the Dead (95)": {
           "monsters": ["Reluctant Ghost"]
         }
       }
@@ -8932,7 +8933,7 @@
         }
       ],
       "sections": {
-        "#18.1 Underground Station (96)": {
+        "#18.1(1) Underground Station (96)": {
           "special": [
             {
               "type": "Objective",
@@ -8951,7 +8952,7 @@
             }
           ]
         },
-        "#116.2 Underground Station (96)": {
+        "#116.2(2) Underground Station (96)": {
           "special": [
             {
               "type": "Objective",
@@ -9004,7 +9005,7 @@
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest" ],
       "lootDeck": {"coin":8,"lumber": 3,"metal":3,"hide": 3,"rockroot":1,"arrowvine":1, "snowthistle": 1},
       "sections": {
-        "#126.2 Harrower Library (101)": {
+        "#126.2(1) Harrower Library (101)": {
           "special": [
             {
               "type": "Timer",
@@ -9053,7 +9054,7 @@
         }
       ],
       "sections": {
-        "#11.7 The Lead Door (103)": {
+        "#11.7(2) The Lead Door (103)": {
           "special": [
             {
               "type": "Objective",
@@ -9062,7 +9063,7 @@
             }
           ]
         },
-        "#30.4 The Lead Door (103)": {
+        "#30.4(1) The Lead Door (103)": {
           "special": [
             {
               "type": "Objective",
@@ -9084,7 +9085,7 @@
           "note": "Each Earth Demon or Forest Imp in winter and each Frost Demon and Savvas Icestorm in spring suffer 1 damage."
         }],
       "sections": {
-        "#14.2 Ruins of the Solstice (104)": {
+        "#14.2(2) Ruins of the Solstice (104)": {
           "initialMessage": "1st printing ERRATA: Map: Ice Wraith should be Frost Demon"
         }
       }
@@ -9112,7 +9113,7 @@
           "note": "All characters and character summons in air token row, move 1 hex to the right. Move Air to row a."
         }],
       "sections": {
-        "#191.3 Ruins of the Equinox (105)": {
+        "#191.3(1) Ruins of the Equinox (105)": {
           "special": [
             {
               "type": "Timer",
@@ -9127,7 +9128,7 @@
       "monsters": [ "City Guard (FH)", "Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Wind Demon (FH)" ],
       "lootDeck": {"coin":7,"lumber": 2,"metal":4,"hide":2,"rockroot":2,"arrowvine":2, "treasure": 1},
       "sections": {
-        "#8.1 The Tempus Forge (106)": {
+        "#8.1(1) The Tempus Forge (106)": {
           "special": [
             {
               "type": "Timer",
@@ -9142,10 +9143,10 @@
             }
           ]
         },
-        "#29.2 The Tempus Forge (106)": {
+        "#29.2(5) The Tempus Forge (106)": {
           "monsters": ["Blacksmith"]
         },
-        "#183.1 The Tempus Forge (106)": {
+        "#183.1(4) The Tempus Forge (106)": {
           "special": [
             {
               "type": "Objective",
@@ -9154,7 +9155,7 @@
             }
           ]
         },
-        "#184.4 The Tempus Forge (106)": {
+        "#184.4(2) The Tempus Forge (106)": {
           "special": [
             {
               "type": "Timer",
@@ -9169,7 +9170,7 @@
             }
           ]
         },
-        "#189.2 The Tempus Forge (106)": {
+        "#189.2(3) The Tempus Forge (106)": {
           "special": [
             {
               "type": "Timer",
@@ -9190,7 +9191,7 @@
       "monsters": [ "Flaming Bladespinner", "Living Bones (FH)", "Living Doom", "Living Spirit (FH)", "Robotic Boltshooter", "Ruined Machine", "Steel Automaton" ],
       "lootDeck": {"coin":10,"lumber": 3,"metal":3,"flamefruit":1,"axenut":1,"arrowvine":1, "treasure": 1},
       "sections": {
-        "#168.4 Furious Factory (109)": {
+        "#168.4(a) Furious Factory (109)": {
           "initialMessage": "Treat the new monsters as spawns."
         }
       }
@@ -9206,7 +9207,7 @@
         "#195.2 Furious Factory (109)": {
           "monsters": ["Laser Spire Controller"]
         },
-        "#162.1 Furious Factory (109)": {
+        "#162.1(3) Furious Factory (109)": {
           "special": [
             {
               "type": "Objective",
@@ -9215,7 +9216,7 @@
             }
           ]
         },
-        "#166.3 Furious Factory (109)": {
+        "#166.3(1) Furious Factory (109)": {
           "special": [
             {
               "type": "Objective",
@@ -9224,7 +9225,7 @@
             }
           ]
         },
-        "#172.5 Furious Factory (109)": {
+        "#172.5(4) Furious Factory (109)": {
           "special": [
             {
               "type": "Objective",
@@ -9233,7 +9234,7 @@
             }
           ]
         },
-        "#186.2 Furious Factory (109)": {
+        "#186.2(2) Furious Factory (109)": {
           "special": [
             {
               "type": "Objective",
@@ -9310,7 +9311,7 @@
           "note": "All characters and monsters resolve: Corresponding Hex unoccupied: suffer 1 damage. Occupied by enemy: suffer 2 damage. Occupied by ally: heal 1, self."
         }],
       "sections": {
-        "#182.2 Ice Cave (111)": {
+        "#182.2(1) Ice Cave (111)": {
           "monsters": ["The Shimmer"]
         }
       }
@@ -9328,7 +9329,7 @@
       "monsters": [ "Chaos Demon (FH)", "Forest Imp (FH)", "Polar Bear" ],
       "lootDeck": {"coin":8,"lumber": 4,"rockroot":2,"arrowvine":2, "flamefruit": 1, "snowthistle": 2, "axenut": 1, "corpsecap":  1},
       "sections": {
-        "#154.1 Lush Grotto (113)": {
+        "#154.1(13c) Lush Grotto (113)": {
           "initialMessage": "1st printing ERRATA: Map: Black Imp should be Forest Imp"
         }
       }
@@ -9552,7 +9553,7 @@
       "monsters": [ "City Guard (FH)", "Hound (FH)" ,"Robotic Boltshooter", "Steel Automaton", "Vermling Priest", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":8,"lumber": 4,"metal":4,"hide": 4},
       "sections": {
-        "#101.1 Under the Influence (120)": {
+        "#101.1(1) Under the Influence (120)": {
           "special": [
             {
               "type": "Objective",
@@ -9561,7 +9562,7 @@
             }
           ]
         },
-        "#157.1 Orphan's Halls (120)": {
+        "#157.1(2) Orphan's Halls (120)": {
           "special": [
             {
               "type": "Objective",
@@ -9576,7 +9577,7 @@
       "monsters": [ "Vermling Priest", "Vermling Scout (FH)" ],
       "lootDeck": {"coin":9,"lumber": 3,"metal":3,"hide": 2,"rockroot":1,"axenut":1, "treasure": 1},
       "sections": {
-        "#115.2 Black Memories (121)": {
+        "#115.2(1) Black Memories (121)": {
           "monsters": ["Large Vermling Scout"]
         },
         "#123.1 Black Memories (121)": {
@@ -9588,7 +9589,7 @@
       "monsters": [ "Ice Wraith", "Polar Bear", "Snow Imp" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":3,"hide": 4,"rockroot":2,"axenut":1, "treasure": 1},
       "sections": {
-        "#98.1 The Eternal Crave (122)": {
+        "#98.1(1) The Eternal Crave (122)": {
           "monsters": ["Hungry Maw"]
         }
       }
@@ -9604,7 +9605,7 @@
           "note": "Figures not occupying stable hexes fall."
         }],
       "sections": {
-        "#128.4 The Titan (123)": {
+        "#128.4(4) The Titan (123)": {
           "monsters": ["Power Core"]
         }
       }
@@ -9899,7 +9900,7 @@
       "monsters": [ "Frost Demon (FH)", "Frozen Corpse", "Ice Wraith", "Snow Imp" ],
       "lootDeck": {"coin":12,"lumber": 2,"metal":2,"hide": 2,"corpsecap":1,"arrowvine":1},
       "sections": {
-        "#110.2 Temple of Feline Power (132)": {
+        "#110.2(a) Temple of Feline Power (132)": {
           "special": [
             {
               "type": "ResetRound"
@@ -9971,7 +9972,7 @@
       "monsters": [ "Earth Demon (FH)", "Flame Demon (FH)", "Rending Drake (FH)", "Sun Demon (FH)" ],
       "lootDeck": {"coin":7,"lumber": 4,"metal":4,"hide": 2,"corpsecap":1,"flamefruit":1, "treasure": 1},
       "sections": {
-        "#195.1 Belara's Keep (135)": {
+        "#195.1(f) Belara's Keep (135)": {
           "monsters": ["Belara"]
         }
       }
