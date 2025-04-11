@@ -129,7 +129,11 @@ class Client {
           //overwrite states if needed
           _gameState.commandIndex.value = newIndex;
           _gameState.updateAllUI();
-          _gameState.save();
+
+          //delayed as update all ui need to finish first. some animations dependent on comparing to last save.
+          Future.delayed(
+              const Duration(milliseconds: 100), () => _gameState.save());
+          //_gameState.save();
         } else if (message.startsWith("Error")) {
           throw (message);
         } else if (message.startsWith("ping")) {

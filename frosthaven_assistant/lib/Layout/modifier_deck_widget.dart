@@ -43,7 +43,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
     //to load save state
     _gameData.modelData.addListener(_modelDataListener);
-    _animationsEnabled = initAnimationEnabled();
   }
 
   Widget buildStayAnimation(Widget child) {
@@ -90,7 +89,31 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   bool initAnimationEnabled() {
     if (getIt<Settings>().client.value == ClientState.connected) {
-      return true; //TODO: instead of looking at nonexistent commandDescriptions, look at last gameState
+      GameState oldState = GameState();
+      int offset = 1;
+      if (_gameState.gameSaveStates.length <= offset ||
+          _gameState
+                  .gameSaveStates[_gameState.gameSaveStates.length - offset] ==
+              null) {
+        return false;
+      }
+
+      String oldSave = _gameState
+          .gameSaveStates[_gameState.gameSaveStates.length - offset]!
+          .getState();
+      oldState.loadFromData(oldSave);
+      GameState currentState = _gameState;
+
+      var oldPile = oldState.modifierDeck.discardPile;
+      var newPile = currentState.modifierDeck.discardPile;
+      if (widget.name == "allies") {
+        oldPile = oldState.modifierDeckAllies.discardPile;
+        newPile = currentState.modifierDeckAllies.discardPile;
+      }
+      if (oldPile.size() == newPile.size() - 1) {
+        return true;
+      }
+      return false;
     }
 
     if (getIt<Settings>().server.value &&
@@ -102,7 +125,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
       if (getIt<GameState>().commandDescriptions.length > commandIndex) {
         String commandDescription =
             getIt<GameState>().commandDescriptions[commandIndex];
-        //todo: also: missing info. need to check for updateForUndo
         if (widget.name == "allies") {
           if (commandDescription.contains("allies modifier card")) {
             return true;

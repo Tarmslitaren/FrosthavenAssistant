@@ -62,13 +62,16 @@ class ConditionIconState extends State<ConditionIcon> {
   void _animateListener() {
     GameState gameState = getIt<GameState>();
     GameState oldState = GameState();
-    int offset = 1;
-    if(gameState.gameSaveStates.length <= offset ||
-        gameState.gameSaveStates[gameState.gameSaveStates.length-offset] == null) {
+    const offset = 1;
+    if (gameState.gameSaveStates.length <= offset ||
+        gameState.gameSaveStates[gameState.gameSaveStates.length - offset] ==
+            null) {
       return;
     }
 
-    String oldSave = gameState.gameSaveStates[gameState.gameSaveStates.length-offset]!.getState();
+    String oldSave = gameState
+        .gameSaveStates[gameState.gameSaveStates.length - offset]!
+        .getState();
     oldState.loadFromData(oldSave);
     GameState currentState = gameState;
     bool turnChanged = false;
@@ -76,19 +79,18 @@ class ConditionIconState extends State<ConditionIcon> {
     int healthChangedValue = 0;
     late String changeHealthId;
     //find if turn state changed one step
-    if(oldState.round.value == currentState.round.value &&
+    if (oldState.round.value == currentState.round.value &&
         oldState.roundState.value == currentState.roundState.value &&
-    oldState.currentList.length == currentState.currentList.length
-    ) {
+        oldState.currentList.length == currentState.currentList.length) {
       //todo: pretty heavy to do for every icon, when calc only needed once = put it in game state?
       for (int i = 0; i < oldState.currentList.length; i++) {
         ListItemData oldItem = oldState.currentList[i];
         ListItemData currentItem = currentState.currentList[i];
-          if (oldItem.id == currentItem.id) {
-            if (oldItem.turnState != currentItem.turnState) {
-              turnChanged = true;
-              turnIndex = i;
-              break;
+        if (oldItem.id == currentItem.id) {
+          if (oldItem.turnState != currentItem.turnState) {
+            turnChanged = true;
+            turnIndex = i;
+            break;
           }
         }
       }
@@ -98,28 +100,30 @@ class ConditionIconState extends State<ConditionIcon> {
         ListItemData currentItem = currentState.currentList[i];
         if (oldItem.id == currentItem.id) {
           if (oldItem is Character) {
-            int diff = (currentItem as Character).characterState.health.value - oldItem.characterState.health.value;
-            if(diff != 0) {
+            int diff = (currentItem as Character).characterState.health.value -
+                oldItem.characterState.health.value;
+            if (diff != 0) {
               healthChangedValue = diff;
               changeHealthId = oldItem.id;
               break;
             }
           } else if (oldItem is Monster) {
             final newMonster = currentItem as Monster;
-            if (oldItem.monsterInstances.length == newMonster.monsterInstances.length) {
-              for( int j = 0; j < oldItem.monsterInstances.length; j++) {
+            if (oldItem.monsterInstances.length ==
+                newMonster.monsterInstances.length) {
+              for (int j = 0; j < oldItem.monsterInstances.length; j++) {
                 MonsterInstance old = oldItem.monsterInstances[j];
                 MonsterInstance current = newMonster.monsterInstances[j];
-                if(old.getId() == current.getId()) {
-                  int diff =  current.health.value - old.health.value;
-                  if(diff != 0) {
+                if (old.getId() == current.getId()) {
+                  int diff = current.health.value - old.health.value;
+                  if (diff != 0) {
                     healthChangedValue = diff;
                     changeHealthId = old.getId();
                     break;
                   }
                 }
               }
-              if(healthChangedValue != 0) {
+              if (healthChangedValue != 0) {
                 break;
               }
             }
@@ -139,15 +143,14 @@ class ConditionIconState extends State<ConditionIcon> {
       }
       if (widget.owner.turnState == TurnsState.done &&
           currentState.currentList[turnIndex].id == widget.owner.id) {
-
-        if(widget.condition == Condition.bane && !widget.figure.conditionsAddedThisTurn.contains(widget.condition)) {
+        if (widget.condition == Condition.bane &&
+            !widget.figure.conditionsAddedThisTurn.contains(widget.condition)) {
           _runAnimation();
         }
 
         //was current last round but is no more
         if (widget.figure.conditionsAddedPreviousTurn
             .contains(widget.condition)) {
-
           //only run these if not automatically taken off. TODO: maybe run animations before removing is good?
           if (getIt<Settings>().expireConditions.value == false) {
             if (widget.condition == Condition.chill ||
@@ -164,7 +167,9 @@ class ConditionIconState extends State<ConditionIcon> {
         }
       }
     } else if (healthChangedValue != 0) {
-      if (changeHealthId == widget.owner.id || widget.figure is MonsterInstance && (widget.figure as MonsterInstance).getId() == changeHealthId) {
+      if (changeHealthId == widget.owner.id ||
+          widget.figure is MonsterInstance &&
+              (widget.figure as MonsterInstance).getId() == changeHealthId) {
         if (healthChangedValue < 0) {
           if (widget.condition.name.contains("poison") ||
               widget.condition == Condition.regenerate ||
