@@ -17,6 +17,11 @@ class ActionHandler {
 
   final int maxUndo = 250;
 
+  //todo: ugly hacks to delay list update (doesn't need to be here)
+  final updateList = ValueNotifier<int>(0);
+  final killMonsterStandee = ValueNotifier<int>(-1);
+  final updateForUndo = ValueNotifier<int>(0);
+
   void updateAllUI() {
     getIt<GameState>().updateList.value++;
     getIt<GameState>().updateForUndo.value++;
@@ -33,12 +38,14 @@ class ActionHandler {
     bool isServer = getIt<Settings>().server.value;
     bool isClient = getIt<Settings>().client.value == ClientState.connected;
     if (!isClient) {
-      if (commandIndex.value >= 0 && gameSaveStates[commandIndex.value] != null) {
+      if (commandIndex.value >= 0 &&
+          gameSaveStates[commandIndex.value] != null) {
         gameSaveStates[commandIndex.value]!.load(getIt<
             GameState>()); //this works as gameSaveStates has one more entry than command list (includes load at start)
         gameSaveStates[commandIndex.value]!.saveToDisk(getIt<GameState>());
         if (!isServer && !isClient) {
-          commands[commandIndex.value]!.undo(); //undo only makes sure ui is updated
+          commands[commandIndex.value]!
+              .undo(); //undo only makes sure ui is updated
         } else {
           updateAllUI();
           //run generic update all function instead, as commands list is not retained
@@ -103,23 +110,26 @@ class ActionHandler {
     //remove possible redo list
     if (commands.length - 1 > commandIndex.value) {
       commands.removeRange(commandIndex.value + 1, commands.length);
-      commandDescriptions.removeRange(commandIndex.value + 1, commandDescriptions.length);
+      commandDescriptions.removeRange(
+          commandIndex.value + 1, commandDescriptions.length);
     }
     if (gameSaveStates.length > commandIndex.value + 1) {
       //remove future game states
       gameSaveStates.removeRange(commandIndex.value + 1, gameSaveStates.length);
     }
-    getIt<GameState>().save(); //save after each action
+
+    GameState gameState = getIt<GameState>();
+    gameState.save(); //save after each action
 
     //send last game state if connected
     if (isServer) {
       log('server sends, index: ${commandIndex.value}, description:${command.describe()}');
       getIt<Network>().server.send(
-          "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameSaveStates.last!.getState()}");
+          "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameState.toString()}");
     } else if (isClient) {
       log('client sends, index: ${commandIndex.value}, description:${command.describe()}');
       _communication.sendToAll(
-          "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameSaveStates.last!.getState()}");
+          "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameState.toString()}");
     }
 
     //TODO: this is breaking if command index is not in sync with commands. and in connected state.

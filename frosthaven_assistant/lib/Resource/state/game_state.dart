@@ -66,11 +66,6 @@ class GameState extends ActionHandler {
     _elementState[Elements.dark] = ElementState.inert;
   }
 
-  //todo: ugly hacks to delay list update (doesn't need to be here)
-  final updateList = ValueNotifier<int>(0);
-  final killMonsterStandee = ValueNotifier<int>(-1);
-  final updateForUndo = ValueNotifier<int>(0);
-
   //state
   ValueListenable<String> get currentCampaign => _currentCampaign;
   final _currentCampaign = ValueNotifier<String>("Jaws of the Lion");

@@ -60,6 +60,10 @@ class ConditionIconState extends State<ConditionIcon> {
   }
 
   void _animateListener() {
+    _animateListenerTask();
+  }
+
+  void _animateListenerTask() {
     GameState gameState = getIt<GameState>();
     GameState oldState = GameState();
     const offset = 1;
@@ -69,6 +73,7 @@ class ConditionIconState extends State<ConditionIcon> {
       return;
     }
 
+    //todo: for whatever reason, on an update from server, the save state is off by one at this time - but is correct next frame
     String oldSave = gameState
         .gameSaveStates[gameState.gameSaveStates.length - offset]!
         .getState();
@@ -95,6 +100,7 @@ class ConditionIconState extends State<ConditionIcon> {
         }
       }
 
+      //check health value changed
       for (int i = 0; i < oldState.currentList.length; i++) {
         ListItemData oldItem = oldState.currentList[i];
         ListItemData currentItem = currentState.currentList[i];
