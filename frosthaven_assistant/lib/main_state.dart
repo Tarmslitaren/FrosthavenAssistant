@@ -34,6 +34,7 @@ class MainState extends State<MyHomePage>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.resumed:
+        //this happens allthe time on pc, disable this for pc.
         getIt<Network>().appInBackground = false;
         log("app in resumed");
         rebuildAllChildren(

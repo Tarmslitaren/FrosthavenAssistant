@@ -33,7 +33,9 @@ class Client {
           debugPrint(info);
           _gameState.commands.clear();
           _network.networkMessage.value = info;
-          _settings.connectClientOnStartup = true;
+          if (Platform.isAndroid || Platform.isIOS) {
+            _settings.connectClientOnStartup = true;
+          }
           _settings.saveToDisk();
           _send("init version:${_network.server.serverVersion}");
           _sendPing();
