@@ -22,10 +22,7 @@ TextStyle getSmallTextStyle(double scale) {
 }
 
 TextStyle getButtonTextStyle(double scale) {
-  return TextStyle(
-    fontSize: 14 * scale,
-    color: Colors.blue
-  );
+  return TextStyle(fontSize: 14 * scale, color: Colors.blue);
 }
 
 bool isLargeTablet(BuildContext context) {
@@ -186,26 +183,30 @@ createToastContent(BuildContext context, String text) {
 }
 
 showToast(BuildContext context, String text) {
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    backgroundColor: Colors.teal,
-    content: createToastContent(context, text),
-  ));
+  if (context.mounted) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      backgroundColor: Colors.teal,
+      content: createToastContent(context, text),
+    ));
+  }
 }
 
 showToastSticky(BuildContext context, String text) {
-  ScaffoldMessenger.of(context).clearSnackBars();
-  ScaffoldMessenger.of(context)
-      .showSnackBar(SnackBar(
-        duration: const Duration(days: 1),
-        backgroundColor: Colors.teal,
-        content: createToastContent(context, text),
-      ))
-      .closed
-      .then((value) {
-    if (getIt<GameState>().toastMessage.value == text) {
-      GameMethods.setToastMessage("");
-    }
-  });
+  if (context.mounted) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(
+          duration: const Duration(days: 1),
+          backgroundColor: Colors.teal,
+          content: createToastContent(context, text),
+        ))
+        .closed
+        .then((value) {
+      if (getIt<GameState>().toastMessage.value == text) {
+        GameMethods.setToastMessage("");
+      }
+    });
+  }
 }
 
 showErrorToastStickyWithRetry(

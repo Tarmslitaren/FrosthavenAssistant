@@ -22,7 +22,8 @@ class DataLoadedNotification extends Notification {
   const DataLoadedNotification({required this.data});
 }
 
-class MainState extends State<MyHomePage> with WindowListener, WidgetsBindingObserver {
+class MainState extends State<MyHomePage>
+    with WindowListener, WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
@@ -39,14 +40,12 @@ class MainState extends State<MyHomePage> with WindowListener, WidgetsBindingObs
             context); //might be a bit performance heavy, but ensures app state visually up to date with server.
         if (getIt<Network>().clientDisconnectedWhileInBackground == true ||
             (getIt<Settings>().connectClientOnStartup == true
-                //todo: reevaluate if this is a good idea: might be good to do an actual check, since this boo might be wrong
-               // && getIt<Settings>().client.value == ClientState.disconnected
-            )
-        ) {
-          log("client was disconnected in background so try reconnect");
+            //todo: reevaluate if this is a good idea: might be good to do an actual check, since this boo might be wrong
+            // && getIt<Settings>().client.value == ClientState.disconnected
+            )) {
+          log("client was in background so try reconnect");
           getIt<Network>().clientDisconnectedWhileInBackground = false;
-          getIt<Client>().connect(
-              getIt<Settings>().lastKnownConnection);
+          getIt<Client>().connect(getIt<Settings>().lastKnownConnection);
         }
         break;
       case AppLifecycleState.inactive: //goes background but still alive.
@@ -107,7 +106,7 @@ class MainState extends State<MyHomePage> with WindowListener, WidgetsBindingObs
         builder: (context, value, child) {
           rebuildAllChildren(
               context); //only way to remake the value listenable builders with broken references
-          return OverrideTextScaleFactor(child: createMainScaffold(context));
+          return const OverrideTextScaleFactor(child: MainScaffold());
         });
   }
 

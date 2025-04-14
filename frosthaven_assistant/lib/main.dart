@@ -14,6 +14,8 @@ import 'package:window_size/window_size.dart';
 import 'Resource/game_data.dart';
 import 'Resource/theme_switcher.dart';
 
+const title = 'X-haven Assistant';
+
 void _enablePlatformOverrideForDesktop() {
   if (kDebugMode && !kIsWeb && (Platform.isWindows || Platform.isLinux)) {
     debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
@@ -26,17 +28,19 @@ void main() {
 
   _enablePlatformOverrideForDesktop();
 
+  const minScreenWidth = 400.0;
+  const minScreenHeight = 600.0;
+
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    setWindowTitle('X-haven Assistant');
+    setWindowTitle(title);
     if (!Platform.isMacOS) {
-      windowManager.setMinimumSize(const Size(400, 600));
+      windowManager.setMinimumSize(const Size(minScreenWidth, minScreenHeight));
     }
-    setWindowMinSize(const Size(400,
-        600)); //when updating flutter you may need to re-set these values in main.cpp
+    setWindowMinSize(const Size(minScreenWidth,
+        minScreenHeight)); //when updating flutter you may need to re-set these values in main.cpp
     setWindowMaxSize(Size.infinite);
   }
 
-  //if (kReleaseMode) {
   ErrorWidget.builder = ((e) {
     if (!kDebugMode) {
       //to not show the gray boxes, when there are exceptions
@@ -46,7 +50,6 @@ void main() {
     //show the error in debug builds
     return ErrorWidget(e);
   });
-  //}
 
   runApp(ThemeSwitcherWidget(initialTheme: theme, child: const MyApp()));
 }
@@ -56,7 +59,7 @@ final loading = ValueNotifier<bool>(true);
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
     debugInvertOversizedImages = false;
@@ -84,9 +87,9 @@ class MyApp extends StatelessWidget {
       debugShowMaterialGrid: false,
       checkerboardOffscreenLayers: false,
       showPerformanceOverlay: false,
-      title: 'X-haven Assistant',
+      title: title,
       theme: ThemeSwitcher.of(context).themeData,
-      home: const MyHomePage(title: 'X-haven Assistant'),
+      home: const MyHomePage(title: title),
     );
   }
 }
