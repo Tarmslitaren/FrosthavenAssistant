@@ -22,7 +22,9 @@ class LootDeckWidget extends StatefulWidget {
 class LootDeckWidgetState extends State<LootDeckWidget> {
   final GameState _gameState = getIt<GameState>();
   final GameData _gameData = getIt<GameData>();
-  final Settings settings = getIt<Settings>();
+  final Settings _settings = getIt<Settings>();
+
+  bool _animationsEnabled = false;
 
   void _modelDataListenerLootDeck() {
     setState(() {});
@@ -44,15 +46,16 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
 
   Widget buildStayAnimation(Widget child) {
     return Container(
-        margin: EdgeInsets.only(left: 13.3333 * settings.userScalingBars.value),
+        margin:
+            EdgeInsets.only(left: 13.3333 * _settings.userScalingBars.value),
         child: child);
   }
 
   Widget buildSlideAnimation(Widget child, Key key) {
-    if (!animationsEnabled) {
+    if (!_animationsEnabled) {
       return Container(
           margin:
-              EdgeInsets.only(left: 13.3333 * settings.userScalingBars.value),
+              EdgeInsets.only(left: 13.3333 * _settings.userScalingBars.value),
           child: child);
     }
     return Container(
@@ -60,7 +63,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
         child: TranslationAnimatedWidget(
             animationFinished: (bool finished) {
               if (finished) {
-                animationsEnabled = false;
+                _animationsEnabled = false;
               }
             },
             duration: const Duration(milliseconds: cardAnimationDuration),
@@ -69,7 +72,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
             values: [
               const Offset(0, 0), //left to draw pile
               const Offset(0, 0), //left to draw pile
-              Offset(13.3333 * settings.userScalingBars.value, 0), //end
+              Offset(13.3333 * _settings.userScalingBars.value, 0), //end
             ],
             child: RotationAnimatedWidget(
                 enabled: true,
@@ -84,49 +87,60 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
 
   static const int cardAnimationDuration = 1600;
 
-  bool animationsEnabled = initAnimationEnabled();
-
-  static bool initAnimationEnabled() {
+  bool initAnimationEnabled() {
     if (getIt<Settings>().client.value == ClientState.connected ||
-        getIt<Settings>().server.value &&
-            getIt<GameState>().commandIndex.value >= 0 &&
-            getIt<GameState>()
-                .commandDescriptions[getIt<GameState>().commandIndex.value]
-                .contains("loot card")) {
-      //todo: also: missing info. need to check for updateForUndo
-      return true;
+        getIt<Settings>().server.value) {
+      GameState oldState = GameState();
+      int offset = 1;
+      if (_gameState.gameSaveStates.length <= offset ||
+          _gameState
+                  .gameSaveStates[_gameState.gameSaveStates.length - offset] ==
+              null) {
+        return false;
+      }
+
+      String oldSave = _gameState
+          .gameSaveStates[_gameState.gameSaveStates.length - offset]!
+          .getState();
+      oldState.loadFromData(oldSave);
+      GameState currentState = _gameState;
+
+      var oldPile = oldState.lootDeck.discardPile;
+      var newPile = currentState.lootDeck.discardPile;
+      if (oldPile.size() == newPile.size() - 1) {
+        return true;
+      }
+      return false;
     }
     return false;
   }
 
   Widget buildDrawAnimation(Widget child, Key key) {
     //compose a translation, scale, rotation + somehow switch widget from back to front
-    double width = 40 * settings.userScalingBars.value;
-    double height = 58.6666 * settings.userScalingBars.value;
+    double width = 40 * _settings.userScalingBars.value;
+    double height = 58.6666 * _settings.userScalingBars.value;
 
     var screenSize = MediaQuery.of(context).size;
     double xOffset =
-        (screenSize.width / 2 - 63 * settings.userScalingBars.value);
+        (screenSize.width / 2 - 63 * _settings.userScalingBars.value);
     double yOffset = -(screenSize.height / 2 - height);
-
-    if (!animationsEnabled) {
-      return Container(child: child);
-    }
 
     return Container(
         key: key,
         //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
-        child: animationsEnabled
+        child: _animationsEnabled
             ? TranslationAnimatedWidget(
                 animationFinished: (bool finished) {
                   if (finished) {
-                    animationsEnabled = false;
+                    _animationsEnabled = false;
                   }
                 },
-                duration: const Duration(milliseconds: cardAnimationDuration),
-                enabled: true,
+                duration: Duration(
+                    milliseconds:
+                        _animationsEnabled ? cardAnimationDuration : 0),
+                enabled: _animationsEnabled,
                 values: [
-                  Offset(-(width + 2 * settings.userScalingBars.value), 0),
+                  Offset(-(width + 2 * _settings.userScalingBars.value), 0),
                   //left to draw pile
                   Offset(xOffset, yOffset),
                   //center of screen
@@ -162,11 +176,11 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     //is not doing anything now. in case flip animation is added
 
     return ValueListenableBuilder<double>(
-        valueListenable: settings.userScalingBars,
+        valueListenable: _settings.userScalingBars,
         builder: (context, value, child) {
           return SizedBox(
-            width: (94) * settings.userScalingBars.value,
-            height: 58.6666 * settings.userScalingBars.value,
+            width: (94) * _settings.userScalingBars.value,
+            height: 58.6666 * _settings.userScalingBars.value,
             child: ValueListenableBuilder<int>(
                 valueListenable: _gameState.commandIndex,
                 builder: (context, value, child) {
@@ -179,8 +193,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                           return Container();
                         }
 
-                        if (animationsEnabled != true) {
-                          animationsEnabled = initAnimationEnabled();
+                        if (_animationsEnabled != true) {
+                          _animationsEnabled = initAnimationEnabled();
                         }
 
                         Color currentCharacterColor = Colors.transparent;
@@ -188,14 +202,16 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                         for (var item in _gameState.currentList) {
                           if (item.turnState == TurnsState.current) {
                             if (item is Character) {
-                              if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
-                                currentCharacterColor =
-                                    Colors.black;
+                              if (!GameMethods.isObjectiveOrEscort(
+                                  item.characterClass)) {
+                                currentCharacterColor = Colors.black;
                                 currentCharacterName = item.characterClass.name;
                               }
                             }
                           }
                         }
+
+                        var userScalingBars = _settings.userScalingBars.value;
 
                         return Row(
                           children: [
@@ -203,7 +219,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                 onTap: () {
                                   if (deck.drawPile.isNotEmpty) {
                                     setState(() {
-                                      animationsEnabled = true;
+                                      _animationsEnabled = true;
                                       _gameState.action(DrawLootCardCommand());
                                     });
                                   }
@@ -214,52 +230,39 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           card: deck.drawPile.peek,
                                           revealed: isAnimating)
                                       : Container(
-                                          width: 40 *
-                                              settings.userScalingBars.value,
-                                          height: 58.6666 *
-                                              settings.userScalingBars.value,
+                                          width: 40 * userScalingBars,
+                                          height: 58.6666 * userScalingBars,
                                           color: Color(int.parse("7A000000",
                                               radix: 16))),
                                   Positioned(
                                       bottom: 0,
-                                      right: 2 * settings.userScalingBars.value,
+                                      right: 2 * userScalingBars,
                                       child: Text(
                                         deck.cardCount.value.toString(),
                                         style: TextStyle(
-                                            fontSize: 12 *
-                                                settings.userScalingBars.value,
+                                            fontSize: 12 * userScalingBars,
                                             color: Colors.white,
                                             shadows: [
                                               Shadow(
                                                   offset: Offset(
-                                                      1 *
-                                                          settings
-                                                              .userScalingBars
-                                                              .value,
-                                                      1 *
-                                                          settings
-                                                              .userScalingBars
-                                                              .value),
+                                                      1 * userScalingBars,
+                                                      1 * userScalingBars),
                                                   color: Colors.black)
                                             ]),
                                       )),
                                   if (currentCharacterName != null)
                                     Positioned(
-                                      height:
-                                          35 * settings.userScalingBars.value,
-                                      width:
-                                          35 * settings.userScalingBars.value,
-                                      top: 24 *
-                                          settings.userScalingBars.value /
-                                          2,
-                                      left: 2 * settings.userScalingBars.value,
+                                      height: 35 * userScalingBars,
+                                      width: 35 * userScalingBars,
+                                      top: 24 * userScalingBars / 2,
+                                      left: 2 * userScalingBars,
                                       child: Image.asset(
                                           color: currentCharacterColor,
                                           'assets/images/class-icons/$currentCharacterName.png'),
                                     )
                                 ])),
                             SizedBox(
-                              width: 2 * settings.userScalingBars.value,
+                              width: 2 * userScalingBars,
                             ),
                             InkWell(
                                 onTap: () {
@@ -312,10 +315,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           Key((-deck.discardPile.size())
                                               .toString()))
                                       : SizedBox(
-                                          width: 40 *
-                                              settings.userScalingBars.value,
-                                          height: 58.6666 *
-                                              settings.userScalingBars.value,
+                                          width: 40 * userScalingBars,
+                                          height: 58.6666 * userScalingBars,
                                         ),
                                 ]))
                           ],

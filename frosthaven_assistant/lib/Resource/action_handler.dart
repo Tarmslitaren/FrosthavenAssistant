@@ -17,7 +17,7 @@ class ActionHandler {
 
   final int maxUndo = 250;
 
-  //todo: ugly hacks to delay list update (doesn't need to be here)
+  //todo: ugly hacks to delay list update
   final updateList = ValueNotifier<int>(0);
   final killMonsterStandee = ValueNotifier<int>(-1);
   final updateForUndo = ValueNotifier<int>(0);

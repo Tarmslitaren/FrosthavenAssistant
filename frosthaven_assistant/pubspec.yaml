@@ -42,7 +42,7 @@ dependencies:
     git:
       url: https://github.com/Tarmslitaren/Flutter-Animation-Progress-Bar
 
-  animated_widgets: ^1.1.0 #for monster death animation
+  animated_widgets: ^1.1.0
   dotted_border: ^2.0.0+2
   animated_text_kit: ^4.2.2
   network_info_plus: ^6.1.2
