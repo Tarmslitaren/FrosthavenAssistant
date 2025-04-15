@@ -20,9 +20,12 @@ class Monster extends ListItemData {
   }
   late final MonsterModel type;
 
+  BuiltList<MonsterInstance> get monsterInstances =>
+      BuiltList.of(_monsterInstances);
+  getMutableMonsterInstancesList(_StateModifier stateModifier) {
+    return _monsterInstances;
+  }
 
-  BuiltList<MonsterInstance> get monsterInstances => BuiltList.of(_monsterInstances);
-  getMutableMonsterInstancesList(_StateModifier stateModifier) {return _monsterInstances;}
   final List<MonsterInstance> _monsterInstances = [];
 
   ValueListenable<int> get level => _level;
@@ -33,7 +36,10 @@ class Monster extends ListItemData {
 
   //note: this is only used for the no standee tracking setting
   bool get isActive => _isActive;
-  setActive(_StateModifier stateModifier, bool value) {_isActive = value;}
+  setActive(_StateModifier stateModifier, bool value) {
+    _isActive = value;
+  }
+
   bool _isActive = false;
 
   void _addAbilityDeck() {
@@ -44,7 +50,6 @@ class Monster extends ListItemData {
     }
     _gameState._currentAbilityDecks.add(MonsterAbilityState(type.deck));
   }
-
 
   bool hasElites() {
     for (var instance in _monsterInstances) {
@@ -76,7 +81,7 @@ class Monster extends ListItemData {
   String toString() {
     return '{'
         '"id": "$id", '
-        '"turnState": ${turnState.index}, '
+        '"turnState": ${turnState.value.index}, '
         '"isActive": $isActive, '
         '"type": "${type.name}", '
         '"monsterInstances": ${_monsterInstances.toString()}, '
@@ -87,7 +92,7 @@ class Monster extends ListItemData {
 
   Monster.fromJson(Map<String, dynamic> json) : _isAlly = false {
     id = json['id'];
-    _turnState = TurnsState.values[json['turnState']];
+    _turnState.value = TurnsState.values[json['turnState']];
     _level.value = json['level'];
     if (json.containsKey("isAlly")) {
       _isAlly = json['isAlly'];

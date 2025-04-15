@@ -213,7 +213,7 @@ class GameMethods {
     ListItemData? item;
     int currentTurnItemIndex = 0;
     for (int i = 0; i < newList.length; i++) {
-      if (newList[i].turnState == TurnsState.current) {
+      if (newList[i].turnState.value == TurnsState.current) {
         currentTurnItemIndex = i;
       }
       if (newList[i].id == id) {
@@ -519,7 +519,8 @@ class GameMethods {
             : [];
       }
     } else {
-      if (getIt<Settings>().showBattleGoalReminder.value && _gameState.currentCampaign.value != "Buttons and Bugs") {
+      if (getIt<Settings>().showBattleGoalReminder.value &&
+          _gameState.currentCampaign.value != "Buttons and Bugs") {
         initMessage += "Remember to choose your Battle Goals.";
       }
       if (scenario != "custom") {
@@ -1386,7 +1387,7 @@ class GameMethods {
   static void clearTurnState(
       _StateModifier stateModifier, bool clearLastTurnToo) {
     for (var item in _gameState._currentList) {
-      item._turnState = TurnsState.notDone;
+      item._turnState.value = TurnsState.notDone;
       if (item is Character) {
         clearTurnStateConditions(
             stateModifier, item.characterState, clearLastTurnToo);
@@ -1479,48 +1480,53 @@ class GameMethods {
     }
   }
 
+  //1 if item WAS done OR not done, then set it to current, all before to done, and all after to not done
+  //2 if item was current: set item to done, all before to done, next to current and rest to not done
   static void setTurnDone(_StateModifier s, int index) {
+    //set all before to done.
     for (int i = 0; i < index; i++) {
-      if (_gameState.currentList[i].turnState != TurnsState.done) {
-        _gameState.currentList[i]._turnState = TurnsState.done;
+      if (_gameState.currentList[i].turnState.value != TurnsState.done) {
+        _gameState.currentList[i]._turnState.value = TurnsState.done;
         removeExpiringConditionsFromListItem(s, _gameState.currentList[i]);
       }
     }
     //if on index is NOT current then set to current else set to done
     int newIndex = index + 1;
-    if (_gameState.currentList[index].turnState == TurnsState.current) {
-      _gameState.currentList[index]._turnState = TurnsState.done;
+    if (_gameState.currentList[index].turnState.value == TurnsState.current) {
+      _gameState.currentList[index]._turnState.value = TurnsState.done;
       removeExpiringConditionsFromListItem(s, _gameState.currentList[index]);
       //remove expiring conditions
     } else {
       newIndex = index;
     }
 
+    //get next active item and set to current
     for (; newIndex < _gameState.currentList.length; newIndex++) {
       ListItemData data = _gameState.currentList[newIndex];
       if (data is Monster) {
         if (data.monsterInstances.isNotEmpty || data.isActive) {
-          if (data.turnState == TurnsState.done) {
+          if (data.turnState.value == TurnsState.done) {
             reapplyConditionsFromListItem(s, data);
           }
-          data._turnState = TurnsState.current;
+          data._turnState.value = TurnsState.current;
           break;
         }
       } else if (data is Character) {
         if (data.characterState.health.value > 0) {
-          if (data.turnState == TurnsState.done) {
+          if (data.turnState.value == TurnsState.done) {
             reapplyConditionsFromListItem(s, data);
           }
-          data._turnState = TurnsState.current;
+          data._turnState.value = TurnsState.current;
           break;
         }
       }
     }
+    //set rest to not done
     for (int i = newIndex + 1; i < _gameState.currentList.length; i++) {
-      if (_gameState.currentList[i].turnState == TurnsState.done) {
+      if (_gameState.currentList[i].turnState.value == TurnsState.done) {
         reapplyConditionsFromListItem(s, _gameState.currentList[i]);
       }
-      _gameState.currentList[i]._turnState = TurnsState.notDone;
+      _gameState.currentList[i]._turnState.value = TurnsState.notDone;
     }
   }
 

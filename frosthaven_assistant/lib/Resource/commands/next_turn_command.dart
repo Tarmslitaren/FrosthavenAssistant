@@ -9,6 +9,7 @@ class TurnDoneCommand extends Command {
     for (int i = 0; i < getIt<GameState>().currentList.length; i++) {
       if (id == getIt<GameState>().currentList[i].id) {
         index = i;
+        break;
       }
     }
     getIt<GameState>().updateList.value++;

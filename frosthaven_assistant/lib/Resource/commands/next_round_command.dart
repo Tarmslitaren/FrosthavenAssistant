@@ -24,8 +24,8 @@ class NextRoundCommand extends Command {
           ScenarioModel? spawnSection = scenario.sections.firstWhereOrNull(
               (element) => element.name.substring(1) == rule.name);
           if (spawnSection != null && spawnSection.monsterStandees != null) {
-            GameMethods.autoAddStandees(stateAccess,
-                spawnSection.monsterStandees!, rule.note);
+            GameMethods.autoAddStandees(
+                stateAccess, spawnSection.monsterStandees!, rule.note);
           }
         }
       }
@@ -40,16 +40,17 @@ class NextRoundCommand extends Command {
       }
       if (item is Monster) {
         //only really needed for ice wraiths
-        GameMethods.sortMonsterInstances(stateAccess, item.getMutableMonsterInstancesList(stateAccess));
+        GameMethods.sortMonsterInstances(
+            stateAccess, item.getMutableMonsterInstancesList(stateAccess));
       }
     }
     GameMethods.shuffleDecksIfNeeded(stateAccess);
     GameMethods.updateElements(stateAccess);
     GameMethods.setRoundState(stateAccess, RoundState.chooseInitiative);
-    if (_gameState.currentList.last.turnState != TurnsState.done) {
+    if (_gameState.currentList.last.turnState.value != TurnsState.done) {
       GameMethods.setTurnDone(stateAccess, _gameState.currentList.length - 1);
     }
-    if (_gameState.currentList.last.turnState != TurnsState.done) {
+    if (_gameState.currentList.last.turnState.value != TurnsState.done) {
       GameMethods.setTurnDone(stateAccess, _gameState.currentList.length - 1);
     }
     GameMethods.clearTurnState(stateAccess, false);

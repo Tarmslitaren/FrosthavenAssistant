@@ -18,7 +18,7 @@ class AddConditionCommand extends Command {
     //only added this turn if is current or done
     for (var item in getIt<GameState>().currentList) {
       if (item.id == ownerId) {
-        if (item.turnState != TurnsState.notDone &&
+        if (item.turnState.value != TurnsState.notDone &&
             getIt<GameState>().roundState.value == RoundState.playTurns) {
           figure.getMutableConditionsAddedThisTurn(stateAccess).add(condition);
         }

@@ -23,7 +23,7 @@ class Character extends ListItemData {
   String toString() {
     return '{'
         '"id": "$id", '
-        '"turnState": ${turnState.index}, '
+        '"turnState": ${turnState.value.index}, '
         '"characterState": ${characterState.toString()}, '
         '"characterClass": "${characterClass.id}" '
         '}';
@@ -31,7 +31,7 @@ class Character extends ListItemData {
 
   Character.fromJson(Map<String, dynamic> json) {
     var anId = json['characterClass'];
-    _turnState = TurnsState.values[json['turnState']];
+    _turnState.value = TurnsState.values[json['turnState']];
     characterState = CharacterState.fromJson(json['characterState']);
     GameData data = getIt<GameData>();
     List<CharacterClass> characters = [];

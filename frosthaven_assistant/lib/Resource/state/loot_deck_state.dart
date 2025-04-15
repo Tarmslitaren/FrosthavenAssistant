@@ -62,7 +62,6 @@ class LootCard {
 }
 
 class LootDeck {
-
   List<LootCard> _coinPool = [];
   List<LootCard> _lumberPool = [];
   List<LootCard> _hidePool = [];
@@ -507,7 +506,6 @@ class LootDeck {
     }
   }
 
-
   void _shuffle() {
     while (_discardPile.isNotEmpty) {
       LootCard card = _discardPile.pop();
@@ -523,7 +521,7 @@ class LootDeck {
 
     //mark owner
     for (var item in getIt<GameState>().currentList) {
-      if (item.turnState == TurnsState.current && item is Character) {
+      if (item.turnState.value == TurnsState.current && item is Character) {
         if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
           card.owner = item.characterClass.id;
           break;

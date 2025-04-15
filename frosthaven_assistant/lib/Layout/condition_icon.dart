@@ -59,47 +59,61 @@ class ConditionIconState extends State<ConditionIcon> {
     });
   }
 
-  void _animateListener() {
-    _animateListenerTask();
-  }
-
-  void _animateListenerTask() {
+  static GameState? getOldState() {
     GameState gameState = getIt<GameState>();
     GameState oldState = GameState();
     const offset = 1;
     if (gameState.gameSaveStates.length <= offset ||
         gameState.gameSaveStates[gameState.gameSaveStates.length - offset] ==
             null) {
-      return;
+      return null;
     }
-
-    //todo: for whatever reason, on an update from server, the save state is off by one at this time - but is correct next frame
     String oldSave = gameState
         .gameSaveStates[gameState.gameSaveStates.length - offset]!
         .getState();
     oldState.loadFromData(oldSave);
+    return oldState;
+  }
+
+  int? getTurnChanged(GameState oldState, GameState currentState) {
+    if (oldState.round.value == currentState.round.value &&
+        oldState.roundState.value == currentState.roundState.value &&
+        oldState.currentList.length == currentState.currentList.length) {
+      for (int i = 0; i < oldState.currentList.length; i++) {
+        ListItemData oldItem = oldState.currentList[i];
+        ListItemData currentItem = currentState.currentList[i];
+        if (oldItem.id == currentItem.id) {
+          if (oldItem.turnState.value != currentItem.turnState.value) {
+            return i;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  void _animateListener() {
+    _animateListenerTask();
+  }
+
+  void _animateListenerTask() {
+    GameState gameState = getIt<GameState>();
+    GameState? oldState = getOldState();
+
+    if (oldState == null) {
+      return;
+    }
+
+    //note: for whatever reason the widget.owner.turnState is NOT updated at the time of this code, in case change is from server.
+    //therefore using the gameState data directly and only using owner to compare id.
     GameState currentState = gameState;
-    bool turnChanged = false;
-    late int turnIndex;
+    int? turnIndex = getTurnChanged(oldState, currentState);
     int healthChangedValue = 0;
     late String changeHealthId;
     //find if turn state changed one step
     if (oldState.round.value == currentState.round.value &&
         oldState.roundState.value == currentState.roundState.value &&
         oldState.currentList.length == currentState.currentList.length) {
-      //todo: pretty heavy to do for every icon, when calc only needed once = put it in game state?
-      for (int i = 0; i < oldState.currentList.length; i++) {
-        ListItemData oldItem = oldState.currentList[i];
-        ListItemData currentItem = currentState.currentList[i];
-        if (oldItem.id == currentItem.id) {
-          if (oldItem.turnState != currentItem.turnState) {
-            turnChanged = true;
-            turnIndex = i;
-            break;
-          }
-        }
-      }
-
       //check health value changed
       for (int i = 0; i < oldState.currentList.length; i++) {
         ListItemData oldItem = oldState.currentList[i];
@@ -138,16 +152,22 @@ class ConditionIconState extends State<ConditionIcon> {
       }
     }
 
-    if (turnChanged == true) {
-      if (widget.owner.turnState == TurnsState.current) {
-        //this turn started! play animation for wound and regenerate
-        if (widget.condition == Condition.regenerate ||
-            widget.condition == Condition.wound ||
-            widget.condition == Condition.wound2) {
-          _runAnimation();
+    if (turnIndex != null) {
+      //find current in list
+      for (var item in currentState.currentList) {
+        if (item.id == widget.owner.id &&
+            item.turnState.value == TurnsState.current) {
+          //this turn started! play animation for wound and regenerate
+          if (widget.condition == Condition.regenerate ||
+              widget.condition == Condition.wound ||
+              widget.condition == Condition.wound2) {
+            _runAnimation();
+          }
         }
       }
-      if (widget.owner.turnState == TurnsState.done &&
+
+      if (currentState.currentList[turnIndex].turnState.value ==
+              TurnsState.done &&
           currentState.currentList[turnIndex].id == widget.owner.id) {
         if (widget.condition == Condition.bane &&
             !widget.figure.conditionsAddedThisTurn.contains(widget.condition)) {
@@ -172,7 +192,8 @@ class ConditionIconState extends State<ConditionIcon> {
           }
         }
       }
-    } else if (healthChangedValue != 0) {
+    }
+    if (healthChangedValue != 0) {
       if (changeHealthId == widget.owner.id ||
           widget.figure is MonsterInstance &&
               (widget.figure as MonsterInstance).getId() == changeHealthId) {

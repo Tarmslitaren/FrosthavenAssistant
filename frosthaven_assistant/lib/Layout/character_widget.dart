@@ -25,7 +25,8 @@ class CharacterWidget extends StatefulWidget {
   final String characterId;
   final int? initPreset;
 
-  const CharacterWidget({required this.characterId, required this.initPreset, super.key});
+  const CharacterWidget(
+      {required this.characterId, required this.initPreset, super.key});
 
   @override
   CharacterWidgetState createState() => CharacterWidgetState();
@@ -94,7 +95,9 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
   List<Widget> createConditionList(double scale) {
     List<Widget> conditions = [];
-    for (int i = conditions.length; i < character.characterState.conditions.value.length; i++) {
+    for (int i = conditions.length;
+        i < character.characterState.conditions.value.length;
+        i++) {
       conditions.add(ConditionIcon(
         character.characterState.conditions.value[i],
         16,
@@ -147,7 +150,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                   key: Key(character.characterState.summonList[index].getId()),
                   figureId: character.characterState.summonList[index].name +
                       character.characterState.summonList[index].gfx +
-                      character.characterState.summonList[index].standeeNr.toString(),
+                      character.characterState.summonList[index].standeeNr
+                          .toString(),
                   ownerId: character.id,
                   displayStartAnimation: displayStartAnimation,
                   blockInput: false,
@@ -161,8 +165,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
     );
   }
 
-  Widget buildInitiativeWidget(BuildContext context, double scale, double scaledHeight,
-      Shadow shadow, bool frosthavenStyle) {
+  Widget buildInitiativeWidget(BuildContext context, double scale,
+      double scaledHeight, Shadow shadow, bool frosthavenStyle) {
     return Column(children: [
       Container(
         margin: EdgeInsets.only(top: scaledHeight / 6, left: 10 * scale),
@@ -176,7 +180,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
           builder: (context, value, child) {
             bool secret = (getIt<Settings>().server.value ||
                     getIt<Settings>().client.value == ClientState.connected) &&
-                (!CharacterWidget.localCharacterInitChanges.contains(character.id));
+                (!CharacterWidget.localCharacterInitChanges
+                    .contains(character.id));
             if (_initTextFieldController.text !=
                     character.characterState.initiative.value.toString() &&
                 character.characterState.initiative.value != 0 &&
@@ -189,13 +194,15 @@ class CharacterWidgetState extends State<CharacterWidget> {
                     character.characterState.initiative.value.toString();
               }
             }
-            if (_gameState.roundState.value == RoundState.playTurns && isCharacter) {
+            if (_gameState.roundState.value == RoundState.playTurns &&
+                isCharacter) {
               _initTextFieldController.clear();
             }
             if (_gameState.roundState.value == RoundState.chooseInitiative &&
                 character.characterState.health.value > 0) {
               return Container(
-                margin: EdgeInsets.only(left: 11 * scale, top: scaledHeight * 0.11),
+                margin:
+                    EdgeInsets.only(left: 11 * scale, top: scaledHeight * 0.11),
                 height: scaledHeight * 0.5,
                 width: 25 * scale,
                 padding: EdgeInsets.zero,
@@ -237,11 +244,13 @@ class CharacterWidgetState extends State<CharacterWidget> {
                       contentPadding: EdgeInsets.zero,
                       enabledBorder: UnderlineInputBorder(
                         borderRadius: BorderRadius.zero,
-                        borderSide: BorderSide(width: 0, color: Colors.transparent),
+                        borderSide:
+                            BorderSide(width: 0, color: Colors.transparent),
                       ),
                       focusedBorder: UnderlineInputBorder(
                         borderRadius: BorderRadius.zero,
-                        borderSide: BorderSide(width: 0, color: Colors.transparent),
+                        borderSide:
+                            BorderSide(width: 0, color: Colors.transparent),
                       ),
                     ),
                     controller: _initTextFieldController,
@@ -337,8 +346,9 @@ class CharacterWidgetState extends State<CharacterWidget> {
         figureId: widget.characterId,
         ownerId: widget.characterId,
         child: PhysicalShape(
-            color:
-                character.turnState == TurnsState.current ? Colors.tealAccent : Colors.transparent,
+            color: character.turnState.value == TurnsState.current
+                ? Colors.tealAccent
+                : Colors.transparent,
             shadowColor: Colors.black,
             elevation: 8,
             clipper: const ShapeBorderClipper(shape: RoundedRectangleBorder()),
@@ -376,23 +386,32 @@ class CharacterWidgetState extends State<CharacterWidget> {
                 ],
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    colorFilter: character.characterClass.name == "Shattersong" ||
+                    colorFilter: character.characterClass.name ==
+                                "Shattersong" ||
                             character.characterClass.name == "Rimehearth"
-                        ? ColorFilter.mode(character.characterClass.color, BlendMode.softLight)
+                        ? ColorFilter.mode(
+                            character.characterClass.color, BlendMode.softLight)
                         : ColorFilter.mode(
-                            character.characterClass.colorSecondary, BlendMode.color),
-                    image: const AssetImage("assets/images/psd/character-bar.png")),
+                            character.characterClass.colorSecondary,
+                            BlendMode.color),
+                    image: const AssetImage(
+                        "assets/images/psd/character-bar.png")),
                 shape: BoxShape.rectangle,
               ),
               child: Container(
                   decoration: BoxDecoration(
-                      backgroundBlendMode: (character.characterClass.name == "Shattersong" ||
-                              character.characterClass.name == "Rimehearth")
-                          ? BlendMode.multiply
-                          : null,
+                      backgroundBlendMode:
+                          (character.characterClass.name == "Shattersong" ||
+                                  character.characterClass.name == "Rimehearth")
+                              ? BlendMode.multiply
+                              : null,
                       gradient: (character.characterClass.name == "Shattersong")
-                          ? buildGradiantBackground(
-                              [Colors.yellow, Colors.purple, Colors.teal, Colors.white24])
+                          ? buildGradiantBackground([
+                              Colors.yellow,
+                              Colors.purple,
+                              Colors.teal,
+                              Colors.white24
+                            ])
                           : character.characterClass.name == "Rimehearth"
                               ? buildGradiantBackground([
                                   character.characterClass.colorSecondary,
@@ -414,7 +433,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                         ),
                       ],
                     ),
-                    margin: EdgeInsets.only(left: 26 * scale, top: 5 * scale, bottom: 5 * scale),
+                    margin: EdgeInsets.only(
+                        left: 26 * scale, top: 5 * scale, bottom: 5 * scale),
                     child: character.characterClass.name == "Shattersong"
                         ? ShaderMask(
                             shaderCallback: (bounds) {
@@ -441,29 +461,37 @@ class CharacterWidgetState extends State<CharacterWidget> {
                         : Image(
                             fit: BoxFit.contain,
                             height: scaledHeight * 0.6,
-                            color: isCharacter ? character.characterClass.color : null,
+                            color: isCharacter
+                                ? character.characterClass.color
+                                : null,
                             filterQuality: FilterQuality.medium,
                             image: AssetImage(
                               "assets/images/class-icons/${character.characterClass.name}.png",
                             ),
                             width: scaledHeight * 0.6,
                           )),
-                buildInitiativeWidget(context, scale, scaledHeight, shadow, frosthavenStyle),
+                buildInitiativeWidget(
+                    context, scale, scaledHeight, shadow, frosthavenStyle),
                 Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     //align children to the left
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 10 * scale, left: 10 * scale),
+                        margin:
+                            EdgeInsets.only(top: 10 * scale, left: 10 * scale),
                         child: ValueListenableBuilder<String>(
                             valueListenable: character.characterState.display,
                             builder: (context, value, child) {
                               return Text(
                                 character.characterState.display.value,
                                 style: TextStyle(
-                                    fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
+                                    fontFamily: frosthavenStyle
+                                        ? 'GermaniaOne'
+                                        : 'Pirata',
                                     color: Colors.white,
-                                    fontSize: frosthavenStyle ? 15 * scale : 16 * scale,
+                                    fontSize: frosthavenStyle
+                                        ? 15 * scale
+                                        : 16 * scale,
                                     shadows: [shadow]),
                               );
                             }),
@@ -480,24 +508,31 @@ class CharacterWidgetState extends State<CharacterWidget> {
                                       Image(
                                         fit: BoxFit.contain,
                                         height: scaledHeight * 0.2,
-                                        image: const AssetImage("assets/images/blood.png"),
+                                        image: const AssetImage(
+                                            "assets/images/blood.png"),
                                       ),
                                       Text(
                                         frosthavenStyle
                                             ? '${character.characterState.health.value.toString()}/${character.characterState.maxHealth.value.toString()}'
                                             : '${character.characterState.health.value.toString()} / ${character.characterState.maxHealth.value.toString()}',
                                         style: TextStyle(
-                                            fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
+                                            fontFamily: frosthavenStyle
+                                                ? 'GermaniaOne'
+                                                : 'Pirata',
                                             color: Colors.white,
-                                            fontSize: frosthavenStyle ? 16 * scale : 16 * scale,
+                                            fontSize: frosthavenStyle
+                                                ? 16 * scale
+                                                : 16 * scale,
                                             shadows: [shadow]),
                                       ),
                                       //add conditions here
                                       ValueListenableBuilder<List<Condition>>(
-                                          valueListenable: character.characterState.conditions,
+                                          valueListenable: character
+                                              .characterState.conditions,
                                           builder: (context, value, child) {
                                             return Row(
-                                              children: createConditionList(scale),
+                                              children:
+                                                  createConditionList(scale),
                                             );
                                           }),
                                     ])));
@@ -523,7 +558,9 @@ class CharacterWidgetState extends State<CharacterWidget> {
                               return Text(
                                 character.characterState.xp.value.toString(),
                                 style: TextStyle(
-                                    fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
+                                    fontFamily: frosthavenStyle
+                                        ? 'GermaniaOne'
+                                        : 'Pirata',
                                     color: Colors.blue,
                                     fontSize: 14 * scale,
                                     shadows: [shadow]),
@@ -540,7 +577,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                       children: [
                         Image(
                           height: 12.0 * scale,
-                          image: const AssetImage("assets/images/psd/level.png"),
+                          image:
+                              const AssetImage("assets/images/psd/level.png"),
                         ),
                         ValueListenableBuilder<int>(
                             valueListenable: character.characterState.level,
@@ -548,7 +586,9 @@ class CharacterWidgetState extends State<CharacterWidget> {
                               return Text(
                                 character.characterState.level.value.toString(),
                                 style: TextStyle(
-                                    fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
+                                    fontFamily: frosthavenStyle
+                                        ? 'GermaniaOne'
+                                        : 'Pirata',
                                     color: Colors.white,
                                     fontSize: 14 * scale,
                                     shadows: [shadow]),
@@ -567,7 +607,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
             if (character.characterState.health.value > 0)
               InkWell(
                   onTap: () {
-                    if (_gameState.roundState.value == RoundState.chooseInitiative) {
+                    if (_gameState.roundState.value ==
+                        RoundState.chooseInitiative) {
                       //if in choose mode - focus the input or open the soft numpad if that option is on
                       if (getIt<Settings>().softNumpadInput.value == true) {
                         openDialog(
@@ -614,12 +655,14 @@ class CharacterWidgetState extends State<CharacterWidget> {
             valueListenable: getIt<GameState>().updateList,
             builder: (context, value, child) {
               bool notGrayScale = character.characterState.health.value != 0 &&
-                  (character.turnState != TurnsState.done ||
-                      getIt<GameState>().roundState.value == RoundState.chooseInitiative);
+                  (character.turnState.value != TurnsState.done ||
+                      getIt<GameState>().roundState.value ==
+                          RoundState.chooseInitiative);
               double scale = getScaleByReference(context);
               return Column(mainAxisSize: MainAxisSize.max, children: [
                 Container(
-                  margin: EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
+                  margin:
+                      EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
                   width: getMainListWidth(context) - 6.4 * scale,
                   child: ValueListenableBuilder<int>(
                       valueListenable: getIt<GameState>().killMonsterStandee,
@@ -628,9 +671,11 @@ class CharacterWidgetState extends State<CharacterWidget> {
                       }),
                 ),
                 ColorFiltered(
-                    colorFilter:
-                        notGrayScale ? ColorFilter.matrix(identity) : ColorFilter.matrix(grayScale),
-                    child: _gameState.roundState.value == RoundState.chooseInitiative
+                    colorFilter: notGrayScale
+                        ? ColorFilter.matrix(identity)
+                        : ColorFilter.matrix(grayScale),
+                    child: _gameState.roundState.value ==
+                            RoundState.chooseInitiative
                         ? buildInternal(context)
                         : buildWithHealthWheel())
               ]);

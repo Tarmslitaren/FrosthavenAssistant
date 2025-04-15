@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
@@ -55,16 +54,15 @@ class MonsterWidgetState extends State<MonsterWidget> {
     final generatedChildren = List<Widget>.generate(
         widget.data.monsterInstances.length,
         (index) => AnimatedSize(
-              key: Key(widget.data.monsterInstances[index].standeeNr
-                  .toString()),
+              key:
+                  Key(widget.data.monsterInstances[index].standeeNr.toString()),
               duration: const Duration(milliseconds: 300),
               child: MonsterBox(
-                  key: Key(widget.data.monsterInstances[index].standeeNr
-                      .toString()),
+                  key: Key(
+                      widget.data.monsterInstances[index].standeeNr.toString()),
                   figureId: widget.data.monsterInstances[index].name +
                       widget.data.monsterInstances[index].gfx +
-                      widget.data.monsterInstances[index].standeeNr
-                          .toString(),
+                      widget.data.monsterInstances[index].standeeNr.toString(),
                   ownerId: widget.data.id,
                   displayStartAnimation: displayStartAnimation,
                   blockInput: false,
@@ -84,7 +82,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
       Container(
           margin: EdgeInsets.only(bottom: 4 * scale, top: 4 * scale),
           child: PhysicalShape(
-            color: widget.data.turnState == TurnsState.current
+            color: widget.data.turnState.value == TurnsState.current
                 ? Colors.tealAccent
                 : Colors.transparent,
             //or bleu if current
@@ -135,7 +133,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
             ColorFiltered(
                 colorFilter: (widget.data.monsterInstances.isNotEmpty ||
                             widget.data.isActive) &&
-                        (widget.data.turnState != TurnsState.done ||
+                        (widget.data.turnState.value != TurnsState.done ||
                             getIt<GameState>().roundState.value ==
                                 RoundState.chooseInitiative)
                     ? ColorFilter.matrix(identity)
@@ -163,8 +161,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                   ),
                 )),
             Container(
-              margin: EdgeInsets.only(
-                  left: 3.2 * scale, right: 3.2 * scale),
+              margin: EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
               width: getMainListWidth(context) - 3.2 * scale,
               child: ValueListenableBuilder<int>(
                   valueListenable: getIt<GameState>().killMonsterStandee,
