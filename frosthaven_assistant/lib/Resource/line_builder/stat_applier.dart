@@ -161,17 +161,8 @@ class StatApplier {
       if (normal != null && value != null) {
         normalValue = value;
       }
-    } else if (lastToken == "target") {
-      //only if there is ever a +x target
-      /*int? value = normalTokens["target"];
-      int? eValue = eliteTokens["target"];
-      if (elite != null && eValue != null) {
-        eliteValue = eValue;
-      }
-      if (normal != null && value != null) {
-        normalValue = value;
-      }*/
     }
+
     String normalResult = formula;
     if (!skipCalculation) {
       int? res = StatCalculator.calculateFormula("$formula+$normalValue");
@@ -203,7 +194,7 @@ class StatApplier {
     }
 
     //special case for incalculable and only elites (heed the pigs)
-    if(elite != null && skipCalculation && showElite && !showNormal) {
+    if (elite != null && skipCalculation && showElite && !showNormal) {
       newStartOfLine += normalResult;
     }
 

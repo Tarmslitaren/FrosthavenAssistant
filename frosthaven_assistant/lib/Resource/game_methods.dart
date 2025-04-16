@@ -779,6 +779,15 @@ class GameMethods {
     }
   }
 
+  static void returnModifierCard(bool allies) {
+    var deck = _gameState._modifierDeck;
+    if (allies) {
+      deck = _gameState._modifierDeckAllies;
+    }
+    var card = deck._discardPile.pop();
+    deck._drawPile.push(card);
+  }
+
   static void removeCharacters(_StateModifier s, List<Character> characters) {
     List<ListItemData> newList = [];
     for (var item in _gameState.currentList) {

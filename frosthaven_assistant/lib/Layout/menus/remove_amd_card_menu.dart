@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Resource/commands/remove_amd_card_command.dart';
+import '../../Resource/commands/return_modifier_card_command.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
@@ -9,7 +10,8 @@ class RemoveAMDCardMenu extends StatefulWidget {
   final int index;
   final bool allyDeck;
 
-  const RemoveAMDCardMenu({super.key, required this.index, required this.allyDeck});
+  const RemoveAMDCardMenu(
+      {super.key, required this.index, required this.allyDeck});
 
   @override
   RemoveAMDCardMenuState createState() => RemoveAMDCardMenuState();
@@ -30,7 +32,8 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
         height: 180,
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value
                 ? 'assets/images/bg/dark_bg.png'
                 : 'assets/images/bg/white_bg.png'),
@@ -43,12 +46,30 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
           ),
           TextButton(
               onPressed: () {
-                _gameState.action(RemoveAMDCardCommand(widget.index, widget.allyDeck));
+                _gameState.action(
+                    RemoveAMDCardCommand(widget.index, widget.allyDeck));
 
                 Navigator.pop(context);
               },
               child: const Text("Remove card?",
                   textAlign: TextAlign.center, style: TextStyle(fontSize: 20))),
+          const SizedBox(
+            height: 20,
+          ),
+          TextButton(
+            onPressed: () {
+              _gameState.action(ReturnModifierCardCommand(widget.allyDeck));
+              //if last card, remove modal
+              if (widget.allyDeck &&
+                      _gameState.modifierDeckAllies.discardPile.isEmpty ||
+                  !widget.allyDeck &&
+                      _gameState.modifierDeck.discardPile.isEmpty) {
+                Navigator.pop(context);
+              }
+            },
+            child: const Text("Return top card",
+                textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
+          ),
           const SizedBox(
             height: 20,
           ),
