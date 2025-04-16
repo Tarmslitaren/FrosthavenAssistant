@@ -1,6 +1,7 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
+import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
@@ -23,6 +24,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   final GameState _gameState = getIt<GameState>();
   final GameData _gameData = getIt<GameData>();
   final Settings _settings = getIt<Settings>();
+  static const double cardWidth = 13.3333;
+  static const int cardAnimationDuration = 1600;
 
   bool _animationsEnabled = false;
 
@@ -47,15 +50,15 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   Widget buildStayAnimation(Widget child) {
     return Container(
         margin:
-            EdgeInsets.only(left: 13.3333 * _settings.userScalingBars.value),
+            EdgeInsets.only(left: cardWidth * _settings.userScalingBars.value),
         child: child);
   }
 
   Widget buildSlideAnimation(Widget child, Key key) {
     if (!_animationsEnabled) {
       return Container(
-          margin:
-              EdgeInsets.only(left: 13.3333 * _settings.userScalingBars.value),
+          margin: EdgeInsets.only(
+              left: cardWidth * _settings.userScalingBars.value),
           child: child);
     }
     return Container(
@@ -72,7 +75,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
             values: [
               const Offset(0, 0), //left to draw pile
               const Offset(0, 0), //left to draw pile
-              Offset(13.3333 * _settings.userScalingBars.value, 0), //end
+              Offset(cardWidth * _settings.userScalingBars.value, 0), //end
             ],
             child: RotationAnimatedWidget(
                 enabled: true,
@@ -84,8 +87,6 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                 duration: const Duration(milliseconds: cardAnimationDuration),
                 child: child)));
   }
-
-  static const int cardAnimationDuration = 1600;
 
   bool initAnimationEnabled() {
     if (getIt<Settings>().client.value == ClientState.connected ||
@@ -115,15 +116,28 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     return false;
   }
 
-  Widget buildDrawAnimation(Widget child, Key key) {
-    //compose a translation, scale, rotation + somehow switch widget from back to front
-    double width = 40 * _settings.userScalingBars.value;
+  Widget buildDrawAnimation(Widget child, Key key, BuildContext context) {
+    double width = 40 * _settings.userScalingBars.value; //the width of a card
     double height = 58.6666 * _settings.userScalingBars.value;
+    double startXOffset = -(width);
+    Offset screenSpaceOffset = context.globalPaintBounds!.topLeft;
+    var screenSpaceY =
+        screenSpaceOffset.dy; //draw deck top position from screen top
+    var screenSpaceX = screenSpaceOffset.dx -
+        startXOffset; //draw deck left position from screen left
 
+    //compose a translation, scale, rotation
+    const double maxScale = 4; //how big card is in center
     var screenSize = MediaQuery.of(context).size;
-    double xOffset =
-        (screenSize.width / 2 - 63 * _settings.userScalingBars.value);
-    double yOffset = -(screenSize.height / 2 - height);
+    double screenWidth = screenSize.width;
+    var localScreenWidth = screenWidth - screenSpaceX * 2;
+    var heightShaveOff = (screenSize.height - screenSpaceY) * 2;
+    var localScreenHeight = screenSize.height - heightShaveOff;
+    double yOffset = -(localScreenHeight / 2 + height / 2);
+    double halfBigCardWidth =
+        width / 2; //lol up scaled width is same as normal width
+    double xOffset = (localScreenWidth) / 2 -
+        halfBigCardWidth; //is correct if max scale is 1
 
     return Container(
         key: key,
@@ -140,7 +154,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                         _animationsEnabled ? cardAnimationDuration : 0),
                 enabled: _animationsEnabled,
                 values: [
-                  Offset(-(width + 2 * _settings.userScalingBars.value), 0),
+                  Offset(startXOffset, 0),
                   //left to draw pile
                   Offset(xOffset, yOffset),
                   //center of screen
@@ -156,7 +170,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                     enabled: true,
                     duration:
                         const Duration(milliseconds: cardAnimationDuration),
-                    values: const [1, 4, 4, 4, 1],
+                    values: const [1, maxScale, maxScale, maxScale, 1],
                     child: RotationAnimatedWidget(
                         enabled: true,
                         values: [
@@ -179,7 +193,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
         valueListenable: _settings.userScalingBars,
         builder: (context, value, child) {
           return SizedBox(
-            width: (94) * _settings.userScalingBars.value,
+            width: 94 * _settings.userScalingBars.value,
             height: 58.6666 * _settings.userScalingBars.value,
             child: ValueListenableBuilder<int>(
                 valueListenable: _gameState.commandIndex,
@@ -313,7 +327,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                             revealed: true,
                                           ),
                                           Key((-deck.discardPile.size())
-                                              .toString()))
+                                              .toString()),
+                                          context)
                                       : SizedBox(
                                           width: 40 * userScalingBars,
                                           height: 58.6666 * userScalingBars,

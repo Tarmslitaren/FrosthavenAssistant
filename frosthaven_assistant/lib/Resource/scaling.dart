@@ -52,3 +52,22 @@ double _scaleByReference(
   double fraction = width / referenceWidth;
   return fraction;
 }
+
+extension GlobalPaintBounds on BuildContext {
+  Rect? get globalPaintBounds {
+    final renderObject =
+        findRenderObject(); // Get the RenderObject associated with the widget
+    final translation = renderObject
+        ?.getTransformTo(null)
+        .getTranslation(); // Get its transformation matrix and extract translation
+
+    if (translation != null && renderObject?.paintBounds != null) {
+      final offset =
+          Offset(translation.x, translation.y); // Convert translation to Offset
+      return renderObject!.paintBounds
+          .shift(offset); // Shift the paint bounds by the offset
+    } else {
+      return null;
+    }
+  }
+}

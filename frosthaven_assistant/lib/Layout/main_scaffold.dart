@@ -121,7 +121,7 @@ class MainScaffoldBody extends StatelessWidget {
                     return Positioned(
                         width: screenWidth,
                         bottom: 4 * barScale,
-                        left: 20,
+                        left: 20 * barScale,
                         child: Column(children: [
                           Row(
                               mainAxisAlignment: ((!sectionsOnSeparateRow &&

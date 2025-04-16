@@ -5,19 +5,6 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../Resource/state/game_state.dart';
 import '../services/service_locator.dart';
 
-extension GlobalPaintBounds on BuildContext {
-  Rect? get globalPaintBounds {
-    final renderObject = findRenderObject();
-    final translation = renderObject?.getTransformTo(null).getTranslation();
-    if (translation != null && renderObject?.paintBounds != null) {
-      final offset = Offset(translation.x, translation.y);
-      return renderObject!.paintBounds.shift(offset);
-    } else {
-      return null;
-    }
-  }
-}
-
 class HealthWheelController extends StatefulWidget {
   final String figureId;
   final String ownerId;

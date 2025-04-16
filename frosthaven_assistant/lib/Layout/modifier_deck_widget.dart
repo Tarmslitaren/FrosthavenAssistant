@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/modifier_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
+import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
@@ -140,20 +141,34 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   }
 
   Widget buildDrawAnimation(Widget child, Key key) {
+    if (!_animationsEnabled || context.globalPaintBounds == null) {
+      return Container(child: child);
+    }
     //compose a translation, scale, rotation + somehow switch widget from back to front
     double width = 58.6666 * settings.userScalingBars.value;
     double height = 39 * settings.userScalingBars.value;
 
     var screenSize = MediaQuery.of(context).size;
-    double xOffset = -(screenSize.width / 2 -
-        63 * settings.userScalingBars.value); //TODO: tweak to be exactly center
-    double yOffset = -(screenSize.height / 2 -
-        height /
-            2); //TODO: not correct depending on position of the deck widget
 
-    if (!_animationsEnabled) {
-      return Container(child: child);
-    }
+    double startXOffset = -(width + 2 * settings.userScalingBars.value);
+
+    Offset screenSpaceOffset = context.globalPaintBounds!.topLeft;
+    var screenSpaceY =
+        screenSpaceOffset.dy; //draw deck top position from screen top
+    var screenSpaceX = screenSpaceOffset.dx -
+        startXOffset; //draw deck left position from screen left
+
+    //compose a translation, scale, rotation
+    const double maxScale = 4; //how big card is in center
+    double screenWidth = screenSize.width;
+    var localScreenWidth = screenWidth - screenSpaceX * 2;
+    var heightShaveOff = (screenSize.height - screenSpaceY) * 2;
+    var localScreenHeight = screenSize.height - heightShaveOff;
+    double yOffset = -(localScreenHeight / 2 + height / 2);
+    double halfBigCardWidth =
+        width / 2; //lol up scaled width is same as normal width
+    double xOffset = (localScreenWidth) / 2 -
+        halfBigCardWidth; //is correct if max scale is 1
 
     return Container(
         key: key,
@@ -168,7 +183,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                 duration: const Duration(milliseconds: cardAnimationDuration),
                 enabled: true,
                 values: [
-                  Offset(-(width + 2 * settings.userScalingBars.value), 0),
+                  Offset(startXOffset, 0),
                   //left to draw pile
                   Offset(xOffset, yOffset),
                   //center of screen
@@ -184,7 +199,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                     enabled: true,
                     duration:
                         const Duration(milliseconds: cardAnimationDuration),
-                    values: const [1, 4, 4, 4, 1],
+                    values: const [1, maxScale, maxScale, maxScale, 1],
                     child: RotationAnimatedWidget(
                         enabled: true,
                         values: [
