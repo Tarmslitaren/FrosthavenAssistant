@@ -24,6 +24,9 @@ enum Condition {
   ward,
   dodge,
 
+  shield,
+  retaliate,
+
   character1,
   character2,
   character3,
@@ -74,12 +77,7 @@ enum ListItemState {
   doneTurn, //gray, expire conditions
 }
 
-enum MonsterType {
-  normal,
-  elite,
-  boss,
-  summon
-}
+enum MonsterType { normal, elite, boss, summon }
 
 enum TurnsState {
   notDone, //if got condition while in this state or from earlier round: remove at end of current

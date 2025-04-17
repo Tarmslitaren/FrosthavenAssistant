@@ -1489,6 +1489,46 @@ class GameMethods {
     }
   }
 
+  static bool _monsterHasConditionOnCards(
+      Monster monster, MonsterInstance figure, String condition) {
+    bool hasCondition = false;
+    //check innate value
+
+    if (figure.type == MonsterType.normal) {
+      hasCondition = monster.type.levels[monster.level.value].normal!.attributes
+              .indexWhere((i) => i.contains(condition)) !=
+          -1;
+    } else if (figure.type == MonsterType.elite) {
+      hasCondition = monster.type.levels[monster.level.value].elite!.attributes
+              .indexWhere((i) => i.contains(condition)) !=
+          -1;
+    } else if (figure.type == MonsterType.boss) {
+      hasCondition = monster.type.levels[monster.level.value].boss!.attributes
+              .indexWhere((i) => i.contains(condition)) !=
+          -1;
+    }
+    //check ability card
+    var deck = GameMethods.getDeck(monster.type.deck);
+    if (deck != null &&
+        deck.discardPile.isNotEmpty &&
+        monster.turnState.value != TurnsState.notDone) {
+      if (deck.discardPile.peek.lines
+              .firstWhereOrNull((item) => item.contains(condition)) !=
+          null) {
+        return true;
+      }
+    }
+    return hasCondition;
+  }
+
+  static bool hasRetaliate(Monster monster, MonsterInstance figure) {
+    return _monsterHasConditionOnCards(monster, figure, "%retaliate%");
+  }
+
+  static bool hasShield(Monster monster, MonsterInstance figure) {
+    return _monsterHasConditionOnCards(monster, figure, "%shield%");
+  }
+
   //1 if item WAS done OR not done, then set it to current, all before to done, and all after to not done
   //2 if item was current: set item to done, all before to done, next to current and rest to not done
   static void setTurnDone(_StateModifier s, int index) {

@@ -201,6 +201,8 @@ class ConditionIconState extends State<ConditionIcon> {
           if (widget.condition.name.contains("poison") ||
               widget.condition == Condition.regenerate ||
               widget.condition == Condition.ward ||
+              widget.condition == Condition.shield ||
+              widget.condition == Condition.retaliate ||
               widget.condition == Condition.brittle) {
             _runAnimation();
           }

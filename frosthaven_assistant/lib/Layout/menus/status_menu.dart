@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
@@ -411,28 +412,33 @@ class StatusMenuState extends State<StatusMenu> {
     Monster? monster;
     bool isIceWraith = false;
     bool isElite = false;
+    bool hasShield = false;
+    bool hasRetaliate = false;
     if (figure is MonsterInstance) {
       name = (figure).name;
 
       if (widget.monsterId != null) {
-        for (var item in _gameState.currentList) {
-          if (item.id == widget.monsterId) {
-            monster = item as Monster;
-            name = "${monster.type.display} ${figure.standeeNr.toString()}";
-            if (monster.type.deck == "Ice Wraith") {
-              isIceWraith = true;
-            }
-            if (figure.type == MonsterType.normal) {
-              immunities =
-                  monster.type.levels[monster.level.value].normal!.immunities;
-            } else if (figure.type == MonsterType.elite) {
-              immunities =
-                  monster.type.levels[monster.level.value].elite!.immunities;
-              isElite = true;
-            } else if (figure.type == MonsterType.boss) {
-              immunities =
-                  monster.type.levels[monster.level.value].boss!.immunities;
-            }
+        monster = _gameState.currentList
+                .firstWhereOrNull((item) => item.id == widget.monsterId)
+            as Monster?;
+        if (monster != null) {
+          name = "${monster.type.display} ${figure.standeeNr.toString()}";
+          if (monster.type.deck == "Ice Wraith") {
+            isIceWraith = true;
+          }
+          hasShield = GameMethods.hasShield(monster, figure);
+          hasRetaliate = GameMethods.hasRetaliate(monster, figure);
+
+          if (figure.type == MonsterType.normal) {
+            immunities =
+                monster.type.levels[monster.level.value].normal!.immunities;
+          } else if (figure.type == MonsterType.elite) {
+            immunities =
+                monster.type.levels[monster.level.value].elite!.immunities;
+            isElite = true;
+          } else if (figure.type == MonsterType.boss) {
+            immunities =
+                monster.type.levels[monster.level.value].boss!.immunities;
           }
         }
       }
@@ -440,15 +446,9 @@ class StatusMenuState extends State<StatusMenu> {
     //has to be summon
 
     //get id and owner Id
-    Character? character;
-    if (widget.characterId != null) {
-      for (var item in _gameState.currentList) {
-        if (item.id == widget.characterId) {
-          character = item as Character;
-        }
-      }
-    }
-
+    Character? character = _gameState.currentList
+            .firstWhereOrNull((item) => item.id == widget.characterId)
+        as Character?;
     if (figure is CharacterState && character != null) {
       name = character.characterClass.name;
     }
@@ -462,6 +462,9 @@ class StatusMenuState extends State<StatusMenu> {
     }
 
     int nrOfCharacters = GameMethods.getCurrentCharacterAmount();
+
+    ListItemData owner =
+        _gameState.currentList.firstWhereOrNull((item) => item.id == ownerId)!;
 
     return Container(
         width: 340 * scale,
@@ -497,15 +500,42 @@ class StatusMenuState extends State<StatusMenu> {
                               //todo: should somehow pop context in case dead by health wheel
                               return Container();
                             }
-                            return Container(
-                                height: 28 * scale,
-                                margin: EdgeInsets.only(top: 2 * scale),
-                                child: MonsterBox(
-                                    figureId: figureId,
-                                    ownerId: ownerId,
-                                    displayStartAnimation: "",
-                                    blockInput: true,
-                                    scale: scale * 0.9));
+
+                            return Row(children: [
+                              if (hasShield)
+                                Container(
+                                    height: 28 * scale,
+                                    margin: EdgeInsets.only(
+                                        top: 2 * scale, right: 2 * scale),
+                                    child: ConditionIcon(
+                                      Condition.shield,
+                                      24 * scale,
+                                      owner,
+                                      figure,
+                                      scale: scale,
+                                    )),
+                              if (hasRetaliate)
+                                Container(
+                                    height: 28 * scale,
+                                    margin: EdgeInsets.only(
+                                        top: 2 * scale, right: 2 * scale),
+                                    child: ConditionIcon(
+                                      Condition.retaliate,
+                                      24 * scale,
+                                      owner,
+                                      figure,
+                                      scale: scale,
+                                    )),
+                              Container(
+                                  height: 28 * scale,
+                                  margin: EdgeInsets.only(top: 2 * scale),
+                                  child: MonsterBox(
+                                      figureId: figureId,
+                                      ownerId: ownerId,
+                                      displayStartAnimation: "",
+                                      blockInput: true,
+                                      scale: scale * 0.9))
+                            ]);
                           }),
                     if (isIceWraith)
                       TextButton(
