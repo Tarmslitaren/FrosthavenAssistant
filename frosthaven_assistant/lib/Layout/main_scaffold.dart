@@ -98,69 +98,78 @@ class MainScaffoldBody extends StatelessWidget {
               return ValueListenableBuilder<int>(
                   valueListenable: getIt<GameState>().commandIndex,
                   builder: (context, value, child) {
-                    GameState gameState = getIt<GameState>();
-                    double barScale = getIt<Settings>().userScalingBars.value;
-                    bool hasLootDeck = !getIt<Settings>().hideLootDeck.value;
-                    bool modFitsOnBar = modifiersFitOnBar(context);
-                    var sectionWidth = getSectionWidth(context);
+                    return ValueListenableBuilder<double>(
+                        valueListenable: getIt<Settings>().userScalingBars,
+                        builder: (context, value, child) {
+                          GameState gameState = getIt<GameState>();
+                          double barScale =
+                              getIt<Settings>().userScalingBars.value;
+                          bool hasLootDeck =
+                              !getIt<Settings>().hideLootDeck.value;
+                          bool modFitsOnBar = modifiersFitOnBar(context);
+                          var sectionWidth = getSectionWidth(context);
 
-                    //move to separate row if it doesn't fit
-                    bool sectionsOnSeparateRow = false;
-                    int? nrOfSections = getNrOfSections();
-                    if ((nrOfSections != null &&
-                            nrOfSections > 0 &&
-                            sectionWidth < 58 * barScale) ||
-                        (nrOfSections != null &&
-                            nrOfSections > 2 &&
-                            sectionWidth < 58 * barScale * 2)) {
-                      //in case doesn't fit
-                      sectionsOnSeparateRow = true;
-                      sectionWidth = MediaQuery.of(context).size.width;
-                    }
+                          //move to separate row if it doesn't fit
+                          bool sectionsOnSeparateRow = false;
+                          int? nrOfSections = getNrOfSections();
+                          if ((nrOfSections != null &&
+                                  nrOfSections > 0 &&
+                                  sectionWidth < 58 * barScale) ||
+                              (nrOfSections != null &&
+                                  nrOfSections > 2 &&
+                                  sectionWidth < 58 * barScale * 2)) {
+                            //in case doesn't fit
+                            sectionsOnSeparateRow = true;
+                            sectionWidth = MediaQuery.of(context).size.width;
+                          }
 
-                    return Positioned(
-                        width: screenWidth,
-                        bottom: 4 * barScale,
-                        left: 20 * barScale,
-                        child: Column(children: [
-                          Row(
-                              mainAxisAlignment: ((!sectionsOnSeparateRow &&
-                                          nrOfSections != null) ||
-                                      hasLootDeck)
-                                  ? MainAxisAlignment.spaceBetween
-                                  : MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                if (hasLootDeck) const LootDeckWidget(),
-                                if (!sectionsOnSeparateRow &&
+                          return Positioned(
+                              width: screenWidth,
+                              bottom: 4 * barScale,
+                              left: 5 * barScale,
+                              child: Column(children: [
+                                Row(
+                                    mainAxisAlignment:
+                                        ((!sectionsOnSeparateRow &&
+                                                    nrOfSections != null) ||
+                                                hasLootDeck)
+                                            ? MainAxisAlignment.spaceBetween
+                                            : MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      if (hasLootDeck) const LootDeckWidget(),
+                                      if (!sectionsOnSeparateRow &&
+                                          nrOfSections != null)
+                                        SizedBox(
+                                          width: sectionWidth,
+                                          child: const SectionList(),
+                                        ),
+                                      Column(children: [
+                                        if (GameMethods.shouldShowAlliesDeck())
+                                          const ModifierDeckWidget(
+                                              name: "allies"),
+                                        if (!modFitsOnBar &&
+                                            gameState.currentCampaign.value !=
+                                                "Buttons and Bugs" && //hide amd deck for buttons and bugs
+                                            getIt<Settings>().showAmdDeck.value)
+                                          Container(
+                                              margin: EdgeInsets.only(
+                                                top: 4 * barScale,
+                                              ),
+                                              child: const ModifierDeckWidget(
+                                                name: '',
+                                              ))
+                                      ])
+                                    ]),
+                                if (sectionsOnSeparateRow &&
                                     nrOfSections != null)
                                   SizedBox(
                                     width: sectionWidth,
                                     child: const SectionList(),
                                   ),
-                                Column(children: [
-                                  if (GameMethods.shouldShowAlliesDeck())
-                                    const ModifierDeckWidget(name: "allies"),
-                                  if (!modFitsOnBar &&
-                                      gameState.currentCampaign.value !=
-                                          "Buttons and Bugs" && //hide amd deck for buttons and bugs
-                                      getIt<Settings>().showAmdDeck.value)
-                                    Container(
-                                        margin: EdgeInsets.only(
-                                          top: 4 * barScale,
-                                        ),
-                                        child: const ModifierDeckWidget(
-                                          name: '',
-                                        ))
-                                ])
-                              ]),
-                          if (sectionsOnSeparateRow && nrOfSections != null)
-                            SizedBox(
-                              width: sectionWidth,
-                              child: const SectionList(),
-                            ),
-                        ]));
+                              ]));
+                        });
                   });
             }),
         if (loading.value)

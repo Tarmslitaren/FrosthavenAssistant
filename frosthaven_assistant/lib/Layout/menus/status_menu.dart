@@ -317,10 +317,13 @@ class StatusMenuState extends State<StatusMenu> {
                                     filterQuality: FilterQuality.medium,
                                     image: const AssetImage(
                                         "assets/images/psd/class-token-bg.png")),
-                                Image(
-                                    height: 24 * scale * 0.65,
+                                Image.asset(
                                     filterQuality: FilterQuality.medium,
-                                    image: AssetImage(imagePath)),
+                                    height: 24 * scale * 0.65,
+                                    width: 24 * scale * 0.65,
+                                    //color: classColor,
+                                    //colorBlendMode: BlendMode.colorBurn,
+                                    imagePath),
                               ])
                             : Image.asset(
                                 filterQuality: FilterQuality.medium,
