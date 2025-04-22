@@ -223,16 +223,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
       deck = _gameState.modifierDeckAllies;
     }
 
-    var textStyle = TextStyle(
-        fontSize: 12 * settings.userScalingBars.value,
-        color: Colors.white,
-        shadows: [
-          Shadow(
-              offset: Offset(1 * settings.userScalingBars.value,
-                  1 * settings.userScalingBars.value),
-              color: Colors.black)
-        ]);
-
     bool isAnimating =
         false; //is not doing anything now. in case flip animation is added
     return ValueListenableBuilder<double>(
@@ -247,6 +237,16 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                   if (_animationsEnabled != true) {
                     _animationsEnabled = initAnimationEnabled();
                   }
+
+                  var textStyle = TextStyle(
+                      fontSize: 12 * settings.userScalingBars.value,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                            offset: Offset(1 * settings.userScalingBars.value,
+                                1 * settings.userScalingBars.value),
+                            color: Colors.black)
+                      ]);
 
                   return Row(
                     children: [
