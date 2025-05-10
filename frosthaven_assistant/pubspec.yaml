@@ -20,7 +20,7 @@ version: 1.10.3+41
 environment:
   sdk: ">=3.4.0 <3.8.0"
   #uncomment to peg flutter version to specific one.
-  #flutter: '3.19.6'
+  flutter: '<=3.27.3' #impeller forced on ios after this one...
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -51,7 +51,7 @@ dependencies:
   shared_preferences: ^2.2.2
   wakelock_plus: ^1.2.5 #keep awake on android
   window_manager: ^0.4.3 #to be able to set fullscreen on windows
-  flutter_launcher_icons: ^0.13.1 #I can't believe we need a third party package to do icons..
+  flutter_launcher_icons: ^0.14.3 #I can't believe we need a third party package to do icons..
   flutter_native_splash: ^2.2.8 # and same for splash :)
   url_launcher: ^6.2.1
   flutter_keyboard_visibility: ^6.0.0 #only way to check for keyboard closed event.
@@ -78,11 +78,11 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
   #test: ^1.25.8 # can use built in test version
   mockito: ^5.3.2
   build_runner: ^2.3.3
-  fluent_assertions: ^0.4.0
+  fluent_assertions: ^0.5.1
   build_test: any
   json_diff: ^0.2.1
 

@@ -2185,7 +2185,7 @@
     "#17 Red Twilight": {
       "monsters": [ "Blood Imp", "Blood Monstrosity", "First of the Order" ],
       "sections": {
-        "#A-B": {
+        "#01": {
           "special": [
             {
               "type": "ResetRound"
