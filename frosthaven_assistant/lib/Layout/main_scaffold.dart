@@ -191,6 +191,7 @@ class MainScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    setupMoreGetIt(context);
     return ValueListenableBuilder<bool>(
         valueListenable: loading,
         builder: (context, value, child) {

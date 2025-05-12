@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.10.3+41
+version: 1.10.3+42
 
 environment:
   sdk: ">=3.4.0 <3.8.0"
@@ -48,7 +48,7 @@ dependencies:
   network_info_plus: ^6.1.2
   dart_ipify: ^1.1.1 #get outgoing ip
   connectivity_plus: ^6.0.3 #poll for network changes
-  shared_preferences: ^2.2.2
+  shared_preferences: 2.4.0 #pinned at 2.4.0 due to some issue (https://github.com/flutter/flutter/issues/161796)
   wakelock_plus: ^1.2.5 #keep awake on android
   window_manager: ^0.4.3 #to be able to set fullscreen on windows
   flutter_launcher_icons: ^0.14.3 #I can't believe we need a third party package to do icons..
