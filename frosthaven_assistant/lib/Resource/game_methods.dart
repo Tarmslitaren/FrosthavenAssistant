@@ -1719,4 +1719,14 @@ class GameMethods {
     }
     return edition != "Frosthaven" && edition != "Gloomhaven 2nd Edition";
   }
+
+  static bool hasLootDeck() {
+    GameState gameState = getIt<GameState>();
+    bool hasLootDeck = !getIt<Settings>().hideLootDeck.value;
+    if (gameState.lootDeck.discardPile.isEmpty &&
+        gameState.lootDeck.drawPile.isEmpty) {
+      hasLootDeck = false;
+    }
+    return hasLootDeck;
+  }
 }

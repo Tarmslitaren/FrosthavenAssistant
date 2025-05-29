@@ -47,17 +47,13 @@ class MainScaffoldBody extends StatelessWidget {
   double getSectionWidth(BuildContext context) {
     bool modFitsOnBar = modifiersFitOnBar(context);
     double screenWidth = MediaQuery.of(context).size.width;
-    GameState gameState = getIt<GameState>();
     double barScale = getIt<Settings>().userScalingBars.value;
 
-    bool hasLootDeck = !getIt<Settings>().hideLootDeck.value;
-    if (gameState.lootDeck.discardPile.isEmpty &&
-        gameState.lootDeck.drawPile.isEmpty) {
-      hasLootDeck = false;
-    }
+    bool hasLootDeck = GameMethods.hasLootDeck();
     double sectionWidth = screenWidth;
     if (hasLootDeck) {
-      sectionWidth -= 94 * barScale; //width of loot deck
+      sectionWidth -= 94 *
+          barScale; //width of loot deck todo: add the 5 * barScale margin here?
     }
     if ((!modFitsOnBar || GameMethods.shouldShowAlliesDeck()) &&
         getIt<Settings>().showAmdDeck.value) {
@@ -104,8 +100,7 @@ class MainScaffoldBody extends StatelessWidget {
                           GameState gameState = getIt<GameState>();
                           double barScale =
                               getIt<Settings>().userScalingBars.value;
-                          bool hasLootDeck =
-                              !getIt<Settings>().hideLootDeck.value;
+                          bool hasLootDeck = GameMethods.hasLootDeck();
                           bool modFitsOnBar = modifiersFitOnBar(context);
                           var sectionWidth = getSectionWidth(context);
 
@@ -172,7 +167,7 @@ class MainScaffoldBody extends StatelessWidget {
                         });
                   });
             }),
-        if (loading.value)
+        if (loading.value && kDebugMode)
           Positioned(
               left: screenWidth * 0.45,
               top: MediaQuery.of(context).size.height * 0.4,
@@ -192,26 +187,19 @@ class MainScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setupMoreGetIt(context);
-    return ValueListenableBuilder<bool>(
-        valueListenable: loading,
+    return ValueListenableBuilder<double>(
+        valueListenable: getIt<Settings>().userScalingBars,
         builder: (context, value, child) {
-          if (kDebugMode) {
-            print("loading is: ${loading.value}");
-          }
-          return ValueListenableBuilder<double>(
-              valueListenable: getIt<Settings>().userScalingBars,
-              builder: (context, value, child) {
-                return SafeArea(
-                    left: false,
-                    right: false,
-                    maintainBottomViewPadding: true,
-                    child: Scaffold(
-                        resizeToAvoidBottomInset: false,
-                        bottomNavigationBar: createBottomBar(context),
-                        appBar: createTopBar(),
-                        drawer: createMainMenu(context),
-                        body: const MainScaffoldBody()));
-              });
+          return SafeArea(
+              left: false,
+              right: false,
+              maintainBottomViewPadding: true,
+              child: Scaffold(
+                  resizeToAvoidBottomInset: false,
+                  bottomNavigationBar: createBottomBar(context),
+                  appBar: createTopBar(),
+                  drawer: createMainMenu(context),
+                  body: const MainScaffoldBody()));
         });
   }
 }

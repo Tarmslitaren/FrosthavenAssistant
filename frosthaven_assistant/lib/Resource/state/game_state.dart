@@ -1,5 +1,3 @@
-library game_state;
-
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:math';
