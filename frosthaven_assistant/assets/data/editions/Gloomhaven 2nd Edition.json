@@ -351,47 +351,216 @@
 
   "monsterAbilities": [
     {
+      "name": "Deep Terror (2e)",
+      "cards": [
+        ["Horrible Glare", 722, false, 65, "%attack% - 1","^%target% 3,", "^%range% 3,",  "^%curse%" ],
+        ["Beam of Annihilation", 723, true, 60,[{
+          "gfx": "aoe-line-6-with-black",
+          "x": 0.65,
+          "y": 0.28
+        }], "%attack% + 0", "^%pierce% 3" ],
+        ["Beam of Annihilation", 724, true, 60, [{
+          "gfx": "aoe-line-6-with-black",
+          "x": 0.65,
+          "y": 0.28
+        }],"%attack% + 0", "^%pierce% 3" ],
+        ["Burning Gaze", 725, false, 84, "%attack% - 1", "^%target% all adjacent enemies","*.........", "%attack% + 0", "^%range% 4,", "^%wound%" ],
+        ["Rooted Fear", 726, false, 75, "%attack% - 1", "^%poison%","*.........", "%attack% - 1", "^%range% 5,", "^%immobilize%" ],
+        ["Disruptive Frenzy", 727, false, 75, "%attack% - 2",  "^%disarm%","*.........", "%attack% - 1", "^%target% 2,","^%range% 3", "^%muddle%" ],
+        ["Terrible Growth", 728, false, 96, "%attack% - 2", "^%range% 6","*.........", "^If the attack ability was performed","^^Summon normal Deep Terror in","^^an empty hex adjacent to the target", "^^of the attack ability" ],
+        ["Ray of Hate", 729, false, 54, "%wound%, %poison%", "^Target all, %range% 1","*.........", "%attack% + 0", "^%range% 4" ]
+      ]
+    },
+    {
+      "name": "Chaos Demon (2e)",
+      "cards": [
+        ["Chilling Breath", 538, false, 14, "%move% - 1","*.........",
+          "[r]", "%attack% + 0", "¤aoe-triangle-2-side-with-black", "[/r]",
+          "*.........",
+          "[r]", "%ice%%use%",
+          "[c]", "^%retaliate% 2","^%range% 2,","[/c]",
+          "[/r]" ],
+        ["Heat Blast", 539, false, 1, "%move% + 1","*.........", "%attack% - 1", "^%range% 2", "[r]", "%fire%%use%", "^%wound%", "[/r]" ],
+        ["Seismic Punch", 540, false, 67, "%move% - 2","*.........", "%attack% + 1", "^%push% 2", "[r]", "%earth%%use%", "¤aoe-triangle-2-side-with-black", "[/r]" ],
+        ["Whirlwind", 541, false, 20, "%move% + 0","*.........", "[r]", "[c]", "%attack% - 1", "^%range% 2", "[/c]", "¤aoe-triangle-2-side", "[/r]", "*.........", "[r]", "%air%%use%", "^%shield% 2", "[/r]"] ,
+        ["White Claws", 542, false, 42, "%move% + 0","*.........", "%attack% + 0", "^Advantage","*.........", "[r]","%light%%use%","[c]", "^%heal% 4", "^Self","[/c]", "[/r]" ],
+        ["Black Tendrils", 543, false, 51, "%move% - 1","*.........", "%attack% + 1","*.........", "[r]", "%dark%%use%", "[c]","^%invisible%","^Self","[/c]", "[/r]" ],
+        ["Arcane Explosion", 544, true, 77, "%move% + 0","*.........", "%attack% + 0", "Å*", "%fire% %ice% %air% %earth% %light% %dark%" ],
+        ["Hungry Maw", 545, true, 98, "%move% - 1","*.........", "%attack% - 1", "[r]","%any%%use%", "^%disarm%", "[/r]" ]
+      ]
+    },
+    {
+      "name": "Crystal Rot",
+      "cards": [
+        ["Dark Communion", 788, true, 18, "%muddle%",  "^%target% all,", "^%range% 4" ,"*.........", "^^Living Bones, Living Corpses, and", "^^Living Spirits within %range% 4 add +1 %attack%", "^^to all their attacks this round." ],
+        ["Drain Essence", 785, false, 28, "%attack% + 0","^%range% 4,", "^%muddle%","*.........", "^^If the attack ability was performed,", "^^Crystal Rot performs:", "%heal% 2", "^Self,","^%strengthen%" ],
+        ["Drain Essence", 784, false, 28, "%attack% + 0","^%range% 4,", "^%muddle%","*.........", "^^If the attack ability was performed,", "^^Crystal Rot performs:", "%heal% 2", "^Self,","^%strengthen%" ],
+        ["Rise and Fall", 787, false, 34, "%move% + 0","*.........", "%attack% - 1", "^%range% 3","*.........","%heal% 1", "^%range% 3,", "^%safeguard%", "[r]","%dark%%use%", "^+1%target%", "[/r]" ],
+        ["Unholy Gifts", 786, false, 40, "%move% + 1","*.........", "%heal% 1", "^%target% 2,", "^%range% 3,", "%ward%", "[r]","%dark%%use%", "^+1%target%", "[/r]" ],
+        ["Nothing special", 789, false, 49, "%move% + 0","*.........", "%attack% + 0", "^%target% 3", "%dark%" ],
+        ["Shadow Bolt", 791, true, 67, "%move% + 0","*.........", "[r]", "[c]", "%attack% - 1", "^%range% 3", "[/c]","¤aoe-triangle-2-side", "[/r]", "%dark%" ],
+        ["Last Resort", 790, false, 87, "%move% - 1","*.........", "%attack% + 1", "^%target% 3", "Å.", "^^Add %disarm% if there are no Living Bones,", "^^Living Corpses, or Living Spirits", "^^within %range% 3." ]
+      ]
+    },
+    {
+      "name": "Harrower Infester (2e)",
+      "cards": [
+        ["Biting Gnats", 802, false, 38, "%move% - 1","*.........", "%attack% + 1", "^%target% 2" ],
+        ["Centipede Strike", 803, false, 7, "%move% + 0", "*.........","%attack% - 1", "^%poison%", "%dark%" ],
+        ["Restore the Swarm", 804, false, 16, "%move% - 1","*.........", "%attack% - 1","*.........", "%heal% 5", "^Self" ],
+        ["Spiked Mandibles", 806, false, 16, "%attack% + 2", "^%immobilize%","*.........", "%retaliate% + 2" ],
+        ["Angry Bulwark", 807, true, 2, "%shield% + 2","*.........", "%retaliate% 2", "^%range% 3" ],
+        ["Piercing Parasites", 808, false, 30, [{
+          "gfx": "aoe-line-4-with-black",
+          "x": 0.73,
+          "y": 0.63,
+          "angle": 210.0
+        }],"%move% - 1","*.........", "%attack% + 0","**.........", "[r]","%dark%%use%", "[c]","^Perform \"%heal% X, self\" where X is","^^twice the number of enemies", "^^targeted by the attack ability.", "[/c]","[/r]"],
+        ["Clouds of Hate", 809, false, 38, "%move% + 0","*.........", "%attack% - 1", "^%target% 2,", "^%wound%", "[r]", "%dark%%use%", "^+1%attack%", "[/r]" ],
+        ["Drain the Essence", 805, true, 7, "%attack% - 1", "^%range% 3,", "^%muddle%","*.........", "%heal% 4", "^Self" ]
+      ]
+    },
+    {
+      "name": "Lurker (2e)",
+      "cards": [
+        ["Defensive Claws", 674, true, 11, "%wound%","^Target all, %range% 1", "*.........","%shield% + 1","[r]", "%ice%%use%", "^+1%shield%", "[/r]" ],
+        ["Hasty Assault", 675, false, 28, "%move% + 1","*.........", "%attack% - 1" ],
+        ["Nothing Special", 676, false, 38, "%move% + 0","*.........", "%attack% + 0" ],
+        ["Focused Strikes", 677, false, 38, "%move% + 0","*.........", "%attack% + 0","[newLine]", "^Target 1 enemy with all attacks" ],
+        ["Calculated Strike", 678, false, 61, "%move% - 1","*.........", "%attack% + 1" ],
+        ["Berserk Rage", 679, false, 64, "%attack% + 1","[newLine]", "^Target enemies within 2 hexes, %muddle%" ],
+        ["Strength of the Deep", 680, false, 41, "[r]","%ice%%use%", "^%strengthen%", "^Self", "[/r]","*.........", "%move% + 0", "%attack% - 1", "^%wound%" ],
+        ["Hardened by Frost", 681, true, 23, "%move% + 0","*.........", "%attack% - 1","*.........","%shield% + 1", "%ice%" ]
+      ]
+    },
+    {
       "name": "Cave Bear (2e)",
       "cards": [
-        [ 596, false, 13, "%move% + 1","*.........", "%attack% - 1" ],
-        [ 587, false, 14, "%move% - 1","*.........", "%attack% - 1", "^%immobilize%" ],
-        [ 598, true, 34, "%attack% + 1", "^%wound%" ],
-        [ 599, false, 41, "%move% + 0","*.........", "%attack% + 0" ],
-        [ 600, false, 60, "%move% - 1","*.........", "%attack% + 1" ],
-        [ 601, true, 80, "%attack% - 1","*.........", "%move% - 2", "*.........","%attack% - 1", "^%wound%" ],
-        [ 602, false, 61, "%move% + 0","*.........", "%attack% - 1", "^%target% 2" ],
-        [ 603, false, 3, "%shield% + 1","*.........", "%retaliate% 2","*.........", "%heal% 2", "^Self" ]
+        ["Hasty Assault", 834, true, 13, "%move% + 1", "*.........","%attack% - 1"],
+        ["Low Slash", 835, false, 14,  "%move% - 1", "*.........","%attack% - 1", "^%immobilize%"],
+        ["Hibernate", 841, false, 3,  "%retaliate% + 2","*.........", "%heal% 2", "^Self,", "^%safeguard%"],
+        ["Full Force", 836, false, 29, "%attack% + 1", "^%muddle%"],
+        ["Nothing Special", 837, false, 41, "%move% + 0", "*.........","%attack% + 0"],
+        ["Claw Swipes", 840, false, 61,  "%move% + 0", "*.........","%attack% - 1", "^%target% 2"],
+        ["Rampage", 839, true, 80, "%attack% - 1", "*.........","%move% - 2", "*.........","%attack% + 0"],
+        ["Calculated Strike", 838, false, 60, "%move% - 1","*.........","%attack% + 1" ]
       ]
     },
     {
       "name": "Cultist (2e)",
       "cards": [
-        [ 604, false, 10, "%move% - 1","*.........", "%attack% - 1","*.........", "[r]","[c]","On Death:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
-        [ 605, false, 10, "%move% - 1","*.........", "%attack% - 1","*.........", "[r]","[c]","On Death:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
-        [ 606, false, 27, "%move% + 0","*.........", "%attack% + 0" ],
-        [ 607, false, 27, "%move% + 0","*.........", "%attack% + 0" ],
-        [ 608, false, 39, "%move% - 1","*.........", "%attack% + 0","*.........", "%heal% 1", "^Self" ],
-        [ 609, true, 63, "*", "Summon normal","Living Bones","*", "^Cultist suffers 2 damage." ],
-        [ 610, true, 63, "*", "Summon normal","Living Bones","*", "^Cultist suffers 2 damage." ],
-        [ 611, false, 31, "%move% - 1","*.........", "%heal% 3", "^%range% 3" ]
+        ["Volatile Conduct", 760, false, 10, "%move% + 0","*.........", "%attack% - 1","*.........", "[r]","[c]","^^If Cultist dies this round,", "^^first remove all negative", "^^conditions and perform:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        ["Volatile Conduct", 761, false, 10, "%move% + 0","*.........", "%attack% - 1","*.........", "[r]","[c]","^^If Cultist dies this round,", "^^first remove all negative", "^^conditions and perform:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        ["Harrowing Harvest", 762, false, 27, "%move% + 0","*.........", "%attack% + 0","*.........", "%heal% X", "^Self", "[r]", "[c]","^^where X is the amount", "^^of %damage% suffered by the", "target of the attack ability.", "[/c]","[/r]" ],
+        ["Harrowing Harvest", 763, false, 27, "%move% + 0","*.........", "%attack% + 0","*.........", "%heal% X", "^Self", "[r]", "[c]", "^^where X is the amount", "^^of %damage% suffered by the", "target of the attack ability.", "[/c]","[/r]" ],
+        ["Dark Ritual", 764, true, 63, "*", "^Summon one normal","^Living Bones","*.........", "^Cultist suffers %damage% 2.","*.........", "%stun%", "^Self" ],
+        ["Dark Ritual", 765, true, 63, "*", "^Summon one normal","^Living Bones","*.........", "^Cultist suffers %damage% 2.", "*.........", "%stun%", "^Self"],
+        ["Unholy Guard", 766, false, 21, "%move% - 1","*.........", "%heal% 3", "^%range% 3,", "^%safeguard%" ],
+        ["Unholy Guard", 767, false, 21, "%move% - 1","*.........", "%heal% 3", "^%range% 3,", "^%safeguard%" ]
       ]
     },
     {
       "name": "Living Corpse (2e)",
       "cards": [
-        [ 564, false, 21, "%move% + 1","*.........", "%muddle% and", "%immobilize%", "^Target one adjacent enemy" ],
-        [ 565, false, 47, "%move% + 1","*.........", "%attack% - 1" ],
-        [ 566, true, 66, "%move% + 0", "*.........","%attack% + 0" ],
-        [ 567, true, 66, "%move% + 0", "*.........","%attack% + 0" ],
-        [ 568, false, 82, "%move% - 1", "*.........","%attack% + 1" ],
-        [ 569, false, 91, "%move% + 1","*.........", "Living Corpse suffers 1 damage." ],
-        [ 570, false, 71, "%move% + 0", "*.........","%attack% + 1","*.........", "%poison%", "^Target all adjacent enemies" ],
-        [ 571, false, 32, "%attack% + 2", "^%push% 1","*.........", "Living Corpse suffers 1 damage." ]
+        ["Rotting Embrace", 752, false, 21, "%move% + 1","*.........", "%muddle%, %immobilize%", "^%range% 1","*.........", "Îf Living Corpse dies this round, all", "^figures adjacent to the hex it occupied", "^suffer %damage% 1 and gain %poison%."],
+        ["hasty Assault", 754, false, 47, "%move% + 1","*.........", "%attack% - 1"],
+        ["Nothing Special", 755, true, 68, "%move% + 0","*.........", "%attack% + 0"],
+        ["Nothing Special", 756, true, 68, "%move% + 0","*.........", "%attack% + 0"],
+        ["Calculated Strike", 753, false, 82, "%move% - 1","*.........", "%attack% + 1"],
+        ["Reckless Charge", 757, false, 91, "%move% + 2","*.........", "[r]", "%earth%%use%", "^%attack% + 0", "[/r]","*.........", "^If the move ability was performed,","^Living Corpse suffers %damage% 1."],
+        ["Release Gas", 758, false, 71, "%move% + 0","*.........", "%attack% + 1", "*.........","%poison%", "^Target all,", "^%range% 1", "%earth%"],
+        ["Violent Slam", 759, false, 32, "%attack% + 2", "^%push% 1", "*.........", "^If the attack ability was performed,", "^Living Corpse suffers %damage% 1."]
+      ]
+    },
+    {
+      "name": "Scout (2e)",
+      "cards": [
+        ["Cruel Bow", 770, true, 29, "%move% - 1","*.........", "%attack% - 1", "^%range% 3,","^%wound%"],
+        ["Hasty Assault", 771, false, 40, "%move% + 1","*.........", "%attack% - 1"],
+        ["Nothing Special", 772, false, 53, "%move% + 0","*.........", "%attack% + 0"],
+        ["Rancid Arrow", 773, false, 54, "%move% - 2","*.........", "%attack% + 0", "^%range% 3,", "^%poison%"],
+        ["Calculated Strike",774, false, 69, "%move% - 1","*.........", "%attack% + 1"],
+        ["Noxious Blade", 775, false, 92, "%attack% + 2", "^%poison%"],
+        ["Rapid Bolts", 776, false, 79, "%attack% - 1", "^%target% 2,", "^%range% 4"],
+        ["Greed", 777, true, 35, "%move% + 1", "^%jump%","*.........", "%loot% 1"]
+      ]
+    },
+    {
+      "name": "Giant Viper (2e)",
+      "cards": [
+        ["Swift Fangs", 396, false, 33, "%move% + 1", "^%jump%", "*.........", "%attack% + 0", "^%target% 2"],
+        ["Find Cover", 397, false, 18, "%move% + 1", "^%jump%","*.........", "%attack% - 1", "^All attacks targeting Giant Viper", "^this round gain disadvantage."],
+        ["Calculated Strike", 398, false, 58, "%move% - 1","*.........", "%attack% + 1"],
+        ["Toxic Frenzy", 399, false, 43, "%move% + 1", "^%jump%","*.........", "%attack% - 1", "^Target all adjacent enemies"],
+        ["Surround", 400, true, 32, "%move% + 0","*.........", "%attack% + 0","[r]", "[c]", "^Add +2 %attack% if the target is adjacent", "^to any of the Giant Viper's allies.","[/c]", "[/r]"],
+        ["Surround", 401, true, 32, "%move% + 0","*.........", "%attack% + 0","[r]", "[c]","^Add +2 %attack% if the target is adjacent", "^to any of the Giant Viper's allies.","[/c]", "[/r]"],
+        ["Defensive Strike", 402, false, 11, "%shield% 1","*.........", "%attack% + 0"],
+        ["Constrict", 403, false, 23, "%move% - 1","*.........", "%attack% - 1", "^%immobilize%","*.........", "%attack% - 1"]
+      ]
+    },
+    {
+      "name": "Stone Construct (2e)",
+      "cards": [
+        ["Runic Feeedback", 404, false, 10, "%retaliate% 3", "^%range% 3" ],
+        ["Taxing Advance", 405, false, 28, "%move% + 1","*.........", "%attack% + 0","*.........","[r]", "[c]", "^If the Move ability was performed,", "^^Stone Construct suffers %damage% 1.","[/c]", "[/r]" ],
+        ["Hasty Assault", 406, true, 51, "%move% + 1","*.........", "%attack% - 1"],
+        ["Nothing Special", 407, false, 64, "%move% + 0","*.........", "%attack% + 0"],
+        ["Sacrificial Hurl", 408, false, 72, "%attack% + 1", "^%range% 3", "*.........", "^If the attack was performed,", "^^Stone Construct suffers %damage% 1."],
+        ["Calculated Strike", 409, true, 90, "%move% - 1","*.........", "%attack% + 1"],
+        ["Ground Pound", 410, false, 83, "%move% + 0","*.........", "%attack% + 0", "^Target all adjacent enemies"],
+        ["Runic Draw", 411, false, 28, "%move% + 1","*.........", "%attack% - 2", "^%range% 3", "^%pull% 2", "^%immobilize%" ]
       ]
     }
-
   ],
   "monsters": {
+    "Ancient Artillery (2e)": {
+      "display": "Ancient Artillery",
+      "gfx": "Ancient Artillery",
+      "deck": "Ancient Artillery (FH)",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 0, "attack": 2, "immunities": [ "%muddle%"] },
+          "elite": { "health": 7, "move": 0, "attack": 3, "immunities": [ "%muddle%"] }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 0, "attack": 2, "immunities": [ "%muddle%"] },
+          "elite": { "health": 9, "move": 0, "attack": 3, "immunities": [ "%muddle%"] }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 8, "move": 0, "attack": 2, "immunities": [ "%muddle%"] },
+          "elite": { "health": 12, "move": 0, "attack": 3, "immunities": [ "%muddle%"] }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 9, "move": 0, "attack": 3, "immunities": [ "%muddle%"] },
+          "elite": { "health": 14, "move": 0, "attack": 4, "immunities": [ "%muddle%"] }
+        },
+        {
+          "level": 4,
+          "normal": { "health": 12, "move": 0, "attack": 3, "immunities": [ "%muddle%"] },
+          "elite": { "health": 16, "move": 0, "attack": 5, "immunities": [ "%muddle%"]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 15, "move": 0, "attack": 3, "immunities": [ "%muddle%"] },
+          "elite": { "health": 21, "move": 0, "attack": 5, "immunities": [ "%muddle%"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 18, "move": 0, "attack": 4, "immunities": [ "%muddle%"] },
+          "elite": { "health": 26, "move": 0, "attack": 6, "immunities": [ "%muddle%"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 21, "move": 0, "attack": 5, "immunities": [ "%muddle%"] },
+          "elite": { "health": 34, "move": 0, "attack": 7, "immunities": [ "%muddle%"]}
+        }
+      ]
+    },
     "Bandit Archer (2e)": {
       "deck": "Archer (FH)",
       "display": "Bandit Archer",
@@ -405,8 +574,8 @@
         },
         {
           "level": 1,
-          "normal": { "health": 5, "move": 2, "attack": 2 },
-          "elite": { "health": 7, "move": 2, "attack": 3}
+          "normal": { "health": 5, "move": 3, "attack": 2 },
+          "elite": { "health": 7, "move": 3, "attack": 3}
         },
         {
           "level": 2,
@@ -425,66 +594,114 @@
         },
         {
           "level": 5,
-          "normal": { "health": 10, "move": 3, "attack": 3 },
+          "normal": { "health": 9, "move": 4, "attack": 3 },
           "elite": {"health": 12, "move": 4, "attack": 4, "attributes": [ "%poison%" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 10, "move": 3, "attack": 4 },
+          "normal": { "health": 9, "move": 4, "attack": 4 },
           "elite": {"health": 13, "move": 4, "attack": 5, "attributes": [ "%poison%" ]}
         },
         {
           "level": 7,
-          "normal": { "health": 13, "move": 3, "attack": 4 },
+          "normal": { "health": 12, "move": 4, "attack": 4 },
           "elite": {"health": 17, "move": 4, "attack": 5, "attributes": [ "%poison%" ]}
         }
       ]
     },
-    "Bandit Guard (2e)": {
-      "deck": "Guard (FH)",
-      "display": "Bandit Guard",
+    "Bandit Scout (2e)": {
+      "deck": "Scout (2e)",
+      "display": "Bandit Scout",
       "gfx": "Bandit Guard",
       "count": 6,
       "levels": [
         {
           "level": 0,
           "normal": { "health": 5, "move": 2, "attack": 2 },
-          "elite": { "health": 9, "move": 2, "attack": 3 }
+          "elite": { "health": 7, "move": 2, "attack": 3 }
         },
         {
           "level": 1,
           "normal": { "health": 6, "move": 3, "attack": 2 },
-          "elite": { "health": 9, "move": 2, "attack": 3, "attributes": [ "%shield% 1" ]}
+          "elite": { "health": 8, "move": 3, "attack": 3, "attributes": [ "%shield% 1" ]}
         },
         {
           "level": 2,
-          "normal": { "health": 6, "move": 3, "attack": 3 },
-          "elite": { "health": 10, "move": 2, "attack": 4, "attributes": [ "%shield% 1" ]}
+          "normal": { "health": 7, "move": 3, "attack": 3 },
+          "elite": { "health": 9, "move": 3, "attack": 4, "attributes": [ "%shield% 1" ]}
         },
         {
           "level": 3,
-          "normal": { "health": 9, "move": 3, "attack": 3 },
-          "elite": { "health": 10, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ]}
+          "normal": { "health": 10, "move": 3, "attack": 3 },
+          "elite": { "health": 12, "move": 3, "attack": 4, "attributes": [ "%shield% 1" ]}
         },
         {
           "level": 4,
-          "normal": { "health": 10, "move": 4, "attack": 3 },
-          "elite": { "health": 11, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 2" ]}
+          "normal": { "health": 11, "move": 4, "attack": 3, "attributes": [ "%muddle%" ]},
+          "elite": { "health": 14, "move": 4, "attack": 4, "attributes": [ "%muddle%", "%shield% 1" ]}
         },
         {
           "level": 5,
-          "normal": { "health": 11, "move": 4, "attack": 4 },
-          "elite": { "health": 12, "move": 3, "attack": 5, "attributes": [ "%muddle%", "%shield% 2" ]}
+          "normal": { "health": 11, "move": 4, "attack": 4,  "attributes": [ "%muddle%" ]},
+          "elite": { "health": 15, "move": 4, "attack": 5, "attributes": [ "%muddle%", "%shield% 1" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 14, "move": 4, "attack": 4 },
-          "elite": { "health": 14, "move": 4, "attack": 5, "attributes": [ "%muddle%", "%shield% 2" ]}
+          "normal": { "health": 16, "move": 4, "attack": 4, "attributes": [ "%muddle%" ] },
+          "elite": { "health": 18, "move": 4, "attack": 5, "attributes": [ "%muddle%", "%shield% 2" ]}
         },
         {
           "level": 7,
-          "normal": { "health": 16, "move": 5, "attack": 4 },
-          "elite": { "health": 14, "move": 3, "attack": 5, "attributes": [ "%muddle%", "%shield% 3" ]}
+          "normal": { "health": 19, "move": 4, "attack": 4,  "attributes": [ "%muddle%" ]},
+          "elite": { "health": 22, "move": 4, "attack": 5, "attributes": [ "%muddle%", "%shield% 2" ]}
+        }
+      ]
+    },
+    "Black Imp (2e)": {
+      "gfx": "Black Imp",
+      "display": "Black Imp",
+      "deck": "Imp (FH)",
+      "count": 10,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 3, "move": 1, "attack": 1 },
+          "elite": { "health": 3, "move": 1, "attack": 2, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 3, "move": 1, "attack": 1, "attributes": [ "%poison%" ] },
+          "elite": { "health": 5, "move": 1, "attack": 2, "attributes": [ "%poison%" ] }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 4, "move": 1, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": { "health": 7, "move": 1, "attack": 2, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 4, "move": 1, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": { "health": 7, "move": 1, "attack": 2, "attributes": [ "^^All attacks","^^targeting","^^Black Imp gain","^^disadvantage", "%poison%" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 5, "move": 1, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": { "health": 7, "move": 1, "attack": 3, "attributes": [ "^^All attacks","^^targeting","^^Black Imp gain","^^disadvantage", "%poison%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 7, "move": 1, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": { "health": 9, "move": 1, "attack": 3, "attributes": [ "^^All attacks","^^targeting","^^Black Imp gain","^^disadvantage", "%poison%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 9, "move": 1, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": { "health": 12, "move": 1, "attack": 4, "attributes": [ "^^All attacks","^^targeting","^^Black Imp gain","^^disadvantage", "%poison%"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 13, "move": 1, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": { "health": 18, "move": 1, "attack": 4, "attributes": [ "^^All attacks","^^targeting","^^Black Imp gain","^^disadvantage", "%poison%" ]}
         }
       ]
     },
@@ -496,43 +713,43 @@
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 7, "move": 3, "attack": 3 },
-          "elite": { "health": 11, "move": 3, "attack": 4 }
+          "normal": { "health": 7, "move": 3, "attack": 3,"immunities": [ "%disarm%"] },
+          "elite": { "health": 11, "move": 3, "attack": 4,"immunities": [ "%disarm%"] }
         },
         {
           "level": 1,
-          "normal": { "health": 9, "move": 3, "attack": 3 },
-          "elite": { "health": 14, "move": 3, "attack": 4 }
+          "normal": { "health": 9, "move": 3, "attack": 3, "immunities": [ "%disarm%"]},
+          "elite": { "health": 14, "move": 3, "attack": 4, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]}
         },
         {
           "level": 2,
-          "normal": { "health": 11, "move": 4, "attack": 3 },
-          "elite": { "health": 17, "move": 4, "attack": 4 }
+          "normal": { "health": 11, "move": 4, "attack": 3, "immunities": [ "%disarm%"]},
+          "elite": { "health": 17, "move": 4, "attack": 4, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]}
         },
         {
           "level": 3,
-          "normal": { "health": 13, "move": 4, "attack": 4 },
-          "elite": { "health": 20, "move": 4, "attack": 5 }
+          "normal": { "health": 13, "move": 4, "attack": 4, "immunities": [ "%disarm%"]},
+          "elite": { "health": 20, "move": 4, "attack": 5, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]}
         },
         {
           "level": 4,
-          "normal": { "health": 16, "move": 4, "attack": 4 },
-          "elite": { "health": 21, "move": 5, "attack": 5, "attributes": [ "%wound%" ]}
+          "normal": { "health": 15, "move": 4, "attack": 4, "attributes": [ "%wound%" ], "immunities": [ "%disarm%"]},
+          "elite": { "health": 21, "move": 5, "attack": 5, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]}
         },
         {
           "level": 5,
-          "normal": { "health": 17, "move": 5, "attack": 4, "attributes": [ "%wound%" ]},
-          "elite": { "health": 24, "move": 5, "attack": 6, "attributes": [ "%wound%" ]}
+          "normal": { "health": 17, "move": 5, "attack": 4, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]},
+          "elite": { "health": 24, "move": 5, "attack": 6, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]}
         },
         {
           "level": 6,
-          "normal": { "health": 19, "move": 5, "attack": 5, "attributes": [ "%wound%" ]},
-          "elite": { "health": 28, "move": 5, "attack": 7, "attributes": [ "%wound%" ]}
+          "normal": { "health": 21, "move": 5, "attack": 5, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]},
+          "elite": { "health": 29, "move": 5, "attack": 7, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]}
         },
         {
           "level": 7,
-          "normal": {"health": 22, "move": 5, "attack": 5, "attributes": [ "%wound%" ]},
-          "elite": { "health": 33, "move": 5, "attack": 7, "attributes": [ "%wound%" ]}
+          "normal": {"health": 27, "move": 5, "attack": 5, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]},
+          "elite": { "health": 37, "move": 5, "attack": 7, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]}
         }
       ]
     },
@@ -569,18 +786,112 @@
         },
         {
           "level": 5,
-          "normal": { "health": 9, "move": 2, "attack": 4, "attributes": [ "%shield% 1" ]},
+          "normal": { "health": 8, "move": 2, "attack": 4, "attributes": [ "%shield% 1" ]},
           "elite": { "health": 11, "move": 2, "attack": 5, "attributes": [ "%pierce% 3", "%shield% 2" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 9, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ]},
-          "elite": { "health": 12, "move": 3, "attack": 6, "attributes": [ "%pierce% 3", "%shield% 2" ]}
+          "normal": { "health": 10, "move": 2, "attack": 4, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 14, "move": 2, "attack": 5, "attributes": [ "%pierce% 3", "%shield% 3" ]}
         },
         {
           "level": 7,
-          "normal": { "health": 10, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ]},
-          "elite": { "health": 13, "move": 3, "attack": 6, "attributes": [ "%pierce% 3", "%shield% 3" ]}
+          "normal": { "health": 11, "move": 2, "attack": 5, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 16, "move": 2, "attack": 6, "attributes": [ "%pierce% 3", "%shield% 3" ]}
+        }
+      ]
+    },
+    "City Guard (2e)": {
+      "display": "City Guard",
+      "gfx": "City Guard",
+      "deck": "Guard (FH)",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 2 },
+          "elite": { "health": 6,  "move": 2,  "attack": 3, "attributes": [ "%shield% 1" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 6, "move": 2, "attack": 3, "attributes": [ "%shield% 2" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 9, "move": 2, "attack": 3, "attributes": [ "%shield% 2" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 8, "move": 2, "attack": 3, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 9, "move": 2, "attack": 4, "attributes": [ "%shield% 2", "%retaliate% 1"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 9, "move": 3, "attack": 3, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 10, "move": 3, "attack": 4, "attributes": [  "%shield% 2","%retaliate% 2"]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 13, "move": 3, "attack": 4, "attributes": [  "%shield% 2","%retaliate% 2"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 13, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 15, "move": 3, "attack": 4, "attributes": [ "%shield% 3","%retaliate% 3" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 17, "move": 3, "attack": 4, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 20, "move": 3, "attack": 5, "attributes": [ "%shield% 3","%retaliate% 3"]}
+        }
+      ]
+    },
+    "Crystal Rot": {
+      "deck": "Crystal Rot",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 1,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"] },
+          "elite": { "health": 8, "move": 2, "attack": 2,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"] }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 2, "attack": 2,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"] },
+          "elite": { "health": 9, "move": 2, "attack": 3,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 3, "attack": 2,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]},
+          "elite": { "health": 11, "move": 3, "attack": 3,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 10, "move": 3, "attack": 2,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]},
+          "elite": { "health": 16, "move": 3, "attack": 3,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 11, "move": 3, "attack": 3,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]},
+          "elite": { "health": 18, "move": 3, "attack": 4,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 13, "move": 3, "attack": 3,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"] },
+          "elite": { "health": 21, "move": 3, "attack": 4,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 18, "move": 3, "attack": 3,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]},
+          "elite": { "health": 29, "move": 3, "attack": 4,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 21, "move": 3, "attack": 4,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]},
+          "elite": { "health": 33, "move": 3, "attack": 5,"attributes": [ "^^Living Bones,","^^Living Corpses", "^^and Living Spirits","^^within %range% 3 gain","^^advantage on","^^all their","^^attacks"]}
         }
       ]
     },
@@ -597,45 +908,430 @@
         },
         {
           "level": 1,
-          "normal": { "health": 5, "move": 2, "attack": 1 },
-          "elite": { "health": 9, "move": 2, "attack": 2 }
+          "normal": { "health": 6, "move": 2, "attack": 1 },
+          "elite": { "health": 9, "move": 2, "attack": 2, "attributes": [ "%curse%" ]}
         },
         {
           "level": 2,
-          "normal": { "health": 7, "move": 2, "attack": 1 },
-          "elite": { "health": 12, "move": 2, "attack": 2 }
+          "normal": { "health": 7, "move": 3, "attack": 1 },
+          "elite": { "health": 11, "move": 3, "attack": 2, "attributes": [ "%curse%" ]}
         },
         {
           "level": 3,
-          "normal": { "health": 9, "move": 3, "attack": 1 },
-          "elite": { "health": 13, "move": 3, "attack": 2, "attributes": [ "%curse%" ]}
+          "normal": { "health": 8, "move": 3, "attack": 2 },
+          "elite": { "health": 15, "move": 3, "attack": 2, "attributes": [ "%curse%" ]}
         },
         {
           "level": 4,
-          "normal": { "health": 10, "move": 3, "attack": 2 },
-          "elite": { "health": 15, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+          "normal": { "health": 9, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 16, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
         },
         {
           "level": 5,
           "normal": { "health": 11, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
-          "elite": { "health": 18, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+          "elite": { "health": 20, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 14, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
-          "elite": { "health": 22, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+          "normal": { "health": 16, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 26, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
         },
         {
           "level": 7,
-          "normal": { "health": 15, "move": 3, "attack": 3, "attributes": [ "%curse%" ]},
-          "elite": { "health": 25, "move": 3, "attack": 4, "attributes": [ "%curse%" ]}
+          "normal": { "health": 18, "move": 3, "attack": 3, "attributes": [ "%curse%" ]},
+          "elite": { "health": 30, "move": 3, "attack": 4, "attributes": [ "%curse%" ]}
+        }
+      ]
+    },
+    "Deep Terror (2e)": {
+      "gfx": "Deep Terror",
+      "display": "Deep Terror",
+      "deck": "Deep Terror (2e)",
+      "count": 10,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 3, "move": 0, "attack": 2 },
+          "elite": { "health": 5, "move": 0, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 4, "move": 0, "attack": 2, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 6, "move": 0, "attack": 3, "attributes": [ "%retaliate% 1" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 4, "move": 0, "attack": 3, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 7, "move": 0, "attack": 4, "attributes": [ "%retaliate% 1" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 5, "move": 0, "attack": 3, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 8, "move": 0, "attack": 4, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 7, "move": 0, "attack": 3, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 9, "move": 0, "attack": 5, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 7, "move": 0, "attack": 4, "attributes": [ "%retaliate% 3" ]},
+          "elite": { "health": 11, "move": 0, "attack": 5, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 9, "move": 0, "attack": 4, "attributes": [ "%retaliate% 3" ]},
+          "elite": {"health": 13, "move": 0, "attack": 6, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 9, "move": 0, "attack": 5, "attributes": [ "%retaliate% 4" ]},
+          "elite": { "health": 16, "move": 0, "attack": 6, "attributes": [ "%retaliate% 4" ]}
+        }
+      ]
+    },
+    "Earth Demon (2e)": {
+      "gfx": "Earth Demon",
+      "display": "Earth Demon",
+      "deck": "Earth Demon (FH)",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 7, "move": 1, "attack": 3 },
+          "elite": { "health": 10, "move": 2, "attack": 4 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 9, "move": 1, "attack": 3 },
+          "elite": { "health": 13, "move": 2, "attack": 4 }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 12, "move": 1, "attack": 3 },
+          "elite": { "health": 18, "move": 2, "attack": 4 }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 13, "move": 2, "attack": 3 },
+          "elite": { "health": 20, "move": 2, "attack": 4, "attributes": [ "%immobilize%" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 15, "move": 2, "attack": 4 },
+          "elite": { "health": 21, "move": 3, "attack": 5, "attributes": [ "%immobilize%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 17, "move": 2, "attack": 4, "attributes": [ "%immobilize%" ]},
+          "elite": { "health": 25, "move": 3, "attack": 5, "attributes": [ "%immobilize%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 21, "move": 3, "attack": 4, "attributes": [ "%immobilize%" ]},
+          "elite": { "health": 32, "move": 3, "attack": 6, "attributes": [ "%immobilize%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 25, "move": 3, "attack": 5, "attributes": [ "%immobilize%" ]},
+          "elite": { "health": 42, "move": 3, "attack": 7, "attributes": [ "%immobilize%" ]}
+        }
+      ]
+    },
+    "Flame Demon (2e)": {
+      "gfx": "Flame Demon",
+      "display": "Flame Demon",
+      "deck": "Flame Demon (FH)",
+      "count": 6,
+      "flying": true,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 2, "move": 3, "attack": 2, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 3, "move": 3, "attack": 2, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 2, "move": 3, "attack": 2, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 3, "move": 3, "attack": 2, "attributes": [  "%shield% 4","%retaliate% 2", "^%range% 3"]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 3, "move": 3, "attack": 3, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 4, "move": 3, "attack": 3, "attributes": ["%shield% 4","%retaliate% 2", "^%range% 3" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 3, "move": 3, "attack": 3, "attributes": [ "%shield% 3","%retaliate% 2", "^%range% 2" ]},
+          "elite": { "health": 5, "move": 3, "attack": 3, "attributes": [ "%shield% 4","%retaliate% 2", "^%range% 3" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 3, "move": 4, "attack": 3, "attributes": [ "%shield% 3","%retaliate% 3", "^%range% 2" ]},
+          "elite": { "health": 5, "move": 4, "attack": 4, "attributes": [ "%shield% 4","%retaliate% 3", "^%range% 3" ]}
+        },
+        {
+          "level": 5,
+          "normal": {"health": 4, "move": 4, "attack": 3, "attributes": [ "%shield% 4","%retaliate% 3", "^%range% 2" ]},
+          "elite": { "health": 6, "move": 4, "attack": 4, "attributes": [ "%shield% 5","%retaliate% 3", "^%range% 3" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 4, "move": 4, "attack": 4, "attributes": [ "%shield% 4","%retaliate% 4", "^%range% 2" ]},
+          "elite": { "health": 7, "move": 4, "attack": 5, "attributes": [ "%shield% 5","%retaliate% 4", "^%range% 3" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 6, "move": 4, "attack": 4, "attributes": ["%shield% 4","%retaliate% 5", "^%range% 2" ]},
+          "elite": { "health": 9, "move": 4, "attack": 6, "attributes": [ "%shield% 5","%retaliate% 5", "^%range% 3"]}
+        }
+      ]
+    },
+    "Frost Demon (2e)": {
+      "gfx": "Frost Demon",
+      "display" : "Frost Demon",
+      "deck": "Frost Demon (FH)",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 3 },
+          "elite": { "health": 10, "move": 3, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 2, "attack": 3, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 3, "attack": 3, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 12, "move": 4, "attack": 4, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 8, "move": 3, "attack": 4, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 14, "move": 4, "attack": 4, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 11, "move": 3, "attack": 4, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 19, "move": 4, "attack": 4, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 13, "move": 3, "attack": 4, "attributes": [ "%retaliate% 3" ]},
+          "elite": { "health": 22, "move": 4, "attack": 5, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 18, "move": 3, "attack": 5, "attributes": [ "%retaliate% 3" ]},
+          "elite": { "health": 29, "move": 4, "attack": 6, "attributes": [ "%retaliate% 4" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 25, "move": 3, "attack": 5, "attributes": [ "%retaliate% 3" ]},
+          "elite": { "health": 40, "move": 4, "attack": 7, "attributes": [ "%retaliate% 4" ]}
+        }
+      ]
+    },
+    "Forest Imp (2e)": {
+      "gfx": "Forest Imp FH",
+      "display": "Forest Imp",
+      "deck": "Imp (FH)",
+      "count": 10,
+      "flying": true,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 1, "move": 3, "attack": 1, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 4, "move": 3, "attack": 1, "attributes": [ "%shield% 1" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 2, "move": 3, "attack": 1, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 5, "move": 3, "attack": 2, "attributes": [ "%shield% 1" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 2, "move": 3, "attack": 2, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 6, "move": 3, "attack": 2, "attributes": [ "%shield% 1", "%curse%"]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 3, "move": 4, "attack": 2, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 7, "move": 4, "attack": 2, "attributes": [  "%shield% 1", "%curse%"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 3, "move": 4, "attack": 2, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 7, "move": 4, "attack": 2, "attributes": [ "%shield% 2","%curse%"]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 4, "move": 4, "attack": 2, "attributes": [  "%shield% 2","%curse%"]},
+          "elite": { "health": 8, "move": 4, "attack": 3, "attributes": [  "%shield% 2","%curse%"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 5, "move": 4, "attack": 3, "attributes": [ "%shield% 2","%curse%"]},
+          "elite": { "health": 10, "move": 4, "attack": 4, "attributes": [  "%shield% 2","%curse%"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 8, "move": 4, "attack": 3, "attributes": [ "%shield% 2","%curse%"]},
+          "elite": { "health": 14, "move": 4, "attack": 4, "attributes": [ "%shield% 2","%curse%"]}
+        }
+      ]
+    },
+    "Giant Viper (2e)":{
+      "display": "Giant Viper",
+      "deck": "Giant Viper (2e)",
+      "count": 10,
+      "levels": [
+        {
+          "level": 0,
+          "normal": {"health": 2, "move": 2, "attack": 1},
+          "elite": {"health": 3, "move": 2, "attack": 2, "attributes": [ "%poison%" ]}},
+        {
+          "level": 1,
+          "normal": {"health": 3, "move": 2, "attack": 1, "attributes": [ "%poison%" ]},
+          "elite": {"health": 5, "move": 2, "attack": 2, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 2,
+          "normal": {"health": 4, "move": 3, "attack": 1, "attributes": [ "%poison%" ]},
+          "elite": {"health": 7, "move": 3, "attack": 2, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 3,
+          "normal": {"health": 4, "move": 3, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": {"health": 8, "move": 3, "attack": 3, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 4,
+          "normal": {"health": 6, "move": 3, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": {"health": 11, "move": 3, "attack": 3, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 5,
+          "normal": {"health": 7, "move": 3, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": {"health": 13, "move": 4, "attack": 3, "attributes": [ "%poison%" ]
+          }
+        },
+        {
+          "level": 6,
+          "normal": {"health": 9, "move": 4, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": {"health": 16, "move": 4, "attack": 4, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 7,
+          "normal": {"health": 12, "move": 4, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": {"health": 20, "move": 5, "attack": 4, "attributes": [ "%poison%" ]}
+        }
+      ]
+    },
+    "Harrower Infester (2e)": {
+      "gfx": "Harrower Infester",
+      "display": "Harrower Infester",
+      "deck": "Harrower Infester (2e)",
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 6, "move": 2, "attack": 2 },
+          "elite": { "health": 12, "move": 2, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "%retaliate% 1" ]},
+          "elite": {"health": 12, "move": 3, "attack": 2, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 8, "move": 2, "attack": 2, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 14, "move": 3, "attack": 3, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 10, "move": 2, "attack": 3, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 17, "move": 3, "attack": 3, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 12, "move": 3, "attack": 3, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 19, "move": 3, "attack": 4, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 12, "move": 3, "attack": 4, "attributes": [ "%retaliate% 3" ]},
+          "elite": { "health": 21, "move": 3, "attack": 5, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 15, "move": 3, "attack": 5, "attributes": [ "%retaliate% 3" ]},
+          "elite": { "health": 27, "move": 3, "attack": 6, "attributes": [ "%retaliate% 4" ],"immunities": [ "%poison%"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 18, "move": 3, "attack": 5, "attributes": [ "%retaliate% 4" ],"immunities": [ "%poison%"]},
+          "elite": { "health": 32, "move": 4, "attack": 6, "attributes": [ "%retaliate% 4" ],  "immunities": [ "%poison%"] }
+        }
+      ]
+    },
+    "Hound (2e)": {
+      "gfx": "Hound",
+      "display": "Hound",
+      "deck": "Hound (FH)",
+      "count": 10,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 3, "attack": 2 },
+          "elite": { "health": 6, "move": 5, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 4, "move": 4, "attack": 2, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 6, "move": 5, "attack": 2, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 6, "move": 4, "attack": 2, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 7, "move": 5, "attack": 3, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 8, "move": 4, "attack": 2, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 8, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 9, "move": 4, "attack": 3, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 11, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 10, "move": 4, "attack": 3, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 13, "move": 5, "attack": 4, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 14, "move": 5, "attack": 3, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 17, "move": 6, "attack": 5, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 17, "move": 5, "attack": 4, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 23, "move": 6, "attack": 6, "attributes": [ "%retaliate% 3" ]}
         }
       ]
     },
     "Inox Archer (2e)": {
       "deck": "Archer (FH)",
-      "display": "Cultist",
-      "gfx": "Cultist",
+      "display": "Inox Archer",
+      "gfx": "Inox Archer",
       "count": 6,
       "levels": [
         {
@@ -645,134 +1341,231 @@
         },
         {
           "level": 1,
-          "normal": { "health": 6, "move": 2, "attack": 2 },
-          "elite": { "health": 8, "move": 2, "attack": 3}
+          "normal": { "health": 6, "move": 2, "attack": 2,"attributes": [ "%wound%" ] },
+          "elite": { "health": 9, "move": 2, "attack": 3,"attributes": [ "%wound%" ]}
         },
         {
           "level": 2,
-          "normal": { "health": 8, "move": 2, "attack": 2 },
-          "elite": { "health": 11, "move": 2, "attack": 3}
+          "normal": { "health": 8, "move": 2, "attack": 2, "attributes": [ "%wound%" ]},
+          "elite": { "health": 12, "move": 2, "attack": 3,"attributes": [ "%wound%" ]}
         },
         {
           "level": 3,
-          "normal": { "health": 9, "move": 2, "attack": 3},
-          "elite": { "health": 13, "move": 2, "attack": 4}
+          "normal": { "health": 8, "move": 2, "attack": 3,"attributes": [ "%wound%" ]},
+          "elite": { "health": 13, "move": 2, "attack": 4,"attributes": [ "%wound%" ]}
         },
         {
           "level": 4,
-          "normal": { "health": 10, "move": 3, "attack": 3 },
-          "elite": { "health": 14, "move": 3, "attack": 4, "attributes": [ "%wound%" ]}
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%wound%" ]},
+          "elite": { "health": 16, "move": 3, "attack": 4, "attributes": [ "%wound%" ]}
         },
         {
           "level": 5,
-          "normal": { "health": 12, "move": 3, "attack": 3 },
-          "elite": { "health": 17, "move": 3, "attack": 4, "attributes": [ "%wound%" ]}
+          "normal": { "health": 14, "move": 3, "attack": 3,"attributes": [ "%wound%" ] },
+          "elite": { "health": 22, "move": 3, "attack": 4, "attributes": [ "%wound%" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 12, "move": 3, "attack": 4, "attributes": [ "%wound%" ]},
-          "elite": { "health": 19, "move": 3, "attack": 5, "attributes": [ "%wound%" ]}
+          "normal": { "health": 16, "move": 3, "attack": 4, "attributes": [ "%wound%" ]},
+          "elite": { "health": 25, "move": 3, "attack": 5, "attributes": [ "%wound%" ]}
         },
         {
           "level": 7,
-          "normal": { "health": 15, "move": 3, "attack": 4, "attributes": [ "%wound%" ]},
-          "elite": { "health": 23, "move": 3, "attack": 5, "attributes": [ "%wound%" ]}
+          "normal": { "health": 23, "move": 3, "attack": 4, "attributes": [ "%wound%" ]},
+          "elite": { "health": 35, "move": 3, "attack": 5, "attributes": [ "%wound%" ]}
         }
       ]
     },
     "Inox Guard (2e)": {
       "deck": "Guard (FH)",
-      "display": "Cultist",
-      "gfx": "Cultist",
+      "display": "Inox Guard",
+      "gfx": "Inox Guard",
       "count": 6,
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 5, "move": 2, "attack": 2 },
-          "elite": { "health": 9, "move": 1, "attack": 3, "attributes": [ "%retaliate% 1" ]}
+          "normal": { "health": 7, "move": 2, "attack": 2 },
+          "elite": { "health": 11, "move": 2, "attack": 3, "attributes": [ "%retaliate% 1" ]}
         },
         {
           "level": 1,
-          "normal": { "health": 8, "move": 2, "attack": 2 },
-          "elite": { "health": 10, "move": 2, "attack": 3, "attributes": [ "%retaliate% 2" ]}
+          "normal": { "health": 8, "move": 3, "attack": 2 },
+          "elite": { "health": 13, "move": 3, "attack": 3, "attributes": [ "%retaliate% 2" ]}
         },
         {
           "level": 2,
-          "normal": { "health": 9, "move": 2, "attack": 3 },
-          "elite": {"health": 12, "move": 2, "attack": 4, "attributes": [ "%retaliate% 2" ]}
+          "normal": { "health": 12, "move": 3, "attack": 2,"attributes": [ "%retaliate% 1" ] },
+          "elite": {"health": 15, "move": 3, "attack": 4, "attributes": [ "%retaliate% 2" ]}
         },
         {
           "level": 3,
-          "normal": { "health": 11, "move": 3, "attack": 3 },
-          "elite": { "health": 15, "move": 2, "attack": 4, "attributes": [ "%retaliate% 3" ]}
+          "normal": { "health": 13, "move": 3, "attack": 3,"attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 20, "move": 3, "attack": 4, "attributes": [ "%retaliate% 2" ]}
         },
         {
           "level": 4,
-          "normal": { "health": 12, "move": 3, "attack": 3, "attributes": [ "%retaliate% 1" ]},
-          "elite": { "health": 17, "move": 2, "attack": 5, "attributes": [ "%retaliate% 3" ]}
+          "normal": { "health": 16, "move": 4, "attack": 3, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 23, "move": 4, "attack": 5, "attributes": [ "%retaliate% 2" ]}
         },
         {
           "level": 5,
-          "normal": { "health": 13, "move": 3, "attack": 4, "attributes": [ "%retaliate% 1" ]},
-          "elite": { "health": 19, "move": 2, "attack": 5, "attributes": [ "%retaliate% 4" ]}
+          "normal": { "health": 20, "move": 4, "attack": 3, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 28, "move": 4, "attack": 5, "attributes": [ "%retaliate% 2" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 16, "move": 3, "attack": 4, "attributes": [ "%retaliate% 1" ]},
-          "elite": { "health": 21, "move": 3, "attack": 5, "attributes": [ "%retaliate% 4" ]}
+          "normal": { "health": 28, "move": 4, "attack": 4, "attributes": [ "%retaliate% 1" ]},
+          "elite": { "health": 34, "move": 4, "attack": 6, "attributes": [ "%retaliate% 2" ]}
         },
         {
           "level": 7,
-          "normal": { "health": 19, "move": 3, "attack": 4, "attributes": [ "%retaliate% 2" ]},
-          "elite": { "health": 23, "move": 3, "attack": 6, "attributes": [ "%retaliate% 4" ]}
+          "normal": { "health": 32, "move": 4, "attack": 4, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 40, "move": 4, "attack": 6, "attributes": [ "%retaliate% 3" ]}
         }
       ]
     },
     "Inox Priest (2e)": {
       "deck": "Priest",
       "display": "Inox Priest",
-      "gfx": "Inox Priest",
+      "gfx": "Inox Shaman",
       "count": 4,
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 4, "move": 1, "attack": 2 },
-          "elite": { "health": 6, "move": 2, "attack": 3 }
+          "normal": { "health": 5, "move": 1, "attack": 2,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] },
+          "elite": { "health": 7, "move": 2, "attack": 3,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] }
         },
         {
           "level": 1,
-          "normal": { "health": 6, "move": 1, "attack": 2 },
-          "elite": { "health": 9, "move": 2, "attack": 3 }
+          "normal": { "health": 7, "move": 1, "attack": 2,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] },
+          "elite": { "health": 10, "move": 2, "attack": 3,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] }
         },
         {
           "level": 2,
-          "normal": { "health": 7, "move": 2, "attack": 2 },
-          "elite": { "health": 11, "move": 3, "attack": 3 }
+          "normal": { "health": 8, "move": 2, "attack": 2,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] },
+          "elite": { "health": 12, "move": 3, "attack": 3,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] }
         },
         {
           "level": 3,
-          "normal": { "health": 9, "move": 2, "attack": 2 },
-          "elite": { "health": 14, "move": 3, "attack": 3 }
+          "normal": { "health": 11, "move": 2, "attack": 2,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] },
+          "elite": { "health": 16, "move": 3, "attack": 3,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] }
         },
         {
           "level": 4,
-          "normal": { "health": 10, "move": 2, "attack": 3 },
-          "elite": { "health": 16, "move": 3, "attack": 4 }
+          "normal": { "health": 12, "move": 2, "attack": 3,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] },
+          "elite": { "health": 18, "move": 3, "attack": 4,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] }
         },
         {
           "level": 5,
-          "normal": { "health": 13, "move": 2, "attack": 3 },
-          "elite": { "health": 20, "move": 3, "attack": 4}
+          "normal": { "health": 15, "move": 2, "attack": 3,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] },
+          "elite": { "health": 24, "move": 3, "attack": 4,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 15, "move": 3, "attack": 3 },
-          "elite": { "health": 24, "move": 4, "attack": 4 }
+          "normal": { "health": 20, "move": 3, "attack": 3,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] },
+          "elite": { "health": 32, "move": 4, "attack": 4,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] }
         },
         {
           "level": 7,
-          "normal": { "health": 16, "move": 3, "attack": 4 },
-          "elite": { "health": 27, "move": 4, "attack": 5 }
+          "normal": { "health": 25, "move": 3, "attack": 4,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] },
+          "elite": { "health": 36, "move": 4, "attack": 5,"attributes": [ "^^Adds %safeguard% to","^^all its heals" ] }
+        }
+      ]
+    },
+    "Living Bones (2e)": {
+      "gfx": "Living Bones",
+      "display": "Living Bones",
+      "deck": "Living Bones (FH)",
+      "count": 10,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 1, "attributes": [ "%target% 2" ]},
+          "elite": { "health": 6, "move": 4, "attack": 2, "attributes": [ "%target% 2" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 5, "move": 3, "attack": 1, "attributes": [  "%shield% 1","%target% 2"]},
+          "elite": { "health": 6, "move": 4, "attack": 2, "attributes": [  "%shield% 1","%target% 3"]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 5, "move": 3, "attack": 2, "attributes": [  "%shield% 1","%target% 2"]},
+          "elite": { "health": 7, "move": 4, "attack": 3, "attributes": [  "%shield% 1","%target% 3"]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 7, "move": 3, "attack": 2, "attributes": [  "%shield% 1","%target% 2"]},
+          "elite": { "health": 9, "move": 4, "attack": 3, "attributes": [  "%shield% 1", "%target% 3"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 7, "move": 3, "attack": 3, "attributes": [  "%shield% 1","%target% 2"]},
+          "elite": { "health": 10, "move": 4, "attack": 4, "attributes": [  "%shield% 1","%target% 3"]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 9, "move": 3, "attack": 3, "attributes": [ "%shield% 1","%target% 2"]},
+          "elite": { "health": 13, "move": 4, "attack": 4, "attributes": [ "%shield% 1","%target% 3"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 12, "move": 4, "attack": 3, "attributes": [  "%shield% 1","%target% 2"]},
+          "elite": { "health": 18, "move": 5, "attack": 4, "attributes": [  "%shield% 1","%target% 3"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 15, "move": 4, "attack": 4, "attributes": [  "%shield% 1","%target% 2"]},
+          "elite": { "health": 21, "move": 6, "attack": 5, "attributes": [  "%shield% 1","%target% 3"]}
+        }
+      ]
+    },
+    "Living Spirit (2e)": {
+      "gfx": "Living Spirit",
+      "display": "Living Spirit",
+      "deck": "Living Spirit (FH)",
+      "count": 6,
+      "flying": true,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 2, "move": 2, "attack": 2, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 3, "move": 3, "attack": 3, "attributes": [ "%shield% 2" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 2, "move": 2, "attack": 2, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 3, "move": 3, "attack": 3, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 2, "move": 2, "attack": 3, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 3, "move": 3, "attack": 4, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 3, "move": 3, "attack": 3, "attributes": [ "%shield% 2" ]},
+          "elite": { "health": 4, "move": 4, "attack": 4, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 3, "move": 3, "attack": 3, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 4, "move": 4, "attack": 4, "attributes": [ "%shield% 4" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 3, "move": 3, "attack": 4, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 5, "move": 4, "attack": 5, "attributes": [ "%shield% 4" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 6, "move": 3, "attack": 4, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 8, "move": 4, "attack": 5, "attributes": [ "%shield% 4" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 7, "move": 4, "attack": 5, "attributes": [ "%shield% 3" ]},
+          "elite": { "health": 10, "move": 4, "attack": 6, "attributes": [ "%shield% 4" ]}
         }
       ]
     },
@@ -784,50 +1577,532 @@
       "levels": [
         {
           "level": 0,
-          "normal": { "health": 5, "move": 1, "attack": 3 },
-          "elite": { "health": 10, "move": 1, "attack": 3 }
+          "normal": { "health": 5, "move": 1, "attack": 3, "immunities": [ "%poison%"]},
+          "elite": { "health": 10, "move": 1, "attack": 3, "immunities": [ "%poison%"]}
         },
         {
           "level": 1,
-          "normal": { "health": 7, "move": 1, "attack": 3 },
-          "elite": { "health": 10, "move": 1, "attack": 4 }
+          "normal": { "health": 8, "move": 1, "attack": 3, "immunities": [ "%poison%"]},
+          "elite": { "health": 11, "move": 1, "attack": 4, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]}
         },
         {
           "level": 2,
-          "normal": { "health": 9, "move": 1, "attack": 3 },
-          "elite": { "health": 13, "move": 1, "attack": 4 }
+          "normal": { "health": 10, "move": 1, "attack": 3,"immunities": [ "%poison%"] },
+          "elite": { "health": 15, "move": 1, "attack": 4, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]}
         },
         {
           "level": 3,
-          "normal": { "health": 10, "move": 1, "attack": 4 },
-          "elite": { "health": 13, "move": 2, "attack": 5 }
+          "normal": { "health": 11, "move": 1, "attack": 4, "immunities": [ "%poison%"]},
+          "elite": { "health": 15, "move": 2, "attack": 5,"attributes": [ "%poison%" ], "immunities": [ "%poison%"]}
         },
         {
           "level": 4,
-          "normal": { "health": 11, "move": 2, "attack": 4 },
-          "elite": { "health": 15, "move": 2, "attack": 5, "attributes": [ "%poison%" ]}
+          "normal": { "health": 12, "move": 2, "attack": 4, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]},
+          "elite": { "health": 19, "move": 2, "attack": 5, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]}
         },
         {
           "level": 5,
-          "normal": { "health": 13, "move": 2, "attack": 4 },
-          "elite": { "health": 17, "move": 2, "attack": 6, "attributes": [ "%poison%" ]}
+          "normal": { "health": 14, "move": 2, "attack": 4,"attributes": [ "%poison%" ],"immunities": [ "%poison%"] },
+          "elite": { "health": 21, "move": 2, "attack": 6, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]}
         },
         {
           "level": 6,
-          "normal": { "health": 14, "move": 2, "attack": 4, "attributes": [ "%poison%" ]},
-          "elite": { "health": 21, "move": 2, "attack": 6, "attributes": [ "%poison%" ]}
+          "normal": { "health": 18, "move": 2, "attack": 5, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]},
+          "elite": { "health": 31, "move": 2, "attack": 6, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]}
         },
         {
           "level": 7,
-          "normal": { "health": 15, "move": 2, "attack": 5, "attributes": [ "%poison%" ]},
-          "elite": { "health": 25, "move": 2, "attack": 6, "attributes": [ "%poison%" ]}
+          "normal": { "health": 26, "move": 2, "attack": 5, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]},
+          "elite": { "health": 36, "move": 2, "attack": 7, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]}
+        }
+      ]
+    },
+    "Lurker (2e) placeholder?": {
+      "gfx": "Lurker",
+      "display": "Lurker",
+      "deck": "Lurker (2e)",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": [ "%target% 2" ]},
+          "elite": { "health": 7, "move": 2, "attack": 3, "attributes": [ "%shield% 1","%target% 2" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "%target% 2", "%pierce% 1" ]},
+          "elite": { "health": 9, "move": 2, "attack": 3, "attributes": [  "%shield% 1","%target% 2", "%pierce% 1" ]}
+        },
+        {
+          "level": 2,
+          "normal": {	"health": 9, "move": 3, "attack": 2, "attributes": [ "%target% 2", "%pierce% 1"]},
+          "elite": { "health": 11, "move": 3, "attack": 3, "attributes": [ "%shield% 1", "%target% 2", "%pierce% 2" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%target% 2", "%pierce% 1" ]},
+          "elite": { "health": 13, "move": 3, "attack": 4, "attributes": [ "%shield% 1","%target% 2", "%pierce% 2" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": ["%shield% 1", "%target% 2", "%pierce% 2"]},
+          "elite": { "health": 13, "move": 3, "attack": 4, "attributes": ["%shield% 2", "%target% 2", "%pierce% 3" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 11, "move": 3, "attack": 4, "attributes": ["%shield% 1", "%target% 2", "%pierce% 2" ]},
+          "elite": { "health": 15, "move": 3, "attack": 5, "attributes": [ "%shield% 2","%target% 2", "%pierce% 3" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 16, "move": 4, "attack": 4, "attributes": ["%shield% 1", "%target% 2", "%pierce% 2"]},
+          "elite": { "health": 19, "move": 4, "attack": 6, "attributes": ["%shield% 2", "%target% 2", "%pierce% 3" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 20, "move": 4, "attack": 5, "attributes": ["%shield% 1", "%target% 2", "%pierce% 2" ]},
+          "elite": { "health": 27, "move": 4, "attack": 7, "attributes": ["%shield% 2", "%target% 2", "%pierce% 3" ]}
+        }
+      ]
+    },
+    "Ooze (2e)": {
+      "gfx": "Ooze",
+      "display": "Ooze",
+      "deck": "Ooze (FH)",
+      "count": 10,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 1, "attack": 2 },
+          "elite": { "health": 8, "move": 1, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 5, "move": 1, "attack": 2, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 9, "move": 1, "attack": 2, "attributes": [ "%shield% 1" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 1, "attack": 2, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 11, "move": 1, "attack": 3, "attributes": [ "%shield% 1" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 8, "move": 1, "attack": 3, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 11, "move": 2, "attack": 3, "attributes": [ "%shield% 1", "%poison%"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 9, "move": 2, "attack": 3, "attributes": [ "%shield% 1" ]},
+          "elite": { "health": 12, "move": 2, "attack": 4, "attributes": [ "%shield% 1","%poison%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 10, "move": 2, "attack": 3, "attributes": [ "%shield% 1","%poison%" ]},
+          "elite": { "health": 15, "move": 3, "attack": 4, "attributes": [ "%shield% 1","%poison%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 13, "move": 2, "attack": 4, "attributes": ["%shield% 1","%poison%" ]},
+          "elite": { "health": 21, "move": 3, "attack": 4, "attributes": [ "%shield% 1","%poison%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 17, "move": 2, "attack": 4, "attributes": [ "%shield% 1","%poison%" ]},
+          "elite": { "health": 27, "move": 3, "attack": 5, "attributes": ["%shield% 1","%poison%" ]}
+        }
+      ]
+    },
+    "Night Demon (2e)": {
+      "gfx": "Night Demon",
+      "display": "Night Demon",
+      "deck": "Night Demon (FH)",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 3, "move": 3, "attack": 3, "attributes": ["^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]},
+          "elite": { "health": 5, "move": 4, "attack": 4, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 5, "move": 3, "attack": 3, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]},
+          "elite": { "health": 8, "move": 4, "attack": 4, "attributes": ["^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 6, "move": 3, "attack": 4, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]},
+          "elite": { "health": 11, "move": 4, "attack": 4, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage"]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 7, "move": 4, "attack": 4, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]},
+          "elite": { "health": 13, "move": 4, "attack": 5, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 8, "move": 4, "attack": 5, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage"]},
+          "elite": { "health": 15, "move": 5, "attack": 5, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 11, "move": 4, "attack": 5, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage"]},
+          "elite": { "health": 17, "move": 5, "attack": 6, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 16, "move": 4, "attack": 5, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage"]},
+          "elite": { "health": 23, "move": 5, "attack": 7, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 20, "move": 4, "attack": 6, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage"]},
+          "elite": { "health": 30, "move": 5, "attack": 8, "attributes": [ "^^All attacks","^^targeting Night", "^^Demon gain","^^disadvantage" ]}
+        }
+      ]
+    },
+    "Rending Drake (2e)": {
+      "gfx": "Rending Drake",
+      "display": "Rending Drake",
+      "deck": "Rending Drake (FH)",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 5, "move": 3, "attack": 3 },
+          "elite": { "health": 7, "move": 4, "attack": 4 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 3, "attack": 3, "attributes": [ "%wound%" ]},
+          "elite": { "health": 7, "move": 4, "attack": 5, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 4, "attack": 3, "attributes": [ "%wound%" ]},
+          "elite": { "health": 9, "move": 5, "attack": 5, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 7, "move": 4, "attack": 4, "attributes": [ "%wound%" ]},
+          "elite": { "health": 10, "move": 5, "attack": 6, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 9, "move": 4, "attack": 4, "attributes": [ "%wound%" ]},
+          "elite": { "health": 12, "move": 6, "attack": 6, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 10, "move": 4, "attack": 5, "attributes": [ "%wound%" ]},
+          "elite": { "health": 15, "move": 6, "attack": 6, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 14, "move": 5, "attack": 5, "attributes": [ "%wound%" ]},
+          "elite": { "health": 19, "move": 6, "attack": 7, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 18, "move": 5, "attack": 6, "attributes": [ "%wound%" ]},
+          "elite": { "health": 24, "move": 6, "attack": 8, "attributes": [ "%wound%" ]}
+        }
+      ]
+    },
+    "Savvas Icestorm (2e)": {
+      "gfx": "Savvas Icestorm",
+      "display": "Savvas Icestorm",
+      "deck": "Savvas Icestorm (FH)",
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 7,  "move": 2,  "attack": 2, "attributes": [ "%pierce% 3" ]},
+          "elite": { "health": 12, "move": 2, "attack": 3, "attributes": [ "%pierce% 3" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 10, "move": 2, "attack": 2, "attributes": [ "%pierce% 3" ]},
+          "elite": { "health": 12, "move": 2, "attack": 3, "attributes": [ "%shield% 1","%pierce% 3" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 12, "move": 3, "attack": 2, "attributes": [ "%pierce% 3" ]},
+          "elite": { "health": 15, "move": 3, "attack": 3, "attributes": [ "%shield% 1","%pierce% 3" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 12, "move": 3, "attack": 2, "attributes": [ "%shield% 1","%pierce% 3" ]},
+          "elite": { "health": 17, "move": 3, "attack": 4, "attributes": [ "%shield% 1","%pierce% 3" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 13, "move": 3, "attack": 3, "attributes": [ "%shield% 1","%pierce% 3" ]},
+          "elite": { "health": 17, "move": 4, "attack": 4, "attributes": [ "%shield% 2",  "%pierce% 3" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 15, "move": 3, "attack": 4, "attributes": [ "%shield% 1","%pierce% 3"]},
+          "elite": { "health": 20, "move": 4, "attack": 5, "attributes": [  "%shield% 2", "%pierce% 3"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 16, "move": 4, "attack": 4, "attributes": [ "%shield% 2",  "%pierce% 3" ]},
+          "elite": { "health": 26, "move": 4, "attack": 6, "attributes": [  "%shield% 2", "%pierce% 3"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 20, "move": 4, "attack": 5, "attributes": [ "%shield% 2",  "%pierce% 3" ]},
+          "elite": { "health": 33, "move": 4, "attack": 7, "attributes": [ "%shield% 2",  "%pierce% 3"]}
+        }
+      ]
+    },
+    "Savvas Lavaflow (2e)": {
+      "gfx": "Savvas Lavaflow",
+      "display": "Savvas Lavaflow",
+      "deck": "Savvas Lavaflow (FH)",
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 8, "move": 3, "attack": 2 },
+          "elite": { "health": 13, "move": 3, "attack": 3 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 9, "move": 3, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": { "health": 15, "move": 3, "attack": 3, "attributes": [ "%wound%" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 11, "move": 3, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": { "health": 18, "move": 3, "attack": 3, "attributes": [ "%poison%", "%wound%" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 14, "move": 3, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": { "health": 21, "move": 3, "attack": 4, "attributes": [ "%poison%", "%wound%" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 16, "move": 3, "attack": 4, "attributes": [ "%poison%" ]},
+          "elite": { "health": 25, "move": 4, "attack": 4, "attributes": [ "%poison%", "%wound%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 20, "move": 3, "attack": 4, "attributes": [ "%poison%" ]},
+          "elite": { "health": 30, "move": 4, "attack": 5, "attributes": [ "%poison%", "%wound%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 28, "move": 4, "attack": 4, "attributes": [ "%poison%" ]},
+          "elite": { "health": 40, "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 35, "move": 4, "attack": 5, "attributes": [ "%poison%" ]},
+          "elite": { "health": 50, "move": 4, "attack": 7, "attributes": [ "%poison%", "%wound%" ]}
+        }
+      ]
+    },
+    "Spitting Drake (2e)": {
+      "gfx": "Spitting Drake",
+      "display": "Spitting Drake",
+      "deck": "Spitting Drake (FH)",
+      "count": 6,
+      "flying": true,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 3, "attack": 3 },
+          "elite": { "health": 7, "move": 3, "attack": 4 }
+        },
+        {
+          "level": 1,
+          "normal": { "health":5, "move": 3, "attack": 3,"attributes": [ "%muddle%" ] },
+          "elite": {"health": 9, "move": 3, "attack": 4, "attributes": [ "%muddle%" ]}
+        },
+        {
+          "level": 2,
+          "normal": {"health": 7, "move": 3, "attack": 3, "attributes": [ "%muddle%" ]},
+          "elite": {"health": 10, "move": 3, "attack": 5, "attributes": [ "%muddle%" ]}
+        },
+        {
+          "level": 3,
+          "normal": {"health": 8, "move": 3, "attack": 4, "attributes": [ "%muddle%" ]},
+          "elite": {"health": 13, "move": 3, "attack": 5, "attributes": [ "%muddle%" ]}
+        },
+        {
+          "level": 4,
+          "normal": {"health": 9, "move": 4, "attack": 4, "attributes": [ "%muddle%" ]},
+          "elite": {"health": 16, "move": 4, "attack": 5, "attributes": [ "%muddle%" ]}
+        },
+        {
+          "level": 5,
+          "normal": {"health": 12, "move": 4, "attack": 4, "attributes": [ "%muddle%" ]},
+          "elite": {"health": 19, "move": 4, "attack": 6, "attributes": [ "%muddle%" ]}
+        },
+        {
+          "level": 6,
+          "normal": {"health": 16, "move": 4, "attack": 5, "attributes": [ "%muddle%" ]},
+          "elite": {"health": 27, "move": 4, "attack": 6, "attributes": [ "%muddle%" ]}
+        },
+        {
+          "level": 7,
+          "normal": {"health": 22, "move": 4, "attack": 5, "attributes": [ "%muddle%" ]},
+          "elite": {"health": 34, "move": 4, "attack": 7, "attributes": [ "%muddle%" ]}
+        }
+      ]
+    },
+    "Stone Construct (2e)":{
+      "gfx": "Stone Golem",
+      "display": "Stone Construct",
+      "deck": "Stone Construct (2e)",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 10, "move": 1, "attack": 3, "immunities": [ "%immobilize%"] },
+          "elite": {"health": 10, "move": 2, "attack": 4, "attributes": [ "%shield% 1" ], "immunities": [ "%immobilize%"]}
+        },
+        {
+          "level": 1,
+          "normal": {"health": 10, "move": 1, "attack": 3, "attributes": [ "%shield% 1" ], "immunities": [ "%immobilize%"]},
+          "elite": {"health": 11, "move": 2, "attack": 4, "attributes": [ "%shield% 2" ], "immunities": [ "%immobilize%"]}
+        },
+        {
+          "level": 2,
+          "normal": {"health": 11, "move": 1, "attack": 4, "attributes": [ "%shield% 1" ], "immunities": [ "%immobilize%"]},
+          "elite": {"health": 14, "move": 2, "attack": 5, "attributes": [ "%shield% 2" ], "immunities": [ "%immobilize%"]}
+        },
+        {
+          "level": 3,
+          "normal": {"health": 11, "move": 1, "attack": 4, "attributes": [ "%shield% 2" ], "immunities": [ "%immobilize%"]},
+          "elite": {"health": 15, "move": 2, "attack": 5, "attributes": [ "%shield% 3" ], "immunities": [ "%immobilize%"]}
+        },
+        {
+          "level": 4,
+          "normal": {"health": 12, "move": 2, "attack": 4, "attributes": [ "%shield% 2" ], "immunities": [ "%immobilize%"]},
+          "elite": {"health": 17, "move": 2, "attack": 6, "attributes": [ "%shield% 3" ], "immunities": [ "%immobilize%"]}
+        },
+        {
+          "level": 5,
+          "normal": {"health": 13, "move": 2, "attack": 5, "attributes": [ "%shield% 2" ], "immunities": [ "%immobilize%"]},
+          "elite": {"health": 19, "move": 3, "attack": 6, "attributes": [ "%shield% 3" ], "immunities": [ "%immobilize%"]}
+        },
+        {
+          "level": 6,
+          "normal": {"health": 19, "move": 2, "attack": 5, "attributes": [ "%shield% 2" ], "immunities": [ "%immobilize%"]},
+          "elite": {"health": 23, "move": 3, "attack": 7, "attributes": [ "%shield% 3" ], "immunities": [ "%immobilize%"]}
+        },
+        {
+          "level": 7,
+          "normal": {"health": 22, "move": 2, "attack": 5, "attributes": [ "%shield% 3" ], "immunities": [ "%immobilize%"]},
+          "elite": {"health": 26, "move": 3, "attack": 7, "attributes": [ "%shield% 4" ], "immunities": [ "%immobilize%"]}
+        }
+      ]
+    },
+    "Sun Demon (2e)": {
+      "display": "Sun Demon",
+      "gfx": "Sun Demon",
+      "deck": "Sun Demon (FH)",
+      "count": 6,
+      "flying": true,
+      "levels": [
+        {
+          "level": 0,
+          "normal": {"health": 5, "move": 2, "attack": 2, "attributes": [ "Advantage", "%shield% 1" ]},
+          "elite": {"health": 9, "move": 2, "attack": 3, "attributes": [ "Advantage", "%shield% 1" ]}
+        },
+        {
+          "level": 1,
+          "normal": {"health": 8, "move": 2, "attack": 2, "attributes": [ "Advantage", "%shield% 1" ]},
+          "elite": {"health": 12, "move": 2, "attack": 3, "attributes": [ "Advantage", "%shield% 1" ]}
+        },
+        {
+          "level": 2,
+          "normal": {"health": 10, "move": 2, "attack": 2, "attributes": [ "Advantage", "%shield% 1" ]},
+          "elite": {"health": 13, "move": 2, "attack": 4, "attributes": [ "Advantage", "%shield% 1" ]}
+        },
+        {
+          "level": 3,
+          "normal": {"health": 11, "move": 2, "attack": 3, "attributes": [ "Advantage", "%shield% 1" ]},
+          "elite": {"health": 16, "move": 3, "attack": 4, "attributes": [ "Advantage", "%shield% 1" ]}
+        },
+        {
+          "level": 4,
+          "normal": {"health": 13, "move": 3, "attack": 3, "attributes": [ "Advantage", "%shield% 1" ]},
+          "elite": {"health": 18, "move": 3, "attack": 5, "attributes": [ "Advantage", "%shield% 1" ]}
+        },
+        {
+          "level": 5,
+          "normal": {"health": 13, "move": 3, "attack": 3, "attributes": [ "Advantage", "%shield% 2" ]},
+          "elite": {"health": 18, "move": 3, "attack": 5, "attributes": [ "Advantage", "%shield% 2" ]}
+        },
+        {
+          "level": 6,
+          "normal": {"health": 16, "move": 3, "attack": 4, "attributes": [ "Advantage", "%shield% 2" ]},
+          "elite": {"health": 25, "move": 4, "attack": 5, "attributes": [ "Advantage", "%shield% 2" ]}
+        },
+        {
+          "level": 7,
+          "normal": {"health": 19, "move": 3, "attack": 5, "attributes": [ "Advantage", "%shield% 2" ]},
+          "elite": {"health": 27, "move": 4, "attack": 6, "attributes": [ "Advantage", "%shield% 3" ]}
+        }
+      ]
+    },
+    "Vermling Scout (2e)": {
+      "gfx": "Vermling Scout",
+      "display": "Vermling Scout",
+      "deck": "Scout (2e)",
+      "count": 10,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 2, "move": 3, "attack": 1 },
+          "elite": { "health": 4, "move": 3, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 3, "move": 3, "attack": 1 },
+          "elite": { "health": 5, "move": 3, "attack": 2 }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 3, "move": 3, "attack": 2 },
+          "elite": { "health": 5, "move": 4, "attack": 3 }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 4, "move": 3, "attack": 2 },
+          "elite": { "health": 7, "move": 4, "attack": 3 }
+        },
+        {
+          "level": 4,
+          "normal": { "health": 5, "move": 3, "attack": 3 },
+          "elite": { "health": 8, "move": 4, "attack": 4 }
+        },
+        {
+          "level": 5,
+          "normal": { "health": 7, "move": 3, "attack": 3 },
+          "elite": { "health": 11, "move": 4, "attack": 4 }
+        },
+        {
+          "level": 6,
+          "normal": { "health": 10, "move": 4, "attack": 3 },
+          "elite": { "health": 16, "move": 5, "attack": 4 }
+        },
+        {
+          "level": 7,
+          "normal": { "health": 15, "move": 4, "attack": 3 },
+          "elite": { "health": 23, "move": 5, "attack": 4 }
         }
       ]
     },
     "Vermling Priest (2e)": {
-      "deck": "Priest",
-      "display": "Vermling Priest",
       "gfx": "Vermling Shaman",
+      "display": "Vermling Priest",
+      "deck": "Priest",
       "count": 6,
       "levels": [
         {
@@ -852,28 +2127,126 @@
         },
         {
           "level": 4,
-          "normal": { "health": 3, "move": 3, "attack": 2, "attributes": [ "%muddle%", "%shield% 3" ]},
-          "elite": { "health": 5, "move": 3, "attack": 3, "attributes": [ "%muddle%", "%shield% 4" ]}
+          "normal": { "health": 3, "move": 3, "attack": 2, "attributes": [ "%shield% 3", "%muddle%" ]},
+          "elite": { "health": 5, "move": 3, "attack": 3, "attributes": [ "%shield% 4","%muddle%" ]}
         },
         {
           "level": 5,
-          "normal": { "health": 4, "move": 3, "attack": 3, "attributes": [ "%muddle%", "%shield% 3" ]},
-          "elite": { "health": 6, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 4" ]}
+          "normal": { "health": 4, "move": 3, "attack": 3, "attributes": [  "%shield% 3","%muddle%" ]},
+          "elite": { "health": 6, "move": 3, "attack": 4, "attributes": [  "%shield% 4","%muddle%" ]}
         },
         {
           "level": 6,
-          "normal": { "health": 5, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 3" ]},
-          "elite": { "health": 6, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 5" ]}
+          "normal": { "health": 5, "move": 3, "attack": 4, "attributes": [  "%shield% 3","%muddle%" ]},
+          "elite": { "health": 8, "move": 3, "attack": 5, "attributes": [  "%shield% 4","%muddle%" ]}
         },
         {
           "level": 7,
-          "normal": { "health": 7, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 3" ]},
-          "elite": { "health": 8, "move": 3, "attack": 4, "attributes": [ "%muddle%", "%shield% 5" ]}
+          "normal": { "health": 8, "move": 3, "attack": 4, "attributes": [ "%shield% 3","%muddle%" ]},
+          "elite": { "health": 11, "move": 3, "attack": 5, "attributes": [ "%shield% 4","%muddle%" ]}
+        }
+      ]
+    },
+    "Wind Demon (2e)": {
+      "gfx": "Wind Demon",
+      "display": "Wind Demon",
+      "deck": "Wind Demon (FH)",
+      "count": 6,
+      "flying": true,
+      "levels": [
+        {
+          "level": 0,
+          "normal": {"health": 3, "move": 3, "attack": 2, "attributes": [ "%shield% 1" ]},
+          "elite": {"health": 5, "move": 3, "attack": 3, "attributes": [ "%shield% 1" ]}
+        },
+        {
+          "level": 1,
+          "normal": {"health": 3, "move": 3, "attack": 2, "attributes": [ "%shield% 2" ]},
+          "elite": {"health": 5, "move": 3, "attack": 3, "attributes": [ "%shield% 2" ]}
+        },
+        {
+          "level": 2,
+          "normal": {"health": 4, "move": 4, "attack": 2, "attributes": [ "%shield% 2" ]},
+          "elite": {"health": 7, "move": 4, "attack": 3, "attributes": [ "%shield% 2" ]
+          }
+        },
+        {
+          "level": 3,
+          "normal": {"health": 5, "move": 4, "attack": 3, "attributes": [ "%shield% 2" ]},
+          "elite": {"health": 8, "move": 4, "attack": 4, "attributes": [ "%shield% 2" ]}
+        },
+        {
+          "level": 4,
+          "normal": {"health": 7, "move": 4, "attack": 3, "attributes": [ "%shield% 2" ]},
+          "elite": {"health": 10, "move": 4, "attack": 5, "attributes": [  "%shield% 2" ]}
+        },
+        {
+          "level": 5,
+          "normal": {"health": 10, "move": 4, "attack": 3, "attributes": [ "%shield% 2" ]},
+          "elite": {"health": 14, "move": 4, "attack": 5, "attributes": ["%shield% 2" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 11, "move": 4, "attack": 3, "attributes": [ "%shield% 3" ]},
+          "elite": {"health": 16, "move": 4, "attack": 5, "attributes": [ "%shield% 3" ]}
+        },
+        {
+          "level": 7,
+          "normal": {"health": 14, "move": 4, "attack": 4, "attributes": [ "%shield% 3" ]},
+          "elite": {"health": 21, "move": 4, "attack": 6, "attributes": [ "%shield% 3" ]}
+        }
+      ]
+    },
+    "Chaos Demon (2e)":{
+      "display": "Chaos Demon",
+      "gfx": "Chaos Demon",
+      "deck": "Chaos Demon (2e)",
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 7, "move": 3, "attack": 2, "attributes": [ "%muddle%" ] },
+          "elite": { "health": 10, "move": 4, "attack": 3, "attributes": [ "%muddle%" ] }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 8, "move": 3, "attack": 3, "attributes": [ "%muddle%" ] },
+          "elite": { "health": 12, "move": 4, "attack": 4, "attributes": [ "%muddle%" ] }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 11, "move": 3, "attack": 3, "attributes": [ "%muddle%" ] },
+          "elite": { "health": 14, "move": 4, "attack": 5, "attributes": [ "%muddle%" ] }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 12, "move": 3, "attack": 4, "attributes": [ "%muddle%" ] },
+          "elite": { "health": 18, "move": 5, "attack": 5, "attributes": [ "%muddle%" ] }
+        },
+        {
+          "level": 4,
+          "normal": { "health": 14, "move": 4, "attack": 4, "attributes": [ "%muddle%" ] },
+          "elite": { "health": 21, "move": 5, "attack": 6, "attributes": [ "%muddle%" ] }
+        },
+        {
+          "level": 5,
+          "normal": { "health": 16, "move": 4, "attack": 5, "attributes": [ "%muddle%" ] },
+          "elite": { "health": 26, "move": 5, "attack": 6, "attributes": [ "%muddle%" ] }
+        },
+        {
+          "level": 6,
+          "normal": { "health": 20, "move": 4, "attack": 6, "attributes": [ "%muddle%" ] },
+          "elite": { "health": 33, "move": 5, "attack": 8, "attributes": [ "%muddle%" ],"immunities": [ "%curse%"] }
+        },
+        {
+          "level": 7,
+          "normal": { "health": 25, "move": 4, "attack": 7, "attributes": [ "%muddle%" ],"immunities": [ "%curse%"] },
+          "elite": { "health": 39, "move": 6, "attack": 9, "attributes": [ "%muddle%" ], "immunities": [ "%curse%"]}
         }
       ]
     },
 
-    "Bandit Commander (2e)": {
+    "Bandit Commander (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "Bandit Commander",
       "gfx": "Bandit Commander",
@@ -953,7 +2326,7 @@
         }
       ]
     },
-    "The Betrayer (2e)": {
+    "The Betrayer (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "The Betrayer",
       "gfx": "The Betrayer",
@@ -1033,7 +2406,7 @@
         }
       ]
     },
-    "Captain of the Guard (2e)": {
+    "Captain of the Guard (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "Captain of the Guard",
       "gfx": "Captain of the Guard",
@@ -1113,7 +2486,7 @@
         }
       ]
     },
-    "The Colorless (2e)": {
+    "The Colorless (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "The Colorless",
       "gfx": "The Colorless",
@@ -1169,7 +2542,7 @@
         }
       ]
     },
-    "Dark Rider (2e)": {
+    "Dark Rider (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "Dark Rider",
       "gfx": "Dark Rider",
@@ -1257,7 +2630,7 @@
         }
       ]
     },
-    "Elder Drake (2e)": {
+    "Elder Drake (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "Elder Drake",
       "gfx": "Elder Drake",
@@ -1313,7 +2686,7 @@
         }
       ]
     },
-    "The Gloom (2e)": {
+    "The Gloom (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "The Gloom",
       "gfx": "The Gloom",
@@ -1393,7 +2766,7 @@
         }
       ]
     },
-    "Inox Bodyguard (2e)": {
+    "Inox Bodyguard (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "Inox Bodyguard",
       "gfx": "Inox Bodyguard",
@@ -1473,7 +2846,7 @@
         }
       ]
     },
-    "Jekserah (2e)": {
+    "Jekserah (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "Jekserah",
       "gfx": "Jekserah",
@@ -1553,7 +2926,7 @@
         }
       ]
     },
-    "Merciless Overseer (2e)": {
+    "Merciless Overseer (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "Merciless Overseer",
       "gfx": "Merciless Overseer",
@@ -1641,7 +3014,7 @@
         }
       ]
     },
-    "Prime Demon (2e)": {
+    "Prime Demon (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "Prime Demon",
       "gfx": "Prime Demon",
@@ -1721,7 +3094,7 @@
         }
       ]
     },
-    "The Sightless Eye (2e)": {
+    "The Sightless Eye (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "The Sightless Eye",
       "gfx": "The Sightless Eye",
@@ -1801,7 +3174,7 @@
         }
       ]
     },
-    "Winged Horror (2e)": {
+    "Winged Horror (2e)placeholder": {
       "deck": "Boss (FH)",
       "display": "Winged Horror",
       "gfx": "Winged Horror",
@@ -1890,8 +3263,8 @@
             "type": "RandomSections"
           }]
       },
-      "#1 Black Barrow": {
-        "monsters": [ "Bandit Guard (2e)", "Bandit Archer (2e)", "Living Bones (FH)" ]
+      "#1 placeholder": {
+        "monsters": [ "Bandit Guard (2e)", "Bandit Archer (2e)", "Living Bones (2e)" ]
       }
     }
 }

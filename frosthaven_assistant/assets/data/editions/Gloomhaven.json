@@ -1015,7 +1015,7 @@
         {
           "level": 6,
           "normal": { "health": 14, "move": 4, "attack": 4 },
-          "elite": { "health": 14, "move": 4, "attack": 5, "attributes": [ "%muddle%", "%shield% 2" ]}
+          "elite": { "health": 14, "move": 3, "attack": 5, "attributes": [ "%muddle%", "%shield% 2" ]}
         },
         {
           "level": 7,
