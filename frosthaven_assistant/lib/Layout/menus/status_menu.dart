@@ -763,6 +763,8 @@ class StatusMenuState extends State<StatusMenu> {
                         Condition.bane, figureId, ownerId, immunities, scale),
                     buildConditionButton(Condition.brittle, figureId, ownerId,
                         immunities, scale),
+                    buildConditionButton(Condition.safeguard, figureId, ownerId,
+                        immunities, scale),
                   ],
                 ),
                 widget.characterId != null || isSummon

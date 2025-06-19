@@ -23,6 +23,7 @@ enum Condition {
   regenerate,
   ward,
   dodge,
+  safeguard,
 
   shield,
   retaliate,

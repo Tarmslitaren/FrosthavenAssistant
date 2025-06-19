@@ -210,6 +210,7 @@ class FrosthavenConverter {
             iconToken == "immobilize" ||
             iconToken == "stun" ||
             iconToken == "impair" ||
+            iconToken == "safeguard" ||
             iconToken == "muddle"));
   }
 
@@ -299,8 +300,7 @@ class FrosthavenConverter {
             Row(
               children: list2[3],
             )
-        ])
-        );
+        ]));
 
     Widget row = Row(
       mainAxisSize: MainAxisSize.max,

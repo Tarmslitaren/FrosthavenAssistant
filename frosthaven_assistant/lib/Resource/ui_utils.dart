@@ -133,6 +133,9 @@ bool hasGHVersion(String name) {
   if (name == "impair") {
     return false;
   }
+  if (name == "safeguard") {
+    return false;
+  }
   if (name == "muddle") {
     return false;
   }

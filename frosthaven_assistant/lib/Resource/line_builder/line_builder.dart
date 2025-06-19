@@ -41,6 +41,7 @@ class LineBuilder {
     "curse": "CURSE",
     "enfeeble": "ENFEEBLE",
     "bless": "BLESS",
+    "safeguard": "SAFEGUARD",
     "damage": "damage",
     "and": "and"
   };
@@ -114,7 +115,9 @@ class LineBuilder {
         iconToken == "bane" ||
         iconToken == "brittle" ||
         iconToken == "invisible" ||
+        iconToken == "safeguard" ||
         iconToken == "muddle") {
+      //todo; optimize with else and no strcmp
       if (mainLine) {
         //smaller margins for secondary modifiers
         return const EdgeInsets.all(0);
