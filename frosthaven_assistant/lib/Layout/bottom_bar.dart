@@ -13,7 +13,9 @@ import 'modifier_deck_widget.dart';
 String formattedScenarioName(GameState gameState) {
   String scenario = gameState.scenario.value;
   if (gameState.currentCampaign.value == "Solo") {
-    return scenario.split(':')[1];
+    if (scenario.contains(':')) {
+      return scenario.split(':')[1];
+    }
   }
   return scenario;
 }

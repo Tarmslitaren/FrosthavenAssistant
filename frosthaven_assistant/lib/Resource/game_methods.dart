@@ -417,7 +417,7 @@ class GameMethods {
     character.characterState
         .setMaxHealth(s, character.characterState.health.value);
 
-    if (character.id == "Beast Tyrant") {
+    if (character.id == "Beast Tyrant" || character.id == "Wildfury") {
       if (character.characterState.summonList.isNotEmpty) {
         //create the bear summon
         final int bearHp = 8 + character.characterState.level.value * 2;
@@ -452,7 +452,7 @@ class GameMethods {
             item.characterState._chill.value = 0;
             item.characterState._summonList.clear();
 
-            if (item.id == "Beast Tyrant") {
+            if (item.id == "Beast Tyrant" || item.id == "Wildfury") {
               //create the bear summon
               final int bearHp = 8 + item.characterState.level.value * 2;
               MonsterInstance bear = MonsterInstance.summon(
@@ -1313,7 +1313,8 @@ class GameMethods {
         }
         character = Character(characterState, characterClass);
 
-        if (characterClass.id == "Beast Tyrant") {
+        if (characterClass.id == "Beast Tyrant" ||
+            characterClass.id == "Wildfury") {
           //create the bear summon
           final int bearHp = 8 + characterState.level.value * 2;
 
@@ -1580,7 +1581,9 @@ class GameMethods {
   }
 
   static bool isFrosthavenStyledEdition(String edition) {
-    return edition == "Frosthaven" || edition == "Buttons and Bugs";
+    return edition == "Frosthaven" ||
+        edition == "Buttons and Bugs" ||
+        edition == "Gloomhaven 2nd Edition";
   }
 
   static bool isFrosthavenStyle(MonsterModel? monster) {

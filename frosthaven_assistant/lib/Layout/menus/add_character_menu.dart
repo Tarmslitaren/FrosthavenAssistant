@@ -28,7 +28,6 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   final ScrollController _scrollController = ScrollController();
 
   int compareEditions(String a, String b) {
-
     //sort current edition to top
     String currentEdition = _gameState.currentCampaign.value;
     if (b == currentEdition && a != currentEdition && a != "na") {
@@ -58,7 +57,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     }
 
     for (var item in _allCharacters) {
-      if (item.name == "Bladeswarm") {
+      if (item.name == "Bladeswarm" && item.edition == "Gloomhaven") {
         _allCharacters.remove(item);
         bs = item;
         break;
@@ -73,7 +72,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     }
 
     if (getIt<Settings>().showCustomContent.value == false) {
-      _allCharacters.removeWhere((character) => GameMethods.isCustomCampaign(character.edition));
+      _allCharacters.removeWhere(
+          (character) => GameMethods.isCustomCampaign(character.edition));
     }
 
     _foundCharacters = _allCharacters;
@@ -100,7 +100,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       results = _allCharacters;
     } else {
       results = _allCharacters
-          .where((user) => user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .where((user) =>
+              user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       if (enteredKeyword.toLowerCase() == "bladeswarm") {
         //unlocked it!
@@ -135,8 +136,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       }
     }
 
-    AddCharacterCommand command =
-        AddCharacterCommand(character.id, display, 1);
+    AddCharacterCommand command = AddCharacterCommand(character.id, display, 1);
     _gameState.action(command);
 
     //open level menu
@@ -176,7 +176,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                     child: TextField(
                       onChanged: (value) => _runFilter(value),
                       decoration: const InputDecoration(
-                          labelText: 'Add Character (type name for hidden character classes)',
+                          labelText:
+                              'Add Character (type name for hidden character classes)',
                           suffixIcon: Icon(Icons.search)),
                     ),
                   ),
