@@ -893,7 +893,7 @@
         }
       ]
     },
-    "Crystal Rot": {
+    "Crystal Rot (2e)": {
       "deck": "Crystal Rot",
       "count": 4,
       "levels": [
@@ -1661,9 +1661,9 @@
         }
       ]
     },
-    "Lurker (2e)": {
+    "Lurker Soldier (2e)": {
       "gfx": "Lurker",
-      "display": "Lurker",
+      "display": "Lurker Soldier",
       "deck": "Lurker (2e)",
       "count": 6,
       "levels": [
@@ -3357,14 +3357,490 @@
   },
 
   "scenarios": {
-      "#Random Dungeon": {
-        "special": [
+    "#0 Training Course": {
+      "monsters": ["City Guard (2e)"],
+      "todo": "should deal with 2 basic types of city guard"
+    },
+    "#1 Bandit Camp": {
+      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)"]
+    },
+    "#2 Ruinous Crypt": {
+      "monsters": ["Cultist (2e)", "Earth Demon (2e)", "Frost Demon (2e)","Living Bones (2e)","Night Demon (2e)"],
+      "todo": "special cultists"
+    },
+    "#3 Frozen Hollow": {
+      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)"]
+    },
+    "#4 Crypt of the Damned": {
+      "monsters": ["Bandit Archer (2e)", "Cultist (2e)", "Earth Demon (2e)","Living Bones (2e)","Wind Demon (2e)"]
+    },
+    "#5 Forgotten Crypt": {
+      "monsters": ["Cultist (2e)", "Living Bones (2e)","Living Corpse (2e)","Living Spirit (2e)"],
+      "todo": "hail escort"
+    },
+    "#6 Decaying Crypt": {
+      "monsters": ["Crystal Rot (2e)", "Living Bones (2e)","Living Corpse (2e)","Living Spirit (2e)"]
+    },
+    "#7 Black Barrow": {
+      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)","Living Bones (2e)"]
+    },
+    "#8 Barrow Lair": {
+      "monsters": ["Bandit Commander (2e)","Bandit Archer (2e)", "Living Bones (2e)","Living Corpse (2e)"]
+    },
+    "#8 Frozen Hollow": {
+      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)"],
+      "todo": "errata. "
+    },
+    "#9 Ruinous Rift": {
+      "monsters": ["Chaos Demon (2e)","Earth Demon (2e)","Flame Demon (2e)","Frost Demon (2e)","Night Demon (2e)","Sun Demon (2e)","Wind Demon (2e)"],
+      "todo": "hail escort, demon spawns note"
+    },
+    "#10 Mountain Pass": {
+      "monsters": ["Earth Demon (2e)","Inox Archer (2e)", "Inox Guard (2e)","Wind Demon (2e)"],
+      "todo": "timer for note"
+    },
+    "#11 Ritual Chamber": {
+      "monsters": ["Cultist (2e)", "Living Bones (2e)","Living Corpse (2e)","Night Demon (2e)","Sun Demon (2e)"],
+      "todo": "living vorpses +1 level. spawns"
+    },
+    "#12 Inox Encampment": {
+      "monsters": ["Inox Archer (2e)", "Inox Guard (2e)","Inox Priest (2e)"],
+      "todo": "spawn on door open"
+    },
+    "#13 Icecrag Ascent": {
+      "monsters": ["Hound (2e)", "Rending Drake (2e)", "Spitting Drake (2e)"]
+    },
+    "#14 Echo Chamber": {
+      "monsters": ["Living Spirit (2e)", "Ooze (2e)", "Rending Drake (2e)"],
+      "todo": "note only one door can be opened per round"
+    },
+    "#15 Plane of Elemental Power": {
+      "monsters": ["Earth Demon (2e)","Flame Demon (2e)","Frost Demon (2e)","Sun Demon (2e)"],
+      "todo": "note earth until door 1 opened"
+    },
+    "#16 Diamond Mine": {
+      "monsters": ["Merciless Taskmaster (2e)", "Bandit Archer (2e)","Bandit Scout (2e)", "Hound (2e)", "Vermling Scout (2e)"]
+    },
+    "#17 Demonic Rift": {
+      "monsters": ["City Guard (2e)", "Earth Demon (2e)","Night Demon (2e)","Wind Demon (2e)"],
+      "todo": "city guard ally nad special. spawn note"
+    },
+    "#18 Investigation": {
+      "monsters": [ "Bandit Scout (2e)","City Archer (2e)","City Guard (2e)", "Hound (2e)"]
+    },
+    "#19 Military Outpost": {
+      "monsters": [ "Chaos Demon (2e)","City Archer (2e)", "City Guard (2e)", "Hound (2e)"],
+      "todo": "chaos demon ally, cleansing pillars objectives"
+    },
+    "#20 Gloomhaven Warehouse": {
+      "monsters": ["Inox Bodyguard (2e)", "Crystal Rot (2e)", "Living Bones (2e)", "Living Corpse (2e)"]
+    },
+    "#21 The Ghost Fortress": {
+      "monsters": [ "Ancient Artillery (2e)","City Archer (2e)", "City Guard (2e)", "Hound (2e)"],
+      "todo": "note disadvantage on all attacks, cant use items before loot"
+    },
+    "#22 Doomcannon Demolition": {
+      "monsters": ["Ancient Artillery (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Living Corpse (2e)", "Sun Demon"],
+      "todo": "corpse ally and special"
+    },
+    "#23 Gloomhaven Square A": {
+      "monsters": ["Jekserah (2e)","City Archer (2e)", "City Guard (2e)", "Earth Demon (2e)", "Night Demon (2e)", "Cultist (2e)", "Living Bones (2e)", "Living Corpse (2e)"],
+      "todo": "ally spawns. also 2 versions of thsi!?"
+    },
+    "#24 Gloomhaven Square B": {
+      "monsters": ["First Shield Harmon (2e)","City Archer (2e)", "City Guard(2e)", "Living Bones (2e)", "Living Corpse (2e)"],
+      "todo": "bones and corpses are allies. "
+    },
+    "#25 Gloomhaven Battlements A": {
+      "monsters": ["The Prime Demon (2e)","City Archer (2e)", "City Guard (2e)", "Cultist (2e)", "Living Bones (2e)", "Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Wind Demon (2e)"],
+      "todo": "ally spawns.  special cultists. door objectives. special prime demon.also 2 versions of thsi!?"
+    },
+    "#26  Gloomhaven Battlements B": {
+      "monsters": ["First Shield Harmon (2e)","Ancient Artillery (2e)","City Archer (2e)", "City Guard (2e)", "Frost Demon (2e)", "Wind Demon (2e)"],
+      "todo": "frost and wind demon ally  door objectives. errata"
+    },
+    "#27 Infernal Throne": {
+      "monsters": ["The Prime Demon (2e)","Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Night Demon (2e)","Sun Demon (2e)","Wind Demon (2e)"]
+    },
+    "#28 Temple of the Seer": {
+      "monsters": ["Cave Bear (2e)", "Living Spirit (2e)", "Spitting Drake (2e)", "Stone Construct (2e)"]
+    },
+    "#29 Scorched Summit": {
+      "monsters": ["The Elder Drake (2e)", "Rending Drake (2e)", "Spitting Drake (2e)"]
+    },
+    "#30 Shrine of the Depths": {
+      "monsters": ["Deep Terror (2e)", "Lurker Soldier(2e)", "Ooze (2e)"]
+    },
+    "#31 Decrepit Wood": {
+      "monsters": ["Black Imp (2e)", "Deep Terror (2e)", "Giant Viper (2e)", "Harrower Infester (2e)"]
+    },
+    "#32 Savvas Armory": {
+      "monsters": ["Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Savvas Icestorm (2e)","Savvas Lavaflow (2e)","Wind Demon (2e)"],
+      "todo": "door objective."
+    },
+    "#33 Ancient Defense Network": {
+      "monsters": ["Cave Bear (2e)", "Flame Demon (2e)", "Forest Imp (2e)", "Living Corpse (2e)", "Stone Construct (2e)"]
+    },
+    "#34 Timeworn Tomb": {
+      "monsters": ["Ancient Artillery (2e)", "Living Corpse (2e)", "Living Spirit (2e)", "Stone Construct (2e)"]
+    },
+    "#35 Realm of the Voice": {
+      "monsters": ["Deep Terror (2e)", "Living Spirit (2e)", "Night Demon (2e)", "Wind Demon (2e)"],
+      "todo": "vocal chord objective. + note if alive "
+    },
+    "#36 Abandoned Sewers": {
+      "monsters": ["Giant Viper (2e)", "Ooze (2e)", "Vermling Scout (2e)"]
+    },
+    "#37 Deep Ruins": {
+      "monsters": ["Ancient Artillery (2e)", "Crystal Rot (2e)", "Living Bones (2e)", "Living Spirit (2e)", "Stone Construct (2e)"]
+    },
+    "#38 Drake Nest": {
+      "monsters": ["Flame Demon (2e)", "Rending Drake (2e)", "Spitting Drake (2e)"]
+    },
+    "#39 Vibrant Grotto": {
+      "monsters": ["Cave Bear (2e)", "Earth Demon (2e)", "Forest Imp (2e)", "Inox Priest (2e)"]
+    },
+    "#40 Wetlands Ambush": {
+      "monsters": ["Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Savvas Icestorm (2e)", "Savvas Lavaflow (2e)", "Wind Demon (2e)"],
+      "todo": "savvas specal versions. noteenemies dont act until door 1 opened"
+    },
+    "#41 Ancient Cistern": {
+      "monsters": ["Black Imp (2e)", "Living Corpse (2e)", "Ooze (2e)", "Night Demon (2e)"]
+    },
+    "#42 Secluded Valley": {
+      "monsters": ["Cave Bear (2e)", "City Guard (2e)", "Forest Imp (2e)", "Hound (2e)", "Stone Construct (2e)"]
+    },
+    "#43 Chasing Secrets": {
+      "monsters": ["Candlekeeper Trice", "City Guard (2e)", "Hound (2e)", "Stone Construct (2e)"]
+    },
+    "#44 Temple of the Elements": {
+      "monsters": ["Cultist (2e)","Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Living Bones (2e)","Wind Demon (2e)"],
+      "todo": "elemental tether objectives"
+    },
+    "#45 Plane of Night": {
+      "monsters": ["Black Imp (2e)", "Deep Terror (2e)", "Night Demon (2e)"],
+      "todo": "note dark every turn start"
+    },
+    "#46 Doom Trench": {
+      "monsters": [ "Deep Teror (2e)", "Harrower Infester (2e)", "Lurker Soldier (2e)","City Archer (2e)", "Frost Demon (2e)", "Living Corpse (2e)"],
+      "todo": "ally spawn note for achievements"
+    },
+    "#47 Slave Pens": {
+      "monsters": [ "Inox Archer (2e)", "Inox Guard (2e)", "Inox Priest (2e)", "Stone Construct (2e)","City Archer (2e)", "Earth Demon (2e)", "Living Corpse (2e)"],
+      "todo": "orchid ally. ally spawn note for achievements"
+    },
+    "#48 Treacherous Divide": {
+      "monsters": ["City Guard (2e)", "Wind Demon (2e)", "Living Corpse (2e)", "Cave Bear (2e)", "Cultist (2e)", "Frost Demon (2e)"],
+      "todo": "note if altar cnot destroyed frost?? ally spawn note for achievements "
+    },
+    "#49 Tribal Assault": {
+      "monsters": ["Hound (2e)", "Inox Archer (2e)", "Inox Guard (2e)", "Inox Priest (2e)"],
+      "todo": "redthorn escort. captive orchids escorts. "
+    },
+    "#50 Nightmare Peak": {
+      "monsters": ["The Winged Horror (2e)", "Frost Demon (2e)", "Night Demon (2e)", "Savvas Icestorm (2e)", "Wind Demon (2e)","City Guard (2e)", "Flame Demon (2e)", "Living Bones (2e)"],
+      "todo": "door objective/ special monster?, note ally spawn note for achievements "
+    },
+    "#51 Lair of the Unseeing Eye": {
+      "monsters": ["The Sightless Eye (2e)", "Deep Terror (2e)","Harrower Infester (2e)", "Lurker Soldier (2e)","City Archer (2e)", "Sun Demon (2e)", "Living Corpse (2e)"],
+      "todo": "door objective/ special monster?, note ally spawn note for achievements "
+    },
+    "#52 Shadow Weald": {
+      "monsters": ["Dark Rider (2e)", "Earth Demon (2e)", "Forest Imp (2e)", "Harrower Infester (2e)","City Guard (2e)", "Night Demon (2e)", "Living Bones (2e)"],
+      "todo": " note ally spawn note for achievements "
+    },
+    "#53 Shrine of Strength": {
+      "monsters": ["Frost Demon (2e)", "Harrower Infester (2e)", "Savvas Icestorm (2e)", "Stone Construct (2e)", "Wind Demon (2e)"]
+    },
+    "#54 The Void": {
+      "monsters": ["Black Imp (2e)", "Chaos Demon (2e)", "Cultist (2e)", "Harrower Infester (2e)","Vermling Scout (2e)","City Archer (2e)","City Guard (2e)", "Frost Demon (2e)","Night Demon (2e)", "Living Bones (2e)","Living Corpse (2e)"],
+      "todo": "special cultists. note ally spawn note for achievements "
+    },
+    "#55 The Last Stand": {
+      "monsters": ["Black Imp (2e)", "Chaos Demon (2e)", "Deep Terror (2e)", "Harrower Infester (2e)","Vermling Scout (2e)","City Archer (2e)","City Guard (2e)", "Earth Demon (2e)","Wind Demon (2e)", "Living Bones (2e)","Living Corpse (2e)"],
+      "todo": "hail escort. stone pillar objective.special cultists. note ally spawn note for achievements at round 4, 8, 12, 16, 20, 24, 28, 32 "
+    },
+    "#56 The Gloom": {
+      "monsters": ["The Gloom (2e)", "Black Imp (2e)", "Chaos Demon (2e)", "Deep Terror (2e)", "Harrower Infester (2e)"],
+      "todo": "spawn timer "
+    },
+    "#57 Crypt Basement": {
+      "monsters": ["Crystal Rot (2e)", "Gaint Viper (2e)", "Living Bones (2e)", "Living Corpse (2e)", "Living Spirit (2e)"]
+    },
+    "#58 Palace of Ice": {
+      "monsters": ["Cave Bear (2e)", "Frost Demon (2e)", "Harrower Infester (2e)", "Living Spirit (2e)"],
+      "todo": "special bears"
+    },
+    "#59 Foggy Thicket": {
+      "monsters": [],
+      "todo": "will this work? there is a sublist of possible monster cards",
+      "special": [
+        {
+          "type": "RandomSections"
+        }]
+    },
+    "#60 Bandit's Wood": {
+      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Hound (2e)", "Rending Drake (2e)"]
+    },
+    "#61 Finding the Cure": {
+      "monsters": ["Cave Bear (2e)", "Forest Imp (2e)", "Hound (2e)"]
+    },
+    "#62 Alchemy Lab": {
+      "monsters": ["Cave Bear (2e)", "Giant Viper (2e)", "Hound (2e)", "Ooze (2e)", "Spitting Drake (2e)"],
+      "todo": "tracker lose at round 12. every round start event, and water spawn. rubble objectives. robotic helper escorts"
+    },
+    "#63 Fading Lighthouse": {
+      "monsters": ["Flame Demon (2e)", "Frost Demon (2e)", "Giant Viper (2e)", "Ooze (2e)"],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": true,
+          "note": "Flame Demons and Frost Demons are active."
+        },
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
+          "startOfRound": true,
+          "note": "Oozes and Giant Vipers are active."
+        }
+      ]
+    },
+    "#64 Roots of Chaos": {
+      "monsters": ["Chaos Demon (2e)", "Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Night Demon (2e)", "Sun Demon (2e)", "Wind Demon (2e)"],
+      "todo": "chaos demo specila boss: The Convergence. note to flip token every round start. bleh do not draw ability card in certain situation."
+    },
+    "#65 Hero's Mausoleum": {
+      "monsters": ["Crystal Rot (2e)", "Living Bones (2e)", "Living Corpse (2e)", "Living Spirit (2e)"]
+    },
+    "#66 A Friend in Need": {
+      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Cave Bear (2e)", "Hound (2e)"],
+      "todo": "no draw ability card for bear!? bleh. (make special bear?)"
+    },
+    "#67 Temple of the Eclipse": {
+      "monsters": ["The Colorless (2e)", "Ancient Artillery (2e)", "Night Demon (2e)", "Stone Construct (2e)", "Sun Demon (2e)"],
+      "special": [
           {
-            "type": "RandomSections"
-          }]
-      },
-      "#1 placeholder": {
-        "monsters": [ "Bandit Guard (2e)", "Bandit Archer (2e)", "Living Bones (2e)" ]
-      }
+            "type": "Timer",
+            "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+            "startOfRound": true,
+            "note": "Set Light to Strong."
+          },
+          {
+            "type": "Timer",
+            "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
+            "startOfRound": true,
+            "note": "Set Dark to Strong."
+          }
+      ],
+      "todo": "no draw ability card for bear!? bleh. (make special bear?)"
+    },
+    "#68 Sunken Vessel": {
+      "monsters": ["Frost Demon (2e)", "Living Spirit (2e)", "Lurker Soldier (2e)"]
+    },
+    "#69 Corrupted Cove": {
+      "monsters": ["Black Imp (2e)", "Deep Terror (2e)", "Lurker Soldier (2e)", "Ooze (2e)"]
+    },
+    "#70 Underwater Lagoon": {
+      "monsters": ["Forest Imp (2e)", "Ooze (2e)", "Rending Drake (2e)"]
+    },
+    "#71 Clockwork Factory": {
+      "monsters": ["Ancient Artillery (2e)", "Living Spirit (2e)", "Ooze (2e)", "Stone Construct (2e)"]
+    },
+    "#72 Well of the Unfortunate": {
+      "monsters": ["Forest Imp (2e)", "Living Spirit (2e)", "Stone Construct (2e)", "Vermling Priest (2e)", "Vermling Scout (2e)"]
+    },
+    "#73 Chained Isle": {
+      "monsters": ["Living Spirit (2e)", "Night Demon (2e)", "Wind Demon (2e)"],
+      "todo": "spawn timers"
+    },
+    "#74 Windswept Highlands": {
+      "monsters": ["Spitting Drake (2e)", "Sun Demon (2e)", "Wind Demon (2e)"],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [5,9,13,17,21,25,29],
+          "startOfRound": true,
+          "note": "Wind blows Up."
+        },
+        {
+          "type": "Timer",
+          "list": [2,6,10,14,18,22,26,30],
+          "startOfRound": true,
+          "note": "Wind blows Right."
+        },
+        {
+          "type": "Timer",
+          "list": [3,7,11,15,19,23,27,31],
+          "startOfRound": true,
+          "note": "Wind blows Down."
+        },
+        {
+          "type": "Timer",
+          "list": [4,8,12,16,20,24,28,32],
+          "startOfRound": true,
+          "note": "Wind blows Left."
+        }
+      ]
+    },
+    "#75 Rockslide Ridge": {
+      "monsters": [ "Ancient Artillery (2e)","Hound (2e)", "Inox Archer (2e)", "Inox Guard (2e)", "Inox Priest (2e)" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [-1],
+          "startOfRound": true,
+          "note": "Move boulders."
+        }
+      ],
+      "todo": "only one tree in first room. spawn in sections."
+    },
+    "#76 Oozing Grove": {
+      "monsters": [ "Ooze (2e)", "Forest Imp (2e)", "Giant Viper (2e)" ],
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Tree A",
+          "health": "Cx(3+L)"
+        },
+        {
+          "type": "Objective",
+          "name": "Tree B",
+          "health": "Cx(3+L)"
+        },
+        {
+          "type": "Objective",
+          "name": "Tree C",
+          "health": "Cx(3+L)"
+        },
+        {
+          "type": "Timer",
+          "list": [2,5,8,11,14,17,20,23,26,29,32],
+          "startOfRound": false,
+          "note": "Trees Spawn Oozes."
+        }
+      ]
+    },
+    "#77 Harrower Hive": {
+      "monsters": ["Giant Viper (2e)", "Living Bones (2e)", "Night Demon (2e)", "Harrower Infester (2e)"]
+    },
+    "#78 Vault of Secrets": {
+      "monsters": ["City Guard (2e)", "Ancient Artillery (2e)", "Stone Construct (2e)", "Hound (2e)"],
+      "todo": "special guards."
+    },
+    "#79 Lurker Assault": {
+      "monsters": ["Lurker Soldier (2e)", "Savvas Icestorm (2e)", "Wind Demon (2e)"]
+    },
+    "#80 Lost Temple": {
+      "monsters": [ "The Betrayer (2e)","Stone Construct (2e)", "Giant Viper (2e)" ],
+      "special": [
+        {
+          "type": "AllyDeck"
+        },
+        {
+          "type": "Escort",
+          "name": "Chereth",
+          "health": "6+2xL",
+          "init": 99
+        }
+      ]
+    },
+    "#81 Overgrown Graveyard": {
+      "monsters": ["Crystal Rot (2e)","Living Bones (2e)", "Bloated Regent (2e)", "Living Spirit (2e)"],
+      "todo": "special corpse boss maybe."
+    },
+    "#82 Syndicate Hideout": {
+      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Cultist (2e)", "Giant Viper (2e)"],
+      "todo": "special cultists."
+    },
+    "#83 Lost Island": {
+      "monsters": ["Vermling Scout (2e)", "Vermling Prist (2e)", "Cave Bear (2e)"]
+    },
+    "#84 Wild Melee": {
+      "monsters": [ "Cave Bear (2e)", "Hound (2e)", "Bandit Scout (2e)", "Bandit Archer (2e)", "Living Spirit (2e)" ],
+      "special": [
+        {
+          "type": "Allies",
+          "list": ["Hound (2e)", "Cave Bear (2e)"]
+        }]
+    },
+    "#85 Crossroads Station": {
+      "monsters": ["Black Imp (2e)", "City Guard (2e)", "Earth demon (2e)", "Harrower Infester (2e)"]
+    },
+    "#86 Magma Pit": {
+      "monsters": ["Vermling Scout (2e)", "Inox Guard (2e)", "Inox Archer (2e)", "Flame Demon (2e)"]
+    },
+    "#87 Sulfur Mine": {
+      "monsters": ["Vermling Scout (2e)", "Hound (2e)", "Inox Priest (2e)"]
+    },
+    "#88 Arcane Library": {
+      "monsters": [ "Forest Imp (2e)", "Cave Bear (2e)", "Arcane Golem (2e)" ],
+      "special": [
+        {
+          "type": "LevelAdjust",
+          "name": "Arcane Golem",
+          "level": 1,
+          "note": "Elite Stone Golem: +1 level, HPxC"
+        }
+      ],
+      "todo": "arcane golem boss maybe."
+    },
+    "#89 Community Service": {
+      "monsters": ["Black Imp (2e)", "Giant Viper (2e)", "Living Corpse (2e)", "Rending Drake (2e)"],
+      "todo": "end of round 2 damage on door"
+    },
+    "#90 Burning Mountain": {
+      "monsters": ["Earth Demon (2e)", "Flame Demon (2e)", "Stone Construct (2e)"]
+    },
+    "#91 Shadows Within": {
+      "monsters": ["Hound (2e)", "Cultist (2e)", "Living Bones (2e)", "Living Spirit (2e)", "Flame Demon (2e)" ]
+    },
+    "#92 Chronal Anchor": {
+      "monsters": ["Chaos Demon (2e)", "Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Wind Demon (2e)"],
+      "todo": "Temporal Matrix escort. timr, every other round initiative is backwards"
+    },
+    "#93 Harried Village": {
+      "monsters": [ "Cave Bear (2e)", "Vermling Priest (2e)", "Vermling Scout (2e)", "Lurker Soldier (2e)" ],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": true,
+          "note": "Spawn Vermling Scouts at D and E. Elite at D for 3 character or Both for 4 characters.",
+          "name": "spawn 1"
+        },
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
+          "startOfRound": true,
+          "note": "Spawn Vermling Scouts at F and G. Elite at G for 3 character or Both for 4 characters.",
+          "name": "spawn 1"
+        }
+      ]
+    },
+    "#94 A Watery Rescue": {
+      "monsters": ["Frost Demon (2e)", "Lurker Soldier (2e)", "Ooze (2e)"]
+    },
+    "#95 Cargo Ship": {
+      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Depp Terror (2e)", "Lurker Soldier (2e)"],
+      "todo": "timer"
+    },
+    "#96 Back Alley Brawl": {
+      "monsters": ["Bandit Scout (2e)", "City Guard (2e)", "Inox Guard (2e)", "City Archer (2e)", "Savvas Lavaflow (2e)", "Flame Demon (2e)", "Earth Demon (2e)"]
+    },
+    "#97 Vermling Camp": {
+      "monsters": ["Cave Bear (2e)", "Hound (2e)", "Vermling Priest (2e)", "Vermling Scout (2e)"]
+    },
+    "#98 Metamorphic Fault": {
+      "monsters": ["Deep Terror (2e)", "Earth Demon(2e)", "Flame Demon (2e)", "Savvas Lavaflow 82e)"],
+      "todo": "timed spawns until tokens looted. probably min boss"
+    },
+    "#99 Sintering Forge": {
+      "monsters": ["Ancient Artillery (2e)", "Black Imp (2e)", "Chaos Demon (2e)", "Harrower Infester (2e)"],
+      "todo": "time 1-14 thing. special black imps an infesters. timed spawns "
+    },
+    "#100 Silence Falls": {
+      "monsters": ["Chaos Demon (2e)", "Crystal Rot (2e)", "Living Bones (2e)", "Living Corpse (2e)"]
     }
+  }
 }
