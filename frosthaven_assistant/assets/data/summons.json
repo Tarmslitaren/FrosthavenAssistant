@@ -1,22 +1,20 @@
 {
   "summons": {
-    "Jade Falcon": {
-      "health": 2,
-      "move": 3,
-      "attack":  2
-    },
     "Warrior Spirit": {
-      "health": 4,
+      "health": 6,
+      "gfx": "Warrior Spirit",
       "move": 1,
       "attack":  3
     },
     "Skeleton": {
       "health": 3,
+      "gfx": "Skeleton",
       "move": 2,
       "attack":  2
     },
     "Steel Construct": {
       "health": 5,
+      "gfx": "Steel Construct",
       "move": 2,
       "attack":  3
     },
@@ -24,6 +22,26 @@
       "health": 2,
       "move": 2,
       "attack":  2
+    },
+    "Jade Falcon ": {
+      "health": 2,
+      "move": 3,
+      "attack":  2
+    },
+    "Warrior Spirit ": {
+      "health": 4,
+      "move": 1,
+      "attack":  3
+    },
+    "Skeleton ": {
+      "health": 3,
+      "move": 2,
+      "attack":  2
+    },
+    "Steel Construct ": {
+      "health": 5,
+      "move": 2,
+      "attack":  3
     },
     "Delicate Model": {
       "health": 1,
