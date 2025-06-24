@@ -653,6 +653,7 @@
       "display": "Doomcannon",
       "gfx": "Ancient Artillery",
       "deck": "Doomcannon (2e)",
+      "hidden": true,
       "count": 6,
       "levels": [
         {
@@ -684,7 +685,7 @@
     "Bandit Archer (2e)": {
       "deck": "Archer (FH)",
       "display": "Bandit Archer",
-      "gfx": "Bandit Archer",
+      "gfx": "Bandit Archer 2e",
       "count": 6,
       "levels": [
         {
@@ -732,7 +733,7 @@
     "Bandit Scout (2e)": {
       "deck": "Scout (2e)",
       "display": "Bandit Scout",
-      "gfx": "Bandit Guard",
+      "gfx": "Bandit Scout",
       "count": 6,
       "levels": [
         {
@@ -876,7 +877,7 @@
     "City Archer (2e)": {
       "deck": "Archer (FH)",
       "display": "City Archer",
-      "gfx": "City Archer",
+      "gfx": "City Archer 2e",
       "count": 6,
       "levels": [
         {
@@ -973,6 +974,7 @@
       "display": "Corrupt City Guard",
       "gfx": "City Guard",
       "deck": "Guard (FH)",
+      "hidden": true,
       "count": 6,
       "levels": [
         {
@@ -1150,6 +1152,7 @@
     },
     "Crystal Rot (2e)": {
       "deck": "Crystal Rot",
+      "gfx": "Crystal Rot",
       "count": 4,
       "levels": [
         {
@@ -1246,6 +1249,7 @@
       "deck": "Dark Ritual Cultist (2e)",
       "display": "Cultist",
       "gfx": "Cultist",
+      "hidden": true,
       "count": 6,
       "levels": [
         {
@@ -1678,7 +1682,7 @@
     "Inox Archer (2e)": {
       "deck": "Archer (FH)",
       "display": "Inox Archer",
-      "gfx": "Inox Archer",
+      "gfx": "Inox Archer 2e",
       "count": 6,
       "levels": [
         {
@@ -1726,7 +1730,7 @@
     "Inox Guard (2e)": {
       "deck": "Guard (FH)",
       "display": "Inox Guard",
-      "gfx": "Inox Guard",
+      "gfx": "Inox Guard 2e",
       "count": 6,
       "levels": [
         {
@@ -1774,7 +1778,7 @@
     "Inox Priest (2e)": {
       "deck": "Priest",
       "display": "Inox Priest",
-      "gfx": "Inox Shaman",
+      "gfx": "Inox Priest 2e",
       "count": 6,
       "levels": [
         {
@@ -1968,6 +1972,7 @@
       "deck": "Living Bomb (2e)",
       "display": "Living Bomb",
       "gfx": "Living Corpse",
+      "hidden": true,
       "count": 6,
       "levels": [
         {
@@ -2465,7 +2470,7 @@
       ]
     },
     "Vermling Scout (2e)": {
-      "gfx": "Vermling Scout",
+      "gfx": "Vermling Scout 2e",
       "display": "Vermling Scout",
       "deck": "Scout (2e)",
       "count": 10,
@@ -2513,7 +2518,7 @@
       ]
     },
     "Vermling Priest (2e)": {
-      "gfx": "Vermling Shaman",
+      "gfx": "Vermling Priest 2e",
       "display": "Vermling Priest",
       "deck": "Priest",
       "count": 6,
@@ -2859,7 +2864,7 @@
           "move": 2,
           "attack": "C+3",
           "special1": [ "%attack% + 0", "^%target% C, %push% 2","**.........", "^Grant all City Guards:", ">%move% 3", "^%jump%", "*with First Shield Harmon as their focus."  ],
-          "special2": [ "^Grant all allies and self:", "%shield% 1, %retaliate% 1, %strengthen%","^Self" ],
+          "special2": [ "^Grant all allies and self:", "%shield% 1, %retaliate% 2, %strengthen%","^Self" ],
           "attributes": [ "%shield% 1" ],
           "immunities": [ "%disarm%", "%stun%" ]
         },
@@ -2899,7 +2904,7 @@
           "move": 2,
           "attack": "C+6",
           "special1": [ "%attack% + 0", "^%target% C, %push% 2","**.........", "^Grant all City Guards:", ">%move% 3", "^%jump%", "*with First Shield Harmon as their focus."  ],
-          "special2": [ "^Grant all allies and self:", "%shield% 3, %retaliate% 3, %strengthen%","^Self" ],
+          "special2": [ "^Grant all allies and self:", "%shield% 2, %retaliate% 3, %strengthen%","^Self" ],
           "attributes": [ "%shield% 2" ],
           "immunities": [ "%disarm%", "%stun%" ]
         },
@@ -2918,7 +2923,6 @@
     "Candlekeeper Trice": {
       "deck": "Boss (FH)",
       "display": "Candlekeeper Trice",
-      "gfx": "The Colorless",
       "count": 1,
       "levels": [
         {
@@ -3166,7 +3170,7 @@
     "The Gloom (2e)": {
       "deck": "Boss (FH)",
       "display": "The Gloom",
-      "gfx": "The Gloom",
+      "gfx": "The Gloom 2e",
       "count": 1,
       "levels": [
         {
@@ -3246,7 +3250,7 @@
     "Inox Bodyguard (2e)": {
       "deck": "Boss (FH)",
       "display": "Inox Bodyguard",
-      "gfx": "Inox Bodyguard",
+      "gfx": "Inox Bodyguard 2e",
       "count": 2,
       "levels": [
         {
@@ -3326,7 +3330,7 @@
     "Jekserah (2e)": {
       "deck": "Boss (FH)",
       "display": "Jekserah",
-      "gfx": "Jekserah",
+      "gfx": "Jekserah 2e",
       "count": 1,
       "levels": [
         {
@@ -3691,7 +3695,7 @@
           "move": 5,
           "attack": 4,
           "special1": [ "%move% - 1","**.........", "%attack% - 1", "^Target all %range% 3, %push% 2","**.........", "%heal% 3", "^Target all eggs, %range% 2"],
-          "special2": [ "%move% + 0", "**.........","%attack% + 0","**.........", "[r]", "^^Grant all eggs within %range% 2:", "%shield% 2", "[/r]" ],
+          "special2": [ "%move% + 0", "**.........","%attack% + 0","**.........", "[r]", "^^Grant all eggs within %range% 2:", "%shield% 3", "[/r]" ],
           "immunities": [ "%poison%","%disarm%", "%immobilize%", "%stun%", "%curse%" ]
         },
         {

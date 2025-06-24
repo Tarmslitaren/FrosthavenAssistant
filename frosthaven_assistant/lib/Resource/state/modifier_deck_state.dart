@@ -72,6 +72,7 @@ class ModifierDeck {
     _enfeebles.value = 0;
     _badOmen.value = 0;
     _addedMinusOnes.value = 0;
+    _imbuement.value = 0;
     _needsShuffle = false;
     name = name;
   }
@@ -102,6 +103,8 @@ class ModifierDeck {
   final _badOmen = ValueNotifier<int>(0);
   ValueListenable<int> get addedMinusOnes => _addedMinusOnes;
   final _addedMinusOnes = ValueNotifier<int>(0);
+  ValueListenable<int> get imbuement => _imbuement;
+  final _imbuement = ValueNotifier<int>(0);
 
   void setCurse(_StateModifier _, int value) {
     _curses.value = value;
@@ -137,14 +140,8 @@ class ModifierDeck {
     }
     _shuffle();
     _addedMinusOnes.value--;
-    var card = _drawPile
-        .getList()
-        .lastWhereOrNull((element) => element.gfx == "minus1$suffix");
-    if (card != null) {
-      _drawPile.remove(card);
-      _drawPile.shuffle();
-      _cardCount.value--;
-    }
+
+    _removeCardFromDrawPile("minus1$suffix");
   }
 
   bool hasMinus1() {
@@ -192,14 +189,7 @@ class ModifierDeck {
       suffix = "-$name";
     }
     _shuffle();
-    var card = _drawPile
-        .getList()
-        .lastWhereOrNull((element) => element.gfx == "nullAttack$suffix");
-    if (card != null) {
-      _drawPile.remove(card);
-      _drawPile.shuffle();
-      _cardCount.value--;
-    }
+    _removeCardFromDrawPile("nullAttack$suffix");
   }
 
   void addNull(_StateModifier _) {
@@ -217,14 +207,7 @@ class ModifierDeck {
       suffix = "-$name";
     }
     _shuffle();
-    var card = _drawPile
-        .getList()
-        .lastWhereOrNull((element) => element.gfx == "minus2$suffix");
-    if (card != null) {
-      _drawPile.remove(card);
-      _drawPile.shuffle();
-      _cardCount.value--;
-    }
+    _removeCardFromDrawPile("minus2$suffix");
   }
 
   void addMinusTwo(_StateModifier _) {
@@ -234,6 +217,75 @@ class ModifierDeck {
     }
     _drawPile.add(ModifierCard(CardType.add, "minus2$suffix"));
     _shuffle();
+  }
+
+  _removeCardFromDrawPile(String gfx) {
+    var card =
+        _drawPile.getList().lastWhereOrNull((element) => element.gfx == gfx);
+    if (card != null) {
+      _drawPile.remove(card);
+      _drawPile.shuffle();
+      _cardCount.value--;
+    }
+  }
+
+  void setImbue1(_StateModifier m) {
+    assert(name.isEmpty); //only basic deck for this feature
+
+    _shuffle();
+    _removeCardFromDrawPile("minus1");
+    _removeCardFromDrawPile("minus1");
+    _removeCardFromDrawPile("minus1");
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus1"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus1"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus1"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus2-muddle"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus0-poison"));
+    _shuffle();
+    _imbuement.value = 1;
+    _cardCount.value = _drawPile.size();
+  }
+
+  void setImbue2(_StateModifier m) {
+    assert(name.isEmpty); //only basic deck for this feature
+
+    if (_imbuement.value == 0) {
+      setImbue1(m);
+    }
+
+    _shuffle();
+    _removeCardFromDrawPile("minus2");
+    _removeCardFromDrawPile("plus0");
+    _removeCardFromDrawPile("plus0");
+
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus3"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus1-heal"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus1-heal"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus1-curse"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus0-wound"));
+    _shuffle();
+    _imbuement.value = 2;
+    _cardCount.value = _drawPile.size();
+  }
+
+  void resetImbue(_StateModifier _) {
+    assert(name.isEmpty); //only basic deck for this feature
+
+    if (_imbuement.value != 0) {
+      _shuffle();
+      _drawPile.removeWhere((element) => element.gfx.startsWith("imbue"));
+      _drawPile.add(ModifierCard(CardType.add, "minus1"));
+      _drawPile.add(ModifierCard(CardType.add, "minus1"));
+      _drawPile.add(ModifierCard(CardType.add, "minus1"));
+      if (_imbuement.value == 2) {
+        _drawPile.add(ModifierCard(CardType.add, "minus2"));
+        _drawPile.add(ModifierCard(CardType.add, "plus0"));
+        _drawPile.add(ModifierCard(CardType.add, "plus0"));
+      }
+      _imbuement.value = 0;
+      _cardCount.value = _drawPile.size();
+      _shuffle();
+    }
   }
 
   void _handleCurseBless(
@@ -337,6 +389,7 @@ class ModifierDeck {
         '"curses": ${_curses.value}, '
         '"enfeebles": ${_enfeebles.value}, '
         '"addedMinusOnes": ${_addedMinusOnes.value.toString()}, '
+        '"imbuement": ${_imbuement.value.toString()}, '
         '"badOmen": ${_badOmen.value.toString()}, '
         '"drawPile": ${_drawPile.toString()}, '
         '"discardPile": ${_discardPile.toString()} '

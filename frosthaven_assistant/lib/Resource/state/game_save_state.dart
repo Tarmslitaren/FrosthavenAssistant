@@ -71,6 +71,10 @@ class GameSaveState {
       int enfeebles = modifierDeckData['enfeebles'];
       state._enfeebles.value = enfeebles;
     }
+    if (modifierDeckData.containsKey("imbuement")) {
+      int imbuement = modifierDeckData['imbuement'];
+      state._imbuement.value = imbuement;
+    }
     if (modifierDeckData.containsKey("blesses")) {
       int blesses = modifierDeckData['blesses'];
       state._blesses.value = blesses;
