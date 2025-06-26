@@ -272,16 +272,22 @@
           "attack": 2
         },
         "War Raptor": {
-          "level": 4,
+          "level": 5,
           "health": 6,
           "move": 5,
           "attack": 3
         },
-        "Horned Hristek": {
+,        "Horned Hristek": {
           "level": 7,
           "health": 7,
           "move": 3,
           "attack": 2
+        },
+        "Great Archinotl": {
+          "level": 9,
+          "health": 8,
+          "move": 4,
+          "attack": 3
         }
       }
     },
@@ -301,6 +307,17 @@
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
       "summons": {
+        "Chromatic Construct": {
+          "level": 7,
+          "health": 7,
+          "move": 4
+        },
+        "Elemental Conduit": {
+          "level": 9,
+          "health": 3,
+          "move": 3,
+          "attack": 2
+        }
       }
     },
      {
@@ -321,6 +338,10 @@
         "Monolith": {
           "level": 3,
           "health": 2
+        },
+        "Vital Force": {
+          "level": 9,
+          "health": 3
         }
       }
     },
