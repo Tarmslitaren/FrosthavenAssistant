@@ -2919,83 +2919,179 @@
       }
     }
   ],
+  "42": [
+    {
+      "start": {
+        "Cave Bear (2e)": {
+          "normal": [0, 1, 1],
+          "elite": [1, 1, 2]
+        },
+        "Forest Imp (2e)": {
+          "normal": [2, 2, 4],
+          "elite": [1, 2, 0]
+        }
+      }
+    },
+    {
+      "83.4(1)": {
+        "City Guard (2e)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        },
+        "Hound (2e)": {
+          "normal": [1, 0, 1],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "79.1": {
+        "Stone Construct (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "City Guard (2e)": {
+          "normal": [2, 0, 0],
+          "elite": [0, 2, 2]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Stone Construct (2e)": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        },
+        "Hound (2e)": {
+          "normal": [2, 2, 0],
+          "elite": [0, 0, 2]
+        }
+      }
+    }
+  ],
+  "43": [
+    {
+      "start": {
+        "City Guard (2e)": {
+          "normal": [1, 0, 0],
+          "elite": [1, 2, 2]
+        },
+        "Hound (2e)": {
+          "normal": [1, 1, 2],
+          "elite": [0, 1, 1]
+        },
+        "Stone Construct (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "86.2(1)": {
+        "Candlekeeper Trice": {
+          "normal": [1, 0, 1],
+          "elite": [0, 1, 1]
+        },
+        "City Guard (2e)": {
+          "normal": [3, 2, 1],
+          "elite": [0, 1, 2]
+        },
+        "Hound (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [1, 2, 2]
+        },
+        "Stone Construct (2e)": {
+          "normal": [0,0, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "59.3": {
+      }
+    },
+    {
+      "41.2": {
+      }
+    },
+    {
+      "77.1": {
+        "Stone Construct (2e)": {
+          "normal": [1,1, 0],
+          "elite": [0, 0, 1]
+        },
+        "City Guard (2e)": {
+          "normal": [2, 0, 1],
+          "elite": [0, 2, 2]
+        }
+      }
+    },
+    {
+      "80.3": {
+      }
+    },
+    {
+      "106.1": {
+      }
+    },
+    {
+      "132.4": {
+      }
+    }
+  ],
   "44": [
     {
-      "B2b": {
+      "start": {
         "Cultist (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         }
       }
     },
     {
-      "M1a(1)": {
+      "97.5(1)": {
         "Cultist (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
-      "D1a": {
-        "Flame Demon (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
-        }
-      }
-    },
-    {
-      "C2b": {
-        "Wind Demon (2e)": {
-          "normal": [1, 1, 2],
-          "elite": [0, 0, 0]
-        }
-      }
-    },
-    {
-      "C1a": {
-        "Frost Demon (2e)": {
-          "normal": [1, 1, 2],
-          "elite": [0, 0, 0]
-        }
-      }
-    },
-    {
-      "D2a": {
+      "118.1(2)": {
         "Earth Demon (2e)": {
-          "normal": [1, 2, 2],
-          "elite": [0, 0, 0]
+          "normal": [2, 1, 2],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "48.4(3)": {
+        "Flame Demon (2e)": {
+          "normal": [2, 3, 2],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "43.3(4)": {
+        "Wind Demon (2e)": {
+          "normal": [2, 1, 2],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "99.2(5)": {
+        "Frost Demon (2e)": {
+          "normal": [2, 3, 2],
+          "elite": [0, 0, 1]
         }
       }
     }
   ],
   "45": [
     {
-      "G2a": {
+      "start": {
         "Deep Terror (2e)": {
           "normal": [2, 3, 0],
           "elite": [0, 0, 3]
@@ -3007,7 +3103,7 @@
       }
     },
     {
-      "J1b": {
+      "93.3(1)": {
         "Black Imp (2e)": {
           "normal": [5, 7, 4],
           "elite": [1, 1, 5]
@@ -3019,10 +3115,10 @@
       }
     },
     {
-      "L2a(1)": {
+      "95.1(2)": {
         "Deep Terror (2e)": {
-          "normal": [2, 2, 0],
-          "elite": [0, 0, 2]
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         },
         "Night Demon (2e)": {
           "normal": [1, 2, 2],
@@ -3031,7 +3127,7 @@
       }
     },
     {
-      "spawn 1": {
+      "spawn 2": {
         "Night Demon (2e)": {
           "normal": [1, 1, 0],
           "elite": [0, 0, 1]
@@ -3039,7 +3135,7 @@
       }
     },
     {
-      "spawn 2": {
+      "spawn 1": {
         "Night Demon (2e)": {
           "normal": [1, 0, 0],
           "elite": [0, 1, 1]
@@ -3049,1022 +3145,802 @@
   ],
   "46": [
     {
-      "J1b": {
+      "start": {
+        "Deep Terror (2e)": {
+          "normal": [1, 1, 3],
+          "elite": [1, 1, 0]
+        },
+        "Lurker Soldier (2e)": {
+          "normal": [2, 2, 2],
+          "elite": [0, 1, 2]
+        }
+      }
+    },
+    {
+      "27.2(1)": {
         "Deep Terror (2e)": {
           "normal": [0, 1, 2],
           "elite": [1, 1, 1]
         },
-        "Lurker Soldier (2e)": {
-          "normal": [2, 3, 2],
-          "elite": [0, 0, 1]
-        }
-      }
-    },
-    {
-      "H2a": {
         "Harrower Infester (2e)": {
-          "normal": [1, 1, 0],
-          "elite": [0, 0, 1]
+          "normal": [1, 0, 1],
+          "elite": [0, 1, 1]
         },
         "Lurker Soldier (2e)": {
-          "normal": [2, 2, 2],
-          "elite": [0, 1, 1]
+          "normal": [1, 2, 1],
+          "elite": [1, 1, 2]
         }
       }
     },
     {
-      "K2a": {
+      "113.5": {
         "Deep Terror (2e)": {
-          "normal": [3, 3, 5],
-          "elite": [0, 1, 1]
+          "normal": [4, 2, 4],
+          "elite": [0, 2, 2]
         },
         "Harrower Infester (2e)": {
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Lurker Soldier (2e)": {
           "normal": [1, 1, 0],
           "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 2": {
+        "Lurker Soldier (2e)": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
         }
       }
     }
   ],
   "47": [
     {
-      "C2a": {
-        "Inox Guard (2e)": {
-          "normal": [2, 1, 0],
-          "elite": [0, 1, 2]
-        }
-      }
-    },
-    {
-      "A4a": {
+      "start": {
         "Inox Archer (2e)": {
           "normal": [2, 2, 0],
           "elite": [0, 0, 2]
         },
-        "Stone Construct (2e)": {
-          "normal": [1, 0, 0],
+        "Inox Guard (2e)": {
+          "normal": [1, 1, 1],
           "elite": [0, 1, 1]
+        },
+        "Stone Construct (2e)": {
+          "normal": [0, 0, 1],
+          "elite": [1, 0, 0]
         }
       }
     },
     {
-      "M1b": {
+      "55.1(1)": {
         "Inox Guard (2e)": {
-          "normal": [1, 2, 3],
-          "elite": [0, 0, 0]
+          "normal": [1, 1, 2],
+          "elite": [1, 1, 2]
         },
         "Inox Priest (2e)": {
           "normal": [1, 1, 1],
           "elite": [0, 0, 0]
         },
         "Stone Construct (2e)": {
-          "normal": [0, 1, 0],
-          "elite": [1, 1, 2]
+          "normal": [1, 1, 0],
+          "elite": [0, 1, 1]
         }
       }
     },
     {
-      "H2b": {
+      "102.6(2)": {
         "Inox Archer (2e)": {
-          "normal": [1, 1, 0],
+          "normal": [1, 1, 1],
+          "elite": [0, 1, 1]
+        },
+        "Inox Guard (2e)": {
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 0]
+        },
+        "Stone Construct (2e)": {
+          "normal": [1, 0, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "101.2(3)": {
+        "Inox Archer (2e)": {
+          "normal": [1, 2, 1],
           "elite": [0, 0, 1]
         },
         "Inox Guard (2e)": {
-          "normal": [0, 1, 0],
-          "elite": [1, 1, 2]
-        }
-      }
-    },
-    {
-      "D1b": {
-        "Inox Archer (2e)": {
-          "normal": [1, 2, 2],
-          "elite": [0, 0, 0]
-        },
-        "Inox Guard (2e)": {
-          "normal": [1, 0, 0],
+          "normal": [1, 0, 1],
           "elite": [0, 1, 1]
         },
         "Inox Priest (2e)": {
-          "normal": [1, 1, 0],
-          "elite": [0, 0, 1]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         }
       }
     }
   ],
   "48": [
     {
-      "N1a": {
+      "start": {
         "Cave Bear (2e)": {
-          "normal": [2, 1, 2],
+          "normal": [1, 0, 1],
           "elite": [0, 1, 1]
         },
         "Cultist (2e)": {
-          "normal": [0, 1, 0],
-          "elite": [1, 1, 2]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         },
         "Frost Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Spitting Drake (2e)": {
-          "normal": [
-            2,
-            3,
-            4
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 2, 3],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
-      "D2b(1)": {
+      "75.2": {
+        "Cave Bear (2e)": {
+          "normal": [0, 1, 1],
+          "elite": [1, 0, 0]
+        },
+        "Cultist (2e)": {
+          "normal": [0, 1, 1],
+          "elite": [0, 0, 1]
+        },
         "Frost Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [1, 0, 1],
+          "elite": [0, 1, 1]
+        },
+        "Spitting Drake (2e)": {
+          "normal": [1, 1, 2],
+          "elite": [0, 1, 1]
+        }
+      }
+    },
+    {
+      "52.4(1)": {
+        "Cultist (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [1, 1, 3]
+        },
+        "Frost Demon (2e)": {
+          "normal": [0, 2, 2],
+          "elite": [1, 1, 1]
         }
       }
     }
   ],
   "49": [
     {
-      "M1b": {
+      "start": {
         "Hound (2e)": {
-          "normal": [
-            1,
-            3,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 3, 2],
+          "elite": [0, 0, 0]
         },
         "Inox Archer (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
         },
         "Inox Guard (2e)": {
-          "normal": [
-            2,
-            2,
-            4
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [2, 2, 4],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
-      "L1b": {
+      "78.1(1)": {
         "Hound (2e)": {
-          "normal": [
-            3,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            2,
-            3
-          ]
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
         },
         "Inox Archer (2e)": {
-          "normal": [
-            0,
-            2,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            3
-          ]
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 2]
         },
         "Inox Guard (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "13.3(2)": {
+        "Hound (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 1, 2]
+        },
+        "Inox Archer (2e)": {
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
+        },
+        "Inox Guard (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Inox Priest (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
         }
       }
     },
     {
-      "B4a": {
+      "103.2(3)": {
+        "Hound (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
         "Inox Guard (2e)": {
-          "normal": [
-            1,
-            2,
-            3
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 1, 1]
         },
         "Inox Priest (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
-        }
-      }
-    },
-    {
-      "B3a": {
-        "Hound (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        },
-        "Inox Archer (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         }
       }
     }
   ],
   "50": [
     {
-      "J1b": {
+      "start": {
         "Night Demon (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 1]
         },
         "Savvas Icestorm (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
         }
       }
     },
     {
-      "K2a": {
+      "58.2(1)": {
         "Frost Demon (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 0, 1],
+          "elite": [0, 1, 1]
         },
         "Wind Demon (2e)": {
-          "normal": [
-            2,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
+        },
+        "Savvas Icestorm (2e)": {
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
-      "I2a(1)": {
-        "Savvas Icestorm (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
-        },
+      "101.1(2)": {
         "The Winged Horror (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Egg 50": {
+          "normal": [2, 3, 4],
+          "elite": [0, 0, 0]
         }
       }
     }
   ],
   "51": [
     {
-      "J1a": {
+      "start": {
         "Lurker Soldier (2e)": {
-          "normal": [
-            2,
-            2,
-            2
-          ],
-          "elite": [
-            1,
-            2,
-            3
-          ]
+          "normal": [2, 2, 2],
+          "elite": [1, 2, 3]
         }
       }
     },
     {
-      "M1a(1)": {
-        "Deep Terror (2e)": {
-          "normal": [
-            2,
-            3,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+      "104.4(1)": {
+        "The Sightless Eye (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Harrower Infester (2e)": {
-          "normal": [
-            0,
-            3,
-            2
-          ],
-          "elite": [
-            1,
-            0,
-            1
-          ]
-        },
-        "The Sightless Eye (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Deep Terror": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         }
       }
     }
   ],
   "52": [
     {
-      "L1b": {
+      "start": {
         "The Dark Rider (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Earth Demon (2e)": {
-          "normal": [
-            2,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            2,
-            2
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Forest Imp (2e)": {
-          "normal": [
-            3,
-            4,
-            5
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [1, 1, 2],
+          "elite": [1, 2, 2]
         },
         "Harrower Infester (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
         }
       }
     }
   ],
   "53": [
     {
-      "L1a": {
+      "start": {
+        "Frost Demon (2e)": {
+          "normal": [0, 0, 0],
+          "elite": [0, 1, 1]
+        },
         "Savvas Icestorm (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         },
         "Stone Construct (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
-        }
-      }
-    },
-    {
-      "D1a": {
-        "Frost Demon (2e)": {
-          "normal": [
-            2,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
-        },
-        "Savvas Icestorm (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Wind Demon (2e)": {
-          "normal": [
-            0,
-            2,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            2
-          ]
+          "normal": [0, 0, 0],
+          "elite": [0, 1, 1]
         }
       }
     },
     {
-      "H3b": {
+      "98.3(1)": {
+        "Frost Demon (2e)": {
+          "normal": [2, 1, 1],
+          "elite": [0, 1, 1]
+        },
+        "Savvas Icestorm (2e)": {
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
+        },
+        "Wind Demon (2e)": {
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "103.6": {
         "Harrower Infester (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [2, 2, 2]
         },
         "Stone Construct (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 1, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
-      "H1b": {
-        "Harrower Infester (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+      "107.4": {
+        "Stone Construct (2e)": {
+          "normal": [0, 0, 0],
+          "elite": [2, 2, 2]
+        }
+      }
+    }
+  ],
+  "54": [
+    {
+      "start": {
+        "Black Imp (2e)": {
+          "normal": [4, 3, 1],
+          "elite": [0, 3, 6]
         },
-        "Stone Construct (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+        "Cultist 54 (2e)": {
+          "normal": [1, 2,2],
+          "elite": [1, 1, 2]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
-      "C1a": {
-        "Stone Construct (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            2,
-            2,
-            2
-          ]
+      "4.1(1)": {
+        "Black Imp (2e)": {
+          "normal": [2, 3, 4],
+          "elite": [0, 2, 2]
+        },
+        "Chaos Demon (2e)": {
+          "normal": [0, 0,1],
+          "elite": [1, 1, 1]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        }
+      }
+    },
+    {
+      "109.1(2)": {
+        "Black Imp (2e)": {
+          "normal": [1, 2, 2],
+          "elite": [1, 2, 3]
+        },
+        "Chaos Demon (2e)": {
+          "normal": [0, 1, 1],
+          "elite": [1, 1, 1]
+        },
+        "Cultist 54 (2e)": {
+          "normal": [0, 1, 1],
+          "elite": [1, 1, 2]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "112.3": {
+        "The Gloom (2e)": {
+          "normal": [0, 1, 2],
+          "elite": [2, 2, 2]
+        }
+      }
+    }
+  ],
+  "55": [
+    {
+      "start": {
+        "Black Imp (2e)": {
+          "normal": [0, 0, 1],
+          "elite": [0, 0, 0]
+        },
+        "Chaos Demon (2e)": {
+          "normal": [2, 1,0],
+          "elite": [0, 1, 2]
+        },
+        "Deep Terror (2e)": {
+          "normal": [4, 3, 2],
+          "elite": [1, 3, 4]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [0, 0, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "71.1": {
+        "Deep Terror (2e)": {
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
+        },
+        "Black Imp (2e)": {
+          "normal": [1, 0, 0],
+          "elite": [0, 2, 1]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Chaos Demon (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "2.3": {
+        "Deep Terror (2e)": {
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
+        },
+        "Black Imp (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 2, 1]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Chaos Demon (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "72.2": {
+        "Deep Terror (2e)": {
+          "normal": [2, 1, 0],
+          "elite": [1, 1, 2]
+        },
+        "Black Imp (2e)": {
+          "normal": [0, 0, 0],
+          "elite": [0, 1, 3]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [0, 0, 0],
+          "elite": [0, 1, 1]
+        },
+        "Chaos Demon (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "93.5": {
+        "Chaos Demon (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 1, 1]
+        },
+        "Black Imp (2e)": {
+          "normal": [0, 1, 4],
+          "elite": [1, 1, 0]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 2]
+        }
+      }
+    },
+    {
+      "67.1": {
+        "Deep Terror (2e)": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        },
+        "Chaos Demon (2e)": {
+          "normal": [2, 2, 1],
+          "elite": [0, 0, 1]
+        },
+        "Black Imp (2e)": {
+          "normal": [1, 1, 2],
+          "elite": [1, 1, 0]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [0, 1, 0],
+          "elite": [0, 0, 1]
         }
       }
     }
   ],
   "56": [
     {
-      "D1a": {
+      "start": {
         "The Gloom (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Black Imp (2e)": {
+          "normal": [0, 1, 1],
+          "elite": [0, 0, 1]
+        },
+        "Chaos Demon (2e)": {
+          "normal": [1, 0, 1],
+          "elite": [0, 0, 0]
+        },
+        "Deep Terror (2e)": {
+          "normal": [3, 2, 1],
+          "elite": [0, 1, 2]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [0, 0, 1],
+          "elite": [0, 1, 0]
+        }
+      }
+    },
+    {
+      "118.4": {
+        "Vermling Scout (2e)": {
+          "normal": [0, 0, 0],
+          "elite": [2, 2, 2]
+        }
+      }
+    },
+    {
+      "46.2": {
+        "Flame Demon (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        },
+        "Sun Demon (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        }
+      }
+    },
+    {
+      "110.2": {
+        "Living Bones (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        },
+        "Living Corpse (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        }
+      }
+    },
+    {
+      "45.5": {
+        "City Archer (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        },
+        "City Guard (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        }
+      }
+    },
+    {
+      "45.5": {
+        "City Guard (2e)": {
+          "normal": [2, 2, 2],
+          "elite": [0,0,0]
+        }
+      }
+    },
+    {
+      "39.4": {
+      }
+    },
+    {
+      "spawn 1": {
+        "Chaos Demon (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Black Imp (2e)": {
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
+        },
+        "Harrower Infester (2e)": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
         }
       }
     }
   ],
   "57": [
     {
-      "M1a": {
+      "start": {
         "Giant Viper (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [2, 1, 0],
+          "elite": [1, 2, 3]
         },
         "Living Bones (2e)": {
-          "normal": [
-            1,
-            3,
-            4
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
-        },
-        "Living Corpse (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 0, 1],
+          "elite": [0, 1, 1]
         },
         "Living Spirit (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
-        },
-        "Ooze (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 1, 2],
+          "elite": [0, 1, 1]
         }
       }
     },
     {
-      "J1a(A)": {
-        "Giant Viper (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+      "115.3(1)": {
+        "Crystal Rot (2e)": {
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         },
         "Living Corpse (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 1, 1],
+          "elite": [0, 1, 2]
         },
         "Living Spirit (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        },
-        "Ooze (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 3, 2],
+          "elite": [0, 0, 1]
         }
       }
     },
     {
-      "D2a(C)": {
-        "Giant Viper (2e)": {
-          "normal": [
-            0,
-            0,
-            2
-          ],
-          "elite": [
-            1,
-            2,
-            1
-          ]
+      "108.1(2)": {
+        "Crystal Rot (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         },
-        "Living Bones (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+        "Giant Viper (2e)": {
+          "normal": [1, 1, 2],
+          "elite": [0, 1, 0]
         },
         "Living Corpse (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
         },
         "Living Spirit (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        },
-        "Ooze (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
-      "J2a(B)": {
+      "102.1(3)": {
         "Giant Viper (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 2]
         },
         "Living Bones (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        },
-        "Living Spirit (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        },
-        "Ooze (2e)": {
-          "normal": [
-            3,
-            3,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
-        }
-      }
-    },
-    {
-      "D1a(D)": {
-        "Giant Viper (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        },
-        "Living Bones (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Living Corpse (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Living Spirit (2e)": {
-          "normal": [
-            0,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        },
-        "Ooze (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         }
       }
     }
   ],
   "58": [
     {
-      "G2a": {
-        "Cave Bear (2e) (54)": {
-          "normal": [
-            2,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+      "start": {
+        "Cave Bear 58 (2e)": {
+          "normal": [ 1, 2, 1],
+          "elite": [ 1, 1, 2]
+        },
+        "Living Spirit (2e)": {
+          "normal": [0, 1, 0],
+          "elite": [ 0, 0, 1]
         }
       }
     },
     {
-      "N1a(1)": {
+      "59.2(1)": {
+        "Cave Bear 58 (2e)": {
+          "normal": [ 0, 0, 1],
+          "elite": [ 0, 0, 0]
+        },
         "Frost Demon (2e)": {
-          "normal": [
-            2,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [2, 2, 2],
+          "elite": [ 0, 1, 1]
         },
         "Harrower Infester (2e)": {
-          "normal": [
-            3,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [1, 1, 1],
+          "elite": [1, 1, 1]
         },
         "Living Spirit (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 2],
+          "elite": [ 0, 1, 1]
+        }
+      }
+    },
+    {
+      "spawn 1": {
+        "Cave Bear 58 (2e)": {
+          "normal": [ 1, 0, 1],
+          "elite": [ 0, 1, 1]
+        },
+        "Living Spirit (2e)": {
+          "normal": [1, 2, 1],
+          "elite": [ 0, 0, 1]
         }
       }
     }
@@ -4072,346 +3948,62 @@
   "59": [
     {
       "start": {}
-    },
-    {
-      "554 Mangy": {
-        "Cave Bear (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        },
-        "Vermling Scout (2e)": {
-          "normal": [
-            3,
-            6,
-            4
-          ],
-          "elite": [
-            0,
-            1,
-            3
-          ]
-        },
-        "Vermling Priest (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
-        }
-      }
-    },
-    {
-      "558 Wild": {
-        "Cave Bear (2e)": {
-          "normal": [
-            1,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
-        },
-        "Forest Imp (2e)": {
-          "normal": [
-            2,
-            3,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
-        },
-        "Hound (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
-        }
-      }
-    },
-    {
-      "560 Cutthroat": {
-        "Bandit Archer (2e)": {
-          "normal": [
-            2,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
-        },
-        "Bandit Scout (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
-        },
-        "Hound (2e)": {
-          "normal": [
-            1,
-            2,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            2
-          ]
-        }
-      }
-    },
-    {
-      "564 Tribal": {
-        "Inox Archer (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
-        },
-        "Inox Guard (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
-        },
-        "Inox Priest (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        }
-      }
-    },
-    {
-      "567 Scaled": {
-        "Giant Viper (2e)": {
-          "normal": [
-            2,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            2,
-            2
-          ]
-        },
-        "Rending Drake (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        },
-        "Spitting Drake (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
-        }
-      }
-    },
-    {
-      "571 Infected": {
-        "Giant Viper (2e)": {
-          "normal": [
-            3,
-            4,
-            2
-          ],
-          "elite": [
-            1,
-            2,
-            5
-          ]
-        },
-        "Ooze (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
-        }
-      }
     }
   ],
   "60": [
     {
-      "L3a": {
+      "start": {
         "Bandit Archer (2e)": {
-          "normal": [
-            1,
-            3,
-            1
-          ],
-          "elite": [
-            1,
-            0,
-            2
-          ]
+          "normal": [1, 2, 2],
+          "elite": [1, 1, 2]
         },
         "Hound (2e)": {
-          "normal": [
-            2,
-            2,
-            3
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 3, 2],
+          "elite": [ 1, 1, 2]
         }
       }
     },
     {
-      "C2a": {
+      "85.1(1)": {
+        "Bandit Archer (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Bandit Scout (2e)": {
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
+        },
         "Rending Drake (2e)": {
-          "normal": [
-            2,
-            3,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [3, 3, 2],
+          "elite": [0, 1, 2]
+        }
+      }
+    },
+    {
+      "56.2(2)": {
+        "Bandit Archer (2e)": {
+          "normal": [0, 2, 2],
+          "elite": [1, 2, 2]
+        },
+        "Bandit Scout (2e)": {
+          "normal": [1, 2, 2],
+          "elite": [1, 2, 2]
+        },
+        "Hound (2e)": {
+          "normal": [2, 1, 2],
+          "elite": [ 0, 1, 1]
         }
       }
     },
     {
       "A4a": {
         "Bandit Scout (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
         },
         "Rending Drake (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
-        }
-      }
-    },
-    {
-      "M1b(1)": {
-        "Bandit Archer (2e)": {
-          "normal": [
-            2,
-            4,
-            5
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
-        },
-        "Bandit Scout (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
-        },
-        "Hound (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         }
       }
     }
@@ -4420,96 +4012,40 @@
     {
       "M1b": {
         "Cave Bear (2e)": {
-          "normal": [
-            1,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 1],
+          "elite": [ 0, 1, 1]
         },
         "Forest Imp (2e)": {
-          "normal": [
-            2,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [ 2, 1, 2],
+          "elite": [ 0, 1, 1]
         },
         "Hound (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "A4a": {
         "Cave Bear (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         },
         "Forest Imp (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [1, 2, 2],
+          "elite": [1, 1, 1]
         },
         "Hound (2e)": {
-          "normal": [
-            2,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 2, 1],
+          "elite": [0, 1, 2]
         }
       }
     },
     {
       "L3a": {
         "Cave Bear (2e)": {
-          "normal": [
-            0,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Forest Imp (2e)": {
           "normal": [
@@ -4533,76 +4069,36 @@
     {
       "B4a": {
         "Hound (2e)": {
-          "normal": [
-            2,
-            4,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            3
-          ]
+          "normal": [2, 4, 2],
+          "elite": [1, 1, 3]
         }
       }
     },
     {
       "B3a": {
         "Rending Drake (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Spitting Drake (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         }
       }
     },
     {
       "B1a": {
         "Giant Viper (2e)": {
-          "normal": [
-            4,
-            4,
-            4
-          ],
-          "elite": [
-            2,
-            4,
-            6
-          ]
+          "normal": [4, 4, 4],
+          "elite": [2, 4, 6]
         }
       }
     },
     {
       "B2a": {
         "Ooze (2e)": {
-          "normal": [
-            2,
-            2,
-            2
-          ],
-          "elite": [
-            1,
-            2,
-            3
-          ]
+          "normal": [2, 2, 2],
+          "elite": [1, 2, 3]
         }
       }
     }
@@ -4611,52 +4107,20 @@
     {
       "M1a": {
         "Flame Demon (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
         },
         "Frost Demon (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 1],
+          "elite": [1, 1, 1]
         },
         "Giant Viper (2e)": {
-          "normal": [
-            1,
-            2,
-            0
-          ],
-          "elite": [
-            1,
-            2,
-            4
-          ]
+          "normal": [1, 2, 0],
+          "elite": [1, 2, 4]
         },
         "Ooze (2e)": {
-          "normal": [
-            1,
-            2,
-            3
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [1, 2, 3],
+          "elite": [1, 1, 1]
         }
       }
     },
@@ -4666,52 +4130,20 @@
     {
       "D1a": {
         "Flame Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Frost Demon (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         },
         "Giant Viper (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            2,
-            4
-          ]
+          "normal": [2, 1, 0],
+          "elite": [1, 2, 4]
         },
         "Ooze (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
@@ -4721,40 +4153,16 @@
     {
       "C1a(1)": {
         "Flame Demon (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         },
         "Giant Viper (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Ooze (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         }
       }
     }
@@ -4763,96 +4171,40 @@
     {
       "J2a": {
         "Night Demon (2e)": {
-          "normal": [
-            2,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [ 2, 1, 2],
+          "elite": [ 0, 1, 1]
         },
         "Sun Demon (2e)": {
-          "normal": [
-            2,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [ 2, 1, 2],
+          "elite": [ 0, 1, 1]
         }
       }
     },
     {
       "J1a": {
         "Ancient Artillery (2e)": {
-          "normal": [
-            2,
-            3,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            2
-          ]
+          "normal": [2, 3, 0],
+          "elite": [0, 0, 2]
         },
         "Stone Construct (2e)": {
-          "normal": [
-            2,
-            3,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [2, 3, 2],
+          "elite": [0, 0, 1]
         }
       }
     },
     {
       "D1a(1)": {
         "Night Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         },
         "Sun Demon (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         },
         "The Colorless (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -4861,88 +4213,40 @@
     {
       "G1a": {
         "Lurker Soldier (2e)": {
-          "normal": [
-            1,
-            2,
-            4
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [1, 2, 4],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "K2a": {
         "Frost Demon (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         },
         "Lurker Soldier (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         }
       }
     },
     {
       "I1a": {
         "Frost Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         },
         "Living Spirit (2e)": {
-          "normal": [
-            2,
-            4,
-            4
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 4, 4],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "B3a": {
         "Living Spirit (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     }
@@ -4951,68 +4255,28 @@
     {
       "D2b": {
         "Lurker Soldier (2e)": {
-          "normal": [
-            1,
-            2,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            3
-          ]
+          "normal": [1, 2, 0],
+          "elite": [1, 1, 3]
         }
       }
     },
     {
       "L2a(1)": {
         "Black Imp (2e)": {
-          "normal": [
-            2,
-            3,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            4
-          ]
+          "normal": [2, 3, 1],
+          "elite": [1, 1, 4]
         },
         "Deep Terror (2e)": {
-          "normal": [
-            2,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [ 2, 1, 2],
+          "elite": [ 0, 1, 1]
         },
         "Giant Ooze (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Ooze (2e)": {
-          "normal": [
-            4,
-            3,
-            3
-          ],
-          "elite": [
-            0,
-            2,
-            3
-          ]
+          "normal": [4, 3, 3],
+          "elite": [0, 2, 3]
         }
       }
     }
@@ -5021,84 +4285,36 @@
     {
       "D2b": {
         "Forest Imp (2e)": {
-          "normal": [
-            2,
-            2,
-            0
-          ],
-          "elite": [
-            1,
-            2,
-            4
-          ]
+          "normal": [2, 2, 0],
+          "elite": [1, 2, 4]
         },
         "Ooze (2e)": {
-          "normal": [
-            2,
-            3,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [2, 3, 2],
+          "elite": [0, 0, 1]
         }
       }
     },
     {
       "K1b": {
         "Forest Imp (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         },
         "Ooze (2e)": {
-          "normal": [
-            2,
-            4,
-            4
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [2, 4, 4],
+          "elite": [1, 1, 2]
         }
       }
     },
     {
       "M1b": {
         "Forest Imp (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [1, 1, 2],
+          "elite": [1, 1, 2]
         },
         "Rending Drake (2e)": {
-          "normal": [
-            3,
-            3,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [3, 3, 2],
+          "elite": [0, 1, 2]
         }
       }
     }
@@ -5107,184 +4323,80 @@
     {
       "J1b": {
         "Ooze (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "C1a(1)": {
         "Ancient Artillery (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 1],
+          "elite": [1, 1, 1]
         },
         "Living Spirit (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 1, 1],
+          "elite": [ 0, 1, 1]
         }
       }
     },
     {
       "D1a(F)": {
         "Ancient Artillery (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Ooze (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Stone Construct (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "A1a(J)": {
         "Living Spirit (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "D2a(G)": {
         "Ancient Artillery (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Ooze (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Stone Construct (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "C2b(H)": {
         "Ancient Artillery (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 1],
+          "elite": [1, 1, 1]
         },
         "Living Spirit (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 1, 1],
+          "elite": [ 0, 1, 1]
         }
       }
     },
     {
       "A2a(I)": {
         "Living Spirit (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -5293,136 +4405,56 @@
     {
       "L3a": {
         "Forest Imp (2e)": {
-          "normal": [
-            2,
-            2,
-            4
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 2, 4],
+          "elite": [0, 0, 0]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            0,
-            2,
-            0
-          ],
-          "elite": [
-            2,
-            2,
-            4
-          ]
+          "normal": [0, 2, 0],
+          "elite": [2, 2, 4]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "B1b": {
         "Vermling Scout (2e)": {
-          "normal": [
-            2,
-            4,
-            4
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 4, 4],
+          "elite": [0, 0, 0]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "J1a(1)": {
         "Forest Imp (2e)": {
-          "normal": [
-            0,
-            0,
-            2
-          ],
-          "elite": [
-            2,
-            2,
-            2
-          ]
+          "normal": [0, 0, 2],
+          "elite": [2, 2, 2]
         },
         "Stone Construct (2e)": {
-          "normal": [
-            1,
-            2,
-            3
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 3],
+          "elite": [0, 0, 0]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            2,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            2,
-            2
-          ]
+          "normal": [2, 0, 0],
+          "elite": [0, 2, 2]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         }
       }
     },
     {
       "D2a": {
         "Living Spirit (2e)": {
-          "normal": [
-            3,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [3, 2, 1],
+          "elite": [0, 1, 2]
         }
       }
     }
@@ -5431,84 +4463,36 @@
     {
       "L1b": {
         "Night Demon (2e)": {
-          "normal": [
-            1,
-            2,
-            3
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 3],
+          "elite": [0, 0, 0]
         },
         "Wind Demon (2e)": {
-          "normal": [
-            2,
-            3,
-            3
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 3, 3],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "A3a": {
         "Night Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Wind Demon (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 0, 1],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "D2b": {
         "Night Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Wind Demon (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
@@ -5518,28 +4502,12 @@
     {
       "E1b(1)": {
         "Night Demon (2e)": {
-          "normal": [
-            1,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 1],
+          "elite": [ 0, 1, 1]
         },
         "Wind Demon (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 1],
+          "elite": [1, 1, 1]
         }
       }
     },
@@ -5564,88 +4532,40 @@
     {
       "A4a": {
         "Spitting Drake (2e)": {
-          "normal": [
-            6,
-            4,
-            2
-          ],
-          "elite": [
-            0,
-            2,
-            4
-          ]
+          "normal": [6, 4, 2],
+          "elite": [0, 2, 4]
         },
         "Sun Demon (2e)": {
-          "normal": [
-            2,
-            4,
-            5
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 4, 5],
+          "elite": [0, 0, 0]
         },
         "Wind Demon (2e)": {
-          "normal": [
-            2,
-            2,
-            3
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 2, 3],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "A3a(C)": {
         "Sun Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [ 0, 1, 1],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "G2a(D)": {
         "Wind Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
         }
       }
     },
     {
       "A2b(B)": {
         "Wind Demon (2e)": {
-          "normal": [
-            1,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 1],
+          "elite": [ 0, 1, 1]
         }
       }
     }
@@ -5654,80 +4574,32 @@
     {
       "M1b": {
         "Ancient Artillery (2e)": {
-          "normal": [
-            0,
-            2,
-            0
-          ],
-          "elite": [
-            2,
-            2,
-            4
-          ]
+          "normal": [0, 2, 0],
+          "elite": [2, 2, 4]
         },
         "Hound (2e)": {
-          "normal": [
-            2,
-            0,
-            2
-          ],
-          "elite": [
-            0,
-            2,
-            2
-          ]
+          "normal": [2, 0, 2],
+          "elite": [0, 2, 2]
         },
         "Inox Archer (2e)": {
-          "normal": [
-            2,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "E1b(1)": {
         "Inox Archer (2e)": {
-          "normal": [
-            1,
-            2,
-            3
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 3],
+          "elite": [0, 0, 0]
         },
         "Inox Guard (2e)": {
-          "normal": [
-            2,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            2,
-            2
-          ]
+          "normal": [2, 0, 0],
+          "elite": [0, 2, 2]
         },
         "Inox Priest (2e)": {
-          "normal": [
-            0,
-            0,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 2],
+          "elite": [1, 1, 1]
         }
       }
     }
@@ -5736,40 +4608,16 @@
     {
       "L1b": {
         "Forest Imp (2e)": {
-          "normal": [
-            2,
-            3,
-            5
-          ],
-          "elite": [
-            1,
-            2,
-            2
-          ]
+          "normal": [2, 3, 5],
+          "elite": [1, 2, 2]
         },
         "Giant Viper (2e)": {
-          "normal": [
-            2,
-            3,
-            3
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [2, 3, 3],
+          "elite": [1, 1, 2]
         },
         "Ooze (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            2,
-            3
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 2, 3]
         }
       }
     }
@@ -5781,152 +4629,64 @@
     {
       "E1b": {
         "Giant Viper (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Harrower Infester (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Night Demon (2e)": {
-          "normal": [
-            1,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 1],
+          "elite": [ 0, 1, 1]
         }
       }
     },
     {
       "H2a": {
         "Giant Viper (2e)": {
-          "normal": [
-            2,
-            2,
-            4
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 2, 4],
+          "elite": [0, 0, 0]
         },
         "Living Bones (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            2,
-            2
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 2, 2]
         }
       }
     },
     {
       "G2a": {
         "Harrower Infester (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Living Bones (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
         },
         "Night Demon (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "B4b": {
         "Giant Viper (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 1, 1],
+          "elite": [ 0, 1, 1]
         },
         "Living Bones (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "A2b": {
         "Harrower Infester (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
         }
       }
     },
@@ -5938,112 +4698,48 @@
     {
       "M1a": {
         "City Archer (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
         },
         "City Guard (2e)": {
-          "normal": [
-            2,
-            2,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            2
-          ]
+          "normal": [2, 2, 0],
+          "elite": [0, 0, 2]
         },
         "Stone Construct (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         }
       }
     },
     {
       "N1b(1)": {
         "City Archer (2e)": {
-          "normal": [
-            2,
-            2,
-            4
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 2, 4],
+          "elite": [0, 0, 0]
         },
         "City Guard (2e)": {
-          "normal": [
-            2,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            2,
-            2
-          ]
+          "normal": [2, 0, 0],
+          "elite": [0, 2, 2]
         },
         "Hound (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            2,
-            3
-          ]
+          "normal": [1, 0, 0],
+          "elite": [1, 2, 3]
         }
       }
     },
     {
       "B2b": {
         "Stone Construct (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "B3b": {
         "Stone Construct (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -6052,32 +4748,16 @@
     {
       "K1a": {
         "Stone Construct (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            2,
-            3,
-            4
-          ]
+          "normal": [1, 1, 1],
+          "elite": [2, 3, 4]
         }
       }
     },
     {
       "M1a(1)": {
         "The Betrayer (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -6086,60 +4766,28 @@
     {
       "G1a": {
         "Living Bones (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         }
       }
     },
     {
       "L1b": {
         "Living Bones (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         },
         "Living Spirit (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "B1b(1)": {
         "Living Spirit (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -6148,152 +4796,64 @@
     {
       "H3a": {
         "Bandit Archer (2e)": {
-          "normal": [
-            2,
-            4,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            3
-          ]
+          "normal": [2, 4, 2],
+          "elite": [1, 1, 3]
         }
       }
     },
     {
       "B2a": {
         "Cultist (2e) (89)": {
-          "normal": [
-            2,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 1],
+          "elite": [0, 1, 2]
         },
         "Giant Viper (2e)": {
-          "normal": [
-            2,
-            2,
-            2
-          ],
-          "elite": [
-            1,
-            2,
-            2
-          ]
+          "normal": [2, 2, 2],
+          "elite": [1, 2, 2]
         }
       }
     },
     {
       "B1a": {
         "Bandit Archer (2e)": {
-          "normal": [
-            0,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Bandit Scout (2e)": {
-          "normal": [
-            2,
-            2,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            2
-          ]
+          "normal": [2, 2, 0],
+          "elite": [0, 0, 2]
         },
         "Cultist (2e) (89)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "I2b": {
         "Bandit Archer (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Bandit Scout (2e)": {
-          "normal": [
-            2,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 1],
+          "elite": [0, 1, 2]
         },
         "Giant Viper (2e)": {
-          "normal": [
-            0,
-            2,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 2, 2],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "B3a": {
         "Cultist (2e) (89)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         },
         "Giant Viper (2e)": {
-          "normal": [
-            0,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [0, 2, 2],
+          "elite": [0, 0, 1]
         }
       }
     }
@@ -6302,124 +4862,52 @@
     {
       "L3a": {
         "Cave Bear (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            2,
-            3,
-            2
-          ],
-          "elite": [
-            2,
-            2,
-            3
-          ]
+          "normal": [2, 3, 2],
+          "elite": [2, 2, 3]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
         }
       }
     },
     {
       "B3a": {
         "Vermling Scout (2e)": {
-          "normal": [
-            3,
-            4,
-            4
-          ],
-          "elite": [
-            1,
-            2,
-            3
-          ]
+          "normal": [3, 4, 4],
+          "elite": [1, 2, 3]
         }
       }
     },
     {
       "B4a": {
         "Vermling Scout (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [1, 2, 2],
+          "elite": [1, 1, 2]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
         }
       }
     },
     {
       "C1b": {
         "Cave Bear (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         }
       }
     }
@@ -6428,68 +4916,28 @@
     {
       "H2b": {
         "Bandit Archer": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            2,
-            2,
-            3
-          ]
+          "normal": [0, 1, 0],
+          "elite": [2, 2, 3]
         },
         "Bandit Guard": {
-          "normal": [
-            4,
-            3,
-            4
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [4, 3, 4],
+          "elite": [ 0, 1, 1]
         },
         "Cave Bear": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         },
         "Hound": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 1, 0],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "G1a(1)": {
         "Bandit Archer": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            2,
-            2,
-            3
-          ]
+          "normal": [1, 2, 1],
+          "elite": [2, 2, 3]
         },
         "Bandit Guard": {
           "normal": [
@@ -6497,75 +4945,31 @@
             4,
             3
           ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "elite": [0, 0, 1]
         },
         "Hound": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 1, 0],
+          "elite": [0, 0, 0]
         },
         "Living Spirit": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "M1b": {
         "Bandit Archer": {
-          "normal": [
-            0,
-            2,
-            3
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 2, 3],
+          "elite": [1, 1, 1]
         },
         "Bandit Guard": {
-          "normal": [
-            3,
-            3,
-            3
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [3, 3, 3],
+          "elite": [1, 1, 2]
         },
         "Living Spirit": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [1, 2, 1],
+          "elite": [1, 1, 2]
         }
       }
     }
@@ -6574,120 +4978,48 @@
     {
       "C2a": {
         "Black Imp (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         },
         "Earth Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Harrower Infester (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
         }
       }
     },
     {
       "G2b(1)": {
         "Black Imp (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            1,
-            2,
-            2
-          ]
+          "normal": [ 0, 1, 1],
+          "elite": [1, 2, 2]
         },
         "Earth Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Harrower Infester (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 1, 2],
+          "elite": [ 0, 1, 1]
         }
       }
     },
     {
       "B1a(2)": {
         "Earth Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         },
         "Harrower Infester (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "The Harvester": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -6696,120 +5028,48 @@
     {
       "K1b": {
         "Inox Archer (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Inox Guard (2e)": {
-          "normal": [
-            0,
-            0,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 2],
+          "elite": [1, 1, 1]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            4,
-            3,
-            4
-          ],
-          "elite": [
-            0,
-            2,
-            2
-          ]
+          "normal": [4, 3, 4],
+          "elite": [0, 2, 2]
         }
       }
     },
     {
       "I2a": {
         "Flame Demon (2e)": {
-          "normal": [
-            1,
-            3,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 3, 2],
+          "elite": [0, 0, 1]
         },
         "Inox Archer (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Inox Guard (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [1, 1, 0],
+          "elite": [1, 1, 2]
         }
       }
     },
     {
       "D2b": {
         "Flame Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
         },
         "Inox Archer (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Inox Guard (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         }
       }
     }
@@ -6818,184 +5078,80 @@
     {
       "H1a": {
         "Hound (2e)": {
-          "normal": [
-            2,
-            3,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [2, 3, 2],
+          "elite": [0, 0, 1]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            2,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
         }
       }
     },
     {
       "H2a": {
         "Hound (2e)": {
-          "normal": [
-            2,
-            0,
-            2
-          ],
-          "elite": [
-            0,
-            2,
-            2
-          ]
+          "normal": [2, 0, 2],
+          "elite": [0, 2, 2]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "B1a": {
         "Hound (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [ 0, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            0,
-            1
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 0, 1]
         }
       }
     },
     {
       "B3a": {
         "Vermling Scout (2e)": {
-          "normal": [
-            0,
-            2,
-            1
-          ],
-          "elite": [
-            1,
-            0,
-            1
-          ]
+          "normal": [0, 2, 1],
+          "elite": [1, 0, 1]
         }
       }
     },
     {
       "I2b": {
         "Hound (2e)": {
-          "normal": [
-            2,
-            4,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            2
-          ]
+          "normal": [2, 4, 2],
+          "elite": [0, 0, 2]
         },
         "Inox Priest (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            0,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "B4a": {
         "Vermling Scout (2e)": {
-          "normal": [
-            0,
-            2,
-            1
-          ],
-          "elite": [
-            1,
-            0,
-            1
-          ]
+          "normal": [0, 2, 1],
+          "elite": [1, 0, 1]
         }
       }
     },
     {
       "B2a": {
         "Hound (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [ 0, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            0,
-            1
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 0, 1]
         }
       }
     }
@@ -7004,28 +5160,12 @@
     {
       "L3a": {
         "Cave Bear (2e)": {
-          "normal": [
-            2,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [2, 1, 1],
+          "elite": [ 0, 1, 1]
         },
         "Forest Imp (2e)": {
-          "normal": [
-            4,
-            4,
-            3
-          ],
-          "elite": [
-            1,
-            2,
-            5
-          ]
+          "normal": [4, 4, 3],
+          "elite": [1, 2, 5]
         }
       }
     },
@@ -7035,28 +5175,12 @@
     {
       "M1a(2)": {
         "Arcane Golem": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         },
         "Forest Imp (2e)": {
-          "normal": [
-            0,
-            1,
-            3
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 1, 3],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -7065,104 +5189,40 @@
     {
       "B1b": {
         "Black Imp (2e)": {
-          "normal": [
-            2,
-            2,
-            3
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 2, 3],
+          "elite": [0, 0, 0]
         },
         "Giant Viper (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Living Corpse (2e)": {
-          "normal": [
-            1,
-            2,
-            3
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 3],
+          "elite": [0, 0, 0]
         },
         "Rending Drake (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "M1b": {
         "Black Imp (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
         },
         "Giant Viper (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Living Corpse (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 2]
         },
         "Rending Drake (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [1, 2, 2],
+          "elite": [1, 1, 1]
         }
       }
     }
@@ -7171,88 +5231,40 @@
     {
       "K1a": {
         "Earth Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         },
         "Flame Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "C1a(A)": {
         "Stone Construct (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "D1a(B)": {
         "Stone Construct (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "B2b": {
         "Earth Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         },
         "Flame Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     }
@@ -7261,88 +5273,40 @@
     {
       "H1b": {
         "Cultist (2e)": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            1,
-            2,
-            2
-          ]
+          "normal": [1, 2, 2],
+          "elite": [1, 2, 2]
         },
         "Hound (2e)": {
-          "normal": [
-            2,
-            2,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            2
-          ]
+          "normal": [2, 2, 0],
+          "elite": [0, 0, 2]
         }
       }
     },
     {
       "I1b": {
         "Cultist (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [1, 1, 0],
+          "elite": [1, 1, 2]
         },
         "Living Spirit (2e)": {
-          "normal": [
-            2,
-            4,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            2
-          ]
+          "normal": [2, 4, 2],
+          "elite": [0, 0, 2]
         }
       }
     },
     {
       "M1a(1)": {
         "Cultist (2e)": {
-          "normal": [
-            0,
-            2,
-            0
-          ],
-          "elite": [
-            2,
-            2,
-            4
-          ]
+          "normal": [0, 2, 0],
+          "elite": [2, 2, 4]
         }
       }
     },
     {
       "2": {
         "Flame Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
         }
       }
     }
@@ -7351,160 +5315,64 @@
     {
       "L2a": {
         "Earth Demon (2e)": {
-          "normal": [
-            2,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Flame Demon (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
         },
         "Frost Demon (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
         }
       }
     },
     {
       "A3a(B)": {
         "Earth Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Flame Demon (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         },
         "Frost Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         }
       }
     },
     {
       "A2b(C)": {
         "Earth Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         },
         "Flame Demon (2e)": {
-          "normal": [
-            0,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 2, 2],
+          "elite": [0, 0, 0]
         },
         "Frost Demon (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "E1b(D)": {
         "Earth Demon (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         },
         "Flame Demon (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         },
         "Frost Demon (2e)": {
-          "normal": [
-            0,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 2, 2],
+          "elite": [0, 0, 0]
         }
       }
     }
@@ -7513,96 +5381,40 @@
     {
       "B1b": {
         "Cave Bear (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 1]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [1, 1, 2],
+          "elite": [1, 1, 1]
         }
       }
     },
     {
       "B2a": {
         "Vermling Scout (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            0,
-            1
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 0, 1]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [ 0, 1, 1],
+          "elite": [0, 0, 0]
         }
       }
     },
     {
       "B3a": {
         "Vermling Scout (2e)": {
-          "normal": [
-            0,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         }
       }
     },
@@ -7619,92 +5431,36 @@
     {
       "D2b": {
         "Frost Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [ 0, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Lurker Soldier (2e)": {
-          "normal": [
-            1,
-            1,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
         },
         "Ooze (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [1, 2, 1],
+          "elite": [1, 1, 2]
         }
       }
     },
     {
       "G2a(1)": {
         "Frost Demon (2e)": {
-          "normal": [
-            2,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 1],
+          "elite": [0, 1, 2]
         },
         "Lurker Soldier (2e)": {
-          "normal": [
-            2,
-            3,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [2, 3, 2],
+          "elite": [0, 0, 1]
         },
         "Lurker Soldier (2e) King": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Ooze (2e)": {
-          "normal": [
-            2,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 2, 1],
+          "elite": [0, 1, 2]
         }
       }
     }
@@ -7713,144 +5469,56 @@
     {
       "B1a": {
         "Bandit Scout (2e)": {
-          "normal": [
-            2,
-            4,
-            4
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 4, 4],
+          "elite": [0, 0, 0]
         },
         "Deep Terror (2e)": {
-          "normal": [
-            1,
-            0,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            0
-          ]
+          "normal": [1, 0, 2],
+          "elite": [0, 1, 0]
         },
         "Lurker Soldier (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 2]
         }
       }
     },
     {
       "I2b(1)": {
         "Bandit Archer (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Bandit Scout (2e)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Lurker Soldier (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Deep Terror (2e)": {
-          "normal": [
-            1,
-            0,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            0
-          ]
+          "normal": [1, 0, 2],
+          "elite": [0, 1, 0]
         }
       }
     },
     {
       "I1a(2)": {
         "Bandit Archer (2e)": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
         },
         "Bandit Scout (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [ 0, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Lurker Soldier (2e)": {
-          "normal": [
-            1,
-            2,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 2, 0],
+          "elite": [0, 0, 1]
         },
         "Deep Terror (2e)": {
-          "normal": [
-            2,
-            2,
-            0
-          ],
-          "elite": [
-            0,
-            0,
-            2
-          ]
+          "normal": [2, 2, 0],
+          "elite": [0, 0, 2]
         }
       }
     }
@@ -7859,116 +5527,44 @@
     {
       "H3b": {
         "Bandit Archer (2e)": {
-          "normal": [
-            1,
-            2,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [1, 2, 1],
+          "elite": [1, 1, 2]
         },
         "Bandit Scout (2e)": {
-          "normal": [
-            1,
-            2,
-            3
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 2, 3],
+          "elite": [0, 0, 0]
         },
         "Inox Guard (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
         }
       }
     },
     {
       "F1a(1)": {
         "Bandit Archer (2e)": {
-          "normal": [
-            2,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 2, 1],
+          "elite": [0, 1, 2]
         },
         "Bandit Scout (2e)": {
-          "normal": [
-            0,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [0, 2, 2],
+          "elite": [0, 0, 1]
         },
         "Inox Guard (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 1],
+          "elite": [1, 1, 1]
         },
         "Savvas Lavaflow (2e)": {
-          "normal": [
-            0,
-            0,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [0, 0, 0],
+          "elite": [1, 1, 1]
         },
         "City Guard (2e)": {
-          "normal": [
-            2,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [2, 2, 1],
+          "elite": [0, 0, 1]
         },
         "City Archer (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         }
       }
     }
@@ -7977,136 +5573,56 @@
     {
       "H2b": {
         "Hound (2e)": {
-          "normal": [
-            2,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            2
-          ]
+          "normal": [2, 1, 1],
+          "elite": [0, 1, 2]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            3,
-            3,
-            2
-          ],
-          "elite": [
-            1,
-            2,
-            3
-          ]
+          "normal": [3, 3, 2],
+          "elite": [1, 2, 3]
         }
       }
     },
     {
       "M1b": {
         "Cave Bear (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            2,
-            4,
-            2
-          ],
-          "elite": [
-            1,
-            1,
-            3
-          ]
+          "normal": [2, 4, 2],
+          "elite": [1, 1, 3]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            2,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 1]
         }
       }
     },
     {
       "C2a": {
         "Hound (2e)": {
-          "normal": [
-            0,
-            1,
-            0
-          ],
-          "elite": [
-            1,
-            1,
-            2
-          ]
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            1,
-            0,
-            0
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [1, 0, 0],
+          "elite": [ 0, 1, 1]
         }
       }
     },
     {
       "D1b(1)": {
         "Cave Bear (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 0, 1],
+          "elite": [0, 0, 0]
         },
         "Vermling Scout (2e)": {
-          "normal": [
-            4,
-            4,
-            4
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [4, 4, 4],
+          "elite": [ 0, 1, 1]
         },
         "Vermling Priest (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            1,
-            1,
-            1
-          ]
+          "normal": [ 0, 1, 1],
+          "elite": [1, 1, 1]
         }
       }
     }
@@ -8118,40 +5634,16 @@
     {
       "E1a(1)": {
         "Earth Demon (2e)": {
-          "normal": [
-            0,
-            0,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [0, 0, 1],
+          "elite": [0, 0, 0]
         },
         "Flame Demon (2e)": {
-          "normal": [
-            0,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [ 0, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Prime Lieutenant": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         }
       }
     },
@@ -8161,16 +5653,8 @@
     {
       "K2b": {
         "Deep Terror (2e)": {
-          "normal": [
-            2,
-            2,
-            1
-          ],
-          "elite": [
-            0,
-            1,
-            3
-          ]
+          "normal": [2, 2, 1],
+          "elite": [0, 1, 3]
         }
       }
     }

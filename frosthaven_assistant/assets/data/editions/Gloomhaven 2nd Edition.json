@@ -277,7 +277,7 @@
           "move": 5,
           "attack": 3
         },
-,        "Horned Hristek": {
+        "Horned Hristek": {
           "level": 7,
           "health": 7,
           "move": 3,
@@ -532,6 +532,19 @@
       ]
     },
     {
+      "name": "Cultist 54 (2e)",
+      "cards": [
+        ["Volatile Conduct", 760, false, 10, "%move% + 0","*.........", "%attack% - 1","*.........", "[r]","[c]","^^If Cultist dies this round,", "^^first remove all negative", "^^conditions and perform:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        ["Volatile Conduct", 761, false, 10, "%move% + 0","*.........", "%attack% - 1","*.........", "[r]","[c]","^^If Cultist dies this round,", "^^first remove all negative", "^^conditions and perform:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        ["Harrowing Harvest", 762, false, 27, "%move% + 0","*.........", "%attack% + 0","*.........", "%heal% X", "^Self", "[r]", "[c]","^^where X is the amount", "^^of damage suffered by the", "^^target of the attack ability.", "[/c]","[/r]" ],
+        ["Harrowing Harvest", 763, false, 27, "%move% + 0","*.........", "%attack% + 0","*.........", "%heal% X", "^Self", "[r]", "[c]", "^^where X is the amount", "^^of damage suffered by the", "^^target of the attack ability.", "[/c]","[/r]" ],
+        ["Dark Ritual", 764, true, 63, "^the highest health enemy within","^%range% 5 and within line-of-sight suffers", "^Damage X suffers damage 2.","*.........", "%heal% X", "^%range% 5", "[r]", "^Where x is equal to hazardous terrain damage.", "[/r]" ],
+        ["Dark Ritual", 765, true, 63, "^the highest health enemy within","^%range% 5 and within line-of-sight suffers", "^Damage X suffers damage 2.","*.........", "%heal% X", "^%range% 5", "[r]", "^Where x is equal to hazardous terrain damage.", "[/r]" ],
+        ["Unholy Guard", 766, false, 21, "%move% - 1","*.........", "%heal% 3", "^%range% 3,", "^%safeguard%" ],
+        ["Unholy Guard", 767, false, 21, "%move% - 1","*.........", "%heal% 3", "^%range% 3,", "^%safeguard%" ]
+      ]
+    },
+    {
       "name": "Living Corpse (2e)",
       "cards": [
         ["Rotting Embrace", 752, false, 21, "%move% + 1","*.........", "%muddle%, %immobilize%", "^%range% 1","*.........", "^If Living Corpse dies this round, all", "^figures adjacent to the hex it occupied", "^suffer damage 1 and gain %poison%."],
@@ -656,6 +669,12 @@
         }], "%move% + 0", "*.........","%attack% - 1        ", "[r]", "%earth%%use%", "[c]", "^+2%attack%,", "^%immobilize%","[/c]", "[/r]" ],
         ["Strength of the Mountain", 792, false, 31, "%heal% 4", "^%range% 3", "[r]", "%earth%%use%", "^+2%target%", "[/r]" ],
         ["Fire Bolts", 793, true, 68, "%move% - 1","*.........", "%attack% - 1","^%target% 2,", "^%range% 3", "%fire%" ]]
+    },
+    {
+      "name": "Egg 50",
+      "cards": [
+        ["Omelette?", 0, true, 99, "%heal% 1", "^Self", "*.........", "^If health increased beyond max:", "^Destroy Egg and spawn one Normal Night Demon in same hex."]
+      ]
     }
   ],
   "monsters": {
@@ -929,6 +948,55 @@
           "level": 7,
           "normal": {"health": 27, "move": 5, "attack": 5, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]},
           "elite": { "health": 37, "move": 5, "attack": 7, "attributes": [ "%wound%" ],"immunities": [ "%disarm%"]}
+        }
+      ]
+    },
+    "Cave Bear 58 (2e)": {
+      "deck": "Cave Bear (2e)",
+      "display": "Cave Bear",
+      "gfx": "Cave Bear",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 7, "move": 3, "attack": 3,"immunities": [ "%disarm%", "%poison%"] },
+          "elite": { "health": 11, "move": 3, "attack": 4,"immunities": [ "%disarm%","%poison%"] }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 9, "move": 3, "attack": 3,"attributes": [ "%poison%" ], "immunities": [ "%disarm%","%poison%"]},
+          "elite": { "health": 14, "move": 3, "attack": 4, "attributes": [ "%wound%", "%poison%"],"immunities": [ "%disarm%","%poison%"]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 11, "move": 4, "attack": 3, "attributes": [ "%poison%" ], "immunities": [ "%disarm%","%poison%"]},
+          "elite": { "health": 17, "move": 4, "attack": 4, "attributes": [ "%wound%","%poison%" ],"immunities": [ "%disarm%","%poison%"]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 13, "move": 4, "attack": 4, "immunities": [ "%disarm%","%poison%"],
+          "elite": { "health": 20, "move": 4, "attack": 5, "attributes": [ "%wound%","%poison%" ],"immunities": [ "%disarm%","%poison%"]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 15, "move": 4, "attack": 4, "attributes": [ "%wound%", "%poison%"], "immunities": [ "%disarm%","%poison%"]},
+          "elite": { "health": 21, "move": 5, "attack": 5, "attributes": [ "%wound%", "%poison%"],"immunities": [ "%disarm%","%poison%"]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 17, "move": 5, "attack": 4, "attributes": [ "%wound%", "%poison%"],"immunities": [ "%disarm%","%poison%"]},
+          "elite": { "health": 24, "move": 5, "attack": 6, "attributes": [ "%wound%", "%poison%"],"immunities": [ "%disarm%","%poison%"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 21, "move": 5, "attack": 5, "attributes": [ "%wound%", "%poison%"],"immunities": [ "%disarm%","%poison%"]},
+          "elite": { "health": 29, "move": 5, "attack": 7, "attributes": [ "%wound%","%poison%" ],"immunities": [ "%disarm%","%poison%"]}
+        },
+        {
+          "level": 7,
+          "normal": {"health": 27, "move": 5, "attack": 5, "attributes": [ "%wound%","%poison%" ],"immunities": [ "%disarm%","%poison%"]},
+          "elite": { "health": 37, "move": 5, "attack": 7, "attributes": [ "%wound%","%poison%" ],"immunities": [ "%disarm%","%poison%"]}
         }
       ]
     },
@@ -1305,6 +1373,55 @@
     },
     "Dark Ritual Cultist (2e)": {
       "deck": "Dark Ritual Cultist (2e)",
+      "display": "Cultist",
+      "gfx": "Cultist",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 2, "attack": 1 },
+          "elite": { "health": 7, "move": 2, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 2, "attack": 1 },
+          "elite": { "health": 9, "move": 2, "attack": 2, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 3, "attack": 1 },
+          "elite": { "health": 11, "move": 3, "attack": 2, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 8, "move": 3, "attack": 2 },
+          "elite": { "health": 15, "move": 3, "attack": 2, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 9, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 16, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 11, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 20, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 16, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 26, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 18, "move": 3, "attack": 3, "attributes": [ "%curse%" ]},
+          "elite": { "health": 30, "move": 3, "attack": 4, "attributes": [ "%curse%" ]}
+        }
+      ]
+    },
+    "Cultist 54 (2e)": {
+      "deck": "Cultist 54 (2e)",
       "display": "Cultist",
       "gfx": "Cultist",
       "hidden": true,
@@ -3962,6 +4079,38 @@
           "immunities": [ "%poison%","%disarm%", "%immobilize%", "%stun%", "%curse%" ]
         }
       ]
+    },
+    "Egg 50": {
+      "gfx": "nothing",
+      "hidden": true,
+      "deck": "Egg 50",
+      "count": 10,
+      "levels": [
+        {
+          "level": 0, "health": 4,  "move": 0,  "attack": 0
+        },
+        {
+          "level": 1, "health": 5, "move": 0, "attack":0
+        },
+        {
+          "level": 2,"health": 5,  "move": 0,  "attack": 0
+        },
+        {
+          "level": 3, "health": 6,  "move": 0,  "attack": 0
+        },
+        {
+          "level": 4,"health": 6,  "move": 0,  "attack": 0
+        },
+        {
+          "level": 5, "health": 7,  "move": 0,  "attack": 0
+        },
+        {
+          "level": 6, "health": 7,  "move": 0,  "attack": 0
+        },
+        {
+          "level": 7, "health": 8,  "move": 0,  "attack": 0
+        }
+      ]
     }
   },
 
@@ -4735,7 +4884,7 @@
       "initialMessage": "Enemies do not act until door 1 is opened.",
       "monsters": ["Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Savvas Icestorm 40 (2e)", "Savvas Lavaflow 40 (2e)", "Wind Demon (2e)"],
       "sections": {
-        "#103.3": {
+        "#103.3(2)": {
           "special": [
             {
               "type": "ResetRound"
@@ -4761,7 +4910,7 @@
     "#41 Ancient Cistern": {
       "monsters": ["Black Imp (2e)", "Living Corpse (2e)", "Ooze (2e)", "Night Demon (2e)"],
       "sections": {
-        "#112.4": {
+        "#112.4(6)": {
           "special": [
             {
               "type": "ResetRound"
@@ -4783,44 +4932,175 @@
       }
     },
     "#42 Secluded Valley": {
-      "monsters": ["Cave Bear (2e)", "City Guard (2e)", "Forest Imp (2e)", "Hound (2e)", "Stone Construct (2e)"]
+      "monsters": ["Cave Bear (2e)", "City Guard (2e)", "Forest Imp (2e)", "Hound (2e)", "Stone Construct (2e)"],
+      "sections": {
+        "#83.4(1)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Objective",
+              "name": "Wheel 1",
+              "health": "(4+L)xC"
+            },
+            {
+              "type": "Objective",
+              "name": "Wheel 2",
+              "health": "(4+L)xC"
+            },
+            {
+              "type": "Timer",
+              "list": [
+                -1
+              ],
+              "startOfRound": true,
+              "note": "Move Wagon."
+            },
+            {
+              "type": "Timer",
+              "list": [
+                6
+              ],
+              "startOfRound": true,
+              "note": "Spawn one Stone Construct and two Hounds at B. All Normal for 2 characters, Construct is Elite for 3 and all Elite for 4 characters.",
+              "name": "spawn 1"
+            }
+          ]
+        }
+      }
     },
     "#43 Chasing Secrets": {
-      "monsters": ["Candlekeeper Trice", "City Guard (2e)", "Hound (2e)", "Stone Construct (2e)"]
+      "monsters": ["Candlekeeper Trice", "City Guard (2e)", "Hound (2e)", "Stone Construct (2e)"],
+      "sections": {
+        "#77.1": {
+          "initialMessage": "Spawn one Stone Construct and two City Guards at B. They are Normal for 2 characters,Guards are Elite for 3 characters and All are Elite for 4.",
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Bookshelf",
+              "health": "4+LxC"
+            }
+          ]
+        }
+      }
     },
     "#44 Temple of the Elements": {
       "monsters": ["Cultist (2e)","Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Living Bones (2e)","Wind Demon (2e)"],
-      "special": [
-        {
-          "type": "Objective",
-          "name": "Elemental Tether A",
-          "health": "4+(CxL)",
-          "Todo": "move these to sections"
+      "sections": {
+        "#118.1(2)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Elemental Tether A",
+              "health": "2+(CxL)"
+            }
+          ]
         },
-        {
-          "type": "Objective",
-          "name": "Elemental Tether B",
-          "health": "4+(CxL)"
+        "#48.4(3)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Elemental Tether B",
+              "health": "2+(CxL)"
+            }
+          ]
         },
-        {
-          "type": "Objective",
-          "name": "Elemental Tether C",
-          "health": "4+(CxL)"
+        "43.3(4)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Elemental Tether C",
+              "health": "2+(CxL)"
+            }
+          ]
         },
-        {
-          "type": "Objective",
-          "name": "Elemental Tether D",
-          "health": "4+(CxL)"
+        "#99.2(5)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Elemental Tether D",
+              "health": "2+(CxL)"
+            }
+          ]
         }
-      ]
+      }
     },
     "#45 Plane of Night": {
       "monsters": ["Black Imp (2e)", "Deep Terror (2e)", "Night Demon (2e)"],
-      "todo": "note dark every turn start"
+      "special": [
+        {
+          "type": "Timer",
+          "list": [
+            -1
+          ],
+          "startOfRound": true,
+          "note": "Dark strong."
+        }
+      ],
+      "sections": {
+        "#95.1(2)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Rock Column A",
+              "health": "(8+L)xC",
+              "init": 1
+            },
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22],
+              "startOfRound": true,
+              "note": "Spawn one Night Demon at B. It is Elite for 3-4 characters.",
+              "name": "spawn 1"
+            },
+            {
+              "type": "Timer",
+              "list": [3,5,7,9,11,13,15,17,19,21],
+              "startOfRound": true,
+              "note": "Spawn one Night Demon. It is Elite for 4 characters.",
+              "name": "spawn 2"
+            },
+            {
+              "type": "Timer",
+              "list": [
+                -1
+              ],
+              "startOfRound": true,
+              "note": "Dark strong."
+            }
+          ]
+        }
+      }
     },
     "#46 Doom Trench": {
-      "monsters": [ "Deep Teror (2e)", "Harrower Infester (2e)", "Lurker Soldier (2e)","City Archer (2e)", "Frost Demon (2e)", "Living Corpse (2e)"],
-      "todo": "ally spawn note for achievements"
+      "monsters": [ "Deep Terror (2e)", "Harrower Infester (2e)", "Lurker Soldier (2e)","City Archer (2e)", "Frost Demon (2e)", "Living Corpse (2e)"],
+      "sections": {
+        "#95.1(2)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22],
+              "startOfRound": true,
+              "note": "Spawn one Lurker Soldier in a starting hex. It is Elite for 4 characters.",
+              "name": "spawn 1"
+            },
+            {
+              "type": "Timer",
+              "list": [3,5,7,9,11,13,15,17,19,21],
+              "startOfRound": true,
+              "note": "Spawn one Lurker Soldier in a starting hex. It is Elite for 3-4 characters.",
+              "name": "spawn 2"
+            }
+          ]
+        }
+      }
     },
     "#47 Slave Pens": {
       "monsters": [ "Inox Archer (2e)", "Inox Guard (2e)", "Inox Priest (2e)", "Stone Construct (2e)","City Archer (2e)", "Earth Demon (2e)", "Living Corpse (2e)"],
@@ -4831,25 +5111,29 @@
           "health": "6+(3xL)",
           "init": 40
         }
-      ],
-      "todo": "ally spawn note for achievements"
+      ]
     },
     "#48 Treacherous Divide": {
       "monsters": ["City Guard (2e)", "Wind Demon (2e)", "Living Corpse (2e)", "Cave Bear (2e)", "Cultist (2e)", "Frost Demon (2e)"],
       "special": [
         {
-          "type": "Objective",
-          "name": "Altar",
-          "health": "6+(CxL)"
-        },
-        {
           "type": "Timer",
           "list": [-1],
           "startOfRound": true,
-          "note": "Ice Strong if Altar is not destroyed."
+          "note": "Ice Strong if Altar C is not destroyed."
         }
       ],
-      "todo": "ally spawn note for achievements. move objective to section"
+      "sections": {
+        "#52.4(1)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Altar C",
+              "health": "2+(CxL)"
+            }
+          ]
+        }
+      }
     },
     "#49 Tribal Assault": {
       "monsters": ["Hound (2e)", "Inox Archer (2e)", "Inox Guard (2e)", "Inox Priest (2e)"],
@@ -4863,42 +5147,321 @@
       ]
     },
     "#50 Nightmare Peak": {
-      "monsters": ["The Winged Horror (2e)", "Frost Demon (2e)", "Night Demon (2e)", "Savvas Icestorm (2e)", "Wind Demon (2e)","City Guard (2e)", "Flame Demon (2e)", "Living Bones (2e)"],
-      "todo": "door objective/ special monster?, note ally spawn note for achievements "
+      "monsters": ["The Winged Horror (2e)", "Frost Demon (2e)", "Night Demon (2e)", "Savvas Icestorm (2e)", "Wind Demon (2e)","City Guard (2e)", "Flame Demon (2e)", "Living Bones (2e)", "Door 50"],
+      "special": [
+        {
+          "type": "Objective",
+          "name": "Door 1 (push 1)",
+          "health": "100",
+          "init": 73
+        }
+      ],
+      "sections": {
+        "#58.2(1)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Door 2 (push 2)",
+              "health": "100",
+              "init": 73
+            }
+          ]
+        },
+        "#101.1(2)": {
+          "monsters": ["Egg 50"],
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [3,5,7,9,11,13,15,17,19,21,23,25,27],
+              "startOfRound": true,
+              "note": "Spawn C Eggs.",
+              "name": "spawn 1"
+            }
+          ]
+        }
+      }
     },
     "#51 Lair of the Unseeing Eye": {
       "monsters": ["The Sightless Eye (2e)", "Deep Terror (2e)","Harrower Infester (2e)", "Lurker Soldier (2e)","City Archer (2e)", "Sun Demon (2e)", "Living Corpse (2e)"],
-      "todo": "door objective/ special monster?, note ally spawn note for achievements "
+      "sections": {
+        "#104.4(1)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22],
+              "startOfRound": true,
+              "note": "Spawn two Deep Terrors. One is Elite for 3 characters and both are Elite for 4 characters.",
+              "name": "spawn 1"
+            },
+            {
+              "type": "Timer",
+              "list": [2],
+              "startOfRound": true,
+              "note": "Remove 11-A tile and door."
+            }
+          ]
+        }
+      }
     },
     "#52 Shadow Weald": {
       "monsters": ["Dark Rider (2e)", "Earth Demon (2e)", "Forest Imp (2e)", "Harrower Infester (2e)","City Guard (2e)", "Night Demon (2e)", "Living Bones (2e)"],
-      "todo": " note ally spawn note for achievements "
+      "special": [
+        {
+          "type": "Timer",
+          "list": [-1],
+          "startOfRound": true,
+          "note": "Activate Redthorns Aid?"
+        }
+      ]
     },
     "#53 Shrine of Strength": {
       "monsters": ["Frost Demon (2e)", "Harrower Infester (2e)", "Savvas Icestorm (2e)", "Stone Construct (2e)", "Wind Demon (2e)"]
     },
     "#54 The Void": {
-      "monsters": ["Black Imp (2e)", "Chaos Demon (2e)", "Cultist (2e)", "Harrower Infester (2e)","Vermling Scout (2e)","City Archer (2e)","City Guard (2e)", "Frost Demon (2e)","Night Demon (2e)", "Living Bones (2e)","Living Corpse (2e)"],
-      "todo": "special cultists. note ally spawn note for achievements "
+      "monsters": ["Black Imp (2e)", "Chaos Demon (2e)", "Cultist 54 (2e)", "Harrower Infester (2e)","Vermling Scout (2e)","City Archer (2e)","City Guard (2e)", "Frost Demon (2e)","Night Demon (2e)", "Living Bones (2e)","Living Corpse (2e)"],
+      "sections": {
+        "#112.3": {
+          "monsters": ["The Gloom"],
+          "initialMessage": "1st printing Errata: The Gloom considers all Null modifier cards he draws to be +0 instead.",
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [3],
+              "startOfRound": true,
+              "note": "Read section 55.4"
+            }
+          ]
+        }
+      }
     },
     "#55 The Last Stand": {
       "monsters": ["Black Imp (2e)", "Chaos Demon (2e)", "Deep Terror (2e)", "Harrower Infester (2e)","Vermling Scout (2e)","City Archer (2e)","City Guard (2e)", "Earth Demon (2e)","Wind Demon (2e)", "Living Bones (2e)","Living Corpse (2e)"],
-      "todo": "hail escort. stone pillar objective.special cultists. note ally spawn note for achievements at round 4, 8, 12, 16, 20, 24, 28, 32 "
+      "special": [
+        {
+          "type": "Escort",
+          "name": "Hail",
+          "health": "4+(2xL)",
+          "init": 99
+        },
+        {
+          "type": "Objective",
+          "name": "Stone Pillar H",
+          "health": "8+CxL",
+          "init": 99
+        },
+        {
+          "type": "Timer",
+          "list": [4,8,12,16,20,24,28,32],
+          "startOfRound": true,
+          "note": "Spawn your allies at D."
+        },
+        {
+          "type": "Timer",
+          "list": [3],
+          "startOfRound": true,
+          "note": "read 71.1"
+        },
+        {
+          "type": "Timer",
+          "list": [6],
+          "startOfRound": true,
+          "note": "read 2.3"
+        },
+        {
+          "type": "Timer",
+          "list": [9],
+          "startOfRound": true,
+          "note": "read 72.2"
+        },
+        {
+          "type": "Timer",
+          "list": [12],
+          "startOfRound": true,
+          "note": "read 93.5"
+        },
+        {
+          "type": "Timer",
+          "list": [15],
+          "startOfRound": true,
+          "note": "read 67.1"
+        }
+      ]
     },
     "#56 The Gloom": {
       "monsters": ["The Gloom (2e)", "Black Imp (2e)", "Chaos Demon (2e)", "Deep Terror (2e)", "Harrower Infester (2e)"],
-      "todo": "spawn timer "
+      "initialMessage": "1st printing Errata: The Gloom considers all Null modifier cards he draws to be +0 instead.",
+      "special": [
+        {
+          "type": "Timer",
+          "list": [3,6,9,12,15,18,21,24,27,30],
+          "startOfRound": true,
+          "note": "Spawn a Chaos Demon (Elite for 4 characters), a Normal Black Imp (2 imps for 3-4 characters) and a Harrower Infester (Elite for 3-4 characters)",
+          "name": "spawn 1"
+        },
+        {
+          "type": "Timer",
+          "list": [3],
+          "startOfRound": true,
+          "note": "read 39.4"
+        },
+        {
+          "type": "Timer",
+          "list": [4],
+          "startOfRound": true,
+          "note": "read 60.5"
+        }
+      ],
+      "sections": {
+        "#118.4": {
+          "monsters": ["Vermling Scout (2e)"],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Argeise",
+              "health": "4+(3xL)",
+              "init": 1
+            },
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "Argeise performs Move 3, Attack 2, Range 3 AOE Triangle."
+            }
+          ]
+        },
+        "#46.2": {
+          "monsters": ["Flame Demon (2e)", "Sun Demon (2e)"],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Prime Demon",
+              "health": "8+(3xL)",
+              "init": 1
+            },
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "Prime Demon performs Move 4, Attack 3, ( OXXX )"
+            }
+          ]
+        },
+        "#110.2": {
+          "monsters": ["Living Bones (2e)", "Living Corpse (2e)"],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Jekserah",
+              "health": "4+(3xL)",
+              "init": 1
+            },
+            {
+              "type": "Timer",
+              "list": [3,5,7,9,11,13,15,17,19,21,23,25,27,29],
+              "startOfRound": true,
+              "note": "Jekserah Summons one normal Living Bones."
+            },
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "startOfRound": true,
+              "note": "Jekserah performs Heal 2, Target 2, Range 3."
+            }
+          ]
+        },
+        "#45.5": {
+          "monsters": ["City Archer (2e)", "City Guard (2e)"],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "First Shield Harmon",
+              "health": "6+(2xL)",
+              "init": 1
+            },
+            {
+              "type": "Timer",
+              "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29],
+              "startOfRound": true,
+              "note": "Harmon Grants all allies Shield 1."
+            },
+            {
+              "type": "Timer",
+              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+              "startOfRound": true,
+              "note": "Harmon Grants all allies Retaliate 1."
+            }
+          ]
+        },
+        "#6.1": {
+          "monsters": ["City Guard (2e)"],
+          "special": [
+            {
+              "type": "Escort",
+              "name": "Candlekeeper Trice",
+              "health": "6+(3xL)",
+              "init": 1
+            },
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "Trice performs Move 3, Attack 3 (Advantage, Wound). AOE. Infuse Fire or Light."
+            }
+          ]
+        },
+        "#60.5": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [6,9,12,15,18,21,24,27,30],
+              "startOfRound": true,
+              "note": "The Gloom Loses Ward and Cannot gain Ward."
+            },
+            {
+              "type": "Timer",
+              "list": [7,8,10,11,13,14,16,17,19,20,22,23,25,26,28,29],
+              "startOfRound": true,
+              "note": "The Gloom Gains Ward and whenever he loses Ward he gain Ward again."
+            }
+          ]
+        }
+      },
+      "todo": "make special monsters instead of escorts?"
     },
     "#57 Crypt Basement": {
       "monsters": ["Crystal Rot (2e)", "Giant Viper (2e)", "Living Bones (2e)", "Living Corpse (2e)", "Living Spirit (2e)"]
     },
     "#58 Palace of Ice": {
       "monsters": ["Cave Bear (2e)", "Frost Demon (2e)", "Harrower Infester (2e)", "Living Spirit (2e)"],
-      "todo": "special bears"
+      "sections": {
+        "#59.2(1)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [5],
+              "startOfRound": true,
+              "note": "Spawn Cave Bears at B. One Normal for 2 and 4 characters. One Elite for 3-4.. \nSpawn Living spirits at C. One Normal for 2 characters, Two Normal for 3 characters. One Normal and one Elite for 4.",
+              "name": "spawn 1"
+            }
+          ]
+        }
+      }
     },
     "#59 Foggy Thicket": {
       "monsters": [],
-      "todo": "will this work? there is a sublist of possible monster cards",
+      "initialMessage": "Handle Manually: Sorry, 2e Random Dungeon Deck not added yet...",
       "special": [
         {
           "type": "RandomSections"
@@ -4907,7 +5470,7 @@
     "#60 Bandit's Wood": {
       "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Hound (2e)", "Rending Drake (2e)"],
       "sections": {
-        "#56.2 - Bandit's Wood": {
+        "#56.2(2) - Bandit's Wood": {
           "special": [
             {
               "type": "Escort",
@@ -5224,6 +5787,9 @@
     },
     "#100 Silence Falls": {
       "monsters": ["Chaos Demon (2e)", "Crystal Rot (2e)", "Living Bones (2e)", "Living Corpse (2e)"]
+    },
+    "#S Challenger's Rift": {
+      "monsters": ["Chaos Demon (2e)", "Forest Imp (2e)", "Giant Viper (2e)", "Living Bones (2e)","Spitting Drake (2e)"]
     }
   }
 }
