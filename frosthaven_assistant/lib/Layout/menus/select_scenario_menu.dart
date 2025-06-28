@@ -62,7 +62,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
         .toList();
 
-    //special hack for solo BladeSwarm
+    //special hack for solo BladeSwarm and Vanquisher
     if (campaign == "Solo" || campaign == "Trail of Ashes") {
       if (!_gameState.unlockedClasses.contains("Bladeswarm")) {
         for (var item in _foundScenarios) {

@@ -545,6 +545,19 @@
       ]
     },
     {
+      "name": "Cultist 82 (2e)",
+      "cards": [
+        ["Volatile Conduct", 760, false, 10, "%move% + 0","*.........", "%attack% - 1","*.........", "[r]","[c]","^^If Cultist dies this round,", "^^first remove all negative", "^^conditions and perform:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        ["Volatile Conduct", 761, false, 10, "%move% + 0","*.........", "%attack% - 1","*.........", "[r]","[c]","^^If Cultist dies this round,", "^^first remove all negative", "^^conditions and perform:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
+        ["Harrowing Harvest", 762, false, 27, "%move% + 0","*.........", "%attack% + 0","*.........", "%heal% X", "^Self", "[r]", "[c]","^^where X is the amount", "^^of damage suffered by the", "^^target of the attack ability.", "[/c]","[/r]" ],
+        ["Harrowing Harvest", 763, false, 27, "%move% + 0","*.........", "%attack% + 0","*.........", "%heal% X", "^Self", "[r]", "[c]", "^^where X is the amount", "^^of damage suffered by the", "^^target of the attack ability.", "[/c]","[/r]" ],
+        ["Dark Ritual", 764, true, 63, "*", "^Summon one elite","^Giant Viper","*.........", "^Cultist suffers damage 2.","*.........", "%stun%", "^Self" ],
+        ["Dark Ritual", 765, true, 63, "*", "^Summon one elite","^Giant Viper","*.........", "^Cultist suffers damage 2.", "*.........", "%stun%", "^Self"],
+        ["Unholy Guard", 766, false, 21, "%move% - 1","*.........", "%heal% 3", "^%range% 3,", "^%safeguard%" ],
+        ["Unholy Guard", 767, false, 21, "%move% - 1","*.........", "%heal% 3", "^%range% 3,", "^%safeguard%" ]
+      ]
+    },
+    {
       "name": "Living Corpse (2e)",
       "cards": [
         ["Rotting Embrace", 752, false, 21, "%move% + 1","*.........", "%muddle%, %immobilize%", "^%range% 1","*.........", "^If Living Corpse dies this round, all", "^figures adjacent to the hex it occupied", "^suffer damage 1 and gain %poison%."],
@@ -555,6 +568,19 @@
         ["Reckless Charge", 757, false, 91, "%move% + 2","*.........", "[r]", "%earth%%use%", "^%attack% + 0", "[/r]","*.........", "^If the move ability was performed,","^Living Corpse suffers damage 1."],
         ["Release Gas", 758, false, 71, "%move% + 0","*.........", "%attack% + 1", "*.........","%poison%", "^Target all,", "^%range% 1", "%earth%"],
         ["Violent Slam", 759, false, 32, "%attack% + 2", "^%push% 1", "*.........", "^If the attack ability was performed,", "^Living Corpse suffers damage 1."]
+      ]
+    },
+    {
+      "name": "Bloated Victim (2e)",
+      "cards": [
+        ["Rotting Embrace", 752, false, 21, "%move% + 2","*.........", "%muddle%, %immobilize%", "^%range% 1","*.........", "^If Bloated Victim dies this round, all", "^figures adjacent to the hex it occupied", "^suffer damage 1 and gain %poison%."],
+        ["hasty Assault", 754, false, 47, "%move% + 2","*.........", "%attack% - 1", "^Target 2"],
+        ["Nothing Special", 755, true, 68, "%move% + 1","*.........", "%attack% + 0","^Target 2"],
+        ["Nothing Special", 756, true, 68, "%move% + 1","*.........", "%attack% + 0","^Target 2"],
+        ["Calculated Strike", 753, false, 82, "%move% + 0","*.........", "%attack% + 1","^Target 2"],
+        ["Reckless Charge", 757, false, 91, "%move% + 3","*.........", "[r]", "%earth%%use%", "^%attack% + 0","^Target 2", "[/r]","*.........", "^If the move ability was performed,","^Bloated Victim suffers damage 1."],
+        ["Release Gas", 758, false, 71, "%move% + 1","*.........", "%attack% + 1","^Target 2", "*.........","%poison%", "^Target all,", "^%range% 1", "%earth%"],
+        ["Violent Slam", 759, false, 32, "%attack% + 2","^Target 2", "^%push% 1", "*.........", "^If the attack ability was performed,", "^Bloated Victim suffers damage 1."]
       ]
     },
     {
@@ -649,6 +675,19 @@
     {
       "name": "Savvas Icestorm 40 (2e)",
       "cards": [
+        ["Hardened Frost", 797, false, 19,"%move% + 0","*.........", "%attack% - 1", "^%range% 3","*.........", "^Grant all allies within %range% 2 and self:","%shield% 1", "%ice%"],
+        ["Freezing Winds", 798, false, 14,"%attack% + 0", "^%range% 4", "[r]","%ice%%use%", "^+2%attack%,", "^%immobilize%", "[/r]","*.........", "%retaliate% + 2", "%air%" ],
+        ["Frozen Shell", 799, false, 14, "%shield% + 4","*.........", "%heal% 2", "^%range% 3","[r]", "%ice%%use%", "^+3%heal%", "[/r]","*.........", "[r]","%air%%use%", "[c]","%attack% - 1", "^%range% 3", "[/c]","[/r]" ],
+        ["Forceful Gust", 800, true, 47, "%disarm%", "^Target all, %range% 1","**.........", "%move% + 0","**.........", "%attack% - 1", "^%range% 4", "%air%" ],
+        ["Cone of Cold", 801, true, 35, "%move% - 1","**.........","[r]","%attack% - 1","¤aoe-triangle-3-side-with-corner-black", "[/r]", "%ice%" ]
+      ]
+    },
+    {
+      "name": "Tyrant of the Tides",
+      "cards": [
+        ["Repulsive Torrent", 794, false, 70, "%push% 2", "^Target all, %range% 1", "[r]","%air%%use%", "^+2%push%", "[/r]","*.........", "%attack% + 1", "^%range% 5" ],
+        ["Call to the Wind", 795, false, 98, "Summon one normal","Wind Demon.", "%air%" ],
+        ["Call to the Frost", 796, false, 98, "^Spawn one Lurker soldier at B.", "^^It is Normal for 2 characters and Elite for 3-4.", "%ice%" ],
         ["Hardened Frost", 797, false, 19,"%move% + 0","*.........", "%attack% - 1", "^%range% 3","*.........", "^Grant all allies within %range% 2 and self:","%shield% 1", "%ice%"],
         ["Freezing Winds", 798, false, 14,"%attack% + 0", "^%range% 4", "[r]","%ice%%use%", "^+2%attack%,", "^%immobilize%", "[/r]","*.........", "%retaliate% + 2", "%air%" ],
         ["Frozen Shell", 799, false, 14, "%shield% + 4","*.........", "%heal% 2", "^%range% 3","[r]", "%ice%%use%", "^+3%heal%", "[/r]","*.........", "[r]","%air%%use%", "[c]","%attack% - 1", "^%range% 3", "[/c]","[/r]" ],
@@ -903,6 +942,55 @@
         }
       ]
     },
+    "Black Imp 99 (2e)": {
+      "gfx": "Black Imp",
+      "display": "Black Imp",
+      "hidden": true,
+      "deck": "Imp (FH)",
+      "count": 10,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 3, "move": 2, "attack": 1 },
+          "elite": { "health": 3, "move": 2, "attack": 2, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 1,
+          "normal": { "health": 3, "move": 2, "attack": 1, "attributes": [ "%poison%" ] },
+          "elite": { "health": 5, "move": 2, "attack": 2, "attributes": [ "%poison%" ] }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 4, "move": 2, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": { "health": 7, "move": 2, "attack": 2, "attributes": [ "%poison%" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 4, "move": 2, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": { "health": 7, "move": 2, "attack": 2, "attributes": [ "^^All attacks","^^targeting","^^Black Imp gain","^^disadvantage", "%poison%" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 5, "move": 2, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": { "health": 7, "move": 2, "attack": 3, "attributes": [ "^^All attacks","^^targeting","^^Black Imp gain","^^disadvantage", "%poison%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 7, "move": 2, "attack": 2, "attributes": [ "%poison%" ]},
+          "elite": { "health": 9, "move": 2, "attack": 3, "attributes": [ "^^All attacks","^^targeting","^^Black Imp gain","^^disadvantage", "%poison%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 9, "move": 2, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": { "health": 12, "move": 2, "attack": 4, "attributes": [ "^^All attacks","^^targeting","^^Black Imp gain","^^disadvantage", "%poison%"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 13, "move": 2, "attack": 3, "attributes": [ "%poison%" ]},
+          "elite": { "health": 18, "move": 2, "attack": 4, "attributes": [ "^^All attacks","^^targeting","^^Black Imp gain","^^disadvantage", "%poison%" ]}
+        }
+      ]
+    },
     "Cave Bear (2e)": {
       "deck": "Cave Bear (2e)",
       "display": "Cave Bear",
@@ -975,7 +1063,7 @@
         },
         {
           "level": 3,
-          "normal": { "health": 13, "move": 4, "attack": 4, "immunities": [ "%disarm%","%poison%"],
+          "normal": { "health": 13, "move": 4, "attack": 4, "immunities": [ "%disarm%","%poison%"]},
           "elite": { "health": 20, "move": 4, "attack": 5, "attributes": [ "%wound%","%poison%" ],"immunities": [ "%disarm%","%poison%"]}
         },
         {
@@ -1276,6 +1364,39 @@
         }
       ]
     },
+    "The Harvester (2e)": {
+      "display": "The Harvester",
+      "gfx": "City Guard",
+      "deck": "Guard (FH)",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0, "health": "6+C",  "move": 2,  "attack": 3, "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 1, "health": "7+C", "move": 2, "attack": 3, "attributes": [ "%shield% 2" ]
+        },
+        {
+          "level": 2, "health": "11+C", "move": 2, "attack": 3, "attributes": [ "%shield% 2" ]
+        },
+        {
+          "level": 3, "health": "12+C", "move": 2, "attack": 4, "attributes": [ "%shield% 2", "%retaliate% 1"]
+        },
+        {
+          "level": 4, "health": "14+C", "move": 3, "attack": 4, "attributes": [  "%shield% 2","%retaliate% 2"]
+        },
+        {
+          "level": 5, "health": "18+C", "move": 3, "attack": 4, "attributes": [  "%shield% 2","%retaliate% 2"]
+        },
+        {
+          "level": 6, "health": "21+C", "move": 3, "attack": 4, "attributes": [ "%shield% 3","%retaliate% 3" ]
+        },
+        {
+          "level": 7, "health": "27+C", "move": 3, "attack": 5, "attributes": [ "%shield% 3","%retaliate% 3"]
+        }
+      ]
+    },
     "Crystal Rot (2e)": {
       "deck": "Crystal Rot",
       "gfx": "Crystal Rot",
@@ -1422,6 +1543,55 @@
     },
     "Cultist 54 (2e)": {
       "deck": "Cultist 54 (2e)",
+      "display": "Cultist",
+      "gfx": "Cultist",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 2, "attack": 1 },
+          "elite": { "health": 7, "move": 2, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 2, "attack": 1 },
+          "elite": { "health": 9, "move": 2, "attack": 2, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 7, "move": 3, "attack": 1 },
+          "elite": { "health": 11, "move": 3, "attack": 2, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 8, "move": 3, "attack": 2 },
+          "elite": { "health": 15, "move": 3, "attack": 2, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 9, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 16, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 11, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 20, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 16, "move": 3, "attack": 2, "attributes": [ "%curse%" ]},
+          "elite": { "health": 26, "move": 3, "attack": 3, "attributes": [ "%curse%" ]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 18, "move": 3, "attack": 3, "attributes": [ "%curse%" ]},
+          "elite": { "health": 30, "move": 3, "attack": 4, "attributes": [ "%curse%" ]}
+        }
+      ]
+    },
+    "Cultist 82 (2e)": {
+      "deck": "Cultist 82 (2e)",
       "display": "Cultist",
       "gfx": "Cultist",
       "hidden": true,
@@ -1806,6 +1976,55 @@
         }
       ]
     },
+    "Harrower Infester 99 (2e)": {
+      "gfx": "Harrower Infester",
+      "display": "Harrower Infester",
+      "hidden": true,
+      "deck": "Harrower Infester (2e)",
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 6, "move": 3, "attack": 2 },
+          "elite": { "health": 12, "move": 3, "attack": 2 }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 7, "move": 3, "attack": 2, "attributes": [ "%retaliate% 1" ]},
+          "elite": {"health": 12, "move": 4, "attack": 2, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 2,
+          "normal": { "health": 8, "move": 3, "attack": 2, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 14, "move": 4, "attack": 3, "attributes": [ "%retaliate% 2" ]}
+        },
+        {
+          "level": 3,
+          "normal": { "health": 10, "move": 3, "attack": 3, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 17, "move": 4, "attack": 3, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 4,
+          "normal": { "health": 12, "move": 4, "attack": 3, "attributes": [ "%retaliate% 2" ]},
+          "elite": { "health": 19, "move": 4, "attack": 4, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 12, "move": 4, "attack": 4, "attributes": [ "%retaliate% 3" ]},
+          "elite": { "health": 21, "move": 4, "attack": 5, "attributes": [ "%retaliate% 3" ]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 15, "move": 4, "attack": 5, "attributes": [ "%retaliate% 3" ]},
+          "elite": { "health": 27, "move": 4, "attack": 6, "attributes": [ "%retaliate% 4" ],"immunities": [ "%poison%"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 18, "move": 4, "attack": 5, "attributes": [ "%retaliate% 4" ],"immunities": [ "%poison%"]},
+          "elite": { "health": 32, "move": 5, "attack": 6, "attributes": [ "%retaliate% 4" ],  "immunities": [ "%poison%"] }
+        }
+      ]
+    },
     "Hound (2e)": {
       "gfx": "Hound",
       "display": "Hound",
@@ -2143,6 +2362,39 @@
         }
       ]
     },
+    "Bloated Victim (2e)": {
+      "deck": "Bloated Victim (2e)",
+      "display": "Bloated Victim",
+      "gfx": "Living Corpse",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0, "health": "10xC", "move": 1, "attack": 3, "immunities": [ "%poison%"]
+        },
+        {
+          "level": 1, "health": "11xC", "move": 1, "attack": 4, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]
+        },
+        {
+          "level": 2, "health": "15xC", "move": 1, "attack": 4, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]
+        },
+        {
+          "level": 3, "health": "15xC", "move": 2, "attack": 5,"attributes": [ "%poison%" ], "immunities": [ "%poison%"]
+        },
+        {
+          "level": 4, "health": "19xC", "move": 2, "attack": 5, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]
+        },
+        {
+          "level": 5, "health": "21xC", "move": 2, "attack": 6, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]
+        },
+        {
+          "level": 6, "health": "31xC", "move": 2, "attack": 6, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]
+        },
+        {
+          "level": 7, "health": "36xC", "move": 2, "attack": 7, "attributes": [ "%poison%" ],"immunities": [ "%poison%"]
+        }
+      ]
+    },
     "Living Bomb (2e) (2e)": {
       "deck": "Living Bomb (2e)",
       "display": "Living Bomb",
@@ -2240,6 +2492,39 @@
         }
       ]
     },
+    "Alpha Lurker (2e)": {
+      "gfx": "Lurker",
+      "display": "Alpha Lurker",
+      "deck": "Lurker (2e)",
+      "hidden": true,
+      "count": 6,
+      "levels": [
+        {
+          "level": 0, "health": "7xC", "move": 2, "attack": 3, "attributes": [ "%shield% 1","%target% 2" ]
+        },
+        {
+          "level": 1, "health": "9xC", "move": 2, "attack": 3, "attributes": [  "%shield% 1","%target% 2", "%pierce% 1" ]
+        },
+        {
+          "level": 2, "health": "11xC", "move": 3, "attack": 3, "attributes": [ "%shield% 1", "%target% 2", "%pierce% 2" ]
+        },
+        {
+          "level": 3, "health": "13xC", "move": 3, "attack": 4, "attributes": [ "%shield% 1","%target% 2", "%pierce% 2" ]
+        },
+        {
+          "level": 4, "health": "13xC", "move": 3, "attack": 4, "attributes": ["%shield% 2", "%target% 2", "%pierce% 3" ]
+        },
+        {
+          "level": 5, "health": "15xC", "move": 3, "attack": 5, "attributes": [ "%shield% 2","%target% 2", "%pierce% 3" ]
+        },
+        {
+          "level": 6, "health": "19xC", "move": 4, "attack": 6, "attributes": ["%shield% 2", "%target% 2", "%pierce% 3" ]
+        },
+        {
+          "level": 7, "health": "27xC", "move": 4, "attack": 7, "attributes": ["%shield% 2", "%target% 2", "%pierce% 3" ]
+        }
+      ]
+    },
     "Ooze (2e)": {
       "gfx": "Ooze",
       "display": "Ooze",
@@ -2285,6 +2570,39 @@
           "level": 7,
           "normal": { "health": 17, "move": 2, "attack": 4, "attributes": [ "%shield% 1","%poison%" ]},
           "elite": { "health": 27, "move": 3, "attack": 5, "attributes": ["%shield% 1","%poison%" ]}
+        }
+      ]
+    },
+    "Giant Ooze (2e)": {
+      "gfx": "Ooze",
+      "display": "Giant Ooze",
+      "deck": "Ooze (FH)",
+      "hidden": true,
+      "count": 10,
+      "levels": [
+        {
+          "level": 0, "health": "8xC", "move": 0, "attack": 2
+        },
+        {
+          "level": 1, "health": "9xC", "move": 0, "attack": 2, "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 2, "health": "11xC", "move": 0, "attack": 3, "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 3, "health": "11xC", "move": 0, "attack": 3, "attributes": [ "%shield% 1", "%poison%"]
+        },
+        {
+          "level": 4, "health": "12xC", "move": 0, "attack": 4, "attributes": [ "%shield% 1","%poison%" ]
+        },
+        {
+          "level": 5, "health": "15xC", "move": 0, "attack": 4, "attributes": [ "%shield% 1","%poison%" ]
+        },
+        {
+          "level": 6, "health": "21xC", "move": 0, "attack": 4, "attributes": [ "%shield% 1","%poison%" ]
+        },
+        {
+          "level": 7, "health": "27xC", "move": 0, "attack": 5, "attributes": ["%shield% 1","%poison%" ]
         }
       ]
     },
@@ -2481,6 +2799,39 @@
         }
       ]
     },
+    "Tyrant of the Tides": {
+      "gfx": "Savvas Icestorm",
+      "display": "Tyrant of the Tides",
+      "deck": "Tyrant of the Tides",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": "12xC", "move": 2, "attack": 3, "attributes": [ "%pierce% 3" ],"immunities": [ "%disarm%", "%stun%"]
+        },
+        {
+          "level": 1, "health": "12xC", "move": 2, "attack": 3, "attributes": [ "%shield% 1","%pierce% 3" ],"immunities": [ "%disarm%", "%stun%"]
+        },
+        {
+          "level": 2, "health": "15xC", "move": 3, "attack": 3, "attributes": [ "%shield% 1","%pierce% 3" ],"immunities": [ "%disarm%", "%stun%"]
+        },
+        {
+          "level": 3, "health": "17xC", "move": 3, "attack": 4, "attributes": [ "%shield% 1","%pierce% 3" ],"immunities": [ "%disarm%", "%stun%"]
+        },
+        {
+          "level": 4, "health": "17xC", "move": 4, "attack": 4, "attributes": [ "%shield% 2",  "%pierce% 3" ],"immunities": [ "%disarm%", "%stun%"]
+        },
+        {
+          "level": 5, "health": "20xC", "move": 4, "attack": 5, "attributes": [  "%shield% 2", "%pierce% 3"],"immunities": [ "%disarm%", "%stun%"]
+        },
+        {
+          "level": 6, "health": "26xC", "move": 4, "attack": 6, "attributes": [  "%shield% 2", "%pierce% 3"],"immunities": [ "%disarm%", "%stun%"]
+        },
+        {
+          "level": 7, "health": "33xC", "move": 4, "attack": 7, "attributes": [ "%shield% 2",  "%pierce% 3"],"immunities": [ "%disarm%", "%stun%"]
+        }
+      ]
+    },
     "Savvas Lavaflow (2e)": {
       "gfx": "Savvas Lavaflow",
       "display": "Savvas Lavaflow",
@@ -2578,6 +2929,39 @@
         }
       ]
     },
+    "Disjointed Twin (2e)": {
+      "gfx": "Savvas Lavaflow",
+      "display": "Disjointed Twin",
+      "deck": "Savvas Lavaflow (FH)",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": "13xC", "move": 3, "attack": 3
+        },
+        {
+          "level": 1, "health": "15xC", "move": 3, "attack": 3, "attributes": [ "%wound%" ]
+        },
+        {
+          "level": 2, "health": "18xC", "move": 3, "attack": 3, "attributes": [ "%poison%", "%wound%" ]
+        },
+        {
+          "level": 3, "health": "21xC", "move": 3, "attack": 4, "attributes": [ "%poison%", "%wound%" ]
+        },
+        {
+          "level": 4, "health": "25xC", "move": 4, "attack": 4, "attributes": [ "%poison%", "%wound%" ]
+        },
+        {
+          "level": 5, "health": "30xC", "move": 4, "attack": 5, "attributes": [ "%poison%", "%wound%" ]
+        },
+        {
+          "level": 6, "health": "40xC", "move": 4, "attack": 6, "attributes": [ "%poison%", "%wound%" ]
+        },
+        {
+          "level": 7, "health": "50xC", "move": 4, "attack": 7, "attributes": [ "%poison%", "%wound%" ]
+        }
+      ]
+    },
     "Spitting Drake (2e)": {
       "gfx": "Spitting Drake",
       "display": "Spitting Drake",
@@ -2672,6 +3056,39 @@
           "level": 7,
           "normal": {"health": 22, "move": 2, "attack": 5, "attributes": [ "%shield% 3" ], "immunities": [ "%immobilize%"]},
           "elite": {"health": 26, "move": 3, "attack": 7, "attributes": [ "%shield% 4" ], "immunities": [ "%immobilize%"]}
+        }
+      ]
+    },
+    "Arcane Construct (2e)":{
+      "gfx": "Stone Golem",
+      "display": "Arcane Construct",
+      "deck": "Stone Construct (2e)",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0, "health": "10xC", "move": 2, "attack": 4, "attributes": [ "%shield% 1" ], "immunities": [ "%immobilize%", "%disarm%", "%stun%"]
+        },
+        {
+          "level": 1, "health": "11xC", "move": 2, "attack": 4, "attributes": [ "%shield% 2" ], "immunities": [ "%immobilize%","%disarm%", "%stun%"]
+        },
+        {
+          "level": 2, "health": "14xC", "move": 2, "attack": 5, "attributes": [ "%shield% 2" ], "immunities": [ "%immobilize%","%disarm%", "%stun%"]
+        },
+        {
+          "level": 3, "health": "15xC", "move": 2, "attack": 5, "attributes": [ "%shield% 3" ], "immunities": [ "%immobilize%","%disarm%", "%stun%"]
+        },
+        {
+          "level": 4, "health": "17xC", "move": 2, "attack": 6, "attributes": [ "%shield% 3" ], "immunities": [ "%immobilize%","%disarm%", "%stun%"]
+        },
+        {
+          "level": 5, "health": "19xC", "move": 3, "attack": 6, "attributes": [ "%shield% 3" ], "immunities": [ "%immobilize%","%disarm%", "%stun%"]
+        },
+        {
+          "level": 6, "health": "23xC", "move": 3, "attack": 7, "attributes": [ "%shield% 3" ], "immunities": [ "%immobilize%","%disarm%", "%stun%"]
+        },
+        {
+          "level": 7, "health": "26xC", "move": 3, "attack": 7, "attributes": [ "%shield% 4" ], "immunities": [ "%immobilize%","%disarm%", "%stun%"]
         }
       ]
     },
@@ -2933,6 +3350,48 @@
           "level": 7,
           "normal": { "health": 25, "move": 4, "attack": 7, "attributes": [ "%muddle%" ],"immunities": [ "%curse%"] },
           "elite": { "health": 39, "move": 6, "attack": 9, "attributes": [ "%muddle%" ], "immunities": [ "%curse%"]}
+        }
+      ]
+    },
+
+    "The Convergence (2e)":{
+      "display": "The Convergence",
+      "gfx": "Chaos Demon",
+      "deck": "Chaos Demon (2e)",
+      "hidden": true,
+      "count": 4,
+      "levels": [
+        {
+          "level": 0,
+          "health": "14xC", "move": 3, "attack": 2, "attributes": [ "%muddle%" ]
+        },
+        {
+          "level": 1,
+           "health": "16xC", "move": 3, "attack": 3, "attributes": [ "%muddle%" ]
+        },
+        {
+          "level": 2,
+           "health": "22xC", "move": 3, "attack": 3, "attributes": [ "%muddle%" ]
+        },
+        {
+          "level": 3,
+           "health": "24xC", "move": 3, "attack": 4, "attributes": [ "%muddle%" ]
+        },
+        {
+          "level": 4,
+           "health": "28xC", "move": 4, "attack": 4, "attributes": [ "%muddle%" ]
+        },
+        {
+          "level": 5,
+           "health": "32xC", "move": 4, "attack": 5, "attributes": [ "%muddle%" ]
+        },
+        {
+          "level": 6,
+           "health": "40xC", "move": 4, "attack": 6, "attributes": [ "%muddle%" ]
+        },
+        {
+          "level": 7,
+           "health": "50xC", "move": 4, "attack": 7, "attributes": [ "%muddle%" ],"immunities": [ "%curse%"]
         }
       ]
     },
@@ -4499,7 +4958,7 @@
         }
        ]
     },
-    "#23.1 Gloomhaven Square A (Demon Allies)": {
+    "#23A Gloomhaven Square A (Demon Allies)": {
       "monsters": ["Jekserah 23 (2e)", "Earth Demon (2e)", "Night Demon (2e)", "Cultist (2e)", "Living Bones (2e)", "Living Corpse (2e)"],
       "special": [
         {
@@ -4514,7 +4973,7 @@
           "name": "spawn 1"
         }]
     },
-    "#23.2 Gloomhaven Square A (Military Allies)": {
+    "#23B Gloomhaven Square A (Military Allies)": {
       "monsters": ["Jekserah 23 (2e)","City Archer (2e)", "City Guard (2e)", "Cultist (2e)", "Living Bones (2e)", "Living Corpse (2e)"],
       "special": [
         {
@@ -4560,7 +5019,7 @@
           "list": ["Living Corpse (2e)", "Living Bones (2e)"]
         }]
     },
-    "#25.1 Gloomhaven Battlements A (Merchant Allies)": {
+    "#25A Gloomhaven Battlements A (Merchant Allies)": {
       "monsters": ["The Prime Demon (2e)", "Dark Ritual Cultist (2e)", "Living Bones (2e)", "Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Wind Demon (2e)"],
       "special": [
         {
@@ -4609,7 +5068,7 @@
         }
       ]
     },
-    "#25.2 Gloomhaven Battlements A (Military Allies)": {
+    "#25B Gloomhaven Battlements A (Military Allies)": {
       "monsters": ["The Prime Demon (2e)","City Archer (2e)", "City Guard (2e)", "Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Wind Demon (2e)"],
       "special": [
         {
@@ -5494,13 +5953,13 @@
         }
       }
     },
-    "#61 Finding the Cure": {
+    "#61 Dangerous Grove": {
       "monsters": ["Cave Bear (2e)", "Forest Imp (2e)", "Hound (2e)"]
     },
     "#62 Alchemy Lab": {
       "monsters": ["Cave Bear (2e)", "Giant Viper (2e)", "Hound (2e)", "Ooze (2e)", "Spitting Drake (2e)"],
       "sections": {
-        "#116.1 - Alchemy Lab": {
+        "#116.1(2) - Alchemy Lab": {
           "special": [
             {
               "type": "Objective",
@@ -5515,13 +5974,7 @@
           "type": "Timer",
           "list": [-1],
           "startOfRound": true,
-          "note": "Characters on tile 06-B and 01-B remove all damage tokens from their mat.\nAll characters suffer X/2 damage, (where Xis nr of damage tokens on their mat),and then place one token on their mat.\nIF no water tile at A, place water tile at A"
-        },
-        {
-          "type": "Timer",
-          "list": [12],
-          "startOfRound": false,
-          "note": "Scenario Lost..."
+          "note": "Characters on tile 06-B and 01-B remove all damage tokens from their mat.\nAll characters suffer X/2 damage, (where X is nr of damage tokens on their mat),and then place one token on their mat.\nIf no water tile at A, place water tile at A"
         },
         {
           "type": "Objective",
@@ -5532,8 +5985,23 @@
           "type": "Objective",
           "name": "Rubble 4",
           "health": "C+L"
+        },
+        {
+          "type": "Escort",
+          "name": "Robotic Lab Helper B",
+          "health": "2",
+          "condition": "C<3",
+          "init": 99
+        },
+        {
+          "type": "Escort",
+          "name": "Robotic Lab Helper C",
+          "health": "2",
+          "condition": "C<4",
+          "init": 99
         }
-      ]
+      ],
+      "todo": "round tracker manipulation"
     },
     "#63 Fading Lighthouse": {
       "monsters": ["Flame Demon (2e)", "Frost Demon (2e)", "Giant Viper (2e)", "Ooze (2e)"],
@@ -5553,15 +6021,50 @@
       ]
     },
     "#64 Roots of Chaos": {
-      "monsters": ["Chaos Demon (2e)", "Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Night Demon (2e)", "Sun Demon (2e)", "Wind Demon (2e)"],
-      "todo": "chaos demo specila boss: The Convergence. note to flip token every round start. bleh do not draw ability card in certain situation."
+      "monsters": ["The Convergence (2e)", "Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Night Demon (2e)", "Sun Demon (2e)", "Wind Demon (2e)"],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [-1],
+          "startOfRound": true,
+          "note": "Flip Token. 1: Flame, 2: Frost, 3: Wind, 4: Earth, 5: Sun, 6: Night. Skip turn of Demon Type, or Spawn Demon (Convergence do not act)."
+        }
+      ],
+      "todo": "do not draw ability card in certain situation."
     },
     "#65 Hero's Mausoleum": {
       "monsters": ["Crystal Rot (2e)", "Living Bones (2e)", "Living Corpse (2e)", "Living Spirit (2e)"]
     },
     "#66 A Friend in Need": {
       "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Cave Bear (2e)", "Hound (2e)"],
-      "todo": "no draw ability card for bear!? bleh. (make special bear?)"
+      "sections": {
+        "#6.2": {
+          "initialMessage": "Spawn Bandit Scout at A and Starting hex. Both Normal for 2 characters, At A Elite for 3 and All Elite for 4 characters.",
+          "special": [
+            {
+              "type": "Allies",
+              "list": ["Cave Bear (2e)"],
+              "todo": "does allies special work from section? probably not."
+            }
+          ]
+        },
+        "#124.1(1)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [4],
+              "startOfRound": true,
+              "note": "Open Door 2. (Read 87.1)"
+            }
+          ]
+        },
+        "#87.1(2)": {
+          "initialMessage": "Spawn Bandit Scout and a Hound at A. Both Normal for 2 characters, Hound is Elite for 3 and Both Elite for 4 characters."
+        }
+      }
     },
     "#67 Temple of the Eclipse": {
       "monsters": ["The Colorless (2e)", "Ancient Artillery (2e)", "Night Demon (2e)", "Stone Construct (2e)", "Sun Demon (2e)"],
@@ -5578,14 +6081,41 @@
             "startOfRound": true,
             "note": "Set Dark to Strong."
           }
-      ],
-      "todo": "no draw ability card for bear!? bleh. (make special bear?)"
+      ]
     },
     "#68 Sunken Vessel": {
       "monsters": ["Frost Demon (2e)", "Living Spirit (2e)", "Lurker Soldier (2e)"]
     },
     "#69 Corrupted Cove": {
-      "monsters": ["Black Imp (2e)", "Deep Terror (2e)", "Lurker Soldier (2e)", "Ooze (2e)"]
+      "monsters": ["Black Imp (2e)", "Deep Terror (2e)", "Lurker Soldier (2e)", "Ooze (2e)"],
+      "sections": {
+        "#76.2(1)": {
+          "monsters": [ "Giant Ooze (2e)"],
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [3,6,9,12,15,18,21,24,27],
+              "startOfRound": true,
+              "note": "Spawn Ooze by A."
+            },
+            {
+              "type": "Timer",
+              "list": [4,7,10,13,16,19,22,25,28],
+              "startOfRound": true,
+              "note": "Spawn Ooze by B"
+            },
+            {
+              "type": "Timer",
+              "list": [5,8,11,14,17,20,23,26,29],
+              "startOfRound": true,
+              "note": "Spawn Ooze by C"
+            }
+          ]
+        }
+      }
     },
     "#70 Underwater Lagoon": {
       "monsters": ["Forest Imp (2e)", "Ooze (2e)", "Rending Drake (2e)"]
@@ -5594,11 +6124,31 @@
       "monsters": ["Ancient Artillery (2e)", "Living Spirit (2e)", "Ooze (2e)", "Stone Construct (2e)"]
     },
     "#72 Well of the Unfortunate": {
-      "monsters": ["Forest Imp (2e)", "Living Spirit (2e)", "Stone Construct (2e)", "Vermling Priest (2e)", "Vermling Scout (2e)"]
+      "monsters": ["Forest Imp (2e)", "Living Spirit (2e)", "Stone Construct (2e)", "Vermling Priest (2e)", "Vermling Scout (2e)"],
+      "sections": {
+        "#78.4": {
+          "initialMessage": "Spawn 4 Vermling Scouts and 1 Priest at C. All Normal for 2 characters, One Scout and the Priest are Elite for 3 and All Elite for 4 characters."
+         }
+      }
     },
     "#73 Chained Isle": {
       "monsters": ["Living Spirit (2e)", "Night Demon (2e)", "Wind Demon (2e)"],
-      "todo": "spawn timers"
+      "special": [
+        {
+          "type": "Timer",
+          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": true,
+          "note": "Spawn Living Spirits. At A for 2-3 characters. At both A and B for 4 characters.",
+          "name": "spawn 1"
+        },
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
+          "startOfRound": true,
+          "note": "Spawn Living Spirits. At B for 2 characters. At both A and B for 3-4 characters.",
+          "name": "spawn 2"
+        }
+      ]
     },
     "#74 Windswept Highlands": {
       "monsters": ["Spitting Drake (2e)", "Sun Demon (2e)", "Wind Demon (2e)"],
@@ -5638,47 +6188,90 @@
           "startOfRound": true,
           "note": "Move boulders."
         }
-      ],
-      "todo": "only one tree in first room. spawn in sections."
+      ]
     },
     "#76 Oozing Grove": {
       "monsters": [ "Ooze (2e)", "Forest Imp (2e)", "Giant Viper (2e)" ],
       "special": [
         {
           "type": "Objective",
-          "name": "Tree A",
-          "health": "Cx(3+L)"
-        },
-        {
-          "type": "Objective",
-          "name": "Tree B",
-          "health": "Cx(3+L)"
-        },
-        {
-          "type": "Objective",
-          "name": "Tree C",
+          "name": "Tree (15-B)",
           "health": "Cx(3+L)"
         },
         {
           "type": "Timer",
           "list": [2,5,8,11,14,17,20,23,26,29,32],
-          "startOfRound": false,
+          "startOfRound": true,
           "note": "Trees Spawn Oozes."
         }
-      ]
+      ],
+      "sections": {
+        "#57.2(1)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Tree (13-E)",
+              "health": "Cx(3+L)"
+            },
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2,5,8,11,14,17,20,23,26,29,32],
+              "startOfRound": true,
+              "note": "Trees Spawn Oozes."
+            }
+          ]
+        },
+        "#64.1(2)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Tree (13-B)",
+              "health": "Cx(3+L)"
+            },
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [2,5,8,11,14,17,20,23,26,29,32],
+              "startOfRound": true,
+              "note": "Trees Spawn Oozes."
+            }
+          ]
+        }
+      }
     },
     "#77 Harrower Hive": {
       "monsters": ["Giant Viper (2e)", "Living Bones (2e)", "Night Demon (2e)", "Harrower Infester (2e)"]
     },
     "#78 Vault of Secrets": {
-      "monsters": ["City Guard (2e)", "Ancient Artillery (2e)", "Stone Construct (2e)", "Hound (2e)"],
-      "todo": "special guards."
+      "monsters": ["City Guard (2e)", "Ancient Artillery (2e)", "Stone Construct (2e)", "Hound (2e)"]
     },
     "#79 Lurker Assault": {
-      "monsters": ["Lurker Soldier (2e)", "Savvas Icestorm (2e)", "Wind Demon (2e)"]
+      "monsters": ["Lurker Soldier (2e)", "Tyrant of the Tides (2e)", "Wind Demon (2e)"],
+      "sections": {
+        "#8.2(1)": {
+          "monsters": ["Tyrant of the Tides"],
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [6,9,12,15,18,21,24,27,30],
+              "startOfRound": true,
+              "note": "Spawn Lurker soldiers at A and B. B is Elite for 3 characters and both are Elite for 4.",
+              "name": "spawn 1"
+            }
+          ]
+        }
+      }
     },
     "#80 Lost Temple": {
-      "monsters": [ "The Betrayer (2e)","Stone Construct (2e)", "Giant Viper (2e)" ],
+      "monsters": [ "The Betrayer (2e)","Giant Viper (2e)","Stone Construct (2e)" ],
       "special": [
         {
           "type": "AllyDeck"
@@ -5689,15 +6282,50 @@
           "health": "6+2xL",
           "init": 99
         }
-      ]
+      ],
+      "sections": {
+        "#door 1": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "Spawn Elite Giant Viper at D. For 3-4 characters, spawn one Giant Viper also at E. It is Elite for 4 characters",
+              "name": "spawn 1"
+            }
+          ]
+        }
+      }
     },
     "#81 Overgrown Graveyard": {
-      "monsters": ["Crystal Rot (2e)","Living Bones (2e)", "Bloated Regent (2e)", "Living Spirit (2e)"],
-      "todo": "special corpse boss maybe."
+      "monsters": ["Crystal Rot (2e)","Living Bones (2e)", "Living Spirit (2e)"],
+      "sections": {
+        "#74.2(1)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [3,7,11,15,19,23,27,31],
+              "startOfRound": true,
+              "note": "Spawn Living Spirit at A. It is Elite for 4 characters. Spawn one Living Bones at B. It is Elite for 3-4 characters.",
+              "name": "spawn 1"
+            }
+          ]
+        },
+        "120.4": {
+          "monsters": ["Bloated Victim (2e)"],
+          "special": [
+            {
+              "type": "ResetRound"
+            }
+          ]
+        }
+      }
     },
     "#82 Syndicate Hideout": {
-      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Cultist (2e)", "Giant Viper (2e)"],
-      "todo": "special cultists."
+      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Cultist 82 (2e)", "Giant Viper (2e)"]
     },
     "#83 Lost Island": {
       "monsters": ["Vermling Scout (2e)", "Vermling Prist (2e)", "Cave Bear (2e)"]
@@ -5711,7 +6339,20 @@
         }]
     },
     "#85 Crossroads Station": {
-      "monsters": ["Black Imp (2e)", "City Guard (2e)", "Earth demon (2e)", "Harrower Infester (2e)"]
+      "monsters": ["Black Imp (2e)", "Earth demon (2e)", "Harrower Infester (2e)"],
+      "sections": {
+        "#72.5(2)": {
+          "monsters": ["The Harvester (2e)"],
+          "special": [
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "Remove one damage token from each bone pile. (Harvester adds +1 attack, +1 move and +1 shield per pile without damage.)"
+            }
+          ]
+        }
+      }
     },
     "#86 Magma Pit": {
       "monsters": ["Vermling Scout (2e)", "Inox Guard (2e)", "Inox Archer (2e)", "Flame Demon (2e)"]
@@ -5720,30 +6361,132 @@
       "monsters": ["Vermling Scout (2e)", "Hound (2e)", "Inox Priest (2e)"]
     },
     "#88 Arcane Library": {
-      "monsters": [ "Forest Imp (2e)", "Cave Bear (2e)", "Arcane Golem (2e)" ],
-      "special": [
-        {
-          "type": "LevelAdjust",
-          "name": "Arcane Golem",
-          "level": 1,
-          "note": "Elite Stone Golem: +1 level, HPxC"
+      "monsters": [ "Forest Imp (2e)", "Cave Bear (2e)" ],
+      "sections": {
+        "#42.3(2)": {
+          "monsters": [
+            "Arcane Construct (2e)"
+          ],
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [
+                2, 4, 6, 8, 10, 12, 14, 15, 18, 20],
+              "startOfRound": true,
+              "note": "The Arcane Construct doubles the value of its Move and Attack abilities, but reduce shield value to 0"
+            }
+          ]
         }
-      ],
-      "todo": "arcane golem boss maybe."
+      }
     },
     "#89 Community Service": {
       "monsters": ["Black Imp (2e)", "Giant Viper (2e)", "Living Corpse (2e)", "Rending Drake (2e)"],
-      "todo": "end of round 2 damage on door"
+      "special": [
+        {
+          "type": "Timer",
+          "list": [-1],
+          "startOfRound": false,
+          "note": "Add two damage to Objective."
+        },
+        {
+          "type": "Escort",
+          "name": "Objective",
+          "health": 17
+        }
+      ],
+      "sections": {
+        "#125(1)": {
+          "special": [
+            {
+              "type": "ResetRound"
+            },
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": false,
+              "note": "Add 2 damage to tree unless no Rending Drakes left."
+            }
+          ]
+        }
+      }
     },
     "#90 Burning Mountain": {
       "monsters": ["Earth Demon (2e)", "Flame Demon (2e)", "Stone Construct (2e)"]
     },
     "#91 Shadows Within": {
-      "monsters": ["Hound (2e)", "Cultist (2e)", "Living Bones (2e)", "Living Spirit (2e)", "Flame Demon (2e)" ]
+      "monsters": ["Hound (2e)", "Cultist (2e)", "Living Bones (2e)", "Living Spirit (2e)", "Flame Demon (2e)" ],
+      "sections": {
+        "#58(3)": {
+          "special": [
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "At the start of their turns: Characters (and summons) within 2 hexes of A suffer 1 damage. Monsters within range 2 of A perform heal 1 self."
+            }
+          ]
+        },
+        "#128.1": {
+          "initialMessage": "Spawn one Elite Flame Demon at B. For 3-4 character spawn one Flame Demon at C. It is Elite for 4 characters.",
+          "special": [
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "Set Fire to Strong. \n\nAt the start of their turns: Characters (and summons) within 2 hexes of A suffer 2 damage."
+            }
+          ]
+        }
+      }
     },
     "#92 Chronal Anchor": {
       "monsters": ["Chaos Demon (2e)", "Earth Demon (2e)", "Flame Demon (2e)", "Frost Demon (2e)", "Wind Demon (2e)"],
-      "todo": "Temporal Matrix escort. timr, every other round initiative is backwards"
+      "special": [
+        {
+          "type": "Timer",
+          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": true,
+          "note": "Normal Initiative order."
+        },
+        {
+          "type": "Timer",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+          "startOfRound": true,
+          "note": "Initiative order is from highest to lowest."
+        },
+        {
+          "type": "Timer",
+          "list": [4],
+          "startOfRound": true,
+          "note": "Read 86.3."
+        },
+        {
+          "type": "Timer",
+          "list": [7],
+          "startOfRound": true,
+          "note": "Read 134.3."
+        },
+        {
+          "type": "Timer",
+          "list": [10],
+          "startOfRound": true,
+          "note": "Read 103.1."
+        },
+        {
+          "type": "Timer",
+          "list": [13],
+          "startOfRound": true,
+          "note": "Read 101.3."
+        },
+        {
+          "type": "Escort",
+          "name": "Temporal Matrix",
+          "health": "3+C+2xL"
+        }
+      ]
     },
     "#93 Harried Village": {
       "monsters": [ "Cave Bear (2e)", "Vermling Priest (2e)", "Vermling Scout (2e)", "Lurker Soldier (2e)" ],
@@ -5765,25 +6508,142 @@
       ]
     },
     "#94 A Watery Rescue": {
-      "monsters": ["Frost Demon (2e)", "Lurker Soldier (2e)", "Ooze (2e)"]
+      "monsters": ["Frost Demon (2e)", "Lurker Soldier (2e)", "Ooze (2e)"],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [-1],
+          "startOfRound": true,
+          "note": "Character adds -1 Move to each Move Ability."
+        }
+      ],
+      "sections": {
+        "#99.1(3)": {
+          "monsters": ["Alpha Lurker (2e)"],
+          "special": [
+            {
+              "type": "Timer",
+              "list": [-1],
+              "startOfRound": true,
+              "note": "Flip Tokens. 1: Current is NW, 2: current is NE. Move in that direction or suffer hazardous terrain damage."
+            }
+          ]
+        }
+      }
     },
     "#95 Cargo Ship": {
-      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Depp Terror (2e)", "Lurker Soldier (2e)"],
-      "todo": "timer"
+      "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Deep Terror (2e)", "Lurker Soldier (2e)"],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [1,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": true,
+          "note": "Add water if 3-4 characters."
+        },
+        {
+          "type": "Timer",
+          "list": [2,4,8,10,12,14,16,18,20,22,24,26,28,30],
+          "startOfRound": true,
+          "note": "Add water."
+        },
+        {
+          "type": "Timer",
+          "list": [4],
+          "startOfRound": true,
+          "note": "Read section 11.4."
+        },
+        {
+          "type": "Timer",
+          "list": [8],
+          "startOfRound": true,
+          "note": "Read section 107.5."
+        }
+      ],
+      "sections": {
+        "#11.4": {
+          "initialMessage": "For 2-3 characters: Spawn 1 Deep Terror at A. It Is Elite for 3 characters. For 4 characters spawn Normal Deep Terrors at each B."
+        },
+        "#107.5": {
+          "initialMessage": "Spawn Deep Terrors at each C. They are Elite for 4 characters."
+        }
+      }
     },
     "#96 Back Alley Brawl": {
-      "monsters": ["Bandit Scout (2e)", "City Guard (2e)", "Inox Guard (2e)", "City Archer (2e)", "Savvas Lavaflow (2e)", "Flame Demon (2e)", "Earth Demon (2e)"]
+      "monsters": ["Bandit Scout (2e)", "City Guard (2e)", "Inox Guard (2e)", "City Archer (2e)", "Savvas Lavaflow (2e)", "Flame Demon (2e)", "Earth Demon (2e)"],
+      "sections": {
+        "#111.4(1)": {
+          "initialMessage": "Spawn City Archer and City Guard at A. archer is Elite for 3 character and Both are elite for 4 characters."
+        }
+      }
     },
     "#97 Vermling Camp": {
       "monsters": ["Cave Bear (2e)", "Hound (2e)", "Vermling Priest (2e)", "Vermling Scout (2e)"]
     },
     "#98 Metamorphic Fault": {
-      "monsters": ["Deep Terror (2e)", "Earth Demon(2e)", "Flame Demon (2e)", "Savvas Lavaflow 82e)"],
-      "todo": "timed spawns until tokens looted. probably min boss"
+      "monsters": ["Deep Terror (2e)", "Earth Demon(2e)", "Flame Demon (2e)", "Savvas Lavaflow (2e)"],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [2,5,8,11,14,17,20,23,26,29],
+          "startOfRound": true,
+          "note": "If Tokens not Looted: Spawn one Flame Demon at B. It is Elite for 4 characters."
+        },
+        {
+          "type": "Timer",
+          "list": [3,6,9,12,15,18,21,24,27,30],
+          "startOfRound": true,
+          "note": "If Tokens not Looted: Spawn one Earth Demon at B. It is Elite for 3-4 characters."
+        }
+      ],
+      "sections": {
+        "#116.5(1)": {
+          "monsters": ["Disjointed Twin (2e)"],
+          "special": [
+            {
+              "type": "ResetRound"
+            }
+            ]
+        }
+      }
     },
     "#99 Sintering Forge": {
-      "monsters": ["Ancient Artillery (2e)", "Black Imp (2e)", "Chaos Demon (2e)", "Harrower Infester (2e)"],
-      "todo": "time 1-14 thing. special black imps an infesters. timed spawns "
+      "monsters": ["Ancient Artillery (2e)", "Black Imp 99 (2e)", "Chaos Demon (2e)", "Harrower Infester 99 (2e)"],
+      "special": [
+        {
+          "type": "Timer",
+          "list": [1,2,3,4,5,6,7,8,9,10,11,12,13,14],
+          "startOfRound": true,
+          "note": "Create Obstacle. (Trap damage to figure in spot. hazardous terrain damage to adjacent if Light is Strong)."
+        },
+        {
+          "type": "Timer",
+          "list": [3],
+          "startOfRound": true,
+          "note": "At A: Spawn Two Black Imps. Both Elite for 2 or 4 characters, one Elite for 3.Spawn one Harrower Infester. It is Elite for 3-4 characters.",
+          "name": "spawn 1"
+        },
+        {
+          "type": "Timer",
+          "list": [6],
+          "startOfRound": true,
+          "note": "At B: Spawn Two Black Imps. One Elite for 2 characters, Both Elite for 4. Spawn one Chaos Demon. It is Elite for 3-4 characters.",
+          "name": "spawn 2"
+        },
+        {
+          "type": "Timer",
+          "list": [9],
+          "startOfRound": true,
+          "note": "At C: Spawn Two Black Imps. One Elite for 2 characters, Both Elite for 4. Spawn one Harrower Infester. It is Elite for 3-4 characters.",
+          "name": "spawn 3"
+        },
+        {
+          "type": "Timer",
+          "list": [12],
+          "startOfRound": true,
+          "note": "At D: Spawn one Harrower Infester. It is Elite for 3-4 characters. Spawn one Chaos Demon. It is Elite for 4 characters.",
+          "name": "spawn 4"
+        }
+      ]
     },
     "#100 Silence Falls": {
       "monsters": ["Chaos Demon (2e)", "Crystal Rot (2e)", "Living Bones (2e)", "Living Corpse (2e)"]
