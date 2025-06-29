@@ -20,17 +20,20 @@
         "Decoy": {
           "level": 1,
           "health": 10,
+          "gfx": "TIN Decoy",
           "move": 3
         },
         "Battle Bot": {
           "level": 4,
           "health": 7,
+          "gfx": "TIN Battle Bot",
           "move": 3,
           "attack": 3
         },
         "Kill Bot": {
           "level": 7,
           "health": 8,
+          "gfx": "TIN Kill Bot",
           "move": 4,
           "attack": 3
         }
@@ -74,18 +77,21 @@
         "Rat Swarm": {
           "level": 1,
           "health": 5,
+          "gfx": "MIN Rat Swarm",
           "move": 2,
           "attack": 2
         },
         "Rat Monstrosity": {
           "level": 5,
           "health": 8,
+          "gfx": "MIN Rat Monstrosity",
           "move": 3,
           "attack": 3
         },
         "Rat King": {
           "level": 9,
           "health": 10,
+          "gfx": "MIN Rat King",
           "move": 3
         }
       }
@@ -250,42 +256,49 @@
         "Green Snake": {
           "level": 1,
           "health": 5,
+          "gfx": "DOO Green Snake",
           "move": 3,
           "attack": 2
         },
         "Vicious Jackal": {
           "level": 1,
           "health": 4,
+          "gfx": "DOO Vicious Jackal",
           "move": 3,
           "attack": 2
         },
         "Battle Boar": {
           "level": 1,
           "health": 7,
+          "gfx": "DOO Battle Boar",
           "move": 2,
           "attack": 2
         },
         "Staunch Garralev": {
           "level": 3,
           "health": 8,
+          "gfx": "DOO Staunch Garralev",
           "move": 2,
           "attack": 2
         },
         "War Raptor": {
           "level": 5,
           "health": 6,
+          "gfx": "DOO War Raptor",
           "move": 5,
           "attack": 3
         },
         "Horned Hristek": {
           "level": 7,
           "health": 7,
+          "gfx": "DOO Horned Hristek",
           "move": 3,
           "attack": 2
         },
         "Great Archinotl": {
           "level": 9,
           "health": 8,
+          "gfx": "DOO Archinotl",
           "move": 4,
           "attack": 3
         }
@@ -310,11 +323,13 @@
         "Chromatic Construct": {
           "level": 7,
           "health": 7,
-          "move": 4
+          "gfx": "ELE Chromatic Construct",
+          "move": 3
         },
         "Elemental Conduit": {
           "level": 9,
           "health": 3,
+          "gfx": "ELE Elemental Conduit",
           "move": 3,
           "attack": 2
         }
@@ -332,16 +347,19 @@
         "Wind Idol": {
           "level": 1,
           "health": 2,
+          "gfx": "WIL Wind Idol",
           "move": 4,
           "attack": 2
         },
         "Monolith": {
           "level": 3,
-          "health": 2
+          "health": 2,
+          "gfx": "WIL Monolith"
         },
         "Vital Force": {
           "level": 9,
-          "health": 3
+          "health": 3,
+          "gfx": "WIL Vital Force"
         }
       }
     },

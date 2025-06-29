@@ -455,8 +455,10 @@ class GameMethods {
             if (item.id == "Beast Tyrant" || item.id == "Wildfury") {
               //create the bear summon
               final int bearHp = 8 + item.characterState.level.value * 2;
+              final String gfx =
+                  item.id == "Beast Tyrant" ? "beast" : "Beast v2";
               MonsterInstance bear = MonsterInstance.summon(
-                  0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, "beast", -1);
+                  0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, gfx, -1);
               item.characterState._summonList.add(bear);
             }
 
@@ -1318,8 +1320,11 @@ class GameMethods {
           //create the bear summon
           final int bearHp = 8 + characterState.level.value * 2;
 
+          final String gfx =
+              characterClass.id == "Beast Tyrant" ? "beast" : "Beast v2";
+
           MonsterInstance bear = MonsterInstance.summon(
-              0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, "beast", -1);
+              0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, gfx, -1);
 
           character.characterState._summonList.add(bear);
         }
