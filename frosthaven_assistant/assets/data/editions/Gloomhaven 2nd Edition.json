@@ -6155,8 +6155,7 @@
             }
           ]
         }
-      },
-      "todo": "make special monsters instead of escorts (for the immunities)"
+      }
     },
     "#57 Crypt Basement": {
       "monsters": ["Crystal Rot (2e)", "Giant Viper (2e)", "Living Bones (2e)", "Living Corpse (2e)", "Living Spirit (2e)"]
