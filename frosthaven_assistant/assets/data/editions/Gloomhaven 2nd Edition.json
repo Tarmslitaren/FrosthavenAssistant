@@ -730,8 +730,33 @@
     {
       "name": "Egg 50",
       "cards": [
-        ["Omelette?", 0, true, 99, "%heal% 1", "^Self", "*.........", "^If health increased beyond max:", "^Destroy Egg and spawn","^one Normal Night Demon", "^in same hex."]
+        ["Hatch", 0, true, 99, "%heal% 1", "^Self", "*.........", "^If health increased beyond max:", "^Destroy Egg and spawn","^one Normal Night Demon", "^in same hex."]
       ]
+    },
+    {
+      "name": "Spymaster Argeise",
+      "cards": [
+        ["Fire Grenade", 0, true, 1, "%move% 3","*.........", "[r]","%attack% 2", "^%range% 3", "¤aoe-triangle-2-side","[/r]"]]
+    },
+    {
+      "name": "The Prime Demon 56 (2e)",
+      "cards": [
+        ["Trident", 0, true, 1, "%move% 4","*.........","[r]", "%attack% 3", "¤aoe-line-4-with-black-v2","[/r]"]]
+    },
+    {
+      "name": "Jekserah 56 (2e)",
+      "cards": [
+        ["Purple Glow", 0, true, 1, "^If odd round:", "Å*","^Summon one Normal Living Bones.", "Å*", "^If even round:","Å*", "%heal% 2", "^Target 2, %range% 3"]]
+    },
+    {
+      "name": "First Shield Harmon 56 (2e)",
+      "cards": [
+        ["To Fear is to Die", 0, true, 1, "^If odd round:", "Å*","^>Grant All Allies: %shield% 1.", "Å*", "^If even round:","Å*", "^>Grant All Allies: %retaliate% 1."]]
+    },
+    {
+      "name": "Candlekeeper Trice 56",
+      "cards": [
+        ["We Will See", 0, true, 1, "%move% 3","*.........","[r]","%attack% 3", "^%wound%, advantage", "¤aoe-trice","[/r]", "%firelight%"]]
     }
   ],
   "monsters": {
@@ -3671,6 +3696,71 @@
         }
       ]
     },
+    "First Shield Harmon 56 (2e)": {
+      "deck": "First Shield Harmon 56 (2e)",
+      "display": "First Shield Harmon",
+      "gfx": "Captain of the Guard",
+      "hidden": true,
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": 6,
+          "move": 0,
+          "attack": 0,
+          "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 1,
+          "health": 8,
+          "move": 0,
+          "attack": 0,
+          "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 2,
+          "health": 10,
+          "move": 0,
+          "attack": 0,
+          "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 3,
+          "health": 12,
+          "move": 0,
+          "attack": 0,
+          "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 4,
+          "health": 14,
+          "move": 0,
+          "attack": 0,
+          "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 5,
+          "health": 16,
+          "move": 0,
+          "attack": 0,
+          "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 6,
+          "health": 18,
+          "move": 0,
+          "attack": 0,
+          "attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 7,
+          "health": 20,
+          "move": 0,
+          "attack": 0,
+          "attributes": [ "%shield% 1" ]
+        }
+      ]
+    },
     "Candlekeeper Trice": {
       "deck": "Boss (FH)",
       "display": "Candlekeeper Trice",
@@ -3723,6 +3813,38 @@
           "special1": [ "^See monster stat sheet." ],
           "special2": [ "%shield% 3", "**.........", "%move% + 1", "**.........", "%attack% + 0", "^%pierce% 3", "[r]", "%light%%use%" , "^advantage","[/r]", "%fire%" ],
           "immunities": [ "%disarm%", "%immobilize%", "%stun%" ]
+        }
+      ]
+    },
+    "Candlekeeper Trice 56": {
+      "deck": "Candlekeeper Trice 56",
+      "display": "Candlekeeper Trice",
+      "hidden": true,
+      "count": 1,
+      "levels": [
+        {
+          "level": 0, "health": 6,"move": 3, "attack": 3,"attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 1, "health": 9, "move": 3, "attack": 3,"attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 2, "health": 12,"move": 3, "attack": 3,"attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 3, "health": 15, "move": 3, "attack": 3,"attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 4, "health": 18, "move": 3, "attack": 3,"attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 5, "health": 21,"move": 3, "attack": 3,"attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 6, "health": 24,"move": 3, "attack": 3,"attributes": [ "%shield% 1" ]
+        },
+        {
+          "level": 7, "health": 27, "move": 3, "attack": 3,"attributes": [ "%shield% 1" ]
         }
       ]
     },
@@ -4157,7 +4279,8 @@
           "immunities": [ "%stun%" ]
         }
       ]
-    },"Jekserah 23 (2e)": {
+    },
+    "Jekserah 23 (2e)": {
       "deck": "Jekserah 23",
       "display": "Jekserah",
       "gfx": "Jekserah 2e",
@@ -4235,6 +4358,63 @@
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
           "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
           "immunities": [ "%stun%" ]
+        }
+      ]
+    },
+    "Jekserah 56 (2e)": {
+      "deck": "Jekserah 56 (2e)",
+      "display": "Jekserah",
+      "gfx": "Jekserah 2e",
+      "hidden": true,
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": 4,
+          "move": 0,
+          "attack": 0
+        },
+        {
+          "level": 1,
+          "health": 7,
+          "move": 0,
+          "attack": 0
+        },
+        {
+          "level": 2,
+          "health": 10,
+          "move": 0,
+          "attack": 0
+        },
+        {
+          "level": 3,
+          "health": 13,
+          "move": 0,
+          "attack": 0
+        },
+        {
+          "level": 4,
+          "health": 16,
+          "move": 0,
+          "attack": 0
+        },
+        {
+          "level": 5,
+          "health": 19,
+          "move": 0,
+          "attack": 0
+        },
+        {
+          "level": 6,
+          "health": 22,
+          "move": 0,
+          "attack": 0
+        },
+        {
+          "level": 7,
+          "health": 25,
+          "move": 0,
+          "attack": 0
         }
       ]
     },
@@ -4395,6 +4575,63 @@
           "special1": [ "[r]", "[c]","%move% - 1", "**.........","%attack% + 1",  "[/c]","¤aoe-arc-3-v2","[/r]"  ],
           "special2": ["[r]", "[c]", "%move% + 1", "**.........","%attack% -1","[/c]","¤aoe-line-4-with-black-v2","[/r]"  ],
           "immunities": [ "%wound%", "%poison%", "%disarm%", "%immobilize%", "%stun%" ]
+        }
+      ]
+    },
+    "The Prime Demon 56 (2e)": {
+      "deck": "The Prime Demon 56 (2e)",
+      "display": "The Prime Demon",
+      "gfx": "Prime Demon 2e",
+      "hidden": true,
+      "count": 1,
+      "levels": [
+        {
+          "level": 0,
+          "health": 8,
+          "move": 3,
+          "attack": 4
+        },
+        {
+          "level": 1,
+          "health": 11,
+          "move": 4,
+          "attack": 3
+        },
+        {
+          "level": 2,
+          "health": 14,
+          "move": 4,
+          "attack": 3
+        },
+        {
+          "level": 3,
+          "health": 17,
+          "move": 4,
+          "attack": 3
+        },
+        {
+          "level": 4,
+          "health": 20,
+          "move": 4,
+          "attack": 3
+        },
+        {
+          "level": 5,
+          "health": 23,
+          "move": 4,
+          "attack": 3
+        },
+        {
+          "level": 6,
+          "health": 26,
+          "move": 4,
+          "attack": 3
+        },
+        {
+          "level": 7,
+          "health": 29,
+          "move": 4,
+          "attack": 3
         }
       ]
     },
@@ -4588,6 +4825,39 @@
         },
         {
           "level": 7, "health": 8,  "move": 0,  "attack": 0
+        }
+      ]
+    },
+    "Spymaster Argeise": {
+      "gfx": "City Archer 2e",
+      "display": "Spymaster Argeise",
+      "hidden": true,
+      "deck": "Spymaster Argeise",
+      "count": 1,
+      "levels": [
+        {
+          "level": 0, "health": 4,  "move": 3,  "attack": 2
+        },
+        {
+          "level": 1, "health": 7, "move": 3, "attack": 2
+        },
+        {
+          "level": 2,"health": 10,  "move": 3,  "attack": 2
+        },
+        {
+          "level": 3, "health": 13,  "move": 3,  "attack": 2
+        },
+        {
+          "level": 4,"health": 16,  "move": 3,  "attack": 2
+        },
+        {
+          "level": 5, "health": 19,  "move": 3,  "attack": 2
+        },
+        {
+          "level": 6, "health": 22,  "move": 3,  "attack": 2
+        },
+        {
+          "level": 7, "health": 25,  "move": 3,  "attack": 2
         }
       ]
     }
@@ -5829,7 +6099,9 @@
       "special": [
         {
           "type": "Allies",
-          "list": ["Vermling Scout (2e)","Flame Demon (2e)", "Sun Demon (2e)","Living Bones (2e)", "Living Corpse (2e)","City Archer (2e)", "City Guard (2e)"]
+          "list": ["Vermling Scout (2e)","Flame Demon (2e)", "Sun Demon (2e)","Living Bones (2e)", "Living Corpse (2e)","City Archer (2e)", "City Guard (2e)",
+            "Spymaster Argeise", "The Prime Demon 56 (2e)", "Jekserah 56 (2e)", "First Shield Harmon 56 (2e)", "Candlekeeper Trice 56"
+          ]
         },
         {
           "type": "Timer",
@@ -5853,101 +6125,19 @@
       ],
       "sections": {
         "#118.4": {
-          "monsters": ["Vermling Scout (2e)"],
-          "special": [
-            {
-              "type": "Escort",
-              "name": "Argeise",
-              "health": "4+(3xL)",
-              "init": 1
-            },
-            {
-              "type": "Timer",
-              "list": [-1],
-              "startOfRound": true,
-              "note": "Argeise performs Move 3, Attack 2, Range 3 AOE Triangle."
-            }
-          ]
+          "monsters": ["Spymaster Argeise","Vermling Scout (2e)"]
         },
         "#46.2": {
-          "monsters": ["Flame Demon (2e)", "Sun Demon (2e)"],
-          "special": [
-            {
-              "type": "Escort",
-              "name": "The Prime Demon",
-              "health": "8+(3xL)",
-              "init": 1
-            },
-            {
-              "type": "Timer",
-              "list": [-1],
-              "startOfRound": true,
-              "note": "Prime Demon performs Move 4, Attack 3, ( OXXX )"
-            }
-          ]
+          "monsters": ["The Prime Demon 56 (2e)","Flame Demon (2e)", "Sun Demon (2e)"]
         },
         "#110.2": {
-          "monsters": ["Living Bones (2e)", "Living Corpse (2e)"],
-          "special": [
-            {
-              "type": "Escort",
-              "name": "Jekserah",
-              "health": "4+(3xL)",
-              "init": 1
-            },
-            {
-              "type": "Timer",
-              "list": [3,5,7,9,11,13,15,17,19,21,23,25,27,29],
-              "startOfRound": true,
-              "note": "Jekserah Summons one normal Living Bones."
-            },
-            {
-              "type": "Timer",
-              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
-              "startOfRound": true,
-              "note": "Jekserah performs Heal 2, Target 2, Range 3."
-            }
-          ]
+          "monsters": ["Jekserah 56 (2e)","Living Bones (2e)", "Living Corpse (2e)"]
         },
         "#45.5": {
-          "monsters": ["City Archer (2e)", "City Guard (2e)"],
-          "special": [
-            {
-              "type": "Escort",
-              "name": "First Shield Harmon",
-              "health": "6+(2xL)",
-              "init": 1
-            },
-            {
-              "type": "Timer",
-              "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29],
-              "startOfRound": true,
-              "note": "Harmon Grants all allies Shield 1."
-            },
-            {
-              "type": "Timer",
-              "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
-              "startOfRound": true,
-              "note": "Harmon Grants all allies Retaliate 1."
-            }
-          ]
+          "monsters": ["First Shield Harmon 56 (2e)","City Archer (2e)", "City Guard (2e)"]
         },
         "#6.1": {
-          "monsters": ["City Guard (2e)"],
-          "special": [
-            {
-              "type": "Escort",
-              "name": "Candlekeeper Trice",
-              "health": "6+(3xL)",
-              "init": 1
-            },
-            {
-              "type": "Timer",
-              "list": [-1],
-              "startOfRound": true,
-              "note": "Trice performs Move 3, Attack 3 (Advantage, Wound). AOE. Infuse Fire or Light."
-            }
-          ]
+          "monsters": ["Candlekeeper Trice 56","City Guard (2e)"]
         },
         "#60.5": {
           "special": [

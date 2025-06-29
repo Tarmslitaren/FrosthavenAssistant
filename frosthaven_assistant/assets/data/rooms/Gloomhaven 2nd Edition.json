@@ -3775,6 +3775,10 @@
     },
     {
       "118.4": {
+        "Spymaster Argeise": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        },
         "Vermling Scout (2e)": {
           "normal": [0, 0, 0],
           "elite": [2, 2, 2]
@@ -3783,6 +3787,10 @@
     },
     {
       "46.2": {
+        "The Prime Demon 56 (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        },
         "Flame Demon (2e)": {
           "normal": [1, 1, 1],
           "elite": [0,0,0]
@@ -3795,6 +3803,10 @@
     },
     {
       "110.2": {
+        "Jekserah 56 (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        },
         "Living Bones (2e)": {
           "normal": [1, 1, 1],
           "elite": [0,0,0]
@@ -3807,6 +3819,10 @@
     },
     {
       "45.5": {
+        "First Shield Harmon 56 (2e)": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        },
         "City Archer (2e)": {
           "normal": [1, 1, 1],
           "elite": [0,0,0]
@@ -3819,6 +3835,10 @@
     },
     {
       "6.1": {
+        "Candlekeeper Trice 56": {
+          "normal": [1, 1, 1],
+          "elite": [0,0,0]
+        },
         "City Guard (2e)": {
           "normal": [2, 2, 2],
           "elite": [0,0,0]
