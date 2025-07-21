@@ -4880,6 +4880,7 @@
       }
     },
     "#1 Bandit Camp": {
+      "initialMessage": "1st Printing issue: Please check the official errata for an important campaign feature, relating to events.",
       "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)"]
     },
     "#2 Ruinous Crypt": {
@@ -5538,6 +5539,9 @@
               "name": "spawn 6"
             }
           ]
+        },
+        "#10.1": {
+          "initialMessage": "1st printing errata: add Event R-37 in addition to R-38."
         }
       }
     },
