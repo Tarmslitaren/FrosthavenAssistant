@@ -580,8 +580,8 @@
       "cards": [
         ["Rotting Embrace", 752, false, 21, "%move% + 1","*.........", "%muddle%, %immobilize%", "^%range% 1","*.........", "^If Living Corpse dies this round, all", "^figures adjacent to the hex it occupied", "^suffer damage 1 and gain %poison%."],
         ["hasty Assault", 754, false, 47, "%move% + 1","*.........", "%attack% - 1"],
-        ["Nothing Special", 755, true, 68, "%move% + 0","*.........", "%attack% + 0"],
-        ["Nothing Special", 756, true, 68, "%move% + 0","*.........", "%attack% + 0"],
+        ["Nothing Special", 755, true, 66, "%move% + 0","*.........", "%attack% + 0"],
+        ["Nothing Special", 756, true, 66, "%move% + 0","*.........", "%attack% + 0"],
         ["Calculated Strike", 753, false, 82, "%move% - 1","*.........", "%attack% + 1"],
         ["Reckless Charge", 757, false, 91, "%move% + 2","*.........", "[r]", "%earth%%use%", "^%attack% + 0", "[/r]","*.........", "^If the move ability was performed,","^Living Corpse suffers damage 1."],
         ["Release Gas", 758, false, 71, "%move% + 0","*.........", "%attack% + 1", "*.........","%poison%", "^Target all,", "^%range% 1", "%earth%"],
@@ -593,8 +593,8 @@
       "cards": [
         ["Rotting Embrace", 752, false, 21, "%move% + 2","*.........", "%muddle%, %immobilize%", "^%range% 1","*.........", "^If Bloated Victim dies this round, all", "^figures adjacent to the hex it occupied", "^suffer damage 1 and gain %poison%."],
         ["hasty Assault", 754, false, 47, "%move% + 2","*.........", "%attack% - 1", "^Target 2"],
-        ["Nothing Special", 755, true, 68, "%move% + 1","*.........", "%attack% + 0","^Target 2"],
-        ["Nothing Special", 756, true, 68, "%move% + 1","*.........", "%attack% + 0","^Target 2"],
+        ["Nothing Special", 755, true, 66, "%move% + 1","*.........", "%attack% + 0","^Target 2"],
+        ["Nothing Special", 756, true, 66, "%move% + 1","*.........", "%attack% + 0","^Target 2"],
         ["Calculated Strike", 753, false, 82, "%move% + 0","*.........", "%attack% + 1","^Target 2"],
         ["Reckless Charge", 757, false, 91, "%move% + 3","*.........", "[r]", "%earth%%use%", "^%attack% + 0","^Target 2", "[/r]","*.........", "^If the move ability was performed,","^Bloated Victim suffers damage 1."],
         ["Release Gas", 758, false, 71, "%move% + 1","*.........", "%attack% + 1","^Target 2", "*.........","%poison%", "^Target all,", "^%range% 1", "%earth%"],
