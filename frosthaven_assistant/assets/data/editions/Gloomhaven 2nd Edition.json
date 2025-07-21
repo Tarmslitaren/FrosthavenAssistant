@@ -536,8 +536,8 @@
         ["Volatile Conduct", 761, false, 10, "%move% + 0","*.........", "%attack% - 1","*.........", "[r]","[c]","^^If Cultist dies this round,", "^^first remove all negative", "^^conditions and perform:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
         ["Harrowing Harvest", 762, false, 27, "%move% + 0","*.........", "%attack% + 0","*.........", "%heal% X", "^Self", "[r]", "[c]","^^where X is the amount", "^^of damage suffered by the", "^^target of the attack ability.", "[/c]","[/r]" ],
         ["Harrowing Harvest", 763, false, 27, "%move% + 0","*.........", "%attack% + 0","*.........", "%heal% X", "^Self", "[r]", "[c]", "^^where X is the amount", "^^of damage suffered by the", "^^target of the attack ability.", "[/c]","[/r]" ],
-        ["Dark Ritual", 764, true, 63, "*", "^Summon one normal","^Living Bones","*.........", "^Cultist suffers damage 2.","*.........", "%stun%", "^Self" ],
-        ["Dark Ritual", 765, true, 63, "*", "^Summon one normal","^Living Bones","*.........", "^Cultist suffers damage 2.", "*.........", "%stun%", "^Self"],
+        ["Dark Ritual", 764, true, 63, "*", "^Summon one normal","^Living Bones","*.........", "^Cultist suffers damage 1.","*.........", "%stun%", "^Self" ],
+        ["Dark Ritual", 765, true, 63, "*", "^Summon one normal","^Living Bones","*.........", "^Cultist suffers damage 1.", "*.........", "%stun%", "^Self"],
         ["Unholy Guard", 766, false, 21, "%move% - 1","*.........", "%heal% 3", "^%range% 3,", "^%safeguard%" ],
         ["Unholy Guard", 767, false, 21, "%move% - 1","*.........", "%heal% 3", "^%range% 3,", "^%safeguard%" ]
       ]
@@ -545,8 +545,8 @@
     {
       "name": "Dark Ritual Cultist (2e)",
       "cards": [
-        ["Dark Ritual", 764, true, 63, "*", "^Summon one normal","^Living Bones","*.........", "^Cultist suffers damage 2.","*.........", "%stun%", "^Self" ],
-        ["Dark Ritual", 765, true, 63, "*", "^Summon one normal","^Living Bones","*.........", "^Cultist suffers damage 2.", "*.........", "%stun%", "^Self"]
+        ["Dark Ritual", 764, true, 63, "*", "^Summon one normal","^Living Bones","*.........", "^Cultist suffers damage 1.","*.........", "%stun%", "^Self" ],
+        ["Dark Ritual", 765, true, 63, "*", "^Summon one normal","^Living Bones","*.........", "^Cultist suffers damage 1.", "*.........", "%stun%", "^Self"]
       ]
     },
     {
@@ -569,8 +569,8 @@
         ["Volatile Conduct", 761, false, 10, "%move% + 0","*.........", "%attack% - 1","*.........", "[r]","[c]","^^If Cultist dies this round,", "^^first remove all negative", "^^conditions and perform:", "^%attack% + 2","[/c]","¤aoe-circle-with-middle-black", "[/r]" ],
         ["Harrowing Harvest", 762, false, 27, "%move% + 0","*.........", "%attack% + 0","*.........", "%heal% X", "^Self", "[r]", "[c]","^^where X is the amount", "^^of damage suffered by the", "^^target of the attack ability.", "[/c]","[/r]" ],
         ["Harrowing Harvest", 763, false, 27, "%move% + 0","*.........", "%attack% + 0","*.........", "%heal% X", "^Self", "[r]", "[c]", "^^where X is the amount", "^^of damage suffered by the", "^^target of the attack ability.", "[/c]","[/r]" ],
-        ["Dark Ritual", 764, true, 63, "*", "^Summon one elite","^Giant Viper","*.........", "^Cultist suffers damage 2.","*.........", "%stun%", "^Self" ],
-        ["Dark Ritual", 765, true, 63, "*", "^Summon one elite","^Giant Viper","*.........", "^Cultist suffers damage 2.", "*.........", "%stun%", "^Self"],
+        ["Dark Ritual", 764, true, 63, "*", "^Summon one elite","^Giant Viper","*.........", "^Cultist suffers damage 1.","*.........", "%stun%", "^Self" ],
+        ["Dark Ritual", 765, true, 63, "*", "^Summon one elite","^Giant Viper","*.........", "^Cultist suffers damage 1.", "*.........", "%stun%", "^Self"],
         ["Unholy Guard", 766, false, 21, "%move% - 1","*.........", "%heal% 3", "^%range% 3,", "^%safeguard%" ],
         ["Unholy Guard", 767, false, 21, "%move% - 1","*.........", "%heal% 3", "^%range% 3,", "^%safeguard%" ]
       ]
