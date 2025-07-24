@@ -177,7 +177,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   Widget buildSoloTile(String name) {
     List<String> strings = name.split(':');
     strings[0] = strings[0].replaceFirst(" ", "Å");
-    String characterName = strings[0].split("Å")[1];
+    String nameAndCampaign = strings[0].split("Å")[1];
+    String characterName = nameAndCampaign.split("/")[0];
+    String edition = nameAndCampaign.split("/")[1];
 
     String text = strings[1];
     for (String key in _gameData.modelData.value.keys) {
@@ -201,6 +203,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         image: AssetImage("assets/images/class-icons/$characterName.png"),
       ),
       title: Text(text, style: const TextStyle(fontSize: 18)),
+      trailing: Text("($edition)",
+          softWrap: true,
+          style: const TextStyle(fontSize: 14, color: Colors.grey)),
       onTap: () {
         Navigator.pop(context);
         _gameState.action(SetScenarioCommand(name, false));
