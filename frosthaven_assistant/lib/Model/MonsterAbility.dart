@@ -6,8 +6,7 @@ class MonsterAbilityDeckModel {
 
   final String name;
   final String edition;
-  final List<MonsterAbilityCardModel>
-      cards;
+  final List<MonsterAbilityCardModel> cards;
 
   factory MonsterAbilityDeckModel.fromJson(
       Map<String, dynamic> data, String edition) {

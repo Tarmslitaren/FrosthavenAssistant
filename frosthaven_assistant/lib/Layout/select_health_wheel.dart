@@ -54,10 +54,11 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
     if (value != 0) {
       //in case figure killed by other device double check
       if (GameMethods.getFigure(widget.ownerId, widget.figureId) != null) {
-        getIt<GameState>().action(ChangeHealthCommand(value, widget.figureId, widget.ownerId));
+        getIt<GameState>().action(
+            ChangeHealthCommand(value, widget.figureId, widget.ownerId));
       }
-      selected =
-          widget.data.maxHealth.value - (widget.data.maxHealth.value - widget.data.health.value);
+      selected = widget.data.maxHealth.value -
+          (widget.data.maxHealth.value - widget.data.health.value);
     }
   }
 
@@ -79,7 +80,8 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
     if (scrollController.hasClients) {
       if (timeMicroSeconds > 0) {
         scrollController.animateTo(currentScrollOffset - deltaMod,
-            duration: Duration(microseconds: timeMicroSeconds), curve: Curves.linear);
+            duration: Duration(microseconds: timeMicroSeconds),
+            curve: Curves.linear);
         currentScrollOffset = currentScrollOffset - deltaMod;
         //don't go over limit/don't account for extra drag at end of range
         if (currentScrollOffset > itemExtent * scale * maxHealth) {
@@ -155,8 +157,12 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
                                   maxLines: 1,
                                   style: TextStyle(
                                       height: 1,
-                                      color: x == selected ? Colors.red : Colors.white,
-                                      fontSize: x == selected ? 18 * scale : 16 * scale,
+                                      color: x == selected
+                                          ? Colors.red
+                                          : Colors.white,
+                                      fontSize: x == selected
+                                          ? 18 * scale
+                                          : 16 * scale,
                                       shadows: [shadow]),
                                 ))),
                       ));

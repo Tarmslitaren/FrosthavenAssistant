@@ -11,7 +11,11 @@ class ModifierCardWidget extends StatelessWidget {
   final revealed = ValueNotifier<bool>(false);
   final String name;
 
-  ModifierCardWidget({super.key, required this.card, required bool revealed, required this.name}) {
+  ModifierCardWidget(
+      {super.key,
+      required this.card,
+      required bool revealed,
+      required this.name}) {
     this.revealed.value = revealed;
   }
 

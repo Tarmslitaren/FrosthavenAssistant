@@ -24,15 +24,15 @@ class CharacterTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool characterUnlocked =
-        _gameState.unlockedClasses.contains(character.id);
+    bool characterUnlocked = _gameState.unlockedClasses.contains(character.id);
 
     return ListTile(
       leading: Image(
         height: 40,
         width: 40,
         fit: BoxFit.contain,
-        color: character.hidden && !characterUnlocked || GameMethods.isObjectiveOrEscort(character)
+        color: character.hidden && !characterUnlocked ||
+                GameMethods.isObjectiveOrEscort(character)
             ? null
             : character.color,
         filterQuality: FilterQuality.medium,

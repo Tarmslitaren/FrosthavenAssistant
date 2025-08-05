@@ -55,7 +55,7 @@ class CardStack<E> {
     _list.clear();
   }
 
-  void removeWhere(bool Function (E) test) {
+  void removeWhere(bool Function(E) test) {
     _list.removeWhere(test);
   }
 

@@ -13,8 +13,8 @@ import 'network.dart';
 
 class NetworkInformation {
   NetworkInformation() {
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen((List<ConnectivityResult> result) {
+    _connectivitySubscription = _connectivity.onConnectivityChanged
+        .listen((List<ConnectivityResult> result) {
       if (result.isNotEmpty && _connectionStatus != result.first) {
         if (_connectionStatus != null) {
           //null just to not show message on start.
@@ -23,7 +23,8 @@ class NetworkInformation {
             //default to show wifi if available
             connection = ConnectivityResult.wifi.name;
           }
-          getIt<Network>().networkMessage.value = "Network connection: $connection";
+          getIt<Network>().networkMessage.value =
+              "Network connection: $connection";
         }
         _connectionStatus = result.first;
       }
@@ -53,7 +54,8 @@ class NetworkInformation {
           if (address.type == InternetAddressType.IPv4) {
             wifiIPv4List.add(address.address);
             if (wifiIPv4.value != "") {
-              wifiIPv4.value = address.address; //default to ipv4 ethernet address if no wifi
+              wifiIPv4.value =
+                  address.address; //default to ipv4 ethernet address if no wifi
             }
             break;
           }

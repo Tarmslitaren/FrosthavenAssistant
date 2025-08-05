@@ -16,8 +16,16 @@ class MonsterInstance extends FigureState {
     }
   }
 
-  MonsterInstance.summon(this.standeeNr, this._type, this.name, int summonHealth,
-      this.move, this.attack, this.range, this.gfx, this._roundSummoned) {
+  MonsterInstance.summon(
+      this.standeeNr,
+      this._type,
+      this.name,
+      int summonHealth,
+      this.move,
+      this.attack,
+      this.range,
+      this.gfx,
+      this._roundSummoned) {
     //deal with summon init
     _maxHealth.value = summonHealth;
     _health.value = summonHealth;
@@ -29,7 +37,10 @@ class MonsterInstance extends FigureState {
 
   late final int standeeNr;
 
-  setType(_StateModifier stateModifier, MonsterType value) {_type = value;}
+  setType(_StateModifier stateModifier, MonsterType value) {
+    _type = value;
+  }
+
   MonsterType get type => _type;
   late MonsterType _type; //can't be fina due to ice wraith special
   late final String name;
@@ -41,10 +52,11 @@ class MonsterInstance extends FigureState {
   late final int range;
 
   int get roundSummoned => _roundSummoned;
-  setRoundSummoned(_StateModifier stateModifier, int value) {_roundSummoned = value;}
+  setRoundSummoned(_StateModifier stateModifier, int value) {
+    _roundSummoned = value;
+  }
+
   late int _roundSummoned;
-
-
 
   void _setLevel(Monster monster) {
     dynamic newHealthValue =

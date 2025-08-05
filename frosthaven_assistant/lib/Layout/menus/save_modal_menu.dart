@@ -5,7 +5,8 @@ import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
 
 class SaveModalMenu extends StatefulWidget {
-  const SaveModalMenu({super.key, required this.saveName, required this.saveOnly});
+  const SaveModalMenu(
+      {super.key, required this.saveName, required this.saveOnly});
 
   final bool saveOnly;
   final String saveName;
@@ -63,7 +64,8 @@ class SaveModalMenuState extends State<SaveModalMenu> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value
                 ? 'assets/images/bg/dark_bg.png'
                 : 'assets/images/bg/white_bg.png'),
@@ -87,7 +89,8 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                     if (!widget.saveOnly)
                       OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          side: BorderSide(width: 2 * scale, color: Colors.blue),
+                          side:
+                              BorderSide(width: 2 * scale, color: Colors.blue),
                         ),
                         onPressed: () {
                           settings.loadSave(widget.saveName);
@@ -117,7 +120,8 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                     if (!widget.saveOnly)
                       OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          side: BorderSide(width: 2 * scale, color: Colors.blue),
+                          side:
+                              BorderSide(width: 2 * scale, color: Colors.blue),
                         ),
                         onPressed: () {
                           settings.deleteSave(widget.saveName);

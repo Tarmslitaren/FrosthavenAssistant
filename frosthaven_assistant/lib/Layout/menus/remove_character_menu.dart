@@ -55,8 +55,7 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
               ListTile(
                 title: const Text("Remove All", style: TextStyle(fontSize: 18)),
                 onTap: () {
-                  _gameState
-                      .action(RemoveCharacterCommand(currentCharacters));
+                  _gameState.action(RemoveCharacterCommand(currentCharacters));
                   Navigator.pop(context);
                 },
               ),

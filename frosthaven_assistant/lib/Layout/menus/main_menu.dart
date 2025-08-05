@@ -37,7 +37,6 @@ bool undoEnabled() {
     return true;
   }
   if (getIt<Settings>().server.value == true) {
-    //TDO make the logic
     return gameState.commandIndex.value >= 0 &&
         gameState.commandIndex.value < gameState.commandDescriptions.length &&
         (gameState.commandIndex.value == 0 ||

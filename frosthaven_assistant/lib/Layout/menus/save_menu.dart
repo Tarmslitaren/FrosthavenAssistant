@@ -44,20 +44,15 @@ class SaveMenuState extends State<SaveMenu> {
                     height: 20,
                   ),
                   Container(
-                    height: 40,
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    child: Text(
-                              'Load, Add or Delete save states.',
-                       style: getTitleTextStyle(1)
-                    )
-
-                  ),
+                      height: 40,
+                      margin: const EdgeInsets.only(left: 10, right: 10),
+                      child: Text('Load, Add or Delete save states.',
+                          style: getTitleTextStyle(1))),
                   Container(
                       margin: const EdgeInsets.only(left: 10, right: 10),
                       child: const Text(
                         'Please note that the app automatically saves your progress after every action. These are for backups or multiple campaigns.',
-                      )
-                  ),
+                      )),
                   const SizedBox(
                     height: 20,
                   ),
@@ -67,7 +62,8 @@ class SaveMenuState extends State<SaveMenu> {
                             context,
                             SaveModalMenu(
                                 saveName:
-                                    "${_gameState.currentCampaign.value}${_saves.length + 1}", saveOnly: true));
+                                    "${_gameState.currentCampaign.value}${_saves.length + 1}",
+                                saveOnly: true));
                       },
                       child: const Text("Add new Save")),
                   Expanded(
@@ -84,9 +80,14 @@ class SaveMenuState extends State<SaveMenu> {
                                 controller: _scrollController,
                                 itemCount: _saves.length,
                                 itemBuilder: (context, index) => ListTile(
-                                  title: Text(_saves[index], style: const TextStyle(fontSize: 18)),
+                                  title: Text(_saves[index],
+                                      style: const TextStyle(fontSize: 18)),
                                   onTap: () {
-                                    openDialog(context, SaveModalMenu(saveName: _saves[index], saveOnly: false));
+                                    openDialog(
+                                        context,
+                                        SaveModalMenu(
+                                            saveName: _saves[index],
+                                            saveOnly: false));
                                   },
                                 ),
                               );

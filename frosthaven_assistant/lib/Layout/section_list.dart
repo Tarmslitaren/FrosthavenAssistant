@@ -13,14 +13,14 @@ class SectionList extends StatelessWidget {
 
   List<Widget> generateList(List<ScenarioModel> inputList) {
     List<Widget> list = [];
-      for (int index = 0; index < inputList.length; index++) {
-        var item = inputList[index];
-        if (!item.name.contains("spawn")) {
-          SectionButton value =
-          SectionButton(key: Key(item.name), data: item.name);
-          list.add(value);
-        }
+    for (int index = 0; index < inputList.length; index++) {
+      var item = inputList[index];
+      if (!item.name.contains("spawn")) {
+        SectionButton value =
+            SectionButton(key: Key(item.name), data: item.name);
+        list.add(value);
       }
+    }
     return list;
   }
 
@@ -43,12 +43,15 @@ class SectionList extends StatelessWidget {
                     .toList();
 
                 //handle random list
-                var randomSections = gameState.scenarioSpecialRules.firstWhereOrNull((element) => element.type == "RandomSections");
-                if(randomSections != null && list != null) {
+                var randomSections = gameState.scenarioSpecialRules
+                    .firstWhereOrNull(
+                        (element) => element.type == "RandomSections");
+                if (randomSections != null && list != null) {
                   List<ScenarioModel> newList = [];
-                  for(var item in randomSections.list) {
-                    var section = list.firstWhereOrNull((element) => element.name == item);
-                    if(section != null) {
+                  for (var item in randomSections.list) {
+                    var section = list
+                        .firstWhereOrNull((element) => element.name == item);
+                    if (section != null) {
                       newList.add(section);
                     }
                   }
@@ -72,7 +75,12 @@ class SectionList extends StatelessWidget {
                 }
 
                 if (list != null &&
-                    gameState.scenarioSectionsAdded.length == list.length - list.where((section) => section.name.contains("spawn")).length) {
+                    gameState.scenarioSectionsAdded.length ==
+                        list.length -
+                            list
+                                .where(
+                                    (section) => section.name.contains("spawn"))
+                                .length) {
                   list = [];
                 }
                 list ??= [];

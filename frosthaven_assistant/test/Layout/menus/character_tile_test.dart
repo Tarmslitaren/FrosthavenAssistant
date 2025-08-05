@@ -1,11 +1,11 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-import 'package:get_it/get_it.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_tile.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:built_collection/built_collection.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mockito/mockito.dart';
 
 class MockGameState extends Mock implements GameState {
   @override

@@ -3,8 +3,8 @@ import 'package:frosthaven_assistant/Model/summon.dart';
 
 @immutable
 class CharacterClass {
-  const CharacterClass(this.id, this.name, this.healthByLevel, this.edition, this.color,
-      this.colorSecondary, this.hidden, this.summons);
+  const CharacterClass(this.id, this.name, this.healthByLevel, this.edition,
+      this.color, this.colorSecondary, this.hidden, this.summons);
   final String id;
   final String name;
   final String edition;
@@ -31,16 +31,15 @@ class CharacterClass {
     var colorValue = data['color'];
     Color color;
     if (colorValue is List<dynamic>) {
-      color =
-          Color(int.parse(colorValue[0], radix: radix));
+      color = Color(int.parse(colorValue[0], radix: radix));
     } else {
       color = Color(int.parse(colorValue, radix: radix));
     }
     Color colorSecondary = color;
     if (data.containsKey("colorSecondary")) {
       if (data["colorSecondary"] is List<dynamic>) {
-        colorSecondary = Color(int.parse(data['colorSecondary'][0],
-            radix: radix));
+        colorSecondary =
+            Color(int.parse(data['colorSecondary'][0], radix: radix));
       } else {
         colorSecondary = Color(int.parse(data['colorSecondary'], radix: radix));
       }
@@ -53,7 +52,7 @@ class CharacterClass {
         summonList.add(SummonModel.fromJson(summons[key], key));
       }
     }
-    return CharacterClass(id, name, healthByLevel, edition, color, colorSecondary,
-        hidden, summonList);
+    return CharacterClass(id, name, healthByLevel, edition, color,
+        colorSecondary, hidden, summonList);
   }
 }

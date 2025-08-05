@@ -33,7 +33,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
     if (scenarios != null) {
       _foundScenarios = scenarios;
     }
-    _foundScenarios = _foundScenarios.where((element) => !element.contains("spawn")).toList();
+    _foundScenarios =
+        _foundScenarios.where((element) => !element.contains("spawn")).toList();
     _foundScenarios.sort((a, b) {
       int? aNr = GameMethods.findNrFromScenarioName(a);
       int? bNr = GameMethods.findNrFromScenarioName(b);
@@ -61,7 +62,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
           .scenarios[_gameState.scenario.value]!.sections
           .map((e) => e.name)
           .toList()
-          .where((user) => user.toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .where((user) =>
+              user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       results = results.where((element) => !element.contains("spawn")).toList();
       results.sort((a, b) {
@@ -115,9 +117,10 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                         }
                       },
                       decoration: InputDecoration(
-                          labelText: _gameState.scenario.value == "#Random Dungeon"
-                              ? 'Add Random Dungeon Card'
-                              : 'Add Section',
+                          labelText:
+                              _gameState.scenario.value == "#Random Dungeon"
+                                  ? 'Add Random Dungeon Card'
+                                  : 'Add Section',
                           suffixIcon: const Icon(Icons.search)),
                     ),
                   ),
@@ -135,7 +138,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                                 title: Text(_foundScenarios[index],
                                     style: TextStyle(
                                         color: _gameState.scenarioSectionsAdded
-                                                .contains(_foundScenarios[index])
+                                                .contains(
+                                                    _foundScenarios[index])
                                             ? Colors.blueGrey
                                             : Colors.black,
                                         fontSize: 18)),
@@ -143,8 +147,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                                   if (!_gameState.scenarioSectionsAdded
                                       .contains(_foundScenarios[index])) {
                                     Navigator.pop(context);
-                                    _gameState
-                                        .action(SetScenarioCommand(_foundScenarios[index], true));
+                                    _gameState.action(SetScenarioCommand(
+                                        _foundScenarios[index], true));
                                   }
                                 },
                               ),

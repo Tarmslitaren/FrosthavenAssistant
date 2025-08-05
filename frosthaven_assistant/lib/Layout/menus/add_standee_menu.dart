@@ -44,20 +44,19 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
     }
 
     if (getIt<GameState>().currentCampaign.value == "Buttons and Bugs") {
-      if(nr == 1) {
+      if (nr == 1) {
         color = Colors.green;
       }
-      if(nr == 2) {
+      if (nr == 2) {
         color = Colors.blue;
       }
-      if(nr == 3) {
+      if (nr == 3) {
         color = Colors.purple;
       }
-      if(nr == 4) {
+      if (nr == 4) {
         color = Colors.red;
       }
     }
-
 
     bool isOut = false;
     for (var item in widget.monster.monsterInstances) {
@@ -89,7 +88,8 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
         ),
         onPressed: () {
           if (!isOut) {
-            _gameState.action(AddStandeeCommand(nr, null, widget.monster.id, type, addAsSummon));
+            _gameState.action(AddStandeeCommand(
+                nr, null, widget.monster.id, type, addAsSummon));
           }
         },
       ),
@@ -120,7 +120,8 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
         height: height * scale,
         decoration: BoxDecoration(
           image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.8), BlendMode.dstATop),
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.8), BlendMode.dstATop),
             image: AssetImage(getIt<Settings>().darkMode.value
                 ? 'assets/images/bg/dark_bg.png'
                 : 'assets/images/bg/white_bg.png'),
@@ -142,19 +143,33 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         buildNrButton(1, scale),
-                        nrOfStandees > 1 ? buildNrButton(2, scale) : Container(),
-                        nrOfStandees > 2 ? buildNrButton(3, scale) : Container(),
-                        nrOfStandees > 3 ? buildNrButton(4, scale) : Container(),
+                        nrOfStandees > 1
+                            ? buildNrButton(2, scale)
+                            : Container(),
+                        nrOfStandees > 2
+                            ? buildNrButton(3, scale)
+                            : Container(),
+                        nrOfStandees > 3
+                            ? buildNrButton(4, scale)
+                            : Container(),
                       ],
                     ),
                     nrOfStandees > 4
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              nrOfStandees > 4 ? buildNrButton(5, scale) : Container(),
-                              nrOfStandees > 5 ? buildNrButton(6, scale) : Container(),
-                              nrOfStandees > 6 ? buildNrButton(7, scale) : Container(),
-                              nrOfStandees > 7 ? buildNrButton(8, scale) : Container(),
+                              nrOfStandees > 4
+                                  ? buildNrButton(5, scale)
+                                  : Container(),
+                              nrOfStandees > 5
+                                  ? buildNrButton(6, scale)
+                                  : Container(),
+                              nrOfStandees > 6
+                                  ? buildNrButton(7, scale)
+                                  : Container(),
+                              nrOfStandees > 7
+                                  ? buildNrButton(8, scale)
+                                  : Container(),
                             ],
                           )
                         : Container(),
@@ -162,8 +177,12 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              nrOfStandees > 8 ? buildNrButton(9, scale) : Container(),
-                              nrOfStandees > 9 ? buildNrButton(10, scale) : Container(),
+                              nrOfStandees > 8
+                                  ? buildNrButton(9, scale)
+                                  : Container(),
+                              nrOfStandees > 9
+                                  ? buildNrButton(10, scale)
+                                  : Container(),
                             ],
                           )
                         : Container(),
@@ -173,7 +192,9 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                         checkColor: Colors.black,
                         activeColor: Colors.grey.shade200,
                         side: BorderSide(
-                            color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black),
+                            color: getIt<Settings>().darkMode.value
+                                ? Colors.white
+                                : Colors.black),
                         onChanged: (bool? newValue) {
                           setState(() {
                             addAsSummon = newValue!;

@@ -131,7 +131,8 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
                         height: 20,
                       ),
                       for (Character character in characters)
-                        buildCharacterLootWidget(character.characterClass.id, character.characterState.display.value),
+                        buildCharacterLootWidget(character.characterClass.id,
+                            character.characterState.display.value),
                       const SizedBox(
                         height: 34,
                       ),

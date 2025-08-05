@@ -22,15 +22,16 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
     return Container(
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5), color: Theme.of(context).colorScheme.secondary),
+          borderRadius: BorderRadius.circular(5),
+          color: Theme.of(context).colorScheme.secondary),
       child: Row(
         children: [
           InkWell(
               onTap: () {
                 setState(() {
                   if (card.enhanced > 0) {
-                    getIt<GameState>()
-                        .action(EnhanceLootCardCommand(card.id, card.enhanced - 1, card.gfx));
+                    getIt<GameState>().action(EnhanceLootCardCommand(
+                        card.id, card.enhanced - 1, card.gfx));
                   }
                 });
               },
@@ -38,7 +39,8 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 3),
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(1), color: Colors.white),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(1), color: Colors.white),
             child: Text(
               card.enhanced.toString(),
               style: const TextStyle(color: Colors.black, fontSize: 18),
@@ -47,8 +49,8 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
           InkWell(
               onTap: () {
                 setState(() {
-                  getIt<GameState>()
-                      .action(EnhanceLootCardCommand(card.id, card.enhanced + 1, card.gfx));
+                  getIt<GameState>().action(EnhanceLootCardCommand(
+                      card.id, card.enhanced + 1, card.gfx));
                 });
               },
               child: const Icon(
@@ -168,8 +170,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("lumber", 0)!),
-                              createCounterButton(getCardFromIndex("lumber", 1)!)
+                              createCounterButton(
+                                  getCardFromIndex("lumber", 0)!),
+                              createCounterButton(
+                                  getCardFromIndex("lumber", 1)!)
                             ],
                           ),
                           const Divider(),
@@ -177,9 +181,12 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("lumber", 2)!),
-                              createCounterButton(getCardFromIndex("lumber", 3)!),
-                              createCounterButton(getCardFromIndex("lumber", 4)!)
+                              createCounterButton(
+                                  getCardFromIndex("lumber", 2)!),
+                              createCounterButton(
+                                  getCardFromIndex("lumber", 3)!),
+                              createCounterButton(
+                                  getCardFromIndex("lumber", 4)!)
                             ],
                           ),
                           const Divider(),
@@ -187,9 +194,12 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("lumber", 5)!),
-                              createCounterButton(getCardFromIndex("lumber", 6)!),
-                              createCounterButton(getCardFromIndex("lumber", 7)!)
+                              createCounterButton(
+                                  getCardFromIndex("lumber", 5)!),
+                              createCounterButton(
+                                  getCardFromIndex("lumber", 6)!),
+                              createCounterButton(
+                                  getCardFromIndex("lumber", 7)!)
                             ],
                           ),
                           const Divider(),
@@ -197,7 +207,8 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("metal", 0)!),
+                              createCounterButton(
+                                  getCardFromIndex("metal", 0)!),
                               createCounterButton(getCardFromIndex("metal", 1)!)
                             ],
                           ),
@@ -206,8 +217,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("metal", 2)!),
-                              createCounterButton(getCardFromIndex("metal", 3)!),
+                              createCounterButton(
+                                  getCardFromIndex("metal", 2)!),
+                              createCounterButton(
+                                  getCardFromIndex("metal", 3)!),
                               createCounterButton(getCardFromIndex("metal", 4)!)
                             ],
                           ),
@@ -216,8 +229,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("metal", 5)!),
-                              createCounterButton(getCardFromIndex("metal", 6)!),
+                              createCounterButton(
+                                  getCardFromIndex("metal", 5)!),
+                              createCounterButton(
+                                  getCardFromIndex("metal", 6)!),
                               createCounterButton(getCardFromIndex("metal", 7)!)
                             ],
                           ),
@@ -226,8 +241,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("arrowvine", 0)!),
-                              createCounterButton(getCardFromIndex("arrowvine", 1)!),
+                              createCounterButton(
+                                  getCardFromIndex("arrowvine", 0)!),
+                              createCounterButton(
+                                  getCardFromIndex("arrowvine", 1)!),
                             ],
                           ),
                           const Divider(),
@@ -235,8 +252,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("axenut", 0)!),
-                              createCounterButton(getCardFromIndex("axenut", 1)!),
+                              createCounterButton(
+                                  getCardFromIndex("axenut", 0)!),
+                              createCounterButton(
+                                  getCardFromIndex("axenut", 1)!),
                             ],
                           ),
                           const Divider(),
@@ -244,8 +263,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("corpsecap", 0)!),
-                              createCounterButton(getCardFromIndex("corpsecap", 1)!),
+                              createCounterButton(
+                                  getCardFromIndex("corpsecap", 0)!),
+                              createCounterButton(
+                                  getCardFromIndex("corpsecap", 1)!),
                             ],
                           ),
                           const Divider(),
@@ -253,8 +274,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("flamefruit", 0)!),
-                              createCounterButton(getCardFromIndex("flamefruit", 1)!),
+                              createCounterButton(
+                                  getCardFromIndex("flamefruit", 0)!),
+                              createCounterButton(
+                                  getCardFromIndex("flamefruit", 1)!),
                             ],
                           ),
                           const Divider(),
@@ -262,8 +285,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("rockroot", 0)!),
-                              createCounterButton(getCardFromIndex("rockroot", 1)!),
+                              createCounterButton(
+                                  getCardFromIndex("rockroot", 0)!),
+                              createCounterButton(
+                                  getCardFromIndex("rockroot", 1)!),
                             ],
                           ),
                           const Divider(),
@@ -271,8 +296,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("snowthistle", 0)!),
-                              createCounterButton(getCardFromIndex("snowthistle", 1)!),
+                              createCounterButton(
+                                  getCardFromIndex("snowthistle", 0)!),
+                              createCounterButton(
+                                  getCardFromIndex("snowthistle", 1)!),
                             ],
                           ),
                           const Divider(),
@@ -308,8 +335,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               createCounterButton(getCardFromIndex("coin", 9)!),
-                              createCounterButton(getCardFromIndex("coin", 10)!),
-                              createCounterButton(getCardFromIndex("coin", 11)!),
+                              createCounterButton(
+                                  getCardFromIndex("coin", 10)!),
+                              createCounterButton(
+                                  getCardFromIndex("coin", 11)!),
                             ],
                           ),
                           const Divider(),
@@ -317,8 +346,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("coin", 12)!),
-                              createCounterButton(getCardFromIndex("coin", 13)!),
+                              createCounterButton(
+                                  getCardFromIndex("coin", 12)!),
+                              createCounterButton(
+                                  getCardFromIndex("coin", 13)!),
                               createCounterButton(getCardFromIndex("coin", 14)!)
                             ],
                           ),
@@ -326,8 +357,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("coin", 15)!),
-                              createCounterButton(getCardFromIndex("coin", 16)!),
+                              createCounterButton(
+                                  getCardFromIndex("coin", 15)!),
+                              createCounterButton(
+                                  getCardFromIndex("coin", 16)!),
                               createCounterButton(getCardFromIndex("coin", 17)!)
                             ],
                           ),
@@ -336,7 +369,8 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              createCounterButton(getCardFromIndex("coin", 18)!),
+                              createCounterButton(
+                                  getCardFromIndex("coin", 18)!),
                               createCounterButton(getCardFromIndex("coin", 19)!)
                             ],
                           ),

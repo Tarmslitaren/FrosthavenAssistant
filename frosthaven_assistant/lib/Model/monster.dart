@@ -26,7 +26,6 @@ class MonsterModel {
 
   factory MonsterModel.fromJson(
       Map<String, dynamic> data, String name, String edition) {
-
     String anEdition = edition;
     if (data.containsKey('edition')) {
       anEdition = data['edition'] as String;

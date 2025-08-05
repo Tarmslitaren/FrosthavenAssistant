@@ -5,19 +5,31 @@ class CharacterState extends FigureState {
   CharacterState();
 
   ValueListenable<String> get display => _display;
-  setDisplay(_StateModifier stateModifier, String value) {_display.value = value;}
+  setDisplay(_StateModifier stateModifier, String value) {
+    _display.value = value;
+  }
+
   final _display = ValueNotifier<String>("");
 
   ValueListenable<int> get initiative => _initiative;
-  setInitiative(_StateModifier stateModifier, int value) {_initiative.value = value;}
+  setInitiative(_StateModifier stateModifier, int value) {
+    _initiative.value = value;
+  }
+
   final _initiative = ValueNotifier<int>(0);
 
   ValueListenable<int> get xp => _xp;
-  setXp(_StateModifier stateModifier, int value) {_xp.value = value;}
+  setXp(_StateModifier stateModifier, int value) {
+    _xp.value = value;
+  }
+
   final _xp = ValueNotifier<int>(0);
 
   BuiltList<MonsterInstance> get summonList => BuiltList.of(_summonList);
-  getMutableSummonList(_StateModifier stateModifier) {return _summonList;}
+  getMutableSummonList(_StateModifier stateModifier) {
+    return _summonList;
+  }
+
   final List<MonsterInstance> _summonList = [];
 
   @override

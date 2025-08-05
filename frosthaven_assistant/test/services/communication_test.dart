@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:fluent_assertions/fluent_assertions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
@@ -6,6 +7,7 @@ import 'package:frosthaven_assistant/services/network/connection.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+
 import 'communication_test.mocks.dart';
 
 final _sut = Communication();

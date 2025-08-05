@@ -22,10 +22,12 @@ class MonsterStatCardWidget extends StatelessWidget {
     required this.data,
   });
 
-  static void _handleAddPressed(Monster data, BuildContext context, bool left, bool isBoss) {
+  static void _handleAddPressed(
+      Monster data, BuildContext context, bool left, bool isBoss) {
     Settings settings = getIt<Settings>();
     if (settings.noStandees.value == true) {
-      getIt<GameState>().action(ActivateMonsterTypeCommand(data.id, !data.isActive));
+      getIt<GameState>()
+          .action(ActivateMonsterTypeCommand(data.id, !data.isActive));
       return;
     }
 
@@ -44,7 +46,7 @@ class MonsterStatCardWidget extends StatelessWidget {
       if (settings.randomStandees.value == true) {
         //todo: no logic in layout
         int standeeNr = GameMethods.getRandomStandee(data);
-        if(getIt<GameState>().currentCampaign.value == "Buttons and Bugs") {
+        if (getIt<GameState>().currentCampaign.value == "Buttons and Bugs") {
           standeeNr = GameMethods.getNextAvailableBnBStandee(data);
         }
         if (standeeNr != 0) {
@@ -71,8 +73,8 @@ class MonsterStatCardWidget extends StatelessWidget {
     }
   }
 
-  static Widget buildNormalLayout(
-      Monster data, double scale, var shadow, var leftStyle, var rightStyle, bool frosthavenStyle) {
+  static Widget buildNormalLayout(Monster data, double scale, var shadow,
+      var leftStyle, var rightStyle, bool frosthavenStyle) {
     MonsterStatsModel normal = data.type.levels[data.level.value].normal!;
     MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
 
@@ -111,7 +113,8 @@ class MonsterStatCardWidget extends StatelessWidget {
             height: 93.5 * scale,
             width: 167 * scale,
             fit: BoxFit.fitHeight,
-            image: const AssetImage("assets/images/psd/monsterStats-normal.png"),
+            image:
+                const AssetImage("assets/images/psd/monsterStats-normal.png"),
           ),
         ),
         Positioned(
@@ -148,7 +151,8 @@ class MonsterStatCardWidget extends StatelessWidget {
               Text(health, style: leftStyle),
               Text(move, style: leftStyle),
               Text(attack, style: leftStyle),
-              Text(normal.range != 0 ? normal.range.toString() : "-", style: leftStyle),
+              Text(normal.range != 0 ? normal.range.toString() : "-",
+                  style: leftStyle),
             ],
           ),
         ),
@@ -156,21 +160,31 @@ class MonsterStatCardWidget extends StatelessWidget {
             left: 0.0,
             top: 19.2 * scale,
             width: 58.4 * scale,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  LineBuilder.createLines(normal.attributes, true, false, false, data,
-                      CrossAxisAlignment.end, scale, getIt<Settings>().shimmer.value),
-                ])),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+              LineBuilder.createLines(
+                  normal.attributes,
+                  true,
+                  false,
+                  false,
+                  data,
+                  CrossAxisAlignment.end,
+                  scale,
+                  getIt<Settings>().shimmer.value),
+            ])),
         Positioned(
           right: 61.6 * scale,
           top: 20.8 * scale,
           child: Column(
             children: <Widget>[
-              Text(StatCalculator.calculateFormula(elite!.health).toString(), style: rightStyle),
-              Text(StatCalculator.calculateFormula(elite.move).toString(), style: rightStyle),
-              Text(StatCalculator.calculateFormula(elite.attack).toString(), style: rightStyle),
-              Text(elite.range != 0 ? elite.range.toString() : "-", style: rightStyle),
+              Text(StatCalculator.calculateFormula(elite!.health).toString(),
+                  style: rightStyle),
+              Text(StatCalculator.calculateFormula(elite.move).toString(),
+                  style: rightStyle),
+              Text(StatCalculator.calculateFormula(elite.attack).toString(),
+                  style: rightStyle),
+              Text(elite.range != 0 ? elite.range.toString() : "-",
+                  style: rightStyle),
             ],
           ),
         ),
@@ -178,8 +192,15 @@ class MonsterStatCardWidget extends StatelessWidget {
           width: 57.6 * scale,
           right: 0.0,
           top: 19.2 * scale,
-          child: LineBuilder.createLines(elite.attributes, false, false, false, data,
-              CrossAxisAlignment.start, scale, getIt<Settings>().shimmer.value),
+          child: LineBuilder.createLines(
+              elite.attributes,
+              false,
+              false,
+              false,
+              data,
+              CrossAxisAlignment.start,
+              scale,
+              getIt<Settings>().shimmer.value),
         ),
         data.type.flying
             ? Positioned(
@@ -239,8 +260,8 @@ class MonsterStatCardWidget extends StatelessWidget {
     );
   }
 
-  static Widget buildBossLayout(
-      Monster data, double scale, var shadow, var leftStyle, var rightStyle, bool frosthavenStyle) {
+  static Widget buildBossLayout(Monster data, double scale, var shadow,
+      var leftStyle, var rightStyle, bool frosthavenStyle) {
     bool noCalculationSetting = getIt<Settings>().noCalculation.value;
     MonsterStatsModel normal = data.type.levels[data.level.value].boss!;
     //normal stats calculated:
@@ -256,8 +277,9 @@ class MonsterStatCardWidget extends StatelessWidget {
       health = "7";
       for (var item in getIt<GameState>().currentList) {
         if (item is Character && item.id == "Hollowpact") {
-          health =
-              item.characterClass.healthByLevel[item.characterState.level.value - 1].toString();
+          health = item
+              .characterClass.healthByLevel[item.characterState.level.value - 1]
+              .toString();
         }
       }
     }
@@ -265,7 +287,9 @@ class MonsterStatCardWidget extends StatelessWidget {
       health = "36";
       for (var item in getIt<GameState>().currentList) {
         if (item is Character && item.id == "Incarnate") {
-          health = (item.characterClass.healthByLevel[item.characterState.level.value - 1] * 2)
+          health = (item.characterClass
+                      .healthByLevel[item.characterState.level.value - 1] *
+                  2)
               .toString();
         }
       }
@@ -301,8 +325,8 @@ class MonsterStatCardWidget extends StatelessWidget {
       }
     }
 
-    Widget attackAttributes = LineBuilder.createLines(
-        [bossAttackAttributes], true, false, false, data, CrossAxisAlignment.start, scale, false);
+    Widget attackAttributes = LineBuilder.createLines([bossAttackAttributes],
+        true, false, false, data, CrossAxisAlignment.start, scale, false);
 
     final specialStyle = TextStyle(
         fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
@@ -346,11 +370,14 @@ class MonsterStatCardWidget extends StatelessWidget {
               Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                 Container(
                     margin: EdgeInsets.only(
-                        right: bossAttackAttributes.contains("target") ? 1 * scale : 0),
+                        right: bossAttackAttributes.contains("target")
+                            ? 1 * scale
+                            : 0),
                     child: attackAttributes),
                 Text(attack, style: leftStyle)
               ]),
-              Text(normal.range != 0 ? normal.range.toString() : "", style: leftStyle),
+              Text(normal.range != 0 ? normal.range.toString() : "",
+                  style: leftStyle),
             ],
           ),
         ),
@@ -358,74 +385,47 @@ class MonsterStatCardWidget extends StatelessWidget {
             left: 40.0 * scale,
             top: 16 * scale,
             width: 128 * scale, //useful or not?
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  bossOtherAttributes.isNotEmpty
-                      ? Row(children: [
-                          Text("    ", style: specialStyle),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              bossOtherAttributes.isNotEmpty
+                  ? Row(children: [
+                      Text("    ", style: specialStyle),
+                      SizedBox(
+                          width: 112 * scale,
+                          child: LineBuilder.createLines(
+                              bossOtherAttributes,
+                              false,
+                              false,
+                              false,
+                              data,
+                              CrossAxisAlignment.start,
+                              scale,
+                              getIt<Settings>().shimmer.value)),
+                    ])
+                  : Container(),
+              if (bossOtherAttributes.isNotEmpty)
+                Image.asset(
+                  scale: 1 / (scale * 0.15),
+                  height: 1 * scale,
+                  fit: BoxFit.fill,
+                  width: 125.0 * scale,
+                  //actually 40, but some layout might depend on wider size so not changing now
+                  filterQuality: FilterQuality.medium,
+                  "assets/images/abilities/divider_boss_fh.png",
+                ),
+              normal.special1.isNotEmpty
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          Text(
+                            "1:",
+                            style: specialStyle,
+                          ),
                           SizedBox(
                               width: 112 * scale,
                               child: LineBuilder.createLines(
-                                  bossOtherAttributes,
-                                  false,
-                                  false,
-                                  false,
-                                  data,
-                                  CrossAxisAlignment.start,
-                                  scale,
-                                  getIt<Settings>().shimmer.value)),
-                        ])
-                      : Container(),
-                  if (bossOtherAttributes.isNotEmpty)
-                    Image.asset(
-                      scale: 1 / (scale * 0.15),
-                      height: 1 * scale,
-                      fit: BoxFit.fill,
-                      width: 125.0 * scale,
-                      //actually 40, but some layout might depend on wider size so not changing now
-                      filterQuality: FilterQuality.medium,
-                      "assets/images/abilities/divider_boss_fh.png",
-                    ),
-                  normal.special1.isNotEmpty
-                      ? Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                              Text(
-                                "1:",
-                                style: specialStyle,
-                              ),
-                              SizedBox(
-                                  width: 112 * scale,
-                                  child: LineBuilder.createLines(
-                                      data.type.levels[data.level.value].boss!.special1,
-                                      false,
-                                      !noCalculationSetting,
-                                      false,
-                                      data,
-                                      CrossAxisAlignment.start,
-                                      scale,
-                                      false)),
-                            ])
-                      : Container(),
-                  normal.special2.isNotEmpty
-                      ? Image.asset(
-                          scale: 1 / (scale * 0.15),
-                          height: 1 * scale,
-                          fit: BoxFit.fill,
-                          width: 125.0 * scale,
-                          //actually 40, but some layout might depend on wider size so not changing now
-                          filterQuality: FilterQuality.medium,
-                          "assets/images/abilities/divider_boss_fh.png",
-                        )
-                      : Container(),
-                  normal.special2.isNotEmpty
-                      ? Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                          Text("2:", style: specialStyle),
-                          SizedBox(
-                              width: 112 * scale,
-                              child: LineBuilder.createLines(
-                                  data.type.levels[data.level.value].boss!.special2,
+                                  data.type.levels[data.level.value].boss!
+                                      .special1,
                                   false,
                                   !noCalculationSetting,
                                   false,
@@ -434,8 +434,38 @@ class MonsterStatCardWidget extends StatelessWidget {
                                   scale,
                                   false)),
                         ])
-                      : Container()
-                ])),
+                  : Container(),
+              normal.special2.isNotEmpty
+                  ? Image.asset(
+                      scale: 1 / (scale * 0.15),
+                      height: 1 * scale,
+                      fit: BoxFit.fill,
+                      width: 125.0 * scale,
+                      //actually 40, but some layout might depend on wider size so not changing now
+                      filterQuality: FilterQuality.medium,
+                      "assets/images/abilities/divider_boss_fh.png",
+                    )
+                  : Container(),
+              normal.special2.isNotEmpty
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          Text("2:", style: specialStyle),
+                          SizedBox(
+                              width: 112 * scale,
+                              child: LineBuilder.createLines(
+                                  data.type.levels[data.level.value].boss!
+                                      .special2,
+                                  false,
+                                  !noCalculationSetting,
+                                  false,
+                                  data,
+                                  CrossAxisAlignment.start,
+                                  scale,
+                                  false)),
+                        ])
+                  : Container()
+            ])),
         data.type.flying
             ? Positioned(
                 height: 16 * scale,
@@ -526,8 +556,10 @@ class MonsterStatCardWidget extends StatelessWidget {
               ),
               margin: EdgeInsets.all(1.6 * scale),
               child: isBoss
-                  ? buildBossLayout(data, scale, shadow, leftStyle, rightStyle, frosthavenStyle)
-                  : buildNormalLayout(data, scale, shadow, leftStyle, rightStyle, frosthavenStyle));
+                  ? buildBossLayout(data, scale, shadow, leftStyle, rightStyle,
+                      frosthavenStyle)
+                  : buildNormalLayout(data, scale, shadow, leftStyle,
+                      rightStyle, frosthavenStyle));
         });
   }
 
@@ -558,13 +590,16 @@ class MonsterStatCardWidget extends StatelessWidget {
                     child: ValueListenableBuilder<int>(
                         valueListenable: getIt<GameState>().commandIndex,
                         builder: (context, value, child) {
-                          bool allStandeesOut = data.monsterInstances.length == data.type.count;
+                          bool allStandeesOut =
+                              data.monsterInstances.length == data.type.count;
                           return IconButton(
                             padding: const EdgeInsets.only(right: 8, top: 8),
                             icon: Image.asset(
                                 height: 20 * scale,
                                 fit: BoxFit.fitHeight,
-                                color: allStandeesOut ? Colors.white24 : Colors.grey,
+                                color: allStandeesOut
+                                    ? Colors.white24
+                                    : Colors.grey,
                                 colorBlendMode: BlendMode.modulate,
                                 'assets/images/psd/add.png'),
                             onPressed: () {
@@ -584,7 +619,8 @@ class MonsterStatCardWidget extends StatelessWidget {
                         return IconButton(
                             padding: const EdgeInsets.only(left: 8, top: 8),
                             icon: Image.asset(
-                                color: data.monsterInstances.length == data.type.count
+                                color: data.monsterInstances.length ==
+                                        data.type.count
                                     ? Colors.white24
                                     : Colors.grey,
                                 height: 20 * scale,
@@ -598,7 +634,8 @@ class MonsterStatCardWidget extends StatelessWidget {
         ]));
   }
 
-  static List<Widget> _createConditionList(Monster data, double scale, MonsterStatsModel stats) {
+  static List<Widget> _createConditionList(
+      Monster data, double scale, MonsterStatsModel stats) {
     List<Widget> list = [];
     String suffix = "";
     if (GameMethods.isFrosthavenStyle(data.type)) {

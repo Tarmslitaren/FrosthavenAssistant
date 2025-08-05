@@ -5,7 +5,6 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../../Resource/state/game_state.dart';
 
-
 class AbilityCardZoom extends StatefulWidget {
   const AbilityCardZoom(
       {super.key,

@@ -53,7 +53,8 @@ class DrawButtonState extends State<DrawButton> {
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
           var shadow = Shadow(
-            offset: Offset(1 * settings.userScalingBars.value, 1 * settings.userScalingBars.value),
+            offset: Offset(1 * settings.userScalingBars.value,
+                1 * settings.userScalingBars.value),
             color: Colors.black87,
             blurRadius: 1 * settings.userScalingBars.value,
           );
@@ -83,8 +84,11 @@ class DrawButtonState extends State<DrawButton> {
                 return Container(
                     margin: EdgeInsets.zero,
                     height: 40 * settings.userScalingBars.value,
-                    width: (_gameState.totalRounds.value != _gameState.round.value ? 75 : 60) *
-                        settings.userScalingBars.value,
+                    width:
+                        (_gameState.totalRounds.value != _gameState.round.value
+                                ? 75
+                                : 60) *
+                            settings.userScalingBars.value,
                     child: TextButton(
                         style: TextButton.styleFrom(
                             padding: EdgeInsets.only(
@@ -93,7 +97,8 @@ class DrawButtonState extends State<DrawButton> {
                             alignment: Alignment.center),
                         onPressed: onPressed,
                         child: Text(
-                          _gameState.roundState.value == RoundState.chooseInitiative
+                          _gameState.roundState.value ==
+                                  RoundState.chooseInitiative
                               ? "Draw"
                               : " Next Round",
                           style: TextStyle(
