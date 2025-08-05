@@ -203,8 +203,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
         ),
         key: const ValueKey<int>(0),
         margin: EdgeInsets.all(1.6 * scale),
-        width:
-            142.4 * scale, //this evaluates to same space as front somehow.
+        width: 142.4 * scale, //this evaluates to same space as front somehow.
         height: 94.4 * scale,
         child: Stack(
           alignment: Alignment.center,
@@ -231,8 +230,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                           fontSize: 12.8 * scale,
                           shadows: const [
                             Shadow(
-                                offset: Offset(0.8, 0.8),
-                                color: Colors.black)
+                                offset: Offset(0.8, 0.8), color: Colors.black)
                           ]),
                     ))
                 : Container(),
@@ -278,7 +276,8 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
   Widget build(BuildContext context) {
     final double scale = getScaleByReference(context);
     return ValueListenableBuilder<int>(
-        valueListenable: _gameState.commandIndex,
+        valueListenable: _gameState
+            .commandIndex, //todo: make more granular: this is here roundState && killMonsterStandee, but also scaling maybe? (or this is rebuilt on any action)
         builder: (context, value, child) {
           MonsterAbilityCardModel? card;
           if (_gameState.roundState.value == RoundState.playTurns &&
@@ -291,7 +290,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
             }
           }
 
-          //get size for back
+          //get size for back todo: move to game methods
           late MonsterAbilityState deckk;
           _deckSize = 8;
           for (var deck in _gameState.currentAbilityDecks) {

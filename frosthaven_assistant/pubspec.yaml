@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.11.1+45
 
 environment:
-  sdk: ">=3.4.0 <3.8.0"
+  sdk: ">=3.4.0"
   #uncomment to peg flutter version to specific one.
   flutter: '<=3.27.3' #impeller forced on ios after this one...
 

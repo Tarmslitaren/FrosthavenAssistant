@@ -120,7 +120,10 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     double width = 40 * _settings.userScalingBars.value; //the width of a card
     double height = 58.6666 * _settings.userScalingBars.value;
     double startXOffset = -(width);
-    Offset screenSpaceOffset = context.globalPaintBounds!.topLeft;
+
+    Offset screenSpaceOffset = context.globalPaintBounds != null
+        ? context.globalPaintBounds!.topLeft
+        : Offset(0, 0);
     var screenSpaceY =
         screenSpaceOffset.dy; //draw deck top position from screen top
     var screenSpaceX = screenSpaceOffset.dx -

@@ -27,6 +27,9 @@ void main() {
   setupGetIt();
 
   _enablePlatformOverrideForDesktop();
+  //debugPrintRebuildDirtyWidgets = true;
+  //debugProfileBuildsEnabled = true;
+  //debugProfileLayoutsEnabled = true;
 
   const minScreenWidth = 400.0;
   const minScreenHeight = 600.0;

@@ -38,7 +38,7 @@
 		{
 			"name": "City Guard (Sun Special) (2e)",
 			"cards": [
-				[ 0, true, 99, "%move% + 0","*.........", "%attack% + 0", "^(act immediately after you.)" ]
+				["Nothing Special", 0, true, 99, "%move% + 0","*.........", "%attack% + 0", "^(act immediately after you.)" ]
 			]
 		},
 		{
