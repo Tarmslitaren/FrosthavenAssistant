@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/character_widget.dart';
+import 'package:frosthaven_assistant/Layout/CharacterWidget/character_widget.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';

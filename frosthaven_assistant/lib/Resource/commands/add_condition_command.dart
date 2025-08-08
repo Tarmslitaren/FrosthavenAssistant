@@ -9,22 +9,26 @@ class AddConditionCommand extends Command {
   AddConditionCommand(this.condition, this.figureId, this.ownerId);
   @override
   void execute() {
-    FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
-    List<Condition> newList = [];
-    newList.addAll(figure.conditions.value);
-    newList.add(condition);
-    figure.conditions.value = newList;
+    FigureState? figure = GameMethods.getFigure(ownerId, figureId);
+    if (figure != null) {
+      List<Condition> newList = [];
+      newList.addAll(figure.conditions.value);
+      newList.add(condition);
+      figure.conditions.value = newList;
 
-    //only added this turn if is current or done
-    for (var item in getIt<GameState>().currentList) {
-      if (item.id == ownerId) {
-        if (item.turnState.value != TurnsState.notDone &&
-            getIt<GameState>().roundState.value == RoundState.playTurns) {
-          figure.getMutableConditionsAddedThisTurn(stateAccess).add(condition);
+      //only added this turn if is current or done
+      for (var item in getIt<GameState>().currentList) {
+        if (item.id == ownerId) {
+          if (item.turnState.value != TurnsState.notDone &&
+              getIt<GameState>().roundState.value == RoundState.playTurns) {
+            figure
+                .getMutableConditionsAddedThisTurn(stateAccess)
+                .add(condition);
+          }
         }
       }
+      getIt<GameState>().updateList.value++;
     }
-    getIt<GameState>().updateList.value++;
   }
 
   @override

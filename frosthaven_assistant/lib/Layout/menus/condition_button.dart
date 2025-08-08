@@ -10,7 +10,7 @@ import '../../services/service_locator.dart';
 import '../condition_icon.dart';
 
 class ConditionButton extends StatelessWidget {
-  ConditionButton(
+  const ConditionButton(
       {super.key,
       required this.condition,
       required this.figureId,

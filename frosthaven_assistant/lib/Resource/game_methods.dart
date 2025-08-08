@@ -1152,9 +1152,9 @@ class GameMethods {
           stateModifier, roomMonsters.name, _gameState._scenarioSpecialRules);
     }
     bool addSorted = _gameState.currentCampaign.value == "Buttons and Bugs";
-    if (getIt<Settings>().noStandees.value != true &&
-        getIt<Settings>().autoAddStandees.value != false) {
-      if (getIt<Settings>().randomStandees.value == true || addSorted) {
+    if (!getIt<Settings>().noStandees.value &&
+        getIt<Settings>().autoAddStandees.value) {
+      if (getIt<Settings>().randomStandees.value || addSorted) {
         if (initMessage.isNotEmpty && !addSorted) {
           initMessage += "\n";
         }
