@@ -11,7 +11,7 @@ import '../services/service_locator.dart';
 class SelectHealthWheel extends StatefulWidget {
   final FigureState data;
   final String figureId;
-  final String ownerId;
+  final String? ownerId;
   final ValueNotifier<double> delta;
   final ValueNotifier<int> time;
 

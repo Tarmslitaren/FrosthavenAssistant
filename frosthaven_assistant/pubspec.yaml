@@ -85,6 +85,7 @@ dev_dependencies:
   fluent_assertions: ^0.5.1
   build_test: any
   json_diff: ^0.2.1
+  dart_code_metrics_presets: ^2.24.0
 
 flutter_icons:
   android: "launcher_icon"

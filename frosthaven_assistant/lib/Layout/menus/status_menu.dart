@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
+import 'package:frosthaven_assistant/Layout/menus/condition_button.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
@@ -90,17 +91,6 @@ class StatusMenuState extends State<StatusMenu> {
     super.initState();
   }
 
-  bool isConditionActive(Condition condition, FigureState figure) {
-    bool isActive = false;
-    for (var item in figure.conditions.value) {
-      if (item == condition) {
-        isActive = true;
-        break;
-      }
-    }
-    return isActive;
-  }
-
   void activateCondition(Condition condition, FigureState figure) {
     List<Condition> newList = [];
     newList.addAll(figure.conditions.value);
@@ -109,7 +99,7 @@ class StatusMenuState extends State<StatusMenu> {
   }
 
   Widget buildChillButtons(ValueListenable<int> notifier, int maxValue,
-      String image, String figureId, String ownerId, double scale) {
+      String image, String figureId, String? ownerId, double scale) {
     return Row(children: [
       SizedBox(
           width: 40 * scale,
@@ -173,7 +163,7 @@ class StatusMenuState extends State<StatusMenu> {
     ]);
   }
 
-  Widget buildSummonButton(String figureId, String ownerId, double scale) {
+  Widget buildSummonButton(String figureId, String? ownerId, double scale) {
     String imagePath = "assets/images/summon/green.png";
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
@@ -224,153 +214,6 @@ class StatusMenuState extends State<StatusMenu> {
         });
   }
 
-  Widget buildConditionButton(Condition condition, String figureId,
-      String ownerId, List<String> immunities, double scale) {
-    bool enabled = true;
-    String suffix = "";
-    if (GameMethods.isFrosthavenStyle(null)) {
-      suffix = "_fh";
-    }
-    String imagePath = "assets/images/abilities/${condition.name}.png";
-    if (condition.name.contains("character")) {
-      imagePath = "assets/images/class-icons/${condition.getName()}.png";
-    } else if (suffix.isNotEmpty && hasGHVersion(condition.name)) {
-      imagePath = "assets/images/abilities/${condition.getName()}$suffix.png";
-    }
-    for (var item in immunities) {
-      if (condition.name.contains(item.substring(1, item.length - 1))) {
-        enabled = false;
-      }
-      if (item.substring(1, item.length - 1) == "poison" &&
-          condition == Condition.infect) {
-        enabled = false;
-      }
-      if (item.substring(1, item.length - 1) == "wound" &&
-          condition == Condition.rupture) {
-        enabled = false;
-      }
-      //immobilize or muddle: also chill - doesn't matter: monster can't be chilled and players don't have immunities.
-    }
-    return ValueListenableBuilder<int>(
-        valueListenable: _gameState.commandIndex,
-        builder: (context, value, child) {
-          Color color = Colors.transparent;
-          FigureState? figure = GameMethods.getFigure(ownerId, figureId);
-          if (figure == null) {
-            return const SizedBox(
-              width: 0,
-              height: 0,
-            );
-          }
-          ListItemData? owner;
-          for (var item in _gameState.currentList) {
-            if (item.id == ownerId) {
-              owner = item;
-              break;
-            }
-          }
-
-          bool isActive = isConditionActive(condition, figure);
-          if (isActive) {
-            color =
-                getIt<Settings>().darkMode.value ? Colors.white : Colors.black;
-          }
-
-          bool isCharacter = condition.name.contains("character");
-          Color classColor = Colors.transparent;
-          if (isCharacter) {
-            var characters = GameMethods.getCurrentCharacters();
-            classColor = characters
-                .where((element) =>
-                    element.characterClass.name == condition.getName())
-                .first
-                .characterClass
-                .color;
-          }
-
-          return Container(
-              width: 42 * scale,
-              height: 42 * scale,
-              padding: EdgeInsets.zero,
-              margin: EdgeInsets.all(1 * scale),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                    color: color,
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(30 * scale))),
-              child: IconButton(
-                icon: enabled
-                    ? isActive
-                        ? ConditionIcon(
-                            condition,
-                            24 * scale,
-                            owner!,
-                            figure,
-                            scale: scale,
-                          )
-                        : isCharacter
-                            ? Stack(alignment: Alignment.center, children: [
-                                Image(
-                                    color: classColor,
-                                    colorBlendMode: BlendMode.modulate,
-                                    height: 24 * scale,
-                                    filterQuality: FilterQuality.medium,
-                                    image: const AssetImage(
-                                        "assets/images/psd/class-token-bg.png")),
-                                Image.asset(
-                                    filterQuality: FilterQuality.medium,
-                                    height: 24 * scale * 0.65,
-                                    width: 24 * scale * 0.65,
-                                    //color: classColor,
-                                    //colorBlendMode: BlendMode.colorBurn,
-                                    imagePath),
-                              ])
-                            : Image.asset(
-                                filterQuality: FilterQuality.medium,
-                                //needed because of the edges
-                                height: 24 * scale,
-                                width: 24 * scale,
-                                imagePath)
-                    : Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Positioned(
-                              left: 0,
-                              top: 0,
-                              child: Image(
-                                height: 23.1 * scale,
-                                filterQuality: FilterQuality.medium,
-                                //needed because of the edges
-                                image: AssetImage(imagePath),
-                              )),
-                          Positioned(
-                              //should be 19  but there is a clipping issue
-                              left: 15.75 * scale,
-                              top: 7.35 * scale,
-                              child: Image(
-                                height: 8.4 * scale,
-                                filterQuality: FilterQuality.medium,
-                                //needed because of the edges
-                                image: const AssetImage(
-                                    "assets/images/psd/immune.png"),
-                              )),
-                        ],
-                      ),
-                onPressed: enabled
-                    ? () {
-                        if (!isActive) {
-                          _gameState.action(AddConditionCommand(
-                              condition, figureId, ownerId));
-                        } else {
-                          _gameState.action(RemoveConditionCommand(
-                              condition, figureId, ownerId));
-                        }
-                      }
-                    : null,
-              ));
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     bool showCustomContent = getIt<Settings>().showCustomContent.value;
@@ -390,10 +233,10 @@ class StatusMenuState extends State<StatusMenu> {
     }
 
     String name = "";
-    String ownerId = "";
+    String? ownerId = "";
     if (widget.monsterId != null) {
       name = widget.monsterId!; //this is no good
-      ownerId = widget.monsterId!;
+      ownerId = widget.monsterId;
     } else if (widget.characterId != null) {
       name = widget.characterId!; //now this is no good either...
       ownerId = name;
@@ -431,17 +274,15 @@ class StatusMenuState extends State<StatusMenu> {
           }
           hasShield = GameMethods.hasShield(monster, figure);
           hasRetaliate = GameMethods.hasRetaliate(monster, figure);
+          final monsterData = monster.type.levels[monster.level.value];
 
           if (figure.type == MonsterType.normal) {
-            immunities =
-                monster.type.levels[monster.level.value].normal!.immunities;
+            immunities = monsterData.normal!.immunities;
           } else if (figure.type == MonsterType.elite) {
-            immunities =
-                monster.type.levels[monster.level.value].elite!.immunities;
+            immunities = monsterData.elite!.immunities;
             isElite = true;
           } else if (figure.type == MonsterType.boss) {
-            immunities =
-                monster.type.levels[monster.level.value].boss!.immunities;
+            immunities = monsterData.boss!.immunities;
           }
         }
       }
@@ -742,29 +583,65 @@ class StatusMenuState extends State<StatusMenu> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    buildConditionButton(
-                        Condition.stun, figureId, ownerId, immunities, scale),
-                    buildConditionButton(Condition.immobilize, figureId,
-                        ownerId, immunities, scale),
-                    buildConditionButton(
-                        Condition.disarm, figureId, ownerId, immunities, scale),
-                    buildConditionButton(
-                        Condition.wound, figureId, ownerId, immunities, scale),
+                    ConditionButton(
+                        condition: Condition.stun,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
+                    ConditionButton(
+                        condition: Condition.immobilize,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
+                    ConditionButton(
+                        condition: Condition.disarm,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
+                    ConditionButton(
+                        condition: Condition.wound,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
                   ],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    buildConditionButton(
-                        Condition.muddle, figureId, ownerId, immunities, scale),
-                    buildConditionButton(
-                        Condition.poison, figureId, ownerId, immunities, scale),
-                    buildConditionButton(
-                        Condition.bane, figureId, ownerId, immunities, scale),
-                    buildConditionButton(Condition.brittle, figureId, ownerId,
-                        immunities, scale),
-                    buildConditionButton(Condition.safeguard, figureId, ownerId,
-                        immunities, scale),
+                    ConditionButton(
+                        condition: Condition.muddle,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
+                    ConditionButton(
+                        condition: Condition.poison,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
+                    ConditionButton(
+                        condition: Condition.bane,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
+                    ConditionButton(
+                        condition: Condition.brittle,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
+                    ConditionButton(
+                        condition: Condition.safeguard,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
                   ],
                 ),
                 widget.characterId != null || isSummon
@@ -772,14 +649,26 @@ class StatusMenuState extends State<StatusMenu> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           if (showCustomContent)
-                            buildConditionButton(Condition.infect, figureId,
-                                ownerId, immunities, scale),
+                            ConditionButton(
+                                condition: Condition.infect,
+                                figureId: figureId,
+                                ownerId: ownerId,
+                                immunities: immunities,
+                                scale: scale),
                           if (!isSummon)
-                            buildConditionButton(Condition.impair, figureId,
-                                ownerId, immunities, scale),
+                            ConditionButton(
+                                condition: Condition.impair,
+                                figureId: figureId,
+                                ownerId: ownerId,
+                                immunities: immunities,
+                                scale: scale),
                           if (showCustomContent)
-                            buildConditionButton(Condition.rupture, figureId,
-                                ownerId, immunities, scale)
+                            ConditionButton(
+                                condition: Condition.rupture,
+                                figureId: figureId,
+                                ownerId: ownerId,
+                                immunities: immunities,
+                                scale: scale),
                         ],
                       )
                     : !hasMireFoot
@@ -787,42 +676,90 @@ class StatusMenuState extends State<StatusMenu> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               if (showCustomContent)
-                                buildConditionButton(Condition.poison2,
-                                    figureId, ownerId, immunities, scale),
+                                ConditionButton(
+                                    condition: Condition.poison2,
+                                    figureId: figureId,
+                                    ownerId: ownerId,
+                                    immunities: immunities,
+                                    scale: scale),
                               if (showCustomContent)
-                                buildConditionButton(Condition.rupture,
-                                    figureId, ownerId, immunities, scale),
+                                ConditionButton(
+                                    condition: Condition.rupture,
+                                    figureId: figureId,
+                                    ownerId: ownerId,
+                                    immunities: immunities,
+                                    scale: scale),
                             ],
                           )
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              buildConditionButton(Condition.wound2, figureId,
-                                  ownerId, immunities, scale),
-                              buildConditionButton(Condition.poison2, figureId,
-                                  ownerId, immunities, scale),
-                              buildConditionButton(Condition.poison3, figureId,
-                                  ownerId, immunities, scale),
-                              buildConditionButton(Condition.poison4, figureId,
-                                  ownerId, immunities, scale),
-                              buildConditionButton(Condition.rupture, figureId,
-                                  ownerId, immunities, scale),
+                              ConditionButton(
+                                  condition: Condition.wound2,
+                                  figureId: figureId,
+                                  ownerId: ownerId,
+                                  immunities: immunities,
+                                  scale: scale),
+                              ConditionButton(
+                                  condition: Condition.poison2,
+                                  figureId: figureId,
+                                  ownerId: ownerId,
+                                  immunities: immunities,
+                                  scale: scale),
+                              ConditionButton(
+                                  condition: Condition.poison3,
+                                  figureId: figureId,
+                                  ownerId: ownerId,
+                                  immunities: immunities,
+                                  scale: scale),
+                              ConditionButton(
+                                  condition: Condition.poison4,
+                                  figureId: figureId,
+                                  ownerId: ownerId,
+                                  immunities: immunities,
+                                  scale: scale),
+                              ConditionButton(
+                                  condition: Condition.rupture,
+                                  figureId: figureId,
+                                  ownerId: ownerId,
+                                  immunities: immunities,
+                                  scale: scale),
                             ],
                           ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    buildConditionButton(Condition.strengthen, figureId,
-                        ownerId, immunities, scale),
-                    buildConditionButton(Condition.invisible, figureId, ownerId,
-                        immunities, scale),
-                    buildConditionButton(Condition.regenerate, figureId,
-                        ownerId, immunities, scale),
-                    buildConditionButton(
-                        Condition.ward, figureId, ownerId, immunities, scale),
+                    ConditionButton(
+                        condition: Condition.strengthen,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
+                    ConditionButton(
+                        condition: Condition.invisible,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
+                    ConditionButton(
+                        condition: Condition.regenerate,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
+                    ConditionButton(
+                        condition: Condition.ward,
+                        figureId: figureId,
+                        ownerId: ownerId,
+                        immunities: immunities,
+                        scale: scale),
                     if (showCustomContent)
-                      buildConditionButton(Condition.dodge, figureId, ownerId,
-                          immunities, scale),
+                      ConditionButton(
+                          condition: Condition.dodge,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
                   ],
                 ),
                 if (monster != null)
@@ -830,17 +767,33 @@ class StatusMenuState extends State<StatusMenu> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       if (nrOfCharacters > 0)
-                        buildConditionButton(Condition.character1, figureId,
-                            ownerId, immunities, scale),
+                        ConditionButton(
+                            condition: Condition.character1,
+                            figureId: figureId,
+                            ownerId: ownerId,
+                            immunities: immunities,
+                            scale: scale),
                       if (nrOfCharacters > 1)
-                        buildConditionButton(Condition.character2, figureId,
-                            ownerId, immunities, scale),
+                        ConditionButton(
+                            condition: Condition.character2,
+                            figureId: figureId,
+                            ownerId: ownerId,
+                            immunities: immunities,
+                            scale: scale),
                       if (nrOfCharacters > 2)
-                        buildConditionButton(Condition.character3, figureId,
-                            ownerId, immunities, scale),
+                        ConditionButton(
+                            condition: Condition.character3,
+                            figureId: figureId,
+                            ownerId: ownerId,
+                            immunities: immunities,
+                            scale: scale),
                       if (nrOfCharacters > 3)
-                        buildConditionButton(Condition.character4, figureId,
-                            ownerId, immunities, scale),
+                        ConditionButton(
+                            condition: Condition.character4,
+                            figureId: figureId,
+                            ownerId: ownerId,
+                            immunities: immunities,
+                            scale: scale),
                       buildSummonButton(figureId, ownerId, scale)
                     ],
                   ),

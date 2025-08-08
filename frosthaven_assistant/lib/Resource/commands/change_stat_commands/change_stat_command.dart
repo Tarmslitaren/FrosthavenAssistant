@@ -3,7 +3,7 @@ import '../../enums.dart';
 import '../../state/game_state.dart';
 
 abstract class ChangeStatCommand extends Command {
-  final String ownerId;
+  final String? ownerId;
   int change;
   final String figureId;
   ChangeStatCommand(this.change, this.figureId, this.ownerId);
@@ -30,7 +30,8 @@ abstract class ChangeStatCommand extends Command {
               if (getIt<GameState>().roundState.value ==
                   RoundState.chooseInitiative) {
                 GameMethods.sortCharactersFirst(stateAccess);
-              } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
+              } else if (getIt<GameState>().roundState.value ==
+                  RoundState.playTurns) {
                 //GameMethods.sortItemToPlace(item.id, 99); //TODO: don't? leave in place until end of round?
               }
               if (getIt<GameState>().roundState.value == RoundState.playTurns) {
@@ -55,7 +56,9 @@ abstract class ChangeStatCommand extends Command {
         //handle summon death
         for (var instance in item.characterState.summonList) {
           if (instance.health.value == 0) {
-            item.characterState.getMutableSummonList(stateAccess).remove(instance);
+            item.characterState
+                .getMutableSummonList(stateAccess)
+                .remove(instance);
             Future.delayed(const Duration(milliseconds: 600), () {
               getIt<GameState>().killMonsterStandee.value++;
             });

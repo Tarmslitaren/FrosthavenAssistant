@@ -46,6 +46,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
         return -1;
       }
     }
+
     return a.compareTo(b);
   }
 
@@ -71,7 +72,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       }
     }
 
-    if (getIt<Settings>().showCustomContent.value == false) {
+    if (!getIt<Settings>().showCustomContent.value) {
       _allCharacters.removeWhere(
           (character) => GameMethods.isCustomCampaign(character.edition));
     }
@@ -87,6 +88,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       if (b.hidden && !a.hidden) {
         return -1;
       }
+
       return a.name.compareTo(b.name);
     });
     super.initState();
@@ -103,11 +105,12 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
           .where((user) =>
               user.name.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
-      if (enteredKeyword.toLowerCase() == "bladeswarm") {
+      final keyWord = enteredKeyword.toLowerCase();
+      if (keyWord == "bladeswarm") {
         //unlocked it!
         results = [bs];
       }
-      if (enteredKeyword.toLowerCase() == "vanquisher") {
+      if (keyWord == "vanquisher") {
         //unlocked it!
         results = [vq];
       }
@@ -156,6 +159,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
         return true;
       }
     }
+
     return false;
   }
 

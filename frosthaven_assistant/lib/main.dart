@@ -51,6 +51,7 @@ void main() {
       //todo: save a log?
     }
     //show the error in debug builds
+
     return ErrorWidget(e);
   });
 

@@ -30,7 +30,7 @@ class RemoveCardCommand extends Command {
       }
     }
     //todo: not use a sad hack, find better ui update solution
-    AbilityCardMenuState.revealedList = [];
+    AbilityCardsMenuState.revealedList = [];
   }
 
   @override

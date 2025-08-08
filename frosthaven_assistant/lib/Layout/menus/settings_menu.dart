@@ -31,13 +31,12 @@ class SettingsMenuState extends State<SettingsMenu> {
 
   final ScrollController scrollController = ScrollController();
 
-  late Settings settings;
+  final settings = getIt<Settings>();
 
   @override
   initState() {
     // at the beginning, all items are shown
     super.initState();
-    settings = getIt<Settings>();
     getIt<Network>().networkInfo.initNetworkInfo();
     _serverTextController.text = settings.lastKnownConnection;
     _portTextController.text = settings.lastKnownPort;
@@ -48,6 +47,7 @@ class SettingsMenuState extends State<SettingsMenu> {
     for (var item in getIt<Network>().networkInfo.wifiIPv4List) {
       retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
     }
+
     return retVal;
   }
 
@@ -80,8 +80,11 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   title: const Text("Dark mode"),
                                   value: settings.darkMode.value,
                                   onChanged: (bool? value) {
+                                    if (value == null) {
+                                      return;
+                                    }
                                     setState(() {
-                                      settings.darkMode.value = value!;
+                                      settings.darkMode.value = value;
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -359,11 +362,6 @@ class SettingsMenuState extends State<SettingsMenu> {
                                               settings.style.value =
                                                   Style.original;
                                               settings.saveToDisk();
-                                              if (getIt<GameState>()
-                                                      .currentCampaign
-                                                      .value ==
-                                                  "Frosthaven") {
-                                              } else {}
                                               getIt<GameState>()
                                                   .updateList
                                                   .value++;
@@ -388,21 +386,19 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   valueListenable: settings.client,
                                   builder: (context, value, child) {
                                     bool connected = false;
+                                    final clientState = settings.client.value;
                                     String connectionText = "Connect as Client";
-                                    if (settings.client.value ==
-                                        ClientState.connected) {
+                                    if (clientState == ClientState.connected) {
                                       connected = true;
                                       connectionText = "Connected as Client";
                                     }
-                                    if (settings.client.value ==
-                                        ClientState.connecting) {
+                                    if (clientState == ClientState.connecting) {
                                       connectionText = "Connecting...";
                                     }
                                     return CheckboxListTile(
-                                        enabled:
-                                            settings.server.value == false &&
-                                                settings.client.value !=
-                                                    ClientState.connecting,
+                                        enabled: !settings.server.value &&
+                                            settings.client.value !=
+                                                ClientState.connecting,
                                         title: Text(connectionText),
                                         value: connected,
                                         onChanged: (bool? value) {

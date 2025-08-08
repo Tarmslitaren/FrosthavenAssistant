@@ -7,7 +7,7 @@ import '../services/service_locator.dart';
 
 class HealthWheelController extends StatefulWidget {
   final String figureId;
-  final String ownerId;
+  final String? ownerId;
   final Widget child;
 
   const HealthWheelController(

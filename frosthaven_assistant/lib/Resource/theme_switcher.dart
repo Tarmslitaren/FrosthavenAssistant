@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../Layout/theme.dart';
 
 class ThemeSwitcher extends InheritedWidget {
-  final ThemeSwitcherWidgetState data;
-
   const ThemeSwitcher({
     super.key,
     required this.data,
@@ -15,6 +13,8 @@ class ThemeSwitcher extends InheritedWidget {
     return context.dependOnInheritedWidgetOfExactType<ThemeSwitcher>()!.data;
   }
 
+  final ThemeSwitcherWidgetState data;
+
   @override
   bool updateShouldNotify(ThemeSwitcher oldWidget) {
     return this != oldWidget;
@@ -22,11 +22,11 @@ class ThemeSwitcher extends InheritedWidget {
 }
 
 class ThemeSwitcherWidget extends StatefulWidget {
-  final ThemeData initialTheme;
-  final Widget child;
-
   const ThemeSwitcherWidget(
       {super.key, required this.initialTheme, required this.child});
+
+  final ThemeData initialTheme;
+  final Widget child;
 
   @override
   ThemeSwitcherWidgetState createState() {

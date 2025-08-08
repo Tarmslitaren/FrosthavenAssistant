@@ -4,51 +4,8 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import '../../Resource/commands/add_loot_card_command.dart';
 import '../../services/service_locator.dart';
 
-class AddLootCardMenu extends StatefulWidget {
+class AddLootCardMenu extends StatelessWidget {
   const AddLootCardMenu({super.key});
-
-  @override
-  AddLootCardMenuState createState() => AddLootCardMenuState();
-}
-
-class AddLootCardMenuState extends State<AddLootCardMenu> {
-  @override
-  initState() {
-    // at the beginning, all items are shown
-    super.initState();
-  }
-
-  Widget createListTile(name, index) {
-    ListTile listTile = ListTile(
-      onTap: () {
-        setState(() {
-          getIt<GameState>().action(AddLootCardCommand(name));
-        });
-      },
-      contentPadding: const EdgeInsets.only(left: 14),
-      minVerticalPadding: 0,
-      minLeadingWidth: 0,
-      horizontalTitleGap: 6,
-      leading: Image(
-        filterQuality: FilterQuality.medium,
-        height: 30,
-        width: 30,
-        fit: BoxFit.contain,
-        image: AssetImage("assets/images/loot/${name}_icon.png"),
-      ),
-      title: Text(
-        name,
-        overflow: TextOverflow.visible,
-        maxLines: 1,
-      ),
-      trailing:
-          Text("added: ${getIt<GameState>().lootDeck.addedCards[index]}   ",
-              style: const TextStyle(
-                fontSize: 18,
-              )),
-    );
-    return listTile;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,16 +30,15 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
                             style: TextStyle(fontSize: 18),
                           ),
                           //TODO: only show what can be added?
-                          createListTile("hide", 0),
-                          createListTile("lumber", 1),
-                          createListTile("metal", 2),
-
-                          createListTile("arrowvine", 3),
-                          createListTile("axenut", 4),
-                          createListTile("corpsecap", 5),
-                          createListTile("flamefruit", 6),
-                          createListTile("rockroot", 7),
-                          createListTile("snowthistle", 8),
+                          LootCardListTile(name: "hide", index: 0),
+                          LootCardListTile(name: "lumber", index: 1),
+                          LootCardListTile(name: "metal", index: 2),
+                          LootCardListTile(name: "arrowvine", index: 3),
+                          LootCardListTile(name: "axenut", index: 4),
+                          LootCardListTile(name: "corpsecap", index: 5),
+                          LootCardListTile(name: "flamefruit", index: 6),
+                          LootCardListTile(name: "rockroot", index: 7),
+                          LootCardListTile(name: "snowthistle", index: 8),
                         ]),
                       ),
                       const SizedBox(
@@ -104,5 +60,49 @@ class AddLootCardMenuState extends State<AddLootCardMenu> {
                             Navigator.pop(context);
                           }))
                 ]))));
+  }
+}
+
+class LootCardListTile extends StatefulWidget {
+  const LootCardListTile({super.key, required this.name, required this.index});
+
+  final String name;
+  final int index;
+
+  @override
+  State<StatefulWidget> createState() => LootCardListTileState();
+}
+
+class LootCardListTileState extends State<LootCardListTile> {
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: () {
+        setState(() {
+          getIt<GameState>().action(AddLootCardCommand(widget.name));
+        });
+      },
+      contentPadding: const EdgeInsets.only(left: 14),
+      minVerticalPadding: 0,
+      minLeadingWidth: 0,
+      horizontalTitleGap: 6,
+      leading: Image(
+        filterQuality: FilterQuality.medium,
+        height: 30,
+        width: 30,
+        fit: BoxFit.contain,
+        image: AssetImage("assets/images/loot/${widget.name}_icon.png"),
+      ),
+      title: Text(
+        widget.name,
+        overflow: TextOverflow.visible,
+        maxLines: 1,
+      ),
+      trailing: Text(
+          "added: ${getIt<GameState>().lootDeck.addedCards[widget.index]}   ",
+          style: const TextStyle(
+            fontSize: 18,
+          )),
+    );
   }
 }

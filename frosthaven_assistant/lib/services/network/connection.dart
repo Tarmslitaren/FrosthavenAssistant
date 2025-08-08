@@ -15,16 +15,8 @@ class Connection {
     final resolvedAddresses = await _resolveAddress(address);
     var socket = await Socket.connect(resolvedAddresses.first, port);
     add(socket);
-    return socket;
-  }
 
-  Future<List<InternetAddress>> _resolveAddress(String address) async {
-    List<InternetAddress> resolvedAddresses =
-        await InternetAddress.lookup(address);
-    if (resolvedAddresses.isEmpty) {
-      throw Exception("Unable to resolve host");
-    }
-    return resolvedAddresses;
+    return socket;
   }
 
   void add(Socket socket) {
@@ -54,6 +46,16 @@ class Connection {
     return _sockets.isNotEmpty;
   }
 
+  Future<List<InternetAddress>> _resolveAddress(String address) async {
+    List<InternetAddress> resolvedAddresses =
+        await InternetAddress.lookup(address);
+    if (resolvedAddresses.isEmpty) {
+      throw Exception("Unable to resolve host");
+    }
+
+    return resolvedAddresses;
+  }
+
   Iterable<Socket> _find(Socket socket) {
     return _sockets.where((x) =>
         x.remoteAddress == socket.remoteAddress &&
@@ -80,6 +82,7 @@ class Connection {
       // Close the socket, as something is completely wrong with it
       log('Unexpected exception in determining socket closure: \'{}\''
           .format(e.toString()));
+
       return true;
     }
   }

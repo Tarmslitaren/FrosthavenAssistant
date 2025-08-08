@@ -5,6 +5,139 @@
 # IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
 # invoked from the command line by running `flutter analyze`.
 
+#dcm plugin
+dart_code_metrics:
+  extends:
+    - recommended
+  rules:
+
+    #common
+    avoid-cascade-after-if-null: true
+    #Warns when a cascade expression is used after if null (??) binary expression without parentheses
+    avoid-duplicate-named-imports: true
+    #Warns when a file has duplicate imports which differ only in name prefix
+    avoid-dynamic: true
+    #Warns when the dynamic type is used as a variable type in a declaration, a function return type, etc.
+    avoid-global-state: true
+    #Warns when a global mutable variables is used
+    avoid-non-null-assertion: true
+    #Warns when the non-null assertion operator ! (or “bang” operator) is used on a property access or method invocation
+    avoid-self-compare: true
+    #Warns when a comparison has both sides exactly the same
+    avoid-throw-in-catch-block: true
+    #Warns when a throw expression is called inside a catch block
+    binary-expression-operand-order: false #silly rule
+    #Warns when a literal value is on the left hand side in a binary expressions
+    double-literal-format: true
+    #Checks that double literals should begin with 0. instead of just ., and should not end with a trailing 0
+    member-ordering: true
+    #Enforces ordering for a class members
+    newline-before-return: false
+    #Enforces a blank line between statements and return in a block
+    no-boolean-literal-compare: true
+    #Warns on comparison to a boolean literal, as in x == true
+    no-empty-block: true
+    #Disallows empty blocks except catch clause block
+    no-equal-then-else: true
+    #Warns when if statement has equal then and else statements or conditional expression has equal then and else expressions
+    no-magic-number: false #temp disabled because of amount
+    #Warns when number literals are used outside of named constants or variables
+    prefer-conditional-expressions: true
+    #Recommends to use a conditional expression instead of assigning to the same thing or return statement in each branch of an if statement
+    prefer-enums-by-name: true
+    #Since Dart 2.15 it's possible to use byName method on enum values prop instead of searching the value with firstWhere
+    prefer-first: true
+    #Suggests using first instead of list[0] or iterable.elementAt(0)
+    prefer-immediate-return: true
+    #Warns when a method or a function returns a variable declared right before the return statement
+    prefer-iterable-of: true
+    #Warns when List.from() factory is used instead of List.of()
+    prefer-last: true
+    #Suggests using last instead of list[list.length - 1] or iterable.elementAt(iterable.length - 1)
+    prefer-match-file-name: true
+    #Warns when a file name does not match the class name
+
+    #common maybe disable
+    prefer-moving-to-variable: true
+    #Warns when a property access or a method invocation start with duplicated chains of other invocations / accesses inside a single function or method block
+    prefer-correct-test-file-name: true
+    #Warns if the file within /test contains a main, but the file name doesn't end with _test.dart
+    prefer-abstract-final-static-class: true
+    #Suggests adding abstract final to classes with only static members to avoid them being instantiated or being used in inheritance
+    prefer-async-await: true
+    #Recommends to use async/await syntax to handle a Future result instead of .then() invocation
+    prefer-commenting-analyzer-ignores: true
+    #Warns when // ignore: comments are left without any additional description of why this ignore is applied
+    missing-test-assertion: true
+    #Warns when there are no test assertions in a test case
+    avoid-top-level-members-in-tests: true
+    #Warns when a public top-level member (except the entrypoint) is declared inside a test file
+    avoid-unnecessary-conditionals: true
+    #Checks for unnecessary conditional expressions
+    avoid-unnecessary-type-assertions: true
+    #Warns about unnecessary usage of the is operator, and whereType and whereNotNull methods
+    avoid-unnecessary-type-casts: true
+    #Warns about unnecessary use of the as operator and cast method
+    avoid-unrelated-type-assertions: true
+    #Warns about unrelated usages of the is operator and whereType method
+    avoid-unused-parameters: true
+    #Checks for unused parameters inside a function or method body
+    avoid-substring: false #verbose alternatives
+    #Warns when a String.substring method is used
+    avoid-late-keyword: true
+    #Warns when a field or variable is declared with a late keyword
+    avoid-nested-conditional-expressions: true
+    #Suggests to refactor conditional expressions when the nesting level exceeds the configured threshold
+    avoid-passing-async-when-sync-expected: true
+    #Warns when an asynchronous function is used as an argument where a synchronous function is expected
+    avoid-redundant-async: true
+    #Checks for redundant async in a method or function body
+    avoid-collection-methods-with-unrelated-types: true
+    #Warns when a collection method is used with an expression of an unrelated type
+
+
+
+    # Flutter-specific Rules
+    avoid-border-all: true
+    #Suggests replacing the Border.all constructor with the const Border.fromBorderSide constructor
+    avoid-expanded-as-spacer: true
+    #Suggests using the Spacer widget instead of the Expanded widget containing empty SizedBox/Container widget
+    avoid-returning-widgets: true
+    #Warns when a method or function returns a Widget or subclass of a Widget
+    avoid-shrink-wrap-in-lists: true
+    #Warns when a ListView widget with shrinkWrap parameter is wrapped in a Column, Row or another ListView widget
+    avoid-wrapping-in-padding: true
+    #Warns when a widget is wrapped in a Padding widget but has a padding setting by itself
+    prefer-const-border-radius: true
+    #Suggests replacing the BorderRadius.circular constructor with the const BorderRadius.all constructor
+    prefer-correct-edge-insets-constructor: true
+    #Suggests using the correct EdgeInsets constructor
+    prefer-text-rich: true
+    #Warns when a RichText widget is used instead of Text.rich
+
+    # Flutter-specific Rules, maybe disable?
+    prefer-using-list-view: true
+    #Warns when a Column widget with only children parameter is wrapped in a SingleChildScrollView widget
+    use-setstate-synchronously: true
+    #Warns when setState is called past an await point
+    prefer-define-hero-tag: true
+    #Warns when a Widget has an unset heroTag
+    prefer-extracting-callbacks: false
+    #Warns about inline callbacks in a widget tree and suggest to extract them to a widget method
+    prefer-single-widget-per-file: false # yeah no.
+    #Warns when a file contains more than one widget
+    check-for-equals-in-render-object-setters: true
+    #Warns when a RenderObject setter doesn't have an equality check for the new value
+    consistent-update-render-object: true
+    #Warns when an updateRenderObject method is absent or doesn't update all fields set in createRenderObject
+    avoid-unnecessary-setstate: true
+    #Warns when setState is called inside initState, didUpdateWidget or build methods and when it is called from a sync method that is called inside those methods
+    avoid-unnecessary-stateful-widgets: true
+    #Warns when a StatefulWidget can be converted to a StatelessWidget
+    always-remove-listener: true
+    #Warns when an event listener is added but never removed
+
+
 # The following line activates a set of recommended lints for Flutter apps,
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml

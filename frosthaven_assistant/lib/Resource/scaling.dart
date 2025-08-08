@@ -23,6 +23,7 @@ double getMainListMargin(BuildContext context) {
   if (screenSize.width > referenceWidth) {
     return max((screenSize.width - fraction * referenceWidth) / 2, 0);
   }
+
   return 0.0;
 }
 
@@ -34,23 +35,22 @@ bool modifiersFitOnBar(BuildContext context) {
   if (barSize < referenceMinWidthWithModifiersOnBar) {
     return false;
   }
+
   return true;
 }
 
 double getMainListWidth(BuildContext context) {
-  //wrong
   var screenSize = MediaQuery.of(context).size;
-  var width = min(screenSize.width, maxWidth);
 
-  return width;
+  return min(screenSize.width, maxWidth);
 }
 
 double _scaleByReference(
     BuildContext context, double referenceWidth, double maxWidth) {
   var screenSize = MediaQuery.of(context).size;
   var width = min(screenSize.width, maxWidth);
-  double fraction = width / referenceWidth;
-  return fraction;
+
+  return width / referenceWidth;
 }
 
 extension GlobalPaintBounds on BuildContext {
@@ -64,6 +64,7 @@ extension GlobalPaintBounds on BuildContext {
     if (translation != null && renderObject?.paintBounds != null) {
       final offset =
           Offset(translation.x, translation.y); // Convert translation to Offset
+
       return renderObject!.paintBounds
           .shift(offset); // Shift the paint bounds by the offset
     } else {

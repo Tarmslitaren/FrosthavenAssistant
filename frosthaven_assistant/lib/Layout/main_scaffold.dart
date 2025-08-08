@@ -17,6 +17,33 @@ import 'loot_deck_widget.dart';
 import 'main_list.dart';
 import 'menus/main_menu.dart';
 
+class MainScaffold extends StatelessWidget {
+  const MainScaffold({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    setupMoreGetIt(context);
+
+    return ValueListenableBuilder<double>(
+        valueListenable: getIt<Settings>().userScalingBars,
+        builder: (context, value, child) {
+          return SafeArea(
+              left: false,
+              right: false,
+              maintainBottomViewPadding: true,
+              child: Scaffold(
+                  resizeToAvoidBottomInset: false,
+                  bottomNavigationBar: createBottomBar(context),
+                  appBar: PreferredSize(
+                      preferredSize: Size(double.infinity,
+                          40 * getIt<Settings>().userScalingBars.value),
+                      child: const TopBar()),
+                  drawer: createMainMenu(context),
+                  body: const MainScaffoldBody()));
+        });
+  }
+}
+
 class ToastNotifier extends StatelessWidget {
   const ToastNotifier({super.key});
 
@@ -26,16 +53,17 @@ class ToastNotifier extends StatelessWidget {
         valueListenable: getIt<GameState>().toastMessage,
         builder: (context, value, child) {
           Future.delayed(const Duration(milliseconds: 200), () {
-            if (getIt<GameState>().toastMessage.value != "") {
+            String message = getIt<GameState>().toastMessage.value;
+            if (message != "") {
               if (context.mounted) {
-                showToastSticky(context, getIt<GameState>().toastMessage.value);
+                showToastSticky(context, message);
               }
             }
           });
 
           return const SizedBox(
-            width: 0.0000,
-            height: 0.0000,
+            width: 0,
+            height: 0,
           );
         });
   }
@@ -52,13 +80,13 @@ class MainScaffoldBody extends StatelessWidget {
     bool hasLootDeck = GameMethods.hasLootDeck();
     double sectionWidth = screenWidth;
     if (hasLootDeck) {
-      sectionWidth -= 94 *
-          barScale; //width of loot deck todo: add the 5 * barScale margin here?
+      sectionWidth -= 94 * barScale; //width of loot deck
     }
     if ((!modFitsOnBar || GameMethods.shouldShowAlliesDeck()) &&
         getIt<Settings>().showAmdDeck.value) {
       sectionWidth -= 153 * barScale; //width of amd
     }
+
     return sectionWidth;
   }
 
@@ -75,15 +103,17 @@ class MainScaffoldBody extends StatelessWidget {
         gameState.scenarioSectionsAdded.length == nrOfSections) {
       nrOfSections = null;
     }
-    if (getIt<Settings>().showSectionsInMainView.value == false) {
+    if (!getIt<Settings>().showSectionsInMainView.value) {
       nrOfSections = null;
     }
+
     return nrOfSections;
   }
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    Size screenSize = MediaQuery.of(context).size;
+
     return Stack(
       children: [
         const MainList(),
@@ -119,9 +149,9 @@ class MainScaffoldBody extends StatelessWidget {
                           }
 
                           return Positioned(
-                              width: screenWidth,
-                              bottom: 4 * barScale,
-                              left: 5 * barScale,
+                              width: screenSize.width,
+                              bottom: barScale * 4,
+                              left: barScale * 5,
                               child: Column(children: [
                                 Row(
                                     mainAxisAlignment:
@@ -169,37 +199,14 @@ class MainScaffoldBody extends StatelessWidget {
             }),
         if (loading.value && kDebugMode)
           Positioned(
-              left: screenWidth * 0.45,
-              top: MediaQuery.of(context).size.height * 0.4,
-              width: screenWidth * 0.1,
-              height: screenWidth * 0.1,
+              left: screenSize.width * 0.45,
+              top: screenSize.height * 0.4,
+              width: screenSize.width * 0.1,
+              height: screenSize.width * 0.1,
               child: const CircularProgressIndicator(
                 strokeWidth: 10,
               ))
       ],
     );
-  }
-}
-
-class MainScaffold extends StatelessWidget {
-  const MainScaffold({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    setupMoreGetIt(context);
-    return ValueListenableBuilder<double>(
-        valueListenable: getIt<Settings>().userScalingBars,
-        builder: (context, value, child) {
-          return SafeArea(
-              left: false,
-              right: false,
-              maintainBottomViewPadding: true,
-              child: Scaffold(
-                  resizeToAvoidBottomInset: false,
-                  bottomNavigationBar: createBottomBar(context),
-                  appBar: createTopBar(),
-                  drawer: createMainMenu(context),
-                  body: const MainScaffoldBody()));
-        });
   }
 }

@@ -13,7 +13,6 @@ class ActionHandler {
   final List<Command?> commands = [];
   final List<String> commandDescriptions = []; //only used when connected
   final List<GameSaveState?> gameSaveStates = [];
-  final _communication = getIt<Communication>();
 
   final int maxUndo = 250;
 
@@ -21,6 +20,8 @@ class ActionHandler {
   final updateList = ValueNotifier<int>(0);
   final killMonsterStandee = ValueNotifier<int>(-1);
   final updateForUndo = ValueNotifier<int>(0);
+
+  final _communication = getIt<Communication>();
 
   void updateAllUI() {
     getIt<GameState>().updateList.value++;
@@ -122,14 +123,15 @@ class ActionHandler {
     gameState.save(); //save after each action
 
     //send last game state if connected
+    String description = command.describe();
     if (isServer) {
-      log('server sends, index: ${commandIndex.value}, description:${command.describe()}');
+      log('server sends, index: ${commandIndex.value}, description:$description');
       getIt<Network>().server.send(
-          "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameState.toString()}");
+          "Index:${commandIndex.value}Description:${description}GameState:${gameState.toString()}");
     } else if (isClient) {
-      log('client sends, index: ${commandIndex.value}, description:${command.describe()}');
+      log('client sends, index: ${commandIndex.value}, description:$description');
       _communication.sendToAll(
-          "Index:${commandIndex.value}Description:${command.describe()}GameState:${gameState.toString()}");
+          "Index:${commandIndex.value}Description:${description}GameState:${gameState.toString()}");
     }
 
     //TODO: this is breaking if command index is not in sync with commands. and in connected state.

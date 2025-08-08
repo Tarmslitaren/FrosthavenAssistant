@@ -39,6 +39,7 @@ enum Condition {
     if (characters.length > index) {
       return characters[index].characterClass.name;
     }
+
     return "Escort"; //some basic
   }
 
@@ -53,6 +54,7 @@ enum Condition {
     } else if (this == Condition.character4) {
       return _getCharacterName(3);
     }
+
     return name;
   }
 

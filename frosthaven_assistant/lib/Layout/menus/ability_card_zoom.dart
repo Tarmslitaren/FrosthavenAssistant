@@ -5,7 +5,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../../Resource/state/game_state.dart';
 
-class AbilityCardZoom extends StatefulWidget {
+class AbilityCardZoom extends StatelessWidget {
   const AbilityCardZoom(
       {super.key,
       required this.card,
@@ -17,16 +17,12 @@ class AbilityCardZoom extends StatefulWidget {
   final bool calculateAll;
 
   @override
-  AbilityCardZoomState createState() => AbilityCardZoomState();
-}
-
-class AbilityCardZoomState extends State<AbilityCardZoom> {
-  @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     double zoomValue = 2.5;
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    final screenSize = MediaQuery.of(context).size;
+    double screenWidth = screenSize.width;
+    double screenHeight = screenSize.height;
     double width = 142.4 * scale * zoomValue;
     double height = 92.8 * scale * zoomValue;
     if (screenWidth < 40 + width) {
@@ -50,7 +46,7 @@ class AbilityCardZoomState extends State<AbilityCardZoom> {
           width: 142.4 * scale * zoomValue,
           height: 92.8 * scale * zoomValue,
           child: MonsterAbilityCardWidget.buildFront(
-              widget.card, widget.monster, scaling, widget.calculateAll)),
+              card, monster, scaling, calculateAll)),
     );
   }
 }

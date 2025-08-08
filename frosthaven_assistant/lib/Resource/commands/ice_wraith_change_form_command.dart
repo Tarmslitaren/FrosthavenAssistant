@@ -6,7 +6,7 @@ import '../state/game_state.dart';
 class IceWraithChangeFormCommand extends Command {
   IceWraithChangeFormCommand(this.isElite, this.ownerId, this.figureId);
   final bool isElite;
-  final String ownerId;
+  final String? ownerId;
   final String figureId;
 
   @override

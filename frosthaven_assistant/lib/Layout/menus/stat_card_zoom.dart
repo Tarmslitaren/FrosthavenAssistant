@@ -4,22 +4,18 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../../Resource/state/game_state.dart';
 
-class StatCardZoom extends StatefulWidget {
+class StatCardZoom extends StatelessWidget {
   const StatCardZoom({super.key, required this.monster});
 
   final Monster monster;
 
   @override
-  StatCardZoomState createState() => StatCardZoomState();
-}
-
-class StatCardZoomState extends State<StatCardZoom> {
-  @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     double zoomValue = 2.5;
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    final size = MediaQuery.of(context).size;
+    double screenWidth = size.width;
+    double screenHeight = size.height;
     double cardWidth = 167;
     double cardHeight = 96.0;
     double width = cardWidth * scale * zoomValue;
@@ -46,7 +42,7 @@ class StatCardZoomState extends State<StatCardZoom> {
       child: SizedBox(
           width: cardWidth * scale * zoomValue,
           height: cardHeight * scale * zoomValue,
-          child: MonsterStatCardWidget.buildCard(widget.monster, scaling)),
+          child: MonsterStatCardWidget.buildCard(monster, scaling)),
     );
   }
 }

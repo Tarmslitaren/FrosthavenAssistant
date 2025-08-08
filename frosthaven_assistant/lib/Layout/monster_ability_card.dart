@@ -306,7 +306,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 //open deck menu
                 openDialog(
                     context,
-                    AbilityCardMenu(
+                    AbilityCardsMenu(
                       monsterAbilityState: deckk,
                       monsterData: widget.data,
                     ));

@@ -12,12 +12,6 @@ import '../Resource/ui_utils.dart';
 import 'menus/status_menu.dart';
 
 class MonsterBox extends StatelessWidget {
-  final String figureId;
-  final String ownerId;
-  final String displayStartAnimation;
-  final bool blockInput;
-  final double scale;
-
   MonsterBox(
       {super.key,
       required this.figureId,
@@ -35,13 +29,20 @@ class MonsterBox extends StatelessWidget {
       return 0;
     }
     double width = 47; //some margin there
-    width += conditionSize * data.conditions.value.length / 2;
-    if (data.conditions.value.length % 2 != 0) {
+    final length = data.conditions.value.length;
+    width += conditionSize * length / 2;
+    if (length % 2 != 0) {
       width += conditionSize / 2;
     }
     width = width * scale;
     return width;
   }
+
+  final String figureId;
+  final String? ownerId;
+  final String displayStartAnimation;
+  final bool blockInput;
+  final double scale;
 
   late final MonsterInstance data;
 
@@ -236,7 +237,8 @@ class MonsterBox extends StatelessWidget {
                           maxValue: data.maxHealth.value.toDouble(),
                           size: 4.0 * scale,
                           direction: Axis.horizontal,
-                          borderRadius: BorderRadius.circular(0),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(0)),
                           border: Border.all(
                             color: Colors.black,
                             width: 0.5 * scale,

@@ -11,7 +11,7 @@ class CounterButton extends StatefulWidget {
   final int maxValue;
   final String image;
   final String figureId;
-  final String ownerId;
+  final String? ownerId;
   final bool showTotalValue;
   final Color color;
   final double scale;

@@ -13,36 +13,8 @@ import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
-class Item extends StatelessWidget {
-  final MonsterAbilityCardModel data;
-  final Monster monsterData;
-  final bool revealed;
-
-  const Item(
-      {super.key,
-      required this.data,
-      required this.revealed,
-      required this.monsterData});
-
-  @override
-  Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-    double scale = max((screenSize.height / (40 * 14)), 0.5);
-    if (screenSize.width * 0.4 < 142.4 * scale) {
-      scale = screenSize.width * 0.4 / (142.4);
-    }
-    late final Widget child;
-
-    child = revealed
-        ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale, true)
-        : MonsterAbilityCardWidget.buildRear(scale, -1, monsterData);
-
-    return child;
-  }
-}
-
-class AbilityCardMenu extends StatefulWidget {
-  const AbilityCardMenu(
+class AbilityCardsMenu extends StatefulWidget {
+  const AbilityCardsMenu(
       {super.key,
       required this.monsterAbilityState,
       required this.monsterData});
@@ -51,10 +23,10 @@ class AbilityCardMenu extends StatefulWidget {
   final Monster monsterData;
 
   @override
-  AbilityCardMenuState createState() => AbilityCardMenuState();
+  AbilityCardsMenuState createState() => AbilityCardsMenuState();
 }
 
-class AbilityCardMenuState extends State<AbilityCardMenu> {
+class AbilityCardsMenuState extends State<AbilityCardsMenu> {
   final GameState _gameState = getIt<GameState>();
   static List<MonsterAbilityCardModel> revealedList = [];
 
@@ -81,6 +53,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
         return true;
       }
     }
+
     return false;
   }
 
@@ -88,14 +61,15 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
       List<MonsterAbilityCardModel> inputList, bool allOpen) {
     List<Widget> list = [];
     for (var item in inputList) {
+      final nrString = item.nr.toString();
       Item value = Item(
-          key: Key(item.nr.toString()),
+          key: Key(nrString),
           data: item,
           monsterData: widget.monsterData,
-          revealed: isRevealed(item) || allOpen == true);
+          revealed: isRevealed(item) || allOpen);
       {
         InkWell gestureDetector = InkWell(
-          key: Key(item.nr.toString()),
+          key: Key(nrString),
           onTap: () {
             //open remove card menu
             openDialog(context, RemoveCardMenu(card: item));
@@ -105,6 +79,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
         list.add(gestureDetector);
       }
     }
+
     return list;
   }
 
@@ -113,6 +88,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
     if (nr < nrOfButtons) {
       text = nr.toString();
     }
+
     return SizedBox(
         width: 32,
         child: TextButton(
@@ -126,6 +102,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
   Widget buildList(
       List<MonsterAbilityCardModel> list, bool reorderable, bool allOpen) {
     double screenWidth = MediaQuery.of(context).size.width;
+
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
@@ -168,10 +145,13 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
           var drawPile =
               widget.monsterAbilityState.drawPile.getList().reversed.toList();
           var discardPile = widget.monsterAbilityState.discardPile.getList();
+
+          final screenSize = MediaQuery.of(context).size;
+
           return Container(
               constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width,
-                  maxHeight: MediaQuery.of(context).size.height * 0.9),
+                  maxWidth: screenSize.width,
+                  maxHeight: screenSize.height * 0.9),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [
@@ -185,7 +165,7 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                                   topRight: Radius.circular(4))),
                           child: Column(children: [
                             SizedBox(
-                                width: MediaQuery.of(context).size.width,
+                                width: screenSize.width,
                                 child: Wrap(
                                     crossAxisAlignment:
                                         WrapCrossAlignment.center,
@@ -267,5 +247,30 @@ class AbilityCardMenuState extends State<AbilityCardMenu> {
                             })),
                   ])));
         });
+  }
+}
+
+class Item extends StatelessWidget {
+  const Item(
+      {super.key,
+      required this.data,
+      required this.revealed,
+      required this.monsterData});
+
+  final MonsterAbilityCardModel data;
+  final Monster monsterData;
+  final bool revealed;
+
+  @override
+  Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+    double scale = max((screenSize.height / (40 * 14)), 0.5);
+    if (screenSize.width * 0.4 < 142.4 * scale) {
+      scale = screenSize.width * 0.4 / (142.4);
+    }
+
+    return revealed
+        ? MonsterAbilityCardWidget.buildFront(data, monsterData, scale, true)
+        : MonsterAbilityCardWidget.buildRear(scale, -1, monsterData);
   }
 }

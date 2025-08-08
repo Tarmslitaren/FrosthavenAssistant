@@ -24,6 +24,7 @@ class GameMethods {
         !getIt<Settings>().fhHazTerrainCalcInOGGloom.value) {
       return (getTrapValue() / 2).floor();
     }
+
     return 1 + (_gameState.level.value / 3.0).ceil();
   }
 
@@ -32,10 +33,12 @@ class GameMethods {
   }
 
   static int getCoinValue() {
-    if (_gameState.level.value == 7) {
+    int level = _gameState.level.value;
+    if (level == 7) {
       return 6;
     }
-    return 2 + (_gameState.level.value / 2.0).floor();
+
+    return 2 + (level / 2.0).floor();
   }
 
   static int getRecommendedLevel() {
@@ -51,7 +54,7 @@ class GameMethods {
     if (nrOfCharacters == 0) {
       return 1;
     }
-    if (_gameState.solo.value == true) {
+    if (_gameState.solo.value) {
       //Take the average level of all characters in the
       // scenario, then add 1 before dividing by 2 and rounding
       // up.
@@ -60,6 +63,7 @@ class GameMethods {
     //scenario level is equal to
     //the average level of the characters divided by 2
     //(rounded up)
+
     return (totalLevels / nrOfCharacters / 2.0).ceil();
   }
 
@@ -67,7 +71,7 @@ class GameMethods {
     if (_gameState.currentList.isEmpty) {
       return false;
     }
-    if (getIt<Settings>().noInit.value == true) {
+    if (getIt<Settings>().noInit.value) {
       return true;
     }
     for (var item in _gameState.currentList) {
@@ -79,6 +83,7 @@ class GameMethods {
         }
       }
     }
+
     return true;
   }
 
@@ -122,6 +127,7 @@ class GameMethods {
         return deck;
       }
     }
+
     return null;
   }
 
@@ -338,6 +344,7 @@ class GameMethods {
         characters.add(data);
       }
     }
+
     return characters;
   }
 
@@ -350,6 +357,7 @@ class GameMethods {
         }
       }
     }
+
     return res;
   }
 
@@ -360,6 +368,7 @@ class GameMethods {
         monsters.add(data);
       }
     }
+
     return monsters;
   }
 
@@ -383,12 +392,12 @@ class GameMethods {
           monster = item as Monster;
         }
       }
-      monster!.setLevel(s, level);
+      monster?.setLevel(s, level);
     }
   }
 
   static void applyDifficulty(_StateModifier s) {
-    if (_gameState.autoScenarioLevel.value == true) {
+    if (_gameState.autoScenarioLevel.value) {
       //adjust difficulty
       int newLevel =
           GameMethods.getRecommendedLevel() + _gameState.difficulty.value;
@@ -408,21 +417,24 @@ class GameMethods {
         break;
       }
     }
-    if (character!.characterClass.healthByLevel.length < level) {
-      level = character.characterClass.healthByLevel.length;
-    }
-    character.characterState.setFigureLevel(s, level);
-    character.characterState
-        .setHealth(s, character.characterClass.healthByLevel[level - 1]);
-    character.characterState
-        .setMaxHealth(s, character.characterState.health.value);
+    if (character != null) {
+      var healthByLevel = character.characterClass.healthByLevel;
+      if (healthByLevel.length < level) {
+        level = healthByLevel.length;
+      }
+      character.characterState.setFigureLevel(s, level);
+      character.characterState.setHealth(s, healthByLevel[level - 1]);
+      character.characterState
+          .setMaxHealth(s, character.characterState.health.value);
 
-    if (character.id == "Beast Tyrant" || character.id == "Wildfury") {
-      if (character.characterState.summonList.isNotEmpty) {
-        //create the bear summon
-        final int bearHp = 8 + character.characterState.level.value * 2;
-        character.characterState.summonList[0].setMaxHealth(s, bearHp);
-        character.characterState.summonList[0].setHealth(s, bearHp);
+      if (character.id == "Beast Tyrant" || character.id == "Wildfury") {
+        var list = character.characterState.summonList;
+        if (list.isNotEmpty) {
+          //create the bear summon
+          final int bearHp = 8 + character.characterState.level.value * 2;
+          list[0].setMaxHealth(s, bearHp);
+          list[0].setHealth(s, bearHp);
+        }
       }
     }
 
@@ -478,11 +490,10 @@ class GameMethods {
             .value[_gameState.currentCampaign.value]!
             .scenarios[scenario]!
             .lootDeck;
-        if (lootDeckModel != null) {
-          _gameState._lootDeck = LootDeck(lootDeckModel, _gameState.lootDeck);
-        } else {
-          _gameState._lootDeck = LootDeck.from(_gameState.lootDeck);
-        }
+        lootDeckModel != null
+            ? _gameState._lootDeck =
+                LootDeck(lootDeckModel, _gameState.lootDeck)
+            : _gameState._lootDeck = LootDeck.from(_gameState.lootDeck);
       } else {
         //todo: remove. no need for custom loot deck
         if (_gameState.currentCampaign.value == "Frosthaven") {
@@ -1207,9 +1218,7 @@ class GameMethods {
               }
             }
             if (normals.isNotEmpty) {
-              if (isBoss) {
-                //only numbers matter
-              } else {
+              if (!isBoss) {
                 if (elites.isNotEmpty) {
                   initMessage += ", ";
                 }
@@ -1241,7 +1250,7 @@ class GameMethods {
     return initMessage;
   }
 
-  static FigureState? getFigure(String ownerId, String figureId) {
+  static FigureState? getFigure(String? ownerId, String figureId) {
     for (var item in getIt<GameState>().currentList) {
       if (item.id == figureId) {
         return (item as Character).characterState;
@@ -1495,46 +1504,6 @@ class GameMethods {
     }
   }
 
-  static bool _monsterHasConditionOnCards(
-      Monster monster, MonsterInstance figure, String condition) {
-    bool hasCondition = false;
-    //check innate value
-
-    if (figure.type == MonsterType.normal) {
-      hasCondition = monster.type.levels[monster.level.value].normal!.attributes
-              .indexWhere((i) => i.contains(condition)) !=
-          -1;
-    } else if (figure.type == MonsterType.elite) {
-      hasCondition = monster.type.levels[monster.level.value].elite!.attributes
-              .indexWhere((i) => i.contains(condition)) !=
-          -1;
-    } else if (figure.type == MonsterType.boss) {
-      hasCondition = monster.type.levels[monster.level.value].boss!.attributes
-              .indexWhere((i) => i.contains(condition)) !=
-          -1;
-    }
-    //check ability card
-    var deck = GameMethods.getDeck(monster.type.deck);
-    if (deck != null &&
-        deck.discardPile.isNotEmpty &&
-        monster.turnState.value != TurnsState.notDone) {
-      if (deck.discardPile.peek.lines
-              .firstWhereOrNull((item) => item.contains(condition)) !=
-          null) {
-        return true;
-      }
-    }
-    return hasCondition;
-  }
-
-  static bool hasRetaliate(Monster monster, MonsterInstance figure) {
-    return _monsterHasConditionOnCards(monster, figure, "%retaliate%");
-  }
-
-  static bool hasShield(Monster monster, MonsterInstance figure) {
-    return _monsterHasConditionOnCards(monster, figure, "%shield%");
-  }
-
   //1 if item WAS done OR not done, then set it to current, all before to done, and all after to not done
   //2 if item was current: set item to done, all before to done, next to current and rest to not done
   static void setTurnDone(_StateModifier s, int index) {
@@ -1736,5 +1705,45 @@ class GameMethods {
       hasLootDeck = false;
     }
     return hasLootDeck;
+  }
+
+  static bool hasRetaliate(Monster monster, MonsterInstance figure) {
+    return _monsterHasConditionOnCards(monster, figure, "%retaliate%");
+  }
+
+  static bool hasShield(Monster monster, MonsterInstance figure) {
+    return _monsterHasConditionOnCards(monster, figure, "%shield%");
+  }
+
+  static bool _monsterHasConditionOnCards(
+      Monster monster, MonsterInstance figure, String condition) {
+    bool hasCondition = false;
+    //check innate value
+
+    if (figure.type == MonsterType.normal) {
+      hasCondition = monster.type.levels[monster.level.value].normal!.attributes
+              .indexWhere((i) => i.contains(condition)) !=
+          -1;
+    } else if (figure.type == MonsterType.elite) {
+      hasCondition = monster.type.levels[monster.level.value].elite!.attributes
+              .indexWhere((i) => i.contains(condition)) !=
+          -1;
+    } else if (figure.type == MonsterType.boss) {
+      hasCondition = monster.type.levels[monster.level.value].boss!.attributes
+              .indexWhere((i) => i.contains(condition)) !=
+          -1;
+    }
+    //check ability card
+    var deck = GameMethods.getDeck(monster.type.deck);
+    if (deck != null &&
+        deck.discardPile.isNotEmpty &&
+        monster.turnState.value != TurnsState.notDone) {
+      if (deck.discardPile.peek.lines
+              .firstWhereOrNull((item) => item.contains(condition)) !=
+          null) {
+        return true;
+      }
+    }
+    return hasCondition;
   }
 }

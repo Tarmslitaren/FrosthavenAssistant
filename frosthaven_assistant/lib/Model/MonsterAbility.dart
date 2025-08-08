@@ -24,7 +24,7 @@ class MonsterAbilityDeckModel {
       ///duplication check
       if (kDebugMode) {
         if (cards.any((element) => element.nr == nr)) {
-          print("duplicate monster abilty card nr: $nr for $name");
+          print("duplicate monster ability card nr: $nr for $name");
         }
       }
       bool shuffle = card[1] as bool;

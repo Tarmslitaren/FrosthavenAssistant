@@ -4,7 +4,7 @@ import '../state/game_state.dart';
 
 class AddConditionCommand extends Command {
   final Condition condition;
-  final String ownerId;
+  final String? ownerId;
   final String figureId;
   AddConditionCommand(this.condition, this.figureId, this.ownerId);
   @override
