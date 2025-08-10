@@ -337,8 +337,12 @@ class GameMethods {
   }
 
   static List<Character> getCurrentCharacters() {
+    return getCurrentCharactersForState(_gameState);
+  }
+
+  static List<Character> getCurrentCharactersForState(GameState state) {
     List<Character> characters = [];
-    for (ListItemData data in _gameState.currentList) {
+    for (ListItemData data in state.currentList) {
       if (data is Character &&
           !GameMethods.isObjectiveOrEscort(data.characterClass)) {
         characters.add(data);
@@ -346,6 +350,35 @@ class GameMethods {
     }
 
     return characters;
+  }
+
+  static Character? getCurrentCharacter() {
+    for (var item in _gameState.currentList) {
+      if (item.turnState.value == TurnsState.current) {
+        if (item is Character) {
+          if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
+            return item;
+          }
+        }
+      }
+    }
+    return null;
+  }
+
+  static ModifierDeck getModifierDeck(final String id, GameState state) {
+    if (id == "allies") {
+      return state.modifierDeckAllies;
+    }
+    if (id.isNotEmpty) {
+      final characters = GameMethods.getCurrentCharactersForState(state);
+      for (final character in characters) {
+        if (character.id == id) {
+          //return character.characterState.modifierDeck;
+        }
+      }
+    }
+
+    return state.modifierDeck;
   }
 
   static int getCurrentCharacterAmount() {
@@ -1308,7 +1341,7 @@ class GameMethods {
     }
     for (CharacterClass characterClass in characters) {
       if (characterClass.id == id) {
-        var characterState = CharacterState();
+        var characterState = CharacterState(id);
         characterState._level.value = level;
 
         if (GameMethods.isObjectiveOrEscort(characterClass)) {

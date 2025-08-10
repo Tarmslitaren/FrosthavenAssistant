@@ -32,23 +32,12 @@ part "figure_state.dart";
 part "game_save_state.dart";
 part "list_item_data.dart";
 part "loot_deck_state.dart";
-part "modifier_deck_state.dart";
+part "modifier_deck.dart";
 part "monster.dart";
 part "monster_ability_state.dart";
 part "monster_instance.dart";
 
 // ignore_for_file: library_private_types_in_public_api
-
-abstract class Command {
-  void execute();
-  void undo();
-  String describe();
-
-  //private class so only this class and it's children is allowed to change state
-  _StateModifier stateAccess = _StateModifier();
-}
-
-class _StateModifier {}
 
 class GameState extends ActionHandler {
   //TODO: put action handler in own place
@@ -67,7 +56,7 @@ class GameState extends ActionHandler {
   //state
   ValueListenable<String> get currentCampaign => _currentCampaign;
   final _currentCampaign = ValueNotifier<String>("Jaws of the Lion");
-  setCampaign(_StateModifier stateModifier, String value) {
+  setCampaign(_StateModifier _, String value) {
     _currentCampaign.value = value;
   }
 
@@ -78,43 +67,43 @@ class GameState extends ActionHandler {
 
   ValueListenable<RoundState> get roundState => _roundState;
   final _roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
-  setRoundState(_StateModifier stateModifier, RoundState value) {
+  setRoundState(_StateModifier _, RoundState value) {
     _roundState.value = value;
   }
 
   ValueListenable<int> get level => _level;
   final _level = ValueNotifier<int>(1);
-  setLevel(_StateModifier stateModifier, int value) {
+  setLevel(_StateModifier _, int value) {
     _level.value = value;
   }
 
   ValueListenable<bool> get solo => _solo;
   final _solo = ValueNotifier<bool>(false);
-  setSolo(_StateModifier stateModifier, bool value) {
+  setSolo(_StateModifier _, bool value) {
     _solo.value = value;
   }
 
   ValueListenable<bool> get autoScenarioLevel => _autoScenarioLevel;
   final _autoScenarioLevel = ValueNotifier<bool>(false);
-  setAutoScenarioLevel(_StateModifier stateModifier, bool value) {
+  setAutoScenarioLevel(_StateModifier _, bool value) {
     _autoScenarioLevel.value = value;
   }
 
   ValueListenable<bool> get allyDeckInOGGloom => _allyDeckInOGGloom;
   final _allyDeckInOGGloom = ValueNotifier<bool>(true);
-  setAllyDeckInOGGloom(_StateModifier stateModifier, bool value) {
+  setAllyDeckInOGGloom(_StateModifier _, bool value) {
     _allyDeckInOGGloom.value = value;
   }
 
   ValueListenable<int> get difficulty => _difficulty;
   final _difficulty = ValueNotifier<int>(1);
-  setDifficulty(_StateModifier stateModifier, int value) {
+  setDifficulty(_StateModifier _, int value) {
     _difficulty.value = value;
   }
 
   ValueListenable<String> get scenario => _scenario;
   final _scenario = ValueNotifier<String>("");
-  setScenario(_StateModifier stateModifier, String value) {
+  setScenario(_StateModifier _, String value) {
     _scenario.value = value;
   }
 
@@ -131,7 +120,7 @@ class GameState extends ActionHandler {
 
   ValueListenable<String> get toastMessage => _toastMessage;
   final _toastMessage = ValueNotifier<String>("");
-  setToastMessage(_StateModifier stateModifier, String value) {
+  setToastMessage(_StateModifier _, String value) {
     _toastMessage.value = value;
   }
 
@@ -166,7 +155,10 @@ class GameState extends ActionHandler {
   String toString() {
     Map<String, int> elements = {};
     for (var key in elementState.keys) {
-      elements[key.index.toString()] = elementState[key]!.index;
+      final state = elementState[key];
+      if (state != null) {
+        elements[key.index.toString()] = state.index;
+      }
     }
 
     return '{'
@@ -212,3 +204,13 @@ class GameState extends ActionHandler {
     state.loadFromData(data, this);
   }
 }
+
+abstract class Command {
+  //private class so only this class and it's children is allowed to change state
+  _StateModifier stateAccess = _StateModifier();
+  void execute();
+  void undo();
+  String describe();
+}
+
+class _StateModifier {}

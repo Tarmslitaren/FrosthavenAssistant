@@ -101,12 +101,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
       GameState currentState = _gameState;
 
-      var oldPile = oldState.modifierDeck.discardPile;
-      var newPile = currentState.modifierDeck.discardPile;
-      if (widget.name == "allies") {
-        oldPile = oldState.modifierDeckAllies.discardPile;
-        newPile = currentState.modifierDeckAllies.discardPile;
-      }
+      ModifierDeck oldDeck = GameMethods.getModifierDeck(widget.name, oldState);
+      ModifierDeck currentDeck =
+          GameMethods.getModifierDeck(widget.name, currentState);
+      var oldPile = oldDeck.discardPile;
+      var newPile = currentDeck.discardPile;
       if (oldPile.size() == newPile.size() - 1) {
         return true;
       }
@@ -148,7 +147,9 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
     double startXOffset = -(width + 2 * userScalingBars);
 
-    Offset screenSpaceOffset = context.globalPaintBounds!.topLeft;
+    final globalPaintBounds = context.globalPaintBounds;
+    Offset screenSpaceOffset =
+        globalPaintBounds != null ? globalPaintBounds.topLeft : Offset(0, 0);
     var screenSpaceY =
         screenSpaceOffset.dy; //draw deck top position from screen top
     var screenSpaceX = screenSpaceOffset.dx -
@@ -216,10 +217,9 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ModifierDeck deck = _gameState.modifierDeck;
-    if (widget.name == "allies") {
-      deck = _gameState.modifierDeckAllies;
-    }
+    ModifierDeck deck = GameMethods.getModifierDeck(widget.name, _gameState);
+
+    //todo: if character - draw icon
 
     bool isAnimating =
         false; //is not doing anything now. in case flip animation is added

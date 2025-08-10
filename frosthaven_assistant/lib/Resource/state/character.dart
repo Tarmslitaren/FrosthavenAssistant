@@ -2,16 +2,36 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class Character extends ListItemData {
-  Character(this.characterState, this.characterClass) {
-    if (GameMethods.isObjectiveOrEscort(characterClass)) {
-      id = characterState.display.value;
-    } else {
-      id = characterClass.id;
-    }
-  }
-
   late final CharacterState characterState;
   late final CharacterClass characterClass;
+
+  Character(this.characterState, this.characterClass) {
+    id = GameMethods.isObjectiveOrEscort(characterClass)
+        ? characterState.display.value
+        : id = characterClass.id;
+  }
+
+  Character.fromJson(Map<String, dynamic> json) {
+    var anId = json['characterClass'];
+    _turnState.value = TurnsState.values[json['turnState']];
+    characterState = CharacterState.fromJson(json['characterState']);
+    GameData data = getIt<GameData>();
+    List<CharacterClass> characters = [];
+    final modelData = data.modelData.value;
+    for (String key in modelData.keys) {
+      characters.addAll(modelData[key]!.characters);
+    }
+    for (var item in characters) {
+      if (item.id == anId) {
+        characterClass = item;
+        break;
+      }
+    }
+
+    id = GameMethods.isObjectiveOrEscort(characterClass)
+        ? characterState.display.value
+        : id = characterClass.id;
+  }
 
   void nextRound(_StateModifier _) {
     if (!GameMethods.isObjectiveOrEscort(characterClass)) {
@@ -27,28 +47,5 @@ class Character extends ListItemData {
         '"characterState": ${characterState.toString()}, '
         '"characterClass": "${characterClass.id}" '
         '}';
-  }
-
-  Character.fromJson(Map<String, dynamic> json) {
-    var anId = json['characterClass'];
-    _turnState.value = TurnsState.values[json['turnState']];
-    characterState = CharacterState.fromJson(json['characterState']);
-    GameData data = getIt<GameData>();
-    List<CharacterClass> characters = [];
-    for (String key in data.modelData.value.keys) {
-      characters.addAll(data.modelData.value[key]!.characters);
-    }
-    for (var item in characters) {
-      if (item.id == anId) {
-        characterClass = item;
-        break;
-      }
-    }
-
-    if (!GameMethods.isObjectiveOrEscort(characterClass)) {
-      id = characterClass.id;
-    } else {
-      id = characterState.display.value;
-    }
   }
 }

@@ -1,97 +1,14 @@
 part of 'game_state.dart';
 
 class GameSaveState {
+  String? _savedState;
+
   String getState() {
     return _savedState!;
   }
 
-  String? _savedState;
-
   void save(GameState gameState) {
     _savedState = gameState.toString();
-  }
-
-  void _loadLootDeck(var data, GameState gameState) {
-    var lootDeckData = data["lootDeck"];
-    LootDeck state = LootDeck.fromJson(lootDeckData);
-    gameState._lootDeck = state;
-  }
-
-  void _loadModifierDeck(String identifier, var data, GameState gameState) {
-    //modifier deck
-    String name = "";
-    if (identifier == 'modifierDeckAllies') {
-      name = "allies";
-    }
-    var modifierDeckData = data[identifier];
-    ModifierDeck state = ModifierDeck(name);
-    List<ModifierCard> newDrawList = [];
-    List drawPile = modifierDeckData["drawPile"] as List;
-    for (var item in drawPile) {
-      String gfx = item["gfx"];
-      if (gfx == "curse") {
-        newDrawList.add(ModifierCard(CardType.curse, gfx));
-      } else if (gfx == "enfeeble") {
-        newDrawList.add(ModifierCard(CardType.enfeeble, gfx));
-      } else if (gfx == "bless") {
-        newDrawList.add(ModifierCard(CardType.bless, gfx));
-      } else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
-        newDrawList.add(ModifierCard(CardType.multiply, gfx));
-      } else {
-        newDrawList.add(ModifierCard(CardType.add, gfx));
-      }
-    }
-    List<ModifierCard> newDiscardList = [];
-    for (var item in modifierDeckData["discardPile"] as List) {
-      String gfx = item["gfx"];
-      if (gfx == "curse") {
-        newDiscardList.add(ModifierCard(CardType.curse, gfx));
-      } else if (gfx == "enfeeble") {
-        newDiscardList.add(ModifierCard(CardType.enfeeble, gfx));
-      } else if (gfx == "bless") {
-        newDiscardList.add(ModifierCard(CardType.bless, gfx));
-      } else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
-        newDiscardList.add(ModifierCard(CardType.multiply, gfx));
-        state._needsShuffle = true;
-      } else {
-        newDiscardList.add(ModifierCard(CardType.add, gfx));
-      }
-    }
-    state._drawPile.clear();
-    state._discardPile.clear();
-    state._drawPile.setList(newDrawList);
-    state._discardPile.setList(newDiscardList);
-    state._cardCount.value = state._drawPile.size();
-
-    if (modifierDeckData.containsKey("curses")) {
-      int curses = modifierDeckData['curses'];
-      state._curses.value = curses;
-    }
-    if (modifierDeckData.containsKey("enfeebles")) {
-      int enfeebles = modifierDeckData['enfeebles'];
-      state._enfeebles.value = enfeebles;
-    }
-    if (modifierDeckData.containsKey("imbuement")) {
-      int imbuement = modifierDeckData['imbuement'];
-      state._imbuement.value = imbuement;
-    }
-    if (modifierDeckData.containsKey("blesses")) {
-      int blesses = modifierDeckData['blesses'];
-      state._blesses.value = blesses;
-    }
-
-    if (modifierDeckData.containsKey('badOmen')) {
-      state._badOmen.value = modifierDeckData["badOmen"] as int;
-    }
-    if (modifierDeckData.containsKey('addedMinusOnes')) {
-      state._addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
-    }
-
-    if (identifier == 'modifierDeck') {
-      gameState._modifierDeck = state;
-    } else {
-      gameState._modifierDeckAllies = state;
-    }
   }
 
   void load(GameState gameState) {
@@ -286,5 +203,28 @@ class GameSaveState {
     //have to call after init or element state overridden
     _savedState = data;
     load(gameState);
+  }
+
+  void _loadLootDeck(var data, GameState gameState) {
+    var lootDeckData = data["lootDeck"];
+    LootDeck state = LootDeck.fromJson(lootDeckData);
+    gameState._lootDeck = state;
+  }
+
+  void _loadModifierDeck(String identifier, var data, GameState gameState) {
+    //modifier deck
+    String name = "";
+    if (identifier == 'modifierDeckAllies') {
+      name = "allies";
+    }
+
+    var modifierDeckData = data[identifier];
+    ModifierDeck state = ModifierDeck.fromJson(name, modifierDeckData);
+
+    if (identifier == 'modifierDeck') {
+      gameState._modifierDeck = state;
+    } else {
+      gameState._modifierDeckAllies = state;
+    }
   }
 }
