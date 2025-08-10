@@ -33,7 +33,7 @@ class MainScaffold extends StatelessWidget {
               maintainBottomViewPadding: true,
               child: Scaffold(
                   resizeToAvoidBottomInset: false,
-                  bottomNavigationBar: createBottomBar(context),
+                  bottomNavigationBar: BottomBar(),
                   appBar: PreferredSize(
                       preferredSize: Size(double.infinity,
                           40 * getIt<Settings>().userScalingBars.value),
@@ -171,6 +171,7 @@ class MainScaffoldBody extends StatelessWidget {
                                           child: const SectionList(),
                                         ),
                                       Column(children: [
+                                        //todo: add here the current character amd,
                                         if (GameMethods.shouldShowAlliesDeck())
                                           const ModifierDeckWidget(
                                               name: "allies"),

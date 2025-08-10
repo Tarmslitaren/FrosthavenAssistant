@@ -16,10 +16,20 @@ import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'monster_widget.dart';
 
-class Item extends StatelessWidget {
-  final ListItemData data;
+class MainList extends StatefulWidget {
+  const MainList({super.key});
 
+  static void scrollToTop() {
+    MainListState.scrollToTop();
+  }
+
+  @override
+  MainListState createState() => MainListState();
+}
+
+class Item extends StatelessWidget {
   const Item({super.key, required this.data});
+  final ListItemData data;
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +48,10 @@ class Item extends StatelessWidget {
           characterId: character.id,
           initPreset: initPreset);
       height = 60 * scale;
-      if (character.characterState.summonList.isNotEmpty) {
+      final summonList = character.characterState.summonList;
+      if (summonList.isNotEmpty) {
         double summonsTotalWidth = 0;
-        for (var monsterInstance in character.characterState.summonList) {
+        for (var monsterInstance in summonList) {
           summonsTotalWidth +=
               MonsterBox.getWidth(scale, monsterInstance) + 2 * scale;
         }
@@ -70,37 +81,25 @@ class Item extends StatelessWidget {
       height = 0;
     }
 
-    var animatedContainer = AnimatedContainer(
+    return AnimatedContainer(
       key: child.key,
       height: height,
       duration: const Duration(milliseconds: 500),
       child: child,
     );
-    return animatedContainer;
   }
-}
-
-class MainList extends StatefulWidget {
-  const MainList({super.key});
-
-  static void scrollToTop() {
-    MainListState.scrollToTop();
-  }
-
-  @override
-  MainListState createState() => MainListState();
 }
 
 class ListAnimation extends StatefulWidget {
-  final int index;
-  final int lastIndex;
-  final Widget child;
-
   const ListAnimation(
       {super.key,
       required this.index,
       required this.lastIndex,
       required this.child});
+
+  final int index;
+  final int lastIndex;
+  final Widget child;
 
   @override
   State<StatefulWidget> createState() {
@@ -152,6 +151,58 @@ class ListAnimationState extends State<ListAnimation> {
 }
 
 class MainListState extends State<MainList> {
+  static void scrollToTop() {
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        0,
+        curve: Curves.easeOut,
+        duration: const Duration(milliseconds: 500),
+      );
+    }
+  }
+
+  static void scrollToPosition(int index) {
+    //TODO: implement
+  }
+
+  static List<double> getItemHeights(BuildContext context) {
+    GameState gameState = getIt<GameState>();
+    double listHeight = 0;
+    double scale = getScaleByReference(context);
+    double mainListWidth = getMainListWidth(context);
+
+    List<double> widgetPositions = [];
+    for (int i = 0; i < gameState.currentList.length; i++) {
+      var item = gameState.currentList[i];
+      if (item is Character) {
+        listHeight += 60;
+        final summonList = item.characterState.summonList;
+        if (summonList.isNotEmpty) {
+          double listWidth = 0;
+          for (var monsterInstance in summonList) {
+            listWidth += MonsterBox.getWidth(scale, monsterInstance);
+          }
+          double rows = listWidth / mainListWidth;
+          listHeight += 32 * (rows.ceil());
+        }
+      }
+      if (item is Monster) {
+        listHeight += 96;
+        if (item.monsterInstances.isNotEmpty) {
+          double listWidth = 0;
+          for (var monsterInstance in item.monsterInstances) {
+            listWidth += MonsterBox.getWidth(scale, monsterInstance);
+          }
+
+          double rows = listWidth / mainListWidth;
+          listHeight += 32 * rows.ceil();
+        }
+      }
+      widgetPositions.add(listHeight * scale);
+    }
+    return widgetPositions;
+  }
+
   final GameState _gameState = getIt<GameState>();
   final GameData _gameData = getIt<GameData>();
   List<Widget> _generatedList = [];
@@ -199,67 +250,16 @@ class MainListState extends State<MainList> {
         });
   }
 
-  static void scrollToTop() {
-    if (scrollController.hasClients) {
-      scrollController.animateTo(
-        0,
-        curve: Curves.easeOut,
-        duration: const Duration(milliseconds: 500),
-      );
-    }
-  }
-
-  static void scrollToPosition(int index) {
-    //TODO: implement
-  }
-
-  static List<double> getItemHeights(BuildContext context) {
-    GameState gameState = getIt<GameState>();
-    double listHeight = 0;
-    double scale = getScaleByReference(context);
-    double mainListWidth = getMainListWidth(context);
-
-    List<double> widgetPositions = [];
-    for (int i = 0; i < gameState.currentList.length; i++) {
-      var item = gameState.currentList[i];
-      if (item is Character) {
-        listHeight += 60;
-        if (item.characterState.summonList.isNotEmpty) {
-          double listWidth = 0;
-          for (var monsterInstance in item.characterState.summonList) {
-            listWidth += MonsterBox.getWidth(scale, monsterInstance);
-          }
-          double rows = listWidth / mainListWidth;
-          listHeight += 32 * (rows.ceil());
-        }
-      }
-      if (item is Monster) {
-        listHeight += 96;
-        if (item.monsterInstances.isNotEmpty) {
-          double listWidth = 0;
-          for (var monsterInstance in item.monsterInstances) {
-            listWidth += MonsterBox.getWidth(scale, monsterInstance);
-          }
-
-          double rows = listWidth / mainListWidth;
-          listHeight += 32 * rows.ceil();
-        }
-      }
-      widgetPositions.add(listHeight * scale);
-    }
-    return widgetPositions;
-  }
-
   int getItemsCanFitOneColumn(List<double> widgetPositions) {
     //too bad this has to be done
-    bool canFit2Columns =
-        MediaQuery.of(context).size.width >= getMainListWidth(context) * 2;
+    final screenSize = MediaQuery.of(context).size;
+    bool canFit2Columns = screenSize.width >= getMainListWidth(context) * 2;
     if (!canFit2Columns) {
       return _gameState
           .currentList.length; //don't wrap if no space. Probably not needed
     }
-    double screenHeight = MediaQuery.of(context).size.height -
-        80 * getIt<Settings>().userScalingBars.value;
+    double screenHeight =
+        screenSize.height - 80 * getIt<Settings>().userScalingBars.value;
 
     //if can't fit without scroll
     if (widgetPositions.isNotEmpty) {
@@ -285,14 +285,14 @@ class MainListState extends State<MainList> {
 
   int getItemsForHalfTotalHeight(List<double> widgetPositions) {
     //too bad this has to be done
-    bool canFit2Columns =
-        MediaQuery.of(context).size.width >= getMainListWidth(context) * 2;
+    final screenSize = MediaQuery.of(context).size;
+    bool canFit2Columns = screenSize.width >= getMainListWidth(context) * 2;
     if (!canFit2Columns) {
       return _gameState
           .currentList.length; //don't wrap if no space. Probably not needed
     }
-    double screenHeight = MediaQuery.of(context).size.height -
-        80 * getIt<Settings>().userScalingBars.value;
+    double screenHeight =
+        screenSize.height - 80 * getIt<Settings>().userScalingBars.value;
 
     if (widgetPositions.isNotEmpty) {
       bool allFitInView = false;
@@ -339,10 +339,9 @@ class MainListState extends State<MainList> {
     List<Widget> newList = List<Widget>.generate(
       _gameState.currentList.length,
       (index) {
-        var item = Item(
+        return Item(
             key: Key(_gameState.currentList[index].id),
             data: _gameState.currentList[index]);
-        return item;
       },
     );
 
@@ -384,7 +383,8 @@ class MainListState extends State<MainList> {
         valueListenable: _gameState.updateList,
         builder: (context, value, child) {
           double width = getMainListWidth(context);
-          bool canFit2Columns = MediaQuery.of(context).size.width >= width * 2;
+          final screenSize = MediaQuery.of(context).size;
+          bool canFit2Columns = screenSize.width >= width * 2;
           if (canFit2Columns) {
             width *= 2;
           }
@@ -394,7 +394,8 @@ class MainListState extends State<MainList> {
           int itemsColumn2 = itemHeights.length - itemsPerColumn;
           itemsPerColumn = max(itemsPerColumn, itemsColumn2);
           bool ignoreScroll = false;
-          double paddingBottom = 0.5 * MediaQuery.of(context).size.height;
+          double paddingBottom = 0.5 * screenSize.height;
+
           return Container(
               alignment: Alignment.topCenter,
               child: Scrollbar(

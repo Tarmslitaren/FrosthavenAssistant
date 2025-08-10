@@ -21,13 +21,21 @@ class LootDeckWidget extends StatefulWidget {
 }
 
 class LootDeckWidgetState extends State<LootDeckWidget> {
+  static const double cardWidth = 13.3333;
+  static const int cardAnimationDuration = 1600;
   final GameState _gameState = getIt<GameState>();
   final GameData _gameData = getIt<GameData>();
   final Settings _settings = getIt<Settings>();
-  static const double cardWidth = 13.3333;
-  static const int cardAnimationDuration = 1600;
 
   bool _animationsEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    //to load save state
+    _gameData.modelData.addListener(_modelDataListenerLootDeck);
+  }
 
   void _modelDataListenerLootDeck() {
     setState(() {});
@@ -37,14 +45,6 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   void dispose() {
     _gameData.modelData.removeListener(_modelDataListenerLootDeck);
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    //to load save state
-    _gameData.modelData.addListener(_modelDataListenerLootDeck);
   }
 
   Widget buildStayAnimation(Widget child) {

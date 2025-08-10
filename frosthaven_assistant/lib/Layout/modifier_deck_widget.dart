@@ -22,11 +22,20 @@ class ModifierDeckWidget extends StatefulWidget {
 }
 
 class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
+  static const int cardAnimationDuration = 1200;
   final GameState _gameState = getIt<GameState>();
   final GameData _gameData = getIt<GameData>();
   final Settings settings = getIt<Settings>();
 
   bool _animationsEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    //to load save state
+    _gameData.modelData.addListener(_modelDataListener);
+  }
 
   void _modelDataListener() {
     setState(() {});
@@ -36,14 +45,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   void dispose() {
     _gameData.modelData.removeListener(_modelDataListener);
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    //to load save state
-    _gameData.modelData.addListener(_modelDataListener);
   }
 
   Widget buildStayAnimation(Widget child) {
@@ -86,23 +87,18 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                 child: child)));
   }
 
-  static const int cardAnimationDuration = 1200;
-
   bool initAnimationEnabled() {
     if (getIt<Settings>().client.value == ClientState.connected) {
       GameState oldState = GameState();
       int offset = 1;
-      if (_gameState.gameSaveStates.length <= offset ||
-          _gameState
-                  .gameSaveStates[_gameState.gameSaveStates.length - offset] ==
-              null) {
+      final saveStateLength = _gameState.gameSaveStates.length;
+      final saveState = _gameState.gameSaveStates[saveStateLength - offset];
+      if (saveStateLength <= offset || saveState == null) {
         return false;
+      } else {
+        oldState.loadFromData(saveState.getState());
       }
 
-      String oldSave = _gameState
-          .gameSaveStates[_gameState.gameSaveStates.length - offset]!
-          .getState();
-      oldState.loadFromData(oldSave);
       GameState currentState = _gameState;
 
       var oldPile = oldState.modifierDeck.discardPile;
@@ -117,15 +113,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
       return false;
     }
 
-    if (getIt<Settings>().server.value &&
-        getIt<GameState>().commandIndex.value >= 0) {
-      final int commandIndex = getIt<GameState>().commandIndex.value;
+    final commandIndex = getIt<GameState>().commandIndex.value;
+    final commandDescriptions = getIt<GameState>().commandDescriptions;
+    if (getIt<Settings>().server.value && commandIndex >= 0) {
       if (commandIndex < 0) {
         return false;
       }
-      if (getIt<GameState>().commandDescriptions.length > commandIndex) {
-        String commandDescription =
-            getIt<GameState>().commandDescriptions[commandIndex];
+      if (commandDescriptions.length > commandIndex) {
+        String commandDescription = commandDescriptions[commandIndex];
         if (widget.name == "allies") {
           if (commandDescription.contains("allies modifier card")) {
             return true;
@@ -144,13 +139,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     if (!_animationsEnabled || context.globalPaintBounds == null) {
       return Container(child: child);
     }
+    final userScalingBars = settings.userScalingBars.value;
     //compose a translation, scale, rotation + somehow switch widget from back to front
-    double width = 58.6666 * settings.userScalingBars.value;
-    double height = 39 * settings.userScalingBars.value;
+    double width = 58.6666 * userScalingBars;
+    double height = 39 * userScalingBars;
 
     var screenSize = MediaQuery.of(context).size;
 
-    double startXOffset = -(width + 2 * settings.userScalingBars.value);
+    double startXOffset = -(width + 2 * userScalingBars);
 
     Offset screenSpaceOffset = context.globalPaintBounds!.topLeft;
     var screenSpaceY =
@@ -174,6 +170,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         key: key,
         //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
         child: _animationsEnabled
+            //in case this is in a list, how to make z-order on top?
+            //solution: do NOT create from charactr widget, but from scaffold, with ann offset from character widget position. (I know)
             ? TranslationAnimatedWidget(
                 animationFinished: (bool finished) {
                   if (finished) {
@@ -228,26 +226,30 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     return ValueListenableBuilder<double>(
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
+          final userScalingBars = settings.userScalingBars.value;
           return SizedBox(
-            width: 153 * settings.userScalingBars.value,
-            height: 39 * settings.userScalingBars.value,
+            width: 153 * userScalingBars,
+            height: 39 * userScalingBars,
             child: ValueListenableBuilder<int>(
                 valueListenable: _gameState.commandIndex, //blanket
                 builder: (context, value, child) {
-                  if (_animationsEnabled != true) {
+                  if (!_animationsEnabled) {
                     _animationsEnabled = initAnimationEnabled();
                   }
 
-                  var textStyle = TextStyle(
-                      fontSize: 12 * settings.userScalingBars.value,
+                  final textStyle = TextStyle(
+                      fontSize: 12 * userScalingBars,
                       color: Colors.white,
                       shadows: [
                         Shadow(
-                            offset: Offset(1 * settings.userScalingBars.value,
-                                1 * settings.userScalingBars.value),
+                            offset: Offset(
+                                1 * userScalingBars, 1 * userScalingBars),
                             color: Colors.black)
                       ]);
 
+                  final discardPileSize = deck.discardPile.size();
+                  final discardPileList = deck.discardPile.getList();
+                  final widgetKey = discardPileSize.toString();
                   return Row(
                     children: [
                       Stack(children: [
@@ -273,9 +275,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                               ])
                             : Stack(children: [
                                 Container(
-                                    width: 58.6666 *
-                                        settings.userScalingBars.value,
-                                    height: 39 * settings.userScalingBars.value,
+                                    width: 58.6666 * userScalingBars,
+                                    height: 39 * userScalingBars,
                                     color: Color(
                                         int.parse("7A000000", radix: 16))),
                                 Positioned.fill(
@@ -301,56 +302,54 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                               ]),
                         Positioned(
                             bottom: 0,
-                            right: 2 * settings.userScalingBars.value,
+                            right: 2 * userScalingBars,
                             child: Text(
                               deck.cardCount.value.toString(),
                               style: textStyle,
                             )),
                       ]),
                       SizedBox(
-                        width: 2 * settings.userScalingBars.value,
+                        width: 2 * userScalingBars,
                       ),
                       Stack(children: [
-                        deck.discardPile.size() > 2
+                        discardPileSize > 2
                             ? buildStayAnimation(
                                 RotationTransition(
                                     turns:
                                         const AlwaysStoppedAnimation(15 / 360),
                                     child: ModifierCardWidget(
                                       name: deck.name,
-                                      card: deck.discardPile.getList()[
-                                          deck.discardPile.getList().length -
-                                              3],
+                                      card: discardPileList[
+                                          discardPileList.length - 3],
                                       revealed: true,
                                     )),
                               )
                             : Container(),
-                        deck.discardPile.size() > 1
+                        discardPileSize > 1
                             ? buildSlideAnimation(
                                 RotationTransition(
                                     turns:
                                         const AlwaysStoppedAnimation(15 / 360),
                                     child: ModifierCardWidget(
                                       name: deck.name,
-                                      card: deck.discardPile.getList()[
-                                          deck.discardPile.getList().length -
-                                              2],
+                                      card: discardPileList[
+                                          discardPileList.length - 2],
                                       revealed: true,
                                     )),
-                                Key(deck.discardPile.size().toString()))
+                                Key(widgetKey))
                             : Container(),
                         deck.discardPile.isNotEmpty
                             ? buildDrawAnimation(
                                 ModifierCardWidget(
                                   name: deck.name,
-                                  key: Key(deck.discardPile.size().toString()),
+                                  key: Key(widgetKey),
                                   card: deck.discardPile.peek,
                                   revealed: true,
                                 ),
                                 Key((-deck.discardPile.size()).toString()))
                             : SizedBox(
-                                width: 66.6666 * settings.userScalingBars.value,
-                                height: 39 * settings.userScalingBars.value,
+                                width: 66.6666 * userScalingBars,
+                                height: 39 * userScalingBars,
                               ),
                         Positioned.fill(
                             child: Material(
