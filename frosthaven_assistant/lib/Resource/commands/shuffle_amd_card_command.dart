@@ -2,15 +2,12 @@ import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class ShuffleAMDCardCommand extends Command {
-  final bool allyDeck;
-  ShuffleAMDCardCommand(this.allyDeck);
+  final String name;
+  ShuffleAMDCardCommand(this.name);
 
   @override
   void execute() {
-    ModifierDeck deck = allyDeck
-        ? getIt<GameState>().modifierDeckAllies
-        : getIt<GameState>().modifierDeck;
-
+    final deck = GameMethods.getModifierDeck(name, getIt<GameState>());
     deck.shuffleUnDrawn(stateAccess);
   }
 

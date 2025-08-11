@@ -126,7 +126,7 @@ class ModifierDeck {
 
   void addMinusOne(_StateModifier _) {
     String suffix = "";
-    if (name.isNotEmpty) {
+    if (name == "allies") {
       suffix = "-$name";
     }
     _addedMinusOnes.value++;
@@ -137,7 +137,7 @@ class ModifierDeck {
 
   void removeMinusOne(_StateModifier _) {
     String suffix = "";
-    if (name.isNotEmpty) {
+    if (name == "allies") {
       suffix = "-$name";
     }
     _shuffle();
@@ -148,7 +148,7 @@ class ModifierDeck {
 
   bool hasMinus1() {
     String suffix = "";
-    if (name.isNotEmpty) {
+    if (name == "allies") {
       suffix = "-$name";
     }
     return _drawPile.getList().firstWhereOrNull(
@@ -161,7 +161,7 @@ class ModifierDeck {
 
   bool hasMinus2() {
     String suffix = "";
-    if (name.isNotEmpty) {
+    if (name == "allies") {
       suffix = "-$name";
     }
     return _drawPile.getList().firstWhereOrNull(
@@ -174,7 +174,7 @@ class ModifierDeck {
 
   bool hasNull() {
     String suffix = "";
-    if (name.isNotEmpty) {
+    if (name == "allies") {
       suffix = "-$name";
     }
     return _drawPile.getList().firstWhereOrNull(
@@ -187,7 +187,7 @@ class ModifierDeck {
 
   void removeNull(_StateModifier _) {
     String suffix = "";
-    if (name.isNotEmpty) {
+    if (name == "allies") {
       suffix = "-$name";
     }
     _shuffle();
@@ -196,7 +196,7 @@ class ModifierDeck {
 
   void addNull(_StateModifier _) {
     String suffix = "";
-    if (name.isNotEmpty) {
+    if (name == "allies") {
       suffix = "-$name";
     }
     _drawPile.add(ModifierCard(CardType.multiply, "nullAttack$suffix"));
@@ -205,7 +205,7 @@ class ModifierDeck {
 
   void removeMinusTwo(_StateModifier _) {
     String suffix = "";
-    if (name.isNotEmpty) {
+    if (name == "allies") {
       suffix = "-$name";
     }
     _shuffle();
@@ -214,7 +214,7 @@ class ModifierDeck {
 
   void addMinusTwo(_StateModifier _) {
     String suffix = "";
-    if (name.isNotEmpty) {
+    if (name == "allies") {
       suffix = "-$name";
     }
     _drawPile.add(ModifierCard(CardType.add, "minus2$suffix"));
@@ -341,7 +341,7 @@ class ModifierDeck {
 
   void _initDeck(final String name) {
     String suffix = "";
-    if (name.isNotEmpty) {
+    if (name == "allies") {
       suffix = "-$name";
     }
     List<ModifierCard> cards = [];

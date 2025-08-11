@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
-import 'package:frosthaven_assistant/Layout/modifier_card.dart';
+import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue1_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue2_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_remove_imbue_command.dart';
@@ -22,31 +22,6 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import '../counter_button.dart';
 
-class Item extends StatelessWidget {
-  final ModifierCard data;
-  final bool revealed;
-  final String name;
-
-  const Item(
-      {super.key,
-      required this.data,
-      required this.revealed,
-      required this.name});
-
-  @override
-  Widget build(BuildContext context) {
-    var screenSize = MediaQuery.of(context).size;
-    double scale = max((screenSize.height / (40 * 12)), 1);
-    late final Widget child;
-
-    child = revealed
-        ? ModifierCardWidget.buildFront(data, scale)
-        : ModifierCardWidget.buildRear(scale, name);
-
-    return Container(margin: EdgeInsets.all(2 * scale), child: child);
-  }
-}
-
 class ModifierCardMenu extends StatefulWidget {
   const ModifierCardMenu({super.key, required this.name});
 
@@ -58,6 +33,7 @@ class ModifierCardMenu extends StatefulWidget {
 
 class ModifierCardMenuState extends State<ModifierCardMenu> {
   final GameState _gameState = getIt<GameState>();
+  final scrollController = ScrollController();
   List<ModifierCard> _revealedList = [];
 
   @override
@@ -121,7 +97,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                       .toString()
                       .substring(3, value.key.toString().length - 3)),
                   length: inputList.length,
-                  allies: name == "allies",
+                  name: name,
                 ));
           },
           child: value,
@@ -136,7 +112,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                 context,
                 RemoveAMDCardMenu(
                   index: index,
-                  allyDeck: name == "allies",
+                  name: name,
                 ));
           },
           child: value,
@@ -171,8 +147,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                       dropIndex = list.length - dropIndex - 1;
                       index = list.length - index - 1;
                       list.insert(dropIndex, list.removeAt(index));
-                      _gameState.action(ReorderModifierListCommand(
-                          dropIndex, index, name == "allies"));
+                      _gameState.action(
+                          ReorderModifierListCommand(dropIndex, index, name));
                     });
                   },
                   children: generateList(list, allOpen, name),
@@ -184,21 +160,14 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
         ));
   }
 
-  final scrollController = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
           String name = widget.name;
-          if (name.isEmpty) {
-            name = "Enemies";
-          }
-          ModifierDeck deck = _gameState.modifierDeck;
-          if (name != "Enemies") {
-            deck = _gameState.modifierDeckAllies;
-          }
+          ModifierDeck deck =
+              GameMethods.getModifierDeck(widget.name, _gameState);
           var drawPile = deck.drawPile.getList().reversed.toList();
           var discardPile = deck.discardPile.getList();
           bool hasDiviner = false;
@@ -207,6 +176,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
               hasDiviner = true;
             }
           }
+
+          bool isCharacter = widget.name.isNotEmpty && widget.name != "allies";
 
           return Container(
               constraints: BoxConstraints(
@@ -231,7 +202,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                               runSpacing: 0,
                               spacing: 0,
                               children: [
-                                if (hasDiviner)
+                                if (hasDiviner && !isCharacter)
                                   if (deck.badOmen.value == 0)
                                     TextButton(
                                       onPressed: () {
@@ -243,35 +214,39 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 if (deck.badOmen.value > 0)
                                   Text("BadOmensLeft: ${deck.badOmen.value}",
                                       style: getTitleTextStyle(1)),
-                                TextButton(
-                                  onPressed: () {
-                                    _gameState.action(
-                                        EnfeeblingHexCommand(name == "allies"));
-                                  },
-                                  child: Text(
-                                      "Add -1 card (added : ${deck.addedMinusOnes.value})"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    if (deck.hasMinus1()) {
-                                      _gameState.action(AMDRemoveMinus1Command(
+                                if (!isCharacter)
+                                  TextButton(
+                                    onPressed: () {
+                                      _gameState.action(EnfeeblingHexCommand(
                                           name == "allies"));
-                                    }
-                                  },
-                                  child: const Text("Remove -1 card"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    _gameState.action(AMDRemoveMinus2Command(
-                                        name == "allies"));
-                                  },
-                                  child: Text(
-                                    deck.hasMinus2()
-                                        ? "Remove -2 card"
-                                        : "-2 card removed",
+                                    },
+                                    child: Text(
+                                        "Add -1 card (added : ${deck.addedMinusOnes.value})"),
                                   ),
-                                ),
-                                if (name != "allies")
+                                if (!isCharacter)
+                                  TextButton(
+                                    onPressed: () {
+                                      if (deck.hasMinus1()) {
+                                        _gameState.action(
+                                            AMDRemoveMinus1Command(
+                                                name == "allies"));
+                                      }
+                                    },
+                                    child: const Text("Remove -1 card"),
+                                  ),
+                                if (!isCharacter)
+                                  TextButton(
+                                    onPressed: () {
+                                      _gameState.action(AMDRemoveMinus2Command(
+                                          name == "allies"));
+                                    },
+                                    child: Text(
+                                      deck.hasMinus2()
+                                          ? "Remove -2 card"
+                                          : "-2 card removed",
+                                    ),
+                                  ),
+                                if (widget.name.isEmpty)
                                   TextButton(
                                     onPressed: () {
                                       if (deck.imbuement.value > 0) {
@@ -288,7 +263,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                     ),
                                   ),
                                 if (deck.imbuement.value != 2 &&
-                                    name != "allies")
+                                    widget.name.isEmpty)
                                   TextButton(
                                     onPressed: () {
                                       _gameState.action(AMDImbue2Command());
@@ -401,5 +376,28 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                         ))
                   ])));
         });
+  }
+}
+
+class Item extends StatelessWidget {
+  const Item(
+      {super.key,
+      required this.data,
+      required this.revealed,
+      required this.name});
+
+  final ModifierCard data;
+  final bool revealed;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+    double scale = max((screenSize.height / (40 * 12)), 1);
+    final Widget child = revealed
+        ? ModifierCardWidget.buildFront(data, name, scale)
+        : ModifierCardWidget.buildRear(scale, name);
+
+    return Container(margin: EdgeInsets.all(2 * scale), child: child);
   }
 }

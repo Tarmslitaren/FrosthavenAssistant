@@ -336,6 +336,17 @@ class GameMethods {
     });
   }
 
+  static Character? getCharacterByName(String name) {
+    for (ListItemData data in _gameState.currentList) {
+      if (data is Character) {
+        if (data.id == name) {
+          return data;
+        }
+      }
+    }
+    return null;
+  }
+
   static List<Character> getCurrentCharacters() {
     return getCurrentCharactersForState(_gameState);
   }
@@ -373,7 +384,7 @@ class GameMethods {
       final characters = GameMethods.getCurrentCharactersForState(state);
       for (final character in characters) {
         if (character.id == id) {
-          //return character.characterState.modifierDeck;
+          return character.characterState.modifierDeck;
         }
       }
     }
@@ -825,11 +836,8 @@ class GameMethods {
     }
   }
 
-  static void returnModifierCard(bool allies) {
-    var deck = _gameState._modifierDeck;
-    if (allies) {
-      deck = _gameState._modifierDeckAllies;
-    }
+  static void returnModifierCard(String name) {
+    final deck = GameMethods.getModifierDeck(name, getIt<GameState>());
     var card = deck._discardPile.pop();
     deck._drawPile.push(card);
   }

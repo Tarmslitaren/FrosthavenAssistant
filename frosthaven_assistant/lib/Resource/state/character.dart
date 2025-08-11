@@ -8,13 +8,13 @@ class Character extends ListItemData {
   Character(this.characterState, this.characterClass) {
     id = GameMethods.isObjectiveOrEscort(characterClass)
         ? characterState.display.value
-        : id = characterClass.id;
+        : characterClass.id;
   }
 
   Character.fromJson(Map<String, dynamic> json) {
     var anId = json['characterClass'];
     _turnState.value = TurnsState.values[json['turnState']];
-    characterState = CharacterState.fromJson(json['characterState']);
+    characterState = CharacterState.fromJson(anId, json['characterState']);
     GameData data = getIt<GameData>();
     List<CharacterClass> characters = [];
     final modelData = data.modelData.value;
@@ -30,7 +30,7 @@ class Character extends ListItemData {
 
     id = GameMethods.isObjectiveOrEscort(characterClass)
         ? characterState.display.value
-        : id = characterClass.id;
+        : characterClass.id;
   }
 
   void nextRound(_StateModifier _) {

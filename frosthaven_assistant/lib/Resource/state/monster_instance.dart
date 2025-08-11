@@ -139,7 +139,7 @@ class MonsterInstance extends FigureState {
       _roundSummoned = -1;
     }
     _chill.value = json["chill"];
-    List<dynamic> condis = json["conditions"];
+    final condis = json["conditions"];
     for (int item in condis) {
       conditions.value.add(Condition.values[item]);
     }

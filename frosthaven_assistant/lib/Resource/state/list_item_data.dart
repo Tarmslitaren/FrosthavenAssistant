@@ -6,7 +6,7 @@ class ListItemData {
 
   ValueListenable<TurnsState> get turnState => _turnState;
   final _turnState = ValueNotifier<TurnsState>(TurnsState.notDone);
-  setTurnState(_StateModifier stateModifier, TurnsState value) {
+  setTurnState(_StateModifier _, TurnsState value) {
     _turnState.value = value;
   }
 }

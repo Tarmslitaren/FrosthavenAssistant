@@ -1,13 +1,13 @@
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 class ReturnModifierCardCommand extends Command {
-  final bool allies;
+  final String name;
 
-  ReturnModifierCardCommand(this.allies);
+  ReturnModifierCardCommand(this.name);
 
   @override
   void execute() {
-    GameMethods.returnModifierCard(allies);
+    GameMethods.returnModifierCard(name);
   }
 
   @override

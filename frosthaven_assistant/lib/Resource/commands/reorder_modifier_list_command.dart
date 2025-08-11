@@ -1,21 +1,15 @@
-
 import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class ReorderModifierListCommand extends Command {
-  late final int newIndex;
-  late final int oldIndex;
-  late final bool allies;
-  ReorderModifierListCommand(this.newIndex, this.oldIndex, this.allies);
-
+  final int newIndex;
+  final int oldIndex;
+  final String name;
+  ReorderModifierListCommand(this.newIndex, this.oldIndex, this.name);
   @override
   void execute() {
-    GameState gameState = getIt<GameState>();
-    ModifierDeck deck = gameState.modifierDeck;
-    if (allies) {
-      deck = gameState.modifierDeckAllies;
-    }
-    List<ModifierCard> list = List.from(deck.drawPile.getList());
+    final deck = GameMethods.getModifierDeck(name, getIt<GameState>());
+    List<ModifierCard> list = List.of(deck.drawPile.getList());
 
     var item = list.removeAt(oldIndex);
     list.insert(newIndex, item);

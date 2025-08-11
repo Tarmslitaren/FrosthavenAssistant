@@ -148,6 +148,9 @@ class MainScaffoldBody extends StatelessWidget {
                             sectionWidth = MediaQuery.of(context).size.width;
                           }
 
+                          final Character? currentCharacter =
+                              GameMethods.getCurrentCharacter();
+
                           return Positioned(
                               width: screenSize.width,
                               bottom: barScale * 4,
@@ -171,10 +174,17 @@ class MainScaffoldBody extends StatelessWidget {
                                           child: const SectionList(),
                                         ),
                                       Column(children: [
-                                        //todo: add here the current character amd,
+                                        if (currentCharacter != null)
+                                          ModifierDeckWidget(
+                                              name: currentCharacter.id),
                                         if (GameMethods.shouldShowAlliesDeck())
-                                          const ModifierDeckWidget(
-                                              name: "allies"),
+                                          Container(
+                                              margin: EdgeInsets.only(
+                                                top: 4 * barScale,
+                                              ),
+                                              child: const ModifierDeckWidget(
+                                                name: 'allies',
+                                              )),
                                         if (!modFitsOnBar &&
                                             gameState.currentCampaign.value !=
                                                 "Buttons and Bugs" && //hide amd deck for buttons and bugs

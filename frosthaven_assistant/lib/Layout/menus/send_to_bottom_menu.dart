@@ -7,16 +7,15 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class SendToBottomMenu extends StatefulWidget {
-  //it's for modifier deck
-  final int currentIndex;
-  final int length;
-  final bool allies;
-
   const SendToBottomMenu(
       {super.key,
       required this.currentIndex,
       required this.length,
-      required this.allies});
+      required this.name});
+  //it's for modifier deck
+  final int currentIndex;
+  final int length;
+  final String name;
 
   @override
   SendToBottomMenuState createState() => SendToBottomMenuState();
@@ -53,7 +52,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
               onPressed: () {
                 int oldIndex = widget.length - 1 - widget.currentIndex;
                 _gameState.action(
-                    ReorderModifierListCommand(0, oldIndex, widget.allies));
+                    ReorderModifierListCommand(0, oldIndex, widget.name));
                 Navigator.pop(context);
               },
               child:
@@ -63,7 +62,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
           ),
           TextButton(
               onPressed: () {
-                _gameState.action(ShuffleAMDCardCommand(widget.allies));
+                _gameState.action(ShuffleAMDCardCommand(widget.name));
                 Navigator.pop(context);
               },
               child: const Text("Shuffle un-drawn Cards",

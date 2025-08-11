@@ -1,7 +1,7 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/modifier_card_menu.dart';
-import 'package:frosthaven_assistant/Layout/modifier_card.dart';
+import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -120,8 +120,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
       }
       if (commandDescriptions.length > commandIndex) {
         String commandDescription = commandDescriptions[commandIndex];
-        if (widget.name == "allies") {
-          if (commandDescription.contains("allies modifier card")) {
+        if (widget.name.isNotEmpty) {
+          if (commandDescription.contains("${widget.name} modifier card")) {
             return true;
           }
         } else {
@@ -219,8 +219,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   Widget build(BuildContext context) {
     ModifierDeck deck = GameMethods.getModifierDeck(widget.name, _gameState);
 
-    //todo: if character - draw icon
-
     bool isAnimating =
         false; //is not doing anything now. in case flip animation is added
     return ValueListenableBuilder<double>(
@@ -247,67 +245,102 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                             color: Colors.black)
                       ]);
 
+                  Color currentCharacterColor = Colors.transparent;
+                  String? currentCharacterName;
+                  Character? currentCharacter =
+                      GameMethods.getCurrentCharacter();
+                  if (currentCharacter != null &&
+                      currentCharacter.id == deck.name) {
+                    currentCharacterColor = Colors.black;
+                    currentCharacterName = currentCharacter.characterClass.name;
+                  }
+
                   final discardPileSize = deck.discardPile.size();
                   final discardPileList = deck.discardPile.getList();
                   final widgetKey = discardPileSize.toString();
+
+                  final characterIconWidget = Positioned(
+                    height: 27 * userScalingBars,
+                    width: 27 * userScalingBars,
+                    top: 12 * userScalingBars / 2,
+                    left: 16 * userScalingBars,
+                    child: Image.asset(
+                        color: currentCharacterColor,
+                        'assets/images/class-icons/$currentCharacterName.png'),
+                  );
+
                   return Row(
                     children: [
-                      Stack(children: [
-                        deck.drawPile.isNotEmpty
-                            ? Stack(children: [
-                                ModifierCardWidget(
-                                    card: deck.drawPile.peek,
-                                    name: deck.name,
-                                    revealed: isAnimating),
-                                Positioned.fill(
-                                    child: Material(
-                                        color: Colors.transparent,
-                                        child: InkWell(
-                                            focusColor: const Color(0x44000000),
-                                            onTap: () {
-                                              setState(() {
-                                                _animationsEnabled = true;
-                                                _gameState.action(
-                                                    DrawModifierCardCommand(
-                                                        widget.name));
-                                              });
-                                            })))
-                              ])
-                            : Stack(children: [
-                                Container(
-                                    width: 58.6666 * userScalingBars,
-                                    height: 39 * userScalingBars,
-                                    color: Color(
-                                        int.parse("7A000000", radix: 16))),
-                                Positioned.fill(
-                                    child: Material(
-                                        color: Colors.transparent,
-                                        child: InkWell(
-                                          focusColor: const Color(0x44000000),
-                                          onTap: () {
-                                            setState(() {
-                                              _animationsEnabled = true;
-                                              _gameState.action(
-                                                  DrawModifierCardCommand(
-                                                      widget.name));
-                                            });
-                                          },
-                                          child: Center(
-                                              child: Text(
-                                            "Shuffle\n& Draw",
-                                            style: textStyle,
-                                            textAlign: TextAlign.center,
-                                          )),
-                                        )))
-                              ]),
-                        Positioned(
-                            bottom: 0,
-                            right: 2 * userScalingBars,
-                            child: Text(
-                              deck.cardCount.value.toString(),
-                              style: textStyle,
-                            )),
-                      ]),
+                      InkWell(
+                          onTap: () {
+                            setState(() {
+                              _animationsEnabled = true;
+                              _gameState
+                                  .action(DrawModifierCardCommand(widget.name));
+                            });
+                          },
+                          child: Stack(children: [
+                            deck.drawPile.isNotEmpty
+                                ? Stack(children: [
+                                    ModifierCardWidget(
+                                        card: deck.drawPile.peek,
+                                        name: deck.name,
+                                        revealed: isAnimating),
+                                    if (currentCharacterName != null)
+                                      characterIconWidget,
+                                    Positioned.fill(
+                                        child: Material(
+                                            color: Colors.transparent,
+                                            child: InkWell(
+                                                focusColor:
+                                                    const Color(0x44000000),
+                                                onTap: () {
+                                                  setState(() {
+                                                    _animationsEnabled = true;
+                                                    _gameState.action(
+                                                        DrawModifierCardCommand(
+                                                            widget.name));
+                                                  });
+                                                })))
+                                  ])
+                                : Stack(children: [
+                                    Container(
+                                        width: 58.6666 * userScalingBars,
+                                        height: 39 * userScalingBars,
+                                        color: Color(
+                                            int.parse("7A000000", radix: 16))),
+                                    if (currentCharacterName != null)
+                                      characterIconWidget,
+                                    Positioned.fill(
+                                        child: Material(
+                                            color: Colors.transparent,
+                                            child: InkWell(
+                                              focusColor:
+                                                  const Color(0x44000000),
+                                              onTap: () {
+                                                setState(() {
+                                                  _animationsEnabled = true;
+                                                  _gameState.action(
+                                                      DrawModifierCardCommand(
+                                                          widget.name));
+                                                });
+                                              },
+                                              child: Center(
+                                                  child: Text(
+                                                "Shuffle\n& Draw",
+                                                style: textStyle,
+                                                textAlign: TextAlign.center,
+                                              )),
+                                            )))
+                                  ]),
+                            Positioned(
+                                bottom: 0,
+                                right: 2 * userScalingBars,
+                                child: Text(
+                                  deck.cardCount.value.toString(),
+                                  style: textStyle,
+                                )),
+                          ])),
                       SizedBox(
                         width: 2 * userScalingBars,
                       ),

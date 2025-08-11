@@ -7,11 +7,10 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class RemoveAMDCardMenu extends StatefulWidget {
-  final int index;
-  final bool allyDeck;
+  const RemoveAMDCardMenu({super.key, required this.index, required this.name});
 
-  const RemoveAMDCardMenu(
-      {super.key, required this.index, required this.allyDeck});
+  final int index;
+  final String name;
 
   @override
   RemoveAMDCardMenuState createState() => RemoveAMDCardMenuState();
@@ -46,8 +45,8 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
           ),
           TextButton(
               onPressed: () {
-                _gameState.action(
-                    RemoveAMDCardCommand(widget.index, widget.allyDeck));
+                _gameState
+                    .action(RemoveAMDCardCommand(widget.index, widget.name));
 
                 Navigator.pop(context);
               },
@@ -58,12 +57,10 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
           ),
           TextButton(
             onPressed: () {
-              _gameState.action(ReturnModifierCardCommand(widget.allyDeck));
+              _gameState.action(ReturnModifierCardCommand(widget.name));
+              final deck = GameMethods.getModifierDeck(widget.name, _gameState);
               //if last card, remove modal
-              if (widget.allyDeck &&
-                      _gameState.modifierDeckAllies.discardPile.isEmpty ||
-                  !widget.allyDeck &&
-                      _gameState.modifierDeck.discardPile.isEmpty) {
+              if (deck.discardPile.isEmpty) {
                 Navigator.pop(context);
               }
             },
