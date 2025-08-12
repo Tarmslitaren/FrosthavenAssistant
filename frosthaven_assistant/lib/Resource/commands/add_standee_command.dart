@@ -3,22 +3,8 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 import '../enums.dart';
 
-class SummonData {
-  int standeeNr;
-  String name;
-  int health;
-  int move;
-  int attack;
-  int range;
-  String gfx;
-
-  SummonData(this.standeeNr, this.name, this.health, this.move, this.attack,
-      this.range, this.gfx);
-}
-
 class AddStandeeCommand extends Command {
   final int nr;
-
   final SummonData? summon;
   final MonsterType type;
   final String ownerId;
@@ -29,7 +15,8 @@ class AddStandeeCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.executeAddStandee(stateAccess, nr, summon, type, ownerId, addAsSummon);
+    GameMethods.executeAddStandee(
+        stateAccess, nr, summon, type, ownerId, addAsSummon);
 
     if (getIt<GameState>().roundState.value == RoundState.playTurns) {
       Future.delayed(const Duration(milliseconds: 600), () {
@@ -47,10 +34,22 @@ class AddStandeeCommand extends Command {
 
   @override
   String describe() {
-    String name = ownerId;
-    if (summon != null) {
-      name = summon!.name;
-    }
+    final sum = summon;
+    String name = sum == null ? ownerId : sum.name;
+
     return "Add $name $nr";
   }
+}
+
+class SummonData {
+  int standeeNr;
+  String name;
+  int health;
+  int move;
+  int attack;
+  int range;
+  String gfx;
+
+  SummonData(this.standeeNr, this.name, this.health, this.move, this.attack,
+      this.range, this.gfx);
 }

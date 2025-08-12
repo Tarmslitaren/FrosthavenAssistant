@@ -40,19 +40,19 @@ class ModifierCardWidget extends StatelessWidget {
             ),
             if (isCharacter)
               Positioned(
-                height: 6 * scale,
-                width: 6 * scale,
-                top: 59 * scale / 2,
-                left: 3.3 * scale,
+                height: 8 * scale,
+                width: 8 * scale,
+                top: 53 * scale / 2,
+                left: 4 * scale,
                 child: Image.asset(
                     'assets/images/attack/class-marker-background.png'),
               ),
             if (isCharacter)
               Positioned(
-                height: 6 * scale,
-                width: 6 * scale,
-                top: 59 * scale / 2,
-                left: 3.3 * scale,
+                height: 7 * scale,
+                width: 7 * scale,
+                top: 53 * scale / 2,
+                left: 4 * scale,
                 child: Image.asset(
                     //colorBlendMode: BlendMode.modulate,
                     color: Colors.white, //try lighter gray?

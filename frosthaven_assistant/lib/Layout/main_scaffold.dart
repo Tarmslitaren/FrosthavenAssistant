@@ -72,7 +72,7 @@ class ToastNotifier extends StatelessWidget {
 class MainScaffoldBody extends StatelessWidget {
   const MainScaffoldBody({super.key});
 
-  double getSectionWidth(BuildContext context) {
+  double getSectionWidth(BuildContext context, Character? currentCharacter) {
     bool modFitsOnBar = modifiersFitOnBar(context);
     double screenWidth = MediaQuery.of(context).size.width;
     double barScale = getIt<Settings>().userScalingBars.value;
@@ -82,7 +82,9 @@ class MainScaffoldBody extends StatelessWidget {
     if (hasLootDeck) {
       sectionWidth -= 94 * barScale; //width of loot deck
     }
-    if ((!modFitsOnBar || GameMethods.shouldShowAlliesDeck()) &&
+    if ((!modFitsOnBar ||
+            GameMethods.shouldShowAlliesDeck() ||
+            currentCharacter != null) &&
         getIt<Settings>().showAmdDeck.value) {
       sectionWidth -= 153 * barScale; //width of amd
     }
@@ -132,7 +134,12 @@ class MainScaffoldBody extends StatelessWidget {
                               getIt<Settings>().userScalingBars.value;
                           bool hasLootDeck = GameMethods.hasLootDeck();
                           bool modFitsOnBar = modifiersFitOnBar(context);
-                          var sectionWidth = getSectionWidth(context);
+
+                          final Character? currentCharacter =
+                              GameMethods.getCurrentCharacter();
+
+                          var sectionWidth =
+                              getSectionWidth(context, currentCharacter);
 
                           //move to separate row if it doesn't fit
                           bool sectionsOnSeparateRow = false;
@@ -147,9 +154,6 @@ class MainScaffoldBody extends StatelessWidget {
                             sectionsOnSeparateRow = true;
                             sectionWidth = MediaQuery.of(context).size.width;
                           }
-
-                          final Character? currentCharacter =
-                              GameMethods.getCurrentCharacter();
 
                           return Positioned(
                               width: screenSize.width,

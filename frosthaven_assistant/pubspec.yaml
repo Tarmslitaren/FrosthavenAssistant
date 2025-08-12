@@ -121,6 +121,7 @@ flutter:
     - assets/data/rooms/
     - assets/images/abilities/ #for use with monster ability card
     - assets/images/attack/ #modifier deck
+    - assets/images/attack/perks/ #perks
     - assets/images/loot/ #loot deck
     - assets/images/class-icons/
     - assets/images/monsters/ #portraits

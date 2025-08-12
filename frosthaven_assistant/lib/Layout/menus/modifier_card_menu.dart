@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/perks_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
@@ -178,7 +179,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           }
 
           bool isCharacter = widget.name.isNotEmpty && widget.name != "allies";
-
           return Container(
               constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width,
@@ -304,6 +304,26 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                       figureId: "unknown",
                                       ownerId: "unknown",
                                       scale: 1),
+
+                                if (isCharacter)
+                                  TextButton(
+                                    onPressed: () {
+                                      final Character? character =
+                                          GameMethods.getCharacterByName(
+                                              widget.name);
+                                      if (character != null) {
+                                        final characterClass =
+                                            character.characterClass;
+                                        openDialog(
+                                            context,
+                                            PerksMenu(
+                                              perks: characterClass.perks,
+                                              characterId: characterClass.id,
+                                            ));
+                                      }
+                                    },
+                                    child: const Text("Perks"),
+                                  ),
 
                                 const Text(
                                   "   Reveal:",

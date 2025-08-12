@@ -28,8 +28,8 @@ class SummonModel {
       attack = data['attack'];
     }
     int range = 0;
-    if (data.containsKey('attack')) {
-      attack = data['attack'];
+    if (data.containsKey('range')) {
+      attack = data['range'];
     }
     int level = 0;
     if (data.containsKey('level')) {

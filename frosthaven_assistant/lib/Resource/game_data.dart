@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 
 import '../Model/campaign.dart';
 import '../Model/room.dart';
-import '../Model/summon.dart';
+import '../Model/summon_model.dart';
 
 class GameData {
   late final BuiltList<String> editions;

@@ -392,6 +392,24 @@ class GameMethods {
     return state.modifierDeck;
   }
 
+  static addPerk(_StateModifier s, ModifierDeck deck, PerkModel perk) {
+    for (final item in perk.remove) {
+      deck.removeCard(s, item);
+    }
+    for (final item in perk.add) {
+      deck.addCard(s, item);
+    }
+  }
+
+  static removePerk(_StateModifier s, ModifierDeck deck, PerkModel perk) {
+    for (final item in perk.remove) {
+      deck.addCard(s, item);
+    }
+    for (final item in perk.add) {
+      deck.removeCard(s, item);
+    }
+  }
+
   static int getCurrentCharacterAmount() {
     int res = 0;
     for (ListItemData data in _gameState.currentList) {

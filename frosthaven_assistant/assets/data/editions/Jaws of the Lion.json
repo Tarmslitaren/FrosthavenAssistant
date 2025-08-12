@@ -8,7 +8,82 @@
       "edition": "Jaws of the Lion",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
-      "summons": {}
+      "summons": {},
+      "perks": [
+        {
+          "text": "Remove two -1 cards",
+          "removes": ["minus1", "minus1"]
+        },
+        {
+          "text": "Remove two -1 cards",
+          "removes": ["minus1", "minus1"]
+        },
+        {
+          "text": "Replace one +0 card with one +1 %muddle% card",
+          "removes": ["plus0"],
+          "adds": ["perks/plus2muddle"]
+        },
+        {
+          "text": "Replace one +0 card with one +1 %poison% card",
+          "removes": ["plus0"],
+          "adds": ["perks/plus1poison"]
+        },
+        {
+          "text": "Replace one +0 card with one +1 %wound% card",
+          "removes": ["plus0"],
+          "adds": ["perks/plus1wound"]
+        },
+        {
+          "text": "Replace one +0 card with one +1 %immobilize% card",
+          "removes": ["plus0"],
+          "adds": ["perks/plus1immobilize"]
+        },
+        {
+          "text": "Replace one +0 card with one +1 %push% 2 card",
+          "removes": ["plus0"],
+          "adds": ["perks/plus1push2"]
+        },
+        {
+          "text": "Replace one +0 card with one +0 %stun% card",
+          "removes": ["plus0"],
+          "adds": ["perks/plus0stun"]
+        },
+        {
+          "text": "Replace one +1 card with one +0 %stun% card",
+          "removes": ["plus1"],
+          "adds": ["perks/plus0stun"]
+        },
+        {
+          "text": "Add one one +2 %air% card",
+          "adds": ["perks/plus2air"]
+        },
+        {
+          "text": "Add one one +2 %air% card",
+          "adds": ["perks/plus2air"]
+        },
+        {
+          "text": "Add one one +2 %air% card",
+          "adds": ["perks/plus2air"]
+        },
+        {
+          "text": "Replace one +1 card with one +3 card",
+          "removes": ["plus1"],
+          "adds": ["perks/plus3"]
+        },
+        {
+          "text": "Replace one +1 card with one +3 card",
+          "removes": ["plus1"],
+          "adds": ["perks/plus3"]
+        },
+        {
+          "text": "Replace one +1 card with one +3 card",
+          "removes": ["plus1"],
+          "adds": ["perks/plus3"]
+        },
+        {
+          "text": "Hasty Pickup"
+        }
+      ]
     },
     {
       "name": "Demolitionist",

@@ -6,6 +6,7 @@ class CharacterState extends FigureState {
   final _initiative = ValueNotifier<int>(0);
   final _xp = ValueNotifier<int>(0);
   final List<MonsterInstance> _summonList = [];
+  final List<bool> _perkList = List.filled(18, false);
 
   late final ModifierDeck _modifierDeck;
 
@@ -14,6 +15,7 @@ class CharacterState extends FigureState {
   ValueListenable<int> get xp => _xp;
   BuiltList<MonsterInstance> get summonList => BuiltList.of(_summonList);
   ModifierDeck get modifierDeck => _modifierDeck;
+  BuiltList<bool> get perkList => BuiltList.of(_perkList);
 
   CharacterState(final String id) {
     _modifierDeck = ModifierDeck(id);
@@ -29,8 +31,17 @@ class CharacterState extends FigureState {
     _display.value = json['display'];
 
     final summons = json["summonList"];
-    for (var item in summons) {
+    for (final item in summons) {
       _summonList.add(MonsterInstance.fromJson(item));
+    }
+
+    if (json.containsKey("perkList")) {
+      final perks = json["perkList"];
+      int i = 0;
+      for (bool item in perks) {
+        _perkList[i] = item;
+        i++;
+      }
     }
 
     final condis = json["conditions"];
@@ -55,6 +66,10 @@ class CharacterState extends FigureState {
         _conditionsAddedPreviousTurn.add(Condition.values[item]);
       }
     }
+  }
+
+  flipPerk(_StateModifier _, int index) {
+    _perkList[index] = !_perkList[index];
   }
 
   setDisplay(_StateModifier _, String value) {
@@ -85,6 +100,7 @@ class CharacterState extends FigureState {
         '"display": ${jsonEncode(display.value)}, '
         '"modifierDeck": ${_modifierDeck.toString()}, '
         '"summonList": ${_summonList.toString()}, '
+        '"perkList": ${_perkList.toString()}, '
         '"conditions": ${conditions.value.toString()}, '
         '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.toList().toString()}, '
         '"conditionsAddedPreviousTurn": ${conditionsAddedPreviousTurn.toList().toString()} '

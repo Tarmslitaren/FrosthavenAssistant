@@ -279,7 +279,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                             ),
                             InkWell(
                                 onTap: () {
-                                  openDialog(context, const LootCardMenu());
+                                  openDialog(context, const LootCardsMenu());
                                 },
                                 child: Stack(children: [
                                   discardPileSize > 2

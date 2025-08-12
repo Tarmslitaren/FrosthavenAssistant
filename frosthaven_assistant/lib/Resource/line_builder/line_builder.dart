@@ -59,79 +59,6 @@ class LineBuilder {
     return false;
   }
 
-  static double _getIconHeight(
-      String iconToken, double height, bool isFrosthavenStyle) {
-    if (isElement(iconToken)) {
-      //FH style: elements have same size as regular icons
-      return isFrosthavenStyle ? height : height * 1.2;
-    }
-    if (iconToken.contains("aoe")) {
-      return height * 2.0;
-    }
-    //if(shouldOverflow(isFrosthavenStyle, iconToken, true)) {
-    //  return height * 1.2;
-    //}
-    return height;
-  }
-
-  static EdgeInsetsGeometry _getMarginForToken(String iconToken, double height,
-      bool mainLine, CrossAxisAlignment alignment, bool isFrostHavenStyle) {
-    double margin = 0.2;
-
-    if (alignment != CrossAxisAlignment.center) {
-      margin = 0.1;
-    }
-    if (isFrostHavenStyle) {
-      margin = 0;
-    }
-    if (iconToken.contains("aoe")) {
-      return EdgeInsets.only(left: margin * height, right: margin * height);
-    }
-    if (mainLine &&
-        (iconToken == "attack" ||
-            iconToken == "heal" ||
-            iconToken == "loot" ||
-            iconToken == "shield" ||
-            iconToken == "move")) {
-      return EdgeInsets.only(left: margin * height, right: margin * height);
-    }
-    if (iconToken == "pierce" ||
-        iconToken == "target" ||
-        iconToken == "curse" ||
-        iconToken == "enfeeble" ||
-        iconToken == "bless" ||
-        iconToken == "enfeeble" ||
-        iconToken == "push" ||
-        iconToken == "pull" ||
-        iconToken.contains("poison") ||
-        iconToken.contains("wound") ||
-        iconToken == "infect" ||
-        iconToken == "chill" ||
-        iconToken == "disarm" ||
-        iconToken == "immobilize" ||
-        iconToken == "stun" ||
-        iconToken == "strengthen" ||
-        iconToken == "impair" ||
-        iconToken == "bane" ||
-        iconToken == "brittle" ||
-        iconToken == "invisible" ||
-        iconToken == "safeguard" ||
-        iconToken == "muddle") {
-      //todo; optimize with else and no strcmp
-      if (mainLine) {
-        //smaller margins for secondary modifiers
-        return const EdgeInsets.all(0);
-      } else if (isFrostHavenStyle == true && iconToken != "target") {
-        //need more margin around the over sized condition gfx
-        return EdgeInsets.only(left: 0.25 * height, right: 0.25 * height);
-      }
-    }
-    if (isFrostHavenStyle) {
-      return EdgeInsets.zero;
-    }
-    return EdgeInsets.only(left: 0.1 * height, right: 0.1 * height);
-  }
-
   //get rid of this if it doesn't really help
   static double getTopPaddingForStyle(TextStyle style) {
     double height = style.fontSize!;
@@ -160,16 +87,16 @@ class LineBuilder {
       final bool left,
       final bool applyStats,
       final bool applyAll,
-      final Monster monster,
+      final Monster? monster,
       final CrossAxisAlignment alignment,
       final double scale,
       final bool animate) {
     //todo: for performance - check how often is this being run
-    bool isBossStatCard = monster.type.levels[0].boss != null &&
+    bool isBossStatCard = monster?.type.levels[0].boss != null &&
         alignment == CrossAxisAlignment.start;
 
     String imageSuffix = "";
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster.type);
+    bool frosthavenStyle = GameMethods.isFrosthavenStyle(monster?.type);
     if (frosthavenStyle) {
       imageSuffix = "_fh";
     }
@@ -355,12 +282,11 @@ class LineBuilder {
       String sizeToken = "";
       bool isRightPartOfLastLine = false;
       var styleToUse = normalStyle;
-      //List<InlineSpan> textPartList = [];
       List<Widget> textPartListRowContent = [];
 
-      if (line == "[subLineStart]") {
-        //continue;
-      }
+      //if (line == "[subLineStart]") {
+      //continue;
+      //}
       //handle FH layout with gray background for sub-lines
       if (line.contains("[subLineEnd]")) {
         FrosthavenConverter.buildFHStyleBackgrounds(
@@ -567,7 +493,6 @@ class LineBuilder {
                   : Alignment.center,
               scale: 1 / (scale * 0.15),
               //for some reason flutter likes scale to be inverted
-              //fit: BoxFit.fitHeight,
               height:
                   styleToUse == dividerStyleExtraThin ? 2 * scale : 6.0 * scale,
               width: 55.0 *
@@ -608,7 +533,7 @@ class LineBuilder {
       if (line.startsWith('>')) {
         //disable apply stats (for granted lines) //Too bad it doesn't work here
         line = line.substring(1, line.length);
-      } else if (applyStats) {
+      } else if (applyStats && monster != null) {
         List<String> statLines =
             StatApplier.applyMonsterStats(line, sizeToken, monster, applyAll);
         line = statLines.removeAt(0);
@@ -638,8 +563,6 @@ class LineBuilder {
               }
             }
             if (iconToken == "use") {
-              //put use gfx on top of previous and add ':'
-              // WidgetSpan part = textPartList.removeLast() as WidgetSpan;
               Widget part = textPartListRowContent.removeLast();
               Container container = part as Container;
               Image lastImage;
@@ -648,7 +571,6 @@ class LineBuilder {
               } else {
                 lastImage = (container.child as OverflowBox).child as Image;
               }
-              //Image lastImage = ((part.child as Container).child as OverflowBox).child as Image;
               textPartListRowContent.add(Container(
                   color: debugColors ? Colors.amber : null,
                   //margin: margin,
@@ -668,8 +590,6 @@ class LineBuilder {
                             height: frosthavenStyle
                                 ? styleToUse.fontSize! * 1.0 * 0.5
                                 : styleToUse.fontSize! * 1.2,
-                            //width: frosthavenStyle? styleToUse.fontSize! * 1.2 * 0.5: styleToUse.fontSize! * 1.2,
-                            //alignment: Alignment.topCenter,
                             fit: BoxFit.fitHeight,
                             filterQuality: FilterQuality.medium,
                             semanticLabel: iconGfx,
@@ -682,26 +602,8 @@ class LineBuilder {
                   color: debugColors ? Colors.red : null,
                   padding: EdgeInsets.only(
                       top: getTopPaddingForStyle(normalStyle) * 0.5),
-                  child: Text(
-                    frosthavenStyle ? " :" : " : ",
-                    style:
-                        normalStyle, /*TextStyle(
-                      //maybe slightly bigger between chars space?
-                      fontFamily: frosthavenStyle ? 'Markazi' : 'Majalla',
-                      color: left ? Colors.black : Colors.white,
-                      backgroundColor: debugColors? Colors.amber : null,
-                      fontSize:
-                      ((alignment == CrossAxisAlignment.center ? 12 : 12) * scale),
-                      height: (alignment == CrossAxisAlignment.center)
-                          ? frosthavenStyle
-                              ? 1.0
-                              : 1.1
-                          : 1.0,
-
-                      shadows: [
-                        shadow
-                      ]))*/
-                  )));
+                  child: Text(frosthavenStyle ? " :" : " : ",
+                      style: normalStyle)));
             } else {
               double height = _getIconHeight(
                   iconToken, styleToUse.fontSize!, frosthavenStyle);
@@ -716,11 +618,13 @@ class LineBuilder {
                 } else if (iconTokenText != null) {
                   //TODO: add animation on other texts too? and need to animate icons as well then for FH style
                   bool shouldAnimate = animate &&
+                      monster != null &&
                       (line.toLowerCase().contains('disadvantage') ||
                           line.contains('retaliate') ||
                           line.contains('shield')) &&
                       (monster.isActive || monster.monsterInstances.isNotEmpty);
-                  if (monster.turnState.value == TurnsState.current) {
+                  if (monster != null &&
+                      monster.turnState.value == TurnsState.current) {
                     if (line.toLowerCase().contains("advantage")) {
                       shouldAnimate = true;
                     }
@@ -754,7 +658,9 @@ class LineBuilder {
                   styleToUse == normalStyle || styleToUse == eliteStyle;
               EdgeInsetsGeometry margin = _getMarginForToken(
                   iconToken, height, mainLine, alignment, frosthavenStyle);
-              if (iconToken == "move" && monster.type.flying) {
+              if (monster != null &&
+                  iconToken == "move" &&
+                  monster.type.flying) {
                 iconGfx = "flying";
               }
               String imagePath = "assets/images/abilities/$iconGfx.png";
@@ -839,11 +745,12 @@ class LineBuilder {
 
       //TODO: add animation on other texts too? and need to animate icons as well then for FH style
       bool shouldAnimate = animate &&
+          monster != null &&
           (line.toLowerCase().contains('disadvantage') ||
               line.contains('retaliate') ||
               line.contains('shield')) &&
           (monster.isActive || monster.monsterInstances.isNotEmpty);
-      if (monster.turnState.value == TurnsState.current) {
+      if (monster != null && monster.turnState.value == TurnsState.current) {
         if (line.toLowerCase().contains("advantage")) {
           shouldAnimate = true;
         }
@@ -916,5 +823,78 @@ class LineBuilder {
       lastLineTextPartListRowContent = textPartListRowContent;
     }
     return createLinesColumn(alignment, lines);
+  }
+
+  static double _getIconHeight(
+      String iconToken, double height, bool isFrosthavenStyle) {
+    if (isElement(iconToken)) {
+      //FH style: elements have same size as regular icons
+      return isFrosthavenStyle ? height : height * 1.2;
+    }
+    if (iconToken.contains("aoe")) {
+      return height * 2.0;
+    }
+    //if(shouldOverflow(isFrosthavenStyle, iconToken, true)) {
+    //  return height * 1.2;
+    //}
+    return height;
+  }
+
+  static EdgeInsetsGeometry _getMarginForToken(String iconToken, double height,
+      bool mainLine, CrossAxisAlignment alignment, bool isFrostHavenStyle) {
+    double margin = 0.2;
+
+    if (alignment != CrossAxisAlignment.center) {
+      margin = 0.1;
+    }
+    if (isFrostHavenStyle) {
+      margin = 0;
+    }
+    if (iconToken.contains("aoe")) {
+      return EdgeInsets.only(left: margin * height, right: margin * height);
+    }
+    if (mainLine &&
+        (iconToken == "attack" ||
+            iconToken == "heal" ||
+            iconToken == "loot" ||
+            iconToken == "shield" ||
+            iconToken == "move")) {
+      return EdgeInsets.only(left: margin * height, right: margin * height);
+    }
+    if (iconToken == "pierce" ||
+        iconToken == "target" ||
+        iconToken == "curse" ||
+        iconToken == "enfeeble" ||
+        iconToken == "bless" ||
+        iconToken == "enfeeble" ||
+        iconToken == "push" ||
+        iconToken == "pull" ||
+        iconToken.contains("poison") ||
+        iconToken.contains("wound") ||
+        iconToken == "infect" ||
+        iconToken == "chill" ||
+        iconToken == "disarm" ||
+        iconToken == "immobilize" ||
+        iconToken == "stun" ||
+        iconToken == "strengthen" ||
+        iconToken == "impair" ||
+        iconToken == "bane" ||
+        iconToken == "brittle" ||
+        iconToken == "invisible" ||
+        iconToken == "safeguard" ||
+        iconToken == "muddle") {
+      //todo; optimize with else and no strcmp
+      if (mainLine) {
+        //smaller margins for secondary modifiers
+        return const EdgeInsets.all(0);
+      } else if (isFrostHavenStyle && iconToken != "target") {
+        //need more margin around the over sized condition gfx
+        return EdgeInsets.only(left: 0.25 * height, right: 0.25 * height);
+      }
+    }
+    if (isFrostHavenStyle) {
+      return EdgeInsets.zero;
+    }
+    return EdgeInsets.only(left: 0.1 * height, right: 0.1 * height);
   }
 }

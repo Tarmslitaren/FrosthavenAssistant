@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
-import 'package:frosthaven_assistant/Model/summon.dart';
+import 'package:frosthaven_assistant/Model/summon_model.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/add_standee_command.dart';

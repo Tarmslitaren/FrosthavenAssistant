@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Model/summon.dart';
+import 'package:frosthaven_assistant/Model/summon_model.dart';
 
 @immutable
 class CharacterClass {
-  const CharacterClass(this.id, this.name, this.healthByLevel, this.edition,
-      this.color, this.colorSecondary, this.hidden, this.summons);
   final String id;
   final String name;
   final String edition;
@@ -13,6 +11,10 @@ class CharacterClass {
   final Color colorSecondary;
   final bool hidden;
   final List<SummonModel> summons;
+  final List<PerkModel> perks;
+
+  const CharacterClass(this.id, this.name, this.healthByLevel, this.edition,
+      this.color, this.colorSecondary, this.hidden, this.summons, this.perks);
 
   factory CharacterClass.fromJson(Map<String, dynamic> data) {
     final edition = data['edition'] as String;
@@ -29,20 +31,16 @@ class CharacterClass {
     final healthByLevel = (data['health'] as List<dynamic>).cast<int>();
     int radix = 16;
     var colorValue = data['color'];
-    Color color;
-    if (colorValue is List<dynamic>) {
-      color = Color(int.parse(colorValue[0], radix: radix));
-    } else {
-      color = Color(int.parse(colorValue, radix: radix));
-    }
+    Color color = (colorValue is List<dynamic>)
+        ? Color(int.parse(colorValue.first, radix: radix))
+        : Color(int.parse(colorValue, radix: radix));
+
     Color colorSecondary = color;
     if (data.containsKey("colorSecondary")) {
-      if (data["colorSecondary"] is List<dynamic>) {
-        colorSecondary =
-            Color(int.parse(data['colorSecondary'][0], radix: radix));
-      } else {
-        colorSecondary = Color(int.parse(data['colorSecondary'], radix: radix));
-      }
+      colorSecondary = (data["colorSecondary"] is List<dynamic>)
+          ? colorSecondary =
+              Color(int.parse(data['colorSecondary'][0], radix: radix))
+          : Color(int.parse(data['colorSecondary'], radix: radix));
     }
 
     List<SummonModel> summonList = [];
@@ -52,7 +50,49 @@ class CharacterClass {
         summonList.add(SummonModel.fromJson(summons[key], key));
       }
     }
+
+    List<PerkModel> perkList = [];
+    if (data.containsKey('perks')) {
+      final perks = data['perks'] as List<dynamic>;
+      for (final item in perks) {
+        perkList.add(PerkModel.fromJson(item));
+      }
+    }
+
     return CharacterClass(id, name, healthByLevel, edition, color,
-        colorSecondary, hidden, summonList);
+        colorSecondary, hidden, summonList, perkList);
+  }
+}
+
+@immutable
+class PerkModel {
+  final String text;
+  final List<String> remove;
+  final List<String> add;
+  const PerkModel(this.text, this.remove, this.add);
+
+  factory PerkModel.fromJson(Map<String, dynamic> data) {
+    String text = "";
+    if (data.containsKey('text')) {
+      text = data['text'];
+    }
+
+    List<String> addList = [];
+    if (data.containsKey('adds')) {
+      final adds = data['adds'] as List<dynamic>;
+      for (String item in adds) {
+        addList.add(item);
+      }
+    }
+
+    List<String> removeList = [];
+    if (data.containsKey('removes')) {
+      final removes = data['removes'] as List<dynamic>;
+      for (String item in removes) {
+        removeList.add(item);
+      }
+    }
+
+    return PerkModel(text, removeList, addList);
   }
 }

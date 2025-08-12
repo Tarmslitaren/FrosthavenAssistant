@@ -167,7 +167,7 @@ Drawer createMainMenu(BuildContext context) {
                   title: const Text('Loot Deck Menu'),
                   onTap: () {
                     Navigator.pop(context);
-                    openDialog(context, const LootCardMenu());
+                    openDialog(context, const LootCardsMenu());
                   },
                 ),
               const Divider(),

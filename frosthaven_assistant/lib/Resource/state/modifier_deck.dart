@@ -203,6 +203,18 @@ class ModifierDeck {
     _shuffle();
   }
 
+  void removeCard(_StateModifier _, String gfx) {
+    _shuffle();
+    _removeCardFromDrawPile(gfx);
+    _shuffle();
+  }
+
+  void addCard(_StateModifier _, String gfx) {
+    //todo: supposes all perks are additive cards
+    _drawPile.add(ModifierCard(CardType.add, gfx));
+    _shuffle();
+  }
+
   void removeMinusTwo(_StateModifier _) {
     String suffix = "";
     if (name == "allies") {
@@ -235,7 +247,6 @@ class ModifierDeck {
     _drawPile.add(ModifierCard(CardType.add, "imbue-plus0-poison"));
     _shuffle();
     _imbuement.value = 1;
-    _cardCount.value = _drawPile.size();
   }
 
   void setImbue2(_StateModifier m) {
@@ -257,7 +268,6 @@ class ModifierDeck {
     _drawPile.add(ModifierCard(CardType.add, "imbue-plus0-wound"));
     _shuffle();
     _imbuement.value = 2;
-    _cardCount.value = _drawPile.size();
   }
 
   void resetImbue(_StateModifier _) {
@@ -275,7 +285,6 @@ class ModifierDeck {
         _drawPile.add(ModifierCard(CardType.add, "plus0"));
       }
       _imbuement.value = 0;
-      _cardCount.value = _drawPile.size();
       _shuffle();
     }
   }
@@ -367,6 +376,8 @@ class ModifierDeck {
     _addedMinusOnes.value = 0;
     _imbuement.value = 0;
     _needsShuffle = false;
+
+    //todo: also init perks?
   }
 
   _removeCardFromDrawPile(String gfx) {

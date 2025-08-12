@@ -14,40 +14,14 @@ import '../../services/service_locator.dart';
 import '../loot_card.dart';
 import 'add_loot_card_menu.dart';
 
-class Item extends StatelessWidget {
-  final LootCard data;
-
-  const Item({super.key, required this.data});
+class LootCardsMenu extends StatefulWidget {
+  const LootCardsMenu({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double wantedItemMaxWidth = 200;
-    double maxScale = 3;
-    double scale = min(maxScale, screenWidth / wantedItemMaxWidth);
-
-    late final Widget child;
-
-    child = LootCardWidget.buildFront(data, scale);
-
-    return Container(
-        margin: EdgeInsets.all(2 * scale),
-        child: InkWell(
-            onTap: () {
-              openDialog(context, SetLootOwnerMenu(card: data));
-            },
-            child: child));
-  }
+  LootCardsMenuState createState() => LootCardsMenuState();
 }
 
-class LootCardMenu extends StatefulWidget {
-  const LootCardMenu({super.key});
-
-  @override
-  LootCardMenuState createState() => LootCardMenuState();
-}
-
-class LootCardMenuState extends State<LootCardMenu> {
+class LootCardsMenuState extends State<LootCardsMenu> {
   final GameState _gameState = getIt<GameState>();
 
   @override
@@ -225,5 +199,30 @@ class LootCardMenuState extends State<LootCardMenu> {
                             })),
                   ])));
         });
+  }
+}
+
+class Item extends StatelessWidget {
+  const Item({super.key, required this.data});
+  final LootCard data;
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double wantedItemMaxWidth = 200;
+    double maxScale = 3;
+    double scale = min(maxScale, screenWidth / wantedItemMaxWidth);
+
+    late final Widget child;
+
+    child = LootCardWidget.buildFront(data, scale);
+
+    return Container(
+        margin: EdgeInsets.all(2 * scale),
+        child: InkWell(
+            onTap: () {
+              openDialog(context, SetLootOwnerMenu(card: data));
+            },
+            child: child));
   }
 }
