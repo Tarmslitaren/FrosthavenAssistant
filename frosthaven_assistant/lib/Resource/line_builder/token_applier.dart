@@ -8,6 +8,7 @@ class TokenApplier {
     line = line.replaceAll('+0', '%+0%');
     line = line.replaceAll('-1', '%-1%');
     line = line.replaceAll('-2', '%-2%');
+    line = line.replaceAll('+1', '%+1%');
     line = line.replaceAll('+2', '%+2%');
     line = line.replaceAll('+3', '%+3%');
     line = line.replaceAll('+4', '%+4%');
