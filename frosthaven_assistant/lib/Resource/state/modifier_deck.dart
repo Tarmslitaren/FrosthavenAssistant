@@ -33,17 +33,12 @@ class ModifierDeck {
   ModifierDeck(this.name) {
     //build deck
     _initDeck(name);
-    _curses.removeListener(_curseListener);
-    _blesses.removeListener(_blessListener);
-    _enfeebles.removeListener(_enfeebleListener);
-
-    _curses.addListener(_curseListener);
-    _blesses.addListener(_blessListener);
-    _enfeebles.addListener(_enfeebleListener);
+    _initListeners();
   }
 
   ModifierDeck.fromJson(this.name, Map<String, dynamic> modifierDeckData) {
-    ModifierDeck(name);
+    _initDeck(name);
+    _initListeners();
 
     List<ModifierCard> newDrawList = [];
     List drawPile = modifierDeckData["drawPile"] as List;
@@ -334,6 +329,16 @@ class ModifierDeck {
         '"drawPile": ${_drawPile.toString()}, '
         '"discardPile": ${_discardPile.toString()} '
         '}';
+  }
+
+  void _initListeners() {
+    _curses.removeListener(_curseListener);
+    _blesses.removeListener(_blessListener);
+    _enfeebles.removeListener(_enfeebleListener);
+
+    _curses.addListener(_curseListener);
+    _blesses.addListener(_blessListener);
+    _enfeebles.addListener(_enfeebleListener);
   }
 
   void _curseListener() {
