@@ -214,26 +214,23 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 if (deck.badOmen.value > 0)
                                   Text("BadOmensLeft: ${deck.badOmen.value}",
                                       style: getTitleTextStyle(1)),
-                                if (!isCharacter)
-                                  TextButton(
-                                    onPressed: () {
-                                      _gameState.action(EnfeeblingHexCommand(
-                                          name == "allies"));
-                                    },
-                                    child: Text(
-                                        "Add -1 card (added : ${deck.addedMinusOnes.value})"),
-                                  ),
-                                if (!isCharacter)
-                                  TextButton(
-                                    onPressed: () {
-                                      if (deck.hasMinus1()) {
-                                        _gameState.action(
-                                            AMDRemoveMinus1Command(
-                                                name == "allies"));
-                                      }
-                                    },
-                                    child: const Text("Remove -1 card"),
-                                  ),
+                                TextButton(
+                                  onPressed: () {
+                                    _gameState
+                                        .action(EnfeeblingHexCommand(name));
+                                  },
+                                  child: Text(
+                                      "Add -1 card (added : ${deck.addedMinusOnes.value})"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    if (deck.hasMinus1()) {
+                                      _gameState
+                                          .action(AMDRemoveMinus1Command(name));
+                                    }
+                                  },
+                                  child: const Text("Remove -1 card"),
+                                ),
                                 if (!isCharacter)
                                   TextButton(
                                     onPressed: () {
