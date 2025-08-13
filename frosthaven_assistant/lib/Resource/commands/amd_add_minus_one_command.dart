@@ -1,9 +1,9 @@
 import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
-class EnfeeblingHexCommand extends Command {
+class AmdAddMinusOneCommand extends Command {
   String name;
-  EnfeeblingHexCommand(this.name);
+  AmdAddMinusOneCommand(this.name);
 
   @override
   void execute() {

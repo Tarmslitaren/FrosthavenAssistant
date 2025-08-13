@@ -6,6 +6,13 @@ import '../Resource/state/game_state.dart';
 import '../services/service_locator.dart';
 
 class CounterButton extends StatefulWidget {
+  const CounterButton(this.notifier, this.command, this.maxValue, this.image,
+      this.showTotalValue, this.color,
+      {super.key,
+      required this.figureId,
+      required this.ownerId,
+      required this.scale});
+
   final ValueListenable<int> notifier;
   final ChangeStatCommand command;
   final int maxValue;
@@ -15,13 +22,6 @@ class CounterButton extends StatefulWidget {
   final bool showTotalValue;
   final Color color;
   final double scale;
-
-  const CounterButton(this.notifier, this.command, this.maxValue, this.image,
-      this.showTotalValue, this.color,
-      {super.key,
-      required this.figureId,
-      required this.ownerId,
-      required this.scale});
 
   @override
   State<StatefulWidget> createState() {

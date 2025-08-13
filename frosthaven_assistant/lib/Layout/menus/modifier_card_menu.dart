@@ -5,12 +5,12 @@ import 'package:frosthaven_assistant/Layout/menus/perks_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
+import 'package:frosthaven_assistant/Resource/commands/amd_add_minus_one_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue1_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue2_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_remove_imbue_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_remove_minus_1_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/bad_omen_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/enfeebling_hex_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 import 'package:reorderables/reorderables.dart';
 
@@ -179,18 +179,18 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           }
 
           bool isCharacter = widget.name.isNotEmpty && widget.name != "allies";
+          final screenSize = MediaQuery.of(context).size;
+          final badOmen = deck.badOmen.value;
           return Container(
               constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width,
-                  maxHeight: MediaQuery.of(context).size.height * 0.9),
+                  maxWidth: screenSize.width,
+                  maxHeight: screenSize.height * 0.9),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
                       Container(
-                          width: MediaQuery.of(context)
-                              .size
-                              .width, //need some width to fill out
+                          width: screenSize.width, //need some width to fill out
                           margin: const EdgeInsets.all(2),
                           decoration: const BoxDecoration(
                               color: Colors.white,
@@ -203,7 +203,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                               spacing: 0,
                               children: [
                                 if (hasDiviner && !isCharacter)
-                                  if (deck.badOmen.value == 0)
+                                  if (badOmen == 0)
                                     TextButton(
                                       onPressed: () {
                                         _gameState.action(
@@ -211,13 +211,13 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                       },
                                       child: const Text("Bad Omen"),
                                     ),
-                                if (deck.badOmen.value > 0)
-                                  Text("BadOmensLeft: ${deck.badOmen.value}",
+                                if (badOmen > 0)
+                                  Text("BadOmensLeft: $badOmen",
                                       style: getTitleTextStyle(1)),
                                 TextButton(
                                   onPressed: () {
                                     _gameState
-                                        .action(EnfeeblingHexCommand(name));
+                                        .action(AmdAddMinusOneCommand(name));
                                   },
                                   child: Text(
                                       "Add -1 card (added : ${deck.addedMinusOnes.value})"),

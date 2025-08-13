@@ -19,6 +19,9 @@ class ChangeBlessCommand extends ChangeStatCommand {
                   !GameMethods.isOgGloomEdition())) {
             deck = getIt<GameState>().modifierDeckAllies;
           }
+          if (item is Character) {
+            deck = item.characterState.modifierDeck;
+          }
         }
       }
     }

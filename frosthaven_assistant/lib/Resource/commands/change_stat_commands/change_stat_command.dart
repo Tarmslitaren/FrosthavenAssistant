@@ -26,23 +26,18 @@ abstract class ChangeStatCommand extends Command {
               getIt<GameState>().killMonsterStandee.value++;
             });
 
+            final roundState = getIt<GameState>().roundState.value;
             if (item.monsterInstances.isEmpty) {
-              if (getIt<GameState>().roundState.value ==
-                  RoundState.chooseInitiative) {
+              if (roundState == RoundState.chooseInitiative) {
                 GameMethods.sortCharactersFirst(stateAccess);
-              } else if (getIt<GameState>().roundState.value ==
-                  RoundState.playTurns) {
-                //GameMethods.sortItemToPlace(item.id, 99); //TODO: don't? leave in place until end of round?
               }
-              if (getIt<GameState>().roundState.value == RoundState.playTurns) {
+              if (roundState == RoundState.playTurns) {
                 Future.delayed(const Duration(milliseconds: 600), () {
                   getIt<GameState>().updateList.value++;
                 });
               } else {
                 getIt<GameState>().updateList.value++;
               }
-            } else {
-              // getIt<GameState>().updateList.value++; //check if this was needed for something (will block standee death anim)
             }
             break;
           }
@@ -54,7 +49,8 @@ abstract class ChangeStatCommand extends Command {
         }
 
         //handle summon death
-        for (var instance in item.characterState.summonList) {
+        final summonList = item.characterState.summonList;
+        for (var instance in summonList) {
           if (instance.health.value == 0) {
             item.characterState
                 .getMutableSummonList(stateAccess)

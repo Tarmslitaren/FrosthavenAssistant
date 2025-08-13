@@ -139,7 +139,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
       return Container(child: child);
     }
     final userScalingBars = settings.userScalingBars.value;
-    //compose a translation, scale, rotation + somehow switch widget from back to front
+    //compose a translation, scale, rotation
     double width = 58.6666 * userScalingBars;
     double height = 39 * userScalingBars;
 
@@ -217,8 +217,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ModifierDeck deck = GameMethods.getModifierDeck(widget.name, _gameState);
-
     bool isAnimating =
         false; //is not doing anything now. in case flip animation is added
     return ValueListenableBuilder<double>(
@@ -249,6 +247,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                   String? currentCharacterName;
                   Character? currentCharacter =
                       GameMethods.getCurrentCharacter();
+                  ModifierDeck deck =
+                      GameMethods.getModifierDeck(widget.name, _gameState);
                   if (currentCharacter != null &&
                       currentCharacter.id == deck.name) {
                     currentCharacterColor = Colors.black;
