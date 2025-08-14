@@ -16,7 +16,31 @@ class ModifierCardWidget extends StatelessWidget {
   }
 
   static Widget buildFront(ModifierCard card, String name, double scale) {
-    bool isCharacter = name.isNotEmpty && name != "allies";
+    bool allies = name == "allies";
+    bool isCharacter = name.isNotEmpty && !allies;
+    bool imbue = card.gfx.contains("imbue");
+    bool imbue2 = card.gfx.contains("imbue2");
+    bool hasExtra = isCharacter || allies || imbue;
+    String gfx = card.gfx;
+    String extraGfx = "";
+    if (imbue) {
+      gfx = gfx.replaceAll("imbue-", "");
+      extraGfx = 'assets/images/attack/imbue.png';
+      if (imbue2) {
+        extraGfx = 'assets/images/attack/advancedImbue.png';
+        gfx = gfx.replaceAll("imbue2-", "");
+      }
+      if (gfx != "plus1") {
+        gfx = "perks/$gfx";
+      }
+    } else if (allies) {
+      gfx = gfx.replaceAll("-allies", "");
+      extraGfx = 'assets/images/attack/allies.png';
+    } else if (isCharacter) {
+      extraGfx = 'assets/images/class-icons/$name.png';
+    }
+    gfx = "assets/images/attack/$gfx.png";
+
     return Container(
         width: 58.6666 * scale,
         height: 39 * scale,
@@ -35,10 +59,10 @@ class ModifierCardWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(4.0 * scale),
               child: Image(
                 fit: BoxFit.fitHeight,
-                image: AssetImage("assets/images/attack/${card.gfx}.png"),
+                image: AssetImage(gfx),
               ),
             ),
-            if (isCharacter)
+            if (hasExtra)
               Positioned(
                 height: 9 * scale,
                 width: 9 * scale,
@@ -47,44 +71,69 @@ class ModifierCardWidget extends StatelessWidget {
                 child: Image.asset(
                     'assets/images/attack/class-marker-background.png'),
               ),
-            if (isCharacter)
+            if (hasExtra)
               Positioned(
                 height: 7 * scale,
                 width: 7 * scale,
-                top: 54 * scale / 2,
+                top: 55 * scale / 2,
                 left: 4 * scale,
-                child: Image.asset(
-                    color: Colors.white, 'assets/images/class-icons/$name.png'),
+                child: Image.asset(color: Colors.white, extraGfx),
               ),
           ],
         ));
   }
 
   static Widget buildRear(double scale, String name) {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
+    bool allies = name == "allies";
+    bool isCharacter = name.isNotEmpty && !allies;
+    bool hasExtra = isCharacter || allies;
+    String extraGfx = "";
+    if (allies) {
+      extraGfx = 'assets/images/attack/allies.png';
+    } else if (isCharacter) {
+      extraGfx = 'assets/images/class-icons/$name.png';
     }
+
     return Container(
-      width: 58.6666 * scale,
-      height: 39 * scale,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45,
-            blurRadius: 4 * scale,
-            offset: Offset(2 * scale, 4 * scale), // Shadow position
-          ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(4.0 * scale),
-        child: Image(
-          fit: BoxFit.fitHeight,
-          image: AssetImage("assets/images/attack/back$suffix.png"),
+        width: 58.6666 * scale,
+        height: 39 * scale,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black45,
+              blurRadius: 4 * scale,
+              offset: Offset(2 * scale, 4 * scale), // Shadow position
+            ),
+          ],
         ),
-      ),
-    );
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4.0 * scale),
+              child: Image(
+                fit: BoxFit.fitHeight,
+                image: AssetImage("assets/images/attack/back.png"),
+              ),
+            ),
+            if (hasExtra)
+              Positioned(
+                height: 27 * scale,
+                width: 27 * scale,
+                top: 5.5 * scale,
+                left: 15.7 * scale,
+                child: Image.asset(
+                    'assets/images/attack/class-marker-background.png'),
+              ),
+            if (hasExtra)
+              Positioned(
+                height: 20 * scale,
+                width: 20 * scale,
+                top: 9 * scale,
+                left: 19 * scale,
+                child: Image.asset(color: Colors.white, extraGfx),
+              ),
+          ],
+        ));
   }
 
   final ModifierCard card;

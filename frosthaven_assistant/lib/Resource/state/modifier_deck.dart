@@ -238,8 +238,8 @@ class ModifierDeck {
     _drawPile.add(ModifierCard(CardType.add, "imbue-plus1"));
     _drawPile.add(ModifierCard(CardType.add, "imbue-plus1"));
     _drawPile.add(ModifierCard(CardType.add, "imbue-plus1"));
-    _drawPile.add(ModifierCard(CardType.add, "imbue-plus2-muddle"));
-    _drawPile.add(ModifierCard(CardType.add, "imbue-plus0-poison"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus2muddle"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue-plus0poison"));
     _shuffle();
     _imbuement.value = 1;
   }
@@ -256,11 +256,11 @@ class ModifierDeck {
     _removeCardFromDrawPile("plus0");
     _removeCardFromDrawPile("plus0");
 
-    _drawPile.add(ModifierCard(CardType.add, "imbue-plus3"));
-    _drawPile.add(ModifierCard(CardType.add, "imbue-plus1-heal"));
-    _drawPile.add(ModifierCard(CardType.add, "imbue-plus1-heal"));
-    _drawPile.add(ModifierCard(CardType.add, "imbue-plus1-curse"));
-    _drawPile.add(ModifierCard(CardType.add, "imbue-plus0-wound"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue2-plus3"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue2-plus1heal1"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue2-plus1heal1"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue2-plus1curse"));
+    _drawPile.add(ModifierCard(CardType.add, "imbue2-plus0wound"));
     _shuffle();
     _imbuement.value = 2;
   }
@@ -271,6 +271,7 @@ class ModifierDeck {
     if (_imbuement.value != 0) {
       _shuffle();
       _drawPile.removeWhere((element) => element.gfx.startsWith("imbue"));
+
       _drawPile.add(ModifierCard(CardType.add, "minus1"));
       _drawPile.add(ModifierCard(CardType.add, "minus1"));
       _drawPile.add(ModifierCard(CardType.add, "minus1"));
@@ -459,10 +460,12 @@ class ModifierDeck {
 }
 
 enum CardType { add, multiply, curse, bless, enfeeble }
+//enum CardTypeExtra {none, imbue, allies, monster}
 
 class ModifierCard {
   final CardType type;
   final String gfx;
+  //final CardTypeExtra extra;
 
   ModifierCard(this.type, this.gfx);
 

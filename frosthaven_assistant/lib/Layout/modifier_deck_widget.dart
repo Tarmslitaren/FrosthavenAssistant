@@ -171,8 +171,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         key: key,
         //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
         child: _animationsEnabled
-            //in case this is in a list, how to make z-order on top?
-            //solution: do NOT create from charactr widget, but from scaffold, with ann offset from character widget position. (I know)
             ? TranslationAnimatedWidget(
                 animationFinished: (bool finished) {
                   if (finished) {
@@ -286,8 +284,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                         card: deck.drawPile.peek,
                                         name: deck.name,
                                         revealed: isAnimating),
-                                    if (currentCharacterName != null)
-                                      characterIconWidget,
                                     Positioned.fill(
                                         child: Material(
                                             color: Colors.transparent,
