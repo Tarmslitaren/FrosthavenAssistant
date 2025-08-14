@@ -443,7 +443,14 @@ class StatusMenuState extends State<StatusMenu> {
                       }
                     }
 
-                    bool showCharacterAmd = true;
+                    final bool showCharacterAmd =
+                        getIt<Settings>().showCharacterAMD.value &&
+                                isCharacter ||
+                            isSummon;
+                    final bool showMonsterAmd =
+                        getIt<Settings>().showAmdDeck.value &&
+                            (isObjective || (isMonster && !isSummon));
+                    final bool showAmd = showCharacterAmd || showMonsterAmd;
 
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -476,7 +483,7 @@ class StatusMenuState extends State<StatusMenu> {
                         SizedBox(
                             //todo? why this?
                             height: !showCharacterAmd || isSummon ? 2 : 0),
-                        if (showCharacterAmd)
+                        if (showAmd)
                           CounterButton(
                               deck.blesses,
                               ChangeBlessCommand(0, figureId, ownerId),
@@ -488,7 +495,7 @@ class StatusMenuState extends State<StatusMenu> {
                               ownerId: ownerId,
                               scale: scale),
                         SizedBox(height: showCharacterAmd ? 2 : 0),
-                        if (canBeCursed || showCharacterAmd)
+                        if ((canBeCursed && showMonsterAmd) || showCharacterAmd)
                           CounterButton(
                               deck.curses,
                               ChangeCurseCommand(0, figureId, ownerId),
@@ -499,7 +506,7 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId: figureId,
                               ownerId: ownerId,
                               scale: scale),
-                        if (isMonster && hasIncarnate)
+                        if (showMonsterAmd && hasIncarnate)
                           CounterButton(
                               deck.enfeebles,
                               ChangeEnfeebleCommand(0, figureId, ownerId),

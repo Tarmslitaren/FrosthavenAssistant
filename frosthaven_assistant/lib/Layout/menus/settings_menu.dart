@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/Resource/commands/track_standees_command.da
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 
+import '../../Resource/enums.dart';
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
@@ -272,6 +273,17 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       settings.showAmdDeck.value = value!;
+                                      settings.saveToDisk();
+                                      getIt<GameState>().updateAllUI();
+                                    });
+                                  }),
+                              CheckboxListTile(
+                                  title: const Text(
+                                      "Show character Attack Modifier Decks"),
+                                  value: settings.showCharacterAMD.value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      settings.showCharacterAMD.value = value!;
                                       settings.saveToDisk();
                                       getIt<GameState>().updateAllUI();
                                     });

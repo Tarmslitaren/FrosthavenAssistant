@@ -1,6 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
+enum Style { frosthaven, gloomhaven, original }
+
 enum Condition {
   stun,
   immobilize,

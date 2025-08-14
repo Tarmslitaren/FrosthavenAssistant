@@ -13,8 +13,7 @@ import '../services/network/client.dart';
 import '../services/network/network.dart';
 import '../services/service_locator.dart';
 import 'commands/load_save_command.dart';
-
-enum Style { frosthaven, gloomhaven, original }
+import 'enums.dart';
 
 class Settings {
   final userScalingMainList = ValueNotifier<double>(1.0);
@@ -30,9 +29,7 @@ class Settings {
   final expireConditions = ValueNotifier<bool>(false);
   final hideLootDeck = ValueNotifier<bool>(false);
   final shimmer = ValueNotifier<bool>(
-      (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
-          ? true
-          : false);
+      (Platform.isWindows || Platform.isLinux || Platform.isMacOS));
   final showScenarioNames = ValueNotifier<bool>(true);
   final showCustomContent = ValueNotifier<bool>(true);
   final showSectionsInMainView = ValueNotifier<bool>(true);
@@ -42,6 +39,7 @@ class Settings {
   final showAmdDeck = ValueNotifier<bool>(true);
   final showBattleGoalReminder = ValueNotifier<bool>(true);
   final fhHazTerrainCalcInOGGloom = ValueNotifier<bool>(true);
+  final showCharacterAMD = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -280,6 +278,10 @@ class Settings {
         fhHazTerrainCalcInOGGloom.value = data["fhHazTerrainCalcInOGGloom"];
       }
 
+      if (data["showCharacterAMD"] != null) {
+        showCharacterAMD.value = data["showCharacterAMD"];
+      }
+
       if (data["saves"] != null) {
         Map<String, dynamic> map = data["saves"];
         for (var key in map.keys) {
@@ -322,6 +324,7 @@ class Settings {
         '"showAmdDeck": ${showAmdDeck.value}, '
         '"showBattleGoalReminder": ${showBattleGoalReminder.value}, '
         '"fhHazTerrainCalcInOGGloom": ${fhHazTerrainCalcInOGGloom.value}, '
+        '"showCharacterAMD": ${showCharacterAMD.value}, '
         '"saves": ${jsonEncode(saves.value)}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '

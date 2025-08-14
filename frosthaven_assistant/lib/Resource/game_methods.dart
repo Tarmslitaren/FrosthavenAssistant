@@ -517,23 +517,36 @@ class GameMethods {
         if (item is Character) {
           if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
             item.characterState._initiative.value = 0;
-            item.characterState._health.value = item.characterClass
-                .healthByLevel[item.characterState.level.value - 1];
+            final level = item.characterState.level.value;
+            item.characterState._health.value =
+                item.characterClass.healthByLevel[level - 1];
             item.characterState._maxHealth.value =
                 item.characterState.health.value;
             item.characterState._xp.value = 0;
             item.characterState.conditions.value.clear();
             item.characterState._chill.value = 0;
-            item.characterState._summonList.clear();
+            item.characterState.modifierDeck._initDeck(item.id);
+            //reapply perk
+            final perksSetList = item.characterState.perkList;
+            final perks = item.characterClass.perks;
+            for (int i = 0; i < item.characterClass.perks.length; i++) {
+              if (perksSetList[i]) {
+                GameMethods.addPerk(
+                    s, item.characterState.modifierDeck, perks[i]);
+              }
+            }
+
+            final summonList = item.characterState._summonList;
+            summonList.clear();
 
             if (item.id == "Beast Tyrant" || item.id == "Wildfury") {
               //create the bear summon
-              final int bearHp = 8 + item.characterState.level.value * 2;
+              final int bearHp = 8 + level * 2;
               final String gfx =
                   item.id == "Beast Tyrant" ? "beast" : "Beast v2";
               MonsterInstance bear = MonsterInstance.summon(
                   0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, gfx, -1);
-              item.characterState._summonList.add(bear);
+              summonList.add(bear);
             }
 
             newList.add(item);
@@ -589,9 +602,9 @@ class GameMethods {
         monsters = sectionData.monsters;
         specialRules = sectionData.specialRules.toList();
         initMessage = sectionData.initMessage;
-        roomMonsterData = sectionData.monsterStandees != null
-            ? sectionData.monsterStandees!.toList()
-            : [];
+        final monsterStandees = sectionData.monsterStandees;
+        roomMonsterData =
+            monsterStandees != null ? monsterStandees.toList() : [];
       }
     } else {
       if (getIt<Settings>().showBattleGoalReminder.value &&
@@ -609,9 +622,9 @@ class GameMethods {
           } else {
             initMessage += scenarioData.initMessage;
           }
-          roomMonsterData = scenarioData.monsterStandees != null
-              ? scenarioData.monsterStandees!.toList()
-              : [];
+          final monsterStandees = scenarioData.monsterStandees;
+          roomMonsterData =
+              monsterStandees != null ? monsterStandees.toList() : [];
           for (var item in scenarioData.sections) {
             subSections.add(item.name);
           }
@@ -632,8 +645,9 @@ class GameMethods {
     if (scenario.contains("Banner Spear: Scouting Ambush")) {
       MonsterAbilityState deck = _gameState.currentAbilityDecks
           .firstWhere((element) => element.name.contains("Scout"));
-      for (int i = 0; i < deck.drawPile.getList().length; i++) {
-        if (deck.drawPile.getList()[i].title == "Rancid Arrow") {
+      final drawPileList = deck.drawPile.getList();
+      for (int i = 0; i < drawPileList.length; i++) {
+        if (drawPileList[i].title == "Rancid Arrow") {
           deck.drawPile.add(deck.drawPile.removeAt(i));
           break;
         }

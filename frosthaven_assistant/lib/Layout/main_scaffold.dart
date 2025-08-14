@@ -178,7 +178,10 @@ class MainScaffoldBody extends StatelessWidget {
                                           child: const SectionList(),
                                         ),
                                       Column(children: [
-                                        if (currentCharacter != null)
+                                        if (currentCharacter != null &&
+                                            getIt<Settings>()
+                                                .showCharacterAMD
+                                                .value)
                                           ModifierDeckWidget(
                                               name: currentCharacter.id),
                                         if (GameMethods.shouldShowAlliesDeck())

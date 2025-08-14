@@ -382,8 +382,6 @@ class ModifierDeck {
     _addedMinusOnes.value = 0;
     _imbuement.value = 0;
     _needsShuffle = false;
-
-    //todo: also init perks?
   }
 
   _removeCardFromDrawPile(String gfx) {

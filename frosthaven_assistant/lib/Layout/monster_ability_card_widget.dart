@@ -15,15 +15,9 @@ import '../Resource/ui_utils.dart';
 import 'menus/ability_card_zoom.dart';
 
 class MonsterAbilityCardWidget extends StatefulWidget {
-  final Monster data;
-
   const MonsterAbilityCardWidget({super.key, required this.data});
 
-  @override
-  MonsterAbilityCardWidgetState createState() =>
-      MonsterAbilityCardWidgetState();
-
-  static List<Widget> buildGraphicPositionals(
+  static List<Widget> _buildGraphicPositionals(
       double scale, List<GraphicPositional> positionals) {
     List<Widget> list = [];
     double cardWidth = 142.4 * scale;
@@ -72,7 +66,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     );
 
     List<Widget> positionals =
-        buildGraphicPositionals(scale, card.graphicPositional);
+        _buildGraphicPositionals(scale, card.graphicPositional);
 
     return Container(
         decoration: BoxDecoration(
@@ -237,6 +231,12 @@ class MonsterAbilityCardWidget extends StatefulWidget {
           ],
         ));
   }
+
+  final Monster data;
+
+  @override
+  MonsterAbilityCardWidgetState createState() =>
+      MonsterAbilityCardWidgetState();
 }
 
 class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
@@ -280,26 +280,20 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
             .commandIndex, //todo: make more granular: this is here roundState && killMonsterStandee, but also scaling maybe? (or this is rebuilt on any action)
         builder: (context, value, child) {
           MonsterAbilityCardModel? card;
-          if (_gameState.roundState.value == RoundState.playTurns &&
-              (widget.data.monsterInstances.isNotEmpty ||
-                  widget.data.isActive)) {
-            CardStack stack =
-                GameMethods.getDeck(widget.data.type.deck)!.discardPile;
-            if (stack.isNotEmpty) {
+          final roundState = _gameState.roundState.value;
+          final data = widget.data;
+          if (roundState == RoundState.playTurns &&
+              (data.monsterInstances.isNotEmpty || data.isActive)) {
+            CardStack? stack = GameMethods.getDeck(data.type.deck)?.discardPile;
+            if (stack != null && stack.isNotEmpty) {
               card = stack.peek;
             }
           }
 
-          //get size for back todo: move to game methods
-          late MonsterAbilityState deckk;
-          _deckSize = 8;
-          for (var deck in _gameState.currentAbilityDecks) {
-            if (deck.name == widget.data.type.deck) {
-              _deckSize = deck.drawPile.size();
-              deckk = deck;
-              break;
-            }
-          }
+          //get size for back
+          MonsterAbilityState deck =
+              GameMethods.getDeck(widget.data.type.deck)!;
+          _deckSize = deck.drawPile.size();
 
           return InkWell(
               onTap: () {
@@ -307,7 +301,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 openDialog(
                     context,
                     AbilityCardsMenu(
-                      monsterAbilityState: deckk,
+                      monsterAbilityState: deck,
                       monsterData: widget.data,
                     ));
 
@@ -335,7 +329,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 layoutBuilder: (widget, list) => Stack(
                   children: [widget!, ...list],
                 ),
-                child: _gameState.roundState.value == RoundState.playTurns &&
+                child: roundState == RoundState.playTurns &&
                         (widget.data.monsterInstances.isNotEmpty ||
                             widget.data.isActive) &&
                         card != null
