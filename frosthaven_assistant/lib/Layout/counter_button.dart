@@ -108,12 +108,13 @@ class CounterButtonState extends State<CounterButton> {
           child: IconButton(
             icon: Image.asset('assets/images/psd/add.png'),
             onPressed: () {
+              final value = widget.notifier.value;
               widget.command.setChange(1);
-              if (widget.notifier.value < widget.maxValue) {
+              if (value < widget.maxValue) {
                 totalChangeValue.value++;
                 gameState.action(widget.command);
                 if (widget.figureId != "unknown" &&
-                    widget.notifier.value <= 0 &&
+                    value <= 0 &&
                     widget.notifier == figure!.health) {
                   Navigator.pop(context);
                 }

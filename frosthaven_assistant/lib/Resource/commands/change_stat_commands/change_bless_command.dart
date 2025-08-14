@@ -9,15 +9,16 @@ class ChangeBlessCommand extends ChangeStatCommand {
 
   @override
   void execute() {
+    final gameState = getIt<GameState>();
     if (deck == null) {
-      deck = getIt<GameState>().modifierDeck;
-      for (var item in getIt<GameState>().currentList) {
+      deck = gameState.modifierDeck;
+      for (var item in gameState.currentList) {
         if (item.id == ownerId) {
           if (item is Monster &&
               item.isAlly &&
-              (getIt<GameState>().allyDeckInOGGloom.value ||
+              (gameState.allyDeckInOGGloom.value ||
                   !GameMethods.isOgGloomEdition())) {
-            deck = getIt<GameState>().modifierDeckAllies;
+            deck = gameState.modifierDeckAllies;
           }
           if (item is Character) {
             deck = item.characterState.modifierDeck;

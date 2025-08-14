@@ -309,168 +309,175 @@ class StatusMenuState extends State<StatusMenu> {
 
     ListItemData owner =
         _gameState.currentList.firstWhereOrNull((item) => item.id == ownerId)!;
-
-    return Container(
-        width: 340 * scale,
-        height: 220 * scale +
-            30 * scale +
-            ((hasIncarnate && widget.monsterId != null && !isSummon)
-                ? 40 * scale
-                : 0),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
-            fit: BoxFit.cover,
+    final bool isMonster = widget.monsterId != null;
+    final bool isCharacter = widget.characterId != null;
+    return Wrap(children: [
+      Container(
+          width: 340 * scale,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.8), BlendMode.dstATop),
+              image: AssetImage(getIt<Settings>().darkMode.value
+                  ? 'assets/images/bg/dark_bg.png'
+                  : 'assets/images/bg/white_bg.png'),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SizedBox(
-              height: 28 * scale,
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(name, style: getTitleTextStyle(scale)),
-                    if (figure is MonsterInstance)
-                      ValueListenableBuilder<int>(
-                          valueListenable: getIt<GameState>().updateList,
-                          builder: (context, value, child) {
-                            //handle case when health is changed to zero: don't instantiate monster box
-                            if (GameMethods.getFigure(ownerId, figureId) ==
-                                null) {
-                              //todo: should somehow pop context in case dead by health wheel
-                              return Container();
-                            }
-
-                            return Row(children: [
-                              if (hasShield)
-                                Container(
-                                    height: 28 * scale,
-                                    margin: EdgeInsets.only(
-                                        top: 2 * scale, right: 2 * scale),
-                                    child: ConditionIcon(
-                                      Condition.shield,
-                                      24 * scale,
-                                      owner,
-                                      figure,
-                                      scale: scale,
-                                    )),
-                              if (hasRetaliate)
-                                Container(
-                                    height: 28 * scale,
-                                    margin: EdgeInsets.only(
-                                        top: 2 * scale, right: 2 * scale),
-                                    child: ConditionIcon(
-                                      Condition.retaliate,
-                                      24 * scale,
-                                      owner,
-                                      figure,
-                                      scale: scale,
-                                    )),
-                              Container(
-                                  height: 28 * scale,
-                                  margin: EdgeInsets.only(top: 2 * scale),
-                                  child: MonsterBox(
-                                      figureId: figureId,
-                                      ownerId: ownerId,
-                                      displayStartAnimation: "",
-                                      blockInput: true,
-                                      scale: scale * 0.9))
-                            ]);
-                          }),
-                    if (isIceWraith)
-                      TextButton(
-                          clipBehavior: Clip.hardEdge,
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.only(right: 20 * scale),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              _gameState.action(IceWraithChangeFormCommand(
-                                  isElite, ownerId, figureId));
-                            });
-                          },
-                          child: Text("                     Switch Form",
-                              style: TextStyle(
-                                fontSize: 14 * scale,
-                                color: Colors.blue,
-                              )))
-                  ])),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            ValueListenableBuilder<int>(
-                valueListenable: _gameState.commandIndex,
-                builder: (context, value, child) {
-                  ModifierDeck deck = _gameState.modifierDeck;
-                  if (widget.monsterId != null) {
-                    for (var item in _gameState.currentList) {
-                      if (item.id == widget.monsterId) {
-                        if (item is Monster &&
-                            item.isAlly &&
-                            (getIt<GameState>().allyDeckInOGGloom.value ||
-                                !GameMethods.isOgGloomEdition())) {
-                          deck = _gameState.modifierDeckAllies;
-                        }
-                      }
-                    }
-                  }
-                  bool hasXp = false;
-                  bool isObjective = false;
-                  if (widget.characterId != null && !isSummon) {
-                    hasXp = true;
-                    for (var item in _gameState.currentList) {
-                      if (item.id == widget.characterId) {
-                        if (GameMethods.isObjectiveOrEscort(
-                            (item as Character).characterClass)) {
-                          hasXp = false;
-                          isObjective = true;
-                        }
-                      }
-                    }
-                  }
-
-                  bool canBeCursed = true;
-                  for (var item in immunities) {
-                    if (item.substring(1, item.length - 1) == "curse") {
-                      canBeCursed = false;
-                    }
-                  }
-
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            SizedBox(
+                height: 28 * scale,
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      CounterButton(
-                          figure.health,
-                          ChangeHealthCommand(0, figureId, ownerId),
-                          figure.maxHealth.value,
-                          "assets/images/abilities/heal.png",
-                          false,
-                          Colors.red,
-                          figureId: figureId,
-                          ownerId: ownerId,
-                          scale: scale),
-                      const SizedBox(height: 2),
-                      hasXp
-                          ? CounterButton(
-                              (figure as CharacterState).xp,
-                              ChangeXPCommand(0, figureId, ownerId),
-                              900,
-                              "assets/images/psd/xp.png",
-                              false,
-                              Colors.blue,
-                              figureId: figureId,
-                              ownerId: ownerId,
-                              scale: scale)
-                          : Container(),
-                      SizedBox(height: hasXp ? 2 : 0),
-                      SizedBox(
-                          height:
-                              widget.characterId != null || isSummon ? 2 : 0),
-                      widget.monsterId != null
-                          ? CounterButton(
+                      Text(name, style: getTitleTextStyle(scale)),
+                      if (figure is MonsterInstance)
+                        ValueListenableBuilder<int>(
+                            valueListenable: getIt<GameState>().updateList,
+                            builder: (context, value, child) {
+                              //handle case when health is changed to zero: don't instantiate monster box
+                              if (GameMethods.getFigure(ownerId, figureId) ==
+                                  null) {
+                                //todo: should somehow pop context in case dead by health wheel
+                                return Container();
+                              }
+
+                              return Row(children: [
+                                if (hasShield)
+                                  Container(
+                                      height: 28 * scale,
+                                      margin: EdgeInsets.only(
+                                          top: 2 * scale, right: 2 * scale),
+                                      child: ConditionIcon(
+                                        Condition.shield,
+                                        24 * scale,
+                                        owner,
+                                        figure,
+                                        scale: scale,
+                                      )),
+                                if (hasRetaliate)
+                                  Container(
+                                      height: 28 * scale,
+                                      margin: EdgeInsets.only(
+                                          top: 2 * scale, right: 2 * scale),
+                                      child: ConditionIcon(
+                                        Condition.retaliate,
+                                        24 * scale,
+                                        owner,
+                                        figure,
+                                        scale: scale,
+                                      )),
+                                Container(
+                                    height: 28 * scale,
+                                    margin: EdgeInsets.only(top: 2 * scale),
+                                    child: MonsterBox(
+                                        figureId: figureId,
+                                        ownerId: ownerId,
+                                        displayStartAnimation: "",
+                                        blockInput: true,
+                                        scale: scale * 0.9))
+                              ]);
+                            }),
+                      if (isIceWraith)
+                        TextButton(
+                            clipBehavior: Clip.hardEdge,
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.only(right: 20 * scale),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _gameState.action(IceWraithChangeFormCommand(
+                                    isElite, ownerId, figureId));
+                              });
+                            },
+                            child: Text("                     Switch Form",
+                                style: TextStyle(
+                                  fontSize: 14 * scale,
+                                  color: Colors.blue,
+                                )))
+                    ])),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              ValueListenableBuilder<int>(
+                  valueListenable: _gameState.commandIndex,
+                  builder: (context, value, child) {
+                    ModifierDeck deck = _gameState.modifierDeck;
+                    if (isMonster) {
+                      for (var item in _gameState.currentList) {
+                        if (item.id == widget.monsterId) {
+                          if (item is Monster &&
+                              item.isAlly &&
+                              (getIt<GameState>().allyDeckInOGGloom.value ||
+                                  !GameMethods.isOgGloomEdition())) {
+                            deck = _gameState.modifierDeckAllies;
+                          }
+                        }
+                      }
+                    }
+                    bool hasXp = false;
+                    bool isObjective = false;
+                    if (isCharacter && !isSummon) {
+                      hasXp = true;
+                      for (var item in _gameState.currentList) {
+                        if (item.id == widget.characterId) {
+                          if (GameMethods.isObjectiveOrEscort(
+                              (item as Character).characterClass)) {
+                            hasXp = false;
+                            isObjective = true;
+                          } else {
+                            deck = GameMethods.getModifierDeck(
+                                widget.characterId!, _gameState);
+                          }
+                        }
+                      }
+                    }
+
+                    if (isSummon) {
+                      deck = GameMethods.getModifierDeck(
+                          widget.characterId!, _gameState);
+                    }
+
+                    bool canBeCursed = true;
+                    for (var item in immunities) {
+                      if (item.substring(1, item.length - 1) == "curse") {
+                        canBeCursed = false;
+                      }
+                    }
+
+                    bool showCharacterAmd = true;
+
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CounterButton(
+                            figure.health,
+                            ChangeHealthCommand(0, figureId, ownerId),
+                            figure.maxHealth.value,
+                            "assets/images/abilities/heal.png",
+                            false,
+                            Colors.red,
+                            figureId: figureId,
+                            ownerId: ownerId,
+                            scale: scale),
+                        const SizedBox(height: 2),
+                        hasXp
+                            ? CounterButton(
+                                (figure as CharacterState).xp,
+                                ChangeXPCommand(0, figureId, ownerId),
+                                900,
+                                "assets/images/psd/xp.png",
+                                false,
+                                Colors.blue,
+                                figureId: figureId,
+                                ownerId: ownerId,
+                                scale: scale)
+                            : Container(),
+                        SizedBox(height: hasXp ? 2 : 0),
+                        SizedBox(
+                            //todo? why this?
+                            height: !showCharacterAmd || isSummon ? 2 : 0),
+                        if (showCharacterAmd)
+                          CounterButton(
                               deck.blesses,
                               ChangeBlessCommand(0, figureId, ownerId),
                               10,
@@ -479,11 +486,10 @@ class StatusMenuState extends State<StatusMenu> {
                               Colors.white,
                               figureId: figureId,
                               ownerId: ownerId,
-                              scale: scale)
-                          : Container(),
-                      SizedBox(height: widget.monsterId != null ? 2 : 0),
-                      widget.monsterId != null && canBeCursed
-                          ? CounterButton(
+                              scale: scale),
+                        SizedBox(height: showCharacterAmd ? 2 : 0),
+                        if (canBeCursed || showCharacterAmd)
+                          CounterButton(
                               deck.curses,
                               ChangeCurseCommand(0, figureId, ownerId),
                               10,
@@ -492,10 +498,9 @@ class StatusMenuState extends State<StatusMenu> {
                               Colors.white,
                               figureId: figureId,
                               ownerId: ownerId,
-                              scale: scale)
-                          : Container(),
-                      widget.monsterId != null && hasIncarnate
-                          ? CounterButton(
+                              scale: scale),
+                        if (isMonster && hasIncarnate)
+                          CounterButton(
                               deck.enfeebles,
                               ChangeEnfeebleCommand(0, figureId, ownerId),
                               10,
@@ -504,302 +509,301 @@ class StatusMenuState extends State<StatusMenu> {
                               Colors.white,
                               figureId: figureId,
                               ownerId: ownerId,
-                              scale: scale)
-                          : Container(),
-                      if (showCustomContent)
-                        buildChillButtons(
-                            figure.chill,
-                            12,
-                            //technically you can have infinite, but realistically not so much
-                            "assets/images/abilities/chill.png",
-                            figureId,
-                            ownerId,
-                            scale),
-                      SizedBox(
-                          height:
-                              widget.monsterId != null && canBeCursed ? 2 : 0),
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 42 * scale,
-                            height: 42 * scale,
-                            child: IconButton(
-                              icon: Image.asset('assets/images/psd/skull.png'),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                _gameState.action(ChangeHealthCommand(
-                                    -figure.health.value, figureId, ownerId));
-                              },
-                            ),
-                          ),
-                          SizedBox(
+                              scale: scale),
+                        if (showCustomContent)
+                          buildChillButtons(
+                              figure.chill,
+                              12,
+                              //technically you can have infinite, but realistically not so much
+                              "assets/images/abilities/chill.png",
+                              figureId,
+                              ownerId,
+                              scale),
+                        SizedBox(height: canBeCursed ? 2 : 0),
+                        Row(
+                          children: [
+                            SizedBox(
                               width: 42 * scale,
                               height: 42 * scale,
                               child: IconButton(
-                                icon: Image.asset(
-                                    colorBlendMode: BlendMode.multiply,
-                                    'assets/images/psd/level.png'),
+                                icon:
+                                    Image.asset('assets/images/psd/skull.png'),
                                 onPressed: () {
-                                  if (figure is CharacterState) {
-                                    openDialog(
-                                      context,
-                                      SetCharacterLevelMenu(
-                                          character: character!),
-                                    );
-                                  } else {
-                                    openDialog(
-                                      context,
-                                      SetLevelMenu(
-                                          monster: monster,
-                                          figure: figure,
-                                          characterId: widget.characterId),
-                                    );
-                                  }
+                                  Navigator.pop(context);
+                                  _gameState.action(ChangeHealthCommand(
+                                      -figure.health.value, figureId, ownerId));
                                 },
-                              )),
-                          if (!isObjective)
-                            Text(figure.level.value.toString(),
-                                style: TextStyle(
-                                    fontSize: 14 * scale,
-                                    color: Colors.white,
-                                    shadows: [
-                                      Shadow(
-                                        offset: Offset(1 * scale, 1 * scale),
-                                        color: Colors.black87,
-                                        blurRadius: 1 * scale,
-                                      )
-                                    ])),
-                        ],
-                      )
+                              ),
+                            ),
+                            SizedBox(
+                                width: 42 * scale,
+                                height: 42 * scale,
+                                child: IconButton(
+                                  icon: Image.asset(
+                                      colorBlendMode: BlendMode.multiply,
+                                      'assets/images/psd/level.png'),
+                                  onPressed: () {
+                                    if (figure is CharacterState) {
+                                      openDialog(
+                                        context,
+                                        SetCharacterLevelMenu(
+                                            character: character!),
+                                      );
+                                    } else {
+                                      openDialog(
+                                        context,
+                                        SetLevelMenu(
+                                            monster: monster,
+                                            figure: figure,
+                                            characterId: widget.characterId),
+                                      );
+                                    }
+                                  },
+                                )),
+                            if (!isObjective)
+                              Text(figure.level.value.toString(),
+                                  style: TextStyle(
+                                      fontSize: 14 * scale,
+                                      color: Colors.white,
+                                      shadows: [
+                                        Shadow(
+                                          offset: Offset(1 * scale, 1 * scale),
+                                          color: Colors.black87,
+                                          blurRadius: 1 * scale,
+                                        )
+                                      ])),
+                          ],
+                        )
+                      ],
+                    );
+                  }),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 2 * scale,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ConditionButton(
+                          condition: Condition.stun,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                      ConditionButton(
+                          condition: Condition.immobilize,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                      ConditionButton(
+                          condition: Condition.disarm,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                      ConditionButton(
+                          condition: Condition.wound,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
                     ],
-                  );
-                }),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 2 * scale,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ConditionButton(
-                        condition: Condition.stun,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    ConditionButton(
-                        condition: Condition.immobilize,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    ConditionButton(
-                        condition: Condition.disarm,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    ConditionButton(
-                        condition: Condition.wound,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ConditionButton(
-                        condition: Condition.muddle,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    ConditionButton(
-                        condition: Condition.poison,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    ConditionButton(
-                        condition: Condition.bane,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    ConditionButton(
-                        condition: Condition.brittle,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    ConditionButton(
-                        condition: Condition.safeguard,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                  ],
-                ),
-                widget.characterId != null || isSummon
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          if (showCustomContent)
-                            ConditionButton(
-                                condition: Condition.infect,
-                                figureId: figureId,
-                                ownerId: ownerId,
-                                immunities: immunities,
-                                scale: scale),
-                          if (!isSummon)
-                            ConditionButton(
-                                condition: Condition.impair,
-                                figureId: figureId,
-                                ownerId: ownerId,
-                                immunities: immunities,
-                                scale: scale),
-                          if (showCustomContent)
-                            ConditionButton(
-                                condition: Condition.rupture,
-                                figureId: figureId,
-                                ownerId: ownerId,
-                                immunities: immunities,
-                                scale: scale),
-                        ],
-                      )
-                    : !hasMireFoot
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              if (showCustomContent)
-                                ConditionButton(
-                                    condition: Condition.poison2,
-                                    figureId: figureId,
-                                    ownerId: ownerId,
-                                    immunities: immunities,
-                                    scale: scale),
-                              if (showCustomContent)
-                                ConditionButton(
-                                    condition: Condition.rupture,
-                                    figureId: figureId,
-                                    ownerId: ownerId,
-                                    immunities: immunities,
-                                    scale: scale),
-                            ],
-                          )
-                        : Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ConditionButton(
+                          condition: Condition.muddle,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                      ConditionButton(
+                          condition: Condition.poison,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                      ConditionButton(
+                          condition: Condition.bane,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                      ConditionButton(
+                          condition: Condition.brittle,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                      ConditionButton(
+                          condition: Condition.safeguard,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                    ],
+                  ),
+                  isCharacter || isSummon
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            if (showCustomContent)
                               ConditionButton(
-                                  condition: Condition.wound2,
+                                  condition: Condition.infect,
                                   figureId: figureId,
                                   ownerId: ownerId,
                                   immunities: immunities,
                                   scale: scale),
+                            if (!isSummon)
                               ConditionButton(
-                                  condition: Condition.poison2,
+                                  condition: Condition.impair,
                                   figureId: figureId,
                                   ownerId: ownerId,
                                   immunities: immunities,
                                   scale: scale),
-                              ConditionButton(
-                                  condition: Condition.poison3,
-                                  figureId: figureId,
-                                  ownerId: ownerId,
-                                  immunities: immunities,
-                                  scale: scale),
-                              ConditionButton(
-                                  condition: Condition.poison4,
-                                  figureId: figureId,
-                                  ownerId: ownerId,
-                                  immunities: immunities,
-                                  scale: scale),
+                            if (showCustomContent)
                               ConditionButton(
                                   condition: Condition.rupture,
                                   figureId: figureId,
                                   ownerId: ownerId,
                                   immunities: immunities,
                                   scale: scale),
-                            ],
-                          ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ConditionButton(
-                        condition: Condition.strengthen,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    ConditionButton(
-                        condition: Condition.invisible,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    ConditionButton(
-                        condition: Condition.regenerate,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    ConditionButton(
-                        condition: Condition.ward,
-                        figureId: figureId,
-                        ownerId: ownerId,
-                        immunities: immunities,
-                        scale: scale),
-                    if (showCustomContent)
+                          ],
+                        )
+                      : !hasMireFoot
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                if (showCustomContent)
+                                  ConditionButton(
+                                      condition: Condition.poison2,
+                                      figureId: figureId,
+                                      ownerId: ownerId,
+                                      immunities: immunities,
+                                      scale: scale),
+                                if (showCustomContent)
+                                  ConditionButton(
+                                      condition: Condition.rupture,
+                                      figureId: figureId,
+                                      ownerId: ownerId,
+                                      immunities: immunities,
+                                      scale: scale),
+                              ],
+                            )
+                          : Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ConditionButton(
+                                    condition: Condition.wound2,
+                                    figureId: figureId,
+                                    ownerId: ownerId,
+                                    immunities: immunities,
+                                    scale: scale),
+                                ConditionButton(
+                                    condition: Condition.poison2,
+                                    figureId: figureId,
+                                    ownerId: ownerId,
+                                    immunities: immunities,
+                                    scale: scale),
+                                ConditionButton(
+                                    condition: Condition.poison3,
+                                    figureId: figureId,
+                                    ownerId: ownerId,
+                                    immunities: immunities,
+                                    scale: scale),
+                                ConditionButton(
+                                    condition: Condition.poison4,
+                                    figureId: figureId,
+                                    ownerId: ownerId,
+                                    immunities: immunities,
+                                    scale: scale),
+                                ConditionButton(
+                                    condition: Condition.rupture,
+                                    figureId: figureId,
+                                    ownerId: ownerId,
+                                    immunities: immunities,
+                                    scale: scale),
+                              ],
+                            ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       ConditionButton(
-                          condition: Condition.dodge,
+                          condition: Condition.strengthen,
                           figureId: figureId,
                           ownerId: ownerId,
                           immunities: immunities,
                           scale: scale),
-                  ],
-                ),
-                if (monster != null)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (nrOfCharacters > 0)
+                      ConditionButton(
+                          condition: Condition.invisible,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                      ConditionButton(
+                          condition: Condition.regenerate,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                      ConditionButton(
+                          condition: Condition.ward,
+                          figureId: figureId,
+                          ownerId: ownerId,
+                          immunities: immunities,
+                          scale: scale),
+                      if (showCustomContent)
                         ConditionButton(
-                            condition: Condition.character1,
+                            condition: Condition.dodge,
                             figureId: figureId,
                             ownerId: ownerId,
                             immunities: immunities,
                             scale: scale),
-                      if (nrOfCharacters > 1)
-                        ConditionButton(
-                            condition: Condition.character2,
-                            figureId: figureId,
-                            ownerId: ownerId,
-                            immunities: immunities,
-                            scale: scale),
-                      if (nrOfCharacters > 2)
-                        ConditionButton(
-                            condition: Condition.character3,
-                            figureId: figureId,
-                            ownerId: ownerId,
-                            immunities: immunities,
-                            scale: scale),
-                      if (nrOfCharacters > 3)
-                        ConditionButton(
-                            condition: Condition.character4,
-                            figureId: figureId,
-                            ownerId: ownerId,
-                            immunities: immunities,
-                            scale: scale),
-                      buildSummonButton(figureId, ownerId, scale)
                     ],
                   ),
-              ],
-            ),
-          ])
-        ]));
+                  if (isMonster)
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (nrOfCharacters > 0)
+                          ConditionButton(
+                              condition: Condition.character1,
+                              figureId: figureId,
+                              ownerId: ownerId,
+                              immunities: immunities,
+                              scale: scale),
+                        if (nrOfCharacters > 1)
+                          ConditionButton(
+                              condition: Condition.character2,
+                              figureId: figureId,
+                              ownerId: ownerId,
+                              immunities: immunities,
+                              scale: scale),
+                        if (nrOfCharacters > 2)
+                          ConditionButton(
+                              condition: Condition.character3,
+                              figureId: figureId,
+                              ownerId: ownerId,
+                              immunities: immunities,
+                              scale: scale),
+                        if (nrOfCharacters > 3)
+                          ConditionButton(
+                              condition: Condition.character4,
+                              figureId: figureId,
+                              ownerId: ownerId,
+                              immunities: immunities,
+                              scale: scale),
+                        buildSummonButton(figureId, ownerId, scale)
+                      ],
+                    ),
+                ],
+              ),
+            ])
+          ]))
+    ]);
   }
 }

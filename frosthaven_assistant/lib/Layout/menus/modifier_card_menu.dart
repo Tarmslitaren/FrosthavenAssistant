@@ -80,15 +80,16 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
       List<ModifierCard> inputList, bool allOpen, String name) {
     List<Widget> list = [];
     for (int index = 0; index < inputList.length; index++) {
+      final key = index.toString();
       var item = inputList[index];
       Item value = Item(
-          key: Key(index.toString()),
+          key: Key(key),
           data: item,
           name: name,
-          revealed: isRevealed(item) || allOpen == true);
+          revealed: isRevealed(item) || allOpen);
       if (!allOpen) {
         InkWell gestureDetector = InkWell(
-          key: Key(index.toString()),
+          key: Key(key),
           onTap: () {
             //open remove card menu
             openDialog(
@@ -99,6 +100,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                       .substring(3, value.key.toString().length - 3)),
                   length: inputList.length,
                   name: name,
+                  revealed: isRevealed(item) || allOpen,
                 ));
           },
           child: value,
@@ -109,12 +111,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           key: Key(index.toString()),
           onTap: () {
             //open remove card menu
-            openDialog(
-                context,
-                RemoveAMDCardMenu(
-                  index: index,
-                  name: name,
-                ));
+            openDialog(context, RemoveAMDCardMenu(index: index, name: name));
           },
           child: value,
         );
