@@ -12,7 +12,8 @@ class Character extends ListItemData {
   }
 
   Character.fromJson(Map<String, dynamic> json) {
-    var anId = json['characterClass'];
+    final anId = json['characterClass'];
+    String? edition = json['edition'];
     _turnState.value = TurnsState.values[json['turnState']];
     characterState = CharacterState.fromJson(anId, json['characterState']);
     GameData data = getIt<GameData>();
@@ -22,7 +23,7 @@ class Character extends ListItemData {
       characters.addAll(modelData[key]!.characters);
     }
     for (var item in characters) {
-      if (item.id == anId) {
+      if (item.id == anId && (edition == null || edition == item.edition)) {
         characterClass = item;
         break;
       }
@@ -56,7 +57,8 @@ class Character extends ListItemData {
         '"id": "$id", '
         '"turnState": ${turnState.value.index}, '
         '"characterState": ${characterState.toString()}, '
-        '"characterClass": "${characterClass.id}" '
+        '"characterClass": "${characterClass.id}", '
+        '"edition": "${characterClass.edition}" '
         '}';
   }
 }
