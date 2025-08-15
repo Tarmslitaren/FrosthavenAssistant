@@ -9,7 +9,7 @@ import '../state/game_state.dart';
 
 class LineBuilder {
   static const bool debugColors = false;
-  static const Map<String, String> _tokens = {
+  static const Map<String, String> tokens = {
     "attack": "Attack",
     "move": "Move",
     "range": "Range",
@@ -42,6 +42,7 @@ class LineBuilder {
     "enfeeble": "ENFEEBLE",
     "bless": "BLESS",
     "safeguard": "SAFEGUARD",
+    "flip": "ROLLING",
     "damage": "damage",
     "and": "and"
   };
@@ -558,7 +559,7 @@ class LineBuilder {
             if (left) {
               RegExp regEx = RegExp(
                   r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
-              if (regEx.hasMatch(_tokens[iconToken]!) == true) {
+              if (regEx.hasMatch(tokens[iconToken]!)) {
                 iconGfx += "_black";
               }
             }
@@ -612,7 +613,7 @@ class LineBuilder {
                   !FrosthavenConverter.shouldOverflow(
                       true, iconToken, false)) {}
               if (addText) {
-                String? iconTokenText = _tokens[iconToken];
+                String? iconTokenText = tokens[iconToken];
                 if (frosthavenStyle) {
                   iconTokenText = null;
                 } else if (iconTokenText != null) {

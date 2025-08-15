@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../ui_utils.dart';
+import 'line_builder.dart';
 
 class TokenApplier {
   static Widget applyTokensForPerks(final String text) {
     String line = text;
-    line = line.replaceAll('+0', '%+0%');
-    line = line.replaceAll('-1', '%-1%');
-    line = line.replaceAll('-2', '%-2%');
-    line = line.replaceAll('+1', '%+1%');
-    line = line.replaceAll('+2', '%+2%');
-    line = line.replaceAll('+3', '%+3%');
-    line = line.replaceAll('+4', '%+4%');
+    for (int i = -2; i <= 4; i++) {
+      String sign = i < 0 ? "-" : "+";
+      String glyph = sign + i.toString();
+      line = line.replaceAll(glyph, "%$glyph%");
+    }
 
     List<InlineSpan> textPartListRowContent = [];
     int partStartIndex = 0;
@@ -42,6 +41,12 @@ class TokenApplier {
             //create token part
             String iconGfx = iconToken;
             double height = 20;
+
+            RegExp regEx = RegExp(
+                r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
+            if (regEx.hasMatch(LineBuilder.tokens[iconToken]!)) {
+              iconGfx += "_black";
+            }
 
             String imagePath = "assets/images/abilities/$iconGfx.png";
             if (imageSuffix.isNotEmpty && hasGHVersion(iconGfx)) {
