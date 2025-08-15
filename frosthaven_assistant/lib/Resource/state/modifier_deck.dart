@@ -119,6 +119,14 @@ class ModifierDeck {
     _badOmen.value = value;
   }
 
+  void addCSSanctuary(_StateModifier _) {}
+
+  void removeCSSanctuary(_StateModifier _) {}
+
+  void addCSPartyCard(_StateModifier _, int type) {}
+
+  void removeCSPartyCard(_StateModifier _, int type) {}
+
   void addMinusOne(_StateModifier _) {
     String suffix = "";
     if (name == "allies") {
@@ -458,12 +466,10 @@ class ModifierDeck {
 }
 
 enum CardType { add, multiply, curse, bless, enfeeble }
-//enum CardTypeExtra {none, imbue, allies, monster}
 
 class ModifierCard {
   final CardType type;
   final String gfx;
-  //final CardTypeExtra extra;
 
   ModifierCard(this.type, this.gfx);
 

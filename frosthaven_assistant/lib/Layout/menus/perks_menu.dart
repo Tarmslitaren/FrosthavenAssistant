@@ -154,33 +154,39 @@ class LootCardListTileState extends State<PerkListTile> {
       //only works for remove and add same cards
       final adds = widget.perk.add;
       final removes = widget.perk.remove;
-      description = "Replace ";
-      int amount = removes.length;
+      description = "";
+      final removeAmount = removes.length;
+      final addsAmount = adds.length;
 
       if (adds.isNotEmpty && removes.isEmpty) {
         description = "Add ";
-        amount = adds.length;
-      } else if (adds.isEmpty && removes.isNotEmpty) {
-        description = "Remove ";
-      }
-      description += _nrTextFromDigit(amount);
-      if (adds.isNotEmpty) {
+        description += _nrTextFromDigit(addsAmount);
         final addCard = adds.first;
         description += "${_cardText(addCard)} card";
-      } else {
+        if (addsAmount > 1) {
+          description += "s";
+        }
+      } else if (adds.isEmpty && removes.isNotEmpty) {
+        description = "Remove ";
+        description += _nrTextFromDigit(removeAmount);
         final removeCard = removes.first;
         description += "${_cardText(removeCard)} card";
-      }
-      amount = removes.length;
-      if (amount > 1) {
-        description += "s";
-      }
-      if (adds.isNotEmpty && removes.isNotEmpty) {
+        if (removeAmount > 1) {
+          description += "s";
+        }
+      } else if (adds.isNotEmpty && removes.isNotEmpty) {
+        description = "Replace ";
+        description += _nrTextFromDigit(removes.length);
+        description += "${_cardText(removes.first)} card";
+        if (adds.length > 1) {
+          description += "s";
+        }
         description += " with ";
-        description += _nrTextFromDigit(amount);
-        final removeCard = removes.first;
-        description += "${_cardText(removeCard)} card";
-        if (amount > 1) {
+        final addsAmount = adds.length;
+        description += _nrTextFromDigit(addsAmount);
+        final addCard = adds.first;
+        description += "${_cardText(addCard)} card";
+        if (addsAmount > 1) {
           description += "s";
         }
       }

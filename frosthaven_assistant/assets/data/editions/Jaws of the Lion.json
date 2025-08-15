@@ -82,6 +82,9 @@
           "removes": ["minus1", "minus1"]
         },
         {
+          "removes": ["minus1", "minus1"]
+        },
+        {
           "removes": ["minus2", "minus1"]
         },
         {
@@ -198,59 +201,21 @@
       "hidden": false,
       "summons": {},
       "perks": [
-        {
-          "removes": ["plus0", "plus0","plus0","plus0"]
-        },
-        {
-          "removes": ["minus1", "minus1"]
-        },
-        {
-          "removes": ["minus2","minus1"]
-        },
-        {
-          "removes": ["minus1"],
-          "adds": ["plus1"]
-        },
-        {
-          "removes": ["minus1"],
-          "adds": ["plus1"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus2fire"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus2fire"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus2light"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus2light"]
-        },
-        {
-          "adds": ["perks/plus1firelight"]
-        },
-        {
-          "adds": ["perks/plus1firelight"]
-        },
-        {
-          "adds": ["perks/plus1shield1"]
-        },
-        {
-          "adds": ["perks/plus1shield1"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus1immobilize"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus1wound"]
-        }
+        {"removes": ["plus0", "plus0","plus0","plus0"]},
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus2","minus1"]},
+        {"removes": ["minus1"], "adds": ["plus1"]},
+        {"removes": ["minus1"], "adds": ["plus1"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2fire"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2fire"]},
+        {"removes": ["plus1"],"adds": ["perks/plus2light"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2light"]},
+        {"adds": ["perks/plus1firelight"]},
+        {"adds": ["perks/plus1firelight"]},
+        {"adds": ["perks/plus1shield1"]},
+        {"adds": ["perks/plus1shield1"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1immobilize"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1wound"]}
       ]
     }
   ],

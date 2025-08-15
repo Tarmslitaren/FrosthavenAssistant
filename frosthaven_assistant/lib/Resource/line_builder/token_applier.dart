@@ -7,7 +7,7 @@ class TokenApplier {
   static Widget applyTokensForPerks(final String text) {
     String line = text;
     for (int i = -2; i <= 4; i++) {
-      String sign = i < 0 ? "-" : "+";
+      String sign = i < 0 ? "" : "+";
       String glyph = sign + i.toString();
       line = line.replaceAll(glyph, "%$glyph%");
     }
@@ -42,10 +42,12 @@ class TokenApplier {
             String iconGfx = iconToken;
             double height = 20;
 
-            RegExp regEx = RegExp(
-                r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
-            if (regEx.hasMatch(LineBuilder.tokens[iconToken]!)) {
-              iconGfx += "_black";
+            if (LineBuilder.tokens[iconToken] != null) {
+              RegExp regEx = RegExp(
+                  r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
+              if (regEx.hasMatch(LineBuilder.tokens[iconToken]!)) {
+                iconGfx += "_black";
+              }
             }
 
             String imagePath = "assets/images/abilities/$iconGfx.png";

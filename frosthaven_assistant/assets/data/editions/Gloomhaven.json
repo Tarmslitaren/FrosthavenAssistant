@@ -107,6 +107,9 @@
            "adds": ["perks/plus0fireflip","perks/plus0fireflip" ]
          },
          {
+           "adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip"]
+         },
+         {
            "adds": ["perks/plus1wound" ]
          },
          {
@@ -410,7 +413,57 @@
       "edition": "Gloomhaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {
+           "removes": ["minus1", "minus1"]
+         },
+         {
+           "removes": ["minus1", "minus1"]
+         },
+         {
+           "removes": ["plus0", "plus0","plus0","plus0"]
+         },
+         {
+           "removes": ["minus2"],
+           "adds": ["plus0"]
+         },
+         {
+           "removes": ["plus0"],
+           "adds": ["plus2"]
+         },
+         {
+           "adds": ["perks/plus1flip","perks/plus1flip" ]
+         },
+         {
+           "adds": ["perks/plus1flip","perks/plus1flip" ]
+         },
+         {
+           "adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]
+         },
+         {
+           "adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]
+         },
+         {
+           "adds": ["perks/plus0stunflip" ]
+         },
+         {
+           "adds": ["perks/plus0lightflip","perks/plus0lightflip"]
+         },
+         {
+           "adds": ["perks/plus0lightflip","perks/plus0lightflip"]
+         },
+         {
+           "adds": ["perks/plus0shield1flip", "perks/plus0shield1flip"]
+         },
+         {
+           "text": "Ignore negative item effects and add two +1 cards",
+           "adds": ["plus1","plus1"]
+         },
+         {
+           "text": "Ignore negative scenario effects"
+         }
+       ]
     },
      {
       "name": "Quartermaster",
@@ -419,7 +472,60 @@
       "edition": "Gloomhaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {
+           "removes": ["minus1", "minus1"]
+         },
+         {
+           "removes": ["minus1", "minus1"]
+         },
+         {
+           "removes": ["plus0", "plus0","plus0","plus0"]
+         },
+         {
+           "removes": ["plus0"],
+           "adds": ["plus2"]
+         },
+         {
+           "removes": ["plus0"],
+           "adds": ["plus2"]
+         },
+         {
+           "adds": ["perks/plus1flip","perks/plus1flip" ]
+         },
+         {
+           "adds": ["perks/plus1flip","perks/plus1flip" ]
+         },
+         {
+           "adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip" ]
+         },
+         {
+           "adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip" ]
+         },
+         {
+           "adds": ["perks/plus0stunflip" ]
+         },
+         {
+           "adds": ["perks/plus0target1"]
+         },
+         {
+           "text": "Add one +0 Refresh an item card",
+           "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]
+         },
+         {
+           "text": "Add one +0 Refresh an item card",
+           "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]
+         },
+         {
+           "text": "Add one +0 Refresh an item card",
+           "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]
+         },
+         {
+           "text": "Ignore negative item effects and add two +1 cards",
+           "adds": ["plus1","plus1"]
+         }
+       ]
     },
      {
       "name": "Summoner",
@@ -505,7 +611,24 @@
           "move": 4,
           "attack": 4
         }
-      }
+      },
+       "perks": [
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["plus2"], "adds": ["plus0"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"adds": ["plus2"]},
+         {"adds": ["plus2"]},
+         {"adds": ["perks/plus0woundflip","perks/plus0woundflip" ]},
+         {"adds": ["perks/plus0poisonflip","perks/plus0poisonflip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"text": "Add one %flip%%fire% card and one %flip%%air%","adds": ["perks/plus0fireflip","perks/plus0airflip" ]},
+         {"text": "Add one %flip%%dark% card and one %flip%%earth%","adds": ["perks/plus0darkflip","perks/plus0earthflip" ]},
+         {"text": "Ignore negative scenario effects and add two +1 cards", "adds": ["plus1","plus1"]}
+       ]
     },
      {
       "name": "Nightshroud",
@@ -514,7 +637,24 @@
       "edition": "Gloomhaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["plus0", "plus0","plus0","plus0"]},
+         {"adds": ["perks/minus1dark" ]},
+         {"adds": ["perks/minus1dark" ]},
+         {"removes": ["perks/minus1dark" ],"adds": ["perks/plus1dark" ]},
+         {"removes": ["perks/minus1dark" ],"adds": ["perks/plus1dark" ]},
+         {"adds": ["perks/plus1invisible"]},
+         {"adds": ["perks/plus1invisible"]},
+         {"adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0curseflip","perks/plus0curseflip" ]},
+         {"adds": ["perks/plus0target1flip" ]},
+         {"adds": ["perks/plus0fireflip","perks/plus0airflip" ]},
+         {"text": "Ignore negative scenario effects and add two +1 cards", "adds": ["plus1","plus1"]}
+       ]
     },
      {
       "name": "Plagueherald",
@@ -522,7 +662,24 @@
       "edition": "Gloomhaven",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus2" ],"adds": ["plus0" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"adds": ["plus1","plus1"]},
+         {"adds": ["perks/plus1air" ]},
+         {"adds": ["perks/plus1air" ]},
+         {"adds": ["perks/plus1air" ]},
+         {"adds": ["perks/plus0poisonflip","perks/plus0poisonflip","perks/plus0poisonflip" ]},
+         {"adds": ["perks/plus0curseflip","perks/plus0curseflip" ]},
+         {"adds": ["perks/plus0immobilizeflip","perks/plus0immobilizeflip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"text": "Ignore negative scenario effects and add one +1 cards", "adds": ["plus1"]}
+       ]
     },
      {
       "name": "Berserker",
@@ -531,7 +688,24 @@
       "edition": "Gloomhaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["plus0","plus0", "plus0", "plus0" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus2flip" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus2flip" ]},
+         {"adds": ["perks/plus0woundflip","perks/plus0woundflip" ]},
+         {"adds": ["perks/plus0woundflip","perks/plus0woundflip" ]},
+         {"adds": ["perks/plus0stunflip"]},
+         {"adds": ["perks/plus0stunflip"]},
+         {"adds": ["perks/plus1disarmflip"]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus2fire" ]},
+         {"adds": ["perks/plus2fire" ]},
+         {"text": "Ignore negative item effects"}
+       ]
     },
      {
       "name": "Soothsinger",
@@ -540,7 +714,24 @@
       "edition": "Gloomhaven",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus2" ]},
+         {"removes": ["plus1","plus1" ],"adds": ["perks/plus4" ]},
+         {"removes": ["plus1","plus1" ],"adds": ["perks/plus4" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1immobilize" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1disarm" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus2wound" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus2poison" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus2curse" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus3muddle" ]},
+         {"removes": ["minus1" ],"adds": ["perks/plus0stun" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip","perks/plus1flip"]},
+         {"adds": ["perks/plus0curseflip","perks/plus0curseflip" ]},
+         {"adds": ["perks/plus0curseflip","perks/plus0curseflip" ]}
+       ]
     },
      {
       "name": "Doomstalker",
@@ -580,7 +771,24 @@
           "attack": 3,
           "range": 3
         }
-      }
+      },
+       "perks": [
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["plus0", "plus0" ],"adds": ["plus1","plus1" ]},
+         {"removes": ["plus0", "plus0" ],"adds": ["plus1","plus1" ]},
+         {"removes": ["plus0", "plus0" ],"adds": ["plus1","plus1" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus2muddle" ]},
+         {"adds": ["perks/plus1poison" ]},
+         {"adds": ["perks/plus1wound" ]},
+         {"adds": ["perks/plus1immobilize" ]},
+         {"adds": ["perks/plus0stun" ]},
+         {"adds": ["perks/plus0target1flip"]},
+         {"adds": ["perks/plus0target1flip"]},
+         {"text": "Ignore negative scenario effects"}
+       ]
     },
      {
       "name": "Sawbones",
@@ -589,7 +797,24 @@
       "edition": "Gloomhaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["plus0", "plus0","plus0","plus0"]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"adds": ["perks/plus2flip" ]},
+         {"adds": ["perks/plus2flip" ]},
+         {"adds": ["perks/plus1immobilize" ]},
+         {"adds": ["perks/plus1immobilize" ]},
+         {"adds": ["perks/plus0woundflip" ]},
+         {"adds": ["perks/plus0woundflip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"adds": ["perks/plus0heal3flip" ]},
+         {"adds": ["perks/plus0heal3flip" ]},
+         {"text": "Add one +1 Refresh an item card","adds": ["perks/plus0untap" ]}
+       ]
     },
      {
       "name": "Elementalist",
@@ -610,7 +835,24 @@
           "attack": 2,
           "range": 3
         }
-      }
+      },
+       "perks": [
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"adds": ["perks/plus0fire","perks/plus0fire","perks/plus0fire"]},
+         {"adds": ["perks/plus0ice","perks/plus0ice","perks/plus0ice" ]},
+         {"adds": ["perks/plus0air","perks/plus0air","perks/plus0air" ]},
+         {"adds": ["perks/plus0earth","perks/plus0earth","perks/plus0earth" ]},
+         {"text": "Replace two +0 cards with one +0 %fire% and one +0 %earth%","removes": ["plus0","plus0" ], "adds": ["perks/plus0fire", "perks/plus0earth"]},
+         {"text": "Replace two +0 cards with one +0 %ice% and one +0 %air%","removes": ["plus0","plus0" ], "adds": ["perks/plus0ice", "perks/plus0air"]},
+         {"adds": ["perks/plus1push1","perks/plus1push1" ]},
+         {"adds": ["perks/plus1wound" ]},
+         {"adds": ["perks/plus0stun" ]},
+         {"adds": ["perks/plus0target1" ]}
+       ]
     },
      {
       "note": "the bear is a special summon with scaling hit points. as such it remains hardcoded",
@@ -658,9 +900,25 @@
           "level": 9,
           "health": 8
         }
-      }
+      },
+       "perks": [
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"adds": ["perks/plus1wound" ]},
+         {"adds": ["perks/plus1wound" ]},
+         {"adds": ["perks/plus1immobilize" ]},
+         {"adds": ["perks/plus1immobilize" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0earthflip","perks/plus0earthflip"]},
+         {"text": "Ignore negative scenario effects"}
+       ]
     },
-
      {
       "name": "Bladeswarm",
       "color": "FFCB9070",
@@ -725,7 +983,24 @@
           "move": 4,
           "attack": 3
         }
-      }
+      },
+       "perks": [
+         {"removes": ["minus2" ],"adds": ["plus0" ]},
+         {"removes": ["minus1" ],"adds": ["perks/plus0wound" ]},
+         {"removes": ["minus1" ],"adds": ["perks/plus0wound" ]},
+         {"removes": ["minus1" ],"adds": ["perks/plus0poison" ]},
+         {"removes": ["minus1" ],"adds": ["perks/plus0poison" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1air" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1earth" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1light" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1dark" ]},
+         {"adds": ["perks/plus2muddle" ]},
+         {"adds": ["perks/plus2muddle" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"text": "Ignore negative item effects and add one +1 card","adds": ["plus1" ]},
+         {"text": "Ignore negative scenario effects and all one +1 card","adds": ["plus1" ]}
+       ]
     }
   ],
 
