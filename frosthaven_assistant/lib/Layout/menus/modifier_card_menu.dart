@@ -35,7 +35,7 @@ class ModifierCardMenu extends StatefulWidget {
 class ModifierCardMenuState extends State<ModifierCardMenu> {
   final GameState _gameState = getIt<GameState>();
   final scrollController = ScrollController();
-  List<ModifierCard> _revealedList = [];
+  static List<ModifierCard> revealedList = [];
 
   @override
   initState() {
@@ -44,16 +44,16 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
 
   void markAsOpen(int revealed, ModifierDeck deck) {
     setState(() {
-      _revealedList = [];
+      revealedList = [];
       var drawPile = deck.drawPile.getList().reversed.toList();
       for (int i = 0; i < revealed; i++) {
-        _revealedList.add(drawPile[i]);
+        revealedList.add(drawPile[i]);
       }
     });
   }
 
   bool isRevealed(ModifierCard item) {
-    for (var card in _revealedList) {
+    for (var card in revealedList) {
       if (card == item) {
         return true;
       }
@@ -320,7 +320,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                   ),
 
                                 const Text(
-                                  "   Reveal:",
+                                  "   Reveal\n    cards:",
                                 ),
                                 drawPile.isNotEmpty
                                     ? buildRevealButton(

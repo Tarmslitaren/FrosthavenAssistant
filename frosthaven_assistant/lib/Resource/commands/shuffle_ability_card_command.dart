@@ -1,3 +1,4 @@
+import '../../Layout/menus/ability_cards_menu.dart';
 import '../state/game_state.dart';
 
 class ShuffleAbilityCardCommand extends Command {
@@ -10,6 +11,7 @@ class ShuffleAbilityCardCommand extends Command {
         .firstWhere((element) => element.id == ownerId);
     MonsterAbilityState deck = GameMethods.getDeck(monster.type.deck)!;
     deck.shuffle(stateAccess);
+    AbilityCardsMenuState.revealedList = [];
   }
 
   @override
