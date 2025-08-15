@@ -78,6 +78,69 @@ class PerkListTile extends StatefulWidget {
 }
 
 class LootCardListTileState extends State<PerkListTile> {
+  String _cardText(String gfx) {
+    if (gfx.startsWith("perks/")) {
+      gfx = gfx.substring("perks/".length);
+    }
+    bool negative = gfx.startsWith("minus");
+    String retVal = "+";
+    if (negative) {
+      retVal = "-";
+      gfx = gfx.substring("minus".length);
+    } else {
+      gfx = gfx.substring("plus".length);
+    }
+    retVal += gfx[0]; //nr
+    if (gfx.length > 1) {
+      gfx = gfx.substring(1);
+      String flip = "";
+      String range = "";
+      if (gfx.endsWith("flip")) {
+        flip = "%flip%";
+        gfx = gfx.substring(0, gfx.length - "flip".length);
+      }
+      if (gfx.contains("range")) {
+        range = " %range% ${gfx.substring(gfx.length - 1)}";
+        gfx = gfx.substring(0, range.length);
+      }
+      String ally = "";
+      if (gfx.contains("ally")) {
+        ally = " ally";
+        gfx = gfx.substring(0, gfx.length - "ally".length);
+      }
+      String mainMod = "";
+      String maybeNr = "";
+      if (gfx.length > 1) {
+        maybeNr = gfx.substring(gfx.length - 1);
+        int? nr = int.tryParse(maybeNr);
+        if (nr == null) {
+          maybeNr = "";
+        } else {
+          gfx = gfx.substring(0, gfx.length - 1);
+        }
+        mainMod = "%$gfx%";
+      }
+      retVal += mainMod + maybeNr + range + ally + flip;
+    }
+    return retVal;
+  }
+
+  String _nrTextFromDigit(int digit) {
+    if (digit == 1) {
+      return "one ";
+    }
+    if (digit == 2) {
+      return "two ";
+    }
+    if (digit == 3) {
+      return "three ";
+    }
+    if (digit == 4) {
+      return "four ";
+    }
+    return "";
+  }
+
   @override
   Widget build(BuildContext context) {
     final Character? character =
@@ -85,14 +148,47 @@ class LootCardListTileState extends State<PerkListTile> {
     final bool added = character != null
         ? character.characterState.perkList[widget.index]
         : false;
+
+    String description = widget.perk.text;
+    if (description.isEmpty) {
+      //only works for remove and add same cards
+      final adds = widget.perk.add;
+      final removes = widget.perk.remove;
+      description = "Replace ";
+      int amount = removes.length;
+
+      if (adds.isNotEmpty && removes.isEmpty) {
+        description = "Add ";
+        amount = adds.length;
+      } else if (adds.isEmpty && removes.isNotEmpty) {
+        description = "Remove ";
+      }
+      description += _nrTextFromDigit(amount);
+      if (adds.isNotEmpty) {
+        final addCard = adds.first;
+        description += "${_cardText(addCard)} card";
+      } else {
+        final removeCard = removes.first;
+        description += "${_cardText(removeCard)} card";
+      }
+      amount = removes.length;
+      if (amount > 1) {
+        description += "s";
+      }
+      if (adds.isNotEmpty && removes.isNotEmpty) {
+        description += " with ";
+        description += _nrTextFromDigit(amount);
+        final removeCard = removes.first;
+        description += "${_cardText(removeCard)} card";
+        if (amount > 1) {
+          description += "s";
+        }
+      }
+    }
+
     return CheckboxListTile(
-      contentPadding: const EdgeInsets.only(left: 14),
-      //minVerticalPadding: 0,
-      // minLeadingWidth: 0,
-      //horizontalTitleGap: 6,
-
-      title: TokenApplier.applyTokensForPerks(widget.perk.text),
-
+      contentPadding: EdgeInsets.only(left: 14),
+      title: TokenApplier.applyTokensForPerks(description),
       onChanged: (bool? value) {
         setState(() {
           getIt<GameState>()

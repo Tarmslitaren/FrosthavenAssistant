@@ -8,7 +8,58 @@
       "edition": "Gloomhaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {
+           "removes": ["minus1", "minus1"]
+         },
+         {
+           "removes": ["minus1"],
+           "adds": ["plus1"]
+         },
+         {
+           "adds": ["plus1","plus1"]
+         },
+         {
+           "adds": ["plus1","plus1"]
+         },
+         {
+           "adds": ["perks/plus3"]
+         },
+         {
+           "adds": ["perks/plus0push1flip","perks/plus0push1flip","perks/plus0push1flip" ]
+         },
+         {
+           "adds": ["perks/plus0push1flip","perks/plus0push1flip","perks/plus0push1flip" ]
+         },
+         {
+           "adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip"]
+         },
+         {
+           "adds": ["perks/plus0stunflip"]
+         },
+         {
+           "adds": ["perks/plus0stunflip"]
+         },
+         {
+           "text": "Add one %flip%%disarm% card and one %flip%%muddle% card",
+           "adds": ["perks/plus0disarmflip", "perks/plus0muddleflip"]
+         },
+         {
+           "adds": ["perks/plus0target1flip"]
+         },
+         {
+           "adds": ["perks/plus0target1flip"]
+         },
+         {
+           "text": "Add one %shield% 1, Self card",
+           "adds": ["perks/plus1shield1"]
+         },
+         {
+           "text": "Ignore negative item effects and add one +1 card",
+           "adds": ["plus1"]
+         }
+       ]
     },
      {
       "name": "Tinkerer",

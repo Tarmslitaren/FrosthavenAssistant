@@ -11,72 +11,57 @@
       "summons": {},
       "perks": [
         {
-          "text": "Remove two -1 cards",
           "removes": ["minus1", "minus1"]
         },
         {
-          "text": "Remove two -1 cards",
           "removes": ["minus1", "minus1"]
         },
         {
-          "text": "Replace one +0 card with one +2 %muddle% card",
           "removes": ["plus0"],
           "adds": ["perks/plus2muddle"]
         },
         {
-          "text": "Replace one +0 card with one +1 %poison% card",
           "removes": ["plus0"],
           "adds": ["perks/plus1poison"]
         },
         {
-          "text": "Replace one +0 card with one +1 %wound% card",
           "removes": ["plus0"],
           "adds": ["perks/plus1wound"]
         },
         {
-          "text": "Replace one +0 card with one +1 %immobilize% card",
           "removes": ["plus0"],
           "adds": ["perks/plus1immobilize"]
         },
         {
-          "text": "Replace one +0 card with one +1 %push% 2 card",
           "removes": ["plus0"],
           "adds": ["perks/plus1push2"]
         },
         {
-          "text": "Replace one +0 card with one +0 %stun% card",
           "removes": ["plus0"],
           "adds": ["perks/plus0stun"]
         },
         {
-          "text": "Replace one +1 card with one +1 %stun% card",
           "removes": ["plus1"],
           "adds": ["perks/plus1stun"]
         },
         {
-          "text": "Add one +2 %air% card",
           "adds": ["perks/plus2air"]
         },
         {
-          "text": "Add one one +2 %air% card",
           "adds": ["perks/plus2air"]
         },
         {
-          "text": "Add one one +2 %air% card",
           "adds": ["perks/plus2air"]
         },
         {
-          "text": "Replace one +1 card with one +3 card",
           "removes": ["plus1"],
           "adds": ["perks/plus3"]
         },
         {
-          "text": "Replace one +1 card with one +3 card",
           "removes": ["plus1"],
           "adds": ["perks/plus3"]
         },
         {
-          "text": "Replace one +1 card with one +3 card",
           "removes": ["plus1"],
           "adds": ["perks/plus3"]
         }
@@ -91,57 +76,45 @@
       "summons": {},
       "perks": [
         {
-          "text": "Remove four +0 cards",
           "removes": ["plus0","plus0","plus0","plus0"]
         },
         {
-          "text": "Remove two -1 cards",
           "removes": ["minus1", "minus1"]
         },
         {
-          "text": "Remove one -2 card and one -1 card",
           "removes": ["minus2", "minus1"]
         },
         {
-          "text": "Replace one +0 card with one +2 %muddle% card",
           "removes": ["plus0"],
           "adds": ["perks/plus2muddle"]
         },
         {
-          "text": "Replace one +0 card with one +2 %muddle% card",
           "removes": ["plus0"],
           "adds": ["perks/plus2muddle"]
         },
         {
-          "text": "Replace one -1 card with one +0 %poison% card",
           "removes": ["minus1"],
           "adds": ["perks/plus0poison"]
         },
         {
-          "text": "Add one +2 card",
           "adds": ["plus2"]
         },
         {
-          "text": "Add one +2 card",
           "adds": ["plus2"]
         },
         {
-          "text": "Replace one +1 card with one +2 %earth% card",
           "removes": ["plus1"],
           "adds": ["perks/plus2earth"]
         },
         {
-          "text": "Replace one +1 card with one +2 %earth% card",
           "removes": ["plus1"],
           "adds": ["perks/plus2earth"]
         },
         {
-          "text": "Replace one +1 card with one +2 %fire% card",
           "removes": ["plus1"],
           "adds": ["perks/plus2fire"]
         },
         {
-          "text": "Replace one +1 card with one +2 %fire% card",
           "removes": ["plus1"],
           "adds": ["perks/plus2fire"]
         },
@@ -164,69 +137,54 @@
       "summons": {},
       "perks": [
         {
-          "text": "Remove two -1 cards",
           "removes": ["minus1", "minus1"]
         },
         {
-          "text": "Remove one -2 card",
           "removes": ["minus2"]
         },
         {
-          "text": "Replace one +0 card with one +1 %dark% card",
           "removes": ["plus0"],
           "adds": ["perks/plus1dark"]
         },
         {
-          "text": "Replace one +0 card with one +1 %dark% card",
           "removes": ["plus0"],
           "adds": ["perks/plus1dark"]
         },
         {
-          "text": "Replace one +0 card with one +1 %ice% card",
           "removes": ["plus0"],
           "adds": ["perks/plus1ice"]
         },
         {
-          "text": "Replace one +0 card with one +1 %ice% card",
           "removes": ["plus0"],
           "adds": ["perks/plus1ice"]
         },
         {
-          "text": "Replace one -1 card with one +0 %heal% 1 ally card",
           "removes": ["minus1"],
           "adds": ["perks/plus0heal1ally"]
         },
         {
-          "text": "Replace one -1 card with one +0 %heal% 1 ally card",
           "removes": ["minus1"],
           "adds": ["perks/plus0heal1ally"]
         },
         {
-          "text": "Add one +1 %heal% 1 ally card",
           "adds": ["perks/plus1heal1ally"]
         },
         {
-          "text": "Add one +1 %heal% 1 ally card",
           "adds": ["perks/plus1heal1ally"]
         },
         {
-          "text": "Add one +1 %heal% 1 ally card",
           "adds": ["perks/plus1heal1ally"]
         },
         {
-          "text": "Add one +1 %poison% card",
           "adds": ["perks/plus1poison"]
         },
         {
-          "text": "Add one +3 card",
           "adds": ["perks/plus3"]
         },
         {
-          "text": "Add one +1 %curse% card",
           "adds": ["perks/plus1curse"]
         },
         {
-          "text": "Add one +1 %curse% card",
           "adds": ["perks/plus1curse"]
         }
       ]
@@ -241,70 +199,55 @@
       "summons": {},
       "perks": [
         {
-          "text": "Remove four +0 cards",
           "removes": ["plus0", "plus0","plus0","plus0"]
         },
         {
-          "text": "Remove two -1 cards",
           "removes": ["minus1", "minus1"]
         },
         {
-          "text": "Remove one -2 card and one -1 card",
           "removes": ["minus2","minus1"]
         },
         {
-          "text": "Replace one -1 card with one +1 card",
           "removes": ["minus1"],
           "adds": ["plus1"]
         },
         {
-          "text": "Replace one -1 card with one +1 card",
           "removes": ["minus1"],
           "adds": ["plus1"]
         },
         {
-          "text": "Replace one +1 card with one +2 %fire% card",
           "removes": ["plus1"],
           "adds": ["perks/plus2fire"]
         },
         {
-          "text": "Replace one +1 card with one +2 %fire% card",
           "removes": ["plus1"],
           "adds": ["perks/plus2fire"]
         },
         {
-          "text": "Replace one +1 card with one +2 %light% card",
           "removes": ["plus1"],
           "adds": ["perks/plus2light"]
         },
         {
-          "text": "Replace one +1 card with one +2 %light% card",
           "removes": ["plus1"],
           "adds": ["perks/plus2light"]
         },
         {
-          "text": "Add one +1 %firelight% card",
           "adds": ["perks/plus1firelight"]
         },
         {
-          "text": "Add one +1 %firelight% card",
           "adds": ["perks/plus1firelight"]
         },
         {
-          "text": "Add one +1 %shield% 1 card",
           "adds": ["perks/plus1shield1"]
         },
         {
-          "text": "Add one +1 %shield% 1 card",
           "adds": ["perks/plus1shield1"]
         },
         {
-          "text": "Replace one +0 card with one +1 %immobilize% card",
           "removes": ["plus0"],
           "adds": ["perks/plus1immobilize"]
         },
         {
-          "text": "Replace one +0 card with one +1 %wound% card",
           "removes": ["plus0"],
           "adds": ["perks/plus1wound"]
         }

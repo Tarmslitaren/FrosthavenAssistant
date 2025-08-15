@@ -172,6 +172,9 @@ bool hasGHVersion(String name) {
   if (name.contains("fire")) {
     return false;
   }
+  if (name.contains("flip")) {
+    return false;
+  }
   return true;
 }
 
