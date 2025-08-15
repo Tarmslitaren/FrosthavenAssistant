@@ -57,7 +57,7 @@ class CharacterClass {
       for (final item in perks) {
         perkList.add(PerkModel.fromJson(item));
       }
-    }
+    } //todo: asset list is 15 or 18 long?
 
     return CharacterClass(id, name, healthByLevel, edition, color,
         colorSecondary, hidden, summonList, perkList);

@@ -53,8 +53,9 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   @override
   initState() {
     // at the beginning, all users are shown
-    for (String key in _gameData.modelData.value.keys) {
-      _allCharacters.addAll(_gameData.modelData.value[key]!.characters);
+    final data = _gameData.modelData.value;
+    for (String key in data.keys) {
+      _allCharacters.addAll(data[key]!.characters);
     }
 
     for (var item in _allCharacters) {
@@ -139,7 +140,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       }
     }
 
-    AddCharacterCommand command = AddCharacterCommand(character.id, display, 1);
+    AddCharacterCommand command =
+        AddCharacterCommand(character.id, character.edition, display, 1);
     _gameState.action(command);
 
     //open level menu

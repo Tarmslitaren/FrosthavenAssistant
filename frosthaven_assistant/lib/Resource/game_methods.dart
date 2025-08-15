@@ -662,7 +662,7 @@ class GameMethods {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {
           Character? objective = GameMethods.createCharacter(
-              s, "Objective", item.name, _gameState.level.value + 1)!;
+              s, "Objective", null, item.name, _gameState.level.value + 1)!;
           objective.characterState._maxHealth.value =
               StatCalculator.calculateFormula(item.health.toString())!;
           objective.characterState._health.value =
@@ -686,7 +686,7 @@ class GameMethods {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {
           Character objective = GameMethods.createCharacter(
-              s, "Escort", item.name, _gameState.level.value + 1)!;
+              s, "Escort", null, item.name, _gameState.level.value + 1)!;
           objective.characterState._maxHealth.value =
               StatCalculator.calculateFormula(item.health.toString())!;
           objective.characterState._health.value =
@@ -1377,8 +1377,8 @@ class GameMethods {
     return character.id == "Escort" || character.id == "Objective";
   }
 
-  static Character? createCharacter(
-      _StateModifier _, String id, String? display, int level) {
+  static Character? createCharacter(_StateModifier _, String id,
+      String? edition, String? display, int level) {
     Character? character;
     List<CharacterClass> characters = [];
     final modelData = _gameData.modelData.value;
@@ -1386,7 +1386,8 @@ class GameMethods {
       characters.addAll(modelData[key]!.characters);
     }
     for (CharacterClass characterClass in characters) {
-      if (characterClass.id == id) {
+      if (characterClass.id == id &&
+          (edition == null || edition == characterClass.edition)) {
         var characterState = CharacterState(id);
         characterState._level.value = level;
 

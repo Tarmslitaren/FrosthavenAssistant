@@ -85,8 +85,52 @@
           "move": 3,
           "attack": 3
         }
-      }
-
+      },
+       "perks": [
+         {
+           "removes": ["minus1", "minus1"]
+         },
+         {
+           "removes": ["minus1", "minus1"]
+         },
+         {
+           "removes": ["minus2"],
+           "adds": ["plus0"]
+         },
+         {
+           "adds": ["plus1","plus1"]
+         },
+         {
+           "adds": ["perks/plus3"]
+         },
+         {
+           "adds": ["perks/plus0fireflip","perks/plus0fireflip" ]
+         },
+         {
+           "adds": ["perks/plus1wound" ]
+         },
+         {
+           "adds": ["perks/plus1wound" ]
+         },
+         {
+           "adds": ["perks/plus1immobilize"]
+         },
+         {
+           "adds": ["perks/plus1immobilize"]
+         },
+         {
+           "adds": ["perks/plus1heal2", "perks/plus1heal2"]
+         },
+         {
+           "adds": ["perks/plus1heal2", "perks/plus1heal2"]
+         },
+         {
+           "adds": ["perks/plus0target1"]
+         },
+         {
+           "text": "Ignore negative scenario effects"
+         }
+       ]
     },
      {
       "name": "Spellweaver",
@@ -110,7 +154,58 @@
           "attack": 2,
           "range": 3
         }
-      }
+      },
+       "perks": [
+         {
+           "removes": ["plus0", "plus0","plus0","plus0"]
+         },
+         {
+           "removes": ["minus1"],
+           "adds": ["plus1"]
+         },
+         {
+           "removes": ["minus1"],
+           "adds": ["plus1"]
+         },
+         {
+           "adds": ["plus1","plus1"]
+         },
+         {
+           "adds": ["plus1","plus1"]
+         },
+         {
+           "adds": ["perks/plus0stun"]
+         },
+         {
+           "adds": ["perks/plus1wound" ]
+         },
+         {
+           "adds": ["perks/plus1immobilize" ]
+         },
+         {
+           "adds": ["perks/plus1curse" ]
+         },
+         {
+           "adds": ["perks/plus2fire"]
+         },
+         {
+           "adds": ["perks/plus2fire"]
+         },
+         {
+           "adds": ["perks/plus1ice"]
+         },
+         {
+           "adds": ["perks/plus1ice"]
+         },
+         {
+           "text": "Add one %flip%%earth% and one %flip%%air%",
+           "adds": ["perks/plus0earthflip","perks/plus0airflip" ]
+         },
+         {
+           "text": "Add one %flip%%light% and one %flip%%dark%",
+           "adds": ["perks/plus0lightflip","perks/plus0darkflip" ]
+         }
+       ]
     },
      {
       "name": "Scoundrel",
@@ -118,7 +213,59 @@
       "edition": "Gloomhaven",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {
+           "removes": ["minus1", "minus1"]
+         },
+         {
+           "removes": ["minus1", "minus1"]
+         },
+         {
+           "removes": ["plus0", "plus0","plus0","plus0"]
+         },
+         {
+           "removes": ["minus2"],
+           "adds": ["plus0"]
+         },
+         {
+           "removes": ["minus1"],
+           "adds": ["plus1"]
+         },
+         {
+           "removes": ["plus0"],
+           "adds": ["plus2"]
+         },
+         {
+           "removes": ["plus0"],
+           "adds": ["plus2"]
+         },
+         {
+           "adds": ["perks/plus1flip","perks/plus1flip"]
+         },
+         {
+           "adds": ["perks/plus1flip","perks/plus1flip"]
+         },
+
+         {
+           "adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip" ]
+         },
+         {
+           "adds": ["perks/plus0poisonflip","perks/plus0poisonflip" ]
+         },
+         {
+           "adds": ["perks/plus0poisonflip","perks/plus0poisonflip" ]
+         },
+         {
+           "adds": ["perks/plus0muddleflip","perks/plus0muddleflip"]
+         },
+         {
+           "adds": ["perks/plus0invisibleflip"]
+         },
+         {
+           "text": "Ignore negative scenario effects"
+         }
+       ]
     },
     {
       "name": "Cragheart",
@@ -126,7 +273,58 @@
       "edition": "Gloomhaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
-      "summons": {}
+      "summons": {},
+      "perks": [
+        {
+          "removes": ["plus0", "plus0","plus0","plus0"]
+        },
+        {
+          "removes": ["minus1"],
+          "adds": ["plus1"]
+        },
+        {
+          "removes": ["minus1"],
+          "adds": ["plus1"]
+        },
+        {
+          "removes": ["minus1"],
+          "adds": ["plus1"]
+        },
+        {
+          "text": "Add one -2 card and two +2 cards",
+          "adds": ["minus2","plus2","plus2"]
+        },
+        {
+          "adds": ["perks/plus1immobilize"]
+        },
+        {
+          "adds": ["perks/plus1immobilize"]
+        },
+        {
+          "adds": ["perks/plus2muddle" ]
+        },
+        {
+          "adds": ["perks/plus2muddle" ]
+        },
+        {
+          "adds": ["perks/plus0push2flip","perks/plus0push2flip" ]
+        },
+        {
+          "adds": ["perks/plus0earthflip","perks/plus0earthflip" ]
+        },
+        {
+          "adds": ["perks/plus0earthflip","perks/plus0earthflip" ]
+        },
+        {
+          "adds": ["perks/plus0airflip","perks/plus0airflip" ]
+        },
+        {
+          "text": "Ignore negative item effects"
+        },
+        {
+          "text": "Ignore negative scenario effects"
+        }
+      ]
     },
      {
       "name": "Mindthief",
@@ -153,7 +351,57 @@
           "health": 9,
           "move": 2
         }
-      }
+      },
+       "perks": [
+         {
+           "removes": ["minus1","minus1"]
+         },
+         {
+           "removes": ["minus1","minus1"]
+         },
+         {
+           "removes": ["plus0", "plus0","plus0","plus0"]
+         },
+         {
+           "removes": ["plus1","plus1"],
+           "adds": ["plus2","plus2"]
+         },
+         {
+           "removes": ["minus2"],
+           "adds": ["plus0"]
+         },
+         {
+           "adds": ["perks/plus2ice"]
+         },
+         {
+           "adds": ["perks/plus2ice"]
+         },
+         {
+           "adds": ["perks/plus1flip","perks/plus1flip" ]
+         },
+         {
+           "adds": ["perks/plus1flip","perks/plus1flip" ]
+         },
+         {
+           "adds": ["perks/plus0pull1flip","perks/plus0pull1flip","perks/plus0pull1flip" ]
+         },
+         {
+           "adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0earthflip" ]
+         },
+         {
+           "adds": ["perks/plus0immobilizeflip","perks/plus0immobilizeflip" ]
+         },
+         {
+           "adds": ["perks/plus0stunflip" ]
+         },
+         {
+           "text": "Add one %flip%%disarm% card and one %flip%%muddle% card",
+           "adds": ["perks/plus0disarmflip","perks/plus0muddleflip" ]
+         },
+         {
+           "text": "Ignore negative scenario effects"
+         }
+       ]
     },
 
      {
