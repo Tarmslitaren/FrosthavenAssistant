@@ -1,0 +1,48 @@
+{
+  "MP": [
+    {
+      "start": {
+        "Bandit Archer (2e)": {
+          "normal": [2, 3, 3],
+          "elite": [0, 0, 1]
+        },
+        "Bandit Scout (2e)": {
+          "normal": [1, 2, 3],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "1": {
+        "Bandit Archer (2e)": {
+          "normal": [2, 1, 1],
+          "elite": [0, 1, 1]
+        },
+        "Bandit Scout (2e)": {
+          "normal": [1, 2, 4],
+          "elite": [1, 1, 1]
+        },
+        "Lurker Soldier (2e)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        }
+      }
+    },
+    {
+      "2": {
+        "Baron Redpatch": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Flame Demon (2e)": {
+          "normal": [0,0, 0],
+          "elite": [1,1,1]
+        },
+        "Bandit Archer (2e)": {
+          "normal": [4, 2, 0],
+          "elite": [0, 2, 4]
+        }
+      }
+    }
+  ]
+}

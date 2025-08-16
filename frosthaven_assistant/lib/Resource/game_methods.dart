@@ -1638,7 +1638,8 @@ class GameMethods {
   static bool isFrosthavenStyledEdition(String edition) {
     return edition == "Frosthaven" ||
         edition == "Buttons and Bugs" ||
-        edition == "Gloomhaven 2nd Edition";
+        edition == "Gloomhaven 2nd Edition" ||
+        edition == "Mercenary Packs";
   }
 
   static bool isFrosthavenStyle(MonsterModel? monster) {

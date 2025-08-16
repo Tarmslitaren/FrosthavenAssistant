@@ -231,8 +231,9 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   List<Widget> buildCampaignButtons() {
     List<Widget> retVal = [];
     for (String item in _gameData.editions) {
-      if (item != "na" && item != "CCUG") {
-        if (getIt<Settings>().showCustomContent.value == true ||
+      final scenarioList = _gameData.modelData.value[item]?.scenarios;
+      if (scenarioList != null && scenarioList.isNotEmpty) {
+        if (getIt<Settings>().showCustomContent.value ||
             !GameMethods.isCustomCampaign(item)) {
           retVal.add(TextButton(
               onPressed: () {

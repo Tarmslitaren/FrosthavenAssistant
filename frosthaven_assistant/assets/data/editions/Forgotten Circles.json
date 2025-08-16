@@ -2,7 +2,7 @@
   "edition": "Forgotten Circles",
   "classes": [
     {
-      "note": "this class has some special hardcoded rules, unlocking the ability to scry and change order of monster decks",
+      "note": "this class has 'bad omen' hard coded feature",
       "name": "Diviner",
       "color": "FFC8E3EA",
       "colorSecondary": "ff353456",
@@ -25,65 +25,21 @@
         }
       },
       "perks": [
-        {
-          "removes": ["minus1", "minus1"]
-        },
-        {
-          "removes": ["minus1", "minus1"]
-        },
-        {
-          "removes": ["minus2"]
-        },
-        {
-          "text": "Replace two +1 card with one +3 %shield% 1, Self card",
-          "removes": ["plus1", "plus1"],
-          "adds": ["perks/plus3shield1"]
-        },
-        {
-          "text": "Replace two +1 card with one +3 %shield% 1, Self card",
-          "removes": ["plus1", "plus1"],
-          "adds": ["perks/plus3shield1"]
-        },
-        {
-          "text": "Replace one +0 card with one +1 %shield% 1, Affect any ally card",
-          "removes": ["plus0"],
-          "adds": ["perks/plus1shield1ally"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus2dark"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus2light"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus3muddle"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus2curse"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus2regenerate"]
-        },
-        {
-          "text": "Replace one -1 card with one +1 %heal% 2, affect any ally card",
-          "removes": ["minus1"],
-          "adds": ["perks/plus1heal2ally"]
-        },
-        {
-          "adds": ["perks/plus0heal1flip","perks/plus0heal1flip"]
-        },
-        {
-          "adds": ["perks/plus0curseflip","perks/plus0curseflip"]
-        },
-        {
-          "text": "Ignore negative scenario effects and add two +1 cards",
-          "adds": ["plus1", "plus1"]
-        }
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus2"]},
+        {"text": "Replace two +1 card with one +3 %shield% 1, Self card", "removes": ["plus1", "plus1"], "adds": ["perks/plus3shield1"]},
+        {"text": "Replace two +1 card with one +3 %shield% 1, Self card", "removes": ["plus1", "plus1"], "adds": ["perks/plus3shield1"]},
+        {"text": "Replace one +0 card with one +1 %shield% 1, Affect any ally card", "removes": ["plus0"], "adds": ["perks/plus1shield1ally"]},
+        {"removes": ["plus0"], "adds": ["perks/plus2dark"]},
+        {"removes": ["plus0"], "adds": ["perks/plus2light"]},
+        {"removes": ["plus0"], "adds": ["perks/plus3muddle"]},
+        {"removes": ["plus0"], "adds": ["perks/plus2curse"]},
+        {"removes": ["plus0"], "adds": ["perks/plus2regenerate"]},
+        {"text": "Replace one -1 card with one +1 %heal% 2, affect any ally card", "removes": ["minus1"], "adds": ["perks/plus1heal2ally"]},
+        {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip"]},
+        {"adds": ["perks/plus0curseflip","perks/plus0curseflip"]},
+        {"text": "Ignore negative scenario effects and add two +1 cards", "adds": ["plus1", "plus1"]}
       ]
     }
   ],
