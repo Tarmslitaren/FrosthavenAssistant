@@ -261,14 +261,14 @@
       "summons": {},
       "perks": [
         {"removes": ["minus2"], "adds": [ "plus0"]},
-        {"text": "Replace one -1 with one +0 \"%use%%%any%: %%any%\" card","removes": ["minus1"],"adds": [ "perks/plus0anytoany"]},
-        {"text": "Replace one -1 with one +0 \"%use%%%any%: %%any%\" card","removes": ["minus1"],"adds": [ "perks/plus0anytoany"]},
-        {"text": "Replace one -1 with one +0 \"%use%%%any%: %%any%\" card","removes": ["minus1"],"adds": [ "perks/plus0anytoany"]},
+        {"text": "Replace one -1 with one +0 \"%use%%any%: %any%\" card","removes": ["minus1"],"adds": [ "perks/plus0anytoany"]},
+        {"text": "Replace one -1 with one +0 \"%use%%any%: %any%\" card","removes": ["minus1"],"adds": [ "perks/plus0anytoany"]},
+        {"text": "Replace one -1 with one +0 \"%use%%any%: %any%\" card","removes": ["minus1"],"adds": [ "perks/plus0anytoany"]},
         {"removes": ["plus0"],"adds": [ "perks/plus1poison"]},
         {"removes": ["plus0"],"adds": [ "perks/plus1poison"]},
         {"removes": ["plus0"],"adds": [ "perks/plus1wound"]},
         {"removes": ["plus0"],"adds": [ "perks/plus1wound"]},
-        {"removes": ["plus0","plus0"], "adds": [ "perks/plus0pierce3flip","perks/plus0pierce3flip","perks/plus0pierce3flip"]},
+        {"removes": ["plus0","plus0"], "adds": [ "perks/plus0pierce3flip","perks/plus0pierce3flip"]},
         {"adds": [ "perks/plus1push3","perks/plus1push3","perks/plus1push3"]},
         {"text": "Add one 2x \"%brittle%, self\" card", "adds": [ "perks/unique/ge1"]},
         {"adds": [ "perks/plus1regenerateflip"]},
@@ -371,7 +371,7 @@
         {"text": "Add one +1 \"Gain one Resonance\"flip card","adds": [ "perks/unique/sh3"]},
         {"text": "Add one +1 \"Gain one Resonance\"flip card","adds": [ "perks/unique/sh3"]},
         {"text": "Ignore scenario effects"},
-        {"text": "[double] Whenever you short rest, you may %use%%air% to perform %strengthen%, %range% 3 and %use%%light% to perform %bless%, %%range% 3"},
+        {"text": "[double] Whenever you short rest, you may %use%%air% to perform %strengthen%, %range% 3 and %use%%light% to perform %bless%, %range% 3"},
         {"text": "At the start of each scenario, oyu may gain %brittle% to gain 2 Resonance"},
         {"text": "Whenever a new roo is revealed, you may reveal the top card of both the monster attack modifier deck and all allies' attack modifier decks"}
       ]

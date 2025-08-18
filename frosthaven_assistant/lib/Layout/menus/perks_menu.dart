@@ -105,8 +105,9 @@ class LootCardListTileState extends State<PerkListTile> {
       }
       String ally = "";
       if (gfx.contains("ally")) {
-        ally = " ally";
-        gfx = gfx.substring(0, gfx.length - "ally".length);
+        ally = ", %target%1 ally";
+        gfx = gfx.substring(
+            0, gfx.length - "ally".length); //should be %target% 1 ally?
       }
       String mainMod = "";
       String maybeNr = "";
@@ -120,7 +121,31 @@ class LootCardListTileState extends State<PerkListTile> {
         }
         mainMod = "%$gfx%";
       }
-      retVal += mainMod + maybeNr + range + ally + flip;
+
+      //self check
+      bool positiveMod = gfx == "invisible" ||
+              gfx == "heal" ||
+              gfx == "strengthen" ||
+              gfx == "regenerate"
+          //|| gfx == "bless"
+          //|| gfx == "ward"
+          //|| gfx == "safeguard"
+          //|| gfx == "dodge"
+          ;
+      if (ally.isEmpty && positiveMod) {
+        ally = ", self";
+      }
+
+      String quotes = "";
+      String initialQuoteSpace = "";
+      if (mainMod.isNotEmpty &&
+          (ally.isNotEmpty || maybeNr.isNotEmpty || range.isNotEmpty)) {
+        quotes = "\"";
+        initialQuoteSpace = " ";
+      }
+
+      retVal +=
+          "$initialQuoteSpace$quotes$mainMod$maybeNr$range$ally$quotes$flip";
     }
     return retVal;
   }

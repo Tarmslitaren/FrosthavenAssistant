@@ -50,7 +50,9 @@ class ModifierDeck {
         newDrawList.add(ModifierCard(CardType.enfeeble, gfx));
       } else if (gfx == "bless") {
         newDrawList.add(ModifierCard(CardType.bless, gfx));
-      } else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
+      } else if (gfx.contains("nullAttack") ||
+          gfx.contains("doubleAttack") ||
+          gfx == "ge1") {
         newDrawList.add(ModifierCard(CardType.multiply, gfx));
       } else {
         newDrawList.add(ModifierCard(CardType.add, gfx));
@@ -65,7 +67,9 @@ class ModifierDeck {
         newDiscardList.add(ModifierCard(CardType.enfeeble, gfx));
       } else if (gfx == "bless") {
         newDiscardList.add(ModifierCard(CardType.bless, gfx));
-      } else if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
+      } else if (gfx.contains("nullAttack") ||
+          gfx.contains("doubleAttack") ||
+          gfx == "ge1") {
         newDiscardList.add(ModifierCard(CardType.multiply, gfx));
         _needsShuffle = true;
       } else {
@@ -213,8 +217,12 @@ class ModifierDeck {
   }
 
   void addCard(_StateModifier _, String gfx) {
-    //todo: supposes all perks are additive cards
-    _drawPile.add(ModifierCard(CardType.add, gfx));
+    // geminate hack
+    CardType type = CardType.add;
+    if (gfx == "ge1") {
+      type = CardType.multiply;
+    }
+    _drawPile.add(ModifierCard(type, gfx));
     _shuffle();
   }
 

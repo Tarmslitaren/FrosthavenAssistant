@@ -566,12 +566,10 @@ class LineBuilder {
             if (iconToken == "use") {
               Widget part = textPartListRowContent.removeLast();
               Container container = part as Container;
-              Image lastImage;
-              if (container.child is Image) {
-                lastImage = container.child as Image;
-              } else {
-                lastImage = (container.child as OverflowBox).child as Image;
-              }
+              final child = container.child;
+              Image lastImage = (child is Image)
+                  ? child
+                  : (child as OverflowBox).child as Image;
               textPartListRowContent.add(Container(
                   color: debugColors ? Colors.amber : null,
                   //margin: margin,

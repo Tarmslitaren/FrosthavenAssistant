@@ -11,10 +11,12 @@ class TokenApplier {
       String glyph = sign + i.toString();
       line = line.replaceAll(glyph, "%$glyph%");
     }
+    line = line.replaceAll("2x", "%2x%");
 
     List<InlineSpan> textPartListRowContent = [];
     int partStartIndex = 0;
     bool isIconPart = false;
+    bool useElement = false;
     final imageSuffix = "_fh";
     const fontStyle = TextStyle(
         fontFamily: 'Majalla', color: Colors.black, fontSize: 24, height: 0.84);
@@ -38,34 +40,74 @@ class TokenApplier {
                       textAlign: TextAlign.center,
                     ))));
           } else {
-            //create token part
-            String iconGfx = iconToken;
-            double height = 20;
+            //handle use element
+            if (iconToken == "use") {
+              useElement = true;
+            } else {
+              //create token part
+              String iconGfx = iconToken;
+              double height = 20;
 
-            if (LineBuilder.tokens[iconToken] != null) {
-              RegExp regEx = RegExp(
-                  r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
-              if (regEx.hasMatch(LineBuilder.tokens[iconToken]!)) {
-                iconGfx += "_black";
+              if (LineBuilder.tokens[iconToken] != null) {
+                RegExp regEx = RegExp(
+                    r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
+                if (regEx.hasMatch(LineBuilder.tokens[iconToken]!)) {
+                  iconGfx += "_black";
+                }
+              }
+
+              String imagePath = "assets/images/abilities/$iconGfx.png";
+              if (hasGHVersion(iconGfx)) {
+                imagePath = "assets/images/abilities/$iconGfx$imageSuffix.png";
+              }
+
+              Widget child = Image(
+                height: height,
+                fit: BoxFit.fitHeight,
+                filterQuality: FilterQuality.medium,
+                semanticLabel: iconGfx,
+                image: AssetImage(imagePath),
+              );
+
+              if (!useElement) {
+                child = Container(
+                    height: height, clipBehavior: Clip.none, child: child);
+
+                textPartListRowContent.add(WidgetSpan(
+                    alignment: PlaceholderAlignment.middle, child: child));
+              } else {
+                final double fontSize = fontStyle.fontSize ?? 16;
+
+                Image lastImage = (child is Image)
+                    ? child
+                    : (child as OverflowBox).child as Image;
+                textPartListRowContent.add(WidgetSpan(
+                    child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    lastImage,
+                    Positioned(
+                        //width: fontSize * 0.6,
+                        top: 10,
+                        left: 8.5,
+                        //why left?!
+
+                        child: Image(
+                          height: fontSize * 0.5,
+                          fit: BoxFit.fitHeight,
+                          filterQuality: FilterQuality.medium,
+                          semanticLabel: iconGfx,
+                          image: AssetImage(
+                              "assets/images/abilities/use_plain_fh.png"),
+                        ))
+                  ],
+                )));
+                // textPartListRowContent
+                //     .add(TextSpan(text: " :", style: fontStyle));
+
+                useElement = false;
               }
             }
-
-            String imagePath = "assets/images/abilities/$iconGfx.png";
-            if (imageSuffix.isNotEmpty && hasGHVersion(iconGfx)) {
-              imagePath = "assets/images/abilities/$iconGfx$imageSuffix.png";
-            }
-            Widget child = Image(
-              height: height,
-              fit: BoxFit.fitHeight,
-              filterQuality: FilterQuality.medium,
-              semanticLabel: iconGfx,
-              image: AssetImage(imagePath),
-            );
-            child = Container(
-                height: height, clipBehavior: Clip.none, child: child);
-
-            textPartListRowContent.add(WidgetSpan(
-                alignment: PlaceholderAlignment.middle, child: child));
           }
           isIconPart = false;
         } else {
