@@ -6271,13 +6271,13 @@
           "type": "Timer",
           "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
           "startOfRound": true,
-          "note": "Flame Demons and Frost Demons are active."
+          "note": "Oozes and Giant Vipers are active."
         },
         {
           "type": "Timer",
           "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
           "startOfRound": true,
-          "note": "Oozes and Giant Vipers are active."
+          "note": "Flame Demons and Frost Demons are active."
         }
       ]
     },
