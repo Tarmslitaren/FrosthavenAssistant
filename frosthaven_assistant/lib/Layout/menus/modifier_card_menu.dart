@@ -176,6 +176,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           }
 
           bool isCharacter = widget.name.isNotEmpty && widget.name != "allies";
+          final character =
+              isCharacter ? GameMethods.getCharacterByName(widget.name) : null;
           final screenSize = MediaQuery.of(context).size;
           final badOmen = deck.badOmen.value;
           return Container(
@@ -299,22 +301,19 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                       ownerId: "unknown",
                                       scale: 1),
 
-                                if (isCharacter)
+                                if (isCharacter &&
+                                    character != null &&
+                                    character.characterClass.perks.isNotEmpty)
                                   TextButton(
                                     onPressed: () {
-                                      final Character? character =
-                                          GameMethods.getCharacterByName(
-                                              widget.name);
-                                      if (character != null) {
-                                        final characterClass =
-                                            character.characterClass;
-                                        openDialog(
-                                            context,
-                                            PerksMenu(
-                                              perks: characterClass.perks,
-                                              characterId: characterClass.id,
-                                            ));
-                                      }
+                                      final characterClass =
+                                          character.characterClass;
+                                      openDialog(
+                                          context,
+                                          PerksMenu(
+                                            perks: characterClass.perks,
+                                            characterId: characterClass.id,
+                                          ));
                                     },
                                     child: const Text("Perks"),
                                   ),

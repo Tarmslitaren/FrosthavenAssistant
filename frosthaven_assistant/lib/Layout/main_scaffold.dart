@@ -84,7 +84,9 @@ class MainScaffoldBody extends StatelessWidget {
     }
     if ((!modFitsOnBar ||
             GameMethods.shouldShowAlliesDeck() ||
-            currentCharacter != null) &&
+            currentCharacter != null &&
+                getIt<Settings>().showCharacterAMD.value &&
+                currentCharacter.characterClass.perks.isNotEmpty) &&
         getIt<Settings>().showAmdDeck.value) {
       sectionWidth -= 153 * barScale; //width of amd
     }
@@ -181,7 +183,9 @@ class MainScaffoldBody extends StatelessWidget {
                                         if (currentCharacter != null &&
                                             getIt<Settings>()
                                                 .showCharacterAMD
-                                                .value)
+                                                .value &&
+                                            currentCharacter.characterClass
+                                                .perks.isNotEmpty)
                                           ModifierDeckWidget(
                                               name: currentCharacter.id),
                                         if (GameMethods.shouldShowAlliesDeck())
