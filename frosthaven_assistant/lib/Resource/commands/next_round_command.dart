@@ -12,28 +12,9 @@ class NextRoundCommand extends Command {
   final GameState _gameState = getIt<GameState>();
   final GameData _gameData = getIt<GameData>();
 
-  void _handleTimedSpawns(var rule) {
-    if (getIt<Settings>().autoAddSpawns.value == true) {
-      if (rule.name.isNotEmpty) {
-        //get room data and deal with spawns
-        ScenarioModel? scenario = _gameData
-            .modelData
-            .value[_gameState.currentCampaign.value]
-            ?.scenarios[_gameState.scenario.value];
-        if (scenario != null) {
-          ScenarioModel? spawnSection = scenario.sections.firstWhereOrNull(
-              (element) => element.name.substring(1) == rule.name);
-          if (spawnSection != null && spawnSection.monsterStandees != null) {
-            GameMethods.autoAddStandees(
-                stateAccess, spawnSection.monsterStandees!, rule.note);
-          }
-        }
-      }
-    }
-  }
-
   @override
   void execute() {
+    //todo: move code to GameMethods?
     for (var item in _gameState.currentList) {
       if (item is Character) {
         item.nextRound(stateAccess);
@@ -59,11 +40,11 @@ class NextRoundCommand extends Command {
     GameMethods.setToastMessage("");
 
     for (var rule in _gameState.scenarioSpecialRules) {
-      if (rule.type == "Timer" && rule.startOfRound == false) {
+      if (rule.type == "Timer" && !rule.startOfRound) {
         for (int round in rule.list) {
           //minus 1 means always
           if (round == _gameState.round.value || round == -1) {
-            if (getIt<Settings>().showReminders.value == true) {
+            if (getIt<Settings>().showReminders.value) {
               GameMethods.setToastMessage(rule.note);
             }
 
@@ -75,17 +56,16 @@ class NextRoundCommand extends Command {
 
     //start of next round is now
     for (var rule in _gameState.scenarioSpecialRules) {
-      if (rule.type == "Timer" && rule.startOfRound == true) {
+      if (rule.type == "Timer" && rule.startOfRound) {
         for (int round in rule.list) {
           //minus 1 means always
+          final toastMessage = _gameState.toastMessage.value;
           if (round - 1 == _gameState.round.value || round == -1) {
-            if (_gameState.toastMessage.value.isNotEmpty) {
-              GameMethods.setToastMessage(
-                  "${_gameState.toastMessage.value}\n\n${rule.note}");
+            if (toastMessage.isNotEmpty) {
+              GameMethods.setToastMessage("$toastMessage\n\n${rule.note}");
             } else {
-              if (getIt<Settings>().showReminders.value == true) {
-                GameMethods.setToastMessage(
-                    "${_gameState.toastMessage.value}${rule.note}");
+              if (getIt<Settings>().showReminders.value) {
+                GameMethods.setToastMessage("$toastMessage${rule.note}");
               }
             }
             _handleTimedSpawns(rule);
@@ -107,6 +87,13 @@ class NextRoundCommand extends Command {
     if (_gameState.modifierDeckAllies.needsShuffle) {
       _gameState.modifierDeckAllies.shuffle(stateAccess);
     }
+    final characters = GameMethods.getCurrentCharacters();
+    for (final character in characters) {
+      final modifierDeck = character.characterState.modifierDeck;
+      if (modifierDeck.needsShuffle) {
+        modifierDeck.shuffle(stateAccess);
+      }
+    }
   }
 
   @override
@@ -117,5 +104,28 @@ class NextRoundCommand extends Command {
   @override
   String describe() {
     return "Next Round";
+  }
+
+  void _handleTimedSpawns(SpecialRule rule) {
+    if (getIt<Settings>().autoAddSpawns.value) {
+      if (rule.name.isNotEmpty) {
+        //get room data and deal with spawns
+        ScenarioModel? scenario = _gameData
+            .modelData
+            .value[_gameState.currentCampaign.value]
+            ?.scenarios[_gameState.scenario.value];
+        if (scenario != null) {
+          ScenarioModel? spawnSection = scenario.sections.firstWhereOrNull(
+              (element) => element.name.substring(1) == rule.name);
+          if (spawnSection != null) {
+            final monsterStandees = spawnSection.monsterStandees;
+            if (monsterStandees != null) {
+              GameMethods.autoAddStandees(
+                  stateAccess, monsterStandees, rule.note);
+            }
+          }
+        }
+      }
+    }
   }
 }

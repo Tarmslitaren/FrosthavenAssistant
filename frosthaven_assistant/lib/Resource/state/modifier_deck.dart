@@ -52,7 +52,7 @@ class ModifierDeck {
         newDrawList.add(ModifierCard(CardType.bless, gfx));
       } else if (gfx.contains("nullAttack") ||
           gfx.contains("doubleAttack") ||
-          gfx == "ge1") {
+          gfx.endsWith("/ge1")) {
         newDrawList.add(ModifierCard(CardType.multiply, gfx));
       } else {
         newDrawList.add(ModifierCard(CardType.add, gfx));
@@ -69,7 +69,7 @@ class ModifierDeck {
         newDiscardList.add(ModifierCard(CardType.bless, gfx));
       } else if (gfx.contains("nullAttack") ||
           gfx.contains("doubleAttack") ||
-          gfx == "ge1") {
+          gfx.endsWith("/ge1")) {
         newDiscardList.add(ModifierCard(CardType.multiply, gfx));
         _needsShuffle = true;
       } else {
@@ -219,7 +219,7 @@ class ModifierDeck {
   void addCard(_StateModifier _, String gfx) {
     // geminate hack
     CardType type = CardType.add;
-    if (gfx == "ge1") {
+    if (gfx.endsWith("/ge1")) {
       type = CardType.multiply;
     }
     _drawPile.add(ModifierCard(type, gfx));
