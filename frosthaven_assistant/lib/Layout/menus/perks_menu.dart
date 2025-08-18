@@ -144,8 +144,9 @@ class LootCardListTileState extends State<PerkListTile> {
         initialQuoteSpace = " ";
       }
 
-      retVal +=
-          "$initialQuoteSpace$quotes$mainMod$maybeNr$range$ally$quotes$flip";
+      return (mainMod == "%target%")
+          ? "$retVal$initialQuoteSpace$quotes+ $maybeNr$mainMod$range$ally$quotes$flip"
+          : "$retVal$initialQuoteSpace$quotes$mainMod$maybeNr$range$ally$quotes$flip";
     }
     return retVal;
   }
