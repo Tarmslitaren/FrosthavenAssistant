@@ -10,7 +10,7 @@
       "hidden": false,
       "summons": {
         "Sewer Monstrosity": {
-          "level": 4,
+          "level": 1,
           "health": 1,
           "move": 3,
           "attack": 2,
@@ -136,7 +136,7 @@
         {"text": "Ignore scenario effects and add two +1 cards","adds": [ "plus1", "plus1"]},
         {"text": "Whenever you short rest,you may choose which card to lose"},
         {"text": "Your and your allies' enhancements cost five gold less and whenever an ally enhances a card, you gain five gold"},
-        {"text": "add one +1 \"%Hail gains 1 irritation\" card to the monster attack modifier deck (TODO: apply when taking this perk)"}
+        {"text": "add one +1 \"%Hail gains 1 resolve\" card to the monster attack modifier deck (TODO: apply when taking this perk)"}
       ]
     },
     {
@@ -162,7 +162,7 @@
         {"text": "TODO: Add one %disarm%%flip% and one +0 \"Grant one ally within %range% 3: %move% 2\"%flip% card","adds": ["perks/plus0disarmflip"]},
         {"text": "TODO","adds": ["perks/plus0wardrange1flip","perks/plus0wardrange1flip"]},
         {"text": "TODO","adds": ["perks/plus0wardrange1flip","perks/plus0wardrange1flip"]},
-        {"text": "Ignore negative item effects and whenever you would gain %stun%, prevent the condition"},
+        {"text": "Ignore item - 1 effects and whenever you would gain %stun%, prevent the condition"},
         {"text": "Whenever you long rest, perform: %strengthen%, %target% 1 ally, %&range% 3"},
         {"text": "All initiative values may be discussed freely and precisely"},
         {"text": "The first time each scenario that you or an ally exhaust, perform: %heal% 3, %target% all, %ward%, %&strengthen%"}
@@ -175,7 +175,7 @@
       "cards": [
         ["Cruel Bow", 770, true, 29, "%move% - 1","*.........", "%attack% - 1", "^%range% 3,","^%wound%"],
         ["Hasty Assault", 771, false, 40, "%move% + 1","*.........", "%attack% - 1"],
-        ["Nothing Special", 772, false, 53, "%move% + 0","*.........", "%attack% + 0"],
+        ["Trump Special", 772, false, 53, "%move% + 0","*.........", "%attack% + 0"],
         ["Rancid Arrow", 773, false, 54, "%move% - 2","*.........", "%attack% + 0", "^%range% 3,", "^%poison%"],
         ["Calculated Strike",774, false, 69, "%move% - 1","*.........", "%attack% + 1"],
         ["Noxious Blade", 775, false, 92, "%attack% + 2", "^%poison%"],
