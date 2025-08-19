@@ -43,11 +43,9 @@ class Character extends ListItemData {
   void flipPerk(_StateModifier _, int index) {
     characterState.flipPerk(_, index);
     if (characterState.perkList[index]) {
-      GameMethods.addPerk(
-          _, characterState.modifierDeck, characterClass.perks[index]);
+      GameMethods.addPerk(_, this, index);
     } else {
-      GameMethods.removePerk(
-          _, characterState.modifierDeck, characterClass.perks[index]);
+      GameMethods.removePerk(_, this, index);
     }
   }
 

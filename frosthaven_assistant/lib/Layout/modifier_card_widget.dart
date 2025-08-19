@@ -20,7 +20,7 @@ class ModifierCardWidget extends StatelessWidget {
     bool isCharacter = name.isNotEmpty && !allies;
     bool imbue = card.gfx.contains("imbue");
     bool imbue2 = card.gfx.contains("imbue2");
-    bool hasExtra = isCharacter || allies || imbue;
+    bool hasExtra = card.gfx.startsWith("P") || allies || imbue;
     String gfx = card.gfx;
     String extraGfx = "";
     if (imbue) {
@@ -39,6 +39,24 @@ class ModifierCardWidget extends StatelessWidget {
     } else if (isCharacter) {
       extraGfx = 'assets/images/class-icons/$name.png';
     }
+
+    //deal with perks. this part will be subject to change when/if data changes to accommodate building cards from parts
+    if (gfx.startsWith("P")) {
+      final character = GameMethods.getCharacterByName(name);
+      assert(character != null);
+      if (character != null) {
+        gfx = gfx.substring(1);
+        if (gfx.endsWith("-2")) {
+          gfx = gfx.substring(0, gfx.length - 2);
+          int index = int.parse(gfx);
+          gfx = character.characterClass.perks[index].add.last;
+        } else {
+          int index = int.parse(gfx);
+          gfx = character.characterClass.perks[index].add.first;
+        }
+      }
+    }
+
     gfx = "assets/images/attack/$gfx.png";
 
     return Container(

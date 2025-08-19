@@ -52,7 +52,7 @@ class ModifierDeck {
         newDrawList.add(ModifierCard(CardType.bless, gfx));
       } else if (gfx.contains("nullAttack") ||
           gfx.contains("doubleAttack") ||
-          gfx.endsWith("/ge1")) {
+          (gfx == "P10" && name == "Geminate")) {
         newDrawList.add(ModifierCard(CardType.multiply, gfx));
       } else {
         newDrawList.add(ModifierCard(CardType.add, gfx));
@@ -69,7 +69,7 @@ class ModifierDeck {
         newDiscardList.add(ModifierCard(CardType.bless, gfx));
       } else if (gfx.contains("nullAttack") ||
           gfx.contains("doubleAttack") ||
-          gfx.endsWith("/ge1")) {
+          (gfx == "P10" && name == "Geminate")) {
         newDiscardList.add(ModifierCard(CardType.multiply, gfx));
         _needsShuffle = true;
       } else {
@@ -216,13 +216,8 @@ class ModifierDeck {
     _shuffle();
   }
 
-  void addCard(_StateModifier _, String gfx) {
-    // geminate hack
-    CardType type = CardType.add;
-    if (gfx.endsWith("/ge1")) {
-      type = CardType.multiply;
-    }
-    _drawPile.add(ModifierCard(type, gfx));
+  void addCard(_StateModifier _, String id, CardType type) {
+    _drawPile.add(ModifierCard(type, id));
     _shuffle();
   }
 

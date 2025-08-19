@@ -392,21 +392,55 @@ class GameMethods {
     return state.modifierDeck;
   }
 
-  static addPerk(_StateModifier s, ModifierDeck deck, PerkModel perk) {
+  static addPerk(_StateModifier s, Character character, int index) {
+    final deck = character.characterState.modifierDeck;
+    final perks = character.characterClass.perks;
+    final perk = perks[index];
+    //deal with removing added perks (i.e infuser -1)?
     for (final item in perk.remove) {
+      final amount = deck.cardCount.value;
       deck.removeCard(s, item);
+      if (deck.cardCount.value == amount &&
+          item == "minus1" &&
+          character.id == "Infuser") {
+        deck.removeCard(s, "P0");
+        //infuser adds one -1 and removes 6 -1. which will include the perk card
+        //todo: should disallow adding perks that remove non existent cards
+      }
     }
     for (final item in perk.add) {
-      deck.addCard(s, item);
+      CardType type = CardType.add;
+      if (item.endsWith("/ge1")) {
+        //geminate hack
+        type = CardType.multiply;
+      }
+      String id = "P$index";
+      final last = perk.add.last;
+      if (perk.add.first != last) {
+        if (item == last) {
+          id += "-2";
+        }
+      }
+      deck.addCard(s, id, type);
     }
   }
 
-  static removePerk(_StateModifier s, ModifierDeck deck, PerkModel perk) {
+  static removePerk(_StateModifier s, Character character, int index) {
+    final deck = character.characterState.modifierDeck;
+    final perks = character.characterClass.perks;
+    final perk = perks[index];
     for (final item in perk.remove) {
-      deck.addCard(s, item);
+      deck.addCard(s, item, CardType.add);
     }
     for (final item in perk.add) {
-      deck.removeCard(s, item);
+      String id = "P$index";
+      final last = perk.add.last;
+      if (perk.add.first != last) {
+        if (item == last) {
+          id += "-2";
+        }
+      }
+      deck.removeCard(s, id);
     }
   }
 
@@ -531,8 +565,7 @@ class GameMethods {
             final perks = item.characterClass.perks;
             for (int i = 0; i < item.characterClass.perks.length; i++) {
               if (perksSetList[i]) {
-                GameMethods.addPerk(
-                    s, item.characterState.modifierDeck, perks[i]);
+                GameMethods.addPerk(s, item, i);
               }
             }
 
