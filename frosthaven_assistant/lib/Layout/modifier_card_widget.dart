@@ -84,7 +84,7 @@ class ModifierCardWidget extends StatelessWidget {
               Positioned(
                 height: 9 * scale,
                 width: 9 * scale,
-                top: 53 * scale / 2,
+                top: 52 * scale / 2,
                 left: 3 * scale,
                 child: Image.asset(
                     'assets/images/attack/class-marker-background.png'),
@@ -93,7 +93,7 @@ class ModifierCardWidget extends StatelessWidget {
               Positioned(
                 height: 7 * scale,
                 width: 7 * scale,
-                top: 55 * scale / 2,
+                top: 54 * scale / 2,
                 left: 4 * scale,
                 child: Image.asset(color: Colors.white, extraGfx),
               ),

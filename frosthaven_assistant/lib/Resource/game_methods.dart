@@ -718,31 +718,36 @@ class GameMethods {
       if (item.type == "Escort") {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {
-          Character objective = GameMethods.createCharacter(
-              s, "Escort", null, item.name, _gameState.level.value + 1)!;
-          objective.characterState._maxHealth.value =
-              StatCalculator.calculateFormula(item.health.toString())!;
-          objective.characterState._health.value =
-              objective.characterState.maxHealth.value;
-          objective.characterState._initiative.value = item.init;
-          bool add = true;
-          for (var item2 in _gameState.currentList) {
-            //don't add duplicates
-            if (item2 is Character &&
-                (item2).characterState.display.value == item.name) {
-              add = false;
-              break;
+          final objective = GameMethods.createCharacter(
+              s, "Escort", null, item.name, _gameState.level.value + 1);
+          if (objective != null) {
+            final maxHealth =
+                StatCalculator.calculateFormula(item.health.toString());
+            if (maxHealth != null) {
+              objective.characterState._maxHealth.value = maxHealth;
             }
-          }
-          if (add) {
-            _gameState._currentList.add(objective);
+            objective.characterState._health.value =
+                objective.characterState.maxHealth.value;
+            objective.characterState._initiative.value = item.init;
+            bool add = true;
+            for (var item2 in _gameState.currentList) {
+              //don't add duplicates
+              if (item2 is Character &&
+                  (item2).characterState.display.value == item.name) {
+                add = false;
+                break;
+              }
+            }
+            if (add) {
+              _gameState._currentList.add(objective);
+            }
           }
         }
       }
 
       //special case for start of round and round is 1
       if (!section) {
-        if (item.type == "Timer" && item.startOfRound == true) {
+        if (item.type == "Timer" && item.startOfRound) {
           for (int round in item.list) {
             //minus 1 means always
             if (round == 1 || round == -1) {
