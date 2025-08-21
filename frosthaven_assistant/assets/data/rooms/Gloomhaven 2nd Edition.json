@@ -90,164 +90,69 @@
       {
         "560 Cutthroat": {
           "Bandit Archer (2e)": {
-            "normal": [
-              2,
-              1,
-              2
-            ],
-            "elite": [
-              0,
-              1,
-              1
-            ]
-          },
+            "normal": [2, 1, 2],
+            "elite": [0, 1, 1]},
           "Bandit Scout (2e)": {
-            "normal": [
-              0,
-              1,
-              1
-            ],
-            "elite": [
-              1,
-              1,
+            "normal": [0, 1, 1],
+            "elite": [1, 1,
               1
             ]
           },
           "Hound (2e)": {
-            "normal": [
-              1,
-              2,
-              0
-            ],
-            "elite": [
-              0,
-              0,
-              2
-            ]
+            "normal": [1, 2, 0],
+            "elite": [0, 0, 2]
           }
         }
       },
       {
         "561 Rotting": {
           "Living Bones (2e)": {
-            "normal": [
-              2,
-              1,
-              0
-            ],
-            "elite": [
-              0,
-              1,
-              2
-            ]
+            "normal": [2, 1, 0],
+            "elite": [0, 1, 2]
           },
           "Living Corpse (2e)": {
-            "normal": [
-              0,
-              1,
-              0
-            ],
-            "elite": [
-              1,
-              1,
-              2
-            ]
+            "normal": [0, 1, 0],
+            "elite": [1, 1, 2]
           },
           "Living Spirit (2e)": {
-            "normal": [
-              0,
-              1,
-              2
-            ],
-            "elite": [
-              1,
-              1,
-              1
-            ]
+            "normal": [0, 1, 2],
+            "elite": [1, 1, 1]
           }
         }
       },
       {
         "562 Foggy": {
           "Flame Demon (2e)": {
-            "normal": [
-              0,
-              1,
-              2
-            ],
-            "elite": [
-              1,
-              1,
-              1
-            ]
+            "normal": [0, 1, 2],
+            "elite": [1, 1, 1]
           },
           "Frost Demon (2e)": {
-            "normal": [
-              0,
-              1,
-              2
-            ],
-            "elite": [
-              1,
-              1,
-              1
-            ]
+            "normal": [0, 1, 2],
+            "elite": [1, 1, 1]
           }
         }
       },
       {
         "563 Crushing": {
           "Earth Demon (2e)": {
-            "normal": [
-              0,
-              1,
-              0
-            ],
-            "elite": [
-              1,
-              1,
-              2
-            ]
+            "normal": [0, 1, 0],
+            "elite": [1, 1, 2]
           },
           "Wind Demon (2e)": {
-            "normal": [
-              2,
-              3,
-              4
-            ],
-            "elite": [
-              0,
-              0,
-              0
-            ]
+            "normal": [2, 3, 4],
+            "elite": [0, 0, 0]
           }
         }
       },
       {
         "564 Tribal": {
           "Inox Archer (2e)": {
-            "normal": [
-              0,
-              0,
-              1
-            ],
-            "elite": [
-              1,
-              1,
-              1
-            ]
+            "normal": [0, 0, 1],
+            "elite": [1, 1, 1]
           },
           "Inox Guard (2e)": {
-            "normal": [
-              2,
-              1,
-              0
-            ],
-            "elite": [
-              0,
-              1,
-              2
-            ]
+            "normal": [2, 1, 0],
+            "elite": [0, 1, 2]
           },
           "Inox Priest (2e)": {
             "normal": [

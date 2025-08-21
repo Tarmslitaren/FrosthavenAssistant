@@ -29,58 +29,62 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
   Widget build(BuildContext context) {
     final deck = GameMethods.getModifierDeck(widget.name, _gameState);
     final card = deck.discardPile.getList()[widget.index];
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      ModifierCardWidget.buildFront(card, widget.name, 6),
-      const SizedBox(
-        height: 20,
-      ),
-      Container(
-          width: 300,
-          height: 180,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.8), BlendMode.dstATop),
-              image: AssetImage(getIt<Settings>().darkMode.value
-                  ? 'assets/images/bg/dark_bg.png'
-                  : 'assets/images/bg/white_bg.png'),
-              fit: BoxFit.cover,
-            ),
+    return Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ModifierCardWidget.buildFront(card, widget.name, 6),
+          const SizedBox(
+            height: 20,
           ),
-          child: Column(children: [
-            const SizedBox(
-              height: 20,
-            ),
-            TextButton(
-                onPressed: () {
-                  _gameState
-                      .action(RemoveAMDCardCommand(widget.index, widget.name));
+          Container(
+              width: 300,
+              height: 180,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.8), BlendMode.dstATop),
+                  image: AssetImage(getIt<Settings>().darkMode.value
+                      ? 'assets/images/bg/dark_bg.png'
+                      : 'assets/images/bg/white_bg.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Column(children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                TextButton(
+                    onPressed: () {
+                      _gameState.action(
+                          RemoveAMDCardCommand(widget.index, widget.name));
 
-                  Navigator.pop(context);
-                },
-                child: const Text("Remove card?",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 20))),
-            const SizedBox(
-              height: 20,
-            ),
-            TextButton(
-              onPressed: () {
-                _gameState.action(ReturnModifierCardCommand(widget.name));
-                final deck =
-                    GameMethods.getModifierDeck(widget.name, _gameState);
-                //if last card, remove modal
-                if (deck.discardPile.isEmpty) {
-                  Navigator.pop(context);
-                }
-              },
-              child: const Text("Return top card",
-                  textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ]))
-    ]);
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Remove card?",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 20))),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextButton(
+                  onPressed: () {
+                    _gameState.action(ReturnModifierCardCommand(widget.name));
+                    final deck =
+                        GameMethods.getModifierDeck(widget.name, _gameState);
+                    //if last card, remove modal
+                    if (deck.discardPile.isEmpty) {
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const Text("Return top card",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20)),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ]))
+        ]);
   }
 }

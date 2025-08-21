@@ -115,7 +115,12 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           },
           child: value,
         );
-        list.add(gestureDetector);
+        //reason for row is to force wrap width of ListView
+        list.add(Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.min,
+            key: Key(index.toString()),
+            children: [gestureDetector]));
       }
     }
     return list;

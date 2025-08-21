@@ -76,7 +76,13 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
           },
           child: value,
         );
-        list.add(gestureDetector);
+        list.add(
+            //reason for row is to force wrap width of ListView
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.min,
+                key: Key(nrString),
+                children: [gestureDetector]));
       }
     }
 
@@ -110,31 +116,35 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
           //other styles
         ),
         child: SizedBox(
-          width: screenWidth * 0.4,
-          child: reorderable
-              ? ReorderableColumn(
-                  needsLongPressDraggable: true,
-                  scrollController: ScrollController(),
-                  scrollAnimationDuration: const Duration(milliseconds: 400),
-                  reorderAnimationDuration: const Duration(milliseconds: 400),
-                  buildDraggableFeedback: defaultBuildDraggableFeedback,
-                  onReorder: (index, dropIndex) {
-                    setState(() {
-                      dropIndex = list.length - dropIndex - 1;
-                      index = list.length - index - 1;
-                      list.insert(dropIndex, list.removeAt(index));
-                      _gameState.action(ReorderAbilityListCommand(
-                          widget.monsterAbilityState.name, dropIndex, index));
-                    });
-                  },
-                  children: generateList(list, allOpen),
-                )
-              : ListView(
-                  controller: ScrollController(),
-                  padding: EdgeInsets.zero,
-                  children: generateList(list, allOpen).reversed.toList(),
-                ),
-        ));
+            width: screenWidth * 0.4,
+            child: reorderable
+                ? ReorderableColumn(
+                    needsLongPressDraggable: true,
+                    scrollController: ScrollController(),
+                    scrollAnimationDuration: const Duration(milliseconds: 400),
+                    reorderAnimationDuration: const Duration(milliseconds: 400),
+                    buildDraggableFeedback: defaultBuildDraggableFeedback,
+                    onReorder: (index, dropIndex) {
+                      setState(() {
+                        dropIndex = list.length - dropIndex - 1;
+                        index = list.length - index - 1;
+                        list.insert(dropIndex, list.removeAt(index));
+                        _gameState.action(ReorderAbilityListCommand(
+                            widget.monsterAbilityState.name, dropIndex, index));
+                      });
+                    },
+                    children: generateList(list, allOpen),
+                  )
+                : Container(
+                    // margin: EdgeInsets.only(right: screenWidth * 0.2),
+                    color: Colors.amber,
+                    child: ListView(
+                      clipBehavior: Clip.none,
+                      controller: ScrollController(),
+                      padding: EdgeInsets.zero,
+                      children: generateList(list, allOpen).reversed.toList(),
+                    ),
+                  )));
   }
 
   @override
@@ -216,6 +226,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                           ])),
                       Flexible(
                           child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
