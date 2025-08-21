@@ -131,6 +131,30 @@ class ModifierDeck {
 
   void removeCSPartyCard(_StateModifier _, int type) {}
 
+  void addHailSpecial(_StateModifier _) {
+    addCard(_, "special/hail", CardType.add);
+  }
+
+  void removeHailSpecial(_StateModifier _) {
+    removeCard(_, "special/hail");
+  }
+
+  bool hasHail() {
+    if (discardPile
+            .getList()
+            .firstWhereOrNull((item) => item.gfx == "special/hail") !=
+        null) {
+      return true;
+    }
+    if (drawPile
+            .getList()
+            .firstWhereOrNull((item) => item.gfx == "special/hail") !=
+        null) {
+      return true;
+    }
+    return false;
+  }
+
   void addMinusOne(_StateModifier _) {
     String suffix = "";
     if (name == "allies") {

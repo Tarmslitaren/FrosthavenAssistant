@@ -1,3 +1,4 @@
+import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class AddPerkCommand extends Command {
@@ -11,6 +12,14 @@ class AddPerkCommand extends Command {
     Character? character = GameMethods.getCharacterByName(characterId);
     if (character != null) {
       character.flipPerk(stateAccess, index);
+
+      if (index == 17 && character.characterClass.name == "Hail") {
+        if (character.characterState.perkList[index]) {
+          getIt<GameState>().modifierDeck.addHailSpecial(stateAccess);
+        } else {
+          getIt<GameState>().modifierDeck.removeHailSpecial(stateAccess);
+        }
+      }
     }
   }
 

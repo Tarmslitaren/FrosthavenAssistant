@@ -558,7 +558,7 @@
         {"text": "add two +1 \"Gain one trophy\" cards","adds": [ "perks/unique/ff1", "perks/unique/ff1"]},
         {"text": "add two +1 \"Gain one trophy\" cards","adds": [ "perks/unique/ff1", "perks/unique/ff1"]},
         {"text": "Ignore scenario effects, and remove two +0 cards","removes": ["plus0","plus0"]},
-        {"text": "Whenever you long rest, you may lot one adjacent hex. If you gain any loot tokens, gain 1 trophy"},
+        {"text": "Whenever you long rest, you may loot one adjacent hex. If you gain any loot tokens, gain 1 trophy"},
         {"text": "At the start of each scenario, gain 2 trophies"},
         {"text": "[triple] While you have %invisible%, gain advantage on all your attacks"}
       ]

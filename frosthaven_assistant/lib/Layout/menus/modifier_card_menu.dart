@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Layout/menus/perks_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
+import 'package:frosthaven_assistant/Resource/commands/add_perk_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_add_minus_one_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue1_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue2_command.dart';
@@ -185,6 +186,13 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
               isCharacter ? GameMethods.getCharacterByName(widget.name) : null;
           final screenSize = MediaQuery.of(context).size;
           final badOmen = deck.badOmen.value;
+
+          final characterHail = GameMethods.getCharacterByName("Hail");
+          bool hasHailPerk = characterHail != null
+              ? characterHail.characterState.perkList[17]
+              : false;
+          final monsterDeck = widget.name.isEmpty;
+
           return Container(
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
@@ -247,7 +255,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                           : "-2 card removed",
                                     ),
                                   ),
-                                if (widget.name.isEmpty)
+                                if (monsterDeck)
                                   TextButton(
                                     onPressed: () {
                                       if (deck.imbuement.value > 0) {
@@ -263,13 +271,25 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                           : "Imbue",
                                     ),
                                   ),
-                                if (deck.imbuement.value != 2 &&
-                                    widget.name.isEmpty)
+                                if (deck.imbuement.value != 2 && monsterDeck)
                                   TextButton(
                                     onPressed: () {
                                       _gameState.action(AMDImbue2Command());
                                     },
                                     child: Text("Advanced Imbue"),
+                                  ),
+                                if (widget.name.isEmpty &&
+                                    characterHail != null)
+                                  TextButton(
+                                    onPressed: () {
+                                      _gameState
+                                          .action(AddPerkCommand("Hail", 17));
+                                    },
+                                    child: Text(
+                                      hasHailPerk
+                                          ? "Remove Hail Perk"
+                                          : "Add Hail Perk",
+                                    ),
                                   ),
                                 //todo: (gray out if maxed out)
                                 CounterButton(
