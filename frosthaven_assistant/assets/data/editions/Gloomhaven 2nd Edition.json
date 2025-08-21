@@ -480,9 +480,9 @@
         ["Drain Essence", 784, false, 28, "%attack% + 0","^%range% 4,", "^%muddle%","*.........", "^^If the attack ability was performed,", "^^Crystal Rot performs:", "%heal% 2", "^Self,","^%strengthen%" ],
         ["Rise and Fall", 787, false, 34, "%move% + 0","*.........", "%attack% - 1", "^%range% 3","*.........","%heal% 1", "^%range% 3,", "^%safeguard%", "[r]","%dark%%use%", "^+1%target%", "[/r]" ],
         ["Unholy Gifts", 786, false, 40, "%move% + 1","*.........", "%heal% 1", "^%target% 2,", "^%range% 3,", "^%ward%", "[r]","%dark%%use%", "^+1%target%", "[/r]" ],
-        ["Nothing special", 789, false, 49, "%move% + 0","*.........", "%attack% + 0", "^%target% 3", "%dark%" ],
+        ["Nothing special", 789, false, 49, "%move% + 0","*.........", "%attack% + 0", "^%range% 3", "%dark%" ],
         ["Shadow Bolt", 791, true, 67, "%move% + 0","*.........", "[r]", "[c]", "%attack% - 1", "^%range% 3", "[/c]","¤aoe-triangle-2-side", "[/r]", "%dark%" ],
-        ["Last Resort", 790, false, 87, "%move% - 1","*.........", "%attack% + 1", "^%target% 3", "Å.", "^Add %disarm% if there are no Living Bones,", "^Living Corpses, or Living Spirits", "^within %range% 3." ]
+        ["Last Resort", 790, false, 87, "%move% - 1","*.........", "%attack% + 1", "^%range% 3", "Å.", "^Add %disarm% if there are no Living Bones,", "^Living Corpses, or Living Spirits", "^within %range% 3." ]
       ]
     },
     {

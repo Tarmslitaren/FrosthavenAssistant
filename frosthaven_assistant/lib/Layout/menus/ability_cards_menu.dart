@@ -135,15 +135,11 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                     },
                     children: generateList(list, allOpen),
                   )
-                : Container(
-                    // margin: EdgeInsets.only(right: screenWidth * 0.2),
-                    color: Colors.amber,
-                    child: ListView(
-                      clipBehavior: Clip.none,
-                      controller: ScrollController(),
-                      padding: EdgeInsets.zero,
-                      children: generateList(list, allOpen).reversed.toList(),
-                    ),
+                : ListView(
+                    clipBehavior: Clip.none,
+                    controller: ScrollController(),
+                    padding: EdgeInsets.zero,
+                    children: generateList(list, allOpen).reversed.toList(),
                   )));
   }
 
