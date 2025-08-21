@@ -423,6 +423,10 @@ class GameMethods {
       }
       deck.addCard(s, id, type);
     }
+
+    if (index == 17 && character.characterClass.name == "Hail") {
+      getIt<GameState>().modifierDeck.addHailSpecial(s);
+    }
   }
 
   static removePerk(_StateModifier s, Character character, int index) {
@@ -441,6 +445,10 @@ class GameMethods {
         }
       }
       deck.removeCard(s, id);
+    }
+
+    if (index == 17 && character.characterClass.name == "Hail") {
+      getIt<GameState>().modifierDeck.removeHailSpecial(s);
     }
   }
 
@@ -546,6 +554,10 @@ class GameMethods {
       _gameState._currentAbilityDecks.clear();
       _gameState._scenarioSpecialRules.clear();
       GameMethods.applyDifficulty(s);
+
+      _gameState.modifierDeck._initDeck("");
+      _gameState.modifierDeckAllies._initDeck("allies");
+
       List<ListItemData> newList = [];
       for (var item in _gameState.currentList) {
         if (item is Character) {
@@ -563,7 +575,7 @@ class GameMethods {
             //reapply perks
             final perksSetList = item.characterState.perkList;
             final perks = item.characterClass.perks;
-            for (int i = 0; i < item.characterClass.perks.length; i++) {
+            for (int i = 0; i < perks.length; i++) {
               if (perksSetList[i]) {
                 GameMethods.addPerk(s, item, i);
               }
@@ -571,7 +583,6 @@ class GameMethods {
 
             final summonList = item.characterState._summonList;
             summonList.clear();
-
             if (item.id == "Beast Tyrant" || item.id == "Wildfury") {
               //create the bear summon
               final int bearHp = 8 + level * 2;
@@ -587,8 +598,6 @@ class GameMethods {
         }
       }
 
-      _gameState.modifierDeck._initDeck("");
-      _gameState.modifierDeckAllies._initDeck("allies");
       _gameState._currentList = newList;
 
       //loot deck init
