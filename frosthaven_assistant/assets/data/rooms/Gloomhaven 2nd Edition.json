@@ -6056,8 +6056,8 @@
       }},{
       "spawn 3": {
         "Black Imp (2e)": {
-          "normal": [1, 2, 0],
-          "elite": [1, 0, 2]
+          "normal": [0, 2, 1],
+          "elite": [2, 0, 1]
         },
         "Harrower Infester (2e)": {
           "normal": [1, 0, 0],

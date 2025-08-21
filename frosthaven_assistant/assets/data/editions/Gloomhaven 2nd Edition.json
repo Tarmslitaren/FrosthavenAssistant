@@ -6903,7 +6903,7 @@
           "type": "Timer",
           "list": [9],
           "startOfRound": true,
-          "note": "At C: Spawn Two Black Imps. One Elite for 2 characters, Both Elite for 4. Spawn one Harrower Infester. It is Elite for 3-4 characters.",
+          "note": "At C: Spawn Two Black Imps. Both Elite for 2 characters, Both Normal for 3. One Normal and one Elite for 4. Spawn one Harrower Infester. It is Elite for 3-4 characters.",
           "name": "spawn 3"
         },
         {
