@@ -29,11 +29,17 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
   Widget build(BuildContext context) {
     final deck = GameMethods.getModifierDeck(widget.name, _gameState);
     final card = deck.discardPile.getList()[widget.index];
+    final screenSize = MediaQuery.of(context).size;
+    double scale = 6;
+    final cardWidth = 7 * 58.6666;
+    if (screenSize.width < cardWidth) {
+      scale = 6 * (screenSize.width / cardWidth);
+    }
     return Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ModifierCardWidget.buildFront(card, widget.name, 6),
+          ModifierCardWidget.buildFront(card, widget.name, scale),
           const SizedBox(
             height: 20,
           ),

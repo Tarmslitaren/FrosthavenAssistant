@@ -37,12 +37,18 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
     final deck = GameMethods.getModifierDeck(widget.name, _gameState);
     final card =
         deck.drawPile.getList()[widget.length - 1 - widget.currentIndex];
+    double scale = 6;
+    final cardWidth = 7 * 58.6666;
+    final screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth < cardWidth) {
+      scale = 6 * (screenWidth / cardWidth);
+    }
     return Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (widget.revealed)
-            ModifierCardWidget.buildFront(card, widget.name, 6),
+            ModifierCardWidget.buildFront(card, widget.name, scale),
           const SizedBox(
             height: 20,
           ),
