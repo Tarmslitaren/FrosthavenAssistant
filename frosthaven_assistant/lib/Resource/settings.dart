@@ -22,11 +22,11 @@ class Settings {
   final userScalingMenus = ValueNotifier<double>(1.0);
   final fullScreen = ValueNotifier<bool>(true);
   final darkMode = ValueNotifier<bool>(false);
-  final noInit = ValueNotifier<bool>(false);
+  final noInit = ValueNotifier<bool>(true);
   final noStandees = ValueNotifier<bool>(false);
   final randomStandees = ValueNotifier<bool>(false);
   final noCalculation = ValueNotifier<bool>(false);
-  final expireConditions = ValueNotifier<bool>(false);
+  final expireConditions = ValueNotifier<bool>(true);
   final hideLootDeck = ValueNotifier<bool>(false);
   final shimmer = ValueNotifier<bool>(
       (Platform.isWindows || Platform.isLinux || Platform.isMacOS));
