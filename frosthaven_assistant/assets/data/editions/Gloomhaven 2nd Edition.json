@@ -4864,6 +4864,12 @@
   },
 
   "scenarios": {
+    "#Random Dungeon": {
+      "special": [
+        {
+          "type": "RandomSections"
+        }]
+    },
     "#0 Training Course": {
       "monsters": ["Training Dummy"],
       "sections": {
@@ -6185,7 +6191,11 @@
     },
     "#59 Foggy Thicket": {
       "monsters": [],
-      "initialMessage": "Handle Random Dungeon Manually: 2e Random Dungeon Deck will be added in a later update."
+      "special": [
+        {
+          "type": "RandomSections"
+        }
+      ]
     },
     "#60 Bandit's Wood": {
       "monsters": ["Bandit Archer (2e)", "Bandit Scout (2e)", "Hound (2e)", "Rending Drake (2e)"],

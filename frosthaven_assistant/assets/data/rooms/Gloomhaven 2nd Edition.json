@@ -4,23 +4,23 @@
         "start": {}
       },
       {
-        "554 Mangy": {
+        "736 Fierce": {
           "Cave Bear (2e)": {
             "normal": [1, 1, 0],
             "elite": [0, 0, 1]
           },
           "Vermling Scout (2e)": {
-            "normal": [3, 6, 4],
-            "elite": [0, 1, 3]
+            "normal": [3, 5, 4],
+            "elite": [0, 1, 2]
           },
           "Vermling Priest (2e)": {
-            "normal": [0, 0, 0],
+            "normal": [0, 1, 1],
             "elite": [1, 1, 1]
           }
         }
       },
       {
-        "555 Drowned": {
+        "737 Drowned": {
           "Living Spirit (2e)": {
             "normal": [1, 2, 1],
             "elite": [0, 0, 2]
@@ -32,7 +32,7 @@
         }
       },
       {
-        "556 Hopeless": {
+        "738 Hopeless": {
           "Black Imp (2e)": {
             "normal": [4, 3, 3],
             "elite": [0, 2, 3]
@@ -44,7 +44,7 @@
         }
       },
       {
-        "557 Defiled": {
+        "739 Defiled": {
           "Forest Imp (2e)": {
             "normal": [1, 4, 1],
             "elite": [1, 1, 4]
@@ -56,23 +56,23 @@
         }
       },
       {
-        "558 Wild": {
+        "740 Wild": {
           "Cave Bear (2e)": {
             "normal": [1, 0, 1],
             "elite": [0, 1, 1]
           },
           "Forest Imp (2e)": {
-            "normal": [2, 3, 2],
-            "elite": [1, 1, 2]
+            "normal": [1, 2, 2],
+            "elite": [1, 1, 1]
           },
           "Hound (2e)": {
-            "normal": [1, 1, 1],
-            "elite": [0, 0, 0]
+            "normal": [2, 2, 1],
+            "elite": [0, 0, 1]
           }
         }
       },
       {
-        "559 Fortified": {
+        "741 Fortified": {
           "Ancient Artillery (2e)": {
             "normal": [1, 2, 1],
             "elite": [0, 0, 1]
@@ -88,299 +88,162 @@
         }
       },
       {
-        "560 Cutthroat": {
+        "742 Cutthroat": {
           "Bandit Archer (2e)": {
             "normal": [2, 1, 2],
-            "elite": [0, 1, 1]},
+            "elite": [0, 1, 1]
+          },
           "Bandit Scout (2e)": {
-            "normal": [0, 1, 1],
-            "elite": [1, 1,
-              1
-            ]
+            "normal": [0, 1, 0],
+            "elite": [1, 1, 2]
           },
           "Hound (2e)": {
-            "normal": [1, 2, 0],
-            "elite": [0, 0, 2]
+            "normal": [2, 1, 0],
+            "elite": [0, 1, 2]
           }
         }
       },
       {
-        "561 Rotting": {
+        "743 Rotting": {
           "Living Bones (2e)": {
-            "normal": [2, 1, 0],
+            "normal": [2, 1, 1],
             "elite": [0, 1, 2]
           },
           "Living Corpse (2e)": {
-            "normal": [0, 1, 0],
-            "elite": [1, 1, 2]
+            "normal": [1, 1, 2],
+            "elite": [0, 1, 1]
           },
-          "Living Spirit (2e)": {
-            "normal": [0, 1, 2],
+          "Crystal Rot (2e)": {
+            "normal": [0, 0, 0],
             "elite": [1, 1, 1]
           }
         }
       },
       {
-        "562 Foggy": {
+        "744 Foggy": {
           "Flame Demon (2e)": {
-            "normal": [0, 1, 2],
-            "elite": [1, 1, 1]
+            "normal": [2, 2, 2],
+            "elite": [0, 1, 1]
           },
           "Frost Demon (2e)": {
-            "normal": [0, 1, 2],
-            "elite": [1, 1, 1]
+            "normal": [2, 2, 2],
+            "elite": [0, 0, 1]
           }
         }
       },
       {
-        "563 Crushing": {
+        "745 Overwhelming": {
           "Earth Demon (2e)": {
-            "normal": [0, 1, 0],
-            "elite": [1, 1, 2]
+            "normal": [2, 2, 2],
+            "elite": [0, 0, 1]
           },
           "Wind Demon (2e)": {
-            "normal": [2, 3, 4],
+            "normal": [2, 2, 2],
+            "elite": [0, 1, 1]
+          }
+        }
+      },
+      {
+        "746 Mighty": {
+          "Inox Archer (2e)": {
+            "normal": [1, 2, 1],
+            "elite": [0, 0, 1]
+          },
+          "Inox Guard (2e)": {
+            "normal": [2, 1, 1],
+            "elite": [0, 1, 1]
+          },
+          "Inox Priest (2e)": {
+            "normal": [1, 1, 2],
             "elite": [0, 0, 0]
           }
         }
       },
       {
-        "564 Tribal": {
-          "Inox Archer (2e)": {
-            "normal": [0, 0, 1],
-            "elite": [1, 1, 1]
-          },
-          "Inox Guard (2e)": {
-            "normal": [2, 1, 0],
-            "elite": [0, 1, 2]
-          },
-          "Inox Priest (2e)": {
-            "normal": [
-              1,
-              2,
-              1
-            ],
-            "elite": [
-              0,
-              0,
-              1
-            ]
-          }
-        }
-      },
-      {
-        "565 Horrific": {
-          "Black Imp (2e)": {
-            "normal": [
-              2,
-              5,
-              2
-            ],
-            "elite": [
-              0,
-              0,
-              3
-            ]
+        "747 Ancient": {
+          "Chaos Demon (2e)": {
+            "normal": [1, 0, 0],
+            "elite": [0, 1, 1]
           },
           "Deep Terror (2e)": {
-            "normal": [
-              1,
-              0,
-              0
-            ],
-            "elite": [
-              1,
-              2,
-              2
-            ]
+            "normal": [1, 2, 1],
+            "elite": [0, 0, 2]
           },
           "Lurker Soldier (2e)": {
-            "normal": [
-              1,
-              1,
-              0
-            ],
-            "elite": [
-              0,
-              0,
-              1
-            ]
+            "normal": [2, 2, 2],
+            "elite": [0, 0, 0]
           }
         }
       },
       {
-        "566 Archaic": {
+        "748 Archaic": {
           "Ancient Artillery (2e)": {
-            "normal": [
-              2,
-              3,
-              2
-            ],
-            "elite": [
-              0,
-              0,
-              1
-            ]
+            "normal": [2, 3, 2],
+            "elite": [0, 0, 1]
           },
           "Stone Construct (2e)": {
-            "normal": [
-              0,
-              1,
-              0
-            ],
-            "elite": [
-              1,
-              1,
-              2
-            ]
+            "normal": [0, 1, 0],
+            "elite": [1, 1, 2]
           }
         }
       },
       {
-        "567 Scaled": {
+        "749 Scaled": {
           "Giant Viper (2e)": {
-            "normal": [
-              2,
-              0,
-              0
-            ],
-            "elite": [
-              0,
-              2,
-              2
-            ]
+            "normal": [2, 0, 0],
+            "elite": [0, 2, 2]
           },
           "Rending Drake (2e)": {
-            "normal": [
-              1,
-              2,
-              1
-            ],
-            "elite": [
-              0,
-              0,
-              1
-            ]
+            "normal": [1, 2, 1],
+            "elite": [0, 0, 1]
           },
           "Spitting Drake (2e)": {
-            "normal": [
-              2,
-              1,
-              0
-            ],
-            "elite": [
-              0,
-              0,
-              1
-            ]
+            "normal": [2, 2, 1],
+            "elite": [0, 0, 1]
           }
         }
       },
       {
-        "568 Venomous": {
+        "750 Venomous": {
           "Black Imp (2e)": {
-            "normal": [
-              2,
-              1,
-              2
-            ],
-            "elite": [
-              0,
-              1,
-              1
-            ]
+            "normal": [2, 1, 2],
+            "elite": [0, 1, 1]
           },
           "Giant Viper (2e)": {
-            "normal": [
-              3,
-              4,
-              2
-            ],
-            "elite": [
-              0,
-              0,
-              2
-            ]
+            "normal": [3, 4, 2],
+            "elite": [0, 0, 2]
           },
           "Harrower Infester (2e)": {
-            "normal": [
-              0,
-              1,
-              0
-            ],
-            "elite": [
-              1,
-              1,
-              2
-            ]
+            "normal": [0, 1, 0],
+            "elite": [1, 1, 2]
           }
         }
       },
       {
-        "569 Unstable": {
+        "751 Unstable": {
           "Earth Demon (2e)": {
-            "normal": [
-              1,
-              0,
-              1
-            ],
-            "elite": [
-              0,
-              1,
-              1
-            ]
+            "normal": [0, 1, 2],
+            "elite": [0, 0, 0]
           },
           "Flame Demon (2e)": {
-            "normal": [
-              1,
-              2,
-              1
-            ],
-            "elite": [
-              0,
-              0,
-              1
-            ]
+            "normal": [1, 2, 1],
+            "elite": [0, 0, 1]
           },
           "Savvas Lavaflow (2e)": {
-            "normal": [
-              1,
-              1,
-              1
-            ],
-            "elite": [
-              0,
-              0,
-              0
-            ]
+            "normal": [0,0,0],
+            "elite": [1,1,1]
           }
         }
       },
       {
-        "570 Corrupted": {
+        "752 Corrupted": {
           "Cultist (2e)": {
-            "normal": [
-              1,
-              2,
-              2
-            ],
-            "elite": [
-              1,
-              1,
-              1
-            ]
+            "normal": [1, 2, 2],
+            "elite": [1, 1, 1]
           },
           "Living Bones (2e)": {
-            "normal": [
-              1,
-              1,
-              1
-            ],
-            "elite": [
-              0,
-              0,
-              1
-            ]
+            "normal": [1, 1, 1],
+            "elite": [0, 0, 1]
           },
           "Night Demon (2e)": {
             "normal": [1, 2, 1],
@@ -389,101 +252,73 @@
         }
       },
       {
-        "571 Infected": {
+        "753 Infected": {
           "Giant Viper (2e)": {
-            "normal": [
-              3,
-              4,
-              2
-            ],
-            "elite": [
-              1,
-              2,
-              5
-            ]
+            "normal": [3, 4, 2],
+            "elite": [1, 2, 5]
           },
           "Ooze (2e)": {
-            "normal": [
-              1,
-              2,
-              1
-            ],
-            "elite": [
-              1,
-              1,
-              2
-            ]
+            "normal": [1, 2, 1],
+            "elite": [1, 1, 2]
           }
         }
       },
       {
-        "572 Putrid": {
-          "Living Corpse (2e)": {
-            "normal": [
-              1,
-              2,
-              4
-            ],
-            "elite": [
-              1,
-              1,
-              1
-            ]
+        "754 Horrific": {
+          "Deep Terror (2e)": {
+            "normal": [1, 2, 3],
+            "elite": [1, 1, 2]
           },
           "Ooze (2e)": {
-            "normal": [
-              2,
-              2,
-              1
-            ],
-            "elite": [
-              0,
-              1,
-              2
-            ]
+            "normal": [1,1,1],
+            "elite": [1, 1, 2]
           }
         }
       },
       {
-        "573 Frigid": {
+        "755 Blustery": {
           "Frost Demon (2e)": {
-            "normal": [
-              1,
-              1,
-              0
-            ],
-            "elite": [
-              0,
-              0,
-              1
-            ]
+            "normal": [0, 1, 2],
+            "elite": [0, 0, 0]
           },
           "Savvas Icestorm (2e)": {
-            "normal": [
-              0,
-              0,
-              0
-            ],
-            "elite": [
-              1,
-              1,
-              1
-            ]
+            "normal": [0, 0, 0],
+            "elite": [1, 1, 1]
           },
           "Wind Demon (2e)": {
-            "normal": [
-              0,
-              2,
-              1
-            ],
-            "elite": [
-              0,
-              0,
-              1
-            ]
+            "normal": [1, 2, 1],
+            "elite": [0, 0, 1]
           }
         }
+      },
+    {
+      "756 Tumultuous": {
+        "Chaos Demon (2e)": {
+          "normal": [2, 1, 2],
+          "elite": [0, 0, 1]
+        },
+        "Sun Demon (2e)": {
+          "normal": [1, 2, 2],
+          "elite": [0, 1, 0]
+        }
       }
+    },
+    {
+      "757 Vile": {
+        "Crystal Rot (2e)": {
+          "normal": [2,2,2],
+          "elite": [0,0,0]
+        },
+        "Living Corpse (2e)": {
+          "normal": [2, 1, 1],
+          "elite": [0, 1, 2]
+        },
+        "Living Spirit (2e)": {
+          "normal": [1, 1, 2],
+          "elite": [0, 1, 1]
+        }
+      }
+    }
   ],
   "0": [
     {
@@ -3894,6 +3729,98 @@
   "59": [
     {
       "start": {}
+    },
+    {
+      "736 Fierce": {
+        "Cave Bear (2e)": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        },
+        "Vermling Scout (2e)": {
+          "normal": [3, 5, 4],
+          "elite": [0, 1, 2]
+        },
+        "Vermling Priest (2e)": {
+          "normal": [0, 1, 1],
+          "elite": [1, 1, 1]
+        }
+      }
+    },
+    {
+      "740 Wild": {
+        "Cave Bear (2e)": {
+          "normal": [1, 0, 1],
+          "elite": [0, 1, 1]
+        },
+        "Forest Imp (2e)": {
+          "normal": [1, 2, 2],
+          "elite": [1, 1, 1]
+        },
+        "Hound (2e)": {
+          "normal": [2, 2, 1],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "742 Cutthroat": {
+        "Bandit Archer (2e)": {
+          "normal": [2, 1, 2],
+          "elite": [0, 1, 1]
+        },
+        "Bandit Scout (2e)": {
+          "normal": [0, 1, 0],
+          "elite": [1, 1, 2]
+        },
+        "Hound (2e)": {
+          "normal": [2, 1, 0],
+          "elite": [0, 1, 2]
+        }
+      }
+    },
+    {
+      "746 Mighty": {
+        "Inox Archer (2e)": {
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
+        },
+        "Inox Guard (2e)": {
+          "normal": [2, 1, 1],
+          "elite": [0, 1, 1]
+        },
+        "Inox Priest (2e)": {
+          "normal": [1, 1, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "749 Scaled": {
+        "Giant Viper (2e)": {
+          "normal": [2, 0, 0],
+          "elite": [0, 2, 2]
+        },
+        "Rending Drake (2e)": {
+          "normal": [1, 2, 1],
+          "elite": [0, 0, 1]
+        },
+        "Spitting Drake (2e)": {
+          "normal": [2, 2, 1],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "753 Infected": {
+        "Giant Viper (2e)": {
+          "normal": [3, 4, 2],
+          "elite": [1, 2, 5]
+        },
+        "Ooze (2e)": {
+          "normal": [1, 2, 1],
+          "elite": [1, 1, 2]
+        }
+      }
     }
   ],
   "60": [

@@ -109,9 +109,13 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     });
 
     //sort random dungeon first for visibility of special feature
-    if (_foundScenarios.last == "#Random Dungeon") {
-      _foundScenarios.insert(0, _foundScenarios.last);
-      _foundScenarios.removeAt(_foundScenarios.length - 1);
+    if (_foundScenarios.first != "#Random Dungeon") {
+      for (int i = _foundScenarios.length - 1; i > 0; i--) {
+        if (_foundScenarios[i] == "#Random Dungeon") {
+          _foundScenarios.removeAt(i);
+          _foundScenarios.insert(0, "#Random Dungeon");
+        }
+      }
     }
 
     if (campaign != "Solo") {
