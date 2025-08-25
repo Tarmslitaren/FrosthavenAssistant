@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/section_list.dart';
 import 'package:frosthaven_assistant/Layout/top_bar.dart';
-import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/main.dart';
 
@@ -14,6 +13,7 @@ import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import '../services/service_locator.dart';
 import 'bottom_bar.dart';
+import 'character_amds_widget.dart';
 import 'loot_deck_widget.dart';
 import 'main_list.dart';
 import 'menus/main_menu.dart';
@@ -83,12 +83,21 @@ class MainScaffoldBody extends StatelessWidget {
     if (hasLootDeck) {
       sectionWidth -= 94 * barScale; //width of loot deck
     }
-    if ((!modFitsOnBar ||
-            GameMethods.shouldShowAlliesDeck() ||
-            currentCharacter != null &&
-                getIt<Settings>().showCharacterAMD.value &&
-                currentCharacter.characterClass.perks.isNotEmpty) &&
-        getIt<Settings>().showAmdDeck.value) {
+
+    final chars = GameMethods.getCurrentCharacters();
+    bool perksAvailable = false;
+    if (getIt<Settings>().showCharacterAMD.value) {
+      for (final character in chars) {
+        if (character.characterClass.perks.isNotEmpty) {
+          perksAvailable = true;
+          break;
+        }
+      }
+    }
+
+    if (!modFitsOnBar ||
+        GameMethods.shouldShowAlliesDeck() ||
+        perksAvailable && getIt<Settings>().showAmdDeck.value) {
       sectionWidth -= 153 * barScale; //width of amd
     }
 
@@ -224,51 +233,5 @@ class MainScaffoldBody extends StatelessWidget {
               ))
       ],
     );
-  }
-}
-
-class CharacterAmdsWidget extends StatelessWidget {
-  const CharacterAmdsWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final Character? currentCharacter = GameMethods.getCurrentCharacter();
-    final showCharacterAmd = getIt<Settings>().showCharacterAMD.value;
-    if (!showCharacterAmd) {
-      return Container();
-    }
-    bool hasCharacters = false;
-    final chars = GameMethods.getCurrentCharacters();
-    for (final character in chars) {
-      if (character.characterClass.perks.isNotEmpty) {
-        hasCharacters = true;
-      }
-    }
-    if (!hasCharacters) {
-      return Container();
-    }
-    if (getIt<GameState>().roundState.value == RoundState.chooseInitiative) {
-      //while in the choosing state, show all character amd's, since we don't care so much about blocking monster stat cards
-      //todo: make a widget to show/hide this list
-      final barScale = getIt<Settings>().userScalingBars.value;
-      return Column(
-        children: chars
-            .map(
-              (item) => (item.characterClass.perks.isNotEmpty)
-                  ? Container(
-                      margin: EdgeInsets.only(
-                        top: 4 * barScale,
-                      ),
-                      child: ModifierDeckWidget(name: item.id))
-                  : Container(),
-            )
-            .toList(),
-      );
-    } else if (currentCharacter != null &&
-        currentCharacter.characterClass.perks.isNotEmpty) {
-      return ModifierDeckWidget(name: currentCharacter.id);
-    }
-
-    return Container();
   }
 }
