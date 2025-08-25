@@ -82,19 +82,19 @@ class ModifierCardWidget extends StatelessWidget {
             ),
             if (hasExtra)
               Positioned(
-                height: 9 * scale,
-                width: 9 * scale,
-                top: 52 * scale / 2,
+                height: 10 * scale,
+                width: 10 * scale,
+                top: 53 * scale / 2,
                 left: 3 * scale,
                 child: Image.asset(
                     'assets/images/attack/class-marker-background.png'),
               ),
             if (hasExtra)
               Positioned(
-                height: 7 * scale,
-                width: 7 * scale,
-                top: 54 * scale / 2,
-                left: 4 * scale,
+                height: 7.5 * scale,
+                width: 7.5 * scale,
+                top: 55.5 * scale / 2,
+                left: 4.2 * scale,
                 child: Image.asset(color: Colors.white, extraGfx),
               ),
           ],
