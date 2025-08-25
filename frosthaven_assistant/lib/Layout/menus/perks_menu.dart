@@ -95,19 +95,24 @@ class LootCardListTileState extends State<PerkListTile> {
       gfx = gfx.substring(1);
       String flip = "";
       String range = "";
+      String target = "";
       if (gfx.endsWith("flip")) {
         flip = "%flip%";
         gfx = gfx.substring(0, gfx.length - "flip".length);
       }
       if (gfx.contains("range")) {
         range = " %range% ${gfx.substring(gfx.length - 1)}";
-        gfx = gfx.substring(0, range.length);
+        gfx = gfx.substring(0, gfx.length - "range".length - 1);
       }
       String ally = "";
       if (gfx.contains("ally")) {
         ally = ", %target%1 ally";
         gfx = gfx.substring(
             0, gfx.length - "ally".length); //should be %target% 1 ally?
+      }
+      if (gfx.contains("target")) {
+        target = " %target% ${gfx.substring(gfx.length - 1)}";
+        gfx = gfx.substring(0, gfx.length - "target".length - 1);
       }
       String mainMod = "";
       String maybeNr = "";
@@ -132,7 +137,7 @@ class LootCardListTileState extends State<PerkListTile> {
           //|| gfx == "safeguard"
           //|| gfx == "dodge"
           ;
-      if (ally.isEmpty && positiveMod) {
+      if (ally.isEmpty && positiveMod && range.isEmpty) {
         ally = ", self";
       }
 
@@ -144,9 +149,13 @@ class LootCardListTileState extends State<PerkListTile> {
         initialQuoteSpace = " ";
       }
 
-      return (mainMod == "%target%")
-          ? "$retVal$initialQuoteSpace$quotes+ $maybeNr$mainMod$range$ally$quotes$flip"
-          : "$retVal$initialQuoteSpace$quotes$mainMod$maybeNr$range$ally$quotes$flip";
+      if (mainMod.isEmpty && target.isNotEmpty) {
+        //target is main mod
+        target =
+            "+ ${target.substring(target.length - 1, target.length)}%target%";
+      }
+
+      return "$retVal$initialQuoteSpace$quotes$mainMod$maybeNr$range$target$ally$quotes$flip";
     }
     return retVal;
   }

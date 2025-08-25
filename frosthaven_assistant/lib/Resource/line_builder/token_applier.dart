@@ -13,6 +13,12 @@ class TokenApplier {
     }
     line = line.replaceAll("2x", "%2x%");
 
+    //removing empty spaces  eg - 1 -> -1
+    for (int i = 1; i <= 4; i++) {
+      line = line.replaceAll("- $i", "-$i");
+      line = line.replaceAll("+ $i", "+$i");
+    }
+
     List<InlineSpan> textPartListRowContent = [];
     int partStartIndex = 0;
     bool isIconPart = false;

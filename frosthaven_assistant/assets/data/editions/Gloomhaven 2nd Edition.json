@@ -8,7 +8,26 @@
       "edition": "Gloomhaven 2nd Edition",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus1"], "adds": [ "plus1"]},
+         {"removes": ["minus1"], "adds": [ "plus1"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0shield1flip"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0shield1flip"]},
+         {"text": "Replace one +0 with one \"Add this card to your active area. On the next attack targeting you performed by an adjacent enemy, discard this card to gain %retaliate% 2 for the attack\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/br1"]},
+         {"text": "Replace one +0 with one \"Add this card to your active area. On the next attack targeting you performed by an adjacent enemy, discard this card to gain %retaliate% 2 for the attack\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/br1"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus0stun"]},
+         {"adds": [ "perks/plus1heal2"]},
+         {"adds": [ "perks/plus1heal2"]},
+         {"adds": [ "perks/plus2push2"]},
+         {"adds": [ "perks/plus2push2"]},
+         {"adds": [ "perks/plus3"]},
+         {"text": "Add one %disarm%%flip% and one %muddle%%flip% card","adds": [ "perks/plus0disarmflip","perks/plus0muddleflip"]},
+         {"text": "Ignore item - 1 effects and add two +1 cards","adds": [ "plus1","plus1"]},
+         {"text": "[double] Once each scenario, during your turn, you may perform: %loot%1, if this ability loots at least one money token, you may refresh one body item"},
+         {"text": "Whenever you long rest, add + 1%move% to your first move ability the following round"},
+         {"text": "Each character gains advantage on their first attack during the first round of each scenario"}
+       ]
     },
      {
       "name": "Tinkerer",
@@ -37,8 +56,26 @@
           "move": 4,
           "attack": 3
         }
-      }
-
+      },
+       "perks": [
+         {"removes": ["minus2"], "adds": [ "plus0"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0heal1ally"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0heal1ally"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0heal1ally"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1wound"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1wound"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1poison"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1poison"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+         {"adds": [ "perks/plus2strengthenally"]},
+         {"adds": [ "perks/plus2strengthenally"]},
+         {"adds": [ "perks/plus2strengthenally"]},
+         {"text": "Ignore scenario effects and add one +0\"%heal%1, %target%1 ally\" card", "adds": [ "perks/plus0heal1ally"]},
+         {"text": "Once each scenario, one adjacent ally may use one of your potion items during their turn without it becoming lost"},
+         {"text": "Whenever you perform a lost action, you may %any%"},
+         {"text": "[double] Whenever you long rest, you may perform: %heal% 2, %range% 3"}
+       ]
     },
      {
       "name": "Spellweaver",
@@ -48,7 +85,26 @@
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
       "summons": {
-      }
+      },
+       "perks": [
+         {"removes": ["minus2"], "adds": [ "plus0"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
+         {"text": "Replace one +0 with one +1\"Add + 2 %attack% if drawn during a lost action\" card","removes": ["plus0"],"adds": [ "perks/unique/sw1"]},
+         {"text": "Replace one +0 with one +1\"Add + 2 %attack% if drawn during a lost action\" card","removes": ["plus0"],"adds": [ "perks/unique/sw1"]},
+         {"text": "Replace one +0 with one +1\"Add + 2 %attack% if drawn during a lost action\" card","removes": ["plus0"],"adds": [ "perks/unique/sw1"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1curse"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1curse"]},
+         {"adds": [ "perks/plus1stun"]},
+         {"adds": [ "perks/plus1stun"]},
+         {"adds": [ "perks/plus2fireice"]},
+         {"adds": [ "perks/plus2fireice"]},
+         {"text": "Ignore scenario effects and remove one +0 card", "removes": [ "plus0"]},
+         {"text": "Once each scenario, when you would suffer %damage%, you may gain %invisible% and %stun% to negate the %damage%"},
+         {"text": "Whenever you short rest, if Reviving Ether is in your discard pile, first recover it"},
+         {"text": "[double] At the end of each of your turns during which you performed a lost action, gain %bless%"}
+       ]
     },
      {
       "name": "Silent Knife",
@@ -56,7 +112,26 @@
       "edition": "Gloomhaven 2nd Edition",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus2"]},
+         {"removes": ["minus1","minus1"]},
+         {"removes": ["minus1"],"adds": [ "plus1"]},
+         {"removes": ["minus1"],"adds": [ "plus1"]},
+         {"removes": ["minus1"],"adds": [ "plus1"]},
+         {"text": "Replace one +0 card with one +1\"Gain one money token if this attack targeted an adjacent enemy\" card","removes": ["plus0"],"adds": [ "perks/unique/sk1"]},
+         {"text": "Replace one +0 card with one +1\"Gain one money token if this attack targeted an adjacent enemy\" card","removes": ["plus0"],"adds": [ "perks/unique/sk1"]},
+         {"text": "Replace one +0 card with one +1\"Gain one money token if this attack targeted an adjacent enemy\" card","removes": ["plus0"],"adds": [ "perks/unique/sk1"]},
+         {"removes": ["plus0"],"adds": [ "plus2"]},
+         {"removes": ["plus0"],"adds": [ "plus2"]},
+         {"removes": ["plus1"],"adds": [ "perks/plus1invisibleflip"]},
+         {"removes": ["plus1"],"adds": [ "perks/plus1invisibleflip"]},
+         {"adds": [ "perks/plus1disarm"]},
+         {"adds": [ "perks/plus1disarm"]},
+         {"text": "At the end of each of your rests, you may place one of your money tokens ni the hex occupied by an enemy within %range% 3 to perform: %attack% 1, %target% that enemy, %range% 3"},
+         {"text": "Whenever you complete a city event, draw an attack modifier card as though you were performing an %attack% 4. Gain an amount of gold equal to the %damage% the attack would have dealt"},
+         {"text": "[double] Once each scenario, during your turn, you may perform: %invisible%, self"}
+       ]
     },
     {
       "name": "Cragheart",
@@ -64,7 +139,26 @@
       "edition": "Gloomhaven 2nd Edition",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": false,
-      "summons": {}
+      "summons": {},
+      "perks": [
+        {"removes": ["minus2"],"adds": [ "plus0"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"text": "Replace one +0 card with one +1\"Create one 1-hex obstacle tile in an empty hex adjacent to the target\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/ch1"]},
+        {"text": "Replace one +0 card with one +1\"Create one 1-hex obstacle tile in an empty hex adjacent to the target\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/ch1"]},
+        {"text": "Replace one +0 card with one +1\"Create one 1-hex obstacle tile in an empty hex adjacent to the target\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/ch1"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1push1"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1push1"]},
+        {"adds": [ "perks/plus2immobilize"]},
+        {"adds": [ "perks/plus2immobilize"]},
+        {"adds": [ "perks/plus2immobilize"]},
+        {"text": "Ignore scenario effects and add one %muddle%%flip% card","adds": [ "perks/plus0muddleflip"]},
+        {"text": "Ignore item - 1 effects"},
+        {"text": "Once each scenario, during your turn, you may destroy one 1-hex obstacle within %range% 5 to %teleport% to the hex it occupied"},
+        {"text": "At the end of each of your rests, you may destroy one 1-hex obstacle within %range% 3 to %earth%"},
+        {"text": "[double] Whenever a new room is revealed, control all enemies in the newly revealed room: %move% 1, this movement must end in an empty hex"}
+      ]
     },
      {
       "name": "Mindthief",
@@ -94,7 +188,26 @@
           "gfx": "MIN Rat King",
           "move": 3
         }
-      }
+      },
+       "perks": [
+         {"text": "Replace two -1 cards with one +1\"After the attack ability, control the target: %move% 1\" card","removes": ["minus1","minus1"],"adds": [ "perks/unique/mt1"]},
+         {"text": "Replace two -1 cards with one +1\"After the attack ability, control the target: %move% 1\" card","removes": ["minus1","minus1"],"adds": [ "perks/unique/mt1"]},
+         {"text": "Replace one +0 card with one +1\"Add + 1 %attack% for each negative condition the target has\" card","removes": ["plus0"],"adds": [ "perks/unique/mt2"]},
+         {"text": "Replace one +0 card with one +1\"Add + 1 %attack% for each negative condition the target has\" card","removes": ["plus0"],"adds": [ "perks/unique/mt2"]},
+         {"text": "Replace one +0 card with one +1\"Add + 1 %attack% for each negative condition the target has\" card","removes": ["plus0"],"adds": [ "perks/unique/mt2"]},
+         {"removes": ["plus0"],"adds": [ "plus2"]},
+         {"removes": ["plus0"],"adds": [ "plus2"]},
+         {"adds": [ "perks/plus1immobilize","perks/plus1immobilize"]},
+         {"adds": [ "perks/plus2ice"]},
+         {"adds": [ "perks/plus2ice"]},
+         {"adds": [ "perks/plus2ice"]},
+         {"adds": [ "perks/plus0invisibleflip"]},
+         {"adds": [ "perks/plus0invisibleflip"]},
+         {"text": "Ignore scenario effects and add one +1%flip% card","adds": [ "perks/plus1flip"]},
+         {"text": "Whenever you control the attack of an enemy, you may have the enemy use your attack modifier deck"},
+         {"text": "You are considered to be last in initiative order when determining monster focus"},
+         {"text": "[double] At the end of each of your rests, you may %use%%icedark% to control one enemy within %range% 5: %attack% 1"}
+       ]
     },
 
      {
@@ -103,7 +216,25 @@
       "edition": "Gloomhaven 2nd Edition",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus1"],"adds": [ "perks/plus0light","perks/plus0light"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0light","perks/plus0light"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1shield1flip"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1shield1flip"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1shield1flip"]},
+         {"removes": ["plus0"],"adds": [ "plus2"]},
+         {"removes": ["plus0"],"adds": [ "plus2"]},
+         {"adds": [ "perks/plus1heal1range3", "perks/plus1heal1range3"]},
+         {"adds": [ "perks/plus1heal1range3", "perks/plus1heal1range3"]},
+         {"text": "Add one +1\"You or an adjacent ally may recover one level 1 card from the discard pile\" card","adds": [ "perks/unique/sk1"]},
+         {"adds": [ "perks/plus0stunflip"]},
+         {"text": "Ignore scenario effects and add one +1 card","adds": [ "plus1"]},
+         {"text": "Ignore item - 1 effects and remove one -1 card","removes": ["minus1"]},
+         {"text": "[double] Whenever you open one or more doors during your turn, gain %shield% 1, %retaliate% 1 for the round"},
+         {"text": "Whenever you long rest, you may %light%"},
+         {"text": "[double] Whenever one of your heals would cause an ally's current hit point value to increase beyond their maximum hit point value, that ally gains %ward%"}
+       ]
     },
      {
       "name": "Quartermaster",
@@ -112,7 +243,26 @@
       "edition": "Gloomhaven 2nd Edition",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus1","minus1"],"adds": [ "perks/plus0muddle"]},
+         {"removes": ["minus1","minus1"],"adds": [ "perks/plus0muddle"]},
+         {"text": "Replace one +0 card with one +0\"Gain 10 Supplies\" card","removes": ["plus0"],"adds": [ "perks/unique/qm1"]},
+         {"text": "Replace one +0 card with one +0\"Gain 10 Supplies\" card","removes": ["plus0"],"adds": [ "perks/unique/qm1"]},
+         {"text": "Replace one +0 card with one +0\"Gain 10 Supplies\" card","removes": ["plus0"],"adds": [ "perks/unique/qm1"]},
+         {"removes": ["plus0","plus0"],"adds": [ "perks/plus0pierce3flip","perks/plus0pierce3flip"]},
+         {"text": "Replace one +1 card with two +0\"Gain the Barbed Strip or Iron Plate item\" cards","removes": ["plus1"],"adds": [ "perks/unique/qm2","perks/unique/qm2"]},
+         {"text": "Replace one +1 card with two +0\"Gain the Barbed Strip or Iron Plate item\" cards","removes": ["plus1"],"adds": [ "perks/unique/qm2","perks/unique/qm2"]},
+         {"removes": ["plus1","plus1"],"adds": [ "plus2","plus2"]},
+         {"text": "Add one +0\"Gain the Scroll of Relocation or Sharpened Dirk item\"%flip% card","adds": ["perks/unique/qm3"]},
+         {"text": "Add one +0\"Gain the Scroll of Relocation or Sharpened Dirk item\"%flip% card","adds": ["perks/unique/qm3"]},
+         {"adds": [ "perks/plus0stunflip"]},
+         {"adds": [ "perks/plus0stunflip"]},
+         {"text": "Ignore item - 1 effects and remove one +0 card","removes": ["plus0"]},
+         {"text": "You may bring one additional small item into each scenario"},
+         {"text": "Your party may purchase items from each faction as though the items' costs were five gold less and your reputation with that faction was two greater"},
+         {"text": "[double] Whenever you long rest, gain 10 Supplies"}
+       ]
     },
      {
       "name": "Soultether",
@@ -209,7 +359,26 @@
           "move": 4,
           "attack": 3
         }
-      }
+      },
+       "perks": [
+         {"removes": ["minus2"],"adds": [ "plus0"]},
+         {"text": "Replace one -1 card with one +0\"After the attack ability, grant one of your summons: %teleport% 2\" card","removes": ["minus1"],"adds": [ "perks/unique/so1"]},
+         {"text": "Replace one -1 card with one +0\"After the attack ability, grant one of your summons: %teleport% 2\" card","removes": ["minus1"],"adds": [ "perks/unique/so1"]},
+         {"text": "Replace one -1 card with one +0\"After the attack ability, grant one of your summons: %teleport% 2\" card","removes": ["minus1"],"adds": [ "perks/unique/so1"]},
+         {"text": "Replace one +0 card with one +1\"%invisible%, %target% 1 of your summons\" card","removes": ["plus0"],"adds": [ "perks/unique/so2"]},
+         {"text": "Replace one +0 card with one +1\"%invisible%, %target% 1 of your summons\" card","removes": ["plus0"],"adds": [ "perks/unique/so2"]},
+         {"text": "Replace one +0 card with one +1\"%invisible%, %target% 1 of your summons\" card","removes": ["plus0"],"adds": [ "perks/unique/so2"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus0woundflip","perks/plus0woundflip"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus0poisonflip","perks/plus0poisonflip"]},
+         {"removes": ["plus1","plus1"],"adds": [ "perks/plus1curse","perks/plus1curse"]},
+         {"adds": [ "perks/plus2fireair"]},
+         {"adds": [ "perks/plus2firedark"]},
+         {"adds": [ "perks/plus2airdark"]},
+         {"text": "Ignore scenario effects and add two +1 cards","adds": ["plus1","plus1"]},
+         {"text": "At the beginning of each round in which you long rest, all your summons gain %shield% 1 for the round"},
+         {"text": "Once each scenario, during you turn, %teleport% one of your summons to an empty hex adjacent to you"},
+         {"text": "[double] Once each scenario, during ordering of initiative, after all ability cards have been revealed, all your summons gain %invisible%"}
+       ]
     },
      {
       "name": "Nightshroud",
@@ -218,7 +387,24 @@
       "edition": "Gloomhaven 2nd Edition",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus2"]},
+         {"removes": ["minus1","minus1"]},
+         {"removes": ["minus1","minus1"]},
+         {"text": "Replace one -1 card with two \"After the attack ability, grant one adjacent ally or self: %teleport% 2\"%flip% cards","removes": ["minus1"],"adds": [ "perks/unique/ns1","perks/unique/ns1"]},
+         {"text": "Replace one null card with one -2 shuffle card","removes": ["nullAttack"],"adds": [ "perks/unique/ns2"]},
+         {"text": "Replace two +0 cards with two +1\"If this attack kills the target, shuffle one %curse% card into the monster attack modifier deck\" cards","removes": ["plus0", "plus0"],"adds": [ "perks/unique/ns3","perks/unique/ns3"]},
+         {"text": "Replace two +0 cards with two +1\"If this attack kills the target, shuffle one %curse% card into the monster attack modifier deck\" cards","removes": ["plus0", "plus0"],"adds": [ "perks/unique/ns3","perks/unique/ns3"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus2dark"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus2dark"]},
+         {"text": "Replace one +1 card with one \"Place one Tear Token in a hex adjacent to the target\" card","removes": ["plus1"],"adds": [ "perks/unique/ns4"]},
+         {"text": "Replace one +1 card with one \"Place one Tear Token in a hex adjacent to the target\" card","removes": ["plus1"],"adds": [ "perks/unique/ns4"]},
+         {"text": "Ignore scenario effects and add two +1 cards","adds": ["plus1","plus1"]},
+         {"text": "Whenever you long rest you may %dark%"},
+         {"text": "[double] Once each scenario, during you turn, place one Tear Token in an adjacent hex"},
+         {"text": "[triple] If a %curse% causes an enemy to deal no %damage% during its attack, that enemy suffers %damage% 3"}
+       ]
     },
      {
       "name": "Plagueherald",
@@ -226,7 +412,26 @@
       "edition": "Gloomhaven 2nd Edition",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus1"],"adds": [ "plus1"]},
+         {"removes": ["minus1"],"adds": [ "plus1"]},
+         {"text": "Replace one -1 card with one +0\"give the target or one enemy within %range% 2 of the target a Plague Token\" cards","removes": ["minus1"],"adds": ["perks/unique/ph1"]},
+         {"text": "Replace one -1 card with one +0\"give the target or one enemy within %range% 2 of the target a Plague Token\" cards","removes": ["minus1"],"adds": ["perks/unique/ph1"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1curse"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1curse"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+         {"removes": ["plus1","plus1"],"adds": [ "plus2","plus2"]},
+         {"adds": [ "perks/plus1stun"]},
+         {"adds": [ "perks/plus1stun"]},
+         {"text": "Add three \"Give the target or one enemy within %range% 2 of the target %poison%\"%flip% cards","adds": [ "perks/unique/ph2","perks/unique/ph2","perks/unique/ph2"]},
+         {"adds": [ "perks/plus0heal1allyflip","perks/plus0heal1allyflip"]},
+         {"text": "Ignore scenario effects and add one +1 card","adds": ["plus1"]},
+         {"text": "You can fly"},
+         {"text": "Whenever you heal from a long rest, you may remove %poison% from one ally to add + 1 %heal%"},
+         {"text": "[double] Once each scenario, when an enemy that has Plague would die, first control that enemy and have it perform the abilities on its ability card, adding Plague to all its attacks, then it dies"}
+       ]
     },
      {
       "name": "Berserker",
@@ -235,7 +440,24 @@
       "edition": "Gloomhaven 2nd Edition",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus2"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0heal1"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0heal1"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0heal1"]},
+         {"text": "Replace two +0 card with one +1\"You may suffer %damage% 2 to add + 2 %attack%\" card","removes": ["plus0","plus0"],"adds": ["perks/unique/be1"]},
+         {"text": "Replace two +0 card with one +1\"You may suffer %damage% 2 to add + 2 %attack%\" card","removes": ["plus0","plus0"],"adds": ["perks/unique/be1"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus0woundflip", "perks/plus0woundflip"]},
+         {"adds": [ "perks/plus2fire"]},
+         {"adds": [ "perks/plus2fire"]},
+         {"adds": [ "perks/plus0stunflip"]},
+         {"text": "Add one 2x\"Suffer %damage% equal to half your current hit point value (rounded down)\" card","adds": ["perks/unique/be2"]},
+         {"text": "Ignore item - 1 effects and add one +1 card","removes": ["plus1"]},
+         {"text": "Whenever you heal from a long rest, add + 1 %heal%"},
+         {"text": "[double] Once each scenario, when %damage% from an attack would reduce your current hit point value to less than 1, instead set your current hit point value to 1 and perform: %attack% 2, %target% the attacker"},
+         {"text": "[triple] At the end of each of your turns, you may control all adjacent enemies: %attack%+ 0, %target% Berserker"}
+       ]
     },
      {
       "name": "Soothsinger",
@@ -244,7 +466,26 @@
       "edition": "Gloomhaven 2nd Edition",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus2"],"adds": [ "perks/minus2blesstarget2"]},
+         {"text": "Replace one -1 card with one +0\"Skip moving your character tokens on each active Song at the rend of this round%\" card","removes": ["minus1"],"adds": ["perks/unique/ss1"]},
+         {"text": "Replace one -1 card with one +0\"Skip moving your character tokens on each active Song at the rend of this round%\" card","removes": ["minus1"],"adds": ["perks/unique/ss1"]},
+         {"text": "Replace one -1 card with one +0\"Skip moving your character tokens on each active Song at the rend of this round%\" card","removes": ["minus1"],"adds": ["perks/unique/ss1"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0stun"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0stun"]},
+         {"removes": ["plus0", "plus0"],"adds": [ "perks/plus1strengthenally"]},
+         {"removes": ["plus0", "plus0"],"adds": [ "perks/plus1strengthenally"]},
+         {"text":"Replace one +0 and one +1 with two +2 cards", "removes": ["plus1", "plus0"],"adds": [ "plus2", "plus2"]},
+         {"text":"Replace one +0 and one +1 with two +2 cards", "removes": ["plus1", "plus0"],"adds": [ "plus2", "plus2"]},
+         {"text": "Add one \"Grant one ally: %move% 2 or %attack% 2\"%flip% card","adds": ["perks/unique/ss2"]},
+         {"text": "Add one \"Grant one ally: %move% 2 or %attack% 2\"%flip% card","adds": ["perks/unique/ss2"]},
+         {"text": "Add one \"Grant one ally: %move% 2 or %attack% 2\"%flip% card","adds": ["perks/unique/ss2"]},
+         {"adds": ["perks/plus0curseflip","perks/plus0curseflip","perks/plus0curseflip"]},
+         {"text": "At the end of each scenario, each character in that scenario gains 8 experience if you completed your battle goal"},
+         {"text": "Whenever you perform a Song action, if you have any unused Notes, gain one Note of your choice in addition to any other Note gained that round"},
+         {"text": "[double] During ordering of initiative in rounds in which you declare a long rest, gain one Note of your choice, and each of your allies may decrease their initiative by 10"}
+       ]
     },
      {
       "name": "Doomstalker",
@@ -302,7 +543,25 @@
           "move": 4,
           "attack": 3
         }
-      }
+      },
+       "perks": [
+         {"removes": ["minus2"],"adds": [ "plus0"]},
+         {"text": "Replace one -1 card with one -1\"Doomstalker performs: %attack% 2, %range% 5\" card","removes": ["minus1"],"adds": ["perks/unique/ds1"]},
+         {"text": "Replace one -1 card with one -1\"Doomstalker performs: %attack% 2, %range% 5\" card","removes": ["minus1"],"adds": ["perks/unique/ds1"]},
+         {"text": "Replace one -1 card with one -1\"Doomstalker performs: %attack% 2, %range% 5\" card","removes": ["minus1"],"adds": ["perks/unique/ds1"]},
+         {"removes": ["plus0", "plus0"],"adds": [ "plus1","plus1"]},
+         {"removes": ["plus0", "plus0"],"adds": [ "plus1","plus1"]},
+         {"text": "Add one +0\"Grant one of your summons adjacent to the target: %attack%+ 0\" card","adds": ["perks/unique/ds2"]},
+         {"text": "Add one +0\"Grant one of your summons adjacent to the target: %attack%+ 0\" card","adds": ["perks/unique/ds2"]},
+         {"adds": [ "perks/plus3"]},
+         {"adds": [ "perks/plus3"]},
+         {"adds": [ "perks/plus0stunflip"]},
+         {"adds": [ "perks/plus0stunflip"]},
+         {"text": "Ignore scenario effects and add one +1%flip% card","adds": [ "perks/plus1flip"]},
+         {"text": "At the start of each scenario, reveal the top card of each monster ability card deck in the scenario"},
+         {"text": "[double] Whenever you rest, after you retrun your cards from your discard pile, you may play one card from your hand to perform a Doom action of the card"},
+         {"text": "[double] On each of your summons' turns, you may have them skip their turn and instead perform %move%+ 0 treating you as their focus"}
+       ]
     },
      {
       "name": "Sawbones",
@@ -311,7 +570,23 @@
       "edition": "Gloomhaven 2nd Edition",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
-      "summons": {}
+      "summons": {},
+       "perks": [
+         {"removes": ["minus1","minus1"]},
+         {"text": "Replace one -2 card with one -2\"Give one adjacent ally or self one medical pack\" card","removes": ["minus2"],"adds": ["perks/unique/sb1"]},
+         {"removes": ["minus1"],"adds": [ "plus1"]},
+         {"removes": ["minus1"],"adds": [ "plus1"]},
+         {"removes": ["minus1"],"adds": [ "plus1"]},
+         {"text": "Replace two +0 cards with one +1\"You may gain %disarm% to add %stun%\" card","removes": ["plus0","plus0"],"adds": ["perks/unique/sb2"]},
+         {"text": "Replace two +0 cards with one +1\"You may gain %disarm% to add %stun%\" card","removes": ["plus0","plus0"],"adds": ["perks/unique/sb2"]},
+         {"text": "Add two +1\"Add + 1%attack% if an ally has an active Prescription\" cards","adds": ["perks/unique/sb3","perks/unique/sb3"]},
+         {"text": "Add two +1\"Add + 1%attack% if an ally has an active Prescription\" cards","adds": ["perks/unique/sb3","perks/unique/sb3"]},
+         {"adds": [ "perks/plus0heal3range1flip"]},
+         {"adds": [ "perks/plus0heal3range1flip"]},
+         {"text": "[double] Add + 1 %heal% to all heal abilities on \"Medical Pack\" ability cards"},
+         {"text": "[double] Each City Phase after completing a scenario, your or one ally's donation to the Sanctuary of the Great Oak is free"},
+         {"text": "[triple] At the end of each of your rests, if an ally has an active Prescription, gain one \"Medical Pack\" ability card and move the token on one ally's active Prescription backward one slot"}
+       ]
     },
      {
       "name": "Elementalist",
@@ -333,7 +608,25 @@
           "move": 3,
           "attack": 2
         }
-      }
+      },
+       "perks": [
+         {"removes": ["minus1"],"adds": [ "perks/plus0fireair"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0earthfire"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0iceair"]},
+         {"removes": ["minus1"],"adds": [ "perks/plus0iceearth"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1fireice"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1fireice"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1airearth"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1airearth"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1lightdark"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1lightdark"]},
+         {"adds": [ "perks/plus0anyflip","perks/plus0anyflip"]},
+         {"adds": [ "perks/plus0anyflip","perks/plus0anyflip"]},
+         {"text": "Ignore scenario effects and add one %any%%flip%","adds": ["perks/plus0anyflip"]},
+         {"text": "At the start of each scenario, you may %any%"},
+         {"text": "Whenever you long rest %use%%any%: %any%"},
+         {"text": "[triple] %fire%,%ice%,%air%, and %earth% do not wane at the end of each round"}
+       ]
     },
      {
       "note": "the bear is a special summon with scaling hit points. as such it remains hardcoded",
@@ -361,7 +654,26 @@
           "health": 3,
           "gfx": "WIL Vital Force"
         }
-      }
+      },
+       "perks": [
+         {"text": "Replace one -1 card with one \"%heal% 2, %target% the Bear\"%flip% card","removes": ["minus1"],"adds": ["perks/unique/wf1"]},
+         {"text": "Replace one -1 card with one \"%heal% 2, %target% the Bear\"%flip% card","removes": ["minus1"],"adds": ["perks/unique/wf1"]},
+         {"text": "Replace one -1 card with one \"%heal% 2, %target% the Bear\"%flip% card","removes": ["minus1"],"adds": ["perks/unique/wf1"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1wound"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1wound"]},
+         {"removes": ["plus0"],"adds": [ "perks/plus1wound"]},
+         {"text": "Replace one +0 card with one +2\"Add + 1%attack% if the Wildfury and the Bear are within %range% 4 of each other\" card","removes": ["plus0"],"adds": ["perks/unique/wf2"]},
+         {"text": "Replace one +0 card with one +2\"Add + 1%attack% if the Wildfury and the Bear are within %range% 4 of each other\" card","removes": ["plus0"],"adds": ["perks/unique/wf2"]},
+         {"removes": ["plus2"],"adds": [ "perks/plus4"]},
+         {"adds": [ "perks/plus1airearth","perks/plus1airearth"]},
+         {"adds": [ "perks/plus1airearth","perks/plus1airearth"]},
+         {"adds": [ "perks/plus2push2"]},
+         {"adds": [ "perks/plus2push2"]},
+         {"text": "Ignore scenario effects and add one +1\"%safeguard%, %target% 1 ally\" card", "adds": [ "perks/plus1safeguardally"]},
+         {"text": "Whenever the Bear is attacked, treat any 2x attack modifier card the enemy draws as +0 instead"},
+         {"text": "Once each scenario, during your turn, Command: %move% 4. If the Bear exits a hex adjacent to you during this movement, you may %teleport% to an empty hex adjacent to the Bear at the end of the movement"},
+         {"text": "[double] At the start or end of each of your long rests, you may %airearth% and reduce your current hit point value by X (X must be at least 1) to Command: %heal% X, self"}
+       ]
     },
 
      {
@@ -428,7 +740,24 @@
           "move": 4,
           "attack": 3
         }
-      }
+      },
+       "perks": [
+         {"removes": ["minus1" ],"adds": ["perks/plus0wound" ]},
+         {"removes": ["minus1" ],"adds": ["perks/plus0wound" ]},
+         {"removes": ["minus1" ],"adds": ["perks/plus0poison" ]},
+         {"removes": ["minus1" ],"adds": ["perks/plus0poison" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1airdark" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1airdark" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1earthlight" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1earthlight" ]},
+         {"text": "Replace one +0 card with one +0\"Add + 1%attack% for each card with a lost icon in Bladeswarm's active area\" card","removes": ["plus0"],"adds": ["perks/unique/bs1"]},
+         {"text": "Replace one +0 card with one +0\"Add + 1%attack% for each card with a lost icon in Bladeswarm's active area\" card","removes": ["plus0"],"adds": ["perks/unique/bs1"]},
+         {"text": "Ignore negative scenario effects and add one +1 card","adds": ["plus1" ]},
+         {"text": "Ignore item - 1 effects and add one +1 card","adds": ["plus1" ]},
+         {"text": "Whenever you long rest, you may %teleport% to the hex occupied by one of your summons and simultaneously %teleport% that summon to the hex you occupied"},
+         {"text": "[double] Once each scenario, when you perform a lost action, you may immediately play one card from your hand to perform a lost action of the the card"},
+         {"text": "[triple] You mey additionally bring four extra hands worth of hand items into each scenario"}
+       ]
     }
   ],
 
