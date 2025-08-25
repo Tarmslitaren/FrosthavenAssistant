@@ -410,8 +410,8 @@ class GameMethods {
     }
     for (final item in perk.add) {
       CardType type = CardType.add;
-      if (item.endsWith("/ge1")) {
-        //geminate hack
+      if (item.endsWith("/ns2")) {
+        //nightshroud hack
         type = CardType.multiply;
       }
       String id = "P$index";

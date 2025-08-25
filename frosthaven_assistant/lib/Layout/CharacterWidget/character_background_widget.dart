@@ -89,7 +89,8 @@ class CharacterBackgroundWidget extends StatelessWidget {
         ],
         image: DecorationImage(
             fit: BoxFit.fill,
-            colorFilter: className == "Shattersong" || className == "Rimehearth"
+            colorFilter: className == "Shattersong" ||
+                    className == "Rimehearth" //todo: also elementalist 2e
                 ? ColorFilter.mode(color, BlendMode.softLight)
                 : ColorFilter.mode(colorSecondary, BlendMode.color),
             image: const AssetImage("assets/images/psd/character-bar.png")),

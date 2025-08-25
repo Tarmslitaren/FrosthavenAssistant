@@ -50,9 +50,7 @@ class ModifierDeck {
         newDrawList.add(ModifierCard(CardType.enfeeble, gfx));
       } else if (gfx == "bless") {
         newDrawList.add(ModifierCard(CardType.bless, gfx));
-      } else if (gfx.contains("nullAttack") ||
-          gfx.contains("doubleAttack") ||
-          (gfx == "P10" && name == "Geminate")) {
+      } else if (_isMultiplyType(gfx)) {
         newDrawList.add(ModifierCard(CardType.multiply, gfx));
       } else {
         newDrawList.add(ModifierCard(CardType.add, gfx));
@@ -67,9 +65,7 @@ class ModifierDeck {
         newDiscardList.add(ModifierCard(CardType.enfeeble, gfx));
       } else if (gfx == "bless") {
         newDiscardList.add(ModifierCard(CardType.bless, gfx));
-      } else if (gfx.contains("nullAttack") ||
-          gfx.contains("doubleAttack") ||
-          (gfx == "P10" && name == "Geminate")) {
+      } else if (_isMultiplyType(gfx)) {
         newDiscardList.add(ModifierCard(CardType.multiply, gfx));
         _needsShuffle = true;
       } else {
@@ -489,6 +485,17 @@ class ModifierDeck {
 
     _needsShuffle = false;
     _cardCount.value = _drawPile.size();
+  }
+
+  bool _isMultiplyType(String gfx) {
+    if (gfx.contains("nullAttack") || gfx.contains("doubleAttack")) {
+      return true;
+    }
+    if (gfx == "P4" && name == "Nightshroud") {
+      //todo: edition . . .
+      return true;
+    }
+    return false;
   }
 }
 
