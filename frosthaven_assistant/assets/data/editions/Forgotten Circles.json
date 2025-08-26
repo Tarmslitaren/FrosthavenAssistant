@@ -57,7 +57,7 @@
         [ 1013, false, 36, "%move% - 1","*.........", "%attack% + 2", "[r]", "%fire%%use%", "^%wound%", "[/r]", "[r]", "%dark%%use%", "^%curse%", "[/r]" ],
         [ 1014, false, 2,
           "^Focus on the enemy with", "^the highest initiative.",
-          "^Teleport%teleport% to the closest unoccupied", "^hex adjacent to the focus.",
+          "^%teleport% to the closest unoccupied", "^hex adjacent to the focus.",
           "*.........", "%attack% - 2", "%dark%"]
       ]
     },

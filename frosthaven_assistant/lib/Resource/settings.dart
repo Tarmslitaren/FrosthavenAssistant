@@ -40,7 +40,7 @@ class Settings {
   final showBattleGoalReminder = ValueNotifier<bool>(true);
   final fhHazTerrainCalcInOGGloom = ValueNotifier<bool>(true);
   final showCharacterAMD = ValueNotifier<bool>(
-      false); //todo: this should be true on release of this feature
+      true); //todo: this should be true on release of this feature (+ dont forget to uncommendt the save code)
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);

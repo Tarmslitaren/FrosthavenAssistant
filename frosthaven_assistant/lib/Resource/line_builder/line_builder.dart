@@ -12,6 +12,7 @@ class LineBuilder {
   static const Map<String, String> tokens = {
     "attack": "Attack",
     "move": "Move",
+    "teleport": "Teleport",
     "range": "Range",
     "heal": "Heal",
     "target": "Target",
