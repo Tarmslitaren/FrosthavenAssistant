@@ -8,7 +8,27 @@
       "edition": "CCUG",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
-      "summons": {}
+      "summons": {},
+      "perks": [
+        {"removes": ["minus2"], "adds": [ "plus0"]},
+        {"text": "Replace one -1 with one +1 %wound%, \"%wound%, self\" card","removes": ["minus1"],"adds": [ "perks/unique/co1"]},
+        {"text": "Replace one -1 with one +1 %wound%, \"%wound%, self\" card","removes": ["minus1"],"adds": [ "perks/unique/co1"]},
+        {"text": "Replace one -1 with one +1 %poison%, \"%poison%, self\" card","removes": ["minus1"],"adds": [ "perks/unique/co2"]},
+        {"text": "Replace one -1 with one +1 %poison%, \"%poison%, self\" card","removes": ["minus1"],"adds": [ "perks/unique/co2"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+        {"text": "Add one +0 \"Add + 1 %damage% for each condition you have\" card","adds": [ "perks/unique/co3"]},
+        {"text": "Add one +0 \"Add + 1 %damage% for each condition you have\" card","adds": [ "perks/unique/co3"]},
+        {"adds": [ "perks/plus0heal1range1flip", "perks/plus0heal1range1flip"]},
+        {"adds": [ "perks/plus0heal1range1flip", "perks/plus0heal1range1flip"]},
+        {"text": "Add one \"%ward%, %regenerate%, self\"%flip% card","adds": [ "perks/unique/co4"]},
+        {"text": "Add one \"%ward%, %regenerate%, self\"%flip% card","adds": [ "perks/unique/co4"]},
+        {"text": "Add one -2 %brittle% and one  +3\"%brittle%, self\" card","adds": ["perks/minus2brittle", "perks/unique/co5"]},
+        {"text": "Ignore item - 1 effects and remove one +0 card","removes": ["plus0"]},
+        {"text": "At the start of each scenario you may perform \"%strengthen%, %wound%, self\" or \"%ward%, %immobilize%, self\""},
+        {"text": "Once each scenario, avoid an Overdrive exhaustion check"},
+        {"text": "Once each scenario, during your turn, remove any number of negative conditions you have"}
+      ]
     },
     {
       "name": "Wildborn",
