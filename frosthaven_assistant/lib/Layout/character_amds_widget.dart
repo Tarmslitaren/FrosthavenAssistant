@@ -51,7 +51,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
           curve: Easing.standard,
           child: Column(children: [
             ElevatedButton(
-                //todo: nicer button
+                //todo: nicer button: show that it hides the amds somehow
                 onPressed: () => {
                       setState(() {
                         _isOpen = !_isOpen;

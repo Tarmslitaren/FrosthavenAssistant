@@ -52,6 +52,9 @@ class CharacterState extends FigureState {
     if (json.containsKey("modifierDeck")) {
       final deck = json["modifierDeck"];
       _modifierDeck = ModifierDeck.fromJson(id, deck);
+    } else {
+      //needs to be initialized first time
+      _modifierDeck = ModifierDeck(id);
     }
 
     if (json.containsKey("conditionsAddedThisTurn")) {
