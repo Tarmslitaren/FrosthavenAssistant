@@ -7,7 +7,7 @@ import 'test_helpers.dart';
 
 void tests() {
   String oldState = gameState.toString();
-  AddCharacterCommand("Hatchet", "Arnold", 9).execute();
+  AddCharacterCommand("Hatchet", "Jaws of the Lion", "Arnold", 9).execute();
   RemoveCharacterCommand(List.of([gameState.currentList.last as Character]))
       .execute();
   test("removed ok", () {

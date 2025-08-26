@@ -6,7 +6,8 @@ import 'test_helpers.dart';
 
 void tests() {
   String oldState = gameState.toString();
-  AddCharacterCommand command = AddCharacterCommand("Hatchet", "Arnold", 9);
+  AddCharacterCommand command =
+      AddCharacterCommand("Hatchet", "Jaws of the Lion", "Arnold", 9);
   command.execute();
 
   test("added ok", () {
