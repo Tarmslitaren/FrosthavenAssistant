@@ -46,7 +46,26 @@
       "edition": "CCUG",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
-      "summons": {}
+      "summons": {},
+      "perks": [
+        {"text": "Replace one -2 card with one -4 \"%use%%any% : %bane%\" card","removes": ["minus2"],"adds": [ "perks/unique/wb1"]},
+        {"text": "Replace one -1 card with one %ice%%flip% and one %air%%flip% card","removes": ["minus1"],"adds": [ "perks/plus0iceflip", "perks/plus0airflip"]},
+        {"text": "Replace one -1 card with one %ice%%flip% and one %air%%flip% card","removes": ["minus1"],"adds": [ "perks/plus0iceflip", "perks/plus0airflip"]},
+        {"text": "Replace one -1 card with one %pierce% 2 \"!%light%%dark%\"%flip% card","removes": ["minus1"],"adds": [ "perks/unique/wb3"]},
+        {"text": "Replace one -1 card with one %pierce% 2 \"!%light%%dark%\"%flip% card","removes": ["minus1"],"adds": [ "perks/unique/wb3"]},
+        {"text": "Replace one +0 card with one %pierce% 2 \"!%fire%%ice%\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/wb2"]},
+        {"text": "Replace one +0 card with one %pierce% 2 \"!%fire%%ice%\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/wb2"]},
+        {"text": "Replace two +0 cards with one +1 %dark% card and one +1 %fire% card","removes": ["plus0","plus0"],"adds": [ "perks/plus1dark", "perks/plus1fire"]},
+        {"text": "Replace two +0 cards with one +1 %dark% card and one +1 %fire% card","removes": ["plus0","plus0"],"adds": [ "perks/plus1dark", "perks/plus1fire"]},
+        {"text": "Add one +1 %disarm% \"!%air%%earth%\" card","adds": [ "perks/unique/wb4"]},
+        {"text": "Add one +1 %disarm% \"!%air%%earth%\" card","adds": [ "perks/unique/wb4"]},
+        {"text": "Add one \"%heal% 1, self\"%light%%flip% card and one \"%heal% 1, self\"%earth%%flip% ","adds": [ "perks/unique/wb5", "perks/unique/wb6"]},
+        {"text": "Add one +X where X is the number of elements you have consumed this turn","adds": [ "perks/unique/wb7"]},
+        {"text": "Add one +X where X is the number of elements you have consumed this turn","adds": [ "perks/unique/wb7"]},
+        {"text": "Whenever you consume an element as a mandatory part of an action, you may generate that same element"},
+        {"text": "At the start of each scenario, %any%"},
+        {"text": "Whenever you long rest, %any%"}
+      ]
     }
   ],
   "monsterAbilities": [
