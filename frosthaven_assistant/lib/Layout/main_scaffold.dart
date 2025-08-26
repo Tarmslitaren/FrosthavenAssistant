@@ -59,6 +59,10 @@ class ToastNotifier extends StatelessWidget {
               if (context.mounted) {
                 showToastSticky(context, message);
               }
+            } else {
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).clearSnackBars();
+              }
             }
           });
 

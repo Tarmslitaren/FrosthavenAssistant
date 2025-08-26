@@ -202,7 +202,6 @@ showToast(BuildContext context, String text) {
 
 showToastSticky(BuildContext context, String text) {
   if (context.mounted) {
-    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(
           duration: const Duration(days: 1),
