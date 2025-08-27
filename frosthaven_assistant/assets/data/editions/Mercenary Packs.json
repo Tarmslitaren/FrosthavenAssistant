@@ -45,13 +45,13 @@
           "gfx": "ANA rat queen"
         }
       },
-      "perksTemp": [
+      "perks": [
         {"removes": ["minus2"], "adds": ["plus0"]},
         {"removes": ["minus1"],"adds": ["perks/plus0poison"]},
         {"removes": ["minus1"],"adds": ["perks/plus0poison"]},
-        {"removes": ["minus1"],"adds": ["plus0poison"]},
-        {"text": "TODO: Replace two +0 cards with one +1 \"Add +1 %attack% when drawn by a summon\" card", "removes": ["plus0", "plus0"]},
-        {"text": "TODO: Replace two +0 cards with one +1 \"Add +1 %attack% when drawn by a summon\" card", "removes": ["plus0", "plus0"]},
+        {"removes": ["minus1"],"adds": ["perks/plus0poison"]},
+        {"text": "Replace two +0 cards with one +1 \"Add +1 %attack% when drawn by a summon\" card", "removes": ["plus0", "plus0"],"adds": ["perks/unique/an2"]},
+        {"text": "Replace two +0 cards with one +1 \"Add +1 %attack% when drawn by a summon\" card", "removes": ["plus0", "plus0"],"adds": ["perks/unique/an2"]},
         {"removes": ["plus0"],"adds": ["perks/plus0stun"]},
         {"removes": ["plus1"],"adds": ["perks/plus1invisible"]},
         {"removes": ["plus1"],"adds": ["perks/plus1invisible"]},
@@ -63,7 +63,7 @@
         {"text": "Ignore scenario effects and remove one +0 card", "removes": ["plus0"]},
         {"text": "Whenever you long rest, you may infuse %air% or %dark%"},
         {"text": "Once each scenario, during your turn, all enemies adjacent to a wall suffer %damage% 1"},
-        {"text": "at the start of the first round of each scenario, after all ability card have been revealed, control one enemy within %range% 5: %move2%"}
+        {"text": "at the start of the first round of each scenario, after all ability card have been revealed, control one enemy within %range% 5: %move% 2"}
       ]
     },
     {
