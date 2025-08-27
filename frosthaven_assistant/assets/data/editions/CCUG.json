@@ -37,7 +37,27 @@
       "edition": "CCUG",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
-      "summons": {}
+      "summons": {},
+      "perks": [
+        {"text": "Replace one -2 with one -1 \"you may suffer %damage% 2 to add +1 instead\" card","removes": ["minus2"],"adds": [ "perks/unique/wi1"]},
+        {"removes": ["minus1","minus1"],"adds": [ "perks/minus1poison"]},
+        {"removes": ["minus1","minus1"],"adds": [ "perks/minus1poison"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus1pierce3"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus1pierce3"]},
+        {"removes": ["plus1","plus1"],"adds": [ "plus2","plus2"]},
+        {"removes": ["plus1","plus1"],"adds": [ "plus2","plus2"]},
+        {"adds": [ "perks/plus2ward"]},
+        {"adds": [ "perks/plus2ward"]},
+        {"text": "Add one +0 \"Add + 1 %attack% per collected Essence\" card","adds": [ "perks/unique/wi2"]},
+        {"text": "Add one \"%heal% 1 %ward% %range% 2\"%flip% card","adds": [ "perks/unique/wi3"]},
+        {"text": "Add one \"%heal% 1 %ward% %range% 2\"%flip% card","adds": [ "perks/unique/wi3"]},
+        {"text": "Add one +1 \"Place this card in your active area. On your next commanded attack, discard this card to add + 2 %attack%\" card","adds": [ "perks/unique/wi4"]},
+        {"text": "Add one +1 \"Place this card in your active area. On your next commanded attack, discard this card to add + 2 %attack%\" card","adds": [ "perks/unique/wi4"]},
+        {"text": "Add one +1 \"Place this card in your active area. On your next commanded attack, discard this card to add + 2 %attack%\" card","adds": [ "perks/unique/wi4"]},
+        {"text": "Ignore scenario effects and treat all Essence' as Stable during one round each scenario"},
+        {"text": "Remove one +0 card and whenever you or one of your allies would suffer exactly %damage% 2, that figure may lose %ward% to suffer no %damage% instead","removes": ["plus0"]},
+        {"text": "At the start of each scenario, you may %any%"}
+      ]
     },
     {
       "name": "Woebound",
