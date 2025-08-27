@@ -91,12 +91,12 @@
           "gfx": "CAS twilight archon"
         }
     },
-      "perksTemp": [
+      "perks": [
         {"removes": ["minus2"]},
         {"removes": ["minus1", "minus1"]},
-        {"text": "todo: Replace one -1 card with one +0 \"%bless%, %target% self or 1 ally\" card", "removes": ["minus1"]},
-        {"text": "todo: Replace one -1 card with one +0 \"%bless%, %target% self or 1 ally\" card", "removes": ["minus1"]},
-        {"text": "todo: Replace one -1 card with one +0 \"%bless%, %target% self or 1 ally\" card", "removes": ["minus1"]},
+        {"text": "Replace one -1 card with one +0 \"%bless%, %target% self or 1 ally\" card", "removes": ["minus1"],"adds": ["perks/unique/ca1"]},
+        {"text": "Replace one -1 card with one +0 \"%bless%, %target% self or 1 ally\" card", "removes": ["minus1"],"adds": ["perks/unique/ca1"]},
+        {"text": "Replace one -1 card with one +0 \"%bless%, %target% self or 1 ally\" card", "removes": ["minus1"],"adds": ["perks/unique/ca1"]},
         {"text": "Replace one +0 card with one +2 \"Add +1 %attack% if the top card of the monster attack modifier deck is revealed\"", "removes": ["plus0"],"adds": ["perks/unique/ca2"]},
         {"text": "Replace one +0 card with one +2 \"Add +1 %attack% if the top card of the monster attack modifier deck is revealed\"", "removes": ["plus0"],"adds": ["perks/unique/ca2"]},
         {"text": "Replace one +0 card with one +2 \"Add +1 %attack% if the top card of the monster attack modifier deck is revealed\"", "removes": ["plus0"],"adds": ["perks/unique/ca2"]},
