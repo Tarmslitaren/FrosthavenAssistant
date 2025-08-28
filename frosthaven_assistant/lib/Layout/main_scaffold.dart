@@ -77,7 +77,7 @@ class ToastNotifier extends StatelessWidget {
 class MainScaffoldBody extends StatelessWidget {
   const MainScaffoldBody({super.key});
 
-  double getSectionWidth(BuildContext context, Character? currentCharacter) {
+  double getSectionWidth(BuildContext context) {
     bool modFitsOnBar = modifiersFitOnBar(context);
     double screenWidth = MediaQuery.of(context).size.width;
     double barScale = getIt<Settings>().userScalingBars.value;
@@ -151,11 +151,7 @@ class MainScaffoldBody extends StatelessWidget {
                           bool hasLootDeck = GameMethods.hasLootDeck();
                           bool modFitsOnBar = modifiersFitOnBar(context);
 
-                          final Character? currentCharacter =
-                              GameMethods.getCurrentCharacter();
-
-                          var sectionWidth =
-                              getSectionWidth(context, currentCharacter);
+                          var sectionWidth = getSectionWidth(context);
 
                           //move to separate row if it doesn't fit
                           bool sectionsOnSeparateRow = false;
