@@ -9,6 +9,7 @@ class ModifierDeck {
   final _curses = ValueNotifier<int>(0);
   final _blesses = ValueNotifier<int>(0);
   final _enfeebles = ValueNotifier<int>(0);
+  final _empowers = ValueNotifier<int>(0);
   final _cardCount = ValueNotifier<int>(
       0); //TODO: everything is a hammer - use maybe change notifier instead?
   final _badOmen = ValueNotifier<int>(0);
@@ -25,6 +26,7 @@ class ModifierDeck {
   ValueListenable<int> get curses => _curses;
   ValueListenable<int> get blesses => _blesses;
   ValueListenable<int> get enfeebles => _enfeebles;
+  ValueListenable<int> get empowers => _empowers;
   ValueListenable<int> get cardCount => _cardCount;
   ValueListenable<int> get badOmen => _badOmen;
   ValueListenable<int> get addedMinusOnes => _addedMinusOnes;
@@ -46,6 +48,8 @@ class ModifierDeck {
       String gfx = item["gfx"];
       if (gfx == "curse") {
         newDrawList.add(ModifierCard(CardType.curse, gfx));
+      } else if (gfx == "empower") {
+        newDrawList.add(ModifierCard(CardType.empower, gfx));
       } else if (gfx == "enfeeble") {
         newDrawList.add(ModifierCard(CardType.enfeeble, gfx));
       } else if (gfx == "bless") {
@@ -63,6 +67,8 @@ class ModifierDeck {
         newDiscardList.add(ModifierCard(CardType.curse, gfx));
       } else if (gfx == "enfeeble") {
         newDiscardList.add(ModifierCard(CardType.enfeeble, gfx));
+      } else if (gfx == "empower") {
+        newDiscardList.add(ModifierCard(CardType.empower, gfx));
       } else if (gfx == "bless") {
         newDiscardList.add(ModifierCard(CardType.bless, gfx));
       } else if (_isMultiplyType(gfx)) {
@@ -85,6 +91,10 @@ class ModifierDeck {
     if (modifierDeckData.containsKey("enfeebles")) {
       int enfeebles = modifierDeckData['enfeebles'];
       _enfeebles.value = enfeebles;
+    }
+    if (modifierDeckData.containsKey("empowers")) {
+      int empowers = modifierDeckData['empowers'];
+      _empowers.value = empowers;
     }
     if (modifierDeckData.containsKey("imbuement")) {
       int imbuement = modifierDeckData['imbuement'];
@@ -109,6 +119,10 @@ class ModifierDeck {
 
   void setEnfeeble(_StateModifier _, int value) {
     _enfeebles.value = value;
+  }
+
+  void setEmpower(_StateModifier _, int value) {
+    _empowers.value = value;
   }
 
   void setBless(_StateModifier _, int value) {
@@ -344,6 +358,9 @@ class ModifierDeck {
     if (card.type == CardType.enfeeble) {
       _enfeebles.value--;
     }
+    if (card.type == CardType.empower) {
+      _empowers.value--;
+    }
 
     _discardPile.push(card);
     _cardCount.value = _drawPile.size();
@@ -355,6 +372,7 @@ class ModifierDeck {
         '"blesses": ${_blesses.value}, '
         '"curses": ${_curses.value}, '
         '"enfeebles": ${_enfeebles.value}, '
+        '"empowers": ${_empowers.value}, '
         '"addedMinusOnes": ${_addedMinusOnes.value.toString()}, '
         '"imbuement": ${_imbuement.value.toString()}, '
         '"badOmen": ${_badOmen.value.toString()}, '
@@ -367,10 +385,12 @@ class ModifierDeck {
     _curses.removeListener(_curseListener);
     _blesses.removeListener(_blessListener);
     _enfeebles.removeListener(_enfeebleListener);
+    _empowers.removeListener(_empowerListener);
 
     _curses.addListener(_curseListener);
     _blesses.addListener(_blessListener);
     _enfeebles.addListener(_enfeebleListener);
+    _empowers.addListener(_empowerListener);
   }
 
   void _curseListener() {
@@ -383,6 +403,10 @@ class ModifierDeck {
 
   void _enfeebleListener() {
     _handleCurseBless(CardType.enfeeble, _enfeebles, "enfeeble");
+  }
+
+  void _empowerListener() {
+    _handleCurseBless(CardType.empower, _empowers, "empower");
   }
 
   void _initDeck(final String name) {
@@ -409,6 +433,7 @@ class ModifierDeck {
     _curses.value = 0;
     _blesses.value = 0;
     _enfeebles.value = 0;
+    _empowers.value = 0;
     _badOmen.value = 0;
     _addedMinusOnes.value = 0;
     _imbuement.value = 0;
@@ -476,6 +501,7 @@ class ModifierDeck {
       ModifierCard card = _discardPile.pop();
       //remove curse and bless
       if (card.type != CardType.bless &&
+          card.type != CardType.empower &&
           card.type != CardType.curse &&
           card.type != CardType.enfeeble) {
         _drawPile.push(card);
@@ -499,7 +525,7 @@ class ModifierDeck {
   }
 }
 
-enum CardType { add, multiply, curse, bless, enfeeble }
+enum CardType { add, multiply, curse, bless, enfeeble, empower }
 
 class ModifierCard {
   final CardType type;

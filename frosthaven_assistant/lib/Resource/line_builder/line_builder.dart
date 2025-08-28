@@ -41,6 +41,7 @@ class LineBuilder {
     "pierce": "PIERCE",
     "curse": "CURSE",
     "enfeeble": "ENFEEBLE",
+    "empower": "EMPOWER",
     "bless": "BLESS",
     "safeguard": "SAFEGUARD",
     "flip": "ROLLING",

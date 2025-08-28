@@ -18,6 +18,7 @@ import 'package:reorderables/reorderables.dart';
 import '../../Resource/commands/amd_remove_minus_2_command.dart';
 import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
+import '../../Resource/commands/change_stat_commands/change_empower_command.dart';
 import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
@@ -192,6 +193,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
               ? characterHail.characterState.perkList[17]
               : false;
           final monsterDeck = widget.name.isEmpty;
+          final hasIncarnate =
+              GameMethods.getFigure("Incarnate", "Incarnate") != null;
 
           return Container(
               constraints: BoxConstraints(
@@ -312,14 +315,25 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                     figureId: "unknown",
                                     ownerId: "unknown",
                                     scale: 1),
-                                if (GameMethods.getFigure(
-                                        "Incarnate", "Incarnate") !=
-                                    null)
+                                if (hasIncarnate)
                                   CounterButton(
                                       deck.enfeebles,
                                       ChangeEnfeebleCommand.deck(deck),
                                       10,
                                       "assets/images/abilities/enfeeble.png",
+                                      true,
+                                      Colors.white,
+                                      figureId: "unknown",
+                                      ownerId: "unknown",
+                                      scale: 1),
+
+                                if ((isCharacter || widget.name == "allies") &&
+                                    hasIncarnate)
+                                  CounterButton(
+                                      deck.empowers,
+                                      ChangeEmpowerCommand.deck(deck),
+                                      10,
+                                      "assets/images/abilities/empower.png",
                                       true,
                                       Colors.white,
                                       figureId: "unknown",

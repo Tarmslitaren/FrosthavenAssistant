@@ -12,6 +12,7 @@ import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/chan
 
 import '../../Resource/commands/add_condition_command.dart';
 import '../../Resource/commands/change_stat_commands/change_chill_command.dart';
+import '../../Resource/commands/change_stat_commands/change_empower_command.dart';
 import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
 import '../../Resource/commands/change_stat_commands/change_health_command.dart';
 import '../../Resource/commands/ice_wraith_change_form_command.dart';
@@ -452,6 +453,8 @@ class StatusMenuState extends State<StatusMenu> {
                             (isObjective || (isMonster && !isSummon));
                     final bool showAmd = showCharacterAmd || showMonsterAmd;
 
+                    final isAlly = deck.name == "allies";
+
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -512,6 +515,17 @@ class StatusMenuState extends State<StatusMenu> {
                               ChangeEnfeebleCommand(0, figureId, ownerId),
                               10,
                               "assets/images/abilities/enfeeble.png",
+                              true,
+                              Colors.white,
+                              figureId: figureId,
+                              ownerId: ownerId,
+                              scale: scale),
+                        if (showAmd && (isCharacter || isAlly) && hasIncarnate)
+                          CounterButton(
+                              deck.empowers,
+                              ChangeEmpowerCommand(0, figureId, ownerId),
+                              10,
+                              "assets/images/abilities/empower.png",
                               true,
                               Colors.white,
                               figureId: figureId,
