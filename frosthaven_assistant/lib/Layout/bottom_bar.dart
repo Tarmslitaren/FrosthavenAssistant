@@ -27,11 +27,13 @@ class BottomBar extends StatelessWidget {
                   child: ValueListenableBuilder<bool>(
                       valueListenable: getIt<Settings>().darkMode,
                       builder: (context, value, child) {
+                        final darkMode = getIt<Settings>().darkMode.value;
                         return Container(
                             height: 40 * settings.userScalingBars.value,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
-                              color: Colors.transparent,
+                              color:
+                                  darkMode ? Colors.black : Colors.transparent,
                               boxShadow: const [
                                 BoxShadow(
                                   color: Colors.black26,
@@ -40,9 +42,8 @@ class BottomBar extends StatelessWidget {
                                 )
                               ],
                               image: DecorationImage(
-                                  image: AssetImage(getIt<Settings>()
-                                          .darkMode
-                                          .value
+                                  opacity: darkMode ? 0.4 : 1,
+                                  image: AssetImage(darkMode
                                       ? 'assets/images/psd/gloomhaven-bar.png'
                                       : 'assets/images/psd/frosthaven-bar.png'),
                                   fit: BoxFit.cover,
@@ -52,7 +53,7 @@ class BottomBar extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const DrawButton(),
-                                const BottomBarLevelWidget(),
+                                BottomBarLevelWidget(),
                                 const NetworkUI(),
                                 if (modifiersFitOnBar(context) &&
                                     getIt<Settings>().showAmdDeck.value &&

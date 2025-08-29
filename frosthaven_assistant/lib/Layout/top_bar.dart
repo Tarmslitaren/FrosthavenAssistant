@@ -45,18 +45,20 @@ class TopBar extends StatelessWidget {
             flexibleSpace: ValueListenableBuilder<bool>(
                 valueListenable: getIt<Settings>().darkMode,
                 builder: (context, value, child) {
+                  final darkMode = getIt<Settings>().darkMode.value;
                   return Container(
-                      height: 42 * userScaling,
-                      color: getIt<Settings>().darkMode.value
-                          ? Colors.black
-                          : Colors.white,
-                      child: Image(
-                          height: 40 * settings.userScalingBars.value,
-                          image: AssetImage(getIt<Settings>().darkMode.value
+                    height: 42 * userScaling,
+                    decoration: BoxDecoration(
+                      color: darkMode ? Colors.black : Colors.transparent,
+                      image: DecorationImage(
+                          opacity: darkMode ? 0.4 : 1,
+                          image: AssetImage(darkMode
                               ? 'assets/images/psd/gloomhaven-bar.png'
                               : 'assets/images/psd/frosthaven-bar.png'),
                           fit: BoxFit.cover,
-                          repeat: ImageRepeat.repeatX));
+                          repeat: ImageRepeat.repeatX),
+                    ),
+                  );
                 }),
             actions: [
               ElementButton(

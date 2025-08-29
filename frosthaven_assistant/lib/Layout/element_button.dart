@@ -8,17 +8,16 @@ import '../Resource/state/game_state.dart';
 import '../services/service_locator.dart';
 
 class ElementButton extends StatefulWidget {
-  final String icon;
-  final Color color;
-  final Elements element;
-  final double width = 40;
-  final double borderWidth = 2;
-
   const ElementButton(
       {super.key,
       required this.icon,
       required this.color,
       required this.element});
+  final String icon;
+  final Color color;
+  final Elements element;
+  final double width = 40;
+  final double borderWidth = 2;
 
   @override
   AnimatedContainerButtonState createState() => AnimatedContainerButtonState();
@@ -32,6 +31,16 @@ class AnimatedContainerButtonState extends State<ElementButton> {
   late double _height;
   late Color _color;
   late BorderRadiusGeometry _borderRadius;
+
+  @override
+  void initState() {
+    final scale = settings.userScalingBars.value;
+    super.initState();
+    _height = widget.width * scale;
+    _color = Colors.transparent;
+    _borderRadius = BorderRadius.all(
+        Radius.circular(widget.width * scale - widget.borderWidth * scale * 2));
+  }
 
   @override
   void dispose() {
@@ -57,35 +66,23 @@ class AnimatedContainerButtonState extends State<ElementButton> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _height = widget.width * settings.userScalingBars.value;
-    _color = Colors.transparent;
-    _borderRadius = BorderRadius.all(Radius.circular(
-        widget.width * settings.userScalingBars.value -
-            widget.borderWidth * settings.userScalingBars.value * 2));
-  }
-
   void setHalf() {
+    final scale = settings.userScalingBars.value;
     _color = widget.color;
-    _height = widget.width * settings.userScalingBars.value / 2 +
-        2 * settings.userScalingBars.value;
+    _height = widget.width * scale / 2 + 2 * scale;
     _borderRadius = BorderRadius.only(
         bottomLeft: Radius.circular(
-            widget.width * settings.userScalingBars.value / 2 -
-                widget.borderWidth * settings.userScalingBars.value * 0),
+            widget.width * scale / 2 - widget.borderWidth * scale * 0),
         bottomRight: Radius.circular(
-            widget.width * settings.userScalingBars.value / 2 -
-                widget.borderWidth * settings.userScalingBars.value * 0));
+            widget.width * scale / 2 - widget.borderWidth * scale * 0));
   }
 
   void setFull() {
+    final scale = settings.userScalingBars.value;
     _color = widget.color;
-    _height = widget.width * settings.userScalingBars.value;
-    _borderRadius = BorderRadius.all(Radius.circular(
-        widget.width * settings.userScalingBars.value -
-            widget.borderWidth * settings.userScalingBars.value));
+    _height = widget.width * scale;
+    _borderRadius = BorderRadius.all(
+        Radius.circular(widget.width * scale - widget.borderWidth * scale));
   }
 
   void setInert() {
@@ -96,8 +93,9 @@ class AnimatedContainerButtonState extends State<ElementButton> {
 
   @override
   Widget build(BuildContext context) {
+    final scale = settings.userScalingBars.value;
     return Container(
-        margin: EdgeInsets.only(right: 2 * settings.userScalingBars.value),
+        margin: EdgeInsets.only(right: 2 * scale),
         child: InkWell(
             hoverColor: Colors.transparent,
             splashColor: Colors.transparent,
@@ -123,8 +121,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
               alignment: Alignment.center,
               children: [
                 Container(
-                    padding: EdgeInsets.only(
-                        bottom: 2 * settings.userScalingBars.value),
+                    padding: EdgeInsets.only(bottom: 2 * scale),
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: ValueListenableBuilder<int>(
@@ -145,15 +142,10 @@ class AnimatedContainerButtonState extends State<ElementButton> {
 
                             return AnimatedContainer(
                                 // Use the properties stored in the State class.
-                                width: widget.width *
-                                        settings.userScalingBars.value -
-                                    widget.borderWidth *
-                                        settings.userScalingBars.value *
-                                        2,
-                                height: _height -
-                                    widget.borderWidth *
-                                        settings.userScalingBars.value *
-                                        2,
+                                width: widget.width * scale -
+                                    widget.borderWidth * scale * 2,
+                                height:
+                                    _height - widget.borderWidth * scale * 2,
                                 decoration: BoxDecoration(
                                     shape: BoxShape.rectangle,
                                     color: _color,
@@ -175,29 +167,29 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                                 curve: Curves.decelerate);
                           }),
                     )),
-                ValueListenableBuilder<int>(
-                    valueListenable: _gameState.commandIndex,
+                ValueListenableBuilder<bool>(
+                    valueListenable: getIt<Settings>().darkMode,
                     builder: (context, value, child) {
-                      Color? color;
-                      if (getIt<Settings>().darkMode.value == false) {
-                        color = Colors.black;
-                      }
-                      if (ElementState.inert !=
-                          _gameState.elementState[widget.element]) {
-                        color = null;
-                      }
+                      return ValueListenableBuilder<int>(
+                          valueListenable: _gameState.commandIndex,
+                          builder: (context, value, child) {
+                            Color? color;
+                            if (!getIt<Settings>().darkMode.value) {
+                              color = Colors.black;
+                            }
+                            if (ElementState.inert !=
+                                _gameState.elementState[widget.element]) {
+                              color = null;
+                            }
 
-                      return Image(
-                        height: widget.width *
-                            settings.userScalingBars.value *
-                            0.65,
-                        image: AssetImage(widget.icon),
-                        color: color,
-                        width: widget.width *
-                            settings.userScalingBars.value *
-                            0.65,
-                      );
-                    }),
+                            return Image(
+                              height: widget.width * scale * 0.65,
+                              image: AssetImage(widget.icon),
+                              color: color,
+                              width: widget.width * scale * 0.65,
+                            );
+                          });
+                    })
               ],
             )));
   }

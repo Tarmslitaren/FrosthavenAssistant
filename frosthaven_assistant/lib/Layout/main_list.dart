@@ -230,11 +230,15 @@ class MainListState extends State<MainList> {
     return ValueListenableBuilder<bool>(
         valueListenable: getIt<Settings>().darkMode,
         builder: (context, value, child) {
+          final darkMode = getIt<Settings>().darkMode.value;
           return Container(
               decoration: BoxDecoration(
+                backgroundBlendMode: BlendMode.srcATop,
+                color: darkMode ? Colors.black : Colors.grey,
                 image: DecorationImage(
+                    opacity: darkMode ? 0.4 : 0.7,
                     fit: BoxFit.cover,
-                    image: AssetImage(getIt<Settings>().darkMode.value
+                    image: AssetImage(darkMode
                         ? 'assets/images/bg/bg.png'
                         : 'assets/images/bg/frosthaven-bg.png')),
               ),
