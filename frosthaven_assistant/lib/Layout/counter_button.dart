@@ -6,12 +6,18 @@ import '../Resource/state/game_state.dart';
 import '../services/service_locator.dart';
 
 class CounterButton extends StatefulWidget {
-  const CounterButton(this.notifier, this.command, this.maxValue, this.image,
-      this.showTotalValue, this.color,
+  const CounterButton(
       {super.key,
+      required this.notifier,
+      required this.command,
+      required this.maxValue,
+      required this.image,
+      required this.showTotalValue,
+      required this.color,
       required this.figureId,
       required this.ownerId,
-      required this.scale});
+      required this.scale,
+      this.extraImage});
 
   final ValueListenable<int> notifier;
   final ChangeStatCommand command;
@@ -22,6 +28,7 @@ class CounterButton extends StatefulWidget {
   final bool showTotalValue;
   final Color color;
   final double scale;
+  final String? extraImage;
 
   @override
   State<StatefulWidget> createState() {
@@ -72,6 +79,18 @@ class CounterButtonState extends State<CounterButton> {
             image: AssetImage(widget.image),
           ),
         ),
+        if (widget.extraImage != null)
+          SizedBox(
+            width: 30 * widget.scale,
+            height: 30 * widget.scale,
+            child: Image(
+              color: Colors.black54,
+              colorBlendMode: BlendMode.modulate,
+              fit: BoxFit.contain,
+              filterQuality: FilterQuality.medium,
+              image: AssetImage(widget.extraImage!),
+            ),
+          ),
         ValueListenableBuilder<int>(
             valueListenable: widget.notifier,
             builder: (context, value, child) {

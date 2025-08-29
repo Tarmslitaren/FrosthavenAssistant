@@ -73,24 +73,17 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                                         ? darkMode
                                             ? Colors.black
                                             : Colors.grey
-                                        : darkMode
-                                            ? Colors.black
-                                            : Colors.black)
+                                        : Colors.black)
                               ],
                               color: isCurrentlySelected
                                   ? darkMode
                                       ? Colors.white
                                       : Colors.black
-                                  : darkMode
-                                      ? Colors.grey
-                                      : Colors.grey),
+                                  : Colors.grey),
                         ),
                         onPressed: () {
                           if (!isCurrentlySelected) {
-                            String? monsterId;
-                            if (widget.monster != null) {
-                              monsterId = widget.monster!.id;
-                            }
+                            String? monsterId = widget.monster?.id;
                             _gameState.action(SetLevelCommand(nr, monsterId));
                           }
                           Navigator.pop(context);
@@ -334,17 +327,17 @@ class SetLevelMenuState extends State<SetLevelMenu> {
               if (widget.figure != null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   CounterButton(
-                      widget.figure!.maxHealth,
-                      ChangeMaxHealthCommand(0, figureId, ownerId),
-                      900,
-                      "assets/images/abilities/heal.png",
-                      true,
-                      Colors.red,
+                      notifier: widget.figure!.maxHealth,
+                      command: ChangeMaxHealthCommand(0, figureId, ownerId),
+                      maxValue: 900,
+                      image: "assets/images/abilities/heal.png",
+                      showTotalValue: true,
+                      color: Colors.red,
                       figureId: figureId,
                       ownerId: ownerId,
                       scale: scale)
                 ]),
-              if (showLegend == true)
+              if (showLegend)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,

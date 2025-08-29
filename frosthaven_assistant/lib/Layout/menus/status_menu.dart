@@ -463,24 +463,24 @@ class StatusMenuState extends State<StatusMenu> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CounterButton(
-                            figure.health,
-                            ChangeHealthCommand(0, figureId, ownerId),
-                            figure.maxHealth.value,
-                            "assets/images/abilities/heal.png",
-                            false,
-                            Colors.red,
+                            notifier: figure.health,
+                            command: ChangeHealthCommand(0, figureId, ownerId),
+                            maxValue: figure.maxHealth.value,
+                            image: "assets/images/abilities/heal.png",
+                            showTotalValue: false,
+                            color: Colors.red,
                             figureId: figureId,
                             ownerId: ownerId,
                             scale: scale),
                         const SizedBox(height: 2),
                         hasXp
                             ? CounterButton(
-                                (figure as CharacterState).xp,
-                                ChangeXPCommand(0, figureId, ownerId),
-                                900,
-                                "assets/images/psd/xp.png",
-                                false,
-                                Colors.blue,
+                                notifier: (figure as CharacterState).xp,
+                                command: ChangeXPCommand(0, figureId, ownerId),
+                                maxValue: 900,
+                                image: "assets/images/psd/xp.png",
+                                showTotalValue: false,
+                                color: Colors.blue,
                                 figureId: figureId,
                                 ownerId: ownerId,
                                 scale: scale)
@@ -491,48 +491,52 @@ class StatusMenuState extends State<StatusMenu> {
                             height: !showCharacterAmd || isSummon ? 2 : 0),
                         if (showAmd)
                           CounterButton(
-                              deck.getRemovable("bless"),
-                              ChangeBlessCommand(0, figureId, ownerId),
-                              10,
-                              "assets/images/abilities/bless.png",
-                              true,
-                              Colors.white,
+                              notifier: deck.getRemovable("bless"),
+                              command: ChangeBlessCommand(0, figureId, ownerId),
+                              maxValue: 10,
+                              image: "assets/images/abilities/bless.png",
+                              showTotalValue: true,
+                              color: Colors.white,
                               figureId: figureId,
                               ownerId: ownerId,
                               scale: scale),
                         SizedBox(height: showCharacterAmd ? 2 : 0),
                         if ((canBeCursed && showMonsterAmd) || showCharacterAmd)
                           CounterButton(
-                              deck.getRemovable("curse"),
-                              ChangeCurseCommand(0, figureId, ownerId),
-                              10,
-                              "assets/images/abilities/curse.png",
-                              true,
-                              Colors.white,
+                              notifier: deck.getRemovable("curse"),
+                              command: ChangeCurseCommand(0, figureId, ownerId),
+                              maxValue: 10,
+                              image: "assets/images/abilities/curse.png",
+                              showTotalValue: true,
+                              color: Colors.white,
                               figureId: figureId,
                               ownerId: ownerId,
                               scale: scale),
                         if (showMonsterAmd && hasIncarnate)
                           CounterButton(
-                              deck.getRemovable("in-enfeeble"),
-                              ChangeEnfeebleCommand(
+                              notifier: deck.getRemovable("in-enfeeble"),
+                              command: ChangeEnfeebleCommand(
                                   0, "in-enfeeble", figureId, ownerId),
-                              10,
-                              "assets/images/abilities/enfeeble.png",
-                              true,
-                              Colors.white,
+                              maxValue: 10,
+                              image: "assets/images/abilities/enfeeble.png",
+                              extraImage:
+                                  "assets/images/class-icons/incarnate.png",
+                              showTotalValue: true,
+                              color: Colors.white,
                               figureId: figureId,
                               ownerId: ownerId,
                               scale: scale),
                         if (showAmd && (isCharacter || isAlly) && hasIncarnate)
                           CounterButton(
-                              deck.getRemovable("in-empower"),
-                              ChangeEmpowerCommand(
+                              notifier: deck.getRemovable("in-empower"),
+                              command: ChangeEmpowerCommand(
                                   0, "in-empower", figureId, ownerId),
-                              10,
-                              "assets/images/abilities/empower.png",
-                              true,
-                              Colors.white,
+                              maxValue: 10,
+                              image: "assets/images/abilities/empower.png",
+                              extraImage:
+                                  "assets/images/class-icons/incarnate.png",
+                              showTotalValue: true,
+                              color: Colors.white,
                               figureId: figureId,
                               ownerId: ownerId,
                               scale: scale),
@@ -540,13 +544,16 @@ class StatusMenuState extends State<StatusMenu> {
                             (widget.characterId == "Ruinmaw" ||
                                 widget.monsterId == "Ruinmaw"))
                           CounterButton(
-                              deck.getRemovable("rm-empower"),
-                              ChangeEmpowerCommand(
+                              notifier: deck.getRemovable("rm-empower"),
+                              command: ChangeEmpowerCommand(
                                   0, "rm-empower", figureId, ownerId),
-                              12,
-                              "assets/images/abilities/empower.png", //add character icon here too
-                              true,
-                              Colors.white,
+                              maxValue: 12,
+                              image:
+                                  "assets/images/abilities/empower.png", //add character icon here too
+                              extraImage:
+                                  "assets/images/class-icons/ruinmaw.png",
+                              showTotalValue: true,
+                              color: Colors.white,
                               figureId: figureId,
                               ownerId: ownerId,
                               scale: scale),

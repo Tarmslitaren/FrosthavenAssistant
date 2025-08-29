@@ -153,13 +153,13 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                 ),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 CounterButton(
-                    widget.character.characterState.maxHealth,
-                    ChangeMaxHealthCommand(
+                    notifier: widget.character.characterState.maxHealth,
+                    command: ChangeMaxHealthCommand(
                         0, widget.character.id, widget.character.id),
-                    900,
-                    "assets/images/abilities/heal.png",
-                    true,
-                    Colors.red,
+                    maxValue: 900,
+                    image: "assets/images/abilities/heal.png",
+                    showTotalValue: true,
+                    color: Colors.red,
                     figureId: widget.character.id,
                     ownerId: widget.character.id,
                     scale: scale)

@@ -316,59 +316,69 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                     ),
                                   ),
                                 CounterButton(
-                                    deck.getRemovable("bless"),
-                                    ChangeBlessCommand.deck(deck),
-                                    10,
-                                    "assets/images/abilities/bless.png",
-                                    true,
-                                    Colors.white,
+                                    notifier: deck.getRemovable("bless"),
+                                    command: ChangeBlessCommand.deck(deck),
+                                    maxValue: 10,
+                                    image: "assets/images/abilities/bless.png",
+                                    showTotalValue: true,
+                                    color: Colors.white,
                                     figureId: "unknown",
                                     ownerId: "unknown",
                                     scale: 1),
                                 CounterButton(
-                                    deck.getRemovable("curse"),
-                                    ChangeCurseCommand.deck(deck),
-                                    10,
-                                    "assets/images/abilities/curse.png",
-                                    true,
-                                    Colors.white,
+                                    notifier: deck.getRemovable("curse"),
+                                    command: ChangeCurseCommand.deck(deck),
+                                    maxValue: 10,
+                                    image: "assets/images/abilities/curse.png",
+                                    showTotalValue: true,
+                                    color: Colors.white,
                                     figureId: "unknown",
                                     ownerId: "unknown",
                                     scale: 1),
                                 if (hasIncarnate)
                                   CounterButton(
-                                      deck.getRemovable("in-enfeeble"),
-                                      ChangeEnfeebleCommand.deck(
+                                      notifier:
+                                          deck.getRemovable("in-enfeeble"),
+                                      command: ChangeEnfeebleCommand.deck(
                                           deck, "in-enfeeble"),
-                                      10,
-                                      "assets/images/abilities/enfeeble.png",
-                                      true,
-                                      Colors.white,
+                                      maxValue: 10,
+                                      image:
+                                          "assets/images/abilities/enfeeble.png",
+                                      extraImage:
+                                          "assets/images/class-icons/incarnate.png",
+                                      showTotalValue: true,
+                                      color: Colors.white,
                                       figureId: "unknown",
                                       ownerId: "unknown",
                                       scale: 1),
                                 if ((widget.name == "Ruinmaw"))
                                   CounterButton(
-                                      deck.getRemovable("rm-empower"),
-                                      ChangeEmpowerCommand.deck(
+                                      notifier: deck.getRemovable("rm-empower"),
+                                      command: ChangeEmpowerCommand.deck(
                                           deck, "rm-empower"),
-                                      12,
-                                      "assets/images/abilities/empower.png",
-                                      true,
-                                      Colors.white,
+                                      maxValue: 12,
+                                      image:
+                                          "assets/images/abilities/empower.png",
+                                      extraImage:
+                                          "assets/images/class-icons/ruinmaw.png",
+                                      showTotalValue: true,
+                                      color: Colors.white,
                                       figureId: "unknown",
                                       ownerId: "unknown",
                                       scale: 1),
                                 if ((isCharacter || widget.name == "allies") &&
                                     hasIncarnate)
                                   CounterButton(
-                                      deck.getRemovable("in-empower"),
-                                      ChangeEmpowerCommand.deck(
+                                      notifier: deck.getRemovable("in-empower"),
+                                      command: ChangeEmpowerCommand.deck(
                                           deck, "in-empower"),
-                                      10,
-                                      "assets/images/abilities/empower.png",
-                                      true,
-                                      Colors.white,
+                                      maxValue: 10,
+                                      image:
+                                          "assets/images/abilities/empower.png",
+                                      extraImage:
+                                          "assets/images/class-icons/incarnate.png",
+                                      showTotalValue: true,
+                                      color: Colors.white,
                                       figureId: "unknown",
                                       ownerId: "unknown",
                                       scale: 1),
