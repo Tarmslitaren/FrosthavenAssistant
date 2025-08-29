@@ -3,10 +3,10 @@ import '../../state/game_state.dart';
 import 'change_stat_command.dart';
 
 class ChangeEmpowerCommand extends ChangeStatCommand {
-  ChangeEmpowerCommand(super.change, super.figureId, super.ownerId);
-  ChangeEmpowerCommand.deck(this.deck) : super(0, '', '');
-
+  final String gfx;
   ModifierDeck? deck;
+  ChangeEmpowerCommand(super.change, this.gfx, super.figureId, super.ownerId);
+  ChangeEmpowerCommand.deck(this.deck, this.gfx) : super(0, '', '');
 
   @override
   void execute() {
@@ -26,7 +26,7 @@ class ChangeEmpowerCommand extends ChangeStatCommand {
         }
       }
     }
-    deck?.setEmpower(stateAccess, deck!.empowers.value + change);
+    deck?.addRemovableValue(gfx, change);
   }
 
   @override

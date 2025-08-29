@@ -3,10 +3,10 @@ import '../../state/game_state.dart';
 import 'change_stat_command.dart';
 
 class ChangeEnfeebleCommand extends ChangeStatCommand {
-  ChangeEnfeebleCommand(super.change, super.figureId, super.ownerId);
-  ChangeEnfeebleCommand.deck(this.deck) : super(0, '', '');
-
   ModifierDeck? deck;
+  final String gfx;
+  ChangeEnfeebleCommand(super.change, this.gfx, super.figureId, super.ownerId);
+  ChangeEnfeebleCommand.deck(this.deck, this.gfx) : super(0, '', '');
 
   @override
   void execute() {
@@ -26,7 +26,7 @@ class ChangeEnfeebleCommand extends ChangeStatCommand {
         }
       }
     }
-    deck!.setEnfeeble(stateAccess, deck!.enfeebles.value + change);
+    deck?.addRemovableValue(gfx, change);
   }
 
   @override

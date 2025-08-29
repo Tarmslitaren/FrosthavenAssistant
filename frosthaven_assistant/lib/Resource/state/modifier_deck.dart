@@ -6,10 +6,14 @@ class ModifierDeck {
   final String name;
   final CardStack<ModifierCard> _drawPile = CardStack<ModifierCard>();
   final CardStack<ModifierCard> _discardPile = CardStack<ModifierCard>();
-  final _curses = ValueNotifier<int>(0);
-  final _blesses = ValueNotifier<int>(0);
-  final _enfeebles = ValueNotifier<int>(0);
-  final _empowers = ValueNotifier<int>(0);
+  final Map<String, ValueNotifier<int>> _removables = {
+    "curse": ValueNotifier<int>(0),
+    "bless": ValueNotifier<int>(0),
+    "in-enfeeble": ValueNotifier<int>(0),
+    "in-empower": ValueNotifier<int>(0),
+    "rm-empower": ValueNotifier<int>(0),
+  };
+
   final _cardCount = ValueNotifier<int>(
       0); //TODO: everything is a hammer - use maybe change notifier instead?
   final _badOmen = ValueNotifier<int>(0);
@@ -23,10 +27,6 @@ class ModifierDeck {
   CardStack<ModifierCard> get drawPile => _drawPile;
   CardStack<ModifierCard> get discardPile => _discardPile;
 
-  ValueListenable<int> get curses => _curses;
-  ValueListenable<int> get blesses => _blesses;
-  ValueListenable<int> get enfeebles => _enfeebles;
-  ValueListenable<int> get empowers => _empowers;
   ValueListenable<int> get cardCount => _cardCount;
   ValueListenable<int> get badOmen => _badOmen;
   ValueListenable<int> get addedMinusOnes => _addedMinusOnes;
@@ -47,13 +47,17 @@ class ModifierDeck {
     for (var item in drawPile) {
       String gfx = item["gfx"];
       if (gfx == "curse") {
-        newDrawList.add(ModifierCard(CardType.curse, gfx));
-      } else if (gfx == "empower") {
-        newDrawList.add(ModifierCard(CardType.empower, gfx));
-      } else if (gfx == "enfeeble") {
-        newDrawList.add(ModifierCard(CardType.enfeeble, gfx));
+        newDrawList.add(ModifierCard(CardType.remove, gfx));
+        addRemovableValue(gfx, 1);
+      } else if (gfx.contains("empower")) {
+        addRemovableValue(gfx, 1);
+        newDrawList.add(ModifierCard(CardType.remove, gfx));
+      } else if (gfx.contains("enfeeble")) {
+        addRemovableValue(gfx, 1);
+        newDrawList.add(ModifierCard(CardType.remove, gfx));
       } else if (gfx == "bless") {
-        newDrawList.add(ModifierCard(CardType.bless, gfx));
+        addRemovableValue(gfx, 1);
+        newDrawList.add(ModifierCard(CardType.remove, gfx));
       } else if (_isMultiplyType(gfx)) {
         newDrawList.add(ModifierCard(CardType.multiply, gfx));
       } else {
@@ -64,13 +68,13 @@ class ModifierDeck {
     for (var item in modifierDeckData["discardPile"] as List) {
       String gfx = item["gfx"];
       if (gfx == "curse") {
-        newDiscardList.add(ModifierCard(CardType.curse, gfx));
-      } else if (gfx == "enfeeble") {
-        newDiscardList.add(ModifierCard(CardType.enfeeble, gfx));
-      } else if (gfx == "empower") {
-        newDiscardList.add(ModifierCard(CardType.empower, gfx));
+        newDiscardList.add(ModifierCard(CardType.remove, gfx));
+      } else if (gfx == "in-enfeeble") {
+        newDiscardList.add(ModifierCard(CardType.remove, gfx));
+      } else if (gfx == "in-empower") {
+        newDiscardList.add(ModifierCard(CardType.remove, gfx));
       } else if (gfx == "bless") {
-        newDiscardList.add(ModifierCard(CardType.bless, gfx));
+        newDiscardList.add(ModifierCard(CardType.remove, gfx));
       } else if (_isMultiplyType(gfx)) {
         newDiscardList.add(ModifierCard(CardType.multiply, gfx));
         _needsShuffle = true;
@@ -84,25 +88,9 @@ class ModifierDeck {
     _discardPile.setList(newDiscardList);
     _cardCount.value = _drawPile.size();
 
-    if (modifierDeckData.containsKey("curses")) {
-      int curses = modifierDeckData['curses'];
-      _curses.value = curses;
-    }
-    if (modifierDeckData.containsKey("enfeebles")) {
-      int enfeebles = modifierDeckData['enfeebles'];
-      _enfeebles.value = enfeebles;
-    }
-    if (modifierDeckData.containsKey("empowers")) {
-      int empowers = modifierDeckData['empowers'];
-      _empowers.value = empowers;
-    }
     if (modifierDeckData.containsKey("imbuement")) {
       int imbuement = modifierDeckData['imbuement'];
       _imbuement.value = imbuement;
-    }
-    if (modifierDeckData.containsKey("blesses")) {
-      int blesses = modifierDeckData['blesses'];
-      _blesses.value = blesses;
     }
 
     if (modifierDeckData.containsKey('badOmen')) {
@@ -113,20 +101,19 @@ class ModifierDeck {
     }
   }
 
-  void setCurse(_StateModifier _, int value) {
-    _curses.value = value;
+  void setRemovableValue(String id, int value) {
+    _removables[id]?.value = value;
   }
 
-  void setEnfeeble(_StateModifier _, int value) {
-    _enfeebles.value = value;
+  void addRemovableValue(String id, int value) {
+    _removables[id]?.value += value;
   }
 
-  void setEmpower(_StateModifier _, int value) {
-    _empowers.value = value;
-  }
-
-  void setBless(_StateModifier _, int value) {
-    _blesses.value = value;
+  ValueNotifier<int> getRemovable(String id) {
+    if (_removables[id] == null) {
+      _removables[id] = ValueNotifier<int>(0);
+    }
+    return _removables[id]!;
   }
 
   void setBadOmen(_StateModifier _, int value) {
@@ -349,19 +336,9 @@ class ModifierDeck {
       _needsShuffle = true;
     }
 
-    if (card.type == CardType.curse) {
-      _curses.value--;
+    if (_removables[card.gfx] != null) {
+      addRemovableValue(card.gfx, -1);
     }
-    if (card.type == CardType.bless) {
-      _blesses.value--;
-    }
-    if (card.type == CardType.enfeeble) {
-      _enfeebles.value--;
-    }
-    if (card.type == CardType.empower) {
-      _empowers.value--;
-    }
-
     _discardPile.push(card);
     _cardCount.value = _drawPile.size();
   }
@@ -369,10 +346,6 @@ class ModifierDeck {
   @override
   String toString() {
     return '{'
-        '"blesses": ${_blesses.value}, '
-        '"curses": ${_curses.value}, '
-        '"enfeebles": ${_enfeebles.value}, '
-        '"empowers": ${_empowers.value}, '
         '"addedMinusOnes": ${_addedMinusOnes.value.toString()}, '
         '"imbuement": ${_imbuement.value.toString()}, '
         '"badOmen": ${_badOmen.value.toString()}, '
@@ -382,31 +355,14 @@ class ModifierDeck {
   }
 
   void _initListeners() {
-    _curses.removeListener(_curseListener);
-    _blesses.removeListener(_blessListener);
-    _enfeebles.removeListener(_enfeebleListener);
-    _empowers.removeListener(_empowerListener);
-
-    _curses.addListener(_curseListener);
-    _blesses.addListener(_blessListener);
-    _enfeebles.addListener(_enfeebleListener);
-    _empowers.addListener(_empowerListener);
-  }
-
-  void _curseListener() {
-    _handleCurseBless(CardType.curse, _curses, "curse");
-  }
-
-  void _blessListener() {
-    _handleCurseBless(CardType.bless, _blesses, "bless");
-  }
-
-  void _enfeebleListener() {
-    _handleCurseBless(CardType.enfeeble, _enfeebles, "enfeeble");
-  }
-
-  void _empowerListener() {
-    _handleCurseBless(CardType.empower, _empowers, "empower");
+    for (var item in _removables.keys) {
+      _removables[item]?.removeListener(() {
+        _handleRemovableCards(_removables[item]!, item);
+      });
+      _removables[item]?.addListener(() {
+        _handleRemovableCards(_removables[item]!, item);
+      });
+    }
   }
 
   void _initDeck(final String name) {
@@ -430,14 +386,13 @@ class ModifierDeck {
     _discardPile.setList([]);
     _shuffle();
     _cardCount.value = _drawPile.size();
-    _curses.value = 0;
-    _blesses.value = 0;
-    _enfeebles.value = 0;
-    _empowers.value = 0;
     _badOmen.value = 0;
     _addedMinusOnes.value = 0;
     _imbuement.value = 0;
     _needsShuffle = false;
+    for (var item in _removables.keys) {
+      _removables[item]?.value = 0;
+    }
   }
 
   _removeCardFromDrawPile(String gfx) {
@@ -450,13 +405,12 @@ class ModifierDeck {
     }
   }
 
-  void _handleCurseBless(
-      CardType type, ValueNotifier<int> notifier, String gfx) {
+  void _handleRemovableCards(ValueNotifier<int> notifier, String gfx) {
     //count and add or remove, then shuffle
     int count = 0;
     bool shuffle = true;
     for (var item in _drawPile.getList()) {
-      if (item.type == type) {
+      if (item.gfx == gfx) {
         count++;
       }
     }
@@ -464,7 +418,8 @@ class ModifierDeck {
       shuffle = false;
     } else if (count < notifier.value) {
       for (int i = count; i < notifier.value; i++) {
-        if (type == CardType.curse && badOmen.value > 0) {
+        //todo: similarly handle ruinmaw empower special ability
+        if (gfx == "curse" && badOmen.value > 0) {
           _badOmen.value--;
           shuffle = false;
           //put in sixth or as far down as it goes.
@@ -473,9 +428,9 @@ class ModifierDeck {
           if (size < 6) {
             position = size;
           }
-          _drawPile.insert(size - position, ModifierCard(type, gfx));
+          _drawPile.insert(size - position, ModifierCard(CardType.remove, gfx));
         } else {
-          _drawPile.push(ModifierCard(type, gfx));
+          _drawPile.push(ModifierCard(CardType.remove, gfx));
         }
       }
     } else {
@@ -483,7 +438,7 @@ class ModifierDeck {
       final list = _drawPile.getList();
       for (int i = 0; i < toRemove; i++) {
         for (int j = list.length - 1; j >= 0; j--) {
-          if (list[j].type == type) {
+          if (list[j].gfx == gfx) {
             _drawPile.removeAt(j);
             break;
           }
@@ -500,10 +455,7 @@ class ModifierDeck {
     while (_discardPile.isNotEmpty) {
       ModifierCard card = _discardPile.pop();
       //remove curse and bless
-      if (card.type != CardType.bless &&
-          card.type != CardType.empower &&
-          card.type != CardType.curse &&
-          card.type != CardType.enfeeble) {
+      if (card.type != CardType.remove) {
         _drawPile.push(card);
       }
     }
@@ -525,7 +477,7 @@ class ModifierDeck {
   }
 }
 
-enum CardType { add, multiply, curse, bless, enfeeble, empower }
+enum CardType { add, multiply, remove }
 
 class ModifierCard {
   final CardType type;

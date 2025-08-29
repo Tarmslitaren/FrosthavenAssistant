@@ -296,7 +296,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                   ),
                                 //todo: (gray out if maxed out)
                                 CounterButton(
-                                    deck.blesses,
+                                    deck.getRemovable("bless"),
                                     ChangeBlessCommand.deck(deck),
                                     10,
                                     "assets/images/abilities/bless.png",
@@ -306,7 +306,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                     ownerId: "unknown",
                                     scale: 1),
                                 CounterButton(
-                                    deck.curses,
+                                    deck.getRemovable("curse"),
                                     ChangeCurseCommand.deck(deck),
                                     10,
                                     "assets/images/abilities/curse.png",
@@ -317,10 +317,24 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                     scale: 1),
                                 if (hasIncarnate)
                                   CounterButton(
-                                      deck.enfeebles,
-                                      ChangeEnfeebleCommand.deck(deck),
+                                      deck.getRemovable("in-enfeeble"),
+                                      ChangeEnfeebleCommand.deck(
+                                          deck, "in-enfeeble"),
                                       10,
                                       "assets/images/abilities/enfeeble.png",
+                                      true,
+                                      Colors.white,
+                                      figureId: "unknown",
+                                      ownerId: "unknown",
+                                      scale: 1),
+
+                                if ((widget.name == "Ruinmaw"))
+                                  CounterButton(
+                                      deck.getRemovable("rm-empower"),
+                                      ChangeEmpowerCommand.deck(
+                                          deck, "in-empower"),
+                                      10,
+                                      "assets/images/abilities/empower.png",
                                       true,
                                       Colors.white,
                                       figureId: "unknown",
@@ -330,8 +344,9 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                 if ((isCharacter || widget.name == "allies") &&
                                     hasIncarnate)
                                   CounterButton(
-                                      deck.empowers,
-                                      ChangeEmpowerCommand.deck(deck),
+                                      deck.getRemovable("in-empower"),
+                                      ChangeEmpowerCommand.deck(
+                                          deck, "in-empower"),
                                       10,
                                       "assets/images/abilities/empower.png",
                                       true,

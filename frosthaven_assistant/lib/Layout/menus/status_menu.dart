@@ -416,8 +416,10 @@ class StatusMenuState extends State<StatusMenu> {
                     }
                     bool hasXp = false;
                     bool isObjective = false;
+                    bool characterHasAmd = false;
                     if (isCharacter && !isSummon) {
                       hasXp = true;
+
                       for (var item in _gameState.currentList) {
                         if (item.id == widget.characterId) {
                           if (GameMethods.isObjectiveOrEscort(
@@ -425,8 +427,9 @@ class StatusMenuState extends State<StatusMenu> {
                             hasXp = false;
                             isObjective = true;
                           } else {
-                            deck = GameMethods.getModifierDeck(
-                                widget.characterId!, _gameState);
+                            characterHasAmd =
+                                item.characterClass.perks.isNotEmpty;
+                            deck = item.characterState.modifierDeck;
                           }
                         }
                       }
@@ -444,10 +447,10 @@ class StatusMenuState extends State<StatusMenu> {
                       }
                     }
 
-                    final bool showCharacterAmd =
-                        getIt<Settings>().showCharacterAMD.value &&
-                                isCharacter ||
-                            isSummon;
+                    final bool showCharacterAmd = characterHasAmd &&
+                            getIt<Settings>().showCharacterAMD.value &&
+                            isCharacter ||
+                        isSummon;
                     final bool showMonsterAmd =
                         getIt<Settings>().showAmdDeck.value &&
                             (isObjective || (isMonster && !isSummon));
@@ -488,7 +491,7 @@ class StatusMenuState extends State<StatusMenu> {
                             height: !showCharacterAmd || isSummon ? 2 : 0),
                         if (showAmd)
                           CounterButton(
-                              deck.blesses,
+                              deck.getRemovable("bless"),
                               ChangeBlessCommand(0, figureId, ownerId),
                               10,
                               "assets/images/abilities/bless.png",
@@ -500,7 +503,7 @@ class StatusMenuState extends State<StatusMenu> {
                         SizedBox(height: showCharacterAmd ? 2 : 0),
                         if ((canBeCursed && showMonsterAmd) || showCharacterAmd)
                           CounterButton(
-                              deck.curses,
+                              deck.getRemovable("curse"),
                               ChangeCurseCommand(0, figureId, ownerId),
                               10,
                               "assets/images/abilities/curse.png",
@@ -511,8 +514,9 @@ class StatusMenuState extends State<StatusMenu> {
                               scale: scale),
                         if (showMonsterAmd && hasIncarnate)
                           CounterButton(
-                              deck.enfeebles,
-                              ChangeEnfeebleCommand(0, figureId, ownerId),
+                              deck.getRemovable("in-enfeeble"),
+                              ChangeEnfeebleCommand(
+                                  0, "in-enfeeble", figureId, ownerId),
                               10,
                               "assets/images/abilities/enfeeble.png",
                               true,
@@ -522,10 +526,25 @@ class StatusMenuState extends State<StatusMenu> {
                               scale: scale),
                         if (showAmd && (isCharacter || isAlly) && hasIncarnate)
                           CounterButton(
-                              deck.empowers,
-                              ChangeEmpowerCommand(0, figureId, ownerId),
+                              deck.getRemovable("in-empower"),
+                              ChangeEmpowerCommand(
+                                  0, "in-empower", figureId, ownerId),
                               10,
                               "assets/images/abilities/empower.png",
+                              true,
+                              Colors.white,
+                              figureId: figureId,
+                              ownerId: ownerId,
+                              scale: scale),
+                        if (showAmd &&
+                            (widget.characterId == "Ruinmaw" ||
+                                widget.monsterId == "Ruinmaw"))
+                          CounterButton(
+                              deck.getRemovable("rm-empower"),
+                              ChangeEmpowerCommand(
+                                  0, "rm-empower", figureId, ownerId),
+                              12,
+                              "assets/images/abilities/empower.png", //add character icon here too
                               true,
                               Colors.white,
                               figureId: figureId,
