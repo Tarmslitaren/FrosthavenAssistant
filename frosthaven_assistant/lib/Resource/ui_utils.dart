@@ -121,6 +121,9 @@ bool hasGHVersion(String name) {
   if (name == "enfeeble") {
     return false;
   }
+  if (name == "empower") {
+    return false;
+  }
   if (name == "brittle") {
     return false;
   }

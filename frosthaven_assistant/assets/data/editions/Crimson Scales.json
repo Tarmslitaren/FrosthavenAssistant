@@ -355,7 +355,24 @@
       "hidden": true,
       "color": "ffc12729",
       "colorSecondary": "ff471817",
-      "summons": {}
+      "summons": {},
+      "perks": [
+        {"text": "Replace one -2 card with one -1\"%rupture% and %wound%\" cards","removes": ["minus2"],"adds": [ "perks/unique/rm2"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0wound"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0wound"]},
+        {"text": "Replace one -1 card with one +0\"%rupture%\" card","removes": ["minus1"],"adds": [ "perks/unique/rm3"]},
+        {"text": "Replace one -1 card with one +0\"%rupture%\" card","removes": ["minus1"],"adds": [ "perks/unique/rm3"]},
+        {"text": "Replace one +0 card with one +1\"Add +3 instead if the target has %rupture% or %wound%\" card","removes": ["plus0"],"adds": [ "perks/unique/rm4"]},
+        {"text": "Replace one +0 card with one +1\"Add +3 instead if the target has %rupture% or %wound%\" card","removes": ["plus0"],"adds": [ "perks/unique/rm4"]},
+        {"text": "Replace one +0 card with one +1\"Add +3 instead if the target has %rupture% or %wound%\" card","removes": ["plus0"],"adds": [ "perks/unique/rm4"]},
+        {"text": "Replace one +0 card with one \"%heal% 1, self, %empower%\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/rm1"]},
+        {"text": "Replace one +0 card with one \"%heal% 1, self, %empower%\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/rm1"]},
+        {"text": "Replace one +0 card with one \"%heal% 1, self, %empower%\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/rm1"]},
+        {"text": "Once each scenario become Sated after collection your fifth loot token"},
+        {"text": "Become Sated each time you lose a card to negate suffering damage"},
+        {"text": "Whenever one of your abilities causes at least one enemy to gain %rupture%, immediately after that ability perform %move% 1"},
+        {"text": "Ignore negative scenario effects and remove one  -1 card","removes": ["minus1"]}
+      ]
     },
     {
       "name": "Amber Aegis",

@@ -17,6 +17,7 @@ class ModifierDeck {
   final _cardCount = ValueNotifier<int>(
       0); //TODO: everything is a hammer - use maybe change notifier instead?
   final _badOmen = ValueNotifier<int>(0);
+  final _corrosiveSpew = ValueNotifier<bool>(false);
   final _addedMinusOnes = ValueNotifier<int>(0);
   final _imbuement = ValueNotifier<int>(0);
 
@@ -29,6 +30,7 @@ class ModifierDeck {
 
   ValueListenable<int> get cardCount => _cardCount;
   ValueListenable<int> get badOmen => _badOmen;
+  ValueListenable<bool> get corrosiveSpew => _corrosiveSpew;
   ValueListenable<int> get addedMinusOnes => _addedMinusOnes;
   ValueListenable<int> get imbuement => _imbuement;
 
@@ -53,6 +55,10 @@ class ModifierDeck {
         addRemovableValue(gfx, 1);
         newDrawList.add(ModifierCard(CardType.remove, gfx));
       } else if (gfx.contains("enfeeble")) {
+        if (gfx == "enfeeble") {
+          //if updating from old version
+          gfx = "in-enfeeble";
+        }
         addRemovableValue(gfx, 1);
         newDrawList.add(ModifierCard(CardType.remove, gfx));
       } else if (gfx == "bless") {
@@ -96,6 +102,9 @@ class ModifierDeck {
     if (modifierDeckData.containsKey('badOmen')) {
       _badOmen.value = modifierDeckData["badOmen"] as int;
     }
+    if (modifierDeckData.containsKey('corrosiveSpew')) {
+      _corrosiveSpew.value = modifierDeckData["corrosiveSpew"] as bool;
+    }
     if (modifierDeckData.containsKey('addedMinusOnes')) {
       _addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
     }
@@ -118,6 +127,10 @@ class ModifierDeck {
 
   void setBadOmen(_StateModifier _, int value) {
     _badOmen.value = value;
+  }
+
+  void setCorrosiveSpew(_StateModifier _) {
+    _corrosiveSpew.value = true;
   }
 
   void addCSSanctuary(_StateModifier _) {}
@@ -349,6 +362,7 @@ class ModifierDeck {
         '"addedMinusOnes": ${_addedMinusOnes.value.toString()}, '
         '"imbuement": ${_imbuement.value.toString()}, '
         '"badOmen": ${_badOmen.value.toString()}, '
+        '"corrosiveSpew": ${_corrosiveSpew.value.toString()}, '
         '"drawPile": ${_drawPile.toString()}, '
         '"discardPile": ${_discardPile.toString()} '
         '}';
@@ -387,6 +401,7 @@ class ModifierDeck {
     _shuffle();
     _cardCount.value = _drawPile.size();
     _badOmen.value = 0;
+    _corrosiveSpew.value = false;
     _addedMinusOnes.value = 0;
     _imbuement.value = 0;
     _needsShuffle = false;
@@ -419,7 +434,12 @@ class ModifierDeck {
     } else if (count < notifier.value) {
       for (int i = count; i < notifier.value; i++) {
         //todo: similarly handle ruinmaw empower special ability
-        if (gfx == "curse" && badOmen.value > 0) {
+        if (gfx == "rm-empower" && corrosiveSpew.value) {
+          shuffle = false;
+          //put on top
+          //_drawPile.insert(0, ModifierCard(CardType.remove, gfx));
+          _drawPile.push(ModifierCard(CardType.remove, gfx));
+        } else if (gfx == "curse" && badOmen.value > 0) {
           _badOmen.value--;
           shuffle = false;
           //put in sixth or as far down as it goes.

@@ -12,6 +12,7 @@ import 'package:frosthaven_assistant/Resource/commands/amd_imbue2_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_remove_imbue_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_remove_minus_1_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/bad_omen_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/corrosive_spew_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 import 'package:reorderables/reorderables.dart';
 
@@ -128,8 +129,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
     return list;
   }
 
-  Widget buildList(List<ModifierCard> list, bool reorderable, bool allOpen,
-      bool hasDiviner, String name) {
+  Widget buildList(
+      List<ModifierCard> list, bool reorderable, bool allOpen, String name) {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Theme(
@@ -176,7 +177,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           var drawPile = deck.drawPile.getList().reversed.toList();
           var discardPile = deck.discardPile.getList();
           bool hasDiviner = false;
-          for (var item in _gameState.currentList) {
+          for (final item in _gameState.currentList) {
             if (item is Character && item.characterClass.name == "Diviner") {
               hasDiviner = true;
             }
@@ -187,6 +188,7 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
               isCharacter ? GameMethods.getCharacterByName(widget.name) : null;
           final screenSize = MediaQuery.of(context).size;
           final badOmen = deck.badOmen.value;
+          final corrosiveSpew = deck.corrosiveSpew.value;
 
           final characterHail = GameMethods.getCharacterByName("Hail");
           bool hasHailPerk = characterHail != null
@@ -195,6 +197,10 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           final monsterDeck = widget.name.isEmpty;
           final hasIncarnate =
               GameMethods.getFigure("Incarnate", "Incarnate") != null;
+
+          final imbuement = deck.imbuement.value;
+
+          final textStyle = TextStyle(fontSize: 16, color: Colors.black);
 
           return Container(
               constraints: BoxConstraints(
@@ -228,7 +234,18 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                     ),
                                 if (badOmen > 0)
                                   Text("BadOmensLeft: $badOmen",
-                                      style: getTitleTextStyle(1)),
+                                      style: textStyle),
+                                if (widget.name == "Ruinmaw" && !corrosiveSpew)
+                                  TextButton(
+                                    onPressed: () {
+                                      _gameState.action(CorrosiveSpewCommand());
+                                    },
+                                    child: Text(
+                                      "Corrosive Spew",
+                                    ),
+                                  ),
+                                if (corrosiveSpew)
+                                  Text(" Empowers on top", style: textStyle),
                                 TextButton(
                                   onPressed: () {
                                     _gameState
@@ -269,12 +286,10 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                       }
                                     },
                                     child: Text(
-                                      deck.imbuement.value > 0
-                                          ? "Remove Imbue"
-                                          : "Imbue",
+                                      imbuement > 0 ? "Remove Imbue" : "Imbue",
                                     ),
                                   ),
-                                if (deck.imbuement.value != 2 && monsterDeck)
+                                if (imbuement != 2 && monsterDeck)
                                   TextButton(
                                     onPressed: () {
                                       _gameState.action(AMDImbue2Command());
@@ -294,7 +309,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                           : "Add Hail Perk",
                                     ),
                                   ),
-                                //todo: (gray out if maxed out)
                                 CounterButton(
                                     deck.getRemovable("bless"),
                                     ChangeBlessCommand.deck(deck),
@@ -327,20 +341,18 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                       figureId: "unknown",
                                       ownerId: "unknown",
                                       scale: 1),
-
                                 if ((widget.name == "Ruinmaw"))
                                   CounterButton(
                                       deck.getRemovable("rm-empower"),
                                       ChangeEmpowerCommand.deck(
-                                          deck, "in-empower"),
-                                      10,
+                                          deck, "rm-empower"),
+                                      12,
                                       "assets/images/abilities/empower.png",
                                       true,
                                       Colors.white,
                                       figureId: "unknown",
                                       ownerId: "unknown",
                                       scale: 1),
-
                                 if ((isCharacter || widget.name == "allies") &&
                                     hasIncarnate)
                                   CounterButton(
@@ -354,7 +366,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                       figureId: "unknown",
                                       ownerId: "unknown",
                                       scale: 1),
-
                                 if (isCharacter &&
                                     character != null &&
                                     character.characterClass.perks.isNotEmpty)
@@ -371,7 +382,6 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                     },
                                     child: const Text("Perks"),
                                   ),
-
                                 const Text(
                                   "   Reveal\n    cards:",
                                 ),
@@ -405,10 +415,8 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          buildList(
-                              drawPile, true, false, hasDiviner, widget.name),
-                          buildList(
-                              discardPile, false, true, hasDiviner, widget.name)
+                          buildList(drawPile, true, false, widget.name),
+                          buildList(discardPile, false, true, widget.name)
                         ],
                       )),
                       Container(
