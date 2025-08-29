@@ -167,6 +167,12 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
   }
 
   @override
+  void deactivate() {
+    revealedList = [];
+    super.deactivate();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
