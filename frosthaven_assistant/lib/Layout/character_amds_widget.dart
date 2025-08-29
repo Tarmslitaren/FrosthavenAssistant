@@ -37,7 +37,6 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
       Offset(0, deckHeight * (characterAmount - 1)),
       Offset(0, deckHeight * characterAmount)
     ];
-
     final goingDownAll = [
       Offset(0, 0),
       Offset(0, deckHeight * characterAmount)
@@ -46,7 +45,6 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
       Offset(0, -deckHeight * (characterAmount - 1)),
       Offset(0, 0)
     ];
-
     final goingNowhereNone = [
       Offset(0, deckHeight * (characterAmount)),
       Offset(0, deckHeight * (characterAmount))
@@ -85,6 +83,9 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
         retVal = goingUpAll;
       }
       if (whereWeAre == _OpenState.oneOpen) {
+        if (characterAmount == 1) {
+          return goingNowhereOne;
+        }
         retVal = goingUpSome;
       }
     }
@@ -93,6 +94,9 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
         retVal = goingUpOne;
       }
       if (whereWeAre == _OpenState.allOpen) {
+        if (characterAmount == 1) {
+          return goingNowhereOne;
+        }
         retVal = goingDownSome;
       }
     }
@@ -137,12 +141,9 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
     final canShowOneDeck = roundState == RoundState.playTurns &&
         currentCharacter != null &&
         currentCharacter.characterClass.perks.isNotEmpty;
-
     final duration = Duration(milliseconds: 500);
     final barScale = getIt<Settings>().userScalingBars.value;
-
     final offsets = _getOffsets(characterAmount);
-
     final text = "Character Decks";
 
     return TranslationAnimatedWidget(
@@ -200,7 +201,11 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
               curve: Easing.standard,
               child: (_openStateUserIntentPlayTurns == _OpenState.oneOpen &&
                       canShowOneDeck)
-                  ? ModifierDeckWidget(name: currentCharacter.id)
+                  ? Container(
+                      margin: EdgeInsets.only(
+                        top: 4 * barScale,
+                      ),
+                      child: ModifierDeckWidget(name: currentCharacter.id))
                   : Column(
                       children: chars
                           .map((item) => (item.characterClass.perks.isNotEmpty)
