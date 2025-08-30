@@ -56,6 +56,7 @@ class BottomBarLevelWidget extends StatelessWidget {
     return Material(
         color: Colors.transparent,
         child: InkWell(
+          canRequestFocus: false,
           onTap: () {
             openDialog(
               context,

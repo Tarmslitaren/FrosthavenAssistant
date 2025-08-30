@@ -51,6 +51,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
           curve: Easing.standard,
           child: Column(children: [
             ElevatedButton(
+                focusNode: FocusNode(skipTraversal: true),
                 //todo: nicer button: show that it hides the amds somehow
                 onPressed: () => {
                       setState(() {

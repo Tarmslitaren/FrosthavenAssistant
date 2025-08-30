@@ -45,6 +45,7 @@ class CounterButtonState extends State<CounterButton> {
           width: 40 * widget.scale,
           height: 40 * widget.scale,
           child: IconButton(
+              focusNode: FocusNode(skipTraversal: true),
               icon: Image.asset('assets/images/psd/sub.png'),
               onPressed: () {
                 widget.command.setChange(-1);
@@ -106,6 +107,7 @@ class CounterButtonState extends State<CounterButton> {
           width: 40 * widget.scale,
           height: 40 * widget.scale,
           child: IconButton(
+            focusNode: FocusNode(skipTraversal: true),
             icon: Image.asset('assets/images/psd/add.png'),
             onPressed: () {
               final value = widget.notifier.value;

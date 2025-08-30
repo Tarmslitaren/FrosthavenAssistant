@@ -85,7 +85,7 @@ class InitiativeWidget extends StatelessWidget {
                     onChanged: (String str) {
                       //close soft keyboard on 2 chars entered
                       if (str.length == 2) {
-                        FocusManager.instance.primaryFocus?.unfocus();
+                        FocusScope.of(context).nextFocus();
                       }
                     },
                     textAlign: TextAlign.center,

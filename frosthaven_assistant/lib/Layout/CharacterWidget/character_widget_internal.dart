@@ -165,6 +165,7 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
             //make left side of character widget start initiative interaction on tap
             if (character.characterState.health.value > 0)
               InkWell(
+                  canRequestFocus: false,
                   onTap: () {
                     if (_gameState.roundState.value ==
                         RoundState.chooseInitiative) {

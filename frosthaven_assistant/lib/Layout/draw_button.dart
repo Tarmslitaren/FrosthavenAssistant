@@ -90,6 +90,7 @@ class DrawButtonState extends State<DrawButton> {
                                 : 60) *
                             settings.userScalingBars.value,
                     child: TextButton(
+                        focusNode: FocusNode(skipTraversal: true),
                         style: TextButton.styleFrom(
                             padding: EdgeInsets.only(
                                 left: 10 * settings.userScalingBars.value,

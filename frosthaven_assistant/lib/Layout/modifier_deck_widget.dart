@@ -270,6 +270,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                   return Row(
                     children: [
                       InkWell(
+                          canRequestFocus: false,
                           onTap: () {
                             setState(() {
                               _animationsEnabled = true;
@@ -288,6 +289,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                         child: Material(
                                             color: Colors.transparent,
                                             child: InkWell(
+                                                canRequestFocus: false,
                                                 focusColor:
                                                     const Color(0x44000000),
                                                 onTap: () {
@@ -311,6 +313,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                         child: Material(
                                             color: Colors.transparent,
                                             child: InkWell(
+                                              canRequestFocus: false,
                                               focusColor:
                                                   const Color(0x44000000),
                                               onTap: () {
@@ -384,6 +387,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                             child: Material(
                                 color: Colors.transparent,
                                 child: InkWell(
+                                    canRequestFocus: false,
                                     focusColor: const Color(0x44000000),
                                     onTap: () {
                                       setState(() {

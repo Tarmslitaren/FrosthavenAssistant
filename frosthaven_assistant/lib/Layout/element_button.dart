@@ -99,6 +99,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
     return Container(
         margin: EdgeInsets.only(right: 2 * settings.userScalingBars.value),
         child: InkWell(
+            canRequestFocus: false,
             hoverColor: Colors.transparent,
             splashColor: Colors.transparent,
             focusColor: const Color(0x44000000),

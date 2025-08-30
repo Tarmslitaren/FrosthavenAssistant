@@ -16,6 +16,7 @@ class CharacterSummonsButton extends StatelessWidget {
         width: 50 * scale,
         height: 50 * scale,
         child: IconButton(
+          focusNode: FocusNode(skipTraversal: true),
           padding: EdgeInsets.zero,
           icon: Image.asset(
               height: 30 * scale,

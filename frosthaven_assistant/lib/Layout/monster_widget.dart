@@ -149,6 +149,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                               (widget.data.monsterInstances.isNotEmpty ||
                                   widget.data.isActive)
                           ? InkWell(
+                              canRequestFocus: false,
                               onTap: () {
                                 getIt<GameState>()
                                     .action(TurnDoneCommand(widget.data.id));

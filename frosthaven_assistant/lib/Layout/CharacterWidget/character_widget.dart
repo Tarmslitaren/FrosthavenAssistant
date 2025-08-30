@@ -89,6 +89,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
     }
 
     return InkWell(
+        canRequestFocus: false,
         onTap: () {
           //open stats menu
           openDialog(

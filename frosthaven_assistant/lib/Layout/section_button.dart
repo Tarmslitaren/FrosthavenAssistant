@@ -18,6 +18,7 @@ class SectionButton extends StatelessWidget {
         valueListenable: getIt<GameState>().commandIndex,
         builder: (context, value, child) {
           return OutlinedButton(
+            focusNode: FocusNode(skipTraversal: true),
             style: OutlinedButton.styleFrom(
               padding: EdgeInsets.zero,
               foregroundColor: Colors.black,

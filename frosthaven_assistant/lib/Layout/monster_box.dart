@@ -287,6 +287,7 @@ class MonsterBox extends StatelessWidget {
     return Material(
         color: Colors.transparent,
         child: InkWell(
+            canRequestFocus: false,
             onTap: () {
               //open stats menu
               if (!blockInput) {
