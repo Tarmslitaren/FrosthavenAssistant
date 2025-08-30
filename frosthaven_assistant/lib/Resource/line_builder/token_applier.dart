@@ -12,6 +12,7 @@ class TokenApplier {
       line = line.replaceAll(glyph, "%$glyph%");
     }
     line = line.replaceAll("2x", "%2x%");
+    line = line.replaceAll("+X", "%+X%");
 
     //removing empty spaces  eg - 1 -> -1
     for (int i = 1; i <= 4; i++) {

@@ -129,14 +129,13 @@ class LootCardListTileState extends State<PerkListTile> {
 
       //self check
       bool positiveMod = gfx == "invisible" ||
-              gfx == "heal" ||
-              gfx == "strengthen" ||
-              gfx == "regenerate"
-          //|| gfx == "bless"
-          //|| gfx == "ward"
-          //|| gfx == "safeguard"
-          //|| gfx == "dodge"
-          ;
+          gfx == "heal" ||
+          gfx == "strengthen" ||
+          gfx == "regenerate" ||
+          gfx == "bless" ||
+          gfx == "ward" ||
+          gfx == "safeguard" ||
+          gfx == "dodge";
       if (ally.isEmpty && positiveMod && range.isEmpty) {
         ally = ", self";
       }
