@@ -82,11 +82,7 @@ class MainScaffoldBody extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double barScale = getIt<Settings>().userScalingBars.value;
 
-    bool hasLootDeck = GameMethods.hasLootDeck();
     double sectionWidth = screenWidth;
-    if (hasLootDeck) {
-      sectionWidth -= 94 * barScale; //width of loot deck
-    }
 
     final chars = GameMethods.getCurrentCharacters();
     bool perksAvailable = false;
@@ -178,15 +174,13 @@ class MainScaffoldBody extends StatelessWidget {
                               child: Column(children: [
                                 Row(
                                     mainAxisAlignment:
-                                        ((!sectionsOnSeparateRow &&
-                                                    nrOfSections != null) ||
-                                                hasLootDeck)
+                                        (!sectionsOnSeparateRow &&
+                                                nrOfSections != null)
                                             ? MainAxisAlignment.spaceBetween
                                             : MainAxisAlignment.end,
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      if (hasLootDeck) const LootDeckWidget(),
                                       if (!sectionsOnSeparateRow &&
                                           nrOfSections != null)
                                         SizedBox(
@@ -194,7 +188,14 @@ class MainScaffoldBody extends StatelessWidget {
                                           child: const SectionList(),
                                         ),
                                       Column(children: [
-                                        CharacterAmdsWidget(),
+                                        const CharacterAmdsWidget(),
+                                        if (hasLootDeck)
+                                          Container(
+                                            margin: EdgeInsets.only(
+                                              top: 4 * barScale,
+                                            ),
+                                            child: const LootDeckWidget(),
+                                          ),
                                         if (GameMethods.shouldShowAlliesDeck())
                                           Container(
                                               margin: EdgeInsets.only(
