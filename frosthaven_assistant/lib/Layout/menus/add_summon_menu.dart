@@ -35,9 +35,10 @@ class AddSummonMenuState extends State<AddSummonMenu> {
 
     //populate the summon list
     for (var item in widget.character.characterClass.summons) {
-      if (item.level <= widget.character.characterState.level.value) {
+      final characterState = widget.character.characterState;
+      if (item.level <= characterState.level.value) {
         int standeesOut = 0;
-        for (var item2 in widget.character.characterState.summonList) {
+        for (var item2 in characterState.summonList) {
           if (item2.name == item.name) {
             standeesOut++;
           }
@@ -124,13 +125,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = 1;
-    if (!isPhoneScreen(context)) {
-      scale = 1.5;
-      if (isLargeTablet(context)) {
-        scale = 2;
-      }
-    }
+    double scale = getModalMenuScale(context);
     return Container(
       width: 336 * scale,
       height: 452 * scale,

@@ -8,10 +8,10 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddStandeeMenu extends StatefulWidget {
+  const AddStandeeMenu({super.key, required this.monster, required this.elite});
+
   final Monster monster;
   final bool elite;
-
-  const AddStandeeMenu({super.key, required this.monster, required this.elite});
 
   @override
   AddStandeeMenuState createState() => AddStandeeMenuState();
@@ -99,13 +99,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
   @override
   Widget build(BuildContext context) {
     int nrOfStandees = widget.monster.type.count;
-    double scale = 1;
-    if (!isPhoneScreen(context)) {
-      scale = 1.5;
-      if (isLargeTablet(context)) {
-        scale = 2;
-      }
-    }
+    double scale = getModalMenuScale(context);
     //4 nrs per row
     double height = 140;
     if (nrOfStandees > 4) {

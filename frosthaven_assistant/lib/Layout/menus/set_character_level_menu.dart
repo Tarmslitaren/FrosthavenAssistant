@@ -88,13 +88,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = 1;
-    if (!isPhoneScreen(context)) {
-      scale = 1.5;
-      if (isLargeTablet(context)) {
-        scale = 2;
-      }
-    }
+    double scale = getModalMenuScale(context);
     bool isObjective =
         GameMethods.isObjectiveOrEscort(widget.character.characterClass);
 

@@ -49,6 +49,17 @@ bool isPhoneScreen(BuildContext context) {
   return false;
 }
 
+double getModalMenuScale(BuildContext context) {
+  double scale = 1;
+  if (!isPhoneScreen(context)) {
+    scale = 1.5;
+    if (isLargeTablet(context)) {
+      scale = 2;
+    }
+  }
+  return scale;
+}
+
 void rebuildAllChildren(BuildContext context) {
   void rebuild(Element el) {
     el.markNeedsBuild();

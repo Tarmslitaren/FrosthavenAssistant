@@ -56,13 +56,7 @@ class NumpadMenuState extends State<NumpadMenu> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = 1;
-    if (!isPhoneScreen(context)) {
-      scale = 1.5;
-      if (isLargeTablet(context)) {
-        scale = 2;
-      }
-    }
+    double scale = getModalMenuScale(context);
     return Container(
         width: 10,
         height: 180 * scale,

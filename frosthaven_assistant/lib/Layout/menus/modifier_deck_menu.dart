@@ -27,16 +27,16 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import '../counter_button.dart';
 
-class ModifierCardMenu extends StatefulWidget {
-  const ModifierCardMenu({super.key, required this.name});
+class ModifierDeckMenu extends StatefulWidget {
+  const ModifierDeckMenu({super.key, required this.name});
 
   final String name;
 
   @override
-  ModifierCardMenuState createState() => ModifierCardMenuState();
+  ModifierDeckMenuState createState() => ModifierDeckMenuState();
 }
 
-class ModifierCardMenuState extends State<ModifierCardMenu> {
+class ModifierDeckMenuState extends State<ModifierDeckMenu> {
   final GameState _gameState = getIt<GameState>();
   final scrollController = ScrollController();
   static List<ModifierCard> revealedList = [];
@@ -211,6 +211,16 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
 
           final textStyle = TextStyle(fontSize: 16, color: Colors.black);
 
+          final campaign = _gameState.currentCampaign.value;
+          final bool isCSCampaign =
+              campaign == "Crimson Scales" || campaign == "Trail of Ashes";
+
+          bool donatedCS = false;
+          if (character != null &&
+              character.characterState.modifierDeck.hasCsSanctuary()) {
+            donatedCS = true;
+          }
+
           return Container(
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
@@ -329,6 +339,13 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                     },
                                     child:
                                         Text("Removed: ${removedPile.length}"),
+                                  ),
+                                if (isCSCampaign && !donatedCS)
+                                  TextButton(
+                                    onPressed: () {
+                                      //todo: add cs blessings
+                                    },
+                                    child: Text("Donate to\nSanctuary"),
                                   ),
                                 CounterButton(
                                     notifier: deck.getRemovable("bless"),

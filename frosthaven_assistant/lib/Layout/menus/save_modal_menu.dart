@@ -21,6 +21,16 @@ class SaveModalMenuState extends State<SaveModalMenu> {
 
   late String _newSaveName;
 
+  @override
+  initState() {
+    // at the beginning, all items are shown
+    super.initState();
+    _newSaveName = widget.saveName;
+    nameController.text = _newSaveName;
+
+    focusNode.addListener(_focusNodeListener);
+  }
+
   void _focusNodeListener() {
     if (!focusNode.hasFocus) {
       if (nameController.text.isNotEmpty) {
@@ -36,27 +46,14 @@ class SaveModalMenuState extends State<SaveModalMenu> {
   }
 
   @override
-  initState() {
-    // at the beginning, all items are shown
-    super.initState();
-    _newSaveName = widget.saveName;
-    nameController.text = _newSaveName;
-
-    focusNode.addListener(_focusNodeListener);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    //todo: extract to ui utils
-    double scale = 1;
-    if (!isPhoneScreen(context)) {
-      scale = 1.5;
-      if (isLargeTablet(context)) {
-        scale = 2;
-      }
-    }
+    double scale = getModalMenuScale(context);
 
     Settings settings = getIt<Settings>();
+
+    final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
+      side: BorderSide(width: 2 * scale, color: Colors.blue),
+    );
 
     return Container(
         width: 240 * scale,
@@ -88,10 +85,7 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                   children: [
                     if (!widget.saveOnly)
                       OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          side:
-                              BorderSide(width: 2 * scale, color: Colors.blue),
-                        ),
+                        style: buttonStyle,
                         onPressed: () {
                           settings.loadSave(widget.saveName);
                           Navigator.pop(context);
@@ -103,9 +97,7 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                       width: 10 * scale,
                     ),
                     OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(width: 2 * scale, color: Colors.blue),
-                      ),
+                      style: buttonStyle,
                       onPressed: () {
                         settings.deleteSave(widget.saveName);
                         settings.saveState(_newSaveName);
@@ -119,10 +111,7 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                     ),
                     if (!widget.saveOnly)
                       OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          side:
-                              BorderSide(width: 2 * scale, color: Colors.blue),
-                        ),
+                        style: buttonStyle,
                         onPressed: () {
                           settings.deleteSave(widget.saveName);
                           Navigator.pop(context);

@@ -1,6 +1,6 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/menus/modifier_card_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/modifier_deck_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -388,7 +388,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                     onTap: () {
                                       setState(() {
                                         openDialog(context,
-                                            ModifierCardMenu(name: deck.name));
+                                            ModifierDeckMenu(name: deck.name));
                                       });
                                     })))
                       ])

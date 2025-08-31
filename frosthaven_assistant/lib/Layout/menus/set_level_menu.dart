@@ -228,13 +228,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
 
     bool darkMode = getIt<Settings>().darkMode.value;
 
-    double scale = 1;
-    if (!isPhoneScreen(context)) {
-      scale = 1.5;
-      if (isLargeTablet(context)) {
-        scale = 2;
-      }
-    }
+    double scale = getModalMenuScale(context);
 
     return Container(
         width: 270 * scale,

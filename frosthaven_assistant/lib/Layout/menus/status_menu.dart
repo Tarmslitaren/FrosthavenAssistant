@@ -298,13 +298,7 @@ class StatusMenuState extends State<StatusMenu> {
       name = character.characterClass.name;
     }
 
-    double scale = 1;
-    if (!isPhoneScreen(context)) {
-      scale = 1.5;
-      if (isLargeTablet(context)) {
-        scale = 2;
-      }
-    }
+    double scale = getModalMenuScale(context);
 
     int nrOfCharacters = GameMethods.getCurrentCharacterAmount();
 
