@@ -639,7 +639,7 @@
       "summons": {
         "Wind Idol": {
           "level": 1,
-          "health": 2,
+          "health": 1,
           "gfx": "WIL Wind Idol",
           "move": 4,
           "attack": 2
