@@ -75,6 +75,22 @@ class CharacterBackgroundWidget extends StatelessWidget {
     final className = character.characterClass.name;
     final color = character.characterClass.color;
     final colorSecondary = character.characterClass.colorSecondary;
+
+    Gradient? gradient;
+    bool hasGradient = false;
+    if (className == "Shattersong") {
+      gradient = buildGradiantBackground(
+          [Colors.yellow, Colors.purple, Colors.teal, Colors.white24]);
+      hasGradient = true;
+    } else if (className == "Rimehearth") {
+      gradient = buildGradiantBackground([colorSecondary, color]);
+      hasGradient = true;
+    } else if (className == "Elementalist") {
+      gradient = buildGradiantBackground(
+          [Colors.red, Colors.blue, Colors.green, Colors.yellow]);
+      hasGradient = true;
+    }
+
     return Container(
       margin: EdgeInsets.all(2 * scale),
       width: 408 * scale,
@@ -89,8 +105,7 @@ class CharacterBackgroundWidget extends StatelessWidget {
         ],
         image: DecorationImage(
             fit: BoxFit.fill,
-            colorFilter: className == "Shattersong" ||
-                    className == "Rimehearth" //todo: also elementalist 2e
+            colorFilter: hasGradient
                 ? ColorFilter.mode(color, BlendMode.softLight)
                 : ColorFilter.mode(colorSecondary, BlendMode.color),
             image: const AssetImage("assets/images/psd/character-bar.png")),
@@ -98,20 +113,8 @@ class CharacterBackgroundWidget extends StatelessWidget {
       ),
       child: Container(
           decoration: BoxDecoration(
-              backgroundBlendMode:
-                  (className == "Shattersong" || className == "Rimehearth")
-                      ? BlendMode.multiply
-                      : null,
-              gradient: (className == "Shattersong")
-                  ? buildGradiantBackground([
-                      Colors.yellow,
-                      Colors.purple,
-                      Colors.teal,
-                      Colors.white24
-                    ])
-                  : className == "Rimehearth"
-                      ? buildGradiantBackground([colorSecondary, color])
-                      : null)),
+              backgroundBlendMode: hasGradient ? BlendMode.multiply : null,
+              gradient: gradient)),
     );
   }
 }

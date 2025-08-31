@@ -32,6 +32,7 @@
      {
       "name": "Tinkerer",
       "color": "FFD1C3A2",
+       "colorSecondary": "FF362417",
       "edition": "Gloomhaven 2nd Edition",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
@@ -213,6 +214,7 @@
      {
       "name": "Sunkeeper",
       "color": "FFFCE434",
+       "colorSecondary": "ff4e1f14",
       "edition": "Gloomhaven 2nd Edition",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
       "hidden": true,
@@ -408,7 +410,8 @@
     },
      {
       "name": "Plagueherald",
-      "color": "FF72E0BE",
+      "color": "FF226866",
+       "colorSecondary": "FF16545e",
       "edition": "Gloomhaven 2nd Edition",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
@@ -461,8 +464,8 @@
     },
      {
       "name": "Soothsinger",
-      "color": "ffe3726b",
-       "colorSecondary": "ff5d3636",
+      "color": "ffc693b0",
+       "colorSecondary": "ffc49648",
       "edition": "Gloomhaven 2nd Edition",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": true,
@@ -565,8 +568,8 @@
     },
      {
       "name": "Sawbones",
-      "color": "ffe3dfcf",
-       "colorSecondary": "ff43413e",
+      "color": "ffc8d1d6",
+       "colorSecondary": "ff934a36",
       "edition": "Gloomhaven 2nd Edition",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": true,
@@ -632,7 +635,7 @@
       "note": "the bear is a special summon with scaling hit points. as such it remains hardcoded",
       "name": "Wildfury",
       "color": "ffca9789",
-       "colorSecondary": "ff36221a",
+       "colorSecondary": "ff46454a",
       "edition": "Gloomhaven 2nd Edition",
       "health": [6, 7, 8, 9, 10, 11, 12, 13, 14],
       "hidden": true,

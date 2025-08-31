@@ -113,7 +113,7 @@
     {
       "name": "Hail",
       "color": "FFb06871",
-      "colorSecondary": "FF540001",
+      "colorSecondary": "FF240F18",
       "edition": "Mercenary Packs",
       "health": [8,9,11,12,14,15,17,18,20],
       "hidden": false,
