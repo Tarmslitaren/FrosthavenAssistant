@@ -75,9 +75,12 @@ class ModifierDeck {
       String gfx = item["gfx"];
       if (gfx == "curse") {
         newDiscardList.add(ModifierCard(CardType.remove, gfx));
-      } else if (gfx == "in-enfeeble") {
-        newDiscardList.add(ModifierCard(CardType.remove, gfx));
-      } else if (gfx == "in-empower") {
+      } else if (gfx.contains("enfeeble")) {
+        if (gfx == "enfeeble") {
+          //if updating from old version
+          gfx = "in-enfeeble";
+        }
+      } else if (gfx.contains("empower")) {
         newDiscardList.add(ModifierCard(CardType.remove, gfx));
       } else if (gfx == "bless") {
         newDiscardList.add(ModifierCard(CardType.remove, gfx));
