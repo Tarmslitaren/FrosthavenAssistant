@@ -550,13 +550,14 @@ class GameMethods {
     if (!section) {
       //first reset state
       GameMethods.resetRound(s, 1, true);
-      _gameState.showAllyDeck.value = false;
+      _gameState._showAllyDeck.value = false;
       _gameState._currentAbilityDecks.clear();
       _gameState._scenarioSpecialRules.clear();
       GameMethods.applyDifficulty(s);
 
       _gameState.modifierDeck._initDeck("");
       _gameState.modifierDeckAllies._initDeck("allies");
+      _gameState._sanctuaryDeck._initDeck();
 
       List<ListItemData> newList = [];
       for (var item in _gameState.currentList) {
@@ -698,7 +699,7 @@ class GameMethods {
     //add objectives and escorts
     for (var item in specialRules) {
       if (item.type == "AllyDeck") {
-        _gameState.showAllyDeck.value = true;
+        _gameState._showAllyDeck.value = true;
       }
       if (item.type == "Objective") {
         if (item.condition == "" ||
@@ -1482,11 +1483,11 @@ class GameMethods {
   }
 
   static void showAllyDeck(_StateModifier _) {
-    _gameState.showAllyDeck.value = true;
+    _gameState._showAllyDeck.value = true;
   }
 
   static void hideAllyDeck(_StateModifier _) {
-    _gameState.showAllyDeck.value = false;
+    _gameState._showAllyDeck.value = false;
   }
 
   static bool shouldShowAlliesDeck() {

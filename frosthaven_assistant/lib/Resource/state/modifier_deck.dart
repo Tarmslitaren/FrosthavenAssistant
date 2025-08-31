@@ -109,20 +109,77 @@ class ModifierDeck {
     _corrosiveSpew.value = true;
   }
 
-  void addCSSanctuary(_StateModifier _) {}
-
-  void removeCSSanctuary(_StateModifier _) {}
-
-  void addCSPartyCard(_StateModifier _, int type) {}
-
-  void removeCSPartyCard(_StateModifier _, int type) {}
-
-  void addHailSpecial(_StateModifier _) {
-    addCard(_, "special/hail", CardType.add);
+  void addCSSanctuary(_StateModifier s) {
+    //adds one of each
+    _drawPile.add(_gameState._sanctuaryDeck.drawFlip(s));
+    _drawPile.add(_gameState._sanctuaryDeck.drawMult(s));
+    _drawPile.shuffle();
   }
 
-  void removeHailSpecial(_StateModifier _) {
-    removeCard(_, "special/hail");
+  void removeCSSanctuary(_StateModifier _) {
+    var list = _drawPile.getList();
+    for (int i = list.length - 1; i >= 0; i--) {
+      if (list[i].gfx.startsWith("sanctuary")) {
+        _gameState._sanctuaryDeck.returnCard(list[i].gfx);
+        _drawPile.removeAt(i);
+      }
+    }
+    list = _discardPile.getList();
+    for (int i = list.length - 1; i >= 0; i--) {
+      if (list[i].gfx.startsWith("sanctuary")) {
+        _gameState._sanctuaryDeck.returnCard(list[i].gfx);
+        _discardPile.removeAt(i);
+      }
+    }
+  }
+
+  bool hasCSSanctuary() {
+    if (_drawPile.getList().firstWhereOrNull((test) {
+              return test.gfx.startsWith("sanctuary");
+            }) !=
+            null ||
+        _discardPile.getList().firstWhereOrNull((test) {
+              return test.gfx.startsWith("sanctuary");
+            }) !=
+            null) {
+      return true;
+    }
+    return false;
+  }
+
+  void addCSPartyCard(_StateModifier s, int type) {
+    addCard(s, "party/$type", CardType.remove);
+  }
+
+  void removeCSPartyCard(_StateModifier _) {
+    _drawPile.removeWhere((test) {
+      return test.gfx.startsWith("party/");
+    });
+    discardPile.removeWhere((test) {
+      return test.gfx.startsWith("party/");
+    });
+  }
+
+  bool hasPartyCard() {
+    if (_drawPile.getList().firstWhereOrNull((test) {
+              return test.gfx.startsWith("party/");
+            }) !=
+            null ||
+        _discardPile.getList().firstWhereOrNull((test) {
+              return test.gfx.startsWith("party/");
+            }) !=
+            null) {
+      return true;
+    }
+    return false;
+  }
+
+  void addHailSpecial(_StateModifier s) {
+    addCard(s, "special/hail", CardType.add);
+  }
+
+  void removeHailSpecial(_StateModifier s) {
+    removeCard(s, "special/hail");
   }
 
   bool hasHail() {

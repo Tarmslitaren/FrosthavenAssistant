@@ -133,9 +133,13 @@ class GameSaveState {
         _loadModifierDeck('modifierDeckAllies', data, gameState);
         _loadLootDeck(data, gameState);
 
+        if (data["sanctuaryDeck"] != null) {
+          gameState._sanctuaryDeck = data["sanctuaryDeck"];
+        }
+
         //this is not really a setting, but a scenario command?
         if (data["showAllyDeck"] != null) {
-          gameState.showAllyDeck.value = data["showAllyDeck"];
+          gameState._showAllyDeck.value = data["showAllyDeck"];
         }
 
         //////elements

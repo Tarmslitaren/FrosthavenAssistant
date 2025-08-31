@@ -124,6 +124,8 @@ flutter:
     - assets/images/attack/perks/ #perks
     - assets/images/attack/perks/unique/ #perks
     - assets/images/attack/special/ #special cards
+    - assets/images/attack/party/ #special cards
+    - assets/images/attack/sanctuary/ #special cards
     - assets/images/loot/ #loot deck
     - assets/images/class-icons/
     - assets/images/monsters/ #portraits

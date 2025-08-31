@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/removed_modifier_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
+import 'package:frosthaven_assistant/Resource/commands/add_cs_party_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_perk_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_add_minus_one_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue1_command.dart';
@@ -14,6 +15,9 @@ import 'package:frosthaven_assistant/Resource/commands/amd_remove_imbue_command.
 import 'package:frosthaven_assistant/Resource/commands/amd_remove_minus_1_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/bad_omen_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/corrosive_spew_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/donate_cs_sanctuary_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/remove_cs_party_card_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/remove_cs_sanctuary_donation_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 import 'package:reorderables/reorderables.dart';
 
@@ -76,6 +80,18 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
           child: Text(text),
           onPressed: () {
             markAsOpen(nr, deck);
+          },
+        ));
+  }
+
+  Widget buildPartyButton(int nr, String id) {
+    String text = nr.toString();
+    return SizedBox(
+        width: 32,
+        child: TextButton(
+          child: Text(text),
+          onPressed: () {
+            _gameState.action(AddCSPartyCardCommand(widget.name, 1));
           },
         ));
   }
@@ -216,9 +232,12 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
               campaign == "Crimson Scales" || campaign == "Trail of Ashes";
 
           bool donatedCS = false;
-          if (character != null &&
-              character.characterState.modifierDeck.hasCsSanctuary()) {
+          bool addedPartyCard = false;
+          if (isCharacter && deck.hasCSSanctuary()) {
             donatedCS = true;
+          }
+          if (isCharacter && deck.hasPartyCard()) {
+            addedPartyCard = true;
           }
 
           return Container(
@@ -340,13 +359,41 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     child:
                                         Text("Removed: ${removedPile.length}"),
                                   ),
-                                if (isCSCampaign && !donatedCS)
+                                if (isCSCampaign && isCharacter)
                                   TextButton(
                                     onPressed: () {
-                                      //todo: add cs blessings
+                                      donatedCS
+                                          ? _gameState.action(
+                                              RemoveCSSanctuaryDonationCommand(
+                                                  widget.name))
+                                          : _gameState.action(
+                                              DonateCSSanctuaryCommand(
+                                                  widget.name));
                                     },
-                                    child: Text("Donate to\nSanctuary"),
+                                    child: Text(donatedCS
+                                        ? "Remove\nDonation"
+                                        : "Donate to\nSanctuary"),
                                   ),
+                                if (isCSCampaign && isCharacter)
+                                  addedPartyCard
+                                      ? TextButton(
+                                          onPressed: () {
+                                            _gameState.action(
+                                                RemoveCSPartyCardCommand(
+                                                    widget.name));
+                                          },
+                                          child: Text("Remove\nParty Card:"),
+                                        )
+                                      : Wrap(
+                                          crossAxisAlignment:
+                                              WrapCrossAlignment.center,
+                                          children: [
+                                              Text("Add Party\n Card:"),
+                                              buildPartyButton(1, widget.name),
+                                              buildPartyButton(2, widget.name),
+                                              buildPartyButton(3, widget.name),
+                                              buildPartyButton(4, widget.name),
+                                            ]),
                                 CounterButton(
                                     notifier: deck.getRemovable("bless"),
                                     command: ChangeBlessCommand.deck(deck),

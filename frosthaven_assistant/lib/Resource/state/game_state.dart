@@ -36,11 +36,69 @@ part "modifier_deck.dart";
 part "monster.dart";
 part "monster_ability_state.dart";
 part "monster_instance.dart";
+part "sanctuary_deck.dart";
 
 // ignore_for_file: library_private_types_in_public_api
 
 class GameState extends ActionHandler {
   //TODO: put action handler in own place
+
+  //state
+  final _currentCampaign = ValueNotifier<String>("Jaws of the Lion");
+  final _round = ValueNotifier<int>(1);
+  final _totalRounds = ValueNotifier<int>(1);
+  final _roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
+  final _level = ValueNotifier<int>(1);
+  final _solo = ValueNotifier<bool>(false);
+  final _autoScenarioLevel = ValueNotifier<bool>(false);
+  final _allyDeckInOGGloom = ValueNotifier<bool>(true);
+  final _difficulty = ValueNotifier<int>(1);
+  final _scenario = ValueNotifier<String>("");
+  final _toastMessage = ValueNotifier<String>("");
+  final _showAllyDeck = ValueNotifier<bool>(false);
+
+  List<String> _scenarioSectionsAdded = [];
+  List<SpecialRule> _scenarioSpecialRules = [];
+  List<ListItemData> _currentList = []; //has both monsters and characters
+  final List<MonsterAbilityState> _currentAbilityDecks =
+      <MonsterAbilityState>[];
+  final Map<Elements, ElementState> _elementState = HashMap();
+  Set<String> _unlockedClasses = {};
+
+  late LootDeck _lootDeck = LootDeck.empty(); //loot deck for current scenario
+  ModifierDeck _modifierDeck = ModifierDeck("");
+  ModifierDeck _modifierDeckAllies = ModifierDeck("allies");
+  SanctuaryDeck _sanctuaryDeck = SanctuaryDeck();
+
+  ValueListenable<String> get currentCampaign => _currentCampaign;
+  ValueListenable<int> get round => _round;
+  ValueListenable<int> get totalRounds => _totalRounds;
+  ValueListenable<RoundState> get roundState => _roundState;
+  ValueListenable<int> get level => _level;
+  ValueListenable<bool> get solo => _solo;
+  ValueListenable<bool> get autoScenarioLevel => _autoScenarioLevel;
+  ValueListenable<bool> get allyDeckInOGGloom => _allyDeckInOGGloom;
+  ValueListenable<int> get difficulty => _difficulty;
+  ValueListenable<String> get toastMessage => _toastMessage;
+  ValueListenable<String> get scenario => _scenario;
+  ValueListenable<bool> get showAllyDeck => _showAllyDeck;
+
+  BuiltList<String> get scenarioSectionsAdded =>
+      BuiltList.of(_scenarioSectionsAdded);
+  BuiltList<SpecialRule> get scenarioSpecialRules =>
+      BuiltList.of(_scenarioSpecialRules);
+  BuiltList<ListItemData> get currentList => BuiltList.of(_currentList);
+  BuiltList<MonsterAbilityState> get currentAbilityDecks =>
+      BuiltList.of(_currentAbilityDecks);
+  BuiltMap<Elements, ElementState> get elementState =>
+      BuiltMap.of(_elementState);
+  BuiltSet<String> get unlockedClasses => BuiltSet.of(_unlockedClasses);
+
+  LootDeck get lootDeck => _lootDeck; //todo: still mutable
+  ModifierDeck get modifierDeck => _modifierDeck; //todo: still mutable
+  ModifierDeck get modifierDeckAllies =>
+      _modifierDeckAllies; //todo: still mutable
+  SanctuaryDeck get sanctuaryDeck => _sanctuaryDeck;
 
   GameState();
 
@@ -53,103 +111,41 @@ class GameState extends ActionHandler {
     _elementState[Elements.dark] = ElementState.inert;
   }
 
-  //state
-  ValueListenable<String> get currentCampaign => _currentCampaign;
-  final _currentCampaign = ValueNotifier<String>("Jaws of the Lion");
   setCampaign(_StateModifier _, String value) {
     _currentCampaign.value = value;
   }
 
-  ValueListenable<int> get round => _round;
-  final _round = ValueNotifier<int>(1);
-  ValueListenable<int> get totalRounds => _totalRounds;
-  final _totalRounds = ValueNotifier<int>(1);
-
-  ValueListenable<RoundState> get roundState => _roundState;
-  final _roundState = ValueNotifier<RoundState>(RoundState.chooseInitiative);
   setRoundState(_StateModifier _, RoundState value) {
     _roundState.value = value;
   }
 
-  ValueListenable<int> get level => _level;
-  final _level = ValueNotifier<int>(1);
   setLevel(_StateModifier _, int value) {
     _level.value = value;
   }
 
-  ValueListenable<bool> get solo => _solo;
-  final _solo = ValueNotifier<bool>(false);
   setSolo(_StateModifier _, bool value) {
     _solo.value = value;
   }
 
-  ValueListenable<bool> get autoScenarioLevel => _autoScenarioLevel;
-  final _autoScenarioLevel = ValueNotifier<bool>(false);
   setAutoScenarioLevel(_StateModifier _, bool value) {
     _autoScenarioLevel.value = value;
   }
 
-  ValueListenable<bool> get allyDeckInOGGloom => _allyDeckInOGGloom;
-  final _allyDeckInOGGloom = ValueNotifier<bool>(true);
   setAllyDeckInOGGloom(_StateModifier _, bool value) {
     _allyDeckInOGGloom.value = value;
   }
 
-  ValueListenable<int> get difficulty => _difficulty;
-  final _difficulty = ValueNotifier<int>(1);
   setDifficulty(_StateModifier _, int value) {
     _difficulty.value = value;
   }
 
-  ValueListenable<String> get scenario => _scenario;
-  final _scenario = ValueNotifier<String>("");
   setScenario(_StateModifier _, String value) {
     _scenario.value = value;
   }
 
-  BuiltList<String> get scenarioSectionsAdded =>
-      BuiltList.of(_scenarioSectionsAdded);
-  List<String> _scenarioSectionsAdded = [];
-
-  BuiltList<SpecialRule> get scenarioSpecialRules =>
-      BuiltList.of(_scenarioSpecialRules);
-  List<SpecialRule> _scenarioSpecialRules = [];
-
-  LootDeck get lootDeck => _lootDeck; //todo: still mutable
-  late LootDeck _lootDeck = LootDeck.empty(); //loot deck for current scenario
-
-  ValueListenable<String> get toastMessage => _toastMessage;
-  final _toastMessage = ValueNotifier<String>("");
   setToastMessage(_StateModifier _, String value) {
     _toastMessage.value = value;
   }
-
-  BuiltList<ListItemData> get currentList => BuiltList.of(_currentList);
-  List<ListItemData> _currentList = []; //has both monsters and characters
-
-  BuiltList<MonsterAbilityState> get currentAbilityDecks =>
-      BuiltList.of(_currentAbilityDecks);
-  final List<MonsterAbilityState> _currentAbilityDecks =
-      <MonsterAbilityState>[];
-  //add to here when adding a monster type
-
-  //elements
-  BuiltMap<Elements, ElementState> get elementState =>
-      BuiltMap.of(_elementState);
-  final Map<Elements, ElementState> _elementState = HashMap();
-
-  //modifierDeck
-  ModifierDeck get modifierDeck => _modifierDeck; //todo: still mutable
-  ModifierDeck _modifierDeck = ModifierDeck("");
-  ModifierDeck get modifierDeckAllies =>
-      _modifierDeckAllies; //todo: still mutable
-  ModifierDeck _modifierDeckAllies = ModifierDeck("allies");
-
-  //unlocked characters
-  BuiltSet<String> get unlockedClasses => BuiltSet.of(_unlockedClasses);
-  Set<String> _unlockedClasses = {};
-
-  final showAllyDeck = ValueNotifier<bool>(false);
 
   @override
   String toString() {
@@ -176,6 +172,7 @@ class GameState extends ActionHandler {
         '"currentCampaign": "${_currentCampaign.value}", '
         '"currentList": ${_currentList.toString()}, '
         '"currentAbilityDecks": ${_currentAbilityDecks.toString()}, '
+        '"sanctuaryDeck": ${_sanctuaryDeck.toString()}, '
         '"modifierDeck": ${_modifierDeck.toString()}, '
         '"modifierDeckAllies": ${_modifierDeckAllies.toString()}, '
         '"lootDeck": ${_lootDeck.toString()}, ' //does this work if null?
