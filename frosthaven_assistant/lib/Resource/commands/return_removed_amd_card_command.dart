@@ -1,16 +1,16 @@
 import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
-class RemoveAMDCardCommand extends Command {
+class ReturnRemovedAMDCardCommand extends Command {
   final int index;
   final String name;
   final GameState _gameState = getIt<GameState>();
-  RemoveAMDCardCommand(this.index, this.name);
+  ReturnRemovedAMDCardCommand(this.index, this.name);
   @override
   void execute() {
     final deck = GameMethods.getModifierDeck(name, _gameState);
-    var card = deck.discardPile.removeAt(index);
-    deck.removedPile.add(card);
+    var card = deck.removedPile.removeAt(index);
+    deck.discardPile.add(card);
   }
 
   @override
@@ -18,6 +18,6 @@ class RemoveAMDCardCommand extends Command {
 
   @override
   String describe() {
-    return "Remove amd card";
+    return "Return removed amd card";
   }
 }

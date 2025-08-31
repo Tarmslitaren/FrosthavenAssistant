@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/perks_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/removed_modifier_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_perk_command.dart';
@@ -180,8 +181,10 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
           String name = widget.name;
           ModifierDeck deck =
               GameMethods.getModifierDeck(widget.name, _gameState);
-          var drawPile = deck.drawPile.getList().reversed.toList();
-          var discardPile = deck.discardPile.getList();
+          final drawPile = deck.drawPile.getList().reversed.toList();
+          final discardPile = deck.discardPile.getList();
+          final removedPile = deck.removedPile.getList();
+
           bool hasDiviner = false;
           for (final item in _gameState.currentList) {
             if (item is Character && item.characterClass.name == "Diviner") {
@@ -314,6 +317,18 @@ class ModifierCardMenuState extends State<ModifierCardMenu> {
                                           ? "Remove Hail Perk"
                                           : "Add Hail Perk",
                                     ),
+                                  ),
+                                if (removedPile.isNotEmpty)
+                                  TextButton(
+                                    onPressed: () {
+                                      openDialog(
+                                          context,
+                                          RemovedModifierCardMenu(
+                                            name: widget.name,
+                                          ));
+                                    },
+                                    child:
+                                        Text("Removed: ${removedPile.length}"),
                                   ),
                                 CounterButton(
                                     notifier: deck.getRemovable("bless"),

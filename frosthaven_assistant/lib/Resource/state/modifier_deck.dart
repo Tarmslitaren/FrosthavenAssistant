@@ -6,6 +6,7 @@ class ModifierDeck {
   final String name;
   final CardStack<ModifierCard> _drawPile = CardStack<ModifierCard>();
   final CardStack<ModifierCard> _discardPile = CardStack<ModifierCard>();
+  final CardStack<ModifierCard> _removedPile = CardStack<ModifierCard>();
   final Map<String, ValueNotifier<int>> _removables = {
     "curse": ValueNotifier<int>(0),
     "bless": ValueNotifier<int>(0),
@@ -27,6 +28,7 @@ class ModifierDeck {
   //TODO: better safety for these getters
   CardStack<ModifierCard> get drawPile => _drawPile;
   CardStack<ModifierCard> get discardPile => _discardPile;
+  CardStack<ModifierCard> get removedPile => _removedPile;
 
   ValueListenable<int> get cardCount => _cardCount;
   ValueListenable<int> get badOmen => _badOmen;
@@ -44,57 +46,28 @@ class ModifierDeck {
     _initDeck(name);
     _initListeners();
 
-    List<ModifierCard> newDrawList = [];
-    List drawPile = modifierDeckData["drawPile"] as List;
-    for (var item in drawPile) {
+    for (var item in modifierDeckData["drawPile"] as List) {
       String gfx = item["gfx"];
-      if (gfx == "curse") {
-        newDrawList.add(ModifierCard(CardType.remove, gfx));
+      if (gfx == "curse" ||
+          gfx.contains("empower") ||
+          gfx.contains("enfeeble") ||
+          gfx == "bless") {
         addRemovableValue(gfx, 1);
-      } else if (gfx.contains("empower")) {
-        addRemovableValue(gfx, 1);
-        newDrawList.add(ModifierCard(CardType.remove, gfx));
-      } else if (gfx.contains("enfeeble")) {
-        if (gfx == "enfeeble") {
-          //if updating from old version
-          gfx = "in-enfeeble";
-        }
-        addRemovableValue(gfx, 1);
-        newDrawList.add(ModifierCard(CardType.remove, gfx));
-      } else if (gfx == "bless") {
-        addRemovableValue(gfx, 1);
-        newDrawList.add(ModifierCard(CardType.remove, gfx));
-      } else if (_isMultiplyType(gfx)) {
-        newDrawList.add(ModifierCard(CardType.multiply, gfx));
-      } else {
-        newDrawList.add(ModifierCard(CardType.add, gfx));
       }
     }
-    List<ModifierCard> newDiscardList = [];
     for (var item in modifierDeckData["discardPile"] as List) {
       String gfx = item["gfx"];
-      if (gfx == "curse") {
-        newDiscardList.add(ModifierCard(CardType.remove, gfx));
-      } else if (gfx.contains("enfeeble")) {
-        if (gfx == "enfeeble") {
-          //if updating from old version
-          gfx = "in-enfeeble";
-        }
-      } else if (gfx.contains("empower")) {
-        newDiscardList.add(ModifierCard(CardType.remove, gfx));
-      } else if (gfx == "bless") {
-        newDiscardList.add(ModifierCard(CardType.remove, gfx));
-      } else if (_isMultiplyType(gfx)) {
-        newDiscardList.add(ModifierCard(CardType.multiply, gfx));
+      if (_isMultiplyType(gfx)) {
         _needsShuffle = true;
-      } else {
-        newDiscardList.add(ModifierCard(CardType.add, gfx));
       }
     }
+
     _drawPile.clear();
     _discardPile.clear();
-    _drawPile.setList(newDrawList);
-    _discardPile.setList(newDiscardList);
+    _removedPile.clear();
+    _drawPile.setList(_getCardsFromJson(modifierDeckData, "drawPile"));
+    _discardPile.setList(_getCardsFromJson(modifierDeckData, "discardPile"));
+    _removedPile.setList(_getCardsFromJson(modifierDeckData, "removedPile"));
     _cardCount.value = _drawPile.size();
 
     if (modifierDeckData.containsKey("imbuement")) {
@@ -367,6 +340,7 @@ class ModifierDeck {
         '"badOmen": ${_badOmen.value.toString()}, '
         '"corrosiveSpew": ${_corrosiveSpew.value.toString()}, '
         '"drawPile": ${_drawPile.toString()}, '
+        '"removedPile": ${_removedPile.toString()}, '
         '"discardPile": ${_discardPile.toString()} '
         '}';
   }
@@ -380,6 +354,32 @@ class ModifierDeck {
         _handleRemovableCards(_removables[item]!, item);
       });
     }
+  }
+
+  List<ModifierCard> _getCardsFromJson(
+      Map<String, dynamic> modifierDeckData, String deckId) {
+    List<ModifierCard> newList = [];
+    for (var item in modifierDeckData[deckId] as List) {
+      String gfx = item["gfx"];
+      if (gfx == "curse") {
+        newList.add(ModifierCard(CardType.remove, gfx));
+      } else if (gfx.contains("enfeeble")) {
+        if (gfx == "enfeeble") {
+          //if updating from old version
+          gfx = "in-enfeeble";
+        }
+        newList.add(ModifierCard(CardType.remove, gfx));
+      } else if (gfx.contains("empower")) {
+        newList.add(ModifierCard(CardType.remove, gfx));
+      } else if (gfx == "bless") {
+        newList.add(ModifierCard(CardType.remove, gfx));
+      } else if (_isMultiplyType(gfx)) {
+        newList.add(ModifierCard(CardType.multiply, gfx));
+      } else {
+        newList.add(ModifierCard(CardType.add, gfx));
+      }
+    }
+    return newList;
   }
 
   void _initDeck(final String name) {
@@ -401,6 +401,7 @@ class ModifierDeck {
     }
     _drawPile.setList(cards);
     _discardPile.setList([]);
+    _removedPile.setList([]);
     _shuffle();
     _cardCount.value = _drawPile.size();
     _badOmen.value = 0;
@@ -436,7 +437,6 @@ class ModifierDeck {
       shuffle = false;
     } else if (count < notifier.value) {
       for (int i = count; i < notifier.value; i++) {
-        //todo: similarly handle ruinmaw empower special ability
         if (gfx == "rm-empower" && corrosiveSpew.value) {
           shuffle = false;
           //put on top
