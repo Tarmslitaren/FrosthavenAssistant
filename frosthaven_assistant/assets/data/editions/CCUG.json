@@ -86,6 +86,34 @@
         {"text": "At the start of each scenario, %any%"},
         {"text": "Whenever you long rest, %any%"}
       ]
+    },
+    {
+      "name": "Lightracer",
+      "color": "FFEF1921",
+      "colorSecondary": "ff8E9D9D",
+      "edition": "CCUG",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {},
+      "perks": [
+        {"removes": ["minus2"],"adds": [ "perks/minus1bless"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0immobilize"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0heal1"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0heal1"]},
+        {"text": "Replace one +0 with one +1 %push% 1, %move% 1 card","removes": ["plus0"],"adds": [ "perks/unique/lr1"]},
+        {"text": "Replace one +0 with one +1 %push% 1, %move% 1 card","removes": ["plus0"],"adds": [ "perks/unique/lr1"]},
+        {"text": "Replace one +0 with one +1 %push% 1, %move% 1 card","removes": ["plus0"],"adds": [ "perks/unique/lr1"]},
+        {"text": "Replace one +0 with one +1 \"You may discard a Speed card to add + 1 %attack% and %muddle%\" card","removes": ["plus0"],"adds": [ "perks/unique/lr2"]},
+        {"text": "Replace one +0 with one +1 \"You may discard a Speed card to add + 1 %attack% and %muddle%\" card","removes": ["plus0"],"adds": [ "perks/unique/lr2"]},
+        {"text": "Replace one +0 with one +1 \"You may discard a Speed card to add + 1 %attack% and %muddle%\" card","removes": ["plus0"],"adds": [ "perks/unique/lr2"]},
+        {"adds": [ "perks/plus1disarm"]},
+        {"adds": [ "perks/plus1disarm"]},
+        {"text": "Add one %ward% %range% 3%flip% card and one %bless% %range% 3%flip% card","adds": [ "perks/plus0wardrange3flip","perks/plus0blessrange3flip"]},
+        {"text": "Add one %ward% %range% 3%flip% card and one %bless% %range% 3%flip% card","adds": [ "perks/plus0wardrange3flip","perks/plus0blessrange3flip"]},
+        {"text": "Ignore scenario effects and when you suffer damage during your turn, you may ignore %ward%"},
+        {"text": "[double] Whenever you draw a %bless%, perform %ward% %target% 1 ally. If that ally already has %ward%, %heal% 1 that ally"},
+        {"text": "Once each scenario, you may use all of your played cards for their standard action and ignore damage from Speeds that turn"}
+      ]
     }
   ],
   "monsterAbilities": [
