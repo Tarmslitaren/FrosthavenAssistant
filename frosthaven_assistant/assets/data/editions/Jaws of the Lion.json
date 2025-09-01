@@ -10,61 +10,38 @@
       "hidden": false,
       "summons": {},
       "perks": [
-        {
-          "removes": ["minus1", "minus1"]
-        },
-        {
-          "removes": ["minus1", "minus1"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus2muddle"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus1poison"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus1wound"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus1immobilize"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus1push2"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus0stun"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus1stun"]
-        },
-        {
-          "adds": ["perks/plus2air"]
-        },
-        {
-          "adds": ["perks/plus2air"]
-        },
-        {
-          "adds": ["perks/plus2air"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus3"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus3"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus3"]
-        }
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["plus0"], "adds": ["perks/plus2muddle"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1poison"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1wound"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1immobilize"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1push2"]},
+        {"removes": ["plus0"], "adds": ["perks/plus0stun"]},
+        {"removes": ["plus1"], "adds": ["perks/plus1stun"]},
+        {"adds": ["perks/plus2air"]},
+        {"adds": ["perks/plus2air"]},
+        {"adds": ["perks/plus2air"]},
+        {"removes": ["plus1"], "adds": ["perks/plus3"]},
+        {"removes": ["plus1"], "adds": ["perks/plus3"]},
+        {"removes": ["plus1"], "adds": ["perks/plus3"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["plus0"], "adds": ["perks/plus0stun"]},
+        {"removes": ["plus1"], "adds": ["perks/plus1stun"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1wound"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1poison"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1immobilize"]},
+        {"removes": ["plus0"], "adds": ["perks/plus2muddle"]},
+        {"removes": ["plus1"], "adds": ["perks/plus3"]},
+        {"removes": ["plus1"], "adds": ["perks/plus3"]},
+        {"removes": ["plus1"], "adds": ["perks/plus3"]},
+        {"adds": ["perks/plus2air"]},
+        {"adds": ["perks/plus2air"]},
+        {"adds": ["perks/plus2air"]},
+        {"text": "Hasty Pick-up: Once each scenario, during your turn, if the Favorite is in a hex on the map, you may %use%%wind% to return it to its ability card"}
       ]
     },
     {
@@ -75,60 +52,37 @@
       "hidden": false,
       "summons": {},
       "perks": [
-        {
-          "removes": ["plus0","plus0","plus0","plus0"]
-        },
-        {
-          "removes": ["minus1", "minus1"]
-        },
-        {
-          "removes": ["minus1", "minus1"]
-        },
-        {
-          "removes": ["minus2", "minus1"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus2muddle"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus2muddle"]
-        },
-        {
-          "removes": ["minus1"],
-          "adds": ["perks/plus0poison"]
-        },
-        {
-          "adds": ["plus2"]
-        },
-        {
-          "adds": ["plus2"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus2earth"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus2earth"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus2fire"]
-        },
-        {
-          "removes": ["plus1"],
-          "adds": ["perks/plus2fire"]
-        },
-        {
-          "text": "Add one +0 \"all adjacent enemies suffer 1 damage\" card",
-          "adds": ["perks/unique/de1"]
-        },
-        {
-          "text": "Add one +0 \"all adjacent enemies suffer 1 damage\" card",
-          "adds": ["perks/unique/de1"]
-        }
+        {"removes": ["plus0","plus0","plus0","plus0"]},
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus2", "minus1"]},
+        {"removes": ["plus0"], "adds": ["perks/plus2muddle"]},
+        {"removes": ["plus0"], "adds": ["perks/plus2muddle"]},
+        {"removes": ["minus1"], "adds": ["perks/plus0poison"]},
+        {"adds": ["plus2"]},
+        {"adds": ["plus2"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2earth"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2earth"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2fire"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2fire"]},
+        {"text": "Add one +0 \"all adjacent enemies suffer 1 damage\" card", "adds": ["perks/unique/de1"]},
+        {"text": "Add one +0 \"all adjacent enemies suffer 1 damage\" card", "adds": ["perks/unique/de1"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["plus0","plus0","plus0","plus0"]},
+        {"removes": ["minus2"], "adds": ["perks/plus0poison"]},
+        {"removes": ["plus0"], "adds": ["perks/plus2muddle"]},
+        {"removes": ["plus0"], "adds": ["perks/plus2muddle"]},
+        {"removes": ["plus1"],"adds": ["plus2","plus2"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2fire"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2fire"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2earth"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2earth"]},
+        {"text": "Add two +0 \"all adjacent enemies suffer 1 damage\" cards", "adds": ["perks/unique/de1","perks/unique/de1"]},
+        {"text": "Ignore scenario effects and remove one -1 card","removes": ["minus1"]},
+        {"text": "[double] Remodeling: Whenever you rest while adjacent to a wall or obstacle, you may place an obstacle in an empty hex within %range% 2 (of you)"}
       ]
     },
     {
@@ -139,57 +93,38 @@
       "hidden": false,
       "summons": {},
       "perks": [
-        {
-          "removes": ["minus1", "minus1"]
-        },
-        {
-          "removes": ["minus2"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus1dark"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus1dark"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus1ice"]
-        },
-        {
-          "removes": ["plus0"],
-          "adds": ["perks/plus1ice"]
-        },
-        {
-          "removes": ["minus1"],
-          "adds": ["perks/plus0heal1ally"]
-        },
-        {
-          "removes": ["minus1"],
-          "adds": ["perks/plus0heal1ally"]
-        },
-        {
-          "adds": ["perks/plus1heal1ally"]
-        },
-        {
-          "adds": ["perks/plus1heal1ally"]
-        },
-        {
-          "adds": ["perks/plus1heal1ally"]
-        },
-        {
-          "adds": ["perks/plus1poison"]
-        },
-        {
-          "adds": ["perks/plus3"]
-        },
-        {
-          "adds": ["perks/plus1curse"]
-        },
-        {
-          "adds": ["perks/plus1curse"]
-        }
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus2"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1dark"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1dark"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1ice"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1ice"]},
+        {"removes": ["minus1"], "adds": ["perks/plus0heal1ally"]},
+        {"removes": ["minus1"], "adds": ["perks/plus0heal1ally"]},
+        {"adds": ["perks/plus1heal1ally"]},
+        {"adds": ["perks/plus1heal1ally"]},
+        {"adds": ["perks/plus1heal1ally"]},
+        {"adds": ["perks/plus1poison"]},
+        {"adds": ["perks/plus3"]},
+        {"adds": ["perks/plus1curse"]},
+        {"adds": ["perks/plus1curse"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus2"]},
+        {"removes": ["minus1"], "adds": ["perks/plus0heal1ally"]},
+        {"removes": ["minus1"], "adds": ["perks/plus0heal1ally"]},
+        {"removes": ["plus0"],"adds": ["perks/plus1heal1ally"]},
+        {"removes": ["plus0"],"adds": ["perks/plus1heal1ally"]},
+        {"removes": ["plus0"],"adds": ["perks/plus1heal1ally"]},
+        {"removes": ["plus0"],"adds": ["perks/plus1poison"]},
+        {"removes": ["plus0"],"adds": ["perks/plus1curse"]},
+        {"removes": ["plus0"],"adds": ["perks/plus1curse"]},
+        {"adds": ["perks/plus1ice","perks/plus1ice"]},
+        {"adds": ["perks/plus1dark","perks/plus1dark"]},
+        {"adds": ["perks/plus3"]},
+        {"text": "Ignore scenario effects"},
+        {"text": "Grave Defense: Whenever you rest, you may %use%%lightdark% to give %ward% to one ally who has %poison%"}
       ]
     },
     {
@@ -216,6 +151,22 @@
         {"adds": ["perks/plus1shield1"]},
         {"removes": ["plus0"], "adds": ["perks/plus1immobilize"]},
         {"removes": ["plus0"], "adds": ["perks/plus1wound"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus1", "minus1"]},
+        {"removes": ["minus1","minus1"]},
+        {"removes": ["minus2"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1wound"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1immobilize"]},
+        {"text": "Replace one +0 card and one +1 card with two +1\"%shield% 1\" cards","removes": ["plus0","plus1"], "adds": ["perks/plus1shield1","perks/plus1shield1"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2fire"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2fire"]},
+        {"removes": ["plus1"],"adds": ["perks/plus2light"]},
+        {"removes": ["plus1"], "adds": ["perks/plus2light"]},
+        {"adds": ["perks/plus1firelight"]},
+        {"adds": ["perks/plus1firelight"]},
+        {"text": "Ignore item - 1 effects and add two +1 cards","adds": ["plus1","plus1"]},
+        {"text": "[double] Brilliant Aegis: Whenever you are attacked, you may %use%%light% to gain %shield% 1 for the attack and have the attacker gain disadvantage for the attack"}
       ]
     }
   ],
