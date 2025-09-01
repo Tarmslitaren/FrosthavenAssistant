@@ -114,6 +114,7 @@ class ModifierDeck {
     _drawPile.add(_gameState._sanctuaryDeck.drawFlip(s));
     _drawPile.add(_gameState._sanctuaryDeck.drawMult(s));
     _drawPile.shuffle();
+    _cardCount.value = _drawPile.size();
   }
 
   void removeCSSanctuary(_StateModifier _) {
@@ -131,6 +132,7 @@ class ModifierDeck {
         _discardPile.removeAt(i);
       }
     }
+    _cardCount.value = _drawPile.size();
   }
 
   bool hasCSSanctuary() {
@@ -158,6 +160,7 @@ class ModifierDeck {
     discardPile.removeWhere((test) {
       return test.gfx.startsWith("party/");
     });
+    _cardCount.value = _drawPile.size();
   }
 
   bool hasPartyCard() {
