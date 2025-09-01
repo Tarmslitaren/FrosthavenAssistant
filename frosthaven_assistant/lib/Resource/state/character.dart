@@ -11,23 +11,21 @@ class Character extends ListItemData {
         : characterClass.id;
   }
 
+  Character.fromSave(Map<String, dynamic> json) {
+    final anId = json['characterClass'];
+    String? edition = json['edition'];
+    characterState = CharacterState.fromSave(anId, json['characterState']);
+    characterClass = _getClass(anId, edition)!;
+    id = characterClass.id;
+  }
+
   Character.fromJson(Map<String, dynamic> json) {
     final anId = json['characterClass'];
     String? edition = json['edition'];
     _turnState.value = TurnsState.values[json['turnState']];
     characterState = CharacterState.fromJson(anId, json['characterState']);
-    GameData data = getIt<GameData>();
-    List<CharacterClass> characters = [];
-    final modelData = data.modelData.value;
-    for (String key in modelData.keys) {
-      characters.addAll(modelData[key]!.characters);
-    }
-    for (var item in characters) {
-      if (item.id == anId && (edition == null || edition == item.edition)) {
-        characterClass = item;
-        break;
-      }
-    }
+
+    characterClass = _getClass(anId, edition)!;
 
     id = GameMethods.isObjectiveOrEscort(characterClass)
         ? characterState.display.value
@@ -49,6 +47,14 @@ class Character extends ListItemData {
     }
   }
 
+  String toSave() {
+    return '{'
+        '"characterState": ${characterState.toString()}, '
+        '"characterClass": "${characterClass.id}", '
+        '"edition": "${characterClass.edition}" '
+        '}';
+  }
+
   @override
   String toString() {
     return '{'
@@ -58,5 +64,19 @@ class Character extends ListItemData {
         '"characterClass": "${characterClass.id}", '
         '"edition": "${characterClass.edition}" '
         '}';
+  }
+
+  CharacterClass? _getClass(String id, String? edition) {
+    final modelData = getIt<GameData>().modelData.value;
+    for (String key in modelData.keys) {
+      final item = modelData[key]!.characters.firstWhereOrNull((item) {
+        return item.id == id && (edition == null || edition == item.edition);
+      });
+      if (item != null) {
+        return item;
+        break;
+      }
+    }
+    return null;
   }
 }

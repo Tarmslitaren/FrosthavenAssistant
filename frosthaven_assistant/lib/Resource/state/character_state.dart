@@ -3,11 +3,11 @@ part of 'game_state.dart';
 
 class CharacterState extends FigureState {
   final _display = ValueNotifier<String>("");
+  final List<bool> _perkList = List.filled(18, false);
+
   final _initiative = ValueNotifier<int>(0);
   final _xp = ValueNotifier<int>(0);
   final List<MonsterInstance> _summonList = [];
-  final List<bool> _perkList = List.filled(18, false);
-
   late final ModifierDeck _modifierDeck;
 
   ValueListenable<String> get display => _display;
@@ -18,6 +18,20 @@ class CharacterState extends FigureState {
   BuiltList<bool> get perkList => BuiltList.of(_perkList);
 
   CharacterState(final String id) {
+    _modifierDeck = ModifierDeck(id);
+  }
+
+  CharacterState.fromSave(final String id, Map<String, dynamic> json) {
+    _level.value = json["level"];
+    _display.value = json['display'];
+    if (json.containsKey("perkList")) {
+      final perks = json["perkList"];
+      int i = 0;
+      for (bool item in perks) {
+        _perkList[i] = item;
+        i++;
+      }
+    }
     _modifierDeck = ModifierDeck(id);
   }
 
@@ -89,6 +103,14 @@ class CharacterState extends FigureState {
 
   getMutableSummonList(_StateModifier _) {
     return _summonList;
+  }
+
+  String toSave() {
+    return '{'
+        '"level": ${level.value}, '
+        '"display": ${jsonEncode(display.value)}, '
+        '"perkList": ${_perkList.toString()} '
+        '}';
   }
 
   @override

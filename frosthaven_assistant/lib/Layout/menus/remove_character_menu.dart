@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/save_character_menu.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands/remove_character_command.dart';
 import '../../Resource/state/game_state.dart';
+import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import './character_tile.dart';
 
@@ -32,6 +34,7 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
     }
 
     void removeCharacter(CharacterClass characterClassToRemove) {
+      //todo: ask if wanna save
       setState(() {
         int indexToRemove = currentCharacters.indexWhere(
             (character) => character.characterClass == characterClassToRemove);
@@ -50,11 +53,22 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
           Column(
             children: [
               const SizedBox(
-                height: 20,
+                height: 10,
+              ),
+              TextButton(
+                onPressed: () {
+                  //open remove card menu
+                  openDialog(context, SaveCharacterMenu());
+                },
+                child: Text(
+                  "Load or Save Characters",
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
               ListTile(
                 title: const Text("Remove All", style: TextStyle(fontSize: 18)),
                 onTap: () {
+                  //todo: ask if wanna save
                   _gameState.action(RemoveCharacterCommand(currentCharacters));
                   Navigator.pop(context);
                 },

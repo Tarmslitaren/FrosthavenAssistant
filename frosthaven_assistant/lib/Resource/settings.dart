@@ -12,6 +12,7 @@ import 'package:window_manager/window_manager.dart';
 import '../services/network/client.dart';
 import '../services/network/network.dart';
 import '../services/service_locator.dart';
+import 'commands/load_character_save_command.dart';
 import 'commands/load_save_command.dart';
 import 'enums.dart';
 
@@ -48,6 +49,7 @@ class Settings {
   final style = ValueNotifier<Style>(Style.original);
 
   final saves = ValueNotifier<Map<String, String>>({});
+  final characterSaves = ValueNotifier<Map<String, String>>({});
 
   //network
   final server = ValueNotifier<bool>(false); //not saving these
@@ -89,6 +91,33 @@ class Settings {
       newMap[key] = saves.value[key]!;
     }
     saves.value = newMap;
+    saveToDisk();
+  }
+
+  void loadCharacterSave(String saveName) {
+    String? save = characterSaves.value[saveName];
+    if (save != null) {
+      getIt<GameState>().action(LoadCharacterSaveCommand(saveName, save));
+    }
+  }
+
+  void saveCharacterState(String saveName, Character character) {
+    characterSaves.value['$saveName\n${character.id}'] = character.toSave();
+    Map<String, String> newMap = {};
+    for (String key in characterSaves.value.keys) {
+      newMap[key] = characterSaves.value[key]!;
+    }
+    characterSaves.value = newMap;
+    saveToDisk();
+  }
+
+  void deleteCharacterSave(String saveId) {
+    characterSaves.value.remove(saveId);
+    Map<String, String> newMap = {};
+    for (String key in characterSaves.value.keys) {
+      newMap[key] = characterSaves.value[key]!;
+    }
+    characterSaves.value = newMap;
     saveToDisk();
   }
 
@@ -291,6 +320,13 @@ class Settings {
         }
       }
 
+      if (data["characterSaves"] != null) {
+        Map<String, dynamic> map = data["characterSaves"];
+        for (var key in map.keys) {
+          characterSaves.value[key] = map[key];
+        }
+      }
+
       if (data["connectClientOnStartup"] != null &&
           data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
@@ -328,6 +364,7 @@ class Settings {
         '"fhHazTerrainCalcInOGGloom": ${fhHazTerrainCalcInOGGloom.value}, '
         // '"showCharacterAMD": ${showCharacterAMD.value}, ' //todo: uncomment on character amd release
         '"saves": ${jsonEncode(saves.value)}, '
+        '"characterSaves": ${jsonEncode(characterSaves.value)}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
         '"lastKnownConnection": "$lastKnownConnection", '
         '"lastKnownPort": "$lastKnownPort", '

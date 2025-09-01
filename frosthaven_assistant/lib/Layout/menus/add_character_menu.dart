@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/menus/save_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 
 import '../../Model/character_class.dart';
@@ -175,7 +176,17 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
               Column(
                 children: [
                   const SizedBox(
-                    height: 20,
+                    height: 10,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      //open remove card menu
+                      openDialog(context, SaveCharacterMenu());
+                    },
+                    child: Text(
+                      "Load or Save Characters",
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 10, right: 10),

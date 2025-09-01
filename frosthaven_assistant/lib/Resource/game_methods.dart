@@ -427,6 +427,7 @@ class GameMethods {
     if (index == 17 && character.characterClass.name == "Hail") {
       getIt<GameState>().modifierDeck.addHailSpecial(s);
     }
+    //todo: add other perk specials
   }
 
   static removePerk(_StateModifier s, Character character, int index) {
@@ -545,6 +546,37 @@ class GameMethods {
     GameMethods.applyDifficulty(s);
   }
 
+  static void resetCharacter(_StateModifier s, Character item) {
+    item.characterState._initiative.value = 0;
+    final level = item.characterState.level.value;
+    item.characterState._health.value =
+        item.characterClass.healthByLevel[level - 1];
+    item.characterState._maxHealth.value = item.characterState.health.value;
+    item.characterState._xp.value = 0;
+    item.characterState.conditions.value.clear();
+    item.characterState._chill.value = 0;
+    item.characterState.modifierDeck._initDeck(item.id);
+    //reapply perks
+    final perksSetList = item.characterState.perkList;
+    final perks = item.characterClass.perks;
+    for (int i = 0; i < perks.length; i++) {
+      if (perksSetList[i]) {
+        GameMethods.addPerk(s, item, i);
+      }
+    }
+
+    final summonList = item.characterState._summonList;
+    summonList.clear();
+    if (item.id == "Beast Tyrant" || item.id == "Wildfury") {
+      //create the bear summon
+      final int bearHp = 8 + level * 2;
+      final String gfx = item.id == "Beast Tyrant" ? "beast" : "Beast v2";
+      MonsterInstance bear = MonsterInstance.summon(
+          0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, gfx, -1);
+      summonList.add(bear);
+    }
+  }
+
   //todo: too long method - split
   static void setScenario(_StateModifier s, String scenario, bool section) {
     if (!section) {
@@ -563,37 +595,7 @@ class GameMethods {
       for (var item in _gameState.currentList) {
         if (item is Character) {
           if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
-            item.characterState._initiative.value = 0;
-            final level = item.characterState.level.value;
-            item.characterState._health.value =
-                item.characterClass.healthByLevel[level - 1];
-            item.characterState._maxHealth.value =
-                item.characterState.health.value;
-            item.characterState._xp.value = 0;
-            item.characterState.conditions.value.clear();
-            item.characterState._chill.value = 0;
-            item.characterState.modifierDeck._initDeck(item.id);
-            //reapply perks
-            final perksSetList = item.characterState.perkList;
-            final perks = item.characterClass.perks;
-            for (int i = 0; i < perks.length; i++) {
-              if (perksSetList[i]) {
-                GameMethods.addPerk(s, item, i);
-              }
-            }
-
-            final summonList = item.characterState._summonList;
-            summonList.clear();
-            if (item.id == "Beast Tyrant" || item.id == "Wildfury") {
-              //create the bear summon
-              final int bearHp = 8 + level * 2;
-              final String gfx =
-                  item.id == "Beast Tyrant" ? "beast" : "Beast v2";
-              MonsterInstance bear = MonsterInstance.summon(
-                  0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, gfx, -1);
-              summonList.add(bear);
-            }
-
+            resetCharacter(s, item);
             newList.add(item);
           }
         }
@@ -705,12 +707,15 @@ class GameMethods {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {
           Character? objective = GameMethods.createCharacter(
-              s, "Objective", null, item.name, _gameState.level.value + 1)!;
-          objective.characterState._maxHealth.value =
-              StatCalculator.calculateFormula(item.health.toString())!;
-          objective.characterState._health.value =
+              s, "Objective", null, item.name, _gameState.level.value + 1);
+          final health =
+              StatCalculator.calculateFormula(item.health.toString());
+          if (health != null) {
+            objective?.characterState._maxHealth.value = health;
+          }
+          objective?.characterState._health.value =
               objective.characterState.maxHealth.value;
-          objective.characterState._initiative.value = item.init;
+          objective?.characterState._initiative.value = item.init;
           bool add = true;
           for (var item2 in _gameState.currentList) {
             //don't add duplicates
@@ -720,7 +725,7 @@ class GameMethods {
               break;
             }
           }
-          if (add) {
+          if (add && objective != null) {
             _gameState._currentList.add(objective);
           }
         }
@@ -796,31 +801,33 @@ class GameMethods {
                   if (spawnSection != null &&
                       spawnSection.monsterStandees != null) {
                     final monsterStandees = spawnSection.monsterStandees;
-                    for (var spawnItem in monsterStandees!) {
-                      var item = roomMonsterData.firstWhereOrNull(
-                          (element) => element.name == spawnItem.name);
-                      if (item != null) {
-                        //merge
-                        List<int> normal = [
-                          item.normal[0] + spawnItem.normal[0],
-                          item.normal[1] + spawnItem.normal[1],
-                          item.normal[2] + spawnItem.normal[2]
-                        ];
-                        List<int> elite = [
-                          item.elite[0] + spawnItem.elite[0],
-                          item.elite[1] + spawnItem.elite[1],
-                          item.elite[2] + spawnItem.elite[2]
-                        ];
-                        RoomMonsterData mergedItem =
-                            RoomMonsterData(item.name, normal, elite);
-                        for (int i = 0; i < roomMonsterData.length; i++) {
-                          if (roomMonsterData[i].name == item.name) {
-                            roomMonsterData[i] = mergedItem;
-                            break;
+                    if (monsterStandees != null) {
+                      for (var spawnItem in monsterStandees) {
+                        var item = roomMonsterData.firstWhereOrNull(
+                            (element) => element.name == spawnItem.name);
+                        if (item != null) {
+                          //merge
+                          List<int> normal = [
+                            item.normal[0] + spawnItem.normal[0],
+                            item.normal[1] + spawnItem.normal[1],
+                            item.normal[2] + spawnItem.normal[2]
+                          ];
+                          List<int> elite = [
+                            item.elite[0] + spawnItem.elite[0],
+                            item.elite[1] + spawnItem.elite[1],
+                            item.elite[2] + spawnItem.elite[2]
+                          ];
+                          RoomMonsterData mergedItem =
+                              RoomMonsterData(item.name, normal, elite);
+                          for (int i = 0; i < roomMonsterData.length; i++) {
+                            if (roomMonsterData[i].name == item.name) {
+                              roomMonsterData[i] = mergedItem;
+                              break;
+                            }
                           }
+                        } else {
+                          roomMonsterData.add(spawnItem);
                         }
-                      } else {
-                        roomMonsterData.add(spawnItem);
                       }
                     }
                   }

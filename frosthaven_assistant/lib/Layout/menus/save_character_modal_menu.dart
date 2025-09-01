@@ -2,20 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/settings.dart';
+import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
-class SaveModalMenu extends StatefulWidget {
-  const SaveModalMenu(
-      {super.key, required this.saveName, required this.saveOnly});
+class SaveCharacterModalMenu extends StatefulWidget {
+  const SaveCharacterModalMenu(
+      {super.key,
+      required this.saveName,
+      required this.saveOnly,
+      required this.saveId,
+      required this.character});
 
+  final String saveId;
   final bool saveOnly;
   final String saveName;
+  final Character? character;
 
   @override
-  SaveModalMenuState createState() => SaveModalMenuState();
+  SaveCharacterModalMenuState createState() => SaveCharacterModalMenuState();
 }
 
-class SaveModalMenuState extends State<SaveModalMenu> {
+class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
   final TextEditingController nameController = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
@@ -55,6 +62,8 @@ class SaveModalMenuState extends State<SaveModalMenu> {
       side: BorderSide(width: 2 * scale, color: Colors.blue),
     );
 
+    final character = widget.character;
+
     return Container(
         width: 240 * scale,
         height: 160 * scale,
@@ -87,7 +96,7 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                       OutlinedButton(
                         style: buttonStyle,
                         onPressed: () {
-                          settings.loadSave(widget.saveName);
+                          settings.loadCharacterSave(widget.saveId);
                           Navigator.pop(context);
                           Navigator.pop(context);
                         },
@@ -96,16 +105,16 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                     SizedBox(
                       width: 10 * scale,
                     ),
-                    OutlinedButton(
-                      style: buttonStyle,
-                      onPressed: () {
-                        settings.deleteSave(widget.saveName);
-                        settings.saveState(_newSaveName);
-                        Navigator.pop(context);
-                        Navigator.pop(context);
-                      },
-                      child: Text("Save", style: getButtonTextStyle(scale)),
-                    ),
+                    if (character != null)
+                      OutlinedButton(
+                        style: buttonStyle,
+                        onPressed: () {
+                          settings.deleteCharacterSave(widget.saveId);
+                          settings.saveCharacterState(_newSaveName, character);
+                          Navigator.pop(context);
+                        },
+                        child: Text("Save", style: getButtonTextStyle(scale)),
+                      ),
                     SizedBox(
                       width: 10 * scale,
                     ),
@@ -113,7 +122,7 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                       OutlinedButton(
                         style: buttonStyle,
                         onPressed: () {
-                          settings.deleteSave(widget.saveName);
+                          settings.deleteCharacterSave(widget.saveId);
                           Navigator.pop(context);
                         },
                         child: Text("Delete", style: getButtonTextStyle(scale)),
