@@ -134,7 +134,8 @@ class GameSaveState {
         _loadLootDeck(data, gameState);
 
         if (data["sanctuaryDeck"] != null) {
-          gameState._sanctuaryDeck = data["sanctuaryDeck"];
+          gameState._sanctuaryDeck =
+              SanctuaryDeck.fromJson(data["sanctuaryDeck"]);
         }
 
         //this is not really a setting, but a scenario command?

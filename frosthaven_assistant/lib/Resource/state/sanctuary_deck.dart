@@ -21,7 +21,7 @@ class SanctuaryDeck {
     }
     for (var item in modifierDeckData["flipPile"] as List) {
       String gfx = item["gfx"];
-      newMultList.add(ModifierCard(CardType.remove, gfx));
+      newFlipList.add(ModifierCard(CardType.remove, gfx));
     }
     _multPile.setList(newMultList);
     _flipPile.setList(newFlipList);
