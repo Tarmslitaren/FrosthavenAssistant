@@ -38,6 +38,17 @@ class Character extends ListItemData {
     }
   }
 
+  flipUseFHPerks(_StateModifier s) {
+    characterState._useFHPerks.value = !characterState._useFHPerks.value;
+    //also clear all perks
+    for (int i = 0; i < characterState._perkList.length; i++) {
+      if (characterState._perkList[i]) {
+        characterState.flipPerk(s, i);
+        GameMethods.removePerk(s, this, i);
+      }
+    }
+  }
+
   void flipPerk(_StateModifier _, int index) {
     characterState.flipPerk(_, index);
     if (characterState.perkList[index]) {

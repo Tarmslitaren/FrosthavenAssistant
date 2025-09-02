@@ -10,55 +10,38 @@
       "hidden": false,
       "summons": {},
        "perks": [
-         {
-           "removes": ["minus1", "minus1"]
-         },
-         {
-           "removes": ["minus1"],
-           "adds": ["plus1"]
-         },
-         {
-           "adds": ["plus1","plus1"]
-         },
-         {
-           "adds": ["plus1","plus1"]
-         },
-         {
-           "adds": ["perks/plus3"]
-         },
-         {
-           "adds": ["perks/plus0push1flip","perks/plus0push1flip","perks/plus0push1flip" ]
-         },
-         {
-           "adds": ["perks/plus0push1flip","perks/plus0push1flip","perks/plus0push1flip" ]
-         },
-         {
-           "adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip"]
-         },
-         {
-           "adds": ["perks/plus0stunflip"]
-         },
-         {
-           "adds": ["perks/plus0stunflip"]
-         },
-         {
-           "text": "Add one %flip%%disarm% card and one %flip%%muddle% card",
-           "adds": ["perks/plus0disarmflip", "perks/plus0muddleflip"]
-         },
-         {
-           "adds": ["perks/plus0target1flip"]
-         },
-         {
-           "adds": ["perks/plus0target1flip"]
-         },
-         {
-           "text": "Add one %shield% 1, Self card",
-           "adds": ["perks/plus1shield1"]
-         },
-         {
-           "text": "Ignore negative item effects and add one +1 card",
-           "adds": ["plus1"]
-         }
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"adds": ["plus1","plus1"]},
+         {"adds": ["plus1","plus1"]},
+         {"adds": ["perks/plus3"]},
+         {"adds": ["perks/plus0push1flip","perks/plus0push1flip","perks/plus0push1flip" ]},
+         {"adds": ["perks/plus0push1flip","perks/plus0push1flip","perks/plus0push1flip" ]},
+         {"adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip"]},
+         {"adds": ["perks/plus0stunflip"]},
+         {"adds": ["perks/plus0stunflip"]},
+         {"text": "Add one %flip%%disarm% card and one %flip%%muddle% card", "adds": ["perks/plus0disarmflip", "perks/plus0muddleflip"]},
+         {"adds": ["perks/plus0target1flip"]},
+         {"adds": ["perks/plus0target1flip"]},
+         {"text": "Add one %shield% 1, Self card", "adds": ["perks/plus1shield1"]},
+         {"text": "Ignore negative item effects and add one +1 card", "adds": ["plus1"]}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["minus1"],"adds": ["perks/plus0push1flip","perks/plus0push1flip","perks/plus0push1flip" ]},
+         {"removes": ["minus1"],"adds": ["perks/plus0push1flip","perks/plus0push1flip","perks/plus0push1flip" ]},
+         {"removes": ["plus0","plus0"],"adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip"]},
+         {"removes": ["plus0"],"adds": ["plus1","plus1"]},
+         {"removes": ["plus0"],"adds": ["plus1","plus1"]},
+         {"removes": ["plus0"],"adds": ["perks/plus0target1flip"]},
+         {"removes": ["plus0"],"adds": ["perks/plus0target1flip"]},
+         {"adds": ["perks/plus0stunflip"]},
+         {"adds": ["perks/plus0stunflip"]},
+         {"text": "Add one +0 %disarm%%flip% card and one +0 %muddle%%flip% card", "adds": ["perks/plus0disarmflip", "perks/plus0muddleflip"]},
+         {"adds": ["perks/plus3"]},
+         {"text": "Ignore item - 1 effects and add one +1 %shield% 1 card", "adds": ["perks/plus1shield1"]},
+         {"text": "Rested and Ready: Whenever you long rest, add + 1 %move% to your first move ability the following round"}
        ]
     },
      {
@@ -87,52 +70,37 @@
         }
       },
        "perks": [
-         {
-           "removes": ["minus1", "minus1"]
-         },
-         {
-           "removes": ["minus1", "minus1"]
-         },
-         {
-           "removes": ["minus2"],
-           "adds": ["plus0"]
-         },
-         {
-           "adds": ["plus1","plus1"]
-         },
-         {
-           "adds": ["perks/plus3"]
-         },
-         {
-           "adds": ["perks/plus0fireflip","perks/plus0fireflip" ]
-         },
-         {
-           "adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip"]
-         },
-         {
-           "adds": ["perks/plus1wound" ]
-         },
-         {
-           "adds": ["perks/plus1wound" ]
-         },
-         {
-           "adds": ["perks/plus1immobilize"]
-         },
-         {
-           "adds": ["perks/plus1immobilize"]
-         },
-         {
-           "adds": ["perks/plus1heal2", "perks/plus1heal2"]
-         },
-         {
-           "adds": ["perks/plus1heal2", "perks/plus1heal2"]
-         },
-         {
-           "adds": ["perks/plus0target1"]
-         },
-         {
-           "text": "Ignore negative scenario effects"
-         }
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
+         {"adds": ["plus1","plus1"]},
+         {"adds": ["perks/plus3"]},
+         {"adds": ["perks/plus0fireflip","perks/plus0fireflip" ]},
+         {"adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip"]},
+         {"adds": ["perks/plus1wound" ]},
+         {"adds": ["perks/plus1wound" ]},
+         {"adds": ["perks/plus1immobilize"]},
+         {"adds": ["perks/plus1immobilize"]},
+         {"adds": ["perks/plus1heal2", "perks/plus1heal2"]},
+         {"adds": ["perks/plus1heal2", "perks/plus1heal2"]},
+         {"adds": ["perks/plus0target1"]},
+         {"text": "Ignore negative scenario effects"}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1"],"adds": ["plus1"]},
+         {"removes": ["minus1"],"adds": ["plus1"]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
+         {"removes": ["plus0"],"adds": ["perks/plus0target1"]},
+         {"removes": ["plus0"],"adds": ["perks/plus1wound" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus1wound" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus1immobilize" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus1immobilize" ]},
+         {"removes": ["plus0","plus0"],"adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip"]},
+         {"adds": ["perks/plus3"]},
+         {"adds": ["perks/plus1heal2", "perks/plus1heal2"]},
+         {"text": "Ignore scenario effects and add two +0 %fire%%flip%","adds": ["perks/plus0fireflip","perks/plus0fireflip" ]},
+         {"text": "[double] Rejuvenating Vapor: Whenever you long rest, you may perform \"%heal% 2, %range% 3\""}
        ]
     },
      {
@@ -159,56 +127,40 @@
         }
       },
        "perks": [
-         {
-           "removes": ["plus0", "plus0","plus0","plus0"]
-         },
-         {
-           "removes": ["minus1"],
-           "adds": ["plus1"]
-         },
-         {
-           "removes": ["minus1"],
-           "adds": ["plus1"]
-         },
-         {
-           "adds": ["plus1","plus1"]
-         },
-         {
-           "adds": ["plus1","plus1"]
-         },
-         {
-           "adds": ["perks/plus0stun"]
-         },
-         {
-           "adds": ["perks/plus1wound" ]
-         },
-         {
-           "adds": ["perks/plus1immobilize" ]
-         },
-         {
-           "adds": ["perks/plus1curse" ]
-         },
-         {
-           "adds": ["perks/plus2fire"]
-         },
-         {
-           "adds": ["perks/plus2fire"]
-         },
-         {
-           "adds": ["perks/plus1ice"]
-         },
-         {
-           "adds": ["perks/plus1ice"]
-         },
-         {
-           "text": "Add one %flip%%earth% and one %flip%%air%",
-           "adds": ["perks/plus0earthflip","perks/plus0airflip" ]
-         },
-         {
-           "text": "Add one %flip%%light% and one %flip%%dark%",
-           "adds": ["perks/plus0lightflip","perks/plus0darkflip" ]
-         }
-       ]
+         {"removes": ["plus0", "plus0","plus0","plus0"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"adds": ["plus1","plus1"]},
+         {"adds": ["plus1","plus1"]},
+         {"adds": ["perks/plus0stun"]},
+         {"adds": ["perks/plus1wound" ]},
+         {"adds": ["perks/plus1immobilize" ]},
+         {"adds": ["perks/plus1curse" ]},
+         {"adds": ["perks/plus2fire"]},
+         {"adds": ["perks/plus2fire"]},
+         {"adds": ["perks/plus1ice"]},
+         {"adds": ["perks/plus1ice"]},
+         {"text": "Add one %flip%%earth% and one %flip%%air%", "adds": ["perks/plus0earthflip","perks/plus0airflip" ]},
+         {"text": "Add one %flip%%light% and one %flip%%dark%", "adds": ["perks/plus0lightflip","perks/plus0darkflip" ]}
+       ],
+       "perks_fh": [
+         {"removes": ["minus2"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"text": "Replace one -1 card with one +0 %air%%flip% and one +0 %earth%%flip%","removes": ["minus1"], "adds": ["perks/plus0earthflip","perks/plus0airflip" ]},
+         {"text": "Replace one -1 card with one +0 %light%%flip% and one +0 %dark%%flip%","removes": ["minus1"], "adds": ["perks/plus0earthflip","perks/plus0airflip" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus1wound" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus1immobilize" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus1stun" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus1curse" ]},
+         {"adds": ["perks/plus2fire"]},
+         {"adds": ["perks/plus2fire"]},
+         {"adds": ["perks/plus1ice"]},
+         {"adds": ["perks/plus1ice"]},
+         {"text": "Ignore scenario effects"},
+         {"text": "Etheric Bond: Whenever you short rest, if Reviving Ether is in your discard pile, first return it to your hand"}
+       ],
+       "note": "official fh perk sheet has error with +1 stun card"
     },
      {
       "name": "Scoundrel",
@@ -218,56 +170,21 @@
       "hidden": false,
       "summons": {},
        "perks": [
-         {
-           "removes": ["minus1", "minus1"]
-         },
-         {
-           "removes": ["minus1", "minus1"]
-         },
-         {
-           "removes": ["plus0", "plus0","plus0","plus0"]
-         },
-         {
-           "removes": ["minus2"],
-           "adds": ["plus0"]
-         },
-         {
-           "removes": ["minus1"],
-           "adds": ["plus1"]
-         },
-         {
-           "removes": ["plus0"],
-           "adds": ["plus2"]
-         },
-         {
-           "removes": ["plus0"],
-           "adds": ["plus2"]
-         },
-         {
-           "adds": ["perks/plus1flip","perks/plus1flip"]
-         },
-         {
-           "adds": ["perks/plus1flip","perks/plus1flip"]
-         },
-
-         {
-           "adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip" ]
-         },
-         {
-           "adds": ["perks/plus0poisonflip","perks/plus0poisonflip" ]
-         },
-         {
-           "adds": ["perks/plus0poisonflip","perks/plus0poisonflip" ]
-         },
-         {
-           "adds": ["perks/plus0muddleflip","perks/plus0muddleflip"]
-         },
-         {
-           "adds": ["perks/plus0invisibleflip"]
-         },
-         {
-           "text": "Ignore negative scenario effects"
-         }
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["plus0", "plus0","plus0","plus0"]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["plus0"], "adds": ["plus2"]},
+         {"removes": ["plus0"], "adds": ["plus2"]},
+         {"adds": ["perks/plus1flip","perks/plus1flip"]},
+         {"adds": ["perks/plus1flip","perks/plus1flip"]},
+         {"adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip" ]},
+         {"adds": ["perks/plus0poisonflip","perks/plus0poisonflip" ]},
+         {"adds": ["perks/plus0poisonflip","perks/plus0poisonflip" ]},
+         {"adds": ["perks/plus0muddleflip","perks/plus0muddleflip"]},
+         {"adds": ["perks/plus0invisibleflip"]},
+         {"text": "Ignore negative scenario effects"}
        ]
     },
     {
@@ -278,55 +195,21 @@
       "hidden": false,
       "summons": {},
       "perks": [
-        {
-          "removes": ["plus0", "plus0","plus0","plus0"]
-        },
-        {
-          "removes": ["minus1"],
-          "adds": ["plus1"]
-        },
-        {
-          "removes": ["minus1"],
-          "adds": ["plus1"]
-        },
-        {
-          "removes": ["minus1"],
-          "adds": ["plus1"]
-        },
-        {
-          "text": "Add one -2 card and two +2 cards",
-          "adds": ["minus2","plus2","plus2"]
-        },
-        {
-          "adds": ["perks/plus1immobilize"]
-        },
-        {
-          "adds": ["perks/plus1immobilize"]
-        },
-        {
-          "adds": ["perks/plus2muddle" ]
-        },
-        {
-          "adds": ["perks/plus2muddle" ]
-        },
-        {
-          "adds": ["perks/plus0push2flip","perks/plus0push2flip" ]
-        },
-        {
-          "adds": ["perks/plus0earthflip","perks/plus0earthflip" ]
-        },
-        {
-          "adds": ["perks/plus0earthflip","perks/plus0earthflip" ]
-        },
-        {
-          "adds": ["perks/plus0airflip","perks/plus0airflip" ]
-        },
-        {
-          "text": "Ignore negative item effects"
-        },
-        {
-          "text": "Ignore negative scenario effects"
-        }
+        {"removes": ["plus0", "plus0","plus0","plus0"]},
+        {"removes": ["minus1"], "adds": ["plus1"]},
+        {"removes": ["minus1"], "adds": ["plus1"]},
+        {"removes": ["minus1"], "adds": ["plus1"]},
+        {"text": "Add one -2 card and two +2 cards", "adds": ["minus2","plus2","plus2"]},
+        {"adds": ["perks/plus1immobilize"]},
+        {"adds": ["perks/plus1immobilize"]},
+        {"adds": ["perks/plus2muddle" ]},
+        {"adds": ["perks/plus2muddle" ]},
+        {"adds": ["perks/plus0push2flip","perks/plus0push2flip" ]},
+        {"adds": ["perks/plus0earthflip","perks/plus0earthflip" ]},
+        {"adds": ["perks/plus0earthflip","perks/plus0earthflip" ]},
+        {"adds": ["perks/plus0airflip","perks/plus0airflip" ]},
+        {"text": "Ignore negative item effects"},
+        {"text": "Ignore negative scenario effects"}
       ]
     },
      {
@@ -356,54 +239,21 @@
         }
       },
        "perks": [
-         {
-           "removes": ["minus1","minus1"]
-         },
-         {
-           "removes": ["minus1","minus1"]
-         },
-         {
-           "removes": ["plus0", "plus0","plus0","plus0"]
-         },
-         {
-           "removes": ["plus1","plus1"],
-           "adds": ["plus2","plus2"]
-         },
-         {
-           "removes": ["minus2"],
-           "adds": ["plus0"]
-         },
-         {
-           "adds": ["perks/plus2ice"]
-         },
-         {
-           "adds": ["perks/plus2ice"]
-         },
-         {
-           "adds": ["perks/plus1flip","perks/plus1flip" ]
-         },
-         {
-           "adds": ["perks/plus1flip","perks/plus1flip" ]
-         },
-         {
-           "adds": ["perks/plus0pull1flip","perks/plus0pull1flip","perks/plus0pull1flip" ]
-         },
-         {
-           "adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0earthflip" ]
-         },
-         {
-           "adds": ["perks/plus0immobilizeflip","perks/plus0immobilizeflip" ]
-         },
-         {
-           "adds": ["perks/plus0stunflip" ]
-         },
-         {
-           "text": "Add one %flip%%disarm% card and one %flip%%muddle% card",
-           "adds": ["perks/plus0disarmflip","perks/plus0muddleflip" ]
-         },
-         {
-           "text": "Ignore negative scenario effects"
-         }
+         {"removes": ["minus1","minus1"]},
+         {"removes": ["minus1","minus1"]},
+         {"removes": ["plus0", "plus0","plus0","plus0"]},
+         {"removes": ["plus1","plus1"], "adds": ["plus2","plus2"]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
+         {"adds": ["perks/plus2ice"]},
+         {"adds": ["perks/plus2ice"]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus0pull1flip","perks/plus0pull1flip","perks/plus0pull1flip" ]},
+         {"adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0earthflip" ]},
+         {"adds": ["perks/plus0immobilizeflip","perks/plus0immobilizeflip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"text": "Add one %flip%%disarm% card and one %flip%%muddle% card", "adds": ["perks/plus0disarmflip","perks/plus0muddleflip" ]},
+         {"text": "Ignore negative scenario effects"}
        ]
     },
 
@@ -415,54 +265,21 @@
       "hidden": true,
       "summons": {},
        "perks": [
-         {
-           "removes": ["minus1", "minus1"]
-         },
-         {
-           "removes": ["minus1", "minus1"]
-         },
-         {
-           "removes": ["plus0", "plus0","plus0","plus0"]
-         },
-         {
-           "removes": ["minus2"],
-           "adds": ["plus0"]
-         },
-         {
-           "removes": ["plus0"],
-           "adds": ["plus2"]
-         },
-         {
-           "adds": ["perks/plus1flip","perks/plus1flip" ]
-         },
-         {
-           "adds": ["perks/plus1flip","perks/plus1flip" ]
-         },
-         {
-           "adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]
-         },
-         {
-           "adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]
-         },
-         {
-           "adds": ["perks/plus0stunflip" ]
-         },
-         {
-           "adds": ["perks/plus0lightflip","perks/plus0lightflip"]
-         },
-         {
-           "adds": ["perks/plus0lightflip","perks/plus0lightflip"]
-         },
-         {
-           "adds": ["perks/plus0shield1flip", "perks/plus0shield1flip"]
-         },
-         {
-           "text": "Ignore negative item effects and add two +1 cards",
-           "adds": ["plus1","plus1"]
-         },
-         {
-           "text": "Ignore negative scenario effects"
-         }
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["plus0", "plus0","plus0","plus0"]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
+         {"removes": ["plus0"], "adds": ["plus2"]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"adds": ["perks/plus0lightflip","perks/plus0lightflip"]},
+         {"adds": ["perks/plus0lightflip","perks/plus0lightflip"]},
+         {"adds": ["perks/plus0shield1flip", "perks/plus0shield1flip"]},
+         {"text": "Ignore negative item effects and add two +1 cards", "adds": ["plus1","plus1"]},
+         {"text": "Ignore negative scenario effects"}
        ]
     },
      {
@@ -474,57 +291,21 @@
       "hidden": true,
       "summons": {},
        "perks": [
-         {
-           "removes": ["minus1", "minus1"]
-         },
-         {
-           "removes": ["minus1", "minus1"]
-         },
-         {
-           "removes": ["plus0", "plus0","plus0","plus0"]
-         },
-         {
-           "removes": ["plus0"],
-           "adds": ["plus2"]
-         },
-         {
-           "removes": ["plus0"],
-           "adds": ["plus2"]
-         },
-         {
-           "adds": ["perks/plus1flip","perks/plus1flip" ]
-         },
-         {
-           "adds": ["perks/plus1flip","perks/plus1flip" ]
-         },
-         {
-           "adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip" ]
-         },
-         {
-           "adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip" ]
-         },
-         {
-           "adds": ["perks/plus0stunflip" ]
-         },
-         {
-           "adds": ["perks/plus0target1"]
-         },
-         {
-           "text": "Add one +0 Refresh an item card",
-           "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]
-         },
-         {
-           "text": "Add one +0 Refresh an item card",
-           "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]
-         },
-         {
-           "text": "Add one +0 Refresh an item card",
-           "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]
-         },
-         {
-           "text": "Ignore negative item effects and add two +1 cards",
-           "adds": ["plus1","plus1"]
-         }
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["plus0", "plus0","plus0","plus0"]},
+         {"removes": ["plus0"], "adds": ["plus2"]},
+         {"removes": ["plus0"], "adds": ["plus2"]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip" ]},
+         {"adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"adds": ["perks/plus0target1"]},
+         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
+         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
+         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
+         {"text": "Ignore negative item effects and add two +1 cards", "adds": ["plus1","plus1"]}
        ]
     },
      {

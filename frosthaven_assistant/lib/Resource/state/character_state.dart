@@ -4,6 +4,7 @@ part of 'game_state.dart';
 class CharacterState extends FigureState {
   final _display = ValueNotifier<String>("");
   final List<bool> _perkList = List.filled(18, false);
+  final _useFHPerks = ValueNotifier<bool>(false);
 
   final _initiative = ValueNotifier<int>(0);
   final _xp = ValueNotifier<int>(0);
@@ -15,7 +16,9 @@ class CharacterState extends FigureState {
   ValueListenable<int> get xp => _xp;
   BuiltList<MonsterInstance> get summonList => BuiltList.of(_summonList);
   ModifierDeck get modifierDeck => _modifierDeck;
+
   BuiltList<bool> get perkList => BuiltList.of(_perkList);
+  ValueListenable<bool> get useFHPerks => _useFHPerks;
 
   CharacterState(final String id) {
     _modifierDeck = ModifierDeck(id);
@@ -24,6 +27,9 @@ class CharacterState extends FigureState {
   CharacterState.fromSave(final String id, Map<String, dynamic> json) {
     _level.value = json["level"];
     _display.value = json['display'];
+    if (json.containsKey("useFHPerks")) {
+      _useFHPerks.value = json["useFHPerks"];
+    }
     if (json.containsKey("perkList")) {
       final perks = json["perkList"];
       int i = 0;
@@ -56,6 +62,9 @@ class CharacterState extends FigureState {
         _perkList[i] = item;
         i++;
       }
+    }
+    if (json.containsKey("useFHPerks")) {
+      _useFHPerks.value = json["useFHPerks"];
     }
 
     final condis = json["conditions"];
@@ -108,6 +117,7 @@ class CharacterState extends FigureState {
   String toSave() {
     return '{'
         '"level": ${level.value}, '
+        '"useFHPerks": ${jsonEncode(useFHPerks.value)}, '
         '"display": ${jsonEncode(display.value)}, '
         '"perkList": ${_perkList.toString()} '
         '}';
@@ -125,6 +135,7 @@ class CharacterState extends FigureState {
         '"display": ${jsonEncode(display.value)}, '
         '"modifierDeck": ${_modifierDeck.toString()}, '
         '"summonList": ${_summonList.toString()}, '
+        '"useFHPerks": ${jsonEncode(useFHPerks.value)}, '
         '"perkList": ${_perkList.toString()}, '
         '"conditions": ${conditions.value.toString()}, '
         '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.toList().toString()}, '

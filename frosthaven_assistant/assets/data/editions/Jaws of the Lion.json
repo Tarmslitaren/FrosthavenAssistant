@@ -41,7 +41,7 @@
         {"adds": ["perks/plus2air"]},
         {"adds": ["perks/plus2air"]},
         {"adds": ["perks/plus2air"]},
-        {"text": "Hasty Pick-up: Once each scenario, during your turn, if the Favorite is in a hex on the map, you may %use%%wind% to return it to its ability card"}
+        {"text": "Hasty Pick-up: Once each scenario, during your turn, if the Favorite is in a hex on the map, you may %use%%air% to return it to its ability card"}
       ]
     },
     {
@@ -55,7 +55,7 @@
         {"removes": ["plus0","plus0","plus0","plus0"]},
         {"removes": ["minus1", "minus1"]},
         {"removes": ["minus1", "minus1"]},
-        {"removes": ["minus2", "minus1"]},
+        {"removes": ["minus2", "plus1"]},
         {"removes": ["plus0"], "adds": ["perks/plus2muddle"]},
         {"removes": ["plus0"], "adds": ["perks/plus2muddle"]},
         {"removes": ["minus1"], "adds": ["perks/plus0poison"]},

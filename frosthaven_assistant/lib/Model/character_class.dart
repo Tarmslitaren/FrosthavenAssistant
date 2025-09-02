@@ -12,9 +12,19 @@ class CharacterClass {
   final bool hidden;
   final List<SummonModel> summons;
   final List<PerkModel> perks;
+  final List<PerkModel> perksFH;
 
-  const CharacterClass(this.id, this.name, this.healthByLevel, this.edition,
-      this.color, this.colorSecondary, this.hidden, this.summons, this.perks);
+  const CharacterClass(
+      this.id,
+      this.name,
+      this.healthByLevel,
+      this.edition,
+      this.color,
+      this.colorSecondary,
+      this.hidden,
+      this.summons,
+      this.perks,
+      this.perksFH);
 
   factory CharacterClass.fromJson(Map<String, dynamic> data) {
     final edition = data['edition'] as String;
@@ -57,10 +67,18 @@ class CharacterClass {
       for (final item in perks) {
         perkList.add(PerkModel.fromJson(item));
       }
-    } //todo: asset list is 15 or 18 long?
+    }
+
+    List<PerkModel> perkFHList = [];
+    if (data.containsKey('perks_fh')) {
+      final perks = data['perks_fh'] as List<dynamic>;
+      for (final item in perks) {
+        perkFHList.add(PerkModel.fromJson(item));
+      }
+    }
 
     return CharacterClass(id, name, healthByLevel, edition, color,
-        colorSecondary, hidden, summonList, perkList);
+        colorSecondary, hidden, summonList, perkList, perkFHList);
   }
 }
 

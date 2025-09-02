@@ -466,13 +466,10 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     character.characterClass.perks.isNotEmpty)
                                   TextButton(
                                     onPressed: () {
-                                      final characterClass =
-                                          character.characterClass;
                                       openDialog(
                                           context,
                                           PerksMenu(
-                                            perks: characterClass.perks,
-                                            characterId: characterClass.id,
+                                            character: character,
                                           ));
                                     },
                                     child: const Text("Perks"),

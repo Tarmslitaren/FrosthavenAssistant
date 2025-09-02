@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
+import 'package:frosthaven_assistant/Resource/commands/use_fh_perks_command.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/token_applier.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
@@ -7,69 +8,93 @@ import '../../Resource/commands/add_perk_command.dart';
 import '../../services/service_locator.dart';
 
 class PerksMenu extends StatelessWidget {
-  const PerksMenu({super.key, required this.perks, required this.characterId});
-  final List<PerkModel> perks;
-  final String characterId;
+  const PerksMenu({super.key, required this.character});
+  final Character character;
 
   @override
   Widget build(BuildContext context) {
-    final ScrollController scrollController = ScrollController();
+    return ValueListenableBuilder<bool>(
+        valueListenable: character.characterState.useFHPerks,
+        builder: (context, value, child) {
+          final ScrollController scrollController = ScrollController();
 
-    List<Widget> tiles = [];
-    tiles.add(Text(
-      "Add Perks",
-      style: TextStyle(fontSize: 18),
-    ));
-    for (int i = 0; i < perks.length; i++) {
-      tiles.add(
-          PerkListTile(characterId: characterId, index: i, perk: perks[i]));
-    }
+          final perksFH = character.characterClass.perksFH;
+          final bool hasFHPerkSet = perksFH.isNotEmpty;
+          final bool useFHPerks =
+              hasFHPerkSet && character.characterState.useFHPerks.value;
+          final perks = useFHPerks ? perksFH : character.characterClass.perks;
 
-    return Card(
-        child: Scrollbar(
-            controller: scrollController,
-            child: SingleChildScrollView(
-                controller: scrollController,
-                child: Stack(children: [
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        constraints: const BoxConstraints(maxWidth: 300),
-                        child: Column(children: tiles),
-                      ),
-                      const SizedBox(
-                        height: 34,
-                      ),
-                    ],
-                  ),
-                  Positioned(
-                      width: 100,
-                      height: 40,
-                      right: 0,
-                      bottom: 0,
-                      child: TextButton(
-                          child: const Text(
-                            'Close',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                          onPressed: () {
-                            Navigator.pop(context);
-                          }))
-                ]))));
+          List<Widget> tiles = [];
+          tiles.add(Text(
+            "Add Perks",
+            style: TextStyle(fontSize: 18),
+          ));
+
+          if (hasFHPerkSet) {
+            tiles.add(CheckboxListTile(
+                title: Text(
+                  "Use Frosthaven Perks",
+                  style: TextStyle(fontSize: 16),
+                ),
+                value: useFHPerks,
+                onChanged: (on) {
+                  //setState(() {
+                  getIt<GameState>().action(UseFHPerksCommand(character.id));
+                  // }
+                }));
+          }
+
+          for (int i = 0; i < perks.length; i++) {
+            tiles.add(
+                PerkListTile(character: character, index: i, perk: perks[i]));
+          }
+
+          return Card(
+              child: Scrollbar(
+                  controller: scrollController,
+                  child: SingleChildScrollView(
+                      controller: scrollController,
+                      child: Stack(children: [
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              constraints: const BoxConstraints(maxWidth: 300),
+                              child: Column(children: tiles),
+                            ),
+                            const SizedBox(
+                              height: 34,
+                            ),
+                          ],
+                        ),
+                        Positioned(
+                            width: 100,
+                            height: 40,
+                            right: 0,
+                            bottom: 0,
+                            child: TextButton(
+                                child: const Text(
+                                  'Close',
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                }))
+                      ]))));
+        });
   }
 }
 
 class PerkListTile extends StatefulWidget {
   const PerkListTile(
       {super.key,
-      required this.characterId,
+      required this.character,
       required this.index,
       required this.perk});
 
-  final String characterId;
+  final Character character;
   final int index;
   final PerkModel perk;
 
@@ -177,11 +202,7 @@ class LootCardListTileState extends State<PerkListTile> {
 
   @override
   Widget build(BuildContext context) {
-    final Character? character =
-        GameMethods.getCharacterByName(widget.characterId);
-    final bool added = character != null
-        ? character.characterState.perkList[widget.index]
-        : false;
+    final bool added = widget.character.characterState.perkList[widget.index];
 
     String description = widget.perk.text;
     if (description.isEmpty) {
@@ -232,7 +253,7 @@ class LootCardListTileState extends State<PerkListTile> {
       onChanged: (bool? value) {
         setState(() {
           getIt<GameState>()
-              .action(AddPerkCommand(widget.characterId, widget.index));
+              .action(AddPerkCommand(widget.character.id, widget.index));
         });
       },
       value: added,

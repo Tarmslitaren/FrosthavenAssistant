@@ -394,7 +394,10 @@ class GameMethods {
 
   static addPerk(_StateModifier s, Character character, int index) {
     final deck = character.characterState.modifierDeck;
-    final perks = character.characterClass.perks;
+    final perksFH = character.characterClass.perksFH;
+    final useFHPerks =
+        character.characterState.useFHPerks.value && perksFH.isNotEmpty;
+    final perks = useFHPerks ? perksFH : character.characterClass.perks;
     final perk = perks[index];
     //deal with removing added perks (i.e infuser -1)?
     for (final item in perk.remove) {
@@ -427,12 +430,15 @@ class GameMethods {
     if (index == 17 && character.characterClass.name == "Hail") {
       getIt<GameState>().modifierDeck.addHailSpecial(s);
     }
-    //todo: add other perk specials
+    //todo: add other perk specials: elementalist gh2e, painconduit
   }
 
   static removePerk(_StateModifier s, Character character, int index) {
     final deck = character.characterState.modifierDeck;
-    final perks = character.characterClass.perks;
+    final perksFH = character.characterClass.perksFH;
+    final useFHPerks =
+        character.characterState.useFHPerks.value && perksFH.isNotEmpty;
+    final perks = useFHPerks ? perksFH : character.characterClass.perks;
     final perk = perks[index];
     for (final item in perk.remove) {
       deck.addCard(s, item, CardType.add);
@@ -451,6 +457,7 @@ class GameMethods {
     if (index == 17 && character.characterClass.name == "Hail") {
       getIt<GameState>().modifierDeck.removeHailSpecial(s);
     }
+    //todo: remove other perk specials: elementalist gh2e, painconduit
   }
 
   static int getCurrentCharacterAmount() {
