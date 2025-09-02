@@ -392,6 +392,68 @@ class GameMethods {
     return state.modifierDeck;
   }
 
+  static bool canAddPerk(Character character, int index) {
+    final deck = character.characterState.modifierDeck;
+    final perksFH = character.characterClass.perksFH;
+    final useFHPerks =
+        character.characterState.useFHPerks.value && perksFH.isNotEmpty;
+    final perks = useFHPerks ? perksFH : character.characterClass.perks;
+    final perk = perks[index];
+    for (final item in perk.remove) {
+      if (!deck.hasCard(item)) {
+        //check for perk cards in the deck with same id
+
+        int otherPerkCardAdded = 0;
+        //find missing card from perk list
+        for (int i = 0; i < perks.length; i++) {
+          //check if other perk added the card previously
+          if (character.characterState.perkList[i]) {
+            for (final card in perks[i].add) {
+              if (card == item) {
+                otherPerkCardAdded++;
+              }
+            }
+            //this only for specific perk cards
+            if (item.startsWith("perks/")) {
+              for (final card in perks[i].remove) {
+                if (card == item) {
+                  otherPerkCardAdded--;
+                }
+              }
+            }
+          }
+        }
+        return otherPerkCardAdded > 0;
+      }
+    }
+    return true;
+  }
+
+  static bool canRemovePerk(Character character, int index) {
+    final deck = character.characterState.modifierDeck;
+    final perksFH = character.characterClass.perksFH;
+    final useFHPerks =
+        character.characterState.useFHPerks.value && perksFH.isNotEmpty;
+    final perks = useFHPerks ? perksFH : character.characterClass.perks;
+    final perk = perks[index];
+
+    for (final item in perk.add) {
+      if (item.startsWith("perks/")) {
+        String id = "P$index";
+        if (perk.add.last != perk.add.first && item == perk.add.last) {
+          id += "-2";
+        }
+        if (deck.hasCard(id)) {
+          return true;
+        }
+      }
+      if (!deck.hasCard(item)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   static addPerk(_StateModifier s, Character character, int index) {
     final deck = character.characterState.modifierDeck;
     final perksFH = character.characterClass.perksFH;
@@ -399,16 +461,31 @@ class GameMethods {
         character.characterState.useFHPerks.value && perksFH.isNotEmpty;
     final perks = useFHPerks ? perksFH : character.characterClass.perks;
     final perk = perks[index];
-    //deal with removing added perks (i.e infuser -1)?
     for (final item in perk.remove) {
       final amount = deck.cardCount.value;
       deck.removeCard(s, item);
-      if (deck.cardCount.value == amount &&
-          item == "minus1" &&
-          character.id == "Infuser") {
-        deck.removeCard(s, "P0");
-        //infuser adds one -1 and removes 6 -1. which will include the perk card
-        //todo: should disallow adding perks that remove non existent cards
+      if (deck.cardCount.value == amount) {
+        //must be a perk card
+
+        //find missing card from perk list
+        //todo: maybe easier to find from card list? get all starting with a 'P' then go through and remove first fitting
+
+        for (int i = 0; i < perks.length; i++) {
+          //check if other perk added the card previously
+          final adds = perks[i].add;
+          if (adds.contains(item)) {
+            //remove that perk card
+            String second = "";
+            if (adds.first != adds.last && item == adds.last) {
+              second = "-2"; //in case perk adds 2 different cards
+            }
+            deck.removeCard(s, "P$i$second");
+            if (deck.cardCount.value != amount) {
+              //found and removed
+              break;
+            }
+          }
+        }
       }
     }
     for (final item in perk.add) {
@@ -417,13 +494,7 @@ class GameMethods {
         //nightshroud hack
         type = CardType.multiply;
       }
-      String id = "P$index";
-      final last = perk.add.last;
-      if (perk.add.first != last) {
-        if (item == last) {
-          id += "-2";
-        }
-      }
+      final id = perkGfxIdToCardId(item, perk, index);
       deck.addCard(s, id, type);
     }
 
@@ -431,6 +502,20 @@ class GameMethods {
       getIt<GameState>().modifierDeck.addHailSpecial(s);
     }
     //todo: add other perk specials: elementalist gh2e, painconduit
+  }
+
+  static String perkGfxIdToCardId(String gfx, PerkModel perk, int index) {
+    if (gfx.startsWith("perks/")) {
+      String id = "P$index";
+      final last = perk.add.last;
+      if (perk.add.first != last) {
+        if (gfx == last) {
+          id += "-2";
+        }
+      }
+      return id;
+    }
+    return gfx;
   }
 
   static removePerk(_StateModifier s, Character character, int index) {
@@ -441,16 +526,22 @@ class GameMethods {
     final perks = useFHPerks ? perksFH : character.characterClass.perks;
     final perk = perks[index];
     for (final item in perk.remove) {
-      deck.addCard(s, item, CardType.add);
+      if (item.startsWith("perks/")) {
+        //find id of perk: bull: could be several...
+        for (int i = 0; i < perks.length; i++) {
+          if (character.characterState.perkList[i] &&
+              perks[i].add.contains(item)) {
+            final id = perkGfxIdToCardId(item, perks[i], i);
+            deck.addCard(s, id, CardType.add);
+            break;
+          }
+        }
+      } else {
+        deck.addCard(s, item, CardType.add);
+      }
     }
     for (final item in perk.add) {
-      String id = "P$index";
-      final last = perk.add.last;
-      if (perk.add.first != last) {
-        if (item == last) {
-          id += "-2";
-        }
-      }
+      final id = perkGfxIdToCardId(item, perk, index);
       deck.removeCard(s, id);
     }
 

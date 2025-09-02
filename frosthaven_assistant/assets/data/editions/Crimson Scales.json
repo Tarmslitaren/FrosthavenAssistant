@@ -418,7 +418,7 @@
         {"text": "Replace one +1 card with one +0 %wound% 2 card","removes": ["plus1"],"adds": [ "perks/unique/mf4"]},
         {"text": "Replace one +1 card with one +0 %wound% 2 card","removes": ["plus1"],"adds": [ "perks/unique/mf4"]},
         {"text": "Add four +0 \"+1 if the target occupy difficult terrain\"%flip% cards","adds": [ "perks/unique/mf5","perks/unique/mf5","perks/unique/mf5","perks/unique/mf5"]},
-        {"text": "Add two \"%invisible%, self, if you occupy difficult terrain\"%flip% cards","removes": ["plus0"],"adds": [ "perks/unique/mf1", "perks/unique/mf1"]},
+        {"text": "Add two \"%invisible%, self, if you occupy difficult terrain\"%flip% cards","adds": [ "perks/unique/mf1", "perks/unique/mf1"]},
         {"text": "Gain \"Poison Dagger\" (Item 11). You may carry one additional Hand item with \"Dagger\" in its name "},
         {"text": "Ignore damage and negative conditions and modifiers from Events, and remove one -1 card","removes": ["minus1"]},
         {"text": "Ignore negative scenario effects and remove one -1 card","removes": ["minus1"]}

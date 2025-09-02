@@ -185,6 +185,22 @@
          {"adds": ["perks/plus0muddleflip","perks/plus0muddleflip"]},
          {"adds": ["perks/plus0invisibleflip"]},
          {"text": "Ignore negative scenario effects"}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["minus1"],"adds": ["perks/plus0poisonflip" ]},
+         {"removes": ["minus1"],"adds": ["perks/plus0poisonflip" ]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
+         {"removes": ["plus0"], "adds": ["plus2"]},
+         {"removes": ["plus0"], "adds": ["plus2"]},
+         {"text": "Replace two +0 cards with one +0%muddle%%flip% card and one +0%pierce%%flip%","removes": ["plus0", "plus0"],"adds": ["perks/plus0muddleflip","perks/plus0pierce3flip"]},
+         {"text": "Replace two +0 cards with one +0%muddle%%flip% card and one +0%pierce%%flip%","removes": ["plus0", "plus0"],"adds": ["perks/plus0muddleflip","perks/plus0pierce3flip"]},
+         {"adds": ["perks/plus1flip","perks/plus1flip"]},
+         {"adds": ["perks/plus1flip","perks/plus1flip"]},
+         {"adds": ["perks/plus0invisibleflip"]},
+         {"text": "Ignore scenario effects"},
+         {"text": "[double] Cloak of Invisibility: Once each scenario, during your turn, perform %invisible%, self"}
        ]
     },
     {
@@ -210,6 +226,22 @@
         {"adds": ["perks/plus0airflip","perks/plus0airflip" ]},
         {"text": "Ignore negative item effects"},
         {"text": "Ignore negative scenario effects"}
+      ],
+      "perks_fh": [
+        {"removes": ["minus1"], "adds": ["plus1"]},
+        {"removes": ["minus1"], "adds": ["plus1"]},
+        {"removes": ["minus1"], "adds": ["plus1"]},
+        {"removes": ["plus0"], "adds": ["perks/plus0push2flip","perks/plus0push2flip" ]},
+        {"removes": ["plus0"],"adds": ["perks/plus1immobilize"]},
+        {"removes": ["plus0"],"adds": ["perks/plus1immobilize"]},
+        {"removes": ["plus0"],"adds": ["plus2"]},
+        {"removes": ["plus0"],"adds": ["plus2"]},
+        {"text": "Add one +2 %muddle% and one +0%air%%flip%","adds": ["perks/plus2muddle", "perks/plus0airflip"]},
+        {"text": "Add one +2 %muddle% and one +0%air%%flip%","adds": ["perks/plus2muddle", "perks/plus0airflip"]},
+        {"adds": ["perks/plus0earthflip","perks/plus0earthflip", "perks/plus0earthflip","perks/plus0earthflip"]},
+        {"text": "Ignore item - 1 effects"},
+        {"text": "Ignore scenario effects"},
+        {"text": "[double] Earthquakes: Whenever a new room is revealed, control all enemies in the newly revealed room: %move% 1, this movement must end in an empty hex"}
       ]
     },
      {
@@ -254,6 +286,23 @@
          {"adds": ["perks/plus0stunflip" ]},
          {"text": "Add one %flip%%disarm% card and one %flip%%muddle% card", "adds": ["perks/plus0disarmflip","perks/plus0muddleflip" ]},
          {"text": "Ignore negative scenario effects"}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1","minus1"]},
+         {"removes": ["minus1"], "adds": ["perks/plus0immobilizeflip" ]},
+         {"removes": ["minus1"], "adds": ["perks/plus0immobilizeflip" ]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
+         {"removes": ["plus0","plus0"],"adds": ["perks/plus0pull1flip","perks/plus0pull1flip","perks/plus0pull1flip"]},
+         {"removes": ["plus0","plus0"],"adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0earthflip" ]},
+         {"removes": ["plus1","plus1"], "adds": ["plus2","plus2"]},
+         {"adds": ["perks/plus2ice"]},
+         {"adds": ["perks/plus2ice"]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"text": "Add one +0 %disarm%%flip% card and one +0 %muddle%%flip% card", "adds": ["perks/plus0disarmflip","perks/plus0muddleflip" ]},
+         {"text": "Ignore negative scenario effects"},
+         {"text": "Lying Low: You are considered to be last in initiative order when determining monster focus"}
        ]
     },
 

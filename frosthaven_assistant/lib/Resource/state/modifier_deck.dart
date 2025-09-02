@@ -280,6 +280,18 @@ class ModifierDeck {
     _shuffle();
   }
 
+  bool hasCard(String gfx) {
+    final drawPileHas =
+        _drawPile.getList().firstWhereOrNull((test) => test.gfx == gfx) != null;
+    final discardPileHas =
+        _discardPile.getList().firstWhereOrNull((test) => test.gfx == gfx) !=
+            null;
+    final removedPileHas =
+        _removedPile.getList().firstWhereOrNull((test) => test.gfx == gfx) !=
+            null;
+    return (drawPileHas || discardPileHas || removedPileHas);
+  }
+
   void removeCard(_StateModifier _, String gfx) {
     _shuffle();
     _removeCardFromDrawPile(gfx);

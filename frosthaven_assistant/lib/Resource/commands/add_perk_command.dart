@@ -26,6 +26,6 @@ class AddPerkCommand extends Command {
         add = "Remove";
       }
     }
-    return "$add '${character?.characterClass.perks[index].text}' Perk";
+    return "$add '${character?.id}' Perk no: $index";
   }
 }

@@ -13,8 +13,8 @@ class PerksMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-        valueListenable: character.characterState.useFHPerks,
+    return ValueListenableBuilder<int>(
+        valueListenable: getIt<GameState>().commandIndex,
         builder: (context, value, child) {
           final ScrollController scrollController = ScrollController();
 
@@ -247,9 +247,14 @@ class LootCardListTileState extends State<PerkListTile> {
       }
     }
 
+    bool enabled =
+        (added && GameMethods.canRemovePerk(widget.character, widget.index)) ||
+            (!added && GameMethods.canAddPerk(widget.character, widget.index));
+
     return CheckboxListTile(
       contentPadding: EdgeInsets.only(left: 14),
       title: TokenApplier.applyTokensForPerks(description),
+      enabled: enabled,
       onChanged: (bool? value) {
         setState(() {
           getIt<GameState>()
