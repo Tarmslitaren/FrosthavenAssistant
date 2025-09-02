@@ -341,6 +341,18 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         width: 2 * userScalingBars,
                       ),
                       Stack(children: [
+                        //bg
+                        Container(
+                          margin: EdgeInsets.only(top: 1 * userScalingBars),
+                          width: 57.6666 * userScalingBars,
+                          height: 39 * userScalingBars,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                                Radius.circular(5 * userScalingBars)),
+                            border: Border.all(color: Colors.white70),
+                            color: Color(int.parse("7A000000", radix: 16)),
+                          ),
+                        ),
                         discardPileSize > 2
                             ? buildStayAnimation(
                                 RotationTransition(
