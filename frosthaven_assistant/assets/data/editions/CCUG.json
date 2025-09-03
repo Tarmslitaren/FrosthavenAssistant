@@ -114,6 +114,55 @@
         {"text": "[double] Whenever you draw a %bless%, perform %ward% %target% 1 ally. If that ally already has %ward%, %heal% 1 that ally"},
         {"text": "Once each scenario, you may use all of your played cards for their standard action and ignore damage from Speeds that turn"}
       ]
+    },
+    {
+      "name": "Lifespeaker",
+      "color": "FFFBB769",
+      "colorSecondary": "ff913A58",
+      "edition": "CCUG",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+        "Pakh's Prowess": {
+          "level": 1,
+          "health": 7,
+          "gfx": "LIF pakhs prowess",
+          "move": 2,
+          "attack": 2
+        },
+        "Makolu's Favor": {
+          "level": 6,
+          "health": 5,
+          "gfx": "LIF makolus favor",
+          "move": 3,
+          "attack": 2
+        },
+        "Otark's Rage": {
+          "level": 8,
+          "health": 9,
+          "gfx": "LIF otarks rage",
+          "move": 3,
+          "attack": 3
+        }
+      },
+      "perks": [
+        {"removes": ["minus2"]},
+        {"text": "Replace one -1 card with one +0 %enfeeble% card","removes": ["minus1"],"adds": [ "perks/unique/li3"]},
+        {"text": "Replace one -1 card with one +0 %enfeeble% card","removes": ["minus1"],"adds": [ "perks/unique/li3"]},
+        {"text": "Replace one -1 card with one +0 %enfeeble% card","removes": ["minus1"],"adds": [ "perks/unique/li3"]},
+        {"text": "Replace one +0 card and one +1 card with one +1 %pierce% 1 %push% 1\"%regenerate%, %range% 2\" card","removes": ["plus0","plus1"],"adds": [ "perks/unique/li1"]},
+        {"text": "Replace one +0 card and one +1 card with one +1 %pierce% 1 %push% 1\"%regenerate%, %range% 2\" card","removes": ["plus0","plus1"],"adds": [ "perks/unique/li1"]},
+        {"text": "Replace one +0 card and one +1 card with one +1 %pierce% 1 %push% 1\"%regenerate%, %range% 2\" card","removes": ["plus0","plus1"],"adds": [ "perks/unique/li1"]},
+        {"text": "Add one +0\"Place this card in your active area. The next time you trigger an element consumption effect, discard this card to gain the effect an additional time\"%flip% card","adds": [ "perks/unique/li2"]},
+        {"text": "Add one +0\"Place this card in your active area. The next time you trigger an element consumption effect, discard this card to gain the effect an additional time\"%flip% card","adds": [ "perks/unique/li2"]},
+        {"text": "Add one +0\"Place this card in your active area. The next time you trigger an element consumption effect, discard this card to gain the effect an additional time\"%flip% card","adds": [ "perks/unique/li2"]},
+        {"text": "Add one +1\"Add + 2 %attack% and suffer %damage% 1 if Lifespeaker has at least 2 Icons\"%flip% card","adds": [ "perks/unique/li4"]},
+        {"text": "Add one +1\"Add + 2 %attack% and suffer %damage% 1 if Lifespeaker has at least 2 Icons\"%flip% card","adds": [ "perks/unique/li4"]},
+        {"text": "Add one +1\"Add + 2 %attack% and suffer %damage% 1 if Lifespeaker has at least 2 Icons\"%flip% card","adds": [ "perks/unique/li4"]},
+        {"text": "Ignore scenario effects and at the start of each of your turns, any number of times, perform: - 1 Icon: Move the character token on one of your persistent abilities backwards one slot."},
+        {"text": "Once each scenario, you may gain up to three %enfeeble% cards to gain the same amount of Icons"},
+        {"text": "[triple] Whenever an enemy draws an %enfeeble% card, that enemy reduces the value of their attack by 1 and suffers %damage% 1 after the attack."}
+      ]
     }
   ],
   "monsterAbilities": [

@@ -11,8 +11,13 @@ class ModifierDeck {
     "curse": ValueNotifier<int>(0),
     "bless": ValueNotifier<int>(0),
     "in-enfeeble": ValueNotifier<int>(0),
+    "vi-enfeeble": ValueNotifier<int>(0),
+    "vi-gr-enfeeble": ValueNotifier<int>(0),
+    "li-enfeeble": ValueNotifier<int>(0),
     "in-empower": ValueNotifier<int>(0),
     "rm-empower": ValueNotifier<int>(0),
+    "vi-empower": ValueNotifier<int>(0),
+    "vi-gr-empower": ValueNotifier<int>(0),
   };
 
   final _cardCount = ValueNotifier<int>(

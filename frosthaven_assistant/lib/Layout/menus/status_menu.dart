@@ -220,6 +220,8 @@ class StatusMenuState extends State<StatusMenu> {
     bool showCustomContent = getIt<Settings>().showCustomContent.value;
     bool hasMireFoot = false;
     bool hasIncarnate = false;
+    bool hasVimthreader = false;
+    bool hasLifespeaker = false;
     bool isSummon = (widget.monsterId == null &&
         widget.characterId !=
             widget
@@ -230,6 +232,12 @@ class StatusMenuState extends State<StatusMenu> {
       }
       if (item.id == "Incarnate" && showCustomContent) {
         hasIncarnate = true;
+      }
+      if (item.id == "Vimthreader" && showCustomContent) {
+        hasVimthreader = true;
+      }
+      if (item.id == "Lifespeaker" && showCustomContent) {
+        hasLifespeaker = true;
       }
     }
 
@@ -542,14 +550,91 @@ class StatusMenuState extends State<StatusMenu> {
                               command: ChangeEmpowerCommand(
                                   0, "rm-empower", figureId, ownerId),
                               maxValue: 12,
-                              image:
-                                  "assets/images/abilities/empower.png", //add character icon here too
+                              image: "assets/images/abilities/empower.png",
                               extraImage:
                                   "assets/images/class-icons/ruinmaw.png",
                               showTotalValue: true,
                               color: Colors.white,
                               figureId: figureId,
                               ownerId: ownerId,
+                              scale: scale),
+                        if (showAmd &&
+                            (isCharacter || isAlly) &&
+                            hasVimthreader)
+                          CounterButton(
+                              notifier: deck.getRemovable("vi-empower"),
+                              command:
+                                  ChangeEmpowerCommand.deck(deck, "vi-empower"),
+                              maxValue: 10,
+                              image: "assets/images/abilities/empower2.png",
+                              extraImage:
+                                  "assets/images/class-icons/vimthreader.png",
+                              showTotalValue: true,
+                              color: Colors.white,
+                              figureId: "unknown",
+                              ownerId: "unknown",
+                              scale: scale),
+                        if (showAmd &&
+                            (isCharacter || isAlly) &&
+                            hasVimthreader)
+                          CounterButton(
+                              notifier: deck.getRemovable("vi-gr-empower"),
+                              command: ChangeEmpowerCommand.deck(
+                                  deck, "vi-gr-empower"),
+                              maxValue: 5,
+                              image:
+                                  "assets/images/abilities/greater-empower.png",
+                              showTotalValue: true,
+                              color: Colors.white,
+                              figureId: "unknown",
+                              ownerId: "unknown",
+                              scale: scale),
+                        if (showMonsterAmd &&
+                            (!isCharacter || !isSummon) &&
+                            hasVimthreader)
+                          CounterButton(
+                              notifier: deck.getRemovable("vi-enfeeble"),
+                              command: ChangeEmpowerCommand.deck(
+                                  deck, "vi-enfeeble"),
+                              maxValue: 10,
+                              image: "assets/images/abilities/enfeeble2.png",
+                              extraImage:
+                                  "assets/images/class-icons/vimthreader.png",
+                              showTotalValue: true,
+                              color: Colors.white,
+                              figureId: "unknown",
+                              ownerId: "unknown",
+                              scale: scale),
+                        if (showMonsterAmd &&
+                            (!isCharacter || !isSummon) &&
+                            hasVimthreader)
+                          CounterButton(
+                              notifier: deck.getRemovable("vi-gr-enfeeble"),
+                              command: ChangeEmpowerCommand.deck(
+                                  deck, "vi-gr-enfeeble"),
+                              maxValue: 5,
+                              image:
+                                  "assets/images/abilities/greater-enfeeble.png",
+                              showTotalValue: true,
+                              color: Colors.white,
+                              figureId: "unknown",
+                              ownerId: "unknown",
+                              scale: scale),
+                        if ((!isCharacter ||
+                                widget.characterId == "Lifespeaker") &&
+                            hasLifespeaker)
+                          CounterButton(
+                              notifier: deck.getRemovable("li-enfeeble"),
+                              command: ChangeEmpowerCommand.deck(
+                                  deck, "li-enfeeble"),
+                              maxValue: 15,
+                              image: "assets/images/abilities/enfeeble2.png",
+                              extraImage: //todo: only add extra image if more than one enfeeble character present
+                                  "assets/images/class-icons/lifespeaker.png",
+                              showTotalValue: true,
+                              color: Colors.white,
+                              figureId: "unknown",
+                              ownerId: "unknown",
                               scale: scale),
                         if (showCustomContent)
                           buildChillButtons(
