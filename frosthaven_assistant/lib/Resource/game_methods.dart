@@ -5,12 +5,35 @@ GameState _gameState = getIt<GameState>();
 GameData _gameData = getIt<GameData>();
 
 class GameMethods {
+  static void resetElements(_StateModifier _) {
+    for (var key in _gameState.elementState.keys) {
+      _gameState._elementState[key] = ElementState.inert;
+    }
+  }
+
   static void updateElements(_StateModifier _) {
+    //elementalist special:
+    bool elementalistPerk = false;
+    Character? elementalist = getCharacterByName("Elementalist");
+    if (elementalist != null && elementalist.characterState.perkList[15]) {
+      if (elementalist.characterClass.edition == "Gloomhaven 2nd Edition") {
+        elementalistPerk = true;
+      }
+    }
+
     for (var key in _gameState.elementState.keys) {
       if (_gameState.elementState[key] == ElementState.full) {
-        _gameState._elementState[key] = ElementState.half;
+        if (!elementalistPerk ||
+            key == Elements.light ||
+            key == Elements.dark) {
+          _gameState._elementState[key] = ElementState.half;
+        }
       } else if (_gameState.elementState[key] == ElementState.half) {
-        _gameState._elementState[key] = ElementState.inert;
+        if (!elementalistPerk ||
+            key == Elements.light ||
+            key == Elements.dark) {
+          _gameState._elementState[key] = ElementState.inert;
+        }
       }
     }
   }
@@ -509,7 +532,6 @@ class GameMethods {
       character.characterState
           .setMaxHealth(s, character.characterState._health.value);
     }
-    //todo: add other perk specials: elementalist gh2e,
   }
 
   static String perkGfxIdToCardId(String gfx, PerkModel perk, int index) {
@@ -564,7 +586,6 @@ class GameMethods {
       state.setMaxHealth(s, health);
       state.setHealth(s, health);
     }
-    //todo: remove other perk specials: elementalist gh2e
   }
 
   static int getCurrentCharacterAmount() {
@@ -974,8 +995,7 @@ class GameMethods {
       _gameState._scenarioSpecialRules = specialRules;
 
       //todo: create a game state set scenario method to handle all these
-      GameMethods.updateElements(s);
-      GameMethods.updateElements(s); //twice to make sure they are inert.
+      GameMethods.resetElements(s);
       GameMethods.setRoundState(s, RoundState.chooseInitiative);
       GameMethods.sortCharactersFirst(s);
       _gameState._scenario.value = scenario;

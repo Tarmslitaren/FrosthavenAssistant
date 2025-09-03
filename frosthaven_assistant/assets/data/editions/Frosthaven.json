@@ -457,7 +457,7 @@
         {"text": "Ignore scenario effects and add two +1 cards","adds": [ "plus1","plus1"]},
         {"text": "Each round in which you long rest, you may ignore all negative conditions you have. If you do, they cannot be removed that round"},
         {"text": "Whenever you become exhausted, first perform %curse%, %target% all, %range% 3"},
-        {"text": "[double] Increase your maximum hit point value  by 5", "todo":  "automate this if set"}
+        {"text": "[double] Increase your maximum hit point value  by 5"}
       ]
     },
     {
