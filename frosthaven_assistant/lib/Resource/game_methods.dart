@@ -498,10 +498,18 @@ class GameMethods {
       deck.addCard(s, id, type);
     }
 
-    if (index == 17 && character.characterClass.name == "Hail") {
+    final className = character.characterClass.name;
+    if (index == 17 && className == "Hail") {
       getIt<GameState>().modifierDeck.addHailSpecial(s);
     }
-    //todo: add other perk specials: elementalist gh2e, painconduit
+    if (index == 16 && className == "Pain Conduit") {
+      final level = character.characterState.level.value;
+      character.characterState._health.value =
+          character.characterClass.healthByLevel[level - 1] + 5;
+      character.characterState
+          .setMaxHealth(s, character.characterState._health.value);
+    }
+    //todo: add other perk specials: elementalist gh2e,
   }
 
   static String perkGfxIdToCardId(String gfx, PerkModel perk, int index) {
@@ -545,10 +553,18 @@ class GameMethods {
       deck.removeCard(s, id);
     }
 
-    if (index == 17 && character.characterClass.name == "Hail") {
+    final className = character.characterClass.name;
+    if (index == 17 && className == "Hail") {
       getIt<GameState>().modifierDeck.removeHailSpecial(s);
     }
-    //todo: remove other perk specials: elementalist gh2e, painconduit
+    if (index == 16 && className == "Pain Conduit") {
+      final state = character.characterState;
+      final characterClass = character.characterClass;
+      final int health = characterClass.healthByLevel[state.level.value - 1];
+      state.setMaxHealth(s, health);
+      state.setHealth(s, health);
+    }
+    //todo: remove other perk specials: elementalist gh2e
   }
 
   static int getCurrentCharacterAmount() {
@@ -627,6 +643,12 @@ class GameMethods {
       }
       character.characterState.setFigureLevel(s, level);
       character.characterState.setHealth(s, healthByLevel[level - 1]);
+
+      if (character.id == "Pain Conduit" &&
+          character.characterState.perkList[16]) {
+        character.characterState.setHealth(s, healthByLevel[level - 1] + 5);
+      }
+
       character.characterState
           .setMaxHealth(s, character.characterState.health.value);
 
@@ -649,6 +671,13 @@ class GameMethods {
     final level = item.characterState.level.value;
     item.characterState._health.value =
         item.characterClass.healthByLevel[level - 1];
+
+    if (item.characterClass.name == "Pain Conduit") {
+      if (item.characterState.perkList[16]) {
+        item.characterState._health.value += 5;
+      }
+    }
+
     item.characterState._maxHealth.value = item.characterState.health.value;
     item.characterState._xp.value = 0;
     item.characterState.conditions.value.clear();
