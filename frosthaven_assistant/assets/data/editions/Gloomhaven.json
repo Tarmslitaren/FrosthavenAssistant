@@ -329,6 +329,22 @@
          {"adds": ["perks/plus0shield1flip", "perks/plus0shield1flip"]},
          {"text": "Ignore negative item effects and add two +1 cards", "adds": ["plus1","plus1"]},
          {"text": "Ignore negative scenario effects"}
+       ],
+       "perks_fh": [
+         {"removes": ["plus0", "plus0","plus0","plus0"]},
+         {"removes": ["minus1"],"adds": ["perks/plus0lightflip","perks/plus0lightflip"]},
+         {"removes": ["minus1"],"adds": ["perks/plus0lightflip","perks/plus0lightflip"]},
+         {"removes": ["minus1"],"adds": ["perks/plus0shield1flip"]},
+         {"removes": ["minus1"],"adds": ["perks/plus0shield1flip"]},
+         {"removes": ["plus0"], "adds": ["plus2"]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"text": "Ignore item - 1 effects and add two +1 cards", "adds": ["plus1","plus1"]},
+         {"text": "Ignore negative scenario effects"},
+         {"text": "[double] Shielding Light: Whenever one of your heals would cause an ally's current hit point value to increase beyond their maximum hit point value, that ally gains %ward%"}
        ]
     },
      {
@@ -355,6 +371,22 @@
          {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
          {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
          {"text": "Ignore negative item effects and add two +1 cards", "adds": ["plus1","plus1"]}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["plus0", "plus0"], "adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip" ]},
+         {"removes": ["plus0"], "adds": ["perks/plus0target1"]},
+         {"removes": ["plus0"], "adds": ["plus2"]},
+         {"removes": ["plus0"], "adds": ["plus2"]},
+         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
+         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
+         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"text": "Ignore item - 1 effects and add two +1 cards", "adds": ["plus1","plus1"]},
+         {"text": "[double] Well Supplied: Once each scenario, during your turn, if you have a persistent Quartermaster ability card in your active area, you may recover up to four cards from your discard pile"}
        ]
     },
      {
@@ -444,7 +476,7 @@
       },
        "perks": [
          {"removes": ["minus1", "minus1"]},
-         {"removes": ["plus2"], "adds": ["plus0"]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
          {"removes": ["minus1"], "adds": ["plus1"]},
          {"removes": ["minus1"], "adds": ["plus1"]},
          {"removes": ["minus1"], "adds": ["plus1"]},
@@ -458,6 +490,22 @@
          {"text": "Add one %flip%%fire% card and one %flip%%air%","adds": ["perks/plus0fireflip","perks/plus0airflip" ]},
          {"text": "Add one %flip%%dark% card and one %flip%%earth%","adds": ["perks/plus0darkflip","perks/plus0earthflip" ]},
          {"text": "Ignore negative scenario effects and add two +1 cards", "adds": ["plus1","plus1"]}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["minus1"], "adds": ["plus1"]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
+         {"text": "Replace two +0 cards with one +0 %fire%%flip% card and one +0 %earth%%flip%","removes": ["plus0","plus0"],"adds": ["perks/plus0fireflip","perks/plus0earthflip" ]},
+         {"text": "Replace two +0 cards with one +0 %air%%flip% card and one +0 %dark%%flip%","removes": ["plus0","plus0"],"adds": ["perks/plus0darkflip","perks/plus0airflip" ]},
+         {"removes": ["plus1","plus1"],"adds": ["plus2","plus2"]},
+         {"adds": ["perks/plus0woundflip","perks/plus0woundflip" ]},
+         {"adds": ["perks/plus0poisonflip","perks/plus0poisonflip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"text": "Ignore scenario effects and add two +1 cards", "adds": ["plus1","plus1"]},
+         {"text": "[double] Phase Out: Once ach scenario, during ordering of initiative, after all ability cards have been revealed, all your summons gain %invisible%"}
        ]
     },
      {
@@ -479,11 +527,27 @@
          {"adds": ["perks/plus1invisible"]},
          {"adds": ["perks/plus1invisible"]},
          {"adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip" ]},
+         {"adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip" ]},
          {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
          {"adds": ["perks/plus0curseflip","perks/plus0curseflip" ]},
          {"adds": ["perks/plus0target1flip" ]},
-         {"adds": ["perks/plus0fireflip","perks/plus0airflip" ]},
          {"text": "Ignore negative scenario effects and add two +1 cards", "adds": ["plus1","plus1"]}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus1", "minus1"]},
+         {"removes": ["minus2" ], "adds": ["perks/minus1dark" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus0target1flip" ]},
+         {"removes": ["plus0","plus0"],"adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip" ]},
+         {"removes": ["plus0","plus0"],"adds": ["perks/plus0muddleflip","perks/plus0muddleflip","perks/plus0muddleflip" ]},
+         {"removes": ["plus1"],"adds": ["perks/plus1invisible"]},
+         {"removes": ["plus1"],"adds": ["perks/plus1invisible"]},
+         {"adds": ["perks/plus1dark" ]},
+         {"adds": ["perks/plus1dark" ]},
+         {"adds": ["perks/plus0curseflip","perks/plus0curseflip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"text": "Ignore scenario effects and add two +1 cards", "adds": ["plus1","plus1"]},
+         {"text": "[double] Empowering Night: At the start of the scenario, you may discard two cards to add a card with an action containing a persistent symbol from your pool to your hand and immediately play it, performing that action"}
        ]
     },
      {
@@ -509,6 +573,22 @@
          {"adds": ["perks/plus0stunflip" ]},
          {"adds": ["perks/plus0stunflip" ]},
          {"text": "Ignore negative scenario effects and add one +1 cards", "adds": ["plus1"]}
+       ],
+       "perks_fh": [
+         {"removes": ["minus2" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"adds": ["perks/plus1air","perks/plus1air","perks/plus1air" ]},
+         {"adds": ["perks/plus0poisonflip","perks/plus0poisonflip","perks/plus0poisonflip" ]},
+         {"adds": ["perks/plus0immobilizeflip","perks/plus0immobilizeflip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"adds": ["perks/plus0curseflip","perks/plus0curseflip" ]},
+         {"text": "Ignore negative scenario effects and add one +1 cards", "adds": ["plus1"]},
+         {"text": "[double] Xorn's Boon: Once each scenario, during your turn, cause each enemy that has %poison% to suffer %damage% 1 and gain %muddle% and each ally who has %poison% to suffer %damage% 1 and gain %strengthen%"}
        ]
     },
      {
@@ -535,6 +615,23 @@
          {"adds": ["perks/plus2fire" ]},
          {"adds": ["perks/plus2fire" ]},
          {"text": "Ignore negative item effects"}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus0woundflip","perks/plus0woundflip" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus0woundflip","perks/plus0woundflip" ]},
+         {"removes": ["plus1" ],"adds": ["perks/plus2flip" ]},
+         {"removes": ["plus1" ],"adds": ["perks/plus2flip" ]},
+         {"adds": ["perks/plus2fire" ]},
+         {"adds": ["perks/plus2fire" ]},
+         {"adds": ["perks/plus0stunflip"]},
+         {"adds": ["perks/plus0stunflip"]},
+         {"adds": ["perks/plus1disarmflip"]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"text": "Ignore item - 1 effects"},
+         {"text": "Rapid Recovery: Whenever you heal from a long rest, add +1 %heal%"}
        ]
     },
      {
@@ -561,6 +658,23 @@
          {"adds": ["perks/plus1flip","perks/plus1flip","perks/plus1flip"]},
          {"adds": ["perks/plus0curseflip","perks/plus0curseflip" ]},
          {"adds": ["perks/plus0curseflip","perks/plus0curseflip" ]}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus2" ]},
+         {"removes": ["minus1" ],"adds": ["perks/plus0stun" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1immobilize" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1disarm" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus2wound" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus2poison" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus2curse" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus3muddle" ]},
+         {"removes": ["plus1","plus1" ],"adds": ["perks/plus4" ]},
+         {"removes": ["plus1","plus1" ],"adds": ["perks/plus4" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip","perks/plus1flip"]},
+         {"adds": ["perks/plus0curseflip","perks/plus0curseflip", "perks/plus0curseflip"]},
+         {"text": "Storyteller: At the end of each scenario, each character in that scenario gains 8 experience if you completed your battle goal"}
        ]
     },
      {
@@ -618,6 +732,23 @@
          {"adds": ["perks/plus0target1flip"]},
          {"adds": ["perks/plus0target1flip"]},
          {"text": "Ignore negative scenario effects"}
+       ],
+       "perks_fh": [
+         {"removes": ["minus2"]},
+         {"removes": ["minus1" ],"adds": ["plus1"]},
+         {"removes": ["minus1" ],"adds": ["plus1"]},
+         {"removes": ["minus1" ],"adds": ["plus1"]},
+         {"removes": ["minus1" ],"adds": ["plus1"]},
+         {"removes": ["plus0"],"adds": ["perks/plus0target1flip"]},
+         {"removes": ["plus0"],"adds": ["perks/plus0target1flip"]},
+         {"removes": ["plus0"],"adds": ["perks/plus0stun" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus1wound" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus1poison" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus2muddle" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"adds": ["perks/plus1flip","perks/plus1flip" ]},
+         {"text": "Ignore scenario effects and  add one +1 %immobilize%","adds": ["perks/plus1immobilize" ]},
+         {"text": "Marked for the Hunt: At the beginning of each round in which you long rest, you may choose one ally to gain the benefits of any of your active Dooms as if the Dooms were in that ally's active area for the round" }
        ]
     },
      {
@@ -638,12 +769,29 @@
          {"adds": ["perks/plus2flip" ]},
          {"adds": ["perks/plus1immobilize" ]},
          {"adds": ["perks/plus1immobilize" ]},
-         {"adds": ["perks/plus0woundflip" ]},
-         {"adds": ["perks/plus0woundflip" ]},
+         {"adds": ["perks/plus0woundflip","perks/plus0woundflip" ]},
+         {"adds": ["perks/plus0woundflip","perks/plus0woundflip" ]},
          {"adds": ["perks/plus0stunflip" ]},
          {"adds": ["perks/plus0heal3flip" ]},
          {"adds": ["perks/plus0heal3flip" ]},
          {"text": "Add one +1 Refresh an item card","adds": ["perks/plus0untap" ]}
+       ],
+       "perks_fh": [
+         {"removes": ["minus2" ]},
+         {"removes": ["minus1"],"adds": ["perks/plus0woundflip" ]},
+         {"removes": ["minus1"],"adds": ["perks/plus0woundflip" ]},
+         {"removes": ["minus1"],"adds": ["perks/plus0woundflip" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1immobilize" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1immobilize" ]},
+         {"text": "Add one +1 Refresh an item card","adds": ["perks/plus0untap" ]},
+         {"adds": ["perks/plus2flip" ]},
+         {"adds": ["perks/plus2flip" ]},
+         {"adds": ["perks/plus0stunflip" ]},
+         {"adds": ["perks/plus0heal3flip" ]},
+         {"adds": ["perks/plus0heal3flip" ]},
+         {"text": "Revitalizing Medicine: Whenever an ally perform the Heal ability of Medical Pack or Large Medical Pack, that character may first remove one negative condition" }
        ]
     },
      {
@@ -682,6 +830,23 @@
          {"adds": ["perks/plus1wound" ]},
          {"adds": ["perks/plus0stun" ]},
          {"adds": ["perks/plus0target1" ]}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus2" ]},
+         {"removes": ["plus0","plus0","plus0","plus0" ]},
+         {"removes": ["minus1" ],"adds": ["perks/plus0target1" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus0stun" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1wound" ]},
+         {"removes": ["plus1","plus1" ],"adds": ["plus2","plus2" ]},
+         {"adds": ["perks/plus0fire","perks/plus0fire","perks/plus0fire","perks/plus0fire"]},
+         {"adds": ["perks/plus0ice","perks/plus0ice","perks/plus0ice","perks/plus0ice" ]},
+         {"adds": ["perks/plus0air","perks/plus0air","perks/plus0air","perks/plus0air" ]},
+         {"adds": ["perks/plus0earth","perks/plus0earth","perks/plus0earth","perks/plus0earth" ]},
+         {"text": "Ignore scenario effects" },
+         {"text": "[double] Elemental Proficiency: At the start of each scenario and whenever you long rest, %any%" }
+
        ]
     },
      {
@@ -747,6 +912,22 @@
          {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
          {"adds": ["perks/plus0earthflip","perks/plus0earthflip"]},
          {"text": "Ignore negative scenario effects"}
+       ],
+       "perks_fh": [
+         {"removes": ["minus1","minus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["minus1" ],"adds": ["plus1" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"removes": ["plus0" ],"adds": ["plus2" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1wound" ]},
+         {"removes": ["plus0" ],"adds": ["perks/plus1wound" ]},
+         {"adds": ["perks/plus1immobilize","perks/plus1immobilize" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
+         {"text": "Ignore negative scenario effects and add two +0 %earth%%flip%","adds": ["perks/plus0earthflip","perks/plus0earthflip"]},
+         {"text": "[double] Bear Treat: During each round in which you long rest, at initiative 99, you may skip the bear's normal turn to command:\"%move% 3, %loot% 1; If the loot ability was performed:%heal% 3, self\""}
        ]
     },
      {
@@ -829,7 +1010,8 @@
          {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
          {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
          {"text": "Ignore negative item effects and add one +1 card","adds": ["plus1" ]},
-         {"text": "Ignore negative scenario effects and all one +1 card","adds": ["plus1" ]}
+         {"text": "Ignore negative scenario effects and all one +1 card","adds": ["plus1" ]},
+         {"text": "Spinning Up: At the start of your first turn each scenario, you may play one card from your hand to perform a persistent loss action of that card"}
        ]
     }
   ],
