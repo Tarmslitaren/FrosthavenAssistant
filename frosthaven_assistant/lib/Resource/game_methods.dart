@@ -656,7 +656,9 @@ class GameMethods {
     item.characterState.modifierDeck._initDeck(item.id);
     //reapply perks
     final perksSetList = item.characterState.perkList;
-    final perks = item.characterClass.perks;
+    final perks = item.characterState.useFHPerks.value
+        ? item.characterClass.perksFH
+        : item.characterClass.perks;
     for (int i = 0; i < perks.length; i++) {
       if (perksSetList[i]) {
         GameMethods.addPerk(s, item, i);

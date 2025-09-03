@@ -45,14 +45,17 @@ class ModifierCardWidget extends StatelessWidget {
       final character = GameMethods.getCharacterByName(name);
       assert(character != null);
       if (character != null) {
+        final perks = character.characterState.useFHPerks.value
+            ? character.characterClass.perksFH
+            : character.characterClass.perks;
         gfx = gfx.substring(1);
         if (gfx.endsWith("-2")) {
           gfx = gfx.substring(0, gfx.length - 2);
           int index = int.parse(gfx);
-          gfx = character.characterClass.perks[index].add.last;
+          gfx = perks[index].add.last;
         } else {
           int index = int.parse(gfx);
-          gfx = character.characterClass.perks[index].add.first;
+          gfx = perks[index].add.first;
         }
       }
     }
