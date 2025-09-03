@@ -2552,7 +2552,15 @@
     {
       "shattersong": {
         "Algox Icespeaker (Shattersong Special)": {
-          "normal": [2, 2, 2],
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        }
+      }
+    },
+    {
+      "door": {
+        "Algox Icespeaker (Shattersong Special)": {
+          "normal": [1, 1, 1],
           "elite": [0, 0, 0]
         },
         "Algox Archer": {
