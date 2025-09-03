@@ -163,6 +163,42 @@
         {"text": "Once each scenario, you may gain up to three %enfeeble% cards to gain the same amount of Icons"},
         {"text": "[triple] Whenever an enemy draws an %enfeeble% card, that enemy reduces the value of their attack by 1 and suffers %damage% 1 after the attack."}
       ]
+    },
+    {
+      "name": "Vimthreader",
+      "color": "FF843636",
+      "colorSecondary": "ff182921",
+      "edition": "CCUG",
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "hidden": false,
+      "summons": {
+        "Bloodthirsty Swarm": {
+          "level": 6,
+          "health": 2,
+          "gfx": "VIM bloodthirsty swarm",
+          "move": 3,
+          "attack": 1
+        }
+      },
+      "perks": [
+        {"text": "Replace one -2 card with one -1 \"If the target ha an attribute, add %wound%,%poison%,%muddle%\" card","removes": ["minus2"],"adds": [ "perks/unique/vt1"]},
+        {"text": "Replace one -1 card with one +0 %enfeeble% card","removes": ["minus1"],"adds": [ "perks/unique/li3"]},
+        {"text": "Replace one -1 card with one +0 %enfeeble% card","removes": ["minus1"],"adds": [ "perks/unique/li3"]},
+        {"text": "Replace one -1 card with one +0 \"%empower%, %range% 2\" card","removes": ["minus1"],"adds": [ "perks/unique/vt3"]},
+        {"text": "Replace one -1 card with one +0 \"%empower%, %range% 2\" card","removes": ["minus1"],"adds": [ "perks/unique/vt3"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1heal1ally"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1heal1ally"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1heal1ally"]},
+        {"removes": ["plus2"],"adds": [ "perks/plus1flip","perks/plus1flip","perks/plus1flip","perks/plus1flip"]},
+        {"text": "Add two %pierce% 2 %poison% %flip% cards","adds": [ "perks/unique/vt2","perks/unique/vt2"]},
+        {"adds": [ "perks/plus0heal1range1flip","perks/plus0heal1range1flip","perks/plus0heal1range1flip"]},
+        {"adds": [ "perks/plus0heal1range1flip","perks/plus0heal1range1flip","perks/plus0heal1range1flip"]},
+        {"text": "Ignore scenario effects and remove one +0 card","removes": ["plus0"]},
+        {"text": "Ignore item - 1 effects and remove one +0 card","removes": ["plus0"]},
+        {"text": "Whenever you short rest, one adjacent enemy suffers %damage% 1, and you perform \"%heal% 1, self\""},
+        {"text": "[double] At the start of each scenario, you may suffer %damage% 1 to grant all allies and self %move% 3"},
+        {"text": "Once each scenario, remove all negative conditions you have. One adjacent enemy suffers %damage% equal to the number of conditions removed"}
+      ]
     }
   ],
   "monsterAbilities": [
