@@ -136,7 +136,7 @@
         {"text": "Ignore scenario effects and add two +1 cards","adds": [ "plus1", "plus1"]},
         {"text": "Whenever you short rest,you may choose which card to lose"},
         {"text": "Your and your allies' enhancements cost five gold less and whenever an ally enhances a card, you gain five gold"},
-        {"text": "add one +1 \"%Hail gains 1 resolve\" card to the monster attack modifier deck (TODO: apply when taking this perk)"}
+        {"text": "add one +1 \"%Hail gains 1 resolve\" card to the monster attack modifier deck"}
       ]
     },
     {

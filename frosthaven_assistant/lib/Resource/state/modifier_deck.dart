@@ -565,8 +565,12 @@ class ModifierDeck {
       return true;
     }
     if (gfx == "P4" && name == "Nightshroud") {
-      //todo: edition . . .
-      return true;
+      if (GameMethods.getCharacterByName("Nightshroud")
+              ?.characterClass
+              .edition ==
+          "Gloomhaven 2nd Edition") {
+        return true;
+      }
     }
     return false;
   }

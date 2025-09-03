@@ -277,7 +277,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),
-                              /*CheckboxListTile(
+                              CheckboxListTile(
                                   title: const Text(
                                       "Show character Attack Modifier Decks"),
                                   value: settings.showCharacterAMD.value,
@@ -287,7 +287,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       settings.saveToDisk();
                                       getIt<GameState>().updateAllUI();
                                     });
-                                  }),*/
+                                  }),
                               if (!Platform.isIOS)
                                 CheckboxListTile(
                                     title: const Text("Fullscreen"),

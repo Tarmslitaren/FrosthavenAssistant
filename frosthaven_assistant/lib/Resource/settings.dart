@@ -40,8 +40,7 @@ class Settings {
   final showAmdDeck = ValueNotifier<bool>(true);
   final showBattleGoalReminder = ValueNotifier<bool>(true);
   final fhHazTerrainCalcInOGGloom = ValueNotifier<bool>(true);
-  final showCharacterAMD = ValueNotifier<bool>(
-      true); //todo: this should be true on release of this feature (+ dont forget to uncommendt the save code)
+  final showCharacterAMD = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -308,8 +307,7 @@ class Settings {
         fhHazTerrainCalcInOGGloom.value = data["fhHazTerrainCalcInOGGloom"];
       }
 
-      if (data["showCharacterAMD"] != null && false) {
-        //todo: renable on character amd release
+      if (data["showCharacterAMD"] != null) {
         showCharacterAMD.value = data["showCharacterAMD"];
       }
 
@@ -362,7 +360,7 @@ class Settings {
         '"showAmdDeck": ${showAmdDeck.value}, '
         '"showBattleGoalReminder": ${showBattleGoalReminder.value}, '
         '"fhHazTerrainCalcInOGGloom": ${fhHazTerrainCalcInOGGloom.value}, '
-        // '"showCharacterAMD": ${showCharacterAMD.value}, ' //todo: uncomment on character amd release
+        '"showCharacterAMD": ${showCharacterAMD.value}, '
         '"saves": ${jsonEncode(saves.value)}, '
         '"characterSaves": ${jsonEncode(characterSaves.value)}, '
         '"connectClientOnStartup": $connectClientOnStartup, '
