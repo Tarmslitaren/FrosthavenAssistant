@@ -24,7 +24,24 @@
         {"text": "Each time you long rest, change Active Spirit"},
         {"text": "You may bring one additional one-handed hand item into each scenario"},
         {"text": "Each time you short rest, refresh one spent one-handed hand item"},
-        {"text": "Ignore negative scenario effects and remove noe -1 card","removes": ["minus1"]}
+        {"text": "Ignore negative scenario effects and remove one -1 card","removes": ["minus1"]}
+      ],
+      "perks_fh": [
+        {"text": "Replace one -2 card with one \"change Active Spirit\"%flip% card","removes": ["minus2"],"adds": [ "perks/unique/in1"]},
+        {"text": "Replace one -1 card with one %pierce% 2, %fire% %flip% card","removes": ["minus1"],"adds": [ "perks/unique/in2"]},
+        {"text": "Replace one -1 card with one %push% 1, %air% %flip% card","removes": ["minus1"],"adds": [ "perks/unique/in4"]},
+        {"text": "Replace one -1 card with one \"%shield% 1\", %earth% %flip% card","removes": ["minus1"],"adds": [ "perks/unique/in3"]},
+        {"text": "Replace one +0 card with one +1 \"Reaver: %rupture% / Ritualist: %enfeeble%\" card","removes": ["plus0"],"adds": [ "perks/unique/in7"]},
+        {"text": "Replace one +0 card with one +1 \"Reaver: %rupture% / Ritualist: %enfeeble%\" card","removes": ["plus0"],"adds": [ "perks/unique/in7"]},
+        {"text": "Replace one +0 card with one +1 \"Reaver: %rupture% / Conqueror: %empower%, self\" card","removes": ["plus0"],"adds": [ "perks/unique/in6"]},
+        {"text": "Replace one +0 card with one +1 \"Reaver: %rupture% / Conqueror: %empower%, self\" card","removes": ["plus0"],"adds": [ "perks/unique/in6"]},
+        {"text": "Replace one +0 card with one +1 \"Ritualist: %enfeeble% / Conqueror: %empower%, self\" card","removes": ["plus0"],"adds": [ "perks/unique/in5"]},
+        {"text": "Replace one +0 card with one +1 \"Ritualist: %enfeeble% / Conqueror: %empower%, self\" card","removes": ["plus0"],"adds": [ "perks/unique/in5"]},
+        {"text": "Add one \"Refresh one hand item\"%flip% card","adds": [ "perks/unique/in8"]},
+        {"text": "Ignore item - 1 effects and remove one -1 card","removes": ["minus1"]},
+        {"text": "Eyes of the  Ritualist: Each time you long rest, change Active Spirit"},
+        {"text": "Hands of the Reaver: Whenever you short rest, refresh one spent one-handed hand item"},
+        {"text": "Shoulders of the Conqueror: You may bring one additional one-handed hand item into each scenario"}
       ]
     },
     {
@@ -51,6 +68,23 @@
         {"adds": [ "perks/plus0brittle"]},
         {"text": "At the start of each scenario, you may either gain %wound% to generate %fire% or gain %chill% to generate %ice%"},
         {"text": "Ignore negative item effects and add one %fireice%%flip% card ","adds": [ "perks/plus0fireiceflip"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus1"],"adds": [ "perks/plus0chill"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0chill"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0woundflip"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0woundflip"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1ice"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1ice"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus0fireflip","perks/plus0fireflip"]},
+        {"text": "Replace one +0 card with one \"%heal% 3, %wound%, self\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/rh1"]},
+        {"text": "Replace three +1 cards with one +1%flip% card, one +1 %wound% card, and one +1\"%heal% 1, self\" card","removes": ["plus1","plus1","plus1"],"adds": [ "perks/plus1flip","perks/plus1wound","perks/plus1heal1"]},
+        {"removes": ["plus2"],"adds": [ "perks/plus3chill"]},
+        {"adds": [ "perks/plus2fireice"]},
+        {"adds": [ "perks/plus2fireice"]},
+        {"adds": [ "perks/plus0brittle"]},
+        {"text": "Ignore item - 1 effects and add one %fireice%%flip% card ","adds": [ "perks/plus0fireiceflip"]},
+        {"text": "Icebreaker: At the start of each scenario, you may either gain %wound% to %fire%, or gain %chill% to %ice%"}
       ]
     },
     {
@@ -63,10 +97,10 @@
       "summons": {},
       "perks": [
         {"removes": ["minus2"]},
-        {"removes": ["minus1"],"adds": [ "plus1","plus1"]},
-        {"removes": ["minus1"],"adds": [ "perks/plus0chill"]},
-        {"removes": ["minus1"],"adds": [ "perks/plus0shield1flip"]},
-        {"removes": ["minus1"],"adds": [ "perks/plus0shield1flip"]},
+        {"removes": ["minus1"],"adds": ["plus1"]},
+        {"removes": ["minus1"],"adds": ["plus1"]},
+        {"removes": ["minus1"],"adds": ["perks/plus0shield1flip"]},
+        {"removes": ["minus1"],"adds": ["perks/plus0shield1flip"]},
         {"text": "Replace two +0 cards with two +0 \"Move one character token on a Crystallize back one space\" cards","removes": ["plus0","plus0"],"adds": [ "perks/unique/sr1","perks/unique/sr1"]},
         {"text": "Replace two +0 cards with two +0 \"Move one character token on a Crystallize back one space\" cards","removes": ["plus0","plus0"],"adds": [ "perks/unique/sr1","perks/unique/sr1"]},
         {"text": "Replace one +0 cards with one +1 \"+2 instead if the attack has %pierce%\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/sr3"]},
@@ -74,8 +108,25 @@
         {"text": "Add two +1 \"+2 instead if you Crystallize one space\" card","adds": [ "perks/unique/sr2","perks/unique/sr2"]},
         {"adds": [ "perks/plus0brittle"]},
         {"text": "[double] Ignore negative item effects and at the start of each scenario you may play a level 1 card from your hand to perform a Crystallize action of the card"},
-        {"text": "Once each scenario, when you would suffer damage from asn attack, gain \"%shield% 3\" for that attack"},
+        {"text": "Once each scenario, when you would suffer damage from an attack, gain \"%shield% 3\" for that attack"},
         {"text": "Each time you long rest, perform %regenerate%, self"}
+      ],
+      "perks_fh": [
+        {"removes": ["minus2"],"adds": ["plus0"]},
+        {"removes": ["minus1"],"adds": ["plus1"]},
+        {"removes": ["minus1"],"adds": ["plus1"]},
+        {"removes": ["minus1"],"adds": ["perks/plus0shield1flip"]},
+        {"removes": ["minus1"],"adds": ["perks/plus0shield1flip"]},
+        {"text": "Replace two +0 cards with two +0 \"Move your character token on a Crystallize back one space\" cards","removes": ["plus0","plus0"],"adds": [ "perks/unique/sr1","perks/unique/sr1"]},
+        {"text": "Replace two +0 cards with two +0 \"Move your character token on a Crystallize back one space\" cards","removes": ["plus0","plus0"],"adds": [ "perks/unique/sr1","perks/unique/sr1"]},
+        {"text": "Replace one +0 cards with one +1 \"+2 instead if the attack has %pierce%\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/sr3"]},
+        {"text": "Replace one +0 cards with one +1 \"+2 instead if the attack has %pierce%\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/sr3"]},
+        {"text": "Add two +1 \"+2 instead if you Crystallize one space\" card","adds": [ "perks/unique/sr2","perks/unique/sr2"]},
+        {"adds": [ "perks/plus0brittle"]},
+        {"text": "Ignore item - 1 effects and remove one +0 card","removes": ["plus0"]},
+        {"text": "[double] Take Shape: At the start of each scenario, you may play a level 1 card from your hand to perform a Crystallize action of the card and gain %ward%"},
+        {"text": "Solidify: Once each scenario, when you would suffer %damage% from an attack, gain \"%shield% 3\" for that attack"},
+        {"text": "Invigorating Meditation: Whenever you long rest, gain %regenerate%"}
       ]
     },
     {
@@ -98,9 +149,9 @@
         {"adds": [ "perks/plus1dodge"]},
         {"adds": [ "perks/plus1dodge"]},
         {"adds": [ "perks/plus2airlight"]},
-        {"text": "Whenever you dodge an attack, gain one Spark"},
-        {"text": "[double] Whenever you long rest, you may gain %dodge%"},
-        {"text": "Whenever you short rest, you may consume one Spark. If you do, one enemy within %range% 2 suffers one damage"}
+        {"text": "Energizing Evasion: Whenever you dodge an attack, gain one Spark"},
+        {"text": "Recharged: [double] Whenever you long rest, you may gain %dodge%"},
+        {"text": "Lightning Strike: Whenever you short rest, you may consume one Spark to cause one enemy within %range% 2 suffers %damage% 1"}
       ]
     },
     {
@@ -112,20 +163,20 @@
       "hidden": true,
       "summons": {},
       "perks": [
-        {"text": "Replace one -1 cards with one \"+1 if %light% is Strong or Waning\"%flip% card","removes": ["minus1"],"adds": [ "perks/unique/tr2"]},
-        {"text": "Replace one -1 cards with one \"+1 if %light% is Strong or Waning\"%flip% card","removes": ["minus1"],"adds": [ "perks/unique/tr2"]},
+        {"text": "Replace one -1 cards with one +0 \"If %light% is Strong or Waning, +1 instead\"%flip% card","removes": ["minus1"],"adds": [ "perks/unique/tr2"]},
+        {"text": "Replace one -1 cards with one +0 \"If %light% is Strong or Waning, +1 instead\"%flip% card","removes": ["minus1"],"adds": [ "perks/unique/tr2"]},
         {"removes": ["minus2"],"adds": [ "plus0"]},
-        {"text": "Add three \"+1 if %light% is Strong or Waning\"%flip% cards","adds": [ "perks/unique/tr2","perks/unique/tr2","perks/unique/tr2"]},
-        {"text": "Add three \"+1 if %light% is Strong or Waning\"%flip% cards","adds": [ "perks/unique/tr2","perks/unique/tr2","perks/unique/tr2"]},
+        {"text": "Add three +0 \"If %light% is Strong or Waning, +1 instead\"%flip% cards","adds": [ "perks/unique/tr2","perks/unique/tr2","perks/unique/tr2"]},
+        {"text": "Add three +0 \"If %light% is Strong or Waning, +1 instead\"%flip% cards","adds": [ "perks/unique/tr2","perks/unique/tr2","perks/unique/tr2"]},
         {"adds": [ "perks/plus0lightflip","perks/plus0lightflip"]},
-        {"text": "Add three \"%earth% if %light% is Strong or Waning\"%flip% cards","adds": [ "perks/unique/tr3","perks/unique/tr3","perks/unique/tr3"]},
-        {"text": "Add one \"Create hazardous terrain in one hex within %range% 1\" card","adds": [ "perks/unique/tr4"]},
-        {"text": "Add one \"On the next attack targeting you while you occupy hazardous terrain, discard this card to gain %retaliate% 3\"%flip% cards","adds": [ "perks/unique/tr5"]},
-        {"text": "Add one \"On the next attack targeting you while you occupy hazardous terrain, discard this card to gain %retaliate% 3\"%flip% cards","adds": [ "perks/unique/tr5"]},
-        {"text": "Add one \"On the next attack targeting you while you occupy hazardous terrain, discard this card to gain %shield% 3\"%flip% cards","adds": [ "perks/unique/tr1"]},
-        {"text": "Add one \"On the next attack targeting you while you occupy hazardous terrain, discard this card to gain %shield% 3\"%flip% cards","adds": [ "perks/unique/tr1"]},
-        {"text": "Ignore negative item effects and add one \"+1 if %light% is Strong or Waning\"%flip% card","adds": [ "perks/unique/tr2"]},
-        {"text": "[double] Gain %shield% 1 while you occupy hazardous terrain"}
+        {"text": "Add three \"If %light% is Strong or Waning, %earth%\"%flip% cards","adds": [ "perks/unique/tr3","perks/unique/tr3","perks/unique/tr3"]},
+        {"text": "Add one \"Create one 1-hex hazardous terrain tile in a featureless hex within %range% 1\" card","adds": [ "perks/unique/tr4"]},
+        {"text": "Add one \"On the next attack targeting you while you are occupying hazardous terrain, discard this card to gain %retaliate% 3\"%flip% cards","adds": [ "perks/unique/tr5"]},
+        {"text": "Add one \"On the next attack targeting you while you are occupying hazardous terrain, discard this card to gain %retaliate% 3\"%flip% cards","adds": [ "perks/unique/tr5"]},
+        {"text": "Add one \"On the next attack targeting you while you are occupying hazardous terrain, discard this card to gain %shield% 3\"%flip% cards","adds": [ "perks/unique/tr1"]},
+        {"text": "Add one \"On the next attack targeting you while you are occupying hazardous terrain, discard this card to gain %shield% 3\"%flip% cards","adds": [ "perks/unique/tr1"]},
+        {"text": "Ignore item - 1 effects and add one +0 \"If %light% is Strong or Waning, +1 instead\"%flip% card","adds": [ "perks/unique/tr2"]},
+        {"text": "[double] Nature's Armor: Gain %shield% 1 while you are occupying hazardous terrain hexes"}
       ]
     },
     {
@@ -153,6 +204,23 @@
         {"text": "Add two +1 \"+2 instead if you suffer 1 damage\" cards","removes": ["plus2"],"adds": [ "perks/unique/vq2","perks/unique/vq2"]},
         {"text": "Add one +2 \"+3 instead if you suffer 1 damage\" card","removes": ["plus2"],"adds": [ "perks/unique/vq3"]},
         {"text": "Ignore negative item effects and remove one -1 card","removes": ["minus1"]}
+      ],
+      "perks_fh": [
+        {"text": "Replace one -2 card with one -1 %poison%%wound% card","removes": ["minus2"],"adds": ["perks/minus1poisonwound"]},
+        {"removes": ["minus1","minus1"],"adds": [ "perks/plus0muddle"]},
+        {"removes": ["minus1","minus1"],"adds": [ "perks/minus1heal2"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1heal1"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1heal1"]},
+        {"text": "Replace two +0 card with one +0 %curse% card and one +0 %immobilize% card","removes": ["plus0","plus0"],"adds": ["perks/plus0curse", "perks/plus0immobilize"]},
+        {"text": "Replace two +0 card with one +0 %curse% card and one +0 %immobilize% card","removes": ["plus0","plus0"],"adds": ["perks/plus0curse", "perks/plus0immobilize"]},
+        {"removes": ["plus1"],"adds": [ "perks/plus2fireair"]},
+        {"removes": ["plus1"],"adds": [ "perks/plus2fireair"]},
+        {"text": "Replace one +2 card with one +0 \"Gain one Rage\"%flip% card an done +0 \"%bless%, self\" card","removes": ["plus2"],"adds": [ "perks/unique/vq1","perks/plus0bless"]},
+        {"text": "Add one +1 \"%retaliate% 1\" card and one \"%pierce% 3\"%flip% card","adds": [ "perks/plus1retaliate1","perks/plus0pierce3flip"]},
+        {"text": "Add one +1 \"%retaliate% 1\" card and one \"%pierce% 3\"%flip% card","adds": [ "perks/plus1retaliate1","perks/plus0pierce3flip"]},
+        {"text": "Add two +1 \"+2 instead if you suffer %damage% 1\" cards","adds": [ "perks/unique/vq2","perks/unique/vq2"]},
+        {"text": "Add two +2 \"+3 instead if you suffer %damage% 1\" cards","adds": [ "perks/unique/vq3"]},
+        {"text": "[double] At the start of each scenario, you may discard one card from your hand to gain a random Rage card"}
       ]
     }
   ],
