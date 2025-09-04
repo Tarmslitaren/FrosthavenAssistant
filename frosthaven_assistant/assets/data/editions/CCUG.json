@@ -199,6 +199,49 @@
         {"text": "[double] At the start of each scenario, you may suffer %damage% 1 to grant all allies and self %move% 3"},
         {"text": "Once each scenario, remove all negative conditions you have. One adjacent enemy suffers %damage% equal to the number of conditions removed"}
       ]
+    },
+    {
+      "name": "Alchemancer",
+      "color": "FF3FD49B",
+      "colorSecondary": "ff376E57",
+      "edition": "CCUG",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+        "Perpetual Enginebot": {
+          "level": 1,
+          "health": 5,
+          "gfx": "ALC perpetual enginebot",
+          "move": 2,
+          "attack": 2
+        },
+        "Radioactive Homonculus": {
+          "level": 1,
+          "health": 6,
+          "gfx": "ALC radioactive homonculus",
+          "move": 3,
+          "attack": 2
+        }
+      },
+      "perks": [
+        {"text": "Replace one -2 card with one -1 \"%use%%any%: + 2 %attack%\" card","removes": ["minus2"],"adds": [ "perks/unique/al1"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
+        {"text": "Replace one +0 card with one +0 \"Add a Vial token to an active Experiment card \" card","removes": ["plus0"],"adds": [ "perks/unique/al2"]},
+        {"text": "Replace one +0 card with one +0 \"Add a Vial token to an active Experiment card \" card","removes": ["plus0"],"adds": [ "perks/unique/al2"]},
+        {"text": "Replace one +0 card with one +0 \"Add a Vial token to an active Experiment card \" card","removes": ["plus0"],"adds": [ "perks/unique/al2"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+        {"text": "Add two +1 \"If you drew this as part of a Experiment ability, +2 instead\" cards","adds": [ "perks/unique/al3","perks/unique/al3"]},
+        {"text": "Add two +1 \"If you drew this as part of a Experiment ability, +2 instead\" cards","adds": [ "perks/unique/al3","perks/unique/al3"]},
+        {"text": "Add one %fireice%%flip% card, one %earthfire%%flip% card, and one %iceearth%%flip% card, card","adds": [ "perks/plus0fireiceflip","perks/plus0earthfireflip","perks/plus0iceearthflip"]},
+        {"text": "Add one %fireice%%flip% card, one %earthfire%%flip% card, and one %iceearth%%flip% card, card","adds": [ "perks/plus0fireiceflip","perks/plus0earthfireflip","perks/plus0iceearthflip"]},
+        {"text": "Ignore scenario effects and remove one +0 card","removes": ["plus0"]},
+        {"text": "Whenever you rest, you may %use%%any% to %any%"},
+        {"text": "Whenever you consume a potion small item, you may place one Vial Token on an active Experiment card"},
+        {"text": "[double] At the end of your turns during which you performed no attacks and you are not performing a long rest, %fire% or %ice% or %earth%"}
+      ]
     }
   ],
   "monsterAbilities": [
