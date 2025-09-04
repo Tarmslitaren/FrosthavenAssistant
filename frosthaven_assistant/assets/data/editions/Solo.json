@@ -2467,7 +2467,53 @@
 		},
 		"#28 Shattersong/Frosthaven: Tuning the Resonance": {
 			"monsters": [ "Algox Archer", "Algox Icespeaker (Shattersong Special)","Chief of Spikes" ],
-			"lootDeck": {"coin":15}
+			"lootDeck": {"coin":15},
+			"sections": {
+				"#door": {
+					"special": [
+						{
+							"type": "Objective",
+							"name": "Ice Pillar 3",
+							"health": "L+5",
+							"init": 99
+						},
+						{
+							"type": "Objective",
+							"name": "Ice Pillar 4",
+							"health": "L+5",
+							"init": 99
+						}
+					]
+				},
+				"#1": {
+					"special": [
+						{
+							"type": "ResetRound"
+						},
+						{
+							"type": "Timer",
+							"list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30],
+							"startOfRound": false,
+							"note": "The Chief of Spikes creates one Ice Pillar in any empty hex within range 2 of it."
+						}
+
+					]
+				}
+			},
+			"special": [
+				{
+					"type": "Objective",
+					"name": "Ice Pillar 1",
+					"health": "L+5",
+					"init": 99
+				},
+				{
+					"type": "Objective",
+					"name": "Ice Pillar 2",
+					"health": "L+5",
+					"init": 99
+				}
+			]
 		},
 		"#29 Trapper/Frosthaven: A Magnificent Trap": {
 			"monsters": [ "Algox Guard", "Algox Snowspeaker (Trapper Special)","Wind Demon (FH)" ],
