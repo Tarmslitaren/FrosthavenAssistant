@@ -26,6 +26,23 @@
         {"text": "Add one +1 %wound%%muddle%  card","adds": [ "perks/plus1woundmuddle"]},
         {"text": "At the start of your first turn each scenario, gain %bless%"},
         {"text": "Ignore negative scenario effects and remove one +0 card","removes": ["plus0"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus1","minus1"]},
+        {"text": "Replace one -2 card with one -1\"Give one ally a 'Prayer' ability card\" card and one +0 card","removes": ["minus2"],"adds": [ "perks/unique/hp1","plus0"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0curse"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0curse"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus0lightflip"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus0earthflip"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1shield1ally"]},
+        {"removes": ["plus1"],"adds": [ "perks/plus3"]},
+        {"removes": ["plus1"],"adds": [ "perks/plus3"]},
+        {"text": "Add one +1 %wound%%muddle%  card","adds": [ "perks/plus1woundmuddle"]},
+        {"text": "Add one +1 %wound%%muddle%  card","adds": [ "perks/plus1woundmuddle"]},
+        {"text": "Add two \"%heal% 1 self or ally\"%flip% cards","adds": [ "perks/unique/hp2","perks/unique/hp2"]},
+        {"text": "Add two \"%heal% 1 self or ally\"%flip% cards","adds": [ "perks/unique/hp2","perks/unique/hp2"]},
+        {"text": "Ignore negative scenario effects and remove one +0 card","removes": ["plus0"]},
+        {"text": "Gift of the Oak: At the start of each scenario, you may perform \"%bless%, %range% 2\""}
       ]
     },
     {
@@ -52,6 +69,22 @@
         {"text": "Add two \"Force the target to perform %move% 1\"%flip% cards","adds": [ "perks/unique/st2","perks/unique/st2"]},
         {"adds": [ "perks/plus0heal1range1flip","perks/plus0heal1range1flip"]},
         {"text": "Ignore negative scenario effects and remove one +0 card","removes": ["plus0"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus2"],"adds": [ "perks/minus1invisible"]},
+        {"removes": ["minus1"], "adds": ["perks/plus0immobilizeflip"]},
+        {"removes": ["minus1"], "adds": ["perks/plus0immobilizeflip"]},
+        {"text": "Replace one -1 card with one \"Control the target: %move% 1\"%flip% cards","removes": ["minus1"],"adds": ["perks/unique/st2"]},
+        {"text": "Replace one -1 card with one \"Control the target: %move% 1\"%flip% cards","removes": ["minus1"],"adds": ["perks/unique/st2"]},
+        {"removes": ["plus0", "plus0"],"adds": [ "perks/plus1light"]},
+        {"removes": ["plus0", "plus0"],"adds": [ "perks/plus1light"]},
+        {"adds": [ "perks/plus1heal1range3","perks/plus1heal1range3"]},
+        {"text": "Add one +1 \"If you are at full health, +3 instead\" card","adds": [ "perks/unique/st1"]},
+        {"text": "Add one +1 \"If you are at full health, +3 instead\" card","adds": [ "perks/unique/st1"]},
+        {"adds": [ "perks/plus0heal1range1flip","perks/plus0heal1range1flip"]},
+        {"text": "Add one \"%loot% 1\"%flip% card","adds": [ "perks/plus0loot1flip"]},
+        {"text": "Ignore negative scenario effects and add one +0 %dark% card","removes": ["perks/plus0dark"]},
+        {"text": "[double] Reflective Journey: At the end of each of your long rests, %lightdark%. If you are at full health, grant one ally: %move% 2"}
       ]
     },
     {
@@ -92,6 +125,23 @@
         {"adds": [ "perks/plus0woundflip","perks/plus0woundflip"]},
         {"text": "Ignore negative item effects and add one %fire%%flip% card","adds": ["perks/plus0fireflip"]},
         {"text": "Ignore negative scenario effects and add one %fire%%flip% card","adds": ["perks/plus0fireflip"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus1"],"adds": [ "perks/plus0strengthenally"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0strengthenally"]},
+        {"removes": ["minus1"],"adds": ["perks/plus0heal1range1flip"]},
+        {"removes": ["minus1"],"adds": ["perks/plus0heal1range1flip"]},
+        {"text": "Replace two +0 cards with two +0 \"If you are on your Ladder, +2 instead\" cards","removes": ["plus0","plus0"],"adds": [ "perks/unique/fk1","perks/unique/fk1"]},
+        {"text": "Replace two +0 cards with two +0 \"If you are on your Ladder, +2 instead\" cards","removes": ["plus0","plus0"],"adds": [ "perks/unique/fk1","perks/unique/fk1"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1fire"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1wound"]},
+        {"removes": ["plus1"],"adds": [ "perks/plus2wound"]},
+        {"adds": [ "perks/plus2fire"]},
+        {"adds": [ "perks/plus1strengthenally"]},
+        {"adds": [ "perks/plus0woundflip","perks/plus0woundflip"]},
+        {"text": "Ignore scenario effects and add one %fire%%flip% card","adds": ["perks/plus0fireflip"]},
+        {"text": "Ignore item - 1 effects and add one %fire%%flip% card","adds": ["perks/plus0fireflip"]},
+        {"text": "[double] Fearless Leader: After your first turn each scenario and whenever you open a door during your turn, %fire%. For the remainder of the round, all attacks targeting you or allies adjacent to you gani disadvantage"}
       ]
     },
     {
@@ -128,6 +178,23 @@
         {"text": "Add one \"%heal% 1 %range% 3, %light%\"%flip% card and one \"%pierce% 2, %fire%\"%flip% card","adds": [ "perks/unique/bk5","perks/unique/bk6"]},
         {"text": "Add three \"%use%%any%: %any%\"%flip%","adds": [ "perks/plus0anytoanyflip","perks/plus0anytoanyflip","perks/plus0anytoanyflip"]},
         {"text": "Ignore negative scenario effects and remove one -1 card","removes": ["minus1"]}
+      ],
+      "perks_fh": [
+        {"text": "Replace one -2 cards with one -2 \"Recover one random card from your discard pile\" card","removes": ["minus2"],"adds": [ "perks/unique/bk2"]},
+        {"text": "Replace one -1 cards with one +0 \"%use%%any% to add + 2 %attack%\" card","removes": ["minus1"],"adds": [ "perks/unique/bk1"]},
+        {"text": "Replace one -1 cards with one +0 \"%use%%any% to add + 2 %attack%\" card","removes": ["minus1"],"adds": [ "perks/unique/bk1"]},
+        {"text": "Replace one -1 cards with one +0 \"%use%%any% to add + 2 %attack%\" card","removes": ["minus1"],"adds": [ "perks/unique/bk1"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1heal1allyrange2"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1heal1allyrange2"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus1shield1allyrange2"]},
+        {"text": "Replace two +0 cards with three \"%use%%any%: %any%\"%flip%","removes": ["plus0","plus0"],"adds": [ "perks/plus0anytoanyflip","perks/plus0anytoanyflip","perks/plus0anytoanyflip"]},
+        {"removes": ["plus1"],"adds": [ "perks/plus2any"]},
+        {"removes": ["plus1"],"adds": [ "perks/plus2any"]},
+        {"removes": ["plus1","plus1"], "adds": [ "perks/plus1strengthenallyrange2","perks/plus1strengthenallyrange2"]},
+        {"text": "Add one \"%immobilize%, %ice%\"%flip% card and one \"Add %push% 1 or %pull% 1, %air%\"%flip% card","adds": [ "perks/unique/bk4","perks/unique/bk3"]},
+        {"text": "Add one \"%pierce% 2, %fire%\"%flip% card and one \"%heal% 1 %range% 3, %light%\"%flip% card","adds": [ "perks/unique/bk5","perks/unique/bk6"]},
+        {"text": "Ignore scenario effects and remove one -1 card","removes": ["minus1"]},
+        {"text": "[double] Spark of Inspiration: Whenever you long rest, after you recover your cards from your discard pile, you may play one card from your hand to perform all persistent abilities on either the top or bottom action of the card"}
       ]
     },
     {
@@ -231,12 +298,29 @@
         {"text": "Replace two +0 cards with one +0 \"%immobilize% %push% 1\" card","removes": ["plus0","plus0"],"adds": [ "perks/unique/ct3"]},
         {"text": "Replace one +0 card with one \"+X, where X is the number of summoned allies you own\" card","removes": ["plus0"],"adds": [ "perks/unique/ct4"]},
         {"text": "Replace one +0 card with one \"+X, where X is the number of summoned allies you own\" card","removes": ["plus0"],"adds": [ "perks/unique/ct4"]},
-        {"text": "Replace one +1 card with two +1 \"+1, if summon is attacking\"%flip% card","removes": ["plus1"],"adds": [ "perks/unique/ct5", "perks/unique/ct5"]},
+        {"text": "Replace one +1 card with two +1 \"+1 %flip%, if summon is attacking\" card","removes": ["plus1"],"adds": [ "perks/unique/ct5", "perks/unique/ct5"]},
         {"text": "Add one +0 \"%wound%, %pierce% 1\" card","adds": [ "perks/unique/ct6"]},
         {"adds": [ "perks/plus1earth"]},
         {"adds": [ "perks/plus1earth"]},
         {"text": "Add two \"%pierce% 2, ignore %retaliate% on the target\"%flip% cards","adds": [ "perks/unique/ct7","perks/unique/ct7"]},
         {"text": "Ignore negative scenario effects and add one +1 card","adds": ["plus1"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus2"],"adds": [ "perks/minus2bless"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0poison"]},
+        {"text": "Replace one -1 card with one +0 \"%heal% 1, %target% Mount\" card","removes": ["minus1"],"adds": [ "perks/unique/ct1"]},
+        {"text": "Replace one -1 card with one +0 \"%heal% 1, %target% Mount\" card","removes": ["minus1"],"adds": [ "perks/unique/ct1"]},
+        {"text": "Replace one -1 card with one +0 \"%heal% 1, %target% all your summons\" card","removes": ["minus1"],"adds": [ "perks/unique/ct2"]},
+        {"text": "Replace one -1 card with one +0 \"%heal% 1, %target% all your summons\" card","removes": ["minus1"],"adds": [ "perks/unique/ct2"]},
+        {"text": "Replace two +0 cards with one +0 \"%push% 1, %immobilize%\" card","removes": ["plus0","plus0"],"adds": [ "perks/unique/ct3"]},
+        {"text": "Replace one +0 card with one +X \"Where X is the number of your summons\" card","removes": ["plus0"],"adds": [ "perks/unique/ct4"]},
+        {"text": "Replace one +0 card with one +X \"Where X is the number of your summons\" card","removes": ["plus0"],"adds": [ "perks/unique/ct4"]},
+        {"text": "Replace one +0 with two %pierce% 2, \"ignore %retaliate%\"%flip% cards","removes": ["plus0"],"adds": [ "perks/unique/ct7","perks/unique/ct7"]},
+        {"text": "Replace one +0 card with two +1 \"If drawn by a summon +1 %flip% instead\" card","removes": ["plus0"],"adds": [ "perks/unique/ct5", "perks/unique/ct5"]},
+        {"adds": [ "perks/plus1earth","perks/plus1earth"]},
+        {"text": "Ignore negative scenario effects and add one +0 \"%pierce% 1, %wound%\"card","adds": [ "perks/unique/ct6"]},
+        {"text": "Practiced Control: While you are mounted on a summon, all summoned allies within %range% 1 of you ignore %retaliate%"},
+        {"text": "Stampede: Once per scenario on your turn, you may have each of your summons perform %move% + 0. You do not control the movement"}
       ]
     },
     {
@@ -385,6 +469,23 @@
         {"adds": [ "perks/plus0target1flip"]},
         {"removes": ["plus1"],"adds": [ "perks/plus2push2"]},
         {"text": "Ignore negative scenario effects and remove one +0 card","removes": ["plus0"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus2"],"adds": ["plus0"]},
+        {"text": "Replace one -1 card with one +0 \"If a Spirit performed the attack, +2 instead\" card","removes": ["minus1"],"adds": [ "perks/unique/sp1"]},
+        {"text": "Replace one -1 card with one +0 \"If a Spirit performed the attack, +2 instead\" card","removes": ["minus1"],"adds": [ "perks/unique/sp1"]},
+        {"text": "Replace one -1 card with one +0%poison%%flip% card","removes": ["minus1"],"adds": [ "perks/plus0poisonflip"]},
+        {"text": "Replace one -1 card with one +0%poison%%flip% card","removes": ["minus1"],"adds": [ "perks/plus0poisonflip"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1air"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1air"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1dark"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1dark"]},
+        {"removes": ["plus0","plus0"],"adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus0target1flip"]},
+        {"removes": ["plus1","plus1"],"adds": [ "perks/plus1pierce2"]},
+        {"adds": [ "perks/plus2push2"]},
+        {"text": "Ignore negative scenario effects and add one +1 %curse% card","adds": ["perks/plus1curse"]},
+        {"text": "[double] Special Velocity: Whenever you end your turn in a hex occupied by a Spirit, the Spirit gains + 2 %move% on its nextturn that round"}
       ]
     },
     {
@@ -419,9 +520,26 @@
         {"text": "Replace one +1 card with one +0 %wound% 2 card","removes": ["plus1"],"adds": [ "perks/unique/mf4"]},
         {"text": "Add four +0 \"+1 if the target occupy difficult terrain\"%flip% cards","adds": [ "perks/unique/mf5","perks/unique/mf5","perks/unique/mf5","perks/unique/mf5"]},
         {"text": "Add two \"%invisible%, self, if you occupy difficult terrain\"%flip% cards","adds": [ "perks/unique/mf1", "perks/unique/mf1"]},
-        {"text": "Gain \"Poison Dagger\" (Item 11). You may carry one additional Hand item with \"Dagger\" in its name "},
+        {"text": "Gain \"Poison Dagger\" (Item 11). You may carry one additional Hand item with \"Dagger\" in its name"},
         {"text": "Ignore damage and negative conditions and modifiers from Events, and remove one -1 card","removes": ["minus1"]},
         {"text": "Ignore negative scenario effects and remove one -1 card","removes": ["minus1"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus2"],"adds": ["plus0"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"text": "Replace two +0 cards with two +0 \"Add +X %attack%, where X is the %poison% value of the target\" cards","removes": ["plus0", "plus0"],"adds": [ "perks/unique/mf2","perks/unique/mf2"]},
+        {"text": "Replace two +0 cards with two +0 \"Add +X %attack%, where X is the %poison% value of the target\" cards","removes": ["plus0", "plus0"],"adds": [ "perks/unique/mf2","perks/unique/mf2"]},
+        {"text": "Replace one +0 card with two \"Create one 1-hex difficult terrain in the featureless hex occupied by the target\"%flip% cards","removes": ["plus0"],"adds": [ "perks/unique/mf3", "perks/unique/mf3"]},
+        {"text": "Replace one +0 card with two \"Create one 1-hex difficult terrain in the featureless hex occupied by the target\"%flip% cards","removes": ["plus0"],"adds": [ "perks/unique/mf3", "perks/unique/mf3"]},
+        {"removes": ["plus1","plus1"],"adds": [ "plus2","plus2"]},
+        {"text": "Replace one +1 card with one +0 %wound% 2 card","removes": ["plus1"],"adds": [ "perks/unique/mf4"]},
+        {"text": "Replace one +1 card with one +0 %wound% 2 card","removes": ["plus1"],"adds": [ "perks/unique/mf4"]},
+        {"text": "Add two \"If you are occupying difficult terrain, gain %invisible%\"%flip% cards","adds": [ "perks/unique/mf1", "perks/unique/mf1"]},
+        {"text": "Add four +0 \"If the target occupy difficult terrain, +1 instead\"%flip% cards","adds": [ "perks/unique/mf5","perks/unique/mf5","perks/unique/mf5","perks/unique/mf5"]},
+        {"text": "Ignore scenario effects and remove one -1 card","removes": ["minus1"]},
+        {"text": "Silent Step of the Bog Wraith: Ignore negative conditions and modifiers and damage from events, and remove one -1 card","removes": ["minus1"]},
+        {"text": "Hidden Blade: Gain \"Poison Dagger\" (Item 127). You may carry one additional Dagger hand item into each scenario"}
       ]
     },
     {
@@ -440,7 +558,7 @@
         {"removes": ["plus0","plus0"],"adds": [ "perks/plus0shield1flip"]},
         {"removes": ["plus0","plus0"],"adds": [ "perks/plus0shield1flip"]},
         {"adds": [ "perks/plus0retaliate1flip","perks/plus0retaliate1flip"]},
-        {"text": "Add three +0 \"Swing 3\" cards","adds": [ "perks/unique/cg4"]},
+        {"text": "Add three +0 \"Swing 3\"%flip% cards","adds": [ "perks/unique/cg4", "perks/unique/cg4", "perks/unique/cg4"]},
         {"removes": ["plus1"],"adds": [ "perks/plus2wound"]},
         {"text": "Add one +1 \"%disarm% if the target is Shackled\" card", "adds": [ "perks/unique/cg5"]},
         {"text": "Add one +1 \"Create a 2 damage trap in an empty hex within %range% 2\" card", "adds": [ "perks/unique/cg6"]},
@@ -448,6 +566,22 @@
         {"text": "Add one +2 \"Shackle\" card", "adds": [ "perks/unique/cg1"]},
         {"text": "Add one +2 \"Shackle\" card", "adds": [ "perks/unique/cg1"]},
         {"text": "Ignore negative item effects and remove one +0 card","removes": ["plus0"]}
+      ],
+      "perks_fh": [
+        {"text": "Replace one -1 card with one +1 \"Shackle\" card","removes": ["minus1"],"adds": [ "perks/unique/cg2"]},
+        {"text": "Replace one -1 card with one +1 \"Shackle\" card","removes": ["minus1"],"adds": [ "perks/unique/cg2"]},
+        {"text": "Replace one -1 card with one +0 \"+2 if the target is Shackled\" card","removes": ["minus1"],"adds": [ "perks/unique/cg3"]},
+        {"text": "Replace one -1 card with one +0 \"+2 if the target is Shackled\" card","removes": ["minus1"],"adds": [ "perks/unique/cg3"]},
+        {"text": "Replace two +0 cards with one \"%shield% 1\"%flip% card and one \"%retaliate% 1\"%flip%","removes": ["plus0","plus0"],"adds": [ "perks/plus0shield1flip","perks/plus0retaliate1flip"]},
+        {"text": "Replace two +0 cards with one \"%shield% 1\"%flip% card and one \"%retaliate% 1\"%flip%","removes": ["plus0","plus0"],"adds": [ "perks/plus0shield1flip","perks/plus0retaliate1flip"]},
+        {"text": "Replace two +0 cards with three +0 \"Swing 3\" cards","removes": ["plus0","plus0"], "adds": [ "perks/unique/cg4", "perks/unique/cg4", "perks/unique/cg4"]},
+        {"removes": ["plus1"],"adds": [ "perks/plus2wound"]},
+        {"text": "Add one +1 \"%disarm% if the target is Shackled\" card", "adds": [ "perks/unique/cg5"]},
+        {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
+        {"text": "Add one +2 \"Shackle\" card", "adds": [ "perks/unique/cg1"]},
+        {"text": "Add one +2 \"Shackle\" card", "adds": [ "perks/unique/cg1"]},
+        {"text": "Ignore item - 1 effects and add one +1 \"Creste one %damage% 2 trap in an empty hex within %range% 2\" card","adds": ["perks/unique/cg6"]},
+        {"text": "[triple] Unyielding Jailer: You may have an additional enemy Shackled at any time"}
       ]
     },
     {
@@ -474,6 +608,24 @@
         {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
         {"text": "Ignore negative scenario effects and remove one +0 card","removes": ["plus0"]},
         {"text": "Ignore negative item effects and remove one +0 card","removes": ["plus0"]}
+      ],
+      "perks_fh": [
+        {"removes": ["minus1","minus1"]},
+        {"removes": ["minus1"], "adds": ["perks/plus0shield1flip"]},
+        {"removes": ["minus1"], "adds": ["perks/plus0shield1flip"]},
+        {"text": "Replace one +0 card with one +0 \"If this attack is a Projectile, +3 instead\" card","removes": ["plus0"],"adds": [ "perks/unique/bm1"]},
+        {"text": "Replace one +0 card with one +0 \"If this attack is a Projectile, +3 instead\" card","removes": ["plus0"],"adds": [ "perks/unique/bm1"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus0pierce3flip","perks/plus0pierce3flip"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1wound"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus0stun"]},
+        {"removes": ["plus1"],"adds": [ "perks/plus1retaliate1range3","perks/plus1retaliate1range3"]},
+        {"removes": ["plus1"],"adds": [ "perks/plus0strengthen"]},
+        {"adds": [ "perks/plus2immobilize"]},
+        {"adds": [ "perks/plus2immobilize"]},
+        {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
+        {"text": "Ignore scenario effects and add one +1 \"%pull% 3, self, toward the target\" card","adds": ["perks/unique/bm2"]},
+        {"text": "Ignore item - 1 effects and add one +1 \"%pull% 3, self, toward the target\" card","adds": ["perks/unique/bm2"]},
+        {"text": "Emergency Emplacement: Whenever you short rest, you may gain Immobilize to immediatelyresolve any of your active Projectile abilities"}
       ]
     },
     {
@@ -507,6 +659,23 @@
         {"text": "Add one +0 \"%poison%, target all enemies in the depicted area\" card","adds": [ "perks/unique/lu2"]},
         {"text": "Ignore negative scenario effects and remove one +0 card","removes": ["plus0"]},
         {"text": "Ignore negative item effects and add one \"%use%%any% : %any%\"%flip% card","adds": ["perks/plus0anytoanyflip"]}
+      ],
+      "perks_fh": [
+        {"text": "Replace one -2 card with one -2 \"Perform one glow ability\" card","removes": ["minus2"],"adds": [ "perks/unique/lu1"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0ice"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0fire"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0light"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0dark"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus0any"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus0any"]},
+        {"removes": ["plus0"],"adds": [ "plus2"]},
+        {"text": "Add one +0 \"%poison%, %target% all enemies in the depicted area\" card","adds": [ "perks/unique/lu2"]},
+        {"text": "Add one +0 \"%poison%, %target% all enemies in the depicted area\" card","adds": [ "perks/unique/lu2"]},
+        {"adds": [ "perks/plus1heal1flip"]},
+        {"adds": [ "perks/plus1heal1flip"]},
+        {"text": "Ignore negative scenario effects and add one \"%use%%any% : %any%\"%flip% card","adds": ["perks/plus0anytoanyflip"]},
+        {"text": "Ignore item - 1 effects and remove one +0 card","remove": ["plus0"]},
+        {"text": "Ignited Power: Whenever you perform an action with a Lost icon, you may immediately play a card from your hand to perform an action that has a Glow ability"}
       ]
     },
     {
@@ -532,7 +701,27 @@
         {"removes": ["plus1","plus1"],"adds": [ "perks/plus3regenerate"]},
         {"text": "Replace one +0 card with one +1 \"Create a Void pit in an empty hex within %range% 2\" card","removes": ["plus0"],"adds": [ "perks/unique/ho3"]},
         {"text": "Replace one +0 card with one +1 \"Create a Void pit in an empty hex within %range% 2\" card","removes": ["plus0"],"adds": [ "perks/unique/ho3"]},
-        {"text": "Ignore negative scenario effects and add one +0 \"%ward%, self\" card","adds": ["plus0"]}
+        {"text": "Ignore negative scenario effects and add one +0 \"%ward%, self\" card","adds": ["perks/plus0ward"]}
+      ],
+      "perks_fh": [
+        {"text": "Replace one -2 card with one +0 %disarm% card and one -1 %any% card","removes": ["minus2"],"adds": [ "perks/plus0disarm","perks/minus1any"]},
+        {"text": "Replace one -1 card with one +0 \"Voidsight\" card","removes": ["minus1"],"adds": [ "perks/unique/ho1"]},
+        {"text": "Replace one -1 card with one +0 \"Voidsight\" card","removes": ["minus1"],"adds": [ "perks/unique/ho1"]},
+        {"text": "Replace one -1 card with one +0 \"Voidsight\" card","removes": ["minus1"],"adds": [ "perks/unique/ho1"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0heal2"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0heal2"]},
+        {"text": "Replace two +0 cards with one +2 %dark% card and one -2 %stun% card","removes": ["plus0", "plus0"],"adds": [ "perks/minus2stun", "perks/plus2dark"]},
+        {"text": "Replace two +0 cards with one +1 \"Create one 1-hex void pit obstacle tile in an empty hex within %range% 2\" card","removes": ["plus0", "plus0"],"adds": [ "perks/unique/ho3"]},
+        {"text": "Replace two +0 cards with one +1 \"Create one 1-hex void pit obstacle tile in an empty hex within %range% 2\" card","removes": ["plus0", "plus0"],"adds": [ "perks/unique/ho3"]},
+        {"removes": ["plus1","plus1"],"adds": [ "perks/plus3regenerate"]},
+        {"removes": ["plus1","plus1"],"adds": [ "perks/plus3regenerate"]},
+        {"text": "Add one +1 \"Void Energy\"%flip% card","adds": [ "perks/unique/ho2"]},
+        {"text": "Add one +1 \"Void Energy\"%flip% card","adds": [ "perks/unique/ho2"]},
+        {"text": "Voidborn Defenses: Ignore scenario effects. You may move through void pit obstacles as if you has %jump%"},
+        {"text": "Void Channeling:Whenever you rest You may spend Void Energy to create one 1-hex void put obstacle tile in an empty hex within %range% 2"}
+
+
+
       ]
     },
     {
@@ -559,6 +748,23 @@
         {"text": "Become Sated each time you lose a card to negate suffering damage"},
         {"text": "Whenever one of your abilities causes at least one enemy to gain %rupture%, immediately after that ability perform %move% 1"},
         {"text": "Ignore negative scenario effects and remove one -1 card","removes": ["minus1"]}
+      ],
+      "perks_fh": [
+        {"text": "Replace one -2 card with one -1\"%rupture% and %wound%\" cards","removes": ["minus2"],"adds": [ "perks/unique/rm2"]},
+        {"text": "Replace one -1 card with one +0\"%rupture%\" card","removes": ["minus1"],"adds": [ "perks/unique/rm3"]},
+        {"text": "Replace one -1 card with one +0\"%rupture%\" card","removes": ["minus1"],"adds": [ "perks/unique/rm3"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0wound"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0wound"]},
+        {"text": "Replace one +0 card with one +1\"If the target has %rupture% or %wound%, +3 instead\" card","removes": ["plus0"],"adds": [ "perks/unique/rm4"]},
+        {"text": "Replace one +0 card with one +1\"If the target has %rupture% or %wound%, +3 instead\" card","removes": ["plus0"],"adds": [ "perks/unique/rm4"]},
+        {"text": "Replace one +0 card with one +1\"If the target has %rupture% or %wound%, +3 instead\" card","removes": ["plus0"],"adds": [ "perks/unique/rm4"]},
+        {"text": "Replace one +0 card with one \"%heal% 1, %empower%, self\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/rm1"]},
+        {"text": "Replace one +0 card with one \"%heal% 1, %empower%, self\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/rm1"]},
+        {"text": "Replace one +0 card with one \"%heal% 1, %empower%, self\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/rm1"]},
+        {"text": "Ignore negative scenario effects and remove one -1 card","removes": ["minus1"]},
+        {"text": "Lull in Hunger: Once each scenario become Sated after collection your fifth loot token"},
+        {"text": "Adrenaline Rush: Become Sated each time you lose a card to negate suffering %damage%"},
+        {"text": "Follow the Scent: Whenever one of your abilities causes at least one enemy to gain %rupture%, immediately after the ability perform %move% 1"}
       ]
     },
     {
@@ -601,6 +807,23 @@
         {"adds": [ "perks/plus2earthfire"]},
         {"text": "Ignore negative item effects and add one +1 card","adds": ["plus1"]},
         {"text": "Ignore negative scenario effects and add one \"+X, where X is the number of active Cultivate actions\" card","adds": ["perks/unique/aa1"]}
+      ],
+      "perks_fh": [
+        {"text": "Replace one -2 card with one -1 \"Place one Colony token of your choice in an empty hex within %range% 2\" card","removes": ["minus2"],"adds": [ "perks/unique/aa2"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0heal1flip"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0heal1flip"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0shield1flip"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0shield1flip"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1wound"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1poison"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus2muddle"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus2earthfire"]},
+        {"text": "Replace one +0 card with one +0 \"Add +X, %attack% where X is the number of active Cultivate actions\" card","removes": ["plus0"],"adds": ["perks/unique/aa1"]},
+        {"adds": [ "perks/plus1immobilizeflip","perks/plus1immobilizeflip"]},
+        {"adds": [ "perks/plus1immobilizeflip","perks/plus1immobilizeflip"]},
+        {"text": "Ignore scenario effects and add one \"%retaliate% 1, %range% 3\"%flip% card","adds": ["perks/plus0retaliate1range3flip"]},
+        {"text": "Ignore item - 1 effects and add one \"%retaliate% 1, %range% 3\"%flip% card","adds": ["perks/plus0retaliate1range3flip"]},
+        {"text": "[double] Heart of the Swarm: Once per scenario no your turn, play a card from your discard pile to perform a Cultivate action of that card. You and all allies adjacent to you are considered to be adjacent to every colony type this round"}
       ]
     },
     {
@@ -675,7 +898,8 @@
         {"removes": ["plus0"],"adds": [ "perks/plus1pierce2"]},
         {"removes": ["plus2"],"adds": [ "perks/plus3heal2"]},
         {"removes": ["plus1","plus1"],"adds": [ "perks/plus1poisonflip","perks/plus1poisonflip"]},
-        {"removes": ["plus1","plus1"],"adds": [ "perks/plus1woundflip","perks/plus1woundflip"]}
+        {"removes": ["plus1","plus1"],"adds": [ "perks/plus1woundflip","perks/plus1woundflip"]},
+        {"text": "Spare Parts: At the start of each scenario, you may lose one Head, Foot or Hand item for no effect to gain 2 Scrap"}
       ]
     }
   ],
