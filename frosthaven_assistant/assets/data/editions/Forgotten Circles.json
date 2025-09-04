@@ -2014,7 +2014,7 @@
       "special": [
         {
           "type": "Escort",
-          "name": "Hail",
+          "name": "Hail ",
           "health": "6+2xL",
           "note": "Escort: Hail 6+2xL"
         },
@@ -2272,7 +2272,7 @@
       "special": [
         {
           "type": "Escort",
-          "name": "Hail",
+          "name": "Hail ",
           "health": "4+2xL",
           "init": 99
         }],

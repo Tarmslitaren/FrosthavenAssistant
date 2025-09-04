@@ -4858,7 +4858,7 @@
         "special": [
           {
             "type": "Escort",
-            "name": "Hail",
+            "name": "Hail ",
             "health": "4+(2xL)",
             "init": 99
           } ]
@@ -4911,7 +4911,7 @@
         "special": [
           {
             "type": "Escort",
-            "name": "Hail",
+            "name": "Hail ",
             "health": "4+(2xL)",
             "init": 99,
             "note": "Escort: Hail"
