@@ -22,6 +22,7 @@ import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_com
 import 'package:reorderables/reorderables.dart';
 
 import '../../Resource/commands/amd_remove_minus_2_command.dart';
+import '../../Resource/commands/amd_remove_plus_0_command.dart';
 import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
 import '../../Resource/commands/change_stat_commands/change_empower_command.dart';
@@ -246,6 +247,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
             addedPartyCard = true;
           }
 
+          bool hasPlus0Card = deck.hasCard("plus0");
+
           return Container(
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
@@ -317,6 +320,19 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       deck.hasMinus2()
                                           ? "Remove -2 card"
                                           : "-2 card removed",
+                                    ),
+                                  ),
+                                if (isCharacter &&
+                                    (hasPlus0Card || deck.hasCard("plus0")))
+                                  TextButton(
+                                    onPressed: () {
+                                      _gameState.action(AmdRemovePlus0Command(
+                                          name, hasPlus0Card));
+                                    },
+                                    child: Text(
+                                      hasPlus0Card
+                                          ? "Remove +0 card"
+                                          : "+0 card removed",
                                     ),
                                   ),
                                 if (monsterDeck)

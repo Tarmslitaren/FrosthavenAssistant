@@ -291,10 +291,7 @@ class ModifierDeck {
     final discardPileHas =
         _discardPile.getList().firstWhereOrNull((test) => test.gfx == gfx) !=
             null;
-    final removedPileHas =
-        _removedPile.getList().firstWhereOrNull((test) => test.gfx == gfx) !=
-            null;
-    return (drawPileHas || discardPileHas || removedPileHas);
+    return (drawPileHas || discardPileHas);
   }
 
   void removeCard(_StateModifier _, String gfx) {

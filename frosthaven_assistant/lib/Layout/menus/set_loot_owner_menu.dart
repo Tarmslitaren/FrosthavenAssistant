@@ -43,6 +43,9 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
                 height: 30,
                 width: 30,
                 fit: BoxFit.contain,
+                color: getIt<Settings>().darkMode.value
+                    ? Colors.white
+                    : Colors.black,
                 image: AssetImage(
                     "assets/images/class-icons/${character.characterClass.name}.png")),
             const SizedBox(

@@ -59,7 +59,7 @@
         }
       },
        "perks": [
-         {"removes": ["minus2"], "adds": [ "plus0"]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
          {"removes": ["minus1"],"adds": [ "perks/plus0heal1ally"]},
          {"removes": ["minus1"],"adds": [ "perks/plus0heal1ally"]},
          {"removes": ["minus1"],"adds": [ "perks/plus0heal1ally"]},
@@ -88,7 +88,7 @@
       "summons": {
       },
        "perks": [
-         {"removes": ["minus2"], "adds": [ "plus0"]},
+         {"removes": ["minus2"], "adds": ["plus0"]},
          {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
          {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
          {"removes": ["minus1"],"adds": [ "perks/plus0any"]},
@@ -142,7 +142,7 @@
       "hidden": false,
       "summons": {},
       "perks": [
-        {"removes": ["minus2"],"adds": [ "plus0"]},
+        {"removes": ["minus2"],"adds": ["plus0"]},
         {"removes": ["minus1"],"adds": [ "plus1"]},
         {"removes": ["minus1"],"adds": [ "plus1"]},
         {"removes": ["minus1"],"adds": [ "plus1"]},
@@ -363,7 +363,7 @@
         }
       },
        "perks": [
-         {"removes": ["minus2"],"adds": [ "plus0"]},
+         {"removes": ["minus2"],"adds": ["plus0"]},
          {"text": "Replace one -1 card with one +0\"After the attack ability, grant one of your summons: %teleport% 2\" card","removes": ["minus1"],"adds": [ "perks/unique/so1"]},
          {"text": "Replace one -1 card with one +0\"After the attack ability, grant one of your summons: %teleport% 2\" card","removes": ["minus1"],"adds": [ "perks/unique/so1"]},
          {"text": "Replace one -1 card with one +0\"After the attack ability, grant one of your summons: %teleport% 2\" card","removes": ["minus1"],"adds": [ "perks/unique/so1"]},
@@ -548,7 +548,7 @@
         }
       },
        "perks": [
-         {"removes": ["minus2"],"adds": [ "plus0"]},
+         {"removes": ["minus2"],"adds": ["plus0"]},
          {"text": "Replace one -1 card with one -1\"Doomstalker performs: %attack% 2, %range% 5\" card","removes": ["minus1"],"adds": ["perks/unique/ds1"]},
          {"text": "Replace one -1 card with one -1\"Doomstalker performs: %attack% 2, %range% 5\" card","removes": ["minus1"],"adds": ["perks/unique/ds1"]},
          {"text": "Replace one -1 card with one -1\"Doomstalker performs: %attack% 2, %range% 5\" card","removes": ["minus1"],"adds": ["perks/unique/ds1"]},

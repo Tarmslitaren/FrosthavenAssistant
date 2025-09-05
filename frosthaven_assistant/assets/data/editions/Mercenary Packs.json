@@ -119,7 +119,7 @@
       "hidden": false,
       "summons": {},
       "perks": [
-        {"removes": ["minus2"], "adds": [ "plus0"]},
+        {"removes": ["minus2"], "adds": ["plus0"]},
         {"text": "Replace one -1 card with one +0 %wound% or %immobilize%","removes": ["minus1"], "adds": [ "perks/unique/ha1"]},
         {"text": "Replace one -1 card with one +0 %wound% or %immobilize%","removes": ["minus1"], "adds": [ "perks/unique/ha1"]},
         { "removes": ["minus1"], "adds": ["perks/plus1any"]},
@@ -148,7 +148,7 @@
       "hidden": false,
       "summons": {},
       "perks": [
-        {"removes": ["minus2"], "adds": [ "plus0"]},
+        {"removes": ["minus2"], "adds": ["plus0"]},
         {"removes": ["minus1"], "adds": [ "perks/plus0shield1flip"]},
         {"removes": ["minus1"], "adds": [ "perks/plus0shield1flip"]},
         { "removes": ["minus1"], "adds": ["perks/plus1ice"]},

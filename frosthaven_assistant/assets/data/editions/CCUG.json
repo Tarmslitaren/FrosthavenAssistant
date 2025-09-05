@@ -10,7 +10,7 @@
       "hidden": false,
       "summons": {},
       "perks": [
-        {"removes": ["minus2"], "adds": [ "plus0"]},
+        {"removes": ["minus2"], "adds": ["plus0"]},
         {"text": "Replace one -1 with one +1 %wound%, \"%wound%, self\" card","removes": ["minus1"],"adds": [ "perks/unique/co1"]},
         {"text": "Replace one -1 with one +1 %wound%, \"%wound%, self\" card","removes": ["minus1"],"adds": [ "perks/unique/co1"]},
         {"text": "Replace one -1 with one +1 %poison%, \"%poison%, self\" card","removes": ["minus1"],"adds": [ "perks/unique/co2"]},

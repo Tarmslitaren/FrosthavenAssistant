@@ -165,7 +165,7 @@
       "perks": [
         {"text": "Replace one -1 cards with one +0 \"If %light% is Strong or Waning, +1 instead\"%flip% card","removes": ["minus1"],"adds": [ "perks/unique/tr2"]},
         {"text": "Replace one -1 cards with one +0 \"If %light% is Strong or Waning, +1 instead\"%flip% card","removes": ["minus1"],"adds": [ "perks/unique/tr2"]},
-        {"removes": ["minus2"],"adds": [ "plus0"]},
+        {"removes": ["minus2"],"adds": ["plus0"]},
         {"text": "Add three +0 \"If %light% is Strong or Waning, +1 instead\"%flip% cards","adds": [ "perks/unique/tr2","perks/unique/tr2","perks/unique/tr2"]},
         {"text": "Add three +0 \"If %light% is Strong or Waning, +1 instead\"%flip% cards","adds": [ "perks/unique/tr2","perks/unique/tr2","perks/unique/tr2"]},
         {"adds": [ "perks/plus0lightflip","perks/plus0lightflip"]},
