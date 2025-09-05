@@ -242,6 +242,42 @@
         {"text": "Whenever you consume a potion small item, you may place one Vial Token on an active Experiment card"},
         {"text": "[double] At the end of your turns during which you performed no attacks and you are not performing a long rest, %fire% or %ice% or %earth%"}
       ]
+    },
+    {
+      "name": "Veilpiercer",
+      "color": "FFBCAE93",
+      "colorSecondary": "ff26313D",
+      "edition": "CCUG",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {
+        "Wild Boar": {
+          "level": 1,
+          "health": 3,
+          "gfx": "VEI wild boar",
+          "move": 2,
+          "attack": 2
+        }
+      },
+      "perks": [
+        {"text": "Replace one -2 card with one +0 card","removes": ["minus2"],"adds": [ "plus0"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"text": "Replace one +0 card with one +0 \"The target and all enemies adjacent to it suffer %damage% 1\" card","removes": ["plus0"],"adds": [ "perks/unique/me2"]},
+        {"text": "Replace one +0 card with one +0 \"The target and all enemies adjacent to it suffer %damage% 1\" card","removes": ["plus0"],"adds": [ "perks/unique/me2"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus0woundflip"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus0woundflip"]},
+        {"adds": [ "perks/plus2pierce2"]},
+        {"adds": [ "perks/plus2pierce2"]},
+        {"text": "Add one +1 %push% 2, %immobilize% %flip% cards","adds": [ "perks/unique/vp1"]},
+        {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
+        {"adds": [ "perks/plus0curseflip","perks/plus0curseflip"]},
+        {"text": "Ignore scenario effects and add two +1 cards","adds": ["plus1","plus1"]},
+        {"text": "Unlock The Astral Plane and start each scenario with %invisible%"},
+        {"text": "Whenever you long rest, you may perform \"%teleport% 2\""},
+        {"text": "[double] Once each scenario, during your turn, place one Veil token in a hex within %range% 4"}
+      ]
     }
   ],
   "monsterAbilities": [
