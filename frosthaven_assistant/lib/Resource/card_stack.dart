@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
+
 //todo: make whole thing safe (only expose immutable values)
 
 class CardStack<E> {
@@ -57,6 +59,13 @@ class CardStack<E> {
 
   void removeWhere(bool Function(E) test) {
     _list.removeWhere(test);
+  }
+
+  void removeFirstWhere(bool Function(E) test) {
+    final object = _list.firstWhereOrNull(test);
+    if (object != null) {
+      _list.remove(object);
+    }
   }
 
   void add(E card) {

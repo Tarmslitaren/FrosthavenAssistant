@@ -9,8 +9,7 @@ class ReturnRemovedAMDCardCommand extends Command {
   @override
   void execute() {
     final deck = GameMethods.getModifierDeck(name, _gameState);
-    var card = deck.removedPile.removeAt(index);
-    deck.discardPile.add(card);
+    deck.returnCardToDiscard(stateAccess, index);
   }
 
   @override

@@ -211,14 +211,22 @@ class ModifierDeck {
     _drawPile.add(ModifierCard(CardType.add, "minus1"));
     _drawPile.shuffle();
     _cardCount.value++;
+    if (_addedMinusOnes.value < 0) {
+      //do not add/remove extra minus ones to removed pile
+      _removedPile.removeFirstWhere((item) => item.gfx == "minus1");
+    }
   }
 
   void removeMinusOne(_StateModifier _) {
     _shuffle();
-    _addedMinusOnes.value--;
 
-    _removeCardFromDrawPile("minus1");
-    //_removedPile.add(ModifierCard(CardType.add, "minus1"));
+    final card = _removeCardFromDrawPile("minus1");
+    if (card != null) {
+      _addedMinusOnes.value--;
+      if (_addedMinusOnes.value < 0) {
+        _removedPile.add(card);
+      }
+    }
   }
 
   bool hasMinus1() {
@@ -256,11 +264,15 @@ class ModifierDeck {
 
   void removeNull(_StateModifier _) {
     _shuffle();
-    _removeCardFromDrawPile("nullAttack");
+    final card = _removeCardFromDrawPile("nullAttack");
+    if (card != null) {
+      _removedPile.add(card);
+    }
   }
 
   void addNull(_StateModifier _) {
     _drawPile.add(ModifierCard(CardType.multiply, "nullAttack"));
+    _removedPile.removeFirstWhere((item) => item.gfx == "nullAttack");
     _shuffle();
   }
 
@@ -279,6 +291,22 @@ class ModifierDeck {
     _shuffle();
   }
 
+  void removeCardFromDiscard(_StateModifier _, int index) {
+    var card = _discardPile.removeAt(index);
+    _removedPile.add(card);
+    if (card.gfx == "minus1") {
+      _addedMinusOnes.value--;
+    }
+  }
+
+  void returnCardToDiscard(_StateModifier _, int index) {
+    var card = _removedPile.removeAt(index);
+    _discardPile.add(card);
+    if (card.gfx == "minus1") {
+      _addedMinusOnes.value++;
+    }
+  }
+
   void addCard(_StateModifier _, String id, CardType type) {
     _drawPile.add(ModifierCard(type, id));
     _shuffle();
@@ -286,11 +314,15 @@ class ModifierDeck {
 
   void removeMinusTwo(_StateModifier _) {
     _shuffle();
-    _removeCardFromDrawPile("minus2");
+    final card = _removeCardFromDrawPile("minus2");
+    if (card != null) {
+      _removedPile.add(card);
+    }
   }
 
   void addMinusTwo(_StateModifier _) {
     _drawPile.add(ModifierCard(CardType.add, "minus2"));
+    _removedPile.removeFirstWhere((item) => item.gfx == "minus2");
     _shuffle();
   }
 
@@ -456,7 +488,7 @@ class ModifierDeck {
     }
   }
 
-  _removeCardFromDrawPile(String gfx) {
+  ModifierCard? _removeCardFromDrawPile(String gfx) {
     var card =
         _drawPile.getList().lastWhereOrNull((element) => element.gfx == gfx);
     if (card != null) {
@@ -464,6 +496,7 @@ class ModifierDeck {
       _drawPile.shuffle();
       _cardCount.value--;
     }
+    return card;
   }
 
   void _handleRemovableCards(ValueNotifier<int> notifier, String gfx) {
