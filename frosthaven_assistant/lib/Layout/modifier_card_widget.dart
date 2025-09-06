@@ -34,7 +34,6 @@ class ModifierCardWidget extends StatelessWidget {
         gfx = "perks/$gfx";
       }
     } else if (allies) {
-      gfx = gfx.replaceAll("-allies", "");
       extraGfx = 'assets/images/attack/allies.png';
     } else if (isCharacter) {
       extraGfx = 'assets/images/class-icons/$name.png';

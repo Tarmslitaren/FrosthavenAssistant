@@ -43,12 +43,12 @@ class ModifierDeck {
 
   ModifierDeck(this.name) {
     //build deck
-    _initDeck(name);
+    _initDeck();
     _initListeners();
   }
 
   ModifierDeck.fromJson(this.name, Map<String, dynamic> modifierDeckData) {
-    _initDeck(name);
+    _initDeck();
     _initListeners();
 
     for (var item in modifierDeckData["drawPile"] as List) {
@@ -207,81 +207,60 @@ class ModifierDeck {
   }
 
   void addMinusOne(_StateModifier _) {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
-    }
     _addedMinusOnes.value++;
-    _drawPile.add(ModifierCard(CardType.add, "minus1$suffix"));
+    _drawPile.add(ModifierCard(CardType.add, "minus1"));
     _drawPile.shuffle();
     _cardCount.value++;
   }
 
   void removeMinusOne(_StateModifier _) {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
-    }
     _shuffle();
     _addedMinusOnes.value--;
 
-    _removeCardFromDrawPile("minus1$suffix");
+    _removeCardFromDrawPile("minus1");
+    //_removedPile.add(ModifierCard(CardType.add, "minus1"));
   }
 
   bool hasMinus1() {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
-    }
-    return _drawPile.getList().firstWhereOrNull(
-                (element) => element.gfx == "minus1$suffix") !=
+    return _drawPile
+                .getList()
+                .firstWhereOrNull((element) => element.gfx == "minus1") !=
             null ||
-        _discardPile.getList().firstWhereOrNull(
-                (element) => element.gfx == "minus1$suffix") !=
+        _discardPile
+                .getList()
+                .firstWhereOrNull((element) => element.gfx == "minus1") !=
             null;
   }
 
   bool hasMinus2() {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
-    }
-    return _drawPile.getList().firstWhereOrNull(
-                (element) => element.gfx == "minus2$suffix") !=
+    return _drawPile
+                .getList()
+                .firstWhereOrNull((element) => element.gfx == "minus2") !=
             null ||
-        _discardPile.getList().firstWhereOrNull(
-                (element) => element.gfx == "minus2$suffix") !=
+        _discardPile
+                .getList()
+                .firstWhereOrNull((element) => element.gfx == "minus2") !=
             null;
   }
 
   bool hasNull() {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
-    }
-    return _drawPile.getList().firstWhereOrNull(
-                (element) => element.gfx == "nullAttack$suffix") !=
+    return _drawPile
+                .getList()
+                .firstWhereOrNull((element) => element.gfx == "nullAttack") !=
             null ||
-        _discardPile.getList().firstWhereOrNull(
-                (element) => element.gfx == "nullAttack$suffix") !=
+        _discardPile
+                .getList()
+                .firstWhereOrNull((element) => element.gfx == "nullAttack") !=
             null;
   }
 
   void removeNull(_StateModifier _) {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
-    }
     _shuffle();
-    _removeCardFromDrawPile("nullAttack$suffix");
+    _removeCardFromDrawPile("nullAttack");
   }
 
   void addNull(_StateModifier _) {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
-    }
-    _drawPile.add(ModifierCard(CardType.multiply, "nullAttack$suffix"));
+    _drawPile.add(ModifierCard(CardType.multiply, "nullAttack"));
     _shuffle();
   }
 
@@ -306,20 +285,12 @@ class ModifierDeck {
   }
 
   void removeMinusTwo(_StateModifier _) {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
-    }
     _shuffle();
-    _removeCardFromDrawPile("minus2$suffix");
+    _removeCardFromDrawPile("minus2");
   }
 
   void addMinusTwo(_StateModifier _) {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
-    }
-    _drawPile.add(ModifierCard(CardType.add, "minus2$suffix"));
+    _drawPile.add(ModifierCard(CardType.add, "minus2"));
     _shuffle();
   }
 
@@ -435,6 +406,7 @@ class ModifierDeck {
     List<ModifierCard> newList = [];
     for (var item in modifierDeckData[deckId] as List) {
       String gfx = item["gfx"];
+      gfx = gfx.replaceAll("-allies", "");
       if (gfx == "curse") {
         newList.add(ModifierCard(CardType.remove, gfx));
       } else if (gfx.contains("enfeeble")) {
@@ -456,22 +428,18 @@ class ModifierDeck {
     return newList;
   }
 
-  void _initDeck(final String name) {
-    String suffix = "";
-    if (name == "allies") {
-      suffix = "-$name";
-    }
+  void _initDeck() {
     List<ModifierCard> cards = [];
-    cards.add(ModifierCard(CardType.add, "minus2$suffix"));
-    cards.add(ModifierCard(CardType.add, "plus2$suffix"));
-    cards.add(ModifierCard(CardType.multiply, "doubleAttack$suffix"));
-    cards.add(ModifierCard(CardType.multiply, "nullAttack$suffix"));
+    cards.add(ModifierCard(CardType.add, "minus2"));
+    cards.add(ModifierCard(CardType.add, "plus2"));
+    cards.add(ModifierCard(CardType.multiply, "doubleAttack"));
+    cards.add(ModifierCard(CardType.multiply, "nullAttack"));
     for (int i = 0; i < 5; i++) {
-      cards.add(ModifierCard(CardType.add, "minus1$suffix"));
-      cards.add(ModifierCard(CardType.add, "plus1$suffix"));
+      cards.add(ModifierCard(CardType.add, "minus1"));
+      cards.add(ModifierCard(CardType.add, "plus1"));
     }
     for (int i = 0; i < 6; i++) {
-      cards.add(ModifierCard(CardType.add, "plus0$suffix"));
+      cards.add(ModifierCard(CardType.add, "plus0"));
     }
     _drawPile.setList(cards);
     _discardPile.setList([]);

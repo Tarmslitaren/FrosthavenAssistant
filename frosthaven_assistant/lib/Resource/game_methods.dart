@@ -703,7 +703,7 @@ class GameMethods {
     item.characterState._xp.value = 0;
     item.characterState.conditions.value.clear();
     item.characterState._chill.value = 0;
-    item.characterState.modifierDeck._initDeck(item.id);
+    item.characterState.modifierDeck._initDeck();
     //reapply perks
     final perksSetList = item.characterState.perkList;
     final perks = item.characterState.useFHPerks.value
@@ -737,8 +737,8 @@ class GameMethods {
       _gameState._scenarioSpecialRules.clear();
       GameMethods.applyDifficulty(s);
 
-      _gameState.modifierDeck._initDeck("");
-      _gameState.modifierDeckAllies._initDeck("allies");
+      _gameState.modifierDeck._initDeck();
+      _gameState.modifierDeckAllies._initDeck();
       _gameState._sanctuaryDeck._initDeck();
 
       List<ListItemData> newList = [];
