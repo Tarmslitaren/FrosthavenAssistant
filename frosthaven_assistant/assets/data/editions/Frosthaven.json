@@ -5262,7 +5262,7 @@
         }
       ]
     },
-    "Frozen Fist": {
+    "Frozen Fist ": {
       "deck": "Boss (FH)",
       "count": 1,
       "levels": [
@@ -5340,7 +5340,7 @@
         }
       ]
     },
-    "Snowdancer": {
+    "Snowdancer ": {
       "deck": "Boss 2 (FH)",
       "count": 1,
       "levels": [
@@ -6660,7 +6660,7 @@
         }]
     },
     "#4A Heart of Ice": {
-      "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Scout" ],
+      "monsters": [ "Frozen Fist ", "Snowdancer ", "Algox Archer", "Algox Guard", "Algox Scout" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
       "special": [
         {
@@ -6674,7 +6674,7 @@
       }
     },
     "#4B Heart of Ice": {
-      "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Scout" ],
+      "monsters": [ "Frozen Fist ", "Snowdancer ", "Algox Archer", "Algox Guard", "Algox Scout" ],
       "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
       "sections": {
         "#75.1(1) Heart of Ice (4)": {
@@ -8086,7 +8086,7 @@
       }
     },
     "#55 Change of Heart": {
-      "monsters": [ "Frozen Fist", "Snowdancer", "Algox Archer", "Algox Guard", "Algox Priest" ],
+      "monsters": [ "Frozen Fist ", "Snowdancer ", "Algox Archer", "Algox Guard", "Algox Priest" ],
       "lootDeck": {"coin":3,"lumber": 2,"metal":4,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
       "sections":  {
         "#80.2(1) Change of Heart (55)": {

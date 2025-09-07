@@ -975,11 +975,11 @@
     },
     {
       "75.1(1)": {
-        "Frozen Fist": {
+        "Frozen Fist ": {
           "normal": [1, 1, 1],
           "elite": [0, 0, 0]
         },
-        "Snowdancer": {
+        "Snowdancer ": {
           "normal": [1, 1, 1],
           "elite": [0, 0, 0]
         }
@@ -1001,11 +1001,11 @@
     },
     {
       "75.1(1)": {
-        "Frozen Fist": {
+        "Frozen Fist ": {
           "normal": [1, 1, 1],
           "elite": [0, 0, 0]
         },
-        "Snowdancer": {
+        "Snowdancer ": {
           "normal": [1, 1, 1],
           "elite": [0, 0, 0]
         }
