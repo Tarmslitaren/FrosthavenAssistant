@@ -47,10 +47,10 @@ dependencies:
   animated_text_kit: ^4.2.2
   network_info_plus: ^6.1.2
   dart_ipify: ^1.1.1 #get outgoing ip
-  connectivity_plus: ^6.0.3 #poll for network changes
+  connectivity_plus: ^6.1.5 #poll for network changes
   shared_preferences: 2.4.0 #pinned at 2.4.0 due to some issue (https://github.com/flutter/flutter/issues/161796)
   wakelock_plus: ^1.2.5 #keep awake on android
-  window_manager: ^0.4.3 #to be able to set fullscreen on windows
+  window_manager: ^0.5.1 #to be able to set fullscreen on windows
   flutter_launcher_icons: ^0.14.3 #I can't believe we need a third party package to do icons..
   flutter_native_splash: ^2.2.8 # and same for splash :)
   url_launcher: ^6.2.1
@@ -85,7 +85,7 @@ dev_dependencies:
   fluent_assertions: ^0.5.1
   build_test: any
   json_diff: ^0.2.1
-  dart_code_metrics_presets: ^2.24.0
+  dart_code_metrics_presets: ^2.25.1
 
 flutter_icons:
   android: "launcher_icon"

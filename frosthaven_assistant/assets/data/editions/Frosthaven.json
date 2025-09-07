@@ -373,7 +373,7 @@
         {"text": "Ignore scenario effects"},
         {"text": "[double] Whenever you short rest, you may %use%%air% to perform %strengthen%, %range% 3 and %use%%light% to perform %bless%, %range% 3"},
         {"text": "At the start of each scenario, you may gain %brittle% to gain 2 Resonance"},
-        {"text": "Whenever a new roo is revealed, you may reveal the top card of both the monster attack modifier deck and all allies' attack modifier decks"}
+        {"text": "Whenever a new room is revealed, you may reveal the top card of both the monster attack modifier deck and all allies' attack modifier decks"}
       ]
     },
     {
