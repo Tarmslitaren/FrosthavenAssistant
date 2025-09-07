@@ -114,6 +114,7 @@ Widget defaultBuildDraggableFeedback(
 }
 
 bool hasGHVersion(String name) {
+  //todo: use lookuptable
   if (name.contains("aoe")) {
     return false;
   }

@@ -20,6 +20,10 @@ class RemoveConditionCommand extends Command {
           !figure.conditions.value.contains(Condition.chill)) {
         figure.getMutableConditionsAddedThisTurn(stateAccess).remove(condition);
       }
+      if(condition == Condition.chill) {
+        figure.setChill(stateAccess, figure.chill.value - 1);
+      }
+
       figure
           .getMutableConditionsAddedPreviousTurn(stateAccess)
           .remove(condition);
@@ -29,10 +33,6 @@ class RemoveConditionCommand extends Command {
 
   @override
   void undo() {
-    /*List<Condition> newList = [];
-    newList.addAll(figure.conditions.value);
-    newList.add(condition);
-    figure.conditions.value = newList;*/
     getIt<GameState>().updateList.value++;
   }
 

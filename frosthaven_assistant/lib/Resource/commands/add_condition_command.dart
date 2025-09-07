@@ -16,6 +16,10 @@ class AddConditionCommand extends Command {
       newList.add(condition);
       figure.conditions.value = newList;
 
+      if(condition == Condition.chill) {
+        figure.setChill(stateAccess, figure.chill.value + 1);
+      }
+
       //only added this turn if is current or done
       for (var item in getIt<GameState>().currentList) {
         if (item.id == ownerId) {

@@ -11,7 +11,6 @@ import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/chan
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_xp_command.dart';
 
 import '../../Resource/commands/add_condition_command.dart';
-import '../../Resource/commands/change_stat_commands/change_chill_command.dart';
 import '../../Resource/commands/change_stat_commands/change_empower_command.dart';
 import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
 import '../../Resource/commands/change_stat_commands/change_health_command.dart';
@@ -109,7 +108,7 @@ class StatusMenuState extends State<StatusMenu> {
               icon: Image.asset('assets/images/psd/sub.png'),
               onPressed: () {
                 if (notifier.value > 0) {
-                  _gameState.action(ChangeChillCommand(-1, figureId, ownerId));
+                  //_gameState.action(ChangeChillCommand(-1, figureId, ownerId));
                   _gameState.action(RemoveConditionCommand(
                       Condition.chill, figureId, ownerId));
                 }
@@ -154,7 +153,7 @@ class StatusMenuState extends State<StatusMenu> {
             icon: Image.asset('assets/images/psd/add.png'),
             onPressed: () {
               if (notifier.value < maxValue) {
-                _gameState.action(ChangeChillCommand(1, figureId, ownerId));
+               // _gameState.action(ChangeChillCommand(1, figureId, ownerId));
                 _gameState.action(
                     AddConditionCommand(Condition.chill, figureId, ownerId));
               }
