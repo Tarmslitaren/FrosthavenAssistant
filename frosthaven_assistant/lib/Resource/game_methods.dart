@@ -682,6 +682,15 @@ class GameMethods {
           list[0].setHealth(s, bearHp);
         }
       }
+      if (character.id == "D.O.M.E.") {
+        var list = character.characterState.summonList;
+        if (list.isNotEmpty) {
+          //create the barrier summon
+          final int health = 3 + character.characterState.level.value;
+          list[0].setMaxHealth(s, health);
+          list[0].setHealth(s, health);
+        }
+      }
     }
 
     GameMethods.applyDifficulty(s);
@@ -724,6 +733,14 @@ class GameMethods {
       MonsterInstance bear = MonsterInstance.summon(
           0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, gfx, -1);
       summonList.add(bear);
+    }
+    if (item.id == "D.O.M.E.") {
+      //create the barrier as a summon
+      final int health = 3 + level;
+      final String gfx = "DOM barrier";
+      MonsterInstance barrier = MonsterInstance.summon(
+          0, MonsterType.summon, "Barrier", health, 0, 0, 0, gfx, -1);
+      summonList.add(barrier);
     }
   }
 
@@ -1612,14 +1629,19 @@ class GameMethods {
             characterClass.id == "Wildfury") {
           //create the bear summon
           final int bearHp = 8 + characterState.level.value * 2;
-
           final String gfx =
               characterClass.id == "Beast Tyrant" ? "beast" : "Beast v2";
-
           MonsterInstance bear = MonsterInstance.summon(
               0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, gfx, -1);
-
           character.characterState._summonList.add(bear);
+        }
+        if (characterClass.id == "D.O.M.E.") {
+          //create the summon
+          final int health = 3 + characterState.level.value;
+          final String gfx = "DOM barrier";
+          MonsterInstance barrier = MonsterInstance.summon(
+              0, MonsterType.summon, "Barrier", health, 0, 0, 0, gfx, -1);
+          character.characterState._summonList.add(barrier);
         }
         break;
       }

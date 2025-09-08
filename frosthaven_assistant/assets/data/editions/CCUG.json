@@ -278,6 +278,54 @@
         {"text": "Whenever you long rest, you may perform \"%teleport% 2\""},
         {"text": "[double] Once each scenario, during your turn, place one Veil token in a hex within %range% 4"}
       ]
+    },
+    {
+      "name": "D.O.M.E.",
+      "color": "FF95B7E1",
+      "colorSecondary": "ff35364E",
+      "edition": "CCUG",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+        "Helper Bot": {
+          "level": 1,
+          "health": 1,
+          "gfx": "DOM helper bot",
+          "move": 3
+        },
+        "Robotic Detrius": {
+          "level": 5,
+          "health": 4,
+          "gfx": "DOM robotic detrius",
+          "move": 3,
+          "attack": 2
+        },
+        "Automated Mech Suit": {
+          "level": 9,
+          "health": 10,
+          "gfx": "DOM automated mech suit",
+          "move": 2,
+          "attack": 3
+        }
+      },
+      "perks": [
+        {"removes": ["minus1"],"adds": [ "perks/plus0strengthenallyflip"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0strengthenallyflip"]},
+        {"text": "Replace one -1 card with one +0 \"Grant the ally with Project Barrier: %attack% 2\" card","removes": ["minus1"],"adds": [ "perks/unique/do1"]},
+        {"text": "Replace one -1 card with one +0 \"Grant the ally with Project Barrier: %attack% 2\" card","removes": ["minus1"],"adds": [ "perks/unique/do1"]},
+        {"text": "Replace one +0 card with one +0 \"Place this card in your active area. On your next attack granting ability, discard this card to add + 2 %attack%\" card","removes": ["plus0"],"adds": [ "perks/unique/do2"]},
+        {"text": "Replace one +0 card with one +0 \"Place this card in your active area. On your next attack granting ability, discard this card to add + 2 %attack%\" card","removes": ["plus0"],"adds": [ "perks/unique/do2"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus0pierce3flip","perks/plus0pierce3flip"]},
+        {"text": "Add three Recharge Barrier 1 %flip% cards","adds": [ "perks/unique/do3","perks/unique/do3","perks/unique/do3"]},
+        {"text": "Add three Recharge Barrier 1 %flip% cards","adds": [ "perks/unique/do3","perks/unique/do3","perks/unique/do3"]},
+        {"adds": [ "perks/plus2light"]},
+        {"adds": [ "perks/plus2light"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1regenerateflip"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1regenerateflip"]},
+        {"text": "[double] Your summons gain %retaliate% 1. Whenever one of your summons dies, perform: Recharge Barrier 3"},
+        {"text": "At the end of each of your rests, perform: Recharge Barrier 1 and Project Barrier %range% 4"},
+        {"text": "[double] Once each scenario, at the end of an ally's turn, perform: Recharge Barrier 5 and Project Barrier, %target% that ally"}
+      ]
     }
   ],
   "monsterAbilities": [
