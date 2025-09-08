@@ -286,6 +286,7 @@
       "edition": "CCUG",
       "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
+      "note": "Barrier added as a hard coded summon",
       "summons": {
         "Helper Bot": {
           "level": 1,
@@ -325,6 +326,75 @@
         {"text": "[double] Your summons gain %retaliate% 1. Whenever one of your summons dies, perform: Recharge Barrier 3"},
         {"text": "At the end of each of your rests, perform: Recharge Barrier 1 and Project Barrier %range% 4"},
         {"text": "[double] Once each scenario, at the end of an ally's turn, perform: Recharge Barrier 5 and Project Barrier, %target% that ally"}
+      ]
+    },
+    {
+      "name": "Echowight",
+      "color": "FFB3D3E2",
+      "colorSecondary": "ff575A70",
+      "edition": "CCUG",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+        "Ethereal Opening": {
+          "level": 1,
+          "health": 1,
+          "gfx": "ECH ethereal opening"
+        },
+        "Ghostly Armor": {
+          "level": 1,
+          "health": 7,
+          "gfx": "ECH ghostly armor",
+          "move": 2,
+          "attack": 1
+        },
+        "Fogbound Terror": {
+          "level": 1,
+          "health": 5,
+          "gfx": "ECH fogbound terror",
+          "move": 3,
+          "attack": 3
+        },
+        "Shrouded Stalker": {
+          "level": 4,
+          "health": 4,
+          "gfx": "ECH shrouded stalker",
+          "move": 3,
+          "attack": 2
+        },
+        "Screeching Banshee": {
+          "level": 6,
+          "health": 7,
+          "gfx": "ECH screeching banshee",
+          "move": 4,
+          "attack": 2
+        },
+        "Harbringer": {
+          "level": 9,
+          "health": 9,
+          "gfx": "ECH harbringer",
+          "move": 3,
+          "attack": 4
+        }
+      },
+      "perks": [
+        {"removes": ["minus2"],"adds": [ "plus0"]},
+        {"text": "Replace one -1 card with one +0 \"One enemy adjacent to Fog suffers one damage\" card","removes": ["minus1"],"adds": [ "perks/unique/ew1"]},
+        {"text": "Replace one -1 card with one +0 \"One enemy adjacent to Fog suffers one damage\" card","removes": ["minus1"],"adds": [ "perks/unique/ew1"]},
+        {"text": "Replace one -1 card with one +0 \"One enemy adjacent to Fog suffers one damage\" card","removes": ["minus1"],"adds": [ "perks/unique/ew1"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1curse"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1curse"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1air"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1air"]},
+        {"text": "Add one +1 \"+ 1 %attack% for each Fog token adjacent to the target\" card","adds": [ "perks/unique/ew2"]},
+        {"text": "Add one +2 \"Place one Fog token in a hex adjacent to the target\" card","adds": [ "perks/unique/ew3"]},
+        {"text": "Add one +2 \"Place one Fog token in a hex adjacent to the target\" card","adds": [ "perks/unique/ew3"]},
+        {"text": "Add two \"%heal% 1, %target% 1 figure adjacent to Fog\"%flip% card","adds": [ "perks/unique/ew4","perks/unique/ew4"]},
+        {"text": "Add two \"%heal% 1, %target% 1 figure adjacent to Fog\"%flip% card","adds": [ "perks/unique/ew4","perks/unique/ew4"]},
+        {"text": "Ignore scenario effects and add two +1 cards","adds": [ "plus1","plus1"]},
+        {"text": "[double] At the end of your turn, if you are adjacent to Fog and have not moved this turn, you may perform: %move% 1"},
+        {"text": "Once per round, when a door is opened, you may relocate a Fog token to a hex within %range% 1 of the opened door"},
+        {"text": "Enemies gain - 1 %retaliate% for each adjacent Fog token"}
       ]
     }
   ],
