@@ -504,6 +504,34 @@
         {"text": "[double] Once per scenario, when you or an ally would suffer %damage% from an attack, remove a Latched summon from the attacker or the target to negate the damage instead"},
         {"text": "[double] At the start of each scenario, you may play a card from your hand to perform a summon action of the card"}
       ]
+    },
+    {
+      "name": "Glacial Torrent",
+      "color": "FF89D9E8",
+      "colorSecondary": "ff08303A",
+      "edition": "CCUG",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {
+      },
+      "perks": [
+        {"removes": ["minus2"],"adds": [ "perks/minus2brittle"]},
+        {"text": "Replace one -1 card with one +0 \"glacier+ 1\" card","removes": ["minus1"],"adds": [ "perks/unique/gt1"]},
+        {"text": "Replace one -1 card with one +0 \"glacier+ 1\" card","removes": ["minus1"],"adds": [ "perks/unique/gt1"]},
+        {"text": "Replace one -1 card with one +0 \"glacier+ 1\" card","removes": ["minus1"],"adds": [ "perks/unique/gt1"]},
+        {"removes": ["plus0","plus0"],"adds": [ "perks/plus0push2flip", "perks/plus0push2flip"]},
+        {"text": "Replace one +0 card with one +2 \"Create one 1-hex icy terrain tile in a featureless hex adjacent to the target\" card","removes": ["plus0"],"adds": [ "perks/unique/gt2"]},
+        {"text": "Replace one +0 card with one +2 \"Create one 1-hex icy terrain tile in a featureless hex adjacent to the target\" card","removes": ["plus0"],"adds": [ "perks/unique/gt2"]},
+        {"adds": [ "perks/plus1ice","perks/plus1ice"]},
+        {"adds": [ "perks/plus1ice","perks/plus1ice"]},
+        {"adds": [ "perks/plus3"]},
+        {"text": "Add one +0 %heal% 1, %ward%, self %flip% card","adds": [ "perks/unique/gt3"]},
+        {"text": "Add one +0 %heal% 1, %ward%, self %flip% card","adds": [ "perks/unique/gt3"]},
+        {"text": "Add one +0 %heal% 1, %ward%, self %flip% card","adds": [ "perks/unique/gt3"]},
+        {"text": "Ignore item - 1 effects and add whenever you would gain %brittle%, prevent the condition"},
+        {"text": "whenever one of your ally's heals would cause your hit point value to increase beyond your maximum hit point value, gain that much Glacier"},
+        {"text": "[triple] Whenever you end your turn adjacent to icy terrain, perform %heal% 1, self"}
+      ]
     }
   ],
   "monsterAbilities": [

@@ -691,6 +691,15 @@ class GameMethods {
           list[0].setHealth(s, health);
         }
       }
+      if (character.id == "Glacial Torrent") {
+        var list = character.characterState.summonList;
+        if (list.isNotEmpty) {
+          //create the barrier summon
+          final int health = 7 + character.characterState.level.value;
+          list[0].setMaxHealth(s, health);
+          list[0].setHealth(s, health);
+        }
+      }
     }
 
     GameMethods.applyDifficulty(s);
@@ -740,6 +749,14 @@ class GameMethods {
       final String gfx = "DOM barrier";
       MonsterInstance barrier = MonsterInstance.summon(
           0, MonsterType.summon, "Barrier", health, 0, 0, 0, gfx, -1);
+      summonList.add(barrier);
+    }
+    if (item.id == "Glacial Torrent") {
+      //create the barrier as a summon
+      final int health = 7 + level;
+      final String gfx = "GLA glacier";
+      MonsterInstance barrier = MonsterInstance.summon(
+          0, MonsterType.summon, "Glacier", health, 0, 0, 0, gfx, -1);
       summonList.add(barrier);
     }
   }
@@ -1641,6 +1658,14 @@ class GameMethods {
           final String gfx = "DOM barrier";
           MonsterInstance barrier = MonsterInstance.summon(
               0, MonsterType.summon, "Barrier", health, 0, 0, 0, gfx, -1);
+          character.characterState._summonList.add(barrier);
+        }
+        if (characterClass.id == "Glacial Torrent") {
+          //create the summon
+          final int health = 7 + characterState.level.value;
+          final String gfx = "GLA glacier";
+          MonsterInstance barrier = MonsterInstance.summon(
+              0, MonsterType.summon, "Glacier", health, 0, 0, 0, gfx, -1);
           character.characterState._summonList.add(barrier);
         }
         break;
