@@ -673,32 +673,34 @@ class GameMethods {
       character.characterState
           .setMaxHealth(s, character.characterState.health.value);
 
+      //handle special summons
+      int health = 0;
+      int multiplier = 1;
+      String name = "";
       if (character.id == "Beast Tyrant" || character.id == "Wildfury") {
-        var list = character.characterState.summonList;
-        if (list.isNotEmpty) {
-          //create the bear summon
-          final int bearHp = 8 + character.characterState.level.value * 2;
-          list[0].setMaxHealth(s, bearHp);
-          list[0].setHealth(s, bearHp);
-        }
+        //create the bear summon
+        health = 8;
+        multiplier = 2;
       }
       if (character.id == "D.O.M.E.") {
-        var list = character.characterState.summonList;
-        if (list.isNotEmpty) {
-          //create the barrier summon
-          final int health = 3 + character.characterState.level.value;
-          list[0].setMaxHealth(s, health);
-          list[0].setHealth(s, health);
-        }
+        health = 3;
+        name = "Barrier";
       }
       if (character.id == "Glacial Torrent") {
-        var list = character.characterState.summonList;
-        if (list.isNotEmpty) {
-          //create the barrier summon
-          final int health = 7 + character.characterState.level.value;
-          list[0].setMaxHealth(s, health);
-          list[0].setHealth(s, health);
-        }
+        health = 7;
+        name = "Glacier";
+      }
+      if (character.id == "Jester Twins") {
+        //create the barrier as a summon
+        health = 5;
+        name = "Jester Twin";
+      }
+
+      var list = character.characterState.summonList;
+      if (list.isNotEmpty && list[0].name == name) {
+        int hp = health + character.characterState.level.value * multiplier;
+        list[0].setMaxHealth(s, hp);
+        list[0].setHealth(s, hp);
       }
     }
 
@@ -732,33 +734,39 @@ class GameMethods {
         GameMethods.addPerk(s, item, i);
       }
     }
-
+    //handle special summons
     final summonList = item.characterState._summonList;
     summonList.clear();
+    int health = 0;
+    int multiplier = 1;
+    String gfx = "";
+    String name = "";
     if (item.id == "Beast Tyrant" || item.id == "Wildfury") {
       //create the bear summon
-      final int bearHp = 8 + level * 2;
-      final String gfx = item.id == "Beast Tyrant" ? "beast" : "Beast v2";
-      MonsterInstance bear = MonsterInstance.summon(
-          0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, gfx, -1);
-      summonList.add(bear);
+      health = 8;
+      multiplier = 2;
+      gfx = item.id == "Beast Tyrant" ? "beast" : "Beast v2";
     }
     if (item.id == "D.O.M.E.") {
-      //create the barrier as a summon
-      final int health = 3 + level;
-      final String gfx = "DOM barrier";
-      MonsterInstance barrier = MonsterInstance.summon(
-          0, MonsterType.summon, "Barrier", health, 0, 0, 0, gfx, -1);
-      summonList.add(barrier);
+      health = 3;
+      gfx = "DOM barrier";
+      name = "Barrier";
     }
     if (item.id == "Glacial Torrent") {
-      //create the barrier as a summon
-      final int health = 7 + level;
-      final String gfx = "GLA glacier";
-      MonsterInstance barrier = MonsterInstance.summon(
-          0, MonsterType.summon, "Glacier", health, 0, 0, 0, gfx, -1);
-      summonList.add(barrier);
+      health = 7;
+      gfx = "GLA glacier";
+      name = "Glacier";
     }
+    if (item.id == "Jester Twins") {
+      //create the barrier as a summon
+      health = 5;
+      gfx = "JES twin";
+      name = "Jester Twin";
+    }
+
+    MonsterInstance summon = MonsterInstance.summon(0, MonsterType.summon, name,
+        health + level * multiplier, 3, 2, 0, gfx, -1);
+    summonList.add(summon);
   }
 
   //todo: too long method - split
@@ -1642,32 +1650,40 @@ class GameMethods {
         }
         character = Character(characterState, characterClass);
 
-        if (characterClass.id == "Beast Tyrant" ||
-            characterClass.id == "Wildfury") {
+        //handle special summons
+        final summonList = character.characterState._summonList;
+        summonList.clear();
+        int health = 0;
+        int multiplier = 1;
+        String gfx = "";
+        String name = "";
+        if (character.id == "Beast Tyrant" || character.id == "Wildfury") {
           //create the bear summon
-          final int bearHp = 8 + characterState.level.value * 2;
-          final String gfx =
-              characterClass.id == "Beast Tyrant" ? "beast" : "Beast v2";
-          MonsterInstance bear = MonsterInstance.summon(
-              0, MonsterType.summon, "Bear", bearHp, 3, 2, 0, gfx, -1);
-          character.characterState._summonList.add(bear);
+          health = 8;
+          multiplier = 2;
+          gfx = character.id == "Beast Tyrant" ? "beast" : "Beast v2";
         }
-        if (characterClass.id == "D.O.M.E.") {
-          //create the summon
-          final int health = 3 + characterState.level.value;
-          final String gfx = "DOM barrier";
-          MonsterInstance barrier = MonsterInstance.summon(
-              0, MonsterType.summon, "Barrier", health, 0, 0, 0, gfx, -1);
-          character.characterState._summonList.add(barrier);
+        if (character.id == "D.O.M.E.") {
+          health = 3;
+          gfx = "DOM barrier";
+          name = "Barrier";
         }
-        if (characterClass.id == "Glacial Torrent") {
-          //create the summon
-          final int health = 7 + characterState.level.value;
-          final String gfx = "GLA glacier";
-          MonsterInstance barrier = MonsterInstance.summon(
-              0, MonsterType.summon, "Glacier", health, 0, 0, 0, gfx, -1);
-          character.characterState._summonList.add(barrier);
+        if (character.id == "Glacial Torrent") {
+          health = 7;
+          gfx = "GLA glacier";
+          name = "Glacier";
         }
+        if (character.id == "Jester Twins") {
+          //create the barrier as a summon
+          health = 5;
+          gfx = "JES twin";
+          name = "Jester Twin";
+        }
+
+        MonsterInstance summon = MonsterInstance.summon(0, MonsterType.summon,
+            name, health + level * multiplier, 3, 2, 0, gfx, -1);
+        summonList.add(summon);
+
         break;
       }
     }

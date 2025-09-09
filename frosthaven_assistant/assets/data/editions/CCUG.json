@@ -516,9 +516,9 @@
       },
       "perks": [
         {"removes": ["minus2"],"adds": [ "perks/minus2brittle"]},
-        {"text": "Replace one -1 card with one +0 \"glacier+ 1\" card","removes": ["minus1"],"adds": [ "perks/unique/gt1"]},
-        {"text": "Replace one -1 card with one +0 \"glacier+ 1\" card","removes": ["minus1"],"adds": [ "perks/unique/gt1"]},
-        {"text": "Replace one -1 card with one +0 \"glacier+ 1\" card","removes": ["minus1"],"adds": [ "perks/unique/gt1"]},
+        {"text": "Replace one -1 card with one +0 \"Glacier+ 1\" card","removes": ["minus1"],"adds": [ "perks/unique/gt1"]},
+        {"text": "Replace one -1 card with one +0 \"Glacier+ 1\" card","removes": ["minus1"],"adds": [ "perks/unique/gt1"]},
+        {"text": "Replace one -1 card with one +0 \"Glacier+ 1\" card","removes": ["minus1"],"adds": [ "perks/unique/gt1"]},
         {"removes": ["plus0","plus0"],"adds": [ "perks/plus0push2flip", "perks/plus0push2flip"]},
         {"text": "Replace one +0 card with one +2 \"Create one 1-hex icy terrain tile in a featureless hex adjacent to the target\" card","removes": ["plus0"],"adds": [ "perks/unique/gt2"]},
         {"text": "Replace one +0 card with one +2 \"Create one 1-hex icy terrain tile in a featureless hex adjacent to the target\" card","removes": ["plus0"],"adds": [ "perks/unique/gt2"]},
@@ -531,6 +531,35 @@
         {"text": "Ignore item - 1 effects and add whenever you would gain %brittle%, prevent the condition"},
         {"text": "whenever one of your ally's heals would cause your hit point value to increase beyond your maximum hit point value, gain that much Glacier"},
         {"text": "[triple] Whenever you end your turn adjacent to icy terrain, perform %heal% 1, self"}
+      ]
+    },
+    {
+      "name": "Jester Twins",
+      "color": "FFC01E3A",
+      "colorSecondary": "ff402E67",
+      "edition": "CCUG",
+      "health": [6,7,8,9,10,11,12,13,14],
+      "hidden": false,
+      "summons": {
+      },
+      "perks": [
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0poison"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0poison"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1immobilize"]},
+        {"text": "Replace one +1 card with one +2 \"Swing 3\" card","removes": ["plus1"],"adds": [ "perks/unique/jt1"]},
+        {"text": "Replace one +1 card with one +2 \"Swing 3\" card","removes": ["plus1"],"adds": [ "perks/unique/jt1"]},
+        {"text": "Replace one +1 card with one +2 \"Swing 3\" card","removes": ["plus1"],"adds": [ "perks/unique/jt1"]},
+        {"text": "Add one +0 \"Place this card in your active area. The next time you force an enemy to move, discard this card and that enemy suffers %damage% 2\"%flip% card","adds": [ "perks/unique/jt2"]},
+        {"text": "Add one +0 \"Place this card in your active area. The next time you force an enemy to move, discard this card and that enemy suffers %damage% 2\"%flip% card","adds": [ "perks/unique/jt2"]},
+        {"text": "Add one +2 \"If you are not Stacked, after this attack ability, %teleport% the other Twin to your hex and become Stacked\" card","adds": [ "perks/unique/jt3"]},
+        {"text": "Ignore scenario effects and add two \"Swing 2\"%flip% cards","adds": [ "perks/unique/jt4","perks/unique/jt4"]},
+        {"text": "If you are not Stacked, you may end your movement in a hex occupied by an ally to become Stacked on top of the ally"},
+        {"text": "[double] You may bring an additional 2-handed hand item into each scenario"},
+        {"text": "Your forced movement can move allies through enemies, and enemies through allies"}
       ]
     }
   ],
