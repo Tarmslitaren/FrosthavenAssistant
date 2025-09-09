@@ -43,10 +43,10 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                 child: ListView.builder(
                   itemCount: currentMonsters.length,
                   itemBuilder: (context, index) => ListTile(
-                    leading: Image(
+                    leading: Image.asset(
+                      cacheHeight: 75,
                       height: 30,
-                      image: AssetImage(
-                          "assets/images/monsters/${currentMonsters[index].type.gfx}.png"),
+                      "assets/images/monsters/${currentMonsters[index].type.gfx}.png",
                     ),
                     title: Text(currentMonsters[index].type.display,
                         style: const TextStyle(fontSize: 18)),

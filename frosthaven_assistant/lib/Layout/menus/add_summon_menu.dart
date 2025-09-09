@@ -81,7 +81,10 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                 });
               }
             },
-            icon: Image.asset('assets/images/summon/$summonGfx.png'),
+            icon: Image.asset(
+              'assets/images/summon/$summonGfx.png',
+              cacheHeight: 75,
+            ),
           )),
     );
   }

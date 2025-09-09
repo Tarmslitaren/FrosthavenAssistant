@@ -27,16 +27,17 @@ class CharacterTile extends StatelessWidget {
     bool characterUnlocked = _gameState.unlockedClasses.contains(character.id);
 
     return ListTile(
-      leading: Image(
+      leading: Image.asset(
+        "assets/images/class-icons/${character.name}.png",
         height: 40,
         width: 40,
+        cacheHeight: 80,
         fit: BoxFit.contain,
         color: character.hidden && !characterUnlocked ||
                 GameMethods.isObjectiveOrEscort(character)
             ? null
             : character.color,
         filterQuality: FilterQuality.medium,
-        image: AssetImage("assets/images/class-icons/${character.name}.png"),
       ),
       title: Text(
           character.hidden && !characterUnlocked ? "???" : character.name,
