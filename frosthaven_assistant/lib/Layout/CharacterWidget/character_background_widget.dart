@@ -104,11 +104,13 @@ class CharacterBackgroundWidget extends StatelessWidget {
           ),
         ],
         image: DecorationImage(
-            fit: BoxFit.fill,
-            colorFilter: hasGradient
-                ? ColorFilter.mode(color, BlendMode.softLight)
-                : ColorFilter.mode(colorSecondary, BlendMode.color),
-            image: const AssetImage("assets/images/psd/character-bar.png")),
+          fit: BoxFit.fill,
+          colorFilter: hasGradient
+              ? ColorFilter.mode(color, BlendMode.softLight)
+              : ColorFilter.mode(colorSecondary, BlendMode.color),
+          image: ResizeImage(AssetImage("assets/images/psd/character-bar.png"),
+              width: (408 * scale).toInt(), height: (58 * scale).toInt()),
+        ),
         shape: BoxShape.rectangle,
       ),
       child: Container(

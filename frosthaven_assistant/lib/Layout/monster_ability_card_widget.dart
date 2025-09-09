@@ -89,13 +89,15 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0 * scale),
               child: Image(
-                fit: BoxFit.fill,
-                height: 92.8 * scale,
-                width: 142.4 * scale,
-                image: AssetImage(frosthavenStyle
-                    ? "assets/images/psd/monsterAbility-front_fh.png"
-                    : "assets/images/psd/monsterAbility-front.png"),
-              ),
+                  fit: BoxFit.fill,
+                  height: 92.8 * scale,
+                  width: 142.4 * scale,
+                  image: ResizeImage(
+                      AssetImage(frosthavenStyle
+                          ? "assets/images/psd/monsterAbility-front_fh.png"
+                          : "assets/images/psd/monsterAbility-front.png"),
+                      height: (92.8 * scale).toInt(),
+                      width: (142.4 * scale).toInt())),
             ),
             Positioned(
                 top: frosthavenStyle ? 2 * scale : 0 * scale,
@@ -205,12 +207,14 @@ class MonsterAbilityCardWidget extends StatefulWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0 * scale),
               child: Image(
-                fit: BoxFit.fitHeight,
-                height: 91.2 * scale,
-                image: AssetImage(frosthavenStyle
-                    ? "assets/images/psd/MonsterAbility-back_fh.png"
-                    : "assets/images/psd/MonsterAbility-back.png"),
-              ),
+                  fit: BoxFit.fitHeight,
+                  height: 91.2 * scale,
+                  image: ResizeImage(
+                      AssetImage(frosthavenStyle
+                          ? "assets/images/psd/MonsterAbility-back_fh.png"
+                          : "assets/images/psd/MonsterAbility-back.png"),
+                      height: (92.8 * scale).toInt(),
+                      width: (142.4 * scale).toInt())),
             ),
             size >= 0
                 ? Positioned(

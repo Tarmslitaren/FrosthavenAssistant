@@ -113,8 +113,10 @@ class MonsterStatCardWidget extends StatelessWidget {
             height: 93.5 * scale,
             width: 167 * scale,
             fit: BoxFit.fitHeight,
-            image:
-                const AssetImage("assets/images/psd/monsterStats-normal.png"),
+            image: ResizeImage(
+                AssetImage("assets/images/psd/monsterStats-normal.png"),
+                height: (93.5 * scale).toInt(),
+                width: (167 * scale).toInt()),
           ),
         ),
         Positioned(

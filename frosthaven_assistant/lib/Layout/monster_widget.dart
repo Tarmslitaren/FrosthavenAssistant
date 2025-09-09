@@ -95,8 +95,11 @@ class MonsterWidgetState extends State<MonsterWidget> {
                 fit: BoxFit.contain,
                 height: height,
                 width: height,
-                image: AssetImage(
-                    "assets/images/monsters/${widget.data.type.gfx}.png"),
+                image: ResizeImage(
+                    AssetImage(
+                        "assets/images/monsters/${widget.data.type.gfx}.png"),
+                    width: height.toInt(),
+                    height: height.toInt()),
               ),
             ),
           )),

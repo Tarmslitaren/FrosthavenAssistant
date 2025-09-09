@@ -51,12 +51,16 @@ class TopBar extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: darkMode ? Colors.black : Colors.transparent,
                       image: DecorationImage(
-                          opacity: darkMode ? 0.4 : 1,
-                          image: AssetImage(darkMode
-                              ? 'assets/images/psd/gloomhaven-bar.png'
-                              : 'assets/images/psd/frosthaven-bar.png'),
-                          fit: BoxFit.cover,
-                          repeat: ImageRepeat.repeatX),
+                        opacity: darkMode ? 0.4 : 1,
+                        fit: BoxFit.cover,
+                        repeat: ImageRepeat.repeatX,
+                        image: ResizeImage(
+                            AssetImage(darkMode
+                                ? 'assets/images/psd/gloomhaven-bar.png'
+                                : 'assets/images/psd/frosthaven-bar.png'),
+                            height:
+                                (40 * settings.userScalingBars.value).toInt()),
+                      ),
                     ),
                   );
                 }),

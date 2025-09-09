@@ -233,15 +233,23 @@ class MainListState extends State<MainList> {
           final darkMode = getIt<Settings>().darkMode.value;
           return Container(
               decoration: BoxDecoration(
-                backgroundBlendMode: BlendMode.srcATop,
-                color: darkMode ? Colors.black : Colors.grey,
-                image: DecorationImage(
+                  backgroundBlendMode: BlendMode.srcATop,
+                  color: darkMode ? Colors.black : Colors.grey,
+                  image: DecorationImage(
                     opacity: darkMode ? 0.4 : 0.7,
                     fit: BoxFit.cover,
-                    image: AssetImage(darkMode
-                        ? 'assets/images/bg/bg.png'
-                        : 'assets/images/bg/frosthaven-bg.png')),
-              ),
+                    image: ResizeImage(
+                        AssetImage(
+                          darkMode
+                              ? 'assets/images/bg/bg.png'
+                              : 'assets/images/bg/frosthaven-bg.png',
+                        ),
+                        width: (MediaQuery.of(context).size.width).toInt(),
+                        height: (MediaQuery.of(context).size.height -
+                                80 * getIt<Settings>().userScalingBars.value)
+                            .toInt(),
+                        policy: ResizeImagePolicy.fit),
+                  )),
               child: ValueListenableBuilder<Map<String, CampaignModel>>(
                   valueListenable: _gameData.modelData,
                   builder: (context, value, child) {
