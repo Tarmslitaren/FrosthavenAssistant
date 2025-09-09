@@ -161,7 +161,7 @@ class Item extends StatelessWidget {
     var screenSize = MediaQuery.of(context).size;
     double scale = max((screenSize.height / (40 * 12)), 1);
     final Widget child = revealed
-        ? ModifierCardWidget.buildFront(data, name, scale)
+        ? ModifierCardWidget.buildFront(data, name, scale, 2)
         : ModifierCardWidget.buildRear(scale, name);
 
     return Container(margin: EdgeInsets.all(2 * scale), child: child);

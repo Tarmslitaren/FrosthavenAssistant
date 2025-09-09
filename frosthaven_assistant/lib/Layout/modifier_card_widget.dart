@@ -15,7 +15,8 @@ class ModifierCardWidget extends StatelessWidget {
     this.revealed.value = revealed;
   }
 
-  static Widget buildFront(ModifierCard card, String name, double scale) {
+  static Widget buildFront(
+      ModifierCard card, String name, double scale, double assetScale) {
     bool allies = name == "allies";
     bool isCharacter = name.isNotEmpty && !allies;
     bool imbue = card.gfx.contains("imbue");
@@ -81,8 +82,8 @@ class ModifierCardWidget extends StatelessWidget {
                 fit: BoxFit.fitHeight,
                 image: ResizeImage(AssetImage(gfx),
                     //can't set to actual size, since the scale animation would look crap
-                    width: (58.6666 * scale * 4).toInt(),
-                    height: (39 * scale * 4).toInt(),
+                    width: (58.6666 * scale * assetScale).toInt(),
+                    height: (39 * scale * assetScale).toInt(),
                     policy: ResizeImagePolicy.fit),
               ),
             ),
@@ -143,8 +144,8 @@ class ModifierCardWidget extends StatelessWidget {
               child: Image(
                 fit: BoxFit.fitHeight,
                 image: ResizeImage(AssetImage("assets/images/attack/back.png"),
-                    height: (39 * scale).toInt(),
-                    width: (58.6666 * scale).toInt()),
+                    height: (39 * scale).toInt() * 2,
+                    width: (58.6666 * scale).toInt() * 2),
               ),
             ),
             if (hasExtra)
@@ -201,7 +202,7 @@ class ModifierCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final userScalingBars = getIt<Settings>().userScalingBars.value;
     return revealed.value
-        ? ModifierCardWidget.buildFront(card, name, userScalingBars)
+        ? ModifierCardWidget.buildFront(card, name, userScalingBars, 4)
         : ModifierCardWidget.buildRear(userScalingBars, name);
   }
 }
