@@ -11,9 +11,9 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddSummonMenu extends StatefulWidget {
-  final Character character;
-
   const AddSummonMenu({super.key, required this.character});
+
+  final Character character;
 
   @override
   AddSummonMenuState createState() => AddSummonMenuState();
@@ -51,7 +51,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     }
     _summonList.addAll(_gameData.itemSummonData);
 
-    if (getIt<Settings>().showCustomContent.value == false) {
+    if (!getIt<Settings>().showCustomContent.value) {
       //-4 because there are 4 custom summons. I know.
       _summonList.removeRange(_summonList.length - 4, _summonList.length);
     }

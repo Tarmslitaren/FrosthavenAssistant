@@ -764,9 +764,11 @@ class GameMethods {
       name = "Jester Twin";
     }
 
-    MonsterInstance summon = MonsterInstance.summon(0, MonsterType.summon, name,
-        health + level * multiplier, 3, 2, 0, gfx, -1);
-    summonList.add(summon);
+    if (name.isNotEmpty) {
+      MonsterInstance summon = MonsterInstance.summon(0, MonsterType.summon,
+          name, health + level * multiplier, 3, 2, 0, gfx, -1);
+      summonList.add(summon);
+    }
   }
 
   //todo: too long method - split
@@ -1680,9 +1682,11 @@ class GameMethods {
           name = "Jester Twin";
         }
 
-        MonsterInstance summon = MonsterInstance.summon(0, MonsterType.summon,
-            name, health + level * multiplier, 3, 2, 0, gfx, -1);
-        summonList.add(summon);
+        if (name.isNotEmpty) {
+          MonsterInstance summon = MonsterInstance.summon(0, MonsterType.summon,
+              name, health + level * multiplier, 3, 2, 0, gfx, -1);
+          summonList.add(summon);
+        }
 
         break;
       }

@@ -15,18 +15,6 @@ double getScaleByReference(BuildContext context) {
   return _scaleByReference(context, referenceWidth, maxWidth);
 }
 
-//not used
-double getMainListMargin(BuildContext context) {
-  var screenSize = MediaQuery.of(context).size;
-  var width = min(screenSize.width, maxWidth);
-  double fraction = width / referenceWidth;
-  if (screenSize.width > referenceWidth) {
-    return max((screenSize.width - fraction * referenceWidth) / 2, 0);
-  }
-
-  return 0.0;
-}
-
 bool modifiersFitOnBar(BuildContext context) {
   Settings settings = getIt<Settings>();
   double screenWidth = MediaQuery.of(context).size.width;
