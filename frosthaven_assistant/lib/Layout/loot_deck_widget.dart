@@ -269,9 +269,15 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                       width: 35 * userScalingBars,
                                       top: 24 * userScalingBars / 2,
                                       left: 2 * userScalingBars,
-                                      child: Image.asset(
+                                      child: Image(
                                           color: currentCharacterColor,
-                                          'assets/images/class-icons/$currentCharacterName.png'),
+                                          image: ResizeImage(
+                                            AssetImage(
+                                                'assets/images/class-icons/$currentCharacterName.png'),
+                                            height:
+                                                (35 * userScalingBars).toInt() *
+                                                    2,
+                                          )),
                                     )
                                 ])),
                             SizedBox(

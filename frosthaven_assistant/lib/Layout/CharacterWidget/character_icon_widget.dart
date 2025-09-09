@@ -67,8 +67,7 @@ class CharacterIconWidget extends StatelessWidget {
                 image: ResizeImage(
                   AssetImage(
                       "assets/images/class-icons/${character.characterClass.name}.png"),
-                  width: (scaledHeight * 0.6).toInt(),
-                  height: (scaledHeight * 0.6).toInt(),
+                  height: (scaledHeight * 0.6).toInt() * 2,
                 )));
   }
 }

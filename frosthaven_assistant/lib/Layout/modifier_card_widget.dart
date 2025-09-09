@@ -105,8 +105,8 @@ class ModifierCardWidget extends StatelessWidget {
                     color: Colors.white,
                     image: ResizeImage(
                       AssetImage(extraGfx),
-                      width: (7.5 * scale).toInt(),
-                      height: (7.5 * scale).toInt(),
+                      //width: (7.5 * scale).toInt(),
+                      height: (7.5 * scale).toInt() * 8,
                     )),
               ),
           ],
@@ -170,8 +170,8 @@ class ModifierCardWidget extends StatelessWidget {
                     color: Colors.white,
                     image: ResizeImage(
                       AssetImage(extraGfx),
-                      width: (20 * scale).toInt(),
-                      height: (20 * scale).toInt(),
+                      //width: (20 * scale).toInt(),
+                      height: (20 * scale).toInt() * 4,
                     )),
               ),
           ],

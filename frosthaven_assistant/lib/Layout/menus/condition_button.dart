@@ -129,10 +129,12 @@ class ConditionButton extends StatelessWidget {
                                     image: const AssetImage(
                                         "assets/images/psd/class-token-bg.png")),
                                 Image(
+                                    height: (24 * scale * 0.65),
+                                    width: (24 * scale * 0.65),
                                     image: ResizeImage(
                                       AssetImage(imagePath),
-                                      height: (24 * scale * 0.65).toInt(),
-                                      width: (24 * scale * 0.65).toInt(),
+                                      height: (24 * scale * 0.65).toInt() * 4,
+                                      //width: (24 * scale * 0.65).toInt(),
                                     ),
                                     filterQuality: FilterQuality.medium),
                               ])

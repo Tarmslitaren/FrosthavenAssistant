@@ -23,6 +23,7 @@ class LootCardsMenu extends StatefulWidget {
 
 class LootCardsMenuState extends State<LootCardsMenu> {
   final GameState _gameState = getIt<GameState>();
+  final scrollController = ScrollController();
 
   @override
   initState() {
@@ -60,8 +61,6 @@ class LootCardsMenuState extends State<LootCardsMenu> {
           ),
         ));
   }
-
-  final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -215,7 +214,7 @@ class Item extends StatelessWidget {
 
     late final Widget child;
 
-    child = LootCardWidget.buildFront(data, scale);
+    child = LootCardWidget.buildFront(data, scale, false);
 
     return Container(
         margin: EdgeInsets.all(2 * scale),
