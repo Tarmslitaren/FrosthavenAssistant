@@ -6,15 +6,15 @@ import '../Resource/state/game_state.dart';
 import '../services/service_locator.dart';
 
 class HealthWheelController extends StatefulWidget {
-  final String figureId;
-  final String? ownerId;
-  final Widget child;
-
   const HealthWheelController(
       {super.key,
       required this.figureId,
       required this.ownerId,
       required this.child});
+
+  final String figureId;
+  final String? ownerId;
+  final Widget child;
 
   @override
   HealthWheelControllerState createState() => HealthWheelControllerState();
@@ -39,8 +39,8 @@ class HealthWheelControllerState extends State<HealthWheelController> {
 
   void hideOverlay() {
     if (entry != null && entry!.mounted) {
-      entry!.remove();
-      entry!.dispose();
+      entry?.remove();
+      entry?.dispose();
       entry = null;
       getIt<GameState>().updateList.value++;
     }

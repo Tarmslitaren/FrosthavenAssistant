@@ -11,6 +11,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/game_data.dart';
 import '../Resource/settings.dart';
+import 'menus/modifier_card_zoom.dart';
 
 class ModifierDeckWidget extends StatefulWidget {
   const ModifierDeckWidget({super.key, required this.name});
@@ -397,6 +398,16 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 color: Colors.transparent,
                                 child: InkWell(
                                     focusColor: const Color(0x44000000),
+                                    onLongPress: () {
+                                      //show zoomed in card
+                                      if (deck.discardPile.isNotEmpty) {
+                                        openDialog(
+                                            context,
+                                            ModifierCardZoom(
+                                                name: widget.name,
+                                                card: deck.discardPile.peek));
+                                      }
+                                    },
                                     onTap: () {
                                       setState(() {
                                         openDialog(context,

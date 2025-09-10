@@ -576,10 +576,7 @@ class MonsterStatCardWidget extends StatelessWidget {
         child: Stack(children: [
           GestureDetector(
               onDoubleTap: () {
-                openDialog(
-                    context,
-                    //problem: context is of stat card widget, not the + button
-                    StatCardZoom(monster: data));
+                openDialog(context, StatCardZoom(monster: data));
               },
               child: buildCard(data, scale)),
           if (!isBoss)

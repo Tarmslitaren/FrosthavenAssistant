@@ -67,6 +67,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //debugInvertOversizedImages = true;
+    //double wtf = MediaQuery.of(context).devicePixelRatio;
 
     //call after keyboard
     if (Platform.isIOS || Platform.isAndroid) {
