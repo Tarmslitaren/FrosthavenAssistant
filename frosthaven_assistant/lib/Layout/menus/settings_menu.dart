@@ -273,6 +273,10 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       settings.showAmdDeck.value = value!;
+                                      if (!settings.showAmdDeck.value) {
+                                        //disable also character amd
+                                        settings.showCharacterAMD.value = false;
+                                      }
                                       settings.saveToDisk();
                                       getIt<GameState>().updateAllUI();
                                     });
@@ -284,6 +288,10 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       settings.showCharacterAMD.value = value!;
+                                      if (settings.showCharacterAMD.value) {
+                                        //enable also monster amd
+                                        settings.showAmdDeck.value = true;
+                                      }
                                       settings.saveToDisk();
                                       getIt<GameState>().updateAllUI();
                                     });
