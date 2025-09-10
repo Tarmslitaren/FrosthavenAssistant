@@ -249,6 +249,24 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
 
           bool hasPlus0Card = deck.hasCard("plus0");
 
+          int nrOfEnfeebles = 0;
+          int nrOfEmpowers = 0;
+          if (hasVimthreader) {
+            nrOfEnfeebles++;
+            nrOfEmpowers++;
+          }
+          if (hasLifespeaker) {
+            nrOfEnfeebles++;
+          }
+          if (hasIncarnate) {
+            nrOfEnfeebles++;
+            nrOfEmpowers++;
+          }
+          final hasMoreThanOneEnfeeble = monsterDeck && nrOfEnfeebles > 1;
+          final hasMoreThanOneEmpower =
+              ((isCharacter || name == "allies") && nrOfEmpowers > 1) ||
+                  isCharacter && character?.id == "Ruinmaw" && nrOfEmpowers > 0;
+
           return Container(
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
@@ -411,7 +429,10 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                               WrapCrossAlignment.center,
                                           children: [
                                               Text("Add Party\n Card:"),
-                                              buildPartyButton(1, widget.name),
+                                              buildPartyButton(
+                                                  1,
+                                                  widget
+                                                      .name), //todo: make own menu for this, just like for gh2e special
                                               buildPartyButton(2, widget.name),
                                               buildPartyButton(3, widget.name),
                                               buildPartyButton(4, widget.name),
@@ -436,7 +457,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     figureId: "unknown",
                                     ownerId: "unknown",
                                     scale: 1),
-                                if (hasIncarnate)
+                                if (hasIncarnate && !isCharacter)
                                   CounterButton(
                                       notifier:
                                           deck.getRemovable("in-enfeeble"),
@@ -445,8 +466,9 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       maxValue: 10,
                                       image:
                                           "assets/images/abilities/enfeeble.png",
-                                      extraImage:
-                                          "assets/images/class-icons/incarnate.png",
+                                      extraImage: hasMoreThanOneEnfeeble
+                                          ? "assets/images/class-icons/incarnate.png"
+                                          : null,
                                       showTotalValue: true,
                                       color: Colors.white,
                                       figureId: "unknown",
@@ -461,8 +483,9 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       maxValue: 10,
                                       image:
                                           "assets/images/abilities/empower.png",
-                                      extraImage:
-                                          "assets/images/class-icons/incarnate.png",
+                                      extraImage: hasMoreThanOneEmpower
+                                          ? "assets/images/class-icons/incarnate.png"
+                                          : null,
                                       showTotalValue: true,
                                       color: Colors.white,
                                       figureId: "unknown",
@@ -476,8 +499,9 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       maxValue: 12,
                                       image:
                                           "assets/images/abilities/empower.png",
-                                      extraImage:
-                                          "assets/images/class-icons/ruinmaw.png",
+                                      extraImage: hasMoreThanOneEmpower
+                                          ? "assets/images/class-icons/ruinmaw.png"
+                                          : null,
                                       showTotalValue: true,
                                       color: Colors.white,
                                       figureId: "unknown",
@@ -492,8 +516,9 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       maxValue: 10,
                                       image:
                                           "assets/images/abilities/empower2.png",
-                                      extraImage:
-                                          "assets/images/class-icons/vimthreader.png",
+                                      extraImage: hasMoreThanOneEmpower
+                                          ? "assets/images/class-icons/vimthreader.png"
+                                          : null,
                                       showTotalValue: true,
                                       color: Colors.white,
                                       figureId: "unknown",
@@ -523,8 +548,9 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       maxValue: 10,
                                       image:
                                           "assets/images/abilities/enfeeble2.png",
-                                      extraImage:
-                                          "assets/images/class-icons/vimthreader.png",
+                                      extraImage: hasMoreThanOneEnfeeble
+                                          ? "assets/images/class-icons/vimthreader.png"
+                                          : null,
                                       showTotalValue: true,
                                       color: Colors.white,
                                       figureId: "unknown",
@@ -555,8 +581,9 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       maxValue: 15,
                                       image:
                                           "assets/images/abilities/enfeeble2.png",
-                                      extraImage: //todo: only add extra image if more than one enfeeble character present
-                                          "assets/images/class-icons/lifespeaker.png",
+                                      extraImage: hasMoreThanOneEnfeeble
+                                          ? "assets/images/class-icons/lifespeaker.png"
+                                          : null,
                                       showTotalValue: true,
                                       color: Colors.white,
                                       figureId: "unknown",

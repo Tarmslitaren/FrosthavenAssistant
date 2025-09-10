@@ -153,7 +153,7 @@ class StatusMenuState extends State<StatusMenu> {
             icon: Image.asset('assets/images/psd/add.png'),
             onPressed: () {
               if (notifier.value < maxValue) {
-               // _gameState.action(ChangeChillCommand(1, figureId, ownerId));
+                // _gameState.action(ChangeChillCommand(1, figureId, ownerId));
                 _gameState.action(
                     AddConditionCommand(Condition.chill, figureId, ownerId));
               }
@@ -459,6 +459,27 @@ class StatusMenuState extends State<StatusMenu> {
 
                     final isAlly = deck.name == "allies";
 
+                    int nrOfEnfeebles = 0;
+                    int nrOfEmpowers = 0;
+                    if (hasVimthreader) {
+                      nrOfEnfeebles++;
+                      nrOfEmpowers++;
+                    }
+                    if (hasLifespeaker) {
+                      nrOfEnfeebles++;
+                    }
+                    if (hasIncarnate) {
+                      nrOfEnfeebles++;
+                      nrOfEmpowers++;
+                    }
+                    final hasMoreThanOneEnfeeble =
+                        isMonster && nrOfEnfeebles > 1;
+                    final hasMoreThanOneEmpower =
+                        ((isCharacter || isAlly) && nrOfEmpowers > 1) ||
+                            isCharacter &&
+                                character?.id == "Ruinmaw" &&
+                                nrOfEmpowers > 0;
+
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -513,15 +534,19 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId: figureId,
                               ownerId: ownerId,
                               scale: scale),
-                        if (showMonsterAmd && hasIncarnate)
+                        if (canBeCursed &&
+                            showMonsterAmd &&
+                            hasIncarnate &&
+                            character == null)
                           CounterButton(
                               notifier: deck.getRemovable("in-enfeeble"),
                               command: ChangeEnfeebleCommand(
                                   0, "in-enfeeble", figureId, ownerId),
                               maxValue: 10,
                               image: "assets/images/abilities/enfeeble.png",
-                              extraImage:
-                                  "assets/images/class-icons/incarnate.png",
+                              extraImage: hasMoreThanOneEnfeeble
+                                  ? "assets/images/class-icons/incarnate.png"
+                                  : null,
                               showTotalValue: true,
                               color: Colors.white,
                               figureId: figureId,
@@ -534,8 +559,9 @@ class StatusMenuState extends State<StatusMenu> {
                                   0, "in-empower", figureId, ownerId),
                               maxValue: 10,
                               image: "assets/images/abilities/empower.png",
-                              extraImage:
-                                  "assets/images/class-icons/incarnate.png",
+                              extraImage: hasMoreThanOneEmpower
+                                  ? "assets/images/class-icons/incarnate.png"
+                                  : null,
                               showTotalValue: true,
                               color: Colors.white,
                               figureId: figureId,
@@ -550,8 +576,9 @@ class StatusMenuState extends State<StatusMenu> {
                                   0, "rm-empower", figureId, ownerId),
                               maxValue: 12,
                               image: "assets/images/abilities/empower.png",
-                              extraImage:
-                                  "assets/images/class-icons/ruinmaw.png",
+                              extraImage: hasMoreThanOneEmpower
+                                  ? "assets/images/class-icons/ruinmaw.png"
+                                  : null,
                               showTotalValue: true,
                               color: Colors.white,
                               figureId: figureId,
@@ -566,8 +593,9 @@ class StatusMenuState extends State<StatusMenu> {
                                   ChangeEmpowerCommand.deck(deck, "vi-empower"),
                               maxValue: 10,
                               image: "assets/images/abilities/empower2.png",
-                              extraImage:
-                                  "assets/images/class-icons/vimthreader.png",
+                              extraImage: hasMoreThanOneEmpower
+                                  ? "assets/images/class-icons/vimthreader.png"
+                                  : null,
                               showTotalValue: true,
                               color: Colors.white,
                               figureId: "unknown",
@@ -588,7 +616,8 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId: "unknown",
                               ownerId: "unknown",
                               scale: scale),
-                        if (showMonsterAmd &&
+                        if (canBeCursed &&
+                            showMonsterAmd &&
                             (!isCharacter || !isSummon) &&
                             hasVimthreader)
                           CounterButton(
@@ -597,14 +626,16 @@ class StatusMenuState extends State<StatusMenu> {
                                   deck, "vi-enfeeble"),
                               maxValue: 10,
                               image: "assets/images/abilities/enfeeble2.png",
-                              extraImage:
-                                  "assets/images/class-icons/vimthreader.png",
+                              extraImage: hasMoreThanOneEnfeeble
+                                  ? "assets/images/class-icons/vimthreader.png"
+                                  : null,
                               showTotalValue: true,
                               color: Colors.white,
                               figureId: "unknown",
                               ownerId: "unknown",
                               scale: scale),
-                        if (showMonsterAmd &&
+                        if (canBeCursed &&
+                            showMonsterAmd &&
                             (!isCharacter || !isSummon) &&
                             hasVimthreader)
                           CounterButton(
@@ -619,17 +650,19 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId: "unknown",
                               ownerId: "unknown",
                               scale: scale),
-                        if ((!isCharacter ||
+                        if (canBeCursed &&
+                            (!isCharacter ||
                                 widget.characterId == "Lifespeaker") &&
                             hasLifespeaker)
                           CounterButton(
                               notifier: deck.getRemovable("li-enfeeble"),
-                              command: ChangeEmpowerCommand.deck(
-                                  deck, "li-enfeeble"),
+                              command: ChangeEmpowerCommand
+                                  .deck(deck, "li-enfeeble"),
                               maxValue: 15,
                               image: "assets/images/abilities/enfeeble2.png",
-                              extraImage: //todo: only add extra image if more than one enfeeble character present
-                                  "assets/images/class-icons/lifespeaker.png",
+                              extraImage: hasMoreThanOneEnfeeble
+                                  ? "assets/images/class-icons/lifespeaker.png"
+                                  : null,
                               showTotalValue: true,
                               color: Colors.white,
                               figureId: "unknown",

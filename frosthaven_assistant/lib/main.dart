@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
-    debugInvertOversizedImages = true;
+    //debugInvertOversizedImages = true;
 
     //call after keyboard
     if (Platform.isIOS || Platform.isAndroid) {
