@@ -973,6 +973,10 @@ class GameMethods {
       if (item.type == "ResetRound") {
         GameMethods.resetRound(s, 1, false);
       }
+      if (item.type == "Unlock") {
+        unlockClass(s, item.name);
+        initMessage += item.note;
+      }
     }
 
     //in case of spawns at round 1 start of round, add to roomMonsterData

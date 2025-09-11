@@ -437,6 +437,36 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                               buildPartyButton(3, widget.name),
                                               buildPartyButton(4, widget.name),
                                             ]),
+                                if (isCharacter &&
+                                    _gameState.unlockedClasses
+                                        .contains("Demons"))
+                                  IconButton(
+                                    icon:
+                                        Image.asset("assets/images/demons.png"),
+                                    onPressed: () {
+                                      //todo: open menu
+                                    },
+                                  ),
+                                if (isCharacter &&
+                                    _gameState.unlockedClasses
+                                        .contains("Merchant-Guild"))
+                                  IconButton(
+                                    icon: Image.asset(
+                                        "assets/images/merchant-guild.png"),
+                                    onPressed: () {
+                                      //todo: open menu
+                                    },
+                                  ),
+                                if (isCharacter &&
+                                    _gameState.unlockedClasses
+                                        .contains("Military"))
+                                  IconButton(
+                                    icon: Image.asset(
+                                        "assets/images/military.png"),
+                                    onPressed: () {
+                                      //todo: open menu
+                                    },
+                                  ),
                                 CounterButton(
                                     notifier: deck.getRemovable("bless"),
                                     command: ChangeBlessCommand.deck(deck),

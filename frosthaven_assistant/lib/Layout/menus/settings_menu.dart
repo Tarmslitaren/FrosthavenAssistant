@@ -393,8 +393,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 ],
                               ),
                               ListTile(
-                                  title:
-                                      const Text("Clear unlocked characters"),
+                                  title: const Text(
+                                      "Clear unlocked characters and stuff"),
                                   onTap: () {
                                     setState(() {
                                       getIt<GameState>().action(

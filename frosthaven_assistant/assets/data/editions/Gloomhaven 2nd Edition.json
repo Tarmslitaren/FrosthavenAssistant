@@ -5665,18 +5665,29 @@
     },
     "#23A Gloomhaven Square A (Demon Allies)": {
       "monsters": ["Jekserah 23 (2e)", "Earth Demon (2e)", "Night Demon (2e)", "Cultist (2e)", "Living Bones (2e)", "Living Corpse (2e)"],
+      "sections": {
+        "#57.3": {
+          "special": [
+            {
+              "type": "Unlock",
+              "note": "Demons Envelope Now Unlocked!",
+              "name": "Demons"
+            }
+          ]
+        }
+      },
       "special": [
-        {
-          "type": "Allies",
-          "list": ["Earth Demon (2e)", "Night Demon (2e)"]
-        },
-        {
-          "type": "Timer",
-          "list": [1],
-          "startOfRound": true,
-          "note": "Spawn an Earth Demon at A. It is Elite for 3-4 characters. Spawn a Night Demon at B. It is Elite for 4 characters.",
-          "name": "spawn 1"
-        }]
+      {
+        "type": "Allies",
+        "list": ["Earth Demon (2e)", "Night Demon (2e)"]
+      },
+      {
+        "type": "Timer",
+        "list": [1],
+        "startOfRound": true,
+        "note": "Spawn an Earth Demon at A. It is Elite for 3-4 characters. Spawn a Night Demon at B. It is Elite for 4 characters.",
+        "name": "spawn 1"
+      }]
     },
     "#23B Gloomhaven Square A (Military Allies)": {
       "monsters": ["Jekserah 23 (2e)","City Archer (2e)", "City Guard (2e)", "Cultist (2e)", "Living Bones (2e)", "Living Corpse (2e)"],
@@ -5942,7 +5953,22 @@
           ]
         },
         "#10.1": {
-          "initialMessage": "1st Printing Errata: Add Event R-37 in addition to R-38."
+          "special": [
+            {
+              "type": "Unlock",
+              "name": "Merchant-Guild",
+              "note": "Merchant Guild Envelope Now Unlocked!\n1st Printing Errata: Add Event R-37 in addition to R-38."
+            }
+          ]
+        },
+        "#50.2": {
+          "special": [
+            {
+              "type": "Unlock",
+              "note": "Military Envelope Now Unlocked!",
+              "name": "Military"
+            }
+          ]
         }
       }
     },
