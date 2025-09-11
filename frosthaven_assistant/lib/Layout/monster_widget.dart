@@ -129,6 +129,10 @@ class MonsterWidgetState extends State<MonsterWidget> {
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
     double height = scale * 96;
+
+    final specialDisabled =
+        GameMethods.isInactiveForRule(widget.data.type.name);
+
     return ValueListenableBuilder<int>(
         valueListenable: getIt<GameState>().updateList,
         builder: (context, value, child) {
@@ -136,6 +140,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
             ColorFiltered(
                 colorFilter: (widget.data.monsterInstances.isNotEmpty ||
                             widget.data.isActive) &&
+                        !specialDisabled &&
                         (widget.data.turnState.value != TurnsState.done ||
                             getIt<GameState>().roundState.value ==
                                 RoundState.chooseInitiative)
@@ -149,8 +154,9 @@ class MonsterWidgetState extends State<MonsterWidget> {
                     children: [
                       getIt<GameState>().roundState.value ==
                                   RoundState.playTurns &&
-                              (widget.data.monsterInstances.isNotEmpty ||
-                                  widget.data.isActive)
+                              ((widget.data.monsterInstances.isNotEmpty ||
+                                      widget.data.isActive) &&
+                                  !specialDisabled)
                           ? InkWell(
                               onTap: () {
                                 getIt<GameState>()

@@ -115,7 +115,8 @@ class GameMethods {
       for (var item in _gameState.currentList) {
         if (item is Monster) {
           if (item.type.deck == deck.name) {
-            if (item.monsterInstances.isNotEmpty || item.isActive) {
+            if ((item.monsterInstances.isNotEmpty || item.isActive) &&
+                !isInactiveForRule(item.type.name)) {
               if (deck.lastRoundDrawn != _gameState.totalRounds.value) {
                 //do not draw new card in case drawn already this round
                 deck.draw(stateModifier);
@@ -128,12 +129,23 @@ class GameMethods {
     }
   }
 
+  static bool isInactiveForRule(String monsterId) {
+    final rule = _gameState.scenarioSpecialRules.firstWhereOrNull(
+        (rule) => rule.type == "InactiveMonster" && rule.name == monsterId);
+    if (rule != null && rule.list.contains(_gameState.round.value)) {
+      return true;
+    }
+    return false;
+  }
+
   static void drawAbilityCards(_StateModifier stateModifier) {
     for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
       for (var item in _gameState.currentList) {
         if (item is Monster) {
           if (item.type.deck == deck.name) {
-            if (item.monsterInstances.isNotEmpty || item.isActive) {
+            bool specialInactive = isInactiveForRule(item.type.name);
+            if ((item.monsterInstances.isNotEmpty && !specialInactive) ||
+                (item.isActive && !specialInactive)) {
               deck.draw(stateModifier);
               //only draw once from each deck
               break;
@@ -321,7 +333,7 @@ class GameMethods {
 
         //find the deck
         for (var item in _gameState.currentAbilityDecks) {
-          if (item.name == a.type.deck) {
+          if (item.name == a.type.deck && item.discardPile.isNotEmpty) {
             aInitiative = item.discardPile.peek.initiative;
           }
         }
@@ -337,7 +349,7 @@ class GameMethods {
         }
         //find the deck
         for (var item in _gameState.currentAbilityDecks) {
-          if (item.name == b.type.deck) {
+          if (item.name == b.type.deck && item.discardPile.isNotEmpty) {
             bInitiative = item.discardPile.peek.initiative;
           }
         }
@@ -1884,7 +1896,8 @@ class GameMethods {
     for (; newIndex < _gameState.currentList.length; newIndex++) {
       ListItemData data = _gameState.currentList[newIndex];
       if (data is Monster) {
-        if (data.monsterInstances.isNotEmpty || data.isActive) {
+        if ((data.monsterInstances.isNotEmpty || data.isActive) &&
+            !isInactiveForRule(data.type.name)) {
           if (data.turnState.value == TurnsState.done) {
             reapplyConditionsFromListItem(s, data);
           }

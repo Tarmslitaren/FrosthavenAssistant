@@ -6712,6 +6712,7 @@
       "monsters": ["Flame Demon (2e)", "Frost Demon (2e)", "Giant Viper (2e)", "Ooze (2e)"],
       "special": [
         {
+          "todo": "double check that it is correct",
           "type": "Timer",
           "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
           "startOfRound": true,
@@ -6722,6 +6723,30 @@
           "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
           "startOfRound": true,
           "note": "Flame Demons and Frost Demons are active."
+        },
+        {
+          "type": "InactiveMonster",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
+          "startOfRound": true,
+          "name": "Ooze (2e)"
+        },
+        {
+          "type": "InactiveMonster",
+          "list": [2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32],
+          "startOfRound": true,
+          "name": "Giant Viper (2e)"
+        },
+        {
+          "type": "InactiveMonster",
+          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": true,
+          "name": "Flame Demon (2e)"
+        },
+        {
+          "type": "InactiveMonster",
+          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "startOfRound": true,
+          "name": "Frost Demon (2e)"
         }
       ]
     },

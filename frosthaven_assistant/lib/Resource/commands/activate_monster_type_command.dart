@@ -3,9 +3,9 @@ import '../enums.dart';
 import '../state/game_state.dart';
 
 class ActivateMonsterTypeCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
   final String name;
   final bool activate;
+  final GameState _gameState = getIt<GameState>();
 
   ActivateMonsterTypeCommand(this.name, this.activate);
 
@@ -21,11 +21,13 @@ class ActivateMonsterTypeCommand extends Command {
       }
     }
     if (activate) {
-      if (getIt<GameState>().roundState.value == RoundState.chooseInitiative) {
+      final roundState = _gameState.roundState.value;
+      if (roundState == RoundState.chooseInitiative) {
         GameMethods.sortCharactersFirst(stateAccess);
-      } else if (getIt<GameState>().roundState.value == RoundState.playTurns) {
+      } else if (roundState == RoundState.playTurns) {
         GameMethods.drawAbilityCardFromInactiveDeck(stateAccess);
-        GameMethods.sortItemToPlace(stateAccess, name, GameMethods.getInitiative(monster!));
+        GameMethods.sortItemToPlace(
+            stateAccess, name, GameMethods.getInitiative(monster!));
       }
     }
     if (getIt<GameState>().roundState.value == RoundState.playTurns) {

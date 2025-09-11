@@ -25,7 +25,7 @@ class MonsterStatCardWidget extends StatelessWidget {
   static void _handleAddPressed(
       Monster data, BuildContext context, bool left, bool isBoss) {
     Settings settings = getIt<Settings>();
-    if (settings.noStandees.value == true) {
+    if (settings.noStandees.value) {
       getIt<GameState>()
           .action(ActivateMonsterTypeCommand(data.id, !data.isActive));
       return;
@@ -43,7 +43,7 @@ class MonsterStatCardWidget extends StatelessWidget {
                   : MonsterType.elite,
           false);
     } else if (data.monsterInstances.length < data.type.count - 1) {
-      if (settings.randomStandees.value == true) {
+      if (settings.randomStandees.value) {
         //todo: no logic in layout
         int standeeNr = GameMethods.getRandomStandee(data);
         if (getIt<GameState>().currentCampaign.value == "Buttons and Bugs") {
@@ -82,7 +82,7 @@ class MonsterStatCardWidget extends StatelessWidget {
 
     //normal stats calculated:
     String health = normal.health.toString();
-    if (noCalculationSetting == false) {
+    if (!noCalculationSetting) {
       int? healthValue = StatCalculator.calculateFormula(normal.health);
       if (healthValue != null) {
         health = healthValue.toString();
@@ -90,7 +90,7 @@ class MonsterStatCardWidget extends StatelessWidget {
     }
 
     String move = normal.move.toString();
-    if (noCalculationSetting == false) {
+    if (!noCalculationSetting) {
       int? moveValue = StatCalculator.calculateFormula(normal.move);
       if (moveValue != null) {
         move = moveValue.toString();
@@ -98,7 +98,7 @@ class MonsterStatCardWidget extends StatelessWidget {
     }
 
     String attack = normal.attack.toString();
-    if (noCalculationSetting == false) {
+    if (!noCalculationSetting) {
       int? attackValue = StatCalculator.calculateFormula(normal.attack);
       if (attackValue != null) {
         attack = attackValue.toString();
