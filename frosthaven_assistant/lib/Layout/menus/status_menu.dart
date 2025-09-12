@@ -332,7 +332,8 @@ class StatusMenuState extends State<StatusMenu> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(name, style: getTitleTextStyle(scale)),
+                      Text(name,
+                          style: getTitleTextStyle(getModalMenuScale(context))),
                       if (figure is MonsterInstance)
                         ValueListenableBuilder<int>(
                             valueListenable: getIt<GameState>().updateList,
@@ -622,7 +623,7 @@ class StatusMenuState extends State<StatusMenu> {
                             hasVimthreader)
                           CounterButton(
                               notifier: deck.getRemovable("vi-enfeeble"),
-                              command: ChangeEmpowerCommand.deck(
+                              command: ChangeEnfeebleCommand.deck(
                                   deck, "vi-enfeeble"),
                               maxValue: 10,
                               image: "assets/images/abilities/enfeeble2.png",
@@ -640,7 +641,7 @@ class StatusMenuState extends State<StatusMenu> {
                             hasVimthreader)
                           CounterButton(
                               notifier: deck.getRemovable("vi-gr-enfeeble"),
-                              command: ChangeEmpowerCommand.deck(
+                              command: ChangeEnfeebleCommand.deck(
                                   deck, "vi-gr-enfeeble"),
                               maxValue: 5,
                               image:
@@ -656,7 +657,7 @@ class StatusMenuState extends State<StatusMenu> {
                             hasLifespeaker)
                           CounterButton(
                               notifier: deck.getRemovable("li-enfeeble"),
-                              command: ChangeEmpowerCommand
+                              command: ChangeEnfeebleCommand
                                   .deck(deck, "li-enfeeble"),
                               maxValue: 15,
                               image: "assets/images/abilities/enfeeble2.png",

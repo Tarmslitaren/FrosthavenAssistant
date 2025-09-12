@@ -21,6 +21,7 @@ class ModifierCardWidget extends StatelessWidget {
     bool isCharacter = name.isNotEmpty && !allies;
     bool imbue = card.gfx.contains("imbue");
     bool imbue2 = card.gfx.contains("imbue2");
+
     bool hasExtra = card.gfx.startsWith("P") || allies || imbue;
     String gfx = card.gfx;
     String extraGfx = "";
@@ -38,6 +39,20 @@ class ModifierCardWidget extends StatelessWidget {
       extraGfx = 'assets/images/attack/allies.png';
     } else if (isCharacter) {
       extraGfx = 'assets/images/class-icons/$name.png';
+    }
+
+    if (card.gfx.startsWith("Demons")) {
+      gfx = gfx.replaceAll("Demons-", "");
+      extraGfx = 'assets/images/Demons.png';
+      hasExtra = true;
+    } else if (card.gfx.startsWith("Merchant-Guild")) {
+      gfx = gfx.replaceAll("Merchant-Guild-", "");
+      extraGfx = 'assets/images/Merchant-Guild.png';
+      hasExtra = true;
+    } else if (card.gfx.startsWith("Military")) {
+      gfx = gfx.replaceAll("Military-", "");
+      extraGfx = 'assets/images/Military.png';
+      hasExtra = true;
     }
 
     //deal with perks. this part will be subject to change when/if data changes to accommodate building cards from parts

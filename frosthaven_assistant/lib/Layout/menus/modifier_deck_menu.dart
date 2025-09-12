@@ -31,6 +31,7 @@ import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import '../counter_button.dart';
+import 'gh2e_faction_amd_card_menu.dart';
 
 class ModifierDeckMenu extends StatefulWidget {
   const ModifierDeckMenu({super.key, required this.name});
@@ -444,7 +445,12 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     icon:
                                         Image.asset("assets/images/demons.png"),
                                     onPressed: () {
-                                      //todo: open menu
+                                      openDialog(
+                                          context,
+                                          GH2eFactionAMDCardMenu(
+                                            faction: "Demons",
+                                            name: widget.name,
+                                          ));
                                     },
                                   ),
                                 if (isCharacter &&
@@ -454,7 +460,12 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     icon: Image.asset(
                                         "assets/images/merchant-guild.png"),
                                     onPressed: () {
-                                      //todo: open menu
+                                      openDialog(
+                                          context,
+                                          GH2eFactionAMDCardMenu(
+                                            faction: "Merchant-Guild",
+                                            name: widget.name,
+                                          ));
                                     },
                                   ),
                                 if (isCharacter &&
@@ -464,7 +475,12 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     icon: Image.asset(
                                         "assets/images/military.png"),
                                     onPressed: () {
-                                      //todo: open menu
+                                      openDialog(
+                                          context,
+                                          GH2eFactionAMDCardMenu(
+                                            faction: "Military",
+                                            name: widget.name,
+                                          ));
                                     },
                                   ),
                                 CounterButton(
@@ -573,7 +589,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                   CounterButton(
                                       notifier:
                                           deck.getRemovable("vi-enfeeble"),
-                                      command: ChangeEmpowerCommand.deck(
+                                      command: ChangeEnfeebleCommand.deck(
                                           deck, "vi-enfeeble"),
                                       maxValue: 10,
                                       image:
@@ -590,7 +606,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                   CounterButton(
                                       notifier:
                                           deck.getRemovable("vi-gr-enfeeble"),
-                                      command: ChangeEmpowerCommand.deck(
+                                      command: ChangeEnfeebleCommand.deck(
                                           deck, "vi-gr-enfeeble"),
                                       maxValue: 5,
                                       image:
@@ -606,7 +622,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                   CounterButton(
                                       notifier:
                                           deck.getRemovable("li-enfeeble"),
-                                      command: ChangeEmpowerCommand.deck(
+                                      command: ChangeEnfeebleCommand.deck(
                                           deck, "li-enfeeble"),
                                       maxValue: 15,
                                       image:

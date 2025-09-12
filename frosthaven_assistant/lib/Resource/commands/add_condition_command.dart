@@ -16,7 +16,7 @@ class AddConditionCommand extends Command {
       newList.add(condition);
       figure.conditions.value = newList;
 
-      if(condition == Condition.chill) {
+      if (condition == Condition.chill) {
         figure.setChill(stateAccess, figure.chill.value + 1);
       }
 
@@ -37,10 +37,6 @@ class AddConditionCommand extends Command {
 
   @override
   void undo() {
-    /*List<Condition> newList = [];
-    newList.addAll(figure.conditions.value);
-    newList.remove(condition);
-    figure.conditions.value = newList;*/
     getIt<GameState>().updateList.value++;
   }
 

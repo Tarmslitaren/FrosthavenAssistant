@@ -2077,6 +2077,41 @@ class GameMethods {
     return hasLootDeck;
   }
 
+  static List<ModifierCard> getFactionCards(String faction) {
+    List<ModifierCard> retVal = [];
+    if (faction == "Demons") {
+      retVal.add(ModifierCard(CardType.add, "Demons-perks/plus1any"));
+      retVal
+          .add(ModifierCard(CardType.add, "Demons-perks/plus1retaliate1flip"));
+      retVal.add(ModifierCard(CardType.add, "Demons-perks/plus0wardallyflip"));
+      retVal.add(ModifierCard(CardType.add, "Demons-perks/unique/fuck3"));
+    } else if (faction == "Merchant-Guild") {
+      retVal.add(ModifierCard(CardType.add, "Merchant-Guild-perks/plus1curse"));
+      retVal.add(ModifierCard(CardType.add, "Merchant-Guild-perks/plus1wound"));
+      retVal.add(
+          ModifierCard(CardType.add, "Merchant-Guild-perks/plus0heal2flip"));
+      retVal
+          .add(ModifierCard(CardType.add, "Merchant-Guild-perks/unique/fuck2"));
+    } else if (faction == "Military") {
+      retVal.add(
+          ModifierCard(CardType.add, "Military-perks/plus1strengthenally"));
+      retVal.add(ModifierCard(CardType.add, "Military-perks/plus1shield1flip"));
+      retVal.add(ModifierCard(CardType.add, "Military-perks/plus1push2flip"));
+      retVal.add(ModifierCard(CardType.add, "Military-perks/unique/fuck1"));
+    }
+    return retVal;
+  }
+
+  static bool isCardInAnyCharacterDeck(String gfx) {
+    final characters = getCurrentCharacters();
+    for (var item in characters) {
+      if (item.characterState.modifierDeck.hasCard(gfx)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   static bool hasRetaliate(Monster monster, MonsterInstance figure) {
     return _monsterHasConditionOnCards(monster, figure, "%retaliate%");
   }
