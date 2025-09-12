@@ -34,21 +34,32 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     super.initState();
   }
 
-  int? findNrFromScenarioName(String scenario) {
+  double? findNrFromScenarioName(String scenario) {
     String nr = scenario.substring(1);
-    for (int i = 0; i < nr.length; i++) {
-      if (nr[i] == ' ' || nr[i] == 'A' || nr[i] == 'B') {
-        nr = nr.substring(0, i);
-        int? number = int.tryParse(nr);
-        return number;
-      }
+    nr = nr.split(" ").first;
+    if (nr.endsWith('A')) {
+      nr = "${nr.substring(0, nr.length - 1)}.1";
     }
+    if (nr.endsWith('B')) {
+      nr = "${nr.substring(0, nr.length - 1)}.2";
+    }
+    return double.tryParse(nr);
+  }
 
-    return null;
+  void _sortList() {
+    _foundScenarios.sort((a, b) {
+      double? aNr = findNrFromScenarioName(a);
+      double? bNr = findNrFromScenarioName(b);
+      if (aNr != null && bNr != null) {
+        return aNr.compareTo(bNr);
+      }
+      return a.compareTo(b);
+    });
   }
 
   void setCampaign(String campaign) {
-    //TODO: clear search
+    //empty the search text
+    _controller.clear();
 
     //check value ok
     if (_gameData.modelData.value[campaign] == null) {
@@ -82,12 +93,11 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       }
     }
 
-    if (campaign == "Solo" &&
-        getIt<Settings>().showCustomContent.value == false) {
+    if (campaign == "Solo" && !getIt<Settings>().showCustomContent.value) {
       _foundScenarios.removeWhere((scenario) {
         List<String> strings = scenario.split(':');
-        strings[0] = strings[0].replaceFirst(" ", "Å");
-        String characterName = strings[0].split("Å")[1];
+        strings[0] = strings.first.replaceFirst(" ", "Å");
+        String characterName = strings.first.split("Å")[1];
         if (_gameData.modelData.value.entries.any((element) =>
             GameMethods.isCustomCampaign(element.value.edition) &&
             element.value.characters
@@ -99,14 +109,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       });
     }
 
-    _foundScenarios.sort((a, b) {
-      int? aNr = findNrFromScenarioName(a);
-      int? bNr = findNrFromScenarioName(b);
-      if (aNr != null && bNr != null) {
-        return aNr.compareTo(bNr);
-      }
-      return a.compareTo(b);
-    });
+    _sortList();
 
     //sort random dungeon first for visibility of special feature
     if (_foundScenarios.first != "#Random Dungeon") {
@@ -126,24 +129,22 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   // This function is called whenever the text field changes
   void _runFilter(String enteredKeyword) {
     List<String> results = [];
+    final String campaign = _gameState.currentCampaign.value;
     if (enteredKeyword.isEmpty) {
       // if the search field is empty or only contains white-space, we'll display all
-      results = _gameData
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
-          .toList();
-      if (_gameState.currentCampaign.value != "Solo") {
+      results = _gameData.modelData.value[campaign]!.scenarios.keys.toList();
+      if (campaign != "Solo") {
         results.insert(0, "custom");
       }
     } else {
-      results = _gameData
-          .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
+      results = _gameData.modelData.value[campaign]!.scenarios.keys
           .toList()
           .where((user) =>
               user.toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
       results.sort((a, b) {
-        int? aNr = findNrFromScenarioName(a);
-        int? bNr = findNrFromScenarioName(b);
+        double? aNr = findNrFromScenarioName(a);
+        double? bNr = findNrFromScenarioName(b);
         if (aNr != null && bNr != null) {
           return aNr.compareTo(bNr);
         }
@@ -151,8 +152,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       });
       // we use the toLowerCase() method to make it case-insensitive
       //special hack for solo BladeSwarm
-      if (_gameState.currentCampaign.value == "Solo" ||
-          _gameState.currentCampaign.value == "Trail of Ashes") {
+      if (campaign == "Solo" || campaign == "Trail of Ashes") {
         if (!_gameState.unlockedClasses.contains("Bladeswarm")) {
           for (var item in results) {
             if (item.contains("Bladeswarm")) {
@@ -175,13 +175,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     // Refresh the UI
     setState(() {
       _foundScenarios = results;
+      _sortList();
     });
   }
 
   Widget buildSoloTile(String name) {
     List<String> strings = name.split(':');
-    strings[0] = strings[0].replaceFirst(" ", "Å");
-    String nameAndCampaign = strings[0].split("Å")[1];
+    strings[0] = strings.first.replaceFirst(" ", "Å");
+    String nameAndCampaign = strings.first.split("Å")[1];
     String characterName = nameAndCampaign.split("/")[0];
     String edition = nameAndCampaign.split("/")[1];
 
@@ -219,8 +220,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
   Widget buildTile(String name) {
     String title = name;
-    if (getIt<Settings>().showScenarioNames.value == false) {
-      title = name.split(' ')[0];
+    if (!getIt<Settings>().showScenarioNames.value) {
+      title = name.split(' ').first;
     }
 
     return ListTile(
@@ -316,7 +317,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                             if (_foundScenarios.isNotEmpty) {
                               Navigator.pop(context);
                               _gameState.action(SetScenarioCommand(
-                                  _foundScenarios[0], false));
+                                  _foundScenarios.first, false));
                             }
                           },
                           decoration: const InputDecoration(
