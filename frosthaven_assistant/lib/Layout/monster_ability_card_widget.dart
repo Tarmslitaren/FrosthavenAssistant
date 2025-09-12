@@ -287,7 +287,8 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
           final roundState = _gameState.roundState.value;
           final data = widget.data;
           if (roundState == RoundState.playTurns &&
-              (data.monsterInstances.isNotEmpty || data.isActive)) {
+              (data.monsterInstances.isNotEmpty || data.isActive) &&
+              !GameMethods.isInactiveForRule(data.type.name)) {
             CardStack? stack = GameMethods.getDeck(data.type.deck)?.discardPile;
             if (stack != null && stack.isNotEmpty) {
               card = stack.peek;
