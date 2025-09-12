@@ -29,6 +29,15 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
     super.initState();
     _factionCards.clear();
     _factionCards.addAll(GameMethods.getFactionCards(widget.faction));
+
+    //find if card added previously
+    final deck = GameMethods.getModifierDeck(widget.name, getIt<GameState>());
+    for (final item in _factionCards) {
+      if (deck.hasCard(item.gfx)) {
+        addedCard = item.gfx;
+        break;
+      }
+    }
   }
 
   @override
