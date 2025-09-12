@@ -17,7 +17,7 @@
         {"removes": ["minus1"],"adds": [ "perks/plus0curse"]},
         {"removes": ["minus1"],"adds": [ "perks/plus0curse"]},
         {"removes": ["plus0"],"adds": [ "perks/plus1shield1ally"]},
-        {"text": "Replace one -2 card with one -1\"Give one ally a 'Prayer' ability card\" card and one +0 card","removes": ["minus2"],"adds": [ "perks/unique/hp1","plus0"]},
+        {"text": "Replace one -2 card with one -1 \"Give one ally a 'Prayer' ability card\" card and one +0 card","removes": ["minus2"],"adds": [ "perks/unique/hp1","plus0"]},
         {"removes": ["plus1"],"adds": [ "perks/plus3"]},
         {"removes": ["plus1"],"adds": [ "perks/plus3"]},
         {"text": "Add two \"%heal% 1 self or ally\"%flip% cards","adds": [ "perks/unique/hp2","perks/unique/hp2"]},
@@ -29,7 +29,7 @@
       ],
       "perks_fh": [
         {"removes": ["minus1","minus1"]},
-        {"text": "Replace one -2 card with one -1\"Give one ally a 'Prayer' ability card\" card and one +0 card","removes": ["minus2"],"adds": [ "perks/unique/hp1","plus0"]},
+        {"text": "Replace one -2 card with one -1 \"Give one ally a 'Prayer' ability card\" card and one +0 card","removes": ["minus2"],"adds": [ "perks/unique/hp1","plus0"]},
         {"removes": ["minus1"],"adds": [ "perks/plus0curse"]},
         {"removes": ["minus1"],"adds": [ "perks/plus0curse"]},
         {"removes": ["plus0","plus0"],"adds": [ "perks/plus0lightflip"]},
@@ -580,7 +580,7 @@
         {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
         {"text": "Add one +2 \"Shackle\" card", "adds": [ "perks/unique/cg1"]},
         {"text": "Add one +2 \"Shackle\" card", "adds": [ "perks/unique/cg1"]},
-        {"text": "Ignore item - 1 effects and add one +1 \"Creste one %damage% 2 trap in an empty hex within %range% 2\" card","adds": ["perks/unique/cg6"]},
+        {"text": "Ignore item - 1 effects and add one +1 \"Create one %damage% 2 trap in an empty hex within %range% 2\" card","adds": ["perks/unique/cg6"]},
         {"text": "[triple] Unyielding Jailer: You may have an additional enemy Shackled at any time"}
       ]
     },
