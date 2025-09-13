@@ -23,7 +23,7 @@
          {"text": "Add one %flip%%disarm% card and one %flip%%muddle% card", "adds": ["perks/plus0disarmflip", "perks/plus0muddleflip"]},
          {"adds": ["perks/plus0target1flip"]},
          {"adds": ["perks/plus0target1flip"]},
-         {"text": "Add one %shield% 1, Self card", "adds": ["perks/plus1shield1"]},
+         {"adds": ["perks/plus1shield1"]},
          {"text": "Ignore negative item effects and add one +1 card", "adds": ["plus1"]}
        ],
        "perks_fh": [
@@ -138,8 +138,8 @@
          {"adds": ["perks/plus1curse" ]},
          {"adds": ["perks/plus2fire"]},
          {"adds": ["perks/plus2fire"]},
-         {"adds": ["perks/plus1ice"]},
-         {"adds": ["perks/plus1ice"]},
+         {"adds": ["perks/plus2ice"]},
+         {"adds": ["perks/plus2ice"]},
          {"text": "Add one %flip%%earth% and one %flip%%air%", "adds": ["perks/plus0earthflip","perks/plus0airflip" ]},
          {"text": "Add one %flip%%light% and one %flip%%dark%", "adds": ["perks/plus0lightflip","perks/plus0darkflip" ]}
        ],
@@ -148,15 +148,15 @@
          {"removes": ["minus1"], "adds": ["plus1"]},
          {"removes": ["minus1"], "adds": ["plus1"]},
          {"text": "Replace one -1 card with one +0 %air%%flip% and one +0 %earth%%flip%","removes": ["minus1"], "adds": ["perks/plus0earthflip","perks/plus0airflip" ]},
-         {"text": "Replace one -1 card with one +0 %light%%flip% and one +0 %dark%%flip%","removes": ["minus1"], "adds": ["perks/plus0earthflip","perks/plus0airflip" ]},
+         {"text": "Replace one -1 card with one +0 %light%%flip% and one +0 %dark%%flip%","removes": ["minus1"], "adds": ["perks/plus0lightflip","perks/plus0darkflip" ]},
          {"removes": ["plus0"],"adds": ["perks/plus1wound" ]},
          {"removes": ["plus0"],"adds": ["perks/plus1immobilize" ]},
-         {"removes": ["plus0"],"adds": ["perks/plus1stun" ]},
+         {"removes": ["plus0"],"adds": ["perks/plus0stun" ]},
          {"removes": ["plus0"],"adds": ["perks/plus1curse" ]},
          {"adds": ["perks/plus2fire"]},
          {"adds": ["perks/plus2fire"]},
-         {"adds": ["perks/plus1ice"]},
-         {"adds": ["perks/plus1ice"]},
+         {"adds": ["perks/plus2ice"]},
+         {"adds": ["perks/plus2ice"]},
          {"text": "Ignore scenario effects"},
          {"text": "Etheric Bond: Whenever you short rest, if Reviving Ether is in your discard pile, first return it to your hand"}
        ],
@@ -189,13 +189,13 @@
        "perks_fh": [
          {"removes": ["minus1", "minus1"]},
          {"removes": ["minus1"], "adds": ["plus1"]},
-         {"removes": ["minus1"],"adds": ["perks/plus0poisonflip" ]},
-         {"removes": ["minus1"],"adds": ["perks/plus0poisonflip" ]},
+         {"removes": ["minus1"],"adds": ["perks/plus0poisonflip","perks/plus0poisonflip" ]},
+         {"removes": ["minus1"],"adds": ["perks/plus0poisonflip","perks/plus0poisonflip" ]},
          {"removes": ["minus2"], "adds": ["plus0"]},
          {"removes": ["plus0"], "adds": ["plus2"]},
          {"removes": ["plus0"], "adds": ["plus2"]},
-         {"text": "Replace two +0 cards with one +0%muddle%%flip% card and one +0%pierce%%flip%","removes": ["plus0", "plus0"],"adds": ["perks/plus0muddleflip","perks/plus0pierce3flip"]},
-         {"text": "Replace two +0 cards with one +0%muddle%%flip% card and one +0%pierce%%flip%","removes": ["plus0", "plus0"],"adds": ["perks/plus0muddleflip","perks/plus0pierce3flip"]},
+         {"text": "Replace two +0 cards with one +0%muddle%%flip% card and one +0 \"%pierce%3\"%flip%","removes": ["plus0", "plus0"],"adds": ["perks/plus0muddleflip","perks/plus0pierce3flip"]},
+         {"text": "Replace two +0 cards with one +0%muddle%%flip% card and one +0 \"%pierce%3\"%flip%","removes": ["plus0", "plus0"],"adds": ["perks/plus0muddleflip","perks/plus0pierce3flip"]},
          {"adds": ["perks/plus1flip","perks/plus1flip"]},
          {"adds": ["perks/plus1flip","perks/plus1flip"]},
          {"adds": ["perks/plus0invisibleflip"]},
@@ -367,9 +367,9 @@
          {"adds": ["perks/plus0pierce3flip","perks/plus0pierce3flip" ]},
          {"adds": ["perks/plus0stunflip" ]},
          {"adds": ["perks/plus0target1"]},
-         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
-         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
-         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
+         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap"]},
+         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap"]},
+         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap"]},
          {"text": "Ignore negative item effects and add two +1 cards", "adds": ["plus1","plus1"]}
        ],
        "perks_fh": [
@@ -379,9 +379,9 @@
          {"removes": ["plus0"], "adds": ["perks/plus0target1"]},
          {"removes": ["plus0"], "adds": ["plus2"]},
          {"removes": ["plus0"], "adds": ["plus2"]},
-         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
-         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
-         {"text": "Add one +0 Refresh an item card", "adds": ["perks/plus0untap","perks/plus0untap","perks/plus0untap"]},
+         {"text": "Add one +0 Refresh one item card", "adds": ["perks/plus0untap"]},
+         {"text": "Add one +0 Refresh one item card", "adds": ["perks/plus0untap"]},
+         {"text": "Add one +0 Refresh one item card", "adds": ["perks/plus0untap"]},
          {"adds": ["perks/plus1flip","perks/plus1flip" ]},
          {"adds": ["perks/plus1flip","perks/plus1flip" ]},
          {"adds": ["perks/plus0stunflip" ]},
@@ -505,7 +505,7 @@
          {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip","perks/plus0heal1flip" ]},
          {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip","perks/plus0heal1flip" ]},
          {"text": "Ignore scenario effects and add two +1 cards", "adds": ["plus1","plus1"]},
-         {"text": "[double] Phase Out: Once ach scenario, during ordering of initiative, after all ability cards have been revealed, all your summons gain %invisible%"}
+         {"text": "[double] Phase Out: Once each scenario, during ordering of initiative, after all ability cards have been revealed, all your summons gain %invisible%"}
        ]
     },
      {
@@ -631,7 +631,7 @@
          {"adds": ["perks/plus1disarmflip"]},
          {"adds": ["perks/plus0heal1flip","perks/plus0heal1flip" ]},
          {"text": "Ignore item - 1 effects"},
-         {"text": "Rapid Recovery: Whenever you heal from a long rest, add +1 %heal%"}
+         {"text": "Rapid Recovery: Whenever you heal from a long rest, add + 1 %heal%"}
        ]
     },
      {
@@ -774,7 +774,7 @@
          {"adds": ["perks/plus0stunflip" ]},
          {"adds": ["perks/plus0heal3flip" ]},
          {"adds": ["perks/plus0heal3flip" ]},
-         {"text": "Add one +1 Refresh an item card","adds": ["perks/plus0untap" ]}
+         {"text": "Add one +0 Refresh an item card","adds": ["perks/plus0untap" ]}
        ],
        "perks_fh": [
          {"removes": ["minus2" ]},
@@ -785,7 +785,7 @@
          {"removes": ["plus0" ],"adds": ["plus2" ]},
          {"removes": ["plus0" ],"adds": ["perks/plus1immobilize" ]},
          {"removes": ["plus0" ],"adds": ["perks/plus1immobilize" ]},
-         {"text": "Add one +1 Refresh an item card","adds": ["perks/plus0untap" ]},
+         {"text": "Add one +0 Refresh one item card","adds": ["perks/plus0untap" ]},
          {"adds": ["perks/plus2flip" ]},
          {"adds": ["perks/plus2flip" ]},
          {"adds": ["perks/plus0stunflip" ]},
