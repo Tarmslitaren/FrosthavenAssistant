@@ -201,8 +201,8 @@
         {"text": "Add one +1 \"%retaliate% 1\" card and one \"%pierce% 3\"%flip% card","adds": [ "perks/plus1retaliate1","perks/plus0pierce3flip"]},
         {"text": "Add one +1 \"%retaliate% 1\" card and one \"%pierce% 3\"%flip% card","adds": [ "perks/plus1retaliate1","perks/plus0pierce3flip"]},
         {"adds": [ "perks/plus0bless"]},
-        {"text": "Add two +1 \"+2 instead if you suffer 1 damage\" cards","removes": ["plus2"],"adds": [ "perks/unique/vq2","perks/unique/vq2"]},
-        {"text": "Add one +2 \"+3 instead if you suffer 1 damage\" card","removes": ["plus2"],"adds": [ "perks/unique/vq3"]},
+        {"text": "Add two +1 \"+2 instead if you suffer 1 damage\" cards","adds": [ "perks/unique/vq2","perks/unique/vq2"]},
+        {"text": "Add one +2 \"+3 instead if you suffer 1 damage\" card","adds": [ "perks/unique/vq3"]},
         {"text": "Ignore negative item effects and remove one -1 card","removes": ["minus1"]}
       ],
       "perks_fh": [
@@ -215,11 +215,11 @@
         {"text": "Replace two +0 card with one +0 %curse% card and one +0 %immobilize% card","removes": ["plus0","plus0"],"adds": ["perks/plus0curse", "perks/plus0immobilize"]},
         {"removes": ["plus1"],"adds": [ "perks/plus2fireair"]},
         {"removes": ["plus1"],"adds": [ "perks/plus2fireair"]},
-        {"text": "Replace one +2 card with one +0 \"Gain one Rage\"%flip% card an done +0 \"%bless%, self\" card","removes": ["plus2"],"adds": [ "perks/unique/vq1","perks/plus0bless"]},
+        {"text": "Replace one +2 card with one +0 \"Gain one Rage\"%flip% card and one +0 \"%bless%, self\" card","removes": ["plus2"],"adds": [ "perks/unique/vq1","perks/plus0bless"]},
         {"text": "Add one +1 \"%retaliate% 1\" card and one \"%pierce% 3\"%flip% card","adds": [ "perks/plus1retaliate1","perks/plus0pierce3flip"]},
         {"text": "Add one +1 \"%retaliate% 1\" card and one \"%pierce% 3\"%flip% card","adds": [ "perks/plus1retaliate1","perks/plus0pierce3flip"]},
         {"text": "Add two +1 \"+2 instead if you suffer %damage% 1\" cards","adds": [ "perks/unique/vq2","perks/unique/vq2"]},
-        {"text": "Add two +2 \"+3 instead if you suffer %damage% 1\" cards","adds": [ "perks/unique/vq3"]},
+        {"text": "Add one +2 \"+3 instead if you suffer %damage% 1\" cards","adds": [ "perks/unique/vq3"]},
         {"text": "[double] At the start of each scenario, you may discard one card from your hand to gain a random Rage card"}
       ]
     }

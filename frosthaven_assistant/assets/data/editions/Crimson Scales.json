@@ -83,7 +83,7 @@
         {"text": "Add one +1 \"If you are at full health, +3 instead\" card","adds": [ "perks/unique/st1"]},
         {"adds": [ "perks/plus0heal1range1flip","perks/plus0heal1range1flip"]},
         {"text": "Add one \"%loot% 1\"%flip% card","adds": [ "perks/plus0loot1flip"]},
-        {"text": "Ignore negative scenario effects and add one +0 %dark% card","removes": ["perks/plus0dark"]},
+        {"text": "Ignore negative scenario effects and add one +0 %dark% card","adds": ["perks/plus0dark"]},
         {"text": "[double] Reflective Journey: At the end of each of your long rests, %lightdark%. If you are at full health, grant one ally: %move% 2"}
       ]
     },
@@ -528,8 +528,8 @@
         {"removes": ["minus2"],"adds": ["plus0"]},
         {"removes": ["minus1"],"adds": [ "plus1"]},
         {"removes": ["minus1"],"adds": [ "plus1"]},
-        {"text": "Replace two +0 cards with two +0 \"Add +X %attack%, where X is the %poison% value of the target\" cards","removes": ["plus0", "plus0"],"adds": [ "perks/unique/mf2","perks/unique/mf2"]},
-        {"text": "Replace two +0 cards with two +0 \"Add +X %attack%, where X is the %poison% value of the target\" cards","removes": ["plus0", "plus0"],"adds": [ "perks/unique/mf2","perks/unique/mf2"]},
+        {"text": "Replace two +0 cards with two +0 \"Add + X %attack%, where X is the %poison% value of the target\" cards","removes": ["plus0", "plus0"],"adds": [ "perks/unique/mf2","perks/unique/mf2"]},
+        {"text": "Replace two +0 cards with two +0 \"Add + X %attack%, where X is the %poison% value of the target\" cards","removes": ["plus0", "plus0"],"adds": [ "perks/unique/mf2","perks/unique/mf2"]},
         {"text": "Replace one +0 card with two \"Create one 1-hex difficult terrain in the featureless hex occupied by the target\"%flip% cards","removes": ["plus0"],"adds": [ "perks/unique/mf3", "perks/unique/mf3"]},
         {"text": "Replace one +0 card with two \"Create one 1-hex difficult terrain in the featureless hex occupied by the target\"%flip% cards","removes": ["plus0"],"adds": [ "perks/unique/mf3", "perks/unique/mf3"]},
         {"removes": ["plus1","plus1"],"adds": [ "plus2","plus2"]},
@@ -818,7 +818,7 @@
         {"removes": ["plus0"],"adds": [ "perks/plus1poison"]},
         {"removes": ["plus0"],"adds": [ "perks/plus2muddle"]},
         {"removes": ["plus0"],"adds": [ "perks/plus2earthfire"]},
-        {"text": "Replace one +0 card with one +0 \"Add +X, %attack% where X is the number of active Cultivate actions\" card","removes": ["plus0"],"adds": ["perks/unique/aa1"]},
+        {"text": "Replace one +0 card with one +0 \"Add + X, %attack% where X is the number of active Cultivate actions\" card","removes": ["plus0"],"adds": ["perks/unique/aa1"]},
         {"adds": [ "perks/plus1immobilizeflip","perks/plus1immobilizeflip"]},
         {"adds": [ "perks/plus1immobilizeflip","perks/plus1immobilizeflip"]},
         {"text": "Ignore scenario effects and add one \"%retaliate% 1, %range% 3\"%flip% card","adds": ["perks/plus0retaliate1range3flip"]},
