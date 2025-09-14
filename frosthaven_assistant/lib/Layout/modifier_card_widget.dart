@@ -95,11 +95,7 @@ class ModifierCardWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(4.0 * scale),
               child: Image(
                 fit: BoxFit.fitHeight,
-                image: ResizeImage(AssetImage(gfx),
-                    //can't set to actual size, since the scale animation would look crap
-                    width: (58.6666 * scale * assetScale).toInt(),
-                    height: (39 * scale * assetScale).toInt(),
-                    policy: ResizeImagePolicy.fit),
+                image: AssetImage(gfx),
               ),
             ),
             if (hasExtra)
@@ -118,12 +114,9 @@ class ModifierCardWidget extends StatelessWidget {
                 top: 55.5 * scale / 2,
                 left: 4.2 * scale,
                 child: Image(
-                    color: Colors.white,
-                    image: ResizeImage(
-                      AssetImage(extraGfx),
-                      //width: (7.5 * scale).toInt(),
-                      height: (7.5 * scale).toInt() * 8,
-                    )),
+                  color: Colors.white,
+                  image: AssetImage(extraGfx),
+                ),
               ),
           ],
         ));
@@ -158,9 +151,7 @@ class ModifierCardWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(4.0 * scale),
               child: Image(
                 fit: BoxFit.fitHeight,
-                image: ResizeImage(AssetImage("assets/images/attack/back.png"),
-                    height: (39 * scale).toInt() * 2,
-                    width: (58.6666 * scale).toInt() * 2),
+                image: AssetImage("assets/images/attack/back.png"),
               ),
             ),
             if (hasExtra)
@@ -170,11 +161,9 @@ class ModifierCardWidget extends StatelessWidget {
                 top: 5.5 * scale,
                 left: 15.7 * scale,
                 child: Image(
-                    image: ResizeImage(
-                        AssetImage(
-                            'assets/images/attack/class-marker-background.png'),
-                        width: (27 * scale).toInt(),
-                        height: (27 * scale).toInt())),
+                  image: AssetImage(
+                      'assets/images/attack/class-marker-background.png'),
+                ),
               ),
             if (hasExtra)
               Positioned(
@@ -183,12 +172,9 @@ class ModifierCardWidget extends StatelessWidget {
                 top: 9 * scale,
                 left: 19 * scale,
                 child: Image(
-                    color: Colors.white,
-                    image: ResizeImage(
-                      AssetImage(extraGfx),
-                      //width: (20 * scale).toInt(),
-                      height: (20 * scale).toInt() * 4,
-                    )),
+                  color: Colors.white,
+                  image: AssetImage(extraGfx),
+                ),
               ),
           ],
         ));

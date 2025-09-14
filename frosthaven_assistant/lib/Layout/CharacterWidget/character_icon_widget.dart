@@ -64,10 +64,8 @@ class CharacterIconWidget extends StatelessWidget {
                 color: isCharacter ? character.characterClass.color : null,
                 filterQuality: FilterQuality.medium,
                 width: scaledHeight * 0.6,
-                image: ResizeImage(
-                  AssetImage(
-                      "assets/images/class-icons/${character.characterClass.name}.png"),
-                  height: (scaledHeight * 0.6).toInt() * 2,
-                )));
+                image: AssetImage(
+                    "assets/images/class-icons/${character.characterClass.name}.png"),
+              ));
   }
 }

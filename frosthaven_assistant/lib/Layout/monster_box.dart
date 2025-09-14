@@ -156,11 +156,7 @@ class MonsterBox extends StatelessWidget {
                   width: 17 * scale,
                   fit: BoxFit.cover,
                   filterQuality: FilterQuality.medium,
-                  image: ResizeImage(
-                    AssetImage(imagePath),
-                    width: (40 * scale).toInt(),
-                    //height: (100 * scale).toInt()
-                  ),
+                  image: AssetImage(imagePath),
                 ),
               ),
               Positioned(

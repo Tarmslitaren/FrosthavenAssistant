@@ -43,13 +43,10 @@ class LootCardWidget extends StatelessWidget {
               clipBehavior: Clip.hardEdge,
               borderRadius: BorderRadius.circular(4.0 * scale),
               child: Image(
-                  filterQuality: FilterQuality.medium,
-                  fit: BoxFit.cover,
-                  image: ResizeImage(
-                      AssetImage("assets/images/loot/${card.gfx}.png"),
-                      policy: ResizeImagePolicy.fit,
-                      width: (39 * scale * scaleMod).toInt(),
-                      height: (58.6666 * scale * scaleMod).toInt())),
+                filterQuality: FilterQuality.medium,
+                fit: BoxFit.cover,
+                image: AssetImage("assets/images/loot/${card.gfx}.png"),
+              ),
             ),
             if (value != null)
               Text(
@@ -119,12 +116,8 @@ class LootCardWidget extends StatelessWidget {
                 child: Image(
                     fit: BoxFit.scaleDown,
                     color: Colors.black,
-                    image: ResizeImage(
-                      AssetImage('assets/images/class-icons/${card.owner}.png'),
-                      policy: ResizeImagePolicy.fit,
-                      height: (15 * scale * scaleMod).toInt(),
-                      width: (15 * scale * scaleMod).toInt(),
-                    )),
+                    image: AssetImage(
+                        'assets/images/class-icons/${card.owner}.png')),
               )
           ]),
     );
@@ -147,11 +140,7 @@ class LootCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(4.0 * scale),
         child: Image(
           fit: BoxFit.fitHeight,
-          image: ResizeImage(
-            AssetImage("assets/images/loot/back.png"),
-            height: (58.6666 * scale).toInt(),
-            width: (39 * scale).toInt(),
-          ),
+          image: AssetImage("assets/images/loot/back.png"),
         ),
       ),
     );

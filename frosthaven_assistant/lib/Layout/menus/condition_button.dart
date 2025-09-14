@@ -131,11 +131,7 @@ class ConditionButton extends StatelessWidget {
                                 Image(
                                     height: (24 * scale * 0.65),
                                     width: (24 * scale * 0.65),
-                                    image: ResizeImage(
-                                      AssetImage(imagePath),
-                                      height: (24 * scale * 0.65).toInt() * 4,
-                                      //width: (24 * scale * 0.65).toInt(),
-                                    ),
+                                    image: AssetImage(imagePath),
                                     filterQuality: FilterQuality.medium),
                               ])
                             : Image.asset(

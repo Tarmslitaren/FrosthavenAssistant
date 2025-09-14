@@ -39,18 +39,16 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
           },
           child: Row(children: [
             Image(
-                filterQuality: FilterQuality.medium,
-                height: 30,
-                width: 30,
-                fit: BoxFit.contain,
-                color: getIt<Settings>().darkMode.value
-                    ? Colors.white
-                    : Colors.black,
-                image: ResizeImage(
-                  AssetImage(
-                      "assets/images/class-icons/${character.characterClass.name}.png"),
-                  height: 130,
-                )),
+              filterQuality: FilterQuality.medium,
+              height: 30,
+              width: 30,
+              fit: BoxFit.contain,
+              color: getIt<Settings>().darkMode.value
+                  ? Colors.white
+                  : Colors.black,
+              image: AssetImage(
+                  "assets/images/class-icons/${character.characterClass.name}.png"),
+            ),
             const SizedBox(
               width: 10,
             ),
