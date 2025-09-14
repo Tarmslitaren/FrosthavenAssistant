@@ -103,7 +103,7 @@ Drawer createMainMenu(BuildContext context) {
                 child: Stack(
                   children: [
                     Positioned(
-                        right: 6, bottom: 0, child: Text("Version 1.12.1"))
+                        right: 6, bottom: 0, child: Text("Version 1.13.0"))
                   ],
                 ),
               ),
