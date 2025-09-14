@@ -3533,6 +3533,22 @@
           "elite": [1, 3, 4]
         }
       }
+    },
+    {
+      "spawn 11": {
+        "Burrowing Blade": {
+          "normal": [1, 1, 0],
+          "elite": [0, 0, 1]
+        }
+      }
+    },
+    {
+      "spawn 12": {
+        "Burrowing Blade": {
+          "normal": [1, 0, 0],
+          "elite": [0, 1, 1]
+        }
+      }
     }
   ],
   "65": [
