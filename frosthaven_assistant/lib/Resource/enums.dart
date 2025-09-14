@@ -20,6 +20,7 @@ enum Condition {
   infect,
   impair,
   rupture,
+  plague,
   strengthen,
   invisible,
   regenerate,

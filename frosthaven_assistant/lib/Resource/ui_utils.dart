@@ -142,6 +142,9 @@ bool hasGHVersion(String name) {
   if (name == "chill") {
     return false;
   }
+  if (name == "plague") {
+    return false;
+  }
   if (name == "infect") {
     return false;
   }

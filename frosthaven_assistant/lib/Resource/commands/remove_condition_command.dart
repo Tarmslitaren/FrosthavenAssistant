@@ -20,8 +20,11 @@ class RemoveConditionCommand extends Command {
           !figure.conditions.value.contains(Condition.chill)) {
         figure.getMutableConditionsAddedThisTurn(stateAccess).remove(condition);
       }
-      if(condition == Condition.chill) {
+      if (condition == Condition.chill) {
         figure.setChill(stateAccess, figure.chill.value - 1);
+      }
+      if (condition == Condition.plague) {
+        figure.setPlague(stateAccess, figure.plague.value - 1);
       }
 
       figure

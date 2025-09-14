@@ -9,6 +9,7 @@ class FigureState {
   final _health = ValueNotifier<int>(0);
   final _maxHealth = ValueNotifier<int>(0);
   final _chill = ValueNotifier<int>(0);
+  final _plague = ValueNotifier<int>(0);
   final Set<Condition> _conditionsAddedThisTurn = {};
   final Set<Condition> _conditionsAddedPreviousTurn = {};
 
@@ -16,6 +17,7 @@ class FigureState {
   ValueListenable<int> get health => _health;
   ValueListenable<int> get maxHealth => _maxHealth;
   ValueListenable<int> get chill => _chill;
+  ValueListenable<int> get plague => _plague;
   BuiltSet<Condition> get conditionsAddedThisTurn =>
       BuiltSet.of(_conditionsAddedThisTurn);
   BuiltSet<Condition> get conditionsAddedPreviousTurn =>
@@ -35,6 +37,10 @@ class FigureState {
 
   setChill(_StateModifier _, int value) {
     _chill.value = value;
+  }
+
+  setPlague(_StateModifier _, int value) {
+    _plague.value = value;
   }
 
   Set<Condition> getMutableConditionsAddedThisTurn(_StateModifier _) {

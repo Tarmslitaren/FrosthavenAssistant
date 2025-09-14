@@ -19,6 +19,9 @@ class AddConditionCommand extends Command {
       if (condition == Condition.chill) {
         figure.setChill(stateAccess, figure.chill.value + 1);
       }
+      if (condition == Condition.plague) {
+        figure.setPlague(stateAccess, figure.plague.value + 1);
+      }
 
       //only added this turn if is current or done
       for (var item in getIt<GameState>().currentList) {

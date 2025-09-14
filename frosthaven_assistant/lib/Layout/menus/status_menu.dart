@@ -98,8 +98,14 @@ class StatusMenuState extends State<StatusMenu> {
     figure.conditions.value = newList;
   }
 
-  Widget buildChillButtons(ValueListenable<int> notifier, int maxValue,
-      String image, String figureId, String? ownerId, double scale) {
+  Widget buildStackableConditionButtons(
+      ValueListenable<int> notifier,
+      Condition stackableCondition,
+      int maxValue,
+      String image,
+      String figureId,
+      String? ownerId,
+      double scale) {
     return Row(children: [
       SizedBox(
           width: 40 * scale,
@@ -108,9 +114,8 @@ class StatusMenuState extends State<StatusMenu> {
               icon: Image.asset('assets/images/psd/sub.png'),
               onPressed: () {
                 if (notifier.value > 0) {
-                  //_gameState.action(ChangeChillCommand(-1, figureId, ownerId));
                   _gameState.action(RemoveConditionCommand(
-                      Condition.chill, figureId, ownerId));
+                      stackableCondition, figureId, ownerId));
                 }
                 //increment
               })),
@@ -153,9 +158,8 @@ class StatusMenuState extends State<StatusMenu> {
             icon: Image.asset('assets/images/psd/add.png'),
             onPressed: () {
               if (notifier.value < maxValue) {
-                // _gameState.action(ChangeChillCommand(1, figureId, ownerId));
                 _gameState.action(
-                    AddConditionCommand(Condition.chill, figureId, ownerId));
+                    AddConditionCommand(stackableCondition, figureId, ownerId));
               }
               //increment
             },
@@ -221,6 +225,7 @@ class StatusMenuState extends State<StatusMenu> {
     bool hasIncarnate = false;
     bool hasVimthreader = false;
     bool hasLifespeaker = false;
+    bool hasPlagueHerald = false;
     bool isSummon = (widget.monsterId == null &&
         widget.characterId !=
             widget
@@ -228,6 +233,11 @@ class StatusMenuState extends State<StatusMenu> {
     for (var item in _gameState.currentList) {
       if (item.id == "Mirefoot" && showCustomContent) {
         hasMireFoot = true;
+      }
+      if (item.id == "Plagueherald" &&
+          (item as Character).characterClass.edition ==
+              "Gloomhaven 2nd Edition") {
+        hasPlagueHerald = true;
       }
       if (item.id == "Incarnate" && showCustomContent) {
         hasIncarnate = true;
@@ -669,9 +679,20 @@ class StatusMenuState extends State<StatusMenu> {
                               figureId: "unknown",
                               ownerId: "unknown",
                               scale: scale),
+                        if (hasPlagueHerald && isMonster)
+                          buildStackableConditionButtons(
+                              figure.plague,
+                              Condition.plague,
+                              3,
+                              //technically you can have infinite, but realistically not so much
+                              "assets/images/abilities/plague.png",
+                              figureId,
+                              ownerId,
+                              scale),
                         if (showCustomContent)
-                          buildChillButtons(
+                          buildStackableConditionButtons(
                               figure.chill,
+                              Condition.chill,
                               12,
                               //technically you can have infinite, but realistically not so much
                               "assets/images/abilities/chill.png",

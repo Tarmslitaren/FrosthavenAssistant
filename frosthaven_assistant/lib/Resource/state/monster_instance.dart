@@ -116,6 +116,7 @@ class MonsterInstance extends FigureState {
         '"roundSummoned": $roundSummoned, '
         '"type": ${type.index}, '
         '"chill": ${chill.value}, '
+        '"plague": ${plague.value}, '
         '"conditions": ${conditions.value.toString()}, '
         '"conditionsAddedThisTurn": ${_conditionsAddedThisTurn.toList().toString()}, '
         '"conditionsAddedPreviousTurn": ${_conditionsAddedPreviousTurn.toList().toString()} '
@@ -139,6 +140,9 @@ class MonsterInstance extends FigureState {
       _roundSummoned = -1;
     }
     _chill.value = json["chill"];
+    if (json.containsKey("plague")) {
+      _plague.value = json["plague"];
+    }
     final condis = json["conditions"];
     for (int item in condis) {
       conditions.value.add(Condition.values[item]);

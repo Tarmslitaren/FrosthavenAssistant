@@ -735,6 +735,7 @@ class GameMethods {
     item.characterState._xp.value = 0;
     item.characterState.conditions.value.clear();
     item.characterState._chill.value = 0;
+    item.characterState._plague.value = 0;
     item.characterState.modifierDeck._initDeck();
     //reapply perks
     final perksSetList = item.characterState.perkList;
