@@ -11,18 +11,17 @@ import '../services/service_locator.dart';
 import 'monster_stat_card.dart';
 
 class MonsterWidget extends StatefulWidget {
-  final Monster data;
-
-  final updateList = ValueNotifier<int>(0);
-
   MonsterWidget({super.key, required this.data});
+
+  final Monster data;
+  final updateList = ValueNotifier<int>(0);
 
   @override
   MonsterWidgetState createState() => MonsterWidgetState();
 }
 
 class MonsterWidgetState extends State<MonsterWidget> {
-  late List<MonsterInstance> lastList = [];
+  List<MonsterInstance> lastList = [];
 
   @override
   void initState() {
@@ -32,11 +31,12 @@ class MonsterWidgetState extends State<MonsterWidget> {
 
   Widget buildMonsterBoxGrid(double scale) {
     String displayStartAnimation = "";
+    final monsterInstances = widget.data.monsterInstances;
 
-    if (lastList.length < widget.data.monsterInstances.length) {
+    if (lastList.length < monsterInstances.length) {
       //find which is new
 
-      for (var item in widget.data.monsterInstances) {
+      for (var item in monsterInstances) {
         bool found = false;
         for (var oldItem in lastList) {
           if (item.standeeNr == oldItem.standeeNr) {
@@ -52,23 +52,21 @@ class MonsterWidgetState extends State<MonsterWidget> {
     }
 
     final generatedChildren = List<Widget>.generate(
-        widget.data.monsterInstances.length,
+        monsterInstances.length,
         (index) => AnimatedSize(
-              key:
-                  Key(widget.data.monsterInstances[index].standeeNr.toString()),
+              key: Key(monsterInstances[index].standeeNr.toString()),
               duration: const Duration(milliseconds: 300),
               child: MonsterBox(
-                  key: Key(
-                      widget.data.monsterInstances[index].standeeNr.toString()),
-                  figureId: widget.data.monsterInstances[index].name +
-                      widget.data.monsterInstances[index].gfx +
-                      widget.data.monsterInstances[index].standeeNr.toString(),
+                  key: Key(monsterInstances[index].standeeNr.toString()),
+                  figureId: monsterInstances[index].name +
+                      monsterInstances[index].gfx +
+                      monsterInstances[index].standeeNr.toString(),
                   ownerId: widget.data.id,
                   displayStartAnimation: displayStartAnimation,
                   blockInput: false,
                   scale: scale),
             ));
-    lastList = widget.data.monsterInstances.toList();
+    lastList = monsterInstances.toList();
     return Wrap(
       runSpacing: 2.0 * scale,
       spacing: 2.0 * scale,
@@ -133,14 +131,16 @@ class MonsterWidgetState extends State<MonsterWidget> {
     return ValueListenableBuilder<int>(
         valueListenable: getIt<GameState>().updateList,
         builder: (context, value, child) {
+          final hasInstances = widget.data.monsterInstances.isNotEmpty;
+          final roundState = getIt<GameState>().roundState.value;
+          final isActive = widget.data.isActive;
+
           return Column(mainAxisSize: MainAxisSize.max, children: [
             ColorFiltered(
-                colorFilter: (widget.data.monsterInstances.isNotEmpty ||
-                            widget.data.isActive) &&
+                colorFilter: (hasInstances || isActive) &&
                         !specialDisabled &&
                         (widget.data.turnState.value != TurnsState.done ||
-                            getIt<GameState>().roundState.value ==
-                                RoundState.chooseInitiative)
+                            roundState == RoundState.chooseInitiative)
                     ? ColorFilter.matrix(identity)
                     : ColorFilter.matrix(grayScale),
                 child: SizedBox(
@@ -149,11 +149,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
                   width: getMainListWidth(context),
                   child: Row(
                     children: [
-                      getIt<GameState>().roundState.value ==
-                                  RoundState.playTurns &&
-                              ((widget.data.monsterInstances.isNotEmpty ||
-                                      widget.data.isActive) &&
-                                  !specialDisabled)
+                      roundState == RoundState.playTurns &&
+                              ((hasInstances || isActive) && !specialDisabled)
                           ? InkWell(
                               onTap: () {
                                 getIt<GameState>()

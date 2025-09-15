@@ -59,8 +59,8 @@ class CounterButtonState extends State<CounterButton> {
                   totalChangeValue.value--;
                   gameState.action(widget.command);
                   if (widget.figureId != "unknown" &&
-                      widget.notifier == figure!.health &&
-                      figure.health.value <= 0) {
+                      widget.notifier == figure?.health &&
+                      figure!.health.value <= 0) {
                     {
                       Navigator.pop(context);
                     }
@@ -134,7 +134,7 @@ class CounterButtonState extends State<CounterButton> {
                 gameState.action(widget.command);
                 if (widget.figureId != "unknown" &&
                     widget.notifier.value <= 0 &&
-                    widget.notifier == figure!.health) {
+                    widget.notifier == figure?.health) {
                   Navigator.pop(context);
                 }
               }

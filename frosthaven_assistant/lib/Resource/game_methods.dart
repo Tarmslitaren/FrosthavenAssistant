@@ -1925,6 +1925,16 @@ class GameMethods {
   }
 
   static bool isFrosthavenStyledEdition(String edition) {
+    String scenario = _gameState.scenario.value;
+    if (edition == "Solo") {
+      //#37+ are og solo scenarios
+      for (int i = 1; i <= 36; i++) {
+        if (scenario.contains("${"#$i"} ")) {
+          return true;
+        }
+      }
+      return false;
+    }
     return edition == "Frosthaven" ||
         edition == "Buttons and Bugs" ||
         edition == "Gloomhaven 2nd Edition" ||
@@ -1933,15 +1943,17 @@ class GameMethods {
 
   static bool isFrosthavenStyle(MonsterModel? monster) {
     //frosthaven monster
-    if (monster != null && isFrosthavenStyledEdition(monster.edition)) {
+    final monsterFrostHavenStyledEdition =
+        monster != null && isFrosthavenStyledEdition(monster.edition);
+    if (monsterFrostHavenStyledEdition) {
       return true;
     }
-    //frosthaven monsters in other campaigns
     final style = getIt<Settings>().style.value;
-    if (style != Style.frosthaven &&
-        monster != null &&
-        !isFrosthavenStyledEdition(monster.edition)) {
-      return false;
+    //frosthaven monsters in other campaigns
+    if (monster != null) {
+      if (style != Style.frosthaven && !monsterFrostHavenStyledEdition) {
+        return false;
+      }
     }
     //frosthaven style settings
     return style == Style.frosthaven ||
@@ -2049,23 +2061,7 @@ class GameMethods {
   }
 
   static bool isOgGloomEdition() {
-    String edition = _gameState.currentCampaign.value;
-    String scenario = _gameState.scenario.value;
-    if (edition == "Solo") {
-      //#1-19, #37-56 are og solo scenarios
-      for (int i = 1; i <= 19; i++) {
-        if (scenario.contains("${"#$i"} ")) {
-          return true;
-        }
-      }
-      for (int i = 37; i <= 56; i++) {
-        if (scenario.contains("${"#$i"} ")) {
-          return true;
-        }
-      }
-      return false;
-    }
-    return edition != "Frosthaven" && edition != "Gloomhaven 2nd Edition";
+    return !isFrosthavenStyledEdition(_gameState.currentCampaign.value);
   }
 
   static bool hasLootDeck() {

@@ -178,7 +178,7 @@ class ConditionIconState extends State<ConditionIcon> {
         if (widget.figure.conditionsAddedPreviousTurn
             .contains(widget.condition)) {
           //only run these if not automatically taken off. TODO: maybe run animations before removing is good?
-          if (getIt<Settings>().expireConditions.value == false) {
+          if (!getIt<Settings>().expireConditions.value) {
             if (widget.condition == Condition.chill ||
                 widget.condition == Condition.stun ||
                 widget.condition == Condition.disarm ||
