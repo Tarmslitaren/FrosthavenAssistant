@@ -43,13 +43,15 @@
         {"removes": ["minus1"], "adds": [ "perks/plus0wound"]},
         {"removes": ["plus0"], "adds": [ "perks/plus1immobilize"]},
         {"removes": ["plus0"], "adds": [ "perks/plus1immobilize"]},
-        {"text": "Replace one +0 card with one \"Place this card in your active area. On your next attack, discard this card to add +2 %attack%\" %flip% card", "removes": ["plus0"], "adds": ["perks/unique/bb1"]},
-        {"text": "Replace one +0 card with one \"Place this card in your active area. On your next attack, discard this card to add +2 %attack%\" %flip% card", "removes": ["plus0"], "adds": ["perks/unique/bb1"]},
-        {"text": "Replace one +0 card with one \"Place this card in your active area. On your next attack, discard this card to add +2 %attack%\" %flip% card", "removes": ["plus0"], "adds": ["perks/unique/bb1"]},
+        {"text": "Replace one +0 card with one \"Place this card in your active area. On your next attack, discard this card to add + 2 %attack%\" %flip% card", "removes": ["plus0"], "adds": ["perks/unique/bb1"]},
+        {"text": "Replace one +0 card with one \"Place this card in your active area. On your next attack, discard this card to add + 2 %attack%\" %flip% card", "removes": ["plus0"], "adds": ["perks/unique/bb1"]},
+        {"text": "Replace one +0 card with one \"Place this card in your active area. On your next attack, discard this card to add + 2 %attack%\" %flip% card", "removes": ["plus0"], "adds": ["perks/unique/bb1"]},
         {"removes": ["plus1","plus1"], "adds": [ "plus2","plus2"]},
         {"text": "Add one -1 \"Gain 1 Time token\"","adds": [ "perks/unique/bb2"]},
         {"text": "Add one -1 \"Gain 1 Time token\"","adds": [ "perks/unique/bb2"]},
-        {"text": "[double] Whenever you short rest, you may move spend one unspent item for no effect to refresh a different spent item"},
+        {"adds": [ "perks/plus2regenerateflip"]},
+        {"adds": [ "perks/plus2regenerateflip"]},
+        {"text": "Whenever you short rest, you may spend one unspent item for no effect to refresh a different spent item"},
         {"text": "At the start of your first turn each scenario, you may perform %move% 3"},
         {"text": "Whenever you would gain %immobilize% prevent the condition"}
       ]
@@ -505,7 +507,7 @@
         {"removes": ["plus0"],"adds": [ "perks/plus1strengthenally"]},
         {"text": "Add one \"%heal% 1, %ward%, %target% 1 ally\" %flip% card","adds": ["perks/unique/sd2"]},
         {"text": "Add one \"%heal% 1, %ward%, %target% 1 ally\" %flip% card","adds": ["perks/unique/sd2"]},
-        {"text": "whenever you long rest you may %iceair%"},
+        {"text": "Whenever you long rest you may %iceair%"},
         {"text": "[double] Whenever you short rest, you may %use%%ice% to perform %regenerate%, %range% 3 and %use%%air% to perform %ward%, %range% 3"},
         {"text": "[double] At the start of each scenario, all enemies gain %muddle%. Whenever a new room is revealed, all enemies in the newly revealed room gain %muddle%"}
       ]
@@ -558,7 +560,7 @@
         {"text": "add two +1 \"Gain one trophy\" cards","adds": [ "perks/unique/ff1", "perks/unique/ff1"]},
         {"text": "add two +1 \"Gain one trophy\" cards","adds": [ "perks/unique/ff1", "perks/unique/ff1"]},
         {"text": "Ignore scenario effects, and remove two +0 cards","removes": ["plus0","plus0"]},
-        {"text": "Whenever you long rest, you may loot one adjacent hex. If you gain any loot tokens, gain 1 trophy"},
+        {"text": "Whenever you long rest, you may %loot% one adjacent hex. If you gain any loot tokens, gain 1 trophy"},
         {"text": "At the start of each scenario, gain 2 trophies"},
         {"text": "[triple] While you have %invisible%, gain advantage on all your attacks"}
       ]
