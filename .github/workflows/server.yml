@@ -5,6 +5,9 @@ on:
       - main
     tags:
       - 'v*'
+  pull_request:
+    branches:
+      - main
 permissions:
   contents: read
   packages: write
@@ -31,6 +34,7 @@ jobs:
             type=ref,event=branch,suffix=-dev
             type=semver,pattern={{version}}
             type=raw,value=latest,enable=${{ github.ref_type == 'tag' }}
+            type=ref,event=pr,prefix=pr-
       
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
@@ -43,7 +47,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./frosthaven_assistant_server
-          push: true
+          push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
