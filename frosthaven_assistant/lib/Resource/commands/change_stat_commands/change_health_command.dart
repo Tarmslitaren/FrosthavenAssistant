@@ -7,22 +7,24 @@ class ChangeHealthCommand extends ChangeStatCommand {
 
   @override
   void execute() {
-    FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
+    FigureState? figure = GameMethods.getFigure(ownerId, figureId);
+    if (figure != null) {
+      final previousValue = figure.health.value;
+      if (previousValue + change < 0) {
+        //no negative values
+        figure.setHealth(stateAccess, 0);
+      } else {
+        figure.setHealth(stateAccess, figure.health.value + change);
+      }
+      final newValue = figure.health.value;
+      if (previousValue <= 0 && newValue > 0) {
+        //un death
+        getIt<GameState>().updateList.value++;
+      }
 
-    int previousValue = figure.health.value;
-    if (figure.health.value + change < 0) {
-      //no negative values
-      figure.setHealth(stateAccess, 0);
-    } else {
-      figure.setHealth(stateAccess, figure.health.value + change);
-    }
-    if (previousValue <= 0 && figure.health.value > 0) {
-      //un death
-      getIt<GameState>().updateList.value++;
-    }
-
-    if (figure.health.value <= 0) {
-      handleDeath();
+      if (newValue <= 0) {
+        handleDeath();
+      }
     }
   }
 

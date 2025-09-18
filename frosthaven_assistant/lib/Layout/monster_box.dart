@@ -26,7 +26,7 @@ class MonsterBox extends StatelessWidget {
 
   static double getWidth(double scale, MonsterInstance data) {
     if (data.health.value == 0) {
-      return 0;
+      //return 0;
     }
     double width = 47; //some margin there
     final length = data.conditions.value.length;
@@ -117,6 +117,8 @@ class MonsterBox extends StatelessWidget {
       }
     }
 
+    final health = data.health.value;
+
     return ColorFiltered(
         //gray out if summoned this turn and it's still the character's/monster's turn
         colorFilter: (data.roundSummoned == getIt<GameState>().round.value &&
@@ -171,7 +173,7 @@ class MonsterBox extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: data.health.value > 99 ? 22 * scale : 23 * scale,
+                left: health > 99 ? 22 * scale : 23 * scale,
                 top: 0,
                 child: Container(
                     padding: EdgeInsets.zero,
@@ -185,13 +187,11 @@ class MonsterBox extends StatelessWidget {
                         ),
                         Container(
                           margin: EdgeInsets.only(bottom: 2 * scale),
-                          width: data.health.value > 99
-                              ? 21 * scale
-                              : 16.8 * scale,
+                          width: health > 99 ? 21 * scale : 16.8 * scale,
                           alignment: Alignment.center,
                           child: Text(
                             textAlign: TextAlign.end,
-                            "${data.health.value}",
+                            "$health",
                             style: TextStyle(
                                 height: 1,
                                 color: Colors.white,
@@ -201,8 +201,7 @@ class MonsterBox extends StatelessWidget {
                         )
                       ]),
                       SizedBox(
-                        width:
-                            data.health.value > 99 ? 4.5 * scale : 6.5 * scale,
+                        width: health > 99 ? 4.5 * scale : 6.5 * scale,
                       ),
                       ValueListenableBuilder<List<Condition>>(
                           valueListenable: data.conditions,
@@ -312,7 +311,8 @@ class MonsterBox extends StatelessWidget {
                       valueListenable: data.health,
                       builder: (context, value, child) {
                         bool alive = true;
-                        if (data.health.value <= 0) {
+                        if (data.health.value <= 0 &&
+                            !GameMethods.summonDoesNotDie(ownerId, data.name)) {
                           alive = false;
                         }
 

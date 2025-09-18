@@ -1941,6 +1941,16 @@ class GameMethods {
         edition == "Mercenary Packs";
   }
 
+  static bool summonDoesNotDie(String? ownerId, String id) {
+    //exempt special summons that should not be removed at 0
+    if (ownerId == "Glacial Torrent" && id == "Glacier") {
+      return true;
+    } else if (ownerId == "D.O.M.E." && id == "Barrier") {
+      return true;
+    }
+    return false;
+  }
+
   static bool isFrosthavenStyle(MonsterModel? monster) {
     //frosthaven monster
     final monsterFrostHavenStyledEdition =

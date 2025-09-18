@@ -18,7 +18,8 @@ void tests() {
       "currentAbilityDecks",
       "currentList",
       "modifierDeck",
-      "modifierDeckAllies"
+      "modifierDeckAllies",
+      "sanctuaryDeck"
     ], oldState);
     checkSaveState();
   });

@@ -52,25 +52,28 @@ abstract class ChangeStatCommand extends Command {
         final summonList = item.characterState.summonList;
         for (var instance in summonList) {
           if (instance.health.value == 0) {
-            item.characterState
-                .getMutableSummonList(stateAccess)
-                .remove(instance);
-            Future.delayed(const Duration(milliseconds: 600), () {
-              getIt<GameState>().killMonsterStandee.value++;
-            });
+            if (!GameMethods.summonDoesNotDie(item.id, instance.name)) {
+              item.characterState
+                  .getMutableSummonList(stateAccess)
+                  .remove(instance);
+              Future.delayed(const Duration(milliseconds: 600), () {
+                getIt<GameState>().killMonsterStandee.value++;
+              });
 
-            if (item.characterState.summonList.isEmpty) {
-              if (getIt<GameState>().roundState.value == RoundState.playTurns) {
-                Future.delayed(const Duration(milliseconds: 600), () {
+              if (item.characterState.summonList.isEmpty) {
+                if (getIt<GameState>().roundState.value ==
+                    RoundState.playTurns) {
+                  Future.delayed(const Duration(milliseconds: 600), () {
+                    getIt<GameState>().updateList.value++;
+                  });
+                } else {
                   getIt<GameState>().updateList.value++;
-                });
+                }
               } else {
                 getIt<GameState>().updateList.value++;
               }
-            } else {
-              getIt<GameState>().updateList.value++;
+              break;
             }
-            break;
           }
         }
       }
