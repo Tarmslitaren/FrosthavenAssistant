@@ -1,16 +1,13 @@
-name: CI
-
+name: Build Server Docker Image
 on:
   push:
     branches:
       - main
     tags:
       - 'v*'
-
 permissions:
   contents: read
   packages: write
-
 jobs:
   container:
     name: Build docker container
@@ -22,6 +19,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -30,7 +30,7 @@ jobs:
           tags: |
             type=ref,event=branch,suffix=-dev
             type=semver,pattern={{version}}
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=raw,value=latest,enable=${{ github.ref_type == 'tag' }}
       
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
