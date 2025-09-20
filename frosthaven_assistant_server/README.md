@@ -1,15 +1,31 @@
 Library and simple standalone dart server for X-Haven Assistant
-I have pushed the container to Docker Hub here:
-https://hub.docker.com/r/aschneem/x-haven-server
-
-This is currently a manual process and may not be up-to-date
+Container builds are automatically pushed the GitHub Container registry here:
+https://github.com/Tarmslitaren/FrosthavenAssistant/pkgs/container/x-haven-server
 
 The pull command:
-```
-docker pull aschneem/x-haven-server
+```bash
+docker pull ghcr.io/tarmslitaren/x-haven-server:latest
 ```
 
 Running the container:
+```bash
+docker run -p 4567:4567 ghcr.io/tarmslitaren/x-haven-server
 ```
-docker run -p 4567:4567 aschneem/x-haven-server
+
+Docker docker-compose.yml example:
+```yaml
+version: "3.9"
+
+services:
+  x-haven-server:
+    image: ghcr.io/tarmslitaren/x-haven-server:latest
+    container_name: x-haven-server
+    ports:
+      - "4567:4567"
+    restart: unless-stopped
+```
+
+Usage:
+```bash
+docker compose up -d
 ```
