@@ -61,17 +61,18 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     //empty the search text
     _controller.clear();
 
+    final modelData = _gameData.modelData.value;
+    final currentCampaign = _gameState.currentCampaign.value;
     //check value ok
-    if (_gameData.modelData.value[campaign] == null) {
+    if (modelData[campaign] == null) {
       campaign = "Jaws of the Lion";
     }
 
-    if (_gameState.currentCampaign.value != campaign) {
+    if (currentCampaign != campaign) {
       _gameState.action(SetCampaignCommand(campaign));
     }
-    _foundScenarios = _gameData
-        .modelData.value[_gameState.currentCampaign.value]!.scenarios.keys
-        .toList();
+    _foundScenarios =
+        modelData[_gameState.currentCampaign.value]!.scenarios.keys.toList();
 
     //special hack for solo BladeSwarm and Vanquisher
     if (campaign == "Solo" || campaign == "Trail of Ashes") {
@@ -98,6 +99,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         List<String> strings = scenario.split(':');
         strings[0] = strings.first.replaceFirst(" ", "Å");
         String characterName = strings.first.split("Å")[1];
+        characterName = characterName.split("/").first;
         if (_gameData.modelData.value.entries.any((element) =>
             GameMethods.isCustomCampaign(element.value.edition) &&
             element.value.characters
