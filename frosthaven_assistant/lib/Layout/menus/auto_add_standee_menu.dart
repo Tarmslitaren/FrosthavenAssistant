@@ -11,9 +11,9 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AutoAddStandeeMenu extends StatefulWidget {
-  final List<RoomMonsterData> monsterData;
-
   const AutoAddStandeeMenu({super.key, required this.monsterData});
+
+  final List<RoomMonsterData> monsterData;
 
   @override
   AddStandeeMenuState createState() => AddStandeeMenuState();
@@ -62,7 +62,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     }
   }
 
-  void closeOrNext(int nrOfElite, int nrOfNormal) {
+  void closeOrNext() {
     if (currentMonsterIndex + 1 >= widget.monsterData.length) {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         Navigator.pop(context);
@@ -84,7 +84,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
 
   Widget buildNrButton(final int nr, final double scale, Monster monster,
       bool elite, int nrOfElite, int nrOfNormal) {
-    bool boss = monster.type.levels[0].boss != null;
+    bool boss = monster.type.levels.first.boss != null;
     MonsterType type = MonsterType.normal;
     Color color = Colors.white;
 
@@ -100,8 +100,8 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     bool isOut = false;
     for (var item in monster.monsterInstances) {
       if (item.standeeNr == nr ||
-          (elite == true && nrOfElite <= currentEliteAdded) ||
-          (elite == false && nrOfNormal <= currentNormalAdded)) {
+          (elite && nrOfElite <= currentEliteAdded) ||
+          (!elite && nrOfNormal <= currentNormalAdded)) {
         isOut = true;
         break;
       }
@@ -180,18 +180,28 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
     );
   }
 
+  String _pluralize(String text) {
+    if (text.endsWith("s")) {
+      return text;
+    }
+    if (text.endsWith("y")) {
+      return "${text.substring(0, text.length - 1)}ies";
+    }
+    return "${text}s";
+  }
+
   Widget _buildButtonGrid(double scale, Monster monster, bool elite,
       int nrOfStandees, int nrLeft, int nrOfElite, int nrOfNormal) {
     String text;
     if (elite) {
       text = "Add $nrLeft Elite ${monster.type.display}";
       if (nrLeft > 1) {
-        text += "s";
+        text = _pluralize(text);
       }
     } else {
       text = "Add $nrLeft Normal ${monster.type.display}";
       if (nrLeft > 1) {
-        text += "s";
+        text = _pluralize(text);
       }
     }
     return Column(
@@ -343,10 +353,10 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
               initialNormalAdded[currentMonsterIndex].length +
               initialEliteAdded[currentMonsterIndex].length;
           if (allAdded >= monster.type.count) {
-            closeOrNext(nrOfElite, nrOfNormal);
+            closeOrNext();
           } else if (currentEliteAdded >= nrOfElite &&
               currentNormalAdded >= nrOfNormal) {
-            closeOrNext(nrOfElite, nrOfNormal);
+            closeOrNext();
           }
 
           double scale = getModalMenuScale(context);

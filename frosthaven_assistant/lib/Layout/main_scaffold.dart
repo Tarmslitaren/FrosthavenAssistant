@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/section_list.dart';
 import 'package:frosthaven_assistant/Layout/top_bar.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/main.dart';
 
 import '../Model/campaign.dart';
 import '../Resource/game_data.dart';
@@ -221,16 +219,7 @@ class MainScaffoldBody extends StatelessWidget {
                               ]));
                         });
                   });
-            }),
-        if (loading.value && kDebugMode)
-          Positioned(
-              left: screenSize.width * 0.45,
-              top: screenSize.height * 0.4,
-              width: screenSize.width * 0.1,
-              height: screenSize.width * 0.1,
-              child: const CircularProgressIndicator(
-                strokeWidth: 10,
-              ))
+            })
       ],
     );
   }
