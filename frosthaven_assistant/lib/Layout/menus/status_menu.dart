@@ -554,7 +554,7 @@ class StatusMenuState extends State<StatusMenu> {
                               command: ChangeEnfeebleCommand(
                                   0, "in-enfeeble", figureId, ownerId),
                               maxValue: 10,
-                              image: "assets/images/abilities/enfeeble.png",
+                              image: "assets/images/abilities/enfeeble_old.png",
                               extraImage: hasMoreThanOneEnfeeble
                                   ? "assets/images/class-icons/Incarnate.png"
                                   : null,
@@ -569,7 +569,7 @@ class StatusMenuState extends State<StatusMenu> {
                               command: ChangeEmpowerCommand(
                                   0, "in-empower", figureId, ownerId),
                               maxValue: 10,
-                              image: "assets/images/abilities/empower.png",
+                              image: "assets/images/abilities/empower_old.png",
                               extraImage: hasMoreThanOneEmpower
                                   ? "assets/images/class-icons/Incarnate.png"
                                   : null,
@@ -586,7 +586,7 @@ class StatusMenuState extends State<StatusMenu> {
                               command: ChangeEmpowerCommand(
                                   0, "rm-empower", figureId, ownerId),
                               maxValue: 12,
-                              image: "assets/images/abilities/empower.png",
+                              image: "assets/images/abilities/empower_old.png",
                               extraImage: hasMoreThanOneEmpower
                                   ? "assets/images/class-icons/Ruinmaw.png"
                                   : null,
@@ -603,7 +603,7 @@ class StatusMenuState extends State<StatusMenu> {
                               command:
                                   ChangeEmpowerCommand.deck(deck, "vi-empower"),
                               maxValue: 10,
-                              image: "assets/images/abilities/empower2.png",
+                              image: "assets/images/abilities/empower.png",
                               extraImage: hasMoreThanOneEmpower
                                   ? "assets/images/class-icons/Vimthreader.png"
                                   : null,
@@ -636,7 +636,7 @@ class StatusMenuState extends State<StatusMenu> {
                               command: ChangeEnfeebleCommand.deck(
                                   deck, "vi-enfeeble"),
                               maxValue: 10,
-                              image: "assets/images/abilities/enfeeble2.png",
+                              image: "assets/images/abilities/enfeeble.png",
                               extraImage: hasMoreThanOneEnfeeble
                                   ? "assets/images/class-icons/Vimthreader.png"
                                   : null,
@@ -670,7 +670,7 @@ class StatusMenuState extends State<StatusMenu> {
                               command: ChangeEnfeebleCommand
                                   .deck(deck, "li-enfeeble"),
                               maxValue: 15,
-                              image: "assets/images/abilities/enfeeble2.png",
+                              image: "assets/images/abilities/enfeeble.png",
                               extraImage: hasMoreThanOneEnfeeble
                                   ? "assets/images/class-icons/Lifespeaker.png"
                                   : null,

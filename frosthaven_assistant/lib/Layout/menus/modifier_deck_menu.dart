@@ -511,7 +511,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           deck, "in-enfeeble"),
                                       maxValue: 10,
                                       image:
-                                          "assets/images/abilities/enfeeble.png",
+                                          "assets/images/abilities/enfeeble_old.png",
                                       extraImage: hasMoreThanOneEnfeeble
                                           ? "assets/images/class-icons/Incarnate.png"
                                           : null,
@@ -528,7 +528,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           deck, "in-empower"),
                                       maxValue: 10,
                                       image:
-                                          "assets/images/abilities/empower.png",
+                                          "assets/images/abilities/empower_old.png",
                                       extraImage: hasMoreThanOneEmpower
                                           ? "assets/images/class-icons/Incarnate.png"
                                           : null,
@@ -544,7 +544,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           deck, "rm-empower"),
                                       maxValue: 12,
                                       image:
-                                          "assets/images/abilities/empower.png",
+                                          "assets/images/abilities/empower_old.png",
                                       extraImage: hasMoreThanOneEmpower
                                           ? "assets/images/class-icons/Ruinmaw.png"
                                           : null,
@@ -561,7 +561,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           deck, "vi-empower"),
                                       maxValue: 10,
                                       image:
-                                          "assets/images/abilities/empower2.png",
+                                          "assets/images/abilities/empower.png",
                                       extraImage: hasMoreThanOneEmpower
                                           ? "assets/images/class-icons/Vimthreader.png"
                                           : null,
@@ -593,7 +593,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           deck, "vi-enfeeble"),
                                       maxValue: 10,
                                       image:
-                                          "assets/images/abilities/enfeeble2.png",
+                                          "assets/images/abilities/enfeeble.png",
                                       extraImage: hasMoreThanOneEnfeeble
                                           ? "assets/images/class-icons/Vimthreader.png"
                                           : null,
@@ -626,7 +626,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           deck, "li-enfeeble"),
                                       maxValue: 15,
                                       image:
-                                          "assets/images/abilities/enfeeble2.png",
+                                          "assets/images/abilities/enfeeble.png",
                                       extraImage: hasMoreThanOneEnfeeble
                                           ? "assets/images/class-icons/Lifespeaker.png"
                                           : null,
