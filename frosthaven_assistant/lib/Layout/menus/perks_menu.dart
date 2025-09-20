@@ -7,6 +7,14 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import '../../Resource/commands/add_perk_command.dart';
 import '../../services/service_locator.dart';
 
+const divider = Divider(
+  color: Colors.grey,
+  thickness: 1,
+  height: 16,
+  indent: 8,
+  endIndent: 8,
+);
+
 class PerksMenu extends StatelessWidget {
   const PerksMenu({super.key, required this.character});
   final Character character;
@@ -45,9 +53,11 @@ class PerksMenu extends StatelessWidget {
           }
 
           for (int i = 0; i < perks.length; i++) {
+            tiles.add(divider);
             tiles.add(
                 PerkListTile(character: character, index: i, perk: perks[i]));
           }
+          tiles.add(divider);
 
           return Card(
               child: Scrollbar(
