@@ -28,6 +28,7 @@ abstract class ChangeStatCommand extends Command {
 
             final roundState = getIt<GameState>().roundState.value;
             if (item.monsterInstances.isEmpty) {
+              item.setActive(stateAccess, false);
               if (roundState == RoundState.chooseInitiative) {
                 GameMethods.sortCharactersFirst(stateAccess);
               }

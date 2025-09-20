@@ -15,8 +15,6 @@ import '../Resource/ui_utils.dart';
 import 'menus/stat_card_zoom.dart';
 
 class MonsterStatCardWidget extends StatelessWidget {
-  final Monster data;
-
   const MonsterStatCardWidget({
     super.key,
     required this.data,
@@ -31,7 +29,10 @@ class MonsterStatCardWidget extends StatelessWidget {
       return;
     }
 
-    if (data.monsterInstances.length == data.type.count - 1) {
+    final nrOfStandees = data.monsterInstances.length;
+    final maxStandees = data.type.count;
+
+    if (nrOfStandees == maxStandees - 1) {
       //directly add last standee
       GameMethods.addStandee(
           null,
@@ -42,7 +43,7 @@ class MonsterStatCardWidget extends StatelessWidget {
                   ? MonsterType.normal
                   : MonsterType.elite,
           false);
-    } else if (data.monsterInstances.length < data.type.count - 1) {
+    } else if (nrOfStandees < maxStandees - 1) {
       if (settings.randomStandees.value) {
         //todo: no logic in layout
         int standeeNr = GameMethods.getRandomStandee(data);
@@ -73,8 +74,8 @@ class MonsterStatCardWidget extends StatelessWidget {
     }
   }
 
-  static Widget buildNormalLayout(Monster data, double scale, var shadow,
-      var leftStyle, var rightStyle, bool frosthavenStyle) {
+  static Widget buildNormalLayout(Monster data, double scale, Shadow shadow,
+      TextStyle leftStyle, TextStyle rightStyle, bool frosthavenStyle) {
     MonsterStatsModel normal = data.type.levels[data.level.value].normal!;
     MonsterStatsModel? elite = data.type.levels[data.level.value].elite;
 
@@ -259,13 +260,13 @@ class MonsterStatCardWidget extends StatelessWidget {
     );
   }
 
-  static Widget buildBossLayout(Monster data, double scale, var shadow,
-      var leftStyle, var rightStyle, bool frosthavenStyle) {
+  static Widget buildBossLayout(Monster data, double scale, Shadow shadow,
+      TextStyle leftStyle, bool frosthavenStyle) {
     bool noCalculationSetting = getIt<Settings>().noCalculation.value;
     MonsterStatsModel normal = data.type.levels[data.level.value].boss!;
     //normal stats calculated:
     String health = normal.health.toString();
-    if (noCalculationSetting == false) {
+    if (!noCalculationSetting) {
       int? healthValue = StatCalculator.calculateFormula(normal.health);
       if (healthValue != null) {
         health = healthValue.toString();
@@ -296,7 +297,7 @@ class MonsterStatCardWidget extends StatelessWidget {
 
     String attack = normal.attack.toString();
     String move = normal.move.toString();
-    if (noCalculationSetting == false) {
+    if (!noCalculationSetting) {
       int? moveValue = StatCalculator.calculateFormula(normal.move);
       if (moveValue != null) {
         move = moveValue.toString();
@@ -555,12 +556,14 @@ class MonsterStatCardWidget extends StatelessWidget {
               ),
               margin: EdgeInsets.all(1.6 * scale),
               child: isBoss
-                  ? buildBossLayout(data, scale, shadow, leftStyle, rightStyle,
-                      frosthavenStyle)
+                  ? buildBossLayout(
+                      data, scale, shadow, leftStyle, frosthavenStyle)
                   : buildNormalLayout(data, scale, shadow, leftStyle,
                       rightStyle, frosthavenStyle));
         });
   }
+
+  final Monster data;
 
   @override
   Widget build(BuildContext context) {

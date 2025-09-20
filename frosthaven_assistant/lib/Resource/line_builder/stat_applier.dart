@@ -1,27 +1,156 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import '../../Model/monster.dart';
+import '../../services/service_locator.dart';
 import '../enums.dart';
 import '../stat_calculator.dart';
 import '../state/game_state.dart';
 
 class StatApplier {
-  static Map<String, int> _getStatTokens(Monster monster, bool elite) {
+  static List<String> applyMonsterStats(final String lineInput,
+      String sizeToken, Monster monster, bool forceShowAll) {
+    bool showElite = false;
+    final noStandees = getIt<Settings>().noStandees.value;
+    if ((noStandees && monster.isActive) ||
+        monster.monsterInstances.firstWhereOrNull(
+                (element) => element.type == MonsterType.elite) !=
+            null) {
+      showElite = true;
+    }
+    bool showNormal = false;
+    if ((noStandees && monster.isActive) ||
+        monster.monsterInstances.firstWhereOrNull(
+                (element) => element.type != MonsterType.elite) !=
+            null) {
+      showNormal = true;
+    }
+    if (forceShowAll) {
+      showElite = true;
+      showNormal = true;
+    }
+    String line = lineInput;
+    List<String> retVal = [];
+
+    //get the data
+    var normalTokens = _getStatTokens(monster, false);
+    var eliteTokens = _getStatTokens(monster, true);
+
+    RegExp regExpNumbers = RegExp(r'^[\d ()xCL/*+-]+$');
+    //first pass fix values only
+    String lastToken =
+        ""; //turn this into move or attack or whatever, then apply correct monster stat
+    bool isInToken = false;
+    int tokenStartIndex = 0;
+    for (int i = 0; i < line.length; i++) {
+      if (line[i] == "%") {
+        if (!isInToken) {
+          isInToken = true;
+          tokenStartIndex = i + 1;
+        } else {
+          isInToken = false;
+          lastToken = line.substring(tokenStartIndex, i);
+        }
+      }
+      if (!isInToken &&
+                  (line[i] == '+' ||
+                      line[i] == '-' ||
+                      line[i] == 'C' ||
+                      line[i] == 'L') ||
+              line[i] ==
+                  'X' || //hax: X doesn't work in formula, but if a formula starts wit X it should bork. Hopefully there are no wild 'X's anywhere.
+              (line[i].contains(regExpNumbers) &&
+                      lastToken
+                          .isEmpty) //plain numbers cant be calculated for tokens (e.g. attack 1 is not same as attack +1)
+                  &&
+                  (i == 0 ||
+                      line[i - 1] ==
+                          ' ') //supposing there is always a leading whitespace to any formula
+          ) {
+        String formula = line[i];
+        int startIndex = i;
+        int endIndex = i;
+
+        for (int j = i + 1; j < lineInput.length; j++) {
+          String val = lineInput[j];
+          if (val.contains(regExpNumbers) || val == "d") {
+            if (val != ' ') formula += val;
+            endIndex = j;
+          } else {
+            i = j; //skip ahead
+            if (lineInput[i - 1] == ' ') {
+              i = j - 1; //restore any skipped whitespace
+              endIndex = endIndex - 1;
+            }
+            //hack for when a formula is followed by " (..."
+            if (i > 0 && lineInput[i - 1] == '(') {
+              i = j - 1; //restore any skipped (
+              endIndex = endIndex - 1;
+              formula = formula.substring(0, formula.length - 1);
+              if (i > 1 && lineInput[i - 2] == ' ') {
+                i = j - 1; //restore any skipped whitespace
+                endIndex = endIndex - 1;
+              }
+            }
+            break;
+          }
+        }
+        if (formula.length > 1 && lastToken.isNotEmpty || formula.length > 2) {
+          //this disallows a single digit or C,L. single C or L could be part of regular text
+          //for a formula to work (outside of plain C or L) it must either be modifying a token value or be 3+ chars long
+
+          if (lastToken.isNotEmpty) {
+            retVal = _applyStatForToken(
+              formula,
+              line,
+              sizeToken,
+              startIndex,
+              endIndex,
+              monster,
+              showNormal,
+              showElite,
+              lastToken,
+              normalTokens,
+              eliteTokens,
+            );
+            lastToken = "";
+            if (retVal.isNotEmpty) {
+              return retVal;
+            }
+          } else {
+            int? result = StatCalculator.calculateFormula(formula);
+            if (result != null) {
+              if (result < 0) {
+                //just some nicety. probably never applies
+                result = 0;
+              }
+              line = line.replaceRange(
+                  startIndex, endIndex + 1, result.toString());
+            }
+          }
+        }
+      }
+    }
+
+    return [line];
+  }
+
+  static Map<String, int> _getStatTokens(Monster monster, bool isElite) {
     var map = <String, int>{};
     MonsterStatsModel data;
-    if (monster.type.levels[monster.level.value].boss != null) {
+    final level = monster.type.levels[monster.level.value];
+    final boss = level.boss;
+    final elite = level.elite;
+    final normal = level.normal;
+    if (boss != null) {
       //is boss
-      if (elite) {
+      if (isElite) {
         return map;
       }
-      data = monster.type.levels[monster.level.value].boss!;
+      data = boss;
     } else {
-      if (elite) {
-        data = monster.type.levels[monster.level.value].elite!;
-      } else {
-        data = monster.type.levels[monster.level.value].normal!;
-      }
+      data = isElite ? elite! : normal!;
     }
     for (String item in data.attributes) {
       //remove size modifiers (only used for immobilize since it's so long it overflows.)
@@ -90,9 +219,9 @@ class StatApplier {
     int normalValue = 0;
     int eliteValue = 0;
     bool skipCalculation = false; //in case un-calculable
-    MonsterStatsModel? normal = monster.type.levels[monster.level.value].boss ??
-        monster.type.levels[monster.level.value].normal;
-    MonsterStatsModel? elite = monster.type.levels[monster.level.value].elite;
+    final level = monster.type.levels[monster.level.value];
+    MonsterStatsModel? normal = level.boss ?? level.normal;
+    MonsterStatsModel? elite = level.elite;
     if (lastToken == "attack") {
       int? calc = StatCalculator.calculateFormula(normal!.attack);
       if (calc != null) {
@@ -110,7 +239,7 @@ class StatApplier {
       RegExp regEx =
           RegExp(r"(?=.*[a-z])"); //not sure why I do this. only letters?
       for (var item in normalTokens.keys) {
-        if (regEx.hasMatch(item) == true) {
+        if (regEx.hasMatch(item)) {
           if (item != "shield" &&
               item != "retaliate" &&
               item != "range" &&
@@ -121,7 +250,7 @@ class StatApplier {
         }
       }
       for (var item in eliteTokens.keys) {
-        if (regEx.hasMatch(item) == true) {
+        if (regEx.hasMatch(item)) {
           if (item != "shield" &&
               item != "retaliate" &&
               item != "range" &&
@@ -228,144 +357,8 @@ class StatApplier {
       String leftOver =
           "!$sizeModifier${line.substring(endIndex + 1, line.length)}";
 
-      //retVal.addAll(applyMonsterStats(leftOver, sizeToken, monster));
       retVal.add(leftOver);
     }
     return retVal;
-  }
-
-  static List<String> applyMonsterStats(final String lineInput,
-      String sizeToken, Monster monster, bool forceShowAll) {
-    bool showElite = false;
-    if (monster.isActive ||
-        monster.monsterInstances.firstWhereOrNull(
-                (element) => element.type == MonsterType.elite) !=
-            null) {
-      showElite = true;
-    }
-    bool showNormal = false;
-    if (monster.isActive ||
-        monster.monsterInstances.firstWhereOrNull(
-                (element) => element.type != MonsterType.elite) !=
-            null) {
-      showNormal = true;
-    }
-    if (forceShowAll) {
-      showElite = true;
-      showNormal = true;
-    }
-    String line = lineInput;
-    if (kDebugMode) {
-      //print("monster: ${monster.id}");
-      //print("line: $line");
-    }
-
-    List<String> retVal = [];
-
-    //get the data
-    var normalTokens = _getStatTokens(monster, false);
-    var eliteTokens = _getStatTokens(monster, true);
-
-    RegExp regExpNumbers = RegExp(r'^[\d ()xCL/*+-]+$');
-    //first pass fix values only
-    String lastToken =
-        ""; //turn this into move or attack or whatever, then apply correct monster stat
-    bool isInToken = false;
-    int tokenStartIndex = 0;
-    for (int i = 0; i < line.length; i++) {
-      if (line[i] == "%") {
-        if (!isInToken) {
-          isInToken = true;
-          tokenStartIndex = i + 1;
-        } else {
-          isInToken = false;
-          lastToken = line.substring(tokenStartIndex, i);
-        }
-      }
-      if (!isInToken &&
-                  (line[i] == '+' ||
-                      line[i] == '-' ||
-                      line[i] == 'C' ||
-                      line[i] == 'L') ||
-              line[i] ==
-                  'X' || //hax: X doesn't work in formula, but if a formula starts wit X it should bork. Hopefully there are no wild 'X's anywhere.
-              (line[i].contains(regExpNumbers) &&
-                      lastToken
-                          .isEmpty) //plain numbers cant be calculated for tokens (e.g. attack 1 is not same as attack +1)
-                  &&
-                  (i == 0 ||
-                      line[i - 1] ==
-                          ' ') //supposing there is always a leading whitespace to any formula
-          ) {
-        String formula = line[i];
-        int startIndex = i;
-        int endIndex = i;
-
-        for (int j = i + 1; j < lineInput.length; j++) {
-          String val = lineInput[j];
-          if (val.contains(regExpNumbers) || val == "d") {
-            if (val != ' ') formula += val;
-            endIndex = j;
-          } else {
-            i = j; //skip ahead
-            if (lineInput[i - 1] == ' ') {
-              i = j - 1; //restore any skipped whitespace
-              endIndex = endIndex - 1;
-            }
-            //hack for when a formula is followed by " (..."
-            if (i > 0 && lineInput[i - 1] == '(') {
-              i = j - 1; //restore any skipped (
-              endIndex = endIndex - 1;
-              formula = formula.substring(0, formula.length - 1);
-              if (i > 1 && lineInput[i - 2] == ' ') {
-                i = j - 1; //restore any skipped whitespace
-                endIndex = endIndex - 1;
-              }
-            }
-            break;
-          }
-        }
-        if (formula.length > 1 && lastToken.isNotEmpty || formula.length > 2) {
-          //this disallows a single digit or C,L. single C or L could be part of regular text
-          //for a formula to work (outside of plain C or L) it must either be modifying a token value or be 3+ chars long
-          //might not be right. test.
-          if (kDebugMode) {
-            //print("formula:$formula");
-          }
-
-          if (lastToken.isNotEmpty) {
-            retVal = _applyStatForToken(
-              formula,
-              line,
-              sizeToken,
-              startIndex,
-              endIndex,
-              monster,
-              showNormal,
-              showElite,
-              lastToken,
-              normalTokens,
-              eliteTokens,
-            );
-            lastToken = "";
-            if (retVal.isNotEmpty) {
-              return retVal;
-            }
-          } else {
-            int? result = StatCalculator.calculateFormula(formula);
-            if (result != null) {
-              if (result < 0) {
-                //just some nicety. probably never applies
-                result = 0;
-              }
-              line = line.replaceRange(
-                  startIndex, endIndex + 1, result.toString());
-            }
-          }
-        }
-      }
-    }
-
-    return [line];
   }
 }

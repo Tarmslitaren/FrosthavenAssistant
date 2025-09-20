@@ -283,7 +283,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
           final roundState = _gameState.roundState.value;
           final data = widget.data;
           if (roundState == RoundState.playTurns &&
-              (data.monsterInstances.isNotEmpty || data.isActive) &&
+              data.isActive &&
               !GameMethods.isInactiveForRule(data.type.name)) {
             CardStack? stack = GameMethods.getDeck(data.type.deck)?.discardPile;
             if (stack != null && stack.isNotEmpty) {
@@ -310,8 +310,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
               },
               onDoubleTap: () {
                 if (_gameState.roundState.value == RoundState.playTurns &&
-                    (widget.data.monsterInstances.isNotEmpty ||
-                        widget.data.isActive) &&
+                    widget.data.isActive &&
                     card != null) {
                   setState(() {
                     openDialog(
@@ -331,8 +330,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                   children: [widget!, ...list],
                 ),
                 child: roundState == RoundState.playTurns &&
-                        (widget.data.monsterInstances.isNotEmpty ||
-                            widget.data.isActive) &&
+                        widget.data.isActive &&
                         card != null
                     ? MonsterAbilityCardWidget.buildFront(
                         card, widget.data, scale, false)

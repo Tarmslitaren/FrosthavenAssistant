@@ -623,7 +623,7 @@ class LineBuilder {
                       (line.toLowerCase().contains('disadvantage') ||
                           line.contains('retaliate') ||
                           line.contains('shield')) &&
-                      (monster.isActive || monster.monsterInstances.isNotEmpty);
+                      monster.isActive;
                   if (monster != null &&
                       monster.turnState.value == TurnsState.current) {
                     if (line.toLowerCase().contains("advantage")) {
@@ -750,7 +750,7 @@ class LineBuilder {
           (line.toLowerCase().contains('disadvantage') ||
               line.contains('retaliate') ||
               line.contains('shield')) &&
-          (monster.isActive || monster.monsterInstances.isNotEmpty);
+          monster.isActive;
       if (monster != null && monster.turnState.value == TurnsState.current) {
         if (line.toLowerCase().contains("advantage")) {
           shouldAnimate = true;

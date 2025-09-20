@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card_widget.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
+import 'package:frosthaven_assistant/Resource/commands/activate_monster_type_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_ability_card_command.dart';
 import 'package:reorderables/reorderables.dart';
 
@@ -216,6 +217,20 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                                         },
                                         child: const Text(
                                           "Extra Shuffle",
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          _gameState.action(
+                                              ActivateMonsterTypeCommand(
+                                                  widget.monsterData.id,
+                                                  !widget
+                                                      .monsterData.isActive));
+                                        },
+                                        child: Text(
+                                          widget.monsterData.isActive
+                                              ? "Inactivate\nMonster"
+                                              : "Activate\nMonster",
                                         ),
                                       ),
                                     ])),

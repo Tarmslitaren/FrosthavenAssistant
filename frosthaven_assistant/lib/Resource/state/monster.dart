@@ -23,6 +23,7 @@ class Monster extends ListItemData {
   final _level = ValueNotifier<int>(0);
   bool _isAlly;
   bool _isActive = false;
+  int _version = 0;
 
   ValueListenable<int> get level => _level;
   bool get isAlly => _isAlly;
@@ -63,6 +64,16 @@ class Monster extends ListItemData {
     for (Map<String, dynamic> item in instanceList) {
       var instance = MonsterInstance.fromJson(item);
       _monsterInstances.add(instance);
+    }
+
+    //fixing update issue, when _isActive is repurposed to work even with standees
+    if (_monsterInstances.isNotEmpty && !_isActive) {
+      if (!json.containsKey("v")) {
+        _isActive = true;
+      }
+    }
+    if (json.containsKey("v")) {
+      _version = json['v'];
     }
   }
 
@@ -109,6 +120,7 @@ class Monster extends ListItemData {
         '"type": "${type.name}", '
         '"monsterInstances": ${_monsterInstances.toString()}, '
         '"isAlly": $isAlly, '
+        '"v": $_version, '
         '"level": ${level.value} '
         '}';
   }

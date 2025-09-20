@@ -8,7 +8,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Resource/color_matrices.dart';
 import '../services/service_locator.dart';
-import 'monster_stat_card.dart';
+import 'monster_stat_card_widget.dart';
 
 class MonsterWidget extends StatefulWidget {
   MonsterWidget({super.key, required this.data});
@@ -137,7 +137,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
 
           return Column(mainAxisSize: MainAxisSize.max, children: [
             ColorFiltered(
-                colorFilter: (hasInstances || isActive) &&
+                colorFilter: isActive &&
                         !specialDisabled &&
                         (widget.data.turnState.value != TurnsState.done ||
                             roundState == RoundState.chooseInitiative)
