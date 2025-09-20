@@ -144,14 +144,12 @@ This will walk you through app installation through your first scenario.
 - Local settings are not affected by the game state (Except for no standees option). It is up to the users to decide on options that affect the game
 
 ## Known Issues
-- Does not handle character modifier decks
 - Severe flickering on lineage os 16, 17 and 18 on older phones using adreno 300 series graphic chip.
 - Some animations will not play, (and some may play when they shouldn't) when receiving updates over wifi
 - When trying to connect without a server on same network, may result in a lot of error messages shown when it tries connecting
 - A device sharing a wifi-hotspot can not connect itself
 - Initiative is secret while not originating from your own device in a network. It will stop being secret if you do modify it yourself
 - Some text alignment issues with small texts on small screens
-- Condition Animations do not play when connected
 - When connected and the server device goes to background, the connection may be broken. Try to avoid having the server device's app go to background
 - All data is added by hand. Please report any error in a ticket on Github
 

@@ -24,8 +24,19 @@ class CharacterWidget extends StatefulWidget {
 
 class CharacterWidgetState extends State<CharacterWidget> {
   final GameState _gameState = getIt<GameState>();
+  @override
+  void initState() {
+    for (var item in _gameState.currentList) {
+      if (item.id == widget.characterId && item is Character) {
+        character = item;
+      }
+    }
+    lastList = character.characterState.summonList.toList();
+    super.initState();
+  }
+
   bool isCharacter = true;
-  late List<MonsterInstance> lastList = [];
+  List<MonsterInstance> lastList = [];
   late Character character;
 
   Widget buildWithHealthWheel() {
@@ -53,7 +64,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
     final summonList = character.characterState.summonList;
     if (lastList.length < summonList.length) {
       //find which is new - always the last one
-      displayStartAnimation = summonList.last.getId();
+      displayStartAnimation =
+          summonList.last.getId(); //issue: if several with same id?
     }
 
     final generatedChildren = List<Widget>.generate(
@@ -82,12 +94,6 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    for (var item in _gameState.currentList) {
-      if (item.id == widget.characterId && item is Character) {
-        character = item;
-      }
-    }
-
     return InkWell(
         onTap: () {
           //open stats menu
