@@ -513,7 +513,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       image:
                                           "assets/images/abilities/enfeeble.png",
                                       extraImage: hasMoreThanOneEnfeeble
-                                          ? "assets/images/class-icons/incarnate.png"
+                                          ? "assets/images/class-icons/Incarnate.png"
                                           : null,
                                       showTotalValue: true,
                                       color: Colors.white,
@@ -530,7 +530,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       image:
                                           "assets/images/abilities/empower.png",
                                       extraImage: hasMoreThanOneEmpower
-                                          ? "assets/images/class-icons/incarnate.png"
+                                          ? "assets/images/class-icons/Incarnate.png"
                                           : null,
                                       showTotalValue: true,
                                       color: Colors.white,
@@ -546,7 +546,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       image:
                                           "assets/images/abilities/empower.png",
                                       extraImage: hasMoreThanOneEmpower
-                                          ? "assets/images/class-icons/ruinmaw.png"
+                                          ? "assets/images/class-icons/Ruinmaw.png"
                                           : null,
                                       showTotalValue: true,
                                       color: Colors.white,
@@ -563,7 +563,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       image:
                                           "assets/images/abilities/empower2.png",
                                       extraImage: hasMoreThanOneEmpower
-                                          ? "assets/images/class-icons/vimthreader.png"
+                                          ? "assets/images/class-icons/Vimthreader.png"
                                           : null,
                                       showTotalValue: true,
                                       color: Colors.white,
@@ -595,7 +595,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       image:
                                           "assets/images/abilities/enfeeble2.png",
                                       extraImage: hasMoreThanOneEnfeeble
-                                          ? "assets/images/class-icons/vimthreader.png"
+                                          ? "assets/images/class-icons/Vimthreader.png"
                                           : null,
                                       showTotalValue: true,
                                       color: Colors.white,
@@ -628,7 +628,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       image:
                                           "assets/images/abilities/enfeeble2.png",
                                       extraImage: hasMoreThanOneEnfeeble
-                                          ? "assets/images/class-icons/lifespeaker.png"
+                                          ? "assets/images/class-icons/Lifespeaker.png"
                                           : null,
                                       showTotalValue: true,
                                       color: Colors.white,
