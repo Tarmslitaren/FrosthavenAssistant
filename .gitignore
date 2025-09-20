@@ -50,6 +50,12 @@ captures/
 # Comment next line if keeping position of elements in Navigation Editor is relevant for you
 .idea/navEditor.xml
 
+# VS Code
+.vscode
+
+# FVM Version Cache
+**/.fvm/
+
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
 #*.jks
@@ -83,3 +89,7 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+
+# generated
+**/generated_*
+**/Generated*
