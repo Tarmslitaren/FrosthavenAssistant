@@ -41,7 +41,7 @@ class CounterButtonState extends State<CounterButton> {
   final totalChangeValue = ValueNotifier<int>(0);
   @override
   Widget build(BuildContext context) {
-    FigureState? figure =
+    final FigureState? figure =
         GameMethods.getFigure(widget.ownerId, widget.figureId);
     if (figure == null && widget.figureId != "unknown") {
       //in case it dies and was removed from the list
@@ -60,7 +60,8 @@ class CounterButtonState extends State<CounterButton> {
                   gameState.action(widget.command);
                   if (widget.figureId != "unknown" &&
                       widget.notifier == figure?.health &&
-                      figure!.health.value <= 0) {
+                      figure != null &&
+                      figure.health.value <= 0) {
                     {
                       Navigator.pop(context);
                     }
