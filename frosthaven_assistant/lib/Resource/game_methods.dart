@@ -692,6 +692,7 @@ class GameMethods {
         //create the bear summon
         health = 8;
         multiplier = 2;
+        name = "Beast";
       }
       if (character.id == "D.O.M.E.") {
         health = 3;
@@ -758,6 +759,7 @@ class GameMethods {
       health = 8;
       multiplier = 2;
       gfx = item.id == "Beast Tyrant" ? "beast" : "Beast v2";
+      name = "Beast";
     }
     if (item.id == "D.O.M.E.") {
       health = 3;
@@ -1681,6 +1683,7 @@ class GameMethods {
           health = 8;
           multiplier = 2;
           gfx = character.id == "Beast Tyrant" ? "beast" : "Beast v2";
+          name = "Beast";
         }
         if (character.id == "D.O.M.E.") {
           health = 3;
