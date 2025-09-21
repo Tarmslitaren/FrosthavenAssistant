@@ -799,6 +799,10 @@ class GameMethods {
       _gameState.modifierDeckAllies._initDeck();
       _gameState._sanctuaryDeck._initDeck();
 
+      GameMethods.setRoundState(s, RoundState.chooseInitiative);
+      _gameState._scenario.value = scenario;
+      _gameState._scenarioSectionsAdded = [];
+
       List<ListItemData> newList = [];
       for (var item in _gameState.currentList) {
         if (item is Character) {
@@ -1055,13 +1059,8 @@ class GameMethods {
 
     if (!section) {
       _gameState._scenarioSpecialRules = specialRules;
-
-      //todo: create a game state set scenario method to handle all these
       GameMethods.resetElements(s);
-      GameMethods.setRoundState(s, RoundState.chooseInitiative);
       GameMethods.sortCharactersFirst(s);
-      _gameState._scenario.value = scenario;
-      _gameState._scenarioSectionsAdded = [];
     } else {
       //remove earlier times if has "ResetRound"
       if (specialRules
