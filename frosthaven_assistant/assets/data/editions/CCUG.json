@@ -89,7 +89,7 @@
     },
     {
       "name": "Lightracer",
-      "color": "FFEF1921",
+      "color": "FFdc6565",
       "colorSecondary": "ff8E9D9D",
       "edition": "CCUG",
       "health": [8,9,11,12,14,15,17,18,20],
