@@ -55,6 +55,7 @@ class CharacterState extends FigureState {
       _summonList.add(MonsterInstance.fromJson(item));
     }
 
+    //todo: automate check json.containsKey for everything: the nr of update bugs...
     if (json.containsKey("perkList")) {
       final perks = json["perkList"];
       int i = 0;
