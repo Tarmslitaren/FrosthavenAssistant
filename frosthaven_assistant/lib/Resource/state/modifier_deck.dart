@@ -72,7 +72,9 @@ class ModifierDeck {
     _removedPile.clear();
     _drawPile.setList(_getCardsFromJson(modifierDeckData, "drawPile"));
     _discardPile.setList(_getCardsFromJson(modifierDeckData, "discardPile"));
-    _removedPile.setList(_getCardsFromJson(modifierDeckData, "removedPile"));
+    if (modifierDeckData.containsKey('removedPile')) {
+      _removedPile.setList(_getCardsFromJson(modifierDeckData, "removedPile"));
+    }
     _cardCount.value = _drawPile.size();
 
     if (modifierDeckData.containsKey("imbuement")) {
