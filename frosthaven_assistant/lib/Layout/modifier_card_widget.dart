@@ -43,15 +43,15 @@ class ModifierCardWidget extends StatelessWidget {
 
     if (card.gfx.startsWith("Demons")) {
       gfx = gfx.replaceAll("Demons-", "");
-      extraGfx = 'assets/images/Demons.png';
+      extraGfx = 'assets/images/demons.png';
       hasExtra = true;
     } else if (card.gfx.startsWith("Merchant-Guild")) {
       gfx = gfx.replaceAll("Merchant-Guild-", "");
-      extraGfx = 'assets/images/Merchant-Guild.png';
+      extraGfx = 'assets/images/merchant-guild.png';
       hasExtra = true;
     } else if (card.gfx.startsWith("Military")) {
       gfx = gfx.replaceAll("Military-", "");
-      extraGfx = 'assets/images/Military.png';
+      extraGfx = 'assets/images/military.png';
       hasExtra = true;
     }
 
