@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_xp_command.dart';
 import '../../Resource/state/game_state.dart';
+import '../../services/service_locator.dart';
 
 class CharacterXPWidget extends StatelessWidget {
-  const CharacterXPWidget(
+  CharacterXPWidget(
       {super.key,
       required this.character,
       required this.scale,
@@ -12,16 +13,17 @@ class CharacterXPWidget extends StatelessWidget {
   final Character character;
   final double scale;
   final Shadow shadow;
+  final GameState _gameState = getIt<GameState>();
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          ChangeXPCommand(1, character.id, character.id).execute();
+          _gameState.action(ChangeXPCommand(1, character.id, character.id));
         },
         onDoubleTap: () {
           if (character.characterState.xp.value > 0) {
-            ChangeXPCommand(-1, character.id, character.id).execute();
+            _gameState.action(ChangeXPCommand(-1, character.id, character.id));
           }
         },
         child: Row(
