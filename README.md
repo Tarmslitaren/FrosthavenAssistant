@@ -60,8 +60,8 @@ This will walk you through app installation through your first scenario.
 	 - Congratulations!
 	 - Look at the bottom bar for successful Experience rewards and the Looted Gold multiplier
 
-
 ## Key features
+
 - Full support for Frosthaven, Gloomhaven, Forgotten Circles, Jaws of the Lion and Crimson Scales!
 - Characters
 - Monster ability decks
@@ -88,8 +88,8 @@ This will walk you through app installation through your first scenario.
 - Switch card styles between Gloomhaven and Frosthaven
 - Loot Deck for Frosthaven
 
-
 ## Usage
+
 - Tap the hamburger icon (≡) for settings.
 - Add characters with the *Add Character* menu. Class names can be searched.
 - Set the current scenario with the *Set Scenario* menu .
@@ -135,11 +135,13 @@ This will walk you through app installation through your first scenario.
 ## Connection Usage
 
 ### Starting
+
 - From the settings menu, have one device start a server. Be sure to be on wifi or ethernet (a local IP will be shown i.e. 192.168.X.XXX).
 - A Port can also be defined if needed. Be aware that ports under 1024 are typically blocked. If using a port, make sure to allow port forwarding in your router's settings. Search the internet for this.
 - Other devices on the same network may connect from the settings menu, by typing in the host server's IP and port. There are two IP numbers, local IP address and public IP address. Try the first one.
 
 ### Info
+
 - Be aware, when connecting to a server, the server's game state will overwrite the local state.
 - Mobile devices might cut connections when they are not in foreground. This is especially crucial for Server device: Best to put the server on a windows or mac if available.
 - Clients will try to auto reconnect when coming back to foreground if connection was cut.
@@ -174,18 +176,18 @@ variables: C (nr of characters), L (scenario level)
 #### Special Rules
 
 Allies:
- - need a "list" of strings of monsters
+- need a "list" of strings of monsters
 Timer:
- - "startOfRound": optional boolean,
- - "list": integers of the rounds in which to display note. -1 means all rounds
- - "note" - test to display
+- "startOfRound": optional boolean,
+- "list": integers of the rounds in which to display note. -1 means all rounds
+- "note" - test to display
 Objective/Escort:
- - "name" - name of character
- - "health": - string with the calculation for health with C,L etc.
- - "init": - preset initiative
+- "name" - name of character
+- "health": - string with the calculation for health with C,L etc.
+- "init": - preset initiative
 LevelAdjust:,
- - "name" - string, the monster id
- - "level" - integer, the disparity from regular level (i.e. -1 means one level lower)
+- "name" - string, the monster id
+- "level" - integer, the disparity from regular level (i.e. -1 means one level lower)
 Named or otherwise special enemies are not added as special rules, but as their own monster type
 Since named monsters are like bosses, they should be added as if they were a boss (i.e only one type instead of normal+elite types)
 
