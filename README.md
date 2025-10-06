@@ -1,4 +1,3 @@
-
 # X-haven Assistant
 
 <img width="776" alt="image" src="https://github.com/alexzhaohong/FrosthavenAssistant/assets/12620082/cfedba27-f69d-4c97-bda3-264973570067">
@@ -6,7 +5,8 @@
 > Scenario 1 of Gloomhaven with starting classes of X-haven games
 
 ## Introduction
-**X-Haven Assistant** is a helper app for **Gloomhaven** and its family of board games. The app currently supports **Gloomhaven**, **Frosthaven**, **Jaws of the Lion**, **Forgotten Circles**, **Crimson Scales**, **Trail of Ashes**, and the **Seeker of Xorn** scenarios. 
+
+**X-Haven Assistant** is a helper app for **Gloomhaven** and its family of board games. The app currently supports **Gloomhaven**, **Frosthaven**, **Jaws of the Lion**, **Forgotten Circles**, **Crimson Scales**, **Trail of Ashes**, and the **Seeker of Xorn** scenarios.
 
 This is a feature-complete replacement for the defunct Gloomhaven Helper app. This single-screen app streamlines combat and minimizes the need for user input. It complements physical play by tracking monster turns, enforcing scenario-specific rules and spawns, facilitating loot deck construction and enhancement, and much more. Multi-device control is available via local area networking. Please note that campaign progress is not within scope of this combat helper app.
 
@@ -20,7 +20,7 @@ Written with the Flutter framework. [![codecov](https://codecov.io/gh/tarmslitar
 
 ## Set-up Guide
 
-This will walk you through app installation through your first scenario. 
+This will walk you through app installation through your first scenario.
 
 <img width="575" alt="image" src="https://github.com/alexzhaohong/FrosthavenAssistant/assets/12620082/13657352-1360-4663-b4b1-8e1b81c93110">
 
@@ -42,7 +42,7 @@ This will walk you through app installation through your first scenario.
 	 - Select monster numbers. Monsters auto-populate by player count and difficulty
          - if you now want to change the difficulty, it can be done by tapping the bottom bar center or from the side menu
  - Round structure
-	 - Choose two cards and input initiative 
+	 - Choose two cards and input initiative
 		 - **For tablet/mouse users:** "*Soft numpad for input*" displays virtual numpad for accessibility
 		 - If the "*Don't ask for initative*" setting is on, long press and drag and drop banners after drawing monster cards
 	 - Reveal monster actions. Click *Draw* in the bottom-left corner
@@ -59,9 +59,9 @@ This will walk you through app installation through your first scenario.
  - Complete the scenario
 	 - Congratulations!
 	 - Look at the bottom bar for successful Experience rewards and the Looted Gold multiplier
- 
 
 ## Key features
+
 - Full support for Frosthaven, Gloomhaven, Forgotten Circles, Jaws of the Lion and Crimson Scales!
 - Characters
 - Monster ability decks
@@ -88,8 +88,8 @@ This will walk you through app installation through your first scenario.
 - Switch card styles between Gloomhaven and Frosthaven
 - Loot Deck for Frosthaven
 
-
 ## Usage
+
 - Tap the hamburger icon (≡) for settings.
 - Add characters with the *Add Character* menu. Class names can be searched.
 - Set the current scenario with the *Set Scenario* menu .
@@ -135,11 +135,13 @@ This will walk you through app installation through your first scenario.
 ## Connection Usage
 
 ### Starting
+
 - From the settings menu, have one device start a server. Be sure to be on wifi or ethernet (a local IP will be shown i.e. 192.168.X.XXX).
 - A Port can also be defined if needed. Be aware that ports under 1024 are typically blocked. If using a port, make sure to allow port forwarding in your router's settings. Search the internet for this.
 - Other devices on the same network may connect from the settings menu, by typing in the host server's IP and port. There are two IP numbers, local IP address and public IP address. Try the first one.
 
 ### Info
+
 - Be aware, when connecting to a server, the server's game state will overwrite the local state.
 - Mobile devices might cut connections when they are not in foreground. This is especially crucial for Server device: Best to put the server on a windows or mac if available.
 - Clients will try to auto reconnect when coming back to foreground if connection was cut.
@@ -172,37 +174,39 @@ and parenthesis.
 variables: C (nr of characters), L (scenario level)
 
 #### Special Rules
-Allies: 
- - need a "list" of strings of monsters
-Timer: 
- - "startOfRound": optional boolean,
- - "list": integers of the rounds in which to display note. -1 means all rounds
- - "note" - test to display
-Objective/Escort:          
- - "name" - name of character
- - "health": - string with the calculation for health with C,L etc.
- - "init": - preset initiative
+
+Allies:
+- need a "list" of strings of monsters
+Timer:
+- "startOfRound": optional boolean,
+- "list": integers of the rounds in which to display note. -1 means all rounds
+- "note" - test to display
+Objective/Escort:
+- "name" - name of character
+- "health": - string with the calculation for health with C,L etc.
+- "init": - preset initiative
 LevelAdjust:,
- - "name" - string, the monster id
- - "level" - integer, the disparity from regular level (i.e. -1 means one level lower)
+- "name" - string, the monster id
+- "level" - integer, the disparity from regular level (i.e. -1 means one level lower)
 Named or otherwise special enemies are not added as special rules, but as their own monster type
 Since named monsters are like bosses, they should be added as if they were a boss (i.e only one type instead of normal+elite types)
 
 #### special signs for text layout
- - *small style - only used for longer texts usually.
- - ^mid style - also denotes subline in case last line was main line sized. if you want a line to be a subline you NEED to use this or ^^.
- - ^^mid style squished. makes the line height smaller. can cause alignment issues if text contains icons. best to use this from the second row onwards in a text block.
- - ! to the right of (don't use this. is being used internally. prefer the "[r]"+"[/r]" way.)
- - £ yellow
- - | draw only condition, not the text (for FH style, ignore this. the text is removed automatically)
- - Å invisible text - used for force aligning text, since whitespace by itself gets disregarded. also empty lines, since height of empty string is variable :(
- - '>' disables stat calculation (useful for grant abilities)
- - "[r]"+"[/r]" row "[c]"+"[/c]" column - put items between in row or column.
- - "[s]"+"[/s]" for row in column in row. only used for element use case.
- - ¤ treat as image instead of WidgetSpan - using actual image size (use this for aoe graphics)
- - *......... create divider
- - **......... crete divider with smaller height.
- - [newLine] used to force break line for the sublines (gray boxes: it is ont correct style, but necessary to fit calculated values in some cases.
+
+- *small style - only used for longer texts usually.
+- ^mid style - also denotes subline in case last line was main line sized. if you want a line to be a subline you NEED to use this or ^^.
+- ^^mid style squished. makes the line height smaller. can cause alignment issues if text contains icons. best to use this from the second row onwards in a text block.
+- ! to the right of (don't use this. is being used internally. prefer the "[r]"+"[/r]" way.)
+- £ yellow
+- | draw only condition, not the text (for FH style, ignore this. the text is removed automatically)
+- Å invisible text - used for force aligning text, since whitespace by itself gets disregarded. also empty lines, since height of empty string is variable :(
+- '>' disables stat calculation (useful for grant abilities)
+- "[r]"+"[/r]" row "[c]"+"[/c]" column - put items between in row or column.
+- "[s]"+"[/s]" for row in column in row. only used for element use case.
+- ¤ treat as image instead of WidgetSpan - using actual image size (use this for aoe graphics)
+- *......... create divider
+- **......... crete divider with smaller height.
+- [newLine] used to force break line for the sublines (gray boxes: it is ont correct style, but necessary to fit calculated values in some cases.
 graphics can be placed at exact position like this:
 [{
 "gfx": "aoe-line-4-with-black",
@@ -212,16 +216,34 @@ graphics can be placed at exact position like this:
 }]
 added before the lines.
 FH special considerations:
- - write as if gloomhaven style, the algorithm will move the sublines up when applicable.
- - algorithm will find if is subline by looking for ^ after a mainline.
- - algorithm will find conditional block (dotted edge) by looking for keyword: '%use%'
- - algorithm will make first ^ line after a use-element to be main line when reasonable (e.g. conditions, and added attacks)
- - if you need a subline to be in 2 parts, one to the right and one below, add empty row like this to separate: "[r]","[/r]",
- - don't use ^^ on first line of subline of conditional block as the gray background will be squished as well and look bad.
- - subline text is somewhat larger than the physical counterpart due to the fact it was just too small to see easily on smaller screens.
+- write as if gloomhaven style, the algorithm will move the sublines up when applicable.
+- algorithm will find if is subline by looking for ^ after a mainline.
+- algorithm will find conditional block (dotted edge) by looking for keyword: '%use%'
+- algorithm will make first ^ line after a use-element to be main line when reasonable (e.g. conditions, and added attacks)
+- if you need a subline to be in 2 parts, one to the right and one below, add empty row like this to separate: "[r]","[/r]",
+- don't use ^^ on first line of subline of conditional block as the gray background will be squished as well and look bad.
+- subline text is somewhat larger than the physical counterpart due to the fact it was just too small to see easily on smaller screens.
 
-## ios beta link
-for those interested in occationally testing builds befor they show up on app store: https://testflight.apple.com/join/FXRPO9oJ
+## iOS Beta link
+
+For those interested in occasionally testing builds before they show up on app store join the: [TestFlight](https://testflight.apple.com/join/FXRPO9oJ)
+
+## Docker Server
+
+The GUI-less server can be run via Docker. A docker compose example:
+
+```yaml
+version: "3.9"
+services:
+  x-haven-server:
+    image: ghcr.io/tarmslitaren/x-haven-server:latest
+    container_name: x-haven-server
+    ports:
+      - "4567:4567"
+    restart: unless-stopped
+```
+
+With this running you can point the clients at the server's IP and port (`45671`). [See more discussion in Issues](https://github.com/Tarmslitaren/FrosthavenAssistant/issues/279).
 
 ## Copyright and License
 
