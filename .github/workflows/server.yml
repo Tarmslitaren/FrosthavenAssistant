@@ -5,9 +5,12 @@ on:
       - main
     tags:
       - 'v*'
+#  pull_request:  # uncomment if you want to build in PRs also
+
 permissions:
   contents: read
   packages: write
+
 jobs:
   container:
     name: Build docker container
@@ -15,9 +18,13 @@ jobs:
     defaults:
       run:
         working-directory: ./frosthaven_assistant_server
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -39,11 +46,12 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and push
+      - name: Build and push multi-arch image
         uses: docker/build-push-action@v5
         with:
           context: ./frosthaven_assistant_server
           push: ${{ github.event_name != 'pull_request' }}
+          platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
