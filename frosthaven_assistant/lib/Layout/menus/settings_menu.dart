@@ -448,12 +448,12 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 width: 200,
                                 height: 40,
                                 child: TextField(
-                                    controller: _serverTextController,
-                                    decoration: const InputDecoration(
-                                      counterText: "",
-                                      helperText: "server ip address",
-                                    ),
-                                    maxLength: 20),
+                                  controller: _serverTextController,
+                                  decoration: const InputDecoration(
+                                    counterText: "",
+                                    helperText: "server ip address",
+                                  ),
+                                ),
                               ),
 
                               Container(
