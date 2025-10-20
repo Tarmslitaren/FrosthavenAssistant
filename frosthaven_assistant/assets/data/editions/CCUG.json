@@ -561,6 +561,132 @@
         {"text": "[double] You may bring an additional 2-handed hand item into each scenario"},
         {"text": "Your forced movement can move allies through enemies, and enemies through allies"}
       ]
+    },
+    {
+      "name": "Reeftender",
+      "color": "FF33ACCD",
+      "colorSecondary": "ff0B262D",
+      "edition": "CCUG",
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "hidden": false,
+      "summons": {
+        "Furious Crab": {
+          "level": 1,
+          "health": 3,
+          "standees": 1,
+          "gfx": "REE furious crab",
+          "move": 3,
+          "attack": 2
+        },
+        "Armored Puffer": {
+          "level": 1,
+          "health": 3,
+          "standees": 1,
+          "gfx": "REE armored puffer",
+          "move": 2,
+          "attack": 2
+        },
+        "Soothing Star": {
+          "level": 1,
+          "health": 3,
+          "standees": 1,
+          "gfx": "REE soothing star",
+          "move": 2,
+          "attack": 2
+        },
+        "Shrieking Gull": {
+          "level": 1,
+          "health": 3,
+          "standees": 1,
+          "gfx": "REE shrieking gull",
+          "move": 3,
+          "attack": 2
+        },
+        "Spiny Urchin": {
+          "level": 1,
+          "health": 4,
+          "standees": 1,
+          "gfx": "REE spiny urchin",
+          "move": 2,
+          "attack": 1
+        },
+        "Spitting Clam": {
+          "level": 2,
+          "health": 3,
+          "standees": 1,
+          "gfx": "REE spitting clam",
+          "move": 2,
+          "attack": 1,
+          "range": 2
+        },
+        "Hydra Serpent": {
+          "level": 3,
+          "health": 3,
+          "standees": 1,
+          "gfx": "REE hydra serpent",
+          "move": 2,
+          "attack": 2
+        },
+        "Venomous Tigerfish": {
+          "level": 4,
+          "health": 3,
+          "standees": 1,
+          "gfx": "REE venomous tigerfish",
+          "move": 2,
+          "attack": 1
+        },
+        "Holy Man-O-War": {
+          "level": 5,
+          "health": 3,
+          "standees": 1,
+          "gfx": "REE holy man-o-war",
+          "move": 3,
+          "attack": 3
+        },
+        "Clever Octopus": {
+          "level": 7,
+          "health": 3,
+          "standees": 1,
+          "gfx": "REE clever octopus",
+          "move": 3,
+          "attack": 3
+        },
+        "Sabretooth Sea Lion": {
+          "level": 8,
+          "health": 4,
+          "standees": 1,
+          "gfx": "REE sabretooth sea lion",
+          "move": 2,
+          "attack": 3
+        },
+        "Reefborne Huntress": {
+          "level": 9,
+          "health": 5,
+          "standees": 1,
+          "gfx": "REE reefborne huntress",
+          "move": 3,
+          "attack": 2,
+          "range": 2
+        }
+      },
+      "perks": [
+        {"removes": ["minus2"],"adds": [ "plus0"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0heal1range3"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0heal1range3"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0heal1range3"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1wardrange3"]},
+        {"removes": ["plus0"],"adds": [ "perks/plus1wardrange3"]},
+        {"text": "Replace one +0 card with one +1 \"After this attack ability, %teleport% one of your summons to an unoccupied hex adjacent to Reeftender\" card","removes": ["plus1"],"adds": [ "perks/unique/rt1"]},
+        {"text": "Replace one +0 card with one +1 \"After this attack ability, %teleport% one of your summons to an unoccupied hex adjacent to Reeftender\" card","removes": ["plus1"],"adds": [ "perks/unique/rt1"]},
+        {"adds": [ "perks/plus1poisonflip"]},
+        {"adds": [ "perks/plus1poisonflip"]},
+        {"adds": [ "perks/plus2earthlight"]},
+        {"adds": [ "perks/plus2earthlight"]},
+        {"text": "Ignore item - 1 effects and add one +1 card","adds": [ "plus1"]},
+        {"text": "Whenever you declare a long rest, oyu may move one of your summons to your discard pile to perform %ward%, self"},
+        {"text": "Once each scenario, when your summon would suffer %damage%, negate the %damage%, %teleport% to the hex occupied by that summon, and place that summon in an empty hex closest to you"},
+        {"text": "[triple] Your summons gain advantage on all attacks performed while adjacent to you"}
+      ]
     }
   ],
   "monsterAbilities": [
