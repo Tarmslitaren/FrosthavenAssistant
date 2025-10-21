@@ -37,7 +37,7 @@ class MainScaffold extends StatelessWidget {
                       preferredSize: Size(double.infinity,
                           40 * getIt<Settings>().userScalingBars.value),
                       child: const TopBar()),
-                  drawer: createMainMenu(context),
+                  drawer: MainMenu(),
                   body: const MainScaffoldBody()));
         });
   }
