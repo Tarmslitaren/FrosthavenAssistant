@@ -1819,7 +1819,7 @@ class GameMethods {
       for (int i = conditions.length - 1; i >= 0; i--) {
         Condition item = conditions[i];
         if (canExpire(item)) {
-          if (item != Condition.chill || chillRemoved) {
+          if (item != Condition.chill || !chillRemoved) {
             if (!figure.conditionsAddedThisTurn.contains(item)) {
               conditions.removeAt(i);
               figure._conditionsAddedPreviousTurn.add(item);
