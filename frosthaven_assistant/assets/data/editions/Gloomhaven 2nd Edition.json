@@ -2738,7 +2738,7 @@
         },
         {
           "level": 5,
-          "normal": { "health": 3, "move": 3, "attack": 4, "attributes": [ "%shield% 3" ]},
+          "normal": { "health": 4, "move": 3, "attack": 3, "attributes": [ "%shield% 3" ]},
           "elite": { "health": 5, "move": 4, "attack": 5, "attributes": [ "%shield% 4" ]}
         },
         {
