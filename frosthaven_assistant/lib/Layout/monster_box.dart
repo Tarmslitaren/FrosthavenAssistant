@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/color_matrices.dart';
 import '../Resource/enums.dart';
+import '../Resource/game_methods.dart';
 import '../Resource/ui_utils.dart';
 import 'menus/status_menu.dart';
 

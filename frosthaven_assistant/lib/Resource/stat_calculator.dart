@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
+import 'game_methods.dart';
+
 class StatCalculator {
   static int? calculateFormula(final dynamic str) {
     if (str is int) {

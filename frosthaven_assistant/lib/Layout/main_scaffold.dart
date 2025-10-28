@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Model/campaign.dart';
 import '../Resource/game_data.dart';
+import '../Resource/game_methods.dart';
 import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';

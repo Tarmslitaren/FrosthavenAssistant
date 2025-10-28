@@ -4,7 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/Model/room.dart';
 
-import '../Resource/state/game_state.dart';
+import '../Resource/game_methods.dart';
 
 @immutable
 class LootDeckModel {

@@ -7,7 +7,7 @@ class SetCampaignCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.setCampaign(stateAccess, campaign);
+    MutableGameMethods.setCampaign(stateAccess, campaign);
   }
 
   @override

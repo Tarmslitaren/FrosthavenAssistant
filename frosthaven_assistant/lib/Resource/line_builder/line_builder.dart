@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/line_builder/frosthaven_converter.
 import 'package:frosthaven_assistant/Resource/line_builder/stat_applier.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
+import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class LineBuilder {

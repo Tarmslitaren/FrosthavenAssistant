@@ -1,6 +1,5 @@
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
-
 class ReturnLootCardCommand extends Command {
   final bool top;
 
@@ -8,7 +7,7 @@ class ReturnLootCardCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.returnLootCard(top);
+    MutableGameMethods.returnLootCard(stateAccess, top);
   }
 
   @override

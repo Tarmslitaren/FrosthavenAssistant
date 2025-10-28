@@ -7,8 +7,8 @@ class SetSoloCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.setSolo(stateAccess, solo);
-    GameMethods.applyDifficulty(stateAccess);
+    MutableGameMethods.setSolo(stateAccess, solo);
+    MutableGameMethods.applyDifficulty(stateAccess);
   }
 
   @override
@@ -16,7 +16,7 @@ class SetSoloCommand extends Command {
 
   @override
   String describe() {
-    if(solo) {
+    if (solo) {
       return "set solo level recommendation";
     }
     return "set regular level recommendation";

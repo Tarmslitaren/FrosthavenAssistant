@@ -1,5 +1,6 @@
 import '../../services/service_locator.dart';
 import '../enums.dart';
+import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class ActivateMonsterTypeCommand extends Command {
@@ -23,10 +24,10 @@ class ActivateMonsterTypeCommand extends Command {
     if (activate) {
       final roundState = _gameState.roundState.value;
       if (roundState == RoundState.chooseInitiative) {
-        GameMethods.sortCharactersFirst(stateAccess);
+        MutableGameMethods.sortCharactersFirst(stateAccess);
       } else if (roundState == RoundState.playTurns) {
-        GameMethods.drawAbilityCardFromInactiveDeck(stateAccess);
-        GameMethods.sortItemToPlace(
+        MutableGameMethods.drawAbilityCardFromInactiveDeck(stateAccess);
+        MutableGameMethods.sortItemToPlace(
             stateAccess, name, GameMethods.getInitiative(monster!));
       }
     }

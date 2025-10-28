@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart
 import '../../Model/character_class.dart';
 import '../../Resource/commands/set_scenario_command.dart';
 import '../../Resource/game_data.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';

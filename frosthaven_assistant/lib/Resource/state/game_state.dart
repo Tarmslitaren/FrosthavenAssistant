@@ -1,6 +1,5 @@
 import 'dart:collection';
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:built_collection/built_collection.dart';
 import 'package:collection/collection.dart';
@@ -24,8 +23,9 @@ import '../card_stack.dart';
 import '../commands/add_standee_command.dart';
 import '../enums.dart';
 import '../game_data.dart';
+import '../game_methods.dart';
 
-part "../game_methods.dart";
+part "../mutable_game_methods.dart";
 part "character.dart";
 part "character_state.dart";
 part "figure_state.dart";

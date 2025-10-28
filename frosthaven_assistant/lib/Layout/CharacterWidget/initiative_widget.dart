@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../../Resource/enums.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/network/network.dart';

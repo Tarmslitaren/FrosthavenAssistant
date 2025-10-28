@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Resource/commands/next_turn_command.dart';
 import '../../Resource/commands/set_init_command.dart';
 import '../../Resource/enums.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/scaling.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';

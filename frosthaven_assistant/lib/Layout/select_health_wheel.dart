@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_health_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
+import '../Resource/game_methods.dart';
 import '../Resource/scaling.dart';
 import '../services/service_locator.dart';
 

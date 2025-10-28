@@ -1,4 +1,5 @@
 import '../../services/service_locator.dart';
+import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class RemoveCharacterCommand extends Command {
@@ -9,11 +10,11 @@ class RemoveCharacterCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.removeCharacters(stateAccess, names);
+    MutableGameMethods.removeCharacters(stateAccess, names);
 
     if (names.length != 1 ||
         !GameMethods.isObjectiveOrEscort(names.first.characterClass)) {
-      GameMethods.applyDifficulty(stateAccess);
+      MutableGameMethods.applyDifficulty(stateAccess);
     }
   }
 

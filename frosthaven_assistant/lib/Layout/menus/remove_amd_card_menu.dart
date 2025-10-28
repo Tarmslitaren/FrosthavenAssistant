@@ -3,6 +3,7 @@ import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 
 import '../../Resource/commands/remove_amd_card_command.dart';
 import '../../Resource/commands/return_modifier_card_command.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';

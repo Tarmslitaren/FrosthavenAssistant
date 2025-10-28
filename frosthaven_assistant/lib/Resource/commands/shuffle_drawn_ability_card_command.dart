@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 
 import '../../Layout/menus/ability_cards_menu.dart';
+import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class ShuffleDrawnAbilityCardCommand extends Command {

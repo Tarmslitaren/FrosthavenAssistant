@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Resource/color_matrices.dart';
+import '../Resource/game_methods.dart';
 import '../services/service_locator.dart';
 import 'monster_stat_card_widget.dart';
 

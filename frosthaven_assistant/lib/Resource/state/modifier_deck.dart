@@ -118,24 +118,26 @@ class ModifierDeck {
 
   void addCSSanctuary(_StateModifier s) {
     //adds one of each
-    _drawPile.add(_gameState._sanctuaryDeck.drawFlip(s));
-    _drawPile.add(_gameState._sanctuaryDeck.drawMult(s));
+    final GameState gameState = getIt<GameState>();
+    _drawPile.add(gameState._sanctuaryDeck.drawFlip(s));
+    _drawPile.add(gameState._sanctuaryDeck.drawMult(s));
     _drawPile.shuffle();
     _cardCount.value = _drawPile.size();
   }
 
   void removeCSSanctuary(_StateModifier _) {
     var list = _drawPile.getList();
+    final GameState gameState = getIt<GameState>();
     for (int i = list.length - 1; i >= 0; i--) {
       if (list[i].gfx.startsWith("sanctuary")) {
-        _gameState._sanctuaryDeck.returnCard(list[i].gfx);
+        gameState._sanctuaryDeck.returnCard(list[i].gfx);
         _drawPile.removeAt(i);
       }
     }
     list = _discardPile.getList();
     for (int i = list.length - 1; i >= 0; i--) {
       if (list[i].gfx.startsWith("sanctuary")) {
-        _gameState._sanctuaryDeck.returnCard(list[i].gfx);
+        gameState._sanctuaryDeck.returnCard(list[i].gfx);
         _discardPile.removeAt(i);
       }
     }

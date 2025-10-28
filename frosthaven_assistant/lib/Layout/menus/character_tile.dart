@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Model/character_class.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 

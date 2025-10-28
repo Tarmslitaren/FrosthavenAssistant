@@ -229,7 +229,7 @@ showToastSticky(BuildContext context, String text) {
         .closed
         .then((value) {
       if (getIt<GameState>().toastMessage.value == text) {
-        GameMethods.setToastMessage("");
+        MutableGameMethods.setToastMessage("");
       }
     });
   }
@@ -262,7 +262,7 @@ showErrorToastStickyWithRetry(
       .closed
       .then((value) {
     if (getIt<GameState>().toastMessage.value == text) {
-      GameMethods.setToastMessage("");
+      MutableGameMethods.setToastMessage("");
     }
   });
 }

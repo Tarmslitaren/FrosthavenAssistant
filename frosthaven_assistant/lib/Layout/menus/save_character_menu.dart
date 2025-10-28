@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_modal_menu.dart';
 
+import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';

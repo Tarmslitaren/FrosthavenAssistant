@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
+import '../Resource/game_methods.dart';
 import '../Resource/state/game_state.dart';
 
 class ModifierCardWidget extends StatelessWidget {

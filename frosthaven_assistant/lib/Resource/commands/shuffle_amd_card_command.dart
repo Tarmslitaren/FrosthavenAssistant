@@ -1,5 +1,6 @@
 import '../../Layout/menus/modifier_deck_menu.dart';
 import '../../services/service_locator.dart';
+import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class ShuffleAMDCardCommand extends Command {

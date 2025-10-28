@@ -1,17 +1,15 @@
 import '../state/game_state.dart';
 
 class ShowAllyDeckCommand extends Command {
-
   ShowAllyDeckCommand();
 
   @override
   void execute() {
-    GameMethods.showAllyDeck(stateAccess);
+    MutableGameMethods.showAllyDeck(stateAccess);
   }
 
   @override
-  void undo() {
-  }
+  void undo() {}
 
   @override
   String describe() {

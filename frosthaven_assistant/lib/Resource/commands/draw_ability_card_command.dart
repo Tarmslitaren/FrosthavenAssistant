@@ -1,3 +1,4 @@
+import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class DrawAbilityCardCommand extends Command {

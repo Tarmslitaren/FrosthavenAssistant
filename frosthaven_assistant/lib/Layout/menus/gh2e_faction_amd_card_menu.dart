@@ -3,6 +3,7 @@ import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_faction_card_command.dart';
 
 import '../../Resource/color_matrices.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';

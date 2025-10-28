@@ -126,11 +126,12 @@ class Monster extends ListItemData {
   }
 
   void _addAbilityDeck() {
-    for (MonsterAbilityState deck in _gameState.currentAbilityDecks) {
+    final GameState gameState = getIt<GameState>();
+    for (MonsterAbilityState deck in gameState.currentAbilityDecks) {
       if (deck.name == type.deck) {
         return;
       }
     }
-    _gameState._currentAbilityDecks.add(MonsterAbilityState(type.deck));
+    gameState._currentAbilityDecks.add(MonsterAbilityState(type.deck));
   }
 }

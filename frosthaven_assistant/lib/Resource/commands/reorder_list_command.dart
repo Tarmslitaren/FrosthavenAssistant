@@ -8,7 +8,7 @@ class ReorderListCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.reorderMainList(stateAccess, newIndex, oldIndex);
+    MutableGameMethods.reorderMainList(stateAccess, newIndex, oldIndex);
   }
 
   @override

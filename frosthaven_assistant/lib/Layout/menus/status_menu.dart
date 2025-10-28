@@ -18,6 +18,7 @@ import '../../Resource/commands/ice_wraith_change_form_command.dart';
 import '../../Resource/commands/remove_condition_command.dart';
 import '../../Resource/commands/set_as_summon_command.dart';
 import '../../Resource/enums.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';

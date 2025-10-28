@@ -17,6 +17,7 @@ import 'package:window_manager/window_manager.dart';
 
 import '../../Resource/commands/hide_ally_deck_command.dart';
 import '../../Resource/commands/show_ally_deck_command.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/network/network.dart';

@@ -1,4 +1,5 @@
 import '../../../services/service_locator.dart';
+import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
 
@@ -10,7 +11,7 @@ class ChangeMaxHealthCommand extends ChangeStatCommand {
     FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
 
     int newValue = figure.maxHealth.value + change;
-    if(newValue <= 0 ) {
+    if (newValue <= 0) {
       //can't lower maxvalue less than 1
       return;
     }

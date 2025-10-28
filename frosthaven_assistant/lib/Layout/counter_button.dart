@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import '../Resource/commands/change_stat_commands/change_stat_command.dart';
+import '../Resource/game_methods.dart';
 import '../Resource/state/game_state.dart';
 import '../services/service_locator.dart';
 

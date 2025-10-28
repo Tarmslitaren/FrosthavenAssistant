@@ -1,6 +1,7 @@
 import 'package:frosthaven_assistant/Resource/enums.dart';
 
 import '../../services/service_locator.dart';
+import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class IceWraithChangeFormCommand extends Command {

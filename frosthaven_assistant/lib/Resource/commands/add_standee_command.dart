@@ -15,7 +15,7 @@ class AddStandeeCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.executeAddStandee(
+    MutableGameMethods.executeAddStandee(
         stateAccess, nr, summon, type, ownerId, addAsSummon);
 
     if (getIt<GameState>().roundState.value == RoundState.playTurns) {

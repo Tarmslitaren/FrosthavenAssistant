@@ -10,6 +10,7 @@ import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/game_data.dart';
+import '../Resource/game_methods.dart';
 import '../Resource/settings.dart';
 import 'menus/modifier_card_zoom.dart';
 

@@ -1,5 +1,6 @@
 import '../../../services/service_locator.dart';
 import '../../enums.dart';
+import '../../game_methods.dart';
 import '../../state/game_state.dart';
 
 abstract class ChangeStatCommand extends Command {
@@ -30,7 +31,7 @@ abstract class ChangeStatCommand extends Command {
             if (item.monsterInstances.isEmpty) {
               item.setActive(stateAccess, false);
               if (roundState == RoundState.chooseInitiative) {
-                GameMethods.sortCharactersFirst(stateAccess);
+                MutableGameMethods.sortCharactersFirst(stateAccess);
               }
               if (roundState == RoundState.playTurns) {
                 Future.delayed(const Duration(milliseconds: 600), () {

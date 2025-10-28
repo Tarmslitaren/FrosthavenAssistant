@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/line_builder/token_applier.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../../Resource/commands/add_perk_command.dart';
+import '../../Resource/game_methods.dart';
 import '../../services/service_locator.dart';
 
 const divider = Divider(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/return_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 
+import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';

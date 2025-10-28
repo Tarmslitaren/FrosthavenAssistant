@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Resource/game_methods.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
 import '../Resource/ui_utils.dart';

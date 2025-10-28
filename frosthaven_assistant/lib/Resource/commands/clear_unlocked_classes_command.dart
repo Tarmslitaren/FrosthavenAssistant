@@ -5,7 +5,7 @@ class ClearUnlockedClassesCommand extends Command {
 
   @override
   void execute() {
-    GameMethods.clearUnlockedClasses(stateAccess);
+    MutableGameMethods.clearUnlockedClasses(stateAccess);
   }
 
   @override

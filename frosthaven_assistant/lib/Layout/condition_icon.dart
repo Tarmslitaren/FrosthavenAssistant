@@ -3,6 +3,7 @@ import 'package:animated_widgets/widgets/shake_animated_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../Resource/enums.dart';
+import '../Resource/game_methods.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
 import '../Resource/ui_utils.dart';

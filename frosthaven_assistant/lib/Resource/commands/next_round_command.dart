@@ -5,6 +5,7 @@ import '../../Layout/main_list.dart';
 import '../../services/service_locator.dart';
 import '../enums.dart';
 import '../game_data.dart';
+import '../game_methods.dart';
 import '../settings.dart';
 import '../state/game_state.dart';
 
@@ -21,23 +22,25 @@ class NextRoundCommand extends Command {
       }
       if (item is Monster) {
         //only really needed for ice wraiths
-        GameMethods.sortMonsterInstances(
+        MutableGameMethods.sortMonsterInstances(
             stateAccess, item.getMutableMonsterInstancesList(stateAccess));
       }
     }
-    GameMethods.shuffleDecksIfNeeded(stateAccess);
-    GameMethods.updateElements(stateAccess);
-    GameMethods.setRoundState(stateAccess, RoundState.chooseInitiative);
+    MutableGameMethods.shuffleDecksIfNeeded(stateAccess);
+    MutableGameMethods.updateElements(stateAccess);
+    MutableGameMethods.setRoundState(stateAccess, RoundState.chooseInitiative);
     if (_gameState.currentList.last.turnState.value != TurnsState.done) {
-      GameMethods.setTurnDone(stateAccess, _gameState.currentList.length - 1);
+      MutableGameMethods.setTurnDone(
+          stateAccess, _gameState.currentList.length - 1);
     }
     if (_gameState.currentList.last.turnState.value != TurnsState.done) {
-      GameMethods.setTurnDone(stateAccess, _gameState.currentList.length - 1);
+      MutableGameMethods.setTurnDone(
+          stateAccess, _gameState.currentList.length - 1);
     }
-    GameMethods.clearTurnState(stateAccess, false);
-    GameMethods.sortCharactersFirst(stateAccess);
+    MutableGameMethods.clearTurnState(stateAccess, false);
+    MutableGameMethods.sortCharactersFirst(stateAccess);
 
-    GameMethods.setToastMessage("");
+    MutableGameMethods.setToastMessage("");
 
     for (var rule in _gameState.scenarioSpecialRules) {
       if (rule.type == "Timer" && !rule.startOfRound) {
@@ -45,7 +48,7 @@ class NextRoundCommand extends Command {
           //minus 1 means always
           if (round == _gameState.round.value || round == -1) {
             if (getIt<Settings>().showReminders.value) {
-              GameMethods.setToastMessage(rule.note);
+              MutableGameMethods.setToastMessage(rule.note);
             }
 
             _handleTimedSpawns(rule);
@@ -62,10 +65,11 @@ class NextRoundCommand extends Command {
           final toastMessage = _gameState.toastMessage.value;
           if (round - 1 == _gameState.round.value || round == -1) {
             if (toastMessage.isNotEmpty) {
-              GameMethods.setToastMessage("$toastMessage\n\n${rule.note}");
+              MutableGameMethods.setToastMessage(
+                  "$toastMessage\n\n${rule.note}");
             } else {
               if (getIt<Settings>().showReminders.value) {
-                GameMethods.setToastMessage("$toastMessage${rule.note}");
+                MutableGameMethods.setToastMessage("$toastMessage${rule.note}");
               }
             }
             _handleTimedSpawns(rule);
@@ -74,7 +78,7 @@ class NextRoundCommand extends Command {
       }
     }
 
-    GameMethods.setRound(stateAccess, _gameState.round.value + 1);
+    MutableGameMethods.setRound(stateAccess, _gameState.round.value + 1);
 
     Future.delayed(const Duration(milliseconds: 600), () {
       _gameState.updateList.value++;
@@ -120,7 +124,7 @@ class NextRoundCommand extends Command {
           if (spawnSection != null) {
             final monsterStandees = spawnSection.monsterStandees;
             if (monsterStandees != null) {
-              GameMethods.autoAddStandees(
+              MutableGameMethods.autoAddStandees(
                   stateAccess, monsterStandees, rule.note);
             }
           }

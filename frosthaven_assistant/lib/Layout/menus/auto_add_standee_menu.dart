@@ -6,6 +6,7 @@ import '../../Model/room.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/commands/change_stat_commands/change_health_command.dart';
 import '../../Resource/enums.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';

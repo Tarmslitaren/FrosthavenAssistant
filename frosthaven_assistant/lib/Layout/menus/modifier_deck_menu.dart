@@ -27,6 +27,7 @@ import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
 import '../../Resource/commands/change_stat_commands/change_empower_command.dart';
 import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
+import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';

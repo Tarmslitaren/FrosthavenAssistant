@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/commands/draw_loot_card_command.dart';
 import '../Resource/game_data.dart';
+import '../Resource/game_methods.dart';
 import '../Resource/settings.dart';
 import 'loot_card.dart';
 import 'menus/loot_cards_menu.dart';

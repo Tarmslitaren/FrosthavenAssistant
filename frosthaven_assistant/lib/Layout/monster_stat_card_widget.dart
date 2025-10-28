@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/commands/add_standee_command.dart';
 import '../Resource/enums.dart';
+import '../Resource/game_methods.dart';
 import '../Resource/line_builder/line_builder.dart';
 import '../Resource/stat_calculator.dart';
 import '../Resource/ui_utils.dart';
@@ -34,7 +35,7 @@ class MonsterStatCardWidget extends StatelessWidget {
 
     if (nrOfStandees == maxStandees - 1) {
       //directly add last standee
-      GameMethods.addStandee(
+      MutableGameMethods.addStandee(
           null,
           data,
           isBoss

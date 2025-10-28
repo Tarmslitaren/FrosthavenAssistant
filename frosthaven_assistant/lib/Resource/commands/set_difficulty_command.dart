@@ -9,7 +9,7 @@ class SetDifficultyCommand extends Command {
   @override
   void execute() {
     getIt<GameState>().setDifficulty(stateAccess, difficulty);
-    GameMethods.applyDifficulty(stateAccess);
+    MutableGameMethods.applyDifficulty(stateAccess);
   }
 
   @override
