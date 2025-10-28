@@ -370,6 +370,7 @@ class MutableGameMethods {
   }
 
   static void setLevel(_StateModifier s, int level, String? monsterId) {
+    assert(level >= 0 && level <= 7);
     final GameState gameState = getIt<GameState>();
     if (monsterId == null) {
       gameState._level.value = level;
