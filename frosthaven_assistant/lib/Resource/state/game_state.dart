@@ -200,6 +200,13 @@ class GameState extends ActionHandler {
     GameSaveState state = GameSaveState();
     state.loadFromData(data, this);
   }
+
+  /**
+   * Clears the current list. only for use in tests. temp. should use load from data instead
+   */
+  void clearList() {
+    _currentList.clear();
+  }
 }
 
 abstract class Command {

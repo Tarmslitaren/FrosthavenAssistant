@@ -1,0 +1,281 @@
+{
+  "edition": "Frosthaven",
+  "classes": [
+    {
+      "name": "Blinkblade",
+      "edition": "Frosthaven",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "color": "ff01b0db",
+      "summons": {},
+      "perks": [
+        {"removes": ["minus1","minus1","minus1","minus1","minus1","minus1"]},
+        {"removes": ["minus1"], "adds": [ "plus1"]},
+        {"removes": ["minus1"], "adds": [ "plus1"]},
+        {"removes": ["minus1"], "adds": [ "perks/plus0wound"]},
+        {"removes": ["plus0"], "adds": [ "perks/plus1immobilize"]},
+        {"removes": ["plus0"], "adds": [ "perks/plus1immobilize"]},
+        {"text": "Replace one +0 card with one \"Place this card in your active area. On your next attack, discard this card to add + 2 %attack%\" %flip% card", "removes": ["plus0"], "adds": ["perks/unique/bb1"]},
+        {"text": "Replace one +0 card with one \"Place this card in your active area. On your next attack, discard this card to add + 2 %attack%\" %flip% card", "removes": ["plus0"], "adds": ["perks/unique/bb1"]},
+        {"text": "Replace one +0 card with one \"Place this card in your active area. On your next attack, discard this card to add + 2 %attack%\" %flip% card", "removes": ["plus0"], "adds": ["perks/unique/bb1"]},
+        {"removes": ["plus1","plus1"], "adds": [ "plus2","plus2"]},
+        {"text": "Add one -1 \"Gain 1 Time token\"","adds": [ "perks/unique/bb2"]},
+        {"text": "Add one -1 \"Gain 1 Time token\"","adds": [ "perks/unique/bb2"]},
+        {"adds": [ "perks/plus2regenerateflip"],"removes": ["perks/plus1immobilize"]},
+        {"adds": [ "perks/plus2regenerateflip"],"removes": ["perks/plus1immobilize"]},
+        {"text": "Whenever you short rest, you may spend one unspent item for no effect to refresh a different spent item"},
+        {"text": "At the start of your first turn each scenario, you may perform %move% 3"},
+        {"text": "Whenever you would gain %immobilize% prevent the condition"}
+      ]
+    },
+    {
+      "name": "Banner Spear",
+      "edition": "Frosthaven",
+      "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
+      "hidden": false,
+      "color": "ffedbc47",
+      "summons": {
+        "Reinforcements": {
+          "level": 1,
+          "gfx": "BAN reinforcements",
+          "health": 1,
+          "move": 2
+        },
+        "Banner of Strength": {
+          "level": 1,
+          "gfx": "BAN banner of strength",
+          "health": 4
+        },
+        "Banner of Hope": {
+          "level": 1,
+          "gfx": "BAN Banner of Hope",
+          "health": 4
+        },
+        "Torch Bearer": {
+          "level": 1,
+          "gfx": "BAN torch bearer",
+          "health": 5,
+          "move": 2,
+          "attack":  1
+        },
+        "Banner of Courage": {
+          "level": 3,
+          "gfx": "BAN banner of courage",
+          "health": 7
+        },
+        "Trained Falcon": {
+          "level": 4,
+          "gfx": "BAN trained falcon",
+          "health": 1,
+          "move": 3,
+          "attack":  2
+        },
+        "Banner of Valor": {
+          "level": 6,
+          "gfx": "BAN banner of valor",
+          "health": 5
+        },
+        "Longbowman": {
+          "level": 7,
+          "gfx": "BAN longbowman",
+          "health": 4,
+          "move": 2,
+          "attack":  2,
+          "range": 4
+        },
+        "Banner of Doom": {
+          "level": 9,
+          "gfx": "BAN banner of doom",
+          "health": 9
+        }
+      },
+      "perks": [
+        {"removes": ["minus1"], "adds": [ "perks/plus0shield1flip"]},
+        {"removes": ["minus1"], "adds": [ "perks/plus0shield1flip"]},
+        {"removes": ["minus1"], "adds": [ "perks/plus0shield1flip"]},
+        {"text": "Replace one +0 card with one +1 \"Add + 1 %attack% for each ally adjacent to the target\" card","removes": ["plus0"], "adds": ["perks/unique/bn1"]},
+        {"text": "Replace one +0 card with one +1 \"Add + 1 %attack% for each ally adjacent to the target\" card","removes": ["plus0"], "adds": ["perks/unique/bn1"]},
+        {"adds": [ "perks/plus1disarm"]},
+        {"adds": [ "perks/plus1disarm"]},
+        {"adds": [ "perks/plus2push1"]},
+        {"adds": [ "perks/plus2push1"]},
+        {"adds": [ "perks/plus1flip","perks/plus1flip"]},
+        {"adds": [ "perks/plus1flip","perks/plus1flip"]},
+        {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
+        {"adds": [ "perks/plus0heal1flip","perks/plus0heal1flip"]},
+        {"text": "Ignore item - 1 effects and remove one -1 card","removes": ["minus1"]},
+        {"text": "At the end of each of your long rests, grant one ally within %range% 3: %move% 2"},
+        {"text": "Whenever you open a door with a move ability, add + 3 %move%"},
+        {"text": "[double] Once each scenario, during your turn, gain %shield% 2 for the round"}
+      ]
+    }
+  ],
+  "monsterAbilities": [
+    {
+      "name": "Ancient Artillery (FH)",
+      "cards": [
+        ["Long Shot", 626, false, 46, "^Focus on the enemy", "^^farthest away within %range% 7.", "*","%attack% - 1", "^%range% 7" ],
+        ["Exploding Ammunition", 627, true, 71, "%attack% + 0", "^%range% 5","*.........", "^All enemies adjacent to","^the target suffer damage 2" ],
+        ["Exploding Ammunition", 628, true, 71, "%attack% + 0", "^%range% 5", "*.........", "^All enemies adjacent to","^the target suffer damage 2" ],
+        ["Grenade", 629, false, 37, "%push% 1", "^Target all, %range% 1","*.........", "[r]", "[c]","%attack% - 1", "^%range% 4","[/c]", "¤aoe-triangle-2-side", "[/r]" ],
+        [ "Massive Blast", 630, false, 57, "%push% 1", "^Target all, %range% 1","*.........", "[r]", "[c]", "%attack% - 1", "^%range% 3","[/c]", "¤aoe-circle", "[/r]" ],
+        ["Defensive Ordinance", 632, false, 17, "%push% 2", "^Target all, %range% 1","*.........", "%attack% - 2", "^%range% 5","*.........", "%shield% + 2" ],
+        ["Heavy Shot", 631, false, 95, "%attack% + 1", "^%range% 5" ],
+        ["Concussive Burst", 633, false, 46, "[r]", "[c]", "%attack% - 1", "^%range% 5,", "^%immobilize%","[/c]","¤aoe-triangle-2-side", "[/r]" ]
+      ]
+    },
+    {
+      "name": "Boss (FH)",
+      "cards": [
+        ["Accelerated Power", 874, false, 11, "Special 2"],
+        ["Accelerated Power", 875, false, 14, "Special 2"],
+        ["Accelerated Power", 876, true, 17, "Special 2"],
+        ["Lingering Strength", 877, true, 85, "Special 1"],
+        ["Lingering Strength", 878, false, 79, "Special 1"],
+        ["Lingering Strength", 879, false, 73, "Special 1"],
+        ["Nothing Special", 880, false, 36, "%move% + 0","*.........", "%attack% + 0"],
+        ["Twin Shots", 881, false, 52, "%move% - 1","*.........", "%attack% - 1", "^%target% 2,","^%range% 3"]
+      ]
+    },
+    {
+      "name": "Boss 2 (FH)",
+      "cards": [
+        ["Accelerated Power", 874, false, 11, "Special 2"],
+        ["Accelerated Power", 875, false, 14, "Special 2"],
+        ["Accelerated Power", 876, true, 17, "Special 2"],
+        ["Lingering Strength", 877, true, 85, "Special 1"],
+        ["Lingering Strength", 878, false, 79, "Special 1"],
+        ["Lingering Strength", 879, false, 73, "Special 1"],
+        ["Nothing Special", 880, false, 36, "%move% + 0","*.........", "%attack% + 0"],
+        ["Twin Shots", 881, false, 52, "%move% - 1","*.........", "%attack% - 1", "^%target% 2,","^%range% 3"]
+      ]
+    }
+  ],
+
+  "monsters": {
+    "Ancient Artillery (FH)": {
+      "display": "Ancient Artillery",
+      "gfx": "Ancient Artillery",
+      "deck": "Ancient Artillery (FH)",
+      "count": 6,
+      "levels": [
+        {
+          "level": 0,
+          "normal": { "health": 4, "move": 0, "attack": 2, "immunities": [ "%muddle%"] },
+          "elite": { "health": 7, "move": 0, "attack": 3, "immunities": [ "%muddle%"] }
+        },
+        {
+          "level": 1,
+          "normal": { "health": 6, "move": 0, "attack": 2, "immunities": [ "%muddle%"] },
+          "elite": { "health": 9, "move": 0, "attack": 3, "immunities": [ "%muddle%"] }
+        },
+        {
+          "level": 2,
+          "normal": { "health": 8, "move": 0, "attack": 2, "immunities": [ "%muddle%"] },
+          "elite": { "health": 12, "move": 0, "attack": 3, "immunities": [ "%muddle%"] }
+        },
+        {
+          "level": 3,
+          "normal": { "health": 9, "move": 0, "attack": 3, "immunities": [ "%muddle%"] },
+          "elite": { "health": 14, "move": 0, "attack": 4, "immunities": [ "%muddle%"] }
+        },
+        {
+          "level": 4,
+          "normal": { "health": 12, "move": 0, "attack": 3, "immunities": [ "%muddle%"] },
+          "elite": { "health": 16, "move": 0, "attack": 5, "immunities": [ "%muddle%"]}
+        },
+        {
+          "level": 5,
+          "normal": { "health": 15, "move": 0, "attack": 3, "immunities": [ "%muddle%"] },
+          "elite": { "health": 21, "move": 0, "attack": 5, "immunities": [ "%muddle%"]}
+        },
+        {
+          "level": 6,
+          "normal": { "health": 18, "move": 0, "attack": 4, "immunities": [ "%muddle%"] },
+          "elite": { "health": 26, "move": 0, "attack": 6, "immunities": [ "%muddle%"]}
+        },
+        {
+          "level": 7,
+          "normal": { "health": 21, "move": 0, "attack": 5, "immunities": [ "%muddle%"] },
+          "elite": { "health": 34, "move": 0, "attack": 7, "immunities": [ "%muddle%"]}
+        }
+      ]
+    }
+  },
+  "scenarios": {
+    "#Random Dungeon": {
+      "lootDeck": {"coin":12,"lumber": 2,"metal":2,"hide": 2,"snowthistle":1,"arrowvine":1,"axenut": 1,"flamefruit": 1,"corpsecap": 1, "rockroot": 1 },
+      "special": [
+        {
+          "type": "RandomSections"
+        }]
+    },
+    "#0 Howling in the Snow": {
+      "monsters": [ "Ancient Artillery (FH)" ],
+      "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 2},
+      "initialMessage": "Masteries cannot be completed in this scenario."
+    },
+    "#1 A Town in Flames": {
+      "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest", "City Guard Scenario 1" ],
+      "lootDeck": {"coin":6,"lumber": 5,"metal":3,"hide": 3,"rockroot":1,"snowthistle":2},
+      "special": [
+        {
+          "type": "Allies",
+          "list": ["City Guard Scenario 1"]
+        }]
+    },
+    "#2 Algox Scouting": {
+      "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest", "Algox Scout" ],
+      "lootDeck": {"coin":4,"lumber"
+      : 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1},
+      "special": [
+        {
+          "type": "Allies",
+          "list": ["Algox Priest"]
+        }],
+      "sections": {
+        "#6.1(2) Algox Scouting (2)": {
+          "special": [
+            {
+              "type": "Objective",
+              "name": "Ice Sheet",
+              "health": "(L+2)xC"
+            }
+          ]
+        }
+      }
+    },
+    "#3 Algox Offensive": {
+      "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest","Hound (FH)" ],
+      "lootDeck": {"coin":4,"lumber": 4,"metal":4,"hide": 4,"rockroot":1,"arrowvine":2, "treasure": 1},
+      "special": [
+        {
+          "type": "Allies",
+          "list": ["Algox Priest","Hound"]
+        }]
+    },
+    "#4A Heart of Ice": {
+      "monsters": [ "Frozen Fist ", "Snowdancer ", "Algox Archer", "Algox Guard", "Algox Scout" ],
+      "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
+      "special": [
+        {
+          "type": "Allies",
+          "list": ["Algox Archer", "Algox Guard"]
+        }],
+      "sections": {
+        "#75.1(1) Heart of Ice (4)": {
+          "initialMessage": "Bosses use separate ability card decks. (Not according to the rules)"
+        }
+      }
+    },
+    "#4B Heart of Ice": {
+      "monsters": [ "Frozen Fist ", "Snowdancer ", "Algox Archer", "Algox Guard", "Algox Scout" ],
+      "lootDeck": {"coin":6,"lumber": 3,"metal":5,"hide": 2,"rockroot":2,"corpsecap":1, "treasure": 1},
+      "sections": {
+        "#75.1(1) Heart of Ice (4)": {
+          "initialMessage": "Bosses use separate ability card decks. (Not according to the rules)"
+        }
+      }
+    }
+  }
+}
