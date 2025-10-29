@@ -434,6 +434,10 @@
       "monsters": [ "Rat Monstrosity", "Black Sludge" ],
       "special": [
         {
+          "type": "Allies",
+          "list": ["Rat Monstrosity"]
+        },
+        {
           "type": "Objective",
           "name": "Growth 1",
           "health": "(1+L)xC"
