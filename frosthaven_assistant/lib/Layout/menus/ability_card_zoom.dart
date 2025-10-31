@@ -38,7 +38,7 @@ class AbilityCardZoom extends StatelessWidget {
       scaling = 269 / (142.4);
     }
 
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         Navigator.pop(context);
       },

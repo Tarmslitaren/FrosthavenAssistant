@@ -58,7 +58,7 @@ dart_code_metrics:
     #Warns when a file name does not match the class name
 
     #common maybe disable
-    prefer-moving-to-variable: true
+    prefer-moving-to-variable: false
     #Warns when a property access or a method invocation start with duplicated chains of other invocations / accesses inside a single function or method block
     prefer-correct-test-file-name: true
     #Warns if the file within /test contains a main, but the file name doesn't end with _test.dart

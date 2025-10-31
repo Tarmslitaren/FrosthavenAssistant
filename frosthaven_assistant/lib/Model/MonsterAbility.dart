@@ -2,11 +2,10 @@ import 'package:flutter/foundation.dart';
 
 @immutable
 class MonsterAbilityDeckModel {
-  const MonsterAbilityDeckModel(this.name, this.edition, this.cards);
-
   final String name;
   final String edition;
   final List<MonsterAbilityCardModel> cards;
+  const MonsterAbilityDeckModel(this.name, this.edition, this.cards);
 
   factory MonsterAbilityDeckModel.fromJson(
       Map<String, dynamic> data, String edition) {
@@ -63,18 +62,16 @@ class MonsterAbilityDeckModel {
 
 @immutable
 class GraphicPositional {
-  const GraphicPositional(this.gfx, this.x, this.y, this.scale, this.angle);
   final String gfx;
   final double x;
   final double y;
   final double scale;
   final double angle;
+  const GraphicPositional(this.gfx, this.x, this.y, this.scale, this.angle);
 }
 
 @immutable
 class MonsterAbilityCardModel {
-  const MonsterAbilityCardModel(this.title, this.nr, this.shuffle,
-      this.initiative, this.lines, this.deck, this.graphicPositional);
   final String deck;
   final String title;
   final int nr;
@@ -82,6 +79,8 @@ class MonsterAbilityCardModel {
   final int initiative;
   final List<String> lines;
   final List<GraphicPositional> graphicPositional;
+  const MonsterAbilityCardModel(this.title, this.nr, this.shuffle,
+      this.initiative, this.lines, this.deck, this.graphicPositional);
 
   @override
   String toString() {
