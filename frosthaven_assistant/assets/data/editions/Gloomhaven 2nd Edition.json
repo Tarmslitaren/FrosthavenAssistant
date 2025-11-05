@@ -4607,7 +4607,7 @@
           "move": 3,
           "attack": "C+1",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 2", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4616,7 +4616,7 @@
           "move": 3,
           "attack": "C+2",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 2", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4625,7 +4625,7 @@
           "move": 3,
           "attack": "C+2",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 2", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4634,7 +4634,7 @@
           "move": 4,
           "attack": "C+3",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 3", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4643,7 +4643,7 @@
           "move": 4,
           "attack": "C+3",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 3", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4652,7 +4652,7 @@
           "move": 4,
           "attack": "C+4",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 3", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4661,7 +4661,7 @@
           "move": 4,
           "attack": "C+5",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 4", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4670,7 +4670,7 @@
           "move": 4,
           "attack": "C+6",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 4", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         }
       ]
@@ -4688,7 +4688,7 @@
           "move": 3,
           "attack": "C+1",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 2", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4697,7 +4697,7 @@
           "move": 3,
           "attack": "C+2",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 2", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4706,7 +4706,7 @@
           "move": 3,
           "attack": "C+2",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 2", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4715,7 +4715,7 @@
           "move": 4,
           "attack": "C+3",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 3", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4724,7 +4724,7 @@
           "move": 4,
           "attack": "C+3",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 3", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4733,7 +4733,7 @@
           "move": 4,
           "attack": "C+4",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 3", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4742,7 +4742,7 @@
           "move": 4,
           "attack": "C+5",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 4", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         },
         {
@@ -4751,7 +4751,7 @@
           "move": 4,
           "attack": "C+6",
           "special1": [ "^Grant the C closest allies:", ">%move% + 0", ">%attack% - 1" ],
-          "special2": [ "^Perform the following C times:", "%heal% 3", "^%target% 3" ],
+          "special2": [ "^Perform the following C times:", "%heal% 4", "^%range% 3" ],
           "immunities": [ "%stun%" ]
         }
       ]
