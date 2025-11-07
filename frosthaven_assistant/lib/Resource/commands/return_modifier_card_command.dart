@@ -1,4 +1,4 @@
-import 'package:frosthaven_assistant/Resource/state/game_state.dart';
+import '../state/game_state.dart';
 
 class ReturnModifierCardCommand extends Command {
   final String name;

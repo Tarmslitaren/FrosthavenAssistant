@@ -311,6 +311,12 @@ class ModifierDeck {
     }
   }
 
+  void returnCardToDrawPile(_StateModifier _) {
+    var card = _discardPile.pop();
+    _drawPile.push(card);
+    _cardCount.value = _drawPile.size();
+  }
+
   void addCard(_StateModifier _, String id, CardType type) {
     _drawPile.add(ModifierCard(type, id));
     _shuffle();

@@ -1,18 +1,14 @@
 part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
-enum LootType { materiel, other }
-
-enum LootBaseValue { one, oneIf4twoIfNot, oneIf3or4twoIfNot }
-
 class LootCard {
   final String gfx;
   final int id;
   final LootBaseValue baseValue;
   final LootType lootType;
+  String owner = "";
+  int _enhanced = 0;
   int get enhanced => _enhanced;
-  late int _enhanced;
-  late String owner;
 
   LootCard(
       {required this.id,
@@ -21,7 +17,6 @@ class LootCard {
       required enhanced,
       required this.gfx}) {
     _enhanced = enhanced;
-    owner = "";
   }
 
   @override
@@ -214,6 +209,21 @@ class LootDeck {
     _cardCount.value = _drawPile.size();
   }
 
+  void setDeck(_StateModifier _, LootDeckModel model) {
+    _setDeck(model);
+  }
+
+  void returnLootCard(_StateModifier _, bool top) {
+    var card = _discardPile.pop();
+    card.owner = "";
+    if (top) {
+      _drawPile.push(card);
+    } else {
+      _drawPile.insert(0, card);
+    }
+    _cardCount.value = _drawPile.size();
+  }
+
   void _addCardFromPool(int amount, List<LootCard> pool, List<LootCard> cards) {
     pool.shuffle();
     if (amount > pool.length) {
@@ -223,10 +233,6 @@ class LootDeck {
       cards.add(pool[i]);
     }
     pool.sort((a, b) => a.id - b.id); //may not be needed
-  }
-
-  void setDeck(_StateModifier _, LootDeckModel model) {
-    _setDeck(model);
   }
 
   void _setDeck(LootDeckModel model) {
@@ -545,3 +551,7 @@ class LootDeck {
         '}';
   }
 }
+
+enum LootType { materiel, other }
+
+enum LootBaseValue { one, oneIf4twoIfNot, oneIf3or4twoIfNot }

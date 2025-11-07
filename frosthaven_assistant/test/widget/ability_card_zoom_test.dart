@@ -17,7 +17,6 @@ void main() {
         (WidgetTester tester) async {
       // Arrange
       AddMonsterCommand("Zealot", 1, false).execute();
-      //DrawAbilityCardCommand("Zealot").execute();
       final monster = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Monster) as Monster;

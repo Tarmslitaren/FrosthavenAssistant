@@ -869,21 +869,9 @@ class MutableGameMethods {
     }
   }
 
-  static void returnLootCard(_StateModifier s, bool top) {
-    final GameState gameState = getIt<GameState>();
-    var card = gameState._lootDeck._discardPile.pop();
-    card.owner = "";
-    if (top) {
-      gameState._lootDeck._drawPile.push(card);
-    } else {
-      gameState._lootDeck._drawPile.insert(0, card);
-    }
-  }
-
   static void returnModifierCard(_StateModifier s, String name) {
     final deck = GameMethods.getModifierDeck(name, getIt<GameState>());
-    var card = deck._discardPile.pop();
-    deck._drawPile.push(card);
+    deck.returnCardToDrawPile(s);
   }
 
   static void removeCharacters(_StateModifier s, List<Character> characters) {
