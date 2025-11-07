@@ -449,8 +449,6 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 //height: 40,
                                 child: TextField(
                                   controller: _serverTextController,
-                                  maxLines: 5,
-                                  minLines: 1,
                                   decoration: const InputDecoration(
                                     counterText: "",
                                     helperText: "server ip address",

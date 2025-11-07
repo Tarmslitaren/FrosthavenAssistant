@@ -113,7 +113,7 @@ class SpecialRule {
   String toString() {
     return '{'
         '"type": "$type", '
-        '"note": "$note", '
+        '"note": ${jsonEncode(note)}, ' //need json encode if note can have escape chars ( i.e. \n )
         '"name": "$name", '
         '"health": "$health", '
         '"condition": "$condition", '
