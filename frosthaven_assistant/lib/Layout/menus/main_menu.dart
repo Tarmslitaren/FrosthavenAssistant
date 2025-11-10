@@ -260,10 +260,10 @@ class MainMenu extends StatelessWidget {
                     builder: (context, value, child) {
                       return ValueListenableBuilder<String>(
                           valueListenable:
-                              getIt<Network>().networkInfo.wifiIPv4,
+                              getIt<Network>().networkInfo.wifiIPv6,
                           builder: (context, value, child) {
                             String ip =
-                                "(${getIt<Network>().networkInfo.wifiIPv4.value})";
+                                "(${getIt<Network>().networkInfo.wifiIPv6.value})";
                             String hostIPText = 'Start Host Server $ip';
                             return CheckboxListTile(
                                 title: Text(settings.server.value
@@ -272,7 +272,7 @@ class MainMenu extends StatelessWidget {
                                 value: settings.server.value,
                                 onChanged: (bool? value) {
                                   settings.lastKnownHostIP =
-                                      "(${getIt<Network>().networkInfo.wifiIPv4.value})";
+                                      "(${getIt<Network>().networkInfo.wifiIPv6.value})";
                                   settings.saveToDisk();
                                   //do the thing
                                   if (!settings.server.value) {

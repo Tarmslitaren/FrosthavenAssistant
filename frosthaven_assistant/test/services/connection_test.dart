@@ -35,7 +35,7 @@ void main() {
     for (var i = 0; i < 2; i++) {
       final socket = MockSocket();
       sockets.add(socket);
-      when(socket.remoteAddress).thenReturn(InternetAddress.anyIPv4);
+      when(socket.remoteAddress).thenReturn(InternetAddress.anyIPv6);
       when(socket.port).thenReturn(0);
     }
 
@@ -72,7 +72,7 @@ void main() {
     final socketToDisconnect = sockets.first;
     final socketsToNotDisconnect =
         sockets.where((socket) => socket != socketToDisconnect);
-    when(socketToDisconnect.remoteAddress).thenReturn(InternetAddress.anyIPv4);
+    when(socketToDisconnect.remoteAddress).thenReturn(InternetAddress.anyIPv6);
     when(socketToDisconnect.port).thenReturn(_randomPortNumber);
 
     // act

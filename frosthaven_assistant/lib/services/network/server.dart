@@ -30,12 +30,12 @@ class Server extends GameServer {
 
   @override
   Future<String> getConnectToIP() async {
-    String connectTo = InternetAddress.anyIPv4.address; //"0.0.0.0";
-    if (getIt<Network>().networkInfo.wifiIPv4.value.isNotEmpty &&
-        !getIt<Network>().networkInfo.wifiIPv4.value.contains("Fail")) {
-      connectTo = getIt<Network>().networkInfo.wifiIPv4.value;
+    String connectTo = InternetAddress.anyIPv6.address; //"0.0.0.0";
+    if (getIt<Network>().networkInfo.wifiIPv6.value.isNotEmpty &&
+        !getIt<Network>().networkInfo.wifiIPv6.value.contains("Fail")) {
+      connectTo = getIt<Network>().networkInfo.wifiIPv6.value;
     } else {
-      getIt<Network>().networkInfo.wifiIPv4.value =
+      getIt<Network>().networkInfo.wifiIPv6.value =
           connectTo; //if not on wifi show local ip
     }
     return connectTo;
@@ -138,7 +138,7 @@ class Server extends GameServer {
   }
 
   Future<void> startServer() async {
-    startServerInternal(InternetAddress.anyIPv4.address,
+    startServerInternal(InternetAddress.anyIPv6.address,
         int.parse(getIt<Settings>().lastKnownPort));
   }
 

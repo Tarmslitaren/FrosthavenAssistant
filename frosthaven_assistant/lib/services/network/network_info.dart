@@ -39,9 +39,9 @@ class NetworkInformation {
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
-  final Set<String> wifiIPv4List = {};
-  final wifiIPv4 = ValueNotifier<String>("");
-  final outgoingIPv4 = ValueNotifier<String>("");
+  final Set<String> wifiIPv6List = {};
+  final wifiIPv6 = ValueNotifier<String>("");
+  final outgoingIPv6 = ValueNotifier<String>("");
 
   Future<void> initNonWifiIPs() async {
     for (var interface in await NetworkInterface.list()) {
@@ -51,44 +51,44 @@ class NetworkInformation {
           !interface.name.toLowerCase().contains("switch") &&
           !interface.name.toLowerCase().contains("veth")) {
         for (var address in interface.addresses) {
-          if (address.type == InternetAddressType.IPv4) {
-            wifiIPv4List.add(address.address);
-            if (wifiIPv4.value != "") {
-              wifiIPv4.value =
+          if (address.type == InternetAddressType.IPv6) {
+            wifiIPv6List.add(address.address);
+            if (wifiIPv6.value != "") {
+              wifiIPv6.value =
                   address.address; //default to ipv4 ethernet address if no wifi
             }
             break;
           }
         }
-        if (wifiIPv4.value != "") {
+        if (wifiIPv6.value != "") {
           //break;
         }
       }
     }
-    if (wifiIPv4.value == "") {
-      wifiIPv4.value = "Failed to get Wifi IPv4";
+    if (wifiIPv6.value == "") {
+      wifiIPv6.value = "Failed to get Wifi IPv6";
     }
   }
 
   Future<void> initNetworkInfo() async {
     try {
-      outgoingIPv4.value = await Ipify.ipv4();
+      outgoingIPv6.value = await Ipify.ipv64();
     } catch (error) {
-      outgoingIPv4.value = "";
+      outgoingIPv6.value = "";
     }
 
     try {
-      String? ipv4 = await networkInfo.getWifiIP();
-      if (ipv4 != null) {
-        wifiIPv4.value = ipv4;
-        wifiIPv4List.add(ipv4);
+      String? ipv6 = await networkInfo.getWifiIP();
+      if (ipv6 != null) {
+        wifiIPv6.value = ipv6;
+        wifiIPv6List.add(ipv6);
       }
     } on PlatformException catch (e) {
-      developer.log('Failed to get Wifi IPv4', error: e);
+      developer.log('Failed to get Wifi IPv6', error: e);
     }
     initNonWifiIPs();
 
-    developer.log('Wifi IPv4: ${wifiIPv4.value}\n'
-        'Outgoing IPv4: ${outgoingIPv4.value}\n');
+    developer.log('Wifi IPv6: ${wifiIPv6.value}\n'
+        'Outgoing IPv6: ${outgoingIPv6.value}\n');
   }
 }

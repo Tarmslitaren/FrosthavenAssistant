@@ -45,7 +45,7 @@ class SettingsMenuState extends State<SettingsMenu> {
 
   List<DropdownMenuItem<String>> getIPList() {
     List<DropdownMenuItem<String>> retVal = [];
-    for (var item in getIt<Network>().networkInfo.wifiIPv4List) {
+    for (var item in getIt<Network>().networkInfo.wifiIPv6List) {
       retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
     }
 
@@ -483,7 +483,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                             settings.lastKnownPort =
                                                 _portTextController.text;
                                             settings.lastKnownHostIP =
-                                                "(${getIt<Network>().networkInfo.wifiIPv4.value})";
+                                                "(${getIt<Network>().networkInfo.wifiIPv6.value})";
                                             settings.saveToDisk();
                                             getIt<Network>()
                                                 .server
@@ -498,7 +498,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   }),
                               ValueListenableBuilder<String>(
                                   valueListenable:
-                                      getIt<Network>().networkInfo.wifiIPv4,
+                                      getIt<Network>().networkInfo.wifiIPv6,
                                   builder: (context, value, child) {
                                     return SizedBox(
                                       width: 200,
@@ -507,26 +507,26 @@ class SettingsMenuState extends State<SettingsMenu> {
                                           child: DropdownButton(
                                               value: getIt<Network>()
                                                   .networkInfo
-                                                  .wifiIPv4
+                                                  .wifiIPv6
                                                   .value,
                                               items: getIPList(),
                                               onChanged: (value) =>
                                                   getIt<Network>()
                                                       .networkInfo
-                                                      .wifiIPv4
+                                                      .wifiIPv6
                                                       .value = value!)),
                                     );
                                   }),
                               ValueListenableBuilder<String>(
                                   valueListenable:
-                                      getIt<Network>().networkInfo.outgoingIPv4,
+                                      getIt<Network>().networkInfo.outgoingIPv6,
                                   builder: (context, value, child) {
                                     return SizedBox(
                                         width: 200,
                                         height: 20,
                                         child: Text(getIt<Network>()
                                             .networkInfo
-                                            .outgoingIPv4
+                                            .outgoingIPv6
                                             .value));
                                   }),
                               Container(
