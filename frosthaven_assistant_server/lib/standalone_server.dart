@@ -32,7 +32,7 @@ class StandaloneServer extends GameServer {
 
   @override
   Future<String> getConnectToIP() async {
-    for (var interface in await NetworkInterface.list(type: InternetAddressType.IPv4)) {
+    for (var interface in await NetworkInterface.list(type: InternetAddressType.IPv6)) {
       for (var address in interface.addresses){
         return address.address;
       }
