@@ -14,7 +14,11 @@ class AddConditionCommand extends Command {
     if (figure != null) {
       List<Condition> newList = [];
       newList.addAll(figure.conditions.value);
-      newList.add(condition);
+      if (!newList.contains(condition) || //block from adding same condition
+          condition == Condition.chill ||
+          condition == Condition.plague) {
+        newList.add(condition);
+      }
       figure.conditions.value = newList;
 
       if (condition == Condition.chill) {

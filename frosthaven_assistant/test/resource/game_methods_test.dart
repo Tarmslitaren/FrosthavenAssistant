@@ -29,28 +29,34 @@ void main() async {
       test('should return 2 + game level when level is 4', () {
         // Act: Call the method we are testing.
         SetLevelCommand(4, null).execute();
+        String oldState = gameState.toString();
         final result = GameMethods.getTrapValue();
 
         // Assert: Check if the result is what we expect.
         expect(result, 6);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return 2 when game level is 0', () {
         SetLevelCommand(0, null).execute();
+        String oldState = gameState.toString();
         // Act
         final result = GameMethods.getTrapValue();
 
         // Assert
         expect(result, 2);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return 9 when game level is 7', () {
         SetLevelCommand(7, null).execute();
+        String oldState = gameState.toString();
         // Act
         final result = GameMethods.getTrapValue();
 
         // Assert
         expect(result, 9);
+        checkNoSideEffects([], oldState);
       });
 
       test('should bork when game level is out of bounds', () {
@@ -241,8 +247,10 @@ void main() async {
         AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1)
             .execute();
         SetInitCommand('Blinkblade', 35).execute();
+        String oldState = gameState.toString();
         final character = getIt<GameState>().currentList.first as Character;
         expect(GameMethods.getInitiative(character), 35);
+        checkNoSideEffects([], oldState);
       });
 
       //todo
@@ -264,17 +272,21 @@ void main() async {
       test('should return the correct character', () {
         getIt<GameState>().clearList();
         AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
+        String oldState = gameState.toString();
         final character = GameMethods.getCharacterByName('Blinkblade');
         expect(character, isNotNull);
         expect(character!.id, 'Blinkblade');
+        checkNoSideEffects([], oldState);
       });
 
       test('should return null if character does not exist', () {
         getIt<GameState>().clearList();
         AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
+        String oldState = gameState.toString();
         final character =
             GameMethods.getCharacterByName('NonExistentCharacter');
         expect(character, isNull);
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -283,16 +295,20 @@ void main() async {
         getIt<GameState>().clearList();
         AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
         AddCharacterCommand('Banner Spear', 'Frosthaven', "", 1).execute();
+        String oldState = gameState.toString();
         final characters = GameMethods.getCurrentCharacters();
         expect(characters.length, 2);
         expect(characters[1].id, 'Blinkblade');
         expect(characters[0].id, 'Banner Spear');
+        checkNoSideEffects([], oldState);
       });
 
       test('should return an empty list if no characters', () {
         getIt<GameState>().clearList();
+        String oldState = gameState.toString();
         final characters = GameMethods.getCurrentCharacters();
         expect(characters, isEmpty);
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -304,9 +320,11 @@ void main() async {
             .execute();
         DrawCommand().execute();
         TurnDoneCommand('Blinkblade').execute(); // It's now Banner Spear's turn
+        String oldState = gameState.toString();
         final character = GameMethods.getCurrentCharacter();
         expect(character, isNotNull);
         expect(character!.id, 'Banner Spear');
+        checkNoSideEffects([], oldState);
       });
 
       test('should return null if it is not a character turn', () {
@@ -316,30 +334,38 @@ void main() async {
             .execute(); // Adds monsters
         TurnDoneCommand(getIt<GameState>().currentList.first.id)
             .execute(); // It's now a monster's turn
+        String oldState = gameState.toString();
         final character = GameMethods.getCurrentCharacter();
         expect(character, isNull);
+        checkNoSideEffects([], oldState);
       });
     });
 
     group('getModifierDeck', () {
       test('should return the monster modifier deck', () {
+        String oldState = gameState.toString();
         final deck = GameMethods.getModifierDeck('', getIt<GameState>());
         expect(deck, equals(getIt<GameState>().modifierDeck));
+        checkNoSideEffects([], oldState);
       });
 
       test('should return the allies modifier deck', () {
+        String oldState = gameState.toString();
         final deck = GameMethods.getModifierDeck('allies', getIt<GameState>());
         expect(deck, equals(getIt<GameState>().modifierDeckAllies));
+        checkNoSideEffects([], oldState);
       });
 
       test('should return a character modifier deck', () {
         getIt<GameState>().clearList();
         AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1)
             .execute();
+        String oldState = gameState.toString();
         final deck =
             GameMethods.getModifierDeck('Blinkblade', getIt<GameState>());
         final character = getIt<GameState>().currentList.first as Character;
         expect(deck, equals(character.characterState.modifierDeck));
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -348,8 +374,10 @@ void main() async {
         getIt<GameState>().clearList();
         AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1)
             .execute();
+        String oldState = gameState.toString();
         final character = getIt<GameState>().currentList.first as Character;
         expect(GameMethods.canAddPerk(character, 0), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false if perk cannot be added', () {
@@ -358,7 +386,9 @@ void main() async {
             .execute();
         final character = getIt<GameState>().currentList.first as Character;
         AddPerkCommand(character.id, 0).execute();
+        String oldState = gameState.toString();
         expect(GameMethods.canAddPerk(character, 0), isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -369,7 +399,9 @@ void main() async {
             .execute();
         final character = getIt<GameState>().currentList.first as Character;
         AddPerkCommand(character.id, 0).execute();
+        String oldState = gameState.toString();
         expect(GameMethods.canRemovePerk(character, 0), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false if perk cannot be removed', () {
@@ -379,28 +411,36 @@ void main() async {
         final character = getIt<GameState>().currentList.first as Character;
         AddPerkCommand(character.id, 12).execute();
         AddPerkCommand(character.id, 13).execute();
+        String oldState = gameState.toString();
         expect(GameMethods.canRemovePerk(character, 5), isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
 
     group('perkGfxIdToCardId', () {
       test('should return the original gfx id if it is not a perk', () {
+        String oldState = gameState.toString();
         final id = GameMethods.perkGfxIdToCardId(
             'test', PerkModel("", const [], const []), 0);
         expect(id, 'test');
+        checkNoSideEffects([], oldState);
       });
 
       test('should return the correct card id for a perk', () {
+        String oldState = gameState.toString();
         final perk = PerkModel("", const [], const ['perks/test']);
         final id = GameMethods.perkGfxIdToCardId('perks/test', perk, 0);
         expect(id, 'P0');
+        checkNoSideEffects([], oldState);
       });
 
       test('should return the correct card id for a perk with two images', () {
+        String oldState = gameState.toString();
         final perk =
             PerkModel("", const [], const ['perks/test', 'perks/test2']);
         final id = GameMethods.perkGfxIdToCardId('perks/test2', perk, 0);
         expect(id, 'P0-2');
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -409,12 +449,16 @@ void main() async {
         getIt<GameState>().clearList();
         AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
         AddCharacterCommand('Banner Spear', 'Frosthaven', "", 1).execute();
+        String oldState = gameState.toString();
         expect(GameMethods.getCurrentCharacterAmount(), 2);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return 0 if no characters', () {
         getIt<GameState>().clearList();
+        String oldState = gameState.toString();
         expect(GameMethods.getCurrentCharacterAmount(), 0);
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -423,17 +467,21 @@ void main() async {
         getIt<GameState>().clearList();
         SetCampaignCommand('Jaws of the Lion').execute();
         SetScenarioCommand('#5 A Deeper Understanding', false).execute();
+        String oldState = gameState.toString();
         final monsters = GameMethods.getCurrentMonsters();
         expect(monsters.length, 3);
         expect(monsters[0].id, 'Zealot');
         expect(monsters[1].id, 'Chaos Demon');
         expect(monsters[2].id, 'Blood Tumor');
+        checkNoSideEffects([], oldState);
       });
 
       test('should return an empty list if no monsters', () {
         getIt<GameState>().clearList();
+        String oldState = gameState.toString();
         final monsters = GameMethods.getCurrentMonsters();
         expect(monsters, isEmpty);
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -456,10 +504,12 @@ void main() async {
         getIt<GameState>().clearList();
         SetCampaignCommand('Jaws of the Lion').execute();
         SetScenarioCommand('#5 A Deeper Understanding', false).execute();
+        String oldState = gameState.toString();
         final monster = getIt<GameState>().currentList.first as Monster;
         final standee = GameMethods.getRandomStandee(monster);
         expect(standee, isNot(0));
         expect(standee, lessThanOrEqualTo(monster.type.count));
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -467,9 +517,11 @@ void main() async {
       test('should return a character', () {
         getIt<GameState>().clearList();
         AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
+        String oldState = gameState.toString();
         final figure = GameMethods.getFigure(null, 'Blinkblade');
         expect(figure, isNotNull);
         expect(figure, isA<CharacterState>());
+        checkNoSideEffects([], oldState);
       });
 
       test('should return a monster instance', () {
@@ -478,10 +530,12 @@ void main() async {
         final monster = getIt<GameState>().currentList.first as Monster;
         AddStandeeCommand(1, null, monster.id, MonsterType.normal, false)
             .execute();
+        String oldState = gameState.toString();
         final figure = GameMethods.getFigure(
             monster.id, monster.monsterInstances.first.getId());
         expect(figure, isNotNull);
         expect(figure, isA<MonsterInstance>());
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -493,9 +547,11 @@ void main() async {
         final monster = getIt<GameState>().currentList.first as Monster;
         AddStandeeCommand(1, null, monster.id, MonsterType.normal, false)
             .execute();
+        String oldState = gameState.toString();
         final id = GameMethods.getFigureIdFromNr(monster.id, 1);
         expect(id, isNotNull);
         expect(id, isNotEmpty);
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -503,41 +559,51 @@ void main() async {
       test('should return true for Objective', () {
         final characterClass =
             AddCharacterCommand("Objective", "na", "whatever", 1);
+        String oldState = gameState.toString();
         expect(
             GameMethods.isObjectiveOrEscort(
                 characterClass.character.characterClass),
             isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return true for Escort', () {
         final characterClass =
             AddCharacterCommand("Escort", "na", "whatever", 1);
+        String oldState = gameState.toString();
         expect(
             GameMethods.isObjectiveOrEscort(
                 characterClass.character.characterClass),
             isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false for other characters', () {
         final characterClass =
             AddCharacterCommand("Blinkblade", "Frosthaven", "whatever", 1);
+        String oldState = gameState.toString();
         expect(
             GameMethods.isObjectiveOrEscort(
                 characterClass.character.characterClass),
             isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
 
     group('shouldShowAlliesDeck', () {
       test('should return true if showAllyDeck setting is true', () {
+        String oldState = gameState.toString();
         getIt<Settings>().showAmdDeck.value = true;
         ShowAllyDeckCommand().execute();
         expect(GameMethods.shouldShowAlliesDeck(), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false if showAmdDeck setting is false', () {
+        String oldState = gameState.toString();
         getIt<Settings>().showAmdDeck.value = false;
         expect(GameMethods.shouldShowAlliesDeck(), isFalse);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return true if an ally monster is in play', () {
@@ -547,12 +613,15 @@ void main() async {
         SetScenarioCommand('#5 A Deeper Understanding', false)
             .execute(); // Adds monsters
         AddMonsterCommand("Zealot", 1, true).execute();
+        String oldState = gameState.toString();
         expect(GameMethods.shouldShowAlliesDeck(), isTrue);
+        checkNoSideEffects([], oldState);
       });
     });
 
     group('canExpire', () {
       test('should return true for conditions that expire', () {
+        String oldState = gameState.toString();
         expect(GameMethods.canExpire(Condition.strengthen), isTrue);
         expect(GameMethods.canExpire(Condition.muddle), isTrue);
         expect(GameMethods.canExpire(Condition.invisible), isTrue);
@@ -561,104 +630,139 @@ void main() async {
         expect(GameMethods.canExpire(Condition.immobilize), isTrue);
         expect(GameMethods.canExpire(Condition.impair), isTrue);
         expect(GameMethods.canExpire(Condition.chill), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false for conditions that do not expire', () {
+        String oldState = gameState.toString();
         expect(GameMethods.canExpire(Condition.bane), isFalse);
         expect(GameMethods.canExpire(Condition.poison), isFalse);
         expect(GameMethods.canExpire(Condition.wound), isFalse);
         expect(GameMethods.canExpire(Condition.regenerate), isFalse);
         expect(GameMethods.canExpire(Condition.ward), isFalse);
         expect(GameMethods.canExpire(Condition.brittle), isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
 
     group('isFrosthavenStyledEdition', () {
       test('should return true for Frosthaven', () {
+        String oldState = gameState.toString();
         expect(GameMethods.isFrosthavenStyledEdition('Frosthaven'), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return true for Buttons and Bugs', () {
+        String oldState = gameState.toString();
         expect(
             GameMethods.isFrosthavenStyledEdition('Buttons and Bugs'), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return true for Gloomhaven 2nd Edition', () {
+        String oldState = gameState.toString();
         expect(GameMethods.isFrosthavenStyledEdition('Gloomhaven 2nd Edition'),
             isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return true for Mercenary Packs', () {
+        String oldState = gameState.toString();
         expect(
             GameMethods.isFrosthavenStyledEdition('Mercenary Packs'), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false for Gloomhaven', () {
+        String oldState = gameState.toString();
         expect(GameMethods.isFrosthavenStyledEdition('Gloomhaven'), isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
 
     group('isFrosthavenStyle', () {
       test('should return true for Frosthaven monster', () {
         final monster = Monster('Ancient Artillery (FH)', 1, false);
+        String oldState = gameState.toString();
         expect(GameMethods.isFrosthavenStyle(monster.type), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false for Gloomhaven monster', () {
         SetCampaignCommand('Jaws of the Lion').execute();
         SetScenarioCommand('#5 A Deeper Understanding', false)
             .execute(); // Adds monsters
+        String oldState = gameState.toString();
         final monster = Monster('Zealot', 1, false);
         getIt<Settings>().style.value = Style.original;
         expect(GameMethods.isFrosthavenStyle(monster.type), isFalse);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return true if style is set to Frosthaven', () {
+        String oldState = gameState.toString();
         getIt<Settings>().style.value = Style.frosthaven;
         expect(GameMethods.isFrosthavenStyle(null), isTrue);
+        checkNoSideEffects([], oldState);
       });
     });
 
     group('isCustomCampaign', () {
       test('should return true for Crimson Scales', () {
+        String oldState = gameState.toString();
         expect(GameMethods.isCustomCampaign('Crimson Scales'), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return true for Trail of Ashes', () {
+        String oldState = gameState.toString();
         expect(GameMethods.isCustomCampaign('Trail of Ashes'), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return true for CCUG', () {
+        String oldState = gameState.toString();
         expect(GameMethods.isCustomCampaign('CCUG'), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false for Frosthaven', () {
+        String oldState = gameState.toString();
         expect(GameMethods.isCustomCampaign('Frosthaven'), isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
 
     group('findNrFromScenarioName', () {
       test('should return the scenario number from the name', () {
+        String oldState = gameState.toString();
         expect(GameMethods.findNrFromScenarioName('#1 '), 1);
         expect(
             GameMethods.findNrFromScenarioName('#10.0 A Sticky Situation'), 10);
         expect(GameMethods.findNrFromScenarioName('#123 - Some Scenario'), 123);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return null if no number is found', () {
+        String oldState = gameState.toString();
         expect(GameMethods.findNrFromScenarioName('Some Scenario'), isNull);
+        checkNoSideEffects([], oldState);
       });
     });
 
     group('isOgGloomEdition', () {
       test('should return true for Gloomhaven', () {
         SetCampaignCommand('Gloomhaven').execute();
+        String oldState = gameState.toString();
         expect(GameMethods.isOgGloomEdition(), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false for Frosthaven', () {
         SetCampaignCommand('Frosthaven').execute();
+        String oldState = gameState.toString();
         expect(GameMethods.isOgGloomEdition(), isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -667,40 +771,52 @@ void main() async {
         getIt<GameState>().clearList();
         SetCampaignCommand('Frosthaven').execute();
         SetScenarioCommand('#0 Howling in the Snow', false).execute();
+        String oldState = gameState.toString();
         //DrawLootCardCommand().execute();
         expect(GameMethods.hasLootDeck(), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false if loot deck is empty', () {
         //getIt<GameState>().clearLootDeck();
         SetCampaignCommand('Jaws of the Lion').execute();
         SetScenarioCommand('#5 A Deeper Understanding', false).execute();
+        String oldState = gameState.toString();
         expect(GameMethods.hasLootDeck(), isFalse);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false if hideLootDeck setting is true', () {
+        String oldState = gameState.toString();
         getIt<Settings>().hideLootDeck.value = true;
         expect(GameMethods.hasLootDeck(), isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
 
     group('getFactionCards', () {
       test('should return the correct cards for Demons', () {
+        String oldState = gameState.toString();
         final cards = GameMethods.getFactionCards('Demons');
         expect(cards.length, 4);
         expect(cards[0].gfx, 'Demons-perks/plus1any');
+        checkNoSideEffects([], oldState);
       });
 
       test('should return the correct cards for Merchant-Guild', () {
+        String oldState = gameState.toString();
         final cards = GameMethods.getFactionCards('Merchant-Guild');
         expect(cards.length, 4);
         expect(cards[0].gfx, 'Merchant-Guild-perks/plus1curse');
+        checkNoSideEffects([], oldState);
       });
 
       test('should return the correct cards for Military', () {
+        String oldState = gameState.toString();
         final cards = GameMethods.getFactionCards('Military');
         expect(cards.length, 4);
         expect(cards[0].gfx, 'Military-perks/plus1strengthenally');
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -710,13 +826,17 @@ void main() async {
         AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
         final character = getIt<GameState>().currentList.first as Character;
         AddPerkCommand(character.id, 3).execute(); // Adds a +1 card
+        String oldState = gameState.toString();
         expect(GameMethods.isCardInAnyCharacterDeck('P3'), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false if card is not in any character deck', () {
         getIt<GameState>().clearList();
         AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
+        String oldState = gameState.toString();
         expect(GameMethods.isCardInAnyCharacterDeck('P3'), isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -727,9 +847,11 @@ void main() async {
             .execute(); // Monster without shield
         AddStandeeCommand(1, null, "Flame Demon (BnB)", MonsterType.boss, false)
             .execute();
+        String oldState = gameState.toString();
         final monster = getIt<GameState>().currentList.first as Monster;
         final instance = monster.monsterInstances.first;
         expect(GameMethods.hasRetaliate(monster, instance), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false if monster does not have retaliate', () {
@@ -738,9 +860,11 @@ void main() async {
             .execute(); // Monster without shield
         AddStandeeCommand(1, null, "Black Sludge", MonsterType.normal, false)
             .execute();
+        String oldState = gameState.toString();
         final monster = getIt<GameState>().currentList.first as Monster;
         final instance = monster.monsterInstances.first;
         expect(GameMethods.hasRetaliate(monster, instance), isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
 
@@ -751,9 +875,11 @@ void main() async {
             .execute(); // Monster without shield
         AddStandeeCommand(1, null, "Black Sludge", MonsterType.normal, false)
             .execute();
+        String oldState = gameState.toString();
         final monster = getIt<GameState>().currentList.first as Monster;
         final instance = monster.monsterInstances.first;
         expect(GameMethods.hasShield(monster, instance), isTrue);
+        checkNoSideEffects([], oldState);
       });
 
       test('should return false if monster does not have shield', () {
@@ -762,9 +888,11 @@ void main() async {
             .execute(); // Monster without shield
         AddStandeeCommand(1, null, "Zealot", MonsterType.normal, false)
             .execute();
+        String oldState = gameState.toString();
         final monster = getIt<GameState>().currentList.first as Monster;
         final instance = monster.monsterInstances.first;
         expect(GameMethods.hasShield(monster, instance), isFalse);
+        checkNoSideEffects([], oldState);
       });
     });
   });

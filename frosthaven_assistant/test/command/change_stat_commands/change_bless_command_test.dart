@@ -7,7 +7,7 @@ import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-import 'test_helpers.dart';
+import '../test_helpers.dart';
 
 void main() {
   setUpAll(() async {
@@ -36,6 +36,7 @@ void main() {
       final finalBlessCount =
           character.characterState.modifierDeck.getRemovable("bless").value;
       expect(finalBlessCount, initialBlessCount + 1);
+      checkSaveState();
     });
 
     test('should remove a bless card from a character deck', () {
@@ -54,6 +55,7 @@ void main() {
       final finalBlessCount =
           character.characterState.modifierDeck.getRemovable("bless").value;
       expect(finalBlessCount, initialBlessCount - 1);
+      checkSaveState();
     });
 
     test('should add a bless card to the monster deck', () {
@@ -71,6 +73,7 @@ void main() {
       final finalBlessCount =
           gameState.modifierDeck.getRemovable("bless").value;
       expect(finalBlessCount, initialBlessCount + 1);
+      checkSaveState();
     });
 
     test('should remove a bless card from the monster deck', () {
@@ -88,6 +91,7 @@ void main() {
       final finalBlessCount =
           gameState.modifierDeck.getRemovable("bless").value;
       expect(finalBlessCount, initialBlessCount - 1);
+      checkSaveState();
     });
 
     test('describe should return correct string for adding bless', () {
@@ -96,6 +100,7 @@ void main() {
 
       // Act & Assert
       expect(command.describe(), 'Add a Bless');
+      checkSaveState();
     });
 
     test('describe should return correct string for removing bless', () {
@@ -104,6 +109,7 @@ void main() {
 
       // Act & Assert
       expect(command.describe(), 'Remove a Bless');
+      checkSaveState();
     });
 
     test('describe should return correct string for monster deck', () {
@@ -112,6 +118,7 @@ void main() {
 
       // Act & Assert
       expect(command.describe(), 'Add a Bless');
+      checkSaveState();
     });
   });
 }

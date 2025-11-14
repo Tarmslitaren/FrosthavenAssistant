@@ -42,6 +42,7 @@ void main() {
       expect(gameState.showAllyDeck.value, isFalse);
       // This scenario has no specific loot deck
       expect(gameState.lootDeck.cardCount.value, 0);
+      checkSaveState();
     });
 
     test('correctly adds a section to a scenario', () {
@@ -61,6 +62,7 @@ void main() {
 
       //expect(zealotsAfter, greaterThan(zealotsBefore));
       expect(gameState.scenarioSectionsAdded, contains('#door'));
+      checkSaveState();
     });
 
     test('correctly handles special rules like AllyDeck and Objective', () {
@@ -79,6 +81,7 @@ void main() {
           reason: "Scenario should have an objective.");
       expect(GameMethods.shouldShowAlliesDeck(), isTrue,
           reason: "Scenario should show the ally deck.");
+      checkSaveState();
     });
 
     test('setting a new scenario resets character and game state', () {
@@ -102,6 +105,7 @@ void main() {
       expect(characterAfter.characterState.xp.value, 0);
       expect(characterAfter.characterState.initiative.value, 0);
       expect(characterAfter.characterState.conditions.value, isEmpty);
+      checkSaveState();
     });
 
     test('custom scenarios have a random Frosthaven loot deck', () {
@@ -113,6 +117,7 @@ void main() {
       final gameState = getIt<GameState>();
       // For Frosthaven, a random loot deck is created for custom scenarios.
       expect(gameState.lootDeck.cardCount.value, greaterThan(0));
+      checkSaveState();
     });
 
     test('describe method provides a correct description', () {
@@ -121,6 +126,7 @@ void main() {
 
       // Act & Assert
       expect(command.describe(), 'Set Scenario');
+      checkSaveState();
     });
   });
 }

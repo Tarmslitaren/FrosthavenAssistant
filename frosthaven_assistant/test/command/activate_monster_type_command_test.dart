@@ -27,6 +27,7 @@ void main() async {
 
       // Assert
       expect(monster.isActive, isTrue);
+      checkSaveState();
     });
 
     test('should deactivate a monster', () {
@@ -44,6 +45,7 @@ void main() async {
 
       // Assert
       expect(monster.isActive, isFalse);
+      checkSaveState();
     });
 
     test('describe should return correct string for activation', () {
@@ -52,6 +54,7 @@ void main() async {
 
       // Act & Assert
       expect(command.describe(), 'Activate Zealot');
+      checkSaveState();
     });
 
     test('describe should return correct string for deactivation', () {
@@ -60,6 +63,7 @@ void main() async {
 
       // Act & Assert
       expect(command.describe(), 'Deactivate Zealot');
+      checkSaveState();
     });
   });
 }

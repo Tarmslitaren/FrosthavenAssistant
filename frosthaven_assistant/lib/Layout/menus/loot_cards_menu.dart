@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_loot_owner_menu.dart';
-import 'package:frosthaven_assistant/Resource/commands/add__special_loot_card_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/add_special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/return_loot_card_command.dart';
 
 import '../../Resource/commands/remove__special_loot_card_command.dart';

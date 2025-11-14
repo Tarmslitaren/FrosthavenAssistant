@@ -108,7 +108,7 @@ class CharacterState extends FigureState {
   }
 
   setXp(_StateModifier _, int value) {
-    _xp.value = value;
+    _xp.value = max(value, 0);
   }
 
   getMutableSummonList(_StateModifier _) {

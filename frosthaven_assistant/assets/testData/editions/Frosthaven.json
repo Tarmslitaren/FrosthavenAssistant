@@ -212,16 +212,16 @@
     },
     "#0 Howling in the Snow": {
       "monsters": [ "Ancient Artillery (FH)" ],
-      "lootDeck": {"coin":8,"lumber": 2,"metal":2,"hide": 2},
+      "lootDeck": {"coin":6,"lumber": 5,"metal":3,"hide": 3,"rockroot":1,"snowthistle":2},
       "initialMessage": "Masteries cannot be completed in this scenario."
     },
     "#1 A Town in Flames": {
-      "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest", "City Guard Scenario 1" ],
+      "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest", "City Guard" ],
       "lootDeck": {"coin":6,"lumber": 5,"metal":3,"hide": 3,"rockroot":1,"snowthistle":2},
       "special": [
         {
           "type": "Allies",
-          "list": ["City Guard Scenario 1"]
+          "list": ["City Guard"]
         }]
     },
     "#2 Algox Scouting": {
