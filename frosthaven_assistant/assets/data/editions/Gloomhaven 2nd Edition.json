@@ -6860,7 +6860,7 @@
       "special": [
         {
           "type": "Timer",
-          "list": [1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
+          "list": [3,5,7,9,11,13,15,17,19,21,23,25,27,29,31],
           "startOfRound": true,
           "note": "Spawn Living Spirits. At A for 2-3 characters. At both A and B for 4 characters.",
           "name": "spawn 1"
