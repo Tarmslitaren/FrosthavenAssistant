@@ -6,12 +6,12 @@
       "color": "FFB83DBA",
       "colorSecondary": "ff460F1D",
       "edition": "Mercenary Packs",
-      "health": [8,9,11,12,14,15,17,18,20],
+      "health": [6,7,8,9,10,11,12,13,14],
       "hidden": false,
       "summons": {
         "Sewer Monstrosity": {
           "level": 1,
-          "health": 1,
+          "health": 4,
           "move": 3,
           "attack": 2,
           "gfx": "MIN Rat Monstrosity"
