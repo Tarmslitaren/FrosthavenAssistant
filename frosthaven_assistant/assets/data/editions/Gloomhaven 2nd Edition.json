@@ -6483,7 +6483,7 @@
         {
           "type": "Objective",
           "name": "Stone Pillar H",
-          "health": "8+CxL",
+          "health": "8+CxL/2",
           "init": 99
         },
         {
@@ -7213,7 +7213,7 @@
         {
           "type": "Escort",
           "name": "Temporal Matrix",
-          "health": "3+C+2xL"
+          "health": "4+C+2xL"
         }
       ]
     },
