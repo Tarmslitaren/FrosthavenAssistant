@@ -2084,6 +2084,62 @@
 					"level": 7, "health": 40, "move": 4, "attack": 6, "attributes": [ "%retaliate% 3" ]
 				}
 			]
+		},
+		"Bug-Body": {
+			"deck": "Boss (JotL)",
+			"gfx": "Bug-Body",
+			"edition": "Jaws of the Lion",
+			"count": 1,
+			"levels": [
+				{
+					"level": 0, "health": "5xC", "move": 2, "attack": 2,
+					"immunities": [ "%disarm%", "%curse%", "%stun%"],
+					"special1": [ "%move% + 1", "%attack% - 1", "^%range% 3","^%target% c", "^%wound%"],
+					"special2": [ "^Follow the room's Special Rules"]
+				},
+				{
+					"level": 1, "health": "6xC", "move": 3, "attack": 2,
+					"immunities": [ "%disarm%", "%curse%", "%stun%"],
+					"special1": [ "%move% + 1", "%attack% - 1", "^%range% 3","^%target% c", "^%wound%"],
+					"special2": [ "^Follow the room's Special Rules"]
+				},
+				{
+					"level": 2, "health": "7xC", "move": 3, "attack": 3,
+					"immunities": [ "%disarm%", "%curse%", "%stun%"],
+					"special1": [ "%move% + 1", "%attack% - 1", "^%range% 3","^%target% c", "^%wound%"],
+					"special2": [ "^Follow the room's Special Rules"]
+				},
+				{
+					"level": 3, "health": "9xC", "move": 3, "attack": 3,
+					"immunities": [ "%disarm%", "%curse%", "%stun%"],
+					"special1": [ "%move% + 1", "%attack% - 1", "^%range% 3","^%target% c", "^%wound%"],
+					"special2": [ "^Follow the room's Special Rules"]
+				},
+				{
+					"level": 4, "health": "10xC", "move": 3, "attack": 4,
+					"immunities": [ "%disarm%", "%curse%", "%stun%"],
+					"special1": [ "%move% + 1", "%attack% + 1", "^%range% 3","^%target% c", "^%wound%"],
+					"special2": [ "^Follow the room's Special Rules"]
+				},
+				{
+					"level": 5, "health": "11xC", "move": 3, "attack": 4,
+					"immunities": [ "%disarm%", "%curse%", "%stun%"],
+					"special1": [ "%move% + 1", "%attack% - 1", "^%range% 3","^%target% c", "^%wound%"],
+					"special2": [ "^Follow the room's Special Rules"]
+				},
+				{
+					"level": 6, "health": "12xC", "move": 3, "attack": 5,
+					"immunities": [ "%disarm%", "%curse%", "%stun%"],
+					"special1": [ "%move% + 1", "%attack% - 1", "^%range% 3","^%target% c", "^%wound%"],
+					"special2": [ "^Follow the room's Special Rules"]
+				},
+				{
+					"level": 7, "health": "13xC", "move": 4, "attack": 5,
+					"immunities": [ "%disarm%", "%curse%", "%stun%"],
+					"special1": [ "%move% + 1", "%attack% - 1", "^%range% 3","^%target% c", "^%wound%"],
+					"special2": [ "^Follow the room's Special Rules"]
+				}
+			]
 		}
 	},
 	"scenarios": {
@@ -3089,6 +3145,41 @@
 		"#56 Vanquisher/Trail of Ashes: Return to Crystal Gardens": {
 			"monsters": [ "Shardrender (84)", "Smoke Spirit"]
 		},
+
+
+		"#57 Satha/Mercenary Pack: Horns in the Night": {
+			"monsters":  [ "Algox Archer", "Algox Icespeaker", "Algox Scout","City Guard (FH)"],
+			"special": [ {
+				"type": "Allies",
+				"list": ["City Guard (FH)"]
+			}],
+			"sections": {
+				"#2": {
+					"initialMessage": "Spawn two Normal Algox Scouts at B"
+				},
+				"#3": {
+					"special": [
+						{
+							"type": "ResetRound"
+						},
+						{
+							"type": "Timer",
+							"list": [2],
+							"note": "Spawn two Elite Algox Scouts at A",
+							"name": "spawn 1",
+							"startOfRound": true
+						}
+					]
+				}
+			}
+		},
+
+		"#58 Anaphi/Mercenary Pack: A Harrowing Deal": {
+			"monsters":  [ "Bug-Body", "Living Corpse (JotL)","Vermling Raider","Vermling Scout (JotL)"]
+		},
+
+
+
 		"#101 Brute/Gloomhaven: Return to the Black Barrow": {
 			"monsters":  ["Bandit Guard", "Bandit Archer", "Living Bones" ],
 			"special": [

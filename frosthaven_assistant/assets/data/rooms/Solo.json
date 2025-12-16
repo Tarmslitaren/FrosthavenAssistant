@@ -4568,40 +4568,16 @@
     {
       "48C": {
         "Cave Bear": {
-          "normal": [
-            1,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            1
-          ]
+          "normal": [1, 2, 2],
+          "elite": [0, 0, 1]
         },
         "Living Bones": {
-          "normal": [
-            1,
-            1,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            0
-          ]
+          "normal": [1, 1, 2],
+          "elite": [0, 1, 0]
         },
         "Black Imp": {
-          "normal": [
-            2,
-            0,
-            2
-          ],
-          "elite": [
-            0,
-            1,
-            1
-          ]
+          "normal": [2, 0, 2],
+          "elite": [0, 1, 1]
         }
       }
     }
@@ -4610,28 +4586,120 @@
     {
       "D2": {
         "Shardrender (84)": {
-          "normal": [
-            1,
-            1,
-            1
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
         },
         "Smoke Spirit": {
-          "normal": [
-            2,
-            2,
-            2
-          ],
-          "elite": [
-            0,
-            0,
-            0
-          ]
+          "normal": [2, 2, 2],
+          "elite": [0, 0, 0]
+        }
+      }
+    }
+  ],
+  "57": [
+    {
+      "start": {
+        "Algox Archer": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Algox Scout": {
+          "normal": [1, 1, 1],
+          "elite": [1,1,1]
+        },
+        "City Guard (FH)": {
+          "normal": [2,2,2],
+          "elite": [0, 0, 0]
+        }
+      }}, {
+      "1": {
+        "Algox Archer": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Algox Icespeaker": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Algox Scout": {
+          "normal": [3,3,3],
+          "elite": [0,0,0]
+        },
+        "City Guard (FH)": {
+          "normal": [2,2,2],
+          "elite": [0, 0, 0]
+        }
+      }},{
+      "2": {
+        "Algox Archer": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Algox Icespeaker": {
+          "normal": [0,0,0],
+          "elite": [1,1,1]
+        },
+        "Algox Scout": {
+          "normal": [5,5,5],
+          "elite": [0,0,0]
+        },
+        "City Guard (FH)": {
+          "normal": [1,1,1],
+          "elite": [0, 0, 0]
+        }
+      }}, {
+      "3": {
+        "Algox Scout": {
+          "normal": [0,0,0],
+          "elite": [2,2,2]
+        }
+      }}, {
+      "spawn 1": {
+        "Algox Archer": {
+          "normal": [0,0,0],
+          "elite": [2,2,2]
+        }
+      }
+    }
+  ],
+  "58": [
+    {
+      "start": {
+        "Bug-Body": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Vermling Raider": {
+          "normal": [1, 2, 1],
+          "elite": [0,0,1]
+        },
+        "Vermling Scout (JotL)": {
+          "normal": [0,0,0],
+          "elite": [1,1,1]
+        }
+      }}, {
+      "1": {
+        "Bug-Body": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Vermling Raider": {
+          "normal": [1, 2, 0],
+          "elite": [1,1,3]
+        },
+        "Vermling Scout (JotL)": {
+          "normal": [2,1,1],
+          "elite": [0, 2, 3]
+        }
+      }},{
+      "2": {
+        "Bug-Body": {
+          "normal": [1, 1, 1],
+          "elite": [0, 0, 0]
+        },
+        "Living Corpse (JotL)": {
+          "normal": [1,2,1],
+          "elite": [1,1,3]
         }
       }
     }
