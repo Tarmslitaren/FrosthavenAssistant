@@ -2890,19 +2890,19 @@
 				}
 			}
 		},
-		"#37 Bombard/Crimson Scales: Disarm the Machine": {
+		"#137 Bombard/Crimson Scales: Disarm the Machine": {
 			"monsters": [ "Ancient Artillery", "Stone Golem" ]
 		},
-		"#38 Brightspark/Crimson Scales: Elemental Converter": {
+		"#138 Brightspark/Crimson Scales: Elemental Converter": {
 			"monsters": [ "Black Imp", "Deep Terror", "Hound", "Lurker", "Rending Drake", "Spitting Drake" ]
 		},
-		"#39 Chainguard/Crimson Scales: Penitentiary Lockdown": {
+		"#139 Chainguard/Crimson Scales: Penitentiary Lockdown": {
 			"monsters": [ "Bandit Archer", "Bandit Guard" ]
 		},
-		"#40 Chieftain/Crimson Scales: Forest Invaders": {
+		"#140 Chieftain/Crimson Scales: Forest Invaders": {
 			"monsters": [ "Cave Bear", "Giant Viper", "Hound", "Vermling Scout", "Vermling Shaman" ]
 		},
-		"#41 Fire Knight/Crimson Scales: Through the Fire and the Flames": {
+		"#141 Fire Knight/Crimson Scales: Through the Fire and the Flames": {
 			"monsters": [ "Flame Demon", "Rending Drake #60 Special", "Savvas Lavaflow", "Spitting Drake" ],
 			"sections": {
 				"#68A Scenario 60": {
@@ -2910,10 +2910,10 @@
 				}
 			}
 		},
-		"#42 Hierophant/Crimson Scales: Archaic Preservation": {
+		"#142 Hierophant/Crimson Scales: Archaic Preservation": {
 			"monsters": [ "Ancient Artillery", "Black Imp", "Lurker", "Rending Drake", "Stone Golem" ]
 		},
-		"#43 Hollowpact/Crimson Scales: Hallow Redemption": {
+		"#143 Hollowpact/Crimson Scales: Hallow Redemption": {
 			"monsters": [ "Aesther Ashblade", "Cave Bear", "Forest Imp", "Vermling Shaman" ],
 			"sections": {
 				"#71A Scenario 62": {
@@ -2927,13 +2927,13 @@
 					"level": -1
 				}]
 		},
-		"#44 Mirefoot/Crimson Scales: A Cornered Viper": {
+		"#144 Mirefoot/Crimson Scales: A Cornered Viper": {
 			"monsters": [ "Cave Bear", "Giant Viper", "Inox Archer", "Living Corpse", "Living Spirit", "Stone Golem" ]
 		},
-		"#45 Luminary/Crimson Scales: Glowing Crystals": {
+		"#145 Luminary/Crimson Scales: Glowing Crystals": {
 			"monsters": [ "Deep Terror", "Lurker" ]
 		},
-		"#46 Spirit Caller/Crimson Scales: Beyond the Grave": {
+		"#146 Spirit Caller/Crimson Scales: Beyond the Grave": {
 			"monsters": [ "Vermling Shaman" ],
 			"special": [
 				{
@@ -2977,7 +2977,7 @@
 				}
 			}
 		},
-		"#47 Starslinger/Crimson Scales: Otherworldly Strangers": {
+		"#147 Starslinger/Crimson Scales: Otherworldly Strangers": {
 			"monsters": [ "City Archer", "City Guard", "Earth Demon", "Harrower Infester", "Night Demon", "Sun Demon" ],
 			"special": [
 				{
@@ -2998,7 +2998,7 @@
 				}
 			]
 		},
-		"#48 Amber Aegis/Crimson Scales: Hive Guardian": {
+		"#148 Amber Aegis/Crimson Scales: Hive Guardian": {
 			"monsters": [ "Flame Demon", "Frost Demon", "Wind Demon", "Earth Demon", "Night Demon", "Sun Demon" ],
 			"special": [
 				{
@@ -3043,7 +3043,7 @@
 				}
 			]
 		},
-		"#49 Artificer/Crimson Scales: Magnum Opus": {
+		"#149 Artificer/Crimson Scales: Magnum Opus": {
 			"monsters": [  "Clockwork Soldier", "Clockwork Railcaster" ],
 			"sections": {
 				"#2 Mechanical Menace": {
@@ -3065,7 +3065,7 @@
 				}
 			]
 		},
-		"#50 Ruinmaw/Crimson Scales: The Fall of Shadow’s Respite": {
+		"#150 Ruinmaw/Crimson Scales: The Fall of Shadow’s Respite": {
 			"monsters": [ "Gnashing Drake", "Spitting Drake", "Rending Drake", "Vermling Scout (ally)", "Vermling Shaman (ally)" ],
 			"sections": {
 				"#4 The Shadow Falls": {
@@ -3093,7 +3093,7 @@
 				}]
 		},
 
-		"#51 Incarnate/Trail of Ashes: Unsouled": {
+		"#151 Incarnate/Trail of Ashes: Unsouled": {
 			"monsters": [ "Inox Archer", "Inox Guard", "Inox Guard (ally)"],
 			"sections": {
 				"#38A (Scenario 79)": {
@@ -3101,11 +3101,11 @@
 				}
 			}
 		},
-		"#52 Rimehearth/Trail of Ashes: Conflux of Power": {
+		"#152 Rimehearth/Trail of Ashes: Conflux of Power": {
 			"monsters": [ "Savvas Acolyte","Inferno Demon", "Glacier Demon", "Flame Demon", "Frost Demon" ]
 		},
 
-		"#53 Shardrender/Trail of Ashes: Corrupted Presence": {
+		"#153 Shardrender/Trail of Ashes: Corrupted Presence": {
 			"monsters": [ "Deep Terror (TOA 81)","Frost Demon", "Living Spirit", "Night Demon", "Tendril of Corruption"],
 			"special": [
 				{
@@ -3122,10 +3122,10 @@
 				}
 			]
 		},
-		"#54 Tempest/Trail of Ashes: Storm Mountain": {
+		"#154 Tempest/Trail of Ashes: Storm Mountain": {
 			"monsters": [ "Stone Golem", "Volt Demon", "Wind Demon"]
 		},
-		"#55 Thornreaper/Trail of Ashes: Collapsed Cavern": {
+		"#155 Thornreaper/Trail of Ashes: Collapsed Cavern": {
 			"monsters": [ "Black Imp","Cave Bear","Deep Terror","Earth Demon","Forest Imp", "Living Bones"],
 			"special": [
 				{
@@ -3142,12 +3142,13 @@
 				}
 			]
 		},
-		"#56 Vanquisher/Trail of Ashes: Return to Crystal Gardens": {
+		"#156 Vanquisher/Trail of Ashes: Return to Crystal Gardens": {
 			"monsters": [ "Shardrender (84)", "Smoke Spirit"]
 		},
 
 
 		"#57 Satha/Mercenary Pack: Horns in the Night": {
+			"lootDeck": {"coin":15},
 			"monsters":  [ "Algox Archer", "Algox Icespeaker", "Algox Scout","City Guard (FH)"],
 			"special": [ {
 				"type": "Allies",
@@ -3178,9 +3179,78 @@
 			"monsters":  [ "Bug-Body", "Living Corpse (JotL)","Vermling Raider","Vermling Scout (JotL)"]
 		},
 
+		"#59 Cassandra/Mercenary Pack: Escape from Corruption": {
+			"monsters":  [ "Black Imp (2e)", "Chaos Demon (2e)", "Harrower Infester (2e)", "Hound (2e)", "Inox Archer (2e)"],
+			"special": [
+				{
+					"type": "Allies",
+					"list": ["Hound (2e)", "Inox Archer (2e)"]
+				},
+				{
+					"type": "Timer",
+					"list": [2],
+					"note": "Spawn one Elite Chaos Demon at 1, one Normal Harrower Infester at 2 and one Normal Black Imp at 5",
+					"name": "spawn 1",
+					"startOfRound": true
+				},
+				{
+					"type": "Timer",
+					"list": [5],
+					"note": "Spawn two Elite Black Imps: one at 2 and one at 3. Spawn one Elite Harrower Infester at 6",
+					"name": "spawn 2",
+					"startOfRound": true
+				},
+				{
+					"type": "Timer",
+					"list": [8],
+					"note": "Spawn one Elite Harrower Infester at 3,  one Normal Chaos Demon at 4 and one Elite Chaos Demon at 7",
+					"name": "spawn 3",
+					"startOfRound": true
+				}
+			]
+		},
+
+		"#60 Hail/Mercenary Pack: Major Annoyance": {
+			"monsters":  ["Earth Demon (FH)", "Flame Demon (FH)", "Frost Demon (FH)", "Wind Demon (FH)"],
+			"special": [
+				{
+					"type": "Escort",
+					"name": "Shielded Research Construct",
+					"init": 1,
+					"health": "6+Lx2"
+				},
+				{
+					"type": "Escort",
+					"name": "Laboratory Defense Cannon",
+					"init": 1,
+					"health": "5+L"
+				},
+				{
+					"type": "Timer",
+					"list": [3],
+					"note": "Spawn Elite Flame Demon at B",
+					"name": "spawn 1",
+					"startOfRound": true
+				},
+				{
+					"type": "Timer",
+					"list": [6],
+					"note": "Spawn Elite Wind Demon at B",
+					"name": "spawn 2",
+					"startOfRound": true
+				},
+				{
+					"type": "Timer",
+					"list": [9],
+					"note": "Read section 2",
+					"startOfRound": true
+				}
+			]
+		},
 
 
-		"#101 Brute/Gloomhaven: Return to the Black Barrow": {
+
+		"#201 Brute/Gloomhaven: Return to the Black Barrow": {
 			"monsters":  ["Bandit Guard", "Bandit Archer", "Living Bones" ],
 			"special": [
 				{
@@ -3191,7 +3261,7 @@
 				}
 			]
 		},
-		"#102 Tinkerer/Gloomhaven: An Unfortunate Intrusion": {
+		"#202 Tinkerer/Gloomhaven: An Unfortunate Intrusion": {
 			"monsters":  ["City Guard (Ally)", "Vermling Scout", "Vermling Shaman" ],
 			"special": [
 				{
@@ -3203,10 +3273,10 @@
 				}
 			]
 		},
-		"#103 Spellweaver/Gloomhaven: Corrupted Laboratory": {
+		"#203 Spellweaver/Gloomhaven: Corrupted Laboratory": {
 			"monsters":  ["Black Imp", "Spitting Drake", "Stone Golem" ]
 		},
-		"#104 Scoundrel/Gloomhaven: Armory Heist": {
+		"#204 Scoundrel/Gloomhaven: Armory Heist": {
 			"monsters":  ["City Guard (Scoundrel Special)", "Stone Golem (Scoundrel Special)", "Ancient Artillery" ],
 			"special": [
 				{
@@ -3219,7 +3289,7 @@
 					"init": 49
 				}]
 		},
-		"#105 Cragheart/Gloomhaven: Stone Defense": {
+		"#205 Cragheart/Gloomhaven: Stone Defense": {
 			"monsters":  ["Cave Bear", "Ooze", "Sun Demon" ],
 			"special": [
 				{
@@ -3238,7 +3308,7 @@
 				}
 			]
 		},
-		"#106 Mindthief/Gloomhaven: Rodent Liberation": {
+		"#206 Mindthief/Gloomhaven: Rodent Liberation": {
 			"monsters":  ["Vermling Scout", "Vermling Shaman", "Earth Demon (Mindthief Special)" ],
 			"special": [{
 				"type": "Objective",
@@ -3256,7 +3326,7 @@
 					"health": "3+L"
 				}]
 		},
-		"#107 Sunkeeper/Gloomhaven: Caravan Escort": {
+		"#207 Sunkeeper/Gloomhaven: Caravan Escort": {
 			"monsters":  ["City Guard (Sun Special)", "Bandit Guard", "Bandit Archer", "Inox Guard", "Inox Archer", "Inox Shaman", "Vermling Scout", "Vermling Shaman", "Cave Bear" ],
 			"special": [
 				{
@@ -3266,10 +3336,10 @@
 				}
 			]
 		},
-		"#108 Quartermaster/Gloomhaven: Storage Fees": {
+		"#208 Quartermaster/Gloomhaven: Storage Fees": {
 			"monsters":  ["Hound", "Bandit Guard", "Bandit Archer" ]
 		},
-		"#109 Summoner/Gloomhaven: Plane of Wild Beasts": {
+		"#209 Summoner/Gloomhaven: Plane of Wild Beasts": {
 			"monsters":  ["Hound", "Spitting Drake", "Cave Bear (Circles special)" ],
 			"special": [
 				{
@@ -3302,10 +3372,10 @@
 				}
 			]
 		},
-		"#110 Nightshroud/Gloomhaven: Harvesting the Night": {
+		"#210 Nightshroud/Gloomhaven: Harvesting the Night": {
 			"monsters":  ["Night Demon", "Deep Terror" ]
 		},
-		"#111 Plagueherald/Gloomhaven: Plagued Crypt": {
+		"#211 Plagueherald/Gloomhaven: Plagued Crypt": {
 			"monsters":  ["Giant Viper", "Black Imp" ],
 			"special": [
 				{ "type": "Escort", "name": "Spirit of Xorn 1", "health": "4+L"},
@@ -3340,10 +3410,10 @@
 				}
 			]
 		},
-		"#112 Berserker/Gloomhaven: Unnatural Insults": {
+		"#212 Berserker/Gloomhaven: Unnatural Insults": {
 			"monsters":  ["Living Corpse", "Living Bones", "Cultist", "Inox Necromancer" ]
 		},
-		"#113 Soothsinger/Gloomhaven: Battle of the Bards": {
+		"#213 Soothsinger/Gloomhaven: Battle of the Bards": {
 			"monsters":  ["Bandit Guard (Note Special)", "Bandit Archer (Note Special)", "City Guard", "City Archer", "Stone Golem", "Song of the Deep" ],
 			"special": [
 				{
@@ -3358,13 +3428,13 @@
 				}
 			]
 		},
-		"#114 Doomstalker/Gloomhaven: Corrupted Hunt": {
+		"#214 Doomstalker/Gloomhaven: Corrupted Hunt": {
 			"monsters":  ["Ghost Wolf", "Deep Earth", "High Flame", "Giant Viper (Angry Face Special)", "Spitting Drake" ]
 		},
-		"#115 Sawbones/Gloomhaven: Aftermath": {
+		"#215 Sawbones/Gloomhaven: Aftermath": {
 			"monsters":  ["City Guard", "Lieutenant" ]
 		},
-		"#116 Elementalist/Gloomhaven: Elemental Secrets": {
+		"#216 Elementalist/Gloomhaven: Elemental Secrets": {
 			"monsters":  ["Flame Demon", "Earth Demon", "Frost Demon", "Wind Demon" ],
 			"special": [
 				{
@@ -3393,10 +3463,10 @@
 				}
 			]
 		},
-		"#117 Beast Tyrant/Gloomhaven: The Caged Bear": {
+		"#217 Beast Tyrant/Gloomhaven: The Caged Bear": {
 			"monsters":  ["Hound", "Forest Imp", "Rending Drake", "Vermling Shaman", "Cave Bear" ]
 		},
-		"#118 Bladeswarm/Gloomhaven: The Sands of Time": {
+		"#218 Bladeswarm/Gloomhaven: The Sands of Time": {
 			"monsters":  ["Giant Viper", "Living Spirit", "Stone Golem" ]
 		}
 	}
