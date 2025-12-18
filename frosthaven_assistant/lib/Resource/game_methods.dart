@@ -464,9 +464,11 @@ class GameMethods {
     final GameState gameState = getIt<GameState>();
     String scenario = gameState.scenario.value;
     if (edition == "Solo") {
-      //#37+ are og solo scenarios
-      for (int i = 1; i <= 36; i++) {
-        //todo: fix this for merc pack (put og CS/TOs at 100 and og gloom at 200?
+      if (scenario.contains("${"#19"} ")) {
+        return false; //this is forgotten circles
+      }
+      //#100+ are og solo scenarios
+      for (int i = 1; i <= 100; i++) {
         if (scenario.contains("${"#$i"} ")) {
           return true;
         }

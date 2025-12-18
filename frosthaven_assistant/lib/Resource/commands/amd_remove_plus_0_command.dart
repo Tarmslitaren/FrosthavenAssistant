@@ -26,6 +26,6 @@ class AmdRemovePlus0Command extends Command {
 
   @override
   String describe() {
-    return remove ? "Remove plus one" : "Add back plus one";
+    return remove ? "Remove plus zero" : "Add back plus zero";
   }
 }

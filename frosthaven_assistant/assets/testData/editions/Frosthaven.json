@@ -32,7 +32,7 @@
       "name": "Banner Spear",
       "edition": "Frosthaven",
       "health": [10, 12, 14, 16, 18, 20, 22, 24, 26],
-      "hidden": false,
+      "hidden": true,
       "color": "ffedbc47",
       "summons": {
         "Reinforcements": {
@@ -107,6 +107,35 @@
         {"text": "At the end of each of your long rests, grant one ally within %range% 3: %move% 2"},
         {"text": "Whenever you open a door with a move ability, add + 3 %move%"},
         {"text": "[double] Once each scenario, during your turn, gain %shield% 2 for the round"}
+      ]
+    },
+    {
+      "name": "Hail",
+      "color": "FFB3686D",
+      "colorSecondary": "FF240F18",
+      "edition": "Mercenary Packs",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {},
+      "perks": [
+        {"removes": ["minus2"], "adds": ["plus0"]},
+        {"text": "Replace one -1 card with one +0 %wound% or %immobilize%","removes": ["minus1"], "adds": [ "perks/unique/ha1"]},
+        {"text": "Replace one -1 card with one +0 %wound% or %immobilize%","removes": ["minus1"], "adds": [ "perks/unique/ha1"]},
+        { "removes": ["minus1"], "adds": ["perks/plus1any"]},
+        { "removes": ["minus1"], "adds": ["perks/plus1any"]},
+        {"text": "Replace two +0 cards with one +1 %poison% or %muddle% card", "removes": ["plus0","plus0"], "adds": [ "perks/unique/ha2"]},
+        {"text": "Replace two +0 cards with one +1 %poison% or %muddle% card", "removes": ["plus0","plus0"], "adds": [ "perks/unique/ha2"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1heal1allyflip"]},
+        {"removes": ["plus0"], "adds": ["perks/plus1heal1allyflip"]},
+        {"removes": ["plus1","plus1"], "adds": ["plus2","plus2"]},
+        {"adds": ["perks/plus1stun"]},
+        {"adds": ["perks/plus1stun"]},
+        {"adds": ["perks/plus3safeguardally"]},
+        {"adds": ["perks/plus3safeguardally"]},
+        {"text": "Ignore scenario effects and add two +1 cards","adds": [ "plus1", "plus1"]},
+        {"text": "Whenever you short rest,you may choose which card to lose"},
+        {"text": "Your and your allies' enhancements cost five gold less and whenever an ally enhances a card, you gain five gold"},
+        {"text": "add one +1 \"%Hail gains 1 resolve\" card to the monster attack modifier deck"}
       ]
     }
   ],
