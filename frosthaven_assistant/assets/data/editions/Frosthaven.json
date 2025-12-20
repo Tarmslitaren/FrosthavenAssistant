@@ -7900,7 +7900,7 @@
               "type": "Timer",
               "list": [4],
               "startOfRound": true,
-              "note": "Place New Snow. Spawn one Normal Burrowing Blade at C and D. For 4 characters, spawn also at B.",
+              "note": "Place New Snow. Spawn one Normal Burrowing Blade at C and D. For 3 or 4 characters, spawn also at B.",
               "name": "spawn 2"
             },
             {
