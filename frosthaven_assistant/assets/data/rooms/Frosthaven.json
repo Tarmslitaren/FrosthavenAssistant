@@ -2716,7 +2716,7 @@
     {
       "spawn 2": {
         "Burrowing Blade": {
-          "normal": [2, 2,3],
+          "normal": [2, 3, 3],
           "elite": [0, 0, 0]
         }
       }
