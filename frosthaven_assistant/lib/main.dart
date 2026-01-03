@@ -70,10 +70,7 @@ class MyApp extends StatelessWidget {
     //double wtf = MediaQuery.of(context).devicePixelRatio;
 
     //call after keyboard
-    if (Platform.isIOS || Platform.isAndroid) {
-      WakelockPlus.enable();
-      //should force app to be in foreground and disable screen lock
-    }
+    WakelockPlus.enable();
 
     try {
       //initialize game
