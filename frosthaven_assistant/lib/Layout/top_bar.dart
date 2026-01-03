@@ -1,11 +1,12 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide AppBar;
 import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import '../Resource/enums.dart';
 import '../services/service_locator.dart';
 import 'element_button.dart';
+import 'widgets/app_bar.dart';
 
 class TopBar extends StatelessWidget {
   const TopBar({super.key});
