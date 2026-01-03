@@ -113,90 +113,34 @@ Widget defaultBuildDraggableFeedback(
   );
 }
 
+final Set<String> _ghVersionSet = {
+  "attack",
+  "damage",
+  "disarm",
+  "flying",
+  "heal",
+  "immobilize",
+  "invisible",
+  "jump",
+  "loot",
+  "move",
+  "pierce",
+  "poison",
+  "push",
+  "pull",
+  "stun",
+  "target",
+  "range",
+  "retaliate",
+  "shield",
+  "strengthen",
+  "teleport",
+  "use",
+  "wound"
+};
+
 bool hasGHVersion(String name) {
-  //todo: use lookuptable. also check the ones that have, not the don't haves-. so no need to update all the time
-  if (name.contains("aoe")) {
-    return false;
-  }
-  if (name == ("dodge")) {
-    return false;
-  }
-  if (name == "bane") {
-    return false;
-  }
-  if (name == "bless") {
-    return false;
-  }
-  if (name == "curse") {
-    return false;
-  }
-  if (name == "enfeeble") {
-    return false;
-  }
-  if (name == "empower") {
-    return false;
-  }
-  if (name == "brittle") {
-    return false;
-  }
-  if (name == "chill") {
-    return false;
-  }
-  if (name == "plague") {
-    return false;
-  }
-  if (name == "infect") {
-    return false;
-  }
-  if (name == "impair") {
-    return false;
-  }
-  if (name == "safeguard") {
-    return false;
-  }
-  if (name == "muddle") {
-    return false;
-  }
-  if (name == "regenerate") {
-    return false;
-  }
-  if (name == "ward") {
-    return false;
-  }
-  if (name == "rupture") {
-    return false;
-  }
-  if (name == "bane") {
-    return false;
-  }
-  if (name.contains("air")) {
-    return false;
-  }
-  if (name.contains("earth")) {
-    return false;
-  }
-  if (name.contains("ice")) {
-    return false;
-  }
-  if (name.contains("dark")) {
-    return false;
-  }
-  if (name == "light") {
-    return false;
-  }
-  if (name == "any") {
-    return false;
-  }
-  if (name.contains("fire")) {
-    return false;
-  }
-  if (name.contains("flip")) {
-    return false;
-  }
-  if (name.contains("bless")) {
-    return false;
-  }
-  return true;
+  return _ghVersionSet.contains(name);
 }
 
 const TextStyle toastTextStyle = TextStyle(fontFamily: "markazi", fontSize: 28);

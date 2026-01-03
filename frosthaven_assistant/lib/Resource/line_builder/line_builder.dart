@@ -559,6 +559,10 @@ class LineBuilder {
             //create token part
             String iconToken = line.substring(partStartIndex, i);
             String iconGfx = iconToken;
+            bool hasOldStyle = hasGHVersion(iconGfx);
+            if (monster != null && iconToken == "move" && monster.type.flying) {
+              iconGfx = "flying";
+            }
             if (left) {
               RegExp regEx = RegExp(
                   r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
@@ -660,13 +664,9 @@ class LineBuilder {
                   styleToUse == normalStyle || styleToUse == eliteStyle;
               EdgeInsetsGeometry margin = _getMarginForToken(
                   iconToken, height, mainLine, alignment, frosthavenStyle);
-              if (monster != null &&
-                  iconToken == "move" &&
-                  monster.type.flying) {
-                iconGfx = "flying";
-              }
+
               String imagePath = "assets/images/abilities/$iconGfx.png";
-              if (imageSuffix.isNotEmpty && hasGHVersion(iconGfx)) {
+              if (imageSuffix.isNotEmpty && hasOldStyle) {
                 imagePath = "assets/images/abilities/$iconGfx$imageSuffix.png";
               }
               bool overflow = FrosthavenConverter.shouldOverflow(

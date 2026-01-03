@@ -55,6 +55,8 @@ class TokenApplier {
               String iconGfx = iconToken;
               double height = 20;
 
+              bool hasOldVersion = hasGHVersion(iconGfx);
+
               if (LineBuilder.tokens[iconToken] != null) {
                 RegExp regEx = RegExp(
                     r"(?=.*[a-z])"); //black versions exist for all tokens containing lower case letters
@@ -64,7 +66,7 @@ class TokenApplier {
               }
 
               String imagePath = "assets/images/abilities/$iconGfx.png";
-              if (hasGHVersion(iconGfx)) {
+              if (hasOldVersion) {
                 imagePath = "assets/images/abilities/$iconGfx$imageSuffix.png";
               }
 
