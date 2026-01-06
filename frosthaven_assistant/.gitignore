@@ -55,3 +55,6 @@ lcov.info
 
 # dependency diagrams - layerlens
 DEPENDENCIES.md
+
+# FVM Version Cache
+.fvm/
