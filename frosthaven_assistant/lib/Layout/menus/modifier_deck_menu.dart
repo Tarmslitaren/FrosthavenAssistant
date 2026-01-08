@@ -23,6 +23,7 @@ import 'package:reorderables/reorderables.dart';
 
 import '../../Resource/commands/amd_remove_minus_2_command.dart';
 import '../../Resource/commands/amd_remove_plus_0_command.dart';
+import '../../Resource/commands/amd_reveal_command.dart';
 import '../../Resource/commands/change_stat_commands/change_bless_command.dart';
 import '../../Resource/commands/change_stat_commands/change_curse_command.dart';
 import '../../Resource/commands/change_stat_commands/change_empower_command.dart';
@@ -46,33 +47,19 @@ class ModifierDeckMenu extends StatefulWidget {
 class ModifierDeckMenuState extends State<ModifierDeckMenu> {
   final GameState _gameState = getIt<GameState>();
   final scrollController = ScrollController();
-  static List<ModifierCard> revealedList = [];
-
-  @override
-  initState() {
-    super.initState();
-  }
-
-  void markAsOpen(int revealed, ModifierDeck deck) {
-    setState(() {
-      revealedList = [];
-      var drawPile = deck.drawPile.getList().reversed.toList();
-      for (int i = 0; i < revealed; i++) {
-        revealedList.add(drawPile[i]);
-      }
-    });
-  }
 
   bool isRevealed(ModifierCard item) {
-    for (var card in revealedList) {
-      if (card == item) {
+    ModifierDeck deck = GameMethods.getModifierDeck(widget.name, _gameState);
+    var drawPile = deck.drawPile.getList().reversed.toList();
+    for (int i = 0; i < deck.revealedCount.value; i++) {
+      if (item == drawPile[i]) {
         return true;
       }
     }
     return false;
   }
 
-  Widget buildRevealButton(int nrOfButtons, int nr, ModifierDeck deck) {
+  Widget buildRevealButton(int nrOfButtons, int nr) {
     String text = "All";
     if (nr < nrOfButtons) {
       text = nr.toString();
@@ -82,12 +69,12 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
         child: TextButton(
           child: Text(text),
           onPressed: () {
-            markAsOpen(nr, deck);
+            _gameState.action(AMDRevealCommand(amount: nr, name: widget.name));
           },
         ));
   }
 
-  Widget buildPartyButton(int nr, String id) {
+  Widget buildPartyButton(int nr) {
     String text = nr.toString();
     return SizedBox(
         width: 32,
@@ -188,7 +175,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
 
   @override
   void deactivate() {
-    revealedList = [];
+    //revealedList = [];
     super.deactivate();
   }
 
@@ -432,12 +419,10 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           children: [
                                               Text("Add Party\n Card:"),
                                               buildPartyButton(
-                                                  1,
-                                                  widget
-                                                      .name), //todo: make own menu for this, just like for gh2e special
-                                              buildPartyButton(2, widget.name),
-                                              buildPartyButton(3, widget.name),
-                                              buildPartyButton(4, widget.name),
+                                                  1), //todo: make own menu for this, just like for gh2e special
+                                              buildPartyButton(2),
+                                              buildPartyButton(3),
+                                              buildPartyButton(4),
                                             ]),
                                 if (isCharacter &&
                                     _gameState.unlockedClasses
@@ -652,29 +637,23 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                 const Text(
                                   "   Reveal\n    cards:",
                                 ),
-                                drawPile.isNotEmpty
-                                    ? buildRevealButton(
-                                        drawPile.length, 1, deck)
-                                    : Container(),
-                                drawPile.length > 1
-                                    ? buildRevealButton(
-                                        drawPile.length, 2, deck)
-                                    : Container(),
+                                if (drawPile.isNotEmpty)
+                                  buildRevealButton(drawPile.length, 0),
+                                if (drawPile.isNotEmpty)
+                                  buildRevealButton(drawPile.length, 1),
+                                if (drawPile.length > 1)
+                                  buildRevealButton(drawPile.length, 2),
                                 drawPile.length > 2
-                                    ? buildRevealButton(
-                                        drawPile.length, 3, deck)
+                                    ? buildRevealButton(drawPile.length, 3)
                                     : Container(),
                                 drawPile.length > 3
-                                    ? buildRevealButton(
-                                        drawPile.length, 4, deck)
+                                    ? buildRevealButton(drawPile.length, 4)
                                     : Container(),
                                 drawPile.length > 4
-                                    ? buildRevealButton(
-                                        drawPile.length, 5, deck)
+                                    ? buildRevealButton(drawPile.length, 5)
                                     : Container(),
                                 drawPile.length > 5
-                                    ? buildRevealButton(
-                                        drawPile.length, 6, deck)
+                                    ? buildRevealButton(drawPile.length, 6)
                                     : Container(),
                               ])),
                       Flexible(

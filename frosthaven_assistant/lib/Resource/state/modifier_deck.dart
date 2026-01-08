@@ -27,6 +27,8 @@ class ModifierDeck {
   final _addedMinusOnes = ValueNotifier<int>(0);
   final _imbuement = ValueNotifier<int>(0);
 
+  final _revealedCount = ValueNotifier<int>(0);
+
   bool _needsShuffle = false;
   bool get needsShuffle => _needsShuffle;
 
@@ -40,6 +42,7 @@ class ModifierDeck {
   ValueListenable<bool> get corrosiveSpew => _corrosiveSpew;
   ValueListenable<int> get addedMinusOnes => _addedMinusOnes;
   ValueListenable<int> get imbuement => _imbuement;
+  ValueListenable<int> get revealedCount => _revealedCount;
 
   ModifierDeck(this.name) {
     //build deck
@@ -87,6 +90,9 @@ class ModifierDeck {
     }
     if (modifierDeckData.containsKey('corrosiveSpew')) {
       _corrosiveSpew.value = modifierDeckData["corrosiveSpew"] as bool;
+    }
+    if (modifierDeckData.containsKey('revealed')) {
+      _revealedCount.value = modifierDeckData["revealed"] as int;
     }
     if (modifierDeckData.containsKey('addedMinusOnes')) {
       _addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
@@ -192,6 +198,10 @@ class ModifierDeck {
 
   void removeHailSpecial(_StateModifier s) {
     removeCard(s, "special/hail");
+  }
+
+  void revealCards(_StateModifier _, int amount) {
+    _revealedCount.value = amount;
   }
 
   bool hasHail() {
@@ -315,6 +325,7 @@ class ModifierDeck {
     var card = _discardPile.pop();
     _drawPile.push(card);
     _cardCount.value = _drawPile.size();
+    //todo: how to tell if revealed should change? if it is over 0?
   }
 
   void addCard(_StateModifier _, String id, CardType type) {
@@ -394,14 +405,20 @@ class ModifierDeck {
   }
 
   void shuffle(_StateModifier _) {
+    final int revealCount = _revealedCount.value;
     _shuffle();
+    //todo: cosaandra special: keep the revelaed count
   }
 
   void shuffleUnDrawn(_StateModifier _) {
     _drawPile.shuffle();
+    _revealedCount.value = 0;
   }
 
   void draw(_StateModifier _) {
+    if (_revealedCount.value > 0) {
+      _revealedCount.value--;
+    }
     //shuffle deck, for the case the deck ends during play
     if (_drawPile.isEmpty) {
       _shuffle();
@@ -426,6 +443,7 @@ class ModifierDeck {
         '"imbuement": ${_imbuement.value.toString()}, '
         '"badOmen": ${_badOmen.value.toString()}, '
         '"corrosiveSpew": ${_corrosiveSpew.value.toString()}, '
+        '"revealed": ${_revealedCount.value.toString()}, '
         '"drawPile": ${_drawPile.toString()}, '
         '"removedPile": ${_removedPile.toString()}, '
         '"discardPile": ${_discardPile.toString()} '
@@ -571,6 +589,7 @@ class ModifierDeck {
 
     _needsShuffle = false;
     _cardCount.value = _drawPile.size();
+    _revealedCount.value = 0;
   }
 
   bool _isMultiplyType(String gfx) {

@@ -1,4 +1,3 @@
-import '../../Layout/menus/modifier_deck_menu.dart';
 import '../../services/service_locator.dart';
 import '../game_methods.dart';
 import '../state/game_state.dart';
@@ -11,7 +10,6 @@ class ShuffleAMDCardCommand extends Command {
   void execute() {
     final deck = GameMethods.getModifierDeck(name, getIt<GameState>());
     deck.shuffleUnDrawn(stateAccess);
-    ModifierDeckMenuState.revealedList = [];
   }
 
   @override

@@ -285,7 +285,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                     ModifierCardWidget(
                                         card: deck.drawPile.peek,
                                         name: deck.name,
-                                        revealed: isAnimating),
+                                        revealed: isAnimating ||
+                                            deck.revealedCount.value > 0),
                                     Positioned.fill(
                                         child: Material(
                                             color: Colors.transparent,
