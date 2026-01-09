@@ -9,6 +9,7 @@ import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_cs_party_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_perk_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_add_minus_one_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/amd_cassandra_special_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue1_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue2_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_remove_imbue_command.dart';
@@ -19,6 +20,7 @@ import 'package:frosthaven_assistant/Resource/commands/donate_cs_sanctuary_comma
 import 'package:frosthaven_assistant/Resource/commands/remove_cs_party_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/remove_cs_sanctuary_donation_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:reorderables/reorderables.dart';
 
 import '../../Resource/commands/amd_remove_minus_2_command.dart';
@@ -209,6 +211,13 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
           bool hasHailPerk = characterHail != null
               ? characterHail.characterState.perkList[17]
               : false;
+
+          final characterCassandra =
+              GameMethods.getCharacterByName("Cassandra");
+          bool hasCassandraPerk = characterCassandra != null
+              ? characterCassandra.characterState.perkList[15]
+              : false;
+
           final monsterDeck = widget.name.isEmpty;
           final hasIncarnate =
               GameMethods.getFigure("Incarnate", "Incarnate") != null;
@@ -374,6 +383,32 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       hasHailPerk
                                           ? "Remove Hail Perk"
                                           : "Add Hail Perk",
+                                    ),
+                                  ),
+                                if (characterCassandra != null &&
+                                    !getIt<Settings>().showCharacterAMD.value)
+                                  TextButton(
+                                    onPressed: () {
+                                      _gameState.action(
+                                          AddPerkCommand("Cassandra", 15));
+                                    },
+                                    child: Text(
+                                      hasCassandraPerk
+                                          ? "Remove\nCassandra Perk"
+                                          : "Add\nCassandra Perk",
+                                    ),
+                                  ),
+                                if (hasCassandraPerk)
+                                  TextButton(
+                                    onPressed: () {
+                                      _gameState.action(
+                                          AMDCassandraSpecialCommand(deck.name,
+                                              !deck.cassandraSpecial.value));
+                                    },
+                                    child: Text(
+                                      deck.cassandraSpecial.value
+                                          ? "Don't Save \nRevealed Cards"
+                                          : "Save\nRevealed Cards",
                                     ),
                                   ),
                                 if (removedPile.isNotEmpty)

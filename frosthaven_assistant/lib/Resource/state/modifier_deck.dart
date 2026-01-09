@@ -28,6 +28,7 @@ class ModifierDeck {
   final _imbuement = ValueNotifier<int>(0);
 
   final _revealedCount = ValueNotifier<int>(0);
+  final _cassandraSpecial = ValueNotifier<bool>(false);
 
   bool _needsShuffle = false;
   bool get needsShuffle => _needsShuffle;
@@ -43,6 +44,7 @@ class ModifierDeck {
   ValueListenable<int> get addedMinusOnes => _addedMinusOnes;
   ValueListenable<int> get imbuement => _imbuement;
   ValueListenable<int> get revealedCount => _revealedCount;
+  ValueListenable<bool> get cassandraSpecial => _cassandraSpecial;
 
   ModifierDeck(this.name) {
     //build deck
@@ -93,6 +95,9 @@ class ModifierDeck {
     }
     if (modifierDeckData.containsKey('revealed')) {
       _revealedCount.value = modifierDeckData["revealed"] as int;
+    }
+    if (modifierDeckData.containsKey('cassandra')) {
+      _cassandraSpecial.value = modifierDeckData["cassandra"] as bool;
     }
     if (modifierDeckData.containsKey('addedMinusOnes')) {
       _addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
@@ -202,6 +207,10 @@ class ModifierDeck {
 
   void revealCards(_StateModifier _, int amount) {
     _revealedCount.value = amount;
+  }
+
+  void setCassandraSpecial(_StateModifier _, bool on) {
+    _cassandraSpecial.value = on;
   }
 
   bool hasHail() {
@@ -405,9 +414,12 @@ class ModifierDeck {
   }
 
   void shuffle(_StateModifier _) {
-    final int revealCount = _revealedCount.value;
-    _shuffle();
-    //todo: cosaandra special: keep the revelaed count
+    if (_cassandraSpecial.value) {
+      //dont shuffle the revealed cards
+      _shuffleOnlyBelowRevealed();
+    } else {
+      _shuffle();
+    }
   }
 
   void shuffleUnDrawn(_StateModifier _) {
@@ -444,6 +456,7 @@ class ModifierDeck {
         '"badOmen": ${_badOmen.value.toString()}, '
         '"corrosiveSpew": ${_corrosiveSpew.value.toString()}, '
         '"revealed": ${_revealedCount.value.toString()}, '
+        '"cassandra": ${_cassandraSpecial.value.toString()}, '
         '"drawPile": ${_drawPile.toString()}, '
         '"removedPile": ${_removedPile.toString()}, '
         '"discardPile": ${_discardPile.toString()} '
@@ -590,6 +603,19 @@ class ModifierDeck {
     _needsShuffle = false;
     _cardCount.value = _drawPile.size();
     _revealedCount.value = 0;
+  }
+
+  void _shuffleOnlyBelowRevealed() {
+    final revealCount = _revealedCount.value;
+    List<ModifierCard> revealed = [];
+    for (int i = 0; i < _revealedCount.value; i++) {
+      revealed.add(_drawPile.pop());
+    }
+    _shuffle();
+    _revealedCount.value = revealCount;
+    for (int i = 0; i < _revealedCount.value; i++) {
+      _drawPile.add(revealed[i]);
+    }
   }
 
   bool _isMultiplyType(String gfx) {
