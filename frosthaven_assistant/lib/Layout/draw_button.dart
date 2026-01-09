@@ -21,20 +21,16 @@ class DrawButton extends StatefulWidget {
 class DrawButtonState extends State<DrawButton> {
   final GameState _gameState = getIt<GameState>();
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   void onPressed() {
     if (_gameState.roundState.value == RoundState.chooseInitiative) {
       if (GameMethods.canDraw()) {
         _gameState.action(DrawCommand());
       } else {
         String text =
-            "Player Initiative numbers must be set (under the initiative marker to the right of the character symbol)";
+            "Player Initiative numbers must be set (tap the character icon or under the initiative marker to the right of it)";
         if (_gameState.currentList.isEmpty) {
-          text = "Add characters first.";
+          text =
+              "Add characters first from the side menu (tap the hamburger icon to open)";
         }
         showToast(context, text);
       }
@@ -53,11 +49,11 @@ class DrawButtonState extends State<DrawButton> {
     return ValueListenableBuilder<double>(
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
-          var shadow = Shadow(
-            offset: Offset(1 * settings.userScalingBars.value,
-                1 * settings.userScalingBars.value),
+          final scaling = settings.userScalingBars.value;
+          final shadow = Shadow(
+            offset: Offset(1 * scaling, 1 * scaling),
             color: Colors.black87,
-            blurRadius: 1 * settings.userScalingBars.value,
+            blurRadius: 1 * scaling,
           );
 
           return Stack(alignment: Alignment.centerLeft, children: [
@@ -69,11 +65,11 @@ class DrawButtonState extends State<DrawButton> {
                   text = "${"$text(${_gameState.totalRounds.value}"})";
                 }
                 return Positioned(
-                    bottom: 2 * settings.userScalingBars.value,
-                    left: 45 * settings.userScalingBars.value,
+                    bottom: 2 * scaling,
+                    left: 45 * scaling,
                     child: Text(text,
                         style: TextStyle(
-                          fontSize: 14 * settings.userScalingBars.value,
+                          fontSize: 14 * scaling,
                           color: Colors.white,
                           shadows: [shadow],
                         )));
@@ -84,17 +80,16 @@ class DrawButtonState extends State<DrawButton> {
               builder: (context, value, child) {
                 return Container(
                     margin: EdgeInsets.zero,
-                    height: 40 * settings.userScalingBars.value,
+                    height: 40 * scaling,
                     width:
                         (_gameState.totalRounds.value != _gameState.round.value
                                 ? 75
                                 : 60) *
-                            settings.userScalingBars.value,
+                            scaling,
                     child: TextButton(
                         style: TextButton.styleFrom(
                             padding: EdgeInsets.only(
-                                left: 10 * settings.userScalingBars.value,
-                                right: 10 * settings.userScalingBars.value),
+                                left: 10 * scaling, right: 10 * scaling),
                             alignment: Alignment.center),
                         onPressed: onPressed,
                         child: Text(
@@ -104,7 +99,7 @@ class DrawButtonState extends State<DrawButton> {
                               : " Next Round",
                           style: TextStyle(
                             height: 0.8,
-                            fontSize: 16 * settings.userScalingBars.value,
+                            fontSize: 16 * scaling,
                             color: Colors.white,
                             shadows: [shadow],
                           ),

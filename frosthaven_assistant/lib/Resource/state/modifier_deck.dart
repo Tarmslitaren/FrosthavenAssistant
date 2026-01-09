@@ -224,6 +224,7 @@ class ModifierDeck {
     _addedMinusOnes.value++;
     _drawPile.add(ModifierCard(CardType.add, "minus1"));
     _drawPile.shuffle();
+    _revealedCount.value = 0;
     _cardCount.value++;
     if (_addedMinusOnes.value < 0) {
       //do not add/remove extra minus ones to removed pile
