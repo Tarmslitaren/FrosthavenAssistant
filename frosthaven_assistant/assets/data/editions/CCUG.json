@@ -687,6 +687,36 @@
         {"text": "Once each scenario, when your summon would suffer %damage%, negate the %damage%, %teleport% to the hex occupied by that summon, and place that summon in an empty hex closest to you"},
         {"text": "[triple] Your summons gain advantage on all attacks performed while adjacent to you"}
       ]
+    },
+    {
+      "name": "Vitalist",
+      "color": "FFA5400C",
+      "colorSecondary": "ff172220",
+      "edition": "CCUG",
+      "health": [8,9,11,12,14,15,17,18,20],
+      "hidden": false,
+      "summons": {
+      },
+      "perks": [
+        {"removes": ["minus2"],"adds": [ "plus0"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "plus1"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0regeneraterange3"]},
+        {"removes": ["minus1"],"adds": [ "perks/plus0regeneraterange3"]},
+        {"text": "Replace one +0 card with one \"Add this card to your active area. On your next attack while Life is Controlled, discard this card to gain + 2 %attack%\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/vi1"]},
+        {"text": "Replace one +0 card with one \"Add this card to your active area. On your next attack while Life is Controlled, discard this card to gain + 2 %attack%\"%flip% card","removes": ["plus0"],"adds": [ "perks/unique/vi1"]},
+        {"text": "Replace one +0 card with one +1 \"Infuse Life\" card","removes": ["plus0"],"adds": [ "perks/unique/vi2"]},
+        {"text": "Replace one +0 card with one +1 \"Infuse Life\" card","removes": ["plus0"],"adds": [ "perks/unique/vi2"]},
+        {"text": "Add one +1 \"One figure with %wound% suffers %damage% 1\"%flip% card","adds": [ "perks/unique/vi3"]},
+        {"text": "Add one +1 \"One figure with %wound% suffers %damage% 1\"%flip% card","adds": [ "perks/unique/vi3"]},
+        {"text": "Add one +1 \"One figure with %wound% suffers %damage% 1\"%flip% card","adds": [ "perks/unique/vi3"]},
+        {"text": "Add one +1 \"%ward%, %target% 1 figure that has %regenerate%\"%flip% card","adds": [ "perks/unique/vi4"]},
+        {"text": "Add one +1 \"%ward%, %target% 1 figure that has %regenerate%\"%flip% card","adds": [ "perks/unique/vi4"]},
+        {"text": "Add one +1 \"%ward%, %target% 1 figure that has %regenerate%\"%flip% card","adds": [ "perks/unique/vi4"]},
+        {"text": "Once each scenario, you may gain %wound% to Infuse Life"},
+        {"text": "Whenever you long rest, consume Life to infuse Life"},
+        {"text": "Whenever you control the attack of an enemy, you may have the enemy use your attach modifier deck"}
+      ]
     }
   ],
   "monsterAbilities": [
