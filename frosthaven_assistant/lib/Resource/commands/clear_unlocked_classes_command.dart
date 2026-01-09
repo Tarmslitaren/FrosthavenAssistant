@@ -9,9 +9,6 @@ class ClearUnlockedClassesCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "clear unlocked classes";
   }

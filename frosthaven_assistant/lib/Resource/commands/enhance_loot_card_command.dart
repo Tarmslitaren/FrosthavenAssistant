@@ -9,11 +9,10 @@ class EnhanceLootCardCommand extends Command {
 
   @override
   void execute() {
-    getIt<GameState>().lootDeck.addEnhancement(stateAccess, id, value, resourceType);
+    getIt<GameState>()
+        .lootDeck
+        .addEnhancement(stateAccess, id, value, resourceType);
   }
-
-  @override
-  void undo() {}
 
   @override
   String describe() {

@@ -16,9 +16,6 @@ class DrawAbilityCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Draw extra ability card";
   }

@@ -13,9 +13,6 @@ class SetDifficultyCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "set difficulty level to $difficulty";
   }

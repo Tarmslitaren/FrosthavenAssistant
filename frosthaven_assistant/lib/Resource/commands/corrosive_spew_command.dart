@@ -14,9 +14,6 @@ class CorrosiveSpewCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Corrosive Spew";
   }

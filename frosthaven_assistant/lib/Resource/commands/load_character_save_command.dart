@@ -29,9 +29,6 @@ class LoadCharacterSaveCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Load saved character: $saveName";
   }

@@ -1,14 +1,3 @@
-/*return AppBar(
-iconTheme: const IconThemeData(color: Colors.white),
-leading: IconButton(
-//could modify constraints to make the button take less space when small, but could potentially cause issues
-padding: EdgeInsets.all(min(8.0 * userScaling, 8.0)),
-icon: Icon(Icons.menu, shadows: [shadow], size: 24 * userScaling),
-onPressed: () => Scaffold.of(context).openDrawer(),
-),
-
-);*/
-
 import 'package:flutter/material.dart';
 
 import '../Resource/enums.dart';

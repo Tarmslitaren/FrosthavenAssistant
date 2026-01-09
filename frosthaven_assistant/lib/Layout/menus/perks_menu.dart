@@ -263,7 +263,7 @@ class LootCardListTileState extends State<PerkListTile> {
             (!added && GameMethods.canAddPerk(widget.character, widget.index));
 
     return CheckboxListTile(
-      contentPadding: EdgeInsets.only(left: 14),
+      //contentPadding: EdgeInsets.only(left: 14, right: 14),
       title: TokenApplier.applyTokensForPerks(description),
       enabled: enabled,
       onChanged: (bool? value) {

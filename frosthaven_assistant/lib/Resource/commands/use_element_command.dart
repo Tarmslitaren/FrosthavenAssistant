@@ -12,9 +12,6 @@ class UseElementCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Use Element ${element.name}";
   }

@@ -13,9 +13,6 @@ class AMDRemoveMinus1Command extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Remove minus one";
   }

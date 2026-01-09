@@ -9,14 +9,13 @@ class BadOmenCommand extends Command {
   void execute() {
     GameState gameState = getIt<GameState>();
     if (allies) {
-      gameState.modifierDeckAllies.setBadOmen(stateAccess, gameState.modifierDeckAllies.badOmen.value + 6);
+      gameState.modifierDeckAllies.setBadOmen(
+          stateAccess, gameState.modifierDeckAllies.badOmen.value + 6);
     } else {
-      gameState.modifierDeck.setBadOmen(stateAccess, gameState.modifierDeck.badOmen.value + 6);
+      gameState.modifierDeck
+          .setBadOmen(stateAccess, gameState.modifierDeck.badOmen.value + 6);
     }
   }
-
-  @override
-  void undo() {}
 
   @override
   String describe() {

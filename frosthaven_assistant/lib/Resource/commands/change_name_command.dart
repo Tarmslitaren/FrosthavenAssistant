@@ -19,9 +19,6 @@ class ChangeNameCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "change character name";
   }

@@ -12,9 +12,6 @@ class SetCharacterLevelCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Set $characterId's Level";
   }

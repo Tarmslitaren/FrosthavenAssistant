@@ -14,9 +14,6 @@ class DrawLootCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Draw loot card";
   }

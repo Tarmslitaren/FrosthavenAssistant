@@ -16,9 +16,6 @@ class AMDRevealCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Reveal $amount modifier cards";
   }

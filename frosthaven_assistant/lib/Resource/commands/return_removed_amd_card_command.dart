@@ -14,9 +14,6 @@ class ReturnRemovedAMDCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Return removed amd card";
   }

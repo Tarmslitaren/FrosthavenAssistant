@@ -16,9 +16,6 @@ class AddPerkCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     Character? character = GameMethods.getCharacterByName(characterId);
     String add = "Add";

@@ -9,9 +9,6 @@ class HideAllyDeckCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Hide Ally Deck";
   }

@@ -12,9 +12,6 @@ class SetSoloCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     if (solo) {
       return "set solo level recommendation";

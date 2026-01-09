@@ -12,9 +12,6 @@ class SetLootOwnerCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Set loot card owner";
   }

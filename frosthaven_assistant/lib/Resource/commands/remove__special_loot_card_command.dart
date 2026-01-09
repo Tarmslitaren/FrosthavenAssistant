@@ -17,9 +17,6 @@ class RemoveSpecialLootCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Remove Special loot card ${nr.toString()}";
   }

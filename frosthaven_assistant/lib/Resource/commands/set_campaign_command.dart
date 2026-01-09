@@ -11,9 +11,6 @@ class SetCampaignCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "set $campaign campaign";
   }

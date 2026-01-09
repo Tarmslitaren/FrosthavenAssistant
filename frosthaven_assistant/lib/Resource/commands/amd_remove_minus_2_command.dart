@@ -1,4 +1,3 @@
-
 import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
@@ -20,9 +19,6 @@ class AMDRemoveMinus2Command extends Command {
       deck.addMinusTwo(stateAccess);
     }
   }
-
-  @override
-  void undo() {}
 
   @override
   String describe() {

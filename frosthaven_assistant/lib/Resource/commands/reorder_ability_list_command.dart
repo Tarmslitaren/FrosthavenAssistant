@@ -23,9 +23,6 @@ class ReorderAbilityListCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Reorder Ability Cards";
   }

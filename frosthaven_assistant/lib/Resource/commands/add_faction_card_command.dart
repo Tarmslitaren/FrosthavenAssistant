@@ -20,9 +20,6 @@ class AddFactionCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return add
         ? "$characterId add faction card"

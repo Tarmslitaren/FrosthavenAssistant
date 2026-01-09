@@ -14,9 +14,6 @@ class RemoveCSPartyCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "$characterId remove party card";
   }

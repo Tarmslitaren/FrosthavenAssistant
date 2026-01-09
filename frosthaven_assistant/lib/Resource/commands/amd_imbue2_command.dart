@@ -11,9 +11,6 @@ class AMDImbue2Command extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Advanced Imbue Monster Deck";
   }

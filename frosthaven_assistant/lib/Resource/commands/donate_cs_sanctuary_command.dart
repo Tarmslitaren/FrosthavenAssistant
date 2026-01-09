@@ -14,9 +14,6 @@ class DonateCSSanctuaryCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "$characterId donate to sanctuary";
   }

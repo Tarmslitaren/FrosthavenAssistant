@@ -214,7 +214,9 @@ abstract class Command {
   //private class so only this class and it's children is allowed to change state
   _StateModifier stateAccess = _StateModifier();
   void execute();
-  void undo();
+  void undo() {
+    //todo: remove this when update hacks fixed
+  }
   String describe();
 }
 

@@ -15,9 +15,6 @@ class AddCSPartyCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "$characterId add party card $type";
   }

@@ -11,9 +11,6 @@ class ReturnModifierCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Return modifier card to top";
   }

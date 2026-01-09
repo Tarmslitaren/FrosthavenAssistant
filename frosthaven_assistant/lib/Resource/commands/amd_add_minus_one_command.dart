@@ -13,9 +13,6 @@ class AmdAddMinusOneCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Add minus one";
   }

@@ -13,9 +13,6 @@ class SetAutoLevelAdjustCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     if (on) {
       return "turn automatic level updated on";

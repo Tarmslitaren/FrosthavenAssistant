@@ -256,14 +256,10 @@ class ModifierDeck {
   }
 
   bool hasMinus2() {
-    return _drawPile
-                .getList()
-                .firstWhereOrNull((element) => element.gfx == "minus2") !=
-            null ||
-        _discardPile
-                .getList()
-                .firstWhereOrNull((element) => element.gfx == "minus2") !=
-            null;
+    return !(_removedPile
+            .getList()
+            .firstWhereOrNull((element) => element.gfx == "minus2") !=
+        null);
   }
 
   bool hasNull() {
@@ -396,7 +392,10 @@ class ModifierDeck {
       _drawPile.add(ModifierCard(CardType.add, "minus1"));
       _drawPile.add(ModifierCard(CardType.add, "minus1"));
       if (_imbuement.value == 2) {
-        _drawPile.add(ModifierCard(CardType.add, "minus2"));
+        if (hasMinus2()) {
+          //if minus2 has not been separately removed
+          _drawPile.add(ModifierCard(CardType.add, "minus2"));
+        }
         _drawPile.add(ModifierCard(CardType.add, "plus0"));
         _drawPile.add(ModifierCard(CardType.add, "plus0"));
       }

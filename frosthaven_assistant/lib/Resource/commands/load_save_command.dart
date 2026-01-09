@@ -14,10 +14,6 @@ class LoadSaveCommand extends Command {
   }
 
   @override
-  void undo() {
-  }
-
-  @override
   String describe() {
     return "Load saved game: $saveName";
   }

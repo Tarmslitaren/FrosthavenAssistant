@@ -9,9 +9,6 @@ class ShowAllyDeckCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Show Ally Deck";
   }

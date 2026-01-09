@@ -15,9 +15,6 @@ class DrawModifierCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     if (name.isNotEmpty) {
       return "Draw $name modifier card";

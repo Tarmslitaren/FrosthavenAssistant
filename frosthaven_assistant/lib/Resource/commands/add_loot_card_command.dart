@@ -11,9 +11,6 @@ class AddLootCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Add $resourceType Loot Card";
   }

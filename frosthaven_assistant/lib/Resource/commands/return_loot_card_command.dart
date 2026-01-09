@@ -13,9 +13,6 @@ class ReturnLootCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Return loot card";
   }

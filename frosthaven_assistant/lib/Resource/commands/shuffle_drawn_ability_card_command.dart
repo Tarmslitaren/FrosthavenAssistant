@@ -20,9 +20,6 @@ class ShuffleDrawnAbilityCardCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "Drawn ability deck shuffle";
   }

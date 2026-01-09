@@ -22,9 +22,6 @@ class AmdRemovePlus0Command extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return remove ? "Remove plus zero" : "Add back plus zero";
   }

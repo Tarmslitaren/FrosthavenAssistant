@@ -14,9 +14,6 @@ class RemoveCSSanctuaryDonationCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     return "remove $characterId's donation";
   }

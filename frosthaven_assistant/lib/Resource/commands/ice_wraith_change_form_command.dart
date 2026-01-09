@@ -30,9 +30,6 @@ class IceWraithChangeFormCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     if (isElite == false) {
       return "Ice Wraith turn normal";

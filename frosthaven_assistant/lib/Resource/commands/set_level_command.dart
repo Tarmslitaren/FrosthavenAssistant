@@ -12,9 +12,6 @@ class SetLevelCommand extends Command {
   }
 
   @override
-  void undo() {}
-
-  @override
   String describe() {
     if (monsterId != null) {
       return "Set $monsterId's level";
