@@ -33,6 +33,7 @@ dependencies:
     sdk: flutter
 
   get_it: ^8.0.3
+  riverpod: ^8.0.3
   flutter_layout_grid: ^2.0.1
   reorderables: ^0.6.0
   search_choices: ^2.0.20
