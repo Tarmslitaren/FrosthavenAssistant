@@ -4929,7 +4929,7 @@
         {
           "level": 5,
           "normal": { "health": 10, "move": 2, "attack": 2, "immunities": [ "%poison%"] },
-          "elite": { "health": 13, "move": 3, "attack": 3, "immunities": [ "%poison%"]}
+          "elite": { "health": 15, "move": 3, "attack": 3, "immunities": [ "%poison%"]}
         },
         {
           "level": 6,
