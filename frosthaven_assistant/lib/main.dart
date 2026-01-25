@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:show_fps/show_fps.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart';
@@ -93,7 +94,11 @@ class MyApp extends StatelessWidget {
       showPerformanceOverlay: false,
       title: title,
       theme: ThemeSwitcher.of(context).themeData,
-      home: const MyHomePage(title: title),
+      home: ShowFPS(
+          alignment: Alignment.topRight,
+          visible: !kReleaseMode,
+          showChart: true,
+          child: const MyHomePage(title: title)),
     );
   }
 }

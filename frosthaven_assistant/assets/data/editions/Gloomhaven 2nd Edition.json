@@ -191,8 +191,8 @@
         }
       },
        "perks": [
-         {"text": "Replace two -1 cards with one +1 \"After the attack ability, control the target: %move% 1\" card","removes": ["minus1","minus1"],"adds": [ "perks/unique/mt1"]},
-         {"text": "Replace two -1 cards with one +1 \"After the attack ability, control the target: %move% 1\" card","removes": ["minus1","minus1"],"adds": [ "perks/unique/mt1"]},
+         {"text": "Replace two -1 cards with one +0 \"After the attack ability, control the target: %move% 1\" card","removes": ["minus1","minus1"],"adds": [ "perks/unique/mt1"]},
+         {"text": "Replace two -1 cards with one +0 \"After the attack ability, control the target: %move% 1\" card","removes": ["minus1","minus1"],"adds": [ "perks/unique/mt1"]},
          {"text": "Replace one +0 card with one +1 \"Add + 1 %attack% for each negative condition the target has\" card","removes": ["plus0"],"adds": [ "perks/unique/mt2"]},
          {"text": "Replace one +0 card with one +1 \"Add + 1 %attack% for each negative condition the target has\" card","removes": ["plus0"],"adds": [ "perks/unique/mt2"]},
          {"text": "Replace one +0 card with one +1 \"Add + 1 %attack% for each negative condition the target has\" card","removes": ["plus0"],"adds": [ "perks/unique/mt2"]},
