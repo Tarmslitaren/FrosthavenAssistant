@@ -107,7 +107,8 @@ class MonsterStatCardWidget extends StatelessWidget {
       }
     }
 
-    return RepaintBoundary(child:Stack(
+    return RepaintBoundary(
+        child: Stack(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0 * scale),
@@ -161,18 +162,20 @@ class MonsterStatCardWidget extends StatelessWidget {
             left: 0.0,
             top: 19.2 * scale,
             width: 58.4 * scale,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-              LineBuilder.createLines(
-                  normal.attributes,
-                  true,
-                  false,
-                  false,
-                  data,
-                  CrossAxisAlignment.end,
-                  scale,
-                  getIt<Settings>().shimmer.value),
-            ])),
+            child: RepaintBoundary(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                  LineBuilder.createLines(
+                      normal.attributes,
+                      true,
+                      false,
+                      false,
+                      data,
+                      CrossAxisAlignment.end,
+                      scale,
+                      getIt<Settings>().shimmer.value),
+                ]))),
         Positioned(
           right: 61.6 * scale,
           top: 20.8 * scale,
@@ -193,15 +196,16 @@ class MonsterStatCardWidget extends StatelessWidget {
           width: 57.6 * scale,
           right: 0.0,
           top: 19.2 * scale,
-          child: LineBuilder.createLines(
-              elite.attributes,
-              false,
-              false,
-              false,
-              data,
-              CrossAxisAlignment.start,
-              scale,
-              getIt<Settings>().shimmer.value),
+          child: RepaintBoundary(
+              child: LineBuilder.createLines(
+                  elite.attributes,
+                  false,
+                  false,
+                  false,
+                  data,
+                  CrossAxisAlignment.start,
+                  scale,
+                  getIt<Settings>().shimmer.value)),
         ),
         data.type.flying
             ? Positioned(
@@ -336,7 +340,8 @@ class MonsterStatCardWidget extends StatelessWidget {
         height: 1,
         shadows: [shadow]);
 
-    return RepaintBoundary(child:Stack(
+    return RepaintBoundary(
+        child: Stack(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0 * scale),
@@ -393,15 +398,16 @@ class MonsterStatCardWidget extends StatelessWidget {
                       Text("    ", style: specialStyle),
                       SizedBox(
                           width: 112 * scale,
-                          child: LineBuilder.createLines(
-                              bossOtherAttributes,
-                              false,
-                              false,
-                              false,
-                              data,
-                              CrossAxisAlignment.start,
-                              scale,
-                              getIt<Settings>().shimmer.value)),
+                          child: RepaintBoundary(
+                              child: LineBuilder.createLines(
+                                  bossOtherAttributes,
+                                  false,
+                                  false,
+                                  false,
+                                  data,
+                                  CrossAxisAlignment.start,
+                                  scale,
+                                  getIt<Settings>().shimmer.value))),
                     ])
                   : Container(),
               if (bossOtherAttributes.isNotEmpty)
@@ -424,16 +430,17 @@ class MonsterStatCardWidget extends StatelessWidget {
                           ),
                           SizedBox(
                               width: 112 * scale,
-                              child: LineBuilder.createLines(
-                                  data.type.levels[data.level.value].boss!
-                                      .special1,
-                                  false,
-                                  !noCalculationSetting,
-                                  false,
-                                  data,
-                                  CrossAxisAlignment.start,
-                                  scale,
-                                  false)),
+                              child: RepaintBoundary(
+                                  child: LineBuilder.createLines(
+                                      data.type.levels[data.level.value].boss!
+                                          .special1,
+                                      false,
+                                      !noCalculationSetting,
+                                      false,
+                                      data,
+                                      CrossAxisAlignment.start,
+                                      scale,
+                                      false))),
                         ])
                   : Container(),
               normal.special2.isNotEmpty
@@ -454,16 +461,17 @@ class MonsterStatCardWidget extends StatelessWidget {
                           Text("2:", style: specialStyle),
                           SizedBox(
                               width: 112 * scale,
-                              child: LineBuilder.createLines(
-                                  data.type.levels[data.level.value].boss!
-                                      .special2,
-                                  false,
-                                  !noCalculationSetting,
-                                  false,
-                                  data,
-                                  CrossAxisAlignment.start,
-                                  scale,
-                                  false)),
+                              child: RepaintBoundary(
+                                  child: LineBuilder.createLines(
+                                      data.type.levels[data.level.value].boss!
+                                          .special2,
+                                      false,
+                                      !noCalculationSetting,
+                                      false,
+                                      data,
+                                      CrossAxisAlignment.start,
+                                      scale,
+                                      false))),
                         ])
                   : Container()
             ])),

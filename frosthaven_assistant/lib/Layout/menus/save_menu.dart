@@ -30,6 +30,15 @@ class SaveMenuState extends State<SaveMenu> {
     super.initState();
   }
 
+  String getSuggestedSaveName() {
+    final String campaign = _gameState.currentCampaign.value;
+    int nr = _saves.length + 1;
+    while (_saves.contains(campaign + nr.toString())) {
+      nr++;
+    }
+    return campaign + nr.toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     //edge insets if width not too small
@@ -61,8 +70,7 @@ class SaveMenuState extends State<SaveMenu> {
                         openDialog(
                             context,
                             SaveModalMenu(
-                                saveName:
-                                    "${_gameState.currentCampaign.value}${_saves.length + 1}",
+                                saveName: getSuggestedSaveName(),
                                 saveOnly: true));
                       },
                       child: const Text("Add new Save")),

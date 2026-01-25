@@ -129,7 +129,7 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                     controller: nameController,
                     focusNode: focusNode,
                     style: getTitleTextStyle(scale),
-                    onSubmitted: (String string) {
+                    onChanged: (String string) {
                       //set the name
                       if (nameController.text.isNotEmpty) {
                         _newSaveName = nameController.text;

@@ -70,7 +70,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //debugInvertOversizedImages = true;
-    //double wtf = MediaQuery.of(context).devicePixelRatio;
 
     //call after keyboard
     WakelockPlus.enable();
@@ -96,7 +95,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeSwitcher.of(context).themeData,
       home: ShowFPS(
           alignment: Alignment.topRight,
-          visible: !kReleaseMode,
+          visible: !kReleaseMode && false,
           showChart: true,
           child: const MyHomePage(title: title)),
     );

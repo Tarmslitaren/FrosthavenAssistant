@@ -23,104 +23,107 @@ class LootCardWidget extends StatelessWidget {
     double scaleMod = hasAnimations ? 4 : 1.5;
 
     return Container(
-      width: 39 * scale,
-      height: 58.6666 * scale,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45,
-            blurRadius: 4 * scale,
-            offset: Offset(2 * scale, 4 * scale), // Shadow position
-          ),
-        ],
-      ),
-      child: Stack(
-          alignment: AlignmentDirectional.center,
-          clipBehavior: Clip.none, //if text overflows it still visible
-
-          children: [
-            ClipRRect(
-              clipBehavior: Clip.hardEdge,
-              borderRadius: BorderRadius.circular(4.0 * scale),
-              child: Image(
-                filterQuality: FilterQuality.medium,
-                fit: BoxFit.cover,
-                image: AssetImage("assets/images/loot/${card.gfx}.png"),
-              ),
+        width: 39 * scale,
+        height: 58.6666 * scale,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black45,
+              blurRadius: 4 * scale,
+              offset: Offset(2 * scale, 4 * scale), // Shadow position
             ),
-            if (value != null)
-              Text(
-                "+$value",
-                style: TextStyle(
-                  shadows: [shadow],
-                  fontSize: 30 * scale,
-                  color: Colors.white,
-                ),
-              ),
-            if (card.gfx.contains("1418"))
-              Text(
-                "1418",
-                style: TextStyle(
-                  shadows: [shadow],
-                  fontSize: 25 * scale,
-                  color: Colors.white,
-                ),
-              ),
-            if (card.gfx.contains("1419"))
-              Text(
-                "1419",
-                style: TextStyle(
-                  shadows: [shadow],
-                  fontSize: 25 * scale,
-                  color: Colors.white,
-                ),
-              ),
-            if (card.enhanced > 0)
-              Positioned(
-                bottom: 5 * scale,
-                child: getIt<Settings>().shimmer.value
-                    ? RepaintBoundary(child: AnimatedTextKit(
-                        repeatForever: true,
-                        animatedTexts: [
-                           ColorizeAnimatedText(
-                            "Enhanced: ${card.enhanced.toString()}",
-                            speed: Duration(milliseconds: (350).ceil()),
-                            textStyle: TextStyle(
-                              fontSize: 9 * scale,
-                            ),
-                            colors: [
-                              Colors.white,
-                              Colors.white,
-                              Colors.blueGrey,
-                              Colors.white,
-                              Colors.blueGrey,
-                              Colors.white,
-                              Colors.blueGrey,
-                              Colors.white,
+          ],
+        ),
+        child: RepaintBoundary(
+          child: Stack(
+              alignment: AlignmentDirectional.center,
+              clipBehavior: Clip.none, //if text overflows it still visible
+
+              children: [
+                RepaintBoundary(
+                    child: ClipRRect(
+                  clipBehavior: Clip.hardEdge,
+                  borderRadius: BorderRadius.circular(4.0 * scale),
+                  child: Image(
+                    filterQuality: FilterQuality.medium,
+                    fit: BoxFit.cover,
+                    image: AssetImage("assets/images/loot/${card.gfx}.png"),
+                  ),
+                )),
+                if (value != null)
+                  Text(
+                    "+$value",
+                    style: TextStyle(
+                      shadows: [shadow],
+                      fontSize: 30 * scale,
+                      color: Colors.white,
+                    ),
+                  ),
+                if (card.gfx.contains("1418"))
+                  Text(
+                    "1418",
+                    style: TextStyle(
+                      shadows: [shadow],
+                      fontSize: 25 * scale,
+                      color: Colors.white,
+                    ),
+                  ),
+                if (card.gfx.contains("1419"))
+                  Text(
+                    "1419",
+                    style: TextStyle(
+                      shadows: [shadow],
+                      fontSize: 25 * scale,
+                      color: Colors.white,
+                    ),
+                  ),
+                if (card.enhanced > 0)
+                  Positioned(
+                    bottom: 5 * scale,
+                    child: getIt<Settings>().shimmer.value
+                        ? RepaintBoundary(
+                            child: AnimatedTextKit(
+                            repeatForever: true,
+                            animatedTexts: [
+                              ColorizeAnimatedText(
+                                "Enhanced: ${card.enhanced.toString()}",
+                                speed: const Duration(milliseconds: 350),
+                                textStyle: TextStyle(
+                                  fontSize: 9 * scale,
+                                ),
+                                colors: [
+                                  Colors.white,
+                                  Colors.white,
+                                  Colors.blueGrey,
+                                  Colors.white,
+                                  Colors.blueGrey,
+                                  Colors.white,
+                                  Colors.blueGrey,
+                                  Colors.white,
+                                ],
+                              ),
                             ],
-                          ),
-                        ],
-                      ))
-                    : Text("Enhanced: ${card.enhanced.toString()}",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 9 * scale,
-                        )),
-              ),
-            if (card.owner != "")
-              Positioned(
-                height: 15 * scale,
-                width: 15 * scale,
-                top: 2 * scale,
-                right: 2 * scale,
-                child: Image(
-                    fit: BoxFit.scaleDown,
-                    color: Colors.black,
-                    image: AssetImage(
-                        'assets/images/class-icons/${card.owner}.png')),
-              )
-          ]),
-    );
+                          ))
+                        : Text("Enhanced: ${card.enhanced.toString()}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 9 * scale,
+                            )),
+                  ),
+                if (card.owner != "")
+                  Positioned(
+                    height: 15 * scale,
+                    width: 15 * scale,
+                    top: 2 * scale,
+                    right: 2 * scale,
+                    child: Image(
+                        fit: BoxFit.scaleDown,
+                        color: Colors.black,
+                        image: AssetImage(
+                            'assets/images/class-icons/${card.owner}.png')),
+                  )
+              ]),
+        ));
   }
 
   static Widget buildRear(double scale) {

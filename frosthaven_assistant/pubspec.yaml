@@ -44,7 +44,7 @@ dependencies:
 
   animated_widgets: ^1.1.0
   dotted_border: ^2.0.0+2
-  animated_text_kit: ^4.2.2
+  animated_text_kit: ^4.3.0
   network_info_plus: ^6.1.2
   dart_ipify: ^1.1.1 #get outgoing ip
   connectivity_plus: ^6.1.5 #poll for network changes
