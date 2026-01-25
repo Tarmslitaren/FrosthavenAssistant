@@ -54,7 +54,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
 
     final generatedChildren = List<Widget>.generate(
         monsterInstances.length,
-        (index) => RepaintBoundary(child:AnimatedSize(
+        (index) => RepaintBoundary(
+                child: AnimatedSize(
               key: Key(monsterInstances[index].standeeNr.toString()),
               duration: const Duration(milliseconds: 300),
               child: MonsterBox(
@@ -77,7 +78,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
 
   Widget buildImagePart(double height, double scale) {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(widget.data.type);
-    return RepaintBoundary(child:Stack(alignment: Alignment.bottomCenter, children: [
+    return RepaintBoundary(
+        child: Stack(alignment: Alignment.bottomCenter, children: [
       Container(
           margin: EdgeInsets.only(bottom: 4 * scale, top: 4 * scale),
           child: PhysicalShape(
@@ -136,7 +138,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
           final roundState = getIt<GameState>().roundState.value;
           final isActive = widget.data.isActive;
 
-          return RepaintBoundary(child:Column(mainAxisSize: MainAxisSize.max, children: [
+          return RepaintBoundary(
+              child: Column(mainAxisSize: MainAxisSize.max, children: [
             ColorFiltered(
                 colorFilter: isActive &&
                         !specialDisabled &&
@@ -159,8 +162,10 @@ class MonsterWidgetState extends State<MonsterWidget> {
                               },
                               child: buildImagePart(height, scale))
                           : buildImagePart(height, scale),
-                      MonsterAbilityCardWidget(data: widget.data),
-                      MonsterStatCardWidget(data: widget.data),
+                      RepaintBoundary(
+                          child: MonsterAbilityCardWidget(data: widget.data)),
+                      RepaintBoundary(
+                          child: MonsterStatCardWidget(data: widget.data)),
                     ],
                   ),
                 )),

@@ -127,7 +127,8 @@ class LootCardWidget extends StatelessWidget {
   }
 
   static Widget buildRear(double scale) {
-    return Container(
+    return RepaintBoundary(
+        child: Container(
       width: 39 * scale,
       height: 58.6666 * scale,
       decoration: BoxDecoration(
@@ -146,7 +147,7 @@ class LootCardWidget extends StatelessWidget {
           image: AssetImage("assets/images/loot/back.png"),
         ),
       ),
-    );
+    ));
   }
 
   final LootCard card;
