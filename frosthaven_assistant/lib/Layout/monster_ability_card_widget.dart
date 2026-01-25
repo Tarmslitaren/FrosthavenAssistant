@@ -69,7 +69,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
     List<Widget> positionals =
         _buildGraphicPositionals(scale, card.graphicPositional);
 
-    return Container(
+    return RepaintBoundary(child:Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -181,7 +181,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
               ),
             )
           ],
-        ));
+        )));
   }
 
   static Widget buildRear(double scale, int size, Monster monster) {

@@ -15,10 +15,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.13.5+55
+version: 1.13.6+56
 
 environment:
-  sdk: ">=3.4.0"
+  sdk: ">=3.6.0"
   #uncomment to peg flutter version to specific one.
   #flutter: '<=3.27.3' #impeller forced on ios after this one...
 
@@ -33,8 +33,7 @@ dependencies:
     sdk: flutter
 
   get_it: ^8.0.3
-  riverpod: ^8.0.3
-  flutter_layout_grid: ^2.0.1
+  #flutter_layout_grid: ^2.0.1 not used
   reorderables: ^0.6.0
   search_choices: ^2.0.20
   built_collection: ^5.1.1 #for immutable lists

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -30,6 +31,7 @@ void main() {
   //debugPrintRebuildDirtyWidgets = true;
   //debugProfileBuildsEnabled = true;
   //debugProfileLayoutsEnabled = true;
+  debugRepaintRainbowEnabled = true;
 
   const minScreenWidth = 400.0;
   const minScreenHeight = 600.0;

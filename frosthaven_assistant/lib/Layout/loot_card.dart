@@ -79,10 +79,10 @@ class LootCardWidget extends StatelessWidget {
               Positioned(
                 bottom: 5 * scale,
                 child: getIt<Settings>().shimmer.value
-                    ? AnimatedTextKit(
+                    ? RepaintBoundary(child: AnimatedTextKit(
                         repeatForever: true,
                         animatedTexts: [
-                          ColorizeAnimatedText(
+                           ColorizeAnimatedText(
                             "Enhanced: ${card.enhanced.toString()}",
                             speed: Duration(milliseconds: (350).ceil()),
                             textStyle: TextStyle(
@@ -100,7 +100,7 @@ class LootCardWidget extends StatelessWidget {
                             ],
                           ),
                         ],
-                      )
+                      ))
                     : Text("Enhanced: ${card.enhanced.toString()}",
                         style: TextStyle(
                           color: Colors.white,

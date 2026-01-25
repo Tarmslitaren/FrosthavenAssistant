@@ -107,7 +107,7 @@ class MonsterStatCardWidget extends StatelessWidget {
       }
     }
 
-    return Stack(
+    return RepaintBoundary(child:Stack(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0 * scale),
@@ -258,7 +258,7 @@ class MonsterStatCardWidget extends StatelessWidget {
               children: _createConditionList(data, scale, elite),
             ))
       ],
-    );
+    ));
   }
 
   static Widget buildBossLayout(Monster data, double scale, Shadow shadow,
@@ -336,7 +336,7 @@ class MonsterStatCardWidget extends StatelessWidget {
         height: 1,
         shadows: [shadow]);
 
-    return Stack(
+    return RepaintBoundary(child:Stack(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0 * scale),
@@ -508,7 +508,7 @@ class MonsterStatCardWidget extends StatelessWidget {
               children: _createConditionList(data, scale, normal),
             )),
       ],
-    );
+    ));
   }
 
   static Widget buildCard(Monster data, double scale) {

@@ -64,7 +64,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     }
     return Container(
         key: key,
-        child: TranslationAnimatedWidget(
+        child: RepaintBoundary(child:TranslationAnimatedWidget(
             animationFinished: (bool finished) {
               if (finished) {
                 _animationsEnabled = false;
@@ -86,7 +86,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                   Rotation.deg(x: 0, y: 0, z: 0),
                 ],
                 duration: const Duration(milliseconds: cardAnimationDuration),
-                child: child)));
+                child: child))));
   }
 
   bool initAnimationEnabled() {
@@ -173,7 +173,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         key: key,
         //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
         child: _animationsEnabled
-            ? TranslationAnimatedWidget(
+            ? RepaintBoundary(child:TranslationAnimatedWidget(
                 animationFinished: (bool finished) {
                   if (finished) {
                     _animationsEnabled = false;
@@ -211,7 +211,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         duration: Duration(
                             milliseconds:
                                 (cardAnimationDuration * 0.25).ceil()),
-                        child: child)))
+                        child: child))))
             : child);
   }
 

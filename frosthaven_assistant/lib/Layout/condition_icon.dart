@@ -239,7 +239,7 @@ class ConditionIconState extends State<ConditionIcon> {
                 .characterClass
                 .color;
           }
-          return ShakeAnimatedWidget(
+          return RepaintBoundary(child:ShakeAnimatedWidget(
               duration: const Duration(milliseconds: 333),
               enabled: animate.value,
               alignment: Alignment.center,
@@ -262,7 +262,7 @@ class ConditionIconState extends State<ConditionIcon> {
                       height: widget.size * scale,
                       filterQuality: FilterQuality.medium,
                       image: AssetImage(widget.gfx),
-                    ));
+                    )));
         });
   }
 }

@@ -33,13 +33,13 @@ class MainScaffold extends StatelessWidget {
               maintainBottomViewPadding: true,
               child: Scaffold(
                   resizeToAvoidBottomInset: false,
-                  bottomNavigationBar: BottomBar(),
+                  bottomNavigationBar: RepaintBoundary(child:BottomBar()),
                   appBar: PreferredSize(
                       preferredSize: Size(double.infinity,
                           40 * getIt<Settings>().userScalingBars.value),
-                      child: const TopBar()),
+                      child: const RepaintBoundary(child:TopBar())),
                   drawer: MainMenu(),
-                  body: const MainScaffoldBody()));
+                  body: const RepaintBoundary(child:MainScaffoldBody())));
         });
   }
 }
@@ -189,7 +189,7 @@ class MainScaffoldBody extends StatelessWidget {
                                           child: const SectionList(),
                                         ),
                                       Column(children: [
-                                        CharacterAmdsWidget(),
+                                          RepaintBoundary(child:CharacterAmdsWidget()),
                                         if (GameMethods.shouldShowAlliesDeck())
                                           Container(
                                               margin: EdgeInsets.only(
@@ -215,7 +215,7 @@ class MainScaffoldBody extends StatelessWidget {
                                     nrOfSections != null)
                                   SizedBox(
                                     width: sectionWidth,
-                                    child: const SectionList(),
+                                    child: const RepaintBoundary(child:SectionList()),
                                   ),
                               ]));
                         });

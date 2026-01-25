@@ -78,7 +78,7 @@ class ModifierCardWidget extends StatelessWidget {
 
     gfx = "assets/images/attack/$gfx.png";
 
-    return Container(
+    return RepaintBoundary(child:Container(
         width: 58.6666 * scale,
         height: 39 * scale,
         decoration: BoxDecoration(
@@ -120,7 +120,7 @@ class ModifierCardWidget extends StatelessWidget {
                 ),
               ),
           ],
-        ));
+        )));
   }
 
   static Widget buildRear(double scale, String name) {
@@ -134,7 +134,7 @@ class ModifierCardWidget extends StatelessWidget {
       extraGfx = 'assets/images/class-icons/$name.png';
     }
 
-    return Container(
+    return RepaintBoundary(child:Container(
         width: 58.6666 * scale,
         height: 39 * scale,
         decoration: BoxDecoration(
@@ -178,7 +178,7 @@ class ModifierCardWidget extends StatelessWidget {
                 ),
               ),
           ],
-        ));
+        )));
   }
 
   final ModifierCard card;

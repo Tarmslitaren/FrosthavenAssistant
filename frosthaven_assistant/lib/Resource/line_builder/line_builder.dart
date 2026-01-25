@@ -641,7 +641,7 @@ class LineBuilder {
                       padding: EdgeInsets.only(
                           top: getTopPaddingForStyle(styleToUse)),
                       child: shouldAnimate
-                          ? AnimatedTextKit(
+                          ?RepaintBoundary(child: AnimatedTextKit(
                               repeatForever: true,
                               //pause: const Duration(milliseconds: textAnimationDelay),
                               animatedTexts: [
@@ -656,7 +656,7 @@ class LineBuilder {
                                 ),
                               ],
                               // isRepeatingAnimation: true,
-                            )
+                            ))
                           : Text(iconTokenText, style: styleToUse)));
                 }
               }
@@ -764,7 +764,7 @@ class LineBuilder {
             color: debugColors ? Colors.red : null,
             padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
             child: shouldAnimate
-                ? AnimatedTextKit(
+                ? RepaintBoundary(child:AnimatedTextKit(
                     repeatForever: true,
                     //pause: const Duration(milliseconds: textAnimationDelay),
                     animatedTexts: [
@@ -778,7 +778,7 @@ class LineBuilder {
                       ),
                     ],
                     // isRepeatingAnimation: true,
-                  )
+                  ))
                 : Text(textPart, style: styleToUse)));
       }
 

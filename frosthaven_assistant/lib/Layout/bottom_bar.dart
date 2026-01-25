@@ -18,7 +18,7 @@ class BottomBar extends StatelessWidget {
     return ValueListenableBuilder<double>(
         valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
-          return SizedBox(
+          return RepaintBoundary(child:SizedBox(
               height: 40 * settings.userScalingBars.value,
               child: Stack(children: [
                 Positioned(
@@ -70,7 +70,7 @@ class BottomBar extends StatelessWidget {
                             ));
                       }),
                 )
-              ]));
+              ])));
         });
   }
 }

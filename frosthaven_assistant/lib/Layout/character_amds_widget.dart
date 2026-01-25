@@ -147,7 +147,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
     final offsets = _getOffsets(characterAmount);
     final text = "Character Decks";
 
-    return TranslationAnimatedWidget(
+    return RepaintBoundary(child:TranslationAnimatedWidget(
         enabled: _enableAnim, //block this when not interacting
         values: offsets,
         duration: duration,
@@ -194,7 +194,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                     })
                   },
               child: Text(text)),
-          OpacityAnimatedWidget.tween(
+        RepaintBoundary(child:OpacityAnimatedWidget.tween(
               enabled: _lastState == _OpenState.noOpen,
               opacityEnabled: 0, //define start value
               opacityDisabled: 1, //and end value
@@ -217,8 +217,8 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                                   child: ModifierDeckWidget(name: item.id))
                               : Container())
                           .toList(),
-                    ))
-        ]));
+                    )))
+        ])));
   }
 }
 

@@ -54,7 +54,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
 
     final generatedChildren = List<Widget>.generate(
         monsterInstances.length,
-        (index) => AnimatedSize(
+        (index) => RepaintBoundary(child:AnimatedSize(
               key: Key(monsterInstances[index].standeeNr.toString()),
               duration: const Duration(milliseconds: 300),
               child: MonsterBox(
@@ -66,7 +66,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                   displayStartAnimation: displayStartAnimation,
                   blockInput: false,
                   scale: scale),
-            ));
+            )));
     lastList = monsterInstances.toList();
     return Wrap(
       runSpacing: 2.0 * scale,
@@ -77,7 +77,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
 
   Widget buildImagePart(double height, double scale) {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(widget.data.type);
-    return Stack(alignment: Alignment.bottomCenter, children: [
+    return RepaintBoundary(child:Stack(alignment: Alignment.bottomCenter, children: [
       Container(
           margin: EdgeInsets.only(bottom: 4 * scale, top: 4 * scale),
           child: PhysicalShape(
@@ -118,7 +118,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                   )
                 ]),
           ))
-    ]);
+    ]));
   }
 
   @override
@@ -136,7 +136,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
           final roundState = getIt<GameState>().roundState.value;
           final isActive = widget.data.isActive;
 
-          return Column(mainAxisSize: MainAxisSize.max, children: [
+          return RepaintBoundary(child:Column(mainAxisSize: MainAxisSize.max, children: [
             ColorFiltered(
                 colorFilter: isActive &&
                         !specialDisabled &&
@@ -173,7 +173,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                     return buildMonsterBoxGrid(scale);
                   }),
             ),
-          ]);
+          ]));
         });
   }
 }

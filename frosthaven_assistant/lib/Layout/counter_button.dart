@@ -48,7 +48,7 @@ class CounterButtonState extends State<CounterButton> {
       //in case it dies and was removed from the list
       return Container();
     }
-    return Row(mainAxisSize: MainAxisSize.min, children: [
+    return RepaintBoundary(child:Row(mainAxisSize: MainAxisSize.min, children: [
       SizedBox(
           width: 40 * widget.scale,
           height: 40 * widget.scale,
@@ -142,6 +142,6 @@ class CounterButtonState extends State<CounterButton> {
               }
             },
           )),
-    ]);
+    ]));
   }
 }

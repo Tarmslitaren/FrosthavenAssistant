@@ -56,7 +56,7 @@ class DrawButtonState extends State<DrawButton> {
             blurRadius: 1 * scaling,
           );
 
-          return Stack(alignment: Alignment.centerLeft, children: [
+          return RepaintBoundary(child:Stack(alignment: Alignment.centerLeft, children: [
             ValueListenableBuilder<int>(
               valueListenable: _gameState.round,
               builder: (context, value, child) {
@@ -106,7 +106,7 @@ class DrawButtonState extends State<DrawButton> {
                         )));
               },
             )
-          ]);
+          ]));
         });
   }
 }

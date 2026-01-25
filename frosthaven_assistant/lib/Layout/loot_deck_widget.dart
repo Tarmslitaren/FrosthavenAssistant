@@ -63,7 +63,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     }
     return Container(
         key: key,
-        child: TranslationAnimatedWidget(
+        child: RepaintBoundary(child:TranslationAnimatedWidget(
             animationFinished: (bool finished) {
               if (finished) {
                 _animationsEnabled = false;
@@ -85,7 +85,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                   Rotation.deg(x: 0, y: 0, z: 0),
                 ],
                 duration: const Duration(milliseconds: cardAnimationDuration),
-                child: child)));
+                child: child))));
   }
 
   bool initAnimationEnabled() {
@@ -145,7 +145,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
         key: key,
         //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
         child: _animationsEnabled
-            ? TranslationAnimatedWidget(
+            ? RepaintBoundary(child:TranslationAnimatedWidget(
                 animationFinished: (bool finished) {
                   if (finished) {
                     _animationsEnabled = false;
@@ -182,7 +182,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                         duration: Duration(
                             milliseconds:
                                 (cardAnimationDuration * 0.25).ceil()),
-                        child: child)))
+                        child: child))))
             : child);
   }
 
@@ -227,7 +227,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                         final discardPileSize = deck.discardPile.size();
                         final discardPileList = deck.discardPile.getList();
 
-                        return Row(
+                        return RepaintBoundary(child:Row(
                           children: [
                             InkWell(
                                 onTap: () {
@@ -344,7 +344,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                         ),
                                 ]))
                           ],
-                        );
+                        ));
                       });
                 }),
           );

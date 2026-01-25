@@ -54,7 +54,7 @@ class BottomBarLevelWidget extends StatelessWidget {
                     color: Colors.white),
               ]);
 
-    return Material(
+    return RepaintBoundary(child:Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
@@ -218,6 +218,6 @@ class BottomBarLevelWidget extends StatelessWidget {
                   }),
             ],
           ),
-        ));
+        )));
   }
 }

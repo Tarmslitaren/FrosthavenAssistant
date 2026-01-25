@@ -82,12 +82,12 @@ class Item extends StatelessWidget {
       height = 0;
     }
 
-    return AnimatedContainer(
+    return RepaintBoundary(child:AnimatedContainer(
       key: child.key,
       height: height,
       duration: const Duration(milliseconds: 500),
       child: child,
-    );
+    ));
   }
 }
 
@@ -136,7 +136,7 @@ class ListAnimationState extends State<ListAnimation> {
         MainListState.lastPositions = positions;
       });
 
-      return TranslationAnimatedWidget.tween(
+      return RepaintBoundary(child:TranslationAnimatedWidget.tween(
         translationDisabled: Offset(0, blockAnimation ? diff : 0),
         translationEnabled: const Offset(0, 0),
         duration: const Duration(milliseconds: 1000),
@@ -146,7 +146,7 @@ class ListAnimationState extends State<ListAnimation> {
         animationFinished: (bool finished) {
           blockAnimation = true;
         },
-      );
+      ));
     }
   }
 }
@@ -374,8 +374,8 @@ class MainListState extends State<MainList> {
       for (int i = generatedListAnimators.length;
           i < _generatedList.length;
           i++) {
-        generatedListAnimators.add(ListAnimation(
-            index: i, lastIndex: indices[i], child: _generatedList[i]));
+        generatedListAnimators.add(RepaintBoundary(child:ListAnimation(
+            index: i, lastIndex: indices[i], child: _generatedList[i])));
       }
     }
 
@@ -411,7 +411,7 @@ class MainListState extends State<MainList> {
 
           return Container(
               alignment: Alignment.topCenter,
-              child: Scrollbar(
+              child: RepaintBoundary(child:Scrollbar(
                   interactive: !ignoreScroll,
                   controller: scrollController,
                   child: SingleChildScrollView(
@@ -419,7 +419,7 @@ class MainListState extends State<MainList> {
                       child: Container(
                         alignment: Alignment.center,
                         width: MediaQuery.of(context).size.width,
-                        child: ReorderableWrap(
+                        child: RepaintBoundary(child:ReorderableWrap(
                           padding: EdgeInsets.only(bottom: paddingBottom),
                           scrollAnimationDuration:
                               const Duration(milliseconds: 400),
@@ -433,14 +433,14 @@ class MainListState extends State<MainList> {
                           buildDraggableFeedback: defaultBuildDraggableFeedback,
                           needsLongPressDraggable: true,
                           onReorder: (int oldIndex, int newIndex) {
-                            setState(() {
+                            setState(() { //todo: is set state needed here?
                               _gameState.action(
                                   ReorderListCommand(newIndex, oldIndex));
                             });
                           },
                           children: generateChildren(),
                         ),
-                      ))));
+                      ))))));
         });
   }
 }

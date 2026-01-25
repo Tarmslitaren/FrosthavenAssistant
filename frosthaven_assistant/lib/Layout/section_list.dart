@@ -85,11 +85,11 @@ class SectionList extends StatelessWidget {
                 }
                 list ??= [];
 
-                return Wrap(
+                return RepaintBoundary(child:Wrap(
                     alignment: WrapAlignment.center,
                     spacing: 4 * scale,
                     runSpacing: 0 * scale,
-                    children: generateList(list));
+                    children: generateList(list)));
               });
         });
   }

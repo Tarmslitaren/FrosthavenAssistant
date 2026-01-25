@@ -140,7 +140,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                               setFull();
                             }
 
-                            return AnimatedContainer(
+                            return RepaintBoundary(child:AnimatedContainer(
                                 // Use the properties stored in the State class.
                                 width: widget.width * scale -
                                     widget.borderWidth * scale * 2,
@@ -164,7 +164,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                                 // Define how long the animation should take.
                                 duration: const Duration(milliseconds: 350),
                                 // Provide an optional curve to make the animation feel smoother.
-                                curve: Curves.decelerate);
+                                curve: Curves.decelerate));
                           }),
                     )),
                 ValueListenableBuilder<bool>(

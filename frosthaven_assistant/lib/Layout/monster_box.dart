@@ -120,7 +120,7 @@ class MonsterBox extends StatelessWidget {
 
     final health = data.health.value;
 
-    return ColorFiltered(
+    return RepaintBoundary(child:ColorFiltered(
         //gray out if summoned this turn and it's still the character's/monster's turn
         colorFilter: (data.roundSummoned == getIt<GameState>().round.value &&
                 ownerIsCurrent)
@@ -249,7 +249,7 @@ class MonsterBox extends StatelessWidget {
                           changeProgressColor: Colors.green,
                         );
                       }))
-            ])));
+            ]))));
   }
 
   @override
@@ -302,7 +302,7 @@ class MonsterBox extends StatelessWidget {
             child: HealthWheelController(
               figureId: figureId,
               ownerId: ownerId,
-              child: AnimatedContainer(
+              child: RepaintBoundary(child:AnimatedContainer(
                   //makes it grow nicely when adding conditions
                   key: Key(figureId.toString()),
                   width: width,
@@ -345,6 +345,6 @@ class MonsterBox extends StatelessWidget {
                                 opacityEnabled: 1,
                                 child: child));
                       })),
-            )));
+            ))));
   }
 }
