@@ -24,8 +24,6 @@ class ElementButton extends StatefulWidget {
 }
 
 class AnimatedContainerButtonState extends State<ElementButton> {
-  // Define the various properties with default values. Update these properties
-  // when the user taps a FloatingActionButton.
   final GameState _gameState = getIt<GameState>();
   final Settings settings = getIt<Settings>();
   late double _height;
@@ -140,31 +138,33 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                               setFull();
                             }
 
-                            return RepaintBoundary(child:AnimatedContainer(
-                                // Use the properties stored in the State class.
-                                width: widget.width * scale -
-                                    widget.borderWidth * scale * 2,
-                                height:
-                                    _height - widget.borderWidth * scale * 2,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    color: _color,
-                                    borderRadius: _borderRadius,
-                                    boxShadow: [
-                                      _gameState.elementState[widget.element] !=
-                                              ElementState.inert
-                                          ? BoxShadow(
-                                              blurRadius: 4 *
-                                                  settings
-                                                      .userScalingBars.value)
-                                          : const BoxShadow(
-                                              color: Colors.transparent,
-                                            )
-                                    ]),
-                                // Define how long the animation should take.
-                                duration: const Duration(milliseconds: 350),
-                                // Provide an optional curve to make the animation feel smoother.
-                                curve: Curves.decelerate));
+                            return RepaintBoundary(
+                                child: AnimatedContainer(
+                                    // Use the properties stored in the State class.
+                                    width: widget.width * scale -
+                                        widget.borderWidth * scale * 2,
+                                    height: _height -
+                                        widget.borderWidth * scale * 2,
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        color: _color,
+                                        borderRadius: _borderRadius,
+                                        boxShadow: [
+                                          _gameState.elementState[
+                                                      widget.element] !=
+                                                  ElementState.inert
+                                              ? BoxShadow(
+                                                  blurRadius: 4 *
+                                                      settings.userScalingBars
+                                                          .value)
+                                              : const BoxShadow(
+                                                  color: Colors.transparent,
+                                                )
+                                        ]),
+                                    // Define how long the animation should take.
+                                    duration: const Duration(milliseconds: 350),
+                                    // Provide an optional curve to make the animation feel smoother.
+                                    curve: Curves.decelerate));
                           }),
                     )),
                 ValueListenableBuilder<bool>(

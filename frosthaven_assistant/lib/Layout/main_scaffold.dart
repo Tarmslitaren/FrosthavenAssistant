@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/section_list.dart';
@@ -20,9 +22,22 @@ import 'menus/main_menu.dart';
 class MainScaffold extends StatelessWidget {
   const MainScaffold({super.key});
 
+  /// Detects if the current device is an iPad.
+  /// iPad has a shortestSide >= 600 and runs iOS.
+  static bool _isIPad(BuildContext context) {
+    // Check if it's iOS first
+    if (!Platform.isIOS) return false;
+
+    // Check if it's a tablet-sized device (iPad)
+    final shortestSide = MediaQuery.of(context).size.shortestSide;
+    return shortestSide >= 600;
+  }
+
   @override
   Widget build(BuildContext context) {
     setupMoreGetIt(context);
+
+    final bool isIPad = _isIPad(context);
 
     return ValueListenableBuilder<double>(
         valueListenable: getIt<Settings>().userScalingBars,
@@ -33,13 +48,18 @@ class MainScaffold extends StatelessWidget {
               maintainBottomViewPadding: true,
               child: Scaffold(
                   resizeToAvoidBottomInset: false,
-                  bottomNavigationBar: RepaintBoundary(child:BottomBar()),
+                  // FIX: Disable drawer edge drag on iPad to prevent gesture conflicts
+                  // with element buttons and other UI elements in the top bar.
+                  // Setting to 0 disables the edge swipe entirely on iPad.
+                  // On other platforms, null uses the default behavior.
+                  drawerEdgeDragWidth: isIPad ? 0.0 : null,
+                  bottomNavigationBar: RepaintBoundary(child: BottomBar()),
                   appBar: PreferredSize(
                       preferredSize: Size(double.infinity,
                           40 * getIt<Settings>().userScalingBars.value),
-                      child: const RepaintBoundary(child:TopBar())),
+                      child: const RepaintBoundary(child: TopBar())),
                   drawer: MainMenu(),
-                  body: const RepaintBoundary(child:MainScaffoldBody())));
+                  body: const RepaintBoundary(child: MainScaffoldBody())));
         });
   }
 }
@@ -189,7 +209,8 @@ class MainScaffoldBody extends StatelessWidget {
                                           child: const SectionList(),
                                         ),
                                       Column(children: [
-                                          RepaintBoundary(child:CharacterAmdsWidget()),
+                                        RepaintBoundary(
+                                            child: CharacterAmdsWidget()),
                                         if (GameMethods.shouldShowAlliesDeck())
                                           Container(
                                               margin: EdgeInsets.only(
@@ -215,7 +236,8 @@ class MainScaffoldBody extends StatelessWidget {
                                     nrOfSections != null)
                                   SizedBox(
                                     width: sectionWidth,
-                                    child: const RepaintBoundary(child:SectionList()),
+                                    child: const RepaintBoundary(
+                                        child: SectionList()),
                                   ),
                               ]));
                         });
