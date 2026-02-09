@@ -233,7 +233,7 @@ Test data available in `assets/testData/` with same structure.
 
 Version defined in `pubspec.yaml`:
 ```yaml
-version: 1.13.7+57  # Format: major.minor.patch+build
+version: 1.13.8+58  # Format: major.minor.patch+build
 ```
 
 Icons and splash screens configured via:
