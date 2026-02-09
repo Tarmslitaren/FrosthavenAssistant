@@ -48,11 +48,6 @@ class MainScaffold extends StatelessWidget {
               maintainBottomViewPadding: true,
               child: Scaffold(
                   resizeToAvoidBottomInset: false,
-                  // FIX: Disable drawer edge drag on iPad to prevent gesture conflicts
-                  // with element buttons and other UI elements in the top bar.
-                  // Setting to 0 disables the edge swipe entirely on iPad.
-                  // On other platforms, null uses the default behavior.
-                  drawerEdgeDragWidth: isIPad ? 0.0 : null,
                   bottomNavigationBar: RepaintBoundary(child: BottomBar()),
                   appBar: PreferredSize(
                       preferredSize: Size(double.infinity,
