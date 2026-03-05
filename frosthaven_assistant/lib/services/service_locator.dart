@@ -11,6 +11,9 @@ import 'network/network.dart';
 
 final getIt = GetIt.instance;
 
+// Loading state notifier for app initialization
+final loading = ValueNotifier<bool>(true);
+
 void setupGetIt() {
   getIt.registerLazySingleton<GameData>(() => GameData());
   getIt.registerLazySingleton<Settings>(() => Settings());

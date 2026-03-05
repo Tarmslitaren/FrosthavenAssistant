@@ -60,8 +60,6 @@ void main() {
   runApp(ThemeSwitcherWidget(initialTheme: theme, child: const MyApp()));
 }
 
-final loading = ValueNotifier<bool>(true);
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

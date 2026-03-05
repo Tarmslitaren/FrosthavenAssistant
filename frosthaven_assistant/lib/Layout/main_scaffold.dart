@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/background.dart';
 import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
 import 'package:frosthaven_assistant/Layout/section_list.dart';
 import 'package:frosthaven_assistant/Layout/top_bar.dart';
@@ -36,8 +37,6 @@ class MainScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     setupMoreGetIt(context);
-
-    final bool isIPad = _isIPad(context);
 
     return ValueListenableBuilder<double>(
         valueListenable: getIt<Settings>().userScalingBars,
@@ -146,99 +145,120 @@ class MainScaffoldBody extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return Stack(
-      children: [
-        const MainList(),
-        const ToastNotifier(),
-        ValueListenableBuilder<Map<String, CampaignModel>>(
-            valueListenable: getIt<GameData>().modelData,
-            builder: (context, value, child) {
-              return ValueListenableBuilder<int>(
-                  valueListenable: getIt<GameState>().commandIndex,
+    return ValueListenableBuilder<bool>(
+        valueListenable: loading,
+        builder: (context, isLoading, child) {
+          return Stack(
+            children: [
+              if (!isLoading) const MainList(),
+              if (isLoading)
+                BackGround(
+                    child: const Center(
+                  child: CircularProgressIndicator(),
+                )),
+              const ToastNotifier(),
+              ValueListenableBuilder<Map<String, CampaignModel>>(
+                  valueListenable: getIt<GameData>().modelData,
                   builder: (context, value, child) {
-                    return ValueListenableBuilder<double>(
-                        valueListenable: getIt<Settings>().userScalingBars,
+                    return ValueListenableBuilder<int>(
+                        valueListenable: getIt<GameState>().commandIndex,
                         builder: (context, value, child) {
-                          GameState gameState = getIt<GameState>();
-                          double barScale =
-                              getIt<Settings>().userScalingBars.value;
-                          bool hasLootDeck = GameMethods.hasLootDeck();
-                          bool modFitsOnBar = modifiersFitOnBar(context);
+                          return ValueListenableBuilder<double>(
+                              valueListenable:
+                                  getIt<Settings>().userScalingBars,
+                              builder: (context, value, child) {
+                                GameState gameState = getIt<GameState>();
+                                double barScale =
+                                    getIt<Settings>().userScalingBars.value;
+                                bool hasLootDeck = GameMethods.hasLootDeck();
+                                bool modFitsOnBar = modifiersFitOnBar(context);
 
-                          var sectionWidth = getSectionWidth(context);
+                                var sectionWidth = getSectionWidth(context);
 
-                          //move to separate row if it doesn't fit
-                          bool sectionsOnSeparateRow = false;
-                          int? nrOfSections = getNrOfSections();
-                          if ((nrOfSections != null &&
-                                  nrOfSections > 0 &&
-                                  sectionWidth < 58 * barScale) ||
-                              (nrOfSections != null &&
-                                  nrOfSections > 2 &&
-                                  sectionWidth < 58 * barScale * 2)) {
-                            //in case doesn't fit
-                            sectionsOnSeparateRow = true;
-                            sectionWidth = MediaQuery.of(context).size.width;
-                          }
+                                //move to separate row if it doesn't fit
+                                bool sectionsOnSeparateRow = false;
+                                int? nrOfSections = getNrOfSections();
+                                if ((nrOfSections != null &&
+                                        nrOfSections > 0 &&
+                                        sectionWidth < 58 * barScale) ||
+                                    (nrOfSections != null &&
+                                        nrOfSections > 2 &&
+                                        sectionWidth < 58 * barScale * 2)) {
+                                  //in case doesn't fit
+                                  sectionsOnSeparateRow = true;
+                                  sectionWidth =
+                                      MediaQuery.of(context).size.width;
+                                }
 
-                          return Positioned(
-                              width: screenSize.width,
-                              bottom: barScale * 4,
-                              left: barScale * 5,
-                              child: Column(children: [
-                                Row(
-                                    mainAxisAlignment:
-                                        ((!sectionsOnSeparateRow &&
-                                                    nrOfSections != null) ||
-                                                hasLootDeck)
-                                            ? MainAxisAlignment.spaceBetween
-                                            : MainAxisAlignment.end,
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      if (hasLootDeck) const LootDeckWidget(),
-                                      if (!sectionsOnSeparateRow &&
+                                return Positioned(
+                                    width: screenSize.width,
+                                    bottom: barScale * 4,
+                                    left: barScale * 5,
+                                    child: Column(children: [
+                                      Row(
+                                          mainAxisAlignment:
+                                              ((!sectionsOnSeparateRow &&
+                                                          nrOfSections !=
+                                                              null) ||
+                                                      hasLootDeck)
+                                                  ? MainAxisAlignment
+                                                      .spaceBetween
+                                                  : MainAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            if (hasLootDeck)
+                                              const LootDeckWidget(),
+                                            if (!sectionsOnSeparateRow &&
+                                                nrOfSections != null)
+                                              SizedBox(
+                                                width: sectionWidth,
+                                                child: const SectionList(),
+                                              ),
+                                            Column(children: [
+                                              RepaintBoundary(
+                                                  child: CharacterAmdsWidget()),
+                                              if (GameMethods
+                                                  .shouldShowAlliesDeck())
+                                                Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: 4 * barScale,
+                                                    ),
+                                                    child:
+                                                        const ModifierDeckWidget(
+                                                      name: 'allies',
+                                                    )),
+                                              if (!modFitsOnBar &&
+                                                  gameState.currentCampaign
+                                                          .value !=
+                                                      "Buttons and Bugs" && //hide amd deck for buttons and bugs
+                                                  getIt<Settings>()
+                                                      .showAmdDeck
+                                                      .value)
+                                                Container(
+                                                    margin: EdgeInsets.only(
+                                                      top: 4 * barScale,
+                                                    ),
+                                                    child:
+                                                        const ModifierDeckWidget(
+                                                      name: '',
+                                                    ))
+                                            ])
+                                          ]),
+                                      if (sectionsOnSeparateRow &&
                                           nrOfSections != null)
                                         SizedBox(
                                           width: sectionWidth,
-                                          child: const SectionList(),
+                                          child: const RepaintBoundary(
+                                              child: SectionList()),
                                         ),
-                                      Column(children: [
-                                        RepaintBoundary(
-                                            child: CharacterAmdsWidget()),
-                                        if (GameMethods.shouldShowAlliesDeck())
-                                          Container(
-                                              margin: EdgeInsets.only(
-                                                top: 4 * barScale,
-                                              ),
-                                              child: const ModifierDeckWidget(
-                                                name: 'allies',
-                                              )),
-                                        if (!modFitsOnBar &&
-                                            gameState.currentCampaign.value !=
-                                                "Buttons and Bugs" && //hide amd deck for buttons and bugs
-                                            getIt<Settings>().showAmdDeck.value)
-                                          Container(
-                                              margin: EdgeInsets.only(
-                                                top: 4 * barScale,
-                                              ),
-                                              child: const ModifierDeckWidget(
-                                                name: '',
-                                              ))
-                                      ])
-                                    ]),
-                                if (sectionsOnSeparateRow &&
-                                    nrOfSections != null)
-                                  SizedBox(
-                                    width: sectionWidth,
-                                    child: const RepaintBoundary(
-                                        child: SectionList()),
-                                  ),
-                              ]));
+                                    ]));
+                              });
                         });
-                  });
-            })
-      ],
-    );
+                  })
+            ],
+          );
+        });
   }
 }

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/CharacterWidget/character_widget.dart';
+import 'package:frosthaven_assistant/Layout/background.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -82,7 +83,8 @@ class Item extends StatelessWidget {
       height = 0;
     }
 
-    return RepaintBoundary(child:AnimatedContainer(
+    return RepaintBoundary(
+        child: AnimatedContainer(
       key: child.key,
       height: height,
       duration: const Duration(milliseconds: 500),
@@ -136,7 +138,8 @@ class ListAnimationState extends State<ListAnimation> {
         MainListState.lastPositions = positions;
       });
 
-      return RepaintBoundary(child:TranslationAnimatedWidget.tween(
+      return RepaintBoundary(
+          child: TranslationAnimatedWidget.tween(
         translationDisabled: Offset(0, blockAnimation ? diff : 0),
         translationEnabled: const Offset(0, 0),
         duration: const Duration(milliseconds: 1000),
@@ -209,7 +212,7 @@ class MainListState extends State<MainList> {
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
 
-  static late List<double> lastPositions;
+  static List<double> lastPositions = [];
 
   @override
   void initState() {
@@ -231,26 +234,7 @@ class MainListState extends State<MainList> {
     return ValueListenableBuilder<bool>(
         valueListenable: getIt<Settings>().darkMode,
         builder: (context, value, child) {
-          final darkMode = getIt<Settings>().darkMode.value;
-          return Container(
-              decoration: BoxDecoration(
-                  backgroundBlendMode: BlendMode.srcATop,
-                  color: darkMode ? Colors.black : Colors.grey,
-                  image: DecorationImage(
-                    opacity: darkMode ? 0.4 : 0.7,
-                    fit: BoxFit.cover,
-                    image: ResizeImage(
-                        AssetImage(
-                          darkMode
-                              ? 'assets/images/bg/bg.png'
-                              : 'assets/images/bg/frosthaven-bg.png',
-                        ),
-                        width: (MediaQuery.of(context).size.width).toInt(),
-                        height: (MediaQuery.of(context).size.height -
-                                80 * getIt<Settings>().userScalingBars.value)
-                            .toInt(),
-                        policy: ResizeImagePolicy.fit),
-                  )),
+          return BackGround(
               child: ValueListenableBuilder<Map<String, CampaignModel>>(
                   valueListenable: _gameData.modelData,
                   builder: (context, value, child) {
@@ -374,8 +358,9 @@ class MainListState extends State<MainList> {
       for (int i = generatedListAnimators.length;
           i < _generatedList.length;
           i++) {
-        generatedListAnimators.add(RepaintBoundary(child:ListAnimation(
-            index: i, lastIndex: indices[i], child: _generatedList[i])));
+        generatedListAnimators.add(RepaintBoundary(
+            child: ListAnimation(
+                index: i, lastIndex: indices[i], child: _generatedList[i])));
       }
     }
 
@@ -411,36 +396,41 @@ class MainListState extends State<MainList> {
 
           return Container(
               alignment: Alignment.topCenter,
-              child: RepaintBoundary(child:Scrollbar(
-                  interactive: !ignoreScroll,
-                  controller: scrollController,
-                  child: SingleChildScrollView(
+              child: RepaintBoundary(
+                  child: Scrollbar(
+                      interactive: !ignoreScroll,
                       controller: scrollController,
-                      child: Container(
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        child: RepaintBoundary(child:ReorderableWrap(
-                          padding: EdgeInsets.only(bottom: paddingBottom),
-                          scrollAnimationDuration:
-                              const Duration(milliseconds: 400),
-                          reorderAnimationDuration:
-                              const Duration(milliseconds: 400),
-                          maxMainAxisCount: itemsPerColumn,
-                          ignorePrimaryScrollController: ignoreScroll,
-                          //this makes it wrap at screen height. turn on if can fit 2 columns and can fit all items in screen
+                      child: SingleChildScrollView(
+                          controller: scrollController,
+                          child: Container(
+                              alignment: Alignment.center,
+                              width: MediaQuery.of(context).size.width,
+                              child: RepaintBoundary(
+                                child: ReorderableWrap(
+                                  padding:
+                                      EdgeInsets.only(bottom: paddingBottom),
+                                  scrollAnimationDuration:
+                                      const Duration(milliseconds: 400),
+                                  reorderAnimationDuration:
+                                      const Duration(milliseconds: 400),
+                                  maxMainAxisCount: itemsPerColumn,
+                                  ignorePrimaryScrollController: ignoreScroll,
+                                  //this makes it wrap at screen height. turn on if can fit 2 columns and can fit all items in screen
 
-                          direction: Axis.vertical,
-                          buildDraggableFeedback: defaultBuildDraggableFeedback,
-                          needsLongPressDraggable: true,
-                          onReorder: (int oldIndex, int newIndex) {
-                            setState(() { //todo: is set state needed here?
-                              _gameState.action(
-                                  ReorderListCommand(newIndex, oldIndex));
-                            });
-                          },
-                          children: generateChildren(),
-                        ),
-                      ))))));
+                                  direction: Axis.vertical,
+                                  buildDraggableFeedback:
+                                      defaultBuildDraggableFeedback,
+                                  needsLongPressDraggable: true,
+                                  onReorder: (int oldIndex, int newIndex) {
+                                    setState(() {
+                                      //todo: is set state needed here?
+                                      _gameState.action(ReorderListCommand(
+                                          newIndex, oldIndex));
+                                    });
+                                  },
+                                  children: generateChildren(),
+                                ),
+                              ))))));
         });
   }
 }
