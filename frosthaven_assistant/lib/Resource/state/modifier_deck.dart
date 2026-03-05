@@ -448,6 +448,27 @@ class ModifierDeck {
     _cardCount.value = _drawPile.size();
   }
 
+  void reorderCards(_StateModifier s, int newIndex, int oldIndex) {
+    List<ModifierCard> list = List.of(drawPile.getList());
+    var item = list.removeAt(oldIndex);
+    list.insert(newIndex, item);
+    drawPile.setList(list);
+
+    //if rearranging between revealed and unrevealed then un-reveal everything below the unknown moved card.
+    final revertOldIndex = drawPile.size() - oldIndex;
+    final revertNewIndex = drawPile.size() - newIndex;
+    if (revertOldIndex <= revealedCount.value &&
+        revertNewIndex > revealedCount.value) {
+      //moving one revealed card to unrevealed area - hide one
+      revealCards(s, revealedCount.value - 1);
+    }
+    if (revertNewIndex <= revealedCount.value &&
+        revertOldIndex > revealedCount.value) {
+      //hide new index card and those below
+      revealCards(s, revertNewIndex - 1);
+    }
+  }
+
   @override
   String toString() {
     return '{'

@@ -9,14 +9,8 @@ class ReorderModifierListCommand extends Command {
   ReorderModifierListCommand(this.newIndex, this.oldIndex, this.name);
   @override
   void execute() {
-    //todo: move to amd deck class
     final deck = GameMethods.getModifierDeck(name, getIt<GameState>());
-    List<ModifierCard> list = List.of(deck.drawPile.getList());
-
-    var item = list.removeAt(oldIndex);
-    list.insert(newIndex, item);
-    deck.drawPile.setList(list);
-    deck.revealCards(stateAccess, 0);
+    deck.reorderCards(stateAccess, newIndex, oldIndex);
   }
 
   @override
