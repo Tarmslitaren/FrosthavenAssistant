@@ -8214,7 +8214,7 @@
           "type": "Timer",
           "list": [-1],
           "startOfRound": true,
-          "note": "Set Elements Strong for the live Lieutenants. (Lieutenants have +1 attack)"
+          "note": "Set Elements Strong for the Dead Lieutenants. (Lieutenants have +1 attack)"
         }
       ]
     },
