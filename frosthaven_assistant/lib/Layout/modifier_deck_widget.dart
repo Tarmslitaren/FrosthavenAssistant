@@ -31,6 +31,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   bool _animationsEnabled = false;
 
+  // FIX: Track the last command index we animated to prevent replaying
+  // the same animation on subsequent UI rebuilds.
+  int _lastAnimatedCommandIndex = -2;
+
+  // FIX: Track the last discard pile size we animated for client mode,
+  // so we don't replay when the pile hasn't changed.
+  int _lastAnimatedDiscardSize = -1;
+
   @override
   void initState() {
     super.initState();
@@ -109,6 +117,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
       var oldPile = oldDeck.discardPile;
       var newPile = currentDeck.discardPile;
       if (oldPile.size() == newPile.size() - 1) {
+        // FIX: Check if we already animated this discard pile size
+        if (_lastAnimatedDiscardSize == newPile.size()) {
+          return false;
+        }
+        _lastAnimatedDiscardSize = newPile.size();
         return true;
       }
       return false;
@@ -117,6 +130,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     final commandIndex = getIt<GameState>().commandIndex.value;
     final commandDescriptions = getIt<GameState>().commandDescriptions;
     if (getIt<Settings>().server.value && commandIndex >= 0) {
+      // FIX: Don't animate if we already animated this exact command index
+      if (commandIndex == _lastAnimatedCommandIndex) {
+        return false;
+      }
+
       if (commandIndex < 0) {
         return false;
       }
@@ -124,10 +142,12 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         String commandDescription = commandDescriptions[commandIndex];
         if (widget.name.isNotEmpty) {
           if (commandDescription.contains("${widget.name} modifier card")) {
+            _lastAnimatedCommandIndex = commandIndex;
             return true;
           }
         } else {
           if (commandDescription.contains("monster modifier card")) {
+            _lastAnimatedCommandIndex = commandIndex;
             return true;
           }
         }
