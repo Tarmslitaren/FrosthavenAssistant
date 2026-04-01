@@ -32,7 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  get_it: ^8.0.3
+  get_it: ^9.2.1
   #flutter_layout_grid: ^2.0.1 not used
   reorderables: ^0.6.0
   search_choices: ^2.0.20
@@ -43,12 +43,12 @@ dependencies:
       url: https://github.com/Tarmslitaren/Flutter-Animation-Progress-Bar
 
   animated_widgets: ^1.1.0
-  dotted_border: ^2.0.0+2
+  dotted_border: ^3.1.0
   animated_text_kit: ^4.3.0
-  network_info_plus: ^6.1.2
+  network_info_plus: ^7.0.0
   dart_ipify: ^1.1.1 #get outgoing ip
-  connectivity_plus: ^6.1.5 #poll for network changes
-  shared_preferences: 2.4.0 #pinned at 2.4.0 due to some issue (https://github.com/flutter/flutter/issues/161796)
+  connectivity_plus: ^7.1.0 #poll for network changes
+  shared_preferences: ^2.5.5 #pinned at 2.4.0 due to some issue (https://github.com/flutter/flutter/issues/161796)
   wakelock_plus: ^1.2.5 #keep awake on android
   window_manager: ^0.5.1 #to be able to set fullscreen on windows
   flutter_launcher_icons: ^0.14.3 #I can't believe we need a third party package to do icons..
@@ -79,12 +79,12 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   #test: ^1.25.8 # can use built in test version
   mockito: ^5.4.4
   build_runner: ^2.4.11
-  build: ^2.4.1
-  source_gen: ^1.5.0
+  build: ^4.0.5
+  source_gen: ^4.2.2
   fluent_assertions: ^0.5.1
   build_test: any
   json_diff: ^0.2.1
