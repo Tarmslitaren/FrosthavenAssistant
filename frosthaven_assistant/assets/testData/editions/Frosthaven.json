@@ -242,7 +242,10 @@
     "#0 Howling in the Snow": {
       "monsters": [ "Ancient Artillery (FH)" ],
       "lootDeck": {"coin":6,"lumber": 5,"metal":3,"hide": 3,"rockroot":1,"snowthistle":2},
-      "initialMessage": "Masteries cannot be completed in this scenario."
+      "initialMessage": "Masteries cannot be completed in this scenario.",
+      "sections": {
+        "#0.1 The Frozen Depths": {}
+      }
     },
     "#1 A Town in Flames": {
       "monsters": [ "Algox Archer", "Algox Guard", "Algox Priest", "City Guard" ],
