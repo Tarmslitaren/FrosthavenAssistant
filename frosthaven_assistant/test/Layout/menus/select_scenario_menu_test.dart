@@ -146,5 +146,54 @@ void main() {
         expect(getIt<GameState>().scenario.value, 'custom');
       }
     });
+
+    testWidgets('switching to Jaws of the Lion shows JotL scenarios',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      await tester.tap(find.textContaining('Current Campaign:'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Jaws of the Lion'));
+      await tester.pumpAndSettle();
+      // JotL scenarios should be listed
+      expect(find.textContaining('#'), findsAtLeast(1));
+    });
+
+    testWidgets('onEditingComplete sets scenario to first filtered result',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // Switch to Frosthaven first
+      await tester.tap(find.textContaining('Current Campaign:'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Frosthaven'));
+      await tester.pumpAndSettle();
+
+      // Type a real scenario keyword so _foundScenarios is non-empty
+      await tester.enterText(find.byType(TextField), 'Howling');
+      await tester.pump();
+      // Trigger onEditingComplete via keyboard submit
+      await tester.testTextInput.receiveAction(TextInputAction.done);
+      await tester.pumpAndSettle();
+
+      // Menu should close after selecting the first result
+      expect(find.byType(SelectScenarioMenu), findsNothing);
+    });
+
+    testWidgets('empty search after typing restores scenario list',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      await tester.tap(find.textContaining('Current Campaign:'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Frosthaven'));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(TextField), 'Town');
+      await tester.pump();
+      expect(find.textContaining('Town'), findsAtLeast(1));
+
+      // Clear and verify scenarios come back
+      await tester.enterText(find.byType(TextField), '');
+      await tester.pump();
+      expect(find.textContaining('#'), findsAtLeast(1));
+    });
   });
 }

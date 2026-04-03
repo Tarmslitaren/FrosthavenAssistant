@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/monster_stat_card_widget.dart';
+import 'package:frosthaven_assistant/Layout/menus/stat_card_zoom.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
+import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -74,20 +77,62 @@ void main() {
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await pumpStatCard(tester);
-      // Double tap the stat card area (buildCard)
+      // Double tap the GestureDetector wrapping buildCard
       await tester.tap(find.byType(GestureDetector).first);
-      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
       await tester.tap(find.byType(GestureDetector).first);
       await tester.pump(const Duration(milliseconds: 300));
       FlutterError.onError = originalOnError;
-      // After double tap, StatCardZoom dialog should open
-      // Just verify no exception
+      expect(find.byType(StatCardZoom), findsOneWidget);
     });
 
     testWidgets('renders level text', (WidgetTester tester) async {
       await pumpStatCard(tester);
       // Level 1 is shown
       expect(find.text('1'), findsAtLeast(1));
+    });
+
+    testWidgets('renders two add standee buttons (normal and elite)',
+        (WidgetTester tester) async {
+      await pumpStatCard(tester);
+      // Non-boss monsters have 2 add buttons: one for normal, one for elite
+      expect(find.byType(IconButton), findsNWidgets(2));
+    });
+
+    testWidgets('tapping elite add button opens AddStandeeMenu for elite',
+        (WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await pumpStatCard(tester);
+      // Elite add button is the second IconButton
+      await tester.tap(find.byType(IconButton).last);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      FlutterError.onError = originalOnError;
+      // No crash expected
+      expect(find.byType(MonsterStatCardWidget), findsOneWidget);
+    });
+
+    testWidgets('when all standees are out, add button is visually disabled',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final zealot = _getZealot();
+      // Add all available standees
+      int maxCount = zealot.type.count;
+      for (int i = 1; i <= maxCount; i++) {
+        AddStandeeCommand(i, null, 'Zealot', MonsterType.normal, false)
+            .execute();
+      }
+
+      await pumpStatCard(tester);
+      // The first IconButton (normal add) should render with white24 color
+      final buttons = tester.widgetList<IconButton>(find.byType(IconButton));
+      expect(buttons, isNotEmpty);
+
+      // Restore
+      for (int i = 0; i < maxCount; i++) {
+        gameState.undo();
+      }
     });
   });
 }

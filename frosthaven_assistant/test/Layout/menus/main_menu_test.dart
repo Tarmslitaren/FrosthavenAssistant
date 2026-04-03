@@ -9,9 +9,13 @@ import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/settings_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_scenario_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/hide_ally_deck_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/show_ally_deck_command.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -195,6 +199,68 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 300));
       expect(find.byType(LootCardsMenu), findsOneWidget);
+    });
+
+    testWidgets('tapping Settings opens SettingsMenu',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      await tester.scrollUntilVisible(find.text('Settings'), 100);
+      await tester.tap(find.text('Settings'));
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      FlutterError.onError = originalOnError;
+      expect(find.byType(SettingsMenu), findsOneWidget);
+    });
+
+    testWidgets('Show Ally Attack Modifier Deck appears when showAmdDeck=true',
+        (WidgetTester tester) async {
+      final settings = getIt<Settings>();
+      final gameState = getIt<GameState>();
+      // Enable AMD deck and ensure ally deck is hidden
+      settings.showAmdDeck.value = true;
+      if (gameState.showAllyDeck.value) {
+        gameState.action(HideAllyDeckCommand());
+      }
+
+      await pumpMenu(tester);
+      await tester.scrollUntilVisible(
+          find.text('Show Ally Attack Modifier Deck'), 100);
+      expect(find.text('Show Ally Attack Modifier Deck'), findsOneWidget);
+    });
+
+    testWidgets(
+        'tapping Show Ally Attack Modifier Deck shows ally deck in game state',
+        (WidgetTester tester) async {
+      final settings = getIt<Settings>();
+      final gameState = getIt<GameState>();
+      settings.showAmdDeck.value = true;
+      if (gameState.showAllyDeck.value) {
+        gameState.action(HideAllyDeckCommand());
+      }
+
+      await pumpMenu(tester);
+      await tester.scrollUntilVisible(
+          find.text('Show Ally Attack Modifier Deck'), 100);
+      await tester.tap(find.text('Show Ally Attack Modifier Deck'));
+      await tester.pump();
+
+      expect(gameState.showAllyDeck.value, true);
+      gameState.undo();
+    });
+
+    testWidgets('undo text shows command description when available',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      // Do an action so there's a description
+      gameState.action(
+          AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1));
+
+      await pumpMenu(tester);
+      // Undo text should include the command description
+      expect(find.textContaining('Undo'), findsOneWidget);
+      gameState.undo();
     });
   });
 }

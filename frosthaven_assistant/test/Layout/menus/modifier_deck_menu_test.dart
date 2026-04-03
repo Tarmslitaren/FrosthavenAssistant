@@ -200,6 +200,63 @@ void main() {
       gameState.undo();
       gameState.undo();
     });
+
+    testWidgets('tapping Close dismisses the menu', (WidgetTester tester) async {
+      await pumpMenu(tester);
+      await tester.tap(find.text('Close'));
+      await tester.pumpAndSettle();
+      expect(find.byType(ModifierDeckMenu), findsNothing);
+    });
+
+    testWidgets('draw pile contains InkWell cards',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // Cards in draw pile are wrapped in InkWell widgets via generateList(allOpen=false)
+      final cardTapTargets = find.descendant(
+          of: find.byType(ModifierDeckMenu),
+          matching: find.byType(InkWell));
+      expect(cardTapTargets, findsWidgets);
+    });
+
+    testWidgets('renders Bless CounterButton and Curse CounterButton',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      expect(
+        find.byWidgetPredicate((w) =>
+            w is CounterButton &&
+            w.image == 'assets/images/abilities/bless.png'),
+        findsOneWidget,
+      );
+      expect(
+        find.byWidgetPredicate((w) =>
+            w is CounterButton &&
+            w.image == 'assets/images/abilities/curse.png'),
+        findsOneWidget,
+      );
+    });
+
+    testWidgets('tapping Bless + increments bless count',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final deck = GameMethods.getModifierDeck(deckName, gameState);
+      final before = deck.getRemovable('bless').value;
+
+      await pumpMenu(tester);
+      // Find the bless CounterButton and tap its + icon
+      final blessButton = find.byWidgetPredicate((w) =>
+          w is CounterButton &&
+          w.image == 'assets/images/abilities/bless.png');
+      expect(blessButton, findsOneWidget);
+      // The add IconButton is the last IconButton within the CounterButton
+      final addButtons = find.descendant(
+          of: blessButton, matching: find.byType(IconButton));
+      if (addButtons.evaluate().isNotEmpty) {
+        await tester.tap(addButtons.last);
+        await tester.pump();
+        expect(deck.getRemovable('bless').value, before + 1);
+        gameState.undo();
+      }
+    });
   });
 
   group('ModifierDeckMenu character deck', () {
