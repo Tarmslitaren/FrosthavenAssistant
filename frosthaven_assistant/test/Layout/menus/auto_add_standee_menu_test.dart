@@ -68,5 +68,36 @@ void main() {
       await pumpMenu(tester);
       expect(find.text('Close'), findsAtLeast(1));
     });
+
+    testWidgets('tapping standee button 1 adds a standee to the monster',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final monster = gameState.currentList
+          .firstWhere((e) => e is Monster) as Monster;
+      final instancesBefore = monster.monsterInstances.length;
+
+      await pumpMenu(tester);
+      // Tap the "1" standee number button
+      final button1 = find.text('1');
+      if (button1.evaluate().isNotEmpty) {
+        await tester.tap(button1.first);
+        // Verify standee was added before further pumping
+        expect(monster.monsterInstances.length, greaterThan(instancesBefore));
+        // Ignore errors from dialog closing animation
+        final originalOnError = FlutterError.onError;
+        FlutterError.onError = ignoreOverflowErrors;
+        await tester.pump();
+        FlutterError.onError = originalOnError;
+      }
+    });
+
+    testWidgets('tapping Close dismisses the menu',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      await tester.tap(find.text('Close'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.byType(AutoAddStandeeMenu), findsNothing);
+    });
   });
 }

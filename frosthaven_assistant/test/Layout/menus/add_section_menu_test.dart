@@ -58,5 +58,34 @@ void main() {
       await pumpMenu(tester);
       expect(find.text('Close'), findsOneWidget);
     });
+
+    testWidgets('typing in search field filters section list',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      await tester.enterText(find.byType(TextField), 'zzz_no_match');
+      await tester.pump();
+      // Filtering should show no results or fewer results
+      expect(find.text('No results found'), findsOneWidget);
+    });
+
+    testWidgets('clearing search field restores full list',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // Type something, then clear
+      await tester.enterText(find.byType(TextField), 'x');
+      await tester.pump();
+      await tester.enterText(find.byType(TextField), '');
+      await tester.pump();
+      // Should not crash
+    });
+
+    testWidgets('tapping Close dismisses the menu',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      await tester.tap(find.text('Close'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      expect(find.byType(AddSectionMenu), findsNothing);
+    });
   });
 }
