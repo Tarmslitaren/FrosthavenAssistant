@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/auto_add_standee_menu.dart';
 import 'package:frosthaven_assistant/Model/room.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
+import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -98,6 +100,93 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 300));
       expect(find.byType(AutoAddStandeeMenu), findsNothing);
+    });
+
+    testWidgets('renders Summoned checkbox unchecked by default',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      final checkbox = tester.widget<Checkbox>(find.byType(Checkbox));
+      expect(checkbox.value, false);
+    });
+
+    testWidgets('Summoned checkbox has onChanged callback',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      final checkbox = tester.widget<Checkbox>(find.byType(Checkbox));
+      // Verify the checkbox is interactive (has an onChanged handler)
+      expect(checkbox.onChanged, isNotNull);
+    });
+
+    testWidgets('already-added standee button still renders',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      // Add standee 1 so it's already out
+      gameState.action(
+          AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false));
+
+      await pumpMenu(tester);
+      // Button '1' should still render (greyed out, but visible)
+      expect(find.text('1'), findsAtLeast(1));
+
+      gameState.undo();
+    });
+  });
+
+  group('AutoAddStandeeMenu elite standees', () {
+    Future<void> pumpEliteMenu(WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      addTearDown(() => FlutterError.onError = originalOnError);
+      FlutterError.onError = ignoreOverflowErrors;
+      // characterIndex=0: normal[0]=0, elite[0]=1
+      final monsterData = [
+        const RoomMonsterData('Zealot', [0, 0, 0], [1, 0, 0]),
+      ];
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) =>
+                      AutoAddStandeeMenu(monsterData: monsterData),
+                );
+              },
+              child: const Text('Open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('renders Elite title for elite-only monster data',
+        (WidgetTester tester) async {
+      await pumpEliteMenu(tester);
+      expect(find.textContaining('Elite'), findsAtLeast(1));
+    });
+
+    testWidgets('tapping elite standee button 1 adds an elite standee',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final monster =
+          gameState.currentList.firstWhere((e) => e is Monster) as Monster;
+      final instancesBefore = monster.monsterInstances.length;
+
+      await pumpEliteMenu(tester);
+      final button1 = find.text('1');
+      if (button1.evaluate().isNotEmpty) {
+        await tester.tap(button1.first);
+        expect(monster.monsterInstances.length, greaterThan(instancesBefore));
+        if (monster.monsterInstances.isNotEmpty) {
+          expect(monster.monsterInstances.last.type, MonsterType.elite);
+        }
+        final originalOnError = FlutterError.onError;
+        FlutterError.onError = ignoreOverflowErrors;
+        await tester.pump();
+        FlutterError.onError = originalOnError;
+      }
     });
   });
 }

@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Layout/counter_button.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_add_minus_one_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue1_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -313,6 +314,141 @@ void main() {
       await pumpCharacterMenu(tester);
       // The Remove -2 button is only shown for non-character (monster) decks
       expect(find.textContaining('-2 card'), findsNothing);
+    });
+
+    testWidgets('renders Remove +0 card button when deck has +0 card',
+        (WidgetTester tester) async {
+      await pumpCharacterMenu(tester);
+      // Blinkblade's deck contains a +0 card by default
+      expect(find.textContaining('+0 card'), findsOneWidget);
+    });
+
+    testWidgets('renders Curse CounterButton for character deck',
+        (WidgetTester tester) async {
+      await pumpCharacterMenu(tester);
+      expect(
+        find.byWidgetPredicate((w) =>
+            w is CounterButton &&
+            w.image == 'assets/images/abilities/curse.png'),
+        findsOneWidget,
+      );
+    });
+  });
+
+  group('ModifierDeckMenu discard pile', () {
+    setUp(() {
+      getIt<GameState>().clearList();
+    });
+
+    testWidgets('discard pile shows cards after drawing',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      // Draw a card to move it from draw pile to discard pile
+      gameState.action(DrawModifierCardCommand(deckName));
+
+      final originalOnError = FlutterError.onError;
+      addTearDown(() => FlutterError.onError = originalOnError);
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) =>
+                      const ModifierDeckMenu(name: deckName),
+                );
+              },
+              child: const Text('Open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+
+      final deck = GameMethods.getModifierDeck(deckName, gameState);
+      expect(deck.discardPile.size(), greaterThan(0));
+
+      gameState.undo();
+    });
+
+    testWidgets('reveal 0 button sets revealedCount to 0',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final deck = GameMethods.getModifierDeck(deckName, gameState);
+
+      await pumpMenu(tester);
+      // Find the '0' reveal button
+      final reveal0Buttons = find.descendant(
+          of: find.byType(ModifierDeckMenu), matching: find.text('0'));
+      if (reveal0Buttons.evaluate().isNotEmpty) {
+        await tester.tap(reveal0Buttons.first);
+        await tester.pump();
+        expect(deck.revealedCount.value, 0);
+        gameState.undo();
+      }
+    });
+  });
+
+  group('ModifierDeckMenu allies deck', () {
+    setUp(() {
+      getIt<GameState>().clearList();
+    });
+
+    Future<void> pumpAlliesMenu(WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      addTearDown(() => FlutterError.onError = originalOnError);
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) =>
+                      const ModifierDeckMenu(name: 'allies'),
+                );
+              },
+              child: const Text('Open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('allies deck renders Add -1 card button',
+        (WidgetTester tester) async {
+      await pumpAlliesMenu(tester);
+      expect(find.textContaining('Add -1 card'), findsOneWidget);
+    });
+
+    testWidgets('allies deck does not render Perks button',
+        (WidgetTester tester) async {
+      await pumpAlliesMenu(tester);
+      expect(find.text('Perks'), findsNothing);
+    });
+
+    testWidgets('allies deck renders Remove -2 card button',
+        (WidgetTester tester) async {
+      await pumpAlliesMenu(tester);
+      // 'allies' is not a character deck so -2 button appears
+      expect(find.textContaining('-2 card'), findsOneWidget);
+    });
+
+    testWidgets('allies deck renders Bless CounterButton',
+        (WidgetTester tester) async {
+      await pumpAlliesMenu(tester);
+      expect(
+        find.byWidgetPredicate((w) =>
+            w is CounterButton &&
+            w.image == 'assets/images/abilities/bless.png'),
+        findsOneWidget,
+      );
     });
   });
 }

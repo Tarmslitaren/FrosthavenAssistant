@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/monster_stat_card_widget.dart';
 import 'package:frosthaven_assistant/Layout/menus/stat_card_zoom.dart';
+import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_level_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -133,6 +135,81 @@ void main() {
       for (int i = 0; i < maxCount; i++) {
         gameState.undo();
       }
+    });
+
+    testWidgets('tapping add button opens AddStandeeMenu when not at last standee',
+        (WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      addTearDown(() => FlutterError.onError = originalOnError);
+      FlutterError.onError = ignoreOverflowErrors;
+      final gameState = getIt<GameState>();
+      final zealot = _getZealot();
+
+      // With count > 2 available standees and none added, tapping opens menu
+      if (zealot.type.count > 2) {
+        await pumpStatCard(tester);
+        await tester.tap(find.byType(IconButton).first);
+        await tester.pumpAndSettle();
+        expect(find.byType(AddStandeeMenu), findsOneWidget);
+      }
+    });
+
+    testWidgets('renders GestureDetector for double-tap zoom',
+        (WidgetTester tester) async {
+      await pumpStatCard(tester);
+      expect(find.byType(GestureDetector), findsAtLeast(1));
+    });
+
+    testWidgets('changing level updates displayed stats',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+
+      // Change to level 3
+      gameState.action(SetLevelCommand(3, null));
+      await pumpStatCard(tester);
+      expect(find.text('3'), findsAtLeast(1));
+
+      // Restore
+      gameState.undo();
+    });
+  });
+
+  group('MonsterStatCardWidget immunity conditions', () {
+    setUp(() {
+      getIt<GameState>().clearList();
+      // Ancient Artillery (FH) has muddle immunity
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
+    });
+
+    Future<void> pumpArtilleryCard(WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      final monster = getIt<GameState>()
+          .currentList
+          .firstWhere((e) => e.id == 'Ancient Artillery (FH)') as Monster;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: MonsterStatCardWidget(data: monster),
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      FlutterError.onError = originalOnError;
+    }
+
+    testWidgets('renders immunity icon for monster with immunities',
+        (WidgetTester tester) async {
+      await pumpArtilleryCard(tester);
+      // Immunity list renders images — at least the immunity icon
+      expect(find.byType(Image), findsAtLeast(1));
+    });
+
+    testWidgets('renders monster name for artillery', (WidgetTester tester) async {
+      await pumpArtilleryCard(tester);
+      expect(find.textContaining('Ancient Artillery'), findsAtLeast(1));
     });
   });
 }

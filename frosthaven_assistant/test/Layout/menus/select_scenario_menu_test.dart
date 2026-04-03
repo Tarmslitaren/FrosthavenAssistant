@@ -195,5 +195,52 @@ void main() {
       await tester.pump();
       expect(find.textContaining('#'), findsAtLeast(1));
     });
+
+    testWidgets('search is case-insensitive', (WidgetTester tester) async {
+      await pumpMenu(tester);
+      await tester.tap(find.textContaining('Current Campaign:'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Frosthaven'));
+      await tester.pumpAndSettle();
+
+      // Use uppercase — should still match '#1 A Town in Flames'
+      await tester.enterText(find.byType(TextField), 'TOWN');
+      await tester.pump();
+      expect(find.textContaining('Town'), findsAtLeast(1));
+    });
+
+    testWidgets('scenario list items are tappable ListTiles',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      await tester.tap(find.textContaining('Current Campaign:'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Frosthaven'));
+      await tester.pumpAndSettle();
+
+      // Scenario entries are rendered as ListTile widgets
+      expect(find.byType(ListTile), findsAtLeast(1));
+    });
+
+    testWidgets('filtering narrows results, no extraneous matches',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      await tester.tap(find.textContaining('Current Campaign:'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Frosthaven'));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(TextField), 'Algox');
+      await tester.pump();
+
+      // All visible items should contain 'Algox' (case-insensitive)
+      final texts = tester
+          .widgetList<Text>(find.byType(Text))
+          .map((t) => t.data ?? '')
+          .where((s) => s.contains('#'))
+          .toList();
+      for (final t in texts) {
+        expect(t.toLowerCase(), contains('algox'));
+      }
+    });
   });
 }
