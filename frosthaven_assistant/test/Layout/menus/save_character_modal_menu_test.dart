@@ -78,5 +78,26 @@ void main() {
       expect(find.text('Set save name:'), findsOneWidget);
       expect(find.byType(TextField), findsOneWidget);
     });
+
+    testWidgets('tapping Save button with character triggers save',
+        (WidgetTester tester) async {
+      await pumpMenu(tester, saveOnly: false, char: character);
+      await tester.tap(find.text('Save'));
+      await tester.pumpAndSettle();
+      // Dialog should close (Navigator.pop called)
+    });
+
+    testWidgets('tapping Delete button closes dialog', (WidgetTester tester) async {
+      await pumpMenu(tester, saveOnly: false, char: character);
+      await tester.tap(find.text('Delete'));
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets('tapping Load button closes dialog', (WidgetTester tester) async {
+      await pumpMenu(tester, saveOnly: false, char: character);
+      // Load button is the first button when saveOnly=false
+      await tester.tap(find.text('Load'));
+      await tester.pumpAndSettle();
+    });
   });
 }

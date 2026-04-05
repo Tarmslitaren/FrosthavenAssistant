@@ -35,5 +35,11 @@ void main() {
       expect(command.describe(),
           'Use Ally Deck in 1st edition Gloomhaven Campaigns');
     });
+
+    test('undo does not throw', () {
+      final gs = getIt<GameState>();
+      gs.action(SetAllyDeckInOgGloomCommand(true));
+      expect(() => gs.undo(), returnsNormally);
+    });
   });
 }

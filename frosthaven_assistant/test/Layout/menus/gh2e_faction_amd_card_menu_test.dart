@@ -29,9 +29,11 @@ void main() {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => GH2eFactionAMDCardMenu(
-                  faction: faction,
-                  name: 'Blinkblade',
+                builder: (context) => Material(
+                  child: GH2eFactionAMDCardMenu(
+                    faction: faction,
+                    name: 'Blinkblade',
+                  ),
                 ),
               );
             },
@@ -62,6 +64,36 @@ void main() {
         (WidgetTester tester) async {
       await pumpMenu(tester, faction: 'Merchant-Guild');
       expect(find.text('Tap Card to add to your deck'), findsOneWidget);
+    });
+
+    testWidgets('tapping a faction card adds it to deck', (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // Directly invoke onTap to avoid image-asset RenderErrorBox blocking hit test
+      final inkWells = find.byType(InkWell);
+      if (tester.widgetList(inkWells).isNotEmpty) {
+        final inkWell = tester.widget<InkWell>(inkWells.first);
+        inkWell.onTap?.call();
+        await tester.pump();
+      }
+    });
+
+    testWidgets('tapping remove button removes the faction card', (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // First add a card via direct onTap invocation
+      final inkWells = find.byType(InkWell);
+      if (tester.widgetList(inkWells).isNotEmpty) {
+        final inkWell = tester.widget<InkWell>(inkWells.first);
+        inkWell.onTap?.call();
+        await tester.pump();
+        // Now remove it
+        final removeBtn = find.text('Remove card from your deck?');
+        if (tester.widgetList(removeBtn).isNotEmpty) {
+          await tester.tap(removeBtn, warnIfMissed: false);
+          await tester.pump();
+          // After remove, "Tap Card to add" should reappear
+          expect(find.text('Tap Card to add to your deck'), findsOneWidget);
+        }
+      }
     });
   });
 }

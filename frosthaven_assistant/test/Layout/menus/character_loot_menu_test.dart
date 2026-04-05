@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/draw_loot_card_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_loot_owner_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_scenario_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -58,6 +62,34 @@ void main() {
       await tester.tap(find.text('Close'));
       await tester.pumpAndSettle();
       expect(find.byType(CharacterLootMenu), findsNothing);
+    });
+
+    testWidgets('renders loot with discard pile having owned cards',
+        (WidgetTester tester) async {
+      // Set up a Frosthaven scenario with loot deck
+      getIt<GameState>().clearList();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      SetCampaignCommand('Frosthaven').execute();
+      SetScenarioCommand('#0 Howling in the Snow', false).execute();
+
+      final gs = getIt<GameState>();
+      final character =
+          gs.currentList.firstWhere((e) => e is Character) as Character;
+
+      // Draw and assign loot cards if deck has any
+      if (gs.lootDeck.drawPile.isNotEmpty) {
+        DrawLootCardCommand().execute();
+        // SetLootOwnerCommand assigns ownership of discard pile cards
+        if (gs.lootDeck.discardPile.isNotEmpty) {
+          SetLootOwnerCommand(character.id,
+                  gs.lootDeck.discardPile.getList().first)
+              .execute();
+        }
+      }
+
+      await pumpMenu(tester);
+      // Should render without error
+      expect(find.byType(CharacterLootMenu), findsOneWidget);
     });
   });
 }

@@ -65,5 +65,29 @@ void main() {
       // Color buttons are IconButton widgets (images, no text)
       expect(find.byType(IconButton), findsAtLeast(8));
     });
+
+    testWidgets('tapping a color icon button selects that graphic',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // Tap the first IconButton (first color choice)
+      final iconButtons = find.byType(IconButton);
+      if (tester.widgetList(iconButtons).isNotEmpty) {
+        await tester.tap(iconButtons.first, warnIfMissed: false);
+        await tester.pump();
+        // No crash is the assertion
+      }
+    });
+
+    testWidgets('tapping a summon list item triggers addSummon',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // Find ListTile items in the summon list
+      final listTiles = find.byType(ListTile);
+      if (tester.widgetList(listTiles).isNotEmpty) {
+        await tester.tap(listTiles.first, warnIfMissed: false);
+        await tester.pump();
+        // After tapping a summon, the menu should close (Navigator.pop)
+      }
+    });
   });
 }

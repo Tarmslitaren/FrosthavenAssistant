@@ -36,6 +36,12 @@ void main() {
     test('describe returns correct string', () {
       expect(ReorderListCommand(0, 1).describe(), 'Reorder List');
     });
+
+    test('undo does not throw', () {
+      final gs = getIt<GameState>();
+      gs.action(ReorderListCommand(0, 1));
+      expect(() => gs.undo(), returnsNormally);
+    });
   });
 
   group('ReorderAbilityListCommand', () {

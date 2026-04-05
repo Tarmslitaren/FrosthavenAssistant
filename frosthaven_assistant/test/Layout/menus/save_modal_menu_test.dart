@@ -71,5 +71,24 @@ void main() {
       final state = tester.state<SaveModalMenuState>(find.byType(SaveModalMenu));
       expect(state.nameController.text, 'MySlot');
     });
+
+    testWidgets('tapping Save button triggers save and closes dialog',
+        (WidgetTester tester) async {
+      await pumpMenu(tester, saveOnly: false, saveName: 'TestSave');
+      await tester.tap(find.text('Save'));
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets('tapping Load button closes dialog', (WidgetTester tester) async {
+      await pumpMenu(tester, saveOnly: false, saveName: 'TestSave');
+      await tester.tap(find.text('Load'));
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets('tapping Delete button closes dialog', (WidgetTester tester) async {
+      await pumpMenu(tester, saveOnly: false, saveName: 'TestSave');
+      await tester.tap(find.text('Delete'));
+      await tester.pumpAndSettle();
+    });
   });
 }

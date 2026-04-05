@@ -358,6 +358,17 @@ void main() {
   });
 
   // ---------------------------------------------------------------------------
+  // undo() coverage
+  // ---------------------------------------------------------------------------
+  group('SetScenarioCommand undo', () {
+    test('undo does not throw', () {
+      final gs = getIt<GameState>();
+      gs.action(SetScenarioCommand('#5 A Deeper Understanding', false));
+      expect(() => gs.undo(), returnsNormally);
+    });
+  });
+
+  // ---------------------------------------------------------------------------
   // Custom scenarios
   // ---------------------------------------------------------------------------
   group('SetScenarioCommand custom scenarios', () {

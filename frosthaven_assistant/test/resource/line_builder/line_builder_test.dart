@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/line_builder.dart';
 
+import '../../command/test_helpers.dart';
+
 void main() {
+  setUpAll(() async {
+    await setUpGame();
+  });
   // ── isElement ─────────────────────────────────────────────────────────────
 
   group('LineBuilder.isElement', () {
@@ -102,6 +107,319 @@ void main() {
           fontFamily: 'Majalla', fontSize: 16.0, height: 0.85);
       expect(LineBuilder.getTopPaddingForStyle(large),
           greaterThan(LineBuilder.getTopPaddingForStyle(small)));
+    });
+  });
+
+  // ── createLines ───────────────────────────────────────────────────────────
+
+  group('LineBuilder.createLines', () {
+    Future<void> pump(WidgetTester tester, Widget widget) async {
+      await tester.pumpWidget(
+        MaterialApp(home: Scaffold(body: widget)),
+      );
+    }
+
+    testWidgets('plain text renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['Hello world'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+      expect(find.text('Hello world'), findsOneWidget);
+    });
+
+    testWidgets('column tokens [c] and [/c] render without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['[c]', 'Column text', '[/c]', 'After column'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+      expect(find.text('Column text'), findsOneWidget);
+    });
+
+    testWidgets('[/c] as last element renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['[c]', 'Inner', '[/c]'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('row tokens [r] and [/r] render without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['[r]', 'Row text', '[/r]'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+      expect(find.text('Row text'), findsOneWidget);
+    });
+
+    testWidgets('[/r] as last element renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['[r]', 'text', '[/r]'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('inner row tokens [s] and [/s] render without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['[c]', '[s]', 'inner', '[/s]', '[/c]'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('[subLineEnd] token renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['First line', '[subLineEnd]', 'After'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('image token starting with ¤ renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['¤fire'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('right-join token starting with ! renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['First', '!Joined'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('small-style token starting with * renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['*small text'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('mid-style token starting with ^ renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['^mid text'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('double ^^ mid-squished style renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['^^squished'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('grant token starting with > renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['>granted line'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('icon token %attack% renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['%attack% 3'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('£ elite-style switch renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['Normal£Elite'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('left=true with icon token renders black icon',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['%attack% 2'],
+        true,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('alignment start renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['Text'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.start,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('alignment end renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['Text'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.end,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('¤fire image inside column renders without error',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['[c]', '¤fire', '[/c]'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
+    });
+
+    testWidgets('¤fire image as last element returns column',
+        (WidgetTester tester) async {
+      final widget = LineBuilder.createLines(
+        ['¤fire'],
+        false,
+        false,
+        false,
+        null,
+        CrossAxisAlignment.center,
+        1.0,
+        false,
+      );
+      await pump(tester, widget);
     });
   });
 }

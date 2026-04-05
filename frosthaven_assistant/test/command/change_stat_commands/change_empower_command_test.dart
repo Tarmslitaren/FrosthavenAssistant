@@ -3,6 +3,8 @@ import 'package:frosthaven_assistant/Resource/commands/add_character_command.dar
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_empower_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_scenario_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -124,6 +126,41 @@ void main() {
 
       // Act & Assert
       expect(command.describe(), 'Remove Empower');
+    });
+
+    test('undo does not throw', () {
+      final gs = getIt<GameState>();
+      final character = gs.currentList.first as Character;
+      gs.action(ChangeEmpowerCommand(1, "in-empower", character.id, character.id));
+      expect(() => gs.undo(), returnsNormally);
+    });
+
+    test('.deck() named constructor targets the given deck directly', () {
+      final deck = getIt<GameState>().modifierDeck;
+      final before = deck.getRemovable("in-empower").value;
+      ChangeEmpowerCommand.deck(deck, "in-empower").execute();
+      // change defaults to 0 for .deck() constructor, so value unchanged
+      expect(deck.getRemovable("in-empower").value, before);
+    });
+
+    test('ally monster owner uses modifierDeckAllies', () {
+      getIt<GameState>().clearList();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', '', 1).execute();
+      SetCampaignCommand('Jaws of the Lion').execute();
+      SetScenarioCommand('#6 Corrupted Research', false).execute();
+      // Rat Monstrosity is marked isAlly in #6
+      final gs = getIt<GameState>();
+      final ratMonstrosity = gs.currentList
+          .whereType<Monster>()
+          .firstWhere((m) => m.id == 'Rat Monstrosity');
+      expect(ratMonstrosity.isAlly, isTrue);
+
+      final alliesDeckBefore =
+          gs.modifierDeckAllies.getRemovable("in-empower").value;
+      ChangeEmpowerCommand(1, "in-empower", ratMonstrosity.id, ratMonstrosity.id)
+          .execute();
+      expect(gs.modifierDeckAllies.getRemovable("in-empower").value,
+          alliesDeckBefore + 1);
     });
   });
 }

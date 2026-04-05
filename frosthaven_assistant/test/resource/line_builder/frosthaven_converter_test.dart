@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/frosthaven_converter.dart';
 
@@ -237,6 +238,174 @@ void main() {
     test('token containing "wound" returns true (contains check)', () {
       expect(
           FrosthavenConverter.shouldOverflow(true, 'wound-infect', true), isTrue);
+    });
+  });
+
+  // ── getAllTextInWidget ─────────────────────────────────────────────────────
+
+  group('FrosthavenConverter.getAllTextInWidget', () {
+    test('Text widget returns its data', () {
+      final result = FrosthavenConverter.getAllTextInWidget(const Text('hello'));
+      expect(result, 'hello');
+    });
+
+    test('Row of Text widgets concatenates all text', () {
+      final widget = Row(children: const [Text('a'), Text('b')]);
+      final result = FrosthavenConverter.getAllTextInWidget(widget);
+      expect(result, 'ab');
+    });
+
+    test('Column of Text widgets concatenates all text', () {
+      final widget = Column(children: const [Text('x'), Text('y')]);
+      final result = FrosthavenConverter.getAllTextInWidget(widget);
+      expect(result, 'xy');
+    });
+
+    test('Container with Text child returns the text', () {
+      final widget = Container(child: const Text('inner'));
+      final result = FrosthavenConverter.getAllTextInWidget(widget);
+      expect(result, 'inner');
+    });
+
+    test('Container with null child returns empty string', () {
+      final widget = Container();
+      final result = FrosthavenConverter.getAllTextInWidget(widget);
+      expect(result, '');
+    });
+
+    test('non-text non-container widget returns empty string', () {
+      final result =
+          FrosthavenConverter.getAllTextInWidget(const SizedBox());
+      expect(result, '');
+    });
+
+    test('nested Row → Column → Text collects text', () {
+      final widget = Row(
+        children: [
+          Column(children: const [Text('deep')]),
+        ],
+      );
+      final result = FrosthavenConverter.getAllTextInWidget(widget);
+      expect(result, 'deep');
+    });
+  });
+
+  // ── getAllImagesInWidget ──────────────────────────────────────────────────
+
+  group('FrosthavenConverter.getAllImagesInWidget', () {
+    test('non-image leaf widget returns empty list', () {
+      final result =
+          FrosthavenConverter.getAllImagesInWidget(const Text('no images'));
+      expect(result, isEmpty);
+    });
+
+    test('Image widget with semanticLabel returns its label', () {
+      const image = Image(
+        image: AssetImage('assets/images/abilities/fire.png'),
+        semanticLabel: 'fire',
+      );
+      final result = FrosthavenConverter.getAllImagesInWidget(image);
+      expect(result, ['fire']);
+    });
+
+    test('Row with two Image widgets returns both labels', () {
+      const img1 = Image(
+          image: AssetImage('a.png'), semanticLabel: 'fire');
+      const img2 = Image(
+          image: AssetImage('b.png'), semanticLabel: 'ice');
+      final widget = Row(children: [img1, img2]);
+      final result = FrosthavenConverter.getAllImagesInWidget(widget);
+      expect(result, ['fire', 'ice']);
+    });
+
+    test('Column with Image child returns the label', () {
+      const img = Image(
+          image: AssetImage('a.png'), semanticLabel: 'earth');
+      final widget = Column(children: [img]);
+      final result = FrosthavenConverter.getAllImagesInWidget(widget);
+      expect(result, ['earth']);
+    });
+
+    test('Container with Image child returns the label', () {
+      const img = Image(
+          image: AssetImage('a.png'), semanticLabel: 'dark');
+      final widget = Container(child: img);
+      final result = FrosthavenConverter.getAllImagesInWidget(widget);
+      expect(result, ['dark']);
+    });
+
+    test('Container with null child returns empty list', () {
+      final widget = Container();
+      final result = FrosthavenConverter.getAllImagesInWidget(widget);
+      expect(result, isEmpty);
+    });
+
+    test('Stack with Image children returns all labels', () {
+      const img1 = Image(
+          image: AssetImage('a.png'), semanticLabel: 'light');
+      const img2 = Image(
+          image: AssetImage('b.png'), semanticLabel: 'any');
+      final widget = Stack(children: [img1, img2]);
+      final result = FrosthavenConverter.getAllImagesInWidget(widget);
+      expect(result, ['light', 'any']);
+    });
+
+    test('nested Row → Container → Image collects label', () {
+      const img = Image(
+          image: AssetImage('a.png'), semanticLabel: 'wind');
+      final widget = Row(children: [Container(child: img)]);
+      final result = FrosthavenConverter.getAllImagesInWidget(widget);
+      expect(result, ['wind']);
+    });
+  });
+
+  // ── convertLinesToFH – advanced subline patterns ─────────────────────────
+
+  group('FrosthavenConverter.convertLinesToFH – advanced subline patterns', () {
+    test('^Normal line starts a subline', () {
+      final result = FrosthavenConverter.convertLinesToFH(
+          ['Attack 3', '^Normal attack'], false);
+      expect(result, contains('![subLineStart]'));
+    });
+
+    test('^all line starts a subline', () {
+      final result = FrosthavenConverter.convertLinesToFH(
+          ['Attack 3', '^all enemies'], false);
+      expect(result, contains('![subLineStart]'));
+    });
+
+    test('^All (not "^All attacks" or "^All targets") starts a subline', () {
+      final result = FrosthavenConverter.convertLinesToFH(
+          ['Attack 3', '^All adjacent enemies'], false);
+      expect(result, contains('![subLineStart]'));
+    });
+
+    test('^All attacks does not start a subline', () {
+      final result = FrosthavenConverter.convertLinesToFH(
+          ['Move 3', '^All attacks on you'], false);
+      expect(result.contains('![subLineStart]'), isFalse);
+    });
+
+    test('^All targets does not start a subline', () {
+      final result = FrosthavenConverter.convertLinesToFH(
+          ['Move 3', '^All targets suffer'], false);
+      expect(result.contains('![subLineStart]'), isFalse);
+    });
+
+    test('isSubLine set to false after non-subline ^ line', () {
+      // A ^ line that does not trigger subline should collapse isSubLine
+      final result = FrosthavenConverter.convertLinesToFH(
+          ['Move 3', '^All attacks on you', 'Attack 2'], false);
+      // No subline markers expected
+      expect(result.contains('![subLineStart]'), isFalse);
+      expect(result.contains('[subLineEnd]'), isFalse);
+    });
+
+    test('second non-special line while isReallySubLine=true adds [subLineEnd]', () {
+      // After a subline block, starting a new main line closes the subline
+      final result = FrosthavenConverter.convertLinesToFH(
+          ['Move 3', '^%poison%', 'Attack 2'], false);
+      expect(result, contains('[subLineEnd]'));
     });
   });
 }

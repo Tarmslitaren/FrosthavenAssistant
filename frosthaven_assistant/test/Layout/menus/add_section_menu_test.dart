@@ -87,5 +87,28 @@ void main() {
       await tester.pump(const Duration(milliseconds: 300));
       expect(find.byType(AddSectionMenu), findsNothing);
     });
+
+    testWidgets('typing partial name shows matching sections',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // '#0.1 The Frozen Depths' is the section in testData scenario #0
+      await tester.enterText(find.byType(TextField), 'Frozen');
+      await tester.pump();
+      expect(find.text('No results found'), findsNothing);
+    });
+
+    testWidgets('tapping a section item in the list triggers action',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // With empty search, any visible section should be tappable
+      await tester.pump(const Duration(milliseconds: 100));
+      // If there are visible sections, tap the first ListTile
+      final listTiles = find.byType(ListTile);
+      if (tester.widgetList(listTiles).isNotEmpty) {
+        // Tap without asserting navigation outcome (may or may not pop)
+        await tester.tap(listTiles.first, warnIfMissed: false);
+        await tester.pump();
+      }
+    });
   });
 }

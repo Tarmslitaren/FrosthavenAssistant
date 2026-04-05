@@ -1,6 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/activate_monster_type_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
+import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -64,6 +66,27 @@ void main() async {
       // Act & Assert
       expect(command.describe(), 'Deactivate Zealot');
       checkSaveState();
+    });
+
+    test('undo does not throw', () {
+      getIt<GameState>().clearList();
+      AddMonsterCommand('Zealot', 1, false).execute();
+      final gs = getIt<GameState>();
+      gs.action(ActivateMonsterTypeCommand('Zealot', true));
+      expect(() => gs.undo(), returnsNormally);
+    });
+
+    test('activate in RoundState.playTurns draws ability card and sorts', () {
+      getIt<GameState>().clearList();
+      AddMonsterCommand('Zealot', 1, false).execute();
+      // Enter playTurns state via DrawCommand
+      DrawCommand().execute();
+      expect(getIt<GameState>().roundState.value, RoundState.playTurns);
+      // Activate should not throw even in playTurns state
+      expect(
+        () => ActivateMonsterTypeCommand('Zealot', true).execute(),
+        returnsNormally,
+      );
     });
   });
 }
