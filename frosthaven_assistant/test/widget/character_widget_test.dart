@@ -3,6 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/CharacterWidget/character_widget.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/next_round_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -77,6 +79,31 @@ void main() {
     testWidgets('renders ColorFiltered widget', (WidgetTester tester) async {
       await pumpCharacterWidget(tester);
       expect(find.byType(ColorFiltered), findsAtLeast(1));
+    });
+
+    testWidgets('renders health wheel when not in chooseInitiative round state',
+        (WidgetTester tester) async {
+      // Draw changes roundState to playTurns, triggering buildWithHealthWheel path
+      DrawCommand().execute();
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: CharacterWidget(characterId: 'Blinkblade'),
+            ),
+          ),
+        ),
+      );
+      // Pump past DrawCommand's 600ms Future.delayed timer
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 700));
+      FlutterError.onError = originalOnError;
+      expect(find.byType(CharacterWidget), findsOneWidget);
+      // Reset round state (NextRoundCommand also has 600ms timer — pump past it)
+      NextRoundCommand().execute();
+      await tester.pump(const Duration(milliseconds: 700));
     });
   });
 }

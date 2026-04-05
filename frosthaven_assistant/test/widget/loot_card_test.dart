@@ -93,6 +93,55 @@ void main() {
       FlutterError.onError = originalOnError;
       expect(find.textContaining('Enhanced'), findsOneWidget);
     });
+
+    testWidgets('card with gfx containing "1418" shows "1418" text',
+        (WidgetTester tester) async {
+      final card = _makeCard(gfx: 'loot_1418');
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LootCardWidget.buildFront(card, 1.0, false),
+          ),
+        ),
+      );
+      FlutterError.onError = originalOnError;
+      expect(find.text('1418'), findsOneWidget);
+    });
+
+    testWidgets('card with gfx containing "1419" shows "1419" text',
+        (WidgetTester tester) async {
+      final card = _makeCard(gfx: 'loot_1419');
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LootCardWidget.buildFront(card, 1.0, false),
+          ),
+        ),
+      );
+      FlutterError.onError = originalOnError;
+      expect(find.text('1419'), findsOneWidget);
+    });
+
+    testWidgets('card with non-empty owner shows owner icon',
+        (WidgetTester tester) async {
+      final card = _makeCard(owner: 'Blinkblade');
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: LootCardWidget.buildFront(card, 1.0, false),
+          ),
+        ),
+      );
+      FlutterError.onError = originalOnError;
+      // Owner image should be rendered (Image widgets exist)
+      expect(find.byType(Image), findsAtLeast(1));
+    });
   });
 
   group('LootCardWidget buildRear', () {

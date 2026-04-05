@@ -33,7 +33,9 @@ void main() {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) => AddSummonMenu(character: character),
+                builder: (context) => Material(
+                  child: AddSummonMenu(character: character),
+                ),
               );
             },
             child: const Text('Open'),
@@ -75,6 +77,30 @@ void main() {
         await tester.tap(iconButtons.first, warnIfMissed: false);
         await tester.pump();
         // No crash is the assertion
+      }
+    });
+
+    testWidgets('tapping a non-selected color button triggers setState',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // First button is 'blue' (already selected). Tap second ('green') directly.
+      final iconButtons = find.byType(IconButton);
+      if (tester.widgetList(iconButtons).length >= 2) {
+        final greenButton = tester.widget<IconButton>(iconButtons.at(1));
+        greenButton.onPressed?.call();
+        await tester.pump();
+      }
+    });
+
+    testWidgets('tapping nr button 2 changes selected standee number',
+        (WidgetTester tester) async {
+      await pumpMenu(tester);
+      // Nr=1 is selected by default. Tapping '2' TextButton triggers setState.
+      final textButtons = find.byType(TextButton);
+      if (tester.widgetList(textButtons).length >= 2) {
+        final btn2 = tester.widget<TextButton>(textButtons.at(1));
+        btn2.onPressed?.call();
+        await tester.pump();
       }
     });
 

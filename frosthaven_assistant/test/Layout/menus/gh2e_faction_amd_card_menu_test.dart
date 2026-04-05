@@ -68,10 +68,12 @@ void main() {
 
     testWidgets('tapping a faction card adds it to deck', (WidgetTester tester) async {
       await pumpMenu(tester);
-      // Directly invoke onTap to avoid image-asset RenderErrorBox blocking hit test
-      final inkWells = find.byType(InkWell);
-      if (tester.widgetList(inkWells).isNotEmpty) {
-        final inkWell = tester.widget<InkWell>(inkWells.first);
+      // Find InkWells inside GH2eFactionAMDCardMenu (not the ElevatedButton)
+      final menuInkWells = find.descendant(
+          of: find.byType(GH2eFactionAMDCardMenu),
+          matching: find.byType(InkWell));
+      if (tester.widgetList(menuInkWells).isNotEmpty) {
+        final inkWell = tester.widget<InkWell>(menuInkWells.first);
         inkWell.onTap?.call();
         await tester.pump();
       }
@@ -79,16 +81,20 @@ void main() {
 
     testWidgets('tapping remove button removes the faction card', (WidgetTester tester) async {
       await pumpMenu(tester);
-      // First add a card via direct onTap invocation
-      final inkWells = find.byType(InkWell);
-      if (tester.widgetList(inkWells).isNotEmpty) {
-        final inkWell = tester.widget<InkWell>(inkWells.first);
+      // Find InkWells inside GH2eFactionAMDCardMenu (not the ElevatedButton)
+      final menuInkWells = find.descendant(
+          of: find.byType(GH2eFactionAMDCardMenu),
+          matching: find.byType(InkWell));
+      if (tester.widgetList(menuInkWells).isNotEmpty) {
+        final inkWell = tester.widget<InkWell>(menuInkWells.first);
         inkWell.onTap?.call();
         await tester.pump();
         // Now remove it
         final removeBtn = find.text('Remove card from your deck?');
         if (tester.widgetList(removeBtn).isNotEmpty) {
-          await tester.tap(removeBtn, warnIfMissed: false);
+          final removeTextBtn = tester.widget<TextButton>(
+              find.ancestor(of: removeBtn, matching: find.byType(TextButton)));
+          removeTextBtn.onPressed?.call();
           await tester.pump();
           // After remove, "Tap Card to add" should reappear
           expect(find.text('Tap Card to add to your deck'), findsOneWidget);

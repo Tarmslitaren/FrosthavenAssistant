@@ -262,5 +262,60 @@ void main() {
       expect(find.textContaining('Undo'), findsOneWidget);
       gameState.undo();
     });
+
+    testWidgets('server mode renders undo/redo via server path',
+        (WidgetTester tester) async {
+      final settings = getIt<Settings>();
+      final gameState = getIt<GameState>();
+      // Enable server mode — covers undoEnabled/redoEnabled server branches
+      settings.server.value = true;
+      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1));
+
+      await pumpMenu(tester);
+      expect(find.textContaining('Undo'), findsOneWidget);
+      expect(find.textContaining('Redo'), findsOneWidget);
+
+      // Restore
+      settings.server.value = false;
+      gameState.undo();
+    });
+
+    testWidgets('tapping Hide Ally Deck calls action when ally deck visible',
+        (WidgetTester tester) async {
+      final settings = getIt<Settings>();
+      final gameState = getIt<GameState>();
+      settings.showAmdDeck.value = true;
+      // Ensure ally deck is shown
+      if (!gameState.showAllyDeck.value) {
+        gameState.action(ShowAllyDeckCommand());
+      }
+
+      await pumpMenu(tester);
+      await tester.scrollUntilVisible(
+          find.text('Hide Ally Attack Modifier Deck'), 100);
+      await tester.tap(find.text('Hide Ally Attack Modifier Deck'));
+      await tester.pump();
+
+      expect(gameState.showAllyDeck.value, false);
+      // Restore
+      settings.showAmdDeck.value = false;
+    });
+
+    testWidgets('client connection section renders when lastKnownConnection is set',
+        (WidgetTester tester) async {
+      final settings = getIt<Settings>();
+      final originalConnection = settings.lastKnownConnection;
+      // Set a valid-looking connection address (not ending with '?')
+      settings.lastKnownConnection = '192.168.1.1';
+
+      await pumpMenu(tester);
+      // The client CheckboxListTile should now be visible
+      await tester.scrollUntilVisible(
+          find.textContaining('Connect as Client'), 100);
+      expect(find.textContaining('Connect as Client'), findsOneWidget);
+
+      // Restore
+      settings.lastKnownConnection = originalConnection;
+    });
   });
 }

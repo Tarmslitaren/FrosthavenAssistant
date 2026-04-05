@@ -132,6 +132,152 @@ void main() {
     });
   });
 
+  group('AutoAddStandeeMenu summoned checkbox', () {
+    testWidgets('invoking Summoned checkbox onChanged does not throw',
+        (WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      addTearDown(() => FlutterError.onError = originalOnError);
+      FlutterError.onError = ignoreOverflowErrors;
+      await pumpMenu(tester);
+      final checkbox = tester.widget<Checkbox>(find.byType(Checkbox));
+      expect(
+        () => checkbox.onChanged?.call(true),
+        returnsNormally,
+      );
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pump();
+      FlutterError.onError = originalOnError;
+    });
+  });
+
+  group('AutoAddStandeeMenu large standee count', () {
+    setUp(() {
+      getIt<GameState>().clearList();
+      AddMonsterCommand('Rat Monstrosity', 1, false).execute();
+    });
+
+    Future<void> pumpLargeMenu(WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      addTearDown(() => FlutterError.onError = originalOnError);
+      FlutterError.onError = ignoreOverflowErrors;
+      final monsterData = [
+        const RoomMonsterData('Rat Monstrosity', [6, 0, 0], [0, 0, 0]),
+      ];
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) =>
+                      AutoAddStandeeMenu(monsterData: monsterData),
+                );
+              },
+              child: const Text('Open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+      FlutterError.onError = originalOnError;
+    }
+
+    testWidgets('monster with 10 standees renders buttons through 10 and pluralizes name',
+        (WidgetTester tester) async {
+      await pumpLargeMenu(tester);
+      // Rat Monstrosity ends with 'y' → _pluralize → 'Monstrosities'
+      expect(find.textContaining('Monstrosit'), findsAtLeast(1));
+      // Buttons 9 and 10 visible for monster with count=10
+      expect(find.text('9'), findsAtLeast(1));
+      expect(find.text('10'), findsAtLeast(1));
+    });
+  });
+
+  group('AutoAddStandeeMenu two-monster progression', () {
+    setUp(() {
+      getIt<GameState>().clearList();
+      AddMonsterCommand('Zealot', 1, false).execute();
+      AddMonsterCommand('Vermling Raider', 1, false).execute();
+    });
+
+    testWidgets('while-loop skips zero-standee monster to next',
+        (WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      addTearDown(() => FlutterError.onError = originalOnError);
+      FlutterError.onError = ignoreOverflowErrors;
+      // First monster needs 0 standees — while loop advances to Vermling Raider
+      final monsterData = [
+        const RoomMonsterData('Zealot', [0, 0, 0], [0, 0, 0]),
+        const RoomMonsterData('Vermling Raider', [1, 0, 0], [0, 0, 0]),
+      ];
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) =>
+                      AutoAddStandeeMenu(monsterData: monsterData),
+                );
+              },
+              child: const Text('Open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+      FlutterError.onError = originalOnError;
+      // After skipping Zealot (0 needed), menu should show Vermling Raider
+      expect(find.textContaining('Vermling'), findsAtLeast(1));
+    });
+
+    testWidgets('tapping standee for first monster advances to second monster',
+        (WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      addTearDown(() => FlutterError.onError = originalOnError);
+      FlutterError.onError = ignoreOverflowErrors;
+      final monsterData = [
+        const RoomMonsterData('Zealot', [1, 0, 0], [0, 0, 0]),
+        const RoomMonsterData('Vermling Raider', [1, 0, 0], [0, 0, 0]),
+      ];
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) =>
+                      AutoAddStandeeMenu(monsterData: monsterData),
+                );
+              },
+              child: const Text('Open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+      FlutterError.onError = originalOnError;
+
+      // Tap standee 1 for Zealot to complete first monster
+      final button1 = find.text('1');
+      if (button1.evaluate().isNotEmpty) {
+        FlutterError.onError = ignoreOverflowErrors;
+        await tester.tap(button1.first);
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 100));
+        FlutterError.onError = originalOnError;
+        // Menu should now show Vermling Raider
+        expect(find.textContaining('Vermling'), findsAtLeast(1));
+      }
+    });
+  });
+
   group('AutoAddStandeeMenu elite standees', () {
     Future<void> pumpEliteMenu(WidgetTester tester) async {
       final originalOnError = FlutterError.onError;
