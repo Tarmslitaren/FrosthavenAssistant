@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/CharacterWidget/character_icon_widget.dart';
+import 'package:frosthaven_assistant/Model/character_class.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
@@ -117,6 +118,27 @@ void main() {
       // When isCharacter=true, color is set to the character class color
       expect(img.color, isNotNull);
       expect(img.color, character.characterClass.color);
+    });
+
+    testWidgets('Shattersong character uses ShaderMask',
+        (WidgetTester tester) async {
+      // Create a character with class name "Shattersong" directly
+      const shattersongClass = CharacterClass(
+        'Shattersong',
+        'Shattersong',
+        [10, 12, 14, 16, 18, 20, 22, 24, 26],
+        'Frosthaven',
+        Colors.teal,
+        Colors.tealAccent,
+        false,
+        [],
+        [],
+        [],
+      );
+      final charState = CharacterState('Shattersong');
+      final character = Character(charState, shattersongClass);
+      await pumpIcon(tester, character, true);
+      expect(find.byType(ShaderMask), findsOneWidget);
     });
 
     testWidgets('isCharacter=false image has no color tint',

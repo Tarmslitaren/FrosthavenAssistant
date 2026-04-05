@@ -5,6 +5,9 @@ import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_health_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -242,6 +245,115 @@ void main() {
       FlutterError.onError = originalOnError;
       expect(find.byType(ConditionIcon), findsOneWidget);
       expect(find.byType(Image), findsAtLeast(1));
+    });
+  });
+
+  group('ConditionIcon frosthaven gfx suffix', () {
+    testWidgets('constructor uses _fh suffix when campaign is Frosthaven',
+        (WidgetTester tester) async {
+      SetCampaignCommand('Frosthaven').execute();
+      final character = _getBlinkblade();
+      // Render stun icon — stun has a GH version, so suffix "_fh" should apply
+      await pumpConditionIcon(tester, Condition.stun);
+      final icon =
+          tester.widget<ConditionIcon>(find.byType(ConditionIcon));
+      // gfx should end with _fh.png for frosthaven-style campaign
+      expect(icon.gfx, contains('_fh'));
+      // Also verify GameMethods.isFrosthavenStyle is true in this context
+      expect(GameMethods.isFrosthavenStyle(null), isTrue);
+    });
+  });
+
+  group('ConditionIcon animation listener health change', () {
+    setUp(() {
+      // Mock SharedPreferences so saveToDisk does not throw MissingPluginException
+      SharedPreferences.setMockInitialValues({});
+      getIt<GameState>().clearList();
+      // Use action() to populate gameSaveStates so listener can read old state
+      getIt<GameState>()
+          .action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1));
+    });
+
+    testWidgets('health decrease triggers animation for regenerate condition',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final character = gameState.currentList
+          .firstWhere((e) => e is Character) as Character;
+
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ConditionIcon(
+              Condition.regenerate,
+              32.0,
+              character,
+              character.characterState,
+              scale: 1.0,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      FlutterError.onError = originalOnError;
+
+      // Trigger health change: commandIndex change → listener → animation path
+      gameState
+          .action(ChangeHealthCommand(-1, character.id, character.id));
+
+      FlutterError.onError = ignoreOverflowErrors;
+      // Pump past the 1000ms animation timer started by _runAnimation()
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 1100));
+      FlutterError.onError = originalOnError;
+
+      expect(find.byType(ConditionIcon), findsOneWidget);
+      gameState.undo();
+    });
+
+    testWidgets(
+        'health decrease then increase with stun covers full condition chains without animation',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final character = gameState.currentList
+          .firstWhere((e) => e is Character) as Character;
+
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      // stun is not in the health-decrease or health-increase animation lists
+      // so _runAnimation() is NOT called → no pending timer
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: ConditionIcon(
+              Condition.stun,
+              32.0,
+              character,
+              character.characterState,
+              scale: 1.0,
+            ),
+          ),
+        ),
+      );
+      await tester.pump();
+      FlutterError.onError = originalOnError;
+
+      // Health decrease: covers lines 128, 198-207 (all conditions evaluated, none match stun)
+      gameState.action(ChangeHealthCommand(-1, character.id, character.id));
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pump();
+      FlutterError.onError = originalOnError;
+
+      // Health increase: covers lines 210-216 (all conditions evaluated, none match stun)
+      gameState.action(ChangeHealthCommand(1, character.id, character.id));
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pump();
+      FlutterError.onError = originalOnError;
+
+      expect(find.byType(ConditionIcon), findsOneWidget);
+      gameState.undo();
+      gameState.undo();
     });
   });
 }

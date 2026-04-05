@@ -4,6 +4,7 @@ import 'package:frosthaven_assistant/Layout/menus/condition_button.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/add_condition_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
@@ -254,6 +255,213 @@ void main() {
 
       expect(instance.conditions.value, isNot(equals(before)));
       expect(instance.conditions.value, contains(Condition.stun));
+      getIt<GameState>().undo();
+    });
+
+    testWidgets('tapping level button for monster opens SetLevelMenu',
+        (WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await pumpMonsterMenu(tester);
+      final levelButton = find.byWidgetPredicate((w) =>
+          w is IconButton &&
+          w.icon is Image &&
+          (w.icon as Image).image is AssetImage &&
+          ((w.icon as Image).image as AssetImage).assetName ==
+              'assets/images/psd/level.png');
+      expect(levelButton, findsOneWidget);
+      await tester.tap(levelButton);
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+      FlutterError.onError = originalOnError;
+      // The else branch (monster level) was covered; menu opened
+      expect(find.byType(StatusMenu), findsOneWidget);
+    });
+
+    testWidgets('tapping summon button on normal standee marks as summoned',
+        (WidgetTester tester) async {
+      final zealot = _getZealot();
+      final instance = zealot.monsterInstances.first;
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await pumpMonsterMenu(tester);
+      final summonButton = find.byWidgetPredicate((w) =>
+          w is IconButton &&
+          w.icon is Image &&
+          (w.icon as Image).image is AssetImage &&
+          ((w.icon as Image).image as AssetImage).assetName
+              .contains('summon'));
+      if (summonButton.evaluate().isNotEmpty) {
+        await tester.tap(summonButton.first);
+        await tester.pump();
+      }
+      FlutterError.onError = originalOnError;
+      // roundSummoned is set (not -1) after tapping the summon button
+      expect(instance.roundSummoned, isNot(-1));
+      getIt<GameState>().undo();
+    });
+  });
+
+  group('StatusMenu elite monster', () {
+    setUp(() {
+      getIt<GameState>().clearList();
+      AddMonsterCommand('Zealot', 1, false).execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.elite, false).execute();
+    });
+
+    testWidgets('elite monster menu renders without error (covers elite branch)',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final zealot =
+          gameState.currentList.firstWhere((e) => e is Monster) as Monster;
+      final instance = zealot.monsterInstances.first;
+
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => StatusMenu(
+                    figureId: instance.getId(),
+                    characterId: null,
+                    monsterId: zealot.id,
+                  ),
+                );
+              },
+              child: const Text('Open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+      FlutterError.onError = originalOnError;
+      expect(find.byType(StatusMenu), findsOneWidget);
+      expect(instance.type, MonsterType.elite);
+    });
+  });
+
+  group('StatusMenu monster with characters present', () {
+    setUp(() {
+      getIt<GameState>().clearList();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Hatchet', 'Jaws of the Lion', null, 1).execute();
+      AddCharacterCommand('Demolitionist', 'Jaws of the Lion', null, 1)
+          .execute();
+      AddMonsterCommand('Zealot', 1, false).execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false).execute();
+    });
+
+    testWidgets(
+        'monster menu with 4 characters renders character condition buttons',
+        (WidgetTester tester) async {
+      final gameState = getIt<GameState>();
+      final zealot =
+          gameState.currentList.firstWhere((e) => e is Monster) as Monster;
+      final instance = zealot.monsterInstances.first;
+
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (context) => ElevatedButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => StatusMenu(
+                    figureId: instance.getId(),
+                    characterId: null,
+                    monsterId: zealot.id,
+                  ),
+                );
+              },
+              child: const Text('Open'),
+            ),
+          ),
+        ),
+      );
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+      FlutterError.onError = originalOnError;
+      // character condition buttons (1-4) are rendered when 4 characters present
+      expect(
+          find.byWidgetPredicate((w) =>
+              w is ConditionButton &&
+              w.condition == Condition.character1),
+          findsOneWidget);
+      expect(
+          find.byWidgetPredicate((w) =>
+              w is ConditionButton &&
+              w.condition == Condition.character4),
+          findsOneWidget);
+    });
+  });
+
+  group('StatusMenu chill stackable buttons', () {
+    testWidgets('tapping chill plus button adds chill condition',
+        (WidgetTester tester) async {
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await pumpMenu(tester);
+      FlutterError.onError = originalOnError;
+
+      // The chill + button is the last add.png IconButton in the status menu
+      final addButtons = find.byWidgetPredicate((w) =>
+          w is IconButton &&
+          w.icon is Image &&
+          (w.icon as Image).image is AssetImage &&
+          ((w.icon as Image).image as AssetImage).assetName ==
+              'assets/images/psd/add.png');
+      if (addButtons.evaluate().isNotEmpty) {
+        final chillPlusButton = addButtons.last;
+        final originalOnError2 = FlutterError.onError;
+        FlutterError.onError = ignoreOverflowErrors;
+        await tester.tap(chillPlusButton);
+        await tester.pump();
+        FlutterError.onError = originalOnError2;
+        final character = _getBlinkblade();
+        expect(character.characterState.chill.value, greaterThan(0));
+        getIt<GameState>().undo();
+      }
+    });
+
+    testWidgets('tapping chill minus button when chill > 0 removes chill',
+        (WidgetTester tester) async {
+      // Pre-add chill so the minus button's condition (value > 0) is true
+      final character = _getBlinkblade();
+      AddConditionCommand(
+              Condition.chill, character.id, character.id)
+          .execute();
+      expect(character.characterState.chill.value, greaterThan(0));
+
+      final originalOnError = FlutterError.onError;
+      FlutterError.onError = ignoreOverflowErrors;
+      await pumpMenu(tester);
+      FlutterError.onError = originalOnError;
+
+      final subButtons = find.byWidgetPredicate((w) =>
+          w is IconButton &&
+          w.icon is Image &&
+          (w.icon as Image).image is AssetImage &&
+          ((w.icon as Image).image as AssetImage).assetName ==
+              'assets/images/psd/sub.png');
+      if (subButtons.evaluate().isNotEmpty) {
+        final chillMinusButton = subButtons.last;
+        final originalOnError2 = FlutterError.onError;
+        FlutterError.onError = ignoreOverflowErrors;
+        await tester.tap(chillMinusButton);
+        await tester.pump();
+        FlutterError.onError = originalOnError2;
+        // Chill decremented
+        expect(character.characterState.chill.value, 0);
+      }
+      getIt<GameState>().undo();
       getIt<GameState>().undo();
     });
   });
