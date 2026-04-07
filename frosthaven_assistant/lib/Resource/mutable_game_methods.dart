@@ -645,7 +645,7 @@ class MutableGameMethods {
     }
 
     //hack for banner spear solo special rule
-    if (scenario.contains("Banner Spear: Scouting Ambush")) {
+    if (scenario.contains("Scouting Ambush")) {
       MonsterAbilityState deck = gameState.currentAbilityDecks
           .firstWhere((element) => element.name.contains("Scout"));
       final drawPileList = deck.drawPile.getList();
