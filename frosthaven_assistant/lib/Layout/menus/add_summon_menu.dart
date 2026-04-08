@@ -3,6 +3,7 @@ import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon_model.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_data.dart';
@@ -129,19 +130,9 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   @override
   Widget build(BuildContext context) {
     double scale = getModalMenuScale(context);
-    return Container(
+    return ModalBackground(
       width: 336 * scale,
       height: 452 * scale,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.8), BlendMode.dstATop),
-          image: AssetImage(getIt<Settings>().darkMode.value
-              ? 'assets/images/bg/dark_bg.png'
-              : 'assets/images/bg/white_bg.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
       child: Column(children: [
         SizedBox(
           height: 20 * scale,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/settings.dart';
 import '../../services/service_locator.dart';
 
@@ -55,20 +56,10 @@ class SaveModalMenuState extends State<SaveModalMenu> {
       side: BorderSide(width: 2 * scale, color: Colors.blue),
     );
 
-    return Container(
+    return ModalBackground(
         width: 240 * scale,
         height: 160 * scale,
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,

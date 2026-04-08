@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 
 import '../../Resource/commands/add_monster_command.dart';
@@ -136,128 +137,112 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        constraints: const BoxConstraints(maxWidth: 450),
-        child: Card(
-            margin: const EdgeInsets.all(2),
-            child: Stack(children: [
-              Column(
-                children: [
-                  Row(children: [
-                    const Text("      Show monsters from:   "),
-                    DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                            value: _currentCampaign,
-                            items: buildEditionDroopDownMenuItems(),
-                            onChanged: (value) {
-                              if (value is String) {
-                                setState(() {
-                                  _setCampaign(value);
-                                });
-                              }
-                            }))
-                  ]),
-                  CheckboxListTile(
-                      title: const Text("Show Bosses"),
-                      value: _showBoss,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _showBoss = value!;
-                          _runFilter("");
-                        });
-                      }),
-                  CheckboxListTile(
-                      title: const Text("Show Scenario Special Monsters"),
-                      value: _showSpecial,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _showSpecial = value!;
-                          _runFilter("");
-                        });
-                      }),
-                  CheckboxListTile(
-                      title: const Text("Add as Ally"),
-                      value: _addAsAlly,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          _addAsAlly = value!;
-                        });
-                      }),
-                  Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    child: TextField(
-                      onChanged: (value) => _runFilter(value),
-                      decoration: const InputDecoration(
-                          labelText: 'Add Monster',
-                          suffixIcon: Icon(Icons.search)),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Expanded(
-                    child: _foundMonsters.isNotEmpty
-                        ? Scrollbar(
-                            controller: _scrollController,
-                            child: ListView.builder(
-                              controller: _scrollController,
-                              itemCount: _foundMonsters.length,
-                              itemBuilder: (context, index) => ListTile(
-                                leading: Image.asset(
-                                  "assets/images/monsters/${_foundMonsters[index].gfx}.png",
-                                  height: 35,
-                                  cacheHeight: 75,
-                                ),
-                                title: Text(
-                                    _foundMonsters[index].hidden
-                                        ? "${_foundMonsters[index].display} (special)"
-                                        : _foundMonsters[index].display,
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        color: _monsterAlreadyAdded(
-                                                _foundMonsters[index].name)
-                                            ? Colors.grey
-                                            : Colors.black)),
-                                trailing: Text(
-                                    "(${_foundMonsters[index].edition})",
-                                    style: const TextStyle(
-                                        fontSize: 14, color: Colors.grey)),
-                                onTap: () {
-                                  if (!_monsterAlreadyAdded(
-                                      _foundMonsters[index].name)) {
-                                    setState(() {
-                                      _gameState.action(AddMonsterCommand(
-                                          _foundMonsters[index].name,
-                                          null,
-                                          _addAsAlly));
-                                    });
-                                  }
-                                },
-                              ),
-                            ))
-                        : const Text(
-                            'No results found',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                  ),
-                  const SizedBox(
-                    height: 34,
-                  ),
-                ],
-              ),
-              Positioned(
-                  width: 100,
-                  height: 40,
-                  right: 0,
-                  bottom: 0,
-                  child: TextButton(
-                      child: const Text(
-                        'Close',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
+    return MenuCard(
+        maxWidth: 450,
+        cardMargin: const EdgeInsets.all(2),
+        child: Column(
+          children: [
+            Row(children: [
+              const Text("      Show monsters from:   "),
+              DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                      value: _currentCampaign,
+                      items: buildEditionDroopDownMenuItems(),
+                      onChanged: (value) {
+                        if (value is String) {
+                          setState(() {
+                            _setCampaign(value);
+                          });
+                        }
                       }))
-            ])));
+            ]),
+            CheckboxListTile(
+                title: const Text("Show Bosses"),
+                value: _showBoss,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _showBoss = value!;
+                    _runFilter("");
+                  });
+                }),
+            CheckboxListTile(
+                title: const Text("Show Scenario Special Monsters"),
+                value: _showSpecial,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _showSpecial = value!;
+                    _runFilter("");
+                  });
+                }),
+            CheckboxListTile(
+                title: const Text("Add as Ally"),
+                value: _addAsAlly,
+                onChanged: (bool? value) {
+                  setState(() {
+                    _addAsAlly = value!;
+                  });
+                }),
+            Container(
+              margin: const EdgeInsets.only(left: 10, right: 10),
+              child: TextField(
+                onChanged: (value) => _runFilter(value),
+                decoration: const InputDecoration(
+                    labelText: 'Add Monster',
+                    suffixIcon: Icon(Icons.search)),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: _foundMonsters.isNotEmpty
+                  ? Scrollbar(
+                      controller: _scrollController,
+                      child: ListView.builder(
+                        controller: _scrollController,
+                        itemCount: _foundMonsters.length,
+                        itemBuilder: (context, index) => ListTile(
+                          leading: Image.asset(
+                            "assets/images/monsters/${_foundMonsters[index].gfx}.png",
+                            height: 35,
+                            cacheHeight: 75,
+                          ),
+                          title: Text(
+                              _foundMonsters[index].hidden
+                                  ? "${_foundMonsters[index].display} (special)"
+                                  : _foundMonsters[index].display,
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  color: _monsterAlreadyAdded(
+                                          _foundMonsters[index].name)
+                                      ? Colors.grey
+                                      : Colors.black)),
+                          trailing: Text(
+                              "(${_foundMonsters[index].edition})",
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.grey)),
+                          onTap: () {
+                            if (!_monsterAlreadyAdded(
+                                _foundMonsters[index].name)) {
+                              setState(() {
+                                _gameState.action(AddMonsterCommand(
+                                    _foundMonsters[index].name,
+                                    null,
+                                    _addAsAlly));
+                              });
+                            }
+                          },
+                        ),
+                      ))
+                  : const Text(
+                      'No results found',
+                      style: TextStyle(fontSize: 24),
+                    ),
+            ),
+            const SizedBox(
+              height: 34,
+            ),
+          ],
+        ));
   }
 }

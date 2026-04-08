@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/commands/set_auto_level_adjust_com
 import 'package:frosthaven_assistant/Resource/commands/set_difficulty_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_solo_command.dart';
 
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/commands/set_level_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
@@ -231,19 +232,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
 
     double scale = getModalMenuScale(context);
 
-    return Container(
+    return ModalBackground(
         width: 270 * scale,
         height: showLegend ? 400 * scale : 287 * scale,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(darkMode
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,

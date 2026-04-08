@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_faction_card_command.dart';
 
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/color_matrices.dart';
 import '../../Resource/game_methods.dart';
-import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
@@ -83,19 +83,9 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
           const SizedBox(
             height: 20,
           ),
-          Container(
+          ModalBackground(
               width: 300,
               height: 180,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.8), BlendMode.dstATop),
-                  image: AssetImage(getIt<Settings>().darkMode.value
-                      ? 'assets/images/bg/dark_bg.png'
-                      : 'assets/images/bg/white_bg.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
               child: Column(children: [
                 SizedBox(
                   height: addedCard == null ? 20 : 30,

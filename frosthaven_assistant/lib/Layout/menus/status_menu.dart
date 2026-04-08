@@ -15,6 +15,7 @@ import '../../Resource/commands/change_stat_commands/change_empower_command.dart
 import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
 import '../../Resource/commands/change_stat_commands/change_health_command.dart';
 import '../../Resource/commands/ice_wraith_change_form_command.dart';
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/commands/remove_condition_command.dart';
 import '../../Resource/commands/set_as_summon_command.dart';
 import '../../Resource/enums.dart';
@@ -325,18 +326,8 @@ class StatusMenuState extends State<StatusMenu> {
     final bool isMonster = widget.monsterId != null;
     final bool isCharacter = widget.characterId != null;
     return Wrap(children: [
-      Container(
+      ModalBackground(
           width: 340 * scale,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.8), BlendMode.dstATop),
-              image: AssetImage(getIt<Settings>().darkMode.value
-                  ? 'assets/images/bg/dark_bg.png'
-                  : 'assets/images/bg/white_bg.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             SizedBox(
                 height: 28 * scale,

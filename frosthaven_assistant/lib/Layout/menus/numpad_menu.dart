@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../Resource/settings.dart';
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/ui_utils.dart';
-import '../../services/service_locator.dart';
 
 class NumpadMenu extends StatefulWidget {
   final TextEditingController controller;
@@ -57,19 +56,9 @@ class NumpadMenuState extends State<NumpadMenu> {
   @override
   Widget build(BuildContext context) {
     double scale = getModalMenuScale(context);
-    return Container(
+    return ModalBackground(
         width: 10,
         height: 180 * scale,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -4,7 +4,7 @@ import 'package:frosthaven_assistant/Resource/commands/remove_card_command.dart'
 import 'package:frosthaven_assistant/Resource/commands/reorder_ability_list_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/shuffle_drawn_ability_card_command.dart';
 
-import '../../Resource/settings.dart';
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
@@ -44,19 +44,9 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
       }
     }
 
-    return Container(
+    return ModalBackground(
         width: 300,
         height: 210,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Column(children: [
           const SizedBox(
             height: 10,

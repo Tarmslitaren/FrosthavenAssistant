@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/settings.dart';
@@ -108,20 +109,10 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
     if (nrOfStandees > 8) {
       height = 211;
     }
-    return Container(
+    return ModalBackground(
         width: 250 * scale,
         //need to set any width to center content, overridden by dialog default min width.
         height: height * scale,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Stack(children: [
           ValueListenableBuilder<int>(
               valueListenable: _gameState.commandIndex,
