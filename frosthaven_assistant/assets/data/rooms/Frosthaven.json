@@ -1438,10 +1438,7 @@
       }
     },
     {
-      "15.3": {}
-    },
-    {
-      "27.2": {
+      "spawn 1": {
         "Ancient Artillery (FH)": {
           "normal": [0, 1, 0],
           "elite": [1, 1, 2]
@@ -1451,13 +1448,13 @@
           "elite": [0, 2, 6]
         }
       }},{
-      "39.1": {
+      "spawn 3": {
         "Flaming Bladespinner": {
           "normal": [2, 1, 0],
           "elite": [0, 1, 2]
         }
       }},{
-      "44.2": {
+      "spawn 2": {
         "Ancient Artillery (FH)": {
           "normal": [2, 1, 0],
           "elite": [0, 1, 2]
@@ -1786,7 +1783,7 @@
       }
     },
     {
-      "131.4": {
+      "spawn 1": {
         "Ruined Machine": {
           "normal": [0, 2, 4],
           "elite": [2, 2, 2]
@@ -5201,7 +5198,7 @@
           "elite": [1, 1, 1]
         }
       }},{
-      "43.1": {
+      "spawn 1": {
         "Living Bones (FH)": {
           "normal": [2, 1, 0],
           "elite": [0, 1, 2]
@@ -6741,7 +6738,7 @@
       }
     },
     {
-      "132,4": {
+      "spawn 1": {
         "Vermling Scout (FH)": {
           "normal": [0, 0, 0],
           "elite": [2, 3, 4]
@@ -6857,7 +6854,7 @@
       }
     },
     {
-      "87.1": {
+      "spawn 2": {
         "Lightning Eel": {
           "normal": [2, 3, 4],
           "elite": [0, 0, 0]
@@ -6873,7 +6870,7 @@
       }
     },
     {
-      "173.2": {
+      "spawn 1": {
         "Lightning Eel": {
           "normal": [2, 3, 4],
           "elite": [0, 0, 0]
@@ -6903,7 +6900,7 @@
       }
     },
     {
-      "120.2": {
+      "spawn 1": {
         "Lurker Wavethrower Scenario 131": {
           "normal": [2, 3, 4],
           "elite": [0, 0, 0]
@@ -6911,7 +6908,7 @@
       }
     },
     {
-      "181.5": {
+      "spawn 2": {
         "Lurker Soldier": {
           "normal": [1, 0, 1],
           "elite": [0, 1, 1]
@@ -6923,7 +6920,7 @@
       }
     },
     {
-      "185.1": {
+      "spawn 3": {
         "Lurker Wavethrower Scenario 131": {
           "normal": [2, 3, 4],
           "elite": [0, 0, 0]
@@ -6931,7 +6928,7 @@
       }
     },
     {
-      "194.2": {
+      "spawn 4": {
         "Lurker Conductor": {
           "normal": [1, 1, 1],
           "elite": [0, 0, 0]
