@@ -84,7 +84,7 @@ class BottomBarLevelWidget extends StatelessWidget {
                     const double blurRadius = 3.0;
                     const double spreadRadius = 1.0;
                     const double opacity = 0.3;
-                    final color = Colors.black.withOpacity(opacity);
+                    final color = Colors.black.withValues(alpha: opacity);
                     return Text.rich(
                       TextSpan(children: [
                         WidgetSpan(
