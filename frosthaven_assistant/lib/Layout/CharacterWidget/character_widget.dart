@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../../Resource/color_matrices.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_methods.dart';
+import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
@@ -36,25 +37,6 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
   bool isCharacter = true;
   List<MonsterInstance> lastList = [];
-
-  Widget buildWithHealthWheel(Character character) {
-    return HealthWheelController(
-        figureId: widget.characterId,
-        ownerId: widget.characterId,
-        child: PhysicalShape(
-            color: character.turnState.value == TurnsState.current
-                ? Colors.tealAccent
-                : Colors.transparent,
-            shadowColor: Colors.black,
-            elevation: 8,
-            clipper: const ShapeBorderClipper(shape: RoundedRectangleBorder()),
-            child: CharacterWidgetInternal(
-              character: character,
-              isCharacter: isCharacter,
-              characterId: character.id,
-              initPreset: widget.initPreset,
-            )));
-  }
 
   Widget buildMonsterBoxGrid(double scale, Character character) {
     String displayStartAnimation = "";
@@ -111,6 +93,22 @@ class CharacterWidgetState extends State<CharacterWidget> {
                             getIt<GameState>().roundState.value ==
                                 RoundState.chooseInitiative);
                 double scale = getScaleByReference(context);
+
+                Widget inner = PhysicalShape(
+                    color: character.turnState.value == TurnsState.current
+                        ? Colors.tealAccent
+                        : Colors.transparent,
+                    shadowColor: Colors.black,
+                    elevation: 8,
+                    clipper: const ShapeBorderClipper(
+                        shape: RoundedRectangleBorder()),
+                    child: CharacterWidgetInternal(
+                      character: character,
+                      isCharacter: isCharacter,
+                      characterId: character.id,
+                      initPreset: widget.initPreset,
+                    ));
+
                 return Column(mainAxisSize: MainAxisSize.max, children: [
                   Container(
                     margin:
@@ -133,7 +131,12 @@ class CharacterWidgetState extends State<CharacterWidget> {
                               isCharacter: isCharacter,
                               characterId: character.id,
                               initPreset: widget.initPreset)
-                          : buildWithHealthWheel(character))
+                          : getIt<Settings>().enableHeathWheel.value
+                              ? HealthWheelController(
+                                  figureId: widget.characterId,
+                                  ownerId: widget.characterId,
+                                  child: inner)
+                              : inner)
                 ]);
               }));
     }

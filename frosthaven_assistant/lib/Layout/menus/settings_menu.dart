@@ -296,6 +296,17 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),
+                              CheckboxListTile(
+                                  title: const Text(
+                                      "Enable heath wheel: drag left-right to change health"),
+                                  value: settings.enableHeathWheel.value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      settings.enableHeathWheel.value = value!;
+                                      settings.saveToDisk();
+                                      getIt<GameState>().updateAllUI();
+                                    });
+                                  }),
                               if (!Platform.isIOS)
                                 CheckboxListTile(
                                     title: const Text("Fullscreen"),
