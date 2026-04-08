@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 
@@ -185,7 +186,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
               },
               child: Text(
                 "Load or Save Characters",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: kFontSizeTitle),
               ),
             ),
             Container(
@@ -219,11 +220,11 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                       ))
                   : const Text(
                       'No results found',
-                      style: TextStyle(fontSize: 24),
+                      style: TextStyle(fontSize: kFontSizeHeading),
                     ),
             ),
             const SizedBox(
-              height: 34,
+              height: kMenuCloseButtonSpacing,
             ),
           ],
         ));

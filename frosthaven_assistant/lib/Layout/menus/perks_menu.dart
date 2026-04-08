@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/use_fh_perks_command.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/token_applier.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -36,14 +37,14 @@ class PerksMenu extends StatelessWidget {
           List<Widget> tiles = [];
           tiles.add(Text(
             "Add Perks",
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: kFontSizeTitle),
           ));
 
           if (hasFHPerkSet) {
             tiles.add(CheckboxListTile(
                 title: Text(
                   "Use Frosthaven Perks",
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: kFontSizeBody),
                 ),
                 value: useFHPerks,
                 onChanged: (on) {
@@ -76,19 +77,19 @@ class PerksMenu extends StatelessWidget {
                               child: Column(children: tiles),
                             ),
                             const SizedBox(
-                              height: 34,
+                              height: kMenuCloseButtonSpacing,
                             ),
                           ],
                         ),
                         Positioned(
-                            width: 100,
-                            height: 40,
+                            width: kCloseButtonWidth,
+                            height: kButtonSize,
                             right: 0,
                             bottom: 0,
                             child: TextButton(
                                 child: const Text(
                                   'Close',
-                                  style: TextStyle(fontSize: 20),
+                                  style: TextStyle(fontSize: kFontSizeButtonLabel),
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);

@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_menu.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/clear_unlocked_classes_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_ally_deck_in_og_gloom_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/track_standees_command.dart';
@@ -75,7 +76,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                             children: [
                               const Text(
                                 "Settings",
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: kFontSizeTitle),
                               ),
                               CheckboxListTile(
                                   title: const Text("Dark mode"),
@@ -359,7 +360,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                               ),
                               const Text(
                                 "Style:",
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(fontSize: kFontSizeTitle),
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -564,7 +565,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                             ],
                           )),
                       const SizedBox(
-                        height: 34,
+                        height: kMenuCloseButtonSpacing,
                       ),
                     ],
                   ),
@@ -576,7 +577,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                       child: TextButton(
                           child: const Text(
                             'Close',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: kFontSizeButtonLabel),
                           ),
                           onPressed: () {
                             Navigator.pop(context);

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/perks_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/removed_modifier_card_menu.dart';
@@ -230,7 +231,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
 
           final imbuement = deck.imbuement.value;
 
-          final textStyle = TextStyle(fontSize: 16, color: Colors.black);
+          final textStyle = TextStyle(fontSize: kFontSizeBody, color: Colors.black);
 
           final campaign = _gameState.currentCampaign.value;
           final bool isCSCampaign =
@@ -711,14 +712,14 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                       ),
                     ]),
                     Positioned(
-                        width: 100,
-                        height: 40,
+                        width: kCloseButtonWidth,
+                        height: kButtonSize,
                         right: 0,
                         bottom: 0,
                         child: TextButton(
                             child: const Text(
                               'Close',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: kFontSizeButtonLabel),
                             ),
                             onPressed: () {
                               Navigator.pop(context);
@@ -728,7 +729,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                         left: 20,
                         child: Text(
                           name,
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: kFontSizeButtonLabel),
                         ))
                   ])));
         });

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_loot_owner_menu.dart';
@@ -184,14 +185,14 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                       ),
                     ]),
                     Positioned(
-                        width: 100,
-                        height: 40,
+                        width: kCloseButtonWidth,
+                        height: kButtonSize,
                         right: 0,
                         bottom: 0,
                         child: TextButton(
                             child: const Text(
                               'Close',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: kFontSizeButtonLabel),
                             ),
                             onPressed: () {
                               Navigator.pop(context);

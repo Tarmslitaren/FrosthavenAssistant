@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../../Resource/game_methods.dart';
@@ -69,7 +70,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
             child: Text(
               "$amount",
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: kFontSizeHeading,
               ),
             )));
 
@@ -97,7 +98,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
               ),
               Text(
                 "$characterName's loot:",
-                style: const TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: kFontSizeTitle),
               )
             ]),
         createListTile("coin", characterId),
@@ -135,19 +136,19 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
                         buildCharacterLootWidget(character.characterClass.id,
                             character.characterState.display.value),
                       const SizedBox(
-                        height: 34,
+                        height: kMenuCloseButtonSpacing,
                       ),
                     ],
                   ),
                   Positioned(
-                      width: 100,
-                      height: 40,
+                      width: kCloseButtonWidth,
+                      height: kButtonSize,
                       right: 0,
                       bottom: 0,
                       child: TextButton(
                           child: const Text(
                             'Close',
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: kFontSizeButtonLabel),
                           ),
                           onPressed: () {
                             Navigator.pop(context);

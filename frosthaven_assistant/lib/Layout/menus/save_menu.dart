@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_modal_menu.dart';
 
 import '../../Resource/settings.dart';
@@ -88,7 +89,7 @@ class SaveMenuState extends State<SaveMenu> {
                           itemCount: _saves.length,
                           itemBuilder: (context, index) => ListTile(
                             title: Text(_saves[index],
-                                style: const TextStyle(fontSize: 18)),
+                                style: const TextStyle(fontSize: kFontSizeTitle)),
                             onTap: () {
                               openDialog(
                                   context,
@@ -101,7 +102,7 @@ class SaveMenuState extends State<SaveMenu> {
                       })),
             ),
             const SizedBox(
-              height: 34,
+              height: kMenuCloseButtonSpacing,
             ),
           ],
         ));

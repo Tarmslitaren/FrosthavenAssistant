@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Resource/commands/remove_monster_command.dart';
 import '../../Resource/game_methods.dart';
@@ -33,7 +34,7 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
               height: 20,
             ),
             ListTile(
-              title: const Text("Remove All", style: TextStyle(fontSize: 18)),
+              title: const Text("Remove All", style: TextStyle(fontSize: kFontSizeTitle)),
               onTap: () {
                 _gameState.action(RemoveMonsterCommand(currentMonsters)); //
                 Navigator.pop(context);
@@ -44,15 +45,15 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                 itemCount: currentMonsters.length,
                 itemBuilder: (context, index) => ListTile(
                   leading: Image.asset(
-                    cacheHeight: 75,
+                    cacheHeight: kMonsterImageCacheHeight,
                     height: 30,
                     "assets/images/monsters/${currentMonsters[index].type.gfx}.png",
                   ),
                   title: Text(currentMonsters[index].type.display,
-                      style: const TextStyle(fontSize: 18)),
+                      style: const TextStyle(fontSize: kFontSizeTitle)),
                   trailing: Text("(${currentMonsters[index].type.edition})",
                       style:
-                          const TextStyle(fontSize: 14, color: Colors.grey)),
+                          const TextStyle(fontSize: kFontSizeSmall, color: Colors.grey)),
                   onTap: () {
                     setState(() {
                       _gameState.action(
@@ -63,7 +64,7 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
               ),
             ),
             const SizedBox(
-              height: 34,
+              height: kMenuCloseButtonSpacing,
             ),
           ],
         ));

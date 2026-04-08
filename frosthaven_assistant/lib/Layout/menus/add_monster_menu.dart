@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
 
 import '../../Resource/commands/add_monster_command.dart';
@@ -205,14 +206,14 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                           leading: Image.asset(
                             "assets/images/monsters/${_foundMonsters[index].gfx}.png",
                             height: 35,
-                            cacheHeight: 75,
+                            cacheHeight: kMonsterImageCacheHeight,
                           ),
                           title: Text(
                               _foundMonsters[index].hidden
                                   ? "${_foundMonsters[index].display} (special)"
                                   : _foundMonsters[index].display,
                               style: TextStyle(
-                                  fontSize: 18,
+                                  fontSize: kFontSizeTitle,
                                   color: _monsterAlreadyAdded(
                                           _foundMonsters[index].name)
                                       ? Colors.grey
@@ -220,7 +221,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                           trailing: Text(
                               "(${_foundMonsters[index].edition})",
                               style: const TextStyle(
-                                  fontSize: 14, color: Colors.grey)),
+                                  fontSize: kFontSizeSmall, color: Colors.grey)),
                           onTap: () {
                             if (!_monsterAlreadyAdded(
                                 _foundMonsters[index].name)) {
@@ -236,11 +237,11 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                       ))
                   : const Text(
                       'No results found',
-                      style: TextStyle(fontSize: 24),
+                      style: TextStyle(fontSize: kFontSizeHeading),
                     ),
             ),
             const SizedBox(
-              height: 34,
+              height: kMenuCloseButtonSpacing,
             ),
           ],
         ));

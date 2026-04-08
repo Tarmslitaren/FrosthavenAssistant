@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 class MenuCard extends StatelessWidget {
   const MenuCard({
@@ -21,14 +22,14 @@ class MenuCard extends StatelessWidget {
         child: Stack(children: [
           child,
           Positioned(
-            width: 100,
-            height: 40,
+            width: kCloseButtonWidth,
+            height: kButtonSize,
             right: 0,
             bottom: 0,
             child: TextButton(
               child: const Text(
                 'Close',
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: kFontSizeButtonLabel),
               ),
               onPressed: () {
                 Navigator.pop(context);

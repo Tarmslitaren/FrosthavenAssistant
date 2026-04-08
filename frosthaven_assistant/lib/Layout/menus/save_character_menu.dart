@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_modal_menu.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
@@ -48,7 +49,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                           style: getTitleTextStyle(1))),
                   const Text(
                     "Add new Save:",
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: kFontSizeHeading),
                   ),
                   Wrap(
                     children: [
@@ -87,7 +88,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                   ),
                   const Text(
                     "Load Character:",
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: kFontSizeHeading),
                   ),
                   Expanded(
                     child: Scrollbar(
@@ -115,7 +116,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                                           "assets/images/class-icons/${characterId[index]}.png")),
                                   //should show icon
                                   title: Text(_saves[index],
-                                      style: const TextStyle(fontSize: 18)),
+                                      style: const TextStyle(fontSize: kFontSizeTitle)),
                                   onTap: () {
                                     openDialog(
                                         context,
@@ -132,19 +133,19 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                             })),
                   ),
                   const SizedBox(
-                    height: 34,
+                    height: kMenuCloseButtonSpacing,
                   ),
                 ],
               ),
               Positioned(
-                  width: 100,
-                  height: 40,
+                  width: kCloseButtonWidth,
+                  height: kButtonSize,
                   right: 0,
                   bottom: 0,
                   child: TextButton(
                       child: const Text(
                         'Close',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: kFontSizeButtonLabel),
                       ),
                       onPressed: () {
                         Navigator.pop(context);

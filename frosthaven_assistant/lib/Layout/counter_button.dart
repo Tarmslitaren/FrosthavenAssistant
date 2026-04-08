@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../Resource/app_constants.dart';
 import '../Resource/commands/change_stat_commands/change_stat_command.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/state/game_state.dart';
@@ -50,8 +51,8 @@ class CounterButtonState extends State<CounterButton> {
     }
     return RepaintBoundary(child:Row(mainAxisSize: MainAxisSize.min, children: [
       SizedBox(
-          width: 40 * widget.scale,
-          height: 40 * widget.scale,
+          width: kButtonSize * widget.scale,
+          height: kButtonSize * widget.scale,
           child: IconButton(
               icon: Image.asset('assets/images/psd/sub.png'),
               onPressed: () {
@@ -71,8 +72,8 @@ class CounterButtonState extends State<CounterButton> {
               })),
       Stack(children: [
         SizedBox(
-          width: 30 * widget.scale,
-          height: 30 * widget.scale,
+          width: kIconSize * widget.scale,
+          height: kIconSize * widget.scale,
           child: Image(
             color: widget.color,
             colorBlendMode: BlendMode.modulate,
@@ -83,8 +84,8 @@ class CounterButtonState extends State<CounterButton> {
         ),
         if (widget.extraImage != null)
           SizedBox(
-            width: 30 * widget.scale,
-            height: 30 * widget.scale,
+            width: kIconSize * widget.scale,
+            height: kIconSize * widget.scale,
             child: Image(
               color: Colors.black54,
               colorBlendMode: BlendMode.modulate,
@@ -117,15 +118,15 @@ class CounterButtonState extends State<CounterButton> {
                     text,
                     style: TextStyle(
                         height: 0.5,
-                        fontSize: 16 * widget.scale,
+                        fontSize: kFontSizeBody * widget.scale,
                         color: Colors.white,
                         shadows: [shadow]),
                   ));
             })
       ]),
       SizedBox(
-          width: 40 * widget.scale,
-          height: 40 * widget.scale,
+          width: kButtonSize * widget.scale,
+          height: kButtonSize * widget.scale,
           child: IconButton(
             icon: Image.asset('assets/images/psd/add.png'),
             onPressed: () {

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/return_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 
@@ -79,7 +80,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
               isCharacter ? GameMethods.getCharacterByName(widget.name) : null;
           final screenSize = MediaQuery.of(context).size;
           final monsterDeck = widget.name.isEmpty;
-          final textStyle = TextStyle(fontSize: 16, color: Colors.black);
+          final textStyle = TextStyle(fontSize: kFontSizeBody, color: Colors.black);
 
           return Container(
               constraints: BoxConstraints(
@@ -122,14 +123,14 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
                       ),
                     ]),
                     Positioned(
-                        width: 100,
-                        height: 40,
+                        width: kCloseButtonWidth,
+                        height: kButtonSize,
                         right: 0,
                         bottom: 0,
                         child: TextButton(
                             child: const Text(
                               'Close',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: kFontSizeButtonLabel),
                             ),
                             onPressed: () {
                               Navigator.pop(context);
@@ -139,7 +140,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
                         left: 20,
                         child: Text(
                           name,
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: kFontSizeButtonLabel),
                         ))
                   ])));
         });

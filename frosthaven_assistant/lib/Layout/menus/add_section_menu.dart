@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Resource/commands/set_scenario_command.dart';
@@ -143,7 +144,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                                                     _foundScenarios[index])
                                             ? Colors.blueGrey
                                             : Colors.black,
-                                        fontSize: 18)),
+                                        fontSize: kFontSizeTitle)),
                                 onTap: () {
                                   if (!_gameState.scenarioSectionsAdded
                                       .contains(_foundScenarios[index])) {
@@ -156,23 +157,23 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                             ))
                         : const Text(
                             'No results found',
-                            style: TextStyle(fontSize: 24),
+                            style: TextStyle(fontSize: kFontSizeHeading),
                           ),
                   ),
                   const SizedBox(
-                    height: 34,
+                    height: kMenuCloseButtonSpacing,
                   ),
                 ],
               ),
               Positioned(
-                  width: 100,
-                  height: 40,
+                  width: kCloseButtonWidth,
+                  height: kButtonSize,
                   right: 0,
                   bottom: 0,
                   child: TextButton(
                       child: const Text(
                         'Close',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: kFontSizeButtonLabel),
                       ),
                       onPressed: () {
                         Navigator.pop(context);
