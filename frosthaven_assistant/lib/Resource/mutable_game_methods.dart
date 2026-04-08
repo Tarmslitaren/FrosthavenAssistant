@@ -267,7 +267,7 @@ class MutableGameMethods {
     });
   }
 
-  static addPerk(_StateModifier s, Character character, int index) {
+  static void addPerk(_StateModifier s, Character character, int index) {
     final deck = character.characterState.modifierDeck;
     final perksFH = character.characterClass.perksFH;
     final useFHPerks =
@@ -324,7 +324,7 @@ class MutableGameMethods {
     }
   }
 
-  static removePerk(_StateModifier s, Character character, int index) {
+  static void removePerk(_StateModifier s, Character character, int index) {
     final deck = character.characterState.modifierDeck;
     final perksFH = character.characterClass.perksFH;
     final useFHPerks =

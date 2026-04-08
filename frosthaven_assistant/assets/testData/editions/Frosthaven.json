@@ -464,6 +464,157 @@
           "text": "add one +1 \"%Hail gains 1 resolve\" card to the monster attack modifier deck"
         }
       ]
+    },
+    {
+      "name": "Pain Conduit",
+      "edition": "Frosthaven",
+      "health": [
+        8,
+        9,
+        11,
+        12,
+        14,
+        15,
+        17,
+        18,
+        20
+      ],
+      "hidden": true,
+      "color": "ff7476a7",
+      "colorSecondary": "ff1c1124",
+      "summons": {
+        "Flesh Fiend": {
+          "level": 1,
+          "gfx": "PAI Flesh Fiend",
+          "health": 7,
+          "move": 2,
+          "attack": 1
+        },
+        "Flesh Bomb": {
+          "level": 1,
+          "gfx": "PAI Flesh Bomb",
+          "health": 3,
+          "move": 3,
+          "attack": 2
+        }
+      },
+      "perks": [
+        {
+          "removes": [
+            "minus1",
+            "minus1"
+          ]
+        },
+        {
+          "removes": [
+            "minus1",
+            "minus1"
+          ]
+        },
+        {
+          "text": "Replace one -2 cards with one -2 %curse%%curse% cards",
+          "removes": [
+            "minus2"
+          ],
+          "adds": [
+            "perks/minus2curse2"
+          ]
+        },
+        {
+          "removes": [
+            "minus1"
+          ],
+          "adds": [
+            "perks/plus0disarm"
+          ]
+        },
+        {
+          "removes": [
+            "plus0"
+          ],
+          "adds": [
+            "perks/plus1fireair"
+          ]
+        },
+        {
+          "removes": [
+            "plus0"
+          ],
+          "adds": [
+            "perks/plus1fireair"
+          ]
+        },
+        {
+          "removes": [
+            "plus0"
+          ],
+          "adds": [
+            "perks/plus1fireair"
+          ]
+        },
+        {
+          "removes": [
+            "plus0"
+          ],
+          "adds": [
+            "plus2"
+          ]
+        },
+        {
+          "removes": [
+            "plus1",
+            "plus1",
+            "plus1"
+          ],
+          "adds": [
+            "perks/plus1curse",
+            "perks/plus1curse",
+            "perks/plus1curse"
+          ]
+        },
+        {
+          "adds": [
+            "perks/plus0heal1flip",
+            "perks/plus0heal1flip",
+            "perks/plus0heal1flip"
+          ]
+        },
+        {
+          "adds": [
+            "perks/plus0heal1flip",
+            "perks/plus0heal1flip",
+            "perks/plus0heal1flip"
+          ]
+        },
+        {
+          "text": "Add one +0 \"add + 1 %attack% for each negative condition you have\" card",
+          "adds": [
+            "perks/unique/pc1"
+          ]
+        },
+        {
+          "text": "Add one +0 \"add + 1 %attack% for each negative condition you have\" card",
+          "adds": [
+            "perks/unique/pc1"
+          ]
+        },
+        {
+          "text": "Ignore scenario effects and add two +1 cards",
+          "adds": [
+            "plus1",
+            "plus1"
+          ]
+        },
+        {
+          "text": "Each round in which you long rest, you may ignore all negative conditions you have. If you do, they cannot be removed that round"
+        },
+        {
+          "text": "Whenever you become exhausted, first perform %curse%, %target% all, %range% 3"
+        },
+        {
+          "text": "[double] Increase your maximum hit point value  by 5"
+        }
+      ]
     }
   ],
   "monsterAbilities": [
