@@ -237,7 +237,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                       ))
                   : const Text(
                       'No results found',
-                      style: TextStyle(fontSize: kFontSizeHeading),
+                      style: kHeadingStyle,
                     ),
             ),
             const SizedBox(

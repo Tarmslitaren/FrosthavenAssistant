@@ -157,7 +157,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                             ))
                         : const Text(
                             'No results found',
-                            style: TextStyle(fontSize: kFontSizeHeading),
+                            style: kHeadingStyle,
                           ),
                   ),
                   const SizedBox(
@@ -173,7 +173,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                   child: TextButton(
                       child: const Text(
                         'Close',
-                        style: TextStyle(fontSize: kFontSizeButtonLabel),
+                        style: kButtonLabelStyle,
                       ),
                       onPressed: () {
                         Navigator.pop(context);

@@ -34,7 +34,7 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
               height: 20,
             ),
             ListTile(
-              title: const Text("Remove All", style: TextStyle(fontSize: kFontSizeTitle)),
+              title: const Text("Remove All", style: kTitleStyle),
               onTap: () {
                 _gameState.action(RemoveMonsterCommand(currentMonsters)); //
                 Navigator.pop(context);
@@ -50,10 +50,10 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                     "assets/images/monsters/${currentMonsters[index].type.gfx}.png",
                   ),
                   title: Text(currentMonsters[index].type.display,
-                      style: const TextStyle(fontSize: kFontSizeTitle)),
+                      style: kTitleStyle),
                   trailing: Text("(${currentMonsters[index].type.edition})",
                       style:
-                          const TextStyle(fontSize: kFontSizeSmall, color: Colors.grey)),
+                          kSubtitleStyle),
                   onTap: () {
                     setState(() {
                       _gameState.action(

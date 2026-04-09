@@ -37,14 +37,14 @@ class PerksMenu extends StatelessWidget {
           List<Widget> tiles = [];
           tiles.add(Text(
             "Add Perks",
-            style: TextStyle(fontSize: kFontSizeTitle),
+            style: kTitleStyle,
           ));
 
           if (hasFHPerkSet) {
             tiles.add(CheckboxListTile(
                 title: Text(
                   "Use Frosthaven Perks",
-                  style: TextStyle(fontSize: kFontSizeBody),
+                  style: kBodyStyle,
                 ),
                 value: useFHPerks,
                 onChanged: (on) {
@@ -89,7 +89,7 @@ class PerksMenu extends StatelessWidget {
                             child: TextButton(
                                 child: const Text(
                                   'Close',
-                                  style: TextStyle(fontSize: kFontSizeButtonLabel),
+                                  style: kButtonLabelStyle,
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);

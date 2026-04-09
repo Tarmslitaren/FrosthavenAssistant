@@ -186,7 +186,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
               },
               child: Text(
                 "Load or Save Characters",
-                style: TextStyle(fontSize: kFontSizeTitle),
+                style: kTitleStyle,
               ),
             ),
             Container(
@@ -220,7 +220,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                       ))
                   : const Text(
                       'No results found',
-                      style: TextStyle(fontSize: kFontSizeHeading),
+                      style: kHeadingStyle,
                     ),
             ),
             const SizedBox(

@@ -49,7 +49,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                           style: getTitleTextStyle(1))),
                   const Text(
                     "Add new Save:",
-                    style: TextStyle(fontSize: kFontSizeHeading),
+                    style: kHeadingStyle,
                   ),
                   Wrap(
                     children: [
@@ -88,7 +88,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                   ),
                   const Text(
                     "Load Character:",
-                    style: TextStyle(fontSize: kFontSizeHeading),
+                    style: kHeadingStyle,
                   ),
                   Expanded(
                     child: Scrollbar(
@@ -116,7 +116,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                                           "assets/images/class-icons/${characterId[index]}.png")),
                                   //should show icon
                                   title: Text(_saves[index],
-                                      style: const TextStyle(fontSize: kFontSizeTitle)),
+                                      style: kTitleStyle),
                                   onTap: () {
                                     openDialog(
                                         context,
@@ -145,7 +145,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                   child: TextButton(
                       child: const Text(
                         'Close',
-                        style: TextStyle(fontSize: kFontSizeButtonLabel),
+                        style: kButtonLabelStyle,
                       ),
                       onPressed: () {
                         Navigator.pop(context);

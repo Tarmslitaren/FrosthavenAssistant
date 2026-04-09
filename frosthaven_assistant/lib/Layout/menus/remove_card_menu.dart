@@ -60,7 +60,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
               child: Text(
                   "Remove ${widget.card.title}\n(card nr: ${widget.card.nr})",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: kFontSizeButtonLabel))),
+                  style: kButtonLabelStyle)),
           const SizedBox(
             height: 10,
           ),
@@ -88,7 +88,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                   Navigator.pop(context);
                 },
                 child: const Text("Send to Bottom",
-                    style: TextStyle(fontSize: kFontSizeButtonLabel))),
+                    style: kButtonLabelStyle)),
           if (isInDrawPile)
             const SizedBox(
               height: 10,
@@ -101,7 +101,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                   Navigator.pop(context);
                 },
                 child: const Text("Shuffle un-drawn Cards",
-                    style: TextStyle(fontSize: kFontSizeButtonLabel))),
+                    style: kButtonLabelStyle)),
         ]));
   }
 }

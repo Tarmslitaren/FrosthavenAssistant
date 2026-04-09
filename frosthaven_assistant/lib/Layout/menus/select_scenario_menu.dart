@@ -211,10 +211,10 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         fit: BoxFit.scaleDown,
         image: AssetImage("assets/images/class-icons/$characterName.png"),
       ),
-      title: Text(text, style: const TextStyle(fontSize: kFontSizeTitle)),
+      title: Text(text, style: kTitleStyle),
       trailing: Text("($edition)",
           softWrap: true,
-          style: const TextStyle(fontSize: kFontSizeSmall, color: Colors.grey)),
+          style: kSubtitleStyle),
       onTap: () {
         Navigator.pop(context);
         _gameState.action(SetScenarioCommand(name, false));
@@ -229,7 +229,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     }
 
     return ListTile(
-      title: Text(title, style: const TextStyle(fontSize: kFontSizeTitle)),
+      title: Text(title, style: kTitleStyle),
       onTap: () {
         Navigator.pop(context);
         _gameState.action(SetScenarioCommand(name, false));
@@ -274,7 +274,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                     height: 20,
                   ),
                   Column(children: [
-                    const Text("Set Scenario", style: TextStyle(fontSize: kFontSizeTitle)),
+                    const Text("Set Scenario", style: kTitleStyle),
                     ExpansionTile(
                       key: UniqueKey(),
                       title: Text(
@@ -345,7 +345,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                                         : buildTile(_foundScenarios[index])))
                         : const Text(
                             'No results found',
-                            style: TextStyle(fontSize: kFontSizeHeading),
+                            style: kHeadingStyle,
                           ),
                   ),
                   const SizedBox(
@@ -361,7 +361,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                   child: TextButton(
                       child: const Text(
                         'Close',
-                        style: TextStyle(fontSize: kFontSizeButtonLabel),
+                        style: kButtonLabelStyle,
                       ),
                       onPressed: () {
                         Navigator.pop(context);

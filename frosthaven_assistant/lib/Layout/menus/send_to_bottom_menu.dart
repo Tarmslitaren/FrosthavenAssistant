@@ -69,7 +69,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
                       Navigator.pop(context);
                     },
                     child: const Text("Send to Bottom",
-                        style: TextStyle(fontSize: kFontSizeButtonLabel))),
+                        style: kButtonLabelStyle)),
                 const SizedBox(
                   height: 20,
                 ),
@@ -79,7 +79,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
                       Navigator.pop(context);
                     },
                     child: const Text("Shuffle un-drawn Cards",
-                        style: TextStyle(fontSize: kFontSizeButtonLabel))),
+                        style: kButtonLabelStyle)),
               ]))
         ]);
   }

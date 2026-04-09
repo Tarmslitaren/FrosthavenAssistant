@@ -4,15 +4,15 @@ import '../../Layout/components/modal_background.dart';
 import '../../Resource/ui_utils.dart';
 
 class NumpadMenu extends StatefulWidget {
-  final TextEditingController controller;
-  final int maxLength;
-  final Function(String)? onChange;
-
   const NumpadMenu(
       {super.key,
       required this.controller,
       required this.maxLength,
       this.onChange});
+
+  final TextEditingController controller;
+  final int maxLength;
+  final Function(String)? onChange;
 
   @override
   NumpadMenuState createState() => NumpadMenuState();
@@ -39,10 +39,7 @@ class NumpadMenuState extends State<NumpadMenu> {
         onPressed: () {
           text += nr.toString();
           widget.controller.text = text;
-
-          if (widget.onChange != null) {
-            widget.onChange!(text);
-          }
+          widget.onChange?.call(text);
 
           if (text.length >= widget.maxLength) {
             Navigator.pop(context);

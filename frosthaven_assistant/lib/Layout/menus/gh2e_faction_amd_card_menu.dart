@@ -108,7 +108,7 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                       },
                       child: const Text("Remove card from your deck?",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: kFontSizeButtonLabel))),
+                          style: kButtonLabelStyle)),
                 const SizedBox(
                   height: 20,
                 ),

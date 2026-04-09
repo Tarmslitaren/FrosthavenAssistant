@@ -69,9 +69,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
             padding: const EdgeInsets.only(right: 16),
             child: Text(
               "$amount",
-              style: const TextStyle(
-                fontSize: kFontSizeHeading,
-              ),
+              style: kHeadingStyle,
             )));
 
     return listTile;
@@ -98,7 +96,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
               ),
               Text(
                 "$characterName's loot:",
-                style: const TextStyle(fontSize: kFontSizeTitle),
+                style: kTitleStyle,
               )
             ]),
         createListTile("coin", characterId),
@@ -148,7 +146,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
                       child: TextButton(
                           child: const Text(
                             'Close',
-                            style: TextStyle(fontSize: kFontSizeButtonLabel),
+                            style: kButtonLabelStyle,
                           ),
                           onPressed: () {
                             Navigator.pop(context);

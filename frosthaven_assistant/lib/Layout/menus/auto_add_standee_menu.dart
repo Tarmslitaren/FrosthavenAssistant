@@ -287,7 +287,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             return TextButton(
                 child: const Text(
                   'Close',
-                  style: TextStyle(fontSize: kFontSizeButtonLabel),
+                  style: kButtonLabelStyle,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -318,7 +318,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             return TextButton(
                 child: const Text(
                   'Close',
-                  style: TextStyle(fontSize: kFontSizeButtonLabel),
+                  style: kButtonLabelStyle,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -434,7 +434,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                               child: const Text(
                                 'Close',
                                 style:
-                                    TextStyle(fontSize: kFontSizeButtonLabel),
+                                    kButtonLabelStyle,
                               ),
                               onPressed: () {
                                 Navigator.pop(context);

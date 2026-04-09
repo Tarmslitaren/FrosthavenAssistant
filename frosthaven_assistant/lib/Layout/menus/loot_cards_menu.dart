@@ -192,7 +192,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                         child: TextButton(
                             child: const Text(
                               'Close',
-                              style: TextStyle(fontSize: kFontSizeButtonLabel),
+                              style: kButtonLabelStyle,
                             ),
                             onPressed: () {
                               Navigator.pop(context);

@@ -59,7 +59,7 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
                     },
                     child: const Text("Return card to discard pile",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: kFontSizeButtonLabel))),
+                        style: kButtonLabelStyle)),
                 const SizedBox(
                   height: 20,
                 ),

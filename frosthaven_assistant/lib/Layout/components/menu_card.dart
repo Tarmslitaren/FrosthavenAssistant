@@ -29,7 +29,7 @@ class MenuCard extends StatelessWidget {
             child: TextButton(
               child: const Text(
                 'Close',
-                style: TextStyle(fontSize: kFontSizeButtonLabel),
+                style: kButtonLabelStyle,
               ),
               onPressed: () {
                 Navigator.pop(context);

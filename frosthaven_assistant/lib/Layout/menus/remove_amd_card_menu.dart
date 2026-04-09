@@ -61,7 +61,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                     },
                     child: const Text("Remove card?",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: kFontSizeButtonLabel))),
+                        style: kButtonLabelStyle)),
                 const SizedBox(
                   height: 20,
                 ),
@@ -77,7 +77,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                   },
                   child: const Text("Return top card",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: kFontSizeButtonLabel)),
+                      style: kButtonLabelStyle),
                 ),
                 const SizedBox(
                   height: 20,

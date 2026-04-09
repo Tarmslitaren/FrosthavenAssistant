@@ -76,7 +76,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
         ),
         Text(
           "$type $amount",
-          style: const TextStyle(fontSize: kFontSizeBody),
+          style: kBodyStyle,
         ),
       ],
     );
@@ -136,7 +136,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                         child: Column(children: [
                           const Text(
                             "Loot Card Enhancements",
-                            style: TextStyle(fontSize: kFontSizeTitle),
+                            style: kTitleStyle,
                           ),
                           _createHeader("hide", "1"),
                           Row(
@@ -390,7 +390,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                       child: TextButton(
                           child: const Text(
                             'Close',
-                            style: TextStyle(fontSize: kFontSizeButtonLabel),
+                            style: kButtonLabelStyle,
                           ),
                           onPressed: () {
                             Navigator.pop(context);

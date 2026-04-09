@@ -89,7 +89,7 @@ class SaveMenuState extends State<SaveMenu> {
                           itemCount: _saves.length,
                           itemBuilder: (context, index) => ListTile(
                             title: Text(_saves[index],
-                                style: const TextStyle(fontSize: kFontSizeTitle)),
+                                style: kTitleStyle),
                             onTap: () {
                               openDialog(
                                   context,

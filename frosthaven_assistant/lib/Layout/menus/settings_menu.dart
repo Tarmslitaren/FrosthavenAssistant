@@ -76,7 +76,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                             children: [
                               const Text(
                                 "Settings",
-                                style: TextStyle(fontSize: kFontSizeTitle),
+                                style: kTitleStyle,
                               ),
                               CheckboxListTile(
                                   title: const Text("Dark mode"),
@@ -360,7 +360,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                               ),
                               const Text(
                                 "Style:",
-                                style: TextStyle(fontSize: kFontSizeTitle),
+                                style: kTitleStyle,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -577,7 +577,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                       child: TextButton(
                           child: const Text(
                             'Close',
-                            style: TextStyle(fontSize: kFontSizeButtonLabel),
+                            style: kButtonLabelStyle,
                           ),
                           onPressed: () {
                             Navigator.pop(context);

@@ -46,7 +46,7 @@ class CharacterTile extends StatelessWidget {
           style: TextStyle(
               fontSize: kFontSizeTitle, color: disabled ? Colors.grey : Colors.black)),
       trailing: Text("(${character.edition})",
-          style: const TextStyle(fontSize: kFontSizeSmall, color: Colors.grey)),
+          style: kSubtitleStyle),
       onTap: _handleAddCharacter,
     );
   }

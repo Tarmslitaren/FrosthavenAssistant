@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 // Shared UI constants for the Frosthaven Assistant app.
 
 // Font sizes (static, unscaled — multiply by the scale factor where needed)
@@ -33,3 +35,11 @@ const double kModalBackgroundOpacity = 0.8;
 
 /// Dialog inset padding
 const double kDialogInsetPadding = 18;
+
+// Static TextStyles (no scale factor — use as-is or pass to style: parameter)
+const TextStyle kButtonLabelStyle = TextStyle(fontSize: kFontSizeButtonLabel);
+const TextStyle kTitleStyle = TextStyle(fontSize: kFontSizeTitle);
+const TextStyle kHeadingStyle = TextStyle(fontSize: kFontSizeHeading);
+const TextStyle kBodyStyle = TextStyle(fontSize: kFontSizeBody);
+const TextStyle kSubtitleStyle = TextStyle(fontSize: kFontSizeSmall, color: Colors.grey);
+const TextStyle kBodyBlackStyle = TextStyle(fontSize: kFontSizeBody, color: Colors.black);

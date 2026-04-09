@@ -28,7 +28,7 @@ class AddLootCardMenu extends StatelessWidget {
                         child: Column(children: [
                           const Text(
                             "Add Extra Loot Card",
-                            style: TextStyle(fontSize: kFontSizeTitle),
+                            style: kTitleStyle,
                           ),
                           //TODO: only show what can be added?
                           LootCardListTile(name: "hide", index: 0),
@@ -55,7 +55,7 @@ class AddLootCardMenu extends StatelessWidget {
                       child: TextButton(
                           child: const Text(
                             'Close',
-                            style: TextStyle(fontSize: kFontSizeButtonLabel),
+                            style: kButtonLabelStyle,
                           ),
                           onPressed: () {
                             Navigator.pop(context);
@@ -101,9 +101,7 @@ class LootCardListTileState extends State<LootCardListTile> {
       ),
       trailing: Text(
           "added: ${getIt<GameState>().lootDeck.addedCards[widget.index]}   ",
-          style: const TextStyle(
-            fontSize: kFontSizeTitle,
-          )),
+          style: kTitleStyle),
     );
   }
 }

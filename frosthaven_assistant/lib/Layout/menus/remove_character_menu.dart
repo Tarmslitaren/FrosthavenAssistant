@@ -62,11 +62,11 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
               },
               child: Text(
                 "Load or Save Characters",
-                style: TextStyle(fontSize: kFontSizeTitle),
+                style: kTitleStyle,
               ),
             ),
             ListTile(
-              title: const Text("Remove All", style: TextStyle(fontSize: kFontSizeTitle)),
+              title: const Text("Remove All", style: kTitleStyle),
               onTap: () {
                 //todo: ask if wanna save
                 _gameState.action(RemoveCharacterCommand(currentCharacters));

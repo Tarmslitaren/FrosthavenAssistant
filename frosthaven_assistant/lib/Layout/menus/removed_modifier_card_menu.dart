@@ -80,7 +80,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
               isCharacter ? GameMethods.getCharacterByName(widget.name) : null;
           final screenSize = MediaQuery.of(context).size;
           final monsterDeck = widget.name.isEmpty;
-          final textStyle = TextStyle(fontSize: kFontSizeBody, color: Colors.black);
+          final textStyle = kBodyBlackStyle;
 
           return Container(
               constraints: BoxConstraints(
@@ -130,7 +130,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
                         child: TextButton(
                             child: const Text(
                               'Close',
-                              style: TextStyle(fontSize: kFontSizeButtonLabel),
+                              style: kButtonLabelStyle,
                             ),
                             onPressed: () {
                               Navigator.pop(context);
@@ -140,7 +140,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
                         left: 20,
                         child: Text(
                           name,
-                          style: const TextStyle(fontSize: kFontSizeButtonLabel),
+                          style: kButtonLabelStyle,
                         ))
                   ])));
         });

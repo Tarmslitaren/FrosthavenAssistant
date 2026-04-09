@@ -231,7 +231,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
 
           final imbuement = deck.imbuement.value;
 
-          final textStyle = TextStyle(fontSize: kFontSizeBody, color: Colors.black);
+          final textStyle = kBodyBlackStyle;
 
           final campaign = _gameState.currentCampaign.value;
           final bool isCSCampaign =
@@ -719,7 +719,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                         child: TextButton(
                             child: const Text(
                               'Close',
-                              style: TextStyle(fontSize: kFontSizeButtonLabel),
+                              style: kButtonLabelStyle,
                             ),
                             onPressed: () {
                               Navigator.pop(context);
@@ -729,7 +729,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                         left: 20,
                         child: Text(
                           name,
-                          style: const TextStyle(fontSize: kFontSizeButtonLabel),
+                          style: kButtonLabelStyle,
                         ))
                   ])));
         });
