@@ -46,7 +46,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                       height: 40,
                       margin: const EdgeInsets.only(left: 10, right: 10),
                       child: Text('Load, Save or Delete Characters.',
-                          style: getTitleTextStyle(1))),
+                          style: getTitleTextStyle(1, forceBlack: true))),
                   const Text(
                     "Add new Save:",
                     style: kHeadingStyle,
@@ -115,8 +115,8 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                                       child: Image.asset(
                                           "assets/images/class-icons/${characterId[index]}.png")),
                                   //should show icon
-                                  title: Text(_saves[index],
-                                      style: kTitleStyle),
+                                  title:
+                                      Text(_saves[index], style: kTitleStyle),
                                   onTap: () {
                                     openDialog(
                                         context,

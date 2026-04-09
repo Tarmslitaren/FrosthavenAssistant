@@ -9,17 +9,22 @@ void openDialogOld(BuildContext context, Widget widget) {
   showDialog(context: context, builder: (BuildContext context) => widget);
 }
 
-TextStyle getTitleTextStyle(double scale) {
+TextStyle getTitleTextStyle(double scale, {bool forceBlack = false}) {
+  //note force black since non modal menus are all white even in dark mode.
   return TextStyle(
       fontSize: kFontSizeTitle * scale,
-      color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black);
+      color: forceBlack || !getIt<Settings>().darkMode.value
+          ? Colors.black
+          : Colors.white);
 }
 
-TextStyle getSmallTextStyle(double scale) {
+TextStyle getSmallTextStyle(double scale, {bool forceBlack = false}) {
+  //note force black since non modal menus are all white even in dark mode.
   return TextStyle(
-    fontSize: kFontSizeSmall * scale,
-    color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black,
-  );
+      fontSize: kFontSizeSmall * scale,
+      color: forceBlack || !getIt<Settings>().darkMode.value
+          ? Colors.black
+          : Colors.white);
 }
 
 TextStyle getButtonTextStyle(double scale) {
@@ -144,7 +149,8 @@ bool hasGHVersion(String name) {
   return _ghVersionSet.contains(name);
 }
 
-const TextStyle toastTextStyle = TextStyle(fontFamily: "markazi", fontSize: kFontSizeToast);
+const TextStyle toastTextStyle =
+    TextStyle(fontFamily: "markazi", fontSize: kFontSizeToast);
 createToastContent(BuildContext context, String text) {
   return GestureDetector(
     onTap: () {

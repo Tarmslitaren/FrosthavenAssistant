@@ -1590,4 +1590,8 @@ class MutableGameMethods {
   static void clearUnlockedClasses(_StateModifier _) {
     getIt<GameState>()._unlockedClasses = {};
   }
+
+  static void clearUnlockedClass(_StateModifier _, String id) {
+    getIt<GameState>()._unlockedClasses.remove(id);
+  }
 }

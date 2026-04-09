@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/special_unlocks_menu.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/clear_unlocked_classes_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_ally_deck_in_og_gloom_command.dart';
@@ -412,6 +413,11 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().action(
                                           ClearUnlockedClassesCommand());
                                     });
+                                  }),
+                              ListTile(
+                                  title: const Text("Unlock specials"),
+                                  onTap: () {
+                                    openDialog(context, SpecialUnlocksMenu());
                                   }),
                               const Text("Connect devices on local wifi:"),
                               ValueListenableBuilder<ClientState>(
