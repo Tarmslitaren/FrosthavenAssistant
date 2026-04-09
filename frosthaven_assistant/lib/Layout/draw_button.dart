@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../Resource/commands/draw_command.dart';
-import '../Resource/commands/next_round_command.dart';
+import '../Resource/app_constants.dart';
 import '../Resource/enums.dart';
-import '../Resource/game_methods.dart';
+import '../Resource/game_actions.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
 import '../Resource/ui_utils.dart';
@@ -22,20 +21,10 @@ class DrawButtonState extends State<DrawButton> {
   final GameState _gameState = getIt<GameState>();
 
   void onPressed() {
-    if (_gameState.roundState.value == RoundState.chooseInitiative) {
-      if (GameMethods.canDraw()) {
-        _gameState.action(DrawCommand());
-      } else {
-        String text =
-            "Player Initiative numbers must be set (tap the character icon or under the initiative marker to the right of it)";
-        if (_gameState.currentList.isEmpty) {
-          text =
-              "Add characters first from the side menu (tap the hamburger icon to open)";
-        }
-        showToast(context, text);
-      }
-    } else {
-      _gameState.action(NextRoundCommand());
+    final result = runDrawOrNextRoundAction(_gameState);
+    final blockedMessage = result.blockedMessage;
+    if (blockedMessage != null) {
+      showToast(context, blockedMessage);
     }
   }
 
@@ -56,7 +45,8 @@ class DrawButtonState extends State<DrawButton> {
             blurRadius: 1 * scaling,
           );
 
-          return RepaintBoundary(child:Stack(alignment: Alignment.centerLeft, children: [
+          return RepaintBoundary(
+              child: Stack(alignment: Alignment.centerLeft, children: [
             ValueListenableBuilder<int>(
               valueListenable: _gameState.round,
               builder: (context, value, child) {
@@ -69,7 +59,7 @@ class DrawButtonState extends State<DrawButton> {
                     left: 45 * scaling,
                     child: Text(text,
                         style: TextStyle(
-                          fontSize: 14 * scaling,
+                          fontSize: kFontSizeSmall * scaling,
                           color: Colors.white,
                           shadows: [shadow],
                         )));
@@ -99,7 +89,7 @@ class DrawButtonState extends State<DrawButton> {
                               : " Next Round",
                           style: TextStyle(
                             height: 0.8,
-                            fontSize: 16 * scaling,
+                            fontSize: kFontSizeBody * scaling,
                             color: Colors.white,
                             shadows: [shadow],
                           ),

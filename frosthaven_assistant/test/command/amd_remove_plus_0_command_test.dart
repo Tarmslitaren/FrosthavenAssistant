@@ -22,7 +22,7 @@ void main() {
       // Arrange
       final modifierDeck = getIt<GameState>().modifierDeck;
       final initialCount =
-          modifierDeck.drawPile.getList().where((c) => c.gfx == 'plus0').length;
+          modifierDeck.drawPileContents.toList().where((c) => c.gfx == 'plus0').length;
       final command = AmdRemovePlus0Command("", true);
 
       // Act
@@ -30,7 +30,7 @@ void main() {
 
       // Assert
       final finalCount =
-          modifierDeck.drawPile.getList().where((c) => c.gfx == 'plus0').length;
+          modifierDeck.drawPileContents.toList().where((c) => c.gfx == 'plus0').length;
       expect(finalCount, initialCount - 1);
     });
 
@@ -38,7 +38,7 @@ void main() {
       // Arrange
       final modifierDeck = getIt<GameState>().modifierDeck;
       final initialCount =
-          modifierDeck.drawPile.getList().where((c) => c.gfx == 'plus0').length;
+          modifierDeck.drawPileContents.toList().where((c) => c.gfx == 'plus0').length;
       final command = AmdRemovePlus0Command("", true);
 
       // Act
@@ -46,7 +46,7 @@ void main() {
 
       // Assert
       final countAfterRemove =
-          modifierDeck.drawPile.getList().where((c) => c.gfx == 'plus0').length;
+          modifierDeck.drawPileContents.toList().where((c) => c.gfx == 'plus0').length;
       expect(countAfterRemove, initialCount - 1);
 
       // Act: Add the card back
@@ -54,7 +54,7 @@ void main() {
 
       // Assert
       final countAfterAdd =
-          modifierDeck.drawPile.getList().where((c) => c.gfx == 'plus0').length;
+          modifierDeck.drawPileContents.toList().where((c) => c.gfx == 'plus0').length;
       expect(countAfterAdd, initialCount);
     });
 
@@ -62,7 +62,7 @@ void main() {
       // Arrange
       final modifierDeck = getIt<GameState>().modifierDeckAllies;
       final initialCount =
-          modifierDeck.drawPile.getList().where((c) => c.gfx == 'plus0').length;
+          modifierDeck.drawPileContents.toList().where((c) => c.gfx == 'plus0').length;
       final command = AmdRemovePlus0Command("allies", true);
 
       // Act
@@ -70,7 +70,7 @@ void main() {
 
       // Assert
       final finalCount =
-          modifierDeck.drawPile.getList().where((c) => c.gfx == 'plus0').length;
+          modifierDeck.drawPileContents.toList().where((c) => c.gfx == 'plus0').length;
       expect(finalCount, initialCount - 1);
     });
 

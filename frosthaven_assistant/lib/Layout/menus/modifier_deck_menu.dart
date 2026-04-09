@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/perks_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/removed_modifier_card_menu.dart';
@@ -52,7 +53,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
 
   bool isRevealed(ModifierCard item) {
     ModifierDeck deck = GameMethods.getModifierDeck(widget.name, _gameState);
-    var drawPile = deck.drawPile.getList().reversed.toList();
+    var drawPile = deck.drawPileContents.reversed.toList();
     for (int i = 0; i < deck.revealedCount.value; i++) {
       if (item == drawPile[i]) {
         return true;
@@ -189,9 +190,9 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
           String name = widget.name;
           ModifierDeck deck =
               GameMethods.getModifierDeck(widget.name, _gameState);
-          final drawPile = deck.drawPile.getList().reversed.toList();
-          final discardPile = deck.discardPile.getList();
-          final removedPile = deck.removedPile.getList();
+          final drawPile = deck.drawPileContents.reversed.toList();
+          final discardPile = deck.discardPileContents.toList();
+          final removedPile = deck.removedPileContents.toList();
 
           bool hasDiviner = false;
           for (final item in _gameState.currentList) {
@@ -230,7 +231,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
 
           final imbuement = deck.imbuement.value;
 
-          final textStyle = TextStyle(fontSize: 16, color: Colors.black);
+          final textStyle = kBodyBlackStyle;
 
           final campaign = _gameState.currentCampaign.value;
           final bool isCSCampaign =
@@ -711,14 +712,14 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                       ),
                     ]),
                     Positioned(
-                        width: 100,
-                        height: 40,
+                        width: kCloseButtonWidth,
+                        height: kButtonSize,
                         right: 0,
                         bottom: 0,
                         child: TextButton(
                             child: const Text(
                               'Close',
-                              style: TextStyle(fontSize: 20),
+                              style: kButtonLabelStyle,
                             ),
                             onPressed: () {
                               Navigator.pop(context);
@@ -728,7 +729,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                         left: 20,
                         child: Text(
                           name,
-                          style: const TextStyle(fontSize: 20),
+                          style: kButtonLabelStyle,
                         ))
                   ])));
         });

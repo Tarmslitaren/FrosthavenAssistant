@@ -22,14 +22,14 @@ void main() {
       final command = AMDImbue2Command();
       final monsterDeck = getIt<GameState>().modifierDeck;
       expect(monsterDeck.imbuement.value, 0);
-      final initialCardCount = monsterDeck.drawPile.size();
+      final initialCardCount = monsterDeck.drawPileSize;
 
       // Act
       command.execute();
 
       // Assert
       expect(monsterDeck.imbuement.value, 2);
-      expect(monsterDeck.drawPile.size(), 24);
+      expect(monsterDeck.drawPileSize, 24);
       //todo: check actual cards
       checkSaveState();
     });
@@ -41,14 +41,14 @@ void main() {
       final command = AMDImbue2Command();
       final monsterDeck = getIt<GameState>().modifierDeck;
       expect(monsterDeck.imbuement.value, 1);
-      final initialCardCount = monsterDeck.drawPile.size();
+      final initialCardCount = monsterDeck.drawPileSize;
 
       // Act
       command.execute();
 
       // Assert
       expect(monsterDeck.imbuement.value, 2);
-      expect(monsterDeck.drawPile.size(), 24);
+      expect(monsterDeck.drawPileSize, 24);
       //todo: check actual cards
       checkSaveState();
     });

@@ -17,7 +17,8 @@ class SectionButton extends StatelessWidget {
     return ValueListenableBuilder<int>(
         valueListenable: getIt<GameState>().commandIndex,
         builder: (context, value, child) {
-          return RepaintBoundary(child:OutlinedButton(
+          return RepaintBoundary(
+              child: OutlinedButton(
             style: OutlinedButton.styleFrom(
               padding: EdgeInsets.zero,
               foregroundColor: Colors.black,
@@ -33,7 +34,7 @@ class SectionButton extends StatelessWidget {
                 : null,
             child: Text(
               data.split(" ")[0],
-              style: getTitleTextStyle(scale * 0.8),
+              style: getTitleTextStyle(scale * 0.8, forceBlack: true),
               maxLines: 1,
             ),
           ));

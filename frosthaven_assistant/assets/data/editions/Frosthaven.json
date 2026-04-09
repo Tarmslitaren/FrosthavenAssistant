@@ -6910,13 +6910,15 @@
           "type": "Timer",
           "list": [4],
           "startOfRound": true,
-          "note": "Read section 27.2"
+          "note": "Read section 27.2",
+          "name": "spawn 1"
         },
         {
           "type": "Timer",
           "list": [7],
           "startOfRound": true,
-          "note": "Read section 44.2"
+          "note": "Read section 44.2",
+          "name": "spawn 2"
         },
         {
           "type": "Timer",
@@ -6928,7 +6930,8 @@
           "type": "Timer",
           "list": [12],
           "startOfRound": true,
-          "note": "Read section 39.1"
+          "note": "Read section 39.1",
+          "name": "spawn 3"
         },
         {
           "type": "Timer",
@@ -7216,7 +7219,8 @@
           "type": "Timer",
           "list": [7],
           "startOfRound": true,
-          "note": "Read section 131.4"
+          "note": "Read section 131.4",
+          "name" : "spawn 1"
         }
       ]
     },
@@ -9244,7 +9248,8 @@
           "type": "Timer",
           "startOfRound": true,
           "list": [8],
-          "note": "Read section 43.1."
+          "note": "Read section 43.1.",
+          "name": "spawn 1"
         }],
       "sections": {
         "#84.1(1) To Bury the Dead (95)": {
@@ -10131,7 +10136,8 @@
           "type": "Timer",
           "startOfRound": true,
           "list": [8],
-          "note": "Read section 132.4."
+          "note": "Read section 132.4.",
+          "name": "spawn 1"
         },
         {
           "type": "Timer",
@@ -10178,13 +10184,15 @@
           "type": "Timer",
           "startOfRound": true,
           "list": [5],
-          "note": "Read section 173.2."
+          "note": "Read section 173.2.",
+          "name" : "spawn 1"
         },
         {
           "type": "Timer",
           "startOfRound": true,
           "list": [8],
-          "note": "Read section 87.1."
+          "note": "Read section 87.1.",
+          "name" : "spawn 2"
         }
       ]
     },
@@ -10195,25 +10203,29 @@
           "type": "Timer",
           "startOfRound": true,
           "list": [3],
-          "note": "Read section 120.2."
+          "note": "Read section 120.2.",
+          "name" : "spawn 1"
         },
         {
           "type": "Timer",
           "startOfRound": true,
           "list": [5],
-          "note": "Read section 181.5"
+          "note": "Read section 181.5",
+          "name" : "spawn 2"
         },
         {
           "type": "Timer",
           "startOfRound": true,
           "list": [7],
-          "note": "Read section 185.1"
+          "note": "Read section 185.1",
+          "name" : "spawn 3"
         },
         {
           "type": "Timer",
           "startOfRound": true,
           "list": [8],
-          "note": "Read section 194.2"
+          "note": "Read section 194.2",
+          "name" : "spawn 4"
         }
       ],
       "sections": {

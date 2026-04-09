@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Layout/menus/condition_button.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
@@ -15,6 +16,7 @@ import '../../Resource/commands/change_stat_commands/change_empower_command.dart
 import '../../Resource/commands/change_stat_commands/change_enfeeble_command.dart';
 import '../../Resource/commands/change_stat_commands/change_health_command.dart';
 import '../../Resource/commands/ice_wraith_change_form_command.dart';
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/commands/remove_condition_command.dart';
 import '../../Resource/commands/set_as_summon_command.dart';
 import '../../Resource/enums.dart';
@@ -92,13 +94,6 @@ class StatusMenuState extends State<StatusMenu> {
     super.initState();
   }
 
-  void activateCondition(Condition condition, FigureState figure) {
-    List<Condition> newList = [];
-    newList.addAll(figure.conditions.value);
-    newList.add(condition);
-    figure.conditions.value = newList;
-  }
-
   Widget buildStackableConditionButtons(
       ValueListenable<int> notifier,
       Condition stackableCondition,
@@ -142,7 +137,7 @@ class StatusMenuState extends State<StatusMenu> {
                       style: TextStyle(
                           color: Colors.white,
                           height: 0.5,
-                          fontSize: 16 * scale,
+                          fontSize: kFontSizeBody * scale,
                           shadows: [
                             Shadow(
                               offset: Offset(1 * scale, 1 * scale),
@@ -325,18 +320,8 @@ class StatusMenuState extends State<StatusMenu> {
     final bool isMonster = widget.monsterId != null;
     final bool isCharacter = widget.characterId != null;
     return Wrap(children: [
-      Container(
+      ModalBackground(
           width: 340 * scale,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.8), BlendMode.dstATop),
-              image: AssetImage(getIt<Settings>().darkMode.value
-                  ? 'assets/images/bg/dark_bg.png'
-                  : 'assets/images/bg/white_bg.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             SizedBox(
                 height: 28 * scale,
@@ -406,7 +391,7 @@ class StatusMenuState extends State<StatusMenu> {
                             },
                             child: Text("                     Switch Form",
                                 style: TextStyle(
-                                  fontSize: 14 * scale,
+                                  fontSize: kFontSizeSmall * scale,
                                   color: Colors.blue,
                                 )))
                     ])),
@@ -744,7 +729,7 @@ class StatusMenuState extends State<StatusMenu> {
                             if (!isObjective)
                               Text(figure.level.value.toString(),
                                   style: TextStyle(
-                                      fontSize: 14 * scale,
+                                      fontSize: kFontSizeSmall * scale,
                                       color: Colors.white,
                                       shadows: [
                                         Shadow(

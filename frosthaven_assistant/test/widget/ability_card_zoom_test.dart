@@ -20,7 +20,7 @@ void main() {
       final monster = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Monster) as Monster;
-      final card = getIt<GameState>().currentAbilityDecks.first.drawPile.peek;
+      final card = getIt<GameState>().currentAbilityDecks.first.drawPileTop;
 
       FlutterError.onError = ignoreOverflowErrors;
       // Act
@@ -70,7 +70,7 @@ void main() {
       final monster = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Monster) as Monster;
-      final card = getIt<GameState>().currentAbilityDecks.first.drawPile.peek;
+      final card = getIt<GameState>().currentAbilityDecks.first.drawPileTop;
 
       FlutterError.onError = ignoreOverflowErrors;
       // Act

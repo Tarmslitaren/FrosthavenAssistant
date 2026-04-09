@@ -31,7 +31,7 @@ void main() {
 
       // Assert
       expect(monsterDeck.imbuement.value, 0);
-      expect(monsterDeck.drawPile.size(), 20);
+      expect(monsterDeck.drawPileSize, 20);
       checkSaveState();
     });
 
@@ -49,7 +49,7 @@ void main() {
 
       // Assert
       expect(monsterDeck.imbuement.value, 0);
-      expect(monsterDeck.drawPile.size(), 20);
+      expect(monsterDeck.drawPileSize, 20);
       checkSaveState();
     });
 
@@ -68,7 +68,7 @@ void main() {
 
       // Assert
       expect(monsterDeck.imbuement.value, 0);
-      expect(monsterDeck.drawPile.size(), 20);
+      expect(monsterDeck.drawPileSize, 20);
       checkSaveState();
     });
 
@@ -88,7 +88,7 @@ void main() {
 
       // Assert
       expect(monsterDeck.imbuement.value, 0);
-      expect(monsterDeck.drawPile.size(), 21);
+      expect(monsterDeck.drawPileSize, 21);
       checkSaveState();
     });
 

@@ -6,10 +6,15 @@ import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:json_diff/json_diff.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 late final GameState gameState;
 Future<void> setUpGame() async {
   TestWidgetsFlutterBinding.ensureInitialized();
+
+  // Provide an in-memory SharedPreferences stub so that Settings.saveToDisk()
+  // and GameSaveState.saveToDisk() don't throw MissingPluginException.
+  SharedPreferences.setMockInitialValues({});
 
   setupGetIt();
   gameState = getIt<GameState>();

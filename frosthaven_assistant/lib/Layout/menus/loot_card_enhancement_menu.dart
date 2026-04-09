@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/enhance_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
@@ -43,7 +44,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                 borderRadius: BorderRadius.circular(1), color: Colors.white),
             child: Text(
               card.enhanced.toString(),
-              style: const TextStyle(color: Colors.black, fontSize: 18),
+              style: const TextStyle(color: Colors.black, fontSize: kFontSizeTitle),
             ),
           ),
           InkWell(
@@ -75,7 +76,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
         ),
         Text(
           "$type $amount",
-          style: const TextStyle(fontSize: 16),
+          style: kBodyStyle,
         ),
       ],
     );
@@ -135,7 +136,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                         child: Column(children: [
                           const Text(
                             "Loot Card Enhancements",
-                            style: TextStyle(fontSize: 18),
+                            style: kTitleStyle,
                           ),
                           _createHeader("hide", "1"),
                           Row(
@@ -377,19 +378,19 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                         ]),
                       ),
                       const SizedBox(
-                        height: 34,
+                        height: kMenuCloseButtonSpacing,
                       ),
                     ],
                   ),
                   Positioned(
-                      width: 100,
-                      height: 40,
+                      width: kCloseButtonWidth,
+                      height: kButtonSize,
                       right: 0,
                       bottom: 0,
                       child: TextButton(
                           child: const Text(
                             'Close',
-                            style: TextStyle(fontSize: 20),
+                            style: kButtonLabelStyle,
                           ),
                           onPressed: () {
                             Navigator.pop(context);

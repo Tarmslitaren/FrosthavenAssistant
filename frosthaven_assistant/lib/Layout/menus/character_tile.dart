@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Model/character_class.dart';
+import '../../Resource/app_constants.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
@@ -30,9 +31,9 @@ class CharacterTile extends StatelessWidget {
     return ListTile(
       leading: Image.asset(
         "assets/images/class-icons/${character.name}.png",
-        height: 40,
-        width: 40,
-        cacheHeight: 80,
+        height: kButtonSize,
+        width: kButtonSize,
+        cacheHeight: kCharacterIconCacheHeight,
         fit: BoxFit.contain,
         color: character.hidden && !characterUnlocked ||
                 GameMethods.isObjectiveOrEscort(character)
@@ -43,9 +44,9 @@ class CharacterTile extends StatelessWidget {
       title: Text(
           character.hidden && !characterUnlocked ? "???" : character.name,
           style: TextStyle(
-              fontSize: 18, color: disabled ? Colors.grey : Colors.black)),
+              fontSize: kFontSizeTitle, color: disabled ? Colors.grey : Colors.black)),
       trailing: Text("(${character.edition})",
-          style: const TextStyle(fontSize: 14, color: Colors.grey)),
+          style: kSubtitleStyle),
       onTap: _handleAddCharacter,
     );
   }

@@ -289,8 +289,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                     currentCharacterName = currentCharacter.characterClass.name;
                   }
 
-                  final discardPileSize = deck.discardPile.size();
-                  final discardPileList = deck.discardPile.getList();
+                  final discardPileSize = deck.discardPileSize;
+                  final discardPileList = deck.discardPileContents.toList();
                   final widgetKey = discardPileSize.toString();
 
                   final characterIconWidget = Positioned(
@@ -315,10 +315,10 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                             });
                           },
                           child: Stack(children: [
-                            deck.drawPile.isNotEmpty
+                            deck.drawPileIsNotEmpty
                                 ? Stack(children: [
                                     ModifierCardWidget(
-                                        card: deck.drawPile.peek,
+                                        card: deck.drawPileTop,
                                         name: deck.name,
                                         revealed: isAnimating ||
                                             deck.revealedCount.value > 0),
@@ -419,15 +419,15 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                     )),
                                 Key(widgetKey))
                             : Container(),
-                        deck.discardPile.isNotEmpty
+                        deck.discardPileIsNotEmpty
                             ? buildDrawAnimation(
                                 ModifierCardWidget(
                                   name: deck.name,
                                   key: Key(widgetKey),
-                                  card: deck.discardPile.peek,
+                                  card: deck.discardPileTop,
                                   revealed: true,
                                 ),
-                                Key((-deck.discardPile.size()).toString()))
+                                Key((-deck.discardPileSize).toString()))
                             : SizedBox(
                                 width: 66.6666 * userScalingBars,
                                 height: 39 * userScalingBars,
@@ -439,12 +439,12 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                     focusColor: const Color(0x44000000),
                                     onLongPress: () {
                                       //show zoomed in card
-                                      if (deck.discardPile.isNotEmpty) {
+                                      if (deck.discardPileIsNotEmpty) {
                                         openDialog(
                                             context,
                                             ModifierCardZoom(
                                                 name: widget.name,
-                                                card: deck.discardPile.peek));
+                                                card: deck.discardPileTop));
                                       }
                                     },
                                     onTap: () {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../../Resource/commands/add_loot_card_command.dart';
@@ -27,7 +28,7 @@ class AddLootCardMenu extends StatelessWidget {
                         child: Column(children: [
                           const Text(
                             "Add Extra Loot Card",
-                            style: TextStyle(fontSize: 18),
+                            style: kTitleStyle,
                           ),
                           //TODO: only show what can be added?
                           LootCardListTile(name: "hide", index: 0),
@@ -42,19 +43,19 @@ class AddLootCardMenu extends StatelessWidget {
                         ]),
                       ),
                       const SizedBox(
-                        height: 34,
+                        height: kMenuCloseButtonSpacing,
                       ),
                     ],
                   ),
                   Positioned(
-                      width: 100,
-                      height: 40,
+                      width: kCloseButtonWidth,
+                      height: kButtonSize,
                       right: 0,
                       bottom: 0,
                       child: TextButton(
                           child: const Text(
                             'Close',
-                            style: TextStyle(fontSize: 20),
+                            style: kButtonLabelStyle,
                           ),
                           onPressed: () {
                             Navigator.pop(context);
@@ -100,9 +101,7 @@ class LootCardListTileState extends State<LootCardListTile> {
       ),
       trailing: Text(
           "added: ${getIt<GameState>().lootDeck.addedCards[widget.index]}   ",
-          style: const TextStyle(
-            fontSize: 18,
-          )),
+          style: kTitleStyle),
     );
   }
 }

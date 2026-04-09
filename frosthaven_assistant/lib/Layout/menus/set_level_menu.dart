@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/counter_button.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_max_health_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_auto_level_adjust_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_difficulty_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_solo_command.dart';
 
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/commands/set_level_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
@@ -66,7 +68,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                         child: Text(
                           text,
                           style: TextStyle(
-                              fontSize: 18 * scale,
+                              fontSize: kFontSizeTitle * scale,
                               shadows: [
                                 Shadow(
                                     offset: Offset(1 * scale, 1 * scale),
@@ -104,7 +106,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     var textStyleLevelWidget = TextStyle(
         color: Colors.white,
         overflow: TextOverflow.fade,
-        fontSize: 18 * scale,
+        fontSize: kFontSizeTitle * scale,
         shadows: [shadow]);
     double height = 20 * scale;
     if (gfx.contains("level")) {
@@ -121,7 +123,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withValues(alpha: 0.3),
                   spreadRadius: 1,
                   blurRadius: 3.0,
                 ),
@@ -159,7 +161,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   child: Text(
                     text,
                     style: TextStyle(
-                        fontSize: 18 * scale,
+                        fontSize: kFontSizeTitle * scale,
                         shadows: [
                           Shadow(
                               offset: Offset(1 * scale, 1 * scale),
@@ -231,19 +233,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
 
     double scale = getModalMenuScale(context);
 
-    return Container(
+    return ModalBackground(
         width: 270 * scale,
         height: showLegend ? 400 * scale : 287 * scale,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(darkMode
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,

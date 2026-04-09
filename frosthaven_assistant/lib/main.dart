@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/global_hotkeys.dart';
 import 'package:frosthaven_assistant/Layout/theme.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -90,6 +91,12 @@ class MyApp extends StatelessWidget {
       showPerformanceOverlay: false,
       title: title,
       theme: ThemeSwitcher.of(context).themeData,
+      builder: (context, child) {
+        if (child == null) {
+          return const SizedBox.shrink();
+        }
+        return GlobalHotkeys(child: child);
+      },
       home: ShowFPS(
           alignment: Alignment.topRight,
           visible: !kReleaseMode && false,

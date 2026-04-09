@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card_widget.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
@@ -41,7 +42,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
     setState(() {
       revealedList = [];
       var drawPile =
-          widget.monsterAbilityState.drawPile.getList().reversed.toList();
+          widget.monsterAbilityState.drawPileContents.reversed.toList();
       for (int i = 0; i < revealed; i++) {
         revealedList.add(drawPile[i]);
       }
@@ -150,8 +151,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
           var drawPile =
-              widget.monsterAbilityState.drawPile.getList().reversed.toList();
-          var discardPile = widget.monsterAbilityState.discardPile.getList();
+              widget.monsterAbilityState.drawPileContents.reversed.toList();
+          var discardPile = widget.monsterAbilityState.discardPileContents.toList();
 
           final screenSize = MediaQuery.of(context).size;
 
@@ -256,14 +257,14 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                       )
                     ]),
                     Positioned(
-                        width: 100,
-                        height: 40,
+                        width: kCloseButtonWidth,
+                        height: kButtonSize,
                         right: 0,
                         bottom: 0,
                         child: TextButton(
                             child: const Text(
                               'Close',
-                              style: TextStyle(fontSize: 20),
+                              style: kButtonLabelStyle,
                             ),
                             onPressed: () {
                               Navigator.pop(context);

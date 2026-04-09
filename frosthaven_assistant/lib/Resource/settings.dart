@@ -41,6 +41,7 @@ class Settings {
   final showBattleGoalReminder = ValueNotifier<bool>(true);
   final fhHazTerrainCalcInOGGloom = ValueNotifier<bool>(true);
   final showCharacterAMD = ValueNotifier<bool>(true);
+  final enableHeathWheel = ValueNotifier<bool>(true);
 
   //used for both initiative and search menus
   final softNumpadInput = ValueNotifier<bool>(false);
@@ -311,6 +312,10 @@ class Settings {
         showCharacterAMD.value = data["showCharacterAMD"];
       }
 
+      if (data["enableHeathWheel"] != null) {
+        enableHeathWheel.value = data["enableHeathWheel"];
+      }
+
       if (data["saves"] != null) {
         Map<String, dynamic> map = data["saves"];
         for (var key in map.keys) {
@@ -361,6 +366,7 @@ class Settings {
         '"showBattleGoalReminder": ${showBattleGoalReminder.value}, '
         '"fhHazTerrainCalcInOGGloom": ${fhHazTerrainCalcInOGGloom.value}, '
         '"showCharacterAMD": ${showCharacterAMD.value}, '
+        '"enableHeathWheel": ${enableHeathWheel.value}, '
         '"saves": ${jsonEncode(saves.value)}, '
         '"characterSaves": ${jsonEncode(characterSaves.value)}, '
         '"connectClientOnStartup": $connectClientOnStartup, '

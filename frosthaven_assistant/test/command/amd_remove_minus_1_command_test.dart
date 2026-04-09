@@ -9,7 +9,7 @@ import 'test_helpers.dart';
 
 int getMinusOnes(ModifierDeck deck) {
   int count = 0;
-  for (var item in deck.drawPile.getList()) {
+  for (var item in deck.drawPileContents.toList()) {
     if (item.gfx == "minus1") {
       count++;
     }

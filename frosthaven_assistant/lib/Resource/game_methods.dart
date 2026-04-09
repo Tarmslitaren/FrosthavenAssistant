@@ -119,8 +119,8 @@ class GameMethods {
       final GameState gameState = getIt<GameState>();
       for (var deck in gameState.currentAbilityDecks) {
         if (deck.name == item.type.deck) {
-          if (deck.discardPile.isNotEmpty) {
-            return deck.discardPile.peek.initiative;
+          if (deck.discardPileIsNotEmpty) {
+            return deck.discardPileTop.initiative;
           }
         }
       }
@@ -544,8 +544,8 @@ class GameMethods {
   static bool hasLootDeck() {
     GameState gameState = getIt<GameState>();
     bool hasLootDeck = !getIt<Settings>().hideLootDeck.value;
-    if (gameState.lootDeck.discardPile.isEmpty &&
-        gameState.lootDeck.drawPile.isEmpty) {
+    if (gameState.lootDeck.discardPileIsEmpty &&
+        gameState.lootDeck.drawPileIsEmpty) {
       hasLootDeck = false;
     }
     return hasLootDeck;
@@ -615,9 +615,9 @@ class GameMethods {
     //check ability card
     var deck = GameMethods.getDeck(monster.type.deck);
     if (deck != null &&
-        deck.discardPile.isNotEmpty &&
+        deck.discardPileIsNotEmpty &&
         monster.turnState.value != TurnsState.notDone) {
-      if (deck.discardPile.peek.lines
+      if (deck.discardPileTop.lines
               .firstWhereOrNull((item) => item.contains(condition)) !=
           null) {
         return true;

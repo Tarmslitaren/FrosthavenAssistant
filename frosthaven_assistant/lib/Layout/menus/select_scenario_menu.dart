@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 
@@ -210,10 +211,10 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         fit: BoxFit.scaleDown,
         image: AssetImage("assets/images/class-icons/$characterName.png"),
       ),
-      title: Text(text, style: const TextStyle(fontSize: 18)),
+      title: Text(text, style: kTitleStyle),
       trailing: Text("($edition)",
           softWrap: true,
-          style: const TextStyle(fontSize: 14, color: Colors.grey)),
+          style: kSubtitleStyle),
       onTap: () {
         Navigator.pop(context);
         _gameState.action(SetScenarioCommand(name, false));
@@ -228,7 +229,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     }
 
     return ListTile(
-      title: Text(title, style: const TextStyle(fontSize: 18)),
+      title: Text(title, style: kTitleStyle),
       onTap: () {
         Navigator.pop(context);
         _gameState.action(SetScenarioCommand(name, false));
@@ -273,7 +274,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                     height: 20,
                   ),
                   Column(children: [
-                    const Text("Set Scenario", style: TextStyle(fontSize: 18)),
+                    const Text("Set Scenario", style: kTitleStyle),
                     ExpansionTile(
                       key: UniqueKey(),
                       title: Text(
@@ -344,23 +345,23 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                                         : buildTile(_foundScenarios[index])))
                         : const Text(
                             'No results found',
-                            style: TextStyle(fontSize: 24),
+                            style: kHeadingStyle,
                           ),
                   ),
                   const SizedBox(
-                    height: 34,
+                    height: kMenuCloseButtonSpacing,
                   ),
                 ],
               ),
               Positioned(
-                  width: 100,
-                  height: 40,
+                  width: kCloseButtonWidth,
+                  height: kButtonSize,
                   right: 0,
                   bottom: 0,
                   child: TextButton(
                       child: const Text(
                         'Close',
-                        style: TextStyle(fontSize: 20),
+                        style: kButtonLabelStyle,
                       ),
                       onPressed: () {
                         Navigator.pop(context);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../../Resource/enums.dart';
@@ -99,7 +100,7 @@ class InitiativeWidget extends StatelessWidget {
                             ? 'GermaniaOne'
                             : 'Pirata',
                         color: Colors.white,
-                        fontSize: 24 * scale,
+                        fontSize: kFontSizeHeading * scale,
                         shadows: [shadow]),
                     decoration: const InputDecoration(
                       isDense: true,
@@ -142,7 +143,7 @@ class InitiativeWidget extends StatelessWidget {
                             ? 'GermaniaOne'
                             : 'Pirata',
                         color: Colors.white,
-                        fontSize: 24 * scale,
+                        fontSize: kFontSizeHeading * scale,
                         shadows: [shadow]),
                   ));
             }

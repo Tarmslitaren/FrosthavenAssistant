@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon_model.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_data.dart';
@@ -83,7 +85,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
             },
             icon: Image.asset(
               'assets/images/summon/$summonGfx.png',
-              cacheHeight: 75,
+              cacheHeight: kMonsterImageCacheHeight,
             ),
           )),
     );
@@ -108,7 +110,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
             child: Text(
               text,
               style: TextStyle(
-                  fontSize: 18 * scale,
+                  fontSize: kFontSizeTitle * scale,
                   color: isCurrentlySelected
                       ? darkMode
                           ? Colors.white
@@ -129,19 +131,9 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   @override
   Widget build(BuildContext context) {
     double scale = getModalMenuScale(context);
-    return Container(
+    return ModalBackground(
       width: 336 * scale,
       height: 452 * scale,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.8), BlendMode.dstATop),
-          image: AssetImage(getIt<Settings>().darkMode.value
-              ? 'assets/images/bg/dark_bg.png'
-              : 'assets/images/bg/white_bg.png'),
-          fit: BoxFit.cover,
-        ),
-      ),
       child: Column(children: [
         SizedBox(
           height: 20 * scale,
@@ -212,7 +204,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                             if (showNr)
                               Text(chosenNr.toString(),
                                   style: TextStyle(
-                                      fontSize: 18 * scale,
+                                      fontSize: kFontSizeTitle * scale,
                                       color: Colors.white,
                                       shadows: [
                                         Shadow(

@@ -30,7 +30,7 @@ void main() {
       // Act
       command.execute();
 
-      final card = modifierDeck.drawPile.getList().firstWhereOrNull((it) {
+      final card = modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
         return it.gfx == 'minus2';
       });
       // Assert
@@ -45,7 +45,7 @@ void main() {
       // Act
       command.execute();
 
-      final card = modifierDeck.drawPile.getList().firstWhereOrNull((it) {
+      final card = modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
         return it.gfx == 'minus2';
       });
       // Assert
@@ -53,7 +53,7 @@ void main() {
 
       //add back
       AMDRemoveMinus2Command(false).execute();
-      final card2 = modifierDeck.drawPile.getList().firstWhereOrNull((it) {
+      final card2 = modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
         return it.gfx == 'minus2';
       });
       // Assert
@@ -69,7 +69,7 @@ void main() {
       // Act
       command.execute();
 
-      final card = modifierDeck.drawPile.getList().firstWhereOrNull((it) {
+      final card = modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
         return it.gfx == 'minus2';
       });
 

@@ -11,13 +11,9 @@ class AmdRemovePlus0Command extends Command {
   void execute() {
     final deck = GameMethods.getModifierDeck(name, getIt<GameState>());
     if (remove) {
-      if (deck.hasCard("plus0")) {
-        deck.removeCard(stateAccess, "plus0");
-        deck.removedPile.add(ModifierCard(CardType.add, "plus0"));
-      }
+      deck.moveCardToRemovedPile(stateAccess, "plus0");
     } else {
-      deck.addCard(stateAccess, "plus0", CardType.add);
-      deck.removedPile.remove(ModifierCard(CardType.add, "plus0"));
+      deck.restoreCardFromRemovedPile(stateAccess, "plus0", CardType.add);
     }
   }
 

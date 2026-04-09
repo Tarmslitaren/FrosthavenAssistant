@@ -229,8 +229,8 @@ class MutableGameMethods {
 
         //find the deck
         for (var item in gameState.currentAbilityDecks) {
-          if (item.name == a.type.deck && item.discardPile.isNotEmpty) {
-            aInitiative = item.discardPile.peek.initiative;
+          if (item.name == a.type.deck && item.discardPileIsNotEmpty) {
+            aInitiative = item.discardPileTop.initiative;
           }
         }
       }
@@ -245,8 +245,8 @@ class MutableGameMethods {
         }
         //find the deck
         for (var item in gameState.currentAbilityDecks) {
-          if (item.name == b.type.deck && item.discardPile.isNotEmpty) {
-            bInitiative = item.discardPile.peek.initiative;
+          if (item.name == b.type.deck && item.discardPileIsNotEmpty) {
+            bInitiative = item.discardPileTop.initiative;
           }
         }
       }
@@ -267,7 +267,7 @@ class MutableGameMethods {
     });
   }
 
-  static addPerk(_StateModifier s, Character character, int index) {
+  static void addPerk(_StateModifier s, Character character, int index) {
     final deck = character.characterState.modifierDeck;
     final perksFH = character.characterClass.perksFH;
     final useFHPerks =
@@ -324,7 +324,7 @@ class MutableGameMethods {
     }
   }
 
-  static removePerk(_StateModifier s, Character character, int index) {
+  static void removePerk(_StateModifier s, Character character, int index) {
     final deck = character.characterState.modifierDeck;
     final perksFH = character.characterClass.perksFH;
     final useFHPerks =
@@ -479,7 +479,7 @@ class MutableGameMethods {
 
     item.characterState._maxHealth.value = item.characterState.health.value;
     item.characterState._xp.value = 0;
-    item.characterState.conditions.value.clear();
+    item.characterState._conditions.value.clear();
     item.characterState._chill.value = 0;
     item.characterState._plague.value = 0;
     item.characterState.modifierDeck._initDeck();
@@ -645,13 +645,13 @@ class MutableGameMethods {
     }
 
     //hack for banner spear solo special rule
-    if (scenario.contains("Banner Spear: Scouting Ambush")) {
+    if (scenario.contains("Scouting Ambush")) {
       MonsterAbilityState deck = gameState.currentAbilityDecks
           .firstWhere((element) => element.name.contains("Scout"));
-      final drawPileList = deck.drawPile.getList();
+      final drawPileList = deck._drawPile.getList();
       for (int i = 0; i < drawPileList.length; i++) {
         if (drawPileList[i].title == "Rancid Arrow") {
-          deck.drawPile.add(deck.drawPile.removeAt(i));
+          deck._drawPile.add(deck._drawPile.removeAt(i));
           break;
         }
       }
@@ -979,8 +979,8 @@ class MutableGameMethods {
   static void shuffleDecksIfNeeded(_StateModifier _) {
     final GameState gameState = getIt<GameState>();
     for (var deck in gameState.currentAbilityDecks) {
-      if (deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle ||
-          deck.drawPile.isEmpty) {
+      if (deck.discardPileIsNotEmpty && deck.discardPileTop.shuffle ||
+          deck.drawPileIsEmpty) {
         deck._shuffle();
       }
     }
@@ -1398,7 +1398,7 @@ class MutableGameMethods {
   static void removeExpiringConditions(_StateModifier _, FigureState figure) {
     if (getIt<Settings>().expireConditions.value) {
       bool chillRemoved = false;
-      final conditions = figure.conditions.value;
+      final conditions = figure._conditions.value;
       for (int i = conditions.length - 1; i >= 0; i--) {
         Condition item = conditions[i];
         if (GameMethods.canExpire(item)) {
@@ -1433,7 +1433,7 @@ class MutableGameMethods {
 
   static void reapplyConditions(_StateModifier _, FigureState figure) {
     for (var condition in figure.conditionsAddedPreviousTurn) {
-      final conditions = figure.conditions.value;
+      final conditions = figure._conditions.value;
       if (!conditions.contains(condition) || condition == Condition.chill) {
         conditions.add(condition);
         figure._conditionsAddedThisTurn.remove(condition);
@@ -1589,5 +1589,9 @@ class MutableGameMethods {
 
   static void clearUnlockedClasses(_StateModifier _) {
     getIt<GameState>()._unlockedClasses = {};
+  }
+
+  static void clearUnlockedClass(_StateModifier _, String id) {
+    getIt<GameState>()._unlockedClasses.remove(id);
   }
 }

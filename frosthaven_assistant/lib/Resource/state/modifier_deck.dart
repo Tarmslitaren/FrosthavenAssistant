@@ -33,10 +33,21 @@ class ModifierDeck {
   bool _needsShuffle = false;
   bool get needsShuffle => _needsShuffle;
 
-  //TODO: better safety for these getters
-  CardStack<ModifierCard> get drawPile => _drawPile;
-  CardStack<ModifierCard> get discardPile => _discardPile;
-  CardStack<ModifierCard> get removedPile => _removedPile;
+  BuiltList<ModifierCard> get drawPileContents =>
+      BuiltList.of(_drawPile.getList());
+  BuiltList<ModifierCard> get discardPileContents =>
+      BuiltList.of(_discardPile.getList());
+  BuiltList<ModifierCard> get removedPileContents =>
+      BuiltList.of(_removedPile.getList());
+  bool get drawPileIsEmpty => _drawPile.isEmpty;
+  bool get drawPileIsNotEmpty => _drawPile.isNotEmpty;
+  bool get discardPileIsEmpty => _discardPile.isEmpty;
+  bool get discardPileIsNotEmpty => _discardPile.isNotEmpty;
+  int get drawPileSize => _drawPile.size();
+  int get discardPileSize => _discardPile.size();
+  int get removedPileSize => _removedPile.size();
+  ModifierCard get discardPileTop => _discardPile.peek;
+  ModifierCard get drawPileTop => _drawPile.peek;
 
   ValueListenable<int> get cardCount => _cardCount;
   ValueListenable<int> get badOmen => _badOmen;
@@ -112,11 +123,23 @@ class ModifierDeck {
     _removables[id]?.value += value;
   }
 
-  ValueNotifier<int> getRemovable(String id) {
+  ValueListenable<int> getRemovable(String id) {
     if (_removables[id] == null) {
       _removables[id] = ValueNotifier<int>(0);
     }
     return _removables[id]!;
+  }
+
+  void moveCardToRemovedPile(_StateModifier s, String gfx) {
+    if (hasCard(gfx)) {
+      removeCard(s, gfx);
+      _removedPile.add(ModifierCard(CardType.add, gfx));
+    }
+  }
+
+  void restoreCardFromRemovedPile(_StateModifier s, String gfx, CardType type) {
+    addCard(s, gfx, type);
+    _removedPile.removeFirstWhere((card) => card.gfx == gfx);
   }
 
   void setBadOmen(_StateModifier _, int value) {
@@ -177,7 +200,7 @@ class ModifierDeck {
     _drawPile.removeWhere((test) {
       return test.gfx.startsWith("party/");
     });
-    discardPile.removeWhere((test) {
+    _discardPile.removeWhere((test) {
       return test.gfx.startsWith("party/");
     });
     _cardCount.value = _drawPile.size();
@@ -214,13 +237,13 @@ class ModifierDeck {
   }
 
   bool hasHail() {
-    if (discardPile
+    if (_discardPile
             .getList()
             .firstWhereOrNull((item) => item.gfx == "special/hail") !=
         null) {
       return true;
     }
-    if (drawPile
+    if (_drawPile
             .getList()
             .firstWhereOrNull((item) => item.gfx == "special/hail") !=
         null) {
@@ -449,14 +472,14 @@ class ModifierDeck {
   }
 
   void reorderCards(_StateModifier s, int newIndex, int oldIndex) {
-    List<ModifierCard> list = List.of(drawPile.getList());
+    List<ModifierCard> list = List.of(_drawPile.getList());
     var item = list.removeAt(oldIndex);
     list.insert(newIndex, item);
-    drawPile.setList(list);
+    _drawPile.setList(list);
 
     //if rearranging between revealed and unrevealed then un-reveal everything below the unknown moved card.
-    final revertOldIndex = drawPile.size() - oldIndex;
-    final revertNewIndex = drawPile.size() - newIndex;
+    final revertOldIndex = _drawPile.size() - oldIndex;
+    final revertNewIndex = _drawPile.size() - newIndex;
     if (revertOldIndex <= revealedCount.value &&
         revertNewIndex > revealedCount.value) {
       //moving one revealed card to unrevealed area - hide one

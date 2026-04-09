@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_name_command.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/commands/change_stat_commands/change_max_health_command.dart';
 import '../../Resource/commands/set_character_level_command.dart';
 import '../../Resource/game_methods.dart';
@@ -62,7 +64,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
               child: Text(
                 text,
                 style: TextStyle(
-                    fontSize: 18 * scale,
+                    fontSize: kFontSizeTitle * scale,
                     shadows: [
                       Shadow(
                         offset: Offset(1 * scale, 1 * scale),
@@ -93,19 +95,9 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
     bool isObjective =
         GameMethods.isObjectiveOrEscort(widget.character.characterClass);
 
-    return Container(
+    return ModalBackground(
         width: 240 * scale,
         height: 240 * scale,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -3,6 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/special_unlocks_menu.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/clear_unlocked_classes_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_ally_deck_in_og_gloom_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/track_standees_command.dart';
@@ -75,7 +77,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                             children: [
                               const Text(
                                 "Settings",
-                                style: TextStyle(fontSize: 18),
+                                style: kTitleStyle,
                               ),
                               CheckboxListTile(
                                   title: const Text("Dark mode"),
@@ -296,6 +298,17 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),
+                              CheckboxListTile(
+                                  title: const Text(
+                                      "Enable heath wheel: drag left-right to change health"),
+                                  value: settings.enableHeathWheel.value,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      settings.enableHeathWheel.value = value!;
+                                      settings.saveToDisk();
+                                      getIt<GameState>().updateAllUI();
+                                    });
+                                  }),
                               if (!Platform.isIOS)
                                 CheckboxListTile(
                                     title: const Text("Fullscreen"),
@@ -348,7 +361,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                               ),
                               const Text(
                                 "Style:",
-                                style: TextStyle(fontSize: 18),
+                                style: kTitleStyle,
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -400,6 +413,11 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       getIt<GameState>().action(
                                           ClearUnlockedClassesCommand());
                                     });
+                                  }),
+                              ListTile(
+                                  title: const Text("Unlock specials"),
+                                  onTap: () {
+                                    openDialog(context, SpecialUnlocksMenu());
                                   }),
                               const Text("Connect devices on local wifi:"),
                               ValueListenableBuilder<ClientState>(
@@ -553,7 +571,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                             ],
                           )),
                       const SizedBox(
-                        height: 34,
+                        height: kMenuCloseButtonSpacing,
                       ),
                     ],
                   ),
@@ -565,7 +583,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                       child: TextButton(
                           child: const Text(
                             'Close',
-                            style: TextStyle(fontSize: 20),
+                            style: kButtonLabelStyle,
                           ),
                           onPressed: () {
                             Navigator.pop(context);

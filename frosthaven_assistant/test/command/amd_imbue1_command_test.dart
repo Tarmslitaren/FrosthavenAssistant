@@ -22,14 +22,14 @@ void main() {
       final monsterDeck = getIt<GameState>().modifierDeck;
       expect(monsterDeck.imbuement.value, 0);
 
-      expect(monsterDeck.drawPile.size(), 20);
+      expect(monsterDeck.drawPileSize, 20);
 
       // Act
       command.execute();
 
       // Assert
       expect(monsterDeck.imbuement.value, 1);
-      expect(monsterDeck.drawPile.size(), 22);
+      expect(monsterDeck.drawPileSize, 22);
       //todo: check the cards in the deck
       checkSaveState();
     });

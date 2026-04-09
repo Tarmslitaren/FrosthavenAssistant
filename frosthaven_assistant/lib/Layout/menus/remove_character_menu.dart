@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_menu.dart';
 
 import '../../Model/character_class.dart';
@@ -46,60 +48,44 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
       });
     }
 
-    return Container(
-        constraints: const BoxConstraints(maxWidth: 400),
-        child: Card(
-            child: Stack(children: [
-          Column(
-            children: [
-              const SizedBox(
-                height: 10,
+    return MenuCard(
+        maxWidth: 400,
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            TextButton(
+              onPressed: () {
+                //open remove card menu
+                openDialog(context, SaveCharacterMenu());
+              },
+              child: Text(
+                "Load or Save Characters",
+                style: kTitleStyle,
               ),
-              TextButton(
-                onPressed: () {
-                  //open remove card menu
-                  openDialog(context, SaveCharacterMenu());
-                },
-                child: Text(
-                  "Load or Save Characters",
-                  style: TextStyle(fontSize: 18),
-                ),
-              ),
-              ListTile(
-                title: const Text("Remove All", style: TextStyle(fontSize: 18)),
-                onTap: () {
-                  //todo: ask if wanna save
-                  _gameState.action(RemoveCharacterCommand(currentCharacters));
-                  Navigator.pop(context);
-                },
-              ),
-              Expanded(
-                child: ListView.builder(
-                    itemCount: currentCharacters.length,
-                    itemBuilder: (context, index) {
-                      return CharacterTile(
-                          character: currentCharacters[index].characterClass,
-                          onSelect: removeCharacter);
-                    }),
-              ),
-              const SizedBox(
-                height: 34,
-              ),
-            ],
-          ),
-          Positioned(
-              width: 100,
-              height: 40,
-              right: 0,
-              bottom: 0,
-              child: TextButton(
-                  child: const Text(
-                    'Close',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }))
-        ])));
+            ),
+            ListTile(
+              title: const Text("Remove All", style: kTitleStyle),
+              onTap: () {
+                //todo: ask if wanna save
+                _gameState.action(RemoveCharacterCommand(currentCharacters));
+                Navigator.pop(context);
+              },
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: currentCharacters.length,
+                  itemBuilder: (context, index) {
+                    return CharacterTile(
+                        character: currentCharacters[index].characterClass,
+                        onSelect: removeCharacter);
+                  }),
+            ),
+            const SizedBox(
+              height: kMenuCloseButtonSpacing,
+            ),
+          ],
+        ));
   }
 }

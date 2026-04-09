@@ -2,7 +2,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
+import '../../Layout/components/modal_background.dart';
 import '../../Model/room.dart';
+import '../../Resource/app_constants.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/commands/change_stat_commands/change_health_command.dart';
 import '../../Resource/enums.dart';
@@ -124,7 +126,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           text,
           style: TextStyle(
             color: color,
-            fontSize: 18 * scale,
+            fontSize: kFontSizeTitle * scale,
             shadows: [shadow],
           ),
         ),
@@ -285,7 +287,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             return TextButton(
                 child: const Text(
                   'Close',
-                  style: TextStyle(fontSize: 20),
+                  style: kButtonLabelStyle,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -316,7 +318,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             return TextButton(
                 child: const Text(
                   'Close',
-                  style: TextStyle(fontSize: 20),
+                  style: kButtonLabelStyle,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -346,6 +348,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
               currentNormalAdded++;
             }
           }
+
           currentEliteAdded -= initialEliteAdded[currentMonsterIndex].length;
           currentNormalAdded -= initialNormalAdded[currentMonsterIndex].length;
 
@@ -373,20 +376,10 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
             height *= 2;
           }
 
-          return Container(
+          return ModalBackground(
               width: 250 * scale,
               //need to set any width to center content, overridden by dialog default min width.
               height: height * scale,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.8), BlendMode.dstATop),
-                  image: AssetImage(getIt<Settings>().darkMode.value
-                      ? 'assets/images/bg/dark_bg.png'
-                      : 'assets/images/bg/white_bg.png'),
-                  fit: BoxFit.cover,
-                ),
-              ),
               child: ValueListenableBuilder<int>(
                   valueListenable: _gameState.commandIndex,
                   builder: (context, value, child) {
@@ -434,14 +427,14 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                         ],
                       ),
                       Positioned(
-                          width: 100,
-                          height: 40,
+                          width: kCloseButtonWidth,
+                          height: kButtonSize,
                           right: 0,
                           bottom: 0,
                           child: TextButton(
                               child: const Text(
                                 'Close',
-                                style: TextStyle(fontSize: 20),
+                                style: kButtonLabelStyle,
                               ),
                               onPressed: () {
                                 Navigator.pop(context);

@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_health_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_perk_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
@@ -892,6 +894,160 @@ void main() async {
         final monster = getIt<GameState>().currentList.first as Monster;
         final instance = monster.monsterInstances.first;
         expect(GameMethods.hasShield(monster, instance), isFalse);
+        checkNoSideEffects([], oldState);
+      });
+    });
+
+    group('canDraw - dead character bypasses initiative check', () {
+      test('dead character (health=0) does not block draw even with no init',
+          () {
+        getIt<GameState>().clearList();
+        getIt<Settings>().noInit.value = false;
+        AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+        // Kill the character so health = 0
+        final character =
+            getIt<GameState>().currentList.first as Character;
+        // Reduce health to 0 via ChangeHealthCommand
+        ChangeHealthCommand(-1000, 'Blinkblade', 'Blinkblade').execute();
+        expect(character.characterState.health.value, 0);
+        // Dead character with 0 initiative should NOT block the draw
+        expect(GameMethods.canDraw(), isTrue);
+      });
+    });
+
+    group('getInitiative - inactive monster', () {
+      test('inactive monster returns initiative 99', () {
+        getIt<GameState>().clearList();
+        AddMonsterCommand('Zealot', 1, false).execute();
+        final monster =
+            getIt<GameState>().currentList.first as Monster;
+        // Monster is inactive by default (isActive = false until ability drawn)
+        expect(monster.isActive, isFalse);
+        String oldState = gameState.toString();
+        expect(GameMethods.getInitiative(monster), 99);
+        checkNoSideEffects([], oldState);
+      });
+    });
+
+    group('summonDoesNotDie', () {
+      test('Glacial Torrent Glacier does not die', () {
+        String oldState = gameState.toString();
+        expect(
+            GameMethods.summonDoesNotDie('Glacial Torrent', 'Glacier'), isTrue);
+        checkNoSideEffects([], oldState);
+      });
+
+      test('D.O.M.E. Barrier does not die', () {
+        String oldState = gameState.toString();
+        expect(GameMethods.summonDoesNotDie('D.O.M.E.', 'Barrier'), isTrue);
+        checkNoSideEffects([], oldState);
+      });
+
+      test('arbitrary owner and id returns false', () {
+        String oldState = gameState.toString();
+        expect(GameMethods.summonDoesNotDie('Blinkblade', 'Jade Falcon'),
+            isFalse);
+        checkNoSideEffects([], oldState);
+      });
+    });
+
+    group('getFigure - character summon lookup', () {
+      test('returns summon instance when found via character ownerId', () {
+        getIt<GameState>().clearList();
+        AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+        final character =
+            getIt<GameState>().currentList.first as Character;
+        // Add a summon to the character
+        final summonData = SummonData(1, 'Jade Falcon', 3, 2, 2, 0,
+            'Jade Falcon');
+        AddStandeeCommand(
+                1, summonData, 'Blinkblade', MonsterType.normal, true)
+            .execute();
+
+        expect(character.characterState.summonList, isNotEmpty);
+        final summon = character.characterState.summonList.first;
+        final figureId = summon.getId();
+
+        String oldState = gameState.toString();
+        final figure = GameMethods.getFigure('Blinkblade', figureId);
+        expect(figure, isNotNull);
+        expect(figure, isA<MonsterInstance>());
+        checkNoSideEffects([], oldState);
+      });
+    });
+
+    group('isFrosthavenStyledEdition - Solo edition', () {
+      test('Solo with Frosthaven scenario number is frosthaven styled', () {
+        // Directly set the scenario string to avoid SetScenarioCommand's loot-deck lookup
+        (gameState.scenario as ValueNotifier<String>).value = '#1 A Town Aflame';
+        String oldState = gameState.toString();
+        expect(GameMethods.isFrosthavenStyledEdition('Solo'), isTrue);
+        checkNoSideEffects(['scenario'], oldState);
+      });
+
+      test('Solo with #19 scenario is NOT frosthaven styled (Forgotten Circles)',
+          () {
+        (gameState.scenario as ValueNotifier<String>).value =
+            '#19 Forgotten Circles';
+        String oldState = gameState.toString();
+        expect(GameMethods.isFrosthavenStyledEdition('Solo'), isFalse);
+        checkNoSideEffects(['scenario'], oldState);
+      });
+
+      test('Solo with scenario not in 1-100 range is not frosthaven styled',
+          () {
+        (gameState.scenario as ValueNotifier<String>).value =
+            '#200 Some Scenario';
+        String oldState = gameState.toString();
+        expect(GameMethods.isFrosthavenStyledEdition('Solo'), isFalse);
+        checkNoSideEffects(['scenario'], oldState);
+      });
+    });
+
+    group('hasShield - boss type', () {
+      test('boss type standee checks boss attribute for shield', () {
+        getIt<GameState>().clearList();
+        // Flame Demon (BnB) is a boss with retaliate; use it to test boss path
+        AddMonsterCommand('Flame Demon (BnB)', 3, false).execute();
+        AddStandeeCommand(
+                1, null, 'Flame Demon (BnB)', MonsterType.boss, false)
+            .execute();
+        final monster =
+            getIt<GameState>().currentList.first as Monster;
+        final instance = monster.monsterInstances.first;
+        // Boss path is exercised; result depends on actual data, just verify no crash
+        final _ = GameMethods.hasShield(monster, instance);
+        final __ = GameMethods.hasRetaliate(monster, instance);
+      });
+    });
+
+    group('getNextAvailableBnBStandee', () {
+      test('returns next available standee number when one is taken', () {
+        getIt<GameState>().clearList();
+        AddMonsterCommand('Zealot', 1, false).execute();
+        final monster =
+            getIt<GameState>().currentList.first as Monster;
+        AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false)
+            .execute();
+        String oldState = gameState.toString();
+        final next = GameMethods.getNextAvailableBnBStandee(monster);
+        // Standee 1 is taken; next available should be 2
+        expect(next, 2);
+        checkNoSideEffects([], oldState);
+      });
+
+      test('returns 0 when all standees are taken', () {
+        getIt<GameState>().clearList();
+        AddMonsterCommand('Zealot', 1, false).execute();
+        final monster =
+            getIt<GameState>().currentList.first as Monster;
+        for (int i = 1; i <= monster.type.count; i++) {
+          AddStandeeCommand(i, null, 'Zealot', MonsterType.normal, false)
+              .execute();
+        }
+        String oldState = gameState.toString();
+        final next = GameMethods.getNextAvailableBnBStandee(monster);
+        expect(next, 0);
         checkNoSideEffects([], oldState);
       });
     });

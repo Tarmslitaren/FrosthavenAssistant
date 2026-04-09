@@ -16,10 +16,10 @@ class RemoveConditionCommand extends Command {
       List<Condition> newList = [];
       newList.addAll(figure.conditions.value);
       newList.remove(condition);
-      figure.conditions.value = newList;
+      figure.setConditions(stateAccess, newList);
       if (condition != Condition.chill ||
           !figure.conditions.value.contains(Condition.chill)) {
-        figure.getMutableConditionsAddedThisTurn(stateAccess).remove(condition);
+        figure.removeFromConditionsThisTurn(stateAccess, condition);
       }
       if (condition == Condition.chill) {
         figure.setChill(stateAccess, figure.chill.value - 1);
@@ -28,9 +28,7 @@ class RemoveConditionCommand extends Command {
         figure.setPlague(stateAccess, figure.plague.value - 1);
       }
 
-      figure
-          .getMutableConditionsAddedPreviousTurn(stateAccess)
-          .remove(condition);
+      figure.removeFromConditionsPreviousTurn(stateAccess, condition);
       getIt<GameState>().updateList.value++;
     }
   }

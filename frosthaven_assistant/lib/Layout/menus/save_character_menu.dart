@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_modal_menu.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
@@ -45,10 +46,10 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                       height: 40,
                       margin: const EdgeInsets.only(left: 10, right: 10),
                       child: Text('Load, Save or Delete Characters.',
-                          style: getTitleTextStyle(1))),
+                          style: getTitleTextStyle(1, forceBlack: true))),
                   const Text(
                     "Add new Save:",
-                    style: TextStyle(fontSize: 24),
+                    style: kHeadingStyle,
                   ),
                   Wrap(
                     children: [
@@ -87,7 +88,7 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                   ),
                   const Text(
                     "Load Character:",
-                    style: TextStyle(fontSize: 24),
+                    style: kHeadingStyle,
                   ),
                   Expanded(
                     child: Scrollbar(
@@ -114,8 +115,8 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                                       child: Image.asset(
                                           "assets/images/class-icons/${characterId[index]}.png")),
                                   //should show icon
-                                  title: Text(_saves[index],
-                                      style: const TextStyle(fontSize: 18)),
+                                  title:
+                                      Text(_saves[index], style: kTitleStyle),
                                   onTap: () {
                                     openDialog(
                                         context,
@@ -132,19 +133,19 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                             })),
                   ),
                   const SizedBox(
-                    height: 34,
+                    height: kMenuCloseButtonSpacing,
                   ),
                 ],
               ),
               Positioned(
-                  width: 100,
-                  height: 40,
+                  width: kCloseButtonWidth,
+                  height: kButtonSize,
                   right: 0,
                   bottom: 0,
                   child: TextButton(
                       child: const Text(
                         'Close',
-                        style: TextStyle(fontSize: 20),
+                        style: kButtonLabelStyle,
                       ),
                       onPressed: () {
                         Navigator.pop(context);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import '../services/service_locator.dart';
@@ -8,30 +9,35 @@ void openDialogOld(BuildContext context, Widget widget) {
   showDialog(context: context, builder: (BuildContext context) => widget);
 }
 
-TextStyle getTitleTextStyle(double scale) {
+TextStyle getTitleTextStyle(double scale, {bool forceBlack = false}) {
+  //note force black since non modal menus are all white even in dark mode.
   return TextStyle(
-      fontSize: 18 * scale,
-      color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black);
+      fontSize: kFontSizeTitle * scale,
+      color: forceBlack || !getIt<Settings>().darkMode.value
+          ? Colors.black
+          : Colors.white);
 }
 
-TextStyle getSmallTextStyle(double scale) {
+TextStyle getSmallTextStyle(double scale, {bool forceBlack = false}) {
+  //note force black since non modal menus are all white even in dark mode.
   return TextStyle(
-    fontSize: 14 * scale,
-    color: getIt<Settings>().darkMode.value ? Colors.white : Colors.black,
-  );
+      fontSize: kFontSizeSmall * scale,
+      color: forceBlack || !getIt<Settings>().darkMode.value
+          ? Colors.black
+          : Colors.white);
 }
 
 TextStyle getButtonTextStyle(double scale) {
-  return TextStyle(fontSize: 14 * scale, color: Colors.blue);
+  return TextStyle(fontSize: kFontSizeSmall * scale, color: Colors.blue);
 }
 
 bool isLargeTablet(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;
-  if (screenWidth < screenHeight && screenHeight > 1200) {
+  if (screenWidth < screenHeight && screenHeight > kLargeTabletMinDimension) {
     return true;
   }
-  if (screenWidth > screenHeight && screenWidth > 1200) {
+  if (screenWidth > screenHeight && screenWidth > kLargeTabletMinDimension) {
     return true;
   }
   return false;
@@ -40,10 +46,10 @@ bool isLargeTablet(BuildContext context) {
 bool isPhoneScreen(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
   double screenHeight = MediaQuery.of(context).size.height;
-  if (screenWidth > screenHeight && screenHeight < 600) {
+  if (screenWidth > screenHeight && screenHeight < kPhoneScreenMaxDimension) {
     return true;
   }
-  if (screenWidth < screenHeight && screenWidth < 600) {
+  if (screenWidth < screenHeight && screenWidth < kPhoneScreenMaxDimension) {
     return true;
   }
   return false;
@@ -52,9 +58,9 @@ bool isPhoneScreen(BuildContext context) {
 double getModalMenuScale(BuildContext context) {
   double scale = 1;
   if (!isPhoneScreen(context)) {
-    scale = 1.5;
+    scale = kModalScaleTablet;
     if (isLargeTablet(context)) {
-      scale = 2;
+      scale = kModalScaleLargeTablet;
     }
   }
   return scale;
@@ -80,7 +86,7 @@ void openDialogWithDismissOption(
     Positioned(
       child: Dialog(
           backgroundColor: Colors.transparent,
-          insetPadding: const EdgeInsets.all(18),
+          insetPadding: const EdgeInsets.all(kDialogInsetPadding),
           child: ValueListenableBuilder<int>(
               valueListenable: getIt<GameState>().updateForUndo,
               builder: (context, value, child) {
@@ -143,7 +149,8 @@ bool hasGHVersion(String name) {
   return _ghVersionSet.contains(name);
 }
 
-const TextStyle toastTextStyle = TextStyle(fontFamily: "markazi", fontSize: 28);
+const TextStyle toastTextStyle =
+    TextStyle(fontFamily: "markazi", fontSize: kFontSizeToast);
 createToastContent(BuildContext context, String text) {
   return GestureDetector(
     onTap: () {
@@ -197,7 +204,7 @@ showErrorToastStickyWithRetry(
                 child: const Text("RETRY",
                     style: TextStyle(
                         fontFamily: "markazi",
-                        fontSize: 28,
+                        fontSize: kFontSizeToast,
                         color: Colors.white,
                         fontWeight: FontWeight.bold))),
           ],

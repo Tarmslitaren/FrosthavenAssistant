@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/return_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 
@@ -72,14 +73,14 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
           String name = widget.name;
           ModifierDeck deck =
               GameMethods.getModifierDeck(widget.name, _gameState);
-          final removedPile = deck.removedPile.getList();
+          final removedPile = deck.removedPileContents.toList();
 
           bool isCharacter = widget.name.isNotEmpty && widget.name != "allies";
           final character =
               isCharacter ? GameMethods.getCharacterByName(widget.name) : null;
           final screenSize = MediaQuery.of(context).size;
           final monsterDeck = widget.name.isEmpty;
-          final textStyle = TextStyle(fontSize: 16, color: Colors.black);
+          final textStyle = kBodyBlackStyle;
 
           return Container(
               constraints: BoxConstraints(
@@ -122,14 +123,14 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
                       ),
                     ]),
                     Positioned(
-                        width: 100,
-                        height: 40,
+                        width: kCloseButtonWidth,
+                        height: kButtonSize,
                         right: 0,
                         bottom: 0,
                         child: TextButton(
                             child: const Text(
                               'Close',
-                              style: TextStyle(fontSize: 20),
+                              style: kButtonLabelStyle,
                             ),
                             onPressed: () {
                               Navigator.pop(context);
@@ -139,7 +140,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
                         left: 20,
                         child: Text(
                           name,
-                          style: const TextStyle(fontSize: 20),
+                          style: kButtonLabelStyle,
                         ))
                   ])));
         });

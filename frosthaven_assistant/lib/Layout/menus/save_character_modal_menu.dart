@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
+import '../../Layout/components/modal_background.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
@@ -64,20 +65,10 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
 
     final character = widget.character;
 
-    return Container(
+    return ModalBackground(
         width: 240 * scale,
         height: 160 * scale,
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8), BlendMode.dstATop),
-            image: AssetImage(getIt<Settings>().darkMode.value
-                ? 'assets/images/bg/dark_bg.png'
-                : 'assets/images/bg/white_bg.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,

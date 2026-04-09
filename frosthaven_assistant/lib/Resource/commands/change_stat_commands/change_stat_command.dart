@@ -21,8 +21,7 @@ abstract class ChangeStatCommand extends Command {
         for (var instance in item.monsterInstances) {
           if (instance.health.value == 0) {
             newList.remove(instance);
-            item.getMutableMonsterInstancesList(stateAccess).clear();
-            item.getMutableMonsterInstancesList(stateAccess).addAll(newList);
+            item.setMonsterInstances(stateAccess, newList);
             Future.delayed(const Duration(milliseconds: 600), () {
               getIt<GameState>().killMonsterStandee.value++;
             });
@@ -55,9 +54,7 @@ abstract class ChangeStatCommand extends Command {
         for (var instance in summonList) {
           if (instance.health.value == 0) {
             if (!GameMethods.summonDoesNotDie(item.id, instance.name)) {
-              item.characterState
-                  .getMutableSummonList(stateAccess)
-                  .remove(instance);
+              item.characterState.removeSummon(stateAccess, instance);
               Future.delayed(const Duration(milliseconds: 600), () {
                 getIt<GameState>().killMonsterStandee.value++;
               });

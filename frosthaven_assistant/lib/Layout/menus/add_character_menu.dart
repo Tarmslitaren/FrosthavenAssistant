@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
 
@@ -169,78 +171,62 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        constraints: const BoxConstraints(maxWidth: 400),
-        child: Card(
-            margin: const EdgeInsets.all(2),
-            child: Stack(children: [
-              Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      //open remove card menu
-                      openDialog(context, SaveCharacterMenu());
-                    },
-                    child: Text(
-                      "Load or Save Characters",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    child: TextField(
-                      onChanged: (value) => _runFilter(value),
-                      decoration: const InputDecoration(
-                          labelText:
-                              'Add Character (type name for hidden character classes)',
-                          suffixIcon: Icon(Icons.search)),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Expanded(
-                    child: _foundCharacters.isNotEmpty
-                        ? Scrollbar(
-                            controller: _scrollController,
-                            child: ListView.builder(
-                              controller: _scrollController,
-                              itemCount: _foundCharacters.length,
-                              itemBuilder: (context, index) {
-                                return CharacterTile(
-                                  character: _foundCharacters[index],
-                                  onSelect: _addCharacter,
-                                  disabled: _characterAlreadyAdded(
-                                      _foundCharacters[index]),
-                                );
-                              },
-                            ))
-                        : const Text(
-                            'No results found',
-                            style: TextStyle(fontSize: 24),
-                          ),
-                  ),
-                  const SizedBox(
-                    height: 34,
-                  ),
-                ],
+    return MenuCard(
+        maxWidth: 400,
+        cardMargin: const EdgeInsets.all(2),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            TextButton(
+              onPressed: () {
+                //open remove card menu
+                openDialog(context, SaveCharacterMenu());
+              },
+              child: Text(
+                "Load or Save Characters",
+                style: kTitleStyle,
               ),
-              Positioned(
-                  width: 100,
-                  height: 40,
-                  right: 0,
-                  bottom: 0,
-                  child: TextButton(
-                      child: const Text(
-                        'Close',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      }))
-            ])));
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 10, right: 10),
+              child: TextField(
+                onChanged: (value) => _runFilter(value),
+                decoration: const InputDecoration(
+                    labelText:
+                        'Add Character (type name for hidden character classes)',
+                    suffixIcon: Icon(Icons.search)),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: _foundCharacters.isNotEmpty
+                  ? Scrollbar(
+                      controller: _scrollController,
+                      child: ListView.builder(
+                        controller: _scrollController,
+                        itemCount: _foundCharacters.length,
+                        itemBuilder: (context, index) {
+                          return CharacterTile(
+                            character: _foundCharacters[index],
+                            onSelect: _addCharacter,
+                            disabled: _characterAlreadyAdded(
+                                _foundCharacters[index]),
+                          );
+                        },
+                      ))
+                  : const Text(
+                      'No results found',
+                      style: kHeadingStyle,
+                    ),
+            ),
+            const SizedBox(
+              height: kMenuCloseButtonSpacing,
+            ),
+          ],
+        ));
   }
 }

@@ -2,8 +2,9 @@ part of 'game_state.dart';
 
 // ignore_for_file: library_private_types_in_public_api
 class FigureState {
-  //TODO:  no value notifier for lists - make non mutable version
-  final conditions = ValueNotifier<List<Condition>>([]);
+  final _conditions = ValueNotifier<List<Condition>>([]);
+
+  ValueListenable<List<Condition>> get conditions => _conditions;
 
   final _level = ValueNotifier<int>(1);
   final _health = ValueNotifier<int>(0);
@@ -43,11 +44,19 @@ class FigureState {
     _plague.value = value;
   }
 
-  Set<Condition> getMutableConditionsAddedThisTurn(_StateModifier _) {
-    return _conditionsAddedThisTurn;
+  void setConditions(_StateModifier _, List<Condition> value) {
+    _conditions.value = value;
   }
 
-  Set<Condition> getMutableConditionsAddedPreviousTurn(_StateModifier _) {
-    return _conditionsAddedPreviousTurn;
+  void addToConditionsThisTurn(_StateModifier _, Condition condition) {
+    _conditionsAddedThisTurn.add(condition);
+  }
+
+  void removeFromConditionsThisTurn(_StateModifier _, Condition condition) {
+    _conditionsAddedThisTurn.remove(condition);
+  }
+
+  void removeFromConditionsPreviousTurn(_StateModifier _, Condition condition) {
+    _conditionsAddedPreviousTurn.remove(condition);
   }
 }
