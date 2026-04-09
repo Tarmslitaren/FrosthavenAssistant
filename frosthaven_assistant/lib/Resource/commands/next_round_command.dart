@@ -22,8 +22,7 @@ class NextRoundCommand extends Command {
       }
       if (item is Monster) {
         //only really needed for ice wraiths
-        MutableGameMethods.sortMonsterInstances(
-            stateAccess, item.getMutableMonsterInstancesList(stateAccess));
+        item.sortMonsterInstances(stateAccess);
       }
     }
     MutableGameMethods.shuffleDecksIfNeeded(stateAccess);

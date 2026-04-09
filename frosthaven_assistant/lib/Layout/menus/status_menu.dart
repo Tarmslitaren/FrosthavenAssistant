@@ -94,13 +94,6 @@ class StatusMenuState extends State<StatusMenu> {
     super.initState();
   }
 
-  void activateCondition(Condition condition, FigureState figure) {
-    List<Condition> newList = [];
-    newList.addAll(figure.conditions.value);
-    newList.add(condition);
-    figure.conditions.value = newList;
-  }
-
   Widget buildStackableConditionButtons(
       ValueListenable<int> notifier,
       Condition stackableCondition,

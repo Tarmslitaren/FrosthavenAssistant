@@ -19,7 +19,7 @@ class AddConditionCommand extends Command {
           condition == Condition.plague) {
         newList.add(condition);
       }
-      figure.conditions.value = newList;
+      figure.setConditions(stateAccess, newList);
 
       if (condition == Condition.chill) {
         figure.setChill(stateAccess, figure.chill.value + 1);
@@ -33,9 +33,7 @@ class AddConditionCommand extends Command {
         if (item.id == ownerId) {
           if (item.turnState.value != TurnsState.notDone &&
               getIt<GameState>().roundState.value == RoundState.playTurns) {
-            figure
-                .getMutableConditionsAddedThisTurn(stateAccess)
-                .add(condition);
+            figure.addToConditionsThisTurn(stateAccess, condition);
           }
         }
       }

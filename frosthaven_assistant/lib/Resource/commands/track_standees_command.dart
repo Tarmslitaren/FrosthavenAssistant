@@ -33,7 +33,7 @@ class TrackStandeesCommand extends Command {
     if (getIt<Settings>().noStandees.value) {
       for (var item in gameState.currentList) {
         if (item is Monster) {
-          item.getMutableMonsterInstancesList(stateAccess).clear();
+          item.clearMonsterInstances(stateAccess);
         }
       }
     } else {

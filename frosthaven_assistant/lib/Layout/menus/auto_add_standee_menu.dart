@@ -348,6 +348,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
               currentNormalAdded++;
             }
           }
+
           currentEliteAdded -= initialEliteAdded[currentMonsterIndex].length;
           currentNormalAdded -= initialNormalAdded[currentMonsterIndex].length;
 
@@ -433,8 +434,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                           child: TextButton(
                               child: const Text(
                                 'Close',
-                                style:
-                                    kButtonLabelStyle,
+                                style: kButtonLabelStyle,
                               ),
                               onPressed: () {
                                 Navigator.pop(context);

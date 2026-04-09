@@ -479,7 +479,7 @@ class MutableGameMethods {
 
     item.characterState._maxHealth.value = item.characterState.health.value;
     item.characterState._xp.value = 0;
-    item.characterState.conditions.value.clear();
+    item.characterState._conditions.value.clear();
     item.characterState._chill.value = 0;
     item.characterState._plague.value = 0;
     item.characterState.modifierDeck._initDeck();
@@ -1398,7 +1398,7 @@ class MutableGameMethods {
   static void removeExpiringConditions(_StateModifier _, FigureState figure) {
     if (getIt<Settings>().expireConditions.value) {
       bool chillRemoved = false;
-      final conditions = figure.conditions.value;
+      final conditions = figure._conditions.value;
       for (int i = conditions.length - 1; i >= 0; i--) {
         Condition item = conditions[i];
         if (GameMethods.canExpire(item)) {
@@ -1433,7 +1433,7 @@ class MutableGameMethods {
 
   static void reapplyConditions(_StateModifier _, FigureState figure) {
     for (var condition in figure.conditionsAddedPreviousTurn) {
-      final conditions = figure.conditions.value;
+      final conditions = figure._conditions.value;
       if (!conditions.contains(condition) || condition == Condition.chill) {
         conditions.add(condition);
         figure._conditionsAddedThisTurn.remove(condition);

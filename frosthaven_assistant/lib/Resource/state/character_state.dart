@@ -70,7 +70,7 @@ class CharacterState extends FigureState {
 
     final condis = json["conditions"];
     for (int item in condis) {
-      conditions.value.add(Condition.values[item]);
+      _conditions.value.add(Condition.values[item]);
     }
 
     if (json.containsKey("modifierDeck")) {
@@ -111,8 +111,12 @@ class CharacterState extends FigureState {
     _xp.value = max(value, 0);
   }
 
-  getMutableSummonList(_StateModifier _) {
-    return _summonList;
+  void addSummon(_StateModifier _, MonsterInstance summon) {
+    _summonList.add(summon);
+  }
+
+  void removeSummon(_StateModifier _, MonsterInstance summon) {
+    _summonList.remove(summon);
   }
 
   String toSave() {
@@ -138,7 +142,7 @@ class CharacterState extends FigureState {
         '"summonList": ${_summonList.toString()}, '
         '"useFHPerks": ${jsonEncode(useFHPerks.value)}, '
         '"perkList": ${_perkList.toString()}, '
-        '"conditions": ${conditions.value.toString()}, '
+        '"conditions": ${_conditions.value.toString()}, '
         '"conditionsAddedThisTurn": ${conditionsAddedThisTurn.toList().toString()}, '
         '"conditionsAddedPreviousTurn": ${conditionsAddedPreviousTurn.toList().toString()} '
         '}';
