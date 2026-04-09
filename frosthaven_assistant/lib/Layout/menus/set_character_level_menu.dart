@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_name_command.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
@@ -63,7 +64,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
               child: Text(
                 text,
                 style: TextStyle(
-                    fontSize: 18 * scale,
+                    fontSize: kFontSizeTitle * scale,
                     shadows: [
                       Shadow(
                         offset: Offset(1 * scale, 1 * scale),

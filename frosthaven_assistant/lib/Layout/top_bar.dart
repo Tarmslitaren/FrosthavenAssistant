@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 
 import '../Resource/enums.dart';
@@ -42,7 +43,7 @@ class TopBar extends StatelessWidget {
                 "X-haven\nAssistant",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 16 * userScaling,
+                  fontSize: kFontSizeBody * userScaling,
                   shadows: [shadow],
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_xp_command.dart';
 
 import '../../Resource/game_methods.dart';
@@ -45,7 +46,7 @@ class CharacterXPWidget extends StatelessWidget {
                             ? 'GermaniaOne'
                             : 'Pirata',
                         color: Colors.blue,
-                        fontSize: 14 * scale,
+                        fontSize: kFontSizeSmall * scale,
                         shadows: [shadow]),
                   );
                 }),

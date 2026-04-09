@@ -1,6 +1,6 @@
-/// Shared UI constants for the Frosthaven Assistant app.
+// Shared UI constants for the Frosthaven Assistant app.
 
-/// Font sizes (static, unscaled — multiply by the scale factor where needed)
+// Font sizes (static, unscaled — multiply by the scale factor where needed)
 const double kFontSizeSmall = 14;        // trailing edition labels, small body text
 const double kFontSizeBody = 16;         // body text in menus and cards
 const double kFontSizeTitle = 18;        // list-tile titles, menu headings

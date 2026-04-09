@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 
 import '../../Layout/components/modal_background.dart';
+import '../../Resource/app_constants.dart';
 import '../../Resource/commands/shuffle_amd_card_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
@@ -68,7 +69,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
                       Navigator.pop(context);
                     },
                     child: const Text("Send to Bottom",
-                        style: TextStyle(fontSize: 20))),
+                        style: TextStyle(fontSize: kFontSizeButtonLabel))),
                 const SizedBox(
                   height: 20,
                 ),
@@ -78,7 +79,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
                       Navigator.pop(context);
                     },
                     child: const Text("Shuffle un-drawn Cards",
-                        style: TextStyle(fontSize: 20))),
+                        style: TextStyle(fontSize: kFontSizeButtonLabel))),
               ]))
         ]);
   }

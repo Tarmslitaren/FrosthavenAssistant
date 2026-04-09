@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Layout/menus/condition_button.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
@@ -143,7 +144,7 @@ class StatusMenuState extends State<StatusMenu> {
                       style: TextStyle(
                           color: Colors.white,
                           height: 0.5,
-                          fontSize: 16 * scale,
+                          fontSize: kFontSizeBody * scale,
                           shadows: [
                             Shadow(
                               offset: Offset(1 * scale, 1 * scale),
@@ -397,7 +398,7 @@ class StatusMenuState extends State<StatusMenu> {
                             },
                             child: Text("                     Switch Form",
                                 style: TextStyle(
-                                  fontSize: 14 * scale,
+                                  fontSize: kFontSizeSmall * scale,
                                   color: Colors.blue,
                                 )))
                     ])),
@@ -735,7 +736,7 @@ class StatusMenuState extends State<StatusMenu> {
                             if (!isObjective)
                               Text(figure.level.value.toString(),
                                   style: TextStyle(
-                                      fontSize: 14 * scale,
+                                      fontSize: kFontSizeSmall * scale,
                                       color: Colors.white,
                                       shadows: [
                                         Shadow(

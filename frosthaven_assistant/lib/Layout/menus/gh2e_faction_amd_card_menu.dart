@@ -6,6 +6,7 @@ import '../../Layout/components/modal_background.dart';
 import '../../Resource/color_matrices.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
+import '../../Resource/app_constants.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
@@ -107,7 +108,7 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                       },
                       child: const Text("Remove card from your deck?",
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20))),
+                          style: TextStyle(fontSize: kFontSizeButtonLabel))),
                 const SizedBox(
                   height: 20,
                 ),

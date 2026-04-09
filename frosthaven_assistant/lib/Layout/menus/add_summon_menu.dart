@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon_model.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
@@ -84,7 +85,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
             },
             icon: Image.asset(
               'assets/images/summon/$summonGfx.png',
-              cacheHeight: 75,
+              cacheHeight: kMonsterImageCacheHeight,
             ),
           )),
     );
@@ -109,7 +110,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
             child: Text(
               text,
               style: TextStyle(
-                  fontSize: 18 * scale,
+                  fontSize: kFontSizeTitle * scale,
                   color: isCurrentlySelected
                       ? darkMode
                           ? Colors.white
@@ -203,7 +204,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                             if (showNr)
                               Text(chosenNr.toString(),
                                   style: TextStyle(
-                                      fontSize: 18 * scale,
+                                      fontSize: kFontSizeTitle * scale,
                                       color: Colors.white,
                                       shadows: [
                                         Shadow(

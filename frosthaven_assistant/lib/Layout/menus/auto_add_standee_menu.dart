@@ -126,7 +126,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           text,
           style: TextStyle(
             color: color,
-            fontSize: 18 * scale,
+            fontSize: kFontSizeTitle * scale,
             shadows: [shadow],
           ),
         ),

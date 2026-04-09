@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/counter_button.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_max_health_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_auto_level_adjust_command.dart';
@@ -67,7 +68,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                         child: Text(
                           text,
                           style: TextStyle(
-                              fontSize: 18 * scale,
+                              fontSize: kFontSizeTitle * scale,
                               shadows: [
                                 Shadow(
                                     offset: Offset(1 * scale, 1 * scale),
@@ -105,7 +106,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     var textStyleLevelWidget = TextStyle(
         color: Colors.white,
         overflow: TextOverflow.fade,
-        fontSize: 18 * scale,
+        fontSize: kFontSizeTitle * scale,
         shadows: [shadow]);
     double height = 20 * scale;
     if (gfx.contains("level")) {
@@ -160,7 +161,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   child: Text(
                     text,
                     style: TextStyle(
-                        fontSize: 18 * scale,
+                        fontSize: kFontSizeTitle * scale,
                         shadows: [
                           Shadow(
                               offset: Offset(1 * scale, 1 * scale),

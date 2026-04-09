@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Resource/app_constants.dart';
 import '../../Resource/enums.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
@@ -110,7 +111,7 @@ class CharacterHealthInnerWidget extends StatelessWidget {
         style: TextStyle(
             fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
             color: Colors.white,
-            fontSize: 16 * scale,
+            fontSize: kFontSizeBody * scale,
             shadows: [shadow]),
       ),
       //add conditions here

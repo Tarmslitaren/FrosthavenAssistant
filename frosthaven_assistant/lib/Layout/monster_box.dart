@@ -1,5 +1,6 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -175,7 +176,7 @@ class MonsterBox extends StatelessWidget {
                       standeeNr,
                       style: TextStyle(
                           color: color,
-                          fontSize: 20 * scale,
+                          fontSize: kFontSizeButtonLabel * scale,
                           shadows: [shadow]),
                     ),
                   ),
@@ -203,7 +204,7 @@ class MonsterBox extends StatelessWidget {
                                 style: TextStyle(
                                     height: 1,
                                     color: Colors.white,
-                                    fontSize: 16 * scale,
+                                    fontSize: kFontSizeBody * scale,
                                     shadows: [shadow]),
                               ),
                             )

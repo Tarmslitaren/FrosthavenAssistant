@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Layout/components/modal_background.dart';
@@ -83,7 +84,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
           text,
           style: TextStyle(
             color: color,
-            fontSize: 18 * scale,
+            fontSize: kFontSizeTitle * scale,
             shadows: [shadow],
           ),
         ),

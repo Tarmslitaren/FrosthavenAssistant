@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 
 import '../../Layout/components/modal_background.dart';
+import '../../Resource/app_constants.dart';
 import '../../Resource/commands/remove_amd_card_command.dart';
 import '../../Resource/commands/return_modifier_card_command.dart';
 import '../../Resource/game_methods.dart';
@@ -60,7 +61,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                     },
                     child: const Text("Remove card?",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20))),
+                        style: TextStyle(fontSize: kFontSizeButtonLabel))),
                 const SizedBox(
                   height: 20,
                 ),
@@ -76,7 +77,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                   },
                   child: const Text("Return top card",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 20)),
+                      style: TextStyle(fontSize: kFontSizeButtonLabel)),
                 ),
                 const SizedBox(
                   height: 20,

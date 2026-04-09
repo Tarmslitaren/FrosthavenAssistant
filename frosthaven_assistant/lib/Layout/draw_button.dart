@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Resource/app_constants.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_actions.dart';
 import '../Resource/settings.dart';
@@ -58,7 +59,7 @@ class DrawButtonState extends State<DrawButton> {
                     left: 45 * scaling,
                     child: Text(text,
                         style: TextStyle(
-                          fontSize: 14 * scaling,
+                          fontSize: kFontSizeSmall * scaling,
                           color: Colors.white,
                           shadows: [shadow],
                         )));
@@ -88,7 +89,7 @@ class DrawButtonState extends State<DrawButton> {
                               : " Next Round",
                           style: TextStyle(
                             height: 0.8,
-                            fontSize: 16 * scaling,
+                            fontSize: kFontSizeBody * scaling,
                             color: Colors.white,
                             shadows: [shadow],
                           ),

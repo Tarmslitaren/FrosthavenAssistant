@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 
 import '../../Layout/components/modal_background.dart';
+import '../../Resource/app_constants.dart';
 import '../../Resource/commands/return_removed_amd_card_command.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
@@ -58,7 +59,7 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
                     },
                     child: const Text("Return card to discard pile",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20))),
+                        style: TextStyle(fontSize: kFontSizeButtonLabel))),
                 const SizedBox(
                   height: 20,
                 ),

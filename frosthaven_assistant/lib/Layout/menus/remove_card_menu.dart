@@ -5,6 +5,7 @@ import 'package:frosthaven_assistant/Resource/commands/reorder_ability_list_comm
 import 'package:frosthaven_assistant/Resource/commands/shuffle_drawn_ability_card_command.dart';
 
 import '../../Layout/components/modal_background.dart';
+import '../../Resource/app_constants.dart';
 import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
@@ -59,7 +60,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
               child: Text(
                   "Remove ${widget.card.title}\n(card nr: ${widget.card.nr})",
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 20))),
+                  style: const TextStyle(fontSize: kFontSizeButtonLabel))),
           const SizedBox(
             height: 10,
           ),
@@ -87,7 +88,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                   Navigator.pop(context);
                 },
                 child: const Text("Send to Bottom",
-                    style: TextStyle(fontSize: 20))),
+                    style: TextStyle(fontSize: kFontSizeButtonLabel))),
           if (isInDrawPile)
             const SizedBox(
               height: 10,
@@ -100,7 +101,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                   Navigator.pop(context);
                 },
                 child: const Text("Shuffle un-drawn Cards",
-                    style: TextStyle(fontSize: 20))),
+                    style: TextStyle(fontSize: kFontSizeButtonLabel))),
         ]));
   }
 }

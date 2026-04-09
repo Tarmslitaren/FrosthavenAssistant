@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Resource/app_constants.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 
@@ -31,7 +32,7 @@ class CharacterLevelWidget extends StatelessWidget {
                         ? 'GermaniaOne'
                         : 'Pirata',
                     color: Colors.white,
-                    fontSize: 14 * scale,
+                    fontSize: kFontSizeSmall * scale,
                     shadows: [shadow]),
               );
             }),
