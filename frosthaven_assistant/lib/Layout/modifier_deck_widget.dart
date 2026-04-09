@@ -31,13 +31,18 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   bool _animationsEnabled = false;
 
-  // FIX: Track the last command index we animated to prevent replaying
-  // the same animation on subsequent UI rebuilds.
+  // FIX: Track the last command index we animated AND use a timestamp cooldown.
+  // The command index alone isn't enough because multiple rebuilds can fire
+  // during a single command (from setState, modelData listener, network updates).
+  // The cooldown prevents any re-trigger within the animation duration window.
   int _lastAnimatedCommandIndex = -2;
-
-  // FIX: Track the last discard pile size we animated for client mode,
-  // so we don't replay when the pile hasn't changed.
   int _lastAnimatedDiscardSize = -1;
+  DateTime _lastAnimationStartTime = DateTime.fromMillisecondsSinceEpoch(0);
+
+  bool _isInCooldown() {
+    return DateTime.now().difference(_lastAnimationStartTime).inMilliseconds <
+        cardAnimationDuration + 200; // small buffer
+  }
 
   @override
   void initState() {
@@ -98,6 +103,13 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   }
 
   bool initAnimationEnabled() {
+    // FIX: If we're still within the cooldown window of the last animation,
+    // don't start a new one. This is the primary guard against replays
+    // caused by multiple rebuild triggers (setState, listeners, network).
+    if (_isInCooldown()) {
+      return false;
+    }
+
     if (getIt<Settings>().client.value == ClientState.connected) {
       GameState oldState = GameState();
       int offset = 1;
@@ -117,11 +129,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
       var oldPile = oldDeck.discardPile;
       var newPile = currentDeck.discardPile;
       if (oldPile.size() == newPile.size() - 1) {
-        // FIX: Check if we already animated this discard pile size
         if (_lastAnimatedDiscardSize == newPile.size()) {
           return false;
         }
         _lastAnimatedDiscardSize = newPile.size();
+        _lastAnimationStartTime = DateTime.now();
         return true;
       }
       return false;
@@ -143,11 +155,13 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         if (widget.name.isNotEmpty) {
           if (commandDescription.contains("${widget.name} modifier card")) {
             _lastAnimatedCommandIndex = commandIndex;
+            _lastAnimationStartTime = DateTime.now();
             return true;
           }
         } else {
           if (commandDescription.contains("monster modifier card")) {
             _lastAnimatedCommandIndex = commandIndex;
+            _lastAnimationStartTime = DateTime.now();
             return true;
           }
         }
@@ -295,6 +309,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                           onTap: () {
                             setState(() {
                               _animationsEnabled = true;
+                              _lastAnimationStartTime = DateTime.now();
                               _gameState
                                   .action(DrawModifierCardCommand(widget.name));
                             });
@@ -316,6 +331,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                                 onTap: () {
                                                   setState(() {
                                                     _animationsEnabled = true;
+                                                    _lastAnimationStartTime = DateTime.now();
                                                     _gameState.action(
                                                         DrawModifierCardCommand(
                                                             widget.name));
@@ -339,6 +355,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                               onTap: () {
                                                 setState(() {
                                                   _animationsEnabled = true;
+                                                  _lastAnimationStartTime = DateTime.now();
                                                   _gameState.action(
                                                       DrawModifierCardCommand(
                                                           widget.name));
