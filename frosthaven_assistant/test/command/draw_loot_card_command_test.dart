@@ -23,28 +23,28 @@ void main() {
   group('DrawLootCardCommand', () {
     test('should move a card from draw pile to discard pile', () {
       final lootDeck = getIt<GameState>().lootDeck;
-      expect(lootDeck.drawPile.isNotEmpty, isTrue,
+      expect(lootDeck.drawPileIsNotEmpty, isTrue,
           reason: 'Frosthaven custom scenario should have a loot deck');
-      final drawBefore = lootDeck.drawPile.size();
-      final discardBefore = lootDeck.discardPile.size();
+      final drawBefore = lootDeck.drawPileSize;
+      final discardBefore = lootDeck.discardPileSize;
 
       DrawLootCardCommand().execute();
 
-      expect(lootDeck.drawPile.size(), drawBefore - 1);
-      expect(lootDeck.discardPile.size(), discardBefore + 1);
+      expect(lootDeck.drawPileSize, drawBefore - 1);
+      expect(lootDeck.discardPileSize, discardBefore + 1);
       checkSaveState();
     });
 
     test('should do nothing when draw pile is empty', () {
       final lootDeck = getIt<GameState>().lootDeck;
       final totalCards =
-          lootDeck.drawPile.size() + lootDeck.discardPile.size();
+          lootDeck.drawPileSize + lootDeck.discardPileSize;
       // Drain draw pile
-      while (lootDeck.drawPile.isNotEmpty) {
+      while (lootDeck.drawPileIsNotEmpty) {
         DrawLootCardCommand().execute();
       }
       DrawLootCardCommand().execute(); // should not throw
-      expect(lootDeck.drawPile.size() + lootDeck.discardPile.size(),
+      expect(lootDeck.drawPileSize + lootDeck.discardPileSize,
           totalCards);
     });
 
@@ -57,13 +57,13 @@ void main() {
     test('should return discard card to top of draw pile', () {
       DrawLootCardCommand().execute();
       final lootDeck = getIt<GameState>().lootDeck;
-      final drawBefore = lootDeck.drawPile.size();
-      final discardBefore = lootDeck.discardPile.size();
+      final drawBefore = lootDeck.drawPileSize;
+      final discardBefore = lootDeck.discardPileSize;
 
       ReturnLootCardCommand(true).execute();
 
-      expect(lootDeck.drawPile.size(), drawBefore + 1);
-      expect(lootDeck.discardPile.size(), discardBefore - 1);
+      expect(lootDeck.drawPileSize, drawBefore + 1);
+      expect(lootDeck.discardPileSize, discardBefore - 1);
       checkSaveState();
     });
 

@@ -58,16 +58,16 @@ void main() {
         'tapping the button returns the card to the discard pile and closes the dialog',
         (WidgetTester tester) async {
       final deck = getIt<GameState>().modifierDeck;
-      final removedBefore = deck.removedPile.size();
-      final discardBefore = deck.discardPile.size();
+      final removedBefore = deck.removedPileSize;
+      final discardBefore = deck.discardPileSize;
       await pumpMenu(tester);
 
       await tester.tap(find.text('Return card to discard pile'));
       await tester.pumpAndSettle();
 
       expect(find.byType(ReturnAMDCardMenu), findsNothing);
-      expect(deck.removedPile.size(), removedBefore - 1);
-      expect(deck.discardPile.size(), discardBefore + 1);
+      expect(deck.removedPileSize, removedBefore - 1);
+      expect(deck.discardPileSize, discardBefore + 1);
     });
   });
 }

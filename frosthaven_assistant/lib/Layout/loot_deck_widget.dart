@@ -103,9 +103,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
         oldState.loadFromData(oldSaveState);
         GameState currentState = _gameState;
 
-        var oldPile = oldState.lootDeck.discardPile;
-        var newPile = currentState.lootDeck.discardPile;
-        if (oldPile.size() == newPile.size() - 1) {
+        if (oldState.lootDeck.discardPileSize ==
+            currentState.lootDeck.discardPileSize - 1) {
           return true;
         }
         return false;
@@ -205,7 +204,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                       valueListenable: _gameState.lootDeck.cardCount,
                       builder: (context, value, child) {
                         LootDeck? deck = _gameState.lootDeck;
-                        if (deck.drawPile.isEmpty && deck.discardPile.isEmpty ||
+                        if (deck.drawPileIsEmpty && deck.discardPileIsEmpty ||
                             getIt<Settings>().hideLootDeck.value) {
                           return Container();
                         }
@@ -224,14 +223,14 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                               currentCharacter.characterClass.name;
                         }
 
-                        final discardPileSize = deck.discardPile.size();
-                        final discardPileList = deck.discardPile.getList();
+                        final discardPileSize = deck.discardPileSize;
+                        final discardPileList = deck.discardPileContents.toList();
 
                         return RepaintBoundary(child:Row(
                           children: [
                             InkWell(
                                 onTap: () {
-                                  if (deck.drawPile.isNotEmpty) {
+                                  if (deck.drawPileIsNotEmpty) {
                                     setState(() {
                                       _animationsEnabled = true;
                                       _gameState.action(DrawLootCardCommand());
@@ -239,9 +238,9 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                   }
                                 },
                                 child: Stack(children: [
-                                  deck.drawPile.isNotEmpty
+                                  deck.drawPileIsNotEmpty
                                       ? LootCardWidget(
-                                          card: deck.drawPile.peek,
+                                          card: deck.drawPileTop,
                                           revealed: isAnimating)
                                       : Container(
                                           width: 40 * userScalingBars,
@@ -323,19 +322,18 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                                     discardPileSize - 2],
                                                 revealed: true,
                                               )),
-                                          Key(deck.discardPile
-                                              .size()
+                                          Key(deck.discardPileSize
                                               .toString()))
                                       : Container(),
-                                  deck.discardPile.isNotEmpty
+                                  deck.discardPileIsNotEmpty
                                       ? buildDrawAnimation(
                                           LootCardWidget(
                                             key:
                                                 Key(discardPileSize.toString()),
-                                            card: deck.discardPile.peek,
+                                            card: deck.discardPileTop,
                                             revealed: true,
                                           ),
-                                          Key((-deck.discardPile.size())
+                                          Key((-deck.discardPileSize)
                                               .toString()),
                                           context)
                                       : SizedBox(

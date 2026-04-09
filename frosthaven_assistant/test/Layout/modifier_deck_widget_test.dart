@@ -63,7 +63,7 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       final deck = GameMethods.getModifierDeck(monsterDeckName, gameState);
-      final before = deck.discardPile.size();
+      final before = deck.discardPileSize;
 
       await pumpWidget(tester, monsterDeckName);
 
@@ -79,7 +79,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 1300));
       FlutterError.onError = originalOnError;
 
-      expect(deck.discardPile.size(), before + 1);
+      expect(deck.discardPileSize, before + 1);
       // restore
       gameState.undo();
     });
@@ -89,7 +89,7 @@ void main() {
       final gameState = getIt<GameState>();
       final deck = GameMethods.getModifierDeck(monsterDeckName, gameState);
       // Drain the draw pile
-      while (deck.drawPile.isNotEmpty) {
+      while (deck.drawPileIsNotEmpty) {
         gameState.action(DrawModifierCardCommand(monsterDeckName));
       }
 
@@ -164,7 +164,7 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       final deck = GameMethods.getModifierDeck('Blinkblade', gameState);
-      final before = deck.discardPile.size();
+      final before = deck.discardPileSize;
 
       await pumpWidget(tester, 'Blinkblade');
 
@@ -177,7 +177,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 1300));
       FlutterError.onError = originalOnError;
 
-      expect(deck.discardPile.size(), before + 1);
+      expect(deck.discardPileSize, before + 1);
       gameState.undo();
     });
   });

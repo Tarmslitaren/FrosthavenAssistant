@@ -34,7 +34,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
     bool isInDrawPile = false;
     for (var item in _gameState.currentAbilityDecks) {
       if (item.name == widget.card.deck) {
-        var list = item.drawPile.getList();
+        var list = item.drawPileContents.toList();
         for (int i = 0; i < list.length; i++) {
           if (list[i].nr == widget.card.nr) {
             isInDrawPile = true;
@@ -72,7 +72,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                   //todo: no logic in ui
                   for (var item in _gameState.currentAbilityDecks) {
                     if (item.name == widget.card.deck) {
-                      var list = item.drawPile.getList();
+                      var list = item.drawPileContents.toList();
                       for (int i = 0; i < list.length; i++) {
                         if (list[i].nr == widget.card.nr) {
                           oldIndex = i;

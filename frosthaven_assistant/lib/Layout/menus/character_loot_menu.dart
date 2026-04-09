@@ -21,7 +21,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
 
   int getLootAmount(String characterId, String lootName) {
     int value = 0;
-    for (var item in getIt<GameState>().lootDeck.discardPile.getList()) {
+    for (var item in getIt<GameState>().lootDeck.discardPileContents) {
       if (item.owner == characterId && item.gfx.contains(lootName)) {
         if (lootName == "coin") {
           if (item.gfx.endsWith("3")) {

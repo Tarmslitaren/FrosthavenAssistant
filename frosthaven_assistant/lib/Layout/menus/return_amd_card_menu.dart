@@ -29,7 +29,7 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
   @override
   Widget build(BuildContext context) {
     final deck = GameMethods.getModifierDeck(widget.name, _gameState);
-    final card = deck.removedPile.getList()[widget.index];
+    final card = deck.removedPileContents[widget.index];
     final screenSize = MediaQuery.of(context).size;
     double scale = 6;
     final cardWidth = 7 * 58.6666;

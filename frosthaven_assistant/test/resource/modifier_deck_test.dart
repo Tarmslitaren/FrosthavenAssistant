@@ -29,10 +29,9 @@ void main() {
       // Draw until we hit a multiply card (nullAttack or doubleAttack)
       bool foundMultiply = false;
       for (int i = 0; i < 50; i++) {
-        if (deck().drawPile.isEmpty) break;
+        if (deck().drawPileIsEmpty) break;
         gs().action(DrawModifierCardCommand(''));
-        if (deck().discardPile
-                .getList()
+        if (deck().discardPileContents
                 .any((c) => c.type == CardType.multiply)) {
           foundMultiply = true;
           break;
@@ -53,7 +52,7 @@ void main() {
       // Draw until a bless is drawn
       bool drewBless = false;
       for (int i = 0; i < 30; i++) {
-        if (deck().drawPile.isEmpty) break;
+        if (deck().drawPileIsEmpty) break;
         final before = deck().getRemovable('bless').value;
         gs().action(DrawModifierCardCommand(''));
         if (deck().getRemovable('bless').value < before) {
@@ -69,15 +68,15 @@ void main() {
 
     test('drawing all cards triggers reshuffle when drawPile is empty', () {
       // Draw all cards to empty the deck, then draw one more (forces reshuffle)
-      int initialSize = deck().drawPile.size();
+      int initialSize = deck().drawPileSize;
       for (int i = 0; i < initialSize; i++) {
         gs().action(DrawModifierCardCommand(''));
       }
-      expect(deck().drawPile.isEmpty, isTrue);
+      expect(deck().drawPileIsEmpty, isTrue);
       // Drawing when empty reshuffles the discard pile into draw pile
       gs().action(DrawModifierCardCommand(''));
       // After reshuffle+draw, discard pile has the one drawn card
-      expect(deck().discardPile.size(), greaterThan(0));
+      expect(deck().discardPileSize, greaterThan(0));
       while (gs().commandIndex.value >= 0) gs().undo();
     });
   });
@@ -89,7 +88,7 @@ void main() {
       gs().action(AMDImbue1Command());
       expect(deck().imbuement.value, 1);
       final hasImbueCards =
-          deck().drawPile.getList().any((c) => c.gfx.startsWith('imbue'));
+          deck().drawPileContents.toList().any((c) => c.gfx.startsWith('imbue'));
       expect(hasImbueCards, isTrue);
       gs().undo();
     });
@@ -98,7 +97,7 @@ void main() {
       gs().action(AMDImbue2Command());
       expect(deck().imbuement.value, 2);
       final hasImbue2Cards =
-          deck().drawPile.getList().any((c) => c.gfx.startsWith('imbue2'));
+          deck().drawPileContents.toList().any((c) => c.gfx.startsWith('imbue2'));
       expect(hasImbue2Cards, isTrue);
       gs().undo();
     });
@@ -109,7 +108,7 @@ void main() {
       expect(deck().imbuement.value, 2);
       // Both imbue and imbue2 cards should be present
       final hasImbueCards =
-          deck().drawPile.getList().any((c) => c.gfx.startsWith('imbue'));
+          deck().drawPileContents.toList().any((c) => c.gfx.startsWith('imbue'));
       expect(hasImbueCards, isTrue);
       gs().undo();
     });
@@ -120,7 +119,7 @@ void main() {
       gs().action(AMDRemoveImbueCommand());
       expect(deck().imbuement.value, 0);
       final hasImbueCards =
-          deck().drawPile.getList().any((c) => c.gfx.startsWith('imbue'));
+          deck().drawPileContents.toList().any((c) => c.gfx.startsWith('imbue'));
       expect(hasImbueCards, isFalse);
       gs().undo();
       gs().undo();
@@ -133,7 +132,7 @@ void main() {
       expect(deck().imbuement.value, 0);
       // After reset from imbue2, minus2 and plus0 cards should be back
       final hasMinus2 =
-          deck().drawPile.getList().any((c) => c.gfx == 'minus2');
+          deck().drawPileContents.toList().any((c) => c.gfx == 'minus2');
       expect(hasMinus2, isTrue);
       gs().undo();
       gs().undo();
@@ -141,10 +140,10 @@ void main() {
 
     test('resetImbue is a no-op when imbuement is already 0', () {
       expect(deck().imbuement.value, 0);
-      final drawSizeBefore = deck().drawPile.size();
+      final drawSizeBefore = deck().drawPileSize;
       gs().action(AMDRemoveImbueCommand());
       expect(deck().imbuement.value, 0);
-      expect(deck().drawPile.size(), drawSizeBefore);
+      expect(deck().drawPileSize, drawSizeBefore);
       gs().undo();
     });
   });
@@ -157,7 +156,7 @@ void main() {
       gs().action(ChangeCurseCommand(1, '', ''));
       expect(deck().getRemovable('curse').value, before + 1);
       final curseInDeck =
-          deck().drawPile.getList().where((c) => c.gfx == 'curse').length;
+          deck().drawPileContents.toList().where((c) => c.gfx == 'curse').length;
       expect(curseInDeck, before + 1);
       gs().undo();
     });

@@ -119,15 +119,15 @@ void main() {
         (WidgetTester tester) async {
       getIt<GameState>().action(DrawLootCardCommand());
       final gameState = getIt<GameState>();
-      final discardBefore = gameState.lootDeck.discardPile.size();
-      final drawBefore = gameState.lootDeck.drawPile.size();
+      final discardBefore = gameState.lootDeck.discardPileSize;
+      final drawBefore = gameState.lootDeck.drawPileSize;
 
       await pumpMenu(tester);
       await tester.tap(find.text('Return to Top'));
       await tester.pump();
 
-      expect(gameState.lootDeck.discardPile.size(), discardBefore - 1);
-      expect(gameState.lootDeck.drawPile.size(), drawBefore + 1);
+      expect(gameState.lootDeck.discardPileSize, discardBefore - 1);
+      expect(gameState.lootDeck.drawPileSize, drawBefore + 1);
     });
   });
 }

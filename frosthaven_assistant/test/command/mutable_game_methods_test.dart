@@ -118,7 +118,7 @@ void main() {
       final zealotDeck = getIt<GameState>()
           .currentAbilityDecks
           .firstWhere((d) => d.name == zealot.type.deck);
-      final zealotInit = zealotDeck.discardPile.peek.initiative;
+      final zealotInit = zealotDeck.discardPileTop.initiative;
 
       final list = getIt<GameState>().currentList;
       final zealotIdx = list.indexWhere((e) => e.id == 'Zealot');
@@ -281,13 +281,13 @@ void main() {
 
       // Zealot has no standees so not drawn during DrawCommand
       DrawCommand().execute();
-      expect(deck.discardPile.isEmpty, isTrue,
+      expect(deck.discardPileIsEmpty, isTrue,
           reason: 'Inactive Zealot should not have drawn a card during DrawCommand');
 
       // Add first standee during playTurns → triggers drawAbilityCardFromInactiveDeck
       AddStandeeCommand(1, null, zealot.id, MonsterType.normal, false).execute();
 
-      expect(deck.discardPile.isNotEmpty, isTrue,
+      expect(deck.discardPileIsNotEmpty, isTrue,
           reason: 'First standee during playTurns should trigger an ability card draw');
     });
 
@@ -301,12 +301,12 @@ void main() {
 
       DrawCommand().execute();
       AddStandeeCommand(1, null, zealot.id, MonsterType.normal, false).execute();
-      final sizeAfterFirst = deck.discardPile.size();
+      final sizeAfterFirst = deck.discardPileSize;
 
       // Second standee should NOT draw another card
       AddStandeeCommand(2, null, zealot.id, MonsterType.normal, false).execute();
 
-      expect(deck.discardPile.size(), sizeAfterFirst,
+      expect(deck.discardPileSize, sizeAfterFirst,
           reason: 'Adding a second standee should not draw another ability card');
     });
   });
@@ -335,7 +335,7 @@ void main() {
       final deck = getIt<GameState>()
           .currentAbilityDecks
           .firstWhere((d) => d.name == zealot.type.deck);
-      final drawnInit = deck.discardPile.peek.initiative;
+      final drawnInit = deck.discardPileTop.initiative;
 
       final list = getIt<GameState>().currentList;
       final zealotIdx = list.indexWhere((e) => e.id == 'Zealot');
@@ -363,7 +363,7 @@ void main() {
       final deck = getIt<GameState>()
           .currentAbilityDecks
           .firstWhere((d) => d.name == chaosDemon.type.deck);
-      final drawnInit = deck.discardPile.peek.initiative;
+      final drawnInit = deck.discardPileTop.initiative;
 
       final list = getIt<GameState>().currentList;
       final cdIdx = list.indexWhere((e) => e.id == 'Chaos Demon');
@@ -596,17 +596,17 @@ void main() {
           .firstWhere((d) => d.name == zealot.type.deck);
 
       // Drain all cards from the draw pile
-      while (deck.drawPile.isNotEmpty) {
+      while (deck.drawPileIsNotEmpty) {
         DrawAbilityCardCommand(zealot.id).execute();
       }
-      expect(deck.drawPile.isEmpty, isTrue,
+      expect(deck.drawPileIsEmpty, isTrue,
           reason: 'Precondition: draw pile should be empty');
 
       NextRoundCommand().execute();
 
-      expect(deck.drawPile.isNotEmpty, isTrue,
+      expect(deck.drawPileIsNotEmpty, isTrue,
           reason: 'Ability deck should be reshuffled when draw pile was empty');
-      expect(deck.discardPile.isEmpty, isTrue,
+      expect(deck.discardPileIsEmpty, isTrue,
           reason: 'Discard pile should be empty after reshuffle');
     });
 
@@ -621,18 +621,18 @@ void main() {
       // Draw until a shuffle-flagged card lands on top of the discard pile.
       // We drain the deck once; if no shuffle card appears, skip the assertion.
       int attempts = 0;
-      while (deck.drawPile.isNotEmpty && attempts < 50) {
+      while (deck.drawPileIsNotEmpty && attempts < 50) {
         DrawAbilityCardCommand(zealot.id).execute();
         attempts++;
-        if (deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle) break;
+        if (deck.discardPileIsNotEmpty && deck.discardPileTop.shuffle) break;
       }
 
-      if (deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle) {
-        final discardSizeBefore = deck.discardPile.size();
+      if (deck.discardPileIsNotEmpty && deck.discardPileTop.shuffle) {
+        final discardSizeBefore = deck.discardPileSize;
         NextRoundCommand().execute();
-        expect(deck.discardPile.isEmpty, isTrue,
+        expect(deck.discardPileIsEmpty, isTrue,
             reason: 'Discard pile should be empty after shuffle-triggered reshuffle');
-        expect(deck.drawPile.size(), greaterThanOrEqualTo(discardSizeBefore),
+        expect(deck.drawPileSize, greaterThanOrEqualTo(discardSizeBefore),
             reason: 'Draw pile should contain all formerly discarded cards');
       }
       // If we never got a shuffle card on top, the test is a no-op (inconclusive but not failing)

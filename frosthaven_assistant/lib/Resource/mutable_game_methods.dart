@@ -229,8 +229,8 @@ class MutableGameMethods {
 
         //find the deck
         for (var item in gameState.currentAbilityDecks) {
-          if (item.name == a.type.deck && item.discardPile.isNotEmpty) {
-            aInitiative = item.discardPile.peek.initiative;
+          if (item.name == a.type.deck && item.discardPileIsNotEmpty) {
+            aInitiative = item.discardPileTop.initiative;
           }
         }
       }
@@ -245,8 +245,8 @@ class MutableGameMethods {
         }
         //find the deck
         for (var item in gameState.currentAbilityDecks) {
-          if (item.name == b.type.deck && item.discardPile.isNotEmpty) {
-            bInitiative = item.discardPile.peek.initiative;
+          if (item.name == b.type.deck && item.discardPileIsNotEmpty) {
+            bInitiative = item.discardPileTop.initiative;
           }
         }
       }
@@ -648,10 +648,10 @@ class MutableGameMethods {
     if (scenario.contains("Scouting Ambush")) {
       MonsterAbilityState deck = gameState.currentAbilityDecks
           .firstWhere((element) => element.name.contains("Scout"));
-      final drawPileList = deck.drawPile.getList();
+      final drawPileList = deck._drawPile.getList();
       for (int i = 0; i < drawPileList.length; i++) {
         if (drawPileList[i].title == "Rancid Arrow") {
-          deck.drawPile.add(deck.drawPile.removeAt(i));
+          deck._drawPile.add(deck._drawPile.removeAt(i));
           break;
         }
       }
@@ -979,8 +979,8 @@ class MutableGameMethods {
   static void shuffleDecksIfNeeded(_StateModifier _) {
     final GameState gameState = getIt<GameState>();
     for (var deck in gameState.currentAbilityDecks) {
-      if (deck.discardPile.isNotEmpty && deck.discardPile.peek.shuffle ||
-          deck.drawPile.isEmpty) {
+      if (deck.discardPileIsNotEmpty && deck.discardPileTop.shuffle ||
+          deck.drawPileIsEmpty) {
         deck._shuffle();
       }
     }

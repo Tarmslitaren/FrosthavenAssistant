@@ -14,9 +14,7 @@ class ReorderAbilityListCommand extends Command {
     GameState gameState = getIt<GameState>();
     for (var item in gameState.currentAbilityDecks) {
       if (item.name == deck) {
-        List<MonsterAbilityCardModel> list = List.from(item.drawPile.getList());
-        list.insert(newIndex, list.removeAt(oldIndex));
-        item.drawPile.setList(list);
+        item.reorderDrawPile(stateAccess, oldIndex, newIndex);
         break;
       }
     }

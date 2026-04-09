@@ -53,7 +53,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
 
   bool isRevealed(ModifierCard item) {
     ModifierDeck deck = GameMethods.getModifierDeck(widget.name, _gameState);
-    var drawPile = deck.drawPile.getList().reversed.toList();
+    var drawPile = deck.drawPileContents.reversed.toList();
     for (int i = 0; i < deck.revealedCount.value; i++) {
       if (item == drawPile[i]) {
         return true;
@@ -190,9 +190,9 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
           String name = widget.name;
           ModifierDeck deck =
               GameMethods.getModifierDeck(widget.name, _gameState);
-          final drawPile = deck.drawPile.getList().reversed.toList();
-          final discardPile = deck.discardPile.getList();
-          final removedPile = deck.removedPile.getList();
+          final drawPile = deck.drawPileContents.reversed.toList();
+          final discardPile = deck.discardPileContents.toList();
+          final removedPile = deck.removedPileContents.toList();
 
           bool hasDiviner = false;
           for (final item in _gameState.currentList) {

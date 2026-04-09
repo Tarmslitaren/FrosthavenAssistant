@@ -22,13 +22,13 @@ void main() {
       final monster = getIt<GameState>().currentList.firstWhere(
               (e) => e is Monster) as Monster;
       final deck = GameMethods.getDeck(monster.type.deck)!;
-      final drawBefore = deck.drawPile.size();
-      final discardBefore = deck.discardPile.size();
+      final drawBefore = deck.drawPileSize;
+      final discardBefore = deck.discardPileSize;
 
       DrawAbilityCardCommand(monster.id).execute();
 
-      expect(deck.drawPile.size(), drawBefore - 1);
-      expect(deck.discardPile.size(), discardBefore + 1);
+      expect(deck.drawPileSize, drawBefore - 1);
+      expect(deck.discardPileSize, discardBefore + 1);
       checkSaveState();
     });
 

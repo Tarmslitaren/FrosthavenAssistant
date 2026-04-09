@@ -85,10 +85,21 @@ class LootDeck {
   List<int> _addedCards = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   Map<String, int> _enhancements = {};
 
-  CardStack<LootCard> get drawPile => _drawPile;
-  CardStack<LootCard> get discardPile => _discardPile;
   final CardStack<LootCard> _drawPile = CardStack<LootCard>();
   final CardStack<LootCard> _discardPile = CardStack<LootCard>();
+
+  bool get drawPileIsEmpty => _drawPile.isEmpty;
+  bool get drawPileIsNotEmpty => _drawPile.isNotEmpty;
+  bool get discardPileIsEmpty => _discardPile.isEmpty;
+  bool get discardPileIsNotEmpty => _discardPile.isNotEmpty;
+  LootCard get drawPileTop => _drawPile.peek;
+  LootCard get discardPileTop => _discardPile.peek;
+  BuiltList<LootCard> get drawPileContents =>
+      BuiltList.of(_drawPile.getList());
+  BuiltList<LootCard> get discardPileContents =>
+      BuiltList.of(_discardPile.getList());
+  int get drawPileSize => _drawPile.size();
+  int get discardPileSize => _discardPile.size();
 
   bool get hasCard1418 => _hasCard1418;
   bool _hasCard1418 = false;

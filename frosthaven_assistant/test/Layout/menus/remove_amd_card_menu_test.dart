@@ -61,31 +61,31 @@ void main() {
     testWidgets('tapping "Remove card?" removes the card from the discard pile',
         (WidgetTester tester) async {
       final deck = getIt<GameState>().modifierDeck;
-      final discardBefore = deck.discardPile.size();
-      final removedBefore = deck.removedPile.size();
+      final discardBefore = deck.discardPileSize;
+      final removedBefore = deck.removedPileSize;
       await pumpMenu(tester);
 
       await tester.tap(find.text('Remove card?'));
       await tester.pumpAndSettle();
 
       expect(find.byType(RemoveAMDCardMenu), findsNothing);
-      expect(deck.discardPile.size(), discardBefore - 1);
-      expect(deck.removedPile.size(), removedBefore + 1);
+      expect(deck.discardPileSize, discardBefore - 1);
+      expect(deck.removedPileSize, removedBefore + 1);
     });
 
     testWidgets(
         'tapping "Return top card" moves the card back to the draw pile',
         (WidgetTester tester) async {
       final deck = getIt<GameState>().modifierDeck;
-      final discardBefore = deck.discardPile.size();
-      final drawBefore = deck.drawPile.size();
+      final discardBefore = deck.discardPileSize;
+      final drawBefore = deck.drawPileSize;
       await pumpMenu(tester);
 
       await tester.tap(find.text('Return top card'));
       await tester.pumpAndSettle();
 
-      expect(deck.discardPile.size(), discardBefore - 1);
-      expect(deck.drawPile.size(), drawBefore + 1);
+      expect(deck.discardPileSize, discardBefore - 1);
+      expect(deck.drawPileSize, drawBefore + 1);
     });
   });
 }

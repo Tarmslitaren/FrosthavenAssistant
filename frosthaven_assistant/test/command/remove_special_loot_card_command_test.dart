@@ -43,11 +43,11 @@ void main() {
 
     test('should do nothing for unknown card nr', () {
       final lootDeck = getIt<GameState>().lootDeck;
-      final countBefore = lootDeck.drawPile.size();
+      final countBefore = lootDeck.drawPileSize;
 
       RemoveSpecialLootCardCommand(9999).execute();
 
-      expect(lootDeck.drawPile.size(), countBefore);
+      expect(lootDeck.drawPileSize, countBefore);
     });
 
     test('describe includes the card number', () {

@@ -68,7 +68,7 @@ void main() {
         (WidgetTester tester) async {
       final deck = getIt<GameState>().lootDeck;
       // The scenario should have initialized the draw pile
-      if (deck.drawPile.isEmpty && deck.discardPile.isEmpty) {
+      if (deck.drawPileIsEmpty && deck.discardPileIsEmpty) {
         return; // skip if testData has no loot deck for this scenario
       }
       await pumpWidget(tester);
@@ -77,7 +77,7 @@ void main() {
 
     testWidgets('renders card count text', (WidgetTester tester) async {
       final deck = getIt<GameState>().lootDeck;
-      if (deck.drawPile.isEmpty && deck.discardPile.isEmpty) {
+      if (deck.drawPileIsEmpty && deck.discardPileIsEmpty) {
         return;
       }
       await pumpWidget(tester);
@@ -87,7 +87,7 @@ void main() {
     testWidgets('renders Row with draw and discard sections',
         (WidgetTester tester) async {
       final deck = getIt<GameState>().lootDeck;
-      if (deck.drawPile.isEmpty && deck.discardPile.isEmpty) {
+      if (deck.drawPileIsEmpty && deck.discardPileIsEmpty) {
         return;
       }
       await pumpWidget(tester);
@@ -98,10 +98,10 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       final deck = gameState.lootDeck;
-      if (deck.drawPile.isEmpty) {
+      if (deck.drawPileIsEmpty) {
         return; // skip if no draw pile in testData
       }
-      final before = deck.discardPile.size();
+      final before = deck.discardPileSize;
 
       await pumpWidget(tester);
 
@@ -115,14 +115,14 @@ void main() {
       await tester.pump(const Duration(milliseconds: 1700));
       FlutterError.onError = originalOnError;
 
-      expect(deck.discardPile.size(), before + 1);
+      expect(deck.discardPileSize, before + 1);
       gameState.undo();
     });
 
     testWidgets('tapping discard pile opens LootCardsMenu',
         (WidgetTester tester) async {
       final deck = getIt<GameState>().lootDeck;
-      if (deck.drawPile.isEmpty && deck.discardPile.isEmpty) {
+      if (deck.drawPileIsEmpty && deck.discardPileIsEmpty) {
         return;
       }
       await pumpWidget(tester);
@@ -144,7 +144,7 @@ void main() {
     testWidgets('SizedBox has expected dimensions from userScalingBars',
         (WidgetTester tester) async {
       final deck = getIt<GameState>().lootDeck;
-      if (deck.drawPile.isEmpty && deck.discardPile.isEmpty) {
+      if (deck.drawPileIsEmpty && deck.discardPileIsEmpty) {
         return;
       }
       await pumpWidget(tester);

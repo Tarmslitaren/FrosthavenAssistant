@@ -369,7 +369,7 @@ void main() {
       await tester.pumpAndSettle();
 
       final deck = GameMethods.getModifierDeck(deckName, gameState);
-      expect(deck.discardPile.size(), greaterThan(0));
+      expect(deck.discardPileSize, greaterThan(0));
 
       gameState.undo();
     });

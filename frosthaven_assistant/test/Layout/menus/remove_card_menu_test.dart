@@ -50,7 +50,7 @@ void main() {
   group('RemoveCardMenu', () {
     testWidgets('shows remove button with card title for a discard pile card',
         (WidgetTester tester) async {
-      final card = abilityState.discardPile.peek;
+      final card = abilityState.discardPileTop;
       await pumpMenu(tester, card);
 
       expect(
@@ -60,7 +60,7 @@ void main() {
     testWidgets(
         'does not show "Send to Bottom" for a card not in the draw pile',
         (WidgetTester tester) async {
-      final card = abilityState.discardPile.peek;
+      final card = abilityState.discardPileTop;
       await pumpMenu(tester, card);
 
       expect(find.text('Send to Bottom'), findsNothing);
@@ -69,7 +69,7 @@ void main() {
 
     testWidgets('shows "Send to Bottom" for a card still in the draw pile',
         (WidgetTester tester) async {
-      final drawCard = abilityState.drawPile.peek;
+      final drawCard = abilityState.drawPileTop;
       await pumpMenu(tester, drawCard);
 
       expect(find.text('Send to Bottom'), findsOneWidget);
@@ -78,7 +78,7 @@ void main() {
 
     testWidgets('tapping remove button removes the card and closes the dialog',
         (WidgetTester tester) async {
-      final card = abilityState.discardPile.peek;
+      final card = abilityState.discardPileTop;
       await pumpMenu(tester, card);
 
       await tester.tap(find.textContaining('Remove ${card.title}'));
@@ -87,8 +87,8 @@ void main() {
       expect(find.byType(RemoveCardMenu), findsNothing);
       // RemoveCardCommand also shuffles + redraws — verify the card is gone
       final allCards = [
-        ...abilityState.drawPile.getList(),
-        ...abilityState.discardPile.getList(),
+        ...abilityState.drawPileContents.toList(),
+        ...abilityState.discardPileContents.toList(),
       ];
       expect(allCards.any((c) => c.nr == card.nr), isFalse);
     });
@@ -96,21 +96,21 @@ void main() {
     testWidgets(
         'tapping "Send to Bottom" reorders draw pile and closes the dialog',
         (WidgetTester tester) async {
-      final drawCard = abilityState.drawPile.peek;
-      final drawSizeBefore = abilityState.drawPile.size();
+      final drawCard = abilityState.drawPileTop;
+      final drawSizeBefore = abilityState.drawPileSize;
       await pumpMenu(tester, drawCard);
 
       await tester.tap(find.text('Send to Bottom'));
       await tester.pumpAndSettle();
 
       expect(find.byType(RemoveCardMenu), findsNothing);
-      expect(abilityState.drawPile.size(), drawSizeBefore);
+      expect(abilityState.drawPileSize, drawSizeBefore);
     });
 
     testWidgets(
         'tapping "Shuffle un-drawn Cards" shuffles draw pile and closes the dialog',
         (WidgetTester tester) async {
-      final drawCard = abilityState.drawPile.peek;
+      final drawCard = abilityState.drawPileTop;
       await pumpMenu(tester, drawCard);
 
       await tester.tap(find.text('Shuffle un-drawn Cards'));

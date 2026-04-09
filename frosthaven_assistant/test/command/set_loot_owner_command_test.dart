@@ -25,7 +25,7 @@ void main() {
   group('SetLootOwnerCommand', () {
     test('should set owner on the loot card', () {
       final lootDeck = getIt<GameState>().lootDeck;
-      final card = lootDeck.discardPile.peek;
+      final card = lootDeck.discardPileTop;
       expect(card.owner, isEmpty);
 
       SetLootOwnerCommand('Blinkblade', card).execute();
@@ -36,7 +36,7 @@ void main() {
 
     test('describe returns correct string', () {
       final lootDeck = getIt<GameState>().lootDeck;
-      final card = lootDeck.discardPile.peek;
+      final card = lootDeck.discardPileTop;
       final command = SetLootOwnerCommand('Blinkblade', card);
       expect(command.describe(), 'Set loot card owner');
     });

@@ -42,7 +42,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
     setState(() {
       revealedList = [];
       var drawPile =
-          widget.monsterAbilityState.drawPile.getList().reversed.toList();
+          widget.monsterAbilityState.drawPileContents.reversed.toList();
       for (int i = 0; i < revealed; i++) {
         revealedList.add(drawPile[i]);
       }
@@ -151,8 +151,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
           var drawPile =
-              widget.monsterAbilityState.drawPile.getList().reversed.toList();
-          var discardPile = widget.monsterAbilityState.discardPile.getList();
+              widget.monsterAbilityState.drawPileContents.reversed.toList();
+          var discardPile = widget.monsterAbilityState.discardPileContents.toList();
 
           final screenSize = MediaQuery.of(context).size;
 

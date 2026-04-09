@@ -21,13 +21,13 @@ void main() {
     test('should add an enhancement to a loot card', () {
       final lootDeck = getIt<GameState>().lootDeck;
       // Get any existing card id from the draw pile
-      if (lootDeck.drawPile.isNotEmpty) {
-        final cardId = lootDeck.drawPile.getList().first.id;
+      if (lootDeck.drawPileIsNotEmpty) {
+        final cardId = lootDeck.drawPileContents.toList().first.id;
 
         EnhanceLootCardCommand(cardId, 2, 'coin').execute();
 
         // After enhancement the deck is rebuilt; verify it doesn't crash
-        expect(lootDeck.drawPile.isNotEmpty, isTrue);
+        expect(lootDeck.drawPileIsNotEmpty, isTrue);
         checkSaveState();
       }
     });

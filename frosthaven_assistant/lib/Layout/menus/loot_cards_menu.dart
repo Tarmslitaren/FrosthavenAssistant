@@ -68,7 +68,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
     return ValueListenableBuilder<int>(
         valueListenable: _gameState.commandIndex,
         builder: (context, value, child) {
-          var discardPile = _gameState.lootDeck.discardPile.getList();
+          var discardPile = _gameState.lootDeck.discardPileContents.toList();
 
           return Container(
               constraints: BoxConstraints(
@@ -152,7 +152,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                       child: const Text("Add Card"),
                                     ),
                                     if (_gameState
-                                        .lootDeck.discardPile.isNotEmpty)
+                                        .lootDeck.discardPileIsNotEmpty)
                                       TextButton(
                                         onPressed: () {
                                           _gameState.action(
@@ -161,7 +161,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                         child: const Text("Return to Top"),
                                       ),
                                     if (_gameState
-                                        .lootDeck.discardPile.isNotEmpty)
+                                        .lootDeck.discardPileIsNotEmpty)
                                       TextButton(
                                         onPressed: () {
                                           _gameState.action(

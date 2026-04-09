@@ -30,7 +30,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
   @override
   Widget build(BuildContext context) {
     final deck = GameMethods.getModifierDeck(widget.name, _gameState);
-    final card = deck.discardPile.getList()[widget.index];
+    final card = deck.discardPileContents[widget.index];
     final screenSize = MediaQuery.of(context).size;
     double scale = 6;
     final cardWidth = 7 * 58.6666;
@@ -71,7 +71,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                     final deck =
                         GameMethods.getModifierDeck(widget.name, _gameState);
                     //if last card, remove modal
-                    if (deck.discardPile.isEmpty) {
+                    if (deck.discardPileIsEmpty) {
                       Navigator.pop(context);
                     }
                   },

@@ -60,23 +60,23 @@ void main() {
       expect(monsterDeck.badOmen.value, initialBadOmenValue + 6);
 
       ChangeCurseCommand(1, "Zealot", "Zealot").execute(); // Add a curse first
-      expect(monsterDeck.drawPile.getList()[15].gfx, "curse");
+      expect(monsterDeck.drawPileContents.toList()[15].gfx, "curse");
       expect(monsterDeck.badOmen.value, initialBadOmenValue + 5);
 
       ChangeCurseCommand(1, "Zealot", "Zealot").execute(); // Add a curse first
-      expect(monsterDeck.drawPile.getList()[15].gfx, "curse");
+      expect(monsterDeck.drawPileContents.toList()[15].gfx, "curse");
       expect(monsterDeck.badOmen.value, initialBadOmenValue + 4);
 
       ChangeCurseCommand(1, "Zealot", "Zealot").execute(); // Add a curse first
-      expect(monsterDeck.drawPile.getList()[15].gfx, "curse");
+      expect(monsterDeck.drawPileContents.toList()[15].gfx, "curse");
       expect(monsterDeck.badOmen.value, initialBadOmenValue + 3);
 
       ChangeCurseCommand(1, "Zealot", "Zealot").execute(); // Add a curse first
-      expect(monsterDeck.drawPile.getList()[15].gfx, "curse");
+      expect(monsterDeck.drawPileContents.toList()[15].gfx, "curse");
       expect(monsterDeck.badOmen.value, initialBadOmenValue + 2);
 
       ChangeCurseCommand(1, "Zealot", "Zealot").execute(); // Add a curse first
-      expect(monsterDeck.drawPile.getList()[15].gfx, "curse");
+      expect(monsterDeck.drawPileContents.toList()[15].gfx, "curse");
       expect(monsterDeck.badOmen.value, initialBadOmenValue + 1);
 
       checkSaveState();

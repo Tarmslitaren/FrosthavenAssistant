@@ -50,14 +50,14 @@ void main() {
               (e) => e is Monster) as Monster;
       final deck = GameMethods.getDeck(monster.type.deck)!;
       // Need at least 2 cards
-      if (deck.drawPile.size() >= 2) {
-        final firstCardNr = deck.drawPile.getList()[0].nr;
-        final secondCardNr = deck.drawPile.getList()[1].nr;
+      if (deck.drawPileSize >= 2) {
+        final firstCardNr = deck.drawPileContents.toList()[0].nr;
+        final secondCardNr = deck.drawPileContents.toList()[1].nr;
 
         ReorderAbilityListCommand(monster.type.deck, 0, 1).execute();
 
-        expect(deck.drawPile.getList()[0].nr, secondCardNr);
-        expect(deck.drawPile.getList()[1].nr, firstCardNr);
+        expect(deck.drawPileContents.toList()[0].nr, secondCardNr);
+        expect(deck.drawPileContents.toList()[1].nr, firstCardNr);
       }
     });
 
@@ -70,14 +70,14 @@ void main() {
   group('ReorderModifierListCommand', () {
     test('should reorder cards in a modifier deck draw pile', () {
       final deck = getIt<GameState>().modifierDeck;
-      if (deck.drawPile.size() >= 2) {
-        final firstGfx = deck.drawPile.getList()[0].gfx;
-        final secondGfx = deck.drawPile.getList()[1].gfx;
+      if (deck.drawPileSize >= 2) {
+        final firstGfx = deck.drawPileContents.toList()[0].gfx;
+        final secondGfx = deck.drawPileContents.toList()[1].gfx;
 
         ReorderModifierListCommand(0, 1, '').execute();
 
-        expect(deck.drawPile.getList()[0].gfx, secondGfx);
-        expect(deck.drawPile.getList()[1].gfx, firstGfx);
+        expect(deck.drawPileContents.toList()[0].gfx, secondGfx);
+        expect(deck.drawPileContents.toList()[1].gfx, firstGfx);
       }
     });
 

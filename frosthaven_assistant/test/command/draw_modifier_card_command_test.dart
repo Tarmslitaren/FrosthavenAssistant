@@ -13,13 +13,13 @@ void main() {
   group('DrawModifierCardCommand', () {
     test('should move a card from draw pile to discard pile', () {
       final deck = getIt<GameState>().modifierDeck;
-      final drawBefore = deck.drawPile.size();
-      final discardBefore = deck.discardPile.size();
+      final drawBefore = deck.drawPileSize;
+      final discardBefore = deck.discardPileSize;
 
       DrawModifierCardCommand('').execute();
 
-      expect(deck.drawPile.size(), drawBefore - 1);
-      expect(deck.discardPile.size(), discardBefore + 1);
+      expect(deck.drawPileSize, drawBefore - 1);
+      expect(deck.discardPileSize, discardBefore + 1);
       checkSaveState();
     });
 

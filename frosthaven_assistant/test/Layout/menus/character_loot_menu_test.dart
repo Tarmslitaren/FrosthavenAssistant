@@ -77,12 +77,12 @@ void main() {
           gs.currentList.firstWhere((e) => e is Character) as Character;
 
       // Draw and assign loot cards if deck has any
-      if (gs.lootDeck.drawPile.isNotEmpty) {
+      if (gs.lootDeck.drawPileIsNotEmpty) {
         DrawLootCardCommand().execute();
         // SetLootOwnerCommand assigns ownership of discard pile cards
-        if (gs.lootDeck.discardPile.isNotEmpty) {
+        if (gs.lootDeck.discardPileIsNotEmpty) {
           SetLootOwnerCommand(character.id,
-                  gs.lootDeck.discardPile.getList().first)
+                  gs.lootDeck.discardPileContents.toList().first)
               .execute();
         }
       }

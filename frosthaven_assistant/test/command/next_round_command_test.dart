@@ -75,7 +75,7 @@ void main() {
       if (deck.needsShuffle) {
         NextRoundCommand().execute();
         // After next round with needsShuffle, deck should be reshuffled
-        expect(deck.drawPile.isNotEmpty, isTrue);
+        expect(deck.drawPileIsNotEmpty, isTrue);
       }
     });
 
@@ -91,7 +91,7 @@ void main() {
       }
       if (deck.needsShuffle) {
         NextRoundCommand().execute();
-        expect(deck.drawPile.isNotEmpty, isTrue);
+        expect(deck.drawPileIsNotEmpty, isTrue);
       }
     });
 
@@ -105,7 +105,7 @@ void main() {
       }
       if (deck.needsShuffle) {
         NextRoundCommand().execute();
-        expect(deck.drawPile.isNotEmpty, isTrue);
+        expect(deck.drawPileIsNotEmpty, isTrue);
       }
     });
 

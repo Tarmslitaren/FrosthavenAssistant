@@ -30,11 +30,11 @@ void main() {
       DrawAbilityCardCommand(monster.id).execute();
       DrawAbilityCardCommand(monster.id).execute();
       final deck = GameMethods.getDeck(monster.type.deck)!;
-      expect(deck.discardPile.isNotEmpty, isTrue);
+      expect(deck.discardPileIsNotEmpty, isTrue);
 
       ShuffleAbilityCardCommand(monster.id).execute();
 
-      expect(deck.discardPile, isEmpty);
+      expect(deck.discardPileContents, isEmpty);
       checkSaveState();
     });
 
@@ -47,11 +47,11 @@ void main() {
   group('ShuffleDrawnAbilityCardCommand', () {
     test('should shuffle only undrawn part of ability deck', () {
       final deck = GameMethods.getDeck(monster.type.deck)!;
-      final totalBefore = deck.drawPile.size() + deck.discardPile.size();
+      final totalBefore = deck.drawPileSize + deck.discardPileSize;
 
       ShuffleDrawnAbilityCardCommand(monster.type.deck).execute();
 
-      final totalAfter = deck.drawPile.size() + deck.discardPile.size();
+      final totalAfter = deck.drawPileSize + deck.discardPileSize;
       expect(totalAfter, totalBefore);
     });
 
@@ -68,11 +68,11 @@ void main() {
 
     test('should shuffle modifier deck draw pile', () {
       final deck = getIt<GameState>().modifierDeck;
-      final sizeBefore = deck.drawPile.size();
+      final sizeBefore = deck.drawPileSize;
 
       ShuffleAMDCardCommand('').execute();
 
-      expect(deck.drawPile.size(), sizeBefore);
+      expect(deck.drawPileSize, sizeBefore);
     });
   });
 }

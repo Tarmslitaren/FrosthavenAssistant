@@ -25,15 +25,14 @@ void main() {
       // Arrange
       final command = AddSpecialLootCardCommand(1418);
       final lootDeck = getIt<GameState>().lootDeck;
-      final initialCardCount = lootDeck.drawPile.size();
+      final initialCardCount = lootDeck.drawPileSize;
 
       // Act
       command.execute();
 
       // Assert
-      expect(lootDeck.drawPile.size(), initialCardCount + 1);
-      final card = lootDeck.drawPile
-          .getList()
+      expect(lootDeck.drawPileSize, initialCardCount + 1);
+      final card = lootDeck.drawPileContents
           .firstWhereOrNull((card) => card.id == 1418);
       expect(card?.gfx, 'special 1418');
       checkSaveState();
@@ -43,15 +42,14 @@ void main() {
       // Arrange
       final command = AddSpecialLootCardCommand(1419);
       final lootDeck = getIt<GameState>().lootDeck;
-      final initialCardCount = lootDeck.drawPile.size();
+      final initialCardCount = lootDeck.drawPileSize;
 
       // Act
       command.execute();
 
       // Assert
-      expect(lootDeck.drawPile.size(), initialCardCount + 1);
-      final card = lootDeck.drawPile
-          .getList()
+      expect(lootDeck.drawPileSize, initialCardCount + 1);
+      final card = lootDeck.drawPileContents
           .firstWhereOrNull((card) => card.id == 1419);
       expect(card?.gfx, 'special 1419');
       checkSaveState();
@@ -61,13 +59,13 @@ void main() {
       // Arrange
       final command = AddSpecialLootCardCommand(9999);
       final lootDeck = getIt<GameState>().lootDeck;
-      final initialCardCount = lootDeck.drawPile.size();
+      final initialCardCount = lootDeck.drawPileSize;
 
       // Act
       command.execute();
 
       // Assert
-      expect(lootDeck.drawPile.size(), initialCardCount);
+      expect(lootDeck.drawPileSize, initialCardCount);
       // Since no change is expected, we don't call checkSaveState()
     });
 
@@ -76,14 +74,14 @@ void main() {
       final command = AddSpecialLootCardCommand(1418);
       final lootDeck = getIt<GameState>().lootDeck;
       command.execute();
-      final cardCountAfterExecute = lootDeck.drawPile.size();
+      final cardCountAfterExecute = lootDeck.drawPileSize;
 
       // Act
       command.undo();
 
       // Assert
       // The undo method is empty, so no change is expected.
-      expect(lootDeck.drawPile.size(), cardCountAfterExecute);
+      expect(lootDeck.drawPileSize, cardCountAfterExecute);
     });
 
     test('describe should return correct string', () {

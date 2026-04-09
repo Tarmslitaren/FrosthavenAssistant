@@ -110,18 +110,18 @@ void main() {
     test('ability decks have cards in draw pile after scenario load', () {
       SetScenarioCommand('#5 A Deeper Understanding', false).execute();
       for (final deck in getIt<GameState>().currentAbilityDecks) {
-        expect(deck.drawPile.isNotEmpty, isTrue);
+        expect(deck.drawPileIsNotEmpty, isTrue);
       }
     });
 
     test('modifier deck discard pile is empty after scenario load', () {
       SetScenarioCommand('#5 A Deeper Understanding', false).execute();
-      expect(getIt<GameState>().modifierDeck.discardPile.isEmpty, isTrue);
+      expect(getIt<GameState>().modifierDeck.discardPileIsEmpty, isTrue);
     });
 
     test('modifier deck draw pile is not empty after scenario load', () {
       SetScenarioCommand('#5 A Deeper Understanding', false).execute();
-      expect(getIt<GameState>().modifierDeck.drawPile.isNotEmpty, isTrue);
+      expect(getIt<GameState>().modifierDeck.drawPileIsNotEmpty, isTrue);
     });
   });
 

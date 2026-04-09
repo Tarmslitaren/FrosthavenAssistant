@@ -16,13 +16,13 @@ void main() {
     test('should move card from discard to removed pile', () {
       DrawModifierCardCommand('').execute();
       final deck = getIt<GameState>().modifierDeck;
-      final discardBefore = deck.discardPile.size();
-      final removedBefore = deck.removedPile.size();
+      final discardBefore = deck.discardPileSize;
+      final removedBefore = deck.removedPileSize;
 
       RemoveAMDCardCommand(0, '').execute();
 
-      expect(deck.discardPile.size(), discardBefore - 1);
-      expect(deck.removedPile.size(), removedBefore + 1);
+      expect(deck.discardPileSize, discardBefore - 1);
+      expect(deck.removedPileSize, removedBefore + 1);
       checkSaveState();
     });
 
@@ -37,13 +37,13 @@ void main() {
       DrawModifierCardCommand('').execute();
       RemoveAMDCardCommand(0, '').execute();
       final deck = getIt<GameState>().modifierDeck;
-      final discardBefore = deck.discardPile.size();
-      final removedBefore = deck.removedPile.size();
+      final discardBefore = deck.discardPileSize;
+      final removedBefore = deck.removedPileSize;
 
       ReturnRemovedAMDCardCommand(0, '').execute();
 
-      expect(deck.removedPile.size(), removedBefore - 1);
-      expect(deck.discardPile.size(), discardBefore + 1);
+      expect(deck.removedPileSize, removedBefore - 1);
+      expect(deck.discardPileSize, discardBefore + 1);
       checkSaveState();
     });
 

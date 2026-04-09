@@ -101,7 +101,7 @@ class GameSaveState {
           List drawPile = item["drawPile"] as List;
           for (var item in drawPile) {
             int nr = item["nr"];
-            for (var card in state.drawPile.getList()) {
+            for (var card in state._drawPile.getList()) {
               if (card.nr == nr) {
                 newDrawList.add(card);
                 break;
@@ -111,7 +111,7 @@ class GameSaveState {
           List<MonsterAbilityCardModel> newDiscardList = [];
           for (var item in item["discardPile"] as List) {
             int nr = item["nr"];
-            for (var card in state.drawPile.getList()) {
+            for (var card in state._drawPile.getList()) {
               if (card.nr == nr) {
                 newDiscardList.add(card);
                 break;
@@ -122,10 +122,10 @@ class GameSaveState {
             state._lastRoundDrawn = item["lastRoundDrawn"];
           }
 
-          state.drawPile.clear();
-          state.discardPile.clear();
-          state.drawPile.setList(newDrawList);
-          state.discardPile.setList(newDiscardList);
+          state._drawPile.clear();
+          state._discardPile.clear();
+          state._drawPile.setList(newDrawList);
+          state._discardPile.setList(newDiscardList);
           gameState._currentAbilityDecks.add(state);
         }
 

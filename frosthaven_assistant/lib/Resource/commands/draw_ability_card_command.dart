@@ -10,7 +10,7 @@ class DrawAbilityCardCommand extends Command {
     Monster monster = GameMethods.getCurrentMonsters()
         .firstWhere((element) => element.id == ownerId);
     MonsterAbilityState deck = GameMethods.getDeck(monster.type.deck)!;
-    if (deck.drawPile.isNotEmpty) {
+    if (deck.drawPileIsNotEmpty) {
       deck.draw(stateAccess);
     }
   }

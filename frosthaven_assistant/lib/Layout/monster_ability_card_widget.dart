@@ -252,7 +252,7 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
     super.initState();
     for (var deck in _gameState.currentAbilityDecks) {
       if (deck.name == widget.data.type.deck) {
-        _deckSize = deck.drawPile.size();
+        _deckSize = deck.drawPileSize;
         break;
       }
     }
@@ -286,16 +286,16 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
           if (roundState == RoundState.playTurns &&
               data.isActive &&
               !GameMethods.isInactiveForRule(data.type.name)) {
-            CardStack? stack = GameMethods.getDeck(data.type.deck)?.discardPile;
-            if (stack != null && stack.isNotEmpty) {
-              card = stack.peek;
+            final deckState = GameMethods.getDeck(data.type.deck);
+            if (deckState != null && deckState.discardPileIsNotEmpty) {
+              card = deckState.discardPileTop;
             }
           }
 
           //get size for back
           MonsterAbilityState deck =
               GameMethods.getDeck(widget.data.type.deck)!;
-          _deckSize = deck.drawPile.size();
+          _deckSize = deck.drawPileSize;
 
           return InkWell(
               onTap: () {

@@ -45,7 +45,7 @@ void main() {
     testWidgets('renders the "Send to Bottom" button',
         (WidgetTester tester) async {
       final deck = getIt<GameState>().modifierDeck;
-      final length = deck.drawPile.size();
+      final length = deck.drawPileSize;
       await pumpMenu(tester, currentIndex: 0, length: length);
       expect(find.text('Send to Bottom'), findsOneWidget);
     });
@@ -53,7 +53,7 @@ void main() {
     testWidgets('renders the "Shuffle un-drawn Cards" button',
         (WidgetTester tester) async {
       final deck = getIt<GameState>().modifierDeck;
-      final length = deck.drawPile.size();
+      final length = deck.drawPileSize;
       await pumpMenu(tester, currentIndex: 0, length: length);
       expect(find.text('Shuffle un-drawn Cards'), findsOneWidget);
     });
@@ -62,28 +62,28 @@ void main() {
         'tapping "Send to Bottom" reorders the deck without changing pile size',
         (WidgetTester tester) async {
       final deck = getIt<GameState>().modifierDeck;
-      final sizeBefore = deck.drawPile.size();
+      final sizeBefore = deck.drawPileSize;
       await pumpMenu(tester, currentIndex: 0, length: sizeBefore);
 
       await tester.tap(find.text('Send to Bottom'));
       await tester.pumpAndSettle();
 
       // Card stays in draw pile — just reordered
-      expect(deck.drawPile.size(), sizeBefore);
+      expect(deck.drawPileSize, sizeBefore);
     });
 
     testWidgets(
         'tapping "Shuffle un-drawn Cards" moves discard to draw pile',
         (WidgetTester tester) async {
       final deck = getIt<GameState>().modifierDeck;
-      final length = deck.drawPile.size();
+      final length = deck.drawPileSize;
       await pumpMenu(tester, currentIndex: 0, length: length);
 
       await tester.tap(find.text('Shuffle un-drawn Cards'));
       await tester.pumpAndSettle();
 
       // After shuffle the discard pile is empty
-      expect(deck.discardPile.size(), 0);
+      expect(deck.discardPileSize, 0);
     });
   });
 }

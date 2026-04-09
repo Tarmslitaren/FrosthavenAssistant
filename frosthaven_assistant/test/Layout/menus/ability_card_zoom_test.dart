@@ -27,7 +27,7 @@ void main() {
     final originalOnError = FlutterError.onError;
     addTearDown(() => FlutterError.onError = originalOnError);
     FlutterError.onError = ignoreOverflowErrors;
-    final card = abilityState.drawPile.getList().first;
+    final card = abilityState.drawPileContents.toList().first;
     await tester.pumpWidget(
       MaterialApp(
         home: Builder(

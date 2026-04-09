@@ -38,7 +38,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
   Widget build(BuildContext context) {
     final deck = GameMethods.getModifierDeck(widget.name, _gameState);
     final card =
-        deck.drawPile.getList()[widget.length - 1 - widget.currentIndex];
+        deck.drawPileContents[widget.length - 1 - widget.currentIndex];
     double scale = 6;
     final cardWidth = 7 * 58.6666;
     final screenWidth = MediaQuery.of(context).size.width;

@@ -24,13 +24,13 @@ void main() {
       // Arrange
       final command = AddLootCardCommand('lumber');
       final lootDeck = getIt<GameState>().lootDeck;
-      final initialCardCount = lootDeck.drawPile.size();
+      final initialCardCount = lootDeck.drawPileSize;
 
       // Act
       command.execute();
 
       // Assert
-      expect(lootDeck.drawPile.size(), initialCardCount + 1);
+      expect(lootDeck.drawPileSize, initialCardCount + 1);
       checkSaveState();
     });
 

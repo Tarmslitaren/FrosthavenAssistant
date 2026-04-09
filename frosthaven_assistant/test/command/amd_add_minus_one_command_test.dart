@@ -26,7 +26,7 @@ void main() {
       final command = AmdAddMinusOneCommand(character.id);
       final modifierDeck = character.characterState.modifierDeck;
       int initialCount = 0;
-      modifierDeck.drawPile.getList().forEach((element) {
+      modifierDeck.drawPileContents.toList().forEach((element) {
         if (element.gfx == 'minus1') {
           initialCount++;
         }
@@ -37,7 +37,7 @@ void main() {
 
       // Assert
       int finalCount = 0;
-      modifierDeck.drawPile.getList().forEach((element) {
+      modifierDeck.drawPileContents.toList().forEach((element) {
         if (element.gfx == 'minus1') {
           finalCount++;
         }
@@ -50,7 +50,7 @@ void main() {
       final command = AmdAddMinusOneCommand('');
       final modifierDeck = getIt<GameState>().modifierDeck;
       int initialCount = 0;
-      modifierDeck.drawPile.getList().forEach((element) {
+      modifierDeck.drawPileContents.toList().forEach((element) {
         if (element.gfx == 'minus1') {
           initialCount++;
         }
@@ -61,7 +61,7 @@ void main() {
 
       // Assert
       int finalCount = 0;
-      modifierDeck.drawPile.getList().forEach((element) {
+      modifierDeck.drawPileContents.toList().forEach((element) {
         if (element.gfx == 'minus1') {
           finalCount++;
         }
@@ -74,7 +74,7 @@ void main() {
       final command = AmdAddMinusOneCommand('allies');
       final modifierDeck = getIt<GameState>().modifierDeckAllies;
       int initialCount = 0;
-      modifierDeck.drawPile.getList().forEach((element) {
+      modifierDeck.drawPileContents.toList().forEach((element) {
         if (element.gfx == 'minus1') {
           initialCount++;
         }
@@ -85,7 +85,7 @@ void main() {
 
       // Assert
       int finalCount = 0;
-      modifierDeck.drawPile.getList().forEach((element) {
+      modifierDeck.drawPileContents.toList().forEach((element) {
         if (element.gfx == 'minus1') {
           finalCount++;
         }

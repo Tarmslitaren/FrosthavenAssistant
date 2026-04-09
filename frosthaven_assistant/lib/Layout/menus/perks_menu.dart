@@ -111,10 +111,10 @@ class PerkListTile extends StatefulWidget {
   final PerkModel perk;
 
   @override
-  State<StatefulWidget> createState() => LootCardListTileState();
+  State<StatefulWidget> createState() => PerkListTileState();
 }
 
-class LootCardListTileState extends State<PerkListTile> {
+class PerkListTileState extends State<PerkListTile> {
   String _cardText(String gfx) {
     if (gfx.startsWith("perks/")) {
       gfx = gfx.substring("perks/".length);

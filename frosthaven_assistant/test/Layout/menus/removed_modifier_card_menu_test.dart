@@ -57,7 +57,7 @@ void main() {
         (WidgetTester tester) async {
       await pumpMenu(tester);
       final deck = getIt<GameState>().modifierDeck;
-      final removedCount = deck.removedPile.size();
+      final removedCount = deck.removedPileSize;
       expect(removedCount, greaterThan(0));
       // The Item widgets are rendered inside the list for each removed card
       expect(find.byType(Item), findsWidgets);

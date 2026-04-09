@@ -92,7 +92,7 @@ void main() {
       // After tapping '1', at least one card should be revealed.
       // We find the specific card by its key and check if it is revealed.
       final item = tester.widget<Item>(find
-          .byKey(Key(monsterAbilityState.discardPile.peek.nr.toString()))
+          .byKey(Key(monsterAbilityState.discardPileTop.nr.toString()))
           .last
           .first);
       expect(item.revealed, isTrue);
@@ -101,28 +101,28 @@ void main() {
     testWidgets('should draw an extra card', (WidgetTester tester) async {
       // Arrange
       await pumpAbilityCardsMenu(tester);
-      final initialDiscardCount = monsterAbilityState.discardPile.size();
+      final initialDiscardCount = monsterAbilityState.discardPileSize;
 
       // Act
       await tester.tap(find.text('Draw extra card'));
       await tester.pumpAndSettle();
 
       // Assert
-      final newDiscardCount = monsterAbilityState.discardPile.size();
+      final newDiscardCount = monsterAbilityState.discardPileSize;
       expect(newDiscardCount, initialDiscardCount + 1);
     });
 
     testWidgets('should shuffle the deck', (WidgetTester tester) async {
       // Arrange
       await pumpAbilityCardsMenu(tester);
-      expect(monsterAbilityState.discardPile.isNotEmpty, isTrue);
+      expect(monsterAbilityState.discardPileIsNotEmpty, isTrue);
 
       // Act
       await tester.tap(find.text('Extra Shuffle'));
       await tester.pumpAndSettle();
 
       // Assert
-      expect(monsterAbilityState.discardPile.isEmpty, isTrue);
+      expect(monsterAbilityState.discardPileIsEmpty, isTrue);
     });
 
     testWidgets('should toggle monster active state',
@@ -146,7 +146,7 @@ void main() {
       // Arrange
       await pumpAbilityCardsMenu(tester);
       // We need to find a card to tap. Let's tap the first one in the discard pile.
-      final cardToTap = monsterAbilityState.discardPile.peek;
+      final cardToTap = monsterAbilityState.discardPileTop;
 
       // Act
       await tester.tap(find.byKey(Key(cardToTap.nr.toString())).first);

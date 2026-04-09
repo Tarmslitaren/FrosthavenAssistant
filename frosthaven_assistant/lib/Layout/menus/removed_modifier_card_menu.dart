@@ -73,7 +73,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
           String name = widget.name;
           ModifierDeck deck =
               GameMethods.getModifierDeck(widget.name, _gameState);
-          final removedPile = deck.removedPile.getList();
+          final removedPile = deck.removedPileContents.toList();
 
           bool isCharacter = widget.name.isNotEmpty && widget.name != "allies";
           final character =
