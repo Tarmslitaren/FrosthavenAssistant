@@ -18,12 +18,15 @@ class AddSummonMenu extends StatefulWidget {
     required this.character,
     this.gameState,
     this.gameData,
-  });
+
+    this.settings,
+    });
 
   final Character character;
 
   final GameState? gameState;
   final GameData? gameData;
+  final Settings? settings;
 
   @override
   AddSummonMenuState createState() => AddSummonMenuState();
@@ -32,6 +35,7 @@ class AddSummonMenu extends StatefulWidget {
 class AddSummonMenuState extends State<AddSummonMenu> {
   late final GameState _gameState;
   late final GameData _gameData;
+  late final Settings _settings;
   int chosenNr = 1;
   String chosenGfx = "blue";
 
@@ -44,6 +48,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
     _gameData = widget.gameData ?? getIt<GameData>();
+    _settings = widget.settings ?? getIt<Settings>();
 
     //populate the summon list
     for (var item in widget.character.characterClass.summons) {
@@ -63,7 +68,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     }
     _summonList.addAll(_gameData.itemSummonData);
 
-    if (!getIt<Settings>().showCustomContent.value) {
+    if (!_settings.showCustomContent.value) {
       //-4 because there are 4 custom summons. I know.
       _summonList.removeRange(_summonList.length - 4, _summonList.length);
     }
@@ -74,7 +79,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     isCurrentlySelected = summonGfx == chosenGfx;
     Color color = Colors.transparent;
     if (isCurrentlySelected) {
-      color = getIt<Settings>().darkMode.value ? Colors.white : Colors.black;
+      color = _settings.darkMode.value ? Colors.white : Colors.black;
     }
     return SizedBox(
       width: 42 * scale,
@@ -106,7 +111,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
     isCurrentlySelected = nr == chosenNr;
     Color color = Colors.transparent;
     String text = nr.toString();
-    bool darkMode = getIt<Settings>().darkMode.value;
+    bool darkMode = _settings.darkMode.value;
     return SizedBox(
       width: 42 * scale,
       height: 42 * scale,
@@ -251,7 +256,7 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                   widget.character.id,
                                   MonsterType.summon,
                                   true,
-                                  gameState: getIt<GameState>()));
+                                  gameState: _gameState));
                             });
                             Navigator.pop(context);
                             //open the level menu here for convenience

@@ -10,26 +10,30 @@ import 'bottom_bar_level_widget.dart';
 import 'modifier_deck_widget.dart';
 
 class BottomBar extends StatelessWidget {
-  const BottomBar({super.key});
+  const BottomBar({super.key, this.settings, this.gameState});
+
+  final Settings? settings;
+  final GameState? gameState;
 
   @override
   Widget build(BuildContext context) {
-    Settings settings = getIt<Settings>();
+    final s = this.settings ?? getIt<Settings>();
+    final gs = this.gameState ?? getIt<GameState>();
     return ValueListenableBuilder<double>(
-        valueListenable: settings.userScalingBars,
+        valueListenable: s.userScalingBars,
         builder: (context, value, child) {
           return RepaintBoundary(child:SizedBox(
-              height: 40 * settings.userScalingBars.value,
+              height: 40 * s.userScalingBars.value,
               child: Stack(children: [
                 Positioned(
                   bottom: 0,
                   left: 0,
                   child: ValueListenableBuilder<bool>(
-                      valueListenable: getIt<Settings>().darkMode,
+                      valueListenable: s.darkMode,
                       builder: (context, value, child) {
-                        final darkMode = getIt<Settings>().darkMode.value;
+                        final darkMode = s.darkMode.value;
                         return Container(
-                            height: 40 * settings.userScalingBars.value,
+                            height: 40 * s.userScalingBars.value,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               color:
@@ -48,7 +52,7 @@ class BottomBar extends StatelessWidget {
                                           ? 'assets/images/psd/gloomhaven-bar.png'
                                           : 'assets/images/psd/frosthaven-bar.png'),
                                       height:
-                                          (40 * settings.userScalingBars.value)
+                                          (40 * s.userScalingBars.value)
                                               .toInt()),
                                   fit: BoxFit.cover,
                                   repeat: ImageRepeat.repeatX),
@@ -60,8 +64,8 @@ class BottomBar extends StatelessWidget {
                                 BottomBarLevelWidget(),
                                 const NetworkUI(),
                                 if (modifiersFitOnBar(context) &&
-                                    getIt<Settings>().showAmdDeck.value &&
-                                    getIt<GameState>().currentCampaign.value !=
+                                    s.showAmdDeck.value &&
+                                    gs.currentCampaign.value !=
                                         "Buttons and Bugs") //hide amd deck for buttons and bugs
                                   const ModifierDeckWidget(
                                     name: '',

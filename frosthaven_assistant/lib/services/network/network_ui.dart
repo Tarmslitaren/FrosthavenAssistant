@@ -7,16 +7,27 @@ import '../service_locator.dart';
 import 'network.dart';
 
 class NetworkUI extends StatefulWidget {
-  const NetworkUI({super.key});
+  const NetworkUI({super.key, this.network, this.settings, this.client});
+
+  // injected for testing
+  final Network? network;
+  final Settings? settings;
+  final Client? client;
 
   @override
   NetworkUIState createState() => NetworkUIState();
 }
 
 class NetworkUIState extends State<NetworkUI> {
+  late final Network _network;
+  late final Settings _settings;
+  late final Client _client;
+
   @override
   initState() {
-    // at the beginning, all items are shown
+    _network = widget.network ?? getIt<Network>();
+    _settings = widget.settings ?? getIt<Settings>();
+    _client = widget.client ?? getIt<Client>();
     super.initState();
   }
 
@@ -24,30 +35,29 @@ class NetworkUIState extends State<NetworkUI> {
   Widget build(BuildContext context) {
     //dummy ui to get context to make toasts.
     return ValueListenableBuilder<String>(
-        valueListenable: getIt<Network>().networkMessage,
+        valueListenable: _network.networkMessage,
         builder: (context, value, child) {
           Future.delayed(const Duration(milliseconds: 200), () {
-            String message = getIt<Network>().networkMessage.value;
+            String message = _network.networkMessage.value;
             if (message != "") {
               if (message.toLowerCase().contains("error") ||
                   message.toLowerCase().contains("disconnected") ||
                   message.toLowerCase().contains("lost")) {
                 showErrorToastStickyWithRetry(
-                    context, getIt<Network>().networkMessage.value, () {
-                  Settings settings = getIt<Settings>();
-                  if (settings.client.value != ClientState.connected &&
-                      settings.lastKnownConnection != "") {
-                    settings.client.value = ClientState.connecting;
-                    getIt<Client>()
-                        .connect(settings.lastKnownConnection)
+                    context, _network.networkMessage.value, () {
+                  if (_settings.client.value != ClientState.connected &&
+                      _settings.lastKnownConnection != "") {
+                    _settings.client.value = ClientState.connecting;
+                    _client
+                        .connect(_settings.lastKnownConnection)
                         .then((value) => null);
-                    settings.saveToDisk();
+                    _settings.saveToDisk();
                   }
                 });
               } else {
-                showToast(context, getIt<Network>().networkMessage.value);
+                showToast(context, _network.networkMessage.value);
               }
-              getIt<Network>().networkMessage.value = "";
+              _network.networkMessage.value = "";
             }
           });
 

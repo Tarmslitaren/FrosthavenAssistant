@@ -6,15 +6,20 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class LootCardEnhancementMenu extends StatefulWidget {
-  const LootCardEnhancementMenu({super.key});
+  const LootCardEnhancementMenu({super.key, this.gameState});
+
+  final GameState? gameState;
 
   @override
   LootCardEnhancementMenuState createState() => LootCardEnhancementMenuState();
 }
 
 class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
+  late final GameState _gameState;
+
   @override
   initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
     // at the beginning, all items are shown
     super.initState();
   }
@@ -31,8 +36,8 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
               onTap: () {
                 setState(() {
                   if (card.enhanced > 0) {
-                    getIt<GameState>().action(EnhanceLootCardCommand(
-                        card.id, card.enhanced - 1, card.gfx, gameState: getIt<GameState>()));
+                    _gameState.action(EnhanceLootCardCommand(
+                        card.id, card.enhanced - 1, card.gfx, gameState: _gameState));
                   }
                 });
               },
@@ -50,8 +55,8 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
           InkWell(
               onTap: () {
                 setState(() {
-                  getIt<GameState>().action(EnhanceLootCardCommand(
-                      card.id, card.enhanced + 1, card.gfx, gameState: getIt<GameState>()));
+                  _gameState.action(EnhanceLootCardCommand(
+                      card.id, card.enhanced + 1, card.gfx, gameState: _gameState));
                 });
               },
               child: const Icon(
@@ -84,34 +89,34 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
 
   LootCard? getCardFromIndex(String type, int index) {
     if (type == "lumber") {
-      return getIt<GameState>().lootDeck.lumberPool[index];
+      return _gameState.lootDeck.lumberPool[index];
     }
     if (type == "hide") {
-      return getIt<GameState>().lootDeck.hidePool[index];
+      return _gameState.lootDeck.hidePool[index];
     }
     if (type == "metal") {
-      return getIt<GameState>().lootDeck.metalPool[index];
+      return _gameState.lootDeck.metalPool[index];
     }
     if (type == "arrowvine") {
-      return getIt<GameState>().lootDeck.arrowvinePool[index];
+      return _gameState.lootDeck.arrowvinePool[index];
     }
     if (type == "axenut") {
-      return getIt<GameState>().lootDeck.axenutPool[index];
+      return _gameState.lootDeck.axenutPool[index];
     }
     if (type == "corpsecap") {
-      return getIt<GameState>().lootDeck.corpsecapPool[index];
+      return _gameState.lootDeck.corpsecapPool[index];
     }
     if (type == "flamefruit") {
-      return getIt<GameState>().lootDeck.flamefruitPool[index];
+      return _gameState.lootDeck.flamefruitPool[index];
     }
     if (type == "rockroot") {
-      return getIt<GameState>().lootDeck.rockrootPool[index];
+      return _gameState.lootDeck.rockrootPool[index];
     }
     if (type == "snowthistle") {
-      return getIt<GameState>().lootDeck.snowthistlePool[index];
+      return _gameState.lootDeck.snowthistlePool[index];
     }
     if (type == "coin") {
-      return getIt<GameState>().lootDeck.coinPool[index];
+      return _gameState.lootDeck.coinPool[index];
     }
     return null;
   }

@@ -19,10 +19,13 @@ class SelectScenarioMenu extends StatefulWidget {
     super.key,
     this.gameState,
     this.gameData,
-  });
+
+    this.settings,
+    });
 
   final GameState? gameState;
   final GameData? gameData;
+  final Settings? settings;
 
   @override
   SelectScenarioMenuState createState() => SelectScenarioMenuState();
@@ -33,6 +36,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   List<String> _foundScenarios = [];
   late final GameState _gameState;
   late final GameData _gameData;
+  late final Settings _settings;
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
@@ -40,6 +44,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   initState() {
     _gameState = widget.gameState ?? getIt<GameState>();
     _gameData = widget.gameData ?? getIt<GameData>();
+    _settings = widget.settings ?? getIt<Settings>();
     // at the beginning, all items are shown
     setCampaign(_gameState.currentCampaign.value);
     super.initState();
@@ -105,7 +110,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       }
     }
 
-    if (campaign == "Solo" && !getIt<Settings>().showCustomContent.value) {
+    if (campaign == "Solo" && !_settings.showCustomContent.value) {
       _foundScenarios.removeWhere((scenario) {
         List<String> strings = scenario.split(':');
         strings[0] = strings.first.replaceFirst(" ", "Å");
@@ -225,14 +230,14 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       onTap: () {
         Navigator.pop(context);
         _gameState.action(
-            SetScenarioCommand(name, false, gameState: getIt<GameState>()));
+            SetScenarioCommand(name, false, gameState: _gameState));
       },
     );
   }
 
   Widget buildTile(String name) {
     String title = name;
-    if (!getIt<Settings>().showScenarioNames.value) {
+    if (!_settings.showScenarioNames.value) {
       title = name.split(' ').first;
     }
 
@@ -241,7 +246,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       onTap: () {
         Navigator.pop(context);
         _gameState.action(
-            SetScenarioCommand(name, false, gameState: getIt<GameState>()));
+            SetScenarioCommand(name, false, gameState: _gameState));
       },
     );
   }
@@ -251,7 +256,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     for (String item in _gameData.editions) {
       final scenarioList = _gameData.modelData.value[item]?.scenarios;
       if (scenarioList != null && scenarioList.isNotEmpty) {
-        if (getIt<Settings>().showCustomContent.value ||
+        if (_settings.showCustomContent.value ||
             !GameMethods.isCustomCampaign(item)) {
           retVal.add(TextButton(
               onPressed: () {
@@ -305,7 +310,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                               (event.logicalKey.keyId == 13)) {
                             if (_foundScenarios.isNotEmpty) {
                               //_gameState.action(
-                              //    SetScenarioCommand(_foundScenarios[0], false, gameState: getIt<GameState>()));
+                              //    SetScenarioCommand(_foundScenarios[0], false, gameState: _gameState));
                               //Navigator.pop(context);
                             }
                           }
@@ -315,7 +320,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                           controller: _controller,
                           onTap: () {
                             _controller.clear();
-                            if (getIt<Settings>().softNumpadInput.value) {
+                            if (_settings.softNumpadInput.value) {
                               openDialog(
                                   context,
                                   NumpadMenu(
@@ -331,7 +336,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                               Navigator.pop(context);
                               _gameState.action(SetScenarioCommand(
                                   _foundScenarios.first, false,
-                                  gameState: getIt<GameState>()));
+                                  gameState: _gameState));
                             }
                           },
                           decoration: const InputDecoration(

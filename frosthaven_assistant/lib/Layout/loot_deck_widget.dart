@@ -104,8 +104,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   }
 
   bool initAnimationEnabled() {
-    if (getIt<Settings>().client.value == ClientState.connected ||
-        getIt<Settings>().server.value) {
+    if (_settings.client.value == ClientState.connected ||
+        _settings.server.value) {
       GameState oldState = GameState(communication: getIt<Communication>());
       int offset = 1;
       final saveStatesLength = _gameState.gameSaveStates.length;
@@ -221,7 +221,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                       builder: (context, value, child) {
                         LootDeck? deck = _gameState.lootDeck;
                         if (deck.drawPileIsEmpty && deck.discardPileIsEmpty ||
-                            getIt<Settings>().hideLootDeck.value) {
+                            _settings.hideLootDeck.value) {
                           return Container();
                         }
 
@@ -252,7 +252,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                     setState(() {
                                       _animationsEnabled = true;
                                       _gameState.action(DrawLootCardCommand(
-                                          gameState: getIt<GameState>()));
+                                          gameState: _gameState));
                                     });
                                   }
                                 },

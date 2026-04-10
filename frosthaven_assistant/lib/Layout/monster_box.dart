@@ -21,9 +21,15 @@ class MonsterBox extends StatelessWidget {
       required this.ownerId,
       required this.displayStartAnimation,
       required this.blockInput,
-      required this.scale}) {
+      required this.scale,
+      this.gameState,
+      this.settings}) {
     data = GameMethods.getFigure(ownerId, figureId) as MonsterInstance;
   }
+
+  // injected for testing
+  final GameState? gameState;
+  final Settings? settings;
 
   static const double conditionSize = 14;
 
@@ -49,10 +55,10 @@ class MonsterBox extends StatelessWidget {
 
   late final MonsterInstance data;
 
-  List<Widget> createConditionList(double scale) {
+  List<Widget> createConditionList(double scale, GameState gameState) {
     List<Widget> list = [];
     for (var condition in data.conditions.value) {
-      for (var item in getIt<GameState>().currentList) {
+      for (var item in gameState.currentList) {
         if (item.id == ownerId) {
           list.add(ConditionIcon(
             condition,
@@ -68,8 +74,8 @@ class MonsterBox extends StatelessWidget {
     return list;
   }
 
-  String? getMonster() {
-    for (var item in getIt<GameState>().currentList) {
+  String? getMonster(GameState gameState) {
+    for (var item in gameState.currentList) {
       if (item is Monster) {
         if (item.id == data.name) {
           return item.id;
@@ -79,7 +85,7 @@ class MonsterBox extends StatelessWidget {
     return null;
   }
 
-  Widget buildInternal(double scale, double width, Color color) {
+  Widget buildInternal(double scale, double width, Color color, GameState gameState) {
     String imagePath = "assets/images/tombstone.png";
     if (data.type == MonsterType.summon) {
       imagePath = "assets/images/summon/${data.gfx}.png";
@@ -111,7 +117,7 @@ class MonsterBox extends StatelessWidget {
     );
 
     bool ownerIsCurrent = true;
-    for (var item in getIt<GameState>().currentList) {
+    for (var item in gameState.currentList) {
       if (item.id == ownerId) {
         if (item.turnState.value == TurnsState.done) {
           ownerIsCurrent = false;
@@ -126,7 +132,7 @@ class MonsterBox extends StatelessWidget {
         child: ColorFiltered(
             //gray out if summoned this turn and it's still the character's/monster's turn
             colorFilter:
-                (data.roundSummoned == getIt<GameState>().round.value &&
+                (data.roundSummoned == gameState.round.value &&
                         ownerIsCurrent)
                     ? ColorFilter.matrix(grayScale)
                     : ColorFilter.matrix(identity),
@@ -225,7 +231,7 @@ class MonsterBox extends StatelessWidget {
                                       alignment: WrapAlignment.center,
                                       crossAxisAlignment:
                                           WrapCrossAlignment.center,
-                                      children: createConditionList(scale),
+                                      children: createConditionList(scale, gameState),
                                     ));
                               }),
                         ])),
@@ -263,6 +269,8 @@ class MonsterBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final gameState = this.gameState ?? getIt<GameState>();
+    final settings = this.settings ?? getIt<Settings>();
     String figureId = data.getId();
     Color color = Colors.white;
     if (data.type == MonsterType.elite) {
@@ -272,7 +280,7 @@ class MonsterBox extends StatelessWidget {
       color = Colors.red;
     }
 
-    if (getIt<GameState>().currentCampaign.value == "Buttons and Bugs") {
+    if (gameState.currentCampaign.value == "Buttons and Bugs") {
       if (data.standeeNr == 1) {
         color = Colors.green;
       }
@@ -310,7 +318,7 @@ class MonsterBox extends StatelessWidget {
                 }
 
                 double offset = -30 * scale;
-                Widget child = buildInternal(scale, width, color);
+                Widget child = buildInternal(scale, width, color, gameState);
 
                 if (displayStartAnimation != figureId) {
                   //if this one is not added - only play death animation
@@ -338,7 +346,7 @@ class MonsterBox extends StatelessWidget {
               })),
     );
 
-    var useHealthWheel = getIt<Settings>().enableHeathWheel.value;
+    var useHealthWheel = settings.enableHeathWheel.value;
 
     return Material(
         color: Colors.transparent,
@@ -350,7 +358,7 @@ class MonsterBox extends StatelessWidget {
                   context,
                   StatusMenu(
                       figureId: figureId,
-                      monsterId: getMonster(),
+                      monsterId: getMonster(gameState),
                       characterId: characterId),
                 );
               }

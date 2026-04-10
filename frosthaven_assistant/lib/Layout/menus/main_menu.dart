@@ -24,7 +24,13 @@ import '../../services/network/network.dart';
 import 'add_monster_menu.dart';
 
 class MainMenu extends StatelessWidget {
-  const MainMenu({super.key});
+  const MainMenu({super.key, this.gameState, this.settings, this.client, this.network});
+
+  // injected for testing
+  final GameState? gameState;
+  final Settings? settings;
+  final Client? client;
+  final Network? network;
 
   Future<void> launchUrlInBrowser(Uri url) async {
     if (!await launchUrl(
@@ -35,10 +41,7 @@ class MainMenu extends StatelessWidget {
     }
   }
 
-  bool undoEnabled() {
-    GameState gameState = getIt<GameState>();
-    Settings settings = getIt<Settings>();
-
+  bool undoEnabled({required GameState gameState, required Settings settings}) {
     final commandIndex = gameState.commandIndex.value;
 
     if (settings.client.value == ClientState.connected) {
@@ -55,12 +58,11 @@ class MainMenu extends StatelessWidget {
         (commandIndex == 0 || gameState.commands[commandIndex - 1] != null);
   }
 
-  bool redoEnabled() {
-    GameState gameState = getIt<GameState>();
-    if (getIt<Settings>().client.value == ClientState.connected) {
+  bool redoEnabled({required GameState gameState, required Settings settings}) {
+    if (settings.client.value == ClientState.connected) {
       return true;
     }
-    if (getIt<Settings>().server.value) {
+    if (settings.server.value) {
       return gameState.commandDescriptions.isNotEmpty &&
           gameState.gameSaveStates.length >=
               gameState.commandDescriptions.length &&
@@ -73,8 +75,10 @@ class MainMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GameState gameState = getIt<GameState>();
-    Settings settings = getIt<Settings>();
+    final gameState = this.gameState ?? getIt<GameState>();
+    final settings = this.settings ?? getIt<Settings>();
+    final client = this.client ?? getIt<Client>();
+    final network = this.network ?? getIt<Network>();
     return Drawer(
       child: ValueListenableBuilder<int>(
         valueListenable: gameState.commandIndex,
@@ -115,14 +119,14 @@ class MainMenu extends StatelessWidget {
                 ),
                 ListTile(
                   title: Text(undoText),
-                  enabled: undoEnabled(),
+                  enabled: undoEnabled(gameState: gameState, settings: settings),
                   onTap: () {
                     gameState.undo();
                   },
                 ),
                 ListTile(
                   title: Text(redoText),
-                  enabled: redoEnabled(),
+                  enabled: redoEnabled(gameState: gameState, settings: settings),
                   onTap: () {
                     gameState.redo();
                   },
@@ -137,7 +141,7 @@ class MainMenu extends StatelessWidget {
                 ),
                 ListTile(
                   title: Text(
-                      getIt<GameState>().scenario.value == "#Random Dungeon"
+                      gameState.scenario.value == "#Random Dungeon"
                           ? 'Add Random Dungeon Card'
                           : 'Add Section'),
                   enabled: true,
@@ -199,7 +203,7 @@ class MainMenu extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                       gameState.action(ShowAllyDeckCommand());
-                      getIt<GameState>().updateAllUI();
+                      gameState.updateAllUI();
                     },
                   ),
 
@@ -209,7 +213,7 @@ class MainMenu extends StatelessWidget {
                     onTap: () {
                       Navigator.pop(context);
                       gameState.action(HideAllyDeckCommand());
-                      getIt<GameState>().updateAllUI();
+                      gameState.updateAllUI();
                     },
                   ),
 
@@ -246,12 +250,12 @@ class MainMenu extends StatelessWidget {
                               if (settings.client.value !=
                                   ClientState.connected) {
                                 settings.client.value = ClientState.connecting;
-                                getIt<Client>()
+                                client
                                     .connect(settings.lastKnownConnection)
                                     .then((value) => null);
                                 settings.saveToDisk();
                               } else {
-                                getIt<Client>().disconnect(null);
+                                client.disconnect(null);
                               }
                             });
                       }),
@@ -260,10 +264,10 @@ class MainMenu extends StatelessWidget {
                     builder: (context, value, child) {
                       return ValueListenableBuilder<String>(
                           valueListenable:
-                              getIt<Network>().networkInfo.wifiIPv6,
+                              network.networkInfo.wifiIPv6,
                           builder: (context, value, child) {
                             String ip =
-                                "(${getIt<Network>().networkInfo.wifiIPv6.value})";
+                                "(${network.networkInfo.wifiIPv6.value})";
                             String hostIPText = 'Start Host Server $ip';
                             return CheckboxListTile(
                                 title: Text(settings.server.value
@@ -272,14 +276,14 @@ class MainMenu extends StatelessWidget {
                                 value: settings.server.value,
                                 onChanged: (bool? value) {
                                   settings.lastKnownHostIP =
-                                      "(${getIt<Network>().networkInfo.wifiIPv6.value})";
+                                      "(${network.networkInfo.wifiIPv6.value})";
                                   settings.saveToDisk();
                                   //do the thing
                                   if (!settings.server.value) {
-                                    getIt<Network>().server.startServer();
+                                    network.server.startServer();
                                   } else {
                                     //close server?
-                                    getIt<Network>().server.stopServer(null);
+                                    network.server.stopServer(null);
                                   }
                                 });
                           });

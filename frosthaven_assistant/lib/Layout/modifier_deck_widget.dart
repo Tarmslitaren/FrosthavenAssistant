@@ -106,7 +106,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   }
 
   bool initAnimationEnabled() {
-    if (getIt<Settings>().client.value == ClientState.connected) {
+    if (settings.client.value == ClientState.connected) {
       GameState oldState = GameState(communication: getIt<Communication>());
       int offset = 1;
       final saveStateLength = _gameState.gameSaveStates.length;
@@ -128,9 +128,9 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
       return false;
     }
 
-    final commandIndex = getIt<GameState>().commandIndex.value;
-    final commandDescriptions = getIt<GameState>().commandDescriptions;
-    if (getIt<Settings>().server.value && commandIndex >= 0) {
+    final commandIndex = _gameState.commandIndex.value;
+    final commandDescriptions = _gameState.commandDescriptions;
+    if (settings.server.value && commandIndex >= 0) {
       if (commandIndex < 0) {
         return false;
       }
@@ -293,7 +293,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                               _animationsEnabled = true;
                               _gameState.action(DrawModifierCardCommand(
                                   widget.name,
-                                  gameState: getIt<GameState>()));
+                                  gameState: _gameState));
                             });
                           },
                           child: Stack(children: [

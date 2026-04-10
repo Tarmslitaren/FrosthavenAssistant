@@ -18,11 +18,14 @@ class AutoAddStandeeMenu extends StatefulWidget {
     super.key,
     required this.monsterData,
     this.gameState,
+    this.settings,
   });
 
   final List<RoomMonsterData> monsterData;
 
   final GameState? gameState;
+  // injected for testing
+  final Settings? settings;
 
   @override
   AddStandeeMenuState createState() => AddStandeeMenuState();
@@ -30,6 +33,7 @@ class AutoAddStandeeMenu extends StatefulWidget {
 
 class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   late final GameState _gameState;
+  late final Settings _settings;
 
   bool addAsSummon = false;
   int currentMonsterIndex = 0;
@@ -44,9 +48,9 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   @override
   initState() {
     // at the beginning, all items are shown
-    super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
-
+    _settings = widget.settings ?? getIt<Settings>();
+    super.initState();
     startCommandIndex = _gameState.commandIndex.value;
 
     for (var data in widget.monsterData) {
@@ -81,7 +85,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
         setState(() {
           WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            getIt<GameState>().updateList.value++;
+            _gameState.updateList.value++;
           });
 
           currentMonsterIndex++; //next set
@@ -141,7 +145,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
           if (!isOut) {
             _gameState.action(AddStandeeCommand(
                 nr, null, monster.id, type, addAsSummon,
-                gameState: getIt<GameState>()));
+                gameState: _gameState));
             if (elite) {
               setState(() {
                 currentEliteAdded++;
@@ -175,7 +179,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                       .contains(state.standeeNr)) {
                 _gameState.action(ChangeHealthCommand(
                     -10000, figureId, monster.id,
-                    gameState: getIt<GameState>()));
+                    gameState: _gameState));
 
                 setState(() {
                   if (state.type == MonsterType.elite) {
@@ -422,7 +426,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                                   checkColor: Colors.black,
                                   activeColor: Colors.grey.shade200,
                                   side: BorderSide(
-                                      color: getIt<Settings>().darkMode.value
+                                      color: _settings.darkMode.value
                                           ? Colors.white
                                           : Colors.black),
                                   onChanged: (bool? newValue) {

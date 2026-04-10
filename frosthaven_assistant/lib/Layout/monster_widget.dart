@@ -12,9 +12,10 @@ import '../services/service_locator.dart';
 import 'monster_stat_card_widget.dart';
 
 class MonsterWidget extends StatefulWidget {
-  MonsterWidget({super.key, required this.data});
+  MonsterWidget({super.key, required this.data, this.gameState});
 
   final Monster data;
+  final GameState? gameState;
   final updateList = ValueNotifier<int>(0);
 
   @override
@@ -22,10 +23,12 @@ class MonsterWidget extends StatefulWidget {
 }
 
 class MonsterWidgetState extends State<MonsterWidget> {
+  late final GameState _gameState;
   List<MonsterInstance> lastList = [];
 
   @override
   void initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
     super.initState();
     lastList = widget.data.monsterInstances.asList();
   }
@@ -132,10 +135,10 @@ class MonsterWidgetState extends State<MonsterWidget> {
         GameMethods.isInactiveForRule(widget.data.type.name);
 
     return ValueListenableBuilder<int>(
-        valueListenable: getIt<GameState>().updateList,
+        valueListenable: _gameState.updateList,
         builder: (context, value, child) {
           final hasInstances = widget.data.monsterInstances.isNotEmpty;
-          final roundState = getIt<GameState>().roundState.value;
+          final roundState = _gameState.roundState.value;
           final isActive = widget.data.isActive;
 
           return RepaintBoundary(
@@ -157,8 +160,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
                               ((hasInstances || isActive) && !specialDisabled)
                           ? InkWell(
                               onTap: () {
-                                getIt<GameState>()
-                                    .action(TurnDoneCommand(widget.data.id, gameState: getIt<GameState>()));
+                                _gameState
+                                    .action(TurnDoneCommand(widget.data.id, gameState: _gameState));
                               },
                               child: buildImagePart(height, scale))
                           : buildImagePart(height, scale),
@@ -173,7 +176,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
               margin: EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
               width: getMainListWidth(context) - 3.2 * scale,
               child: ValueListenableBuilder<int>(
-                  valueListenable: getIt<GameState>().killMonsterStandee,
+                  valueListenable: _gameState.killMonsterStandee,
                   builder: (context, value, child) {
                     return buildMonsterBoxGrid(scale);
                   }),

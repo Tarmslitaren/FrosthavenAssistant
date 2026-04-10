@@ -12,28 +12,31 @@ import '../../services/service_locator.dart';
 
 class GH2eFactionAMDCardMenu extends StatefulWidget {
   const GH2eFactionAMDCardMenu(
-      {super.key, required this.faction, required this.name});
+      {super.key, required this.faction, required this.name, this.gameState});
 
   final String faction;
   final String name;
+  final GameState? gameState;
 
   @override
   GH2eFactionAMDCardMenuState createState() => GH2eFactionAMDCardMenuState();
 }
 
 class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
+  late final GameState _gameState;
   final List<ModifierCard> _factionCards = [];
 
   String? addedCard;
 
   @override
   initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
     super.initState();
     _factionCards.clear();
     _factionCards.addAll(GameMethods.getFactionCards(widget.faction));
 
     //find if card added previously
-    final deck = GameMethods.getModifierDeck(widget.name, getIt<GameState>());
+    final deck = GameMethods.getModifierDeck(widget.name, _gameState);
     for (final item in _factionCards) {
       if (deck.hasCard(item.gfx)) {
         addedCard = item.gfx;
@@ -65,8 +68,8 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                     onTap: () {
                       if (addedCard == null &&
                           !GameMethods.isCardInAnyCharacterDeck(item.gfx)) {
-                        getIt<GameState>().action(
-                            AddFactionCardCommand(widget.name, item.gfx, true, gameState: getIt<GameState>()));
+                        _gameState.action(
+                            AddFactionCardCommand(widget.name, item.gfx, true, gameState: _gameState));
                         setState(() {
                           addedCard = item.gfx;
                         });
@@ -99,8 +102,8 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                       onPressed: () {
                         final cardToRemove = addedCard;
                         if (cardToRemove != null) {
-                          getIt<GameState>().action(AddFactionCardCommand(
-                              widget.name, cardToRemove, false, gameState: getIt<GameState>()));
+                          _gameState.action(AddFactionCardCommand(
+                              widget.name, cardToRemove, false, gameState: _gameState));
                         }
                         setState(() {
                           addedCard = null;

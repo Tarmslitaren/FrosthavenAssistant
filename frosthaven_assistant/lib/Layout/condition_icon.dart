@@ -13,7 +13,7 @@ import '../services/service_locator.dart';
 
 class ConditionIcon extends StatefulWidget {
   ConditionIcon(this.condition, this.size, this.owner, this.figure,
-      {super.key, required this.scale}) {
+      {super.key, required this.scale, this.gameState}) {
     String suffix = "";
     if (GameMethods.isFrosthavenStyle(null)) {
       suffix = "_fh";
@@ -32,6 +32,7 @@ class ConditionIcon extends StatefulWidget {
   final double scale;
   final ListItemData owner;
   final FigureState figure;
+  final GameState? gameState;
   late final String gfx;
 
   @override
@@ -39,19 +40,20 @@ class ConditionIcon extends StatefulWidget {
 }
 
 class ConditionIconState extends State<ConditionIcon> {
+  late final GameState _gameState;
   final animate = ValueNotifier<bool>(
       false); //this needs to exist outside of this class to apply when parent rebuilds. :(
 
   @override
   void dispose() {
-    getIt<GameState>().commandIndex.removeListener(_animateListener);
+    _gameState.commandIndex.removeListener(_animateListener);
     super.dispose();
   }
 
   @override
   void initState() {
-    GameState gameState = getIt<GameState>();
-    gameState.commandIndex.addListener(_animateListener);
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _gameState.commandIndex.addListener(_animateListener);
     super.initState();
   }
 
@@ -62,9 +64,9 @@ class ConditionIconState extends State<ConditionIcon> {
     });
   }
 
-  static GameState? getOldState() {
-    GameState gameState = getIt<GameState>();
-    GameState oldState = GameState(communication: getIt<Communication>());
+  static GameState? getOldState({GameState? gameState, Communication? communication}) {
+    gameState = gameState ?? getIt<GameState>();
+    GameState oldState = GameState(communication: communication ?? getIt<Communication>());
     const offset = 1;
     if (gameState.gameSaveStates.length <= offset ||
         gameState.gameSaveStates[gameState.gameSaveStates.length - offset] ==
@@ -100,8 +102,8 @@ class ConditionIconState extends State<ConditionIcon> {
   }
 
   void _animateListenerTask() {
-    GameState gameState = getIt<GameState>();
-    GameState? oldState = getOldState();
+    GameState gameState = _gameState;
+    GameState? oldState = getOldState(gameState: _gameState);
 
     if (oldState == null) {
       return;

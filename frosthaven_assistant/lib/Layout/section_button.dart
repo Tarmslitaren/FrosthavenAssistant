@@ -8,14 +8,19 @@ import '../services/service_locator.dart';
 
 class SectionButton extends StatelessWidget {
   final String data;
+  // injected for testing
+  final GameState? gameState;
+  final Settings? settings;
 
-  const SectionButton({super.key, required this.data});
+  const SectionButton({super.key, required this.data, this.gameState, this.settings});
 
   @override
   Widget build(BuildContext context) {
-    double scale = getIt<Settings>().userScalingBars.value;
+    final gameState = this.gameState ?? getIt<GameState>();
+    final settings = this.settings ?? getIt<Settings>();
+    double scale = settings.userScalingBars.value;
     return ValueListenableBuilder<int>(
-        valueListenable: getIt<GameState>().commandIndex,
+        valueListenable: gameState.commandIndex,
         builder: (context, value, child) {
           return RepaintBoundary(
               child: OutlinedButton(
@@ -27,9 +32,9 @@ class SectionButton extends StatelessWidget {
               backgroundColor: Colors.white70,
               elevation: 4,
             ),
-            onPressed: !getIt<GameState>().scenarioSectionsAdded.contains(data)
+            onPressed: !gameState.scenarioSectionsAdded.contains(data)
                 ? () {
-                    getIt<GameState>().action(SetScenarioCommand(data, true, gameState: getIt<GameState>()));
+                    gameState.action(SetScenarioCommand(data, true, gameState: gameState));
                   }
                 : null,
             child: Text(

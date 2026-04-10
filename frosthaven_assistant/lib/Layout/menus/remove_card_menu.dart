@@ -58,7 +58,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
           ),
           TextButton(
               onPressed: () {
-                _gameState.action(RemoveCardCommand(widget.card, gameState: getIt<GameState>()));
+                _gameState.action(RemoveCardCommand(widget.card, gameState: _gameState));
                 Navigator.pop(context);
               },
               child: Text(
@@ -87,7 +87,7 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                     }
                   }
                   _gameState.action(ReorderAbilityListCommand(
-                      widget.card.deck, newIndex, oldIndex, gameState: getIt<GameState>()));
+                      widget.card.deck, newIndex, oldIndex, gameState: _gameState));
 
                   Navigator.pop(context);
                 },

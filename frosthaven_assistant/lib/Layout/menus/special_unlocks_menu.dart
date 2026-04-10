@@ -8,12 +8,16 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class SpecialUnlocksMenu extends StatelessWidget {
-  SpecialUnlocksMenu({super.key});
+  SpecialUnlocksMenu({super.key, this.gameState, this.settings});
 
+  final GameState? gameState;
+  final Settings? settings;
   final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
+    final gameState = this.gameState ?? getIt<GameState>();
+    final settings = this.settings ?? getIt<Settings>();
     List<List<String>> _unlocks = [
       ["Demons", "assets/images/demons.png"],
       ["Merchant-Guild", "assets/images/merchant-guild.png"],
@@ -21,12 +25,12 @@ class SpecialUnlocksMenu extends StatelessWidget {
       ["Bladeswarm", "assets/images/class-icons/Bladeswarm.png"]
     ];
 
-    if (getIt<Settings>().showCustomContent.value) {
+    if (settings.showCustomContent.value) {
       _unlocks.add(["Vanquisher", "assets/images/class-icons/Vanquisher.png"]);
     }
 
     bool getEnabled(String id) {
-      return getIt<GameState>().unlockedClasses.contains(id);
+      return gameState.unlockedClasses.contains(id);
     }
 
     return Container(
@@ -51,7 +55,7 @@ class SpecialUnlocksMenu extends StatelessWidget {
                     child: Scrollbar(
                         controller: _scrollController,
                         child: ValueListenableBuilder<int>(
-                            valueListenable: getIt<GameState>().commandIndex,
+                            valueListenable: gameState.commandIndex,
                             builder: (context, value, child) {
                               return ListView.builder(
                                   controller: _scrollController,
@@ -76,9 +80,9 @@ class SpecialUnlocksMenu extends StatelessWidget {
                                                 fontSize: kFontSizeTitle,
                                                 color: Colors.black)),
                                         onChanged: (bool? value) {
-                                          getIt<GameState>().action(
+                                          gameState.action(
                                               UnlockSpecialCommand(
-                                                  _unlocks[index].first, gameState: getIt<GameState>()));
+                                                  _unlocks[index].first, gameState: gameState));
                                         },
                                         value:
                                             getEnabled(_unlocks[index].first),

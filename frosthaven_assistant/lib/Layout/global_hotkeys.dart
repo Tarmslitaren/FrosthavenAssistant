@@ -11,9 +11,10 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class GlobalHotkeys extends StatelessWidget {
-  const GlobalHotkeys({required this.child, super.key});
+  const GlobalHotkeys({required this.child, super.key, this.gameState});
 
   final Widget child;
+  final GameState? gameState;
 
   void _runIfNoTextInputFocus(VoidCallback action) {
     if (_isTextInputFocused()) return;
@@ -31,7 +32,7 @@ class GlobalHotkeys extends StatelessWidget {
   }
 
   void _invokeDrawOrNextRound(BuildContext context) {
-    final gameState = getIt<GameState>();
+    final gameState = this.gameState ?? getIt<GameState>();
 
     final result = runDrawOrNextRoundAction(gameState);
     final blockedMessage = result.blockedMessage;
@@ -42,7 +43,7 @@ class GlobalHotkeys extends StatelessWidget {
   }
 
   void _toggleElement(Elements element) {
-    final gameState = getIt<GameState>();
+    final gameState = this.gameState ?? getIt<GameState>();
     final elementState = gameState.elementState[element];
 
     if (elementState == ElementState.half ||
@@ -55,21 +56,21 @@ class GlobalHotkeys extends StatelessWidget {
   }
 
   void _advanceActivation() {
-    final gameState = getIt<GameState>();
+    final gameState = this.gameState ?? getIt<GameState>();
     if (gameState.roundState.value != RoundState.playTurns) {
       return;
     }
 
     for (final item in gameState.currentList) {
       if (item.turnState.value == TurnsState.current) {
-        gameState.action(TurnDoneCommand(item.id, gameState: getIt<GameState>()));
+        gameState.action(TurnDoneCommand(item.id, gameState: gameState));
         return;
       }
     }
   }
 
   void _undoActivation() {
-    final gameState = getIt<GameState>();
+    final gameState = this.gameState ?? getIt<GameState>();
     final currentCommandIndex = gameState.commandIndex.value;
 
     if (currentCommandIndex < 0 ||
@@ -87,13 +88,13 @@ class GlobalHotkeys extends StatelessWidget {
     return CallbackShortcuts(
       bindings: <ShortcutActivator, VoidCallback>{
         const SingleActivator(LogicalKeyboardKey.keyZ, control: true): () =>
-            _runIfNoTextInputFocus(() => getIt<GameState>().undo()),
+            _runIfNoTextInputFocus(() => (this.gameState ?? getIt<GameState>()).undo()),
         const SingleActivator(LogicalKeyboardKey.keyZ, meta: true): () =>
-            _runIfNoTextInputFocus(() => getIt<GameState>().undo()),
+            _runIfNoTextInputFocus(() => (this.gameState ?? getIt<GameState>()).undo()),
         const SingleActivator(LogicalKeyboardKey.keyY, control: true): () =>
-            _runIfNoTextInputFocus(() => getIt<GameState>().redo()),
+            _runIfNoTextInputFocus(() => (this.gameState ?? getIt<GameState>()).redo()),
         const SingleActivator(LogicalKeyboardKey.keyY, meta: true): () =>
-            _runIfNoTextInputFocus(() => getIt<GameState>().redo()),
+            _runIfNoTextInputFocus(() => (this.gameState ?? getIt<GameState>()).redo()),
         const SingleActivator(LogicalKeyboardKey.tab): () =>
             _runIfNoTextInputFocus(_advanceActivation),
         const SingleActivator(LogicalKeyboardKey.tab, shift: true): () =>

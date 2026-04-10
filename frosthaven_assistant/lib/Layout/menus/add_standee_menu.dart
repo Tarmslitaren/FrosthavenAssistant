@@ -53,7 +53,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
       type = MonsterType.boss;
     }
 
-    if (getIt<GameState>().currentCampaign.value == "Buttons and Bugs") {
+    if (_gameState.currentCampaign.value == "Buttons and Bugs") {
       if (nr == 1) {
         color = Colors.green;
       }
@@ -100,7 +100,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
           if (!isOut) {
             _gameState.action(AddStandeeCommand(
                 nr, null, widget.monster.id, type, addAsSummon,
-                gameState: getIt<GameState>()));
+                gameState: _gameState));
           }
         },
       ),

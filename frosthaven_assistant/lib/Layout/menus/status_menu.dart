@@ -33,7 +33,8 @@ class StatusMenu extends StatefulWidget {
       required this.figureId,
       this.characterId,
       this.monsterId,
-      this.gameState});
+      this.gameState,
+      this.settings});
 
   final String figureId;
   final String? monsterId;
@@ -86,6 +87,7 @@ class StatusMenu extends StatefulWidget {
   //same except line 3: infect impair rupture
 
   final GameState? gameState;
+  final Settings? settings;
 
   @override
   StatusMenuState createState() => StatusMenuState();
@@ -93,12 +95,14 @@ class StatusMenu extends StatefulWidget {
 
 class StatusMenuState extends State<StatusMenu> {
   late final GameState _gameState;
+  late final Settings _settings;
 
   @override
   initState() {
     // at the beginning, all items are shown
     super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
   }
 
   Widget buildStackableConditionButtons(
@@ -119,7 +123,7 @@ class StatusMenuState extends State<StatusMenu> {
                 if (notifier.value > 0) {
                   _gameState.action(RemoveConditionCommand(
                       stackableCondition, figureId, ownerId,
-                      gameState: getIt<GameState>()));
+                      gameState: _gameState));
                 }
                 //increment
               })),
@@ -164,7 +168,7 @@ class StatusMenuState extends State<StatusMenu> {
               if (notifier.value < maxValue) {
                 _gameState.action(AddConditionCommand(
                     stackableCondition, figureId, ownerId,
-                    gameState: getIt<GameState>()));
+                    gameState: _gameState));
               }
               //increment
             },
@@ -186,7 +190,7 @@ class StatusMenuState extends State<StatusMenu> {
           bool isActive = (figure as MonsterInstance).roundSummoned != -1;
           if (isActive) {
             color =
-                getIt<Settings>().darkMode.value ? Colors.white : Colors.black;
+                _settings.darkMode.value ? Colors.white : Colors.black;
           }
 
           return Container(
@@ -215,11 +219,11 @@ class StatusMenuState extends State<StatusMenu> {
                     if (!isActive) {
                       _gameState.action(SetAsSummonCommand(
                           true, figureId, ownerId,
-                          gameState: getIt<GameState>()));
+                          gameState: _gameState));
                     } else {
                       _gameState.action(SetAsSummonCommand(
                           false, figureId, ownerId,
-                          gameState: getIt<GameState>()));
+                          gameState: _gameState));
                     }
                   }));
         });
@@ -227,7 +231,7 @@ class StatusMenuState extends State<StatusMenu> {
 
   @override
   Widget build(BuildContext context) {
-    bool showCustomContent = getIt<Settings>().showCustomContent.value;
+    bool showCustomContent = _settings.showCustomContent.value;
     bool hasMireFoot = false;
     bool hasIncarnate = false;
     bool hasVimthreader = false;
@@ -343,7 +347,7 @@ class StatusMenuState extends State<StatusMenu> {
                           style: getTitleTextStyle(getModalMenuScale(context))),
                       if (figure is MonsterInstance)
                         ValueListenableBuilder<int>(
-                            valueListenable: getIt<GameState>().updateList,
+                            valueListenable: _gameState.updateList,
                             builder: (context, value, child) {
                               //handle case when health is changed to zero: don't instantiate monster box
                               if (GameMethods.getFigure(ownerId, figureId) ==
@@ -398,7 +402,7 @@ class StatusMenuState extends State<StatusMenu> {
                               setState(() {
                                 _gameState.action(IceWraithChangeFormCommand(
                                     isElite, ownerId, figureId,
-                                    gameState: getIt<GameState>()));
+                                    gameState: _gameState));
                               });
                             },
                             child: Text("                     Switch Form",
@@ -417,7 +421,7 @@ class StatusMenuState extends State<StatusMenu> {
                         if (item.id == widget.monsterId) {
                           if (item is Monster &&
                               item.isAlly &&
-                              (getIt<GameState>().allyDeckInOGGloom.value ||
+                              (_gameState.allyDeckInOGGloom.value ||
                                   !GameMethods.isOgGloomEdition())) {
                             deck = _gameState.modifierDeckAllies;
                           }
@@ -458,11 +462,11 @@ class StatusMenuState extends State<StatusMenu> {
                     }
 
                     final bool showCharacterAmd = characterHasAmd &&
-                            getIt<Settings>().showCharacterAMD.value &&
+                            _settings.showCharacterAMD.value &&
                             isCharacter ||
                         isSummon;
                     final bool showMonsterAmd =
-                        getIt<Settings>().showAmdDeck.value &&
+                        _settings.showAmdDeck.value &&
                             (isObjective || (isMonster && !isSummon));
                     final bool showAmd = showCharacterAmd || showMonsterAmd;
 
@@ -496,7 +500,7 @@ class StatusMenuState extends State<StatusMenu> {
                         CounterButton(
                             notifier: figure.health,
                             command: ChangeHealthCommand(0, figureId, ownerId,
-                                gameState: getIt<GameState>()),
+                                gameState: _gameState),
                             maxValue: figure.maxHealth.value,
                             image: "assets/images/abilities/heal.png",
                             showTotalValue: false,
@@ -509,7 +513,7 @@ class StatusMenuState extends State<StatusMenu> {
                             ? CounterButton(
                                 notifier: (figure as CharacterState).xp,
                                 command: ChangeXPCommand(0, figureId, ownerId,
-                                    gameState: getIt<GameState>()),
+                                    gameState: _gameState),
                                 maxValue: 900,
                                 image: "assets/images/psd/xp.png",
                                 showTotalValue: false,
@@ -526,7 +530,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("bless"),
                               command: ChangeBlessCommand(0, figureId, ownerId,
-                                  gameState: getIt<GameState>()),
+                                  gameState: _gameState),
                               maxValue: 10,
                               image: "assets/images/abilities/bless.png",
                               showTotalValue: true,
@@ -539,7 +543,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("curse"),
                               command: ChangeCurseCommand(0, figureId, ownerId,
-                                  gameState: getIt<GameState>()),
+                                  gameState: _gameState),
                               maxValue: 10,
                               image: "assets/images/abilities/curse.png",
                               showTotalValue: true,
@@ -555,7 +559,7 @@ class StatusMenuState extends State<StatusMenu> {
                               notifier: deck.getRemovable("in-enfeeble"),
                               command: ChangeEnfeebleCommand(
                                   0, "in-enfeeble", figureId, ownerId,
-                                  gameState: getIt<GameState>()),
+                                  gameState: _gameState),
                               maxValue: 10,
                               image: "assets/images/abilities/enfeeble_old.png",
                               extraImage: hasMoreThanOneEnfeeble
@@ -571,7 +575,7 @@ class StatusMenuState extends State<StatusMenu> {
                               notifier: deck.getRemovable("in-empower"),
                               command: ChangeEmpowerCommand(
                                   0, "in-empower", figureId, ownerId,
-                                  gameState: getIt<GameState>()),
+                                  gameState: _gameState),
                               maxValue: 10,
                               image: "assets/images/abilities/empower_old.png",
                               extraImage: hasMoreThanOneEmpower
@@ -589,7 +593,7 @@ class StatusMenuState extends State<StatusMenu> {
                               notifier: deck.getRemovable("rm-empower"),
                               command: ChangeEmpowerCommand(
                                   0, "rm-empower", figureId, ownerId,
-                                  gameState: getIt<GameState>()),
+                                  gameState: _gameState),
                               maxValue: 12,
                               image: "assets/images/abilities/empower_old.png",
                               extraImage: hasMoreThanOneEmpower
@@ -607,7 +611,7 @@ class StatusMenuState extends State<StatusMenu> {
                               notifier: deck.getRemovable("vi-empower"),
                               command: ChangeEmpowerCommand.deck(
                                   deck, "vi-empower",
-                                  gameState: getIt<GameState>()),
+                                  gameState: _gameState),
                               maxValue: 10,
                               image: "assets/images/abilities/empower.png",
                               extraImage: hasMoreThanOneEmpower
@@ -625,7 +629,7 @@ class StatusMenuState extends State<StatusMenu> {
                               notifier: deck.getRemovable("vi-gr-empower"),
                               command: ChangeEmpowerCommand.deck(
                                   deck, "vi-gr-empower",
-                                  gameState: getIt<GameState>()),
+                                  gameState: _gameState),
                               maxValue: 5,
                               image:
                                   "assets/images/abilities/greater-empower.png",
@@ -642,7 +646,7 @@ class StatusMenuState extends State<StatusMenu> {
                               notifier: deck.getRemovable("vi-enfeeble"),
                               command: ChangeEnfeebleCommand.deck(
                                   deck, "vi-enfeeble",
-                                  gameState: getIt<GameState>()),
+                                  gameState: _gameState),
                               maxValue: 10,
                               image: "assets/images/abilities/enfeeble.png",
                               extraImage: hasMoreThanOneEnfeeble
@@ -661,7 +665,7 @@ class StatusMenuState extends State<StatusMenu> {
                               notifier: deck.getRemovable("vi-gr-enfeeble"),
                               command: ChangeEnfeebleCommand.deck(
                                   deck, "vi-gr-enfeeble",
-                                  gameState: getIt<GameState>()),
+                                  gameState: _gameState),
                               maxValue: 5,
                               image:
                                   "assets/images/abilities/greater-enfeeble.png",
@@ -678,7 +682,7 @@ class StatusMenuState extends State<StatusMenu> {
                               notifier: deck.getRemovable("li-enfeeble"),
                               command: ChangeEnfeebleCommand.deck(
                                   deck, "li-enfeeble",
-                                  gameState: getIt<GameState>()),
+                                  gameState: _gameState),
                               maxValue: 15,
                               image: "assets/images/abilities/enfeeble.png",
                               extraImage: hasMoreThanOneEnfeeble
@@ -722,7 +726,7 @@ class StatusMenuState extends State<StatusMenu> {
                                   Navigator.pop(context);
                                   _gameState.action(ChangeHealthCommand(
                                       -figure.health.value, figureId, ownerId,
-                                      gameState: getIt<GameState>()));
+                                      gameState: _gameState));
                                 },
                               ),
                             ),

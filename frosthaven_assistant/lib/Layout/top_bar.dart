@@ -52,7 +52,7 @@ class TopBar extends StatelessWidget {
             flexibleSpace: ValueListenableBuilder<bool>(
                 valueListenable: getIt<Settings>().darkMode,
                 builder: (context, value, child) {
-                  final darkMode = getIt<Settings>().darkMode.value;
+                  final darkMode = settings.darkMode.value;
                   return Container(
                     height: 42 * userScaling,
                     decoration: BoxDecoration(

@@ -24,6 +24,11 @@ class DataLoadedNotification extends Notification {
 
 class MainState extends State<MyHomePage>
     with WindowListener, WidgetsBindingObserver {
+  late final Network _network;
+  late final Settings _settings;
+  late final Client _client;
+  late final GameState _gameState;
+
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
@@ -35,24 +40,24 @@ class MainState extends State<MyHomePage>
     switch (state) {
       case AppLifecycleState.resumed:
         //this happens all the time on pc, disable this for pc.
-        getIt<Network>().appInBackground = false;
+        _network.appInBackground = false;
         log("app in resumed");
         rebuildAllChildren(
             context); //might be a bit performance heavy, but ensures app state visually up to date with server.
-        if (getIt<Network>().clientDisconnectedWhileInBackground == true ||
-            (getIt<Settings>().connectClientOnStartup == true
+        if (_network.clientDisconnectedWhileInBackground == true ||
+            (_settings.connectClientOnStartup == true
             //todo: reevaluate if this is a good idea: might be good to do an actual check, since this boo might be wrong
-            // && getIt<Settings>().client.value == ClientState.disconnected
+            // && _settings.client.value == ClientState.disconnected
             )) {
           log("client was in background so try reconnect");
-          getIt<Network>().clientDisconnectedWhileInBackground = false;
-          getIt<Client>().connect(getIt<Settings>().lastKnownConnection);
+          _network.clientDisconnectedWhileInBackground = false;
+          _client.connect(_settings.lastKnownConnection);
         }
         break;
       case AppLifecycleState.inactive: //goes background but still alive.
         //save client state. if somehow disconnected while in background (wifi strangled etc.), reconnect on resume
         log("app in inactive");
-        getIt<Network>().appInBackground = true;
+        _network.appInBackground = true;
         break;
       case AppLifecycleState.paused:
         log("app in paused");
@@ -60,12 +65,12 @@ class MainState extends State<MyHomePage>
       case AppLifecycleState.detached:
         log("app in detached");
         //means shut down. save client state here. and try connect at startup if so.
-        if (getIt<Settings>().client.value == ClientState.connected) {
+        if (_settings.client.value == ClientState.connected) {
           log("client was disconnected in background so try reconnect on restart");
-          getIt<Network>().clientDisconnectedWhileInBackground = true;
-          getIt<Settings>().connectClientOnStartup = true;
-          getIt<Settings>().saveToDisk();
-          getIt<Network>().appInBackground = true;
+          _network.clientDisconnectedWhileInBackground = true;
+          _settings.connectClientOnStartup = true;
+          _settings.saveToDisk();
+          _network.appInBackground = true;
         }
         break;
       case AppLifecycleState.hidden:
@@ -85,6 +90,10 @@ class MainState extends State<MyHomePage>
 
   @override
   void initState() {
+    _network = getIt<Network>();
+    _settings = getIt<Settings>();
+    _client = getIt<Client>();
+    _gameState = getIt<GameState>();
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
@@ -93,8 +102,8 @@ class MainState extends State<MyHomePage>
         if (kDebugMode) {
           print("keyboard visible $visible");
         }
-        if (!visible && getIt<Settings>().fullScreen.value == true) {
-          getIt<Settings>().setFullscreen(true);
+        if (!visible && _settings.fullScreen.value == true) {
+          _settings.setFullscreen(true);
         }
       });
     }
@@ -103,7 +112,7 @@ class MainState extends State<MyHomePage>
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<int>(
-        valueListenable: getIt<GameState>().updateForUndo,
+        valueListenable: _gameState.updateForUndo,
         builder: (context, value, child) {
           rebuildAllChildren(
               context); //only way to remake the value listenable builders with broken references

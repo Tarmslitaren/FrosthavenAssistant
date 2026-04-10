@@ -20,7 +20,9 @@ class InitiativeWidget extends StatelessWidget {
       required this.character,
       required this.isCharacter,
       required this.initTextFieldController,
-      required this.focusNode});
+      required this.focusNode,
+      this.gameState,
+      this.settings});
 
   final Character character;
   final double scale;
@@ -29,10 +31,13 @@ class InitiativeWidget extends StatelessWidget {
   final bool isCharacter;
   final TextEditingController initTextFieldController;
   final FocusNode focusNode;
+  final GameState? gameState;
+  final Settings? settings;
 
   @override
   Widget build(BuildContext context) {
-    final gameState = getIt<GameState>();
+    final gameState = this.gameState ?? getIt<GameState>();
+    final settings = this.settings ?? getIt<Settings>();
     return Column(children: [
       Container(
         margin: EdgeInsets.only(top: scaledHeight / 6, left: 10 * scale),
@@ -46,8 +51,8 @@ class InitiativeWidget extends StatelessWidget {
           builder: (context, value, child) {
             final initiative = character.characterState.initiative.value;
             final roundState = gameState.roundState.value;
-            bool secret = (getIt<Settings>().server.value ||
-                    getIt<Settings>().client.value == ClientState.connected) &&
+            bool secret = (settings.server.value ||
+                    settings.client.value == ClientState.connected) &&
                 (!CharacterWidgetInternal.localCharacterInitChanges
                     .contains(character.id));
             if (initTextFieldController.text != initiative.toString() &&
@@ -75,7 +80,7 @@ class InitiativeWidget extends StatelessWidget {
                     onTap: () {
                       //clear on enter focus
                       initTextFieldController.clear();
-                      if (getIt<Settings>().softNumpadInput.value) {
+                      if (settings.softNumpadInput.value) {
                         openDialog(
                             context,
                             NumpadMenu(
@@ -119,7 +124,7 @@ class InitiativeWidget extends StatelessWidget {
                       ),
                     ),
                     controller: initTextFieldController,
-                    keyboardType: getIt<Settings>().softNumpadInput.value
+                    keyboardType: settings.softNumpadInput.value
                         ? TextInputType.none
                         : TextInputType.number),
               );

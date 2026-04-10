@@ -17,7 +17,13 @@ class ConditionButton extends StatelessWidget {
       required this.figureId,
       required this.ownerId,
       required this.immunities,
-      required this.scale});
+      required this.scale,
+      this.gameState,
+      this.settings});
+
+  // injected for testing
+  final GameState? gameState;
+  final Settings? settings;
 
   final Condition condition;
   final String figureId;
@@ -62,7 +68,8 @@ class ConditionButton extends StatelessWidget {
       }
       //immobilize or muddle: also chill - doesn't matter: monster can't be chilled and players don't have immunities.
     }
-    final gameState = getIt<GameState>();
+    final gameState = this.gameState ?? getIt<GameState>();
+    final settings = this.settings ?? getIt<Settings>();
     return ValueListenableBuilder<int>(
         valueListenable: gameState.commandIndex,
         builder: (context, value, child) {
@@ -85,7 +92,7 @@ class ConditionButton extends StatelessWidget {
           bool isActive = _isConditionActive(condition, figure);
           if (isActive) {
             color =
-                getIt<Settings>().darkMode.value ? Colors.white : Colors.black;
+                settings.darkMode.value ? Colors.white : Colors.black;
           }
 
           bool isCharacter = condition.name.contains("character");
@@ -170,10 +177,10 @@ class ConditionButton extends StatelessWidget {
                     ? () {
                         if (!isActive) {
                           gameState.action(AddConditionCommand(
-                              condition, figureId, ownerId, gameState: getIt<GameState>()));
+                              condition, figureId, ownerId, gameState: gameState));
                         } else {
                           gameState.action(RemoveConditionCommand(
-                              condition, figureId, ownerId, gameState: getIt<GameState>()));
+                              condition, figureId, ownerId, gameState: gameState));
                         }
                       }
                     : null,

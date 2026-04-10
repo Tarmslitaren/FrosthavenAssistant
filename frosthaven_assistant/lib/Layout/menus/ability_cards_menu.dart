@@ -136,7 +136,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                         index = list.length - index - 1;
                         list.insert(dropIndex, list.removeAt(index));
                         _gameState.action(ReorderAbilityListCommand(
-                            widget.monsterAbilityState.name, dropIndex, index, gameState: getIt<GameState>()));
+                            widget.monsterAbilityState.name, dropIndex, index, gameState: _gameState));
                       });
                     },
                     children: generateList(list, allOpen),
@@ -230,7 +230,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                                               ActivateMonsterTypeCommand(
                                                   widget.monsterData.id,
                                                   !widget
-                                                      .monsterData.isActive, gameState: getIt<GameState>()));
+                                                      .monsterData.isActive, gameState: _gameState));
                                         },
                                         child: Text(
                                           widget.monsterData.isActive

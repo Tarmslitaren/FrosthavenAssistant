@@ -88,12 +88,12 @@ class CharacterWidgetState extends State<CharacterWidget> {
             );
           },
           child: ValueListenableBuilder<int>(
-              valueListenable: getIt<GameState>().updateList,
+              valueListenable: _gameState.updateList,
               builder: (context, value, child) {
                 bool notGrayScale =
                     character.characterState.health.value != 0 &&
                         (character.turnState.value != TurnsState.done ||
-                            getIt<GameState>().roundState.value ==
+                            _gameState.roundState.value ==
                                 RoundState.chooseInitiative);
                 double scale = getScaleByReference(context);
 
@@ -118,7 +118,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                         EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
                     width: getMainListWidth(context) - 6.4 * scale,
                     child: ValueListenableBuilder<int>(
-                        valueListenable: getIt<GameState>().killMonsterStandee,
+                        valueListenable: _gameState.killMonsterStandee,
                         builder: (context, value, child) {
                           return buildMonsterBoxGrid(scale, character);
                         }),

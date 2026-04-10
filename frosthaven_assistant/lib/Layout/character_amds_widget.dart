@@ -10,23 +10,35 @@ import '../services/service_locator.dart';
 import 'modifier_deck_widget.dart';
 
 class CharacterAmdsWidget extends StatefulWidget {
-  const CharacterAmdsWidget({super.key});
+  const CharacterAmdsWidget({super.key, this.gameState, this.settings});
+
+  final GameState? gameState;
+  final Settings? settings;
 
   @override
   CharacterAmdsWidgetState createState() => CharacterAmdsWidgetState();
 }
 
 class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
+  late final GameState _gameState;
+  late final Settings _settings;
   _OpenState _openStateUserIntentPlayTurns = _OpenState.oneOpen;
   _OpenState _openStateUserIntentChooseInit = _OpenState.allOpen;
   _OpenState _lastState = _OpenState.noOpen;
 
   bool _enableAnim = true;
 
+  @override
+  void initState() {
+    super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
+  }
+
   List<Offset> _getOffsets(int characterAmount) {
-    final roundState = getIt<GameState>().roundState.value;
+    final roundState = _gameState.roundState.value;
     final Character? currentCharacter = GameMethods.getCurrentCharacter();
-    final barScale = getIt<Settings>().userScalingBars.value;
+    final barScale = _settings.userScalingBars.value;
     final deckHeight = (39 + 4) * barScale;
     final goingUpAll = [Offset(0, deckHeight * characterAmount), Offset(0, 0)];
     final goingUpSome = [
@@ -122,7 +134,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final showCharacterAmd = getIt<Settings>().showCharacterAMD.value;
+    final showCharacterAmd = _settings.showCharacterAMD.value;
     if (!showCharacterAmd) {
       return Container();
     }
@@ -138,12 +150,12 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
     }
 
     final Character? currentCharacter = GameMethods.getCurrentCharacter();
-    final roundState = getIt<GameState>().roundState.value;
+    final roundState = _gameState.roundState.value;
     final canShowOneDeck = roundState == RoundState.playTurns &&
         currentCharacter != null &&
         currentCharacter.characterClass.perks.isNotEmpty;
     final duration = Duration(milliseconds: 500);
-    final barScale = getIt<Settings>().userScalingBars.value;
+    final barScale = _settings.userScalingBars.value;
     final offsets = _getOffsets(characterAmount);
     final text = "Character Decks";
 

@@ -20,7 +20,12 @@ import '../../services/network/network.dart';
 import '../../services/service_locator.dart';
 
 class SettingsMenu extends StatefulWidget {
-  const SettingsMenu({super.key});
+  const SettingsMenu({super.key, this.gameState, this.network, this.client, this.settings});
+
+  final GameState? gameState;
+  final Network? network;
+  final Client? client;
+  final Settings? settings;
 
   @override
   SettingsMenuState createState() => SettingsMenuState();
@@ -34,20 +39,27 @@ class SettingsMenuState extends State<SettingsMenu> {
 
   final ScrollController scrollController = ScrollController();
 
-  final settings = getIt<Settings>();
+  late final Settings settings;
+  late final GameState _gameState;
+  late final Network _network;
+  late final Client _client;
 
   @override
   initState() {
+    settings = widget.settings ?? getIt<Settings>();
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _network = widget.network ?? getIt<Network>();
+    _client = widget.client ?? getIt<Client>();
     // at the beginning, all items are shown
     super.initState();
-    getIt<Network>().networkInfo.initNetworkInfo();
+    _network.networkInfo.initNetworkInfo();
     _serverTextController.text = settings.lastKnownConnection;
     _portTextController.text = settings.lastKnownPort;
   }
 
   List<DropdownMenuItem<String>> getIPList() {
     List<DropdownMenuItem<String>> retVal = [];
-    for (var item in getIt<Network>().networkInfo.wifiIPv6List) {
+    for (var item in _network.networkInfo.wifiIPv6List) {
       retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
     }
 
@@ -123,8 +135,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   value: settings.noStandees.value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      getIt<GameState>().action(
-                                          TrackStandeesCommand(!value!, gameState: getIt<GameState>(), settings: getIt<Settings>()));
+                                      _gameState.action(
+                                          TrackStandeesCommand(!value!, gameState: _gameState, settings: settings));
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -135,7 +147,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     setState(() {
                                       settings.autoAddStandees.value = value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateList.value++;
+                                      _gameState.updateList.value++;
                                     });
                                   }),
                               CheckboxListTile(
@@ -145,7 +157,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     setState(() {
                                       settings.autoAddSpawns.value = value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateList.value++;
+                                      _gameState.updateList.value++;
                                     });
                                   }),
                               CheckboxListTile(
@@ -164,7 +176,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     setState(() {
                                       settings.noCalculation.value = value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateList.value++;
+                                      _gameState.updateList.value++;
                                     });
                                   }),
                               CheckboxListTile(
@@ -174,7 +186,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     setState(() {
                                       settings.hideLootDeck.value = value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
@@ -184,7 +196,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     setState(() {
                                       settings.shimmer.value = value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
@@ -197,20 +209,20 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       settings.fhHazTerrainCalcInOGGloom.value =
                                           value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
                                   title: const Text(
                                       "Use Ally Attack Modifier Deck in OG Gloomhaven"),
-                                  value: getIt<GameState>()
+                                  value: _gameState
                                       .allyDeckInOGGloom
                                       .value,
                                   onChanged: (bool? value) {
                                     setState(() {
-                                      getIt<GameState>().action(
-                                          SetAllyDeckInOgGloomCommand(value!, gameState: getIt<GameState>()));
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.action(
+                                          SetAllyDeckInOgGloomCommand(value!, gameState: _gameState));
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
@@ -221,7 +233,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     setState(() {
                                       settings.showScenarioNames.value = value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
@@ -242,7 +254,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     setState(() {
                                       settings.showCustomContent.value = value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
@@ -254,7 +266,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       settings.showSectionsInMainView.value =
                                           value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
@@ -265,7 +277,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     setState(() {
                                       settings.showReminders.value = value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
@@ -280,7 +292,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                         settings.showCharacterAMD.value = false;
                                       }
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
@@ -295,7 +307,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                         settings.showAmdDeck.value = true;
                                       }
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               CheckboxListTile(
@@ -306,7 +318,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     setState(() {
                                       settings.enableHeathWheel.value = value!;
                                       settings.saveToDisk();
-                                      getIt<GameState>().updateAllUI();
+                                      _gameState.updateAllUI();
                                     });
                                   }),
                               if (!Platform.isIOS)
@@ -377,7 +389,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                               settings.style.value =
                                                   Style.frosthaven;
                                               settings.saveToDisk();
-                                              getIt<GameState>()
+                                              _gameState
                                                   .updateList
                                                   .value++;
                                             });
@@ -395,7 +407,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                               settings.style.value =
                                                   Style.original;
                                               settings.saveToDisk();
-                                              getIt<GameState>()
+                                              _gameState
                                                   .updateList
                                                   .value++;
                                             });
@@ -410,7 +422,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       "Clear unlocked characters and stuff"),
                                   onTap: () {
                                     setState(() {
-                                      getIt<GameState>().action(
+                                      _gameState.action(
                                           ClearUnlockedClassesCommand());
                                     });
                                   }),
@@ -447,7 +459,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                                   ClientState.connecting;
                                               settings.lastKnownPort =
                                                   _portTextController.text;
-                                              getIt<Client>()
+                                              _client
                                                   .connect(_serverTextController
                                                       .text)
                                                   .then((value) => null);
@@ -455,7 +467,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                                   _serverTextController.text;
                                               settings.saveToDisk();
                                             } else {
-                                              getIt<Client>().disconnect(null);
+                                              _client.disconnect(null);
                                             }
                                           });
                                         });
@@ -501,14 +513,14 @@ class SettingsMenuState extends State<SettingsMenu> {
                                             settings.lastKnownPort =
                                                 _portTextController.text;
                                             settings.lastKnownHostIP =
-                                                "(${getIt<Network>().networkInfo.wifiIPv6.value})";
+                                                "(${_network.networkInfo.wifiIPv6.value})";
                                             settings.saveToDisk();
-                                            getIt<Network>()
+                                            _network
                                                 .server
                                                 .startServer();
                                           } else {
                                             //close server
-                                            getIt<Network>()
+                                            _network
                                                 .server
                                                 .stopServer(null);
                                           }
@@ -516,20 +528,20 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   }),
                               ValueListenableBuilder<String>(
                                   valueListenable:
-                                      getIt<Network>().networkInfo.wifiIPv6,
+                                      _network.networkInfo.wifiIPv6,
                                   builder: (context, value, child) {
                                     return SizedBox(
                                       width: 200,
                                       height: 20,
                                       child: DropdownButtonHideUnderline(
                                           child: DropdownButton(
-                                              value: getIt<Network>()
+                                              value: _network
                                                   .networkInfo
                                                   .wifiIPv6
                                                   .value,
                                               items: getIPList(),
                                               onChanged: (value) =>
-                                                  getIt<Network>()
+                                                  _network
                                                       .networkInfo
                                                       .wifiIPv6
                                                       .value = value!)),
@@ -537,12 +549,12 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   }),
                               ValueListenableBuilder<String>(
                                   valueListenable:
-                                      getIt<Network>().networkInfo.outgoingIPv6,
+                                      _network.networkInfo.outgoingIPv6,
                                   builder: (context, value, child) {
                                     return SizedBox(
                                         width: 200,
                                         height: 20,
-                                        child: Text(getIt<Network>()
+                                        child: Text(_network
                                             .networkInfo
                                             .outgoingIPv6
                                             .value));

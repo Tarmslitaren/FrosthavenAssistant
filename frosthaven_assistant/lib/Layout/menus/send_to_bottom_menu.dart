@@ -69,7 +69,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
                       int oldIndex = widget.length - 1 - widget.currentIndex;
                       _gameState.action(ReorderModifierListCommand(
                           0, oldIndex, widget.name,
-                          gameState: getIt<GameState>()));
+                          gameState: _gameState));
                       Navigator.pop(context);
                     },
                     child:
@@ -80,7 +80,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
                 TextButton(
                     onPressed: () {
                       _gameState.action(ShuffleAMDCardCommand(widget.name,
-                          gameState: getIt<GameState>()));
+                          gameState: _gameState));
                       Navigator.pop(context);
                     },
                     child: const Text("Shuffle un-drawn Cards",

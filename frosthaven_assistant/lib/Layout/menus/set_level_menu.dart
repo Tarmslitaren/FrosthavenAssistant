@@ -21,13 +21,16 @@ class SetLevelMenu extends StatefulWidget {
     this.figure,
     this.characterId,
     this.gameState,
-  });
+
+    this.settings,
+    });
 
   final Monster? monster;
   final String? characterId;
   final FigureState? figure;
 
   final GameState? gameState;
+  final Settings? settings;
 
   @override
   SetLevelMenuState createState() => SetLevelMenuState();
@@ -35,12 +38,14 @@ class SetLevelMenu extends StatefulWidget {
 
 class SetLevelMenuState extends State<SetLevelMenu> {
   late final GameState _gameState;
+  late final Settings _settings;
 
   @override
   initState() {
     // at the beginning, all items are shown
     super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
   }
 
   Widget buildLevelButton(int nr, double scale) {
@@ -62,7 +67,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   color = Colors.grey;
                 }
                 String text = nr.toString();
-                bool darkMode = getIt<Settings>().darkMode.value;
+                bool darkMode = _settings.darkMode.value;
                 return SizedBox(
                   width: 40 * scale,
                   height: 40 * scale,
@@ -155,7 +160,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
           if (nr > 0) {
             text = "+$text";
           }
-          bool darkMode = getIt<Settings>().darkMode.value;
+          bool darkMode = _settings.darkMode.value;
           return SizedBox(
             width: 40 * scale,
             height: 40 * scale,
@@ -193,7 +198,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   onPressed: () {
                     if (!isCurrentlySelected) {
                       _gameState.action(SetDifficultyCommand(nr,
-                          gameState: getIt<GameState>()));
+                          gameState: _gameState));
                     }
                   },
                 )),
@@ -239,7 +244,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
 
     bool showLegend = widget.figure == null;
 
-    bool darkMode = getIt<Settings>().darkMode.value;
+    bool darkMode = _settings.darkMode.value;
 
     double scale = getModalMenuScale(context);
 
@@ -307,7 +312,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                           onChanged: (bool? newValue) {
                             _gameState.action(SetAutoLevelAdjustCommand(
                                 newValue!,
-                                gameState: getIt<GameState>()));
+                                gameState: _gameState));
                           },
                           value: _gameState.autoScenarioLevel.value,
                         );
@@ -327,7 +332,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   CounterButton(
                       notifier: widget.figure!.maxHealth,
                       command: ChangeMaxHealthCommand(0, figureId, ownerId,
-                          gameState: getIt<GameState>()),
+                          gameState: _gameState),
                       maxValue: 900,
                       image: "assets/images/abilities/heal.png",
                       showTotalValue: true,

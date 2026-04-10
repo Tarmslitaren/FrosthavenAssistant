@@ -31,6 +31,7 @@ class SelectHealthWheel extends StatefulWidget {
 class SelectHealthWheelState extends State<SelectHealthWheel> {
   late int selected;
   late final FixedExtentScrollController scrollController;
+  late final GameState _gameState;
   double currentScrollOffset = 0;
   late int itemIndex;
   final double itemExtent = 25;
@@ -38,6 +39,7 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
 
   @override
   void initState() {
+    _gameState = getIt<GameState>();
     super.initState();
     int count = widget.data.maxHealth.value;
     selected = count - (widget.data.maxHealth.value - widget.data.health.value);
@@ -55,8 +57,8 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
     if (value != 0) {
       //in case figure killed by other device double check
       if (GameMethods.getFigure(widget.ownerId, widget.figureId) != null) {
-        getIt<GameState>().action(
-            ChangeHealthCommand(value, widget.figureId, widget.ownerId, gameState: getIt<GameState>()));
+        _gameState.action(
+            ChangeHealthCommand(value, widget.figureId, widget.ownerId, gameState: _gameState));
       }
       selected = widget.data.maxHealth.value -
           (widget.data.maxHealth.value - widget.data.health.value);

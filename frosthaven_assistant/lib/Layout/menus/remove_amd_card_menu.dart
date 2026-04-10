@@ -64,7 +64,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                     onPressed: () {
                       _gameState.action(RemoveAMDCardCommand(
                           widget.index, widget.name,
-                          gameState: getIt<GameState>()));
+                          gameState: _gameState));
 
                       Navigator.pop(context);
                     },

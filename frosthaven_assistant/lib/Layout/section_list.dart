@@ -9,7 +9,11 @@ import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 
 class SectionList extends StatelessWidget {
-  const SectionList({super.key});
+  const SectionList({super.key, this.settings, this.gameData, this.gameState});
+
+  final Settings? settings;
+  final GameData? gameData;
+  final GameState? gameState;
 
   List<Widget> generateList(List<ScenarioModel> inputList) {
     List<Widget> list = [];
@@ -26,24 +30,25 @@ class SectionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = this.settings ?? getIt<Settings>();
+    final gd = this.gameData ?? getIt<GameData>();
+    final gs = this.gameState ?? getIt<GameState>();
     return ValueListenableBuilder<double>(
-        valueListenable: getIt<Settings>().userScalingBars,
+        valueListenable: s.userScalingBars,
         builder: (context, value, child) {
-          double scale = getIt<Settings>().userScalingBars.value;
-          final GameData gameData = getIt<GameData>();
-          final GameState gameState = getIt<GameState>();
+          double scale = s.userScalingBars.value;
           return ValueListenableBuilder<int>(
-              valueListenable: getIt<GameState>().commandIndex,
+              valueListenable: gs.commandIndex,
               builder: (context, value, child) {
-                var list = gameData
+                var list = gd
                     .modelData
-                    .value[gameState.currentCampaign.value]
-                    ?.scenarios[gameState.scenario.value]
+                    .value[gs.currentCampaign.value]
+                    ?.scenarios[gs.scenario.value]
                     ?.sections
                     .toList();
 
                 //handle random list
-                var randomSections = gameState.scenarioSpecialRules
+                var randomSections = gs.scenarioSpecialRules
                     .firstWhereOrNull(
                         (element) => element.type == "RandomSections");
                 if (randomSections != null && list != null) {
@@ -58,7 +63,7 @@ class SectionList extends StatelessWidget {
                   list = newList;
                 }
 
-                if (getIt<Settings>().autoAddStandees.value == false) {
+                if (s.autoAddStandees.value == false) {
                   //filter out all sections with only room data
                   list = list?.where((element) {
                     if (element.specialRules.isNotEmpty) {
@@ -75,7 +80,7 @@ class SectionList extends StatelessWidget {
                 }
 
                 if (list != null &&
-                    gameState.scenarioSectionsAdded.length ==
+                    gs.scenarioSectionsAdded.length ==
                         list.length -
                             list
                                 .where(

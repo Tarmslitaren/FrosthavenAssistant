@@ -79,7 +79,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
           child: Text(text),
           onPressed: () {
             _gameState.action(AMDRevealCommand(
-                amount: nr, name: widget.name, gameState: getIt<GameState>()));
+                amount: nr, name: widget.name, gameState: _gameState));
           },
         ));
   }
@@ -92,7 +92,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
           child: Text(text),
           onPressed: () {
             _gameState.action(AddCSPartyCardCommand(widget.name, 1,
-                gameState: getIt<GameState>()));
+                gameState: _gameState));
           },
         ));
   }
@@ -173,7 +173,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                       list.insert(dropIndex, list.removeAt(index));
                       _gameState.action(ReorderModifierListCommand(
                           dropIndex, index, name,
-                          gameState: getIt<GameState>()));
+                          gameState: _gameState));
                     });
                   },
                   children: generateList(list, allOpen, name),
@@ -308,7 +308,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       onPressed: () {
                                         _gameState.action(BadOmenCommand(
                                             name == "allies",
-                                            gameState: getIt<GameState>()));
+                                            gameState: _gameState));
                                       },
                                       child: const Text("Bad Omen"),
                                     ),
@@ -319,7 +319,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                   TextButton(
                                     onPressed: () {
                                       _gameState.action(CorrosiveSpewCommand(
-                                          gameState: getIt<GameState>()));
+                                          gameState: _gameState));
                                     },
                                     child: Text(
                                       "Corrosive Spew",
@@ -331,7 +331,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                   onPressed: () {
                                     _gameState.action(AmdAddMinusOneCommand(
                                         name,
-                                        gameState: getIt<GameState>()));
+                                        gameState: _gameState));
                                   },
                                   child: Text(
                                       "Add -1 card (added : ${deck.addedMinusOnes.value})"),
@@ -341,7 +341,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     if (deck.hasMinus1()) {
                                       _gameState.action(AMDRemoveMinus1Command(
                                           name,
-                                          gameState: getIt<GameState>()));
+                                          gameState: _gameState));
                                     }
                                   },
                                   child: const Text("Remove -1 card"),
@@ -351,7 +351,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     onPressed: () {
                                       _gameState.action(AMDRemoveMinus2Command(
                                           name == "allies",
-                                          gameState: getIt<GameState>()));
+                                          gameState: _gameState));
                                     },
                                     child: Text(
                                       deck.hasMinus2()
@@ -365,7 +365,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     onPressed: () {
                                       _gameState.action(AmdRemovePlus0Command(
                                           name, hasPlus0Card,
-                                          gameState: getIt<GameState>()));
+                                          gameState: _gameState));
                                     },
                                     child: Text(
                                       hasPlus0Card
@@ -378,10 +378,10 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     onPressed: () {
                                       if (deck.imbuement.value > 0) {
                                         _gameState.action(AMDRemoveImbueCommand(
-                                            gameState: getIt<GameState>()));
+                                            gameState: _gameState));
                                       } else {
                                         _gameState.action(AMDImbue1Command(
-                                            gameState: getIt<GameState>()));
+                                            gameState: _gameState));
                                       }
                                     },
                                     child: Text(
@@ -392,7 +392,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                   TextButton(
                                     onPressed: () {
                                       _gameState.action(AMDImbue2Command(
-                                          gameState: getIt<GameState>()));
+                                          gameState: _gameState));
                                     },
                                     child: Text("Advanced Imbue"),
                                   ),
@@ -428,7 +428,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       _gameState.action(
                                           AMDCassandraSpecialCommand(deck.name,
                                               !deck.cassandraSpecial.value,
-                                              gameState: getIt<GameState>()));
+                                              gameState: _gameState));
                                     },
                                     child: Text(
                                       deck.cassandraSpecial.value
@@ -456,12 +456,12 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                               RemoveCSSanctuaryDonationCommand(
                                                   widget.name,
                                                   gameState:
-                                                      getIt<GameState>()))
+                                                      _gameState))
                                           : _gameState.action(
                                               DonateCSSanctuaryCommand(
                                                   widget.name,
                                                   gameState:
-                                                      getIt<GameState>()));
+                                                      _gameState));
                                     },
                                     child: Text(donatedCS
                                         ? "Remove\nDonation"
@@ -475,7 +475,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                                 RemoveCSPartyCardCommand(
                                                     widget.name,
                                                     gameState:
-                                                        getIt<GameState>()));
+                                                        _gameState));
                                           },
                                           child: Text("Remove\nParty Card:"),
                                         )
@@ -538,7 +538,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                 CounterButton(
                                     notifier: deck.getRemovable("bless"),
                                     command: ChangeBlessCommand.deck(deck,
-                                        gameState: getIt<GameState>()),
+                                        gameState: _gameState),
                                     maxValue: 10,
                                     image: "assets/images/abilities/bless.png",
                                     showTotalValue: true,
@@ -549,7 +549,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                 CounterButton(
                                     notifier: deck.getRemovable("curse"),
                                     command: ChangeCurseCommand.deck(deck,
-                                        gameState: getIt<GameState>()),
+                                        gameState: _gameState),
                                     maxValue: 10,
                                     image: "assets/images/abilities/curse.png",
                                     showTotalValue: true,
@@ -563,7 +563,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           deck.getRemovable("in-enfeeble"),
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "in-enfeeble",
-                                          gameState: getIt<GameState>()),
+                                          gameState: _gameState),
                                       maxValue: 10,
                                       image:
                                           "assets/images/abilities/enfeeble_old.png",
@@ -581,7 +581,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       notifier: deck.getRemovable("in-empower"),
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "in-empower",
-                                          gameState: getIt<GameState>()),
+                                          gameState: _gameState),
                                       maxValue: 10,
                                       image:
                                           "assets/images/abilities/empower_old.png",
@@ -598,7 +598,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       notifier: deck.getRemovable("rm-empower"),
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "rm-empower",
-                                          gameState: getIt<GameState>()),
+                                          gameState: _gameState),
                                       maxValue: 12,
                                       image:
                                           "assets/images/abilities/empower_old.png",
@@ -616,7 +616,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       notifier: deck.getRemovable("vi-empower"),
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "vi-empower",
-                                          gameState: getIt<GameState>()),
+                                          gameState: _gameState),
                                       maxValue: 10,
                                       image:
                                           "assets/images/abilities/empower.png",
@@ -635,7 +635,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           deck.getRemovable("vi-gr-empower"),
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "vi-gr-empower",
-                                          gameState: getIt<GameState>()),
+                                          gameState: _gameState),
                                       maxValue: 5,
                                       image:
                                           "assets/images/abilities/greater-empower.png",
@@ -650,7 +650,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           deck.getRemovable("vi-enfeeble"),
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "vi-enfeeble",
-                                          gameState: getIt<GameState>()),
+                                          gameState: _gameState),
                                       maxValue: 10,
                                       image:
                                           "assets/images/abilities/enfeeble.png",
@@ -668,7 +668,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           deck.getRemovable("vi-gr-enfeeble"),
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "vi-gr-enfeeble",
-                                          gameState: getIt<GameState>()),
+                                          gameState: _gameState),
                                       maxValue: 5,
                                       image:
                                           "assets/images/abilities/greater-enfeeble.png",
@@ -685,7 +685,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                           "li-enfeeble"),
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "li-enfeeble",
-                                          gameState: getIt<GameState>()),
+                                          gameState: _gameState),
                                       maxValue: 15,
                                       image:
                                           "assets/images/abilities/enfeeble.png",

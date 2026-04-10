@@ -21,7 +21,10 @@ import 'main_list.dart';
 import 'menus/main_menu.dart';
 
 class MainScaffold extends StatelessWidget {
-  const MainScaffold({super.key});
+  const MainScaffold({super.key, this.settings});
+
+  // injected for testing
+  final Settings? settings;
 
   /// Detects if the current device is an iPad.
   /// iPad has a shortestSide >= 600 and runs iOS.
@@ -36,10 +39,11 @@ class MainScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settings = this.settings ?? getIt<Settings>();
     setupMoreGetIt(context);
 
     return ValueListenableBuilder<double>(
-        valueListenable: getIt<Settings>().userScalingBars,
+        valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
           return SafeArea(
               left: false,
@@ -50,7 +54,7 @@ class MainScaffold extends StatelessWidget {
                   bottomNavigationBar: RepaintBoundary(child: BottomBar()),
                   appBar: PreferredSize(
                       preferredSize: Size(double.infinity,
-                          40 * getIt<Settings>().userScalingBars.value),
+                          40 * settings.userScalingBars.value),
                       child: const RepaintBoundary(child: TopBar())),
                   drawer: MainMenu(),
                   body: const RepaintBoundary(child: MainScaffoldBody())));
@@ -59,15 +63,19 @@ class MainScaffold extends StatelessWidget {
 }
 
 class ToastNotifier extends StatelessWidget {
-  const ToastNotifier({super.key});
+  const ToastNotifier({super.key, this.gameState});
+
+  // injected for testing
+  final GameState? gameState;
 
   @override
   Widget build(BuildContext context) {
+    final gameState = this.gameState ?? getIt<GameState>();
     return ValueListenableBuilder<String>(
-        valueListenable: getIt<GameState>().toastMessage,
+        valueListenable: gameState.toastMessage,
         builder: (context, value, child) {
           Future.delayed(const Duration(milliseconds: 200), () {
-            String message = getIt<GameState>().toastMessage.value;
+            String message = gameState.toastMessage.value;
             if (message != "") {
               if (context.mounted) {
                 showToastSticky(context, message);
@@ -88,12 +96,17 @@ class ToastNotifier extends StatelessWidget {
 }
 
 class MainScaffoldBody extends StatelessWidget {
-  const MainScaffoldBody({super.key});
+  const MainScaffoldBody({super.key, this.gameState, this.settings, this.gameData});
 
-  double getSectionWidth(BuildContext context) {
+  // injected for testing
+  final GameState? gameState;
+  final Settings? settings;
+  final GameData? gameData;
+
+  double getSectionWidth(BuildContext context, Settings settings) {
     bool modFitsOnBar = modifiersFitOnBar(context);
     double screenWidth = MediaQuery.of(context).size.width;
-    double barScale = getIt<Settings>().userScalingBars.value;
+    double barScale = settings.userScalingBars.value;
 
     bool hasLootDeck = GameMethods.hasLootDeck();
     double sectionWidth = screenWidth;
@@ -103,7 +116,7 @@ class MainScaffoldBody extends StatelessWidget {
 
     final chars = GameMethods.getCurrentCharacters();
     bool perksAvailable = false;
-    if (getIt<Settings>().showCharacterAMD.value) {
+    if (settings.showCharacterAMD.value) {
       for (final character in chars) {
         if (character.characterClass.perks.isNotEmpty) {
           perksAvailable = true;
@@ -114,16 +127,17 @@ class MainScaffoldBody extends StatelessWidget {
 
     if (!modFitsOnBar ||
         GameMethods.shouldShowAlliesDeck() ||
-        perksAvailable && getIt<Settings>().showAmdDeck.value) {
+        perksAvailable && settings.showAmdDeck.value) {
       sectionWidth -= 153 * barScale; //width of amd
     }
 
     return sectionWidth;
   }
 
-  int? getNrOfSections() {
-    final GameData gameData = getIt<GameData>();
-    final GameState gameState = getIt<GameState>();
+  int? getNrOfSections(
+      {required GameData gameData,
+      required GameState gameState,
+      required Settings settings}) {
     int? nrOfSections = gameData
         .modelData
         .value[gameState.currentCampaign.value]
@@ -134,7 +148,7 @@ class MainScaffoldBody extends StatelessWidget {
         gameState.scenarioSectionsAdded.length == nrOfSections) {
       nrOfSections = null;
     }
-    if (!getIt<Settings>().showSectionsInMainView.value) {
+    if (!settings.showSectionsInMainView.value) {
       nrOfSections = null;
     }
 
@@ -143,6 +157,9 @@ class MainScaffoldBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final gameState = this.gameState ?? getIt<GameState>();
+    final settings = this.settings ?? getIt<Settings>();
+    final gameData = this.gameData ?? getIt<GameData>();
     Size screenSize = MediaQuery.of(context).size;
 
     return ValueListenableBuilder<bool>(
@@ -158,26 +175,27 @@ class MainScaffoldBody extends StatelessWidget {
                 )),
               const ToastNotifier(),
               ValueListenableBuilder<Map<String, CampaignModel>>(
-                  valueListenable: getIt<GameData>().modelData,
+                  valueListenable: gameData.modelData,
                   builder: (context, value, child) {
                     return ValueListenableBuilder<int>(
-                        valueListenable: getIt<GameState>().commandIndex,
+                        valueListenable: gameState.commandIndex,
                         builder: (context, value, child) {
                           return ValueListenableBuilder<double>(
-                              valueListenable:
-                                  getIt<Settings>().userScalingBars,
+                              valueListenable: settings.userScalingBars,
                               builder: (context, value, child) {
-                                GameState gameState = getIt<GameState>();
                                 double barScale =
-                                    getIt<Settings>().userScalingBars.value;
+                                    settings.userScalingBars.value;
                                 bool hasLootDeck = GameMethods.hasLootDeck();
                                 bool modFitsOnBar = modifiersFitOnBar(context);
 
-                                var sectionWidth = getSectionWidth(context);
+                                var sectionWidth = getSectionWidth(context, settings);
 
                                 //move to separate row if it doesn't fit
                                 bool sectionsOnSeparateRow = false;
-                                int? nrOfSections = getNrOfSections();
+                                int? nrOfSections = getNrOfSections(
+                                    gameData: gameData,
+                                    gameState: gameState,
+                                    settings: settings);
                                 if ((nrOfSections != null &&
                                         nrOfSections > 0 &&
                                         sectionWidth < 58 * barScale) ||
@@ -233,9 +251,7 @@ class MainScaffoldBody extends StatelessWidget {
                                                   gameState.currentCampaign
                                                           .value !=
                                                       "Buttons and Bugs" && //hide amd deck for buttons and bugs
-                                                  getIt<Settings>()
-                                                      .showAmdDeck
-                                                      .value)
+                                                  settings.showAmdDeck.value)
                                                 Container(
                                                     margin: EdgeInsets.only(
                                                       top: 4 * barScale,

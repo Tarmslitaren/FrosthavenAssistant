@@ -16,23 +16,28 @@ class Server extends GameServer {
   final GameState _gameState;
   final Communication _communication;
   final Connection _connection;
+  final Settings? _settingsOverride;
 
   Server(
       {GameState? gameState,
       Communication? communication,
-      Connection? connection})
+      Connection? connection,
+      Settings? settings})
       : _gameState = gameState ?? getIt<GameState>(),
         _communication = communication ?? getIt<Communication>(),
-        _connection = connection ?? getIt<Connection>();
+        _connection = connection ?? getIt<Connection>(),
+        _settingsOverride = settings;
+
+  Settings get _settings => _settingsOverride ?? getIt<Settings>();
 
   @override
   bool get serverEnabled {
-    return getIt<Settings>().server.value;
+    return _settings.server.value;
   }
 
   @override
   set serverEnabled(bool value) {
-    getIt<Settings>().server.value = value;
+    _settings.server.value = value;
     super.serverEnabled = value;
   }
 
@@ -116,10 +121,10 @@ class Server extends GameServer {
   @override
   void sendPing() {
     if (serverSocket != null &&
-        getIt<Settings>().server.value != false &&
+        _settings.server.value != false &&
         pinging == false) {
       Future.delayed(const Duration(seconds: 20), () {
-        if (serverSocket == null || getIt<Settings>().server.value == false) {
+        if (serverSocket == null || _settings.server.value == false) {
           pinging = false;
         } else {
           pinging = true;
@@ -147,7 +152,7 @@ class Server extends GameServer {
 
   Future<void> startServer() async {
     startServerInternal(InternetAddress.anyIPv6.address,
-        int.parse(getIt<Settings>().lastKnownPort));
+        int.parse(_settings.lastKnownPort));
   }
 
   @override

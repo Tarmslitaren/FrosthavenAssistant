@@ -23,6 +23,7 @@ class MainList extends StatefulWidget {
     super.key,
     this.gameState,
     this.gameData,
+    this.settings,
   });
 
   static void scrollToTop() {
@@ -31,6 +32,7 @@ class MainList extends StatefulWidget {
 
   final GameState? gameState;
   final GameData? gameData;
+  final Settings? settings;
 
   @override
   MainListState createState() => MainListState();
@@ -176,8 +178,8 @@ class MainListState extends State<MainList> {
     //TODO: implement
   }
 
-  static List<double> getItemHeights(BuildContext context) {
-    GameState gameState = getIt<GameState>();
+  static List<double> getItemHeights(BuildContext context, {GameState? gameState}) {
+    gameState = gameState ?? getIt<GameState>();
     double listHeight = 0;
     double scale = getScaleByReference(context);
     double mainListWidth = getMainListWidth(context);
@@ -216,6 +218,7 @@ class MainListState extends State<MainList> {
 
   late final GameState _gameState;
   late final GameData _gameData;
+  late final Settings _settings;
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
 
@@ -226,6 +229,7 @@ class MainListState extends State<MainList> {
     super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
     _gameData = widget.gameData ?? getIt<GameData>();
+    _settings = widget.settings ?? getIt<Settings>();
 
     //this does cause a index o
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -241,14 +245,14 @@ class MainListState extends State<MainList> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<bool>(
-        valueListenable: getIt<Settings>().darkMode,
+        valueListenable: _settings.darkMode,
         builder: (context, value, child) {
           return BackGround(
               child: ValueListenableBuilder<Map<String, CampaignModel>>(
                   valueListenable: _gameData.modelData,
                   builder: (context, value, child) {
                     return ValueListenableBuilder<double>(
-                        valueListenable: getIt<Settings>().userScalingMainList,
+                        valueListenable: _settings.userScalingMainList,
                         builder: (context, value, child) {
                           return buildList();
                         });
@@ -265,7 +269,7 @@ class MainListState extends State<MainList> {
           .currentList.length; //don't wrap if no space. Probably not needed
     }
     double screenHeight =
-        screenSize.height - 80 * getIt<Settings>().userScalingBars.value;
+        screenSize.height - 80 * _settings.userScalingBars.value;
 
     //if can't fit without scroll
     if (widgetPositions.isNotEmpty) {
@@ -298,7 +302,7 @@ class MainListState extends State<MainList> {
           .currentList.length; //don't wrap if no space. Probably not needed
     }
     double screenHeight =
-        screenSize.height - 80 * getIt<Settings>().userScalingBars.value;
+        screenSize.height - 80 * _settings.userScalingBars.value;
 
     if (widgetPositions.isNotEmpty) {
       bool allFitInView = false;
@@ -435,7 +439,7 @@ class MainListState extends State<MainList> {
                                       //todo: is set state needed here?
                                       _gameState.action(ReorderListCommand(
                                           newIndex, oldIndex,
-                                          gameState: getIt<GameState>()));
+                                          gameState: _gameState));
                                     });
                                   },
                                   children: generateChildren(),

@@ -15,10 +15,12 @@ class AddMonsterMenu extends StatefulWidget {
     super.key,
     this.gameState,
     this.gameData,
+    this.settings,
   });
 
   final GameState? gameState;
   final GameData? gameData;
+  final Settings? settings;
 
   @override
   AddMonsterMenuState createState() => AddMonsterMenuState();
@@ -30,6 +32,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   final List<MonsterModel> _allMonsters = [];
   late final GameState _gameState;
   late final GameData _gameData;
+  late final Settings _settings;
   bool _addAsAlly = false;
   bool _showSpecial = false;
   bool _showBoss = true;
@@ -39,6 +42,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   @override
   initState() {
     _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
     _gameData = widget.gameData ?? getIt<GameData>();
     // at the beginning, all users are shown
     for (String key in _gameData.modelData.value.keys) {
@@ -113,7 +117,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     _foundMonsters = _allMonsters.toList();
     if (campaign != "All") {
       _foundMonsters.removeWhere((monster) => monster.edition != campaign);
-    } else if (getIt<Settings>().showCustomContent.value == false) {
+    } else if (_settings.showCustomContent.value == false) {
       _foundMonsters.removeWhere(
           (monster) => GameMethods.isCustomCampaign(monster.edition));
     }
@@ -136,7 +140,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
     for (String item in _gameData.editions) {
       if (item != "na") {
         if (!GameMethods.isCustomCampaign(item) ||
-            getIt<Settings>().showCustomContent.value == true) {
+            _settings.showCustomContent.value == true) {
           retVal.add(DropdownMenuItem<String>(value: item, child: Text(item)));
         }
       }
@@ -238,7 +242,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                     _foundMonsters[index].name,
                                     null,
                                     _addAsAlly,
-                                    gameState: getIt<GameState>()));
+                                    gameState: _gameState));
                               });
                             }
                           },

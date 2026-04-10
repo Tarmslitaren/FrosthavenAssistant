@@ -18,13 +18,16 @@ const divider = Divider(
 );
 
 class PerksMenu extends StatelessWidget {
-  const PerksMenu({super.key, required this.character});
+  const PerksMenu({super.key, required this.character, this.gameState});
   final Character character;
+  // injected for testing
+  final GameState? gameState;
 
   @override
   Widget build(BuildContext context) {
+    final gameState = this.gameState ?? getIt<GameState>();
     return ValueListenableBuilder<int>(
-        valueListenable: getIt<GameState>().commandIndex,
+        valueListenable: gameState.commandIndex,
         builder: (context, value, child) {
           final ScrollController scrollController = ScrollController();
 
@@ -49,7 +52,7 @@ class PerksMenu extends StatelessWidget {
                 value: useFHPerks,
                 onChanged: (on) {
                   //setState(() {
-                  getIt<GameState>().action(UseFHPerksCommand(character.id));
+                  gameState.action(UseFHPerksCommand(character.id));
                   // }
                 }));
           }
@@ -104,17 +107,27 @@ class PerkListTile extends StatefulWidget {
       {super.key,
       required this.character,
       required this.index,
-      required this.perk});
+      required this.perk,
+      this.gameState});
 
   final Character character;
   final int index;
   final PerkModel perk;
+  // injected for testing
+  final GameState? gameState;
 
   @override
   State<StatefulWidget> createState() => PerkListTileState();
 }
 
 class PerkListTileState extends State<PerkListTile> {
+  late final GameState _gameState;
+
+  @override
+  void initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
+    super.initState();
+  }
   String _cardText(String gfx) {
     if (gfx.startsWith("perks/")) {
       gfx = gfx.substring("perks/".length);
@@ -269,8 +282,7 @@ class PerkListTileState extends State<PerkListTile> {
       enabled: enabled,
       onChanged: (bool? value) {
         setState(() {
-          getIt<GameState>()
-              .action(AddPerkCommand(widget.character.id, widget.index));
+          _gameState.action(AddPerkCommand(widget.character.id, widget.index));
         });
       },
       value: added,

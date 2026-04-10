@@ -63,7 +63,7 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
                     onPressed: () {
                       _gameState.action(ReturnRemovedAMDCardCommand(
                           widget.index, widget.name,
-                          gameState: getIt<GameState>()));
+                          gameState: _gameState));
                       Navigator.pop(context);
                     },
                     child: const Text("Return card to discard pile",

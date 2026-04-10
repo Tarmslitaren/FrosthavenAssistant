@@ -7,16 +7,17 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 double maxWidth = (740.0 * getIt<Settings>().userScalingMainList.value);
 const double referenceWidth = 412.0;
 
-void setMaxWidth() {
-  maxWidth = (740.0 * getIt<Settings>().userScalingMainList.value);
+void setMaxWidth({Settings? settings}) {
+  settings = settings ?? getIt<Settings>();
+  maxWidth = (740.0 * settings.userScalingMainList.value);
 }
 
 double getScaleByReference(BuildContext context) {
   return _scaleByReference(context, referenceWidth, maxWidth);
 }
 
-bool modifiersFitOnBar(BuildContext context) {
-  Settings settings = getIt<Settings>();
+bool modifiersFitOnBar(BuildContext context, {Settings? settings}) {
+  settings = settings ?? getIt<Settings>();
   double screenWidth = MediaQuery.of(context).size.width;
   double referenceMinWidthWithModifiersOnBar = 370;
   double barSize = screenWidth / settings.userScalingBars.value;

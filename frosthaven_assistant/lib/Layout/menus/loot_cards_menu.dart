@@ -113,12 +113,12 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                                 RemoveSpecialLootCardCommand(
                                                     1418,
                                                     gameState:
-                                                        getIt<GameState>()));
+                                                        _gameState));
                                           } else {
                                             _gameState.action(
                                                 AddSpecialLootCardCommand(1418,
                                                     gameState:
-                                                        getIt<GameState>()));
+                                                        _gameState));
                                           }
                                         });
                                       },
@@ -135,12 +135,12 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                                 RemoveSpecialLootCardCommand(
                                                     1419,
                                                     gameState:
-                                                        getIt<GameState>()));
+                                                        _gameState));
                                           } else {
                                             _gameState.action(
                                                 AddSpecialLootCardCommand(1419,
                                                     gameState:
-                                                        getIt<GameState>()));
+                                                        _gameState));
                                           }
                                         });
                                       },
@@ -171,7 +171,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                               ReturnLootCardCommand(
                                                   true,
                                                   gameState:
-                                                      getIt<GameState>()));
+                                                      _gameState));
                                         },
                                         child: const Text("Return to Top"),
                                       ),
@@ -183,7 +183,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                               ReturnLootCardCommand(
                                                   false,
                                                   gameState:
-                                                      getIt<GameState>()));
+                                                      _gameState));
                                         },
                                         child: const Text("Return to Bottom"),
                                       ),

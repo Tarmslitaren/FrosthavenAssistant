@@ -37,7 +37,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
       if (nameController.text.isNotEmpty) {
         _gameState.action(ChangeNameCommand(
             nameController.text, widget.character.id,
-            gameState: getIt<GameState>()));
+            gameState: _gameState));
       }
     }
   }
@@ -151,7 +151,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                     notifier: widget.character.characterState.maxHealth,
                     command: ChangeMaxHealthCommand(
                         0, widget.character.id, widget.character.id,
-                        gameState: getIt<GameState>()),
+                        gameState: _gameState),
                     maxValue: 900,
                     image: "assets/images/abilities/heal.png",
                     showTotalValue: true,
@@ -172,7 +172,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                       if (nameController.text.isNotEmpty) {
                         _gameState.action(ChangeNameCommand(
                             nameController.text, widget.character.id,
-                            gameState: getIt<GameState>()));
+                            gameState: _gameState));
                       }
                     },
                   ))
