@@ -10,21 +10,29 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class RemoveAMDCardMenu extends StatefulWidget {
-  const RemoveAMDCardMenu({super.key, required this.index, required this.name});
+  const RemoveAMDCardMenu({
+    super.key,
+    required this.index,
+    required this.name,
+    this.gameState,
+  });
 
   final int index;
   final String name;
+
+  final GameState? gameState;
 
   @override
   RemoveAMDCardMenuState createState() => RemoveAMDCardMenuState();
 }
 
 class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   @override
   initState() {
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   @override
@@ -54,14 +62,14 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                 ),
                 TextButton(
                     onPressed: () {
-                      _gameState.action(
-                          RemoveAMDCardCommand(widget.index, widget.name, gameState: getIt<GameState>()));
+                      _gameState.action(RemoveAMDCardCommand(
+                          widget.index, widget.name,
+                          gameState: getIt<GameState>()));
 
                       Navigator.pop(context);
                     },
                     child: const Text("Remove card?",
-                        textAlign: TextAlign.center,
-                        style: kButtonLabelStyle)),
+                        textAlign: TextAlign.center, style: kButtonLabelStyle)),
                 const SizedBox(
                   height: 20,
                 ),
@@ -76,8 +84,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                     }
                   },
                   child: const Text("Return top card",
-                      textAlign: TextAlign.center,
-                      style: kButtonLabelStyle),
+                      textAlign: TextAlign.center, style: kButtonLabelStyle),
                 ),
                 const SizedBox(
                   height: 20,

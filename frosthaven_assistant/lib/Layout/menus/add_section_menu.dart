@@ -11,7 +11,14 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddSectionMenu extends StatefulWidget {
-  const AddSectionMenu({super.key});
+  const AddSectionMenu({
+    super.key,
+    this.gameState,
+    this.gameData,
+  });
+
+  final GameState? gameState;
+  final GameData? gameData;
 
   @override
   AddSectionMenuState createState() => AddSectionMenuState();
@@ -20,13 +27,15 @@ class AddSectionMenu extends StatefulWidget {
 class AddSectionMenuState extends State<AddSectionMenu> {
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
-  final GameState _gameState = getIt<GameState>();
-  final GameData _gameData = getIt<GameData>();
+  late final GameState _gameState;
+  late final GameData _gameData;
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _gameData = widget.gameData ?? getIt<GameData>();
     // at the beginning, all items are shown
     var scenarios = _gameData.modelData.value[_gameState.currentCampaign.value]
         ?.scenarios[_gameState.scenario.value]?.sections
@@ -150,7 +159,8 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                                       .contains(_foundScenarios[index])) {
                                     Navigator.pop(context);
                                     _gameState.action(SetScenarioCommand(
-                                        _foundScenarios[index], true, gameState: getIt<GameState>()));
+                                        _foundScenarios[index], true,
+                                        gameState: getIt<GameState>()));
                                   }
                                 },
                               ),

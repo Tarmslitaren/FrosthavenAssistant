@@ -14,18 +14,22 @@ class SetLootOwnerMenu extends StatefulWidget {
   const SetLootOwnerMenu({
     super.key,
     required this.card,
-  });
+  
+      this.gameState,});
+
+  final GameState? gameState;
 
   @override
   SetLootOwnerMenuState createState() => SetLootOwnerMenuState();
 }
 
 class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   @override
   initState() {
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   Widget buildCharacterButton(Character character) {

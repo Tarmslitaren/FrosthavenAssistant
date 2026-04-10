@@ -12,28 +12,35 @@ class ElementButton extends StatefulWidget {
       {super.key,
       required this.icon,
       required this.color,
-      required this.element});
+      required this.element,
+      this.gameState,
+      this.settings});
   final String icon;
   final Color color;
   final Elements element;
   final double width = 40;
   final double borderWidth = 2;
 
+  final GameState? gameState;
+  final Settings? settings;
+
   @override
   AnimatedContainerButtonState createState() => AnimatedContainerButtonState();
 }
 
 class AnimatedContainerButtonState extends State<ElementButton> {
-  final GameState _gameState = getIt<GameState>();
-  final Settings settings = getIt<Settings>();
+  late final GameState _gameState;
+  late final Settings settings;
   late double _height;
   late Color _color;
   late BorderRadiusGeometry _borderRadius;
 
   @override
   void initState() {
-    final scale = settings.userScalingBars.value;
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
+    settings = widget.settings ?? getIt<Settings>();
+    final scale = settings.userScalingBars.value;
     _height = widget.width * scale;
     _color = Colors.transparent;
     _borderRadius = BorderRadius.all(
@@ -168,13 +175,13 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                           }),
                     )),
                 ValueListenableBuilder<bool>(
-                    valueListenable: getIt<Settings>().darkMode,
+                    valueListenable: settings.darkMode,
                     builder: (context, value, child) {
                       return ValueListenableBuilder<int>(
                           valueListenable: _gameState.commandIndex,
                           builder: (context, value, child) {
                             Color? color;
-                            if (!getIt<Settings>().darkMode.value) {
+                            if (!settings.darkMode.value) {
                               color = Colors.black;
                             }
                             if (ElementState.inert !=

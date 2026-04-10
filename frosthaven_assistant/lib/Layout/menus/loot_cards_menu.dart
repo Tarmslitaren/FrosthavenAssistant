@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_loot_owner_menu.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/return_loot_card_command.dart';
 
@@ -16,19 +16,25 @@ import '../loot_card.dart';
 import 'add_loot_card_menu.dart';
 
 class LootCardsMenu extends StatefulWidget {
-  const LootCardsMenu({super.key});
+  const LootCardsMenu({
+    super.key,
+    this.gameState,
+  });
+
+  final GameState? gameState;
 
   @override
   LootCardsMenuState createState() => LootCardsMenuState();
 }
 
 class LootCardsMenuState extends State<LootCardsMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
   final scrollController = ScrollController();
 
   @override
   initState() {
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   List<Widget> generateList(List<LootCard> inputList) {
@@ -105,11 +111,14 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                           if (_gameState.lootDeck.hasCard1418) {
                                             _gameState.action(
                                                 RemoveSpecialLootCardCommand(
-                                                    1418, gameState: getIt<GameState>()));
+                                                    1418,
+                                                    gameState:
+                                                        getIt<GameState>()));
                                           } else {
                                             _gameState.action(
-                                                AddSpecialLootCardCommand(
-                                                    1418, gameState: getIt<GameState>()));
+                                                AddSpecialLootCardCommand(1418,
+                                                    gameState:
+                                                        getIt<GameState>()));
                                           }
                                         });
                                       },
@@ -124,11 +133,14 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                           if (_gameState.lootDeck.hasCard1419) {
                                             _gameState.action(
                                                 RemoveSpecialLootCardCommand(
-                                                    1419, gameState: getIt<GameState>()));
+                                                    1419,
+                                                    gameState:
+                                                        getIt<GameState>()));
                                           } else {
                                             _gameState.action(
-                                                AddSpecialLootCardCommand(
-                                                    1419, gameState: getIt<GameState>()));
+                                                AddSpecialLootCardCommand(1419,
+                                                    gameState:
+                                                        getIt<GameState>()));
                                           }
                                         });
                                       },
@@ -156,7 +168,10 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                       TextButton(
                                         onPressed: () {
                                           _gameState.action(
-                                              ReturnLootCardCommand(true, gameState: getIt<GameState>()));
+                                              ReturnLootCardCommand(
+                                                  true,
+                                                  gameState:
+                                                      getIt<GameState>()));
                                         },
                                         child: const Text("Return to Top"),
                                       ),
@@ -165,7 +180,10 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                       TextButton(
                                         onPressed: () {
                                           _gameState.action(
-                                              ReturnLootCardCommand(false, gameState: getIt<GameState>()));
+                                              ReturnLootCardCommand(
+                                                  false,
+                                                  gameState:
+                                                      getIt<GameState>()));
                                         },
                                         child: const Text("Return to Bottom"),
                                       ),

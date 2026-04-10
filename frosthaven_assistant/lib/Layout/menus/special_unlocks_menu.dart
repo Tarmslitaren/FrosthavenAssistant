@@ -11,7 +11,6 @@ class SpecialUnlocksMenu extends StatelessWidget {
   SpecialUnlocksMenu({super.key});
 
   final ScrollController _scrollController = ScrollController();
-  final Settings _settings = getIt<Settings>();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class SpecialUnlocksMenu extends StatelessWidget {
       ["Bladeswarm", "assets/images/class-icons/Bladeswarm.png"]
     ];
 
-    if (_settings.showCustomContent.value) {
+    if (getIt<Settings>().showCustomContent.value) {
       _unlocks.add(["Vanquisher", "assets/images/class-icons/Vanquisher.png"]);
     }
 

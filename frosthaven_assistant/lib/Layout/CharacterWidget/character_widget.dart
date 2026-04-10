@@ -15,17 +15,19 @@ import 'character_widget_internal.dart';
 
 class CharacterWidget extends StatefulWidget {
   const CharacterWidget(
-      {required this.characterId, super.key, this.initPreset});
+      {required this.characterId, super.key, this.initPreset, this.gameState});
 
   final String characterId;
   final int? initPreset;
+
+  final GameState? gameState;
 
   @override
   CharacterWidgetState createState() => CharacterWidgetState();
 }
 
 class CharacterWidgetState extends State<CharacterWidget> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
   @override
   void initState() {
     Character? character = GameMethods.getCharacterByName(widget.characterId);
@@ -33,6 +35,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
       lastList = character.characterState.summonList.toList();
     }
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   bool isCharacter = true;

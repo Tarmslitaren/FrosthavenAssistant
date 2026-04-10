@@ -19,22 +19,26 @@ class AbilityCardsMenu extends StatefulWidget {
   const AbilityCardsMenu(
       {super.key,
       required this.monsterAbilityState,
-      required this.monsterData});
+      required this.monsterData,
+      this.gameState});
 
   final MonsterAbilityState monsterAbilityState;
   final Monster monsterData;
+
+  final GameState? gameState;
 
   @override
   AbilityCardsMenuState createState() => AbilityCardsMenuState();
 }
 
 class AbilityCardsMenuState extends State<AbilityCardsMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
   static List<MonsterAbilityCardModel> revealedList = [];
 
   @override
   initState() {
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
     revealedList = [];
   }
 

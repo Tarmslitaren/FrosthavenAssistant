@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:flutter/services.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 
 import '../../Model/character_class.dart';
@@ -15,7 +15,14 @@ import '../../services/service_locator.dart';
 import 'numpad_menu.dart';
 
 class SelectScenarioMenu extends StatefulWidget {
-  const SelectScenarioMenu({super.key});
+  const SelectScenarioMenu({
+    super.key,
+    this.gameState,
+    this.gameData,
+  });
+
+  final GameState? gameState;
+  final GameData? gameData;
 
   @override
   SelectScenarioMenuState createState() => SelectScenarioMenuState();
@@ -24,13 +31,15 @@ class SelectScenarioMenu extends StatefulWidget {
 class SelectScenarioMenuState extends State<SelectScenarioMenu> {
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
-  final GameState _gameState = getIt<GameState>();
-  final GameData _gameData = getIt<GameData>();
+  late final GameState _gameState;
+  late final GameData _gameData;
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _gameData = widget.gameData ?? getIt<GameData>();
     // at the beginning, all items are shown
     setCampaign(_gameState.currentCampaign.value);
     super.initState();
@@ -212,12 +221,11 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
         image: AssetImage("assets/images/class-icons/$characterName.png"),
       ),
       title: Text(text, style: kTitleStyle),
-      trailing: Text("($edition)",
-          softWrap: true,
-          style: kSubtitleStyle),
+      trailing: Text("($edition)", softWrap: true, style: kSubtitleStyle),
       onTap: () {
         Navigator.pop(context);
-        _gameState.action(SetScenarioCommand(name, false, gameState: getIt<GameState>()));
+        _gameState.action(
+            SetScenarioCommand(name, false, gameState: getIt<GameState>()));
       },
     );
   }
@@ -232,7 +240,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       title: Text(title, style: kTitleStyle),
       onTap: () {
         Navigator.pop(context);
-        _gameState.action(SetScenarioCommand(name, false, gameState: getIt<GameState>()));
+        _gameState.action(
+            SetScenarioCommand(name, false, gameState: getIt<GameState>()));
       },
     );
   }
@@ -321,7 +330,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                             if (_foundScenarios.isNotEmpty) {
                               Navigator.pop(context);
                               _gameState.action(SetScenarioCommand(
-                                  _foundScenarios.first, false, gameState: getIt<GameState>()));
+                                  _foundScenarios.first, false,
+                                  gameState: getIt<GameState>()));
                             }
                           },
                           decoration: const InputDecoration(

@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/return_amd_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
@@ -11,16 +11,22 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class RemovedModifierCardMenu extends StatefulWidget {
-  const RemovedModifierCardMenu({super.key, required this.name});
+  const RemovedModifierCardMenu({
+    super.key,
+    required this.name,
+    this.gameState,
+  });
 
   final String name;
+
+  final GameState? gameState;
 
   @override
   RemovedModifierCardMenuState createState() => RemovedModifierCardMenuState();
 }
 
 class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
   final scrollController = ScrollController();
 
   List<Widget> generateList(List<ModifierCard> inputList, String name) {
@@ -63,6 +69,12 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
             children: generateList(list, widget.name).reversed.toList(),
           ),
         ));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   @override

@@ -15,10 +15,11 @@ class GameMethods {
     return 2 + gs.level.value;
   }
 
-  static int getHazardValue({GameState? gameState}) {
+  static int getHazardValue({GameState? gameState, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
+    final s = settings ?? getIt<Settings>();
     if (isOgGloomEdition(gameState: gs) &&
-        !getIt<Settings>().fhHazTerrainCalcInOGGloom.value) {
+        !s.fhHazTerrainCalcInOGGloom.value) {
       return (getTrapValue(gameState: gs) / 2).floor();
     }
 
@@ -67,12 +68,12 @@ class GameMethods {
     return (totalLevels / nrOfCharacters / 2.0).ceil();
   }
 
-  static bool canDraw({GameState? gameState}) {
+  static bool canDraw({GameState? gameState, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
     if (gs.currentList.isEmpty) {
       return false;
     }
-    if (getIt<Settings>().noInit.value) {
+    if ((settings ?? getIt<Settings>()).noInit.value) {
       return true;
     }
     for (var item in gs.currentList) {
@@ -425,9 +426,9 @@ class GameMethods {
     return character.id == "Escort" || character.id == "Objective";
   }
 
-  static bool shouldShowAlliesDeck({GameState? gameState}) {
+  static bool shouldShowAlliesDeck({GameState? gameState, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
-    if (!getIt<Settings>().showAmdDeck.value) {
+    if (!(settings ?? getIt<Settings>()).showAmdDeck.value) {
       return false;
     }
     if (gs.showAllyDeck.value) {
@@ -493,7 +494,8 @@ class GameMethods {
     return false;
   }
 
-  static bool isFrosthavenStyle(MonsterModel? monster, {GameState? gameState}) {
+  static bool isFrosthavenStyle(MonsterModel? monster,
+      {GameState? gameState, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
     //frosthaven monster
     final monsterFrostHavenStyledEdition =
@@ -501,7 +503,7 @@ class GameMethods {
     if (monsterFrostHavenStyledEdition) {
       return true;
     }
-    final style = getIt<Settings>().style.value;
+    final style = (settings ?? getIt<Settings>()).style.value;
     //frosthaven monsters in other campaigns
     if (monster != null) {
       if (style != Style.frosthaven && !monsterFrostHavenStyledEdition) {
@@ -544,9 +546,9 @@ class GameMethods {
     return !isFrosthavenStyledEdition(gs.currentCampaign.value, gameState: gs);
   }
 
-  static bool hasLootDeck({GameState? gameState}) {
+  static bool hasLootDeck({GameState? gameState, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
-    bool hasLootDeck = !getIt<Settings>().hideLootDeck.value;
+    bool hasLootDeck = !(settings ?? getIt<Settings>()).hideLootDeck.value;
     if (gs.lootDeck.discardPileIsEmpty &&
         gs.lootDeck.drawPileIsEmpty) {
       hasLootDeck = false;

@@ -19,11 +19,18 @@ import '../services/service_locator.dart';
 import 'monster_widget.dart';
 
 class MainList extends StatefulWidget {
-  const MainList({super.key});
+  const MainList({
+    super.key,
+    this.gameState,
+    this.gameData,
+  });
 
   static void scrollToTop() {
     MainListState.scrollToTop();
   }
+
+  final GameState? gameState;
+  final GameData? gameData;
 
   @override
   MainListState createState() => MainListState();
@@ -207,8 +214,8 @@ class MainListState extends State<MainList> {
     return widgetPositions;
   }
 
-  final GameState _gameState = getIt<GameState>();
-  final GameData _gameData = getIt<GameData>();
+  late final GameState _gameState;
+  late final GameData _gameData;
   List<Widget> _generatedList = [];
   static final scrollController = ScrollController();
 
@@ -217,6 +224,8 @@ class MainListState extends State<MainList> {
   @override
   void initState() {
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _gameData = widget.gameData ?? getIt<GameData>();
 
     //this does cause a index o
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -425,7 +434,8 @@ class MainListState extends State<MainList> {
                                     setState(() {
                                       //todo: is set state needed here?
                                       _gameState.action(ReorderListCommand(
-                                          newIndex, oldIndex, gameState: getIt<GameState>()));
+                                          newIndex, oldIndex,
+                                          gameState: getIt<GameState>()));
                                     });
                                   },
                                   children: generateChildren(),

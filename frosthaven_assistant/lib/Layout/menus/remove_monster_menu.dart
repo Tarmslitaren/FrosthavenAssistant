@@ -8,19 +8,25 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class RemoveMonsterMenu extends StatefulWidget {
-  const RemoveMonsterMenu({super.key});
+  const RemoveMonsterMenu({
+    super.key,
+    this.gameState,
+  });
+
+  final GameState? gameState;
 
   @override
   RemoveMonsterMenuState createState() => RemoveMonsterMenuState();
 }
 
 class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   @override
   initState() {
     // at the beginning, all items are shown
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   @override
@@ -36,7 +42,8 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
             ListTile(
               title: const Text("Remove All", style: kTitleStyle),
               onTap: () {
-                _gameState.action(RemoveMonsterCommand(currentMonsters, gameState: getIt<GameState>())); //
+                _gameState.action(RemoveMonsterCommand(currentMonsters,
+                    gameState: getIt<GameState>())); //
                 Navigator.pop(context);
               },
             ),
@@ -52,12 +59,12 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                   title: Text(currentMonsters[index].type.display,
                       style: kTitleStyle),
                   trailing: Text("(${currentMonsters[index].type.edition})",
-                      style:
-                          kSubtitleStyle),
+                      style: kSubtitleStyle),
                   onTap: () {
                     setState(() {
-                      _gameState.action(
-                          RemoveMonsterCommand([currentMonsters[index]], gameState: getIt<GameState>()));
+                      _gameState.action(RemoveMonsterCommand(
+                          [currentMonsters[index]],
+                          gameState: getIt<GameState>()));
                     });
                   },
                 ),

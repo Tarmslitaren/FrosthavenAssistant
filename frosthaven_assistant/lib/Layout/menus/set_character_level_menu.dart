@@ -13,24 +13,31 @@ import '../../services/service_locator.dart';
 import '../counter_button.dart';
 
 class SetCharacterLevelMenu extends StatefulWidget {
-  const SetCharacterLevelMenu({super.key, required this.character});
+  const SetCharacterLevelMenu({
+    super.key,
+    required this.character,
+    this.gameState,
+  });
 
   final Character character;
+
+  final GameState? gameState;
 
   @override
   SetCharacterLevelMenuState createState() => SetCharacterLevelMenuState();
 }
 
 class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
   final TextEditingController nameController = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
   void _focusNodeListener() {
     if (!focusNode.hasFocus) {
       if (nameController.text.isNotEmpty) {
-        _gameState.action(
-            ChangeNameCommand(nameController.text, widget.character.id, gameState: getIt<GameState>()));
+        _gameState.action(ChangeNameCommand(
+            nameController.text, widget.character.id,
+            gameState: getIt<GameState>()));
       }
     }
   }
@@ -45,6 +52,7 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
   initState() {
     // at the beginning, all items are shown
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
 
     focusNode.addListener(_focusNodeListener);
   }
@@ -142,7 +150,8 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                 CounterButton(
                     notifier: widget.character.characterState.maxHealth,
                     command: ChangeMaxHealthCommand(
-                        0, widget.character.id, widget.character.id, gameState: getIt<GameState>()),
+                        0, widget.character.id, widget.character.id,
+                        gameState: getIt<GameState>()),
                     maxValue: 900,
                     image: "assets/images/abilities/heal.png",
                     showTotalValue: true,
@@ -162,7 +171,8 @@ class SetCharacterLevelMenuState extends State<SetCharacterLevelMenu> {
                       //set the name
                       if (nameController.text.isNotEmpty) {
                         _gameState.action(ChangeNameCommand(
-                            nameController.text, widget.character.id, gameState: getIt<GameState>()));
+                            nameController.text, widget.character.id,
+                            gameState: getIt<GameState>()));
                       }
                     },
                   ))

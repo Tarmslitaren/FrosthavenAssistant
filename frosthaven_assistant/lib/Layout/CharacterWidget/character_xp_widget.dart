@@ -15,17 +15,16 @@ class CharacterXPWidget extends StatelessWidget {
   final Character character;
   final double scale;
   final Shadow shadow;
-  final GameState _gameState = getIt<GameState>();
-
   @override
   Widget build(BuildContext context) {
+    final gameState = getIt<GameState>();
     return GestureDetector(
         onTap: () {
-          _gameState.action(ChangeXPCommand(1, character.id, character.id, gameState: getIt<GameState>()));
+          gameState.action(ChangeXPCommand(1, character.id, character.id, gameState: gameState));
         },
         onDoubleTap: () {
           if (character.characterState.xp.value > 0) {
-            _gameState.action(ChangeXPCommand(-1, character.id, character.id, gameState: getIt<GameState>()));
+            gameState.action(ChangeXPCommand(-1, character.id, character.id, gameState: gameState));
           }
         },
         child: Row(

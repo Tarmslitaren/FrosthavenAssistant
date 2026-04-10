@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Model/summon_model.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 
 import '../../Layout/components/modal_background.dart';
@@ -13,17 +13,25 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddSummonMenu extends StatefulWidget {
-  const AddSummonMenu({super.key, required this.character});
+  const AddSummonMenu({
+    super.key,
+    required this.character,
+    this.gameState,
+    this.gameData,
+  });
 
   final Character character;
+
+  final GameState? gameState;
+  final GameData? gameData;
 
   @override
   AddSummonMenuState createState() => AddSummonMenuState();
 }
 
 class AddSummonMenuState extends State<AddSummonMenu> {
-  final GameState _gameState = getIt<GameState>();
-  final GameData _gameData = getIt<GameData>();
+  late final GameState _gameState;
+  late final GameData _gameData;
   int chosenNr = 1;
   String chosenGfx = "blue";
 
@@ -34,6 +42,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
   initState() {
     // at the beginning, all items are shown
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _gameData = widget.gameData ?? getIt<GameData>();
 
     //populate the summon list
     for (var item in widget.character.characterClass.summons) {
@@ -240,7 +250,8 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                                   summonData,
                                   widget.character.id,
                                   MonsterType.summon,
-                                  true, gameState: getIt<GameState>()));
+                                  true,
+                                  gameState: getIt<GameState>()));
                             });
                             Navigator.pop(context);
                             //open the level menu here for convenience

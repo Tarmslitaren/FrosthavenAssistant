@@ -9,7 +9,14 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class SaveMenu extends StatefulWidget {
-  const SaveMenu({super.key});
+  const SaveMenu({
+    super.key,
+    this.settings,
+    this.gameState,
+  });
+
+  final Settings? settings;
+  final GameState? gameState;
 
   @override
   SaveMenuState createState() => SaveMenuState();
@@ -18,12 +25,14 @@ class SaveMenu extends StatefulWidget {
 class SaveMenuState extends State<SaveMenu> {
   // This list holds the data for the list view
   final List<String> _saves = [];
-  final Settings _settings = getIt<Settings>();
-  final GameState _gameState = getIt<GameState>();
+  late final Settings _settings;
+  late final GameState _gameState;
   final ScrollController _scrollController = ScrollController();
 
   @override
   initState() {
+    _settings = widget.settings ?? getIt<Settings>();
+    _gameState = widget.gameState ?? getIt<GameState>();
     //fill list with all saved states
     for (String save in _settings.saves.value.keys) {
       _saves.add(save);

@@ -9,21 +9,29 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class ReturnAMDCardMenu extends StatefulWidget {
-  const ReturnAMDCardMenu({super.key, required this.index, required this.name});
+  const ReturnAMDCardMenu({
+    super.key,
+    required this.index,
+    required this.name,
+    this.gameState,
+  });
 
   final int index;
   final String name;
+
+  final GameState? gameState;
 
   @override
   RemoveAMDCardMenuState createState() => RemoveAMDCardMenuState();
 }
 
 class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   @override
   initState() {
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   @override
@@ -54,12 +62,12 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
                 TextButton(
                     onPressed: () {
                       _gameState.action(ReturnRemovedAMDCardCommand(
-                          widget.index, widget.name, gameState: getIt<GameState>()));
+                          widget.index, widget.name,
+                          gameState: getIt<GameState>()));
                       Navigator.pop(context);
                     },
                     child: const Text("Return card to discard pile",
-                        textAlign: TextAlign.center,
-                        style: kButtonLabelStyle)),
+                        textAlign: TextAlign.center, style: kButtonLabelStyle)),
                 const SizedBox(
                   height: 20,
                 ),

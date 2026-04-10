@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_menu.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands/remove_character_command.dart';
@@ -11,19 +11,25 @@ import '../../services/service_locator.dart';
 import './character_tile.dart';
 
 class RemoveCharacterMenu extends StatefulWidget {
-  const RemoveCharacterMenu({super.key});
+  const RemoveCharacterMenu({
+    super.key,
+    this.gameState,
+  });
+
+  final GameState? gameState;
 
   @override
   RemoveCharacterMenuState createState() => RemoveCharacterMenuState();
 }
 
 class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   @override
   initState() {
     // at the beginning, all items are shown
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   @override
@@ -42,8 +48,9 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
             (character) => character.characterClass == characterClassToRemove);
 
         if (indexToRemove != -1) {
-          _gameState.action(
-              RemoveCharacterCommand([currentCharacters[indexToRemove]], gameState: getIt<GameState>()));
+          _gameState.action(RemoveCharacterCommand(
+              [currentCharacters[indexToRemove]],
+              gameState: getIt<GameState>()));
         }
       });
     }
@@ -69,7 +76,8 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
               title: const Text("Remove All", style: kTitleStyle),
               onTap: () {
                 //todo: ask if wanna save
-                _gameState.action(RemoveCharacterCommand(currentCharacters, gameState: getIt<GameState>()));
+                _gameState.action(RemoveCharacterCommand(currentCharacters,
+                    gameState: getIt<GameState>()));
                 Navigator.pop(context);
               },
             ),

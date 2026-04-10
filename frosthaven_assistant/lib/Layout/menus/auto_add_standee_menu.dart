@@ -14,16 +14,22 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AutoAddStandeeMenu extends StatefulWidget {
-  const AutoAddStandeeMenu({super.key, required this.monsterData});
+  const AutoAddStandeeMenu({
+    super.key,
+    required this.monsterData,
+    this.gameState,
+  });
 
   final List<RoomMonsterData> monsterData;
+
+  final GameState? gameState;
 
   @override
   AddStandeeMenuState createState() => AddStandeeMenuState();
 }
 
 class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   bool addAsSummon = false;
   int currentMonsterIndex = 0;
@@ -39,6 +45,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
   initState() {
     // at the beginning, all items are shown
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
 
     startCommandIndex = _gameState.commandIndex.value;
 
@@ -132,8 +139,9 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         ),
         onPressed: () {
           if (!isOut) {
-            _gameState.action(
-                AddStandeeCommand(nr, null, monster.id, type, addAsSummon, gameState: getIt<GameState>()));
+            _gameState.action(AddStandeeCommand(
+                nr, null, monster.id, type, addAsSummon,
+                gameState: getIt<GameState>()));
             if (elite) {
               setState(() {
                 currentEliteAdded++;
@@ -165,8 +173,9 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                       .contains(state.standeeNr) &&
                   !initialNormalAdded[currentMonsterIndex]
                       .contains(state.standeeNr)) {
-                _gameState
-                    .action(ChangeHealthCommand(-10000, figureId, monster.id, gameState: getIt<GameState>()));
+                _gameState.action(ChangeHealthCommand(
+                    -10000, figureId, monster.id,
+                    gameState: getIt<GameState>()));
 
                 setState(() {
                   if (state.type == MonsterType.elite) {

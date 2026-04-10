@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/counter_button.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_max_health_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_auto_level_adjust_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_difficulty_command.dart';
@@ -15,23 +15,32 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class SetLevelMenu extends StatefulWidget {
-  const SetLevelMenu({super.key, this.monster, this.figure, this.characterId});
+  const SetLevelMenu({
+    super.key,
+    this.monster,
+    this.figure,
+    this.characterId,
+    this.gameState,
+  });
 
   final Monster? monster;
   final String? characterId;
   final FigureState? figure;
+
+  final GameState? gameState;
 
   @override
   SetLevelMenuState createState() => SetLevelMenuState();
 }
 
 class SetLevelMenuState extends State<SetLevelMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   @override
   initState() {
     // at the beginning, all items are shown
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   Widget buildLevelButton(int nr, double scale) {
@@ -183,7 +192,8 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
-                      _gameState.action(SetDifficultyCommand(nr, gameState: getIt<GameState>()));
+                      _gameState.action(SetDifficultyCommand(nr,
+                          gameState: getIt<GameState>()));
                     }
                   },
                 )),
@@ -295,8 +305,9 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                           side: BorderSide(
                               color: darkMode ? Colors.white : Colors.black),
                           onChanged: (bool? newValue) {
-                            _gameState
-                                .action(SetAutoLevelAdjustCommand(newValue!, gameState: getIt<GameState>()));
+                            _gameState.action(SetAutoLevelAdjustCommand(
+                                newValue!,
+                                gameState: getIt<GameState>()));
                           },
                           value: _gameState.autoScenarioLevel.value,
                         );
@@ -315,7 +326,8 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   CounterButton(
                       notifier: widget.figure!.maxHealth,
-                      command: ChangeMaxHealthCommand(0, figureId, ownerId, gameState: getIt<GameState>()),
+                      command: ChangeMaxHealthCommand(0, figureId, ownerId,
+                          gameState: getIt<GameState>()),
                       maxValue: 900,
                       image: "assets/images/abilities/heal.png",
                       showTotalValue: true,

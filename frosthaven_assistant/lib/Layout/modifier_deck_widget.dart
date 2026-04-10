@@ -4,22 +4,31 @@ import 'package:frosthaven_assistant/Layout/menus/modifier_deck_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
-import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/game_data.dart';
 import '../Resource/game_methods.dart';
-import '../Resource/settings.dart';
 import 'menus/modifier_card_zoom.dart';
 
 class ModifierDeckWidget extends StatefulWidget {
-  const ModifierDeckWidget({super.key, required this.name});
+  const ModifierDeckWidget({
+    super.key,
+    required this.name,
+    this.gameState,
+    this.gameData,
+    this.settings,
+  });
 
   final String name;
+
+  final GameState? gameState;
+  final GameData? gameData;
+  final Settings? settings;
 
   @override
   ModifierDeckWidgetState createState() => ModifierDeckWidgetState();
@@ -27,15 +36,18 @@ class ModifierDeckWidget extends StatefulWidget {
 
 class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   static const int cardAnimationDuration = 1200;
-  final GameState _gameState = getIt<GameState>();
-  final GameData _gameData = getIt<GameData>();
-  final Settings settings = getIt<Settings>();
+  late final GameState _gameState;
+  late final GameData _gameData;
+  late final Settings settings;
 
   bool _animationsEnabled = false;
 
   @override
   void initState() {
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _gameData = widget.gameData ?? getIt<GameData>();
+    settings = widget.settings ?? getIt<Settings>();
 
     //to load save state
     _gameData.modelData.addListener(_modelDataListener);
@@ -66,29 +78,31 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     }
     return Container(
         key: key,
-        child: RepaintBoundary(child:TranslationAnimatedWidget(
-            animationFinished: (bool finished) {
-              if (finished) {
-                _animationsEnabled = false;
-              }
-            },
-            duration: const Duration(milliseconds: cardAnimationDuration),
-            enabled: true,
-            curve: Curves.easeIn,
-            values: [
-              const Offset(0, 0), //left to draw pile
-              const Offset(0, 0), //left to draw pile
-              Offset(33.3333 * settings.userScalingBars.value, 0), //end
-            ],
-            child: RotationAnimatedWidget(
-                enabled: true,
-                values: [
-                  Rotation.deg(x: 0, y: 0, z: -15),
-                  Rotation.deg(x: 0, y: 0, z: -15),
-                  Rotation.deg(x: 0, y: 0, z: 0),
-                ],
+        child: RepaintBoundary(
+            child: TranslationAnimatedWidget(
+                animationFinished: (bool finished) {
+                  if (finished) {
+                    _animationsEnabled = false;
+                  }
+                },
                 duration: const Duration(milliseconds: cardAnimationDuration),
-                child: child))));
+                enabled: true,
+                curve: Curves.easeIn,
+                values: [
+                  const Offset(0, 0), //left to draw pile
+                  const Offset(0, 0), //left to draw pile
+                  Offset(33.3333 * settings.userScalingBars.value, 0), //end
+                ],
+                child: RotationAnimatedWidget(
+                    enabled: true,
+                    values: [
+                      Rotation.deg(x: 0, y: 0, z: -15),
+                      Rotation.deg(x: 0, y: 0, z: -15),
+                      Rotation.deg(x: 0, y: 0, z: 0),
+                    ],
+                    duration:
+                        const Duration(milliseconds: cardAnimationDuration),
+                    child: child))));
   }
 
   bool initAnimationEnabled() {
@@ -173,45 +187,47 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
         key: key,
         //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
         child: _animationsEnabled
-            ? RepaintBoundary(child:TranslationAnimatedWidget(
-                animationFinished: (bool finished) {
-                  if (finished) {
-                    _animationsEnabled = false;
-                  }
-                },
-                duration: const Duration(milliseconds: cardAnimationDuration),
-                enabled: true,
-                values: [
-                  Offset(startXOffset, 0),
-                  //left to draw pile
-                  Offset(xOffset, yOffset),
-                  //center of screen
-                  Offset(xOffset, yOffset),
-                  //center of screen
-                  Offset(xOffset, yOffset),
-                  //center of screen
-                  const Offset(0, 0),
-                  //end
-                ],
-                child: ScaleAnimatedWidget(
-                    //does nothing
-                    enabled: true,
+            ? RepaintBoundary(
+                child: TranslationAnimatedWidget(
+                    animationFinished: (bool finished) {
+                      if (finished) {
+                        _animationsEnabled = false;
+                      }
+                    },
                     duration:
                         const Duration(milliseconds: cardAnimationDuration),
-                    values: const [1, maxScale, maxScale, maxScale, 1],
-                    child: RotationAnimatedWidget(
+                    enabled: true,
+                    values: [
+                      Offset(startXOffset, 0),
+                      //left to draw pile
+                      Offset(xOffset, yOffset),
+                      //center of screen
+                      Offset(xOffset, yOffset),
+                      //center of screen
+                      Offset(xOffset, yOffset),
+                      //center of screen
+                      const Offset(0, 0),
+                      //end
+                    ],
+                    child: ScaleAnimatedWidget(
+                        //does nothing
                         enabled: true,
-                        values: [
-                          //Rotation.deg(x: 0, y: 0, z: 0),
-                          //Rotation.deg(x:0, y: 0, z: 90),
-                          Rotation.deg(x: 0, y: 0, z: 180),
-                          //Rotation.deg(x: 0, y: 0, z: 270),
-                          Rotation.deg(x: 0, y: 0, z: 360),
-                        ],
-                        duration: Duration(
-                            milliseconds:
-                                (cardAnimationDuration * 0.25).ceil()),
-                        child: child))))
+                        duration:
+                            const Duration(milliseconds: cardAnimationDuration),
+                        values: const [1, maxScale, maxScale, maxScale, 1],
+                        child: RotationAnimatedWidget(
+                            enabled: true,
+                            values: [
+                              //Rotation.deg(x: 0, y: 0, z: 0),
+                              //Rotation.deg(x:0, y: 0, z: 90),
+                              Rotation.deg(x: 0, y: 0, z: 180),
+                              //Rotation.deg(x: 0, y: 0, z: 270),
+                              Rotation.deg(x: 0, y: 0, z: 360),
+                            ],
+                            duration: Duration(
+                                milliseconds:
+                                    (cardAnimationDuration * 0.25).ceil()),
+                            child: child))))
             : child);
   }
 
@@ -275,8 +291,9 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                           onTap: () {
                             setState(() {
                               _animationsEnabled = true;
-                              _gameState
-                                  .action(DrawModifierCardCommand(widget.name, gameState: getIt<GameState>()));
+                              _gameState.action(DrawModifierCardCommand(
+                                  widget.name,
+                                  gameState: getIt<GameState>()));
                             });
                           },
                           child: Stack(children: [
@@ -298,7 +315,9 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                                     _animationsEnabled = true;
                                                     _gameState.action(
                                                         DrawModifierCardCommand(
-                                                            widget.name, gameState: getIt<GameState>()));
+                                                            widget.name,
+                                                            gameState: getIt<
+                                                                GameState>()));
                                                   });
                                                 })))
                                   ])
@@ -321,7 +340,9 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                                   _animationsEnabled = true;
                                                   _gameState.action(
                                                       DrawModifierCardCommand(
-                                                          widget.name, gameState: getIt<GameState>()));
+                                                          widget.name,
+                                                          gameState: getIt<
+                                                              GameState>()));
                                                 });
                                               },
                                               child: Center(

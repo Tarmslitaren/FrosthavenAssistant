@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Resource/commands/add_monster_command.dart';
 import '../../Resource/game_data.dart';
@@ -11,7 +11,14 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddMonsterMenu extends StatefulWidget {
-  const AddMonsterMenu({super.key});
+  const AddMonsterMenu({
+    super.key,
+    this.gameState,
+    this.gameData,
+  });
+
+  final GameState? gameState;
+  final GameData? gameData;
 
   @override
   AddMonsterMenuState createState() => AddMonsterMenuState();
@@ -21,8 +28,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   // This list holds the data for the list view
   List<MonsterModel> _foundMonsters = [];
   final List<MonsterModel> _allMonsters = [];
-  final GameState _gameState = getIt<GameState>();
-  final GameData _gameData = getIt<GameData>();
+  late final GameState _gameState;
+  late final GameData _gameData;
   bool _addAsAlly = false;
   bool _showSpecial = false;
   bool _showBoss = true;
@@ -31,6 +38,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
 
   @override
   initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _gameData = widget.gameData ?? getIt<GameData>();
     // at the beginning, all users are shown
     for (String key in _gameData.modelData.value.keys) {
       _allMonsters.addAll(_gameData.modelData.value[key]!.monsters.values);
@@ -188,8 +197,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
               child: TextField(
                 onChanged: (value) => _runFilter(value),
                 decoration: const InputDecoration(
-                    labelText: 'Add Monster',
-                    suffixIcon: Icon(Icons.search)),
+                    labelText: 'Add Monster', suffixIcon: Icon(Icons.search)),
               ),
             ),
             const SizedBox(
@@ -218,10 +226,10 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                           _foundMonsters[index].name)
                                       ? Colors.grey
                                       : Colors.black)),
-                          trailing: Text(
-                              "(${_foundMonsters[index].edition})",
+                          trailing: Text("(${_foundMonsters[index].edition})",
                               style: const TextStyle(
-                                  fontSize: kFontSizeSmall, color: Colors.grey)),
+                                  fontSize: kFontSizeSmall,
+                                  color: Colors.grey)),
                           onTap: () {
                             if (!_monsterAlreadyAdded(
                                 _foundMonsters[index].name)) {
@@ -229,7 +237,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                 _gameState.action(AddMonsterCommand(
                                     _foundMonsters[index].name,
                                     null,
-                                    _addAsAlly, gameState: getIt<GameState>()));
+                                    _addAsAlly,
+                                    gameState: getIt<GameState>()));
                               });
                             }
                           },

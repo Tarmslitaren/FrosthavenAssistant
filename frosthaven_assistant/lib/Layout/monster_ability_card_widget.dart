@@ -16,7 +16,8 @@ import '../Resource/ui_utils.dart';
 import 'menus/ability_card_zoom.dart';
 
 class MonsterAbilityCardWidget extends StatefulWidget {
-  const MonsterAbilityCardWidget({super.key, required this.data});
+  const MonsterAbilityCardWidget({super.key, required this.data,
+      this.gameState,});
 
   static List<Widget> _buildGraphicPositionals(
       double scale, List<GraphicPositional> positionals) {
@@ -235,6 +236,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
 
   final Monster data;
 
+  final GameState? gameState;
+
   @override
   MonsterAbilityCardWidgetState createState() =>
       MonsterAbilityCardWidgetState();
@@ -244,12 +247,13 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 // Define the various properties with default values. Update these properties
 // when the user taps a FloatingActionButton.
 //late MonsterData _data;
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
   int _deckSize = 8;
 
   @override
   void initState() {
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
     for (var deck in _gameState.currentAbilityDecks) {
       if (deck.name == widget.data.type.deck) {
         _deckSize = deck.drawPileSize;

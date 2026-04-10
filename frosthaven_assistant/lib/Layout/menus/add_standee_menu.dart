@@ -10,17 +10,24 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddStandeeMenu extends StatefulWidget {
-  const AddStandeeMenu({super.key, required this.monster, required this.elite});
+  const AddStandeeMenu({
+    super.key,
+    required this.monster,
+    required this.elite,
+    this.gameState,
+  });
 
   final Monster monster;
   final bool elite;
+
+  final GameState? gameState;
 
   @override
   AddStandeeMenuState createState() => AddStandeeMenuState();
 }
 
 class AddStandeeMenuState extends State<AddStandeeMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   bool addAsSummon = false;
 
@@ -28,6 +35,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
   initState() {
     // at the beginning, all items are shown
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   Widget buildNrButton(final int nr, final double scale) {
@@ -91,7 +99,8 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
         onPressed: () {
           if (!isOut) {
             _gameState.action(AddStandeeCommand(
-                nr, null, widget.monster.id, type, addAsSummon, gameState: getIt<GameState>()));
+                nr, null, widget.monster.id, type, addAsSummon,
+                gameState: getIt<GameState>()));
           }
         },
       ),

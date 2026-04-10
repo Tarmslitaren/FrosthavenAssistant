@@ -535,9 +535,10 @@ class MutableGameMethods {
   }
 
   //todo: too long method - split
-  static void setScenario(_StateModifier s, String scenario, bool section, {GameState? gameState}) {
+  static void setScenario(_StateModifier s, String scenario, bool section,
+      {GameState? gameState, GameData? gameData, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
-    final GameData gameData = getIt<GameData>();
+    final gd = gameData ?? getIt<GameData>();
     if (!section) {
       //first reset state
       resetRound(s, 1, true);
@@ -568,7 +569,7 @@ class MutableGameMethods {
 
       //loot deck init
       if (scenario != "custom") {
-        LootDeckModel? lootDeckModel = gameData
+        LootDeckModel? lootDeckModel = gd
             .modelData
             .value[gs.currentCampaign.value]!
             .scenarios[scenario]!
@@ -598,7 +599,7 @@ class MutableGameMethods {
 
     String initMessage = "";
     if (section) {
-      var sectionData = gameData
+      var sectionData = gd
           .modelData
           .value[gs.currentCampaign.value]
           ?.scenarios[gs.scenario.value]
@@ -613,12 +614,12 @@ class MutableGameMethods {
             monsterStandees != null ? monsterStandees.toList() : [];
       }
     } else {
-      if (getIt<Settings>().showBattleGoalReminder.value &&
+      if ((settings ?? getIt<Settings>()).showBattleGoalReminder.value &&
           gs.currentCampaign.value != "Buttons and Bugs") {
         initMessage += "Remember to choose your Battle Goals.";
       }
       if (scenario != "custom") {
-        var scenarioData = gameData.modelData
+        var scenarioData = gd.modelData
             .value[gs.currentCampaign.value]?.scenarios[scenario];
         if (scenarioData != null) {
           monsters = scenarioData.monsters;
@@ -753,10 +754,10 @@ class MutableGameMethods {
         for (int round in rule.list) {
           //minus 1 means always
           if (round == 1 || round == -1) {
-            if (getIt<Settings>().autoAddSpawns.value) {
+            if ((settings ?? getIt<Settings>()).autoAddSpawns.value) {
               if (rule.name.isNotEmpty) {
                 //get room data and deal with spawns
-                ScenarioModel? scenarioModel = gameData
+                ScenarioModel? scenarioModel = gd
                     .modelData
                     .value[gs.currentCampaign.value]
                     ?.scenarios[scenario];
@@ -863,7 +864,7 @@ class MutableGameMethods {
     }
 
     //show init message if exists:
-    if (initMessage.isNotEmpty && getIt<Settings>().showReminders.value) {
+    if (initMessage.isNotEmpty && (settings ?? getIt<Settings>()).showReminders.value) {
       gs._toastMessage.value += initMessage;
     } else {
       if (getIt.isRegistered<BuildContext>()) {
@@ -1158,7 +1159,7 @@ class MutableGameMethods {
 
   static String autoAddStandees(_StateModifier stateModifier,
       List<RoomMonsterData> roomMonsterData, String initMessage,
-      {GameState? gameState}) {
+      {GameState? gameState, Settings? settings}) {
     final gs = gameState ?? getIt<GameState>();
     //handle room data
     int characterIndex =
@@ -1169,9 +1170,9 @@ class MutableGameMethods {
           stateModifier, roomMonsters.name, gs._scenarioSpecialRules);
     }
     bool addSorted = gs.currentCampaign.value == "Buttons and Bugs";
-    if (!getIt<Settings>().noStandees.value &&
-        getIt<Settings>().autoAddStandees.value) {
-      if (getIt<Settings>().randomStandees.value || addSorted) {
+    final s = settings ?? getIt<Settings>();
+    if (!s.noStandees.value && s.autoAddStandees.value) {
+      if (s.randomStandees.value || addSorted) {
         if (initMessage.isNotEmpty && !addSorted) {
           initMessage += "\n";
         }
@@ -1268,11 +1269,11 @@ class MutableGameMethods {
   }
 
   static Character? createCharacter(_StateModifier _, String id,
-      String? edition, String? display, int level) {
+      String? edition, String? display, int level, {GameData? gameData}) {
     Character? character;
     List<CharacterClass> characters = [];
-    final GameData gameData = getIt<GameData>();
-    final modelData = gameData.modelData.value;
+    final gd = gameData ?? getIt<GameData>();
+    final modelData = gd.modelData.value;
     for (String key in modelData.keys) {
       characters.addAll(modelData[key]!.characters);
     }
@@ -1340,10 +1341,10 @@ class MutableGameMethods {
 
   static Monster? createMonster(
       _StateModifier _, String name, int? level, bool isAlly,
-      {GameState? gameState}) {
-    final GameData gameData = getIt<GameData>();
+      {GameState? gameState, GameData? gameData}) {
+    final gd = gameData ?? getIt<GameData>();
     Map<String, MonsterModel> monsters = {};
-    final modelData = gameData.modelData.value;
+    final modelData = gd.modelData.value;
     for (String key in modelData.keys) {
       monsters.addAll(modelData[key]!.monsters);
     }
@@ -1407,8 +1408,9 @@ class MutableGameMethods {
     }
   }
 
-  static void removeExpiringConditions(_StateModifier _, FigureState figure) {
-    if (getIt<Settings>().expireConditions.value) {
+  static void removeExpiringConditions(_StateModifier _, FigureState figure,
+      {Settings? settings}) {
+    if ((settings ?? getIt<Settings>()).expireConditions.value) {
       bool chillRemoved = false;
       final conditions = figure._conditions.value;
       for (int i = conditions.length - 1; i >= 0; i--) {
@@ -1521,10 +1523,11 @@ class MutableGameMethods {
     }
   }
 
-  static void updateForSpecialRules(_StateModifier _, {GameState? gameState}) {
+  static void updateForSpecialRules(_StateModifier _,
+      {GameState? gameState, GameData? gameData}) {
     final gs = gameState ?? getIt<GameState>();
-    final GameData gameData = getIt<GameData>();
-    List<SpecialRule>? rules = gameData
+    final gd = gameData ?? getIt<GameData>();
+    List<SpecialRule>? rules = gd
         .modelData
         .value[gs.currentCampaign.value]
         ?.scenarios[gs.scenario.value]

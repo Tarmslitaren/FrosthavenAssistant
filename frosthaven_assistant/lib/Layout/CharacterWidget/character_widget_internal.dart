@@ -24,7 +24,8 @@ class CharacterWidgetInternal extends StatefulWidget {
       required this.character,
       required this.isCharacter,
       required this.characterId,
-      this.initPreset});
+      this.initPreset,
+      this.gameState});
 
   final Character character;
   final bool isCharacter;
@@ -34,12 +35,14 @@ class CharacterWidgetInternal extends StatefulWidget {
   static final Set<String> localCharacterInitChanges =
       {}; //if it's been changed locally then it's not hidden
 
+  final GameState? gameState;
+
   @override
   CharacterInternalWidgetState createState() => CharacterInternalWidgetState();
 }
 
 class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
   bool isCharacter = true;
   final _initTextFieldController = TextEditingController();
   late List<MonsterInstance> lastList = [];
@@ -49,6 +52,7 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
   void initState() {
     final character = widget.character;
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
     lastList = character.characterState.summonList.toList();
 
     if (widget.initPreset != null) {

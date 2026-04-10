@@ -15,30 +15,33 @@ class SendToBottomMenu extends StatefulWidget {
       required this.currentIndex,
       required this.length,
       required this.name,
-      required this.revealed});
+      required this.revealed,
+      this.gameState});
   //it's for modifier deck
   final int currentIndex;
   final int length;
   final String name;
   final bool revealed;
 
+  final GameState? gameState;
+
   @override
   SendToBottomMenuState createState() => SendToBottomMenuState();
 }
 
 class SendToBottomMenuState extends State<SendToBottomMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   @override
   initState() {
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   @override
   Widget build(BuildContext context) {
     final deck = GameMethods.getModifierDeck(widget.name, _gameState);
-    final card =
-        deck.drawPileContents[widget.length - 1 - widget.currentIndex];
+    final card = deck.drawPileContents[widget.length - 1 - widget.currentIndex];
     double scale = 6;
     final cardWidth = 7 * 58.6666;
     final screenWidth = MediaQuery.of(context).size.width;
@@ -64,18 +67,20 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
                 TextButton(
                     onPressed: () {
                       int oldIndex = widget.length - 1 - widget.currentIndex;
-                      _gameState.action(
-                          ReorderModifierListCommand(0, oldIndex, widget.name, gameState: getIt<GameState>()));
+                      _gameState.action(ReorderModifierListCommand(
+                          0, oldIndex, widget.name,
+                          gameState: getIt<GameState>()));
                       Navigator.pop(context);
                     },
-                    child: const Text("Send to Bottom",
-                        style: kButtonLabelStyle)),
+                    child:
+                        const Text("Send to Bottom", style: kButtonLabelStyle)),
                 const SizedBox(
                   height: 20,
                 ),
                 TextButton(
                     onPressed: () {
-                      _gameState.action(ShuffleAMDCardCommand(widget.name, gameState: getIt<GameState>()));
+                      _gameState.action(ShuffleAMDCardCommand(widget.name,
+                          gameState: getIt<GameState>()));
                       Navigator.pop(context);
                     },
                     child: const Text("Shuffle un-drawn Cards",

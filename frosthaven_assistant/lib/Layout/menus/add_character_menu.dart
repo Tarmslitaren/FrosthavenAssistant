@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/components/menu_card.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 import '../../Model/character_class.dart';
 import '../../Resource/commands/add_character_command.dart';
@@ -15,7 +15,14 @@ import '../../services/service_locator.dart';
 import 'character_tile.dart';
 
 class AddCharacterMenu extends StatefulWidget {
-  const AddCharacterMenu({super.key});
+  const AddCharacterMenu({
+    super.key,
+    this.gameState,
+    this.gameData,
+  });
+
+  final GameState? gameState;
+  final GameData? gameData;
 
   @override
   AddCharacterMenuState createState() => AddCharacterMenuState();
@@ -27,8 +34,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   final List<CharacterClass> _allCharacters = [];
   late CharacterClass bs;
   late CharacterClass vq;
-  final GameState _gameState = getIt<GameState>();
-  final GameData _gameData = getIt<GameData>();
+  late final GameState _gameState;
+  late final GameData _gameData;
   final ScrollController _scrollController = ScrollController();
 
   int compareEditions(String a, String b) {
@@ -56,6 +63,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
 
   @override
   initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _gameData = widget.gameData ?? getIt<GameData>();
     // at the beginning, all users are shown
     final data = _gameData.modelData.value;
     for (String key in data.keys) {
@@ -144,8 +153,9 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       }
     }
 
-    AddCharacterCommand command =
-        AddCharacterCommand(character.id, character.edition, display, 1, gameState: getIt<GameState>());
+    AddCharacterCommand command = AddCharacterCommand(
+        character.id, character.edition, display, 1,
+        gameState: getIt<GameState>());
     _gameState.action(command);
 
     //open level menu
@@ -213,8 +223,8 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
                           return CharacterTile(
                             character: _foundCharacters[index],
                             onSelect: _addCharacter,
-                            disabled: _characterAlreadyAdded(
-                                _foundCharacters[index]),
+                            disabled:
+                                _characterAlreadyAdded(_foundCharacters[index]),
                           );
                         },
                       ))

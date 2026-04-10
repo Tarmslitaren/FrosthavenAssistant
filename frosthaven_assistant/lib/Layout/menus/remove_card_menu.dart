@@ -15,18 +15,22 @@ class RemoveCardMenu extends StatefulWidget {
   const RemoveCardMenu({
     super.key,
     required this.card,
-  });
+  
+      this.gameState,});
+
+  final GameState? gameState;
 
   @override
   RemoveCardMenuState createState() => RemoveCardMenuState();
 }
 
 class RemoveCardMenuState extends State<RemoveCardMenu> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   @override
   initState() {
     super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   @override

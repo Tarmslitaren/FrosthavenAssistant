@@ -11,14 +11,17 @@ import '../services/service_locator.dart';
 class DrawButton extends StatefulWidget {
   const DrawButton({
     super.key,
-  });
+  
+      this.gameState,});
+
+  final GameState? gameState;
 
   @override
   DrawButtonState createState() => DrawButtonState();
 }
 
 class DrawButtonState extends State<DrawButton> {
-  final GameState _gameState = getIt<GameState>();
+  late final GameState _gameState;
 
   void onPressed() {
     final result = runDrawOrNextRoundAction(_gameState);
@@ -26,6 +29,14 @@ class DrawButtonState extends State<DrawButton> {
     if (blockedMessage != null) {
       showToast(context, blockedMessage);
     }
+  }
+
+
+
+  @override
+  void initState() {
+    super.initState();
+    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   @override
