@@ -9,20 +9,22 @@ void openDialogOld(BuildContext context, Widget widget) {
   showDialog(context: context, builder: (BuildContext context) => widget);
 }
 
-TextStyle getTitleTextStyle(double scale, {bool forceBlack = false}) {
+TextStyle getTitleTextStyle(double scale,
+    {bool forceBlack = false, Settings? settings}) {
   //note force black since non modal menus are all white even in dark mode.
   return TextStyle(
       fontSize: kFontSizeTitle * scale,
-      color: forceBlack || !getIt<Settings>().darkMode.value
+      color: forceBlack || !(settings ?? getIt<Settings>()).darkMode.value
           ? Colors.black
           : Colors.white);
 }
 
-TextStyle getSmallTextStyle(double scale, {bool forceBlack = false}) {
+TextStyle getSmallTextStyle(double scale,
+    {bool forceBlack = false, Settings? settings}) {
   //note force black since non modal menus are all white even in dark mode.
   return TextStyle(
       fontSize: kFontSizeSmall * scale,
-      color: forceBlack || !getIt<Settings>().darkMode.value
+      color: forceBlack || !(settings ?? getIt<Settings>()).darkMode.value
           ? Colors.black
           : Colors.white);
 }
@@ -80,7 +82,8 @@ void openDialog(BuildContext context, Widget widget) {
 }
 
 void openDialogWithDismissOption(
-    BuildContext context, Widget widget, bool dismissible) {
+    BuildContext context, Widget widget, bool dismissible,
+    {GameState? gameState}) {
   //could potentially modify edge insets based on screen width.
   Widget innerWidget = Stack(children: [
     Positioned(
@@ -88,7 +91,7 @@ void openDialogWithDismissOption(
           backgroundColor: Colors.transparent,
           insetPadding: const EdgeInsets.all(kDialogInsetPadding),
           child: ValueListenableBuilder<int>(
-              valueListenable: getIt<GameState>().updateForUndo,
+              valueListenable: (gameState ?? getIt<GameState>()).updateForUndo,
               builder: (context, value, child) {
                 rebuildAllChildren(
                     context); //only way to remake the value listenable builders with broken references
@@ -169,7 +172,7 @@ showToast(BuildContext context, String text) {
   }
 }
 
-showToastSticky(BuildContext context, String text) {
+showToastSticky(BuildContext context, String text, {GameState? gameState}) {
   if (context.mounted) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(
@@ -179,7 +182,7 @@ showToastSticky(BuildContext context, String text) {
         ))
         .closed
         .then((value) {
-      if (getIt<GameState>().toastMessage.value == text) {
+      if ((gameState ?? getIt<GameState>()).toastMessage.value == text) {
         MutableGameMethods.setToastMessage("");
       }
     });
@@ -187,7 +190,8 @@ showToastSticky(BuildContext context, String text) {
 }
 
 showErrorToastStickyWithRetry(
-    BuildContext context, String text, Function() retry) {
+    BuildContext context, String text, Function() retry,
+    {GameState? gameState}) {
   ScaffoldMessenger.of(context).clearSnackBars();
   ScaffoldMessenger.of(context)
       .showSnackBar(SnackBar(
@@ -212,7 +216,7 @@ showErrorToastStickyWithRetry(
       ))
       .closed
       .then((value) {
-    if (getIt<GameState>().toastMessage.value == text) {
+    if ((gameState ?? getIt<GameState>()).toastMessage.value == text) {
       MutableGameMethods.setToastMessage("");
     }
   });

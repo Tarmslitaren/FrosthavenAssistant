@@ -60,23 +60,23 @@ class Settings {
 
   bool connectClientOnStartup = false;
 
-  Future<void> init() async {
+  Future<void> init({Network? network}) async {
     await loadFromDisk();
     setFullscreen(fullScreen.value);
 
-    getIt<Network>().networkInfo.initNetworkInfo();
+    (network ?? getIt<Network>()).networkInfo.initNetworkInfo();
   }
 
-  void loadSave(String saveName) {
+  void loadSave(String saveName, {GameState? gameState}) {
     String? save = saves.value[saveName];
     if (save != null) {
-      getIt<GameState>().action(LoadSaveCommand(saveName, save,
-          gameState: getIt<GameState>()));
+      final gs = gameState ?? getIt<GameState>();
+      gs.action(LoadSaveCommand(saveName, save, gameState: gs));
     }
   }
 
-  void saveState(String saveName) {
-    saves.value[saveName] = getIt<GameState>().toString();
+  void saveState(String saveName, {GameState? gameState}) {
+    saves.value[saveName] = (gameState ?? getIt<GameState>()).toString();
     Map<String, String> newMap = {};
     for (String key in saves.value.keys) {
       newMap[key] = saves.value[key]!;
@@ -95,11 +95,11 @@ class Settings {
     saveToDisk();
   }
 
-  void loadCharacterSave(String saveName) {
+  void loadCharacterSave(String saveName, {GameState? gameState}) {
     String? save = characterSaves.value[saveName];
     if (save != null) {
-      getIt<GameState>().action(LoadCharacterSaveCommand(saveName, save,
-          gameState: getIt<GameState>()));
+      final gs = gameState ?? getIt<GameState>();
+      gs.action(LoadCharacterSaveCommand(saveName, save, gameState: gs));
     }
   }
 
@@ -206,7 +206,7 @@ class Settings {
     }
   }
 
-  Future<void> loadFromDisk() async {
+  Future<void> loadFromDisk({Client? client}) async {
     //have to call after init or element state overridden
 
     const sharedPrefsKey = 'settingsState';
@@ -335,7 +335,7 @@ class Settings {
       if (data["connectClientOnStartup"] != null &&
           data["connectClientOnStartup"] != false) {
         Future.delayed(const Duration(milliseconds: 2000), () {
-          getIt<Client>().connect(lastKnownConnection);
+          (client ?? getIt<Client>()).connect(lastKnownConnection);
         });
       }
     }

@@ -19,6 +19,7 @@ import '../../Model/monster.dart';
 import '../../Model/room.dart';
 import '../../Model/scenario.dart';
 import '../../services/network/communication.dart';
+import '../../services/network/network.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../card_stack.dart';
@@ -104,7 +105,9 @@ class GameState extends ActionHandler {
 
   GameState({
     required Communication communication,
-  }) : super(communication: communication);
+    Settings? settings,
+    Network? network,
+  }) : super(communication: communication, settings: settings, network: network);
 
   void init() {
     _elementState[Elements.fire] = ElementState.inert;

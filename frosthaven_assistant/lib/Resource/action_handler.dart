@@ -22,10 +22,19 @@ class ActionHandler {
   final updateForUndo = ValueNotifier<int>(0);
 
   final Communication _communication;
+  final Settings? _settingsOverride;
+  final Network? _networkOverride;
 
   ActionHandler({
     required Communication communication,
-  })  : _communication = communication;
+    Settings? settings,
+    Network? network,
+  })  : _communication = communication,
+        _settingsOverride = settings,
+        _networkOverride = network;
+
+  Settings get _settings => _settingsOverride ?? getIt<Settings>();
+  Network get _network => _networkOverride ?? getIt<Network>();
 
   GameState get _self => this as GameState;
 
@@ -42,8 +51,8 @@ class ActionHandler {
   }
 
   void undo() {
-    bool isServer = getIt<Settings>().server.value;
-    bool isClient = getIt<Settings>().client.value == ClientState.connected;
+    bool isServer = _settings.server.value;
+    bool isClient = _settings.client.value == ClientState.connected;
     if (!isClient) {
       if (commandIndex.value >= 0 &&
           gameSaveStates[commandIndex.value] != null) {
@@ -61,7 +70,7 @@ class ActionHandler {
           if (isServer) {
             log('server sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
             //should send a special undo message? yes
-            getIt<Network>().server.send(
+            _network.server.send(
                 "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates[commandIndex.value]!.getState()}");
           }
         }
@@ -76,8 +85,8 @@ class ActionHandler {
   }
 
   void redo() {
-    bool isServer = getIt<Settings>().server.value;
-    bool isClient = getIt<Settings>().client.value == ClientState.connected;
+    bool isServer = _settings.server.value;
+    bool isClient = _settings.client.value == ClientState.connected;
     if (!isClient) {
       if (commandIndex.value < commandDescriptions.length - 1) {
         commandIndex.value++;
@@ -93,7 +102,7 @@ class ActionHandler {
       //send last game state if connected
       if (isServer) {
         log('server sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
-        getIt<Network>().server.send(
+        _network.server.send(
             "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates[commandIndex.value + 1]!.getState()}");
       }
     } else if (isClient) {
@@ -102,8 +111,8 @@ class ActionHandler {
   }
 
   void action(Command command) {
-    bool isServer = getIt<Settings>().server.value;
-    bool isClient = getIt<Settings>().client.value == ClientState.connected;
+    bool isServer = _settings.server.value;
+    bool isClient = _settings.client.value == ClientState.connected;
 
     command.execute();
     if (commands.length > commandIndex.value) {
@@ -131,7 +140,7 @@ class ActionHandler {
     String description = command.describe();
     if (isServer) {
       log('server sends, index: ${commandIndex.value}, description:$description');
-      getIt<Network>().server.send(
+      _network.server.send(
           "Index:${commandIndex.value}Description:${description}GameState:${_self.toString()}");
     } else if (isClient) {
       log('client sends, index: ${commandIndex.value}, description:$description');
