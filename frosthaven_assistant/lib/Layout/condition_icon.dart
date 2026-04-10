@@ -7,6 +7,8 @@ import '../Resource/game_methods.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
 import '../Resource/ui_utils.dart';
+import '../services/network/communication.dart';
+import '../services/network/network.dart';
 import '../services/service_locator.dart';
 
 class ConditionIcon extends StatefulWidget {
@@ -62,7 +64,7 @@ class ConditionIconState extends State<ConditionIcon> {
 
   static GameState? getOldState() {
     GameState gameState = getIt<GameState>();
-    GameState oldState = GameState();
+    GameState oldState = GameState(communication: getIt<Communication>());
     const offset = 1;
     if (gameState.gameSaveStates.length <= offset ||
         gameState.gameSaveStates[gameState.gameSaveStates.length - offset] ==

@@ -150,28 +150,28 @@ class ModifierDeck {
     _corrosiveSpew.value = true;
   }
 
-  void addCSSanctuary(_StateModifier s) {
+  void addCSSanctuary(_StateModifier s, {GameState? gameState}) {
     //adds one of each
-    final GameState gameState = getIt<GameState>();
-    _drawPile.add(gameState._sanctuaryDeck.drawFlip(s));
-    _drawPile.add(gameState._sanctuaryDeck.drawMult(s));
+    final gs = gameState ?? getIt<GameState>();
+    _drawPile.add(gs._sanctuaryDeck.drawFlip(s));
+    _drawPile.add(gs._sanctuaryDeck.drawMult(s));
     _drawPile.shuffle();
     _cardCount.value = _drawPile.size();
   }
 
-  void removeCSSanctuary(_StateModifier _) {
+  void removeCSSanctuary(_StateModifier _, {GameState? gameState}) {
     var list = _drawPile.getList();
-    final GameState gameState = getIt<GameState>();
+    final gs = gameState ?? getIt<GameState>();
     for (int i = list.length - 1; i >= 0; i--) {
       if (list[i].gfx.startsWith("sanctuary")) {
-        gameState._sanctuaryDeck.returnCard(list[i].gfx);
+        gs._sanctuaryDeck.returnCard(list[i].gfx);
         _drawPile.removeAt(i);
       }
     }
     list = _discardPile.getList();
     for (int i = list.length - 1; i >= 0; i--) {
       if (list[i].gfx.startsWith("sanctuary")) {
-        gameState._sanctuaryDeck.returnCard(list[i].gfx);
+        gs._sanctuaryDeck.returnCard(list[i].gfx);
         _discardPile.removeAt(i);
       }
     }

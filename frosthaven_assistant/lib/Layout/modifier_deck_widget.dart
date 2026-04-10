@@ -6,6 +6,8 @@ import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_comman
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
+import 'package:frosthaven_assistant/services/network/communication.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -91,7 +93,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   bool initAnimationEnabled() {
     if (getIt<Settings>().client.value == ClientState.connected) {
-      GameState oldState = GameState();
+      GameState oldState = GameState(communication: getIt<Communication>());
       int offset = 1;
       final saveStateLength = _gameState.gameSaveStates.length;
       final saveState = _gameState.gameSaveStates[saveStateLength - offset];

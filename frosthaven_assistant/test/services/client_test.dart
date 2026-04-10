@@ -29,7 +29,8 @@ const _address = '127.0.0.1';
       as: Symbol('MockValueNotifierClientState'))
 ])
 final _connection = MockConnection();
-final _gameState = GameState();
+final _gameState = GameState(
+    communication: _communication);
 final _communication = MockCommunication();
 final _network = MockNetwork();
 final _settings = MockSettings();

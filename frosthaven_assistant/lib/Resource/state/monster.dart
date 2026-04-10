@@ -2,13 +2,13 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class Monster extends ListItemData {
-  Monster(String name, int level, this._isAlly) {
+  Monster(String name, int level, this._isAlly, {GameData? gameData}) {
     id = name;
     _level.value = level;
-    GameData gameData = getIt<GameData>();
+    final gd = gameData ?? getIt<GameData>();
     Map<String, MonsterModel> monsters = {};
-    for (String key in gameData.modelData.value.keys) {
-      monsters.addAll(gameData.modelData.value[key]!.monsters);
+    for (String key in gd.modelData.value.keys) {
+      monsters.addAll(gd.modelData.value[key]!.monsters);
     }
     for (String key in monsters.keys) {
       if (key == name) {
@@ -34,7 +34,8 @@ class Monster extends ListItemData {
   BuiltList<MonsterInstance> get monsterInstances =>
       BuiltList.of(_monsterInstances);
 
-  Monster.fromJson(Map<String, dynamic> json) : _isAlly = false {
+  Monster.fromJson(Map<String, dynamic> json, {GameData? gameData})
+      : _isAlly = false {
     id = json['id'];
     _turnState.value = TurnsState.values[json['turnState']];
     _level.value = json['level'];
@@ -46,10 +47,10 @@ class Monster extends ListItemData {
     }
     String modelName = json['type'];
 
-    GameData gameData = getIt<GameData>();
+    final gd = gameData ?? getIt<GameData>();
     Map<String, MonsterModel> monsters = {};
-    for (String key in gameData.modelData.value.keys) {
-      monsters.addAll(gameData.modelData.value[key]!.monsters);
+    for (String key in gd.modelData.value.keys) {
+      monsters.addAll(gd.modelData.value[key]!.monsters);
     }
     for (var item in monsters.keys) {
       if (item == modelName) {
@@ -134,13 +135,13 @@ class Monster extends ListItemData {
         '}';
   }
 
-  void _addAbilityDeck() {
-    final GameState gameState = getIt<GameState>();
-    for (MonsterAbilityState deck in gameState.currentAbilityDecks) {
+  void _addAbilityDeck({GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    for (MonsterAbilityState deck in gs.currentAbilityDecks) {
       if (deck.name == type.deck) {
         return;
       }
     }
-    gameState._currentAbilityDecks.add(MonsterAbilityState(type.deck));
+    gs._currentAbilityDecks.add(MonsterAbilityState(type.deck));
   }
 }

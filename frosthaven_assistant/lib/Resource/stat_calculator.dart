@@ -5,15 +5,17 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'game_methods.dart';
 
 class StatCalculator {
-  static int? calculateFormula(final dynamic str) {
+  static int? calculateFormula(final dynamic str,
+      [GameState? gameState]) {
     if (str is int) {
       return str;
     }
-    int C = GameMethods.getCurrentCharacterAmount();
+    final gs = gameState ?? getIt<GameState>();
+    int C = GameMethods.getCurrentCharacterAmount(gameState: gs);
     if (C < 2) {
       C = 2;
     }
-    int L = getIt<GameState>().level.value;
+    int L = gs.level.value;
     String formula = str.replaceAll("C", C.toString());
     formula = formula.replaceAll("L", L.toString());
     return eval(formula);

@@ -21,7 +21,8 @@ class DrawOrNextRoundResult {
   }
 }
 
-DrawOrNextRoundResult runDrawOrNextRoundAction(GameState gameState) {
+DrawOrNextRoundResult runDrawOrNextRoundAction(GameState gameState,
+    {GameData? gameData, Settings? settings}) {
   if (gameState.roundState.value == RoundState.chooseInitiative) {
     if (GameMethods.canDraw()) {
       gameState.action(DrawCommand(gameState: gameState));
@@ -41,7 +42,7 @@ DrawOrNextRoundResult runDrawOrNextRoundAction(GameState gameState) {
 
   gameState.action(NextRoundCommand(
       gameState: gameState,
-      gameData: getIt<GameData>(),
-      settings: getIt<Settings>()));
+      gameData: gameData ?? getIt<GameData>(),
+      settings: settings ?? getIt<Settings>()));
   return DrawOrNextRoundResult.success;
 }

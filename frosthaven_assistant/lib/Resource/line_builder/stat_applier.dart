@@ -10,9 +10,10 @@ import '../state/game_state.dart';
 
 class StatApplier {
   static List<String> applyMonsterStats(final String lineInput,
-      String sizeToken, Monster monster, bool forceShowAll) {
+      String sizeToken, Monster monster, bool forceShowAll,
+      [Settings? settings]) {
     bool showElite = false;
-    final noStandees = getIt<Settings>().noStandees.value;
+    final noStandees = (settings ?? getIt<Settings>()).noStandees.value;
     if ((noStandees && monster.isActive) ||
         monster.monsterInstances.firstWhereOrNull(
                 (element) => element.type == MonsterType.elite) !=

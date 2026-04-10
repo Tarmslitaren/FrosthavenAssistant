@@ -2,14 +2,14 @@ part of 'state/game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class MutableGameMethods {
-  static void resetElements(_StateModifier _) {
-    final GameState gameState = getIt<GameState>();
-    for (var key in gameState.elementState.keys) {
-      gameState._elementState[key] = ElementState.inert;
+  static void resetElements(_StateModifier _, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    for (var key in gs.elementState.keys) {
+      gs._elementState[key] = ElementState.inert;
     }
   }
 
-  static void updateElements(_StateModifier _) {
+  static void updateElements(_StateModifier _, {GameState? gameState}) {
     //elementalist special:
     bool elementalistPerk = false;
     Character? elementalist = GameMethods.getCharacterByName("Elementalist");
@@ -19,33 +19,33 @@ class MutableGameMethods {
       }
     }
 
-    final GameState gameState = getIt<GameState>();
-    for (var key in gameState.elementState.keys) {
-      if (gameState.elementState[key] == ElementState.full) {
+    final gs = gameState ?? getIt<GameState>();
+    for (var key in gs.elementState.keys) {
+      if (gs.elementState[key] == ElementState.full) {
         if (!elementalistPerk ||
             key == Elements.light ||
             key == Elements.dark) {
-          gameState._elementState[key] = ElementState.half;
+          gs._elementState[key] = ElementState.half;
         }
-      } else if (gameState.elementState[key] == ElementState.half) {
+      } else if (gs.elementState[key] == ElementState.half) {
         if (!elementalistPerk ||
             key == Elements.light ||
             key == Elements.dark) {
-          gameState._elementState[key] = ElementState.inert;
+          gs._elementState[key] = ElementState.inert;
         }
       }
     }
   }
 
-  static void drawAbilityCardFromInactiveDeck(_StateModifier stateModifier) {
-    final GameState gameState = getIt<GameState>();
-    for (MonsterAbilityState deck in gameState.currentAbilityDecks) {
-      for (var item in gameState.currentList) {
+  static void drawAbilityCardFromInactiveDeck(_StateModifier stateModifier, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    for (MonsterAbilityState deck in gs.currentAbilityDecks) {
+      for (var item in gs.currentList) {
         if (item is Monster) {
           if (item.type.deck == deck.name) {
             if (item.isActive &&
                 !GameMethods.isInactiveForRule(item.type.name)) {
-              if (deck.lastRoundDrawn != gameState.totalRounds.value) {
+              if (deck.lastRoundDrawn != gs.totalRounds.value) {
                 //do not draw new card in case drawn already this round
                 deck.draw(stateModifier);
                 break;
@@ -57,10 +57,10 @@ class MutableGameMethods {
     }
   }
 
-  static void drawAbilityCards(_StateModifier stateModifier) {
-    final GameState gameState = getIt<GameState>();
-    for (MonsterAbilityState deck in gameState.currentAbilityDecks) {
-      for (var item in gameState.currentList) {
+  static void drawAbilityCards(_StateModifier stateModifier, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    for (MonsterAbilityState deck in gs.currentAbilityDecks) {
+      for (var item in gs.currentList) {
         if (item is Monster) {
           if (item.type.deck == deck.name) {
             bool specialInactive =
@@ -77,9 +77,9 @@ class MutableGameMethods {
     }
   }
 
-  static void sortCharactersFirst(_StateModifier _) {
-    final GameState gameState = getIt<GameState>();
-    gameState._currentList.sort((a, b) {
+  static void sortCharactersFirst(_StateModifier _, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._currentList.sort((a, b) {
       //dead characters dead last
       if (a is Character) {
         if (b is Character) {
@@ -143,9 +143,9 @@ class MutableGameMethods {
     });
   }
 
-  static void sortItemToPlace(_StateModifier _, String id, int initiative) {
-    final GameState gameState = getIt<GameState>();
-    var newList = gameState.currentList.toList();
+  static void sortItemToPlace(_StateModifier _, String id, int initiative, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    var newList = gs.currentList.toList();
     ListItemData? item;
     int currentTurnItemIndex = 0;
     for (int i = 0; i < newList.length; i++) {
@@ -167,7 +167,7 @@ class MutableGameMethods {
       if (currentItemInitiative > initiative && currentItemInitiative > init) {
         if (i > currentTurnItemIndex) {
           newList.insert(i, item);
-          gameState._currentList = newList;
+          gs._currentList = newList;
           return;
         } else {
           //in case initiative is earlier than current turn, ignore anything current turn, and earlier and place later
@@ -179,7 +179,7 @@ class MutableGameMethods {
             }
           }
           newList.insert(insertIndex, item);
-          gameState._currentList = newList;
+          gs._currentList = newList;
           return;
         }
       }
@@ -188,12 +188,12 @@ class MutableGameMethods {
     }
 
     newList.add(item);
-    gameState._currentList = newList;
+    gs._currentList = newList;
   }
 
-  static void sortByInitiative(_StateModifier _) {
-    final GameState gameState = getIt<GameState>();
-    gameState._currentList.sort((a, b) {
+  static void sortByInitiative(_StateModifier _, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._currentList.sort((a, b) {
       //dead characters dead last
       if (a is Character) {
         if (b is Character) {
@@ -228,7 +228,7 @@ class MutableGameMethods {
         }
 
         //find the deck
-        for (var item in gameState.currentAbilityDecks) {
+        for (var item in gs.currentAbilityDecks) {
           if (item.name == a.type.deck && item.discardPileIsNotEmpty) {
             aInitiative = item.discardPileTop.initiative;
           }
@@ -244,7 +244,7 @@ class MutableGameMethods {
           return -1; //inactive at bottom
         }
         //find the deck
-        for (var item in gameState.currentAbilityDecks) {
+        for (var item in gs.currentAbilityDecks) {
           if (item.name == b.type.deck && item.discardPileIsNotEmpty) {
             bInitiative = item.discardPileTop.initiative;
           }
@@ -267,7 +267,8 @@ class MutableGameMethods {
     });
   }
 
-  static void addPerk(_StateModifier s, Character character, int index) {
+  static void addPerk(_StateModifier s, Character character, int index, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
     final deck = character.characterState.modifierDeck;
     final perksFH = character.characterClass.perksFH;
     final useFHPerks =
@@ -313,7 +314,7 @@ class MutableGameMethods {
 
     final className = character.characterClass.name;
     if (index == 17 && className == "Hail") {
-      getIt<GameState>().modifierDeck.addHailSpecial(s);
+      gs.modifierDeck.addHailSpecial(s);
     }
     if (index == 16 && className == "Pain Conduit") {
       final level = character.characterState.level.value;
@@ -324,7 +325,8 @@ class MutableGameMethods {
     }
   }
 
-  static void removePerk(_StateModifier s, Character character, int index) {
+  static void removePerk(_StateModifier s, Character character, int index, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
     final deck = character.characterState.modifierDeck;
     final perksFH = character.characterClass.perksFH;
     final useFHPerks =
@@ -353,7 +355,7 @@ class MutableGameMethods {
 
     final className = character.characterClass.name;
     if (index == 17 && className == "Hail") {
-      getIt<GameState>().modifierDeck.removeHailSpecial(s);
+      gs.modifierDeck.removeHailSpecial(s);
     }
     if (index == 16 && className == "Pain Conduit") {
       final state = character.characterState;
@@ -364,17 +366,17 @@ class MutableGameMethods {
     }
   }
 
-  static void setRoundState(_StateModifier _, RoundState state) {
-    final GameState gameState = getIt<GameState>();
-    gameState._roundState.value = state;
+  static void setRoundState(_StateModifier _, RoundState state, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._roundState.value = state;
   }
 
-  static void setLevel(_StateModifier s, int level, String? monsterId) {
+  static void setLevel(_StateModifier s, int level, String? monsterId, {GameState? gameState}) {
     assert(level >= 0 && level <= 7);
-    final GameState gameState = getIt<GameState>();
+    final gs = gameState ?? getIt<GameState>();
     if (monsterId == null) {
-      gameState._level.value = level;
-      for (var item in gameState.currentList) {
+      gs._level.value = level;
+      for (var item in gs.currentList) {
         if (item is Monster) {
           item.setLevel(s, level);
         }
@@ -382,7 +384,7 @@ class MutableGameMethods {
       updateForSpecialRules(s);
     } else {
       Monster? monster;
-      for (var item in gameState.currentList) {
+      for (var item in gs.currentList) {
         if (item.id == monsterId) {
           monster = item as Monster;
         }
@@ -391,12 +393,12 @@ class MutableGameMethods {
     }
   }
 
-  static void applyDifficulty(_StateModifier s) {
-    final GameState gameState = getIt<GameState>();
-    if (gameState.autoScenarioLevel.value) {
+  static void applyDifficulty(_StateModifier s, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    if (gs.autoScenarioLevel.value) {
       //adjust difficulty
       int newLevel =
-          GameMethods.getRecommendedLevel() + gameState.difficulty.value;
+          GameMethods.getRecommendedLevel() + gs.difficulty.value;
       if (newLevel > 7) {
         newLevel = 7;
       }
@@ -405,10 +407,11 @@ class MutableGameMethods {
   }
 
   static void setCharacterLevel(
-      _StateModifier s, int level, String characterId) {
-    final GameState gameState = getIt<GameState>();
+      _StateModifier s, int level, String characterId,
+      {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
     Character? character;
-    for (var item in gameState.currentList) {
+    for (var item in gs.currentList) {
       if (item.id == characterId) {
         character = item as Character;
         break;
@@ -465,7 +468,7 @@ class MutableGameMethods {
     applyDifficulty(s);
   }
 
-  static void resetCharacter(_StateModifier s, Character item) {
+  static void resetCharacter(_StateModifier s, Character item, {GameState? gameState}) {
     item.characterState._initiative.value = 0;
     final level = item.characterState.level.value;
     item.characterState._health.value =
@@ -532,27 +535,27 @@ class MutableGameMethods {
   }
 
   //todo: too long method - split
-  static void setScenario(_StateModifier s, String scenario, bool section) {
-    final GameState gameState = getIt<GameState>();
+  static void setScenario(_StateModifier s, String scenario, bool section, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
     final GameData gameData = getIt<GameData>();
     if (!section) {
       //first reset state
       resetRound(s, 1, true);
-      gameState._showAllyDeck.value = false;
-      gameState._currentAbilityDecks.clear();
-      gameState._scenarioSpecialRules.clear();
+      gs._showAllyDeck.value = false;
+      gs._currentAbilityDecks.clear();
+      gs._scenarioSpecialRules.clear();
       applyDifficulty(s);
 
-      gameState.modifierDeck._initDeck();
-      gameState.modifierDeckAllies._initDeck();
-      gameState._sanctuaryDeck._initDeck();
+      gs.modifierDeck._initDeck();
+      gs.modifierDeckAllies._initDeck();
+      gs._sanctuaryDeck._initDeck();
 
       setRoundState(s, RoundState.chooseInitiative);
-      gameState._scenario.value = scenario;
-      gameState._scenarioSectionsAdded = [];
+      gs._scenario.value = scenario;
+      gs._scenarioSectionsAdded = [];
 
       List<ListItemData> newList = [];
-      for (var item in gameState.currentList) {
+      for (var item in gs.currentList) {
         if (item is Character) {
           if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
             resetCharacter(s, item);
@@ -561,31 +564,31 @@ class MutableGameMethods {
         }
       }
 
-      gameState._currentList = newList;
+      gs._currentList = newList;
 
       //loot deck init
       if (scenario != "custom") {
         LootDeckModel? lootDeckModel = gameData
             .modelData
-            .value[gameState.currentCampaign.value]!
+            .value[gs.currentCampaign.value]!
             .scenarios[scenario]!
             .lootDeck;
         lootDeckModel != null
-            ? gameState._lootDeck = LootDeck(lootDeckModel, gameState.lootDeck)
-            : gameState._lootDeck = LootDeck.from(gameState.lootDeck);
+            ? gs._lootDeck = LootDeck(lootDeckModel, gs.lootDeck)
+            : gs._lootDeck = LootDeck.from(gs.lootDeck);
       } else {
-        if (gameState.currentCampaign.value == "Frosthaven") {
+        if (gs.currentCampaign.value == "Frosthaven") {
           //add loot deck for random scenarios
           LootDeckModel? lootDeckModel =
               const LootDeckModel(2, 2, 2, 12, 1, 1, 1, 1, 1, 1, 0);
-          gameState._lootDeck = LootDeck(lootDeckModel, gameState.lootDeck);
+          gs._lootDeck = LootDeck(lootDeckModel, gs.lootDeck);
         } else {
-          gameState._lootDeck = LootDeck.from(gameState.lootDeck);
+          gs._lootDeck = LootDeck.from(gs.lootDeck);
         }
       }
 
       clearTurnState(s, true);
-      gameState._toastMessage.value = "";
+      gs._toastMessage.value = "";
     }
 
     List<String> monsters = [];
@@ -597,8 +600,8 @@ class MutableGameMethods {
     if (section) {
       var sectionData = gameData
           .modelData
-          .value[gameState.currentCampaign.value]
-          ?.scenarios[gameState.scenario.value]
+          .value[gs.currentCampaign.value]
+          ?.scenarios[gs.scenario.value]
           ?.sections
           .firstWhere((element) => element.name == scenario);
       if (sectionData != null) {
@@ -611,12 +614,12 @@ class MutableGameMethods {
       }
     } else {
       if (getIt<Settings>().showBattleGoalReminder.value &&
-          gameState.currentCampaign.value != "Buttons and Bugs") {
+          gs.currentCampaign.value != "Buttons and Bugs") {
         initMessage += "Remember to choose your Battle Goals.";
       }
       if (scenario != "custom") {
         var scenarioData = gameData.modelData
-            .value[gameState.currentCampaign.value]?.scenarios[scenario];
+            .value[gs.currentCampaign.value]?.scenarios[scenario];
         if (scenarioData != null) {
           monsters = scenarioData.monsters;
           specialRules = scenarioData.specialRules.toList();
@@ -646,7 +649,7 @@ class MutableGameMethods {
 
     //hack for banner spear solo special rule
     if (scenario.contains("Scouting Ambush")) {
-      MonsterAbilityState deck = gameState.currentAbilityDecks
+      MonsterAbilityState deck = gs.currentAbilityDecks
           .firstWhere((element) => element.name.contains("Scout"));
       final drawPileList = deck._drawPile.getList();
       for (int i = 0; i < drawPileList.length; i++) {
@@ -660,13 +663,13 @@ class MutableGameMethods {
     //add objectives and escorts
     for (var item in specialRules) {
       if (item.type == "AllyDeck") {
-        gameState._showAllyDeck.value = true;
+        gs._showAllyDeck.value = true;
       }
       if (item.type == "Objective") {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {
           Character? objective = createCharacter(
-              s, "Objective", null, item.name, gameState.level.value + 1);
+              s, "Objective", null, item.name, gs.level.value + 1);
           final health =
               StatCalculator.calculateFormula(item.health.toString());
           if (health != null) {
@@ -676,7 +679,7 @@ class MutableGameMethods {
               objective.characterState.maxHealth.value;
           objective?.characterState._initiative.value = item.init;
           bool add = true;
-          for (var item2 in gameState.currentList) {
+          for (var item2 in gs.currentList) {
             //don't add duplicates
             if (item2 is Character &&
                 (item2).characterState.display.value == item.name) {
@@ -685,7 +688,7 @@ class MutableGameMethods {
             }
           }
           if (add && objective != null) {
-            gameState._currentList.add(objective);
+            gs._currentList.add(objective);
           }
         }
       }
@@ -693,7 +696,7 @@ class MutableGameMethods {
         if (item.condition == "" ||
             StatCalculator.evaluateCondition(item.condition)) {
           final objective = createCharacter(
-              s, "Escort", null, item.name, gameState.level.value + 1);
+              s, "Escort", null, item.name, gs.level.value + 1);
           if (objective != null) {
             final maxHealth =
                 StatCalculator.calculateFormula(item.health.toString());
@@ -704,7 +707,7 @@ class MutableGameMethods {
                 objective.characterState.maxHealth.value;
             objective.characterState._initiative.value = item.init;
             bool add = true;
-            for (var item2 in gameState.currentList) {
+            for (var item2 in gs.currentList) {
               //don't add duplicates
               if (item2 is Character &&
                   (item2).characterState.display.value == item.name) {
@@ -713,7 +716,7 @@ class MutableGameMethods {
               }
             }
             if (add) {
-              gameState._currentList.add(objective);
+              gs._currentList.add(objective);
             }
           }
         }
@@ -755,7 +758,7 @@ class MutableGameMethods {
                 //get room data and deal with spawns
                 ScenarioModel? scenarioModel = gameData
                     .modelData
-                    .value[gameState.currentCampaign.value]
+                    .value[gs.currentCampaign.value]
                     ?.scenarios[scenario];
                 if (scenarioModel != null) {
                   ScenarioModel? spawnSection = scenarioModel.sections
@@ -805,7 +808,7 @@ class MutableGameMethods {
     initMessage = autoAddStandees(s, roomMonsterData, initMessage);
 
     if (!section) {
-      gameState._scenarioSpecialRules = specialRules;
+      gs._scenarioSpecialRules = specialRules;
       resetElements(s);
       sortCharactersFirst(s);
     } else {
@@ -813,7 +816,7 @@ class MutableGameMethods {
       if (specialRules
               .firstWhereOrNull((element) => element.type == "ResetRound") !=
           null) {
-        gameState._scenarioSpecialRules.removeWhere((oldItem) {
+        gs._scenarioSpecialRules.removeWhere((oldItem) {
           if (oldItem.type == "Timer") {
             return true;
           }
@@ -824,7 +827,7 @@ class MutableGameMethods {
       //overwrite earlier timers with same time.
       for (var item in specialRules) {
         if (item.type == "Timer") {
-          gameState._scenarioSpecialRules.removeWhere((oldItem) {
+          gs._scenarioSpecialRules.removeWhere((oldItem) {
             if (oldItem.type == "Timer" &&
                 item.startOfRound == oldItem.startOfRound) {
               if (item.list.contains(-1) || oldItem.list.contains(-1)) {
@@ -837,8 +840,8 @@ class MutableGameMethods {
           });
         }
       }
-      gameState._scenarioSpecialRules.addAll(specialRules);
-      gameState._scenarioSectionsAdded.add(scenario);
+      gs._scenarioSpecialRules.addAll(specialRules);
+      gs._scenarioSectionsAdded.add(scenario);
     }
 
     //handle random sections
@@ -853,7 +856,7 @@ class MutableGameMethods {
       specialRules.add(newRule);
     }
 
-    gameState.updateList.value++;
+    gs.updateList.value++;
 
     if (!section) {
       MainList.scrollToTop();
@@ -861,7 +864,7 @@ class MutableGameMethods {
 
     //show init message if exists:
     if (initMessage.isNotEmpty && getIt<Settings>().showReminders.value) {
-      gameState._toastMessage.value += initMessage;
+      gs._toastMessage.value += initMessage;
     } else {
       if (getIt.isRegistered<BuildContext>()) {
         ScaffoldMessenger.of(getIt<BuildContext>()).hideCurrentSnackBar();
@@ -869,15 +872,16 @@ class MutableGameMethods {
     }
   }
 
-  static void returnModifierCard(_StateModifier s, String name) {
-    final deck = GameMethods.getModifierDeck(name, getIt<GameState>());
+  static void returnModifierCard(_StateModifier s, String name, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    final deck = GameMethods.getModifierDeck(name, gs);
     deck.returnCardToDrawPile(s);
   }
 
-  static void removeCharacters(_StateModifier s, List<Character> characters) {
+  static void removeCharacters(_StateModifier s, List<Character> characters, {GameState? gameState}) {
     List<ListItemData> newList = [];
-    final GameState gameState = getIt<GameState>();
-    for (var item in gameState.currentList) {
+    final gs = gameState ?? getIt<GameState>();
+    for (var item in gs.currentList) {
       if (item is Character) {
         bool remove = false;
         for (var name in characters) {
@@ -894,16 +898,16 @@ class MutableGameMethods {
         newList.add(item);
       }
     }
-    gameState._currentList = newList;
+    gs._currentList = newList;
     updateForSpecialRules(s);
-    gameState.updateList.value++;
+    gs.updateList.value++;
   }
 
-  static void removeMonsters(_StateModifier _, List<Monster> items) {
+  static void removeMonsters(_StateModifier _, List<Monster> items, {GameState? gameState}) {
     List<String> deckIds = [];
     List<ListItemData> newList = [];
-    final GameState gameState = getIt<GameState>();
-    for (var item in gameState.currentList) {
+    final gs = gameState ?? getIt<GameState>();
+    for (var item in gs.currentList) {
       if (item is Monster) {
         bool remove = false;
         for (var name in items) {
@@ -920,11 +924,11 @@ class MutableGameMethods {
       }
     }
 
-    gameState._currentList = newList;
+    gs._currentList = newList;
 
     for (var deck in deckIds) {
       bool removeDeck = true;
-      for (var item in gameState.currentList) {
+      for (var item in gs.currentList) {
         if (item is Monster) {
           if (item.type.deck == deck) {
             removeDeck = false;
@@ -933,28 +937,28 @@ class MutableGameMethods {
       }
 
       if (removeDeck) {
-        for (var item in gameState.currentAbilityDecks) {
+        for (var item in gs.currentAbilityDecks) {
           if (item.name == deck) {
-            gameState._currentAbilityDecks.remove(item);
+            gs._currentAbilityDecks.remove(item);
             break;
           }
         }
       }
     }
 
-    gameState.updateList.value++;
+    gs.updateList.value++;
   }
 
-  static void reorderMainList(_StateModifier _, int newIndex, int oldIndex) {
-    final GameState gameState = getIt<GameState>();
-    gameState._currentList
-        .insert(newIndex, gameState._currentList.removeAt(oldIndex));
+  static void reorderMainList(_StateModifier _, int newIndex, int oldIndex, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._currentList
+        .insert(newIndex, gs._currentList.removeAt(oldIndex));
   }
 
-  static void addToMainList(_StateModifier _, int? index, ListItemData item) {
+  static void addToMainList(_StateModifier _, int? index, ListItemData item, {GameState? gameState}) {
     List<ListItemData> newList = [];
-    final GameState gameState = getIt<GameState>();
-    for (var item in gameState.currentList) {
+    final gs = gameState ?? getIt<GameState>();
+    for (var item in gs.currentList) {
       newList.add(item);
     }
     if (index != null) {
@@ -962,23 +966,23 @@ class MutableGameMethods {
     } else {
       newList.add(item);
     }
-    gameState._currentList = newList;
+    gs._currentList = newList;
   }
 
   //note: while this changes the game state, it is a state used also by non game related instances.
-  static void setToastMessage(String message) {
-    final GameState gameState = getIt<GameState>();
-    gameState._toastMessage.value = message;
+  static void setToastMessage(String message, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._toastMessage.value = message;
   }
 
-  static void setSolo(_StateModifier _, bool solo) {
-    final GameState gameState = getIt<GameState>();
-    gameState._solo.value = solo;
+  static void setSolo(_StateModifier _, bool solo, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._solo.value = solo;
   }
 
-  static void shuffleDecksIfNeeded(_StateModifier _) {
-    final GameState gameState = getIt<GameState>();
-    for (var deck in gameState.currentAbilityDecks) {
+  static void shuffleDecksIfNeeded(_StateModifier _, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    for (var deck in gs.currentAbilityDecks) {
       if (deck.discardPileIsNotEmpty && deck.discardPileTop.shuffle ||
           deck.drawPileIsEmpty) {
         deck._shuffle();
@@ -986,9 +990,9 @@ class MutableGameMethods {
     }
   }
 
-  static void shuffleDecks(_StateModifier _) {
-    final GameState gameState = getIt<GameState>();
-    for (var deck in gameState.currentAbilityDecks) {
+  static void shuffleDecks(_StateModifier _, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    for (var deck in gs.currentAbilityDecks) {
       deck._shuffle();
     }
   }
@@ -999,11 +1003,13 @@ class MutableGameMethods {
       final SummonData? summon,
       final MonsterType type,
       final String ownerId,
-      final bool addAsSummon) {
+      final bool addAsSummon,
+      {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
     MonsterInstance instance;
     Monster? monster;
     if (summon == null) {
-      for (var item in getIt<GameState>().currentList) {
+      for (var item in gs.currentList) {
         if (item.id == ownerId && item is Monster) {
           monster = item;
           monster._isActive = true;
@@ -1021,7 +1027,7 @@ class MutableGameMethods {
           summon.attack,
           summon.range,
           summon.gfx,
-          getIt<GameState>().round.value);
+          gs.round.value);
     }
 
     List<MonsterInstance> monsterList = [];
@@ -1029,7 +1035,7 @@ class MutableGameMethods {
     if (monster != null) {
       monsterList = monster._monsterInstances;
     } else {
-      for (var item in getIt<GameState>().currentList) {
+      for (var item in gs.currentList) {
         if (item.id == ownerId) {
           monsterList = (item as Character).characterState._summonList;
           break;
@@ -1055,7 +1061,7 @@ class MutableGameMethods {
                   summon.attack,
                   summon.range,
                   summon.gfx,
-                  getIt<GameState>().round.value);
+                  gs.round.value);
               ok = false;
             }
           }
@@ -1069,7 +1075,7 @@ class MutableGameMethods {
     }
     if (monsterList.length == 1 && monster != null) {
       //first added
-      final roundState = getIt<GameState>().roundState.value;
+      final roundState = gs.roundState.value;
       if (roundState == RoundState.chooseInitiative) {
         sortCharactersFirst(s);
       } else if (roundState == RoundState.playTurns) {
@@ -1084,11 +1090,12 @@ class MutableGameMethods {
   }
 
   static void addStandee(
-      int? nr, Monster data, MonsterType type, bool addAsSummon) {
-    final GameState gameState = getIt<GameState>();
+      int? nr, Monster data, MonsterType type, bool addAsSummon,
+      {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
     if (nr != null) {
-      gameState.action(AddStandeeCommand(nr, null, data.id, type, addAsSummon,
-          gameState: gameState));
+      gs.action(AddStandeeCommand(nr, null, data.id, type, addAsSummon,
+          gameState: gs));
     } else {
       //add first un added nr
       for (int i = 1; i <= data.type.count; i++) {
@@ -1100,8 +1107,8 @@ class MutableGameMethods {
           }
         }
         if (!added) {
-          gameState.action(AddStandeeCommand(i, null, data.id, type, addAsSummon,
-              gameState: gameState));
+          gs.action(AddStandeeCommand(i, null, data.id, type, addAsSummon,
+              gameState: gs));
           return;
         }
       }
@@ -1109,7 +1116,8 @@ class MutableGameMethods {
   }
 
   static void addMonster(
-      _StateModifier s, String monster, List<SpecialRule> specialRules) {
+      _StateModifier s, String monster, List<SpecialRule> specialRules,
+      {GameState? gameState}) {
     int levelAdjust = 0;
     Set<String> alliedMonsters = {};
     for (var rule in specialRules) {
@@ -1125,9 +1133,9 @@ class MutableGameMethods {
       }
     }
 
-    final GameState gameState = getIt<GameState>();
+    final gs = gameState ?? getIt<GameState>();
     bool add = true;
-    for (var item in gameState.currentList) {
+    for (var item in gs.currentList) {
       //don't add duplicates
       if (item.id == monster) {
         add = false;
@@ -1141,25 +1149,26 @@ class MutableGameMethods {
       }
 
       final munster = createMonster(s, monster,
-          (gameState.level.value + levelAdjust).clamp(0, 7), isAlly);
+          (gs.level.value + levelAdjust).clamp(0, 7), isAlly);
       if (munster != null) {
-        gameState._currentList.add(munster);
+        gs._currentList.add(munster);
       }
     }
   }
 
   static String autoAddStandees(_StateModifier stateModifier,
-      List<RoomMonsterData> roomMonsterData, String initMessage) {
-    final GameState gameState = getIt<GameState>();
+      List<RoomMonsterData> roomMonsterData, String initMessage,
+      {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
     //handle room data
     int characterIndex =
         GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
     for (int i = 0; i < roomMonsterData.length; i++) {
       var roomMonsters = roomMonsterData[i];
       addMonster(
-          stateModifier, roomMonsters.name, gameState._scenarioSpecialRules);
+          stateModifier, roomMonsters.name, gs._scenarioSpecialRules);
     }
-    bool addSorted = gameState.currentCampaign.value == "Buttons and Bugs";
+    bool addSorted = gs.currentCampaign.value == "Buttons and Bugs";
     if (!getIt<Settings>().noStandees.value &&
         getIt<Settings>().autoAddStandees.value) {
       if (getIt<Settings>().randomStandees.value || addSorted) {
@@ -1170,7 +1179,7 @@ class MutableGameMethods {
           List<int> normals = [];
           List<int> elites = [];
           var roomMonsters = roomMonsterData[i];
-          Monster data = gameState.currentList.firstWhereOrNull(
+          Monster data = gs.currentList.firstWhereOrNull(
               (element) => element.id == roomMonsters.name) as Monster;
 
           int eliteAmount = roomMonsters.elite[characterIndex];
@@ -1330,25 +1339,26 @@ class MutableGameMethods {
   }
 
   static Monster? createMonster(
-      _StateModifier _, String name, int? level, bool isAlly) {
+      _StateModifier _, String name, int? level, bool isAlly,
+      {GameState? gameState}) {
     final GameData gameData = getIt<GameData>();
     Map<String, MonsterModel> monsters = {};
     final modelData = gameData.modelData.value;
     for (String key in modelData.keys) {
       monsters.addAll(modelData[key]!.monsters);
     }
-    level ??= getIt<GameState>().level.value;
+    level ??= (gameState ?? getIt<GameState>()).level.value;
     return Monster(name, level, isAlly);
   }
 
-  static void showAllyDeck(_StateModifier _) {
-    final GameState gameState = getIt<GameState>();
-    gameState._showAllyDeck.value = true;
+  static void showAllyDeck(_StateModifier _, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._showAllyDeck.value = true;
   }
 
-  static void hideAllyDeck(_StateModifier _) {
-    final GameState gameState = getIt<GameState>();
-    gameState._showAllyDeck.value = false;
+  static void hideAllyDeck(_StateModifier _, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._showAllyDeck.value = false;
   }
 
   static void clearTurnStateConditions(
@@ -1378,9 +1388,10 @@ class MutableGameMethods {
   }
 
   static void clearTurnState(
-      _StateModifier stateModifier, bool clearLastTurnToo) {
-    final GameState gameState = getIt<GameState>();
-    for (var item in gameState._currentList) {
+      _StateModifier stateModifier, bool clearLastTurnToo,
+      {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    for (var item in gs._currentList) {
       item._turnState.value = TurnsState.notDone;
       if (item is Character) {
         clearTurnStateConditions(
@@ -1461,28 +1472,28 @@ class MutableGameMethods {
 
   //1 if item WAS done OR not done, then set it to current, all before to done, and all after to not done
   //2 if item was current: set item to done, all before to done, next to current and rest to not done
-  static void setTurnDone(_StateModifier s, int index) {
-    final GameState gameState = getIt<GameState>();
+  static void setTurnDone(_StateModifier s, int index, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
     //set all before to done.
     for (int i = 0; i < index; i++) {
-      if (gameState.currentList[i].turnState.value != TurnsState.done) {
-        gameState.currentList[i]._turnState.value = TurnsState.done;
-        removeExpiringConditionsFromListItem(s, gameState.currentList[i]);
+      if (gs.currentList[i].turnState.value != TurnsState.done) {
+        gs.currentList[i]._turnState.value = TurnsState.done;
+        removeExpiringConditionsFromListItem(s, gs.currentList[i]);
       }
     }
     //if on index is NOT current then set to current else set to done
     int newIndex = index + 1;
-    if (gameState.currentList[index].turnState.value == TurnsState.current) {
-      gameState.currentList[index]._turnState.value = TurnsState.done;
-      removeExpiringConditionsFromListItem(s, gameState.currentList[index]);
+    if (gs.currentList[index].turnState.value == TurnsState.current) {
+      gs.currentList[index]._turnState.value = TurnsState.done;
+      removeExpiringConditionsFromListItem(s, gs.currentList[index]);
       //remove expiring conditions
     } else {
       newIndex = index;
     }
 
     //get next active item and set to current
-    for (; newIndex < gameState.currentList.length; newIndex++) {
-      ListItemData data = gameState.currentList[newIndex];
+    for (; newIndex < gs.currentList.length; newIndex++) {
+      ListItemData data = gs.currentList[newIndex];
       if (data is Monster) {
         if (data.isActive && !GameMethods.isInactiveForRule(data.type.name)) {
           if (data.turnState.value == TurnsState.done) {
@@ -1502,26 +1513,26 @@ class MutableGameMethods {
       }
     }
     //set rest to not done
-    for (int i = newIndex + 1; i < gameState.currentList.length; i++) {
-      if (gameState.currentList[i].turnState.value == TurnsState.done) {
-        reapplyConditionsFromListItem(s, gameState.currentList[i]);
+    for (int i = newIndex + 1; i < gs.currentList.length; i++) {
+      if (gs.currentList[i].turnState.value == TurnsState.done) {
+        reapplyConditionsFromListItem(s, gs.currentList[i]);
       }
-      gameState.currentList[i]._turnState.value = TurnsState.notDone;
+      gs.currentList[i]._turnState.value = TurnsState.notDone;
     }
   }
 
-  static void updateForSpecialRules(_StateModifier _) {
-    final GameState gameState = getIt<GameState>();
+  static void updateForSpecialRules(_StateModifier _, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
     final GameData gameData = getIt<GameData>();
     List<SpecialRule>? rules = gameData
         .modelData
-        .value[gameState.currentCampaign.value]
-        ?.scenarios[gameState.scenario.value]
+        .value[gs.currentCampaign.value]
+        ?.scenarios[gs.scenario.value]
         ?.specialRules;
     if (rules != null) {
       for (SpecialRule rule in rules) {
         if (rule.type == "Objective" || rule.type == "Escort") {
-          Character? character = gameState.currentList
+          Character? character = gs.currentList
                   .firstWhereOrNull((element) => element.id == rule.name)
               as Character?;
           if (character != null) {
@@ -1534,11 +1545,11 @@ class MutableGameMethods {
             }
           }
         } else if (rule.type == "LevelAdjust") {
-          Monster? monster = gameState.currentList
+          Monster? monster = gs.currentList
                   .firstWhereOrNull((element) => element.id == rule.name)
               as Monster?;
           if (monster != null) {
-            if (gameState.level.value == monster.level.value) {
+            if (gs.level.value == monster.level.value) {
               int newLevel = (monster.level.value + rule.level).clamp(0, 7);
               monster._level.value = newLevel;
               for (MonsterInstance instance in monster._monsterInstances) {
@@ -1551,48 +1562,50 @@ class MutableGameMethods {
     }
   }
 
-  static void resetRound(_StateModifier _, int round, bool resetTotal) {
-    final GameState gameState = getIt<GameState>();
-    gameState._round.value = round;
+  static void resetRound(_StateModifier _, int round, bool resetTotal, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._round.value = round;
     if (resetTotal) {
-      gameState._totalRounds.value = round;
+      gs._totalRounds.value = round;
     }
   }
 
-  static void setRound(_StateModifier _, int round) {
-    final GameState gameState = getIt<GameState>();
-    gameState._round.value = round;
-    gameState._totalRounds.value++;
+  static void setRound(_StateModifier _, int round, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._round.value = round;
+    gs._totalRounds.value++;
   }
 
-  static void setCampaign(_StateModifier _, String campaign) {
-    final GameState gameState = getIt<GameState>();
-    gameState._currentCampaign.value = campaign;
+  static void setCampaign(_StateModifier _, String campaign, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._currentCampaign.value = campaign;
   }
 
-  static void imbueElement(_StateModifier _, Elements element, bool half) {
-    final GameState gameState = getIt<GameState>();
-    gameState._elementState[element] = ElementState.full;
+  static void imbueElement(_StateModifier _, Elements element, bool half, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._elementState[element] = ElementState.full;
     if (half) {
-      gameState._elementState[element] = ElementState.half;
+      gs._elementState[element] = ElementState.half;
     }
   }
 
-  static void useElement(_StateModifier _, Elements element) {
-    final GameState gameState = getIt<GameState>();
-    gameState._elementState[element] = ElementState.inert;
+  static void useElement(_StateModifier _, Elements element, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._elementState[element] = ElementState.inert;
   }
 
-  static void unlockClass(_StateModifier _, String name) {
-    final GameState gameState = getIt<GameState>();
-    gameState._unlockedClasses.add(name);
+  static void unlockClass(_StateModifier _, String name, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._unlockedClasses.add(name);
   }
 
-  static void clearUnlockedClasses(_StateModifier _) {
-    getIt<GameState>()._unlockedClasses = {};
+  static void clearUnlockedClasses(_StateModifier _, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._unlockedClasses = {};
   }
 
-  static void clearUnlockedClass(_StateModifier _, String id) {
-    getIt<GameState>()._unlockedClasses.remove(id);
+  static void clearUnlockedClass(_StateModifier _, String id, {GameState? gameState}) {
+    final gs = gameState ?? getIt<GameState>();
+    gs._unlockedClasses.remove(id);
   }
 }

@@ -509,15 +509,16 @@ class LootDeck {
     _shuffle();
   }
 
-  void addEnhancement(_StateModifier _, int id, int value, String identifier) {
+  void addEnhancement(_StateModifier _, int id, int value, String identifier,
+      {GameState? gameState, GameData? gameData}) {
     _enhancements[id.toString()] = value;
     //reset loot deck
     _initPools();
-    GameState gameState = getIt<GameState>();
-    GameData gameData = getIt<GameData>();
-    String scenario = gameState.scenario.value;
-    LootDeckModel? lootDeckModel = gameData.modelData
-        .value[gameState.currentCampaign.value]!.scenarios[scenario]!.lootDeck;
+    final gs = gameState ?? getIt<GameState>();
+    final gd = gameData ?? getIt<GameData>();
+    String scenario = gs.scenario.value;
+    LootDeckModel? lootDeckModel = gd.modelData
+        .value[gs.currentCampaign.value]!.scenarios[scenario]!.lootDeck;
     if (lootDeckModel != null) {
       _setDeck(lootDeckModel);
     }
@@ -532,12 +533,13 @@ class LootDeck {
     _cardCount.value = _drawPile.size();
   }
 
-  void draw(_StateModifier _) {
+  void draw(_StateModifier _, {GameState? gameState}) {
     //put top of draw pile on discard pile
     LootCard card = _drawPile.pop();
 
     //mark owner
-    for (var item in getIt<GameState>().currentList) {
+    final gs = gameState ?? getIt<GameState>();
+    for (var item in gs.currentList) {
       if (item.turnState.value == TurnsState.current && item is Character) {
         if (!GameMethods.isObjectiveOrEscort(item.characterClass)) {
           card.owner = item.characterClass.id;

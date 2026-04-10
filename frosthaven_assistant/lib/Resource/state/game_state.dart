@@ -18,6 +18,7 @@ import '../../Model/character_class.dart';
 import '../../Model/monster.dart';
 import '../../Model/room.dart';
 import '../../Model/scenario.dart';
+import '../../services/network/communication.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../card_stack.dart';
@@ -101,7 +102,9 @@ class GameState extends ActionHandler {
       _modifierDeckAllies; //todo: still mutable
   SanctuaryDeck get sanctuaryDeck => _sanctuaryDeck;
 
-  GameState();
+  GameState({
+    required Communication communication,
+  }) : super(communication: communication);
 
   void init() {
     _elementState[Elements.fire] = ElementState.inert;

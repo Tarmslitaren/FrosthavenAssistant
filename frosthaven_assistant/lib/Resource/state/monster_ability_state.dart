@@ -25,12 +25,12 @@ class MonsterAbilityState {
   int get drawPileSize => _drawPile.size();
   int get discardPileSize => _discardPile.size();
 
-  MonsterAbilityState(this.name) {
-    GameData gameData = getIt<GameData>();
+  MonsterAbilityState(this.name, {GameData? gameData}) {
+    final gd = gameData ?? getIt<GameData>();
 
     List<MonsterAbilityDeckModel> monsters = [];
-    for (String key in gameData.modelData.value.keys) {
-      monsters.addAll(gameData.modelData.value[key]!.monsterAbilities);
+    for (String key in gd.modelData.value.keys) {
+      monsters.addAll(gd.modelData.value[key]!.monsterAbilities);
     }
     for (MonsterAbilityDeckModel model in monsters) {
       if (name == model.name) {
@@ -72,10 +72,10 @@ class MonsterAbilityState {
     _drawPile.shuffle();
   }
 
-  void draw(_StateModifier _) {
+  void draw(_StateModifier _, {GameState? gameState}) {
     //put top of draw pile on discard pile
     _discardPile.push(_drawPile.pop());
-    _lastRoundDrawn = getIt<GameState>().totalRounds.value;
+    _lastRoundDrawn = (gameState ?? getIt<GameState>()).totalRounds.value;
   }
 
   @override

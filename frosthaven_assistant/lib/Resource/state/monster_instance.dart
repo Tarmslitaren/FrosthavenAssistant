@@ -2,7 +2,8 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class MonsterInstance extends FigureState {
-  MonsterInstance(this.standeeNr, this._type, bool summoned, Monster monster) {
+  MonsterInstance(this.standeeNr, this._type, bool summoned, Monster monster,
+      {GameState? gameState}) {
     _setLevel(monster);
     gfx = monster.type.gfx;
     name = monster.type.name;
@@ -10,7 +11,7 @@ class MonsterInstance extends FigureState {
     attack = 0;
     range = 0;
     if (summoned) {
-      _roundSummoned = getIt<GameState>().round.value;
+      _roundSummoned = (gameState ?? getIt<GameState>()).round.value;
     } else {
       _roundSummoned = -1;
     }
@@ -58,7 +59,7 @@ class MonsterInstance extends FigureState {
 
   late int _roundSummoned;
 
-  void _setLevel(Monster monster) {
+  void _setLevel(Monster monster, {GameState? gameState}) {
     dynamic newHealthValue =
         10; //need to put something outer than 0 or the standee will die immediately causing glitch
     if (type == MonsterType.boss) {
@@ -72,10 +73,11 @@ class MonsterInstance extends FigureState {
     if (value != null) {
       _maxHealth.value = value;
     } else {
+      final gs = gameState ?? getIt<GameState>();
       //handle edge case
       if (newHealthValue == "Hollowpact") {
         int value = 7;
-        for (var item in getIt<GameState>().currentList) {
+        for (var item in gs.currentList) {
           if (item is Character && item.id == "Hollowpact") {
             value = item.characterClass
                 .healthByLevel[item.characterState.level.value - 1];
@@ -86,7 +88,7 @@ class MonsterInstance extends FigureState {
       }
       if (newHealthValue == "Incarnate") {
         int value = 36; //double Incarnates level 5 health
-        for (var item in getIt<GameState>().currentList) {
+        for (var item in gs.currentList) {
           if (item is Character && item.id == "Incarnate") {
             value = item.characterClass
                     .healthByLevel[item.characterState.level.value - 1] *

@@ -21,12 +21,18 @@ class ActionHandler {
   final killMonsterStandee = ValueNotifier<int>(-1);
   final updateForUndo = ValueNotifier<int>(0);
 
-  final _communication = getIt<Communication>();
+  final Communication _communication;
+
+  ActionHandler({
+    required Communication communication,
+  })  : _communication = communication;
+
+  GameState get _self => this as GameState;
 
   void updateAllUI() {
-    getIt<GameState>().updateList.value++;
-    getIt<GameState>().updateForUndo.value++;
-    getIt<GameState>().killMonsterStandee.value++;
+    _self.updateList.value++;
+    _self.updateForUndo.value++;
+    _self.killMonsterStandee.value++;
     //try to update card widget here if needed
     //try to update element buttons here if needed
   }
@@ -41,9 +47,9 @@ class ActionHandler {
     if (!isClient) {
       if (commandIndex.value >= 0 &&
           gameSaveStates[commandIndex.value] != null) {
-        gameSaveStates[commandIndex.value]!.load(getIt<
-            GameState>()); //this works as gameSaveStates has one more entry than command list (includes load at start)
-        gameSaveStates[commandIndex.value]!.saveToDisk(getIt<GameState>());
+        gameSaveStates[commandIndex.value]!.load(
+            _self); //this works as gameSaveStates has one more entry than command list (includes load at start)
+        gameSaveStates[commandIndex.value]!.saveToDisk(_self);
         if (!isServer && !isClient) {
           commands[commandIndex.value]!
               .undo(); //undo only makes sure ui is updated
@@ -62,7 +68,7 @@ class ActionHandler {
         commandIndex.value--;
 
         //make sure to invalidate and rebuild all ui, since references will be broken
-        getIt<GameState>().updateForUndo.value++;
+        _self.updateForUndo.value++;
       }
     } else {
       _communication.sendToAll("undo");
@@ -75,8 +81,8 @@ class ActionHandler {
     if (!isClient) {
       if (commandIndex.value < commandDescriptions.length - 1) {
         commandIndex.value++;
-        gameSaveStates[commandIndex.value + 1]!.load(getIt<GameState>());
-        gameSaveStates[commandIndex.value + 1]!.saveToDisk(getIt<GameState>());
+        gameSaveStates[commandIndex.value + 1]!.load(_self);
+        gameSaveStates[commandIndex.value + 1]!.saveToDisk(_self);
         //also run generic update ui function
         updateAllUI();
       } else {
@@ -119,19 +125,18 @@ class ActionHandler {
       gameSaveStates.removeRange(commandIndex.value + 1, gameSaveStates.length);
     }
 
-    GameState gameState = getIt<GameState>();
-    gameState.save(); //save after each action
+    _self.save(); //save after each action
 
     //send last game state if connected
     String description = command.describe();
     if (isServer) {
       log('server sends, index: ${commandIndex.value}, description:$description');
       getIt<Network>().server.send(
-          "Index:${commandIndex.value}Description:${description}GameState:${gameState.toString()}");
+          "Index:${commandIndex.value}Description:${description}GameState:${_self.toString()}");
     } else if (isClient) {
       log('client sends, index: ${commandIndex.value}, description:$description');
       _communication.sendToAll(
-          "Index:${commandIndex.value}Description:${description}GameState:${gameState.toString()}");
+          "Index:${commandIndex.value}Description:${description}GameState:${_self.toString()}");
     }
 
     //TODO: this is breaking if command index is not in sync with commands. and in connected state.
