@@ -31,18 +31,12 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   bool _animationsEnabled = false;
 
-  // FIX: Track the last command index we animated AND use a timestamp cooldown.
-  // The command index alone isn't enough because multiple rebuilds can fire
-  // during a single command (from setState, modelData listener, network updates).
-  // The cooldown prevents any re-trigger within the animation duration window.
-  int _lastAnimatedCommandIndex = -2;
+  // FIX: Track last animated discard pile size for client mode only.
+  // Client mode needs initAnimationEnabled() because the draw happens
+  // on a remote device — the local onTap never fires.
+  // Server/local mode does NOT need initAnimationEnabled() because
+  // the onTap handler already sets _animationsEnabled = true directly.
   int _lastAnimatedDiscardSize = -1;
-  DateTime _lastAnimationStartTime = DateTime.fromMillisecondsSinceEpoch(0);
-
-  bool _isInCooldown() {
-    return DateTime.now().difference(_lastAnimationStartTime).inMilliseconds <
-        cardAnimationDuration + 200; // small buffer
-  }
 
   @override
   void initState() {
@@ -103,69 +97,44 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   }
 
   bool initAnimationEnabled() {
-    // FIX: If we're still within the cooldown window of the last animation,
-    // don't start a new one. This is the primary guard against replays
-    // caused by multiple rebuild triggers (setState, listeners, network).
-    if (_isInCooldown()) {
+    // FIX: Only check for animation in CLIENT mode.
+    // In client mode, the draw happens on a remote device, so the local
+    // onTap handler never fires. We detect the draw by comparing the
+    // discard pile size to the previous state.
+    //
+    // In server/local mode, the onTap handler already sets
+    // _animationsEnabled = true when the user taps draw. We do NOT
+    // need to detect draws here — doing so caused phantom animation
+    // replays when unrelated UI interactions triggered widget rebuilds.
+    if (getIt<Settings>().client.value != ClientState.connected) {
       return false;
     }
 
-    if (getIt<Settings>().client.value == ClientState.connected) {
-      GameState oldState = GameState();
-      int offset = 1;
-      final saveStateLength = _gameState.gameSaveStates.length;
-      final saveState = _gameState.gameSaveStates[saveStateLength - offset];
-      if (saveStateLength <= offset || saveState == null) {
-        return false;
-      } else {
-        oldState.loadFromData(saveState.getState());
-      }
-
-      GameState currentState = _gameState;
-
-      ModifierDeck oldDeck = GameMethods.getModifierDeck(widget.name, oldState);
-      ModifierDeck currentDeck =
-          GameMethods.getModifierDeck(widget.name, currentState);
-      var oldPile = oldDeck.discardPile;
-      var newPile = currentDeck.discardPile;
-      if (oldPile.size() == newPile.size() - 1) {
-        if (_lastAnimatedDiscardSize == newPile.size()) {
-          return false;
-        }
-        _lastAnimatedDiscardSize = newPile.size();
-        _lastAnimationStartTime = DateTime.now();
-        return true;
-      }
+    // Client mode: detect remote draws by comparing discard pile sizes
+    GameState oldState = GameState();
+    int offset = 1;
+    final saveStateLength = _gameState.gameSaveStates.length;
+    final saveState = _gameState.gameSaveStates[saveStateLength - offset];
+    if (saveStateLength <= offset || saveState == null) {
       return false;
+    } else {
+      oldState.loadFromData(saveState.getState());
     }
 
-    final commandIndex = getIt<GameState>().commandIndex.value;
-    final commandDescriptions = getIt<GameState>().commandDescriptions;
-    if (getIt<Settings>().server.value && commandIndex >= 0) {
-      // FIX: Don't animate if we already animated this exact command index
-      if (commandIndex == _lastAnimatedCommandIndex) {
-        return false;
-      }
+    GameState currentState = _gameState;
 
-      if (commandIndex < 0) {
+    ModifierDeck oldDeck = GameMethods.getModifierDeck(widget.name, oldState);
+    ModifierDeck currentDeck =
+        GameMethods.getModifierDeck(widget.name, currentState);
+    var oldPile = oldDeck.discardPile;
+    var newPile = currentDeck.discardPile;
+    if (oldPile.size() == newPile.size() - 1) {
+      // Don't animate if we already animated this discard pile size
+      if (_lastAnimatedDiscardSize == newPile.size()) {
         return false;
       }
-      if (commandDescriptions.length > commandIndex) {
-        String commandDescription = commandDescriptions[commandIndex];
-        if (widget.name.isNotEmpty) {
-          if (commandDescription.contains("${widget.name} modifier card")) {
-            _lastAnimatedCommandIndex = commandIndex;
-            _lastAnimationStartTime = DateTime.now();
-            return true;
-          }
-        } else {
-          if (commandDescription.contains("monster modifier card")) {
-            _lastAnimatedCommandIndex = commandIndex;
-            _lastAnimationStartTime = DateTime.now();
-            return true;
-          }
-        }
-      }
+      _lastAnimatedDiscardSize = newPile.size();
+      return true;
     }
     return false;
   }
@@ -289,8 +258,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                     currentCharacterName = currentCharacter.characterClass.name;
                   }
 
-                  final discardPileSize = deck.discardPileSize;
-                  final discardPileList = deck.discardPileContents.toList();
+                  final discardPileSize = deck.discardPile.size();
+                  final discardPileList = deck.discardPile.getList();
                   final widgetKey = discardPileSize.toString();
 
                   final characterIconWidget = Positioned(
@@ -309,16 +278,15 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                           onTap: () {
                             setState(() {
                               _animationsEnabled = true;
-                              _lastAnimationStartTime = DateTime.now();
                               _gameState
                                   .action(DrawModifierCardCommand(widget.name));
                             });
                           },
                           child: Stack(children: [
-                            deck.drawPileIsNotEmpty
+                            deck.drawPile.isNotEmpty
                                 ? Stack(children: [
                                     ModifierCardWidget(
-                                        card: deck.drawPileTop,
+                                        card: deck.drawPile.peek,
                                         name: deck.name,
                                         revealed: isAnimating ||
                                             deck.revealedCount.value > 0),
@@ -331,7 +299,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                                 onTap: () {
                                                   setState(() {
                                                     _animationsEnabled = true;
-                                                    _lastAnimationStartTime = DateTime.now();
                                                     _gameState.action(
                                                         DrawModifierCardCommand(
                                                             widget.name));
@@ -355,7 +322,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                               onTap: () {
                                                 setState(() {
                                                   _animationsEnabled = true;
-                                                  _lastAnimationStartTime = DateTime.now();
                                                   _gameState.action(
                                                       DrawModifierCardCommand(
                                                           widget.name));
@@ -419,15 +385,15 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                     )),
                                 Key(widgetKey))
                             : Container(),
-                        deck.discardPileIsNotEmpty
+                        deck.discardPile.isNotEmpty
                             ? buildDrawAnimation(
                                 ModifierCardWidget(
                                   name: deck.name,
                                   key: Key(widgetKey),
-                                  card: deck.discardPileTop,
+                                  card: deck.discardPile.peek,
                                   revealed: true,
                                 ),
-                                Key((-deck.discardPileSize).toString()))
+                                Key((-deck.discardPile.size()).toString()))
                             : SizedBox(
                                 width: 66.6666 * userScalingBars,
                                 height: 39 * userScalingBars,
@@ -439,12 +405,12 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                     focusColor: const Color(0x44000000),
                                     onLongPress: () {
                                       //show zoomed in card
-                                      if (deck.discardPileIsNotEmpty) {
+                                      if (deck.discardPile.isNotEmpty) {
                                         openDialog(
                                             context,
                                             ModifierCardZoom(
                                                 name: widget.name,
-                                                card: deck.discardPileTop));
+                                                card: deck.discardPile.peek));
                                       }
                                     },
                                     onTap: () {
