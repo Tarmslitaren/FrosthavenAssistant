@@ -1,14 +1,15 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class AddMonsterCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
   final String _name;
   final int? _level;
   final bool _isAlly;
   late Monster monster;
 
-  AddMonsterCommand(this._name, this._level, this._isAlly) {
+  AddMonsterCommand(this._name, this._level, this._isAlly,
+      {required GameState gameState})
+      : _gameState = gameState {
     monster =
         MutableGameMethods.createMonster(stateAccess, _name, _level, _isAlly)!;
   }

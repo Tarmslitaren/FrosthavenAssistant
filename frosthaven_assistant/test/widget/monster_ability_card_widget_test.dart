@@ -11,6 +11,8 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../command/test_helpers.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/Resource/game_data.dart';
 
 void main() {
   setUpAll(() async {
@@ -19,7 +21,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Zealot', 1, false).execute();
+    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
   });
 
   Monster _getZealot() {
@@ -93,11 +95,11 @@ void main() {
     testWidgets('renders front card in playTurns state when active',
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false).execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>()).execute();
       final monster = _getZealot();
 
       // Enter playTurns by drawing
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
       expect(gameState.roundState.value, RoundState.playTurns);
 
       final originalOnError = FlutterError.onError;
@@ -117,7 +119,7 @@ void main() {
       // Cleanup: advance past the 600ms AnimatedSwitcher timer from NextRoundCommand
       final originalOnError2 = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
       await tester.pump(const Duration(milliseconds: 700));
       FlutterError.onError = originalOnError2;
     });

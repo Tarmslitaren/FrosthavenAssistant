@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand("Zealot", 1, false).execute();
+    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;
   });
@@ -84,7 +84,7 @@ void main() {
 
     testWidgets('tapping an already occupied standee number does nothing',
         (WidgetTester tester) async {
-      AddStandeeCommand(1, null, monster.id, MonsterType.normal, false)
+      AddStandeeCommand(1, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>())
           .execute();
       monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
           as Monster;

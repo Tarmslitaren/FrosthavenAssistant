@@ -40,7 +40,7 @@ void main() {
 
   group('CharacterIconWidget', () {
     testWidgets('renders Blinkblade icon image', (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
@@ -49,7 +49,7 @@ void main() {
 
     testWidgets('Blinkblade icon uses character class color when isCharacter=true',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
@@ -61,7 +61,7 @@ void main() {
 
     testWidgets('isCharacter=false renders image without color tint',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, false);
@@ -73,7 +73,7 @@ void main() {
 
     testWidgets('non-Shattersong character does not render ShaderMask',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
@@ -84,7 +84,7 @@ void main() {
 
     testWidgets('renders Container with circular decoration',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
@@ -96,7 +96,7 @@ void main() {
 
     testWidgets('image asset path contains character class name',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
@@ -109,7 +109,7 @@ void main() {
 
     testWidgets('isCharacter=true applies class color to image',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
@@ -143,7 +143,7 @@ void main() {
 
     testWidgets('isCharacter=false image has no color tint',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, false);
@@ -154,7 +154,7 @@ void main() {
 
     testWidgets('scale parameter affects widget size',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
 

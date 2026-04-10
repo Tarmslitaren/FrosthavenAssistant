@@ -15,14 +15,14 @@ void main() async {
     test('should activate a monster', () {
       // Arrange
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
       final monster = getIt<GameState>()
           .currentList
           .firstWhere((m) => m.id == 'Zealot') as Monster;
 
       expect(monster.isActive, isFalse);
 
-      final command = ActivateMonsterTypeCommand('Zealot', true);
+      final command = ActivateMonsterTypeCommand('Zealot', true, gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -35,12 +35,12 @@ void main() async {
     test('should deactivate a monster', () {
       // Arrange
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
       final monster = getIt<GameState>()
           .currentList
           .firstWhere((m) => m.id == 'Zealot') as Monster;
 
-      final command = ActivateMonsterTypeCommand('Zealot', false);
+      final command = ActivateMonsterTypeCommand('Zealot', false, gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -52,7 +52,7 @@ void main() async {
 
     test('describe should return correct string for activation', () {
       // Arrange
-      final command = ActivateMonsterTypeCommand('Zealot', true);
+      final command = ActivateMonsterTypeCommand('Zealot', true, gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Activate Zealot');
@@ -61,7 +61,7 @@ void main() async {
 
     test('describe should return correct string for deactivation', () {
       // Arrange
-      final command = ActivateMonsterTypeCommand('Zealot', false);
+      final command = ActivateMonsterTypeCommand('Zealot', false, gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Deactivate Zealot');
@@ -70,21 +70,21 @@ void main() async {
 
     test('undo does not throw', () {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
       final gs = getIt<GameState>();
-      gs.action(ActivateMonsterTypeCommand('Zealot', true));
+      gs.action(ActivateMonsterTypeCommand('Zealot', true, gameState: getIt<GameState>()));
       expect(() => gs.undo(), returnsNormally);
     });
 
     test('activate in RoundState.playTurns draws ability card and sorts', () {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
       // Enter playTurns state via DrawCommand
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
       expect(getIt<GameState>().roundState.value, RoundState.playTurns);
       // Activate should not throw even in playTurns state
       expect(
-        () => ActivateMonsterTypeCommand('Zealot', true).execute(),
+        () => ActivateMonsterTypeCommand('Zealot', true, gameState: getIt<GameState>()).execute(),
         returnsNormally,
       );
     });

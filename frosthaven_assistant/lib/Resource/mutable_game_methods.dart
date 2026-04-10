@@ -1087,7 +1087,8 @@ class MutableGameMethods {
       int? nr, Monster data, MonsterType type, bool addAsSummon) {
     final GameState gameState = getIt<GameState>();
     if (nr != null) {
-      gameState.action(AddStandeeCommand(nr, null, data.id, type, addAsSummon));
+      gameState.action(AddStandeeCommand(nr, null, data.id, type, addAsSummon,
+          gameState: gameState));
     } else {
       //add first un added nr
       for (int i = 1; i <= data.type.count; i++) {
@@ -1099,8 +1100,8 @@ class MutableGameMethods {
           }
         }
         if (!added) {
-          gameState
-              .action(AddStandeeCommand(i, null, data.id, type, addAsSummon));
+          gameState.action(AddStandeeCommand(i, null, data.id, type, addAsSummon,
+              gameState: gameState));
           return;
         }
       }

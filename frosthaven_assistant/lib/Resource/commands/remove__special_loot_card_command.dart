@@ -1,18 +1,19 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class RemoveSpecialLootCardCommand extends Command {
   int nr;
-  RemoveSpecialLootCardCommand(this.nr);
+  final GameState _gameState;
+
+  RemoveSpecialLootCardCommand(this.nr, {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {
-    GameState gameState = getIt<GameState>();
     if (nr == 1418) {
-      gameState.lootDeck.removeSpecial1418(stateAccess);
+      _gameState.lootDeck.removeSpecial1418(stateAccess);
     }
     if (nr == 1419) {
-      gameState.lootDeck.removeSpecial1419(stateAccess);
+      _gameState.lootDeck.removeSpecial1419(stateAccess);
     }
   }
 

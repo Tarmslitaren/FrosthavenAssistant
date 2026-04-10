@@ -1,14 +1,15 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class SetAutoLevelAdjustCommand extends Command {
-  SetAutoLevelAdjustCommand(this.on);
+  SetAutoLevelAdjustCommand(this.on, {required GameState gameState})
+      : _gameState = gameState;
 
   bool on;
+  final GameState _gameState;
 
   @override
   void execute() {
-    getIt<GameState>().setAutoScenarioLevel(stateAccess, on);
+    _gameState.setAutoScenarioLevel(stateAccess, on);
     MutableGameMethods.applyDifficulty(stateAccess);
   }
 

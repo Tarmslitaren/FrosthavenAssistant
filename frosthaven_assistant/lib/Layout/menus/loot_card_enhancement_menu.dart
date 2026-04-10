@@ -32,7 +32,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                 setState(() {
                   if (card.enhanced > 0) {
                     getIt<GameState>().action(EnhanceLootCardCommand(
-                        card.id, card.enhanced - 1, card.gfx));
+                        card.id, card.enhanced - 1, card.gfx, gameState: getIt<GameState>()));
                   }
                 });
               },
@@ -51,7 +51,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
               onTap: () {
                 setState(() {
                   getIt<GameState>().action(EnhanceLootCardCommand(
-                      card.id, card.enhanced + 1, card.gfx));
+                      card.id, card.enhanced + 1, card.gfx, gameState: getIt<GameState>()));
                 });
               },
               child: const Icon(

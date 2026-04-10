@@ -19,8 +19,8 @@ void main() {
   setUp(() {
     getIt<GameState>().clearList();
     // Draw then remove a card to populate the removed pile
-    DrawModifierCardCommand(deckName).execute();
-    RemoveAMDCardCommand(0, deckName).execute();
+    DrawModifierCardCommand(deckName, gameState: getIt<GameState>()).execute();
+    RemoveAMDCardCommand(0, deckName, gameState: getIt<GameState>()).execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {

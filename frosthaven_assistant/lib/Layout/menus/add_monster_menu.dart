@@ -229,7 +229,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                                 _gameState.action(AddMonsterCommand(
                                     _foundMonsters[index].name,
                                     null,
-                                    _addAsAlly));
+                                    _addAsAlly, gameState: getIt<GameState>()));
                               });
                             }
                           },

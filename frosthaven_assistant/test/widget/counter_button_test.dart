@@ -15,7 +15,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
   });
 
   Character _getBlinkblade() {
@@ -33,7 +33,7 @@ void main() {
         home: Scaffold(
           body: CounterButton(
             notifier: character.characterState.health,
-            command: ChangeHealthCommand(0, figureId, figureId),
+            command: ChangeHealthCommand(0, figureId, figureId, gameState: getIt<GameState>()),
             maxValue: character.characterState.maxHealth.value,
             image: 'assets/images/abilities/heal.png',
             showTotalValue: showTotalValue,
@@ -70,7 +70,7 @@ void main() {
       final character = _getBlinkblade();
       // Set health below max so we can increment
       final figureId = character.id;
-      getIt<GameState>().action(ChangeHealthCommand(-1, figureId, figureId));
+      getIt<GameState>().action(ChangeHealthCommand(-1, figureId, figureId, gameState: getIt<GameState>()));
       final before = character.characterState.health.value;
 
       await pumpCounterButton(tester);
@@ -106,7 +106,7 @@ void main() {
       // Ensure health is at max
       while (character.characterState.health.value < maxHealth) {
         getIt<GameState>()
-            .action(ChangeHealthCommand(1, figureId, figureId));
+            .action(ChangeHealthCommand(1, figureId, figureId, gameState: getIt<GameState>()));
       }
       final before = character.characterState.health.value;
 
@@ -131,7 +131,7 @@ void main() {
           home: Scaffold(
             body: CounterButton(
               notifier: notifier,
-              command: ChangeHealthCommand(0, 'unknown', null),
+              command: ChangeHealthCommand(0, 'unknown', null, gameState: getIt<GameState>()),
               maxValue: 10,
               image: 'assets/images/abilities/heal.png',
               showTotalValue: true,
@@ -166,7 +166,7 @@ void main() {
           home: Scaffold(
             body: CounterButton(
               notifier: character.characterState.health,
-              command: ChangeHealthCommand(0, figureId, figureId),
+              command: ChangeHealthCommand(0, figureId, figureId, gameState: getIt<GameState>()),
               maxValue: character.characterState.maxHealth.value,
               image: 'assets/images/abilities/heal.png',
               showTotalValue: false,

@@ -15,27 +15,27 @@ void main() {
 
   setUp(() {
     SetCampaignCommand('Frosthaven').execute();
-    SetScenarioCommand('#0 Howling in the Snow', false).execute();
+    SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
   });
 
   group('RemoveSpecialLootCardCommand', () {
     test('should remove special card 1418 from draw pile', () {
-      AddSpecialLootCardCommand(1418).execute();
+      AddSpecialLootCardCommand(1418, gameState: getIt<GameState>()).execute();
       final lootDeck = getIt<GameState>().lootDeck;
       expect(lootDeck.hasCard1418, isTrue);
 
-      RemoveSpecialLootCardCommand(1418).execute();
+      RemoveSpecialLootCardCommand(1418, gameState: getIt<GameState>()).execute();
 
       expect(lootDeck.hasCard1418, isFalse);
       checkSaveState();
     });
 
     test('should remove special card 1419 from draw pile', () {
-      AddSpecialLootCardCommand(1419).execute();
+      AddSpecialLootCardCommand(1419, gameState: getIt<GameState>()).execute();
       final lootDeck = getIt<GameState>().lootDeck;
       expect(lootDeck.hasCard1419, isTrue);
 
-      RemoveSpecialLootCardCommand(1419).execute();
+      RemoveSpecialLootCardCommand(1419, gameState: getIt<GameState>()).execute();
 
       expect(lootDeck.hasCard1419, isFalse);
       checkSaveState();
@@ -45,13 +45,13 @@ void main() {
       final lootDeck = getIt<GameState>().lootDeck;
       final countBefore = lootDeck.drawPileSize;
 
-      RemoveSpecialLootCardCommand(9999).execute();
+      RemoveSpecialLootCardCommand(9999, gameState: getIt<GameState>()).execute();
 
       expect(lootDeck.drawPileSize, countBefore);
     });
 
     test('describe includes the card number', () {
-      final command = RemoveSpecialLootCardCommand(1418);
+      final command = RemoveSpecialLootCardCommand(1418, gameState: getIt<GameState>());
       expect(command.describe(), 'Remove Special loot card 1418');
     });
   });

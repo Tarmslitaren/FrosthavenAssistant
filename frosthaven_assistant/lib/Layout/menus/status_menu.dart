@@ -111,7 +111,7 @@ class StatusMenuState extends State<StatusMenu> {
               onPressed: () {
                 if (notifier.value > 0) {
                   _gameState.action(RemoveConditionCommand(
-                      stackableCondition, figureId, ownerId));
+                      stackableCondition, figureId, ownerId, gameState: getIt<GameState>()));
                 }
                 //increment
               })),
@@ -155,7 +155,7 @@ class StatusMenuState extends State<StatusMenu> {
             onPressed: () {
               if (notifier.value < maxValue) {
                 _gameState.action(
-                    AddConditionCommand(stackableCondition, figureId, ownerId));
+                    AddConditionCommand(stackableCondition, figureId, ownerId, gameState: getIt<GameState>()));
               }
               //increment
             },
@@ -205,10 +205,10 @@ class StatusMenuState extends State<StatusMenu> {
                   onPressed: () {
                     if (!isActive) {
                       _gameState
-                          .action(SetAsSummonCommand(true, figureId, ownerId));
+                          .action(SetAsSummonCommand(true, figureId, ownerId, gameState: getIt<GameState>()));
                     } else {
                       _gameState
-                          .action(SetAsSummonCommand(false, figureId, ownerId));
+                          .action(SetAsSummonCommand(false, figureId, ownerId, gameState: getIt<GameState>()));
                     }
                   }));
         });
@@ -386,7 +386,7 @@ class StatusMenuState extends State<StatusMenu> {
                             onPressed: () {
                               setState(() {
                                 _gameState.action(IceWraithChangeFormCommand(
-                                    isElite, ownerId, figureId));
+                                    isElite, ownerId, figureId, gameState: getIt<GameState>()));
                               });
                             },
                             child: Text("                     Switch Form",
@@ -483,7 +483,7 @@ class StatusMenuState extends State<StatusMenu> {
                       children: [
                         CounterButton(
                             notifier: figure.health,
-                            command: ChangeHealthCommand(0, figureId, ownerId),
+                            command: ChangeHealthCommand(0, figureId, ownerId, gameState: getIt<GameState>()),
                             maxValue: figure.maxHealth.value,
                             image: "assets/images/abilities/heal.png",
                             showTotalValue: false,
@@ -495,7 +495,7 @@ class StatusMenuState extends State<StatusMenu> {
                         hasXp
                             ? CounterButton(
                                 notifier: (figure as CharacterState).xp,
-                                command: ChangeXPCommand(0, figureId, ownerId),
+                                command: ChangeXPCommand(0, figureId, ownerId, gameState: getIt<GameState>()),
                                 maxValue: 900,
                                 image: "assets/images/psd/xp.png",
                                 showTotalValue: false,
@@ -511,7 +511,7 @@ class StatusMenuState extends State<StatusMenu> {
                         if (showAmd)
                           CounterButton(
                               notifier: deck.getRemovable("bless"),
-                              command: ChangeBlessCommand(0, figureId, ownerId),
+                              command: ChangeBlessCommand(0, figureId, ownerId, gameState: getIt<GameState>()),
                               maxValue: 10,
                               image: "assets/images/abilities/bless.png",
                               showTotalValue: true,
@@ -523,7 +523,7 @@ class StatusMenuState extends State<StatusMenu> {
                         if ((canBeCursed && showMonsterAmd) || showCharacterAmd)
                           CounterButton(
                               notifier: deck.getRemovable("curse"),
-                              command: ChangeCurseCommand(0, figureId, ownerId),
+                              command: ChangeCurseCommand(0, figureId, ownerId, gameState: getIt<GameState>()),
                               maxValue: 10,
                               image: "assets/images/abilities/curse.png",
                               showTotalValue: true,
@@ -538,7 +538,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("in-enfeeble"),
                               command: ChangeEnfeebleCommand(
-                                  0, "in-enfeeble", figureId, ownerId),
+                                  0, "in-enfeeble", figureId, ownerId, gameState: getIt<GameState>()),
                               maxValue: 10,
                               image: "assets/images/abilities/enfeeble_old.png",
                               extraImage: hasMoreThanOneEnfeeble
@@ -553,7 +553,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("in-empower"),
                               command: ChangeEmpowerCommand(
-                                  0, "in-empower", figureId, ownerId),
+                                  0, "in-empower", figureId, ownerId, gameState: getIt<GameState>()),
                               maxValue: 10,
                               image: "assets/images/abilities/empower_old.png",
                               extraImage: hasMoreThanOneEmpower
@@ -570,7 +570,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("rm-empower"),
                               command: ChangeEmpowerCommand(
-                                  0, "rm-empower", figureId, ownerId),
+                                  0, "rm-empower", figureId, ownerId, gameState: getIt<GameState>()),
                               maxValue: 12,
                               image: "assets/images/abilities/empower_old.png",
                               extraImage: hasMoreThanOneEmpower
@@ -587,7 +587,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("vi-empower"),
                               command:
-                                  ChangeEmpowerCommand.deck(deck, "vi-empower"),
+                                  ChangeEmpowerCommand.deck(deck, "vi-empower", gameState: getIt<GameState>()),
                               maxValue: 10,
                               image: "assets/images/abilities/empower.png",
                               extraImage: hasMoreThanOneEmpower
@@ -604,7 +604,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("vi-gr-empower"),
                               command: ChangeEmpowerCommand.deck(
-                                  deck, "vi-gr-empower"),
+                                  deck, "vi-gr-empower", gameState: getIt<GameState>()),
                               maxValue: 5,
                               image:
                                   "assets/images/abilities/greater-empower.png",
@@ -620,7 +620,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("vi-enfeeble"),
                               command: ChangeEnfeebleCommand.deck(
-                                  deck, "vi-enfeeble"),
+                                  deck, "vi-enfeeble", gameState: getIt<GameState>()),
                               maxValue: 10,
                               image: "assets/images/abilities/enfeeble.png",
                               extraImage: hasMoreThanOneEnfeeble
@@ -638,7 +638,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("vi-gr-enfeeble"),
                               command: ChangeEnfeebleCommand.deck(
-                                  deck, "vi-gr-enfeeble"),
+                                  deck, "vi-gr-enfeeble", gameState: getIt<GameState>()),
                               maxValue: 5,
                               image:
                                   "assets/images/abilities/greater-enfeeble.png",
@@ -654,7 +654,7 @@ class StatusMenuState extends State<StatusMenu> {
                           CounterButton(
                               notifier: deck.getRemovable("li-enfeeble"),
                               command: ChangeEnfeebleCommand
-                                  .deck(deck, "li-enfeeble"),
+                                  .deck(deck, "li-enfeeble", gameState: getIt<GameState>()),
                               maxValue: 15,
                               image: "assets/images/abilities/enfeeble.png",
                               extraImage: hasMoreThanOneEnfeeble
@@ -697,7 +697,7 @@ class StatusMenuState extends State<StatusMenu> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                   _gameState.action(ChangeHealthCommand(
-                                      -figure.health.value, figureId, ownerId));
+                                      -figure.health.value, figureId, ownerId, gameState: getIt<GameState>()));
                                 },
                               ),
                             ),

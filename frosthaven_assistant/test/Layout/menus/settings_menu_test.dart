@@ -393,7 +393,7 @@ void main() {
 
       expect(gameState.allyDeckInOGGloom.value, !before);
       // restore
-      getIt<GameState>().action(SetAllyDeckInOgGloomCommand(before));
+      getIt<GameState>().action(SetAllyDeckInOgGloomCommand(before, gameState: getIt<GameState>()));
     });
   });
 }

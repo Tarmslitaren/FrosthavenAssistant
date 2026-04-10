@@ -217,7 +217,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
           style: kSubtitleStyle),
       onTap: () {
         Navigator.pop(context);
-        _gameState.action(SetScenarioCommand(name, false));
+        _gameState.action(SetScenarioCommand(name, false, gameState: getIt<GameState>()));
       },
     );
   }
@@ -232,7 +232,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       title: Text(title, style: kTitleStyle),
       onTap: () {
         Navigator.pop(context);
-        _gameState.action(SetScenarioCommand(name, false));
+        _gameState.action(SetScenarioCommand(name, false, gameState: getIt<GameState>()));
       },
     );
   }
@@ -296,7 +296,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                               (event.logicalKey.keyId == 13)) {
                             if (_foundScenarios.isNotEmpty) {
                               //_gameState.action(
-                              //    SetScenarioCommand(_foundScenarios[0], false));
+                              //    SetScenarioCommand(_foundScenarios[0], false, gameState: getIt<GameState>()));
                               //Navigator.pop(context);
                             }
                           }
@@ -321,7 +321,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                             if (_foundScenarios.isNotEmpty) {
                               Navigator.pop(context);
                               _gameState.action(SetScenarioCommand(
-                                  _foundScenarios.first, false));
+                                  _foundScenarios.first, false, gameState: getIt<GameState>()));
                             }
                           },
                           decoration: const InputDecoration(

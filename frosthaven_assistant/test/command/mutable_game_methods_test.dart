@@ -19,6 +19,8 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import 'test_helpers.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/Resource/game_data.dart';
 
 void main() {
   setUpAll(() async {
@@ -32,15 +34,15 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
-      AddCharacterCommand('Banner Spear', 'Frosthaven', 'BS', 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', 'BS', 1, gameState: getIt<GameState>()).execute();
     });
 
     test('character with lower initiative is placed before character with higher initiative', () {
-      SetInitCommand('Blinkblade', 10).execute();
-      SetInitCommand('Banner Spear', 30).execute();
+      SetInitCommand('Blinkblade', 10, gameState: getIt<GameState>()).execute();
+      SetInitCommand('Banner Spear', 30, gameState: getIt<GameState>()).execute();
 
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final list = getIt<GameState>().currentList;
       final bbIdx = list.indexWhere((e) => e.id == 'Blinkblade');
@@ -50,10 +52,10 @@ void main() {
     });
 
     test('character with higher initiative is placed after character with lower initiative', () {
-      SetInitCommand('Blinkblade', 40).execute();
-      SetInitCommand('Banner Spear', 15).execute();
+      SetInitCommand('Blinkblade', 40, gameState: getIt<GameState>()).execute();
+      SetInitCommand('Banner Spear', 15, gameState: getIt<GameState>()).execute();
 
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final list = getIt<GameState>().currentList;
       final bbIdx = list.indexWhere((e) => e.id == 'Blinkblade');
@@ -66,14 +68,14 @@ void main() {
       final gs = getIt<GameState>();
       final bs = gs.currentList
           .firstWhere((e) => e is Character && e.id == 'Banner Spear') as Character;
-      ChangeHealthCommand(-bs.characterState.health.value, bs.id, bs.id).execute();
+      ChangeHealthCommand(-bs.characterState.health.value, bs.id, bs.id, gameState: getIt<GameState>()).execute();
       expect(bs.characterState.health.value, 0);
 
       // Banner Spear has lower initiative but is dead
-      SetInitCommand('Blinkblade', 30).execute();
-      SetInitCommand('Banner Spear', 5).execute();
+      SetInitCommand('Blinkblade', 30, gameState: getIt<GameState>()).execute();
+      SetInitCommand('Banner Spear', 5, gameState: getIt<GameState>()).execute();
 
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final list = gs.currentList;
       final bbIdx = list.indexWhere((e) => e.id == 'Blinkblade');
@@ -85,12 +87,12 @@ void main() {
     test('inactive monster sorted after active character', () {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
 
-      SetInitCommand('Blinkblade', 50).execute();
+      SetInitCommand('Blinkblade', 50, gameState: getIt<GameState>()).execute();
 
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final list = getIt<GameState>().currentList;
       final charIdx = list.indexWhere((e) => e is Character);
@@ -102,18 +104,18 @@ void main() {
     test('active monster sorted by drawn ability card initiative relative to character', () {
       getIt<GameState>().clearList();
       SetCampaignCommand('Jaws of the Lion').execute();
-      SetScenarioCommand('#5 A Deeper Understanding', false).execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
 
       final zealot = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Monster && e.id == 'Zealot') as Monster;
-      AddStandeeCommand(1, null, zealot.id, MonsterType.normal, false).execute();
+      AddStandeeCommand(1, null, zealot.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
 
       // Character initiative very high so Zealot should normally come first
-      SetInitCommand('Blinkblade', 99).execute();
+      SetInitCommand('Blinkblade', 99, gameState: getIt<GameState>()).execute();
 
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final zealotDeck = getIt<GameState>()
           .currentAbilityDecks
@@ -143,15 +145,15 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
       monster = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Monster) as Monster;
     });
 
     test('elite standee is sorted before normal standee', () {
-      AddStandeeCommand(2, null, monster.id, MonsterType.normal, false).execute();
-      AddStandeeCommand(1, null, monster.id, MonsterType.elite, false).execute();
+      AddStandeeCommand(2, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, monster.id, MonsterType.elite, false, gameState: getIt<GameState>()).execute();
 
       final instances = monster.monsterInstances;
       expect(instances[0].type, MonsterType.elite,
@@ -161,8 +163,8 @@ void main() {
     });
 
     test('normal standees are sorted by standee number ascending', () {
-      AddStandeeCommand(3, null, monster.id, MonsterType.normal, false).execute();
-      AddStandeeCommand(1, null, monster.id, MonsterType.normal, false).execute();
+      AddStandeeCommand(3, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
 
       final instances = monster.monsterInstances;
       expect(instances[0].standeeNr, 1,
@@ -171,8 +173,8 @@ void main() {
     });
 
     test('elite standees are sorted by standee number ascending', () {
-      AddStandeeCommand(3, null, monster.id, MonsterType.elite, false).execute();
-      AddStandeeCommand(1, null, monster.id, MonsterType.elite, false).execute();
+      AddStandeeCommand(3, null, monster.id, MonsterType.elite, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, monster.id, MonsterType.elite, false, gameState: getIt<GameState>()).execute();
 
       final instances = monster.monsterInstances;
       expect(instances[0].standeeNr, 1);
@@ -180,10 +182,10 @@ void main() {
     });
 
     test('mixed: elites by nr come before normals by nr', () {
-      AddStandeeCommand(2, null, monster.id, MonsterType.normal, false).execute();
-      AddStandeeCommand(3, null, monster.id, MonsterType.elite, false).execute();
-      AddStandeeCommand(1, null, monster.id, MonsterType.elite, false).execute();
-      AddStandeeCommand(4, null, monster.id, MonsterType.normal, false).execute();
+      AddStandeeCommand(2, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(3, null, monster.id, MonsterType.elite, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, monster.id, MonsterType.elite, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(4, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
 
       final instances = monster.monsterInstances;
       expect(instances[0].type, MonsterType.elite);
@@ -204,14 +206,14 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
-      AddStandeeCommand(1, null, 'Ancient Artillery (FH)', MonsterType.normal, false)
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, 'Ancient Artillery (FH)', MonsterType.normal, false, gameState: getIt<GameState>())
           .execute();
     });
 
     test('all alive characters appear before active monsters', () {
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
 
       final list = getIt<GameState>().currentList;
       bool seenActiveMonster = false;
@@ -226,13 +228,13 @@ void main() {
     });
 
     test('dead character is sorted after alive characters', () {
-      AddCharacterCommand('Banner Spear', 'Frosthaven', 'BS', 1).execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', 'BS', 1, gameState: getIt<GameState>()).execute();
       final bs = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Character && e.id == 'Banner Spear') as Character;
-      ChangeHealthCommand(-bs.characterState.health.value, bs.id, bs.id).execute();
+      ChangeHealthCommand(-bs.characterState.health.value, bs.id, bs.id, gameState: getIt<GameState>()).execute();
 
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
 
       final list = getIt<GameState>().currentList;
       final bbIdx = list.indexWhere((e) => e is Character && e.id == 'Blinkblade');
@@ -242,10 +244,10 @@ void main() {
     });
 
     test('inactive monster sorted after active monsters', () {
-      AddMonsterCommand('Test Boss (FH)', 1, false).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
       // Test Boss has no standees → inactive
 
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
 
       final list = getIt<GameState>().currentList;
       final activeMonsterIdx =
@@ -267,8 +269,8 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Jaws of the Lion').execute();
-      SetScenarioCommand('#5 A Deeper Understanding', false).execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
     });
 
     test('adding first standee during playTurns draws an ability card for the inactive deck', () {
@@ -280,12 +282,12 @@ void main() {
           .firstWhere((d) => d.name == zealot.type.deck);
 
       // Zealot has no standees so not drawn during DrawCommand
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
       expect(deck.discardPileIsEmpty, isTrue,
           reason: 'Inactive Zealot should not have drawn a card during DrawCommand');
 
       // Add first standee during playTurns → triggers drawAbilityCardFromInactiveDeck
-      AddStandeeCommand(1, null, zealot.id, MonsterType.normal, false).execute();
+      AddStandeeCommand(1, null, zealot.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
 
       expect(deck.discardPileIsNotEmpty, isTrue,
           reason: 'First standee during playTurns should trigger an ability card draw');
@@ -299,12 +301,12 @@ void main() {
           .currentAbilityDecks
           .firstWhere((d) => d.name == zealot.type.deck);
 
-      DrawCommand().execute();
-      AddStandeeCommand(1, null, zealot.id, MonsterType.normal, false).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, zealot.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
       final sizeAfterFirst = deck.discardPileSize;
 
       // Second standee should NOT draw another card
-      AddStandeeCommand(2, null, zealot.id, MonsterType.normal, false).execute();
+      AddStandeeCommand(2, null, zealot.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
 
       expect(deck.discardPileSize, sizeAfterFirst,
           reason: 'Adding a second standee should not draw another ability card');
@@ -318,19 +320,19 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Jaws of the Lion').execute();
-      SetScenarioCommand('#5 A Deeper Understanding', false).execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
     });
 
     test('monster placed before character when its drawn initiative is lower', () {
       // Zealot's lowest card initiative is 27 — set character to 99
-      SetInitCommand('Blinkblade', 99).execute();
-      DrawCommand().execute();
+      SetInitCommand('Blinkblade', 99, gameState: getIt<GameState>()).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final zealot = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Monster && e.id == 'Zealot') as Monster;
-      AddStandeeCommand(1, null, zealot.id, MonsterType.normal, false).execute();
+      AddStandeeCommand(1, null, zealot.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
 
       final deck = getIt<GameState>()
           .currentAbilityDecks
@@ -351,13 +353,13 @@ void main() {
 
     test('monster placed after character when its drawn initiative is higher', () {
       // Set character initiative very low so Chaos Demon comes after
-      SetInitCommand('Blinkblade', 1).execute();
-      DrawCommand().execute();
+      SetInitCommand('Blinkblade', 1, gameState: getIt<GameState>()).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final chaosDemon = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Monster && e.id == 'Chaos Demon') as Monster;
-      AddStandeeCommand(1, null, chaosDemon.id, MonsterType.normal, false)
+      AddStandeeCommand(1, null, chaosDemon.id, MonsterType.normal, false, gameState: getIt<GameState>())
           .execute();
 
       final deck = getIt<GameState>()
@@ -387,9 +389,9 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
-      AddStandeeCommand(1, null, 'Ancient Artillery (FH)', MonsterType.normal, false)
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, 'Ancient Artillery (FH)', MonsterType.normal, false, gameState: getIt<GameState>())
           .execute();
 
       character = getIt<GameState>()
@@ -403,11 +405,11 @@ void main() {
 
     test('stun expires on character when turn advances (condition added before draw)', () {
       // Condition added in chooseInitiative → NOT tracked as "added this turn"
-      AddConditionCommand(Condition.stun, character.id, character.id).execute();
+      AddConditionCommand(Condition.stun, character.id, character.id, gameState: getIt<GameState>()).execute();
       expect(character.characterState.conditions.value, contains(Condition.stun));
 
-      DrawCommand().execute();
-      TurnDoneCommand(character.id).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
+      TurnDoneCommand(character.id, gameState: getIt<GameState>()).execute();
 
       expect(character.characterState.conditions.value,
           isNot(contains(Condition.stun)),
@@ -415,20 +417,20 @@ void main() {
     });
 
     test('poison does NOT expire when character turn advances', () {
-      AddConditionCommand(Condition.poison, character.id, character.id).execute();
+      AddConditionCommand(Condition.poison, character.id, character.id, gameState: getIt<GameState>()).execute();
 
-      DrawCommand().execute();
-      TurnDoneCommand(character.id).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
+      TurnDoneCommand(character.id, gameState: getIt<GameState>()).execute();
 
       expect(character.characterState.conditions.value, contains(Condition.poison),
           reason: 'Poison is not in the expiring list and should remain');
     });
 
     test('muddle expires on character when turn advances', () {
-      AddConditionCommand(Condition.muddle, character.id, character.id).execute();
+      AddConditionCommand(Condition.muddle, character.id, character.id, gameState: getIt<GameState>()).execute();
 
-      DrawCommand().execute();
-      TurnDoneCommand(character.id).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
+      TurnDoneCommand(character.id, gameState: getIt<GameState>()).execute();
 
       expect(character.characterState.conditions.value,
           isNot(contains(Condition.muddle)),
@@ -436,10 +438,10 @@ void main() {
     });
 
     test('immobilize expires on character when turn advances', () {
-      AddConditionCommand(Condition.immobilize, character.id, character.id).execute();
+      AddConditionCommand(Condition.immobilize, character.id, character.id, gameState: getIt<GameState>()).execute();
 
-      DrawCommand().execute();
-      TurnDoneCommand(character.id).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
+      TurnDoneCommand(character.id, gameState: getIt<GameState>()).execute();
 
       expect(character.characterState.conditions.value,
           isNot(contains(Condition.immobilize)),
@@ -448,15 +450,15 @@ void main() {
 
     test('stun on monster instance expires when monster turn advances', () {
       AddConditionCommand(
-              Condition.stun, monsterInstance.getId(), monster.id)
+              Condition.stun, monsterInstance.getId(), monster.id, gameState: getIt<GameState>())
           .execute();
       expect(monsterInstance.conditions.value, contains(Condition.stun));
 
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
       // First call: notDone → current (no expiry yet)
-      TurnDoneCommand(monster.id).execute();
+      TurnDoneCommand(monster.id, gameState: getIt<GameState>()).execute();
       // Second call: current → done (triggers removeExpiringConditions)
-      TurnDoneCommand(monster.id).execute();
+      TurnDoneCommand(monster.id, gameState: getIt<GameState>()).execute();
 
       expect(monsterInstance.conditions.value,
           isNot(contains(Condition.stun)),
@@ -465,22 +467,22 @@ void main() {
 
     test('wound on monster instance does NOT expire when monster turn advances', () {
       AddConditionCommand(
-              Condition.wound, monsterInstance.getId(), monster.id)
+              Condition.wound, monsterInstance.getId(), monster.id, gameState: getIt<GameState>())
           .execute();
 
-      DrawCommand().execute();
-      TurnDoneCommand(monster.id).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
+      TurnDoneCommand(monster.id, gameState: getIt<GameState>()).execute();
 
       expect(monsterInstance.conditions.value, contains(Condition.wound),
           reason: 'Wound is not expirable and should remain');
     });
 
     test('stun added during active turn is NOT expired immediately', () {
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
       // Character is current → condition is tracked as "added this turn"
-      AddConditionCommand(Condition.stun, character.id, character.id).execute();
+      AddConditionCommand(Condition.stun, character.id, character.id, gameState: getIt<GameState>()).execute();
 
-      TurnDoneCommand(character.id).execute();
+      TurnDoneCommand(character.id, gameState: getIt<GameState>()).execute();
 
       expect(character.characterState.conditions.value, contains(Condition.stun),
           reason: 'Stun added during own turn should NOT expire at end of that turn');
@@ -494,25 +496,25 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
-      AddCharacterCommand('Banner Spear', 'Frosthaven', 'BS', 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', 'BS', 1, gameState: getIt<GameState>()).execute();
     });
 
     test('dead character is skipped as next current figure', () {
       final gs = getIt<GameState>();
       final bs = gs.currentList
           .firstWhere((e) => e is Character && e.id == 'Banner Spear') as Character;
-      ChangeHealthCommand(-bs.characterState.health.value, bs.id, bs.id).execute();
+      ChangeHealthCommand(-bs.characterState.health.value, bs.id, bs.id, gameState: getIt<GameState>()).execute();
 
-      SetInitCommand('Blinkblade', 10).execute();
-      SetInitCommand('Banner Spear', 20).execute();
-      DrawCommand().execute();
+      SetInitCommand('Blinkblade', 10, gameState: getIt<GameState>()).execute();
+      SetInitCommand('Banner Spear', 20, gameState: getIt<GameState>()).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final bb = gs.currentList
           .firstWhere((e) => e is Character && e.id == 'Blinkblade') as Character;
       expect(bb.turnState.value, TurnsState.current);
 
-      TurnDoneCommand(bb.id).execute();
+      TurnDoneCommand(bb.id, gameState: getIt<GameState>()).execute();
 
       expect(bs.turnState.value, isNot(TurnsState.current),
           reason: 'Dead Banner Spear should never become current');
@@ -521,16 +523,16 @@ void main() {
     test('inactive monster is skipped as next current figure', () {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
 
-      SetInitCommand('Blinkblade', 50).execute();
-      DrawCommand().execute();
+      SetInitCommand('Blinkblade', 50, gameState: getIt<GameState>()).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final bb = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Character) as Character;
-      TurnDoneCommand(bb.id).execute();
+      TurnDoneCommand(bb.id, gameState: getIt<GameState>()).execute();
 
       final artillery = getIt<GameState>()
           .currentList
@@ -540,16 +542,16 @@ void main() {
     });
 
     test('items before the clicked index are set to done', () {
-      SetInitCommand('Blinkblade', 10).execute();
-      SetInitCommand('Banner Spear', 20).execute();
-      DrawCommand().execute();
+      SetInitCommand('Blinkblade', 10, gameState: getIt<GameState>()).execute();
+      SetInitCommand('Banner Spear', 20, gameState: getIt<GameState>()).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final list = getIt<GameState>().currentList;
       final bs =
           list.firstWhere((e) => e is Character && e.id == 'Banner Spear') as Character;
 
       // Click on Banner Spear (index 1) skips Blinkblade to done
-      TurnDoneCommand(bs.id).execute();
+      TurnDoneCommand(bs.id, gameState: getIt<GameState>()).execute();
 
       final bb =
           list.firstWhere((e) => e is Character && e.id == 'Blinkblade') as Character;
@@ -558,18 +560,18 @@ void main() {
     });
 
     test('clicking a done item reverts it to current', () {
-      SetInitCommand('Blinkblade', 10).execute();
-      SetInitCommand('Banner Spear', 20).execute();
-      DrawCommand().execute();
+      SetInitCommand('Blinkblade', 10, gameState: getIt<GameState>()).execute();
+      SetInitCommand('Banner Spear', 20, gameState: getIt<GameState>()).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
 
       final list = getIt<GameState>().currentList;
       final bb =
           list.firstWhere((e) => e is Character && e.id == 'Blinkblade') as Character;
 
-      TurnDoneCommand(bb.id).execute(); // current → done, next becomes current
+      TurnDoneCommand(bb.id, gameState: getIt<GameState>()).execute(); // current → done, next becomes current
       expect(bb.turnState.value, TurnsState.done);
 
-      TurnDoneCommand(bb.id).execute(); // done → current (revert)
+      TurnDoneCommand(bb.id, gameState: getIt<GameState>()).execute(); // done → current (revert)
       expect(bb.turnState.value, TurnsState.current,
           reason: 'Clicking a done item should make it current again');
     });
@@ -582,9 +584,9 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Jaws of the Lion').execute();
-      SetScenarioCommand('#5 A Deeper Understanding', false).execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>()).execute();
     });
 
     test('ability deck with empty draw pile is reshuffled on NextRoundCommand', () {
@@ -602,7 +604,7 @@ void main() {
       expect(deck.drawPileIsEmpty, isTrue,
           reason: 'Precondition: draw pile should be empty');
 
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
 
       expect(deck.drawPileIsNotEmpty, isTrue,
           reason: 'Ability deck should be reshuffled when draw pile was empty');
@@ -629,7 +631,7 @@ void main() {
 
       if (deck.discardPileIsNotEmpty && deck.discardPileTop.shuffle) {
         final discardSizeBefore = deck.discardPileSize;
-        NextRoundCommand().execute();
+        NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
         expect(deck.discardPileIsEmpty, isTrue,
             reason: 'Discard pile should be empty after shuffle-triggered reshuffle');
         expect(deck.drawPileSize, greaterThanOrEqualTo(discardSizeBefore),
@@ -650,9 +652,9 @@ void main() {
       SetCampaignCommand('Frosthaven').execute();
       // Reset the modifier deck between tests via SetScenarioCommand (section=false
       // calls modifierDeck._initDeck() before we add our character)
-      SetScenarioCommand('#0 Howling in the Snow', false).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
       // Hail's edition is "Mercenary Packs" (cross-edition character)
-      AddCharacterCommand('Hail', 'Mercenary Packs', 'H', 1).execute();
+      AddCharacterCommand('Hail', 'Mercenary Packs', 'H', 1, gameState: getIt<GameState>()).execute();
       hail = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Character && e.id == 'Hail') as Character;
@@ -700,7 +702,7 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddCharacterCommand('Pain Conduit', 'Frosthaven', 'PC', 1).execute();
+      AddCharacterCommand('Pain Conduit', 'Frosthaven', 'PC', 1, gameState: getIt<GameState>()).execute();
       painConduit = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Character && e.id == 'Pain Conduit') as Character;
@@ -755,7 +757,7 @@ void main() {
     });
 
     test('Pain Conduit with perk 16 active has correct health after level change', () {
-      AddCharacterCommand('Pain Conduit', 'Frosthaven', 'PC', 1).execute();
+      AddCharacterCommand('Pain Conduit', 'Frosthaven', 'PC', 1, gameState: getIt<GameState>()).execute();
       final pc = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Character && e.id == 'Pain Conduit') as Character;
@@ -770,7 +772,7 @@ void main() {
     });
 
     test('character level is capped at max health table length', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
       final bb = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Character && e.id == 'Blinkblade') as Character;
@@ -783,7 +785,7 @@ void main() {
     });
 
     test('character health and max health are updated on level change', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
       final bb = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Character && e.id == 'Blinkblade') as Character;
@@ -805,17 +807,17 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
       character = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Character) as Character;
     });
 
     test('all turn states are reset to notDone after NextRoundCommand', () {
-      DrawCommand().execute();
-      TurnDoneCommand(character.id).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
+      TurnDoneCommand(character.id, gameState: getIt<GameState>()).execute();
 
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
 
       for (final item in getIt<GameState>().currentList) {
         expect(item.turnState.value, TurnsState.notDone,
@@ -825,12 +827,12 @@ void main() {
 
     test('conditions tracking is cleared at round end', () {
       // Add stun during active turn (tracked as this turn)
-      DrawCommand().execute();
-      AddConditionCommand(Condition.stun, character.id, character.id).execute();
-      TurnDoneCommand(character.id).execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
+      AddConditionCommand(Condition.stun, character.id, character.id, gameState: getIt<GameState>()).execute();
+      TurnDoneCommand(character.id, gameState: getIt<GameState>()).execute();
 
       // Stun is tracked in conditionsAddedThisTurn
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
       // conditionsAddedThisTurn → conditionsAddedPreviousTurn, and fresh turn starts
 
       // Round state should be chooseInitiative now
@@ -845,14 +847,14 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
     });
 
     test('full element steps to half after NextRoundCommand', () {
       ImbueElementCommand(Elements.fire, false).execute();
       expect(getIt<GameState>().elementState[Elements.fire], ElementState.full);
 
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
 
       expect(getIt<GameState>().elementState[Elements.fire], ElementState.half);
     });
@@ -861,7 +863,7 @@ void main() {
       ImbueElementCommand(Elements.ice, true).execute(); // half
       expect(getIt<GameState>().elementState[Elements.ice], ElementState.half);
 
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
 
       expect(getIt<GameState>().elementState[Elements.ice], ElementState.inert);
     });
@@ -870,7 +872,7 @@ void main() {
       // earth is inert by default
       expect(getIt<GameState>().elementState[Elements.earth], ElementState.inert);
 
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
 
       expect(getIt<GameState>().elementState[Elements.earth], ElementState.inert);
     });
@@ -883,7 +885,7 @@ void main() {
       ImbueElementCommand(Elements.light, false).execute();
       ImbueElementCommand(Elements.dark, false).execute();
 
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
 
       for (final element in Elements.values) {
         expect(getIt<GameState>().elementState[element], ElementState.half,
@@ -899,12 +901,12 @@ void main() {
     test('all elements are reset to inert when loading a new scenario', () {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'BB', 1, gameState: getIt<GameState>()).execute();
 
       ImbueElementCommand(Elements.fire, false).execute();
       ImbueElementCommand(Elements.light, true).execute();
 
-      SetScenarioCommand('#0 Howling in the Snow', false).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
 
       for (final element in Elements.values) {
         expect(getIt<GameState>().elementState[element], ElementState.inert,

@@ -52,7 +52,7 @@ void main() {
     testWidgets('renders SectionButtons for a scenario with sections',
         (WidgetTester tester) async {
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('#0 Howling in the Snow', false).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
       getIt<Settings>().autoAddStandees.value = true;
 
       await pumpWidget(tester);
@@ -65,7 +65,7 @@ void main() {
     testWidgets('filters out spawn sections from display',
         (WidgetTester tester) async {
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('#0 Howling in the Snow', false).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
 
       await pumpWidget(tester);
       // Sections containing "spawn" in their name should not be rendered
@@ -78,7 +78,7 @@ void main() {
     testWidgets('renders empty Wrap when all sections are already added',
         (WidgetTester tester) async {
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('#0 Howling in the Snow', false).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
       // Add all sections by command (section=true path)
       final gameState = getIt<GameState>();
       final gameData = getIt<GameData>();
@@ -91,7 +91,7 @@ void main() {
 
       if (sections != null) {
         for (final section in sections) {
-          SetScenarioCommand(section.name, true).execute();
+          SetScenarioCommand(section.name, true, gameState: getIt<GameState>()).execute();
         }
       }
 

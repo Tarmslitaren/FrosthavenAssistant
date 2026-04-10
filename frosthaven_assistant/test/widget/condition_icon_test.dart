@@ -22,7 +22,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
   });
 
   Character _getBlinkblade() {
@@ -215,8 +215,8 @@ void main() {
   group('ConditionIcon monster figure', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false).execute();
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>()).execute();
     });
 
     testWidgets('renders condition icon for monster instance',
@@ -271,7 +271,7 @@ void main() {
       getIt<GameState>().clearList();
       // Use action() to populate gameSaveStates so listener can read old state
       getIt<GameState>()
-          .action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1));
+          .action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()));
     });
 
     testWidgets('health decrease triggers animation for regenerate condition',
@@ -300,7 +300,7 @@ void main() {
 
       // Trigger health change: commandIndex change → listener → animation path
       gameState
-          .action(ChangeHealthCommand(-1, character.id, character.id));
+          .action(ChangeHealthCommand(-1, character.id, character.id, gameState: getIt<GameState>()));
 
       FlutterError.onError = ignoreOverflowErrors;
       // Pump past the 1000ms animation timer started by _runAnimation()
@@ -340,13 +340,13 @@ void main() {
       FlutterError.onError = originalOnError;
 
       // Health decrease: covers lines 128, 198-207 (all conditions evaluated, none match stun)
-      gameState.action(ChangeHealthCommand(-1, character.id, character.id));
+      gameState.action(ChangeHealthCommand(-1, character.id, character.id, gameState: getIt<GameState>()));
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pump();
       FlutterError.onError = originalOnError;
 
       // Health increase: covers lines 210-216 (all conditions evaluated, none match stun)
-      gameState.action(ChangeHealthCommand(1, character.id, character.id));
+      gameState.action(ChangeHealthCommand(1, character.id, character.id, gameState: getIt<GameState>()));
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pump();
       FlutterError.onError = originalOnError;

@@ -1,25 +1,27 @@
-import '../../../services/service_locator.dart';
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class ChangeCurseCommand extends ChangeStatCommand {
-  ChangeCurseCommand(super.change, super.figureId, super.ownerId);
-  ChangeCurseCommand.deck(this.deck) : super(0, '', '');
+  ChangeCurseCommand(super.change, super.figureId, super.ownerId,
+      {required super.gameState});
+  ChangeCurseCommand.deck(this.deck, {required GameState gameState})
+      : super(0, '', '', gameState: gameState);
 
   ModifierDeck? deck;
 
   @override
   void execute() {
     if (deck == null) {
-      deck = getIt<GameState>().modifierDeck;
-      for (var item in getIt<GameState>().currentList) {
+      deck = gameState.modifierDeck;
+      for (var item in gameState.currentList) {
         if (item.id == ownerId) {
           if (item is Monster &&
               item.isAlly &&
-              (getIt<GameState>().allyDeckInOGGloom.value ||
+              (gameState.allyDeckInOGGloom.value ||
                   !GameMethods.isOgGloomEdition())) {
-            deck = getIt<GameState>().modifierDeckAllies;
+            deck = gameState.modifierDeckAllies;
           }
           if (item is Character) {
             deck = item.characterState.modifierDeck;
@@ -28,11 +30,6 @@ class ChangeCurseCommand extends ChangeStatCommand {
       }
     }
     deck?.addRemovableValue("curse", change);
-  }
-
-  @override
-  void undo() {
-    getIt<GameState>().updateList.value++;
   }
 
   @override

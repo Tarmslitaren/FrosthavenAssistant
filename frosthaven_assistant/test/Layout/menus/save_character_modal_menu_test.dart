@@ -16,7 +16,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
   });

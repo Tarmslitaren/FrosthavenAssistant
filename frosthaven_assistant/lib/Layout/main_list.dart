@@ -425,7 +425,7 @@ class MainListState extends State<MainList> {
                                     setState(() {
                                       //todo: is set state needed here?
                                       _gameState.action(ReorderListCommand(
-                                          newIndex, oldIndex));
+                                          newIndex, oldIndex, gameState: getIt<GameState>()));
                                     });
                                   },
                                   children: generateChildren(),

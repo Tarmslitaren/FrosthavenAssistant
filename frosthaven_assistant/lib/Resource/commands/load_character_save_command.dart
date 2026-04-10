@@ -1,13 +1,16 @@
 import 'dart:convert';
 
-import '../../services/service_locator.dart';
 import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class LoadCharacterSaveCommand extends Command {
   String saveName;
   String saveData;
-  LoadCharacterSaveCommand(this.saveName, this.saveData);
+  final GameState _gameState;
+
+  LoadCharacterSaveCommand(this.saveName, this.saveData,
+      {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {
@@ -24,7 +27,7 @@ class LoadCharacterSaveCommand extends Command {
     MutableGameMethods.resetCharacter(stateAccess, character);
     MutableGameMethods.addToMainList(stateAccess, 0, character);
     MutableGameMethods.applyDifficulty(stateAccess);
-    getIt<GameState>().updateList.value++;
+    _gameState.updateList.value++;
     MutableGameMethods.unlockClass(stateAccess, character.characterClass.id);
   }
 

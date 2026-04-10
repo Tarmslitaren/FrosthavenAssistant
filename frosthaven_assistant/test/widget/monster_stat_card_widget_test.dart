@@ -19,7 +19,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Zealot', 1, false).execute();
+    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
   });
 
   Monster _getZealot() {
@@ -122,7 +122,7 @@ void main() {
       // Add all available standees
       int maxCount = zealot.type.count;
       for (int i = 1; i <= maxCount; i++) {
-        AddStandeeCommand(i, null, 'Zealot', MonsterType.normal, false)
+        AddStandeeCommand(i, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>())
             .execute();
       }
 
@@ -178,7 +178,7 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       // Ancient Artillery (FH) has muddle immunity
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
     });
 
     Future<void> pumpArtilleryCard(WidgetTester tester) async {

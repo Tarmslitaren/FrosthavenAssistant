@@ -19,7 +19,7 @@ void main() {
     getIt<GameState>().clearList();
     SetLevelCommand(1, null).execute();
     SetCampaignCommand('Jaws of the Lion').execute();
-    AddMonsterCommand('Zealot', 1, false).execute();
+    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
   });
 
   // Zealot level 1: normal attack=2 move=2 range=0, elite attack=3 move=2 range=0
@@ -134,7 +134,7 @@ void main() {
 
   group('StatApplier.applyMonsterStats – with actual standees', () {
     test('normal standee present → shows normal stat', () {
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false)
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>())
           .execute();
       final result = StatApplier.applyMonsterStats(
           '%attack% +0', '', zealot(), false);
@@ -146,7 +146,7 @@ void main() {
     });
 
     test('elite standee present → shows both normal and elite stat', () {
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.elite, false)
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.elite, false, gameState: getIt<GameState>())
           .execute();
       final result = StatApplier.applyMonsterStats(
           '%attack% +0', '', zealot(), false);
@@ -183,7 +183,7 @@ void main() {
       SetLevelCommand(1, null).execute();
       SetCampaignCommand('Jaws of the Lion').execute();
       // Black Sludge has %shield% 1 in both normal and elite at level 1
-      AddMonsterCommand('Black Sludge', 1, false).execute();
+      AddMonsterCommand('Black Sludge', 1, false, gameState: getIt<GameState>()).execute();
     });
 
     Monster blackSludge() =>

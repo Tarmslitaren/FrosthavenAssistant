@@ -56,7 +56,7 @@ class SelectHealthWheelState extends State<SelectHealthWheel> {
       //in case figure killed by other device double check
       if (GameMethods.getFigure(widget.ownerId, widget.figureId) != null) {
         getIt<GameState>().action(
-            ChangeHealthCommand(value, widget.figureId, widget.ownerId));
+            ChangeHealthCommand(value, widget.figureId, widget.ownerId, gameState: getIt<GameState>()));
       }
       selected = widget.data.maxHealth.value -
           (widget.data.maxHealth.value - widget.data.health.value);

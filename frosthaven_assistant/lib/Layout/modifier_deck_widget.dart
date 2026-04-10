@@ -274,7 +274,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                             setState(() {
                               _animationsEnabled = true;
                               _gameState
-                                  .action(DrawModifierCardCommand(widget.name));
+                                  .action(DrawModifierCardCommand(widget.name, gameState: getIt<GameState>()));
                             });
                           },
                           child: Stack(children: [
@@ -296,7 +296,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                                     _animationsEnabled = true;
                                                     _gameState.action(
                                                         DrawModifierCardCommand(
-                                                            widget.name));
+                                                            widget.name, gameState: getIt<GameState>()));
                                                   });
                                                 })))
                                   ])
@@ -319,7 +319,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                                   _animationsEnabled = true;
                                                   _gameState.action(
                                                       DrawModifierCardCommand(
-                                                          widget.name));
+                                                          widget.name, gameState: getIt<GameState>()));
                                                 });
                                               },
                                               child: Center(

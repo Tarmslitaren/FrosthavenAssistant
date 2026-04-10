@@ -18,7 +18,7 @@ void main() {
 
   group('CharacterSummonsButton', () {
     testWidgets('renders without error', (WidgetTester tester) async {
-      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Banner Spear') as Character;
       final originalOnError = FlutterError.onError;
@@ -37,7 +37,7 @@ void main() {
 
     testWidgets('tapping icon button opens AddSummonMenu',
         (WidgetTester tester) async {
-      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e.id == 'Banner Spear') as Character;
       final originalOnError = FlutterError.onError;

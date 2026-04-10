@@ -1,16 +1,17 @@
-import '../../../services/service_locator.dart';
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class ChangeBlessCommand extends ChangeStatCommand {
   ModifierDeck? deck;
-  ChangeBlessCommand(super.change, super.figureId, super.ownerId);
-  ChangeBlessCommand.deck(this.deck) : super(0, '', '');
+  ChangeBlessCommand(super.change, super.figureId, super.ownerId,
+      {required super.gameState});
+  ChangeBlessCommand.deck(this.deck, {required GameState gameState})
+      : super(0, '', '', gameState: gameState);
 
   @override
   void execute() {
-    final gameState = getIt<GameState>();
     if (deck == null) {
       deck = gameState.modifierDeck;
       for (var item in gameState.currentList) {
@@ -29,11 +30,6 @@ class ChangeBlessCommand extends ChangeStatCommand {
     }
 
     deck?.addRemovableValue("bless", change);
-  }
-
-  @override
-  void undo() {
-    getIt<GameState>().updateList.value++;
   }
 
   @override

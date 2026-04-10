@@ -16,7 +16,7 @@ void main() {
   group('ClearUnlockedClassesCommand', () {
     test('should clear unlocked classes', () {
       // Arrange
-      AddCharacterCommand("Banner Spear", "Frosthaven", "Banny", 1)
+      AddCharacterCommand("Banner Spear", "Frosthaven", "Banny", 1, gameState: getIt<GameState>())
           .execute(); //test data BS is hidden class
 
       final gameState = getIt<GameState>();

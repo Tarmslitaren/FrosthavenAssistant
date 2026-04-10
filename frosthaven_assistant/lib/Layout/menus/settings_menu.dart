@@ -124,7 +124,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       getIt<GameState>().action(
-                                          TrackStandeesCommand(!value!));
+                                          TrackStandeesCommand(!value!, gameState: getIt<GameState>(), settings: getIt<Settings>()));
                                       settings.saveToDisk();
                                     });
                                   }),
@@ -209,7 +209,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   onChanged: (bool? value) {
                                     setState(() {
                                       getIt<GameState>().action(
-                                          SetAllyDeckInOgGloomCommand(value!));
+                                          SetAllyDeckInOgGloomCommand(value!, gameState: getIt<GameState>()));
                                       getIt<GameState>().updateAllUI();
                                     });
                                   }),

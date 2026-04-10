@@ -17,7 +17,7 @@ void main() {
   setUp(() {
     getIt<GameState>().clearList();
     // Banner Spear has summons defined in test data
-    AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1).execute();
+    AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
   });

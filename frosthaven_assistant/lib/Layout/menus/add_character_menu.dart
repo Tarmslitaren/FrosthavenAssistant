@@ -145,7 +145,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
     }
 
     AddCharacterCommand command =
-        AddCharacterCommand(character.id, character.edition, display, 1);
+        AddCharacterCommand(character.id, character.edition, display, 1, gameState: getIt<GameState>());
     _gameState.action(command);
 
     //open level menu

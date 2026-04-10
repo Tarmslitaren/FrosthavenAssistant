@@ -233,7 +233,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                   if (deck.drawPileIsNotEmpty) {
                                     setState(() {
                                       _animationsEnabled = true;
-                                      _gameState.action(DrawLootCardCommand());
+                                      _gameState.action(DrawLootCardCommand(gameState: getIt<GameState>()));
                                     });
                                   }
                                 },

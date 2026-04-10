@@ -12,33 +12,33 @@ void main() {
 
   group('SetAllyDeckInOgGloomCommand', () {
     test('should set allyDeckInOGGloom to false', () {
-      SetAllyDeckInOgGloomCommand(false).execute();
+      SetAllyDeckInOgGloomCommand(false, gameState: getIt<GameState>()).execute();
       expect(getIt<GameState>().allyDeckInOGGloom.value, isFalse);
       checkSaveState();
     });
 
     test('should set allyDeckInOGGloom to true', () {
-      SetAllyDeckInOgGloomCommand(false).execute();
-      SetAllyDeckInOgGloomCommand(true).execute();
+      SetAllyDeckInOgGloomCommand(false, gameState: getIt<GameState>()).execute();
+      SetAllyDeckInOgGloomCommand(true, gameState: getIt<GameState>()).execute();
       expect(getIt<GameState>().allyDeckInOGGloom.value, isTrue);
       checkSaveState();
     });
 
     test('describe when false returns no-ally string', () {
-      final command = SetAllyDeckInOgGloomCommand(false);
+      final command = SetAllyDeckInOgGloomCommand(false, gameState: getIt<GameState>());
       expect(command.describe(),
           'No ally deck in 1st edition Gloomhaven campaigns');
     });
 
     test('describe when true returns use-ally string', () {
-      final command = SetAllyDeckInOgGloomCommand(true);
+      final command = SetAllyDeckInOgGloomCommand(true, gameState: getIt<GameState>());
       expect(command.describe(),
           'Use Ally Deck in 1st edition Gloomhaven Campaigns');
     });
 
     test('undo does not throw', () {
       final gs = getIt<GameState>();
-      gs.action(SetAllyDeckInOgGloomCommand(true));
+      gs.action(SetAllyDeckInOgGloomCommand(true, gameState: getIt<GameState>()));
       expect(() => gs.undo(), returnsNormally);
     });
   });

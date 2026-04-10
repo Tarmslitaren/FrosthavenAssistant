@@ -12,26 +12,26 @@ void main() {
 
   group('AMDCassandraSpecialCommand', () {
     test('should set cassandraSpecial to true on main deck', () {
-      AMDCassandraSpecialCommand('', true).execute();
+      AMDCassandraSpecialCommand('', true, gameState: getIt<GameState>()).execute();
       expect(getIt<GameState>().modifierDeck.cassandraSpecial.value, isTrue);
       checkSaveState();
     });
 
     test('should set cassandraSpecial to false on main deck', () {
-      AMDCassandraSpecialCommand('', true).execute();
-      AMDCassandraSpecialCommand('', false).execute();
+      AMDCassandraSpecialCommand('', true, gameState: getIt<GameState>()).execute();
+      AMDCassandraSpecialCommand('', false, gameState: getIt<GameState>()).execute();
       expect(getIt<GameState>().modifierDeck.cassandraSpecial.value, isFalse);
       checkSaveState();
     });
 
     test('describe when on returns leave-revealed string', () {
-      final command = AMDCassandraSpecialCommand('Blinkblade', true);
+      final command = AMDCassandraSpecialCommand('Blinkblade', true, gameState: getIt<GameState>());
       expect(command.describe(),
           'Leave revealed cards on top of Blinkblade deck');
     });
 
     test('describe when off returns turned-off string', () {
-      final command = AMDCassandraSpecialCommand('Blinkblade', false);
+      final command = AMDCassandraSpecialCommand('Blinkblade', false, gameState: getIt<GameState>());
       expect(command.describe(),
           'Cassandra Special turned off for Blinkblade deck');
     });

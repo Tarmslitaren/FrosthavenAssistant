@@ -52,21 +52,21 @@ void main() {
     testWidgets('renders Character Decks button when character with perks exists',
         (WidgetTester tester) async {
       // Blinkblade has perks
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       await pumpWidget(tester);
       expect(find.text('Character Decks'), findsOneWidget);
     });
 
     testWidgets('renders ElevatedButton when character with perks exists',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       await pumpWidget(tester);
       expect(find.byType(ElevatedButton), findsOneWidget);
     });
 
     testWidgets('tapping Character Decks button does not throw',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       await pumpWidget(tester);
 
       final originalOnError = FlutterError.onError;
@@ -95,8 +95,8 @@ void main() {
 
     testWidgets('widget renders without error with two characters',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
-      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 2).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 2, gameState: getIt<GameState>()).execute();
       await pumpWidget(tester);
       expect(find.text('Character Decks'), findsOneWidget);
     });

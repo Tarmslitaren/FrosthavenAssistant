@@ -80,7 +80,7 @@ class LootCardListTileState extends State<LootCardListTile> {
     return ListTile(
       onTap: () {
         setState(() {
-          getIt<GameState>().action(AddLootCardCommand(widget.name));
+          getIt<GameState>().action(AddLootCardCommand(widget.name, gameState: getIt<GameState>()));
         });
       },
       contentPadding: const EdgeInsets.only(left: 14),

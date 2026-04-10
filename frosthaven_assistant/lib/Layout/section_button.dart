@@ -29,7 +29,7 @@ class SectionButton extends StatelessWidget {
             ),
             onPressed: !getIt<GameState>().scenarioSectionsAdded.contains(data)
                 ? () {
-                    getIt<GameState>().action(SetScenarioCommand(data, true));
+                    getIt<GameState>().action(SetScenarioCommand(data, true, gameState: getIt<GameState>()));
                   }
                 : null,
             child: Text(

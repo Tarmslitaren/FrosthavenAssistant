@@ -66,7 +66,7 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                       if (addedCard == null &&
                           !GameMethods.isCardInAnyCharacterDeck(item.gfx)) {
                         getIt<GameState>().action(
-                            AddFactionCardCommand(widget.name, item.gfx, true));
+                            AddFactionCardCommand(widget.name, item.gfx, true, gameState: getIt<GameState>()));
                         setState(() {
                           addedCard = item.gfx;
                         });
@@ -100,7 +100,7 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                         final cardToRemove = addedCard;
                         if (cardToRemove != null) {
                           getIt<GameState>().action(AddFactionCardCommand(
-                              widget.name, cardToRemove, false));
+                              widget.name, cardToRemove, false, gameState: getIt<GameState>()));
                         }
                         setState(() {
                           addedCard = null;

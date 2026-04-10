@@ -125,7 +125,7 @@ void main() {
     testWidgets('tapping Undo calls undo on game state',
         (WidgetTester tester) async {
       // Do an action first so undo is enabled
-      getIt<GameState>().action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1));
+      getIt<GameState>().action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()));
       final gameState = getIt<GameState>();
       final indexBefore = gameState.commandIndex.value;
 
@@ -140,7 +140,7 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       // Do an action and undo it so redo is available
-      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1));
+      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()));
       gameState.undo();
       final indexBefore = gameState.commandIndex.value;
 
@@ -155,7 +155,7 @@ void main() {
         (WidgetTester tester) async {
       // Set up a valid scenario so AddSectionMenu can initialize
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('#0 Howling in the Snow', false).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
 
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Add Section'), 100);
@@ -189,7 +189,7 @@ void main() {
         (WidgetTester tester) async {
       // Set Frosthaven campaign so Loot Deck Menu appears
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('custom', false).execute();
+      SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
 
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Loot Deck Menu'), 100);
@@ -255,7 +255,7 @@ void main() {
       final gameState = getIt<GameState>();
       // Do an action so there's a description
       gameState.action(
-          AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1));
+          AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()));
 
       await pumpMenu(tester);
       // Undo text should include the command description
@@ -269,7 +269,7 @@ void main() {
       final gameState = getIt<GameState>();
       // Enable server mode — covers undoEnabled/redoEnabled server branches
       settings.server.value = true;
-      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1));
+      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()));
 
       await pumpMenu(tester);
       expect(find.textContaining('Undo'), findsOneWidget);

@@ -17,7 +17,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Zealot', 1, false).execute();
+    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -122,7 +122,7 @@ void main() {
       final gameState = getIt<GameState>();
       // Add standee 1 so it's already out
       gameState.action(
-          AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false));
+          AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>()));
 
       await pumpMenu(tester);
       // Button '1' should still render (greyed out, but visible)
@@ -153,7 +153,7 @@ void main() {
   group('AutoAddStandeeMenu large standee count', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Rat Monstrosity', 1, false).execute();
+      AddMonsterCommand('Rat Monstrosity', 1, false, gameState: getIt<GameState>()).execute();
     });
 
     Future<void> pumpLargeMenu(WidgetTester tester) async {
@@ -198,8 +198,8 @@ void main() {
   group('AutoAddStandeeMenu two-monster progression', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false).execute();
-      AddMonsterCommand('Vermling Raider', 1, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Vermling Raider', 1, false, gameState: getIt<GameState>()).execute();
     });
 
     testWidgets('while-loop skips zero-standee monster to next',

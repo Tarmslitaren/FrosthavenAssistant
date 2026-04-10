@@ -20,10 +20,10 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand("Zealot", 1, false).execute();
+    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;
-    AddStandeeCommand(1, null, monster.id, MonsterType.normal, false).execute();
+    AddStandeeCommand(1, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>()).execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;
     standee = monster.monsterInstances.first;
@@ -111,7 +111,7 @@ void main() {
 
       // Add the condition first
       getIt<GameState>()
-          .action(AddConditionCommand(Condition.muddle, figureId, monster.id));
+          .action(AddConditionCommand(Condition.muddle, figureId, monster.id, gameState: getIt<GameState>()));
       expect(standee.conditions.value, contains(Condition.muddle));
 
       await tester.pumpWidget(buildConditionButton(

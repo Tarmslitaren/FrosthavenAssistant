@@ -17,8 +17,8 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1).execute();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
   });
 
   group('ReorderListCommand', () {
@@ -27,19 +27,19 @@ void main() {
       final firstId = list[0].id;
       final secondId = list[1].id;
 
-      ReorderListCommand(0, 1).execute();
+      ReorderListCommand(0, 1, gameState: getIt<GameState>()).execute();
 
       expect(getIt<GameState>().currentList[0].id, secondId);
       expect(getIt<GameState>().currentList[1].id, firstId);
     });
 
     test('describe returns correct string', () {
-      expect(ReorderListCommand(0, 1).describe(), 'Reorder List');
+      expect(ReorderListCommand(0, 1, gameState: getIt<GameState>()).describe(), 'Reorder List');
     });
 
     test('undo does not throw', () {
       final gs = getIt<GameState>();
-      gs.action(ReorderListCommand(0, 1));
+      gs.action(ReorderListCommand(0, 1, gameState: getIt<GameState>()));
       expect(() => gs.undo(), returnsNormally);
     });
   });
@@ -54,7 +54,7 @@ void main() {
         final firstCardNr = deck.drawPileContents.toList()[0].nr;
         final secondCardNr = deck.drawPileContents.toList()[1].nr;
 
-        ReorderAbilityListCommand(monster.type.deck, 0, 1).execute();
+        ReorderAbilityListCommand(monster.type.deck, 0, 1, gameState: getIt<GameState>()).execute();
 
         expect(deck.drawPileContents.toList()[0].nr, secondCardNr);
         expect(deck.drawPileContents.toList()[1].nr, firstCardNr);
@@ -62,7 +62,7 @@ void main() {
     });
 
     test('describe returns correct string', () {
-      expect(ReorderAbilityListCommand('deck', 0, 1).describe(),
+      expect(ReorderAbilityListCommand('deck', 0, 1, gameState: getIt<GameState>()).describe(),
           'Reorder Ability Cards');
     });
   });
@@ -74,7 +74,7 @@ void main() {
         final firstGfx = deck.drawPileContents.toList()[0].gfx;
         final secondGfx = deck.drawPileContents.toList()[1].gfx;
 
-        ReorderModifierListCommand(0, 1, '').execute();
+        ReorderModifierListCommand(0, 1, '', gameState: getIt<GameState>()).execute();
 
         expect(deck.drawPileContents.toList()[0].gfx, secondGfx);
         expect(deck.drawPileContents.toList()[1].gfx, firstGfx);
@@ -82,7 +82,7 @@ void main() {
     });
 
     test('describe returns correct string', () {
-      expect(ReorderModifierListCommand(0, 1, '').describe(),
+      expect(ReorderModifierListCommand(0, 1, '', gameState: getIt<GameState>()).describe(),
           'Reorder Modifier Cards');
     });
   });

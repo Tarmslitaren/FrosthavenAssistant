@@ -13,7 +13,7 @@ void main() {
 
   group('ReturnModifierCardCommand', () {
     test('should move top discard card back to draw pile', () {
-      DrawModifierCardCommand('').execute();
+      DrawModifierCardCommand('', gameState: getIt<GameState>()).execute();
       final deck = getIt<GameState>().modifierDeck;
       final drawBefore = deck.drawPileSize;
       final discardBefore = deck.discardPileSize;

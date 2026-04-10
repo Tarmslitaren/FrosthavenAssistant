@@ -70,7 +70,8 @@ class Settings {
   void loadSave(String saveName) {
     String? save = saves.value[saveName];
     if (save != null) {
-      getIt<GameState>().action(LoadSaveCommand(saveName, save));
+      getIt<GameState>().action(LoadSaveCommand(saveName, save,
+          gameState: getIt<GameState>()));
     }
   }
 
@@ -97,7 +98,8 @@ class Settings {
   void loadCharacterSave(String saveName) {
     String? save = characterSaves.value[saveName];
     if (save != null) {
-      getIt<GameState>().action(LoadCharacterSaveCommand(saveName, save));
+      getIt<GameState>().action(LoadCharacterSaveCommand(saveName, save,
+          gameState: getIt<GameState>()));
     }
   }
 

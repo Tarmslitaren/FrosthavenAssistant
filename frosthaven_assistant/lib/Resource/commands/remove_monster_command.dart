@@ -1,11 +1,11 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class RemoveMonsterCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
   final List<Monster> names;
 
-  RemoveMonsterCommand(this.names);
+  RemoveMonsterCommand(this.names, {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {

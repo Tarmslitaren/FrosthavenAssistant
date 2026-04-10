@@ -48,7 +48,7 @@ void main() {
       getIt<Settings>().hideLootDeck.value = true;
       // Set up a loot deck so it would normally show
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('#0 Howling in the Snow', false).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
 
       await pumpWidget(tester);
       expect(find.byType(InkWell), findsNothing);
@@ -61,7 +61,7 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('#0 Howling in the Snow', false).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
     });
 
     testWidgets('renders InkWell for draw pile when deck has cards',

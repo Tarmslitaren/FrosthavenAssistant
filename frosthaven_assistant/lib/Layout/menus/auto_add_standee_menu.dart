@@ -133,7 +133,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
         onPressed: () {
           if (!isOut) {
             _gameState.action(
-                AddStandeeCommand(nr, null, monster.id, type, addAsSummon));
+                AddStandeeCommand(nr, null, monster.id, type, addAsSummon, gameState: getIt<GameState>()));
             if (elite) {
               setState(() {
                 currentEliteAdded++;
@@ -166,7 +166,7 @@ class AddStandeeMenuState extends State<AutoAddStandeeMenu> {
                   !initialNormalAdded[currentMonsterIndex]
                       .contains(state.standeeNr)) {
                 _gameState
-                    .action(ChangeHealthCommand(-10000, figureId, monster.id));
+                    .action(ChangeHealthCommand(-10000, figureId, monster.id, gameState: getIt<GameState>()));
 
                 setState(() {
                   if (state.type == MonsterType.elite) {

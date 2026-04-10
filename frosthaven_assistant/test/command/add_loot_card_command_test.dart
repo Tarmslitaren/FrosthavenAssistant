@@ -16,13 +16,13 @@ void main() {
     getIt<GameState>().clearList();
     // A scenario is needed to initialize the loot deck
     SetCampaignCommand("Frosthaven").execute();
-    SetScenarioCommand('#0 Howling in the Snow', false).execute();
+    SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
   });
 
   group('AddLootCardCommand', () {
     test('should add a specified loot card to the deck', () {
       // Arrange
-      final command = AddLootCardCommand('lumber');
+      final command = AddLootCardCommand('lumber', gameState: getIt<GameState>());
       final lootDeck = getIt<GameState>().lootDeck;
       final initialCardCount = lootDeck.drawPileSize;
 
@@ -36,7 +36,7 @@ void main() {
 
     test('describe should return the correct string', () {
       // Arrange
-      final command = AddLootCardCommand('hides');
+      final command = AddLootCardCommand('hides', gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Add hides Loot Card');

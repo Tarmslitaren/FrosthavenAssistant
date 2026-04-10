@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -68,9 +68,9 @@ void main() {
         (WidgetTester tester) async {
       // Set up a Frosthaven scenario with loot deck
       getIt<GameState>().clearList();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('#0 Howling in the Snow', false).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
 
       final gs = getIt<GameState>();
       final character =
@@ -78,7 +78,7 @@ void main() {
 
       // Draw and assign loot cards if deck has any
       if (gs.lootDeck.drawPileIsNotEmpty) {
-        DrawLootCardCommand().execute();
+        DrawLootCardCommand(gameState: getIt<GameState>()).execute();
         // SetLootOwnerCommand assigns ownership of discard pile cards
         if (gs.lootDeck.discardPileIsNotEmpty) {
           SetLootOwnerCommand(character.id,

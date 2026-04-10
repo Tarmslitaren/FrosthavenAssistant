@@ -15,25 +15,25 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1).execute();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
   });
 
   group('DrawCommand', () {
     test('should set round state to playTurns', () {
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
       expect(getIt<GameState>().roundState.value, RoundState.playTurns);
       checkSaveState();
     });
 
     test('should set first list item turn state to current', () {
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
       expect(getIt<GameState>().currentList.first.turnState.value,
           TurnsState.current);
     });
 
     test('describe returns "Draw"', () {
-      expect(DrawCommand().describe(), 'Draw');
+      expect(DrawCommand(gameState: getIt<GameState>()).describe(), 'Draw');
     });
   });
 }

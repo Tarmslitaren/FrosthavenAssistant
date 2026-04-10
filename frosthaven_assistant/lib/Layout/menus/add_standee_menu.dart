@@ -91,7 +91,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
         onPressed: () {
           if (!isOut) {
             _gameState.action(AddStandeeCommand(
-                nr, null, widget.monster.id, type, addAsSummon));
+                nr, null, widget.monster.id, type, addAsSummon, gameState: getIt<GameState>()));
           }
         },
       ),

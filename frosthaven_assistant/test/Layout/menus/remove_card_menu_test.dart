@@ -18,7 +18,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand("Zealot", 1, false).execute();
+    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
     DrawAbilityCardCommand("Zealot").execute();
     abilityState = getIt<GameState>().currentAbilityDecks.first;
   });

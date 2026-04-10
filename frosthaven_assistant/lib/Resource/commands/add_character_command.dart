@@ -1,16 +1,17 @@
-import '../../services/service_locator.dart';
 import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class AddCharacterCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
   final String _id;
   final String _edition;
   final int _level;
   final String? _display;
   late Character character;
 
-  AddCharacterCommand(this._id, this._edition, this._display, this._level) {
+  AddCharacterCommand(this._id, this._edition, this._display, this._level,
+      {required GameState gameState})
+      : _gameState = gameState {
     character = MutableGameMethods.createCharacter(
         stateAccess, _id, _edition, _display, _level)!;
   }

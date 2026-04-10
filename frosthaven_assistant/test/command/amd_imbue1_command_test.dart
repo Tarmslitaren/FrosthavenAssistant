@@ -12,13 +12,13 @@ void main() {
   });
 
   setUp(() {
-    AMDRemoveImbueCommand().execute();
+    AMDRemoveImbueCommand(gameState: getIt<GameState>()).execute();
   });
 
   group('AMDImbue1Command', () {
     test('should set imbue1 on the monster modifier deck', () {
       // Arrange
-      final command = AMDImbue1Command();
+      final command = AMDImbue1Command(gameState: getIt<GameState>());
       final monsterDeck = getIt<GameState>().modifierDeck;
       expect(monsterDeck.imbuement.value, 0);
 
@@ -36,7 +36,7 @@ void main() {
 
     test('describe should return correct string', () {
       // Arrange
-      final command = AMDImbue1Command();
+      final command = AMDImbue1Command(gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Imbue Monster Deck');

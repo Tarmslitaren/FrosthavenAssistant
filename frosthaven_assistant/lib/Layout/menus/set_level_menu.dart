@@ -183,7 +183,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                   ),
                   onPressed: () {
                     if (!isCurrentlySelected) {
-                      _gameState.action(SetDifficultyCommand(nr));
+                      _gameState.action(SetDifficultyCommand(nr, gameState: getIt<GameState>()));
                     }
                   },
                 )),
@@ -296,7 +296,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                               color: darkMode ? Colors.white : Colors.black),
                           onChanged: (bool? newValue) {
                             _gameState
-                                .action(SetAutoLevelAdjustCommand(newValue!));
+                                .action(SetAutoLevelAdjustCommand(newValue!, gameState: getIt<GameState>()));
                           },
                           value: _gameState.autoScenarioLevel.value,
                         );
@@ -315,7 +315,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   CounterButton(
                       notifier: widget.figure!.maxHealth,
-                      command: ChangeMaxHealthCommand(0, figureId, ownerId),
+                      command: ChangeMaxHealthCommand(0, figureId, ownerId, gameState: getIt<GameState>()),
                       maxValue: 900,
                       image: "assets/images/abilities/heal.png",
                       showTotalValue: true,

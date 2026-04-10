@@ -18,7 +18,7 @@ void main() {
   setUp(() {
     getIt<GameState>().clearList();
     // Draw a card to populate the discard pile
-    DrawModifierCardCommand(deckName).execute();
+    DrawModifierCardCommand(deckName, gameState: getIt<GameState>()).execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {

@@ -9,6 +9,8 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../command/test_helpers.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
+import 'package:frosthaven_assistant/Resource/game_data.dart';
 
 void main() {
   setUpAll(() async {
@@ -17,7 +19,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
   });
 
   Future<void> pumpCharacterWidget(WidgetTester tester) async {
@@ -84,7 +86,7 @@ void main() {
     testWidgets('renders health wheel when not in chooseInitiative round state',
         (WidgetTester tester) async {
       // Draw changes roundState to playTurns, triggering buildWithHealthWheel path
-      DrawCommand().execute();
+      DrawCommand(gameState: getIt<GameState>()).execute();
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
@@ -102,7 +104,7 @@ void main() {
       FlutterError.onError = originalOnError;
       expect(find.byType(CharacterWidget), findsOneWidget);
       // Reset round state (NextRoundCommand also has 600ms timer — pump past it)
-      NextRoundCommand().execute();
+      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
       await tester.pump(const Duration(milliseconds: 700));
     });
   });

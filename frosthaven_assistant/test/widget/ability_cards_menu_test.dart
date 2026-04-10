@@ -21,7 +21,7 @@ void main() {
   // This ensures that our tests are independent and not affecting each other.
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand("Zealot", 1, false).execute();
+    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
     DrawAbilityCardCommand("Zealot").execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;

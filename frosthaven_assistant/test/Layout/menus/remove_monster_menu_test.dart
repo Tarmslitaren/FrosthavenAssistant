@@ -17,8 +17,8 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand("Zealot", 1, false).execute();
-    AddMonsterCommand("Ancient Artillery (FH)", 1, false).execute();
+    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand("Ancient Artillery (FH)", 1, false, gameState: getIt<GameState>()).execute();
     final monsters =
         getIt<GameState>().currentList.whereType<Monster>().toList();
     zealotDisplay = monsters.firstWhere((m) => m.id == 'Zealot').type.display;

@@ -23,7 +23,7 @@ void main() {
     // Set Frosthaven campaign with 'custom' scenario to populate loot deck
     // without triggering monster creation (which fails in test data)
     SetCampaignCommand('Frosthaven').execute();
-    SetScenarioCommand('custom', false).execute();
+    SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -103,21 +103,21 @@ void main() {
       expect(gameState.lootDeck.hasCard1418, !hadBefore);
       // restore
       gameState.action(hadBefore
-          ? AddSpecialLootCardCommand(1418)
-          : RemoveSpecialLootCardCommand(1418));
+          ? AddSpecialLootCardCommand(1418, gameState: getIt<GameState>())
+          : RemoveSpecialLootCardCommand(1418, gameState: getIt<GameState>()));
     });
 
     testWidgets('Return to Top button appears when discard pile has cards',
         (WidgetTester tester) async {
       // Draw a loot card to populate the discard pile
-      getIt<GameState>().action(DrawLootCardCommand());
+      getIt<GameState>().action(DrawLootCardCommand(gameState: getIt<GameState>()));
       await pumpMenu(tester);
       expect(find.text('Return to Top'), findsOneWidget);
     });
 
     testWidgets('tapping Return to Top moves card from discard to draw pile',
         (WidgetTester tester) async {
-      getIt<GameState>().action(DrawLootCardCommand());
+      getIt<GameState>().action(DrawLootCardCommand(gameState: getIt<GameState>()));
       final gameState = getIt<GameState>();
       final discardBefore = gameState.lootDeck.discardPileSize;
       final drawBefore = gameState.lootDeck.drawPileSize;

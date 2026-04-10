@@ -109,7 +109,7 @@ void main() {
       test('undo after adding a monster removes it from the list', () {
         final gs = getIt<GameState>();
         gs.clearList();
-        gs.action(AddMonsterCommand('Zealot', 1, false));
+        gs.action(AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()));
         expect(gs.currentList.any((e) => e.id == 'Zealot'), isTrue);
         gs.undo();
         expect(gs.currentList.any((e) => e.id == 'Zealot'), isFalse);

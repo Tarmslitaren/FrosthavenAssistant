@@ -1,10 +1,10 @@
-import '../../../services/service_locator.dart';
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
 
 class ChangeHealthCommand extends ChangeStatCommand {
-  ChangeHealthCommand(super.change, super.figureId, super.ownerId);
+  ChangeHealthCommand(super.change, super.figureId, super.ownerId,
+      {required super.gameState});
 
   @override
   void execute() {
@@ -20,18 +20,13 @@ class ChangeHealthCommand extends ChangeStatCommand {
       final newValue = figure.health.value;
       if (previousValue <= 0 && newValue > 0) {
         //un death
-        getIt<GameState>().updateList.value++;
+        gameState.updateList.value++;
       }
 
       if (newValue <= 0) {
         handleDeath();
       }
     }
-  }
-
-  @override
-  void undo() {
-    getIt<GameState>().updateList.value++;
   }
 
   @override

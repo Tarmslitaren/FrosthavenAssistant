@@ -1,4 +1,3 @@
-import '../../../services/service_locator.dart';
 import '../../enums.dart';
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
@@ -7,14 +6,18 @@ abstract class ChangeStatCommand extends Command {
   final String? ownerId;
   int change;
   final String figureId;
-  ChangeStatCommand(this.change, this.figureId, this.ownerId);
+  // Public so subclasses in other files can access it
+  final GameState gameState;
+
+  ChangeStatCommand(this.change, this.figureId, this.ownerId,
+      {required this.gameState});
 
   void setChange(int change) {
     this.change = change;
   }
 
   void handleDeath() {
-    for (var item in getIt<GameState>().currentList) {
+    for (var item in gameState.currentList) {
       if (item is Monster) {
         List<MonsterInstance> newList = [];
         newList.addAll(item.monsterInstances);
@@ -23,10 +26,10 @@ abstract class ChangeStatCommand extends Command {
             newList.remove(instance);
             item.setMonsterInstances(stateAccess, newList);
             Future.delayed(const Duration(milliseconds: 600), () {
-              getIt<GameState>().killMonsterStandee.value++;
+              gameState.killMonsterStandee.value++;
             });
 
-            final roundState = getIt<GameState>().roundState.value;
+            final roundState = gameState.roundState.value;
             if (item.monsterInstances.isEmpty) {
               item.setActive(stateAccess, false);
               if (roundState == RoundState.chooseInitiative) {
@@ -34,10 +37,10 @@ abstract class ChangeStatCommand extends Command {
               }
               if (roundState == RoundState.playTurns) {
                 Future.delayed(const Duration(milliseconds: 600), () {
-                  getIt<GameState>().updateList.value++;
+                  gameState.updateList.value++;
                 });
               } else {
-                getIt<GameState>().updateList.value++;
+                gameState.updateList.value++;
               }
             }
             break;
@@ -46,7 +49,7 @@ abstract class ChangeStatCommand extends Command {
       } else if (item is Character) {
         //handle character death
         if (item.characterState.health.value <= 0) {
-          getIt<GameState>().updateList.value++;
+          gameState.updateList.value++;
         }
 
         //handle summon death
@@ -56,20 +59,19 @@ abstract class ChangeStatCommand extends Command {
             if (!GameMethods.summonDoesNotDie(item.id, instance.name)) {
               item.characterState.removeSummon(stateAccess, instance);
               Future.delayed(const Duration(milliseconds: 600), () {
-                getIt<GameState>().killMonsterStandee.value++;
+                gameState.killMonsterStandee.value++;
               });
 
               if (item.characterState.summonList.isEmpty) {
-                if (getIt<GameState>().roundState.value ==
-                    RoundState.playTurns) {
+                if (gameState.roundState.value == RoundState.playTurns) {
                   Future.delayed(const Duration(milliseconds: 600), () {
-                    getIt<GameState>().updateList.value++;
+                    gameState.updateList.value++;
                   });
                 } else {
-                  getIt<GameState>().updateList.value++;
+                  gameState.updateList.value++;
                 }
               } else {
-                getIt<GameState>().updateList.value++;
+                gameState.updateList.value++;
               }
               break;
             }
@@ -81,7 +83,7 @@ abstract class ChangeStatCommand extends Command {
 
   @override
   void undo() {
-    getIt<GameState>().updateList.value++;
+    gameState.updateList.value++;
   }
 
   @override

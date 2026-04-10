@@ -123,9 +123,9 @@ void main() {
     });
 
     test('substitutes C with actual character count when ≥ 2', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
-      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1).execute();
-      AddCharacterCommand('Hail', 'Mercenary Packs', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Hail', 'Mercenary Packs', null, 1, gameState: getIt<GameState>()).execute();
       // 3 characters → C = 3
       expect(StatCalculator.calculateFormula('C'), 3);
     });

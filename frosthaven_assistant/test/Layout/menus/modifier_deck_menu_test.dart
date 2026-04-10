@@ -91,7 +91,7 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       // First add a -1 card so we can remove it
-      gameState.action(AmdAddMinusOneCommand(deckName));
+      gameState.action(AmdAddMinusOneCommand(deckName, gameState: getIt<GameState>()));
       final deck = GameMethods.getModifierDeck(deckName, gameState);
       final before = deck.addedMinusOnes.value;
 
@@ -190,7 +190,7 @@ void main() {
       final gameState = getIt<GameState>();
       final deck = GameMethods.getModifierDeck(deckName, gameState);
       // First set imbuement to 1
-      gameState.action(AMDImbue1Command());
+      gameState.action(AMDImbue1Command(gameState: getIt<GameState>()));
 
       await pumpMenu(tester);
       await tester.tap(find.text('Remove Imbue'));
@@ -263,7 +263,7 @@ void main() {
   group('ModifierDeckMenu character deck', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
     });
 
     Future<void> pumpCharacterMenu(WidgetTester tester) async {
@@ -344,7 +344,7 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       // Draw a card to move it from draw pile to discard pile
-      gameState.action(DrawModifierCardCommand(deckName));
+      gameState.action(DrawModifierCardCommand(deckName, gameState: getIt<GameState>()));
 
       final originalOnError = FlutterError.onError;
       addTearDown(() => FlutterError.onError = originalOnError);

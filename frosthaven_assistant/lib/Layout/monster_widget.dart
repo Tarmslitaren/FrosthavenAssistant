@@ -158,7 +158,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                           ? InkWell(
                               onTap: () {
                                 getIt<GameState>()
-                                    .action(TurnDoneCommand(widget.data.id));
+                                    .action(TurnDoneCommand(widget.data.id, gameState: getIt<GameState>()));
                               },
                               child: buildImagePart(height, scale))
                           : buildImagePart(height, scale),

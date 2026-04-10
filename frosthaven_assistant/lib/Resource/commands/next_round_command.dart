@@ -2,7 +2,6 @@ import 'package:collection/collection.dart';
 import 'package:frosthaven_assistant/Model/scenario.dart';
 
 import '../../Layout/main_list.dart';
-import '../../services/service_locator.dart';
 import '../enums.dart';
 import '../game_data.dart';
 import '../game_methods.dart';
@@ -10,8 +9,17 @@ import '../settings.dart';
 import '../state/game_state.dart';
 
 class NextRoundCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
-  final GameData _gameData = getIt<GameData>();
+  final GameState _gameState;
+  final GameData _gameData;
+  final Settings _settings;
+
+  NextRoundCommand(
+      {required GameState gameState,
+      required GameData gameData,
+      required Settings settings})
+      : _gameState = gameState,
+        _gameData = gameData,
+        _settings = settings;
 
   @override
   void execute() {
@@ -46,7 +54,7 @@ class NextRoundCommand extends Command {
         for (int round in rule.list) {
           //minus 1 means always
           if (round == _gameState.round.value || round == -1) {
-            if (getIt<Settings>().showReminders.value) {
+            if (_settings.showReminders.value) {
               MutableGameMethods.setToastMessage(rule.note);
             }
 
@@ -67,7 +75,7 @@ class NextRoundCommand extends Command {
               MutableGameMethods.setToastMessage(
                   "$toastMessage\n\n${rule.note}");
             } else {
-              if (getIt<Settings>().showReminders.value) {
+              if (_settings.showReminders.value) {
                 MutableGameMethods.setToastMessage("$toastMessage${rule.note}");
               }
             }
@@ -110,7 +118,7 @@ class NextRoundCommand extends Command {
   }
 
   void _handleTimedSpawns(SpecialRule rule) {
-    if (getIt<Settings>().autoAddSpawns.value) {
+    if (_settings.autoAddSpawns.value) {
       if (rule.name.isNotEmpty) {
         //get room data and deal with spawns
         ScenarioModel? scenario = _gameData

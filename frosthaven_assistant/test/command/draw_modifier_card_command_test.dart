@@ -16,7 +16,7 @@ void main() {
       final drawBefore = deck.drawPileSize;
       final discardBefore = deck.discardPileSize;
 
-      DrawModifierCardCommand('').execute();
+      DrawModifierCardCommand('', gameState: getIt<GameState>()).execute();
 
       expect(deck.drawPileSize, drawBefore - 1);
       expect(deck.discardPileSize, discardBefore + 1);
@@ -24,12 +24,12 @@ void main() {
     });
 
     test('describe with empty name returns monster string', () {
-      final command = DrawModifierCardCommand('');
+      final command = DrawModifierCardCommand('', gameState: getIt<GameState>());
       expect(command.describe(), 'Draw monster modifier card');
     });
 
     test('describe with non-empty name includes name', () {
-      final command = DrawModifierCardCommand('Blinkblade');
+      final command = DrawModifierCardCommand('Blinkblade', gameState: getIt<GameState>());
       expect(command.describe(), 'Draw Blinkblade modifier card');
     });
   });

@@ -17,7 +17,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
   });
 
   Character _getBlinkblade() =>
@@ -77,7 +77,7 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       // DrawCommand transitions to playTurns
-      gameState.action(DrawCommand());
+      gameState.action(DrawCommand(gameState: getIt<GameState>()));
       expect(gameState.roundState.value, RoundState.playTurns);
 
       final character = _getBlinkblade();
@@ -93,8 +93,8 @@ void main() {
       final gameState = getIt<GameState>();
       final character = _getBlinkblade();
       // Set initiative then advance to playTurns via DrawCommand
-      SetInitCommand(character.id, 42).execute();
-      gameState.action(DrawCommand());
+      SetInitCommand(character.id, 42, gameState: getIt<GameState>()).execute();
+      gameState.action(DrawCommand(gameState: getIt<GameState>()));
       expect(gameState.roundState.value, RoundState.playTurns);
 
       await pumpWidget(tester, character);
@@ -110,7 +110,7 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       final character = _getBlinkblade();
-      gameState.action(DrawCommand());
+      gameState.action(DrawCommand(gameState: getIt<GameState>()));
       expect(gameState.roundState.value, RoundState.playTurns);
 
       await pumpWidget(tester, character);

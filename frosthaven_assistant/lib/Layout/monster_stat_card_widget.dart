@@ -26,7 +26,7 @@ class MonsterStatCardWidget extends StatelessWidget {
     Settings settings = getIt<Settings>();
     if (settings.noStandees.value) {
       getIt<GameState>()
-          .action(ActivateMonsterTypeCommand(data.id, !data.isActive));
+          .action(ActivateMonsterTypeCommand(data.id, !data.isActive, gameState: getIt<GameState>()));
       return;
     }
 
@@ -61,7 +61,7 @@ class MonsterStatCardWidget extends StatelessWidget {
                   : left
                       ? MonsterType.normal
                       : MonsterType.elite,
-              false));
+              false, gameState: getIt<GameState>()));
         }
       } else {
         openDialog(

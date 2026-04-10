@@ -4,11 +4,12 @@ import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import 'test_helpers.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 void tests() {
   String oldState = gameState.toString();
   AddCharacterCommand command =
-      AddCharacterCommand("Hatchet", "Jaws of the Lion", "Arnold", 9);
+      AddCharacterCommand("Hatchet", "Jaws of the Lion", "Arnold", 9, gameState: getIt<GameState>());
   command.execute();
 
   test("added ok", () {

@@ -19,7 +19,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
+    AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;
   });
@@ -63,14 +63,14 @@ void main() {
 
   group('ShuffleAMDCardCommand', () {
     test('describe returns correct string', () {
-      expect(ShuffleAMDCardCommand('').describe(), 'Extra AMD deck shuffle');
+      expect(ShuffleAMDCardCommand('', gameState: getIt<GameState>()).describe(), 'Extra AMD deck shuffle');
     });
 
     test('should shuffle modifier deck draw pile', () {
       final deck = getIt<GameState>().modifierDeck;
       final sizeBefore = deck.drawPileSize;
 
-      ShuffleAMDCardCommand('').execute();
+      ShuffleAMDCardCommand('', gameState: getIt<GameState>()).execute();
 
       expect(deck.drawPileSize, sizeBefore);
     });

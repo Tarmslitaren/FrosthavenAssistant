@@ -20,7 +20,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
   });
 
   Character _getBlinkblade() {
@@ -195,8 +195,8 @@ void main() {
   group('StatusMenu monster', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false).execute();
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>()).execute();
     });
 
     Monster _getZealot() {
@@ -305,8 +305,8 @@ void main() {
   group('StatusMenu elite monster', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false).execute();
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.elite, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.elite, false, gameState: getIt<GameState>()).execute();
     });
 
     testWidgets('elite monster menu renders without error (covers elite branch)',
@@ -348,13 +348,13 @@ void main() {
   group('StatusMenu monster with characters present', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
-      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1).execute();
-      AddCharacterCommand('Hatchet', 'Jaws of the Lion', null, 1).execute();
-      AddCharacterCommand('Demolitionist', 'Jaws of the Lion', null, 1)
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Hatchet', 'Jaws of the Lion', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Demolitionist', 'Jaws of the Lion', null, 1, gameState: getIt<GameState>())
           .execute();
-      AddMonsterCommand('Zealot', 1, false).execute();
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>()).execute();
     });
 
     testWidgets(
@@ -436,7 +436,7 @@ void main() {
       // Pre-add chill so the minus button's condition (value > 0) is true
       final character = _getBlinkblade();
       AddConditionCommand(
-              Condition.chill, character.id, character.id)
+              Condition.chill, character.id, character.id, gameState: getIt<GameState>())
           .execute();
       expect(character.characterState.chill.value, greaterThan(0));
 

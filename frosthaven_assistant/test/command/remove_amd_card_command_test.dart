@@ -14,12 +14,12 @@ void main() {
 
   group('RemoveAMDCardCommand', () {
     test('should move card from discard to removed pile', () {
-      DrawModifierCardCommand('').execute();
+      DrawModifierCardCommand('', gameState: getIt<GameState>()).execute();
       final deck = getIt<GameState>().modifierDeck;
       final discardBefore = deck.discardPileSize;
       final removedBefore = deck.removedPileSize;
 
-      RemoveAMDCardCommand(0, '').execute();
+      RemoveAMDCardCommand(0, '', gameState: getIt<GameState>()).execute();
 
       expect(deck.discardPileSize, discardBefore - 1);
       expect(deck.removedPileSize, removedBefore + 1);
@@ -27,20 +27,20 @@ void main() {
     });
 
     test('describe returns correct string', () {
-      final command = RemoveAMDCardCommand(0, '');
+      final command = RemoveAMDCardCommand(0, '', gameState: getIt<GameState>());
       expect(command.describe(), 'Remove amd card');
     });
   });
 
   group('ReturnRemovedAMDCardCommand', () {
     test('should move card from removed pile back to discard', () {
-      DrawModifierCardCommand('').execute();
-      RemoveAMDCardCommand(0, '').execute();
+      DrawModifierCardCommand('', gameState: getIt<GameState>()).execute();
+      RemoveAMDCardCommand(0, '', gameState: getIt<GameState>()).execute();
       final deck = getIt<GameState>().modifierDeck;
       final discardBefore = deck.discardPileSize;
       final removedBefore = deck.removedPileSize;
 
-      ReturnRemovedAMDCardCommand(0, '').execute();
+      ReturnRemovedAMDCardCommand(0, '', gameState: getIt<GameState>()).execute();
 
       expect(deck.removedPileSize, removedBefore - 1);
       expect(deck.discardPileSize, discardBefore + 1);
@@ -48,7 +48,7 @@ void main() {
     });
 
     test('describe returns correct string', () {
-      final command = ReturnRemovedAMDCardCommand(0, '');
+      final command = ReturnRemovedAMDCardCommand(0, '', gameState: getIt<GameState>());
       expect(command.describe(), 'Return removed amd card');
     });
   });

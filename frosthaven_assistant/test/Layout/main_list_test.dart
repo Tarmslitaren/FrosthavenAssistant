@@ -62,22 +62,22 @@ void main() {
 
     testWidgets('renders CharacterWidget when a character is added',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       await pumpWidget(tester);
       expect(find.byType(CharacterWidget), findsOneWidget);
     });
 
     testWidgets('renders MonsterWidget when a monster is added',
         (WidgetTester tester) async {
-      AddMonsterCommand('Zealot', 1, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
       await pumpWidget(tester);
       expect(find.byType(MonsterWidget), findsOneWidget);
     });
 
     testWidgets('renders both CharacterWidget and MonsterWidget together',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
-      AddMonsterCommand('Zealot', 1, false).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
       await pumpWidget(tester);
       expect(find.byType(CharacterWidget), findsOneWidget);
       expect(find.byType(MonsterWidget), findsOneWidget);
@@ -85,7 +85,7 @@ void main() {
 
     testWidgets('renders Item wrapper for each list element',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       await pumpWidget(tester);
       expect(find.byType(Item), findsAtLeast(1));
     });
@@ -102,7 +102,7 @@ void main() {
   group('Item widget', () {
     testWidgets('wraps CharacterWidget in AnimatedContainer',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final character = getIt<GameState>().currentList
           .firstWhere((e) => e is Character) as Character;
       final originalOnError = FlutterError.onError;
@@ -121,7 +121,7 @@ void main() {
 
     testWidgets('wraps MonsterWidget in AnimatedContainer',
         (WidgetTester tester) async {
-      AddMonsterCommand('Zealot', 1, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
       final monster = getIt<GameState>().currentList
           .firstWhere((e) => e is Monster) as Monster;
       final originalOnError = FlutterError.onError;

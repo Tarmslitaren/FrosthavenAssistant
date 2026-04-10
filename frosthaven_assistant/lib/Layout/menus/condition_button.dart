@@ -170,10 +170,10 @@ class ConditionButton extends StatelessWidget {
                     ? () {
                         if (!isActive) {
                           gameState.action(AddConditionCommand(
-                              condition, figureId, ownerId));
+                              condition, figureId, ownerId, gameState: getIt<GameState>()));
                         } else {
                           gameState.action(RemoveConditionCommand(
-                              condition, figureId, ownerId));
+                              condition, figureId, ownerId, gameState: getIt<GameState>()));
                         }
                       }
                     : null,

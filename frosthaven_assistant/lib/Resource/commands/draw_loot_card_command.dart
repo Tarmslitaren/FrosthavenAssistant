@@ -1,10 +1,10 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class DrawLootCardCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
 
-  DrawLootCardCommand();
+  DrawLootCardCommand({required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {

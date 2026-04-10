@@ -16,7 +16,7 @@ void main() {
     testWidgets('should display the ability card and be dismissible',
         (WidgetTester tester) async {
       // Arrange
-      AddMonsterCommand("Zealot", 1, false).execute();
+      AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
       final monster = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Monster) as Monster;
@@ -65,7 +65,7 @@ void main() {
     testWidgets('should display the ability card with calculateAll true',
         (WidgetTester tester) async {
       // Arrange
-      AddMonsterCommand("Zealot", 1, false).execute();
+      AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
       //DrawAbilityCardCommand("Zealot").execute();
       final monster = getIt<GameState>()
           .currentList

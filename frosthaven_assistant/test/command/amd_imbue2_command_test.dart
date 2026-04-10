@@ -13,13 +13,13 @@ void main() {
   });
 
   setUp(() {
-    AMDRemoveImbueCommand().execute();
+    AMDRemoveImbueCommand(gameState: getIt<GameState>()).execute();
   });
 
   group('AMDImbue2Command', () {
     test('should set imbue2 on the monster modifier deck', () {
       // Arrange
-      final command = AMDImbue2Command();
+      final command = AMDImbue2Command(gameState: getIt<GameState>());
       final monsterDeck = getIt<GameState>().modifierDeck;
       expect(monsterDeck.imbuement.value, 0);
       final initialCardCount = monsterDeck.drawPileSize;
@@ -37,8 +37,8 @@ void main() {
     test('should set imbue2 on the monster modifier deck after imbue 1 set',
         () {
       // Arrange
-      AMDImbue1Command().execute();
-      final command = AMDImbue2Command();
+      AMDImbue1Command(gameState: getIt<GameState>()).execute();
+      final command = AMDImbue2Command(gameState: getIt<GameState>());
       final monsterDeck = getIt<GameState>().modifierDeck;
       expect(monsterDeck.imbuement.value, 1);
       final initialCardCount = monsterDeck.drawPileSize;
@@ -55,7 +55,7 @@ void main() {
 
     test('describe should return correct string', () {
       // Arrange
-      final command = AMDImbue2Command();
+      final command = AMDImbue2Command(gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Advanced Imbue Monster Deck');

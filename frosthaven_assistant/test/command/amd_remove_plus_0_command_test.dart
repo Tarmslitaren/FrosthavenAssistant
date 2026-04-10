@@ -13,7 +13,7 @@ void main() {
 
   setUp(() {
     // Setting a scenario resets the modifier decks to their default state.
-    final command = SetScenarioCommand('#5 A Deeper Understanding', false);
+    final command = SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>());
     command.execute();
   });
 
@@ -23,7 +23,7 @@ void main() {
       final modifierDeck = getIt<GameState>().modifierDeck;
       final initialCount =
           modifierDeck.drawPileContents.toList().where((c) => c.gfx == 'plus0').length;
-      final command = AmdRemovePlus0Command("", true);
+      final command = AmdRemovePlus0Command("", true, gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -39,7 +39,7 @@ void main() {
       final modifierDeck = getIt<GameState>().modifierDeck;
       final initialCount =
           modifierDeck.drawPileContents.toList().where((c) => c.gfx == 'plus0').length;
-      final command = AmdRemovePlus0Command("", true);
+      final command = AmdRemovePlus0Command("", true, gameState: getIt<GameState>());
 
       // Act
       command.execute(); // Remove one card
@@ -50,7 +50,7 @@ void main() {
       expect(countAfterRemove, initialCount - 1);
 
       // Act: Add the card back
-      AmdRemovePlus0Command("", false).execute();
+      AmdRemovePlus0Command("", false, gameState: getIt<GameState>()).execute();
 
       // Assert
       final countAfterAdd =
@@ -63,7 +63,7 @@ void main() {
       final modifierDeck = getIt<GameState>().modifierDeckAllies;
       final initialCount =
           modifierDeck.drawPileContents.toList().where((c) => c.gfx == 'plus0').length;
-      final command = AmdRemovePlus0Command("allies", true);
+      final command = AmdRemovePlus0Command("allies", true, gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -76,7 +76,7 @@ void main() {
 
     test('describe should return correct string', () {
       // Arrange
-      final command = AmdRemovePlus0Command("", true);
+      final command = AmdRemovePlus0Command("", true, gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Remove plus zero');

@@ -18,8 +18,8 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
-    AddMonsterCommand("Ancient Artillery (FH)", 1, false).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand("Ancient Artillery (FH)", 1, false, gameState: getIt<GameState>()).execute();
 
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
@@ -31,7 +31,7 @@ void main() {
     test('should add a standee to a monster', () {
       // Arrange
       final command =
-          AddStandeeCommand(1, null, monster.id, MonsterType.normal, false);
+          AddStandeeCommand(1, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -49,7 +49,7 @@ void main() {
       // Arrange
       final summonData = SummonData(1, 'Test Summon', 10, 2, 2, 0, 'test_gfx');
       final command = AddStandeeCommand(
-          1, summonData, character.id, MonsterType.summon, true);
+          1, summonData, character.id, MonsterType.summon, true, gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -67,7 +67,7 @@ void main() {
     test('undo should not remove the standee (as currently implemented)', () {
       // Arrange
       final command =
-          AddStandeeCommand(1, null, monster.id, MonsterType.normal, false);
+          AddStandeeCommand(1, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>());
       command.execute();
       final monsterAfterExecute = getIt<GameState>()
           .currentList
@@ -85,7 +85,7 @@ void main() {
     test('describe should return correct string for a monster standee', () {
       // Arrange
       final command =
-          AddStandeeCommand(1, null, monster.id, MonsterType.normal, false);
+          AddStandeeCommand(1, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Add Ancient Artillery (FH) 1');
@@ -95,7 +95,7 @@ void main() {
       // Arrange
       final summonData = SummonData(1, 'Test Summon', 10, 2, 2, 0, 'test_gfx');
       final command = AddStandeeCommand(
-          1, summonData, character.id, MonsterType.summon, true);
+          1, summonData, character.id, MonsterType.summon, true, gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Add Test Summon 1');

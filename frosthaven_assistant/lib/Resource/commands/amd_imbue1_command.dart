@@ -1,12 +1,13 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class AMDImbue1Command extends Command {
-  AMDImbue1Command();
+  final GameState _gameState;
+
+  AMDImbue1Command({required GameState gameState}) : _gameState = gameState;
 
   @override
   void execute() {
-    ModifierDeck deck = getIt<GameState>().modifierDeck;
+    ModifierDeck deck = _gameState.modifierDeck;
     deck.setImbue1(stateAccess);
   }
 

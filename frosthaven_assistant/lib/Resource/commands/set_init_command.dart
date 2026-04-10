@@ -1,12 +1,12 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class SetInitCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
   final String _characterId;
   final int _init;
 
-  SetInitCommand(this._characterId, this._init);
+  SetInitCommand(this._characterId, this._init, {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {

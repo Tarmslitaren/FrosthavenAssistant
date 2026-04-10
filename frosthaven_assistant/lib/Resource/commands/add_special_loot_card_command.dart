@@ -1,18 +1,19 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class AddSpecialLootCardCommand extends Command {
   int nr;
-  AddSpecialLootCardCommand(this.nr);
+  final GameState _gameState;
+
+  AddSpecialLootCardCommand(this.nr, {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {
-    GameState gameState = getIt<GameState>();
     if (nr == 1418) {
-      gameState.lootDeck.addSpecial1418(stateAccess);
+      _gameState.lootDeck.addSpecial1418(stateAccess);
     }
     if (nr == 1419) {
-      gameState.lootDeck.addSpecial1419(stateAccess);
+      _gameState.lootDeck.addSpecial1419(stateAccess);
     }
   }
 

@@ -1,13 +1,15 @@
 import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class RemoveCardCommand extends Command {
   final MonsterAbilityCardModel card;
-  final GameState _gameState = getIt<GameState>();
-  RemoveCardCommand(this.card);
+  final GameState _gameState;
+
+  RemoveCardCommand(this.card, {required GameState gameState})
+      : _gameState = gameState;
   @override
   void execute() {
     for (var deck in _gameState.currentAbilityDecks) {
@@ -35,7 +37,7 @@ class RemoveCardCommand extends Command {
 
   @override
   void undo() {
-    getIt<GameState>().updateList.value++;
+    _gameState.updateList.value++;
   }
 
   @override

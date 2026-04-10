@@ -70,7 +70,7 @@ void main() {
     testWidgets('ctrl z undoes and ctrl y redoes', (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       gameState.action(
-        AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1),
+        AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1, gameState: getIt<GameState>()),
       );
 
       await pumpHotkeys(tester);
@@ -85,15 +85,15 @@ void main() {
 
     testWidgets('tab advances activation and shift tab undoes it',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1)
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1, gameState: getIt<GameState>())
           .execute();
-      AddCharacterCommand('Banner Spear', 'Frosthaven', 'Banner Spear', 1)
+      AddCharacterCommand('Banner Spear', 'Frosthaven', 'Banner Spear', 1, gameState: getIt<GameState>())
           .execute();
-      SetInitCommand('Blinkblade', 25).execute();
-      SetInitCommand('Banner Spear', 30).execute();
+      SetInitCommand('Blinkblade', 25, gameState: getIt<GameState>()).execute();
+      SetInitCommand('Banner Spear', 30, gameState: getIt<GameState>()).execute();
       final gameState = getIt<GameState>();
 
-      gameState.action(DrawCommand());
+      gameState.action(DrawCommand(gameState: getIt<GameState>()));
       await tester.pump(const Duration(milliseconds: 600));
       await pumpHotkeys(tester);
 
@@ -113,9 +113,9 @@ void main() {
     });
 
     testWidgets('space runs draw action', (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1)
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1, gameState: getIt<GameState>())
           .execute();
-      SetInitCommand('Blinkblade', 25).execute();
+      SetInitCommand('Blinkblade', 25, gameState: getIt<GameState>()).execute();
       final gameState = getIt<GameState>();
 
       await pumpHotkeys(tester);
@@ -145,7 +145,7 @@ void main() {
 
     testWidgets('shortcuts are ignored while text input is focused',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1)
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinkblade', 1, gameState: getIt<GameState>())
           .execute();
       final gameState = getIt<GameState>();
 

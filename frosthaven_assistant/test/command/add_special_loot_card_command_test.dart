@@ -17,13 +17,13 @@ void main() {
     //getIt<GameState>().reset();
     // A scenario is needed to initialize the loot deck
     SetCampaignCommand("Frosthaven").execute();
-    SetScenarioCommand('#0 Howling in the Snow', false).execute();
+    SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
   });
 
   group('AddSpecialLootCardCommand', () {
     test('should add special loot card 1418', () {
       // Arrange
-      final command = AddSpecialLootCardCommand(1418);
+      final command = AddSpecialLootCardCommand(1418, gameState: getIt<GameState>());
       final lootDeck = getIt<GameState>().lootDeck;
       final initialCardCount = lootDeck.drawPileSize;
 
@@ -40,7 +40,7 @@ void main() {
 
     test('should add special loot card 1419', () {
       // Arrange
-      final command = AddSpecialLootCardCommand(1419);
+      final command = AddSpecialLootCardCommand(1419, gameState: getIt<GameState>());
       final lootDeck = getIt<GameState>().lootDeck;
       final initialCardCount = lootDeck.drawPileSize;
 
@@ -57,7 +57,7 @@ void main() {
 
     test('should not add other cards', () {
       // Arrange
-      final command = AddSpecialLootCardCommand(9999);
+      final command = AddSpecialLootCardCommand(9999, gameState: getIt<GameState>());
       final lootDeck = getIt<GameState>().lootDeck;
       final initialCardCount = lootDeck.drawPileSize;
 
@@ -71,7 +71,7 @@ void main() {
 
     test('undo should not do anything (as currently implemented)', () {
       // Arrange
-      final command = AddSpecialLootCardCommand(1418);
+      final command = AddSpecialLootCardCommand(1418, gameState: getIt<GameState>());
       final lootDeck = getIt<GameState>().lootDeck;
       command.execute();
       final cardCountAfterExecute = lootDeck.drawPileSize;
@@ -86,7 +86,7 @@ void main() {
 
     test('describe should return correct string', () {
       // Arrange
-      final command = AddSpecialLootCardCommand(1418);
+      final command = AddSpecialLootCardCommand(1418, gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Add Special loot card 1418');

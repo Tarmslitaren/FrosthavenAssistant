@@ -1,12 +1,12 @@
-import '../../services/service_locator.dart';
 import '../game_methods.dart';
 import '../state/game_state.dart';
 
 class RemoveCharacterCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
   final List<Character> names;
 
-  RemoveCharacterCommand(this.names);
+  RemoveCharacterCommand(this.names, {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {

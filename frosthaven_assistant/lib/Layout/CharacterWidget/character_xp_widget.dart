@@ -21,11 +21,11 @@ class CharacterXPWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          _gameState.action(ChangeXPCommand(1, character.id, character.id));
+          _gameState.action(ChangeXPCommand(1, character.id, character.id, gameState: getIt<GameState>()));
         },
         onDoubleTap: () {
           if (character.characterState.xp.value > 0) {
-            _gameState.action(ChangeXPCommand(-1, character.id, character.id));
+            _gameState.action(ChangeXPCommand(-1, character.id, character.id, gameState: getIt<GameState>()));
           }
         },
         child: Row(

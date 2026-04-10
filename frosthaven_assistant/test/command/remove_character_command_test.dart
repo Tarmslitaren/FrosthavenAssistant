@@ -4,11 +4,12 @@ import 'package:frosthaven_assistant/Resource/commands/remove_character_command.
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import 'test_helpers.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 void tests() {
   String oldState = gameState.toString();
-  AddCharacterCommand("Hatchet", "Jaws of the Lion", "Arnold", 9).execute();
-  RemoveCharacterCommand(List.of([gameState.currentList.last as Character]))
+  AddCharacterCommand("Hatchet", "Jaws of the Lion", "Arnold", 9, gameState: getIt<GameState>()).execute();
+  RemoveCharacterCommand(List.of([gameState.currentList.last as Character]), gameState: getIt<GameState>())
       .execute();
   test("removed ok", () {
     assert(gameState.currentList.isEmpty);

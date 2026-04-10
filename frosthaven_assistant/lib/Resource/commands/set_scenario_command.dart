@@ -1,12 +1,13 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class SetScenarioCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
   late final String _scenario;
   late final bool _section;
 
-  SetScenarioCommand(this._scenario, this._section);
+  SetScenarioCommand(this._scenario, this._section,
+      {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {

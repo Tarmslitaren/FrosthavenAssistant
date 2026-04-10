@@ -1,17 +1,18 @@
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class AMDCassandraSpecialCommand extends Command {
   String deckId;
   bool on;
-  AMDCassandraSpecialCommand(this.deckId, this.on);
+  final GameState _gameState;
+
+  AMDCassandraSpecialCommand(this.deckId, this.on, {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {
-    GameState gameState = getIt<GameState>();
-    ModifierDeck deck = GameMethods.getModifierDeck(deckId, gameState);
+    ModifierDeck deck = GameMethods.getModifierDeck(deckId, _gameState);
     deck.setCassandraSpecial(stateAccess, on);
   }
 

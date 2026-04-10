@@ -79,7 +79,7 @@ class SpecialUnlocksMenu extends StatelessWidget {
                                         onChanged: (bool? value) {
                                           getIt<GameState>().action(
                                               UnlockSpecialCommand(
-                                                  _unlocks[index].first));
+                                                  _unlocks[index].first, gameState: getIt<GameState>()));
                                         },
                                         value:
                                             getEnabled(_unlocks[index].first),

@@ -14,7 +14,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
+    AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
   });
 
   group('DrawAbilityCardCommand', () {

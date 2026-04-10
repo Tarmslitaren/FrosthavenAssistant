@@ -1,4 +1,3 @@
-import '../../services/service_locator.dart';
 import '../enums.dart';
 import '../game_methods.dart';
 import '../state/game_state.dart';
@@ -6,9 +5,11 @@ import '../state/game_state.dart';
 class ActivateMonsterTypeCommand extends Command {
   final String name;
   final bool activate;
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
 
-  ActivateMonsterTypeCommand(this.name, this.activate);
+  ActivateMonsterTypeCommand(this.name, this.activate,
+      {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {
@@ -31,12 +32,12 @@ class ActivateMonsterTypeCommand extends Command {
             stateAccess, name, GameMethods.getInitiative(monster!));
       }
     }
-    if (getIt<GameState>().roundState.value == RoundState.playTurns) {
+    if (_gameState.roundState.value == RoundState.playTurns) {
       Future.delayed(const Duration(milliseconds: 600), () {
-        getIt<GameState>().updateList.value++;
+        _gameState.updateList.value++;
       });
     } else {
-      getIt<GameState>().updateList.value++;
+      _gameState.updateList.value++;
     }
   }
 

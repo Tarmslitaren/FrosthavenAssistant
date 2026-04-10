@@ -1,17 +1,19 @@
-
-import '../../services/service_locator.dart';
 import '../settings.dart';
 import '../state/game_state.dart';
 
 class TrackStandeesCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
+  final Settings _settings;
   final bool track;
 
-  TrackStandeesCommand(this.track);
+  TrackStandeesCommand(this.track,
+      {required GameState gameState, required Settings settings})
+      : _gameState = gameState,
+        _settings = settings;
 
   @override
   void execute() {
-    getIt<Settings>().noStandees.value = !track;
+    _settings.noStandees.value = !track;
     _handleNoStandeesSettingChange();
   }
 
@@ -29,20 +31,19 @@ class TrackStandeesCommand extends Command {
   }
 
   void _handleNoStandeesSettingChange() {
-    GameState gameState = getIt<GameState>();
-    if (getIt<Settings>().noStandees.value) {
-      for (var item in gameState.currentList) {
+    if (_settings.noStandees.value) {
+      for (var item in _gameState.currentList) {
         if (item is Monster) {
           item.clearMonsterInstances(stateAccess);
         }
       }
     } else {
-      for (var item in gameState.currentList) {
+      for (var item in _gameState.currentList) {
         if (item is Monster && item.isActive) {
           item.setActive(stateAccess, false);
         }
       }
     }
-    gameState.updateList.value++;
+    _gameState.updateList.value++;
   }
 }

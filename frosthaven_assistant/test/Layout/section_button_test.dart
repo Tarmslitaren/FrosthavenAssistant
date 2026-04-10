@@ -54,9 +54,9 @@ void main() {
     testWidgets('button is disabled after section is added via command',
         (WidgetTester tester) async {
       const sectionName = 'test-disabled-section';
-      // Add the section using SetScenarioCommand(name, true) — section=true path
+      // Add the section using SetScenarioCommand(name, true, gameState: getIt<GameState>()) — section=true path
       // does not crash for non-existent keys
-      SetScenarioCommand(sectionName, true).execute();
+      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>()).execute();
 
       await pumpWidget(tester, sectionName);
       final button = tester.widget<OutlinedButton>(find.byType(OutlinedButton));

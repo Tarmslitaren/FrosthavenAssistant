@@ -1,15 +1,17 @@
-import '../../services/service_locator.dart';
 import '../game_methods.dart';
 import '../state/game_state.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class DonateCSSanctuaryCommand extends Command {
   final String characterId;
-  DonateCSSanctuaryCommand(this.characterId);
+  final GameState _gameState;
+
+  DonateCSSanctuaryCommand(this.characterId, {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {
-    ModifierDeck? deck =
-        GameMethods.getModifierDeck(characterId, getIt<GameState>());
+    ModifierDeck? deck = GameMethods.getModifierDeck(characterId, _gameState);
     deck.addCSSanctuary(stateAccess);
   }
 

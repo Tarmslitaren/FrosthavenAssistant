@@ -15,14 +15,14 @@ void main() {
       // CorrosiveSpew targets "Ruinmaw" which falls through to the main deck
       expect(getIt<GameState>().modifierDeck.corrosiveSpew.value, isFalse);
 
-      CorrosiveSpewCommand().execute();
+      CorrosiveSpewCommand(gameState: getIt<GameState>()).execute();
 
       expect(getIt<GameState>().modifierDeck.corrosiveSpew.value, isTrue);
       checkSaveState();
     });
 
     test('describe returns correct string', () {
-      expect(CorrosiveSpewCommand().describe(), 'Corrosive Spew');
+      expect(CorrosiveSpewCommand(gameState: getIt<GameState>()).describe(), 'Corrosive Spew');
     });
   });
 }

@@ -43,7 +43,7 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
 
         if (indexToRemove != -1) {
           _gameState.action(
-              RemoveCharacterCommand([currentCharacters[indexToRemove]]));
+              RemoveCharacterCommand([currentCharacters[indexToRemove]], gameState: getIt<GameState>()));
         }
       });
     }
@@ -69,7 +69,7 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
               title: const Text("Remove All", style: kTitleStyle),
               onTap: () {
                 //todo: ask if wanna save
-                _gameState.action(RemoveCharacterCommand(currentCharacters));
+                _gameState.action(RemoveCharacterCommand(currentCharacters, gameState: getIt<GameState>()));
                 Navigator.pop(context);
               },
             ),

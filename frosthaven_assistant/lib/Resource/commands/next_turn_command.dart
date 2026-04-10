@@ -1,18 +1,20 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class TurnDoneCommand extends Command {
   late int index;
   late String id;
-  TurnDoneCommand(this.id) {
+  final GameState _gameState;
+
+  TurnDoneCommand(this.id, {required GameState gameState})
+      : _gameState = gameState {
     index = 0;
-    for (int i = 0; i < getIt<GameState>().currentList.length; i++) {
-      if (id == getIt<GameState>().currentList[i].id) {
+    for (int i = 0; i < _gameState.currentList.length; i++) {
+      if (id == _gameState.currentList[i].id) {
         index = i;
         break;
       }
     }
-    getIt<GameState>().updateList.value++;
+    _gameState.updateList.value++;
   }
 
   @override
@@ -22,7 +24,7 @@ class TurnDoneCommand extends Command {
 
   @override
   void undo() {
-    getIt<GameState>().updateList.value++;
+    _gameState.updateList.value++;
   }
 
   @override

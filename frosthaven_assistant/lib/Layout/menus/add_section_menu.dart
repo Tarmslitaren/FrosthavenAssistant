@@ -150,7 +150,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                                       .contains(_foundScenarios[index])) {
                                     Navigator.pop(context);
                                     _gameState.action(SetScenarioCommand(
-                                        _foundScenarios[index], true));
+                                        _foundScenarios[index], true, gameState: getIt<GameState>()));
                                   }
                                 },
                               ),

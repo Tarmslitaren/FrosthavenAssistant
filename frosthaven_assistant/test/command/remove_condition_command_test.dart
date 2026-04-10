@@ -21,9 +21,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', '', 1).execute();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
-    AddStandeeCommand(1, null, 'Ancient Artillery (FH)', MonsterType.normal, false)
+    AddCharacterCommand('Blinkblade', 'Frosthaven', '', 1, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
+    AddStandeeCommand(1, null, 'Ancient Artillery (FH)', MonsterType.normal, false, gameState: getIt<GameState>())
         .execute();
 
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
@@ -35,12 +35,12 @@ void main() {
 
   group('RemoveConditionCommand', () {
     test('should remove a condition from a character', () {
-      AddConditionCommand(Condition.poison, character.id, character.id)
+      AddConditionCommand(Condition.poison, character.id, character.id, gameState: getIt<GameState>())
           .execute();
       expect(character.characterState.conditions.value,
           contains(Condition.poison));
 
-      RemoveConditionCommand(Condition.poison, character.id, character.id)
+      RemoveConditionCommand(Condition.poison, character.id, character.id, gameState: getIt<GameState>())
           .execute();
 
       expect(character.characterState.conditions.value,
@@ -50,11 +50,11 @@ void main() {
 
     test('should remove a condition from a monster instance', () {
       AddConditionCommand(
-              Condition.wound, monsterInstance.getId(), monster.id)
+              Condition.wound, monsterInstance.getId(), monster.id, gameState: getIt<GameState>())
           .execute();
       expect(monsterInstance.conditions.value, contains(Condition.wound));
 
-      RemoveConditionCommand(Condition.wound, monsterInstance.getId(), monster.id)
+      RemoveConditionCommand(Condition.wound, monsterInstance.getId(), monster.id, gameState: getIt<GameState>())
           .execute();
 
       expect(monsterInstance.conditions.value,
@@ -62,13 +62,13 @@ void main() {
     });
 
     test('should decrement chill counter when removing chill', () {
-      AddConditionCommand(Condition.chill, character.id, character.id)
+      AddConditionCommand(Condition.chill, character.id, character.id, gameState: getIt<GameState>())
           .execute();
-      AddConditionCommand(Condition.chill, character.id, character.id)
+      AddConditionCommand(Condition.chill, character.id, character.id, gameState: getIt<GameState>())
           .execute();
       expect(character.characterState.chill.value, 2);
 
-      RemoveConditionCommand(Condition.chill, character.id, character.id)
+      RemoveConditionCommand(Condition.chill, character.id, character.id, gameState: getIt<GameState>())
           .execute();
 
       expect(character.characterState.chill.value, 1);
@@ -76,7 +76,7 @@ void main() {
 
     test('describe should return correct string', () {
       final command =
-          RemoveConditionCommand(Condition.stun, character.id, character.id);
+          RemoveConditionCommand(Condition.stun, character.id, character.id, gameState: getIt<GameState>());
       expect(command.describe(), 'Remove condition: stun');
     });
   });

@@ -1,15 +1,16 @@
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-
-import '../../services/service_locator.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class ReturnLootCardCommand extends Command {
   final bool top;
+  final GameState _gameState;
 
-  ReturnLootCardCommand(this.top);
+  ReturnLootCardCommand(this.top, {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {
-    getIt<GameState>().lootDeck.returnLootCard(stateAccess, top);
+    _gameState.lootDeck.returnLootCard(stateAccess, top);
   }
 
   @override

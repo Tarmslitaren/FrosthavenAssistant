@@ -20,7 +20,7 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Zealot', 1, false).execute();
+    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;
   });
@@ -79,7 +79,7 @@ void main() {
     testWidgets('tapping image in playTurns state wraps image in InkWell',
         (WidgetTester tester) async {
       // Add a standee so the monster has instances
-      AddStandeeCommand(1, null, monster.id, MonsterType.normal, false)
+      AddStandeeCommand(1, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>())
           .execute();
       (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =
           RoundState.playTurns;
@@ -92,7 +92,7 @@ void main() {
 
       // restore
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
       monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
           as Monster;
       (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =

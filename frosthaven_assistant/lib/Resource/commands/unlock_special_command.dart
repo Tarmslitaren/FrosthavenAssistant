@@ -1,12 +1,12 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class UnlockSpecialCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
   final String _id;
   bool _unlock = true;
 
-  UnlockSpecialCommand(this._id);
+  UnlockSpecialCommand(this._id, {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {

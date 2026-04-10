@@ -24,7 +24,7 @@ void main() {
     });
 
     test('should set a specific monster level when monsterId is provided', () {
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false).execute();
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
       final monster = getIt<GameState>().currentList.firstWhere(
               (e) => e is Monster) as Monster;
 

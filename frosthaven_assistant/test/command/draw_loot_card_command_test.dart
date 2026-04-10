@@ -17,7 +17,7 @@ void main() {
     getIt<GameState>().clearList();
     // Frosthaven custom scenario creates a loot deck
     SetCampaignCommand('Frosthaven').execute();
-    SetScenarioCommand('custom', false).execute();
+    SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
   });
 
   group('DrawLootCardCommand', () {
@@ -28,7 +28,7 @@ void main() {
       final drawBefore = lootDeck.drawPileSize;
       final discardBefore = lootDeck.discardPileSize;
 
-      DrawLootCardCommand().execute();
+      DrawLootCardCommand(gameState: getIt<GameState>()).execute();
 
       expect(lootDeck.drawPileSize, drawBefore - 1);
       expect(lootDeck.discardPileSize, discardBefore + 1);
@@ -41,26 +41,26 @@ void main() {
           lootDeck.drawPileSize + lootDeck.discardPileSize;
       // Drain draw pile
       while (lootDeck.drawPileIsNotEmpty) {
-        DrawLootCardCommand().execute();
+        DrawLootCardCommand(gameState: getIt<GameState>()).execute();
       }
-      DrawLootCardCommand().execute(); // should not throw
+      DrawLootCardCommand(gameState: getIt<GameState>()).execute(); // should not throw
       expect(lootDeck.drawPileSize + lootDeck.discardPileSize,
           totalCards);
     });
 
     test('describe returns correct string', () {
-      expect(DrawLootCardCommand().describe(), 'Draw loot card');
+      expect(DrawLootCardCommand(gameState: getIt<GameState>()).describe(), 'Draw loot card');
     });
   });
 
   group('ReturnLootCardCommand', () {
     test('should return discard card to top of draw pile', () {
-      DrawLootCardCommand().execute();
+      DrawLootCardCommand(gameState: getIt<GameState>()).execute();
       final lootDeck = getIt<GameState>().lootDeck;
       final drawBefore = lootDeck.drawPileSize;
       final discardBefore = lootDeck.discardPileSize;
 
-      ReturnLootCardCommand(true).execute();
+      ReturnLootCardCommand(true, gameState: getIt<GameState>()).execute();
 
       expect(lootDeck.drawPileSize, drawBefore + 1);
       expect(lootDeck.discardPileSize, discardBefore - 1);
@@ -68,7 +68,7 @@ void main() {
     });
 
     test('describe returns correct string', () {
-      expect(ReturnLootCardCommand(true).describe(), 'Return loot card');
+      expect(ReturnLootCardCommand(true, gameState: getIt<GameState>()).describe(), 'Return loot card');
     });
   });
 }

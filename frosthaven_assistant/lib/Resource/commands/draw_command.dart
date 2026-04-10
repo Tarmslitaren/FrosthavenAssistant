@@ -1,12 +1,11 @@
 import '../../Layout/main_list.dart';
-import '../../services/service_locator.dart';
 import '../enums.dart';
 import '../state/game_state.dart';
 
 class DrawCommand extends Command {
-  final GameState _gameState = getIt<GameState>();
+  final GameState _gameState;
 
-  DrawCommand();
+  DrawCommand({required GameState gameState}) : _gameState = gameState;
 
   @override
   void execute() {

@@ -20,10 +20,10 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1).execute();
-    AddMonsterCommand("Ancient Artillery (FH)", 1, false).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand("Ancient Artillery (FH)", 1, false, gameState: getIt<GameState>()).execute();
     AddStandeeCommand(
-            1, null, "Ancient Artillery (FH)", MonsterType.normal, false)
+            1, null, "Ancient Artillery (FH)", MonsterType.normal, false, gameState: getIt<GameState>())
         .execute();
 
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
@@ -37,7 +37,7 @@ void main() {
     test('should add a condition to a character', () {
       // Arrange
       final command =
-          AddConditionCommand(Condition.poison, character.id, character.id);
+          AddConditionCommand(Condition.poison, character.id, character.id, gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -50,7 +50,7 @@ void main() {
     test('should add a condition to a monster instance', () {
       // Arrange
       final command = AddConditionCommand(
-          Condition.wound, monsterInstance.getId(), monster.id);
+          Condition.wound, monsterInstance.getId(), monster.id, gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -62,9 +62,9 @@ void main() {
     test('should increment chill counter when adding CHILL condition', () {
       // Arrange
       final command1 =
-          AddConditionCommand(Condition.chill, character.id, character.id);
+          AddConditionCommand(Condition.chill, character.id, character.id, gameState: getIt<GameState>());
       final command2 =
-          AddConditionCommand(Condition.chill, character.id, character.id);
+          AddConditionCommand(Condition.chill, character.id, character.id, gameState: getIt<GameState>());
 
       // Act
       command1.execute();
@@ -83,9 +83,9 @@ void main() {
     test('should not add a duplicate non-stacking condition', () {
       // Arrange
       final command1 =
-          AddConditionCommand(Condition.poison, character.id, character.id);
+          AddConditionCommand(Condition.poison, character.id, character.id, gameState: getIt<GameState>());
       final command2 =
-          AddConditionCommand(Condition.poison, character.id, character.id);
+          AddConditionCommand(Condition.poison, character.id, character.id, gameState: getIt<GameState>());
 
       // Act
       command1.execute();
@@ -103,7 +103,7 @@ void main() {
         () {
       // Arrange
       final command =
-          AddConditionCommand(Condition.poison, character.id, character.id);
+          AddConditionCommand(Condition.poison, character.id, character.id, gameState: getIt<GameState>());
       command.execute();
       final conditionsAfterExecute =
           List.from(character.characterState.conditions.value);
@@ -120,7 +120,7 @@ void main() {
     test('describe should return correct string for character', () {
       // Arrange
       final command =
-          AddConditionCommand(Condition.muddle, character.id, character.id);
+          AddConditionCommand(Condition.muddle, character.id, character.id, gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Add condition: muddle');
@@ -129,7 +129,7 @@ void main() {
     test('describe should return correct string for monster', () {
       // Arrange
       final command = AddConditionCommand(
-          Condition.stun, monster.id, monsterInstance.getId());
+          Condition.stun, monster.id, monsterInstance.getId(), gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Add condition: stun');

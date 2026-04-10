@@ -1,19 +1,20 @@
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
 
 class BadOmenCommand extends Command {
   late final bool allies;
-  BadOmenCommand(this.allies);
+  final GameState _gameState;
+
+  BadOmenCommand(this.allies, {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {
-    GameState gameState = getIt<GameState>();
     if (allies) {
-      gameState.modifierDeckAllies.setBadOmen(
-          stateAccess, gameState.modifierDeckAllies.badOmen.value + 6);
+      _gameState.modifierDeckAllies.setBadOmen(
+          stateAccess, _gameState.modifierDeckAllies.badOmen.value + 6);
     } else {
-      gameState.modifierDeck
-          .setBadOmen(stateAccess, gameState.modifierDeck.badOmen.value + 6);
+      _gameState.modifierDeck
+          .setBadOmen(stateAccess, _gameState.modifierDeck.badOmen.value + 6);
     }
   }
 

@@ -81,7 +81,7 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
             if (init != null && init != 0) {
               CharacterWidgetInternal.localCharacterInitChanges
                   .add(character.id);
-              _gameState.action(SetInitCommand(character.id, init));
+              _gameState.action(SetInitCommand(character.id, init, gameState: getIt<GameState>()));
             }
           }
           break;
@@ -182,7 +182,7 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
                         _focusNode.requestFocus();
                       }
                     } else {
-                      getIt<GameState>().action(TurnDoneCommand(character.id));
+                      getIt<GameState>().action(TurnDoneCommand(character.id, gameState: getIt<GameState>()));
                     }
                     //if in choose mode - focus the input or open the soft numpad if that option is on
                     //else: mark as done

@@ -62,7 +62,7 @@ class GlobalHotkeys extends StatelessWidget {
 
     for (final item in gameState.currentList) {
       if (item.turnState.value == TurnsState.current) {
-        gameState.action(TurnDoneCommand(item.id));
+        gameState.action(TurnDoneCommand(item.id, gameState: getIt<GameState>()));
         return;
       }
     }

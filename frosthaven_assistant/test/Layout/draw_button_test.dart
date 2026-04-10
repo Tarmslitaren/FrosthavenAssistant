@@ -73,7 +73,7 @@ void main() {
     testWidgets('tapping in playTurns advances to next round',
         (WidgetTester tester) async {
       // NextRoundCommand calls currentList.last — needs at least one item
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =
           RoundState.playTurns;
       final roundBefore = getIt<GameState>().round.value;
@@ -93,7 +93,7 @@ void main() {
         'tapping Draw with character having initiative set executes DrawCommand',
         (WidgetTester tester) async {
       // Add a character and set their initiative
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
       final gameState = getIt<GameState>();
       final character = gameState.currentList
           .firstWhere((e) => e is Character) as Character;

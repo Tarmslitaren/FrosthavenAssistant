@@ -1,18 +1,21 @@
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 
-import '../../services/service_locator.dart';
 import '../state/game_state.dart';
+import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class ReorderAbilityListCommand extends Command {
   late final int newIndex;
   late final int oldIndex;
   late final String deck;
-  ReorderAbilityListCommand(this.deck, this.newIndex, this.oldIndex);
+  final GameState _gameState;
+
+  ReorderAbilityListCommand(this.deck, this.newIndex, this.oldIndex,
+      {required GameState gameState})
+      : _gameState = gameState;
 
   @override
   void execute() {
-    GameState gameState = getIt<GameState>();
-    for (var item in gameState.currentAbilityDecks) {
+    for (var item in _gameState.currentAbilityDecks) {
       if (item.name == deck) {
         item.reorderDrawPile(stateAccess, oldIndex, newIndex);
         break;
