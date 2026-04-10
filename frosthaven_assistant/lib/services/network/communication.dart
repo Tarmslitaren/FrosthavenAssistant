@@ -10,7 +10,10 @@ class Communication {
   static const beginning = "S3nD:";
   static const end = "[EOM]";
   final messageTemplate = "$beginning{}$end";
-  final _connection = getIt<Connection>();
+  final Connection _connection;
+
+  Communication({Connection? connection})
+      : _connection = connection ?? getIt<Connection>();
 
   // TODO: Need to test this somehow, or refactor altogether.
   // If testing, then better to verify assigned functions are being called on specific actions, rather than verify mock socket assignments.

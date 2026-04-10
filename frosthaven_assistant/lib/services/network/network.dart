@@ -6,10 +6,12 @@ import 'network_info.dart';
 enum ClientState { connected, disconnected, connecting }
 
 class Network {
-  final Server server = Server();
+  final Server server;
   final NetworkInformation networkInfo = NetworkInformation();
   final networkMessage = ValueNotifier<String>("");
 
   bool appInBackground = false;
   bool clientDisconnectedWhileInBackground = false;
+
+  Network({Server? server}) : server = server ?? Server();
 }

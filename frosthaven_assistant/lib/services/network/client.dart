@@ -14,11 +14,23 @@ import 'connection.dart';
 class Client {
   String _leftOverMessage = "";
   bool _serverResponsive = true;
-  final _gameState = getIt<GameState>();
-  final _communication = getIt<Communication>();
-  final _connection = getIt<Connection>();
-  final _network = getIt<Network>();
-  final _settings = getIt<Settings>();
+  final GameState _gameState;
+  final Communication _communication;
+  final Connection _connection;
+  final Network _network;
+  final Settings _settings;
+
+  Client(
+      {GameState? gameState,
+      Communication? communication,
+      Connection? connection,
+      Network? network,
+      Settings? settings})
+      : _gameState = gameState ?? getIt<GameState>(),
+        _communication = communication ?? getIt<Communication>(),
+        _connection = connection ?? getIt<Connection>(),
+        _network = network ?? getIt<Network>(),
+        _settings = settings ?? getIt<Settings>();
 
   Future<void> connect(String address) async {
     _serverResponsive = true;

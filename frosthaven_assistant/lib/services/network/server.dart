@@ -13,9 +13,17 @@ import 'connection.dart';
 import 'network.dart';
 
 class Server extends GameServer {
-  final GameState _gameState = getIt<GameState>();
-  final _communication = getIt<Communication>();
-  final _connection = getIt<Connection>();
+  final GameState _gameState;
+  final Communication _communication;
+  final Connection _connection;
+
+  Server(
+      {GameState? gameState,
+      Communication? communication,
+      Connection? connection})
+      : _gameState = gameState ?? getIt<GameState>(),
+        _communication = communication ?? getIt<Communication>(),
+        _connection = connection ?? getIt<Connection>();
 
   @override
   bool get serverEnabled {
