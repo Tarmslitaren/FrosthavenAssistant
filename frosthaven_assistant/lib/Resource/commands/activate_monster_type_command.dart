@@ -25,10 +25,10 @@ class ActivateMonsterTypeCommand extends Command {
     if (activate) {
       final roundState = _gameState.roundState.value;
       if (roundState == RoundState.chooseInitiative) {
-        MutableGameMethods.sortCharactersFirst(stateAccess);
+        RoundMethods.sortCharactersFirst(stateAccess);
       } else if (roundState == RoundState.playTurns) {
-        MutableGameMethods.drawAbilityCardFromInactiveDeck(stateAccess);
-        MutableGameMethods.sortItemToPlace(
+        DeckMethods.drawAbilityCardFromInactiveDeck(stateAccess);
+        RoundMethods.sortItemToPlace(
             stateAccess, name, GameMethods.getInitiative(monster!));
       }
     }

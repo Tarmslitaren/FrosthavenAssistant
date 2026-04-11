@@ -9,9 +9,9 @@ class DrawCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.drawAbilityCards(stateAccess);
-    MutableGameMethods.sortByInitiative(stateAccess);
-    MutableGameMethods.setRoundState(stateAccess, RoundState.playTurns);
+    DeckMethods.drawAbilityCards(stateAccess);
+    RoundMethods.sortByInitiative(stateAccess);
+    RoundMethods.setRoundState(stateAccess, RoundState.playTurns);
     if (_gameState.currentList.isNotEmpty) {
       _gameState.currentList[0].setTurnState(stateAccess, TurnsState.current);
     }

@@ -33,21 +33,21 @@ class NextRoundCommand extends Command {
         item.sortMonsterInstances(stateAccess);
       }
     }
-    MutableGameMethods.shuffleDecksIfNeeded(stateAccess);
-    MutableGameMethods.updateElements(stateAccess);
-    MutableGameMethods.setRoundState(stateAccess, RoundState.chooseInitiative);
+    DeckMethods.shuffleDecksIfNeeded(stateAccess);
+    ElementMethods.updateElements(stateAccess);
+    RoundMethods.setRoundState(stateAccess, RoundState.chooseInitiative);
     if (_gameState.currentList.last.turnState.value != TurnsState.done) {
-      MutableGameMethods.setTurnDone(
+      RoundMethods.setTurnDone(
           stateAccess, _gameState.currentList.length - 1);
     }
     if (_gameState.currentList.last.turnState.value != TurnsState.done) {
-      MutableGameMethods.setTurnDone(
+      RoundMethods.setTurnDone(
           stateAccess, _gameState.currentList.length - 1);
     }
-    MutableGameMethods.clearTurnState(stateAccess, false);
-    MutableGameMethods.sortCharactersFirst(stateAccess);
+    RoundMethods.clearTurnState(stateAccess, false);
+    RoundMethods.sortCharactersFirst(stateAccess);
 
-    MutableGameMethods.setToastMessage("");
+    GameUtilMethods.setToastMessage("");
 
     for (var rule in _gameState.scenarioSpecialRules) {
       if (rule.type == "Timer" && !rule.startOfRound) {
@@ -55,7 +55,7 @@ class NextRoundCommand extends Command {
           //minus 1 means always
           if (round == _gameState.round.value || round == -1) {
             if (_settings.showReminders.value) {
-              MutableGameMethods.setToastMessage(rule.note);
+              GameUtilMethods.setToastMessage(rule.note);
             }
 
             _handleTimedSpawns(rule);
@@ -72,11 +72,11 @@ class NextRoundCommand extends Command {
           final toastMessage = _gameState.toastMessage.value;
           if (round - 1 == _gameState.round.value || round == -1) {
             if (toastMessage.isNotEmpty) {
-              MutableGameMethods.setToastMessage(
+              GameUtilMethods.setToastMessage(
                   "$toastMessage\n\n${rule.note}");
             } else {
               if (_settings.showReminders.value) {
-                MutableGameMethods.setToastMessage("$toastMessage${rule.note}");
+                GameUtilMethods.setToastMessage("$toastMessage${rule.note}");
               }
             }
             _handleTimedSpawns(rule);
@@ -85,7 +85,7 @@ class NextRoundCommand extends Command {
       }
     }
 
-    MutableGameMethods.setRound(stateAccess, _gameState.round.value + 1);
+    RoundMethods.setRound(stateAccess, _gameState.round.value + 1);
 
     Future.delayed(const Duration(milliseconds: 600), () {
       _gameState.updateList.value++;
@@ -131,7 +131,7 @@ class NextRoundCommand extends Command {
           if (spawnSection != null) {
             final monsterStandees = spawnSection.monsterStandees;
             if (monsterStandees != null) {
-              MutableGameMethods.autoAddStandees(
+              MonsterMethods.autoAddStandees(
                   stateAccess, monsterStandees, rule.note);
             }
           }

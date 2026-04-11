@@ -11,7 +11,7 @@ class SetScenarioCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.setScenario(stateAccess, _scenario, _section);
+    ScenarioMethods.setScenario(stateAccess, _scenario, _section);
   }
 
   @override

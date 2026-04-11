@@ -21,14 +21,14 @@ class LoadCharacterSaveCommand extends Command {
     final Character? currentCharacter =
         GameMethods.getCharacterByName(character.id);
     if (currentCharacter != null) {
-      MutableGameMethods.removeCharacters(stateAccess, [currentCharacter]);
+      CharacterMethods.removeCharacters(stateAccess, [currentCharacter]);
     }
 
-    MutableGameMethods.resetCharacter(stateAccess, character);
-    MutableGameMethods.addToMainList(stateAccess, 0, character);
-    MutableGameMethods.applyDifficulty(stateAccess);
+    CharacterMethods.resetCharacter(stateAccess, character);
+    RoundMethods.addToMainList(stateAccess, 0, character);
+    ScenarioMethods.applyDifficulty(stateAccess);
     _gameState.updateList.value++;
-    MutableGameMethods.unlockClass(stateAccess, character.characterClass.id);
+    ScenarioMethods.unlockClass(stateAccess, character.characterClass.id);
   }
 
   @override

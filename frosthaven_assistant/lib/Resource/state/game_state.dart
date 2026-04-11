@@ -28,7 +28,13 @@ import '../enums.dart';
 import '../game_data.dart';
 import '../game_methods.dart';
 
-part "../mutable_game_methods.dart";
+part "../character_methods.dart";
+part "../deck_methods.dart";
+part "../element_methods.dart";
+part "../game_util_methods.dart";
+part "../monster_methods.dart";
+part "../round_methods.dart";
+part "../scenario_methods.dart";
 part "character.dart";
 part "character_state.dart";
 part "figure_state.dart";

@@ -10,11 +10,11 @@ class RemoveCharacterCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.removeCharacters(stateAccess, names);
+    CharacterMethods.removeCharacters(stateAccess, names);
 
     if (names.length != 1 ||
         !GameMethods.isObjectiveOrEscort(names.first.characterClass)) {
-      MutableGameMethods.applyDifficulty(stateAccess);
+      ScenarioMethods.applyDifficulty(stateAccess);
     }
   }
 

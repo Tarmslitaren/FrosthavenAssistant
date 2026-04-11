@@ -7,7 +7,7 @@ class ReturnModifierCardCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.returnModifierCard(stateAccess, name);
+    DeckMethods.returnModifierCard(stateAccess, name);
   }
 
   @override

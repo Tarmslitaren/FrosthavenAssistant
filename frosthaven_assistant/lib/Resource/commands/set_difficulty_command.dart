@@ -10,7 +10,7 @@ class SetDifficultyCommand extends Command {
   @override
   void execute() {
     _gameState.setDifficulty(stateAccess, difficulty);
-    MutableGameMethods.applyDifficulty(stateAccess);
+    ScenarioMethods.applyDifficulty(stateAccess);
   }
 
   @override

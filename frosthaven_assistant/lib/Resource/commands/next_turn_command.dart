@@ -19,7 +19,7 @@ class TurnDoneCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.setTurnDone(stateAccess, index);
+    RoundMethods.setTurnDone(stateAccess, index);
   }
 
   @override

@@ -9,7 +9,7 @@ class ImbueElementCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.imbueElement(stateAccess, element, half);
+    ElementMethods.imbueElement(stateAccess, element, half);
   }
 
   @override

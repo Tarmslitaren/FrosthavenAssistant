@@ -8,7 +8,7 @@ class UseElementCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.useElement(stateAccess, element);
+    ElementMethods.useElement(stateAccess, element);
   }
 
   @override

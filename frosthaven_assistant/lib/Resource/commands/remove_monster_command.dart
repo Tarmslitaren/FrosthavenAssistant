@@ -9,7 +9,7 @@ class RemoveMonsterCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.removeMonsters(stateAccess, names);
+    MonsterMethods.removeMonsters(stateAccess, names);
   }
 
   @override

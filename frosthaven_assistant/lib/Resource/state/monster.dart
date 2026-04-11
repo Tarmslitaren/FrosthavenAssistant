@@ -88,7 +88,7 @@ class Monster extends ListItemData {
   }
 
   void sortMonsterInstances(_StateModifier s) {
-    MutableGameMethods.sortMonsterInstances(s, _monsterInstances);
+    RoundMethods.sortMonsterInstances(s, _monsterInstances);
   }
 
   setActive(_StateModifier _, bool value) {

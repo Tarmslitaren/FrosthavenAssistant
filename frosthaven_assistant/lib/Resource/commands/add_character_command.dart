@@ -12,22 +12,22 @@ class AddCharacterCommand extends Command {
   AddCharacterCommand(this._id, this._edition, this._display, this._level,
       {required GameState gameState})
       : _gameState = gameState {
-    character = MutableGameMethods.createCharacter(
+    character = CharacterMethods.createCharacter(
         stateAccess, _id, _edition, _display, _level)!;
   }
 
   @override
   void execute() {
     //add new character on top of list
-    MutableGameMethods.addToMainList(stateAccess, 0, character);
+    RoundMethods.addToMainList(stateAccess, 0, character);
 
     if (!GameMethods.isObjectiveOrEscort(character.characterClass)) {
-      MutableGameMethods.applyDifficulty(stateAccess);
+      ScenarioMethods.applyDifficulty(stateAccess);
     }
 
-    MutableGameMethods.updateForSpecialRules(stateAccess);
+    RoundMethods.updateForSpecialRules(stateAccess);
     _gameState.updateList.value++;
-    MutableGameMethods.unlockClass(stateAccess, character.characterClass.id);
+    ScenarioMethods.unlockClass(stateAccess, character.characterClass.id);
   }
 
   @override

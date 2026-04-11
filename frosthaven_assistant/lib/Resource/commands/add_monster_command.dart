@@ -11,12 +11,12 @@ class AddMonsterCommand extends Command {
       {required GameState gameState})
       : _gameState = gameState {
     monster =
-        MutableGameMethods.createMonster(stateAccess, _name, _level, _isAlly)!;
+        MonsterMethods.createMonster(stateAccess, _name, _level, _isAlly)!;
   }
 
   @override
   void execute() {
-    MutableGameMethods.addToMainList(stateAccess, null, monster);
+    RoundMethods.addToMainList(stateAccess, null, monster);
 
     _gameState.updateList.value++;
   }

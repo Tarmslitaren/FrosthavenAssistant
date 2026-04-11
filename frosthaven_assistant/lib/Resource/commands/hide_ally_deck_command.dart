@@ -5,7 +5,7 @@ class HideAllyDeckCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.hideAllyDeck(stateAccess);
+    MonsterMethods.hideAllyDeck(stateAccess);
   }
 
   @override

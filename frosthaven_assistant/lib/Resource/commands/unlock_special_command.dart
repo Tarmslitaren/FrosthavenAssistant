@@ -12,9 +12,9 @@ class UnlockSpecialCommand extends Command {
   void execute() {
     if (_gameState.unlockedClasses.contains(_id)) {
       _unlock = false;
-      MutableGameMethods.clearUnlockedClass(stateAccess, _id);
+      ScenarioMethods.clearUnlockedClass(stateAccess, _id);
     } else {
-      MutableGameMethods.unlockClass(stateAccess, _id);
+      ScenarioMethods.unlockClass(stateAccess, _id);
     }
   }
 

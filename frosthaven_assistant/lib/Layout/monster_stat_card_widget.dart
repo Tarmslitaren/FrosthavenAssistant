@@ -43,7 +43,7 @@ class MonsterStatCardWidget extends StatelessWidget {
 
     if (nrOfStandees == maxStandees - 1) {
       //directly add last standee
-      MutableGameMethods.addStandee(
+      MonsterMethods.addStandee(
           null,
           data,
           isBoss

@@ -8,7 +8,7 @@ class SetCharacterLevelCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.setCharacterLevel(stateAccess, level, characterId);
+    CharacterMethods.setCharacterLevel(stateAccess, level, characterId);
   }
 
   @override

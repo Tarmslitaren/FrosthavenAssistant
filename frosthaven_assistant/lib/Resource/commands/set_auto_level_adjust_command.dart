@@ -10,7 +10,7 @@ class SetAutoLevelAdjustCommand extends Command {
   @override
   void execute() {
     _gameState.setAutoScenarioLevel(stateAccess, on);
-    MutableGameMethods.applyDifficulty(stateAccess);
+    ScenarioMethods.applyDifficulty(stateAccess);
   }
 
   @override

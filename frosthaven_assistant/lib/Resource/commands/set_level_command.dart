@@ -8,7 +8,7 @@ class SetLevelCommand extends Command {
 
   @override
   void execute() {
-    MutableGameMethods.setLevel(stateAccess, level, monsterId);
+    ScenarioMethods.setLevel(stateAccess, level, monsterId);
   }
 
   @override

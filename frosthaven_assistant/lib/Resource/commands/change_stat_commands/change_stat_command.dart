@@ -33,7 +33,7 @@ abstract class ChangeStatCommand extends Command {
             if (item.monsterInstances.isEmpty) {
               item.setActive(stateAccess, false);
               if (roundState == RoundState.chooseInitiative) {
-                MutableGameMethods.sortCharactersFirst(stateAccess);
+                RoundMethods.sortCharactersFirst(stateAccess);
               }
               if (roundState == RoundState.playTurns) {
                 Future.delayed(const Duration(milliseconds: 600), () {
