@@ -23,12 +23,14 @@ class HealthWheelController extends StatefulWidget {
 
 class HealthWheelControllerState extends State<HealthWheelController> {
   OverlayEntry? entry;
+  late final GameState _gameState;
 
   final wheelDelta = ValueNotifier<double>(0);
   final wheelTimeDelta = ValueNotifier<int>(0);
 
   @override
   void initState() {
+    _gameState = getIt<GameState>();
     super.initState();
   }
 
@@ -43,7 +45,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
       entry?.remove();
       entry?.dispose();
       entry = null;
-      getIt<GameState>().updateList.value++;
+      _gameState.updateList.value++;
     }
   }
 

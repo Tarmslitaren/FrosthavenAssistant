@@ -22,6 +22,7 @@ class ModifierDeckWidget extends StatefulWidget {
     this.gameState,
     this.gameData,
     this.settings,
+    this.communication,
   });
 
   final String name;
@@ -29,6 +30,8 @@ class ModifierDeckWidget extends StatefulWidget {
   final GameState? gameState;
   final GameData? gameData;
   final Settings? settings;
+  // injected for testing
+  final Communication? communication;
 
   @override
   ModifierDeckWidgetState createState() => ModifierDeckWidgetState();
@@ -39,15 +42,17 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   late final GameState _gameState;
   late final GameData _gameData;
   late final Settings settings;
+  late final Communication _communication;
 
   bool _animationsEnabled = false;
 
   @override
   void initState() {
-    super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
     _gameData = widget.gameData ?? getIt<GameData>();
     settings = widget.settings ?? getIt<Settings>();
+    _communication = widget.communication ?? getIt<Communication>();
+    super.initState();
 
     //to load save state
     _gameData.modelData.addListener(_modelDataListener);
@@ -107,7 +112,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   bool initAnimationEnabled() {
     if (settings.client.value == ClientState.connected) {
-      GameState oldState = GameState(communication: getIt<Communication>());
+      GameState oldState = GameState(communication: _communication);
       int offset = 1;
       final saveStateLength = _gameState.gameSaveStates.length;
       final saveState = _gameState.gameSaveStates[saveStateLength - offset];
@@ -316,8 +321,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                                     _gameState.action(
                                                         DrawModifierCardCommand(
                                                             widget.name,
-                                                            gameState: getIt<
-                                                                GameState>()));
+                                                            gameState: _gameState));
                                                   });
                                                 })))
                                   ])
@@ -341,8 +345,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                                   _gameState.action(
                                                       DrawModifierCardCommand(
                                                           widget.name,
-                                                          gameState: getIt<
-                                                              GameState>()));
+                                                          gameState: _gameState));
                                                 });
                                               },
                                               child: Center(

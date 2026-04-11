@@ -14,10 +14,13 @@ class AddSectionMenu extends StatefulWidget {
   const AddSectionMenu({
     super.key,
     this.gameState,
+    this.settings,
     this.gameData,
   });
 
   final GameState? gameState;
+  // injected for testing
+  final Settings? settings;
   final GameData? gameData;
 
   @override
@@ -28,6 +31,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   late final GameState _gameState;
+  late final Settings _settings;
   late final GameData _gameData;
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
@@ -35,6 +39,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
   @override
   initState() {
     _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
     _gameData = widget.gameData ?? getIt<GameData>();
     // at the beginning, all items are shown
     var scenarios = _gameData.modelData.value[_gameState.currentCampaign.value]
@@ -110,13 +115,13 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                     margin: const EdgeInsets.only(left: 10, right: 10),
                     child: TextField(
                       controller: _controller,
-                      keyboardType: getIt<Settings>().softNumpadInput.value
+                      keyboardType: _settings.softNumpadInput.value
                           ? TextInputType.none
                           : TextInputType.text,
                       onChanged: (value) => _runFilter(value),
                       onTap: () {
                         _controller.clear();
-                        if (getIt<Settings>().softNumpadInput.value) {
+                        if (_settings.softNumpadInput.value) {
                           openDialog(
                               context,
                               NumpadMenu(

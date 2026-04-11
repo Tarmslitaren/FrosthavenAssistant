@@ -15,14 +15,21 @@ class CharacterHealthWidget extends StatelessWidget {
       required this.character,
       required this.scale,
       required this.shadow,
-      required this.scaledHeight});
+      required this.scaledHeight,
+      this.gameState,
+      this.settings});
   final Character character;
   final double scale;
   final double scaledHeight;
   final Shadow shadow;
+  // injected for testing
+  final GameState? gameState;
+  final Settings? settings;
 
   @override
   Widget build(BuildContext context) {
+    final gameState = this.gameState ?? getIt<GameState>();
+    final settings = this.settings ?? getIt<Settings>();
     final frosthavenStyle = GameMethods.isFrosthavenStyle(null);
 
     return Column(
@@ -45,11 +52,11 @@ class CharacterHealthWidget extends StatelessWidget {
                 }),
           ),
           ValueListenableBuilder<int>(
-              valueListenable: getIt<GameState>().commandIndex,
+              valueListenable: gameState.commandIndex,
               builder: (context, value, child) {
                 return Container(
                     margin: EdgeInsets.only(left: 10 * scale),
-                    child: getIt<Settings>().enableHeathWheel.value
+                    child: settings.enableHeathWheel.value
                         ? HealthWheelController(
                             figureId: character.id,
                             ownerId: character.id,

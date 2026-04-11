@@ -75,12 +75,20 @@ class LootCardListTile extends StatefulWidget {
 }
 
 class LootCardListTileState extends State<LootCardListTile> {
+  late final GameState _gameState;
+
+  @override
+  void initState() {
+    _gameState = getIt<GameState>();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
         setState(() {
-          getIt<GameState>().action(AddLootCardCommand(widget.name, gameState: getIt<GameState>()));
+          _gameState.action(AddLootCardCommand(widget.name, gameState: _gameState));
         });
       },
       contentPadding: const EdgeInsets.only(left: 14),
@@ -100,7 +108,7 @@ class LootCardListTileState extends State<LootCardListTile> {
         maxLines: 1,
       ),
       trailing: Text(
-          "added: ${getIt<GameState>().lootDeck.addedCards[widget.index]}   ",
+          "added: ${_gameState.lootDeck.addedCards[widget.index]}   ",
           style: kTitleStyle),
     );
   }

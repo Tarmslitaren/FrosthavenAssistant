@@ -13,7 +13,7 @@ class TopBar extends StatelessWidget {
   Widget build(BuildContext context) {
     Settings settings = getIt<Settings>();
     return ValueListenableBuilder<double>(
-        valueListenable: getIt<Settings>().userScalingBars,
+        valueListenable: settings.userScalingBars,
         builder: (context, value, child) {
           final userScaling = settings.userScalingBars.value;
           var shadow = Shadow(
@@ -50,7 +50,7 @@ class TopBar extends StatelessWidget {
             ),
             toolbarHeight: 40 * settings.userScalingBars.value,
             flexibleSpace: ValueListenableBuilder<bool>(
-                valueListenable: getIt<Settings>().darkMode,
+                valueListenable: settings.darkMode,
                 builder: (context, value, child) {
                   final darkMode = settings.darkMode.value;
                   return Container(

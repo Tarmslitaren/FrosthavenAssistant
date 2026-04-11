@@ -13,15 +13,17 @@ class CharacterLootMenu extends StatefulWidget {
 }
 
 class CharacterLootMenuState extends State<CharacterLootMenu> {
+  late final GameState _gameState;
+
   @override
   initState() {
-    // at the beginning, all items are shown
+    _gameState = getIt<GameState>();
     super.initState();
   }
 
   int getLootAmount(String characterId, String lootName) {
     int value = 0;
-    for (var item in getIt<GameState>().lootDeck.discardPileContents) {
+    for (var item in _gameState.lootDeck.discardPileContents) {
       if (item.owner == characterId && item.gfx.contains(lootName)) {
         if (lootName == "coin") {
           if (item.gfx.endsWith("3")) {

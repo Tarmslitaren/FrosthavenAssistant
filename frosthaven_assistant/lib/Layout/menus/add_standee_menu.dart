@@ -15,12 +15,15 @@ class AddStandeeMenu extends StatefulWidget {
     required this.monster,
     required this.elite,
     this.gameState,
+    this.settings,
   });
 
   final Monster monster;
   final bool elite;
 
   final GameState? gameState;
+  // injected for testing
+  final Settings? settings;
 
   @override
   AddStandeeMenuState createState() => AddStandeeMenuState();
@@ -28,6 +31,7 @@ class AddStandeeMenu extends StatefulWidget {
 
 class AddStandeeMenuState extends State<AddStandeeMenu> {
   late final GameState _gameState;
+  late final Settings _settings;
 
   bool addAsSummon = false;
 
@@ -36,6 +40,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
     // at the beginning, all items are shown
     super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
   }
 
   Widget buildNrButton(final int nr, final double scale) {
@@ -187,7 +192,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                         checkColor: Colors.black,
                         activeColor: Colors.grey.shade200,
                         side: BorderSide(
-                            color: getIt<Settings>().darkMode.value
+                            color: _settings.darkMode.value
                                 ? Colors.white
                                 : Colors.black),
                         onChanged: (bool? newValue) {

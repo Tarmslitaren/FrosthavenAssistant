@@ -17,7 +17,8 @@ import 'menus/ability_card_zoom.dart';
 
 class MonsterAbilityCardWidget extends StatefulWidget {
   const MonsterAbilityCardWidget({super.key, required this.data,
-      this.gameState,});
+      this.gameState,
+      this.settings,});
 
   static List<Widget> _buildGraphicPositionals(
       double scale, List<GraphicPositional> positionals) {
@@ -53,7 +54,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   }
 
   static Widget buildFront(MonsterAbilityCardModel? card, Monster data,
-      double scale, bool calculateAll) {
+      double scale, bool calculateAll, {Settings? settings}) {
+    settings = settings ?? getIt<Settings>();
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
 
     String initText = card!.initiative.toString();
@@ -173,7 +175,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                 child: LineBuilder.createLines(
                     card.lines,
                     false,
-                    !getIt<Settings>().noCalculation.value,
+                    !settings.noCalculation.value,
                     calculateAll,
                     data,
                     CrossAxisAlignment.center,
@@ -237,6 +239,8 @@ class MonsterAbilityCardWidget extends StatefulWidget {
   final Monster data;
 
   final GameState? gameState;
+  // injected for testing
+  final Settings? settings;
 
   @override
   MonsterAbilityCardWidgetState createState() =>
@@ -252,8 +256,8 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
 
   @override
   void initState() {
-    super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
+    super.initState();
     for (var deck in _gameState.currentAbilityDecks) {
       if (deck.name == widget.data.type.deck) {
         _deckSize = deck.drawPileSize;

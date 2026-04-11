@@ -15,12 +15,14 @@ import 'character_widget_internal.dart';
 
 class CharacterWidget extends StatefulWidget {
   const CharacterWidget(
-      {required this.characterId, super.key, this.initPreset, this.gameState});
+      {required this.characterId, super.key, this.initPreset, this.gameState, this.settings});
 
   final String characterId;
   final int? initPreset;
 
   final GameState? gameState;
+  // injected for testing
+  final Settings? settings;
 
   @override
   CharacterWidgetState createState() => CharacterWidgetState();
@@ -28,14 +30,16 @@ class CharacterWidget extends StatefulWidget {
 
 class CharacterWidgetState extends State<CharacterWidget> {
   late final GameState _gameState;
+  late final Settings _settings;
   @override
   void initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
     Character? character = GameMethods.getCharacterByName(widget.characterId);
     if (character != null) {
       lastList = character.characterState.summonList.toList();
     }
     super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
   }
 
   bool isCharacter = true;
@@ -134,7 +138,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                               isCharacter: isCharacter,
                               characterId: character.id,
                               initPreset: widget.initPreset)
-                          : getIt<Settings>().enableHeathWheel.value
+                          : _settings.enableHeathWheel.value
                               ? HealthWheelController(
                                   figureId: widget.characterId,
                                   ownerId: widget.characterId,

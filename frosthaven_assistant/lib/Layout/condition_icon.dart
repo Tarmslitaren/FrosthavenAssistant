@@ -13,7 +13,7 @@ import '../services/service_locator.dart';
 
 class ConditionIcon extends StatefulWidget {
   ConditionIcon(this.condition, this.size, this.owner, this.figure,
-      {super.key, required this.scale, this.gameState}) {
+      {super.key, required this.scale, this.gameState, this.settings}) {
     String suffix = "";
     if (GameMethods.isFrosthavenStyle(null)) {
       suffix = "_fh";
@@ -33,6 +33,8 @@ class ConditionIcon extends StatefulWidget {
   final ListItemData owner;
   final FigureState figure;
   final GameState? gameState;
+  // injected for testing
+  final Settings? settings;
   late final String gfx;
 
   @override
@@ -41,6 +43,7 @@ class ConditionIcon extends StatefulWidget {
 
 class ConditionIconState extends State<ConditionIcon> {
   late final GameState _gameState;
+  late final Settings _settings;
   final animate = ValueNotifier<bool>(
       false); //this needs to exist outside of this class to apply when parent rebuilds. :(
 
@@ -53,6 +56,7 @@ class ConditionIconState extends State<ConditionIcon> {
   @override
   void initState() {
     _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
     _gameState.commandIndex.addListener(_animateListener);
     super.initState();
   }
@@ -183,7 +187,7 @@ class ConditionIconState extends State<ConditionIcon> {
         if (widget.figure.conditionsAddedPreviousTurn
             .contains(widget.condition)) {
           //only run these if not automatically taken off. TODO: maybe run animations before removing is good?
-          if (!getIt<Settings>().expireConditions.value) {
+          if (!_settings.expireConditions.value) {
             if (widget.condition == Condition.chill ||
                 widget.condition == Condition.stun ||
                 widget.condition == Condition.disarm ||

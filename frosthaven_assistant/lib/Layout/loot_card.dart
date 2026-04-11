@@ -12,7 +12,8 @@ class LootCardWidget extends StatelessWidget {
     this.revealed.value = revealed;
   }
 
-  static Widget buildFront(LootCard card, double scale, bool hasAnimations) {
+  static Widget buildFront(LootCard card, double scale, bool hasAnimations, {Settings? settings}) {
+    settings = settings ?? getIt<Settings>();
     var shadow = Shadow(
       offset: Offset(0.6 * scale, 0.6 * scale),
       color: Colors.black87,
@@ -80,7 +81,7 @@ class LootCardWidget extends StatelessWidget {
                 if (card.enhanced > 0)
                   Positioned(
                     bottom: 5 * scale,
-                    child: getIt<Settings>().shimmer.value
+                    child: settings.shimmer.value
                         ? RepaintBoundary(
                             child: AnimatedTextKit(
                             repeatForever: true,

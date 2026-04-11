@@ -43,11 +43,14 @@ class ModifierDeckMenu extends StatefulWidget {
     super.key,
     required this.name,
     this.gameState,
+    this.settings,
   });
 
   final String name;
 
   final GameState? gameState;
+  // injected for testing
+  final Settings? settings;
 
   @override
   ModifierDeckMenuState createState() => ModifierDeckMenuState();
@@ -55,6 +58,7 @@ class ModifierDeckMenu extends StatefulWidget {
 
 class ModifierDeckMenuState extends State<ModifierDeckMenu> {
   late final GameState _gameState;
+  late final Settings _settings;
   final scrollController = ScrollController();
 
   bool isRevealed(ModifierCard item) {
@@ -189,6 +193,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
   void initState() {
     super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
   }
 
   @override
@@ -410,7 +415,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     ),
                                   ),
                                 if (characterCassandra != null &&
-                                    !getIt<Settings>().showCharacterAMD.value)
+                                    !_settings.showCharacterAMD.value)
                                   TextButton(
                                     onPressed: () {
                                       _gameState.action(

@@ -14,10 +14,13 @@ class SetLootOwnerMenu extends StatefulWidget {
   const SetLootOwnerMenu({
     super.key,
     required this.card,
-  
-      this.gameState,});
+    this.gameState,
+    this.settings,
+  });
 
   final GameState? gameState;
+  // injected for testing
+  final Settings? settings;
 
   @override
   SetLootOwnerMenuState createState() => SetLootOwnerMenuState();
@@ -25,11 +28,13 @@ class SetLootOwnerMenu extends StatefulWidget {
 
 class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
   late final GameState _gameState;
+  late final Settings _settings;
 
   @override
   initState() {
     super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
   }
 
   Widget buildCharacterButton(Character character) {
@@ -49,7 +54,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
               height: 30,
               width: 30,
               fit: BoxFit.contain,
-              color: getIt<Settings>().darkMode.value
+              color: _settings.darkMode.value
                   ? Colors.white
                   : Colors.black,
               image: AssetImage(

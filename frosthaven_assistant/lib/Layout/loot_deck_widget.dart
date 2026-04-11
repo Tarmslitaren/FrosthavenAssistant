@@ -20,11 +20,14 @@ class LootDeckWidget extends StatefulWidget {
     this.gameState,
     this.gameData,
     this.settings,
+    this.communication,
   });
 
   final GameState? gameState;
   final GameData? gameData;
   final Settings? settings;
+  // injected for testing
+  final Communication? communication;
 
   @override
   LootDeckWidgetState createState() => LootDeckWidgetState();
@@ -36,15 +39,17 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   late final GameState _gameState;
   late final GameData _gameData;
   late final Settings _settings;
+  late final Communication _communication;
 
   bool _animationsEnabled = false;
 
   @override
   void initState() {
-    super.initState();
     _gameState = widget.gameState ?? getIt<GameState>();
     _gameData = widget.gameData ?? getIt<GameData>();
     _settings = widget.settings ?? getIt<Settings>();
+    _communication = widget.communication ?? getIt<Communication>();
+    super.initState();
 
     //to load save state
     _gameData.modelData.addListener(_modelDataListenerLootDeck);
@@ -106,7 +111,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   bool initAnimationEnabled() {
     if (_settings.client.value == ClientState.connected ||
         _settings.server.value) {
-      GameState oldState = GameState(communication: getIt<Communication>());
+      GameState oldState = GameState(communication: _communication);
       int offset = 1;
       final saveStatesLength = _gameState.gameSaveStates.length;
       if (saveStatesLength <= offset) {

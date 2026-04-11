@@ -18,10 +18,13 @@ class AddCharacterMenu extends StatefulWidget {
   const AddCharacterMenu({
     super.key,
     this.gameState,
+    this.settings,
     this.gameData,
   });
 
   final GameState? gameState;
+  // injected for testing
+  final Settings? settings;
   final GameData? gameData;
 
   @override
@@ -35,6 +38,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   late CharacterClass bs;
   late CharacterClass vq;
   late final GameState _gameState;
+  late final Settings _settings;
   late final GameData _gameData;
   final ScrollController _scrollController = ScrollController();
 
@@ -64,6 +68,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   @override
   initState() {
     _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
     _gameData = widget.gameData ?? getIt<GameData>();
     // at the beginning, all users are shown
     final data = _gameData.modelData.value;
@@ -86,7 +91,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
       }
     }
 
-    if (!getIt<Settings>().showCustomContent.value) {
+    if (!_settings.showCustomContent.value) {
       _allCharacters.removeWhere(
           (character) => GameMethods.isCustomCampaign(character.edition));
     }

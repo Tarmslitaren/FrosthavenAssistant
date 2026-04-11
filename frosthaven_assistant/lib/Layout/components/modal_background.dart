@@ -11,15 +11,19 @@ class ModalBackground extends StatelessWidget {
     this.width,
     this.height,
     this.alignment,
+    this.settings,
   });
 
   final Widget child;
   final double? width;
   final double? height;
   final AlignmentGeometry? alignment;
+  // injected for testing
+  final Settings? settings;
 
   @override
   Widget build(BuildContext context) {
+    final settings = this.settings ?? getIt<Settings>();
     return Container(
       width: width,
       height: height,
@@ -28,7 +32,7 @@ class ModalBackground extends StatelessWidget {
         image: DecorationImage(
           colorFilter: ColorFilter.mode(
               Colors.black.withValues(alpha: kModalBackgroundOpacity), BlendMode.dstATop),
-          image: AssetImage(getIt<Settings>().darkMode.value
+          image: AssetImage(settings.darkMode.value
               ? 'assets/images/bg/dark_bg.png'
               : 'assets/images/bg/white_bg.png'),
           fit: BoxFit.cover,

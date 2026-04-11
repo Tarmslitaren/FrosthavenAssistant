@@ -25,7 +25,8 @@ class CharacterWidgetInternal extends StatefulWidget {
       required this.isCharacter,
       required this.characterId,
       this.initPreset,
-      this.gameState});
+      this.gameState,
+      this.settings});
 
   final Character character;
   final bool isCharacter;
@@ -36,6 +37,8 @@ class CharacterWidgetInternal extends StatefulWidget {
       {}; //if it's been changed locally then it's not hidden
 
   final GameState? gameState;
+  // injected for testing
+  final Settings? settings;
 
   @override
   CharacterInternalWidgetState createState() => CharacterInternalWidgetState();
@@ -43,6 +46,7 @@ class CharacterWidgetInternal extends StatefulWidget {
 
 class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
   late final GameState _gameState;
+  late final Settings _settings;
   bool isCharacter = true;
   final _initTextFieldController = TextEditingController();
   late List<MonsterInstance> lastList = [];
@@ -50,9 +54,10 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
 
   @override
   void initState() {
+    _gameState = widget.gameState ?? getIt<GameState>();
+    _settings = widget.settings ?? getIt<Settings>();
     final character = widget.character;
     super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
     lastList = character.characterState.summonList.toList();
 
     if (widget.initPreset != null) {
@@ -174,7 +179,7 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
                     if (_gameState.roundState.value ==
                         RoundState.chooseInitiative) {
                       //if in choose mode - focus the input or open the soft numpad if that option is on
-                      if (getIt<Settings>().softNumpadInput.value) {
+                      if (_settings.softNumpadInput.value) {
                         openDialog(
                             context,
                             NumpadMenu(

@@ -4,13 +4,16 @@ import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 
 class BackGround extends StatelessWidget {
-  const BackGround({super.key, required this.child});
+  const BackGround({super.key, required this.child, this.settings});
 
   final Widget child;
+  // injected for testing
+  final Settings? settings;
 
   @override
   Widget build(BuildContext context) {
-    bool darkMode = getIt<Settings>().darkMode.value;
+    final settings = this.settings ?? getIt<Settings>();
+    bool darkMode = settings.darkMode.value;
     return Container(
         decoration: BoxDecoration(
             backgroundBlendMode: BlendMode.srcATop,
@@ -26,7 +29,7 @@ class BackGround extends StatelessWidget {
                   ),
                   width: (MediaQuery.of(context).size.width).toInt(),
                   height: (MediaQuery.of(context).size.height -
-                          80 * getIt<Settings>().userScalingBars.value)
+                          80 * settings.userScalingBars.value)
                       .toInt(),
                   policy: ResizeImagePolicy.fit),
             )),
