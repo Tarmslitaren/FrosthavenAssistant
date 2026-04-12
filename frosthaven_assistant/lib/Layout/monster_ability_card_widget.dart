@@ -14,6 +14,7 @@ import '../Resource/game_methods.dart';
 import '../Resource/line_builder/line_builder.dart';
 import '../Resource/ui_utils.dart';
 import 'menus/ability_card_zoom.dart';
+import 'view_models/monster_ability_card_view_model.dart';
 
 class MonsterAbilityCardWidget extends StatefulWidget {
   const MonsterAbilityCardWidget({super.key, required this.data,
@@ -248,22 +249,13 @@ class MonsterAbilityCardWidget extends StatefulWidget {
 }
 
 class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
-// Define the various properties with default values. Update these properties
-// when the user taps a FloatingActionButton.
-//late MonsterData _data;
-  late final GameState _gameState;
-  int _deckSize = 8;
+  late final MonsterAbilityCardViewModel _vm;
 
   @override
   void initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
+    _vm = MonsterAbilityCardViewModel(widget.data,
+        gameState: widget.gameState, settings: widget.settings);
     super.initState();
-    for (var deck in _gameState.currentAbilityDecks) {
-      if (deck.name == widget.data.type.deck) {
-        _deckSize = deck.drawPileSize;
-        break;
-      }
-    }
   }
 
   Widget _transitionBuilder(Widget widget, Animation<double> animation) {
@@ -285,51 +277,19 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
   Widget build(BuildContext context) {
     final double scale = getScaleByReference(context);
     return ValueListenableBuilder<int>(
-        valueListenable: _gameState
-            .commandIndex, //todo: make more granular: this is here roundState && killMonsterStandee, but also scaling maybe? (or this is rebuilt on any action)
+        valueListenable: _vm.commandIndex,
         builder: (context, value, child) {
-          MonsterAbilityCardModel? card;
-          final roundState = _gameState.roundState.value;
-          final data = widget.data;
-          if (roundState == RoundState.playTurns &&
-              data.isActive &&
-              !GameMethods.isInactiveForRule(data.type.name)) {
-            final deckState = GameMethods.getDeck(data.type.deck);
-            if (deckState != null && deckState.discardPileIsNotEmpty) {
-              card = deckState.discardPileTop;
-            }
-          }
-
-          //get size for back
-          MonsterAbilityState deck =
-              GameMethods.getDeck(widget.data.type.deck)!;
-          _deckSize = deck.drawPileSize;
+          final showFront = _vm.shouldShowFront;
+          final card = _vm.currentCard;
 
           return InkWell(
               onTap: () {
-                //open deck menu
-                openDialog(
-                    context,
-                    AbilityCardsMenu(
-                      monsterAbilityState: deck,
-                      monsterData: widget.data,
-                    ));
-
+                _vm.openDeckMenu(context);
                 setState(() {});
               },
               onDoubleTap: () {
-                if (_gameState.roundState.value == RoundState.playTurns &&
-                    widget.data.isActive &&
-                    card != null) {
-                  setState(() {
-                    openDialog(
-                        context,
-                        //problem: context is of stat card widget, not the + button
-                        AbilityCardZoom(
-                            card: card!,
-                            monster: widget.data,
-                            calculateAll: false));
-                  });
+                if (showFront) {
+                  setState(() => _vm.openZoom(context));
                 }
               },
               child: AnimatedSwitcher(
@@ -338,13 +298,11 @@ class MonsterAbilityCardWidgetState extends State<MonsterAbilityCardWidget> {
                 layoutBuilder: (widget, list) => Stack(
                   children: [widget!, ...list],
                 ),
-                child: roundState == RoundState.playTurns &&
-                        widget.data.isActive &&
-                        card != null
+                child: showFront && card != null
                     ? MonsterAbilityCardWidget.buildFront(
                         card, widget.data, scale, false)
                     : MonsterAbilityCardWidget.buildRear(
-                        scale, _deckSize, widget.data),
+                        scale, _vm.deckSize, widget.data),
               ));
         });
   }

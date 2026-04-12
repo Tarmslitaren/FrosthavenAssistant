@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/monster_stat_card_widget.dart';
+import 'package:frosthaven_assistant/Layout/view_models/monster_stat_card_view_model.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -27,7 +28,8 @@ Future<void> _pumpBoss(WidgetTester tester, Monster monster,
   );
 
   final widget = MonsterStatCardWidget.buildBossLayout(
-      monster, 1.0, shadow, leftStyle, frosthavenStyle);
+      monster, 1.0, shadow, leftStyle, frosthavenStyle,
+      viewModel: MonsterStatCardViewModel(monster, gameState: getIt<GameState>()));
 
   final originalOnError = FlutterError.onError;
   addTearDown(() => FlutterError.onError = originalOnError);

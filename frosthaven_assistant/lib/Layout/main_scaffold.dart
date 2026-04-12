@@ -19,6 +19,7 @@ import 'character_amds_widget.dart';
 import 'loot_deck_widget.dart';
 import 'main_list.dart';
 import 'menus/main_menu.dart';
+import 'view_models/main_scaffold_view_model.dart';
 
 class MainScaffold extends StatelessWidget {
   const MainScaffold({super.key, this.settings});
@@ -103,64 +104,11 @@ class MainScaffoldBody extends StatelessWidget {
   final Settings? settings;
   final GameData? gameData;
 
-  double getSectionWidth(BuildContext context, Settings settings) {
-    bool modFitsOnBar = modifiersFitOnBar(context);
-    double screenWidth = MediaQuery.of(context).size.width;
-    double barScale = settings.userScalingBars.value;
-
-    bool hasLootDeck = GameMethods.hasLootDeck();
-    double sectionWidth = screenWidth;
-    if (hasLootDeck) {
-      sectionWidth -= 94 * barScale; //width of loot deck
-    }
-
-    final chars = GameMethods.getCurrentCharacters();
-    bool perksAvailable = false;
-    if (settings.showCharacterAMD.value) {
-      for (final character in chars) {
-        if (character.characterClass.perks.isNotEmpty) {
-          perksAvailable = true;
-          break;
-        }
-      }
-    }
-
-    if (!modFitsOnBar ||
-        GameMethods.shouldShowAlliesDeck() ||
-        perksAvailable && settings.showAmdDeck.value) {
-      sectionWidth -= 153 * barScale; //width of amd
-    }
-
-    return sectionWidth;
-  }
-
-  int? getNrOfSections(
-      {required GameData gameData,
-      required GameState gameState,
-      required Settings settings}) {
-    int? nrOfSections = gameData
-        .modelData
-        .value[gameState.currentCampaign.value]
-        ?.scenarios[gameState.scenario.value]
-        ?.sections
-        .length;
-    if (nrOfSections != null &&
-        gameState.scenarioSectionsAdded.length == nrOfSections) {
-      nrOfSections = null;
-    }
-    if (!settings.showSectionsInMainView.value) {
-      nrOfSections = null;
-    }
-
-    return nrOfSections;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final gameState = this.gameState ?? getIt<GameState>();
-    final settings = this.settings ?? getIt<Settings>();
-    final gameData = this.gameData ?? getIt<GameData>();
-    Size screenSize = MediaQuery.of(context).size;
+    final vm = MainScaffoldViewModel(
+        gameState: gameState, settings: settings, gameData: gameData);
+    final Size screenSize = MediaQuery.of(context).size;
 
     return ValueListenableBuilder<bool>(
         valueListenable: loading,
@@ -175,38 +123,26 @@ class MainScaffoldBody extends StatelessWidget {
                 )),
               const ToastNotifier(),
               ValueListenableBuilder<Map<String, CampaignModel>>(
-                  valueListenable: gameData.modelData,
+                  valueListenable: vm.modelData,
                   builder: (context, value, child) {
                     return ValueListenableBuilder<int>(
-                        valueListenable: gameState.commandIndex,
+                        valueListenable: vm.commandIndex,
                         builder: (context, value, child) {
                           return ValueListenableBuilder<double>(
-                              valueListenable: settings.userScalingBars,
+                              valueListenable: vm.userScalingBars,
                               builder: (context, value, child) {
-                                double barScale =
-                                    settings.userScalingBars.value;
-                                bool hasLootDeck = GameMethods.hasLootDeck();
-                                bool modFitsOnBar = modifiersFitOnBar(context);
-
-                                var sectionWidth = getSectionWidth(context, settings);
-
-                                //move to separate row if it doesn't fit
-                                bool sectionsOnSeparateRow = false;
-                                int? nrOfSections = getNrOfSections(
-                                    gameData: gameData,
-                                    gameState: gameState,
-                                    settings: settings);
-                                if ((nrOfSections != null &&
-                                        nrOfSections > 0 &&
-                                        sectionWidth < 58 * barScale) ||
-                                    (nrOfSections != null &&
-                                        nrOfSections > 2 &&
-                                        sectionWidth < 58 * barScale * 2)) {
-                                  //in case doesn't fit
-                                  sectionsOnSeparateRow = true;
-                                  sectionWidth =
-                                      MediaQuery.of(context).size.width;
-                                }
+                                final barScale =
+                                    vm.userScalingBars.value;
+                                final bool hasLootDeck = vm.hasLootDeck;
+                                final bool modFitsOnBar =
+                                    modifiersFitOnBar(context);
+                                final int? nrOfSections =
+                                    vm.availableSections;
+                                final bool separateRow =
+                                    vm.sectionsOnSeparateRow(context);
+                                final double width = separateRow
+                                    ? screenSize.width
+                                    : vm.sectionWidth(context);
 
                                 return Positioned(
                                     width: screenSize.width,
@@ -215,7 +151,7 @@ class MainScaffoldBody extends StatelessWidget {
                                     child: Column(children: [
                                       Row(
                                           mainAxisAlignment:
-                                              ((!sectionsOnSeparateRow &&
+                                              ((!separateRow &&
                                                           nrOfSections !=
                                                               null) ||
                                                       hasLootDeck)
@@ -228,17 +164,17 @@ class MainScaffoldBody extends StatelessWidget {
                                           children: [
                                             if (hasLootDeck)
                                               const LootDeckWidget(),
-                                            if (!sectionsOnSeparateRow &&
+                                            if (!separateRow &&
                                                 nrOfSections != null)
                                               SizedBox(
-                                                width: sectionWidth,
+                                                width: width,
                                                 child: const SectionList(),
                                               ),
                                             Column(children: [
                                               RepaintBoundary(
-                                                  child: CharacterAmdsWidget()),
-                                              if (GameMethods
-                                                  .shouldShowAlliesDeck())
+                                                  child:
+                                                      CharacterAmdsWidget()),
+                                              if (vm.shouldShowAlliesDeck)
                                                 Container(
                                                     margin: EdgeInsets.only(
                                                       top: 4 * barScale,
@@ -248,10 +184,8 @@ class MainScaffoldBody extends StatelessWidget {
                                                       name: 'allies',
                                                     )),
                                               if (!modFitsOnBar &&
-                                                  gameState.currentCampaign
-                                                          .value !=
-                                                      "Buttons and Bugs" && //hide amd deck for buttons and bugs
-                                                  settings.showAmdDeck.value)
+                                                  !vm.isButtonsAndBugs &&
+                                                  vm.showAmdDeck)
                                                 Container(
                                                     margin: EdgeInsets.only(
                                                       top: 4 * barScale,
@@ -262,10 +196,9 @@ class MainScaffoldBody extends StatelessWidget {
                                                     ))
                                             ])
                                           ]),
-                                      if (sectionsOnSeparateRow &&
-                                          nrOfSections != null)
+                                      if (separateRow && nrOfSections != null)
                                         SizedBox(
-                                          width: sectionWidth,
+                                          width: width,
                                           child: const RepaintBoundary(
                                               child: SectionList()),
                                         ),

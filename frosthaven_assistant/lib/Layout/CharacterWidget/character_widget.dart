@@ -11,6 +11,7 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 import '../health_wheel_controller.dart';
 import '../monster_box.dart';
+import '../view_models/character_view_model.dart';
 import 'character_widget_internal.dart';
 
 class CharacterWidget extends StatefulWidget {
@@ -29,21 +30,17 @@ class CharacterWidget extends StatefulWidget {
 }
 
 class CharacterWidgetState extends State<CharacterWidget> {
-  late final GameState _gameState;
-  late final Settings _settings;
+  bool isCharacter = true;
+  List<MonsterInstance> lastList = [];
+
   @override
   void initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _settings = widget.settings ?? getIt<Settings>();
-    Character? character = GameMethods.getCharacterByName(widget.characterId);
+    final character = GameMethods.getCharacterByName(widget.characterId);
     if (character != null) {
       lastList = character.characterState.summonList.toList();
     }
     super.initState();
   }
-
-  bool isCharacter = true;
-  List<MonsterInstance> lastList = [];
 
   Widget buildMonsterBoxGrid(double scale, Character character) {
     String displayStartAnimation = "";
@@ -81,72 +78,62 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Character? character = GameMethods.getCharacterByName(widget.characterId);
-    if (character != null) {
-      return InkWell(
-          onTap: () {
-            //open stats menu
-            openDialog(
-              context,
-              StatusMenu(figureId: character.id, characterId: character.id),
-            );
-          },
-          child: ValueListenableBuilder<int>(
-              valueListenable: _gameState.updateList,
-              builder: (context, value, child) {
-                bool notGrayScale =
-                    character.characterState.health.value != 0 &&
-                        (character.turnState.value != TurnsState.done ||
-                            _gameState.roundState.value ==
-                                RoundState.chooseInitiative);
-                double scale = getScaleByReference(context);
+    final character = GameMethods.getCharacterByName(widget.characterId);
+    if (character == null) return Container();
 
-                Widget inner = PhysicalShape(
-                    color: character.turnState.value == TurnsState.current
-                        ? Colors.tealAccent
-                        : Colors.transparent,
-                    shadowColor: Colors.black,
-                    elevation: 8,
-                    clipper: const ShapeBorderClipper(
-                        shape: RoundedRectangleBorder()),
-                    child: CharacterWidgetInternal(
-                      character: character,
-                      isCharacter: isCharacter,
-                      characterId: character.id,
-                      initPreset: widget.initPreset,
-                    ));
+    final vm = CharacterViewModel(character,
+        gameState: widget.gameState, settings: widget.settings);
 
-                return Column(mainAxisSize: MainAxisSize.max, children: [
-                  Container(
-                    margin:
-                        EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
-                    width: getMainListWidth(context) - 6.4 * scale,
-                    child: ValueListenableBuilder<int>(
-                        valueListenable: _gameState.killMonsterStandee,
-                        builder: (context, value, child) {
-                          return buildMonsterBoxGrid(scale, character);
-                        }),
-                  ),
-                  ColorFiltered(
-                      colorFilter: notGrayScale
-                          ? ColorFilter.matrix(identity)
-                          : ColorFilter.matrix(grayScale),
-                      child: _gameState.roundState.value ==
-                              RoundState.chooseInitiative
-                          ? CharacterWidgetInternal(
-                              character: character,
-                              isCharacter: isCharacter,
-                              characterId: character.id,
-                              initPreset: widget.initPreset)
-                          : _settings.enableHeathWheel.value
-                              ? HealthWheelController(
-                                  figureId: widget.characterId,
-                                  ownerId: widget.characterId,
-                                  child: inner)
-                              : inner)
-                ]);
-              }));
-    }
-    return Container();
+    return InkWell(
+        onTap: () => vm.openStatusMenu(context),
+        child: ValueListenableBuilder<int>(
+            valueListenable: vm.updateList,
+            builder: (context, value, child) {
+              final double scale = getScaleByReference(context);
+
+              Widget inner = PhysicalShape(
+                  color: vm.isCurrentTurn
+                      ? Colors.tealAccent
+                      : Colors.transparent,
+                  shadowColor: Colors.black,
+                  elevation: 8,
+                  clipper: const ShapeBorderClipper(
+                      shape: RoundedRectangleBorder()),
+                  child: CharacterWidgetInternal(
+                    character: character,
+                    isCharacter: isCharacter,
+                    characterId: character.id,
+                    initPreset: widget.initPreset,
+                  ));
+
+              return Column(mainAxisSize: MainAxisSize.max, children: [
+                Container(
+                  margin: EdgeInsets.only(
+                      left: 3.2 * scale, right: 3.2 * scale),
+                  width: getMainListWidth(context) - 6.4 * scale,
+                  child: ValueListenableBuilder<int>(
+                      valueListenable: vm.killMonsterStandee,
+                      builder: (context, value, child) {
+                        return buildMonsterBoxGrid(scale, character);
+                      }),
+                ),
+                ColorFiltered(
+                    colorFilter: vm.notGrayScale
+                        ? ColorFilter.matrix(identity)
+                        : ColorFilter.matrix(grayScale),
+                    child: vm.isChooseInitiative
+                        ? CharacterWidgetInternal(
+                            character: character,
+                            isCharacter: isCharacter,
+                            characterId: character.id,
+                            initPreset: widget.initPreset)
+                        : vm.showHealthWheel
+                            ? HealthWheelController(
+                                figureId: widget.characterId,
+                                ownerId: widget.characterId,
+                                child: inner)
+                            : inner)
+              ]);
+            }));
   }
 }

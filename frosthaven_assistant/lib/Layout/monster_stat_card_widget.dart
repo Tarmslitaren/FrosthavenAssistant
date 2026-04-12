@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
-import 'package:frosthaven_assistant/Resource/commands/activate_monster_type_command.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-import '../Resource/commands/add_standee_command.dart';
 import '../Resource/enums.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/line_builder/line_builder.dart';
 import '../Resource/stat_calculator.dart';
 import '../Resource/ui_utils.dart';
 import 'menus/stat_card_zoom.dart';
+import 'view_models/monster_stat_card_view_model.dart';
 
 class MonsterStatCardWidget extends StatelessWidget {
   const MonsterStatCardWidget({
@@ -26,62 +24,6 @@ class MonsterStatCardWidget extends StatelessWidget {
   // injected for testing
   final GameState? gameState;
   final Settings? settings;
-
-  static void _handleAddPressed(
-      Monster data, BuildContext context, bool left, bool isBoss,
-      {GameState? gameState, Settings? settings}) {
-    settings = settings ?? getIt<Settings>();
-    gameState = gameState ?? getIt<GameState>();
-    if (settings.noStandees.value) {
-      gameState
-          .action(ActivateMonsterTypeCommand(data.id, !data.isActive, gameState: gameState));
-      return;
-    }
-
-    final nrOfStandees = data.monsterInstances.length;
-    final maxStandees = data.type.count;
-
-    if (nrOfStandees == maxStandees - 1) {
-      //directly add last standee
-      MonsterMethods.addStandee(
-          null,
-          data,
-          isBoss
-              ? MonsterType.boss
-              : left
-                  ? MonsterType.normal
-                  : MonsterType.elite,
-          false);
-    } else if (nrOfStandees < maxStandees - 1) {
-      if (settings.randomStandees.value) {
-        //todo: no logic in layout
-        int standeeNr = GameMethods.getRandomStandee(data);
-        if (gameState.currentCampaign.value == "Buttons and Bugs") {
-          standeeNr = GameMethods.getNextAvailableBnBStandee(data);
-        }
-        if (standeeNr != 0) {
-          gameState.action(AddStandeeCommand(
-              standeeNr,
-              null,
-              data.id,
-              isBoss
-                  ? MonsterType.boss
-                  : left
-                      ? MonsterType.normal
-                      : MonsterType.elite,
-              false, gameState: gameState));
-        }
-      } else {
-        openDialog(
-          context,
-          AddStandeeMenu(
-            elite: !left,
-            monster: data,
-          ),
-        );
-      }
-    }
-  }
 
   static Widget buildNormalLayout(Monster data, double scale, Shadow shadow,
       TextStyle leftStyle, TextStyle rightStyle, bool frosthavenStyle,
@@ -277,9 +219,8 @@ class MonsterStatCardWidget extends StatelessWidget {
 
   static Widget buildBossLayout(Monster data, double scale, Shadow shadow,
       TextStyle leftStyle, bool frosthavenStyle,
-      {GameState? gameState, Settings? settings}) {
+      {required MonsterStatCardViewModel viewModel, Settings? settings}) {
     settings = settings ?? getIt<Settings>();
-    gameState = gameState ?? getIt<GameState>();
     bool noCalculationSetting = settings.noCalculation.value;
     MonsterStatsModel normal = data.type.levels[data.level.value].boss!;
     //normal stats calculated:
@@ -290,28 +231,7 @@ class MonsterStatCardWidget extends StatelessWidget {
         health = healthValue.toString();
       }
     }
-    //special case:
-    if (health == "Hollowpact") {
-      health = "7";
-      for (var item in gameState.currentList) {
-        if (item is Character && item.id == "Hollowpact") {
-          health = item
-              .characterClass.healthByLevel[item.characterState.level.value - 1]
-              .toString();
-        }
-      }
-    }
-    if (health == "Incarnate") {
-      health = "36";
-      for (var item in gameState.currentList) {
-        if (item is Character && item.id == "Incarnate") {
-          health = (item.characterClass
-                      .healthByLevel[item.characterState.level.value - 1] *
-                  2)
-              .toString();
-        }
-      }
-    }
+    health = viewModel.resolveBossHealth(health);
 
     String attack = normal.attack.toString();
     String move = normal.move.toString();
@@ -533,7 +453,7 @@ class MonsterStatCardWidget extends StatelessWidget {
   }
 
   static Widget buildCard(Monster data, double scale,
-      {GameState? gameState, Settings? settings}) {
+      {required MonsterStatCardViewModel viewModel, Settings? settings}) {
     bool frosthavenStyle = GameMethods.isFrosthavenStyle(data.type);
 
     var shadow = Shadow(
@@ -581,7 +501,7 @@ class MonsterStatCardWidget extends StatelessWidget {
               child: isBoss
                   ? buildBossLayout(
                       data, scale, shadow, leftStyle, frosthavenStyle,
-                      gameState: gameState, settings: settings)
+                      viewModel: viewModel, settings: settings)
                   : buildNormalLayout(data, scale, shadow, leftStyle,
                       rightStyle, frosthavenStyle, settings: settings));
         });
@@ -591,11 +511,10 @@ class MonsterStatCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = this.gameState ?? getIt<GameState>();
-    final settings = this.settings ?? getIt<Settings>();
+    final vm = MonsterStatCardViewModel(data,
+        gameState: gameState, settings: settings);
+    final settings_ = settings ?? getIt<Settings>();
     double scale = getScaleByReference(context);
-
-    bool isBoss = data.type.levels[data.level.value].boss != null;
 
     return SizedBox(
         width: 166 * scale,
@@ -604,8 +523,9 @@ class MonsterStatCardWidget extends StatelessWidget {
               onDoubleTap: () {
                 openDialog(context, StatCardZoom(monster: data));
               },
-              child: buildCard(data, scale, gameState: gameState, settings: settings)),
-          if (!isBoss)
+              child: buildCard(data, scale,
+                  viewModel: vm, settings: settings_)),
+          if (!vm.isBoss)
             Positioned(
                 bottom: 4 * scale,
                 left: 4 * scale,
@@ -613,24 +533,19 @@ class MonsterStatCardWidget extends StatelessWidget {
                     width: 20 * scale + 8,
                     height: 20 * scale + 8,
                     child: ValueListenableBuilder<int>(
-                        valueListenable: gameState.commandIndex,
+                        valueListenable: vm.commandIndex,
                         builder: (context, value, child) {
-                          bool allStandeesOut =
-                              data.monsterInstances.length == data.type.count;
                           return IconButton(
                             padding: const EdgeInsets.only(right: 8, top: 8),
                             icon: Image.asset(
                                 height: 20 * scale,
                                 fit: BoxFit.fitHeight,
-                                color: allStandeesOut
+                                color: vm.allStandeesOut
                                     ? Colors.white24
                                     : Colors.grey,
                                 colorBlendMode: BlendMode.modulate,
                                 'assets/images/psd/add.png'),
-                            onPressed: () {
-                              _handleAddPressed(data, context, true, false,
-                                  gameState: gameState, settings: settings);
-                            },
+                            onPressed: () => vm.handleAddNormal(context),
                           );
                         }))),
           Positioned(
@@ -640,23 +555,19 @@ class MonsterStatCardWidget extends StatelessWidget {
                   width: 20 * scale + 8,
                   height: 20 * scale + 8,
                   child: ValueListenableBuilder<int>(
-                      valueListenable: gameState.commandIndex,
+                      valueListenable: vm.commandIndex,
                       builder: (context, value, child) {
                         return IconButton(
                             padding: const EdgeInsets.only(left: 8, top: 8),
                             icon: Image.asset(
-                                color: data.monsterInstances.length ==
-                                        data.type.count
+                                color: vm.allStandeesOut
                                     ? Colors.white24
                                     : Colors.grey,
                                 height: 20 * scale,
                                 fit: BoxFit.fitHeight,
                                 colorBlendMode: BlendMode.modulate,
                                 'assets/images/psd/add.png'),
-                            onPressed: () {
-                              _handleAddPressed(data, context, false, isBoss,
-                                  gameState: gameState, settings: settings);
-                            });
+                            onPressed: () => vm.handleAddElite(context));
                       }))),
         ]));
   }

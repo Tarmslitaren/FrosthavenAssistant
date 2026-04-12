@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_stat_card_widget.dart';
+import 'package:frosthaven_assistant/Layout/view_models/monster_stat_card_view_model.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../../Resource/state/game_state.dart';
@@ -42,7 +43,8 @@ class StatCardZoom extends StatelessWidget {
       child: SizedBox(
           width: cardWidth * scale * zoomValue,
           height: cardHeight * scale * zoomValue,
-          child: MonsterStatCardWidget.buildCard(monster, scaling)),
+          child: MonsterStatCardWidget.buildCard(monster, scaling,
+              viewModel: MonsterStatCardViewModel(monster))),
     );
   }
 }
