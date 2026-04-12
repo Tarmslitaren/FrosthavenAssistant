@@ -1,19 +1,12 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/menus/modifier_deck_menu.dart';
 import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
-import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
+import 'package:frosthaven_assistant/Layout/view_models/modifier_deck_view_model.dart';
+import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
-import 'package:frosthaven_assistant/services/network/network.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
-
-import '../Resource/game_data.dart';
-import '../Resource/game_methods.dart';
-import 'menus/modifier_card_zoom.dart';
 
 class ModifierDeckWidget extends StatefulWidget {
   const ModifierDeckWidget({
@@ -39,46 +32,32 @@ class ModifierDeckWidget extends StatefulWidget {
 
 class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   static const int cardAnimationDuration = 1200;
-  late final GameState _gameState;
-  late final GameData _gameData;
-  late final Settings settings;
-  late final Communication _communication;
 
+  late final ModifierDeckViewModel _vm;
   bool _animationsEnabled = false;
 
   @override
   void initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _gameData = widget.gameData ?? getIt<GameData>();
-    settings = widget.settings ?? getIt<Settings>();
-    _communication = widget.communication ?? getIt<Communication>();
     super.initState();
-
-    //to load save state
-    _gameData.modelData.addListener(_modelDataListener);
+    _vm = ModifierDeckViewModel(
+      widget.name,
+      gameState: widget.gameState,
+      gameData: widget.gameData,
+      settings: widget.settings,
+      communication: widget.communication,
+    );
   }
 
-  void _modelDataListener() {
-    setState(() {});
-  }
-
-  @override
-  void dispose() {
-    _gameData.modelData.removeListener(_modelDataListener);
-    super.dispose();
-  }
-
-  Widget buildStayAnimation(Widget child) {
+  Widget _buildStayAnimation(Widget child, double userScalingBars) {
     return Container(
-        margin: EdgeInsets.only(left: 33.3333 * settings.userScalingBars.value),
+        margin: EdgeInsets.only(left: 33.3333 * userScalingBars),
         child: child);
   }
 
-  Widget buildSlideAnimation(Widget child, Key key) {
+  Widget _buildSlideAnimation(Widget child, Key key, double userScalingBars) {
     if (!_animationsEnabled) {
       return Container(
-          margin:
-              EdgeInsets.only(left: 33.3333 * settings.userScalingBars.value),
+          margin: EdgeInsets.only(left: 33.3333 * userScalingBars),
           child: child);
     }
     return Container(
@@ -87,16 +66,18 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
             child: TranslationAnimatedWidget(
                 animationFinished: (bool finished) {
                   if (finished) {
-                    _animationsEnabled = false;
+                    setState(() {
+                      _animationsEnabled = false;
+                    });
                   }
                 },
                 duration: const Duration(milliseconds: cardAnimationDuration),
                 enabled: true,
                 curve: Curves.easeIn,
                 values: [
-                  const Offset(0, 0), //left to draw pile
-                  const Offset(0, 0), //left to draw pile
-                  Offset(33.3333 * settings.userScalingBars.value, 0), //end
+                  const Offset(0, 0),
+                  const Offset(0, 0),
+                  Offset(33.3333 * userScalingBars, 0),
                 ],
                 child: RotationAnimatedWidget(
                     enabled: true,
@@ -110,93 +91,41 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                     child: child))));
   }
 
-  bool initAnimationEnabled() {
-    if (settings.client.value == ClientState.connected) {
-      GameState oldState = GameState(communication: _communication);
-      int offset = 1;
-      final saveStateLength = _gameState.gameSaveStates.length;
-      final saveState = _gameState.gameSaveStates[saveStateLength - offset];
-      if (saveStateLength <= offset || saveState == null) {
-        return false;
-      } else {
-        oldState.loadFromData(saveState.getState());
-      }
-
-      GameState currentState = _gameState;
-
-      ModifierDeck oldDeck = GameMethods.getModifierDeck(widget.name, oldState);
-      ModifierDeck currentDeck =
-          GameMethods.getModifierDeck(widget.name, currentState);
-      if (oldDeck.discardPileSize == currentDeck.discardPileSize - 1) {
-        return true;
-      }
-      return false;
-    }
-
-    final commandIndex = _gameState.commandIndex.value;
-    final commandDescriptions = _gameState.commandDescriptions;
-    if (settings.server.value && commandIndex >= 0) {
-      if (commandIndex < 0) {
-        return false;
-      }
-      if (commandDescriptions.length > commandIndex) {
-        String commandDescription = commandDescriptions[commandIndex];
-        if (widget.name.isNotEmpty) {
-          if (commandDescription.contains("${widget.name} modifier card")) {
-            return true;
-          }
-        } else {
-          if (commandDescription.contains("monster modifier card")) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
-
-  Widget buildDrawAnimation(Widget child, Key key) {
+  Widget _buildDrawAnimation(
+      Widget child, Key key, double userScalingBars) {
     if (!_animationsEnabled || context.globalPaintBounds == null) {
       return Container(child: child);
     }
-    final userScalingBars = settings.userScalingBars.value;
-    //compose a translation, scale, rotation
     double width = 58.6666 * userScalingBars;
     double height = 39 * userScalingBars;
-
     var screenSize = MediaQuery.of(context).size;
-
     double startXOffset = -(width + 2 * userScalingBars);
 
     final globalPaintBounds = context.globalPaintBounds;
     Offset screenSpaceOffset =
         globalPaintBounds != null ? globalPaintBounds.topLeft : Offset(0, 0);
-    var screenSpaceY =
-        screenSpaceOffset.dy; //draw deck top position from screen top
-    var screenSpaceX = screenSpaceOffset.dx -
-        startXOffset; //draw deck left position from screen left
+    var screenSpaceY = screenSpaceOffset.dy;
+    var screenSpaceX = screenSpaceOffset.dx - startXOffset;
 
-    //compose a translation, scale, rotation
-    const double maxScale = 4; //how big card is in center
+    const double maxScale = 4;
     double screenWidth = screenSize.width;
     var localScreenWidth = screenWidth - screenSpaceX * 2;
     var heightShaveOff = (screenSize.height - screenSpaceY) * 2;
     var localScreenHeight = screenSize.height - heightShaveOff;
     double yOffset = -(localScreenHeight / 2 + height / 2);
-    double halfBigCardWidth =
-        width / 2; //lol up scaled width is same as normal width
-    double xOffset = (localScreenWidth) / 2 -
-        halfBigCardWidth; //is correct if max scale is 1
+    double halfBigCardWidth = width / 2;
+    double xOffset = (localScreenWidth) / 2 - halfBigCardWidth;
 
     return Container(
         key: key,
-        //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
         child: _animationsEnabled
             ? RepaintBoundary(
                 child: TranslationAnimatedWidget(
                     animationFinished: (bool finished) {
                       if (finished) {
-                        _animationsEnabled = false;
+                        setState(() {
+                          _animationsEnabled = false;
+                        });
                       }
                     },
                     duration:
@@ -204,18 +133,12 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                     enabled: true,
                     values: [
                       Offset(startXOffset, 0),
-                      //left to draw pile
                       Offset(xOffset, yOffset),
-                      //center of screen
                       Offset(xOffset, yOffset),
-                      //center of screen
                       Offset(xOffset, yOffset),
-                      //center of screen
                       const Offset(0, 0),
-                      //end
                     ],
                     child: ScaleAnimatedWidget(
-                        //does nothing
                         enabled: true,
                         duration:
                             const Duration(milliseconds: cardAnimationDuration),
@@ -223,10 +146,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         child: RotationAnimatedWidget(
                             enabled: true,
                             values: [
-                              //Rotation.deg(x: 0, y: 0, z: 0),
-                              //Rotation.deg(x:0, y: 0, z: 90),
                               Rotation.deg(x: 0, y: 0, z: 180),
-                              //Rotation.deg(x: 0, y: 0, z: 270),
                               Rotation.deg(x: 0, y: 0, z: 360),
                             ],
                             duration: Duration(
@@ -238,20 +158,28 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   @override
   Widget build(BuildContext context) {
-    bool isAnimating =
-        false; //is not doing anything now. in case flip animation is added
-    return ValueListenableBuilder<double>(
-        valueListenable: settings.userScalingBars,
+    return ValueListenableBuilder<Object>(
+        valueListenable: _vm.modelData,
         builder: (context, value, child) {
-          final userScalingBars = settings.userScalingBars.value;
+          return _buildContent(context);
+        });
+  }
+
+  Widget _buildContent(BuildContext context) {
+    bool isAnimating = false;
+    //is not doing anything now. in case flip animation is added
+    return ValueListenableBuilder<double>(
+        valueListenable: _vm.userScalingBars,
+        builder: (context, value, child) {
+          final userScalingBars = _vm.userScalingBars.value;
           return SizedBox(
             width: 153 * userScalingBars,
             height: 39 * userScalingBars,
             child: ValueListenableBuilder<int>(
-                valueListenable: _gameState.commandIndex, //blanket
+                valueListenable: _vm.commandIndex,
                 builder: (context, value, child) {
                   if (!_animationsEnabled) {
-                    _animationsEnabled = initAnimationEnabled();
+                    _animationsEnabled = _vm.initAnimationEnabled();
                   }
 
                   final textStyle = TextStyle(
@@ -264,18 +192,9 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                             color: Colors.black)
                       ]);
 
-                  Color currentCharacterColor = Colors.transparent;
-                  String? currentCharacterName;
-                  Character? currentCharacter =
-                      GameMethods.getCurrentCharacter();
-                  ModifierDeck deck =
-                      GameMethods.getModifierDeck(widget.name, _gameState);
-                  if (currentCharacter != null &&
-                      currentCharacter.id == deck.name) {
-                    currentCharacterColor = Colors.black;
-                    currentCharacterName = currentCharacter.characterClass.name;
-                  }
-
+                  final currentCharacterColor = _vm.currentCharacterColor;
+                  final currentCharacterName = _vm.currentCharacterName;
+                  final deck = _vm.deck;
                   final discardPileSize = deck.discardPileSize;
                   final discardPileList = deck.discardPileContents.toList();
                   final widgetKey = discardPileSize.toString();
@@ -296,9 +215,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                           onTap: () {
                             setState(() {
                               _animationsEnabled = true;
-                              _gameState.action(DrawModifierCardCommand(
-                                  widget.name,
-                                  gameState: _gameState));
+                              _vm.drawCard();
                             });
                           },
                           child: Stack(children: [
@@ -318,10 +235,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                                 onTap: () {
                                                   setState(() {
                                                     _animationsEnabled = true;
-                                                    _gameState.action(
-                                                        DrawModifierCardCommand(
-                                                            widget.name,
-                                                            gameState: _gameState));
+                                                    _vm.drawCard();
                                                   });
                                                 })))
                                   ])
@@ -342,10 +256,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                               onTap: () {
                                                 setState(() {
                                                   _animationsEnabled = true;
-                                                  _gameState.action(
-                                                      DrawModifierCardCommand(
-                                                          widget.name,
-                                                          gameState: _gameState));
+                                                  _vm.drawCard();
                                                 });
                                               },
                                               child: Center(
@@ -368,7 +279,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         width: 2 * userScalingBars,
                       ),
                       Stack(children: [
-                        //bg
                         Container(
                           margin: EdgeInsets.only(top: 1 * userScalingBars),
                           width: 57.6666 * userScalingBars,
@@ -381,7 +291,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                           ),
                         ),
                         discardPileSize > 2
-                            ? buildStayAnimation(
+                            ? _buildStayAnimation(
                                 RotationTransition(
                                     turns:
                                         const AlwaysStoppedAnimation(15 / 360),
@@ -391,10 +301,10 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                           discardPileList.length - 3],
                                       revealed: true,
                                     )),
-                              )
+                                userScalingBars)
                             : Container(),
                         discardPileSize > 1
-                            ? buildSlideAnimation(
+                            ? _buildSlideAnimation(
                                 RotationTransition(
                                     turns:
                                         const AlwaysStoppedAnimation(15 / 360),
@@ -404,17 +314,19 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                           discardPileList.length - 2],
                                       revealed: true,
                                     )),
-                                Key(widgetKey))
+                                Key(widgetKey),
+                                userScalingBars)
                             : Container(),
                         deck.discardPileIsNotEmpty
-                            ? buildDrawAnimation(
+                            ? _buildDrawAnimation(
                                 ModifierCardWidget(
                                   name: deck.name,
                                   key: Key(widgetKey),
                                   card: deck.discardPileTop,
                                   revealed: true,
                                 ),
-                                Key((-deck.discardPileSize).toString()))
+                                Key((-deck.discardPileSize).toString()),
+                                userScalingBars)
                             : SizedBox(
                                 width: 66.6666 * userScalingBars,
                                 height: 39 * userScalingBars,
@@ -425,19 +337,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 child: InkWell(
                                     focusColor: const Color(0x44000000),
                                     onLongPress: () {
-                                      //show zoomed in card
-                                      if (deck.discardPileIsNotEmpty) {
-                                        openDialog(
-                                            context,
-                                            ModifierCardZoom(
-                                                name: widget.name,
-                                                card: deck.discardPileTop));
-                                      }
+                                      _vm.openZoom(context);
                                     },
                                     onTap: () {
                                       setState(() {
-                                        openDialog(context,
-                                            ModifierDeckMenu(name: deck.name));
+                                        _vm.openModifierMenu(context);
                                       });
                                     })))
                       ])
