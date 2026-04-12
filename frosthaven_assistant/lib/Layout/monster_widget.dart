@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card_widget.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
-import 'package:frosthaven_assistant/Resource/commands/next_turn_command.dart';
+import 'package:frosthaven_assistant/Layout/view_models/monster_widget_view_model.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Resource/color_matrices.dart';
-import '../Resource/game_methods.dart';
-import '../services/service_locator.dart';
 import 'monster_stat_card_widget.dart';
 
 class MonsterWidget extends StatefulWidget {
@@ -23,23 +21,21 @@ class MonsterWidget extends StatefulWidget {
 }
 
 class MonsterWidgetState extends State<MonsterWidget> {
-  late final GameState _gameState;
+  late final MonsterWidgetViewModel _vm;
   List<MonsterInstance> lastList = [];
 
   @override
   void initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
     super.initState();
+    _vm = MonsterWidgetViewModel(widget.data, gameState: widget.gameState);
     lastList = widget.data.monsterInstances.asList();
   }
 
-  Widget buildMonsterBoxGrid(double scale) {
+  Widget _buildMonsterBoxGrid(double scale) {
     String displayStartAnimation = "";
     final monsterInstances = widget.data.monsterInstances;
 
     if (lastList.length < monsterInstances.length) {
-      //find which is new
-
       for (var item in monsterInstances) {
         bool found = false;
         for (var oldItem in lastList) {
@@ -79,17 +75,15 @@ class MonsterWidgetState extends State<MonsterWidget> {
     );
   }
 
-  Widget buildImagePart(double height, double scale) {
-    bool frosthavenStyle = GameMethods.isFrosthavenStyle(widget.data.type);
+  Widget _buildImagePart(double height, double scale) {
     return RepaintBoundary(
         child: Stack(alignment: Alignment.bottomCenter, children: [
       Container(
           margin: EdgeInsets.only(bottom: 4 * scale, top: 4 * scale),
           child: PhysicalShape(
-            color: widget.data.turnState.value == TurnsState.current
+            color: _vm.turnState == TurnsState.current
                 ? Colors.tealAccent
                 : Colors.transparent,
-            //or bleu if current
             shadowColor: Colors.black,
             elevation: 8,
             clipper: const ShapeBorderClipper(shape: CircleBorder()),
@@ -107,12 +101,13 @@ class MonsterWidgetState extends State<MonsterWidget> {
       Container(
           width: height * 0.95,
           alignment: Alignment.bottomCenter,
-          margin: EdgeInsets.only(bottom: frosthavenStyle ? 2 * scale : 0),
+          margin: EdgeInsets.only(
+              bottom: _vm.frosthavenStyle ? 2 * scale : 0),
           child: Text(
             textAlign: TextAlign.center,
             widget.data.type.display,
             style: TextStyle(
-                fontFamily: frosthavenStyle ? "GermaniaOne" : 'Pirata',
+                fontFamily: _vm.frosthavenStyle ? "GermaniaOne" : 'Pirata',
                 color: Colors.white,
                 fontSize: 14.4 * scale,
                 shadows: [
@@ -131,40 +126,27 @@ class MonsterWidgetState extends State<MonsterWidget> {
     double scale = getScaleByReference(context);
     double height = scale * 96;
 
-    final specialDisabled =
-        GameMethods.isInactiveForRule(widget.data.type.name);
-
     return ValueListenableBuilder<int>(
-        valueListenable: _gameState.updateList,
+        valueListenable: _vm.updateList,
         builder: (context, value, child) {
-          final hasInstances = widget.data.monsterInstances.isNotEmpty;
-          final roundState = _gameState.roundState.value;
-          final isActive = widget.data.isActive;
-
           return RepaintBoundary(
               child: Column(mainAxisSize: MainAxisSize.max, children: [
             ColorFiltered(
-                colorFilter: isActive &&
-                        !specialDisabled &&
-                        (widget.data.turnState.value != TurnsState.done ||
-                            roundState == RoundState.chooseInitiative)
-                    ? ColorFilter.matrix(identity)
-                    : ColorFilter.matrix(grayScale),
+                colorFilter: _vm.isGrayScale
+                    ? ColorFilter.matrix(grayScale)
+                    : ColorFilter.matrix(identity),
                 child: SizedBox(
                   height: 96 * scale,
-                  //this dictates size of the cards
                   width: getMainListWidth(context),
                   child: Row(
                     children: [
-                      roundState == RoundState.playTurns &&
-                              ((hasInstances || isActive) && !specialDisabled)
+                      _vm.showTurnTap
                           ? InkWell(
                               onTap: () {
-                                _gameState
-                                    .action(TurnDoneCommand(widget.data.id, gameState: _gameState));
+                                _vm.endTurn();
                               },
-                              child: buildImagePart(height, scale))
-                          : buildImagePart(height, scale),
+                              child: _buildImagePart(height, scale))
+                          : _buildImagePart(height, scale),
                       RepaintBoundary(
                           child: MonsterAbilityCardWidget(data: widget.data)),
                       RepaintBoundary(
@@ -176,9 +158,9 @@ class MonsterWidgetState extends State<MonsterWidget> {
               margin: EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
               width: getMainListWidth(context) - 3.2 * scale,
               child: ValueListenableBuilder<int>(
-                  valueListenable: _gameState.killMonsterStandee,
+                  valueListenable: _vm.killMonsterStandee,
                   builder: (context, value, child) {
-                    return buildMonsterBoxGrid(scale);
+                    return _buildMonsterBoxGrid(scale);
                   }),
             ),
           ]));
