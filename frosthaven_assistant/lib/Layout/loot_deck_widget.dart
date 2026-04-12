@@ -1,18 +1,13 @@
 import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Layout/view_models/loot_deck_view_model.dart';
+import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
-import 'package:frosthaven_assistant/services/network/network.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
 
-import '../Resource/commands/draw_loot_card_command.dart';
-import '../Resource/game_data.dart';
-import '../Resource/game_methods.dart';
 import 'loot_card.dart';
-import 'menus/loot_cards_menu.dart';
 
 class LootDeckWidget extends StatefulWidget {
   const LootDeckWidget({
@@ -36,47 +31,31 @@ class LootDeckWidget extends StatefulWidget {
 class LootDeckWidgetState extends State<LootDeckWidget> {
   static const double cardWidth = 13.3333;
   static const int cardAnimationDuration = 1600;
-  late final GameState _gameState;
-  late final GameData _gameData;
-  late final Settings _settings;
-  late final Communication _communication;
 
+  late final LootDeckViewModel _vm;
   bool _animationsEnabled = false;
 
   @override
   void initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _gameData = widget.gameData ?? getIt<GameData>();
-    _settings = widget.settings ?? getIt<Settings>();
-    _communication = widget.communication ?? getIt<Communication>();
     super.initState();
-
-    //to load save state
-    _gameData.modelData.addListener(_modelDataListenerLootDeck);
+    _vm = LootDeckViewModel(
+      gameState: widget.gameState,
+      gameData: widget.gameData,
+      settings: widget.settings,
+      communication: widget.communication,
+    );
   }
 
-  void _modelDataListenerLootDeck() {
-    setState(() {});
-  }
-
-  @override
-  void dispose() {
-    _gameData.modelData.removeListener(_modelDataListenerLootDeck);
-    super.dispose();
-  }
-
-  Widget buildStayAnimation(Widget child) {
+  Widget _buildStayAnimation(Widget child, double userScalingBars) {
     return Container(
-        margin:
-            EdgeInsets.only(left: cardWidth * _settings.userScalingBars.value),
+        margin: EdgeInsets.only(left: cardWidth * userScalingBars),
         child: child);
   }
 
-  Widget buildSlideAnimation(Widget child, Key key) {
+  Widget _buildSlideAnimation(Widget child, Key key, double userScalingBars) {
     if (!_animationsEnabled) {
       return Container(
-          margin: EdgeInsets.only(
-              left: cardWidth * _settings.userScalingBars.value),
+          margin: EdgeInsets.only(left: cardWidth * userScalingBars),
           child: child);
     }
     return Container(
@@ -85,16 +64,18 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
             child: TranslationAnimatedWidget(
                 animationFinished: (bool finished) {
                   if (finished) {
-                    _animationsEnabled = false;
+                    setState(() {
+                      _animationsEnabled = false;
+                    });
                   }
                 },
                 duration: const Duration(milliseconds: cardAnimationDuration),
                 enabled: true,
                 curve: Curves.easeIn,
                 values: [
-                  const Offset(0, 0), //left to draw pile
-                  const Offset(0, 0), //left to draw pile
-                  Offset(cardWidth * _settings.userScalingBars.value, 0), //end
+                  const Offset(0, 0),
+                  const Offset(0, 0),
+                  Offset(cardWidth * userScalingBars, 0),
                 ],
                 child: RotationAnimatedWidget(
                     enabled: true,
@@ -108,67 +89,38 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                     child: child))));
   }
 
-  bool initAnimationEnabled() {
-    if (_settings.client.value == ClientState.connected ||
-        _settings.server.value) {
-      GameState oldState = GameState(communication: _communication);
-      int offset = 1;
-      final saveStatesLength = _gameState.gameSaveStates.length;
-      if (saveStatesLength <= offset) {
-        return false;
-      }
-      final oldSave = _gameState.gameSaveStates[saveStatesLength - offset];
-      if (oldSave != null) {
-        String oldSaveState = oldSave.getState();
-        oldState.loadFromData(oldSaveState);
-        GameState currentState = _gameState;
-
-        if (oldState.lootDeck.discardPileSize ==
-            currentState.lootDeck.discardPileSize - 1) {
-          return true;
-        }
-        return false;
-      }
-    }
-    return false;
-  }
-
-  Widget buildDrawAnimation(Widget child, Key key, BuildContext context) {
-    final userScalingBars = _settings.userScalingBars.value;
-    double width = 40 * userScalingBars; //the width of a card
+  Widget _buildDrawAnimation(
+      Widget child, Key key, BuildContext context, double userScalingBars) {
+    double width = 40 * userScalingBars;
     double height = 58.6666 * userScalingBars;
     double startXOffset = -(width);
 
     final globalPaintBounds = context.globalPaintBounds;
     Offset screenSpaceOffset =
         globalPaintBounds != null ? globalPaintBounds.topLeft : Offset(0, 0);
-    var screenSpaceY =
-        screenSpaceOffset.dy; //draw deck top position from screen top
-    var screenSpaceX = screenSpaceOffset.dx -
-        startXOffset; //draw deck left position from screen left
+    var screenSpaceY = screenSpaceOffset.dy;
+    var screenSpaceX = screenSpaceOffset.dx - startXOffset;
 
-    //compose a translation, scale, rotation
-    const double maxScale = 4; //how big card is in center
+    const double maxScale = 4;
     var screenSize = MediaQuery.of(context).size;
     double screenWidth = screenSize.width;
     var localScreenWidth = screenWidth - screenSpaceX * 2;
     var heightShaveOff = (screenSize.height - screenSpaceY) * 2;
     var localScreenHeight = screenSize.height - heightShaveOff;
     double yOffset = -(localScreenHeight / 2 + height / 2);
-    double halfBigCardWidth =
-        width / 2; //lol up scaled width is same as normal width
-    double xOffset = (localScreenWidth) / 2 -
-        halfBigCardWidth; //is correct if max scale is 1
+    double halfBigCardWidth = width / 2;
+    double xOffset = (localScreenWidth) / 2 - halfBigCardWidth;
 
     return Container(
         key: key,
-        //this make it run only once by updating the key once per card. for some reason the translation animation plays anyway
         child: _animationsEnabled
             ? RepaintBoundary(
                 child: TranslationAnimatedWidget(
                     animationFinished: (bool finished) {
                       if (finished) {
-                        _animationsEnabled = false;
+                        setState(() {
+                          _animationsEnabled = false;
+                        });
                       }
                     },
                     duration: Duration(
@@ -177,18 +129,12 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                     enabled: _animationsEnabled,
                     values: [
                       Offset(startXOffset, 0),
-                      //left to draw pile
                       Offset(xOffset, yOffset),
-                      //center of screen
                       Offset(xOffset, yOffset),
-                      //center of screen
                       Offset(xOffset, yOffset),
-                      //center of screen
                       const Offset(0, 0),
-                      //end
                     ],
                     child: ScaleAnimatedWidget(
-                        //does nothing
                         enabled: true,
                         duration:
                             const Duration(milliseconds: cardAnimationDuration),
@@ -208,42 +154,42 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
 
   @override
   Widget build(BuildContext context) {
+    return ValueListenableBuilder<Object>(
+        valueListenable: _vm.modelData,
+        builder: (context, value, child) {
+          return _buildContent(context);
+        });
+  }
+
+  Widget _buildContent(BuildContext context) {
     bool isAnimating = false;
     //is not doing anything now. in case flip animation is added
 
     return ValueListenableBuilder<double>(
-        valueListenable: _settings.userScalingBars,
+        valueListenable: _vm.userScalingBars,
         builder: (context, value, child) {
-          final userScalingBars = _settings.userScalingBars.value;
+          final userScalingBars = _vm.userScalingBars.value;
           return SizedBox(
             width: 94 * userScalingBars,
             height: 58.6666 * userScalingBars,
             child: ValueListenableBuilder<int>(
-                valueListenable: _gameState.commandIndex,
+                valueListenable: _vm.commandIndex,
                 builder: (context, value, child) {
                   return ValueListenableBuilder<int>(
-                      valueListenable: _gameState.lootDeck.cardCount,
+                      valueListenable: _vm.cardCount,
                       builder: (context, value, child) {
-                        LootDeck? deck = _gameState.lootDeck;
-                        if (deck.drawPileIsEmpty && deck.discardPileIsEmpty ||
-                            _settings.hideLootDeck.value) {
+                        if (_vm.shouldHide) {
                           return Container();
                         }
 
                         if (!_animationsEnabled) {
-                          _animationsEnabled = initAnimationEnabled();
+                          _animationsEnabled = _vm.initAnimationEnabled();
                         }
 
-                        Color currentCharacterColor = Colors.transparent;
-                        String? currentCharacterName;
-                        Character? currentCharacter =
-                            GameMethods.getCurrentCharacter();
-                        if (currentCharacter != null) {
-                          currentCharacterColor = Colors.black;
-                          currentCharacterName =
-                              currentCharacter.characterClass.name;
-                        }
-
+                        final deck = _vm.lootDeck;
+                        final currentCharacterColor =
+                            _vm.currentCharacterColor;
+                        final currentCharacterName = _vm.currentCharacterName;
                         final discardPileSize = deck.discardPileSize;
                         final discardPileList =
                             deck.discardPileContents.toList();
@@ -256,8 +202,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                   if (deck.drawPileIsNotEmpty) {
                                     setState(() {
                                       _animationsEnabled = true;
-                                      _gameState.action(DrawLootCardCommand(
-                                          gameState: _gameState));
+                                      _vm.drawCard();
                                     });
                                   }
                                 },
@@ -305,10 +250,9 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                             ),
                             InkWell(
                                 onTap: () {
-                                  openDialog(context, const LootCardsMenu());
+                                  _vm.openLootMenu(context);
                                 },
                                 child: Stack(children: [
-                                  //bg
                                   Container(
                                     margin: EdgeInsets.only(
                                         top: 1 * userScalingBars),
@@ -323,7 +267,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                     ),
                                   ),
                                   discardPileSize > 2
-                                      ? buildStayAnimation(
+                                      ? _buildStayAnimation(
                                           RotationTransition(
                                               turns:
                                                   const AlwaysStoppedAnimation(
@@ -333,10 +277,10 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                                     discardPileSize - 3],
                                                 revealed: true,
                                               )),
-                                        )
+                                          userScalingBars)
                                       : Container(),
                                   discardPileSize > 1
-                                      ? buildSlideAnimation(
+                                      ? _buildSlideAnimation(
                                           RotationTransition(
                                               turns:
                                                   const AlwaysStoppedAnimation(
@@ -346,10 +290,11 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                                     discardPileSize - 2],
                                                 revealed: true,
                                               )),
-                                          Key(deck.discardPileSize.toString()))
+                                          Key(deck.discardPileSize.toString()),
+                                          userScalingBars)
                                       : Container(),
                                   deck.discardPileIsNotEmpty
-                                      ? buildDrawAnimation(
+                                      ? _buildDrawAnimation(
                                           LootCardWidget(
                                             key:
                                                 Key(discardPileSize.toString()),
@@ -358,7 +303,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           ),
                                           Key((-deck.discardPileSize)
                                               .toString()),
-                                          context)
+                                          context,
+                                          userScalingBars)
                                       : SizedBox(
                                           width: 40 * userScalingBars,
                                           height: 58.6666 * userScalingBars,
