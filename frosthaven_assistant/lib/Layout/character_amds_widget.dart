@@ -3,11 +3,10 @@ import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 
 import '../Resource/enums.dart';
-import '../Resource/game_methods.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
-import '../services/service_locator.dart';
 import 'modifier_deck_widget.dart';
+import 'view_models/character_amds_view_model.dart';
 
 class CharacterAmdsWidget extends StatefulWidget {
   const CharacterAmdsWidget({super.key, this.gameState, this.settings});
@@ -20,8 +19,7 @@ class CharacterAmdsWidget extends StatefulWidget {
 }
 
 class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
-  late final GameState _gameState;
-  late final Settings _settings;
+  late final CharacterAmdsViewModel _vm;
   _OpenState _openStateUserIntentPlayTurns = _OpenState.oneOpen;
   _OpenState _openStateUserIntentChooseInit = _OpenState.allOpen;
   _OpenState _lastState = _OpenState.noOpen;
@@ -31,14 +29,14 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
   @override
   void initState() {
     super.initState();
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _settings = widget.settings ?? getIt<Settings>();
+    _vm = CharacterAmdsViewModel(
+        gameState: widget.gameState, settings: widget.settings);
   }
 
   List<Offset> _getOffsets(int characterAmount) {
-    final roundState = _gameState.roundState.value;
-    final Character? currentCharacter = GameMethods.getCurrentCharacter();
-    final barScale = _settings.userScalingBars.value;
+    final roundState = _vm.roundState;
+    final currentCharacter = _vm.currentCharacter;
+    final barScale = _vm.barScale;
     final deckHeight = (39 + 4) * barScale;
     final goingUpAll = [Offset(0, deckHeight * characterAmount), Offset(0, 0)];
     final goingUpSome = [
@@ -66,7 +64,6 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
     final goingNowhereOne = [Offset(0, 0), Offset(0, 0)];
     var retVal = [Offset(0, 0), Offset(0, 0)];
 
-    //find where are we, and where are we going
     _OpenState whereWeAre = _lastState;
     _OpenState whereWeAreGoing = _OpenState.noOpen;
 
@@ -79,7 +76,6 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
       }
     }
 
-    //find the diff
     if (whereWeAre == whereWeAreGoing) {
       if (whereWeAre == _OpenState.noOpen) {
         retVal = goingNowhereNone;
@@ -124,113 +120,104 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
 
     _lastState = whereWeAreGoing;
     return retVal;
-    //show either all, one or none:
-    //10 if all open, tap -> if current character -> show 1 else show none == goingDownSome or goingDownAll
-    //20 if none open tap -> if current character -> show 1 else show all == going upOne or goingUpAll
-    //30 if current character open tap -> show all goto 10 == goingUpAll
-    //issue: can't go down if one open. it's ok
-    //corner case: what if only one character ! (i.e. solo scenarios)
   }
 
   @override
   Widget build(BuildContext context) {
-    final showCharacterAmd = _settings.showCharacterAMD.value;
-    if (!showCharacterAmd) {
+    if (!_vm.showCharacterAmd) {
       return Container();
     }
-    final chars = GameMethods.getCurrentCharacters();
-    int characterAmount = 0;
-    for (final character in chars) {
-      if (character.characterClass.perks.isNotEmpty) {
-        characterAmount++;
-      }
-    }
+    final characterAmount = _vm.characterAmount;
     if (characterAmount == 0) {
       return Container();
     }
 
-    final Character? currentCharacter = GameMethods.getCurrentCharacter();
-    final roundState = _gameState.roundState.value;
-    final canShowOneDeck = roundState == RoundState.playTurns &&
-        currentCharacter != null &&
-        currentCharacter.characterClass.perks.isNotEmpty;
-    final duration = Duration(milliseconds: 500);
-    final barScale = _settings.userScalingBars.value;
+    final currentCharacter = _vm.currentCharacter;
+    final roundState = _vm.roundState;
+    final canShowOneDeck = _vm.canShowOneDeck;
+    final duration = const Duration(milliseconds: 500);
+    final barScale = _vm.barScale;
     final offsets = _getOffsets(characterAmount);
-    final text = "Character Decks";
+    const text = "Character Decks";
 
-    return RepaintBoundary(child:TranslationAnimatedWidget(
-        enabled: _enableAnim, //block this when not interacting
-        values: offsets,
-        duration: duration,
-        curve: Easing.standard,
-        child: Column(children: [
-          ElevatedButton(
-              //todo: nicer button: show that it hides the amds somehow
-              onPressed: () => {
-                    setState(() {
-                      if (roundState == RoundState.chooseInitiative) {
-                        if (_openStateUserIntentChooseInit ==
-                            _OpenState.noOpen) {
-                          _openStateUserIntentChooseInit = _OpenState.allOpen;
-                        } else if (_openStateUserIntentChooseInit ==
-                            _OpenState.allOpen) {
-                          _openStateUserIntentChooseInit = _OpenState.noOpen;
-                        }
-                      } else {
-                        if (canShowOneDeck) {
-                          if (_openStateUserIntentPlayTurns ==
-                              _OpenState.oneOpen) {
-                            _openStateUserIntentPlayTurns = _OpenState.allOpen;
-                          } else if (_openStateUserIntentPlayTurns ==
-                              _OpenState.allOpen) {
-                            _openStateUserIntentPlayTurns = _OpenState.oneOpen;
-                          } else if (_openStateUserIntentPlayTurns ==
-                              _OpenState.noOpen) {
-                            _openStateUserIntentPlayTurns = _OpenState.oneOpen;
+    return RepaintBoundary(
+        child: TranslationAnimatedWidget(
+            enabled: _enableAnim,
+            values: offsets,
+            duration: duration,
+            curve: Easing.standard,
+            child: Column(children: [
+              ElevatedButton(
+                  onPressed: () => {
+                        setState(() {
+                          if (roundState == RoundState.chooseInitiative) {
+                            if (_openStateUserIntentChooseInit ==
+                                _OpenState.noOpen) {
+                              _openStateUserIntentChooseInit =
+                                  _OpenState.allOpen;
+                            } else if (_openStateUserIntentChooseInit ==
+                                _OpenState.allOpen) {
+                              _openStateUserIntentChooseInit =
+                                  _OpenState.noOpen;
+                            }
+                          } else {
+                            if (canShowOneDeck) {
+                              if (_openStateUserIntentPlayTurns ==
+                                  _OpenState.oneOpen) {
+                                _openStateUserIntentPlayTurns =
+                                    _OpenState.allOpen;
+                              } else if (_openStateUserIntentPlayTurns ==
+                                  _OpenState.allOpen) {
+                                _openStateUserIntentPlayTurns =
+                                    _OpenState.oneOpen;
+                              } else if (_openStateUserIntentPlayTurns ==
+                                  _OpenState.noOpen) {
+                                _openStateUserIntentPlayTurns =
+                                    _OpenState.oneOpen;
+                              }
+                            } else {
+                              if (_openStateUserIntentPlayTurns ==
+                                  _OpenState.noOpen) {
+                                _openStateUserIntentPlayTurns =
+                                    _OpenState.allOpen;
+                              } else if (_openStateUserIntentPlayTurns ==
+                                  _OpenState.allOpen) {
+                                _openStateUserIntentPlayTurns =
+                                    _OpenState.oneOpen;
+                              } else if (_openStateUserIntentPlayTurns ==
+                                  _OpenState.oneOpen) {
+                                _openStateUserIntentPlayTurns =
+                                    _OpenState.allOpen;
+                              }
+                            }
                           }
-                        } else {
-                          if (_openStateUserIntentPlayTurns ==
-                              _OpenState.noOpen) {
-                            _openStateUserIntentPlayTurns = _OpenState.allOpen;
-                          } else if (_openStateUserIntentPlayTurns ==
-                              _OpenState.allOpen) {
-                            _openStateUserIntentPlayTurns = _OpenState.oneOpen;
-                          } else if (_openStateUserIntentPlayTurns ==
-                              _OpenState.oneOpen) {
-                            _openStateUserIntentPlayTurns = _OpenState.allOpen;
-                          }
-                        }
-                      }
-                      _enableAnim = true;
-                    })
-                  },
-              child: Text(text)),
-        RepaintBoundary(child:OpacityAnimatedWidget.tween(
-              enabled: _lastState == _OpenState.noOpen,
-              opacityEnabled: 0, //define start value
-              opacityDisabled: 1, //and end value
-              duration: duration,
-              curve: Easing.standard,
-              child: (_openStateUserIntentPlayTurns == _OpenState.oneOpen &&
-                      canShowOneDeck)
-                  ? Container(
-                      margin: EdgeInsets.only(
-                        top: 4 * barScale,
-                      ),
-                      child: ModifierDeckWidget(name: currentCharacter.id))
-                  : Column(
-                      children: chars
-                          .map((item) => (item.characterClass.perks.isNotEmpty)
-                              ? Container(
-                                  margin: EdgeInsets.only(
-                                    top: 4 * barScale,
-                                  ),
-                                  child: ModifierDeckWidget(name: item.id))
-                              : Container())
-                          .toList(),
-                    )))
-        ])));
+                          _enableAnim = true;
+                        })
+                      },
+                  child: const Text(text)),
+              RepaintBoundary(
+                  child: OpacityAnimatedWidget.tween(
+                      enabled: _lastState == _OpenState.noOpen,
+                      opacityEnabled: 0,
+                      opacityDisabled: 1,
+                      duration: duration,
+                      curve: Easing.standard,
+                      child: (_openStateUserIntentPlayTurns ==
+                                  _OpenState.oneOpen &&
+                              canShowOneDeck)
+                          ? Container(
+                              margin: EdgeInsets.only(top: 4 * barScale),
+                              child:
+                                  ModifierDeckWidget(name: currentCharacter!.id))
+                          : Column(
+                              children: _vm.charsWithPerks
+                                  .map((item) => Container(
+                                      margin:
+                                          EdgeInsets.only(top: 4 * barScale),
+                                      child: ModifierDeckWidget(name: item.id)))
+                                  .toList(),
+                            )))
+            ])));
   }
 }
 
