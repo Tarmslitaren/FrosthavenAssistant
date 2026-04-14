@@ -64,9 +64,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
             child: TranslationAnimatedWidget(
                 animationFinished: (bool finished) {
                   if (finished) {
-                    setState(() {
-                      _animationsEnabled = false;
-                    });
+                    _animationsEnabled = false;
                   }
                 },
                 duration: const Duration(milliseconds: cardAnimationDuration),
@@ -118,9 +116,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                 child: TranslationAnimatedWidget(
                     animationFinished: (bool finished) {
                       if (finished) {
-                        setState(() {
-                          _animationsEnabled = false;
-                        });
+                        _animationsEnabled = false;
                       }
                     },
                     duration: Duration(

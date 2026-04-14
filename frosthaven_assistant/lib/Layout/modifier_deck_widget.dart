@@ -66,9 +66,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
             child: TranslationAnimatedWidget(
                 animationFinished: (bool finished) {
                   if (finished) {
-                    setState(() {
-                      _animationsEnabled = false;
-                    });
+                    _animationsEnabled = false;
                   }
                 },
                 duration: const Duration(milliseconds: cardAnimationDuration),
@@ -123,9 +121,7 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                 child: TranslationAnimatedWidget(
                     animationFinished: (bool finished) {
                       if (finished) {
-                        setState(() {
-                          _animationsEnabled = false;
-                        });
+                        _animationsEnabled = false;
                       }
                     },
                     duration:
