@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/background.dart';
 import 'package:frosthaven_assistant/Layout/modifier_deck_widget.dart';
@@ -9,7 +7,6 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../Model/campaign.dart';
 import '../Resource/game_data.dart';
-import '../Resource/game_methods.dart';
 import '../Resource/scaling.dart';
 import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
@@ -27,17 +24,6 @@ class MainScaffold extends StatelessWidget {
   // injected for testing
   final Settings? settings;
 
-  /// Detects if the current device is an iPad.
-  /// iPad has a shortestSide >= 600 and runs iOS.
-  static bool _isIPad(BuildContext context) {
-    // Check if it's iOS first
-    if (!Platform.isIOS) return false;
-
-    // Check if it's a tablet-sized device (iPad)
-    final shortestSide = MediaQuery.of(context).size.shortestSide;
-    return shortestSide >= 600;
-  }
-
   @override
   Widget build(BuildContext context) {
     final settings = this.settings ?? getIt<Settings>();
@@ -54,8 +40,8 @@ class MainScaffold extends StatelessWidget {
                   resizeToAvoidBottomInset: false,
                   bottomNavigationBar: RepaintBoundary(child: BottomBar()),
                   appBar: PreferredSize(
-                      preferredSize: Size(double.infinity,
-                          40 * settings.userScalingBars.value),
+                      preferredSize: Size(
+                          double.infinity, 40 * settings.userScalingBars.value),
                       child: const RepaintBoundary(child: TopBar())),
                   drawer: MainMenu(),
                   body: const RepaintBoundary(child: MainScaffoldBody())));
@@ -97,7 +83,8 @@ class ToastNotifier extends StatelessWidget {
 }
 
 class MainScaffoldBody extends StatelessWidget {
-  const MainScaffoldBody({super.key, this.gameState, this.settings, this.gameData});
+  const MainScaffoldBody(
+      {super.key, this.gameState, this.settings, this.gameData});
 
   // injected for testing
   final GameState? gameState;
@@ -131,13 +118,11 @@ class MainScaffoldBody extends StatelessWidget {
                           return ValueListenableBuilder<double>(
                               valueListenable: vm.userScalingBars,
                               builder: (context, value, child) {
-                                final barScale =
-                                    vm.userScalingBars.value;
+                                final barScale = vm.userScalingBars.value;
                                 final bool hasLootDeck = vm.hasLootDeck;
                                 final bool modFitsOnBar =
                                     modifiersFitOnBar(context);
-                                final int? nrOfSections =
-                                    vm.availableSections;
+                                final int? nrOfSections = vm.availableSections;
                                 final bool separateRow =
                                     vm.sectionsOnSeparateRow(context);
                                 final double width = separateRow
@@ -150,14 +135,11 @@ class MainScaffoldBody extends StatelessWidget {
                                     left: barScale * 5,
                                     child: Column(children: [
                                       Row(
-                                          mainAxisAlignment:
-                                              ((!separateRow &&
-                                                          nrOfSections !=
-                                                              null) ||
-                                                      hasLootDeck)
-                                                  ? MainAxisAlignment
-                                                      .spaceBetween
-                                                  : MainAxisAlignment.end,
+                                          mainAxisAlignment: ((!separateRow &&
+                                                      nrOfSections != null) ||
+                                                  hasLootDeck)
+                                              ? MainAxisAlignment.spaceBetween
+                                              : MainAxisAlignment.end,
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           mainAxisSize: MainAxisSize.max,
@@ -172,8 +154,7 @@ class MainScaffoldBody extends StatelessWidget {
                                               ),
                                             Column(children: [
                                               RepaintBoundary(
-                                                  child:
-                                                      CharacterAmdsWidget()),
+                                                  child: CharacterAmdsWidget()),
                                               if (vm.shouldShowAlliesDeck)
                                                 Container(
                                                     margin: EdgeInsets.only(

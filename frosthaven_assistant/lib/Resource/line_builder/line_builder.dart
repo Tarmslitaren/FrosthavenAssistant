@@ -95,7 +95,6 @@ class LineBuilder {
       final CrossAxisAlignment alignment,
       final double scale,
       final bool animate) {
-    //todo: for performance - check how often is this being run
     bool isBossStatCard = monster?.type.levels[0].boss != null &&
         alignment == CrossAxisAlignment.start;
 
@@ -641,7 +640,8 @@ class LineBuilder {
                       padding: EdgeInsets.only(
                           top: getTopPaddingForStyle(styleToUse)),
                       child: shouldAnimate
-                          ?RepaintBoundary(child: AnimatedTextKit(
+                          ? RepaintBoundary(
+                              child: AnimatedTextKit(
                               repeatForever: true,
                               //pause: const Duration(milliseconds: textAnimationDelay),
                               animatedTexts: [
@@ -764,7 +764,8 @@ class LineBuilder {
             color: debugColors ? Colors.red : null,
             padding: EdgeInsets.only(top: getTopPaddingForStyle(styleToUse)),
             child: shouldAnimate
-                ? RepaintBoundary(child:AnimatedTextKit(
+                ? RepaintBoundary(
+                    child: AnimatedTextKit(
                     repeatForever: true,
                     //pause: const Duration(milliseconds: textAnimationDelay),
                     animatedTexts: [

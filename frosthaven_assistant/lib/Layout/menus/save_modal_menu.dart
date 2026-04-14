@@ -72,7 +72,6 @@ class SaveModalMenuState extends State<SaveModalMenu> {
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  //todo: scale button sizes
                   children: [
                     if (!widget.saveOnly)
                       OutlinedButton(

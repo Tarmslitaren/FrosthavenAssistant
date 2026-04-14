@@ -4,12 +4,10 @@ import '../state/game_state.dart';
 class CorrosiveSpewCommand extends Command {
   final GameState _gameState;
 
-  CorrosiveSpewCommand({required GameState gameState})
-      : _gameState = gameState;
+  CorrosiveSpewCommand({required GameState gameState}) : _gameState = gameState;
 
   @override
   void execute() {
-    //todo: test
     GameMethods.getModifierDeck("Ruinmaw", _gameState)
         .setCorrosiveSpew(stateAccess);
   }

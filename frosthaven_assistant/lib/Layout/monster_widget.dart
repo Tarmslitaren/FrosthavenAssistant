@@ -101,8 +101,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
       Container(
           width: height * 0.95,
           alignment: Alignment.bottomCenter,
-          margin: EdgeInsets.only(
-              bottom: _vm.frosthavenStyle ? 2 * scale : 0),
+          margin: EdgeInsets.only(bottom: _vm.frosthavenStyle ? 2 * scale : 0),
           child: Text(
             textAlign: TextAlign.center,
             widget.data.type.display,
