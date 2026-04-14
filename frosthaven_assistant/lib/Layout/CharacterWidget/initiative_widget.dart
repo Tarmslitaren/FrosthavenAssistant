@@ -3,13 +3,10 @@ import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../../Resource/enums.dart';
-import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
-import '../../services/network/network.dart';
-import '../../services/service_locator.dart';
 import '../menus/numpad_menu.dart';
-import 'character_widget_internal.dart';
+import '../view_models/initiative_widget_view_model.dart';
 
 class InitiativeWidget extends StatelessWidget {
   const InitiativeWidget(
@@ -36,8 +33,8 @@ class InitiativeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = this.gameState ?? getIt<GameState>();
-    final settings = this.settings ?? getIt<Settings>();
+    final vm = InitiativeWidgetViewModel(character,
+        gameState: gameState, settings: settings);
     return Column(children: [
       Container(
         margin: EdgeInsets.only(top: scaledHeight / 6, left: 10 * scale),
@@ -47,18 +44,14 @@ class InitiativeWidget extends StatelessWidget {
         ),
       ),
       ValueListenableBuilder<int>(
-          valueListenable: character.characterState.initiative,
+          valueListenable: vm.initiative,
           builder: (context, value, child) {
-            final initiative = character.characterState.initiative.value;
-            final roundState = gameState.roundState.value;
-            bool secret = (settings.server.value ||
-                    settings.client.value == ClientState.connected) &&
-                (!CharacterWidgetInternal.localCharacterInitChanges
-                    .contains(character.id));
+            final initiative = vm.initiative.value;
+            final roundState = vm.roundState;
+            final secret = vm.isSecret;
             if (initTextFieldController.text != initiative.toString() &&
                 initiative != 0 &&
                 (initTextFieldController.text.isNotEmpty || secret)) {
-              //handle secret if originating from other device
               secret
                   ? initTextFieldController.text = "??"
                   : initTextFieldController.text = initiative.toString();
@@ -66,8 +59,7 @@ class InitiativeWidget extends StatelessWidget {
             if (roundState == RoundState.playTurns && isCharacter) {
               initTextFieldController.clear();
             }
-            if (roundState == RoundState.chooseInitiative &&
-                character.characterState.health.value > 0) {
+            if (vm.isChooseInitiative && vm.isAlive) {
               return Container(
                 margin:
                     EdgeInsets.only(left: 11 * scale, top: scaledHeight * 0.11),
@@ -78,9 +70,8 @@ class InitiativeWidget extends StatelessWidget {
                 child: TextField(
                     focusNode: focusNode,
                     onTap: () {
-                      //clear on enter focus
                       initTextFieldController.clear();
-                      if (settings.softNumpadInput.value) {
+                      if (vm.softNumpadInput) {
                         openDialog(
                             context,
                             NumpadMenu(
@@ -90,7 +81,6 @@ class InitiativeWidget extends StatelessWidget {
                       }
                     },
                     onChanged: (String str) {
-                      //close soft keyboard on 2 chars entered
                       if (str.length == 2) {
                         FocusManager.instance.primaryFocus?.unfocus();
                       }
@@ -100,16 +90,12 @@ class InitiativeWidget extends StatelessWidget {
                     maxLength: 2,
                     style: TextStyle(
                         height: 1,
-                        //quick fix for web-phone disparity.
-                        fontFamily: GameMethods.isFrosthavenStyle(null)
-                            ? 'GermaniaOne'
-                            : 'Pirata',
+                        fontFamily: vm.fontFamily,
                         color: Colors.white,
                         fontSize: kFontSizeHeading * scale,
                         shadows: [shadow]),
                     decoration: const InputDecoration(
                       isDense: true,
-                      //this is what fixes the height issue
                       counterText: '',
                       contentPadding: EdgeInsets.zero,
                       enabledBorder: UnderlineInputBorder(
@@ -124,29 +110,21 @@ class InitiativeWidget extends StatelessWidget {
                       ),
                     ),
                     controller: initTextFieldController,
-                    keyboardType: settings.softNumpadInput.value
-                        ? TextInputType.none
-                        : TextInputType.number),
+                    keyboardType: vm.keyboardInputType),
               );
             } else {
               if (isCharacter) {
                 initTextFieldController.clear();
               }
-              final characterState = character.characterState;
-              final initiative = characterState.initiative.value;
               return Container(
                   height: 33 * scale,
                   width: 25 * scale,
                   margin: EdgeInsets.only(left: 10 * scale),
                   child: Text(
-                    characterState.health.value > 0 && initiative > 0
-                        ? initiative.toString()
-                        : "",
+                    vm.initiativeDisplayText(initiative),
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                        fontFamily: GameMethods.isFrosthavenStyle(null)
-                            ? 'GermaniaOne'
-                            : 'Pirata',
+                        fontFamily: vm.fontFamily,
                         color: Colors.white,
                         fontSize: kFontSizeHeading * scale,
                         shadows: [shadow]),
