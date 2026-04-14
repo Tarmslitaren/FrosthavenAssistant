@@ -5,7 +5,7 @@ import '../Resource/app_constants.dart';
 import '../Resource/commands/change_stat_commands/change_stat_command.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/state/game_state.dart';
-import '../services/service_locator.dart';
+import 'view_models/counter_button_view_model.dart';
 
 class CounterButton extends StatefulWidget {
   const CounterButton(
@@ -39,8 +39,15 @@ class CounterButton extends StatefulWidget {
 }
 
 class CounterButtonState extends State<CounterButton> {
-  GameState gameState = getIt<GameState>();
+  late final CounterButtonViewModel _vm;
   final totalChangeValue = ValueNotifier<int>(0);
+
+  @override
+  void initState() {
+    super.initState();
+    _vm = CounterButtonViewModel();
+  }
+
   @override
   Widget build(BuildContext context) {
     final FigureState? figure =
@@ -59,7 +66,7 @@ class CounterButtonState extends State<CounterButton> {
                 widget.command.setChange(-1);
                 if (widget.notifier.value > 0) {
                   totalChangeValue.value--;
-                  gameState.action(widget.command);
+                  _vm.executeCommand(widget.command);
                   if (widget.figureId != "unknown" &&
                       widget.notifier == figure?.health &&
                       figure != null &&
@@ -134,7 +141,7 @@ class CounterButtonState extends State<CounterButton> {
               widget.command.setChange(1);
               if (value < widget.maxValue) {
                 totalChangeValue.value++;
-                gameState.action(widget.command);
+                _vm.executeCommand(widget.command);
                 if (widget.figureId != "unknown" &&
                     widget.notifier.value <= 0 &&
                     widget.notifier == figure?.health) {
