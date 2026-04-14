@@ -7,9 +7,7 @@ import '../Resource/game_methods.dart';
 import '../Resource/settings.dart';
 import '../Resource/state/game_state.dart';
 import '../Resource/ui_utils.dart';
-import '../services/network/communication.dart';
-import '../services/network/network.dart';
-import '../services/service_locator.dart';
+import 'view_models/condition_icon_view_model.dart';
 
 class ConditionIcon extends StatefulWidget {
   ConditionIcon(this.condition, this.size, this.owner, this.figure,
@@ -42,23 +40,21 @@ class ConditionIcon extends StatefulWidget {
 }
 
 class ConditionIconState extends State<ConditionIcon> {
-  late final GameState _gameState;
-  late final Settings _settings;
-  final animate = ValueNotifier<bool>(
-      false); //this needs to exist outside of this class to apply when parent rebuilds. :(
-
-  @override
-  void dispose() {
-    _gameState.commandIndex.removeListener(_animateListener);
-    super.dispose();
-  }
+  late final ConditionIconViewModel _vm;
+  final animate = ValueNotifier<bool>(false);
 
   @override
   void initState() {
-    _gameState = widget.gameState ?? getIt<GameState>();
-    _settings = widget.settings ?? getIt<Settings>();
-    _gameState.commandIndex.addListener(_animateListener);
     super.initState();
+    _vm = ConditionIconViewModel(
+        gameState: widget.gameState, settings: widget.settings);
+    _vm.commandIndex.addListener(_animateListener);
+  }
+
+  @override
+  void dispose() {
+    _vm.commandIndex.removeListener(_animateListener);
+    super.dispose();
   }
 
   void _runAnimation() {
@@ -68,209 +64,53 @@ class ConditionIconState extends State<ConditionIcon> {
     });
   }
 
-  static GameState? getOldState({GameState? gameState, Communication? communication}) {
-    gameState = gameState ?? getIt<GameState>();
-    GameState oldState = GameState(communication: communication ?? getIt<Communication>());
-    const offset = 1;
-    if (gameState.gameSaveStates.length <= offset ||
-        gameState.gameSaveStates[gameState.gameSaveStates.length - offset] ==
-            null) {
-      return null;
-    }
-    String oldSave = gameState
-        .gameSaveStates[gameState.gameSaveStates.length - offset]!
-        .getState();
-    oldState.loadFromData(oldSave);
-    return oldState;
-  }
-
-  int? getTurnChanged(GameState oldState, GameState currentState) {
-    if (oldState.round.value == currentState.round.value &&
-        oldState.roundState.value == currentState.roundState.value &&
-        oldState.currentList.length == currentState.currentList.length) {
-      for (int i = 0; i < oldState.currentList.length; i++) {
-        ListItemData oldItem = oldState.currentList[i];
-        ListItemData currentItem = currentState.currentList[i];
-        if (oldItem.id == currentItem.id) {
-          if (oldItem.turnState.value != currentItem.turnState.value) {
-            return i;
-          }
-        }
-      }
-    }
-    return null;
-  }
-
   void _animateListener() {
-    _animateListenerTask();
-  }
+    final oldState = _vm.getOldState();
+    if (oldState == null) return;
 
-  void _animateListenerTask() {
-    GameState gameState = _gameState;
-    GameState? oldState = getOldState(gameState: _gameState);
-
-    if (oldState == null) {
-      return;
-    }
-
-    //note: for whatever reason the widget.owner.turnState is NOT updated at the time of this code, in case change is from server.
-    //therefore using the gameState data directly and only using owner to compare id.
-    GameState currentState = gameState;
-    int? turnIndex = getTurnChanged(oldState, currentState);
-    int healthChangedValue = 0;
-    late String changeHealthId;
-    //find if turn state changed one step
-    if (oldState.round.value == currentState.round.value &&
-        oldState.roundState.value == currentState.roundState.value &&
-        oldState.currentList.length == currentState.currentList.length) {
-      //check health value changed
-      for (int i = 0; i < oldState.currentList.length; i++) {
-        ListItemData oldItem = oldState.currentList[i];
-        ListItemData currentItem = currentState.currentList[i];
-        if (oldItem.id == currentItem.id) {
-          if (oldItem is Character) {
-            int diff = (currentItem as Character).characterState.health.value -
-                oldItem.characterState.health.value;
-            if (diff != 0) {
-              healthChangedValue = diff;
-              changeHealthId = oldItem.id;
-              break;
-            }
-          } else if (oldItem is Monster) {
-            final newMonster = currentItem as Monster;
-            if (oldItem.monsterInstances.length ==
-                newMonster.monsterInstances.length) {
-              for (int j = 0; j < oldItem.monsterInstances.length; j++) {
-                MonsterInstance old = oldItem.monsterInstances[j];
-                MonsterInstance current = newMonster.monsterInstances[j];
-                if (old.getId() == current.getId()) {
-                  int diff = current.health.value - old.health.value;
-                  if (diff != 0) {
-                    healthChangedValue = diff;
-                    changeHealthId = old.getId();
-                    break;
-                  }
-                }
-              }
-              if (healthChangedValue != 0) {
-                break;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    if (turnIndex != null) {
-      //find current in list
-      for (var item in currentState.currentList) {
-        if (item.id == widget.owner.id &&
-            item.turnState.value == TurnsState.current) {
-          //this turn started! play animation for wound and regenerate
-          if (widget.condition == Condition.regenerate ||
-              widget.condition == Condition.wound ||
-              widget.condition == Condition.wound2) {
-            _runAnimation();
-          }
-        }
-      }
-
-      if (currentState.currentList[turnIndex].turnState.value ==
-              TurnsState.done &&
-          currentState.currentList[turnIndex].id == widget.owner.id) {
-        if (widget.condition == Condition.bane &&
-            !widget.figure.conditionsAddedThisTurn.contains(widget.condition)) {
-          _runAnimation();
-        }
-
-        //was current last round but is no more
-        if (widget.figure.conditionsAddedPreviousTurn
-            .contains(widget.condition)) {
-          //only run these if not automatically taken off. TODO: maybe run animations before removing is good?
-          if (!_settings.expireConditions.value) {
-            if (widget.condition == Condition.chill ||
-                widget.condition == Condition.stun ||
-                widget.condition == Condition.disarm ||
-                widget.condition == Condition.immobilize ||
-                widget.condition == Condition.invisible ||
-                widget.condition == Condition.strengthen ||
-                widget.condition == Condition.muddle ||
-                widget.condition == Condition.impair) {
-              _runAnimation();
-            }
-          }
-        }
-      }
-    }
-    if (healthChangedValue != 0) {
-      if (changeHealthId == widget.owner.id ||
-          widget.figure is MonsterInstance &&
-              (widget.figure as MonsterInstance).getId() == changeHealthId) {
-        if (healthChangedValue < 0) {
-          if (widget.condition.name.contains("poison") ||
-              widget.condition == Condition.regenerate ||
-              widget.condition == Condition.ward ||
-              widget.condition == Condition.shield ||
-              widget.condition == Condition.retaliate ||
-              widget.condition == Condition.brittle) {
-            _runAnimation();
-          }
-        } else if (healthChangedValue >= 1) {
-          if (widget.condition == Condition.rupture ||
-              widget.condition == Condition.wound ||
-              widget.condition == Condition.bane ||
-              widget.condition.name.contains("poison") ||
-              widget.condition == Condition.infect ||
-              widget.condition == Condition.brittle) {
-            _runAnimation();
-          }
-        }
-      }
+    if (_vm.shouldTriggerAnimation(
+      condition: widget.condition,
+      owner: widget.owner,
+      figure: widget.figure,
+      oldState: oldState,
+    )) {
+      _runAnimation();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    double scale = widget.scale;
-
+    final scale = widget.scale;
     return ValueListenableBuilder<bool>(
         valueListenable: animate,
         builder: (context, value, child) {
-          bool isCharacter = widget.condition.name.contains("character");
-          Color classColor = Colors.transparent;
-          if (isCharacter) {
-            var characters = GameMethods.getCurrentCharacters();
-            classColor = characters
-                .where((element) =>
-                    element.characterClass.name == widget.condition.getName())
-                .first
-                .characterClass
-                .color;
-          }
-          return RepaintBoundary(child:ShakeAnimatedWidget(
-              duration: const Duration(milliseconds: 333),
-              enabled: animate.value,
-              alignment: Alignment.center,
-              shakeAngle: Rotation.deg(x: 0, y: 0, z: 30),
-              child: isCharacter
-                  ? Stack(alignment: Alignment.center, children: [
-                      Image(
-                          color: classColor,
-                          colorBlendMode: BlendMode.modulate,
+          final isCharacter = _vm.isCharacterCondition(widget.condition);
+          final classColor = _vm.classColorFor(widget.condition);
+          return RepaintBoundary(
+              child: ShakeAnimatedWidget(
+                  duration: const Duration(milliseconds: 333),
+                  enabled: animate.value,
+                  alignment: Alignment.center,
+                  shakeAngle: Rotation.deg(x: 0, y: 0, z: 30),
+                  child: isCharacter
+                      ? Stack(alignment: Alignment.center, children: [
+                          Image(
+                              color: classColor,
+                              colorBlendMode: BlendMode.modulate,
+                              height: widget.size * scale,
+                              filterQuality: FilterQuality.medium,
+                              image: const AssetImage(
+                                  "assets/images/psd/class-token-bg.png")),
+                          Image(
+                              height: widget.size * scale * 0.45,
+                              filterQuality: FilterQuality.medium,
+                              image: AssetImage(widget.gfx)),
+                        ])
+                      : Image(
                           height: widget.size * scale,
                           filterQuality: FilterQuality.medium,
-                          image: const AssetImage(
-                              "assets/images/psd/class-token-bg.png")),
-                      Image(
-                          height: widget.size * scale * 0.45,
-                          filterQuality: FilterQuality.medium,
-                          image: AssetImage(widget.gfx)),
-                    ])
-                  : Image(
-                      height: widget.size * scale,
-                      filterQuality: FilterQuality.medium,
-                      image: AssetImage(widget.gfx),
-                    )));
+                          image: AssetImage(widget.gfx),
+                        )));
         });
   }
 }
