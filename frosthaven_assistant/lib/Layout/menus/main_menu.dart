@@ -9,22 +9,20 @@ import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/settings_menu.dart';
+import 'package:frosthaven_assistant/Layout/view_models/main_menu_view_model.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/network/client.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 
-import '../../Resource/commands/hide_ally_deck_command.dart';
-import '../../Resource/commands/show_ally_deck_command.dart';
-import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/ui_utils.dart';
 import '../../services/network/network.dart';
 import 'add_monster_menu.dart';
 
 class MainMenu extends StatelessWidget {
-  const MainMenu({super.key, this.gameState, this.settings, this.client, this.network});
+  const MainMenu(
+      {super.key, this.gameState, this.settings, this.client, this.network});
 
   // injected for testing
   final GameState? gameState;
@@ -32,74 +30,24 @@ class MainMenu extends StatelessWidget {
   final Client? client;
   final Network? network;
 
-  Future<void> launchUrlInBrowser(Uri url) async {
-    if (!await launchUrl(
-      url,
-      mode: LaunchMode.externalApplication,
-    )) {
+  Future<void> _launchUrlInBrowser(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
     }
   }
 
-  bool undoEnabled({required GameState gameState, required Settings settings}) {
-    final commandIndex = gameState.commandIndex.value;
-
-    if (settings.client.value == ClientState.connected) {
-      return true;
-    }
-    if (settings.server.value) {
-      return commandIndex >= 0 &&
-          commandIndex < gameState.commandDescriptions.length &&
-          (commandIndex == 0 ||
-              gameState.commandDescriptions[commandIndex - 1] != "");
-    }
-    return commandIndex >= 0 &&
-        commandIndex < gameState.commands.length &&
-        (commandIndex == 0 || gameState.commands[commandIndex - 1] != null);
-  }
-
-  bool redoEnabled({required GameState gameState, required Settings settings}) {
-    if (settings.client.value == ClientState.connected) {
-      return true;
-    }
-    if (settings.server.value) {
-      return gameState.commandDescriptions.isNotEmpty &&
-          gameState.gameSaveStates.length >=
-              gameState.commandDescriptions.length &&
-          gameState.commandIndex.value <
-              gameState.commandDescriptions.length - 1;
-    }
-    return gameState.commandIndex.value <
-        gameState.commandDescriptions.length - 1;
-  }
-
   @override
   Widget build(BuildContext context) {
-    final gameState = this.gameState ?? getIt<GameState>();
-    final settings = this.settings ?? getIt<Settings>();
-    final client = this.client ?? getIt<Client>();
-    final network = this.network ?? getIt<Network>();
+    final vm = MainMenuViewModel(
+        gameState: gameState,
+        settings: settings,
+        client: client,
+        network: network);
     return Drawer(
       child: ValueListenableBuilder<int>(
-        valueListenable: gameState.commandIndex,
+        valueListenable: vm.commandIndex,
         builder: (context, value, child) {
-          String undoText = "Undo";
-          final clientState = settings.client.value;
-          final commandIndex = gameState.commandIndex.value;
-          final descriptionsAmount = gameState.commandDescriptions.length;
-          if (clientState != ClientState.connected &&
-              commandIndex >= 0 &&
-              descriptionsAmount > commandIndex) {
-            undoText += ": ${gameState.commandDescriptions[commandIndex]}";
-          }
-          String redoText = "Redo";
-          if (clientState != ClientState.connected &&
-              commandIndex < descriptionsAmount - 1) {
-            redoText += ": ${gameState.commandDescriptions[commandIndex + 1]}";
-          }
-
           return ListView(
-// Important: Remove any padding from the ListView.
               padding: EdgeInsets.zero,
               children: [
                 const DrawerHeader(
@@ -118,17 +66,17 @@ class MainMenu extends StatelessWidget {
                   ),
                 ),
                 ListTile(
-                  title: Text(undoText),
-                  enabled: undoEnabled(gameState: gameState, settings: settings),
+                  title: Text(vm.undoText),
+                  enabled: vm.undoEnabled,
                   onTap: () {
-                    gameState.undo();
+                    vm.undo();
                   },
                 ),
                 ListTile(
-                  title: Text(redoText),
-                  enabled: redoEnabled(gameState: gameState, settings: settings),
+                  title: Text(vm.redoText),
+                  enabled: vm.redoEnabled,
                   onTap: () {
-                    gameState.redo();
+                    vm.redo();
                   },
                 ),
                 const Divider(),
@@ -140,10 +88,7 @@ class MainMenu extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  title: Text(
-                      gameState.scenario.value == "#Random Dungeon"
-                          ? 'Add Random Dungeon Card'
-                          : 'Add Section'),
+                  title: Text(vm.addSectionText),
                   enabled: true,
                   onTap: () {
                     Navigator.pop(context);
@@ -172,7 +117,7 @@ class MainMenu extends StatelessWidget {
                     openDialog(context, const SetLevelMenu());
                   },
                 ),
-                if (gameState.currentCampaign.value == "Frosthaven")
+                if (vm.showLootDeckMenu)
                   ListTile(
                     title: const Text('Loot Deck Menu'),
                     onTap: () {
@@ -195,28 +140,22 @@ class MainMenu extends StatelessWidget {
                     openDialog(context, const RemoveMonsterMenu());
                   },
                 ),
-                if (!gameState.showAllyDeck.value &&
-                    !GameMethods.shouldShowAlliesDeck() &&
-                    settings.showAmdDeck.value)
+                if (vm.showShowAllyDeck)
                   ListTile(
                     title: const Text('Show Ally Attack Modifier Deck'),
                     onTap: () {
                       Navigator.pop(context);
-                      gameState.action(ShowAllyDeckCommand());
-                      gameState.updateAllUI();
+                      vm.showAllyDeck();
                     },
                   ),
-
-                if (gameState.showAllyDeck.value && settings.showAmdDeck.value)
+                if (vm.showHideAllyDeck)
                   ListTile(
                     title: const Text('Hide Ally Attack Modifier Deck'),
                     onTap: () {
                       Navigator.pop(context);
-                      gameState.action(HideAllyDeckCommand());
-                      gameState.updateAllUI();
+                      vm.hideAllyDeck();
                     },
                   ),
-
                 const Divider(),
                 ListTile(
                   title: const Text('Settings'),
@@ -226,70 +165,37 @@ class MainMenu extends StatelessWidget {
                   },
                 ),
                 const Divider(),
-                if (!settings.lastKnownConnection.endsWith('?'))
+                if (vm.showClientTile)
                   ValueListenableBuilder<ClientState>(
-                      valueListenable: settings.client,
+                      valueListenable: vm.clientState,
                       builder: (context, value, child) {
-                        bool connected = false;
-                        final clientState = settings.client.value;
-                        String connectionText =
-                            "Connect as Client (${settings.lastKnownConnection})";
-                        if (clientState == ClientState.connected) {
-                          connected = true;
-                          connectionText = "Connected as Client";
-                        }
-                        if (clientState == ClientState.connecting) {
-                          connectionText = "Connecting...";
-                        }
                         return CheckboxListTile(
-                            enabled: !settings.server.value &&
-                                clientState != ClientState.connecting,
-                            title: Text(connectionText),
-                            value: connected,
+                            enabled: !vm.isServer && !vm.isConnecting,
+                            title: Text(vm.connectionText(
+                                vm.lastKnownConnection)),
+                            value: vm.isConnected,
                             onChanged: (bool? value) {
-                              if (settings.client.value !=
-                                  ClientState.connected) {
-                                settings.client.value = ClientState.connecting;
-                                client
-                                    .connect(settings.lastKnownConnection)
-                                    .then((value) => null);
-                                settings.saveToDisk();
-                              } else {
-                                client.disconnect(null);
-                              }
+                              vm.toggleClientConnection();
                             });
                       }),
                 ValueListenableBuilder<bool>(
-                    valueListenable: settings.server,
+                    valueListenable: vm.serverState,
                     builder: (context, value, child) {
                       return ValueListenableBuilder<String>(
-                          valueListenable:
-                              network.networkInfo.wifiIPv6,
+                          valueListenable: vm.wifiIPv6,
                           builder: (context, value, child) {
-                            String ip =
-                                "(${network.networkInfo.wifiIPv6.value})";
-                            String hostIPText = 'Start Host Server $ip';
+                            final ip =
+                                "(${vm.wifiIPv6.value})";
                             return CheckboxListTile(
-                                title: Text(settings.server.value
+                                title: Text(vm.isServer
                                     ? "Stop Server $ip"
-                                    : hostIPText),
-                                value: settings.server.value,
+                                    : 'Start Host Server $ip'),
+                                value: vm.isServer,
                                 onChanged: (bool? value) {
-                                  settings.lastKnownHostIP =
-                                      "(${network.networkInfo.wifiIPv6.value})";
-                                  settings.saveToDisk();
-                                  //do the thing
-                                  if (!settings.server.value) {
-                                    network.server.startServer();
-                                  } else {
-                                    //close server?
-                                    network.server.stopServer(null);
-                                  }
+                                  vm.toggleServer();
                                 });
                           });
                     }),
-                //checkbox client + host + port
-                //checkbox server - show ip, port
                 const Divider(),
                 ListTile(
                   title: const Text('Documentation'),
@@ -299,7 +205,7 @@ class MainMenu extends StatelessWidget {
                         host: 'www.github.com',
                         path: 'Tarmslitaren/FrosthavenAssistant',
                         fragment: "#readme");
-                    launchUrlInBrowser(toLaunch);
+                    _launchUrlInBrowser(toLaunch);
                     Navigator.pop(context);
                   },
                 ),
@@ -311,7 +217,7 @@ class MainMenu extends StatelessWidget {
                           scheme: 'https',
                           host: 'ko-fi.com',
                           path: 'tarmslitaren');
-                      launchUrlInBrowser(toLaunch);
+                      _launchUrlInBrowser(toLaunch);
                       Navigator.pop(context);
                     },
                   ),
@@ -321,7 +227,7 @@ class MainMenu extends StatelessWidget {
                         enabled: true,
                         onTap: () {
                           Navigator.pop(context);
-                          gameState.save();
+                          vm.save();
                           windowManager.close();
                         },
                       )
