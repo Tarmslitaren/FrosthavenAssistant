@@ -5,9 +5,9 @@ import '../../Resource/enums.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
-import '../../services/service_locator.dart';
 import '../condition_icon.dart';
 import '../health_wheel_controller.dart';
+import '../view_models/character_health_widget_view_model.dart';
 
 class CharacterHealthWidget extends StatelessWidget {
   const CharacterHealthWidget(
@@ -28,9 +28,8 @@ class CharacterHealthWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = this.gameState ?? getIt<GameState>();
-    final settings = this.settings ?? getIt<Settings>();
-    final frosthavenStyle = GameMethods.isFrosthavenStyle(null);
+    final vm = CharacterHealthWidgetViewModel(
+        gameState: gameState, settings: settings);
 
     return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,19 +43,21 @@ class CharacterHealthWidget extends StatelessWidget {
                   return Text(
                     character.characterState.display.value,
                     style: TextStyle(
-                        fontFamily: frosthavenStyle ? 'GermaniaOne' : 'Pirata',
+                        fontFamily:
+                            vm.frosthavenStyle ? 'GermaniaOne' : 'Pirata',
                         color: Colors.white,
-                        fontSize: frosthavenStyle ? 15 * scale : 16 * scale,
+                        fontSize:
+                            vm.frosthavenStyle ? 15 * scale : 16 * scale,
                         shadows: [shadow]),
                   );
                 }),
           ),
           ValueListenableBuilder<int>(
-              valueListenable: gameState.commandIndex,
+              valueListenable: vm.commandIndex,
               builder: (context, value, child) {
                 return Container(
                     margin: EdgeInsets.only(left: 10 * scale),
-                    child: settings.enableHeathWheel.value
+                    child: vm.enableHealthWheel
                         ? HealthWheelController(
                             figureId: character.id,
                             ownerId: character.id,
