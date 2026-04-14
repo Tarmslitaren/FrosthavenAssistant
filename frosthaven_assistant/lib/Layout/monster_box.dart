@@ -4,7 +4,6 @@ import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../Resource/color_matrices.dart';
 import '../Resource/enums.dart';
@@ -13,6 +12,7 @@ import '../Resource/settings.dart';
 import '../Resource/ui_utils.dart';
 import 'health_wheel_controller.dart';
 import 'menus/status_menu.dart';
+import 'view_models/monster_box_view_model.dart';
 
 class MonsterBox extends StatelessWidget {
   MonsterBox(
@@ -34,10 +34,7 @@ class MonsterBox extends StatelessWidget {
   static const double conditionSize = 14;
 
   static double getWidth(double scale, MonsterInstance data) {
-    if (data.health.value == 0) {
-      //return 0;
-    }
-    double width = 47; //some margin there
+    double width = 47;
     final length = data.conditions.value.length;
     width += conditionSize * length / 2;
     if (length % 2 != 0) {
@@ -55,37 +52,24 @@ class MonsterBox extends StatelessWidget {
 
   late final MonsterInstance data;
 
-  List<Widget> createConditionList(double scale, GameState gameState) {
-    List<Widget> list = [];
-    for (var condition in data.conditions.value) {
-      for (var item in gameState.currentList) {
-        if (item.id == ownerId) {
-          list.add(ConditionIcon(
-            condition,
-            MonsterBox.conditionSize,
-            item,
-            data,
-            scale: scale,
-          ));
-          break;
-        }
-      }
-    }
-    return list;
+  List<Widget> _createConditionList(
+      double scale, MonsterBoxViewModel vm) {
+    final owner = vm.ownerItem;
+    if (owner == null) return [];
+    return data.conditions.value
+        .map((condition) => ConditionIcon(
+              condition,
+              MonsterBox.conditionSize,
+              owner,
+              data,
+              scale: scale,
+            ))
+        .toList();
   }
 
-  String? getMonster(GameState gameState) {
-    for (var item in gameState.currentList) {
-      if (item is Monster) {
-        if (item.id == data.name) {
-          return item.id;
-        }
-      }
-    }
-    return null;
-  }
-
-  Widget buildInternal(double scale, double width, Color color, GameState gameState) {
+  Widget _buildInternal(
+      double scale, double width, MonsterBoxViewModel vm) {
+    final color = vm.color;
     String imagePath = "assets/images/tombstone.png";
     if (data.type == MonsterType.summon) {
       imagePath = "assets/images/summon/${data.gfx}.png";
@@ -116,26 +100,13 @@ class MonsterBox extends StatelessWidget {
       blurRadius: 1 * scale,
     );
 
-    bool ownerIsCurrent = true;
-    for (var item in gameState.currentList) {
-      if (item.id == ownerId) {
-        if (item.turnState.value == TurnsState.done) {
-          ownerIsCurrent = false;
-        }
-        break;
-      }
-    }
-
     final health = data.health.value;
 
     return RepaintBoundary(
         child: ColorFiltered(
-            //gray out if summoned this turn and it's still the character's/monster's turn
-            colorFilter:
-                (data.roundSummoned == gameState.round.value &&
-                        ownerIsCurrent)
-                    ? ColorFilter.matrix(grayScale)
-                    : ColorFilter.matrix(identity),
+            colorFilter: vm.isSummonedThisTurn
+                ? ColorFilter.matrix(grayScale)
+                : ColorFilter.matrix(identity),
             child: Container(
                 padding: EdgeInsets.zero,
                 height: 30 * scale,
@@ -146,7 +117,7 @@ class MonsterBox extends StatelessWidget {
                     BoxShadow(
                       color: Colors.black45,
                       blurRadius: 4 * scale,
-                      offset: Offset(2 * scale, 4 * scale), // Shadow position
+                      offset: Offset(2 * scale, 4 * scale),
                     ),
                   ],
                 ),
@@ -157,8 +128,6 @@ class MonsterBox extends StatelessWidget {
                     fit: BoxFit.fill,
                     color: borderColor,
                     colorBlendMode: blendMode,
-                    // (works but not great),// BlendMode.modulate/color (good for boss), //BlendMode.saturation,(not good for bosss)
-                    //scale up disregarding aspect ratio
                     image:
                         const AssetImage("assets/images/psd/monster-box.png"),
                   ),
@@ -175,7 +144,6 @@ class MonsterBox extends StatelessWidget {
                   ),
                   Positioned(
                     width: 22 * scale,
-                    //baked in edge insets to line up with picture
                     top: 1 * scale,
                     child: Text(
                       textAlign: TextAlign.center,
@@ -197,12 +165,14 @@ class MonsterBox extends StatelessWidget {
                             Image(
                               color: Colors.red,
                               height: 7 * scale,
-                              image:
-                                  const AssetImage("assets/images/blood.png"),
+                              image: const AssetImage(
+                                  "assets/images/blood.png"),
                             ),
                             Container(
                               margin: EdgeInsets.only(bottom: 2 * scale),
-                              width: health > 99 ? 21 * scale : 16.8 * scale,
+                              width: health > 99
+                                  ? 21 * scale
+                                  : 16.8 * scale,
                               alignment: Alignment.center,
                               child: Text(
                                 textAlign: TextAlign.end,
@@ -216,11 +186,12 @@ class MonsterBox extends StatelessWidget {
                             )
                           ]),
                           SizedBox(
-                            width: health > 99 ? 4.5 * scale : 6.5 * scale,
+                            width: health > 99
+                                ? 4.5 * scale
+                                : 6.5 * scale,
                           ),
                           ValueListenableBuilder<List<Condition>>(
                               valueListenable: data.conditions,
-                              //todo: don't use value listenable for lists or sets
                               builder: (context, value, child) {
                                 return SizedBox(
                                     height: 30 * scale,
@@ -231,13 +202,13 @@ class MonsterBox extends StatelessWidget {
                                       alignment: WrapAlignment.center,
                                       crossAxisAlignment:
                                           WrapCrossAlignment.center,
-                                      children: createConditionList(scale, gameState),
+                                      children: _createConditionList(
+                                          scale, vm),
                                     ));
                               }),
                         ])),
                   ),
                   Container(
-                      //the hp bar
                       margin: EdgeInsets.only(
                           bottom: 2.5 * scale,
                           left: 2.5 * scale,
@@ -248,19 +219,21 @@ class MonsterBox extends StatelessWidget {
                           valueListenable: data.maxHealth,
                           builder: (context, value, child) {
                             return FAProgressBar(
-                              currentValue: data.health.value.toDouble(),
+                              currentValue:
+                                  data.health.value.toDouble(),
                               maxValue: data.maxHealth.value.toDouble(),
                               size: 4.0 * scale,
                               direction: Axis.horizontal,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(0)),
+                              borderRadius: const BorderRadius.all(
+                                  Radius.circular(0)),
                               border: Border.all(
                                 color: Colors.black,
                                 width: 0.5 * scale,
                               ),
                               backgroundColor: Colors.black,
                               progressColor: Colors.red,
-                              changeColorValue: (data.maxHealth.value).toInt(),
+                              changeColorValue:
+                                  (data.maxHealth.value).toInt(),
                               changeProgressColor: Colors.green,
                             );
                           }))
@@ -269,59 +242,24 @@ class MonsterBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final gameState = this.gameState ?? getIt<GameState>();
-    final settings = this.settings ?? getIt<Settings>();
-    String figureId = data.getId();
-    Color color = Colors.white;
-    if (data.type == MonsterType.elite) {
-      color = Colors.yellow;
-    }
-    if (data.type == MonsterType.boss) {
-      color = Colors.red;
-    }
-
-    if (gameState.currentCampaign.value == "Buttons and Bugs") {
-      if (data.standeeNr == 1) {
-        color = Colors.green;
-      }
-      if (data.standeeNr == 2) {
-        color = Colors.blue;
-      }
-      if (data.standeeNr == 3) {
-        color = Colors.purple;
-      }
-      if (data.standeeNr == 4) {
-        color = Colors.red;
-      }
-    }
-
-    double width = MonsterBox.getWidth(scale, data);
-    String? characterId;
-    if (ownerId != data.name) {
-      characterId = ownerId; //this is probably wrong
-    }
+    final vm = MonsterBoxViewModel(data,
+        ownerId: ownerId, gameState: gameState, settings: settings);
+    final width = MonsterBox.getWidth(scale, data);
 
     Widget innerWidget = RepaintBoundary(
       child: AnimatedContainer(
-          //makes it grow nicely when adding conditions
-          key: Key(figureId.toString()),
+          key: Key(data.getId()),
           width: width,
           curve: Curves.easeInOut,
           duration: const Duration(milliseconds: 300),
           child: ValueListenableBuilder<int>(
               valueListenable: data.health,
               builder: (context, value, child) {
-                bool alive = true;
-                if (data.health.value <= 0 &&
-                    !GameMethods.summonDoesNotDie(ownerId, data.name)) {
-                  alive = false;
-                }
-
-                double offset = -30 * scale;
-                Widget child = buildInternal(scale, width, color, gameState);
+                final alive = vm.isAlive;
+                final double offset = -30 * scale;
+                final child = _buildInternal(scale, width, vm);
 
                 if (displayStartAnimation != figureId) {
-                  //if this one is not added - only play death animation
                   return TranslationAnimatedWidget.tween(
                       enabled: !alive && !blockInput,
                       translationDisabled: const Offset(0, 0),
@@ -333,8 +271,8 @@ class MonsterBox extends StatelessWidget {
 
                 return TranslationAnimatedWidget.tween(
                     enabled: true,
-                    //fix is to only set enabled on added/removed ones?
-                    translationDisabled: Offset(0, alive ? offset : 0),
+                    translationDisabled:
+                        Offset(0, alive ? offset : 0),
                     translationEnabled: Offset(0, alive ? 0 : -offset),
                     duration: const Duration(milliseconds: 600),
                     curve: Curves.linear,
@@ -346,26 +284,25 @@ class MonsterBox extends StatelessWidget {
               })),
     );
 
-    var useHealthWheel = settings.enableHeathWheel.value;
-
     return Material(
         color: Colors.transparent,
         child: InkWell(
             onTap: () {
-              //open stats menu
               if (!blockInput) {
                 openDialog(
                   context,
                   StatusMenu(
-                      figureId: figureId,
-                      monsterId: getMonster(gameState),
-                      characterId: characterId),
+                      figureId: data.getId(),
+                      monsterId: vm.monsterId,
+                      characterId: vm.characterId),
                 );
               }
             },
-            child: useHealthWheel
+            child: vm.useHealthWheel
                 ? HealthWheelController(
-                    figureId: figureId, ownerId: ownerId, child: innerWidget)
+                    figureId: data.getId(),
+                    ownerId: ownerId,
+                    child: innerWidget)
                 : innerWidget));
   }
 }
