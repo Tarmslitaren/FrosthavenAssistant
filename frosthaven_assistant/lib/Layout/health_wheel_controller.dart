@@ -4,18 +4,20 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../Resource/game_methods.dart';
 import '../Resource/state/game_state.dart';
-import '../services/service_locator.dart';
+import 'view_models/health_wheel_controller_view_model.dart';
 
 class HealthWheelController extends StatefulWidget {
   const HealthWheelController(
       {super.key,
       required this.figureId,
       required this.ownerId,
-      required this.child});
+      required this.child,
+      this.gameState});
 
   final String figureId;
   final String? ownerId;
   final Widget child;
+  final GameState? gameState;
 
   @override
   HealthWheelControllerState createState() => HealthWheelControllerState();
@@ -23,15 +25,15 @@ class HealthWheelController extends StatefulWidget {
 
 class HealthWheelControllerState extends State<HealthWheelController> {
   OverlayEntry? entry;
-  late final GameState _gameState;
+  late final HealthWheelControllerViewModel _vm;
 
   final wheelDelta = ValueNotifier<double>(0);
   final wheelTimeDelta = ValueNotifier<int>(0);
 
   @override
   void initState() {
-    _gameState = getIt<GameState>();
     super.initState();
+    _vm = HealthWheelControllerViewModel(gameState: widget.gameState);
   }
 
   @override
@@ -45,7 +47,7 @@ class HealthWheelControllerState extends State<HealthWheelController> {
       entry?.remove();
       entry?.dispose();
       entry = null;
-      _gameState.updateList.value++;
+      _vm.triggerListUpdate();
     }
   }
 
