@@ -110,6 +110,66 @@ class CharacterState extends FigureState {
     }
   }
 
+  /// Updates all fields in-place from [json], firing [ValueNotifier] listeners
+  /// so subscribed widgets rebuild automatically. Preserves object identity so
+  /// existing [ValueListenableBuilder] subscriptions remain valid.
+  void updateFromJson(String id, Map<String, dynamic> json) {
+    _initiative.value = json['initiative'] as int;
+    _xp.value = json['xp'] as int;
+    _chill.value = json['chill'] as int;
+    _health.value = json["health"] as int;
+    _level.value = json["level"] as int;
+    _maxHealth.value = json["maxHealth"] as int;
+    _display.value = json['display'] as String;
+    _plague.value = 0; // not serialised — reset to match fromJson behaviour
+
+    _summonList.clear();
+    for (final item in json["summonList"]) {
+      _summonList.add(MonsterInstance.fromJson(item as Map<String, dynamic>));
+    }
+    _notifySummonList();
+
+    for (int i = 0; i < _perkList.length; i++) {
+      _perkList[i] = false;
+    }
+    if (json.containsKey("perkList")) {
+      int i = 0;
+      for (bool item in json["perkList"]) {
+        _perkList[i] = item;
+        i++;
+      }
+    }
+    _useFHPerks.value =
+        json.containsKey("useFHPerks") ? json["useFHPerks"] as bool : false;
+
+    // Assign a new list instance so the ValueNotifier fires its listeners.
+    final newConditions = <Condition>[];
+    for (int item in json["conditions"]) {
+      newConditions.add(Condition.values[item]);
+    }
+    _conditions.value = newConditions;
+
+    if (json.containsKey("modifierDeck")) {
+      _modifierDeck
+          .updateFromJson(json["modifierDeck"] as Map<String, dynamic>);
+    } else {
+      _modifierDeck.resetToDefault();
+    }
+
+    _conditionsAddedThisTurn.clear();
+    if (json.containsKey("conditionsAddedThisTurn")) {
+      for (int item in json["conditionsAddedThisTurn"]) {
+        _conditionsAddedThisTurn.add(Condition.values[item]);
+      }
+    }
+    _conditionsAddedPreviousTurn.clear();
+    if (json.containsKey("conditionsAddedPreviousTurn")) {
+      for (int item in json["conditionsAddedPreviousTurn"]) {
+        _conditionsAddedPreviousTurn.add(Condition.values[item]);
+      }
+    }
+  }
+
   flipPerk(_StateModifier _, int index) {
     _perkList[index] = !_perkList[index];
   }

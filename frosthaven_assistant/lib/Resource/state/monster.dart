@@ -93,6 +93,35 @@ class Monster extends ListItemData {
     _notifyMonsterInstances();
   }
 
+  /// Updates all mutable fields in-place from [json], firing notifiers so
+  /// subscribed widgets rebuild automatically.
+  void updateFromJson(Map<String, dynamic> json) {
+    _turnState.value = TurnsState.values[json['turnState'] as int];
+    _level.value = json['level'] as int;
+    if (json.containsKey("isAlly")) {
+      _isAlly = json['isAlly'] as bool;
+    }
+    if (json.containsKey("isActive")) {
+      _isActive = json['isActive'] as bool;
+    }
+
+    _monsterInstances.clear();
+    for (Map<String, dynamic> item in json["monsterInstances"] as List) {
+      _monsterInstances.add(MonsterInstance.fromJson(item));
+    }
+
+    // Backwards-compat: set isActive when instances exist but version flag absent.
+    if (_monsterInstances.isNotEmpty && !_isActive) {
+      if (!json.containsKey("v")) {
+        _isActive = true;
+      }
+    }
+    if (json.containsKey("v")) {
+      _version = json['v'] as int;
+    }
+    _notifyMonsterInstances();
+  }
+
   void setMonsterInstances(_StateModifier _, List<MonsterInstance> instances) {
     _monsterInstances.clear();
     _monsterInstances.addAll(instances);

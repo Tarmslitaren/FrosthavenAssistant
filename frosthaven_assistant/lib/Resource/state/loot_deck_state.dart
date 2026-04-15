@@ -133,17 +133,24 @@ class LootDeck {
   }
 
   LootDeck.fromJson(dynamic lootDeckData) {
-    _hasCard1418 = lootDeckData["1418"];
-    _hasCard1419 = lootDeckData["1419"];
+    updateFromJson(lootDeckData);
+  }
+
+  /// Updates this deck in-place from [lootDeckData], firing [_cardCount] so
+  /// subscribed widgets rebuild automatically.
+  void updateFromJson(dynamic lootDeckData) {
+    _hasCard1418 = lootDeckData["1418"] as bool;
+    _hasCard1419 = lootDeckData["1419"] as bool;
 
     if (lootDeckData.containsKey('addedCards')) {
-      _addedCards = List<int>.from(lootDeckData['addedCards']);
+      _addedCards = List<int>.from(lootDeckData['addedCards'] as List);
     } else {
       _addedCards = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     }
 
     if (lootDeckData.containsKey('enhancements')) {
-      _enhancements = Map<String, int>.from(lootDeckData['enhancements']);
+      _enhancements =
+          Map<String, int>.from(lootDeckData['enhancements'] as Map);
     } else {
       _enhancements = {};
     }
@@ -155,24 +162,23 @@ class LootDeck {
     int id = 0;
     for (var item in drawPile) {
       String owner = "";
-      String gfx = item["gfx"];
+      String gfx = item["gfx"] as String;
       if (item.containsKey('owner')) {
-        owner = item["owner"];
+        owner = item["owner"] as String;
       }
       if (item.containsKey('id')) {
-        id = item["id"];
+        id = item["id"] as int;
       }
       int enhanced = 0;
       if (item['enhanced'].runtimeType == bool) {
-        bool enh = item['enhanced'];
-        if (enh) {
+        if (item['enhanced'] as bool) {
           enhanced = 1;
         }
       } else {
-        enhanced = item["enhanced"];
+        enhanced = item["enhanced"] as int;
       }
-      LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
-      LootType lootType = LootType.values[item["lootType"]];
+      LootBaseValue baseValue = LootBaseValue.values[item["baseValue"] as int];
+      LootType lootType = LootType.values[item["lootType"] as int];
       LootCard lootCard = LootCard(
           id: id,
           gfx: gfx,
@@ -184,26 +190,24 @@ class LootDeck {
     }
     List<LootCard> newDiscardList = [];
     for (var item in lootDeckData["discardPile"] as List) {
-      String gfx = item["gfx"];
+      String gfx = item["gfx"] as String;
       String owner = "";
       if (item.containsKey('owner')) {
-        owner = item["owner"];
+        owner = item["owner"] as String;
       }
       if (item.containsKey('id')) {
-        id = item["id"];
+        id = item["id"] as int;
       }
-
       int enhanced = 0;
       if (item['enhanced'].runtimeType == bool) {
-        bool enh = item['enhanced'];
-        if (enh) {
+        if (item['enhanced'] as bool) {
           enhanced = 1;
         }
       } else {
-        enhanced = item["enhanced"];
+        enhanced = item["enhanced"] as int;
       }
-      LootBaseValue baseValue = LootBaseValue.values[item["baseValue"]];
-      LootType lootType = LootType.values[item["lootType"]];
+      LootBaseValue baseValue = LootBaseValue.values[item["baseValue"] as int];
+      LootType lootType = LootType.values[item["lootType"] as int];
       LootCard lootCard = LootCard(
           id: id,
           gfx: gfx,

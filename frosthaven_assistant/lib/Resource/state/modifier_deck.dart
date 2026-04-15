@@ -66,6 +66,24 @@ class ModifierDeck {
   ModifierDeck.fromJson(this.name, Map<String, dynamic> modifierDeckData) {
     _initDeck();
     _initListeners();
+    updateFromJson(modifierDeckData);
+  }
+
+  /// Resets this deck to the default 20-card state, firing all notifiers.
+  void resetToDefault() {
+    _initDeck();
+    _cassandraSpecial.value = false;
+  }
+
+  /// Updates this deck in-place from [modifierDeckData], firing all relevant
+  /// [ValueNotifier] listeners so subscribed widgets rebuild automatically.
+  void updateFromJson(Map<String, dynamic> modifierDeckData) {
+    // Reset removable counts first (fires _handleRemovableCards on the current
+    // pile, but the piles are fully replaced below anyway).
+    for (var key in _removables.keys) {
+      _removables[key]?.value = 0;
+    }
+    _needsShuffle = false;
 
     for (var item in modifierDeckData["drawPile"] as List) {
       String gfx = item["gfx"];
@@ -93,26 +111,24 @@ class ModifierDeck {
     }
     _cardCount.value = _drawPile.size();
 
-    if (modifierDeckData.containsKey("imbuement")) {
-      int imbuement = modifierDeckData['imbuement'];
-      _imbuement.value = imbuement;
-    }
-
-    if (modifierDeckData.containsKey('badOmen')) {
-      _badOmen.value = modifierDeckData["badOmen"] as int;
-    }
-    if (modifierDeckData.containsKey('corrosiveSpew')) {
-      _corrosiveSpew.value = modifierDeckData["corrosiveSpew"] as bool;
-    }
-    if (modifierDeckData.containsKey('revealed')) {
-      _revealedCount.value = modifierDeckData["revealed"] as int;
-    }
-    if (modifierDeckData.containsKey('cassandra')) {
-      _cassandraSpecial.value = modifierDeckData["cassandra"] as bool;
-    }
-    if (modifierDeckData.containsKey('addedMinusOnes')) {
-      _addedMinusOnes.value = modifierDeckData["addedMinusOnes"] as int;
-    }
+    _imbuement.value = modifierDeckData.containsKey("imbuement")
+        ? modifierDeckData['imbuement'] as int
+        : 0;
+    _badOmen.value = modifierDeckData.containsKey('badOmen')
+        ? modifierDeckData["badOmen"] as int
+        : 0;
+    _corrosiveSpew.value = modifierDeckData.containsKey('corrosiveSpew')
+        ? modifierDeckData["corrosiveSpew"] as bool
+        : false;
+    _revealedCount.value = modifierDeckData.containsKey('revealed')
+        ? modifierDeckData["revealed"] as int
+        : 0;
+    _cassandraSpecial.value = modifierDeckData.containsKey('cassandra')
+        ? modifierDeckData["cassandra"] as bool
+        : false;
+    _addedMinusOnes.value = modifierDeckData.containsKey('addedMinusOnes')
+        ? modifierDeckData["addedMinusOnes"] as int
+        : 0;
   }
 
   void setRemovableValue(String id, int value) {

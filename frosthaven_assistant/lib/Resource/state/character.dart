@@ -32,6 +32,16 @@ class Character extends ListItemData {
         : characterClass.id;
   }
 
+  /// Updates mutable fields in-place from [json]. [characterClass] and [id]
+  /// are [late final] and never change; only [_turnState] and [characterState]
+  /// need updating.
+  void updateFromJson(Map<String, dynamic> json) {
+    _turnState.value = TurnsState.values[json['turnState'] as int];
+    characterState.updateFromJson(
+        json['characterClass'] as String,
+        json['characterState'] as Map<String, dynamic>);
+  }
+
   void nextRound(_StateModifier _) {
     if (!GameMethods.isObjectiveOrEscort(characterClass)) {
       characterState._initiative.value = 0;
