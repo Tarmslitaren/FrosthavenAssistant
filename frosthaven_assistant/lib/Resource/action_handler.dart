@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import '../services/network/communication.dart';
 import '../services/network/network.dart';
 import '../services/service_locator.dart';
+import 'game_event.dart';
 import 'state/game_state.dart';
 
 class ActionHandler {
@@ -13,6 +14,12 @@ class ActionHandler {
   final List<Command?> commands = [];
   final List<String> commandDescriptions = []; //only used when connected
   final List<GameSaveState?> gameSaveStates = [];
+
+  /// The event produced by the most recent state transition.
+  ///
+  /// Set before [commandIndex] fires so that [commandIndex] VLB callbacks
+  /// can read the correct event during their rebuild.
+  final lastEvent = ValueNotifier<GameEvent>(const NoEvent());
 
   final int maxUndo = 250;
 
@@ -67,9 +74,10 @@ class ActionHandler {
             log('server sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
             //should send a special undo message? yes
             _network.server.send(
-                "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates[commandIndex.value]!.getState()}");
+                "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}Event:${const NoEvent().toJsonString()}GameState:${gameSaveStates[commandIndex.value]!.getState()}");
           }
         }
+        lastEvent.value = const NoEvent();
         commandIndex.value--;
       }
     } else {
@@ -82,6 +90,7 @@ class ActionHandler {
     bool isClient = _settings.client.value == ClientState.connected;
     if (!isClient) {
       if (commandIndex.value < commandDescriptions.length - 1) {
+        lastEvent.value = const NoEvent();
         commandIndex.value++;
         gameSaveStates[commandIndex.value + 1]!.load(_self);
         gameSaveStates[commandIndex.value + 1]!.saveToDisk(_self);
@@ -96,7 +105,7 @@ class ActionHandler {
       if (isServer) {
         log('server sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
         _network.server.send(
-            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}GameState:${gameSaveStates[commandIndex.value + 1]!.getState()}");
+            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}Event:${const NoEvent().toJsonString()}GameState:${gameSaveStates[commandIndex.value + 1]!.getState()}");
       }
     } else if (isClient) {
       _communication.sendToAll("redo");
@@ -115,7 +124,11 @@ class ActionHandler {
       commands.add(command);
       commandDescriptions.add(command.describe());
     }
+
+    // Set event before commandIndex fires so VLB callbacks see the correct value.
+    lastEvent.value = command.event;
     commandIndex.value++;
+
     //remove possible redo list
     if (commands.length - 1 > commandIndex.value) {
       commands.removeRange(commandIndex.value + 1, commands.length);
@@ -131,14 +144,15 @@ class ActionHandler {
 
     //send last game state if connected
     String description = command.describe();
+    String eventJson = command.event.toJsonString();
     if (isServer) {
       log('server sends, index: ${commandIndex.value}, description:$description');
       _network.server.send(
-          "Index:${commandIndex.value}Description:${description}GameState:${_self.toString()}");
+          "Index:${commandIndex.value}Description:${description}Event:${eventJson}GameState:${_self.toString()}");
     } else if (isClient) {
       log('client sends, index: ${commandIndex.value}, description:$description');
       _communication.sendToAll(
-          "Index:${commandIndex.value}Description:${description}GameState:${_self.toString()}");
+          "Index:${commandIndex.value}Description:${description}Event:${eventJson}GameState:${_self.toString()}");
     }
 
     //TODO: this is breaking if command index is not in sync with commands. and in connected state.

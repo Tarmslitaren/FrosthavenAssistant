@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:frosthaven_assistant/services/network/communication.dart';
 import 'package:frosthaven_assistant/services/network/network.dart';
 
+import '../../Resource/game_event.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
 import '../service_locator.dart';
@@ -129,18 +130,27 @@ class Client {
         if (message.startsWith("Index:")) {
           List<String> messageParts1 = message.split("Description:");
           String indexString = messageParts1[0].substring("Index:".length);
-          List<String> messageParts2 = messageParts1[1].split("GameState:");
-          String description = messageParts2[0];
-          String data = messageParts2[1];
+          final String afterDescription = messageParts1[1];
+
+          GameEvent event = const NoEvent();
+          String data;
+          if (afterDescription.contains("Event:")) {
+            List<String> messageParts2 = afterDescription.split("Event:");
+            List<String> messageParts3 = messageParts2[1].split("GameState:");
+            event = GameEvent.fromJsonString(messageParts3[0]);
+            data = messageParts3[1];
+          } else {
+            // Backwards-compatible: older server without Event field.
+            data = afterDescription.split("GameState:")[1];
+          }
 
           debugPrint(
-              'Client Receive Data, index: $indexString, description:$description');
+              'Client Receive Data, index: $indexString, event:${event.runtimeType}');
 
-          //the order here is important, when animation checks are comparing to old state: update ui needs to be after load
-          //and save needs to be last
           _gameState.loadFromData(data);
           int newIndex = int.parse(indexString);
-          //overwrite states if needed
+          // Set event before commandIndex fires so VLB callbacks see it.
+          _gameState.lastEvent.value = event;
           _gameState.commandIndex.value = newIndex;
           _gameState.updateAllUI();
 

@@ -24,6 +24,7 @@ import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../card_stack.dart';
 import '../commands/add_standee_command.dart';
+import '../game_event.dart';
 import '../enums.dart';
 import '../game_data.dart';
 import '../game_methods.dart';
@@ -255,6 +256,9 @@ abstract class Command {
     //todo: remove this when update hacks fixed
   }
   String describe();
+  /// The [GameEvent] this command produces. Defaults to [NoEvent].
+  /// Override in commands that drive UI animations.
+  GameEvent get event => const NoEvent();
 }
 
 class _StateModifier {}
