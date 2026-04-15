@@ -1,3 +1,4 @@
+import '../game_event.dart';
 import '../state/game_state.dart';
 
 class DrawLootCardCommand extends Command {
@@ -17,4 +18,7 @@ class DrawLootCardCommand extends Command {
   String describe() {
     return "Draw loot card";
   }
+
+  @override
+  GameEvent get event => const LootCardDrawnEvent();
 }

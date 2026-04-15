@@ -1,3 +1,4 @@
+import '../game_event.dart';
 import '../game_methods.dart';
 import '../state/game_state.dart';
 
@@ -21,4 +22,7 @@ class DrawModifierCardCommand extends Command {
     }
     return "Draw monster modifier card";
   }
+
+  @override
+  GameEvent get event => ModifierCardDrawnEvent(name);
 }
