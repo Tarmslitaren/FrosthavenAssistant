@@ -19,7 +19,7 @@ class UnlockSpecialCommand extends Command {
   }
 
   @override
-  void undo();
+  void onUndo();
 
   @override
   String describe() {

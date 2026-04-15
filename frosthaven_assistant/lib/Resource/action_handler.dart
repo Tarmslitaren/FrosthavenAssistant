@@ -57,7 +57,7 @@ class ActionHandler {
         gameSaveStates[commandIndex.value]!.saveToDisk(_self);
         if (!isServer && !isClient) {
           commands[commandIndex.value]!
-              .undo(); //undo only makes sure ui is updated
+              .onUndo(); //undo only makes sure ui is updated
         } else {
           updateAllUI();
           //run generic update all function instead, as commands list is not retained

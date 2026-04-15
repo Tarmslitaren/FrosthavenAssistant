@@ -16,7 +16,9 @@ void main() {
   setUp(() {
     getIt<GameState>().clearList();
     // Using a non-CS character is fine for testing the command's logic
-    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1,
+            gameState: getIt<GameState>())
+        .execute();
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
   });
@@ -24,7 +26,8 @@ void main() {
   group('AddCSPartyCardCommand', () {
     test('should add a CS party card to a character deck', () {
       // Arrange
-      final command = AddCSPartyCardCommand(character.id, 1, gameState: getIt<GameState>());
+      final command =
+          AddCSPartyCardCommand(character.id, 1, gameState: getIt<GameState>());
       final modifierDeck = character.characterState.modifierDeck;
       final initialCardCount = modifierDeck.cardCount.value;
 
@@ -40,7 +43,8 @@ void main() {
 
     test('should add a different CS party card to a character deck', () {
       // Arrange
-      final command = AddCSPartyCardCommand(character.id, 2, gameState: getIt<GameState>());
+      final command =
+          AddCSPartyCardCommand(character.id, 2, gameState: getIt<GameState>());
       final modifierDeck = character.characterState.modifierDeck;
       final initialCardCount = modifierDeck.cardCount.value;
 
@@ -56,13 +60,14 @@ void main() {
 
     test('undo should not do anything (as currently implemented)', () {
       // Arrange
-      final command = AddCSPartyCardCommand(character.id, 1, gameState: getIt<GameState>());
+      final command =
+          AddCSPartyCardCommand(character.id, 1, gameState: getIt<GameState>());
       final modifierDeck = character.characterState.modifierDeck;
       command.execute();
       final cardCountAfterExecute = modifierDeck.cardCount.value;
 
       // Act
-      command.undo();
+      command.onUndo();
 
       // Assert
       // The undo method is empty, so no change is expected.
@@ -71,7 +76,8 @@ void main() {
 
     test('describe should return correct string', () {
       // Arrange
-      final command = AddCSPartyCardCommand('Blinkblade', 1, gameState: getIt<GameState>());
+      final command =
+          AddCSPartyCardCommand('Blinkblade', 1, gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Blinkblade add party card 1');

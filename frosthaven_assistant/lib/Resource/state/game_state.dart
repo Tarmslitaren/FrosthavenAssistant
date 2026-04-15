@@ -117,7 +117,8 @@ class GameState extends ActionHandler {
     required Communication communication,
     Settings? settings,
     Network? network,
-  }) : super(communication: communication, settings: settings, network: network);
+  }) : super(
+            communication: communication, settings: settings, network: network);
 
   void init() {
     _elementState[Elements.fire] = ElementState.inert;
@@ -250,7 +251,7 @@ abstract class Command {
   //private class so only this class and it's children is allowed to change state
   _StateModifier stateAccess = _StateModifier();
   void execute();
-  void undo() {
+  void onUndo() {
     //todo: remove this when update hacks fixed
   }
   String describe();

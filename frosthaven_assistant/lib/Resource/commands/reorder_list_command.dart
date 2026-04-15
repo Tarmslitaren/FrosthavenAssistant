@@ -5,7 +5,8 @@ class ReorderListCommand extends Command {
   late final int oldIndex;
   final GameState _gameState;
 
-  ReorderListCommand(this.newIndex, this.oldIndex, {required GameState gameState})
+  ReorderListCommand(this.newIndex, this.oldIndex,
+      {required GameState gameState})
       : _gameState = gameState;
 
   @override
@@ -14,7 +15,7 @@ class ReorderListCommand extends Command {
   }
 
   @override
-  void undo() {
+  void onUndo() {
     _gameState.updateList.value++;
   }
 

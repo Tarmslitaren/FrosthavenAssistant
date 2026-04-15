@@ -15,7 +15,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1,
+            gameState: getIt<GameState>())
+        .execute();
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
   });
@@ -62,7 +64,7 @@ void main() {
       final perkStateAfterExecute = character.characterState.perkList[0];
 
       // Act
-      command.undo();
+      command.onUndo();
 
       // Assert
       // The undo method is empty, so no change is expected.

@@ -37,7 +37,7 @@ class RemoveConditionCommand extends Command {
   }
 
   @override
-  void undo() {
+  void onUndo() {
     _gameState.updateList.value++;
   }
 

@@ -20,7 +20,7 @@ class AddMonsterCommand extends Command {
   }
 
   @override
-  void undo() {
+  void onUndo() {
     _gameState.updateList.value++;
   }
 

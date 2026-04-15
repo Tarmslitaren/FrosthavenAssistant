@@ -2,7 +2,6 @@ import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
 import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 
 import '../state/game_state.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class RemoveCardCommand extends Command {
   final MonsterAbilityCardModel card;
@@ -36,7 +35,7 @@ class RemoveCardCommand extends Command {
   }
 
   @override
-  void undo() {
+  void onUndo() {
     _gameState.updateList.value++;
   }
 

@@ -82,7 +82,7 @@ abstract class ChangeStatCommand extends Command {
   }
 
   @override
-  void undo() {
+  void onUndo() {
     gameState.updateList.value++;
   }
 

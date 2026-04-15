@@ -1,5 +1,4 @@
 import '../state/game_state.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class SetAllyDeckInOgGloomCommand extends Command {
   final GameState _gameState;
@@ -14,7 +13,7 @@ class SetAllyDeckInOgGloomCommand extends Command {
   }
 
   @override
-  void undo() {
+  void onUndo() {
     _gameState.updateList.value++;
   }
 

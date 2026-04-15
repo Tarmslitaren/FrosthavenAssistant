@@ -10,8 +10,9 @@ class AddStandeeCommand extends Command {
   final bool addAsSummon;
   final GameState _gameState;
 
-  AddStandeeCommand(this.nr, this.summon, this.ownerId, this.type,
-      this.addAsSummon, {required GameState gameState})
+  AddStandeeCommand(
+      this.nr, this.summon, this.ownerId, this.type, this.addAsSummon,
+      {required GameState gameState})
       : _gameState = gameState;
 
   @override
@@ -29,7 +30,7 @@ class AddStandeeCommand extends Command {
   }
 
   @override
-  void undo() {
+  void onUndo() {
     _gameState.updateList.value++;
   }
 

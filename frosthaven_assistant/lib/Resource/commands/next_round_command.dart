@@ -37,12 +37,10 @@ class NextRoundCommand extends Command {
     ElementMethods.updateElements(stateAccess);
     RoundMethods.setRoundState(stateAccess, RoundState.chooseInitiative);
     if (_gameState.currentList.last.turnState.value != TurnsState.done) {
-      RoundMethods.setTurnDone(
-          stateAccess, _gameState.currentList.length - 1);
+      RoundMethods.setTurnDone(stateAccess, _gameState.currentList.length - 1);
     }
     if (_gameState.currentList.last.turnState.value != TurnsState.done) {
-      RoundMethods.setTurnDone(
-          stateAccess, _gameState.currentList.length - 1);
+      RoundMethods.setTurnDone(stateAccess, _gameState.currentList.length - 1);
     }
     RoundMethods.clearTurnState(stateAccess, false);
     RoundMethods.sortCharactersFirst(stateAccess);
@@ -72,8 +70,7 @@ class NextRoundCommand extends Command {
           final toastMessage = _gameState.toastMessage.value;
           if (round - 1 == _gameState.round.value || round == -1) {
             if (toastMessage.isNotEmpty) {
-              GameUtilMethods.setToastMessage(
-                  "$toastMessage\n\n${rule.note}");
+              GameUtilMethods.setToastMessage("$toastMessage\n\n${rule.note}");
             } else {
               if (_settings.showReminders.value) {
                 GameUtilMethods.setToastMessage("$toastMessage${rule.note}");
@@ -108,7 +105,7 @@ class NextRoundCommand extends Command {
   }
 
   @override
-  void undo() {
+  void onUndo() {
     _gameState.updateList.value++;
   }
 

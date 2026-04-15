@@ -15,7 +15,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1,
+            gameState: getIt<GameState>())
+        .execute();
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
   });
@@ -24,7 +26,8 @@ void main() {
     test('should increase a character\'s XP', () {
       // Arrange
       final initialXp = character.characterState.xp.value;
-      final command = ChangeXPCommand(10, character.id, character.id, gameState: getIt<GameState>());
+      final command = ChangeXPCommand(10, character.id, character.id,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -35,9 +38,12 @@ void main() {
 
     test('should decrease a character\'s XP', () {
       // Arrange
-      ChangeXPCommand(20, character.id, character.id, gameState: getIt<GameState>()).execute();
+      ChangeXPCommand(20, character.id, character.id,
+              gameState: getIt<GameState>())
+          .execute();
       final initialXp = character.characterState.xp.value;
-      final command = ChangeXPCommand(-5, character.id, character.id, gameState: getIt<GameState>());
+      final command = ChangeXPCommand(-5, character.id, character.id,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -48,7 +54,8 @@ void main() {
 
     test('should not decrease XP below 0', () {
       // Arrange
-      final command = ChangeXPCommand(-100, character.id, character.id, gameState: getIt<GameState>());
+      final command = ChangeXPCommand(-100, character.id, character.id,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -60,11 +67,12 @@ void main() {
     test('undo should not revert XP change (as currently implemented)', () {
       // Arrange
       final initialXp = character.characterState.xp.value;
-      final command = ChangeXPCommand(10, character.id, character.id, gameState: getIt<GameState>());
+      final command = ChangeXPCommand(10, character.id, character.id,
+          gameState: getIt<GameState>());
       command.execute();
 
       // Act
-      command.undo();
+      command.onUndo();
 
       // Assert
       // The undo method is incomplete and does not revert the xp.
@@ -73,12 +81,14 @@ void main() {
     });
 
     test('describe should return correct string for increasing XP', () {
-      final command = ChangeXPCommand(10, 'Blinkblade', 'Blinkblade', gameState: getIt<GameState>());
+      final command = ChangeXPCommand(10, 'Blinkblade', 'Blinkblade',
+          gameState: getIt<GameState>());
       expect(command.describe(), "Increase Blinkblade's xp by 10");
     });
 
     test('describe should return correct string for decreasing XP', () {
-      final command = ChangeXPCommand(-5, 'Blinkblade', 'Blinkblade', gameState: getIt<GameState>());
+      final command = ChangeXPCommand(-5, 'Blinkblade', 'Blinkblade',
+          gameState: getIt<GameState>());
       expect(command.describe(), "Decrease Blinkblade's xp by 5");
     });
   });

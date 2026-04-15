@@ -20,9 +20,14 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1, gameState: getIt<GameState>()).execute();
-    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
-    AddStandeeCommand(1, null, "Zealot", MonsterType.normal, false, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1,
+            gameState: getIt<GameState>())
+        .execute();
+    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>())
+        .execute();
+    AddStandeeCommand(1, null, "Zealot", MonsterType.normal, false,
+            gameState: getIt<GameState>())
+        .execute();
 
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
@@ -35,7 +40,8 @@ void main() {
     test('should increase a character\'s max health', () {
       // Arrange
       final initialMaxHealth = character.characterState.maxHealth.value;
-      final command = ChangeMaxHealthCommand(5, character.id, character.id, gameState: getIt<GameState>());
+      final command = ChangeMaxHealthCommand(5, character.id, character.id,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -47,7 +53,8 @@ void main() {
     test('should decrease a character\'s max health', () {
       // Arrange
       final initialMaxHealth = character.characterState.maxHealth.value;
-      final command = ChangeMaxHealthCommand(-2, character.id, character.id, gameState: getIt<GameState>());
+      final command = ChangeMaxHealthCommand(-2, character.id, character.id,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -60,7 +67,8 @@ void main() {
       // Arrange
       final initialHealth = character.characterState.health.value;
       expect(initialHealth, equals(character.characterState.maxHealth.value));
-      final command = ChangeMaxHealthCommand(-3, character.id, character.id, gameState: getIt<GameState>());
+      final command = ChangeMaxHealthCommand(-3, character.id, character.id,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -74,7 +82,8 @@ void main() {
         'should update current health when max health changes if they were equal',
         () {
       // Arrange
-      final command = ChangeMaxHealthCommand(5, character.id, character.id, gameState: getIt<GameState>());
+      final command = ChangeMaxHealthCommand(5, character.id, character.id,
+          gameState: getIt<GameState>());
       final initialHealth = character.characterState.health.value;
       final initialMaxHealth = character.characterState.maxHealth.value;
       expect(initialHealth, initialMaxHealth);
@@ -90,7 +99,8 @@ void main() {
     test('should not set max health to 0 or below', () {
       // Arrange
       final initialMaxHealth = character.characterState.maxHealth.value;
-      final command = ChangeMaxHealthCommand(-100, character.id, character.id, gameState: getIt<GameState>());
+      final command = ChangeMaxHealthCommand(-100, character.id, character.id,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -102,8 +112,9 @@ void main() {
     test('should increase a monster instance\'s max health', () {
       // Arrange
       final initialMaxHealth = monsterInstance.maxHealth.value;
-      final command =
-          ChangeMaxHealthCommand(3, monsterInstance.getId(), monster.id, gameState: getIt<GameState>());
+      final command = ChangeMaxHealthCommand(
+          3, monsterInstance.getId(), monster.id,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -116,23 +127,26 @@ void main() {
         () {
       // Arrange
       final initialMaxHealth = character.characterState.maxHealth.value;
-      final command = ChangeMaxHealthCommand(5, character.id, character.id, gameState: getIt<GameState>());
+      final command = ChangeMaxHealthCommand(5, character.id, character.id,
+          gameState: getIt<GameState>());
       command.execute();
 
       // Act
-      command.undo();
+      command.onUndo();
 
       // Assert
       expect(character.characterState.maxHealth.value, initialMaxHealth + 5);
     });
 
     test('describe should return correct string for increasing max health', () {
-      final command = ChangeMaxHealthCommand(5, 'Blinkblade', 'Blinkblade', gameState: getIt<GameState>());
+      final command = ChangeMaxHealthCommand(5, 'Blinkblade', 'Blinkblade',
+          gameState: getIt<GameState>());
       expect(command.describe(), "Increase Blinkblade's max health");
     });
 
     test('describe should return correct string for decreasing max health', () {
-      final command = ChangeMaxHealthCommand(-5, 'Blinkblade', 'Blinkblade', gameState: getIt<GameState>());
+      final command = ChangeMaxHealthCommand(-5, 'Blinkblade', 'Blinkblade',
+          gameState: getIt<GameState>());
       expect(command.describe(), "Decrease Blinkblade's max health");
     });
   });
