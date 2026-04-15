@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
@@ -28,6 +29,8 @@ class MainListViewModel {
   ValueListenable<double> get userScalingMainList =>
       _settings.userScalingMainList;
   ValueListenable<int> get updateList => _gameState.updateList;
+  ValueListenable<BuiltList<ListItemData>> get currentListNotifier =>
+      _gameState.currentListNotifier;
 
   // Derived state
   int get currentListLength => _gameState.currentList.length;

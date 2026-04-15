@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
@@ -111,8 +112,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
                   margin: EdgeInsets.only(
                       left: 3.2 * scale, right: 3.2 * scale),
                   width: getMainListWidth(context) - 6.4 * scale,
-                  child: ValueListenableBuilder<int>(
-                      valueListenable: vm.killMonsterStandee,
+                  child: ValueListenableBuilder<BuiltList<MonsterInstance>>(
+                      valueListenable: vm.summonListNotifier,
                       builder: (context, value, child) {
                         return buildMonsterBoxGrid(scale, character);
                       }),

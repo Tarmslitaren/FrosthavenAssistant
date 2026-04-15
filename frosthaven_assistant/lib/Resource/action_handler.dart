@@ -18,7 +18,6 @@ class ActionHandler {
 
   //todo: ugly hacks to delay list update
   final updateList = ValueNotifier<int>(0);
-  final killMonsterStandee = ValueNotifier<int>(-1);
   final updateForUndo = ValueNotifier<int>(0);
 
   final Communication _communication;
@@ -41,7 +40,7 @@ class ActionHandler {
   void updateAllUI() {
     _self.updateList.value++;
     _self.updateForUndo.value++;
-    _self.killMonsterStandee.value++;
+    _self.notifyAllMonsterInstances();
     //try to update card widget here if needed
     //try to update element buttons here if needed
   }

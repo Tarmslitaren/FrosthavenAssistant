@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card_widget.dart';
 import 'package:frosthaven_assistant/Layout/monster_box.dart';
@@ -156,8 +157,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
             Container(
               margin: EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
               width: getMainListWidth(context) - 3.2 * scale,
-              child: ValueListenableBuilder<int>(
-                  valueListenable: _vm.killMonsterStandee,
+              child: ValueListenableBuilder<BuiltList<MonsterInstance>>(
+                  valueListenable: _vm.monsterInstancesNotifier,
                   builder: (context, value, child) {
                     return _buildMonsterBoxGrid(scale);
                   }),

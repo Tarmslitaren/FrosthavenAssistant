@@ -9,13 +9,27 @@ class CharacterState extends FigureState {
   final _initiative = ValueNotifier<int>(0);
   final _xp = ValueNotifier<int>(0);
   final List<MonsterInstance> _summonList = [];
+  final _summonListNotifier =
+      ValueNotifier<BuiltList<MonsterInstance>>(BuiltList.of([]));
   late final ModifierDeck _modifierDeck;
 
   ValueListenable<String> get display => _display;
   ValueListenable<int> get initiative => _initiative;
   ValueListenable<int> get xp => _xp;
   BuiltList<MonsterInstance> get summonList => BuiltList.of(_summonList);
+  ValueListenable<BuiltList<MonsterInstance>> get summonListNotifier =>
+      _summonListNotifier;
   ModifierDeck get modifierDeck => _modifierDeck;
+
+  void _notifySummonList() {
+    _summonListNotifier.value = BuiltList.of(_summonList);
+  }
+
+  /// Public guarded notify — allows commands to fire the notifier at the
+  /// correct time (e.g. after a 600 ms death animation).
+  void notifySummonList(_StateModifier _) {
+    _notifySummonList();
+  }
 
   BuiltList<bool> get perkList => BuiltList.of(_perkList);
   ValueListenable<bool> get useFHPerks => _useFHPerks;
@@ -54,6 +68,7 @@ class CharacterState extends FigureState {
     for (final item in summons) {
       _summonList.add(MonsterInstance.fromJson(item));
     }
+    _notifySummonList();
 
     //todo: automate check json.containsKey for everything: the nr of update bugs...
     if (json.containsKey("perkList")) {
@@ -113,8 +128,12 @@ class CharacterState extends FigureState {
 
   void addSummon(_StateModifier _, MonsterInstance summon) {
     _summonList.add(summon);
+    _notifySummonList();
   }
 
+  /// Removes [summon] from the list but does NOT fire the notifier.
+  /// The caller is responsible for calling [notifySummonList] at the
+  /// appropriate time (e.g. after a 600 ms death animation).
   void removeSummon(_StateModifier _, MonsterInstance summon) {
     _summonList.remove(summon);
   }

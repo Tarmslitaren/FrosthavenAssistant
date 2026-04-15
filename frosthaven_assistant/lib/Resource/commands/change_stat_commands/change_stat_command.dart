@@ -26,7 +26,7 @@ abstract class ChangeStatCommand extends Command {
             newList.remove(instance);
             item.setMonsterInstances(stateAccess, newList);
             Future.delayed(const Duration(milliseconds: 600), () {
-              gameState.killMonsterStandee.value++;
+              item.notifyMonsterInstances(stateAccess);
             });
 
             final roundState = gameState.roundState.value;
@@ -59,7 +59,7 @@ abstract class ChangeStatCommand extends Command {
             if (!GameMethods.summonDoesNotDie(item.id, instance.name)) {
               item.characterState.removeSummon(stateAccess, instance);
               Future.delayed(const Duration(milliseconds: 600), () {
-                gameState.killMonsterStandee.value++;
+                item.characterState.notifySummonList(stateAccess);
               });
 
               if (item.characterState.summonList.isEmpty) {

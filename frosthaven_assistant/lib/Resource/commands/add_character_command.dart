@@ -26,7 +26,6 @@ class AddCharacterCommand extends Command {
     }
 
     RoundMethods.updateForSpecialRules(stateAccess);
-    _gameState.updateList.value++;
     ScenarioMethods.unlockClass(stateAccess, character.characterClass.id);
   }
 

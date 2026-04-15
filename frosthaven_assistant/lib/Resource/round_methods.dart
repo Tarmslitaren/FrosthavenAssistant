@@ -112,6 +112,7 @@ class RoundMethods {
         if (i > currentTurnItemIndex) {
           newList.insert(i, item);
           gs._currentList = newList;
+          gs._notifyCurrentList();
           return;
         } else {
           //in case initiative is earlier than current turn, ignore anything current turn, and earlier and place later
@@ -124,6 +125,7 @@ class RoundMethods {
           }
           newList.insert(insertIndex, item);
           gs._currentList = newList;
+          gs._notifyCurrentList();
           return;
         }
       }
@@ -133,6 +135,7 @@ class RoundMethods {
 
     newList.add(item);
     gs._currentList = newList;
+    gs._notifyCurrentList();
   }
 
   static void sortByInitiative(_StateModifier _, {GameState? gameState}) {
@@ -223,12 +226,14 @@ class RoundMethods {
       newList.add(item);
     }
     gs._currentList = newList;
+    gs._notifyCurrentList();
   }
 
   static void reorderMainList(_StateModifier _, int newIndex, int oldIndex, {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     gs._currentList
         .insert(newIndex, gs._currentList.removeAt(oldIndex));
+    gs._notifyCurrentList();
   }
 
   static void updateForSpecialRules(_StateModifier _,

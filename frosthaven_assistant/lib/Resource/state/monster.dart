@@ -20,6 +20,8 @@ class Monster extends ListItemData {
   }
   late final MonsterModel type;
   final List<MonsterInstance> _monsterInstances = [];
+  final _monsterInstancesNotifier =
+      ValueNotifier<BuiltList<MonsterInstance>>(BuiltList.of([]));
   final _level = ValueNotifier<int>(0);
   bool _isAlly;
   bool _isActive = false;
@@ -33,6 +35,18 @@ class Monster extends ListItemData {
 
   BuiltList<MonsterInstance> get monsterInstances =>
       BuiltList.of(_monsterInstances);
+  ValueListenable<BuiltList<MonsterInstance>> get monsterInstancesNotifier =>
+      _monsterInstancesNotifier;
+
+  void _notifyMonsterInstances() {
+    _monsterInstancesNotifier.value = BuiltList.of(_monsterInstances);
+  }
+
+  /// Public guarded notify — allows commands and part-file methods to fire
+  /// the notifier at the correct time (e.g. after a 600 ms death animation).
+  void notifyMonsterInstances(_StateModifier _) {
+    _notifyMonsterInstances();
+  }
 
   Monster.fromJson(Map<String, dynamic> json, {GameData? gameData})
       : _isAlly = false {
@@ -76,6 +90,7 @@ class Monster extends ListItemData {
     if (json.containsKey("v")) {
       _version = json['v'];
     }
+    _notifyMonsterInstances();
   }
 
   void setMonsterInstances(_StateModifier _, List<MonsterInstance> instances) {

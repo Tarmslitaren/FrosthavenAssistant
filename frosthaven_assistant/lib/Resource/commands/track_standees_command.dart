@@ -35,6 +35,7 @@ class TrackStandeesCommand extends Command {
       for (var item in _gameState.currentList) {
         if (item is Monster) {
           item.clearMonsterInstances(stateAccess);
+          item.notifyMonsterInstances(stateAccess);
         }
       }
     } else {

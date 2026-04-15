@@ -69,6 +69,8 @@ class GameState extends ActionHandler {
   List<String> _scenarioSectionsAdded = [];
   List<SpecialRule> _scenarioSpecialRules = [];
   List<ListItemData> _currentList = []; //has both monsters and characters
+  final _currentListNotifier =
+      ValueNotifier<BuiltList<ListItemData>>(BuiltList.of([]));
   final List<MonsterAbilityState> _currentAbilityDecks =
       <MonsterAbilityState>[];
   final Map<Elements, ElementState> _elementState = HashMap();
@@ -97,6 +99,8 @@ class GameState extends ActionHandler {
   BuiltList<SpecialRule> get scenarioSpecialRules =>
       BuiltList.of(_scenarioSpecialRules);
   BuiltList<ListItemData> get currentList => BuiltList.of(_currentList);
+  ValueListenable<BuiltList<ListItemData>> get currentListNotifier =>
+      _currentListNotifier;
   BuiltList<MonsterAbilityState> get currentAbilityDecks =>
       BuiltList.of(_currentAbilityDecks);
   BuiltMap<Elements, ElementState> get elementState =>
@@ -214,11 +218,31 @@ class GameState extends ActionHandler {
     state.loadFromData(data, this);
   }
 
+  /// Fires `_currentListNotifier` with the current list and also increments
+  /// `updateList` so that all existing subscribers remain notified.
+  void _notifyCurrentList() {
+    _currentListNotifier.value = BuiltList.of(_currentList);
+    updateList.value++;
+  }
+
+  /// Fires `monsterInstancesNotifier` / `summonListNotifier` on every item in
+  /// the current list. Used by [updateAllUI] (redo / network sync).
+  void notifyAllMonsterInstances() {
+    for (var item in _currentList) {
+      if (item is Monster) {
+        item._notifyMonsterInstances();
+      } else if (item is Character) {
+        item.characterState._notifySummonList();
+      }
+    }
+  }
+
   /**
    * Clears the current list. only for use in tests. temp. should use load from data instead
    */
   void clearList() {
     _currentList.clear();
+    _notifyCurrentList();
   }
 }
 

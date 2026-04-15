@@ -68,7 +68,7 @@ class MonsterMethods {
       }
     }
 
-    gs.updateList.value++;
+    gs._notifyCurrentList();
   }
 
   static void executeAddStandee(
@@ -105,13 +105,15 @@ class MonsterMethods {
     }
 
     List<MonsterInstance> monsterList = [];
+    Character? character;
     //find list
     if (monster != null) {
       monsterList = monster._monsterInstances;
     } else {
       for (var item in gs.currentList) {
         if (item.id == ownerId) {
-          monsterList = (item as Character).characterState._summonList;
+          character = item as Character;
+          monsterList = character.characterState._summonList;
           break;
         }
       }
@@ -146,6 +148,9 @@ class MonsterMethods {
     monsterList.add(instance);
     if (monster != null) {
       RoundMethods.sortMonsterInstances(s, monsterList);
+      monster._notifyMonsterInstances();
+    } else {
+      character?.characterState._notifySummonList();
     }
     if (monsterList.length == 1 && monster != null) {
       //first added

@@ -385,7 +385,7 @@ class ScenarioMethods {
       specialRules.add(newRule);
     }
 
-    gs.updateList.value++;
+    gs._notifyCurrentList();
 
     if (!section) {
       MainList.scrollToTop();

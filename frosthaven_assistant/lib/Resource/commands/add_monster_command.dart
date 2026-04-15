@@ -17,8 +17,6 @@ class AddMonsterCommand extends Command {
   @override
   void execute() {
     RoundMethods.addToMainList(stateAccess, null, monster);
-
-    _gameState.updateList.value++;
   }
 
   @override

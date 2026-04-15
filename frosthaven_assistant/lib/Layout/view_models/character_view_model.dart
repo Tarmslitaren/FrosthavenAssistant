@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
@@ -20,7 +21,8 @@ class CharacterViewModel {
 
   // Notifiers the widget subscribes to
   ValueListenable<int> get updateList => _gameState.updateList;
-  ValueListenable<int> get killMonsterStandee => _gameState.killMonsterStandee;
+  ValueListenable<BuiltList<MonsterInstance>> get summonListNotifier =>
+      character.characterState.summonListNotifier;
 
   // Derived state
   bool get isAlive => character.characterState.health.value != 0;

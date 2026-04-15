@@ -227,6 +227,7 @@ class CharacterMethods {
           name, health + level * multiplier, 3, 2, 0, gfx, -1);
       summonList.add(summon);
     }
+    item.characterState._notifySummonList();
   }
 
   static void removeCharacters(_StateModifier s, List<Character> characters, {GameState? gameState}) {
@@ -251,7 +252,7 @@ class CharacterMethods {
     }
     gs._currentList = newList;
     RoundMethods.updateForSpecialRules(s);
-    gs.updateList.value++;
+    gs._notifyCurrentList();
   }
 
   static Character? createCharacter(_StateModifier _, String id,
