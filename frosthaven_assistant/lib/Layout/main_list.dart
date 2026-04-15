@@ -117,48 +117,76 @@ class ListAnimation extends StatefulWidget {
   }
 }
 
-class ListAnimationState extends State<ListAnimation> {
-  bool blockAnimation = false;
+class ListAnimationState extends State<ListAnimation>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final CurvedAnimation _curved;
+  double _diff = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    );
+    _curved =
+        CurvedAnimation(parent: _controller, curve: Curves.linearToEaseOut);
+    // Start animation after first build has computed _diff.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_diff != 0 && mounted) _controller.forward(from: 0.0);
+    });
+  }
+
+  @override
+  void didUpdateWidget(ListAnimation oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.index != widget.index ||
+        oldWidget.lastIndex != widget.lastIndex) {
+      // build() will run before the callback fires, so _diff will be current.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (_diff != 0 && mounted) _controller.forward(from: 0.0);
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _curved.dispose();
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    {
-      //need also last positions
-      List<double> positions = MainListState.getItemHeights(
-          context); // - the end resulting positions.
-      double position = 0;
-      if (widget.index > 0) {
-        position = positions[widget.index - 1];
+    //need also last positions
+    final positions = MainListState.getItemHeights(context);
+    double position = widget.index > 0 ? positions[widget.index - 1] : 0;
+
+    double lastPosition = 0;
+    if (widget.lastIndex > 0) {
+      if (MainListState.lastPositions.length >= widget.lastIndex) {
+        //should be ok except for on reload as we don't bother saving lastPositions to disk
+        lastPosition = MainListState.lastPositions[widget.lastIndex - 1];
       }
-
-      double lastPosition = 0;
-      if (widget.lastIndex > 0) {
-        if (MainListState.lastPositions.length >= widget.lastIndex) {
-          //should be ok except for on reload as we don't bother saving lastPositions ot disk
-          lastPosition = MainListState.lastPositions[widget.lastIndex - 1];
-        }
-      }
-
-      double diff = lastPosition - position;
-
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-        MainListState.lastPositions = positions;
-      });
-
-      return RepaintBoundary(
-          child: TweenAnimationBuilder<Offset>(
-        tween: Tween(
-          begin: Offset(0, blockAnimation ? 0 : diff),
-          end: Offset.zero,
-        ),
-        duration: const Duration(milliseconds: 1000),
-        curve: Curves.linearToEaseOut,
-        onEnd: () => blockAnimation = true,
-        builder: (context, offset, child) =>
-            Transform.translate(offset: offset, child: child),
-        child: widget.child,
-      ));
     }
+
+    _diff = lastPosition - position;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      MainListState.lastPositions = positions;
+    });
+
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _curved,
+        builder: (context, child) => Transform.translate(
+          offset: Offset(0, (1 - _curved.value) * _diff),
+          child: child,
+        ),
+        child: widget.child,
+      ),
+    );
   }
 }
 
