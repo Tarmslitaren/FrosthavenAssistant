@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/CharacterWidget/character_widget.dart';
 import 'package:frosthaven_assistant/Layout/background.dart';
@@ -147,15 +146,17 @@ class ListAnimationState extends State<ListAnimation> {
       });
 
       return RepaintBoundary(
-          child: TranslationAnimatedWidget.tween(
-        translationDisabled: Offset(0, blockAnimation ? diff : 0),
-        translationEnabled: const Offset(0, 0),
+          child: TweenAnimationBuilder<Offset>(
+        tween: Tween(
+          begin: Offset(0, blockAnimation ? 0 : diff),
+          end: Offset.zero,
+        ),
         duration: const Duration(milliseconds: 1000),
         curve: Curves.linearToEaseOut,
+        onEnd: () => blockAnimation = true,
+        builder: (context, offset, child) =>
+            Transform.translate(offset: offset, child: child),
         child: widget.child,
-        animationFinished: (bool finished) {
-          blockAnimation = true;
-        },
       ));
     }
   }

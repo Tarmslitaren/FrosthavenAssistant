@@ -1,4 +1,5 @@
-import 'package:animated_widgets/animated_widgets.dart';
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Layout/view_models/loot_deck_view_model.dart';
 import 'package:frosthaven_assistant/Resource/game_data.dart';
@@ -58,94 +59,44 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
           margin: EdgeInsets.only(left: cardWidth * userScalingBars),
           child: child);
     }
-    return Container(
-        key: key,
-        child: RepaintBoundary(
-            child: TranslationAnimatedWidget(
-                animationFinished: (bool finished) {
-                  if (finished) {
-                    _animationsEnabled = false;
-                  }
-                },
-                duration: const Duration(milliseconds: cardAnimationDuration),
-                enabled: true,
-                curve: Curves.easeIn,
-                values: [
-                  const Offset(0, 0),
-                  const Offset(0, 0),
-                  Offset(cardWidth * userScalingBars, 0),
-                ],
-                child: RotationAnimatedWidget(
-                    enabled: true,
-                    values: [
-                      Rotation.deg(x: 0, y: 0, z: -15),
-                      Rotation.deg(x: 0, y: 0, z: -15),
-                      Rotation.deg(x: 0, y: 0, z: 0),
-                    ],
-                    duration:
-                        const Duration(milliseconds: cardAnimationDuration),
-                    child: child))));
+    return _LootSlideAnimationWidget(
+      key: key,
+      userScalingBars: userScalingBars,
+      onComplete: () => _animationsEnabled = false,
+      child: child,
+    );
   }
 
   Widget _buildDrawAnimation(
       Widget child, Key key, BuildContext context, double userScalingBars) {
-    double width = 40 * userScalingBars;
-    double height = 58.6666 * userScalingBars;
-    double startXOffset = -(width);
+    if (!_animationsEnabled || context.globalPaintBounds == null) {
+      return child;
+    }
+    final double width = 40 * userScalingBars;
+    final double height = 58.6666 * userScalingBars;
+    final double startXOffset = -width;
 
     final globalPaintBounds = context.globalPaintBounds;
-    Offset screenSpaceOffset =
-        globalPaintBounds != null ? globalPaintBounds.topLeft : Offset(0, 0);
-    var screenSpaceY = screenSpaceOffset.dy;
-    var screenSpaceX = screenSpaceOffset.dx - startXOffset;
+    final screenSpaceOffset =
+        globalPaintBounds != null ? globalPaintBounds.topLeft : Offset.zero;
+    final screenSpaceY = screenSpaceOffset.dy;
+    final screenSpaceX = screenSpaceOffset.dx - startXOffset;
 
-    const double maxScale = 4;
-    var screenSize = MediaQuery.of(context).size;
-    double screenWidth = screenSize.width;
-    var localScreenWidth = screenWidth - screenSpaceX * 2;
-    var heightShaveOff = (screenSize.height - screenSpaceY) * 2;
-    var localScreenHeight = screenSize.height - heightShaveOff;
-    double yOffset = -(localScreenHeight / 2 + height / 2);
-    double halfBigCardWidth = width / 2;
-    double xOffset = (localScreenWidth) / 2 - halfBigCardWidth;
+    final screenSize = MediaQuery.of(context).size;
+    final localScreenWidth = screenSize.width - screenSpaceX * 2;
+    final heightShaveOff = (screenSize.height - screenSpaceY) * 2;
+    final localScreenHeight = screenSize.height - heightShaveOff;
+    final double yOffset = -(localScreenHeight / 2 + height / 2);
+    final double xOffset = localScreenWidth / 2 - width / 2;
 
-    return Container(
-        key: key,
-        child: _animationsEnabled
-            ? RepaintBoundary(
-                child: TranslationAnimatedWidget(
-                    animationFinished: (bool finished) {
-                      if (finished) {
-                        _animationsEnabled = false;
-                      }
-                    },
-                    duration: Duration(
-                        milliseconds:
-                            _animationsEnabled ? cardAnimationDuration : 0),
-                    enabled: _animationsEnabled,
-                    values: [
-                      Offset(startXOffset, 0),
-                      Offset(xOffset, yOffset),
-                      Offset(xOffset, yOffset),
-                      Offset(xOffset, yOffset),
-                      const Offset(0, 0),
-                    ],
-                    child: ScaleAnimatedWidget(
-                        enabled: true,
-                        duration:
-                            const Duration(milliseconds: cardAnimationDuration),
-                        values: const [1, maxScale, maxScale, maxScale, 1],
-                        child: RotationAnimatedWidget(
-                            enabled: true,
-                            values: [
-                              Rotation.deg(x: 0, y: 0, z: 180),
-                              Rotation.deg(x: 0, y: 0, z: 360),
-                            ],
-                            duration: Duration(
-                                milliseconds:
-                                    (cardAnimationDuration * 0.25).ceil()),
-                            child: child))))
-            : child);
+    return _LootDrawAnimationWidget(
+      key: key,
+      startXOffset: startXOffset,
+      xOffset: xOffset,
+      yOffset: yOffset,
+      onComplete: () => _animationsEnabled = false,
+      child: child,
+    );
   }
 
   @override
@@ -312,5 +263,184 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                 }),
           );
         });
+  }
+}
+
+class _LootSlideAnimationWidget extends StatefulWidget {
+  const _LootSlideAnimationWidget({
+    required super.key,
+    required this.child,
+    required this.userScalingBars,
+    required this.onComplete,
+  });
+
+  final Widget child;
+  final double userScalingBars;
+  final VoidCallback onComplete;
+
+  @override
+  State<_LootSlideAnimationWidget> createState() =>
+      _LootSlideAnimationWidgetState();
+}
+
+class _LootSlideAnimationWidgetState extends State<_LootSlideAnimationWidget>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<Offset> _translation;
+  late final Animation<double> _rotation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(
+          milliseconds: LootDeckWidgetState.cardAnimationDuration),
+      vsync: this,
+    );
+
+    final slideTarget =
+        Offset(LootDeckWidgetState.cardWidth * widget.userScalingBars, 0);
+    _translation = TweenSequence<Offset>([
+      TweenSequenceItem(tween: ConstantTween(Offset.zero), weight: 1),
+      TweenSequenceItem(
+        tween: Tween(begin: Offset.zero, end: slideTarget)
+            .chain(CurveTween(curve: Curves.easeIn)),
+        weight: 1,
+      ),
+    ]).animate(_controller);
+
+    _rotation = TweenSequence<double>([
+      TweenSequenceItem(
+          tween: ConstantTween(-15.0 * math.pi / 180.0), weight: 1),
+      TweenSequenceItem(
+        tween: Tween(begin: -15.0 * math.pi / 180.0, end: 0.0),
+        weight: 1,
+      ),
+    ]).animate(_controller);
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        widget.onComplete();
+      }
+    });
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) => Transform.translate(
+          offset: _translation.value,
+          child: Transform.rotate(
+            angle: _rotation.value,
+            child: child,
+          ),
+        ),
+        child: widget.child,
+      ),
+    );
+  }
+}
+
+class _LootDrawAnimationWidget extends StatefulWidget {
+  const _LootDrawAnimationWidget({
+    required super.key,
+    required this.child,
+    required this.startXOffset,
+    required this.xOffset,
+    required this.yOffset,
+    required this.onComplete,
+  });
+
+  final Widget child;
+  final double startXOffset;
+  final double xOffset;
+  final double yOffset;
+  final VoidCallback onComplete;
+
+  @override
+  State<_LootDrawAnimationWidget> createState() =>
+      _LootDrawAnimationWidgetState();
+}
+
+class _LootDrawAnimationWidgetState extends State<_LootDrawAnimationWidget>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<Offset> _translation;
+  late final Animation<double> _scale;
+  late final Animation<double> _rotation;
+
+  static const double _maxScale = 4.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(
+          milliseconds: LootDeckWidgetState.cardAnimationDuration),
+      vsync: this,
+    );
+
+    final start = Offset(widget.startXOffset, 0);
+    final center = Offset(widget.xOffset, widget.yOffset);
+
+    _translation = TweenSequence<Offset>([
+      TweenSequenceItem(tween: Tween(begin: start, end: center), weight: 1),
+      TweenSequenceItem(tween: ConstantTween(center), weight: 2),
+      TweenSequenceItem(
+          tween: Tween(begin: center, end: Offset.zero), weight: 1),
+    ]).animate(_controller);
+
+    _scale = TweenSequence<double>([
+      TweenSequenceItem(tween: Tween(begin: 1.0, end: _maxScale), weight: 1),
+      TweenSequenceItem(tween: ConstantTween(_maxScale), weight: 2),
+      TweenSequenceItem(tween: Tween(begin: _maxScale, end: 1.0), weight: 1),
+    ]).animate(_controller);
+
+    _rotation = Tween<double>(begin: math.pi, end: 2 * math.pi).animate(
+      CurvedAnimation(
+          parent: _controller, curve: const Interval(0.0, 0.25)),
+    );
+
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        widget.onComplete();
+      }
+    });
+    _controller.forward();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) => Transform.translate(
+          offset: _translation.value,
+          child: Transform.scale(
+            scale: _scale.value,
+            child: Transform.rotate(
+              angle: _rotation.value,
+              child: child,
+            ),
+          ),
+        ),
+        child: widget.child,
+      ),
+    );
   }
 }

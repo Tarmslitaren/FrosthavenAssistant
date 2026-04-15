@@ -1,4 +1,3 @@
-import 'package:animated_widgets/widgets/shake_animated_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/condition_icon.dart';
@@ -129,19 +128,17 @@ void main() {
       expect(find.byType(ConditionIcon), findsOneWidget);
     });
 
-    testWidgets('ShakeAnimatedWidget is in the widget tree',
+    testWidgets('AnimatedBuilder is in the widget tree for shake animation',
         (WidgetTester tester) async {
       await pumpConditionIcon(tester, Condition.stun);
-      expect(find.byType(ShakeAnimatedWidget), findsOneWidget);
+      expect(find.byType(AnimatedBuilder), findsAtLeast(1));
     });
 
-    testWidgets('animate starts as false (no shake on build)',
+    testWidgets('icon is not shaking on initial build',
         (WidgetTester tester) async {
       await pumpConditionIcon(tester, Condition.poison);
-      // Find the ShakeAnimatedWidget and verify enabled=false initially
-      final shake = tester
-          .widget<ShakeAnimatedWidget>(find.byType(ShakeAnimatedWidget));
-      expect(shake.enabled, false);
+      final state = tester.state<ConditionIconState>(find.byType(ConditionIcon));
+      expect(state.animate.value, false);
     });
 
     testWidgets('renders chill condition icon', (WidgetTester tester) async {

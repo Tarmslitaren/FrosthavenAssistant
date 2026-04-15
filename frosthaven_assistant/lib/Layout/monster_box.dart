@@ -1,4 +1,3 @@
-import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
@@ -260,27 +259,34 @@ class MonsterBox extends StatelessWidget {
                 final child = _buildInternal(scale, width, vm);
 
                 if (displayStartAnimation != figureId) {
-                  return TranslationAnimatedWidget.tween(
-                      enabled: !alive && !blockInput,
-                      translationDisabled: const Offset(0, 0),
-                      translationEnabled: Offset(0, alive ? 0 : -offset),
+                  return TweenAnimationBuilder<Offset>(
+                      tween: Tween(
+                        begin: Offset.zero,
+                        end: (!alive && !blockInput)
+                            ? Offset(0, -offset)
+                            : Offset.zero,
+                      ),
                       duration: const Duration(milliseconds: 600),
                       curve: Curves.linear,
-                      child: child);
+                      builder: (context, translation, _) =>
+                          Transform.translate(offset: translation, child: child));
                 }
 
-                return TranslationAnimatedWidget.tween(
-                    enabled: true,
-                    translationDisabled:
-                        Offset(0, alive ? offset : 0),
-                    translationEnabled: Offset(0, alive ? 0 : -offset),
+                return TweenAnimationBuilder<Offset>(
+                    tween: Tween(
+                      begin: Offset(0, alive ? offset : 0),
+                      end: Offset(0, alive ? 0 : -offset),
+                    ),
                     duration: const Duration(milliseconds: 600),
                     curve: Curves.linear,
-                    child: OpacityAnimatedWidget.tween(
-                        enabled: alive,
-                        opacityDisabled: 0,
-                        opacityEnabled: 1,
-                        child: child));
+                    builder: (context, translation, _) =>
+                        Transform.translate(
+                            offset: translation,
+                            child: AnimatedOpacity(
+                              opacity: alive ? 1.0 : 0.0,
+                              duration: const Duration(milliseconds: 600),
+                              child: child,
+                            )));
               })),
     );
 

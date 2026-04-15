@@ -1,5 +1,5 @@
-import 'package:animated_widgets/widgets/rotation_animated.dart';
-import 'package:animated_widgets/widgets/shake_animated_widget.dart';
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../Resource/enums.dart';
@@ -39,8 +39,12 @@ class ConditionIcon extends StatefulWidget {
   ConditionIconState createState() => ConditionIconState();
 }
 
-class ConditionIconState extends State<ConditionIcon> {
+class ConditionIconState extends State<ConditionIcon>
+    with SingleTickerProviderStateMixin {
   late final ConditionIconViewModel _vm;
+  late final AnimationController _shakeController;
+  late final Animation<double> _shakeAngle;
+
   final animate = ValueNotifier<bool>(false);
 
   @override
@@ -49,17 +53,32 @@ class ConditionIconState extends State<ConditionIcon> {
     _vm = ConditionIconViewModel(
         gameState: widget.gameState, settings: widget.settings);
     _vm.commandIndex.addListener(_animateListener);
+
+    _shakeController = AnimationController(
+      duration: const Duration(milliseconds: 333),
+      vsync: this,
+    );
+    _shakeAngle = TweenSequence<double>([
+      TweenSequenceItem(
+          tween: Tween(begin: 0.0, end: 30.0 * math.pi / 180.0), weight: 1),
+      TweenSequenceItem(
+          tween: Tween(begin: 30.0 * math.pi / 180.0, end: -30.0 * math.pi / 180.0),
+          weight: 2),
+      TweenSequenceItem(
+          tween: Tween(begin: -30.0 * math.pi / 180.0, end: 0.0), weight: 1),
+    ]).animate(_shakeController);
   }
 
   @override
   void dispose() {
     _vm.commandIndex.removeListener(_animateListener);
+    _shakeController.dispose();
     super.dispose();
   }
 
   void _runAnimation() {
     animate.value = true;
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    _shakeController.forward(from: 0.0).then((_) {
       animate.value = false;
     });
   }
@@ -87,11 +106,12 @@ class ConditionIconState extends State<ConditionIcon> {
           final isCharacter = _vm.isCharacterCondition(widget.condition);
           final classColor = _vm.classColorFor(widget.condition);
           return RepaintBoundary(
-              child: ShakeAnimatedWidget(
-                  duration: const Duration(milliseconds: 333),
-                  enabled: animate.value,
-                  alignment: Alignment.center,
-                  shakeAngle: Rotation.deg(x: 0, y: 0, z: 30),
+              child: AnimatedBuilder(
+                  animation: _shakeController,
+                  builder: (context, child) => Transform.rotate(
+                        angle: _shakeAngle.value,
+                        child: child,
+                      ),
                   child: isCharacter
                       ? Stack(alignment: Alignment.center, children: [
                           Image(

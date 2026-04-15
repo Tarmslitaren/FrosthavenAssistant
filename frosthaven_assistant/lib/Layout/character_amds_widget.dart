@@ -1,5 +1,3 @@
-import 'package:animated_widgets/widgets/opacity_animated.dart';
-import 'package:animated_widgets/widgets/translation_animated.dart';
 import 'package:flutter/material.dart';
 
 import '../Resource/enums.dart';
@@ -141,11 +139,12 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
     const text = "Character Decks";
 
     return RepaintBoundary(
-        child: TranslationAnimatedWidget(
-            enabled: _enableAnim,
-            values: offsets,
+        child: TweenAnimationBuilder<Offset>(
+            tween: Tween(begin: offsets.first, end: offsets.last),
             duration: duration,
             curve: Easing.standard,
+            builder: (context, offset, child) =>
+                Transform.translate(offset: offset, child: child),
             child: Column(children: [
               ElevatedButton(
                   onPressed: () => {
@@ -196,10 +195,8 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                       },
                   child: const Text(text)),
               RepaintBoundary(
-                  child: OpacityAnimatedWidget.tween(
-                      enabled: _lastState == _OpenState.noOpen,
-                      opacityEnabled: 0,
-                      opacityDisabled: 1,
+                  child: AnimatedOpacity(
+                      opacity: _lastState == _OpenState.noOpen ? 0.0 : 1.0,
                       duration: duration,
                       curve: Easing.standard,
                       child: (_openStateUserIntentPlayTurns ==
