@@ -42,7 +42,7 @@ void main() {
       expect(find.byType(MyHomePage), findsOneWidget);
     });
 
-    testWidgets('build wraps in ValueListenableBuilder for updateForUndo',
+    testWidgets('build renders OverrideTextScaleFactor as root widget',
         (WidgetTester tester) async {
       await pumpHomePage(tester);
       expect(find.byType(ValueListenableBuilder<int>), findsAtLeast(1));

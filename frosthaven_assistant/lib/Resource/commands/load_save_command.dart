@@ -12,7 +12,6 @@ class LoadSaveCommand extends Command {
   void execute() {
     _gameState.loadFromData(saveData);
     _gameState.save();
-    _gameState.updateForUndo.value++;
   }
 
   @override

@@ -82,21 +82,14 @@ void openDialog(BuildContext context, Widget widget) {
 }
 
 void openDialogWithDismissOption(
-    BuildContext context, Widget widget, bool dismissible,
-    {GameState? gameState}) {
+    BuildContext context, Widget widget, bool dismissible) {
   //could potentially modify edge insets based on screen width.
   Widget innerWidget = Stack(children: [
     Positioned(
       child: Dialog(
           backgroundColor: Colors.transparent,
           insetPadding: const EdgeInsets.all(kDialogInsetPadding),
-          child: ValueListenableBuilder<int>(
-              valueListenable: (gameState ?? getIt<GameState>()).updateForUndo,
-              builder: (context, value, child) {
-                rebuildAllChildren(
-                    context); //only way to remake the value listenable builders with broken references
-                return widget;
-              })),
+          child: widget),
     )
   ]);
   showDialog(

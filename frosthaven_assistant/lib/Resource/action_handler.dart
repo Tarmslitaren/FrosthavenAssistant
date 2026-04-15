@@ -16,9 +16,7 @@ class ActionHandler {
 
   final int maxUndo = 250;
 
-  //todo: ugly hacks to delay list update
   final updateList = ValueNotifier<int>(0);
-  final updateForUndo = ValueNotifier<int>(0);
 
   final Communication _communication;
   final Settings? _settingsOverride;
@@ -39,7 +37,6 @@ class ActionHandler {
 
   void updateAllUI() {
     _self.updateList.value++;
-    _self.updateForUndo.value++;
     _self.notifyAllMonsterInstances();
     //try to update card widget here if needed
     //try to update element buttons here if needed
@@ -74,9 +71,6 @@ class ActionHandler {
           }
         }
         commandIndex.value--;
-
-        //make sure to invalidate and rebuild all ui, since references will be broken
-        _self.updateForUndo.value++;
       }
     } else {
       _communication.sendToAll("undo");

@@ -111,13 +111,7 @@ class MainState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<int>(
-        valueListenable: _gameState.updateForUndo,
-        builder: (context, value, child) {
-          rebuildAllChildren(
-              context); //only way to remake the value listenable builders with broken references
-          return const OverrideTextScaleFactor(child: MainScaffold());
-        });
+    return const OverrideTextScaleFactor(child: MainScaffold());
   }
 
   @override
