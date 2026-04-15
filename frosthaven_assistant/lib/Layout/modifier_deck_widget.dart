@@ -7,7 +7,6 @@ import 'package:frosthaven_assistant/Resource/game_data.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/services/network/communication.dart';
 
 class ModifierDeckWidget extends StatefulWidget {
   const ModifierDeckWidget({
@@ -16,7 +15,6 @@ class ModifierDeckWidget extends StatefulWidget {
     this.gameState,
     this.gameData,
     this.settings,
-    this.communication,
   });
 
   final String name;
@@ -24,8 +22,6 @@ class ModifierDeckWidget extends StatefulWidget {
   final GameState? gameState;
   final GameData? gameData;
   final Settings? settings;
-  // injected for testing
-  final Communication? communication;
 
   @override
   ModifierDeckWidgetState createState() => ModifierDeckWidgetState();
@@ -45,7 +41,6 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
       gameState: widget.gameState,
       gameData: widget.gameData,
       settings: widget.settings,
-      communication: widget.communication,
     );
   }
 

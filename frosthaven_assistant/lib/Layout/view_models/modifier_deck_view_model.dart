@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Model/campaign.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_modifier_card_command.dart';
 import 'package:frosthaven_assistant/Resource/game_data.dart';
+import 'package:frosthaven_assistant/Resource/game_event.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
-import 'package:frosthaven_assistant/services/network/communication.dart';
-import 'package:frosthaven_assistant/services/network/network.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../menus/modifier_card_zoom.dart';
@@ -20,17 +19,14 @@ class ModifierDeckViewModel {
     GameState? gameState,
     GameData? gameData,
     Settings? settings,
-    Communication? communication,
   })  : _gameState = gameState ?? getIt<GameState>(),
         _gameData = gameData ?? getIt<GameData>(),
-        _settings = settings ?? getIt<Settings>(),
-        _communication = communication ?? getIt<Communication>();
+        _settings = settings ?? getIt<Settings>();
 
   final String name;
   final GameState _gameState;
   final GameData _gameData;
   final Settings _settings;
-  final Communication _communication;
 
   // Notifiers the widget subscribes to
   ValueListenable<double> get userScalingBars => _settings.userScalingBars;
@@ -53,38 +49,8 @@ class ModifierDeckViewModel {
   String? get currentCharacterName => currentCharacter?.characterClass.name;
 
   bool initAnimationEnabled() {
-    if (_settings.client.value == ClientState.connected) {
-      final oldState = GameState(communication: _communication);
-      const int offset = 1;
-      final saveStateLength = _gameState.gameSaveStates.length;
-      final saveState = _gameState.gameSaveStates[saveStateLength - offset];
-      if (saveStateLength <= offset || saveState == null) {
-        return false;
-      }
-      oldState.loadFromData(saveState.getState());
-
-      final oldDeck = GameMethods.getModifierDeck(name, oldState);
-      final currentDeck = GameMethods.getModifierDeck(name, _gameState);
-      return oldDeck.discardPileSize == currentDeck.discardPileSize - 1;
-    }
-
-    final commandIndex = _gameState.commandIndex.value;
-    final commandDescriptions = _gameState.commandDescriptions;
-    if (_settings.server.value && commandIndex >= 0) {
-      if (commandDescriptions.length > commandIndex) {
-        final commandDescription = commandDescriptions[commandIndex];
-        if (name.isNotEmpty) {
-          if (commandDescription.contains("$name modifier card")) {
-            return true;
-          }
-        } else {
-          if (commandDescription.contains("monster modifier card")) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
+    final event = _gameState.lastEvent.value;
+    return event is ModifierCardDrawnEvent && event.deckName == name;
   }
 
   void drawCard() {
