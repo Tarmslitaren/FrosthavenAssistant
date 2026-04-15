@@ -105,11 +105,14 @@ class ListAnimation extends StatefulWidget {
       {super.key,
       required this.index,
       required this.lastIndex,
-      required this.child});
+      required this.child,
+      this.skipAnimation = false});
 
   final int index;
   final int lastIndex;
   final Widget child;
+  /// When true the translation offset is forced to zero so no slide plays.
+  final bool skipAnimation;
 
   @override
   State<StatefulWidget> createState() {
@@ -171,7 +174,9 @@ class ListAnimationState extends State<ListAnimation>
       }
     }
 
-    _diff = lastPosition - position;
+    // When the caller flags skipAnimation (e.g. a manual reorder) we set _diff
+    // to zero so no slide plays, while still letting lastPositions update below.
+    _diff = widget.skipAnimation ? 0 : lastPosition - position;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       MainListState.lastPositions = positions;
@@ -218,6 +223,10 @@ class MainListState extends State<MainList> {
   static final scrollController = ScrollController();
 
   static List<double> lastPositions = [];
+
+  /// Set to true by [onReorder] so the next [_generateChildren] call skips
+  /// the translation animation (the drag widget already animates the move).
+  bool _skipNextAnimation = false;
 
   @override
   void initState() {
@@ -285,6 +294,9 @@ class MainListState extends State<MainList> {
   }
 
   List<Widget> _generateChildren() {
+    final skipAnimation = _skipNextAnimation;
+    _skipNextAnimation = false;
+
     List<Widget> generatedListAnimators = [];
     List<int> indices = [];
     for (int i = 0; i < _vm.currentListLength; i++) {
@@ -329,7 +341,10 @@ class MainListState extends State<MainList> {
           i++) {
         generatedListAnimators.add(RepaintBoundary(
             child: ListAnimation(
-                index: i, lastIndex: indices[i], child: _generatedList[i])));
+                index: i,
+                lastIndex: indices[i],
+                skipAnimation: skipAnimation,
+                child: _generatedList[i])));
       }
     }
 
@@ -387,6 +402,7 @@ class MainListState extends State<MainList> {
                                       defaultBuildDraggableFeedback,
                                   needsLongPressDraggable: true,
                                   onReorder: (int oldIndex, int newIndex) {
+                                    _skipNextAnimation = true;
                                     setState(() {
                                       _vm.reorderItem(oldIndex, newIndex);
                                     });
