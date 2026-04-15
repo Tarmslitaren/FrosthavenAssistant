@@ -51,8 +51,7 @@ class LootDeckViewModel {
   String? get currentCharacterName => currentCharacter?.characterClass.name;
 
   bool initAnimationEnabled() {
-    if (_settings.client.value == ClientState.connected ||
-        _settings.server.value) {
+    if (_settings.client.value == ClientState.connected) {
       final oldState = GameState(communication: _communication);
       const int offset = 1;
       final saveStatesLength = _gameState.gameSaveStates.length;
@@ -64,6 +63,16 @@ class LootDeckViewModel {
         oldState.loadFromData(oldSave.getState());
         if (oldState.lootDeck.discardPileSize ==
             _gameState.lootDeck.discardPileSize - 1) {
+          return true;
+        }
+      }
+    }
+
+    final commandIndex = _gameState.commandIndex.value;
+    final commandDescriptions = _gameState.commandDescriptions;
+    if (_settings.server.value && commandIndex >= 0) {
+      if (commandDescriptions.length > commandIndex) {
+        if (commandDescriptions[commandIndex].contains("Draw loot card")) {
           return true;
         }
       }

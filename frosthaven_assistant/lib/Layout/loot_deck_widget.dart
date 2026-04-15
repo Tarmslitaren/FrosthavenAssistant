@@ -122,15 +122,14 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
             child: ValueListenableBuilder<int>(
                 valueListenable: _vm.commandIndex,
                 builder: (context, value, child) {
+                  if (!_animationsEnabled) {
+                    _animationsEnabled = _vm.initAnimationEnabled();
+                  }
                   return ValueListenableBuilder<int>(
                       valueListenable: _vm.cardCount,
                       builder: (context, value, child) {
                         if (_vm.shouldHide) {
                           return Container();
-                        }
-
-                        if (!_animationsEnabled) {
-                          _animationsEnabled = _vm.initAnimationEnabled();
                         }
 
                         final deck = _vm.lootDeck;
