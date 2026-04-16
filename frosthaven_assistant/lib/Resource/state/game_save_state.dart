@@ -172,10 +172,10 @@ class GameSaveState {
             ElementState.values[elementData[Elements.light.index.toString()]];
         gameState._elementState[Elements.dark] =
             ElementState.values[elementData[Elements.dark.index.toString()]];
-      } catch (e) {
-        if (kDebugMode) {
-          print(e.toString());
-        }
+      } catch (e, stack) {
+        // Deserialization failure: log always (not just debug) so it surfaces
+        // in release builds and can be caught by crash-reporting tools.
+        debugPrint('GameSaveState.load error: $e\n$stack');
       }
     }
   }
