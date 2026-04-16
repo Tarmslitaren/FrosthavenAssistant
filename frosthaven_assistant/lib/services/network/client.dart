@@ -116,75 +116,82 @@ class Client {
   }
 
   void onListenData(Uint8List data) {
-    String message = utf8.decode(data);
-    message = _leftOverMessage + message;
-    _leftOverMessage = "";
+    _leftOverMessage += utf8.decode(data);
 
-    List<String> messages = message.split("S3nD:");
-    //handle
-    for (var message in messages) {
+    // Use indexOf-based framing so that "S3nD:" inside a payload (e.g. in a
+    // JSON game-state string) never creates false message boundaries.
+    const String prefix = 'S3nD:';
+    const String suffix = '[EOM]';
+    while (true) {
+      final int start = _leftOverMessage.indexOf(prefix);
+      if (start == -1) break;
+      final int contentStart = start + prefix.length;
+      final int end = _leftOverMessage.indexOf(suffix, contentStart);
+      if (end == -1) break;
+
+      final String content = _leftOverMessage.substring(contentStart, end);
+      _leftOverMessage = _leftOverMessage.substring(end + suffix.length);
       _serverResponsive = true;
-      if (message.endsWith("[EOM]")) {
-        message = message.substring(0, message.length - "[EOM]".length);
-        if (message.startsWith("Mismatch:")) {
-          message = message.substring("Mismatch:".length);
-          _network.networkMessage.value =
-              "Your state was not up to date, try again.";
-        }
+      _handleContent(content);
+    }
+  }
 
-        // Try new JSON envelope format first, fall back to legacy text format.
-        final StateEnvelope? envelope = StateEnvelope.tryDecode(message);
-        if (envelope != null) {
-          final GameEvent event = GameEvent.fromJsonString(envelope.eventJson);
-          debugPrint(
-              'Client Receive Data, index: ${envelope.index}, event:${event.runtimeType}');
-          _gameState.loadFromData(envelope.state);
-          // Set event before commandIndex fires so VLB callbacks see it.
-          _gameState.lastEvent.value = event;
-          _gameState.commandIndex.value = envelope.index;
-          _gameState.updateAllUI();
-          Future.delayed(
-              const Duration(milliseconds: 100), () => _gameState.save());
-        } else if (message.startsWith("Index:")) {
-          // Legacy text format: "Index:NDescription:textEvent:{...}GameState:state"
-          List<String> messageParts1 = message.split("Description:");
-          String indexString = messageParts1[0].substring("Index:".length);
-          final String afterDescription = messageParts1[1];
+  void _handleContent(String message) {
+    if (message.startsWith("Mismatch:")) {
+      message = message.substring("Mismatch:".length);
+      _network.networkMessage.value =
+          "Your state was not up to date, try again.";
+    }
 
-          GameEvent event = const NoEvent();
-          String data;
-          if (afterDescription.contains("Event:")) {
-            List<String> messageParts2 = afterDescription.split("Event:");
-            List<String> messageParts3 = messageParts2[1].split("GameState:");
-            event = GameEvent.fromJsonString(messageParts3[0]);
-            data = messageParts3[1];
-          } else {
-            // Backwards-compatible: older server without Event field.
-            data = afterDescription.split("GameState:")[1];
-          }
+    // Try new JSON envelope format first, fall back to legacy text format.
+    final StateEnvelope? envelope = StateEnvelope.tryDecode(message);
+    if (envelope != null) {
+      final GameEvent event = GameEvent.fromJsonString(envelope.eventJson);
+      debugPrint(
+          'Client Receive Data, index: ${envelope.index}, event:${event.runtimeType}');
+      _gameState.loadFromData(envelope.state);
+      // Set event before commandIndex fires so VLB callbacks see it.
+      _gameState.lastEvent.value = event;
+      _gameState.commandIndex.value = envelope.index;
+      _gameState.updateAllUI();
+      Future.delayed(
+          const Duration(milliseconds: 100), () => _gameState.save());
+    } else if (message.startsWith("Index:")) {
+      // Legacy text format: "Index:NDescription:textEvent:{...}GameState:state"
+      List<String> messageParts1 = message.split("Description:");
+      String indexString = messageParts1[0].substring("Index:".length);
+      final String afterDescription = messageParts1[1];
 
-          debugPrint(
-              'Client Receive Data, index: $indexString, event:${event.runtimeType}');
-
-          _gameState.loadFromData(data);
-          int newIndex = int.tryParse(indexString) ?? -1;
-          // Set event before commandIndex fires so VLB callbacks see it.
-          _gameState.lastEvent.value = event;
-          _gameState.commandIndex.value = newIndex;
-          _gameState.updateAllUI();
-          Future.delayed(
-              const Duration(milliseconds: 100), () => _gameState.save());
-        } else if (message.startsWith("Error")) {
-          _network.networkMessage.value = message;
-          disconnect(message);
-        } else if (message.startsWith("ping")) {
-          _send("pong");
-        } else if (message.startsWith("pong")) {
-          _serverResponsive = true;
-        }
+      GameEvent event = const NoEvent();
+      String data;
+      if (afterDescription.contains("Event:")) {
+        List<String> messageParts2 = afterDescription.split("Event:");
+        List<String> messageParts3 = messageParts2[1].split("GameState:");
+        event = GameEvent.fromJsonString(messageParts3[0]);
+        data = messageParts3[1];
       } else {
-        _leftOverMessage = message;
+        // Backwards-compatible: older server without Event field.
+        data = afterDescription.split("GameState:")[1];
       }
+
+      debugPrint(
+          'Client Receive Data, index: $indexString, event:${event.runtimeType}');
+
+      _gameState.loadFromData(data);
+      int newIndex = int.tryParse(indexString) ?? -1;
+      // Set event before commandIndex fires so VLB callbacks see it.
+      _gameState.lastEvent.value = event;
+      _gameState.commandIndex.value = newIndex;
+      _gameState.updateAllUI();
+      Future.delayed(
+          const Duration(milliseconds: 100), () => _gameState.save());
+    } else if (message.startsWith("Error")) {
+      _network.networkMessage.value = message;
+      disconnect(message);
+    } else if (message.startsWith("ping")) {
+      _send("pong");
+    } else if (message.startsWith("pong")) {
+      _serverResponsive = true;
     }
   }
 
