@@ -7,6 +7,7 @@ import 'dart:typed_data';
 class StateUpdateMessage {
   String indexString = "";
   String description = "";
+  String eventJson = '{"type":"none"}';
   String data = "";
   int index = 0;
 }
@@ -60,16 +61,32 @@ abstract class GameServer {
 
   StateUpdateMessage parseStateUpdateMessage(String message) {
     List<String> messageParts1 = message.split("Description:");
-    String indexString =
-        messageParts1[0].substring("Index:".length);
-    List<String> messageParts2 =
-        messageParts1[1].split("GameState:");
-    String description = messageParts2[0];
-    String data = messageParts2[1];
-    StateUpdateMessage result =  StateUpdateMessage();
+    String indexString = messageParts1[0].substring("Index:".length);
+    final String afterDescription = messageParts1[1];
+
+    String description;
+    String eventJson;
+    String data;
+
+    if (afterDescription.contains("Event:")) {
+      List<String> parts2 = afterDescription.split("Event:");
+      description = parts2[0];
+      List<String> parts3 = parts2[1].split("GameState:");
+      eventJson = parts3[0];
+      data = parts3[1];
+    } else {
+      // Backwards-compatible: older client without Event field.
+      List<String> parts2 = afterDescription.split("GameState:");
+      description = parts2[0];
+      eventJson = '{"type":"none"}';
+      data = parts2[1];
+    }
+
+    StateUpdateMessage result = StateUpdateMessage();
     result.indexString = indexString;
     result.index = int.parse(indexString);
     result.description = description;
+    result.eventJson = eventJson;
     result.data = data;
     return result;
   }
