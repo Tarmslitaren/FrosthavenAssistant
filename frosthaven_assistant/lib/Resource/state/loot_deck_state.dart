@@ -522,7 +522,9 @@ class LootDeck {
     final gd = gameData ?? getIt<GameData>();
     String scenario = gs.scenario.value;
     LootDeckModel? lootDeckModel = gd.modelData
-        .value[gs.currentCampaign.value]!.scenarios[scenario]!.lootDeck;
+        .value[gs.currentCampaign.value]
+        ?.scenarios[scenario]
+        ?.lootDeck;
     if (lootDeckModel != null) {
       _setDeck(lootDeckModel);
     }
