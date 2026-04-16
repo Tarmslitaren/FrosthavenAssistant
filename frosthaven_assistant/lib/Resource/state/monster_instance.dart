@@ -62,15 +62,21 @@ class MonsterInstance extends FigureState {
   void _setLevel(Monster monster, {GameState? gameState}) {
     StatValue newHealthValue = const IntStatValue(
         10); //need to put something outer than 0 or the standee will die immediately causing glitch
-    if (type == MonsterType.boss) {
-      newHealthValue = monster.type.levels[monster.level.value].boss?.health ??
-          newHealthValue;
-    } else if (type == MonsterType.elite) {
-      newHealthValue = monster.type.levels[monster.level.value].elite?.health ??
-          newHealthValue;
-    } else if (type == MonsterType.normal) {
-      newHealthValue = monster.type.levels[monster.level.value].normal?.health ??
-          newHealthValue;
+    final levels = monster.type.levels;
+    final levelIndex = levels.isEmpty
+        ? -1
+        : monster.level.value.clamp(0, levels.length - 1);
+    if (levelIndex >= 0) {
+      if (type == MonsterType.boss) {
+        newHealthValue =
+            levels[levelIndex].boss?.health ?? newHealthValue;
+      } else if (type == MonsterType.elite) {
+        newHealthValue =
+            levels[levelIndex].elite?.health ?? newHealthValue;
+      } else if (type == MonsterType.normal) {
+        newHealthValue =
+            levels[levelIndex].normal?.health ?? newHealthValue;
+      }
     }
     int? value = StatCalculator.calculateFormula(newHealthValue);
     if (value != null) {
@@ -137,7 +143,10 @@ class MonsterInstance extends FigureState {
     _maxHealth.value = json["maxHealth"];
     name = json["name"];
     gfx = json["gfx"];
-    _type = MonsterType.values[json["type"]];
+    final typeIdx = json["type"] as int?;
+    _type = (typeIdx != null && typeIdx >= 0 && typeIdx < MonsterType.values.length)
+        ? MonsterType.values[typeIdx]
+        : MonsterType.normal;
     move = json["move"];
     attack = json["attack"];
     range = json["range"];
