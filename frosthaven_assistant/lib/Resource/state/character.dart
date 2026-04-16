@@ -15,17 +15,30 @@ class Character extends ListItemData {
     final anId = json['characterClass'];
     String? edition = json['edition'];
     characterState = CharacterState.fromSave(anId, json['characterState']);
-    characterClass = _getClass(anId, edition)!;
+    final cls = _getClass(anId, edition);
+    if (cls == null) {
+      throw StateError('Character class not found: $anId (edition: $edition)');
+    }
+    characterClass = cls;
     id = characterClass.id;
   }
 
   Character.fromJson(Map<String, dynamic> json) {
     final anId = json['characterClass'];
     String? edition = json['edition'];
-    _turnState.value = TurnsState.values[json['turnState']];
+    final turnStateIdx = json['turnState'] as int?;
+    if (turnStateIdx != null &&
+        turnStateIdx >= 0 &&
+        turnStateIdx < TurnsState.values.length) {
+      _turnState.value = TurnsState.values[turnStateIdx];
+    }
     characterState = CharacterState.fromJson(anId, json['characterState']);
 
-    characterClass = _getClass(anId, edition)!;
+    final cls = _getClass(anId, edition);
+    if (cls == null) {
+      throw StateError('Character class not found: $anId (edition: $edition)');
+    }
+    characterClass = cls;
 
     id = GameMethods.isObjectiveOrEscort(characterClass)
         ? characterState.display.value
@@ -36,7 +49,12 @@ class Character extends ListItemData {
   /// are [late final] and never change; only [_turnState] and [characterState]
   /// need updating.
   void updateFromJson(Map<String, dynamic> json) {
-    _turnState.value = TurnsState.values[json['turnState'] as int];
+    final turnStateIdx = json['turnState'] as int?;
+    if (turnStateIdx != null &&
+        turnStateIdx >= 0 &&
+        turnStateIdx < TurnsState.values.length) {
+      _turnState.value = TurnsState.values[turnStateIdx];
+    }
     characterState.updateFromJson(json['characterClass'] as String,
         json['characterState'] as Map<String, dynamic>);
   }
