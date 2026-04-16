@@ -120,9 +120,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
             openDialog(
                 context,
                 SendToBottomMenu(
-                  currentIndex: int.parse(value.key
-                      .toString()
-                      .substring(3, value.key.toString().length - 3)),
+                  currentIndex: index,
                   length: inputList.length,
                   name: name,
                   revealed: isRevealed(item) || allOpen,
