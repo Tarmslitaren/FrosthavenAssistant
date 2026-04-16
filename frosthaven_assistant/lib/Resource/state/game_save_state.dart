@@ -45,7 +45,12 @@ class GameSaveState {
         } else {
           gameState._totalRounds.value = gameState._round.value;
         }
-        gameState._roundState.value = RoundState.values[data['roundState']];
+        final roundStateIdx = data['roundState'] as int?;
+        if (roundStateIdx != null &&
+            roundStateIdx >= 0 &&
+            roundStateIdx < RoundState.values.length) {
+          gameState._roundState.value = RoundState.values[roundStateIdx];
+        }
         gameState._solo.value = data['solo'] as bool;
 
         if (data.containsKey('autoScenarioLevel')) {
