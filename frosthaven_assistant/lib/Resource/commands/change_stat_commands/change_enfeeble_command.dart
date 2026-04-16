@@ -29,7 +29,7 @@ class ChangeEnfeebleCommand extends ChangeStatCommand {
         }
       }
     }
-    deck?.addRemovableValue(gfx, change);
+    deck?.addRemovableValue(stateAccess, gfx, change);
   }
 
   @override

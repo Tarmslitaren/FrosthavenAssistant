@@ -28,7 +28,7 @@ class ChangeBlessCommand extends ChangeStatCommand {
       }
     }
 
-    deck?.addRemovableValue("bless", change);
+    deck?.addRemovableValue(stateAccess, "bless", change);
   }
 
   @override

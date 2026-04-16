@@ -91,7 +91,7 @@ class ModifierDeck {
           gfx.contains("empower") ||
           gfx.contains("enfeeble") ||
           gfx == "bless") {
-        addRemovableValue(gfx, 1);
+        addRemovableValue(_StateModifier(), gfx, 1);
       }
     }
     for (var item in modifierDeckData["discardPile"] as List) {
@@ -131,11 +131,11 @@ class ModifierDeck {
         : 0;
   }
 
-  void setRemovableValue(String id, int value) {
+  void setRemovableValue(_StateModifier _, String id, int value) {
     _removables[id]?.value = value;
   }
 
-  void addRemovableValue(String id, int value) {
+  void addRemovableValue(_StateModifier _, String id, int value) {
     _removables[id]?.value += value;
   }
 
@@ -481,7 +481,7 @@ class ModifierDeck {
     }
 
     if (_removables[card.gfx] != null) {
-      addRemovableValue(card.gfx, -1);
+      addRemovableValue(_StateModifier(), card.gfx, -1);
     }
     _discardPile.push(card);
     _cardCount.value = _drawPile.size();
