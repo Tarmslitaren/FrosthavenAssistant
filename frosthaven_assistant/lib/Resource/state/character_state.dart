@@ -48,6 +48,7 @@ class CharacterState extends FigureState {
       final perks = json["perkList"];
       int i = 0;
       for (bool item in perks) {
+        if (i >= _perkList.length) break;
         _perkList[i] = item;
         i++;
       }
@@ -75,6 +76,7 @@ class CharacterState extends FigureState {
       final perks = json["perkList"];
       int i = 0;
       for (bool item in perks) {
+        if (i >= _perkList.length) break;
         _perkList[i] = item;
         i++;
       }
@@ -135,6 +137,7 @@ class CharacterState extends FigureState {
     if (json.containsKey("perkList")) {
       int i = 0;
       for (bool item in json["perkList"]) {
+        if (i >= _perkList.length) break;
         _perkList[i] = item;
         i++;
       }
