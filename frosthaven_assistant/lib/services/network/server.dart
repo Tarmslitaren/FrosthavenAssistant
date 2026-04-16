@@ -151,12 +151,13 @@ class Server extends GameServer {
     if (serverSocket != null &&
         _settings.server.value != false &&
         _pinging == false) {
+      _pinging = true;
       Future.delayed(const Duration(seconds: 20), () {
         if (serverSocket == null || _settings.server.value == false) {
           _pinging = false;
         } else {
-          _pinging = true;
           send("ping");
+          _pinging = false;
           sendPing();
         }
       });

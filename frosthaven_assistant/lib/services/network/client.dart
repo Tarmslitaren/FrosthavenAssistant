@@ -70,12 +70,13 @@ class Client {
     if (_connection.established() &&
         _settings.client.value == ClientState.connected &&
         _pinging == false) {
+      _pinging = true;
       Future.delayed(const Duration(seconds: 12), () {
         if (_serverResponsive == true) {
-          _pinging = true;
           _communication.sendToAll("ping");
-          _sendPing();
           _serverResponsive = false; //set back to true when get response
+          _pinging = false;
+          _sendPing();
         } else {
           _pinging = false;
           disconnect("Server unresponsive. Client disconnected.");
