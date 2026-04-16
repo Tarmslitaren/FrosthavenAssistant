@@ -8,6 +8,7 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/main_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:show_fps/show_fps.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:window_manager/window_manager.dart';
@@ -24,7 +25,7 @@ void _enablePlatformOverrideForDesktop() {
   }
 }
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
 
@@ -47,18 +48,39 @@ void main() {
     setWindowMaxSize(Size.infinite);
   }
 
-  ErrorWidget.builder = ((e) {
-    if (!kDebugMode) {
-      //to not show the gray boxes, when there are exceptions
-      return Container();
-      //todo: save a log?
+  FlutterError.onError = (details) {
+    if (kReleaseMode) {
+      Sentry.captureException(details.exception, stackTrace: details.stack);
+    } else {
+      FlutterError.dumpErrorToConsole(details);
     }
-    //show the error in debug builds
+  };
 
+  PlatformDispatcher.instance.onError = (error, stack) {
+    if (kReleaseMode) {
+      Sentry.captureException(error, stackTrace: stack);
+    }
+    return true;
+  };
+
+  ErrorWidget.builder = (e) {
+    if (kReleaseMode) {
+      Sentry.captureException(e.exception, stackTrace: e.stack);
+      return Container();
+    }
     return ErrorWidget(e);
-  });
+  };
 
-  runApp(ThemeSwitcherWidget(initialTheme: theme, child: const MyApp()));
+  await SentryFlutter.init(
+    (options) {
+      // TODO: should sentry account be secret?
+      options.dsn = kReleaseMode
+          ? 'https://724e200e79e66374173bda0192f05101@o4511228276703232.ingest.de.sentry.io/4511228279914576'
+          : '';
+    },
+    appRunner: () =>
+        runApp(ThemeSwitcherWidget(initialTheme: theme, child: const MyApp())),
+  );
 }
 
 class MyApp extends StatelessWidget {

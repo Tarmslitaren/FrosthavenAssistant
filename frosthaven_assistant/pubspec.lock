@@ -25,14 +25,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.3.0"
-  animated_widgets:
-    dependency: "direct main"
-    description:
-      name: animated_widgets
-      sha256: "2d6b77a77fc733b06e185553ec0b8225ffd1dd0e6fa327900ff26f1e04995eda"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   ansicolor:
     dependency: transitive
     description:
@@ -840,6 +832,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  sentry:
+    dependency: transitive
+    description:
+      name: sentry
+      sha256: "599701ca0693a74da361bc780b0752e1abc98226cf5095f6b069648116c896bb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.14.2"
+  sentry_flutter:
+    dependency: "direct main"
+    description:
+      name: sentry_flutter
+      sha256: "5ba2cf40646a77d113b37a07bd69f61bb3ec8a73cbabe5537b05a7c89d2656f8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.14.2"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -1117,6 +1125,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.5"
+  uuid:
+    dependency: transitive
+    description:
+      name: uuid
+      sha256: "1fef9e8e11e2991bb773070d4656b7bd5d850967a2456cfc83cf47925ba79489"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.5.3"
   vector_math:
     dependency: transitive
     description:

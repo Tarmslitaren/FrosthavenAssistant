@@ -31,6 +31,12 @@
 .pub/
 /build/
 
+#ai tools
+.claude/
+
+#logging tools
+.sentry-native/
+
 # Web related
 
 # Symbolication related
