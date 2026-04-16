@@ -101,8 +101,15 @@ class MyApp extends StatelessWidget {
           .loadData("assets/data/")
           .then((value) => getIt<GameState>().load())
           .then((value) => getIt<Settings>().init())
-          .then((value) => {loading.value = false});
-    } catch (error) {
+          .then((_) { loading.value = false; })
+          .catchError((Object error, StackTrace stack) {
+            Sentry.captureException(error, stackTrace: stack);
+            debugPrint('Init failed: $error');
+            loading.value = false;
+          });
+    } catch (error, stack) {
+      Sentry.captureException(error, stackTrace: stack);
+      debugPrint('Init failed: $error');
       loading.value = false;
     }
 
