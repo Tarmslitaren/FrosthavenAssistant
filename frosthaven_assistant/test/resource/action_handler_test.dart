@@ -105,6 +105,44 @@ void main() {
       });
     });
 
+    group('getCurrent edge cases', () {
+      test('getCurrent throws when there is no valid command at current index',
+          () {
+        final gs = getIt<GameState>();
+        // Reset so commandIndex is -1 (no commands executed yet).
+        gs.commandIndex.value = -1;
+        gs.resetCommandHistory();
+        // getCurrent accesses _commands[commandIndex] — either a RangeError
+        // (negative index) or TypeError (null-check on a null entry). Either
+        // way it must throw an Error so callers know to guard the call site.
+        expect(() => gs.getCurrent(), throwsA(isA<Error>()));
+      });
+    });
+
+    group('redo after maxUndo eviction', () {
+      test('redo from the oldest valid position does not crash', () {
+        final gs = getIt<GameState>();
+        final maxUndo = gs.maxUndo;
+
+        // Execute maxUndo + 1 commands so the oldest save state is evicted.
+        for (int i = 0; i <= maxUndo; i++) {
+          gs.action(SetLevelCommand((i % 7) + 1, null));
+        }
+
+        // Undo all the way to the eviction boundary:
+        // only the last maxUndo states are guaranteed non-null.
+        for (int i = 0; i < maxUndo; i++) {
+          gs.undo();
+        }
+        // commandIndex is now at the boundary; gameSaveStates[commandIndex + 1]
+        // may be null (evicted). redo() must return early without crashing.
+        expect(() => gs.redo(), returnsNormally);
+
+        // Restore state for other tests.
+        gs.undo();
+      });
+    });
+
     group('add monster then undo', () {
       test('undo after adding a monster removes it from the list', () {
         final gs = getIt<GameState>();
