@@ -160,18 +160,13 @@ class GameSaveState {
         //////elements
         Map elementData = data['elementState'];
         gameState._elementState.clear();
-        gameState._elementState[Elements.fire] =
-            ElementState.values[elementData[Elements.fire.index.toString()]];
-        gameState._elementState[Elements.ice] =
-            ElementState.values[elementData[Elements.ice.index.toString()]];
-        gameState._elementState[Elements.air] =
-            ElementState.values[elementData[Elements.air.index.toString()]];
-        gameState._elementState[Elements.earth] =
-            ElementState.values[elementData[Elements.earth.index.toString()]];
-        gameState._elementState[Elements.light] =
-            ElementState.values[elementData[Elements.light.index.toString()]];
-        gameState._elementState[Elements.dark] =
-            ElementState.values[elementData[Elements.dark.index.toString()]];
+        for (final element in Elements.values) {
+          final raw = elementData[element.index.toString()] as int?;
+          final idx = (raw != null && raw >= 0 && raw < ElementState.values.length)
+              ? raw
+              : ElementState.inert.index;
+          gameState._elementState[element] = ElementState.values[idx];
+        }
       } catch (e, stack) {
         // Deserialization failure: log always (not just debug) so it surfaces
         // in release builds and can be caught by crash-reporting tools.
