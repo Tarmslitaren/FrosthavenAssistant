@@ -74,6 +74,12 @@ class Server extends GameServer {
     _gameState.redo();
   }
 
+  String _lastSavedState() {
+    return _gameState.gameSaveStates.isNotEmpty
+        ? _gameState.gameSaveStates.last!.getState()
+        : _gameState.toString();
+  }
+
   @override
   void updateStateFromMessage(StateUpdateMessage message, Socket client) {
     if (message.index > _gameState.commandDescriptions.length) {
@@ -83,7 +89,7 @@ class Server extends GameServer {
         commandDescription = _gameState.commandDescriptions.last;
       }
       send(
-          "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}");
+          "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_lastSavedState()}");
     } else if (message.index > _gameState.commandIndex.value) {
       _gameState.commandIndex.value = message.index;
       if (message.index >= 0) {
@@ -94,14 +100,14 @@ class Server extends GameServer {
       _gameState.save();
       _gameState.updateAllUI();
       sendToOthers(
-          "Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_gameState.gameSaveStates.last!.getState()}",
+          "Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_lastSavedState()}",
           client);
     } else {
       log('Got same or lower index. ignoring: received index: ${message.indexString} current index ${_gameState.commandIndex.value}');
 
       //overwrite client state with current server state.
       sendToOnly(
-          "Mismatch:Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions[_gameState.commandIndex.value]}GameState:${_gameState.gameSaveStates.last!.getState()}",
+          "Mismatch:Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions[_gameState.commandIndex.value]}GameState:${_lastSavedState()}",
           client);
       //ignore if same index from server
     }
@@ -114,7 +120,7 @@ class Server extends GameServer {
 
   @override
   String currentStateMessage(String commandDescription) {
-    return "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}";
+    return "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_lastSavedState()}";
   }
 
   bool _pinging = false; //to not restart this ping sub process, if one is running
@@ -185,7 +191,7 @@ class Server extends GameServer {
     }
     log('Server sends init response: "S3nD:Index:${_gameState.commandIndex.value}Description:$commandDescription');
     sendToOnly(
-        "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}",
+        "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_lastSavedState()}",
         client);
   }
 }
