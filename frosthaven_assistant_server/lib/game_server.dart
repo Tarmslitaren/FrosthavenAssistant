@@ -124,7 +124,7 @@ abstract class GameServer {
 
     StateUpdateMessage result = StateUpdateMessage();
     result.indexString = indexString;
-    result.index = int.parse(indexString);
+    result.index = int.tryParse(indexString) ?? -1;
     result.description = description;
     result.eventJson = eventJson;
     result.data = data;
@@ -264,7 +264,15 @@ abstract class GameServer {
 
   void handleInitMessage(String message, Socket client){
     List<String> initMessageParts = message.split("version:");
-    int version = int.parse(initMessageParts[1]);
+    if (initMessageParts.length < 2) {
+      sendToOnly("Error: malformed init message (missing version field).", client);
+      return;
+    }
+    final int? version = int.tryParse(initMessageParts[1]);
+    if (version == null) {
+      sendToOnly("Error: malformed init message (non-integer version).", client);
+      return;
+    }
     if (version != serverVersion) {
       //version mismatch
       setNetworkMessage("Client version mismatch. Please update. Client $version Server $serverVersion");
