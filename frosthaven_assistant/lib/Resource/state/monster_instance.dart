@@ -63,11 +63,14 @@ class MonsterInstance extends FigureState {
     StatValue newHealthValue = const IntStatValue(
         10); //need to put something outer than 0 or the standee will die immediately causing glitch
     if (type == MonsterType.boss) {
-      newHealthValue = monster.type.levels[monster.level.value].boss!.health;
+      newHealthValue = monster.type.levels[monster.level.value].boss?.health ??
+          newHealthValue;
     } else if (type == MonsterType.elite) {
-      newHealthValue = monster.type.levels[monster.level.value].elite!.health;
+      newHealthValue = monster.type.levels[monster.level.value].elite?.health ??
+          newHealthValue;
     } else if (type == MonsterType.normal) {
-      newHealthValue = monster.type.levels[monster.level.value].normal!.health;
+      newHealthValue = monster.type.levels[monster.level.value].normal?.health ??
+          newHealthValue;
     }
     int? value = StatCalculator.calculateFormula(newHealthValue);
     if (value != null) {
