@@ -125,8 +125,12 @@ class ActionHandler {
       if (commandIndex.value < _commandDescriptions.length - 1) {
         lastEvent.value = const NoEvent();
         commandIndex.value++;
-        _gameSaveStates[commandIndex.value + 1]!.load(_self);
-        _gameSaveStates[commandIndex.value + 1]!.saveToDisk(_self);
+        final nextIdx = commandIndex.value + 1;
+        final nextState =
+            (nextIdx < _gameSaveStates.length) ? _gameSaveStates[nextIdx] : null;
+        if (nextState == null) return; // save state evicted by maxUndo
+        nextState.load(_self);
+        nextState.saveToDisk(_self);
         //also run generic update ui function
         updateAllUI();
       } else {
@@ -136,13 +140,19 @@ class ActionHandler {
 
       //send last game state if connected
       if (isServer) {
-        log('server sends, redo index: ${commandIndex.value}, description:${_commandDescriptions[commandIndex.value]}');
-        _network.server.send(StateEnvelope(
-          index: commandIndex.value,
-          description: _commandDescriptions[commandIndex.value],
-          eventJson: const NoEvent().toJsonString(),
-          state: _gameSaveStates[commandIndex.value + 1]!.getState(),
-        ).encode());
+        final idx = commandIndex.value;
+        final nextIdx = idx + 1;
+        final nextState =
+            (nextIdx < _gameSaveStates.length) ? _gameSaveStates[nextIdx] : null;
+        if (idx < _commandDescriptions.length && nextState != null) {
+          log('server sends, redo index: $idx, description:${_commandDescriptions[idx]}');
+          _network.server.send(StateEnvelope(
+            index: idx,
+            description: _commandDescriptions[idx],
+            eventJson: const NoEvent().toJsonString(),
+            state: nextState.getState(),
+          ).encode());
+        }
       }
     } else if (isClient) {
       _communication.sendToAll("redo");
