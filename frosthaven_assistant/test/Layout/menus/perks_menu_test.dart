@@ -14,10 +14,12 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
   });
 
-  Character _getBlinkblade() {
+  Character getBlinkblade() {
     return getIt<GameState>()
         .currentList
         .firstWhere((item) => item.id == 'Blinkblade') as Character;
@@ -25,7 +27,7 @@ void main() {
 
   Future<void> pumpMenu(WidgetTester tester) async {
     final originalOnError = FlutterError.onError;
-    final character = _getBlinkblade();
+    final character = getBlinkblade();
     FlutterError.onError = ignoreOverflowErrors;
     await tester.pumpWidget(
       MaterialApp(

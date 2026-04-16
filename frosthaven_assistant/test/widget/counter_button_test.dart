@@ -15,10 +15,12 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
   });
 
-  Character _getBlinkblade() {
+  Character getBlinkblade() {
     return getIt<GameState>()
         .currentList
         .firstWhere((item) => item.id == 'Blinkblade') as Character;
@@ -26,14 +28,15 @@ void main() {
 
   Future<void> pumpCounterButton(WidgetTester tester,
       {bool showTotalValue = false}) async {
-    final character = _getBlinkblade();
+    final character = getBlinkblade();
     final figureId = character.id;
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
           body: CounterButton(
             notifier: character.characterState.health,
-            command: ChangeHealthCommand(0, figureId, figureId, gameState: getIt<GameState>()),
+            command: ChangeHealthCommand(0, figureId, figureId,
+                gameState: getIt<GameState>()),
             maxValue: character.characterState.maxHealth.value,
             image: 'assets/images/abilities/heal.png',
             showTotalValue: showTotalValue,
@@ -67,10 +70,11 @@ void main() {
     });
 
     testWidgets('tapping + increments health', (WidgetTester tester) async {
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       // Set health below max so we can increment
       final figureId = character.id;
-      getIt<GameState>().action(ChangeHealthCommand(-1, figureId, figureId, gameState: getIt<GameState>()));
+      getIt<GameState>().action(ChangeHealthCommand(-1, figureId, figureId,
+          gameState: getIt<GameState>()));
       final before = character.characterState.health.value;
 
       await pumpCounterButton(tester);
@@ -84,8 +88,7 @@ void main() {
     });
 
     testWidgets('tapping - decrements health', (WidgetTester tester) async {
-      final character = _getBlinkblade();
-      final figureId = character.id;
+      final character = getBlinkblade();
       final before = character.characterState.health.value;
       expect(before, greaterThan(0));
 
@@ -100,13 +103,13 @@ void main() {
 
     testWidgets('tapping + at max value does not increment',
         (WidgetTester tester) async {
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       final maxHealth = character.characterState.maxHealth.value;
       final figureId = character.id;
       // Ensure health is at max
       while (character.characterState.health.value < maxHealth) {
-        getIt<GameState>()
-            .action(ChangeHealthCommand(1, figureId, figureId, gameState: getIt<GameState>()));
+        getIt<GameState>().action(ChangeHealthCommand(1, figureId, figureId,
+            gameState: getIt<GameState>()));
       }
       final before = character.characterState.health.value;
 
@@ -124,14 +127,14 @@ void main() {
     testWidgets('notifier value of 0 makes minus button no-op',
         (WidgetTester tester) async {
       // Use figureId='unknown' so Navigator.pop is NOT called on zero health
-      final character = _getBlinkblade();
       final notifier = ValueNotifier<int>(0);
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: CounterButton(
               notifier: notifier,
-              command: ChangeHealthCommand(0, 'unknown', null, gameState: getIt<GameState>()),
+              command: ChangeHealthCommand(0, 'unknown', null,
+                  gameState: getIt<GameState>()),
               maxValue: 10,
               image: 'assets/images/abilities/heal.png',
               showTotalValue: true,
@@ -151,22 +154,24 @@ void main() {
 
     testWidgets('showTotalValue=true shows notifier value as text',
         (WidgetTester tester) async {
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       final health = character.characterState.health.value;
 
       await pumpCounterButton(tester, showTotalValue: true);
       expect(find.text(health.toString()), findsOneWidget);
     });
 
-    testWidgets('renders extraImage when provided', (WidgetTester tester) async {
-      final character = _getBlinkblade();
+    testWidgets('renders extraImage when provided',
+        (WidgetTester tester) async {
+      final character = getBlinkblade();
       final figureId = character.id;
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
             body: CounterButton(
               notifier: character.characterState.health,
-              command: ChangeHealthCommand(0, figureId, figureId, gameState: getIt<GameState>()),
+              command: ChangeHealthCommand(0, figureId, figureId,
+                  gameState: getIt<GameState>()),
               maxValue: character.characterState.maxHealth.value,
               image: 'assets/images/abilities/heal.png',
               showTotalValue: false,

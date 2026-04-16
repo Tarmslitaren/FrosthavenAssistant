@@ -12,7 +12,8 @@ class LootCardWidget extends StatelessWidget {
     this.revealed.value = revealed;
   }
 
-  static Widget buildFront(LootCard card, double scale, bool hasAnimations, {Settings? settings}) {
+  static Widget buildFront(LootCard card, double scale, bool hasAnimations,
+      {Settings? settings}) {
     settings = settings ?? getIt<Settings>();
     var shadow = Shadow(
       offset: Offset(0.6 * scale, 0.6 * scale),
@@ -20,8 +21,6 @@ class LootCardWidget extends StatelessWidget {
       blurRadius: 1 * scale,
     );
     int? value = card.getValue();
-
-    double scaleMod = hasAnimations ? 4 : 1.5;
 
     return Container(
         width: 39 * scale,

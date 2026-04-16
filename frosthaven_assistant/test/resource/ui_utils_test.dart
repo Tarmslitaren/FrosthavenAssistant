@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/ui_utils.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../command/test_helpers.dart';
 
@@ -93,7 +92,8 @@ void main() {
   // ── openDialogOld / openDialog / createToastContent ──────────────────────
 
   group('dialog and toast widget functions', () {
-    testWidgets('openDialogOld opens a dialog without throwing', (tester) async {
+    testWidgets('openDialogOld opens a dialog without throwing',
+        (tester) async {
       await tester.pumpWidget(MaterialApp(
         home: Builder(
           builder: (context) => TextButton(
@@ -150,7 +150,8 @@ void main() {
       await tester.pump();
     });
 
-    testWidgets('defaultBuildDraggableFeedback builds a widget', (tester) async {
+    testWidgets('defaultBuildDraggableFeedback builds a widget',
+        (tester) async {
       late Widget feedback;
       await tester.pumpWidget(MaterialApp(
         home: Builder(
@@ -199,7 +200,8 @@ void main() {
       await tester.pump();
     });
 
-    testWidgets('openDialogWithDismissOption with dismissible=false opens dialog',
+    testWidgets(
+        'openDialogWithDismissOption with dismissible=false opens dialog',
         (tester) async {
       await tester.pumpWidget(MaterialApp(
         home: Builder(

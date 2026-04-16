@@ -13,20 +13,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Layout/main_list.dart';
 import '../../Layout/menus/auto_add_standee_menu.dart';
-import '../../Model/MonsterAbility.dart';
 import '../../Model/character_class.dart';
 import '../../Model/monster.dart';
+import '../../Model/monster_ability.dart';
 import '../../Model/room.dart';
 import '../../Model/scenario.dart';
-import '../../services/network/communication.dart';
-import '../../services/network/network.dart';
 import '../../services/service_locator.dart';
 import '../action_handler.dart';
 import '../card_stack.dart';
 import '../commands/add_standee_command.dart';
-import '../game_event.dart';
 import '../enums.dart';
 import '../game_data.dart';
+import '../game_event.dart';
 import '../game_methods.dart';
 
 part "../character_methods.dart";
@@ -78,8 +76,8 @@ class GameState extends ActionHandler {
   Set<String> _unlockedClasses = {};
 
   late LootDeck _lootDeck = LootDeck.empty(); //loot deck for current scenario
-  ModifierDeck _modifierDeck = ModifierDeck("");
-  ModifierDeck _modifierDeckAllies = ModifierDeck("allies");
+  final ModifierDeck _modifierDeck = ModifierDeck("");
+  final ModifierDeck _modifierDeckAllies = ModifierDeck("allies");
   SanctuaryDeck _sanctuaryDeck = SanctuaryDeck();
 
   ValueListenable<String> get currentCampaign => _currentCampaign;
@@ -115,11 +113,10 @@ class GameState extends ActionHandler {
   SanctuaryDeck get sanctuaryDeck => _sanctuaryDeck;
 
   GameState({
-    required Communication communication,
-    Settings? settings,
-    Network? network,
-  }) : super(
-            communication: communication, settings: settings, network: network);
+    required super.communication,
+    super.settings,
+    super.network,
+  });
 
   void init() {
     _elementState[Elements.fire] = ElementState.inert;
@@ -130,39 +127,39 @@ class GameState extends ActionHandler {
     _elementState[Elements.dark] = ElementState.inert;
   }
 
-  setCampaign(_StateModifier _, String value) {
+  void setCampaign(_StateModifier _, String value) {
     _currentCampaign.value = value;
   }
 
-  setRoundState(_StateModifier _, RoundState value) {
+  void setRoundState(_StateModifier _, RoundState value) {
     _roundState.value = value;
   }
 
-  setLevel(_StateModifier _, int value) {
+  void setLevel(_StateModifier _, int value) {
     _level.value = value;
   }
 
-  setSolo(_StateModifier _, bool value) {
+  void setSolo(_StateModifier _, bool value) {
     _solo.value = value;
   }
 
-  setAutoScenarioLevel(_StateModifier _, bool value) {
+  void setAutoScenarioLevel(_StateModifier _, bool value) {
     _autoScenarioLevel.value = value;
   }
 
-  setAllyDeckInOGGloom(_StateModifier _, bool value) {
+  void setAllyDeckInOGGloom(_StateModifier _, bool value) {
     _allyDeckInOGGloom.value = value;
   }
 
-  setDifficulty(_StateModifier _, int value) {
+  void setDifficulty(_StateModifier _, int value) {
     _difficulty.value = value;
   }
 
-  setScenario(_StateModifier _, String value) {
+  void setScenario(_StateModifier _, String value) {
     _scenario.value = value;
   }
 
-  setToastMessage(_StateModifier _, String value) {
+  void setToastMessage(_StateModifier _, String value) {
     _toastMessage.value = value;
   }
 
@@ -215,7 +212,7 @@ class GameState extends ActionHandler {
         state); //init state: means game save state is one larger than command list
   }
 
-  loadFromData(String data) {
+  void loadFromData(String data) {
     GameSaveState state = GameSaveState();
     state.loadFromData(data, this);
   }
@@ -239,9 +236,7 @@ class GameState extends ActionHandler {
     }
   }
 
-  /**
-   * Clears the current list. only for use in tests. temp. should use load from data instead
-   */
+  /// Clears the current list. only for use in tests. temp. should use load from data instead
   void clearList() {
     _currentList.clear();
     _notifyCurrentList();
@@ -256,6 +251,7 @@ abstract class Command {
     //todo: remove this when update hacks fixed
   }
   String describe();
+
   /// The [GameEvent] this command produces. Defaults to [NoEvent].
   /// Override in commands that drive UI animations.
   GameEvent get event => const NoEvent();

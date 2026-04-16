@@ -22,7 +22,6 @@ void main() {
       final command = AMDImbue2Command(gameState: getIt<GameState>());
       final monsterDeck = getIt<GameState>().modifierDeck;
       expect(monsterDeck.imbuement.value, 0);
-      final initialCardCount = monsterDeck.drawPileSize;
 
       // Act
       command.execute();
@@ -41,7 +40,6 @@ void main() {
       final command = AMDImbue2Command(gameState: getIt<GameState>());
       final monsterDeck = getIt<GameState>().modifierDeck;
       expect(monsterDeck.imbuement.value, 1);
-      final initialCardCount = monsterDeck.drawPileSize;
 
       // Act
       command.execute();

@@ -147,7 +147,7 @@ bool hasGHVersion(String name) {
 
 const TextStyle toastTextStyle =
     TextStyle(fontFamily: "markazi", fontSize: kFontSizeToast);
-createToastContent(BuildContext context, String text) {
+GestureDetector createToastContent(BuildContext context, String text) {
   return GestureDetector(
     onTap: () {
       ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -156,7 +156,7 @@ createToastContent(BuildContext context, String text) {
   );
 }
 
-showToast(BuildContext context, String text) {
+void showToast(BuildContext context, String text) {
   if (context.mounted) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       backgroundColor: Colors.teal,
@@ -165,7 +165,8 @@ showToast(BuildContext context, String text) {
   }
 }
 
-showToastSticky(BuildContext context, String text, {GameState? gameState}) {
+void showToastSticky(BuildContext context, String text,
+    {GameState? gameState}) {
   if (context.mounted) {
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(
@@ -182,7 +183,7 @@ showToastSticky(BuildContext context, String text, {GameState? gameState}) {
   }
 }
 
-showErrorToastStickyWithRetry(
+void showErrorToastStickyWithRetry(
     BuildContext context, String text, Function() retry,
     {GameState? gameState}) {
   ScaffoldMessenger.of(context).clearSnackBars();

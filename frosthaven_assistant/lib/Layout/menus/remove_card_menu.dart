@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
+import 'package:frosthaven_assistant/Model/monster_ability.dart';
 import 'package:frosthaven_assistant/Resource/commands/remove_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_ability_list_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/shuffle_drawn_ability_card_command.dart';
@@ -15,8 +15,8 @@ class RemoveCardMenu extends StatefulWidget {
   const RemoveCardMenu({
     super.key,
     required this.card,
-  
-      this.gameState,});
+    this.gameState,
+  });
 
   final GameState? gameState;
 
@@ -58,7 +58,8 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
           ),
           TextButton(
               onPressed: () {
-                _gameState.action(RemoveCardCommand(widget.card, gameState: _gameState));
+                _gameState.action(
+                    RemoveCardCommand(widget.card, gameState: _gameState));
                 Navigator.pop(context);
               },
               child: Text(
@@ -87,12 +88,12 @@ class RemoveCardMenuState extends State<RemoveCardMenu> {
                     }
                   }
                   _gameState.action(ReorderAbilityListCommand(
-                      widget.card.deck, newIndex, oldIndex, gameState: _gameState));
+                      widget.card.deck, newIndex, oldIndex,
+                      gameState: _gameState));
 
                   Navigator.pop(context);
                 },
-                child: const Text("Send to Bottom",
-                    style: kButtonLabelStyle)),
+                child: const Text("Send to Bottom", style: kButtonLabelStyle)),
           if (isInDrawPile)
             const SizedBox(
               height: 10,

@@ -371,8 +371,8 @@ class FrosthavenConverter {
     return retVal;
   }
 
-  static void applyConditionalGraphics(var lines, double scale, bool elementUse,
-      double rightMargin, bool bossStatCard, Row child) {
+  static void applyConditionalGraphics(List<Widget> lines, double scale,
+      bool elementUse, double rightMargin, bool bossStatCard, Row child) {
     bool belongs = true;
     if (lines.isEmpty) {
       belongs = false;

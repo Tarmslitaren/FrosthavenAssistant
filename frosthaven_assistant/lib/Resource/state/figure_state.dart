@@ -24,23 +24,23 @@ class FigureState {
   BuiltSet<Condition> get conditionsAddedPreviousTurn =>
       BuiltSet.of(_conditionsAddedPreviousTurn);
 
-  setHealth(_StateModifier _, int value) {
+  void setHealth(_StateModifier _, int value) {
     _health.value = value;
   }
 
-  setFigureLevel(_StateModifier _, int value) {
+  void setFigureLevel(_StateModifier _, int value) {
     _level.value = value;
   }
 
-  setMaxHealth(_StateModifier _, int value) {
+  void setMaxHealth(_StateModifier _, int value) {
     _maxHealth.value = value;
   }
 
-  setChill(_StateModifier _, int value) {
+  void setChill(_StateModifier _, int value) {
     _chill.value = value;
   }
 
-  setPlague(_StateModifier _, int value) {
+  void setPlague(_StateModifier _, int value) {
     _plague.value = value;
   }
 

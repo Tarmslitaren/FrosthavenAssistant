@@ -40,9 +40,10 @@ class NetworkUIState extends State<NetworkUI> {
           Future.delayed(const Duration(milliseconds: 200), () {
             String message = _network.networkMessage.value;
             if (message != "") {
-              if (message.toLowerCase().contains("error") ||
-                  message.toLowerCase().contains("disconnected") ||
-                  message.toLowerCase().contains("lost")) {
+              if (context.mounted &&
+                  (message.toLowerCase().contains("error") ||
+                      message.toLowerCase().contains("disconnected") ||
+                      message.toLowerCase().contains("lost"))) {
                 showErrorToastStickyWithRetry(
                     context, _network.networkMessage.value, () {
                   if (_settings.client.value != ClientState.connected &&
@@ -55,7 +56,9 @@ class NetworkUIState extends State<NetworkUI> {
                   }
                 });
               } else {
-                showToast(context, _network.networkMessage.value);
+                if (context.mounted) {
+                  showToast(context, _network.networkMessage.value);
+                }
               }
               _network.networkMessage.value = "";
             }

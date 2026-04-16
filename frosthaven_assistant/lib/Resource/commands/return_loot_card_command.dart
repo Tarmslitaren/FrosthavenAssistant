@@ -1,5 +1,4 @@
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class ReturnLootCardCommand extends Command {
   final bool top;

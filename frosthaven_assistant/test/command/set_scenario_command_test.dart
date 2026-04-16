@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_condition_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/change_stat_commands/change_xp_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/imbue_element_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
@@ -28,7 +28,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', 'apan', 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', 'apan', 1,
+            gameState: getIt<GameState>())
+        .execute();
     SetCampaignCommand('Jaws of the Lion').execute();
   });
 
@@ -37,12 +39,18 @@ void main() {
   // ---------------------------------------------------------------------------
   group('SetScenarioCommand describe()', () {
     test('returns "Set Scenario" when section is false', () {
-      expect(SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).describe(),
+      expect(
+          SetScenarioCommand('#5 A Deeper Understanding', false,
+                  gameState: getIt<GameState>())
+              .describe(),
           'Set Scenario');
     });
 
     test('returns "Add Section" when section is true', () {
-      expect(SetScenarioCommand('#door', true, gameState: getIt<GameState>()).describe(), 'Add Section');
+      expect(
+          SetScenarioCommand('#door', true, gameState: getIt<GameState>())
+              .describe(),
+          'Add Section');
     });
   });
 
@@ -51,12 +59,16 @@ void main() {
   // ---------------------------------------------------------------------------
   group('SetScenarioCommand basic scenario setup', () {
     test('sets scenario name on game state', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().scenario.value, '#5 A Deeper Understanding');
     });
 
     test('loads correct number of monsters and ability decks', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       final gs = getIt<GameState>();
       // #5 has Zealot, Chaos Demon, Blood Tumor
       expect(gs.currentList.whereType<Monster>().length, 3);
@@ -65,62 +77,84 @@ void main() {
     });
 
     test('round is reset to 1', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().round.value, 1);
     });
 
     test('totalRounds is reset to 1', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().totalRounds.value, 1);
     });
 
     test('round state is set to chooseInitiative', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().roundState.value, RoundState.chooseInitiative);
     });
 
     test('showAllyDeck is false for scenario with no AllyDeck rule', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().showAllyDeck.value, isFalse);
     });
 
     test('no loot deck for JotL scenario', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().lootDeck.cardCount.value, 0);
     });
 
     test('loot deck populated for Frosthaven scenario with loot', () {
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().lootDeck.cardCount.value, greaterThan(0));
       checkSaveState();
     });
 
     test('scenarioSectionsAdded is empty on fresh scenario', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().scenarioSectionsAdded, isEmpty);
     });
 
     test('scenarioSpecialRules is populated for scenario with rules', () {
       // #6 has Allies and Objective rules
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().scenarioSpecialRules, isNotEmpty);
     });
 
     test('ability decks have cards in draw pile after scenario load', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       for (final deck in getIt<GameState>().currentAbilityDecks) {
         expect(deck.drawPileIsNotEmpty, isTrue);
       }
     });
 
     test('modifier deck discard pile is empty after scenario load', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().modifierDeck.discardPileIsEmpty, isTrue);
     });
 
     test('modifier deck draw pile is not empty after scenario load', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().modifierDeck.drawPileIsNotEmpty, isTrue);
     });
   });
@@ -132,73 +166,89 @@ void main() {
     test('character initiative is reset to 0', () {
       final character = getIt<GameState>().currentList.first as Character;
       SetInitCommand(character.id, 42, gameState: getIt<GameState>()).execute();
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       final after = getIt<GameState>().currentList.first as Character;
       expect(after.characterState.initiative.value, 0);
     });
 
     test('character xp is reset to 0', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
-      final character =
-          getIt<GameState>().currentList.first as Character;
-      ChangeXPCommand(10, character.id, character.id, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>().currentList.first as Character;
+      ChangeXPCommand(10, character.id, character.id,
+              gameState: getIt<GameState>())
+          .execute();
       // Load a different scenario to trigger reset
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
-      final after = getIt<GameState>()
-          .currentList
-          .firstWhere((e) =>
-              e is Character &&
-              !GameMethods.isObjectiveOrEscort((e as Character).characterClass))
-          as Character;
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
+      final after = getIt<GameState>().currentList.firstWhere((e) =>
+          e is Character &&
+          !GameMethods.isObjectiveOrEscort(e.characterClass)) as Character;
       expect(after.characterState.xp.value, 0);
     });
 
     test('character conditions are cleared', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       final character = getIt<GameState>().currentList.first as Character;
-      AddConditionCommand(Condition.poison, character.id, character.id, gameState: getIt<GameState>())
+      AddConditionCommand(Condition.poison, character.id, character.id,
+              gameState: getIt<GameState>())
           .execute();
       expect(character.characterState.conditions.value,
           contains(Condition.poison));
 
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
 
-      final after = getIt<GameState>()
-          .currentList
-          .firstWhere((e) =>
-              e is Character &&
-              !GameMethods.isObjectiveOrEscort((e as Character).characterClass))
-          as Character;
+      final after = getIt<GameState>().currentList.firstWhere((e) =>
+          e is Character &&
+          !GameMethods.isObjectiveOrEscort(e.characterClass)) as Character;
       expect(after.characterState.conditions.value, isEmpty);
     });
 
     test('character health is restored to max on reset', () {
       final character = getIt<GameState>().currentList.first as Character;
       final maxHp = character.characterState.maxHealth.value;
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       final after = getIt<GameState>().currentList.first as Character;
       expect(after.characterState.health.value, maxHp);
     });
 
     test('normal characters are preserved across scenario changes', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       final characters = getIt<GameState>().currentList.whereType<Character>();
       expect(
-          characters.any(
-              (c) => !GameMethods.isObjectiveOrEscort(c.characterClass)),
+          characters
+              .any((c) => !GameMethods.isObjectiveOrEscort(c.characterClass)),
           isTrue);
     });
 
     test('objectives from previous scenario are removed on new scenario', () {
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(
           getIt<GameState>().currentList.any((item) =>
               item is Character &&
               GameMethods.isObjectiveOrEscort(item.characterClass)),
           isTrue);
 
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
 
       expect(
           getIt<GameState>().currentList.any((item) =>
@@ -208,7 +258,9 @@ void main() {
     });
 
     test('previous scenario monsters are replaced on new scenario', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       // #5 has Zealot
       expect(
           getIt<GameState>()
@@ -217,7 +269,9 @@ void main() {
               .any((m) => m.id == 'Zealot'),
           isTrue);
 
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
 
       // #6 has Rat Monstrosity and Black Sludge, not Zealot
       expect(
@@ -236,11 +290,15 @@ void main() {
     });
 
     test('previous ability decks are replaced on new scenario', () {
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       final decksAfterFirst =
           getIt<GameState>().currentAbilityDecks.map((d) => d.name).toSet();
 
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       final decksAfterSecond =
           getIt<GameState>().currentAbilityDecks.map((d) => d.name).toSet();
 
@@ -255,7 +313,9 @@ void main() {
     test('all elements are reset to inert on new scenario', () {
       ImbueElementCommand(Elements.fire, false).execute();
       ImbueElementCommand(Elements.ice, false).execute();
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       final elementState = getIt<GameState>().elementState;
       for (final element in Elements.values) {
         expect(elementState[element], ElementState.inert,
@@ -270,7 +330,9 @@ void main() {
   group('SetScenarioCommand ally rules', () {
     // #6 Corrupted Research (JotL): "Allies": ["Rat Monstrosity"]
     test('monsters listed in Allies rule are marked isAlly', () {
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       final ratMonstrosity = getIt<GameState>()
           .currentList
           .whereType<Monster>()
@@ -279,7 +341,9 @@ void main() {
     });
 
     test('monsters not in Allies rule are not marked isAlly', () {
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       final blackSludge = getIt<GameState>()
           .currentList
           .whereType<Monster>()
@@ -289,23 +353,30 @@ void main() {
 
     test('shouldShowAlliesDeck returns true when allied monsters are present',
         () {
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(GameMethods.shouldShowAlliesDeck(), isTrue);
     });
 
     test(
         'showAllyDeck flag stays false when allies come from "Allies" rule '
         'rather than "AllyDeck" rule', () {
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       // The Allies rule marks monsters as isAlly but does NOT set showAllyDeck
       expect(getIt<GameState>().showAllyDeck.value, isFalse);
     });
 
-    test('showAllyDeck is reset to false when loading a scenario without AllyDeck rule',
+    test(
+        'showAllyDeck is reset to false when loading a scenario without AllyDeck rule',
         () {
       // Start from a state where showAllyDeck is true (set manually via ShowAllyDeckCommand)
       ShowAllyDeckCommand().execute();
-      SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#5 A Deeper Understanding', false,
+              gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().showAllyDeck.value, isFalse);
     });
   });
@@ -315,7 +386,9 @@ void main() {
   // ---------------------------------------------------------------------------
   group('SetScenarioCommand Objective special rule', () {
     test('all 7 objectives from #6 Corrupted Research are added to list', () {
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       final objectives = getIt<GameState>().currentList.where((item) =>
           item is Character &&
           GameMethods.isObjectiveOrEscort(item.characterClass));
@@ -324,7 +397,9 @@ void main() {
     });
 
     test('objective display names match scenario data (Growth 1–7)', () {
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       final names = getIt<GameState>()
           .currentList
           .whereType<Character>()
@@ -337,7 +412,9 @@ void main() {
     });
 
     test('objectives have positive health', () {
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       for (final obj in getIt<GameState>()
           .currentList
           .whereType<Character>()
@@ -347,7 +424,9 @@ void main() {
     });
 
     test('objectives are IsObjectiveOrEscort characters', () {
-      SetScenarioCommand('#6 Corrupted Research', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#6 Corrupted Research', false,
+              gameState: getIt<GameState>())
+          .execute();
       for (final obj in getIt<GameState>()
           .currentList
           .whereType<Character>()
@@ -363,7 +442,8 @@ void main() {
   group('SetScenarioCommand undo', () {
     test('undo does not throw', () {
       final gs = getIt<GameState>();
-      gs.action(SetScenarioCommand('#5 A Deeper Understanding', false, gameState: getIt<GameState>()));
+      gs.action(SetScenarioCommand('#5 A Deeper Understanding', false,
+          gameState: getIt<GameState>()));
       expect(() => gs.undo(), returnsNormally);
     });
   });
@@ -374,26 +454,30 @@ void main() {
   group('SetScenarioCommand custom scenarios', () {
     test('Frosthaven custom scenario creates a loot deck', () {
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('custom', false, gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().lootDeck.cardCount.value, greaterThan(0));
       checkSaveState();
     });
 
     test('non-Frosthaven custom scenario has no loot deck', () {
       SetCampaignCommand('Jaws of the Lion').execute();
-      SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('custom', false, gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().lootDeck.cardCount.value, 0);
     });
 
     test('custom scenario has no monsters', () {
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('custom', false, gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().currentList.whereType<Monster>(), isEmpty);
     });
 
     test('custom scenario has no ability decks', () {
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('custom', false, gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().currentAbilityDecks, isEmpty);
     });
   });
@@ -408,20 +492,26 @@ void main() {
 
     setUp(() {
       getIt<GameState>().clearList();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', 'apan', 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', 'apan', 1,
+              gameState: getIt<GameState>())
+          .execute();
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand(baseScenario, false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand(baseScenario, false, gameState: getIt<GameState>())
+          .execute();
     });
 
     test('section name is tracked in scenarioSectionsAdded', () {
-      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().scenarioSectionsAdded, contains(sectionName));
       checkSaveState();
     });
 
     test('adding the same section twice records it twice', () {
-      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>()).execute();
-      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>())
+          .execute();
+      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>())
+          .execute();
       expect(
           getIt<GameState>()
               .scenarioSectionsAdded
@@ -432,21 +522,27 @@ void main() {
 
     test('scenarioSectionsAdded is cleared when a new base scenario is loaded',
         () {
-      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().scenarioSectionsAdded, isNotEmpty);
 
-      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false,
+              gameState: getIt<GameState>())
+          .execute();
 
       expect(getIt<GameState>().scenarioSectionsAdded, isEmpty);
     });
 
     test('adding a section does not remove previously-added monsters', () {
       // Manually add a known monster after loading the base scenario
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monstersBefore =
           getIt<GameState>().currentList.whereType<Monster>().length;
 
-      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>())
+          .execute();
 
       expect(getIt<GameState>().currentList.whereType<Monster>().length,
           greaterThanOrEqualTo(monstersBefore));
@@ -455,7 +551,8 @@ void main() {
     test('section does not reset round or scenario name', () {
       final roundBefore = getIt<GameState>().round.value;
       final scenarioBefore = getIt<GameState>().scenario.value;
-      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand(sectionName, true, gameState: getIt<GameState>())
+          .execute();
       expect(getIt<GameState>().round.value, roundBefore);
       expect(getIt<GameState>().scenario.value, scenarioBefore);
     });

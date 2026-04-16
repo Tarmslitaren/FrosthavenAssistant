@@ -64,7 +64,8 @@ class Client {
     }
   }
 
-  bool _pinging = false; //to not restart this ping sub process, if one is running
+  bool _pinging =
+      false; //to not restart this ping sub process, if one is running
   void _sendPing() {
     if (_connection.established() &&
         _settings.client.value == ClientState.connected &&
@@ -105,7 +106,7 @@ class Client {
     _cleanup();
   }
 
-  onListenError(error) {
+  void onListenError(dynamic error) {
     debugPrint('Client error: ${error.toString()}');
     _network.networkMessage.value = "client error: ${error.toString()}";
   }

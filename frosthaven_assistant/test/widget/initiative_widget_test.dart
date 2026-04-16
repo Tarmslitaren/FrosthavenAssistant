@@ -17,10 +17,12 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
   });
 
-  Character _getBlinkblade() =>
+  Character getBlinkblade() =>
       getIt<GameState>().currentList.firstWhere((e) => e.id == 'Blinkblade')
           as Character;
 
@@ -52,7 +54,7 @@ void main() {
 
   group('InitiativeWidget', () {
     testWidgets('renders init image', (WidgetTester tester) async {
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       await pumpWidget(tester, character);
       expect(
         find.byWidgetPredicate((w) =>
@@ -68,7 +70,7 @@ void main() {
       final gameState = getIt<GameState>();
       // Default state after clearList + addCharacter is chooseInitiative
       expect(gameState.roundState.value, RoundState.chooseInitiative);
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       await pumpWidget(tester, character);
       expect(find.byType(TextField), findsOneWidget);
     });
@@ -80,7 +82,7 @@ void main() {
       gameState.action(DrawCommand(gameState: getIt<GameState>()));
       expect(gameState.roundState.value, RoundState.playTurns);
 
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       await pumpWidget(tester, character);
       // Drain the 600ms timer left by DrawCommand
       await tester.pump(const Duration(milliseconds: 700));
@@ -91,7 +93,7 @@ void main() {
     testWidgets('shows no TextField in playTurns even with initiative > 0',
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       // Set initiative then advance to playTurns via DrawCommand
       SetInitCommand(character.id, 42, gameState: getIt<GameState>()).execute();
       gameState.action(DrawCommand(gameState: getIt<GameState>()));
@@ -109,7 +111,7 @@ void main() {
     testWidgets('shows empty text when initiative is 0 in playTurns',
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       gameState.action(DrawCommand(gameState: getIt<GameState>()));
       expect(gameState.roundState.value, RoundState.playTurns);
 
@@ -125,7 +127,7 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       expect(gameState.roundState.value, RoundState.chooseInitiative);
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       await pumpWidget(tester, character);
 
       await tester.enterText(find.byType(TextField), '15');

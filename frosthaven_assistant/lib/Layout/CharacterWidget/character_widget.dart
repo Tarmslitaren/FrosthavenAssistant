@@ -1,15 +1,11 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Layout/menus/status_menu.dart';
 import 'package:frosthaven_assistant/Resource/scaling.dart';
 
 import '../../Resource/color_matrices.dart';
-import '../../Resource/enums.dart';
 import '../../Resource/game_methods.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
-import '../../Resource/ui_utils.dart';
-import '../../services/service_locator.dart';
 import '../health_wheel_controller.dart';
 import '../monster_box.dart';
 import '../view_models/character_view_model.dart';
@@ -17,7 +13,11 @@ import 'character_widget_internal.dart';
 
 class CharacterWidget extends StatefulWidget {
   const CharacterWidget(
-      {required this.characterId, super.key, this.initPreset, this.gameState, this.settings});
+      {required this.characterId,
+      super.key,
+      this.initPreset,
+      this.gameState,
+      this.settings});
 
   final String characterId;
   final int? initPreset;
@@ -93,13 +93,12 @@ class CharacterWidgetState extends State<CharacterWidget> {
               final double scale = getScaleByReference(context);
 
               Widget inner = PhysicalShape(
-                  color: vm.isCurrentTurn
-                      ? Colors.tealAccent
-                      : Colors.transparent,
+                  color:
+                      vm.isCurrentTurn ? Colors.tealAccent : Colors.transparent,
                   shadowColor: Colors.black,
                   elevation: 8,
-                  clipper: const ShapeBorderClipper(
-                      shape: RoundedRectangleBorder()),
+                  clipper:
+                      const ShapeBorderClipper(shape: RoundedRectangleBorder()),
                   child: CharacterWidgetInternal(
                     character: character,
                     isCharacter: isCharacter,
@@ -109,8 +108,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
 
               return Column(mainAxisSize: MainAxisSize.max, children: [
                 Container(
-                  margin: EdgeInsets.only(
-                      left: 3.2 * scale, right: 3.2 * scale),
+                  margin:
+                      EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
                   width: getMainListWidth(context) - 6.4 * scale,
                   child: ValueListenableBuilder<BuiltList<MonsterInstance>>(
                       valueListenable: vm.summonListNotifier,

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
+import 'package:frosthaven_assistant/Model/monster_ability.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -38,8 +38,7 @@ class MonsterAbilityCardViewModel {
     return GameMethods.getDeck(monster.type.deck)?.discardPileTop;
   }
 
-  int get deckSize =>
-      GameMethods.getDeck(monster.type.deck)?.drawPileSize ?? 0;
+  int get deckSize => GameMethods.getDeck(monster.type.deck)?.drawPileSize ?? 0;
 
   MonsterAbilityState get deck => GameMethods.getDeck(monster.type.deck)!;
 
@@ -55,10 +54,8 @@ class MonsterAbilityCardViewModel {
   void openZoom(BuildContext context) {
     final card = currentCard;
     if (card != null) {
-      openDialog(
-          context,
-          AbilityCardZoom(
-              card: card, monster: monster, calculateAll: false));
+      openDialog(context,
+          AbilityCardZoom(card: card, monster: monster, calculateAll: false));
     }
   }
 }

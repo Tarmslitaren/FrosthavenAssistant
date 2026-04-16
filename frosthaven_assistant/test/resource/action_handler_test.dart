@@ -70,7 +70,7 @@ void main() {
         final gs = getIt<GameState>();
         gs.action(SetLevelCommand(3, null));
         gs.action(SetLevelCommand(4, null));
-        final indexBefore = gs.commandIndex.value;
+        //final indexBefore = gs.commandIndex.value;
         gs.undo(); // undo SetLevel(4), now commandIndex = indexBefore - 1
         // Do a new action — should clear SetLevel(4) from the redo list
         gs.action(SetLevelCommand(5, null));
@@ -109,7 +109,8 @@ void main() {
       test('undo after adding a monster removes it from the list', () {
         final gs = getIt<GameState>();
         gs.clearList();
-        gs.action(AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()));
+        gs.action(AddMonsterCommand('Zealot', 1, false,
+            gameState: getIt<GameState>()));
         expect(gs.currentList.any((e) => e.id == 'Zealot'), isTrue);
         gs.undo();
         expect(gs.currentList.any((e) => e.id == 'Zealot'), isFalse);

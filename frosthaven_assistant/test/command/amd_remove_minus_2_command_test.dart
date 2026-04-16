@@ -12,11 +12,9 @@ void main() {
     await setUpGame();
   });
 
-  late Character character;
-
   setUp(() {
-    final command = SetScenarioCommand(
-        '#5 A Deeper Understanding', false, gameState: getIt<GameState>()); //setting scenario resets the decks
+    final command = SetScenarioCommand('#5 A Deeper Understanding', false,
+        gameState: getIt<GameState>()); //setting scenario resets the decks
     // Act
     command.execute();
   });
@@ -25,12 +23,14 @@ void main() {
     test('should remove a minus two card from the monster deck', () {
       // Arrange
       final modifierDeck = getIt<GameState>().modifierDeck;
-      final command = AMDRemoveMinus2Command(false, gameState: getIt<GameState>());
+      final command =
+          AMDRemoveMinus2Command(false, gameState: getIt<GameState>());
 
       // Act
       command.execute();
 
-      final card = modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
+      final card =
+          modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
         return it.gfx == 'minus2';
       });
       // Assert
@@ -40,12 +40,14 @@ void main() {
     test('should add back a removed minus two card from the monster deck', () {
       // Arrange
       final modifierDeck = getIt<GameState>().modifierDeck;
-      final command = AMDRemoveMinus2Command(false, gameState: getIt<GameState>());
+      final command =
+          AMDRemoveMinus2Command(false, gameState: getIt<GameState>());
 
       // Act
       command.execute();
 
-      final card = modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
+      final card =
+          modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
         return it.gfx == 'minus2';
       });
       // Assert
@@ -53,7 +55,8 @@ void main() {
 
       //add back
       AMDRemoveMinus2Command(false, gameState: getIt<GameState>()).execute();
-      final card2 = modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
+      final card2 =
+          modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
         return it.gfx == 'minus2';
       });
       // Assert
@@ -64,12 +67,14 @@ void main() {
     test('should remove a minus two card from the allies deck', () {
       // Arrange
       final modifierDeck = getIt<GameState>().modifierDeckAllies;
-      final command = AMDRemoveMinus2Command(true, gameState: getIt<GameState>());
+      final command =
+          AMDRemoveMinus2Command(true, gameState: getIt<GameState>());
 
       // Act
       command.execute();
 
-      final card = modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
+      final card =
+          modifierDeck.drawPileContents.toList().firstWhereOrNull((it) {
         return it.gfx == 'minus2';
       });
 
@@ -79,7 +84,8 @@ void main() {
 
     test('describe should return correct string', () {
       // Arrange
-      final command = AMDRemoveMinus2Command(false, gameState: getIt<GameState>());
+      final command =
+          AMDRemoveMinus2Command(false, gameState: getIt<GameState>());
       command.execute();
 
       // Act & Assert

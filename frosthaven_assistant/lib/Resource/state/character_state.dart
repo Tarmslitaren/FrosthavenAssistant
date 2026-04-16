@@ -170,19 +170,19 @@ class CharacterState extends FigureState {
     }
   }
 
-  flipPerk(_StateModifier _, int index) {
+  void flipPerk(_StateModifier _, int index) {
     _perkList[index] = !_perkList[index];
   }
 
-  setDisplay(_StateModifier _, String value) {
+  void setDisplay(_StateModifier _, String value) {
     _display.value = value;
   }
 
-  setInitiative(_StateModifier _, int value) {
+  void setInitiative(_StateModifier _, int value) {
     _initiative.value = value;
   }
 
-  setXp(_StateModifier _, int value) {
+  void setXp(_StateModifier _, int value) {
     _xp.value = max(value, 0);
   }
 

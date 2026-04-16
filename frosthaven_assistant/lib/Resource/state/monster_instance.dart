@@ -38,7 +38,7 @@ class MonsterInstance extends FigureState {
 
   late final int standeeNr;
 
-  setType(_StateModifier stateModifier, MonsterType value) {
+  void setType(_StateModifier stateModifier, MonsterType value) {
     _type = value;
   }
 
@@ -53,15 +53,15 @@ class MonsterInstance extends FigureState {
   late final int range;
 
   int get roundSummoned => _roundSummoned;
-  setRoundSummoned(_StateModifier stateModifier, int value) {
+  void setRoundSummoned(_StateModifier stateModifier, int value) {
     _roundSummoned = value;
   }
 
   late int _roundSummoned;
 
   void _setLevel(Monster monster, {GameState? gameState}) {
-    StatValue newHealthValue =
-        const IntStatValue(10); //need to put something outer than 0 or the standee will die immediately causing glitch
+    StatValue newHealthValue = const IntStatValue(
+        10); //need to put something outer than 0 or the standee will die immediately causing glitch
     if (type == MonsterType.boss) {
       newHealthValue = monster.type.levels[monster.level.value].boss!.health;
     } else if (type == MonsterType.elite) {

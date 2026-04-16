@@ -7,12 +7,12 @@ import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart'
 import 'package:frosthaven_assistant/Resource/commands/draw_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/next_round_command.dart';
 import 'package:frosthaven_assistant/Resource/enums.dart';
+import 'package:frosthaven_assistant/Resource/game_data.dart';
+import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../command/test_helpers.dart';
-import 'package:frosthaven_assistant/Resource/settings.dart';
-import 'package:frosthaven_assistant/Resource/game_data.dart';
 
 void main() {
   setUpAll(() async {
@@ -21,13 +21,13 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+        .execute();
   });
 
-  Monster _getZealot() {
-    return getIt<GameState>()
-        .currentList
-        .firstWhere((e) => e.id == 'Zealot') as Monster;
+  Monster getZealot() {
+    return getIt<GameState>().currentList.firstWhere((e) => e.id == 'Zealot')
+        as Monster;
   }
 
   Future<void> pumpWidget(WidgetTester tester, Monster monster) async {
@@ -47,14 +47,14 @@ void main() {
   group('MonsterAbilityCardWidget', () {
     testWidgets('renders without error in chooseInitiative state',
         (WidgetTester tester) async {
-      final monster = _getZealot();
+      final monster = getZealot();
       await pumpWidget(tester, monster);
       expect(find.byType(MonsterAbilityCardWidget), findsOneWidget);
     });
 
     testWidgets('renders rear card when not in playTurns state',
         (WidgetTester tester) async {
-      final monster = _getZealot();
+      final monster = getZealot();
       await pumpWidget(tester, monster);
       // In chooseInitiative state, the rear card should be shown
       expect(find.byType(Image), findsAtLeast(1));
@@ -62,7 +62,7 @@ void main() {
 
     testWidgets('tapping card opens AbilityCardsMenu',
         (WidgetTester tester) async {
-      final monster = _getZealot();
+      final monster = getZealot();
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
       await tester.pumpWidget(
@@ -87,7 +87,7 @@ void main() {
 
     testWidgets('widget uses AnimatedSwitcher for card transition',
         (WidgetTester tester) async {
-      final monster = _getZealot();
+      final monster = getZealot();
       await pumpWidget(tester, monster);
       expect(find.byType(AnimatedSwitcher), findsOneWidget);
     });
@@ -95,8 +95,10 @@ void main() {
     testWidgets('renders front card in playTurns state when active',
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>()).execute();
-      final monster = _getZealot();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false,
+              gameState: getIt<GameState>())
+          .execute();
+      final monster = getZealot();
 
       // Enter playTurns by drawing
       DrawCommand(gameState: getIt<GameState>()).execute();
@@ -119,14 +121,18 @@ void main() {
       // Cleanup: advance past the 600ms AnimatedSwitcher timer from NextRoundCommand
       final originalOnError2 = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
-      NextRoundCommand(gameState: getIt<GameState>(), gameData: getIt<GameData>(), settings: getIt<Settings>()).execute();
+      NextRoundCommand(
+              gameState: getIt<GameState>(),
+              gameData: getIt<GameData>(),
+              settings: getIt<Settings>())
+          .execute();
       await tester.pump(const Duration(milliseconds: 700));
       FlutterError.onError = originalOnError2;
     });
 
     testWidgets('double tap in chooseInitiative state does not throw',
         (WidgetTester tester) async {
-      final monster = _getZealot();
+      final monster = getZealot();
       await pumpWidget(tester, monster);
 
       final originalOnError = FlutterError.onError;

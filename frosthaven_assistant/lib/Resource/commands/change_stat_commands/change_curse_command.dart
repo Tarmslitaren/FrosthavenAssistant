@@ -1,7 +1,6 @@
 import '../../game_methods.dart';
 import '../../state/game_state.dart';
 import 'change_stat_command.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class ChangeCurseCommand extends ChangeStatCommand {
   ChangeCurseCommand(super.change, super.figureId, super.ownerId,

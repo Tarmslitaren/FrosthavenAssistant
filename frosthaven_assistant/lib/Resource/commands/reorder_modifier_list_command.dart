@@ -1,6 +1,5 @@
 import '../game_methods.dart';
 import '../state/game_state.dart';
-import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class ReorderModifierListCommand extends Command {
   final int newIndex;

@@ -22,8 +22,6 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
   _OpenState _openStateUserIntentChooseInit = _OpenState.allOpen;
   _OpenState _lastState = _OpenState.noOpen;
 
-  bool _enableAnim = true;
-
   @override
   void initState() {
     super.initState();
@@ -190,7 +188,6 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                               }
                             }
                           }
-                          _enableAnim = true;
                         })
                       },
                   child: const Text(text)),
@@ -204,8 +201,8 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                               canShowOneDeck)
                           ? Container(
                               margin: EdgeInsets.only(top: 4 * barScale),
-                              child:
-                                  ModifierDeckWidget(name: currentCharacter!.id))
+                              child: ModifierDeckWidget(
+                                  name: currentCharacter!.id))
                           : Column(
                               children: _vm.charsWithPerks
                                   .map((item) => Container(

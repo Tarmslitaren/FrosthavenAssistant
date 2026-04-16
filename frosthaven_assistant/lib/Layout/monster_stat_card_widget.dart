@@ -5,7 +5,6 @@ import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-import '../Resource/enums.dart';
 import '../Resource/game_methods.dart';
 import '../Resource/line_builder/line_builder.dart';
 import '../Resource/stat_calculator.dart';
@@ -503,7 +502,8 @@ class MonsterStatCardWidget extends StatelessWidget {
                       data, scale, shadow, leftStyle, frosthavenStyle,
                       viewModel: viewModel, settings: settings)
                   : buildNormalLayout(data, scale, shadow, leftStyle,
-                      rightStyle, frosthavenStyle, settings: settings));
+                      rightStyle, frosthavenStyle,
+                      settings: settings));
         });
   }
 
@@ -523,8 +523,8 @@ class MonsterStatCardWidget extends StatelessWidget {
               onDoubleTap: () {
                 openDialog(context, StatCardZoom(monster: data));
               },
-              child: buildCard(data, scale,
-                  viewModel: vm, settings: settings_)),
+              child:
+                  buildCard(data, scale, viewModel: vm, settings: settings_)),
           if (!vm.isBoss)
             Positioned(
                 bottom: 4 * scale,

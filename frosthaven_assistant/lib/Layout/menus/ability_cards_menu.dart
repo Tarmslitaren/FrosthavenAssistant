@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_card_menu.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card_widget.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
+import 'package:frosthaven_assistant/Model/monster_ability.dart';
+import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/activate_monster_type_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_ability_card_command.dart';
 import 'package:reorderables/reorderables.dart';
@@ -136,7 +136,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                         index = list.length - index - 1;
                         list.insert(dropIndex, list.removeAt(index));
                         _gameState.action(ReorderAbilityListCommand(
-                            widget.monsterAbilityState.name, dropIndex, index, gameState: _gameState));
+                            widget.monsterAbilityState.name, dropIndex, index,
+                            gameState: _gameState));
                       });
                     },
                     children: generateList(list, allOpen),
@@ -156,7 +157,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
         builder: (context, value, child) {
           var drawPile =
               widget.monsterAbilityState.drawPileContents.reversed.toList();
-          var discardPile = widget.monsterAbilityState.discardPileContents.toList();
+          var discardPile =
+              widget.monsterAbilityState.discardPileContents.toList();
 
           final screenSize = MediaQuery.of(context).size;
 
@@ -229,8 +231,8 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                                           _gameState.action(
                                               ActivateMonsterTypeCommand(
                                                   widget.monsterData.id,
-                                                  !widget
-                                                      .monsterData.isActive, gameState: _gameState));
+                                                  !widget.monsterData.isActive,
+                                                  gameState: _gameState));
                                         },
                                         child: Text(
                                           widget.monsterData.isActive

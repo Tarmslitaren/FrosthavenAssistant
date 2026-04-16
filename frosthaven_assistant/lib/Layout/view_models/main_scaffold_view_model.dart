@@ -8,7 +8,6 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../../Model/campaign.dart';
 import '../../Resource/scaling.dart';
-import '../main_scaffold.dart';
 
 class MainScaffoldViewModel {
   MainScaffoldViewModel(
@@ -38,14 +37,9 @@ class MainScaffoldViewModel {
   /// Number of sections still available for the current scenario,
   /// or null if none should be shown.
   int? get availableSections {
-    int? count = _gameData
-        .modelData
-        .value[_gameState.currentCampaign.value]
-        ?.scenarios[_gameState.scenario.value]
-        ?.sections
-        .length;
-    if (count != null &&
-        _gameState.scenarioSectionsAdded.length == count) {
+    int? count = _gameData.modelData.value[_gameState.currentCampaign.value]
+        ?.scenarios[_gameState.scenario.value]?.sections.length;
+    if (count != null && _gameState.scenarioSectionsAdded.length == count) {
       count = null;
     }
     if (!_settings.showSectionsInMainView.value) {

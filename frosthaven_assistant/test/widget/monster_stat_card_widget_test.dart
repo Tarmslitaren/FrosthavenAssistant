@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frosthaven_assistant/Layout/monster_stat_card_widget.dart';
-import 'package:frosthaven_assistant/Layout/menus/stat_card_zoom.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/stat_card_zoom.dart';
+import 'package:frosthaven_assistant/Layout/monster_stat_card_widget.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_level_command.dart';
@@ -19,10 +19,11 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+        .execute();
   });
 
-  Monster _getZealot() {
+  Monster getZealot() {
     return getIt<GameState>()
         .currentList
         .firstWhere((item) => item.id == 'Zealot') as Monster;
@@ -35,7 +36,7 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: SingleChildScrollView(
-            child: MonsterStatCardWidget(data: _getZealot()),
+            child: MonsterStatCardWidget(data: getZealot()),
           ),
         ),
       ),
@@ -55,7 +56,8 @@ void main() {
       expect(find.byType(Image), findsAtLeast(1));
     });
 
-    testWidgets('renders add normal standee button', (WidgetTester tester) async {
+    testWidgets('renders add normal standee button',
+        (WidgetTester tester) async {
       await pumpStatCard(tester);
       // Two add buttons: one for normal, one for elite
       expect(find.byType(IconButton), findsAtLeast(1));
@@ -118,11 +120,12 @@ void main() {
     testWidgets('when all standees are out, add button is visually disabled',
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
-      final zealot = _getZealot();
+      final zealot = getZealot();
       // Add all available standees
       int maxCount = zealot.type.count;
       for (int i = 1; i <= maxCount; i++) {
-        AddStandeeCommand(i, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>())
+        AddStandeeCommand(i, null, 'Zealot', MonsterType.normal, false,
+                gameState: getIt<GameState>())
             .execute();
       }
 
@@ -137,13 +140,13 @@ void main() {
       }
     });
 
-    testWidgets('tapping add button opens AddStandeeMenu when not at last standee',
+    testWidgets(
+        'tapping add button opens AddStandeeMenu when not at last standee',
         (WidgetTester tester) async {
       final originalOnError = FlutterError.onError;
       addTearDown(() => FlutterError.onError = originalOnError);
       FlutterError.onError = ignoreOverflowErrors;
-      final gameState = getIt<GameState>();
-      final zealot = _getZealot();
+      final zealot = getZealot();
 
       // With count > 2 available standees and none added, tapping opens menu
       if (zealot.type.count > 2) {
@@ -178,7 +181,9 @@ void main() {
     setUp(() {
       getIt<GameState>().clearList();
       // Ancient Artillery (FH) has muddle immunity
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
     });
 
     Future<void> pumpArtilleryCard(WidgetTester tester) async {
@@ -207,7 +212,8 @@ void main() {
       expect(find.byType(Image), findsAtLeast(1));
     });
 
-    testWidgets('renders monster name for artillery', (WidgetTester tester) async {
+    testWidgets('renders monster name for artillery',
+        (WidgetTester tester) async {
       await pumpArtilleryCard(tester);
       expect(find.textContaining('Ancient Artillery'), findsAtLeast(1));
     });

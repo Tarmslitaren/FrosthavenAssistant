@@ -1,5 +1,5 @@
 import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
+import 'package:frosthaven_assistant/Model/monster_ability.dart';
 
 import '../state/game_state.dart';
 

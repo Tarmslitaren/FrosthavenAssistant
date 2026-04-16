@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 
@@ -19,9 +17,8 @@ class SelectScenarioMenu extends StatefulWidget {
     super.key,
     this.gameState,
     this.gameData,
-
     this.settings,
-    });
+  });
 
   final GameState? gameState;
   final GameData? gameData;
@@ -229,8 +226,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       trailing: Text("($edition)", softWrap: true, style: kSubtitleStyle),
       onTap: () {
         Navigator.pop(context);
-        _gameState.action(
-            SetScenarioCommand(name, false, gameState: _gameState));
+        _gameState
+            .action(SetScenarioCommand(name, false, gameState: _gameState));
       },
     );
   }
@@ -245,8 +242,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
       title: Text(title, style: kTitleStyle),
       onTap: () {
         Navigator.pop(context);
-        _gameState.action(
-            SetScenarioCommand(name, false, gameState: _gameState));
+        _gameState
+            .action(SetScenarioCommand(name, false, gameState: _gameState));
       },
     );
   }
@@ -298,23 +295,10 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                   ]),
                   Container(
                     margin: const EdgeInsets.only(left: 10, right: 10),
-                    child: RawKeyboardListener(
+                    child: KeyboardListener(
                         //needed to trigger onEditingComplete on enter
                         //TODO: add this to the other menus
                         focusNode: FocusNode(),
-                        onKey: (event) {
-                          if (kDebugMode) {
-                            print(event.data.logicalKey.keyId);
-                          }
-                          if (event.runtimeType == RawKeyDownEvent &&
-                              (event.logicalKey.keyId == 13)) {
-                            if (_foundScenarios.isNotEmpty) {
-                              //_gameState.action(
-                              //    SetScenarioCommand(_foundScenarios[0], false, gameState: _gameState));
-                              //Navigator.pop(context);
-                            }
-                          }
-                        },
                         child: TextField(
                           onChanged: (value) => _runFilter(value),
                           controller: _controller,

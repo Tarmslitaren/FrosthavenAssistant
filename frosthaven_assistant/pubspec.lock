@@ -322,7 +322,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
+      ref: "7d55351b63fda66a33b40f595e090b47a9eda967"
       resolved-ref: "7d55351b63fda66a33b40f595e090b47a9eda967"
       url: "https://github.com/Tarmslitaren/Flutter-Animation-Progress-Bar"
     source: git
@@ -1225,7 +1225,7 @@ packages:
     dependency: "direct main"
     description:
       path: "plugins/window_size"
-      ref: HEAD
+      ref: eb3964990cf19629c89ff8cb4a37640c7b3d5601
       resolved-ref: eb3964990cf19629c89ff8cb4a37640c7b3d5601
       url: "https://github.com/google/flutter-desktop-embedding.git"
     source: git

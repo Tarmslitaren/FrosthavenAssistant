@@ -37,8 +37,7 @@ class Character extends ListItemData {
   /// need updating.
   void updateFromJson(Map<String, dynamic> json) {
     _turnState.value = TurnsState.values[json['turnState'] as int];
-    characterState.updateFromJson(
-        json['characterClass'] as String,
+    characterState.updateFromJson(json['characterClass'] as String,
         json['characterState'] as Map<String, dynamic>);
   }
 
@@ -48,7 +47,7 @@ class Character extends ListItemData {
     }
   }
 
-  flipUseFHPerks(_StateModifier s) {
+  void flipUseFHPerks(_StateModifier s) {
     //first clear all perks
     for (int i = 0; i < characterState._perkList.length; i++) {
       if (characterState._perkList[i]) {
@@ -96,7 +95,6 @@ class Character extends ListItemData {
       });
       if (item != null) {
         return item;
-        break;
       }
     }
     return null;

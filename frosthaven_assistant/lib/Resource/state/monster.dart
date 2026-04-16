@@ -135,7 +135,7 @@ class Monster extends ListItemData {
     RoundMethods.sortMonsterInstances(s, _monsterInstances);
   }
 
-  setActive(_StateModifier _, bool value) {
+  void setActive(_StateModifier _, bool value) {
     _isActive = value;
   }
 

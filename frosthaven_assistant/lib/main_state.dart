@@ -13,7 +13,6 @@ import 'package:window_manager/window_manager.dart';
 
 import 'Layout/main_scaffold.dart';
 import 'Model/campaign.dart';
-import 'Resource/state/game_state.dart';
 import 'main.dart';
 
 class DataLoadedNotification extends Notification {
@@ -27,7 +26,6 @@ class MainState extends State<MyHomePage>
   late final Network _network;
   late final Settings _settings;
   late final Client _client;
-  late final GameState _gameState;
 
   @override
   void dispose() {
@@ -93,7 +91,6 @@ class MainState extends State<MyHomePage>
     _network = getIt<Network>();
     _settings = getIt<Settings>();
     _client = getIt<Client>();
-    _gameState = getIt<GameState>();
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 

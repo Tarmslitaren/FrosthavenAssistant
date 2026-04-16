@@ -20,10 +20,12 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
   });
 
-  Character _getBlinkblade() {
+  Character getBlinkblade() {
     return getIt<GameState>()
         .currentList
         .firstWhere((item) => item.id == 'Blinkblade') as Character;
@@ -31,7 +33,7 @@ void main() {
 
   Future<void> pumpMenu(WidgetTester tester) async {
     final originalOnError = FlutterError.onError;
-    final character = _getBlinkblade();
+    final character = getBlinkblade();
     FlutterError.onError = ignoreOverflowErrors;
     await tester.pumpWidget(
       MaterialApp(
@@ -76,11 +78,12 @@ void main() {
       expect(find.byType(ConditionButton), findsWidgets);
     });
 
-    testWidgets('tapping a condition button adds the condition to the character',
+    testWidgets(
+        'tapping a condition button adds the condition to the character',
         (WidgetTester tester) async {
       await pumpMenu(tester);
 
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       final conditionsBefore =
           List<Condition>.from(character.characterState.conditions.value);
 
@@ -113,7 +116,7 @@ void main() {
       await tester.tap(stunButton);
       await tester.pumpAndSettle();
 
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       expect(
         character.characterState.conditions.value,
         isNot(contains(Condition.stun)),
@@ -166,7 +169,7 @@ void main() {
 
     testWidgets('tapping skull button kills character and closes menu',
         (WidgetTester tester) async {
-      final character = _getBlinkblade();
+      final character = getBlinkblade();
       final originalHp = character.characterState.health.value;
       // Ensure HP > 0
       expect(originalHp, greaterThan(0));
@@ -195,18 +198,21 @@ void main() {
   group('StatusMenu monster', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+          .execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false,
+              gameState: getIt<GameState>())
+          .execute();
     });
 
-    Monster _getZealot() {
+    Monster getZealot() {
       return getIt<GameState>()
           .currentList
           .firstWhere((item) => item.id == 'Zealot') as Monster;
     }
 
     Future<void> pumpMonsterMenu(WidgetTester tester) async {
-      final zealot = _getZealot();
+      final zealot = getZealot();
       final instance = zealot.monsterInstances.first;
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
@@ -242,14 +248,13 @@ void main() {
 
     testWidgets('tapping stun condition adds stun to monster instance',
         (WidgetTester tester) async {
-      final zealot = _getZealot();
+      final zealot = getZealot();
       final instance = zealot.monsterInstances.first;
-      final before =
-          List<Condition>.from(instance.conditions.value);
+      final before = List<Condition>.from(instance.conditions.value);
 
       await pumpMonsterMenu(tester);
-      final stunButton = find.byWidgetPredicate((w) =>
-          w is ConditionButton && w.condition == Condition.stun);
+      final stunButton = find.byWidgetPredicate(
+          (w) => w is ConditionButton && w.condition == Condition.stun);
       await tester.tap(stunButton.first);
       await tester.pumpAndSettle();
 
@@ -280,7 +285,7 @@ void main() {
 
     testWidgets('tapping summon button on normal standee marks as summoned',
         (WidgetTester tester) async {
-      final zealot = _getZealot();
+      final zealot = getZealot();
       final instance = zealot.monsterInstances.first;
       final originalOnError = FlutterError.onError;
       FlutterError.onError = ignoreOverflowErrors;
@@ -289,8 +294,7 @@ void main() {
           w is IconButton &&
           w.icon is Image &&
           (w.icon as Image).image is AssetImage &&
-          ((w.icon as Image).image as AssetImage).assetName
-              .contains('summon'));
+          ((w.icon as Image).image as AssetImage).assetName.contains('summon'));
       if (summonButton.evaluate().isNotEmpty) {
         await tester.tap(summonButton.first);
         await tester.pump();
@@ -305,11 +309,15 @@ void main() {
   group('StatusMenu elite monster', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.elite, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+          .execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.elite, false,
+              gameState: getIt<GameState>())
+          .execute();
     });
 
-    testWidgets('elite monster menu renders without error (covers elite branch)',
+    testWidgets(
+        'elite monster menu renders without error (covers elite branch)',
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       final zealot =
@@ -348,13 +356,23 @@ void main() {
   group('StatusMenu monster with characters present', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      AddCharacterCommand('Hatchet', 'Jaws of the Lion', null, 1, gameState: getIt<GameState>()).execute();
-      AddCharacterCommand('Demolitionist', 'Jaws of the Lion', null, 1, gameState: getIt<GameState>())
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
           .execute();
-      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
-      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      AddCharacterCommand('Hatchet', 'Jaws of the Lion', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      AddCharacterCommand('Demolitionist', 'Jaws of the Lion', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+          .execute();
+      AddStandeeCommand(1, null, 'Zealot', MonsterType.normal, false,
+              gameState: getIt<GameState>())
+          .execute();
     });
 
     testWidgets(
@@ -392,13 +410,11 @@ void main() {
       // character condition buttons (1-4) are rendered when 4 characters present
       expect(
           find.byWidgetPredicate((w) =>
-              w is ConditionButton &&
-              w.condition == Condition.character1),
+              w is ConditionButton && w.condition == Condition.character1),
           findsOneWidget);
       expect(
           find.byWidgetPredicate((w) =>
-              w is ConditionButton &&
-              w.condition == Condition.character4),
+              w is ConditionButton && w.condition == Condition.character4),
           findsOneWidget);
     });
   });
@@ -425,7 +441,7 @@ void main() {
         await tester.tap(chillPlusButton);
         await tester.pump();
         FlutterError.onError = originalOnError2;
-        final character = _getBlinkblade();
+        final character = getBlinkblade();
         expect(character.characterState.chill.value, greaterThan(0));
         getIt<GameState>().undo();
       }
@@ -434,9 +450,9 @@ void main() {
     testWidgets('tapping chill minus button when chill > 0 removes chill',
         (WidgetTester tester) async {
       // Pre-add chill so the minus button's condition (value > 0) is true
-      final character = _getBlinkblade();
-      AddConditionCommand(
-              Condition.chill, character.id, character.id, gameState: getIt<GameState>())
+      final character = getBlinkblade();
+      AddConditionCommand(Condition.chill, character.id, character.id,
+              gameState: getIt<GameState>())
           .execute();
       expect(character.characterState.chill.value, greaterThan(0));
 

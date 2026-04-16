@@ -7,7 +7,7 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class CharacterXPWidget extends StatelessWidget {
-  CharacterXPWidget(
+  const CharacterXPWidget(
       {super.key,
       required this.character,
       required this.scale,
@@ -20,11 +20,13 @@ class CharacterXPWidget extends StatelessWidget {
     final gameState = getIt<GameState>();
     return GestureDetector(
         onTap: () {
-          gameState.action(ChangeXPCommand(1, character.id, character.id, gameState: gameState));
+          gameState.action(ChangeXPCommand(1, character.id, character.id,
+              gameState: gameState));
         },
         onDoubleTap: () {
           if (character.characterState.xp.value > 0) {
-            gameState.action(ChangeXPCommand(-1, character.id, character.id, gameState: gameState));
+            gameState.action(ChangeXPCommand(-1, character.id, character.id,
+                gameState: gameState));
           }
         },
         child: Row(

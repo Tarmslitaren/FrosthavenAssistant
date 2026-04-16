@@ -18,7 +18,7 @@ class SpecialUnlocksMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     final gameState = this.gameState ?? getIt<GameState>();
     final settings = this.settings ?? getIt<Settings>();
-    List<List<String>> _unlocks = [
+    List<List<String>> unlocks = [
       ["Demons", "assets/images/demons.png"],
       ["Merchant-Guild", "assets/images/merchant-guild.png"],
       ["Military", "assets/images/military.png"],
@@ -26,7 +26,7 @@ class SpecialUnlocksMenu extends StatelessWidget {
     ];
 
     if (settings.showCustomContent.value) {
-      _unlocks.add(["Vanquisher", "assets/images/class-icons/Vanquisher.png"]);
+      unlocks.add(["Vanquisher", "assets/images/class-icons/Vanquisher.png"]);
     }
 
     bool getEnabled(String id) {
@@ -59,11 +59,11 @@ class SpecialUnlocksMenu extends StatelessWidget {
                             builder: (context, value, child) {
                               return ListView.builder(
                                   controller: _scrollController,
-                                  itemCount: _unlocks.length,
+                                  itemCount: unlocks.length,
                                   itemBuilder: (context, index) =>
                                       CheckboxListTile(
                                         secondary: Image.asset(
-                                          _unlocks[index].last,
+                                          unlocks[index].last,
                                           height: kButtonSize,
                                           width: kButtonSize,
                                           cacheHeight:
@@ -73,19 +73,18 @@ class SpecialUnlocksMenu extends StatelessWidget {
                                           filterQuality: FilterQuality.medium,
                                         ),
                                         title: Text(
-                                            getEnabled(_unlocks[index].first)
-                                                ? _unlocks[index].first
+                                            getEnabled(unlocks[index].first)
+                                                ? unlocks[index].first
                                                 : "???",
                                             style: TextStyle(
                                                 fontSize: kFontSizeTitle,
                                                 color: Colors.black)),
                                         onChanged: (bool? value) {
-                                          gameState.action(
-                                              UnlockSpecialCommand(
-                                                  _unlocks[index].first, gameState: gameState));
+                                          gameState.action(UnlockSpecialCommand(
+                                              unlocks[index].first,
+                                              gameState: gameState));
                                         },
-                                        value:
-                                            getEnabled(_unlocks[index].first),
+                                        value: getEnabled(unlocks[index].first),
                                       ));
                             })),
                   ),

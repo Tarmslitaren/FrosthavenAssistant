@@ -86,13 +86,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
           ModifierDeck deck =
               GameMethods.getModifierDeck(widget.name, _gameState);
           final removedPile = deck.removedPileContents.toList();
-
-          bool isCharacter = widget.name.isNotEmpty && widget.name != "allies";
-          final character =
-              isCharacter ? GameMethods.getCharacterByName(widget.name) : null;
           final screenSize = MediaQuery.of(context).size;
-          final monsterDeck = widget.name.isEmpty;
-          final textStyle = kBodyBlackStyle;
 
           return Container(
               constraints: BoxConstraints(

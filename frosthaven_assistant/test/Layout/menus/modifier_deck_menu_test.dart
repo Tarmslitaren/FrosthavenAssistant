@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frosthaven_assistant/Layout/counter_button.dart';
 import 'package:frosthaven_assistant/Layout/menus/modifier_deck_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/perks_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/send_to_bottom_menu.dart';
-import 'package:frosthaven_assistant/Layout/counter_button.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_add_minus_one_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue1_command.dart';
@@ -36,8 +35,7 @@ void main() {
             onPressed: () {
               showDialog(
                 context: context,
-                builder: (context) =>
-                    const ModifierDeckMenu(name: deckName),
+                builder: (context) => const ModifierDeckMenu(name: deckName),
               );
             },
             child: const Text('Open'),
@@ -91,7 +89,8 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       // First add a -1 card so we can remove it
-      gameState.action(AmdAddMinusOneCommand(deckName, gameState: getIt<GameState>()));
+      gameState.action(
+          AmdAddMinusOneCommand(deckName, gameState: getIt<GameState>()));
       final deck = GameMethods.getModifierDeck(deckName, gameState);
       final before = deck.addedMinusOnes.value;
 
@@ -126,8 +125,8 @@ void main() {
 
       await pumpMenu(tester);
       // Find the "1" reveal button (second reveal button)
-      final revealButtons =
-          find.descendant(of: find.byType(ModifierDeckMenu), matching: find.text('1'));
+      final revealButtons = find.descendant(
+          of: find.byType(ModifierDeckMenu), matching: find.text('1'));
       if (revealButtons.evaluate().isNotEmpty) {
         await tester.tap(revealButtons.first);
         await tester.pump();
@@ -202,7 +201,8 @@ void main() {
       gameState.undo();
     });
 
-    testWidgets('tapping Close dismisses the menu', (WidgetTester tester) async {
+    testWidgets('tapping Close dismisses the menu',
+        (WidgetTester tester) async {
       await pumpMenu(tester);
       await tester.tap(find.text('Close'));
       await tester.pumpAndSettle();
@@ -214,8 +214,7 @@ void main() {
       await pumpMenu(tester);
       // Cards in draw pile are wrapped in InkWell widgets via generateList(allOpen=false)
       final cardTapTargets = find.descendant(
-          of: find.byType(ModifierDeckMenu),
-          matching: find.byType(InkWell));
+          of: find.byType(ModifierDeckMenu), matching: find.byType(InkWell));
       expect(cardTapTargets, findsWidgets);
     });
 
@@ -245,12 +244,11 @@ void main() {
       await pumpMenu(tester);
       // Find the bless CounterButton and tap its + icon
       final blessButton = find.byWidgetPredicate((w) =>
-          w is CounterButton &&
-          w.image == 'assets/images/abilities/bless.png');
+          w is CounterButton && w.image == 'assets/images/abilities/bless.png');
       expect(blessButton, findsOneWidget);
       // The add IconButton is the last IconButton within the CounterButton
-      final addButtons = find.descendant(
-          of: blessButton, matching: find.byType(IconButton));
+      final addButtons =
+          find.descendant(of: blessButton, matching: find.byType(IconButton));
       if (addButtons.evaluate().isNotEmpty) {
         await tester.tap(addButtons.last);
         await tester.pump();
@@ -263,7 +261,9 @@ void main() {
   group('ModifierDeckMenu character deck', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
     });
 
     Future<void> pumpCharacterMenu(WidgetTester tester) async {
@@ -344,7 +344,8 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       // Draw a card to move it from draw pile to discard pile
-      gameState.action(DrawModifierCardCommand(deckName, gameState: getIt<GameState>()));
+      gameState.action(
+          DrawModifierCardCommand(deckName, gameState: getIt<GameState>()));
 
       final originalOnError = FlutterError.onError;
       addTearDown(() => FlutterError.onError = originalOnError);
@@ -356,8 +357,7 @@ void main() {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (context) =>
-                      const ModifierDeckMenu(name: deckName),
+                  builder: (context) => const ModifierDeckMenu(name: deckName),
                 );
               },
               child: const Text('Open'),
@@ -408,8 +408,7 @@ void main() {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (context) =>
-                      const ModifierDeckMenu(name: 'allies'),
+                  builder: (context) => const ModifierDeckMenu(name: 'allies'),
                 );
               },
               child: const Text('Open'),

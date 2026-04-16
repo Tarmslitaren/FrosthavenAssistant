@@ -3,9 +3,9 @@ import 'dart:core';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:frosthaven_assistant/Model/MonsterAbility.dart';
 import 'package:frosthaven_assistant/Model/character_class.dart';
 import 'package:frosthaven_assistant/Model/monster.dart';
+import 'package:frosthaven_assistant/Model/monster_ability.dart';
 import 'package:frosthaven_assistant/Model/room.dart';
 import 'package:frosthaven_assistant/Model/scenario.dart';
 

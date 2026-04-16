@@ -66,7 +66,7 @@ class GameData {
     }
   }
 
-  fetchCampaignData(String campaign, String root,
+  Future<void> fetchCampaignData(String campaign, String root,
       Map<String, CampaignModel> map, List<RoomsModel> roomsData) async {
     rootBundle.evict('${root}editions/$campaign.json');
     final String response = await rootBundle

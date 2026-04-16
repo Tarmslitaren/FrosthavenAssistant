@@ -200,16 +200,16 @@ class GameSaveState {
     //have to call after init or element state overridden
 
     const sharedPrefsKey = 'gameState';
-    bool hasError = false;
-    bool isWaiting = true;
+    //bool hasError = false;
+    //bool isWaiting = true;
     try {
       final prefs = await SharedPreferences.getInstance();
       _savedState = prefs.getString(sharedPrefsKey);
-      hasError = false;
+      //hasError = false;
     } catch (error) {
-      hasError = true;
+      //hasError = true;
     }
-    isWaiting = false;
+    //isWaiting = false;
 
     if (_savedState != null) {
       load(gameState);
@@ -224,7 +224,7 @@ class GameSaveState {
     load(gameState);
   }
 
-  void _loadLootDeck(var data, GameState gameState) {
+  void _loadLootDeck(Map<String, dynamic> data, GameState gameState) {
     gameState._lootDeck.updateFromJson(data["lootDeck"]);
   }
 
