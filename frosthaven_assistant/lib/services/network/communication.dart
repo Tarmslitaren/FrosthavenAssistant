@@ -1,6 +1,6 @@
 import 'dart:io';
-import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:format/format.dart';
 
 import '../service_locator.dart';
@@ -34,11 +34,13 @@ class Communication {
     }
   }
 
-  // TODO: Change to throw exception if socket is null. Otherwise impossible to test
   void sendTo(Socket? socket, String data) {
-    if (socket != null) {
-      socket.write(_composeMessageFrom(data));
+    assert(socket != null, 'sendTo called with a null socket — message dropped');
+    if (socket == null) {
+      debugPrint('Communication.sendTo: null socket, message dropped: "$data"');
+      return;
     }
+    socket.write(_composeMessageFrom(data));
   }
 
   void sendToAll(String data) {
