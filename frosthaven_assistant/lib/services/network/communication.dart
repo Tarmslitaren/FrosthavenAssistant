@@ -76,8 +76,12 @@ class Communication {
 
   void sendToAllExcept(Socket client, String data) {
     final sockets = _connection.getAll();
-    final recipients =
-        sockets.where((x) => x.remoteAddress != client.remoteAddress);
+    // Compare both address AND port: multiple clients from the same host
+    // (e.g. all on loopback in tests, or same-device multi-window) share the
+    // same remoteAddress but have distinct remotePort values.
+    final recipients = sockets.where((x) =>
+        x.remoteAddress != client.remoteAddress ||
+        x.remotePort != client.remotePort);
     for (var socket in recipients) {
       sendTo(socket, data);
     }

@@ -68,7 +68,7 @@ void main() {
       final includedSockets =
           sockets.where((socket) => socket != excludedSocket);
       when(excludedSocket.remoteAddress).thenReturn(InternetAddress.anyIPv6);
-      when(excludedSocket.port).thenReturn(_randomPortNumber);
+      when(excludedSocket.remotePort).thenReturn(_randomPortNumber);
 
       // act
       _sut.sendToAllExcept(excludedSocket, data);
