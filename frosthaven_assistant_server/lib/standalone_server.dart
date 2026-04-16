@@ -203,10 +203,14 @@ class StandaloneServer extends GameServer {
           'Got same or lower index. ignoring: received index: ${message.indexString} current index ${_state.commandIndex}');
 
       //overwrite client state with current server state.
+      final idx = _state.commandIndex;
+      final mismatchDesc = (idx >= 0 && idx < _state.commandDescriptions.length)
+          ? _state.commandDescriptions[idx]
+          : '';
       sendToOnly(
           "Mismatch:${GameServer.encodeStateEnvelope(
-            index: _state.commandIndex,
-            description: _state.commandDescriptions[_state.commandIndex],
+            index: idx,
+            description: mismatchDesc,
             eventJson: _noEventJson,
             state: _lastSavedState(),
           )}",

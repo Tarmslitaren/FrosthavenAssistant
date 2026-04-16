@@ -114,10 +114,14 @@ class Server extends GameServer {
       log('Got same or lower index. ignoring: received index: ${message.indexString} current index ${_gameState.commandIndex.value}');
 
       //overwrite client state with current server state.
+      final idx = _gameState.commandIndex.value;
+      final mismatchDesc = (idx >= 0 && idx < _gameState.commandDescriptions.length)
+          ? _gameState.commandDescriptions[idx]
+          : '';
       sendToOnly(
           "Mismatch:${StateEnvelope(
-            index: _gameState.commandIndex.value,
-            description: _gameState.commandDescriptions[_gameState.commandIndex.value],
+            index: idx,
+            description: mismatchDesc,
             eventJson: _noEventJson,
             state: _lastSavedState(),
           ).encode()}",
