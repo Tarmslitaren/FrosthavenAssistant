@@ -71,6 +71,8 @@ class Server extends GameServer {
     _gameState.redo();
   }
 
+  static const String _noEventJson = '{"type":"none"}';
+
   String _lastSavedState() {
     return _gameState.gameSaveStates.isNotEmpty
         ? _gameState.gameSaveStates.last!.getState()
@@ -85,8 +87,12 @@ class Server extends GameServer {
       if (_gameState.commandDescriptions.isNotEmpty) {
         commandDescription = _gameState.commandDescriptions.last;
       }
-      send(
-          "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_lastSavedState()}");
+      send(StateEnvelope(
+        index: _gameState.commandIndex.value,
+        description: commandDescription,
+        eventJson: _noEventJson,
+        state: _lastSavedState(),
+      ).encode());
     } else if (message.index > _gameState.commandIndex.value) {
       _gameState.commandIndex.value = message.index;
       if (message.index >= 0) {
@@ -97,14 +103,24 @@ class Server extends GameServer {
       _gameState.save();
       _gameState.updateAllUI();
       sendToOthers(
-          "Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions.last}GameState:${_lastSavedState()}",
+          StateEnvelope(
+            index: _gameState.commandIndex.value,
+            description: _gameState.commandDescriptions.last,
+            eventJson: message.eventJson,
+            state: _lastSavedState(),
+          ).encode(),
           client);
     } else {
       log('Got same or lower index. ignoring: received index: ${message.indexString} current index ${_gameState.commandIndex.value}');
 
       //overwrite client state with current server state.
       sendToOnly(
-          "Mismatch:Index:${_gameState.commandIndex.value}Description:${_gameState.commandDescriptions[_gameState.commandIndex.value]}GameState:${_lastSavedState()}",
+          "Mismatch:${StateEnvelope(
+            index: _gameState.commandIndex.value,
+            description: _gameState.commandDescriptions[_gameState.commandIndex.value],
+            eventJson: _noEventJson,
+            state: _lastSavedState(),
+          ).encode()}",
           client);
       //ignore if same index from server
     }
@@ -117,7 +133,12 @@ class Server extends GameServer {
 
   @override
   String currentStateMessage(String commandDescription) {
-    return "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_lastSavedState()}";
+    return StateEnvelope(
+      index: _gameState.commandIndex.value,
+      description: commandDescription,
+      eventJson: _noEventJson,
+      state: _lastSavedState(),
+    ).encode();
   }
 
   bool _pinging = false; //to not restart this ping sub process, if one is running
@@ -188,7 +209,12 @@ class Server extends GameServer {
     }
     log('Server sends init response: "S3nD:Index:${_gameState.commandIndex.value}Description:$commandDescription');
     sendToOnly(
-        "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_lastSavedState()}",
+        StateEnvelope(
+          index: _gameState.commandIndex.value,
+          description: commandDescription,
+          eventJson: _noEventJson,
+          state: _lastSavedState(),
+        ).encode(),
         client);
   }
 }

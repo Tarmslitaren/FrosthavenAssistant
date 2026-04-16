@@ -102,8 +102,12 @@ class ActionHandler {
           if (isServer) {
             log('server sends, undo index: ${commandIndex.value}, description:${_commandDescriptions[commandIndex.value]}');
             //should send a special undo message? yes
-            _network.server.send(
-                "Index:${commandIndex.value}Description:${_commandDescriptions[commandIndex.value]}Event:${const NoEvent().toJsonString()}GameState:${_gameSaveStates[commandIndex.value]!.getState()}");
+            _network.server.send(StateEnvelope(
+              index: commandIndex.value,
+              description: _commandDescriptions[commandIndex.value],
+              eventJson: const NoEvent().toJsonString(),
+              state: _gameSaveStates[commandIndex.value]!.getState(),
+            ).encode());
           }
         }
         lastEvent.value = const NoEvent();
@@ -133,8 +137,12 @@ class ActionHandler {
       //send last game state if connected
       if (isServer) {
         log('server sends, redo index: ${commandIndex.value}, description:${_commandDescriptions[commandIndex.value]}');
-        _network.server.send(
-            "Index:${commandIndex.value}Description:${_commandDescriptions[commandIndex.value]}Event:${const NoEvent().toJsonString()}GameState:${_gameSaveStates[commandIndex.value + 1]!.getState()}");
+        _network.server.send(StateEnvelope(
+          index: commandIndex.value,
+          description: _commandDescriptions[commandIndex.value],
+          eventJson: const NoEvent().toJsonString(),
+          state: _gameSaveStates[commandIndex.value + 1]!.getState(),
+        ).encode());
       }
     } else if (isClient) {
       _communication.sendToAll("redo");
@@ -176,12 +184,20 @@ class ActionHandler {
     String eventJson = command.event.toJsonString();
     if (isServer) {
       log('server sends, index: ${commandIndex.value}, description:$description');
-      _network.server.send(
-          "Index:${commandIndex.value}Description:${description}Event:${eventJson}GameState:${_self.toString()}");
+      _network.server.send(StateEnvelope(
+        index: commandIndex.value,
+        description: description,
+        eventJson: eventJson,
+        state: _self.toString(),
+      ).encode());
     } else if (isClient) {
       log('client sends, index: ${commandIndex.value}, description:$description');
-      _communication.sendToAll(
-          "Index:${commandIndex.value}Description:${description}Event:${eventJson}GameState:${_self.toString()}");
+      _communication.sendToAll(StateEnvelope(
+        index: commandIndex.value,
+        description: description,
+        eventJson: eventJson,
+        state: _self.toString(),
+      ).encode());
     }
 
     //TODO: this is breaking if command index is not in sync with commands. and in connected state.

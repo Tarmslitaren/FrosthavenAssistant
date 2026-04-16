@@ -127,7 +127,22 @@ class Client {
           _network.networkMessage.value =
               "Your state was not up to date, try again.";
         }
-        if (message.startsWith("Index:")) {
+
+        // Try new JSON envelope format first, fall back to legacy text format.
+        final StateEnvelope? envelope = StateEnvelope.tryDecode(message);
+        if (envelope != null) {
+          final GameEvent event = GameEvent.fromJsonString(envelope.eventJson);
+          debugPrint(
+              'Client Receive Data, index: ${envelope.index}, event:${event.runtimeType}');
+          _gameState.loadFromData(envelope.state);
+          // Set event before commandIndex fires so VLB callbacks see it.
+          _gameState.lastEvent.value = event;
+          _gameState.commandIndex.value = envelope.index;
+          _gameState.updateAllUI();
+          Future.delayed(
+              const Duration(milliseconds: 100), () => _gameState.save());
+        } else if (message.startsWith("Index:")) {
+          // Legacy text format: "Index:NDescription:textEvent:{...}GameState:state"
           List<String> messageParts1 = message.split("Description:");
           String indexString = messageParts1[0].substring("Index:".length);
           final String afterDescription = messageParts1[1];
@@ -153,9 +168,6 @@ class Client {
           _gameState.lastEvent.value = event;
           _gameState.commandIndex.value = newIndex;
           _gameState.updateAllUI();
-
-          //todo: evaluate this change
-          //delayed as update all ui need to finish first. some animations dependent on comparing to last save.
           Future.delayed(
               const Duration(milliseconds: 100), () => _gameState.save());
         } else if (message.startsWith("Error")) {

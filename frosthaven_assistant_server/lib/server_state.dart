@@ -1,4 +1,5 @@
 
+import 'dart:convert';
 import 'dart:developer';
 
 class ServerState {
@@ -17,7 +18,12 @@ class ServerState {
       //gameSaveStates[commandIndex + 1].saveToDisk(this);
       //send last game state if connected
       print('server sends, redo index: $commandIndex, description:${commandDescriptions[commandIndex]}');
-      return "Index:${commandIndex}Description:${commandDescriptions[commandIndex]}Event:${_noEventJson}GameState:${gameSaveStates[commandIndex + 1].getState()}";
+      return jsonEncode({
+        'i': commandIndex,
+        'd': commandDescriptions[commandIndex],
+        'e': jsonDecode(_noEventJson),
+        's': gameSaveStates[commandIndex + 1].getState(),
+      });
     }
     return "";
   }
@@ -32,7 +38,12 @@ class ServerState {
       //should send a special undo message? yes
       commandIndex--;
       if (commandIndex >= 0){
-        return "Index:${commandIndex}Description:${commandDescriptions[commandIndex]}Event:${_noEventJson}GameState:${gameSaveStates[commandIndex].getState()}";
+        return jsonEncode({
+          'i': commandIndex,
+          'd': commandDescriptions[commandIndex],
+          'e': jsonDecode(_noEventJson),
+          's': gameSaveStates[commandIndex].getState(),
+        });
       } else {
         commandIndex = 0;
         return "";

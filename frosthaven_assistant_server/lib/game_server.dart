@@ -59,7 +59,47 @@ abstract class GameServer {
   void sendInitResponse(Socket client);
 
 
+  /// Encodes a state message as a JSON envelope.
+  ///
+  /// [eventJson] must be a valid JSON string (e.g. `'{"type":"none"}'`).
+  static String encodeStateEnvelope({
+    required int index,
+    required String description,
+    required String eventJson,
+    required String state,
+  }) {
+    return jsonEncode({
+      'i': index,
+      'd': description,
+      'e': jsonDecode(eventJson),
+      's': state,
+    });
+  }
+
+  /// Tries to decode [content] as a JSON envelope.
+  /// Returns `null` if it is not in the new format.
+  static StateUpdateMessage? tryDecodeStateEnvelope(String content) {
+    if (!content.startsWith('{')) return null;
+    try {
+      final map = jsonDecode(content) as Map<String, dynamic>;
+      final result = StateUpdateMessage();
+      result.index = map['i'] as int;
+      result.indexString = result.index.toString();
+      result.description = map['d'] as String;
+      result.eventJson = jsonEncode(map['e'] as Object);
+      result.data = map['s'] as String;
+      return result;
+    } catch (_) {
+      return null;
+    }
+  }
+
   StateUpdateMessage parseStateUpdateMessage(String message) {
+    // Try new JSON envelope format first.
+    final StateUpdateMessage? envelope = tryDecodeStateEnvelope(message);
+    if (envelope != null) return envelope;
+
+    // Legacy text format: "Index:NDescription:textEvent:{...}GameState:state"
     List<String> messageParts1 = message.split("Description:");
     String indexString = messageParts1[0].substring("Index:".length);
     final String afterDescription = messageParts1[1];
@@ -198,7 +238,7 @@ abstract class GameServer {
           for (var message in messages) {
             if (message.endsWith("[EOM]")) {
               message = message.substring(0, message.length - "[EOM]".length);
-              if (message.startsWith("Index:")) {
+              if (message.startsWith("Index:") || message.startsWith("{")) {
                 handleIndexMessage(message, client);
               } else if (message.startsWith("init")) {
                 handleInitMessage(message, client);

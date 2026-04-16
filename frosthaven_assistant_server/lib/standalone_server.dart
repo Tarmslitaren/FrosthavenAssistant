@@ -32,7 +32,12 @@ class StandaloneServer extends GameServer {
 
   @override
   String currentStateMessage(String commandDescription) {
-    return "Index:${_state.commandIndex}Description:${commandDescription}Event:${_noEventJson}GameState:${_lastSavedState()}";
+    return GameServer.encodeStateEnvelope(
+      index: _state.commandIndex,
+      description: commandDescription,
+      eventJson: _noEventJson,
+      state: _lastSavedState(),
+    );
   }
 
   @override
@@ -103,7 +108,12 @@ class StandaloneServer extends GameServer {
     print(
         'Server sends init response: "S3nD:Index:${_state.commandIndex}Description:$commandDescription');
     sendToOnly(
-        "Index:${_state.commandIndex}Description:${commandDescription}Event:${_noEventJson}GameState:${_lastSavedState()}",
+        GameServer.encodeStateEnvelope(
+          index: _state.commandIndex,
+          description: commandDescription,
+          eventJson: _noEventJson,
+          state: _lastSavedState(),
+        ),
         client);
   }
 
@@ -167,8 +177,12 @@ class StandaloneServer extends GameServer {
       if (_state.commandDescriptions.isNotEmpty) {
         commandDescription = _state.commandDescriptions.last;
       }
-      send(
-          "Index:${_state.commandIndex}Description:${commandDescription}Event:${_noEventJson}GameState:${_lastSavedState()}");
+      send(GameServer.encodeStateEnvelope(
+        index: _state.commandIndex,
+        description: commandDescription,
+        eventJson: _noEventJson,
+        state: _lastSavedState(),
+      ));
     } else if (message.index > _state.commandIndex) {
       _state.commandIndex = message.index;
       if (message.index >= 0) {
@@ -177,7 +191,12 @@ class StandaloneServer extends GameServer {
       }
       _state.save(message.data);
       sendToOthers(
-          "Index:${_state.commandIndex}Description:${_state.commandDescriptions.last}Event:${message.eventJson}GameState:${_lastSavedState()}",
+          GameServer.encodeStateEnvelope(
+            index: _state.commandIndex,
+            description: _state.commandDescriptions.last,
+            eventJson: message.eventJson,
+            state: _lastSavedState(),
+          ),
           client);
     } else {
       print(
@@ -185,7 +204,12 @@ class StandaloneServer extends GameServer {
 
       //overwrite client state with current server state.
       sendToOnly(
-          "Mismatch:Index:${_state.commandIndex}Description:${_state.commandDescriptions[_state.commandIndex]}Event:${_noEventJson}GameState:${_lastSavedState()}",
+          "Mismatch:${GameServer.encodeStateEnvelope(
+            index: _state.commandIndex,
+            description: _state.commandDescriptions[_state.commandIndex],
+            eventJson: _noEventJson,
+            state: _lastSavedState(),
+          )}",
           client);
       //ignore if same index from server
     }
