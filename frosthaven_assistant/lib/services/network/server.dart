@@ -179,9 +179,12 @@ class Server extends GameServer {
     _connection.removeAll();
   }
 
+  static const int _defaultPort = 4567;
+
   Future<void> startServer() async {
-    startServerInternal(InternetAddress.anyIPv6.address,
-        int.parse(_settings.lastKnownPort));
+    final int port =
+        int.tryParse(_settings.lastKnownPort) ?? _defaultPort;
+    startServerInternal(InternetAddress.anyIPv6.address, port);
   }
 
   @override
