@@ -44,7 +44,7 @@ class Client {
           String info =
               'Client Connected to: ${socket.remoteAddress.address}:${socket.remotePort}';
           debugPrint(info);
-          _gameState.commands.clear();
+          _gameState.clearLocalCommands();
           _network.networkMessage.value = info;
           if (Platform.isAndroid || Platform.isIOS) {
             _settings.connectClientOnStartup = true;
@@ -189,10 +189,7 @@ class Client {
   void _cleanup() {
     _settings.client.value = ClientState.disconnected;
     _gameState.commandIndex.value = -1;
-    _gameState.commands.clear();
-    _gameState.commandDescriptions.clear();
-    _gameState.gameSaveStates
-        .removeRange(0, _gameState.gameSaveStates.length - 1);
+    _gameState.resetCommandHistory();
     _leftOverMessage = "";
     _pinging = false;
 

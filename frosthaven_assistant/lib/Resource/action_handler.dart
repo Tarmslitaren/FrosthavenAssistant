@@ -11,9 +11,38 @@ import 'state/game_state.dart';
 
 class ActionHandler {
   final commandIndex = ValueNotifier<int>(-1);
-  final List<Command?> commands = [];
-  final List<String> commandDescriptions = []; //only used when connected
-  final List<GameSaveState?> gameSaveStates = [];
+  final List<Command?> _commands = [];
+  final List<String> _commandDescriptions = []; //only used when connected
+  final List<GameSaveState?> _gameSaveStates = [];
+
+  List<Command?> get commands => List.unmodifiable(_commands);
+  List<String> get commandDescriptions => List.unmodifiable(_commandDescriptions);
+  List<GameSaveState?> get gameSaveStates => List.unmodifiable(_gameSaveStates);
+
+  /// Resets all command/description/save-state history to a clean slate,
+  /// keeping only the most recent save state as the baseline.
+  void resetCommandHistory() {
+    _commands.clear();
+    _commandDescriptions.clear();
+    if (_gameSaveStates.length > 1) {
+      _gameSaveStates.removeRange(0, _gameSaveStates.length - 1);
+    }
+  }
+
+  /// Clears only the local commands list (used when connecting to a server).
+  void clearLocalCommands() {
+    _commands.clear();
+  }
+
+  /// Inserts a description received from the network at [index].
+  void insertReceivedDescription(int index, String description) {
+    _commandDescriptions.insert(index, description);
+  }
+
+  /// Appends a save-state snapshot. Called by [GameState.save] and [GameState.load].
+  void addSaveState(GameSaveState state) {
+    _gameSaveStates.add(state);
+  }
 
   /// The event produced by the most recent state transition.
   ///
@@ -50,7 +79,7 @@ class ActionHandler {
   }
 
   Command getCurrent() {
-    return commands[commandIndex.value]!;
+    return _commands[commandIndex.value]!;
   }
 
   void undo() {
@@ -58,12 +87,12 @@ class ActionHandler {
     bool isClient = _settings.client.value == ClientState.connected;
     if (!isClient) {
       if (commandIndex.value >= 0 &&
-          gameSaveStates[commandIndex.value] != null) {
-        gameSaveStates[commandIndex.value]!.load(
+          _gameSaveStates[commandIndex.value] != null) {
+        _gameSaveStates[commandIndex.value]!.load(
             _self); //this works as gameSaveStates has one more entry than command list (includes load at start)
-        gameSaveStates[commandIndex.value]!.saveToDisk(_self);
+        _gameSaveStates[commandIndex.value]!.saveToDisk(_self);
         if (!isServer && !isClient) {
-          commands[commandIndex.value]!
+          _commands[commandIndex.value]!
               .onUndo(); //undo only makes sure ui is updated
         } else {
           updateAllUI();
@@ -71,10 +100,10 @@ class ActionHandler {
 
           //send last game state if connected
           if (isServer) {
-            log('server sends, undo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
+            log('server sends, undo index: ${commandIndex.value}, description:${_commandDescriptions[commandIndex.value]}');
             //should send a special undo message? yes
             _network.server.send(
-                "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}Event:${const NoEvent().toJsonString()}GameState:${gameSaveStates[commandIndex.value]!.getState()}");
+                "Index:${commandIndex.value}Description:${_commandDescriptions[commandIndex.value]}Event:${const NoEvent().toJsonString()}GameState:${_gameSaveStates[commandIndex.value]!.getState()}");
           }
         }
         lastEvent.value = const NoEvent();
@@ -89,11 +118,11 @@ class ActionHandler {
     bool isServer = _settings.server.value;
     bool isClient = _settings.client.value == ClientState.connected;
     if (!isClient) {
-      if (commandIndex.value < commandDescriptions.length - 1) {
+      if (commandIndex.value < _commandDescriptions.length - 1) {
         lastEvent.value = const NoEvent();
         commandIndex.value++;
-        gameSaveStates[commandIndex.value + 1]!.load(_self);
-        gameSaveStates[commandIndex.value + 1]!.saveToDisk(_self);
+        _gameSaveStates[commandIndex.value + 1]!.load(_self);
+        _gameSaveStates[commandIndex.value + 1]!.saveToDisk(_self);
         //also run generic update ui function
         updateAllUI();
       } else {
@@ -103,9 +132,9 @@ class ActionHandler {
 
       //send last game state if connected
       if (isServer) {
-        log('server sends, redo index: ${commandIndex.value}, description:${commandDescriptions[commandIndex.value]}');
+        log('server sends, redo index: ${commandIndex.value}, description:${_commandDescriptions[commandIndex.value]}');
         _network.server.send(
-            "Index:${commandIndex.value}Description:${commandDescriptions[commandIndex.value]}Event:${const NoEvent().toJsonString()}GameState:${gameSaveStates[commandIndex.value + 1]!.getState()}");
+            "Index:${commandIndex.value}Description:${_commandDescriptions[commandIndex.value]}Event:${const NoEvent().toJsonString()}GameState:${_gameSaveStates[commandIndex.value + 1]!.getState()}");
       }
     } else if (isClient) {
       _communication.sendToAll("redo");
@@ -117,12 +146,12 @@ class ActionHandler {
     bool isClient = _settings.client.value == ClientState.connected;
 
     command.execute();
-    if (commands.length > commandIndex.value) {
-      commands.insert(commandIndex.value + 1, command);
-      commandDescriptions.insert(commandIndex.value + 1, command.describe());
+    if (_commands.length > commandIndex.value) {
+      _commands.insert(commandIndex.value + 1, command);
+      _commandDescriptions.insert(commandIndex.value + 1, command.describe());
     } else {
-      commands.add(command);
-      commandDescriptions.add(command.describe());
+      _commands.add(command);
+      _commandDescriptions.add(command.describe());
     }
 
     // Set event before commandIndex fires so VLB callbacks see the correct value.
@@ -130,14 +159,14 @@ class ActionHandler {
     commandIndex.value++;
 
     //remove possible redo list
-    if (commands.length - 1 > commandIndex.value) {
-      commands.removeRange(commandIndex.value + 1, commands.length);
-      commandDescriptions.removeRange(
-          commandIndex.value + 1, commandDescriptions.length);
+    if (_commands.length - 1 > commandIndex.value) {
+      _commands.removeRange(commandIndex.value + 1, _commands.length);
+      _commandDescriptions.removeRange(
+          commandIndex.value + 1, _commandDescriptions.length);
     }
-    if (gameSaveStates.length > commandIndex.value + 1) {
+    if (_gameSaveStates.length > commandIndex.value + 1) {
       //remove future game states
-      gameSaveStates.removeRange(commandIndex.value + 1, gameSaveStates.length);
+      _gameSaveStates.removeRange(commandIndex.value + 1, _gameSaveStates.length);
     }
 
     _self.save(); //save after each action
@@ -158,11 +187,11 @@ class ActionHandler {
     //TODO: this is breaking if command index is not in sync with commands. and in connected state.
     //really need to go over this again: do we really need to save commands at all, or are save states + descriptions enough also for offline?
     if (commandIndex.value >= maxUndo) {
-      if (commands.length > commandIndex.value) {
-        commands[commandIndex.value - maxUndo] = null;
+      if (_commands.length > commandIndex.value) {
+        _commands[commandIndex.value - maxUndo] = null;
       }
-      if (gameSaveStates.length > commandIndex.value - maxUndo) {
-        gameSaveStates[commandIndex.value - maxUndo] = null;
+      if (_gameSaveStates.length > commandIndex.value - maxUndo) {
+        _gameSaveStates[commandIndex.value - maxUndo] = null;
       }
     }
   }

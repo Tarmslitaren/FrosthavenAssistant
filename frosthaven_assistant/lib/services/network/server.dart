@@ -57,10 +57,7 @@ class Server extends GameServer {
   @override
   void resetState() {
     _gameState.commandIndex.value = -1;
-    _gameState.commands.clear();
-    _gameState.commandDescriptions.clear();
-    _gameState.gameSaveStates
-        .removeRange(0, _gameState.gameSaveStates.length - 1);
+    _gameState.resetCommandHistory();
     _pinging = false;
   }
 
@@ -93,8 +90,8 @@ class Server extends GameServer {
     } else if (message.index > _gameState.commandIndex.value) {
       _gameState.commandIndex.value = message.index;
       if (message.index >= 0) {
-        _gameState.commandDescriptions
-            .insert(_gameState.commandIndex.value, message.description);
+        _gameState.insertReceivedDescription(
+            _gameState.commandIndex.value, message.description);
       }
       _gameState.loadFromData(message.data);
       _gameState.save();
