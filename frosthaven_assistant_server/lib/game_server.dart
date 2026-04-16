@@ -32,13 +32,6 @@ abstract class GameServer {
     _serverEnabled = value;
   }
 
-  String _leftOverMessage = "";
-  String get leftOverMessage{
-    return _leftOverMessage;
-  }
-  set leftOverMessage(String value){
-    _leftOverMessage = value;
-  }
 
   void resetState();
   void undoState();
@@ -174,8 +167,6 @@ abstract class GameServer {
       removeAllClientConnections();
     }
     serverEnabled = false;
-    leftOverMessage = "";
-
     resetState();
   }
 
@@ -193,15 +184,38 @@ abstract class GameServer {
 
     addClientConnection(client);
 
+    // Per-connection leftover buffer — avoids the shared-field bug where
+    // messages from different clients could corrupt each other's partial frames.
+    String leftOver = "";
+
+    const String prefix = 'S3nD:';
+    const String suffix = '[EOM]';
+
     // listen for events from the client
     try {
       client.listen(
         // handle data from the client
-        (Uint8List data) async {
-          String message = utf8.decode(data);
-          message = leftOverMessage + message;
-          leftOverMessage = "";
-          processMessages(message, client);
+        (Uint8List data) {
+          String chunk;
+          try {
+            chunk = utf8.decode(data);
+          } on FormatException catch (e) {
+            log('Invalid UTF-8 from client: $e');
+            removeClientConnection(client);
+            return;
+          }
+          leftOver += chunk;
+          // Use indexOf-based framing: safe if the payload contains "S3nD:".
+          while (true) {
+            final int start = leftOver.indexOf(prefix);
+            if (start == -1) break;
+            final int contentStart = start + prefix.length;
+            final int end = leftOver.indexOf(suffix, contentStart);
+            if (end == -1) break;
+            final String content = leftOver.substring(contentStart, end);
+            leftOver = leftOver.substring(end + suffix.length);
+            processMessages(content, client);
+          }
         },
         // handle errors
         onError: (error) {
@@ -211,9 +225,7 @@ abstract class GameServer {
           // not mid-message). This is particularly relevant for iOS clients,
           // where the app usually doesn't get a chance to close the socket
           // gracefully when the device is locked.
-          if (error is SocketException &&
-              (error.osError?.errorCode == 103 ||
-                  !leftOverMessage.isEmpty)) {
+          if (error is SocketException && error.osError?.errorCode == 103) {
             stopServer(error.toString());
           }
         },
@@ -232,29 +244,23 @@ abstract class GameServer {
     }
   }
 
-  void processMessages(String socketMessages, Socket client){
-    List<String> messages = socketMessages.split("S3nD:");
-          //handle
-          for (var message in messages) {
-            if (message.endsWith("[EOM]")) {
-              message = message.substring(0, message.length - "[EOM]".length);
-              if (message.startsWith("Index:") || message.startsWith("{")) {
-                handleIndexMessage(message, client);
-              } else if (message.startsWith("init")) {
-                handleInitMessage(message, client);
-              } else if (message.startsWith("undo")) {
-                handleUndoMessage();
-              } else if (message.startsWith("redo")) {
-                handleRedoMessage();
-              } else if (message.startsWith("pong")) {
-                handlePongMessage(client);
-              } else if (message.startsWith("ping")) {
-                handlePingMessage(client);
-              }
-            } else {
-              leftOverMessage = message;
-            }
-          }
+  /// Dispatches a single fully-decoded, unframed message content to the
+  /// appropriate handler.  Framing (S3nD:/[EOM] extraction) is done by
+  /// [handleConnection] before calling this method.
+  void processMessages(String message, Socket client){
+    if (message.startsWith("Index:") || message.startsWith("{")) {
+      handleIndexMessage(message, client);
+    } else if (message.startsWith("init")) {
+      handleInitMessage(message, client);
+    } else if (message.startsWith("undo")) {
+      handleUndoMessage();
+    } else if (message.startsWith("redo")) {
+      handleRedoMessage();
+    } else if (message.startsWith("pong")) {
+      handlePongMessage(client);
+    } else if (message.startsWith("ping")) {
+      handlePingMessage(client);
+    }
   }
 
   void handleIndexMessage(String message, Socket client){

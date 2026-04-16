@@ -249,9 +249,9 @@ class StandaloneServer extends GameServer {
   }
 
   @override
-  void processMessages(String socketMessages, Socket client){
+  void processMessages(String message, Socket client){
     _connectionHealth[client]?.logMessageReceived();
-    super.processMessages(socketMessages, client);
+    super.processMessages(message, client);
   }
 
   String _createMessage(String data){
