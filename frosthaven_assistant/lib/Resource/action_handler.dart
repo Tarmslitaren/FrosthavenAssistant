@@ -100,14 +100,17 @@ class ActionHandler {
 
           //send last game state if connected
           if (isServer) {
-            log('server sends, undo index: ${commandIndex.value}, description:${_commandDescriptions[commandIndex.value]}');
-            //should send a special undo message? yes
-            _network.server.send(StateEnvelope(
-              index: commandIndex.value,
-              description: _commandDescriptions[commandIndex.value],
-              eventJson: const NoEvent().toJsonString(),
-              state: _gameSaveStates[commandIndex.value]!.getState(),
-            ).encode());
+            final idx = commandIndex.value;
+            if (idx >= 0 && idx < _commandDescriptions.length) {
+              log('server sends, undo index: $idx, description:${_commandDescriptions[idx]}');
+              //should send a special undo message? yes
+              _network.server.send(StateEnvelope(
+                index: idx,
+                description: _commandDescriptions[idx],
+                eventJson: const NoEvent().toJsonString(),
+                state: _gameSaveStates[idx]!.getState(),
+              ).encode());
+            }
           }
         }
         lastEvent.value = const NoEvent();
