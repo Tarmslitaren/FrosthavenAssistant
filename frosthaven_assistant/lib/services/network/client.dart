@@ -164,7 +164,7 @@ class Client {
               'Client Receive Data, index: $indexString, event:${event.runtimeType}');
 
           _gameState.loadFromData(data);
-          int newIndex = int.parse(indexString);
+          int newIndex = int.tryParse(indexString) ?? -1;
           // Set event before commandIndex fires so VLB callbacks see it.
           _gameState.lastEvent.value = event;
           _gameState.commandIndex.value = newIndex;
