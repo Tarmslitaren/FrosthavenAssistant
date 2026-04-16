@@ -107,14 +107,13 @@ void main() {
       verify(_socket.write(message));
     });
 
-    test('sendTo does not send message for no socket', () {
+    test('sendTo asserts on null socket', () {
       // arrange
       const data = 'Data';
 
-      // act
-      _sut.sendTo(null, data);
-
-      // assert
+      // act & assert — null socket is a programming error and triggers an
+      // AssertionError in debug builds (logged + no-op in release builds)
+      expect(() => _sut.sendTo(null, data), throwsAssertionError);
     });
   });
 }

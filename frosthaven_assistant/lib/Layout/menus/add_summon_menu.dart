@@ -7,6 +7,7 @@ import 'package:frosthaven_assistant/Resource/ui_utils.dart';
 import '../../Layout/components/modal_background.dart';
 import '../../Resource/commands/add_standee_command.dart';
 import '../../Resource/enums.dart';
+import '../../Resource/stat_calculator.dart';
 import '../../Resource/game_data.dart';
 import '../../Resource/settings.dart';
 import '../../Resource/state/game_state.dart';
@@ -245,7 +246,9 @@ class AddSummonMenuState extends State<AddSummonMenu> {
                               SummonData summonData = SummonData(
                                   chosenNr,
                                   model.name,
-                                  model.health,
+                                  StatCalculator.calculateFormula(
+                                          model.health) ??
+                                      2,
                                   model.move,
                                   model.attack,
                                   model.range,

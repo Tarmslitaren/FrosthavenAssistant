@@ -60,8 +60,8 @@ class MonsterInstance extends FigureState {
   late int _roundSummoned;
 
   void _setLevel(Monster monster, {GameState? gameState}) {
-    dynamic newHealthValue =
-        10; //need to put something outer than 0 or the standee will die immediately causing glitch
+    StatValue newHealthValue =
+        const IntStatValue(10); //need to put something outer than 0 or the standee will die immediately causing glitch
     if (type == MonsterType.boss) {
       newHealthValue = monster.type.levels[monster.level.value].boss!.health;
     } else if (type == MonsterType.elite) {
@@ -75,7 +75,8 @@ class MonsterInstance extends FigureState {
     } else {
       final gs = gameState ?? getIt<GameState>();
       //handle edge case
-      if (newHealthValue == "Hollowpact") {
+      if (newHealthValue is FormulaStatValue &&
+          newHealthValue.formula == "Hollowpact") {
         int value = 7;
         for (var item in gs.currentList) {
           if (item is Character && item.id == "Hollowpact") {
@@ -86,7 +87,8 @@ class MonsterInstance extends FigureState {
         }
         _maxHealth.value = value;
       }
-      if (newHealthValue == "Incarnate") {
+      if (newHealthValue is FormulaStatValue &&
+          newHealthValue.formula == "Incarnate") {
         int value = 36; //double Incarnates level 5 health
         for (var item in gs.currentList) {
           if (item is Character && item.id == "Incarnate") {

@@ -1,15 +1,25 @@
 import 'package:flutter/foundation.dart';
+import 'package:frosthaven_assistant/Model/monster.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import 'game_methods.dart';
 
 class StatCalculator {
-  static int? calculateFormula(final dynamic str,
+  static int? calculateFormula(final Object stat,
       [GameState? gameState]) {
-    if (str is int) {
-      return str;
+    if (stat is IntStatValue) return stat.value;
+    if (stat is int) return stat;
+
+    final String str;
+    if (stat is FormulaStatValue) {
+      str = stat.formula;
+    } else if (stat is String) {
+      str = stat;
+    } else {
+      return null;
     }
+
     final gs = gameState ?? getIt<GameState>();
     int C = GameMethods.getCurrentCharacterAmount(gameState: gs);
     if (C < 2) {
@@ -25,7 +35,7 @@ class StatCalculator {
     return Parser(str).parse();
   }
 
-  static bool evaluateCondition(final dynamic str) {
+  static bool evaluateCondition(final Object str) {
     return calculateFormula(str) == 1;
   }
 }

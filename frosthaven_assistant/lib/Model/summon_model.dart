@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frosthaven_assistant/Model/monster.dart';
 
 @immutable
 class SummonModel {
   final String name;
-  final dynamic health;
+  final StatValue health;
   final int move;
   final int attack;
   final int range;
@@ -15,9 +16,9 @@ class SummonModel {
 
   factory SummonModel.fromJson(Map<String, dynamic> data, String key) {
     String name = key;
-    dynamic health = 2; //default to 2 not to die
+    StatValue health = const IntStatValue(2); //default to 2 not to die
     if (data.containsKey('health')) {
-      health = data['health'];
+      health = StatValue.fromJson(data['health']);
     }
     int move = 0;
     if (data.containsKey('move')) {
