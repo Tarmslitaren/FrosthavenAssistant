@@ -132,7 +132,7 @@ class ScenarioMethods {
           .value[gs.currentCampaign.value]
           ?.scenarios[gs.scenario.value]
           ?.sections
-          .firstWhere((element) => element.name == scenario);
+          .firstWhereOrNull((element) => element.name == scenario);
       if (sectionData != null) {
         monsters = sectionData.monsters;
         specialRules = sectionData.specialRules.toList();
@@ -178,8 +178,9 @@ class ScenarioMethods {
 
     //hack for banner spear solo special rule
     if (scenario.contains("Scouting Ambush")) {
-      MonsterAbilityState deck = gs.currentAbilityDecks
-          .firstWhere((element) => element.name.contains("Scout"));
+      MonsterAbilityState? deck = gs.currentAbilityDecks
+          .firstWhereOrNull((element) => element.name.contains("Scout"));
+      if (deck == null) return;
       final drawPileList = deck._drawPile.getList();
       for (int i = 0; i < drawPileList.length; i++) {
         if (drawPileList[i].title == "Rancid Arrow") {
