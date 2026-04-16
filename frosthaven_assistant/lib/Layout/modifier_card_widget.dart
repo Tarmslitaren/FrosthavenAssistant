@@ -67,11 +67,21 @@ class ModifierCardWidget extends StatelessWidget {
         gfx = gfx.substring(1);
         if (gfx.endsWith("-2")) {
           gfx = gfx.substring(0, gfx.length - 2);
-          int index = int.parse(gfx);
-          gfx = perks[index].add.last;
+          final int? index = int.tryParse(gfx);
+          if (index != null &&
+              index >= 0 &&
+              index < perks.length &&
+              perks[index].add.isNotEmpty) {
+            gfx = perks[index].add.last;
+          }
         } else {
-          int index = int.parse(gfx);
-          gfx = perks[index].add.first;
+          final int? index = int.tryParse(gfx);
+          if (index != null &&
+              index >= 0 &&
+              index < perks.length &&
+              perks[index].add.isNotEmpty) {
+            gfx = perks[index].add.first;
+          }
         }
       }
     }
