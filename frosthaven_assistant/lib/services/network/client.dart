@@ -171,7 +171,8 @@ class Client {
           Future.delayed(
               const Duration(milliseconds: 100), () => _gameState.save());
         } else if (message.startsWith("Error")) {
-          throw (message);
+          _network.networkMessage.value = message;
+          disconnect(message);
         } else if (message.startsWith("ping")) {
           _send("pong");
         } else if (message.startsWith("pong")) {
