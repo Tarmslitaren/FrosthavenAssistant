@@ -64,20 +64,19 @@ class Client {
     }
   }
 
-  static bool pinging =
-      false; //to not restart this ping sub process, if one is running
+  bool _pinging = false; //to not restart this ping sub process, if one is running
   void _sendPing() {
     if (_connection.established() &&
         _settings.client.value == ClientState.connected &&
-        pinging == false) {
+        _pinging == false) {
       Future.delayed(const Duration(seconds: 12), () {
         if (_serverResponsive == true) {
-          pinging = true;
+          _pinging = true;
           _communication.sendToAll("ping");
           _sendPing();
           _serverResponsive = false; //set back to true when get response
         } else {
-          pinging = false;
+          _pinging = false;
           disconnect("Server unresponsive. Client disconnected.");
         }
       });
@@ -195,6 +194,7 @@ class Client {
     _gameState.gameSaveStates
         .removeRange(0, _gameState.gameSaveStates.length - 1);
     _leftOverMessage = "";
+    _pinging = false;
 
     if (_network.appInBackground == true) {
       _network.clientDisconnectedWhileInBackground = true;

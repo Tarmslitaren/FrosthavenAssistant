@@ -61,6 +61,7 @@ class Server extends GameServer {
     _gameState.commandDescriptions.clear();
     _gameState.gameSaveStates
         .removeRange(0, _gameState.gameSaveStates.length - 1);
+    _pinging = false;
   }
 
   @override
@@ -116,18 +117,17 @@ class Server extends GameServer {
     return "Index:${_gameState.commandIndex.value}Description:${commandDescription}GameState:${_gameState.gameSaveStates.last!.getState()}";
   }
 
-  //to not restart this ping sub process, if one is running
-  static bool pinging = false;
+  bool _pinging = false; //to not restart this ping sub process, if one is running
   @override
   void sendPing() {
     if (serverSocket != null &&
         _settings.server.value != false &&
-        pinging == false) {
+        _pinging == false) {
       Future.delayed(const Duration(seconds: 20), () {
         if (serverSocket == null || _settings.server.value == false) {
-          pinging = false;
+          _pinging = false;
         } else {
-          pinging = true;
+          _pinging = true;
           send("ping");
           sendPing();
         }
