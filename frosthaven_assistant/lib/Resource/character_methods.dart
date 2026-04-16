@@ -53,10 +53,13 @@ class CharacterMethods {
     }
     if (index == 16 && className == "Pain Conduit") {
       final level = character.characterState.level.value;
-      character.characterState._health.value =
-          character.characterClass.healthByLevel[level - 1] + 5;
-      character.characterState
-          .setMaxHealth(s, character.characterState._health.value);
+      final healthByLevel = character.characterClass.healthByLevel;
+      if (level >= 1 && level <= healthByLevel.length) {
+        character.characterState._health.value =
+            healthByLevel[level - 1] + 5;
+        character.characterState
+            .setMaxHealth(s, character.characterState._health.value);
+      }
     }
   }
 
@@ -95,9 +98,12 @@ class CharacterMethods {
     if (index == 16 && className == "Pain Conduit") {
       final state = character.characterState;
       final characterClass = character.characterClass;
-      final int health = characterClass.healthByLevel[state.level.value - 1];
-      state.setMaxHealth(s, health);
-      state.setHealth(s, health);
+      final level = state.level.value;
+      if (level >= 1 && level <= characterClass.healthByLevel.length) {
+        final int health = characterClass.healthByLevel[level - 1];
+        state.setMaxHealth(s, health);
+        state.setHealth(s, health);
+      }
     }
   }
 
