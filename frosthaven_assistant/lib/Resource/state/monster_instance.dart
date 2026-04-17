@@ -89,8 +89,11 @@ class MonsterInstance extends FigureState {
         int value = 7;
         for (var item in gs.currentList) {
           if (item is Character && item.id == "Hollowpact") {
-            value = item.characterClass
-                .healthByLevel[item.characterState.level.value - 1];
+            final healthByLevel = item.characterClass.healthByLevel;
+            final level = item.characterState.level.value;
+            if (level >= 1 && level <= healthByLevel.length) {
+              value = healthByLevel[level - 1];
+            }
             break;
           }
         }
@@ -101,9 +104,11 @@ class MonsterInstance extends FigureState {
         int value = 36; //double Incarnates level 5 health
         for (var item in gs.currentList) {
           if (item is Character && item.id == "Incarnate") {
-            value = item.characterClass
-                    .healthByLevel[item.characterState.level.value - 1] *
-                2;
+            final healthByLevel = item.characterClass.healthByLevel;
+            final level = item.characterState.level.value;
+            if (level >= 1 && level <= healthByLevel.length) {
+              value = healthByLevel[level - 1] * 2;
+            }
             break;
           }
         }
