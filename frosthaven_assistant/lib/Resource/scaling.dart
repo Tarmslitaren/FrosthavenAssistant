@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
-double maxWidth = (740.0 * getIt<Settings>().userScalingMainList.value);
+const double _kMaxListWidth = 740.0;
+const double _kReferenceMinBarWidth = 370.0;
+double maxWidth = (_kMaxListWidth * getIt<Settings>().userScalingMainList.value);
 const double referenceWidth = 412.0;
 
 void setMaxWidth({Settings? settings}) {
   settings = settings ?? getIt<Settings>();
-  maxWidth = (740.0 * settings.userScalingMainList.value);
+  maxWidth = (_kMaxListWidth * settings.userScalingMainList.value);
 }
 
 double getScaleByReference(BuildContext context) {
@@ -19,7 +21,7 @@ double getScaleByReference(BuildContext context) {
 bool modifiersFitOnBar(BuildContext context, {Settings? settings}) {
   settings = settings ?? getIt<Settings>();
   double screenWidth = MediaQuery.of(context).size.width;
-  double referenceMinWidthWithModifiersOnBar = 370;
+  double referenceMinWidthWithModifiersOnBar = _kReferenceMinBarWidth;
   double barSize = screenWidth / settings.userScalingBars.value;
   if (barSize < referenceMinWidthWithModifiersOnBar) {
     return false;

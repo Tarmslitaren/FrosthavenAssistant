@@ -6,6 +6,8 @@ import '../../Resource/state/game_state.dart';
 
 class CharacterIconWidget extends StatelessWidget {
   static const double _kIconSizeRatio = 0.6;
+  static const int _kShattersongColor1 = 0xff759a9d;
+  static const int _kShattersongColor2 = 0xffa0a8ac;
   static const double _kShadowAlpha = 0.6;
   static const double _kShadowSpread = 4.0;
   static const double _kMarginLeft = 26.0;
@@ -51,9 +53,9 @@ class CharacterIconWidget extends StatelessWidget {
                   return LinearGradient(
                       transform: const GradientRotation(pi * -0.6),
                       colors: [
-                        Color(int.parse("ff759a9d", radix: 16)),
-                        Color(int.parse("ffa0a8ac", radix: 16)),
-                        Color(int.parse("ff759a9d", radix: 16)),
+                        Color(_kShattersongColor1),
+                        Color(_kShattersongColor2),
+                        Color(_kShattersongColor1),
                       ],
                       stops: const [
                         CharacterIconWidget._kShaderStop1,
@@ -70,7 +72,7 @@ class CharacterIconWidget extends StatelessWidget {
               )
             : Image(
                 fit: BoxFit.contain,
-                height: scaledHeight * 0.6,
+                height: scaledHeight * CharacterIconWidget._kIconSizeRatio,
                 color: isCharacter ? character.characterClass.color : null,
                 filterQuality: FilterQuality.medium,
                 width: scaledHeight * CharacterIconWidget._kIconSizeRatio,

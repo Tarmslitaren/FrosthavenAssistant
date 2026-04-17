@@ -38,6 +38,11 @@ enum Condition {
   character3,
   character4;
 
+  static const int _kChar1Index = 0;
+  static const int _kChar2Index = 1;
+  static const int _kChar3Index = 2;
+  static const int _kChar4Index = 3;
+
   String _getCharacterName(int index) {
     List<Character> characters = GameMethods.getCurrentCharacters();
     characters.sortBy((element) => element.characterClass.name);
@@ -51,13 +56,13 @@ enum Condition {
   String getName() {
     //get current characters, sort by name and add to this
     if (this == Condition.character1) {
-      return _getCharacterName(0);
+      return _getCharacterName(_kChar1Index);
     } else if (this == Condition.character2) {
-      return _getCharacterName(1);
+      return _getCharacterName(_kChar2Index);
     } else if (this == Condition.character3) {
-      return _getCharacterName(2);
+      return _getCharacterName(_kChar3Index);
     } else if (this == Condition.character4) {
-      return _getCharacterName(3);
+      return _getCharacterName(_kChar4Index);
     }
 
     return name;

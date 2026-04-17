@@ -121,6 +121,11 @@ class PerkListTile extends StatefulWidget {
 }
 
 class PerkListTileState extends State<PerkListTile> {
+  static const int _kDigit1 = 1;
+  static const int _kDigit2 = 2;
+  static const int _kDigit3 = 3;
+  static const int _kDigit4 = 4;
+
   late final GameState _gameState;
 
   @override
@@ -210,16 +215,16 @@ class PerkListTileState extends State<PerkListTile> {
   }
 
   String _nrTextFromDigit(int digit) {
-    if (digit == 1) {
+    if (digit == _kDigit1) {
       return "one ";
     }
-    if (digit == 2) {
+    if (digit == _kDigit2) {
       return "two ";
     }
-    if (digit == 3) {
+    if (digit == _kDigit3) {
       return "three ";
     }
-    if (digit == 4) {
+    if (digit == _kDigit4) {
       return "four ";
     }
     return "";
