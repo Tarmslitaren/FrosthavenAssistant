@@ -7,6 +7,11 @@ import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 
 class SectionButton extends StatelessWidget {
+  static const double _kButtonWidth = 55.0;
+  static const double _kButtonHeight = 25.0;
+  static const double _kElevation = 4.0;
+  static const double _kTextScale = 0.8;
+
   final String data;
   // injected for testing
   final GameState? gameState;
@@ -29,9 +34,9 @@ class SectionButton extends StatelessWidget {
               padding: EdgeInsets.zero,
               foregroundColor: Colors.black,
               disabledBackgroundColor: Colors.blueGrey,
-              fixedSize: Size(55 * scale, 25 * scale),
+              fixedSize: Size(_kButtonWidth * scale, _kButtonHeight * scale),
               backgroundColor: Colors.white70,
-              elevation: 4,
+              elevation: _kElevation,
             ),
             onPressed: !gameState.scenarioSectionsAdded.contains(data)
                 ? () {
@@ -41,7 +46,7 @@ class SectionButton extends StatelessWidget {
                 : null,
             child: Text(
               data.split(" ").first,
-              style: getTitleTextStyle(scale * 0.8, forceBlack: true),
+              style: getTitleTextStyle(scale * _kTextScale, forceBlack: true),
               maxLines: 1,
             ),
           ));

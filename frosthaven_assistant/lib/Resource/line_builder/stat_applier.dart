@@ -9,6 +9,12 @@ import '../stat_calculator.dart';
 import '../state/game_state.dart';
 
 class StatApplier {
+  static const int _kLookback2 = 2;
+  static const int _kMinFormulaLength = 1;
+  static const int _kMinFormulaLengthLong = 2;
+  static const int _kTokenEndOffset = 2;
+  static const int _kRangeZero = 0;
+  static const int _kResultFloor = 0;
   static List<String> applyMonsterStats(final String lineInput,
       String sizeToken, Monster monster, bool forceShowAll,
       [Settings? settings]) {
@@ -89,7 +95,7 @@ class StatApplier {
               i = j - 1; //restore any skipped (
               endIndex = endIndex - 1;
               formula = formula.substring(0, formula.length - 1);
-              if (i > 1 && lineInput[i - 2] == ' ') {
+              if (i > _kMinFormulaLength && lineInput[i - _kLookback2] == ' ') {
                 i = j - 1; //restore any skipped whitespace
                 endIndex = endIndex - 1;
               }
@@ -97,7 +103,7 @@ class StatApplier {
             break;
           }
         }
-        if (formula.length > 1 && lastToken.isNotEmpty || formula.length > 2) {
+        if (formula.length > _kMinFormulaLength && lastToken.isNotEmpty || formula.length > _kMinFormulaLengthLong) {
           //this disallows a single digit or C,L. single C or L could be part of regular text
           //for a formula to work (outside of plain C or L) it must either be modifying a token value or be 3+ chars long
 
@@ -167,7 +173,7 @@ class StatApplier {
             String token = item.substring(1, i);
             int number = 0;
             if (i != item.length - 1) {
-              for (int j = i + 2; j < item.length; j++) {
+              for (int j = i + _kTokenEndOffset; j < item.length; j++) {
                 if (item[j] == ' ' || j == item.length - 1) {
                   //need to find end of nr and ignore the rest
                   String nr = item.substring(i + 1, j + 1);
@@ -262,7 +268,7 @@ class StatApplier {
         }
       }
     } else if (lastToken == "range") {
-      if (normal?.range != 0) {
+      if (normal?.range != _kRangeZero) {
         normalValue = normal!.range;
         if (elite != null) {
           eliteValue = elite.range;
@@ -336,8 +342,8 @@ class StatApplier {
 
       int eliteResult =
           StatCalculator.calculateFormula("$formula+$eliteValue")!;
-      if (eliteResult < 0) {
-        eliteResult = 0;
+      if (eliteResult < _kResultFloor) {
+        eliteResult = _kResultFloor;
       }
       String eliteString = "!$sizeModifier£$eliteResult";
       for (var item in eTokens) {

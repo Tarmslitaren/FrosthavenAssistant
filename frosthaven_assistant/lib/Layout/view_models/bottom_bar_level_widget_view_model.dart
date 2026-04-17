@@ -6,6 +6,11 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class BottomBarLevelWidgetViewModel {
+  static const double _kFontSize = 14.0;
+  static const double _kShadowOffset = 1.0;
+  static const double _kBlurRadius = 1.0;
+  static const double _kWhiteBlurSmall = 3.0;
+  static const double _kWhiteBlurLarge = 8.0;
   BottomBarLevelWidgetViewModel({GameState? gameState, Settings? settings})
       : _gameState = gameState ?? getIt<GameState>(),
         _settings = settings ?? getIt<Settings>();
@@ -17,7 +22,7 @@ class BottomBarLevelWidgetViewModel {
   ValueListenable<int> get commandIndex => _gameState.commandIndex;
 
   double get userScalingBars => _settings.userScalingBars.value;
-  double get fontHeight => 14 * userScalingBars;
+  double get fontHeight => _kFontSize * userScalingBars;
 
   String get formattedScenarioName {
     final s = _gameState.scenario.value;
@@ -31,11 +36,11 @@ class BottomBarLevelWidgetViewModel {
 
   TextStyle textStyle(double scaling) {
     final darkMode = _settings.darkMode.value;
-    final fontH = 14 * scaling;
+    final fontH = _kFontSize * scaling;
     final shadow = Shadow(
-      offset: Offset(1 * scaling, 1 * scaling),
+      offset: Offset(_kShadowOffset * scaling, _kShadowOffset * scaling),
       color: Colors.black87,
-      blurRadius: 1 * scaling,
+      blurRadius: _kBlurRadius * scaling,
     );
     return TextStyle(
         color: darkMode ? Colors.white : Colors.black,
@@ -45,12 +50,12 @@ class BottomBarLevelWidgetViewModel {
             ? [shadow]
             : [
                 Shadow(
-                    offset: Offset(1.0 * scaling, 1.0 * scaling),
-                    blurRadius: 3.0 * scaling,
+                    offset: Offset(_kShadowOffset * scaling, _kShadowOffset * scaling),
+                    blurRadius: _kWhiteBlurSmall * scaling,
                     color: Colors.white),
                 Shadow(
-                    offset: Offset(1.0 * scaling, 1.0 * scaling),
-                    blurRadius: 8.0 * scaling,
+                    offset: Offset(_kShadowOffset * scaling, _kShadowOffset * scaling),
+                    blurRadius: _kWhiteBlurLarge * scaling,
                     color: Colors.white),
               ]);
   }

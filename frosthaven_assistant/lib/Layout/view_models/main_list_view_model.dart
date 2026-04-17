@@ -12,6 +12,9 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../monster_box.dart';
 
 class MainListViewModel {
+  static const double _kCharacterHeight = 60.0;
+  static const double _kMonsterHeaderHeight = 96.0;
+  static const double _kRowHeight = 32.0;
   MainListViewModel(
       {GameState? gameState, GameData? gameData, Settings? settings})
       : _gameState = gameState ?? getIt<GameState>(),
@@ -48,7 +51,7 @@ class MainListViewModel {
     for (int i = 0; i < _gameState.currentList.length; i++) {
       final item = _gameState.currentList[i];
       if (item is Character) {
-        listHeight += 60;
+        listHeight += _kCharacterHeight;
         final summonList = item.characterState.summonList;
         if (summonList.isNotEmpty) {
           double listWidth = 0;
@@ -56,18 +59,18 @@ class MainListViewModel {
             listWidth += MonsterBox.getWidth(scale, monsterInstance);
           }
           double rows = listWidth / mainListWidth;
-          listHeight += 32 * (rows.ceil());
+          listHeight += _kRowHeight * (rows.ceil());
         }
       }
       if (item is Monster) {
-        listHeight += 96;
+        listHeight += _kMonsterHeaderHeight;
         if (item.monsterInstances.isNotEmpty) {
           double listWidth = 0;
           for (var monsterInstance in item.monsterInstances) {
             listWidth += MonsterBox.getWidth(scale, monsterInstance);
           }
           double rows = listWidth / mainListWidth;
-          listHeight += 32 * rows.ceil();
+          listHeight += _kRowHeight * rows.ceil();
         }
       }
       widgetPositions.add(listHeight * scale);
