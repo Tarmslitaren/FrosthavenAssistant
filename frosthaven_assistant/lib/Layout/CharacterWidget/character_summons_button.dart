@@ -5,6 +5,9 @@ import '../../Resource/ui_utils.dart';
 import '../menus/add_summon_menu.dart';
 
 class CharacterSummonsButton extends StatelessWidget {
+  static const double _kButtonSize = 50.0;
+  static const double _kIconSize = 30.0;
+
   const CharacterSummonsButton(
       {super.key, required this.scale, required this.character});
   final double scale;
@@ -13,12 +16,12 @@ class CharacterSummonsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 50 * scale,
-        height: 50 * scale,
+        width: CharacterSummonsButton._kButtonSize * scale,
+        height: CharacterSummonsButton._kButtonSize * scale,
         child: IconButton(
           padding: EdgeInsets.zero,
           icon: Image.asset(
-              height: 30 * scale,
+              height: CharacterSummonsButton._kIconSize * scale,
               fit: BoxFit.fitHeight,
               color: Colors.white24,
               colorBlendMode: BlendMode.modulate,

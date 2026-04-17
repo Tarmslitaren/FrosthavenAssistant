@@ -5,6 +5,8 @@ import '../../Resource/game_methods.dart';
 import '../../Resource/state/game_state.dart';
 
 class CharacterLevelWidget extends StatelessWidget {
+  static const double _kImageHeight = 12.0;
+
   const CharacterLevelWidget(
       {super.key,
       required this.character,
@@ -19,7 +21,7 @@ class CharacterLevelWidget extends StatelessWidget {
     return Row(
       children: [
         Image(
-          height: 12.0 * scale,
+          height: CharacterLevelWidget._kImageHeight * scale,
           image: const AssetImage("assets/images/psd/level.png"),
         ),
         ValueListenableBuilder<int>(

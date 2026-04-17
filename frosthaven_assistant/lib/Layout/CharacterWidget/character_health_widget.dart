@@ -10,6 +10,13 @@ import '../health_wheel_controller.dart';
 import '../view_models/character_health_widget_view_model.dart';
 
 class CharacterHealthWidget extends StatelessWidget {
+  static const double _kMarginTop = 10.0;
+  static const double _kMarginLeft = 10.0;
+  static const double _kFontSizeFH = 15.0;
+  static const double _kFontSizeOrig = 16.0;
+  static const double _kConditionIconSize = 16.0;
+  static const double _kBloodHeightRatio = 0.2;
+
   const CharacterHealthWidget(
       {super.key,
       required this.character,
@@ -36,7 +43,7 @@ class CharacterHealthWidget extends StatelessWidget {
         //align children to the left
         children: [
           Container(
-            margin: EdgeInsets.only(top: 10 * scale, left: 10 * scale),
+            margin: EdgeInsets.only(top: CharacterHealthWidget._kMarginTop * scale, left: CharacterHealthWidget._kMarginLeft * scale),
             child: ValueListenableBuilder<String>(
                 valueListenable: character.characterState.display,
                 builder: (context, value, child) {
@@ -47,7 +54,7 @@ class CharacterHealthWidget extends StatelessWidget {
                             vm.frosthavenStyle ? 'GermaniaOne' : 'Pirata',
                         color: Colors.white,
                         fontSize:
-                            vm.frosthavenStyle ? 15 * scale : 16 * scale,
+                            vm.frosthavenStyle ? CharacterHealthWidget._kFontSizeFH * scale : CharacterHealthWidget._kFontSizeOrig * scale,
                         shadows: [shadow]),
                   );
                 }),
@@ -56,7 +63,7 @@ class CharacterHealthWidget extends StatelessWidget {
               valueListenable: vm.commandIndex,
               builder: (context, value, child) {
                 return Container(
-                    margin: EdgeInsets.only(left: 10 * scale),
+                    margin: EdgeInsets.only(left: CharacterHealthWidget._kMarginLeft * scale),
                     child: vm.enableHealthWheel
                         ? HealthWheelController(
                             figureId: character.id,
@@ -94,7 +101,7 @@ class CharacterHealthInnerWidget extends StatelessWidget {
     for (int i = conditions.length; i < characterConditions.length; i++) {
       conditions.add(ConditionIcon(
         characterConditions[i],
-        16,
+        CharacterHealthWidget._kConditionIconSize,
         character,
         character.characterState,
         scale: scale,
@@ -111,7 +118,7 @@ class CharacterHealthInnerWidget extends StatelessWidget {
     return Row(children: [
       Image(
         fit: BoxFit.contain,
-        height: scaledHeight * 0.2,
+        height: scaledHeight * CharacterHealthWidget._kBloodHeightRatio,
         image: const AssetImage("assets/images/blood.png"),
       ),
       Text(

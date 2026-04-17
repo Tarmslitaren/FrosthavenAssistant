@@ -12,6 +12,11 @@ import '../view_models/character_view_model.dart';
 import 'character_widget_internal.dart';
 
 class CharacterWidget extends StatefulWidget {
+  static const int _kAnimationDurationMs = 300;
+  static const double _kSpacing = 2.0;
+  static const double _kElevation = 8.0;
+  static const double _kMarginH = 3.2;
+
   const CharacterWidget(
       {required this.characterId,
       super.key,
@@ -58,7 +63,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
         (index) => AnimatedSize(
               //not really needed now
               key: Key(index.toString()),
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: CharacterWidget._kAnimationDurationMs),
               child: MonsterBox(
                   key: Key(summonList[index].getId()),
                   figureId: summonList[index].name +
@@ -71,8 +76,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
             ));
     lastList = summonList.toList();
     return Wrap(
-      runSpacing: 2.0 * scale,
-      spacing: 2.0 * scale,
+      runSpacing: CharacterWidget._kSpacing * scale,
+      spacing: CharacterWidget._kSpacing * scale,
       children: generatedChildren,
     );
   }
@@ -96,7 +101,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                   color:
                       vm.isCurrentTurn ? Colors.tealAccent : Colors.transparent,
                   shadowColor: Colors.black,
-                  elevation: 8,
+                  elevation: CharacterWidget._kElevation,
                   clipper:
                       const ShapeBorderClipper(shape: RoundedRectangleBorder()),
                   child: CharacterWidgetInternal(
@@ -109,8 +114,8 @@ class CharacterWidgetState extends State<CharacterWidget> {
               return Column(mainAxisSize: MainAxisSize.max, children: [
                 Container(
                   margin:
-                      EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
-                  width: getMainListWidth(context) - 6.4 * scale,
+                      EdgeInsets.only(left: CharacterWidget._kMarginH * scale, right: CharacterWidget._kMarginH * scale),
+                  width: getMainListWidth(context) - CharacterWidget._kMarginH * 2 * scale,
                   child: ValueListenableBuilder<BuiltList<MonsterInstance>>(
                       valueListenable: vm.summonListNotifier,
                       builder: (context, value, child) {

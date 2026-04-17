@@ -7,6 +7,8 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class CharacterXPWidget extends StatelessWidget {
+  static const double _kImageHeight = 16.0;
+
   const CharacterXPWidget(
       {super.key,
       required this.character,
@@ -32,7 +34,7 @@ class CharacterXPWidget extends StatelessWidget {
         child: Row(
           children: [
             Image(
-              height: 16 * scale,
+              height: CharacterXPWidget._kImageHeight * scale,
               color: Colors.blue,
               colorBlendMode: BlendMode.modulate,
               image: const AssetImage("assets/images/psd/xp.png"),

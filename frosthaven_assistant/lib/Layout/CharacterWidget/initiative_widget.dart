@@ -9,6 +9,16 @@ import '../menus/numpad_menu.dart';
 import '../view_models/initiative_widget_view_model.dart';
 
 class InitiativeWidget extends StatelessWidget {
+  static const double _kMarginLeft = 10.0;
+  static const double _kMarginTopDivisor = 6.0;
+  static const double _kInitImageHeightRatio = 0.1;
+  static const double _kTextFieldMarginLeft = 11.0;
+  static const double _kTextFieldTopRatio = 0.11;
+  static const double _kTextFieldHeightRatio = 0.5;
+  static const double _kTextFieldWidth = 25.0;
+  static const int _kInitMaxLength = 2;
+  static const double _kDisplayHeight = 33.0;
+
   const InitiativeWidget(
       {super.key,
       required this.scale,
@@ -37,9 +47,9 @@ class InitiativeWidget extends StatelessWidget {
         gameState: gameState, settings: settings);
     return Column(children: [
       Container(
-        margin: EdgeInsets.only(top: scaledHeight / 6, left: 10 * scale),
+        margin: EdgeInsets.only(top: scaledHeight / InitiativeWidget._kMarginTopDivisor, left: InitiativeWidget._kMarginLeft * scale),
         child: Image(
-          height: scaledHeight * 0.1,
+          height: scaledHeight * InitiativeWidget._kInitImageHeightRatio,
           image: const AssetImage("assets/images/init.png"),
         ),
       ),
@@ -62,9 +72,9 @@ class InitiativeWidget extends StatelessWidget {
             if (vm.isChooseInitiative && vm.isAlive) {
               return Container(
                 margin:
-                    EdgeInsets.only(left: 11 * scale, top: scaledHeight * 0.11),
-                height: scaledHeight * 0.5,
-                width: 25 * scale,
+                    EdgeInsets.only(left: InitiativeWidget._kTextFieldMarginLeft * scale, top: scaledHeight * InitiativeWidget._kTextFieldTopRatio),
+                height: scaledHeight * InitiativeWidget._kTextFieldHeightRatio,
+                width: InitiativeWidget._kTextFieldWidth * scale,
                 padding: EdgeInsets.zero,
                 alignment: Alignment.topCenter,
                 child: TextField(
@@ -76,18 +86,18 @@ class InitiativeWidget extends StatelessWidget {
                             context,
                             NumpadMenu(
                               controller: initTextFieldController,
-                              maxLength: 2,
+                              maxLength: InitiativeWidget._kInitMaxLength,
                             ));
                       }
                     },
                     onChanged: (String str) {
-                      if (str.length == 2) {
+                      if (str.length == InitiativeWidget._kInitMaxLength) {
                         FocusManager.instance.primaryFocus?.unfocus();
                       }
                     },
                     textAlign: TextAlign.center,
                     cursorColor: Colors.white,
-                    maxLength: 2,
+                    maxLength: InitiativeWidget._kInitMaxLength,
                     style: TextStyle(
                         height: 1,
                         fontFamily: vm.fontFamily,
@@ -117,9 +127,9 @@ class InitiativeWidget extends StatelessWidget {
                 initTextFieldController.clear();
               }
               return Container(
-                  height: 33 * scale,
-                  width: 25 * scale,
-                  margin: EdgeInsets.only(left: 10 * scale),
+                  height: InitiativeWidget._kDisplayHeight * scale,
+                  width: InitiativeWidget._kTextFieldWidth * scale,
+                  margin: EdgeInsets.only(left: InitiativeWidget._kMarginLeft * scale),
                   child: Text(
                     vm.initiativeDisplayText(initiative),
                     textAlign: TextAlign.center,

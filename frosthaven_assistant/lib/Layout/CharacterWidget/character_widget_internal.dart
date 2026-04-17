@@ -16,6 +16,18 @@ import 'character_xp_widget.dart';
 import 'initiative_widget.dart';
 
 class CharacterWidgetInternal extends StatefulWidget {
+  static const double _kScaledHeight = 60.0;
+  static const double _kShadowOffset = 1.0;
+  static const double _kShadowBlur = 1.0;
+  static const double _kXPTop = 10.0;
+  static const double _kXPLeft = 314.0;
+  static const double _kLevelTop = 28.0;
+  static const double _kLevelLeft = 316.0;
+  static const double _kSummonsRight = 19.0;
+  static const double _kSummonsTop = 4.0;
+  static const double _kInkwellWidth = 70.0;
+  static const int _kInitMaxLength = 2;
+
   const CharacterWidgetInternal(
       {super.key,
       required this.character,
@@ -89,18 +101,18 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double scaledHeight = 60 * scale;
+    double scaledHeight = CharacterWidgetInternal._kScaledHeight * scale;
 
     var shadow = Shadow(
-      offset: Offset(1 * scale, 1 * scale),
+      offset: Offset(CharacterWidgetInternal._kShadowOffset * scale, CharacterWidgetInternal._kShadowOffset * scale),
       color: Colors.black87,
-      blurRadius: 1 * scale,
+      blurRadius: CharacterWidgetInternal._kShadowBlur * scale,
     );
 
     final character = widget.character;
     return SizedBox(
         width: getMainListWidth(context),
-        height: 60 * scale,
+        height: CharacterWidgetInternal._kScaledHeight * scale,
         child: Stack(
           children: [
             CharacterBackgroundWidget(
@@ -133,14 +145,14 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
             ),
             if (isCharacter)
               Positioned(
-                  top: 10 * scale,
-                  left: 314 * scale,
+                  top: CharacterWidgetInternal._kXPTop * scale,
+                  left: CharacterWidgetInternal._kXPLeft * scale,
                   child: CharacterXPWidget(
                       character: character, scale: scale, shadow: shadow)),
             if (isCharacter)
               Positioned(
-                  top: 28 * scale,
-                  left: 316 * scale,
+                  top: CharacterWidgetInternal._kLevelTop * scale,
+                  left: CharacterWidgetInternal._kLevelLeft * scale,
                   child: CharacterLevelWidget(
                     character: character,
                     scale: scale,
@@ -148,8 +160,8 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
                   )),
             if (isCharacter)
               Positioned(
-                right: 19 * scale,
-                top: 4 * scale,
+                right: CharacterWidgetInternal._kSummonsRight * scale,
+                top: CharacterWidgetInternal._kSummonsTop * scale,
                 child:
                     CharacterSummonsButton(scale: scale, character: character),
               ),
@@ -162,7 +174,7 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
                             context,
                             NumpadMenu(
                               controller: _initTextFieldController,
-                              maxLength: 2,
+                              maxLength: CharacterWidgetInternal._kInitMaxLength,
                             ));
                       } else {
                         _focusNode.requestFocus();
@@ -172,8 +184,8 @@ class CharacterInternalWidgetState extends State<CharacterWidgetInternal> {
                     }
                   },
                   child: SizedBox(
-                    height: 60 * scale,
-                    width: 70 * scale,
+                    height: CharacterWidgetInternal._kScaledHeight * scale,
+                    width: CharacterWidgetInternal._kInkwellWidth * scale,
                   )),
           ],
         ));
