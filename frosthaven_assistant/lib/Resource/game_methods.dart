@@ -236,7 +236,7 @@ class GameMethods {
     for (final item in perk.add) {
       if (item.startsWith("perks/")) {
         String id = "P$index";
-        if (perk.add.last != perk.add.first && item == perk.add.last) {
+        if (perk.add.length >= 2 && item == perk.add.last) {
           id += "-2";
         }
         if (deck.hasCard(id)) {
@@ -253,11 +253,8 @@ class GameMethods {
   static String perkGfxIdToCardId(String gfx, PerkModel perk, int index) {
     if (gfx.startsWith("perks/")) {
       String id = "P$index";
-      final last = perk.add.last;
-      if (perk.add.first != last) {
-        if (gfx == last) {
-          id += "-2";
-        }
+      if (perk.add.length >= 2 && gfx == perk.add.last) {
+        id += "-2";
       }
       return id;
     }
