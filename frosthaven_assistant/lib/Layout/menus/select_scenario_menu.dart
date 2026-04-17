@@ -29,6 +29,14 @@ class SelectScenarioMenu extends StatefulWidget {
 }
 
 class SelectScenarioMenuState extends State<SelectScenarioMenu> {
+  static const int _kSoloNameIndex = 0;
+  static const int _kSoloTextIndex = 1;
+  static const double _kIconSize = 30.0;
+  static const double _kCardMargin = 2.0;
+  static const double _kSearchPadding = 10.0;
+  static const int _kNumpadMaxLength = 3;
+  static const double _kTopSpacing = 20.0;
+
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   late final GameState _gameState;
@@ -198,10 +206,10 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     List<String> strings = name.split(':');
     strings[0] = strings.first.replaceFirst(" ", "Å");
     String nameAndCampaign = strings.first.split("Å")[1];
-    String characterName = nameAndCampaign.split("/")[0];
-    String edition = nameAndCampaign.split("/")[1];
+    String characterName = nameAndCampaign.split("/")[_kSoloNameIndex];
+    String edition = nameAndCampaign.split("/")[_kSoloTextIndex];
 
-    String text = strings[1];
+    String text = strings[_kSoloTextIndex];
     for (String key in _gameData.modelData.value.keys) {
       for (CharacterClass character
           in _gameData.modelData.value[key]!.characters) {
@@ -217,8 +225,8 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
 
     return ListTile(
       leading: Image(
-        height: 30,
-        width: 30,
+        height: _kIconSize,
+        width: _kIconSize,
         fit: BoxFit.scaleDown,
         image: AssetImage("assets/images/class-icons/$characterName.png"),
       ),
@@ -277,12 +285,12 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
     return Container(
         constraints: const BoxConstraints(maxWidth: 400),
         child: Card(
-            margin: const EdgeInsets.all(2),
+            margin: const EdgeInsets.all(_kCardMargin),
             child: Stack(children: [
               Column(
                 children: [
                   const SizedBox(
-                    height: 20,
+                    height: _kTopSpacing,
                   ),
                   Column(children: [
                     const Text("Set Scenario", style: kTitleStyle),
@@ -294,7 +302,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                     ),
                   ]),
                   Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    margin: const EdgeInsets.only(left: _kSearchPadding, right: _kSearchPadding),
                     child: KeyboardListener(
                         //needed to trigger onEditingComplete on enter
                         //TODO: add this to the other menus
@@ -309,7 +317,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                                   context,
                                   NumpadMenu(
                                       controller: _controller,
-                                      maxLength: 3,
+                                      maxLength: _kNumpadMaxLength,
                                       onChange: (String value) {
                                         _runFilter(value);
                                       }));
@@ -329,7 +337,7 @@ class SelectScenarioMenuState extends State<SelectScenarioMenu> {
                         )),
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: _kTopSpacing,
                   ),
                   Expanded(
                     child: _foundScenarios.isNotEmpty

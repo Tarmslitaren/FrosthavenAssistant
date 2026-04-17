@@ -21,6 +21,12 @@ class SaveCharacterMenu extends StatefulWidget {
 }
 
 class SaveCharacterMenuState extends State<SaveCharacterMenu> {
+  static const double _kMaxWidth = 400.0;
+  static const double _kCardMargin = 2.0;
+  static const double _kHeaderHeight = 40.0;
+  static const double _kHeaderPadding = 10.0;
+  static const double _kIconSize = 36.0;
+
   // This list holds the data for the list view
   final List<String> _saves = [];
   late final Settings _settings;
@@ -42,15 +48,15 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
   Widget build(BuildContext context) {
     //edge insets if width not too small
     return Container(
-        constraints: const BoxConstraints(maxWidth: 400),
+        constraints: const BoxConstraints(maxWidth: _kMaxWidth),
         child: Card(
-            margin: const EdgeInsets.all(2),
+            margin: const EdgeInsets.all(_kCardMargin),
             child: Stack(children: [
               Column(
                 children: [
                   Container(
-                      height: 40,
-                      margin: const EdgeInsets.only(left: 10, right: 10),
+                      height: _kHeaderHeight,
+                      margin: const EdgeInsets.only(left: _kHeaderPadding, right: _kHeaderPadding),
                       child: Text('Load, Save or Delete Characters.',
                           style: getTitleTextStyle(1, forceBlack: true))),
                   const Text(
@@ -116,8 +122,8 @@ class SaveCharacterMenuState extends State<SaveCharacterMenu> {
                                 itemCount: _saves.length,
                                 itemBuilder: (context, index) => ListTile(
                                   leading: SizedBox(
-                                      height: 36,
-                                      width: 36,
+                                      height: _kIconSize,
+                                      width: _kIconSize,
                                       child: Image.asset(
                                           "assets/images/class-icons/${characterId[index]}.png")),
                                   //should show icon

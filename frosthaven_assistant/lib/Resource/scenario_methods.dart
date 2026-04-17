@@ -2,6 +2,12 @@ part of 'state/game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class ScenarioMethods {
+  static const int _kMinLevel = 0;
+  static const int _kMaxLevel = 7;
+  static const int _kRound1 = 1;
+  static const int _kTimerAlways = -1;
+  static const int _kRandomSectionCount = 3;
+
   static void setCampaign(_StateModifier _, String campaign, {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     gs._currentCampaign.value = campaign;
@@ -28,7 +34,7 @@ class ScenarioMethods {
   }
 
   static void setLevel(_StateModifier s, int level, String? monsterId, {GameState? gameState}) {
-    assert(level >= 0 && level <= 7);
+    assert(level >= _kMinLevel && level <= _kMaxLevel);
     final gs = gameState ?? getIt<GameState>();
     if (monsterId == null) {
       gs._level.value = level;
@@ -55,8 +61,8 @@ class ScenarioMethods {
       //adjust difficulty
       int newLevel =
           GameMethods.getRecommendedLevel() + gs.difficulty.value;
-      if (newLevel > 7) {
-        newLevel = 7;
+      if (newLevel > _kMaxLevel) {
+        newLevel = _kMaxLevel;
       }
       setLevel(s, newLevel, null);
     }
@@ -257,7 +263,7 @@ class ScenarioMethods {
         if (item.type == "Timer" && item.startOfRound) {
           for (int round in item.list) {
             //minus 1 means always
-            if (round == 1 || round == -1) {
+            if (round == _kRound1 || round == _kTimerAlways) {
               if (initMessage.isNotEmpty) {
                 initMessage += "\n\n${item.note}";
               } else {
@@ -381,7 +387,7 @@ class ScenarioMethods {
       subSections.shuffle();
       //add the random selected to rule.list
       SpecialRule newRule = SpecialRule("RandomSections", "", 0, 0, 0, "",
-          subSections.sublist(0, 3), false, "");
+          subSections.sublist(0, _kRandomSectionCount), false, "");
       specialRules.remove(rule);
       specialRules.add(newRule);
     }
