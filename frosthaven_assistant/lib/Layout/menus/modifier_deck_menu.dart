@@ -39,6 +39,24 @@ import '../counter_button.dart';
 import 'gh2e_faction_amd_card_menu.dart';
 
 class ModifierDeckMenu extends StatefulWidget {
+  static const double _kRevealButtonWidth = 32.0;
+  static const double _kListWidthRatio = 0.3;
+  static const int _kReorderAnimationMs = 400;
+  static const double _kMaxHeightRatio = 0.9;
+  static const int _kMaxBlessCurse = 10;
+  static const int _kMaxRuinmawEmpower = 12;
+  static const int _kMaxVimthreaderGrEmpower = 5;
+  static const int _kMaxLifespeakerEnfeeble = 15;
+  static const double _kHeaderBorderRadius = 4.0;
+  static const double _kHeaderMargin = 2.0;
+  static const double _kFooterHeight = 32.0;
+  static const double _kFooterBottomPos = 4.0;
+  static const double _kNameLeftPos = 20.0;
+  static const double _kItemHeightCount = 12.0;
+  static const double _kItemBaseHeight = 40.0;
+  static const double _kCardScale = 2.5;
+  static const double _kItemMarginMultiplier = 2.0;
+
   const ModifierDeckMenu({
     super.key,
     required this.name,
@@ -78,7 +96,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
       text = nr.toString();
     }
     return SizedBox(
-        width: 32,
+        width: ModifierDeckMenu._kRevealButtonWidth,
         child: TextButton(
           child: Text(text),
           onPressed: () {
@@ -91,7 +109,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
   Widget buildPartyButton(int nr) {
     String text = nr.toString();
     return SizedBox(
-        width: 32,
+        width: ModifierDeckMenu._kRevealButtonWidth,
         child: TextButton(
           child: Text(text),
           onPressed: () {
@@ -160,13 +178,13 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
           //other styles
         ),
         child: SizedBox(
-          width: screenWidth * 0.3,
+          width: screenWidth * ModifierDeckMenu._kListWidthRatio,
           child: reorderable
               ? ReorderableColumn(
                   needsLongPressDraggable: true,
                   scrollController: scrollController,
-                  scrollAnimationDuration: const Duration(milliseconds: 400),
-                  reorderAnimationDuration: const Duration(milliseconds: 400),
+                  scrollAnimationDuration: const Duration(milliseconds: ModifierDeckMenu._kReorderAnimationMs),
+                  reorderAnimationDuration: const Duration(milliseconds: ModifierDeckMenu._kReorderAnimationMs),
                   buildDraggableFeedback: defaultBuildDraggableFeedback,
                   onReorder: (index, dropIndex) {
                     setState(() {
@@ -287,19 +305,19 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
           return Container(
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
-                  maxHeight: screenSize.height * 0.9),
+                  maxHeight: screenSize.height * ModifierDeckMenu._kMaxHeightRatio),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [
                     Column(mainAxisSize: MainAxisSize.max, children: [
                       Container(
                           width: screenSize.width, //need some width to fill out
-                          margin: const EdgeInsets.all(2),
+                          margin: const EdgeInsets.all(ModifierDeckMenu._kHeaderMargin),
                           decoration: const BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(4),
-                                  topRight: Radius.circular(4))),
+                                  topLeft: Radius.circular(ModifierDeckMenu._kHeaderBorderRadius),
+                                  topRight: Radius.circular(ModifierDeckMenu._kHeaderBorderRadius))),
                           child: Wrap(
                               crossAxisAlignment: WrapCrossAlignment.center,
                               runSpacing: 0,
@@ -542,7 +560,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     notifier: deck.getRemovable("bless"),
                                     command: ChangeBlessCommand.deck(deck,
                                         gameState: _gameState),
-                                    maxValue: 10,
+                                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
                                     image: "assets/images/abilities/bless.png",
                                     showTotalValue: true,
                                     color: Colors.white,
@@ -553,7 +571,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                     notifier: deck.getRemovable("curse"),
                                     command: ChangeCurseCommand.deck(deck,
                                         gameState: _gameState),
-                                    maxValue: 10,
+                                    maxValue: ModifierDeckMenu._kMaxBlessCurse,
                                     image: "assets/images/abilities/curse.png",
                                     showTotalValue: true,
                                     color: Colors.white,
@@ -567,7 +585,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "in-enfeeble",
                                           gameState: _gameState),
-                                      maxValue: 10,
+                                      maxValue: ModifierDeckMenu._kMaxBlessCurse,
                                       image:
                                           "assets/images/abilities/enfeeble_old.png",
                                       extraImage: hasMoreThanOneEnfeeble
@@ -585,7 +603,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "in-empower",
                                           gameState: _gameState),
-                                      maxValue: 10,
+                                      maxValue: ModifierDeckMenu._kMaxBlessCurse,
                                       image:
                                           "assets/images/abilities/empower_old.png",
                                       extraImage: hasMoreThanOneEmpower
@@ -602,7 +620,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "rm-empower",
                                           gameState: _gameState),
-                                      maxValue: 12,
+                                      maxValue: ModifierDeckMenu._kMaxRuinmawEmpower,
                                       image:
                                           "assets/images/abilities/empower_old.png",
                                       extraImage: hasMoreThanOneEmpower
@@ -620,7 +638,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "vi-empower",
                                           gameState: _gameState),
-                                      maxValue: 10,
+                                      maxValue: ModifierDeckMenu._kMaxBlessCurse,
                                       image:
                                           "assets/images/abilities/empower.png",
                                       extraImage: hasMoreThanOneEmpower
@@ -639,7 +657,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEmpowerCommand.deck(
                                           deck, "vi-gr-empower",
                                           gameState: _gameState),
-                                      maxValue: 5,
+                                      maxValue: ModifierDeckMenu._kMaxVimthreaderGrEmpower,
                                       image:
                                           "assets/images/abilities/greater-empower.png",
                                       showTotalValue: true,
@@ -654,7 +672,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "vi-enfeeble",
                                           gameState: _gameState),
-                                      maxValue: 10,
+                                      maxValue: ModifierDeckMenu._kMaxBlessCurse,
                                       image:
                                           "assets/images/abilities/enfeeble.png",
                                       extraImage: hasMoreThanOneEnfeeble
@@ -672,7 +690,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "vi-gr-enfeeble",
                                           gameState: _gameState),
-                                      maxValue: 5,
+                                      maxValue: ModifierDeckMenu._kMaxVimthreaderGrEmpower,
                                       image:
                                           "assets/images/abilities/greater-enfeeble.png",
                                       showTotalValue: true,
@@ -689,7 +707,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       command: ChangeEnfeebleCommand.deck(
                                           deck, "li-enfeeble",
                                           gameState: _gameState),
-                                      maxValue: 15,
+                                      maxValue: ModifierDeckMenu._kMaxLifespeakerEnfeeble,
                                       image:
                                           "assets/images/abilities/enfeeble.png",
                                       extraImage: hasMoreThanOneEnfeeble
@@ -745,13 +763,13 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                         ],
                       )),
                       Container(
-                        height: 32,
-                        margin: const EdgeInsets.all(2),
+                        height: ModifierDeckMenu._kFooterHeight,
+                        margin: const EdgeInsets.all(ModifierDeckMenu._kHeaderMargin),
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
-                                bottomLeft: Radius.circular(4),
-                                bottomRight: Radius.circular(4))),
+                                bottomLeft: Radius.circular(ModifierDeckMenu._kHeaderBorderRadius),
+                                bottomRight: Radius.circular(ModifierDeckMenu._kHeaderBorderRadius))),
                       ),
                     ]),
                     Positioned(
@@ -768,8 +786,8 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                               Navigator.pop(context);
                             })),
                     Positioned(
-                        bottom: 4,
-                        left: 20,
+                        bottom: ModifierDeckMenu._kFooterBottomPos,
+                        left: ModifierDeckMenu._kNameLeftPos,
                         child: Text(
                           name,
                           style: kButtonLabelStyle,
@@ -793,11 +811,11 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    double scale = max((screenSize.height / (40 * 12)), 1);
+    double scale = max((screenSize.height / (ModifierDeckMenu._kItemBaseHeight * ModifierDeckMenu._kItemHeightCount)), 1);
     final Widget child = revealed
-        ? ModifierCardWidget.buildFront(data, name, scale, 2.5)
+        ? ModifierCardWidget.buildFront(data, name, scale, ModifierDeckMenu._kCardScale)
         : ModifierCardWidget.buildRear(scale, name);
 
-    return Container(margin: EdgeInsets.all(2 * scale), child: child);
+    return Container(margin: EdgeInsets.all(ModifierDeckMenu._kItemMarginMultiplier * scale), child: child);
   }
 }
