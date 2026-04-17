@@ -52,11 +52,13 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   }
 
   void showOverlay(String figureId, double scale, BuildContext context) {
+    final figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
+    if (figure == null) return;
     double dx = context.globalPaintBounds!.topCenter.dx - 100 * scale;
     double dy = context.globalPaintBounds!.topCenter.dy - 40 * scale;
     var selectHealthWheel = SelectHealthWheel(
         key: UniqueKey(),
-        data: GameMethods.getFigure(widget.ownerId, widget.figureId)!,
+        data: figure,
         figureId: figureId,
         ownerId: widget.ownerId,
         delta: wheelDelta,
