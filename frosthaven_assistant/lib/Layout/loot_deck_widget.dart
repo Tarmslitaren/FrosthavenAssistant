@@ -40,6 +40,11 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
   static const double _kDiscardHeight = 57.6666;
   static const double _kDiscardBorderRadius = 5.0;
   static const double _kCardRotationTurns = 15 / 360;
+  static const int _kTransparentBlack = 0x7A000000;
+  static const int _kCenterDivisor = 2;
+  static const int _kDiscardShowThirdMinSize = 2;
+  static const int _kDiscardThirdFromEnd = 3;
+  static const int _kDiscardSecondFromEnd = 2;
 
   late final LootDeckViewModel _vm;
   bool _animationsEnabled = false;
@@ -90,11 +95,11 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     final screenSpaceX = screenSpaceOffset.dx - startXOffset;
 
     final screenSize = MediaQuery.of(context).size;
-    final localScreenWidth = screenSize.width - screenSpaceX * 2;
-    final heightShaveOff = (screenSize.height - screenSpaceY) * 2;
+    final localScreenWidth = screenSize.width - screenSpaceX * _kCenterDivisor;
+    final heightShaveOff = (screenSize.height - screenSpaceY) * _kCenterDivisor;
     final localScreenHeight = screenSize.height - heightShaveOff;
-    final double yOffset = -(localScreenHeight / 2 + height / 2);
-    final double xOffset = localScreenWidth / 2 - width / 2;
+    final double yOffset = -(localScreenHeight / _kCenterDivisor + height / _kCenterDivisor);
+    final double xOffset = localScreenWidth / _kCenterDivisor - width / _kCenterDivisor;
 
     return _LootDrawAnimationWidget(
       key: key,
@@ -167,8 +172,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                       : Container(
                                           width: LootDeckWidgetState._kCardW * userScalingBars,
                                           height: LootDeckWidgetState._kCardH * userScalingBars,
-                                          color: Color(int.parse("7A000000",
-                                              radix: 16))),
+                                          color: Color(_kTransparentBlack)),
                                   Positioned(
                                       bottom: 0,
                                       right: LootDeckWidgetState._kSmallMargin * userScalingBars,
@@ -208,7 +212,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                 child: Stack(children: [
                                   Container(
                                     margin: EdgeInsets.only(
-                                        top: LootDeckWidgetState._kSmallMargin / 2 * userScalingBars),
+                                        top: LootDeckWidgetState._kSmallMargin / LootDeckWidgetState._kCenterDivisor * userScalingBars),
                                     width: LootDeckWidgetState._kDiscardWidth * userScalingBars,
                                     height: LootDeckWidgetState._kDiscardHeight * userScalingBars,
                                     decoration: BoxDecoration(
@@ -216,10 +220,10 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           Radius.circular(LootDeckWidgetState._kDiscardBorderRadius * userScalingBars)),
                                       border: Border.all(color: Colors.white70),
                                       color: Color(
-                                          int.parse("7A000000", radix: 16)),
+                                          _kTransparentBlack),
                                     ),
                                   ),
-                                  discardPileSize > 2
+                                  discardPileSize > LootDeckWidgetState._kDiscardShowThirdMinSize
                                       ? _buildStayAnimation(
                                           RotationTransition(
                                               turns:
@@ -227,7 +231,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                                       LootDeckWidgetState._kCardRotationTurns),
                                               child: LootCardWidget(
                                                 card: discardPileList[
-                                                    discardPileSize - 3],
+                                                    discardPileSize - LootDeckWidgetState._kDiscardThirdFromEnd],
                                                 revealed: true,
                                               )),
                                           userScalingBars)
@@ -240,7 +244,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                                       LootDeckWidgetState._kCardRotationTurns),
                                               child: LootCardWidget(
                                                 card: discardPileList[
-                                                    discardPileSize - 2],
+                                                    discardPileSize - LootDeckWidgetState._kDiscardSecondFromEnd],
                                                 revealed: true,
                                               )),
                                           Key(deck.discardPileSize.toString()),
@@ -291,6 +295,8 @@ class _LootSlideAnimationWidget extends StatefulWidget {
 
 class _LootSlideAnimationWidgetState extends State<_LootSlideAnimationWidget>
     with SingleTickerProviderStateMixin {
+  static const double _kSlideStartAngle = -15.0 * math.pi / 180.0;
+
   late final AnimationController _controller;
   late final Animation<Offset> _translation;
   late final Animation<double> _rotation;
@@ -317,9 +323,9 @@ class _LootSlideAnimationWidgetState extends State<_LootSlideAnimationWidget>
 
     _rotation = TweenSequence<double>([
       TweenSequenceItem(
-          tween: ConstantTween(-15.0 * math.pi / 180.0), weight: 1),
+          tween: ConstantTween(_kSlideStartAngle), weight: 1),
       TweenSequenceItem(
-        tween: Tween(begin: -15.0 * math.pi / 180.0, end: 0.0),
+        tween: Tween(begin: _kSlideStartAngle, end: 0.0),
         weight: 1,
       ),
     ]).animate(_controller);
@@ -379,12 +385,14 @@ class _LootDrawAnimationWidget extends StatefulWidget {
 
 class _LootDrawAnimationWidgetState extends State<_LootDrawAnimationWidget>
     with SingleTickerProviderStateMixin {
+  static const double _maxScale = 4.0;
+  static const int _kAnimWeightPause = 2;
+  static const double _kTwoPI = math.pi * 2;
+
   late final AnimationController _controller;
   late final Animation<Offset> _translation;
   late final Animation<double> _scale;
   late final Animation<double> _rotation;
-
-  static const double _maxScale = 4.0;
 
   @override
   void initState() {
@@ -400,18 +408,18 @@ class _LootDrawAnimationWidgetState extends State<_LootDrawAnimationWidget>
 
     _translation = TweenSequence<Offset>([
       TweenSequenceItem(tween: Tween(begin: start, end: center), weight: 1),
-      TweenSequenceItem(tween: ConstantTween(center), weight: 2),
+      TweenSequenceItem(tween: ConstantTween(center), weight: _kAnimWeightPause),
       TweenSequenceItem(
           tween: Tween(begin: center, end: Offset.zero), weight: 1),
     ]).animate(_controller);
 
     _scale = TweenSequence<double>([
       TweenSequenceItem(tween: Tween(begin: 1.0, end: _maxScale), weight: 1),
-      TweenSequenceItem(tween: ConstantTween(_maxScale), weight: 2),
+      TweenSequenceItem(tween: ConstantTween(_maxScale), weight: _kAnimWeightPause),
       TweenSequenceItem(tween: Tween(begin: _maxScale, end: 1.0), weight: 1),
     ]).animate(_controller);
 
-    _rotation = Tween<double>(begin: math.pi, end: 2 * math.pi).animate(
+    _rotation = Tween<double>(begin: math.pi, end: _kTwoPI).animate(
       CurvedAnimation(
           parent: _controller, curve: const Interval(0.0, 0.25)),
     );
