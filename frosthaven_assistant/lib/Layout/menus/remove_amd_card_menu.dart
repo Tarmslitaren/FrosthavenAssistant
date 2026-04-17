@@ -27,6 +27,13 @@ class RemoveAMDCardMenu extends StatefulWidget {
 }
 
 class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
+  static const double _kDefaultScale = 6.0;
+  static const double _kCardWidthFactor = 7.0;
+  static const double _kCardWidthBase = 58.6666;
+  static const double _kSpacing = 20.0;
+  static const double _kModalWidth = 300.0;
+  static const double _kModalHeight = 180.0;
+
   late final GameState _gameState;
 
   @override
@@ -40,10 +47,10 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
     final deck = GameMethods.getModifierDeck(widget.name, _gameState);
     final card = deck.discardPileContents[widget.index];
     final screenSize = MediaQuery.of(context).size;
-    double scale = 6;
-    final cardWidth = 7 * 58.6666;
+    double scale = _kDefaultScale;
+    final cardWidth = _kCardWidthFactor * _kCardWidthBase;
     if (screenSize.width < cardWidth) {
-      scale = 6 * (screenSize.width / cardWidth);
+      scale = _kDefaultScale * (screenSize.width / cardWidth);
     }
     return Column(
         mainAxisSize: MainAxisSize.min,
@@ -51,14 +58,14 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
         children: [
           ModifierCardWidget.buildFront(card, widget.name, scale, 1),
           const SizedBox(
-            height: 20,
+            height: _kSpacing,
           ),
           ModalBackground(
-              width: 300,
-              height: 180,
+              width: _kModalWidth,
+              height: _kModalHeight,
               child: Column(children: [
                 const SizedBox(
-                  height: 20,
+                  height: _kSpacing,
                 ),
                 TextButton(
                     onPressed: () {
@@ -71,7 +78,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                     child: const Text("Remove card?",
                         textAlign: TextAlign.center, style: kButtonLabelStyle)),
                 const SizedBox(
-                  height: 20,
+                  height: _kSpacing,
                 ),
                 TextButton(
                   onPressed: () {
@@ -87,7 +94,7 @@ class RemoveAMDCardMenuState extends State<RemoveAMDCardMenu> {
                       textAlign: TextAlign.center, style: kButtonLabelStyle),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: _kSpacing,
                 ),
               ]))
         ]);

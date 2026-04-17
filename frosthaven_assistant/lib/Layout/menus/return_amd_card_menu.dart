@@ -26,6 +26,14 @@ class ReturnAMDCardMenu extends StatefulWidget {
 }
 
 class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
+  static const double _kDefaultScale = 6.0;
+  static const double _kCardWidthFactor = 7.0;
+  static const double _kCardWidthBase = 58.6666;
+  static const double _kTopSpacing = 20.0;
+  static const double _kModalWidth = 300.0;
+  static const double _kModalHeight = 120.0;
+  static const double _kInnerSpacing = 35.0;
+
   late final GameState _gameState;
 
   @override
@@ -39,10 +47,10 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
     final deck = GameMethods.getModifierDeck(widget.name, _gameState);
     final card = deck.removedPileContents[widget.index];
     final screenSize = MediaQuery.of(context).size;
-    double scale = 6;
-    final cardWidth = 7 * 58.6666;
+    double scale = _kDefaultScale;
+    final cardWidth = _kCardWidthFactor * _kCardWidthBase;
     if (screenSize.width < cardWidth) {
-      scale = 6 * (screenSize.width / cardWidth);
+      scale = _kDefaultScale * (screenSize.width / cardWidth);
     }
     return Column(
         mainAxisSize: MainAxisSize.min,
@@ -50,14 +58,14 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
         children: [
           ModifierCardWidget.buildFront(card, widget.name, scale, 1),
           const SizedBox(
-            height: 20,
+            height: _kTopSpacing,
           ),
           ModalBackground(
-              width: 300,
-              height: 120,
+              width: _kModalWidth,
+              height: _kModalHeight,
               child: Column(children: [
                 const SizedBox(
-                  height: 35,
+                  height: _kInnerSpacing,
                 ),
                 TextButton(
                     onPressed: () {
@@ -69,7 +77,7 @@ class RemoveAMDCardMenuState extends State<ReturnAMDCardMenu> {
                     child: const Text("Return card to discard pile",
                         textAlign: TextAlign.center, style: kButtonLabelStyle)),
                 const SizedBox(
-                  height: 20,
+                  height: _kTopSpacing,
                 ),
               ]))
         ]);
