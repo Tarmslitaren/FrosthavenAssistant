@@ -13,6 +13,20 @@ class CharacterLootMenu extends StatefulWidget {
 }
 
 class CharacterLootMenuState extends State<CharacterLootMenu> {
+  static const int _kCoinValue3 = 3;
+  static const int _kCoinValue2 = 2;
+  static const double _kIconSize = 30.0;
+  static const double _kContentPaddingLeft = 14.0;
+  static const double _kHorizontalTitleGap = 6.0;
+  static const double _kTrailingPaddingRight = 16.0;
+  static const double _kMaxWidth = 300.0;
+  static const double _kCharIconSpacing = 10.0;
+  static const double _kTopSpacing = 20.0;
+  static const List<String> _kLootNames = [
+    "coin", "hide", "lumber", "metal", "arrowvine", "axenut",
+    "corpsecap", "flamefruit", "rockroot", "snowthistle",
+  ];
+
   late final GameState _gameState;
 
   @override
@@ -27,9 +41,9 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
       if (item.owner == characterId && item.gfx.contains(lootName)) {
         if (lootName == "coin") {
           if (item.gfx.endsWith("3")) {
-            value += 3;
+            value += _kCoinValue3;
           } else if (item.gfx.endsWith("2")) {
-            value += 2;
+            value += _kCoinValue2;
           } else {
             value += 1;
           }
@@ -51,14 +65,14 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
       return Container();
     }
     ListTile listTile = ListTile(
-        contentPadding: const EdgeInsets.only(left: 14),
+        contentPadding: const EdgeInsets.only(left: _kContentPaddingLeft),
         minVerticalPadding: 0,
         minLeadingWidth: 0,
-        horizontalTitleGap: 6,
+        horizontalTitleGap: _kHorizontalTitleGap,
         leading: Image(
           filterQuality: FilterQuality.medium,
-          height: 30,
-          width: 30,
+          height: _kIconSize,
+          width: _kIconSize,
           fit: BoxFit.contain,
           image: AssetImage("assets/images/loot/${lootName}_icon.png"),
         ),
@@ -68,7 +82,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
           maxLines: 1,
         ),
         trailing: Container(
-            padding: const EdgeInsets.only(right: 16),
+            padding: const EdgeInsets.only(right: _kTrailingPaddingRight),
             child: Text(
               "$amount",
               style: kHeadingStyle,
@@ -79,7 +93,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
 
   Widget buildCharacterLootWidget(String characterId, String characterName) {
     return Container(
-      constraints: const BoxConstraints(maxWidth: 300),
+      constraints: const BoxConstraints(maxWidth: _kMaxWidth),
       child: Column(children: [
         const Divider(),
         Row(
@@ -88,29 +102,20 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
             children: [
               Image(
                 filterQuality: FilterQuality.medium,
-                height: 30,
-                width: 30,
+                height: _kIconSize,
+                width: _kIconSize,
                 fit: BoxFit.contain,
                 image: AssetImage("assets/images/class-icons/$characterId.png"),
               ),
               const SizedBox(
-                width: 10,
+                width: _kCharIconSpacing,
               ),
               Text(
                 "$characterName's loot:",
                 style: kTitleStyle,
               )
             ]),
-        createListTile("coin", characterId),
-        createListTile("hide", characterId),
-        createListTile("lumber", characterId),
-        createListTile("metal", characterId),
-        createListTile("arrowvine", characterId),
-        createListTile("axenut", characterId),
-        createListTile("corpsecap", characterId),
-        createListTile("flamefruit", characterId),
-        createListTile("rockroot", characterId),
-        createListTile("snowthistle", characterId),
+        ..._kLootNames.map((name) => createListTile(name, characterId)),
       ]),
     );
   }
@@ -130,7 +135,7 @@ class CharacterLootMenuState extends State<CharacterLootMenu> {
                   Column(
                     children: [
                       const SizedBox(
-                        height: 20,
+                        height: _kTopSpacing,
                       ),
                       for (Character character in characters)
                         buildCharacterLootWidget(character.characterClass.id,
