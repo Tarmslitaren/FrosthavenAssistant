@@ -23,7 +23,12 @@ class MonsterBox extends StatelessWidget {
       required this.scale,
       this.gameState,
       this.settings}) {
-    data = GameMethods.getFigure(ownerId, figureId) as MonsterInstance;
+    final figure = GameMethods.getFigure(ownerId, figureId);
+    if (figure is! MonsterInstance) {
+      throw StateError(
+          'MonsterBox: expected MonsterInstance for $ownerId/$figureId, got ${figure.runtimeType}');
+    }
+    data = figure;
   }
 
   // injected for testing
