@@ -20,6 +20,22 @@ import '../../services/network/network.dart';
 import '../../services/service_locator.dart';
 
 class SettingsMenu extends StatefulWidget {
+  static const double _kBarWidthBase = 40.0;
+  static const double _kBarWidthMultiplier = 6.5;
+  static const double _kTopSpacing = 20.0;
+  static const double _kMaxWidth = 300.0;
+  static const double _kScaleMin = 0.2;
+  static const double _kScaleMax = 3.0;
+  static const double _kBarScaleMin = 0.8;
+  static const double _kLabelPaddingLeft = 16.0;
+  static const double _kLabelPaddingTop = 10.0;
+  static const double _kInputWidth = 200.0;
+  static const double _kInputHeight = 40.0;
+  static const double _kDropdownHeight = 20.0;
+  static const int _kPortMaxLength = 6;
+  static const double _kCloseButtonWidth = 100.0;
+  static const double _kCloseButtonHeight = 40.0;
+
   const SettingsMenu({super.key, this.gameState, this.network, this.client, this.settings});
 
   final GameState? gameState;
@@ -69,7 +85,7 @@ class SettingsMenuState extends State<SettingsMenu> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double referenceMinBarWidth = 40 * 6.5;
+    double referenceMinBarWidth = SettingsMenu._kBarWidthBase * SettingsMenu._kBarWidthMultiplier;
     double maxBarScale = screenWidth / referenceMinBarWidth;
 
     return Card(
@@ -81,10 +97,10 @@ class SettingsMenuState extends State<SettingsMenu> {
                   Column(
                     children: [
                       const SizedBox(
-                        height: 20,
+                        height: SettingsMenu._kTopSpacing,
                       ),
                       Container(
-                          constraints: const BoxConstraints(maxWidth: 300),
+                          constraints: const BoxConstraints(maxWidth: SettingsMenu._kMaxWidth),
                           child: Column(
                             children: [
                               const Text(
@@ -335,13 +351,13 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 constraints: const BoxConstraints(
                                     minWidth: double.infinity),
                                 padding:
-                                    const EdgeInsets.only(left: 16, top: 10),
+                                    const EdgeInsets.only(left: SettingsMenu._kLabelPaddingLeft, top: SettingsMenu._kLabelPaddingTop),
                                 alignment: Alignment.bottomLeft,
                                 child: const Text("Main List Scaling:"),
                               ),
                               Slider(
-                                min: 0.2,
-                                max: 3.0,
+                                min: SettingsMenu._kScaleMin,
+                                max: SettingsMenu._kScaleMax,
                                 value: settings.userScalingMainList.value,
                                 onChanged: (value) {
                                   setState(() {
@@ -355,13 +371,13 @@ class SettingsMenuState extends State<SettingsMenu> {
                                 constraints: const BoxConstraints(
                                     minWidth: double.infinity),
                                 padding:
-                                    const EdgeInsets.only(left: 16, top: 10),
+                                    const EdgeInsets.only(left: SettingsMenu._kLabelPaddingLeft, top: SettingsMenu._kLabelPaddingTop),
                                 alignment: Alignment.bottomLeft,
                                 child: const Text("App Bar Scaling:"),
                               ),
                               Slider(
-                                min: min(0.8, maxBarScale),
-                                max: min(maxBarScale, 3.0),
+                                min: min(SettingsMenu._kBarScaleMin, maxBarScale),
+                                max: min(maxBarScale, SettingsMenu._kScaleMax),
                                 value: min(settings.userScalingBars.value,
                                     maxBarScale),
                                 onChanged: (value) {
@@ -474,9 +490,9 @@ class SettingsMenuState extends State<SettingsMenu> {
                                   }),
 
                               Container(
-                                margin: const EdgeInsets.only(top: 10),
-                                width: 200,
-                                //height: 40,
+                                margin: const EdgeInsets.only(top: SettingsMenu._kLabelPaddingTop),
+                                width: SettingsMenu._kInputWidth,
+                                //height: SettingsMenu._kInputHeight,
                                 child: TextField(
                                   controller: _serverTextController,
                                   decoration: const InputDecoration(
@@ -487,9 +503,9 @@ class SettingsMenuState extends State<SettingsMenu> {
                               ),
 
                               Container(
-                                margin: const EdgeInsets.only(top: 20),
-                                width: 200,
-                                height: 40,
+                                margin: const EdgeInsets.only(top: SettingsMenu._kTopSpacing),
+                                width: SettingsMenu._kInputWidth,
+                                height: SettingsMenu._kInputHeight,
                                 child: TextField(
                                   keyboardType: TextInputType.number,
                                   controller: _portTextController,
@@ -497,7 +513,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     counterText: "",
                                     helperText: "port",
                                   ),
-                                  maxLength: 6,
+                                  maxLength: SettingsMenu._kPortMaxLength,
                                 ),
                               ),
                               ValueListenableBuilder<bool>(
@@ -531,8 +547,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       _network.networkInfo.wifiIPv6,
                                   builder: (context, value, child) {
                                     return SizedBox(
-                                      width: 200,
-                                      height: 20,
+                                      width: SettingsMenu._kInputWidth,
+                                      height: SettingsMenu._kDropdownHeight,
                                       child: DropdownButtonHideUnderline(
                                           child: DropdownButton(
                                               value: _network
@@ -552,17 +568,17 @@ class SettingsMenuState extends State<SettingsMenu> {
                                       _network.networkInfo.outgoingIPv6,
                                   builder: (context, value, child) {
                                     return SizedBox(
-                                        width: 200,
-                                        height: 20,
+                                        width: SettingsMenu._kInputWidth,
+                                        height: SettingsMenu._kDropdownHeight,
                                         child: Text(_network
                                             .networkInfo
                                             .outgoingIPv6
                                             .value));
                                   }),
                               Container(
-                                margin: const EdgeInsets.only(top: 20),
-                                width: 200,
-                                height: 40,
+                                margin: const EdgeInsets.only(top: SettingsMenu._kTopSpacing),
+                                width: SettingsMenu._kInputWidth,
+                                height: SettingsMenu._kInputHeight,
                                 child: TextField(
                                   controller: _portTextController,
                                   keyboardType: TextInputType.number,
@@ -570,7 +586,7 @@ class SettingsMenuState extends State<SettingsMenu> {
                                     counterText: "",
                                     helperText: "port",
                                   ),
-                                  maxLength: 6,
+                                  maxLength: SettingsMenu._kPortMaxLength,
                                 ),
                               ),
                               ListTile(
@@ -588,8 +604,8 @@ class SettingsMenuState extends State<SettingsMenu> {
                     ],
                   ),
                   Positioned(
-                      width: 100,
-                      height: 40,
+                      width: SettingsMenu._kCloseButtonWidth,
+                      height: SettingsMenu._kCloseButtonHeight,
                       right: 0,
                       bottom: 0,
                       child: TextButton(
