@@ -22,6 +22,19 @@ class MonsterWidget extends StatefulWidget {
 }
 
 class MonsterWidgetState extends State<MonsterWidget> {
+  static const int _kAnimationDurationMs = 300;
+  static const double _kSpacing = 2.0;
+  static const double _kImageMarginV = 4.0;
+  static const double _kElevation = 8.0;
+  static const double _kImageTopMargin = 2.0;
+  static const double _kNameWidthRatio = 0.95;
+  static const double _kNameMarginBottom = 2.0;
+  static const double _kFontSize = 14.4;
+  static const double _kShadowOffset = 1.0;
+  static const double _kShadowBlur = 1.0;
+  static const double _kScaledHeight = 96.0;
+  static const double _kMarginH = 3.2;
+
   late final MonsterWidgetViewModel _vm;
   List<MonsterInstance> lastList = [];
 
@@ -57,7 +70,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
         (index) => RepaintBoundary(
                 child: AnimatedSize(
               key: Key(monsterInstances[index].standeeNr.toString()),
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: _kAnimationDurationMs),
               child: MonsterBox(
                   key: Key(monsterInstances[index].standeeNr.toString()),
                   figureId: monsterInstances[index].name +
@@ -70,8 +83,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
             )));
     lastList = monsterInstances.toList();
     return Wrap(
-      runSpacing: 2.0 * scale,
-      spacing: 2.0 * scale,
+      runSpacing: _kSpacing * scale,
+      spacing: _kSpacing * scale,
       children: generatedChildren,
     );
   }
@@ -80,16 +93,16 @@ class MonsterWidgetState extends State<MonsterWidget> {
     return RepaintBoundary(
         child: Stack(alignment: Alignment.bottomCenter, children: [
       Container(
-          margin: EdgeInsets.only(bottom: 4 * scale, top: 4 * scale),
+          margin: EdgeInsets.only(bottom: _kImageMarginV * scale, top: _kImageMarginV * scale),
           child: PhysicalShape(
             color: _vm.turnState == TurnsState.current
                 ? Colors.tealAccent
                 : Colors.transparent,
             shadowColor: Colors.black,
-            elevation: 8,
+            elevation: _kElevation,
             clipper: const ShapeBorderClipper(shape: CircleBorder()),
             child: Container(
-              margin: EdgeInsets.only(bottom: 0 * scale, top: 2 * scale),
+              margin: EdgeInsets.only(bottom: 0, top: _kImageTopMargin * scale),
               child: Image(
                 fit: BoxFit.contain,
                 height: height,
@@ -100,21 +113,21 @@ class MonsterWidgetState extends State<MonsterWidget> {
             ),
           )),
       Container(
-          width: height * 0.95,
+          width: height * _kNameWidthRatio,
           alignment: Alignment.bottomCenter,
-          margin: EdgeInsets.only(bottom: _vm.frosthavenStyle ? 2 * scale : 0),
+          margin: EdgeInsets.only(bottom: _vm.frosthavenStyle ? _kNameMarginBottom * scale : 0),
           child: Text(
             textAlign: TextAlign.center,
             widget.data.type.display,
             style: TextStyle(
                 fontFamily: _vm.frosthavenStyle ? "GermaniaOne" : 'Pirata',
                 color: Colors.white,
-                fontSize: 14.4 * scale,
+                fontSize: _kFontSize * scale,
                 shadows: [
                   Shadow(
-                    offset: Offset(1 * scale, 1 * scale),
+                    offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
                     color: Colors.black87,
-                    blurRadius: 1 * scale,
+                    blurRadius: _kShadowBlur * scale,
                   )
                 ]),
           ))
@@ -124,7 +137,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double height = scale * 96;
+    double height = scale * _kScaledHeight;
 
     return ValueListenableBuilder<int>(
         valueListenable: _vm.updateList,
@@ -136,7 +149,7 @@ class MonsterWidgetState extends State<MonsterWidget> {
                     ? ColorFilter.matrix(grayScale)
                     : ColorFilter.matrix(identity),
                 child: SizedBox(
-                  height: 96 * scale,
+                  height: _kScaledHeight * scale,
                   width: getMainListWidth(context),
                   child: Row(
                     children: [
@@ -155,8 +168,8 @@ class MonsterWidgetState extends State<MonsterWidget> {
                   ),
                 )),
             Container(
-              margin: EdgeInsets.only(left: 3.2 * scale, right: 3.2 * scale),
-              width: getMainListWidth(context) - 3.2 * scale,
+              margin: EdgeInsets.only(left: _kMarginH * scale, right: _kMarginH * scale),
+              width: getMainListWidth(context) - _kMarginH * scale,
               child: ValueListenableBuilder<BuiltList<MonsterInstance>>(
                   valueListenable: _vm.monsterInstancesNotifier,
                   builder: (context, value, child) {
