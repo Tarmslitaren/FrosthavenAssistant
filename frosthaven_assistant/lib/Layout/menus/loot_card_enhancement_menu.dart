@@ -6,6 +6,17 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class LootCardEnhancementMenu extends StatefulWidget {
+  static const double _kCounterPadding = 3.0;
+  static const double _kCounterBorderRadius = 5.0;
+  static const double _kIconSize = 32.0;
+  static const double _kValuePaddingH = 6.0;
+  static const double _kValuePaddingV = 4.0;
+  static const double _kValueBorderRadius = 1.0;
+  static const double _kHeaderImageSize = 30.0;
+  static const double _kTopSpacing = 20.0;
+  static const double _kMaxWidth = 300.0;
+  static const double _kCoinRowSpacing = 6.0;
+
   const LootCardEnhancementMenu({super.key, this.gameState});
 
   final GameState? gameState;
@@ -26,9 +37,9 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
 
   Widget createCounterButton(LootCard card) {
     return Container(
-      padding: const EdgeInsets.all(3),
+      padding: const EdgeInsets.all(LootCardEnhancementMenu._kCounterPadding),
       decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(5)),
+          borderRadius: const BorderRadius.all(Radius.circular(LootCardEnhancementMenu._kCounterBorderRadius)),
           color: Theme.of(context).colorScheme.secondary),
       child: Row(
         children: [
@@ -41,12 +52,12 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                   }
                 });
               },
-              child: const Icon(Icons.remove, color: Colors.white, size: 32)),
+              child: const Icon(Icons.remove, color: Colors.white, size: LootCardEnhancementMenu._kIconSize)),
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 3),
-            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+            margin: const EdgeInsets.symmetric(horizontal: LootCardEnhancementMenu._kCounterPadding),
+            padding: const EdgeInsets.symmetric(horizontal: LootCardEnhancementMenu._kValuePaddingH, vertical: LootCardEnhancementMenu._kValuePaddingV),
             decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(1)), color: Colors.white),
+                borderRadius: const BorderRadius.all(Radius.circular(LootCardEnhancementMenu._kValueBorderRadius)), color: Colors.white),
             child: Text(
               card.enhanced.toString(),
               style: const TextStyle(color: Colors.black, fontSize: kFontSizeTitle),
@@ -62,7 +73,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
               child: const Icon(
                 Icons.add,
                 color: Colors.white,
-                size: 32,
+                size: LootCardEnhancementMenu._kIconSize,
               )),
         ],
       ),
@@ -74,8 +85,8 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
       children: [
         Image(
           filterQuality: FilterQuality.medium,
-          height: 30,
-          width: 30,
+          height: LootCardEnhancementMenu._kHeaderImageSize,
+          width: LootCardEnhancementMenu._kHeaderImageSize,
           fit: BoxFit.contain,
           image: AssetImage("assets/images/loot/${type}_icon.png"),
         ),
@@ -134,10 +145,10 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                   Column(
                     children: [
                       const SizedBox(
-                        height: 20,
+                        height: LootCardEnhancementMenu._kTopSpacing,
                       ),
                       Container(
-                        constraints: const BoxConstraints(maxWidth: 300),
+                        constraints: const BoxConstraints(maxWidth: LootCardEnhancementMenu._kMaxWidth),
                         child: Column(children: [
                           const Text(
                             "Loot Card Enhancements",
@@ -318,7 +329,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                               createCounterButton(getCardFromIndex("coin", 2)!),
                             ],
                           ),
-                          const SizedBox(height: 6),
+                          const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -327,7 +338,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                               createCounterButton(getCardFromIndex("coin", 5)!)
                             ],
                           ),
-                          const SizedBox(height: 6),
+                          const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -336,7 +347,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                               createCounterButton(getCardFromIndex("coin", 8)!)
                             ],
                           ),
-                          const SizedBox(height: 6),
+                          const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -359,7 +370,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                               createCounterButton(getCardFromIndex("coin", 14)!)
                             ],
                           ),
-                          const SizedBox(height: 6),
+                          const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
