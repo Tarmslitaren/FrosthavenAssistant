@@ -9,6 +9,12 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class SetLootOwnerMenu extends StatefulWidget {
+  static const double _kMenuWidth = 300.0;
+  static const double _kMenuHeight = 280.0;
+  static const double _kTopSpacing = 20.0;
+  static const double _kRowSpacing = 10.0;
+  static const double _kIconSize = 30.0;
+
   final LootCard card;
 
   const SetLootOwnerMenu({
@@ -40,7 +46,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
   Widget buildCharacterButton(Character character) {
     return Column(children: [
       const SizedBox(
-        height: 10,
+        height: SetLootOwnerMenu._kRowSpacing,
       ),
       TextButton(
           onPressed: () {
@@ -51,8 +57,8 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
           child: Row(children: [
             Image(
               filterQuality: FilterQuality.medium,
-              height: 30,
-              width: 30,
+              height: SetLootOwnerMenu._kIconSize,
+              width: SetLootOwnerMenu._kIconSize,
               fit: BoxFit.contain,
               color: _settings.darkMode.value
                   ? Colors.white
@@ -61,7 +67,7 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
                   "assets/images/class-icons/${character.characterClass.name}.png"),
             ),
             const SizedBox(
-              width: 10,
+              width: SetLootOwnerMenu._kRowSpacing,
             ),
             Text(character.characterState.display.value,
                 textAlign: TextAlign.center, style: getTitleTextStyle(1))
@@ -73,11 +79,11 @@ class SetLootOwnerMenuState extends State<SetLootOwnerMenu> {
   Widget build(BuildContext context) {
     List<Character> characters = GameMethods.getCurrentCharacters();
     return ModalBackground(
-        width: 300,
-        height: 280,
+        width: SetLootOwnerMenu._kMenuWidth,
+        height: SetLootOwnerMenu._kMenuHeight,
         child: Column(children: [
           const SizedBox(
-            height: 20,
+            height: SetLootOwnerMenu._kTopSpacing,
           ),
           Text(
             "Set Loot Owner:",
