@@ -8,6 +8,8 @@ import '../Resource/state/game_state.dart';
 import 'view_models/counter_button_view_model.dart';
 
 class CounterButton extends StatefulWidget {
+  static const double _kTextHeight = 0.5;
+
   const CounterButton(
       {super.key,
       required this.notifier,
@@ -124,7 +126,7 @@ class CounterButtonState extends State<CounterButton> {
                   child: Text(
                     text,
                     style: TextStyle(
-                        height: 0.5,
+                        height: CounterButton._kTextHeight,
                         fontSize: kFontSizeBody * widget.scale,
                         color: Colors.white,
                         shadows: [shadow]),

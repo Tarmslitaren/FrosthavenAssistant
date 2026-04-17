@@ -14,6 +14,42 @@ import 'menus/status_menu.dart';
 import 'view_models/monster_box_view_model.dart';
 
 class MonsterBox extends StatelessWidget {
+  static const double conditionSize = 14;
+  static const double _kBaseWidth = 47.0;
+  static const double _kBoxHeight = 30.0;
+  static const double _kShadowOffset = 0.4;
+  static const double _kShadowBlur = 1.0;
+  static const double _kBoxShadowBlur = 4.0;
+  static const double _kBoxShadowOffsetX = 2.0;
+  static const double _kBoxShadowOffsetY = 4.0;
+  static const double _kImageMarginLeft = 3.0;
+  static const double _kImageMarginTop = 3.0;
+  static const double _kImageMarginBottom = 2.0;
+  static const double _kImageHeight = 100.0;
+  static const double _kImageWidth = 17.0;
+  static const double _kStandeeWidth = 22.0;
+  static const double _kStandeeTop = 1.0;
+  static const double _kHealthLeftSmall = 23.0;
+  static const double _kHealthLeftLarge = 22.0;
+  static const double _kBloodIconHeight = 7.0;
+  static const double _kHealthMarginBottom = 2.0;
+  static const double _kHealthWidthLarge = 21.0;
+  static const double _kHealthWidthSmall = 16.8;
+  static const double _kSpacerWidthLarge = 4.5;
+  static const double _kSpacerWidthSmall = 6.5;
+  static const double _kProgressBarMarginBottom = 2.5;
+  static const double _kProgressBarMarginLeft = 2.5;
+  static const double _kProgressBarMarginRight = 2.7;
+  static const double _kProgressBarWidth = 42.0;
+  static const double _kProgressBarSize = 4.0;
+  static const double _kProgressBarBorderWidth = 0.5;
+  static const int _kHealthLargeThreshold = 99;
+  static const double _kAnimationOffset = 30.0;
+  static const int _kAnimationDurationMs = 300;
+  static const int _kFlipAnimationDurationMs = 600;
+  static const int _kConditionRowDivisor = 2;
+  static const int _kHexRadix = 16;
+
   MonsterBox(
       {super.key,
       required this.figureId,
@@ -35,14 +71,12 @@ class MonsterBox extends StatelessWidget {
   final GameState? gameState;
   final Settings? settings;
 
-  static const double conditionSize = 14;
-
   static double getWidth(double scale, MonsterInstance data) {
-    double width = 47;
+    double width = _kBaseWidth;
     final length = data.conditions.value.length;
-    width += conditionSize * length / 2;
-    if (length % 2 != 0) {
-      width += conditionSize / 2;
+    width += conditionSize * length / _kConditionRowDivisor;
+    if (length % _kConditionRowDivisor != 0) {
+      width += conditionSize / _kConditionRowDivisor;
     }
     width = width * scale;
     return width;
@@ -99,9 +133,9 @@ class MonsterBox extends StatelessWidget {
     }
 
     var shadow = Shadow(
-      offset: Offset(0.4 * scale, 0.4 * scale),
+      offset: Offset(_kShadowOffset * scale, _kShadowOffset * scale),
       color: Colors.black87,
-      blurRadius: 1 * scale,
+      blurRadius: _kShadowBlur * scale,
     );
 
     final health = data.health.value;
@@ -113,22 +147,22 @@ class MonsterBox extends StatelessWidget {
                 : ColorFilter.matrix(identity),
             child: Container(
                 padding: EdgeInsets.zero,
-                height: 30 * scale,
+                height: _kBoxHeight * scale,
                 width: width,
                 decoration: BoxDecoration(
-                  color: Color(int.parse("7A000000", radix: 16)),
+                  color: Color(int.parse("7A000000", radix: _kHexRadix)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black45,
-                      blurRadius: 4 * scale,
-                      offset: Offset(2 * scale, 4 * scale),
+                      blurRadius: _kBoxShadowBlur * scale,
+                      offset: Offset(_kBoxShadowOffsetX * scale, _kBoxShadowOffsetY * scale),
                     ),
                   ],
                 ),
                 child: Stack(alignment: Alignment.centerLeft, children: [
                   Image(
-                    height: 30 * scale,
-                    width: 47 * scale,
+                    height: _kBoxHeight * scale,
+                    width: _kBaseWidth * scale,
                     fit: BoxFit.fill,
                     color: borderColor,
                     colorBlendMode: blendMode,
@@ -137,18 +171,18 @@ class MonsterBox extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(
-                        left: 3 * scale, top: 3 * scale, bottom: 2 * scale),
+                        left: _kImageMarginLeft * scale, top: _kImageMarginTop * scale, bottom: _kImageMarginBottom * scale),
                     child: Image(
-                      height: 100 * scale,
-                      width: 17 * scale,
+                      height: _kImageHeight * scale,
+                      width: _kImageWidth * scale,
                       fit: BoxFit.cover,
                       filterQuality: FilterQuality.medium,
                       image: AssetImage(imagePath),
                     ),
                   ),
                   Positioned(
-                    width: 22 * scale,
-                    top: 1 * scale,
+                    width: _kStandeeWidth * scale,
+                    top: _kStandeeTop * scale,
                     child: Text(
                       textAlign: TextAlign.center,
                       standeeNr,
@@ -159,7 +193,7 @@ class MonsterBox extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    left: health > 99 ? 22 * scale : 23 * scale,
+                    left: health > _kHealthLargeThreshold ? _kHealthLeftLarge * scale : _kHealthLeftSmall * scale,
                     top: 0,
                     child: Container(
                         padding: EdgeInsets.zero,
@@ -168,15 +202,15 @@ class MonsterBox extends StatelessWidget {
                           Column(children: [
                             Image(
                               color: Colors.red,
-                              height: 7 * scale,
+                              height: _kBloodIconHeight * scale,
                               image: const AssetImage(
                                   "assets/images/blood.png"),
                             ),
                             Container(
-                              margin: EdgeInsets.only(bottom: 2 * scale),
-                              width: health > 99
-                                  ? 21 * scale
-                                  : 16.8 * scale,
+                              margin: EdgeInsets.only(bottom: _kHealthMarginBottom * scale),
+                              width: health > _kHealthLargeThreshold
+                                  ? _kHealthWidthLarge * scale
+                                  : _kHealthWidthSmall * scale,
                               alignment: Alignment.center,
                               child: Text(
                                 textAlign: TextAlign.end,
@@ -190,15 +224,15 @@ class MonsterBox extends StatelessWidget {
                             )
                           ]),
                           SizedBox(
-                            width: health > 99
-                                ? 4.5 * scale
-                                : 6.5 * scale,
+                            width: health > _kHealthLargeThreshold
+                                ? _kSpacerWidthLarge * scale
+                                : _kSpacerWidthSmall * scale,
                           ),
                           ValueListenableBuilder<List<Condition>>(
                               valueListenable: data.conditions,
                               builder: (context, value, child) {
                                 return SizedBox(
-                                    height: 30 * scale,
+                                    height: _kBoxHeight * scale,
                                     child: Wrap(
                                       spacing: 0,
                                       runSpacing: 0,
@@ -214,11 +248,11 @@ class MonsterBox extends StatelessWidget {
                   ),
                   Container(
                       margin: EdgeInsets.only(
-                          bottom: 2.5 * scale,
-                          left: 2.5 * scale,
-                          right: 2.7 * scale),
+                          bottom: _kProgressBarMarginBottom * scale,
+                          left: _kProgressBarMarginLeft * scale,
+                          right: _kProgressBarMarginRight * scale),
                       alignment: Alignment.bottomCenter,
-                      width: 42 * scale,
+                      width: _kProgressBarWidth * scale,
                       child: ValueListenableBuilder<int>(
                           valueListenable: data.maxHealth,
                           builder: (context, value, child) {
@@ -226,13 +260,13 @@ class MonsterBox extends StatelessWidget {
                               currentValue:
                                   data.health.value.toDouble(),
                               maxValue: data.maxHealth.value.toDouble(),
-                              size: 4.0 * scale,
+                              size: _kProgressBarSize * scale,
                               direction: Axis.horizontal,
                               borderRadius: const BorderRadius.all(
                                   Radius.circular(0)),
                               border: Border.all(
                                 color: Colors.black,
-                                width: 0.5 * scale,
+                                width: _kProgressBarBorderWidth * scale,
                               ),
                               backgroundColor: Colors.black,
                               progressColor: Colors.red,
@@ -255,12 +289,12 @@ class MonsterBox extends StatelessWidget {
           key: Key(data.getId()),
           width: width,
           curve: Curves.easeInOut,
-          duration: const Duration(milliseconds: 300),
+          duration: const Duration(milliseconds: _kAnimationDurationMs),
           child: ValueListenableBuilder<int>(
               valueListenable: data.health,
               builder: (context, value, child) {
                 final alive = vm.isAlive;
-                final double offset = -30 * scale;
+                final double offset = -_kAnimationOffset * scale;
                 final child = _buildInternal(scale, width, vm);
 
                 if (displayStartAnimation != figureId) {
@@ -271,7 +305,7 @@ class MonsterBox extends StatelessWidget {
                             ? Offset(0, -offset)
                             : Offset.zero,
                       ),
-                      duration: const Duration(milliseconds: 600),
+                      duration: const Duration(milliseconds: _kFlipAnimationDurationMs),
                       curve: Curves.linear,
                       builder: (context, translation, _) =>
                           Transform.translate(offset: translation, child: child));
@@ -282,14 +316,14 @@ class MonsterBox extends StatelessWidget {
                       begin: Offset(0, alive ? offset : 0),
                       end: Offset(0, alive ? 0 : -offset),
                     ),
-                    duration: const Duration(milliseconds: 600),
+                    duration: const Duration(milliseconds: _kFlipAnimationDurationMs),
                     curve: Curves.linear,
                     builder: (context, translation, _) =>
                         Transform.translate(
                             offset: translation,
                             child: AnimatedOpacity(
                               opacity: alive ? 1.0 : 0.0,
-                              duration: const Duration(milliseconds: 600),
+                              duration: const Duration(milliseconds: _kFlipAnimationDurationMs),
                               child: child,
                             )));
               })),
