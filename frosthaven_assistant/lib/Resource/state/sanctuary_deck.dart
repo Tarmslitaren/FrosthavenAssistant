@@ -28,13 +28,17 @@ class SanctuaryDeck {
   }
 
   ModifierCard drawMult(_StateModifier _) {
-    //put top of draw pile on discard pile
+    if (_multPile.isEmpty) {
+      _initDeck();
+    }
     _multPile.shuffle();
     return _multPile.pop();
   }
 
   ModifierCard drawFlip(_StateModifier _) {
-    //put top of draw pile on discard pile
+    if (_flipPile.isEmpty) {
+      _initDeck();
+    }
     _flipPile.shuffle();
     return _flipPile.pop();
   }
