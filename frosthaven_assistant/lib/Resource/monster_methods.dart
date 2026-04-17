@@ -90,7 +90,8 @@ class MonsterMethods {
           break;
         }
       }
-      instance = MonsterInstance(nr, type, addAsSummon, monster!);
+      if (monster == null) return;
+      instance = MonsterInstance(nr, type, addAsSummon, monster);
     } else {
       instance = MonsterInstance.summon(
           summon.standeeNr,
