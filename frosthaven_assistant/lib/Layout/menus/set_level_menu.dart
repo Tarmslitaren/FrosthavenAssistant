@@ -15,6 +15,21 @@ import '../../Resource/ui_utils.dart';
 import '../../services/service_locator.dart';
 
 class SetLevelMenu extends StatefulWidget {
+  static const double _kButtonSize = 40.0;
+  static const double _kButtonBorderRadius = 30.0;
+  static const double _kShadowOffset = 1.0;
+  static const double _kShadowBlur = 1.0;
+  static const double _kLegendImageHeight = 20.0;
+  static const double _kLegendLevelImageHeight = 15.0;
+  static const double _kLegendSpacer = 8.0;
+  static const double _kBoxShadowSpread = 1.0;
+  static const double _kBoxShadowBlur = 3.0;
+  static const double _kMenuWidth = 270.0;
+  static const double _kMenuHeightWithLegend = 400.0;
+  static const double _kMenuHeightNoLegend = 287.0;
+  static const double _kTopSpacing = 20.0;
+  static const int _kMaxHealth = 900;
+
   const SetLevelMenu({
     super.key,
     this.monster,
@@ -69,15 +84,15 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                 String text = nr.toString();
                 bool darkMode = _settings.darkMode.value;
                 return SizedBox(
-                  width: 40 * scale,
-                  height: 40 * scale,
+                  width: SetLevelMenu._kButtonSize * scale,
+                  height: SetLevelMenu._kButtonSize * scale,
                   child: Container(
                       decoration: BoxDecoration(
                           border: Border.all(
                             color: color,
                           ),
                           borderRadius:
-                              BorderRadius.all(Radius.circular(30 * scale))),
+                              BorderRadius.all(Radius.circular(SetLevelMenu._kButtonBorderRadius * scale))),
                       child: TextButton(
                         child: Text(
                           text,
@@ -85,7 +100,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                               fontSize: kFontSizeTitle * scale,
                               shadows: [
                                 Shadow(
-                                    offset: Offset(1 * scale, 1 * scale),
+                                    offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
                                     color: isCurrentlySelected
                                         ? darkMode
                                             ? Colors.black
@@ -113,24 +128,24 @@ class SetLevelMenuState extends State<SetLevelMenu> {
 
   Widget createLegend(String name, String gfx, String value, double scale) {
     var shadow = Shadow(
-      offset: Offset(1 * scale, 1 * scale),
+      offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
       color: Colors.black87,
-      blurRadius: 1 * scale,
+      blurRadius: SetLevelMenu._kShadowBlur * scale,
     );
     var textStyleLevelWidget = TextStyle(
         color: Colors.white,
         overflow: TextOverflow.fade,
         fontSize: kFontSizeTitle * scale,
         shadows: [shadow]);
-    double height = 20 * scale;
+    double height = SetLevelMenu._kLegendImageHeight * scale;
     if (gfx.contains("level")) {
-      height = 15 * scale;
+      height = SetLevelMenu._kLegendLevelImageHeight * scale;
     }
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(
-          width: 8 * scale,
+          width: SetLevelMenu._kLegendSpacer * scale,
         ),
         Container(
             decoration: BoxDecoration(
@@ -138,8 +153,8 @@ class SetLevelMenuState extends State<SetLevelMenu> {
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withValues(alpha: 0.3),
-                  spreadRadius: 1,
-                  blurRadius: 3.0,
+                  spreadRadius: SetLevelMenu._kBoxShadowSpread,
+                  blurRadius: SetLevelMenu._kBoxShadowBlur,
                 ),
               ],
             ),
@@ -162,15 +177,15 @@ class SetLevelMenuState extends State<SetLevelMenu> {
           }
           bool darkMode = _settings.darkMode.value;
           return SizedBox(
-            width: 40 * scale,
-            height: 40 * scale,
+            width: SetLevelMenu._kButtonSize * scale,
+            height: SetLevelMenu._kButtonSize * scale,
             child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(
                       color: color,
                     ),
                     borderRadius:
-                        BorderRadius.all(Radius.circular(30 * scale))),
+                        BorderRadius.all(Radius.circular(SetLevelMenu._kButtonBorderRadius * scale))),
                 child: TextButton(
                   child: Text(
                     text,
@@ -178,7 +193,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                         fontSize: kFontSizeTitle * scale,
                         shadows: [
                           Shadow(
-                              offset: Offset(1 * scale, 1 * scale),
+                              offset: Offset(SetLevelMenu._kShadowOffset * scale, SetLevelMenu._kShadowOffset * scale),
                               color: isCurrentlySelected
                                   ? darkMode
                                       ? Colors.black
@@ -249,14 +264,14 @@ class SetLevelMenuState extends State<SetLevelMenu> {
     double scale = getModalMenuScale(context);
 
     return ModalBackground(
-        width: 270 * scale,
-        height: showLegend ? 400 * scale : 287 * scale,
+        width: SetLevelMenu._kMenuWidth * scale,
+        height: showLegend ? SetLevelMenu._kMenuHeightWithLegend * scale : SetLevelMenu._kMenuHeightNoLegend * scale,
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 20 * scale,
+                height: SetLevelMenu._kTopSpacing * scale,
               ),
               Text(title, style: getTitleTextStyle(scale)),
               if (!isSummon)
@@ -333,7 +348,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
                       notifier: widget.figure!.maxHealth,
                       command: ChangeMaxHealthCommand(0, figureId, ownerId,
                           gameState: _gameState),
-                      maxValue: 900,
+                      maxValue: SetLevelMenu._kMaxHealth,
                       image: "assets/images/abilities/heal.png",
                       showTotalValue: true,
                       color: Colors.red,
