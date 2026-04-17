@@ -2,6 +2,13 @@ part of 'state/game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class MonsterMethods {
+  static const int _kMinLevel = 0;
+  static const int _kMaxLevel = 7;
+  static const int _kMinCharacters = 2;
+  static const int _kMaxCharacters = 4;
+  static const int _kCharIndexOffset = 2;
+  static const int _kTrailingCommaLength = 2;
+
   static void showAllyDeck(_StateModifier _, {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     gs._showAllyDeck.value = true;
@@ -229,7 +236,7 @@ class MonsterMethods {
       }
 
       final munster = createMonster(s, monster,
-          (gs.level.value + levelAdjust).clamp(0, 7), isAlly);
+          (gs.level.value + levelAdjust).clamp(_kMinLevel, _kMaxLevel), isAlly);
       if (munster != null) {
         gs._currentList.add(munster);
       }
@@ -242,7 +249,7 @@ class MonsterMethods {
     final gs = gameState ?? getIt<GameState>();
     //handle room data
     int characterIndex =
-        GameMethods.getCurrentCharacterAmount().clamp(2, 4) - 2;
+        GameMethods.getCurrentCharacterAmount().clamp(_kMinCharacters, _kMaxCharacters) - _kCharIndexOffset;
     for (int i = 0; i < roomMonsterData.length; i++) {
       var roomMonsters = roomMonsterData[i];
       addMonster(
@@ -310,7 +317,7 @@ class MonsterMethods {
                 initMessage += "${elites[i]}, ";
                 if (i == elites.length - 1) {
                   initMessage =
-                      initMessage.substring(0, initMessage.length - 2);
+                      initMessage.substring(0, initMessage.length - _kTrailingCommaLength);
                 }
               }
             }
@@ -325,7 +332,7 @@ class MonsterMethods {
                 initMessage += "${normals[i]}, ";
                 if (i == normals.length - 1) {
                   initMessage =
-                      initMessage.substring(0, initMessage.length - 2);
+                      initMessage.substring(0, initMessage.length - _kTrailingCommaLength);
                 }
               }
             }
