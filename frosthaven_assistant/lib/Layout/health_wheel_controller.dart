@@ -24,6 +24,11 @@ class HealthWheelController extends StatefulWidget {
 }
 
 class HealthWheelControllerState extends State<HealthWheelController> {
+  static const double _kOverlayXOffset = 100.0;
+  static const double _kOverlayYOffset = 40.0;
+  static const double _kOverlayWidth = 200.0;
+  static const double _kOverlayHeight = 50.0;
+
   OverlayEntry? entry;
   late final HealthWheelControllerViewModel _vm;
 
@@ -54,8 +59,8 @@ class HealthWheelControllerState extends State<HealthWheelController> {
   void showOverlay(String figureId, double scale, BuildContext context) {
     final figure = GameMethods.getFigure(widget.ownerId, widget.figureId);
     if (figure == null) return;
-    double dx = context.globalPaintBounds!.topCenter.dx - 100 * scale;
-    double dy = context.globalPaintBounds!.topCenter.dy - 40 * scale;
+    double dx = context.globalPaintBounds!.topCenter.dx - _kOverlayXOffset * scale;
+    double dy = context.globalPaintBounds!.topCenter.dy - _kOverlayYOffset * scale;
     var selectHealthWheel = SelectHealthWheel(
         key: UniqueKey(),
         data: figure,
@@ -67,8 +72,8 @@ class HealthWheelControllerState extends State<HealthWheelController> {
         builder: (context) => Positioned(
             left: dx,
             top: dy,
-            width: 200 * scale,
-            height: 50 * scale,
+            width: _kOverlayWidth * scale,
+            height: _kOverlayHeight * scale,
             child:
                 Material(color: Colors.transparent, child: selectHealthWheel)));
     final overlay = Overlay.of(context);

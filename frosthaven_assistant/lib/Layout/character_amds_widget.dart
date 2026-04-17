@@ -17,6 +17,9 @@ class CharacterAmdsWidget extends StatefulWidget {
 }
 
 class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
+  static const double _kDeckBaseHeight = 39.0;
+  static const double _kDeckMargin = 4.0;
+
   late final CharacterAmdsViewModel _vm;
   _OpenState _openStateUserIntentPlayTurns = _OpenState.oneOpen;
   _OpenState _openStateUserIntentChooseInit = _OpenState.allOpen;
@@ -33,7 +36,7 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
     final roundState = _vm.roundState;
     final currentCharacter = _vm.currentCharacter;
     final barScale = _vm.barScale;
-    final deckHeight = (39 + 4) * barScale;
+    final deckHeight = (_kDeckBaseHeight + _kDeckMargin) * barScale;
     final goingUpAll = [Offset(0, deckHeight * characterAmount), Offset(0, 0)];
     final goingUpSome = [
       Offset(0, deckHeight * (characterAmount - 1)),
@@ -200,14 +203,14 @@ class CharacterAmdsWidgetState extends State<CharacterAmdsWidget> {
                                   _OpenState.oneOpen &&
                               canShowOneDeck)
                           ? Container(
-                              margin: EdgeInsets.only(top: 4 * barScale),
+                              margin: EdgeInsets.only(top: _kDeckMargin * barScale),
                               child: ModifierDeckWidget(
                                   name: currentCharacter!.id))
                           : Column(
                               children: _vm.charsWithPerks
                                   .map((item) => Container(
                                       margin:
-                                          EdgeInsets.only(top: 4 * barScale),
+                                          EdgeInsets.only(top: _kDeckMargin * barScale),
                                       child: ModifierDeckWidget(name: item.id)))
                                   .toList(),
                             )))
