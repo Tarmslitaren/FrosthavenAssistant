@@ -8,7 +8,8 @@ class ChangeMaxHealthCommand extends ChangeStatCommand {
 
   @override
   void execute() {
-    FigureState figure = GameMethods.getFigure(ownerId, figureId)!;
+    final FigureState? figure = GameMethods.getFigure(ownerId, figureId);
+    if (figure == null) return;
 
     int newValue = figure.maxHealth.value + change;
     if (newValue <= 0) {

@@ -8,8 +8,8 @@ class ChangeXPCommand extends ChangeStatCommand {
 
   @override
   void execute() {
-    CharacterState figure =
-        GameMethods.getFigure(ownerId, figureId)! as CharacterState;
+    final figure = GameMethods.getFigure(ownerId, figureId);
+    if (figure is! CharacterState) return;
     figure.setXp(stateAccess, figure.xp.value + change);
   }
 

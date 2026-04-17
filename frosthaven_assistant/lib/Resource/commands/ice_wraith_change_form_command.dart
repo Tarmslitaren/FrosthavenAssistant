@@ -14,8 +14,8 @@ class IceWraithChangeFormCommand extends Command {
 
   @override
   void execute() {
-    MonsterInstance figure =
-        GameMethods.getFigure(ownerId, figureId)! as MonsterInstance;
+    final figure = GameMethods.getFigure(ownerId, figureId);
+    if (figure is! MonsterInstance) return;
     if (isElite) {
       figure.setType(stateAccess, MonsterType.normal);
     } else {
