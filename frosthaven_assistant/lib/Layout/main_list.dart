@@ -37,6 +37,13 @@ class MainList extends StatefulWidget {
 }
 
 class Item extends StatelessWidget {
+  static const double _kCharacterHeight = 60.0;
+  static const double _kBoxSpacing = 2.0;
+  static const double _kRowHeight = 32.0;
+  static const double _kMonsterBodyHeight = 97.6;
+  static const int _k2Columns = 2;
+  static const int _k3Rows = 3;
+
   const Item({super.key, required this.data});
   final ListItemData data;
 
@@ -56,16 +63,16 @@ class Item extends StatelessWidget {
           key: Key(character.id),
           characterId: character.id,
           initPreset: initPreset);
-      height = 60 * scale;
+      height = _kCharacterHeight * scale;
       final summonList = character.characterState.summonList;
       if (summonList.isNotEmpty) {
         double summonsTotalWidth = 0;
         for (var monsterInstance in summonList) {
           summonsTotalWidth +=
-              MonsterBox.getWidth(scale, monsterInstance) + 2 * scale;
+              MonsterBox.getWidth(scale, monsterInstance) + _kBoxSpacing * scale;
         }
         double rows = summonsTotalWidth / listWidth;
-        height += 32 * rows.ceil() * scale;
+        height += _kRowHeight * rows.ceil() * scale;
       }
     } else if (data is Monster) {
       Monster monster = data as Monster;
@@ -77,15 +84,15 @@ class Item extends StatelessWidget {
       double totalWidthOfMonsterBoxes = 0;
       for (var item in monster.monsterInstances) {
         totalWidthOfMonsterBoxes +=
-            MonsterBox.getWidth(scale, item) + 2 * scale;
+            MonsterBox.getWidth(scale, item) + _kBoxSpacing * scale;
       }
       if (totalWidthOfMonsterBoxes > listWidth) {
-        standeeRows = 2;
+        standeeRows = _k2Columns;
       }
-      if (totalWidthOfMonsterBoxes > 2 * listWidth) {
-        standeeRows = 3;
+      if (totalWidthOfMonsterBoxes > _k2Columns * listWidth) {
+        standeeRows = _k3Rows;
       }
-      height = 97.6 * scale + standeeRows * 32 * scale;
+      height = _kMonsterBodyHeight * scale + standeeRows * _kRowHeight * scale;
     } else {
       height = 0;
     }
@@ -196,6 +203,11 @@ class ListAnimationState extends State<ListAnimation>
 }
 
 class MainListState extends State<MainList> {
+  static const int _kTwoColumns = 2;
+  static const double _kTopBarHeight = 80.0;
+  static const int _kKeyOffset = 3;
+  static const double _kHalfHeightFactor = 0.5;
+
   static void scrollToTop() {
     if (scrollController.hasClients) {
       scrollController.animateTo(
@@ -270,17 +282,17 @@ class MainListState extends State<MainList> {
 
   int _getItemsForHalfTotalHeight(List<double> widgetPositions) {
     final screenSize = MediaQuery.of(context).size;
-    bool canFit2Columns = screenSize.width >= getMainListWidth(context) * 2;
+    bool canFit2Columns = screenSize.width >= getMainListWidth(context) * _kTwoColumns;
     if (!canFit2Columns) {
       return _vm.currentListLength;
     }
-    double screenHeight = screenSize.height - 80 * _vm.userScalingBars;
+    double screenHeight = screenSize.height - _kTopBarHeight * _vm.userScalingBars;
 
     if (widgetPositions.isNotEmpty) {
-      bool allFitInView = widgetPositions.last < screenHeight * 2;
+      bool allFitInView = widgetPositions.last < screenHeight * _kTwoColumns;
 
       for (int i = 0; i < widgetPositions.length; i++) {
-        if (widgetPositions[i] > widgetPositions.last / 2) {
+        if (widgetPositions[i] > widgetPositions.last / _kTwoColumns) {
           if (allFitInView) {
             if (widgetPositions[i] > screenHeight) {
               return i;
@@ -304,7 +316,7 @@ class MainListState extends State<MainList> {
       if (_generatedList.length > i) {
         for (int j = 0; j < _generatedList.length; j++) {
           String key = _generatedList[j].key.toString();
-          key = key.substring(3, key.length - 3);
+          key = key.substring(_kKeyOffset, key.length - _kKeyOffset);
           if (key == _vm.itemIdAt(i)) {
             if (index != j) {
               index = j;
@@ -365,16 +377,16 @@ class MainListState extends State<MainList> {
         builder: (context, value, child) {
           double width = getMainListWidth(context);
           final screenSize = MediaQuery.of(context).size;
-          bool canFit2Columns = screenSize.width >= width * 2;
+          bool canFit2Columns = screenSize.width >= width * _kTwoColumns;
           if (canFit2Columns) {
-            width *= 2;
+            width *= _kTwoColumns;
           }
           List<double> itemHeights = _vm.getItemHeights(context);
           int itemsPerColumn = _getItemsForHalfTotalHeight(itemHeights);
           int itemsColumn2 = itemHeights.length - itemsPerColumn;
           itemsPerColumn = max(itemsPerColumn, itemsColumn2);
           bool ignoreScroll = false;
-          double paddingBottom = 0.5 * screenSize.height;
+          double paddingBottom = _kHalfHeightFactor * screenSize.height;
 
           return Container(
               alignment: Alignment.topCenter,
