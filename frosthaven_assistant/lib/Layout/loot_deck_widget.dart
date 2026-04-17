@@ -223,8 +223,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                       ? _buildStayAnimation(
                                           RotationTransition(
                                               turns:
-                                                  const AlwaysStoppedAnimation(
-                                                      15 / 360),
+                                                  AlwaysStoppedAnimation(
+                                                      LootDeckWidgetState._kCardRotationTurns),
                                               child: LootCardWidget(
                                                 card: discardPileList[
                                                     discardPileSize - 3],
@@ -236,8 +236,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                       ? _buildSlideAnimation(
                                           RotationTransition(
                                               turns:
-                                                  const AlwaysStoppedAnimation(
-                                                      15 / 360),
+                                                  AlwaysStoppedAnimation(
+                                                      LootDeckWidgetState._kCardRotationTurns),
                                               child: LootCardWidget(
                                                 card: discardPileList[
                                                     discardPileSize - 2],
