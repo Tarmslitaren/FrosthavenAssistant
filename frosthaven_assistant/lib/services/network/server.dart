@@ -75,7 +75,7 @@ class Server extends GameServer {
 
   String _lastSavedState() {
     return _gameState.gameSaveStates.isNotEmpty
-        ? _gameState.gameSaveStates.last!.getState()
+        ? (_gameState.gameSaveStates.last?.getState() ?? _gameState.toString())
         : _gameState.toString();
   }
 
