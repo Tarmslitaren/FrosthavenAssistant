@@ -19,6 +19,13 @@ class NumpadMenu extends StatefulWidget {
 }
 
 class NumpadMenuState extends State<NumpadMenu> {
+  static const double _kButtonSize = 40.0;
+  static const double _kMenuWidth = 10.0;
+  static const double _kMenuHeight = 180.0;
+  static const double _kTopSpacing = 20.0;
+  static const int _kNumpadRowCount = 3;
+  static const int _kNumpadColCount = 3;
+
   String text = "";
 
   @override
@@ -29,8 +36,8 @@ class NumpadMenuState extends State<NumpadMenu> {
 
   Widget buildNrButton(int nr, double scale) {
     return SizedBox(
-      width: 40 * scale,
-      height: 40 * scale,
+      width: _kButtonSize * scale,
+      height: _kButtonSize * scale,
       child: TextButton(
         child: Text(
           nr.toString(),
@@ -54,38 +61,24 @@ class NumpadMenuState extends State<NumpadMenu> {
   Widget build(BuildContext context) {
     double scale = getModalMenuScale(context);
     return ModalBackground(
-        width: 10,
-        height: 180 * scale,
+        width: _kMenuWidth,
+        height: _kMenuHeight * scale,
         child: Stack(children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 20 * scale,
+                height: _kTopSpacing * scale,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  buildNrButton(1, scale),
-                  buildNrButton(2, scale),
-                  buildNrButton(3, scale),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  buildNrButton(4, scale),
-                  buildNrButton(5, scale),
-                  buildNrButton(6, scale),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  buildNrButton(7, scale),
-                  buildNrButton(8, scale),
-                  buildNrButton(9, scale),
-                ],
+              ...List.generate(
+                _kNumpadRowCount,
+                (rowIdx) => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    _kNumpadColCount,
+                    (colIdx) => buildNrButton(rowIdx * _kNumpadColCount + colIdx + 1, scale),
+                  ),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

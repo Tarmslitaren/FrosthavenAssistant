@@ -6,6 +6,13 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../../Resource/state/game_state.dart';
 
 class AbilityCardZoom extends StatelessWidget {
+  static const double _kCardWidth = 142.4;
+  static const double _kCardHeight = 92.8;
+  static const double _kDefaultZoom = 2.5;
+  static const double _kHorizontalMargin = 40.0;
+  static const double _kVerticalMargin = 60.0;
+  static const double _kMinScalePixels = 269.0;
+
   const AbilityCardZoom(
       {super.key,
       required this.card,
@@ -19,23 +26,23 @@ class AbilityCardZoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double scale = getScaleByReference(context);
-    double zoomValue = 2.5;
+    double zoomValue = _kDefaultZoom;
     final screenSize = MediaQuery.of(context).size;
     double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
-    double width = 142.4 * scale * zoomValue;
-    double height = 92.8 * scale * zoomValue;
-    if (screenWidth < 40 + width) {
-      zoomValue = (screenWidth - 40) / (142.4 * scale);
+    double width = _kCardWidth * scale * zoomValue;
+    double height = _kCardHeight * scale * zoomValue;
+    if (screenWidth < _kHorizontalMargin + width) {
+      zoomValue = (screenWidth - _kHorizontalMargin) / (_kCardWidth * scale);
     }
 
-    if (screenHeight < 60 + height) {
-      zoomValue = (screenHeight - 60) / (92.8 * scale);
+    if (screenHeight < _kVerticalMargin + height) {
+      zoomValue = (screenHeight - _kVerticalMargin) / (_kCardHeight * scale);
     }
 
     double scaling = scale * zoomValue;
-    if (scaling < 269 / (142.4) && screenWidth > 40 + width) {
-      scaling = 269 / (142.4);
+    if (scaling < _kMinScalePixels / _kCardWidth && screenWidth > _kHorizontalMargin + width) {
+      scaling = _kMinScalePixels / _kCardWidth;
     }
 
     return GestureDetector(
@@ -43,8 +50,8 @@ class AbilityCardZoom extends StatelessWidget {
         Navigator.pop(context);
       },
       child: SizedBox(
-          width: 142.4 * scale * zoomValue,
-          height: 92.8 * scale * zoomValue,
+          width: _kCardWidth * scale * zoomValue,
+          height: _kCardHeight * scale * zoomValue,
           child: MonsterAbilityCardWidget.buildFront(
               card, monster, scaling, calculateAll)),
     );
