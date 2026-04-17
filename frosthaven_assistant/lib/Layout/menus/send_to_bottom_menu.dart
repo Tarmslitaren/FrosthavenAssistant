@@ -30,6 +30,13 @@ class SendToBottomMenu extends StatefulWidget {
 }
 
 class SendToBottomMenuState extends State<SendToBottomMenu> {
+  static const double _kDefaultScale = 6.0;
+  static const double _kCardWidthFactor = 7.0;
+  static const double _kCardWidthBase = 58.6666;
+  static const double _kSpacing = 20.0;
+  static const double _kModalWidth = 300.0;
+  static const double _kModalHeight = 140.0;
+
   late final GameState _gameState;
 
   @override
@@ -42,11 +49,11 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
   Widget build(BuildContext context) {
     final deck = GameMethods.getModifierDeck(widget.name, _gameState);
     final card = deck.drawPileContents[widget.length - 1 - widget.currentIndex];
-    double scale = 6;
-    final cardWidth = 7 * 58.6666;
+    double scale = _kDefaultScale;
+    final cardWidth = _kCardWidthFactor * _kCardWidthBase;
     final screenWidth = MediaQuery.of(context).size.width;
     if (screenWidth < cardWidth) {
-      scale = 6 * (screenWidth / cardWidth);
+      scale = _kDefaultScale * (screenWidth / cardWidth);
     }
     return Column(
         mainAxisSize: MainAxisSize.min,
@@ -55,14 +62,14 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
           if (widget.revealed)
             ModifierCardWidget.buildFront(card, widget.name, scale, 1),
           const SizedBox(
-            height: 20,
+            height: _kSpacing,
           ),
           ModalBackground(
-              width: 300,
-              height: 140,
+              width: _kModalWidth,
+              height: _kModalHeight,
               child: Column(children: [
                 const SizedBox(
-                  height: 20,
+                  height: _kSpacing,
                 ),
                 TextButton(
                     onPressed: () {
@@ -75,7 +82,7 @@ class SendToBottomMenuState extends State<SendToBottomMenu> {
                     child:
                         const Text("Send to Bottom", style: kButtonLabelStyle)),
                 const SizedBox(
-                  height: 20,
+                  height: _kSpacing,
                 ),
                 TextButton(
                     onPressed: () {
