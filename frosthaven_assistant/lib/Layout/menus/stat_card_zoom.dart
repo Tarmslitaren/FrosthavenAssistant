@@ -6,6 +6,8 @@ import 'package:frosthaven_assistant/Resource/scaling.dart';
 import '../../Resource/state/game_state.dart';
 
 class StatCardZoom extends StatelessWidget {
+  static const double _kMinScaledWidth = 269.0;
+
   const StatCardZoom({super.key, required this.monster});
 
   final Monster monster;
@@ -32,8 +34,8 @@ class StatCardZoom extends StatelessWidget {
     }
 
     double scaling = scale * zoomValue;
-    if (scaling < 269 / cardWidth && screenWidth > horizontalMargin + width) {
-      scaling = 269 / cardWidth;
+    if (scaling < _kMinScaledWidth / cardWidth && screenWidth > horizontalMargin + width) {
+      scaling = _kMinScaledWidth / cardWidth;
     }
 
     return InkWell(

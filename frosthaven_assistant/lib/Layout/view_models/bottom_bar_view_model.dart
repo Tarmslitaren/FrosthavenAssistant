@@ -6,6 +6,7 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class BottomBarViewModel {
+  static const double _kDarkModeOpacity = 0.4;
   BottomBarViewModel({Settings? settings, GameState? gameState})
       : _settings = settings ?? getIt<Settings>(),
         _gameState = gameState ?? getIt<GameState>();
@@ -23,7 +24,7 @@ class BottomBarViewModel {
   Color get backgroundColor =>
       isDarkMode ? Colors.black : Colors.transparent;
 
-  double get backgroundOpacity => isDarkMode ? 0.4 : 1.0;
+  double get backgroundOpacity => isDarkMode ? _kDarkModeOpacity : 1.0;
 
   String get backgroundImagePath => isDarkMode
       ? 'assets/images/psd/gloomhaven-bar.png'

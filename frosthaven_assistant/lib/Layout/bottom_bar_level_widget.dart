@@ -7,6 +7,10 @@ import 'menus/set_level_menu.dart';
 import 'view_models/bottom_bar_level_widget_view_model.dart';
 
 class BottomBarLevelWidget extends StatelessWidget {
+  static const double _kScenarioWidth = 174.0;
+  static const double _kLevelIconScale = 0.6;
+  static const double _kXpIconScale = 0.9;
+
   const BottomBarLevelWidget({super.key, this.gameState, this.settings});
 
   final GameState? gameState;
@@ -38,7 +42,7 @@ class BottomBarLevelWidget extends StatelessWidget {
                       valueListenable: vm.scenario,
                       builder: (context, value, child) {
                         return SizedBox(
-                            width: 174 * userScalingBars,
+                            width: _kScenarioWidth * userScalingBars,
                             child: Text(
                               overflow: TextOverflow.ellipsis,
                               vm.formattedScenarioName,
@@ -71,7 +75,7 @@ class BottomBarLevelWidget extends StatelessWidget {
                                       ],
                                     ),
                                     child: Image(
-                                      height: fontHeight * 0.6,
+                                      height: fontHeight * _kLevelIconScale,
                                       filterQuality: FilterQuality
                                           .medium, //needed because of the edges
                                       image: const AssetImage(
@@ -149,7 +153,7 @@ class BottomBarLevelWidget extends StatelessWidget {
                                       ],
                                     ),
                                     child: Image(
-                                      height: fontHeight * 0.9,
+                                      height: fontHeight * _kXpIconScale,
                                       filterQuality: FilterQuality
                                           .medium, //needed because of the edges
                                       image: const AssetImage(

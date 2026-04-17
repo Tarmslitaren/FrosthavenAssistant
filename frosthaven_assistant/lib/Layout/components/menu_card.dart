@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:frosthaven_assistant/Resource/app_constants.dart';
 
 class MenuCard extends StatelessWidget {
+  static const double _kDefaultMaxWidth = 400;
+
   const MenuCard({
     super.key,
     required this.child,
-    this.maxWidth = 400,
+    this.maxWidth = _kDefaultMaxWidth,
     this.cardMargin,
   });
 

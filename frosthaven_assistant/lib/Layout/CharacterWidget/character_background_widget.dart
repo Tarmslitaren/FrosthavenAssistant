@@ -11,6 +11,7 @@ class CharacterBackgroundWidget extends StatelessWidget {
   static const double _kShadowOffsetY = 4.0;
   static const double _kGradientRotation = 2.0;
   static const int _kGradientRepeat = 3;
+  static const int _kGradientExtraColor = 1;
 
   const CharacterBackgroundWidget(
       {super.key,
@@ -22,7 +23,9 @@ class CharacterBackgroundWidget extends StatelessWidget {
   final Shadow shadow;
 
   SweepGradient buildGradiantBackground(List<Color> colors) {
-    int nrOfColorEntries = colors.length * 3 + 1;
+    int nrOfColorEntries =
+        colors.length * CharacterBackgroundWidget._kGradientRepeat +
+            CharacterBackgroundWidget._kGradientExtraColor;
 
     List<Color> endList = [];
     for (int i = 0; i < CharacterBackgroundWidget._kGradientRepeat; i++) {

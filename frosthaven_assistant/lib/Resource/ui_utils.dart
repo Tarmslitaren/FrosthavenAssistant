@@ -99,13 +99,15 @@ void openDialogWithDismissOption(
 }
 
 //used to get transparent background when dragging in re-orderable widgets
+const double _kDraggableElevation = 6.0;
+
 Widget defaultBuildDraggableFeedback(
     BuildContext context, BoxConstraints constraints, Widget child) {
   return Transform(
     transform: Matrix4.rotationZ(0),
     alignment: FractionalOffset.topLeft,
     child: Material(
-      elevation: 6.0,
+      elevation: _kDraggableElevation,
       color: Colors.transparent,
       borderRadius: BorderRadius.zero,
       child: Card(

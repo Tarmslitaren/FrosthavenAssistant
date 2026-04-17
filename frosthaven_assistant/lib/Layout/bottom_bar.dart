@@ -9,6 +9,8 @@ import 'bottom_bar_level_widget.dart';
 import 'modifier_deck_widget.dart';
 
 class BottomBar extends StatelessWidget {
+  static const double _kBarHeight = 40.0;
+
   const BottomBar({super.key, this.settings, this.gameState});
 
   final Settings? settings;
@@ -23,7 +25,7 @@ class BottomBar extends StatelessWidget {
           final barScale = vm.userScalingBars.value;
           return RepaintBoundary(
               child: SizedBox(
-                  height: 40 * barScale,
+                  height: _kBarHeight * barScale,
                   child: Stack(children: [
                     Positioned(
                       bottom: 0,
@@ -32,7 +34,7 @@ class BottomBar extends StatelessWidget {
                           valueListenable: vm.darkMode,
                           builder: (context, value, child) {
                             return Container(
-                                height: 40 * barScale,
+                                height: _kBarHeight * barScale,
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                   color: vm.backgroundColor,
@@ -47,7 +49,7 @@ class BottomBar extends StatelessWidget {
                                       opacity: vm.backgroundOpacity,
                                       image: ResizeImage(
                                           AssetImage(vm.backgroundImagePath),
-                                          height: (40 * barScale).toInt()),
+                                          height: (_kBarHeight * barScale).toInt()),
                                       fit: BoxFit.cover,
                                       repeat: ImageRepeat.repeatX),
                                 ),

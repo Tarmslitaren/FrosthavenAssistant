@@ -2,8 +2,10 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class CharacterState extends FigureState {
+  static const int _kMaxPerks = 18;
+
   final _display = ValueNotifier<String>("");
-  final List<bool> _perkList = List.filled(18, false);
+  final List<bool> _perkList = List.filled(_kMaxPerks, false);
   final _useFHPerks = ValueNotifier<bool>(false);
 
   final _initiative = ValueNotifier<int>(0);

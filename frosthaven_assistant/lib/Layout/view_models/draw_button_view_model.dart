@@ -6,6 +6,8 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class DrawButtonViewModel {
+  static const double _kWidthWithTotalRounds = 75.0;
+  static const double _kWidthWithoutTotalRounds = 60.0;
   DrawButtonViewModel({GameState? gameState, Settings? settings})
       : _gameState = gameState ?? getIt<GameState>(),
         _settings = settings ?? getIt<Settings>();
@@ -32,7 +34,9 @@ class DrawButtonViewModel {
   }
 
   double get buttonWidth =>
-      _gameState.totalRounds.value != _gameState.round.value ? 75 : 60;
+      _gameState.totalRounds.value != _gameState.round.value
+          ? _kWidthWithTotalRounds
+          : _kWidthWithoutTotalRounds;
 
   /// Runs the draw/next-round action. Returns a blocked message if the action
   /// was blocked, or null if it succeeded.

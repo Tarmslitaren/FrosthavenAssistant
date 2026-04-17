@@ -1,6 +1,9 @@
 import '../state/game_state.dart';
 
 class RemoveSpecialLootCardCommand extends Command {
+  static const int _kCard1418 = 1418;
+  static const int _kCard1419 = 1419;
+
   int nr;
   final GameState _gameState;
 
@@ -9,10 +12,10 @@ class RemoveSpecialLootCardCommand extends Command {
 
   @override
   void execute() {
-    if (nr == 1418) {
+    if (nr == _kCard1418) {
       _gameState.lootDeck.removeSpecial1418(stateAccess);
     }
-    if (nr == 1419) {
+    if (nr == _kCard1419) {
       _gameState.lootDeck.removeSpecial1419(stateAccess);
     }
   }

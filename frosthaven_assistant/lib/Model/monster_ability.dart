@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+const int _kGraphicsIndex = 3;
+
 @immutable
 class MonsterAbilityDeckModel {
   final String name;
@@ -47,10 +49,10 @@ class MonsterAbilityDeckModel {
           graphicPositionals.add(pos);
         }
 
-        card.removeAt(3);
+        card.removeAt(_kGraphicsIndex);
       }
       List<String> lines = [];
-      for (int i = 3; i < card.length; i++) {
+      for (int i = _kGraphicsIndex; i < card.length; i++) {
         lines.add(card[i] as String);
       }
       cards.add(MonsterAbilityCardModel(

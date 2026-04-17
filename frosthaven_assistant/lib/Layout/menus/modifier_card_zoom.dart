@@ -4,6 +4,10 @@ import 'package:frosthaven_assistant/Layout/modifier_card_widget.dart';
 import '../../Resource/state/game_state.dart';
 
 class ModifierCardZoom extends StatelessWidget {
+  static const double _kDefaultScale = 6.0;
+  static const double _kCardWidthFactor = 7.0;
+  static const double _kCardWidthBase = 58.6666;
+
   const ModifierCardZoom({super.key, required this.name, required this.card});
 
   final String name;
@@ -12,10 +16,10 @@ class ModifierCardZoom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    double scale = 6;
-    final cardWidth = 7 * 58.6666;
+    double scale = _kDefaultScale;
+    final cardWidth = _kCardWidthFactor * _kCardWidthBase;
     if (screenSize.width < cardWidth) {
-      scale = 6 * (screenSize.width / cardWidth);
+      scale = _kDefaultScale * (screenSize.width / cardWidth);
     }
 
     return GestureDetector(

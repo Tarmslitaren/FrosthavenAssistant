@@ -23,6 +23,8 @@ class RemoveCharacterMenu extends StatefulWidget {
 }
 
 class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
+  static const double _kMaxWidth = 400;
+
   late final GameState _gameState;
 
   @override
@@ -56,7 +58,7 @@ class RemoveCharacterMenuState extends State<RemoveCharacterMenu> {
     }
 
     return MenuCard(
-        maxWidth: 400,
+        maxWidth: _kMaxWidth,
         child: Column(
           children: [
             const SizedBox(

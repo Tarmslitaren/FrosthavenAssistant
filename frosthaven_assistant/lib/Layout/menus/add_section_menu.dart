@@ -28,6 +28,7 @@ class AddSectionMenu extends StatefulWidget {
 }
 
 class AddSectionMenuState extends State<AddSectionMenu> {
+  static const int _kNumpadMaxLength = 3;
   // This list holds the data for the list view
   List<String> _foundScenarios = [];
   late final GameState _gameState;
@@ -126,7 +127,7 @@ class AddSectionMenuState extends State<AddSectionMenu> {
                               context,
                               NumpadMenu(
                                   controller: _controller,
-                                  maxLength: 3,
+                                  maxLength: _kNumpadMaxLength,
                                   onChange: (String value) {
                                     _runFilter(value);
                                   }));

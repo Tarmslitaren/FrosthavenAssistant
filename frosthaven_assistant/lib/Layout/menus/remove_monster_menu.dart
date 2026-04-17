@@ -20,6 +20,9 @@ class RemoveMonsterMenu extends StatefulWidget {
 }
 
 class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
+  static const double _kMaxWidth = 450;
+  static const double _kIconHeight = 30;
+
   late final GameState _gameState;
 
   @override
@@ -33,7 +36,7 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
   Widget build(BuildContext context) {
     List<Monster> currentMonsters = GameMethods.getCurrentMonsters();
     return MenuCard(
-        maxWidth: 450,
+        maxWidth: _kMaxWidth,
         child: Column(
           children: [
             const SizedBox(
@@ -53,7 +56,7 @@ class RemoveMonsterMenuState extends State<RemoveMonsterMenu> {
                 itemBuilder: (context, index) => ListTile(
                   leading: Image.asset(
                     cacheHeight: kMonsterImageCacheHeight,
-                    height: 30,
+                    height: _kIconHeight,
                     "assets/images/monsters/${currentMonsters[index].type.gfx}.png",
                   ),
                   title: Text(currentMonsters[index].type.display,

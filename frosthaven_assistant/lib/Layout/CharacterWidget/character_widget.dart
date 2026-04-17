@@ -16,6 +16,7 @@ class CharacterWidget extends StatefulWidget {
   static const double _kSpacing = 2.0;
   static const double _kElevation = 8.0;
   static const double _kMarginH = 3.2;
+  static const int _kBothSides = 2;
 
   const CharacterWidget(
       {required this.characterId,
@@ -115,7 +116,7 @@ class CharacterWidgetState extends State<CharacterWidget> {
                 Container(
                   margin:
                       EdgeInsets.only(left: CharacterWidget._kMarginH * scale, right: CharacterWidget._kMarginH * scale),
-                  width: getMainListWidth(context) - CharacterWidget._kMarginH * 2 * scale,
+                  width: getMainListWidth(context) - CharacterWidget._kMarginH * CharacterWidget._kBothSides * scale,
                   child: ValueListenableBuilder<BuiltList<MonsterInstance>>(
                       valueListenable: vm.summonListNotifier,
                       builder: (context, value, child) {

@@ -4,6 +4,10 @@ import '../Resource/settings.dart';
 import '../services/service_locator.dart';
 
 class BackGround extends StatelessWidget {
+  static const double _kDarkModeOpacity = 0.4;
+  static const double _kLightModeOpacity = 0.7;
+  static const double _kBarHeightTotal = 80.0;
+
   const BackGround({super.key, required this.child, this.settings});
 
   final Widget child;
@@ -19,7 +23,7 @@ class BackGround extends StatelessWidget {
             backgroundBlendMode: BlendMode.srcATop,
             color: darkMode ? Colors.black : Colors.grey,
             image: DecorationImage(
-              opacity: darkMode ? 0.4 : 0.7,
+              opacity: darkMode ? _kDarkModeOpacity : _kLightModeOpacity,
               fit: BoxFit.cover,
               image: ResizeImage(
                   AssetImage(
@@ -29,7 +33,7 @@ class BackGround extends StatelessWidget {
                   ),
                   width: (MediaQuery.of(context).size.width).toInt(),
                   height: (MediaQuery.of(context).size.height -
-                          80 * settings.userScalingBars.value)
+                          _kBarHeightTotal * settings.userScalingBars.value)
                       .toInt(),
                   policy: ResizeImagePolicy.fit),
             )),

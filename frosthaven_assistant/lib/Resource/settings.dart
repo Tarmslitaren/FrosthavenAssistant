@@ -17,9 +17,11 @@ import 'commands/load_save_command.dart';
 import 'enums.dart';
 
 class Settings {
+  static const double _kDesktopBarScale = 1.6;
+
   final userScalingMainList = ValueNotifier<double>(1.0);
   final userScalingBars = ValueNotifier<double>(
-      (Platform.isWindows || Platform.isLinux || Platform.isMacOS) ? 1.6 : 1.0);
+      (Platform.isWindows || Platform.isLinux || Platform.isMacOS) ? _kDesktopBarScale : 1.0);
   final userScalingMenus = ValueNotifier<double>(1.0);
   final fullScreen = ValueNotifier<bool>(true);
   final darkMode = ValueNotifier<bool>(false);

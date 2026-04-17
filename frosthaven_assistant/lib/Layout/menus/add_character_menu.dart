@@ -32,6 +32,7 @@ class AddCharacterMenu extends StatefulWidget {
 }
 
 class AddCharacterMenuState extends State<AddCharacterMenu> {
+  static const double _kMaxWidth = 400;
   // This list holds the data for the list view
   List<CharacterClass> _foundCharacters = [];
   final List<CharacterClass> _allCharacters = [];
@@ -187,7 +188,7 @@ class AddCharacterMenuState extends State<AddCharacterMenu> {
   @override
   Widget build(BuildContext context) {
     return MenuCard(
-        maxWidth: 400,
+        maxWidth: _kMaxWidth,
         cardMargin: const EdgeInsets.all(2),
         child: Column(
           children: [

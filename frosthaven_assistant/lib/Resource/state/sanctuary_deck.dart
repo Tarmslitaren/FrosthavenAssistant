@@ -2,6 +2,8 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class SanctuaryDeck {
+  static const int _kCardTypeCount = 5;
+
   late final CardStack<ModifierCard> _multPile = CardStack<ModifierCard>();
   late final CardStack<ModifierCard> _flipPile = CardStack<ModifierCard>();
 
@@ -67,7 +69,7 @@ class SanctuaryDeck {
     List<ModifierCard> flipCards = [];
     List<ModifierCard> multCards = [];
     final prefix = "sanctuary/";
-    for (int i = 1; i < 5; i++) {
+    for (int i = 1; i < _kCardTypeCount; i++) {
       //2 of each of 4 different cards
       flipCards.add(ModifierCard(CardType.remove, "${prefix}flip-$i"));
       flipCards.add(ModifierCard(CardType.remove, "${prefix}flip-$i"));

@@ -2,6 +2,7 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class MonsterInstance extends FigureState {
+  static const int _kIncarnateHealthMultiplier = 2;
   MonsterInstance(this.standeeNr, this._type, bool summoned, Monster monster,
       {GameState? gameState}) {
     _setLevel(monster);
@@ -107,7 +108,7 @@ class MonsterInstance extends FigureState {
             final healthByLevel = item.characterClass.healthByLevel;
             final level = item.characterState.level.value;
             if (level >= 1 && level <= healthByLevel.length) {
-              value = healthByLevel[level - 1] * 2;
+              value = healthByLevel[level - 1] * _kIncarnateHealthMultiplier;
             }
             break;
           }

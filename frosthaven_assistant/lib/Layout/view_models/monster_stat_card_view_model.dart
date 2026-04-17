@@ -12,6 +12,7 @@ import '../../Resource/ui_utils.dart';
 import '../menus/add_standee_menu.dart';
 
 class MonsterStatCardViewModel {
+  static const int _kIncarnateHealthMultiplier = 2;
   MonsterStatCardViewModel(this.monster,
       {GameState? gameState, Settings? settings})
       : _gameState = gameState ?? getIt<GameState>(),
@@ -47,7 +48,7 @@ class MonsterStatCardViewModel {
         if (item is Character && item.id == "Incarnate") {
           return (item.characterClass
                       .healthByLevel[item.characterState.level.value - 1] *
-                  2)
+                  _kIncarnateHealthMultiplier)
               .toString();
         }
       }

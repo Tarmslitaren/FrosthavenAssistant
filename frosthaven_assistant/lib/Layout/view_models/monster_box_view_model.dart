@@ -6,6 +6,13 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
 class MonsterBoxViewModel {
+  static const Map<int, Color> _kBnBColors = {
+    1: Colors.green,
+    2: Colors.blue,
+    3: Colors.purple,
+    4: Colors.red,
+  };
+
   MonsterBoxViewModel(
       this.data, {
       required this.ownerId,
@@ -26,10 +33,7 @@ class MonsterBoxViewModel {
     if (data.type == MonsterType.boss) c = Colors.red;
 
     if (_gameState.currentCampaign.value == "Buttons and Bugs") {
-      if (data.standeeNr == 1) c = Colors.green;
-      if (data.standeeNr == 2) c = Colors.blue;
-      if (data.standeeNr == 3) c = Colors.purple;
-      if (data.standeeNr == 4) c = Colors.red;
+      c = _kBnBColors[data.standeeNr] ?? c;
     }
     return c;
   }

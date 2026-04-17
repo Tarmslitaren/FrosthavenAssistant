@@ -2,6 +2,8 @@ part of 'state/game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class RoundMethods {
+  static const int _kMaxLevel = 7;
+  static const int _kMinLevel = 0;
   static void setRoundState(_StateModifier _, RoundState state, {GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     gs._roundState.value = state;
@@ -266,7 +268,7 @@ class RoundMethods {
               as Monster?;
           if (monster != null) {
             if (gs.level.value == monster.level.value) {
-              int newLevel = (monster.level.value + rule.level).clamp(0, 7);
+              int newLevel = (monster.level.value + rule.level).clamp(_kMinLevel, _kMaxLevel);
               monster._level.value = newLevel;
               for (MonsterInstance instance in monster._monsterInstances) {
                 instance._setLevel(monster);

@@ -23,6 +23,9 @@ class SaveMenu extends StatefulWidget {
 }
 
 class SaveMenuState extends State<SaveMenu> {
+  static const double _kMaxWidth = 400;
+  static const double _kTitleHeight = 40;
+
   // This list holds the data for the list view
   final List<String> _saves = [];
   late final Settings _settings;
@@ -54,7 +57,7 @@ class SaveMenuState extends State<SaveMenu> {
   Widget build(BuildContext context) {
     //edge insets if width not too small
     return MenuCard(
-        maxWidth: 400,
+        maxWidth: _kMaxWidth,
         cardMargin: const EdgeInsets.all(2),
         child: Column(
           children: [
@@ -62,7 +65,7 @@ class SaveMenuState extends State<SaveMenu> {
               height: 20,
             ),
             Container(
-                height: 40,
+                height: _kTitleHeight,
                 margin: const EdgeInsets.only(left: 10, right: 10),
                 child: Text('Load, Add or Delete save states.',
                     style: getTitleTextStyle(1, forceBlack: true))),

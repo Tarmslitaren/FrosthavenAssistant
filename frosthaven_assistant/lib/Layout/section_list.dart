@@ -8,6 +8,8 @@ import '../Resource/game_data.dart';
 import '../Resource/settings.dart';
 
 class SectionList extends StatelessWidget {
+  static const double _kSpacing = 4.0;
+
   const SectionList({super.key, this.settings, this.gameData, this.gameState});
 
   final Settings? settings;
@@ -39,7 +41,7 @@ class SectionList extends StatelessWidget {
                 return RepaintBoundary(
                     child: Wrap(
                         alignment: WrapAlignment.center,
-                        spacing: 4 * scale,
+                        spacing: _kSpacing * scale,
                         runSpacing: 0 * scale,
                         children: _generateList(vm.sections)));
               });
