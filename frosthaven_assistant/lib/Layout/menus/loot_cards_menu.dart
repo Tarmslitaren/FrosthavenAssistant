@@ -28,6 +28,15 @@ class LootCardsMenu extends StatefulWidget {
 }
 
 class LootCardsMenuState extends State<LootCardsMenu> {
+  static const double _kItemMaxWidth = 200.0;
+  static const double _kGridAspectRatio = 0.72;
+  static const int _kMinColumns = 4;
+  static const double _kMaxHeightRatio = 0.9;
+  static const double _kBottomBarHeight = 32.0;
+  static const double _kItemMargin = 2.0;
+  static const int _kCard_kCard1418 = _kCard1418;
+  static const int _kCard_kCard1419 = _kCard1419;
+
   late final GameState _gameState;
   final scrollController = ScrollController();
 
@@ -49,7 +58,6 @@ class LootCardsMenuState extends State<LootCardsMenu> {
 
   Widget buildList(List<LootCard> list) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double wantedItemMaxWidth = 200;
     return Theme(
         data: Theme.of(context).copyWith(
           canvasColor: Colors
@@ -59,11 +67,11 @@ class LootCardsMenuState extends State<LootCardsMenu> {
         child: SizedBox(
           child: GridView.count(
             controller: ScrollController(),
-            childAspectRatio: 0.72,
+            childAspectRatio: _kGridAspectRatio,
             mainAxisSpacing: 0,
             crossAxisSpacing: 0,
             padding: EdgeInsets.zero,
-            crossAxisCount: max(4, (screenWidth / wantedItemMaxWidth).ceil()),
+            crossAxisCount: max(_kMinColumns, (screenWidth / _kItemMaxWidth).ceil()),
             children: generateList(list).reversed.toList(),
           ),
         ));
@@ -79,7 +87,7 @@ class LootCardsMenuState extends State<LootCardsMenu> {
           return Container(
               constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width,
-                  maxHeight: MediaQuery.of(context).size.height * 0.9),
+                  maxHeight: MediaQuery.of(context).size.height * _kMaxHeightRatio),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [
@@ -108,46 +116,46 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                     TextButton(
                                       onPressed: () {
                                         setState(() {
-                                          if (_gameState.lootDeck.hasCard1418) {
+                                          if (_gameState.lootDeck.hasCard_kCard1418) {
                                             _gameState.action(
                                                 RemoveSpecialLootCardCommand(
-                                                    1418,
+                                                    _kCard1418,
                                                     gameState:
                                                         _gameState));
                                           } else {
                                             _gameState.action(
-                                                AddSpecialLootCardCommand(1418,
+                                                AddSpecialLootCardCommand(_kCard1418,
                                                     gameState:
                                                         _gameState));
                                           }
                                         });
                                       },
                                       child: Text(
-                                          _gameState.lootDeck.hasCard1418
-                                              ? "Remove card 1418"
-                                              : "Add card 1418"),
+                                          _gameState.lootDeck.hasCard_kCard1418
+                                              ? "Remove card _kCard1418"
+                                              : "Add card _kCard1418"),
                                     ),
                                     TextButton(
                                       onPressed: () {
                                         setState(() {
-                                          if (_gameState.lootDeck.hasCard1419) {
+                                          if (_gameState.lootDeck.hasCard_kCard1419) {
                                             _gameState.action(
                                                 RemoveSpecialLootCardCommand(
-                                                    1419,
+                                                    _kCard1419,
                                                     gameState:
                                                         _gameState));
                                           } else {
                                             _gameState.action(
-                                                AddSpecialLootCardCommand(1419,
+                                                AddSpecialLootCardCommand(_kCard1419,
                                                     gameState:
                                                         _gameState));
                                           }
                                         });
                                       },
                                       child: Text(
-                                          _gameState.lootDeck.hasCard1419
-                                              ? "Remove card 1419"
-                                              : "Add card 1419"),
+                                          _gameState.lootDeck.hasCard_kCard1419
+                                              ? "Remove card _kCard1419"
+                                              : "Add card _kCard1419"),
                                     ),
                                     TextButton(
                                       onPressed: () {
@@ -193,8 +201,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                       Flexible(
                           fit: FlexFit.tight, child: buildList(discardPile)),
                       Container(
-                        height: 32,
-                        margin: const EdgeInsets.all(2),
+                        height: _kBottomBarHeight,
+                        margin: const EdgeInsets.all(_kItemMargin),
                         decoration: const BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.only(
@@ -221,22 +229,24 @@ class LootCardsMenuState extends State<LootCardsMenu> {
 }
 
 class Item extends StatelessWidget {
+  static const double _kItemMaxWidth = 200.0;
+  static const double _kMaxScale = 3.0;
+  static const double _kItemMargin = 2.0;
+
   const Item({super.key, required this.data});
   final LootCard data;
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double wantedItemMaxWidth = 200;
-    double maxScale = 3;
-    double scale = min(maxScale, screenWidth / wantedItemMaxWidth);
+    double scale = min(_kMaxScale, screenWidth / _kItemMaxWidth);
 
     late final Widget child;
 
     child = LootCardWidget.buildFront(data, scale, false);
 
     return Container(
-        margin: EdgeInsets.all(2 * scale),
+        margin: EdgeInsets.all(_kItemMargin * scale),
         child: InkWell(
             onTap: () {
               openDialog(context, SetLootOwnerMenu(card: data));
