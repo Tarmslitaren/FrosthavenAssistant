@@ -28,8 +28,10 @@ class ActivateMonsterTypeCommand extends Command {
         RoundMethods.sortCharactersFirst(stateAccess);
       } else if (roundState == RoundState.playTurns) {
         DeckMethods.drawAbilityCardFromInactiveDeck(stateAccess);
-        RoundMethods.sortItemToPlace(
-            stateAccess, name, GameMethods.getInitiative(monster!));
+        if (monster != null) {
+          RoundMethods.sortItemToPlace(
+              stateAccess, name, GameMethods.getInitiative(monster));
+        }
       }
     }
     if (_gameState.roundState.value == RoundState.playTurns) {
