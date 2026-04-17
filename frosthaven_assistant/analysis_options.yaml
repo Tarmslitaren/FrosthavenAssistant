@@ -30,7 +30,7 @@ dart_code_metrics:
     #Warns when a literal value is on the left hand side in a binary expressions
     double-literal-format: true
     #Checks that double literals should begin with 0. instead of just ., and should not end with a trailing 0
-    member-ordering: true
+    member-ordering: false
     #Enforces ordering for a class members
     newline-before-return: false
     #Enforces a blank line between statements and return in a block
