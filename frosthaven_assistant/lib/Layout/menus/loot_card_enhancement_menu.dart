@@ -17,6 +17,21 @@ class LootCardEnhancementMenu extends StatefulWidget {
   static const double _kMaxWidth = 300.0;
   static const double _kCoinRowSpacing = 6.0;
 
+  // Pool layout: each material (hide/lumber/metal) has 8 cards: 2 + 3 + 3
+  static const int _kMaterial1Count = 2;
+  static const int _kMaterial2x2Start = _kMaterial1Count;
+  static const int _kMaterial2x2Count = 3;
+  static const int _kMaterial2x3Start = _kMaterial2x2Start + _kMaterial2x2Count;
+  static const int _kMaterial2x3Count = 3;
+  static const int _kHerbCount = 2;
+  // Coin pool: "1" = 12 cards (4 rows of 3), "2" = 6 cards (2 rows of 3), "3" = 2 cards
+  static const int _kCoinRowSize = 3;
+  static const int _kCoin1Rows = 4;
+  static const int _kCoin2Start = _kCoinRowSize * _kCoin1Rows;
+  static const int _kCoin2Rows = 2;
+  static const int _kCoin3Start = _kCoin2Start + _kCoinRowSize * _kCoin2Rows;
+  static const int _kCoin3Count = 2;
+
   const LootCardEnhancementMenu({super.key, this.gameState});
 
   final GameState? gameState;
@@ -31,7 +46,6 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
   @override
   initState() {
     _gameState = widget.gameState ?? getIt<GameState>();
-    // at the beginning, all items are shown
     super.initState();
   }
 
@@ -132,6 +146,49 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
     return null;
   }
 
+  Widget _buildRow(String type, int start, int count) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: List.generate(
+        count,
+        (i) => createCounterButton(getCardFromIndex(type, start + i)!),
+      ),
+    );
+  }
+
+  List<Widget> _buildMaterialSection(String type) {
+    return [
+      _createHeader(type, "1"),
+      _buildRow(type, 0, LootCardEnhancementMenu._kMaterial1Count),
+      const Divider(),
+      _createHeader(type, "2 for 2 characters"),
+      _buildRow(type, LootCardEnhancementMenu._kMaterial2x2Start, LootCardEnhancementMenu._kMaterial2x2Count),
+      const Divider(),
+      _createHeader(type, "2 for 2-3 characters"),
+      _buildRow(type, LootCardEnhancementMenu._kMaterial2x3Start, LootCardEnhancementMenu._kMaterial2x3Count),
+      const Divider(),
+    ];
+  }
+
+  List<Widget> _buildHerbSection(String type) {
+    return [
+      _createHeader(type, ""),
+      _buildRow(type, 0, LootCardEnhancementMenu._kHerbCount),
+      const Divider(),
+    ];
+  }
+
+  List<Widget> _buildCoinRows(int start, int rows) {
+    final result = <Widget>[];
+    for (var row = 0; row < rows; row++) {
+      result.add(_buildRow("coin", start + row * LootCardEnhancementMenu._kCoinRowSize, LootCardEnhancementMenu._kCoinRowSize));
+      if (row < rows - 1) {
+        result.add(const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing));
+      }
+    }
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     final ScrollController scrollController = ScrollController();
@@ -144,9 +201,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                 child: Stack(children: [
                   Column(
                     children: [
-                      const SizedBox(
-                        height: LootCardEnhancementMenu._kTopSpacing,
-                      ),
+                      const SizedBox(height: LootCardEnhancementMenu._kTopSpacing),
                       Container(
                         constraints: const BoxConstraints(maxWidth: LootCardEnhancementMenu._kMaxWidth),
                         child: Column(children: [
@@ -154,243 +209,23 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
                             "Loot Card Enhancements",
                             style: kTitleStyle,
                           ),
-                          _createHeader("hide", "1"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(getCardFromIndex("hide", 0)!),
-                              createCounterButton(getCardFromIndex("hide", 1)!)
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("hide", "2 for 2 characters"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(getCardFromIndex("hide", 2)!),
-                              createCounterButton(getCardFromIndex("hide", 3)!),
-                              createCounterButton(getCardFromIndex("hide", 4)!)
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("hide", "2 for 2-3 characters"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(getCardFromIndex("hide", 5)!),
-                              createCounterButton(getCardFromIndex("hide", 6)!),
-                              createCounterButton(getCardFromIndex("hide", 7)!)
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("lumber", "1"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("lumber", 0)!),
-                              createCounterButton(
-                                  getCardFromIndex("lumber", 1)!)
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("lumber", "2 for 2 characters"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("lumber", 2)!),
-                              createCounterButton(
-                                  getCardFromIndex("lumber", 3)!),
-                              createCounterButton(
-                                  getCardFromIndex("lumber", 4)!)
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("lumber", "2 for 2-3 characters"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("lumber", 5)!),
-                              createCounterButton(
-                                  getCardFromIndex("lumber", 6)!),
-                              createCounterButton(
-                                  getCardFromIndex("lumber", 7)!)
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("metal", "1"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("metal", 0)!),
-                              createCounterButton(getCardFromIndex("metal", 1)!)
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("metal", "2 for 2 characters"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("metal", 2)!),
-                              createCounterButton(
-                                  getCardFromIndex("metal", 3)!),
-                              createCounterButton(getCardFromIndex("metal", 4)!)
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("metal", "2 for 2-3 characters"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("metal", 5)!),
-                              createCounterButton(
-                                  getCardFromIndex("metal", 6)!),
-                              createCounterButton(getCardFromIndex("metal", 7)!)
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("arrowvine", ""),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("arrowvine", 0)!),
-                              createCounterButton(
-                                  getCardFromIndex("arrowvine", 1)!),
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("axenut", ""),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("axenut", 0)!),
-                              createCounterButton(
-                                  getCardFromIndex("axenut", 1)!),
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("corpsecap", ""),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("corpsecap", 0)!),
-                              createCounterButton(
-                                  getCardFromIndex("corpsecap", 1)!),
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("flamefruit", ""),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("flamefruit", 0)!),
-                              createCounterButton(
-                                  getCardFromIndex("flamefruit", 1)!),
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("rockroot", ""),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("rockroot", 0)!),
-                              createCounterButton(
-                                  getCardFromIndex("rockroot", 1)!),
-                            ],
-                          ),
-                          const Divider(),
-                          _createHeader("snowthistle", ""),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("snowthistle", 0)!),
-                              createCounterButton(
-                                  getCardFromIndex("snowthistle", 1)!),
-                            ],
-                          ),
-                          const Divider(),
+                          ..._buildMaterialSection("hide"),
+                          ..._buildMaterialSection("lumber"),
+                          ..._buildMaterialSection("metal"),
+                          ..._buildHerbSection("arrowvine"),
+                          ..._buildHerbSection("axenut"),
+                          ..._buildHerbSection("corpsecap"),
+                          ..._buildHerbSection("flamefruit"),
+                          ..._buildHerbSection("rockroot"),
+                          ..._buildHerbSection("snowthistle"),
                           _createHeader("coin", "1"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(getCardFromIndex("coin", 0)!),
-                              createCounterButton(getCardFromIndex("coin", 1)!),
-                              createCounterButton(getCardFromIndex("coin", 2)!),
-                            ],
-                          ),
-                          const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(getCardFromIndex("coin", 3)!),
-                              createCounterButton(getCardFromIndex("coin", 4)!),
-                              createCounterButton(getCardFromIndex("coin", 5)!)
-                            ],
-                          ),
-                          const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(getCardFromIndex("coin", 6)!),
-                              createCounterButton(getCardFromIndex("coin", 7)!),
-                              createCounterButton(getCardFromIndex("coin", 8)!)
-                            ],
-                          ),
-                          const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(getCardFromIndex("coin", 9)!),
-                              createCounterButton(
-                                  getCardFromIndex("coin", 10)!),
-                              createCounterButton(
-                                  getCardFromIndex("coin", 11)!),
-                            ],
-                          ),
+                          ..._buildCoinRows(0, LootCardEnhancementMenu._kCoin1Rows),
                           const Divider(),
                           _createHeader("coin", "2"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("coin", 12)!),
-                              createCounterButton(
-                                  getCardFromIndex("coin", 13)!),
-                              createCounterButton(getCardFromIndex("coin", 14)!)
-                            ],
-                          ),
-                          const SizedBox(height: LootCardEnhancementMenu._kCoinRowSpacing),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("coin", 15)!),
-                              createCounterButton(
-                                  getCardFromIndex("coin", 16)!),
-                              createCounterButton(getCardFromIndex("coin", 17)!)
-                            ],
-                          ),
+                          ..._buildCoinRows(LootCardEnhancementMenu._kCoin2Start, LootCardEnhancementMenu._kCoin2Rows),
                           const Divider(),
                           _createHeader("coin", "3"),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              createCounterButton(
-                                  getCardFromIndex("coin", 18)!),
-                              createCounterButton(getCardFromIndex("coin", 19)!)
-                            ],
-                          ),
+                          _buildRow("coin", LootCardEnhancementMenu._kCoin3Start, LootCardEnhancementMenu._kCoin3Count),
                         ]),
                       ),
                       const SizedBox(
