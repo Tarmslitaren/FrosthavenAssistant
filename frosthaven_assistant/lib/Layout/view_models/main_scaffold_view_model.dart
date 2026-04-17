@@ -10,6 +10,10 @@ import '../../Model/campaign.dart';
 import '../../Resource/scaling.dart';
 
 class MainScaffoldViewModel {
+  static const double _kLootDeckBarWidth = 94.0;
+  static const double _kModDeckBarWidth = 153.0;
+  static const double _kSectionButtonWidth = 58.0;
+  static const int _kSectionsOverflowThreshold = 2;
   MainScaffoldViewModel(
       {GameState? gameState, Settings? settings, GameData? gameData})
       : _gameState = gameState ?? getIt<GameState>(),
@@ -55,7 +59,7 @@ class MainScaffoldViewModel {
 
     double width = screenWidth;
     if (hasLootDeck) {
-      width -= 94 * barScale;
+      width -= _kLootDeckBarWidth * barScale;
     }
 
     bool perksAvailable = false;
@@ -71,7 +75,7 @@ class MainScaffoldViewModel {
     if (!modFitsOnBar ||
         GameMethods.shouldShowAlliesDeck() ||
         perksAvailable && _settings.showAmdDeck.value) {
-      width -= 153 * barScale;
+      width -= _kModDeckBarWidth * barScale;
     }
 
     return width;
@@ -84,7 +88,7 @@ class MainScaffoldViewModel {
     if (count == null) return false;
     final width = sectionWidth(context);
     final barScale = _settings.userScalingBars.value;
-    return (count > 0 && width < 58 * barScale) ||
-        (count > 2 && width < 58 * barScale * 2);
+    return (count > 0 && width < _kSectionButtonWidth * barScale) ||
+        (count > _kSectionsOverflowThreshold && width < _kSectionButtonWidth * barScale * _kSectionsOverflowThreshold);
   }
 }
