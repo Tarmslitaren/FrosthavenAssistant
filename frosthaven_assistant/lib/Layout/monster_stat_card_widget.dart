@@ -62,7 +62,7 @@ class MonsterStatCardWidget extends StatelessWidget {
         child: Stack(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(8.0 * scale),
+          borderRadius: BorderRadius.all(Radius.circular(8.0 * scale)),
           child: Image(
             height: 93.5 * scale,
             width: 167 * scale,
@@ -276,7 +276,7 @@ class MonsterStatCardWidget extends StatelessWidget {
         child: Stack(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(8.0 * scale),
+          borderRadius: BorderRadius.all(Radius.circular(8.0 * scale)),
           child: Image(
             height: 93.5 * scale,
             width: 167 * scale,

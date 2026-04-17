@@ -28,7 +28,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
     return Container(
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: const BorderRadius.all(Radius.circular(5)),
           color: Theme.of(context).colorScheme.secondary),
       child: Row(
         children: [
@@ -46,7 +46,7 @@ class LootCardEnhancementMenuState extends State<LootCardEnhancementMenu> {
             margin: const EdgeInsets.symmetric(horizontal: 3),
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(1), color: Colors.white),
+                borderRadius: const BorderRadius.all(Radius.circular(1)), color: Colors.white),
             child: Text(
               card.enhanced.toString(),
               style: const TextStyle(color: Colors.black, fontSize: kFontSizeTitle),

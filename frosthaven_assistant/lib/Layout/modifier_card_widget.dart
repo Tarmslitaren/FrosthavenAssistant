@@ -103,7 +103,7 @@ class ModifierCardWidget extends StatelessWidget {
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(4.0 * scale),
+              borderRadius: BorderRadius.all(Radius.circular(4.0 * scale)),
               child: Image(
                 fit: BoxFit.fitHeight,
                 image: AssetImage(gfx),
@@ -159,7 +159,7 @@ class ModifierCardWidget extends StatelessWidget {
         child: Stack(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(4.0 * scale),
+              borderRadius: BorderRadius.all(Radius.circular(4.0 * scale)),
               child: Image(
                 fit: BoxFit.fitHeight,
                 image: AssetImage("assets/images/attack/back.png"),

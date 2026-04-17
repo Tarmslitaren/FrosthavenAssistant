@@ -43,7 +43,7 @@ class LootCardWidget extends StatelessWidget {
                 RepaintBoundary(
                     child: ClipRRect(
                   clipBehavior: Clip.hardEdge,
-                  borderRadius: BorderRadius.circular(4.0 * scale),
+                  borderRadius: BorderRadius.all(Radius.circular(4.0 * scale)),
                   child: Image(
                     filterQuality: FilterQuality.medium,
                     fit: BoxFit.cover,
@@ -141,7 +141,7 @@ class LootCardWidget extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(4.0 * scale),
+        borderRadius: BorderRadius.all(Radius.circular(4.0 * scale)),
         child: Image(
           fit: BoxFit.fitHeight,
           image: AssetImage("assets/images/loot/back.png"),

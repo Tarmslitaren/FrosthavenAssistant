@@ -92,7 +92,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
 
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0 * scale),
+                  borderRadius: BorderRadius.all(Radius.circular(8.0 * scale)),
                   child: Image(
                     fit: BoxFit.fill,
                     height: 92.8 * scale,
@@ -163,7 +163,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
                     : Container(),
 
                 //add graphic positionals here
-                if (positionals.isNotEmpty) positionals[0],
+                if (positionals.isNotEmpty) positionals.first,
                 if (positionals.length > 1) positionals[1],
                 if (positionals.length > 2) positionals[2],
                 if (positionals.length > 3) positionals[3],
@@ -209,7 +209,7 @@ class MonsterAbilityCardWidget extends StatefulWidget {
           alignment: Alignment.center,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(8.0 * scale),
+              borderRadius: BorderRadius.all(Radius.circular(8.0 * scale)),
               child: Image(
                 fit: BoxFit.fitHeight,
                 height: 91.2 * scale,
