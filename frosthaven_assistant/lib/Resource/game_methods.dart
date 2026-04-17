@@ -10,9 +10,24 @@ import '../services/service_locator.dart';
 import 'enums.dart';
 
 class GameMethods {
+  static const int _kTrapBase = 2;
+  static const int _kHazardHalveDivisor = 2;
+  static const double _kHazardLevelDivisor = 3.0;
+  static const int _kXPBase = 4;
+  static const int _kXPMultiplier = 2;
+  static const int _kCoinMaxLevel = 7;
+  static const int _kCoinMaxValue = 6;
+  static const int _kCoinBase = 2;
+  static const double _kCoinLevelDivisor = 2.0;
+  static const double _kLevelDivisor = 2.0;
+  static const int _kInactiveInitiative = 99;
+  static const int _kPerkPairCount = 2;
+  static const int _kPolarBearStandees = 4;
+  static const int _kMaxOGSoloScenario = 100;
+
   static int getTrapValue({GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    return 2 + gs.level.value;
+    return _kTrapBase + gs.level.value;
   }
 
   static int getHazardValue({GameState? gameState, Settings? settings}) {
@@ -20,25 +35,25 @@ class GameMethods {
     final s = settings ?? getIt<Settings>();
     if (isOgGloomEdition(gameState: gs) &&
         !s.fhHazTerrainCalcInOGGloom.value) {
-      return (getTrapValue(gameState: gs) / 2).floor();
+      return (getTrapValue(gameState: gs) / _kHazardHalveDivisor).floor();
     }
 
-    return 1 + (gs.level.value / 3.0).ceil();
+    return 1 + (gs.level.value / _kHazardLevelDivisor).ceil();
   }
 
   static int getXPValue({GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
-    return 4 + 2 * gs.level.value;
+    return _kXPBase + _kXPMultiplier * gs.level.value;
   }
 
   static int getCoinValue({GameState? gameState}) {
     final gs = gameState ?? getIt<GameState>();
     int level = gs.level.value;
-    if (level == 7) {
-      return 6;
+    if (level == _kCoinMaxLevel) {
+      return _kCoinMaxValue;
     }
 
-    return 2 + (level / 2.0).floor();
+    return _kCoinBase + (level / _kCoinLevelDivisor).floor();
   }
 
   static int getRecommendedLevel({GameState? gameState}) {
@@ -59,13 +74,13 @@ class GameMethods {
       //Take the average level of all characters in the
       // scenario, then add 1 before dividing by 2 and rounding
       // up.
-      return ((totalLevels / nrOfCharacters + 1.0) / 2.0).ceil();
+      return ((totalLevels / nrOfCharacters + 1.0) / _kLevelDivisor).ceil();
     }
     //scenario level is equal to
     //the average level of the characters divided by 2
     //(rounded up)
 
-    return (totalLevels / nrOfCharacters / 2.0).ceil();
+    return (totalLevels / nrOfCharacters / _kLevelDivisor).ceil();
   }
 
   static bool canDraw({GameState? gameState, Settings? settings}) {
@@ -115,7 +130,7 @@ class GameMethods {
       return item.characterState.initiative.value;
     } else if (item is Monster) {
       if (!item.isActive) {
-        return 99; //sorted last
+        return _kInactiveInitiative; //sorted last
       }
       final gs = gameState ?? getIt<GameState>();
       for (var deck in gs.currentAbilityDecks) {
@@ -236,7 +251,7 @@ class GameMethods {
     for (final item in perk.add) {
       if (item.startsWith("perks/")) {
         String id = "P$index";
-        if (perk.add.length >= 2 && item == perk.add.last) {
+        if (perk.add.length >= _kPerkPairCount && item == perk.add.last) {
           id += "-2";
         }
         if (deck.hasCard(id)) {
@@ -253,7 +268,7 @@ class GameMethods {
   static String perkGfxIdToCardId(String gfx, PerkModel perk, int index) {
     if (gfx.startsWith("perks/")) {
       String id = "P$index";
-      if (perk.add.length >= 2 && gfx == perk.add.last) {
+      if (perk.add.length >= _kPerkPairCount && gfx == perk.add.last) {
         id += "-2";
       }
       return id;
@@ -329,7 +344,7 @@ class GameMethods {
     int nrOfStandees = data.type.count;
     if (data.type.name == "Polar Bear") {
       nrOfStandees =
-          4; //for the special case where there are only 4 standees in first printing
+          _kPolarBearStandees; //for the special case where there are only 4 standees in first printing
     }
     List<int> available = [];
     for (int i = 0; i < nrOfStandees; i++) {
@@ -468,7 +483,7 @@ class GameMethods {
         return false; //this is forgotten circles
       }
       //#100+ are og solo scenarios
-      for (int i = 1; i <= 100; i++) {
+      for (int i = 1; i <= _kMaxOGSoloScenario; i++) {
         if (scenario.contains("${"#$i"} ")) {
           return true;
         }
