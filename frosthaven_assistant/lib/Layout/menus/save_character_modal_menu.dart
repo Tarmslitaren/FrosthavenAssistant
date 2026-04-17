@@ -24,6 +24,14 @@ class SaveCharacterModalMenu extends StatefulWidget {
 }
 
 class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
+  static const double _kBorderWidth = 2.0;
+  static const double _kMenuWidth = 240.0;
+  static const double _kMenuHeight = 160.0;
+  static const double _kTopSpacing = 2.0;
+  static const double _kButtonSpacing = 10.0;
+  static const double _kNameSpacing = 20.0;
+  static const double _kNameFieldWidth = 200.0;
+
   final TextEditingController nameController = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
@@ -60,14 +68,14 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
     Settings settings = getIt<Settings>();
 
     final ButtonStyle buttonStyle = OutlinedButton.styleFrom(
-      side: BorderSide(width: 2 * scale, color: Colors.blue),
+      side: BorderSide(width: _kBorderWidth * scale, color: Colors.blue),
     );
 
     final character = widget.character;
 
     return ModalBackground(
-        width: 240 * scale,
-        height: 160 * scale,
+        width: _kMenuWidth * scale,
+        height: _kMenuHeight * scale,
         alignment: Alignment.center,
         child: Stack(children: [
           Column(
@@ -75,7 +83,7 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 2 * scale,
+                height: _kTopSpacing * scale,
               ),
               Row(
                   mainAxisSize: MainAxisSize.max,
@@ -93,7 +101,7 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
                         child: Text("Load", style: getButtonTextStyle(scale)),
                       ),
                     SizedBox(
-                      width: 10 * scale,
+                      width: _kButtonSpacing * scale,
                     ),
                     if (character != null)
                       OutlinedButton(
@@ -106,7 +114,7 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
                         child: Text("Save", style: getButtonTextStyle(scale)),
                       ),
                     SizedBox(
-                      width: 10 * scale,
+                      width: _kButtonSpacing * scale,
                     ),
                     if (!widget.saveOnly)
                       OutlinedButton(
@@ -119,11 +127,11 @@ class SaveCharacterModalMenuState extends State<SaveCharacterModalMenu> {
                       )
                   ]),
               SizedBox(
-                height: 20 * scale,
+                height: _kNameSpacing * scale,
               ),
               Text("Set save name:", style: getTitleTextStyle(scale)),
               SizedBox(
-                  width: 200,
+                  width: _kNameFieldWidth,
                   child: TextField(
                     controller: nameController,
                     focusNode: focusNode,
