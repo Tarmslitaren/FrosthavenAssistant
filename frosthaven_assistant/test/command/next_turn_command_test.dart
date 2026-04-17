@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/next_turn_command.dart';
@@ -16,7 +18,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1,
+            gameState: getIt<GameState>())
+        .execute();
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
   });
@@ -43,7 +47,8 @@ void main() {
     });
 
     test('describe includes character id', () {
-      final command = TurnDoneCommand(character.id, gameState: getIt<GameState>());
+      final command =
+          TurnDoneCommand(character.id, gameState: getIt<GameState>());
       expect(command.describe(), "${character.id}'s turn done");
     });
   });

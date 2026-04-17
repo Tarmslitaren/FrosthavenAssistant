@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number, avoid-late-keyword
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_condition_command.dart';
@@ -118,7 +120,7 @@ void main() {
           gameState: getIt<GameState>());
       command.execute();
       final conditionsAfterExecute =
-          List.from(character.characterState.conditions.value);
+          List.of(character.characterState.conditions.value);
 
       // Act
       command.onUndo();

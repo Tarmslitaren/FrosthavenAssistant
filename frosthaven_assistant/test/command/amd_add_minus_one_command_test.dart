@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_add_minus_one_command.dart';
@@ -15,7 +17,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', "", 1,
+            gameState: getIt<GameState>())
+        .execute();
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
   });
@@ -23,7 +27,8 @@ void main() {
   group('AmdAddMinusOneCommand', () {
     test('should add a minus one card to a character deck', () {
       // Arrange
-      final command = AmdAddMinusOneCommand(character.id, gameState: getIt<GameState>());
+      final command =
+          AmdAddMinusOneCommand(character.id, gameState: getIt<GameState>());
       final modifierDeck = character.characterState.modifierDeck;
       int initialCount = 0;
       modifierDeck.drawPileContents.toList().forEach((element) {
@@ -71,7 +76,8 @@ void main() {
 
     test('should add a minus one card to the allies deck', () {
       // Arrange
-      final command = AmdAddMinusOneCommand('allies', gameState: getIt<GameState>());
+      final command =
+          AmdAddMinusOneCommand('allies', gameState: getIt<GameState>());
       final modifierDeck = getIt<GameState>().modifierDeckAllies;
       int initialCount = 0;
       modifierDeck.drawPileContents.toList().forEach((element) {
@@ -95,7 +101,8 @@ void main() {
 
     test('describe should return correct string', () {
       // Arrange
-      final command = AmdAddMinusOneCommand('Blinkblade', gameState: getIt<GameState>());
+      final command =
+          AmdAddMinusOneCommand('Blinkblade', gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Add minus one');

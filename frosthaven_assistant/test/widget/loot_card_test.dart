@@ -5,6 +5,8 @@ import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 
 import '../command/test_helpers.dart';
 
+// ignore_for_file: no-magic-number
+
 void main() {
   setUpAll(() async {
     await setUpGame();

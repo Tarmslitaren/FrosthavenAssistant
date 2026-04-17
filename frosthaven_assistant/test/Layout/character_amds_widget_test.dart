@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/character_amds_widget.dart';
@@ -49,24 +51,31 @@ void main() {
       expect(find.text('Character Decks'), findsNothing);
     });
 
-    testWidgets('renders Character Decks button when character with perks exists',
+    testWidgets(
+        'renders Character Decks button when character with perks exists',
         (WidgetTester tester) async {
       // Blinkblade has perks
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
       await pumpWidget(tester);
       expect(find.text('Character Decks'), findsOneWidget);
     });
 
     testWidgets('renders ElevatedButton when character with perks exists',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
       await pumpWidget(tester);
       expect(find.byType(ElevatedButton), findsOneWidget);
     });
 
     testWidgets('tapping Character Decks button does not throw',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
       await pumpWidget(tester);
 
       final originalOnError = FlutterError.onError;
@@ -95,8 +104,12 @@ void main() {
 
     testWidgets('widget renders without error with two characters',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 2, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 2,
+              gameState: getIt<GameState>())
+          .execute();
       await pumpWidget(tester);
       expect(find.text('Character Decks'), findsOneWidget);
     });

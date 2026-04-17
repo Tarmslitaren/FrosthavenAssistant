@@ -1,3 +1,5 @@
+// ignore_for_file: no-empty-block
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/clear_unlocked_classes_command.dart';
@@ -16,7 +18,8 @@ void main() {
   group('ClearUnlockedClassesCommand', () {
     test('should clear unlocked classes', () {
       // Arrange
-      AddCharacterCommand("Banner Spear", "Frosthaven", "Banny", 1, gameState: getIt<GameState>())
+      AddCharacterCommand("Banner Spear", "Frosthaven", "Banny", 1,
+              gameState: getIt<GameState>())
           .execute(); //test data BS is hidden class
 
       final gameState = getIt<GameState>();

@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number, no-empty-block
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_perk_command.dart';
@@ -76,7 +78,9 @@ void main() {
       // Arrange
       final monsterDeck = getIt<GameState>().modifierDeck;
       // Add imbuement first to ensure there is something to remove.
-      AddCharacterCommand("Hail", "Mercenary Packs", "Hail", 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand("Hail", "Mercenary Packs", "Hail", 1,
+              gameState: getIt<GameState>())
+          .execute();
       AddPerkCommand("Hail", 17).execute();
       AMDImbue2Command(gameState: getIt<GameState>()).execute();
       expect(monsterDeck.imbuement.value, 2);

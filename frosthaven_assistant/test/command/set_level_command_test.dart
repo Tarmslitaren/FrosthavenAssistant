@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_level_command.dart';
@@ -24,9 +26,12 @@ void main() {
     });
 
     test('should set a specific monster level when monsterId is provided', () {
-      AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
-      final monster = getIt<GameState>().currentList.firstWhere(
-              (e) => e is Monster) as Monster;
+      AddMonsterCommand('Ancient Artillery (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
+      final monster = getIt<GameState>()
+          .currentList
+          .firstWhere((e) => e is Monster) as Monster;
 
       SetLevelCommand(4, monster.id).execute();
 
@@ -40,8 +45,7 @@ void main() {
     });
 
     test('describe with monsterId includes monster name', () {
-      final command =
-          SetLevelCommand(2, 'Ancient Artillery (FH)');
+      final command = SetLevelCommand(2, 'Ancient Artillery (FH)');
       expect(command.describe(), "Set Ancient Artillery (FH)'s level");
     });
   });

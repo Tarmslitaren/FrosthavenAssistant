@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-non-null-assertion
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/background.dart';
@@ -11,8 +13,7 @@ void main() {
     await setUpGame();
   });
 
-  Future<void> pumpBackground(
-      WidgetTester tester, Widget child) async {
+  Future<void> pumpBackground(WidgetTester tester, Widget child) async {
     final originalOnError = FlutterError.onError;
     addTearDown(() => FlutterError.onError = originalOnError);
     FlutterError.onError = ignoreOverflowErrors;
@@ -31,7 +32,8 @@ void main() {
       expect(find.text('hello'), findsOneWidget);
     });
 
-    testWidgets('renders Container with decoration', (WidgetTester tester) async {
+    testWidgets('renders Container with decoration',
+        (WidgetTester tester) async {
       await pumpBackground(tester, const SizedBox());
       expect(find.byType(Container), findsAtLeast(1));
     });
@@ -49,8 +51,7 @@ void main() {
       );
       final decoration = container.decoration as BoxDecoration;
       final image = decoration.image!.image as ResizeImage;
-      expect((image.imageProvider as AssetImage).assetName,
-          contains('bg.png'));
+      expect((image.imageProvider as AssetImage).assetName, contains('bg.png'));
     });
 
     testWidgets('uses frosthaven bg image in light mode',

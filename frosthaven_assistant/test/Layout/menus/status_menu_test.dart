@@ -85,7 +85,7 @@ void main() {
 
       final character = getBlinkblade();
       final conditionsBefore =
-          List<Condition>.from(character.characterState.conditions.value);
+          List<Condition>.of(character.characterState.conditions.value);
 
       // Find the stun ConditionButton and tap it
       final stunButtons = find.byWidgetPredicate((widget) =>
@@ -250,7 +250,7 @@ void main() {
         (WidgetTester tester) async {
       final zealot = getZealot();
       final instance = zealot.monsterInstances.first;
-      final before = List<Condition>.from(instance.conditions.value);
+      final before = List<Condition>.of(instance.conditions.value);
 
       await pumpMonsterMenu(tester);
       final stunButton = find.byWidgetPredicate(

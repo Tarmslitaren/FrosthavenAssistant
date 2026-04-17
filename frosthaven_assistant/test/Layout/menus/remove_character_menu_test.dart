@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_tile.dart';
@@ -15,8 +17,12 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-    AddCharacterCommand('Hatchet', 'Jaws of the Lion', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
+    AddCharacterCommand('Hatchet', 'Jaws of the Lion', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -75,10 +81,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(RemoveCharacterMenu), findsNothing);
-      final characters = getIt<GameState>()
-          .currentList
-          .whereType<Character>()
-          .toList();
+      final characters =
+          getIt<GameState>().currentList.whereType<Character>().toList();
       expect(characters, isEmpty);
     });
 
@@ -89,10 +93,8 @@ void main() {
       await tester.tap(find.text('Blinkblade'));
       await tester.pumpAndSettle();
 
-      final characters = getIt<GameState>()
-          .currentList
-          .whereType<Character>()
-          .toList();
+      final characters =
+          getIt<GameState>().currentList.whereType<Character>().toList();
       expect(characters.length, 1);
       expect(characters.first.characterClass.name, 'Hatchet');
     });
@@ -105,10 +107,8 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.byType(RemoveCharacterMenu), findsNothing);
-      final characters = getIt<GameState>()
-          .currentList
-          .whereType<Character>()
-          .toList();
+      final characters =
+          getIt<GameState>().currentList.whereType<Character>().toList();
       expect(characters.length, 2);
     });
   });

@@ -1,13 +1,15 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frosthaven_assistant/Layout/menus/loot_cards_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/character_loot_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_card_enhancement_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/loot_cards_menu.dart';
+import 'package:frosthaven_assistant/Resource/commands/add_special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_loot_card_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/remove__special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_scenario_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/add_special_loot_card_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/remove__special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
 import 'package:frosthaven_assistant/services/service_locator.dart';
 
@@ -23,7 +25,8 @@ void main() {
     // Set Frosthaven campaign with 'custom' scenario to populate loot deck
     // without triggering monster creation (which fails in test data)
     SetCampaignCommand('Frosthaven').execute();
-    SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
+    SetScenarioCommand('custom', false, gameState: getIt<GameState>())
+        .execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -110,14 +113,16 @@ void main() {
     testWidgets('Return to Top button appears when discard pile has cards',
         (WidgetTester tester) async {
       // Draw a loot card to populate the discard pile
-      getIt<GameState>().action(DrawLootCardCommand(gameState: getIt<GameState>()));
+      getIt<GameState>()
+          .action(DrawLootCardCommand(gameState: getIt<GameState>()));
       await pumpMenu(tester);
       expect(find.text('Return to Top'), findsOneWidget);
     });
 
     testWidgets('tapping Return to Top moves card from discard to draw pile',
         (WidgetTester tester) async {
-      getIt<GameState>().action(DrawLootCardCommand(gameState: getIt<GameState>()));
+      getIt<GameState>()
+          .action(DrawLootCardCommand(gameState: getIt<GameState>()));
       final gameState = getIt<GameState>();
       final discardBefore = gameState.lootDeck.discardPileSize;
       final drawBefore = gameState.lootDeck.drawPileSize;

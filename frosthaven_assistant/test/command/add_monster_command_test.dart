@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_level_command.dart';
@@ -18,7 +20,8 @@ void main() {
   group('AddMonsterCommand', () {
     test('should add a monster to the game', () {
       // Arrange
-      final command = AddMonsterCommand("Ancient Artillery (FH)", 2, false, gameState: getIt<GameState>());
+      final command = AddMonsterCommand("Ancient Artillery (FH)", 2, false,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -35,7 +38,8 @@ void main() {
 
     test('should add an allied monster', () {
       // Arrange
-      final command = AddMonsterCommand("Ancient Artillery (FH)", 2, true, gameState: getIt<GameState>());
+      final command = AddMonsterCommand("Ancient Artillery (FH)", 2, true,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -50,7 +54,8 @@ void main() {
     test('should use game level if monster level is null', () {
       // Arrange
       SetLevelCommand(3, null).execute();
-      final command = AddMonsterCommand("Ancient Artillery (FH)", null, false, gameState: getIt<GameState>());
+      final command = AddMonsterCommand("Ancient Artillery (FH)", null, false,
+          gameState: getIt<GameState>());
 
       // Act
       command.execute();
@@ -64,7 +69,8 @@ void main() {
 
     test('describe should return correct string', () {
       // Arrange
-      final command = AddMonsterCommand("Ancient Artillery (FH)", 2, false, gameState: getIt<GameState>());
+      final command = AddMonsterCommand("Ancient Artillery (FH)", 2, false,
+          gameState: getIt<GameState>());
 
       // Act & Assert
       expect(command.describe(), 'Add Ancient Artillery');

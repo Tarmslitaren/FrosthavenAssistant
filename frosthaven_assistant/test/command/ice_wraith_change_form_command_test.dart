@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
@@ -18,9 +20,12 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand('Ancient Artillery (FH)', 1, false,
+            gameState: getIt<GameState>())
+        .execute();
     AddStandeeCommand(
-            1, null, 'Ancient Artillery (FH)', MonsterType.normal, false, gameState: getIt<GameState>())
+            1, null, 'Ancient Artillery (FH)', MonsterType.normal, false,
+            gameState: getIt<GameState>())
         .execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;
@@ -31,7 +36,8 @@ void main() {
     test('should change type to elite when isElite is false', () {
       expect(monsterInstance.type, MonsterType.normal);
 
-      IceWraithChangeFormCommand(false, monster.id, monsterInstance.getId(), gameState: getIt<GameState>())
+      IceWraithChangeFormCommand(false, monster.id, monsterInstance.getId(),
+              gameState: getIt<GameState>())
           .execute();
 
       expect(monsterInstance.type, MonsterType.elite);
@@ -39,11 +45,13 @@ void main() {
 
     test('should change type to normal when isElite is true', () {
       // First set to elite
-      IceWraithChangeFormCommand(false, monster.id, monsterInstance.getId(), gameState: getIt<GameState>())
+      IceWraithChangeFormCommand(false, monster.id, monsterInstance.getId(),
+              gameState: getIt<GameState>())
           .execute();
       expect(monsterInstance.type, MonsterType.elite);
 
-      IceWraithChangeFormCommand(true, monster.id, monsterInstance.getId(), gameState: getIt<GameState>())
+      IceWraithChangeFormCommand(true, monster.id, monsterInstance.getId(),
+              gameState: getIt<GameState>())
           .execute();
 
       expect(monsterInstance.type, MonsterType.normal);
@@ -51,13 +59,15 @@ void main() {
 
     test('describe when isElite is false returns turn-normal string', () {
       final command = IceWraithChangeFormCommand(
-          false, monster.id, monsterInstance.getId(), gameState: getIt<GameState>());
+          false, monster.id, monsterInstance.getId(),
+          gameState: getIt<GameState>());
       expect(command.describe(), 'Ice Wraith turn normal');
     });
 
     test('describe when isElite is true returns turn-elite string', () {
       final command = IceWraithChangeFormCommand(
-          true, monster.id, monsterInstance.getId(), gameState: getIt<GameState>());
+          true, monster.id, monsterInstance.getId(),
+          gameState: getIt<GameState>());
       expect(command.describe(), 'Ice Wraith turn elite');
     });
   });

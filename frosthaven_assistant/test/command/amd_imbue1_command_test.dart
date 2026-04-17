@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_imbue1_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_remove_imbue_command.dart';

@@ -8,6 +8,8 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../command/test_helpers.dart';
 
+// ignore_for_file: no-magic-number
+
 void main() {
   setUpAll(() async {
     await setUpGame();
@@ -40,17 +42,24 @@ void main() {
 
   group('CharacterIconWidget', () {
     testWidgets('renders Blinkblade icon image', (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>().currentList
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
       expect(find.byType(Image), findsOneWidget);
     });
 
-    testWidgets('Blinkblade icon uses character class color when isCharacter=true',
+    testWidgets(
+        'Blinkblade icon uses character class color when isCharacter=true',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>().currentList
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
 
@@ -61,8 +70,11 @@ void main() {
 
     testWidgets('isCharacter=false renders image without color tint',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>().currentList
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, false);
 
@@ -73,8 +85,11 @@ void main() {
 
     testWidgets('non-Shattersong character does not render ShaderMask',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>().currentList
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
 
@@ -84,8 +99,11 @@ void main() {
 
     testWidgets('renders Container with circular decoration',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>().currentList
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
 
@@ -96,21 +114,26 @@ void main() {
 
     testWidgets('image asset path contains character class name',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>().currentList
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
 
       final img = tester.widget<Image>(find.byType(Image));
       final assetImage = img.image as AssetImage;
-      expect(assetImage.assetName,
-          contains(character.characterClass.name));
+      expect(assetImage.assetName, contains(character.characterClass.name));
     });
 
     testWidgets('isCharacter=true applies class color to image',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>().currentList
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, true);
 
@@ -143,8 +166,11 @@ void main() {
 
     testWidgets('isCharacter=false image has no color tint',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>().currentList
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
       await pumpIcon(tester, character, false);
 
@@ -154,8 +180,11 @@ void main() {
 
     testWidgets('scale parameter affects widget size',
         (WidgetTester tester) async {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      final character = getIt<GameState>().currentList
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      final character = getIt<GameState>()
+          .currentList
           .firstWhere((e) => e.id == 'Blinkblade') as Character;
 
       // Pump with scale=1.0

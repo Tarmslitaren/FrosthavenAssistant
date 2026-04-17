@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/numpad_menu.dart';
@@ -69,7 +71,8 @@ void main() {
       expect(controller.text, '123');
     });
 
-    testWidgets('calls onChange callback with current text when digit is tapped',
+    testWidgets(
+        'calls onChange callback with current text when digit is tapped',
         (WidgetTester tester) async {
       final originalOnError = FlutterError.onError;
       addTearDown(() => FlutterError.onError = originalOnError);

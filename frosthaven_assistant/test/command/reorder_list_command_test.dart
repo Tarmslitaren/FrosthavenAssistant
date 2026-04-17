@@ -1,8 +1,10 @@
+// ignore_for_file: prefer-first, no-magic-number, avoid-non-null-assertion
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/reorder_list_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_ability_list_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/reorder_list_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/reorder_modifier_list_command.dart';
 import 'package:frosthaven_assistant/Resource/game_methods.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -17,8 +19,12 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1, gameState: getIt<GameState>()).execute();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', 'Blinky', 1,
+            gameState: getIt<GameState>())
+        .execute();
+    AddMonsterCommand('Ancient Artillery (FH)', 1, false,
+            gameState: getIt<GameState>())
+        .execute();
   });
 
   group('ReorderListCommand', () {
@@ -34,7 +40,8 @@ void main() {
     });
 
     test('describe returns correct string', () {
-      expect(ReorderListCommand(0, 1, gameState: getIt<GameState>()).describe(), 'Reorder List');
+      expect(ReorderListCommand(0, 1, gameState: getIt<GameState>()).describe(),
+          'Reorder List');
     });
 
     test('undo does not throw', () {
@@ -46,15 +53,18 @@ void main() {
 
   group('ReorderAbilityListCommand', () {
     test('should reorder cards in a monster ability deck', () {
-      final monster = getIt<GameState>().currentList.firstWhere(
-              (e) => e is Monster) as Monster;
+      final monster = getIt<GameState>()
+          .currentList
+          .firstWhere((e) => e is Monster) as Monster;
       final deck = GameMethods.getDeck(monster.type.deck)!;
       // Need at least 2 cards
       if (deck.drawPileSize >= 2) {
         final firstCardNr = deck.drawPileContents.toList()[0].nr;
         final secondCardNr = deck.drawPileContents.toList()[1].nr;
 
-        ReorderAbilityListCommand(monster.type.deck, 0, 1, gameState: getIt<GameState>()).execute();
+        ReorderAbilityListCommand(monster.type.deck, 0, 1,
+                gameState: getIt<GameState>())
+            .execute();
 
         expect(deck.drawPileContents.toList()[0].nr, secondCardNr);
         expect(deck.drawPileContents.toList()[1].nr, firstCardNr);
@@ -62,7 +72,9 @@ void main() {
     });
 
     test('describe returns correct string', () {
-      expect(ReorderAbilityListCommand('deck', 0, 1, gameState: getIt<GameState>()).describe(),
+      expect(
+          ReorderAbilityListCommand('deck', 0, 1, gameState: getIt<GameState>())
+              .describe(),
           'Reorder Ability Cards');
     });
   });
@@ -74,7 +86,8 @@ void main() {
         final firstGfx = deck.drawPileContents.toList()[0].gfx;
         final secondGfx = deck.drawPileContents.toList()[1].gfx;
 
-        ReorderModifierListCommand(0, 1, '', gameState: getIt<GameState>()).execute();
+        ReorderModifierListCommand(0, 1, '', gameState: getIt<GameState>())
+            .execute();
 
         expect(deck.drawPileContents.toList()[0].gfx, secondGfx);
         expect(deck.drawPileContents.toList()[1].gfx, firstGfx);
@@ -82,7 +95,9 @@ void main() {
     });
 
     test('describe returns correct string', () {
-      expect(ReorderModifierListCommand(0, 1, '', gameState: getIt<GameState>()).describe(),
+      expect(
+          ReorderModifierListCommand(0, 1, '', gameState: getIt<GameState>())
+              .describe(),
           'Reorder Modifier Cards');
     });
   });

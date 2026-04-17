@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number, avoid-late-keyword
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_summon_menu.dart';
@@ -17,7 +19,9 @@ void main() {
   setUp(() {
     getIt<GameState>().clearList();
     // Banner Spear has summons defined in test data
-    AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
   });

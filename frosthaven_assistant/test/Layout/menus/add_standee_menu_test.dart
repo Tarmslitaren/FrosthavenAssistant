@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_standee_menu.dart';
@@ -18,7 +20,8 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>())
+        .execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;
   });
@@ -84,7 +87,8 @@ void main() {
 
     testWidgets('tapping an already occupied standee number does nothing',
         (WidgetTester tester) async {
-      AddStandeeCommand(1, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>())
+      AddStandeeCommand(1, null, monster.id, MonsterType.normal, false,
+              gameState: getIt<GameState>())
           .execute();
       monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
           as Monster;

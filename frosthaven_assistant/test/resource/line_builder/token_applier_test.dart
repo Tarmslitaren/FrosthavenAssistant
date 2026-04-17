@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/line_builder/token_applier.dart';
 
+// ignore_for_file: no-magic-number
+
 void main() {
   Widget wrapWidget(Widget w) => MaterialApp(home: Scaffold(body: w));
 
@@ -16,8 +18,7 @@ void main() {
 
     testWidgets('plain text with no tokens renders without crashing',
         (tester) async {
-      final widget =
-          TokenApplier.applyTokensForPerks('Remove one -1 card');
+      final widget = TokenApplier.applyTokensForPerks('Remove one -1 card');
       await tester.pumpWidget(wrapWidget(widget));
       expect(find.byType(RichText), findsAtLeast(1));
     });
@@ -128,7 +129,8 @@ void main() {
   });
 }
 
-void ignoreOverflowErrors(FlutterErrorDetails details, {bool forceReport = false}) {
+void ignoreOverflowErrors(FlutterErrorDetails details,
+    {bool forceReport = false}) {
   if (details.exception is FlutterError) {
     final fe = details.exception as FlutterError;
     if (fe.diagnostics.any((e) =>

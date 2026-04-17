@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/save_character_modal_menu.dart';
@@ -16,7 +18,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
   });
@@ -87,13 +91,15 @@ void main() {
       // Dialog should close (Navigator.pop called)
     });
 
-    testWidgets('tapping Delete button closes dialog', (WidgetTester tester) async {
+    testWidgets('tapping Delete button closes dialog',
+        (WidgetTester tester) async {
       await pumpMenu(tester, saveOnly: false, char: character);
       await tester.tap(find.text('Delete'));
       await tester.pumpAndSettle();
     });
 
-    testWidgets('tapping Load button closes dialog', (WidgetTester tester) async {
+    testWidgets('tapping Load button closes dialog',
+        (WidgetTester tester) async {
       await pumpMenu(tester, saveOnly: false, char: character);
       // Load button is the first button when saveOnly=false
       await tester.tap(find.text('Load'));

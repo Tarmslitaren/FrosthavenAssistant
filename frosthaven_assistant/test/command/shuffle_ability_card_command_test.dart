@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword, avoid-non-null-assertion
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/draw_ability_card_command.dart';
@@ -19,7 +21,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand('Ancient Artillery (FH)', 1, false,
+            gameState: getIt<GameState>())
+        .execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;
   });
@@ -63,7 +67,9 @@ void main() {
 
   group('ShuffleAMDCardCommand', () {
     test('describe returns correct string', () {
-      expect(ShuffleAMDCardCommand('', gameState: getIt<GameState>()).describe(), 'Extra AMD deck shuffle');
+      expect(
+          ShuffleAMDCardCommand('', gameState: getIt<GameState>()).describe(),
+          'Extra AMD deck shuffle');
     });
 
     test('should shuffle modifier deck draw pile', () {

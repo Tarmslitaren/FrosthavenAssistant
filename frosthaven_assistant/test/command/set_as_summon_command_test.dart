@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_monster_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_standee_command.dart';
@@ -18,9 +20,12 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Ancient Artillery (FH)', 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand('Ancient Artillery (FH)', 1, false,
+            gameState: getIt<GameState>())
+        .execute();
     AddStandeeCommand(
-            1, null, 'Ancient Artillery (FH)', MonsterType.normal, false, gameState: getIt<GameState>())
+            1, null, 'Ancient Artillery (FH)', MonsterType.normal, false,
+            gameState: getIt<GameState>())
         .execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;
@@ -29,26 +34,33 @@ void main() {
 
   group('SetAsSummonCommand', () {
     test('should mark a monster instance as summoned', () {
-      SetAsSummonCommand(true, monsterInstance.getId(), monster.id, gameState: getIt<GameState>()).execute();
-      expect(monsterInstance.roundSummoned,
-          greaterThanOrEqualTo(1));
+      SetAsSummonCommand(true, monsterInstance.getId(), monster.id,
+              gameState: getIt<GameState>())
+          .execute();
+      expect(monsterInstance.roundSummoned, greaterThanOrEqualTo(1));
     });
 
     test('should clear summon mark when summoned is false', () {
-      SetAsSummonCommand(true, monsterInstance.getId(), monster.id, gameState: getIt<GameState>()).execute();
-      SetAsSummonCommand(false, monsterInstance.getId(), monster.id, gameState: getIt<GameState>()).execute();
+      SetAsSummonCommand(true, monsterInstance.getId(), monster.id,
+              gameState: getIt<GameState>())
+          .execute();
+      SetAsSummonCommand(false, monsterInstance.getId(), monster.id,
+              gameState: getIt<GameState>())
+          .execute();
       expect(monsterInstance.roundSummoned, -1);
     });
 
     test('describe when summoned is true mentions mark', () {
-      final command =
-          SetAsSummonCommand(true, monsterInstance.getId(), monster.id, gameState: getIt<GameState>());
+      final command = SetAsSummonCommand(
+          true, monsterInstance.getId(), monster.id,
+          gameState: getIt<GameState>());
       expect(command.describe(), contains('summon'));
     });
 
     test('describe when summoned is false mentions remove', () {
-      final command =
-          SetAsSummonCommand(false, monsterInstance.getId(), monster.id, gameState: getIt<GameState>());
+      final command = SetAsSummonCommand(
+          false, monsterInstance.getId(), monster.id,
+          gameState: getIt<GameState>());
       expect(command.describe(), contains('Remove'));
     });
   });

@@ -71,7 +71,7 @@ void main() {
     testWidgets('shows existing saves in list', (WidgetTester tester) async {
       final settings = getIt<Settings>();
       // Add a save entry to the settings
-      final saves = Map<String, String>.from(settings.saves.value);
+      final saves = Map<String, String>.of(settings.saves.value);
       saves['TestSave1'] = 'somedata';
       settings.saves.value = saves;
 
@@ -87,7 +87,7 @@ void main() {
       expect(find.byType(SaveModalMenu), findsOneWidget);
 
       // cleanup
-      final cleanSaves = Map<String, String>.from(settings.saves.value);
+      final cleanSaves = Map<String, String>.of(settings.saves.value);
       cleanSaves.remove('TestSave1');
       settings.saves.value = cleanSaves;
     });

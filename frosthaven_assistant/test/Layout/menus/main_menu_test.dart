@@ -1,19 +1,21 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
+import 'package:frosthaven_assistant/Layout/menus/add_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/add_section_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/loot_cards_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/main_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/add_character_menu.dart';
-import 'package:frosthaven_assistant/Layout/menus/add_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_character_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/select_scenario_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
 import 'package:frosthaven_assistant/Layout/menus/settings_menu.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
+import 'package:frosthaven_assistant/Resource/commands/hide_ally_deck_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_scenario_command.dart';
-import 'package:frosthaven_assistant/Resource/commands/hide_ally_deck_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/show_ally_deck_command.dart';
 import 'package:frosthaven_assistant/Resource/settings.dart';
 import 'package:frosthaven_assistant/Resource/state/game_state.dart';
@@ -125,7 +127,9 @@ void main() {
     testWidgets('tapping Undo calls undo on game state',
         (WidgetTester tester) async {
       // Do an action first so undo is enabled
-      getIt<GameState>().action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()));
+      getIt<GameState>().action(AddCharacterCommand(
+          'Blinkblade', 'Frosthaven', null, 1,
+          gameState: getIt<GameState>()));
       final gameState = getIt<GameState>();
       final indexBefore = gameState.commandIndex.value;
 
@@ -140,7 +144,8 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       // Do an action and undo it so redo is available
-      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()));
+      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+          gameState: getIt<GameState>()));
       gameState.undo();
       final indexBefore = gameState.commandIndex.value;
 
@@ -155,7 +160,9 @@ void main() {
         (WidgetTester tester) async {
       // Set up a valid scenario so AddSectionMenu can initialize
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('#0 Howling in the Snow', false,
+              gameState: getIt<GameState>())
+          .execute();
 
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Add Section'), 100);
@@ -189,7 +196,8 @@ void main() {
         (WidgetTester tester) async {
       // Set Frosthaven campaign so Loot Deck Menu appears
       SetCampaignCommand('Frosthaven').execute();
-      SetScenarioCommand('custom', false, gameState: getIt<GameState>()).execute();
+      SetScenarioCommand('custom', false, gameState: getIt<GameState>())
+          .execute();
 
       await pumpMenu(tester);
       await tester.scrollUntilVisible(find.text('Loot Deck Menu'), 100);
@@ -254,8 +262,8 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       // Do an action so there's a description
-      gameState.action(
-          AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()));
+      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+          gameState: getIt<GameState>()));
 
       await pumpMenu(tester);
       // Undo text should include the command description
@@ -269,7 +277,8 @@ void main() {
       final gameState = getIt<GameState>();
       // Enable server mode — covers undoEnabled/redoEnabled server branches
       settings.server.value = true;
-      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()));
+      gameState.action(AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+          gameState: getIt<GameState>()));
 
       await pumpMenu(tester);
       expect(find.textContaining('Undo'), findsOneWidget);
@@ -301,7 +310,8 @@ void main() {
       settings.showAmdDeck.value = false;
     });
 
-    testWidgets('client connection section renders when lastKnownConnection is set',
+    testWidgets(
+        'client connection section renders when lastKnownConnection is set',
         (WidgetTester tester) async {
       final settings = getIt<Settings>();
       final originalConnection = settings.lastKnownConnection;

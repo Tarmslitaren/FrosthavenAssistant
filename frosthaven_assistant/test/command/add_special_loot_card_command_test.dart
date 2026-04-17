@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_special_loot_card_command.dart';

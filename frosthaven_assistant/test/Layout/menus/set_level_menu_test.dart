@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_level_menu.dart';
@@ -105,7 +107,8 @@ void main() {
   group('SetLevelMenu — monster level mode', () {
     testWidgets('renders the monster name in the title',
         (WidgetTester tester) async {
-      AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>())
+          .execute();
       final monster = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Monster) as Monster;
@@ -116,7 +119,8 @@ void main() {
 
     testWidgets('still renders legend entries in monster mode (figure==null)',
         (WidgetTester tester) async {
-      AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>())
+          .execute();
       final monster = getIt<GameState>()
           .currentList
           .firstWhere((e) => e is Monster) as Monster;

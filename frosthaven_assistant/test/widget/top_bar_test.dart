@@ -8,6 +8,8 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 
 import '../command/test_helpers.dart';
 
+// ignore_for_file: no-magic-number
+
 void main() {
   setUpAll(() async {
     await setUpGame();
@@ -60,8 +62,8 @@ void main() {
       expect(gameState.elementState[Elements.fire], ElementState.inert);
 
       await pumpTopBar(tester);
-      final fireButton = find.byWidgetPredicate((w) =>
-          w is ElementButton && w.element == Elements.fire);
+      final fireButton = find.byWidgetPredicate(
+          (w) => w is ElementButton && w.element == Elements.fire);
       await tester.tap(fireButton);
       await tester.pump();
 
@@ -77,8 +79,8 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       await pumpTopBar(tester);
-      final fireButton = find.byWidgetPredicate((w) =>
-          w is ElementButton && w.element == Elements.fire);
+      final fireButton = find.byWidgetPredicate(
+          (w) => w is ElementButton && w.element == Elements.fire);
       await tester.longPress(fireButton);
       await tester.pump();
 
@@ -90,8 +92,8 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       await pumpTopBar(tester);
-      final iceButton = find.byWidgetPredicate((w) =>
-          w is ElementButton && w.element == Elements.ice);
+      final iceButton = find.byWidgetPredicate(
+          (w) => w is ElementButton && w.element == Elements.ice);
       await tester.tap(iceButton);
       await tester.pump();
 
@@ -106,8 +108,8 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       await pumpTopBar(tester);
-      final earthButton = find.byWidgetPredicate((w) =>
-          w is ElementButton && w.element == Elements.earth);
+      final earthButton = find.byWidgetPredicate(
+          (w) => w is ElementButton && w.element == Elements.earth);
       // Tap inert → imbues to full (half=false)
       await tester.tap(earthButton);
       await tester.pump();

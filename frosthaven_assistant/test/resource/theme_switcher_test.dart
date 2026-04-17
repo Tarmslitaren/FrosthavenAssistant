@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword, no-empty-block, no-magic-number, avoid-non-null-assertion
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/theme.dart';

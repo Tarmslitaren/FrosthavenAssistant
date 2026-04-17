@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/monster_stat_card_widget.dart';
@@ -10,7 +12,8 @@ import 'package:frosthaven_assistant/services/service_locator.dart';
 import '../command/test_helpers.dart';
 
 Monster _getBoss() {
-  return getIt<GameState>().currentList.firstWhere((e) => e is Monster) as Monster;
+  return getIt<GameState>().currentList.firstWhere((e) => e is Monster)
+      as Monster;
 }
 
 Future<void> _pumpBoss(WidgetTester tester, Monster monster,
@@ -29,7 +32,8 @@ Future<void> _pumpBoss(WidgetTester tester, Monster monster,
 
   final widget = MonsterStatCardWidget.buildBossLayout(
       monster, 1.0, shadow, leftStyle, frosthavenStyle,
-      viewModel: MonsterStatCardViewModel(monster, gameState: getIt<GameState>()));
+      viewModel:
+          MonsterStatCardViewModel(monster, gameState: getIt<GameState>()));
 
   final originalOnError = FlutterError.onError;
   addTearDown(() => FlutterError.onError = originalOnError);
@@ -57,7 +61,9 @@ void main() {
 
   group('buildBossLayout', () {
     testWidgets('renders without crashing', (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       await _pumpBoss(tester, monster);
       // Should find the RepaintBoundary at the top of the returned widget
@@ -65,7 +71,9 @@ void main() {
     });
 
     testWidgets('renders boss background image', (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       await _pumpBoss(tester, monster);
 
@@ -81,7 +89,9 @@ void main() {
     });
 
     testWidgets('displays health stat text', (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       // At level 1: health=25
       await _pumpBoss(tester, monster);
@@ -89,7 +99,9 @@ void main() {
     });
 
     testWidgets('displays move stat text', (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       // At level 1: move=2
       await _pumpBoss(tester, monster);
@@ -97,7 +109,9 @@ void main() {
     });
 
     testWidgets('displays attack stat text', (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       // At level 1: attack=4
       await _pumpBoss(tester, monster);
@@ -105,7 +119,9 @@ void main() {
     });
 
     testWidgets('displays level text', (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       // Level value is 1
       await _pumpBoss(tester, monster);
@@ -114,7 +130,9 @@ void main() {
 
     testWidgets('shows special1 section with "1:" label when non-empty',
         (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       // Test Boss has non-empty special1
       await _pumpBoss(tester, monster);
@@ -123,7 +141,9 @@ void main() {
 
     testWidgets('shows special2 section with "2:" label when non-empty',
         (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       // Test Boss has non-empty special2
       await _pumpBoss(tester, monster);
@@ -132,7 +152,9 @@ void main() {
 
     testWidgets('shows range icon when range is non-zero',
         (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       // At level 1: range=2
       await _pumpBoss(tester, monster);
@@ -140,14 +162,17 @@ void main() {
       final images = tester.widgetList<Image>(find.byType(Image)).toList();
       final hasRangeIcon = images.any((img) {
         final provider = img.image;
-        return provider is AssetImage && provider.assetName.contains('range-stat');
+        return provider is AssetImage &&
+            provider.assetName.contains('range-stat');
       });
       expect(hasRangeIcon, isTrue);
     });
 
     testWidgets('does not show range icon when range is zero',
         (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 0, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 0, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       // At level 0: range=0
       await _pumpBoss(tester, monster);
@@ -155,14 +180,18 @@ void main() {
       final images = tester.widgetList<Image>(find.byType(Image)).toList();
       final hasRangeIcon = images.any((img) {
         final provider = img.image;
-        return provider is AssetImage && provider.assetName.contains('range-stat');
+        return provider is AssetImage &&
+            provider.assetName.contains('range-stat');
       });
       expect(hasRangeIcon, isFalse);
     });
 
-    testWidgets('shows frosthaven flying icon for flying boss with frosthavenStyle=true',
+    testWidgets(
+        'shows frosthaven flying icon for flying boss with frosthavenStyle=true',
         (WidgetTester tester) async {
-      AddMonsterCommand('Flying Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Flying Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       await _pumpBoss(tester, monster, frosthavenStyle: true);
 
@@ -177,7 +206,9 @@ void main() {
 
     testWidgets('shows non-frosthaven flying icon with frosthavenStyle=false',
         (WidgetTester tester) async {
-      AddMonsterCommand('Flying Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Flying Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       await _pumpBoss(tester, monster, frosthavenStyle: false);
 
@@ -192,7 +223,9 @@ void main() {
 
     testWidgets('frosthavenStyle=true uses Markazi font for level text',
         (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       await _pumpBoss(tester, monster, frosthavenStyle: true);
 
@@ -207,7 +240,9 @@ void main() {
 
     testWidgets('frosthavenStyle=false uses Majalla font for level text',
         (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       await _pumpBoss(tester, monster, frosthavenStyle: false);
 
@@ -222,7 +257,9 @@ void main() {
     testWidgets(
         'noCalculation=true shows raw health formula string instead of calculated value',
         (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       getIt<Settings>().noCalculation.value = true;
       // At level 1: health=25 (raw int, so toString still gives "25")
@@ -233,7 +270,9 @@ void main() {
 
     testWidgets('renders via MonsterStatCardWidget without crashing',
         (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       final originalOnError = FlutterError.onError;
       addTearDown(() => FlutterError.onError = originalOnError);
@@ -256,7 +295,9 @@ void main() {
 
     testWidgets('Stack contains multiple Positioned widgets',
         (WidgetTester tester) async {
-      AddMonsterCommand('Test Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Test Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       await _pumpBoss(tester, monster);
       expect(find.byType(Positioned), findsAtLeast(2));
@@ -265,7 +306,9 @@ void main() {
     testWidgets('does not show "1:" or "2:" when specials are empty',
         (WidgetTester tester) async {
       // Flying Boss has empty special1 and special2
-      AddMonsterCommand('Flying Boss (FH)', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Flying Boss (FH)', 1, false,
+              gameState: getIt<GameState>())
+          .execute();
       final monster = _getBoss();
       await _pumpBoss(tester, monster);
       expect(find.text('1:'), findsNothing);

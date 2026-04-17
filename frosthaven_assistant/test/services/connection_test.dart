@@ -8,6 +8,8 @@ import 'package:mockito/mockito.dart';
 
 import 'connection_test.mocks.dart';
 
+// ignore_for_file: no-magic-number
+
 final _sut = Connection();
 const _randomPortNumber = 54632;
 

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-non-null-assertion
+
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/amd_remove_minus_2_command.dart';

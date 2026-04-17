@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/monster_ability_card_widget.dart';
@@ -20,7 +22,8 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+        .execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;
   });
@@ -66,7 +69,8 @@ void main() {
       expect(find.byType(MonsterWidget), findsOneWidget);
     });
 
-    testWidgets('renders Wrap for monster box grid', (WidgetTester tester) async {
+    testWidgets('renders Wrap for monster box grid',
+        (WidgetTester tester) async {
       await pumpWidget(tester);
       expect(find.byType(Wrap), findsAtLeast(1));
     });
@@ -79,7 +83,8 @@ void main() {
     testWidgets('tapping image in playTurns state wraps image in InkWell',
         (WidgetTester tester) async {
       // Add a standee so the monster has instances
-      AddStandeeCommand(1, null, monster.id, MonsterType.normal, false, gameState: getIt<GameState>())
+      AddStandeeCommand(1, null, monster.id, MonsterType.normal, false,
+              gameState: getIt<GameState>())
           .execute();
       (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =
           RoundState.playTurns;
@@ -92,7 +97,8 @@ void main() {
 
       // restore
       getIt<GameState>().clearList();
-      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>()).execute();
+      AddMonsterCommand('Zealot', 1, false, gameState: getIt<GameState>())
+          .execute();
       monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
           as Monster;
       (getIt<GameState>().roundState as ValueNotifier<RoundState>).value =

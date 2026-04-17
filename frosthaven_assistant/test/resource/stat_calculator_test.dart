@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword, no-empty-block, no-magic-number, avoid-non-null-assertion
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_character_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_level_command.dart';
@@ -123,9 +125,15 @@ void main() {
     });
 
     test('substitutes C with actual character count when ≥ 2', () {
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
-      AddCharacterCommand('Hail', 'Mercenary Packs', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      AddCharacterCommand('Banner Spear', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
+      AddCharacterCommand('Hail', 'Mercenary Packs', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
       // 3 characters → C = 3
       expect(StatCalculator.calculateFormula('C'), 3);
     });

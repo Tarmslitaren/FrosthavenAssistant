@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number, avoid-late-keyword
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/remove_monster_menu.dart';
@@ -17,8 +19,11 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
-    AddMonsterCommand("Ancient Artillery (FH)", 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>())
+        .execute();
+    AddMonsterCommand("Ancient Artillery (FH)", 1, false,
+            gameState: getIt<GameState>())
+        .execute();
     final monsters =
         getIt<GameState>().currentList.whereType<Monster>().toList();
     zealotDisplay = monsters.firstWhere((m) => m.id == 'Zealot').type.display;

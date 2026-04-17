@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/enhance_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/set_campaign_command.dart';
@@ -14,7 +16,9 @@ void main() {
 
   setUp(() {
     SetCampaignCommand('Frosthaven').execute();
-    SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
+    SetScenarioCommand('#0 Howling in the Snow', false,
+            gameState: getIt<GameState>())
+        .execute();
   });
 
   group('EnhanceLootCardCommand', () {
@@ -24,7 +28,8 @@ void main() {
       if (lootDeck.drawPileIsNotEmpty) {
         final cardId = lootDeck.drawPileContents.toList().first.id;
 
-        EnhanceLootCardCommand(cardId, 2, 'coin', gameState: getIt<GameState>()).execute();
+        EnhanceLootCardCommand(cardId, 2, 'coin', gameState: getIt<GameState>())
+            .execute();
 
         // After enhancement the deck is rebuilt; verify it doesn't crash
         expect(lootDeck.drawPileIsNotEmpty, isTrue);
@@ -33,14 +38,22 @@ void main() {
     });
 
     test('describe returns "Add Loot Enhancement" when value is positive', () {
-      expect(EnhanceLootCardCommand(1, 1, 'coin', gameState: getIt<GameState>()).describe(),
+      expect(
+          EnhanceLootCardCommand(1, 1, 'coin', gameState: getIt<GameState>())
+              .describe(),
           'Add Loot Enhancement');
     });
 
-    test('describe returns "Remove Loot Enhancement" when value is zero or negative', () {
-      expect(EnhanceLootCardCommand(1, 0, 'coin', gameState: getIt<GameState>()).describe(),
+    test(
+        'describe returns "Remove Loot Enhancement" when value is zero or negative',
+        () {
+      expect(
+          EnhanceLootCardCommand(1, 0, 'coin', gameState: getIt<GameState>())
+              .describe(),
           'Remove Loot Enhancement');
-      expect(EnhanceLootCardCommand(1, -1, 'coin', gameState: getIt<GameState>()).describe(),
+      expect(
+          EnhanceLootCardCommand(1, -1, 'coin', gameState: getIt<GameState>())
+              .describe(),
           'Remove Loot Enhancement');
     });
   });

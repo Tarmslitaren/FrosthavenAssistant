@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number, avoid-late-keyword
+
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number, avoid-late-keyword
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/set_character_level_menu.dart';
@@ -16,7 +18,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
     character = getIt<GameState>().currentList.firstWhere((e) => e is Character)
         as Character;
   });
@@ -53,9 +57,7 @@ void main() {
     testWidgets('renders the character name in the title',
         (WidgetTester tester) async {
       await pumpMenu(tester);
-      expect(
-          find.textContaining(
-              character.characterState.display.value),
+      expect(find.textContaining(character.characterState.display.value),
           findsOneWidget);
     });
 
@@ -95,8 +97,8 @@ void main() {
 
       // The TextField is off-screen due to overflow so pointer events cannot
       // reach it. Set the controller text and invoke onSubmitted directly.
-      final menuState = tester
-          .state<SetCharacterLevelMenuState>(find.byType(SetCharacterLevelMenu));
+      final menuState = tester.state<SetCharacterLevelMenuState>(
+          find.byType(SetCharacterLevelMenu));
       menuState.nameController.text = 'HeroName';
       final tf = tester.widget<TextField>(find.byType(TextField));
       tf.onSubmitted?.call('HeroName');

@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number, avoid-late-keyword, avoid-top-level-members-in-tests, prefer-match-file-name, avoid-non-null-assertion
+
 import 'dart:async';
 import 'dart:convert' show utf8;
 import 'dart:io';
@@ -87,7 +89,8 @@ class WireClient {
     send('init version:1302');
     final raw = await receive();
     final envelope = StateEnvelope.tryDecode(raw);
-    assert(envelope != null, 'Init response was not a valid StateEnvelope: $raw');
+    assert(
+        envelope != null, 'Init response was not a valid StateEnvelope: $raw');
     return envelope!;
   }
 
@@ -150,7 +153,8 @@ Future<void> _setUpServer() async {
     if (_testServer.serverSocket != null) break;
     await Future<void>.delayed(const Duration(milliseconds: 10));
   }
-  expect(_testServer.serverSocket, isNotNull, reason: 'Server failed to bind within 1 s');
+  expect(_testServer.serverSocket, isNotNull,
+      reason: 'Server failed to bind within 1 s');
   _serverPort = _testServer.serverSocket!.port;
 }
 

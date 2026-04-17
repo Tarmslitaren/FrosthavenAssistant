@@ -4,6 +4,8 @@ import 'package:frosthaven_assistant/Resource/line_builder/line_builder.dart';
 
 import '../../command/test_helpers.dart';
 
+// ignore_for_file: no-magic-number
+
 void main() {
   setUpAll(() async {
     await setUpGame();
@@ -70,41 +72,41 @@ void main() {
 
   group('LineBuilder.getTopPaddingForStyle', () {
     test('non-Markazi font with height=0.85 returns fontSize * 0.25', () {
-      const style = TextStyle(
-          fontFamily: 'Majalla', fontSize: 12.0, height: 0.85);
+      const style =
+          TextStyle(fontFamily: 'Majalla', fontSize: 12.0, height: 0.85);
       expect(LineBuilder.getTopPaddingForStyle(style), closeTo(3.0, 0.001));
     });
 
     test('Markazi font with height=0.84 returns fontSize * 0.1', () {
-      const style = TextStyle(
-          fontFamily: 'Markazi', fontSize: 10.0, height: 0.84);
+      const style =
+          TextStyle(fontFamily: 'Markazi', fontSize: 10.0, height: 0.84);
       expect(LineBuilder.getTopPaddingForStyle(style), closeTo(1.0, 0.001));
     });
 
     test('non-Markazi font with height=0.84 returns 0', () {
-      const style = TextStyle(
-          fontFamily: 'Majalla', fontSize: 12.0, height: 0.84);
+      const style =
+          TextStyle(fontFamily: 'Majalla', fontSize: 12.0, height: 0.84);
       expect(LineBuilder.getTopPaddingForStyle(style), 0.0);
     });
 
     test('Markazi font with height=0.85 returns 0', () {
       // Markazi check uses 0.84 specifically; 0.85 does not match
-      const style = TextStyle(
-          fontFamily: 'Markazi', fontSize: 10.0, height: 0.85);
+      const style =
+          TextStyle(fontFamily: 'Markazi', fontSize: 10.0, height: 0.85);
       expect(LineBuilder.getTopPaddingForStyle(style), 0.0);
     });
 
     test('non-Markazi font with height=1.0 returns 0', () {
-      const style = TextStyle(
-          fontFamily: 'Majalla', fontSize: 14.0, height: 1.0);
+      const style =
+          TextStyle(fontFamily: 'Majalla', fontSize: 14.0, height: 1.0);
       expect(LineBuilder.getTopPaddingForStyle(style), 0.0);
     });
 
     test('padding scales with fontSize', () {
-      const small = TextStyle(
-          fontFamily: 'Majalla', fontSize: 8.0, height: 0.85);
-      const large = TextStyle(
-          fontFamily: 'Majalla', fontSize: 16.0, height: 0.85);
+      const small =
+          TextStyle(fontFamily: 'Majalla', fontSize: 8.0, height: 0.85);
+      const large =
+          TextStyle(fontFamily: 'Majalla', fontSize: 16.0, height: 0.85);
       expect(LineBuilder.getTopPaddingForStyle(large),
           greaterThan(LineBuilder.getTopPaddingForStyle(small)));
     });

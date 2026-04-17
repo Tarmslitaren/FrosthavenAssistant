@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Resource/commands/add_special_loot_card_command.dart';
 import 'package:frosthaven_assistant/Resource/commands/remove__special_loot_card_command.dart';
@@ -15,7 +17,9 @@ void main() {
 
   setUp(() {
     SetCampaignCommand('Frosthaven').execute();
-    SetScenarioCommand('#0 Howling in the Snow', false, gameState: getIt<GameState>()).execute();
+    SetScenarioCommand('#0 Howling in the Snow', false,
+            gameState: getIt<GameState>())
+        .execute();
   });
 
   group('RemoveSpecialLootCardCommand', () {
@@ -24,7 +28,8 @@ void main() {
       final lootDeck = getIt<GameState>().lootDeck;
       expect(lootDeck.hasCard1418, isTrue);
 
-      RemoveSpecialLootCardCommand(1418, gameState: getIt<GameState>()).execute();
+      RemoveSpecialLootCardCommand(1418, gameState: getIt<GameState>())
+          .execute();
 
       expect(lootDeck.hasCard1418, isFalse);
       checkSaveState();
@@ -35,7 +40,8 @@ void main() {
       final lootDeck = getIt<GameState>().lootDeck;
       expect(lootDeck.hasCard1419, isTrue);
 
-      RemoveSpecialLootCardCommand(1419, gameState: getIt<GameState>()).execute();
+      RemoveSpecialLootCardCommand(1419, gameState: getIt<GameState>())
+          .execute();
 
       expect(lootDeck.hasCard1419, isFalse);
       checkSaveState();
@@ -45,13 +51,15 @@ void main() {
       final lootDeck = getIt<GameState>().lootDeck;
       final countBefore = lootDeck.drawPileSize;
 
-      RemoveSpecialLootCardCommand(9999, gameState: getIt<GameState>()).execute();
+      RemoveSpecialLootCardCommand(9999, gameState: getIt<GameState>())
+          .execute();
 
       expect(lootDeck.drawPileSize, countBefore);
     });
 
     test('describe includes the card number', () {
-      final command = RemoveSpecialLootCardCommand(1418, gameState: getIt<GameState>());
+      final command =
+          RemoveSpecialLootCardCommand(1418, gameState: getIt<GameState>());
       expect(command.describe(), 'Remove Special loot card 1418');
     });
   });

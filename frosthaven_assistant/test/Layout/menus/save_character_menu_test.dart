@@ -16,7 +16,9 @@ void main() {
 
   setUp(() {
     getIt<GameState>().clearList();
-    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+    AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+            gameState: getIt<GameState>())
+        .execute();
   });
 
   Future<void> pumpMenu(WidgetTester tester) async {
@@ -87,9 +89,9 @@ void main() {
 
     testWidgets('shows saved characters in list', (WidgetTester tester) async {
       final settings = getIt<Settings>();
-      final before = Map<String, String>.from(settings.characterSaves.value);
+      final before = Map<String, String>.of(settings.characterSaves.value);
       // Add a save entry
-      final saves = Map<String, String>.from(settings.characterSaves.value);
+      final saves = Map<String, String>.of(settings.characterSaves.value);
       saves['BlinkbladeSave\nBlinkblade'] = 'somedata';
       settings.characterSaves.value = saves;
 

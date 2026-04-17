@@ -1,3 +1,5 @@
+// ignore_for_file: avoid-late-keyword
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/ability_cards_menu.dart';
@@ -21,7 +23,8 @@ void main() {
   // This ensures that our tests are independent and not affecting each other.
   setUp(() {
     getIt<GameState>().clearList();
-    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>()).execute();
+    AddMonsterCommand("Zealot", 1, false, gameState: getIt<GameState>())
+        .execute();
     DrawAbilityCardCommand("Zealot").execute();
     monster = getIt<GameState>().currentList.firstWhere((e) => e is Monster)
         as Monster;

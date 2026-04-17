@@ -1,3 +1,5 @@
+// ignore_for_file: no-magic-number
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frosthaven_assistant/Layout/menus/modifier_card_zoom.dart';
@@ -53,8 +55,8 @@ void main() {
     });
 
     testWidgets('renders card count text', (WidgetTester tester) async {
-      final deck = GameMethods.getModifierDeck(
-          monsterDeckName, getIt<GameState>());
+      final deck =
+          GameMethods.getModifierDeck(monsterDeckName, getIt<GameState>());
       await pumpWidget(tester, monsterDeckName);
       expect(find.text(deck.cardCount.value.toString()), findsAtLeast(1));
     });
@@ -90,7 +92,8 @@ void main() {
       final deck = GameMethods.getModifierDeck(monsterDeckName, gameState);
       // Drain the draw pile
       while (deck.drawPileIsNotEmpty) {
-        gameState.action(DrawModifierCardCommand(monsterDeckName, gameState: getIt<GameState>()));
+        gameState.action(DrawModifierCardCommand(monsterDeckName,
+            gameState: getIt<GameState>()));
       }
 
       await pumpWidget(tester, monsterDeckName);
@@ -106,7 +109,8 @@ void main() {
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
       // Draw a card so discard pile has something
-      gameState.action(DrawModifierCardCommand(monsterDeckName, gameState: getIt<GameState>()));
+      gameState.action(DrawModifierCardCommand(monsterDeckName,
+          gameState: getIt<GameState>()));
 
       await pumpWidget(tester, monsterDeckName);
       // The discard pile InkWell is the second one (draw pile is first)
@@ -119,10 +123,12 @@ void main() {
       gameState.undo();
     });
 
-    testWidgets('long press on discard pile opens ModifierCardZoom when not empty',
+    testWidgets(
+        'long press on discard pile opens ModifierCardZoom when not empty',
         (WidgetTester tester) async {
       final gameState = getIt<GameState>();
-      gameState.action(DrawModifierCardCommand(monsterDeckName, gameState: getIt<GameState>()));
+      gameState.action(DrawModifierCardCommand(monsterDeckName,
+          gameState: getIt<GameState>()));
 
       await pumpWidget(tester, monsterDeckName);
       final inkWells = find.byType(InkWell);
@@ -143,7 +149,9 @@ void main() {
   group('ModifierDeckWidget character deck', () {
     setUp(() {
       getIt<GameState>().clearList();
-      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1, gameState: getIt<GameState>()).execute();
+      AddCharacterCommand('Blinkblade', 'Frosthaven', null, 1,
+              gameState: getIt<GameState>())
+          .execute();
     });
 
     testWidgets('renders without error for character deck',

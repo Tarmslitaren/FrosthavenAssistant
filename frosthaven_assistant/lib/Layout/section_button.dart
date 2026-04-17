@@ -12,7 +12,8 @@ class SectionButton extends StatelessWidget {
   final GameState? gameState;
   final Settings? settings;
 
-  const SectionButton({super.key, required this.data, this.gameState, this.settings});
+  const SectionButton(
+      {super.key, required this.data, this.gameState, this.settings});
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +35,12 @@ class SectionButton extends StatelessWidget {
             ),
             onPressed: !gameState.scenarioSectionsAdded.contains(data)
                 ? () {
-                    gameState.action(SetScenarioCommand(data, true, gameState: gameState));
+                    gameState.action(
+                        SetScenarioCommand(data, true, gameState: gameState));
                   }
                 : null,
             child: Text(
-              data.split(" ")[0],
+              data.split(" ").first,
               style: getTitleTextStyle(scale * 0.8, forceBlack: true),
               maxLines: 1,
             ),

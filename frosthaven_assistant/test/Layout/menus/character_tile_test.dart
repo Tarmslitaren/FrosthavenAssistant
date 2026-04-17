@@ -1,3 +1,5 @@
+// ignore_for_file: no-empty-block, avoid-late-keyword, avoid-returning-widgets, avoid-top-level-members-in-tests, prefer-match-file-name
+
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -27,7 +29,7 @@ Widget buildTestWidget(Widget child) {
 CharacterClass getTestCharacter({String name = 'CORE', bool hidden = false}) {
   return CharacterClass(
     'CORE', //id
-    'CORE', // name
+    name, // name
     const [10, 20, 30], // healthByLevel
     'First', // edition
     Colors.blue, // color
