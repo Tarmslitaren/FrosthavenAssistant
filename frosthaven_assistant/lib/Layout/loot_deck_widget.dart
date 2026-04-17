@@ -28,6 +28,18 @@ class LootDeckWidget extends StatefulWidget {
 class LootDeckWidgetState extends State<LootDeckWidget> {
   static const double cardWidth = 13.3333;
   static const int cardAnimationDuration = 1600;
+  static const double _kCardW = 40.0;
+  static const double _kCardH = 58.6666;
+  static const double _kWidgetWidth = 94.0;
+  static const double _kFontSize = 12.0;
+  static const double _kShadowOffset = 1.0;
+  static const double _kIconSize = 35.0;
+  static const double _kIconTopMargin = 12.0; // (_kCardH - _kIconSize) / 2 ≈ 12
+  static const double _kSmallMargin = 2.0;
+  static const double _kDiscardWidth = 39.0;
+  static const double _kDiscardHeight = 57.6666;
+  static const double _kDiscardBorderRadius = 5.0;
+  static const double _kCardRotationTurns = 15 / 360;
 
   late final LootDeckViewModel _vm;
   bool _animationsEnabled = false;
@@ -67,8 +79,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     if (!_animationsEnabled || context.globalPaintBounds == null) {
       return child;
     }
-    final double width = 40 * userScalingBars;
-    final double height = 58.6666 * userScalingBars;
+    final double width = LootDeckWidgetState._kCardW * userScalingBars;
+    final double height = LootDeckWidgetState._kCardH * userScalingBars;
     final double startXOffset = -width;
 
     final globalPaintBounds = context.globalPaintBounds;
@@ -112,8 +124,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
         builder: (context, value, child) {
           final userScalingBars = _vm.userScalingBars.value;
           return SizedBox(
-            width: 94 * userScalingBars,
-            height: 58.6666 * userScalingBars,
+            width: LootDeckWidgetState._kWidgetWidth * userScalingBars,
+            height: LootDeckWidgetState._kCardH * userScalingBars,
             child: ValueListenableBuilder<int>(
                 valueListenable: _vm.commandIndex,
                 builder: (context, value, child) {
@@ -153,32 +165,32 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           card: deck.drawPileTop,
                                           revealed: isAnimating)
                                       : Container(
-                                          width: 40 * userScalingBars,
-                                          height: 58.6666 * userScalingBars,
+                                          width: LootDeckWidgetState._kCardW * userScalingBars,
+                                          height: LootDeckWidgetState._kCardH * userScalingBars,
                                           color: Color(int.parse("7A000000",
                                               radix: 16))),
                                   Positioned(
                                       bottom: 0,
-                                      right: 2 * userScalingBars,
+                                      right: LootDeckWidgetState._kSmallMargin * userScalingBars,
                                       child: Text(
                                         deck.cardCount.value.toString(),
                                         style: TextStyle(
-                                            fontSize: 12 * userScalingBars,
+                                            fontSize: LootDeckWidgetState._kFontSize * userScalingBars,
                                             color: Colors.white,
                                             shadows: [
                                               Shadow(
                                                   offset: Offset(
-                                                      1 * userScalingBars,
-                                                      1 * userScalingBars),
+                                                      LootDeckWidgetState._kShadowOffset * userScalingBars,
+                                                      LootDeckWidgetState._kShadowOffset * userScalingBars),
                                                   color: Colors.black)
                                             ]),
                                       )),
                                   if (currentCharacterName != null)
                                     Positioned(
-                                      height: 35 * userScalingBars,
-                                      width: 35 * userScalingBars,
-                                      top: 24 * userScalingBars / 2,
-                                      left: 2 * userScalingBars,
+                                      height: LootDeckWidgetState._kIconSize * userScalingBars,
+                                      width: LootDeckWidgetState._kIconSize * userScalingBars,
+                                      top: LootDeckWidgetState._kIconTopMargin * userScalingBars,
+                                      left: LootDeckWidgetState._kSmallMargin * userScalingBars,
                                       child: Image(
                                         color: currentCharacterColor,
                                         image: AssetImage(
@@ -187,7 +199,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                     )
                                 ])),
                             SizedBox(
-                              width: 2 * userScalingBars,
+                              width: LootDeckWidgetState._kSmallMargin * userScalingBars,
                             ),
                             InkWell(
                                 onTap: () {
@@ -196,12 +208,12 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                 child: Stack(children: [
                                   Container(
                                     margin: EdgeInsets.only(
-                                        top: 1 * userScalingBars),
-                                    width: 39 * userScalingBars,
-                                    height: 57.6666 * userScalingBars,
+                                        top: LootDeckWidgetState._kSmallMargin / 2 * userScalingBars),
+                                    width: LootDeckWidgetState._kDiscardWidth * userScalingBars,
+                                    height: LootDeckWidgetState._kDiscardHeight * userScalingBars,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(5 * userScalingBars)),
+                                          Radius.circular(LootDeckWidgetState._kDiscardBorderRadius * userScalingBars)),
                                       border: Border.all(color: Colors.white70),
                                       color: Color(
                                           int.parse("7A000000", radix: 16)),
@@ -247,8 +259,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           context,
                                           userScalingBars)
                                       : SizedBox(
-                                          width: 40 * userScalingBars,
-                                          height: 58.6666 * userScalingBars,
+                                          width: LootDeckWidgetState._kCardW * userScalingBars,
+                                          height: LootDeckWidgetState._kCardH * userScalingBars,
                                         ),
                                 ]))
                           ],
