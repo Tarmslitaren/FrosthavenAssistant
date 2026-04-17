@@ -161,19 +161,25 @@ class MonsterInstance extends FigureState {
     }
     final condis = json["conditions"];
     for (int item in condis) {
-      conditions.value.add(Condition.values[item]);
+      if (item >= 0 && item < Condition.values.length) {
+        conditions.value.add(Condition.values[item]);
+      }
     }
 
     if (json.containsKey("conditionsAddedThisTurn")) {
       List<dynamic> condis2 = json["conditionsAddedThisTurn"];
       for (int item in condis2) {
-        _conditionsAddedThisTurn.add(Condition.values[item]);
+        if (item >= 0 && item < Condition.values.length) {
+          _conditionsAddedThisTurn.add(Condition.values[item]);
+        }
       }
     }
     if (json.containsKey("conditionsAddedPreviousTurn")) {
       List<dynamic> condis3 = json["conditionsAddedPreviousTurn"];
       for (int item in condis3) {
-        _conditionsAddedPreviousTurn.add(Condition.values[item]);
+        if (item >= 0 && item < Condition.values.length) {
+          _conditionsAddedPreviousTurn.add(Condition.values[item]);
+        }
       }
     }
   }

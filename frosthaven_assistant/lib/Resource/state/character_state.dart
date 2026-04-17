@@ -87,7 +87,9 @@ class CharacterState extends FigureState {
 
     final condis = json["conditions"];
     for (int item in condis) {
-      _conditions.value.add(Condition.values[item]);
+      if (item >= 0 && item < Condition.values.length) {
+        _conditions.value.add(Condition.values[item]);
+      }
     }
 
     if (json.containsKey("modifierDeck")) {
@@ -101,13 +103,17 @@ class CharacterState extends FigureState {
     if (json.containsKey("conditionsAddedThisTurn")) {
       final condis2 = json["conditionsAddedThisTurn"];
       for (int item in condis2) {
-        _conditionsAddedThisTurn.add(Condition.values[item]);
+        if (item >= 0 && item < Condition.values.length) {
+          _conditionsAddedThisTurn.add(Condition.values[item]);
+        }
       }
     }
     if (json.containsKey("conditionsAddedPreviousTurn")) {
       final condis3 = json["conditionsAddedPreviousTurn"];
       for (int item in condis3) {
-        _conditionsAddedPreviousTurn.add(Condition.values[item]);
+        if (item >= 0 && item < Condition.values.length) {
+          _conditionsAddedPreviousTurn.add(Condition.values[item]);
+        }
       }
     }
   }
@@ -148,7 +154,9 @@ class CharacterState extends FigureState {
     // Assign a new list instance so the ValueNotifier fires its listeners.
     final newConditions = <Condition>[];
     for (int item in json["conditions"]) {
-      newConditions.add(Condition.values[item]);
+      if (item >= 0 && item < Condition.values.length) {
+        newConditions.add(Condition.values[item]);
+      }
     }
     _conditions.value = newConditions;
 
@@ -162,13 +170,17 @@ class CharacterState extends FigureState {
     _conditionsAddedThisTurn.clear();
     if (json.containsKey("conditionsAddedThisTurn")) {
       for (int item in json["conditionsAddedThisTurn"]) {
-        _conditionsAddedThisTurn.add(Condition.values[item]);
+        if (item >= 0 && item < Condition.values.length) {
+          _conditionsAddedThisTurn.add(Condition.values[item]);
+        }
       }
     }
     _conditionsAddedPreviousTurn.clear();
     if (json.containsKey("conditionsAddedPreviousTurn")) {
       for (int item in json["conditionsAddedPreviousTurn"]) {
-        _conditionsAddedPreviousTurn.add(Condition.values[item]);
+        if (item >= 0 && item < Condition.values.length) {
+          _conditionsAddedPreviousTurn.add(Condition.values[item]);
+        }
       }
     }
   }
