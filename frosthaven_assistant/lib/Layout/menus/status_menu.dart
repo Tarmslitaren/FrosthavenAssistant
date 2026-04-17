@@ -187,7 +187,8 @@ class StatusMenuState extends State<StatusMenu> {
             return Container();
           }
 
-          bool isActive = (figure as MonsterInstance).roundSummoned != -1;
+          if (figure is! MonsterInstance) return Container();
+          bool isActive = figure.roundSummoned != -1;
           if (isActive) {
             color =
                 _settings.darkMode.value ? Colors.white : Colors.black;
@@ -245,9 +246,9 @@ class StatusMenuState extends State<StatusMenu> {
       if (item.id == "Mirefoot" && showCustomContent) {
         hasMireFoot = true;
       }
-      if (item.id == "Plagueherald" &&
-          (item as Character).characterClass.edition ==
-              "Gloomhaven 2nd Edition") {
+      if (item is Character &&
+          item.id == "Plagueherald" &&
+          item.characterClass.edition == "Gloomhaven 2nd Edition") {
         hasPlagueHerald = true;
       }
       if (item.id == "Incarnate" && showCustomContent) {
@@ -319,9 +320,10 @@ class StatusMenuState extends State<StatusMenu> {
     //has to be summon
 
     //get id and owner Id
-    Character? character = _gameState.currentList
-            .firstWhereOrNull((item) => item.id == widget.characterId)
-        as Character?;
+    final characterMatch = _gameState.currentList
+        .firstWhereOrNull((item) => item.id == widget.characterId);
+    Character? character =
+        characterMatch is Character ? characterMatch : null;
     if (figure is CharacterState && character != null) {
       name = character.characterClass.name;
     }
@@ -330,8 +332,12 @@ class StatusMenuState extends State<StatusMenu> {
 
     int nrOfCharacters = GameMethods.getCurrentCharacterAmount();
 
-    ListItemData owner =
-        _gameState.currentList.firstWhereOrNull((item) => item.id == ownerId)!;
+    final ListItemData? owner =
+        _gameState.currentList.firstWhereOrNull((item) => item.id == ownerId);
+    if (owner == null) {
+      Navigator.pop(context);
+      return const SizedBox(height: 0, width: 0);
+    }
     final bool isMonster = widget.monsterId != null;
     final bool isCharacter = widget.characterId != null;
     return Wrap(children: [
@@ -435,9 +441,9 @@ class StatusMenuState extends State<StatusMenu> {
                       hasXp = true;
 
                       for (var item in _gameState.currentList) {
-                        if (item.id == widget.characterId) {
+                        if (item.id == widget.characterId && item is Character) {
                           if (GameMethods.isObjectiveOrEscort(
-                              (item as Character).characterClass)) {
+                              item.characterClass)) {
                             hasXp = false;
                             isObjective = true;
                           } else {
@@ -511,7 +517,9 @@ class StatusMenuState extends State<StatusMenu> {
                         const SizedBox(height: 2),
                         hasXp
                             ? CounterButton(
-                                notifier: (figure as CharacterState).xp,
+                                notifier: figure is CharacterState
+                                    ? figure.xp
+                                    : ValueNotifier<int>(0),
                                 command: ChangeXPCommand(0, figureId, ownerId,
                                     gameState: _gameState),
                                 maxValue: 900,
