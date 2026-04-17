@@ -98,8 +98,10 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
     final localScreenWidth = screenSize.width - screenSpaceX * _kCenterDivisor;
     final heightShaveOff = (screenSize.height - screenSpaceY) * _kCenterDivisor;
     final localScreenHeight = screenSize.height - heightShaveOff;
-    final double yOffset = -(localScreenHeight / _kCenterDivisor + height / _kCenterDivisor);
-    final double xOffset = localScreenWidth / _kCenterDivisor - width / _kCenterDivisor;
+    final double yOffset =
+        -(localScreenHeight / _kCenterDivisor + height / _kCenterDivisor);
+    final double xOffset =
+        localScreenWidth / _kCenterDivisor - width / _kCenterDivisor;
 
     return _LootDrawAnimationWidget(
       key: key,
@@ -145,8 +147,7 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                         }
 
                         final deck = _vm.lootDeck;
-                        final currentCharacterColor =
-                            _vm.currentCharacterColor;
+                        final currentCharacterColor = _vm.currentCharacterColor;
                         final currentCharacterName = _vm.currentCharacterName;
                         final discardPileSize = deck.discardPileSize;
                         final discardPileList =
@@ -170,31 +171,44 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           card: deck.drawPileTop,
                                           revealed: isAnimating)
                                       : Container(
-                                          width: LootDeckWidgetState._kCardW * userScalingBars,
-                                          height: LootDeckWidgetState._kCardH * userScalingBars,
+                                          width: LootDeckWidgetState._kCardW *
+                                              userScalingBars,
+                                          height: LootDeckWidgetState._kCardH *
+                                              userScalingBars,
                                           color: Color(_kTransparentBlack)),
                                   Positioned(
                                       bottom: 0,
-                                      right: LootDeckWidgetState._kSmallMargin * userScalingBars,
+                                      right: LootDeckWidgetState._kSmallMargin *
+                                          userScalingBars,
                                       child: Text(
                                         deck.cardCount.value.toString(),
                                         style: TextStyle(
-                                            fontSize: LootDeckWidgetState._kFontSize * userScalingBars,
+                                            fontSize:
+                                                LootDeckWidgetState._kFontSize *
+                                                    userScalingBars,
                                             color: Colors.white,
                                             shadows: [
                                               Shadow(
                                                   offset: Offset(
-                                                      LootDeckWidgetState._kShadowOffset * userScalingBars,
-                                                      LootDeckWidgetState._kShadowOffset * userScalingBars),
+                                                      LootDeckWidgetState
+                                                              ._kShadowOffset *
+                                                          userScalingBars,
+                                                      LootDeckWidgetState
+                                                              ._kShadowOffset *
+                                                          userScalingBars),
                                                   color: Colors.black)
                                             ]),
                                       )),
                                   if (currentCharacterName != null)
                                     Positioned(
-                                      height: LootDeckWidgetState._kIconSize * userScalingBars,
-                                      width: LootDeckWidgetState._kIconSize * userScalingBars,
-                                      top: LootDeckWidgetState._kIconTopMargin * userScalingBars,
-                                      left: LootDeckWidgetState._kSmallMargin * userScalingBars,
+                                      height: LootDeckWidgetState._kIconSize *
+                                          userScalingBars,
+                                      width: LootDeckWidgetState._kIconSize *
+                                          userScalingBars,
+                                      top: LootDeckWidgetState._kIconTopMargin *
+                                          userScalingBars,
+                                      left: LootDeckWidgetState._kSmallMargin *
+                                          userScalingBars,
                                       child: Image(
                                         color: currentCharacterColor,
                                         image: AssetImage(
@@ -203,7 +217,8 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                     )
                                 ])),
                             SizedBox(
-                              width: LootDeckWidgetState._kSmallMargin * userScalingBars,
+                              width: LootDeckWidgetState._kSmallMargin *
+                                  userScalingBars,
                             ),
                             InkWell(
                                 onTap: () {
@@ -212,26 +227,37 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                 child: Stack(children: [
                                   Container(
                                     margin: EdgeInsets.only(
-                                        top: LootDeckWidgetState._kSmallMargin / LootDeckWidgetState._kCenterDivisor * userScalingBars),
-                                    width: LootDeckWidgetState._kDiscardWidth * userScalingBars,
-                                    height: LootDeckWidgetState._kDiscardHeight * userScalingBars,
+                                        top: LootDeckWidgetState._kSmallMargin /
+                                            LootDeckWidgetState
+                                                ._kCenterDivisor *
+                                            userScalingBars),
+                                    width: LootDeckWidgetState._kDiscardWidth *
+                                        userScalingBars,
+                                    height:
+                                        LootDeckWidgetState._kDiscardHeight *
+                                            userScalingBars,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(LootDeckWidgetState._kDiscardBorderRadius * userScalingBars)),
+                                          Radius.circular(LootDeckWidgetState
+                                                  ._kDiscardBorderRadius *
+                                              userScalingBars)),
                                       border: Border.all(color: Colors.white70),
-                                      color: Color(
-                                          _kTransparentBlack),
+                                      color: Color(_kTransparentBlack),
                                     ),
                                   ),
-                                  discardPileSize > LootDeckWidgetState._kDiscardShowThirdMinSize
+                                  discardPileSize >
+                                          LootDeckWidgetState
+                                              ._kDiscardShowThirdMinSize
                                       ? _buildStayAnimation(
                                           RotationTransition(
-                                              turns:
-                                                  AlwaysStoppedAnimation(
-                                                      LootDeckWidgetState._kCardRotationTurns),
+                                              turns: AlwaysStoppedAnimation(
+                                                  LootDeckWidgetState
+                                                      ._kCardRotationTurns),
                                               child: LootCardWidget(
                                                 card: discardPileList[
-                                                    discardPileSize - LootDeckWidgetState._kDiscardThirdFromEnd],
+                                                    discardPileSize -
+                                                        LootDeckWidgetState
+                                                            ._kDiscardThirdFromEnd],
                                                 revealed: true,
                                               )),
                                           userScalingBars)
@@ -239,12 +265,14 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                   discardPileSize > 1
                                       ? _buildSlideAnimation(
                                           RotationTransition(
-                                              turns:
-                                                  AlwaysStoppedAnimation(
-                                                      LootDeckWidgetState._kCardRotationTurns),
+                                              turns: AlwaysStoppedAnimation(
+                                                  LootDeckWidgetState
+                                                      ._kCardRotationTurns),
                                               child: LootCardWidget(
                                                 card: discardPileList[
-                                                    discardPileSize - LootDeckWidgetState._kDiscardSecondFromEnd],
+                                                    discardPileSize -
+                                                        LootDeckWidgetState
+                                                            ._kDiscardSecondFromEnd],
                                                 revealed: true,
                                               )),
                                           Key(deck.discardPileSize.toString()),
@@ -263,8 +291,10 @@ class LootDeckWidgetState extends State<LootDeckWidget> {
                                           context,
                                           userScalingBars)
                                       : SizedBox(
-                                          width: LootDeckWidgetState._kCardW * userScalingBars,
-                                          height: LootDeckWidgetState._kCardH * userScalingBars,
+                                          width: LootDeckWidgetState._kCardW *
+                                              userScalingBars,
+                                          height: LootDeckWidgetState._kCardH *
+                                              userScalingBars,
                                         ),
                                 ]))
                           ],
@@ -322,8 +352,7 @@ class _LootSlideAnimationWidgetState extends State<_LootSlideAnimationWidget>
     ]).animate(_controller);
 
     _rotation = TweenSequence<double>([
-      TweenSequenceItem(
-          tween: ConstantTween(_kSlideStartAngle), weight: 1),
+      TweenSequenceItem(tween: ConstantTween(_kSlideStartAngle), weight: 1),
       TweenSequenceItem(
         tween: Tween(begin: _kSlideStartAngle, end: 0.0),
         weight: 1,
@@ -386,7 +415,7 @@ class _LootDrawAnimationWidget extends StatefulWidget {
 class _LootDrawAnimationWidgetState extends State<_LootDrawAnimationWidget>
     with SingleTickerProviderStateMixin {
   static const double _maxScale = 4.0;
-  static const int _kAnimWeightPause = 2;
+  static const double _kAnimWeightPause = 2;
   static const double _kTwoPI = math.pi * 2;
 
   late final AnimationController _controller;
@@ -408,20 +437,21 @@ class _LootDrawAnimationWidgetState extends State<_LootDrawAnimationWidget>
 
     _translation = TweenSequence<Offset>([
       TweenSequenceItem(tween: Tween(begin: start, end: center), weight: 1),
-      TweenSequenceItem(tween: ConstantTween(center), weight: _kAnimWeightPause),
+      TweenSequenceItem(
+          tween: ConstantTween(center), weight: _kAnimWeightPause),
       TweenSequenceItem(
           tween: Tween(begin: center, end: Offset.zero), weight: 1),
     ]).animate(_controller);
 
     _scale = TweenSequence<double>([
       TweenSequenceItem(tween: Tween(begin: 1.0, end: _maxScale), weight: 1),
-      TweenSequenceItem(tween: ConstantTween(_maxScale), weight: _kAnimWeightPause),
+      TweenSequenceItem(
+          tween: ConstantTween(_maxScale), weight: _kAnimWeightPause),
       TweenSequenceItem(tween: Tween(begin: _maxScale, end: 1.0), weight: 1),
     ]).animate(_controller);
 
     _rotation = Tween<double>(begin: math.pi, end: _kTwoPI).animate(
-      CurvedAnimation(
-          parent: _controller, curve: const Interval(0.0, 0.25)),
+      CurvedAnimation(parent: _controller, curve: const Interval(0.0, 0.25)),
     );
 
     _controller.addStatusListener((status) {

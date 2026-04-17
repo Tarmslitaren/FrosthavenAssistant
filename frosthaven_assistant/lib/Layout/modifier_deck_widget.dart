@@ -42,7 +42,8 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
   static const double _kEmptyDiscardWidth = 66.6666;
   static const double _kDiscardPileWidth = 57.6666;
   static const double _kCardRotationTurns = 15 / 360;
-  static const double _kCharIconTop = 6.0; // (_kCardHeight - _kCharIconSize) / 2
+  static const double _kCharIconTop =
+      6.0; // (_kCardHeight - _kCharIconSize) / 2
   static const double _kRotationDegrees = 15.0;
   static const double _kRotationInterval = 0.25;
   static const double _kDegreesPerRadian = 180.0;
@@ -68,14 +69,16 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
 
   Widget _buildStayAnimation(Widget child, double userScalingBars) {
     return Container(
-        margin: EdgeInsets.only(left: ModifierDeckWidgetState._kCardOffset * userScalingBars),
+        margin: EdgeInsets.only(
+            left: ModifierDeckWidgetState._kCardOffset * userScalingBars),
         child: child);
   }
 
   Widget _buildSlideAnimation(Widget child, Key key, double userScalingBars) {
     if (!_animationsEnabled) {
       return Container(
-          margin: EdgeInsets.only(left: ModifierDeckWidgetState._kCardOffset * userScalingBars),
+          margin: EdgeInsets.only(
+              left: ModifierDeckWidgetState._kCardOffset * userScalingBars),
           child: child);
     }
     return _ModifierSlideAnimationWidget(
@@ -86,15 +89,16 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     );
   }
 
-  Widget _buildDrawAnimation(
-      Widget child, Key key, double userScalingBars) {
+  Widget _buildDrawAnimation(Widget child, Key key, double userScalingBars) {
     if (!_animationsEnabled || context.globalPaintBounds == null) {
       return Container(child: child);
     }
     final double width = ModifierDeckWidgetState._kCardWidth * userScalingBars;
-    final double height = ModifierDeckWidgetState._kCardHeight * userScalingBars;
+    final double height =
+        ModifierDeckWidgetState._kCardHeight * userScalingBars;
     final screenSize = MediaQuery.of(context).size;
-    final double startXOffset = -(width + ModifierDeckWidgetState._kSmallMargin * userScalingBars);
+    final double startXOffset =
+        -(width + ModifierDeckWidgetState._kSmallMargin * userScalingBars);
 
     final globalPaintBounds = context.globalPaintBounds;
     final screenSpaceOffset =
@@ -102,11 +106,17 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
     final screenSpaceY = screenSpaceOffset.dy;
     final screenSpaceX = screenSpaceOffset.dx - startXOffset;
 
-    final localScreenWidth = screenSize.width - screenSpaceX * ModifierDeckWidgetState._kCenterDivisor;
-    final heightShaveOff = (screenSize.height - screenSpaceY) * ModifierDeckWidgetState._kCenterDivisor;
+    final localScreenWidth = screenSize.width -
+        screenSpaceX * ModifierDeckWidgetState._kCenterDivisor;
+    final heightShaveOff = (screenSize.height - screenSpaceY) *
+        ModifierDeckWidgetState._kCenterDivisor;
     final localScreenHeight = screenSize.height - heightShaveOff;
-    final double yOffset = -(localScreenHeight / ModifierDeckWidgetState._kCenterDivisor + height / ModifierDeckWidgetState._kCenterDivisor);
-    final double xOffset = localScreenWidth / ModifierDeckWidgetState._kCenterDivisor - width / ModifierDeckWidgetState._kCenterDivisor;
+    final double yOffset =
+        -(localScreenHeight / ModifierDeckWidgetState._kCenterDivisor +
+            height / ModifierDeckWidgetState._kCenterDivisor);
+    final double xOffset =
+        localScreenWidth / ModifierDeckWidgetState._kCenterDivisor -
+            width / ModifierDeckWidgetState._kCenterDivisor;
 
     return _ModifierDrawAnimationWidget(
       key: key,
@@ -145,12 +155,16 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                   }
 
                   final textStyle = TextStyle(
-                      fontSize: ModifierDeckWidgetState._kFontSize * userScalingBars,
+                      fontSize:
+                          ModifierDeckWidgetState._kFontSize * userScalingBars,
                       color: Colors.white,
                       shadows: [
                         Shadow(
                             offset: Offset(
-                                ModifierDeckWidgetState._kShadowOffset * userScalingBars, ModifierDeckWidgetState._kShadowOffset * userScalingBars),
+                                ModifierDeckWidgetState._kShadowOffset *
+                                    userScalingBars,
+                                ModifierDeckWidgetState._kShadowOffset *
+                                    userScalingBars),
                             color: Colors.black)
                       ]);
 
@@ -162,10 +176,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                   final widgetKey = discardPileSize.toString();
 
                   final characterIconWidget = Positioned(
-                    height: ModifierDeckWidgetState._kCharIconSize * userScalingBars,
-                    width: ModifierDeckWidgetState._kCharIconSize * userScalingBars,
-                    top: ModifierDeckWidgetState._kCharIconTop * userScalingBars,
-                    left: ModifierDeckWidgetState._kCharIconLeft * userScalingBars,
+                    height: ModifierDeckWidgetState._kCharIconSize *
+                        userScalingBars,
+                    width: ModifierDeckWidgetState._kCharIconSize *
+                        userScalingBars,
+                    top:
+                        ModifierDeckWidgetState._kCharIconTop * userScalingBars,
+                    left: ModifierDeckWidgetState._kCharIconLeft *
+                        userScalingBars,
                     child: Image.asset(
                         color: currentCharacterColor,
                         'assets/images/class-icons/$currentCharacterName.png'),
@@ -203,10 +221,14 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                   ])
                                 : Stack(children: [
                                     Container(
-                                        width: ModifierDeckWidgetState._kCardWidth * userScalingBars,
-                                        height: ModifierDeckWidgetState._kCardHeight * userScalingBars,
-                                        color: Color(
-                                            ModifierDeckWidgetState._kTransparentBlack)),
+                                        width: ModifierDeckWidgetState
+                                                ._kCardWidth *
+                                            userScalingBars,
+                                        height: ModifierDeckWidgetState
+                                                ._kCardHeight *
+                                            userScalingBars,
+                                        color: Color(ModifierDeckWidgetState
+                                            ._kTransparentBlack)),
                                     if (currentCharacterName != null)
                                       characterIconWidget,
                                     Positioned.fill(
@@ -231,36 +253,50 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                   ]),
                             Positioned(
                                 bottom: 0,
-                                right: ModifierDeckWidgetState._kSmallMargin * userScalingBars,
+                                right: ModifierDeckWidgetState._kSmallMargin *
+                                    userScalingBars,
                                 child: Text(
                                   deck.cardCount.value.toString(),
                                   style: textStyle,
                                 )),
                           ])),
                       SizedBox(
-                        width: ModifierDeckWidgetState._kSmallMargin * userScalingBars,
+                        width: ModifierDeckWidgetState._kSmallMargin *
+                            userScalingBars,
                       ),
                       Stack(children: [
                         Container(
-                          margin: EdgeInsets.only(top: ModifierDeckWidgetState._kSmallMargin / ModifierDeckWidgetState._kCenterDivisor * userScalingBars),
-                          width: ModifierDeckWidgetState._kDiscardPileWidth * userScalingBars,
-                          height: ModifierDeckWidgetState._kCardHeight * userScalingBars,
+                          margin: EdgeInsets.only(
+                              top: ModifierDeckWidgetState._kSmallMargin /
+                                  ModifierDeckWidgetState._kCenterDivisor *
+                                  userScalingBars),
+                          width: ModifierDeckWidgetState._kDiscardPileWidth *
+                              userScalingBars,
+                          height: ModifierDeckWidgetState._kCardHeight *
+                              userScalingBars,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(ModifierDeckWidgetState._kDiscardBorderRadius * userScalingBars)),
+                            borderRadius: BorderRadius.all(Radius.circular(
+                                ModifierDeckWidgetState._kDiscardBorderRadius *
+                                    userScalingBars)),
                             border: Border.all(color: Colors.white70),
-                            color: Color(ModifierDeckWidgetState._kTransparentBlack),
+                            color: Color(
+                                ModifierDeckWidgetState._kTransparentBlack),
                           ),
                         ),
-                        discardPileSize > ModifierDeckWidgetState._kDiscardShowThirdMinSize
+                        discardPileSize >
+                                ModifierDeckWidgetState
+                                    ._kDiscardShowThirdMinSize
                             ? _buildStayAnimation(
                                 RotationTransition(
-                                    turns:
-                                        const AlwaysStoppedAnimation(ModifierDeckWidgetState._kCardRotationTurns),
+                                    turns: const AlwaysStoppedAnimation(
+                                        ModifierDeckWidgetState
+                                            ._kCardRotationTurns),
                                     child: ModifierCardWidget(
                                       name: deck.name,
                                       card: discardPileList[
-                                          discardPileList.length - ModifierDeckWidgetState._kDiscardThirdFromEnd],
+                                          discardPileList.length -
+                                              ModifierDeckWidgetState
+                                                  ._kDiscardThirdFromEnd],
                                       revealed: true,
                                     )),
                                 userScalingBars)
@@ -268,12 +304,15 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                         discardPileSize > 1
                             ? _buildSlideAnimation(
                                 RotationTransition(
-                                    turns:
-                                        const AlwaysStoppedAnimation(ModifierDeckWidgetState._kCardRotationTurns),
+                                    turns: const AlwaysStoppedAnimation(
+                                        ModifierDeckWidgetState
+                                            ._kCardRotationTurns),
                                     child: ModifierCardWidget(
                                       name: deck.name,
                                       card: discardPileList[
-                                          discardPileList.length - ModifierDeckWidgetState._kDiscardSecondFromEnd],
+                                          discardPileList.length -
+                                              ModifierDeckWidgetState
+                                                  ._kDiscardSecondFromEnd],
                                       revealed: true,
                                     )),
                                 Key(widgetKey),
@@ -290,8 +329,11 @@ class ModifierDeckWidgetState extends State<ModifierDeckWidget> {
                                 Key((-deck.discardPileSize).toString()),
                                 userScalingBars)
                             : SizedBox(
-                                width: ModifierDeckWidgetState._kEmptyDiscardWidth * userScalingBars,
-                                height: ModifierDeckWidgetState._kCardHeight * userScalingBars,
+                                width: ModifierDeckWidgetState
+                                        ._kEmptyDiscardWidth *
+                                    userScalingBars,
+                                height: ModifierDeckWidgetState._kCardHeight *
+                                    userScalingBars,
                               ),
                         Positioned.fill(
                             child: Material(
@@ -343,12 +385,13 @@ class _ModifierSlideAnimationWidgetState
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration:
-          const Duration(milliseconds: ModifierDeckWidgetState.cardAnimationDuration),
+      duration: const Duration(
+          milliseconds: ModifierDeckWidgetState.cardAnimationDuration),
       vsync: this,
     );
 
-    final slideTarget = Offset(ModifierDeckWidgetState._kCardOffset * widget.userScalingBars, 0);
+    final slideTarget = Offset(
+        ModifierDeckWidgetState._kCardOffset * widget.userScalingBars, 0);
     _translation = TweenSequence<Offset>([
       TweenSequenceItem(tween: ConstantTween(Offset.zero), weight: 1),
       TweenSequenceItem(
@@ -360,9 +403,16 @@ class _ModifierSlideAnimationWidgetState
 
     _rotation = TweenSequence<double>([
       TweenSequenceItem(
-          tween: ConstantTween(-ModifierDeckWidgetState._kRotationDegrees * math.pi / ModifierDeckWidgetState._kDegreesPerRadian), weight: 1),
+          tween: ConstantTween(-ModifierDeckWidgetState._kRotationDegrees *
+              math.pi /
+              ModifierDeckWidgetState._kDegreesPerRadian),
+          weight: 1),
       TweenSequenceItem(
-        tween: Tween(begin: -ModifierDeckWidgetState._kRotationDegrees * math.pi / ModifierDeckWidgetState._kDegreesPerRadian, end: 0.0),
+        tween: Tween(
+            begin: -ModifierDeckWidgetState._kRotationDegrees *
+                math.pi /
+                ModifierDeckWidgetState._kDegreesPerRadian,
+            end: 0.0),
         weight: 1,
       ),
     ]).animate(_controller);
@@ -424,7 +474,7 @@ class _ModifierDrawAnimationWidgetState
     extends State<_ModifierDrawAnimationWidget>
     with SingleTickerProviderStateMixin {
   static const double _maxScale = 4.0;
-  static const int _kAnimWeightPause = 2;
+  static const double _kAnimWeightPause = 2;
   static const double _kTwoPI = math.pi * 2;
 
   late final AnimationController _controller;
@@ -436,8 +486,8 @@ class _ModifierDrawAnimationWidgetState
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration:
-          const Duration(milliseconds: ModifierDeckWidgetState.cardAnimationDuration),
+      duration: const Duration(
+          milliseconds: ModifierDeckWidgetState.cardAnimationDuration),
       vsync: this,
     );
 
@@ -446,22 +496,24 @@ class _ModifierDrawAnimationWidgetState
 
     _translation = TweenSequence<Offset>([
       TweenSequenceItem(tween: Tween(begin: start, end: center), weight: 1),
-      TweenSequenceItem(tween: ConstantTween(center), weight: _kAnimWeightPause),
+      TweenSequenceItem(
+          tween: ConstantTween(center), weight: _kAnimWeightPause),
       TweenSequenceItem(
           tween: Tween(begin: center, end: Offset.zero), weight: 1),
     ]).animate(_controller);
 
     _scale = TweenSequence<double>([
+      TweenSequenceItem(tween: Tween(begin: 1.0, end: _maxScale), weight: 1),
       TweenSequenceItem(
-          tween: Tween(begin: 1.0, end: _maxScale), weight: 1),
-      TweenSequenceItem(tween: ConstantTween(_maxScale), weight: _kAnimWeightPause),
-      TweenSequenceItem(
-          tween: Tween(begin: _maxScale, end: 1.0), weight: 1),
+          tween: ConstantTween(_maxScale), weight: _kAnimWeightPause),
+      TweenSequenceItem(tween: Tween(begin: _maxScale, end: 1.0), weight: 1),
     ]).animate(_controller);
 
     _rotation = Tween<double>(begin: math.pi, end: _kTwoPI).animate(
       CurvedAnimation(
-          parent: _controller, curve: const Interval(0.0, ModifierDeckWidgetState._kRotationInterval)),
+          parent: _controller,
+          curve:
+              const Interval(0.0, ModifierDeckWidgetState._kRotationInterval)),
     );
 
     _controller.addStatusListener((status) {

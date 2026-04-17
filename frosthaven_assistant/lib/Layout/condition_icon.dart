@@ -43,8 +43,9 @@ class ConditionIconState extends State<ConditionIcon>
     with SingleTickerProviderStateMixin {
   static const double _kShakeAngleDegrees = 30.0;
   static const double _kDegreesPerRadian = 180.0;
-  static const double _kShakeAngleRad = _kShakeAngleDegrees * math.pi / _kDegreesPerRadian;
-  static const int _kShakeWeightHalf = 2;
+  static const double _kShakeAngleRad =
+      _kShakeAngleDegrees * math.pi / _kDegreesPerRadian;
+  static const double _kShakeWeightHalf = 2;
   static const double _kClassTokenIconScale = 0.45;
 
   late final ConditionIconViewModel _vm;
@@ -128,7 +129,8 @@ class ConditionIconState extends State<ConditionIcon>
                               image: const AssetImage(
                                   "assets/images/psd/class-token-bg.png")),
                           Image(
-                              height: widget.size * scale * _kClassTokenIconScale,
+                              height:
+                                  widget.size * scale * _kClassTokenIconScale,
                               filterQuality: FilterQuality.medium,
                               image: AssetImage(widget.gfx)),
                         ])

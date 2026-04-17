@@ -164,7 +164,7 @@ class RemovedModifierCardMenuState extends State<RemovedModifierCardMenu> {
 class Item extends StatelessWidget {
   static const double _kScaleHeightBase = 40.0;
   static const int _kScaleHeightRows = 12;
-  static const int _kBuildFrontVariant = 2;
+  static const double _kBuildFrontVariant = 2;
   static const double _kItemMargin = 2.0;
 
   const Item(
@@ -180,11 +180,13 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    double scale = max((screenSize.height / (_kScaleHeightBase * _kScaleHeightRows)), 1);
+    double scale =
+        max((screenSize.height / (_kScaleHeightBase * _kScaleHeightRows)), 1);
     final Widget child = revealed
         ? ModifierCardWidget.buildFront(data, name, scale, _kBuildFrontVariant)
         : ModifierCardWidget.buildRear(scale, name);
 
-    return Container(margin: EdgeInsets.all(_kItemMargin * scale), child: child);
+    return Container(
+        margin: EdgeInsets.all(_kItemMargin * scale), child: child);
   }
 }

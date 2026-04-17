@@ -34,8 +34,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
   static const double _kMaxHeightRatio = 0.9;
   static const double _kBottomBarHeight = 32.0;
   static const double _kItemMargin = 2.0;
-  static const int _kCard_kCard1418 = _kCard1418;
-  static const int _kCard_kCard1419 = _kCard1419;
+  static const int _kCard1418 = 1418;
+  static const int _kCard1419 = 1419;
 
   late final GameState _gameState;
   final scrollController = ScrollController();
@@ -71,7 +71,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
             mainAxisSpacing: 0,
             crossAxisSpacing: 0,
             padding: EdgeInsets.zero,
-            crossAxisCount: max(_kMinColumns, (screenWidth / _kItemMaxWidth).ceil()),
+            crossAxisCount:
+                max(_kMinColumns, (screenWidth / _kItemMaxWidth).ceil()),
             children: generateList(list).reversed.toList(),
           ),
         ));
@@ -87,7 +88,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
           return Container(
               constraints: BoxConstraints(
                   maxWidth: MediaQuery.of(context).size.width,
-                  maxHeight: MediaQuery.of(context).size.height * _kMaxHeightRatio),
+                  maxHeight:
+                      MediaQuery.of(context).size.height * _kMaxHeightRatio),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [
@@ -116,44 +118,42 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                     TextButton(
                                       onPressed: () {
                                         setState(() {
-                                          if (_gameState.lootDeck.hasCard_kCard1418) {
+                                          if (_gameState.lootDeck.hasCard1418) {
                                             _gameState.action(
                                                 RemoveSpecialLootCardCommand(
                                                     _kCard1418,
-                                                    gameState:
-                                                        _gameState));
+                                                    gameState: _gameState));
                                           } else {
                                             _gameState.action(
-                                                AddSpecialLootCardCommand(_kCard1418,
-                                                    gameState:
-                                                        _gameState));
+                                                AddSpecialLootCardCommand(
+                                                    _kCard1418,
+                                                    gameState: _gameState));
                                           }
                                         });
                                       },
                                       child: Text(
-                                          _gameState.lootDeck.hasCard_kCard1418
+                                          _gameState.lootDeck.hasCard1418
                                               ? "Remove card _kCard1418"
                                               : "Add card _kCard1418"),
                                     ),
                                     TextButton(
                                       onPressed: () {
                                         setState(() {
-                                          if (_gameState.lootDeck.hasCard_kCard1419) {
+                                          if (_gameState.lootDeck.hasCard1419) {
                                             _gameState.action(
                                                 RemoveSpecialLootCardCommand(
                                                     _kCard1419,
-                                                    gameState:
-                                                        _gameState));
+                                                    gameState: _gameState));
                                           } else {
                                             _gameState.action(
-                                                AddSpecialLootCardCommand(_kCard1419,
-                                                    gameState:
-                                                        _gameState));
+                                                AddSpecialLootCardCommand(
+                                                    _kCard1419,
+                                                    gameState: _gameState));
                                           }
                                         });
                                       },
                                       child: Text(
-                                          _gameState.lootDeck.hasCard_kCard1419
+                                          _gameState.lootDeck.hasCard1419
                                               ? "Remove card _kCard1419"
                                               : "Add card _kCard1419"),
                                     ),
@@ -176,10 +176,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                       TextButton(
                                         onPressed: () {
                                           _gameState.action(
-                                              ReturnLootCardCommand(
-                                                  true,
-                                                  gameState:
-                                                      _gameState));
+                                              ReturnLootCardCommand(true,
+                                                  gameState: _gameState));
                                         },
                                         child: const Text("Return to Top"),
                                       ),
@@ -188,10 +186,8 @@ class LootCardsMenuState extends State<LootCardsMenu> {
                                       TextButton(
                                         onPressed: () {
                                           _gameState.action(
-                                              ReturnLootCardCommand(
-                                                  false,
-                                                  gameState:
-                                                      _gameState));
+                                              ReturnLootCardCommand(false,
+                                                  gameState: _gameState));
                                         },
                                         child: const Text("Return to Bottom"),
                                       ),
