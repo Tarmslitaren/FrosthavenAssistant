@@ -113,8 +113,8 @@ class CharacterMethods {
     final gs = gameState ?? getIt<GameState>();
     Character? character;
     for (var item in gs.currentList) {
-      if (item.id == characterId) {
-        character = item as Character;
+      if (item.id == characterId && item is Character) {
+        character = item;
         break;
       }
     }
