@@ -3,6 +3,12 @@ part of 'game_state.dart';
 // ignore_for_file: library_private_types_in_public_api
 
 class ModifierDeck {
+  static const int _kImbuementLevel1 = 1;
+  static const int _kImbuementLevel2 = 2;
+  static const int _kPlusMinus1Count = 5;
+  static const int _kPlus0Count = 6;
+  static const int _kCursePosition = 5;
+
   final String name;
   final CardStack<ModifierCard> _drawPile = CardStack<ModifierCard>();
   final CardStack<ModifierCard> _discardPile = CardStack<ModifierCard>();
@@ -405,7 +411,7 @@ class ModifierDeck {
     _drawPile.add(ModifierCard(CardType.add, "imbue-plus2muddle"));
     _drawPile.add(ModifierCard(CardType.add, "imbue-plus0poison"));
     _shuffle();
-    _imbuement.value = 1;
+    _imbuement.value = _kImbuementLevel1;
   }
 
   void setImbue2(_StateModifier m) {
@@ -426,7 +432,7 @@ class ModifierDeck {
     _drawPile.add(ModifierCard(CardType.add, "imbue2-plus1curse"));
     _drawPile.add(ModifierCard(CardType.add, "imbue2-plus0wound"));
     _shuffle();
-    _imbuement.value = 2;
+    _imbuement.value = _kImbuementLevel2;
   }
 
   void resetImbue(_StateModifier _) {
@@ -439,7 +445,7 @@ class ModifierDeck {
       _drawPile.add(ModifierCard(CardType.add, "minus1"));
       _drawPile.add(ModifierCard(CardType.add, "minus1"));
       _drawPile.add(ModifierCard(CardType.add, "minus1"));
-      if (_imbuement.value == 2) {
+      if (_imbuement.value == _kImbuementLevel2) {
         if (hasMinus2()) {
           //if minus2 has not been separately removed
           _drawPile.add(ModifierCard(CardType.add, "minus2"));
@@ -567,11 +573,11 @@ class ModifierDeck {
     cards.add(ModifierCard(CardType.add, "plus2"));
     cards.add(ModifierCard(CardType.multiply, "doubleAttack"));
     cards.add(ModifierCard(CardType.multiply, "nullAttack"));
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < _kPlusMinus1Count; i++) {
       cards.add(ModifierCard(CardType.add, "minus1"));
       cards.add(ModifierCard(CardType.add, "plus1"));
     }
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < _kPlus0Count; i++) {
       cards.add(ModifierCard(CardType.add, "plus0"));
     }
     _drawPile.setList(cards);
@@ -622,9 +628,9 @@ class ModifierDeck {
           _badOmen.value--;
           shuffle = false;
           //put in sixth or as far down as it goes.
-          int position = 5;
+          int position = _kCursePosition;
           final size = _drawPile.getList().length;
-          if (size < 6) {
+          if (size < _kPlus0Count) {
             position = size;
           }
           _drawPile.insert(size - position, ModifierCard(CardType.remove, gfx));
