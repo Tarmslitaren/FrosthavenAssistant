@@ -10,6 +10,17 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddStandeeMenu extends StatefulWidget {
+  static const double _kButtonSize = 40.0;
+  static const double _kShadowOffset = 1.0;
+  static const double _kShadowBlur = 1.0;
+  static const double _kMenuWidth = 250.0;
+  static const double _kTopSpacing = 20.0;
+  static const double _kHeightOneRow = 140.0;
+  static const double _kHeightTwoRows = 172.0;
+  static const double _kHeightThreeRows = 211.0;
+  static const int _kRow1Max = 4;
+  static const int _kRow2Max = 8;
+
   const AddStandeeMenu({
     super.key,
     required this.monster,
@@ -85,13 +96,13 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
     }
     String text = nr.toString();
     var shadow = Shadow(
-      offset: Offset(1 * scale, 1 * scale),
+      offset: Offset(AddStandeeMenu._kShadowOffset * scale, AddStandeeMenu._kShadowOffset * scale),
       color: Colors.black87,
-      blurRadius: 1,
+      blurRadius: AddStandeeMenu._kShadowBlur,
     );
     return SizedBox(
-      width: 40 * scale,
-      height: 40 * scale,
+      width: AddStandeeMenu._kButtonSize * scale,
+      height: AddStandeeMenu._kButtonSize * scale,
       child: TextButton(
         child: Text(
           text,
@@ -117,15 +128,15 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
     int nrOfStandees = widget.monster.type.count;
     double scale = getModalMenuScale(context);
     //4 nrs per row
-    double height = 140;
-    if (nrOfStandees > 4) {
-      height = 172;
+    double height = AddStandeeMenu._kHeightOneRow;
+    if (nrOfStandees > AddStandeeMenu._kRow1Max) {
+      height = AddStandeeMenu._kHeightTwoRows;
     }
-    if (nrOfStandees > 8) {
-      height = 211;
+    if (nrOfStandees > AddStandeeMenu._kRow2Max) {
+      height = AddStandeeMenu._kHeightThreeRows;
     }
     return ModalBackground(
-        width: 250 * scale,
+        width: AddStandeeMenu._kMenuWidth * scale,
         //need to set any width to center content, overridden by dialog default min width.
         height: height * scale,
         child: Stack(children: [
@@ -136,7 +147,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 20 * scale,
+                      height: AddStandeeMenu._kTopSpacing * scale,
                     ),
                     Text("Add Standee Nr", style: getTitleTextStyle(scale)),
                     Row(
