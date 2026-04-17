@@ -287,7 +287,7 @@ class FrosthavenConverter {
         margin: EdgeInsets.only(left: 2.0 * scale, right: 2.0 * scale),
         //child: Expanded(
         child: Column(mainAxisSize: MainAxisSize.max, children: [
-          if (list2.isNotEmpty) Row(children: list2[0]),
+          if (list2.isNotEmpty) Row(children: list2.first),
           if (list2.length > 1)
             Row(
               children: list2[1],
@@ -387,7 +387,7 @@ class FrosthavenConverter {
     //sniff the child if it is a element to element thing
     List<String> graphics = getAllImagesInWidget(child);
     if (graphics.length == 2) {
-      if (LineBuilder.isElement(graphics[0]) &&
+      if (LineBuilder.isElement(graphics.first) &&
           LineBuilder.isElement(graphics[1])) {
         belongs = false;
       }

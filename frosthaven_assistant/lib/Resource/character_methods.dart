@@ -159,10 +159,10 @@ class CharacterMethods {
       }
 
       var list = character.characterState.summonList;
-      if (list.isNotEmpty && list[0].name == name) {
+      if (list.isNotEmpty && list.first.name == name) {
         int hp = health + character.characterState.level.value * multiplier;
-        list[0].setMaxHealth(s, hp);
-        list[0].setHealth(s, hp);
+        list.first.setMaxHealth(s, hp);
+        list.first.setHealth(s, hp);
       }
     }
 

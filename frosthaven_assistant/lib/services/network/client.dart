@@ -167,7 +167,7 @@ class Client {
       if (afterDescription.contains("Event:")) {
         List<String> messageParts2 = afterDescription.split("Event:");
         List<String> messageParts3 = messageParts2[1].split("GameState:");
-        event = GameEvent.fromJsonString(messageParts3[0]);
+        event = GameEvent.fromJsonString(messageParts3.first);
         data = messageParts3[1];
       } else {
         // Backwards-compatible: older server without Event field.
