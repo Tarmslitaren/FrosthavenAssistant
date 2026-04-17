@@ -27,6 +27,13 @@ class ElementButton extends StatefulWidget {
 }
 
 class AnimatedContainerButtonState extends State<ElementButton> {
+  static const double _kSmallMargin = 2.0;
+  static const double _kHalfDivisor = 2.0;
+  static const double _kBorderSides = 2.0;
+  static const double _kInertHeight = 4.0;
+  static const double _kBoxShadowBlur = 4.0;
+  static const double _kIconScale = 0.65;
+
   late final ElementButtonViewModel _vm;
   late double _height;
   late Color _color;
@@ -41,7 +48,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
     _height = widget.width * scale;
     _color = Colors.transparent;
     _borderRadius = BorderRadius.all(
-        Radius.circular(widget.width * scale - widget.borderWidth * scale * 2));
+        Radius.circular(widget.width * scale - widget.borderWidth * scale * _kBorderSides));
   }
 
   double get _userScalingBars => _vm.userScalingBars;
@@ -49,10 +56,10 @@ class AnimatedContainerButtonState extends State<ElementButton> {
   void _setHalf() {
     final scale = _userScalingBars;
     _color = widget.color;
-    _height = widget.width * scale / 2 + 2 * scale;
+    _height = widget.width * scale / _kHalfDivisor + _kSmallMargin * scale;
     _borderRadius = BorderRadius.only(
-        bottomLeft: Radius.circular(widget.width * scale / 2),
-        bottomRight: Radius.circular(widget.width * scale / 2));
+        bottomLeft: Radius.circular(widget.width * scale / _kHalfDivisor),
+        bottomRight: Radius.circular(widget.width * scale / _kHalfDivisor));
   }
 
   void _setFull() {
@@ -65,7 +72,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
 
   void _setInert() {
     _color = Colors.transparent;
-    _height = 4 * _userScalingBars;
+    _height = _kInertHeight * _userScalingBars;
     _borderRadius = BorderRadius.zero;
   }
 
@@ -73,7 +80,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
   Widget build(BuildContext context) {
     final scale = _userScalingBars;
     return Container(
-        margin: EdgeInsets.only(right: 2 * scale),
+        margin: EdgeInsets.only(right: _kSmallMargin * scale),
         child: InkWell(
             hoverColor: Colors.transparent,
             splashColor: Colors.transparent,
@@ -91,7 +98,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
               alignment: Alignment.center,
               children: [
                 Container(
-                    padding: EdgeInsets.only(bottom: 2 * scale),
+                    padding: EdgeInsets.only(bottom: _kSmallMargin * scale),
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: ValueListenableBuilder<int>(
@@ -109,9 +116,9 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                             return RepaintBoundary(
                                 child: AnimatedContainer(
                                     width: widget.width * scale -
-                                        widget.borderWidth * scale * 2,
+                                        widget.borderWidth * scale * _kBorderSides,
                                     height:
-                                        _height - widget.borderWidth * scale * 2,
+                                        _height - widget.borderWidth * scale * _kBorderSides,
                                     decoration: BoxDecoration(
                                         shape: BoxShape.rectangle,
                                         color: _color,
@@ -119,7 +126,7 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                                         boxShadow: [
                                           state != ElementState.inert
                                               ? BoxShadow(
-                                                  blurRadius: 4 * scale)
+                                                  blurRadius: _kBoxShadowBlur * scale)
                                               : const BoxShadow(
                                                   color: Colors.transparent,
                                                 )
@@ -136,10 +143,10 @@ class AnimatedContainerButtonState extends State<ElementButton> {
                           valueListenable: _vm.commandIndex,
                           builder: (context, value, child) {
                             return Image(
-                              height: widget.width * scale * 0.65,
+                              height: widget.width * scale * _kIconScale,
                               image: AssetImage(widget.icon),
                               color: _vm.iconColor,
-                              width: widget.width * scale * 0.65,
+                              width: widget.width * scale * _kIconScale,
                             );
                           });
                     })
