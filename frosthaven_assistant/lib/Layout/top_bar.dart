@@ -7,6 +7,12 @@ import '../services/service_locator.dart';
 import 'element_button.dart';
 
 class TopBar extends StatelessWidget {
+  static const double _kMenuIconSize = 24.0;
+  static const double _kTitlePaddingLeft = 2.0;
+  static const double _kToolbarHeight = 40.0;
+  static const double _kFlexibleHeight = 42.0;
+  static const double _kDarkModeOpacity = 0.4;
+
   const TopBar({super.key});
 
   @override
@@ -34,11 +40,11 @@ class TopBar extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 child:
-                    Icon(Icons.menu, shadows: [shadow], size: 24 * userScaling),
+                    Icon(Icons.menu, shadows: [shadow], size: _kMenuIconSize * userScaling),
               ),
             ),
             title: Container(
-              padding: EdgeInsets.only(left: 2.0 * userScaling),
+              padding: EdgeInsets.only(left: _kTitlePaddingLeft * userScaling),
               child: Text(
                 "X-haven\nAssistant",
                 style: TextStyle(
@@ -48,17 +54,17 @@ class TopBar extends StatelessWidget {
                 ),
               ),
             ),
-            toolbarHeight: 40 * settings.userScalingBars.value,
+            toolbarHeight: _kToolbarHeight * settings.userScalingBars.value,
             flexibleSpace: ValueListenableBuilder<bool>(
                 valueListenable: settings.darkMode,
                 builder: (context, value, child) {
                   final darkMode = settings.darkMode.value;
                   return Container(
-                    height: 42 * userScaling,
+                    height: _kFlexibleHeight * userScaling,
                     decoration: BoxDecoration(
                       color: darkMode ? Colors.black : Colors.transparent,
                       image: DecorationImage(
-                        opacity: darkMode ? 0.4 : 1,
+                        opacity: darkMode ? _kDarkModeOpacity : 1,
                         fit: BoxFit.cover,
                         repeat: ImageRepeat.repeatX,
                         image: ResizeImage(
@@ -66,7 +72,7 @@ class TopBar extends StatelessWidget {
                                 ? 'assets/images/psd/gloomhaven-bar.png'
                                 : 'assets/images/psd/frosthaven-bar.png'),
                             height:
-                                (40 * settings.userScalingBars.value).toInt()),
+                                (_kToolbarHeight * settings.userScalingBars.value).toInt()),
                       ),
                     ),
                   );
