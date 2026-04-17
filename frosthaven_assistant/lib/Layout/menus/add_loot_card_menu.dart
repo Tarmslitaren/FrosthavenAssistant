@@ -6,6 +6,13 @@ import '../../Resource/commands/add_loot_card_command.dart';
 import '../../services/service_locator.dart';
 
 class AddLootCardMenu extends StatelessWidget {
+  static const double _kTopSpacing = 20.0;
+  static const double _kMaxWidth = 300.0;
+  static const List<String> _kLootCardNames = [
+    "hide", "lumber", "metal", "arrowvine", "axenut",
+    "corpsecap", "flamefruit", "rockroot", "snowthistle",
+  ];
+
   const AddLootCardMenu({super.key});
 
   @override
@@ -21,25 +28,20 @@ class AddLootCardMenu extends StatelessWidget {
                   Column(
                     children: [
                       const SizedBox(
-                        height: 20,
+                        height: _kTopSpacing,
                       ),
                       Container(
-                        constraints: const BoxConstraints(maxWidth: 300),
+                        constraints: const BoxConstraints(maxWidth: _kMaxWidth),
                         child: Column(children: [
                           const Text(
                             "Add Extra Loot Card",
                             style: kTitleStyle,
                           ),
                           //TODO: only show what can be added?
-                          LootCardListTile(name: "hide", index: 0),
-                          LootCardListTile(name: "lumber", index: 1),
-                          LootCardListTile(name: "metal", index: 2),
-                          LootCardListTile(name: "arrowvine", index: 3),
-                          LootCardListTile(name: "axenut", index: 4),
-                          LootCardListTile(name: "corpsecap", index: 5),
-                          LootCardListTile(name: "flamefruit", index: 6),
-                          LootCardListTile(name: "rockroot", index: 7),
-                          LootCardListTile(name: "snowthistle", index: 8),
+                          ...List.generate(
+                            _kLootCardNames.length,
+                            (i) => LootCardListTile(name: _kLootCardNames[i], index: i),
+                          ),
                         ]),
                       ),
                       const SizedBox(
@@ -75,6 +77,10 @@ class LootCardListTile extends StatefulWidget {
 }
 
 class LootCardListTileState extends State<LootCardListTile> {
+  static const double _kIconSize = 30.0;
+  static const double _kContentPaddingLeft = 14.0;
+  static const double _kHorizontalTitleGap = 6.0;
+
   late final GameState _gameState;
 
   @override
@@ -91,14 +97,14 @@ class LootCardListTileState extends State<LootCardListTile> {
           _gameState.action(AddLootCardCommand(widget.name, gameState: _gameState));
         });
       },
-      contentPadding: const EdgeInsets.only(left: 14),
+      contentPadding: const EdgeInsets.only(left: _kContentPaddingLeft),
       minVerticalPadding: 0,
       minLeadingWidth: 0,
-      horizontalTitleGap: 6,
+      horizontalTitleGap: _kHorizontalTitleGap,
       leading: Image(
         filterQuality: FilterQuality.medium,
-        height: 30,
-        width: 30,
+        height: _kIconSize,
+        width: _kIconSize,
         fit: BoxFit.contain,
         image: AssetImage("assets/images/loot/${widget.name}_icon.png"),
       ),
