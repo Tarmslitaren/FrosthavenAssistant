@@ -11,6 +11,12 @@ import '../../Resource/state/game_state.dart';
 import '../../services/service_locator.dart';
 
 class AddMonsterMenu extends StatefulWidget {
+  static const double _kMaxWidth = 450.0;
+  static const double _kCardMargin = 2.0;
+  static const double _kSearchMarginH = 10.0;
+  static const double _kTopSpacing = 20.0;
+  static const double _kImageHeight = 35.0;
+
   const AddMonsterMenu({
     super.key,
     this.gameState,
@@ -152,8 +158,8 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
   @override
   Widget build(BuildContext context) {
     return MenuCard(
-        maxWidth: 450,
-        cardMargin: const EdgeInsets.all(2),
+        maxWidth: AddMonsterMenu._kMaxWidth,
+        cardMargin: const EdgeInsets.all(AddMonsterMenu._kCardMargin),
         child: Column(
           children: [
             Row(children: [
@@ -197,7 +203,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                   });
                 }),
             Container(
-              margin: const EdgeInsets.only(left: 10, right: 10),
+              margin: const EdgeInsets.only(left: AddMonsterMenu._kSearchMarginH, right: AddMonsterMenu._kSearchMarginH),
               child: TextField(
                 onChanged: (value) => _runFilter(value),
                 decoration: const InputDecoration(
@@ -205,7 +211,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: AddMonsterMenu._kTopSpacing,
             ),
             Expanded(
               child: _foundMonsters.isNotEmpty
@@ -217,7 +223,7 @@ class AddMonsterMenuState extends State<AddMonsterMenu> {
                         itemBuilder: (context, index) => ListTile(
                           leading: Image.asset(
                             "assets/images/monsters/${_foundMonsters[index].gfx}.png",
-                            height: 35,
+                            height: AddMonsterMenu._kImageHeight,
                             cacheHeight: kMonsterImageCacheHeight,
                           ),
                           title: Text(
