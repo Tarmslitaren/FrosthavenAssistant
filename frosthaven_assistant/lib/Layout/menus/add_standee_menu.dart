@@ -20,6 +20,12 @@ class AddStandeeMenu extends StatefulWidget {
   static const double _kHeightThreeRows = 211.0;
   static const int _kRow1Max = 4;
   static const int _kRow2Max = 8;
+  static const Map<int, Color> _kBnBColors = {
+    1: Colors.green,
+    2: Colors.blue,
+    3: Colors.purple,
+    4: Colors.red,
+  };
 
   const AddStandeeMenu({
     super.key,
@@ -70,18 +76,7 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
     }
 
     if (_gameState.currentCampaign.value == "Buttons and Bugs") {
-      if (nr == 1) {
-        color = Colors.green;
-      }
-      if (nr == 2) {
-        color = Colors.blue;
-      }
-      if (nr == 3) {
-        color = Colors.purple;
-      }
-      if (nr == 4) {
-        color = Colors.red;
-      }
+      color = AddStandeeMenu._kBnBColors[nr] ?? color;
     }
 
     bool isOut = false;
@@ -150,53 +145,19 @@ class AddStandeeMenuState extends State<AddStandeeMenu> {
                       height: AddStandeeMenu._kTopSpacing * scale,
                     ),
                     Text("Add Standee Nr", style: getTitleTextStyle(scale)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        buildNrButton(1, scale),
-                        nrOfStandees > 1
-                            ? buildNrButton(2, scale)
-                            : Container(),
-                        nrOfStandees > 2
-                            ? buildNrButton(3, scale)
-                            : Container(),
-                        nrOfStandees > 3
-                            ? buildNrButton(4, scale)
-                            : Container(),
-                      ],
+                    ...List.generate(
+                      (nrOfStandees + AddStandeeMenu._kRow1Max - 1) ~/ AddStandeeMenu._kRow1Max,
+                      (rowIdx) => Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          AddStandeeMenu._kRow1Max,
+                          (colIdx) {
+                            final nr = rowIdx * AddStandeeMenu._kRow1Max + colIdx + 1;
+                            return nr <= nrOfStandees ? buildNrButton(nr, scale) : Container();
+                          },
+                        ),
+                      ),
                     ),
-                    nrOfStandees > 4
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              nrOfStandees > 4
-                                  ? buildNrButton(5, scale)
-                                  : Container(),
-                              nrOfStandees > 5
-                                  ? buildNrButton(6, scale)
-                                  : Container(),
-                              nrOfStandees > 6
-                                  ? buildNrButton(7, scale)
-                                  : Container(),
-                              nrOfStandees > 7
-                                  ? buildNrButton(8, scale)
-                                  : Container(),
-                            ],
-                          )
-                        : Container(),
-                    nrOfStandees > 8
-                        ? Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              nrOfStandees > 8
-                                  ? buildNrButton(9, scale)
-                                  : Container(),
-                              nrOfStandees > 9
-                                  ? buildNrButton(10, scale)
-                                  : Container(),
-                            ],
-                          )
-                        : Container(),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                       Text("Summoned:", style: getSmallTextStyle(scale)),
                       Checkbox(
