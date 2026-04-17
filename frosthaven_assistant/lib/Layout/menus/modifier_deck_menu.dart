@@ -48,6 +48,11 @@ class ModifierDeckMenu extends StatefulWidget {
   static const int _kMaxVimthreaderGrEmpower = 5;
   static const int _kMaxLifespeakerEnfeeble = 15;
   static const double _kHeaderBorderRadius = 4.0;
+  static const int _kAdvancedImbuementLevel = 2;
+  static const int _kHailPerkIndex = 17;
+  static const int _kCassandraPerkIndex = 15;
+  static const int _kMaxRevealButtonNr = 6;
+  static const int _kPartyButtonCount = 4;
   static const double _kHeaderMargin = 2.0;
   static const double _kFooterHeight = 32.0;
   static const double _kFooterBottomPos = 4.0;
@@ -409,7 +414,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                       imbuement > 0 ? "Remove Imbue" : "Imbue",
                                     ),
                                   ),
-                                if (imbuement != 2 && monsterDeck)
+                                if (imbuement != ModifierDeckMenu._kAdvancedImbuementLevel && monsterDeck)
                                   TextButton(
                                     onPressed: () {
                                       _gameState.action(AMDImbue2Command(
@@ -422,7 +427,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                   TextButton(
                                     onPressed: () {
                                       _gameState
-                                          .action(AddPerkCommand("Hail", 17));
+                                          .action(AddPerkCommand("Hail", ModifierDeckMenu._kHailPerkIndex));
                                     },
                                     child: Text(
                                       hasHailPerk
@@ -435,7 +440,7 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                   TextButton(
                                     onPressed: () {
                                       _gameState.action(
-                                          AddPerkCommand("Cassandra", 15));
+                                          AddPerkCommand("Cassandra", ModifierDeckMenu._kCassandraPerkIndex));
                                     },
                                     child: Text(
                                       hasCassandraPerk
@@ -505,11 +510,10 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                               WrapCrossAlignment.center,
                                           children: [
                                               Text("Add Party\n Card:"),
-                                              buildPartyButton(
-                                                  1), //todo: make own menu for this, just like for gh2e special
-                                              buildPartyButton(2),
-                                              buildPartyButton(3),
-                                              buildPartyButton(4),
+                                              ...List.generate(
+                                                ModifierDeckMenu._kPartyButtonCount,
+                                                (i) => buildPartyButton(i + 1),
+                                              ), //todo: make own menu for this, just like for gh2e special
                                             ]),
                                 if (isCharacter &&
                                     _gameState.unlockedClasses
@@ -734,24 +738,10 @@ class ModifierDeckMenuState extends State<ModifierDeckMenu> {
                                 const Text(
                                   "   Reveal\n    cards:",
                                 ),
-                                if (drawPile.isNotEmpty)
-                                  buildRevealButton(drawPile.length, 0),
-                                if (drawPile.isNotEmpty)
-                                  buildRevealButton(drawPile.length, 1),
-                                if (drawPile.length > 1)
-                                  buildRevealButton(drawPile.length, 2),
-                                drawPile.length > 2
-                                    ? buildRevealButton(drawPile.length, 3)
-                                    : Container(),
-                                drawPile.length > 3
-                                    ? buildRevealButton(drawPile.length, 4)
-                                    : Container(),
-                                drawPile.length > 4
-                                    ? buildRevealButton(drawPile.length, 5)
-                                    : Container(),
-                                drawPile.length > 5
-                                    ? buildRevealButton(drawPile.length, 6)
-                                    : Container(),
+                                ...List.generate(
+                                  min(drawPile.length + 1, ModifierDeckMenu._kMaxRevealButtonNr + 1),
+                                  (i) => buildRevealButton(drawPile.length, i),
+                                ),
                               ])),
                       Flexible(
                           child: Row(
