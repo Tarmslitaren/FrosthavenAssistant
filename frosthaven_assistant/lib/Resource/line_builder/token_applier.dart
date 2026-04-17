@@ -4,9 +4,19 @@ import '../ui_utils.dart';
 import 'line_builder.dart';
 
 class TokenApplier {
+  static const int _kModRangeStart = -2;
+  static const int _kModRangeEnd = 4;
+  static const int _kModifierTokenLength = 2;
+  static const double _kTokenSize = 20.0;
+  static const double _kTokenBorderRadius = 30.0;
+  static const double _kDefaultFontSize = 16.0;
+  static const double _kUseElementTop = 10.0;
+  static const double _kUseElementLeft = 8.5;
+  static const double _kUseElementScale = 0.5;
+
   static Widget applyTokensForPerks(final String text) {
     String line = text;
-    for (int i = -2; i <= 4; i++) {
+    for (int i = _kModRangeStart; i <= _kModRangeEnd; i++) {
       String sign = i < 0 ? "" : "+";
       String glyph = sign + i.toString();
       line = line.replaceAll(glyph, "%$glyph%");
@@ -15,7 +25,7 @@ class TokenApplier {
     line = line.replaceAll("+X", "%+X%");
 
     //removing empty spaces  eg - 1 -> -1
-    for (int i = 1; i <= 4; i++) {
+    for (int i = 1; i <= _kModRangeEnd; i++) {
       line = line.replaceAll("- $i", "-$i");
       line = line.replaceAll("+ $i", "+$i");
     }
@@ -31,17 +41,17 @@ class TokenApplier {
       if (line[i] == '%') {
         if (isIconPart) {
           String iconToken = line.substring(partStartIndex, i);
-          if (iconToken.length == 2) {
+          if (iconToken.length == _kModifierTokenLength) {
             textPartListRowContent.add(WidgetSpan(
                 alignment: PlaceholderAlignment.middle,
                 child: Container(
-                    width: 20,
-                    height: 20,
+                    width: _kTokenSize,
+                    height: _kTokenSize,
                     decoration: BoxDecoration(
                         border: Border.fromBorderSide(BorderSide(
                           color: Colors.black,
                         )),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                        borderRadius: BorderRadius.all(Radius.circular(_kTokenBorderRadius))),
                     child: Text(
                       iconToken,
                       textAlign: TextAlign.center,
@@ -85,7 +95,7 @@ class TokenApplier {
                 textPartListRowContent.add(WidgetSpan(
                     alignment: PlaceholderAlignment.middle, child: child));
               } else {
-                final double fontSize = fontStyle.fontSize ?? 16;
+                final double fontSize = fontStyle.fontSize ?? _kDefaultFontSize;
 
                 Image lastImage = (child is Image)
                     ? child
@@ -97,12 +107,12 @@ class TokenApplier {
                     lastImage,
                     Positioned(
                         //width: fontSize * 0.6,
-                        top: 10,
-                        left: 8.5,
+                        top: _kUseElementTop,
+                        left: _kUseElementLeft,
                         //why left?!
 
                         child: Image(
-                          height: fontSize * 0.5,
+                          height: fontSize * _kUseElementScale,
                           fit: BoxFit.fitHeight,
                           filterQuality: FilterQuality.medium,
                           semanticLabel: iconGfx,
