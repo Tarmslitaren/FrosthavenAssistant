@@ -15,6 +15,13 @@ class DrawButton extends StatefulWidget {
 }
 
 class DrawButtonState extends State<DrawButton> {
+  static const double _kShadowOffset = 1.0;
+  static const double _kRoundTextBottom = 2.0;
+  static const double _kRoundTextLeft = 45.0;
+  static const double _kButtonHeight = 40.0;
+  static const double _kButtonPadding = 10.0;
+  static const double _kTextHeight = 0.8;
+
   late final DrawButtonViewModel _vm;
 
   @override
@@ -37,9 +44,9 @@ class DrawButtonState extends State<DrawButton> {
         builder: (context, value, child) {
           final scaling = _vm.userScalingBars.value;
           final shadow = Shadow(
-            offset: Offset(1 * scaling, 1 * scaling),
+            offset: Offset(_kShadowOffset * scaling, _kShadowOffset * scaling),
             color: Colors.black87,
-            blurRadius: 1 * scaling,
+            blurRadius: _kShadowOffset * scaling,
           );
 
           return RepaintBoundary(
@@ -48,8 +55,8 @@ class DrawButtonState extends State<DrawButton> {
               valueListenable: _vm.round,
               builder: (context, value, child) {
                 return Positioned(
-                    bottom: 2 * scaling,
-                    left: 45 * scaling,
+                    bottom: _kRoundTextBottom * scaling,
+                    left: _kRoundTextLeft * scaling,
                     child: Text(_vm.roundText,
                         style: TextStyle(
                           fontSize: kFontSizeSmall * scaling,
@@ -63,18 +70,18 @@ class DrawButtonState extends State<DrawButton> {
               builder: (context, value, child) {
                 return Container(
                     margin: EdgeInsets.zero,
-                    height: 40 * scaling,
+                    height: _kButtonHeight * scaling,
                     width: _vm.buttonWidth * scaling,
                     child: TextButton(
                         style: TextButton.styleFrom(
                             padding: EdgeInsets.only(
-                                left: 10 * scaling, right: 10 * scaling),
+                                left: _kButtonPadding * scaling, right: _kButtonPadding * scaling),
                             alignment: Alignment.center),
                         onPressed: _onPressed,
                         child: Text(
                           _vm.buttonText,
                           style: TextStyle(
-                            height: 0.8,
+                            height: _kTextHeight,
                             fontSize: kFontSizeBody * scaling,
                             color: Colors.white,
                             shadows: [shadow],
