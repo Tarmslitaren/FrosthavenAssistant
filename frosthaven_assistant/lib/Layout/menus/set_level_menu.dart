@@ -29,6 +29,14 @@ class SetLevelMenu extends StatefulWidget {
   static const double _kMenuHeightNoLegend = 287.0;
   static const double _kTopSpacing = 20.0;
   static const int _kMaxHealth = 900;
+  static const double _kBoxShadowAlpha = 0.3;
+  static const int _kLevelMin = 0;
+  static const int _kLevelMax = 7;
+  static const int _kLevelRowSize = 4;
+  static const int _kLevelRow2Start = _kLevelRowSize;
+  static const int _kDifficultyMin = -1;
+  static const int _kDifficultyMax = 3;
+  static const int _kDifficultyCount = _kDifficultyMax - _kDifficultyMin + 1;
 
   const SetLevelMenu({
     super.key,
@@ -152,7 +160,7 @@ class SetLevelMenuState extends State<SetLevelMenu> {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.3),
+                  color: Colors.black.withValues(alpha: SetLevelMenu._kBoxShadowAlpha),
                   spreadRadius: SetLevelMenu._kBoxShadowSpread,
                   blurRadius: SetLevelMenu._kBoxShadowBlur,
                 ),
@@ -277,22 +285,18 @@ class SetLevelMenuState extends State<SetLevelMenu> {
               if (!isSummon)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    buildLevelButton(0, scale),
-                    buildLevelButton(1, scale),
-                    buildLevelButton(2, scale),
-                    buildLevelButton(3, scale),
-                  ],
+                  children: List.generate(
+                    SetLevelMenu._kLevelRowSize,
+                    (i) => buildLevelButton(SetLevelMenu._kLevelMin + i, scale),
+                  ),
                 ),
               if (!isSummon)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    buildLevelButton(4, scale),
-                    buildLevelButton(5, scale),
-                    buildLevelButton(6, scale),
-                    buildLevelButton(7, scale),
-                  ],
+                  children: List.generate(
+                    SetLevelMenu._kLevelRowSize,
+                    (i) => buildLevelButton(SetLevelMenu._kLevelRow2Start + i, scale),
+                  ),
                 ),
               if (widget.figure == null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -336,11 +340,10 @@ class SetLevelMenuState extends State<SetLevelMenu> {
               if (widget.figure == null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Text("Difficulty:", style: getSmallTextStyle(scale)),
-                  buildDifficultyButton(-1, scale),
-                  buildDifficultyButton(0, scale),
-                  buildDifficultyButton(1, scale),
-                  buildDifficultyButton(2, scale),
-                  buildDifficultyButton(3, scale),
+                  ...List.generate(
+                    SetLevelMenu._kDifficultyCount,
+                    (i) => buildDifficultyButton(SetLevelMenu._kDifficultyMin + i, scale),
+                  ),
                 ]),
               if (widget.figure != null)
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
