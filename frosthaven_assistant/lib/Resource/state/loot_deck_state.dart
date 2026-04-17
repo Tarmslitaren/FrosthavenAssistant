@@ -94,8 +94,7 @@ class LootDeck {
   bool get discardPileIsNotEmpty => _discardPile.isNotEmpty;
   LootCard get drawPileTop => _drawPile.peek;
   LootCard get discardPileTop => _discardPile.peek;
-  BuiltList<LootCard> get drawPileContents =>
-      BuiltList.of(_drawPile.getList());
+  BuiltList<LootCard> get drawPileContents => BuiltList.of(_drawPile.getList());
   BuiltList<LootCard> get discardPileContents =>
       BuiltList.of(_discardPile.getList());
   int get drawPileSize => _drawPile.size();
@@ -157,12 +156,11 @@ class LootDeck {
 
     _initPools();
 
-    LootCard _cardFromJson(Map<dynamic, dynamic> item, int fallbackId) {
+    LootCard cardFromJson(Map<dynamic, dynamic> item, int fallbackId) {
       final String gfx = item["gfx"] as String;
       final String owner =
           item.containsKey('owner') ? item["owner"] as String : "";
-      final int id =
-          item.containsKey('id') ? item["id"] as int : fallbackId;
+      final int id = item.containsKey('id') ? item["id"] as int : fallbackId;
 
       // 'enhanced' was stored as bool in older saves, int in newer ones.
       int enhanced = 0;
@@ -174,17 +172,21 @@ class LootDeck {
 
       final baseIdx = item["baseValue"] is int ? item["baseValue"] as int : 0;
       final lootTypeIdx = item["lootType"] is int ? item["lootType"] as int : 0;
-      final LootBaseValue baseValue = (baseIdx >= 0 &&
-              baseIdx < LootBaseValue.values.length)
-          ? LootBaseValue.values[baseIdx]
-          : LootBaseValue.values.first;
-      final LootType lootType = (lootTypeIdx >= 0 &&
-              lootTypeIdx < LootType.values.length)
-          ? LootType.values[lootTypeIdx]
-          : LootType.values.first;
+      final LootBaseValue baseValue =
+          (baseIdx >= 0 && baseIdx < LootBaseValue.values.length)
+              ? LootBaseValue.values[baseIdx]
+              : LootBaseValue.values.first;
+      final LootType lootType =
+          (lootTypeIdx >= 0 && lootTypeIdx < LootType.values.length)
+              ? LootType.values[lootTypeIdx]
+              : LootType.values.first;
 
-      return LootCard(id: id, gfx: gfx, enhanced: enhanced,
-          baseValue: baseValue, lootType: lootType)
+      return LootCard(
+          id: id,
+          gfx: gfx,
+          enhanced: enhanced,
+          baseValue: baseValue,
+          lootType: lootType)
         ..owner = owner;
     }
 
@@ -193,12 +195,12 @@ class LootDeck {
     int id = 0;
     for (var item in drawPile) {
       if (item.containsKey('id')) id = item["id"] as int;
-      newDrawList.add(_cardFromJson(item as Map, id));
+      newDrawList.add(cardFromJson(item as Map, id));
     }
     List<LootCard> newDiscardList = [];
     for (var item in lootDeckData["discardPile"] as List) {
       if (item.containsKey('id')) id = item["id"] as int;
-      newDiscardList.add(_cardFromJson(item as Map, id));
+      newDiscardList.add(cardFromJson(item as Map, id));
     }
     _drawPile.clear();
     _discardPile.clear();
@@ -504,10 +506,8 @@ class LootDeck {
     final gs = gameState ?? getIt<GameState>();
     final gd = gameData ?? getIt<GameData>();
     String scenario = gs.scenario.value;
-    LootDeckModel? lootDeckModel = gd.modelData
-        .value[gs.currentCampaign.value]
-        ?.scenarios[scenario]
-        ?.lootDeck;
+    LootDeckModel? lootDeckModel = gd.modelData.value[gs.currentCampaign.value]
+        ?.scenarios[scenario]?.lootDeck;
     if (lootDeckModel != null) {
       _setDeck(lootDeckModel);
     }

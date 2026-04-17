@@ -40,7 +40,7 @@ dart_code_metrics:
     #Disallows empty blocks except catch clause block
     no-equal-then-else: true
     #Warns when if statement has equal then and else statements or conditional expression has equal then and else expressions
-    no-magic-number: false #temp disabled because of amount
+    no-magic-number: true
     #Warns when number literals are used outside of named constants or variables
     prefer-conditional-expressions: true
     #Recommends to use a conditional expression instead of assigning to the same thing or return statement in each branch of an if statement
