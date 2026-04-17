@@ -23,6 +23,16 @@ class GH2eFactionAMDCardMenu extends StatefulWidget {
 }
 
 class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
+  static const double _kDefaultScale = 3.0;
+  static const double _kCardWidthFactor = 3.5;
+  static const double _kCardWidthBase = 58.6666;
+  static const int _kTwoColumns = 2;
+  static const double _kWrapSpacing = 2.0;
+  static const double _kModalWidth = 300.0;
+  static const double _kModalHeight = 180.0;
+  static const double _kSpacerNoCard = 20.0;
+  static const double _kSpacerWithCard = 30.0;
+
   late final GameState _gameState;
   final List<ModifierCard> _factionCards = [];
 
@@ -48,10 +58,10 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    double scale = 3;
-    final cardWidth = 3.5 * 58.6666;
-    if (screenSize.width < cardWidth * 2) {
-      scale = 3 * (screenSize.width / (cardWidth * 2));
+    double scale = _kDefaultScale;
+    final cardWidth = _kCardWidthFactor * _kCardWidthBase;
+    if (screenSize.width < cardWidth * _kTwoColumns) {
+      scale = _kDefaultScale * (screenSize.width / (cardWidth * _kTwoColumns));
     }
 
     return Column(
@@ -60,8 +70,8 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
         children: [
           //add 4 cards in grid
           Wrap(
-            runSpacing: 2,
-            spacing: 2,
+            runSpacing: _kWrapSpacing,
+            spacing: _kWrapSpacing,
             children: [
               for (var item in _factionCards)
                 InkWell(
@@ -85,14 +95,14 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
             ],
           ),
           const SizedBox(
-            height: 20,
+            height: _kSpacerNoCard,
           ),
           ModalBackground(
-              width: 300,
-              height: 180,
+              width: _kModalWidth,
+              height: _kModalHeight,
               child: Column(children: [
                 SizedBox(
-                  height: addedCard == null ? 20 : 30,
+                  height: addedCard == null ? _kSpacerNoCard : _kSpacerWithCard,
                 ),
                 if (addedCard == null)
                   Text("Tap Card to add to your deck",
@@ -113,10 +123,10 @@ class GH2eFactionAMDCardMenuState extends State<GH2eFactionAMDCardMenu> {
                           textAlign: TextAlign.center,
                           style: kButtonLabelStyle)),
                 const SizedBox(
-                  height: 20,
+                  height: _kSpacerNoCard,
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: _kSpacerNoCard,
                 ),
               ]))
         ]);
