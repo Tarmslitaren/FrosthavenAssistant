@@ -11,6 +11,15 @@ import '../../services/service_locator.dart';
 import '../condition_icon.dart';
 
 class ConditionButton extends StatelessWidget {
+  static const double _kButtonSize = 42.0;
+  static const double _kBorderRadius = 30.0;
+  static const double _kIconSize = 24.0;
+  static const double _kClassTokenScale = 0.65;
+  static const double _kDisabledIconSize = 23.1;
+  static const double _kImmuneLeft = 15.75;
+  static const double _kImmuneTop = 7.35;
+  static const double _kImmuneSize = 8.4;
+
   const ConditionButton(
       {super.key,
       required this.condition,
@@ -108,21 +117,21 @@ class ConditionButton extends StatelessWidget {
           }
 
           return Container(
-              width: 42 * scale,
-              height: 42 * scale,
+              width: _kButtonSize * scale,
+              height: _kButtonSize * scale,
               padding: EdgeInsets.zero,
               margin: EdgeInsets.all(1 * scale),
               decoration: BoxDecoration(
                   border: Border.all(
                     color: color,
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(30 * scale))),
+                  borderRadius: BorderRadius.all(Radius.circular(_kBorderRadius * scale))),
               child: IconButton(
                 icon: enabled
                     ? isActive
                         ? ConditionIcon(
                             condition,
-                            24 * scale,
+                            _kIconSize * scale,
                             owner!,
                             figure,
                             scale: scale,
@@ -132,21 +141,21 @@ class ConditionButton extends StatelessWidget {
                                 Image(
                                     color: classColor,
                                     colorBlendMode: BlendMode.modulate,
-                                    height: 24 * scale,
+                                    height: _kIconSize * scale,
                                     filterQuality: FilterQuality.medium,
                                     image: const AssetImage(
                                         "assets/images/psd/class-token-bg.png")),
                                 Image(
-                                    height: (24 * scale * 0.65),
-                                    width: (24 * scale * 0.65),
+                                    height: (_kIconSize * scale * _kClassTokenScale),
+                                    width: (_kIconSize * scale * _kClassTokenScale),
                                     image: AssetImage(imagePath),
                                     filterQuality: FilterQuality.medium),
                               ])
                             : Image.asset(
                                 filterQuality: FilterQuality.medium,
                                 //needed because of the edges
-                                height: 24 * scale,
-                                width: 24 * scale,
+                                height: _kIconSize * scale,
+                                width: _kIconSize * scale,
                                 imagePath)
                     : Stack(
                         alignment: Alignment.center,
@@ -155,17 +164,17 @@ class ConditionButton extends StatelessWidget {
                               left: 0,
                               top: 0,
                               child: Image(
-                                height: 23.1 * scale,
+                                height: _kDisabledIconSize * scale,
                                 filterQuality: FilterQuality.medium,
                                 //needed because of the edges
                                 image: AssetImage(imagePath),
                               )),
                           Positioned(
                               //should be 19  but there is a clipping issue
-                              left: 15.75 * scale,
-                              top: 7.35 * scale,
+                              left: _kImmuneLeft * scale,
+                              top: _kImmuneTop * scale,
                               child: Image(
-                                height: 8.4 * scale,
+                                height: _kImmuneSize * scale,
                                 filterQuality: FilterQuality.medium,
                                 //needed because of the edges
                                 image: const AssetImage(
