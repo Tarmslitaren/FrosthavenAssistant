@@ -32,6 +32,11 @@ class AbilityCardsMenu extends StatefulWidget {
 }
 
 class AbilityCardsMenuState extends State<AbilityCardsMenu> {
+  static const double _kBarSize = 32.0;
+  static const double _kListWidthRatio = 0.4;
+  static const double _kMaxHeightRatio = 0.9;
+  static const int _kMaxRevealButtons = 8;
+
   late final GameState _gameState;
   static List<MonsterAbilityCardModel> revealedList = [];
 
@@ -102,7 +107,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
     }
 
     return SizedBox(
-        width: 32,
+        width: _kBarSize,
         child: TextButton(
           child: Text(text),
           onPressed: () {
@@ -122,7 +127,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
           //other styles
         ),
         child: SizedBox(
-            width: screenWidth * 0.4,
+            width: screenWidth * _kListWidthRatio,
             child: reorderable
                 ? ReorderableColumn(
                     needsLongPressDraggable: true,
@@ -165,7 +170,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
           return Container(
               constraints: BoxConstraints(
                   maxWidth: screenSize.width,
-                  maxHeight: screenSize.height * 0.9),
+                  maxHeight: screenSize.height * _kMaxHeightRatio),
               child: Card(
                   color: Colors.transparent,
                   child: Stack(children: [
@@ -189,22 +194,10 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                                       const Text(
                                         "  Reveal\n    cards:",
                                       ),
-                                      if (drawPile.isNotEmpty)
-                                        buildRevealButton(drawPile.length, 1),
-                                      if (drawPile.length > 1)
-                                        buildRevealButton(drawPile.length, 2),
-                                      if (drawPile.length > 2)
-                                        buildRevealButton(drawPile.length, 3),
-                                      if (drawPile.length > 3)
-                                        buildRevealButton(drawPile.length, 4),
-                                      if (drawPile.length > 4)
-                                        buildRevealButton(drawPile.length, 5),
-                                      if (drawPile.length > 5)
-                                        buildRevealButton(drawPile.length, 6),
-                                      if (drawPile.length > 6)
-                                        buildRevealButton(drawPile.length, 7),
-                                      if (drawPile.length > 7)
-                                        buildRevealButton(drawPile.length, 8),
+                                      ...List.generate(
+                                        min(drawPile.length, _kMaxRevealButtons),
+                                        (i) => buildRevealButton(drawPile.length, i + 1),
+                                      ),
                                       TextButton(
                                         onPressed: () {
                                           _gameState.action(
@@ -253,7 +246,7 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
                         ],
                       )),
                       Container(
-                        height: 32,
+                        height: _kBarSize,
                         margin: const EdgeInsets.all(2),
                         decoration: const BoxDecoration(
                             color: Colors.white,
@@ -281,6 +274,12 @@ class AbilityCardsMenuState extends State<AbilityCardsMenu> {
 }
 
 class Item extends StatelessWidget {
+  static const double _kScaleCardHeight = 40.0;
+  static const int _kScaleCardRows = 14;
+  static const double _kScaleMin = 0.5;
+  static const double _kListWidthRatio = 0.4;
+  static const double _kCardWidth = 142.4;
+
   const Item(
       {super.key,
       required this.data,
@@ -294,9 +293,9 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    double scale = max((screenSize.height / (40 * 14)), 0.5);
-    if (screenSize.width * 0.4 < 142.4 * scale) {
-      scale = screenSize.width * 0.4 / (142.4);
+    double scale = max((screenSize.height / (_kScaleCardHeight * _kScaleCardRows)), _kScaleMin);
+    if (screenSize.width * _kListWidthRatio < _kCardWidth * scale) {
+      scale = screenSize.width * _kListWidthRatio / _kCardWidth;
     }
 
     return revealed
